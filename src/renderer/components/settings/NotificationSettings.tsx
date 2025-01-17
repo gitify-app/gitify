@@ -57,7 +57,7 @@ export const NotificationSettings: FC = () => {
             See
             <button
               type="button"
-              className="mx-1 text-blue-500"
+              className="mx-1 text-gitify-link"
               title="Open GitHub documentation for participating and watching notifications"
               onClick={(event: MouseEvent<HTMLElement>) => {
                 // Don't trigger onClick of parent element.

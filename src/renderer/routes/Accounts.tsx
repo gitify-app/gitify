@@ -88,7 +88,7 @@ export const AccountsRoute: FC = () => {
             return (
               <div
                 key={getAccountUUID(account)}
-                className="rounded-md bg-gray-100 p-2 pb-0 dark:bg-gray-sidebar"
+                className="rounded-md bg-gray-100 p-2 pb-0 dark:bg-gitify-sidebar"
               >
                 <Stack
                   direction="horizontal"
@@ -231,7 +231,7 @@ export const AccountsRoute: FC = () => {
         </div>
       </div>
 
-      <div className="flex items-center justify-end bg-gray-200 px-8 py-1 text-sm dark:bg-gray-darker">
+      <div className="flex items-center justify-end px-8 py-1 text-sm bg-gitify-footer">
         <ActionMenu>
           <ActionMenu.Anchor>
             <Button leadingVisual={PersonAddIcon} data-testid="account-add-new">

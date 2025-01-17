@@ -38,7 +38,7 @@ export const SystemSettings: FC = () => {
         tooltip={
           <div>
             When enabled you can use the hotkeys{' '}
-            <span className="text-orange-600">
+            <span className="text-gitify-caution">
               {Constants.DEFAULT_KEYBOARD_SHORTCUT}
             </span>{' '}
             to show or hide Gitify.

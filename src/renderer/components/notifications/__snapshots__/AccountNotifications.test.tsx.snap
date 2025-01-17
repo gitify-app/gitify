@@ -6,7 +6,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
   "baseElement": <body>
     <div>
       <div
-        class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-red-300 dark:bg-red-500"
+        class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-error"
       >
         <button
           aria-describedby=":r15:-loading-announcement"
@@ -247,7 +247,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
   </body>,
   "container": <div>
     <div
-      class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-red-300 dark:bg-red-500"
+      class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-error"
     >
       <button
         aria-describedby=":r15:-loading-announcement"
@@ -545,7 +545,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
   "baseElement": <body>
     <div>
       <div
-        class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gray-300 dark:bg-gray-darkest"
+        class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-accounts"
       >
         <button
           aria-describedby=":r7:-loading-announcement"
@@ -1326,7 +1326,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
   </body>,
   "container": <div>
     <div
-      class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gray-300 dark:bg-gray-darkest"
+      class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-accounts"
     >
       <button
         aria-describedby=":r7:-loading-announcement"
@@ -2164,7 +2164,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
   "baseElement": <body>
     <div>
       <div
-        class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gray-300 dark:bg-gray-darkest"
+        class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-accounts"
       >
         <button
           aria-describedby=":r0:-loading-announcement"
@@ -2373,7 +2373,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
   </body>,
   "container": <div>
     <div
-      class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gray-300 dark:bg-gray-darkest"
+      class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-accounts"
     >
       <button
         aria-describedby=":r0:-loading-announcement"
@@ -2639,7 +2639,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
   "baseElement": <body>
     <div>
       <div
-        class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gray-300 dark:bg-gray-darkest"
+        class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-accounts"
       >
         <button
           aria-describedby=":ru:-loading-announcement"
@@ -2875,7 +2875,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
   </body>,
   "container": <div>
     <div
-      class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gray-300 dark:bg-gray-darkest"
+      class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-accounts"
     >
       <button
         aria-describedby=":ru:-loading-announcement"
@@ -3168,7 +3168,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
   "baseElement": <body>
     <div>
       <div
-        class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gray-300 dark:bg-gray-darkest"
+        class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-accounts"
       >
         <button
           aria-describedby=":r21:-loading-announcement"
@@ -3373,7 +3373,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
     </div>
     <div>
       <div
-        class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gray-300 dark:bg-gray-darkest"
+        class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-accounts"
       >
         <button
           aria-describedby=":r28:-loading-announcement"
@@ -3582,7 +3582,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
   </body>,
   "container": <div>
     <div
-      class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gray-300 dark:bg-gray-darkest"
+      class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-accounts"
     >
       <button
         aria-describedby=":r28:-loading-announcement"

@@ -23,7 +23,7 @@ export const SettingsFooter: FC = () => {
   }, []);
 
   return (
-    <div className="flex items-center justify-between bg-gray-200 px-4 py-1 text-sm dark:bg-gray-darker">
+    <div className="flex items-center justify-between px-4 py-1 text-sm bg-gitify-footer">
       <Stack direction="horizontal">
         <Tooltip text="View release notes" direction="n">
           <Button

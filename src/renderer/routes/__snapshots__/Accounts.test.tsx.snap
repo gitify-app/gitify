@@ -85,7 +85,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
       class="mt-4 flex flex-col"
     >
       <div
-        class="rounded-md bg-gray-100 p-2 pb-0 dark:bg-gray-sidebar"
+        class="rounded-md bg-gray-100 p-2 pb-0 dark:bg-gitify-sidebar"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
@@ -449,7 +449,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
         </div>
       </div>
       <div
-        class="rounded-md bg-gray-100 p-2 pb-0 dark:bg-gray-sidebar"
+        class="rounded-md bg-gray-100 p-2 pb-0 dark:bg-gitify-sidebar"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
@@ -813,7 +813,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
         </div>
       </div>
       <div
-        class="rounded-md bg-gray-100 p-2 pb-0 dark:bg-gray-sidebar"
+        class="rounded-md bg-gray-100 p-2 pb-0 dark:bg-gitify-sidebar"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
@@ -1179,7 +1179,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
     </div>
   </div>
   <div
-    class="flex items-center justify-end bg-gray-200 px-8 py-1 text-sm dark:bg-gray-darker"
+    class="flex items-center justify-end px-8 py-1 text-sm bg-gitify-footer"
   >
     <button
       aria-describedby=":r3o:-loading-announcement"
@@ -1316,7 +1316,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
       class="mt-4 flex flex-col"
     >
       <div
-        class="rounded-md bg-gray-100 p-2 pb-0 dark:bg-gray-sidebar"
+        class="rounded-md bg-gray-100 p-2 pb-0 dark:bg-gitify-sidebar"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
@@ -1680,7 +1680,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
         </div>
       </div>
       <div
-        class="rounded-md bg-gray-100 p-2 pb-0 dark:bg-gray-sidebar"
+        class="rounded-md bg-gray-100 p-2 pb-0 dark:bg-gitify-sidebar"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
@@ -2044,7 +2044,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
         </div>
       </div>
       <div
-        class="rounded-md bg-gray-100 p-2 pb-0 dark:bg-gray-sidebar"
+        class="rounded-md bg-gray-100 p-2 pb-0 dark:bg-gitify-sidebar"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
@@ -2410,7 +2410,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
     </div>
   </div>
   <div
-    class="flex items-center justify-end bg-gray-200 px-8 py-1 text-sm dark:bg-gray-darker"
+    class="flex items-center justify-end px-8 py-1 text-sm bg-gitify-footer"
   >
     <button
       aria-describedby=":r4n:-loading-announcement"
@@ -2547,7 +2547,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
       class="mt-4 flex flex-col"
     >
       <div
-        class="rounded-md bg-gray-100 p-2 pb-0 dark:bg-gray-sidebar"
+        class="rounded-md bg-gray-100 p-2 pb-0 dark:bg-gitify-sidebar"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
@@ -2911,7 +2911,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
         </div>
       </div>
       <div
-        class="rounded-md bg-gray-100 p-2 pb-0 dark:bg-gray-sidebar"
+        class="rounded-md bg-gray-100 p-2 pb-0 dark:bg-gitify-sidebar"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
@@ -3275,7 +3275,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
         </div>
       </div>
       <div
-        class="rounded-md bg-gray-100 p-2 pb-0 dark:bg-gray-sidebar"
+        class="rounded-md bg-gray-100 p-2 pb-0 dark:bg-gitify-sidebar"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
@@ -3641,7 +3641,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
     </div>
   </div>
   <div
-    class="flex items-center justify-end bg-gray-200 px-8 py-1 text-sm dark:bg-gray-darker"
+    class="flex items-center justify-end px-8 py-1 text-sm bg-gitify-footer"
   >
     <button
       aria-describedby=":rs:-loading-announcement"

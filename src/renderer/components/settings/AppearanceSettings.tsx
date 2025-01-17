@@ -92,7 +92,7 @@ export const AppearanceSettings: FC = () => {
       <div className="flex items-center mt-3 mb-2 text-sm">
         <label
           htmlFor="Zoom"
-          className="mr-3 content-center font-medium text-gray-700 dark:text-gray-200"
+          className="mr-3 content-center font-medium text-gitify-font"
         >
           Zoom:
         </label>
@@ -151,7 +151,7 @@ export const AppearanceSettings: FC = () => {
               Enrich notifications with author or last commenter profile
               information, state and GitHub-like colors.
             </div>
-            <div className="text-orange-600">
+            <div className="text-gitify-caution">
               ⚠️ Users with a large number of unread notifications <i>may</i>{' '}
               experience rate limiting under certain circumstances. Disable this
               setting if you experience this.
@@ -224,7 +224,7 @@ export const AppearanceSettings: FC = () => {
                 </li>
               </ul>
             </div>
-            <div className="pt-3 text-orange-600">
+            <div className="pt-3 text-gitify-caution">
               ⚠️ This setting requires <strong>Detailed Notifications</strong> to
               be enabled.
             </div>

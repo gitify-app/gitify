@@ -113,7 +113,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           class="flex items-center"
         >
           <input
-            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+            class="size-4 rounded cursor-pointer"
             id="hideBots"
             type="checkbox"
           />
@@ -121,7 +121,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             class="flex items-center ml-3"
           >
             <label
-              class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
+              class="font-medium text-gitify-font cursor-pointer"
               for="hideBots"
             >
               Hide notifications from Bot accounts
@@ -133,7 +133,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             >
               <svg
                 aria-hidden="true"
-                class="octicon octicon-question ml-1 text-blue-500"
+                class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -189,7 +189,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           class="flex items-center"
         >
           <input
-            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+            class="size-4 rounded cursor-pointer"
             id="approval_requested"
             type="checkbox"
           />
@@ -197,7 +197,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             class="flex items-center ml-3"
           >
             <label
-              class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
+              class="font-medium text-gitify-font cursor-pointer"
               for="approval_requested"
             >
               Approval Requested
@@ -209,7 +209,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             >
               <svg
                 aria-hidden="true"
-                class="octicon octicon-question ml-1 text-blue-500"
+                class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -234,7 +234,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           class="flex items-center"
         >
           <input
-            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+            class="size-4 rounded cursor-pointer"
             id="assign"
             type="checkbox"
           />
@@ -242,7 +242,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             class="flex items-center ml-3"
           >
             <label
-              class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
+              class="font-medium text-gitify-font cursor-pointer"
               for="assign"
             >
               Assigned
@@ -254,7 +254,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             >
               <svg
                 aria-hidden="true"
-                class="octicon octicon-question ml-1 text-blue-500"
+                class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -279,7 +279,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           class="flex items-center"
         >
           <input
-            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+            class="size-4 rounded cursor-pointer"
             id="author"
             type="checkbox"
           />
@@ -287,7 +287,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             class="flex items-center ml-3"
           >
             <label
-              class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
+              class="font-medium text-gitify-font cursor-pointer"
               for="author"
             >
               Authored
@@ -299,7 +299,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             >
               <svg
                 aria-hidden="true"
-                class="octicon octicon-question ml-1 text-blue-500"
+                class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -324,7 +324,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           class="flex items-center"
         >
           <input
-            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+            class="size-4 rounded cursor-pointer"
             id="ci_activity"
             type="checkbox"
           />
@@ -332,7 +332,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             class="flex items-center ml-3"
           >
             <label
-              class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
+              class="font-medium text-gitify-font cursor-pointer"
               for="ci_activity"
             >
               Workflow Run Completed
@@ -344,7 +344,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             >
               <svg
                 aria-hidden="true"
-                class="octicon octicon-question ml-1 text-blue-500"
+                class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -369,7 +369,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           class="flex items-center"
         >
           <input
-            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+            class="size-4 rounded cursor-pointer"
             id="comment"
             type="checkbox"
           />
@@ -377,7 +377,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             class="flex items-center ml-3"
           >
             <label
-              class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
+              class="font-medium text-gitify-font cursor-pointer"
               for="comment"
             >
               Commented
@@ -389,7 +389,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             >
               <svg
                 aria-hidden="true"
-                class="octicon octicon-question ml-1 text-blue-500"
+                class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -414,7 +414,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           class="flex items-center"
         >
           <input
-            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+            class="size-4 rounded cursor-pointer"
             id="invitation"
             type="checkbox"
           />
@@ -422,7 +422,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             class="flex items-center ml-3"
           >
             <label
-              class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
+              class="font-medium text-gitify-font cursor-pointer"
               for="invitation"
             >
               Invitation Received
@@ -434,7 +434,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             >
               <svg
                 aria-hidden="true"
-                class="octicon octicon-question ml-1 text-blue-500"
+                class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -459,7 +459,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           class="flex items-center"
         >
           <input
-            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+            class="size-4 rounded cursor-pointer"
             id="manual"
             type="checkbox"
           />
@@ -467,7 +467,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             class="flex items-center ml-3"
           >
             <label
-              class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
+              class="font-medium text-gitify-font cursor-pointer"
               for="manual"
             >
               Updated
@@ -479,7 +479,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             >
               <svg
                 aria-hidden="true"
-                class="octicon octicon-question ml-1 text-blue-500"
+                class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -504,7 +504,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           class="flex items-center"
         >
           <input
-            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+            class="size-4 rounded cursor-pointer"
             id="member_feature_requested"
             type="checkbox"
           />
@@ -512,7 +512,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             class="flex items-center ml-3"
           >
             <label
-              class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
+              class="font-medium text-gitify-font cursor-pointer"
               for="member_feature_requested"
             >
               Member Feature Requested
@@ -524,7 +524,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             >
               <svg
                 aria-hidden="true"
-                class="octicon octicon-question ml-1 text-blue-500"
+                class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -549,7 +549,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           class="flex items-center"
         >
           <input
-            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+            class="size-4 rounded cursor-pointer"
             id="mention"
             type="checkbox"
           />
@@ -557,7 +557,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             class="flex items-center ml-3"
           >
             <label
-              class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
+              class="font-medium text-gitify-font cursor-pointer"
               for="mention"
             >
               Mentioned
@@ -569,7 +569,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             >
               <svg
                 aria-hidden="true"
-                class="octicon octicon-question ml-1 text-blue-500"
+                class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -594,7 +594,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           class="flex items-center"
         >
           <input
-            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+            class="size-4 rounded cursor-pointer"
             id="review_requested"
             type="checkbox"
           />
@@ -602,7 +602,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             class="flex items-center ml-3"
           >
             <label
-              class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
+              class="font-medium text-gitify-font cursor-pointer"
               for="review_requested"
             >
               Review Requested
@@ -614,7 +614,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             >
               <svg
                 aria-hidden="true"
-                class="octicon octicon-question ml-1 text-blue-500"
+                class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -639,7 +639,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           class="flex items-center"
         >
           <input
-            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+            class="size-4 rounded cursor-pointer"
             id="security_advisory_credit"
             type="checkbox"
           />
@@ -647,7 +647,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             class="flex items-center ml-3"
           >
             <label
-              class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
+              class="font-medium text-gitify-font cursor-pointer"
               for="security_advisory_credit"
             >
               Security Advisory Credit Received
@@ -659,7 +659,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             >
               <svg
                 aria-hidden="true"
-                class="octicon octicon-question ml-1 text-blue-500"
+                class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -684,7 +684,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           class="flex items-center"
         >
           <input
-            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+            class="size-4 rounded cursor-pointer"
             id="security_alert"
             type="checkbox"
           />
@@ -692,7 +692,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             class="flex items-center ml-3"
           >
             <label
-              class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
+              class="font-medium text-gitify-font cursor-pointer"
               for="security_alert"
             >
               Security Alert Received
@@ -704,7 +704,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             >
               <svg
                 aria-hidden="true"
-                class="octicon octicon-question ml-1 text-blue-500"
+                class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -729,7 +729,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           class="flex items-center"
         >
           <input
-            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+            class="size-4 rounded cursor-pointer"
             id="state_change"
             type="checkbox"
           />
@@ -737,7 +737,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             class="flex items-center ml-3"
           >
             <label
-              class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
+              class="font-medium text-gitify-font cursor-pointer"
               for="state_change"
             >
               State Changed
@@ -749,7 +749,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             >
               <svg
                 aria-hidden="true"
-                class="octicon octicon-question ml-1 text-blue-500"
+                class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -774,7 +774,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           class="flex items-center"
         >
           <input
-            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+            class="size-4 rounded cursor-pointer"
             id="subscribed"
             type="checkbox"
           />
@@ -782,7 +782,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             class="flex items-center ml-3"
           >
             <label
-              class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
+              class="font-medium text-gitify-font cursor-pointer"
               for="subscribed"
             >
               Updated
@@ -794,7 +794,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             >
               <svg
                 aria-hidden="true"
-                class="octicon octicon-question ml-1 text-blue-500"
+                class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -819,7 +819,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           class="flex items-center"
         >
           <input
-            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+            class="size-4 rounded cursor-pointer"
             id="team_mention"
             type="checkbox"
           />
@@ -827,7 +827,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             class="flex items-center ml-3"
           >
             <label
-              class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
+              class="font-medium text-gitify-font cursor-pointer"
               for="team_mention"
             >
               Team Mentioned
@@ -839,7 +839,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             >
               <svg
                 aria-hidden="true"
-                class="octicon octicon-question ml-1 text-blue-500"
+                class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -860,7 +860,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
     </fieldset>
   </div>
   <div
-    class="flex items-center justify-end bg-gray-200 px-3 py-1 text-sm dark:bg-gray-darker"
+    class="flex items-center justify-end px-3 py-1 text-sm 'var(--color-gitify-accounts)'"
   >
     <span
       aria-label="Clear all filters"
@@ -923,7 +923,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
     class="flex items-center"
   >
     <input
-      class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+      class="size-4 rounded cursor-pointer"
       id="mention"
       type="checkbox"
     />
@@ -931,7 +931,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
       class="flex items-center ml-3"
     >
       <label
-        class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
+        class="font-medium text-gitify-font cursor-pointer"
         for="mention"
       >
         Mentioned
@@ -943,7 +943,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
       >
         <svg
           aria-hidden="true"
-          class="octicon octicon-question ml-1 text-blue-500"
+          class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
           display="inline-block"
           fill="currentColor"
           focusable="false"
@@ -971,7 +971,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
     class="flex items-center"
   >
     <input
-      class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+      class="size-4 rounded cursor-pointer"
       id="mention"
       type="checkbox"
     />
@@ -979,7 +979,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
       class="flex items-center ml-3"
     >
       <label
-        class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
+        class="font-medium text-gitify-font cursor-pointer"
         for="mention"
       >
         Mentioned
@@ -991,7 +991,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
       >
         <svg
           aria-hidden="true"
-          class="octicon octicon-question ml-1 text-blue-500"
+          class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
           display="inline-block"
           fill="currentColor"
           focusable="false"
@@ -1019,7 +1019,7 @@ exports[`renderer/routes/Filters.tsx Users section should be able to toggle the 
     class="flex items-center"
   >
     <input
-      class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+      class="size-4 rounded cursor-pointer"
       id="hideBots"
       type="checkbox"
     />
@@ -1027,7 +1027,7 @@ exports[`renderer/routes/Filters.tsx Users section should be able to toggle the 
       class="flex items-center ml-3"
     >
       <label
-        class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
+        class="font-medium text-gitify-font cursor-pointer"
         for="hideBots"
       >
         Hide notifications from Bot accounts
@@ -1039,7 +1039,7 @@ exports[`renderer/routes/Filters.tsx Users section should be able to toggle the 
       >
         <svg
           aria-hidden="true"
-          class="octicon octicon-question ml-1 text-blue-500"
+          class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
           display="inline-block"
           fill="currentColor"
           focusable="false"
@@ -1067,7 +1067,7 @@ exports[`renderer/routes/Filters.tsx Users section should not be able to toggle 
     class="flex items-center"
   >
     <input
-      class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+      class="size-4 rounded cursor-pointer"
       disabled=""
       id="hideBots"
       type="checkbox"
@@ -1076,7 +1076,7 @@ exports[`renderer/routes/Filters.tsx Users section should not be able to toggle 
       class="flex items-center ml-3"
     >
       <label
-        class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
+        class="font-medium text-gitify-font cursor-pointer"
         for="hideBots"
         style="text-decoration: line-through;"
       >
@@ -1089,7 +1089,7 @@ exports[`renderer/routes/Filters.tsx Users section should not be able to toggle 
       >
         <svg
           aria-hidden="true"
-          class="octicon octicon-question ml-1 text-blue-500"
+          class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
           display="inline-block"
           fill="currentColor"
           focusable="false"

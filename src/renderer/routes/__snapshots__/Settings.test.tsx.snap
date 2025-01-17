@@ -123,7 +123,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               class="mr-3"
             >
               <label
-                class="font-medium text-gray-700 dark:text-gray-200"
+                class="font-medium text-gitify-font"
                 for="theme"
               >
                 Theme:
@@ -139,14 +139,14 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               >
                 <input
                   checked=""
-                  class="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+                  class="size-4 cursor-pointer"
                   id="theme_system"
                   name="theme"
                   type="radio"
                   value="SYSTEM"
                 />
                 <label
-                  class="ml-3 block text-sm font-medium text-gray-700 dark:text-white cursor-pointer"
+                  class="ml-3 block text-sm font-medium text-gitify-font cursor-pointer"
                   for="theme_system"
                 >
                   System
@@ -156,14 +156,14 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                 class="flex items-center"
               >
                 <input
-                  class="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+                  class="size-4 cursor-pointer"
                   id="theme_light"
                   name="theme"
                   type="radio"
                   value="LIGHT"
                 />
                 <label
-                  class="ml-3 block text-sm font-medium text-gray-700 dark:text-white cursor-pointer"
+                  class="ml-3 block text-sm font-medium text-gitify-font cursor-pointer"
                   for="theme_light"
                 >
                   Light
@@ -173,14 +173,14 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                 class="flex items-center"
               >
                 <input
-                  class="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+                  class="size-4 cursor-pointer"
                   id="theme_dark"
                   name="theme"
                   type="radio"
                   value="DARK"
                 />
                 <label
-                  class="ml-3 block text-sm font-medium text-gray-700 dark:text-white cursor-pointer"
+                  class="ml-3 block text-sm font-medium text-gitify-font cursor-pointer"
                   for="theme_dark"
                 >
                   Dark
@@ -193,7 +193,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           class="flex items-center mt-3 mb-2 text-sm"
         >
           <label
-            class="mr-3 content-center font-medium text-gray-700 dark:text-gray-200"
+            class="mr-3 content-center font-medium text-gitify-font"
             for="Zoom"
           >
             Zoom:
@@ -322,7 +322,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           >
             <input
               checked=""
-              class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+              class="size-4 rounded cursor-pointer"
               id="detailedNotifications"
               type="checkbox"
             />
@@ -330,7 +330,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               class="flex items-center ml-3"
             >
               <label
-                class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
+                class="font-medium text-gitify-font cursor-pointer"
                 for="detailedNotifications"
               >
                 Detailed notifications
@@ -342,7 +342,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               >
                 <svg
                   aria-hidden="true"
-                  class="octicon octicon-question ml-1 text-blue-500"
+                  class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
                   display="inline-block"
                   fill="currentColor"
                   focusable="false"
@@ -368,7 +368,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           >
             <input
               checked=""
-              class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+              class="size-4 rounded cursor-pointer"
               id="showPills"
               type="checkbox"
             />
@@ -376,7 +376,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               class="flex items-center ml-3"
             >
               <label
-                class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
+                class="font-medium text-gitify-font cursor-pointer"
                 for="showPills"
               >
                 Show notification metric pills
@@ -388,7 +388,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               >
                 <svg
                   aria-hidden="true"
-                  class="octicon octicon-question ml-1 text-blue-500"
+                  class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
                   display="inline-block"
                   fill="currentColor"
                   focusable="false"
@@ -414,7 +414,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           >
             <input
               checked=""
-              class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+              class="size-4 rounded cursor-pointer"
               id="showNumber"
               type="checkbox"
             />
@@ -422,7 +422,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               class="flex items-center ml-3"
             >
               <label
-                class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
+                class="font-medium text-gitify-font cursor-pointer"
                 for="showNumber"
               >
                 Show number
@@ -434,7 +434,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               >
                 <svg
                   aria-hidden="true"
-                  class="octicon octicon-question ml-1 text-blue-500"
+                  class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
                   display="inline-block"
                   fill="currentColor"
                   focusable="false"
@@ -460,7 +460,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           >
             <input
               checked=""
-              class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+              class="size-4 rounded cursor-pointer"
               disabled=""
               id="showAccountHeader"
               type="checkbox"
@@ -469,7 +469,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               class="flex items-center ml-3"
             >
               <label
-                class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
+                class="font-medium text-gitify-font cursor-pointer"
                 for="showAccountHeader"
                 style="text-decoration: line-through;"
               >
@@ -512,7 +512,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               class="mr-3"
             >
               <label
-                class="font-medium text-gray-700 dark:text-gray-200"
+                class="font-medium text-gitify-font"
                 for="groupBy"
               >
                 Group by:
@@ -528,14 +528,14 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               >
                 <input
                   checked=""
-                  class="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+                  class="size-4 cursor-pointer"
                   id="groupBy_repository"
                   name="groupBy"
                   type="radio"
                   value="REPOSITORY"
                 />
                 <label
-                  class="ml-3 block text-sm font-medium text-gray-700 dark:text-white cursor-pointer"
+                  class="ml-3 block text-sm font-medium text-gitify-font cursor-pointer"
                   for="groupBy_repository"
                 >
                   Repository
@@ -545,14 +545,14 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                 class="flex items-center"
               >
                 <input
-                  class="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+                  class="size-4 cursor-pointer"
                   id="groupBy_date"
                   name="groupBy"
                   type="radio"
                   value="DATE"
                 />
                 <label
-                  class="ml-3 block text-sm font-medium text-gray-700 dark:text-white cursor-pointer"
+                  class="ml-3 block text-sm font-medium text-gitify-font cursor-pointer"
                   for="groupBy_date"
                 >
                   Date
@@ -569,7 +569,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           >
             <input
               checked=""
-              class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+              class="size-4 rounded cursor-pointer"
               id="fetchAllNotifications"
               type="checkbox"
             />
@@ -577,7 +577,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               class="flex items-center ml-3"
             >
               <label
-                class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
+                class="font-medium text-gitify-font cursor-pointer"
                 for="fetchAllNotifications"
               >
                 Fetch all notifications
@@ -589,7 +589,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               >
                 <svg
                   aria-hidden="true"
-                  class="octicon octicon-question ml-1 text-blue-500"
+                  class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
                   display="inline-block"
                   fill="currentColor"
                   focusable="false"
@@ -614,7 +614,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             class="flex items-center"
           >
             <input
-              class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+              class="size-4 rounded cursor-pointer"
               id="showOnlyParticipating"
               type="checkbox"
             />
@@ -622,7 +622,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               class="flex items-center ml-3"
             >
               <label
-                class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
+                class="font-medium text-gitify-font cursor-pointer"
                 for="showOnlyParticipating"
               >
                 Show only participating
@@ -634,7 +634,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               >
                 <svg
                   aria-hidden="true"
-                  class="octicon octicon-question ml-1 text-blue-500"
+                  class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
                   display="inline-block"
                   fill="currentColor"
                   focusable="false"
@@ -659,7 +659,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             class="flex items-center"
           >
             <input
-              class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+              class="size-4 rounded cursor-pointer"
               id="markAsDoneOnOpen"
               type="checkbox"
             />
@@ -667,7 +667,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               class="flex items-center ml-3"
             >
               <label
-                class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
+                class="font-medium text-gitify-font cursor-pointer"
                 for="markAsDoneOnOpen"
               >
                 Mark as done on open
@@ -679,7 +679,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               >
                 <svg
                   aria-hidden="true"
-                  class="octicon octicon-question ml-1 text-blue-500"
+                  class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
                   display="inline-block"
                   fill="currentColor"
                   focusable="false"
@@ -704,7 +704,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             class="flex items-center"
           >
             <input
-              class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+              class="size-4 rounded cursor-pointer"
               id="markAsDoneOnUnsubscribe"
               type="checkbox"
             />
@@ -712,7 +712,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               class="flex items-center ml-3"
             >
               <label
-                class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
+                class="font-medium text-gitify-font cursor-pointer"
                 for="markAsDoneOnUnsubscribe"
               >
                 Mark as done on unsubscribe
@@ -724,7 +724,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               >
                 <svg
                   aria-hidden="true"
-                  class="octicon octicon-question ml-1 text-blue-500"
+                  class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
                   display="inline-block"
                   fill="currentColor"
                   focusable="false"
@@ -749,7 +749,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             class="flex items-center"
           >
             <input
-              class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+              class="size-4 rounded cursor-pointer"
               id="delayNotificationState"
               type="checkbox"
             />
@@ -757,7 +757,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               class="flex items-center ml-3"
             >
               <label
-                class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
+                class="font-medium text-gitify-font cursor-pointer"
                 for="delayNotificationState"
               >
                 Delay notification state
@@ -769,7 +769,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               >
                 <svg
                   aria-hidden="true"
-                  class="octicon octicon-question ml-1 text-blue-500"
+                  class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
                   display="inline-block"
                   fill="currentColor"
                   focusable="false"
@@ -821,7 +821,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               class="mr-3"
             >
               <label
-                class="font-medium text-gray-700 dark:text-gray-200"
+                class="font-medium text-gitify-font"
                 for="openLinks"
               >
                 Open Links:
@@ -837,14 +837,14 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               >
                 <input
                   checked=""
-                  class="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+                  class="size-4 cursor-pointer"
                   id="openLinks_foreground"
                   name="openLinks"
                   type="radio"
                   value="FOREGROUND"
                 />
                 <label
-                  class="ml-3 block text-sm font-medium text-gray-700 dark:text-white cursor-pointer"
+                  class="ml-3 block text-sm font-medium text-gitify-font cursor-pointer"
                   for="openLinks_foreground"
                 >
                   Foreground
@@ -854,14 +854,14 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                 class="flex items-center"
               >
                 <input
-                  class="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+                  class="size-4 cursor-pointer"
                   id="openLinks_background"
                   name="openLinks"
                   type="radio"
                   value="BACKGROUND"
                 />
                 <label
-                  class="ml-3 block text-sm font-medium text-gray-700 dark:text-white cursor-pointer"
+                  class="ml-3 block text-sm font-medium text-gitify-font cursor-pointer"
                   for="openLinks_background"
                 >
                   Background
@@ -878,7 +878,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           >
             <input
               checked=""
-              class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+              class="size-4 rounded cursor-pointer"
               id="keyboardShortcutEnabled"
               type="checkbox"
             />
@@ -886,7 +886,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               class="flex items-center ml-3"
             >
               <label
-                class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
+                class="font-medium text-gitify-font cursor-pointer"
                 for="keyboardShortcutEnabled"
               >
                 Enable keyboard shortcut
@@ -898,7 +898,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               >
                 <svg
                   aria-hidden="true"
-                  class="octicon octicon-question ml-1 text-blue-500"
+                  class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
                   display="inline-block"
                   fill="currentColor"
                   focusable="false"
@@ -923,7 +923,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             class="flex items-center"
           >
             <input
-              class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+              class="size-4 rounded cursor-pointer"
               id="showNotificationsCountInTray"
               type="checkbox"
             />
@@ -931,7 +931,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               class="flex items-center ml-3"
             >
               <label
-                class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
+                class="font-medium text-gitify-font cursor-pointer"
                 for="showNotificationsCountInTray"
               >
                 Show notifications count in tray
@@ -947,7 +947,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           >
             <input
               checked=""
-              class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+              class="size-4 rounded cursor-pointer"
               id="showNotifications"
               type="checkbox"
             />
@@ -955,7 +955,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               class="flex items-center ml-3"
             >
               <label
-                class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
+                class="font-medium text-gitify-font cursor-pointer"
                 for="showNotifications"
               >
                 Show system notifications
@@ -971,7 +971,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           >
             <input
               checked=""
-              class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+              class="size-4 rounded cursor-pointer"
               id="playSound"
               type="checkbox"
             />
@@ -979,7 +979,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               class="flex items-center ml-3"
             >
               <label
-                class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
+                class="font-medium text-gitify-font cursor-pointer"
                 for="playSound"
               >
                 Play sound
@@ -994,7 +994,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             class="flex items-center"
           >
             <input
-              class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+              class="size-4 rounded cursor-pointer"
               id="useAlternateIdleIcon"
               type="checkbox"
             />
@@ -1002,7 +1002,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               class="flex items-center ml-3"
             >
               <label
-                class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
+                class="font-medium text-gitify-font cursor-pointer"
                 for="useAlternateIdleIcon"
               >
                 Use alternate idle icon
@@ -1014,7 +1014,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               >
                 <svg
                   aria-hidden="true"
-                  class="octicon octicon-question ml-1 text-blue-500"
+                  class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
                   display="inline-block"
                   fill="currentColor"
                   focusable="false"
@@ -1039,7 +1039,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             class="flex items-center"
           >
             <input
-              class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+              class="size-4 rounded cursor-pointer"
               id="openAtStartUp"
               type="checkbox"
             />
@@ -1047,7 +1047,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               class="flex items-center ml-3"
             >
               <label
-                class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
+                class="font-medium text-gitify-font cursor-pointer"
                 for="openAtStartUp"
               >
                 Open at startup
@@ -1089,7 +1089,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
     </div>
   </div>
   <div
-    class="flex items-center justify-between bg-gray-200 px-4 py-1 text-sm dark:bg-gray-darker"
+    class="flex items-center justify-between px-4 py-1 text-sm bg-gitify-footer"
   >
     <div
       class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"

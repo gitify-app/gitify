@@ -68,7 +68,7 @@ export const Sidebar: FC = () => {
   }, [notifications]);
 
   return (
-    <div className="fixed left-12 -ml-12 flex h-full w-12 flex-col overflow-y-auto bg-gray-sidebar">
+    <div className="fixed left-12 -ml-12 flex h-full w-12 flex-col overflow-y-auto bg-gitify-sidebar">
       <div className="flex flex-1 flex-col">
         <Stack
           direction="vertical"

@@ -92,7 +92,7 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
           placeholder="The 40 characters token generated on GitHub"
         />
         {!isValidToken && (
-          <div className="mt-4 text-sm font-medium text-red-500">
+          <div className="my-4 text-sm font-medium text-gitify-failure">
             This token could not be validated with {values.hostname}.
           </div>
         )}

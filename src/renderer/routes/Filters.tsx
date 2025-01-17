@@ -57,7 +57,7 @@ export const FiltersRoute: FC = () => {
                   Hide notifications from GitHub Bot accounts, such as
                   @dependabot, @renovate, @netlify, etc
                 </div>
-                <div className="text-orange-600">
+                <div className="text-gitify-caution">
                   ⚠️ This filter requires the{' '}
                   <strong>Detailed Notifications</strong> setting to be enabled.
                 </div>
@@ -88,7 +88,7 @@ export const FiltersRoute: FC = () => {
         </fieldset>
       </div>
 
-      <div className="flex items-center justify-end bg-gray-200 px-3 py-1 text-sm dark:bg-gray-darker">
+      <div className="flex items-center justify-end px-3 py-1 text-sm 'var(--color-gitify-accounts)'">
         <Tooltip text="Clear all filters" direction="n">
           <Button
             leadingVisual={FilterRemoveIcon}

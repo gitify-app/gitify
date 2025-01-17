@@ -71,9 +71,7 @@ export const AccountNotifications: FC<IAccountNotifications> = (
         <div
           className={cn(
             'group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white',
-            props.error
-              ? 'bg-red-300 dark:bg-red-500'
-              : 'bg-gray-300 dark:bg-gray-darkest',
+            props.error ? 'bg-gitify-error' : 'bg-gitify-accounts',
           )}
           onClick={toggleAccountNotifications}
         >
