@@ -6,7 +6,7 @@ exports[`renderer/components/buttons/PillButton.tsx should render with metric 1`
   "baseElement": <body>
     <div>
       <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
         title="Mock Pill"
         type="button"
       >
@@ -46,7 +46,7 @@ exports[`renderer/components/buttons/PillButton.tsx should render with metric 1`
   </body>,
   "container": <div>
     <button
-      class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+      class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
       title="Mock Pill"
       type="button"
     >
@@ -143,7 +143,7 @@ exports[`renderer/components/buttons/PillButton.tsx should render without metric
   "baseElement": <body>
     <div>
       <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
         title="Mock Pill"
         type="button"
       >
@@ -178,7 +178,7 @@ exports[`renderer/components/buttons/PillButton.tsx should render without metric
   </body>,
   "container": <div>
     <button
-      class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+      class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
       title="Mock Pill"
       type="button"
     >

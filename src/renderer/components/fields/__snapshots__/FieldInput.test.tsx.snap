@@ -24,7 +24,7 @@ exports[`renderer/components/fields/FieldInput.tsx should render 1`] = `
             value=""
           />
           <div
-            class="mt-3 text-xs text-gray-700 dark:text-gray-200"
+            class="mt-3 text-xs text-gitify-font"
           >
             This is some helper text
           </div>
@@ -52,7 +52,7 @@ exports[`renderer/components/fields/FieldInput.tsx should render 1`] = `
           value=""
         />
         <div
-          class="mt-3 text-xs text-gray-700 dark:text-gray-200"
+          class="mt-3 text-xs text-gitify-font"
         >
           This is some helper text
         </div>

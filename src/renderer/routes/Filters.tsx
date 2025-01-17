@@ -88,7 +88,7 @@ export const FiltersRoute: FC = () => {
         </fieldset>
       </div>
 
-      <div className="flex items-center justify-end px-3 py-1 text-sm 'var(--color-gitify-accounts)'">
+      <div className="flex items-center justify-end px-3 py-1 text-sm bg-gitify-footer">
         <Tooltip text="Clear all filters" direction="n">
           <Button
             leadingVisual={FilterRemoveIcon}

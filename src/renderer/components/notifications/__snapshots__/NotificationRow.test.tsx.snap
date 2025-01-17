@@ -6,7 +6,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
   "baseElement": <body>
     <div>
       <div
-        class="group flex border-b border-gray-100 bg-white pl-3 pr-1 py-1.5 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker"
+        class="group flex border-b pl-3 pr-1 py-1.5 text-gitify-font border-gitify-notifications-border bg-gitify-notifications-rest hover:bg-gitify-notifications-hover"
         id="138661096"
       >
         <div
@@ -123,7 +123,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               class="flex"
             >
               <button
-                class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
                 title="octocat approved these changes"
                 type="button"
               >
@@ -160,7 +160,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 </div>
               </button>
               <button
-                class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
                 title="gitify-app requested changes"
                 type="button"
               >
@@ -332,7 +332,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
   </body>,
   "container": <div>
     <div
-      class="group flex border-b border-gray-100 bg-white pl-3 pr-1 py-1.5 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker"
+      class="group flex border-b pl-3 pr-1 py-1.5 text-gitify-font border-gitify-notifications-border bg-gitify-notifications-rest hover:bg-gitify-notifications-hover"
       id="138661096"
     >
       <div
@@ -449,7 +449,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             class="flex"
           >
             <button
-              class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+              class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
               title="octocat approved these changes"
               type="button"
             >
@@ -486,7 +486,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               </div>
             </button>
             <button
-              class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+              class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
               title="gitify-app requested changes"
               type="button"
             >
@@ -715,7 +715,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
   "baseElement": <body>
     <div>
       <div
-        class="group flex border-b border-gray-100 bg-white pl-3 pr-1 py-1.5 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker"
+        class="group flex border-b pl-3 pr-1 py-1.5 text-gitify-font border-gitify-notifications-border bg-gitify-notifications-rest hover:bg-gitify-notifications-hover"
         id="138661096"
       >
         <div
@@ -796,7 +796,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               class="flex"
             >
               <button
-                class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
                 title="octocat approved these changes"
                 type="button"
               >
@@ -833,7 +833,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 </div>
               </button>
               <button
-                class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
                 title="gitify-app requested changes"
                 type="button"
               >
@@ -1005,7 +1005,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
   </body>,
   "container": <div>
     <div
-      class="group flex border-b border-gray-100 bg-white pl-3 pr-1 py-1.5 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker"
+      class="group flex border-b pl-3 pr-1 py-1.5 text-gitify-font border-gitify-notifications-border bg-gitify-notifications-rest hover:bg-gitify-notifications-hover"
       id="138661096"
     >
       <div
@@ -1086,7 +1086,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             class="flex"
           >
             <button
-              class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+              class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
               title="octocat approved these changes"
               type="button"
             >
@@ -1123,7 +1123,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               </div>
             </button>
             <button
-              class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+              class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
               title="gitify-app requested changes"
               type="button"
             >
@@ -1352,7 +1352,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
   "baseElement": <body>
     <div>
       <div
-        class="group flex border-b border-gray-100 bg-white pl-3 pr-1 py-1.5 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker"
+        class="group flex border-b pl-3 pr-1 py-1.5 text-gitify-font border-gitify-notifications-border bg-gitify-notifications-rest hover:bg-gitify-notifications-hover"
         id="138661096"
       >
         <div
@@ -1433,7 +1433,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               class="flex"
             >
               <button
-                class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
                 title="octocat approved these changes"
                 type="button"
               >
@@ -1470,7 +1470,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 </div>
               </button>
               <button
-                class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
                 title="gitify-app requested changes"
                 type="button"
               >
@@ -1642,7 +1642,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
   </body>,
   "container": <div>
     <div
-      class="group flex border-b border-gray-100 bg-white pl-3 pr-1 py-1.5 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker"
+      class="group flex border-b pl-3 pr-1 py-1.5 text-gitify-font border-gitify-notifications-border bg-gitify-notifications-rest hover:bg-gitify-notifications-hover"
       id="138661096"
     >
       <div
@@ -1723,7 +1723,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             class="flex"
           >
             <button
-              class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+              class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
               title="octocat approved these changes"
               type="button"
             >
@@ -1760,7 +1760,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               </div>
             </button>
             <button
-              class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+              class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
               title="gitify-app requested changes"
               type="button"
             >

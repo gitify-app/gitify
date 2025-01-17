@@ -9,7 +9,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
         class="flex"
       >
         <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
           title="Linked to issues #1, #2"
           type="button"
         >
@@ -49,7 +49,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
           </div>
         </button>
         <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
           title="octocat approved these changes"
           type="button"
         >
@@ -86,7 +86,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
           </div>
         </button>
         <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
           title="gitify-app requested changes"
           type="button"
         >
@@ -123,7 +123,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
           </div>
         </button>
         <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
           title="1 comment"
           type="button"
         >
@@ -167,7 +167,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
       class="flex"
     >
       <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
         title="Linked to issues #1, #2"
         type="button"
       >
@@ -207,7 +207,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
         </div>
       </button>
       <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
         title="octocat approved these changes"
         type="button"
       >
@@ -244,7 +244,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
         </div>
       </button>
       <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
         title="gitify-app requested changes"
         type="button"
       >
@@ -281,7 +281,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
         </div>
       </button>
       <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
         title="1 comment"
         type="button"
       >
@@ -382,7 +382,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
         class="flex"
       >
         <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
           title="Linked to issues #1, #2"
           type="button"
         >
@@ -422,7 +422,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
           </div>
         </button>
         <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
           title="octocat approved these changes"
           type="button"
         >
@@ -459,7 +459,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
           </div>
         </button>
         <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
           title="gitify-app requested changes"
           type="button"
         >
@@ -496,7 +496,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
           </div>
         </button>
         <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
           title="2 comments"
           type="button"
         >
@@ -540,7 +540,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
       class="flex"
     >
       <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
         title="Linked to issues #1, #2"
         type="button"
       >
@@ -580,7 +580,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
         </div>
       </button>
       <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
         title="octocat approved these changes"
         type="button"
       >
@@ -617,7 +617,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
         </div>
       </button>
       <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
         title="gitify-app requested changes"
         type="button"
       >
@@ -654,7 +654,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
         </div>
       </button>
       <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
         title="2 comments"
         type="button"
       >
@@ -755,7 +755,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
         class="flex"
       >
         <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
           title="Linked to issues #1, #2"
           type="button"
         >
@@ -795,7 +795,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
           </div>
         </button>
         <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
           title="octocat approved these changes"
           type="button"
         >
@@ -832,7 +832,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
           </div>
         </button>
         <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
           title="gitify-app requested changes"
           type="button"
         >
@@ -876,7 +876,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
       class="flex"
     >
       <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
         title="Linked to issues #1, #2"
         type="button"
       >
@@ -916,7 +916,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
         </div>
       </button>
       <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
         title="octocat approved these changes"
         type="button"
       >
@@ -953,7 +953,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
         </div>
       </button>
       <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
         title="gitify-app requested changes"
         type="button"
       >
@@ -1054,7 +1054,7 @@ exports[`renderer/components/notifications/Pills.tsx label pills should render l
         class="flex"
       >
         <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
           title="Linked to issues #1, #2"
           type="button"
         >
@@ -1094,7 +1094,7 @@ exports[`renderer/components/notifications/Pills.tsx label pills should render l
           </div>
         </button>
         <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
           title="octocat approved these changes"
           type="button"
         >
@@ -1131,7 +1131,7 @@ exports[`renderer/components/notifications/Pills.tsx label pills should render l
           </div>
         </button>
         <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
           title="gitify-app requested changes"
           type="button"
         >
@@ -1168,7 +1168,7 @@ exports[`renderer/components/notifications/Pills.tsx label pills should render l
           </div>
         </button>
         <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
           title="2 comments"
           type="button"
         >
@@ -1205,7 +1205,7 @@ exports[`renderer/components/notifications/Pills.tsx label pills should render l
           </div>
         </button>
         <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
           title="🏷️ enhancement
 🏷️ good-first-issue"
           type="button"
@@ -1250,7 +1250,7 @@ exports[`renderer/components/notifications/Pills.tsx label pills should render l
       class="flex"
     >
       <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
         title="Linked to issues #1, #2"
         type="button"
       >
@@ -1290,7 +1290,7 @@ exports[`renderer/components/notifications/Pills.tsx label pills should render l
         </div>
       </button>
       <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
         title="octocat approved these changes"
         type="button"
       >
@@ -1327,7 +1327,7 @@ exports[`renderer/components/notifications/Pills.tsx label pills should render l
         </div>
       </button>
       <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
         title="gitify-app requested changes"
         type="button"
       >
@@ -1364,7 +1364,7 @@ exports[`renderer/components/notifications/Pills.tsx label pills should render l
         </div>
       </button>
       <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
         title="2 comments"
         type="button"
       >
@@ -1401,7 +1401,7 @@ exports[`renderer/components/notifications/Pills.tsx label pills should render l
         </div>
       </button>
       <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
         title="🏷️ enhancement
 🏷️ good-first-issue"
         type="button"
@@ -1503,7 +1503,7 @@ exports[`renderer/components/notifications/Pills.tsx linked issue pills should r
         class="flex"
       >
         <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
           title="Linked to issues #1, #2"
           type="button"
         >
@@ -1543,7 +1543,7 @@ exports[`renderer/components/notifications/Pills.tsx linked issue pills should r
           </div>
         </button>
         <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
           title="octocat approved these changes"
           type="button"
         >
@@ -1580,7 +1580,7 @@ exports[`renderer/components/notifications/Pills.tsx linked issue pills should r
           </div>
         </button>
         <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
           title="gitify-app requested changes"
           type="button"
         >
@@ -1624,7 +1624,7 @@ exports[`renderer/components/notifications/Pills.tsx linked issue pills should r
       class="flex"
     >
       <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
         title="Linked to issues #1, #2"
         type="button"
       >
@@ -1664,7 +1664,7 @@ exports[`renderer/components/notifications/Pills.tsx linked issue pills should r
         </div>
       </button>
       <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
         title="octocat approved these changes"
         type="button"
       >
@@ -1701,7 +1701,7 @@ exports[`renderer/components/notifications/Pills.tsx linked issue pills should r
         </div>
       </button>
       <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
         title="gitify-app requested changes"
         type="button"
       >
@@ -1802,7 +1802,7 @@ exports[`renderer/components/notifications/Pills.tsx linked issue pills should r
         class="flex"
       >
         <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
           title="Linked to issue #1"
           type="button"
         >
@@ -1842,7 +1842,7 @@ exports[`renderer/components/notifications/Pills.tsx linked issue pills should r
           </div>
         </button>
         <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
           title="octocat approved these changes"
           type="button"
         >
@@ -1879,7 +1879,7 @@ exports[`renderer/components/notifications/Pills.tsx linked issue pills should r
           </div>
         </button>
         <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
           title="gitify-app requested changes"
           type="button"
         >
@@ -1923,7 +1923,7 @@ exports[`renderer/components/notifications/Pills.tsx linked issue pills should r
       class="flex"
     >
       <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
         title="Linked to issue #1"
         type="button"
       >
@@ -1963,7 +1963,7 @@ exports[`renderer/components/notifications/Pills.tsx linked issue pills should r
         </div>
       </button>
       <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
         title="octocat approved these changes"
         type="button"
       >
@@ -2000,7 +2000,7 @@ exports[`renderer/components/notifications/Pills.tsx linked issue pills should r
         </div>
       </button>
       <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
         title="gitify-app requested changes"
         type="button"
       >
@@ -2101,7 +2101,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
         class="flex"
       >
         <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
           title="Linked to issues #1, #2"
           type="button"
         >
@@ -2141,7 +2141,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
           </div>
         </button>
         <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
           title="octocat approved these changes"
           type="button"
         >
@@ -2178,7 +2178,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
           </div>
         </button>
         <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
           title="gitify-app requested changes"
           type="button"
         >
@@ -2215,7 +2215,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
           </div>
         </button>
         <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
           title="2 comments"
           type="button"
         >
@@ -2252,7 +2252,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
           </div>
         </button>
         <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
           title="🏷️ enhancement
 🏷️ good-first-issue"
           type="button"
@@ -2290,7 +2290,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
           </div>
         </button>
         <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
           title="Milestone 1"
           type="button"
         >
@@ -2329,7 +2329,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
       class="flex"
     >
       <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
         title="Linked to issues #1, #2"
         type="button"
       >
@@ -2369,7 +2369,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
         </div>
       </button>
       <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
         title="octocat approved these changes"
         type="button"
       >
@@ -2406,7 +2406,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
         </div>
       </button>
       <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
         title="gitify-app requested changes"
         type="button"
       >
@@ -2443,7 +2443,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
         </div>
       </button>
       <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
         title="2 comments"
         type="button"
       >
@@ -2480,7 +2480,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
         </div>
       </button>
       <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
         title="🏷️ enhancement
 🏷️ good-first-issue"
         type="button"
@@ -2518,7 +2518,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
         </div>
       </button>
       <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
         title="Milestone 1"
         type="button"
       >
@@ -2614,7 +2614,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
         class="flex"
       >
         <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
           title="Linked to issues #1, #2"
           type="button"
         >
@@ -2654,7 +2654,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
           </div>
         </button>
         <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
           title="octocat approved these changes"
           type="button"
         >
@@ -2691,7 +2691,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
           </div>
         </button>
         <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
           title="gitify-app requested changes"
           type="button"
         >
@@ -2728,7 +2728,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
           </div>
         </button>
         <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
           title="2 comments"
           type="button"
         >
@@ -2765,7 +2765,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
           </div>
         </button>
         <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
           title="🏷️ enhancement
 🏷️ good-first-issue"
           type="button"
@@ -2803,7 +2803,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
           </div>
         </button>
         <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
           title="Milestone 1"
           type="button"
         >
@@ -2842,7 +2842,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
       class="flex"
     >
       <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
         title="Linked to issues #1, #2"
         type="button"
       >
@@ -2882,7 +2882,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
         </div>
       </button>
       <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
         title="octocat approved these changes"
         type="button"
       >
@@ -2919,7 +2919,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
         </div>
       </button>
       <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
         title="gitify-app requested changes"
         type="button"
       >
@@ -2956,7 +2956,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
         </div>
       </button>
       <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
         title="2 comments"
         type="button"
       >
@@ -2993,7 +2993,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
         </div>
       </button>
       <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
         title="🏷️ enhancement
 🏷️ good-first-issue"
         type="button"
@@ -3031,7 +3031,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
         </div>
       </button>
       <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
         title="Milestone 1"
         type="button"
       >

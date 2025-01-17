@@ -44,13 +44,11 @@ export const FieldInput: FC<IFieldInput> = ({
           />
 
           {helpText && (
-            <div className="mt-3 text-xs text-gray-700 dark:text-gray-200">
-              {helpText}
-            </div>
+            <div className="mt-3 text-xs text-gitify-font">{helpText}</div>
           )}
 
           {touched && error && (
-            <div className="mt-2 text-xs italic text-red-500">{error}</div>
+            <div className="mt-2 text-xs italic text-gitify-error">{error}</div>
           )}
         </div>
       )}

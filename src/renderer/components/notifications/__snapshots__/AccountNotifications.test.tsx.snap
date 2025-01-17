@@ -6,7 +6,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
   "baseElement": <body>
     <div>
       <div
-        class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-error"
+        class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-accounts-error"
       >
         <button
           aria-describedby=":r15:-loading-announcement"
@@ -247,7 +247,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
   </body>,
   "container": <div>
     <div
-      class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-error"
+      class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-accounts-error"
     >
       <button
         aria-describedby=":r15:-loading-announcement"
@@ -545,7 +545,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
   "baseElement": <body>
     <div>
       <div
-        class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-accounts"
+        class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-accounts-rest"
       >
         <button
           aria-describedby=":r7:-loading-announcement"
@@ -748,7 +748,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
         </div>
       </div>
       <div
-        class="group flex border-b border-gray-100 bg-white pl-3 pr-1 py-1.5 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker"
+        class="group flex border-b pl-3 pr-1 py-1.5 text-gitify-font border-gitify-notifications-border bg-gitify-notifications-rest hover:bg-gitify-notifications-hover"
         id="138661096"
       >
         <div
@@ -865,7 +865,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               class="flex"
             >
               <button
-                class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
                 title="octocat approved these changes"
                 type="button"
               >
@@ -902,7 +902,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 </div>
               </button>
               <button
-                class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
                 title="gitify-app requested changes"
                 type="button"
               >
@@ -1071,7 +1071,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
         </div>
       </div>
       <div
-        class="group flex border-b border-gray-100 bg-white pl-3 pr-1 py-1.5 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker"
+        class="group flex border-b pl-3 pr-1 py-1.5 text-gitify-font border-gitify-notifications-border bg-gitify-notifications-rest hover:bg-gitify-notifications-hover"
         id="148827438"
       >
         <div
@@ -1326,7 +1326,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
   </body>,
   "container": <div>
     <div
-      class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-accounts"
+      class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-accounts-rest"
     >
       <button
         aria-describedby=":r7:-loading-announcement"
@@ -1529,7 +1529,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
       </div>
     </div>
     <div
-      class="group flex border-b border-gray-100 bg-white pl-3 pr-1 py-1.5 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker"
+      class="group flex border-b pl-3 pr-1 py-1.5 text-gitify-font border-gitify-notifications-border bg-gitify-notifications-rest hover:bg-gitify-notifications-hover"
       id="138661096"
     >
       <div
@@ -1646,7 +1646,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             class="flex"
           >
             <button
-              class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+              class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
               title="octocat approved these changes"
               type="button"
             >
@@ -1683,7 +1683,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               </div>
             </button>
             <button
-              class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+              class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
               title="gitify-app requested changes"
               type="button"
             >
@@ -1852,7 +1852,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
       </div>
     </div>
     <div
-      class="group flex border-b border-gray-100 bg-white pl-3 pr-1 py-1.5 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker"
+      class="group flex border-b pl-3 pr-1 py-1.5 text-gitify-font border-gitify-notifications-border bg-gitify-notifications-rest hover:bg-gitify-notifications-hover"
       id="148827438"
     >
       <div
@@ -2164,7 +2164,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
   "baseElement": <body>
     <div>
       <div
-        class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-accounts"
+        class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-accounts-rest"
       >
         <button
           aria-describedby=":r0:-loading-announcement"
@@ -2373,7 +2373,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
   </body>,
   "container": <div>
     <div
-      class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-accounts"
+      class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-accounts-rest"
     >
       <button
         aria-describedby=":r0:-loading-announcement"
@@ -2639,7 +2639,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
   "baseElement": <body>
     <div>
       <div
-        class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-accounts"
+        class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-accounts-rest"
       >
         <button
           aria-describedby=":ru:-loading-announcement"
@@ -2875,7 +2875,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
   </body>,
   "container": <div>
     <div
-      class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-accounts"
+      class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-accounts-rest"
     >
       <button
         aria-describedby=":ru:-loading-announcement"
@@ -3168,7 +3168,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
   "baseElement": <body>
     <div>
       <div
-        class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-accounts"
+        class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-accounts-rest"
       >
         <button
           aria-describedby=":r21:-loading-announcement"
@@ -3373,7 +3373,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
     </div>
     <div>
       <div
-        class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-accounts"
+        class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-accounts-rest"
       >
         <button
           aria-describedby=":r28:-loading-announcement"
@@ -3582,7 +3582,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
   </body>,
   "container": <div>
     <div
-      class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-accounts"
+      class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-accounts-rest"
     >
       <button
         aria-describedby=":r28:-loading-announcement"

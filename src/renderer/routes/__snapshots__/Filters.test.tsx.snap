@@ -860,7 +860,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
     </fieldset>
   </div>
   <div
-    class="flex items-center justify-end px-3 py-1 text-sm 'var(--color-gitify-accounts)'"
+    class="flex items-center justify-end px-3 py-1 text-sm bg-gitify-footer"
   >
     <span
       aria-label="Clear all filters"

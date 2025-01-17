@@ -100,7 +100,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
               value="github.com"
             />
             <div
-              class="mt-3 text-xs text-gray-700 dark:text-gray-200"
+              class="mt-3 text-xs text-gitify-font"
             >
               <div
                 class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
@@ -409,7 +409,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
             value="github.com"
           />
           <div
-            class="mt-3 text-xs text-gray-700 dark:text-gray-200"
+            class="mt-3 text-xs text-gitify-font"
           >
             <div
               class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
