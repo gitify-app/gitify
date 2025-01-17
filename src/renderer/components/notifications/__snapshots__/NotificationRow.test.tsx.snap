@@ -10,7 +10,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
         id="138661096"
       >
         <div
-          class="mr-3 flex items-center justify-center text-green-500"
+          class="mr-3 flex items-center justify-center"
         >
           <span
             aria-label="Open Issue"
@@ -20,7 +20,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-issue-opened Octicon-sc-9kayk9-0"
+              class="octicon octicon-issue-opened Octicon-sc-9kayk9-0 text-primer-open"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -123,7 +123,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               class="flex"
             >
               <button
-                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 title="octocat approved these changes"
                 type="button"
               >
@@ -138,7 +138,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 >
                   <svg
                     aria-hidden="true"
-                    class="octicon octicon-check Octicon-sc-9kayk9-0 text-green-500"
+                    class="octicon octicon-check Octicon-sc-9kayk9-0 text-primer-open"
                     display="inline-block"
                     fill="currentColor"
                     focusable="false"
@@ -160,7 +160,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 </div>
               </button>
               <button
-                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 title="gitify-app requested changes"
                 type="button"
               >
@@ -175,7 +175,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 >
                   <svg
                     aria-hidden="true"
-                    class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-red-500"
+                    class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-primer-closed"
                     display="inline-block"
                     fill="currentColor"
                     focusable="false"
@@ -336,7 +336,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
       id="138661096"
     >
       <div
-        class="mr-3 flex items-center justify-center text-green-500"
+        class="mr-3 flex items-center justify-center"
       >
         <span
           aria-label="Open Issue"
@@ -346,7 +346,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-issue-opened Octicon-sc-9kayk9-0"
+            class="octicon octicon-issue-opened Octicon-sc-9kayk9-0 text-primer-open"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -449,7 +449,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             class="flex"
           >
             <button
-              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+              class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
               title="octocat approved these changes"
               type="button"
             >
@@ -464,7 +464,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               >
                 <svg
                   aria-hidden="true"
-                  class="octicon octicon-check Octicon-sc-9kayk9-0 text-green-500"
+                  class="octicon octicon-check Octicon-sc-9kayk9-0 text-primer-open"
                   display="inline-block"
                   fill="currentColor"
                   focusable="false"
@@ -486,7 +486,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               </div>
             </button>
             <button
-              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+              class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
               title="gitify-app requested changes"
               type="button"
             >
@@ -501,7 +501,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               >
                 <svg
                   aria-hidden="true"
-                  class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-red-500"
+                  class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-primer-closed"
                   display="inline-block"
                   fill="currentColor"
                   focusable="false"
@@ -719,7 +719,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
         id="138661096"
       >
         <div
-          class="mr-3 flex items-center justify-center text-green-500"
+          class="mr-3 flex items-center justify-center"
         >
           <span
             aria-label="Open Issue"
@@ -729,7 +729,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-issue-opened Octicon-sc-9kayk9-0"
+              class="octicon octicon-issue-opened Octicon-sc-9kayk9-0 text-primer-open"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -796,7 +796,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               class="flex"
             >
               <button
-                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 title="octocat approved these changes"
                 type="button"
               >
@@ -811,7 +811,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 >
                   <svg
                     aria-hidden="true"
-                    class="octicon octicon-check Octicon-sc-9kayk9-0 text-green-500"
+                    class="octicon octicon-check Octicon-sc-9kayk9-0 text-primer-open"
                     display="inline-block"
                     fill="currentColor"
                     focusable="false"
@@ -833,7 +833,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 </div>
               </button>
               <button
-                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 title="gitify-app requested changes"
                 type="button"
               >
@@ -848,7 +848,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 >
                   <svg
                     aria-hidden="true"
-                    class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-red-500"
+                    class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-primer-closed"
                     display="inline-block"
                     fill="currentColor"
                     focusable="false"
@@ -1009,7 +1009,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
       id="138661096"
     >
       <div
-        class="mr-3 flex items-center justify-center text-green-500"
+        class="mr-3 flex items-center justify-center"
       >
         <span
           aria-label="Open Issue"
@@ -1019,7 +1019,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-issue-opened Octicon-sc-9kayk9-0"
+            class="octicon octicon-issue-opened Octicon-sc-9kayk9-0 text-primer-open"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -1086,7 +1086,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             class="flex"
           >
             <button
-              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+              class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
               title="octocat approved these changes"
               type="button"
             >
@@ -1101,7 +1101,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               >
                 <svg
                   aria-hidden="true"
-                  class="octicon octicon-check Octicon-sc-9kayk9-0 text-green-500"
+                  class="octicon octicon-check Octicon-sc-9kayk9-0 text-primer-open"
                   display="inline-block"
                   fill="currentColor"
                   focusable="false"
@@ -1123,7 +1123,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               </div>
             </button>
             <button
-              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+              class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
               title="gitify-app requested changes"
               type="button"
             >
@@ -1138,7 +1138,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               >
                 <svg
                   aria-hidden="true"
-                  class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-red-500"
+                  class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-primer-closed"
                   display="inline-block"
                   fill="currentColor"
                   focusable="false"
@@ -1356,7 +1356,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
         id="138661096"
       >
         <div
-          class="mr-3 flex items-center justify-center text-green-500"
+          class="mr-3 flex items-center justify-center"
         >
           <span
             aria-label="Open Issue"
@@ -1366,7 +1366,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-issue-opened Octicon-sc-9kayk9-0"
+              class="octicon octicon-issue-opened Octicon-sc-9kayk9-0 text-primer-open"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -1433,7 +1433,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               class="flex"
             >
               <button
-                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 title="octocat approved these changes"
                 type="button"
               >
@@ -1448,7 +1448,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 >
                   <svg
                     aria-hidden="true"
-                    class="octicon octicon-check Octicon-sc-9kayk9-0 text-green-500"
+                    class="octicon octicon-check Octicon-sc-9kayk9-0 text-primer-open"
                     display="inline-block"
                     fill="currentColor"
                     focusable="false"
@@ -1470,7 +1470,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 </div>
               </button>
               <button
-                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 title="gitify-app requested changes"
                 type="button"
               >
@@ -1485,7 +1485,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 >
                   <svg
                     aria-hidden="true"
-                    class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-red-500"
+                    class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-primer-closed"
                     display="inline-block"
                     fill="currentColor"
                     focusable="false"
@@ -1646,7 +1646,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
       id="138661096"
     >
       <div
-        class="mr-3 flex items-center justify-center text-green-500"
+        class="mr-3 flex items-center justify-center"
       >
         <span
           aria-label="Open Issue"
@@ -1656,7 +1656,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-issue-opened Octicon-sc-9kayk9-0"
+            class="octicon octicon-issue-opened Octicon-sc-9kayk9-0 text-primer-open"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -1723,7 +1723,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             class="flex"
           >
             <button
-              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+              class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
               title="octocat approved these changes"
               type="button"
             >
@@ -1738,7 +1738,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               >
                 <svg
                   aria-hidden="true"
-                  class="octicon octicon-check Octicon-sc-9kayk9-0 text-green-500"
+                  class="octicon octicon-check Octicon-sc-9kayk9-0 text-primer-open"
                   display="inline-block"
                   fill="currentColor"
                   focusable="false"
@@ -1760,7 +1760,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               </div>
             </button>
             <button
-              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+              class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
               title="gitify-app requested changes"
               type="button"
             >
@@ -1775,7 +1775,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               >
                 <svg
                   aria-hidden="true"
-                  class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-red-500"
+                  class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-primer-closed"
                   display="inline-block"
                   fill="currentColor"
                   focusable="false"

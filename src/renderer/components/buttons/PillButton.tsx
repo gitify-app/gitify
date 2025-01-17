@@ -18,7 +18,7 @@ export const PillButton: FC<IPillButton> = (props: IPillButton) => {
     <button
       title={props.title}
       type="button"
-      className="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+      className="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
     >
       <Stack direction="horizontal" align="center" gap="condensed">
         <Octicon icon={props.icon} size={Size.XSMALL} className={props.color} />

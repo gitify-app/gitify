@@ -9,7 +9,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
         class="flex"
       >
         <button
-          class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
           title="Linked to issues #1, #2"
           type="button"
         >
@@ -24,7 +24,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-issue-closed Octicon-sc-9kayk9-0 text-green-500"
+              class="octicon octicon-issue-closed Octicon-sc-9kayk9-0 text-primer-open"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -49,7 +49,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
           </div>
         </button>
         <button
-          class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
           title="octocat approved these changes"
           type="button"
         >
@@ -64,7 +64,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-check Octicon-sc-9kayk9-0 text-green-500"
+              class="octicon octicon-check Octicon-sc-9kayk9-0 text-primer-open"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -86,7 +86,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
           </div>
         </button>
         <button
-          class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
           title="gitify-app requested changes"
           type="button"
         >
@@ -101,7 +101,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-red-500"
+              class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-primer-closed"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -123,7 +123,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
           </div>
         </button>
         <button
-          class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
           title="1 comment"
           type="button"
         >
@@ -138,7 +138,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-comment Octicon-sc-9kayk9-0 text-gray-500 dark:text-gray-300"
+              class="octicon octicon-comment Octicon-sc-9kayk9-0 text-primer-muted"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -167,7 +167,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
       class="flex"
     >
       <button
-        class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
         title="Linked to issues #1, #2"
         type="button"
       >
@@ -182,7 +182,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-issue-closed Octicon-sc-9kayk9-0 text-green-500"
+            class="octicon octicon-issue-closed Octicon-sc-9kayk9-0 text-primer-open"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -207,7 +207,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
         </div>
       </button>
       <button
-        class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
         title="octocat approved these changes"
         type="button"
       >
@@ -222,7 +222,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-check Octicon-sc-9kayk9-0 text-green-500"
+            class="octicon octicon-check Octicon-sc-9kayk9-0 text-primer-open"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -244,7 +244,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
         </div>
       </button>
       <button
-        class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
         title="gitify-app requested changes"
         type="button"
       >
@@ -259,7 +259,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-red-500"
+            class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-primer-closed"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -281,7 +281,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
         </div>
       </button>
       <button
-        class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
         title="1 comment"
         type="button"
       >
@@ -296,7 +296,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-comment Octicon-sc-9kayk9-0 text-gray-500 dark:text-gray-300"
+            class="octicon octicon-comment Octicon-sc-9kayk9-0 text-primer-muted"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -382,7 +382,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
         class="flex"
       >
         <button
-          class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
           title="Linked to issues #1, #2"
           type="button"
         >
@@ -397,7 +397,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-issue-closed Octicon-sc-9kayk9-0 text-green-500"
+              class="octicon octicon-issue-closed Octicon-sc-9kayk9-0 text-primer-open"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -422,7 +422,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
           </div>
         </button>
         <button
-          class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
           title="octocat approved these changes"
           type="button"
         >
@@ -437,7 +437,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-check Octicon-sc-9kayk9-0 text-green-500"
+              class="octicon octicon-check Octicon-sc-9kayk9-0 text-primer-open"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -459,7 +459,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
           </div>
         </button>
         <button
-          class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
           title="gitify-app requested changes"
           type="button"
         >
@@ -474,7 +474,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-red-500"
+              class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-primer-closed"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -496,7 +496,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
           </div>
         </button>
         <button
-          class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
           title="2 comments"
           type="button"
         >
@@ -511,7 +511,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-comment Octicon-sc-9kayk9-0 text-gray-500 dark:text-gray-300"
+              class="octicon octicon-comment Octicon-sc-9kayk9-0 text-primer-muted"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -540,7 +540,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
       class="flex"
     >
       <button
-        class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
         title="Linked to issues #1, #2"
         type="button"
       >
@@ -555,7 +555,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-issue-closed Octicon-sc-9kayk9-0 text-green-500"
+            class="octicon octicon-issue-closed Octicon-sc-9kayk9-0 text-primer-open"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -580,7 +580,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
         </div>
       </button>
       <button
-        class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
         title="octocat approved these changes"
         type="button"
       >
@@ -595,7 +595,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-check Octicon-sc-9kayk9-0 text-green-500"
+            class="octicon octicon-check Octicon-sc-9kayk9-0 text-primer-open"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -617,7 +617,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
         </div>
       </button>
       <button
-        class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
         title="gitify-app requested changes"
         type="button"
       >
@@ -632,7 +632,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-red-500"
+            class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-primer-closed"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -654,7 +654,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
         </div>
       </button>
       <button
-        class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
         title="2 comments"
         type="button"
       >
@@ -669,7 +669,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-comment Octicon-sc-9kayk9-0 text-gray-500 dark:text-gray-300"
+            class="octicon octicon-comment Octicon-sc-9kayk9-0 text-primer-muted"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -755,7 +755,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
         class="flex"
       >
         <button
-          class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
           title="Linked to issues #1, #2"
           type="button"
         >
@@ -770,7 +770,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-issue-closed Octicon-sc-9kayk9-0 text-green-500"
+              class="octicon octicon-issue-closed Octicon-sc-9kayk9-0 text-primer-open"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -795,7 +795,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
           </div>
         </button>
         <button
-          class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
           title="octocat approved these changes"
           type="button"
         >
@@ -810,7 +810,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-check Octicon-sc-9kayk9-0 text-green-500"
+              class="octicon octicon-check Octicon-sc-9kayk9-0 text-primer-open"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -832,7 +832,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
           </div>
         </button>
         <button
-          class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
           title="gitify-app requested changes"
           type="button"
         >
@@ -847,7 +847,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-red-500"
+              class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-primer-closed"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -876,7 +876,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
       class="flex"
     >
       <button
-        class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
         title="Linked to issues #1, #2"
         type="button"
       >
@@ -891,7 +891,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-issue-closed Octicon-sc-9kayk9-0 text-green-500"
+            class="octicon octicon-issue-closed Octicon-sc-9kayk9-0 text-primer-open"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -916,7 +916,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
         </div>
       </button>
       <button
-        class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
         title="octocat approved these changes"
         type="button"
       >
@@ -931,7 +931,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-check Octicon-sc-9kayk9-0 text-green-500"
+            class="octicon octicon-check Octicon-sc-9kayk9-0 text-primer-open"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -953,7 +953,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
         </div>
       </button>
       <button
-        class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
         title="gitify-app requested changes"
         type="button"
       >
@@ -968,7 +968,7 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-red-500"
+            class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-primer-closed"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -1054,7 +1054,7 @@ exports[`renderer/components/notifications/Pills.tsx label pills should render l
         class="flex"
       >
         <button
-          class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
           title="Linked to issues #1, #2"
           type="button"
         >
@@ -1069,7 +1069,7 @@ exports[`renderer/components/notifications/Pills.tsx label pills should render l
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-issue-closed Octicon-sc-9kayk9-0 text-green-500"
+              class="octicon octicon-issue-closed Octicon-sc-9kayk9-0 text-primer-open"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -1094,7 +1094,7 @@ exports[`renderer/components/notifications/Pills.tsx label pills should render l
           </div>
         </button>
         <button
-          class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
           title="octocat approved these changes"
           type="button"
         >
@@ -1109,7 +1109,7 @@ exports[`renderer/components/notifications/Pills.tsx label pills should render l
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-check Octicon-sc-9kayk9-0 text-green-500"
+              class="octicon octicon-check Octicon-sc-9kayk9-0 text-primer-open"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -1131,7 +1131,7 @@ exports[`renderer/components/notifications/Pills.tsx label pills should render l
           </div>
         </button>
         <button
-          class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
           title="gitify-app requested changes"
           type="button"
         >
@@ -1146,7 +1146,7 @@ exports[`renderer/components/notifications/Pills.tsx label pills should render l
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-red-500"
+              class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-primer-closed"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -1168,7 +1168,7 @@ exports[`renderer/components/notifications/Pills.tsx label pills should render l
           </div>
         </button>
         <button
-          class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
           title="2 comments"
           type="button"
         >
@@ -1183,7 +1183,7 @@ exports[`renderer/components/notifications/Pills.tsx label pills should render l
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-comment Octicon-sc-9kayk9-0 text-gray-500 dark:text-gray-300"
+              class="octicon octicon-comment Octicon-sc-9kayk9-0 text-primer-muted"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -1205,7 +1205,7 @@ exports[`renderer/components/notifications/Pills.tsx label pills should render l
           </div>
         </button>
         <button
-          class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
           title="🏷️ enhancement
 🏷️ good-first-issue"
           type="button"
@@ -1221,7 +1221,7 @@ exports[`renderer/components/notifications/Pills.tsx label pills should render l
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-tag Octicon-sc-9kayk9-0 text-gray-500 dark:text-gray-300"
+              class="octicon octicon-tag Octicon-sc-9kayk9-0 text-primer-muted"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -1250,7 +1250,7 @@ exports[`renderer/components/notifications/Pills.tsx label pills should render l
       class="flex"
     >
       <button
-        class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
         title="Linked to issues #1, #2"
         type="button"
       >
@@ -1265,7 +1265,7 @@ exports[`renderer/components/notifications/Pills.tsx label pills should render l
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-issue-closed Octicon-sc-9kayk9-0 text-green-500"
+            class="octicon octicon-issue-closed Octicon-sc-9kayk9-0 text-primer-open"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -1290,7 +1290,7 @@ exports[`renderer/components/notifications/Pills.tsx label pills should render l
         </div>
       </button>
       <button
-        class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
         title="octocat approved these changes"
         type="button"
       >
@@ -1305,7 +1305,7 @@ exports[`renderer/components/notifications/Pills.tsx label pills should render l
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-check Octicon-sc-9kayk9-0 text-green-500"
+            class="octicon octicon-check Octicon-sc-9kayk9-0 text-primer-open"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -1327,7 +1327,7 @@ exports[`renderer/components/notifications/Pills.tsx label pills should render l
         </div>
       </button>
       <button
-        class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
         title="gitify-app requested changes"
         type="button"
       >
@@ -1342,7 +1342,7 @@ exports[`renderer/components/notifications/Pills.tsx label pills should render l
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-red-500"
+            class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-primer-closed"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -1364,7 +1364,7 @@ exports[`renderer/components/notifications/Pills.tsx label pills should render l
         </div>
       </button>
       <button
-        class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
         title="2 comments"
         type="button"
       >
@@ -1379,7 +1379,7 @@ exports[`renderer/components/notifications/Pills.tsx label pills should render l
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-comment Octicon-sc-9kayk9-0 text-gray-500 dark:text-gray-300"
+            class="octicon octicon-comment Octicon-sc-9kayk9-0 text-primer-muted"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -1401,7 +1401,7 @@ exports[`renderer/components/notifications/Pills.tsx label pills should render l
         </div>
       </button>
       <button
-        class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
         title="🏷️ enhancement
 🏷️ good-first-issue"
         type="button"
@@ -1417,7 +1417,7 @@ exports[`renderer/components/notifications/Pills.tsx label pills should render l
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-tag Octicon-sc-9kayk9-0 text-gray-500 dark:text-gray-300"
+            class="octicon octicon-tag Octicon-sc-9kayk9-0 text-primer-muted"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -1503,7 +1503,7 @@ exports[`renderer/components/notifications/Pills.tsx linked issue pills should r
         class="flex"
       >
         <button
-          class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
           title="Linked to issues #1, #2"
           type="button"
         >
@@ -1518,7 +1518,7 @@ exports[`renderer/components/notifications/Pills.tsx linked issue pills should r
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-issue-closed Octicon-sc-9kayk9-0 text-green-500"
+              class="octicon octicon-issue-closed Octicon-sc-9kayk9-0 text-primer-open"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -1543,7 +1543,7 @@ exports[`renderer/components/notifications/Pills.tsx linked issue pills should r
           </div>
         </button>
         <button
-          class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
           title="octocat approved these changes"
           type="button"
         >
@@ -1558,7 +1558,7 @@ exports[`renderer/components/notifications/Pills.tsx linked issue pills should r
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-check Octicon-sc-9kayk9-0 text-green-500"
+              class="octicon octicon-check Octicon-sc-9kayk9-0 text-primer-open"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -1580,7 +1580,7 @@ exports[`renderer/components/notifications/Pills.tsx linked issue pills should r
           </div>
         </button>
         <button
-          class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
           title="gitify-app requested changes"
           type="button"
         >
@@ -1595,7 +1595,7 @@ exports[`renderer/components/notifications/Pills.tsx linked issue pills should r
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-red-500"
+              class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-primer-closed"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -1624,7 +1624,7 @@ exports[`renderer/components/notifications/Pills.tsx linked issue pills should r
       class="flex"
     >
       <button
-        class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
         title="Linked to issues #1, #2"
         type="button"
       >
@@ -1639,7 +1639,7 @@ exports[`renderer/components/notifications/Pills.tsx linked issue pills should r
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-issue-closed Octicon-sc-9kayk9-0 text-green-500"
+            class="octicon octicon-issue-closed Octicon-sc-9kayk9-0 text-primer-open"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -1664,7 +1664,7 @@ exports[`renderer/components/notifications/Pills.tsx linked issue pills should r
         </div>
       </button>
       <button
-        class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
         title="octocat approved these changes"
         type="button"
       >
@@ -1679,7 +1679,7 @@ exports[`renderer/components/notifications/Pills.tsx linked issue pills should r
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-check Octicon-sc-9kayk9-0 text-green-500"
+            class="octicon octicon-check Octicon-sc-9kayk9-0 text-primer-open"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -1701,7 +1701,7 @@ exports[`renderer/components/notifications/Pills.tsx linked issue pills should r
         </div>
       </button>
       <button
-        class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
         title="gitify-app requested changes"
         type="button"
       >
@@ -1716,7 +1716,7 @@ exports[`renderer/components/notifications/Pills.tsx linked issue pills should r
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-red-500"
+            class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-primer-closed"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -1802,7 +1802,7 @@ exports[`renderer/components/notifications/Pills.tsx linked issue pills should r
         class="flex"
       >
         <button
-          class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
           title="Linked to issue #1"
           type="button"
         >
@@ -1817,7 +1817,7 @@ exports[`renderer/components/notifications/Pills.tsx linked issue pills should r
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-issue-closed Octicon-sc-9kayk9-0 text-green-500"
+              class="octicon octicon-issue-closed Octicon-sc-9kayk9-0 text-primer-open"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -1842,7 +1842,7 @@ exports[`renderer/components/notifications/Pills.tsx linked issue pills should r
           </div>
         </button>
         <button
-          class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
           title="octocat approved these changes"
           type="button"
         >
@@ -1857,7 +1857,7 @@ exports[`renderer/components/notifications/Pills.tsx linked issue pills should r
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-check Octicon-sc-9kayk9-0 text-green-500"
+              class="octicon octicon-check Octicon-sc-9kayk9-0 text-primer-open"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -1879,7 +1879,7 @@ exports[`renderer/components/notifications/Pills.tsx linked issue pills should r
           </div>
         </button>
         <button
-          class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
           title="gitify-app requested changes"
           type="button"
         >
@@ -1894,7 +1894,7 @@ exports[`renderer/components/notifications/Pills.tsx linked issue pills should r
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-red-500"
+              class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-primer-closed"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -1923,7 +1923,7 @@ exports[`renderer/components/notifications/Pills.tsx linked issue pills should r
       class="flex"
     >
       <button
-        class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
         title="Linked to issue #1"
         type="button"
       >
@@ -1938,7 +1938,7 @@ exports[`renderer/components/notifications/Pills.tsx linked issue pills should r
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-issue-closed Octicon-sc-9kayk9-0 text-green-500"
+            class="octicon octicon-issue-closed Octicon-sc-9kayk9-0 text-primer-open"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -1963,7 +1963,7 @@ exports[`renderer/components/notifications/Pills.tsx linked issue pills should r
         </div>
       </button>
       <button
-        class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
         title="octocat approved these changes"
         type="button"
       >
@@ -1978,7 +1978,7 @@ exports[`renderer/components/notifications/Pills.tsx linked issue pills should r
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-check Octicon-sc-9kayk9-0 text-green-500"
+            class="octicon octicon-check Octicon-sc-9kayk9-0 text-primer-open"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -2000,7 +2000,7 @@ exports[`renderer/components/notifications/Pills.tsx linked issue pills should r
         </div>
       </button>
       <button
-        class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
         title="gitify-app requested changes"
         type="button"
       >
@@ -2015,7 +2015,7 @@ exports[`renderer/components/notifications/Pills.tsx linked issue pills should r
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-red-500"
+            class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-primer-closed"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -2101,7 +2101,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
         class="flex"
       >
         <button
-          class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
           title="Linked to issues #1, #2"
           type="button"
         >
@@ -2116,7 +2116,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-issue-closed Octicon-sc-9kayk9-0 text-green-500"
+              class="octicon octicon-issue-closed Octicon-sc-9kayk9-0 text-primer-open"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -2141,7 +2141,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
           </div>
         </button>
         <button
-          class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
           title="octocat approved these changes"
           type="button"
         >
@@ -2156,7 +2156,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-check Octicon-sc-9kayk9-0 text-green-500"
+              class="octicon octicon-check Octicon-sc-9kayk9-0 text-primer-open"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -2178,7 +2178,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
           </div>
         </button>
         <button
-          class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
           title="gitify-app requested changes"
           type="button"
         >
@@ -2193,7 +2193,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-red-500"
+              class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-primer-closed"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -2215,7 +2215,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
           </div>
         </button>
         <button
-          class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
           title="2 comments"
           type="button"
         >
@@ -2230,7 +2230,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-comment Octicon-sc-9kayk9-0 text-gray-500 dark:text-gray-300"
+              class="octicon octicon-comment Octicon-sc-9kayk9-0 text-primer-muted"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -2252,7 +2252,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
           </div>
         </button>
         <button
-          class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
           title="🏷️ enhancement
 🏷️ good-first-issue"
           type="button"
@@ -2268,7 +2268,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-tag Octicon-sc-9kayk9-0 text-gray-500 dark:text-gray-300"
+              class="octicon octicon-tag Octicon-sc-9kayk9-0 text-primer-muted"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -2290,7 +2290,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
           </div>
         </button>
         <button
-          class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
           title="Milestone 1"
           type="button"
         >
@@ -2305,7 +2305,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-milestone Octicon-sc-9kayk9-0 text-red-500"
+              class="octicon octicon-milestone Octicon-sc-9kayk9-0 text-primer-closed"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -2329,7 +2329,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
       class="flex"
     >
       <button
-        class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
         title="Linked to issues #1, #2"
         type="button"
       >
@@ -2344,7 +2344,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-issue-closed Octicon-sc-9kayk9-0 text-green-500"
+            class="octicon octicon-issue-closed Octicon-sc-9kayk9-0 text-primer-open"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -2369,7 +2369,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
         </div>
       </button>
       <button
-        class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
         title="octocat approved these changes"
         type="button"
       >
@@ -2384,7 +2384,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-check Octicon-sc-9kayk9-0 text-green-500"
+            class="octicon octicon-check Octicon-sc-9kayk9-0 text-primer-open"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -2406,7 +2406,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
         </div>
       </button>
       <button
-        class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
         title="gitify-app requested changes"
         type="button"
       >
@@ -2421,7 +2421,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-red-500"
+            class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-primer-closed"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -2443,7 +2443,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
         </div>
       </button>
       <button
-        class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
         title="2 comments"
         type="button"
       >
@@ -2458,7 +2458,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-comment Octicon-sc-9kayk9-0 text-gray-500 dark:text-gray-300"
+            class="octicon octicon-comment Octicon-sc-9kayk9-0 text-primer-muted"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -2480,7 +2480,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
         </div>
       </button>
       <button
-        class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
         title="🏷️ enhancement
 🏷️ good-first-issue"
         type="button"
@@ -2496,7 +2496,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-tag Octicon-sc-9kayk9-0 text-gray-500 dark:text-gray-300"
+            class="octicon octicon-tag Octicon-sc-9kayk9-0 text-primer-muted"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -2518,7 +2518,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
         </div>
       </button>
       <button
-        class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
         title="Milestone 1"
         type="button"
       >
@@ -2533,7 +2533,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-milestone Octicon-sc-9kayk9-0 text-red-500"
+            class="octicon octicon-milestone Octicon-sc-9kayk9-0 text-primer-closed"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -2614,7 +2614,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
         class="flex"
       >
         <button
-          class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
           title="Linked to issues #1, #2"
           type="button"
         >
@@ -2629,7 +2629,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-issue-closed Octicon-sc-9kayk9-0 text-green-500"
+              class="octicon octicon-issue-closed Octicon-sc-9kayk9-0 text-primer-open"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -2654,7 +2654,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
           </div>
         </button>
         <button
-          class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
           title="octocat approved these changes"
           type="button"
         >
@@ -2669,7 +2669,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-check Octicon-sc-9kayk9-0 text-green-500"
+              class="octicon octicon-check Octicon-sc-9kayk9-0 text-primer-open"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -2691,7 +2691,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
           </div>
         </button>
         <button
-          class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
           title="gitify-app requested changes"
           type="button"
         >
@@ -2706,7 +2706,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-red-500"
+              class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-primer-closed"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -2728,7 +2728,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
           </div>
         </button>
         <button
-          class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
           title="2 comments"
           type="button"
         >
@@ -2743,7 +2743,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-comment Octicon-sc-9kayk9-0 text-gray-500 dark:text-gray-300"
+              class="octicon octicon-comment Octicon-sc-9kayk9-0 text-primer-muted"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -2765,7 +2765,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
           </div>
         </button>
         <button
-          class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
           title="🏷️ enhancement
 🏷️ good-first-issue"
           type="button"
@@ -2781,7 +2781,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-tag Octicon-sc-9kayk9-0 text-gray-500 dark:text-gray-300"
+              class="octicon octicon-tag Octicon-sc-9kayk9-0 text-primer-muted"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -2803,7 +2803,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
           </div>
         </button>
         <button
-          class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
           title="Milestone 1"
           type="button"
         >
@@ -2818,7 +2818,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-milestone Octicon-sc-9kayk9-0 text-green-500"
+              class="octicon octicon-milestone Octicon-sc-9kayk9-0 text-primer-open"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -2842,7 +2842,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
       class="flex"
     >
       <button
-        class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
         title="Linked to issues #1, #2"
         type="button"
       >
@@ -2857,7 +2857,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-issue-closed Octicon-sc-9kayk9-0 text-green-500"
+            class="octicon octicon-issue-closed Octicon-sc-9kayk9-0 text-primer-open"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -2882,7 +2882,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
         </div>
       </button>
       <button
-        class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
         title="octocat approved these changes"
         type="button"
       >
@@ -2897,7 +2897,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-check Octicon-sc-9kayk9-0 text-green-500"
+            class="octicon octicon-check Octicon-sc-9kayk9-0 text-primer-open"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -2919,7 +2919,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
         </div>
       </button>
       <button
-        class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
         title="gitify-app requested changes"
         type="button"
       >
@@ -2934,7 +2934,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-red-500"
+            class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-primer-closed"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -2956,7 +2956,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
         </div>
       </button>
       <button
-        class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
         title="2 comments"
         type="button"
       >
@@ -2971,7 +2971,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-comment Octicon-sc-9kayk9-0 text-gray-500 dark:text-gray-300"
+            class="octicon octicon-comment Octicon-sc-9kayk9-0 text-primer-muted"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -2993,7 +2993,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
         </div>
       </button>
       <button
-        class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
         title="🏷️ enhancement
 🏷️ good-first-issue"
         type="button"
@@ -3009,7 +3009,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-tag Octicon-sc-9kayk9-0 text-gray-500 dark:text-gray-300"
+            class="octicon octicon-tag Octicon-sc-9kayk9-0 text-primer-muted"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -3031,7 +3031,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
         </div>
       </button>
       <button
-        class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
         title="Milestone 1"
         type="button"
       >
@@ -3046,7 +3046,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-milestone Octicon-sc-9kayk9-0 text-green-500"
+            class="octicon octicon-milestone Octicon-sc-9kayk9-0 text-primer-open"
             display="inline-block"
             fill="currentColor"
             focusable="false"

@@ -94,9 +94,13 @@ export const NotificationRow: FC<INotificationRow> = ({
         (isRead || showAsRead) && Opacity.READ,
       )}
     >
-      <div className={cn('mr-3 flex items-center justify-center', iconColor)}>
+      <div className="mr-3 flex items-center justify-center">
         <Tooltip text={notificationType} direction="e">
-          <Octicon icon={NotificationIcon} size={Size.LARGE} />
+          <Octicon
+            icon={NotificationIcon}
+            size={Size.LARGE}
+            className={iconColor}
+          />
         </Tooltip>
       </div>
 
