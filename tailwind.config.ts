@@ -17,10 +17,10 @@ const config: Config = {
          */
         primer: {
           attention: '#9a6700',
-          closed: '#d1242f',
+          closed: '#cf222e',
           done: '#8250df',
           muted: '#59636e',
-          open: '#1a7f37',
+          open: '#1f883d',
         },
         gitify: {
           background: 'var(--color-gitify-background)',
