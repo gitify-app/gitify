@@ -13,10 +13,8 @@ import { AppContext } from '../../context/App';
 import { Opacity, Size } from '../../types';
 import type { Notification } from '../../typesGitHub';
 import { cn } from '../../utils/cn';
-import {
-  formatForDisplay,
-  isMarkAsDoneFeatureSupported,
-} from '../../utils/helpers';
+import { isMarkAsDoneFeatureSupported } from '../../utils/features';
+import { formatForDisplay } from '../../utils/helpers';
 import {
   getNotificationTypeIcon,
   getNotificationTypeIconColor,

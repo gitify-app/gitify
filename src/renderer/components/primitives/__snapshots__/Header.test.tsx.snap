@@ -30,10 +30,12 @@ exports[`renderer/components/primitives/Header.tsx should render itself & its ch
             <svg
               aria-hidden="true"
               class="octicon octicon-arrow-left"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="16"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="16"
             >
@@ -53,11 +55,13 @@ exports[`renderer/components/primitives/Header.tsx should render itself & its ch
           >
             <svg
               aria-hidden="true"
-              class="Octicon-sc-9kayk9-0"
+              class="octicon octicon-mark-github Octicon-sc-9kayk9-0"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="18"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="18"
             >
@@ -102,10 +106,12 @@ exports[`renderer/components/primitives/Header.tsx should render itself & its ch
           <svg
             aria-hidden="true"
             class="octicon octicon-arrow-left"
+            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="16"
-            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+            overflow="visible"
+            style="vertical-align: text-bottom;"
             viewBox="0 0 16 16"
             width="16"
           >
@@ -125,11 +131,13 @@ exports[`renderer/components/primitives/Header.tsx should render itself & its ch
         >
           <svg
             aria-hidden="true"
-            class="Octicon-sc-9kayk9-0"
+            class="octicon octicon-mark-github Octicon-sc-9kayk9-0"
+            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="18"
-            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+            overflow="visible"
+            style="vertical-align: text-bottom;"
             viewBox="0 0 16 16"
             width="18"
           >

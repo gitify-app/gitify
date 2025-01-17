@@ -13,6 +13,7 @@ export function partialMockNotification(
       hostname: Constants.GITHUB_API_BASE_URL as Hostname,
       token: mockToken,
       user: mockGitifyUser,
+      hasRequiredScopes: true,
     },
     subject: subject as Subject,
   };

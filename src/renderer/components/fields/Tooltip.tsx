@@ -19,7 +19,7 @@ export const Tooltip: FC<ITooltip> = (props: ITooltip) => {
     >
       <QuestionIcon className="ml-1 text-blue-500" />
       {showTooltip && (
-        <div className="absolute z-10 w-60 rounded border border-gray-300 bg-white p-2 shadow dark:bg-gray-sidebar">
+        <div className="absolute left-[-80px] z-10 w-60 rounded border border-gray-300 bg-white p-2 shadow dark:bg-gray-sidebar">
           <div className="text-left text-xs text-gray-700 dark:text-white">
             {props.tooltip}
           </div>

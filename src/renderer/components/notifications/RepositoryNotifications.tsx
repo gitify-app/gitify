@@ -1,17 +1,13 @@
-import { type FC, type MouseEvent, useContext, useState } from 'react';
-
 import { CheckIcon, ReadIcon } from '@primer/octicons-react';
 import { Avatar, Button, IconButton, Stack, Text } from '@primer/react';
+import { type FC, type MouseEvent, useContext, useState } from 'react';
 
 import { AppContext } from '../../context/App';
 import { Opacity, Size } from '../../types';
 import type { Notification } from '../../typesGitHub';
 import { cn } from '../../utils/cn';
-import {
-  getChevronDetails,
-  isMarkAsDoneFeatureSupported,
-  isNonHumanUser,
-} from '../../utils/helpers';
+import { isMarkAsDoneFeatureSupported } from '../../utils/features';
+import { getChevronDetails, isNonHumanUser } from '../../utils/helpers';
 import { openRepository } from '../../utils/links';
 import { HoverGroup } from '../primitives/HoverGroup';
 import { NotificationRow } from './NotificationRow';

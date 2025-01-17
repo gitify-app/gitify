@@ -1,4 +1,4 @@
-import log from 'electron-log';
+import { logError } from '../../shared/logger';
 import type { Link } from '../types';
 import type {
   CheckSuiteAttributes,
@@ -49,9 +49,11 @@ export async function getGitifySubjectDetails(
         return null;
     }
   } catch (err) {
-    log.error(
-      `Error occurred while fetching details for ${notification.subject.type} notification: ${notification.subject.title}`,
+    logError(
+      'getGitifySubjectDetails',
+      'failed to fetch details for notification for',
       err,
+      notification,
     );
   }
 }
@@ -90,6 +92,7 @@ function getCheckSuiteStatus(statusDisplayName: string): CheckSuiteStatus {
     case 'cancelled':
       return 'cancelled';
     case 'failed':
+    case 'failed at startup':
       return 'failure';
     case 'skipped':
       return 'skipped';

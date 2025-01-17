@@ -8,11 +8,13 @@ exports[`renderer/routes/components/primitives/Legend.tsx should render the lege
   >
     <svg
       aria-hidden="true"
-      class="mr-2"
+      class="octicon octicon-person-fill mr-2"
+      display="inline-block"
       fill="currentColor"
       focusable="false"
       height="16"
-      style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+      overflow="visible"
+      style="vertical-align: text-bottom;"
       viewBox="0 0 16 16"
       width="16"
     >

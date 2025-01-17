@@ -1,16 +1,13 @@
 import type { AxiosPromise, AxiosResponse } from 'axios';
-import {
-  mockGitHubCloudAccount,
-  mockGitHubEnterpriseServerAccount,
-  mockPersonalAccessTokenAccount,
-} from '../__mocks__/state-mocks';
+import { mockPersonalAccessTokenAccount } from '../__mocks__/state-mocks';
 
 import {
   ChevronDownIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
 } from '@primer/octicons-react';
-import log from 'electron-log';
+
+import * as logger from '../../shared/logger';
 import type { Hostname, Link } from '../types';
 import type { SubjectType } from '../typesGitHub';
 import {
@@ -18,6 +15,7 @@ import {
   mockSingleNotification,
 } from './api/__mocks__/response-mocks';
 import * as apiRequests from './api/request';
+
 import {
   formatForDisplay,
   formatNotificationUpdatedAt,
@@ -26,7 +24,6 @@ import {
   getChevronDetails,
   getPlatformFromHostname,
   isEnterpriseServerHost,
-  isMarkAsDoneFeatureSupported,
   isNonHumanUser,
 } from './helpers';
 
@@ -64,48 +61,6 @@ describe('renderer/utils/helpers.ts', () => {
     it('should return false for non-enterprise host', () => {
       expect(isEnterpriseServerHost('github.com' as Hostname)).toBe(false);
       expect(isEnterpriseServerHost('api.github.com' as Hostname)).toBe(false);
-    });
-  });
-
-  describe('isMarkAsDoneFeatureSupported', () => {
-    it('should return true for GitHub Cloud', () => {
-      expect(isMarkAsDoneFeatureSupported(mockGitHubCloudAccount)).toBe(true);
-    });
-
-    it('should return false for GitHub Enterprise Server < v3.13', () => {
-      const account = {
-        ...mockGitHubEnterpriseServerAccount,
-        version: '3.12.0',
-      };
-
-      expect(isMarkAsDoneFeatureSupported(account)).toBe(false);
-    });
-
-    it('should return true for GitHub Enterprise Server >= v3.13', () => {
-      const account = {
-        ...mockGitHubEnterpriseServerAccount,
-        version: '3.13.3',
-      };
-
-      expect(isMarkAsDoneFeatureSupported(account)).toBe(true);
-    });
-
-    it('should return false for GitHub Enterprise Server when partial version available', () => {
-      const account = {
-        ...mockGitHubEnterpriseServerAccount,
-        version: '3',
-      };
-
-      expect(isMarkAsDoneFeatureSupported(account)).toBe(false);
-    });
-
-    it('should return false for GitHub Enterprise Server when no version available', () => {
-      const account = {
-        ...mockGitHubEnterpriseServerAccount,
-        version: null,
-      };
-
-      expect(isMarkAsDoneFeatureSupported(account)).toBe(false);
     });
   });
 
@@ -532,7 +487,7 @@ describe('renderer/utils/helpers.ts', () => {
       });
 
       it('defaults when exception handled during specialized html enrichment process', async () => {
-        const logErrorSpy = jest.spyOn(log, 'error').mockImplementation();
+        const logErrorSpy = jest.spyOn(logger, 'logError').mockImplementation();
 
         const subject = {
           title: 'generate github web url unit tests',

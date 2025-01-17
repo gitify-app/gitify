@@ -104,10 +104,12 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
               <svg
                 aria-hidden="true"
                 class="octicon octicon-check"
+                display="inline-block"
                 fill="currentColor"
                 focusable="false"
                 height="16"
-                style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
                 viewBox="0 0 16 16"
                 width="16"
               >
@@ -139,10 +141,12 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
               <svg
                 aria-hidden="true"
                 class="octicon octicon-read"
+                display="inline-block"
                 fill="currentColor"
                 focusable="false"
                 height="16"
-                style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
                 viewBox="0 0 16 16"
                 width="16"
               >
@@ -174,10 +178,12 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
               <svg
                 aria-hidden="true"
                 class="octicon octicon-chevron-down"
+                display="inline-block"
                 fill="currentColor"
                 focusable="false"
                 height="16"
-                style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
                 viewBox="0 0 16 16"
                 width="16"
               >
@@ -306,10 +312,12 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
             <svg
               aria-hidden="true"
               class="octicon octicon-check"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="16"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="16"
             >
@@ -341,10 +349,12 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
             <svg
               aria-hidden="true"
               class="octicon octicon-read"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="16"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="16"
             >
@@ -376,10 +386,12 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
             <svg
               aria-hidden="true"
               class="octicon octicon-chevron-down"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="16"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="16"
             >
@@ -504,7 +516,6 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
                     data-component="Avatar"
                     height="18"
                     size="18"
-                    src=""
                     sx="[object Object]"
                     width="18"
                   />
@@ -565,10 +576,12 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
               <svg
                 aria-hidden="true"
                 class="octicon octicon-check"
+                display="inline-block"
                 fill="currentColor"
                 focusable="false"
                 height="16"
-                style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
                 viewBox="0 0 16 16"
                 width="16"
               >
@@ -600,10 +613,12 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
               <svg
                 aria-hidden="true"
                 class="octicon octicon-read"
+                display="inline-block"
                 fill="currentColor"
                 focusable="false"
                 height="16"
-                style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
                 viewBox="0 0 16 16"
                 width="16"
               >
@@ -635,10 +650,12 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
               <svg
                 aria-hidden="true"
                 class="octicon octicon-chevron-right"
+                display="inline-block"
                 fill="currentColor"
                 focusable="false"
                 height="16"
-                style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
                 viewBox="0 0 16 16"
                 width="16"
               >
@@ -699,7 +716,6 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
                     data-component="Avatar"
                     height="18"
                     size="18"
-                    src=""
                     sx="[object Object]"
                     width="18"
                   />
@@ -760,10 +776,12 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
               <svg
                 aria-hidden="true"
                 class="octicon octicon-check"
+                display="inline-block"
                 fill="currentColor"
                 focusable="false"
                 height="16"
-                style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
                 viewBox="0 0 16 16"
                 width="16"
               >
@@ -795,10 +813,12 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
               <svg
                 aria-hidden="true"
                 class="octicon octicon-read"
+                display="inline-block"
                 fill="currentColor"
                 focusable="false"
                 height="16"
-                style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
                 viewBox="0 0 16 16"
                 width="16"
               >
@@ -830,10 +850,12 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
               <svg
                 aria-hidden="true"
                 class="octicon octicon-chevron-down"
+                display="inline-block"
                 fill="currentColor"
                 focusable="false"
                 height="16"
-                style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
                 viewBox="0 0 16 16"
                 width="16"
               >
@@ -901,7 +923,6 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
                   data-component="Avatar"
                   height="18"
                   size="18"
-                  src=""
                   sx="[object Object]"
                   width="18"
                 />
@@ -962,10 +983,12 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
             <svg
               aria-hidden="true"
               class="octicon octicon-check"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="16"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="16"
             >
@@ -997,10 +1020,12 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
             <svg
               aria-hidden="true"
               class="octicon octicon-read"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="16"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="16"
             >
@@ -1032,10 +1057,12 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
             <svg
               aria-hidden="true"
               class="octicon octicon-chevron-down"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="16"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="16"
             >
@@ -1160,7 +1187,6 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
                     data-component="Avatar"
                     height="18"
                     size="18"
-                    src=""
                     sx="[object Object]"
                     width="18"
                   />
@@ -1221,10 +1247,12 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
               <svg
                 aria-hidden="true"
                 class="octicon octicon-check"
+                display="inline-block"
                 fill="currentColor"
                 focusable="false"
                 height="16"
-                style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
                 viewBox="0 0 16 16"
                 width="16"
               >
@@ -1256,10 +1284,12 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
               <svg
                 aria-hidden="true"
                 class="octicon octicon-read"
+                display="inline-block"
                 fill="currentColor"
                 focusable="false"
                 height="16"
-                style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
                 viewBox="0 0 16 16"
                 width="16"
               >
@@ -1291,10 +1321,12 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
               <svg
                 aria-hidden="true"
                 class="octicon octicon-chevron-down"
+                display="inline-block"
                 fill="currentColor"
                 focusable="false"
                 height="16"
-                style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
                 viewBox="0 0 16 16"
                 width="16"
               >
@@ -1362,7 +1394,6 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
                   data-component="Avatar"
                   height="18"
                   size="18"
-                  src=""
                   sx="[object Object]"
                   width="18"
                 />
@@ -1423,10 +1454,12 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
             <svg
               aria-hidden="true"
               class="octicon octicon-check"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="16"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="16"
             >
@@ -1458,10 +1491,12 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
             <svg
               aria-hidden="true"
               class="octicon octicon-read"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="16"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="16"
             >
@@ -1493,10 +1528,12 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
             <svg
               aria-hidden="true"
               class="octicon octicon-chevron-down"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="16"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="16"
             >

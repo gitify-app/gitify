@@ -1,4 +1,3 @@
-import log from 'electron-log';
 import { type FC, useCallback, useContext, useState } from 'react';
 import { Form, type FormRenderProps } from 'react-final-form';
 import { useNavigate } from 'react-router-dom';
@@ -6,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { BookIcon, KeyIcon, SignInIcon } from '@primer/octicons-react';
 import { Button, Stack, Text, Tooltip } from '@primer/react';
 
+import { logError } from '../../shared/logger';
 import { FieldInput } from '../components/fields/FieldInput';
 import { Header } from '../components/primitives/Header';
 import { AppContext } from '../context/App';
@@ -133,7 +133,11 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
         );
         navigate(-1);
       } catch (err) {
-        log.error('Auth: failed to login with personal access token', err);
+        logError(
+          'loginWithPersonalAccessToken',
+          'Failed to login with PAT',
+          err,
+        );
         setIsValidToken(false);
       }
     },

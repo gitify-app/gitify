@@ -20,6 +20,7 @@ import { AppContext } from '../context/App';
 import * as apiRequests from '../utils/api/request';
 import * as comms from '../utils/comms';
 import * as links from '../utils/links';
+import * as storage from '../utils/storage';
 import { AccountsRoute } from './Accounts';
 
 const mockNavigate = jest.fn();
@@ -76,6 +77,7 @@ describe('renderer/routes/Accounts.tsx', () => {
       });
 
       fireEvent.click(screen.getByTestId('header-nav-back'));
+
       expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
     });
   });
@@ -167,6 +169,78 @@ describe('renderer/routes/Accounts.tsx', () => {
       expect(openExternalLinkMock).toHaveBeenCalledWith(
         'https://github.com/settings/tokens',
       );
+    });
+
+    it('should render with PAT scopes warning', async () => {
+      const openExternalLinkMock = jest
+        .spyOn(comms, 'openExternalLink')
+        .mockImplementation();
+
+      await act(async () => {
+        render(
+          <AppContext.Provider
+            value={{
+              auth: {
+                accounts: [
+                  {
+                    ...mockPersonalAccessTokenAccount,
+                    hasRequiredScopes: false,
+                  },
+                  mockOAuthAccount,
+                  mockGitHubAppAccount,
+                ],
+              },
+              settings: mockSettings,
+            }}
+          >
+            <MemoryRouter>
+              <AccountsRoute />
+            </MemoryRouter>
+          </AppContext.Provider>,
+        );
+      });
+
+      expect(screen.getByTestId('accounts')).toMatchSnapshot();
+
+      fireEvent.click(screen.getAllByTestId('account-missing-scopes')[0]);
+
+      expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
+      expect(openExternalLinkMock).toHaveBeenCalledWith(
+        'https://github.com/settings/tokens',
+      );
+    });
+
+    it('should set account as primary account', async () => {
+      const saveStateMock = jest
+        .spyOn(storage, 'saveState')
+        .mockImplementation();
+
+      await act(async () => {
+        render(
+          <AppContext.Provider
+            value={{
+              auth: {
+                accounts: [
+                  mockPersonalAccessTokenAccount,
+                  mockOAuthAccount,
+                  mockGitHubAppAccount,
+                ],
+              },
+              settings: mockSettings,
+            }}
+          >
+            <MemoryRouter>
+              <AccountsRoute />
+            </MemoryRouter>
+          </AppContext.Provider>,
+        );
+      });
+
+      expect(screen.getByTestId('accounts')).toMatchSnapshot();
+
+      fireEvent.click(screen.getAllByTestId('account-set-primary')[0]);
+
+      expect(saveStateMock).toHaveBeenCalled();
     });
 
     it('should refresh account', async () => {

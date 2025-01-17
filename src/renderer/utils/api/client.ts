@@ -1,6 +1,7 @@
 import type { AxiosPromise } from 'axios';
-import log from 'electron-log';
 import { print } from 'graphql/language/printer';
+
+import { logError } from '../../../shared/logger';
 import type {
   Account,
   Hostname,
@@ -22,6 +23,7 @@ import type {
   Release,
   UserDetails,
 } from '../../typesGitHub';
+import { isAnsweredDiscussionFeatureSupported } from '../features';
 import { QUERY_SEARCH_DISCUSSIONS } from './graphql/discussions';
 import { formatAsGitHubSearchSyntax } from './graphql/utils';
 import { apiRequestAuth } from './request';
@@ -216,7 +218,11 @@ export async function getHtmlUrl(url: Link, token: Token): Promise<string> {
     const response = (await apiRequestAuth(url, 'GET', token)).data;
     return response.html_url;
   } catch (err) {
-    log.error('Error occurred while fetching notification html url', err);
+    logError(
+      'getHtmlUrl',
+      `error occurred while fetching html url for ${url}`,
+      err,
+    );
   }
 }
 
@@ -244,6 +250,9 @@ export async function searchDiscussions(
         firstDiscussions: 1,
         lastComments: 1,
         lastReplies: 1,
+        includeIsAnswered: isAnsweredDiscussionFeatureSupported(
+          notification.account,
+        ),
       },
     },
   );
@@ -263,9 +272,11 @@ export async function getLatestDiscussion(
       )[0] ?? null
     );
   } catch (err) {
-    log.error(
-      'Error occurred while fetching notification latest discussion',
+    logError(
+      'getLatestDiscussion',
+      'failed to fetch latest discussion for notification',
       err,
+      notification,
     );
   }
 }

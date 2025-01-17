@@ -51,11 +51,13 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
             >
               <svg
                 aria-hidden="true"
-                class="Octicon-sc-9kayk9-0 text-green-500"
+                class="octicon octicon-check Octicon-sc-9kayk9-0 text-green-500"
+                display="inline-block"
                 fill="currentColor"
                 focusable="false"
                 height="12"
-                style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
                 viewBox="0 0 16 16"
                 width="12"
               >
@@ -86,11 +88,13 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
             >
               <svg
                 aria-hidden="true"
-                class="Octicon-sc-9kayk9-0 text-red-500"
+                class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-red-500"
+                display="inline-block"
                 fill="currentColor"
                 focusable="false"
                 height="12"
-                style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
                 viewBox="0 0 16 16"
                 width="12"
               >
@@ -156,11 +160,13 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
           >
             <svg
               aria-hidden="true"
-              class="Octicon-sc-9kayk9-0 text-green-500"
+              class="octicon octicon-check Octicon-sc-9kayk9-0 text-green-500"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="12"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="12"
             >
@@ -191,11 +197,13 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
           >
             <svg
               aria-hidden="true"
-              class="Octicon-sc-9kayk9-0 text-red-500"
+              class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-red-500"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="12"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="12"
             >
@@ -318,11 +326,13 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
             >
               <svg
                 aria-hidden="true"
-                class="Octicon-sc-9kayk9-0 text-green-500"
+                class="octicon octicon-check Octicon-sc-9kayk9-0 text-green-500"
+                display="inline-block"
                 fill="currentColor"
                 focusable="false"
                 height="12"
-                style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
                 viewBox="0 0 16 16"
                 width="12"
               >
@@ -353,11 +363,13 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
             >
               <svg
                 aria-hidden="true"
-                class="Octicon-sc-9kayk9-0 text-red-500"
+                class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-red-500"
+                display="inline-block"
                 fill="currentColor"
                 focusable="false"
                 height="12"
-                style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
                 viewBox="0 0 16 16"
                 width="12"
               >
@@ -423,11 +435,13 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
           >
             <svg
               aria-hidden="true"
-              class="Octicon-sc-9kayk9-0 text-green-500"
+              class="octicon octicon-check Octicon-sc-9kayk9-0 text-green-500"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="12"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="12"
             >
@@ -458,11 +472,13 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
           >
             <svg
               aria-hidden="true"
-              class="Octicon-sc-9kayk9-0 text-red-500"
+              class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-red-500"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="12"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="12"
             >
@@ -545,10 +561,12 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
         <svg
           aria-hidden="true"
           class="octicon octicon-mark-github"
+          display="inline-block"
           fill="currentColor"
           focusable="false"
           height="14"
-          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+          overflow="visible"
+          style="vertical-align: text-bottom;"
           viewBox="0 0 16 16"
           width="14"
         >
@@ -587,11 +605,13 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
             >
               <svg
                 aria-hidden="true"
-                class="Octicon-sc-9kayk9-0 text-green-500"
+                class="octicon octicon-check Octicon-sc-9kayk9-0 text-green-500"
+                display="inline-block"
                 fill="currentColor"
                 focusable="false"
                 height="12"
-                style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
                 viewBox="0 0 16 16"
                 width="12"
               >
@@ -622,11 +642,13 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
             >
               <svg
                 aria-hidden="true"
-                class="Octicon-sc-9kayk9-0 text-red-500"
+                class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-red-500"
+                display="inline-block"
                 fill="currentColor"
                 focusable="false"
                 height="12"
-                style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
                 viewBox="0 0 16 16"
                 width="12"
               >
@@ -652,10 +674,12 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
       <svg
         aria-hidden="true"
         class="octicon octicon-mark-github"
+        display="inline-block"
         fill="currentColor"
         focusable="false"
         height="14"
-        style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
         viewBox="0 0 16 16"
         width="14"
       >
@@ -694,11 +718,13 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
           >
             <svg
               aria-hidden="true"
-              class="Octicon-sc-9kayk9-0 text-green-500"
+              class="octicon octicon-check Octicon-sc-9kayk9-0 text-green-500"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="12"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="12"
             >
@@ -729,11 +755,13 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
           >
             <svg
               aria-hidden="true"
-              class="Octicon-sc-9kayk9-0 text-red-500"
+              class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-red-500"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="12"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="12"
             >
@@ -856,11 +884,13 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
             >
               <svg
                 aria-hidden="true"
-                class="Octicon-sc-9kayk9-0 text-green-500"
+                class="octicon octicon-check Octicon-sc-9kayk9-0 text-green-500"
+                display="inline-block"
                 fill="currentColor"
                 focusable="false"
                 height="12"
-                style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
                 viewBox="0 0 16 16"
                 width="12"
               >
@@ -891,11 +921,13 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
             >
               <svg
                 aria-hidden="true"
-                class="Octicon-sc-9kayk9-0 text-red-500"
+                class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-red-500"
+                display="inline-block"
                 fill="currentColor"
                 focusable="false"
                 height="12"
-                style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
                 viewBox="0 0 16 16"
                 width="12"
               >
@@ -961,11 +993,13 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
           >
             <svg
               aria-hidden="true"
-              class="Octicon-sc-9kayk9-0 text-green-500"
+              class="octicon octicon-check Octicon-sc-9kayk9-0 text-green-500"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="12"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="12"
             >
@@ -996,11 +1030,13 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
           >
             <svg
               aria-hidden="true"
-              class="Octicon-sc-9kayk9-0 text-red-500"
+              class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-red-500"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="12"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="12"
             >
@@ -1123,11 +1159,13 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
             >
               <svg
                 aria-hidden="true"
-                class="Octicon-sc-9kayk9-0 text-green-500"
+                class="octicon octicon-check Octicon-sc-9kayk9-0 text-green-500"
+                display="inline-block"
                 fill="currentColor"
                 focusable="false"
                 height="12"
-                style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
                 viewBox="0 0 16 16"
                 width="12"
               >
@@ -1158,11 +1196,13 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
             >
               <svg
                 aria-hidden="true"
-                class="Octicon-sc-9kayk9-0 text-red-500"
+                class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-red-500"
+                display="inline-block"
                 fill="currentColor"
                 focusable="false"
                 height="12"
-                style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
                 viewBox="0 0 16 16"
                 width="12"
               >
@@ -1228,11 +1268,13 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
           >
             <svg
               aria-hidden="true"
-              class="Octicon-sc-9kayk9-0 text-green-500"
+              class="octicon octicon-check Octicon-sc-9kayk9-0 text-green-500"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="12"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="12"
             >
@@ -1263,11 +1305,13 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
           >
             <svg
               aria-hidden="true"
-              class="Octicon-sc-9kayk9-0 text-red-500"
+              class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-red-500"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="12"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="12"
             >

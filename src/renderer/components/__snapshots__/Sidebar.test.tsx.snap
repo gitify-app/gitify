@@ -16,10 +16,12 @@ exports[`renderer/components/Sidebar.tsx notifications icon renders correct icon
   <svg
     aria-hidden="true"
     class="octicon octicon-bell"
+    display="inline-block"
     fill="currentColor"
     focusable="false"
     height="16"
-    style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+    overflow="visible"
+    style="vertical-align: text-bottom;"
     viewBox="0 0 16 16"
     width="16"
   >
@@ -46,10 +48,12 @@ exports[`renderer/components/Sidebar.tsx notifications icon renders correct icon
   <svg
     aria-hidden="true"
     class="octicon octicon-bell"
+    display="inline-block"
     fill="currentColor"
     focusable="false"
     height="16"
-    style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+    overflow="visible"
+    style="vertical-align: text-bottom;"
     viewBox="0 0 16 16"
     width="16"
   >
@@ -161,10 +165,12 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
               <svg
                 aria-hidden="true"
                 class="octicon octicon-bell"
+                display="inline-block"
                 fill="currentColor"
                 focusable="false"
                 height="16"
-                style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
                 viewBox="0 0 16 16"
                 width="16"
               >
@@ -197,10 +203,12 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
               <svg
                 aria-hidden="true"
                 class="octicon octicon-issue-opened"
+                display="inline-block"
                 fill="currentColor"
                 focusable="false"
                 height="16"
-                style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
                 viewBox="0 0 16 16"
                 width="16"
               >
@@ -236,10 +244,12 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
               <svg
                 aria-hidden="true"
                 class="octicon octicon-git-pull-request"
+                display="inline-block"
                 fill="currentColor"
                 focusable="false"
                 height="16"
-                style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
                 viewBox="0 0 16 16"
                 width="16"
               >
@@ -283,10 +293,12 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
             <svg
               aria-hidden="true"
               class="octicon octicon-x-circle"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="16"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="16"
             >
@@ -405,10 +417,12 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
             <svg
               aria-hidden="true"
               class="octicon octicon-bell"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="16"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="16"
             >
@@ -441,10 +455,12 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
             <svg
               aria-hidden="true"
               class="octicon octicon-issue-opened"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="16"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="16"
             >
@@ -480,10 +496,12 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
             <svg
               aria-hidden="true"
               class="octicon octicon-git-pull-request"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="16"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="16"
             >
@@ -527,10 +545,12 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
           <svg
             aria-hidden="true"
             class="octicon octicon-x-circle"
+            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="16"
-            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+            overflow="visible"
+            style="vertical-align: text-bottom;"
             viewBox="0 0 16 16"
             width="16"
           >
@@ -706,10 +726,12 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
               <svg
                 aria-hidden="true"
                 class="octicon octicon-bell"
+                display="inline-block"
                 fill="currentColor"
                 focusable="false"
                 height="16"
-                style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
                 viewBox="0 0 16 16"
                 width="16"
               >
@@ -742,10 +764,12 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
               <svg
                 aria-hidden="true"
                 class="octicon octicon-issue-opened"
+                display="inline-block"
                 fill="currentColor"
                 focusable="false"
                 height="16"
-                style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
                 viewBox="0 0 16 16"
                 width="16"
               >
@@ -781,10 +805,12 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
               <svg
                 aria-hidden="true"
                 class="octicon octicon-git-pull-request"
+                display="inline-block"
                 fill="currentColor"
                 focusable="false"
                 height="16"
-                style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
                 viewBox="0 0 16 16"
                 width="16"
               >
@@ -828,10 +854,12 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
             <svg
               aria-hidden="true"
               class="octicon octicon-x-circle"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="16"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="16"
             >
@@ -950,10 +978,12 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
             <svg
               aria-hidden="true"
               class="octicon octicon-bell"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="16"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="16"
             >
@@ -986,10 +1016,12 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
             <svg
               aria-hidden="true"
               class="octicon octicon-issue-opened"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="16"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="16"
             >
@@ -1025,10 +1057,12 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
             <svg
               aria-hidden="true"
               class="octicon octicon-git-pull-request"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="16"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="16"
             >
@@ -1072,10 +1106,12 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
           <svg
             aria-hidden="true"
             class="octicon octicon-x-circle"
+            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="16"
-            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+            overflow="visible"
+            style="vertical-align: text-bottom;"
             viewBox="0 0 16 16"
             width="16"
           >

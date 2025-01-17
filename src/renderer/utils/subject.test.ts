@@ -31,7 +31,7 @@ const mockDiscussionAuthor: DiscussionAuthor = {
   avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4' as Link,
   type: 'User',
 };
-import log from 'electron-log';
+import * as logger from '../../shared/logger';
 
 describe('renderer/utils/subject.ts', () => {
   beforeEach(() => {
@@ -59,6 +59,20 @@ describe('renderer/utils/subject.ts', () => {
       it('failed check suite state', async () => {
         const mockNotification = partialMockNotification({
           title: 'Demo workflow run failed for main branch',
+          type: 'CheckSuite',
+        });
+
+        const result = await getGitifySubjectDetails(mockNotification);
+
+        expect(result).toEqual({
+          state: 'failure',
+          user: null,
+        });
+      });
+
+      it('failed at startup check suite state', async () => {
+        const mockNotification = partialMockNotification({
+          title: 'Demo workflow run failed at startup for main branch',
           type: 'CheckSuite',
         });
 
@@ -1152,7 +1166,7 @@ describe('renderer/utils/subject.ts', () => {
 
     describe('Error', () => {
       it('catches error and logs message', async () => {
-        const logErrorSpy = jest.spyOn(log, 'error').mockImplementation();
+        const logErrorSpy = jest.spyOn(logger, 'logError').mockImplementation();
 
         const mockError = new Error('Test error');
         const mockNotification = partialMockNotification({
@@ -1160,6 +1174,10 @@ describe('renderer/utils/subject.ts', () => {
           type: 'Issue',
           url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1' as Link,
         });
+        const mockRepository = {
+          full_name: 'gitify-app/notifications-test',
+        } as Repository;
+        mockNotification.repository = mockRepository;
 
         nock('https://api.github.com')
           .get('/repos/gitify-app/notifications-test/issues/1')
@@ -1168,8 +1186,10 @@ describe('renderer/utils/subject.ts', () => {
         await getGitifySubjectDetails(mockNotification);
 
         expect(logErrorSpy).toHaveBeenCalledWith(
-          'Error occurred while fetching details for Issue notification: This issue will throw an error',
+          'getGitifySubjectDetails',
+          'failed to fetch details for notification for',
           mockError,
+          mockNotification,
         );
       });
     });

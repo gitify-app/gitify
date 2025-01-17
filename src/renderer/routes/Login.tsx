@@ -1,10 +1,9 @@
-import log from 'electron-log';
+import { KeyIcon, MarkGithubIcon, PersonIcon } from '@primer/octicons-react';
+import { Button, Heading, Stack, Text } from '@primer/react';
 import { type FC, useCallback, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { KeyIcon, MarkGithubIcon, PersonIcon } from '@primer/octicons-react';
-import { Button, Heading, Stack, Text } from '@primer/react';
-
+import { logError } from '../../shared/logger';
 import { LogoIcon } from '../components/icons/LogoIcon';
 import { Centered } from '../components/primitives/Centered';
 import { AppContext } from '../context/App';
@@ -26,7 +25,7 @@ export const LoginRoute: FC = () => {
     try {
       loginWithGitHubApp();
     } catch (err) {
-      log.error('Auth: failed to login with GitHub', err);
+      logError('loginWithGitHubApp', 'failed to login with GitHub', err);
     }
   }, [loginWithGitHubApp]);
 

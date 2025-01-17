@@ -1,5 +1,6 @@
-import log from 'electron-log';
 import { useCallback, useState } from 'react';
+
+import { logError } from '../../shared/logger';
 import type {
   Account,
   AccountNotifications,
@@ -13,7 +14,7 @@ import {
   markNotificationThreadAsDone,
   markNotificationThreadAsRead,
 } from '../utils/api/client';
-import { isMarkAsDoneFeatureSupported } from '../utils/helpers';
+import { isMarkAsDoneFeatureSupported } from '../utils/features';
 import {
   getAllNotifications,
   setTrayIconColor,
@@ -121,7 +122,11 @@ export const useNotifications = (): NotificationsState => {
         setNotifications(updatedNotifications);
         setTrayIconColor(updatedNotifications);
       } catch (err) {
-        log.error('Error occurred while marking notification as read', err);
+        logError(
+          'markNotificationsAsRead',
+          'Error occurred while marking notifications as read',
+          err,
+        );
       }
 
       setStatus('success');
@@ -155,7 +160,11 @@ export const useNotifications = (): NotificationsState => {
         setNotifications(updatedNotifications);
         setTrayIconColor(updatedNotifications);
       } catch (err) {
-        log.error('Error occurred while marking notifications as done', err);
+        logError(
+          'markNotificationsAsDone',
+          'Error occurred while marking notifications as done',
+          err,
+        );
       }
 
       setStatus('success');
@@ -180,9 +189,11 @@ export const useNotifications = (): NotificationsState => {
           await markNotificationsAsRead(state, [notification]);
         }
       } catch (err) {
-        log.error(
+        logError(
+          'unsubscribeNotification',
           'Error occurred while unsubscribing from notification thread',
           err,
+          notification,
         );
       }
 

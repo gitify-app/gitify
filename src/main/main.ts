@@ -34,7 +34,13 @@ const mb = menubar({
 const menuBuilder = new MenuBuilder(mb);
 const contextMenu = menuBuilder.buildMenu();
 
-new Updater(mb, menuBuilder);
+/**
+ * Electron Auto Updater only supports macOS and Windows
+ * https://github.com/electron/update-electron-app
+ */
+if (process.platform === 'darwin' || process.platform === 'win32') {
+  new Updater(mb, menuBuilder);
+}
 
 let shouldUseAlternateIdleIcon = false;
 

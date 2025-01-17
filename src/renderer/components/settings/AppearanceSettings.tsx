@@ -171,26 +171,26 @@ export const AppearanceSettings: FC = () => {
         tooltip={
           <div>
             <div>Show notification metric pills for:</div>
-            <div className="pl-6">
-              <ul className="list-disc">
-                <li>
-                  <IssueClosedIcon size={Size.MEDIUM} className="pr-1" />
+            <div className="pl-4">
+              <ul>
+                <li className="flex items-center gap-1">
+                  <IssueClosedIcon size={Size.SMALL} />
                   linked issues
                 </li>
-                <li>
-                  <CheckIcon size={Size.MEDIUM} className="pr-1" /> pr reviews
+                <li className="flex items-center gap-1">
+                  <CheckIcon size={Size.SMALL} />
+                  pr reviews
                 </li>
-                <li>
-                  <CommentIcon size={Size.MEDIUM} className="pr-1" />
+                <li className="flex items-center gap-1">
+                  <CommentIcon size={Size.SMALL} />
                   comments
                 </li>
-
-                <li>
-                  <TagIcon size={Size.MEDIUM} className="pr-1" />
+                <li className="flex items-center gap-1">
+                  <TagIcon size={Size.SMALL} />
                   labels
                 </li>
-                <li>
-                  <MilestoneIcon size={Size.MEDIUM} className="pr-1" />
+                <li className="flex items-center gap-1">
+                  <MilestoneIcon size={Size.SMALL} />
                   milestones
                 </li>
               </ul>
@@ -211,18 +211,18 @@ export const AppearanceSettings: FC = () => {
         tooltip={
           <div>
             <div>Show GitHub number for:</div>
-            <div className="pl-6">
-              <ul className="list-disc">
-                <li>
-                  <CommentIcon size={Size.MEDIUM} className="pr-1" />
+            <div className="pl-4">
+              <ul>
+                <li className="flex items-center gap-1">
+                  <CommentIcon size={Size.SMALL} />
                   Discussion
                 </li>
-                <li>
-                  <IssueClosedIcon size={Size.MEDIUM} className="pr-1" />
+                <li className="flex items-center gap-1">
+                  <IssueClosedIcon size={Size.SMALL} />
                   Issue
                 </li>
-                <li>
-                  <GitPullRequestIcon size={Size.MEDIUM} className="pr-1" />
+                <li className="flex items-center gap-1">
+                  <GitPullRequestIcon size={Size.SMALL} />
                   Pull Request
                 </li>
               </ul>

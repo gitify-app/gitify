@@ -78,9 +78,14 @@ export const SystemSettings: FC = () => {
         }
         tooltip={
           <div>
-            Use a white Gitify logo (instead of the default black logo) when all
-            notifications are read. Particularly useful for devices which have a
-            dark-themed menubar or taskbar.
+            <div className="pb-3">
+              Use a white Gitify logo (instead of the default black logo) when
+              all notifications are read.
+            </div>
+            <div>
+              This is particularly useful for devices which have a dark-themed
+              menubar or taskbar.
+            </div>
           </div>
         }
       />

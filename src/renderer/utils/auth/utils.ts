@@ -1,6 +1,8 @@
 import { BrowserWindow } from '@electron/remote';
 import { format } from 'date-fns';
-import log from 'electron-log';
+import semver from 'semver';
+
+import { logError } from '../../../shared/logger';
 import type {
   Account,
   AuthCode,
@@ -165,13 +167,34 @@ export async function refreshAccount(account: Account): Promise<Account> {
       avatar: res.data.avatar_url,
     };
 
-    // Refresh platform version
-    account.version = res.headers['x-github-enterprise-version'] ?? 'latest';
-  } catch (error) {
-    log.error('Failed to refresh account', error);
+    account.version = extractHostVersion(
+      res.headers['x-github-enterprise-version'],
+    );
+
+    const accountScopes = res.headers['x-oauth-scopes']
+      ?.split(',')
+      .map((scope: string) => scope.trim());
+
+    account.hasRequiredScopes = Constants.AUTH_SCOPE.every((scope) =>
+      accountScopes.includes(scope),
+    );
+  } catch (err) {
+    logError(
+      'refreshAccount',
+      `failed to refresh account for user ${account.user.login}`,
+      err,
+    );
   }
 
   return account;
+}
+
+export function extractHostVersion(version: string | null): string {
+  if (version) {
+    return semver.valid(semver.coerce(version));
+  }
+
+  return 'latest';
 }
 
 export function getDeveloperSettingsURL(account: Account): Link {
@@ -179,7 +202,8 @@ export function getDeveloperSettingsURL(account: Account): Link {
 
   switch (account.method) {
     case 'GitHub App':
-      settingsURL.pathname = '/settings/apps';
+      settingsURL.pathname =
+        '/settings/connections/applications/27a352516d3341cee376';
       break;
     case 'OAuth App':
       settingsURL.pathname = '/settings/developers';

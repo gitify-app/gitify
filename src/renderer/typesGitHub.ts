@@ -500,7 +500,7 @@ export interface Discussion {
   number: number;
   title: string;
   stateReason: DiscussionStateType;
-  isAnswered: boolean;
+  isAnswered: boolean | null;
   url: Link;
   author: DiscussionAuthor;
   comments: DiscussionComments;

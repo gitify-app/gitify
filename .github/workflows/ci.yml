@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  prepare: # macOS code-signing only works on `push` events and not `pull_request` events
+    if: ${{ !startsWith(github.head_ref, 'release/v') }} 
+    name: Prepare CI
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo Running CI for branch ${{ github.head_ref }}
+
+  lint:
+    name: Lint App
+    uses: ./.github/workflows/lint.yml
+    needs: prepare
+
+  tests:
+    name: Tests
+    uses: ./.github/workflows/test.yml
+    needs: lint
+
+  build:
+    name: Build
+    uses: ./.github/workflows/build.yml
+    needs: tests
+    secrets: inherit

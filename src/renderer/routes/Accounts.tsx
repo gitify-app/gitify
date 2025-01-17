@@ -1,8 +1,8 @@
-import log from 'electron-log';
-import { type FC, useCallback, useContext } from 'react';
+import { type FC, useCallback, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import {
+  AlertFillIcon,
   KeyIcon,
   MarkGithubIcon,
   PersonAddIcon,
@@ -22,11 +22,13 @@ import {
   Text,
 } from '@primer/react';
 
+import { logError } from '../../shared/logger';
 import { Header } from '../components/primitives/Header';
 import { AppContext } from '../context/App';
 import { type Account, Size } from '../types';
 import { getAccountUUID, refreshAccount } from '../utils/auth/utils';
 import { updateTrayIcon, updateTrayTitle } from '../utils/comms';
+import { Constants } from '../utils/constants';
 import { getAuthMethodIcon, getPlatformIcon } from '../utils/icons';
 import {
   openAccountProfile,
@@ -60,7 +62,7 @@ export const AccountsRoute: FC = () => {
     try {
       await loginWithGitHubApp();
     } catch (err) {
-      log.error('Auth: failed to login with GitHub', err);
+      logError('loginWithGitHub', 'failed to login with GitHub', err);
     }
   }, []);
 
@@ -80,6 +82,8 @@ export const AccountsRoute: FC = () => {
           {auth.accounts.map((account, i) => {
             const AuthMethodIcon = getAuthMethodIcon(account.method);
             const PlatformIcon = getPlatformIcon(account.platform);
+            const [isRefreshingAccount, setIsRefreshingAccount] =
+              useState(false);
 
             return (
               <div
@@ -165,6 +169,20 @@ export const AccountsRoute: FC = () => {
 
                   <Stack direction="horizontal" gap="condensed">
                     <IconButton
+                      icon={AlertFillIcon}
+                      aria-label={`This account is missing one or more required scopes: [${Constants.AUTH_SCOPE.join(', ')}]`}
+                      variant="danger"
+                      onClick={() => openDeveloperSettings(account)}
+                      size="small"
+                      data-testid="account-missing-scopes"
+                      sx={{
+                        visibility: account.hasRequiredScopes
+                          ? 'hidden'
+                          : 'visible',
+                      }}
+                    />
+
+                    <IconButton
                       icon={i === 0 ? StarFillIcon : StarIcon}
                       aria-label={
                         i === 0 ? 'Primary account' : 'Set as primary account'
@@ -174,16 +192,29 @@ export const AccountsRoute: FC = () => {
                       size="small"
                       data-testid="account-set-primary"
                     />
+
                     <IconButton
                       icon={SyncIcon}
                       aria-label={`Refresh ${account.user.login}`}
                       onClick={async () => {
+                        setIsRefreshingAccount(true);
+
                         await refreshAccount(account);
                         navigate('/accounts', { replace: true });
+
+                        /**
+                         * Typically the above refresh API call completes very quickly,
+                         * so we add an brief artificial delay to allow the icon to spin a few times
+                         */
+                        setTimeout(() => {
+                          setIsRefreshingAccount(false);
+                        }, 500);
                       }}
                       size="small"
+                      loading={isRefreshingAccount}
                       data-testid="account-refresh"
                     />
+
                     <IconButton
                       icon={SignOutIcon}
                       aria-label={`Logout ${account.user.login}`}

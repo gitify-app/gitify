@@ -30,10 +30,12 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
             <svg
               aria-hidden="true"
               class="octicon octicon-arrow-left"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="16"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="16"
             >
@@ -53,11 +55,13 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
           >
             <svg
               aria-hidden="true"
-              class="Octicon-sc-9kayk9-0"
+              class="octicon octicon-key Octicon-sc-9kayk9-0"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="18"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="18"
             >
@@ -143,10 +147,12 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
                         <svg
                           aria-hidden="true"
                           class="octicon octicon-key"
+                          display="inline-block"
                           fill="currentColor"
                           focusable="false"
                           height="16"
-                          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                          overflow="visible"
+                          style="vertical-align: text-bottom;"
                           viewBox="0 0 16 16"
                           width="16"
                         >
@@ -230,10 +236,12 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
                     <svg
                       aria-hidden="true"
                       class="octicon octicon-book"
+                      display="inline-block"
                       fill="currentColor"
                       focusable="false"
                       height="16"
-                      style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                      overflow="visible"
+                      style="vertical-align: text-bottom;"
                       viewBox="0 0 16 16"
                       width="16"
                     >
@@ -278,10 +286,12 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
                     <svg
                       aria-hidden="true"
                       class="octicon octicon-sign-in"
+                      display="inline-block"
                       fill="currentColor"
                       focusable="false"
                       height="16"
-                      style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                      overflow="visible"
+                      style="vertical-align: text-bottom;"
                       viewBox="0 0 16 16"
                       width="16"
                     >
@@ -329,10 +339,12 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
           <svg
             aria-hidden="true"
             class="octicon octicon-arrow-left"
+            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="16"
-            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+            overflow="visible"
+            style="vertical-align: text-bottom;"
             viewBox="0 0 16 16"
             width="16"
           >
@@ -352,11 +364,13 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
         >
           <svg
             aria-hidden="true"
-            class="Octicon-sc-9kayk9-0"
+            class="octicon octicon-key Octicon-sc-9kayk9-0"
+            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="18"
-            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+            overflow="visible"
+            style="vertical-align: text-bottom;"
             viewBox="0 0 16 16"
             width="18"
           >
@@ -442,10 +456,12 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
                       <svg
                         aria-hidden="true"
                         class="octicon octicon-key"
+                        display="inline-block"
                         fill="currentColor"
                         focusable="false"
                         height="16"
-                        style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                        overflow="visible"
+                        style="vertical-align: text-bottom;"
                         viewBox="0 0 16 16"
                         width="16"
                       >
@@ -529,10 +545,12 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
                   <svg
                     aria-hidden="true"
                     class="octicon octicon-book"
+                    display="inline-block"
                     fill="currentColor"
                     focusable="false"
                     height="16"
-                    style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                    overflow="visible"
+                    style="vertical-align: text-bottom;"
                     viewBox="0 0 16 16"
                     width="16"
                   >
@@ -577,10 +595,12 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
                   <svg
                     aria-hidden="true"
                     class="octicon octicon-sign-in"
+                    display="inline-block"
                     fill="currentColor"
                     focusable="false"
                     height="16"
-                    style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                    overflow="visible"
+                    style="vertical-align: text-bottom;"
                     viewBox="0 0 16 16"
                     width="16"
                   >

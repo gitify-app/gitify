@@ -1,0 +1,27 @@
+name: Renovate
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - renovate.json
+  pull_request:
+    paths:
+      - renovate.json
+
+jobs:
+  renovate-config-validator:
+    name: Config validation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+      - uses: pnpm/action-setup@v3
+        with:
+          run_install: false
+      - run: pnpm install --global renovate
+      - name: Validate Renovate config
+        run: renovate-config-validator

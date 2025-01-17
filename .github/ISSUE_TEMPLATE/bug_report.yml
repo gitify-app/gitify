@@ -13,9 +13,10 @@ body:
           required: true
 
   - type: textarea
+    id: description
     attributes:
       label: 📝 Description
-      description: List steps to reproduce the error and details on what happens and what you expected to happen.
+      description: Describe what happens and what you expected to happen.
     validations:
       required: true
 
@@ -23,7 +24,7 @@ body:
     id: steps-to-reproduce
     attributes:
       label: 🪜 Steps To Reproduce
-      description: Steps to reproduce the behavior.
+      description: List out steps to reproduce the behavior.
       placeholder: |
         1. Go to '...'
         2. Click on '...'
@@ -31,6 +32,14 @@ body:
         4. See error
     validations:
       required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: 🪵 Log Excerpts
+      description: Share any relevant log excerpts where available - see https://gitify.io/faq
+    validations:
+      required: false
 
   - type: input
     id: app-version

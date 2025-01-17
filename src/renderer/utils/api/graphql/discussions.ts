@@ -27,6 +27,7 @@ export const QUERY_SEARCH_DISCUSSIONS = gql`
     $firstDiscussions: Int
     $lastComments: Int
     $lastReplies: Int
+    $includeIsAnswered: Boolean!
   ) {
     search(query: $queryStatement, type: DISCUSSION, first: $firstDiscussions) {
       nodes {
@@ -34,7 +35,7 @@ export const QUERY_SEARCH_DISCUSSIONS = gql`
           number
           title
           stateReason
-          isAnswered
+          isAnswered @include(if: $includeIsAnswered)
           url
           author {
             ...AuthorFields
