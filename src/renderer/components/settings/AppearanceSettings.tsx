@@ -14,12 +14,11 @@ import {
   XCircleIcon,
 } from '@primer/octicons-react';
 import { Button, ButtonGroup, IconButton, useTheme } from '@primer/react';
-import type { ColorModeWithAuto } from '@primer/react/lib/ThemeProvider';
 
 import { AppContext } from '../../context/App';
 import { Size, Theme } from '../../types';
 import { hasMultipleAccounts } from '../../utils/auth/utils';
-import { setTheme } from '../../utils/theme';
+import { getColorModeFromTheme, setTheme } from '../../utils/theme';
 import { zoomLevelToPercentage, zoomPercentageToLevel } from '../../utils/zoom';
 import { Checkbox } from '../fields/Checkbox';
 import { RadioGroup } from '../fields/RadioGroup';
@@ -38,8 +37,10 @@ export const AppearanceSettings: FC = () => {
   useEffect(() => {
     ipcRenderer.on('gitify:update-theme', (_, updatedTheme: Theme) => {
       if (settings.theme === Theme.SYSTEM) {
+        const mode = getColorModeFromTheme(updatedTheme);
+
         setTheme(updatedTheme);
-        setColorMode(updatedTheme === Theme.LIGHT ? 'light' : 'dark');
+        setColorMode(mode);
       }
     });
   }, [settings.theme, setColorMode]);
@@ -68,25 +69,7 @@ export const AppearanceSettings: FC = () => {
           { label: 'Light', value: Theme.LIGHT },
           { label: 'Dark', value: Theme.DARK },
         ]}
-        onChange={(evt) => {
-          let mode: ColorModeWithAuto;
-          switch (evt.target.value) {
-            case Theme.LIGHT:
-              mode = 'day';
-              break;
-            case Theme.DARK:
-              mode = 'night';
-              break;
-            default:
-              mode = 'auto';
-              break;
-          }
-
-          updateSetting('theme', evt.target.value as Theme);
-
-          setColorMode(mode);
-          setTheme(evt.target.value as Theme);
-        }}
+        onChange={(evt) => updateSetting('theme', evt.target.value as Theme)}
       />
 
       <div className="flex items-center mt-3 mb-2 text-sm">

@@ -8,6 +8,7 @@ import {
   useState,
 } from 'react';
 
+import { useTheme } from '@primer/react';
 import { useInterval } from '../hooks/useInterval';
 import { useNotifications } from '../hooks/useNotifications';
 import {
@@ -46,7 +47,7 @@ import {
 import { Constants } from '../utils/constants';
 import { getNotificationCount } from '../utils/notifications';
 import { clearState, loadState, saveState } from '../utils/storage';
-import { setTheme } from '../utils/theme';
+import { getColorModeFromTheme, setTheme } from '../utils/theme';
 import { zoomPercentageToLevel } from '../utils/zoom';
 
 export const defaultAuth: AuthState = {
@@ -122,6 +123,7 @@ interface AppContextState {
 export const AppContext = createContext<Partial<AppContextState>>({});
 
 export const AppProvider = ({ children }: { children: ReactNode }) => {
+  const { setColorMode } = useTheme();
   const [auth, setAuth] = useState<AuthState>(defaultAuth);
   const [settings, setSettings] = useState<SettingsState>(defaultSettings);
   const {
@@ -140,7 +142,10 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   useEffect(() => {
-    setTheme(settings.theme);
+    const mode = getColorModeFromTheme(settings.theme);
+
+    setColorMode(mode);
+    setTheme(settings.theme); // TODO - Replace fully with Primer design tokens and components
   }, [settings.theme]);
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: We only want fetchNotifications to be called for account changes

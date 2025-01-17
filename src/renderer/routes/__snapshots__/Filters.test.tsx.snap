@@ -79,7 +79,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
     </div>
   </div>
   <div
-    class="flex-grow overflow-x-auto px-8"
+    class="flex-grow overflow-x-auto px-8 pb-4"
   >
     <fieldset
       class="mb-3"
@@ -860,7 +860,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
     </fieldset>
   </div>
   <div
-    class="flex items-center justify-end px-3 py-1 text-sm bg-gitify-footer"
+    class="flex items-center px-3 py-1 text-sm bg-gitify-footer justify-end"
   >
     <span
       aria-label="Clear all filters"

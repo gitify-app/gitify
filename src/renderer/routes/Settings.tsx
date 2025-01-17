@@ -4,7 +4,9 @@ import { GearIcon } from '@primer/octicons-react';
 import { Button, Stack } from '@primer/react';
 import { Dialog } from '@primer/react/experimental';
 
+import { Contents } from '../components/primitives/Contents';
 import { Header } from '../components/primitives/Header';
+import { Page } from '../components/primitives/Page';
 import { AppearanceSettings } from '../components/settings/AppearanceSettings';
 import { NotificationSettings } from '../components/settings/NotificationSettings';
 import { SettingsFooter } from '../components/settings/SettingsFooter';
@@ -21,12 +23,12 @@ export const SettingsRoute: FC = () => {
   }, [resetSettings]);
 
   return (
-    <div className="flex h-screen flex-col" data-testid="settings">
+    <Page id="settings">
       <Header fetchOnBack icon={GearIcon}>
         Settings
       </Header>
 
-      <div className="overflow-x-auto px-8 pb-4">
+      <Contents>
         <Stack direction="vertical" gap="spacious">
           <AppearanceSettings />
           <NotificationSettings />
@@ -65,9 +67,9 @@ export const SettingsRoute: FC = () => {
             </Dialog>
           )}
         </Stack>
-      </div>
+      </Contents>
 
       <SettingsFooter />
-    </div>
+    </Page>
   );
 };

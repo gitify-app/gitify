@@ -9,8 +9,11 @@ import {
 import { Button, Tooltip } from '@primer/react';
 
 import { Checkbox } from '../components/fields/Checkbox';
+import { Contents } from '../components/primitives/Contents';
+import { Footer } from '../components/primitives/Footer';
 import { Header } from '../components/primitives/Header';
 import { Legend } from '../components/primitives/Legend';
+import { Page } from '../components/primitives/Page';
 import { AppContext } from '../context/App';
 import type { Reason } from '../typesGitHub';
 import { FORMATTED_REASONS, formatReason } from '../utils/reason';
@@ -35,12 +38,12 @@ export const FiltersRoute: FC = () => {
   };
 
   return (
-    <div className="flex h-screen flex-col" data-testid="filters">
+    <Page id="filters">
       <Header fetchOnBack={true} icon={FilterIcon}>
         Filters
       </Header>
 
-      <div className="flex-grow overflow-x-auto px-8">
+      <Contents>
         <fieldset className="mb-3">
           <Legend icon={FeedPersonIcon}>Users</Legend>
           <Checkbox
@@ -87,9 +90,9 @@ export const FiltersRoute: FC = () => {
             );
           })}
         </fieldset>
-      </div>
+      </Contents>
 
-      <div className="flex items-center justify-end px-3 py-1 text-sm bg-gitify-footer">
+      <Footer justify="justify-end">
         <Tooltip text="Clear all filters" direction="n">
           <Button
             leadingVisual={FilterRemoveIcon}
@@ -99,7 +102,7 @@ export const FiltersRoute: FC = () => {
             Clear filters
           </Button>
         </Tooltip>
-      </div>
-    </div>
+      </Footer>
+    </Page>
   );
 };

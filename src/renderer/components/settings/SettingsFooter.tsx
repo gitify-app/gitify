@@ -6,6 +6,7 @@ import { Button, IconButton, Stack, Tooltip } from '@primer/react';
 
 import { getAppVersion, quitApp } from '../../utils/comms';
 import { openGitifyReleaseNotes } from '../../utils/links';
+import { Footer } from '../primitives/Footer';
 
 export const SettingsFooter: FC = () => {
   const [appVersion, setAppVersion] = useState<string | null>(null);
@@ -23,7 +24,7 @@ export const SettingsFooter: FC = () => {
   }, []);
 
   return (
-    <div className="flex items-center justify-between px-4 py-1 text-sm bg-gitify-footer">
+    <Footer justify="justify-between">
       <Stack direction="horizontal">
         <Tooltip text="View release notes" direction="n">
           <Button
@@ -34,7 +35,6 @@ export const SettingsFooter: FC = () => {
           </Button>
         </Tooltip>
       </Stack>
-
       <Stack direction="horizontal" gap="normal">
         <Tooltip text="Accounts" direction="n">
           <IconButton
@@ -59,6 +59,6 @@ export const SettingsFooter: FC = () => {
           />
         </Tooltip>
       </Stack>
-    </div>
+    </Footer>
   );
 };

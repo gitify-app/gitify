@@ -420,7 +420,8 @@ exports[`renderer/routes/Notifications.tsx should render itself & its children (
   "baseElement": <body>
     <div>
       <div
-        class="flex flex-col"
+        class="flex h-screen flex-col"
+        data-testid="notifications"
       >
         <p>
           AccountNotifications
@@ -430,7 +431,8 @@ exports[`renderer/routes/Notifications.tsx should render itself & its children (
   </body>,
   "container": <div>
     <div
-      class="flex flex-col"
+      class="flex h-screen flex-col"
+      data-testid="notifications"
     >
       <p>
         AccountNotifications
@@ -497,7 +499,8 @@ exports[`renderer/routes/Notifications.tsx should render itself & its children (
   "baseElement": <body>
     <div>
       <div
-        class="flex flex-col"
+        class="flex h-screen flex-col"
+        data-testid="notifications"
       >
         <p>
           AccountNotifications
@@ -510,7 +513,8 @@ exports[`renderer/routes/Notifications.tsx should render itself & its children (
   </body>,
   "container": <div>
     <div
-      class="flex flex-col"
+      class="flex h-screen flex-col"
+      data-testid="notifications"
     >
       <p>
         AccountNotifications

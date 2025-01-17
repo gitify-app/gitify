@@ -1,5 +1,5 @@
 import { Theme } from '../types';
-import { getTheme, setTheme } from './theme';
+import { getColorModeFromTheme, getTheme, setTheme } from './theme';
 
 describe('renderer/utils/theme.ts', () => {
   const htmlElement = document.createElement('html');
@@ -38,5 +38,11 @@ describe('renderer/utils/theme.ts', () => {
     });
     setTheme();
     expect(getTheme()).toBe(Theme.DARK);
+  });
+
+  it('should get color mode from theme', () => {
+    expect(getColorModeFromTheme(Theme.LIGHT)).toBe('light');
+    expect(getColorModeFromTheme(Theme.DARK)).toBe('night');
+    expect(getColorModeFromTheme(Theme.SYSTEM)).toBe('auto');
   });
 });
