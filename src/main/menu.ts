@@ -4,9 +4,10 @@ import type { Menubar } from 'menubar';
 import { openLogsDirectory, resetApp, takeScreenshot } from './utils';
 
 export default class MenuBuilder {
-  private checkForUpdatesMenuItem: MenuItem;
-  private updateAvailableMenuItem: MenuItem;
-  private updateReadyForInstallMenuItem: MenuItem;
+  private readonly checkForUpdatesMenuItem: MenuItem;
+  private readonly noUpdateAvailableMenuItem: MenuItem;
+  private readonly updateAvailableMenuItem: MenuItem;
+  private readonly updateReadyForInstallMenuItem: MenuItem;
 
   menubar: Menubar;
 
@@ -21,6 +22,12 @@ export default class MenuBuilder {
       },
     });
 
+    this.noUpdateAvailableMenuItem = new MenuItem({
+      label: 'No updates available',
+      enabled: false,
+      visible: false,
+    });
+
     this.updateAvailableMenuItem = new MenuItem({
       label: 'An update is available',
       enabled: false,
@@ -28,7 +35,8 @@ export default class MenuBuilder {
     });
 
     this.updateReadyForInstallMenuItem = new MenuItem({
-      label: 'Restart to update',
+      label: 'Restart to install update',
+      enabled: true,
       visible: false,
       click: () => {
         autoUpdater.quitAndInstall();
@@ -39,6 +47,7 @@ export default class MenuBuilder {
   buildMenu(): Menu {
     const contextMenu = Menu.buildFromTemplate([
       this.checkForUpdatesMenuItem,
+      this.noUpdateAvailableMenuItem,
       this.updateAvailableMenuItem,
       this.updateReadyForInstallMenuItem,
       { type: 'separator' },
@@ -88,15 +97,21 @@ export default class MenuBuilder {
     this.checkForUpdatesMenuItem.enabled = enabled;
   }
 
-  setUpdateAvailableMenuEnabled(enabled: boolean) {
-    this.updateAvailableMenuItem.enabled = enabled;
+  setNoUpdateAvailableMenuVisibility(isVisible: boolean) {
+    this.noUpdateAvailableMenuItem.visible = isVisible;
   }
 
-  setUpdateReadyForInstallMenuEnabled(enabled: boolean) {
-    this.updateReadyForInstallMenuItem.enabled = enabled;
+  setUpdateAvailableMenuVisibility(isVisible: boolean) {
+    this.updateAvailableMenuItem.visible = isVisible;
   }
 
-  isUpdateAvailableMenuVisible() {
-    return this.updateAvailableMenuItem.visible;
+  setUpdateReadyForInstallMenuVisibility(isVisible: boolean) {
+    this.updateReadyForInstallMenuItem.visible = isVisible;
+  }
+
+  isUpdateAvailable() {
+    return (
+      this.updateAvailableMenuItem.visible || this.updateReadyForInstallMenuItem
+    );
   }
 }
