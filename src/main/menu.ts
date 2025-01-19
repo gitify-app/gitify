@@ -1,7 +1,9 @@
-import { Menu, MenuItem } from 'electron';
+import { Menu, MenuItem, shell } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import type { Menubar } from 'menubar';
-import { isMacOS } from '../shared/platform';
+
+import { APPLICATION } from '../shared/constants';
+import { isMacOS, isWindows } from '../shared/platform';
 import { openLogsDirectory, resetApp, takeScreenshot } from './utils';
 
 export default class MenuBuilder {
@@ -19,7 +21,11 @@ export default class MenuBuilder {
       label: 'Check for updates',
       enabled: true,
       click: () => {
-        autoUpdater.checkForUpdatesAndNotify();
+        if (isMacOS() || isWindows()) {
+          autoUpdater.checkForUpdatesAndNotify();
+        } else {
+          shell.openExternal(APPLICATION.WEBSITE);
+        }
       },
     });
 

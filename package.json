@@ -65,7 +65,7 @@
   "bugs": {
     "url": "https://github.com/gitify-app/gitify/issues"
   },
-  "homepage": "https://www.gitify.io/",
+  "homepage": "https://gitify.io/",
   "build": {
     "productName": "Gitify",
     "appId": "com.electron.gitify",
