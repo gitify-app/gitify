@@ -3,5 +3,7 @@ export const APPLICATION = {
 
   NAME: 'Gitify',
 
+  EVENT_PREFIX: 'gitify:',
+
   WEBSITE: 'https://gitify.io',
 };
