@@ -2,6 +2,7 @@ import { app, globalShortcut, ipcMain as ipc, nativeTheme } from 'electron';
 import log from 'electron-log';
 import { menubar } from 'menubar';
 
+import { APPLICATION } from '../shared/constants';
 import { onFirstRunMaybe } from './first-run';
 import { TrayIcons } from './icons';
 import MenuBuilder from './menu';
@@ -39,7 +40,8 @@ const contextMenu = menuBuilder.buildMenu();
  * https://github.com/electron/update-electron-app
  */
 if (process.platform === 'darwin' || process.platform === 'win32') {
-  new Updater(mb, menuBuilder);
+  const updater = new Updater(mb, menuBuilder);
+  updater.initialize();
 }
 
 let shouldUseAlternateIdleIcon = false;
@@ -48,7 +50,7 @@ app.whenReady().then(async () => {
   await onFirstRunMaybe();
 
   mb.on('ready', () => {
-    mb.app.setAppUserModelId('com.electron.gitify');
+    mb.app.setAppUserModelId(APPLICATION.ID);
 
     /**
      * TODO: Remove @electron/remote use - see #650
@@ -58,7 +60,7 @@ app.whenReady().then(async () => {
     require('@electron/remote/main').enable(mb.window.webContents);
 
     // Tray configuration
-    mb.tray.setToolTip('Gitify');
+    mb.tray.setToolTip(APPLICATION.NAME);
     mb.tray.setIgnoreDoubleClickEvents(true);
     mb.tray.on('right-click', (_event, bounds) => {
       mb.tray.popUpContextMenu(contextMenu, { x: bounds.x, y: bounds.y });
@@ -114,7 +116,7 @@ app.whenReady().then(async () => {
   ipc.on('gitify:icon-active', () => {
     if (!mb.tray.isDestroyed()) {
       mb.tray.setImage(
-        menuBuilder.isUpdateAvailableMenuVisible()
+        menuBuilder.isUpdateAvailable()
           ? TrayIcons.activeUpdateIcon
           : TrayIcons.active,
       );
@@ -125,13 +127,13 @@ app.whenReady().then(async () => {
     if (!mb.tray.isDestroyed()) {
       if (shouldUseAlternateIdleIcon) {
         mb.tray.setImage(
-          menuBuilder.isUpdateAvailableMenuVisible()
+          menuBuilder.isUpdateAvailable()
             ? TrayIcons.idleAlternateUpdateIcon
             : TrayIcons.idleAlternate,
         );
       } else {
         mb.tray.setImage(
-          menuBuilder.isUpdateAvailableMenuVisible()
+          menuBuilder.isUpdateAvailable()
             ? TrayIcons.idleUpdateIcon
             : TrayIcons.idle,
         );
