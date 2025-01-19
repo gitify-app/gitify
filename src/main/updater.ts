@@ -37,7 +37,9 @@ export default class Updater {
     });
 
     autoUpdater.on('download-progress', (progressObj) => {
-      this.setTooltipWithStatus(`Downloading update: ${progressObj.percent}%`);
+      this.setTooltipWithStatus(
+        `Downloading update: ${progressObj.percent.toFixed(2)}%`,
+      );
     });
 
     autoUpdater.on('update-downloaded', () => {
