@@ -1,6 +1,7 @@
 import { Menu, MenuItem } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import type { Menubar } from 'menubar';
+import { isMacOS } from '../shared/platform';
 import { openLogsDirectory, resetApp, takeScreenshot } from './utils';
 
 export default class MenuBuilder {
@@ -60,8 +61,7 @@ export default class MenuBuilder {
           },
           {
             role: 'toggleDevTools',
-            accelerator:
-              process.platform === 'darwin' ? 'Alt+Cmd+I' : 'Ctrl+Shift+I',
+            accelerator: isMacOS() ? 'Alt+Cmd+I' : 'Ctrl+Shift+I',
           },
           {
             label: 'Take Screenshot',

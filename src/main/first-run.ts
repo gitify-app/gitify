@@ -3,6 +3,7 @@ import path from 'node:path';
 import { app, dialog } from 'electron';
 
 import { logError } from '../shared/logger';
+import { isMacOS } from '../shared/platform';
 
 export async function onFirstRunMaybe() {
   if (isFirstRun()) {
@@ -12,7 +13,7 @@ export async function onFirstRunMaybe() {
 
 // Ask user if the app should be moved to the applications folder.
 async function promptMoveToApplicationsFolder() {
-  if (process.platform !== 'darwin') return;
+  if (!isMacOS()) return;
 
   const isDevMode = !!process.defaultApp;
   if (isDevMode || app.isInApplicationsFolder()) return;
