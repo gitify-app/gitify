@@ -5,6 +5,7 @@ import { dialog, shell } from 'electron';
 import log from 'electron-log';
 import type { Menubar } from 'menubar';
 
+import { namespacedEvent } from '../shared/events';
 import { logError, logInfo } from '../shared/logger';
 
 export function takeScreenshot(mb: Menubar) {
@@ -34,7 +35,7 @@ export function resetApp(mb: Menubar) {
   });
 
   if (response === resetButtonId) {
-    mb.window.webContents.send('gitify:reset-app');
+    mb.window.webContents.send(namespacedEvent('reset-app'));
     mb.app.quit();
   }
 }

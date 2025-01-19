@@ -9,6 +9,7 @@ import {
 } from '@primer/octicons-react';
 import { ipcRenderer, webFrame } from 'electron';
 import { type FC, useContext, useEffect, useState } from 'react';
+import { namespacedEvent } from '../../../shared/events';
 import { AppContext } from '../../context/App';
 import { Size, Theme } from '../../types';
 import { hasMultipleAccounts } from '../../utils/auth/utils';
@@ -29,11 +30,14 @@ export const AppearanceSettings: FC = () => {
   );
 
   useEffect(() => {
-    ipcRenderer.on('gitify:update-theme', (_, updatedTheme: Theme) => {
-      if (settings.theme === Theme.SYSTEM) {
-        setTheme(updatedTheme);
-      }
-    });
+    ipcRenderer.on(
+      namespacedEvent('update-theme'),
+      (_, updatedTheme: Theme) => {
+        if (settings.theme === Theme.SYSTEM) {
+          setTheme(updatedTheme);
+        }
+      },
+    );
   }, [settings.theme]);
 
   window.addEventListener('resize', () => {
