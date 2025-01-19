@@ -1,6 +1,7 @@
 import path from 'node:path';
 
 import { logError, logWarn } from '../../shared/logger';
+import { isWindows } from '../../shared/platform';
 import type {
   AccountNotifications,
   GitifyState,
@@ -13,7 +14,6 @@ import { getAccountUUID } from './auth/utils';
 import { hideWindow, showWindow, updateTrayIcon } from './comms';
 import { Constants } from './constants';
 import { openNotification } from './links';
-import { isWindows } from './platform';
 import { getGitifySubjectDetails } from './subject';
 
 export function setTrayIconColor(notifications: AccountNotifications[]) {
