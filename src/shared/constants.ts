@@ -5,5 +5,7 @@ export const APPLICATION = {
 
   EVENT_PREFIX: 'gitify:',
 
+  FIRST_RUN_FOLDER: 'gitify-first-run',
+
   WEBSITE: 'https://gitify.io',
 };
