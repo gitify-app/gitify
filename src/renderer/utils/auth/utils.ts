@@ -3,7 +3,7 @@ import { format } from 'date-fns';
 import semver from 'semver';
 
 import { APPLICATION } from '../../../shared/constants';
-import { logError } from '../../../shared/logger';
+import { logError, logWarn } from '../../../shared/logger';
 import type {
   Account,
   AuthCode,
@@ -179,6 +179,13 @@ export async function refreshAccount(account: Account): Promise<Account> {
     account.hasRequiredScopes = Constants.AUTH_SCOPE.every((scope) =>
       accountScopes.includes(scope),
     );
+
+    if (!account.hasRequiredScopes) {
+      logWarn(
+        'refreshAccount',
+        `account for user ${account.user.login} is missing required scopes`,
+      );
+    }
   } catch (err) {
     logError(
       'refreshAccount',
