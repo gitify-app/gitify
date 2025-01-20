@@ -7,7 +7,7 @@ import {
 } from 'react';
 
 import { BellSlashIcon, CheckIcon, ReadIcon } from '@primer/octicons-react';
-import { IconButton, Octicon, Tooltip } from '@primer/react';
+import { IconButton, Tooltip } from '@primer/react';
 
 import { AppContext } from '../../context/App';
 import { Opacity, Size } from '../../types';
@@ -96,11 +96,7 @@ export const NotificationRow: FC<INotificationRow> = ({
     >
       <div className="mr-3 flex items-center justify-center">
         <Tooltip text={notificationType} direction="e">
-          <Octicon
-            icon={NotificationIcon}
-            size={Size.LARGE}
-            className={iconColor}
-          />
+          <NotificationIcon size={Size.LARGE} className={iconColor} />
         </Tooltip>
       </div>
 

@@ -55,7 +55,7 @@ exports[`renderer/components/primitives/Header.tsx should render itself & its ch
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-mark-github Octicon-sc-9kayk9-0"
+              class="octicon octicon-mark-github"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -131,7 +131,7 @@ exports[`renderer/components/primitives/Header.tsx should render itself & its ch
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-mark-github Octicon-sc-9kayk9-0"
+            class="octicon octicon-mark-github"
             display="inline-block"
             fill="currentColor"
             focusable="false"

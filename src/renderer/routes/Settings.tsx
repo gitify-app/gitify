@@ -34,7 +34,7 @@ export const SettingsRoute: FC = () => {
           <NotificationSettings />
           <SystemSettings />
         </Stack>
-        <Stack align="center">
+        <Stack align="center" padding={'spacious'}>
           <Button
             variant="danger"
             onClick={() => setIsOpen(!isOpen)}

@@ -55,7 +55,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
       >
         <svg
           aria-hidden="true"
-          class="octicon octicon-person Octicon-sc-9kayk9-0"
+          class="octicon octicon-person"
           display="inline-block"
           fill="currentColor"
           focusable="false"
@@ -1286,7 +1286,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
       >
         <svg
           aria-hidden="true"
-          class="octicon octicon-person Octicon-sc-9kayk9-0"
+          class="octicon octicon-person"
           display="inline-block"
           fill="currentColor"
           focusable="false"
@@ -2517,7 +2517,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
       >
         <svg
           aria-hidden="true"
-          class="octicon octicon-person Octicon-sc-9kayk9-0"
+          class="octicon octicon-person"
           display="inline-block"
           fill="currentColor"
           focusable="false"
