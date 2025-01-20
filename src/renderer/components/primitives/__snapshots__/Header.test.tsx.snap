@@ -9,7 +9,7 @@ exports[`renderer/components/primitives/Header.tsx should render itself & its ch
         class="mx-6 mt-2 py-2"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="stretch"
           data-direction="horizontal"
           data-justify="space-between"
@@ -19,7 +19,7 @@ exports[`renderer/components/primitives/Header.tsx should render itself & its ch
           <button
             aria-describedby=":r0:-loading-announcement"
             aria-labelledby="Go Back"
-            class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+            class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
@@ -45,7 +45,7 @@ exports[`renderer/components/primitives/Header.tsx should render itself & its ch
             </svg>
           </button>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -70,7 +70,7 @@ exports[`renderer/components/primitives/Header.tsx should render itself & its ch
               />
             </svg>
             <h2
-              class="Heading__StyledHeading-sc-1c1dgg0-0 iLDWTC"
+              class="Heading__StyledHeading-sc-1c1dgg0-0 fuhZuh"
               sx="[object Object]"
             >
               Test Header
@@ -85,7 +85,7 @@ exports[`renderer/components/primitives/Header.tsx should render itself & its ch
       class="mx-6 mt-2 py-2"
     >
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
         data-align="stretch"
         data-direction="horizontal"
         data-justify="space-between"
@@ -95,7 +95,7 @@ exports[`renderer/components/primitives/Header.tsx should render itself & its ch
         <button
           aria-describedby=":r0:-loading-announcement"
           aria-labelledby="Go Back"
-          class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+          class="types__StyledButton-sc-ws60qy-0 kQRupk"
           data-component="IconButton"
           data-loading="false"
           data-no-visuals="true"
@@ -121,7 +121,7 @@ exports[`renderer/components/primitives/Header.tsx should render itself & its ch
           </svg>
         </button>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -146,7 +146,7 @@ exports[`renderer/components/primitives/Header.tsx should render itself & its ch
             />
           </svg>
           <h2
-            class="Heading__StyledHeading-sc-1c1dgg0-0 iLDWTC"
+            class="Heading__StyledHeading-sc-1c1dgg0-0 fuhZuh"
             sx="[object Object]"
           >
             Test Header

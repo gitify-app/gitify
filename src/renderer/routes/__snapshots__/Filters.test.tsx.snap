@@ -9,7 +9,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
     class="mx-6 mt-2 py-2"
   >
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+      class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
       data-align="stretch"
       data-direction="horizontal"
       data-justify="space-between"
@@ -19,7 +19,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
       <button
         aria-describedby=":r0:-loading-announcement"
         aria-labelledby="Go Back"
-        class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+        class="types__StyledButton-sc-ws60qy-0 kQRupk"
         data-component="IconButton"
         data-loading="false"
         data-no-visuals="true"
@@ -45,7 +45,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
         </svg>
       </button>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
         data-align="center"
         data-direction="horizontal"
         data-gap="condensed"
@@ -70,7 +70,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           />
         </svg>
         <h2
-          class="Heading__StyledHeading-sc-1c1dgg0-0 iLDWTC"
+          class="Heading__StyledHeading-sc-1c1dgg0-0 fuhZuh"
           sx="[object Object]"
         >
           Filters
@@ -864,25 +864,25 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
   >
     <span
       aria-label="Clear all filters"
-      class="Tooltip__TooltipBase-sc-17tf59c-0 rtmEP tooltipped-n"
+      class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-n"
       id=":r1:"
       role="tooltip"
     >
       <button
         aria-describedby=":r2:-loading-announcement"
-        class="types__StyledButton-sc-ws60qy-0 bBRiTk"
+        class="types__StyledButton-sc-ws60qy-0 jTCgqj"
         data-loading="false"
         data-testid="filters-clear"
         sx="[object Object]"
         type="button"
       >
         <span
-          class="Box-sc-g0xbh4-0 lbSBsX"
+          class="Box-sc-g0xbh4-0 srpGE"
           data-component="buttonContent"
           sx="[object Object]"
         >
           <span
-            class="Box-sc-g0xbh4-0 bPvALJ"
+            class="Box-sc-g0xbh4-0 mhHOW"
             data-component="leadingVisual"
             sx="[object Object]"
           >

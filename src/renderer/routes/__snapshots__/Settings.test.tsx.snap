@@ -9,7 +9,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
     class="mx-6 mt-2 py-2"
   >
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+      class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
       data-align="stretch"
       data-direction="horizontal"
       data-justify="space-between"
@@ -19,7 +19,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
       <button
         aria-describedby=":r0:-loading-announcement"
         aria-labelledby="Go Back"
-        class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+        class="types__StyledButton-sc-ws60qy-0 kQRupk"
         data-component="IconButton"
         data-loading="false"
         data-no-visuals="true"
@@ -45,7 +45,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
         </svg>
       </button>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
         data-align="center"
         data-direction="horizontal"
         data-gap="condensed"
@@ -70,7 +70,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           />
         </svg>
         <h2
-          class="Heading__StyledHeading-sc-1c1dgg0-0 iLDWTC"
+          class="Heading__StyledHeading-sc-1c1dgg0-0 fuhZuh"
           sx="[object Object]"
         >
           Settings
@@ -82,7 +82,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
     class="flex-grow overflow-x-auto px-8 pb-4"
   >
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+      class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
       data-align="stretch"
       data-direction="vertical"
       data-gap="spacious"
@@ -199,12 +199,12 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             Zoom:
           </label>
           <div
-            class="ButtonGroup-sc-1gxhls1-0 hUffXB"
+            class="ButtonGroup-sc-1gxhls1-0 jXbkKi"
           >
             <button
               aria-describedby=":r1:-loading-announcement"
               aria-label="Zoom out"
-              class="types__StyledButton-sc-ws60qy-0 bBRiTk"
+              class="types__StyledButton-sc-ws60qy-0 jTCgqj"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -233,7 +233,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             <button
               aria-describedby=":r2:-loading-announcement"
               aria-label="Zoom percentage"
-              class="types__StyledButton-sc-ws60qy-0 bBRiTk"
+              class="types__StyledButton-sc-ws60qy-0 jTCgqj"
               data-loading="false"
               data-no-visuals="true"
               data-size="small"
@@ -242,7 +242,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               type="button"
             >
               <span
-                class="Box-sc-g0xbh4-0 lbSBsX"
+                class="Box-sc-g0xbh4-0 srpGE"
                 data-component="buttonContent"
                 sx="[object Object]"
               >
@@ -257,7 +257,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             <button
               aria-describedby=":r3:-loading-announcement"
               aria-label="Zoom in"
-              class="types__StyledButton-sc-ws60qy-0 bBRiTk"
+              class="types__StyledButton-sc-ws60qy-0 jTCgqj"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -286,7 +286,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             <button
               aria-describedby=":r4:-loading-announcement"
               aria-label="Reset zoom"
-              class="types__StyledButton-sc-ws60qy-0 fxwkNN"
+              class="types__StyledButton-sc-ws60qy-0 cYZGEC"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -1058,7 +1058,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
       </fieldset>
     </div>
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+      class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
       data-align="center"
       data-direction="vertical"
       data-justify="start"
@@ -1067,7 +1067,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
     >
       <button
         aria-describedby=":r5:-loading-announcement"
-        class="types__StyledButton-sc-ws60qy-0 eMwPlY"
+        class="types__StyledButton-sc-ws60qy-0 fyPjMX"
         data-loading="false"
         data-no-visuals="true"
         data-testid="settings-reset"
@@ -1075,7 +1075,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
         type="button"
       >
         <span
-          class="Box-sc-g0xbh4-0 lbSBsX"
+          class="Box-sc-g0xbh4-0 srpGE"
           data-component="buttonContent"
           sx="[object Object]"
         >
@@ -1092,7 +1092,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
     class="flex items-center px-3 py-1 text-sm bg-gitify-footer justify-between"
   >
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+      class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
       data-align="stretch"
       data-direction="horizontal"
       data-justify="start"
@@ -1101,13 +1101,13 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
     >
       <span
         aria-label="View release notes"
-        class="Tooltip__TooltipBase-sc-17tf59c-0 rtmEP tooltipped-n"
+        class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-n"
         id=":r6:"
         role="tooltip"
       >
         <button
           aria-describedby=":r7:-loading-announcement"
-          class="types__StyledButton-sc-ws60qy-0 bBRiTk"
+          class="types__StyledButton-sc-ws60qy-0 jTCgqj"
           data-loading="false"
           data-no-visuals="true"
           data-testid="settings-release-notes"
@@ -1115,7 +1115,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           type="button"
         >
           <span
-            class="Box-sc-g0xbh4-0 lbSBsX"
+            class="Box-sc-g0xbh4-0 srpGE"
             data-component="buttonContent"
             sx="[object Object]"
           >
@@ -1131,7 +1131,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
       </span>
     </div>
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+      class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
       data-align="stretch"
       data-direction="horizontal"
       data-gap="normal"
@@ -1141,14 +1141,14 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
     >
       <span
         aria-label="Accounts"
-        class="Tooltip__TooltipBase-sc-17tf59c-0 rtmEP tooltipped-n"
+        class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-n"
         id=":r8:"
         role="tooltip"
       >
         <button
           aria-describedby=":r9:-loading-announcement"
           aria-label="Accounts"
-          class="types__StyledButton-sc-ws60qy-0 bBRiTk"
+          class="types__StyledButton-sc-ws60qy-0 jTCgqj"
           data-component="IconButton"
           data-loading="false"
           data-no-visuals="true"
@@ -1176,14 +1176,14 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
       </span>
       <span
         aria-label="Quit Gitify"
-        class="Tooltip__TooltipBase-sc-17tf59c-0 rtmEP tooltipped-nw"
+        class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-nw"
         id=":ra:"
         role="tooltip"
       >
         <button
           aria-describedby=":rb:-loading-announcement"
           aria-label="Quit Gitify"
-          class="types__StyledButton-sc-ws60qy-0 fxwkNN"
+          class="types__StyledButton-sc-ws60qy-0 cYZGEC"
           data-component="IconButton"
           data-loading="false"
           data-no-visuals="true"
