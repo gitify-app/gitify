@@ -9,7 +9,7 @@ exports[`renderer/components/Oops.tsx should render itself & its children 1`] = 
         class="flex flex-1 flex-col items-center justify-center p-8 min-h-screen"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="vertical"
           data-justify="start"
@@ -47,7 +47,7 @@ exports[`renderer/components/Oops.tsx should render itself & its children 1`] = 
       class="flex flex-1 flex-col items-center justify-center p-8 min-h-screen"
     >
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
         data-align="center"
         data-direction="vertical"
         data-justify="start"

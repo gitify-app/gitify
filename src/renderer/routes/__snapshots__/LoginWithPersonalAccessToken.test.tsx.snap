@@ -9,7 +9,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
         class="mx-6 mt-2 py-2"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="stretch"
           data-direction="horizontal"
           data-justify="space-between"
@@ -19,7 +19,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
           <button
             aria-describedby=":r0:-loading-announcement"
             aria-labelledby="Go Back"
-            class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+            class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
@@ -45,7 +45,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
             </svg>
           </button>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -70,7 +70,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
               />
             </svg>
             <h2
-              class="Heading__StyledHeading-sc-1c1dgg0-0 iLDWTC"
+              class="Heading__StyledHeading-sc-1c1dgg0-0 fuhZuh"
               sx="[object Object]"
             >
               Login with Personal Access Token
@@ -103,7 +103,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
               class="mt-3 text-xs text-gitify-font"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                 data-align="stretch"
                 data-direction="vertical"
                 data-gap="condensed"
@@ -112,12 +112,12 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
                 data-wrap="nowrap"
               >
                 <i
-                  class="Text-sc-17v1xeu-0 gCQeDW"
+                  class="Text-sc-17v1xeu-0 hmAFGJ"
                 >
                   Change only if you are using GitHub Enterprise Server.
                 </i>
                 <div
-                  class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                   data-align="center"
                   data-direction="horizontal"
                   data-gap="condensed"
@@ -127,7 +127,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
                 >
                   <button
                     aria-describedby=":r1:-loading-announcement"
-                    class="types__StyledButton-sc-ws60qy-0 bBRiTk"
+                    class="types__StyledButton-sc-ws60qy-0 jTCgqj"
                     data-loading="false"
                     data-size="small"
                     data-testid="login-create-token"
@@ -135,12 +135,12 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
                     type="button"
                   >
                     <span
-                      class="Box-sc-g0xbh4-0 lbSBsX"
+                      class="Box-sc-g0xbh4-0 srpGE"
                       data-component="buttonContent"
                       sx="[object Object]"
                     >
                       <span
-                        class="Box-sc-g0xbh4-0 bPvALJ"
+                        class="Box-sc-g0xbh4-0 mhHOW"
                         data-component="leadingVisual"
                         sx="[object Object]"
                       >
@@ -169,13 +169,13 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
                     </span>
                   </button>
                   <span
-                    class="Text-sc-17v1xeu-0 gCQeDW"
+                    class="Text-sc-17v1xeu-0 hmAFGJ"
                   >
                     on GitHub then paste your token below.
                   </span>
                 </div>
                 <i
-                  class="Text-sc-17v1xeu-0 gCQeDW"
+                  class="Text-sc-17v1xeu-0 hmAFGJ"
                 >
                   The required scopes will be automatically selected for you.
                 </i>
@@ -201,7 +201,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
             />
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
             data-justify="space-between"
@@ -210,13 +210,13 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
           >
             <span
               aria-label="GitHub documentation"
-              class="Tooltip__TooltipBase-sc-17tf59c-0 rtmEP tooltipped-n"
+              class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-n"
               id=":r2:"
               role="tooltip"
             >
               <button
                 aria-describedby=":r3:-loading-announcement"
-                class="types__StyledButton-sc-ws60qy-0 bBRiTk"
+                class="types__StyledButton-sc-ws60qy-0 jTCgqj"
                 data-loading="false"
                 data-size="small"
                 data-testid="login-docs"
@@ -224,12 +224,12 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
                 type="button"
               >
                 <span
-                  class="Box-sc-g0xbh4-0 lbSBsX"
+                  class="Box-sc-g0xbh4-0 srpGE"
                   data-component="buttonContent"
                   sx="[object Object]"
                 >
                   <span
-                    class="Box-sc-g0xbh4-0 bPvALJ"
+                    class="Box-sc-g0xbh4-0 mhHOW"
                     data-component="leadingVisual"
                     sx="[object Object]"
                   >
@@ -260,13 +260,13 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
             </span>
             <span
               aria-label="Login"
-              class="Tooltip__TooltipBase-sc-17tf59c-0 rtmEP tooltipped-n"
+              class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-n"
               id=":r4:"
               role="tooltip"
             >
               <button
                 aria-describedby=":r5:-loading-announcement"
-                class="types__StyledButton-sc-ws60qy-0 bBXWFS"
+                class="types__StyledButton-sc-ws60qy-0 gEWhIh"
                 data-loading="false"
                 data-testid="login-submit"
                 disabled=""
@@ -274,12 +274,12 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
                 type="submit"
               >
                 <span
-                  class="Box-sc-g0xbh4-0 lbSBsX"
+                  class="Box-sc-g0xbh4-0 srpGE"
                   data-component="buttonContent"
                   sx="[object Object]"
                 >
                   <span
-                    class="Box-sc-g0xbh4-0 bPvALJ"
+                    class="Box-sc-g0xbh4-0 mhHOW"
                     data-component="leadingVisual"
                     sx="[object Object]"
                   >
@@ -318,7 +318,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
       class="mx-6 mt-2 py-2"
     >
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
         data-align="stretch"
         data-direction="horizontal"
         data-justify="space-between"
@@ -328,7 +328,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
         <button
           aria-describedby=":r0:-loading-announcement"
           aria-labelledby="Go Back"
-          class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+          class="types__StyledButton-sc-ws60qy-0 kQRupk"
           data-component="IconButton"
           data-loading="false"
           data-no-visuals="true"
@@ -354,7 +354,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
           </svg>
         </button>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -379,7 +379,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
             />
           </svg>
           <h2
-            class="Heading__StyledHeading-sc-1c1dgg0-0 iLDWTC"
+            class="Heading__StyledHeading-sc-1c1dgg0-0 fuhZuh"
             sx="[object Object]"
           >
             Login with Personal Access Token
@@ -412,7 +412,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
             class="mt-3 text-xs text-gitify-font"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
               data-align="stretch"
               data-direction="vertical"
               data-gap="condensed"
@@ -421,12 +421,12 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
               data-wrap="nowrap"
             >
               <i
-                class="Text-sc-17v1xeu-0 gCQeDW"
+                class="Text-sc-17v1xeu-0 hmAFGJ"
               >
                 Change only if you are using GitHub Enterprise Server.
               </i>
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -436,7 +436,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
               >
                 <button
                   aria-describedby=":r1:-loading-announcement"
-                  class="types__StyledButton-sc-ws60qy-0 bBRiTk"
+                  class="types__StyledButton-sc-ws60qy-0 jTCgqj"
                   data-loading="false"
                   data-size="small"
                   data-testid="login-create-token"
@@ -444,12 +444,12 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
                   type="button"
                 >
                   <span
-                    class="Box-sc-g0xbh4-0 lbSBsX"
+                    class="Box-sc-g0xbh4-0 srpGE"
                     data-component="buttonContent"
                     sx="[object Object]"
                   >
                     <span
-                      class="Box-sc-g0xbh4-0 bPvALJ"
+                      class="Box-sc-g0xbh4-0 mhHOW"
                       data-component="leadingVisual"
                       sx="[object Object]"
                     >
@@ -478,13 +478,13 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
                   </span>
                 </button>
                 <span
-                  class="Text-sc-17v1xeu-0 gCQeDW"
+                  class="Text-sc-17v1xeu-0 hmAFGJ"
                 >
                   on GitHub then paste your token below.
                 </span>
               </div>
               <i
-                class="Text-sc-17v1xeu-0 gCQeDW"
+                class="Text-sc-17v1xeu-0 hmAFGJ"
               >
                 The required scopes will be automatically selected for you.
               </i>
@@ -510,7 +510,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
           />
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="horizontal"
           data-justify="space-between"
@@ -519,13 +519,13 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
         >
           <span
             aria-label="GitHub documentation"
-            class="Tooltip__TooltipBase-sc-17tf59c-0 rtmEP tooltipped-n"
+            class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-n"
             id=":r2:"
             role="tooltip"
           >
             <button
               aria-describedby=":r3:-loading-announcement"
-              class="types__StyledButton-sc-ws60qy-0 bBRiTk"
+              class="types__StyledButton-sc-ws60qy-0 jTCgqj"
               data-loading="false"
               data-size="small"
               data-testid="login-docs"
@@ -533,12 +533,12 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
               type="button"
             >
               <span
-                class="Box-sc-g0xbh4-0 lbSBsX"
+                class="Box-sc-g0xbh4-0 srpGE"
                 data-component="buttonContent"
                 sx="[object Object]"
               >
                 <span
-                  class="Box-sc-g0xbh4-0 bPvALJ"
+                  class="Box-sc-g0xbh4-0 mhHOW"
                   data-component="leadingVisual"
                   sx="[object Object]"
                 >
@@ -569,13 +569,13 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
           </span>
           <span
             aria-label="Login"
-            class="Tooltip__TooltipBase-sc-17tf59c-0 rtmEP tooltipped-n"
+            class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-n"
             id=":r4:"
             role="tooltip"
           >
             <button
               aria-describedby=":r5:-loading-announcement"
-              class="types__StyledButton-sc-ws60qy-0 bBXWFS"
+              class="types__StyledButton-sc-ws60qy-0 gEWhIh"
               data-loading="false"
               data-testid="login-submit"
               disabled=""
@@ -583,12 +583,12 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
               type="submit"
             >
               <span
-                class="Box-sc-g0xbh4-0 lbSBsX"
+                class="Box-sc-g0xbh4-0 srpGE"
                 data-component="buttonContent"
                 sx="[object Object]"
               >
                 <span
-                  class="Box-sc-g0xbh4-0 bPvALJ"
+                  class="Box-sc-g0xbh4-0 mhHOW"
                   data-component="leadingVisual"
                   sx="[object Object]"
                 >

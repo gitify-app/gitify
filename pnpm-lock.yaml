@@ -47,7 +47,7 @@ importers:
         version: 19.14.0(react@19.0.0)
       '@primer/react':
         specifier: 37.9.1
-        version: 37.9.1(@types/react-dom@19.0.3(@types/react@19.0.7))(@types/react@19.0.7)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(styled-components@6.1.13(react-dom@19.0.0(react@19.0.0))(react@19.0.0))
+        version: 37.9.1(@types/react-dom@19.0.3(@types/react@19.0.7))(@types/react@19.0.7)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(styled-components@6.1.14(react-dom@19.0.0(react@19.0.0))(react@19.0.0))
       '@testing-library/react':
         specifier: 16.2.0
         version: 16.2.0(@testing-library/dom@10.0.0)(@types/react-dom@19.0.3(@types/react@19.0.7))(@types/react@19.0.7)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -145,8 +145,8 @@ importers:
         specifier: 7.6.3
         version: 7.6.3
       styled-components:
-        specifier: 6.1.13
-        version: 6.1.13(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        specifier: 6.1.14
+        version: 6.1.14(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       tailwind-merge:
         specifier: 2.6.0
         version: 2.6.0
@@ -3774,8 +3774,8 @@ packages:
     resolution: {integrity: sha512-6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig==}
     engines: {node: '>=8'}
 
-  styled-components@6.1.13:
-    resolution: {integrity: sha512-M0+N2xSnAtwcVAQeFEsGWFFxXDftHUD7XrKla06QbpUMmbmtFBMMTcKWvFXtWxuD5qQkB8iU5gk6QASlx2ZRMw==}
+  styled-components@6.1.14:
+    resolution: {integrity: sha512-KtfwhU5jw7UoxdM0g6XU9VZQFV4do+KrM8idiVCH5h4v49W+3p3yMe0icYwJgZQZepa5DbH04Qv8P0/RdcLcgg==}
     engines: {node: '>= 16'}
     peerDependencies:
       react: '>= 16.8.0'
@@ -4869,7 +4869,7 @@ snapshots:
 
   '@primer/primitives@10.3.4': {}
 
-  '@primer/react@37.9.1(@types/react-dom@19.0.3(@types/react@19.0.7))(@types/react@19.0.7)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(styled-components@6.1.13(react-dom@19.0.0(react@19.0.0))(react@19.0.0))':
+  '@primer/react@37.9.1(@types/react-dom@19.0.3(@types/react@19.0.7))(@types/react@19.0.7)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(styled-components@6.1.14(react-dom@19.0.0(react@19.0.0))(react@19.0.0))':
     dependencies:
       '@github/relative-time-element': 4.4.3
       '@github/tab-container-element': 4.8.2
@@ -4898,7 +4898,7 @@ snapshots:
       react-dom: 19.0.0(react@19.0.0)
       react-intersection-observer: 9.13.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       react-is: 18.2.0
-      styled-components: 6.1.13(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      styled-components: 6.1.14(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       styled-system: 5.1.5
     optionalDependencies:
       '@types/react': 19.0.7
@@ -8440,7 +8440,7 @@ snapshots:
 
   strip-json-comments@3.1.1: {}
 
-  styled-components@6.1.13(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
+  styled-components@6.1.14(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
     dependencies:
       '@emotion/is-prop-valid': 1.2.2
       '@emotion/unitless': 0.8.1

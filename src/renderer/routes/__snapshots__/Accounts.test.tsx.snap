@@ -9,7 +9,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
     class="mx-6 mt-2 py-2"
   >
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+      class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
       data-align="stretch"
       data-direction="horizontal"
       data-justify="space-between"
@@ -19,7 +19,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
       <button
         aria-describedby=":r2s:-loading-announcement"
         aria-labelledby="Go Back"
-        class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+        class="types__StyledButton-sc-ws60qy-0 kQRupk"
         data-component="IconButton"
         data-loading="false"
         data-no-visuals="true"
@@ -45,7 +45,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
         </svg>
       </button>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
         data-align="center"
         data-direction="horizontal"
         data-gap="condensed"
@@ -70,7 +70,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
           />
         </svg>
         <h2
-          class="Heading__StyledHeading-sc-1c1dgg0-0 iLDWTC"
+          class="Heading__StyledHeading-sc-1c1dgg0-0 fuhZuh"
           sx="[object Object]"
         >
           Accounts
@@ -88,7 +88,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
         class="rounded-md bg-gray-100 p-2 pb-0 dark:bg-gitify-sidebar"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -97,7 +97,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
           data-wrap="nowrap"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="stretch"
             data-direction="vertical"
             data-gap="none"
@@ -110,7 +110,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
             >
               <button
                 aria-describedby=":r2t:-loading-announcement"
-                class="types__StyledButton-sc-ws60qy-0 bBRiTk"
+                class="types__StyledButton-sc-ws60qy-0 jTCgqj"
                 data-loading="false"
                 data-no-visuals="true"
                 data-testid="account-profile"
@@ -119,7 +119,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
                 type="button"
               >
                 <span
-                  class="Box-sc-g0xbh4-0 lbSBsX"
+                  class="Box-sc-g0xbh4-0 srpGE"
                   data-component="buttonContent"
                   sx="[object Object]"
                 >
@@ -127,7 +127,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
                     data-component="text"
                   >
                     <div
-                      class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                      class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                       data-align="center"
                       data-direction="horizontal"
                       data-gap="condensed"
@@ -137,7 +137,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
                     >
                       <img
                         alt=""
-                        class="Avatar__StyledAvatar-sc-2lv0r8-0 cApoMI"
+                        class="Avatar__StyledAvatar-sc-2lv0r8-0 jwAMPP"
                         data-component="Avatar"
                         height="20"
                         size="20"
@@ -146,7 +146,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
                         width="20"
                       />
                       <span
-                        class="Text-sc-17v1xeu-0 gCQeDW"
+                        class="Text-sc-17v1xeu-0 hmAFGJ"
                       >
                         @
                         octocat
@@ -160,7 +160,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
               class="pb-2 pl-4"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                 data-align="stretch"
                 data-direction="vertical"
                 data-gap="condensed"
@@ -170,7 +170,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
               >
                 <div>
                   <div
-                    class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                    class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                     data-align="center"
                     data-direction="horizontal"
                     data-gap="condensed"
@@ -207,7 +207,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
                   type="button"
                 >
                   <div
-                    class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                    class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                     data-align="center"
                     data-direction="horizontal"
                     data-gap="condensed"
@@ -244,7 +244,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
                   type="button"
                 >
                   <div
-                    class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                    class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                     data-align="center"
                     data-direction="horizontal"
                     data-gap="condensed"
@@ -279,7 +279,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
             </div>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="stretch"
             data-direction="horizontal"
             data-gap="condensed"
@@ -290,7 +290,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
             <button
               aria-describedby=":r2v:-loading-announcement"
               aria-labelledby=":r2u:"
-              class="types__StyledButton-sc-ws60qy-0 iPrVXY"
+              class="types__StyledButton-sc-ws60qy-0 bsfonn"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -318,7 +318,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
             </button>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="s"
               id=":r2u:"
               popover="auto"
@@ -328,7 +328,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
             <button
               aria-describedby=":r31:-loading-announcement"
               aria-labelledby=":r30:"
-              class="types__StyledButton-sc-ws60qy-0 bBXWFS"
+              class="types__StyledButton-sc-ws60qy-0 gEWhIh"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -356,7 +356,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
             </button>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="s"
               id=":r30:"
               popover="auto"
@@ -364,14 +364,14 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
               Primary account
             </span>
             <div
-              class="Box-sc-g0xbh4-0 hZUXnR"
+              class="Box-sc-g0xbh4-0 hMgwpS"
               data-loading-wrapper="true"
               sx="[object Object]"
             >
               <button
                 aria-describedby=":r33:-loading-announcement"
                 aria-labelledby=":r32:"
-                class="types__StyledButton-sc-ws60qy-0 bBRiTk"
+                class="types__StyledButton-sc-ws60qy-0 jTCgqj"
                 data-component="IconButton"
                 data-loading="false"
                 data-no-visuals="true"
@@ -400,7 +400,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
             </div>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="s"
               id=":r32:"
               popover="auto"
@@ -410,7 +410,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
             <button
               aria-describedby=":r35:-loading-announcement"
               aria-labelledby=":r34:"
-              class="types__StyledButton-sc-ws60qy-0 fxwkNN"
+              class="types__StyledButton-sc-ws60qy-0 cYZGEC"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -438,7 +438,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
             </button>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="s"
               id=":r34:"
               popover="auto"
@@ -452,7 +452,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
         class="rounded-md bg-gray-100 p-2 pb-0 dark:bg-gitify-sidebar"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -461,7 +461,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
           data-wrap="nowrap"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="stretch"
             data-direction="vertical"
             data-gap="none"
@@ -474,7 +474,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
             >
               <button
                 aria-describedby=":r36:-loading-announcement"
-                class="types__StyledButton-sc-ws60qy-0 bBRiTk"
+                class="types__StyledButton-sc-ws60qy-0 jTCgqj"
                 data-loading="false"
                 data-no-visuals="true"
                 data-testid="account-profile"
@@ -483,7 +483,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
                 type="button"
               >
                 <span
-                  class="Box-sc-g0xbh4-0 lbSBsX"
+                  class="Box-sc-g0xbh4-0 srpGE"
                   data-component="buttonContent"
                   sx="[object Object]"
                 >
@@ -491,7 +491,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
                     data-component="text"
                   >
                     <div
-                      class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                      class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                       data-align="center"
                       data-direction="horizontal"
                       data-gap="condensed"
@@ -501,7 +501,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
                     >
                       <img
                         alt=""
-                        class="Avatar__StyledAvatar-sc-2lv0r8-0 cApoMI"
+                        class="Avatar__StyledAvatar-sc-2lv0r8-0 jwAMPP"
                         data-component="Avatar"
                         height="20"
                         size="20"
@@ -510,7 +510,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
                         width="20"
                       />
                       <span
-                        class="Text-sc-17v1xeu-0 gCQeDW"
+                        class="Text-sc-17v1xeu-0 hmAFGJ"
                       >
                         @
                         octocat
@@ -524,7 +524,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
               class="pb-2 pl-4"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                 data-align="stretch"
                 data-direction="vertical"
                 data-gap="condensed"
@@ -534,7 +534,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
               >
                 <div>
                   <div
-                    class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                    class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                     data-align="center"
                     data-direction="horizontal"
                     data-gap="condensed"
@@ -571,7 +571,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
                   type="button"
                 >
                   <div
-                    class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                    class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                     data-align="center"
                     data-direction="horizontal"
                     data-gap="condensed"
@@ -608,7 +608,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
                   type="button"
                 >
                   <div
-                    class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                    class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                     data-align="center"
                     data-direction="horizontal"
                     data-gap="condensed"
@@ -643,7 +643,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
             </div>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="stretch"
             data-direction="horizontal"
             data-gap="condensed"
@@ -654,7 +654,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
             <button
               aria-describedby=":r38:-loading-announcement"
               aria-labelledby=":r37:"
-              class="types__StyledButton-sc-ws60qy-0 gxMBgQ"
+              class="types__StyledButton-sc-ws60qy-0 eTzudz"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -682,7 +682,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
             </button>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="s"
               id=":r37:"
               popover="auto"
@@ -692,7 +692,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
             <button
               aria-describedby=":r3a:-loading-announcement"
               aria-labelledby=":r39:"
-              class="types__StyledButton-sc-ws60qy-0 bBRiTk"
+              class="types__StyledButton-sc-ws60qy-0 jTCgqj"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -720,7 +720,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
             </button>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="s"
               id=":r39:"
               popover="auto"
@@ -728,14 +728,14 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
               Set as primary account
             </span>
             <div
-              class="Box-sc-g0xbh4-0 hZUXnR"
+              class="Box-sc-g0xbh4-0 hMgwpS"
               data-loading-wrapper="true"
               sx="[object Object]"
             >
               <button
                 aria-describedby=":r3c:-loading-announcement"
                 aria-labelledby=":r3b:"
-                class="types__StyledButton-sc-ws60qy-0 bBRiTk"
+                class="types__StyledButton-sc-ws60qy-0 jTCgqj"
                 data-component="IconButton"
                 data-loading="false"
                 data-no-visuals="true"
@@ -764,7 +764,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
             </div>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="s"
               id=":r3b:"
               popover="auto"
@@ -774,7 +774,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
             <button
               aria-describedby=":r3e:-loading-announcement"
               aria-labelledby=":r3d:"
-              class="types__StyledButton-sc-ws60qy-0 fxwkNN"
+              class="types__StyledButton-sc-ws60qy-0 cYZGEC"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -802,7 +802,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
             </button>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="s"
               id=":r3d:"
               popover="auto"
@@ -816,7 +816,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
         class="rounded-md bg-gray-100 p-2 pb-0 dark:bg-gitify-sidebar"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -825,7 +825,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
           data-wrap="nowrap"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="stretch"
             data-direction="vertical"
             data-gap="none"
@@ -838,7 +838,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
             >
               <button
                 aria-describedby=":r3f:-loading-announcement"
-                class="types__StyledButton-sc-ws60qy-0 bBRiTk"
+                class="types__StyledButton-sc-ws60qy-0 jTCgqj"
                 data-loading="false"
                 data-no-visuals="true"
                 data-testid="account-profile"
@@ -847,7 +847,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
                 type="button"
               >
                 <span
-                  class="Box-sc-g0xbh4-0 lbSBsX"
+                  class="Box-sc-g0xbh4-0 srpGE"
                   data-component="buttonContent"
                   sx="[object Object]"
                 >
@@ -855,7 +855,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
                     data-component="text"
                   >
                     <div
-                      class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                      class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                       data-align="center"
                       data-direction="horizontal"
                       data-gap="condensed"
@@ -865,7 +865,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
                     >
                       <img
                         alt=""
-                        class="Avatar__StyledAvatar-sc-2lv0r8-0 cApoMI"
+                        class="Avatar__StyledAvatar-sc-2lv0r8-0 jwAMPP"
                         data-component="Avatar"
                         height="20"
                         size="20"
@@ -874,7 +874,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
                         width="20"
                       />
                       <span
-                        class="Text-sc-17v1xeu-0 gCQeDW"
+                        class="Text-sc-17v1xeu-0 hmAFGJ"
                       >
                         @
                         octocat
@@ -888,7 +888,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
               class="pb-2 pl-4"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                 data-align="stretch"
                 data-direction="vertical"
                 data-gap="condensed"
@@ -898,7 +898,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
               >
                 <div>
                   <div
-                    class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                    class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                     data-align="center"
                     data-direction="horizontal"
                     data-gap="condensed"
@@ -935,7 +935,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
                   type="button"
                 >
                   <div
-                    class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                    class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                     data-align="center"
                     data-direction="horizontal"
                     data-gap="condensed"
@@ -972,7 +972,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
                   type="button"
                 >
                   <div
-                    class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                    class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                     data-align="center"
                     data-direction="horizontal"
                     data-gap="condensed"
@@ -1007,7 +1007,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
             </div>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="stretch"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1018,7 +1018,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
             <button
               aria-describedby=":r3h:-loading-announcement"
               aria-labelledby=":r3g:"
-              class="types__StyledButton-sc-ws60qy-0 gxMBgQ"
+              class="types__StyledButton-sc-ws60qy-0 eTzudz"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -1046,7 +1046,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
             </button>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="s"
               id=":r3g:"
               popover="auto"
@@ -1056,7 +1056,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
             <button
               aria-describedby=":r3j:-loading-announcement"
               aria-labelledby=":r3i:"
-              class="types__StyledButton-sc-ws60qy-0 bBRiTk"
+              class="types__StyledButton-sc-ws60qy-0 jTCgqj"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -1084,7 +1084,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
             </button>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="s"
               id=":r3i:"
               popover="auto"
@@ -1092,14 +1092,14 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
               Set as primary account
             </span>
             <div
-              class="Box-sc-g0xbh4-0 hZUXnR"
+              class="Box-sc-g0xbh4-0 hMgwpS"
               data-loading-wrapper="true"
               sx="[object Object]"
             >
               <button
                 aria-describedby=":r3l:-loading-announcement"
                 aria-labelledby=":r3k:"
-                class="types__StyledButton-sc-ws60qy-0 bBRiTk"
+                class="types__StyledButton-sc-ws60qy-0 jTCgqj"
                 data-component="IconButton"
                 data-loading="false"
                 data-no-visuals="true"
@@ -1128,7 +1128,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
             </div>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="s"
               id=":r3k:"
               popover="auto"
@@ -1138,7 +1138,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
             <button
               aria-describedby=":r3n:-loading-announcement"
               aria-labelledby=":r3m:"
-              class="types__StyledButton-sc-ws60qy-0 fxwkNN"
+              class="types__StyledButton-sc-ws60qy-0 cYZGEC"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -1166,7 +1166,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
             </button>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="s"
               id=":r3m:"
               popover="auto"
@@ -1185,7 +1185,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
       aria-describedby=":r3o:-loading-announcement"
       aria-expanded="false"
       aria-haspopup="true"
-      class="types__StyledButton-sc-ws60qy-0 bBRiTk"
+      class="types__StyledButton-sc-ws60qy-0 jTCgqj"
       data-loading="false"
       data-testid="account-add-new"
       id=":r3o:"
@@ -1194,12 +1194,12 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
       type="button"
     >
       <span
-        class="Box-sc-g0xbh4-0 lbSBsX"
+        class="Box-sc-g0xbh4-0 srpGE"
         data-component="buttonContent"
         sx="[object Object]"
       >
         <span
-          class="Box-sc-g0xbh4-0 bPvALJ"
+          class="Box-sc-g0xbh4-0 mhHOW"
           data-component="leadingVisual"
           sx="[object Object]"
         >
@@ -1240,7 +1240,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
     class="mx-6 mt-2 py-2"
   >
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+      class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
       data-align="stretch"
       data-direction="horizontal"
       data-justify="space-between"
@@ -1250,7 +1250,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
       <button
         aria-describedby=":r3r:-loading-announcement"
         aria-labelledby="Go Back"
-        class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+        class="types__StyledButton-sc-ws60qy-0 kQRupk"
         data-component="IconButton"
         data-loading="false"
         data-no-visuals="true"
@@ -1276,7 +1276,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
         </svg>
       </button>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
         data-align="center"
         data-direction="horizontal"
         data-gap="condensed"
@@ -1301,7 +1301,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
           />
         </svg>
         <h2
-          class="Heading__StyledHeading-sc-1c1dgg0-0 iLDWTC"
+          class="Heading__StyledHeading-sc-1c1dgg0-0 fuhZuh"
           sx="[object Object]"
         >
           Accounts
@@ -1319,7 +1319,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
         class="rounded-md bg-gray-100 p-2 pb-0 dark:bg-gitify-sidebar"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -1328,7 +1328,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
           data-wrap="nowrap"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="stretch"
             data-direction="vertical"
             data-gap="none"
@@ -1341,7 +1341,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
             >
               <button
                 aria-describedby=":r3s:-loading-announcement"
-                class="types__StyledButton-sc-ws60qy-0 bBRiTk"
+                class="types__StyledButton-sc-ws60qy-0 jTCgqj"
                 data-loading="false"
                 data-no-visuals="true"
                 data-testid="account-profile"
@@ -1350,7 +1350,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
                 type="button"
               >
                 <span
-                  class="Box-sc-g0xbh4-0 lbSBsX"
+                  class="Box-sc-g0xbh4-0 srpGE"
                   data-component="buttonContent"
                   sx="[object Object]"
                 >
@@ -1358,7 +1358,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
                     data-component="text"
                   >
                     <div
-                      class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                      class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                       data-align="center"
                       data-direction="horizontal"
                       data-gap="condensed"
@@ -1368,7 +1368,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
                     >
                       <img
                         alt=""
-                        class="Avatar__StyledAvatar-sc-2lv0r8-0 cApoMI"
+                        class="Avatar__StyledAvatar-sc-2lv0r8-0 jwAMPP"
                         data-component="Avatar"
                         height="20"
                         size="20"
@@ -1377,7 +1377,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
                         width="20"
                       />
                       <span
-                        class="Text-sc-17v1xeu-0 gCQeDW"
+                        class="Text-sc-17v1xeu-0 hmAFGJ"
                       >
                         @
                         octocat
@@ -1391,7 +1391,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
               class="pb-2 pl-4"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                 data-align="stretch"
                 data-direction="vertical"
                 data-gap="condensed"
@@ -1401,7 +1401,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
               >
                 <div>
                   <div
-                    class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                    class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                     data-align="center"
                     data-direction="horizontal"
                     data-gap="condensed"
@@ -1438,7 +1438,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
                   type="button"
                 >
                   <div
-                    class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                    class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                     data-align="center"
                     data-direction="horizontal"
                     data-gap="condensed"
@@ -1475,7 +1475,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
                   type="button"
                 >
                   <div
-                    class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                    class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                     data-align="center"
                     data-direction="horizontal"
                     data-gap="condensed"
@@ -1510,7 +1510,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
             </div>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="stretch"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1521,7 +1521,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
             <button
               aria-describedby=":r3u:-loading-announcement"
               aria-labelledby=":r3t:"
-              class="types__StyledButton-sc-ws60qy-0 gxMBgQ"
+              class="types__StyledButton-sc-ws60qy-0 eTzudz"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -1549,7 +1549,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
             </button>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="s"
               id=":r3t:"
               popover="auto"
@@ -1559,7 +1559,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
             <button
               aria-describedby=":r40:-loading-announcement"
               aria-labelledby=":r3v:"
-              class="types__StyledButton-sc-ws60qy-0 bBXWFS"
+              class="types__StyledButton-sc-ws60qy-0 gEWhIh"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -1587,7 +1587,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
             </button>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="s"
               id=":r3v:"
               popover="auto"
@@ -1595,14 +1595,14 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
               Primary account
             </span>
             <div
-              class="Box-sc-g0xbh4-0 hZUXnR"
+              class="Box-sc-g0xbh4-0 hMgwpS"
               data-loading-wrapper="true"
               sx="[object Object]"
             >
               <button
                 aria-describedby=":r42:-loading-announcement"
                 aria-labelledby=":r41:"
-                class="types__StyledButton-sc-ws60qy-0 bBRiTk"
+                class="types__StyledButton-sc-ws60qy-0 jTCgqj"
                 data-component="IconButton"
                 data-loading="false"
                 data-no-visuals="true"
@@ -1631,7 +1631,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
             </div>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="s"
               id=":r41:"
               popover="auto"
@@ -1641,7 +1641,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
             <button
               aria-describedby=":r44:-loading-announcement"
               aria-labelledby=":r43:"
-              class="types__StyledButton-sc-ws60qy-0 fxwkNN"
+              class="types__StyledButton-sc-ws60qy-0 cYZGEC"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -1669,7 +1669,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
             </button>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="s"
               id=":r43:"
               popover="auto"
@@ -1683,7 +1683,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
         class="rounded-md bg-gray-100 p-2 pb-0 dark:bg-gitify-sidebar"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -1692,7 +1692,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
           data-wrap="nowrap"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="stretch"
             data-direction="vertical"
             data-gap="none"
@@ -1705,7 +1705,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
             >
               <button
                 aria-describedby=":r45:-loading-announcement"
-                class="types__StyledButton-sc-ws60qy-0 bBRiTk"
+                class="types__StyledButton-sc-ws60qy-0 jTCgqj"
                 data-loading="false"
                 data-no-visuals="true"
                 data-testid="account-profile"
@@ -1714,7 +1714,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
                 type="button"
               >
                 <span
-                  class="Box-sc-g0xbh4-0 lbSBsX"
+                  class="Box-sc-g0xbh4-0 srpGE"
                   data-component="buttonContent"
                   sx="[object Object]"
                 >
@@ -1722,7 +1722,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
                     data-component="text"
                   >
                     <div
-                      class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                      class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                       data-align="center"
                       data-direction="horizontal"
                       data-gap="condensed"
@@ -1732,7 +1732,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
                     >
                       <img
                         alt=""
-                        class="Avatar__StyledAvatar-sc-2lv0r8-0 cApoMI"
+                        class="Avatar__StyledAvatar-sc-2lv0r8-0 jwAMPP"
                         data-component="Avatar"
                         height="20"
                         size="20"
@@ -1741,7 +1741,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
                         width="20"
                       />
                       <span
-                        class="Text-sc-17v1xeu-0 gCQeDW"
+                        class="Text-sc-17v1xeu-0 hmAFGJ"
                       >
                         @
                         octocat
@@ -1755,7 +1755,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
               class="pb-2 pl-4"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                 data-align="stretch"
                 data-direction="vertical"
                 data-gap="condensed"
@@ -1765,7 +1765,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
               >
                 <div>
                   <div
-                    class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                    class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                     data-align="center"
                     data-direction="horizontal"
                     data-gap="condensed"
@@ -1802,7 +1802,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
                   type="button"
                 >
                   <div
-                    class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                    class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                     data-align="center"
                     data-direction="horizontal"
                     data-gap="condensed"
@@ -1839,7 +1839,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
                   type="button"
                 >
                   <div
-                    class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                    class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                     data-align="center"
                     data-direction="horizontal"
                     data-gap="condensed"
@@ -1874,7 +1874,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
             </div>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="stretch"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1885,7 +1885,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
             <button
               aria-describedby=":r47:-loading-announcement"
               aria-labelledby=":r46:"
-              class="types__StyledButton-sc-ws60qy-0 gxMBgQ"
+              class="types__StyledButton-sc-ws60qy-0 eTzudz"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -1913,7 +1913,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
             </button>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="s"
               id=":r46:"
               popover="auto"
@@ -1923,7 +1923,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
             <button
               aria-describedby=":r49:-loading-announcement"
               aria-labelledby=":r48:"
-              class="types__StyledButton-sc-ws60qy-0 bBRiTk"
+              class="types__StyledButton-sc-ws60qy-0 jTCgqj"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -1951,7 +1951,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
             </button>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="s"
               id=":r48:"
               popover="auto"
@@ -1959,14 +1959,14 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
               Set as primary account
             </span>
             <div
-              class="Box-sc-g0xbh4-0 hZUXnR"
+              class="Box-sc-g0xbh4-0 hMgwpS"
               data-loading-wrapper="true"
               sx="[object Object]"
             >
               <button
                 aria-describedby=":r4b:-loading-announcement"
                 aria-labelledby=":r4a:"
-                class="types__StyledButton-sc-ws60qy-0 bBRiTk"
+                class="types__StyledButton-sc-ws60qy-0 jTCgqj"
                 data-component="IconButton"
                 data-loading="false"
                 data-no-visuals="true"
@@ -1995,7 +1995,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
             </div>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="s"
               id=":r4a:"
               popover="auto"
@@ -2005,7 +2005,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
             <button
               aria-describedby=":r4d:-loading-announcement"
               aria-labelledby=":r4c:"
-              class="types__StyledButton-sc-ws60qy-0 fxwkNN"
+              class="types__StyledButton-sc-ws60qy-0 cYZGEC"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -2033,7 +2033,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
             </button>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="s"
               id=":r4c:"
               popover="auto"
@@ -2047,7 +2047,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
         class="rounded-md bg-gray-100 p-2 pb-0 dark:bg-gitify-sidebar"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -2056,7 +2056,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
           data-wrap="nowrap"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="stretch"
             data-direction="vertical"
             data-gap="none"
@@ -2069,7 +2069,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
             >
               <button
                 aria-describedby=":r4e:-loading-announcement"
-                class="types__StyledButton-sc-ws60qy-0 bBRiTk"
+                class="types__StyledButton-sc-ws60qy-0 jTCgqj"
                 data-loading="false"
                 data-no-visuals="true"
                 data-testid="account-profile"
@@ -2078,7 +2078,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
                 type="button"
               >
                 <span
-                  class="Box-sc-g0xbh4-0 lbSBsX"
+                  class="Box-sc-g0xbh4-0 srpGE"
                   data-component="buttonContent"
                   sx="[object Object]"
                 >
@@ -2086,7 +2086,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
                     data-component="text"
                   >
                     <div
-                      class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                      class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                       data-align="center"
                       data-direction="horizontal"
                       data-gap="condensed"
@@ -2096,7 +2096,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
                     >
                       <img
                         alt=""
-                        class="Avatar__StyledAvatar-sc-2lv0r8-0 cApoMI"
+                        class="Avatar__StyledAvatar-sc-2lv0r8-0 jwAMPP"
                         data-component="Avatar"
                         height="20"
                         size="20"
@@ -2105,7 +2105,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
                         width="20"
                       />
                       <span
-                        class="Text-sc-17v1xeu-0 gCQeDW"
+                        class="Text-sc-17v1xeu-0 hmAFGJ"
                       >
                         @
                         octocat
@@ -2119,7 +2119,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
               class="pb-2 pl-4"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                 data-align="stretch"
                 data-direction="vertical"
                 data-gap="condensed"
@@ -2129,7 +2129,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
               >
                 <div>
                   <div
-                    class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                    class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                     data-align="center"
                     data-direction="horizontal"
                     data-gap="condensed"
@@ -2166,7 +2166,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
                   type="button"
                 >
                   <div
-                    class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                    class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                     data-align="center"
                     data-direction="horizontal"
                     data-gap="condensed"
@@ -2203,7 +2203,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
                   type="button"
                 >
                   <div
-                    class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                    class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                     data-align="center"
                     data-direction="horizontal"
                     data-gap="condensed"
@@ -2238,7 +2238,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
             </div>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="stretch"
             data-direction="horizontal"
             data-gap="condensed"
@@ -2249,7 +2249,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
             <button
               aria-describedby=":r4g:-loading-announcement"
               aria-labelledby=":r4f:"
-              class="types__StyledButton-sc-ws60qy-0 gxMBgQ"
+              class="types__StyledButton-sc-ws60qy-0 eTzudz"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -2277,7 +2277,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
             </button>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="s"
               id=":r4f:"
               popover="auto"
@@ -2287,7 +2287,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
             <button
               aria-describedby=":r4i:-loading-announcement"
               aria-labelledby=":r4h:"
-              class="types__StyledButton-sc-ws60qy-0 bBRiTk"
+              class="types__StyledButton-sc-ws60qy-0 jTCgqj"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -2315,7 +2315,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
             </button>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="s"
               id=":r4h:"
               popover="auto"
@@ -2323,14 +2323,14 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
               Set as primary account
             </span>
             <div
-              class="Box-sc-g0xbh4-0 hZUXnR"
+              class="Box-sc-g0xbh4-0 hMgwpS"
               data-loading-wrapper="true"
               sx="[object Object]"
             >
               <button
                 aria-describedby=":r4k:-loading-announcement"
                 aria-labelledby=":r4j:"
-                class="types__StyledButton-sc-ws60qy-0 bBRiTk"
+                class="types__StyledButton-sc-ws60qy-0 jTCgqj"
                 data-component="IconButton"
                 data-loading="false"
                 data-no-visuals="true"
@@ -2359,7 +2359,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
             </div>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="s"
               id=":r4j:"
               popover="auto"
@@ -2369,7 +2369,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
             <button
               aria-describedby=":r4m:-loading-announcement"
               aria-labelledby=":r4l:"
-              class="types__StyledButton-sc-ws60qy-0 fxwkNN"
+              class="types__StyledButton-sc-ws60qy-0 cYZGEC"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -2397,7 +2397,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
             </button>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="s"
               id=":r4l:"
               popover="auto"
@@ -2416,7 +2416,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
       aria-describedby=":r4n:-loading-announcement"
       aria-expanded="false"
       aria-haspopup="true"
-      class="types__StyledButton-sc-ws60qy-0 bBRiTk"
+      class="types__StyledButton-sc-ws60qy-0 jTCgqj"
       data-loading="false"
       data-testid="account-add-new"
       id=":r4n:"
@@ -2425,12 +2425,12 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
       type="button"
     >
       <span
-        class="Box-sc-g0xbh4-0 lbSBsX"
+        class="Box-sc-g0xbh4-0 srpGE"
         data-component="buttonContent"
         sx="[object Object]"
       >
         <span
-          class="Box-sc-g0xbh4-0 bPvALJ"
+          class="Box-sc-g0xbh4-0 mhHOW"
           data-component="leadingVisual"
           sx="[object Object]"
         >
@@ -2471,7 +2471,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
     class="mx-6 mt-2 py-2"
   >
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+      class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
       data-align="stretch"
       data-direction="horizontal"
       data-justify="space-between"
@@ -2481,7 +2481,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
       <button
         aria-describedby=":r0:-loading-announcement"
         aria-labelledby="Go Back"
-        class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+        class="types__StyledButton-sc-ws60qy-0 kQRupk"
         data-component="IconButton"
         data-loading="false"
         data-no-visuals="true"
@@ -2507,7 +2507,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
         </svg>
       </button>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
         data-align="center"
         data-direction="horizontal"
         data-gap="condensed"
@@ -2532,7 +2532,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
           />
         </svg>
         <h2
-          class="Heading__StyledHeading-sc-1c1dgg0-0 iLDWTC"
+          class="Heading__StyledHeading-sc-1c1dgg0-0 fuhZuh"
           sx="[object Object]"
         >
           Accounts
@@ -2550,7 +2550,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
         class="rounded-md bg-gray-100 p-2 pb-0 dark:bg-gitify-sidebar"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -2559,7 +2559,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
           data-wrap="nowrap"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="stretch"
             data-direction="vertical"
             data-gap="none"
@@ -2572,7 +2572,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
             >
               <button
                 aria-describedby=":r1:-loading-announcement"
-                class="types__StyledButton-sc-ws60qy-0 bBRiTk"
+                class="types__StyledButton-sc-ws60qy-0 jTCgqj"
                 data-loading="false"
                 data-no-visuals="true"
                 data-testid="account-profile"
@@ -2581,7 +2581,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                 type="button"
               >
                 <span
-                  class="Box-sc-g0xbh4-0 lbSBsX"
+                  class="Box-sc-g0xbh4-0 srpGE"
                   data-component="buttonContent"
                   sx="[object Object]"
                 >
@@ -2589,7 +2589,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                     data-component="text"
                   >
                     <div
-                      class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                      class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                       data-align="center"
                       data-direction="horizontal"
                       data-gap="condensed"
@@ -2599,7 +2599,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                     >
                       <img
                         alt=""
-                        class="Avatar__StyledAvatar-sc-2lv0r8-0 cApoMI"
+                        class="Avatar__StyledAvatar-sc-2lv0r8-0 jwAMPP"
                         data-component="Avatar"
                         height="20"
                         size="20"
@@ -2608,7 +2608,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                         width="20"
                       />
                       <span
-                        class="Text-sc-17v1xeu-0 gCQeDW"
+                        class="Text-sc-17v1xeu-0 hmAFGJ"
                       >
                         @
                         octocat
@@ -2622,7 +2622,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
               class="pb-2 pl-4"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                 data-align="stretch"
                 data-direction="vertical"
                 data-gap="condensed"
@@ -2632,7 +2632,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
               >
                 <div>
                   <div
-                    class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                    class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                     data-align="center"
                     data-direction="horizontal"
                     data-gap="condensed"
@@ -2669,7 +2669,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                   type="button"
                 >
                   <div
-                    class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                    class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                     data-align="center"
                     data-direction="horizontal"
                     data-gap="condensed"
@@ -2706,7 +2706,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                   type="button"
                 >
                   <div
-                    class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                    class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                     data-align="center"
                     data-direction="horizontal"
                     data-gap="condensed"
@@ -2741,7 +2741,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
             </div>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="stretch"
             data-direction="horizontal"
             data-gap="condensed"
@@ -2752,7 +2752,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
             <button
               aria-describedby=":r3:-loading-announcement"
               aria-labelledby=":r2:"
-              class="types__StyledButton-sc-ws60qy-0 gxMBgQ"
+              class="types__StyledButton-sc-ws60qy-0 eTzudz"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -2780,7 +2780,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
             </button>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="s"
               id=":r2:"
               popover="auto"
@@ -2790,7 +2790,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
             <button
               aria-describedby=":r5:-loading-announcement"
               aria-labelledby=":r4:"
-              class="types__StyledButton-sc-ws60qy-0 bBXWFS"
+              class="types__StyledButton-sc-ws60qy-0 gEWhIh"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -2818,7 +2818,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
             </button>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="s"
               id=":r4:"
               popover="auto"
@@ -2826,14 +2826,14 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
               Primary account
             </span>
             <div
-              class="Box-sc-g0xbh4-0 hZUXnR"
+              class="Box-sc-g0xbh4-0 hMgwpS"
               data-loading-wrapper="true"
               sx="[object Object]"
             >
               <button
                 aria-describedby=":r7:-loading-announcement"
                 aria-labelledby=":r6:"
-                class="types__StyledButton-sc-ws60qy-0 bBRiTk"
+                class="types__StyledButton-sc-ws60qy-0 jTCgqj"
                 data-component="IconButton"
                 data-loading="false"
                 data-no-visuals="true"
@@ -2862,7 +2862,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
             </div>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="s"
               id=":r6:"
               popover="auto"
@@ -2872,7 +2872,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
             <button
               aria-describedby=":r9:-loading-announcement"
               aria-labelledby=":r8:"
-              class="types__StyledButton-sc-ws60qy-0 fxwkNN"
+              class="types__StyledButton-sc-ws60qy-0 cYZGEC"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -2900,7 +2900,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
             </button>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="s"
               id=":r8:"
               popover="auto"
@@ -2914,7 +2914,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
         class="rounded-md bg-gray-100 p-2 pb-0 dark:bg-gitify-sidebar"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -2923,7 +2923,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
           data-wrap="nowrap"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="stretch"
             data-direction="vertical"
             data-gap="none"
@@ -2936,7 +2936,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
             >
               <button
                 aria-describedby=":ra:-loading-announcement"
-                class="types__StyledButton-sc-ws60qy-0 bBRiTk"
+                class="types__StyledButton-sc-ws60qy-0 jTCgqj"
                 data-loading="false"
                 data-no-visuals="true"
                 data-testid="account-profile"
@@ -2945,7 +2945,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                 type="button"
               >
                 <span
-                  class="Box-sc-g0xbh4-0 lbSBsX"
+                  class="Box-sc-g0xbh4-0 srpGE"
                   data-component="buttonContent"
                   sx="[object Object]"
                 >
@@ -2953,7 +2953,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                     data-component="text"
                   >
                     <div
-                      class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                      class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                       data-align="center"
                       data-direction="horizontal"
                       data-gap="condensed"
@@ -2963,7 +2963,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                     >
                       <img
                         alt=""
-                        class="Avatar__StyledAvatar-sc-2lv0r8-0 cApoMI"
+                        class="Avatar__StyledAvatar-sc-2lv0r8-0 jwAMPP"
                         data-component="Avatar"
                         height="20"
                         size="20"
@@ -2972,7 +2972,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                         width="20"
                       />
                       <span
-                        class="Text-sc-17v1xeu-0 gCQeDW"
+                        class="Text-sc-17v1xeu-0 hmAFGJ"
                       >
                         @
                         octocat
@@ -2986,7 +2986,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
               class="pb-2 pl-4"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                 data-align="stretch"
                 data-direction="vertical"
                 data-gap="condensed"
@@ -2996,7 +2996,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
               >
                 <div>
                   <div
-                    class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                    class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                     data-align="center"
                     data-direction="horizontal"
                     data-gap="condensed"
@@ -3033,7 +3033,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                   type="button"
                 >
                   <div
-                    class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                    class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                     data-align="center"
                     data-direction="horizontal"
                     data-gap="condensed"
@@ -3070,7 +3070,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                   type="button"
                 >
                   <div
-                    class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                    class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                     data-align="center"
                     data-direction="horizontal"
                     data-gap="condensed"
@@ -3105,7 +3105,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
             </div>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="stretch"
             data-direction="horizontal"
             data-gap="condensed"
@@ -3116,7 +3116,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
             <button
               aria-describedby=":rc:-loading-announcement"
               aria-labelledby=":rb:"
-              class="types__StyledButton-sc-ws60qy-0 gxMBgQ"
+              class="types__StyledButton-sc-ws60qy-0 eTzudz"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -3144,7 +3144,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
             </button>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="s"
               id=":rb:"
               popover="auto"
@@ -3154,7 +3154,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
             <button
               aria-describedby=":re:-loading-announcement"
               aria-labelledby=":rd:"
-              class="types__StyledButton-sc-ws60qy-0 bBRiTk"
+              class="types__StyledButton-sc-ws60qy-0 jTCgqj"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -3182,7 +3182,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
             </button>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="s"
               id=":rd:"
               popover="auto"
@@ -3190,14 +3190,14 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
               Set as primary account
             </span>
             <div
-              class="Box-sc-g0xbh4-0 hZUXnR"
+              class="Box-sc-g0xbh4-0 hMgwpS"
               data-loading-wrapper="true"
               sx="[object Object]"
             >
               <button
                 aria-describedby=":rg:-loading-announcement"
                 aria-labelledby=":rf:"
-                class="types__StyledButton-sc-ws60qy-0 bBRiTk"
+                class="types__StyledButton-sc-ws60qy-0 jTCgqj"
                 data-component="IconButton"
                 data-loading="false"
                 data-no-visuals="true"
@@ -3226,7 +3226,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
             </div>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="s"
               id=":rf:"
               popover="auto"
@@ -3236,7 +3236,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
             <button
               aria-describedby=":ri:-loading-announcement"
               aria-labelledby=":rh:"
-              class="types__StyledButton-sc-ws60qy-0 fxwkNN"
+              class="types__StyledButton-sc-ws60qy-0 cYZGEC"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -3264,7 +3264,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
             </button>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="s"
               id=":rh:"
               popover="auto"
@@ -3278,7 +3278,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
         class="rounded-md bg-gray-100 p-2 pb-0 dark:bg-gitify-sidebar"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -3287,7 +3287,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
           data-wrap="nowrap"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="stretch"
             data-direction="vertical"
             data-gap="none"
@@ -3300,7 +3300,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
             >
               <button
                 aria-describedby=":rj:-loading-announcement"
-                class="types__StyledButton-sc-ws60qy-0 bBRiTk"
+                class="types__StyledButton-sc-ws60qy-0 jTCgqj"
                 data-loading="false"
                 data-no-visuals="true"
                 data-testid="account-profile"
@@ -3309,7 +3309,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                 type="button"
               >
                 <span
-                  class="Box-sc-g0xbh4-0 lbSBsX"
+                  class="Box-sc-g0xbh4-0 srpGE"
                   data-component="buttonContent"
                   sx="[object Object]"
                 >
@@ -3317,7 +3317,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                     data-component="text"
                   >
                     <div
-                      class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                      class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                       data-align="center"
                       data-direction="horizontal"
                       data-gap="condensed"
@@ -3327,7 +3327,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                     >
                       <img
                         alt=""
-                        class="Avatar__StyledAvatar-sc-2lv0r8-0 cApoMI"
+                        class="Avatar__StyledAvatar-sc-2lv0r8-0 jwAMPP"
                         data-component="Avatar"
                         height="20"
                         size="20"
@@ -3336,7 +3336,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                         width="20"
                       />
                       <span
-                        class="Text-sc-17v1xeu-0 gCQeDW"
+                        class="Text-sc-17v1xeu-0 hmAFGJ"
                       >
                         @
                         octocat
@@ -3350,7 +3350,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
               class="pb-2 pl-4"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                 data-align="stretch"
                 data-direction="vertical"
                 data-gap="condensed"
@@ -3360,7 +3360,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
               >
                 <div>
                   <div
-                    class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                    class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                     data-align="center"
                     data-direction="horizontal"
                     data-gap="condensed"
@@ -3397,7 +3397,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                   type="button"
                 >
                   <div
-                    class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                    class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                     data-align="center"
                     data-direction="horizontal"
                     data-gap="condensed"
@@ -3434,7 +3434,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                   type="button"
                 >
                   <div
-                    class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                    class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                     data-align="center"
                     data-direction="horizontal"
                     data-gap="condensed"
@@ -3469,7 +3469,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
             </div>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="stretch"
             data-direction="horizontal"
             data-gap="condensed"
@@ -3480,7 +3480,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
             <button
               aria-describedby=":rl:-loading-announcement"
               aria-labelledby=":rk:"
-              class="types__StyledButton-sc-ws60qy-0 gxMBgQ"
+              class="types__StyledButton-sc-ws60qy-0 eTzudz"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -3508,7 +3508,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
             </button>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="s"
               id=":rk:"
               popover="auto"
@@ -3518,7 +3518,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
             <button
               aria-describedby=":rn:-loading-announcement"
               aria-labelledby=":rm:"
-              class="types__StyledButton-sc-ws60qy-0 bBRiTk"
+              class="types__StyledButton-sc-ws60qy-0 jTCgqj"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -3546,7 +3546,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
             </button>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="s"
               id=":rm:"
               popover="auto"
@@ -3554,14 +3554,14 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
               Set as primary account
             </span>
             <div
-              class="Box-sc-g0xbh4-0 hZUXnR"
+              class="Box-sc-g0xbh4-0 hMgwpS"
               data-loading-wrapper="true"
               sx="[object Object]"
             >
               <button
                 aria-describedby=":rp:-loading-announcement"
                 aria-labelledby=":ro:"
-                class="types__StyledButton-sc-ws60qy-0 bBRiTk"
+                class="types__StyledButton-sc-ws60qy-0 jTCgqj"
                 data-component="IconButton"
                 data-loading="false"
                 data-no-visuals="true"
@@ -3590,7 +3590,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
             </div>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="s"
               id=":ro:"
               popover="auto"
@@ -3600,7 +3600,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
             <button
               aria-describedby=":rr:-loading-announcement"
               aria-labelledby=":rq:"
-              class="types__StyledButton-sc-ws60qy-0 fxwkNN"
+              class="types__StyledButton-sc-ws60qy-0 cYZGEC"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -3628,7 +3628,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
             </button>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="s"
               id=":rq:"
               popover="auto"
@@ -3647,7 +3647,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
       aria-describedby=":rs:-loading-announcement"
       aria-expanded="false"
       aria-haspopup="true"
-      class="types__StyledButton-sc-ws60qy-0 bBRiTk"
+      class="types__StyledButton-sc-ws60qy-0 jTCgqj"
       data-loading="false"
       data-testid="account-add-new"
       id=":rs:"
@@ -3656,12 +3656,12 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
       type="button"
     >
       <span
-        class="Box-sc-g0xbh4-0 lbSBsX"
+        class="Box-sc-g0xbh4-0 srpGE"
         data-component="buttonContent"
         sx="[object Object]"
       >
         <span
-          class="Box-sc-g0xbh4-0 bPvALJ"
+          class="Box-sc-g0xbh4-0 mhHOW"
           data-component="leadingVisual"
           sx="[object Object]"
         >

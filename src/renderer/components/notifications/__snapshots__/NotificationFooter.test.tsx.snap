@@ -10,7 +10,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
       >
         <img
           alt=""
-          class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
+          class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
           data-component="Avatar"
           data-testid="view-profile"
           height="14"
@@ -41,7 +41,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
             type="button"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -66,7 +66,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
                 />
               </svg>
               <span
-                class="Text-sc-17v1xeu-0 gCQeDW"
+                class="Text-sc-17v1xeu-0 hmAFGJ"
               >
                 1
               </span>
@@ -78,7 +78,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
             type="button"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -103,7 +103,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
                 />
               </svg>
               <span
-                class="Text-sc-17v1xeu-0 gCQeDW"
+                class="Text-sc-17v1xeu-0 hmAFGJ"
               >
                 1
               </span>
@@ -119,7 +119,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
     >
       <img
         alt=""
-        class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
+        class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
         data-component="Avatar"
         data-testid="view-profile"
         height="14"
@@ -150,7 +150,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
           type="button"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -175,7 +175,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 gCQeDW"
+              class="Text-sc-17v1xeu-0 hmAFGJ"
             >
               1
             </span>
@@ -187,7 +187,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
           type="button"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -212,7 +212,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 gCQeDW"
+              class="Text-sc-17v1xeu-0 hmAFGJ"
             >
               1
             </span>
@@ -285,7 +285,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
       >
         <img
           alt=""
-          class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
+          class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
           data-component="Avatar"
           data-testid="view-profile"
           height="14"
@@ -316,7 +316,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
             type="button"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -341,7 +341,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
                 />
               </svg>
               <span
-                class="Text-sc-17v1xeu-0 gCQeDW"
+                class="Text-sc-17v1xeu-0 hmAFGJ"
               >
                 1
               </span>
@@ -353,7 +353,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
             type="button"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -378,7 +378,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
                 />
               </svg>
               <span
-                class="Text-sc-17v1xeu-0 gCQeDW"
+                class="Text-sc-17v1xeu-0 hmAFGJ"
               >
                 1
               </span>
@@ -394,7 +394,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
     >
       <img
         alt=""
-        class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
+        class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
         data-component="Avatar"
         data-testid="view-profile"
         height="14"
@@ -425,7 +425,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
           type="button"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -450,7 +450,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 gCQeDW"
+              class="Text-sc-17v1xeu-0 hmAFGJ"
             >
               1
             </span>
@@ -462,7 +462,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
           type="button"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -487,7 +487,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 gCQeDW"
+              class="Text-sc-17v1xeu-0 hmAFGJ"
             >
               1
             </span>
@@ -595,7 +595,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
             type="button"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -620,7 +620,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
                 />
               </svg>
               <span
-                class="Text-sc-17v1xeu-0 gCQeDW"
+                class="Text-sc-17v1xeu-0 hmAFGJ"
               >
                 1
               </span>
@@ -632,7 +632,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
             type="button"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -657,7 +657,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
                 />
               </svg>
               <span
-                class="Text-sc-17v1xeu-0 gCQeDW"
+                class="Text-sc-17v1xeu-0 hmAFGJ"
               >
                 1
               </span>
@@ -708,7 +708,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
           type="button"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -733,7 +733,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 gCQeDW"
+              class="Text-sc-17v1xeu-0 hmAFGJ"
             >
               1
             </span>
@@ -745,7 +745,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
           type="button"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -770,7 +770,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 gCQeDW"
+              class="Text-sc-17v1xeu-0 hmAFGJ"
             >
               1
             </span>
@@ -843,7 +843,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
       >
         <img
           alt=""
-          class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
+          class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
           data-component="Avatar"
           data-testid="view-profile"
           height="14"
@@ -874,7 +874,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
             type="button"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -899,7 +899,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
                 />
               </svg>
               <span
-                class="Text-sc-17v1xeu-0 gCQeDW"
+                class="Text-sc-17v1xeu-0 hmAFGJ"
               >
                 1
               </span>
@@ -911,7 +911,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
             type="button"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -936,7 +936,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
                 />
               </svg>
               <span
-                class="Text-sc-17v1xeu-0 gCQeDW"
+                class="Text-sc-17v1xeu-0 hmAFGJ"
               >
                 1
               </span>
@@ -952,7 +952,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
     >
       <img
         alt=""
-        class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
+        class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
         data-component="Avatar"
         data-testid="view-profile"
         height="14"
@@ -983,7 +983,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
           type="button"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1008,7 +1008,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 gCQeDW"
+              class="Text-sc-17v1xeu-0 hmAFGJ"
             >
               1
             </span>
@@ -1020,7 +1020,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
           type="button"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1045,7 +1045,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 gCQeDW"
+              class="Text-sc-17v1xeu-0 hmAFGJ"
             >
               1
             </span>
@@ -1118,7 +1118,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
       >
         <img
           alt=""
-          class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
+          class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
           data-component="Avatar"
           data-testid="view-profile"
           height="14"
@@ -1149,7 +1149,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
             type="button"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -1174,7 +1174,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
                 />
               </svg>
               <span
-                class="Text-sc-17v1xeu-0 gCQeDW"
+                class="Text-sc-17v1xeu-0 hmAFGJ"
               >
                 1
               </span>
@@ -1186,7 +1186,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
             type="button"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -1211,7 +1211,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
                 />
               </svg>
               <span
-                class="Text-sc-17v1xeu-0 gCQeDW"
+                class="Text-sc-17v1xeu-0 hmAFGJ"
               >
                 1
               </span>
@@ -1227,7 +1227,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
     >
       <img
         alt=""
-        class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
+        class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
         data-component="Avatar"
         data-testid="view-profile"
         height="14"
@@ -1258,7 +1258,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
           type="button"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1283,7 +1283,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 gCQeDW"
+              class="Text-sc-17v1xeu-0 hmAFGJ"
             >
               1
             </span>
@@ -1295,7 +1295,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
           type="button"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1320,7 +1320,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 gCQeDW"
+              class="Text-sc-17v1xeu-0 hmAFGJ"
             >
               1
             </span>
