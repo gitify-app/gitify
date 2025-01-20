@@ -10,7 +10,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
       >
         <button
           aria-describedby=":r15:-loading-announcement"
-          class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+          class="types__StyledButton-sc-ws60qy-0 kQRupk"
           data-loading="false"
           data-no-visuals="true"
           data-testid="account-profile"
@@ -19,7 +19,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           type="button"
         >
           <span
-            class="Box-sc-g0xbh4-0 lbSBsX"
+            class="Box-sc-g0xbh4-0 srpGE"
             data-component="buttonContent"
             sx="[object Object]"
           >
@@ -27,7 +27,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               data-component="text"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -37,7 +37,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               >
                 <img
                   alt=""
-                  class="Avatar__StyledAvatar-sc-2lv0r8-0 dMhEzR"
+                  class="Avatar__StyledAvatar-sc-2lv0r8-0 kuZlm"
                   data-component="Avatar"
                   height="16"
                   size="16"
@@ -46,7 +46,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                   width="16"
                 />
                 <span
-                  class="Text-sc-17v1xeu-0 gCQeDW"
+                  class="Text-sc-17v1xeu-0 hmAFGJ"
                 >
                   @
                   octocat
@@ -54,20 +54,20 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               </div>
             </span>
             <span
-              class="Box-sc-g0xbh4-0 bPvALJ"
+              class="Box-sc-g0xbh4-0 mhHOW"
               data-component="trailingVisual"
               sx="[object Object]"
             >
               <span
                 aria-hidden="true"
-                class="Box-sc-g0xbh4-0 dZZxCI"
+                class="Box-sc-g0xbh4-0 bfvZWv"
                 data-component="ButtonCounter"
                 sx="[object Object]"
               >
                 0
               </span>
               <span
-                class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 ajbWx"
+                class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 hxuUuW"
               >
                  (
                 0
@@ -80,7 +80,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           class="flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-80"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
             data-gap="none"
@@ -91,7 +91,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             <button
               aria-describedby=":r17:-loading-announcement"
               aria-labelledby=":r16:"
-              class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+              class="types__StyledButton-sc-ws60qy-0 kQRupk"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -122,7 +122,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             </button>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="s"
               id=":r16:"
               popover="auto"
@@ -132,7 +132,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             <button
               aria-describedby=":r19:-loading-announcement"
               aria-labelledby=":r18:"
-              class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+              class="types__StyledButton-sc-ws60qy-0 kQRupk"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -160,7 +160,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             </button>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="s"
               id=":r18:"
               popover="auto"
@@ -170,7 +170,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             <button
               aria-describedby=":r1b:-loading-announcement"
               aria-labelledby=":r1a:"
-              class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+              class="types__StyledButton-sc-ws60qy-0 kQRupk"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -198,7 +198,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             </button>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="s"
               id=":r1a:"
               popover="auto"
@@ -212,7 +212,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
         class="flex flex-1 flex-col items-center justify-center p-8 min-h-screen"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="vertical"
           data-justify="start"
@@ -251,7 +251,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
     >
       <button
         aria-describedby=":r15:-loading-announcement"
-        class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+        class="types__StyledButton-sc-ws60qy-0 kQRupk"
         data-loading="false"
         data-no-visuals="true"
         data-testid="account-profile"
@@ -260,7 +260,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
         type="button"
       >
         <span
-          class="Box-sc-g0xbh4-0 lbSBsX"
+          class="Box-sc-g0xbh4-0 srpGE"
           data-component="buttonContent"
           sx="[object Object]"
         >
@@ -268,7 +268,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-component="text"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -278,7 +278,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             >
               <img
                 alt=""
-                class="Avatar__StyledAvatar-sc-2lv0r8-0 dMhEzR"
+                class="Avatar__StyledAvatar-sc-2lv0r8-0 kuZlm"
                 data-component="Avatar"
                 height="16"
                 size="16"
@@ -287,7 +287,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 width="16"
               />
               <span
-                class="Text-sc-17v1xeu-0 gCQeDW"
+                class="Text-sc-17v1xeu-0 hmAFGJ"
               >
                 @
                 octocat
@@ -295,20 +295,20 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             </div>
           </span>
           <span
-            class="Box-sc-g0xbh4-0 bPvALJ"
+            class="Box-sc-g0xbh4-0 mhHOW"
             data-component="trailingVisual"
             sx="[object Object]"
           >
             <span
               aria-hidden="true"
-              class="Box-sc-g0xbh4-0 dZZxCI"
+              class="Box-sc-g0xbh4-0 bfvZWv"
               data-component="ButtonCounter"
               sx="[object Object]"
             >
               0
             </span>
             <span
-              class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 ajbWx"
+              class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 hxuUuW"
             >
                (
               0
@@ -321,7 +321,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
         class="flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-80"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -332,7 +332,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           <button
             aria-describedby=":r17:-loading-announcement"
             aria-labelledby=":r16:"
-            class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+            class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
@@ -363,7 +363,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           </button>
           <span
             aria-hidden="true"
-            class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
             data-direction="s"
             id=":r16:"
             popover="auto"
@@ -373,7 +373,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           <button
             aria-describedby=":r19:-loading-announcement"
             aria-labelledby=":r18:"
-            class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+            class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
@@ -401,7 +401,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           </button>
           <span
             aria-hidden="true"
-            class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
             data-direction="s"
             id=":r18:"
             popover="auto"
@@ -411,7 +411,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           <button
             aria-describedby=":r1b:-loading-announcement"
             aria-labelledby=":r1a:"
-            class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+            class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
@@ -439,7 +439,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           </button>
           <span
             aria-hidden="true"
-            class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
             data-direction="s"
             id=":r1a:"
             popover="auto"
@@ -453,7 +453,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
       class="flex flex-1 flex-col items-center justify-center p-8 min-h-screen"
     >
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
         data-align="center"
         data-direction="vertical"
         data-justify="start"
@@ -549,7 +549,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
       >
         <button
           aria-describedby=":r7:-loading-announcement"
-          class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+          class="types__StyledButton-sc-ws60qy-0 kQRupk"
           data-loading="false"
           data-no-visuals="true"
           data-testid="account-profile"
@@ -558,7 +558,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           type="button"
         >
           <span
-            class="Box-sc-g0xbh4-0 lbSBsX"
+            class="Box-sc-g0xbh4-0 srpGE"
             data-component="buttonContent"
             sx="[object Object]"
           >
@@ -566,7 +566,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               data-component="text"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -576,7 +576,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               >
                 <img
                   alt=""
-                  class="Avatar__StyledAvatar-sc-2lv0r8-0 dMhEzR"
+                  class="Avatar__StyledAvatar-sc-2lv0r8-0 kuZlm"
                   data-component="Avatar"
                   height="16"
                   size="16"
@@ -585,7 +585,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                   width="16"
                 />
                 <span
-                  class="Text-sc-17v1xeu-0 gCQeDW"
+                  class="Text-sc-17v1xeu-0 hmAFGJ"
                 >
                   @
                   octocat
@@ -593,20 +593,20 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               </div>
             </span>
             <span
-              class="Box-sc-g0xbh4-0 bPvALJ"
+              class="Box-sc-g0xbh4-0 mhHOW"
               data-component="trailingVisual"
               sx="[object Object]"
             >
               <span
                 aria-hidden="true"
-                class="Box-sc-g0xbh4-0 dZZxCI"
+                class="Box-sc-g0xbh4-0 bfvZWv"
                 data-component="ButtonCounter"
                 sx="[object Object]"
               >
                 2
               </span>
               <span
-                class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 ajbWx"
+                class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 hxuUuW"
               >
                  (
                 2
@@ -619,7 +619,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           class="flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-80"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
             data-gap="none"
@@ -630,7 +630,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             <button
               aria-describedby=":r9:-loading-announcement"
               aria-labelledby=":r8:"
-              class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+              class="types__StyledButton-sc-ws60qy-0 kQRupk"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -661,7 +661,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             </button>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="s"
               id=":r8:"
               popover="auto"
@@ -671,7 +671,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             <button
               aria-describedby=":rb:-loading-announcement"
               aria-labelledby=":ra:"
-              class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+              class="types__StyledButton-sc-ws60qy-0 kQRupk"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -699,7 +699,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             </button>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="s"
               id=":ra:"
               popover="auto"
@@ -709,7 +709,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             <button
               aria-describedby=":rd:-loading-announcement"
               aria-labelledby=":rc:"
-              class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+              class="types__StyledButton-sc-ws60qy-0 kQRupk"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -737,7 +737,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             </button>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="s"
               id=":rc:"
               popover="auto"
@@ -756,7 +756,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
         >
           <span
             aria-label="Open Issue"
-            class="Tooltip__TooltipBase-sc-17tf59c-0 rtmEP tooltipped-e"
+            class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-e"
             id=":re:"
             role="tooltip"
           >
@@ -786,7 +786,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
         >
           <span
             aria-label="View repository: gitify-app/notifications-test"
-            class="Tooltip__TooltipBase-sc-17tf59c-0 rtmEP tooltipped-se"
+            class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-se"
             id=":rf:"
             role="tooltip"
           >
@@ -794,7 +794,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               data-testid="view-repository"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -804,7 +804,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               >
                 <img
                   alt=""
-                  class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
+                  class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
                   data-component="Avatar"
                   height="14"
                   size="14"
@@ -839,7 +839,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           >
             <img
               alt=""
-              class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
+              class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
               data-component="Avatar"
               data-testid="view-profile"
               height="14"
@@ -870,7 +870,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 type="button"
               >
                 <div
-                  class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                   data-align="center"
                   data-direction="horizontal"
                   data-gap="condensed"
@@ -895,7 +895,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                     />
                   </svg>
                   <span
-                    class="Text-sc-17v1xeu-0 gCQeDW"
+                    class="Text-sc-17v1xeu-0 hmAFGJ"
                   >
                     1
                   </span>
@@ -907,7 +907,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 type="button"
               >
                 <div
-                  class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                   data-align="center"
                   data-direction="horizontal"
                   data-gap="condensed"
@@ -932,7 +932,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                     />
                   </svg>
                   <span
-                    class="Text-sc-17v1xeu-0 gCQeDW"
+                    class="Text-sc-17v1xeu-0 hmAFGJ"
                   >
                     1
                   </span>
@@ -945,7 +945,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           class="flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-80"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
             data-gap="none"
@@ -956,7 +956,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             <button
               aria-describedby=":rh:-loading-announcement"
               aria-labelledby=":rg:"
-              class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+              class="types__StyledButton-sc-ws60qy-0 kQRupk"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -984,7 +984,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             </button>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="s"
               id=":rg:"
               popover="auto"
@@ -994,7 +994,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             <button
               aria-describedby=":rj:-loading-announcement"
               aria-labelledby=":ri:"
-              class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+              class="types__StyledButton-sc-ws60qy-0 kQRupk"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -1022,7 +1022,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             </button>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="s"
               id=":ri:"
               popover="auto"
@@ -1032,7 +1032,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             <button
               aria-describedby=":rl:-loading-announcement"
               aria-labelledby=":rk:"
-              class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+              class="types__StyledButton-sc-ws60qy-0 kQRupk"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -1060,7 +1060,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             </button>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="s"
               id=":rk:"
               popover="auto"
@@ -1079,7 +1079,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
         >
           <span
             aria-label=" Issue"
-            class="Tooltip__TooltipBase-sc-17tf59c-0 rtmEP tooltipped-e"
+            class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-e"
             id=":rm:"
             role="tooltip"
           >
@@ -1109,7 +1109,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
         >
           <span
             aria-label="View repository: gitify-app/notifications-test"
-            class="Tooltip__TooltipBase-sc-17tf59c-0 rtmEP tooltipped-se"
+            class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-se"
             id=":rn:"
             role="tooltip"
           >
@@ -1117,7 +1117,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               data-testid="view-repository"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -1127,7 +1127,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               >
                 <img
                   alt=""
-                  class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
+                  class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
                   data-component="Avatar"
                   height="14"
                   size="14"
@@ -1197,7 +1197,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           class="flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-80"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
             data-gap="none"
@@ -1208,7 +1208,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             <button
               aria-describedby=":rp:-loading-announcement"
               aria-labelledby=":ro:"
-              class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+              class="types__StyledButton-sc-ws60qy-0 kQRupk"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -1236,7 +1236,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             </button>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="s"
               id=":ro:"
               popover="auto"
@@ -1246,7 +1246,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             <button
               aria-describedby=":rr:-loading-announcement"
               aria-labelledby=":rq:"
-              class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+              class="types__StyledButton-sc-ws60qy-0 kQRupk"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -1274,7 +1274,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             </button>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="s"
               id=":rq:"
               popover="auto"
@@ -1284,7 +1284,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             <button
               aria-describedby=":rt:-loading-announcement"
               aria-labelledby=":rs:"
-              class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+              class="types__StyledButton-sc-ws60qy-0 kQRupk"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -1312,7 +1312,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             </button>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="s"
               id=":rs:"
               popover="auto"
@@ -1330,7 +1330,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
     >
       <button
         aria-describedby=":r7:-loading-announcement"
-        class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+        class="types__StyledButton-sc-ws60qy-0 kQRupk"
         data-loading="false"
         data-no-visuals="true"
         data-testid="account-profile"
@@ -1339,7 +1339,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
         type="button"
       >
         <span
-          class="Box-sc-g0xbh4-0 lbSBsX"
+          class="Box-sc-g0xbh4-0 srpGE"
           data-component="buttonContent"
           sx="[object Object]"
         >
@@ -1347,7 +1347,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-component="text"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -1357,7 +1357,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             >
               <img
                 alt=""
-                class="Avatar__StyledAvatar-sc-2lv0r8-0 dMhEzR"
+                class="Avatar__StyledAvatar-sc-2lv0r8-0 kuZlm"
                 data-component="Avatar"
                 height="16"
                 size="16"
@@ -1366,7 +1366,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 width="16"
               />
               <span
-                class="Text-sc-17v1xeu-0 gCQeDW"
+                class="Text-sc-17v1xeu-0 hmAFGJ"
               >
                 @
                 octocat
@@ -1374,20 +1374,20 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             </div>
           </span>
           <span
-            class="Box-sc-g0xbh4-0 bPvALJ"
+            class="Box-sc-g0xbh4-0 mhHOW"
             data-component="trailingVisual"
             sx="[object Object]"
           >
             <span
               aria-hidden="true"
-              class="Box-sc-g0xbh4-0 dZZxCI"
+              class="Box-sc-g0xbh4-0 bfvZWv"
               data-component="ButtonCounter"
               sx="[object Object]"
             >
               2
             </span>
             <span
-              class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 ajbWx"
+              class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 hxuUuW"
             >
                (
               2
@@ -1400,7 +1400,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
         class="flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-80"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -1411,7 +1411,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           <button
             aria-describedby=":r9:-loading-announcement"
             aria-labelledby=":r8:"
-            class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+            class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
@@ -1442,7 +1442,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           </button>
           <span
             aria-hidden="true"
-            class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
             data-direction="s"
             id=":r8:"
             popover="auto"
@@ -1452,7 +1452,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           <button
             aria-describedby=":rb:-loading-announcement"
             aria-labelledby=":ra:"
-            class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+            class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
@@ -1480,7 +1480,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           </button>
           <span
             aria-hidden="true"
-            class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
             data-direction="s"
             id=":ra:"
             popover="auto"
@@ -1490,7 +1490,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           <button
             aria-describedby=":rd:-loading-announcement"
             aria-labelledby=":rc:"
-            class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+            class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
@@ -1518,7 +1518,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           </button>
           <span
             aria-hidden="true"
-            class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
             data-direction="s"
             id=":rc:"
             popover="auto"
@@ -1537,7 +1537,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
       >
         <span
           aria-label="Open Issue"
-          class="Tooltip__TooltipBase-sc-17tf59c-0 rtmEP tooltipped-e"
+          class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-e"
           id=":re:"
           role="tooltip"
         >
@@ -1567,7 +1567,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
       >
         <span
           aria-label="View repository: gitify-app/notifications-test"
-          class="Tooltip__TooltipBase-sc-17tf59c-0 rtmEP tooltipped-se"
+          class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-se"
           id=":rf:"
           role="tooltip"
         >
@@ -1575,7 +1575,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-testid="view-repository"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -1585,7 +1585,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             >
               <img
                 alt=""
-                class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
+                class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
                 data-component="Avatar"
                 height="14"
                 size="14"
@@ -1620,7 +1620,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
         >
           <img
             alt=""
-            class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
+            class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
             data-component="Avatar"
             data-testid="view-profile"
             height="14"
@@ -1651,7 +1651,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               type="button"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -1676,7 +1676,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                   />
                 </svg>
                 <span
-                  class="Text-sc-17v1xeu-0 gCQeDW"
+                  class="Text-sc-17v1xeu-0 hmAFGJ"
                 >
                   1
                 </span>
@@ -1688,7 +1688,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               type="button"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -1713,7 +1713,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                   />
                 </svg>
                 <span
-                  class="Text-sc-17v1xeu-0 gCQeDW"
+                  class="Text-sc-17v1xeu-0 hmAFGJ"
                 >
                   1
                 </span>
@@ -1726,7 +1726,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
         class="flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-80"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -1737,7 +1737,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           <button
             aria-describedby=":rh:-loading-announcement"
             aria-labelledby=":rg:"
-            class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+            class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
@@ -1765,7 +1765,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           </button>
           <span
             aria-hidden="true"
-            class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
             data-direction="s"
             id=":rg:"
             popover="auto"
@@ -1775,7 +1775,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           <button
             aria-describedby=":rj:-loading-announcement"
             aria-labelledby=":ri:"
-            class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+            class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
@@ -1803,7 +1803,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           </button>
           <span
             aria-hidden="true"
-            class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
             data-direction="s"
             id=":ri:"
             popover="auto"
@@ -1813,7 +1813,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           <button
             aria-describedby=":rl:-loading-announcement"
             aria-labelledby=":rk:"
-            class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+            class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
@@ -1841,7 +1841,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           </button>
           <span
             aria-hidden="true"
-            class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
             data-direction="s"
             id=":rk:"
             popover="auto"
@@ -1860,7 +1860,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
       >
         <span
           aria-label=" Issue"
-          class="Tooltip__TooltipBase-sc-17tf59c-0 rtmEP tooltipped-e"
+          class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-e"
           id=":rm:"
           role="tooltip"
         >
@@ -1890,7 +1890,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
       >
         <span
           aria-label="View repository: gitify-app/notifications-test"
-          class="Tooltip__TooltipBase-sc-17tf59c-0 rtmEP tooltipped-se"
+          class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-se"
           id=":rn:"
           role="tooltip"
         >
@@ -1898,7 +1898,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-testid="view-repository"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -1908,7 +1908,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             >
               <img
                 alt=""
-                class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
+                class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
                 data-component="Avatar"
                 height="14"
                 size="14"
@@ -1978,7 +1978,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
         class="flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-80"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -1989,7 +1989,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           <button
             aria-describedby=":rp:-loading-announcement"
             aria-labelledby=":ro:"
-            class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+            class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
@@ -2017,7 +2017,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           </button>
           <span
             aria-hidden="true"
-            class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
             data-direction="s"
             id=":ro:"
             popover="auto"
@@ -2027,7 +2027,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           <button
             aria-describedby=":rr:-loading-announcement"
             aria-labelledby=":rq:"
-            class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+            class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
@@ -2055,7 +2055,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           </button>
           <span
             aria-hidden="true"
-            class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
             data-direction="s"
             id=":rq:"
             popover="auto"
@@ -2065,7 +2065,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           <button
             aria-describedby=":rt:-loading-announcement"
             aria-labelledby=":rs:"
-            class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+            class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
@@ -2093,7 +2093,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           </button>
           <span
             aria-hidden="true"
-            class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
             data-direction="s"
             id=":rs:"
             popover="auto"
@@ -2168,7 +2168,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
       >
         <button
           aria-describedby=":r0:-loading-announcement"
-          class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+          class="types__StyledButton-sc-ws60qy-0 kQRupk"
           data-loading="false"
           data-no-visuals="true"
           data-testid="account-profile"
@@ -2177,7 +2177,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           type="button"
         >
           <span
-            class="Box-sc-g0xbh4-0 lbSBsX"
+            class="Box-sc-g0xbh4-0 srpGE"
             data-component="buttonContent"
             sx="[object Object]"
           >
@@ -2185,7 +2185,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               data-component="text"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -2195,7 +2195,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               >
                 <img
                   alt=""
-                  class="Avatar__StyledAvatar-sc-2lv0r8-0 dMhEzR"
+                  class="Avatar__StyledAvatar-sc-2lv0r8-0 kuZlm"
                   data-component="Avatar"
                   height="16"
                   size="16"
@@ -2204,7 +2204,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                   width="16"
                 />
                 <span
-                  class="Text-sc-17v1xeu-0 gCQeDW"
+                  class="Text-sc-17v1xeu-0 hmAFGJ"
                 >
                   @
                   octocat
@@ -2212,20 +2212,20 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               </div>
             </span>
             <span
-              class="Box-sc-g0xbh4-0 bPvALJ"
+              class="Box-sc-g0xbh4-0 mhHOW"
               data-component="trailingVisual"
               sx="[object Object]"
             >
               <span
                 aria-hidden="true"
-                class="Box-sc-g0xbh4-0 dZZxCI"
+                class="Box-sc-g0xbh4-0 bfvZWv"
                 data-component="ButtonCounter"
                 sx="[object Object]"
               >
                 2
               </span>
               <span
-                class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 ajbWx"
+                class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 hxuUuW"
               >
                  (
                 2
@@ -2238,7 +2238,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           class="flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-80"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
             data-gap="none"
@@ -2249,7 +2249,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             <button
               aria-describedby=":r2:-loading-announcement"
               aria-labelledby=":r1:"
-              class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+              class="types__StyledButton-sc-ws60qy-0 kQRupk"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -2280,7 +2280,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             </button>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="s"
               id=":r1:"
               popover="auto"
@@ -2290,7 +2290,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             <button
               aria-describedby=":r4:-loading-announcement"
               aria-labelledby=":r3:"
-              class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+              class="types__StyledButton-sc-ws60qy-0 kQRupk"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -2318,7 +2318,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             </button>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="s"
               id=":r3:"
               popover="auto"
@@ -2328,7 +2328,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             <button
               aria-describedby=":r6:-loading-announcement"
               aria-labelledby=":r5:"
-              class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+              class="types__StyledButton-sc-ws60qy-0 kQRupk"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -2356,7 +2356,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             </button>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="s"
               id=":r5:"
               popover="auto"
@@ -2377,7 +2377,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
     >
       <button
         aria-describedby=":r0:-loading-announcement"
-        class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+        class="types__StyledButton-sc-ws60qy-0 kQRupk"
         data-loading="false"
         data-no-visuals="true"
         data-testid="account-profile"
@@ -2386,7 +2386,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
         type="button"
       >
         <span
-          class="Box-sc-g0xbh4-0 lbSBsX"
+          class="Box-sc-g0xbh4-0 srpGE"
           data-component="buttonContent"
           sx="[object Object]"
         >
@@ -2394,7 +2394,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-component="text"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -2404,7 +2404,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             >
               <img
                 alt=""
-                class="Avatar__StyledAvatar-sc-2lv0r8-0 dMhEzR"
+                class="Avatar__StyledAvatar-sc-2lv0r8-0 kuZlm"
                 data-component="Avatar"
                 height="16"
                 size="16"
@@ -2413,7 +2413,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 width="16"
               />
               <span
-                class="Text-sc-17v1xeu-0 gCQeDW"
+                class="Text-sc-17v1xeu-0 hmAFGJ"
               >
                 @
                 octocat
@@ -2421,20 +2421,20 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             </div>
           </span>
           <span
-            class="Box-sc-g0xbh4-0 bPvALJ"
+            class="Box-sc-g0xbh4-0 mhHOW"
             data-component="trailingVisual"
             sx="[object Object]"
           >
             <span
               aria-hidden="true"
-              class="Box-sc-g0xbh4-0 dZZxCI"
+              class="Box-sc-g0xbh4-0 bfvZWv"
               data-component="ButtonCounter"
               sx="[object Object]"
             >
               2
             </span>
             <span
-              class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 ajbWx"
+              class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 hxuUuW"
             >
                (
               2
@@ -2447,7 +2447,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
         class="flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-80"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -2458,7 +2458,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           <button
             aria-describedby=":r2:-loading-announcement"
             aria-labelledby=":r1:"
-            class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+            class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
@@ -2489,7 +2489,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           </button>
           <span
             aria-hidden="true"
-            class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
             data-direction="s"
             id=":r1:"
             popover="auto"
@@ -2499,7 +2499,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           <button
             aria-describedby=":r4:-loading-announcement"
             aria-labelledby=":r3:"
-            class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+            class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
@@ -2527,7 +2527,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           </button>
           <span
             aria-hidden="true"
-            class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
             data-direction="s"
             id=":r3:"
             popover="auto"
@@ -2537,7 +2537,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           <button
             aria-describedby=":r6:-loading-announcement"
             aria-labelledby=":r5:"
-            class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+            class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
@@ -2565,7 +2565,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           </button>
           <span
             aria-hidden="true"
-            class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
             data-direction="s"
             id=":r5:"
             popover="auto"
@@ -2643,7 +2643,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
       >
         <button
           aria-describedby=":ru:-loading-announcement"
-          class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+          class="types__StyledButton-sc-ws60qy-0 kQRupk"
           data-loading="false"
           data-no-visuals="true"
           data-testid="account-profile"
@@ -2652,7 +2652,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           type="button"
         >
           <span
-            class="Box-sc-g0xbh4-0 lbSBsX"
+            class="Box-sc-g0xbh4-0 srpGE"
             data-component="buttonContent"
             sx="[object Object]"
           >
@@ -2660,7 +2660,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               data-component="text"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -2670,7 +2670,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               >
                 <img
                   alt=""
-                  class="Avatar__StyledAvatar-sc-2lv0r8-0 dMhEzR"
+                  class="Avatar__StyledAvatar-sc-2lv0r8-0 kuZlm"
                   data-component="Avatar"
                   height="16"
                   size="16"
@@ -2679,7 +2679,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                   width="16"
                 />
                 <span
-                  class="Text-sc-17v1xeu-0 gCQeDW"
+                  class="Text-sc-17v1xeu-0 hmAFGJ"
                 >
                   @
                   octocat
@@ -2687,20 +2687,20 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               </div>
             </span>
             <span
-              class="Box-sc-g0xbh4-0 bPvALJ"
+              class="Box-sc-g0xbh4-0 mhHOW"
               data-component="trailingVisual"
               sx="[object Object]"
             >
               <span
                 aria-hidden="true"
-                class="Box-sc-g0xbh4-0 dZZxCI"
+                class="Box-sc-g0xbh4-0 bfvZWv"
                 data-component="ButtonCounter"
                 sx="[object Object]"
               >
                 0
               </span>
               <span
-                class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 ajbWx"
+                class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 hxuUuW"
               >
                  (
                 0
@@ -2713,7 +2713,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           class="flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-80"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
             data-gap="none"
@@ -2724,7 +2724,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             <button
               aria-describedby=":r10:-loading-announcement"
               aria-labelledby=":rv:"
-              class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+              class="types__StyledButton-sc-ws60qy-0 kQRupk"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -2755,7 +2755,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             </button>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="s"
               id=":rv:"
               popover="auto"
@@ -2765,7 +2765,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             <button
               aria-describedby=":r12:-loading-announcement"
               aria-labelledby=":r11:"
-              class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+              class="types__StyledButton-sc-ws60qy-0 kQRupk"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -2793,7 +2793,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             </button>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="s"
               id=":r11:"
               popover="auto"
@@ -2803,7 +2803,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             <button
               aria-describedby=":r14:-loading-announcement"
               aria-labelledby=":r13:"
-              class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+              class="types__StyledButton-sc-ws60qy-0 kQRupk"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -2831,7 +2831,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             </button>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="s"
               id=":r13:"
               popover="auto"
@@ -2845,7 +2845,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
         class="flex flex-1 flex-col items-center justify-center p-8 min-h-screen"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="vertical"
           data-justify="start"
@@ -2879,7 +2879,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
     >
       <button
         aria-describedby=":ru:-loading-announcement"
-        class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+        class="types__StyledButton-sc-ws60qy-0 kQRupk"
         data-loading="false"
         data-no-visuals="true"
         data-testid="account-profile"
@@ -2888,7 +2888,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
         type="button"
       >
         <span
-          class="Box-sc-g0xbh4-0 lbSBsX"
+          class="Box-sc-g0xbh4-0 srpGE"
           data-component="buttonContent"
           sx="[object Object]"
         >
@@ -2896,7 +2896,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-component="text"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -2906,7 +2906,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             >
               <img
                 alt=""
-                class="Avatar__StyledAvatar-sc-2lv0r8-0 dMhEzR"
+                class="Avatar__StyledAvatar-sc-2lv0r8-0 kuZlm"
                 data-component="Avatar"
                 height="16"
                 size="16"
@@ -2915,7 +2915,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 width="16"
               />
               <span
-                class="Text-sc-17v1xeu-0 gCQeDW"
+                class="Text-sc-17v1xeu-0 hmAFGJ"
               >
                 @
                 octocat
@@ -2923,20 +2923,20 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             </div>
           </span>
           <span
-            class="Box-sc-g0xbh4-0 bPvALJ"
+            class="Box-sc-g0xbh4-0 mhHOW"
             data-component="trailingVisual"
             sx="[object Object]"
           >
             <span
               aria-hidden="true"
-              class="Box-sc-g0xbh4-0 dZZxCI"
+              class="Box-sc-g0xbh4-0 bfvZWv"
               data-component="ButtonCounter"
               sx="[object Object]"
             >
               0
             </span>
             <span
-              class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 ajbWx"
+              class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 hxuUuW"
             >
                (
               0
@@ -2949,7 +2949,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
         class="flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-80"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -2960,7 +2960,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           <button
             aria-describedby=":r10:-loading-announcement"
             aria-labelledby=":rv:"
-            class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+            class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
@@ -2991,7 +2991,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           </button>
           <span
             aria-hidden="true"
-            class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
             data-direction="s"
             id=":rv:"
             popover="auto"
@@ -3001,7 +3001,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           <button
             aria-describedby=":r12:-loading-announcement"
             aria-labelledby=":r11:"
-            class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+            class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
@@ -3029,7 +3029,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           </button>
           <span
             aria-hidden="true"
-            class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
             data-direction="s"
             id=":r11:"
             popover="auto"
@@ -3039,7 +3039,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           <button
             aria-describedby=":r14:-loading-announcement"
             aria-labelledby=":r13:"
-            class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+            class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
@@ -3067,7 +3067,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           </button>
           <span
             aria-hidden="true"
-            class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
             data-direction="s"
             id=":r13:"
             popover="auto"
@@ -3081,7 +3081,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
       class="flex flex-1 flex-col items-center justify-center p-8 min-h-screen"
     >
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
         data-align="center"
         data-direction="vertical"
         data-justify="start"
@@ -3172,7 +3172,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
       >
         <button
           aria-describedby=":r21:-loading-announcement"
-          class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+          class="types__StyledButton-sc-ws60qy-0 kQRupk"
           data-loading="false"
           data-no-visuals="true"
           data-testid="account-profile"
@@ -3181,7 +3181,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
           type="button"
         >
           <span
-            class="Box-sc-g0xbh4-0 lbSBsX"
+            class="Box-sc-g0xbh4-0 srpGE"
             data-component="buttonContent"
             sx="[object Object]"
           >
@@ -3189,7 +3189,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
               data-component="text"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -3199,7 +3199,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
               >
                 <img
                   alt=""
-                  class="Avatar__StyledAvatar-sc-2lv0r8-0 dMhEzR"
+                  class="Avatar__StyledAvatar-sc-2lv0r8-0 kuZlm"
                   data-component="Avatar"
                   height="16"
                   size="16"
@@ -3208,7 +3208,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
                   width="16"
                 />
                 <span
-                  class="Text-sc-17v1xeu-0 gCQeDW"
+                  class="Text-sc-17v1xeu-0 hmAFGJ"
                 >
                   @
                   octocat
@@ -3216,20 +3216,20 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
               </div>
             </span>
             <span
-              class="Box-sc-g0xbh4-0 bPvALJ"
+              class="Box-sc-g0xbh4-0 mhHOW"
               data-component="trailingVisual"
               sx="[object Object]"
             >
               <span
                 aria-hidden="true"
-                class="Box-sc-g0xbh4-0 dZZxCI"
+                class="Box-sc-g0xbh4-0 bfvZWv"
                 data-component="ButtonCounter"
                 sx="[object Object]"
               >
                 2
               </span>
               <span
-                class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 ajbWx"
+                class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 hxuUuW"
               >
                  (
                 2
@@ -3242,7 +3242,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
           class="flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-80"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
             data-gap="none"
@@ -3253,7 +3253,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
             <button
               aria-describedby=":r23:-loading-announcement"
               aria-labelledby=":r22:"
-              class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+              class="types__StyledButton-sc-ws60qy-0 kQRupk"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -3284,7 +3284,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
             </button>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="s"
               id=":r22:"
               popover="auto"
@@ -3294,7 +3294,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
             <button
               aria-describedby=":r25:-loading-announcement"
               aria-labelledby=":r24:"
-              class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+              class="types__StyledButton-sc-ws60qy-0 kQRupk"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -3322,7 +3322,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
             </button>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="s"
               id=":r24:"
               popover="auto"
@@ -3332,7 +3332,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
             <button
               aria-describedby=":r27:-loading-announcement"
               aria-labelledby=":r26:"
-              class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+              class="types__StyledButton-sc-ws60qy-0 kQRupk"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -3360,7 +3360,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
             </button>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="s"
               id=":r26:"
               popover="auto"
@@ -3377,7 +3377,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
       >
         <button
           aria-describedby=":r28:-loading-announcement"
-          class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+          class="types__StyledButton-sc-ws60qy-0 kQRupk"
           data-loading="false"
           data-no-visuals="true"
           data-testid="account-profile"
@@ -3386,7 +3386,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
           type="button"
         >
           <span
-            class="Box-sc-g0xbh4-0 lbSBsX"
+            class="Box-sc-g0xbh4-0 srpGE"
             data-component="buttonContent"
             sx="[object Object]"
           >
@@ -3394,7 +3394,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
               data-component="text"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -3404,7 +3404,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
               >
                 <img
                   alt=""
-                  class="Avatar__StyledAvatar-sc-2lv0r8-0 dMhEzR"
+                  class="Avatar__StyledAvatar-sc-2lv0r8-0 kuZlm"
                   data-component="Avatar"
                   height="16"
                   size="16"
@@ -3413,7 +3413,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
                   width="16"
                 />
                 <span
-                  class="Text-sc-17v1xeu-0 gCQeDW"
+                  class="Text-sc-17v1xeu-0 hmAFGJ"
                 >
                   @
                   octocat
@@ -3421,20 +3421,20 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
               </div>
             </span>
             <span
-              class="Box-sc-g0xbh4-0 bPvALJ"
+              class="Box-sc-g0xbh4-0 mhHOW"
               data-component="trailingVisual"
               sx="[object Object]"
             >
               <span
                 aria-hidden="true"
-                class="Box-sc-g0xbh4-0 dZZxCI"
+                class="Box-sc-g0xbh4-0 bfvZWv"
                 data-component="ButtonCounter"
                 sx="[object Object]"
               >
                 2
               </span>
               <span
-                class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 ajbWx"
+                class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 hxuUuW"
               >
                  (
                 2
@@ -3447,7 +3447,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
           class="flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-80"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
             data-gap="none"
@@ -3458,7 +3458,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
             <button
               aria-describedby=":r2a:-loading-announcement"
               aria-labelledby=":r29:"
-              class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+              class="types__StyledButton-sc-ws60qy-0 kQRupk"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -3489,7 +3489,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
             </button>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="s"
               id=":r29:"
               popover="auto"
@@ -3499,7 +3499,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
             <button
               aria-describedby=":r2c:-loading-announcement"
               aria-labelledby=":r2b:"
-              class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+              class="types__StyledButton-sc-ws60qy-0 kQRupk"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -3527,7 +3527,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
             </button>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="s"
               id=":r2b:"
               popover="auto"
@@ -3537,7 +3537,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
             <button
               aria-describedby=":r2e:-loading-announcement"
               aria-labelledby=":r2d:"
-              class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+              class="types__StyledButton-sc-ws60qy-0 kQRupk"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -3565,7 +3565,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
             </button>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="s"
               id=":r2d:"
               popover="auto"
@@ -3586,7 +3586,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
     >
       <button
         aria-describedby=":r28:-loading-announcement"
-        class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+        class="types__StyledButton-sc-ws60qy-0 kQRupk"
         data-loading="false"
         data-no-visuals="true"
         data-testid="account-profile"
@@ -3595,7 +3595,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
         type="button"
       >
         <span
-          class="Box-sc-g0xbh4-0 lbSBsX"
+          class="Box-sc-g0xbh4-0 srpGE"
           data-component="buttonContent"
           sx="[object Object]"
         >
@@ -3603,7 +3603,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
             data-component="text"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -3613,7 +3613,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
             >
               <img
                 alt=""
-                class="Avatar__StyledAvatar-sc-2lv0r8-0 dMhEzR"
+                class="Avatar__StyledAvatar-sc-2lv0r8-0 kuZlm"
                 data-component="Avatar"
                 height="16"
                 size="16"
@@ -3622,7 +3622,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
                 width="16"
               />
               <span
-                class="Text-sc-17v1xeu-0 gCQeDW"
+                class="Text-sc-17v1xeu-0 hmAFGJ"
               >
                 @
                 octocat
@@ -3630,20 +3630,20 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
             </div>
           </span>
           <span
-            class="Box-sc-g0xbh4-0 bPvALJ"
+            class="Box-sc-g0xbh4-0 mhHOW"
             data-component="trailingVisual"
             sx="[object Object]"
           >
             <span
               aria-hidden="true"
-              class="Box-sc-g0xbh4-0 dZZxCI"
+              class="Box-sc-g0xbh4-0 bfvZWv"
               data-component="ButtonCounter"
               sx="[object Object]"
             >
               2
             </span>
             <span
-              class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 ajbWx"
+              class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 hxuUuW"
             >
                (
               2
@@ -3656,7 +3656,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
         class="flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-80"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -3667,7 +3667,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
           <button
             aria-describedby=":r2a:-loading-announcement"
             aria-labelledby=":r29:"
-            class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+            class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
@@ -3698,7 +3698,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
           </button>
           <span
             aria-hidden="true"
-            class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
             data-direction="s"
             id=":r29:"
             popover="auto"
@@ -3708,7 +3708,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
           <button
             aria-describedby=":r2c:-loading-announcement"
             aria-labelledby=":r2b:"
-            class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+            class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
@@ -3736,7 +3736,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
           </button>
           <span
             aria-hidden="true"
-            class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
             data-direction="s"
             id=":r2b:"
             popover="auto"
@@ -3746,7 +3746,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
           <button
             aria-describedby=":r2e:-loading-announcement"
             aria-labelledby=":r2d:"
-            class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+            class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
@@ -3774,7 +3774,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
           </button>
           <span
             aria-hidden="true"
-            class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
             data-direction="s"
             id=":r2d:"
             popover="auto"

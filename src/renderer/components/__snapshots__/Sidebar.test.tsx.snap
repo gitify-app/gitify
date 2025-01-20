@@ -4,7 +4,7 @@ exports[`renderer/components/Sidebar.tsx notifications icon renders correct icon
 <button
   aria-describedby=":r1f:-loading-announcement :r1e:"
   aria-label="Notifications"
-  class="types__StyledButton-sc-ws60qy-0 itTBlA"
+  class="types__StyledButton-sc-ws60qy-0 ffHjIj"
   data-component="IconButton"
   data-loading="false"
   data-no-visuals="true"
@@ -36,7 +36,7 @@ exports[`renderer/components/Sidebar.tsx notifications icon renders correct icon
 <button
   aria-describedby=":r1t:-loading-announcement :r1s:"
   aria-label="Notifications"
-  class="types__StyledButton-sc-ws60qy-0 itTBlA"
+  class="types__StyledButton-sc-ws60qy-0 ffHjIj"
   data-component="IconButton"
   data-loading="false"
   data-no-visuals="true"
@@ -76,7 +76,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
           class="flex flex-1 flex-col"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="vertical"
             data-gap="condensed"
@@ -87,7 +87,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
             <button
               aria-describedby=":r1:-loading-announcement :r0:"
               aria-label="Gitify"
-              class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+              class="types__StyledButton-sc-ws60qy-0 kQRupk"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -142,7 +142,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
               </svg>
             </button>
             <span
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="e"
               id=":r0:"
               popover="auto"
@@ -153,7 +153,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
             <button
               aria-describedby=":r3:-loading-announcement :r2:"
               aria-label="Notifications"
-              class="types__StyledButton-sc-ws60qy-0 ghurFZ"
+              class="types__StyledButton-sc-ws60qy-0 hBssey"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -180,7 +180,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
               </svg>
             </button>
             <span
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="e"
               id=":r2:"
               popover="auto"
@@ -191,7 +191,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
             <button
               aria-describedby=":r5:-loading-announcement"
               aria-labelledby=":r4:"
-              class="types__StyledButton-sc-ws60qy-0 itTBlA"
+              class="types__StyledButton-sc-ws60qy-0 ffHjIj"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -222,7 +222,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
             </button>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="e"
               id=":r4:"
               popover="auto"
@@ -232,7 +232,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
             <button
               aria-describedby=":r7:-loading-announcement"
               aria-labelledby=":r6:"
-              class="types__StyledButton-sc-ws60qy-0 itTBlA"
+              class="types__StyledButton-sc-ws60qy-0 ffHjIj"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -260,7 +260,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
             </button>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="e"
               id=":r6:"
               popover="auto"
@@ -270,7 +270,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
           </div>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="vertical"
           data-gap="condensed"
@@ -281,7 +281,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
           <button
             aria-describedby=":r9:-loading-announcement"
             aria-labelledby=":r8:"
-            class="types__StyledButton-sc-ws60qy-0 itTBlA"
+            class="types__StyledButton-sc-ws60qy-0 ffHjIj"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
@@ -309,7 +309,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
           </button>
           <span
             aria-hidden="true"
-            class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
             data-direction="e"
             id=":r8:"
             popover="auto"
@@ -328,7 +328,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
         class="flex flex-1 flex-col"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="vertical"
           data-gap="condensed"
@@ -339,7 +339,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
           <button
             aria-describedby=":r1:-loading-announcement :r0:"
             aria-label="Gitify"
-            class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+            class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
@@ -394,7 +394,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
             </svg>
           </button>
           <span
-            class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
             data-direction="e"
             id=":r0:"
             popover="auto"
@@ -405,7 +405,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
           <button
             aria-describedby=":r3:-loading-announcement :r2:"
             aria-label="Notifications"
-            class="types__StyledButton-sc-ws60qy-0 ghurFZ"
+            class="types__StyledButton-sc-ws60qy-0 hBssey"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
@@ -432,7 +432,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
             </svg>
           </button>
           <span
-            class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
             data-direction="e"
             id=":r2:"
             popover="auto"
@@ -443,7 +443,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
           <button
             aria-describedby=":r5:-loading-announcement"
             aria-labelledby=":r4:"
-            class="types__StyledButton-sc-ws60qy-0 itTBlA"
+            class="types__StyledButton-sc-ws60qy-0 ffHjIj"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
@@ -474,7 +474,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
           </button>
           <span
             aria-hidden="true"
-            class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
             data-direction="e"
             id=":r4:"
             popover="auto"
@@ -484,7 +484,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
           <button
             aria-describedby=":r7:-loading-announcement"
             aria-labelledby=":r6:"
-            class="types__StyledButton-sc-ws60qy-0 itTBlA"
+            class="types__StyledButton-sc-ws60qy-0 ffHjIj"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
@@ -512,7 +512,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
           </button>
           <span
             aria-hidden="true"
-            class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
             data-direction="e"
             id=":r6:"
             popover="auto"
@@ -522,7 +522,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
         </div>
       </div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
         data-align="center"
         data-direction="vertical"
         data-gap="condensed"
@@ -533,7 +533,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
         <button
           aria-describedby=":r9:-loading-announcement"
           aria-labelledby=":r8:"
-          class="types__StyledButton-sc-ws60qy-0 itTBlA"
+          class="types__StyledButton-sc-ws60qy-0 ffHjIj"
           data-component="IconButton"
           data-loading="false"
           data-no-visuals="true"
@@ -561,7 +561,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
         </button>
         <span
           aria-hidden="true"
-          class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+          class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
           data-direction="e"
           id=":r8:"
           popover="auto"
@@ -637,7 +637,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
           class="flex flex-1 flex-col"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="vertical"
             data-gap="condensed"
@@ -648,7 +648,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
             <button
               aria-describedby=":rb:-loading-announcement :ra:"
               aria-label="Gitify"
-              class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+              class="types__StyledButton-sc-ws60qy-0 kQRupk"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -703,7 +703,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
               </svg>
             </button>
             <span
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="e"
               id=":ra:"
               popover="auto"
@@ -714,7 +714,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
             <button
               aria-describedby=":rd:-loading-announcement :rc:"
               aria-label="Notifications"
-              class="types__StyledButton-sc-ws60qy-0 ghurFZ"
+              class="types__StyledButton-sc-ws60qy-0 hBssey"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -741,7 +741,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
               </svg>
             </button>
             <span
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="e"
               id=":rc:"
               popover="auto"
@@ -752,7 +752,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
             <button
               aria-describedby=":rf:-loading-announcement"
               aria-labelledby=":re:"
-              class="types__StyledButton-sc-ws60qy-0 itTBlA"
+              class="types__StyledButton-sc-ws60qy-0 ffHjIj"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -783,7 +783,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
             </button>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="e"
               id=":re:"
               popover="auto"
@@ -793,7 +793,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
             <button
               aria-describedby=":rh:-loading-announcement"
               aria-labelledby=":rg:"
-              class="types__StyledButton-sc-ws60qy-0 itTBlA"
+              class="types__StyledButton-sc-ws60qy-0 ffHjIj"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -821,7 +821,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
             </button>
             <span
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
               data-direction="e"
               id=":rg:"
               popover="auto"
@@ -831,7 +831,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
           </div>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="vertical"
           data-gap="condensed"
@@ -842,7 +842,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
           <button
             aria-describedby=":rj:-loading-announcement"
             aria-labelledby=":ri:"
-            class="types__StyledButton-sc-ws60qy-0 itTBlA"
+            class="types__StyledButton-sc-ws60qy-0 ffHjIj"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
@@ -870,7 +870,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
           </button>
           <span
             aria-hidden="true"
-            class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
             data-direction="e"
             id=":ri:"
             popover="auto"
@@ -889,7 +889,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
         class="flex flex-1 flex-col"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="vertical"
           data-gap="condensed"
@@ -900,7 +900,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
           <button
             aria-describedby=":rb:-loading-announcement :ra:"
             aria-label="Gitify"
-            class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+            class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
@@ -955,7 +955,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
             </svg>
           </button>
           <span
-            class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
             data-direction="e"
             id=":ra:"
             popover="auto"
@@ -966,7 +966,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
           <button
             aria-describedby=":rd:-loading-announcement :rc:"
             aria-label="Notifications"
-            class="types__StyledButton-sc-ws60qy-0 ghurFZ"
+            class="types__StyledButton-sc-ws60qy-0 hBssey"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
@@ -993,7 +993,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
             </svg>
           </button>
           <span
-            class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
             data-direction="e"
             id=":rc:"
             popover="auto"
@@ -1004,7 +1004,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
           <button
             aria-describedby=":rf:-loading-announcement"
             aria-labelledby=":re:"
-            class="types__StyledButton-sc-ws60qy-0 itTBlA"
+            class="types__StyledButton-sc-ws60qy-0 ffHjIj"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
@@ -1035,7 +1035,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
           </button>
           <span
             aria-hidden="true"
-            class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
             data-direction="e"
             id=":re:"
             popover="auto"
@@ -1045,7 +1045,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
           <button
             aria-describedby=":rh:-loading-announcement"
             aria-labelledby=":rg:"
-            class="types__StyledButton-sc-ws60qy-0 itTBlA"
+            class="types__StyledButton-sc-ws60qy-0 ffHjIj"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
@@ -1073,7 +1073,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
           </button>
           <span
             aria-hidden="true"
-            class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
             data-direction="e"
             id=":rg:"
             popover="auto"
@@ -1083,7 +1083,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
         </div>
       </div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
         data-align="center"
         data-direction="vertical"
         data-gap="condensed"
@@ -1094,7 +1094,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
         <button
           aria-describedby=":rj:-loading-announcement"
           aria-labelledby=":ri:"
-          class="types__StyledButton-sc-ws60qy-0 itTBlA"
+          class="types__StyledButton-sc-ws60qy-0 ffHjIj"
           data-component="IconButton"
           data-loading="false"
           data-no-visuals="true"
@@ -1122,7 +1122,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
         </button>
         <span
           aria-hidden="true"
-          class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+          class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
           data-direction="e"
           id=":ri:"
           popover="auto"
