@@ -47,7 +47,7 @@ import {
   updateTrayTitle,
 } from '../utils/comms';
 import { Constants } from '../utils/constants';
-import { getNotificationCount } from '../utils/notifications';
+import { getNotificationCount } from '../utils/notifications/notifications';
 import { clearState, loadState, saveState } from '../utils/storage';
 import { getColorModeFromTheme, setTheme } from '../utils/theme';
 import { zoomPercentageToLevel } from '../utils/zoom';
