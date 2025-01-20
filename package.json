@@ -173,7 +173,7 @@
     "react-final-form": "6.5.9",
     "rimraf": "6.0.1",
     "semver": "7.6.3",
-    "styled-components": "6.1.13",
+    "styled-components": "6.1.14",
     "tailwind-merge": "2.6.0",
     "tailwindcss": "3.4.17",
     "terser-webpack-plugin": "5.3.11",
