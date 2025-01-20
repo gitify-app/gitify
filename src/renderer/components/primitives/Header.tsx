@@ -2,8 +2,8 @@ import { type FC, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { ArrowLeftIcon, type Icon } from '@primer/octicons-react';
+import { Heading, IconButton, Stack } from '@primer/react';
 
-import { Heading, IconButton, Octicon, Stack } from '@primer/react';
 import { AppContext } from '../../context/App';
 import { Size } from '../../types';
 
@@ -36,7 +36,7 @@ export const Header: FC<IHeader> = (props: IHeader) => {
         />
 
         <Stack direction="horizontal" align="center" gap="condensed">
-          <Octicon icon={props.icon} size={Size.LARGE} />
+          <props.icon size={Size.LARGE} />
           <Heading sx={{ fontSize: 3 }}>{props.children}</Heading>
         </Stack>
       </Stack>

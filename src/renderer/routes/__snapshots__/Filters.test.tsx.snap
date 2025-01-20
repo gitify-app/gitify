@@ -55,7 +55,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
       >
         <svg
           aria-hidden="true"
-          class="octicon octicon-filter Octicon-sc-9kayk9-0"
+          class="octicon octicon-filter"
           display="inline-block"
           fill="currentColor"
           focusable="false"

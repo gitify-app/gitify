@@ -51,7 +51,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
             >
               <svg
                 aria-hidden="true"
-                class="octicon octicon-check Octicon-sc-9kayk9-0 text-primer-open"
+                class="octicon octicon-check text-primer-open"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -88,7 +88,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
             >
               <svg
                 aria-hidden="true"
-                class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-primer-closed"
+                class="octicon octicon-file-diff text-primer-closed"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -160,7 +160,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-check Octicon-sc-9kayk9-0 text-primer-open"
+              class="octicon octicon-check text-primer-open"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -197,7 +197,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-primer-closed"
+              class="octicon octicon-file-diff text-primer-closed"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -326,7 +326,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
             >
               <svg
                 aria-hidden="true"
-                class="octicon octicon-check Octicon-sc-9kayk9-0 text-primer-open"
+                class="octicon octicon-check text-primer-open"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -363,7 +363,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
             >
               <svg
                 aria-hidden="true"
-                class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-primer-closed"
+                class="octicon octicon-file-diff text-primer-closed"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -435,7 +435,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-check Octicon-sc-9kayk9-0 text-primer-open"
+              class="octicon octicon-check text-primer-open"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -472,7 +472,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-primer-closed"
+              class="octicon octicon-file-diff text-primer-closed"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -605,7 +605,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
             >
               <svg
                 aria-hidden="true"
-                class="octicon octicon-check Octicon-sc-9kayk9-0 text-primer-open"
+                class="octicon octicon-check text-primer-open"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -642,7 +642,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
             >
               <svg
                 aria-hidden="true"
-                class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-primer-closed"
+                class="octicon octicon-file-diff text-primer-closed"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -718,7 +718,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-check Octicon-sc-9kayk9-0 text-primer-open"
+              class="octicon octicon-check text-primer-open"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -755,7 +755,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-primer-closed"
+              class="octicon octicon-file-diff text-primer-closed"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -884,7 +884,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
             >
               <svg
                 aria-hidden="true"
-                class="octicon octicon-check Octicon-sc-9kayk9-0 text-primer-open"
+                class="octicon octicon-check text-primer-open"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -921,7 +921,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
             >
               <svg
                 aria-hidden="true"
-                class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-primer-closed"
+                class="octicon octicon-file-diff text-primer-closed"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -993,7 +993,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-check Octicon-sc-9kayk9-0 text-primer-open"
+              class="octicon octicon-check text-primer-open"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -1030,7 +1030,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-primer-closed"
+              class="octicon octicon-file-diff text-primer-closed"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -1159,7 +1159,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
             >
               <svg
                 aria-hidden="true"
-                class="octicon octicon-check Octicon-sc-9kayk9-0 text-primer-open"
+                class="octicon octicon-check text-primer-open"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -1196,7 +1196,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
             >
               <svg
                 aria-hidden="true"
-                class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-primer-closed"
+                class="octicon octicon-file-diff text-primer-closed"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -1268,7 +1268,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-check Octicon-sc-9kayk9-0 text-primer-open"
+              class="octicon octicon-check text-primer-open"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -1305,7 +1305,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-primer-closed"
+              class="octicon octicon-file-diff text-primer-closed"
               display="inline-block"
               fill="currentColor"
               focusable="false"
