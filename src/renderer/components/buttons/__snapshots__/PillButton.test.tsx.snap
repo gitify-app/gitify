@@ -21,7 +21,7 @@ exports[`renderer/components/buttons/PillButton.tsx should render with metric 1`
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-mark-github Octicon-sc-9kayk9-0 text-primer-open"
+            class="octicon octicon-mark-github text-primer-open"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -61,7 +61,7 @@ exports[`renderer/components/buttons/PillButton.tsx should render with metric 1`
       >
         <svg
           aria-hidden="true"
-          class="octicon octicon-mark-github Octicon-sc-9kayk9-0 text-primer-open"
+          class="octicon octicon-mark-github text-primer-open"
           display="inline-block"
           fill="currentColor"
           focusable="false"
@@ -158,7 +158,7 @@ exports[`renderer/components/buttons/PillButton.tsx should render without metric
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-mark-github Octicon-sc-9kayk9-0 text-primer-open"
+            class="octicon octicon-mark-github text-primer-open"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -193,7 +193,7 @@ exports[`renderer/components/buttons/PillButton.tsx should render without metric
       >
         <svg
           aria-hidden="true"
-          class="octicon octicon-mark-github Octicon-sc-9kayk9-0 text-primer-open"
+          class="octicon octicon-mark-github text-primer-open"
           display="inline-block"
           fill="currentColor"
           focusable="false"

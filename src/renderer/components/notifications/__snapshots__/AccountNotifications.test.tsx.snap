@@ -762,7 +762,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-issue-opened Octicon-sc-9kayk9-0 text-primer-open"
+              class="octicon octicon-issue-opened text-primer-open"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -880,7 +880,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 >
                   <svg
                     aria-hidden="true"
-                    class="octicon octicon-check Octicon-sc-9kayk9-0 text-primer-open"
+                    class="octicon octicon-check text-primer-open"
                     display="inline-block"
                     fill="currentColor"
                     focusable="false"
@@ -917,7 +917,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 >
                   <svg
                     aria-hidden="true"
-                    class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-primer-closed"
+                    class="octicon octicon-file-diff text-primer-closed"
                     display="inline-block"
                     fill="currentColor"
                     focusable="false"
@@ -1085,7 +1085,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-issue-opened Octicon-sc-9kayk9-0 text-primer-muted"
+              class="octicon octicon-issue-opened text-primer-muted"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -1543,7 +1543,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-issue-opened Octicon-sc-9kayk9-0 text-primer-open"
+            class="octicon octicon-issue-opened text-primer-open"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -1661,7 +1661,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               >
                 <svg
                   aria-hidden="true"
-                  class="octicon octicon-check Octicon-sc-9kayk9-0 text-primer-open"
+                  class="octicon octicon-check text-primer-open"
                   display="inline-block"
                   fill="currentColor"
                   focusable="false"
@@ -1698,7 +1698,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               >
                 <svg
                   aria-hidden="true"
-                  class="octicon octicon-file-diff Octicon-sc-9kayk9-0 text-primer-closed"
+                  class="octicon octicon-file-diff text-primer-closed"
                   display="inline-block"
                   fill="currentColor"
                   focusable="false"
@@ -1866,7 +1866,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-issue-opened Octicon-sc-9kayk9-0 text-primer-muted"
+            class="octicon octicon-issue-opened text-primer-muted"
             display="inline-block"
             fill="currentColor"
             focusable="false"

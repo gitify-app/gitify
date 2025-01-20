@@ -55,7 +55,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
       >
         <svg
           aria-hidden="true"
-          class="octicon octicon-gear Octicon-sc-9kayk9-0"
+          class="octicon octicon-gear"
           display="inline-block"
           fill="currentColor"
           focusable="false"
@@ -1062,7 +1062,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
       data-align="center"
       data-direction="vertical"
       data-justify="start"
-      data-padding="none"
+      data-padding="spacious"
       data-wrap="nowrap"
     >
       <button

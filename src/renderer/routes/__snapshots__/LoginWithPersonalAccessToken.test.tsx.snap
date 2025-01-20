@@ -55,7 +55,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-key Octicon-sc-9kayk9-0"
+              class="octicon octicon-key"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -364,7 +364,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-key Octicon-sc-9kayk9-0"
+            class="octicon octicon-key"
             display="inline-block"
             fill="currentColor"
             focusable="false"
