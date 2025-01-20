@@ -117,7 +117,8 @@ export default class MenuBuilder {
 
   isUpdateAvailable() {
     return (
-      this.updateAvailableMenuItem.visible || this.updateReadyForInstallMenuItem
+      this.updateAvailableMenuItem.visible ||
+      this.updateReadyForInstallMenuItem.visible
     );
   }
 }
