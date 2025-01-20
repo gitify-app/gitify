@@ -53,11 +53,12 @@ describe('renderer/routes/Filters.tsx', () => {
         );
       });
 
-      fireEvent.click(screen.getByLabelText('Go Back'));
+      fireEvent.click(screen.getByTestId('header-nav-back'));
       expect(fetchNotifications).toHaveBeenCalledTimes(1);
       expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
     });
   });
+
   describe('Users section', () => {
     it('should not be able to toggle the hideBots checkbox when detailedNotifications is disabled', async () => {
       await act(async () => {
@@ -227,7 +228,7 @@ describe('renderer/routes/Filters.tsx', () => {
         );
       });
 
-      fireEvent.click(screen.getByTitle('Clear filters'));
+      fireEvent.click(screen.getByTestId('filters-clear'));
 
       expect(clearFilters).toHaveBeenCalled();
     });

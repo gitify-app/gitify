@@ -1,18 +1,21 @@
+import { type FC, useContext } from 'react';
+
 import {
   FeedPersonIcon,
   FilterIcon,
   FilterRemoveIcon,
   NoteIcon,
 } from '@primer/octicons-react';
-import { type FC, useContext } from 'react';
-import { Header } from '../components/Header';
+import { Button, Tooltip } from '@primer/react';
+
 import { Checkbox } from '../components/fields/Checkbox';
-import { Legend } from '../components/settings/Legend';
+import { Contents } from '../components/primitives/Contents';
+import { Footer } from '../components/primitives/Footer';
+import { Header } from '../components/primitives/Header';
+import { Legend } from '../components/primitives/Legend';
+import { Page } from '../components/primitives/Page';
 import { AppContext } from '../context/App';
-import { BUTTON_CLASS_NAME } from '../styles/gitify';
-import { Size } from '../types';
 import type { Reason } from '../typesGitHub';
-import { cn } from '../utils/cn';
 import { FORMATTED_REASONS, formatReason } from '../utils/reason';
 
 export const FiltersRoute: FC = () => {
@@ -35,11 +38,12 @@ export const FiltersRoute: FC = () => {
   };
 
   return (
-    <div className="flex h-screen flex-col" data-testid="filters">
+    <Page id="filters">
       <Header fetchOnBack={true} icon={FilterIcon}>
         Filters
       </Header>
-      <div className="flex-grow overflow-x-auto px-8">
+
+      <Contents>
         <fieldset className="mb-3">
           <Legend icon={FeedPersonIcon}>Users</Legend>
           <Checkbox
@@ -57,7 +61,7 @@ export const FiltersRoute: FC = () => {
                   Hide notifications from GitHub Bot accounts, such as
                   @dependabot, @renovate, @netlify, etc
                 </div>
-                <div className="text-orange-600">
+                <div className="text-gitify-caution">
                   ⚠️ This filter requires the{' '}
                   <strong>Detailed Notifications</strong> setting to be enabled.
                 </div>
@@ -69,7 +73,7 @@ export const FiltersRoute: FC = () => {
         <fieldset className="mb-3">
           <Legend icon={NoteIcon}>Reason</Legend>
           <span className="text-xs italic">
-            Note: if no reasons are selected, all notifications will be shown.
+            Note: If no reasons are selected, all notifications will be shown.
           </span>
           {Object.keys(FORMATTED_REASONS).map((reason: Reason) => {
             return (
@@ -86,25 +90,19 @@ export const FiltersRoute: FC = () => {
             );
           })}
         </fieldset>
-      </div>
+      </Contents>
 
-      <div className="flex items-center justify-between bg-gray-200 px-3 py-1 text-sm dark:bg-gray-darker">
-        <div>
-          <button
-            type="button"
-            className={cn('flex items-center', BUTTON_CLASS_NAME)}
-            title="Clear filters"
-            onClick={clearFilters}
+      <Footer justify="justify-end">
+        <Tooltip text="Clear all filters" direction="n">
+          <Button
+            leadingVisual={FilterRemoveIcon}
+            onClick={() => clearFilters()}
+            data-testid="filters-clear"
           >
-            <FilterRemoveIcon
-              size={Size.LARGE}
-              className="mr-2"
-              aria-label="Clear filters"
-            />
             Clear filters
-          </button>
-        </div>
-      </div>
-    </div>
+          </Button>
+        </Tooltip>
+      </Footer>
+    </Page>
   );
 };

@@ -157,12 +157,11 @@ export interface FormattedReason {
 }
 
 export enum IconColor {
-  GRAY = 'text-gray-500 dark:text-gray-300',
-  GREEN = 'text-green-500',
-  PURPLE = 'text-purple-500',
-  RED = 'text-red-500',
-  YELLOW = 'text-yellow-500 dark:text-yellow-300',
-  WHITE = 'text-white',
+  GRAY = 'text-primer-muted',
+  GREEN = 'text-primer-open',
+  PURPLE = 'text-primer-done',
+  RED = 'text-primer-closed',
+  YELLOW = 'text-primer-attention',
 }
 
 export enum Opacity {

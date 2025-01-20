@@ -1,20 +1,22 @@
-import { BookIcon, KeyIcon, SignInIcon } from '@primer/octicons-react';
 import { type FC, useCallback, useContext, useState } from 'react';
 import { Form, type FormRenderProps } from 'react-final-form';
 import { useNavigate } from 'react-router-dom';
 
+import { BookIcon, KeyIcon, SignInIcon } from '@primer/octicons-react';
+import { Button, Stack, Text, Tooltip } from '@primer/react';
+
 import { logError } from '../../shared/logger';
-import { Header } from '../components/Header';
-import { Button } from '../components/buttons/Button';
 import { FieldInput } from '../components/fields/FieldInput';
+import { Header } from '../components/primitives/Header';
 import { AppContext } from '../context/App';
-import { type Hostname, Size, type Token } from '../types';
+import type { Hostname, Token } from '../types';
 import type { LoginPersonalAccessTokenOptions } from '../utils/auth/types';
 import {
   getNewTokenURL,
   isValidHostname,
   isValidToken,
 } from '../utils/auth/utils';
+import { openExternalLink } from '../utils/comms';
 import { Constants } from '../utils/constants';
 
 interface IValues {
@@ -60,63 +62,64 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
           label="Hostname"
           placeholder="github.company.com"
           helpText={
-            <div>
-              <div className="mt-1 italic">
+            <Stack direction="vertical" gap="condensed">
+              <Text as="i">
                 Change only if you are using GitHub Enterprise Server.
-              </div>
-              <div className="mt-3">
+              </Text>
+              <Stack direction="horizontal" align="center" gap="condensed">
                 <Button
-                  label="Generate a PAT"
+                  size="small"
+                  leadingVisual={KeyIcon}
                   disabled={!values.hostname}
-                  icon={{ icon: KeyIcon, size: Size.XSMALL }}
-                  url={getNewTokenURL(values.hostname)}
-                  size="xs"
+                  onClick={() =>
+                    openExternalLink(getNewTokenURL(values.hostname))
+                  }
+                  data-testid="login-create-token"
                 >
                   Generate a PAT
                 </Button>
-                <span className="mx-1">
-                  on GitHub then paste your{' '}
-                  <span className="italic">token</span> below.
-                </span>
-              </div>
-              <div className="mt-1 italic">
+                <Text>on GitHub then paste your token below.</Text>
+              </Stack>
+              <Text as="i">
                 The required scopes will be automatically selected for you.
-              </div>
-            </div>
+              </Text>
+            </Stack>
           }
         />
-
         <FieldInput
           name="token"
           label="Token"
           placeholder="The 40 characters token generated on GitHub"
         />
-
         {!isValidToken && (
-          <div className="mt-4 text-sm font-medium text-red-500">
+          <div className="my-4 text-sm font-medium text-gitify-error">
             This token could not be validated with {values.hostname}.
           </div>
         )}
+        <Stack direction="horizontal" justify="space-between" align="center">
+          <Tooltip text="GitHub documentation">
+            <Button
+              size="small"
+              leadingVisual={BookIcon}
+              onClick={() => openExternalLink(Constants.GITHUB_DOCS.PAT_URL)}
+              data-testid="login-docs"
+            >
+              Docs
+            </Button>
+          </Tooltip>
 
-        <div className="flex items-end justify-between mt-2">
-          <Button
-            label="GitHub Docs"
-            icon={{ icon: BookIcon, size: Size.XSMALL }}
-            url={Constants.GITHUB_DOCS.PAT_URL}
-            size="xs"
-          >
-            Docs
-          </Button>
-          <Button
-            label="Login"
-            className="px-4 py-2 !text-sm"
-            icon={{ icon: SignInIcon, size: Size.MEDIUM }}
-            disabled={submitting || pristine}
-            type="submit"
-          >
-            Login
-          </Button>
-        </div>
+          <Tooltip text="Login">
+            <Button
+              variant="primary"
+              leadingVisual={SignInIcon}
+              disabled={submitting || pristine}
+              type="submit"
+              data-testid="login-submit"
+            >
+              Login
+            </Button>
+          </Tooltip>
+        </Stack>
       </form>
     );
   };

@@ -1,8 +1,18 @@
-import { type FC, useMemo } from 'react';
+import { type FC, useContext, useMemo } from 'react';
+
+import { Stack } from '@primer/react';
+
+import { AppContext } from '../context/App';
 import { Constants } from '../utils/constants';
-import { EmojiText } from './EmojiText';
+import { hasFiltersSet } from '../utils/filters';
+import { Centered } from './primitives/Centered';
+import { EmojiText } from './primitives/EmojiText';
 
 export const AllRead: FC = () => {
+  const { settings } = useContext(AppContext);
+
+  const hasFilters = hasFiltersSet(settings);
+
   const emoji = useMemo(
     () =>
       Constants.ALL_READ_EMOJIS[
@@ -12,12 +22,20 @@ export const AllRead: FC = () => {
   );
 
   return (
-    <div className="flex flex-1 flex-col items-center justify-center bg-white p-4 text-black dark:bg-gray-dark dark:text-white">
-      <div className="mt-2 mb-5 text-5xl">
-        <EmojiText text={emoji} />
-      </div>
+    <Centered>
+      <Stack direction="vertical" align="center">
+        <div className="mt-2 mb-5 text-5xl">
+          <EmojiText text={emoji} />
+        </div>
 
-      <div className="mb-2 text-xl font-semibold">No new notifications.</div>
-    </div>
+        {hasFilters ? (
+          <div className="mb-2 text-xl font-semibold">
+            No new filtered notifications
+          </div>
+        ) : (
+          <div className="mb-2 text-xl font-semibold">No new notifications</div>
+        )}
+      </Stack>
+    </Centered>
   );
 };

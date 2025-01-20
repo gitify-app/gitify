@@ -22,7 +22,7 @@ export const RadioGroup: FC<IRadioGroup> = (props: IRadioGroup) => {
         <div className="mr-3">
           <label
             htmlFor={props.name}
-            className="font-medium text-gray-700 dark:text-gray-200"
+            className="font-medium text-gitify-font"
             style={
               props.disabled ? { textDecoration: 'line-through' } : undefined
             }
@@ -47,7 +47,7 @@ export const RadioGroup: FC<IRadioGroup> = (props: IRadioGroup) => {
               >
                 <input
                   type="radio"
-                  className="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+                  className="size-4 cursor-pointer"
                   id={`${props.name}_${item.value.toLowerCase()}`}
                   name={props.name}
                   value={item.value}
@@ -57,7 +57,7 @@ export const RadioGroup: FC<IRadioGroup> = (props: IRadioGroup) => {
                 />
                 <label
                   htmlFor={`${props.name}_${item.value.toLowerCase()}`}
-                  className="ml-3 block text-sm font-medium text-gray-700 dark:text-white cursor-pointer"
+                  className="ml-3 block text-sm font-medium text-gitify-font cursor-pointer"
                 >
                   {item.label}
                 </label>

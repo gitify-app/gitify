@@ -1,3 +1,6 @@
+import { type FC, useContext, useMemo } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+
 import {
   BellIcon,
   FilterIcon,
@@ -7,21 +10,19 @@ import {
   SyncIcon,
   XCircleIcon,
 } from '@primer/octicons-react';
-import { type FC, useContext, useMemo } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { IconButton, Stack } from '@primer/react';
+
 import { APPLICATION } from '../../shared/constants';
 import { AppContext } from '../context/App';
-import { Size } from '../types';
 import { quitApp } from '../utils/comms';
 import { Constants } from '../utils/constants';
-import { getFilterCount } from '../utils/helpers';
+import { hasFiltersSet } from '../utils/filters';
 import {
   openGitHubIssues,
   openGitHubNotifications,
   openGitHubPulls,
 } from '../utils/links';
 import { getNotificationCount } from '../utils/notifications';
-import { SidebarButton } from './buttons/SidebarButton';
 import { LogoIcon } from './icons/LogoIcon';
 
 export const Sidebar: FC = () => {
@@ -67,80 +68,133 @@ export const Sidebar: FC = () => {
     return getNotificationCount(notifications);
   }, [notifications]);
 
-  const filterCount = useMemo(() => {
-    return getFilterCount(settings);
-  }, [settings]);
-
   return (
-    <div className="fixed left-14 -ml-14 flex h-full w-14 flex-col overflow-y-auto bg-gray-sidebar">
-      <div className="flex flex-1 flex-col items-center py-4">
-        <button
-          type="button"
-          className="mx-auto my-3 cursor-pointer outline-none"
-          title="Home"
-          onClick={() => navigate('/', { replace: true })}
+    <div className="fixed left-12 -ml-12 flex h-full w-12 flex-col overflow-y-auto bg-gitify-sidebar">
+      <div className="flex flex-1 flex-col">
+        <Stack
+          direction="vertical"
+          align="center"
+          gap="condensed"
+          padding="normal"
         >
-          <LogoIcon size={Size.SMALL} aria-label={`Open ${APPLICATION.NAME}`} />
-        </button>
+          <IconButton
+            icon={LogoIcon}
+            aria-label={APPLICATION.NAME}
+            description="Home"
+            unsafeDisableTooltip={false}
+            size="small"
+            variant="invisible"
+            tooltipDirection="e"
+            onClick={() => navigate('/', { replace: true })}
+            data-testid="sidebar-home"
+          />
 
-        <SidebarButton
-          title={`${notificationsCount} unread notifications`}
-          metric={isLoggedIn ? notificationsCount : null}
-          icon={BellIcon}
-          onClick={() => openGitHubNotifications(primaryAccountHostname)}
-        />
+          <IconButton
+            icon={BellIcon}
+            aria-label="Notifications"
+            description={`${notificationsCount} unread notifications`}
+            unsafeDisableTooltip={false}
+            size="small"
+            variant={notificationsCount > 0 ? 'primary' : 'invisible'}
+            tooltipDirection="e"
+            onClick={() => openGitHubNotifications(primaryAccountHostname)}
+            data-testid="sidebar-notifications"
+            sx={{ color: 'white' }}
+          />
 
-        <SidebarButton
-          title="My issues"
-          icon={IssueOpenedIcon}
-          onClick={() => openGitHubIssues(primaryAccountHostname)}
-        />
+          {/* TODO - explore https://primer.style/components/selectpanel/react/alpha/ for a better UI for filters */}
+          {isLoggedIn && (
+            <IconButton
+              icon={FilterIcon}
+              aria-label="Filters"
+              description="Filter notifications"
+              unsafeDisableTooltip={false}
+              size="small"
+              variant={hasFiltersSet(settings) ? 'primary' : 'invisible'}
+              tooltipDirection="e"
+              onClick={() => toggleFilters()}
+              data-testid="sidebar-filter-notifications"
+              sx={{ color: 'white' }}
+            />
+          )}
 
-        <SidebarButton
-          title="My pull requests"
-          icon={GitPullRequestIcon}
-          onClick={() => openGitHubPulls(primaryAccountHostname)}
-        />
+          <IconButton
+            icon={IssueOpenedIcon}
+            aria-label="My issues"
+            unsafeDisableTooltip={false}
+            size="small"
+            variant="invisible"
+            tooltipDirection="e"
+            onClick={() => openGitHubIssues(primaryAccountHostname)}
+            data-testid="sidebar-my-issues"
+            sx={{ color: 'white' }}
+          />
+
+          <IconButton
+            icon={GitPullRequestIcon}
+            aria-label="My pull requests"
+            unsafeDisableTooltip={false}
+            size="small"
+            variant="invisible"
+            tooltipDirection="e"
+            onClick={() => openGitHubPulls(primaryAccountHostname)}
+            data-testid="sidebar-my-pull-requests"
+            sx={{ color: 'white' }}
+          />
+        </Stack>
       </div>
 
-      <div className="px-3 py-4">
+      <Stack
+        direction="vertical"
+        align="center"
+        gap="condensed"
+        padding="normal"
+      >
         {isLoggedIn && (
           <>
-            <SidebarButton
-              title="Refresh notifications"
+            <IconButton
               icon={SyncIcon}
-              size={Size.MEDIUM}
+              aria-label="Refresh"
+              description="Refresh notifications"
+              unsafeDisableTooltip={false}
+              size="small"
+              variant="invisible"
+              tooltipDirection="e"
               loading={status === 'loading'}
               disabled={status === 'loading'}
               onClick={() => refreshNotifications()}
+              data-testid="sidebar-refresh"
+              sx={{ color: 'white' }}
             />
 
-            <SidebarButton
-              title="Filters"
-              icon={FilterIcon}
-              size={Size.MEDIUM}
-              metric={filterCount}
-              onClick={() => toggleFilters()}
-            />
-
-            <SidebarButton
-              title="Settings"
+            <IconButton
               icon={GearIcon}
-              size={Size.MEDIUM}
+              aria-label="Settings"
+              unsafeDisableTooltip={false}
+              size="small"
+              variant="invisible"
+              tooltipDirection="e"
               onClick={() => toggleSettings()}
+              data-testid="sidebar-settings"
+              sx={{ color: 'white' }}
             />
           </>
         )}
 
         {!isLoggedIn && (
-          <SidebarButton
-            title={`Quit ${APPLICATION.NAME}`}
+          <IconButton
             icon={XCircleIcon}
-            size={Size.MEDIUM}
+            aria-label={`Quit ${APPLICATION.NAME}`}
+            unsafeDisableTooltip={false}
+            size="small"
+            variant="invisible"
+            tooltipDirection="e"
             onClick={() => quitApp()}
+            data-testid="sidebar-quit"
+            sx={{ color: 'white' }}
           />
         )}
-      </div>
+      </Stack>
     </div>
   );
 };

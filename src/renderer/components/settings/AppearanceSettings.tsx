@@ -1,29 +1,35 @@
+import { ipcRenderer, webFrame } from 'electron';
+import { type FC, useContext, useEffect, useState } from 'react';
+
 import {
   CheckIcon,
   CommentIcon,
+  DashIcon,
   GitPullRequestIcon,
   IssueClosedIcon,
   MilestoneIcon,
   PaintbrushIcon,
+  PlusIcon,
   TagIcon,
+  XCircleIcon,
 } from '@primer/octicons-react';
-import { ipcRenderer, webFrame } from 'electron';
-import { type FC, useContext, useEffect, useState } from 'react';
+import { Button, ButtonGroup, IconButton, useTheme } from '@primer/react';
+
 import { namespacedEvent } from '../../../shared/events';
 import { AppContext } from '../../context/App';
 import { Size, Theme } from '../../types';
 import { hasMultipleAccounts } from '../../utils/auth/utils';
-import { setTheme } from '../../utils/theme';
+import { getColorModeFromTheme, setTheme } from '../../utils/theme';
 import { zoomLevelToPercentage, zoomPercentageToLevel } from '../../utils/zoom';
-import { Button } from '../buttons/Button';
 import { Checkbox } from '../fields/Checkbox';
 import { RadioGroup } from '../fields/RadioGroup';
-import { Legend } from './Legend';
+import { Legend } from '../primitives/Legend';
 
 let timeout: NodeJS.Timeout;
 const DELAY = 200;
 
 export const AppearanceSettings: FC = () => {
+  const { setColorMode } = useTheme();
   const { auth, settings, updateSetting } = useContext(AppContext);
   const [zoomPercentage, setZoomPercentage] = useState(
     zoomLevelToPercentage(webFrame.getZoomLevel()),
@@ -34,11 +40,14 @@ export const AppearanceSettings: FC = () => {
       namespacedEvent('update-theme'),
       (_, updatedTheme: Theme) => {
         if (settings.theme === Theme.SYSTEM) {
+          const mode = getColorModeFromTheme(updatedTheme);
+
           setTheme(updatedTheme);
+          setColorMode(mode);
         }
       },
     );
-  }, [settings.theme]);
+  }, [settings.theme, setColorMode]);
 
   window.addEventListener('resize', () => {
     // clear the timeout
@@ -54,6 +63,7 @@ export const AppearanceSettings: FC = () => {
   return (
     <fieldset>
       <Legend icon={PaintbrushIcon}>Appearance</Legend>
+
       <RadioGroup
         name="theme"
         label="Theme:"
@@ -63,52 +73,58 @@ export const AppearanceSettings: FC = () => {
           { label: 'Light', value: Theme.LIGHT },
           { label: 'Dark', value: Theme.DARK },
         ]}
-        onChange={(evt) => {
-          updateSetting('theme', evt.target.value as Theme);
-        }}
+        onChange={(evt) => updateSetting('theme', evt.target.value as Theme)}
       />
+
       <div className="flex items-center mt-3 mb-2 text-sm">
         <label
           htmlFor="Zoom"
-          className="mr-3 content-center font-medium text-gray-700 dark:text-gray-200"
+          className="mr-3 content-center font-medium text-gitify-font"
         >
           Zoom:
         </label>
-        <Button
-          label="Zoom Out"
-          onClick={() =>
-            zoomPercentage > 0 &&
-            webFrame.setZoomLevel(zoomPercentageToLevel(zoomPercentage - 10))
-          }
-          className="rounded-r-none"
-          size="inline"
-        >
-          -
-        </Button>
-        <span className="flex w-16 h-5 items-center justify-center rounded-none border border-gray-300 bg-transparent text-xs text-gray-700 dark:text-gray-200">
-          {zoomPercentage.toFixed(0)}%
-        </span>
-        <Button
-          label="Zoom In"
-          onClick={() =>
-            zoomPercentage < 120 &&
-            webFrame.setZoomLevel(zoomPercentageToLevel(zoomPercentage + 10))
-          }
-          className="rounded-none"
-          size="inline"
-        >
-          +
-        </Button>
-        <Button
-          label="Reset Zoom"
-          onClick={() => webFrame.setZoomLevel(0)}
-          variant="destructive"
-          className="rounded-l-none"
-          size="inline"
-        >
-          X
-        </Button>
+
+        <ButtonGroup>
+          <IconButton
+            aria-label="Zoom out"
+            size="small"
+            icon={DashIcon}
+            unsafeDisableTooltip={true}
+            onClick={() =>
+              zoomPercentage > 0 &&
+              webFrame.setZoomLevel(zoomPercentageToLevel(zoomPercentage - 10))
+            }
+            data-testid="settings-zoom-out"
+          />
+
+          <Button aria-label="Zoom percentage" size="small" disabled>
+            {zoomPercentage.toFixed(0)}%
+          </Button>
+
+          <IconButton
+            aria-label="Zoom in"
+            size="small"
+            icon={PlusIcon}
+            unsafeDisableTooltip={true}
+            onClick={() =>
+              zoomPercentage < 120 &&
+              webFrame.setZoomLevel(zoomPercentageToLevel(zoomPercentage + 10))
+            }
+            data-testid="settings-zoom-in"
+          />
+
+          <IconButton
+            aria-label="Reset zoom"
+            size="small"
+            variant="danger"
+            icon={XCircleIcon}
+            unsafeDisableTooltip={true}
+            onClick={() => webFrame.setZoomLevel(0)}
+            data-testid="settings-zoom-reset"
+          />
+        </ButtonGroup>
       </div>
+
       <Checkbox
         name="detailedNotifications"
         label="Detailed notifications"
@@ -122,7 +138,7 @@ export const AppearanceSettings: FC = () => {
               Enrich notifications with author or last commenter profile
               information, state and GitHub-like colors.
             </div>
-            <div className="text-orange-600">
+            <div className="text-gitify-caution">
               ⚠️ Users with a large number of unread notifications <i>may</i>{' '}
               experience rate limiting under certain circumstances. Disable this
               setting if you experience this.
@@ -130,6 +146,7 @@ export const AppearanceSettings: FC = () => {
           </div>
         }
       />
+
       <Checkbox
         name="showPills"
         label="Show notification metric pills"
@@ -165,6 +182,7 @@ export const AppearanceSettings: FC = () => {
           </div>
         }
       />
+
       <Checkbox
         name="showNumber"
         label="Show number"
@@ -193,13 +211,14 @@ export const AppearanceSettings: FC = () => {
                 </li>
               </ul>
             </div>
-            <div className="pt-3 text-orange-600">
+            <div className="pt-3 text-gitify-caution">
               ⚠️ This setting requires <strong>Detailed Notifications</strong> to
               be enabled.
             </div>
           </div>
         }
       />
+
       <Checkbox
         name="showAccountHeader"
         label="Show account header"

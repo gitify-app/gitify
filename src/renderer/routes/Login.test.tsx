@@ -63,7 +63,7 @@ describe('renderer/routes/Login.tsx', () => {
       </AppContext.Provider>,
     );
 
-    fireEvent.click(screen.getByLabelText('Login with GitHub'));
+    fireEvent.click(screen.getByTestId('login-github'));
 
     expect(mockLoginWithGitHubApp).toHaveBeenCalled();
   });
@@ -75,7 +75,7 @@ describe('renderer/routes/Login.tsx', () => {
       </MemoryRouter>,
     );
 
-    fireEvent.click(screen.getByLabelText('Login with Personal Access Token'));
+    fireEvent.click(screen.getByTestId('login-pat'));
 
     expect(mockNavigate).toHaveBeenNthCalledWith(
       1,
@@ -90,7 +90,7 @@ describe('renderer/routes/Login.tsx', () => {
       </MemoryRouter>,
     );
 
-    fireEvent.click(screen.getByLabelText('Login with OAuth App'));
+    fireEvent.click(screen.getByTestId('login-oauth-app'));
 
     expect(mockNavigate).toHaveBeenNthCalledWith(1, '/login-oauth-app');
   });

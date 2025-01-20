@@ -1,5 +1,10 @@
+import type { ColorModeWithAuto } from '@primer/react/lib/ThemeProvider';
 import { Theme } from '../types';
 
+// TODO - Replace fully with Octicon primer theme provider
+/**
+ * @deprecated
+ */
 export function getTheme(): Theme {
   if (document.querySelector('html').classList.contains('dark')) {
     return Theme.DARK;
@@ -8,16 +13,22 @@ export function getTheme(): Theme {
   return Theme.LIGHT;
 }
 
+/**
+ * @deprecated
+ */
 export function setLightMode() {
   document.querySelector('html').classList.remove('dark');
 }
 
+/**
+ * @deprecated
+ */
 export function setDarkMode() {
   document.querySelector('html').classList.add('dark');
 }
 
-export function setTheme(mode?: Theme) {
-  switch (mode) {
+export function setTheme(theme?: Theme) {
+  switch (theme) {
     case Theme.LIGHT:
       setLightMode();
       break;
@@ -32,5 +43,16 @@ export function setTheme(mode?: Theme) {
       } else {
         setLightMode();
       }
+  }
+}
+
+export function getColorModeFromTheme(theme: Theme): ColorModeWithAuto {
+  switch (theme) {
+    case Theme.LIGHT:
+      return 'light';
+    case Theme.DARK:
+      return 'night';
+    default:
+      return 'auto';
   }
 }

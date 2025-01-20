@@ -13,7 +13,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render 1`] = `
         >
           <input
             checked=""
-            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+            class="size-4 rounded cursor-pointer"
             id="appearance"
             type="checkbox"
           />
@@ -21,7 +21,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render 1`] = `
             class="flex items-center ml-3"
           >
             <label
-              class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
+              class="font-medium text-gitify-font cursor-pointer"
               for="appearance"
             >
               Appearance
@@ -45,7 +45,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render 1`] = `
       >
         <input
           checked=""
-          class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+          class="size-4 rounded cursor-pointer"
           id="appearance"
           type="checkbox"
         />
@@ -53,7 +53,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render 1`] = `
           class="flex items-center ml-3"
         >
           <label
-            class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
+            class="font-medium text-gitify-font cursor-pointer"
             for="appearance"
           >
             Appearance

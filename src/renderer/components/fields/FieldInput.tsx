@@ -1,5 +1,6 @@
 import type { FC, ReactNode } from 'react';
 import { Field } from 'react-final-form';
+import { cn } from '../../utils/cn';
 
 export interface IFieldInput {
   name: string;
@@ -31,7 +32,11 @@ export const FieldInput: FC<IFieldInput> = ({
 
           <input
             type={type}
-            className="mb-2 block w-full appearance-none rounded border border-red-500 bg-gray-100 px-4 py-1.5 text-sm focus:bg-gray-200 focus:outline-none dark:text-gray-800"
+            className={cn(
+              'mb-2 block w-full appearance-none',
+              'rounded border bg-gray-100 px-4 py-1.5 text-sm focus:bg-gray-200 focus:outline-none dark:text-gray-800',
+              error ? 'border-red-500' : 'border-gray-500',
+            )}
             id={input.name}
             placeholder={placeholder}
             required={required}
@@ -39,13 +44,11 @@ export const FieldInput: FC<IFieldInput> = ({
           />
 
           {helpText && (
-            <div className="mt-3 text-xs text-gray-700 dark:text-gray-200">
-              {helpText}
-            </div>
+            <div className="mt-3 text-xs text-gitify-font">{helpText}</div>
           )}
 
           {touched && error && (
-            <div className="mt-2 text-xs italic text-red-500">{error}</div>
+            <div className="mt-2 text-xs italic text-gitify-error">{error}</div>
           )}
         </div>
       )}

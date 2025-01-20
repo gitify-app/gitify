@@ -1,12 +1,14 @@
-import { BellIcon } from '@primer/octicons-react';
 import { type FC, type MouseEvent, useContext } from 'react';
+
+import { BellIcon } from '@primer/octicons-react';
+
 import { APPLICATION } from '../../../shared/constants';
 import { AppContext } from '../../context/App';
 import { GroupBy } from '../../types';
 import { openGitHubParticipatingDocs } from '../../utils/links';
 import { Checkbox } from '../fields/Checkbox';
 import { RadioGroup } from '../fields/RadioGroup';
-import { Legend } from './Legend';
+import { Legend } from '../primitives/Legend';
 
 export const NotificationSettings: FC = () => {
   const { settings, updateSetting } = useContext(AppContext);
@@ -56,7 +58,7 @@ export const NotificationSettings: FC = () => {
             See
             <button
               type="button"
-              className="mx-1 text-blue-500"
+              className="mx-1 text-gitify-link"
               title="Open GitHub documentation for participating and watching notifications"
               onClick={(event: MouseEvent<HTMLElement>) => {
                 // Don't trigger onClick of parent element.

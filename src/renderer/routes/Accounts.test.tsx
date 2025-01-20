@@ -6,6 +6,9 @@ import {
   waitFor,
 } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
+
+import { BaseStyles, ThemeProvider } from '@primer/react';
+
 import {
   mockAuth,
   mockGitHubAppAccount,
@@ -17,7 +20,7 @@ import { AppContext } from '../context/App';
 import * as apiRequests from '../utils/api/request';
 import * as comms from '../utils/comms';
 import * as links from '../utils/links';
-
+import * as storage from '../utils/storage';
 import { AccountsRoute } from './Accounts';
 
 const mockNavigate = jest.fn();
@@ -57,6 +60,117 @@ describe('renderer/routes/Accounts.tsx', () => {
       expect(screen.getByTestId('accounts')).toMatchSnapshot();
     });
 
+    it('should go back by pressing the icon', async () => {
+      await act(async () => {
+        render(
+          <AppContext.Provider
+            value={{
+              auth: mockAuth,
+              settings: mockSettings,
+            }}
+          >
+            <MemoryRouter>
+              <AccountsRoute />
+            </MemoryRouter>
+          </AppContext.Provider>,
+        );
+      });
+
+      fireEvent.click(screen.getByTestId('header-nav-back'));
+
+      expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
+    });
+  });
+
+  describe('Account interactions', () => {
+    it('open profile in external browser', async () => {
+      const openAccountProfileMock = jest
+        .spyOn(links, 'openAccountProfile')
+        .mockImplementation();
+
+      await act(async () => {
+        render(
+          <AppContext.Provider
+            value={{
+              auth: {
+                accounts: [mockPersonalAccessTokenAccount],
+              },
+              settings: mockSettings,
+            }}
+          >
+            <MemoryRouter>
+              <AccountsRoute />
+            </MemoryRouter>
+          </AppContext.Provider>,
+        );
+      });
+
+      fireEvent.click(screen.getByTestId('account-profile'));
+
+      expect(openAccountProfileMock).toHaveBeenCalledTimes(1);
+      expect(openAccountProfileMock).toHaveBeenCalledWith(
+        mockPersonalAccessTokenAccount,
+      );
+    });
+
+    it('open host in external browser', async () => {
+      const openExternalLinkMock = jest
+        .spyOn(comms, 'openExternalLink')
+        .mockImplementation();
+
+      await act(async () => {
+        render(
+          <AppContext.Provider
+            value={{
+              auth: {
+                accounts: [mockPersonalAccessTokenAccount],
+              },
+              settings: mockSettings,
+            }}
+          >
+            <MemoryRouter>
+              <AccountsRoute />
+            </MemoryRouter>
+          </AppContext.Provider>,
+        );
+      });
+
+      fireEvent.click(screen.getByTestId('account-host'));
+
+      expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
+      expect(openExternalLinkMock).toHaveBeenCalledWith('https://github.com');
+    });
+
+    it('open developer settings in external browser', async () => {
+      const openExternalLinkMock = jest
+        .spyOn(comms, 'openExternalLink')
+        .mockImplementation();
+
+      await act(async () => {
+        render(
+          <AppContext.Provider
+            value={{
+              auth: {
+                accounts: [mockPersonalAccessTokenAccount],
+              },
+              settings: mockSettings,
+            }}
+          >
+            <MemoryRouter>
+              <AccountsRoute />
+            </MemoryRouter>
+          </AppContext.Provider>,
+        );
+      });
+
+      fireEvent.click(screen.getByTestId('account-developer-settings'));
+
+      expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
+      expect(openExternalLinkMock).toHaveBeenCalledWith(
+        'https://github.com/settings/tokens',
+      );
+    });
+
     it('should render with PAT scopes warning', async () => {
       const openExternalLinkMock = jest
         .spyOn(comms, 'openExternalLink')
@@ -88,7 +202,7 @@ describe('renderer/routes/Accounts.tsx', () => {
 
       expect(screen.getByTestId('accounts')).toMatchSnapshot();
 
-      fireEvent.click(screen.getByLabelText('missing-scopes'));
+      fireEvent.click(screen.getAllByTestId('account-missing-scopes')[0]);
 
       expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
       expect(openExternalLinkMock).toHaveBeenCalledWith(
@@ -96,31 +210,9 @@ describe('renderer/routes/Accounts.tsx', () => {
       );
     });
 
-    it('should go back by pressing the icon', async () => {
-      await act(async () => {
-        render(
-          <AppContext.Provider
-            value={{
-              auth: mockAuth,
-              settings: mockSettings,
-            }}
-          >
-            <MemoryRouter>
-              <AccountsRoute />
-            </MemoryRouter>
-          </AppContext.Provider>,
-        );
-      });
-
-      fireEvent.click(screen.getByLabelText('Go Back'));
-      expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
-    });
-  });
-
-  describe('Account interactions', () => {
-    it('open profile in external browser', async () => {
-      const openAccountProfileMock = jest
-        .spyOn(links, 'openAccountProfile')
+    it('should set account as primary account', async () => {
+      const saveStateMock = jest
+        .spyOn(storage, 'saveState')
         .mockImplementation();
 
       await act(async () => {
@@ -128,7 +220,11 @@ describe('renderer/routes/Accounts.tsx', () => {
           <AppContext.Provider
             value={{
               auth: {
-                accounts: [mockPersonalAccessTokenAccount],
+                accounts: [
+                  mockPersonalAccessTokenAccount,
+                  mockOAuthAccount,
+                  mockGitHubAppAccount,
+                ],
               },
               settings: mockSettings,
             }}
@@ -140,70 +236,11 @@ describe('renderer/routes/Accounts.tsx', () => {
         );
       });
 
-      fireEvent.click(screen.getByTitle('Open Profile'));
+      expect(screen.getByTestId('accounts')).toMatchSnapshot();
 
-      expect(openAccountProfileMock).toHaveBeenCalledTimes(1);
-      expect(openAccountProfileMock).toHaveBeenCalledWith(
-        mockPersonalAccessTokenAccount,
-      );
-    });
+      fireEvent.click(screen.getAllByTestId('account-set-primary')[0]);
 
-    it('open host in external browser', async () => {
-      const openExternalLinkMock = jest
-        .spyOn(comms, 'openExternalLink')
-        .mockImplementation();
-
-      await act(async () => {
-        render(
-          <AppContext.Provider
-            value={{
-              auth: {
-                accounts: [mockPersonalAccessTokenAccount],
-              },
-              settings: mockSettings,
-            }}
-          >
-            <MemoryRouter>
-              <AccountsRoute />
-            </MemoryRouter>
-          </AppContext.Provider>,
-        );
-      });
-
-      fireEvent.click(screen.getByTitle('Open Host'));
-
-      expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
-      expect(openExternalLinkMock).toHaveBeenCalledWith('https://github.com');
-    });
-
-    it('open developer settings in external browser', async () => {
-      const openExternalLinkMock = jest
-        .spyOn(comms, 'openExternalLink')
-        .mockImplementation();
-
-      await act(async () => {
-        render(
-          <AppContext.Provider
-            value={{
-              auth: {
-                accounts: [mockPersonalAccessTokenAccount],
-              },
-              settings: mockSettings,
-            }}
-          >
-            <MemoryRouter>
-              <AccountsRoute />
-            </MemoryRouter>
-          </AppContext.Provider>,
-        );
-      });
-
-      fireEvent.click(screen.getByTitle('Open Developer Settings'));
-
-      expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
-      expect(openExternalLinkMock).toHaveBeenCalledWith(
-        'https://github.com/settings/tokens',
-      );
+      expect(saveStateMock).toHaveBeenCalled();
     });
 
     it('should refresh account', async () => {
@@ -226,7 +263,7 @@ describe('renderer/routes/Accounts.tsx', () => {
         );
       });
 
-      fireEvent.click(screen.getByTitle('Refresh octocat'));
+      fireEvent.click(screen.getByTestId('account-refresh'));
 
       expect(apiRequestAuthMock).toHaveBeenCalledTimes(1);
       expect(apiRequestAuthMock).toHaveBeenCalledWith(
@@ -264,7 +301,7 @@ describe('renderer/routes/Accounts.tsx', () => {
         );
       });
 
-      fireEvent.click(screen.getByTitle('Logout octocat'));
+      fireEvent.click(screen.getByTestId('account-logout'));
 
       expect(logoutFromAccountMock).toHaveBeenCalledTimes(1);
 
@@ -282,21 +319,26 @@ describe('renderer/routes/Accounts.tsx', () => {
 
       await act(async () => {
         render(
-          <AppContext.Provider
-            value={{
-              auth: { accounts: [mockOAuthAccount] },
-              settings: mockSettings,
-              loginWithGitHubApp: mockLoginWithGitHubApp,
-            }}
-          >
-            <MemoryRouter>
-              <AccountsRoute />
-            </MemoryRouter>
-          </AppContext.Provider>,
+          <ThemeProvider>
+            <BaseStyles>
+              <AppContext.Provider
+                value={{
+                  auth: { accounts: [mockOAuthAccount] },
+                  settings: mockSettings,
+                  loginWithGitHubApp: mockLoginWithGitHubApp,
+                }}
+              >
+                <MemoryRouter>
+                  <AccountsRoute />
+                </MemoryRouter>
+              </AppContext.Provider>
+            </BaseStyles>
+          </ThemeProvider>,
         );
       });
 
-      fireEvent.click(screen.getByTitle('Login with GitHub'));
+      fireEvent.click(screen.getByTestId('account-add-new'));
+      fireEvent.click(screen.getByTestId('account-add-github'));
 
       expect(mockLoginWithGitHubApp).toHaveBeenCalled();
     });
@@ -304,20 +346,25 @@ describe('renderer/routes/Accounts.tsx', () => {
     it('should show login with personal access token', async () => {
       await act(async () => {
         render(
-          <AppContext.Provider
-            value={{
-              auth: { accounts: [mockOAuthAccount] },
-              settings: mockSettings,
-            }}
-          >
-            <MemoryRouter>
-              <AccountsRoute />
-            </MemoryRouter>
-          </AppContext.Provider>,
+          <ThemeProvider>
+            <BaseStyles>
+              <AppContext.Provider
+                value={{
+                  auth: { accounts: [mockOAuthAccount] },
+                  settings: mockSettings,
+                }}
+              >
+                <MemoryRouter>
+                  <AccountsRoute />
+                </MemoryRouter>
+              </AppContext.Provider>
+            </BaseStyles>
+          </ThemeProvider>,
         );
       });
 
-      fireEvent.click(screen.getByTitle('Login with Personal Access Token'));
+      fireEvent.click(screen.getByTestId('account-add-new'));
+      fireEvent.click(screen.getByTestId('account-add-pat'));
 
       expect(mockNavigate).toHaveBeenNthCalledWith(
         1,
@@ -331,20 +378,25 @@ describe('renderer/routes/Accounts.tsx', () => {
     it('should show login with oauth app', async () => {
       await act(async () => {
         render(
-          <AppContext.Provider
-            value={{
-              auth: { accounts: [mockPersonalAccessTokenAccount] },
-              settings: mockSettings,
-            }}
-          >
-            <MemoryRouter>
-              <AccountsRoute />
-            </MemoryRouter>
-          </AppContext.Provider>,
+          <ThemeProvider>
+            <BaseStyles>
+              <AppContext.Provider
+                value={{
+                  auth: { accounts: [mockPersonalAccessTokenAccount] },
+                  settings: mockSettings,
+                }}
+              >
+                <MemoryRouter>
+                  <AccountsRoute />
+                </MemoryRouter>
+              </AppContext.Provider>
+            </BaseStyles>
+          </ThemeProvider>,
         );
       });
 
-      fireEvent.click(screen.getByTitle('Login with OAuth App'));
+      fireEvent.click(screen.getByTestId('account-add-new'));
+      fireEvent.click(screen.getByTestId('account-add-oauth-app'));
 
       expect(mockNavigate).toHaveBeenNthCalledWith(1, '/login-oauth-app', {
         replace: true,

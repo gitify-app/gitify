@@ -1,11 +1,13 @@
-import { PersonIcon, XCircleIcon } from '@primer/octicons-react';
 import { type FC, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import { PersonIcon, XCircleIcon } from '@primer/octicons-react';
+import { Button, IconButton, Stack, Tooltip } from '@primer/react';
+
 import { APPLICATION } from '../../../shared/constants';
-import { BUTTON_CLASS_NAME } from '../../styles/gitify';
-import { Size } from '../../types';
 import { getAppVersion, quitApp } from '../../utils/comms';
 import { openGitifyReleaseNotes } from '../../utils/links';
+import { Footer } from '../primitives/Footer';
 
 export const SettingsFooter: FC = () => {
   const [appVersion, setAppVersion] = useState<string | null>(null);
@@ -23,43 +25,41 @@ export const SettingsFooter: FC = () => {
   }, []);
 
   return (
-    <div className="flex items-center justify-between bg-gray-200 px-8 py-1 text-sm dark:bg-gray-darker">
-      <button
-        type="button"
-        className="cursor-pointer font-semibold"
-        title={`View ${APPLICATION.NAME} release notes`}
-        onClick={() => openGitifyReleaseNotes(appVersion)}
-      >
-        <div className="flex items-center gap-1">
-          <span aria-label="app-version">
+    <Footer justify="justify-between">
+      <Stack direction="horizontal">
+        <Tooltip text="View release notes" direction="n">
+          <Button
+            onClick={() => openGitifyReleaseNotes(appVersion)}
+            data-testid="settings-release-notes"
+          >
             {APPLICATION.NAME} {appVersion}
-          </span>
-        </div>
-      </button>
-      <div>
-        <button
-          type="button"
-          className={BUTTON_CLASS_NAME}
-          title="Accounts"
-          onClick={() => {
-            navigate('/accounts');
-          }}
-        >
-          <PersonIcon size={Size.LARGE} aria-label="Accounts" />
-        </button>
-
-        <button
-          type="button"
-          className={BUTTON_CLASS_NAME}
-          title={`Quit ${APPLICATION.NAME}`}
-          onClick={quitApp}
-        >
-          <XCircleIcon
-            size={Size.LARGE}
-            aria-label={`Quit ${APPLICATION.NAME}`}
+          </Button>
+        </Tooltip>
+      </Stack>
+      <Stack direction="horizontal" gap="normal">
+        <Tooltip text="Accounts" direction="n">
+          <IconButton
+            aria-label="Accounts"
+            icon={PersonIcon}
+            onClick={() => {
+              navigate('/accounts');
+            }}
+            data-testid="settings-accounts"
           />
-        </button>
-      </div>
-    </div>
+        </Tooltip>
+
+        <Tooltip text={`Quit ${APPLICATION.NAME}`} direction="nw">
+          <IconButton
+            aria-label={`Quit ${APPLICATION.NAME}`}
+            variant="danger"
+            icon={XCircleIcon}
+            onClick={() => {
+              quitApp();
+            }}
+            data-testid="settings-quit"
+          />
+        </Tooltip>
+      </Stack>
+    </Footer>
   );
 };

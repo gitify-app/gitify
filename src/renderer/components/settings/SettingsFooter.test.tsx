@@ -46,7 +46,7 @@ describe('renderer/routes/components/settings/SettingsFooter.tsx', () => {
         );
       });
 
-      expect(screen.getByLabelText('app-version')).toMatchSnapshot();
+      expect(screen.getByTestId('settings-release-notes')).toMatchSnapshot();
     });
 
     it('should show development app version', async () => {
@@ -70,7 +70,7 @@ describe('renderer/routes/components/settings/SettingsFooter.tsx', () => {
         );
       });
 
-      expect(screen.getByLabelText('app-version')).toMatchSnapshot();
+      expect(screen.getByTestId('settings-release-notes')).toMatchSnapshot();
     });
   });
 
@@ -98,7 +98,7 @@ describe('renderer/routes/components/settings/SettingsFooter.tsx', () => {
       );
     });
 
-    fireEvent.click(screen.getByTitle('View Gitify release notes'));
+    fireEvent.click(screen.getByTestId('settings-release-notes'));
 
     expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
     expect(openExternalLinkMock).toHaveBeenCalledWith(
@@ -122,7 +122,8 @@ describe('renderer/routes/components/settings/SettingsFooter.tsx', () => {
       );
     });
 
-    fireEvent.click(screen.getByTitle('Accounts'));
+    fireEvent.click(screen.getByTestId('settings-accounts'));
+
     expect(mockNavigate).toHaveBeenCalledWith('/accounts');
   });
 
@@ -144,7 +145,8 @@ describe('renderer/routes/components/settings/SettingsFooter.tsx', () => {
       );
     });
 
-    fireEvent.click(screen.getByTitle('Quit Gitify'));
+    fireEvent.click(screen.getByTestId('settings-quit'));
+
     expect(quitAppMock).toHaveBeenCalledTimes(1);
   });
 });

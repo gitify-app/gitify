@@ -49,7 +49,7 @@ describe('renderer/routes/Settings.tsx', () => {
       );
     });
 
-    fireEvent.click(screen.getByLabelText('Go Back'));
+    fireEvent.click(screen.getByTestId('header-nav-back'));
     expect(fetchNotifications).toHaveBeenCalledTimes(1);
     expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
   });
@@ -73,7 +73,9 @@ describe('renderer/routes/Settings.tsx', () => {
       );
     });
 
-    fireEvent.click(screen.getByText('Restore settings to their defaults'));
+    fireEvent.click(screen.getByTestId('settings-reset'));
+    fireEvent.click(screen.getByText('Reset'));
+
     expect(resetSettings).toHaveBeenCalled();
   });
 
@@ -96,7 +98,9 @@ describe('renderer/routes/Settings.tsx', () => {
       );
     });
 
-    fireEvent.click(screen.getByText('Restore settings to their defaults'));
+    fireEvent.click(screen.getByTestId('settings-reset'));
+    fireEvent.click(screen.getByText('Cancel'));
+
     expect(resetSettings).not.toHaveBeenCalled();
   });
 });

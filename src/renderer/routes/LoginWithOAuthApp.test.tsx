@@ -47,7 +47,8 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
       </AppContext.Provider>,
     );
 
-    fireEvent.click(screen.getByLabelText('Go Back'));
+    fireEvent.click(screen.getByTestId('header-nav-back'));
+
     expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
   });
 
@@ -86,7 +87,7 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
         </AppContext.Provider>,
       );
 
-      fireEvent.click(screen.getByText('Create new OAuth App'));
+      fireEvent.click(screen.getByTestId('login-create-oauth-app'));
 
       expect(openExternalLinkMock).toHaveBeenCalledTimes(0);
     });
@@ -104,7 +105,7 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
         target: { value: 'company.github.com' },
       });
 
-      fireEvent.click(screen.getByText('Create new OAuth App'));
+      fireEvent.click(screen.getByTestId('login-create-oauth-app'));
 
       expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
     });
@@ -135,7 +136,7 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
       target: { value: '1234567890_asdfghjklPOIUYTREWQ0987654321' },
     });
 
-    fireEvent.submit(screen.getByLabelText('Login'));
+    fireEvent.click(screen.getByTestId('login-submit'));
 
     await waitFor(() => expect(mockLoginWithOAuthApp).toHaveBeenCalledTimes(1));
 
@@ -162,7 +163,7 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
       target: { value: 'abc' },
     });
 
-    fireEvent.submit(screen.getByLabelText('Login'));
+    fireEvent.click(screen.getByTestId('login-submit'));
 
     expect(screen.getByText('Invalid hostname.')).toBeTruthy();
     expect(screen.getByText('Invalid client id.')).toBeTruthy();
@@ -178,7 +179,7 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
       </AppContext.Provider>,
     );
 
-    fireEvent.click(screen.getByLabelText('GitHub Docs'));
+    fireEvent.click(screen.getByTestId('login-docs'));
 
     expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
   });

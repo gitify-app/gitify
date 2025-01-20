@@ -1,4 +1,5 @@
 import type { FC } from 'react';
+
 import { APPLICATION } from '../../../shared/constants';
 import { Size } from '../../types';
 import { cn } from '../../utils/cn';
@@ -18,7 +19,7 @@ const DARK_GRADIENT_END = '#555B6E';
 export const LogoIcon: FC<ILogoIcon> = ({
   isDark,
   onClick,
-  size = Size.MEDIUM,
+  size = Size.SMALL,
   ...props
 }: ILogoIcon) => (
   <svg

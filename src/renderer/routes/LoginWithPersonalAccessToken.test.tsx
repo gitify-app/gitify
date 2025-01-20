@@ -1,10 +1,4 @@
-import {
-  act,
-  fireEvent,
-  render,
-  screen,
-  waitFor,
-} from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { AppContext } from '../context/App';
 import * as comms from '../utils/comms';
@@ -46,7 +40,8 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
       </MemoryRouter>,
     );
 
-    fireEvent.click(screen.getByLabelText('Go Back'));
+    fireEvent.click(screen.getByTestId('header-nav-back'));
+
     expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
   });
 
@@ -89,7 +84,7 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
         target: { value: '' },
       });
 
-      fireEvent.click(screen.getByText('Generate a PAT'));
+      fireEvent.click(screen.getByTestId('login-create-token'));
 
       expect(openExternalLinkMock).toHaveBeenCalledTimes(0);
     });
@@ -107,7 +102,7 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
         </AppContext.Provider>,
       );
 
-      fireEvent.click(screen.getByText('Generate a PAT'));
+      fireEvent.click(screen.getByTestId('login-create-token'));
 
       expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
     });
@@ -131,11 +126,12 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
     fireEvent.change(screen.getByLabelText('Token'), {
       target: { value: '1234567890123456789012345678901234567890' },
     });
+
     fireEvent.change(screen.getByLabelText('Hostname'), {
       target: { value: 'github.com' },
     });
 
-    fireEvent.submit(screen.getByLabelText('Login'));
+    fireEvent.click(screen.getByTestId('login-submit'));
 
     await waitFor(() =>
       expect(mockLoginWithPersonalAccessToken).toHaveBeenCalledTimes(1),
@@ -160,15 +156,15 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
       </AppContext.Provider>,
     );
 
-    act(() => {
-      fireEvent.change(screen.getByLabelText('Token'), {
-        target: { value: '1234567890123456789012345678901234567890' },
-      });
-      fireEvent.change(screen.getByLabelText('Hostname'), {
-        target: { value: 'github.com' },
-      });
-      fireEvent.submit(screen.getByLabelText('Login'));
+    fireEvent.change(screen.getByLabelText('Token'), {
+      target: { value: '1234567890123456789012345678901234567890' },
     });
+
+    fireEvent.change(screen.getByLabelText('Hostname'), {
+      target: { value: 'github.com' },
+    });
+
+    fireEvent.click(screen.getByTestId('login-submit'));
 
     await waitFor(() =>
       expect(mockLoginWithPersonalAccessToken).toHaveBeenCalledTimes(1),
@@ -192,7 +188,7 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
       target: { value: '123' },
     });
 
-    fireEvent.submit(screen.getByLabelText('Login'));
+    fireEvent.click(screen.getByTestId('login-submit'));
 
     expect(screen.getByText('Invalid hostname.')).toBeDefined();
     expect(screen.getByText('Invalid token.')).toBeDefined();
@@ -211,7 +207,7 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
       </AppContext.Provider>,
     );
 
-    fireEvent.click(screen.getByLabelText('GitHub Docs'));
+    fireEvent.click(screen.getByTestId('login-docs'));
 
     expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
   });

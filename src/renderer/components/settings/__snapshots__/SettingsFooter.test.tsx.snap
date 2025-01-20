@@ -1,21 +1,53 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renderer/routes/components/settings/SettingsFooter.tsx app version should show development app version 1`] = `
-<span
-  aria-label="app-version"
+<button
+  aria-describedby=":r7:-loading-announcement"
+  class="types__StyledButton-sc-ws60qy-0 bBRiTk"
+  data-loading="false"
+  data-no-visuals="true"
+  data-testid="settings-release-notes"
+  sx="[object Object]"
+  type="button"
 >
-  Gitify
-   
-  dev
-</span>
+  <span
+    class="Box-sc-g0xbh4-0 lbSBsX"
+    data-component="buttonContent"
+    sx="[object Object]"
+  >
+    <span
+      data-component="text"
+    >
+      Gitify
+       
+      dev
+    </span>
+  </span>
+</button>
 `;
 
 exports[`renderer/routes/components/settings/SettingsFooter.tsx app version should show production app version 1`] = `
-<span
-  aria-label="app-version"
+<button
+  aria-describedby=":r1:-loading-announcement"
+  class="types__StyledButton-sc-ws60qy-0 bhyaxP"
+  data-loading="false"
+  data-no-visuals="true"
+  data-testid="settings-release-notes"
+  sx="[object Object]"
+  type="button"
 >
-  Gitify
-   
-  v0.0.1
-</span>
+  <span
+    class="Box-sc-g0xbh4-0 lbSBsX"
+    data-component="buttonContent"
+    sx="[object Object]"
+  >
+    <span
+      data-component="text"
+    >
+      Gitify
+       
+      v0.0.1
+    </span>
+  </span>
+</button>
 `;
