@@ -1,5 +1,6 @@
 import path from 'node:path';
 
+import { APPLICATION } from '../../shared/constants';
 import { logError, logWarn } from '../../shared/logger';
 import { isWindows } from '../../shared/platform';
 import type {
@@ -84,7 +85,7 @@ export const raiseNativeNotification = (notifications: Notification[]) => {
     title = isWindows() ? '' : notification.repository.full_name;
     body = notification.subject.title;
   } else {
-    title = 'Gitify';
+    title = APPLICATION.NAME;
     body = `You have ${notifications.length} notifications.`;
   }
 

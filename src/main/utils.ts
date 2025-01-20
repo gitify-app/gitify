@@ -5,6 +5,7 @@ import { dialog, shell } from 'electron';
 import log from 'electron-log';
 import type { Menubar } from 'menubar';
 
+import { APPLICATION } from '../shared/constants';
 import { namespacedEvent } from '../shared/events';
 import { logError, logInfo } from '../shared/logger';
 
@@ -12,7 +13,10 @@ export function takeScreenshot(mb: Menubar) {
   const date = new Date();
   const dateStr = date.toISOString().replace(/:/g, '-');
 
-  const capturedPicFilePath = `${os.homedir()}/${dateStr}-gitify-screenshot.png`;
+  const capturedPicFilePath = path.join(
+    os.homedir(),
+    `${dateStr}-${APPLICATION.NAME}-screenshot.png`,
+  );
   mb.window.capturePage().then((img) => {
     fs.writeFile(capturedPicFilePath, img.toPNG(), () =>
       logInfo('takeScreenshot', `Screenshot saved ${capturedPicFilePath}`),
@@ -26,9 +30,8 @@ export function resetApp(mb: Menubar) {
 
   const response = dialog.showMessageBoxSync(mb.window, {
     type: 'warning',
-    title: 'Reset Gitify',
-    message:
-      'Are you sure you want to reset Gitify? You will be logged out of all accounts',
+    title: `Reset ${APPLICATION.NAME}`,
+    message: `Are you sure you want to reset ${APPLICATION.NAME}? You will be logged out of all accounts`,
     buttons: ['Cancel', 'Reset'],
     defaultId: cancelButtonId,
     cancelId: cancelButtonId,

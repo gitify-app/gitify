@@ -4,7 +4,8 @@ exports[`renderer/routes/components/settings/SettingsFooter.tsx app version shou
 <span
   aria-label="app-version"
 >
-  Gitify 
+  Gitify
+   
   dev
 </span>
 `;
@@ -13,7 +14,8 @@ exports[`renderer/routes/components/settings/SettingsFooter.tsx app version shou
 <span
   aria-label="app-version"
 >
-  Gitify 
+  Gitify
+   
   v0.0.1
 </span>
 `;

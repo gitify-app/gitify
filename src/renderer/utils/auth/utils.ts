@@ -2,6 +2,7 @@ import { BrowserWindow } from '@electron/remote';
 import { format } from 'date-fns';
 import semver from 'semver';
 
+import { APPLICATION } from '../../../shared/constants';
 import { logError } from '../../../shared/logger';
 import type {
   Account,
@@ -221,7 +222,10 @@ export function getDeveloperSettingsURL(account: Account): Link {
 export function getNewTokenURL(hostname: Hostname): Link {
   const date = format(new Date(), 'PP p');
   const newTokenURL = new URL(`https://${hostname}/settings/tokens/new`);
-  newTokenURL.searchParams.append('description', `Gitify (Created on ${date})`);
+  newTokenURL.searchParams.append(
+    'description',
+    `${APPLICATION.NAME} (Created on ${date})`,
+  );
   newTokenURL.searchParams.append('scopes', Constants.AUTH_SCOPE.join(','));
 
   return newTokenURL.toString() as Link;
@@ -234,7 +238,7 @@ export function getNewOAuthAppURL(hostname: Hostname): Link {
   );
   newOAuthAppURL.searchParams.append(
     'oauth_application[name]',
-    `Gitify (Created on ${date})`,
+    `${APPLICATION.NAME} (Created on ${date})`,
   );
   newOAuthAppURL.searchParams.append(
     'oauth_application[url]',

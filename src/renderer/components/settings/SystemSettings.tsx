@@ -1,5 +1,6 @@
 import { DeviceDesktopIcon } from '@primer/octicons-react';
 import { type FC, useContext } from 'react';
+import { APPLICATION } from '../../../shared/constants';
 import { isLinux, isMacOS } from '../../../shared/platform';
 import { AppContext } from '../../context/App';
 import { OpenPreference } from '../../types';
@@ -39,7 +40,7 @@ export const SystemSettings: FC = () => {
             <span className="text-orange-600">
               {Constants.DEFAULT_KEYBOARD_SHORTCUT}
             </span>{' '}
-            to show or hide Gitify.
+            to show or hide {APPLICATION.NAME}.
           </div>
         }
       />
@@ -77,8 +78,8 @@ export const SystemSettings: FC = () => {
         tooltip={
           <div>
             <div className="pb-3">
-              Use a white Gitify logo (instead of the default black logo) when
-              all notifications are read.
+              Use a white {APPLICATION.NAME} logo (instead of the default black
+              logo) when all notifications are read.
             </div>
             <div>
               This is particularly useful for devices which have a dark-themed

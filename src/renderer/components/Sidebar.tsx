@@ -9,6 +9,7 @@ import {
 } from '@primer/octicons-react';
 import { type FC, useContext, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { APPLICATION } from '../../shared/constants';
 import { AppContext } from '../context/App';
 import { Size } from '../types';
 import { quitApp } from '../utils/comms';
@@ -79,7 +80,7 @@ export const Sidebar: FC = () => {
           title="Home"
           onClick={() => navigate('/', { replace: true })}
         >
-          <LogoIcon size={Size.SMALL} aria-label="Open Gitify" />
+          <LogoIcon size={Size.SMALL} aria-label={`Open ${APPLICATION.NAME}`} />
         </button>
 
         <SidebarButton
@@ -133,7 +134,7 @@ export const Sidebar: FC = () => {
 
         {!isLoggedIn && (
           <SidebarButton
-            title="Quit Gitify"
+            title={`Quit ${APPLICATION.NAME}`}
             icon={XCircleIcon}
             size={Size.MEDIUM}
             onClick={() => quitApp()}

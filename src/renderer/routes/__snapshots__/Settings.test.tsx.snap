@@ -948,7 +948,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
   >
     <button
       class="cursor-pointer font-semibold"
-      title="View release notes"
+      title="View Gitify release notes"
       type="button"
     >
       <div
@@ -957,7 +957,8 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
         <span
           aria-label="app-version"
         >
-          Gitify 
+          Gitify
+           
           v0.0.1
         </span>
       </div>

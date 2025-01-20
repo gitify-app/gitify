@@ -1,5 +1,6 @@
 import { BellIcon } from '@primer/octicons-react';
 import { type FC, type MouseEvent, useContext } from 'react';
+import { APPLICATION } from '../../../shared/constants';
 import { AppContext } from '../../context/App';
 import { GroupBy } from '../../types';
 import { openGitHubParticipatingDocs } from '../../utils/links';
@@ -106,9 +107,9 @@ export const NotificationSettings: FC = () => {
         }
         tooltip={
           <div>
-            Keep the notification within Gitify window upon interaction (click,
-            mark as read, mark as done, etc) until the next refresh window
-            (scheduled or user initiated).
+            Keep the notification within {APPLICATION.NAME} upon interaction
+            (ie: open notification, mark as read, mark as done) until the next
+            refresh window (scheduled or user initiated).
           </div>
         }
       />

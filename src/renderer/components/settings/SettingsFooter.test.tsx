@@ -98,7 +98,7 @@ describe('renderer/routes/components/settings/SettingsFooter.tsx', () => {
       );
     });
 
-    fireEvent.click(screen.getByTitle('View release notes'));
+    fireEvent.click(screen.getByTitle('View Gitify release notes'));
 
     expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
     expect(openExternalLinkMock).toHaveBeenCalledWith(

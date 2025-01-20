@@ -79,7 +79,7 @@ export default class MenuBuilder {
             click: () => openLogsDirectory(),
           },
           {
-            label: 'Reset App',
+            label: `Reset ${APPLICATION.NAME}`,
             click: () => {
               resetApp(this.menubar);
             },
@@ -88,7 +88,7 @@ export default class MenuBuilder {
       },
       { type: 'separator' },
       {
-        label: 'Quit Gitify',
+        label: `Quit ${APPLICATION.NAME}`,
         accelerator: 'CommandOrControl+Q',
         click: () => {
           this.menubar.app.quit();

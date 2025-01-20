@@ -1,6 +1,7 @@
 import { PersonIcon, XCircleIcon } from '@primer/octicons-react';
 import { type FC, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { APPLICATION } from '../../../shared/constants';
 import { BUTTON_CLASS_NAME } from '../../styles/gitify';
 import { Size } from '../../types';
 import { getAppVersion, quitApp } from '../../utils/comms';
@@ -26,11 +27,13 @@ export const SettingsFooter: FC = () => {
       <button
         type="button"
         className="cursor-pointer font-semibold"
-        title="View release notes"
+        title={`View ${APPLICATION.NAME} release notes`}
         onClick={() => openGitifyReleaseNotes(appVersion)}
       >
         <div className="flex items-center gap-1">
-          <span aria-label="app-version">Gitify {appVersion}</span>
+          <span aria-label="app-version">
+            {APPLICATION.NAME} {appVersion}
+          </span>
         </div>
       </button>
       <div>
@@ -48,10 +51,13 @@ export const SettingsFooter: FC = () => {
         <button
           type="button"
           className={BUTTON_CLASS_NAME}
-          title="Quit Gitify"
+          title={`Quit ${APPLICATION.NAME}`}
           onClick={quitApp}
         >
-          <XCircleIcon size={Size.LARGE} aria-label="Quit Gitify" />
+          <XCircleIcon
+            size={Size.LARGE}
+            aria-label={`Quit ${APPLICATION.NAME}`}
+          />
         </button>
       </div>
     </div>
