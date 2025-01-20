@@ -15,11 +15,11 @@ import {
   markNotificationThreadAsRead,
 } from '../utils/api/client';
 import { isMarkAsDoneFeatureSupported } from '../utils/features';
+import { triggerNativeNotifications } from '../utils/notifications/native';
 import {
   getAllNotifications,
   setTrayIconColor,
-  triggerNativeNotifications,
-} from '../utils/notifications';
+} from '../utils/notifications/notifications';
 import { removeNotifications } from '../utils/notifications/remove';
 
 interface NotificationsState {
