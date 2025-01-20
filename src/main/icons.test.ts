@@ -4,13 +4,13 @@ describe('main/icons.ts', () => {
   it('should return icon images', () => {
     expect(TrayIcons.active).toContain('assets/images/tray-active.png');
 
-    expect(TrayIcons.activeUpdateIcon).toContain(
+    expect(TrayIcons.activeWithUpdate).toContain(
       'assets/images/tray-active-update.png',
     );
 
     expect(TrayIcons.idle).toContain('assets/images/tray-idleTemplate.png');
 
-    expect(TrayIcons.idleUpdateIcon).toContain(
+    expect(TrayIcons.idleWithUpdate).toContain(
       'assets/images/tray-idle-update.png',
     );
 
@@ -18,8 +18,10 @@ describe('main/icons.ts', () => {
       'assets/images/tray-idle-white.png',
     );
 
-    expect(TrayIcons.idleAlternateUpdateIcon).toContain(
+    expect(TrayIcons.idleAlternateWithUpdate).toContain(
       'assets/images/tray-idle-white-update.png',
     );
+
+    expect(TrayIcons.error).toContain('assets/images/tray-error.png');
   });
 });

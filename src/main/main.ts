@@ -118,11 +118,17 @@ app.whenReady().then(async () => {
     },
   );
 
+  ipc.on(namespacedEvent('icon-error'), () => {
+    if (!mb.tray.isDestroyed()) {
+      mb.tray.setImage(TrayIcons.error);
+    }
+  });
+
   ipc.on(namespacedEvent('icon-active'), () => {
     if (!mb.tray.isDestroyed()) {
       mb.tray.setImage(
         menuBuilder.isUpdateAvailable()
-          ? TrayIcons.activeUpdateIcon
+          ? TrayIcons.activeWithUpdate
           : TrayIcons.active,
       );
     }
@@ -133,13 +139,13 @@ app.whenReady().then(async () => {
       if (shouldUseAlternateIdleIcon) {
         mb.tray.setImage(
           menuBuilder.isUpdateAvailable()
-            ? TrayIcons.idleAlternateUpdateIcon
+            ? TrayIcons.idleAlternateWithUpdate
             : TrayIcons.idleAlternate,
         );
       } else {
         mb.tray.setImage(
           menuBuilder.isUpdateAvailable()
-            ? TrayIcons.idleUpdateIcon
+            ? TrayIcons.idleWithUpdate
             : TrayIcons.idle,
         );
       }

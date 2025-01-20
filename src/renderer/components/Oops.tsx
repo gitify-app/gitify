@@ -18,7 +18,7 @@ export const Oops: FC<IOops> = ({ error }: IOops) => {
   return (
     <Centered>
       <Stack direction="vertical" align="center">
-        <div className="mt-2 mb-5 text-5xl">
+        <div className="mt-2 text-5xl">
           <EmojiText text={emoji} />
         </div>
 

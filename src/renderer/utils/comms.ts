@@ -55,11 +55,17 @@ export function setKeyboardShortcut(keyboardShortcut: boolean): void {
 }
 
 export function updateTrayIcon(notificationsLength = 0): void {
+  if (notificationsLength < 0) {
+    ipcRenderer.send(namespacedEvent('icon-error'));
+    return;
+  }
+
   if (notificationsLength > 0) {
     ipcRenderer.send(namespacedEvent('icon-active'));
-  } else {
-    ipcRenderer.send(namespacedEvent('icon-idle'));
+    return;
   }
+
+  ipcRenderer.send(namespacedEvent('icon-idle'));
 }
 
 export function updateTrayTitle(title = ''): void {
