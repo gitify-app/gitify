@@ -209,7 +209,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
         </div>
       </div>
       <div
-        class="flex flex-1 flex-col items-center justify-center min-h-screen"
+        class="flex flex-1 flex-col items-center justify-center p-8 min-h-screen"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
@@ -220,7 +220,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           data-wrap="nowrap"
         >
           <div
-            class="mt-2 mb-5 text-5xl"
+            class="mt-2 text-5xl"
           >
             <span>
               <img
@@ -450,7 +450,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
       </div>
     </div>
     <div
-      class="flex flex-1 flex-col items-center justify-center min-h-screen"
+      class="flex flex-1 flex-col items-center justify-center p-8 min-h-screen"
     >
       <div
         class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
@@ -461,7 +461,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
         data-wrap="nowrap"
       >
         <div
-          class="mt-2 mb-5 text-5xl"
+          class="mt-2 text-5xl"
         >
           <span>
             <img
@@ -2842,7 +2842,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
         </div>
       </div>
       <div
-        class="flex flex-1 flex-col items-center justify-center min-h-screen"
+        class="flex flex-1 flex-col items-center justify-center p-8 min-h-screen"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
@@ -3078,7 +3078,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
       </div>
     </div>
     <div
-      class="flex flex-1 flex-col items-center justify-center min-h-screen"
+      class="flex flex-1 flex-col items-center justify-center p-8 min-h-screen"
     >
       <div
         class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"

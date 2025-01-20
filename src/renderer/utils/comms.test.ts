@@ -162,4 +162,13 @@ describe('renderer/utils/comms.ts', () => {
     expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
     expect(ipcRenderer.send).toHaveBeenCalledWith(namespacedEvent('icon-idle'));
   });
+
+  it('should send mark the icons as error', () => {
+    const notificationsLength = -1;
+    updateTrayIcon(notificationsLength);
+    expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
+    expect(ipcRenderer.send).toHaveBeenCalledWith(
+      namespacedEvent('icon-error'),
+    );
+  });
 });

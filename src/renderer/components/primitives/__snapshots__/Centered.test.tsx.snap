@@ -6,7 +6,7 @@ exports[`renderer/components/primitives/Centered.tsx should render itself & its 
   "baseElement": <body>
     <div>
       <div
-        class="flex flex-1 flex-col items-center justify-center min-h-screen"
+        class="flex flex-1 flex-col items-center justify-center p-8 min-h-screen"
       >
         Test
       </div>
@@ -14,7 +14,7 @@ exports[`renderer/components/primitives/Centered.tsx should render itself & its 
   </body>,
   "container": <div>
     <div
-      class="flex flex-1 flex-col items-center justify-center min-h-screen"
+      class="flex flex-1 flex-col items-center justify-center p-8 min-h-screen"
     >
       Test
     </div>
