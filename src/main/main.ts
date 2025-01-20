@@ -2,6 +2,9 @@ import { app, globalShortcut, ipcMain as ipc, nativeTheme } from 'electron';
 import log from 'electron-log';
 import { menubar } from 'menubar';
 
+import { APPLICATION } from '../shared/constants';
+import { namespacedEvent } from '../shared/events';
+import { isMacOS, isWindows } from '../shared/platform';
 import { onFirstRunMaybe } from './first-run';
 import { TrayIcons } from './icons';
 import MenuBuilder from './menu';
@@ -38,8 +41,9 @@ const contextMenu = menuBuilder.buildMenu();
  * Electron Auto Updater only supports macOS and Windows
  * https://github.com/electron/update-electron-app
  */
-if (process.platform === 'darwin' || process.platform === 'win32') {
-  new Updater(mb, menuBuilder);
+if (isMacOS() || isWindows()) {
+  const updater = new Updater(mb, menuBuilder);
+  updater.initialize();
 }
 
 let shouldUseAlternateIdleIcon = false;
@@ -48,7 +52,7 @@ app.whenReady().then(async () => {
   await onFirstRunMaybe();
 
   mb.on('ready', () => {
-    mb.app.setAppUserModelId('com.electron.gitify');
+    mb.app.setAppUserModelId(APPLICATION.ID);
 
     /**
      * TODO: Remove @electron/remote use - see #650
@@ -58,7 +62,7 @@ app.whenReady().then(async () => {
     require('@electron/remote/main').enable(mb.window.webContents);
 
     // Tray configuration
-    mb.tray.setToolTip('Gitify');
+    mb.tray.setToolTip(APPLICATION.NAME);
     mb.tray.setIgnoreDoubleClickEvents(true);
     mb.tray.on('right-click', (_event, bounds) => {
       mb.tray.popUpContextMenu(contextMenu, { x: bounds.x, y: bounds.y });
@@ -90,48 +94,51 @@ app.whenReady().then(async () => {
 
   nativeTheme.on('updated', () => {
     if (nativeTheme.shouldUseDarkColors) {
-      mb.window.webContents.send('gitify:update-theme', 'DARK');
+      mb.window.webContents.send(namespacedEvent('update-theme'), 'DARK');
     } else {
-      mb.window.webContents.send('gitify:update-theme', 'LIGHT');
+      mb.window.webContents.send(namespacedEvent('update-theme'), 'LIGHT');
     }
   });
 
   /**
    * Gitify custom IPC events
    */
-  ipc.handle('gitify:version', () => app.getVersion());
+  ipc.handle(namespacedEvent('version'), () => app.getVersion());
 
-  ipc.on('gitify:window-show', () => mb.showWindow());
+  ipc.on(namespacedEvent('window-show'), () => mb.showWindow());
 
-  ipc.on('gitify:window-hide', () => mb.hideWindow());
+  ipc.on(namespacedEvent('window-hide'), () => mb.hideWindow());
 
-  ipc.on('gitify:quit', () => mb.app.quit());
+  ipc.on(namespacedEvent('quit'), () => mb.app.quit());
 
-  ipc.on('gitify:use-alternate-idle-icon', (_, useAlternateIdleIcon) => {
-    shouldUseAlternateIdleIcon = useAlternateIdleIcon;
-  });
+  ipc.on(
+    namespacedEvent('use-alternate-idle-icon'),
+    (_, useAlternateIdleIcon) => {
+      shouldUseAlternateIdleIcon = useAlternateIdleIcon;
+    },
+  );
 
-  ipc.on('gitify:icon-active', () => {
+  ipc.on(namespacedEvent('icon-active'), () => {
     if (!mb.tray.isDestroyed()) {
       mb.tray.setImage(
-        menuBuilder.isUpdateAvailableMenuVisible()
+        menuBuilder.isUpdateAvailable()
           ? TrayIcons.activeUpdateIcon
           : TrayIcons.active,
       );
     }
   });
 
-  ipc.on('gitify:icon-idle', () => {
+  ipc.on(namespacedEvent('icon-idle'), () => {
     if (!mb.tray.isDestroyed()) {
       if (shouldUseAlternateIdleIcon) {
         mb.tray.setImage(
-          menuBuilder.isUpdateAvailableMenuVisible()
+          menuBuilder.isUpdateAvailable()
             ? TrayIcons.idleAlternateUpdateIcon
             : TrayIcons.idleAlternate,
         );
       } else {
         mb.tray.setImage(
-          menuBuilder.isUpdateAvailableMenuVisible()
+          menuBuilder.isUpdateAvailable()
             ? TrayIcons.idleUpdateIcon
             : TrayIcons.idle,
         );
@@ -139,14 +146,14 @@ app.whenReady().then(async () => {
     }
   });
 
-  ipc.on('gitify:update-title', (_, title) => {
+  ipc.on(namespacedEvent('update-title'), (_, title) => {
     if (!mb.tray.isDestroyed()) {
       mb.tray.setTitle(title);
     }
   });
 
   ipc.on(
-    'gitify:update-keyboard-shortcut',
+    namespacedEvent('update-keyboard-shortcut'),
     (_, { enabled, keyboardShortcut }) => {
       if (!enabled) {
         globalShortcut.unregister(keyboardShortcut);
@@ -163,7 +170,7 @@ app.whenReady().then(async () => {
     },
   );
 
-  ipc.on('gitify:update-auto-launch', (_, settings) => {
+  ipc.on(namespacedEvent('update-auto-launch'), (_, settings) => {
     app.setLoginItemSettings(settings);
   });
 });

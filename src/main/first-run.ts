@@ -2,7 +2,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { app, dialog } from 'electron';
 
+import { APPLICATION } from '../shared/constants';
 import { logError } from '../shared/logger';
+import { isMacOS } from '../shared/platform';
 
 export async function onFirstRunMaybe() {
   if (isFirstRun()) {
@@ -12,7 +14,7 @@ export async function onFirstRunMaybe() {
 
 // Ask user if the app should be moved to the applications folder.
 async function promptMoveToApplicationsFolder() {
-  if (process.platform !== 'darwin') return;
+  if (!isMacOS()) return;
 
   const isDevMode = !!process.defaultApp;
   if (isDevMode || app.isInApplicationsFolder()) return;
@@ -31,7 +33,7 @@ async function promptMoveToApplicationsFolder() {
 
 const getConfigPath = () => {
   const userDataPath = app.getPath('userData');
-  return path.join(userDataPath, 'FirstRun', 'gitify-first-run');
+  return path.join(userDataPath, 'FirstRun', APPLICATION.FIRST_RUN_FOLDER);
 };
 
 // Whether or not the app is being run for the first time.

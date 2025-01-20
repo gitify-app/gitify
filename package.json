@@ -65,7 +65,7 @@
   "bugs": {
     "url": "https://github.com/gitify-app/gitify/issues"
   },
-  "homepage": "https://www.gitify.io/",
+  "homepage": "https://gitify.io/",
   "build": {
     "productName": "Gitify",
     "appId": "com.electron.gitify",
@@ -132,7 +132,7 @@
     "menubar": "9.5.1",
     "react": "19.0.0",
     "react-dom": "19.0.0",
-    "react-router-dom": "7.1.1",
+    "react-router-dom": "7.1.3",
     "update-electron-app": "3.1.0"
   },
   "devDependencies": {

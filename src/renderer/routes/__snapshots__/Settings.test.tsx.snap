@@ -1122,7 +1122,8 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             <span
               data-component="text"
             >
-              Gitify 
+              Gitify
+               
               v0.0.1
             </span>
           </span>

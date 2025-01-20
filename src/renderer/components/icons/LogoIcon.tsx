@@ -1,5 +1,6 @@
 import type { FC } from 'react';
 
+import { APPLICATION } from '../../../shared/constants';
 import { Size } from '../../types';
 import { cn } from '../../utils/cn';
 
@@ -32,7 +33,7 @@ export const LogoIcon: FC<ILogoIcon> = ({
     xmlnsXlink="https://www.w3.org/1999/xlink"
     viewBox="0 0 500 500"
     role="img"
-    aria-label="Gitify Logo"
+    aria-label={`${APPLICATION.NAME} Logo`}
     {...props}
   >
     <defs>

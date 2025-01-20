@@ -15,6 +15,7 @@ import {
 } from '@primer/octicons-react';
 import { Button, ButtonGroup, IconButton, useTheme } from '@primer/react';
 
+import { namespacedEvent } from '../../../shared/events';
 import { AppContext } from '../../context/App';
 import { Size, Theme } from '../../types';
 import { hasMultipleAccounts } from '../../utils/auth/utils';
@@ -35,14 +36,17 @@ export const AppearanceSettings: FC = () => {
   );
 
   useEffect(() => {
-    ipcRenderer.on('gitify:update-theme', (_, updatedTheme: Theme) => {
-      if (settings.theme === Theme.SYSTEM) {
-        const mode = getColorModeFromTheme(updatedTheme);
+    ipcRenderer.on(
+      namespacedEvent('update-theme'),
+      (_, updatedTheme: Theme) => {
+        if (settings.theme === Theme.SYSTEM) {
+          const mode = getColorModeFromTheme(updatedTheme);
 
-        setTheme(updatedTheme);
-        setColorMode(mode);
-      }
-    });
+          setTheme(updatedTheme);
+          setColorMode(mode);
+        }
+      },
+    );
   }, [settings.theme, setColorMode]);
 
   window.addEventListener('resize', () => {

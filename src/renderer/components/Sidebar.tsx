@@ -10,8 +10,9 @@ import {
   SyncIcon,
   XCircleIcon,
 } from '@primer/octicons-react';
-
 import { IconButton, Stack } from '@primer/react';
+
+import { APPLICATION } from '../../shared/constants';
 import { AppContext } from '../context/App';
 import { quitApp } from '../utils/comms';
 import { Constants } from '../utils/constants';
@@ -78,7 +79,7 @@ export const Sidebar: FC = () => {
         >
           <IconButton
             icon={LogoIcon}
-            aria-label="Gitify"
+            aria-label={APPLICATION.NAME}
             description="Home"
             unsafeDisableTooltip={false}
             size="small"
@@ -183,7 +184,7 @@ export const Sidebar: FC = () => {
         {!isLoggedIn && (
           <IconButton
             icon={XCircleIcon}
-            aria-label="Quit Gitify"
+            aria-label={`Quit ${APPLICATION.NAME}`}
             unsafeDisableTooltip={false}
             size="small"
             variant="invisible"

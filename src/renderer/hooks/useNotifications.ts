@@ -73,22 +73,26 @@ export const useNotifications = (): NotificationsState => {
       const fetchedNotifications = await getAllNotifications(state);
 
       // Set Global Error if all accounts have the same error
-      const allAccountsHaveErrors = fetchedNotifications.every((account) => {
-        return account.error !== null;
-      });
-      let accountErrorsAreAllSame = true;
-      const accountError = fetchedNotifications[0]?.error;
-      for (const fetchedNotification of fetchedNotifications) {
-        if (accountError !== fetchedNotification.error) {
-          accountErrorsAreAllSame = false;
-          break;
-        }
-      }
+      if (fetchNotifications.length > 0) {
+        const allAccountsHaveErrors = fetchedNotifications.every((account) => {
+          return account.error !== null;
+        });
 
-      if (allAccountsHaveErrors) {
-        setStatus('error');
-        setGlobalError(accountErrorsAreAllSame ? accountError : null);
-        return;
+        let accountErrorsAreAllSame = true;
+        const accountError = fetchedNotifications[0]?.error;
+
+        for (const fetchedNotification of fetchedNotifications) {
+          if (accountError !== fetchedNotification.error) {
+            accountErrorsAreAllSame = false;
+            break;
+          }
+        }
+
+        if (allAccountsHaveErrors) {
+          setStatus('error');
+          setGlobalError(accountErrorsAreAllSame ? accountError : null);
+          return;
+        }
       }
 
       setNotifications(fetchedNotifications);

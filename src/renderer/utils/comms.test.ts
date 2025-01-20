@@ -1,4 +1,6 @@
 import { ipcRenderer, shell } from 'electron';
+
+import { namespacedEvent } from '../../shared/events';
 import { mockSettings } from '../__mocks__/state-mocks';
 import type { Link } from '../types';
 import {
@@ -63,50 +65,60 @@ describe('renderer/utils/comms.ts', () => {
   it('should get app version', async () => {
     await getAppVersion();
     expect(ipcRenderer.invoke).toHaveBeenCalledTimes(1);
-    expect(ipcRenderer.invoke).toHaveBeenCalledWith('gitify:version');
+    expect(ipcRenderer.invoke).toHaveBeenCalledWith(namespacedEvent('version'));
   });
 
   it('should quit the app', () => {
     quitApp();
     expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
-    expect(ipcRenderer.send).toHaveBeenCalledWith('gitify:quit');
+    expect(ipcRenderer.send).toHaveBeenCalledWith(namespacedEvent('quit'));
   });
 
   it('should show the window', () => {
     showWindow();
     expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
-    expect(ipcRenderer.send).toHaveBeenCalledWith('gitify:window-show');
+    expect(ipcRenderer.send).toHaveBeenCalledWith(
+      namespacedEvent('window-show'),
+    );
   });
 
   it('should hide the window', () => {
     hideWindow();
     expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
-    expect(ipcRenderer.send).toHaveBeenCalledWith('gitify:window-hide');
+    expect(ipcRenderer.send).toHaveBeenCalledWith(
+      namespacedEvent('window-hide'),
+    );
   });
 
   it('should setAutoLaunch (true)', () => {
     setAutoLaunch(true);
 
-    expect(ipcRenderer.send).toHaveBeenCalledWith('gitify:update-auto-launch', {
-      openAtLogin: true,
-      openAsHidden: true,
-    });
+    expect(ipcRenderer.send).toHaveBeenCalledWith(
+      namespacedEvent('update-auto-launch'),
+      {
+        openAtLogin: true,
+        openAsHidden: true,
+      },
+    );
   });
 
   it('should setAutoLaunch (false)', () => {
     setAutoLaunch(false);
 
-    expect(ipcRenderer.send).toHaveBeenCalledWith('gitify:update-auto-launch', {
-      openAsHidden: false,
-      openAtLogin: false,
-    });
+    expect(ipcRenderer.send).toHaveBeenCalledWith(
+      namespacedEvent('update-auto-launch'),
+      {
+        openAsHidden: false,
+        openAtLogin: false,
+      },
+    );
   });
 
   it('should setAlternateIdleIcon', () => {
     setAlternateIdleIcon(true);
 
     expect(ipcRenderer.send).toHaveBeenCalledWith(
-      'gitify:use-alternate-idle-icon',
+      namespacedEvent('use-alternate-idle-icon'),
       true,
     );
   });
@@ -115,7 +127,7 @@ describe('renderer/utils/comms.ts', () => {
     setKeyboardShortcut(true);
     expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
     expect(ipcRenderer.send).toHaveBeenCalledWith(
-      'gitify:update-keyboard-shortcut',
+      namespacedEvent('update-keyboard-shortcut'),
       {
         enabled: true,
         keyboardShortcut: Constants.DEFAULT_KEYBOARD_SHORTCUT,
@@ -127,7 +139,7 @@ describe('renderer/utils/comms.ts', () => {
     setKeyboardShortcut(false);
     expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
     expect(ipcRenderer.send).toHaveBeenCalledWith(
-      'gitify:update-keyboard-shortcut',
+      namespacedEvent('update-keyboard-shortcut'),
       {
         enabled: false,
         keyboardShortcut: Constants.DEFAULT_KEYBOARD_SHORTCUT,
@@ -139,13 +151,15 @@ describe('renderer/utils/comms.ts', () => {
     const notificationsLength = 3;
     updateTrayIcon(notificationsLength);
     expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
-    expect(ipcRenderer.send).toHaveBeenCalledWith('gitify:icon-active');
+    expect(ipcRenderer.send).toHaveBeenCalledWith(
+      namespacedEvent('icon-active'),
+    );
   });
 
   it('should send mark the icons as idle', () => {
     const notificationsLength = 0;
     updateTrayIcon(notificationsLength);
     expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
-    expect(ipcRenderer.send).toHaveBeenCalledWith('gitify:icon-idle');
+    expect(ipcRenderer.send).toHaveBeenCalledWith(namespacedEvent('icon-idle'));
   });
 });

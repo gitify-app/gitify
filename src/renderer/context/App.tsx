@@ -9,6 +9,8 @@ import {
 } from 'react';
 
 import { useTheme } from '@primer/react';
+
+import { namespacedEvent } from '../../shared/events';
 import { useInterval } from '../hooks/useInterval';
 import { useNotifications } from '../hooks/useNotifications';
 import {
@@ -178,7 +180,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   }, [settings.keyboardShortcut]);
 
   useEffect(() => {
-    ipcRenderer.on('gitify:reset-app', () => {
+    ipcRenderer.on(namespacedEvent('reset-app'), () => {
       clearState();
       setAuth(defaultAuth);
       setSettings(defaultSettings);

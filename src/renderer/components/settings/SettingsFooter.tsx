@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { PersonIcon, XCircleIcon } from '@primer/octicons-react';
 import { Button, IconButton, Stack, Tooltip } from '@primer/react';
 
+import { APPLICATION } from '../../../shared/constants';
 import { getAppVersion, quitApp } from '../../utils/comms';
 import { openGitifyReleaseNotes } from '../../utils/links';
 import { Footer } from '../primitives/Footer';
@@ -31,7 +32,7 @@ export const SettingsFooter: FC = () => {
             onClick={() => openGitifyReleaseNotes(appVersion)}
             data-testid="settings-release-notes"
           >
-            Gitify {appVersion}
+            {APPLICATION.NAME} {appVersion}
           </Button>
         </Tooltip>
       </Stack>
@@ -47,9 +48,9 @@ export const SettingsFooter: FC = () => {
           />
         </Tooltip>
 
-        <Tooltip text="Quit Gitify" direction="nw">
+        <Tooltip text={`Quit ${APPLICATION.NAME}`} direction="nw">
           <IconButton
-            aria-label="Quit Gitify"
+            aria-label={`Quit ${APPLICATION.NAME}`}
             variant="danger"
             icon={XCircleIcon}
             onClick={() => {

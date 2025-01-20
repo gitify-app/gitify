@@ -1,12 +1,16 @@
-import { Menu, MenuItem } from 'electron';
+import { Menu, MenuItem, shell } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import type { Menubar } from 'menubar';
+
+import { APPLICATION } from '../shared/constants';
+import { isMacOS, isWindows } from '../shared/platform';
 import { openLogsDirectory, resetApp, takeScreenshot } from './utils';
 
 export default class MenuBuilder {
-  private checkForUpdatesMenuItem: MenuItem;
-  private updateAvailableMenuItem: MenuItem;
-  private updateReadyForInstallMenuItem: MenuItem;
+  private readonly checkForUpdatesMenuItem: MenuItem;
+  private readonly noUpdateAvailableMenuItem: MenuItem;
+  private readonly updateAvailableMenuItem: MenuItem;
+  private readonly updateReadyForInstallMenuItem: MenuItem;
 
   menubar: Menubar;
 
@@ -17,8 +21,18 @@ export default class MenuBuilder {
       label: 'Check for updates',
       enabled: true,
       click: () => {
-        autoUpdater.checkForUpdatesAndNotify();
+        if (isMacOS() || isWindows()) {
+          autoUpdater.checkForUpdatesAndNotify();
+        } else {
+          shell.openExternal(APPLICATION.WEBSITE);
+        }
       },
+    });
+
+    this.noUpdateAvailableMenuItem = new MenuItem({
+      label: 'No updates available',
+      enabled: false,
+      visible: false,
     });
 
     this.updateAvailableMenuItem = new MenuItem({
@@ -28,7 +42,8 @@ export default class MenuBuilder {
     });
 
     this.updateReadyForInstallMenuItem = new MenuItem({
-      label: 'Restart to update',
+      label: 'Restart to install update',
+      enabled: true,
       visible: false,
       click: () => {
         autoUpdater.quitAndInstall();
@@ -39,6 +54,7 @@ export default class MenuBuilder {
   buildMenu(): Menu {
     const contextMenu = Menu.buildFromTemplate([
       this.checkForUpdatesMenuItem,
+      this.noUpdateAvailableMenuItem,
       this.updateAvailableMenuItem,
       this.updateReadyForInstallMenuItem,
       { type: 'separator' },
@@ -51,8 +67,7 @@ export default class MenuBuilder {
           },
           {
             role: 'toggleDevTools',
-            accelerator:
-              process.platform === 'darwin' ? 'Alt+Cmd+I' : 'Ctrl+Shift+I',
+            accelerator: isMacOS() ? 'Alt+Cmd+I' : 'Ctrl+Shift+I',
           },
           {
             label: 'Take Screenshot',
@@ -64,7 +79,7 @@ export default class MenuBuilder {
             click: () => openLogsDirectory(),
           },
           {
-            label: 'Reset App',
+            label: `Reset ${APPLICATION.NAME}`,
             click: () => {
               resetApp(this.menubar);
             },
@@ -73,7 +88,7 @@ export default class MenuBuilder {
       },
       { type: 'separator' },
       {
-        label: 'Quit Gitify',
+        label: `Quit ${APPLICATION.NAME}`,
         accelerator: 'CommandOrControl+Q',
         click: () => {
           this.menubar.app.quit();
@@ -88,15 +103,21 @@ export default class MenuBuilder {
     this.checkForUpdatesMenuItem.enabled = enabled;
   }
 
-  setUpdateAvailableMenuEnabled(enabled: boolean) {
-    this.updateAvailableMenuItem.enabled = enabled;
+  setNoUpdateAvailableMenuVisibility(isVisible: boolean) {
+    this.noUpdateAvailableMenuItem.visible = isVisible;
   }
 
-  setUpdateReadyForInstallMenuEnabled(enabled: boolean) {
-    this.updateReadyForInstallMenuItem.enabled = enabled;
+  setUpdateAvailableMenuVisibility(isVisible: boolean) {
+    this.updateAvailableMenuItem.visible = isVisible;
   }
 
-  isUpdateAvailableMenuVisible() {
-    return this.updateAvailableMenuItem.visible;
+  setUpdateReadyForInstallMenuVisibility(isVisible: boolean) {
+    this.updateReadyForInstallMenuItem.visible = isVisible;
+  }
+
+  isUpdateAvailable() {
+    return (
+      this.updateAvailableMenuItem.visible || this.updateReadyForInstallMenuItem
+    );
   }
 }

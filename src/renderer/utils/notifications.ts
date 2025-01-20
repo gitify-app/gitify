@@ -1,6 +1,8 @@
 import path from 'node:path';
 
+import { APPLICATION } from '../../shared/constants';
 import { logError, logWarn } from '../../shared/logger';
+import { isWindows } from '../../shared/platform';
 import type {
   AccountNotifications,
   GitifyState,
@@ -13,7 +15,6 @@ import { getAccountUUID } from './auth/utils';
 import { hideWindow, showWindow, updateTrayIcon } from './comms';
 import { Constants } from './constants';
 import { openNotification } from './links';
-import { isWindows } from './platform';
 import { getGitifySubjectDetails } from './subject';
 
 export function setTrayIconColor(notifications: AccountNotifications[]) {
@@ -84,7 +85,7 @@ export const raiseNativeNotification = (notifications: Notification[]) => {
     title = isWindows() ? '' : notification.repository.full_name;
     body = notification.subject.title;
   } else {
-    title = 'Gitify';
+    title = APPLICATION.NAME;
     body = `You have ${notifications.length} notifications.`;
   }
 

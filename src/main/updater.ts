@@ -3,17 +3,20 @@ import { autoUpdater } from 'electron-updater';
 import type { Menubar } from 'menubar';
 import { updateElectronApp } from 'update-electron-app';
 
+import { APPLICATION } from '../shared/constants';
 import { logError, logInfo } from '../shared/logger';
 import type MenuBuilder from './menu';
 
 export default class Updater {
-  menubar: Menubar;
-  menuBuilder: MenuBuilder;
+  private readonly menubar: Menubar;
+  private readonly menuBuilder: MenuBuilder;
 
   constructor(menubar: Menubar, menuBuilder: MenuBuilder) {
     this.menubar = menubar;
     this.menuBuilder = menuBuilder;
+  }
 
+  initialize(): void {
     updateElectronApp({
       updateInterval: '24 hours',
       logger: log,
@@ -23,32 +26,37 @@ export default class Updater {
       logInfo('auto updater', 'Checking for update');
 
       this.menuBuilder.setCheckForUpdatesMenuEnabled(false);
+      this.menuBuilder.setNoUpdateAvailableMenuVisibility(false);
     });
 
     autoUpdater.on('update-available', () => {
       logInfo('auto updater', 'New update available');
 
-      this.menubar.tray.setToolTip('Gitify\nA new update is available');
-      menuBuilder.setUpdateAvailableMenuEnabled(true);
+      this.setTooltipWithStatus('A new update is available');
+      this.menuBuilder.setUpdateAvailableMenuVisibility(true);
     });
 
     autoUpdater.on('download-progress', (progressObj) => {
-      this.menubar.tray.setToolTip(
-        `Gitify\nDownloading update: ${progressObj.percent} %`,
+      this.setTooltipWithStatus(
+        `Downloading update: ${progressObj.percent.toFixed(2)}%`,
       );
     });
 
     autoUpdater.on('update-downloaded', () => {
       logInfo('auto updater', 'Update downloaded');
 
-      this.menubar.tray.setToolTip('Gitify\nA new update is ready to install');
-      menuBuilder.setUpdateReadyForInstallMenuEnabled(true);
+      this.setTooltipWithStatus('A new update is ready to install');
+      this.menuBuilder.setUpdateAvailableMenuVisibility(false);
+      this.menuBuilder.setUpdateReadyForInstallMenuVisibility(true);
     });
 
     autoUpdater.on('update-not-available', () => {
       logInfo('auto updater', 'Update not available');
 
-      this.resetState();
+      this.menuBuilder.setCheckForUpdatesMenuEnabled(true);
+      this.menuBuilder.setNoUpdateAvailableMenuVisibility(true);
+      this.menuBuilder.setUpdateAvailableMenuVisibility(false);
+      this.menuBuilder.setUpdateReadyForInstallMenuVisibility(false);
     });
 
     autoUpdater.on('update-cancelled', () => {
@@ -64,10 +72,15 @@ export default class Updater {
     });
   }
 
+  private setTooltipWithStatus(status: string) {
+    this.menubar.tray.setToolTip(`${APPLICATION.NAME}\n${status}`);
+  }
+
   private resetState() {
-    this.menubar.tray.setToolTip('Gitify');
+    this.menubar.tray.setToolTip(APPLICATION.NAME);
     this.menuBuilder.setCheckForUpdatesMenuEnabled(true);
-    this.menuBuilder.setUpdateAvailableMenuEnabled(false);
-    this.menuBuilder.setUpdateReadyForInstallMenuEnabled(false);
+    this.menuBuilder.setNoUpdateAvailableMenuVisibility(false);
+    this.menuBuilder.setUpdateAvailableMenuVisibility(false);
+    this.menuBuilder.setUpdateReadyForInstallMenuVisibility(false);
   }
 }
