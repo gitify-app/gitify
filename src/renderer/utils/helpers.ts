@@ -3,7 +3,6 @@ import {
   ChevronLeftIcon,
   ChevronRightIcon,
 } from '@primer/octicons-react';
-import { formatDistanceToNowStrict, parseISO } from 'date-fns';
 
 import { logError, logWarn } from '../../shared/logger';
 import type { Chevron, Hostname, Link } from '../types';
@@ -185,18 +184,6 @@ export function formatForDisplay(text: string[]): string {
       // Convert to proper case (capitalize first letter of each word)
       return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
     });
-}
-
-export function formatNotificationUpdatedAt(
-  notification: Notification,
-): string {
-  try {
-    return formatDistanceToNowStrict(parseISO(notification.updated_at), {
-      addSuffix: true,
-    });
-  } catch (e) {}
-
-  return '';
 }
 
 export function getChevronDetails(
