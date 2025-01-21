@@ -1,7 +1,7 @@
 import type { FC, MouseEvent } from 'react';
 
 import { FeedPersonIcon, MarkGithubIcon } from '@primer/octicons-react';
-import { Avatar, RelativeTime } from '@primer/react';
+import { Avatar, RelativeTime, Stack, Text } from '@primer/react';
 
 import { IconColor, Opacity, Size } from '../../types';
 import type { Notification } from '../../typesGitHub';
@@ -21,7 +21,7 @@ export const NotificationFooter: FC<INotificationFooter> = ({
   const reason = formatReason(notification.reason);
 
   return (
-    <div className="flex flex-wrap items-center gap-1">
+    <Stack direction="horizontal" align="center" gap="condensed" wrap="wrap">
       {notification.subject.user ? (
         <Avatar
           title={`View profile: ${notification.subject.user.login}`}
@@ -46,13 +46,14 @@ export const NotificationFooter: FC<INotificationFooter> = ({
         </>
       )}
       <span className={cn('text-xs', Opacity.MEDIUM)}>
-        <span className={'capitalize'} title={reason.description}>
-          {reason.title}
-        </span>
-        <span> • </span>
-        <RelativeTime datetime={notification.updated_at} />
+        <Stack direction="horizontal" gap="condensed">
+          <Text title={reason.description}>{reason.title}</Text>
+          <Text>&bull;</Text>
+          <RelativeTime datetime={notification.updated_at} />
+        </Stack>
       </span>
+
       <Pills notification={notification} />
-    </div>
+    </Stack>
   );
 };
