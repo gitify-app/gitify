@@ -1,15 +1,12 @@
 import type { FC, MouseEvent } from 'react';
 
 import { FeedPersonIcon, MarkGithubIcon } from '@primer/octicons-react';
-import { Avatar } from '@primer/react';
+import { Avatar, RelativeTime } from '@primer/react';
 
 import { IconColor, Opacity, Size } from '../../types';
 import type { Notification } from '../../typesGitHub';
 import { cn } from '../../utils/cn';
-import {
-  formatNotificationUpdatedAt,
-  isNonHumanUser,
-} from '../../utils/helpers';
+import { isNonHumanUser } from '../../utils/helpers';
 import { openUserProfile } from '../../utils/links';
 import { formatReason } from '../../utils/reason';
 import { Pills } from './Pills';
@@ -22,11 +19,6 @@ export const NotificationFooter: FC<INotificationFooter> = ({
   notification,
 }: INotificationFooter) => {
   const reason = formatReason(notification.reason);
-
-  const updatedAt = formatNotificationUpdatedAt(notification);
-  const updatedLabel = notification.subject.user
-    ? `${notification.subject.user.login} updated ${updatedAt}`
-    : `Updated ${updatedAt}`;
 
   return (
     <div className="flex flex-wrap items-center gap-1">
@@ -53,17 +45,12 @@ export const NotificationFooter: FC<INotificationFooter> = ({
           )}
         </>
       )}
-      <span
-        className={cn('text-xs capitalize', Opacity.MEDIUM)}
-        title={reason.description}
-      >
-        {reason.title}
-      </span>
-      <span
-        className={cn('text-xs capitalize', Opacity.MEDIUM)}
-        title={updatedLabel}
-      >
-        {updatedAt}
+      <span className={cn('text-xs', Opacity.MEDIUM)}>
+        <span className={'capitalize'} title={reason.description}>
+          {reason.title}
+        </span>
+        <span> • </span>
+        <RelativeTime datetime={notification.updated_at} />
       </span>
       <Pills notification={notification} />
     </div>
