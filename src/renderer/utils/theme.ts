@@ -49,7 +49,7 @@ export function setTheme(theme?: Theme) {
 export function getColorModeFromTheme(theme: Theme): ColorModeWithAuto {
   switch (theme) {
     case Theme.LIGHT:
-      return 'light';
+      return 'day';
     case Theme.DARK:
       return 'night';
     default:

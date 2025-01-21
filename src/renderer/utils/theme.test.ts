@@ -41,7 +41,7 @@ describe('renderer/utils/theme.ts', () => {
   });
 
   it('should get color mode from theme', () => {
-    expect(getColorModeFromTheme(Theme.LIGHT)).toBe('light');
+    expect(getColorModeFromTheme(Theme.LIGHT)).toBe('day');
     expect(getColorModeFromTheme(Theme.DARK)).toBe('night');
     expect(getColorModeFromTheme(Theme.SYSTEM)).toBe('auto');
   });

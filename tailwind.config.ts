@@ -10,22 +10,17 @@ const config: Config = {
         xxs: '0.625rem', // 10px
       },
       colors: {
-        /**
-         * Temporary solution until we migrate to using GitHub Primer Design Tokens Directly.
-         *
-         * See https://primer.style/foundations/primitives/color
-         */
         primer: {
-          attention: '#9a6700',
-          closed: '#cf222e',
-          done: '#8250df',
-          muted: '#59636e',
-          open: '#1f883d',
+          attention: 'var(--fgColor-attention)',
+          closed: 'var(--fgColor-closed)',
+          done: 'var(--fgColor-done)',
+          muted: 'var(--fgColor-muted)',
+          open: 'var(--fgColor-open)',
         },
         gitify: {
           background: 'var(--gitify-background)',
           font: 'var(--gitify-font)',
-          error: colors.red[500],
+          error: 'var(--fgColor-danger)',
           sidebar: '#24292e',
           footer: 'var(--gitify-footer)',
           accounts: {
@@ -39,12 +34,11 @@ const config: Config = {
             hover: 'var(--gitify-notifications-hover)',
           },
           tooltip: {
-            icon: colors.blue[500],
+            icon: 'var(--fgColor-accent)',
             popout: 'var(--gitify-tooltip-popout)',
           },
-          link: colors.blue[500],
+          link: 'var(--fgColor-link)',
           caution: colors.orange[600],
-          settings: colors.blue[600],
           pill: {
             rest: 'var(--gitify-pill-rest)',
             hover: 'var(--gitify-pill-hover)',
