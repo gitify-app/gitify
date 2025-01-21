@@ -6,7 +6,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
   "baseElement": <body>
     <div>
       <div
-        class="group flex border-b pl-3 pr-1 py-1.5 text-gitify-font border-gitify-notification-border bg-gitify-notification-rest hover:bg-gitify-notification-hover"
+        class="group flex border-b pl-3 pr-1 py-1.5 text-gitify-font border-gitify-notification-border hover:bg-gitify-notification-hover"
         id="138661096"
       >
         <div
@@ -332,7 +332,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
   </body>,
   "container": <div>
     <div
-      class="group flex border-b pl-3 pr-1 py-1.5 text-gitify-font border-gitify-notification-border bg-gitify-notification-rest hover:bg-gitify-notification-hover"
+      class="group flex border-b pl-3 pr-1 py-1.5 text-gitify-font border-gitify-notification-border hover:bg-gitify-notification-hover"
       id="138661096"
     >
       <div
@@ -715,7 +715,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
   "baseElement": <body>
     <div>
       <div
-        class="group flex border-b pl-3 pr-1 py-1.5 text-gitify-font border-gitify-notification-border bg-gitify-notification-rest hover:bg-gitify-notification-hover"
+        class="group flex border-b pl-3 pr-1 py-1.5 text-gitify-font border-gitify-notification-border hover:bg-gitify-notification-hover"
         id="138661096"
       >
         <div
@@ -1005,7 +1005,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
   </body>,
   "container": <div>
     <div
-      class="group flex border-b pl-3 pr-1 py-1.5 text-gitify-font border-gitify-notification-border bg-gitify-notification-rest hover:bg-gitify-notification-hover"
+      class="group flex border-b pl-3 pr-1 py-1.5 text-gitify-font border-gitify-notification-border hover:bg-gitify-notification-hover"
       id="138661096"
     >
       <div
@@ -1352,7 +1352,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
   "baseElement": <body>
     <div>
       <div
-        class="group flex border-b pl-3 pr-1 py-1.5 text-gitify-font border-gitify-notification-border bg-gitify-notification-rest hover:bg-gitify-notification-hover"
+        class="group flex border-b pl-3 pr-1 py-1.5 text-gitify-font border-gitify-notification-border hover:bg-gitify-notification-hover"
         id="138661096"
       >
         <div
@@ -1642,7 +1642,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
   </body>,
   "container": <div>
     <div
-      class="group flex border-b pl-3 pr-1 py-1.5 text-gitify-font border-gitify-notification-border bg-gitify-notification-rest hover:bg-gitify-notification-hover"
+      class="group flex border-b pl-3 pr-1 py-1.5 text-gitify-font border-gitify-notification-border hover:bg-gitify-notification-hover"
       id="138661096"
     >
       <div

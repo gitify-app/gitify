@@ -11,7 +11,7 @@ const config: Config = {
       },
       colors: {
         gitify: {
-          font: 'var(--gitify-font)',
+          font: 'var(--fgColor-default)',
           background: 'var(--gitify-background)',
           sidebar: '#24292e',
           footer: 'var(--gitify-footer)',
@@ -36,9 +36,8 @@ const config: Config = {
           repository: 'var(--gitify-repository)',
 
           notification: {
-            border: 'var(--gitify-notification-border)',
-            rest: 'var(--gitify-notification-rest)',
-            hover: 'var(--gitify-notification-hover)',
+            border: 'var(--control-bgColor-hover)',
+            hover: 'var(--control-bgColor-hover)',
             pill: {
               rest: 'var(--gitify-notification-pill-rest)',
               hover: 'var(--gitify-notification-pill-hover)',
@@ -60,7 +59,6 @@ const config: Config = {
     ({ addBase }) => {
       addBase({
         ':root': {
-          '--gitify-font': colors.gray[700],
           '--gitify-background': colors.white,
           '--gitify-footer': colors.gray[200],
 
@@ -69,9 +67,6 @@ const config: Config = {
 
           '--gitify-repository': colors.gray[100],
 
-          '--gitify-notification-border': colors.gray[100],
-          '--gitify-notification-rest': colors.white,
-          '--gitify-notification-hover': colors.gray[100],
           '--gitify-notification-pill-rest': colors.gray[100],
           '--gitify-notification-pill-hover': colors.gray[200],
 
@@ -80,7 +75,6 @@ const config: Config = {
           '--gitify-scrollbar-thumb-hover': colors.gray[500],
         },
         '.dark': {
-          '--gitify-font': colors.gray[100],
           '--gitify-background': '#161b22',
           '--gitify-footer': '#000209',
 
@@ -89,9 +83,6 @@ const config: Config = {
 
           '--gitify-repository': '#090e15',
 
-          '--gitify-notification-border': '#090e15',
-          '--gitify-notification-rest': '#161b22',
-          '--gitify-notification-hover': '#090e15',
           '--gitify-notification-pill-rest': colors.gray[800],
           '--gitify-notification-pill-hover': colors.gray[700],
 
