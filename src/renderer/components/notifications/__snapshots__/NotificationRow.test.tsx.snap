@@ -93,7 +93,13 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             />
           </div>
           <div
-            class="flex flex-wrap items-center gap-1"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="wrap"
           >
             <img
               alt=""
@@ -108,16 +114,35 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               width="14"
             />
             <span
-              class="text-xs capitalize opacity-80"
-              title="You're watching the repository."
+              class="text-xs opacity-80"
             >
-              Updated
-            </span>
-            <span
-              class="text-xs capitalize opacity-80"
-              title="gitify-app updated 7 years ago"
-            >
-              7 years ago
+              <div
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+                data-align="stretch"
+                data-direction="horizontal"
+                data-gap="condensed"
+                data-justify="start"
+                data-padding="none"
+                data-wrap="nowrap"
+              >
+                <span
+                  class="Text-sc-17v1xeu-0 hmAFGJ"
+                  title="You're watching the repository."
+                >
+                  Updated
+                </span>
+                <span
+                  class="Text-sc-17v1xeu-0 hmAFGJ"
+                >
+                  •
+                </span>
+                <relative-time
+                  class="sc-KXCwU"
+                  datetime="2017-05-20T17:51:57.000Z"
+                >
+                  May 20, 2017
+                </relative-time>
+              </div>
             </span>
             <div
               class="flex"
@@ -419,7 +444,13 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
           />
         </div>
         <div
-          class="flex flex-wrap items-center gap-1"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="wrap"
         >
           <img
             alt=""
@@ -434,16 +465,35 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             width="14"
           />
           <span
-            class="text-xs capitalize opacity-80"
-            title="You're watching the repository."
+            class="text-xs opacity-80"
           >
-            Updated
-          </span>
-          <span
-            class="text-xs capitalize opacity-80"
-            title="gitify-app updated 7 years ago"
-          >
-            7 years ago
+            <div
+              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+              data-align="stretch"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+            >
+              <span
+                class="Text-sc-17v1xeu-0 hmAFGJ"
+                title="You're watching the repository."
+              >
+                Updated
+              </span>
+              <span
+                class="Text-sc-17v1xeu-0 hmAFGJ"
+              >
+                •
+              </span>
+              <relative-time
+                class="sc-KXCwU"
+                datetime="2017-05-20T17:51:57.000Z"
+              >
+                May 20, 2017
+              </relative-time>
+            </div>
           </span>
           <div
             class="flex"
@@ -766,7 +816,13 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             />
           </div>
           <div
-            class="flex flex-wrap items-center gap-1"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="wrap"
           >
             <img
               alt=""
@@ -781,16 +837,35 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               width="14"
             />
             <span
-              class="text-xs capitalize opacity-80"
-              title="You're watching the repository."
+              class="text-xs opacity-80"
             >
-              Updated
-            </span>
-            <span
-              class="text-xs capitalize opacity-80"
-              title="gitify-app updated 7 years ago"
-            >
-              7 years ago
+              <div
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+                data-align="stretch"
+                data-direction="horizontal"
+                data-gap="condensed"
+                data-justify="start"
+                data-padding="none"
+                data-wrap="nowrap"
+              >
+                <span
+                  class="Text-sc-17v1xeu-0 hmAFGJ"
+                  title="You're watching the repository."
+                >
+                  Updated
+                </span>
+                <span
+                  class="Text-sc-17v1xeu-0 hmAFGJ"
+                >
+                  •
+                </span>
+                <relative-time
+                  class="sc-KXCwU"
+                  datetime="2017-05-20T17:51:57.000Z"
+                >
+                  May 20, 2017
+                </relative-time>
+              </div>
             </span>
             <div
               class="flex"
@@ -1056,7 +1131,13 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
           />
         </div>
         <div
-          class="flex flex-wrap items-center gap-1"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="wrap"
         >
           <img
             alt=""
@@ -1071,16 +1152,35 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             width="14"
           />
           <span
-            class="text-xs capitalize opacity-80"
-            title="You're watching the repository."
+            class="text-xs opacity-80"
           >
-            Updated
-          </span>
-          <span
-            class="text-xs capitalize opacity-80"
-            title="gitify-app updated 7 years ago"
-          >
-            7 years ago
+            <div
+              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+              data-align="stretch"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+            >
+              <span
+                class="Text-sc-17v1xeu-0 hmAFGJ"
+                title="You're watching the repository."
+              >
+                Updated
+              </span>
+              <span
+                class="Text-sc-17v1xeu-0 hmAFGJ"
+              >
+                •
+              </span>
+              <relative-time
+                class="sc-KXCwU"
+                datetime="2017-05-20T17:51:57.000Z"
+              >
+                May 20, 2017
+              </relative-time>
+            </div>
           </span>
           <div
             class="flex"
@@ -1403,7 +1503,13 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             />
           </div>
           <div
-            class="flex flex-wrap items-center gap-1"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="wrap"
           >
             <img
               alt=""
@@ -1418,16 +1524,35 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               width="14"
             />
             <span
-              class="text-xs capitalize opacity-80"
-              title="You're watching the repository."
+              class="text-xs opacity-80"
             >
-              Updated
-            </span>
-            <span
-              class="text-xs capitalize opacity-80"
-              title="gitify-app updated 7 years ago"
-            >
-              7 years ago
+              <div
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+                data-align="stretch"
+                data-direction="horizontal"
+                data-gap="condensed"
+                data-justify="start"
+                data-padding="none"
+                data-wrap="nowrap"
+              >
+                <span
+                  class="Text-sc-17v1xeu-0 hmAFGJ"
+                  title="You're watching the repository."
+                >
+                  Updated
+                </span>
+                <span
+                  class="Text-sc-17v1xeu-0 hmAFGJ"
+                >
+                  •
+                </span>
+                <relative-time
+                  class="sc-KXCwU"
+                  datetime="2017-05-20T17:51:57.000Z"
+                >
+                  May 20, 2017
+                </relative-time>
+              </div>
             </span>
             <div
               class="flex"
@@ -1693,7 +1818,13 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
           />
         </div>
         <div
-          class="flex flex-wrap items-center gap-1"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="wrap"
         >
           <img
             alt=""
@@ -1708,16 +1839,35 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             width="14"
           />
           <span
-            class="text-xs capitalize opacity-80"
-            title="You're watching the repository."
+            class="text-xs opacity-80"
           >
-            Updated
-          </span>
-          <span
-            class="text-xs capitalize opacity-80"
-            title="gitify-app updated 7 years ago"
-          >
-            7 years ago
+            <div
+              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+              data-align="stretch"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+            >
+              <span
+                class="Text-sc-17v1xeu-0 hmAFGJ"
+                title="You're watching the repository."
+              >
+                Updated
+              </span>
+              <span
+                class="Text-sc-17v1xeu-0 hmAFGJ"
+              >
+                •
+              </span>
+              <relative-time
+                class="sc-KXCwU"
+                datetime="2017-05-20T17:51:57.000Z"
+              >
+                May 20, 2017
+              </relative-time>
+            </div>
           </span>
           <div
             class="flex"

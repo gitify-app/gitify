@@ -835,7 +835,13 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             />
           </div>
           <div
-            class="flex flex-wrap items-center gap-1"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="wrap"
           >
             <img
               alt=""
@@ -850,16 +856,35 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               width="14"
             />
             <span
-              class="text-xs capitalize opacity-80"
-              title="You're watching the repository."
+              class="text-xs opacity-80"
             >
-              Updated
-            </span>
-            <span
-              class="text-xs capitalize opacity-80"
-              title="gitify-app updated 8 years ago"
-            >
-              8 years ago
+              <div
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+                data-align="stretch"
+                data-direction="horizontal"
+                data-gap="condensed"
+                data-justify="start"
+                data-padding="none"
+                data-wrap="nowrap"
+              >
+                <span
+                  class="Text-sc-17v1xeu-0 hmAFGJ"
+                  title="You're watching the repository."
+                >
+                  Updated
+                </span>
+                <span
+                  class="Text-sc-17v1xeu-0 hmAFGJ"
+                >
+                  •
+                </span>
+                <relative-time
+                  class="sc-KXCwU"
+                  datetime="2017-05-20T17:51:57.000Z"
+                >
+                  May 20, 2017
+                </relative-time>
+              </div>
             </span>
             <div
               class="flex"
@@ -1158,7 +1183,13 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             />
           </div>
           <div
-            class="flex flex-wrap items-center gap-1"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="wrap"
           >
             <svg
               aria-hidden="true"
@@ -1177,16 +1208,35 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               />
             </svg>
             <span
-              class="text-xs capitalize opacity-80"
-              title="You created the thread."
+              class="text-xs opacity-80"
             >
-              Authored
-            </span>
-            <span
-              class="text-xs capitalize opacity-80"
-              title="Updated 8 years ago"
-            >
-              8 years ago
+              <div
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+                data-align="stretch"
+                data-direction="horizontal"
+                data-gap="condensed"
+                data-justify="start"
+                data-padding="none"
+                data-wrap="nowrap"
+              >
+                <span
+                  class="Text-sc-17v1xeu-0 hmAFGJ"
+                  title="You created the thread."
+                >
+                  Authored
+                </span>
+                <span
+                  class="Text-sc-17v1xeu-0 hmAFGJ"
+                >
+                  •
+                </span>
+                <relative-time
+                  class="sc-KXCwU"
+                  datetime="2017-05-20T17:06:34.000Z"
+                >
+                  May 20, 2017
+                </relative-time>
+              </div>
             </span>
             <div
               class="flex"
@@ -1616,7 +1666,13 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           />
         </div>
         <div
-          class="flex flex-wrap items-center gap-1"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="wrap"
         >
           <img
             alt=""
@@ -1631,16 +1687,35 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             width="14"
           />
           <span
-            class="text-xs capitalize opacity-80"
-            title="You're watching the repository."
+            class="text-xs opacity-80"
           >
-            Updated
-          </span>
-          <span
-            class="text-xs capitalize opacity-80"
-            title="gitify-app updated 8 years ago"
-          >
-            8 years ago
+            <div
+              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+              data-align="stretch"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+            >
+              <span
+                class="Text-sc-17v1xeu-0 hmAFGJ"
+                title="You're watching the repository."
+              >
+                Updated
+              </span>
+              <span
+                class="Text-sc-17v1xeu-0 hmAFGJ"
+              >
+                •
+              </span>
+              <relative-time
+                class="sc-KXCwU"
+                datetime="2017-05-20T17:51:57.000Z"
+              >
+                May 20, 2017
+              </relative-time>
+            </div>
           </span>
           <div
             class="flex"
@@ -1939,7 +2014,13 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           />
         </div>
         <div
-          class="flex flex-wrap items-center gap-1"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="wrap"
         >
           <svg
             aria-hidden="true"
@@ -1958,16 +2039,35 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             />
           </svg>
           <span
-            class="text-xs capitalize opacity-80"
-            title="You created the thread."
+            class="text-xs opacity-80"
           >
-            Authored
-          </span>
-          <span
-            class="text-xs capitalize opacity-80"
-            title="Updated 8 years ago"
-          >
-            8 years ago
+            <div
+              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+              data-align="stretch"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+            >
+              <span
+                class="Text-sc-17v1xeu-0 hmAFGJ"
+                title="You created the thread."
+              >
+                Authored
+              </span>
+              <span
+                class="Text-sc-17v1xeu-0 hmAFGJ"
+              >
+                •
+              </span>
+              <relative-time
+                class="sc-KXCwU"
+                datetime="2017-05-20T17:06:34.000Z"
+              >
+                May 20, 2017
+              </relative-time>
+            </div>
           </span>
           <div
             class="flex"

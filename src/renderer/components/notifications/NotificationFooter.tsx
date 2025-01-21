@@ -1,15 +1,12 @@
 import type { FC, MouseEvent } from 'react';
 
 import { FeedPersonIcon, MarkGithubIcon } from '@primer/octicons-react';
-import { Avatar } from '@primer/react';
+import { Avatar, RelativeTime, Stack, Text } from '@primer/react';
 
 import { IconColor, Opacity, Size } from '../../types';
 import type { Notification } from '../../typesGitHub';
 import { cn } from '../../utils/cn';
-import {
-  formatNotificationUpdatedAt,
-  isNonHumanUser,
-} from '../../utils/helpers';
+import { isNonHumanUser } from '../../utils/helpers';
 import { openUserProfile } from '../../utils/links';
 import { formatReason } from '../../utils/reason';
 import { Pills } from './Pills';
@@ -23,13 +20,8 @@ export const NotificationFooter: FC<INotificationFooter> = ({
 }: INotificationFooter) => {
   const reason = formatReason(notification.reason);
 
-  const updatedAt = formatNotificationUpdatedAt(notification);
-  const updatedLabel = notification.subject.user
-    ? `${notification.subject.user.login} updated ${updatedAt}`
-    : `Updated ${updatedAt}`;
-
   return (
-    <div className="flex flex-wrap items-center gap-1">
+    <Stack direction="horizontal" align="center" gap="condensed" wrap="wrap">
       {notification.subject.user ? (
         <Avatar
           title={`View profile: ${notification.subject.user.login}`}
@@ -53,19 +45,15 @@ export const NotificationFooter: FC<INotificationFooter> = ({
           )}
         </>
       )}
-      <span
-        className={cn('text-xs capitalize', Opacity.MEDIUM)}
-        title={reason.description}
-      >
-        {reason.title}
+      <span className={cn('text-xs', Opacity.MEDIUM)}>
+        <Stack direction="horizontal" gap="condensed">
+          <Text title={reason.description}>{reason.title}</Text>
+          <Text>&bull;</Text>
+          <RelativeTime datetime={notification.updated_at} />
+        </Stack>
       </span>
-      <span
-        className={cn('text-xs capitalize', Opacity.MEDIUM)}
-        title={updatedLabel}
-      >
-        {updatedAt}
-      </span>
+
       <Pills notification={notification} />
-    </div>
+    </Stack>
   );
 };
