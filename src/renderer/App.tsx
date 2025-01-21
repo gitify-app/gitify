@@ -35,7 +35,7 @@ function RequireAuth({ children }) {
 
 export const App = () => {
   return (
-    // TODO - Add support for setting color modes (dark_dimmed)
+    // TODO Add support for setting color modes (dark_dimmed) - see #1748
     <ThemeProvider dayScheme="light" nightScheme="dark">
       <BaseStyles>
         <AppProvider>
