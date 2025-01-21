@@ -36,7 +36,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
           class="flex"
         >
           <button
-            class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+            class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-notification-pill-rest hover:bg-gitify-notification-pill-hover"
             title="octocat approved these changes"
             type="button"
           >
@@ -51,7 +51,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
             >
               <svg
                 aria-hidden="true"
-                class="octicon octicon-check text-primer-open"
+                class="octicon octicon-check text-gitify-icon-open"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -73,7 +73,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
             </div>
           </button>
           <button
-            class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+            class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-notification-pill-rest hover:bg-gitify-notification-pill-hover"
             title="gitify-app requested changes"
             type="button"
           >
@@ -88,7 +88,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
             >
               <svg
                 aria-hidden="true"
-                class="octicon octicon-file-diff text-primer-closed"
+                class="octicon octicon-file-diff text-gitify-icon-closed"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -145,7 +145,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
         class="flex"
       >
         <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-notification-pill-rest hover:bg-gitify-notification-pill-hover"
           title="octocat approved these changes"
           type="button"
         >
@@ -160,7 +160,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-check text-primer-open"
+              class="octicon octicon-check text-gitify-icon-open"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -182,7 +182,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
           </div>
         </button>
         <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-notification-pill-rest hover:bg-gitify-notification-pill-hover"
           title="gitify-app requested changes"
           type="button"
         >
@@ -197,7 +197,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-file-diff text-primer-closed"
+              class="octicon octicon-file-diff text-gitify-icon-closed"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -311,7 +311,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
           class="flex"
         >
           <button
-            class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+            class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-notification-pill-rest hover:bg-gitify-notification-pill-hover"
             title="octocat approved these changes"
             type="button"
           >
@@ -326,7 +326,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
             >
               <svg
                 aria-hidden="true"
-                class="octicon octicon-check text-primer-open"
+                class="octicon octicon-check text-gitify-icon-open"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -348,7 +348,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
             </div>
           </button>
           <button
-            class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+            class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-notification-pill-rest hover:bg-gitify-notification-pill-hover"
             title="gitify-app requested changes"
             type="button"
           >
@@ -363,7 +363,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
             >
               <svg
                 aria-hidden="true"
-                class="octicon octicon-file-diff text-primer-closed"
+                class="octicon octicon-file-diff text-gitify-icon-closed"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -420,7 +420,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
         class="flex"
       >
         <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-notification-pill-rest hover:bg-gitify-notification-pill-hover"
           title="octocat approved these changes"
           type="button"
         >
@@ -435,7 +435,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-check text-primer-open"
+              class="octicon octicon-check text-gitify-icon-open"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -457,7 +457,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
           </div>
         </button>
         <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-notification-pill-rest hover:bg-gitify-notification-pill-hover"
           title="gitify-app requested changes"
           type="button"
         >
@@ -472,7 +472,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-file-diff text-primer-closed"
+              class="octicon octicon-file-diff text-gitify-icon-closed"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -590,7 +590,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
           class="flex"
         >
           <button
-            class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+            class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-notification-pill-rest hover:bg-gitify-notification-pill-hover"
             title="octocat approved these changes"
             type="button"
           >
@@ -605,7 +605,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
             >
               <svg
                 aria-hidden="true"
-                class="octicon octicon-check text-primer-open"
+                class="octicon octicon-check text-gitify-icon-open"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -627,7 +627,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
             </div>
           </button>
           <button
-            class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+            class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-notification-pill-rest hover:bg-gitify-notification-pill-hover"
             title="gitify-app requested changes"
             type="button"
           >
@@ -642,7 +642,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
             >
               <svg
                 aria-hidden="true"
-                class="octicon octicon-file-diff text-primer-closed"
+                class="octicon octicon-file-diff text-gitify-icon-closed"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -703,7 +703,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
         class="flex"
       >
         <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-notification-pill-rest hover:bg-gitify-notification-pill-hover"
           title="octocat approved these changes"
           type="button"
         >
@@ -718,7 +718,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-check text-primer-open"
+              class="octicon octicon-check text-gitify-icon-open"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -740,7 +740,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
           </div>
         </button>
         <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-notification-pill-rest hover:bg-gitify-notification-pill-hover"
           title="gitify-app requested changes"
           type="button"
         >
@@ -755,7 +755,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-file-diff text-primer-closed"
+              class="octicon octicon-file-diff text-gitify-icon-closed"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -869,7 +869,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
           class="flex"
         >
           <button
-            class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+            class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-notification-pill-rest hover:bg-gitify-notification-pill-hover"
             title="octocat approved these changes"
             type="button"
           >
@@ -884,7 +884,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
             >
               <svg
                 aria-hidden="true"
-                class="octicon octicon-check text-primer-open"
+                class="octicon octicon-check text-gitify-icon-open"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -906,7 +906,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
             </div>
           </button>
           <button
-            class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+            class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-notification-pill-rest hover:bg-gitify-notification-pill-hover"
             title="gitify-app requested changes"
             type="button"
           >
@@ -921,7 +921,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
             >
               <svg
                 aria-hidden="true"
-                class="octicon octicon-file-diff text-primer-closed"
+                class="octicon octicon-file-diff text-gitify-icon-closed"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -978,7 +978,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
         class="flex"
       >
         <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-notification-pill-rest hover:bg-gitify-notification-pill-hover"
           title="octocat approved these changes"
           type="button"
         >
@@ -993,7 +993,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-check text-primer-open"
+              class="octicon octicon-check text-gitify-icon-open"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -1015,7 +1015,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
           </div>
         </button>
         <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-notification-pill-rest hover:bg-gitify-notification-pill-hover"
           title="gitify-app requested changes"
           type="button"
         >
@@ -1030,7 +1030,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-file-diff text-primer-closed"
+              class="octicon octicon-file-diff text-gitify-icon-closed"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -1144,7 +1144,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
           class="flex"
         >
           <button
-            class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+            class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-notification-pill-rest hover:bg-gitify-notification-pill-hover"
             title="octocat approved these changes"
             type="button"
           >
@@ -1159,7 +1159,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
             >
               <svg
                 aria-hidden="true"
-                class="octicon octicon-check text-primer-open"
+                class="octicon octicon-check text-gitify-icon-open"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -1181,7 +1181,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
             </div>
           </button>
           <button
-            class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+            class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-notification-pill-rest hover:bg-gitify-notification-pill-hover"
             title="gitify-app requested changes"
             type="button"
           >
@@ -1196,7 +1196,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
             >
               <svg
                 aria-hidden="true"
-                class="octicon octicon-file-diff text-primer-closed"
+                class="octicon octicon-file-diff text-gitify-icon-closed"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -1253,7 +1253,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
         class="flex"
       >
         <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-notification-pill-rest hover:bg-gitify-notification-pill-hover"
           title="octocat approved these changes"
           type="button"
         >
@@ -1268,7 +1268,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-check text-primer-open"
+              class="octicon octicon-check text-gitify-icon-open"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -1290,7 +1290,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
           </div>
         </button>
         <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-notification-pill-rest hover:bg-gitify-notification-pill-hover"
           title="gitify-app requested changes"
           type="button"
         >
@@ -1305,7 +1305,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-file-diff text-primer-closed"
+              class="octicon octicon-file-diff text-gitify-icon-closed"
               display="inline-block"
               fill="currentColor"
               focusable="false"

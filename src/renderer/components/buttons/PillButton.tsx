@@ -18,7 +18,7 @@ export const PillButton: FC<IPillButton> = (props: IPillButton) => {
     <button
       title={props.title}
       type="button"
-      className="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+      className="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-notification-pill-rest hover:bg-gitify-notification-pill-hover"
     >
       <Stack direction="horizontal" align="center" gap="condensed">
         <props.icon size={Size.XSMALL} className={props.color} />

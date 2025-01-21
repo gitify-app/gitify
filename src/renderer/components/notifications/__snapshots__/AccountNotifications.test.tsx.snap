@@ -6,7 +6,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
   "baseElement": <body>
     <div>
       <div
-        class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-accounts-error"
+        class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-account-error"
       >
         <button
           aria-describedby=":r15:-loading-announcement"
@@ -247,7 +247,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
   </body>,
   "container": <div>
     <div
-      class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-accounts-error"
+      class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-account-error"
     >
       <button
         aria-describedby=":r15:-loading-announcement"
@@ -545,7 +545,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
   "baseElement": <body>
     <div>
       <div
-        class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-accounts-rest"
+        class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-account-rest"
       >
         <button
           aria-describedby=":r7:-loading-announcement"
@@ -748,7 +748,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
         </div>
       </div>
       <div
-        class="group flex border-b pl-3 pr-1 py-1.5 text-gitify-font border-gitify-notifications-border bg-gitify-notifications-rest hover:bg-gitify-notifications-hover"
+        class="group flex border-b pl-3 pr-1 py-1.5 text-gitify-font border-gitify-notification-border bg-gitify-notification-rest hover:bg-gitify-notification-hover"
         id="138661096"
       >
         <div
@@ -762,7 +762,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-issue-opened text-primer-open"
+              class="octicon octicon-issue-opened text-gitify-icon-open"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -865,7 +865,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               class="flex"
             >
               <button
-                class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+                class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-notification-pill-rest hover:bg-gitify-notification-pill-hover"
                 title="octocat approved these changes"
                 type="button"
               >
@@ -880,7 +880,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 >
                   <svg
                     aria-hidden="true"
-                    class="octicon octicon-check text-primer-open"
+                    class="octicon octicon-check text-gitify-icon-open"
                     display="inline-block"
                     fill="currentColor"
                     focusable="false"
@@ -902,7 +902,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 </div>
               </button>
               <button
-                class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+                class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-notification-pill-rest hover:bg-gitify-notification-pill-hover"
                 title="gitify-app requested changes"
                 type="button"
               >
@@ -917,7 +917,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 >
                   <svg
                     aria-hidden="true"
-                    class="octicon octicon-file-diff text-primer-closed"
+                    class="octicon octicon-file-diff text-gitify-icon-closed"
                     display="inline-block"
                     fill="currentColor"
                     focusable="false"
@@ -1071,7 +1071,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
         </div>
       </div>
       <div
-        class="group flex border-b pl-3 pr-1 py-1.5 text-gitify-font border-gitify-notifications-border bg-gitify-notifications-rest hover:bg-gitify-notifications-hover"
+        class="group flex border-b pl-3 pr-1 py-1.5 text-gitify-font border-gitify-notification-border bg-gitify-notification-rest hover:bg-gitify-notification-hover"
         id="148827438"
       >
         <div
@@ -1085,7 +1085,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-issue-opened text-primer-muted"
+              class="octicon octicon-issue-opened text-gitify-icon-muted"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -1162,7 +1162,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-feed-person text-primer-muted"
+              class="octicon octicon-feed-person text-gitify-icon-muted"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -1326,7 +1326,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
   </body>,
   "container": <div>
     <div
-      class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-accounts-rest"
+      class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-account-rest"
     >
       <button
         aria-describedby=":r7:-loading-announcement"
@@ -1529,7 +1529,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
       </div>
     </div>
     <div
-      class="group flex border-b pl-3 pr-1 py-1.5 text-gitify-font border-gitify-notifications-border bg-gitify-notifications-rest hover:bg-gitify-notifications-hover"
+      class="group flex border-b pl-3 pr-1 py-1.5 text-gitify-font border-gitify-notification-border bg-gitify-notification-rest hover:bg-gitify-notification-hover"
       id="138661096"
     >
       <div
@@ -1543,7 +1543,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-issue-opened text-primer-open"
+            class="octicon octicon-issue-opened text-gitify-icon-open"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -1646,7 +1646,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             class="flex"
           >
             <button
-              class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+              class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-notification-pill-rest hover:bg-gitify-notification-pill-hover"
               title="octocat approved these changes"
               type="button"
             >
@@ -1661,7 +1661,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               >
                 <svg
                   aria-hidden="true"
-                  class="octicon octicon-check text-primer-open"
+                  class="octicon octicon-check text-gitify-icon-open"
                   display="inline-block"
                   fill="currentColor"
                   focusable="false"
@@ -1683,7 +1683,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               </div>
             </button>
             <button
-              class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+              class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-notification-pill-rest hover:bg-gitify-notification-pill-hover"
               title="gitify-app requested changes"
               type="button"
             >
@@ -1698,7 +1698,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               >
                 <svg
                   aria-hidden="true"
-                  class="octicon octicon-file-diff text-primer-closed"
+                  class="octicon octicon-file-diff text-gitify-icon-closed"
                   display="inline-block"
                   fill="currentColor"
                   focusable="false"
@@ -1852,7 +1852,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
       </div>
     </div>
     <div
-      class="group flex border-b pl-3 pr-1 py-1.5 text-gitify-font border-gitify-notifications-border bg-gitify-notifications-rest hover:bg-gitify-notifications-hover"
+      class="group flex border-b pl-3 pr-1 py-1.5 text-gitify-font border-gitify-notification-border bg-gitify-notification-rest hover:bg-gitify-notification-hover"
       id="148827438"
     >
       <div
@@ -1866,7 +1866,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-issue-opened text-primer-muted"
+            class="octicon octicon-issue-opened text-gitify-icon-muted"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -1943,7 +1943,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-feed-person text-primer-muted"
+            class="octicon octicon-feed-person text-gitify-icon-muted"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -2164,7 +2164,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
   "baseElement": <body>
     <div>
       <div
-        class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-accounts-rest"
+        class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-account-rest"
       >
         <button
           aria-describedby=":r0:-loading-announcement"
@@ -2373,7 +2373,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
   </body>,
   "container": <div>
     <div
-      class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-accounts-rest"
+      class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-account-rest"
     >
       <button
         aria-describedby=":r0:-loading-announcement"
@@ -2639,7 +2639,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
   "baseElement": <body>
     <div>
       <div
-        class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-accounts-rest"
+        class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-account-rest"
       >
         <button
           aria-describedby=":ru:-loading-announcement"
@@ -2875,7 +2875,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
   </body>,
   "container": <div>
     <div
-      class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-accounts-rest"
+      class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-account-rest"
     >
       <button
         aria-describedby=":ru:-loading-announcement"
@@ -3168,7 +3168,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
   "baseElement": <body>
     <div>
       <div
-        class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-accounts-rest"
+        class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-account-rest"
       >
         <button
           aria-describedby=":r21:-loading-announcement"
@@ -3373,7 +3373,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
     </div>
     <div>
       <div
-        class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-accounts-rest"
+        class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-account-rest"
       >
         <button
           aria-describedby=":r28:-loading-announcement"
@@ -3582,7 +3582,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
   </body>,
   "container": <div>
     <div
-      class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-accounts-rest"
+      class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-account-rest"
     >
       <button
         aria-describedby=":r28:-loading-announcement"

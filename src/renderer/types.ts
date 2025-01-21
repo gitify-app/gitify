@@ -157,11 +157,11 @@ export interface FormattedReason {
 }
 
 export enum IconColor {
-  GRAY = 'text-primer-muted',
-  GREEN = 'text-primer-open',
-  PURPLE = 'text-primer-done',
-  RED = 'text-primer-closed',
-  YELLOW = 'text-primer-attention',
+  GRAY = 'text-gitify-icon-muted',
+  GREEN = 'text-gitify-icon-open',
+  PURPLE = 'text-gitify-icon-done',
+  RED = 'text-gitify-icon-closed',
+  YELLOW = 'text-gitify-icon-attention',
 }
 
 export enum Opacity {
