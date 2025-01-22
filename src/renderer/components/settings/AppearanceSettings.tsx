@@ -33,6 +33,7 @@ import {
 } from '../../utils/theme';
 import { zoomLevelToPercentage, zoomPercentageToLevel } from '../../utils/zoom';
 import { Checkbox } from '../fields/Checkbox';
+import { FieldLabel } from '../fields/FieldLabel';
 import { Title } from '../primitives/Title';
 
 let timeout: NodeJS.Timeout;
@@ -76,12 +77,7 @@ export const AppearanceSettings: FC = () => {
       <Title icon={PaintbrushIcon}>Appearance</Title>
 
       <div className="flex items-center mt-3 mb-2 text-sm">
-        <label
-          htmlFor="theme"
-          className="mr-3 content-center font-medium text-gitify-font"
-        >
-          Theme:
-        </label>
+        <FieldLabel name="theme" label="Theme:" />
 
         <Select
           id="theme"
@@ -129,12 +125,7 @@ export const AppearanceSettings: FC = () => {
       </div>
 
       <div className="flex items-center mt-3 mb-2 text-sm">
-        <label
-          htmlFor="zoom"
-          className="mr-3 content-center font-medium text-gitify-font"
-        >
-          Zoom:
-        </label>
+        <FieldLabel name="zoom" label="Zoom:" />
 
         <ButtonGroup>
           <IconButton

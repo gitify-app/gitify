@@ -17,8 +17,7 @@ describe('renderer/routes/components/settings/AppearanceSettings.tsx', () => {
     jest.clearAllMocks();
   });
 
-  // FIXME - re-enable test
-  it.skip('should change the theme mode dropdown', async () => {
+  it('should change the theme mode dropdown', async () => {
     await act(async () => {
       render(
         <AppContext.Provider
@@ -34,7 +33,11 @@ describe('renderer/routes/components/settings/AppearanceSettings.tsx', () => {
         </AppContext.Provider>,
       );
     });
-    fireEvent.click(screen.getAllByTestId('settings-theme-mode')[3]);
+
+    const select = screen.getByTestId(
+      'settings-theme-mode',
+    ) as HTMLSelectElement;
+    fireEvent.change(select, { target: { value: 'LIGHT_DEFAULT' } });
 
     expect(updateSetting).toHaveBeenCalledTimes(1);
     expect(updateSetting).toHaveBeenCalledWith('themeMode', 'LIGHT_DEFAULT');

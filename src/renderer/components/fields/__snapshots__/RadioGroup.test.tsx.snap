@@ -6,90 +6,21 @@ exports[`renderer/components/fields/RadioGroup.tsx should render 1`] = `
   "baseElement": <body>
     <div>
       <div
-        class="mt-3 mb-2 text-sm"
+        class="flex items-start my-2 text-sm font-medium"
       >
-        <div
-          class="flex items-start"
+        <label
+          class="mr-3 font-medium cursor-pointer"
+          for="appearance"
         >
-          <div
-            class="mr-3"
-          >
-            <label
-              class="font-medium text-gitify-font"
-              for="appearance"
-            >
-              Appearance
-            </label>
-          </div>
-          <div
-            aria-labelledby="appearance"
-            class="flex flex-wrap items-center space-x-4"
-            role="group"
-          >
-            <div
-              class="flex items-center"
-            >
-              <input
-                class="size-4 cursor-pointer"
-                id="appearance_one"
-                name="appearance"
-                type="radio"
-                value="one"
-              />
-              <label
-                class="ml-3 block text-sm font-medium text-gitify-font cursor-pointer"
-                for="appearance_one"
-              >
-                Value 1
-              </label>
-            </div>
-            <div
-              class="flex items-center"
-            >
-              <input
-                checked=""
-                class="size-4 cursor-pointer"
-                id="appearance_two"
-                name="appearance"
-                type="radio"
-                value="two"
-              />
-              <label
-                class="ml-3 block text-sm font-medium text-gitify-font cursor-pointer"
-                for="appearance_two"
-              >
-                Value 2
-              </label>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </body>,
-  "container": <div>
-    <div
-      class="mt-3 mb-2 text-sm"
-    >
-      <div
-        class="flex items-start"
-      >
-        <div
-          class="mr-3"
-        >
-          <label
-            class="font-medium text-gitify-font"
-            for="appearance"
-          >
-            Appearance
-          </label>
-        </div>
+          Appearance
+        </label>
         <div
           aria-labelledby="appearance"
-          class="flex flex-wrap items-center space-x-4"
+          class="flex items-center space-x-4"
           role="group"
         >
           <div
-            class="flex items-center"
+            class="flex items-center gap-2"
           >
             <input
               class="size-4 cursor-pointer"
@@ -99,14 +30,14 @@ exports[`renderer/components/fields/RadioGroup.tsx should render 1`] = `
               value="one"
             />
             <label
-              class="ml-3 block text-sm font-medium text-gitify-font cursor-pointer"
+              class="mr-3 font-medium cursor-pointer"
               for="appearance_one"
             >
               Value 1
             </label>
           </div>
           <div
-            class="flex items-center"
+            class="flex items-center gap-2"
           >
             <input
               checked=""
@@ -117,12 +48,65 @@ exports[`renderer/components/fields/RadioGroup.tsx should render 1`] = `
               value="two"
             />
             <label
-              class="ml-3 block text-sm font-medium text-gitify-font cursor-pointer"
+              class="mr-3 font-medium cursor-pointer"
               for="appearance_two"
             >
               Value 2
             </label>
           </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="flex items-start my-2 text-sm font-medium"
+    >
+      <label
+        class="mr-3 font-medium cursor-pointer"
+        for="appearance"
+      >
+        Appearance
+      </label>
+      <div
+        aria-labelledby="appearance"
+        class="flex items-center space-x-4"
+        role="group"
+      >
+        <div
+          class="flex items-center gap-2"
+        >
+          <input
+            class="size-4 cursor-pointer"
+            id="appearance_one"
+            name="appearance"
+            type="radio"
+            value="one"
+          />
+          <label
+            class="mr-3 font-medium cursor-pointer"
+            for="appearance_one"
+          >
+            Value 1
+          </label>
+        </div>
+        <div
+          class="flex items-center gap-2"
+        >
+          <input
+            checked=""
+            class="size-4 cursor-pointer"
+            id="appearance_two"
+            name="appearance"
+            type="radio"
+            value="two"
+          />
+          <label
+            class="mr-3 font-medium cursor-pointer"
+            for="appearance_two"
+          >
+            Value 2
+          </label>
         </div>
       </div>
     </div>
@@ -187,64 +171,53 @@ exports[`renderer/components/fields/RadioGroup.tsx should render as disabled 1`]
   "baseElement": <body>
     <div>
       <div
-        class="mt-3 mb-2 text-sm"
+        class="flex items-start my-2 text-sm font-medium"
       >
+        <label
+          class="mr-3 font-medium cursor-pointer"
+          for="appearance"
+        >
+          Appearance
+        </label>
         <div
-          class="flex items-start"
+          aria-labelledby="appearance"
+          class="flex items-center space-x-4"
+          role="group"
         >
           <div
-            class="mr-3"
+            class="flex items-center gap-2"
           >
+            <input
+              class="size-4 cursor-pointer"
+              id="appearance_one"
+              name="appearance"
+              type="radio"
+              value="one"
+            />
             <label
-              class="font-medium text-gitify-font"
-              for="appearance"
-              style="text-decoration: line-through;"
+              class="mr-3 font-medium cursor-pointer"
+              for="appearance_one"
             >
-              Appearance
+              Value 1
             </label>
           </div>
           <div
-            aria-labelledby="appearance"
-            class="flex flex-wrap items-center space-x-4"
-            role="group"
+            class="flex items-center gap-2"
           >
-            <div
-              class="flex items-center"
+            <input
+              checked=""
+              class="size-4 cursor-pointer"
+              id="appearance_two"
+              name="appearance"
+              type="radio"
+              value="two"
+            />
+            <label
+              class="mr-3 font-medium cursor-pointer"
+              for="appearance_two"
             >
-              <input
-                class="size-4 cursor-pointer"
-                disabled=""
-                id="appearance_one"
-                name="appearance"
-                type="radio"
-                value="one"
-              />
-              <label
-                class="ml-3 block text-sm font-medium text-gitify-font cursor-pointer"
-                for="appearance_one"
-              >
-                Value 1
-              </label>
-            </div>
-            <div
-              class="flex items-center"
-            >
-              <input
-                checked=""
-                class="size-4 cursor-pointer"
-                disabled=""
-                id="appearance_two"
-                name="appearance"
-                type="radio"
-                value="two"
-              />
-              <label
-                class="ml-3 block text-sm font-medium text-gitify-font cursor-pointer"
-                for="appearance_two"
-              >
-                Value 2
-              </label>
-            </div>
+              Value 2
+            </label>
           </div>
         </div>
       </div>
@@ -252,64 +225,53 @@ exports[`renderer/components/fields/RadioGroup.tsx should render as disabled 1`]
   </body>,
   "container": <div>
     <div
-      class="mt-3 mb-2 text-sm"
+      class="flex items-start my-2 text-sm font-medium"
     >
+      <label
+        class="mr-3 font-medium cursor-pointer"
+        for="appearance"
+      >
+        Appearance
+      </label>
       <div
-        class="flex items-start"
+        aria-labelledby="appearance"
+        class="flex items-center space-x-4"
+        role="group"
       >
         <div
-          class="mr-3"
+          class="flex items-center gap-2"
         >
+          <input
+            class="size-4 cursor-pointer"
+            id="appearance_one"
+            name="appearance"
+            type="radio"
+            value="one"
+          />
           <label
-            class="font-medium text-gitify-font"
-            for="appearance"
-            style="text-decoration: line-through;"
+            class="mr-3 font-medium cursor-pointer"
+            for="appearance_one"
           >
-            Appearance
+            Value 1
           </label>
         </div>
         <div
-          aria-labelledby="appearance"
-          class="flex flex-wrap items-center space-x-4"
-          role="group"
+          class="flex items-center gap-2"
         >
-          <div
-            class="flex items-center"
+          <input
+            checked=""
+            class="size-4 cursor-pointer"
+            id="appearance_two"
+            name="appearance"
+            type="radio"
+            value="two"
+          />
+          <label
+            class="mr-3 font-medium cursor-pointer"
+            for="appearance_two"
           >
-            <input
-              class="size-4 cursor-pointer"
-              disabled=""
-              id="appearance_one"
-              name="appearance"
-              type="radio"
-              value="one"
-            />
-            <label
-              class="ml-3 block text-sm font-medium text-gitify-font cursor-pointer"
-              for="appearance_one"
-            >
-              Value 1
-            </label>
-          </div>
-          <div
-            class="flex items-center"
-          >
-            <input
-              checked=""
-              class="size-4 cursor-pointer"
-              disabled=""
-              id="appearance_two"
-              name="appearance"
-              type="radio"
-              value="two"
-            />
-            <label
-              class="ml-3 block text-sm font-medium text-gitify-font cursor-pointer"
-              for="appearance_two"
-            >
-              Value 2
-            </label>
-          </div>
+            Value 2
+          </label>
         </div>
       </div>
     </div>
