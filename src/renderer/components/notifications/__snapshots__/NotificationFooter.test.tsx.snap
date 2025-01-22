@@ -36,15 +36,10 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
           data-wrap="nowrap"
         >
           <span
-            class="Text-sc-17v1xeu-0 hmAFGJ"
+            class="Text-sc-17v1xeu-0 hmAFGJ pr-1"
             title="You're watching the repository."
           >
             Updated
-          </span>
-          <span
-            class="Text-sc-17v1xeu-0 hmAFGJ px-1"
-          >
-            •
           </span>
           <relative-time
             class="sc-KXCwU"
@@ -166,15 +161,10 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
         data-wrap="nowrap"
       >
         <span
-          class="Text-sc-17v1xeu-0 hmAFGJ"
+          class="Text-sc-17v1xeu-0 hmAFGJ pr-1"
           title="You're watching the repository."
         >
           Updated
-        </span>
-        <span
-          class="Text-sc-17v1xeu-0 hmAFGJ px-1"
-        >
-          •
         </span>
         <relative-time
           class="sc-KXCwU"
@@ -353,15 +343,10 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
           data-wrap="nowrap"
         >
           <span
-            class="Text-sc-17v1xeu-0 hmAFGJ"
+            class="Text-sc-17v1xeu-0 hmAFGJ pr-1"
             title="You're watching the repository."
           >
             Updated
-          </span>
-          <span
-            class="Text-sc-17v1xeu-0 hmAFGJ px-1"
-          >
-            •
           </span>
           <relative-time
             class="sc-KXCwU"
@@ -483,15 +468,10 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
         data-wrap="nowrap"
       >
         <span
-          class="Text-sc-17v1xeu-0 hmAFGJ"
+          class="Text-sc-17v1xeu-0 hmAFGJ pr-1"
           title="You're watching the repository."
         >
           Updated
-        </span>
-        <span
-          class="Text-sc-17v1xeu-0 hmAFGJ px-1"
-        >
-          •
         </span>
         <relative-time
           class="sc-KXCwU"
@@ -674,15 +654,10 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
           data-wrap="nowrap"
         >
           <span
-            class="Text-sc-17v1xeu-0 hmAFGJ"
+            class="Text-sc-17v1xeu-0 hmAFGJ pr-1"
             title="You're watching the repository."
           >
             Updated
-          </span>
-          <span
-            class="Text-sc-17v1xeu-0 hmAFGJ px-1"
-          >
-            •
           </span>
           <relative-time
             class="sc-KXCwU"
@@ -808,15 +783,10 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
         data-wrap="nowrap"
       >
         <span
-          class="Text-sc-17v1xeu-0 hmAFGJ"
+          class="Text-sc-17v1xeu-0 hmAFGJ pr-1"
           title="You're watching the repository."
         >
           Updated
-        </span>
-        <span
-          class="Text-sc-17v1xeu-0 hmAFGJ px-1"
-        >
-          •
         </span>
         <relative-time
           class="sc-KXCwU"
@@ -995,15 +965,10 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
           data-wrap="nowrap"
         >
           <span
-            class="Text-sc-17v1xeu-0 hmAFGJ"
+            class="Text-sc-17v1xeu-0 hmAFGJ pr-1"
             title="You're watching the repository."
           >
             Updated
-          </span>
-          <span
-            class="Text-sc-17v1xeu-0 hmAFGJ px-1"
-          >
-            •
           </span>
           <relative-time
             class="sc-KXCwU"
@@ -1125,15 +1090,10 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
         data-wrap="nowrap"
       >
         <span
-          class="Text-sc-17v1xeu-0 hmAFGJ"
+          class="Text-sc-17v1xeu-0 hmAFGJ pr-1"
           title="You're watching the repository."
         >
           Updated
-        </span>
-        <span
-          class="Text-sc-17v1xeu-0 hmAFGJ px-1"
-        >
-          •
         </span>
         <relative-time
           class="sc-KXCwU"
@@ -1312,15 +1272,10 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
           data-wrap="nowrap"
         >
           <span
-            class="Text-sc-17v1xeu-0 hmAFGJ"
+            class="Text-sc-17v1xeu-0 hmAFGJ pr-1"
             title="You're watching the repository."
           >
             Updated
-          </span>
-          <span
-            class="Text-sc-17v1xeu-0 hmAFGJ px-1"
-          >
-            •
           </span>
           <relative-time
             class="sc-KXCwU"
@@ -1442,15 +1397,10 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
         data-wrap="nowrap"
       >
         <span
-          class="Text-sc-17v1xeu-0 hmAFGJ"
+          class="Text-sc-17v1xeu-0 hmAFGJ pr-1"
           title="You're watching the repository."
         >
           Updated
-        </span>
-        <span
-          class="Text-sc-17v1xeu-0 hmAFGJ px-1"
-        >
-          •
         </span>
         <relative-time
           class="sc-KXCwU"
