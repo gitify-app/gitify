@@ -39,7 +39,6 @@ const config: Config = {
             border: 'var(--control-bgColor-hover)',
             hover: 'var(--control-bgColor-hover)',
             pill: {
-              rest: 'var(--gitify-notification-pill-rest)',
               hover: 'var(--gitify-notification-pill-hover)',
             },
           },
@@ -67,7 +66,6 @@ const config: Config = {
 
           '--gitify-repository': colors.gray[100],
 
-          '--gitify-notification-pill-rest': colors.gray[100],
           '--gitify-notification-pill-hover': colors.gray[200],
 
           '--gitify-scrollbar-track': colors.gray[100],
@@ -83,7 +81,6 @@ const config: Config = {
 
           '--gitify-repository': '#090e15',
 
-          '--gitify-notification-pill-rest': colors.gray[800],
           '--gitify-notification-pill-hover': colors.gray[700],
 
           '--gitify-scrollbar-track': '#090e15',

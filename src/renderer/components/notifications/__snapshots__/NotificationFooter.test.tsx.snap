@@ -6,7 +6,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
   "baseElement": <body>
     <div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-xs opacity-80"
         data-align="center"
         data-direction="horizontal"
         data-gap="condensed"
@@ -26,50 +26,46 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
           title="View profile: gitify-app"
           width="14"
         />
-        <span
-          class="text-xs opacity-80"
-        >
-          <div
-            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-            data-align="stretch"
-            data-direction="horizontal"
-            data-gap="condensed"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
-          >
-            <span
-              class="Text-sc-17v1xeu-0 hmAFGJ"
-              title="You're watching the repository."
-            >
-              Updated
-            </span>
-            <span
-              class="Text-sc-17v1xeu-0 hmAFGJ"
-            >
-              •
-            </span>
-            <relative-time
-              class="sc-KXCwU"
-              datetime="2017-05-20T17:51:57.000Z"
-            >
-              May 20, 2017
-            </relative-time>
-          </div>
-        </span>
         <div
-          class="flex"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          data-align="stretch"
+          data-direction="horizontal"
+          data-gap="none"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
         >
-          <button
-            class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-notification-pill-rest hover:bg-gitify-notification-pill-hover"
+          <span
+            class="Text-sc-17v1xeu-0 hmAFGJ"
+            title="You're watching the repository."
+          >
+            Updated
+          </span>
+          <span
+            class="Text-sc-17v1xeu-0 hmAFGJ px-1"
+          >
+            •
+          </span>
+          <relative-time
+            class="sc-KXCwU"
+            datetime="2017-05-20T17:51:57.000Z"
+          >
+            May 20, 2017
+          </relative-time>
+        </div>
+        <div
+          class="Box-sc-g0xbh4-0 flex gap-1"
+        >
+          <span
+            class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
             title="octocat approved these changes"
-            type="button"
+            variant="secondary"
           >
             <div
               class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
               data-align="center"
               data-direction="horizontal"
-              data-gap="condensed"
+              data-gap="none"
               data-justify="start"
               data-padding="none"
               data-wrap="nowrap"
@@ -91,22 +87,22 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
                 />
               </svg>
               <span
-                class="Text-sc-17v1xeu-0 hmAFGJ"
+                class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
               >
                 1
               </span>
             </div>
-          </button>
-          <button
-            class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-notification-pill-rest hover:bg-gitify-notification-pill-hover"
+          </span>
+          <span
+            class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
             title="gitify-app requested changes"
-            type="button"
+            variant="secondary"
           >
             <div
               class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
               data-align="center"
               data-direction="horizontal"
-              data-gap="condensed"
+              data-gap="none"
               data-justify="start"
               data-padding="none"
               data-wrap="nowrap"
@@ -128,19 +124,19 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
                 />
               </svg>
               <span
-                class="Text-sc-17v1xeu-0 hmAFGJ"
+                class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
               >
                 1
               </span>
             </div>
-          </button>
+          </span>
         </div>
       </div>
     </div>
   </body>,
   "container": <div>
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+      class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-xs opacity-80"
       data-align="center"
       data-direction="horizontal"
       data-gap="condensed"
@@ -160,50 +156,46 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
         title="View profile: gitify-app"
         width="14"
       />
-      <span
-        class="text-xs opacity-80"
-      >
-        <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-          data-align="stretch"
-          data-direction="horizontal"
-          data-gap="condensed"
-          data-justify="start"
-          data-padding="none"
-          data-wrap="nowrap"
-        >
-          <span
-            class="Text-sc-17v1xeu-0 hmAFGJ"
-            title="You're watching the repository."
-          >
-            Updated
-          </span>
-          <span
-            class="Text-sc-17v1xeu-0 hmAFGJ"
-          >
-            •
-          </span>
-          <relative-time
-            class="sc-KXCwU"
-            datetime="2017-05-20T17:51:57.000Z"
-          >
-            May 20, 2017
-          </relative-time>
-        </div>
-      </span>
       <div
-        class="flex"
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+        data-align="stretch"
+        data-direction="horizontal"
+        data-gap="none"
+        data-justify="start"
+        data-padding="none"
+        data-wrap="nowrap"
       >
-        <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-notification-pill-rest hover:bg-gitify-notification-pill-hover"
+        <span
+          class="Text-sc-17v1xeu-0 hmAFGJ"
+          title="You're watching the repository."
+        >
+          Updated
+        </span>
+        <span
+          class="Text-sc-17v1xeu-0 hmAFGJ px-1"
+        >
+          •
+        </span>
+        <relative-time
+          class="sc-KXCwU"
+          datetime="2017-05-20T17:51:57.000Z"
+        >
+          May 20, 2017
+        </relative-time>
+      </div>
+      <div
+        class="Box-sc-g0xbh4-0 flex gap-1"
+      >
+        <span
+          class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
           title="octocat approved these changes"
-          type="button"
+          variant="secondary"
         >
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
-            data-gap="condensed"
+            data-gap="none"
             data-justify="start"
             data-padding="none"
             data-wrap="nowrap"
@@ -225,22 +217,22 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 hmAFGJ"
+              class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
             >
               1
             </span>
           </div>
-        </button>
-        <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-notification-pill-rest hover:bg-gitify-notification-pill-hover"
+        </span>
+        <span
+          class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
           title="gitify-app requested changes"
-          type="button"
+          variant="secondary"
         >
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
-            data-gap="condensed"
+            data-gap="none"
             data-justify="start"
             data-padding="none"
             data-wrap="nowrap"
@@ -262,12 +254,12 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 hmAFGJ"
+              class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
             >
               1
             </span>
           </div>
-        </button>
+        </span>
       </div>
     </div>
   </div>,
@@ -331,7 +323,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
   "baseElement": <body>
     <div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-xs opacity-80"
         data-align="center"
         data-direction="horizontal"
         data-gap="condensed"
@@ -351,50 +343,46 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
           title="View profile: gitify-app"
           width="14"
         />
-        <span
-          class="text-xs opacity-80"
-        >
-          <div
-            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-            data-align="stretch"
-            data-direction="horizontal"
-            data-gap="condensed"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
-          >
-            <span
-              class="Text-sc-17v1xeu-0 hmAFGJ"
-              title="You're watching the repository."
-            >
-              Updated
-            </span>
-            <span
-              class="Text-sc-17v1xeu-0 hmAFGJ"
-            >
-              •
-            </span>
-            <relative-time
-              class="sc-KXCwU"
-              datetime="2017-05-20T17:51:57.000Z"
-            >
-              May 20, 2017
-            </relative-time>
-          </div>
-        </span>
         <div
-          class="flex"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          data-align="stretch"
+          data-direction="horizontal"
+          data-gap="none"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
         >
-          <button
-            class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-notification-pill-rest hover:bg-gitify-notification-pill-hover"
+          <span
+            class="Text-sc-17v1xeu-0 hmAFGJ"
+            title="You're watching the repository."
+          >
+            Updated
+          </span>
+          <span
+            class="Text-sc-17v1xeu-0 hmAFGJ px-1"
+          >
+            •
+          </span>
+          <relative-time
+            class="sc-KXCwU"
+            datetime="2017-05-20T17:51:57.000Z"
+          >
+            May 20, 2017
+          </relative-time>
+        </div>
+        <div
+          class="Box-sc-g0xbh4-0 flex gap-1"
+        >
+          <span
+            class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
             title="octocat approved these changes"
-            type="button"
+            variant="secondary"
           >
             <div
               class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
               data-align="center"
               data-direction="horizontal"
-              data-gap="condensed"
+              data-gap="none"
               data-justify="start"
               data-padding="none"
               data-wrap="nowrap"
@@ -416,22 +404,22 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
                 />
               </svg>
               <span
-                class="Text-sc-17v1xeu-0 hmAFGJ"
+                class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
               >
                 1
               </span>
             </div>
-          </button>
-          <button
-            class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-notification-pill-rest hover:bg-gitify-notification-pill-hover"
+          </span>
+          <span
+            class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
             title="gitify-app requested changes"
-            type="button"
+            variant="secondary"
           >
             <div
               class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
               data-align="center"
               data-direction="horizontal"
-              data-gap="condensed"
+              data-gap="none"
               data-justify="start"
               data-padding="none"
               data-wrap="nowrap"
@@ -453,19 +441,19 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
                 />
               </svg>
               <span
-                class="Text-sc-17v1xeu-0 hmAFGJ"
+                class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
               >
                 1
               </span>
             </div>
-          </button>
+          </span>
         </div>
       </div>
     </div>
   </body>,
   "container": <div>
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+      class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-xs opacity-80"
       data-align="center"
       data-direction="horizontal"
       data-gap="condensed"
@@ -485,50 +473,46 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
         title="View profile: gitify-app"
         width="14"
       />
-      <span
-        class="text-xs opacity-80"
-      >
-        <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-          data-align="stretch"
-          data-direction="horizontal"
-          data-gap="condensed"
-          data-justify="start"
-          data-padding="none"
-          data-wrap="nowrap"
-        >
-          <span
-            class="Text-sc-17v1xeu-0 hmAFGJ"
-            title="You're watching the repository."
-          >
-            Updated
-          </span>
-          <span
-            class="Text-sc-17v1xeu-0 hmAFGJ"
-          >
-            •
-          </span>
-          <relative-time
-            class="sc-KXCwU"
-            datetime="2017-05-20T17:51:57.000Z"
-          >
-            May 20, 2017
-          </relative-time>
-        </div>
-      </span>
       <div
-        class="flex"
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+        data-align="stretch"
+        data-direction="horizontal"
+        data-gap="none"
+        data-justify="start"
+        data-padding="none"
+        data-wrap="nowrap"
       >
-        <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-notification-pill-rest hover:bg-gitify-notification-pill-hover"
+        <span
+          class="Text-sc-17v1xeu-0 hmAFGJ"
+          title="You're watching the repository."
+        >
+          Updated
+        </span>
+        <span
+          class="Text-sc-17v1xeu-0 hmAFGJ px-1"
+        >
+          •
+        </span>
+        <relative-time
+          class="sc-KXCwU"
+          datetime="2017-05-20T17:51:57.000Z"
+        >
+          May 20, 2017
+        </relative-time>
+      </div>
+      <div
+        class="Box-sc-g0xbh4-0 flex gap-1"
+      >
+        <span
+          class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
           title="octocat approved these changes"
-          type="button"
+          variant="secondary"
         >
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
-            data-gap="condensed"
+            data-gap="none"
             data-justify="start"
             data-padding="none"
             data-wrap="nowrap"
@@ -550,22 +534,22 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 hmAFGJ"
+              class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
             >
               1
             </span>
           </div>
-        </button>
-        <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-notification-pill-rest hover:bg-gitify-notification-pill-hover"
+        </span>
+        <span
+          class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
           title="gitify-app requested changes"
-          type="button"
+          variant="secondary"
         >
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
-            data-gap="condensed"
+            data-gap="none"
             data-justify="start"
             data-padding="none"
             data-wrap="nowrap"
@@ -587,12 +571,12 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 hmAFGJ"
+              class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
             >
               1
             </span>
           </div>
-        </button>
+        </span>
       </div>
     </div>
   </div>,
@@ -656,7 +640,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
   "baseElement": <body>
     <div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-xs opacity-80"
         data-align="center"
         data-direction="horizontal"
         data-gap="condensed"
@@ -680,50 +664,46 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
             d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"
           />
         </svg>
-        <span
-          class="text-xs opacity-80"
-        >
-          <div
-            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-            data-align="stretch"
-            data-direction="horizontal"
-            data-gap="condensed"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
-          >
-            <span
-              class="Text-sc-17v1xeu-0 hmAFGJ"
-              title="You're watching the repository."
-            >
-              Updated
-            </span>
-            <span
-              class="Text-sc-17v1xeu-0 hmAFGJ"
-            >
-              •
-            </span>
-            <relative-time
-              class="sc-KXCwU"
-              datetime="2017-05-20T17:51:57.000Z"
-            >
-              May 20, 2017
-            </relative-time>
-          </div>
-        </span>
         <div
-          class="flex"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          data-align="stretch"
+          data-direction="horizontal"
+          data-gap="none"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
         >
-          <button
-            class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-notification-pill-rest hover:bg-gitify-notification-pill-hover"
+          <span
+            class="Text-sc-17v1xeu-0 hmAFGJ"
+            title="You're watching the repository."
+          >
+            Updated
+          </span>
+          <span
+            class="Text-sc-17v1xeu-0 hmAFGJ px-1"
+          >
+            •
+          </span>
+          <relative-time
+            class="sc-KXCwU"
+            datetime="2017-05-20T17:51:57.000Z"
+          >
+            May 20, 2017
+          </relative-time>
+        </div>
+        <div
+          class="Box-sc-g0xbh4-0 flex gap-1"
+        >
+          <span
+            class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
             title="octocat approved these changes"
-            type="button"
+            variant="secondary"
           >
             <div
               class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
               data-align="center"
               data-direction="horizontal"
-              data-gap="condensed"
+              data-gap="none"
               data-justify="start"
               data-padding="none"
               data-wrap="nowrap"
@@ -745,22 +725,22 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
                 />
               </svg>
               <span
-                class="Text-sc-17v1xeu-0 hmAFGJ"
+                class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
               >
                 1
               </span>
             </div>
-          </button>
-          <button
-            class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-notification-pill-rest hover:bg-gitify-notification-pill-hover"
+          </span>
+          <span
+            class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
             title="gitify-app requested changes"
-            type="button"
+            variant="secondary"
           >
             <div
               class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
               data-align="center"
               data-direction="horizontal"
-              data-gap="condensed"
+              data-gap="none"
               data-justify="start"
               data-padding="none"
               data-wrap="nowrap"
@@ -782,19 +762,19 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
                 />
               </svg>
               <span
-                class="Text-sc-17v1xeu-0 hmAFGJ"
+                class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
               >
                 1
               </span>
             </div>
-          </button>
+          </span>
         </div>
       </div>
     </div>
   </body>,
   "container": <div>
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+      class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-xs opacity-80"
       data-align="center"
       data-direction="horizontal"
       data-gap="condensed"
@@ -818,50 +798,46 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
           d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"
         />
       </svg>
-      <span
-        class="text-xs opacity-80"
-      >
-        <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-          data-align="stretch"
-          data-direction="horizontal"
-          data-gap="condensed"
-          data-justify="start"
-          data-padding="none"
-          data-wrap="nowrap"
-        >
-          <span
-            class="Text-sc-17v1xeu-0 hmAFGJ"
-            title="You're watching the repository."
-          >
-            Updated
-          </span>
-          <span
-            class="Text-sc-17v1xeu-0 hmAFGJ"
-          >
-            •
-          </span>
-          <relative-time
-            class="sc-KXCwU"
-            datetime="2017-05-20T17:51:57.000Z"
-          >
-            May 20, 2017
-          </relative-time>
-        </div>
-      </span>
       <div
-        class="flex"
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+        data-align="stretch"
+        data-direction="horizontal"
+        data-gap="none"
+        data-justify="start"
+        data-padding="none"
+        data-wrap="nowrap"
       >
-        <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-notification-pill-rest hover:bg-gitify-notification-pill-hover"
+        <span
+          class="Text-sc-17v1xeu-0 hmAFGJ"
+          title="You're watching the repository."
+        >
+          Updated
+        </span>
+        <span
+          class="Text-sc-17v1xeu-0 hmAFGJ px-1"
+        >
+          •
+        </span>
+        <relative-time
+          class="sc-KXCwU"
+          datetime="2017-05-20T17:51:57.000Z"
+        >
+          May 20, 2017
+        </relative-time>
+      </div>
+      <div
+        class="Box-sc-g0xbh4-0 flex gap-1"
+      >
+        <span
+          class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
           title="octocat approved these changes"
-          type="button"
+          variant="secondary"
         >
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
-            data-gap="condensed"
+            data-gap="none"
             data-justify="start"
             data-padding="none"
             data-wrap="nowrap"
@@ -883,22 +859,22 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 hmAFGJ"
+              class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
             >
               1
             </span>
           </div>
-        </button>
-        <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-notification-pill-rest hover:bg-gitify-notification-pill-hover"
+        </span>
+        <span
+          class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
           title="gitify-app requested changes"
-          type="button"
+          variant="secondary"
         >
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
-            data-gap="condensed"
+            data-gap="none"
             data-justify="start"
             data-padding="none"
             data-wrap="nowrap"
@@ -920,12 +896,12 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 hmAFGJ"
+              class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
             >
               1
             </span>
           </div>
-        </button>
+        </span>
       </div>
     </div>
   </div>,
@@ -989,7 +965,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
   "baseElement": <body>
     <div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-xs opacity-80"
         data-align="center"
         data-direction="horizontal"
         data-gap="condensed"
@@ -1009,50 +985,46 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
           title="View profile: gitify-app"
           width="14"
         />
-        <span
-          class="text-xs opacity-80"
-        >
-          <div
-            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-            data-align="stretch"
-            data-direction="horizontal"
-            data-gap="condensed"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
-          >
-            <span
-              class="Text-sc-17v1xeu-0 hmAFGJ"
-              title="You're watching the repository."
-            >
-              Updated
-            </span>
-            <span
-              class="Text-sc-17v1xeu-0 hmAFGJ"
-            >
-              •
-            </span>
-            <relative-time
-              class="sc-KXCwU"
-              datetime="2017-05-20T17:51:57.000Z"
-            >
-              May 20, 2017
-            </relative-time>
-          </div>
-        </span>
         <div
-          class="flex"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          data-align="stretch"
+          data-direction="horizontal"
+          data-gap="none"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
         >
-          <button
-            class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-notification-pill-rest hover:bg-gitify-notification-pill-hover"
+          <span
+            class="Text-sc-17v1xeu-0 hmAFGJ"
+            title="You're watching the repository."
+          >
+            Updated
+          </span>
+          <span
+            class="Text-sc-17v1xeu-0 hmAFGJ px-1"
+          >
+            •
+          </span>
+          <relative-time
+            class="sc-KXCwU"
+            datetime="2017-05-20T17:51:57.000Z"
+          >
+            May 20, 2017
+          </relative-time>
+        </div>
+        <div
+          class="Box-sc-g0xbh4-0 flex gap-1"
+        >
+          <span
+            class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
             title="octocat approved these changes"
-            type="button"
+            variant="secondary"
           >
             <div
               class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
               data-align="center"
               data-direction="horizontal"
-              data-gap="condensed"
+              data-gap="none"
               data-justify="start"
               data-padding="none"
               data-wrap="nowrap"
@@ -1074,22 +1046,22 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
                 />
               </svg>
               <span
-                class="Text-sc-17v1xeu-0 hmAFGJ"
+                class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
               >
                 1
               </span>
             </div>
-          </button>
-          <button
-            class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-notification-pill-rest hover:bg-gitify-notification-pill-hover"
+          </span>
+          <span
+            class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
             title="gitify-app requested changes"
-            type="button"
+            variant="secondary"
           >
             <div
               class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
               data-align="center"
               data-direction="horizontal"
-              data-gap="condensed"
+              data-gap="none"
               data-justify="start"
               data-padding="none"
               data-wrap="nowrap"
@@ -1111,19 +1083,19 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
                 />
               </svg>
               <span
-                class="Text-sc-17v1xeu-0 hmAFGJ"
+                class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
               >
                 1
               </span>
             </div>
-          </button>
+          </span>
         </div>
       </div>
     </div>
   </body>,
   "container": <div>
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+      class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-xs opacity-80"
       data-align="center"
       data-direction="horizontal"
       data-gap="condensed"
@@ -1143,50 +1115,46 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
         title="View profile: gitify-app"
         width="14"
       />
-      <span
-        class="text-xs opacity-80"
-      >
-        <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-          data-align="stretch"
-          data-direction="horizontal"
-          data-gap="condensed"
-          data-justify="start"
-          data-padding="none"
-          data-wrap="nowrap"
-        >
-          <span
-            class="Text-sc-17v1xeu-0 hmAFGJ"
-            title="You're watching the repository."
-          >
-            Updated
-          </span>
-          <span
-            class="Text-sc-17v1xeu-0 hmAFGJ"
-          >
-            •
-          </span>
-          <relative-time
-            class="sc-KXCwU"
-            datetime="2017-05-20T17:51:57.000Z"
-          >
-            May 20, 2017
-          </relative-time>
-        </div>
-      </span>
       <div
-        class="flex"
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+        data-align="stretch"
+        data-direction="horizontal"
+        data-gap="none"
+        data-justify="start"
+        data-padding="none"
+        data-wrap="nowrap"
       >
-        <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-notification-pill-rest hover:bg-gitify-notification-pill-hover"
+        <span
+          class="Text-sc-17v1xeu-0 hmAFGJ"
+          title="You're watching the repository."
+        >
+          Updated
+        </span>
+        <span
+          class="Text-sc-17v1xeu-0 hmAFGJ px-1"
+        >
+          •
+        </span>
+        <relative-time
+          class="sc-KXCwU"
+          datetime="2017-05-20T17:51:57.000Z"
+        >
+          May 20, 2017
+        </relative-time>
+      </div>
+      <div
+        class="Box-sc-g0xbh4-0 flex gap-1"
+      >
+        <span
+          class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
           title="octocat approved these changes"
-          type="button"
+          variant="secondary"
         >
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
-            data-gap="condensed"
+            data-gap="none"
             data-justify="start"
             data-padding="none"
             data-wrap="nowrap"
@@ -1208,22 +1176,22 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 hmAFGJ"
+              class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
             >
               1
             </span>
           </div>
-        </button>
-        <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-notification-pill-rest hover:bg-gitify-notification-pill-hover"
+        </span>
+        <span
+          class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
           title="gitify-app requested changes"
-          type="button"
+          variant="secondary"
         >
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
-            data-gap="condensed"
+            data-gap="none"
             data-justify="start"
             data-padding="none"
             data-wrap="nowrap"
@@ -1245,12 +1213,12 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 hmAFGJ"
+              class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
             >
               1
             </span>
           </div>
-        </button>
+        </span>
       </div>
     </div>
   </div>,
@@ -1314,7 +1282,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
   "baseElement": <body>
     <div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-xs opacity-80"
         data-align="center"
         data-direction="horizontal"
         data-gap="condensed"
@@ -1334,50 +1302,46 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
           title="View profile: gitify-app"
           width="14"
         />
-        <span
-          class="text-xs opacity-80"
-        >
-          <div
-            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-            data-align="stretch"
-            data-direction="horizontal"
-            data-gap="condensed"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
-          >
-            <span
-              class="Text-sc-17v1xeu-0 hmAFGJ"
-              title="You're watching the repository."
-            >
-              Updated
-            </span>
-            <span
-              class="Text-sc-17v1xeu-0 hmAFGJ"
-            >
-              •
-            </span>
-            <relative-time
-              class="sc-KXCwU"
-              datetime="2017-05-20T17:51:57.000Z"
-            >
-              May 20, 2017
-            </relative-time>
-          </div>
-        </span>
         <div
-          class="flex"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          data-align="stretch"
+          data-direction="horizontal"
+          data-gap="none"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
         >
-          <button
-            class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-notification-pill-rest hover:bg-gitify-notification-pill-hover"
+          <span
+            class="Text-sc-17v1xeu-0 hmAFGJ"
+            title="You're watching the repository."
+          >
+            Updated
+          </span>
+          <span
+            class="Text-sc-17v1xeu-0 hmAFGJ px-1"
+          >
+            •
+          </span>
+          <relative-time
+            class="sc-KXCwU"
+            datetime="2017-05-20T17:51:57.000Z"
+          >
+            May 20, 2017
+          </relative-time>
+        </div>
+        <div
+          class="Box-sc-g0xbh4-0 flex gap-1"
+        >
+          <span
+            class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
             title="octocat approved these changes"
-            type="button"
+            variant="secondary"
           >
             <div
               class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
               data-align="center"
               data-direction="horizontal"
-              data-gap="condensed"
+              data-gap="none"
               data-justify="start"
               data-padding="none"
               data-wrap="nowrap"
@@ -1399,22 +1363,22 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
                 />
               </svg>
               <span
-                class="Text-sc-17v1xeu-0 hmAFGJ"
+                class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
               >
                 1
               </span>
             </div>
-          </button>
-          <button
-            class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-notification-pill-rest hover:bg-gitify-notification-pill-hover"
+          </span>
+          <span
+            class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
             title="gitify-app requested changes"
-            type="button"
+            variant="secondary"
           >
             <div
               class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
               data-align="center"
               data-direction="horizontal"
-              data-gap="condensed"
+              data-gap="none"
               data-justify="start"
               data-padding="none"
               data-wrap="nowrap"
@@ -1436,19 +1400,19 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
                 />
               </svg>
               <span
-                class="Text-sc-17v1xeu-0 hmAFGJ"
+                class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
               >
                 1
               </span>
             </div>
-          </button>
+          </span>
         </div>
       </div>
     </div>
   </body>,
   "container": <div>
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+      class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-xs opacity-80"
       data-align="center"
       data-direction="horizontal"
       data-gap="condensed"
@@ -1468,50 +1432,46 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
         title="View profile: gitify-app"
         width="14"
       />
-      <span
-        class="text-xs opacity-80"
-      >
-        <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-          data-align="stretch"
-          data-direction="horizontal"
-          data-gap="condensed"
-          data-justify="start"
-          data-padding="none"
-          data-wrap="nowrap"
-        >
-          <span
-            class="Text-sc-17v1xeu-0 hmAFGJ"
-            title="You're watching the repository."
-          >
-            Updated
-          </span>
-          <span
-            class="Text-sc-17v1xeu-0 hmAFGJ"
-          >
-            •
-          </span>
-          <relative-time
-            class="sc-KXCwU"
-            datetime="2017-05-20T17:51:57.000Z"
-          >
-            May 20, 2017
-          </relative-time>
-        </div>
-      </span>
       <div
-        class="flex"
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+        data-align="stretch"
+        data-direction="horizontal"
+        data-gap="none"
+        data-justify="start"
+        data-padding="none"
+        data-wrap="nowrap"
       >
-        <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-notification-pill-rest hover:bg-gitify-notification-pill-hover"
+        <span
+          class="Text-sc-17v1xeu-0 hmAFGJ"
+          title="You're watching the repository."
+        >
+          Updated
+        </span>
+        <span
+          class="Text-sc-17v1xeu-0 hmAFGJ px-1"
+        >
+          •
+        </span>
+        <relative-time
+          class="sc-KXCwU"
+          datetime="2017-05-20T17:51:57.000Z"
+        >
+          May 20, 2017
+        </relative-time>
+      </div>
+      <div
+        class="Box-sc-g0xbh4-0 flex gap-1"
+      >
+        <span
+          class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
           title="octocat approved these changes"
-          type="button"
+          variant="secondary"
         >
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
-            data-gap="condensed"
+            data-gap="none"
             data-justify="start"
             data-padding="none"
             data-wrap="nowrap"
@@ -1533,22 +1493,22 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 hmAFGJ"
+              class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
             >
               1
             </span>
           </div>
-        </button>
-        <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-notification-pill-rest hover:bg-gitify-notification-pill-hover"
+        </span>
+        <span
+          class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
           title="gitify-app requested changes"
-          type="button"
+          variant="secondary"
         >
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
-            data-gap="condensed"
+            data-gap="none"
             data-justify="start"
             data-padding="none"
             data-wrap="nowrap"
@@ -1570,12 +1530,12 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 hmAFGJ"
+              class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
             >
               1
             </span>
           </div>
-        </button>
+        </span>
       </div>
     </div>
   </div>,
