@@ -12,10 +12,10 @@ export const Centered: FC<ICentered> = ({
 }: ICentered) => {
   return (
     <Stack
-      direction={'vertical'}
-      align={'center'}
-      justify={'center'}
-      padding={'spacious'}
+      direction="vertical"
+      align="center"
+      justify="center"
+      padding="spacious"
       className={fullHeight && 'min-h-screen'}
     >
       {props.children}

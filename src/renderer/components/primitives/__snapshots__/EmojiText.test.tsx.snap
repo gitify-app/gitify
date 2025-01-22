@@ -6,7 +6,7 @@ exports[`renderer/components/primitives/Emoji.tsx should render 1`] = `
   "baseElement": <body>
     <div>
       <div
-        class="Box-sc-g0xbh4-0"
+        class="Box-sc-g0xbh4-0 text-5xl"
       >
         <img
           alt="🍺"
@@ -19,7 +19,7 @@ exports[`renderer/components/primitives/Emoji.tsx should render 1`] = `
   </body>,
   "container": <div>
     <div
-      class="Box-sc-g0xbh4-0"
+      class="Box-sc-g0xbh4-0 text-5xl"
     >
       <img
         alt="🍺"
