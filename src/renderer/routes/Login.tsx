@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { logError } from '../../shared/logger';
 import { LogoIcon } from '../components/icons/LogoIcon';
-import { Centered } from '../components/primitives/Centered';
+import { Centered } from '../components/layout/Centered';
 import { AppContext } from '../context/App';
 import { Size } from '../types';
 import { showWindow } from '../utils/comms';
@@ -30,7 +30,7 @@ export const LoginRoute: FC = () => {
   }, [loginWithGitHubApp]);
 
   return (
-    <Centered>
+    <Centered fullHeight={true}>
       <Stack direction="vertical" align="center">
         <LogoIcon size={Size.LARGE} isDark />
 

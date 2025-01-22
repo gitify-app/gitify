@@ -1,13 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renderer/components/primitives/Page.tsx should render itself & its children 1`] = `
+exports[`renderer/components/layout/Contents.tsx should render itself & its children 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
       <div
-        class="flex h-screen flex-col"
-        data-testid="test"
+        class="flex-grow overflow-x-auto px-8 pb-4"
       >
         Test
       </div>
@@ -15,8 +14,7 @@ exports[`renderer/components/primitives/Page.tsx should render itself & its chil
   </body>,
   "container": <div>
     <div
-      class="flex h-screen flex-col"
-      data-testid="test"
+      class="flex-grow overflow-x-auto px-8 pb-4"
     >
       Test
     </div>

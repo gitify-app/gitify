@@ -6,7 +6,12 @@ exports[`renderer/components/Oops.tsx should render itself & its children 1`] = 
   "baseElement": <body>
     <div>
       <div
-        class="flex flex-1 flex-col items-center justify-center p-8 min-h-screen"
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY min-h-screen"
+        data-align="center"
+        data-direction="vertical"
+        data-justify="center"
+        data-padding="spacious"
+        data-wrap="nowrap"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
@@ -19,14 +24,16 @@ exports[`renderer/components/Oops.tsx should render itself & its children 1`] = 
           <div
             class="mt-2 text-5xl"
           >
-            <span>
+            <div
+              class="Box-sc-g0xbh4-0"
+            >
               <img
                 alt="🔥"
                 class="emoji"
                 draggable="false"
                 src="images/twemoji/1f525.svg"
               />
-            </span>
+            </div>
           </div>
           <div
             class="mb-2 text-xl font-semibold"
@@ -44,7 +51,12 @@ exports[`renderer/components/Oops.tsx should render itself & its children 1`] = 
   </body>,
   "container": <div>
     <div
-      class="flex flex-1 flex-col items-center justify-center p-8 min-h-screen"
+      class="Stack__StyledStack-sc-x3xa2i-0 duhwY min-h-screen"
+      data-align="center"
+      data-direction="vertical"
+      data-justify="center"
+      data-padding="spacious"
+      data-wrap="nowrap"
     >
       <div
         class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
@@ -57,14 +69,16 @@ exports[`renderer/components/Oops.tsx should render itself & its children 1`] = 
         <div
           class="mt-2 text-5xl"
         >
-          <span>
+          <div
+            class="Box-sc-g0xbh4-0"
+          >
             <img
               alt="🔥"
               class="emoji"
               draggable="false"
               src="images/twemoji/1f525.svg"
             />
-          </span>
+          </div>
         </div>
         <div
           class="mb-2 text-xl font-semibold"

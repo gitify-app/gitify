@@ -6,44 +6,42 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
   data-testid="filters"
 >
   <div
-    class="mx-6 mt-2 py-2"
+    class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+    data-align="stretch"
+    data-direction="horizontal"
+    data-justify="space-between"
+    data-padding="spacious"
+    data-wrap="nowrap"
   >
-    <div
-      class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-      data-align="stretch"
-      data-direction="horizontal"
-      data-justify="space-between"
-      data-padding="none"
-      data-wrap="nowrap"
+    <button
+      aria-describedby=":r0:-loading-announcement"
+      aria-labelledby="Go Back"
+      class="types__StyledButton-sc-ws60qy-0 kQRupk"
+      data-component="IconButton"
+      data-loading="false"
+      data-no-visuals="true"
+      data-testid="header-nav-back"
+      sx="[object Object]"
+      type="button"
     >
-      <button
-        aria-describedby=":r0:-loading-announcement"
-        aria-labelledby="Go Back"
-        class="types__StyledButton-sc-ws60qy-0 kQRupk"
-        data-component="IconButton"
-        data-loading="false"
-        data-no-visuals="true"
-        data-testid="header-nav-back"
-        sx="[object Object]"
-        type="button"
+      <svg
+        aria-hidden="true"
+        class="octicon octicon-arrow-left"
+        display="inline-block"
+        fill="currentColor"
+        focusable="false"
+        height="16"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
+        viewBox="0 0 16 16"
+        width="16"
       >
-        <svg
-          aria-hidden="true"
-          class="octicon octicon-arrow-left"
-          display="inline-block"
-          fill="currentColor"
-          focusable="false"
-          height="16"
-          overflow="visible"
-          style="vertical-align: text-bottom;"
-          viewBox="0 0 16 16"
-          width="16"
-        >
-          <path
-            d="M7.78 12.53a.75.75 0 0 1-1.06 0L2.47 8.28a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L4.81 7h7.44a.75.75 0 0 1 0 1.5H4.81l2.97 2.97a.75.75 0 0 1 0 1.06Z"
-          />
-        </svg>
-      </button>
+        <path
+          d="M7.78 12.53a.75.75 0 0 1-1.06 0L2.47 8.28a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L4.81 7h7.44a.75.75 0 0 1 0 1.5H4.81l2.97 2.97a.75.75 0 0 1 0 1.06Z"
+        />
+      </svg>
+    </button>
+    <legend>
       <div
         class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
         data-align="center"
@@ -52,6 +50,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
         data-justify="start"
         data-padding="none"
         data-wrap="nowrap"
+        id="filters"
       >
         <svg
           aria-hidden="true"
@@ -59,11 +58,11 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           display="inline-block"
           fill="currentColor"
           focusable="false"
-          height="18"
+          height="16"
           overflow="visible"
           style="vertical-align: text-bottom;"
           viewBox="0 0 16 16"
-          width="18"
+          width="16"
         >
           <path
             d="M.75 3h14.5a.75.75 0 0 1 0 1.5H.75a.75.75 0 0 1 0-1.5ZM3 7.75A.75.75 0 0 1 3.75 7h8.5a.75.75 0 0 1 0 1.5h-8.5A.75.75 0 0 1 3 7.75Zm3 4a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z"
@@ -76,7 +75,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           Filters
         </h2>
       </div>
-    </div>
+    </legend>
   </div>
   <div
     class="flex-grow overflow-x-auto px-8 pb-4"
@@ -84,27 +83,40 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
     <fieldset
       class="mb-3"
     >
-      <legend
-        class="mb-1 mt-2 font-semibold flex items-center"
-        id="users"
-      >
-        <svg
-          aria-hidden="true"
-          class="octicon octicon-feed-person mr-2"
-          display="inline-block"
-          fill="currentColor"
-          focusable="false"
-          height="16"
-          overflow="visible"
-          style="vertical-align: text-bottom;"
-          viewBox="0 0 16 16"
-          width="16"
+      <legend>
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
+          id="users"
         >
-          <path
-            d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
-          />
-        </svg>
-        Users
+          <svg
+            aria-hidden="true"
+            class="octicon octicon-feed-person"
+            display="inline-block"
+            fill="currentColor"
+            focusable="false"
+            height="16"
+            overflow="visible"
+            style="vertical-align: text-bottom;"
+            viewBox="0 0 16 16"
+            width="16"
+          >
+            <path
+              d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
+            />
+          </svg>
+          <h2
+            class="Heading__StyledHeading-sc-1c1dgg0-0 lfvrLU"
+            sx="[object Object]"
+          >
+            Users
+          </h2>
+        </div>
       </legend>
       <div
         class="mt-3 mb-2 text-sm"
@@ -155,27 +167,40 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
     <fieldset
       class="mb-3"
     >
-      <legend
-        class="mb-1 mt-2 font-semibold flex items-center"
-        id="reason"
-      >
-        <svg
-          aria-hidden="true"
-          class="octicon octicon-note mr-2"
-          display="inline-block"
-          fill="currentColor"
-          focusable="false"
-          height="16"
-          overflow="visible"
-          style="vertical-align: text-bottom;"
-          viewBox="0 0 16 16"
-          width="16"
+      <legend>
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
+          id="reason"
         >
-          <path
-            d="M0 3.75C0 2.784.784 2 1.75 2h12.5c.966 0 1.75.784 1.75 1.75v8.5A1.75 1.75 0 0 1 14.25 14H1.75A1.75 1.75 0 0 1 0 12.25Zm1.75-.25a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25v-8.5a.25.25 0 0 0-.25-.25ZM3.5 6.25a.75.75 0 0 1 .75-.75h7a.75.75 0 0 1 0 1.5h-7a.75.75 0 0 1-.75-.75Zm.75 2.25h4a.75.75 0 0 1 0 1.5h-4a.75.75 0 0 1 0-1.5Z"
-          />
-        </svg>
-        Reason
+          <svg
+            aria-hidden="true"
+            class="octicon octicon-note"
+            display="inline-block"
+            fill="currentColor"
+            focusable="false"
+            height="16"
+            overflow="visible"
+            style="vertical-align: text-bottom;"
+            viewBox="0 0 16 16"
+            width="16"
+          >
+            <path
+              d="M0 3.75C0 2.784.784 2 1.75 2h12.5c.966 0 1.75.784 1.75 1.75v8.5A1.75 1.75 0 0 1 14.25 14H1.75A1.75 1.75 0 0 1 0 12.25Zm1.75-.25a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25v-8.5a.25.25 0 0 0-.25-.25ZM3.5 6.25a.75.75 0 0 1 .75-.75h7a.75.75 0 0 1 0 1.5h-7a.75.75 0 0 1-.75-.75Zm.75 2.25h4a.75.75 0 0 1 0 1.5h-4a.75.75 0 0 1 0-1.5Z"
+            />
+          </svg>
+          <h2
+            class="Heading__StyledHeading-sc-1c1dgg0-0 lfvrLU"
+            sx="[object Object]"
+          >
+            Reason
+          </h2>
+        </div>
       </legend>
       <span
         class="text-xs italic"
@@ -860,7 +885,12 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
     </fieldset>
   </div>
   <div
-    class="flex items-center px-3 py-1 text-sm bg-gitify-footer justify-end"
+    class="Stack__StyledStack-sc-x3xa2i-0 duhwY bg-gitify-footer"
+    data-align="stretch"
+    data-direction="horizontal"
+    data-justify="end"
+    data-padding="condensed"
+    data-wrap="nowrap"
   >
     <span
       aria-label="Clear all filters"

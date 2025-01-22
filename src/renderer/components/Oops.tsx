@@ -2,21 +2,22 @@ import { type FC, useMemo } from 'react';
 
 import { Stack } from '@primer/react';
 import type { GitifyError } from '../types';
-import { Centered } from './primitives/Centered';
+import { Centered } from './layout/Centered';
 import { EmojiText } from './primitives/EmojiText';
 
 interface IOops {
   error: GitifyError;
+  fullHeight?: boolean;
 }
 
-export const Oops: FC<IOops> = ({ error }: IOops) => {
+export const Oops: FC<IOops> = ({ error, fullHeight = true }: IOops) => {
   const emoji = useMemo(
     () => error.emojis[Math.floor(Math.random() * error.emojis.length)],
     [error],
   );
 
   return (
-    <Centered>
+    <Centered fullHeight={fullHeight}>
       <Stack direction="vertical" align="center">
         <div className="mt-2 text-5xl">
           <EmojiText text={emoji} />

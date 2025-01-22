@@ -9,14 +9,14 @@ import { OpenPreference } from '../../types';
 import { Constants } from '../../utils/constants';
 import { Checkbox } from '../fields/Checkbox';
 import { RadioGroup } from '../fields/RadioGroup';
-import { Legend } from '../primitives/Legend';
+import { Title } from '../primitives/Title';
 
 export const SystemSettings: FC = () => {
   const { settings, updateSetting } = useContext(AppContext);
 
   return (
     <fieldset>
-      <Legend icon={DeviceDesktopIcon}>System</Legend>
+      <Title icon={DeviceDesktopIcon}>System</Title>
       <RadioGroup
         name="openLinks"
         label="Open Links:"

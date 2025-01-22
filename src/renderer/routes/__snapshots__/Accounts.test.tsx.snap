@@ -6,44 +6,42 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
   data-testid="accounts"
 >
   <div
-    class="mx-6 mt-2 py-2"
+    class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+    data-align="stretch"
+    data-direction="horizontal"
+    data-justify="space-between"
+    data-padding="spacious"
+    data-wrap="nowrap"
   >
-    <div
-      class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-      data-align="stretch"
-      data-direction="horizontal"
-      data-justify="space-between"
-      data-padding="none"
-      data-wrap="nowrap"
+    <button
+      aria-describedby=":r2s:-loading-announcement"
+      aria-labelledby="Go Back"
+      class="types__StyledButton-sc-ws60qy-0 kQRupk"
+      data-component="IconButton"
+      data-loading="false"
+      data-no-visuals="true"
+      data-testid="header-nav-back"
+      sx="[object Object]"
+      type="button"
     >
-      <button
-        aria-describedby=":r2s:-loading-announcement"
-        aria-labelledby="Go Back"
-        class="types__StyledButton-sc-ws60qy-0 kQRupk"
-        data-component="IconButton"
-        data-loading="false"
-        data-no-visuals="true"
-        data-testid="header-nav-back"
-        sx="[object Object]"
-        type="button"
+      <svg
+        aria-hidden="true"
+        class="octicon octicon-arrow-left"
+        display="inline-block"
+        fill="currentColor"
+        focusable="false"
+        height="16"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
+        viewBox="0 0 16 16"
+        width="16"
       >
-        <svg
-          aria-hidden="true"
-          class="octicon octicon-arrow-left"
-          display="inline-block"
-          fill="currentColor"
-          focusable="false"
-          height="16"
-          overflow="visible"
-          style="vertical-align: text-bottom;"
-          viewBox="0 0 16 16"
-          width="16"
-        >
-          <path
-            d="M7.78 12.53a.75.75 0 0 1-1.06 0L2.47 8.28a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L4.81 7h7.44a.75.75 0 0 1 0 1.5H4.81l2.97 2.97a.75.75 0 0 1 0 1.06Z"
-          />
-        </svg>
-      </button>
+        <path
+          d="M7.78 12.53a.75.75 0 0 1-1.06 0L2.47 8.28a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L4.81 7h7.44a.75.75 0 0 1 0 1.5H4.81l2.97 2.97a.75.75 0 0 1 0 1.06Z"
+        />
+      </svg>
+    </button>
+    <legend>
       <div
         class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
         data-align="center"
@@ -52,6 +50,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
         data-justify="start"
         data-padding="none"
         data-wrap="nowrap"
+        id="accounts"
       >
         <svg
           aria-hidden="true"
@@ -59,11 +58,11 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
           display="inline-block"
           fill="currentColor"
           focusable="false"
-          height="18"
+          height="16"
           overflow="visible"
           style="vertical-align: text-bottom;"
           viewBox="0 0 16 16"
-          width="18"
+          width="16"
         >
           <path
             d="M10.561 8.073a6.005 6.005 0 0 1 3.432 5.142.75.75 0 1 1-1.498.07 4.5 4.5 0 0 0-8.99 0 .75.75 0 0 1-1.498-.07 6.004 6.004 0 0 1 3.431-5.142 3.999 3.999 0 1 1 5.123 0ZM10.5 5a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0Z"
@@ -76,7 +75,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
           Accounts
         </h2>
       </div>
-    </div>
+    </legend>
   </div>
   <div
     class="flex-grow overflow-x-auto px-8"
@@ -1237,44 +1236,42 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
   data-testid="accounts"
 >
   <div
-    class="mx-6 mt-2 py-2"
+    class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+    data-align="stretch"
+    data-direction="horizontal"
+    data-justify="space-between"
+    data-padding="spacious"
+    data-wrap="nowrap"
   >
-    <div
-      class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-      data-align="stretch"
-      data-direction="horizontal"
-      data-justify="space-between"
-      data-padding="none"
-      data-wrap="nowrap"
+    <button
+      aria-describedby=":r3r:-loading-announcement"
+      aria-labelledby="Go Back"
+      class="types__StyledButton-sc-ws60qy-0 kQRupk"
+      data-component="IconButton"
+      data-loading="false"
+      data-no-visuals="true"
+      data-testid="header-nav-back"
+      sx="[object Object]"
+      type="button"
     >
-      <button
-        aria-describedby=":r3r:-loading-announcement"
-        aria-labelledby="Go Back"
-        class="types__StyledButton-sc-ws60qy-0 kQRupk"
-        data-component="IconButton"
-        data-loading="false"
-        data-no-visuals="true"
-        data-testid="header-nav-back"
-        sx="[object Object]"
-        type="button"
+      <svg
+        aria-hidden="true"
+        class="octicon octicon-arrow-left"
+        display="inline-block"
+        fill="currentColor"
+        focusable="false"
+        height="16"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
+        viewBox="0 0 16 16"
+        width="16"
       >
-        <svg
-          aria-hidden="true"
-          class="octicon octicon-arrow-left"
-          display="inline-block"
-          fill="currentColor"
-          focusable="false"
-          height="16"
-          overflow="visible"
-          style="vertical-align: text-bottom;"
-          viewBox="0 0 16 16"
-          width="16"
-        >
-          <path
-            d="M7.78 12.53a.75.75 0 0 1-1.06 0L2.47 8.28a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L4.81 7h7.44a.75.75 0 0 1 0 1.5H4.81l2.97 2.97a.75.75 0 0 1 0 1.06Z"
-          />
-        </svg>
-      </button>
+        <path
+          d="M7.78 12.53a.75.75 0 0 1-1.06 0L2.47 8.28a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L4.81 7h7.44a.75.75 0 0 1 0 1.5H4.81l2.97 2.97a.75.75 0 0 1 0 1.06Z"
+        />
+      </svg>
+    </button>
+    <legend>
       <div
         class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
         data-align="center"
@@ -1283,6 +1280,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
         data-justify="start"
         data-padding="none"
         data-wrap="nowrap"
+        id="accounts"
       >
         <svg
           aria-hidden="true"
@@ -1290,11 +1288,11 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
           display="inline-block"
           fill="currentColor"
           focusable="false"
-          height="18"
+          height="16"
           overflow="visible"
           style="vertical-align: text-bottom;"
           viewBox="0 0 16 16"
-          width="18"
+          width="16"
         >
           <path
             d="M10.561 8.073a6.005 6.005 0 0 1 3.432 5.142.75.75 0 1 1-1.498.07 4.5 4.5 0 0 0-8.99 0 .75.75 0 0 1-1.498-.07 6.004 6.004 0 0 1 3.431-5.142 3.999 3.999 0 1 1 5.123 0ZM10.5 5a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0Z"
@@ -1307,7 +1305,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
           Accounts
         </h2>
       </div>
-    </div>
+    </legend>
   </div>
   <div
     class="flex-grow overflow-x-auto px-8"
@@ -2468,44 +2466,42 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
   data-testid="accounts"
 >
   <div
-    class="mx-6 mt-2 py-2"
+    class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+    data-align="stretch"
+    data-direction="horizontal"
+    data-justify="space-between"
+    data-padding="spacious"
+    data-wrap="nowrap"
   >
-    <div
-      class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-      data-align="stretch"
-      data-direction="horizontal"
-      data-justify="space-between"
-      data-padding="none"
-      data-wrap="nowrap"
+    <button
+      aria-describedby=":r0:-loading-announcement"
+      aria-labelledby="Go Back"
+      class="types__StyledButton-sc-ws60qy-0 kQRupk"
+      data-component="IconButton"
+      data-loading="false"
+      data-no-visuals="true"
+      data-testid="header-nav-back"
+      sx="[object Object]"
+      type="button"
     >
-      <button
-        aria-describedby=":r0:-loading-announcement"
-        aria-labelledby="Go Back"
-        class="types__StyledButton-sc-ws60qy-0 kQRupk"
-        data-component="IconButton"
-        data-loading="false"
-        data-no-visuals="true"
-        data-testid="header-nav-back"
-        sx="[object Object]"
-        type="button"
+      <svg
+        aria-hidden="true"
+        class="octicon octicon-arrow-left"
+        display="inline-block"
+        fill="currentColor"
+        focusable="false"
+        height="16"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
+        viewBox="0 0 16 16"
+        width="16"
       >
-        <svg
-          aria-hidden="true"
-          class="octicon octicon-arrow-left"
-          display="inline-block"
-          fill="currentColor"
-          focusable="false"
-          height="16"
-          overflow="visible"
-          style="vertical-align: text-bottom;"
-          viewBox="0 0 16 16"
-          width="16"
-        >
-          <path
-            d="M7.78 12.53a.75.75 0 0 1-1.06 0L2.47 8.28a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L4.81 7h7.44a.75.75 0 0 1 0 1.5H4.81l2.97 2.97a.75.75 0 0 1 0 1.06Z"
-          />
-        </svg>
-      </button>
+        <path
+          d="M7.78 12.53a.75.75 0 0 1-1.06 0L2.47 8.28a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L4.81 7h7.44a.75.75 0 0 1 0 1.5H4.81l2.97 2.97a.75.75 0 0 1 0 1.06Z"
+        />
+      </svg>
+    </button>
+    <legend>
       <div
         class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
         data-align="center"
@@ -2514,6 +2510,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
         data-justify="start"
         data-padding="none"
         data-wrap="nowrap"
+        id="accounts"
       >
         <svg
           aria-hidden="true"
@@ -2521,11 +2518,11 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
           display="inline-block"
           fill="currentColor"
           focusable="false"
-          height="18"
+          height="16"
           overflow="visible"
           style="vertical-align: text-bottom;"
           viewBox="0 0 16 16"
-          width="18"
+          width="16"
         >
           <path
             d="M10.561 8.073a6.005 6.005 0 0 1 3.432 5.142.75.75 0 1 1-1.498.07 4.5 4.5 0 0 0-8.99 0 .75.75 0 0 1-1.498-.07 6.004 6.004 0 0 1 3.431-5.142 3.999 3.999 0 1 1 5.123 0ZM10.5 5a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0Z"
@@ -2538,7 +2535,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
           Accounts
         </h2>
       </div>
-    </div>
+    </legend>
   </div>
   <div
     class="flex-grow overflow-x-auto px-8"

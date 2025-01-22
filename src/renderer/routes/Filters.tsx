@@ -9,11 +9,11 @@ import {
 import { Button, Tooltip } from '@primer/react';
 
 import { Checkbox } from '../components/fields/Checkbox';
-import { Contents } from '../components/primitives/Contents';
+import { Contents } from '../components/layout/Contents';
+import { Page } from '../components/layout/Page';
 import { Footer } from '../components/primitives/Footer';
 import { Header } from '../components/primitives/Header';
-import { Legend } from '../components/primitives/Legend';
-import { Page } from '../components/primitives/Page';
+import { Title } from '../components/primitives/Title';
 import { AppContext } from '../context/App';
 import type { Reason } from '../typesGitHub';
 import { FORMATTED_REASONS, formatReason } from '../utils/reason';
@@ -45,7 +45,7 @@ export const FiltersRoute: FC = () => {
 
       <Contents>
         <fieldset className="mb-3">
-          <Legend icon={FeedPersonIcon}>Users</Legend>
+          <Title icon={FeedPersonIcon}>Users</Title>
           <Checkbox
             name="hideBots"
             label="Hide notifications from Bot accounts"
@@ -71,7 +71,7 @@ export const FiltersRoute: FC = () => {
         </fieldset>
 
         <fieldset className="mb-3">
-          <Legend icon={NoteIcon}>Reason</Legend>
+          <Title icon={NoteIcon}>Reason</Title>
           <span className="text-xs italic">
             Note: If no reasons are selected, all notifications will be shown.
           </span>
@@ -92,7 +92,7 @@ export const FiltersRoute: FC = () => {
         </fieldset>
       </Contents>
 
-      <Footer justify="justify-end">
+      <Footer justify="end">
         <Tooltip text="Clear all filters" direction="n">
           <Button
             leadingVisual={FilterRemoveIcon}

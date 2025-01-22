@@ -1,10 +1,20 @@
 import { PersonFillIcon } from '@primer/octicons-react';
 import { render } from '@testing-library/react';
-import { Legend } from './Legend';
+import { Title } from './Title';
 
-describe('renderer/routes/components/primitives/Legend.tsx', () => {
-  it('should render the legend', async () => {
-    const { container } = render(<Legend icon={PersonFillIcon}>Legend</Legend>);
+describe('renderer/routes/components/primitives/Title.tsx', () => {
+  it('should render the title - default size', async () => {
+    const { container } = render(<Title icon={PersonFillIcon}>Legend</Title>);
+
+    expect(container).toMatchSnapshot();
+  });
+
+  it('should render the title - specific size', async () => {
+    const { container } = render(
+      <Title icon={PersonFillIcon} size={4}>
+        Legend
+      </Title>,
+    );
 
     expect(container).toMatchSnapshot();
   });
