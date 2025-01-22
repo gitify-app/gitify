@@ -1,12 +1,10 @@
-import type { ChangeEvent, FC, ReactNode } from 'react';
+import type { ChangeEvent, FC } from 'react';
 import type { RadioGroupItem } from '../../types';
 import { cn } from '../../utils/cn';
-import { Tooltip } from './Tooltip';
 
 export interface IRadioGroup {
   name: string;
   label: string;
-  tooltip?: ReactNode | string;
   options: RadioGroupItem[];
   value: string;
   disabled?: boolean;
@@ -27,9 +25,6 @@ export const RadioGroup: FC<IRadioGroup> = (props: IRadioGroup) => {
             }
           >
             {props.label}
-            {props.tooltip && (
-              <Tooltip name={`tooltip-${props.name}`} tooltip={props.tooltip} />
-            )}
           </label>
         </div>
 
