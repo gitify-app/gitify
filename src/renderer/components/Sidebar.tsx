@@ -69,80 +69,82 @@ export const Sidebar: FC = () => {
   }, [notifications]);
 
   return (
-    <div className="fixed left-12 -ml-12 flex h-full w-12 flex-col overflow-y-auto bg-gitify-sidebar">
-      <div className="flex flex-1 flex-col">
-        <Stack
-          direction="vertical"
-          align="center"
-          gap="condensed"
-          padding="normal"
-        >
-          <IconButton
-            icon={LogoIcon}
-            aria-label={APPLICATION.NAME}
-            description="Home"
-            unsafeDisableTooltip={false}
-            size="small"
-            variant="invisible"
-            tooltipDirection="e"
-            onClick={() => navigate('/', { replace: true })}
-            data-testid="sidebar-home"
-          />
+    <Stack
+      direction="vertical"
+      justify="space-between"
+      className="fixed left-12 -ml-12 w-12 h-full bg-gitify-sidebar"
+    >
+      <Stack
+        direction="vertical"
+        align="center"
+        gap="condensed"
+        padding="normal"
+      >
+        <IconButton
+          icon={LogoIcon}
+          aria-label={APPLICATION.NAME}
+          description="Home"
+          unsafeDisableTooltip={false}
+          size="small"
+          variant="invisible"
+          tooltipDirection="e"
+          onClick={() => navigate('/', { replace: true })}
+          data-testid="sidebar-home"
+        />
 
+        <IconButton
+          icon={BellIcon}
+          aria-label="Notifications"
+          description={`${notificationsCount} unread notifications`}
+          unsafeDisableTooltip={false}
+          size="small"
+          variant={notificationsCount > 0 ? 'primary' : 'invisible'}
+          tooltipDirection="e"
+          onClick={() => openGitHubNotifications(primaryAccountHostname)}
+          data-testid="sidebar-notifications"
+          sx={{ color: 'white' }}
+        />
+
+        {/* TODO - explore https://primer.style/components/selectpanel/react/alpha/ for a better UI for filters */}
+        {isLoggedIn && (
           <IconButton
-            icon={BellIcon}
-            aria-label="Notifications"
-            description={`${notificationsCount} unread notifications`}
+            icon={FilterIcon}
+            aria-label="Filters"
+            description="Filter notifications"
             unsafeDisableTooltip={false}
             size="small"
-            variant={notificationsCount > 0 ? 'primary' : 'invisible'}
+            variant={hasFiltersSet(settings) ? 'primary' : 'invisible'}
             tooltipDirection="e"
-            onClick={() => openGitHubNotifications(primaryAccountHostname)}
-            data-testid="sidebar-notifications"
+            onClick={() => toggleFilters()}
+            data-testid="sidebar-filter-notifications"
             sx={{ color: 'white' }}
           />
+        )}
 
-          {/* TODO - explore https://primer.style/components/selectpanel/react/alpha/ for a better UI for filters */}
-          {isLoggedIn && (
-            <IconButton
-              icon={FilterIcon}
-              aria-label="Filters"
-              description="Filter notifications"
-              unsafeDisableTooltip={false}
-              size="small"
-              variant={hasFiltersSet(settings) ? 'primary' : 'invisible'}
-              tooltipDirection="e"
-              onClick={() => toggleFilters()}
-              data-testid="sidebar-filter-notifications"
-              sx={{ color: 'white' }}
-            />
-          )}
+        <IconButton
+          icon={IssueOpenedIcon}
+          aria-label="My issues"
+          unsafeDisableTooltip={false}
+          size="small"
+          variant="invisible"
+          tooltipDirection="e"
+          onClick={() => openGitHubIssues(primaryAccountHostname)}
+          data-testid="sidebar-my-issues"
+          sx={{ color: 'white' }}
+        />
 
-          <IconButton
-            icon={IssueOpenedIcon}
-            aria-label="My issues"
-            unsafeDisableTooltip={false}
-            size="small"
-            variant="invisible"
-            tooltipDirection="e"
-            onClick={() => openGitHubIssues(primaryAccountHostname)}
-            data-testid="sidebar-my-issues"
-            sx={{ color: 'white' }}
-          />
-
-          <IconButton
-            icon={GitPullRequestIcon}
-            aria-label="My pull requests"
-            unsafeDisableTooltip={false}
-            size="small"
-            variant="invisible"
-            tooltipDirection="e"
-            onClick={() => openGitHubPulls(primaryAccountHostname)}
-            data-testid="sidebar-my-pull-requests"
-            sx={{ color: 'white' }}
-          />
-        </Stack>
-      </div>
+        <IconButton
+          icon={GitPullRequestIcon}
+          aria-label="My pull requests"
+          unsafeDisableTooltip={false}
+          size="small"
+          variant="invisible"
+          tooltipDirection="e"
+          onClick={() => openGitHubPulls(primaryAccountHostname)}
+          data-testid="sidebar-my-pull-requests"
+          sx={{ color: 'white' }}
+        />
+      </Stack>
 
       <Stack
         direction="vertical"
@@ -195,6 +197,6 @@ export const Sidebar: FC = () => {
           />
         )}
       </Stack>
-    </div>
+    </Stack>
   );
 };

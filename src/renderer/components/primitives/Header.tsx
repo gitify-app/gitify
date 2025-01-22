@@ -19,7 +19,7 @@ export const Header: FC<IHeader> = (props: IHeader) => {
   const { fetchNotifications } = useContext(AppContext);
 
   return (
-    <Stack direction="horizontal" justify="space-between" padding={'spacious'}>
+    <Stack direction="horizontal" justify="space-between" padding="spacious">
       <IconButton
         aria-labelledby="Go Back"
         variant="invisible"
