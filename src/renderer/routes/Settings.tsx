@@ -2,7 +2,7 @@ import { type FC, useCallback, useContext, useState } from 'react';
 
 import { GearIcon } from '@primer/octicons-react';
 import { Button, Stack } from '@primer/react';
-import { Dialog } from '@primer/react/experimental';
+import { Dialog } from '@primer/react';
 
 import { Contents } from '../components/primitives/Contents';
 import { Header } from '../components/primitives/Header';
