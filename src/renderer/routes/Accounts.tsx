@@ -175,11 +175,9 @@ export const AccountsRoute: FC = () => {
                       onClick={() => openDeveloperSettings(account)}
                       size="small"
                       data-testid="account-missing-scopes"
-                      sx={{
-                        visibility: account.hasRequiredScopes
-                          ? 'hidden'
-                          : 'visible',
-                      }}
+                      className={
+                        account.hasRequiredScopes ? 'invisible' : 'visible'
+                      }
                     />
 
                     <IconButton

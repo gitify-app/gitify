@@ -289,7 +289,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
             <button
               aria-describedby=":r2v:-loading-announcement"
               aria-labelledby=":r2u:"
-              class="types__StyledButton-sc-ws60qy-0 bsfonn"
+              class="types__StyledButton-sc-ws60qy-0 cYZGEC visible"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -653,7 +653,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
             <button
               aria-describedby=":r38:-loading-announcement"
               aria-labelledby=":r37:"
-              class="types__StyledButton-sc-ws60qy-0 eTzudz"
+              class="types__StyledButton-sc-ws60qy-0 cYZGEC invisible"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -1017,7 +1017,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
             <button
               aria-describedby=":r3h:-loading-announcement"
               aria-labelledby=":r3g:"
-              class="types__StyledButton-sc-ws60qy-0 eTzudz"
+              class="types__StyledButton-sc-ws60qy-0 cYZGEC invisible"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -1519,7 +1519,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
             <button
               aria-describedby=":r3u:-loading-announcement"
               aria-labelledby=":r3t:"
-              class="types__StyledButton-sc-ws60qy-0 eTzudz"
+              class="types__StyledButton-sc-ws60qy-0 cYZGEC invisible"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -1883,7 +1883,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
             <button
               aria-describedby=":r47:-loading-announcement"
               aria-labelledby=":r46:"
-              class="types__StyledButton-sc-ws60qy-0 eTzudz"
+              class="types__StyledButton-sc-ws60qy-0 cYZGEC invisible"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -2247,7 +2247,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
             <button
               aria-describedby=":r4g:-loading-announcement"
               aria-labelledby=":r4f:"
-              class="types__StyledButton-sc-ws60qy-0 eTzudz"
+              class="types__StyledButton-sc-ws60qy-0 cYZGEC invisible"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -2749,7 +2749,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
             <button
               aria-describedby=":r3:-loading-announcement"
               aria-labelledby=":r2:"
-              class="types__StyledButton-sc-ws60qy-0 eTzudz"
+              class="types__StyledButton-sc-ws60qy-0 cYZGEC invisible"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -3113,7 +3113,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
             <button
               aria-describedby=":rc:-loading-announcement"
               aria-labelledby=":rb:"
-              class="types__StyledButton-sc-ws60qy-0 eTzudz"
+              class="types__StyledButton-sc-ws60qy-0 cYZGEC invisible"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -3477,7 +3477,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
             <button
               aria-describedby=":rl:-loading-announcement"
               aria-labelledby=":rk:"
-              class="types__StyledButton-sc-ws60qy-0 eTzudz"
+              class="types__StyledButton-sc-ws60qy-0 cYZGEC invisible"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"

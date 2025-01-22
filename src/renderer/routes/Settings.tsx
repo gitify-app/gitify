@@ -40,7 +40,7 @@ export const SettingsRoute: FC = () => {
             variant="danger"
             onClick={() => setIsOpen(!isOpen)}
             data-testid="settings-reset"
-            sx={{ width: '200px' }} // Set the width of the button
+            sx={{ width: '200px' }}
           >
             Reset Settings
           </Button>

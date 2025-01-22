@@ -68,11 +68,13 @@ export const Sidebar: FC = () => {
     return getNotificationCount(notifications);
   }, [notifications]);
 
+  const sidebarButtonStyle = { color: 'white' };
+
   return (
     <Stack
       direction="vertical"
       justify="space-between"
-      className="fixed left-12 -ml-12 w-12 h-full bg-gitify-sidebar"
+      className="fixed left-12 -ml-12 w-12 h-full bg-gitify-sidebar text-white"
     >
       <Stack
         direction="vertical"
@@ -102,10 +104,9 @@ export const Sidebar: FC = () => {
           tooltipDirection="e"
           onClick={() => openGitHubNotifications(primaryAccountHostname)}
           data-testid="sidebar-notifications"
-          sx={{ color: 'white' }}
+          sx={sidebarButtonStyle}
         />
 
-        {/* TODO - explore https://primer.style/components/selectpanel/react/alpha/ for a better UI for filters */}
         {isLoggedIn && (
           <IconButton
             icon={FilterIcon}
@@ -117,7 +118,7 @@ export const Sidebar: FC = () => {
             tooltipDirection="e"
             onClick={() => toggleFilters()}
             data-testid="sidebar-filter-notifications"
-            sx={{ color: 'white' }}
+            sx={sidebarButtonStyle}
           />
         )}
 
@@ -130,7 +131,7 @@ export const Sidebar: FC = () => {
           tooltipDirection="e"
           onClick={() => openGitHubIssues(primaryAccountHostname)}
           data-testid="sidebar-my-issues"
-          sx={{ color: 'white' }}
+          sx={sidebarButtonStyle}
         />
 
         <IconButton
@@ -142,7 +143,7 @@ export const Sidebar: FC = () => {
           tooltipDirection="e"
           onClick={() => openGitHubPulls(primaryAccountHostname)}
           data-testid="sidebar-my-pull-requests"
-          sx={{ color: 'white' }}
+          sx={sidebarButtonStyle}
         />
       </Stack>
 
@@ -166,7 +167,7 @@ export const Sidebar: FC = () => {
               disabled={status === 'loading'}
               onClick={() => refreshNotifications()}
               data-testid="sidebar-refresh"
-              sx={{ color: 'white' }}
+              sx={sidebarButtonStyle}
             />
 
             <IconButton
@@ -178,7 +179,7 @@ export const Sidebar: FC = () => {
               tooltipDirection="e"
               onClick={() => toggleSettings()}
               data-testid="sidebar-settings"
-              sx={{ color: 'white' }}
+              sx={sidebarButtonStyle}
             />
           </>
         )}
@@ -193,7 +194,7 @@ export const Sidebar: FC = () => {
             tooltipDirection="e"
             onClick={() => quitApp()}
             data-testid="sidebar-quit"
-            sx={{ color: 'white' }}
+            sx={sidebarButtonStyle}
           />
         )}
       </Stack>

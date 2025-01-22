@@ -70,7 +70,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
   "baseElement": <body>
     <div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 duhwY fixed left-12 -ml-12 w-12 h-full bg-gitify-sidebar"
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY fixed left-12 -ml-12 w-12 h-full bg-gitify-sidebar text-white"
         data-align="stretch"
         data-direction="vertical"
         data-justify="space-between"
@@ -323,7 +323,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
   </body>,
   "container": <div>
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 duhwY fixed left-12 -ml-12 w-12 h-full bg-gitify-sidebar"
+      class="Stack__StyledStack-sc-x3xa2i-0 duhwY fixed left-12 -ml-12 w-12 h-full bg-gitify-sidebar text-white"
       data-align="stretch"
       data-direction="vertical"
       data-justify="space-between"
@@ -633,7 +633,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
   "baseElement": <body>
     <div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 duhwY fixed left-12 -ml-12 w-12 h-full bg-gitify-sidebar"
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY fixed left-12 -ml-12 w-12 h-full bg-gitify-sidebar text-white"
         data-align="stretch"
         data-direction="vertical"
         data-justify="space-between"
@@ -886,7 +886,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
   </body>,
   "container": <div>
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 duhwY fixed left-12 -ml-12 w-12 h-full bg-gitify-sidebar"
+      class="Stack__StyledStack-sc-x3xa2i-0 duhwY fixed left-12 -ml-12 w-12 h-full bg-gitify-sidebar text-white"
       data-align="stretch"
       data-direction="vertical"
       data-justify="space-between"
