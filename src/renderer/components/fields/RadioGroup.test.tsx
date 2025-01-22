@@ -5,7 +5,6 @@ describe('renderer/components/fields/RadioGroup.tsx', () => {
   const props: IRadioGroup = {
     label: 'Appearance',
     name: 'appearance',
-    helpText: 'This is some helper text',
     options: [
       { label: 'Value 1', value: 'one' },
       { label: 'Value 2', value: 'two' },

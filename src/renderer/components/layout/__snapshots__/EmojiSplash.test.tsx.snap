@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renderer/components/AllRead.tsx should render itself & its children - no filters 1`] = `
+exports[`renderer/components/layout/EmojiSplash.tsx should render itself & its children - heading and sub-heading 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -35,17 +35,22 @@ exports[`renderer/components/AllRead.tsx should render itself & its children - n
               class="Box-sc-g0xbh4-0 text-5xl"
             >
               <img
-                alt="🎊"
+                alt="🍺"
                 class="emoji"
                 draggable="false"
-                src="images/twemoji/1f38a.svg"
+                src="images/twemoji/1f37a.svg"
               />
             </div>
             <div
               class="Box-sc-g0xbh4-0 text-xl font-semibold"
             >
-              No new  notifications
+              Test Heading
             </div>
+          </div>
+          <div
+            class="Box-sc-g0xbh4-0 text-center"
+          >
+            Test Sub-Heading
           </div>
         </div>
       </div>
@@ -82,17 +87,22 @@ exports[`renderer/components/AllRead.tsx should render itself & its children - n
             class="Box-sc-g0xbh4-0 text-5xl"
           >
             <img
-              alt="🎊"
+              alt="🍺"
               class="emoji"
               draggable="false"
-              src="images/twemoji/1f38a.svg"
+              src="images/twemoji/1f37a.svg"
             />
           </div>
           <div
             class="Box-sc-g0xbh4-0 text-xl font-semibold"
           >
-            No new  notifications
+            Test Heading
           </div>
+        </div>
+        <div
+          class="Box-sc-g0xbh4-0 text-center"
+        >
+          Test Sub-Heading
         </div>
       </div>
     </div>
@@ -151,7 +161,7 @@ exports[`renderer/components/AllRead.tsx should render itself & its children - n
 }
 `;
 
-exports[`renderer/components/AllRead.tsx should render itself & its children - with filters 1`] = `
+exports[`renderer/components/layout/EmojiSplash.tsx should render itself & its children - heading only 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -186,16 +196,16 @@ exports[`renderer/components/AllRead.tsx should render itself & its children - w
               class="Box-sc-g0xbh4-0 text-5xl"
             >
               <img
-                alt="🎊"
+                alt="🍺"
                 class="emoji"
                 draggable="false"
-                src="images/twemoji/1f38a.svg"
+                src="images/twemoji/1f37a.svg"
               />
             </div>
             <div
               class="Box-sc-g0xbh4-0 text-xl font-semibold"
             >
-              No new filtered  notifications
+              Test Heading
             </div>
           </div>
         </div>
@@ -233,16 +243,16 @@ exports[`renderer/components/AllRead.tsx should render itself & its children - w
             class="Box-sc-g0xbh4-0 text-5xl"
           >
             <img
-              alt="🎊"
+              alt="🍺"
               class="emoji"
               draggable="false"
-              src="images/twemoji/1f38a.svg"
+              src="images/twemoji/1f37a.svg"
             />
           </div>
           <div
             class="Box-sc-g0xbh4-0 text-xl font-semibold"
           >
-            No new filtered  notifications
+            Test Heading
           </div>
         </div>
       </div>

@@ -25,7 +25,7 @@ export const SettingsFooter: FC = () => {
   }, []);
 
   return (
-    <Footer justify="justify-between">
+    <Footer justify="space-between">
       <Stack direction="horizontal">
         <Tooltip text="View release notes" direction="n">
           <Button

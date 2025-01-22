@@ -1,27 +1,27 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renderer/components/buttons/PillButton.tsx should render with metric 1`] = `
+exports[`renderer/components/metrics/MetricPill.tsx should render with metric 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+      <span
+        class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
         title="Mock Pill"
-        type="button"
+        variant="secondary"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="horizontal"
-          data-gap="condensed"
+          data-gap="none"
           data-justify="start"
           data-padding="none"
           data-wrap="nowrap"
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-mark-github text-primer-open"
+            class="octicon octicon-mark-github text-gitify-icon-open"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -36,32 +36,32 @@ exports[`renderer/components/buttons/PillButton.tsx should render with metric 1`
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 hmAFGJ"
+            class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
           >
             1
           </span>
         </div>
-      </button>
+      </span>
     </div>
   </body>,
   "container": <div>
-    <button
-      class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+    <span
+      class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
       title="Mock Pill"
-      type="button"
+      variant="secondary"
     >
       <div
         class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
         data-align="center"
         data-direction="horizontal"
-        data-gap="condensed"
+        data-gap="none"
         data-justify="start"
         data-padding="none"
         data-wrap="nowrap"
       >
         <svg
           aria-hidden="true"
-          class="octicon octicon-mark-github text-primer-open"
+          class="octicon octicon-mark-github text-gitify-icon-open"
           display="inline-block"
           fill="currentColor"
           focusable="false"
@@ -76,12 +76,12 @@ exports[`renderer/components/buttons/PillButton.tsx should render with metric 1`
           />
         </svg>
         <span
-          class="Text-sc-17v1xeu-0 hmAFGJ"
+          class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
         >
           1
         </span>
       </div>
-    </button>
+    </span>
   </div>,
   "debug": [Function],
   "findAllByAltText": [Function],
@@ -137,28 +137,28 @@ exports[`renderer/components/buttons/PillButton.tsx should render with metric 1`
 }
 `;
 
-exports[`renderer/components/buttons/PillButton.tsx should render without metric 1`] = `
+exports[`renderer/components/metrics/MetricPill.tsx should render without metric 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+      <span
+        class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
         title="Mock Pill"
-        type="button"
+        variant="secondary"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="horizontal"
-          data-gap="condensed"
+          data-gap="none"
           data-justify="start"
           data-padding="none"
           data-wrap="nowrap"
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-mark-github text-primer-open"
+            class="octicon octicon-mark-github text-gitify-icon-open"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -173,27 +173,27 @@ exports[`renderer/components/buttons/PillButton.tsx should render without metric
             />
           </svg>
         </div>
-      </button>
+      </span>
     </div>
   </body>,
   "container": <div>
-    <button
-      class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+    <span
+      class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
       title="Mock Pill"
-      type="button"
+      variant="secondary"
     >
       <div
         class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
         data-align="center"
         data-direction="horizontal"
-        data-gap="condensed"
+        data-gap="none"
         data-justify="start"
         data-padding="none"
         data-wrap="nowrap"
       >
         <svg
           aria-hidden="true"
-          class="octicon octicon-mark-github text-primer-open"
+          class="octicon octicon-mark-github text-gitify-icon-open"
           display="inline-block"
           fill="currentColor"
           focusable="false"
@@ -208,7 +208,7 @@ exports[`renderer/components/buttons/PillButton.tsx should render without metric
           />
         </svg>
       </div>
-    </button>
+    </span>
   </div>,
   "debug": [Function],
   "findAllByAltText": [Function],

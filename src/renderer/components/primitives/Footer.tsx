@@ -1,20 +1,20 @@
+import { Stack } from '@primer/react';
 import type { FC, ReactNode } from 'react';
-import { cn } from '../../utils/cn';
 
 interface IFooter {
   children: ReactNode;
-  justify: 'justify-end' | 'justify-between';
+  justify: 'end' | 'space-between';
 }
 
 export const Footer: FC<IFooter> = (props: IFooter) => {
   return (
-    <div
-      className={cn(
-        'flex items-center px-3 py-1 text-sm bg-gitify-footer',
-        props.justify,
-      )}
+    <Stack
+      direction="horizontal"
+      justify={props.justify}
+      padding="condensed"
+      className="bg-gitify-footer"
     >
       {props.children}
-    </div>
+    </Stack>
   );
 };

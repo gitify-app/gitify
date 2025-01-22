@@ -1,14 +1,15 @@
 import { type FC, useContext, useMemo } from 'react';
 
-import { Stack } from '@primer/react';
-
 import { AppContext } from '../context/App';
 import { Constants } from '../utils/constants';
 import { hasFiltersSet } from '../utils/filters';
-import { Centered } from './primitives/Centered';
-import { EmojiText } from './primitives/EmojiText';
+import { EmojiSplash } from './layout/EmojiSplash';
 
-export const AllRead: FC = () => {
+interface IAllRead {
+  fullHeight?: boolean;
+}
+
+export const AllRead: FC<IAllRead> = ({ fullHeight = true }: IAllRead) => {
   const { settings } = useContext(AppContext);
 
   const hasFilters = hasFiltersSet(settings);
@@ -21,21 +22,9 @@ export const AllRead: FC = () => {
     [],
   );
 
-  return (
-    <Centered>
-      <Stack direction="vertical" align="center">
-        <div className="mt-2 mb-5 text-5xl">
-          <EmojiText text={emoji} />
-        </div>
+  const heading = `No new ${hasFilters ? 'filtered ' : ''} notifications`;
 
-        {hasFilters ? (
-          <div className="mb-2 text-xl font-semibold">
-            No new filtered notifications
-          </div>
-        ) : (
-          <div className="mb-2 text-xl font-semibold">No new notifications</div>
-        )}
-      </Stack>
-    </Centered>
+  return (
+    <EmojiSplash emoji={emoji} heading={heading} fullHeight={fullHeight} />
   );
 };

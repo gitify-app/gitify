@@ -23,7 +23,7 @@ import { getColorModeFromTheme, setTheme } from '../../utils/theme';
 import { zoomLevelToPercentage, zoomPercentageToLevel } from '../../utils/zoom';
 import { Checkbox } from '../fields/Checkbox';
 import { RadioGroup } from '../fields/RadioGroup';
-import { Legend } from '../primitives/Legend';
+import { Title } from '../primitives/Title';
 
 let timeout: NodeJS.Timeout;
 const DELAY = 200;
@@ -62,7 +62,7 @@ export const AppearanceSettings: FC = () => {
 
   return (
     <fieldset>
-      <Legend icon={PaintbrushIcon}>Appearance</Legend>
+      <Title icon={PaintbrushIcon}>Appearance</Title>
 
       <RadioGroup
         name="theme"

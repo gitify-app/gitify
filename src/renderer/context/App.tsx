@@ -145,10 +145,10 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     const mode = getColorModeFromTheme(settings.theme);
-
     setColorMode(mode);
+
     setTheme(settings.theme); // TODO - Replace fully with Primer design tokens and components
-  }, [settings.theme]);
+  }, [settings.theme, setColorMode]);
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: We only want fetchNotifications to be called for account changes
   useEffect(() => {

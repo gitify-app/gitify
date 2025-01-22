@@ -1,3 +1,18 @@
+/** GitHub Primer Design System */
+/* Size & Typography */
+@import "@primer/primitives/dist/css/base/size/size.css";
+@import "@primer/primitives/dist/css/base/typography/typography.css";
+@import "@primer/primitives/dist/css/functional/size/border.css";
+@import "@primer/primitives/dist/css/functional/size/breakpoints.css";
+@import "@primer/primitives/dist/css/functional/size/size.css";
+@import "@primer/primitives/dist/css/functional/size/viewport.css";
+@import "@primer/primitives/dist/css/functional/typography/typography.css";
+
+/* Themes and Colors */
+/* TODO Add support for setting color modes (dark_dimmed) - see #1748 */
+@import "@primer/primitives/dist/css/functional/themes/light.css";
+@import "@primer/primitives/dist/css/functional/themes/dark.css";
+
 html,
 body,
 #root {

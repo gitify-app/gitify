@@ -3,9 +3,9 @@ import { mockSettings } from '../../__mocks__/state-mocks';
 import { AppContext } from '../../context/App';
 import type { Milestone } from '../../typesGitHub';
 import { mockSingleNotification } from '../../utils/api/__mocks__/response-mocks';
-import { Pills } from './Pills';
+import { MetricGroup } from './MetricGroup';
 
-describe('renderer/components/notifications/Pills.tsx', () => {
+describe('renderer/components/metrics/MetricGroup.tsx', () => {
   describe('showPills disabled', () => {
     it('should not render any pills when showPills is disabled', async () => {
       const mockNotification = mockSingleNotification;
@@ -20,7 +20,7 @@ describe('renderer/components/notifications/Pills.tsx', () => {
             settings: { ...mockSettings, showPills: false },
           }}
         >
-          <Pills {...props} />
+          <MetricGroup {...props} />
         </AppContext.Provider>,
       );
       expect(tree).toMatchSnapshot();
@@ -42,7 +42,7 @@ describe('renderer/components/notifications/Pills.tsx', () => {
             settings: mockSettings,
           }}
         >
-          <Pills {...props} />
+          <MetricGroup {...props} />
         </AppContext.Provider>,
       );
       expect(tree).toMatchSnapshot();
@@ -62,7 +62,7 @@ describe('renderer/components/notifications/Pills.tsx', () => {
             settings: mockSettings,
           }}
         >
-          <Pills {...props} />
+          <MetricGroup {...props} />
         </AppContext.Provider>,
       );
       expect(tree).toMatchSnapshot();
@@ -84,7 +84,7 @@ describe('renderer/components/notifications/Pills.tsx', () => {
             settings: mockSettings,
           }}
         >
-          <Pills {...props} />
+          <MetricGroup {...props} />
         </AppContext.Provider>,
       );
       expect(tree).toMatchSnapshot();
@@ -104,7 +104,7 @@ describe('renderer/components/notifications/Pills.tsx', () => {
             settings: mockSettings,
           }}
         >
-          <Pills {...props} />
+          <MetricGroup {...props} />
         </AppContext.Provider>,
       );
       expect(tree).toMatchSnapshot();
@@ -124,7 +124,7 @@ describe('renderer/components/notifications/Pills.tsx', () => {
             settings: mockSettings,
           }}
         >
-          <Pills {...props} />
+          <MetricGroup {...props} />
         </AppContext.Provider>,
       );
       expect(tree).toMatchSnapshot();
@@ -146,7 +146,7 @@ describe('renderer/components/notifications/Pills.tsx', () => {
             settings: mockSettings,
           }}
         >
-          <Pills {...props} />
+          <MetricGroup {...props} />
         </AppContext.Provider>,
       );
       expect(tree).toMatchSnapshot();
@@ -171,7 +171,7 @@ describe('renderer/components/notifications/Pills.tsx', () => {
             settings: mockSettings,
           }}
         >
-          <Pills {...props} />
+          <MetricGroup {...props} />
         </AppContext.Provider>,
       );
       expect(tree).toMatchSnapshot();
@@ -194,7 +194,7 @@ describe('renderer/components/notifications/Pills.tsx', () => {
             settings: mockSettings,
           }}
         >
-          <Pills {...props} />
+          <MetricGroup {...props} />
         </AppContext.Provider>,
       );
       expect(tree).toMatchSnapshot();

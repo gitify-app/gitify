@@ -6,35 +6,49 @@ exports[`renderer/components/Oops.tsx should render itself & its children 1`] = 
   "baseElement": <body>
     <div>
       <div
-        class="flex flex-1 flex-col items-center justify-center p-8 min-h-screen"
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY min-h-screen"
+        data-align="center"
+        data-direction="vertical"
+        data-justify="center"
+        data-padding="spacious"
+        data-wrap="nowrap"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="vertical"
-          data-justify="start"
+          data-gap="condensed"
+          data-justify="center"
           data-padding="none"
           data-wrap="nowrap"
         >
           <div
-            class="mt-2 text-5xl"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+            data-align="center"
+            data-direction="vertical"
+            data-gap="spacious"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
           >
-            <span>
+            <div
+              class="Box-sc-g0xbh4-0 text-5xl"
+            >
               <img
                 alt="🔥"
                 class="emoji"
                 draggable="false"
                 src="images/twemoji/1f525.svg"
               />
-            </span>
+            </div>
+            <div
+              class="Box-sc-g0xbh4-0 text-xl font-semibold"
+            >
+              Error title
+            </div>
           </div>
           <div
-            class="mb-2 text-xl font-semibold"
-          >
-            Error title
-          </div>
-          <div
-            class="mb-2 text-center"
+            class="Box-sc-g0xbh4-0 text-center"
           >
             Error description
           </div>
@@ -44,35 +58,49 @@ exports[`renderer/components/Oops.tsx should render itself & its children 1`] = 
   </body>,
   "container": <div>
     <div
-      class="flex flex-1 flex-col items-center justify-center p-8 min-h-screen"
+      class="Stack__StyledStack-sc-x3xa2i-0 duhwY min-h-screen"
+      data-align="center"
+      data-direction="vertical"
+      data-justify="center"
+      data-padding="spacious"
+      data-wrap="nowrap"
     >
       <div
         class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
         data-align="center"
         data-direction="vertical"
-        data-justify="start"
+        data-gap="condensed"
+        data-justify="center"
         data-padding="none"
         data-wrap="nowrap"
       >
         <div
-          class="mt-2 text-5xl"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          data-align="center"
+          data-direction="vertical"
+          data-gap="spacious"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
         >
-          <span>
+          <div
+            class="Box-sc-g0xbh4-0 text-5xl"
+          >
             <img
               alt="🔥"
               class="emoji"
               draggable="false"
               src="images/twemoji/1f525.svg"
             />
-          </span>
+          </div>
+          <div
+            class="Box-sc-g0xbh4-0 text-xl font-semibold"
+          >
+            Error title
+          </div>
         </div>
         <div
-          class="mb-2 text-xl font-semibold"
-        >
-          Error title
-        </div>
-        <div
-          class="mb-2 text-center"
+          class="Box-sc-g0xbh4-0 text-center"
         >
           Error description
         </div>

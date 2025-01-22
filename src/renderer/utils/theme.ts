@@ -1,6 +1,8 @@
 import type { ColorModeWithAuto } from '@primer/react/lib/ThemeProvider';
 import { Theme } from '../types';
 
+// TODO Add support for setting color modes (dark_dimmed) - see #1748
+
 // TODO - Replace fully with Octicon primer theme provider
 /**
  * @deprecated
@@ -49,7 +51,7 @@ export function setTheme(theme?: Theme) {
 export function getColorModeFromTheme(theme: Theme): ColorModeWithAuto {
   switch (theme) {
     case Theme.LIGHT:
-      return 'light';
+      return 'day';
     case Theme.DARK:
       return 'night';
     default:

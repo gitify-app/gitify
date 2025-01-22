@@ -6,18 +6,21 @@ import {
   MilestoneIcon,
   TagIcon,
 } from '@primer/octicons-react';
+import { Box } from '@primer/react';
 
 import { AppContext } from '../../context/App';
 import { IconColor } from '../../types';
 import type { Notification } from '../../typesGitHub';
 import { getPullRequestReviewIcon } from '../../utils/icons';
-import { PillButton } from '../buttons/PillButton';
+import { MetricPill } from './MetricPill';
 
-interface IPills {
+interface IMetricGroup {
   notification: Notification;
 }
 
-export const Pills: FC<IPills> = ({ notification }: IPills) => {
+export const MetricGroup: FC<IMetricGroup> = ({
+  notification,
+}: IMetricGroup) => {
   const { settings } = useContext(AppContext);
 
   const commentsPillDescription = `${notification.subject.comments} ${
@@ -34,9 +37,9 @@ export const Pills: FC<IPills> = ({ notification }: IPills) => {
 
   return (
     settings.showPills && (
-      <div className="flex">
+      <Box className="flex gap-1">
         {notification.subject?.linkedIssues?.length > 0 && (
-          <PillButton
+          <MetricPill
             title={linkedIssuesPillDescription}
             metric={notification.subject.linkedIssues.length}
             icon={IssueClosedIcon}
@@ -51,7 +54,7 @@ export const Pills: FC<IPills> = ({ notification }: IPills) => {
           }
 
           return (
-            <PillButton
+            <MetricPill
               key={review.state}
               title={icon.description}
               metric={review.users.length}
@@ -61,7 +64,7 @@ export const Pills: FC<IPills> = ({ notification }: IPills) => {
           );
         })}
         {notification.subject?.comments > 0 && (
-          <PillButton
+          <MetricPill
             title={commentsPillDescription}
             metric={notification.subject.comments}
             icon={CommentIcon}
@@ -69,7 +72,7 @@ export const Pills: FC<IPills> = ({ notification }: IPills) => {
           />
         )}
         {notification.subject?.labels?.length > 0 && (
-          <PillButton
+          <MetricPill
             title={labelsPillDescription}
             metric={notification.subject.labels.length}
             icon={TagIcon}
@@ -77,7 +80,7 @@ export const Pills: FC<IPills> = ({ notification }: IPills) => {
           />
         )}
         {notification.subject.milestone && (
-          <PillButton
+          <MetricPill
             title={notification.subject.milestone.title}
             icon={MilestoneIcon}
             color={
@@ -87,7 +90,7 @@ export const Pills: FC<IPills> = ({ notification }: IPills) => {
             }
           />
         )}
-      </div>
+      </Box>
     )
   );
 };

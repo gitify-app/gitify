@@ -1,30 +1,30 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renderer/components/notifications/Pills.tsx comment pills should render when 1 comment 1`] = `
+exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render when 1 comment 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
       <div
-        class="flex"
+        class="Box-sc-g0xbh4-0 flex gap-1"
       >
-        <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+        <span
+          class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
           title="Linked to issues #1, #2"
-          type="button"
+          variant="secondary"
         >
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
-            data-gap="condensed"
+            data-gap="none"
             data-justify="start"
             data-padding="none"
             data-wrap="nowrap"
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-issue-closed text-primer-open"
+              class="octicon octicon-issue-closed text-gitify-icon-open"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -42,29 +42,29 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 hmAFGJ"
+              class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
             >
               2
             </span>
           </div>
-        </button>
-        <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+        </span>
+        <span
+          class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
           title="octocat approved these changes"
-          type="button"
+          variant="secondary"
         >
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
-            data-gap="condensed"
+            data-gap="none"
             data-justify="start"
             data-padding="none"
             data-wrap="nowrap"
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-check text-primer-open"
+              class="octicon octicon-check text-gitify-icon-open"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -79,29 +79,29 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 hmAFGJ"
+              class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
             >
               1
             </span>
           </div>
-        </button>
-        <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+        </span>
+        <span
+          class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
           title="gitify-app requested changes"
-          type="button"
+          variant="secondary"
         >
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
-            data-gap="condensed"
+            data-gap="none"
             data-justify="start"
             data-padding="none"
             data-wrap="nowrap"
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-file-diff text-primer-closed"
+              class="octicon octicon-file-diff text-gitify-icon-closed"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -116,29 +116,29 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 hmAFGJ"
+              class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
             >
               1
             </span>
           </div>
-        </button>
-        <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+        </span>
+        <span
+          class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
           title="1 comment"
-          type="button"
+          variant="secondary"
         >
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
-            data-gap="condensed"
+            data-gap="none"
             data-justify="start"
             data-padding="none"
             data-wrap="nowrap"
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-comment text-primer-muted"
+              class="octicon octicon-comment text-gitify-icon-muted"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -153,36 +153,36 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 hmAFGJ"
+              class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
             >
               1
             </span>
           </div>
-        </button>
+        </span>
       </div>
     </div>
   </body>,
   "container": <div>
     <div
-      class="flex"
+      class="Box-sc-g0xbh4-0 flex gap-1"
     >
-      <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+      <span
+        class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
         title="Linked to issues #1, #2"
-        type="button"
+        variant="secondary"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="horizontal"
-          data-gap="condensed"
+          data-gap="none"
           data-justify="start"
           data-padding="none"
           data-wrap="nowrap"
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-issue-closed text-primer-open"
+            class="octicon octicon-issue-closed text-gitify-icon-open"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -200,29 +200,29 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 hmAFGJ"
+            class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
           >
             2
           </span>
         </div>
-      </button>
-      <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+      </span>
+      <span
+        class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
         title="octocat approved these changes"
-        type="button"
+        variant="secondary"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="horizontal"
-          data-gap="condensed"
+          data-gap="none"
           data-justify="start"
           data-padding="none"
           data-wrap="nowrap"
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-check text-primer-open"
+            class="octicon octicon-check text-gitify-icon-open"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -237,29 +237,29 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 hmAFGJ"
+            class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
           >
             1
           </span>
         </div>
-      </button>
-      <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+      </span>
+      <span
+        class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
         title="gitify-app requested changes"
-        type="button"
+        variant="secondary"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="horizontal"
-          data-gap="condensed"
+          data-gap="none"
           data-justify="start"
           data-padding="none"
           data-wrap="nowrap"
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-file-diff text-primer-closed"
+            class="octicon octicon-file-diff text-gitify-icon-closed"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -274,29 +274,29 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 hmAFGJ"
+            class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
           >
             1
           </span>
         </div>
-      </button>
-      <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+      </span>
+      <span
+        class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
         title="1 comment"
-        type="button"
+        variant="secondary"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="horizontal"
-          data-gap="condensed"
+          data-gap="none"
           data-justify="start"
           data-padding="none"
           data-wrap="nowrap"
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-comment text-primer-muted"
+            class="octicon octicon-comment text-gitify-icon-muted"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -311,12 +311,12 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 hmAFGJ"
+            class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
           >
             1
           </span>
         </div>
-      </button>
+      </span>
     </div>
   </div>,
   "debug": [Function],
@@ -373,31 +373,31 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
 }
 `;
 
-exports[`renderer/components/notifications/Pills.tsx comment pills should render when more than 1 comments 1`] = `
+exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render when more than 1 comments 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
       <div
-        class="flex"
+        class="Box-sc-g0xbh4-0 flex gap-1"
       >
-        <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+        <span
+          class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
           title="Linked to issues #1, #2"
-          type="button"
+          variant="secondary"
         >
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
-            data-gap="condensed"
+            data-gap="none"
             data-justify="start"
             data-padding="none"
             data-wrap="nowrap"
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-issue-closed text-primer-open"
+              class="octicon octicon-issue-closed text-gitify-icon-open"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -415,29 +415,29 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 hmAFGJ"
+              class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
             >
               2
             </span>
           </div>
-        </button>
-        <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+        </span>
+        <span
+          class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
           title="octocat approved these changes"
-          type="button"
+          variant="secondary"
         >
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
-            data-gap="condensed"
+            data-gap="none"
             data-justify="start"
             data-padding="none"
             data-wrap="nowrap"
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-check text-primer-open"
+              class="octicon octicon-check text-gitify-icon-open"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -452,29 +452,29 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 hmAFGJ"
+              class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
             >
               1
             </span>
           </div>
-        </button>
-        <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+        </span>
+        <span
+          class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
           title="gitify-app requested changes"
-          type="button"
+          variant="secondary"
         >
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
-            data-gap="condensed"
+            data-gap="none"
             data-justify="start"
             data-padding="none"
             data-wrap="nowrap"
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-file-diff text-primer-closed"
+              class="octicon octicon-file-diff text-gitify-icon-closed"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -489,29 +489,29 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 hmAFGJ"
+              class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
             >
               1
             </span>
           </div>
-        </button>
-        <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+        </span>
+        <span
+          class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
           title="2 comments"
-          type="button"
+          variant="secondary"
         >
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
-            data-gap="condensed"
+            data-gap="none"
             data-justify="start"
             data-padding="none"
             data-wrap="nowrap"
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-comment text-primer-muted"
+              class="octicon octicon-comment text-gitify-icon-muted"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -526,36 +526,36 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 hmAFGJ"
+              class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
             >
               2
             </span>
           </div>
-        </button>
+        </span>
       </div>
     </div>
   </body>,
   "container": <div>
     <div
-      class="flex"
+      class="Box-sc-g0xbh4-0 flex gap-1"
     >
-      <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+      <span
+        class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
         title="Linked to issues #1, #2"
-        type="button"
+        variant="secondary"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="horizontal"
-          data-gap="condensed"
+          data-gap="none"
           data-justify="start"
           data-padding="none"
           data-wrap="nowrap"
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-issue-closed text-primer-open"
+            class="octicon octicon-issue-closed text-gitify-icon-open"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -573,29 +573,29 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 hmAFGJ"
+            class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
           >
             2
           </span>
         </div>
-      </button>
-      <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+      </span>
+      <span
+        class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
         title="octocat approved these changes"
-        type="button"
+        variant="secondary"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="horizontal"
-          data-gap="condensed"
+          data-gap="none"
           data-justify="start"
           data-padding="none"
           data-wrap="nowrap"
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-check text-primer-open"
+            class="octicon octicon-check text-gitify-icon-open"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -610,29 +610,29 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 hmAFGJ"
+            class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
           >
             1
           </span>
         </div>
-      </button>
-      <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+      </span>
+      <span
+        class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
         title="gitify-app requested changes"
-        type="button"
+        variant="secondary"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="horizontal"
-          data-gap="condensed"
+          data-gap="none"
           data-justify="start"
           data-padding="none"
           data-wrap="nowrap"
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-file-diff text-primer-closed"
+            class="octicon octicon-file-diff text-gitify-icon-closed"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -647,29 +647,29 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 hmAFGJ"
+            class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
           >
             1
           </span>
         </div>
-      </button>
-      <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+      </span>
+      <span
+        class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
         title="2 comments"
-        type="button"
+        variant="secondary"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="horizontal"
-          data-gap="condensed"
+          data-gap="none"
           data-justify="start"
           data-padding="none"
           data-wrap="nowrap"
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-comment text-primer-muted"
+            class="octicon octicon-comment text-gitify-icon-muted"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -684,12 +684,12 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 hmAFGJ"
+            class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
           >
             2
           </span>
         </div>
-      </button>
+      </span>
     </div>
   </div>,
   "debug": [Function],
@@ -746,31 +746,31 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
 }
 `;
 
-exports[`renderer/components/notifications/Pills.tsx comment pills should render when no comments 1`] = `
+exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render when no comments 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
       <div
-        class="flex"
+        class="Box-sc-g0xbh4-0 flex gap-1"
       >
-        <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+        <span
+          class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
           title="Linked to issues #1, #2"
-          type="button"
+          variant="secondary"
         >
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
-            data-gap="condensed"
+            data-gap="none"
             data-justify="start"
             data-padding="none"
             data-wrap="nowrap"
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-issue-closed text-primer-open"
+              class="octicon octicon-issue-closed text-gitify-icon-open"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -788,29 +788,29 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 hmAFGJ"
+              class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
             >
               2
             </span>
           </div>
-        </button>
-        <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+        </span>
+        <span
+          class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
           title="octocat approved these changes"
-          type="button"
+          variant="secondary"
         >
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
-            data-gap="condensed"
+            data-gap="none"
             data-justify="start"
             data-padding="none"
             data-wrap="nowrap"
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-check text-primer-open"
+              class="octicon octicon-check text-gitify-icon-open"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -825,29 +825,29 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 hmAFGJ"
+              class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
             >
               1
             </span>
           </div>
-        </button>
-        <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+        </span>
+        <span
+          class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
           title="gitify-app requested changes"
-          type="button"
+          variant="secondary"
         >
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
-            data-gap="condensed"
+            data-gap="none"
             data-justify="start"
             data-padding="none"
             data-wrap="nowrap"
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-file-diff text-primer-closed"
+              class="octicon octicon-file-diff text-gitify-icon-closed"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -862,36 +862,36 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 hmAFGJ"
+              class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
             >
               1
             </span>
           </div>
-        </button>
+        </span>
       </div>
     </div>
   </body>,
   "container": <div>
     <div
-      class="flex"
+      class="Box-sc-g0xbh4-0 flex gap-1"
     >
-      <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+      <span
+        class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
         title="Linked to issues #1, #2"
-        type="button"
+        variant="secondary"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="horizontal"
-          data-gap="condensed"
+          data-gap="none"
           data-justify="start"
           data-padding="none"
           data-wrap="nowrap"
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-issue-closed text-primer-open"
+            class="octicon octicon-issue-closed text-gitify-icon-open"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -909,29 +909,29 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 hmAFGJ"
+            class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
           >
             2
           </span>
         </div>
-      </button>
-      <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+      </span>
+      <span
+        class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
         title="octocat approved these changes"
-        type="button"
+        variant="secondary"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="horizontal"
-          data-gap="condensed"
+          data-gap="none"
           data-justify="start"
           data-padding="none"
           data-wrap="nowrap"
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-check text-primer-open"
+            class="octicon octicon-check text-gitify-icon-open"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -946,29 +946,29 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 hmAFGJ"
+            class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
           >
             1
           </span>
         </div>
-      </button>
-      <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+      </span>
+      <span
+        class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
         title="gitify-app requested changes"
-        type="button"
+        variant="secondary"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="horizontal"
-          data-gap="condensed"
+          data-gap="none"
           data-justify="start"
           data-padding="none"
           data-wrap="nowrap"
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-file-diff text-primer-closed"
+            class="octicon octicon-file-diff text-gitify-icon-closed"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -983,12 +983,12 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 hmAFGJ"
+            class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
           >
             1
           </span>
         </div>
-      </button>
+      </span>
     </div>
   </div>,
   "debug": [Function],
@@ -1045,31 +1045,31 @@ exports[`renderer/components/notifications/Pills.tsx comment pills should render
 }
 `;
 
-exports[`renderer/components/notifications/Pills.tsx label pills should render labels pill 1`] = `
+exports[`renderer/components/metrics/MetricGroup.tsx label pills should render labels pill 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
       <div
-        class="flex"
+        class="Box-sc-g0xbh4-0 flex gap-1"
       >
-        <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+        <span
+          class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
           title="Linked to issues #1, #2"
-          type="button"
+          variant="secondary"
         >
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
-            data-gap="condensed"
+            data-gap="none"
             data-justify="start"
             data-padding="none"
             data-wrap="nowrap"
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-issue-closed text-primer-open"
+              class="octicon octicon-issue-closed text-gitify-icon-open"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -1087,29 +1087,29 @@ exports[`renderer/components/notifications/Pills.tsx label pills should render l
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 hmAFGJ"
+              class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
             >
               2
             </span>
           </div>
-        </button>
-        <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+        </span>
+        <span
+          class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
           title="octocat approved these changes"
-          type="button"
+          variant="secondary"
         >
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
-            data-gap="condensed"
+            data-gap="none"
             data-justify="start"
             data-padding="none"
             data-wrap="nowrap"
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-check text-primer-open"
+              class="octicon octicon-check text-gitify-icon-open"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -1124,29 +1124,29 @@ exports[`renderer/components/notifications/Pills.tsx label pills should render l
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 hmAFGJ"
+              class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
             >
               1
             </span>
           </div>
-        </button>
-        <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+        </span>
+        <span
+          class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
           title="gitify-app requested changes"
-          type="button"
+          variant="secondary"
         >
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
-            data-gap="condensed"
+            data-gap="none"
             data-justify="start"
             data-padding="none"
             data-wrap="nowrap"
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-file-diff text-primer-closed"
+              class="octicon octicon-file-diff text-gitify-icon-closed"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -1161,29 +1161,29 @@ exports[`renderer/components/notifications/Pills.tsx label pills should render l
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 hmAFGJ"
+              class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
             >
               1
             </span>
           </div>
-        </button>
-        <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+        </span>
+        <span
+          class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
           title="2 comments"
-          type="button"
+          variant="secondary"
         >
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
-            data-gap="condensed"
+            data-gap="none"
             data-justify="start"
             data-padding="none"
             data-wrap="nowrap"
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-comment text-primer-muted"
+              class="octicon octicon-comment text-gitify-icon-muted"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -1198,30 +1198,30 @@ exports[`renderer/components/notifications/Pills.tsx label pills should render l
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 hmAFGJ"
+              class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
             >
               2
             </span>
           </div>
-        </button>
-        <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+        </span>
+        <span
+          class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
           title="🏷️ enhancement
 🏷️ good-first-issue"
-          type="button"
+          variant="secondary"
         >
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
-            data-gap="condensed"
+            data-gap="none"
             data-justify="start"
             data-padding="none"
             data-wrap="nowrap"
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-tag text-primer-muted"
+              class="octicon octicon-tag text-gitify-icon-muted"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -1236,36 +1236,36 @@ exports[`renderer/components/notifications/Pills.tsx label pills should render l
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 hmAFGJ"
+              class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
             >
               2
             </span>
           </div>
-        </button>
+        </span>
       </div>
     </div>
   </body>,
   "container": <div>
     <div
-      class="flex"
+      class="Box-sc-g0xbh4-0 flex gap-1"
     >
-      <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+      <span
+        class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
         title="Linked to issues #1, #2"
-        type="button"
+        variant="secondary"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="horizontal"
-          data-gap="condensed"
+          data-gap="none"
           data-justify="start"
           data-padding="none"
           data-wrap="nowrap"
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-issue-closed text-primer-open"
+            class="octicon octicon-issue-closed text-gitify-icon-open"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -1283,29 +1283,29 @@ exports[`renderer/components/notifications/Pills.tsx label pills should render l
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 hmAFGJ"
+            class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
           >
             2
           </span>
         </div>
-      </button>
-      <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+      </span>
+      <span
+        class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
         title="octocat approved these changes"
-        type="button"
+        variant="secondary"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="horizontal"
-          data-gap="condensed"
+          data-gap="none"
           data-justify="start"
           data-padding="none"
           data-wrap="nowrap"
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-check text-primer-open"
+            class="octicon octicon-check text-gitify-icon-open"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -1320,29 +1320,29 @@ exports[`renderer/components/notifications/Pills.tsx label pills should render l
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 hmAFGJ"
+            class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
           >
             1
           </span>
         </div>
-      </button>
-      <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+      </span>
+      <span
+        class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
         title="gitify-app requested changes"
-        type="button"
+        variant="secondary"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="horizontal"
-          data-gap="condensed"
+          data-gap="none"
           data-justify="start"
           data-padding="none"
           data-wrap="nowrap"
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-file-diff text-primer-closed"
+            class="octicon octicon-file-diff text-gitify-icon-closed"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -1357,29 +1357,29 @@ exports[`renderer/components/notifications/Pills.tsx label pills should render l
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 hmAFGJ"
+            class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
           >
             1
           </span>
         </div>
-      </button>
-      <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+      </span>
+      <span
+        class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
         title="2 comments"
-        type="button"
+        variant="secondary"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="horizontal"
-          data-gap="condensed"
+          data-gap="none"
           data-justify="start"
           data-padding="none"
           data-wrap="nowrap"
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-comment text-primer-muted"
+            class="octicon octicon-comment text-gitify-icon-muted"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -1394,30 +1394,30 @@ exports[`renderer/components/notifications/Pills.tsx label pills should render l
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 hmAFGJ"
+            class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
           >
             2
           </span>
         </div>
-      </button>
-      <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+      </span>
+      <span
+        class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
         title="🏷️ enhancement
 🏷️ good-first-issue"
-        type="button"
+        variant="secondary"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="horizontal"
-          data-gap="condensed"
+          data-gap="none"
           data-justify="start"
           data-padding="none"
           data-wrap="nowrap"
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-tag text-primer-muted"
+            class="octicon octicon-tag text-gitify-icon-muted"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -1432,12 +1432,12 @@ exports[`renderer/components/notifications/Pills.tsx label pills should render l
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 hmAFGJ"
+            class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
           >
             2
           </span>
         </div>
-      </button>
+      </span>
     </div>
   </div>,
   "debug": [Function],
@@ -1494,31 +1494,31 @@ exports[`renderer/components/notifications/Pills.tsx label pills should render l
 }
 `;
 
-exports[`renderer/components/notifications/Pills.tsx linked issue pills should render issues pill when linked to multiple issues/prs 1`] = `
+exports[`renderer/components/metrics/MetricGroup.tsx linked issue pills should render issues pill when linked to multiple issues/prs 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
       <div
-        class="flex"
+        class="Box-sc-g0xbh4-0 flex gap-1"
       >
-        <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+        <span
+          class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
           title="Linked to issues #1, #2"
-          type="button"
+          variant="secondary"
         >
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
-            data-gap="condensed"
+            data-gap="none"
             data-justify="start"
             data-padding="none"
             data-wrap="nowrap"
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-issue-closed text-primer-open"
+              class="octicon octicon-issue-closed text-gitify-icon-open"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -1536,29 +1536,29 @@ exports[`renderer/components/notifications/Pills.tsx linked issue pills should r
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 hmAFGJ"
+              class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
             >
               2
             </span>
           </div>
-        </button>
-        <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+        </span>
+        <span
+          class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
           title="octocat approved these changes"
-          type="button"
+          variant="secondary"
         >
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
-            data-gap="condensed"
+            data-gap="none"
             data-justify="start"
             data-padding="none"
             data-wrap="nowrap"
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-check text-primer-open"
+              class="octicon octicon-check text-gitify-icon-open"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -1573,29 +1573,29 @@ exports[`renderer/components/notifications/Pills.tsx linked issue pills should r
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 hmAFGJ"
+              class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
             >
               1
             </span>
           </div>
-        </button>
-        <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+        </span>
+        <span
+          class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
           title="gitify-app requested changes"
-          type="button"
+          variant="secondary"
         >
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
-            data-gap="condensed"
+            data-gap="none"
             data-justify="start"
             data-padding="none"
             data-wrap="nowrap"
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-file-diff text-primer-closed"
+              class="octicon octicon-file-diff text-gitify-icon-closed"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -1610,36 +1610,36 @@ exports[`renderer/components/notifications/Pills.tsx linked issue pills should r
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 hmAFGJ"
+              class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
             >
               1
             </span>
           </div>
-        </button>
+        </span>
       </div>
     </div>
   </body>,
   "container": <div>
     <div
-      class="flex"
+      class="Box-sc-g0xbh4-0 flex gap-1"
     >
-      <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+      <span
+        class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
         title="Linked to issues #1, #2"
-        type="button"
+        variant="secondary"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="horizontal"
-          data-gap="condensed"
+          data-gap="none"
           data-justify="start"
           data-padding="none"
           data-wrap="nowrap"
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-issue-closed text-primer-open"
+            class="octicon octicon-issue-closed text-gitify-icon-open"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -1657,29 +1657,29 @@ exports[`renderer/components/notifications/Pills.tsx linked issue pills should r
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 hmAFGJ"
+            class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
           >
             2
           </span>
         </div>
-      </button>
-      <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+      </span>
+      <span
+        class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
         title="octocat approved these changes"
-        type="button"
+        variant="secondary"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="horizontal"
-          data-gap="condensed"
+          data-gap="none"
           data-justify="start"
           data-padding="none"
           data-wrap="nowrap"
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-check text-primer-open"
+            class="octicon octicon-check text-gitify-icon-open"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -1694,29 +1694,29 @@ exports[`renderer/components/notifications/Pills.tsx linked issue pills should r
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 hmAFGJ"
+            class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
           >
             1
           </span>
         </div>
-      </button>
-      <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+      </span>
+      <span
+        class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
         title="gitify-app requested changes"
-        type="button"
+        variant="secondary"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="horizontal"
-          data-gap="condensed"
+          data-gap="none"
           data-justify="start"
           data-padding="none"
           data-wrap="nowrap"
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-file-diff text-primer-closed"
+            class="octicon octicon-file-diff text-gitify-icon-closed"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -1731,12 +1731,12 @@ exports[`renderer/components/notifications/Pills.tsx linked issue pills should r
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 hmAFGJ"
+            class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
           >
             1
           </span>
         </div>
-      </button>
+      </span>
     </div>
   </div>,
   "debug": [Function],
@@ -1793,31 +1793,31 @@ exports[`renderer/components/notifications/Pills.tsx linked issue pills should r
 }
 `;
 
-exports[`renderer/components/notifications/Pills.tsx linked issue pills should render issues pill when linked to one issue/pr 1`] = `
+exports[`renderer/components/metrics/MetricGroup.tsx linked issue pills should render issues pill when linked to one issue/pr 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
       <div
-        class="flex"
+        class="Box-sc-g0xbh4-0 flex gap-1"
       >
-        <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+        <span
+          class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
           title="Linked to issue #1"
-          type="button"
+          variant="secondary"
         >
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
-            data-gap="condensed"
+            data-gap="none"
             data-justify="start"
             data-padding="none"
             data-wrap="nowrap"
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-issue-closed text-primer-open"
+              class="octicon octicon-issue-closed text-gitify-icon-open"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -1835,29 +1835,29 @@ exports[`renderer/components/notifications/Pills.tsx linked issue pills should r
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 hmAFGJ"
+              class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
             >
               1
             </span>
           </div>
-        </button>
-        <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+        </span>
+        <span
+          class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
           title="octocat approved these changes"
-          type="button"
+          variant="secondary"
         >
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
-            data-gap="condensed"
+            data-gap="none"
             data-justify="start"
             data-padding="none"
             data-wrap="nowrap"
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-check text-primer-open"
+              class="octicon octicon-check text-gitify-icon-open"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -1872,29 +1872,29 @@ exports[`renderer/components/notifications/Pills.tsx linked issue pills should r
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 hmAFGJ"
+              class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
             >
               1
             </span>
           </div>
-        </button>
-        <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+        </span>
+        <span
+          class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
           title="gitify-app requested changes"
-          type="button"
+          variant="secondary"
         >
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
-            data-gap="condensed"
+            data-gap="none"
             data-justify="start"
             data-padding="none"
             data-wrap="nowrap"
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-file-diff text-primer-closed"
+              class="octicon octicon-file-diff text-gitify-icon-closed"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -1909,36 +1909,36 @@ exports[`renderer/components/notifications/Pills.tsx linked issue pills should r
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 hmAFGJ"
+              class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
             >
               1
             </span>
           </div>
-        </button>
+        </span>
       </div>
     </div>
   </body>,
   "container": <div>
     <div
-      class="flex"
+      class="Box-sc-g0xbh4-0 flex gap-1"
     >
-      <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+      <span
+        class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
         title="Linked to issue #1"
-        type="button"
+        variant="secondary"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="horizontal"
-          data-gap="condensed"
+          data-gap="none"
           data-justify="start"
           data-padding="none"
           data-wrap="nowrap"
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-issue-closed text-primer-open"
+            class="octicon octicon-issue-closed text-gitify-icon-open"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -1956,29 +1956,29 @@ exports[`renderer/components/notifications/Pills.tsx linked issue pills should r
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 hmAFGJ"
+            class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
           >
             1
           </span>
         </div>
-      </button>
-      <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+      </span>
+      <span
+        class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
         title="octocat approved these changes"
-        type="button"
+        variant="secondary"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="horizontal"
-          data-gap="condensed"
+          data-gap="none"
           data-justify="start"
           data-padding="none"
           data-wrap="nowrap"
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-check text-primer-open"
+            class="octicon octicon-check text-gitify-icon-open"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -1993,29 +1993,29 @@ exports[`renderer/components/notifications/Pills.tsx linked issue pills should r
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 hmAFGJ"
+            class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
           >
             1
           </span>
         </div>
-      </button>
-      <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+      </span>
+      <span
+        class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
         title="gitify-app requested changes"
-        type="button"
+        variant="secondary"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="horizontal"
-          data-gap="condensed"
+          data-gap="none"
           data-justify="start"
           data-padding="none"
           data-wrap="nowrap"
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-file-diff text-primer-closed"
+            class="octicon octicon-file-diff text-gitify-icon-closed"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -2030,12 +2030,12 @@ exports[`renderer/components/notifications/Pills.tsx linked issue pills should r
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 hmAFGJ"
+            class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
           >
             1
           </span>
         </div>
-      </button>
+      </span>
     </div>
   </div>,
   "debug": [Function],
@@ -2092,31 +2092,31 @@ exports[`renderer/components/notifications/Pills.tsx linked issue pills should r
 }
 `;
 
-exports[`renderer/components/notifications/Pills.tsx milestone pills should render closed milestone pill 1`] = `
+exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should render closed milestone pill 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
       <div
-        class="flex"
+        class="Box-sc-g0xbh4-0 flex gap-1"
       >
-        <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+        <span
+          class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
           title="Linked to issues #1, #2"
-          type="button"
+          variant="secondary"
         >
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
-            data-gap="condensed"
+            data-gap="none"
             data-justify="start"
             data-padding="none"
             data-wrap="nowrap"
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-issue-closed text-primer-open"
+              class="octicon octicon-issue-closed text-gitify-icon-open"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -2134,29 +2134,29 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 hmAFGJ"
+              class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
             >
               2
             </span>
           </div>
-        </button>
-        <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+        </span>
+        <span
+          class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
           title="octocat approved these changes"
-          type="button"
+          variant="secondary"
         >
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
-            data-gap="condensed"
+            data-gap="none"
             data-justify="start"
             data-padding="none"
             data-wrap="nowrap"
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-check text-primer-open"
+              class="octicon octicon-check text-gitify-icon-open"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -2171,29 +2171,29 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 hmAFGJ"
+              class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
             >
               1
             </span>
           </div>
-        </button>
-        <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+        </span>
+        <span
+          class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
           title="gitify-app requested changes"
-          type="button"
+          variant="secondary"
         >
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
-            data-gap="condensed"
+            data-gap="none"
             data-justify="start"
             data-padding="none"
             data-wrap="nowrap"
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-file-diff text-primer-closed"
+              class="octicon octicon-file-diff text-gitify-icon-closed"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -2208,29 +2208,29 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 hmAFGJ"
+              class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
             >
               1
             </span>
           </div>
-        </button>
-        <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+        </span>
+        <span
+          class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
           title="2 comments"
-          type="button"
+          variant="secondary"
         >
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
-            data-gap="condensed"
+            data-gap="none"
             data-justify="start"
             data-padding="none"
             data-wrap="nowrap"
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-comment text-primer-muted"
+              class="octicon octicon-comment text-gitify-icon-muted"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -2245,30 +2245,30 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 hmAFGJ"
+              class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
             >
               2
             </span>
           </div>
-        </button>
-        <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+        </span>
+        <span
+          class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
           title="🏷️ enhancement
 🏷️ good-first-issue"
-          type="button"
+          variant="secondary"
         >
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
-            data-gap="condensed"
+            data-gap="none"
             data-justify="start"
             data-padding="none"
             data-wrap="nowrap"
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-tag text-primer-muted"
+              class="octicon octicon-tag text-gitify-icon-muted"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -2283,29 +2283,29 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 hmAFGJ"
+              class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
             >
               2
             </span>
           </div>
-        </button>
-        <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+        </span>
+        <span
+          class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
           title="Milestone 1"
-          type="button"
+          variant="secondary"
         >
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
-            data-gap="condensed"
+            data-gap="none"
             data-justify="start"
             data-padding="none"
             data-wrap="nowrap"
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-milestone text-primer-closed"
+              class="octicon octicon-milestone text-gitify-icon-closed"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -2320,31 +2320,31 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
               />
             </svg>
           </div>
-        </button>
+        </span>
       </div>
     </div>
   </body>,
   "container": <div>
     <div
-      class="flex"
+      class="Box-sc-g0xbh4-0 flex gap-1"
     >
-      <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+      <span
+        class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
         title="Linked to issues #1, #2"
-        type="button"
+        variant="secondary"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="horizontal"
-          data-gap="condensed"
+          data-gap="none"
           data-justify="start"
           data-padding="none"
           data-wrap="nowrap"
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-issue-closed text-primer-open"
+            class="octicon octicon-issue-closed text-gitify-icon-open"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -2362,29 +2362,29 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 hmAFGJ"
+            class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
           >
             2
           </span>
         </div>
-      </button>
-      <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+      </span>
+      <span
+        class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
         title="octocat approved these changes"
-        type="button"
+        variant="secondary"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="horizontal"
-          data-gap="condensed"
+          data-gap="none"
           data-justify="start"
           data-padding="none"
           data-wrap="nowrap"
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-check text-primer-open"
+            class="octicon octicon-check text-gitify-icon-open"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -2399,29 +2399,29 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 hmAFGJ"
+            class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
           >
             1
           </span>
         </div>
-      </button>
-      <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+      </span>
+      <span
+        class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
         title="gitify-app requested changes"
-        type="button"
+        variant="secondary"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="horizontal"
-          data-gap="condensed"
+          data-gap="none"
           data-justify="start"
           data-padding="none"
           data-wrap="nowrap"
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-file-diff text-primer-closed"
+            class="octicon octicon-file-diff text-gitify-icon-closed"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -2436,29 +2436,29 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 hmAFGJ"
+            class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
           >
             1
           </span>
         </div>
-      </button>
-      <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+      </span>
+      <span
+        class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
         title="2 comments"
-        type="button"
+        variant="secondary"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="horizontal"
-          data-gap="condensed"
+          data-gap="none"
           data-justify="start"
           data-padding="none"
           data-wrap="nowrap"
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-comment text-primer-muted"
+            class="octicon octicon-comment text-gitify-icon-muted"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -2473,30 +2473,30 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 hmAFGJ"
+            class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
           >
             2
           </span>
         </div>
-      </button>
-      <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+      </span>
+      <span
+        class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
         title="🏷️ enhancement
 🏷️ good-first-issue"
-        type="button"
+        variant="secondary"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="horizontal"
-          data-gap="condensed"
+          data-gap="none"
           data-justify="start"
           data-padding="none"
           data-wrap="nowrap"
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-tag text-primer-muted"
+            class="octicon octicon-tag text-gitify-icon-muted"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -2511,29 +2511,29 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 hmAFGJ"
+            class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
           >
             2
           </span>
         </div>
-      </button>
-      <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+      </span>
+      <span
+        class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
         title="Milestone 1"
-        type="button"
+        variant="secondary"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="horizontal"
-          data-gap="condensed"
+          data-gap="none"
           data-justify="start"
           data-padding="none"
           data-wrap="nowrap"
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-milestone text-primer-closed"
+            class="octicon octicon-milestone text-gitify-icon-closed"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -2548,7 +2548,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
             />
           </svg>
         </div>
-      </button>
+      </span>
     </div>
   </div>,
   "debug": [Function],
@@ -2605,31 +2605,31 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
 }
 `;
 
-exports[`renderer/components/notifications/Pills.tsx milestone pills should render open milestone pill 1`] = `
+exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should render open milestone pill 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
       <div
-        class="flex"
+        class="Box-sc-g0xbh4-0 flex gap-1"
       >
-        <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+        <span
+          class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
           title="Linked to issues #1, #2"
-          type="button"
+          variant="secondary"
         >
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
-            data-gap="condensed"
+            data-gap="none"
             data-justify="start"
             data-padding="none"
             data-wrap="nowrap"
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-issue-closed text-primer-open"
+              class="octicon octicon-issue-closed text-gitify-icon-open"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -2647,29 +2647,29 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 hmAFGJ"
+              class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
             >
               2
             </span>
           </div>
-        </button>
-        <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+        </span>
+        <span
+          class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
           title="octocat approved these changes"
-          type="button"
+          variant="secondary"
         >
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
-            data-gap="condensed"
+            data-gap="none"
             data-justify="start"
             data-padding="none"
             data-wrap="nowrap"
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-check text-primer-open"
+              class="octicon octicon-check text-gitify-icon-open"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -2684,29 +2684,29 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 hmAFGJ"
+              class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
             >
               1
             </span>
           </div>
-        </button>
-        <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+        </span>
+        <span
+          class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
           title="gitify-app requested changes"
-          type="button"
+          variant="secondary"
         >
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
-            data-gap="condensed"
+            data-gap="none"
             data-justify="start"
             data-padding="none"
             data-wrap="nowrap"
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-file-diff text-primer-closed"
+              class="octicon octicon-file-diff text-gitify-icon-closed"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -2721,29 +2721,29 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 hmAFGJ"
+              class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
             >
               1
             </span>
           </div>
-        </button>
-        <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+        </span>
+        <span
+          class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
           title="2 comments"
-          type="button"
+          variant="secondary"
         >
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
-            data-gap="condensed"
+            data-gap="none"
             data-justify="start"
             data-padding="none"
             data-wrap="nowrap"
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-comment text-primer-muted"
+              class="octicon octicon-comment text-gitify-icon-muted"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -2758,30 +2758,30 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 hmAFGJ"
+              class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
             >
               2
             </span>
           </div>
-        </button>
-        <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+        </span>
+        <span
+          class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
           title="🏷️ enhancement
 🏷️ good-first-issue"
-          type="button"
+          variant="secondary"
         >
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
-            data-gap="condensed"
+            data-gap="none"
             data-justify="start"
             data-padding="none"
             data-wrap="nowrap"
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-tag text-primer-muted"
+              class="octicon octicon-tag text-gitify-icon-muted"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -2796,29 +2796,29 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 hmAFGJ"
+              class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
             >
               2
             </span>
           </div>
-        </button>
-        <button
-          class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+        </span>
+        <span
+          class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
           title="Milestone 1"
-          type="button"
+          variant="secondary"
         >
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="center"
             data-direction="horizontal"
-            data-gap="condensed"
+            data-gap="none"
             data-justify="start"
             data-padding="none"
             data-wrap="nowrap"
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-milestone text-primer-open"
+              class="octicon octicon-milestone text-gitify-icon-open"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -2833,31 +2833,31 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
               />
             </svg>
           </div>
-        </button>
+        </span>
       </div>
     </div>
   </body>,
   "container": <div>
     <div
-      class="flex"
+      class="Box-sc-g0xbh4-0 flex gap-1"
     >
-      <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+      <span
+        class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
         title="Linked to issues #1, #2"
-        type="button"
+        variant="secondary"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="horizontal"
-          data-gap="condensed"
+          data-gap="none"
           data-justify="start"
           data-padding="none"
           data-wrap="nowrap"
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-issue-closed text-primer-open"
+            class="octicon octicon-issue-closed text-gitify-icon-open"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -2875,29 +2875,29 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 hmAFGJ"
+            class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
           >
             2
           </span>
         </div>
-      </button>
-      <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+      </span>
+      <span
+        class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
         title="octocat approved these changes"
-        type="button"
+        variant="secondary"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="horizontal"
-          data-gap="condensed"
+          data-gap="none"
           data-justify="start"
           data-padding="none"
           data-wrap="nowrap"
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-check text-primer-open"
+            class="octicon octicon-check text-gitify-icon-open"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -2912,29 +2912,29 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 hmAFGJ"
+            class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
           >
             1
           </span>
         </div>
-      </button>
-      <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+      </span>
+      <span
+        class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
         title="gitify-app requested changes"
-        type="button"
+        variant="secondary"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="horizontal"
-          data-gap="condensed"
+          data-gap="none"
           data-justify="start"
           data-padding="none"
           data-wrap="nowrap"
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-file-diff text-primer-closed"
+            class="octicon octicon-file-diff text-gitify-icon-closed"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -2949,29 +2949,29 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 hmAFGJ"
+            class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
           >
             1
           </span>
         </div>
-      </button>
-      <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+      </span>
+      <span
+        class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
         title="2 comments"
-        type="button"
+        variant="secondary"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="horizontal"
-          data-gap="condensed"
+          data-gap="none"
           data-justify="start"
           data-padding="none"
           data-wrap="nowrap"
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-comment text-primer-muted"
+            class="octicon octicon-comment text-gitify-icon-muted"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -2986,30 +2986,30 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 hmAFGJ"
+            class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
           >
             2
           </span>
         </div>
-      </button>
-      <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+      </span>
+      <span
+        class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
         title="🏷️ enhancement
 🏷️ good-first-issue"
-        type="button"
+        variant="secondary"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="horizontal"
-          data-gap="condensed"
+          data-gap="none"
           data-justify="start"
           data-padding="none"
           data-wrap="nowrap"
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-tag text-primer-muted"
+            class="octicon octicon-tag text-gitify-icon-muted"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -3024,29 +3024,29 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 hmAFGJ"
+            class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
           >
             2
           </span>
         </div>
-      </button>
-      <button
-        class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
+      </span>
+      <span
+        class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
         title="Milestone 1"
-        type="button"
+        variant="secondary"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="center"
           data-direction="horizontal"
-          data-gap="condensed"
+          data-gap="none"
           data-justify="start"
           data-padding="none"
           data-wrap="nowrap"
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-milestone text-primer-open"
+            class="octicon octicon-milestone text-gitify-icon-open"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -3061,7 +3061,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
             />
           </svg>
         </div>
-      </button>
+      </span>
     </div>
   </div>,
   "debug": [Function],
@@ -3118,7 +3118,7 @@ exports[`renderer/components/notifications/Pills.tsx milestone pills should rend
 }
 `;
 
-exports[`renderer/components/notifications/Pills.tsx showPills disabled should not render any pills when showPills is disabled 1`] = `
+exports[`renderer/components/metrics/MetricGroup.tsx showPills disabled should not render any pills when showPills is disabled 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>

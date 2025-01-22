@@ -70,10 +70,8 @@ export const AccountNotifications: FC<IAccountNotifications> = (
       {showAccountHeader && (
         <div
           className={cn(
-            'group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white',
-            props.error
-              ? 'bg-gitify-accounts-error'
-              : 'bg-gitify-accounts-rest',
+            'group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold',
+            props.error ? 'bg-gitify-account-error' : 'bg-gitify-account-rest',
           )}
           onClick={toggleAccountNotifications}
         >
@@ -136,8 +134,8 @@ export const AccountNotifications: FC<IAccountNotifications> = (
 
       {showAccountNotifications && (
         <>
-          {props.error && <Oops error={props.error} />}
-          {!hasNotifications && !props.error && <AllRead />}
+          {props.error && <Oops error={props.error} fullHeight={false} />}
+          {!hasNotifications && !props.error && <AllRead fullHeight={false} />}
           {isGroupByRepository
             ? Object.values(groupedNotifications).map((repoNotifications) => {
                 const repoSlug = repoNotifications[0].repository.full_name;

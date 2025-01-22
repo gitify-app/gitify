@@ -9,7 +9,7 @@ import { cn } from '../../utils/cn';
 import { isNonHumanUser } from '../../utils/helpers';
 import { openUserProfile } from '../../utils/links';
 import { formatReason } from '../../utils/reason';
-import { Pills } from './Pills';
+import { MetricGroup } from '../metrics/MetricGroup';
 
 interface INotificationFooter {
   notification: Notification;
@@ -21,7 +21,13 @@ export const NotificationFooter: FC<INotificationFooter> = ({
   const reason = formatReason(notification.reason);
 
   return (
-    <Stack direction="horizontal" align="center" gap="condensed" wrap="wrap">
+    <Stack
+      direction="horizontal"
+      align="center"
+      gap="condensed"
+      wrap="wrap"
+      className={cn('text-xs', Opacity.MEDIUM)}
+    >
       {notification.subject.user ? (
         <Avatar
           title={`View profile: ${notification.subject.user.login}`}
@@ -45,15 +51,14 @@ export const NotificationFooter: FC<INotificationFooter> = ({
           )}
         </>
       )}
-      <span className={cn('text-xs', Opacity.MEDIUM)}>
-        <Stack direction="horizontal" gap="condensed">
-          <Text title={reason.description}>{reason.title}</Text>
-          <Text>&bull;</Text>
-          <RelativeTime datetime={notification.updated_at} />
-        </Stack>
-      </span>
 
-      <Pills notification={notification} />
+      <Stack direction="horizontal" gap="none">
+        <Text title={reason.description}>{reason.title}</Text>
+        <Text className="px-1">&bull;</Text>
+        <RelativeTime datetime={notification.updated_at} />
+      </Stack>
+
+      <MetricGroup notification={notification} />
     </Stack>
   );
 };

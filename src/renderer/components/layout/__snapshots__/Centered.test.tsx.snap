@@ -1,16 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renderer/components/primitives/Footer.tsx should render itself & its children - end 1`] = `
+exports[`renderer/components/layout/Centered.tsx should render itself & its children - full height false 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 duhwY bg-gitify-footer"
-        data-align="stretch"
-        data-direction="horizontal"
-        data-justify="end"
-        data-padding="condensed"
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+        data-align="center"
+        data-direction="vertical"
+        data-justify="center"
+        data-padding="spacious"
         data-wrap="nowrap"
       >
         Test
@@ -19,11 +19,11 @@ exports[`renderer/components/primitives/Footer.tsx should render itself & its ch
   </body>,
   "container": <div>
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 duhwY bg-gitify-footer"
-      data-align="stretch"
-      data-direction="horizontal"
-      data-justify="end"
-      data-padding="condensed"
+      class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+      data-align="center"
+      data-direction="vertical"
+      data-justify="center"
+      data-padding="spacious"
       data-wrap="nowrap"
     >
       Test
@@ -83,17 +83,17 @@ exports[`renderer/components/primitives/Footer.tsx should render itself & its ch
 }
 `;
 
-exports[`renderer/components/primitives/Footer.tsx should render itself & its children - space-between 1`] = `
+exports[`renderer/components/layout/Centered.tsx should render itself & its children - full height true 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 duhwY bg-gitify-footer"
-        data-align="stretch"
-        data-direction="horizontal"
-        data-justify="space-between"
-        data-padding="condensed"
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY min-h-screen"
+        data-align="center"
+        data-direction="vertical"
+        data-justify="center"
+        data-padding="spacious"
         data-wrap="nowrap"
       >
         Test
@@ -102,11 +102,11 @@ exports[`renderer/components/primitives/Footer.tsx should render itself & its ch
   </body>,
   "container": <div>
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 duhwY bg-gitify-footer"
-      data-align="stretch"
-      data-direction="horizontal"
-      data-justify="space-between"
-      data-padding="condensed"
+      class="Stack__StyledStack-sc-x3xa2i-0 duhwY min-h-screen"
+      data-align="center"
+      data-direction="vertical"
+      data-justify="center"
+      data-padding="spacious"
       data-wrap="nowrap"
     >
       Test

@@ -88,7 +88,7 @@ export const NotificationRow: FC<INotificationRow> = ({
     <div
       id={notification.id}
       className={cn(
-        'group flex border-b pl-3 pr-1 py-1.5 text-gitify-font border-gitify-notifications-border bg-gitify-notifications-rest hover:bg-gitify-notifications-hover',
+        'group flex border-b pl-3 pr-1 py-1.5 text-gitify-font border-gitify-notification-border hover:bg-gitify-notification-hover',
         (isAnimated || animateExit) &&
           'translate-x-full opacity-0 transition duration-[350ms] ease-in-out',
         (isRead || showAsRead) && Opacity.READ,

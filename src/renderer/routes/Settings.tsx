@@ -4,9 +4,9 @@ import { GearIcon } from '@primer/octicons-react';
 import { Button, Stack } from '@primer/react';
 import { Dialog } from '@primer/react/experimental';
 
-import { Contents } from '../components/primitives/Contents';
+import { Contents } from '../components/layout/Contents';
+import { Page } from '../components/layout/Page';
 import { Header } from '../components/primitives/Header';
-import { Page } from '../components/primitives/Page';
 import { AppearanceSettings } from '../components/settings/AppearanceSettings';
 import { NotificationSettings } from '../components/settings/NotificationSettings';
 import { SettingsFooter } from '../components/settings/SettingsFooter';
@@ -34,7 +34,8 @@ export const SettingsRoute: FC = () => {
           <NotificationSettings />
           <SystemSettings />
         </Stack>
-        <Stack align="center" padding={'spacious'}>
+
+        <Stack align="center" padding="spacious">
           <Button
             variant="danger"
             onClick={() => setIsOpen(!isOpen)}

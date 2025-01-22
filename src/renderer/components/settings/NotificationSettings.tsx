@@ -8,14 +8,14 @@ import { GroupBy } from '../../types';
 import { openGitHubParticipatingDocs } from '../../utils/links';
 import { Checkbox } from '../fields/Checkbox';
 import { RadioGroup } from '../fields/RadioGroup';
-import { Legend } from '../primitives/Legend';
+import { Title } from '../primitives/Title';
 
 export const NotificationSettings: FC = () => {
   const { settings, updateSetting } = useContext(AppContext);
 
   return (
     <fieldset>
-      <Legend icon={BellIcon}>Notifications</Legend>
+      <Title icon={BellIcon}>Notifications</Title>
       <RadioGroup
         name="groupBy"
         label="Group by:"

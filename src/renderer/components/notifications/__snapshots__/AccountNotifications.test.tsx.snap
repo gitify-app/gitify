@@ -6,7 +6,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
   "baseElement": <body>
     <div>
       <div
-        class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-accounts-error"
+        class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold bg-gitify-account-error"
       >
         <button
           aria-describedby=":r15:-loading-announcement"
@@ -77,251 +77,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           </span>
         </button>
         <div
-          class="flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-80"
-        >
-          <div
-            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-            data-align="center"
-            data-direction="horizontal"
-            data-gap="none"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
-          >
-            <button
-              aria-describedby=":r17:-loading-announcement"
-              aria-labelledby=":r16:"
-              class="types__StyledButton-sc-ws60qy-0 kQRupk"
-              data-component="IconButton"
-              data-loading="false"
-              data-no-visuals="true"
-              data-size="small"
-              data-testid="account-issues"
-              sx="[object Object]"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-issue-opened"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
-                />
-                <path
-                  d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"
-                />
-              </svg>
-            </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":r16:"
-              popover="auto"
-            >
-              My Issues
-            </span>
-            <button
-              aria-describedby=":r19:-loading-announcement"
-              aria-labelledby=":r18:"
-              class="types__StyledButton-sc-ws60qy-0 kQRupk"
-              data-component="IconButton"
-              data-loading="false"
-              data-no-visuals="true"
-              data-size="small"
-              data-testid="account-pull-requests"
-              sx="[object Object]"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-git-pull-request"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M1.5 3.25a2.25 2.25 0 1 1 3 2.122v5.256a2.251 2.251 0 1 1-1.5 0V5.372A2.25 2.25 0 0 1 1.5 3.25Zm5.677-.177L9.573.677A.25.25 0 0 1 10 .854V2.5h1A2.5 2.5 0 0 1 13.5 5v5.628a2.251 2.251 0 1 1-1.5 0V5a1 1 0 0 0-1-1h-1v1.646a.25.25 0 0 1-.427.177L7.177 3.427a.25.25 0 0 1 0-.354ZM3.75 2.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm0 9.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm8.25.75a.75.75 0 1 0 1.5 0 .75.75 0 0 0-1.5 0Z"
-                />
-              </svg>
-            </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":r18:"
-              popover="auto"
-            >
-              My Pull Requests
-            </span>
-            <button
-              aria-describedby=":r1b:-loading-announcement"
-              aria-labelledby=":r1a:"
-              class="types__StyledButton-sc-ws60qy-0 kQRupk"
-              data-component="IconButton"
-              data-loading="false"
-              data-no-visuals="true"
-              data-size="small"
-              data-testid="account-toggle"
-              sx="[object Object]"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-chevron-left"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M9.78 12.78a.75.75 0 0 1-1.06 0L4.47 8.53a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L6.06 8l3.72 3.72a.75.75 0 0 1 0 1.06Z"
-                />
-              </svg>
-            </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":r1a:"
-              popover="auto"
-            >
-              No notifications for account
-            </span>
-          </div>
-        </div>
-      </div>
-      <div
-        class="flex flex-1 flex-col items-center justify-center p-8 min-h-screen"
-      >
-        <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-          data-align="center"
-          data-direction="vertical"
-          data-justify="start"
-          data-padding="none"
-          data-wrap="nowrap"
-        >
-          <div
-            class="mt-2 text-5xl"
-          >
-            <span>
-              <img
-                alt="🔥"
-                class="emoji"
-                draggable="false"
-                src="images/twemoji/1f525.svg"
-              />
-            </span>
-          </div>
-          <div
-            class="mb-2 text-xl font-semibold"
-          >
-            Error title
-          </div>
-          <div
-            class="mb-2 text-center"
-          >
-            Error description
-          </div>
-        </div>
-      </div>
-    </div>
-  </body>,
-  "container": <div>
-    <div
-      class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-accounts-error"
-    >
-      <button
-        aria-describedby=":r15:-loading-announcement"
-        class="types__StyledButton-sc-ws60qy-0 kQRupk"
-        data-loading="false"
-        data-no-visuals="true"
-        data-testid="account-profile"
-        sx="[object Object]"
-        title="Open account profile"
-        type="button"
-      >
-        <span
-          class="Box-sc-g0xbh4-0 srpGE"
-          data-component="buttonContent"
-          sx="[object Object]"
-        >
-          <span
-            data-component="text"
-          >
-            <div
-              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-              data-align="center"
-              data-direction="horizontal"
-              data-gap="condensed"
-              data-justify="start"
-              data-padding="none"
-              data-wrap="nowrap"
-            >
-              <img
-                alt=""
-                class="Avatar__StyledAvatar-sc-2lv0r8-0 kuZlm"
-                data-component="Avatar"
-                height="16"
-                size="16"
-                src="https://avatars.githubusercontent.com/u/583231?v=4"
-                sx="[object Object]"
-                width="16"
-              />
-              <span
-                class="Text-sc-17v1xeu-0 hmAFGJ"
-              >
-                @
-                octocat
-              </span>
-            </div>
-          </span>
-          <span
-            class="Box-sc-g0xbh4-0 mhHOW"
-            data-component="trailingVisual"
-            sx="[object Object]"
-          >
-            <span
-              aria-hidden="true"
-              class="Box-sc-g0xbh4-0 bfvZWv"
-              data-component="ButtonCounter"
-              sx="[object Object]"
-            >
-              0
-            </span>
-            <span
-              class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 hxuUuW"
-            >
-               (
-              0
-              )
-            </span>
-          </span>
-        </span>
-      </button>
-      <div
-        class="flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-80"
-      >
-        <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY opacity-0 transition-opacity group-hover:opacity-80"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -448,37 +204,301 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           </span>
         </div>
       </div>
+      <div
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+        data-align="center"
+        data-direction="vertical"
+        data-justify="center"
+        data-padding="spacious"
+        data-wrap="nowrap"
+      >
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          data-align="center"
+          data-direction="vertical"
+          data-gap="condensed"
+          data-justify="center"
+          data-padding="none"
+          data-wrap="nowrap"
+        >
+          <div
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+            data-align="center"
+            data-direction="vertical"
+            data-gap="spacious"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <div
+              class="Box-sc-g0xbh4-0 text-5xl"
+            >
+              <img
+                alt="🔥"
+                class="emoji"
+                draggable="false"
+                src="images/twemoji/1f525.svg"
+              />
+            </div>
+            <div
+              class="Box-sc-g0xbh4-0 text-xl font-semibold"
+            >
+              Error title
+            </div>
+          </div>
+          <div
+            class="Box-sc-g0xbh4-0 text-center"
+          >
+            Error description
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold bg-gitify-account-error"
+    >
+      <button
+        aria-describedby=":r15:-loading-announcement"
+        class="types__StyledButton-sc-ws60qy-0 kQRupk"
+        data-loading="false"
+        data-no-visuals="true"
+        data-testid="account-profile"
+        sx="[object Object]"
+        title="Open account profile"
+        type="button"
+      >
+        <span
+          class="Box-sc-g0xbh4-0 srpGE"
+          data-component="buttonContent"
+          sx="[object Object]"
+        >
+          <span
+            data-component="text"
+          >
+            <div
+              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+              data-align="center"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+            >
+              <img
+                alt=""
+                class="Avatar__StyledAvatar-sc-2lv0r8-0 kuZlm"
+                data-component="Avatar"
+                height="16"
+                size="16"
+                src="https://avatars.githubusercontent.com/u/583231?v=4"
+                sx="[object Object]"
+                width="16"
+              />
+              <span
+                class="Text-sc-17v1xeu-0 hmAFGJ"
+              >
+                @
+                octocat
+              </span>
+            </div>
+          </span>
+          <span
+            class="Box-sc-g0xbh4-0 mhHOW"
+            data-component="trailingVisual"
+            sx="[object Object]"
+          >
+            <span
+              aria-hidden="true"
+              class="Box-sc-g0xbh4-0 bfvZWv"
+              data-component="ButtonCounter"
+              sx="[object Object]"
+            >
+              0
+            </span>
+            <span
+              class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 hxuUuW"
+            >
+               (
+              0
+              )
+            </span>
+          </span>
+        </span>
+      </button>
+      <div
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY opacity-0 transition-opacity group-hover:opacity-80"
+        data-align="center"
+        data-direction="horizontal"
+        data-gap="none"
+        data-justify="start"
+        data-padding="none"
+        data-wrap="nowrap"
+      >
+        <button
+          aria-describedby=":r17:-loading-announcement"
+          aria-labelledby=":r16:"
+          class="types__StyledButton-sc-ws60qy-0 kQRupk"
+          data-component="IconButton"
+          data-loading="false"
+          data-no-visuals="true"
+          data-size="small"
+          data-testid="account-issues"
+          sx="[object Object]"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="octicon octicon-issue-opened"
+            display="inline-block"
+            fill="currentColor"
+            focusable="false"
+            height="16"
+            overflow="visible"
+            style="vertical-align: text-bottom;"
+            viewBox="0 0 16 16"
+            width="16"
+          >
+            <path
+              d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
+            />
+            <path
+              d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"
+            />
+          </svg>
+        </button>
+        <span
+          aria-hidden="true"
+          class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
+          data-direction="s"
+          id=":r16:"
+          popover="auto"
+        >
+          My Issues
+        </span>
+        <button
+          aria-describedby=":r19:-loading-announcement"
+          aria-labelledby=":r18:"
+          class="types__StyledButton-sc-ws60qy-0 kQRupk"
+          data-component="IconButton"
+          data-loading="false"
+          data-no-visuals="true"
+          data-size="small"
+          data-testid="account-pull-requests"
+          sx="[object Object]"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="octicon octicon-git-pull-request"
+            display="inline-block"
+            fill="currentColor"
+            focusable="false"
+            height="16"
+            overflow="visible"
+            style="vertical-align: text-bottom;"
+            viewBox="0 0 16 16"
+            width="16"
+          >
+            <path
+              d="M1.5 3.25a2.25 2.25 0 1 1 3 2.122v5.256a2.251 2.251 0 1 1-1.5 0V5.372A2.25 2.25 0 0 1 1.5 3.25Zm5.677-.177L9.573.677A.25.25 0 0 1 10 .854V2.5h1A2.5 2.5 0 0 1 13.5 5v5.628a2.251 2.251 0 1 1-1.5 0V5a1 1 0 0 0-1-1h-1v1.646a.25.25 0 0 1-.427.177L7.177 3.427a.25.25 0 0 1 0-.354ZM3.75 2.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm0 9.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm8.25.75a.75.75 0 1 0 1.5 0 .75.75 0 0 0-1.5 0Z"
+            />
+          </svg>
+        </button>
+        <span
+          aria-hidden="true"
+          class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
+          data-direction="s"
+          id=":r18:"
+          popover="auto"
+        >
+          My Pull Requests
+        </span>
+        <button
+          aria-describedby=":r1b:-loading-announcement"
+          aria-labelledby=":r1a:"
+          class="types__StyledButton-sc-ws60qy-0 kQRupk"
+          data-component="IconButton"
+          data-loading="false"
+          data-no-visuals="true"
+          data-size="small"
+          data-testid="account-toggle"
+          sx="[object Object]"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="octicon octicon-chevron-left"
+            display="inline-block"
+            fill="currentColor"
+            focusable="false"
+            height="16"
+            overflow="visible"
+            style="vertical-align: text-bottom;"
+            viewBox="0 0 16 16"
+            width="16"
+          >
+            <path
+              d="M9.78 12.78a.75.75 0 0 1-1.06 0L4.47 8.53a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L6.06 8l3.72 3.72a.75.75 0 0 1 0 1.06Z"
+            />
+          </svg>
+        </button>
+        <span
+          aria-hidden="true"
+          class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
+          data-direction="s"
+          id=":r1a:"
+          popover="auto"
+        >
+          No notifications for account
+        </span>
+      </div>
     </div>
     <div
-      class="flex flex-1 flex-col items-center justify-center p-8 min-h-screen"
+      class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+      data-align="center"
+      data-direction="vertical"
+      data-justify="center"
+      data-padding="spacious"
+      data-wrap="nowrap"
     >
       <div
         class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
         data-align="center"
         data-direction="vertical"
-        data-justify="start"
+        data-gap="condensed"
+        data-justify="center"
         data-padding="none"
         data-wrap="nowrap"
       >
         <div
-          class="mt-2 text-5xl"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          data-align="center"
+          data-direction="vertical"
+          data-gap="spacious"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
         >
-          <span>
+          <div
+            class="Box-sc-g0xbh4-0 text-5xl"
+          >
             <img
               alt="🔥"
               class="emoji"
               draggable="false"
               src="images/twemoji/1f525.svg"
             />
-          </span>
+          </div>
+          <div
+            class="Box-sc-g0xbh4-0 text-xl font-semibold"
+          >
+            Error title
+          </div>
         </div>
         <div
-          class="mb-2 text-xl font-semibold"
-        >
-          Error title
-        </div>
-        <div
-          class="mb-2 text-center"
+          class="Box-sc-g0xbh4-0 text-center"
         >
           Error description
         </div>
@@ -545,7 +565,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
   "baseElement": <body>
     <div>
       <div
-        class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-accounts-rest"
+        class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold bg-gitify-account-rest"
       >
         <button
           aria-describedby=":r7:-loading-announcement"
@@ -616,841 +636,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           </span>
         </button>
         <div
-          class="flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-80"
-        >
-          <div
-            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-            data-align="center"
-            data-direction="horizontal"
-            data-gap="none"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
-          >
-            <button
-              aria-describedby=":r9:-loading-announcement"
-              aria-labelledby=":r8:"
-              class="types__StyledButton-sc-ws60qy-0 kQRupk"
-              data-component="IconButton"
-              data-loading="false"
-              data-no-visuals="true"
-              data-size="small"
-              data-testid="account-issues"
-              sx="[object Object]"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-issue-opened"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
-                />
-                <path
-                  d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"
-                />
-              </svg>
-            </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":r8:"
-              popover="auto"
-            >
-              My Issues
-            </span>
-            <button
-              aria-describedby=":rb:-loading-announcement"
-              aria-labelledby=":ra:"
-              class="types__StyledButton-sc-ws60qy-0 kQRupk"
-              data-component="IconButton"
-              data-loading="false"
-              data-no-visuals="true"
-              data-size="small"
-              data-testid="account-pull-requests"
-              sx="[object Object]"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-git-pull-request"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M1.5 3.25a2.25 2.25 0 1 1 3 2.122v5.256a2.251 2.251 0 1 1-1.5 0V5.372A2.25 2.25 0 0 1 1.5 3.25Zm5.677-.177L9.573.677A.25.25 0 0 1 10 .854V2.5h1A2.5 2.5 0 0 1 13.5 5v5.628a2.251 2.251 0 1 1-1.5 0V5a1 1 0 0 0-1-1h-1v1.646a.25.25 0 0 1-.427.177L7.177 3.427a.25.25 0 0 1 0-.354ZM3.75 2.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm0 9.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm8.25.75a.75.75 0 1 0 1.5 0 .75.75 0 0 0-1.5 0Z"
-                />
-              </svg>
-            </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":ra:"
-              popover="auto"
-            >
-              My Pull Requests
-            </span>
-            <button
-              aria-describedby=":rd:-loading-announcement"
-              aria-labelledby=":rc:"
-              class="types__StyledButton-sc-ws60qy-0 kQRupk"
-              data-component="IconButton"
-              data-loading="false"
-              data-no-visuals="true"
-              data-size="small"
-              data-testid="account-toggle"
-              sx="[object Object]"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-chevron-down"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"
-                />
-              </svg>
-            </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":rc:"
-              popover="auto"
-            >
-              Hide account notifications
-            </span>
-          </div>
-        </div>
-      </div>
-      <div
-        class="group flex border-b pl-3 pr-1 py-1.5 text-gitify-font border-gitify-notifications-border bg-gitify-notifications-rest hover:bg-gitify-notifications-hover"
-        id="138661096"
-      >
-        <div
-          class="mr-3 flex items-center justify-center"
-        >
-          <span
-            aria-label="Open Issue"
-            class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-e"
-            id=":re:"
-            role="tooltip"
-          >
-            <svg
-              aria-hidden="true"
-              class="octicon octicon-issue-opened text-primer-open"
-              display="inline-block"
-              fill="currentColor"
-              focusable="false"
-              height="18"
-              overflow="visible"
-              style="vertical-align: text-bottom;"
-              viewBox="0 0 16 16"
-              width="18"
-            >
-              <path
-                d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
-              />
-              <path
-                d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"
-              />
-            </svg>
-          </span>
-        </div>
-        <div
-          class="flex-1 truncate cursor-pointer"
-        >
-          <span
-            aria-label="View repository: gitify-app/notifications-test"
-            class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-se"
-            id=":rf:"
-            role="tooltip"
-          >
-            <div
-              data-testid="view-repository"
-            >
-              <div
-                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-                data-align="center"
-                data-direction="horizontal"
-                data-gap="condensed"
-                data-justify="start"
-                data-padding="none"
-                data-wrap="nowrap"
-              >
-                <img
-                  alt=""
-                  class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
-                  data-component="Avatar"
-                  height="14"
-                  size="14"
-                  src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-                  sx="[object Object]"
-                  width="14"
-                />
-                <span
-                  class="text-xs font-medium"
-                >
-                  gitify-app/notifications-test
-                </span>
-              </div>
-            </div>
-          </span>
-          <div
-            class="flex gap-1 items-center mb-1 truncate text-sm"
-            data-testid="notification-row"
-            title="I am a robot and this is a test!"
-          >
-            <span
-              class="truncate"
-            >
-              I am a robot and this is a test!
-            </span>
-            <span
-              class="text-xxs opacity-50"
-            />
-          </div>
-          <div
-            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-            data-align="center"
-            data-direction="horizontal"
-            data-gap="condensed"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="wrap"
-          >
-            <img
-              alt=""
-              class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
-              data-component="Avatar"
-              data-testid="view-profile"
-              height="14"
-              size="14"
-              src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-              sx="[object Object]"
-              title="View profile: gitify-app"
-              width="14"
-            />
-            <span
-              class="text-xs opacity-80"
-            >
-              <div
-                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-                data-align="stretch"
-                data-direction="horizontal"
-                data-gap="condensed"
-                data-justify="start"
-                data-padding="none"
-                data-wrap="nowrap"
-              >
-                <span
-                  class="Text-sc-17v1xeu-0 hmAFGJ"
-                  title="You're watching the repository."
-                >
-                  Updated
-                </span>
-                <span
-                  class="Text-sc-17v1xeu-0 hmAFGJ"
-                >
-                  •
-                </span>
-                <relative-time
-                  class="sc-KXCwU"
-                  datetime="2017-05-20T17:51:57.000Z"
-                >
-                  May 20, 2017
-                </relative-time>
-              </div>
-            </span>
-            <div
-              class="flex"
-            >
-              <button
-                class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
-                title="octocat approved these changes"
-                type="button"
-              >
-                <div
-                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-                  data-align="center"
-                  data-direction="horizontal"
-                  data-gap="condensed"
-                  data-justify="start"
-                  data-padding="none"
-                  data-wrap="nowrap"
-                >
-                  <svg
-                    aria-hidden="true"
-                    class="octicon octicon-check text-primer-open"
-                    display="inline-block"
-                    fill="currentColor"
-                    focusable="false"
-                    height="12"
-                    overflow="visible"
-                    style="vertical-align: text-bottom;"
-                    viewBox="0 0 16 16"
-                    width="12"
-                  >
-                    <path
-                      d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
-                    />
-                  </svg>
-                  <span
-                    class="Text-sc-17v1xeu-0 hmAFGJ"
-                  >
-                    1
-                  </span>
-                </div>
-              </button>
-              <button
-                class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
-                title="gitify-app requested changes"
-                type="button"
-              >
-                <div
-                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-                  data-align="center"
-                  data-direction="horizontal"
-                  data-gap="condensed"
-                  data-justify="start"
-                  data-padding="none"
-                  data-wrap="nowrap"
-                >
-                  <svg
-                    aria-hidden="true"
-                    class="octicon octicon-file-diff text-primer-closed"
-                    display="inline-block"
-                    fill="currentColor"
-                    focusable="false"
-                    height="12"
-                    overflow="visible"
-                    style="vertical-align: text-bottom;"
-                    viewBox="0 0 16 16"
-                    width="12"
-                  >
-                    <path
-                      d="M1 1.75C1 .784 1.784 0 2.75 0h7.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16H2.75A1.75 1.75 0 0 1 1 14.25Zm1.75-.25a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25V4.664a.25.25 0 0 0-.073-.177l-2.914-2.914a.25.25 0 0 0-.177-.073ZM8 3.25a.75.75 0 0 1 .75.75v1.5h1.5a.75.75 0 0 1 0 1.5h-1.5v1.5a.75.75 0 0 1-1.5 0V7h-1.5a.75.75 0 0 1 0-1.5h1.5V4A.75.75 0 0 1 8 3.25Zm-3 8a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1-.75-.75Z"
-                    />
-                  </svg>
-                  <span
-                    class="Text-sc-17v1xeu-0 hmAFGJ"
-                  >
-                    1
-                  </span>
-                </div>
-              </button>
-            </div>
-          </div>
-        </div>
-        <div
-          class="flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-80"
-        >
-          <div
-            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-            data-align="center"
-            data-direction="horizontal"
-            data-gap="none"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
-          >
-            <button
-              aria-describedby=":rh:-loading-announcement"
-              aria-labelledby=":rg:"
-              class="types__StyledButton-sc-ws60qy-0 kQRupk"
-              data-component="IconButton"
-              data-loading="false"
-              data-no-visuals="true"
-              data-size="small"
-              data-testid="notification-mark-as-done"
-              sx="[object Object]"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-check"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
-                />
-              </svg>
-            </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":rg:"
-              popover="auto"
-            >
-              Mark as done
-            </span>
-            <button
-              aria-describedby=":rj:-loading-announcement"
-              aria-labelledby=":ri:"
-              class="types__StyledButton-sc-ws60qy-0 kQRupk"
-              data-component="IconButton"
-              data-loading="false"
-              data-no-visuals="true"
-              data-size="small"
-              data-testid="notification-mark-as-read"
-              sx="[object Object]"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-read"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M7.115.65a1.752 1.752 0 0 1 1.77 0l6.25 3.663c.536.314.865.889.865 1.51v6.427A1.75 1.75 0 0 1 14.25 14H1.75A1.75 1.75 0 0 1 0 12.25V5.823c0-.621.33-1.196.865-1.51Zm1.011 1.293a.252.252 0 0 0-.252 0l-5.72 3.353L6.468 7.76a2.748 2.748 0 0 1 3.066 0l4.312-2.464-5.719-3.353ZM13.15 12.5 8.772 9.06a1.25 1.25 0 0 0-1.544 0L2.85 12.5Zm1.35-5.85-3.687 2.106 3.687 2.897ZM5.187 8.756 1.5 6.65v5.003Z"
-                />
-              </svg>
-            </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":ri:"
-              popover="auto"
-            >
-              Mark as read
-            </span>
-            <button
-              aria-describedby=":rl:-loading-announcement"
-              aria-labelledby=":rk:"
-              class="types__StyledButton-sc-ws60qy-0 kQRupk"
-              data-component="IconButton"
-              data-loading="false"
-              data-no-visuals="true"
-              data-size="small"
-              data-testid="notification-unsubscribe-from-thread"
-              sx="[object Object]"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-bell-slash"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="m4.182 4.31.016.011 10.104 7.316.013.01 1.375.996a.75.75 0 1 1-.88 1.214L13.626 13H2.518a1.516 1.516 0 0 1-1.263-2.36l1.703-2.554A.255.255 0 0 0 3 7.947V5.305L.31 3.357a.75.75 0 1 1 .88-1.214Zm7.373 7.19L4.5 6.391v1.556c0 .346-.102.683-.294.97l-1.703 2.556a.017.017 0 0 0-.003.01c0 .005.002.009.005.012l.006.004.007.001ZM8 1.5c-.997 0-1.895.416-2.534 1.086A.75.75 0 1 1 4.38 1.55 5 5 0 0 1 13 5v2.373a.75.75 0 0 1-1.5 0V5A3.5 3.5 0 0 0 8 1.5ZM8 16a2 2 0 0 1-1.985-1.75c-.017-.137.097-.25.235-.25h3.5c.138 0 .252.113.235.25A2 2 0 0 1 8 16Z"
-                />
-              </svg>
-            </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":rk:"
-              popover="auto"
-            >
-              Unsubscribe from thread
-            </span>
-          </div>
-        </div>
-      </div>
-      <div
-        class="group flex border-b pl-3 pr-1 py-1.5 text-gitify-font border-gitify-notifications-border bg-gitify-notifications-rest hover:bg-gitify-notifications-hover"
-        id="148827438"
-      >
-        <div
-          class="mr-3 flex items-center justify-center"
-        >
-          <span
-            aria-label=" Issue"
-            class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-e"
-            id=":rm:"
-            role="tooltip"
-          >
-            <svg
-              aria-hidden="true"
-              class="octicon octicon-issue-opened text-primer-muted"
-              display="inline-block"
-              fill="currentColor"
-              focusable="false"
-              height="18"
-              overflow="visible"
-              style="vertical-align: text-bottom;"
-              viewBox="0 0 16 16"
-              width="18"
-            >
-              <path
-                d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
-              />
-              <path
-                d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"
-              />
-            </svg>
-          </span>
-        </div>
-        <div
-          class="flex-1 truncate cursor-pointer"
-        >
-          <span
-            aria-label="View repository: gitify-app/notifications-test"
-            class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-se"
-            id=":rn:"
-            role="tooltip"
-          >
-            <div
-              data-testid="view-repository"
-            >
-              <div
-                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-                data-align="center"
-                data-direction="horizontal"
-                data-gap="condensed"
-                data-justify="start"
-                data-padding="none"
-                data-wrap="nowrap"
-              >
-                <img
-                  alt=""
-                  class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
-                  data-component="Avatar"
-                  height="14"
-                  size="14"
-                  src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-                  sx="[object Object]"
-                  width="14"
-                />
-                <span
-                  class="text-xs font-medium"
-                >
-                  gitify-app/notifications-test
-                </span>
-              </div>
-            </div>
-          </span>
-          <div
-            class="flex gap-1 items-center mb-1 truncate text-sm"
-            data-testid="notification-row"
-            title="Improve the UI"
-          >
-            <span
-              class="truncate"
-            >
-              Improve the UI
-            </span>
-            <span
-              class="text-xxs opacity-50"
-            />
-          </div>
-          <div
-            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-            data-align="center"
-            data-direction="horizontal"
-            data-gap="condensed"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="wrap"
-          >
-            <svg
-              aria-hidden="true"
-              class="octicon octicon-feed-person text-primer-muted"
-              display="inline-block"
-              fill="currentColor"
-              focusable="false"
-              height="14"
-              overflow="visible"
-              style="vertical-align: text-bottom;"
-              viewBox="0 0 16 16"
-              width="14"
-            >
-              <path
-                d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
-              />
-            </svg>
-            <span
-              class="text-xs opacity-80"
-            >
-              <div
-                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-                data-align="stretch"
-                data-direction="horizontal"
-                data-gap="condensed"
-                data-justify="start"
-                data-padding="none"
-                data-wrap="nowrap"
-              >
-                <span
-                  class="Text-sc-17v1xeu-0 hmAFGJ"
-                  title="You created the thread."
-                >
-                  Authored
-                </span>
-                <span
-                  class="Text-sc-17v1xeu-0 hmAFGJ"
-                >
-                  •
-                </span>
-                <relative-time
-                  class="sc-KXCwU"
-                  datetime="2017-05-20T17:06:34.000Z"
-                >
-                  May 20, 2017
-                </relative-time>
-              </div>
-            </span>
-            <div
-              class="flex"
-            />
-          </div>
-        </div>
-        <div
-          class="flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-80"
-        >
-          <div
-            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-            data-align="center"
-            data-direction="horizontal"
-            data-gap="none"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
-          >
-            <button
-              aria-describedby=":rp:-loading-announcement"
-              aria-labelledby=":ro:"
-              class="types__StyledButton-sc-ws60qy-0 kQRupk"
-              data-component="IconButton"
-              data-loading="false"
-              data-no-visuals="true"
-              data-size="small"
-              data-testid="notification-mark-as-done"
-              sx="[object Object]"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-check"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
-                />
-              </svg>
-            </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":ro:"
-              popover="auto"
-            >
-              Mark as done
-            </span>
-            <button
-              aria-describedby=":rr:-loading-announcement"
-              aria-labelledby=":rq:"
-              class="types__StyledButton-sc-ws60qy-0 kQRupk"
-              data-component="IconButton"
-              data-loading="false"
-              data-no-visuals="true"
-              data-size="small"
-              data-testid="notification-mark-as-read"
-              sx="[object Object]"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-read"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M7.115.65a1.752 1.752 0 0 1 1.77 0l6.25 3.663c.536.314.865.889.865 1.51v6.427A1.75 1.75 0 0 1 14.25 14H1.75A1.75 1.75 0 0 1 0 12.25V5.823c0-.621.33-1.196.865-1.51Zm1.011 1.293a.252.252 0 0 0-.252 0l-5.72 3.353L6.468 7.76a2.748 2.748 0 0 1 3.066 0l4.312-2.464-5.719-3.353ZM13.15 12.5 8.772 9.06a1.25 1.25 0 0 0-1.544 0L2.85 12.5Zm1.35-5.85-3.687 2.106 3.687 2.897ZM5.187 8.756 1.5 6.65v5.003Z"
-                />
-              </svg>
-            </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":rq:"
-              popover="auto"
-            >
-              Mark as read
-            </span>
-            <button
-              aria-describedby=":rt:-loading-announcement"
-              aria-labelledby=":rs:"
-              class="types__StyledButton-sc-ws60qy-0 kQRupk"
-              data-component="IconButton"
-              data-loading="false"
-              data-no-visuals="true"
-              data-size="small"
-              data-testid="notification-unsubscribe-from-thread"
-              sx="[object Object]"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-bell-slash"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="m4.182 4.31.016.011 10.104 7.316.013.01 1.375.996a.75.75 0 1 1-.88 1.214L13.626 13H2.518a1.516 1.516 0 0 1-1.263-2.36l1.703-2.554A.255.255 0 0 0 3 7.947V5.305L.31 3.357a.75.75 0 1 1 .88-1.214Zm7.373 7.19L4.5 6.391v1.556c0 .346-.102.683-.294.97l-1.703 2.556a.017.017 0 0 0-.003.01c0 .005.002.009.005.012l.006.004.007.001ZM8 1.5c-.997 0-1.895.416-2.534 1.086A.75.75 0 1 1 4.38 1.55 5 5 0 0 1 13 5v2.373a.75.75 0 0 1-1.5 0V5A3.5 3.5 0 0 0 8 1.5ZM8 16a2 2 0 0 1-1.985-1.75c-.017-.137.097-.25.235-.25h3.5c.138 0 .252.113.235.25A2 2 0 0 1 8 16Z"
-                />
-              </svg>
-            </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":rs:"
-              popover="auto"
-            >
-              Unsubscribe from thread
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </body>,
-  "container": <div>
-    <div
-      class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-accounts-rest"
-    >
-      <button
-        aria-describedby=":r7:-loading-announcement"
-        class="types__StyledButton-sc-ws60qy-0 kQRupk"
-        data-loading="false"
-        data-no-visuals="true"
-        data-testid="account-profile"
-        sx="[object Object]"
-        title="Open account profile"
-        type="button"
-      >
-        <span
-          class="Box-sc-g0xbh4-0 srpGE"
-          data-component="buttonContent"
-          sx="[object Object]"
-        >
-          <span
-            data-component="text"
-          >
-            <div
-              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-              data-align="center"
-              data-direction="horizontal"
-              data-gap="condensed"
-              data-justify="start"
-              data-padding="none"
-              data-wrap="nowrap"
-            >
-              <img
-                alt=""
-                class="Avatar__StyledAvatar-sc-2lv0r8-0 kuZlm"
-                data-component="Avatar"
-                height="16"
-                size="16"
-                src="https://avatars.githubusercontent.com/u/583231?v=4"
-                sx="[object Object]"
-                width="16"
-              />
-              <span
-                class="Text-sc-17v1xeu-0 hmAFGJ"
-              >
-                @
-                octocat
-              </span>
-            </div>
-          </span>
-          <span
-            class="Box-sc-g0xbh4-0 mhHOW"
-            data-component="trailingVisual"
-            sx="[object Object]"
-          >
-            <span
-              aria-hidden="true"
-              class="Box-sc-g0xbh4-0 bfvZWv"
-              data-component="ButtonCounter"
-              sx="[object Object]"
-            >
-              2
-            </span>
-            <span
-              class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 hxuUuW"
-            >
-               (
-              2
-              )
-            </span>
-          </span>
-        </span>
-      </button>
-      <div
-        class="flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-80"
-      >
-        <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY opacity-0 transition-opacity group-hover:opacity-80"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -1577,123 +763,119 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           </span>
         </div>
       </div>
-    </div>
-    <div
-      class="group flex border-b pl-3 pr-1 py-1.5 text-gitify-font border-gitify-notifications-border bg-gitify-notifications-rest hover:bg-gitify-notifications-hover"
-      id="138661096"
-    >
       <div
-        class="mr-3 flex items-center justify-center"
+        class="group flex border-b pl-3 pr-1 py-1.5 text-gitify-font border-gitify-notification-border hover:bg-gitify-notification-hover"
+        id="138661096"
       >
-        <span
-          aria-label="Open Issue"
-          class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-e"
-          id=":re:"
-          role="tooltip"
-        >
-          <svg
-            aria-hidden="true"
-            class="octicon octicon-issue-opened text-primer-open"
-            display="inline-block"
-            fill="currentColor"
-            focusable="false"
-            height="18"
-            overflow="visible"
-            style="vertical-align: text-bottom;"
-            viewBox="0 0 16 16"
-            width="18"
-          >
-            <path
-              d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
-            />
-            <path
-              d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"
-            />
-          </svg>
-        </span>
-      </div>
-      <div
-        class="flex-1 truncate cursor-pointer"
-      >
-        <span
-          aria-label="View repository: gitify-app/notifications-test"
-          class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-se"
-          id=":rf:"
-          role="tooltip"
-        >
-          <div
-            data-testid="view-repository"
-          >
-            <div
-              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-              data-align="center"
-              data-direction="horizontal"
-              data-gap="condensed"
-              data-justify="start"
-              data-padding="none"
-              data-wrap="nowrap"
-            >
-              <img
-                alt=""
-                class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
-                data-component="Avatar"
-                height="14"
-                size="14"
-                src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-                sx="[object Object]"
-                width="14"
-              />
-              <span
-                class="text-xs font-medium"
-              >
-                gitify-app/notifications-test
-              </span>
-            </div>
-          </div>
-        </span>
         <div
-          class="flex gap-1 items-center mb-1 truncate text-sm"
-          data-testid="notification-row"
-          title="I am a robot and this is a test!"
+          class="mr-3 flex items-center justify-center"
         >
           <span
-            class="truncate"
+            aria-label="Open Issue"
+            class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-e"
+            id=":re:"
+            role="tooltip"
           >
-            I am a robot and this is a test!
+            <svg
+              aria-hidden="true"
+              class="octicon octicon-issue-opened text-gitify-icon-open"
+              display="inline-block"
+              fill="currentColor"
+              focusable="false"
+              height="18"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
+              viewBox="0 0 16 16"
+              width="18"
+            >
+              <path
+                d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
+              />
+              <path
+                d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"
+              />
+            </svg>
           </span>
-          <span
-            class="text-xxs opacity-50"
-          />
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-          data-align="center"
-          data-direction="horizontal"
-          data-gap="condensed"
-          data-justify="start"
-          data-padding="none"
-          data-wrap="wrap"
+          class="flex-1 truncate cursor-pointer"
         >
-          <img
-            alt=""
-            class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
-            data-component="Avatar"
-            data-testid="view-profile"
-            height="14"
-            size="14"
-            src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-            sx="[object Object]"
-            title="View profile: gitify-app"
-            width="14"
-          />
           <span
-            class="text-xs opacity-80"
+            aria-label="View repository: gitify-app/notifications-test"
+            class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-se"
+            id=":rf:"
+            role="tooltip"
           >
+            <div
+              data-testid="view-repository"
+            >
+              <div
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+                data-align="center"
+                data-direction="horizontal"
+                data-gap="condensed"
+                data-justify="start"
+                data-padding="none"
+                data-wrap="nowrap"
+              >
+                <img
+                  alt=""
+                  class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
+                  data-component="Avatar"
+                  height="14"
+                  size="14"
+                  src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+                  sx="[object Object]"
+                  width="14"
+                />
+                <span
+                  class="text-xs font-medium"
+                >
+                  gitify-app/notifications-test
+                </span>
+              </div>
+            </div>
+          </span>
+          <div
+            class="flex gap-1 items-center mb-1 truncate text-sm"
+            data-testid="notification-row"
+            title="I am a robot and this is a test!"
+          >
+            <span
+              class="truncate"
+            >
+              I am a robot and this is a test!
+            </span>
+            <span
+              class="text-xxs opacity-50"
+            />
+          </div>
+          <div
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-xs opacity-80"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="wrap"
+          >
+            <img
+              alt=""
+              class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
+              data-component="Avatar"
+              data-testid="view-profile"
+              height="14"
+              size="14"
+              src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+              sx="[object Object]"
+              title="View profile: gitify-app"
+              width="14"
+            />
             <div
               class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
               data-align="stretch"
               data-direction="horizontal"
-              data-gap="condensed"
+              data-gap="none"
               data-justify="start"
               data-padding="none"
               data-wrap="nowrap"
@@ -1705,7 +887,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 Updated
               </span>
               <span
-                class="Text-sc-17v1xeu-0 hmAFGJ"
+                class="Text-sc-17v1xeu-0 hmAFGJ px-1"
               >
                 •
               </span>
@@ -1716,92 +898,88 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 May 20, 2017
               </relative-time>
             </div>
-          </span>
-          <div
-            class="flex"
-          >
-            <button
-              class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
-              title="octocat approved these changes"
-              type="button"
+            <div
+              class="Box-sc-g0xbh4-0 flex gap-1"
             >
-              <div
-                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-                data-align="center"
-                data-direction="horizontal"
-                data-gap="condensed"
-                data-justify="start"
-                data-padding="none"
-                data-wrap="nowrap"
+              <span
+                class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
+                title="octocat approved these changes"
+                variant="secondary"
               >
-                <svg
-                  aria-hidden="true"
-                  class="octicon octicon-check text-primer-open"
-                  display="inline-block"
-                  fill="currentColor"
-                  focusable="false"
-                  height="12"
-                  overflow="visible"
-                  style="vertical-align: text-bottom;"
-                  viewBox="0 0 16 16"
-                  width="12"
+                <div
+                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+                  data-align="center"
+                  data-direction="horizontal"
+                  data-gap="none"
+                  data-justify="start"
+                  data-padding="none"
+                  data-wrap="nowrap"
                 >
-                  <path
-                    d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
-                  />
-                </svg>
-                <span
-                  class="Text-sc-17v1xeu-0 hmAFGJ"
-                >
-                  1
-                </span>
-              </div>
-            </button>
-            <button
-              class="flex gap-1 items-center text-xxs px-1 m-0.5 rounded-full bg-gitify-pill-rest hover:bg-gitify-pill-hover"
-              title="gitify-app requested changes"
-              type="button"
-            >
-              <div
-                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-                data-align="center"
-                data-direction="horizontal"
-                data-gap="condensed"
-                data-justify="start"
-                data-padding="none"
-                data-wrap="nowrap"
+                  <svg
+                    aria-hidden="true"
+                    class="octicon octicon-check text-gitify-icon-open"
+                    display="inline-block"
+                    fill="currentColor"
+                    focusable="false"
+                    height="12"
+                    overflow="visible"
+                    style="vertical-align: text-bottom;"
+                    viewBox="0 0 16 16"
+                    width="12"
+                  >
+                    <path
+                      d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
+                    />
+                  </svg>
+                  <span
+                    class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
+                  >
+                    1
+                  </span>
+                </div>
+              </span>
+              <span
+                class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
+                title="gitify-app requested changes"
+                variant="secondary"
               >
-                <svg
-                  aria-hidden="true"
-                  class="octicon octicon-file-diff text-primer-closed"
-                  display="inline-block"
-                  fill="currentColor"
-                  focusable="false"
-                  height="12"
-                  overflow="visible"
-                  style="vertical-align: text-bottom;"
-                  viewBox="0 0 16 16"
-                  width="12"
+                <div
+                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+                  data-align="center"
+                  data-direction="horizontal"
+                  data-gap="none"
+                  data-justify="start"
+                  data-padding="none"
+                  data-wrap="nowrap"
                 >
-                  <path
-                    d="M1 1.75C1 .784 1.784 0 2.75 0h7.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16H2.75A1.75 1.75 0 0 1 1 14.25Zm1.75-.25a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25V4.664a.25.25 0 0 0-.073-.177l-2.914-2.914a.25.25 0 0 0-.177-.073ZM8 3.25a.75.75 0 0 1 .75.75v1.5h1.5a.75.75 0 0 1 0 1.5h-1.5v1.5a.75.75 0 0 1-1.5 0V7h-1.5a.75.75 0 0 1 0-1.5h1.5V4A.75.75 0 0 1 8 3.25Zm-3 8a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1-.75-.75Z"
-                  />
-                </svg>
-                <span
-                  class="Text-sc-17v1xeu-0 hmAFGJ"
-                >
-                  1
-                </span>
-              </div>
-            </button>
+                  <svg
+                    aria-hidden="true"
+                    class="octicon octicon-file-diff text-gitify-icon-closed"
+                    display="inline-block"
+                    fill="currentColor"
+                    focusable="false"
+                    height="12"
+                    overflow="visible"
+                    style="vertical-align: text-bottom;"
+                    viewBox="0 0 16 16"
+                    width="12"
+                  >
+                    <path
+                      d="M1 1.75C1 .784 1.784 0 2.75 0h7.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16H2.75A1.75 1.75 0 0 1 1 14.25Zm1.75-.25a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25V4.664a.25.25 0 0 0-.073-.177l-2.914-2.914a.25.25 0 0 0-.177-.073ZM8 3.25a.75.75 0 0 1 .75.75v1.5h1.5a.75.75 0 0 1 0 1.5h-1.5v1.5a.75.75 0 0 1-1.5 0V7h-1.5a.75.75 0 0 1 0-1.5h1.5V4A.75.75 0 0 1 8 3.25Zm-3 8a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1-.75-.75Z"
+                    />
+                  </svg>
+                  <span
+                    class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
+                  >
+                    1
+                  </span>
+                </div>
+              </span>
+            </div>
           </div>
         </div>
-      </div>
-      <div
-        class="flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-80"
-      >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY opacity-0 transition-opacity group-hover:opacity-80"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -1925,127 +1103,123 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           </span>
         </div>
       </div>
-    </div>
-    <div
-      class="group flex border-b pl-3 pr-1 py-1.5 text-gitify-font border-gitify-notifications-border bg-gitify-notifications-rest hover:bg-gitify-notifications-hover"
-      id="148827438"
-    >
       <div
-        class="mr-3 flex items-center justify-center"
+        class="group flex border-b pl-3 pr-1 py-1.5 text-gitify-font border-gitify-notification-border hover:bg-gitify-notification-hover"
+        id="148827438"
       >
-        <span
-          aria-label=" Issue"
-          class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-e"
-          id=":rm:"
-          role="tooltip"
-        >
-          <svg
-            aria-hidden="true"
-            class="octicon octicon-issue-opened text-primer-muted"
-            display="inline-block"
-            fill="currentColor"
-            focusable="false"
-            height="18"
-            overflow="visible"
-            style="vertical-align: text-bottom;"
-            viewBox="0 0 16 16"
-            width="18"
-          >
-            <path
-              d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
-            />
-            <path
-              d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"
-            />
-          </svg>
-        </span>
-      </div>
-      <div
-        class="flex-1 truncate cursor-pointer"
-      >
-        <span
-          aria-label="View repository: gitify-app/notifications-test"
-          class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-se"
-          id=":rn:"
-          role="tooltip"
-        >
-          <div
-            data-testid="view-repository"
-          >
-            <div
-              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-              data-align="center"
-              data-direction="horizontal"
-              data-gap="condensed"
-              data-justify="start"
-              data-padding="none"
-              data-wrap="nowrap"
-            >
-              <img
-                alt=""
-                class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
-                data-component="Avatar"
-                height="14"
-                size="14"
-                src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-                sx="[object Object]"
-                width="14"
-              />
-              <span
-                class="text-xs font-medium"
-              >
-                gitify-app/notifications-test
-              </span>
-            </div>
-          </div>
-        </span>
         <div
-          class="flex gap-1 items-center mb-1 truncate text-sm"
-          data-testid="notification-row"
-          title="Improve the UI"
+          class="mr-3 flex items-center justify-center"
         >
           <span
-            class="truncate"
+            aria-label=" Issue"
+            class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-e"
+            id=":rm:"
+            role="tooltip"
           >
-            Improve the UI
+            <svg
+              aria-hidden="true"
+              class="octicon octicon-issue-opened text-gitify-icon-muted"
+              display="inline-block"
+              fill="currentColor"
+              focusable="false"
+              height="18"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
+              viewBox="0 0 16 16"
+              width="18"
+            >
+              <path
+                d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
+              />
+              <path
+                d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"
+              />
+            </svg>
           </span>
-          <span
-            class="text-xxs opacity-50"
-          />
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-          data-align="center"
-          data-direction="horizontal"
-          data-gap="condensed"
-          data-justify="start"
-          data-padding="none"
-          data-wrap="wrap"
+          class="flex-1 truncate cursor-pointer"
         >
-          <svg
-            aria-hidden="true"
-            class="octicon octicon-feed-person text-primer-muted"
-            display="inline-block"
-            fill="currentColor"
-            focusable="false"
-            height="14"
-            overflow="visible"
-            style="vertical-align: text-bottom;"
-            viewBox="0 0 16 16"
-            width="14"
-          >
-            <path
-              d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
-            />
-          </svg>
           <span
-            class="text-xs opacity-80"
+            aria-label="View repository: gitify-app/notifications-test"
+            class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-se"
+            id=":rn:"
+            role="tooltip"
           >
+            <div
+              data-testid="view-repository"
+            >
+              <div
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+                data-align="center"
+                data-direction="horizontal"
+                data-gap="condensed"
+                data-justify="start"
+                data-padding="none"
+                data-wrap="nowrap"
+              >
+                <img
+                  alt=""
+                  class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
+                  data-component="Avatar"
+                  height="14"
+                  size="14"
+                  src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+                  sx="[object Object]"
+                  width="14"
+                />
+                <span
+                  class="text-xs font-medium"
+                >
+                  gitify-app/notifications-test
+                </span>
+              </div>
+            </div>
+          </span>
+          <div
+            class="flex gap-1 items-center mb-1 truncate text-sm"
+            data-testid="notification-row"
+            title="Improve the UI"
+          >
+            <span
+              class="truncate"
+            >
+              Improve the UI
+            </span>
+            <span
+              class="text-xxs opacity-50"
+            />
+          </div>
+          <div
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-xs opacity-80"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="wrap"
+          >
+            <svg
+              aria-hidden="true"
+              class="octicon octicon-feed-person text-gitify-icon-muted"
+              display="inline-block"
+              fill="currentColor"
+              focusable="false"
+              height="14"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
+              viewBox="0 0 16 16"
+              width="14"
+            >
+              <path
+                d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
+              />
+            </svg>
             <div
               class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
               data-align="stretch"
               data-direction="horizontal"
-              data-gap="condensed"
+              data-gap="none"
               data-justify="start"
               data-padding="none"
               data-wrap="nowrap"
@@ -2057,7 +1231,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 Authored
               </span>
               <span
-                class="Text-sc-17v1xeu-0 hmAFGJ"
+                class="Text-sc-17v1xeu-0 hmAFGJ px-1"
               >
                 •
               </span>
@@ -2068,17 +1242,13 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 May 20, 2017
               </relative-time>
             </div>
-          </span>
-          <div
-            class="flex"
-          />
+            <div
+              class="Box-sc-g0xbh4-0 flex gap-1"
+            />
+          </div>
         </div>
-      </div>
-      <div
-        class="flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-80"
-      >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY opacity-0 transition-opacity group-hover:opacity-80"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -2203,6 +1373,816 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
         </div>
       </div>
     </div>
+  </body>,
+  "container": <div>
+    <div
+      class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold bg-gitify-account-rest"
+    >
+      <button
+        aria-describedby=":r7:-loading-announcement"
+        class="types__StyledButton-sc-ws60qy-0 kQRupk"
+        data-loading="false"
+        data-no-visuals="true"
+        data-testid="account-profile"
+        sx="[object Object]"
+        title="Open account profile"
+        type="button"
+      >
+        <span
+          class="Box-sc-g0xbh4-0 srpGE"
+          data-component="buttonContent"
+          sx="[object Object]"
+        >
+          <span
+            data-component="text"
+          >
+            <div
+              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+              data-align="center"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+            >
+              <img
+                alt=""
+                class="Avatar__StyledAvatar-sc-2lv0r8-0 kuZlm"
+                data-component="Avatar"
+                height="16"
+                size="16"
+                src="https://avatars.githubusercontent.com/u/583231?v=4"
+                sx="[object Object]"
+                width="16"
+              />
+              <span
+                class="Text-sc-17v1xeu-0 hmAFGJ"
+              >
+                @
+                octocat
+              </span>
+            </div>
+          </span>
+          <span
+            class="Box-sc-g0xbh4-0 mhHOW"
+            data-component="trailingVisual"
+            sx="[object Object]"
+          >
+            <span
+              aria-hidden="true"
+              class="Box-sc-g0xbh4-0 bfvZWv"
+              data-component="ButtonCounter"
+              sx="[object Object]"
+            >
+              2
+            </span>
+            <span
+              class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 hxuUuW"
+            >
+               (
+              2
+              )
+            </span>
+          </span>
+        </span>
+      </button>
+      <div
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY opacity-0 transition-opacity group-hover:opacity-80"
+        data-align="center"
+        data-direction="horizontal"
+        data-gap="none"
+        data-justify="start"
+        data-padding="none"
+        data-wrap="nowrap"
+      >
+        <button
+          aria-describedby=":r9:-loading-announcement"
+          aria-labelledby=":r8:"
+          class="types__StyledButton-sc-ws60qy-0 kQRupk"
+          data-component="IconButton"
+          data-loading="false"
+          data-no-visuals="true"
+          data-size="small"
+          data-testid="account-issues"
+          sx="[object Object]"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="octicon octicon-issue-opened"
+            display="inline-block"
+            fill="currentColor"
+            focusable="false"
+            height="16"
+            overflow="visible"
+            style="vertical-align: text-bottom;"
+            viewBox="0 0 16 16"
+            width="16"
+          >
+            <path
+              d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
+            />
+            <path
+              d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"
+            />
+          </svg>
+        </button>
+        <span
+          aria-hidden="true"
+          class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
+          data-direction="s"
+          id=":r8:"
+          popover="auto"
+        >
+          My Issues
+        </span>
+        <button
+          aria-describedby=":rb:-loading-announcement"
+          aria-labelledby=":ra:"
+          class="types__StyledButton-sc-ws60qy-0 kQRupk"
+          data-component="IconButton"
+          data-loading="false"
+          data-no-visuals="true"
+          data-size="small"
+          data-testid="account-pull-requests"
+          sx="[object Object]"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="octicon octicon-git-pull-request"
+            display="inline-block"
+            fill="currentColor"
+            focusable="false"
+            height="16"
+            overflow="visible"
+            style="vertical-align: text-bottom;"
+            viewBox="0 0 16 16"
+            width="16"
+          >
+            <path
+              d="M1.5 3.25a2.25 2.25 0 1 1 3 2.122v5.256a2.251 2.251 0 1 1-1.5 0V5.372A2.25 2.25 0 0 1 1.5 3.25Zm5.677-.177L9.573.677A.25.25 0 0 1 10 .854V2.5h1A2.5 2.5 0 0 1 13.5 5v5.628a2.251 2.251 0 1 1-1.5 0V5a1 1 0 0 0-1-1h-1v1.646a.25.25 0 0 1-.427.177L7.177 3.427a.25.25 0 0 1 0-.354ZM3.75 2.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm0 9.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm8.25.75a.75.75 0 1 0 1.5 0 .75.75 0 0 0-1.5 0Z"
+            />
+          </svg>
+        </button>
+        <span
+          aria-hidden="true"
+          class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
+          data-direction="s"
+          id=":ra:"
+          popover="auto"
+        >
+          My Pull Requests
+        </span>
+        <button
+          aria-describedby=":rd:-loading-announcement"
+          aria-labelledby=":rc:"
+          class="types__StyledButton-sc-ws60qy-0 kQRupk"
+          data-component="IconButton"
+          data-loading="false"
+          data-no-visuals="true"
+          data-size="small"
+          data-testid="account-toggle"
+          sx="[object Object]"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="octicon octicon-chevron-down"
+            display="inline-block"
+            fill="currentColor"
+            focusable="false"
+            height="16"
+            overflow="visible"
+            style="vertical-align: text-bottom;"
+            viewBox="0 0 16 16"
+            width="16"
+          >
+            <path
+              d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"
+            />
+          </svg>
+        </button>
+        <span
+          aria-hidden="true"
+          class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
+          data-direction="s"
+          id=":rc:"
+          popover="auto"
+        >
+          Hide account notifications
+        </span>
+      </div>
+    </div>
+    <div
+      class="group flex border-b pl-3 pr-1 py-1.5 text-gitify-font border-gitify-notification-border hover:bg-gitify-notification-hover"
+      id="138661096"
+    >
+      <div
+        class="mr-3 flex items-center justify-center"
+      >
+        <span
+          aria-label="Open Issue"
+          class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-e"
+          id=":re:"
+          role="tooltip"
+        >
+          <svg
+            aria-hidden="true"
+            class="octicon octicon-issue-opened text-gitify-icon-open"
+            display="inline-block"
+            fill="currentColor"
+            focusable="false"
+            height="18"
+            overflow="visible"
+            style="vertical-align: text-bottom;"
+            viewBox="0 0 16 16"
+            width="18"
+          >
+            <path
+              d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
+            />
+            <path
+              d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"
+            />
+          </svg>
+        </span>
+      </div>
+      <div
+        class="flex-1 truncate cursor-pointer"
+      >
+        <span
+          aria-label="View repository: gitify-app/notifications-test"
+          class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-se"
+          id=":rf:"
+          role="tooltip"
+        >
+          <div
+            data-testid="view-repository"
+          >
+            <div
+              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+              data-align="center"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+            >
+              <img
+                alt=""
+                class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
+                data-component="Avatar"
+                height="14"
+                size="14"
+                src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+                sx="[object Object]"
+                width="14"
+              />
+              <span
+                class="text-xs font-medium"
+              >
+                gitify-app/notifications-test
+              </span>
+            </div>
+          </div>
+        </span>
+        <div
+          class="flex gap-1 items-center mb-1 truncate text-sm"
+          data-testid="notification-row"
+          title="I am a robot and this is a test!"
+        >
+          <span
+            class="truncate"
+          >
+            I am a robot and this is a test!
+          </span>
+          <span
+            class="text-xxs opacity-50"
+          />
+        </div>
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-xs opacity-80"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="wrap"
+        >
+          <img
+            alt=""
+            class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
+            data-component="Avatar"
+            data-testid="view-profile"
+            height="14"
+            size="14"
+            src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+            sx="[object Object]"
+            title="View profile: gitify-app"
+            width="14"
+          />
+          <div
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+            data-align="stretch"
+            data-direction="horizontal"
+            data-gap="none"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <span
+              class="Text-sc-17v1xeu-0 hmAFGJ"
+              title="You're watching the repository."
+            >
+              Updated
+            </span>
+            <span
+              class="Text-sc-17v1xeu-0 hmAFGJ px-1"
+            >
+              •
+            </span>
+            <relative-time
+              class="sc-KXCwU"
+              datetime="2017-05-20T17:51:57.000Z"
+            >
+              May 20, 2017
+            </relative-time>
+          </div>
+          <div
+            class="Box-sc-g0xbh4-0 flex gap-1"
+          >
+            <span
+              class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
+              title="octocat approved these changes"
+              variant="secondary"
+            >
+              <div
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+                data-align="center"
+                data-direction="horizontal"
+                data-gap="none"
+                data-justify="start"
+                data-padding="none"
+                data-wrap="nowrap"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="octicon octicon-check text-gitify-icon-open"
+                  display="inline-block"
+                  fill="currentColor"
+                  focusable="false"
+                  height="12"
+                  overflow="visible"
+                  style="vertical-align: text-bottom;"
+                  viewBox="0 0 16 16"
+                  width="12"
+                >
+                  <path
+                    d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
+                  />
+                </svg>
+                <span
+                  class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
+                >
+                  1
+                </span>
+              </div>
+            </span>
+            <span
+              class="Label__StyledLabel-sc-1dgcne-0 bEDWlT hover:bg-gitify-notification-pill-hover"
+              title="gitify-app requested changes"
+              variant="secondary"
+            >
+              <div
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+                data-align="center"
+                data-direction="horizontal"
+                data-gap="none"
+                data-justify="start"
+                data-padding="none"
+                data-wrap="nowrap"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="octicon octicon-file-diff text-gitify-icon-closed"
+                  display="inline-block"
+                  fill="currentColor"
+                  focusable="false"
+                  height="12"
+                  overflow="visible"
+                  style="vertical-align: text-bottom;"
+                  viewBox="0 0 16 16"
+                  width="12"
+                >
+                  <path
+                    d="M1 1.75C1 .784 1.784 0 2.75 0h7.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16H2.75A1.75 1.75 0 0 1 1 14.25Zm1.75-.25a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25V4.664a.25.25 0 0 0-.073-.177l-2.914-2.914a.25.25 0 0 0-.177-.073ZM8 3.25a.75.75 0 0 1 .75.75v1.5h1.5a.75.75 0 0 1 0 1.5h-1.5v1.5a.75.75 0 0 1-1.5 0V7h-1.5a.75.75 0 0 1 0-1.5h1.5V4A.75.75 0 0 1 8 3.25Zm-3 8a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1-.75-.75Z"
+                  />
+                </svg>
+                <span
+                  class="Text-sc-17v1xeu-0 hmAFGJ text-xxs px-1"
+                >
+                  1
+                </span>
+              </div>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY opacity-0 transition-opacity group-hover:opacity-80"
+        data-align="center"
+        data-direction="horizontal"
+        data-gap="none"
+        data-justify="start"
+        data-padding="none"
+        data-wrap="nowrap"
+      >
+        <button
+          aria-describedby=":rh:-loading-announcement"
+          aria-labelledby=":rg:"
+          class="types__StyledButton-sc-ws60qy-0 kQRupk"
+          data-component="IconButton"
+          data-loading="false"
+          data-no-visuals="true"
+          data-size="small"
+          data-testid="notification-mark-as-done"
+          sx="[object Object]"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="octicon octicon-check"
+            display="inline-block"
+            fill="currentColor"
+            focusable="false"
+            height="16"
+            overflow="visible"
+            style="vertical-align: text-bottom;"
+            viewBox="0 0 16 16"
+            width="16"
+          >
+            <path
+              d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
+            />
+          </svg>
+        </button>
+        <span
+          aria-hidden="true"
+          class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
+          data-direction="s"
+          id=":rg:"
+          popover="auto"
+        >
+          Mark as done
+        </span>
+        <button
+          aria-describedby=":rj:-loading-announcement"
+          aria-labelledby=":ri:"
+          class="types__StyledButton-sc-ws60qy-0 kQRupk"
+          data-component="IconButton"
+          data-loading="false"
+          data-no-visuals="true"
+          data-size="small"
+          data-testid="notification-mark-as-read"
+          sx="[object Object]"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="octicon octicon-read"
+            display="inline-block"
+            fill="currentColor"
+            focusable="false"
+            height="16"
+            overflow="visible"
+            style="vertical-align: text-bottom;"
+            viewBox="0 0 16 16"
+            width="16"
+          >
+            <path
+              d="M7.115.65a1.752 1.752 0 0 1 1.77 0l6.25 3.663c.536.314.865.889.865 1.51v6.427A1.75 1.75 0 0 1 14.25 14H1.75A1.75 1.75 0 0 1 0 12.25V5.823c0-.621.33-1.196.865-1.51Zm1.011 1.293a.252.252 0 0 0-.252 0l-5.72 3.353L6.468 7.76a2.748 2.748 0 0 1 3.066 0l4.312-2.464-5.719-3.353ZM13.15 12.5 8.772 9.06a1.25 1.25 0 0 0-1.544 0L2.85 12.5Zm1.35-5.85-3.687 2.106 3.687 2.897ZM5.187 8.756 1.5 6.65v5.003Z"
+            />
+          </svg>
+        </button>
+        <span
+          aria-hidden="true"
+          class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
+          data-direction="s"
+          id=":ri:"
+          popover="auto"
+        >
+          Mark as read
+        </span>
+        <button
+          aria-describedby=":rl:-loading-announcement"
+          aria-labelledby=":rk:"
+          class="types__StyledButton-sc-ws60qy-0 kQRupk"
+          data-component="IconButton"
+          data-loading="false"
+          data-no-visuals="true"
+          data-size="small"
+          data-testid="notification-unsubscribe-from-thread"
+          sx="[object Object]"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="octicon octicon-bell-slash"
+            display="inline-block"
+            fill="currentColor"
+            focusable="false"
+            height="16"
+            overflow="visible"
+            style="vertical-align: text-bottom;"
+            viewBox="0 0 16 16"
+            width="16"
+          >
+            <path
+              d="m4.182 4.31.016.011 10.104 7.316.013.01 1.375.996a.75.75 0 1 1-.88 1.214L13.626 13H2.518a1.516 1.516 0 0 1-1.263-2.36l1.703-2.554A.255.255 0 0 0 3 7.947V5.305L.31 3.357a.75.75 0 1 1 .88-1.214Zm7.373 7.19L4.5 6.391v1.556c0 .346-.102.683-.294.97l-1.703 2.556a.017.017 0 0 0-.003.01c0 .005.002.009.005.012l.006.004.007.001ZM8 1.5c-.997 0-1.895.416-2.534 1.086A.75.75 0 1 1 4.38 1.55 5 5 0 0 1 13 5v2.373a.75.75 0 0 1-1.5 0V5A3.5 3.5 0 0 0 8 1.5ZM8 16a2 2 0 0 1-1.985-1.75c-.017-.137.097-.25.235-.25h3.5c.138 0 .252.113.235.25A2 2 0 0 1 8 16Z"
+            />
+          </svg>
+        </button>
+        <span
+          aria-hidden="true"
+          class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
+          data-direction="s"
+          id=":rk:"
+          popover="auto"
+        >
+          Unsubscribe from thread
+        </span>
+      </div>
+    </div>
+    <div
+      class="group flex border-b pl-3 pr-1 py-1.5 text-gitify-font border-gitify-notification-border hover:bg-gitify-notification-hover"
+      id="148827438"
+    >
+      <div
+        class="mr-3 flex items-center justify-center"
+      >
+        <span
+          aria-label=" Issue"
+          class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-e"
+          id=":rm:"
+          role="tooltip"
+        >
+          <svg
+            aria-hidden="true"
+            class="octicon octicon-issue-opened text-gitify-icon-muted"
+            display="inline-block"
+            fill="currentColor"
+            focusable="false"
+            height="18"
+            overflow="visible"
+            style="vertical-align: text-bottom;"
+            viewBox="0 0 16 16"
+            width="18"
+          >
+            <path
+              d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
+            />
+            <path
+              d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"
+            />
+          </svg>
+        </span>
+      </div>
+      <div
+        class="flex-1 truncate cursor-pointer"
+      >
+        <span
+          aria-label="View repository: gitify-app/notifications-test"
+          class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-se"
+          id=":rn:"
+          role="tooltip"
+        >
+          <div
+            data-testid="view-repository"
+          >
+            <div
+              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+              data-align="center"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+            >
+              <img
+                alt=""
+                class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
+                data-component="Avatar"
+                height="14"
+                size="14"
+                src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+                sx="[object Object]"
+                width="14"
+              />
+              <span
+                class="text-xs font-medium"
+              >
+                gitify-app/notifications-test
+              </span>
+            </div>
+          </div>
+        </span>
+        <div
+          class="flex gap-1 items-center mb-1 truncate text-sm"
+          data-testid="notification-row"
+          title="Improve the UI"
+        >
+          <span
+            class="truncate"
+          >
+            Improve the UI
+          </span>
+          <span
+            class="text-xxs opacity-50"
+          />
+        </div>
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-xs opacity-80"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="wrap"
+        >
+          <svg
+            aria-hidden="true"
+            class="octicon octicon-feed-person text-gitify-icon-muted"
+            display="inline-block"
+            fill="currentColor"
+            focusable="false"
+            height="14"
+            overflow="visible"
+            style="vertical-align: text-bottom;"
+            viewBox="0 0 16 16"
+            width="14"
+          >
+            <path
+              d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
+            />
+          </svg>
+          <div
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+            data-align="stretch"
+            data-direction="horizontal"
+            data-gap="none"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <span
+              class="Text-sc-17v1xeu-0 hmAFGJ"
+              title="You created the thread."
+            >
+              Authored
+            </span>
+            <span
+              class="Text-sc-17v1xeu-0 hmAFGJ px-1"
+            >
+              •
+            </span>
+            <relative-time
+              class="sc-KXCwU"
+              datetime="2017-05-20T17:06:34.000Z"
+            >
+              May 20, 2017
+            </relative-time>
+          </div>
+          <div
+            class="Box-sc-g0xbh4-0 flex gap-1"
+          />
+        </div>
+      </div>
+      <div
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY opacity-0 transition-opacity group-hover:opacity-80"
+        data-align="center"
+        data-direction="horizontal"
+        data-gap="none"
+        data-justify="start"
+        data-padding="none"
+        data-wrap="nowrap"
+      >
+        <button
+          aria-describedby=":rp:-loading-announcement"
+          aria-labelledby=":ro:"
+          class="types__StyledButton-sc-ws60qy-0 kQRupk"
+          data-component="IconButton"
+          data-loading="false"
+          data-no-visuals="true"
+          data-size="small"
+          data-testid="notification-mark-as-done"
+          sx="[object Object]"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="octicon octicon-check"
+            display="inline-block"
+            fill="currentColor"
+            focusable="false"
+            height="16"
+            overflow="visible"
+            style="vertical-align: text-bottom;"
+            viewBox="0 0 16 16"
+            width="16"
+          >
+            <path
+              d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
+            />
+          </svg>
+        </button>
+        <span
+          aria-hidden="true"
+          class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
+          data-direction="s"
+          id=":ro:"
+          popover="auto"
+        >
+          Mark as done
+        </span>
+        <button
+          aria-describedby=":rr:-loading-announcement"
+          aria-labelledby=":rq:"
+          class="types__StyledButton-sc-ws60qy-0 kQRupk"
+          data-component="IconButton"
+          data-loading="false"
+          data-no-visuals="true"
+          data-size="small"
+          data-testid="notification-mark-as-read"
+          sx="[object Object]"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="octicon octicon-read"
+            display="inline-block"
+            fill="currentColor"
+            focusable="false"
+            height="16"
+            overflow="visible"
+            style="vertical-align: text-bottom;"
+            viewBox="0 0 16 16"
+            width="16"
+          >
+            <path
+              d="M7.115.65a1.752 1.752 0 0 1 1.77 0l6.25 3.663c.536.314.865.889.865 1.51v6.427A1.75 1.75 0 0 1 14.25 14H1.75A1.75 1.75 0 0 1 0 12.25V5.823c0-.621.33-1.196.865-1.51Zm1.011 1.293a.252.252 0 0 0-.252 0l-5.72 3.353L6.468 7.76a2.748 2.748 0 0 1 3.066 0l4.312-2.464-5.719-3.353ZM13.15 12.5 8.772 9.06a1.25 1.25 0 0 0-1.544 0L2.85 12.5Zm1.35-5.85-3.687 2.106 3.687 2.897ZM5.187 8.756 1.5 6.65v5.003Z"
+            />
+          </svg>
+        </button>
+        <span
+          aria-hidden="true"
+          class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
+          data-direction="s"
+          id=":rq:"
+          popover="auto"
+        >
+          Mark as read
+        </span>
+        <button
+          aria-describedby=":rt:-loading-announcement"
+          aria-labelledby=":rs:"
+          class="types__StyledButton-sc-ws60qy-0 kQRupk"
+          data-component="IconButton"
+          data-loading="false"
+          data-no-visuals="true"
+          data-size="small"
+          data-testid="notification-unsubscribe-from-thread"
+          sx="[object Object]"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="octicon octicon-bell-slash"
+            display="inline-block"
+            fill="currentColor"
+            focusable="false"
+            height="16"
+            overflow="visible"
+            style="vertical-align: text-bottom;"
+            viewBox="0 0 16 16"
+            width="16"
+          >
+            <path
+              d="m4.182 4.31.016.011 10.104 7.316.013.01 1.375.996a.75.75 0 1 1-.88 1.214L13.626 13H2.518a1.516 1.516 0 0 1-1.263-2.36l1.703-2.554A.255.255 0 0 0 3 7.947V5.305L.31 3.357a.75.75 0 1 1 .88-1.214Zm7.373 7.19L4.5 6.391v1.556c0 .346-.102.683-.294.97l-1.703 2.556a.017.017 0 0 0-.003.01c0 .005.002.009.005.012l.006.004.007.001ZM8 1.5c-.997 0-1.895.416-2.534 1.086A.75.75 0 1 1 4.38 1.55 5 5 0 0 1 13 5v2.373a.75.75 0 0 1-1.5 0V5A3.5 3.5 0 0 0 8 1.5ZM8 16a2 2 0 0 1-1.985-1.75c-.017-.137.097-.25.235-.25h3.5c.138 0 .252.113.235.25A2 2 0 0 1 8 16Z"
+            />
+          </svg>
+        </button>
+        <span
+          aria-hidden="true"
+          class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
+          data-direction="s"
+          id=":rs:"
+          popover="auto"
+        >
+          Unsubscribe from thread
+        </span>
+      </div>
+    </div>
   </div>,
   "debug": [Function],
   "findAllByAltText": [Function],
@@ -2264,7 +2244,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
   "baseElement": <body>
     <div>
       <div
-        class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-accounts-rest"
+        class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold bg-gitify-account-rest"
       >
         <button
           aria-describedby=":r0:-loading-announcement"
@@ -2335,219 +2315,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           </span>
         </button>
         <div
-          class="flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-80"
-        >
-          <div
-            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-            data-align="center"
-            data-direction="horizontal"
-            data-gap="none"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
-          >
-            <button
-              aria-describedby=":r2:-loading-announcement"
-              aria-labelledby=":r1:"
-              class="types__StyledButton-sc-ws60qy-0 kQRupk"
-              data-component="IconButton"
-              data-loading="false"
-              data-no-visuals="true"
-              data-size="small"
-              data-testid="account-issues"
-              sx="[object Object]"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-issue-opened"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
-                />
-                <path
-                  d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"
-                />
-              </svg>
-            </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":r1:"
-              popover="auto"
-            >
-              My Issues
-            </span>
-            <button
-              aria-describedby=":r4:-loading-announcement"
-              aria-labelledby=":r3:"
-              class="types__StyledButton-sc-ws60qy-0 kQRupk"
-              data-component="IconButton"
-              data-loading="false"
-              data-no-visuals="true"
-              data-size="small"
-              data-testid="account-pull-requests"
-              sx="[object Object]"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-git-pull-request"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M1.5 3.25a2.25 2.25 0 1 1 3 2.122v5.256a2.251 2.251 0 1 1-1.5 0V5.372A2.25 2.25 0 0 1 1.5 3.25Zm5.677-.177L9.573.677A.25.25 0 0 1 10 .854V2.5h1A2.5 2.5 0 0 1 13.5 5v5.628a2.251 2.251 0 1 1-1.5 0V5a1 1 0 0 0-1-1h-1v1.646a.25.25 0 0 1-.427.177L7.177 3.427a.25.25 0 0 1 0-.354ZM3.75 2.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm0 9.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm8.25.75a.75.75 0 1 0 1.5 0 .75.75 0 0 0-1.5 0Z"
-                />
-              </svg>
-            </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":r3:"
-              popover="auto"
-            >
-              My Pull Requests
-            </span>
-            <button
-              aria-describedby=":r6:-loading-announcement"
-              aria-labelledby=":r5:"
-              class="types__StyledButton-sc-ws60qy-0 kQRupk"
-              data-component="IconButton"
-              data-loading="false"
-              data-no-visuals="true"
-              data-size="small"
-              data-testid="account-toggle"
-              sx="[object Object]"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-chevron-down"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"
-                />
-              </svg>
-            </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":r5:"
-              popover="auto"
-            >
-              Hide account notifications
-            </span>
-          </div>
-        </div>
-      </div>
-      <div>
-        Repository Notifications
-      </div>
-    </div>
-  </body>,
-  "container": <div>
-    <div
-      class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-accounts-rest"
-    >
-      <button
-        aria-describedby=":r0:-loading-announcement"
-        class="types__StyledButton-sc-ws60qy-0 kQRupk"
-        data-loading="false"
-        data-no-visuals="true"
-        data-testid="account-profile"
-        sx="[object Object]"
-        title="Open account profile"
-        type="button"
-      >
-        <span
-          class="Box-sc-g0xbh4-0 srpGE"
-          data-component="buttonContent"
-          sx="[object Object]"
-        >
-          <span
-            data-component="text"
-          >
-            <div
-              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-              data-align="center"
-              data-direction="horizontal"
-              data-gap="condensed"
-              data-justify="start"
-              data-padding="none"
-              data-wrap="nowrap"
-            >
-              <img
-                alt=""
-                class="Avatar__StyledAvatar-sc-2lv0r8-0 kuZlm"
-                data-component="Avatar"
-                height="16"
-                size="16"
-                src="https://avatars.githubusercontent.com/u/583231?v=4"
-                sx="[object Object]"
-                width="16"
-              />
-              <span
-                class="Text-sc-17v1xeu-0 hmAFGJ"
-              >
-                @
-                octocat
-              </span>
-            </div>
-          </span>
-          <span
-            class="Box-sc-g0xbh4-0 mhHOW"
-            data-component="trailingVisual"
-            sx="[object Object]"
-          >
-            <span
-              aria-hidden="true"
-              class="Box-sc-g0xbh4-0 bfvZWv"
-              data-component="ButtonCounter"
-              sx="[object Object]"
-            >
-              2
-            </span>
-            <span
-              class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 hxuUuW"
-            >
-               (
-              2
-              )
-            </span>
-          </span>
-        </span>
-      </button>
-      <div
-        class="flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-80"
-      >
-        <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY opacity-0 transition-opacity group-hover:opacity-80"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -2674,6 +2442,210 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           </span>
         </div>
       </div>
+      <div>
+        Repository Notifications
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold bg-gitify-account-rest"
+    >
+      <button
+        aria-describedby=":r0:-loading-announcement"
+        class="types__StyledButton-sc-ws60qy-0 kQRupk"
+        data-loading="false"
+        data-no-visuals="true"
+        data-testid="account-profile"
+        sx="[object Object]"
+        title="Open account profile"
+        type="button"
+      >
+        <span
+          class="Box-sc-g0xbh4-0 srpGE"
+          data-component="buttonContent"
+          sx="[object Object]"
+        >
+          <span
+            data-component="text"
+          >
+            <div
+              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+              data-align="center"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+            >
+              <img
+                alt=""
+                class="Avatar__StyledAvatar-sc-2lv0r8-0 kuZlm"
+                data-component="Avatar"
+                height="16"
+                size="16"
+                src="https://avatars.githubusercontent.com/u/583231?v=4"
+                sx="[object Object]"
+                width="16"
+              />
+              <span
+                class="Text-sc-17v1xeu-0 hmAFGJ"
+              >
+                @
+                octocat
+              </span>
+            </div>
+          </span>
+          <span
+            class="Box-sc-g0xbh4-0 mhHOW"
+            data-component="trailingVisual"
+            sx="[object Object]"
+          >
+            <span
+              aria-hidden="true"
+              class="Box-sc-g0xbh4-0 bfvZWv"
+              data-component="ButtonCounter"
+              sx="[object Object]"
+            >
+              2
+            </span>
+            <span
+              class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 hxuUuW"
+            >
+               (
+              2
+              )
+            </span>
+          </span>
+        </span>
+      </button>
+      <div
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY opacity-0 transition-opacity group-hover:opacity-80"
+        data-align="center"
+        data-direction="horizontal"
+        data-gap="none"
+        data-justify="start"
+        data-padding="none"
+        data-wrap="nowrap"
+      >
+        <button
+          aria-describedby=":r2:-loading-announcement"
+          aria-labelledby=":r1:"
+          class="types__StyledButton-sc-ws60qy-0 kQRupk"
+          data-component="IconButton"
+          data-loading="false"
+          data-no-visuals="true"
+          data-size="small"
+          data-testid="account-issues"
+          sx="[object Object]"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="octicon octicon-issue-opened"
+            display="inline-block"
+            fill="currentColor"
+            focusable="false"
+            height="16"
+            overflow="visible"
+            style="vertical-align: text-bottom;"
+            viewBox="0 0 16 16"
+            width="16"
+          >
+            <path
+              d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
+            />
+            <path
+              d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"
+            />
+          </svg>
+        </button>
+        <span
+          aria-hidden="true"
+          class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
+          data-direction="s"
+          id=":r1:"
+          popover="auto"
+        >
+          My Issues
+        </span>
+        <button
+          aria-describedby=":r4:-loading-announcement"
+          aria-labelledby=":r3:"
+          class="types__StyledButton-sc-ws60qy-0 kQRupk"
+          data-component="IconButton"
+          data-loading="false"
+          data-no-visuals="true"
+          data-size="small"
+          data-testid="account-pull-requests"
+          sx="[object Object]"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="octicon octicon-git-pull-request"
+            display="inline-block"
+            fill="currentColor"
+            focusable="false"
+            height="16"
+            overflow="visible"
+            style="vertical-align: text-bottom;"
+            viewBox="0 0 16 16"
+            width="16"
+          >
+            <path
+              d="M1.5 3.25a2.25 2.25 0 1 1 3 2.122v5.256a2.251 2.251 0 1 1-1.5 0V5.372A2.25 2.25 0 0 1 1.5 3.25Zm5.677-.177L9.573.677A.25.25 0 0 1 10 .854V2.5h1A2.5 2.5 0 0 1 13.5 5v5.628a2.251 2.251 0 1 1-1.5 0V5a1 1 0 0 0-1-1h-1v1.646a.25.25 0 0 1-.427.177L7.177 3.427a.25.25 0 0 1 0-.354ZM3.75 2.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm0 9.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm8.25.75a.75.75 0 1 0 1.5 0 .75.75 0 0 0-1.5 0Z"
+            />
+          </svg>
+        </button>
+        <span
+          aria-hidden="true"
+          class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
+          data-direction="s"
+          id=":r3:"
+          popover="auto"
+        >
+          My Pull Requests
+        </span>
+        <button
+          aria-describedby=":r6:-loading-announcement"
+          aria-labelledby=":r5:"
+          class="types__StyledButton-sc-ws60qy-0 kQRupk"
+          data-component="IconButton"
+          data-loading="false"
+          data-no-visuals="true"
+          data-size="small"
+          data-testid="account-toggle"
+          sx="[object Object]"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="octicon octicon-chevron-down"
+            display="inline-block"
+            fill="currentColor"
+            focusable="false"
+            height="16"
+            overflow="visible"
+            style="vertical-align: text-bottom;"
+            viewBox="0 0 16 16"
+            width="16"
+          >
+            <path
+              d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"
+            />
+          </svg>
+        </button>
+        <span
+          aria-hidden="true"
+          class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
+          data-direction="s"
+          id=":r5:"
+          popover="auto"
+        >
+          Hide account notifications
+        </span>
+      </div>
     </div>
     <div>
       Repository Notifications
@@ -2739,7 +2711,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
   "baseElement": <body>
     <div>
       <div
-        class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-accounts-rest"
+        class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold bg-gitify-account-rest"
       >
         <button
           aria-describedby=":ru:-loading-announcement"
@@ -2810,246 +2782,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           </span>
         </button>
         <div
-          class="flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-80"
-        >
-          <div
-            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-            data-align="center"
-            data-direction="horizontal"
-            data-gap="none"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
-          >
-            <button
-              aria-describedby=":r10:-loading-announcement"
-              aria-labelledby=":rv:"
-              class="types__StyledButton-sc-ws60qy-0 kQRupk"
-              data-component="IconButton"
-              data-loading="false"
-              data-no-visuals="true"
-              data-size="small"
-              data-testid="account-issues"
-              sx="[object Object]"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-issue-opened"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
-                />
-                <path
-                  d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"
-                />
-              </svg>
-            </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":rv:"
-              popover="auto"
-            >
-              My Issues
-            </span>
-            <button
-              aria-describedby=":r12:-loading-announcement"
-              aria-labelledby=":r11:"
-              class="types__StyledButton-sc-ws60qy-0 kQRupk"
-              data-component="IconButton"
-              data-loading="false"
-              data-no-visuals="true"
-              data-size="small"
-              data-testid="account-pull-requests"
-              sx="[object Object]"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-git-pull-request"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M1.5 3.25a2.25 2.25 0 1 1 3 2.122v5.256a2.251 2.251 0 1 1-1.5 0V5.372A2.25 2.25 0 0 1 1.5 3.25Zm5.677-.177L9.573.677A.25.25 0 0 1 10 .854V2.5h1A2.5 2.5 0 0 1 13.5 5v5.628a2.251 2.251 0 1 1-1.5 0V5a1 1 0 0 0-1-1h-1v1.646a.25.25 0 0 1-.427.177L7.177 3.427a.25.25 0 0 1 0-.354ZM3.75 2.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm0 9.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm8.25.75a.75.75 0 1 0 1.5 0 .75.75 0 0 0-1.5 0Z"
-                />
-              </svg>
-            </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":r11:"
-              popover="auto"
-            >
-              My Pull Requests
-            </span>
-            <button
-              aria-describedby=":r14:-loading-announcement"
-              aria-labelledby=":r13:"
-              class="types__StyledButton-sc-ws60qy-0 kQRupk"
-              data-component="IconButton"
-              data-loading="false"
-              data-no-visuals="true"
-              data-size="small"
-              data-testid="account-toggle"
-              sx="[object Object]"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-chevron-left"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M9.78 12.78a.75.75 0 0 1-1.06 0L4.47 8.53a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L6.06 8l3.72 3.72a.75.75 0 0 1 0 1.06Z"
-                />
-              </svg>
-            </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":r13:"
-              popover="auto"
-            >
-              No notifications for account
-            </span>
-          </div>
-        </div>
-      </div>
-      <div
-        class="flex flex-1 flex-col items-center justify-center p-8 min-h-screen"
-      >
-        <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-          data-align="center"
-          data-direction="vertical"
-          data-justify="start"
-          data-padding="none"
-          data-wrap="nowrap"
-        >
-          <div
-            class="mt-2 mb-5 text-5xl"
-          >
-            <span>
-              <img
-                alt="🎊"
-                class="emoji"
-                draggable="false"
-                src="images/twemoji/1f38a.svg"
-              />
-            </span>
-          </div>
-          <div
-            class="mb-2 text-xl font-semibold"
-          >
-            No new notifications
-          </div>
-        </div>
-      </div>
-    </div>
-  </body>,
-  "container": <div>
-    <div
-      class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-accounts-rest"
-    >
-      <button
-        aria-describedby=":ru:-loading-announcement"
-        class="types__StyledButton-sc-ws60qy-0 kQRupk"
-        data-loading="false"
-        data-no-visuals="true"
-        data-testid="account-profile"
-        sx="[object Object]"
-        title="Open account profile"
-        type="button"
-      >
-        <span
-          class="Box-sc-g0xbh4-0 srpGE"
-          data-component="buttonContent"
-          sx="[object Object]"
-        >
-          <span
-            data-component="text"
-          >
-            <div
-              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-              data-align="center"
-              data-direction="horizontal"
-              data-gap="condensed"
-              data-justify="start"
-              data-padding="none"
-              data-wrap="nowrap"
-            >
-              <img
-                alt=""
-                class="Avatar__StyledAvatar-sc-2lv0r8-0 kuZlm"
-                data-component="Avatar"
-                height="16"
-                size="16"
-                src="https://avatars.githubusercontent.com/u/583231?v=4"
-                sx="[object Object]"
-                width="16"
-              />
-              <span
-                class="Text-sc-17v1xeu-0 hmAFGJ"
-              >
-                @
-                octocat
-              </span>
-            </div>
-          </span>
-          <span
-            class="Box-sc-g0xbh4-0 mhHOW"
-            data-component="trailingVisual"
-            sx="[object Object]"
-          >
-            <span
-              aria-hidden="true"
-              class="Box-sc-g0xbh4-0 bfvZWv"
-              data-component="ButtonCounter"
-              sx="[object Object]"
-            >
-              0
-            </span>
-            <span
-              class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 hxuUuW"
-            >
-               (
-              0
-              )
-            </span>
-          </span>
-        </span>
-      </button>
-      <div
-        class="flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-80"
-      >
-        <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY opacity-0 transition-opacity group-hover:opacity-80"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -3176,34 +2909,293 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           </span>
         </div>
       </div>
+      <div
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+        data-align="center"
+        data-direction="vertical"
+        data-justify="center"
+        data-padding="spacious"
+        data-wrap="nowrap"
+      >
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          data-align="center"
+          data-direction="vertical"
+          data-gap="condensed"
+          data-justify="center"
+          data-padding="none"
+          data-wrap="nowrap"
+        >
+          <div
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+            data-align="center"
+            data-direction="vertical"
+            data-gap="spacious"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <div
+              class="Box-sc-g0xbh4-0 text-5xl"
+            >
+              <img
+                alt="🎊"
+                class="emoji"
+                draggable="false"
+                src="images/twemoji/1f38a.svg"
+              />
+            </div>
+            <div
+              class="Box-sc-g0xbh4-0 text-xl font-semibold"
+            >
+              No new  notifications
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold bg-gitify-account-rest"
+    >
+      <button
+        aria-describedby=":ru:-loading-announcement"
+        class="types__StyledButton-sc-ws60qy-0 kQRupk"
+        data-loading="false"
+        data-no-visuals="true"
+        data-testid="account-profile"
+        sx="[object Object]"
+        title="Open account profile"
+        type="button"
+      >
+        <span
+          class="Box-sc-g0xbh4-0 srpGE"
+          data-component="buttonContent"
+          sx="[object Object]"
+        >
+          <span
+            data-component="text"
+          >
+            <div
+              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+              data-align="center"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+            >
+              <img
+                alt=""
+                class="Avatar__StyledAvatar-sc-2lv0r8-0 kuZlm"
+                data-component="Avatar"
+                height="16"
+                size="16"
+                src="https://avatars.githubusercontent.com/u/583231?v=4"
+                sx="[object Object]"
+                width="16"
+              />
+              <span
+                class="Text-sc-17v1xeu-0 hmAFGJ"
+              >
+                @
+                octocat
+              </span>
+            </div>
+          </span>
+          <span
+            class="Box-sc-g0xbh4-0 mhHOW"
+            data-component="trailingVisual"
+            sx="[object Object]"
+          >
+            <span
+              aria-hidden="true"
+              class="Box-sc-g0xbh4-0 bfvZWv"
+              data-component="ButtonCounter"
+              sx="[object Object]"
+            >
+              0
+            </span>
+            <span
+              class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 hxuUuW"
+            >
+               (
+              0
+              )
+            </span>
+          </span>
+        </span>
+      </button>
+      <div
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY opacity-0 transition-opacity group-hover:opacity-80"
+        data-align="center"
+        data-direction="horizontal"
+        data-gap="none"
+        data-justify="start"
+        data-padding="none"
+        data-wrap="nowrap"
+      >
+        <button
+          aria-describedby=":r10:-loading-announcement"
+          aria-labelledby=":rv:"
+          class="types__StyledButton-sc-ws60qy-0 kQRupk"
+          data-component="IconButton"
+          data-loading="false"
+          data-no-visuals="true"
+          data-size="small"
+          data-testid="account-issues"
+          sx="[object Object]"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="octicon octicon-issue-opened"
+            display="inline-block"
+            fill="currentColor"
+            focusable="false"
+            height="16"
+            overflow="visible"
+            style="vertical-align: text-bottom;"
+            viewBox="0 0 16 16"
+            width="16"
+          >
+            <path
+              d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
+            />
+            <path
+              d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"
+            />
+          </svg>
+        </button>
+        <span
+          aria-hidden="true"
+          class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
+          data-direction="s"
+          id=":rv:"
+          popover="auto"
+        >
+          My Issues
+        </span>
+        <button
+          aria-describedby=":r12:-loading-announcement"
+          aria-labelledby=":r11:"
+          class="types__StyledButton-sc-ws60qy-0 kQRupk"
+          data-component="IconButton"
+          data-loading="false"
+          data-no-visuals="true"
+          data-size="small"
+          data-testid="account-pull-requests"
+          sx="[object Object]"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="octicon octicon-git-pull-request"
+            display="inline-block"
+            fill="currentColor"
+            focusable="false"
+            height="16"
+            overflow="visible"
+            style="vertical-align: text-bottom;"
+            viewBox="0 0 16 16"
+            width="16"
+          >
+            <path
+              d="M1.5 3.25a2.25 2.25 0 1 1 3 2.122v5.256a2.251 2.251 0 1 1-1.5 0V5.372A2.25 2.25 0 0 1 1.5 3.25Zm5.677-.177L9.573.677A.25.25 0 0 1 10 .854V2.5h1A2.5 2.5 0 0 1 13.5 5v5.628a2.251 2.251 0 1 1-1.5 0V5a1 1 0 0 0-1-1h-1v1.646a.25.25 0 0 1-.427.177L7.177 3.427a.25.25 0 0 1 0-.354ZM3.75 2.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm0 9.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm8.25.75a.75.75 0 1 0 1.5 0 .75.75 0 0 0-1.5 0Z"
+            />
+          </svg>
+        </button>
+        <span
+          aria-hidden="true"
+          class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
+          data-direction="s"
+          id=":r11:"
+          popover="auto"
+        >
+          My Pull Requests
+        </span>
+        <button
+          aria-describedby=":r14:-loading-announcement"
+          aria-labelledby=":r13:"
+          class="types__StyledButton-sc-ws60qy-0 kQRupk"
+          data-component="IconButton"
+          data-loading="false"
+          data-no-visuals="true"
+          data-size="small"
+          data-testid="account-toggle"
+          sx="[object Object]"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="octicon octicon-chevron-left"
+            display="inline-block"
+            fill="currentColor"
+            focusable="false"
+            height="16"
+            overflow="visible"
+            style="vertical-align: text-bottom;"
+            viewBox="0 0 16 16"
+            width="16"
+          >
+            <path
+              d="M9.78 12.78a.75.75 0 0 1-1.06 0L4.47 8.53a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L6.06 8l3.72 3.72a.75.75 0 0 1 0 1.06Z"
+            />
+          </svg>
+        </button>
+        <span
+          aria-hidden="true"
+          class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
+          data-direction="s"
+          id=":r13:"
+          popover="auto"
+        >
+          No notifications for account
+        </span>
+      </div>
     </div>
     <div
-      class="flex flex-1 flex-col items-center justify-center p-8 min-h-screen"
+      class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+      data-align="center"
+      data-direction="vertical"
+      data-justify="center"
+      data-padding="spacious"
+      data-wrap="nowrap"
     >
       <div
         class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
         data-align="center"
         data-direction="vertical"
-        data-justify="start"
+        data-gap="condensed"
+        data-justify="center"
         data-padding="none"
         data-wrap="nowrap"
       >
         <div
-          class="mt-2 mb-5 text-5xl"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          data-align="center"
+          data-direction="vertical"
+          data-gap="spacious"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
         >
-          <span>
+          <div
+            class="Box-sc-g0xbh4-0 text-5xl"
+          >
             <img
               alt="🎊"
               class="emoji"
               draggable="false"
               src="images/twemoji/1f38a.svg"
             />
-          </span>
-        </div>
-        <div
-          class="mb-2 text-xl font-semibold"
-        >
-          No new notifications
+          </div>
+          <div
+            class="Box-sc-g0xbh4-0 text-xl font-semibold"
+          >
+            No new  notifications
+          </div>
         </div>
       </div>
     </div>
@@ -3268,7 +3260,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
   "baseElement": <body>
     <div>
       <div
-        class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-accounts-rest"
+        class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold bg-gitify-account-rest"
       >
         <button
           aria-describedby=":r21:-loading-announcement"
@@ -3339,141 +3331,137 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
           </span>
         </button>
         <div
-          class="flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-80"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY opacity-0 transition-opacity group-hover:opacity-80"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="none"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
         >
-          <div
-            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-            data-align="center"
-            data-direction="horizontal"
-            data-gap="none"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
+          <button
+            aria-describedby=":r23:-loading-announcement"
+            aria-labelledby=":r22:"
+            class="types__StyledButton-sc-ws60qy-0 kQRupk"
+            data-component="IconButton"
+            data-loading="false"
+            data-no-visuals="true"
+            data-size="small"
+            data-testid="account-issues"
+            sx="[object Object]"
+            type="button"
           >
-            <button
-              aria-describedby=":r23:-loading-announcement"
-              aria-labelledby=":r22:"
-              class="types__StyledButton-sc-ws60qy-0 kQRupk"
-              data-component="IconButton"
-              data-loading="false"
-              data-no-visuals="true"
-              data-size="small"
-              data-testid="account-issues"
-              sx="[object Object]"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-issue-opened"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
-                />
-                <path
-                  d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"
-                />
-              </svg>
-            </button>
-            <span
+            <svg
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":r22:"
-              popover="auto"
+              class="octicon octicon-issue-opened"
+              display="inline-block"
+              fill="currentColor"
+              focusable="false"
+              height="16"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
+              viewBox="0 0 16 16"
+              width="16"
             >
-              My Issues
-            </span>
-            <button
-              aria-describedby=":r25:-loading-announcement"
-              aria-labelledby=":r24:"
-              class="types__StyledButton-sc-ws60qy-0 kQRupk"
-              data-component="IconButton"
-              data-loading="false"
-              data-no-visuals="true"
-              data-size="small"
-              data-testid="account-pull-requests"
-              sx="[object Object]"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-git-pull-request"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M1.5 3.25a2.25 2.25 0 1 1 3 2.122v5.256a2.251 2.251 0 1 1-1.5 0V5.372A2.25 2.25 0 0 1 1.5 3.25Zm5.677-.177L9.573.677A.25.25 0 0 1 10 .854V2.5h1A2.5 2.5 0 0 1 13.5 5v5.628a2.251 2.251 0 1 1-1.5 0V5a1 1 0 0 0-1-1h-1v1.646a.25.25 0 0 1-.427.177L7.177 3.427a.25.25 0 0 1 0-.354ZM3.75 2.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm0 9.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm8.25.75a.75.75 0 1 0 1.5 0 .75.75 0 0 0-1.5 0Z"
-                />
-              </svg>
-            </button>
-            <span
+              <path
+                d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
+              />
+              <path
+                d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"
+              />
+            </svg>
+          </button>
+          <span
+            aria-hidden="true"
+            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
+            data-direction="s"
+            id=":r22:"
+            popover="auto"
+          >
+            My Issues
+          </span>
+          <button
+            aria-describedby=":r25:-loading-announcement"
+            aria-labelledby=":r24:"
+            class="types__StyledButton-sc-ws60qy-0 kQRupk"
+            data-component="IconButton"
+            data-loading="false"
+            data-no-visuals="true"
+            data-size="small"
+            data-testid="account-pull-requests"
+            sx="[object Object]"
+            type="button"
+          >
+            <svg
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":r24:"
-              popover="auto"
+              class="octicon octicon-git-pull-request"
+              display="inline-block"
+              fill="currentColor"
+              focusable="false"
+              height="16"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
+              viewBox="0 0 16 16"
+              width="16"
             >
-              My Pull Requests
-            </span>
-            <button
-              aria-describedby=":r27:-loading-announcement"
-              aria-labelledby=":r26:"
-              class="types__StyledButton-sc-ws60qy-0 kQRupk"
-              data-component="IconButton"
-              data-loading="false"
-              data-no-visuals="true"
-              data-size="small"
-              data-testid="account-toggle"
-              sx="[object Object]"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-chevron-right"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M6.22 3.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042L9.94 8 6.22 4.28a.75.75 0 0 1 0-1.06Z"
-                />
-              </svg>
-            </button>
-            <span
+              <path
+                d="M1.5 3.25a2.25 2.25 0 1 1 3 2.122v5.256a2.251 2.251 0 1 1-1.5 0V5.372A2.25 2.25 0 0 1 1.5 3.25Zm5.677-.177L9.573.677A.25.25 0 0 1 10 .854V2.5h1A2.5 2.5 0 0 1 13.5 5v5.628a2.251 2.251 0 1 1-1.5 0V5a1 1 0 0 0-1-1h-1v1.646a.25.25 0 0 1-.427.177L7.177 3.427a.25.25 0 0 1 0-.354ZM3.75 2.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm0 9.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm8.25.75a.75.75 0 1 0 1.5 0 .75.75 0 0 0-1.5 0Z"
+              />
+            </svg>
+          </button>
+          <span
+            aria-hidden="true"
+            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
+            data-direction="s"
+            id=":r24:"
+            popover="auto"
+          >
+            My Pull Requests
+          </span>
+          <button
+            aria-describedby=":r27:-loading-announcement"
+            aria-labelledby=":r26:"
+            class="types__StyledButton-sc-ws60qy-0 kQRupk"
+            data-component="IconButton"
+            data-loading="false"
+            data-no-visuals="true"
+            data-size="small"
+            data-testid="account-toggle"
+            sx="[object Object]"
+            type="button"
+          >
+            <svg
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":r26:"
-              popover="auto"
+              class="octicon octicon-chevron-right"
+              display="inline-block"
+              fill="currentColor"
+              focusable="false"
+              height="16"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
+              viewBox="0 0 16 16"
+              width="16"
             >
-              Show account notifications
-            </span>
-          </div>
+              <path
+                d="M6.22 3.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042L9.94 8 6.22 4.28a.75.75 0 0 1 0-1.06Z"
+              />
+            </svg>
+          </button>
+          <span
+            aria-hidden="true"
+            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
+            data-direction="s"
+            id=":r26:"
+            popover="auto"
+          >
+            Show account notifications
+          </span>
         </div>
       </div>
     </div>
     <div>
       <div
-        class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-accounts-rest"
+        class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold bg-gitify-account-rest"
       >
         <button
           aria-describedby=":r28:-loading-announcement"
@@ -3544,219 +3532,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
           </span>
         </button>
         <div
-          class="flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-80"
-        >
-          <div
-            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-            data-align="center"
-            data-direction="horizontal"
-            data-gap="none"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
-          >
-            <button
-              aria-describedby=":r2a:-loading-announcement"
-              aria-labelledby=":r29:"
-              class="types__StyledButton-sc-ws60qy-0 kQRupk"
-              data-component="IconButton"
-              data-loading="false"
-              data-no-visuals="true"
-              data-size="small"
-              data-testid="account-issues"
-              sx="[object Object]"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-issue-opened"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
-                />
-                <path
-                  d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"
-                />
-              </svg>
-            </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":r29:"
-              popover="auto"
-            >
-              My Issues
-            </span>
-            <button
-              aria-describedby=":r2c:-loading-announcement"
-              aria-labelledby=":r2b:"
-              class="types__StyledButton-sc-ws60qy-0 kQRupk"
-              data-component="IconButton"
-              data-loading="false"
-              data-no-visuals="true"
-              data-size="small"
-              data-testid="account-pull-requests"
-              sx="[object Object]"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-git-pull-request"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M1.5 3.25a2.25 2.25 0 1 1 3 2.122v5.256a2.251 2.251 0 1 1-1.5 0V5.372A2.25 2.25 0 0 1 1.5 3.25Zm5.677-.177L9.573.677A.25.25 0 0 1 10 .854V2.5h1A2.5 2.5 0 0 1 13.5 5v5.628a2.251 2.251 0 1 1-1.5 0V5a1 1 0 0 0-1-1h-1v1.646a.25.25 0 0 1-.427.177L7.177 3.427a.25.25 0 0 1 0-.354ZM3.75 2.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm0 9.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm8.25.75a.75.75 0 1 0 1.5 0 .75.75 0 0 0-1.5 0Z"
-                />
-              </svg>
-            </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":r2b:"
-              popover="auto"
-            >
-              My Pull Requests
-            </span>
-            <button
-              aria-describedby=":r2e:-loading-announcement"
-              aria-labelledby=":r2d:"
-              class="types__StyledButton-sc-ws60qy-0 kQRupk"
-              data-component="IconButton"
-              data-loading="false"
-              data-no-visuals="true"
-              data-size="small"
-              data-testid="account-toggle"
-              sx="[object Object]"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-chevron-down"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"
-                />
-              </svg>
-            </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":r2d:"
-              popover="auto"
-            >
-              Hide account notifications
-            </span>
-          </div>
-        </div>
-      </div>
-      <div>
-        Repository Notifications
-      </div>
-    </div>
-  </body>,
-  "container": <div>
-    <div
-      class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gitify-accounts-rest"
-    >
-      <button
-        aria-describedby=":r28:-loading-announcement"
-        class="types__StyledButton-sc-ws60qy-0 kQRupk"
-        data-loading="false"
-        data-no-visuals="true"
-        data-testid="account-profile"
-        sx="[object Object]"
-        title="Open account profile"
-        type="button"
-      >
-        <span
-          class="Box-sc-g0xbh4-0 srpGE"
-          data-component="buttonContent"
-          sx="[object Object]"
-        >
-          <span
-            data-component="text"
-          >
-            <div
-              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-              data-align="center"
-              data-direction="horizontal"
-              data-gap="condensed"
-              data-justify="start"
-              data-padding="none"
-              data-wrap="nowrap"
-            >
-              <img
-                alt=""
-                class="Avatar__StyledAvatar-sc-2lv0r8-0 kuZlm"
-                data-component="Avatar"
-                height="16"
-                size="16"
-                src="https://avatars.githubusercontent.com/u/583231?v=4"
-                sx="[object Object]"
-                width="16"
-              />
-              <span
-                class="Text-sc-17v1xeu-0 hmAFGJ"
-              >
-                @
-                octocat
-              </span>
-            </div>
-          </span>
-          <span
-            class="Box-sc-g0xbh4-0 mhHOW"
-            data-component="trailingVisual"
-            sx="[object Object]"
-          >
-            <span
-              aria-hidden="true"
-              class="Box-sc-g0xbh4-0 bfvZWv"
-              data-component="ButtonCounter"
-              sx="[object Object]"
-            >
-              2
-            </span>
-            <span
-              class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 hxuUuW"
-            >
-               (
-              2
-              )
-            </span>
-          </span>
-        </span>
-      </button>
-      <div
-        class="flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-80"
-      >
-        <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY opacity-0 transition-opacity group-hover:opacity-80"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -3882,6 +3658,210 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
             Hide account notifications
           </span>
         </div>
+      </div>
+      <div>
+        Repository Notifications
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold bg-gitify-account-rest"
+    >
+      <button
+        aria-describedby=":r28:-loading-announcement"
+        class="types__StyledButton-sc-ws60qy-0 kQRupk"
+        data-loading="false"
+        data-no-visuals="true"
+        data-testid="account-profile"
+        sx="[object Object]"
+        title="Open account profile"
+        type="button"
+      >
+        <span
+          class="Box-sc-g0xbh4-0 srpGE"
+          data-component="buttonContent"
+          sx="[object Object]"
+        >
+          <span
+            data-component="text"
+          >
+            <div
+              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+              data-align="center"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+            >
+              <img
+                alt=""
+                class="Avatar__StyledAvatar-sc-2lv0r8-0 kuZlm"
+                data-component="Avatar"
+                height="16"
+                size="16"
+                src="https://avatars.githubusercontent.com/u/583231?v=4"
+                sx="[object Object]"
+                width="16"
+              />
+              <span
+                class="Text-sc-17v1xeu-0 hmAFGJ"
+              >
+                @
+                octocat
+              </span>
+            </div>
+          </span>
+          <span
+            class="Box-sc-g0xbh4-0 mhHOW"
+            data-component="trailingVisual"
+            sx="[object Object]"
+          >
+            <span
+              aria-hidden="true"
+              class="Box-sc-g0xbh4-0 bfvZWv"
+              data-component="ButtonCounter"
+              sx="[object Object]"
+            >
+              2
+            </span>
+            <span
+              class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 hxuUuW"
+            >
+               (
+              2
+              )
+            </span>
+          </span>
+        </span>
+      </button>
+      <div
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY opacity-0 transition-opacity group-hover:opacity-80"
+        data-align="center"
+        data-direction="horizontal"
+        data-gap="none"
+        data-justify="start"
+        data-padding="none"
+        data-wrap="nowrap"
+      >
+        <button
+          aria-describedby=":r2a:-loading-announcement"
+          aria-labelledby=":r29:"
+          class="types__StyledButton-sc-ws60qy-0 kQRupk"
+          data-component="IconButton"
+          data-loading="false"
+          data-no-visuals="true"
+          data-size="small"
+          data-testid="account-issues"
+          sx="[object Object]"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="octicon octicon-issue-opened"
+            display="inline-block"
+            fill="currentColor"
+            focusable="false"
+            height="16"
+            overflow="visible"
+            style="vertical-align: text-bottom;"
+            viewBox="0 0 16 16"
+            width="16"
+          >
+            <path
+              d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
+            />
+            <path
+              d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"
+            />
+          </svg>
+        </button>
+        <span
+          aria-hidden="true"
+          class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
+          data-direction="s"
+          id=":r29:"
+          popover="auto"
+        >
+          My Issues
+        </span>
+        <button
+          aria-describedby=":r2c:-loading-announcement"
+          aria-labelledby=":r2b:"
+          class="types__StyledButton-sc-ws60qy-0 kQRupk"
+          data-component="IconButton"
+          data-loading="false"
+          data-no-visuals="true"
+          data-size="small"
+          data-testid="account-pull-requests"
+          sx="[object Object]"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="octicon octicon-git-pull-request"
+            display="inline-block"
+            fill="currentColor"
+            focusable="false"
+            height="16"
+            overflow="visible"
+            style="vertical-align: text-bottom;"
+            viewBox="0 0 16 16"
+            width="16"
+          >
+            <path
+              d="M1.5 3.25a2.25 2.25 0 1 1 3 2.122v5.256a2.251 2.251 0 1 1-1.5 0V5.372A2.25 2.25 0 0 1 1.5 3.25Zm5.677-.177L9.573.677A.25.25 0 0 1 10 .854V2.5h1A2.5 2.5 0 0 1 13.5 5v5.628a2.251 2.251 0 1 1-1.5 0V5a1 1 0 0 0-1-1h-1v1.646a.25.25 0 0 1-.427.177L7.177 3.427a.25.25 0 0 1 0-.354ZM3.75 2.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm0 9.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm8.25.75a.75.75 0 1 0 1.5 0 .75.75 0 0 0-1.5 0Z"
+            />
+          </svg>
+        </button>
+        <span
+          aria-hidden="true"
+          class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
+          data-direction="s"
+          id=":r2b:"
+          popover="auto"
+        >
+          My Pull Requests
+        </span>
+        <button
+          aria-describedby=":r2e:-loading-announcement"
+          aria-labelledby=":r2d:"
+          class="types__StyledButton-sc-ws60qy-0 kQRupk"
+          data-component="IconButton"
+          data-loading="false"
+          data-no-visuals="true"
+          data-size="small"
+          data-testid="account-toggle"
+          sx="[object Object]"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="octicon octicon-chevron-down"
+            display="inline-block"
+            fill="currentColor"
+            focusable="false"
+            height="16"
+            overflow="visible"
+            style="vertical-align: text-bottom;"
+            viewBox="0 0 16 16"
+            width="16"
+          >
+            <path
+              d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"
+            />
+          </svg>
+        </button>
+        <span
+          aria-hidden="true"
+          class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
+          data-direction="s"
+          id=":r2d:"
+          popover="auto"
+        >
+          Hide account notifications
+        </span>
       </div>
     </div>
     <div>

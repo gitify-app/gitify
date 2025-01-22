@@ -6,7 +6,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
   "baseElement": <body>
     <div>
       <div
-        class="group flex justify-between pr-1 py-0.5 bg-gitify-repositories dark:text-white"
+        class="group flex justify-between pr-1 py-0.5 bg-gitify-repository"
       >
         <div
           class="flex flex-1 gap-3 items-center truncate text-sm font-medium"
@@ -79,218 +79,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
           </button>
         </div>
         <div
-          class="flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-80"
-        >
-          <div
-            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-            data-align="center"
-            data-direction="horizontal"
-            data-gap="none"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
-          >
-            <button
-              aria-describedby=":r2:-loading-announcement"
-              aria-labelledby=":r1:"
-              class="types__StyledButton-sc-ws60qy-0 kQRupk"
-              data-component="IconButton"
-              data-loading="false"
-              data-no-visuals="true"
-              data-size="small"
-              sx="[object Object]"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-check"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
-                />
-              </svg>
-            </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":r1:"
-              popover="auto"
-            >
-              Mark repository as done
-            </span>
-            <button
-              aria-describedby=":r4:-loading-announcement"
-              aria-labelledby=":r3:"
-              class="types__StyledButton-sc-ws60qy-0 kQRupk"
-              data-component="IconButton"
-              data-loading="false"
-              data-no-visuals="true"
-              data-size="small"
-              sx="[object Object]"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-read"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M7.115.65a1.752 1.752 0 0 1 1.77 0l6.25 3.663c.536.314.865.889.865 1.51v6.427A1.75 1.75 0 0 1 14.25 14H1.75A1.75 1.75 0 0 1 0 12.25V5.823c0-.621.33-1.196.865-1.51Zm1.011 1.293a.252.252 0 0 0-.252 0l-5.72 3.353L6.468 7.76a2.748 2.748 0 0 1 3.066 0l4.312-2.464-5.719-3.353ZM13.15 12.5 8.772 9.06a1.25 1.25 0 0 0-1.544 0L2.85 12.5Zm1.35-5.85-3.687 2.106 3.687 2.897ZM5.187 8.756 1.5 6.65v5.003Z"
-                />
-              </svg>
-            </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":r3:"
-              popover="auto"
-            >
-              Mark repository as read
-            </span>
-            <button
-              aria-describedby=":r6:-loading-announcement"
-              aria-labelledby=":r5:"
-              class="types__StyledButton-sc-ws60qy-0 kQRupk"
-              data-component="IconButton"
-              data-loading="false"
-              data-no-visuals="true"
-              data-size="small"
-              sx="[object Object]"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-chevron-down"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"
-                />
-              </svg>
-            </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":r5:"
-              popover="auto"
-            >
-              Hide repository notifications
-            </span>
-          </div>
-        </div>
-      </div>
-      <div>
-        NotificationRow
-      </div>
-      <div>
-        NotificationRow
-      </div>
-    </div>
-  </body>,
-  "container": <div>
-    <div
-      class="group flex justify-between pr-1 py-0.5 bg-gitify-repositories dark:text-white"
-    >
-      <div
-        class="flex flex-1 gap-3 items-center truncate text-sm font-medium"
-      >
-        <button
-          aria-describedby=":r0:-loading-announcement"
-          class="types__StyledButton-sc-ws60qy-0 kQRupk"
-          data-loading="false"
-          data-no-visuals="true"
-          sx="[object Object]"
-          title="Open repository"
-          type="button"
-        >
-          <span
-            class="Box-sc-g0xbh4-0 srpGE"
-            data-component="buttonContent"
-            sx="[object Object]"
-          >
-            <span
-              data-component="text"
-            >
-              <div
-                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-                data-align="center"
-                data-direction="horizontal"
-                data-gap="condensed"
-                data-justify="start"
-                data-padding="none"
-                data-wrap="nowrap"
-              >
-                <img
-                  alt=""
-                  class="Avatar__StyledAvatar-sc-2lv0r8-0 bGlcDY"
-                  data-component="Avatar"
-                  height="18"
-                  size="18"
-                  src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-                  sx="[object Object]"
-                  width="18"
-                />
-                <span
-                  class="Text-sc-17v1xeu-0 hmAFGJ"
-                >
-                  gitify-app/notifications-test
-                </span>
-              </div>
-            </span>
-            <span
-              class="Box-sc-g0xbh4-0 mhHOW"
-              data-component="trailingVisual"
-              sx="[object Object]"
-            >
-              <span
-                aria-hidden="true"
-                class="Box-sc-g0xbh4-0 bfvZWv"
-                data-component="ButtonCounter"
-                sx="[object Object]"
-              >
-                2
-              </span>
-              <span
-                class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 hxuUuW"
-              >
-                 (
-                2
-                )
-              </span>
-            </span>
-          </span>
-        </button>
-      </div>
-      <div
-        class="flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-80"
-      >
-        <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY opacity-0 transition-opacity group-hover:opacity-80"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -411,6 +200,209 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
           </span>
         </div>
       </div>
+      <div>
+        NotificationRow
+      </div>
+      <div>
+        NotificationRow
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="group flex justify-between pr-1 py-0.5 bg-gitify-repository"
+    >
+      <div
+        class="flex flex-1 gap-3 items-center truncate text-sm font-medium"
+      >
+        <button
+          aria-describedby=":r0:-loading-announcement"
+          class="types__StyledButton-sc-ws60qy-0 kQRupk"
+          data-loading="false"
+          data-no-visuals="true"
+          sx="[object Object]"
+          title="Open repository"
+          type="button"
+        >
+          <span
+            class="Box-sc-g0xbh4-0 srpGE"
+            data-component="buttonContent"
+            sx="[object Object]"
+          >
+            <span
+              data-component="text"
+            >
+              <div
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+                data-align="center"
+                data-direction="horizontal"
+                data-gap="condensed"
+                data-justify="start"
+                data-padding="none"
+                data-wrap="nowrap"
+              >
+                <img
+                  alt=""
+                  class="Avatar__StyledAvatar-sc-2lv0r8-0 bGlcDY"
+                  data-component="Avatar"
+                  height="18"
+                  size="18"
+                  src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+                  sx="[object Object]"
+                  width="18"
+                />
+                <span
+                  class="Text-sc-17v1xeu-0 hmAFGJ"
+                >
+                  gitify-app/notifications-test
+                </span>
+              </div>
+            </span>
+            <span
+              class="Box-sc-g0xbh4-0 mhHOW"
+              data-component="trailingVisual"
+              sx="[object Object]"
+            >
+              <span
+                aria-hidden="true"
+                class="Box-sc-g0xbh4-0 bfvZWv"
+                data-component="ButtonCounter"
+                sx="[object Object]"
+              >
+                2
+              </span>
+              <span
+                class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 hxuUuW"
+              >
+                 (
+                2
+                )
+              </span>
+            </span>
+          </span>
+        </button>
+      </div>
+      <div
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY opacity-0 transition-opacity group-hover:opacity-80"
+        data-align="center"
+        data-direction="horizontal"
+        data-gap="none"
+        data-justify="start"
+        data-padding="none"
+        data-wrap="nowrap"
+      >
+        <button
+          aria-describedby=":r2:-loading-announcement"
+          aria-labelledby=":r1:"
+          class="types__StyledButton-sc-ws60qy-0 kQRupk"
+          data-component="IconButton"
+          data-loading="false"
+          data-no-visuals="true"
+          data-size="small"
+          sx="[object Object]"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="octicon octicon-check"
+            display="inline-block"
+            fill="currentColor"
+            focusable="false"
+            height="16"
+            overflow="visible"
+            style="vertical-align: text-bottom;"
+            viewBox="0 0 16 16"
+            width="16"
+          >
+            <path
+              d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
+            />
+          </svg>
+        </button>
+        <span
+          aria-hidden="true"
+          class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
+          data-direction="s"
+          id=":r1:"
+          popover="auto"
+        >
+          Mark repository as done
+        </span>
+        <button
+          aria-describedby=":r4:-loading-announcement"
+          aria-labelledby=":r3:"
+          class="types__StyledButton-sc-ws60qy-0 kQRupk"
+          data-component="IconButton"
+          data-loading="false"
+          data-no-visuals="true"
+          data-size="small"
+          sx="[object Object]"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="octicon octicon-read"
+            display="inline-block"
+            fill="currentColor"
+            focusable="false"
+            height="16"
+            overflow="visible"
+            style="vertical-align: text-bottom;"
+            viewBox="0 0 16 16"
+            width="16"
+          >
+            <path
+              d="M7.115.65a1.752 1.752 0 0 1 1.77 0l6.25 3.663c.536.314.865.889.865 1.51v6.427A1.75 1.75 0 0 1 14.25 14H1.75A1.75 1.75 0 0 1 0 12.25V5.823c0-.621.33-1.196.865-1.51Zm1.011 1.293a.252.252 0 0 0-.252 0l-5.72 3.353L6.468 7.76a2.748 2.748 0 0 1 3.066 0l4.312-2.464-5.719-3.353ZM13.15 12.5 8.772 9.06a1.25 1.25 0 0 0-1.544 0L2.85 12.5Zm1.35-5.85-3.687 2.106 3.687 2.897ZM5.187 8.756 1.5 6.65v5.003Z"
+            />
+          </svg>
+        </button>
+        <span
+          aria-hidden="true"
+          class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
+          data-direction="s"
+          id=":r3:"
+          popover="auto"
+        >
+          Mark repository as read
+        </span>
+        <button
+          aria-describedby=":r6:-loading-announcement"
+          aria-labelledby=":r5:"
+          class="types__StyledButton-sc-ws60qy-0 kQRupk"
+          data-component="IconButton"
+          data-loading="false"
+          data-no-visuals="true"
+          data-size="small"
+          sx="[object Object]"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="octicon octicon-chevron-down"
+            display="inline-block"
+            fill="currentColor"
+            focusable="false"
+            height="16"
+            overflow="visible"
+            style="vertical-align: text-bottom;"
+            viewBox="0 0 16 16"
+            width="16"
+          >
+            <path
+              d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"
+            />
+          </svg>
+        </button>
+        <span
+          aria-hidden="true"
+          class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
+          data-direction="s"
+          id=":r5:"
+          popover="auto"
+        >
+          Hide repository notifications
+        </span>
+      </div>
     </div>
     <div>
       NotificationRow
@@ -479,7 +471,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
   "baseElement": <body>
     <div>
       <div
-        class="group flex justify-between pr-1 py-0.5 bg-gitify-repositories dark:text-white"
+        class="group flex justify-between pr-1 py-0.5 bg-gitify-repository"
       >
         <div
           class="flex flex-1 gap-3 items-center truncate text-sm font-medium"
@@ -551,135 +543,131 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
           </button>
         </div>
         <div
-          class="flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-80"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY opacity-0 transition-opacity group-hover:opacity-80"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="none"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
         >
-          <div
-            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-            data-align="center"
-            data-direction="horizontal"
-            data-gap="none"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
+          <button
+            aria-describedby=":r15:-loading-announcement"
+            aria-labelledby=":r14:"
+            class="types__StyledButton-sc-ws60qy-0 kQRupk"
+            data-component="IconButton"
+            data-loading="false"
+            data-no-visuals="true"
+            data-size="small"
+            sx="[object Object]"
+            type="button"
           >
-            <button
-              aria-describedby=":r15:-loading-announcement"
-              aria-labelledby=":r14:"
-              class="types__StyledButton-sc-ws60qy-0 kQRupk"
-              data-component="IconButton"
-              data-loading="false"
-              data-no-visuals="true"
-              data-size="small"
-              sx="[object Object]"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-check"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
-                />
-              </svg>
-            </button>
-            <span
+            <svg
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":r14:"
-              popover="auto"
+              class="octicon octicon-check"
+              display="inline-block"
+              fill="currentColor"
+              focusable="false"
+              height="16"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
+              viewBox="0 0 16 16"
+              width="16"
             >
-              Mark repository as done
-            </span>
-            <button
-              aria-describedby=":r17:-loading-announcement"
-              aria-labelledby=":r16:"
-              class="types__StyledButton-sc-ws60qy-0 kQRupk"
-              data-component="IconButton"
-              data-loading="false"
-              data-no-visuals="true"
-              data-size="small"
-              sx="[object Object]"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-read"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M7.115.65a1.752 1.752 0 0 1 1.77 0l6.25 3.663c.536.314.865.889.865 1.51v6.427A1.75 1.75 0 0 1 14.25 14H1.75A1.75 1.75 0 0 1 0 12.25V5.823c0-.621.33-1.196.865-1.51Zm1.011 1.293a.252.252 0 0 0-.252 0l-5.72 3.353L6.468 7.76a2.748 2.748 0 0 1 3.066 0l4.312-2.464-5.719-3.353ZM13.15 12.5 8.772 9.06a1.25 1.25 0 0 0-1.544 0L2.85 12.5Zm1.35-5.85-3.687 2.106 3.687 2.897ZM5.187 8.756 1.5 6.65v5.003Z"
-                />
-              </svg>
-            </button>
-            <span
+              <path
+                d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
+              />
+            </svg>
+          </button>
+          <span
+            aria-hidden="true"
+            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
+            data-direction="s"
+            id=":r14:"
+            popover="auto"
+          >
+            Mark repository as done
+          </span>
+          <button
+            aria-describedby=":r17:-loading-announcement"
+            aria-labelledby=":r16:"
+            class="types__StyledButton-sc-ws60qy-0 kQRupk"
+            data-component="IconButton"
+            data-loading="false"
+            data-no-visuals="true"
+            data-size="small"
+            sx="[object Object]"
+            type="button"
+          >
+            <svg
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":r16:"
-              popover="auto"
+              class="octicon octicon-read"
+              display="inline-block"
+              fill="currentColor"
+              focusable="false"
+              height="16"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
+              viewBox="0 0 16 16"
+              width="16"
             >
-              Mark repository as read
-            </span>
-            <button
-              aria-describedby=":r19:-loading-announcement"
-              aria-labelledby=":r18:"
-              class="types__StyledButton-sc-ws60qy-0 kQRupk"
-              data-component="IconButton"
-              data-loading="false"
-              data-no-visuals="true"
-              data-size="small"
-              sx="[object Object]"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-chevron-right"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M6.22 3.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042L9.94 8 6.22 4.28a.75.75 0 0 1 0-1.06Z"
-                />
-              </svg>
-            </button>
-            <span
+              <path
+                d="M7.115.65a1.752 1.752 0 0 1 1.77 0l6.25 3.663c.536.314.865.889.865 1.51v6.427A1.75 1.75 0 0 1 14.25 14H1.75A1.75 1.75 0 0 1 0 12.25V5.823c0-.621.33-1.196.865-1.51Zm1.011 1.293a.252.252 0 0 0-.252 0l-5.72 3.353L6.468 7.76a2.748 2.748 0 0 1 3.066 0l4.312-2.464-5.719-3.353ZM13.15 12.5 8.772 9.06a1.25 1.25 0 0 0-1.544 0L2.85 12.5Zm1.35-5.85-3.687 2.106 3.687 2.897ZM5.187 8.756 1.5 6.65v5.003Z"
+              />
+            </svg>
+          </button>
+          <span
+            aria-hidden="true"
+            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
+            data-direction="s"
+            id=":r16:"
+            popover="auto"
+          >
+            Mark repository as read
+          </span>
+          <button
+            aria-describedby=":r19:-loading-announcement"
+            aria-labelledby=":r18:"
+            class="types__StyledButton-sc-ws60qy-0 kQRupk"
+            data-component="IconButton"
+            data-loading="false"
+            data-no-visuals="true"
+            data-size="small"
+            sx="[object Object]"
+            type="button"
+          >
+            <svg
               aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":r18:"
-              popover="auto"
+              class="octicon octicon-chevron-right"
+              display="inline-block"
+              fill="currentColor"
+              focusable="false"
+              height="16"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
+              viewBox="0 0 16 16"
+              width="16"
             >
-              Show repository notifications
-            </span>
-          </div>
+              <path
+                d="M6.22 3.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042L9.94 8 6.22 4.28a.75.75 0 0 1 0-1.06Z"
+              />
+            </svg>
+          </button>
+          <span
+            aria-hidden="true"
+            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
+            data-direction="s"
+            id=":r18:"
+            popover="auto"
+          >
+            Show repository notifications
+          </span>
         </div>
       </div>
     </div>
     <div>
       <div
-        class="group flex justify-between pr-1 py-0.5 bg-gitify-repositories dark:text-white"
+        class="group flex justify-between pr-1 py-0.5 bg-gitify-repository"
       >
         <div
           class="flex flex-1 gap-3 items-center truncate text-sm font-medium"
@@ -751,217 +739,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
           </button>
         </div>
         <div
-          class="flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-80"
-        >
-          <div
-            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-            data-align="center"
-            data-direction="horizontal"
-            data-gap="none"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
-          >
-            <button
-              aria-describedby=":r1c:-loading-announcement"
-              aria-labelledby=":r1b:"
-              class="types__StyledButton-sc-ws60qy-0 kQRupk"
-              data-component="IconButton"
-              data-loading="false"
-              data-no-visuals="true"
-              data-size="small"
-              sx="[object Object]"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-check"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
-                />
-              </svg>
-            </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":r1b:"
-              popover="auto"
-            >
-              Mark repository as done
-            </span>
-            <button
-              aria-describedby=":r1e:-loading-announcement"
-              aria-labelledby=":r1d:"
-              class="types__StyledButton-sc-ws60qy-0 kQRupk"
-              data-component="IconButton"
-              data-loading="false"
-              data-no-visuals="true"
-              data-size="small"
-              sx="[object Object]"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-read"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M7.115.65a1.752 1.752 0 0 1 1.77 0l6.25 3.663c.536.314.865.889.865 1.51v6.427A1.75 1.75 0 0 1 14.25 14H1.75A1.75 1.75 0 0 1 0 12.25V5.823c0-.621.33-1.196.865-1.51Zm1.011 1.293a.252.252 0 0 0-.252 0l-5.72 3.353L6.468 7.76a2.748 2.748 0 0 1 3.066 0l4.312-2.464-5.719-3.353ZM13.15 12.5 8.772 9.06a1.25 1.25 0 0 0-1.544 0L2.85 12.5Zm1.35-5.85-3.687 2.106 3.687 2.897ZM5.187 8.756 1.5 6.65v5.003Z"
-                />
-              </svg>
-            </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":r1d:"
-              popover="auto"
-            >
-              Mark repository as read
-            </span>
-            <button
-              aria-describedby=":r1g:-loading-announcement"
-              aria-labelledby=":r1f:"
-              class="types__StyledButton-sc-ws60qy-0 kQRupk"
-              data-component="IconButton"
-              data-loading="false"
-              data-no-visuals="true"
-              data-size="small"
-              sx="[object Object]"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-chevron-down"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"
-                />
-              </svg>
-            </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":r1f:"
-              popover="auto"
-            >
-              Hide repository notifications
-            </span>
-          </div>
-        </div>
-      </div>
-      <div>
-        NotificationRow
-      </div>
-      <div>
-        NotificationRow
-      </div>
-    </div>
-  </body>,
-  "container": <div>
-    <div
-      class="group flex justify-between pr-1 py-0.5 bg-gitify-repositories dark:text-white"
-    >
-      <div
-        class="flex flex-1 gap-3 items-center truncate text-sm font-medium"
-      >
-        <button
-          aria-describedby=":r1a:-loading-announcement"
-          class="types__StyledButton-sc-ws60qy-0 kQRupk"
-          data-loading="false"
-          data-no-visuals="true"
-          sx="[object Object]"
-          title="Open repository"
-          type="button"
-        >
-          <span
-            class="Box-sc-g0xbh4-0 srpGE"
-            data-component="buttonContent"
-            sx="[object Object]"
-          >
-            <span
-              data-component="text"
-            >
-              <div
-                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-                data-align="center"
-                data-direction="horizontal"
-                data-gap="condensed"
-                data-justify="start"
-                data-padding="none"
-                data-wrap="nowrap"
-              >
-                <img
-                  alt=""
-                  class="Avatar__StyledAvatar-sc-2lv0r8-0 bGlcDY"
-                  data-component="Avatar"
-                  height="18"
-                  size="18"
-                  sx="[object Object]"
-                  width="18"
-                />
-                <span
-                  class="Text-sc-17v1xeu-0 hmAFGJ"
-                >
-                  gitify-app/notifications-test
-                </span>
-              </div>
-            </span>
-            <span
-              class="Box-sc-g0xbh4-0 mhHOW"
-              data-component="trailingVisual"
-              sx="[object Object]"
-            >
-              <span
-                aria-hidden="true"
-                class="Box-sc-g0xbh4-0 bfvZWv"
-                data-component="ButtonCounter"
-                sx="[object Object]"
-              >
-                2
-              </span>
-              <span
-                class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 hxuUuW"
-              >
-                 (
-                2
-                )
-              </span>
-            </span>
-          </span>
-        </button>
-      </div>
-      <div
-        class="flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-80"
-      >
-        <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY opacity-0 transition-opacity group-hover:opacity-80"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -1082,6 +860,208 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
           </span>
         </div>
       </div>
+      <div>
+        NotificationRow
+      </div>
+      <div>
+        NotificationRow
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="group flex justify-between pr-1 py-0.5 bg-gitify-repository"
+    >
+      <div
+        class="flex flex-1 gap-3 items-center truncate text-sm font-medium"
+      >
+        <button
+          aria-describedby=":r1a:-loading-announcement"
+          class="types__StyledButton-sc-ws60qy-0 kQRupk"
+          data-loading="false"
+          data-no-visuals="true"
+          sx="[object Object]"
+          title="Open repository"
+          type="button"
+        >
+          <span
+            class="Box-sc-g0xbh4-0 srpGE"
+            data-component="buttonContent"
+            sx="[object Object]"
+          >
+            <span
+              data-component="text"
+            >
+              <div
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+                data-align="center"
+                data-direction="horizontal"
+                data-gap="condensed"
+                data-justify="start"
+                data-padding="none"
+                data-wrap="nowrap"
+              >
+                <img
+                  alt=""
+                  class="Avatar__StyledAvatar-sc-2lv0r8-0 bGlcDY"
+                  data-component="Avatar"
+                  height="18"
+                  size="18"
+                  sx="[object Object]"
+                  width="18"
+                />
+                <span
+                  class="Text-sc-17v1xeu-0 hmAFGJ"
+                >
+                  gitify-app/notifications-test
+                </span>
+              </div>
+            </span>
+            <span
+              class="Box-sc-g0xbh4-0 mhHOW"
+              data-component="trailingVisual"
+              sx="[object Object]"
+            >
+              <span
+                aria-hidden="true"
+                class="Box-sc-g0xbh4-0 bfvZWv"
+                data-component="ButtonCounter"
+                sx="[object Object]"
+              >
+                2
+              </span>
+              <span
+                class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 hxuUuW"
+              >
+                 (
+                2
+                )
+              </span>
+            </span>
+          </span>
+        </button>
+      </div>
+      <div
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY opacity-0 transition-opacity group-hover:opacity-80"
+        data-align="center"
+        data-direction="horizontal"
+        data-gap="none"
+        data-justify="start"
+        data-padding="none"
+        data-wrap="nowrap"
+      >
+        <button
+          aria-describedby=":r1c:-loading-announcement"
+          aria-labelledby=":r1b:"
+          class="types__StyledButton-sc-ws60qy-0 kQRupk"
+          data-component="IconButton"
+          data-loading="false"
+          data-no-visuals="true"
+          data-size="small"
+          sx="[object Object]"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="octicon octicon-check"
+            display="inline-block"
+            fill="currentColor"
+            focusable="false"
+            height="16"
+            overflow="visible"
+            style="vertical-align: text-bottom;"
+            viewBox="0 0 16 16"
+            width="16"
+          >
+            <path
+              d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
+            />
+          </svg>
+        </button>
+        <span
+          aria-hidden="true"
+          class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
+          data-direction="s"
+          id=":r1b:"
+          popover="auto"
+        >
+          Mark repository as done
+        </span>
+        <button
+          aria-describedby=":r1e:-loading-announcement"
+          aria-labelledby=":r1d:"
+          class="types__StyledButton-sc-ws60qy-0 kQRupk"
+          data-component="IconButton"
+          data-loading="false"
+          data-no-visuals="true"
+          data-size="small"
+          sx="[object Object]"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="octicon octicon-read"
+            display="inline-block"
+            fill="currentColor"
+            focusable="false"
+            height="16"
+            overflow="visible"
+            style="vertical-align: text-bottom;"
+            viewBox="0 0 16 16"
+            width="16"
+          >
+            <path
+              d="M7.115.65a1.752 1.752 0 0 1 1.77 0l6.25 3.663c.536.314.865.889.865 1.51v6.427A1.75 1.75 0 0 1 14.25 14H1.75A1.75 1.75 0 0 1 0 12.25V5.823c0-.621.33-1.196.865-1.51Zm1.011 1.293a.252.252 0 0 0-.252 0l-5.72 3.353L6.468 7.76a2.748 2.748 0 0 1 3.066 0l4.312-2.464-5.719-3.353ZM13.15 12.5 8.772 9.06a1.25 1.25 0 0 0-1.544 0L2.85 12.5Zm1.35-5.85-3.687 2.106 3.687 2.897ZM5.187 8.756 1.5 6.65v5.003Z"
+            />
+          </svg>
+        </button>
+        <span
+          aria-hidden="true"
+          class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
+          data-direction="s"
+          id=":r1d:"
+          popover="auto"
+        >
+          Mark repository as read
+        </span>
+        <button
+          aria-describedby=":r1g:-loading-announcement"
+          aria-labelledby=":r1f:"
+          class="types__StyledButton-sc-ws60qy-0 kQRupk"
+          data-component="IconButton"
+          data-loading="false"
+          data-no-visuals="true"
+          data-size="small"
+          sx="[object Object]"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="octicon octicon-chevron-down"
+            display="inline-block"
+            fill="currentColor"
+            focusable="false"
+            height="16"
+            overflow="visible"
+            style="vertical-align: text-bottom;"
+            viewBox="0 0 16 16"
+            width="16"
+          >
+            <path
+              d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"
+            />
+          </svg>
+        </button>
+        <span
+          aria-hidden="true"
+          class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
+          data-direction="s"
+          id=":r1f:"
+          popover="auto"
+        >
+          Hide repository notifications
+        </span>
+      </div>
     </div>
     <div>
       NotificationRow
@@ -1150,7 +1130,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
   "baseElement": <body>
     <div>
       <div
-        class="group flex justify-between pr-1 py-0.5 bg-gitify-repositories dark:text-white"
+        class="group flex justify-between pr-1 py-0.5 bg-gitify-repository"
       >
         <div
           class="flex flex-1 gap-3 items-center truncate text-sm font-medium"
@@ -1222,217 +1202,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
           </button>
         </div>
         <div
-          class="flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-80"
-        >
-          <div
-            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-            data-align="center"
-            data-direction="horizontal"
-            data-gap="none"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
-          >
-            <button
-              aria-describedby=":ru:-loading-announcement"
-              aria-labelledby=":rt:"
-              class="types__StyledButton-sc-ws60qy-0 kQRupk"
-              data-component="IconButton"
-              data-loading="false"
-              data-no-visuals="true"
-              data-size="small"
-              sx="[object Object]"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-check"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
-                />
-              </svg>
-            </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":rt:"
-              popover="auto"
-            >
-              Mark repository as done
-            </span>
-            <button
-              aria-describedby=":r10:-loading-announcement"
-              aria-labelledby=":rv:"
-              class="types__StyledButton-sc-ws60qy-0 kQRupk"
-              data-component="IconButton"
-              data-loading="false"
-              data-no-visuals="true"
-              data-size="small"
-              sx="[object Object]"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-read"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M7.115.65a1.752 1.752 0 0 1 1.77 0l6.25 3.663c.536.314.865.889.865 1.51v6.427A1.75 1.75 0 0 1 14.25 14H1.75A1.75 1.75 0 0 1 0 12.25V5.823c0-.621.33-1.196.865-1.51Zm1.011 1.293a.252.252 0 0 0-.252 0l-5.72 3.353L6.468 7.76a2.748 2.748 0 0 1 3.066 0l4.312-2.464-5.719-3.353ZM13.15 12.5 8.772 9.06a1.25 1.25 0 0 0-1.544 0L2.85 12.5Zm1.35-5.85-3.687 2.106 3.687 2.897ZM5.187 8.756 1.5 6.65v5.003Z"
-                />
-              </svg>
-            </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":rv:"
-              popover="auto"
-            >
-              Mark repository as read
-            </span>
-            <button
-              aria-describedby=":r12:-loading-announcement"
-              aria-labelledby=":r11:"
-              class="types__StyledButton-sc-ws60qy-0 kQRupk"
-              data-component="IconButton"
-              data-loading="false"
-              data-no-visuals="true"
-              data-size="small"
-              sx="[object Object]"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-chevron-down"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"
-                />
-              </svg>
-            </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":r11:"
-              popover="auto"
-            >
-              Hide repository notifications
-            </span>
-          </div>
-        </div>
-      </div>
-      <div>
-        NotificationRow
-      </div>
-      <div>
-        NotificationRow
-      </div>
-    </div>
-  </body>,
-  "container": <div>
-    <div
-      class="group flex justify-between pr-1 py-0.5 bg-gitify-repositories dark:text-white"
-    >
-      <div
-        class="flex flex-1 gap-3 items-center truncate text-sm font-medium"
-      >
-        <button
-          aria-describedby=":rs:-loading-announcement"
-          class="types__StyledButton-sc-ws60qy-0 kQRupk"
-          data-loading="false"
-          data-no-visuals="true"
-          sx="[object Object]"
-          title="Open repository"
-          type="button"
-        >
-          <span
-            class="Box-sc-g0xbh4-0 srpGE"
-            data-component="buttonContent"
-            sx="[object Object]"
-          >
-            <span
-              data-component="text"
-            >
-              <div
-                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-                data-align="center"
-                data-direction="horizontal"
-                data-gap="condensed"
-                data-justify="start"
-                data-padding="none"
-                data-wrap="nowrap"
-              >
-                <img
-                  alt=""
-                  class="Avatar__StyledAvatar-sc-2lv0r8-0 bGlcDY"
-                  data-component="Avatar"
-                  height="18"
-                  size="18"
-                  sx="[object Object]"
-                  width="18"
-                />
-                <span
-                  class="Text-sc-17v1xeu-0 hmAFGJ"
-                >
-                  gitify-app/notifications-test
-                </span>
-              </div>
-            </span>
-            <span
-              class="Box-sc-g0xbh4-0 mhHOW"
-              data-component="trailingVisual"
-              sx="[object Object]"
-            >
-              <span
-                aria-hidden="true"
-                class="Box-sc-g0xbh4-0 bfvZWv"
-                data-component="ButtonCounter"
-                sx="[object Object]"
-              >
-                2
-              </span>
-              <span
-                class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 hxuUuW"
-              >
-                 (
-                2
-                )
-              </span>
-            </span>
-          </span>
-        </button>
-      </div>
-      <div
-        class="flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-80"
-      >
-        <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY opacity-0 transition-opacity group-hover:opacity-80"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -1552,6 +1322,208 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
             Hide repository notifications
           </span>
         </div>
+      </div>
+      <div>
+        NotificationRow
+      </div>
+      <div>
+        NotificationRow
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="group flex justify-between pr-1 py-0.5 bg-gitify-repository"
+    >
+      <div
+        class="flex flex-1 gap-3 items-center truncate text-sm font-medium"
+      >
+        <button
+          aria-describedby=":rs:-loading-announcement"
+          class="types__StyledButton-sc-ws60qy-0 kQRupk"
+          data-loading="false"
+          data-no-visuals="true"
+          sx="[object Object]"
+          title="Open repository"
+          type="button"
+        >
+          <span
+            class="Box-sc-g0xbh4-0 srpGE"
+            data-component="buttonContent"
+            sx="[object Object]"
+          >
+            <span
+              data-component="text"
+            >
+              <div
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+                data-align="center"
+                data-direction="horizontal"
+                data-gap="condensed"
+                data-justify="start"
+                data-padding="none"
+                data-wrap="nowrap"
+              >
+                <img
+                  alt=""
+                  class="Avatar__StyledAvatar-sc-2lv0r8-0 bGlcDY"
+                  data-component="Avatar"
+                  height="18"
+                  size="18"
+                  sx="[object Object]"
+                  width="18"
+                />
+                <span
+                  class="Text-sc-17v1xeu-0 hmAFGJ"
+                >
+                  gitify-app/notifications-test
+                </span>
+              </div>
+            </span>
+            <span
+              class="Box-sc-g0xbh4-0 mhHOW"
+              data-component="trailingVisual"
+              sx="[object Object]"
+            >
+              <span
+                aria-hidden="true"
+                class="Box-sc-g0xbh4-0 bfvZWv"
+                data-component="ButtonCounter"
+                sx="[object Object]"
+              >
+                2
+              </span>
+              <span
+                class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 hxuUuW"
+              >
+                 (
+                2
+                )
+              </span>
+            </span>
+          </span>
+        </button>
+      </div>
+      <div
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY opacity-0 transition-opacity group-hover:opacity-80"
+        data-align="center"
+        data-direction="horizontal"
+        data-gap="none"
+        data-justify="start"
+        data-padding="none"
+        data-wrap="nowrap"
+      >
+        <button
+          aria-describedby=":ru:-loading-announcement"
+          aria-labelledby=":rt:"
+          class="types__StyledButton-sc-ws60qy-0 kQRupk"
+          data-component="IconButton"
+          data-loading="false"
+          data-no-visuals="true"
+          data-size="small"
+          sx="[object Object]"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="octicon octicon-check"
+            display="inline-block"
+            fill="currentColor"
+            focusable="false"
+            height="16"
+            overflow="visible"
+            style="vertical-align: text-bottom;"
+            viewBox="0 0 16 16"
+            width="16"
+          >
+            <path
+              d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
+            />
+          </svg>
+        </button>
+        <span
+          aria-hidden="true"
+          class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
+          data-direction="s"
+          id=":rt:"
+          popover="auto"
+        >
+          Mark repository as done
+        </span>
+        <button
+          aria-describedby=":r10:-loading-announcement"
+          aria-labelledby=":rv:"
+          class="types__StyledButton-sc-ws60qy-0 kQRupk"
+          data-component="IconButton"
+          data-loading="false"
+          data-no-visuals="true"
+          data-size="small"
+          sx="[object Object]"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="octicon octicon-read"
+            display="inline-block"
+            fill="currentColor"
+            focusable="false"
+            height="16"
+            overflow="visible"
+            style="vertical-align: text-bottom;"
+            viewBox="0 0 16 16"
+            width="16"
+          >
+            <path
+              d="M7.115.65a1.752 1.752 0 0 1 1.77 0l6.25 3.663c.536.314.865.889.865 1.51v6.427A1.75 1.75 0 0 1 14.25 14H1.75A1.75 1.75 0 0 1 0 12.25V5.823c0-.621.33-1.196.865-1.51Zm1.011 1.293a.252.252 0 0 0-.252 0l-5.72 3.353L6.468 7.76a2.748 2.748 0 0 1 3.066 0l4.312-2.464-5.719-3.353ZM13.15 12.5 8.772 9.06a1.25 1.25 0 0 0-1.544 0L2.85 12.5Zm1.35-5.85-3.687 2.106 3.687 2.897ZM5.187 8.756 1.5 6.65v5.003Z"
+            />
+          </svg>
+        </button>
+        <span
+          aria-hidden="true"
+          class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
+          data-direction="s"
+          id=":rv:"
+          popover="auto"
+        >
+          Mark repository as read
+        </span>
+        <button
+          aria-describedby=":r12:-loading-announcement"
+          aria-labelledby=":r11:"
+          class="types__StyledButton-sc-ws60qy-0 kQRupk"
+          data-component="IconButton"
+          data-loading="false"
+          data-no-visuals="true"
+          data-size="small"
+          sx="[object Object]"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="octicon octicon-chevron-down"
+            display="inline-block"
+            fill="currentColor"
+            focusable="false"
+            height="16"
+            overflow="visible"
+            style="vertical-align: text-bottom;"
+            viewBox="0 0 16 16"
+            width="16"
+          >
+            <path
+              d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"
+            />
+          </svg>
+        </button>
+        <span
+          aria-hidden="true"
+          class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
+          data-direction="s"
+          id=":r11:"
+          popover="auto"
+        >
+          Hide repository notifications
+        </span>
       </div>
     </div>
     <div>

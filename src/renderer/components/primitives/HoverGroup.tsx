@@ -8,10 +8,13 @@ interface IHoverGroup {
 
 export const HoverGroup: FC<IHoverGroup> = ({ children }: IHoverGroup) => {
   return (
-    <div className="flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-80">
-      <Stack direction="horizontal" align="center" gap="none">
-        {children}
-      </Stack>
-    </div>
+    <Stack
+      direction="horizontal"
+      align="center"
+      gap="none"
+      className="opacity-0 transition-opacity group-hover:opacity-80"
+    >
+      {children}
+    </Stack>
   );
 };
