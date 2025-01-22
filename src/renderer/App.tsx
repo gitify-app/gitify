@@ -40,7 +40,7 @@ export const App = () => {
       <BaseStyles>
         <AppProvider>
           <Router>
-            <div className="flex h-full overflow-x-hidden overflow-y-auto flex-col pl-12 bg-gitify-background">
+            <div className="flex h-full overflow-x-hidden overflow-y-auto flex-col pl-10 bg-gitify-background">
               <Loading />
               <Sidebar />
               <Routes>
