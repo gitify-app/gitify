@@ -53,8 +53,9 @@ export const NotificationFooter: FC<INotificationFooter> = ({
       )}
 
       <Stack direction="horizontal" gap="none">
-        <Text title={reason.description}>{reason.title}</Text>
-        <Text className="px-1">&bull;</Text>
+        <Text title={reason.description} className="pr-1">
+          {reason.title}
+        </Text>
         <RelativeTime datetime={notification.updated_at} />
       </Stack>
 
