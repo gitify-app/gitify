@@ -1106,9 +1106,8 @@ exports[`renderer/routes/Filters.tsx Users section should not be able to toggle 
       class="flex items-center ml-3"
     >
       <label
-        class="font-medium text-gitify-font cursor-pointer"
+        class="font-medium text-gitify-font cursor-pointer line-through"
         for="hideBots"
-        style="text-decoration: line-through;"
       >
         Hide notifications from Bot accounts
       </label>

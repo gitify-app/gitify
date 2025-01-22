@@ -126,78 +126,70 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           </div>
         </legend>
         <div
-          class="mt-3 mb-2 text-sm"
+          class="flex items-start my-2 text-sm font-medium"
         >
+          <label
+            class="mr-3 font-medium cursor-pointer"
+            for="theme"
+          >
+            Theme:
+          </label>
           <div
-            class="flex items-start"
+            aria-labelledby="theme"
+            class="flex items-center space-x-4"
+            role="group"
           >
             <div
-              class="mr-3"
+              class="flex items-center gap-2"
             >
+              <input
+                checked=""
+                class="size-4 cursor-pointer"
+                id="theme_system"
+                name="theme"
+                type="radio"
+                value="SYSTEM"
+              />
               <label
-                class="font-medium text-gitify-font"
-                for="theme"
+                class="mr-3 font-medium cursor-pointer"
+                for="theme_system"
               >
-                Theme:
+                System
               </label>
             </div>
             <div
-              aria-labelledby="theme"
-              class="flex items-center space-x-4"
-              role="group"
+              class="flex items-center gap-2"
             >
-              <div
-                class="flex items-center"
+              <input
+                class="size-4 cursor-pointer"
+                id="theme_light"
+                name="theme"
+                type="radio"
+                value="LIGHT"
+              />
+              <label
+                class="mr-3 font-medium cursor-pointer"
+                for="theme_light"
               >
-                <input
-                  checked=""
-                  class="size-4 cursor-pointer"
-                  id="theme_system"
-                  name="theme"
-                  type="radio"
-                  value="SYSTEM"
-                />
-                <label
-                  class="ml-3 block text-sm font-medium text-gitify-font cursor-pointer"
-                  for="theme_system"
-                >
-                  System
-                </label>
-              </div>
-              <div
-                class="flex items-center"
+                Light
+              </label>
+            </div>
+            <div
+              class="flex items-center gap-2"
+            >
+              <input
+                class="size-4 cursor-pointer"
+                id="theme_dark"
+                name="theme"
+                type="radio"
+                value="DARK"
+              />
+              <label
+                class="mr-3 font-medium cursor-pointer"
+                for="theme_dark"
               >
-                <input
-                  class="size-4 cursor-pointer"
-                  id="theme_light"
-                  name="theme"
-                  type="radio"
-                  value="LIGHT"
-                />
-                <label
-                  class="ml-3 block text-sm font-medium text-gitify-font cursor-pointer"
-                  for="theme_light"
-                >
-                  Light
-                </label>
-              </div>
-              <div
-                class="flex items-center"
-              >
-                <input
-                  class="size-4 cursor-pointer"
-                  id="theme_dark"
-                  name="theme"
-                  type="radio"
-                  value="DARK"
-                />
-                <label
-                  class="ml-3 block text-sm font-medium text-gitify-font cursor-pointer"
-                  for="theme_dark"
-                >
-                  Dark
-                </label>
-              </div>
+                Dark
+              </label>
             </div>
           </div>
         </div>
@@ -205,10 +197,10 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           class="flex items-center mt-3 mb-2 text-sm"
         >
           <label
-            class="mr-3 content-center font-medium text-gitify-font"
-            for="Zoom"
+            class="mr-3 font-medium cursor-pointer"
+            for="zoom"
           >
-            Zoom:
+            Zoom
           </label>
           <div
             class="ButtonGroup-sc-1gxhls1-0 jXbkKi"
@@ -481,9 +473,8 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               class="flex items-center ml-3"
             >
               <label
-                class="font-medium text-gitify-font cursor-pointer"
+                class="font-medium text-gitify-font cursor-pointer line-through"
                 for="showAccountHeader"
-                style="text-decoration: line-through;"
               >
                 Show account header
               </label>
@@ -528,61 +519,53 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           </div>
         </legend>
         <div
-          class="mt-3 mb-2 text-sm"
+          class="flex items-start my-2 text-sm font-medium"
         >
+          <label
+            class="mr-3 font-medium cursor-pointer"
+            for="groupBy"
+          >
+            Group by:
+          </label>
           <div
-            class="flex items-start"
+            aria-labelledby="groupBy"
+            class="flex items-center space-x-4"
+            role="group"
           >
             <div
-              class="mr-3"
+              class="flex items-center gap-2"
             >
+              <input
+                checked=""
+                class="size-4 cursor-pointer"
+                id="groupBy_repository"
+                name="groupBy"
+                type="radio"
+                value="REPOSITORY"
+              />
               <label
-                class="font-medium text-gitify-font"
-                for="groupBy"
+                class="mr-3 font-medium cursor-pointer"
+                for="groupBy_repository"
               >
-                Group by:
+                Repository
               </label>
             </div>
             <div
-              aria-labelledby="groupBy"
-              class="flex items-center space-x-4"
-              role="group"
+              class="flex items-center gap-2"
             >
-              <div
-                class="flex items-center"
+              <input
+                class="size-4 cursor-pointer"
+                id="groupBy_date"
+                name="groupBy"
+                type="radio"
+                value="DATE"
+              />
+              <label
+                class="mr-3 font-medium cursor-pointer"
+                for="groupBy_date"
               >
-                <input
-                  checked=""
-                  class="size-4 cursor-pointer"
-                  id="groupBy_repository"
-                  name="groupBy"
-                  type="radio"
-                  value="REPOSITORY"
-                />
-                <label
-                  class="ml-3 block text-sm font-medium text-gitify-font cursor-pointer"
-                  for="groupBy_repository"
-                >
-                  Repository
-                </label>
-              </div>
-              <div
-                class="flex items-center"
-              >
-                <input
-                  class="size-4 cursor-pointer"
-                  id="groupBy_date"
-                  name="groupBy"
-                  type="radio"
-                  value="DATE"
-                />
-                <label
-                  class="ml-3 block text-sm font-medium text-gitify-font cursor-pointer"
-                  for="groupBy_date"
-                >
-                  Date
-                </label>
-              </div>
+                Date
+              </label>
             </div>
           </div>
         </div>
@@ -850,61 +833,53 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           </div>
         </legend>
         <div
-          class="mt-3 mb-2 text-sm"
+          class="flex items-start my-2 text-sm font-medium"
         >
+          <label
+            class="mr-3 font-medium cursor-pointer"
+            for="openLinks"
+          >
+            Open Links:
+          </label>
           <div
-            class="flex items-start"
+            aria-labelledby="openLinks"
+            class="flex items-center space-x-4"
+            role="group"
           >
             <div
-              class="mr-3"
+              class="flex items-center gap-2"
             >
+              <input
+                checked=""
+                class="size-4 cursor-pointer"
+                id="openLinks_foreground"
+                name="openLinks"
+                type="radio"
+                value="FOREGROUND"
+              />
               <label
-                class="font-medium text-gitify-font"
-                for="openLinks"
+                class="mr-3 font-medium cursor-pointer"
+                for="openLinks_foreground"
               >
-                Open Links:
+                Foreground
               </label>
             </div>
             <div
-              aria-labelledby="openLinks"
-              class="flex items-center space-x-4"
-              role="group"
+              class="flex items-center gap-2"
             >
-              <div
-                class="flex items-center"
+              <input
+                class="size-4 cursor-pointer"
+                id="openLinks_background"
+                name="openLinks"
+                type="radio"
+                value="BACKGROUND"
+              />
+              <label
+                class="mr-3 font-medium cursor-pointer"
+                for="openLinks_background"
               >
-                <input
-                  checked=""
-                  class="size-4 cursor-pointer"
-                  id="openLinks_foreground"
-                  name="openLinks"
-                  type="radio"
-                  value="FOREGROUND"
-                />
-                <label
-                  class="ml-3 block text-sm font-medium text-gitify-font cursor-pointer"
-                  for="openLinks_foreground"
-                >
-                  Foreground
-                </label>
-              </div>
-              <div
-                class="flex items-center"
-              >
-                <input
-                  class="size-4 cursor-pointer"
-                  id="openLinks_background"
-                  name="openLinks"
-                  type="radio"
-                  value="BACKGROUND"
-                />
-                <label
-                  class="ml-3 block text-sm font-medium text-gitify-font cursor-pointer"
-                  for="openLinks_background"
-                >
-                  Background
-                </label>
-              </div>
+                Background
+              </label>
             </div>
           </div>
         </div>

@@ -1,4 +1,5 @@
 import type { FC, ReactNode } from 'react';
+import { cn } from '../../utils/cn';
 import { Tooltip } from './Tooltip';
 
 export interface ICheckbox {
@@ -26,10 +27,10 @@ export const Checkbox: FC<ICheckbox> = (props: ICheckbox) => {
         <div className="flex items-center ml-3">
           <label
             htmlFor={props.name}
-            className="font-medium text-gitify-font cursor-pointer"
-            style={
-              props.disabled ? { textDecoration: 'line-through' } : undefined
-            }
+            className={cn(
+              'font-medium text-gitify-font cursor-pointer',
+              props.disabled && 'line-through',
+            )}
           >
             {props.label}
           </label>
