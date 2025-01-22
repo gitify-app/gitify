@@ -130,7 +130,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
         >
           <label
             class="mr-3 content-center font-medium text-gitify-font"
-            for="Zoom"
+            for="theme"
           >
             Theme:
           </label>
@@ -143,6 +143,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               class="Select__StyledSelect-sc-li6bhs-0 gdxHkq"
               data-hasplaceholder="false"
               data-testid="settings-theme-mode"
+              id="theme"
             >
               <optgroup
                 label="System"
@@ -226,7 +227,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
         >
           <label
             class="mr-3 content-center font-medium text-gitify-font"
-            for="Zoom"
+            for="zoom"
           >
             Zoom:
           </label>

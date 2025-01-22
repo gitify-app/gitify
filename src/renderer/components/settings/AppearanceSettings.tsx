@@ -77,13 +77,14 @@ export const AppearanceSettings: FC = () => {
 
       <div className="flex items-center mt-3 mb-2 text-sm">
         <label
-          htmlFor="Zoom"
+          htmlFor="theme"
           className="mr-3 content-center font-medium text-gitify-font"
         >
           Theme:
         </label>
 
         <Select
+          id="theme"
           value={settings.themeMode}
           onChange={(evt) =>
             updateSetting('themeMode', evt.target.value as ThemeMode)
@@ -129,7 +130,7 @@ export const AppearanceSettings: FC = () => {
 
       <div className="flex items-center mt-3 mb-2 text-sm">
         <label
-          htmlFor="Zoom"
+          htmlFor="zoom"
           className="mr-3 content-center font-medium text-gitify-font"
         >
           Zoom:
