@@ -43,7 +43,7 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
   return (
     <>
       <div
-        className="group flex justify-between pr-1 py-0.5 bg-gitify-repository dark:text-white"
+        className="group flex justify-between pr-1 py-0.5 bg-gitify-repository"
         onClick={toggleRepositoryNotifications}
       >
         <div

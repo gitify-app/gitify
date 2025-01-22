@@ -88,7 +88,7 @@ export const AccountsRoute: FC = () => {
             return (
               <div
                 key={getAccountUUID(account)}
-                className="rounded-md bg-gray-100 p-2 pb-0 dark:bg-gitify-sidebar"
+                className="rounded-md p-2 pb-0 bg-gitify-accounts"
               >
                 <Stack
                   direction="horizontal"

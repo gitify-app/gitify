@@ -2,7 +2,7 @@
 
 exports[`renderer/routes/Filters.tsx General should render itself & its children 1`] = `
 <div
-  class="flex h-screen flex-col"
+  class="flex flex-col h-screen"
   data-testid="filters"
 >
   <div

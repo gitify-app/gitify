@@ -6,7 +6,6 @@ import { Tooltip } from './Tooltip';
 export interface IRadioGroup {
   name: string;
   label: string;
-  helpText?: ReactNode | string;
   tooltip?: ReactNode | string;
   options: RadioGroupItem[];
   value: string;
@@ -66,12 +65,6 @@ export const RadioGroup: FC<IRadioGroup> = (props: IRadioGroup) => {
           })}
         </div>
       </div>
-
-      {props.helpText && (
-        <div className="mt-1 text-xs italic text-gray-500 dark:text-gray-300">
-          {props.helpText}
-        </div>
-      )}
     </div>
   );
 };

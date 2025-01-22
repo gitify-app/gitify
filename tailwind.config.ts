@@ -12,13 +12,17 @@ const config: Config = {
       colors: {
         gitify: {
           font: 'var(--fgColor-default)',
-          background: 'var(--gitify-background)',
+          background: 'var(--bgColor-muted)',
           sidebar: '#24292e',
-          footer: 'var(--gitify-footer)',
+          footer: 'var(--bgColor-neutral-muted)',
 
           caution: colors.orange[600],
           error: 'var(--fgColor-danger)',
           link: 'var(--fgColor-link)',
+          input: {
+            rest: 'var(--control-bgColor-rest)',
+            focus: 'var(--control-bgColor-active)',
+          },
 
           icon: {
             attention: 'var(--fgColor-attention)',
@@ -28,18 +32,20 @@ const config: Config = {
             open: 'var(--fgColor-open)',
           },
 
+          accounts: 'var(--bgColor-neutral-muted)',
+
           account: {
-            rest: 'var(--gitify-account-rest)',
-            error: 'var(--gitify-account-error)',
+            rest: 'var(--control-bgColor-active)',
+            error: 'var(--bgColor-danger-emphasis)',
           },
 
-          repository: 'var(--gitify-repository)',
+          repository: 'var(--control-bgColor-disabled)',
 
           notification: {
-            border: 'var(--control-bgColor-hover)',
+            border: 'var(--borderColor-disabled)',
             hover: 'var(--control-bgColor-hover)',
             pill: {
-              hover: 'var(--gitify-notification-pill-hover)',
+              hover: 'var(--control-bgColor-active)',
             },
           },
 
@@ -56,36 +62,17 @@ const config: Config = {
   },
   plugins: [
     ({ addBase }) => {
+      // TODO - ideally we would move this to be controlled by GitHub Primer Design Tokens, colors and color schemes
       addBase({
         ':root': {
-          '--gitify-background': colors.white,
-          '--gitify-footer': colors.gray[200],
-
-          '--gitify-account-rest': colors.gray[300],
-          '--gitify-account-error': colors.red[300],
-
-          '--gitify-repository': colors.gray[100],
-
-          '--gitify-notification-pill-hover': colors.gray[200],
-
           '--gitify-scrollbar-track': colors.gray[100],
-          '--gitify-scrollbar-thumb': colors.gray[400],
-          '--gitify-scrollbar-thumb-hover': colors.gray[500],
+          '--gitify-scrollbar-thumb': colors.gray[300],
+          '--gitify-scrollbar-thumb-hover': colors.gray[400],
         },
         '.dark': {
-          '--gitify-background': '#161b22',
-          '--gitify-footer': '#000209',
-
-          '--gitify-account-rest': '#000209',
-          '--gitify-account-error': colors.red[500],
-
-          '--gitify-repository': '#090e15',
-
-          '--gitify-notification-pill-hover': colors.gray[700],
-
-          '--gitify-scrollbar-track': '#090e15',
-          '--gitify-scrollbar-thumb': '#24292e',
-          '--gitify-scrollbar-thumb-hover': '#3a3f44',
+          '--gitify-scrollbar-track': colors.gray[900],
+          '--gitify-scrollbar-thumb': colors.gray[700],
+          '--gitify-scrollbar-thumb-hover': colors.gray[600],
         },
       });
     },

@@ -63,11 +63,6 @@ exports[`renderer/components/fields/RadioGroup.tsx should render 1`] = `
             </div>
           </div>
         </div>
-        <div
-          class="mt-1 text-xs italic text-gray-500 dark:text-gray-300"
-        >
-          This is some helper text
-        </div>
       </div>
     </div>
   </body>,
@@ -129,11 +124,6 @@ exports[`renderer/components/fields/RadioGroup.tsx should render 1`] = `
             </label>
           </div>
         </div>
-      </div>
-      <div
-        class="mt-1 text-xs italic text-gray-500 dark:text-gray-300"
-      >
-        This is some helper text
       </div>
     </div>
   </div>,
@@ -257,11 +247,6 @@ exports[`renderer/components/fields/RadioGroup.tsx should render as disabled 1`]
             </div>
           </div>
         </div>
-        <div
-          class="mt-1 text-xs italic text-gray-500 dark:text-gray-300"
-        >
-          This is some helper text
-        </div>
       </div>
     </div>
   </body>,
@@ -326,11 +311,6 @@ exports[`renderer/components/fields/RadioGroup.tsx should render as disabled 1`]
             </label>
           </div>
         </div>
-      </div>
-      <div
-        class="mt-1 text-xs italic text-gray-500 dark:text-gray-300"
-      >
-        This is some helper text
       </div>
     </div>
   </div>,

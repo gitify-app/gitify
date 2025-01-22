@@ -84,7 +84,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
       class="mt-4 flex flex-col"
     >
       <div
-        class="rounded-md bg-gray-100 p-2 pb-0 dark:bg-gitify-sidebar"
+        class="rounded-md p-2 pb-0 bg-gitify-accounts"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
@@ -448,7 +448,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
         </div>
       </div>
       <div
-        class="rounded-md bg-gray-100 p-2 pb-0 dark:bg-gitify-sidebar"
+        class="rounded-md p-2 pb-0 bg-gitify-accounts"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
@@ -812,7 +812,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
         </div>
       </div>
       <div
-        class="rounded-md bg-gray-100 p-2 pb-0 dark:bg-gitify-sidebar"
+        class="rounded-md p-2 pb-0 bg-gitify-accounts"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
@@ -1314,7 +1314,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
       class="mt-4 flex flex-col"
     >
       <div
-        class="rounded-md bg-gray-100 p-2 pb-0 dark:bg-gitify-sidebar"
+        class="rounded-md p-2 pb-0 bg-gitify-accounts"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
@@ -1678,7 +1678,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
         </div>
       </div>
       <div
-        class="rounded-md bg-gray-100 p-2 pb-0 dark:bg-gitify-sidebar"
+        class="rounded-md p-2 pb-0 bg-gitify-accounts"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
@@ -2042,7 +2042,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
         </div>
       </div>
       <div
-        class="rounded-md bg-gray-100 p-2 pb-0 dark:bg-gitify-sidebar"
+        class="rounded-md p-2 pb-0 bg-gitify-accounts"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
@@ -2544,7 +2544,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
       class="mt-4 flex flex-col"
     >
       <div
-        class="rounded-md bg-gray-100 p-2 pb-0 dark:bg-gitify-sidebar"
+        class="rounded-md p-2 pb-0 bg-gitify-accounts"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
@@ -2908,7 +2908,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
         </div>
       </div>
       <div
-        class="rounded-md bg-gray-100 p-2 pb-0 dark:bg-gitify-sidebar"
+        class="rounded-md p-2 pb-0 bg-gitify-accounts"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
@@ -3272,7 +3272,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
         </div>
       </div>
       <div
-        class="rounded-md bg-gray-100 p-2 pb-0 dark:bg-gitify-sidebar"
+        class="rounded-md p-2 pb-0 bg-gitify-accounts"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 duhwY"

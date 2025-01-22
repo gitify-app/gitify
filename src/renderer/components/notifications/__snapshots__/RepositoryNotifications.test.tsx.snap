@@ -6,7 +6,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
   "baseElement": <body>
     <div>
       <div
-        class="group flex justify-between pr-1 py-0.5 bg-gitify-repository dark:text-white"
+        class="group flex justify-between pr-1 py-0.5 bg-gitify-repository"
       >
         <div
           class="flex flex-1 gap-3 items-center truncate text-sm font-medium"
@@ -210,7 +210,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
   </body>,
   "container": <div>
     <div
-      class="group flex justify-between pr-1 py-0.5 bg-gitify-repository dark:text-white"
+      class="group flex justify-between pr-1 py-0.5 bg-gitify-repository"
     >
       <div
         class="flex flex-1 gap-3 items-center truncate text-sm font-medium"
@@ -471,7 +471,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
   "baseElement": <body>
     <div>
       <div
-        class="group flex justify-between pr-1 py-0.5 bg-gitify-repository dark:text-white"
+        class="group flex justify-between pr-1 py-0.5 bg-gitify-repository"
       >
         <div
           class="flex flex-1 gap-3 items-center truncate text-sm font-medium"
@@ -667,7 +667,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
     </div>
     <div>
       <div
-        class="group flex justify-between pr-1 py-0.5 bg-gitify-repository dark:text-white"
+        class="group flex justify-between pr-1 py-0.5 bg-gitify-repository"
       >
         <div
           class="flex flex-1 gap-3 items-center truncate text-sm font-medium"
@@ -870,7 +870,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
   </body>,
   "container": <div>
     <div
-      class="group flex justify-between pr-1 py-0.5 bg-gitify-repository dark:text-white"
+      class="group flex justify-between pr-1 py-0.5 bg-gitify-repository"
     >
       <div
         class="flex flex-1 gap-3 items-center truncate text-sm font-medium"
@@ -1130,7 +1130,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
   "baseElement": <body>
     <div>
       <div
-        class="group flex justify-between pr-1 py-0.5 bg-gitify-repository dark:text-white"
+        class="group flex justify-between pr-1 py-0.5 bg-gitify-repository"
       >
         <div
           class="flex flex-1 gap-3 items-center truncate text-sm font-medium"
@@ -1333,7 +1333,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
   </body>,
   "container": <div>
     <div
-      class="group flex justify-between pr-1 py-0.5 bg-gitify-repository dark:text-white"
+      class="group flex justify-between pr-1 py-0.5 bg-gitify-repository"
     >
       <div
         class="flex flex-1 gap-3 items-center truncate text-sm font-medium"
