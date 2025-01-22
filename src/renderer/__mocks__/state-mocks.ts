@@ -8,7 +8,7 @@ import {
   type Link,
   OpenPreference,
   type SettingsState,
-  Theme,
+  ThemeMode,
   type Token,
 } from '../types';
 import type { EnterpriseAccount } from '../utils/auth/types';
@@ -81,7 +81,7 @@ export const mockAuth: AuthState = {
 export const mockToken = 'token-123-456' as Token;
 
 const mockAppearanceSettings = {
-  theme: Theme.SYSTEM,
+  themeMode: ThemeMode.SYSTEM,
   zoomPercentage: 100,
   detailedNotifications: true,
   showPills: true,

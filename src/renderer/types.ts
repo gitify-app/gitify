@@ -59,7 +59,7 @@ export type SettingsValue =
   | GroupBy
   | OpenPreference
   | Reason[]
-  | Theme;
+  | ThemeMode;
 
 export type SettingsState = AppearanceSettingsState &
   NotificationSettingsState &
@@ -67,7 +67,7 @@ export type SettingsState = AppearanceSettingsState &
   FilterSettingsState;
 
 interface AppearanceSettingsState {
-  theme: Theme;
+  themeMode: ThemeMode;
   zoomPercentage: number;
   detailedNotifications: boolean;
   showAccountHeader: boolean;
@@ -104,10 +104,17 @@ export interface GitifyState {
   settings?: SettingsState;
 }
 
-export enum Theme {
+export enum ThemeMode {
   SYSTEM = 'SYSTEM',
-  LIGHT = 'LIGHT',
-  DARK = 'DARK',
+  LIGHT_DEFAULT = 'LIGHT_DEFAULT',
+  LIGHT_HIGH_CONTRAST = 'LIGHT_HIGH_CONTRAST',
+  LIGHT_COLOR_BLIND = 'LIGHT_COLOR_BLIND',
+  LIGHT_TRITANOPIA = 'LIGHT_TRITANOPIA',
+  DARK_DEFAULT = 'LIGHT_DARK_DEFAULT',
+  DARK_HIGH_CONTRAST = 'DARK_HIGH_CONTRAST',
+  DARK_COLOR_BLIND = 'DARK_COLOR_BLIND',
+  DARK_TRITANOPIA = 'DARK_TRITANOPIA',
+  DARK_DIMMED = 'DARK_DIMMED',
 }
 
 export enum OpenPreference {

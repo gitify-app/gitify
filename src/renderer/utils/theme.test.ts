@@ -1,5 +1,9 @@
-import { Theme } from '../types';
-import { getColorModeFromTheme, getTheme, setTheme } from './theme';
+import { ThemeMode } from '../types';
+import {
+  getTheme,
+  mapThemeModeToColorScheme,
+  setScrollbarTheme,
+} from './theme';
 
 describe('renderer/utils/theme.ts', () => {
   const htmlElement = document.createElement('html');
@@ -9,13 +13,13 @@ describe('renderer/utils/theme.ts', () => {
   });
 
   it('should change to light mode', () => {
-    setTheme(Theme.LIGHT);
-    expect(getTheme()).toBe(Theme.LIGHT);
+    setScrollbarTheme('day');
+    expect(getTheme()).toBe(ThemeMode.LIGHT_DEFAULT);
   });
 
   it('should change to dark mode', () => {
-    setTheme(Theme.DARK);
-    expect(getTheme()).toBe(Theme.DARK);
+    setScrollbarTheme('night');
+    expect(getTheme()).toBe(ThemeMode.DARK_DEFAULT);
   });
 
   it("should use the system's mode - light", () => {
@@ -25,8 +29,8 @@ describe('renderer/utils/theme.ts', () => {
         matches: false,
       })),
     });
-    setTheme();
-    expect(getTheme()).toBe(Theme.LIGHT);
+    setScrollbarTheme();
+    expect(getTheme()).toBe(ThemeMode.LIGHT_DEFAULT);
   });
 
   it("should use the system's mode - dark", () => {
@@ -36,13 +40,34 @@ describe('renderer/utils/theme.ts', () => {
         matches: true,
       })),
     });
-    setTheme();
-    expect(getTheme()).toBe(Theme.DARK);
+    setScrollbarTheme();
+    expect(getTheme()).toBe(ThemeMode.DARK_DEFAULT);
   });
 
-  it('should get color mode from theme', () => {
-    expect(getColorModeFromTheme(Theme.LIGHT)).toBe('day');
-    expect(getColorModeFromTheme(Theme.DARK)).toBe('night');
-    expect(getColorModeFromTheme(Theme.SYSTEM)).toBe('auto');
+  it('should map theme mode to github primer provider', () => {
+    expect(mapThemeModeToColorScheme(ThemeMode.LIGHT_DEFAULT)).toBe('light');
+    expect(mapThemeModeToColorScheme(ThemeMode.LIGHT_HIGH_CONTRAST)).toBe(
+      'light_high_contrast',
+    );
+    expect(mapThemeModeToColorScheme(ThemeMode.LIGHT_COLOR_BLIND)).toBe(
+      'light_colorblind',
+    );
+    expect(mapThemeModeToColorScheme(ThemeMode.LIGHT_TRITANOPIA)).toBe(
+      'light_tritanopia',
+    );
+    expect(mapThemeModeToColorScheme(ThemeMode.DARK_DEFAULT)).toBe('dark');
+    expect(mapThemeModeToColorScheme(ThemeMode.DARK_HIGH_CONTRAST)).toBe(
+      'dark_high_contrast',
+    );
+    expect(mapThemeModeToColorScheme(ThemeMode.DARK_COLOR_BLIND)).toBe(
+      'dark_colorblind',
+    );
+    expect(mapThemeModeToColorScheme(ThemeMode.DARK_TRITANOPIA)).toBe(
+      'dark_tritanopia',
+    );
+    expect(mapThemeModeToColorScheme(ThemeMode.DARK_DIMMED)).toBe(
+      'dark_dimmed',
+    );
+    expect(mapThemeModeToColorScheme(ThemeMode.SYSTEM)).toBe(null);
   });
 });

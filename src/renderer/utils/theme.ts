@@ -1,18 +1,18 @@
 import type { ColorModeWithAuto } from '@primer/react/lib/ThemeProvider';
-import { Theme } from '../types';
+import { ThemeMode } from '../types';
 
-// TODO Add support for setting color modes (dark_dimmed) - see #1748
+export const DEFAULT_DAY_COLOR_SCHEME = 'light';
+export const DEFAULT_NIGHT_COLOR_SCHEME = 'dark';
 
-// TODO - Replace fully with Octicon primer theme provider
 /**
  * @deprecated
  */
-export function getTheme(): Theme {
+export function getTheme(): ThemeMode {
   if (document.querySelector('html').classList.contains('dark')) {
-    return Theme.DARK;
+    return ThemeMode.DARK_DEFAULT;
   }
 
-  return Theme.LIGHT;
+  return ThemeMode.LIGHT_DEFAULT;
 }
 
 /**
@@ -29,16 +29,19 @@ export function setDarkMode() {
   document.querySelector('html').classList.add('dark');
 }
 
-export function setTheme(theme?: Theme) {
-  switch (theme) {
-    case Theme.LIGHT:
+/**
+ * @deprecated
+ */
+export function setScrollbarTheme(mode?: ColorModeWithAuto) {
+  switch (mode) {
+    case 'day':
+    case 'light':
       setLightMode();
       break;
-
-    case Theme.DARK:
+    case 'night':
+    case 'dark':
       setDarkMode();
       break;
-
     default:
       if (window.matchMedia?.('(prefers-color-scheme: dark)').matches) {
         setDarkMode();
@@ -48,13 +51,39 @@ export function setTheme(theme?: Theme) {
   }
 }
 
-export function getColorModeFromTheme(theme: Theme): ColorModeWithAuto {
-  switch (theme) {
-    case Theme.LIGHT:
-      return 'day';
-    case Theme.DARK:
-      return 'night';
+export function isDayScheme(themeMode: ThemeMode) {
+  switch (themeMode) {
+    case ThemeMode.LIGHT_DEFAULT:
+    case ThemeMode.LIGHT_HIGH_CONTRAST:
+    case ThemeMode.LIGHT_COLOR_BLIND:
+    case ThemeMode.LIGHT_TRITANOPIA:
+      return true;
     default:
-      return 'auto';
+      return false;
+  }
+}
+
+export function mapThemeModeToColorScheme(themeMode: ThemeMode): string | null {
+  switch (themeMode) {
+    case ThemeMode.LIGHT_DEFAULT:
+      return 'light';
+    case ThemeMode.LIGHT_HIGH_CONTRAST:
+      return 'light_high_contrast';
+    case ThemeMode.LIGHT_COLOR_BLIND:
+      return 'light_colorblind';
+    case ThemeMode.LIGHT_TRITANOPIA:
+      return 'light_tritanopia';
+    case ThemeMode.DARK_DEFAULT:
+      return 'dark';
+    case ThemeMode.DARK_HIGH_CONTRAST:
+      return 'dark_high_contrast';
+    case ThemeMode.DARK_COLOR_BLIND:
+      return 'dark_colorblind';
+    case ThemeMode.DARK_TRITANOPIA:
+      return 'dark_tritanopia';
+    case ThemeMode.DARK_DIMMED:
+      return 'dark_dimmed';
+    default:
+      return null;
   }
 }

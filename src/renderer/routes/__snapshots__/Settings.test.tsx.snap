@@ -126,80 +126,100 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           </div>
         </legend>
         <div
-          class="mt-3 mb-2 text-sm"
+          class="flex items-center mt-3 mb-2 text-sm"
         >
-          <div
-            class="flex items-start"
+          <label
+            class="mr-3 content-center font-medium text-gitify-font"
+            for="Zoom"
           >
-            <div
-              class="mr-3"
+            Theme:
+          </label>
+          <span
+            class="TextInputWrapper__TextInputBaseWrapper-sc-1mqhpbi-0 TextInputWrapper-sc-1mqhpbi-1 gSHUap iCKcNi"
+            sx="[object Object]"
+          >
+            <select
+              aria-invalid="false"
+              class="Select__StyledSelect-sc-li6bhs-0 gdxHkq"
+              data-hasplaceholder="false"
+              data-testid="settings-theme-mode"
             >
-              <label
-                class="font-medium text-gitify-font"
-                for="theme"
+              <optgroup
+                label="System"
               >
-                Theme:
-              </label>
-            </div>
-            <div
-              aria-labelledby="theme"
-              class="flex items-center space-x-4"
-              role="group"
-            >
-              <div
-                class="flex items-center"
-              >
-                <input
-                  checked=""
-                  class="size-4 cursor-pointer"
-                  id="theme_system"
-                  name="theme"
-                  type="radio"
+                <option
                   value="SYSTEM"
-                />
-                <label
-                  class="ml-3 block text-sm font-medium text-gitify-font cursor-pointer"
-                  for="theme_system"
                 >
                   System
-                </label>
-              </div>
-              <div
-                class="flex items-center"
+                </option>
+              </optgroup>
+              <optgroup
+                label="Light"
               >
-                <input
-                  class="size-4 cursor-pointer"
-                  id="theme_light"
-                  name="theme"
-                  type="radio"
-                  value="LIGHT"
-                />
-                <label
-                  class="ml-3 block text-sm font-medium text-gitify-font cursor-pointer"
-                  for="theme_light"
+                <option
+                  value="LIGHT_DEFAULT"
                 >
-                  Light
-                </label>
-              </div>
-              <div
-                class="flex items-center"
+                  Light default
+                </option>
+                <option
+                  value="LIGHT_HIGH_CONTRAST"
+                >
+                  Light high contrast
+                </option>
+                <option
+                  value="LIGHT_COLOR_BLIND"
+                >
+                  Light Protanopia & Deuteranopia
+                </option>
+                <option
+                  value="LIGHT_TRITANOPIA"
+                >
+                  Light Tritanopia
+                </option>
+              </optgroup>
+              <optgroup
+                label="Dark"
               >
-                <input
-                  class="size-4 cursor-pointer"
-                  id="theme_dark"
-                  name="theme"
-                  type="radio"
-                  value="DARK"
-                />
-                <label
-                  class="ml-3 block text-sm font-medium text-gitify-font cursor-pointer"
-                  for="theme_dark"
+                <option
+                  value="LIGHT_DARK_DEFAULT"
                 >
-                  Dark
-                </label>
-              </div>
-            </div>
-          </div>
+                  Dark default
+                </option>
+                <option
+                  value="DARK_HIGH_CONTRAST"
+                >
+                  Dark high contrast
+                </option>
+                <option
+                  value="DARK_COLOR_BLIND"
+                >
+                  Dark Protanopia & Deuteranopia
+                </option>
+                <option
+                  value="DARK_TRITANOPIA"
+                >
+                  Dark Tritanopia
+                </option>
+                <option
+                  value="DARK_DIMMED"
+                >
+                  Dark dimmed
+                </option>
+              </optgroup>
+            </select>
+            <svg
+              aria-hidden="true"
+              class="Select__ArrowIndicator-sc-li6bhs-1 eMZdJP"
+              fill="currentColor"
+              height="16"
+              width="16"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="m4.074 9.427 3.396 3.396a.25.25 0 0 0 .354 0l3.396-3.396A.25.25 0 0 0 11.043 9H4.251a.25.25 0 0 0-.177.427ZM4.074 7.47 7.47 4.073a.25.25 0 0 1 .354 0L11.22 7.47a.25.25 0 0 1-.177.426H4.251a.25.25 0 0 1-.177-.426Z"
+              />
+            </svg>
+          </span>
         </div>
         <div
           class="flex items-center mt-3 mb-2 text-sm"
@@ -545,7 +565,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             </div>
             <div
               aria-labelledby="groupBy"
-              class="flex items-center space-x-4"
+              class="flex flex-wrap items-center space-x-4"
               role="group"
             >
               <div
@@ -867,7 +887,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             </div>
             <div
               aria-labelledby="openLinks"
-              class="flex items-center space-x-4"
+              class="flex flex-wrap items-center space-x-4"
               role="group"
             >
               <div

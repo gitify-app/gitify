@@ -23,7 +23,7 @@ exports[`renderer/components/fields/RadioGroup.tsx should render 1`] = `
           </div>
           <div
             aria-labelledby="appearance"
-            class="flex items-center space-x-4"
+            class="flex flex-wrap items-center space-x-4"
             role="group"
           >
             <div
@@ -85,7 +85,7 @@ exports[`renderer/components/fields/RadioGroup.tsx should render 1`] = `
         </div>
         <div
           aria-labelledby="appearance"
-          class="flex items-center space-x-4"
+          class="flex flex-wrap items-center space-x-4"
           role="group"
         >
           <div
@@ -205,7 +205,7 @@ exports[`renderer/components/fields/RadioGroup.tsx should render as disabled 1`]
           </div>
           <div
             aria-labelledby="appearance"
-            class="flex items-center space-x-4"
+            class="flex flex-wrap items-center space-x-4"
             role="group"
           >
             <div
@@ -270,7 +270,7 @@ exports[`renderer/components/fields/RadioGroup.tsx should render as disabled 1`]
         </div>
         <div
           aria-labelledby="appearance"
-          class="flex items-center space-x-4"
+          class="flex flex-wrap items-center space-x-4"
           role="group"
         >
           <div

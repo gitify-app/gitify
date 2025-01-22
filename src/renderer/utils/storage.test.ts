@@ -18,7 +18,7 @@ describe('renderer/utils/storage.ts', () => {
             },
           ],
         },
-        settings: { theme: 'DARK' },
+        settings: { themeMode: 'DARK_DEFAULT' },
       }),
     );
     const result = loadState();
@@ -35,7 +35,7 @@ describe('renderer/utils/storage.ts', () => {
     expect(result.auth.token).toBeUndefined();
     expect(result.auth.enterpriseAccounts).toBeUndefined();
     expect(result.auth.user).toBeUndefined();
-    expect(result.settings.theme).toBe('DARK');
+    expect(result.settings.themeMode).toBe('DARK_DEFAULT');
   });
 
   it('should load the state from localstorage - empty', () => {

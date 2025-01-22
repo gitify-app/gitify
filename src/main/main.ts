@@ -94,9 +94,15 @@ app.whenReady().then(async () => {
 
   nativeTheme.on('updated', () => {
     if (nativeTheme.shouldUseDarkColors) {
-      mb.window.webContents.send(namespacedEvent('update-theme'), 'DARK');
+      mb.window.webContents.send(
+        namespacedEvent('update-theme'),
+        'DARK_DEFAULT',
+      );
     } else {
-      mb.window.webContents.send(namespacedEvent('update-theme'), 'LIGHT');
+      mb.window.webContents.send(
+        namespacedEvent('update-theme'),
+        'LIGHT_DEFAULT',
+      );
     }
   });
 

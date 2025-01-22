@@ -34,7 +34,7 @@ export const RadioGroup: FC<IRadioGroup> = (props: IRadioGroup) => {
         </div>
 
         <div
-          className="flex items-center space-x-4"
+          className="flex flex-wrap items-center space-x-4"
           role="group"
           aria-labelledby={props.name}
         >

@@ -23,7 +23,7 @@ import {
   type SettingsState,
   type SettingsValue,
   type Status,
-  Theme,
+  ThemeMode,
 } from '../types';
 import type { Notification } from '../typesGitHub';
 import { headNotifications } from '../utils/api/client';
@@ -49,7 +49,13 @@ import {
 import { Constants } from '../utils/constants';
 import { getNotificationCount } from '../utils/notifications/notifications';
 import { clearState, loadState, saveState } from '../utils/storage';
-import { getColorModeFromTheme, setTheme } from '../utils/theme';
+import {
+  DEFAULT_DAY_COLOR_SCHEME,
+  DEFAULT_NIGHT_COLOR_SCHEME,
+  isDayScheme,
+  mapThemeModeToColorScheme,
+  setScrollbarTheme,
+} from '../utils/theme';
 import { zoomPercentageToLevel } from '../utils/zoom';
 
 export const defaultAuth: AuthState = {
@@ -60,7 +66,7 @@ export const defaultAuth: AuthState = {
 };
 
 const defaultAppearanceSettings = {
-  theme: Theme.SYSTEM,
+  themeMode: ThemeMode.SYSTEM,
   zoomPercentage: 100,
   detailedNotifications: true,
   showPills: true,
@@ -125,7 +131,7 @@ interface AppContextState {
 export const AppContext = createContext<Partial<AppContextState>>({});
 
 export const AppProvider = ({ children }: { children: ReactNode }) => {
-  const { setColorMode } = useTheme();
+  const { setColorMode, setDayScheme, setNightScheme } = useTheme();
   const [auth, setAuth] = useState<AuthState>(defaultAuth);
   const [settings, setSettings] = useState<SettingsState>(defaultSettings);
   const {
@@ -144,11 +150,18 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   useEffect(() => {
-    const mode = getColorModeFromTheme(settings.theme);
-    setColorMode(mode);
+    const colorScheme = mapThemeModeToColorScheme(settings.themeMode);
 
-    setTheme(settings.theme); // TODO - Replace fully with Primer design tokens and components
-  }, [settings.theme, setColorMode]);
+    if (isDayScheme(settings.themeMode)) {
+      setDayScheme(colorScheme ?? DEFAULT_DAY_COLOR_SCHEME);
+      setColorMode('day');
+      setScrollbarTheme('day');
+    } else {
+      setNightScheme(colorScheme ?? DEFAULT_NIGHT_COLOR_SCHEME);
+      setColorMode('night');
+      setScrollbarTheme('night');
+    }
+  }, [settings.themeMode, setDayScheme, setNightScheme]);
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: We only want fetchNotifications to be called for account changes
   useEffect(() => {
