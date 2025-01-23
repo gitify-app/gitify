@@ -66,7 +66,7 @@ export const LoginWithOAuthAppRoute: FC = () => {
     const { handleSubmit, submitting, pristine, values } = formProps;
 
     return (
-      <Page id="Login With OAuth App">
+      <Page id="Login With OAuth App" type="h-full">
         <form onSubmit={handleSubmit} className="-mt-5">
           <FieldInput
             name="hostname"

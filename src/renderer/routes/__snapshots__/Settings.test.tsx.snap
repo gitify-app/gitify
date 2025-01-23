@@ -2,7 +2,7 @@
 
 exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = `
 <div
-  class="flex flex-col h-full"
+  class="flex flex-col h-screen"
   data-testid="settings"
 >
   <div

@@ -23,7 +23,7 @@ export const SettingsRoute: FC = () => {
   }, [resetSettings]);
 
   return (
-    <Page id="settings">
+    <Page id="settings" type="h-screen">
       <Header fetchOnBack icon={GearIcon}>
         Settings
       </Header>

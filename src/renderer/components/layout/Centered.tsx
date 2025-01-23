@@ -16,7 +16,7 @@ export const Centered: FC<ICentered> = ({
       align="center"
       justify="center"
       padding="spacious"
-      className={fullHeight && 'h-full'}
+      className={fullHeight && 'h-screen'}
     >
       {props.children}
     </Stack>

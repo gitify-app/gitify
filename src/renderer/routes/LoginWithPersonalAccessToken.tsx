@@ -57,7 +57,7 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
     const { handleSubmit, submitting, pristine, values } = formProps;
 
     return (
-      <Page id="Login With Personal Access Token">
+      <Page id="Login With Personal Access Token" type="h-full">
         <form onSubmit={handleSubmit}>
           <FieldInput
             name="hostname"
