@@ -3,8 +3,9 @@ import { type FC, type MouseEvent, useContext } from 'react';
 import { Avatar, Stack, Tooltip } from '@primer/react';
 
 import { AppContext } from '../../context/App';
-import { Size } from '../../types';
+import { GroupBy, Opacity, Size } from '../../types';
 import type { Notification } from '../../typesGitHub';
+import { cn } from '../../utils/cn';
 import { openRepository } from '../../utils/links';
 
 interface INotificationHeader {
@@ -19,7 +20,11 @@ export const NotificationHeader: FC<INotificationHeader> = ({
   const repoAvatarUrl = notification.repository.owner.avatar_url;
   const repoSlug = notification.repository.full_name;
 
-  const groupByDate = settings.groupBy === 'DATE';
+  const notificationNumber = notification.subject?.number
+    ? `#${notification.subject.number}`
+    : '';
+
+  const groupByDate = settings.groupBy === GroupBy.DATE;
 
   return (
     groupByDate && (
@@ -35,6 +40,15 @@ export const NotificationHeader: FC<INotificationHeader> = ({
           <Stack direction="horizontal" align="center" gap="condensed">
             <Avatar src={repoAvatarUrl} size={Size.SMALL} />
             <span className="text-xs font-medium">{repoSlug}</span>
+            <span
+              className={cn(
+                'text-xxs',
+                Opacity.READ,
+                !settings.showNumber && 'hidden',
+              )}
+            >
+              {notificationNumber}
+            </span>
           </Stack>
         </div>
       </Tooltip>

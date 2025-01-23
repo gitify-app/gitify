@@ -38,6 +38,9 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
             >
               gitify-app/notifications-test
             </span>
+            <span
+              class="text-xxs opacity-50"
+            />
           </div>
         </div>
       </span>
@@ -77,6 +80,9 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
           >
             gitify-app/notifications-test
           </span>
+          <span
+            class="text-xxs opacity-50"
+          />
         </div>
       </div>
     </span>
