@@ -17,7 +17,7 @@ describe('renderer/routes/components/settings/AppearanceSettings.tsx', () => {
     jest.clearAllMocks();
   });
 
-  it('should change the theme radio group', async () => {
+  it('should change the theme mode dropdown', async () => {
     await act(async () => {
       render(
         <AppContext.Provider
@@ -34,7 +34,8 @@ describe('renderer/routes/components/settings/AppearanceSettings.tsx', () => {
       );
     });
 
-    fireEvent.click(screen.getByLabelText('Light'));
+    const select = screen.getByTestId('settings-theme') as HTMLSelectElement;
+    fireEvent.change(select, { target: { value: 'LIGHT' } });
 
     expect(updateSetting).toHaveBeenCalledTimes(1);
     expect(updateSetting).toHaveBeenCalledWith('theme', 'LIGHT');

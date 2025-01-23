@@ -13,24 +13,34 @@ import {
   TagIcon,
   XCircleIcon,
 } from '@primer/octicons-react';
-import { Button, ButtonGroup, IconButton, useTheme } from '@primer/react';
+import {
+  Button,
+  ButtonGroup,
+  IconButton,
+  Select,
+  useTheme,
+} from '@primer/react';
 
 import { namespacedEvent } from '../../../shared/events';
 import { AppContext } from '../../context/App';
 import { Size, Theme } from '../../types';
 import { hasMultipleAccounts } from '../../utils/auth/utils';
-import { getColorModeFromTheme, setTheme } from '../../utils/theme';
+import {
+  DEFAULT_DAY_COLOR_SCHEME,
+  DEFAULT_NIGHT_COLOR_SCHEME,
+  isDayScheme,
+  setScrollbarTheme,
+} from '../../utils/theme';
 import { zoomLevelToPercentage, zoomPercentageToLevel } from '../../utils/zoom';
 import { Checkbox } from '../fields/Checkbox';
 import { FieldLabel } from '../fields/FieldLabel';
-import { RadioGroup } from '../fields/RadioGroup';
 import { Title } from '../primitives/Title';
 
 let timeout: NodeJS.Timeout;
 const DELAY = 200;
 
 export const AppearanceSettings: FC = () => {
-  const { setColorMode } = useTheme();
+  const { setColorMode, setDayScheme, setNightScheme } = useTheme();
   const { auth, settings, updateSetting } = useContext(AppContext);
   const [zoomPercentage, setZoomPercentage] = useState(
     zoomLevelToPercentage(webFrame.getZoomLevel()),
@@ -41,14 +51,15 @@ export const AppearanceSettings: FC = () => {
       namespacedEvent('update-theme'),
       (_, updatedTheme: Theme) => {
         if (settings.theme === Theme.SYSTEM) {
-          const mode = getColorModeFromTheme(updatedTheme);
-
-          setTheme(updatedTheme);
-          setColorMode(mode);
+          const mode = isDayScheme(updatedTheme) ? 'day' : 'night';
+          setColorMode('auto');
+          setDayScheme(DEFAULT_DAY_COLOR_SCHEME);
+          setNightScheme(DEFAULT_NIGHT_COLOR_SCHEME);
+          setScrollbarTheme(mode);
         }
       },
     );
-  }, [settings.theme, setColorMode]);
+  }, [settings.theme, setColorMode, setDayScheme, setNightScheme]);
 
   window.addEventListener('resize', () => {
     // clear the timeout
@@ -65,20 +76,48 @@ export const AppearanceSettings: FC = () => {
     <fieldset>
       <Title icon={PaintbrushIcon}>Appearance</Title>
 
-      <RadioGroup
-        name="theme"
-        label="Theme:"
-        value={settings.theme}
-        options={[
-          { label: 'System', value: Theme.SYSTEM },
-          { label: 'Light', value: Theme.LIGHT },
-          { label: 'Dark', value: Theme.DARK },
-        ]}
-        onChange={(evt) => updateSetting('theme', evt.target.value as Theme)}
-      />
+      <div className="flex items-center mt-3 mb-2 text-sm">
+        <FieldLabel name="theme" label="Theme:" />
+
+        <Select
+          id="theme"
+          value={settings.theme}
+          onChange={(evt) => updateSetting('theme', evt.target.value as Theme)}
+          data-testid="settings-theme"
+        >
+          <Select.OptGroup label="System">
+            <Select.Option value={Theme.SYSTEM}>System</Select.Option>
+          </Select.OptGroup>
+          <Select.OptGroup label="Light">
+            <Select.Option value={Theme.LIGHT}>Light default</Select.Option>
+            <Select.Option value={Theme.LIGHT_HIGH_CONTRAST}>
+              Light high contrast
+            </Select.Option>
+            <Select.Option value={Theme.LIGHT_COLORBLIND}>
+              Light Protanopia & Deuteranopia
+            </Select.Option>
+            <Select.Option value={Theme.LIGHT_TRITANOPIA}>
+              Light Tritanopia
+            </Select.Option>
+          </Select.OptGroup>
+          <Select.OptGroup label="Dark">
+            <Select.Option value={Theme.DARK}>Dark default</Select.Option>
+            <Select.Option value={Theme.DARK_HIGH_CONTRAST}>
+              Dark high contrast
+            </Select.Option>
+            <Select.Option value={Theme.DARK_COLORBLIND}>
+              Dark Protanopia & Deuteranopia
+            </Select.Option>
+            <Select.Option value={Theme.DARK_TRITANOPIA}>
+              Dark Tritanopia
+            </Select.Option>
+            <Select.Option value={Theme.DARK_DIMMED}>Dark dimmed</Select.Option>
+          </Select.OptGroup>
+        </Select>
+      </div>
 
       <div className="flex items-center mt-3 mb-2 text-sm">
-        <FieldLabel name="zoom" label="Zoom" />
+        <FieldLabel name="zoom" label="Zoom:" />
 
         <ButtonGroup>
           <IconButton

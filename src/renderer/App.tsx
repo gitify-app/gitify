@@ -21,6 +21,10 @@ import { NotificationsRoute } from './routes/Notifications';
 import { SettingsRoute } from './routes/Settings';
 
 import './App.css';
+import {
+  DEFAULT_DAY_COLOR_SCHEME,
+  DEFAULT_NIGHT_COLOR_SCHEME,
+} from './utils/theme';
 
 function RequireAuth({ children }) {
   const { isLoggedIn } = useContext(AppContext);
@@ -35,8 +39,11 @@ function RequireAuth({ children }) {
 
 export const App = () => {
   return (
-    // TODO Add support for setting color modes (dark_dimmed) - see #1748
-    <ThemeProvider dayScheme="light" nightScheme="dark">
+    <ThemeProvider
+      colorMode="auto"
+      dayScheme={DEFAULT_DAY_COLOR_SCHEME}
+      nightScheme={DEFAULT_NIGHT_COLOR_SCHEME}
+    >
       <BaseStyles>
         <AppProvider>
           <Router>

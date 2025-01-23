@@ -1,5 +1,9 @@
 import { Theme } from '../types';
-import { getColorModeFromTheme, getTheme, setTheme } from './theme';
+import {
+  getTheme,
+  mapThemeModeToColorScheme,
+  setScrollbarTheme,
+} from './theme';
 
 describe('renderer/utils/theme.ts', () => {
   const htmlElement = document.createElement('html');
@@ -9,12 +13,12 @@ describe('renderer/utils/theme.ts', () => {
   });
 
   it('should change to light mode', () => {
-    setTheme(Theme.LIGHT);
+    setScrollbarTheme('day');
     expect(getTheme()).toBe(Theme.LIGHT);
   });
 
   it('should change to dark mode', () => {
-    setTheme(Theme.DARK);
+    setScrollbarTheme('night');
     expect(getTheme()).toBe(Theme.DARK);
   });
 
@@ -25,7 +29,7 @@ describe('renderer/utils/theme.ts', () => {
         matches: false,
       })),
     });
-    setTheme();
+    setScrollbarTheme();
     expect(getTheme()).toBe(Theme.LIGHT);
   });
 
@@ -36,13 +40,32 @@ describe('renderer/utils/theme.ts', () => {
         matches: true,
       })),
     });
-    setTheme();
+    setScrollbarTheme();
     expect(getTheme()).toBe(Theme.DARK);
   });
 
-  it('should get color mode from theme', () => {
-    expect(getColorModeFromTheme(Theme.LIGHT)).toBe('day');
-    expect(getColorModeFromTheme(Theme.DARK)).toBe('night');
-    expect(getColorModeFromTheme(Theme.SYSTEM)).toBe('auto');
+  it('should map theme mode to github primer provider', () => {
+    expect(mapThemeModeToColorScheme(Theme.LIGHT)).toBe('light');
+    expect(mapThemeModeToColorScheme(Theme.LIGHT_HIGH_CONTRAST)).toBe(
+      'light_high_contrast',
+    );
+    expect(mapThemeModeToColorScheme(Theme.LIGHT_COLORBLIND)).toBe(
+      'light_colorblind',
+    );
+    expect(mapThemeModeToColorScheme(Theme.LIGHT_TRITANOPIA)).toBe(
+      'light_tritanopia',
+    );
+    expect(mapThemeModeToColorScheme(Theme.DARK)).toBe('dark');
+    expect(mapThemeModeToColorScheme(Theme.DARK_HIGH_CONTRAST)).toBe(
+      'dark_high_contrast',
+    );
+    expect(mapThemeModeToColorScheme(Theme.DARK_COLORBLIND)).toBe(
+      'dark_colorblind',
+    );
+    expect(mapThemeModeToColorScheme(Theme.DARK_TRITANOPIA)).toBe(
+      'dark_tritanopia',
+    );
+    expect(mapThemeModeToColorScheme(Theme.DARK_DIMMED)).toBe('dark_dimmed');
+    expect(mapThemeModeToColorScheme(Theme.SYSTEM)).toBe(null);
   });
 });

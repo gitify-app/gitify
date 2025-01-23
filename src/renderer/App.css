@@ -9,9 +9,15 @@
 @import "@primer/primitives/dist/css/functional/typography/typography.css";
 
 /* Themes and Colors */
-/* TODO Add support for setting color modes (dark_dimmed) - see #1748 */
 @import "@primer/primitives/dist/css/functional/themes/light.css";
+@import "@primer/primitives/dist/css/functional/themes/light-tritanopia.css";
+@import "@primer/primitives/dist/css/functional/themes/light-high-contrast.css";
+@import "@primer/primitives/dist/css/functional/themes/light-colorblind.css";
 @import "@primer/primitives/dist/css/functional/themes/dark.css";
+@import "@primer/primitives/dist/css/functional/themes/dark-colorblind.css";
+@import "@primer/primitives/dist/css/functional/themes/dark-dimmed.css";
+@import "@primer/primitives/dist/css/functional/themes/dark-high-contrast.css";
+@import "@primer/primitives/dist/css/functional/themes/dark-tritanopia.css";
 
 html,
 body,
