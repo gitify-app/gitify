@@ -22,7 +22,7 @@ export const FiltersRoute: FC = () => {
   const { settings, clearFilters, updateSetting } = useContext(AppContext);
 
   const updateReasonFilter = (reason: Reason, checked: boolean) => {
-    let reasons: Reason[] = settings.filterReasons;
+    let reasons: Reason[] = [...settings.filterReasons];
 
     if (checked) {
       reasons.push(reason);
