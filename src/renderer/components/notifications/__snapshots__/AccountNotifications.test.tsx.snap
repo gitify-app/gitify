@@ -800,44 +800,57 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
         <div
           class="flex-1 truncate cursor-pointer"
         >
-          <span
-            aria-label="View repository: gitify-app/notifications-test"
-            class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-se"
-            id=":rf:"
-            role="tooltip"
+          <div
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
           >
-            <div
-              class="Box-sc-g0xbh4-0 text-xs font-medium"
-              data-testid="view-repository"
+            <span
+              aria-label="View repository: gitify-app/notifications-test"
+              class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-se"
+              id=":rf:"
+              role="tooltip"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-                data-align="center"
-                data-direction="horizontal"
-                data-gap="condensed"
-                data-justify="start"
-                data-padding="none"
-                data-testid="avatar"
-                data-wrap="nowrap"
+                class="Box-sc-g0xbh4-0 text-xs font-medium"
+                data-testid="view-repository"
               >
-                <img
-                  alt="gitify-app/notifications-test"
-                  class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
-                  data-component="Avatar"
-                  height="14"
-                  size="14"
-                  src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-                  sx="[object Object]"
-                  width="14"
-                />
-                <span
-                  class="Text-sc-17v1xeu-0 hmAFGJ"
+                <div
+                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+                  data-align="center"
+                  data-direction="horizontal"
+                  data-gap="condensed"
+                  data-justify="start"
+                  data-padding="none"
+                  data-testid="avatar"
+                  data-wrap="nowrap"
                 >
-                  gitify-app/notifications-test
-                </span>
+                  <img
+                    alt="gitify-app/notifications-test"
+                    class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
+                    data-component="Avatar"
+                    height="14"
+                    size="14"
+                    src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+                    sx="[object Object]"
+                    width="14"
+                  />
+                  <span
+                    class="Text-sc-17v1xeu-0 hmAFGJ"
+                  >
+                    gitify-app/notifications-test
+                  </span>
+                </div>
               </div>
-            </div>
-          </span>
+            </span>
+            <div
+              class="Box-sc-g0xbh4-0 text-xxs opacity-50"
+            />
+          </div>
           <div
             class="flex gap-1 items-center mb-1 truncate text-sm"
             data-testid="notification-row"
@@ -849,7 +862,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               I am a robot and this is a test!
             </span>
             <span
-              class="text-xxs opacity-50"
+              class="text-xxs opacity-50 hidden"
             />
           </div>
           <div
@@ -1152,44 +1165,57 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
         <div
           class="flex-1 truncate cursor-pointer"
         >
-          <span
-            aria-label="View repository: gitify-app/notifications-test"
-            class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-se"
-            id=":rn:"
-            role="tooltip"
+          <div
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
           >
-            <div
-              class="Box-sc-g0xbh4-0 text-xs font-medium"
-              data-testid="view-repository"
+            <span
+              aria-label="View repository: gitify-app/notifications-test"
+              class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-se"
+              id=":rn:"
+              role="tooltip"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-                data-align="center"
-                data-direction="horizontal"
-                data-gap="condensed"
-                data-justify="start"
-                data-padding="none"
-                data-testid="avatar"
-                data-wrap="nowrap"
+                class="Box-sc-g0xbh4-0 text-xs font-medium"
+                data-testid="view-repository"
               >
-                <img
-                  alt="gitify-app/notifications-test"
-                  class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
-                  data-component="Avatar"
-                  height="14"
-                  size="14"
-                  src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-                  sx="[object Object]"
-                  width="14"
-                />
-                <span
-                  class="Text-sc-17v1xeu-0 hmAFGJ"
+                <div
+                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+                  data-align="center"
+                  data-direction="horizontal"
+                  data-gap="condensed"
+                  data-justify="start"
+                  data-padding="none"
+                  data-testid="avatar"
+                  data-wrap="nowrap"
                 >
-                  gitify-app/notifications-test
-                </span>
+                  <img
+                    alt="gitify-app/notifications-test"
+                    class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
+                    data-component="Avatar"
+                    height="14"
+                    size="14"
+                    src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+                    sx="[object Object]"
+                    width="14"
+                  />
+                  <span
+                    class="Text-sc-17v1xeu-0 hmAFGJ"
+                  >
+                    gitify-app/notifications-test
+                  </span>
+                </div>
               </div>
-            </div>
-          </span>
+            </span>
+            <div
+              class="Box-sc-g0xbh4-0 text-xxs opacity-50"
+            />
+          </div>
           <div
             class="flex gap-1 items-center mb-1 truncate text-sm"
             data-testid="notification-row"
@@ -1201,7 +1227,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               Improve the UI
             </span>
             <span
-              class="text-xxs opacity-50"
+              class="text-xxs opacity-50 hidden"
             />
           </div>
           <div
@@ -1631,44 +1657,57 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
       <div
         class="flex-1 truncate cursor-pointer"
       >
-        <span
-          aria-label="View repository: gitify-app/notifications-test"
-          class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-se"
-          id=":rf:"
-          role="tooltip"
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
         >
-          <div
-            class="Box-sc-g0xbh4-0 text-xs font-medium"
-            data-testid="view-repository"
+          <span
+            aria-label="View repository: gitify-app/notifications-test"
+            class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-se"
+            id=":rf:"
+            role="tooltip"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-              data-align="center"
-              data-direction="horizontal"
-              data-gap="condensed"
-              data-justify="start"
-              data-padding="none"
-              data-testid="avatar"
-              data-wrap="nowrap"
+              class="Box-sc-g0xbh4-0 text-xs font-medium"
+              data-testid="view-repository"
             >
-              <img
-                alt="gitify-app/notifications-test"
-                class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
-                data-component="Avatar"
-                height="14"
-                size="14"
-                src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-                sx="[object Object]"
-                width="14"
-              />
-              <span
-                class="Text-sc-17v1xeu-0 hmAFGJ"
+              <div
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+                data-align="center"
+                data-direction="horizontal"
+                data-gap="condensed"
+                data-justify="start"
+                data-padding="none"
+                data-testid="avatar"
+                data-wrap="nowrap"
               >
-                gitify-app/notifications-test
-              </span>
+                <img
+                  alt="gitify-app/notifications-test"
+                  class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
+                  data-component="Avatar"
+                  height="14"
+                  size="14"
+                  src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+                  sx="[object Object]"
+                  width="14"
+                />
+                <span
+                  class="Text-sc-17v1xeu-0 hmAFGJ"
+                >
+                  gitify-app/notifications-test
+                </span>
+              </div>
             </div>
-          </div>
-        </span>
+          </span>
+          <div
+            class="Box-sc-g0xbh4-0 text-xxs opacity-50"
+          />
+        </div>
         <div
           class="flex gap-1 items-center mb-1 truncate text-sm"
           data-testid="notification-row"
@@ -1680,7 +1719,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             I am a robot and this is a test!
           </span>
           <span
-            class="text-xxs opacity-50"
+            class="text-xxs opacity-50 hidden"
           />
         </div>
         <div
@@ -1983,44 +2022,57 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
       <div
         class="flex-1 truncate cursor-pointer"
       >
-        <span
-          aria-label="View repository: gitify-app/notifications-test"
-          class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-se"
-          id=":rn:"
-          role="tooltip"
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
         >
-          <div
-            class="Box-sc-g0xbh4-0 text-xs font-medium"
-            data-testid="view-repository"
+          <span
+            aria-label="View repository: gitify-app/notifications-test"
+            class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-se"
+            id=":rn:"
+            role="tooltip"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-              data-align="center"
-              data-direction="horizontal"
-              data-gap="condensed"
-              data-justify="start"
-              data-padding="none"
-              data-testid="avatar"
-              data-wrap="nowrap"
+              class="Box-sc-g0xbh4-0 text-xs font-medium"
+              data-testid="view-repository"
             >
-              <img
-                alt="gitify-app/notifications-test"
-                class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
-                data-component="Avatar"
-                height="14"
-                size="14"
-                src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-                sx="[object Object]"
-                width="14"
-              />
-              <span
-                class="Text-sc-17v1xeu-0 hmAFGJ"
+              <div
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+                data-align="center"
+                data-direction="horizontal"
+                data-gap="condensed"
+                data-justify="start"
+                data-padding="none"
+                data-testid="avatar"
+                data-wrap="nowrap"
               >
-                gitify-app/notifications-test
-              </span>
+                <img
+                  alt="gitify-app/notifications-test"
+                  class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
+                  data-component="Avatar"
+                  height="14"
+                  size="14"
+                  src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+                  sx="[object Object]"
+                  width="14"
+                />
+                <span
+                  class="Text-sc-17v1xeu-0 hmAFGJ"
+                >
+                  gitify-app/notifications-test
+                </span>
+              </div>
             </div>
-          </div>
-        </span>
+          </span>
+          <div
+            class="Box-sc-g0xbh4-0 text-xxs opacity-50"
+          />
+        </div>
         <div
           class="flex gap-1 items-center mb-1 truncate text-sm"
           data-testid="notification-row"
@@ -2032,7 +2084,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             Improve the UI
           </span>
           <span
-            class="text-xxs opacity-50"
+            class="text-xxs opacity-50 hidden"
           />
         </div>
         <div
