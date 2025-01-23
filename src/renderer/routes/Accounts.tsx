@@ -15,14 +15,13 @@ import {
 import {
   ActionList,
   ActionMenu,
-  Avatar,
   Button,
   IconButton,
   Stack,
-  Text,
 } from '@primer/react';
 
 import { logError } from '../../shared/logger';
+import { AvatarWithFallback } from '../components/avatars/AvatarWithFallback';
 import { Header } from '../components/primitives/Header';
 import { AppContext } from '../context/App';
 import { type Account, Size } from '../types';
@@ -103,17 +102,12 @@ export const AccountsRoute: FC = () => {
                         onClick={() => openAccountProfile(account)}
                         data-testid="account-profile"
                       >
-                        <Stack
-                          direction="horizontal"
-                          gap="condensed"
-                          align="center"
-                        >
-                          <Avatar
-                            src={account.user.avatar}
-                            size={Size.XLARGE}
-                          />
-                          <Text>@{account.user.login}</Text>
-                        </Stack>
+                        <AvatarWithFallback
+                          src={account.user.avatar}
+                          alt={account.user.login}
+                          name={`@${account.user.login}`}
+                          size={Size.XLARGE}
+                        />
                       </Button>
                     </div>
 

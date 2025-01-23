@@ -1,7 +1,7 @@
 import { type FC, type MouseEvent, useContext, useMemo, useState } from 'react';
 
 import { GitPullRequestIcon, IssueOpenedIcon } from '@primer/octicons-react';
-import { Avatar, Button, IconButton, Stack, Text } from '@primer/react';
+import { Button, IconButton } from '@primer/react';
 
 import { AppContext } from '../../context/App';
 import { type Account, type GitifyError, Size } from '../../types';
@@ -15,6 +15,7 @@ import {
 } from '../../utils/links';
 import { AllRead } from '../AllRead';
 import { Oops } from '../Oops';
+import { AvatarWithFallback } from '../avatars/AvatarWithFallback';
 import { HoverGroup } from '../primitives/HoverGroup';
 import { NotificationRow } from './NotificationRow';
 import { RepositoryNotifications } from './RepositoryNotifications';
@@ -87,10 +88,12 @@ export const AccountNotifications: FC<IAccountNotifications> = (
             }}
             data-testid="account-profile"
           >
-            <Stack direction="horizontal" align="center" gap="condensed">
-              <Avatar src={account.user.avatar} size={Size.MEDIUM} />
-              <Text>@{account.user.login}</Text>
-            </Stack>
+            <AvatarWithFallback
+              src={account.user.avatar}
+              alt={account.user.login}
+              name={`@${account.user.login}`}
+              size={Size.MEDIUM}
+            />
           </Button>
 
           <HoverGroup>

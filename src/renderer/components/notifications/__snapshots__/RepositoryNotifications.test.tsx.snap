@@ -35,10 +35,11 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
                   data-gap="condensed"
                   data-justify="start"
                   data-padding="none"
+                  data-testid="avatar"
                   data-wrap="nowrap"
                 >
                   <img
-                    alt=""
+                    alt="gitify-app/notifications-test"
                     class="Avatar__StyledAvatar-sc-2lv0r8-0 bGlcDY"
                     data-component="Avatar"
                     height="18"
@@ -239,10 +240,11 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
                 data-gap="condensed"
                 data-justify="start"
                 data-padding="none"
+                data-testid="avatar"
                 data-wrap="nowrap"
               >
                 <img
-                  alt=""
+                  alt="gitify-app/notifications-test"
                   class="Avatar__StyledAvatar-sc-2lv0r8-0 bGlcDY"
                   data-component="Avatar"
                   height="18"
@@ -500,10 +502,11 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
                   data-gap="condensed"
                   data-justify="start"
                   data-padding="none"
+                  data-testid="avatar"
                   data-wrap="nowrap"
                 >
                   <img
-                    alt=""
+                    alt="gitify-app/notifications-test"
                     class="Avatar__StyledAvatar-sc-2lv0r8-0 bGlcDY"
                     data-component="Avatar"
                     height="18"
@@ -696,10 +699,11 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
                   data-gap="condensed"
                   data-justify="start"
                   data-padding="none"
+                  data-testid="avatar"
                   data-wrap="nowrap"
                 >
                   <img
-                    alt=""
+                    alt="gitify-app/notifications-test"
                     class="Avatar__StyledAvatar-sc-2lv0r8-0 bGlcDY"
                     data-component="Avatar"
                     height="18"
@@ -899,10 +903,11 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
                 data-gap="condensed"
                 data-justify="start"
                 data-padding="none"
+                data-testid="avatar"
                 data-wrap="nowrap"
               >
                 <img
-                  alt=""
+                  alt="gitify-app/notifications-test"
                   class="Avatar__StyledAvatar-sc-2lv0r8-0 bGlcDY"
                   data-component="Avatar"
                   height="18"
@@ -1159,10 +1164,11 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
                   data-gap="condensed"
                   data-justify="start"
                   data-padding="none"
+                  data-testid="avatar"
                   data-wrap="nowrap"
                 >
                   <img
-                    alt=""
+                    alt="gitify-app/notifications-test"
                     class="Avatar__StyledAvatar-sc-2lv0r8-0 bGlcDY"
                     data-component="Avatar"
                     height="18"
@@ -1362,10 +1368,11 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
                 data-gap="condensed"
                 data-justify="start"
                 data-padding="none"
+                data-testid="avatar"
                 data-wrap="nowrap"
               >
                 <img
-                  alt=""
+                  alt="gitify-app/notifications-test"
                   class="Avatar__StyledAvatar-sc-2lv0r8-0 bGlcDY"
                   data-component="Avatar"
                   height="18"

@@ -27,7 +27,9 @@ describe('renderer/components/fields/RadioGroup.tsx', () => {
 
   it('should check that NProgress is getting called in getDerivedStateFromProps (loading)', () => {
     render(<RadioGroup {...props} />);
+
     fireEvent.click(screen.getByLabelText('Value 1'));
+
     expect(props.onChange).toHaveBeenCalledTimes(1);
   });
 });

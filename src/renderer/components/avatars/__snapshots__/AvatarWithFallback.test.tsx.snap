@@ -1,0 +1,289 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renderer/components/avatars/AvatarWithFallback.tsx renders the fallback icon when the image fails to load (isBroken = true) - human user 1`] = `
+<div
+  class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+  data-align="center"
+  data-direction="horizontal"
+  data-gap="condensed"
+  data-justify="start"
+  data-padding="none"
+  data-testid="avatar"
+  data-wrap="nowrap"
+>
+  <img
+    alt="gitify-app"
+    class="Avatar__StyledAvatar-sc-2lv0r8-0 kuZlm"
+    data-component="Avatar"
+    height="16"
+    size="16"
+    src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+    sx="[object Object]"
+    width="16"
+  />
+  <span
+    class="Text-sc-17v1xeu-0 hmAFGJ"
+  >
+    @gitify-app
+  </span>
+</div>
+`;
+
+exports[`renderer/components/avatars/AvatarWithFallback.tsx renders the fallback icon when the image fails to load (isBroken = true) - non human user 1`] = `
+<div
+  class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+  data-align="center"
+  data-direction="horizontal"
+  data-gap="condensed"
+  data-justify="start"
+  data-padding="none"
+  data-testid="avatar"
+  data-wrap="nowrap"
+>
+  <img
+    alt="gitify-app"
+    class="Avatar__StyledAvatar-sc-2lv0r8-0 fdrsHc"
+    data-component="Avatar"
+    height="16"
+    size="16"
+    src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+    sx="[object Object]"
+    width="16"
+  />
+  <span
+    class="Text-sc-17v1xeu-0 hmAFGJ"
+  >
+    @gitify-app
+  </span>
+</div>
+`;
+
+exports[`renderer/components/avatars/AvatarWithFallback.tsx should render avatar - human user 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+        data-align="center"
+        data-direction="horizontal"
+        data-gap="condensed"
+        data-justify="start"
+        data-padding="none"
+        data-testid="avatar"
+        data-wrap="nowrap"
+      >
+        <img
+          alt="gitify-app"
+          class="Avatar__StyledAvatar-sc-2lv0r8-0 kuZlm"
+          data-component="Avatar"
+          height="16"
+          size="16"
+          src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+          sx="[object Object]"
+          width="16"
+        />
+        <span
+          class="Text-sc-17v1xeu-0 hmAFGJ"
+        >
+          @gitify-app
+        </span>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+      data-align="center"
+      data-direction="horizontal"
+      data-gap="condensed"
+      data-justify="start"
+      data-padding="none"
+      data-testid="avatar"
+      data-wrap="nowrap"
+    >
+      <img
+        alt="gitify-app"
+        class="Avatar__StyledAvatar-sc-2lv0r8-0 kuZlm"
+        data-component="Avatar"
+        height="16"
+        size="16"
+        src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+        sx="[object Object]"
+        width="16"
+      />
+      <span
+        class="Text-sc-17v1xeu-0 hmAFGJ"
+      >
+        @gitify-app
+      </span>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`renderer/components/avatars/AvatarWithFallback.tsx should render avatar - non-human user 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+        data-align="center"
+        data-direction="horizontal"
+        data-gap="condensed"
+        data-justify="start"
+        data-padding="none"
+        data-testid="avatar"
+        data-wrap="nowrap"
+      >
+        <img
+          alt="gitify-app"
+          class="Avatar__StyledAvatar-sc-2lv0r8-0 fdrsHc"
+          data-component="Avatar"
+          height="16"
+          size="16"
+          src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+          sx="[object Object]"
+          width="16"
+        />
+        <span
+          class="Text-sc-17v1xeu-0 hmAFGJ"
+        >
+          @gitify-app
+        </span>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+      data-align="center"
+      data-direction="horizontal"
+      data-gap="condensed"
+      data-justify="start"
+      data-padding="none"
+      data-testid="avatar"
+      data-wrap="nowrap"
+    >
+      <img
+        alt="gitify-app"
+        class="Avatar__StyledAvatar-sc-2lv0r8-0 fdrsHc"
+        data-component="Avatar"
+        height="16"
+        size="16"
+        src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+        sx="[object Object]"
+        width="16"
+      />
+      <span
+        class="Text-sc-17v1xeu-0 hmAFGJ"
+      >
+        @gitify-app
+      </span>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

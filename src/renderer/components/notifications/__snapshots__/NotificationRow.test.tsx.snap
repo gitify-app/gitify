@@ -49,6 +49,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             role="tooltip"
           >
             <div
+              class="Box-sc-g0xbh4-0 text-xs font-medium"
               data-testid="view-repository"
             >
               <div
@@ -58,10 +59,11 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 data-gap="condensed"
                 data-justify="start"
                 data-padding="none"
+                data-testid="avatar"
                 data-wrap="nowrap"
               >
                 <img
-                  alt=""
+                  alt="gitify-app/notifications-test"
                   class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
                   data-component="Avatar"
                   height="14"
@@ -71,7 +73,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                   width="14"
                 />
                 <span
-                  class="text-xs font-medium"
+                  class="Text-sc-17v1xeu-0 hmAFGJ"
                 >
                   gitify-app/notifications-test
                 </span>
@@ -101,18 +103,33 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             data-padding="none"
             data-wrap="wrap"
           >
-            <img
-              alt=""
-              class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
-              data-component="Avatar"
+            <div
+              class="Box-sc-g0xbh4-0"
               data-testid="view-profile"
-              height="14"
-              size="14"
-              src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-              sx="[object Object]"
               title="View profile: gitify-app"
-              width="14"
-            />
+            >
+              <div
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+                data-align="center"
+                data-direction="horizontal"
+                data-gap="condensed"
+                data-justify="start"
+                data-padding="none"
+                data-testid="avatar"
+                data-wrap="nowrap"
+              >
+                <img
+                  alt="gitify-app"
+                  class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
+                  data-component="Avatar"
+                  height="14"
+                  size="14"
+                  src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+                  sx="[object Object]"
+                  width="14"
+                />
+              </div>
+            </div>
             <div
               class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
               data-align="stretch"
@@ -387,6 +404,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
           role="tooltip"
         >
           <div
+            class="Box-sc-g0xbh4-0 text-xs font-medium"
             data-testid="view-repository"
           >
             <div
@@ -396,10 +414,11 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               data-gap="condensed"
               data-justify="start"
               data-padding="none"
+              data-testid="avatar"
               data-wrap="nowrap"
             >
               <img
-                alt=""
+                alt="gitify-app/notifications-test"
                 class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
                 data-component="Avatar"
                 height="14"
@@ -409,7 +428,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 width="14"
               />
               <span
-                class="text-xs font-medium"
+                class="Text-sc-17v1xeu-0 hmAFGJ"
               >
                 gitify-app/notifications-test
               </span>
@@ -439,18 +458,33 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
           data-padding="none"
           data-wrap="wrap"
         >
-          <img
-            alt=""
-            class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
-            data-component="Avatar"
+          <div
+            class="Box-sc-g0xbh4-0"
             data-testid="view-profile"
-            height="14"
-            size="14"
-            src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-            sx="[object Object]"
             title="View profile: gitify-app"
-            width="14"
-          />
+          >
+            <div
+              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+              data-align="center"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-testid="avatar"
+              data-wrap="nowrap"
+            >
+              <img
+                alt="gitify-app"
+                class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
+                data-component="Avatar"
+                height="14"
+                size="14"
+                src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+                sx="[object Object]"
+                width="14"
+              />
+            </div>
+          </div>
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="stretch"
@@ -798,18 +832,33 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             data-padding="none"
             data-wrap="wrap"
           >
-            <img
-              alt=""
-              class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
-              data-component="Avatar"
+            <div
+              class="Box-sc-g0xbh4-0"
               data-testid="view-profile"
-              height="14"
-              size="14"
-              src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-              sx="[object Object]"
               title="View profile: gitify-app"
-              width="14"
-            />
+            >
+              <div
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+                data-align="center"
+                data-direction="horizontal"
+                data-gap="condensed"
+                data-justify="start"
+                data-padding="none"
+                data-testid="avatar"
+                data-wrap="nowrap"
+              >
+                <img
+                  alt="gitify-app"
+                  class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
+                  data-component="Avatar"
+                  height="14"
+                  size="14"
+                  src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+                  sx="[object Object]"
+                  width="14"
+                />
+              </div>
+            </div>
             <div
               class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
               data-align="stretch"
@@ -1100,18 +1149,33 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
           data-padding="none"
           data-wrap="wrap"
         >
-          <img
-            alt=""
-            class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
-            data-component="Avatar"
+          <div
+            class="Box-sc-g0xbh4-0"
             data-testid="view-profile"
-            height="14"
-            size="14"
-            src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-            sx="[object Object]"
             title="View profile: gitify-app"
-            width="14"
-          />
+          >
+            <div
+              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+              data-align="center"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-testid="avatar"
+              data-wrap="nowrap"
+            >
+              <img
+                alt="gitify-app"
+                class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
+                data-component="Avatar"
+                height="14"
+                size="14"
+                src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+                sx="[object Object]"
+                width="14"
+              />
+            </div>
+          </div>
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="stretch"
@@ -1459,18 +1523,33 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             data-padding="none"
             data-wrap="wrap"
           >
-            <img
-              alt=""
-              class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
-              data-component="Avatar"
+            <div
+              class="Box-sc-g0xbh4-0"
               data-testid="view-profile"
-              height="14"
-              size="14"
-              src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-              sx="[object Object]"
               title="View profile: gitify-app"
-              width="14"
-            />
+            >
+              <div
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+                data-align="center"
+                data-direction="horizontal"
+                data-gap="condensed"
+                data-justify="start"
+                data-padding="none"
+                data-testid="avatar"
+                data-wrap="nowrap"
+              >
+                <img
+                  alt="gitify-app"
+                  class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
+                  data-component="Avatar"
+                  height="14"
+                  size="14"
+                  src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+                  sx="[object Object]"
+                  width="14"
+                />
+              </div>
+            </div>
             <div
               class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
               data-align="stretch"
@@ -1761,18 +1840,33 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
           data-padding="none"
           data-wrap="wrap"
         >
-          <img
-            alt=""
-            class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
-            data-component="Avatar"
+          <div
+            class="Box-sc-g0xbh4-0"
             data-testid="view-profile"
-            height="14"
-            size="14"
-            src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-            sx="[object Object]"
             title="View profile: gitify-app"
-            width="14"
-          />
+          >
+            <div
+              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+              data-align="center"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-testid="avatar"
+              data-wrap="nowrap"
+            >
+              <img
+                alt="gitify-app"
+                class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
+                data-component="Avatar"
+                height="14"
+                size="14"
+                src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+                sx="[object Object]"
+                width="14"
+              />
+            </div>
+          </div>
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="stretch"

@@ -1,5 +1,5 @@
 import { CheckIcon, ReadIcon } from '@primer/octicons-react';
-import { Avatar, Button, IconButton, Stack, Text } from '@primer/react';
+import { Button, IconButton } from '@primer/react';
 import { type FC, type MouseEvent, useContext, useState } from 'react';
 
 import { AppContext } from '../../context/App';
@@ -9,6 +9,7 @@ import { cn } from '../../utils/cn';
 import { isMarkAsDoneFeatureSupported } from '../../utils/features';
 import { getChevronDetails, isNonHumanUser } from '../../utils/helpers';
 import { openRepository } from '../../utils/links';
+import { AvatarWithFallback } from '../avatars/AvatarWithFallback';
 import { HoverGroup } from '../primitives/HoverGroup';
 import { NotificationRow } from './NotificationRow';
 
@@ -65,16 +66,15 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
               openRepository(repoNotifications[0].repository);
             }}
           >
-            <Stack direction="horizontal" gap="condensed" align="center">
-              <Avatar
-                src={avatarUrl}
-                size={Size.LARGE}
-                square={isNonHumanUser(
-                  repoNotifications[0].repository.owner.type,
-                )}
-              />
-              <Text>{repoName}</Text>
-            </Stack>
+            <AvatarWithFallback
+              src={avatarUrl}
+              alt={repoName}
+              name={repoName}
+              size={Size.LARGE}
+              isNonHuman={isNonHumanUser(
+                repoNotifications[0].repository.owner.type,
+              )}
+            />
           </Button>
         </div>
 

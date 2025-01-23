@@ -12,6 +12,7 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
         role="tooltip"
       >
         <div
+          class="Box-sc-g0xbh4-0 text-xs font-medium"
           data-testid="view-repository"
         >
           <div
@@ -21,10 +22,11 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
             data-gap="condensed"
             data-justify="start"
             data-padding="none"
+            data-testid="avatar"
             data-wrap="nowrap"
           >
             <img
-              alt=""
+              alt="gitify-app/notifications-test"
               class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
               data-component="Avatar"
               height="14"
@@ -34,7 +36,7 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
               width="14"
             />
             <span
-              class="text-xs font-medium"
+              class="Text-sc-17v1xeu-0 hmAFGJ"
             >
               gitify-app/notifications-test
             </span>
@@ -51,6 +53,7 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
       role="tooltip"
     >
       <div
+        class="Box-sc-g0xbh4-0 text-xs font-medium"
         data-testid="view-repository"
       >
         <div
@@ -60,10 +63,11 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
           data-gap="condensed"
           data-justify="start"
           data-padding="none"
+          data-testid="avatar"
           data-wrap="nowrap"
         >
           <img
-            alt=""
+            alt="gitify-app/notifications-test"
             class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
             data-component="Avatar"
             height="14"
@@ -73,7 +77,7 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
             width="14"
           />
           <span
-            class="text-xs font-medium"
+            class="Text-sc-17v1xeu-0 hmAFGJ"
           >
             gitify-app/notifications-test
           </span>

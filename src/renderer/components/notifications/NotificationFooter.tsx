@@ -1,7 +1,7 @@
 import type { FC, MouseEvent } from 'react';
 
 import { FeedPersonIcon, MarkGithubIcon } from '@primer/octicons-react';
-import { Avatar, RelativeTime, Stack, Text } from '@primer/react';
+import { Box, RelativeTime, Stack, Text } from '@primer/react';
 
 import { IconColor, Opacity, Size } from '../../types';
 import type { Notification } from '../../typesGitHub';
@@ -9,6 +9,7 @@ import { cn } from '../../utils/cn';
 import { isNonHumanUser } from '../../utils/helpers';
 import { openUserProfile } from '../../utils/links';
 import { formatReason } from '../../utils/reason';
+import { AvatarWithFallback } from '../avatars/AvatarWithFallback';
 import { MetricGroup } from '../metrics/MetricGroup';
 
 interface INotificationFooter {
@@ -29,18 +30,22 @@ export const NotificationFooter: FC<INotificationFooter> = ({
       className={cn('text-xs', Opacity.MEDIUM)}
     >
       {notification.subject.user ? (
-        <Avatar
+        <Box
           title={`View profile: ${notification.subject.user.login}`}
-          src={notification.subject.user.avatar_url}
-          size={Size.SMALL}
-          square={isNonHumanUser(notification.subject.user.type)}
           onClick={(event: MouseEvent<HTMLElement>) => {
             // Don't trigger onClick of parent element.
             event.stopPropagation();
             openUserProfile(notification.subject.user);
           }}
           data-testid="view-profile"
-        />
+        >
+          <AvatarWithFallback
+            src={notification.subject.user.avatar_url}
+            alt={notification.subject.user.login}
+            size={Size.SMALL}
+            isNonHuman={isNonHumanUser(notification.subject.user.type)}
+          />
+        </Box>
       ) : (
         <>
           {notification.subject.type === 'RepositoryDependabotAlertsThread' ||

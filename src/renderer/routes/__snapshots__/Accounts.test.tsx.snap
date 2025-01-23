@@ -132,10 +132,11 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
                       data-gap="condensed"
                       data-justify="start"
                       data-padding="none"
+                      data-testid="avatar"
                       data-wrap="nowrap"
                     >
                       <img
-                        alt=""
+                        alt="octocat"
                         class="Avatar__StyledAvatar-sc-2lv0r8-0 jwAMPP"
                         data-component="Avatar"
                         height="20"
@@ -147,8 +148,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
                       <span
                         class="Text-sc-17v1xeu-0 hmAFGJ"
                       >
-                        @
-                        octocat
+                        @octocat
                       </span>
                     </div>
                   </span>
@@ -496,10 +496,11 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
                       data-gap="condensed"
                       data-justify="start"
                       data-padding="none"
+                      data-testid="avatar"
                       data-wrap="nowrap"
                     >
                       <img
-                        alt=""
+                        alt="octocat"
                         class="Avatar__StyledAvatar-sc-2lv0r8-0 jwAMPP"
                         data-component="Avatar"
                         height="20"
@@ -511,8 +512,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
                       <span
                         class="Text-sc-17v1xeu-0 hmAFGJ"
                       >
-                        @
-                        octocat
+                        @octocat
                       </span>
                     </div>
                   </span>
@@ -860,10 +860,11 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
                       data-gap="condensed"
                       data-justify="start"
                       data-padding="none"
+                      data-testid="avatar"
                       data-wrap="nowrap"
                     >
                       <img
-                        alt=""
+                        alt="octocat"
                         class="Avatar__StyledAvatar-sc-2lv0r8-0 jwAMPP"
                         data-component="Avatar"
                         height="20"
@@ -875,8 +876,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
                       <span
                         class="Text-sc-17v1xeu-0 hmAFGJ"
                       >
-                        @
-                        octocat
+                        @octocat
                       </span>
                     </div>
                   </span>
@@ -1362,10 +1362,11 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
                       data-gap="condensed"
                       data-justify="start"
                       data-padding="none"
+                      data-testid="avatar"
                       data-wrap="nowrap"
                     >
                       <img
-                        alt=""
+                        alt="octocat"
                         class="Avatar__StyledAvatar-sc-2lv0r8-0 jwAMPP"
                         data-component="Avatar"
                         height="20"
@@ -1377,8 +1378,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
                       <span
                         class="Text-sc-17v1xeu-0 hmAFGJ"
                       >
-                        @
-                        octocat
+                        @octocat
                       </span>
                     </div>
                   </span>
@@ -1726,10 +1726,11 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
                       data-gap="condensed"
                       data-justify="start"
                       data-padding="none"
+                      data-testid="avatar"
                       data-wrap="nowrap"
                     >
                       <img
-                        alt=""
+                        alt="octocat"
                         class="Avatar__StyledAvatar-sc-2lv0r8-0 jwAMPP"
                         data-component="Avatar"
                         height="20"
@@ -1741,8 +1742,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
                       <span
                         class="Text-sc-17v1xeu-0 hmAFGJ"
                       >
-                        @
-                        octocat
+                        @octocat
                       </span>
                     </div>
                   </span>
@@ -2090,10 +2090,11 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
                       data-gap="condensed"
                       data-justify="start"
                       data-padding="none"
+                      data-testid="avatar"
                       data-wrap="nowrap"
                     >
                       <img
-                        alt=""
+                        alt="octocat"
                         class="Avatar__StyledAvatar-sc-2lv0r8-0 jwAMPP"
                         data-component="Avatar"
                         height="20"
@@ -2105,8 +2106,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
                       <span
                         class="Text-sc-17v1xeu-0 hmAFGJ"
                       >
-                        @
-                        octocat
+                        @octocat
                       </span>
                     </div>
                   </span>
@@ -2592,10 +2592,11 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                       data-gap="condensed"
                       data-justify="start"
                       data-padding="none"
+                      data-testid="avatar"
                       data-wrap="nowrap"
                     >
                       <img
-                        alt=""
+                        alt="octocat"
                         class="Avatar__StyledAvatar-sc-2lv0r8-0 jwAMPP"
                         data-component="Avatar"
                         height="20"
@@ -2607,8 +2608,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                       <span
                         class="Text-sc-17v1xeu-0 hmAFGJ"
                       >
-                        @
-                        octocat
+                        @octocat
                       </span>
                     </div>
                   </span>
@@ -2956,10 +2956,11 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                       data-gap="condensed"
                       data-justify="start"
                       data-padding="none"
+                      data-testid="avatar"
                       data-wrap="nowrap"
                     >
                       <img
-                        alt=""
+                        alt="octocat"
                         class="Avatar__StyledAvatar-sc-2lv0r8-0 jwAMPP"
                         data-component="Avatar"
                         height="20"
@@ -2971,8 +2972,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                       <span
                         class="Text-sc-17v1xeu-0 hmAFGJ"
                       >
-                        @
-                        octocat
+                        @octocat
                       </span>
                     </div>
                   </span>
@@ -3320,10 +3320,11 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                       data-gap="condensed"
                       data-justify="start"
                       data-padding="none"
+                      data-testid="avatar"
                       data-wrap="nowrap"
                     >
                       <img
-                        alt=""
+                        alt="octocat"
                         class="Avatar__StyledAvatar-sc-2lv0r8-0 jwAMPP"
                         data-component="Avatar"
                         height="20"
@@ -3335,8 +3336,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                       <span
                         class="Text-sc-17v1xeu-0 hmAFGJ"
                       >
-                        @
-                        octocat
+                        @octocat
                       </span>
                     </div>
                   </span>
