@@ -5,13 +5,15 @@ import { FeedPersonIcon, MarkGithubIcon } from '@primer/octicons-react';
 import { Avatar, Stack, Text } from '@primer/react';
 
 import { type Link, Size } from '../../types';
+import type { UserType } from '../../typesGitHub';
+import { isNonHumanUser } from '../../utils/helpers';
 
 export interface IAvatarWithFallback {
-  src: Link;
-  alt: string;
+  src?: Link;
+  alt?: string;
   name?: string;
   size?: number;
-  isNonHuman?: boolean;
+  userType?: UserType;
 }
 
 export const AvatarWithFallback: React.FC<IAvatarWithFallback> = ({
@@ -19,10 +21,11 @@ export const AvatarWithFallback: React.FC<IAvatarWithFallback> = ({
   alt,
   name,
   size = Size.MEDIUM,
-  isNonHuman = false,
+  userType = 'User',
 }) => {
   const [isBroken, setIsBroken] = useState(false);
 
+  const isNonHuman = isNonHumanUser(userType);
   return (
     <Stack
       direction="horizontal"
@@ -30,7 +33,7 @@ export const AvatarWithFallback: React.FC<IAvatarWithFallback> = ({
       gap="condensed"
       data-testid="avatar"
     >
-      {isBroken ? (
+      {!src || isBroken ? (
         isNonHuman ? (
           <MarkGithubIcon size={size} />
         ) : (

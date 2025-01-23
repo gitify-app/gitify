@@ -5,7 +5,6 @@ import { Box, Tooltip } from '@primer/react';
 import { AppContext } from '../../context/App';
 import { Size } from '../../types';
 import type { Notification } from '../../typesGitHub';
-import { isNonHumanUser } from '../../utils/helpers';
 import { openRepository } from '../../utils/links';
 import { AvatarWithFallback } from '../avatars/AvatarWithFallback';
 
@@ -39,7 +38,7 @@ export const NotificationHeader: FC<INotificationHeader> = ({
             alt={repoSlug}
             name={repoSlug}
             size={Size.SMALL}
-            isNonHuman={isNonHumanUser(notification.repository.owner.type)}
+            userType={notification.repository.owner.type}
           />
         </Box>
       </Tooltip>

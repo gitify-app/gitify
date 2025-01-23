@@ -7,7 +7,7 @@ import { Opacity, Size } from '../../types';
 import type { Notification } from '../../typesGitHub';
 import { cn } from '../../utils/cn';
 import { isMarkAsDoneFeatureSupported } from '../../utils/features';
-import { getChevronDetails, isNonHumanUser } from '../../utils/helpers';
+import { getChevronDetails } from '../../utils/helpers';
 import { openRepository } from '../../utils/links';
 import { AvatarWithFallback } from '../avatars/AvatarWithFallback';
 import { HoverGroup } from '../primitives/HoverGroup';
@@ -71,9 +71,7 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
               alt={repoName}
               name={repoName}
               size={Size.LARGE}
-              isNonHuman={isNonHumanUser(
-                repoNotifications[0].repository.owner.type,
-              )}
+              userType={repoNotifications[0].repository.owner.type}
             />
           </Button>
         </div>

@@ -12,7 +12,7 @@ describe('renderer/components/avatars/AvatarWithFallback.tsx', () => {
     alt: 'gitify-app',
     name: '@gitify-app',
     size: Size.MEDIUM,
-    isNonHuman: false,
+    userType: 'User',
   };
 
   it('should render avatar - human user', () => {
@@ -21,7 +21,23 @@ describe('renderer/components/avatars/AvatarWithFallback.tsx', () => {
   });
 
   it('should render avatar - non-human user', () => {
-    const tree = render(<AvatarWithFallback {...props} isNonHuman />);
+    const tree = render(
+      <AvatarWithFallback {...props} userType={'Organization'} />,
+    );
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('renders the fallback icon when no src url - human user', () => {
+    const tree = render(<AvatarWithFallback {...props} src={null} />);
+
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('renders the fallback icon when no src url - non human user', () => {
+    const tree = render(
+      <AvatarWithFallback {...props} src={null} userType="Bot" />,
+    );
+
     expect(tree).toMatchSnapshot();
   });
 
@@ -38,7 +54,7 @@ describe('renderer/components/avatars/AvatarWithFallback.tsx', () => {
   });
 
   it('renders the fallback icon when the image fails to load (isBroken = true) - non human user', () => {
-    render(<AvatarWithFallback {...props} isNonHuman />);
+    render(<AvatarWithFallback {...props} userType={'Bot'} />);
 
     // Find the avatar element by its alt text
     const avatar = screen.getByAltText('gitify-app') as HTMLImageElement;

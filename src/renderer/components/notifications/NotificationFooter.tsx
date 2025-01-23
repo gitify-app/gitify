@@ -1,12 +1,10 @@
 import type { FC, MouseEvent } from 'react';
 
-import { FeedPersonIcon, MarkGithubIcon } from '@primer/octicons-react';
 import { Box, RelativeTime, Stack, Text } from '@primer/react';
 
-import { IconColor, Opacity, Size } from '../../types';
+import { Opacity, Size } from '../../types';
 import type { Notification } from '../../typesGitHub';
 import { cn } from '../../utils/cn';
-import { isNonHumanUser } from '../../utils/helpers';
 import { openUserProfile } from '../../utils/links';
 import { formatReason } from '../../utils/reason';
 import { AvatarWithFallback } from '../avatars/AvatarWithFallback';
@@ -43,18 +41,19 @@ export const NotificationFooter: FC<INotificationFooter> = ({
             src={notification.subject.user.avatar_url}
             alt={notification.subject.user.login}
             size={Size.SMALL}
-            isNonHuman={isNonHumanUser(notification.subject.user.type)}
+            userType={notification.subject.user.type}
           />
         </Box>
       ) : (
-        <>
-          {notification.subject.type === 'RepositoryDependabotAlertsThread' ||
-          notification.subject.type === 'RepositoryVulnerabilityAlert' ? (
-            <MarkGithubIcon size={Size.SMALL} />
-          ) : (
-            <FeedPersonIcon size={Size.SMALL} className={IconColor.GRAY} />
-          )}
-        </>
+        <AvatarWithFallback
+          size={Size.SMALL}
+          userType={
+            notification.subject.type === 'RepositoryDependabotAlertsThread' ||
+            notification.subject.type === 'RepositoryVulnerabilityAlert'
+              ? 'Bot'
+              : 'User'
+          }
+        />
       )}
 
       <Stack direction="horizontal" gap="none">

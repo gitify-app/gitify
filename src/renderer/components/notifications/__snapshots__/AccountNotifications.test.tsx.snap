@@ -1213,22 +1213,33 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-padding="none"
             data-wrap="wrap"
           >
-            <svg
-              aria-hidden="true"
-              class="octicon octicon-feed-person text-gitify-icon-muted"
-              display="inline-block"
-              fill="currentColor"
-              focusable="false"
-              height="14"
-              overflow="visible"
-              style="vertical-align: text-bottom;"
-              viewBox="0 0 16 16"
-              width="14"
+            <div
+              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+              data-align="center"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-testid="avatar"
+              data-wrap="nowrap"
             >
-              <path
-                d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
-              />
-            </svg>
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-feed-person"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="14"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="14"
+              >
+                <path
+                  d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
+                />
+              </svg>
+            </div>
             <div
               class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
               data-align="stretch"
@@ -2033,22 +2044,33 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           data-padding="none"
           data-wrap="wrap"
         >
-          <svg
-            aria-hidden="true"
-            class="octicon octicon-feed-person text-gitify-icon-muted"
-            display="inline-block"
-            fill="currentColor"
-            focusable="false"
-            height="14"
-            overflow="visible"
-            style="vertical-align: text-bottom;"
-            viewBox="0 0 16 16"
-            width="14"
+          <div
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-testid="avatar"
+            data-wrap="nowrap"
           >
-            <path
-              d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
-            />
-          </svg>
+            <svg
+              aria-hidden="true"
+              class="octicon octicon-feed-person"
+              display="inline-block"
+              fill="currentColor"
+              focusable="false"
+              height="14"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
+              viewBox="0 0 16 16"
+              width="14"
+            >
+              <path
+                d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
+              />
+            </svg>
+          </div>
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="stretch"
