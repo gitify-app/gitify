@@ -46,7 +46,7 @@ importers:
         specifier: 19.14.0
         version: 19.14.0(react@19.0.0)
       '@primer/primitives':
-        specifier: ^10.3.4
+        specifier: 10.3.4
         version: 10.3.4
       '@primer/react':
         specifier: 36.27.0
