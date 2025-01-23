@@ -33,10 +33,11 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 data-gap="condensed"
                 data-justify="start"
                 data-padding="none"
+                data-testid="avatar"
                 data-wrap="nowrap"
               >
                 <img
-                  alt=""
+                  alt="octocat"
                   class="Avatar__StyledAvatar-sc-2lv0r8-0 kuZlm"
                   data-component="Avatar"
                   height="16"
@@ -48,8 +49,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 <span
                   class="Text-sc-17v1xeu-0 hmAFGJ"
                 >
-                  @
-                  octocat
+                  @octocat
                 </span>
               </div>
             </span>
@@ -284,10 +284,11 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               data-gap="condensed"
               data-justify="start"
               data-padding="none"
+              data-testid="avatar"
               data-wrap="nowrap"
             >
               <img
-                alt=""
+                alt="octocat"
                 class="Avatar__StyledAvatar-sc-2lv0r8-0 kuZlm"
                 data-component="Avatar"
                 height="16"
@@ -299,8 +300,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               <span
                 class="Text-sc-17v1xeu-0 hmAFGJ"
               >
-                @
-                octocat
+                @octocat
               </span>
             </div>
           </span>
@@ -592,10 +592,11 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 data-gap="condensed"
                 data-justify="start"
                 data-padding="none"
+                data-testid="avatar"
                 data-wrap="nowrap"
               >
                 <img
-                  alt=""
+                  alt="octocat"
                   class="Avatar__StyledAvatar-sc-2lv0r8-0 kuZlm"
                   data-component="Avatar"
                   height="16"
@@ -607,8 +608,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 <span
                   class="Text-sc-17v1xeu-0 hmAFGJ"
                 >
-                  @
-                  octocat
+                  @octocat
                 </span>
               </div>
             </span>
@@ -800,45 +800,57 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
         <div
           class="flex-1 truncate cursor-pointer"
         >
-          <span
-            aria-label="View repository: gitify-app/notifications-test"
-            class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-se"
-            id=":rf:"
-            role="tooltip"
+          <div
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
           >
-            <div
-              data-testid="view-repository"
+            <span
+              aria-label="View repository: gitify-app/notifications-test"
+              class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-se"
+              id=":rf:"
+              role="tooltip"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-                data-align="center"
-                data-direction="horizontal"
-                data-gap="condensed"
-                data-justify="start"
-                data-padding="none"
-                data-wrap="nowrap"
+                class="Box-sc-g0xbh4-0 text-xs font-medium"
+                data-testid="view-repository"
               >
-                <img
-                  alt=""
-                  class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
-                  data-component="Avatar"
-                  height="14"
-                  size="14"
-                  src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-                  sx="[object Object]"
-                  width="14"
-                />
-                <span
-                  class="text-xs font-medium"
+                <div
+                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+                  data-align="center"
+                  data-direction="horizontal"
+                  data-gap="condensed"
+                  data-justify="start"
+                  data-padding="none"
+                  data-testid="avatar"
+                  data-wrap="nowrap"
                 >
-                  gitify-app/notifications-test
-                </span>
-                <span
-                  class="text-xxs opacity-50"
-                />
+                  <img
+                    alt="gitify-app/notifications-test"
+                    class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
+                    data-component="Avatar"
+                    height="14"
+                    size="14"
+                    src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+                    sx="[object Object]"
+                    width="14"
+                  />
+                  <span
+                    class="Text-sc-17v1xeu-0 hmAFGJ"
+                  >
+                    gitify-app/notifications-test
+                  </span>
+                </div>
               </div>
-            </div>
-          </span>
+            </span>
+            <div
+              class="Box-sc-g0xbh4-0 text-xxs opacity-50"
+            />
+          </div>
           <div
             class="flex gap-1 items-center mb-1 truncate text-sm"
             data-testid="notification-row"
@@ -862,18 +874,33 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-padding="none"
             data-wrap="wrap"
           >
-            <img
-              alt=""
-              class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
-              data-component="Avatar"
+            <div
+              class="Box-sc-g0xbh4-0"
               data-testid="view-profile"
-              height="14"
-              size="14"
-              src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-              sx="[object Object]"
               title="View profile: gitify-app"
-              width="14"
-            />
+            >
+              <div
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+                data-align="center"
+                data-direction="horizontal"
+                data-gap="condensed"
+                data-justify="start"
+                data-padding="none"
+                data-testid="avatar"
+                data-wrap="nowrap"
+              >
+                <img
+                  alt="gitify-app"
+                  class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
+                  data-component="Avatar"
+                  height="14"
+                  size="14"
+                  src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+                  sx="[object Object]"
+                  width="14"
+                />
+              </div>
+            </div>
             <div
               class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
               data-align="stretch"
@@ -1138,45 +1165,57 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
         <div
           class="flex-1 truncate cursor-pointer"
         >
-          <span
-            aria-label="View repository: gitify-app/notifications-test"
-            class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-se"
-            id=":rn:"
-            role="tooltip"
+          <div
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
           >
-            <div
-              data-testid="view-repository"
+            <span
+              aria-label="View repository: gitify-app/notifications-test"
+              class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-se"
+              id=":rn:"
+              role="tooltip"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-                data-align="center"
-                data-direction="horizontal"
-                data-gap="condensed"
-                data-justify="start"
-                data-padding="none"
-                data-wrap="nowrap"
+                class="Box-sc-g0xbh4-0 text-xs font-medium"
+                data-testid="view-repository"
               >
-                <img
-                  alt=""
-                  class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
-                  data-component="Avatar"
-                  height="14"
-                  size="14"
-                  src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-                  sx="[object Object]"
-                  width="14"
-                />
-                <span
-                  class="text-xs font-medium"
+                <div
+                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+                  data-align="center"
+                  data-direction="horizontal"
+                  data-gap="condensed"
+                  data-justify="start"
+                  data-padding="none"
+                  data-testid="avatar"
+                  data-wrap="nowrap"
                 >
-                  gitify-app/notifications-test
-                </span>
-                <span
-                  class="text-xxs opacity-50"
-                />
+                  <img
+                    alt="gitify-app/notifications-test"
+                    class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
+                    data-component="Avatar"
+                    height="14"
+                    size="14"
+                    src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+                    sx="[object Object]"
+                    width="14"
+                  />
+                  <span
+                    class="Text-sc-17v1xeu-0 hmAFGJ"
+                  >
+                    gitify-app/notifications-test
+                  </span>
+                </div>
               </div>
-            </div>
-          </span>
+            </span>
+            <div
+              class="Box-sc-g0xbh4-0 text-xxs opacity-50"
+            />
+          </div>
           <div
             class="flex gap-1 items-center mb-1 truncate text-sm"
             data-testid="notification-row"
@@ -1200,22 +1239,33 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-padding="none"
             data-wrap="wrap"
           >
-            <svg
-              aria-hidden="true"
-              class="octicon octicon-feed-person text-gitify-icon-muted"
-              display="inline-block"
-              fill="currentColor"
-              focusable="false"
-              height="14"
-              overflow="visible"
-              style="vertical-align: text-bottom;"
-              viewBox="0 0 16 16"
-              width="14"
+            <div
+              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+              data-align="center"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-testid="avatar"
+              data-wrap="nowrap"
             >
-              <path
-                d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
-              />
-            </svg>
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-feed-person"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="14"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="14"
+              >
+                <path
+                  d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
+                />
+              </svg>
+            </div>
             <div
               class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
               data-align="stretch"
@@ -1399,10 +1449,11 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               data-gap="condensed"
               data-justify="start"
               data-padding="none"
+              data-testid="avatar"
               data-wrap="nowrap"
             >
               <img
-                alt=""
+                alt="octocat"
                 class="Avatar__StyledAvatar-sc-2lv0r8-0 kuZlm"
                 data-component="Avatar"
                 height="16"
@@ -1414,8 +1465,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               <span
                 class="Text-sc-17v1xeu-0 hmAFGJ"
               >
-                @
-                octocat
+                @octocat
               </span>
             </div>
           </span>
@@ -1607,45 +1657,57 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
       <div
         class="flex-1 truncate cursor-pointer"
       >
-        <span
-          aria-label="View repository: gitify-app/notifications-test"
-          class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-se"
-          id=":rf:"
-          role="tooltip"
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
         >
-          <div
-            data-testid="view-repository"
+          <span
+            aria-label="View repository: gitify-app/notifications-test"
+            class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-se"
+            id=":rf:"
+            role="tooltip"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-              data-align="center"
-              data-direction="horizontal"
-              data-gap="condensed"
-              data-justify="start"
-              data-padding="none"
-              data-wrap="nowrap"
+              class="Box-sc-g0xbh4-0 text-xs font-medium"
+              data-testid="view-repository"
             >
-              <img
-                alt=""
-                class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
-                data-component="Avatar"
-                height="14"
-                size="14"
-                src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-                sx="[object Object]"
-                width="14"
-              />
-              <span
-                class="text-xs font-medium"
+              <div
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+                data-align="center"
+                data-direction="horizontal"
+                data-gap="condensed"
+                data-justify="start"
+                data-padding="none"
+                data-testid="avatar"
+                data-wrap="nowrap"
               >
-                gitify-app/notifications-test
-              </span>
-              <span
-                class="text-xxs opacity-50"
-              />
+                <img
+                  alt="gitify-app/notifications-test"
+                  class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
+                  data-component="Avatar"
+                  height="14"
+                  size="14"
+                  src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+                  sx="[object Object]"
+                  width="14"
+                />
+                <span
+                  class="Text-sc-17v1xeu-0 hmAFGJ"
+                >
+                  gitify-app/notifications-test
+                </span>
+              </div>
             </div>
-          </div>
-        </span>
+          </span>
+          <div
+            class="Box-sc-g0xbh4-0 text-xxs opacity-50"
+          />
+        </div>
         <div
           class="flex gap-1 items-center mb-1 truncate text-sm"
           data-testid="notification-row"
@@ -1669,18 +1731,33 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           data-padding="none"
           data-wrap="wrap"
         >
-          <img
-            alt=""
-            class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
-            data-component="Avatar"
+          <div
+            class="Box-sc-g0xbh4-0"
             data-testid="view-profile"
-            height="14"
-            size="14"
-            src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-            sx="[object Object]"
             title="View profile: gitify-app"
-            width="14"
-          />
+          >
+            <div
+              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+              data-align="center"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-testid="avatar"
+              data-wrap="nowrap"
+            >
+              <img
+                alt="gitify-app"
+                class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
+                data-component="Avatar"
+                height="14"
+                size="14"
+                src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+                sx="[object Object]"
+                width="14"
+              />
+            </div>
+          </div>
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="stretch"
@@ -1945,45 +2022,57 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
       <div
         class="flex-1 truncate cursor-pointer"
       >
-        <span
-          aria-label="View repository: gitify-app/notifications-test"
-          class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-se"
-          id=":rn:"
-          role="tooltip"
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
         >
-          <div
-            data-testid="view-repository"
+          <span
+            aria-label="View repository: gitify-app/notifications-test"
+            class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-se"
+            id=":rn:"
+            role="tooltip"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-              data-align="center"
-              data-direction="horizontal"
-              data-gap="condensed"
-              data-justify="start"
-              data-padding="none"
-              data-wrap="nowrap"
+              class="Box-sc-g0xbh4-0 text-xs font-medium"
+              data-testid="view-repository"
             >
-              <img
-                alt=""
-                class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
-                data-component="Avatar"
-                height="14"
-                size="14"
-                src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-                sx="[object Object]"
-                width="14"
-              />
-              <span
-                class="text-xs font-medium"
+              <div
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+                data-align="center"
+                data-direction="horizontal"
+                data-gap="condensed"
+                data-justify="start"
+                data-padding="none"
+                data-testid="avatar"
+                data-wrap="nowrap"
               >
-                gitify-app/notifications-test
-              </span>
-              <span
-                class="text-xxs opacity-50"
-              />
+                <img
+                  alt="gitify-app/notifications-test"
+                  class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
+                  data-component="Avatar"
+                  height="14"
+                  size="14"
+                  src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+                  sx="[object Object]"
+                  width="14"
+                />
+                <span
+                  class="Text-sc-17v1xeu-0 hmAFGJ"
+                >
+                  gitify-app/notifications-test
+                </span>
+              </div>
             </div>
-          </div>
-        </span>
+          </span>
+          <div
+            class="Box-sc-g0xbh4-0 text-xxs opacity-50"
+          />
+        </div>
         <div
           class="flex gap-1 items-center mb-1 truncate text-sm"
           data-testid="notification-row"
@@ -2007,22 +2096,33 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           data-padding="none"
           data-wrap="wrap"
         >
-          <svg
-            aria-hidden="true"
-            class="octicon octicon-feed-person text-gitify-icon-muted"
-            display="inline-block"
-            fill="currentColor"
-            focusable="false"
-            height="14"
-            overflow="visible"
-            style="vertical-align: text-bottom;"
-            viewBox="0 0 16 16"
-            width="14"
+          <div
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-testid="avatar"
+            data-wrap="nowrap"
           >
-            <path
-              d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
-            />
-          </svg>
+            <svg
+              aria-hidden="true"
+              class="octicon octicon-feed-person"
+              display="inline-block"
+              fill="currentColor"
+              focusable="false"
+              height="14"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
+              viewBox="0 0 16 16"
+              width="14"
+            >
+              <path
+                d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
+              />
+            </svg>
+          </div>
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
             data-align="stretch"
@@ -2263,10 +2363,11 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 data-gap="condensed"
                 data-justify="start"
                 data-padding="none"
+                data-testid="avatar"
                 data-wrap="nowrap"
               >
                 <img
-                  alt=""
+                  alt="octocat"
                   class="Avatar__StyledAvatar-sc-2lv0r8-0 kuZlm"
                   data-component="Avatar"
                   height="16"
@@ -2278,8 +2379,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 <span
                   class="Text-sc-17v1xeu-0 hmAFGJ"
                 >
-                  @
-                  octocat
+                  @octocat
                 </span>
               </div>
             </span>
@@ -2468,10 +2568,11 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               data-gap="condensed"
               data-justify="start"
               data-padding="none"
+              data-testid="avatar"
               data-wrap="nowrap"
             >
               <img
-                alt=""
+                alt="octocat"
                 class="Avatar__StyledAvatar-sc-2lv0r8-0 kuZlm"
                 data-component="Avatar"
                 height="16"
@@ -2483,8 +2584,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               <span
                 class="Text-sc-17v1xeu-0 hmAFGJ"
               >
-                @
-                octocat
+                @octocat
               </span>
             </div>
           </span>
@@ -2730,10 +2830,11 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 data-gap="condensed"
                 data-justify="start"
                 data-padding="none"
+                data-testid="avatar"
                 data-wrap="nowrap"
               >
                 <img
-                  alt=""
+                  alt="octocat"
                   class="Avatar__StyledAvatar-sc-2lv0r8-0 kuZlm"
                   data-component="Avatar"
                   height="16"
@@ -2745,8 +2846,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 <span
                   class="Text-sc-17v1xeu-0 hmAFGJ"
                 >
-                  @
-                  octocat
+                  @octocat
                 </span>
               </div>
             </span>
@@ -2976,10 +3076,11 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               data-gap="condensed"
               data-justify="start"
               data-padding="none"
+              data-testid="avatar"
               data-wrap="nowrap"
             >
               <img
-                alt=""
+                alt="octocat"
                 class="Avatar__StyledAvatar-sc-2lv0r8-0 kuZlm"
                 data-component="Avatar"
                 height="16"
@@ -2991,8 +3092,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               <span
                 class="Text-sc-17v1xeu-0 hmAFGJ"
               >
-                @
-                octocat
+                @octocat
               </span>
             </div>
           </span>
@@ -3279,10 +3379,11 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
                 data-gap="condensed"
                 data-justify="start"
                 data-padding="none"
+                data-testid="avatar"
                 data-wrap="nowrap"
               >
                 <img
-                  alt=""
+                  alt="octocat"
                   class="Avatar__StyledAvatar-sc-2lv0r8-0 kuZlm"
                   data-component="Avatar"
                   height="16"
@@ -3294,8 +3395,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
                 <span
                   class="Text-sc-17v1xeu-0 hmAFGJ"
                 >
-                  @
-                  octocat
+                  @octocat
                 </span>
               </div>
             </span>
@@ -3480,10 +3580,11 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
                 data-gap="condensed"
                 data-justify="start"
                 data-padding="none"
+                data-testid="avatar"
                 data-wrap="nowrap"
               >
                 <img
-                  alt=""
+                  alt="octocat"
                   class="Avatar__StyledAvatar-sc-2lv0r8-0 kuZlm"
                   data-component="Avatar"
                   height="16"
@@ -3495,8 +3596,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
                 <span
                   class="Text-sc-17v1xeu-0 hmAFGJ"
                 >
-                  @
-                  octocat
+                  @octocat
                 </span>
               </div>
             </span>
@@ -3685,10 +3785,11 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
               data-gap="condensed"
               data-justify="start"
               data-padding="none"
+              data-testid="avatar"
               data-wrap="nowrap"
             >
               <img
-                alt=""
+                alt="octocat"
                 class="Avatar__StyledAvatar-sc-2lv0r8-0 kuZlm"
                 data-component="Avatar"
                 height="16"
@@ -3700,8 +3801,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
               <span
                 class="Text-sc-17v1xeu-0 hmAFGJ"
               >
-                @
-                octocat
+                @octocat
               </span>
             </div>
           </span>
