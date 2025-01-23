@@ -5,7 +5,6 @@ import { Oops } from '../components/Oops';
 import { AccountNotifications } from '../components/notifications/AccountNotifications';
 import { AppContext } from '../context/App';
 import { getAccountUUID } from '../utils/auth/utils';
-import { Errors } from '../utils/errors';
 import { getNotificationCount } from '../utils/notifications/notifications';
 
 export const NotificationsRoute: FC = () => {
@@ -28,7 +27,7 @@ export const NotificationsRoute: FC = () => {
   );
 
   if (status === 'error') {
-    return <Oops error={globalError ?? Errors.UNKNOWN} />;
+    return <Oops error={globalError} />;
   }
 
   if (!hasNotifications && hasNoAccountErrors) {
