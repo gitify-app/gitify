@@ -1,5 +1,5 @@
 import type { ColorModeWithAuto } from '@primer/react/lib/ThemeProvider';
-import { ThemeMode } from '../types';
+import { Theme } from '../types';
 
 export const DEFAULT_DAY_COLOR_SCHEME = 'light';
 export const DEFAULT_NIGHT_COLOR_SCHEME = 'dark';
@@ -7,12 +7,12 @@ export const DEFAULT_NIGHT_COLOR_SCHEME = 'dark';
 /**
  * @deprecated
  */
-export function getTheme(): ThemeMode {
+export function getTheme(): Theme {
   if (document.querySelector('html').classList.contains('dark')) {
-    return ThemeMode.DARK_DEFAULT;
+    return Theme.DARK;
   }
 
-  return ThemeMode.LIGHT_DEFAULT;
+  return Theme.LIGHT;
 }
 
 /**
@@ -51,37 +51,37 @@ export function setScrollbarTheme(mode?: ColorModeWithAuto) {
   }
 }
 
-export function isDayScheme(themeMode: ThemeMode) {
+export function isDayScheme(themeMode: Theme) {
   switch (themeMode) {
-    case ThemeMode.LIGHT_DEFAULT:
-    case ThemeMode.LIGHT_HIGH_CONTRAST:
-    case ThemeMode.LIGHT_COLOR_BLIND:
-    case ThemeMode.LIGHT_TRITANOPIA:
+    case Theme.LIGHT:
+    case Theme.LIGHT_HIGH_CONTRAST:
+    case Theme.LIGHT_COLORBLIND:
+    case Theme.LIGHT_TRITANOPIA:
       return true;
     default:
       return false;
   }
 }
 
-export function mapThemeModeToColorScheme(themeMode: ThemeMode): string | null {
+export function mapThemeModeToColorScheme(themeMode: Theme): string | null {
   switch (themeMode) {
-    case ThemeMode.LIGHT_DEFAULT:
+    case Theme.LIGHT:
       return 'light';
-    case ThemeMode.LIGHT_HIGH_CONTRAST:
+    case Theme.LIGHT_HIGH_CONTRAST:
       return 'light_high_contrast';
-    case ThemeMode.LIGHT_COLOR_BLIND:
+    case Theme.LIGHT_COLORBLIND:
       return 'light_colorblind';
-    case ThemeMode.LIGHT_TRITANOPIA:
+    case Theme.LIGHT_TRITANOPIA:
       return 'light_tritanopia';
-    case ThemeMode.DARK_DEFAULT:
+    case Theme.DARK:
       return 'dark';
-    case ThemeMode.DARK_HIGH_CONTRAST:
+    case Theme.DARK_HIGH_CONTRAST:
       return 'dark_high_contrast';
-    case ThemeMode.DARK_COLOR_BLIND:
+    case Theme.DARK_COLORBLIND:
       return 'dark_colorblind';
-    case ThemeMode.DARK_TRITANOPIA:
+    case Theme.DARK_TRITANOPIA:
       return 'dark_tritanopia';
-    case ThemeMode.DARK_DIMMED:
+    case Theme.DARK_DIMMED:
       return 'dark_dimmed';
     default:
       return null;

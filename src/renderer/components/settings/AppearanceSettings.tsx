@@ -23,7 +23,7 @@ import {
 
 import { namespacedEvent } from '../../../shared/events';
 import { AppContext } from '../../context/App';
-import { Size, ThemeMode } from '../../types';
+import { Size, Theme } from '../../types';
 import { hasMultipleAccounts } from '../../utils/auth/utils';
 import {
   DEFAULT_DAY_COLOR_SCHEME,
@@ -49,8 +49,8 @@ export const AppearanceSettings: FC = () => {
   useEffect(() => {
     ipcRenderer.on(
       namespacedEvent('update-theme'),
-      (_, updatedTheme: ThemeMode) => {
-        if (settings.themeMode === ThemeMode.SYSTEM) {
+      (_, updatedTheme: Theme) => {
+        if (settings.theme === Theme.SYSTEM) {
           const mode = isDayScheme(updatedTheme) ? 'day' : 'night';
           setColorMode('auto');
           setDayScheme(DEFAULT_DAY_COLOR_SCHEME);
@@ -59,7 +59,7 @@ export const AppearanceSettings: FC = () => {
         }
       },
     );
-  }, [settings.themeMode, setColorMode, setDayScheme, setNightScheme]);
+  }, [settings.theme, setColorMode, setDayScheme, setNightScheme]);
 
   window.addEventListener('resize', () => {
     // clear the timeout
@@ -81,45 +81,37 @@ export const AppearanceSettings: FC = () => {
 
         <Select
           id="theme"
-          value={settings.themeMode}
-          onChange={(evt) =>
-            updateSetting('themeMode', evt.target.value as ThemeMode)
-          }
-          data-testid="settings-theme-mode"
+          value={settings.theme}
+          onChange={(evt) => updateSetting('theme', evt.target.value as Theme)}
+          data-testid="settings-theme"
         >
           <Select.OptGroup label="System">
-            <Select.Option value={ThemeMode.SYSTEM}>System</Select.Option>
+            <Select.Option value={Theme.SYSTEM}>System</Select.Option>
           </Select.OptGroup>
           <Select.OptGroup label="Light">
-            <Select.Option value={ThemeMode.LIGHT_DEFAULT}>
-              Light default
-            </Select.Option>
-            <Select.Option value={ThemeMode.LIGHT_HIGH_CONTRAST}>
+            <Select.Option value={Theme.LIGHT}>Light default</Select.Option>
+            <Select.Option value={Theme.LIGHT_HIGH_CONTRAST}>
               Light high contrast
             </Select.Option>
-            <Select.Option value={ThemeMode.LIGHT_COLOR_BLIND}>
+            <Select.Option value={Theme.LIGHT_COLORBLIND}>
               Light Protanopia & Deuteranopia
             </Select.Option>
-            <Select.Option value={ThemeMode.LIGHT_TRITANOPIA}>
+            <Select.Option value={Theme.LIGHT_TRITANOPIA}>
               Light Tritanopia
             </Select.Option>
           </Select.OptGroup>
           <Select.OptGroup label="Dark">
-            <Select.Option value={ThemeMode.DARK_DEFAULT}>
-              Dark default
-            </Select.Option>
-            <Select.Option value={ThemeMode.DARK_HIGH_CONTRAST}>
+            <Select.Option value={Theme.DARK}>Dark default</Select.Option>
+            <Select.Option value={Theme.DARK_HIGH_CONTRAST}>
               Dark high contrast
             </Select.Option>
-            <Select.Option value={ThemeMode.DARK_COLOR_BLIND}>
+            <Select.Option value={Theme.DARK_COLORBLIND}>
               Dark Protanopia & Deuteranopia
             </Select.Option>
-            <Select.Option value={ThemeMode.DARK_TRITANOPIA}>
+            <Select.Option value={Theme.DARK_TRITANOPIA}>
               Dark Tritanopia
             </Select.Option>
-            <Select.Option value={ThemeMode.DARK_DIMMED}>
-              Dark dimmed
-            </Select.Option>
+            <Select.Option value={Theme.DARK_DIMMED}>Dark dimmed</Select.Option>
           </Select.OptGroup>
         </Select>
       </div>

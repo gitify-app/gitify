@@ -34,13 +34,11 @@ describe('renderer/routes/components/settings/AppearanceSettings.tsx', () => {
       );
     });
 
-    const select = screen.getByTestId(
-      'settings-theme-mode',
-    ) as HTMLSelectElement;
-    fireEvent.change(select, { target: { value: 'LIGHT_DEFAULT' } });
+    const select = screen.getByTestId('settings-theme') as HTMLSelectElement;
+    fireEvent.change(select, { target: { value: 'LIGHT' } });
 
     expect(updateSetting).toHaveBeenCalledTimes(1);
-    expect(updateSetting).toHaveBeenCalledWith('themeMode', 'LIGHT_DEFAULT');
+    expect(updateSetting).toHaveBeenCalledWith('theme', 'LIGHT');
   });
 
   it('should update the zoom value when using CMD + and CMD -', async () => {

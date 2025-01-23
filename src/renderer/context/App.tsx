@@ -23,7 +23,7 @@ import {
   type SettingsState,
   type SettingsValue,
   type Status,
-  ThemeMode,
+  Theme,
 } from '../types';
 import type { Notification } from '../typesGitHub';
 import { headNotifications } from '../utils/api/client';
@@ -66,7 +66,7 @@ export const defaultAuth: AuthState = {
 };
 
 const defaultAppearanceSettings = {
-  themeMode: ThemeMode.SYSTEM,
+  theme: Theme.SYSTEM,
   zoomPercentage: 100,
   detailedNotifications: true,
   showPills: true,
@@ -150,9 +150,9 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   useEffect(() => {
-    const colorScheme = mapThemeModeToColorScheme(settings.themeMode);
+    const colorScheme = mapThemeModeToColorScheme(settings.theme);
 
-    if (isDayScheme(settings.themeMode)) {
+    if (isDayScheme(settings.theme)) {
       setDayScheme(colorScheme ?? DEFAULT_DAY_COLOR_SCHEME);
       setColorMode('day');
       setScrollbarTheme('day');
@@ -161,7 +161,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       setColorMode('night');
       setScrollbarTheme('night');
     }
-  }, [settings.themeMode, setDayScheme, setNightScheme]);
+  }, [settings.theme, setColorMode, setDayScheme, setNightScheme]);
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: We only want fetchNotifications to be called for account changes
   useEffect(() => {

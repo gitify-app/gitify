@@ -142,7 +142,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               aria-invalid="false"
               class="Select__StyledSelect-sc-li6bhs-0 gdxHkq"
               data-hasplaceholder="false"
-              data-testid="settings-theme-mode"
+              data-testid="settings-theme"
               id="theme"
             >
               <optgroup
@@ -158,7 +158,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                 label="Light"
               >
                 <option
-                  value="LIGHT_DEFAULT"
+                  value="LIGHT"
                 >
                   Light default
                 </option>
@@ -168,7 +168,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                   Light high contrast
                 </option>
                 <option
-                  value="LIGHT_COLOR_BLIND"
+                  value="LIGHT_COLORBLIND"
                 >
                   Light Protanopia & Deuteranopia
                 </option>
@@ -182,7 +182,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                 label="Dark"
               >
                 <option
-                  value="LIGHT_DARK_DEFAULT"
+                  value="DARK"
                 >
                   Dark default
                 </option>
@@ -192,7 +192,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                   Dark high contrast
                 </option>
                 <option
-                  value="DARK_COLOR_BLIND"
+                  value="DARK_COLORBLIND"
                 >
                   Dark Protanopia & Deuteranopia
                 </option>
