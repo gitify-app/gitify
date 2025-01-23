@@ -82,10 +82,12 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
           class="px-8"
         >
           <div
-            class="flex flex-col h-screen"
+            class="flex flex-col h-full"
             data-testid="Login With OAuth App"
           >
-            <form>
+            <form
+              class="-mt-5"
+            >
               <div
                 class="mb-4"
               >
@@ -416,10 +418,12 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
         class="px-8"
       >
         <div
-          class="flex flex-col h-screen"
+          class="flex flex-col h-full"
           data-testid="Login With OAuth App"
         >
-          <form>
+          <form
+            class="-mt-5"
+          >
             <div
               class="mb-4"
             >

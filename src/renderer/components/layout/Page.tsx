@@ -7,7 +7,7 @@ interface IPage {
 
 export const Page: FC<IPage> = (props: IPage) => {
   return (
-    <div className="flex flex-col h-screen" data-testid={props.id}>
+    <div className="flex flex-col h-full" data-testid={props.id}>
       {props.children}
     </div>
   );

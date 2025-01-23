@@ -67,7 +67,7 @@ export const LoginWithOAuthAppRoute: FC = () => {
 
     return (
       <Page id="Login With OAuth App">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="-mt-5">
           <FieldInput
             name="hostname"
             label="Hostname"
