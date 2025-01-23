@@ -26,19 +26,60 @@ describe('renderer/components/notifications/NotificationHeader.tsx', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('should render itself & its children - group by date', async () => {
-    const props = {
-      notification: mockSingleNotification,
-    };
+  describe('should render itself & its children - group by date', () => {
+    it('with notification number', async () => {
+      const props = {
+        notification: mockSingleNotification,
+      };
 
-    const tree = render(
-      <AppContext.Provider
-        value={{ settings: { ...mockSettings, groupBy: GroupBy.DATE } }}
-      >
-        <NotificationHeader {...props} />
-      </AppContext.Provider>,
-    );
-    expect(tree).toMatchSnapshot();
+      const tree = render(
+        <AppContext.Provider
+          value={{ settings: { ...mockSettings, groupBy: GroupBy.DATE } }}
+        >
+          <NotificationHeader {...props} />
+        </AppContext.Provider>,
+      );
+      expect(tree).toMatchSnapshot();
+    });
+
+    it('with showNumber setting disabled', async () => {
+      const props = {
+        notification: mockSingleNotification,
+      };
+
+      const tree = render(
+        <AppContext.Provider
+          value={{
+            settings: {
+              ...mockSettings,
+              showNumber: false,
+              groupBy: GroupBy.DATE,
+            },
+          }}
+        >
+          <NotificationHeader {...props} />
+        </AppContext.Provider>,
+      );
+      expect(tree).toMatchSnapshot();
+    });
+
+    it('without notification number', async () => {
+      const props = {
+        notification: {
+          ...mockSingleNotification,
+          subject: { ...mockSingleNotification.subject, number: null },
+        },
+      };
+
+      const tree = render(
+        <AppContext.Provider
+          value={{ settings: { ...mockSettings, groupBy: GroupBy.DATE } }}
+        >
+          <NotificationHeader {...props} />
+        </AppContext.Provider>,
+      );
+      expect(tree).toMatchSnapshot();
+    });
   });
 
   it('should open notification user profile - group by date', () => {

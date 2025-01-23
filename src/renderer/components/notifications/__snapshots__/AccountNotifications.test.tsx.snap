@@ -833,6 +833,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 >
                   gitify-app/notifications-test
                 </span>
+                <span
+                  class="text-xxs opacity-50"
+                />
               </div>
             </div>
           </span>
@@ -847,7 +850,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               I am a robot and this is a test!
             </span>
             <span
-              class="text-xxs opacity-50"
+              class="text-xxs opacity-50 hidden"
             />
           </div>
           <div
@@ -1168,6 +1171,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 >
                   gitify-app/notifications-test
                 </span>
+                <span
+                  class="text-xxs opacity-50"
+                />
               </div>
             </div>
           </span>
@@ -1182,7 +1188,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               Improve the UI
             </span>
             <span
-              class="text-xxs opacity-50"
+              class="text-xxs opacity-50 hidden"
             />
           </div>
           <div
@@ -1634,6 +1640,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               >
                 gitify-app/notifications-test
               </span>
+              <span
+                class="text-xxs opacity-50"
+              />
             </div>
           </div>
         </span>
@@ -1648,7 +1657,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             I am a robot and this is a test!
           </span>
           <span
-            class="text-xxs opacity-50"
+            class="text-xxs opacity-50 hidden"
           />
         </div>
         <div
@@ -1969,6 +1978,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               >
                 gitify-app/notifications-test
               </span>
+              <span
+                class="text-xxs opacity-50"
+              />
             </div>
           </div>
         </span>
@@ -1983,7 +1995,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             Improve the UI
           </span>
           <span
-            class="text-xxs opacity-50"
+            class="text-xxs opacity-50 hidden"
           />
         </div>
         <div

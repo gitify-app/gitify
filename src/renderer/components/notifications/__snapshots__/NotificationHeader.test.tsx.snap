@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renderer/components/notifications/NotificationHeader.tsx should render itself & its children - group by date 1`] = `
+exports[`renderer/components/notifications/NotificationHeader.tsx should render itself & its children - group by date with notification number 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -38,6 +38,9 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
             >
               gitify-app/notifications-test
             </span>
+            <span
+              class="text-xxs opacity-50"
+            />
           </div>
         </div>
       </span>
@@ -77,6 +80,291 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
           >
             gitify-app/notifications-test
           </span>
+          <span
+            class="text-xxs opacity-50"
+          />
+        </div>
+      </div>
+    </span>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`renderer/components/notifications/NotificationHeader.tsx should render itself & its children - group by date with showNumber setting disabled 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <span
+        aria-label="View repository: gitify-app/notifications-test"
+        class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-se"
+        id=":r1:"
+        role="tooltip"
+      >
+        <div
+          data-testid="view-repository"
+        >
+          <div
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <img
+              alt=""
+              class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
+              data-component="Avatar"
+              height="14"
+              size="14"
+              src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+              sx="[object Object]"
+              width="14"
+            />
+            <span
+              class="text-xs font-medium"
+            >
+              gitify-app/notifications-test
+            </span>
+            <span
+              class="text-xxs opacity-50 hidden"
+            />
+          </div>
+        </div>
+      </span>
+    </div>
+  </body>,
+  "container": <div>
+    <span
+      aria-label="View repository: gitify-app/notifications-test"
+      class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-se"
+      id=":r1:"
+      role="tooltip"
+    >
+      <div
+        data-testid="view-repository"
+      >
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
+        >
+          <img
+            alt=""
+            class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
+            data-component="Avatar"
+            height="14"
+            size="14"
+            src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+            sx="[object Object]"
+            width="14"
+          />
+          <span
+            class="text-xs font-medium"
+          >
+            gitify-app/notifications-test
+          </span>
+          <span
+            class="text-xxs opacity-50 hidden"
+          />
+        </div>
+      </div>
+    </span>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`renderer/components/notifications/NotificationHeader.tsx should render itself & its children - group by date without notification number 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <span
+        aria-label="View repository: gitify-app/notifications-test"
+        class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-se"
+        id=":r2:"
+        role="tooltip"
+      >
+        <div
+          data-testid="view-repository"
+        >
+          <div
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <img
+              alt=""
+              class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
+              data-component="Avatar"
+              height="14"
+              size="14"
+              src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+              sx="[object Object]"
+              width="14"
+            />
+            <span
+              class="text-xs font-medium"
+            >
+              gitify-app/notifications-test
+            </span>
+            <span
+              class="text-xxs opacity-50"
+            />
+          </div>
+        </div>
+      </span>
+    </div>
+  </body>,
+  "container": <div>
+    <span
+      aria-label="View repository: gitify-app/notifications-test"
+      class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-se"
+      id=":r2:"
+      role="tooltip"
+    >
+      <div
+        data-testid="view-repository"
+      >
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
+        >
+          <img
+            alt=""
+            class="Avatar__StyledAvatar-sc-2lv0r8-0 htlvKA"
+            data-component="Avatar"
+            height="14"
+            size="14"
+            src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+            sx="[object Object]"
+            width="14"
+          />
+          <span
+            class="text-xs font-medium"
+          >
+            gitify-app/notifications-test
+          </span>
+          <span
+            class="text-xxs opacity-50"
+          />
         </div>
       </div>
     </span>

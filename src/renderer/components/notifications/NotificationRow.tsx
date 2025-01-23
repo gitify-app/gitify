@@ -10,7 +10,7 @@ import { BellSlashIcon, CheckIcon, ReadIcon } from '@primer/octicons-react';
 import { IconButton, Tooltip } from '@primer/react';
 
 import { AppContext } from '../../context/App';
-import { Opacity, Size } from '../../types';
+import { GroupBy, Opacity, Size } from '../../types';
 import type { Notification } from '../../typesGitHub';
 import { cn } from '../../utils/cn';
 import { isMarkAsDoneFeatureSupported } from '../../utils/features';
@@ -84,6 +84,8 @@ export const NotificationRow: FC<INotificationRow> = ({
   const notificationTitle =
     `${notification.subject.title} ${notificationNumber}`.trim();
 
+  const groupByDate = settings.groupBy === GroupBy.DATE;
+
   return (
     <div
       id={notification.id}
@@ -116,7 +118,7 @@ export const NotificationRow: FC<INotificationRow> = ({
             className={cn(
               'text-xxs',
               Opacity.READ,
-              !settings.showNumber && 'hidden',
+              (groupByDate || !settings.showNumber) && 'hidden',
             )}
           >
             {notificationNumber}

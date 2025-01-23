@@ -75,6 +75,9 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 >
                   gitify-app/notifications-test
                 </span>
+                <span
+                  class="text-xxs opacity-50"
+                />
               </div>
             </div>
           </span>
@@ -89,7 +92,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               I am a robot and this is a test!
             </span>
             <span
-              class="text-xxs opacity-50"
+              class="text-xxs opacity-50 hidden"
             />
           </div>
           <div
@@ -413,6 +416,9 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               >
                 gitify-app/notifications-test
               </span>
+              <span
+                class="text-xxs opacity-50"
+              />
             </div>
           </div>
         </span>
@@ -427,7 +433,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             I am a robot and this is a test!
           </span>
           <span
-            class="text-xxs opacity-50"
+            class="text-xxs opacity-50 hidden"
           />
         </div>
         <div
