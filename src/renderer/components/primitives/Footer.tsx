@@ -1,4 +1,4 @@
-import { Stack } from '@primer/react';
+import { Box, Stack } from '@primer/react';
 import type { FC, ReactNode } from 'react';
 
 interface IFooter {
@@ -8,13 +8,10 @@ interface IFooter {
 
 export const Footer: FC<IFooter> = (props: IFooter) => {
   return (
-    <Stack
-      direction="horizontal"
-      justify={props.justify}
-      padding="condensed"
-      className="bg-gitify-footer"
-    >
-      {props.children}
-    </Stack>
+    <Box className="fixed bottom-0 left-10 right-0 bg-gitify-footer">
+      <Stack direction="horizontal" justify={props.justify} padding="condensed">
+        {props.children}
+      </Stack>
+    </Box>
   );
 };

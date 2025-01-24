@@ -6,7 +6,27 @@ exports[`renderer/components/primitives/Footer.tsx should render itself & its ch
   "baseElement": <body>
     <div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 duhwY bg-gitify-footer"
+        class="Box-sc-g0xbh4-0 fixed bottom-0 left-10 right-0 bg-gitify-footer"
+      >
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          data-align="stretch"
+          data-direction="horizontal"
+          data-justify="end"
+          data-padding="condensed"
+          data-wrap="nowrap"
+        >
+          Test
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="Box-sc-g0xbh4-0 fixed bottom-0 left-10 right-0 bg-gitify-footer"
+    >
+      <div
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
         data-align="stretch"
         data-direction="horizontal"
         data-justify="end"
@@ -15,18 +35,6 @@ exports[`renderer/components/primitives/Footer.tsx should render itself & its ch
       >
         Test
       </div>
-    </div>
-  </body>,
-  "container": <div>
-    <div
-      class="Stack__StyledStack-sc-x3xa2i-0 duhwY bg-gitify-footer"
-      data-align="stretch"
-      data-direction="horizontal"
-      data-justify="end"
-      data-padding="condensed"
-      data-wrap="nowrap"
-    >
-      Test
     </div>
   </div>,
   "debug": [Function],
@@ -89,7 +97,27 @@ exports[`renderer/components/primitives/Footer.tsx should render itself & its ch
   "baseElement": <body>
     <div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 duhwY bg-gitify-footer"
+        class="Box-sc-g0xbh4-0 fixed bottom-0 left-10 right-0 bg-gitify-footer"
+      >
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          data-align="stretch"
+          data-direction="horizontal"
+          data-justify="space-between"
+          data-padding="condensed"
+          data-wrap="nowrap"
+        >
+          Test
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="Box-sc-g0xbh4-0 fixed bottom-0 left-10 right-0 bg-gitify-footer"
+    >
+      <div
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
         data-align="stretch"
         data-direction="horizontal"
         data-justify="space-between"
@@ -98,18 +126,6 @@ exports[`renderer/components/primitives/Footer.tsx should render itself & its ch
       >
         Test
       </div>
-    </div>
-  </body>,
-  "container": <div>
-    <div
-      class="Stack__StyledStack-sc-x3xa2i-0 duhwY bg-gitify-footer"
-      data-align="stretch"
-      data-direction="horizontal"
-      data-justify="space-between"
-      data-padding="condensed"
-      data-wrap="nowrap"
-    >
-      Test
     </div>
   </div>,
   "debug": [Function],

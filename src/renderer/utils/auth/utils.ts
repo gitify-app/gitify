@@ -284,3 +284,7 @@ export function hasAccounts(auth: AuthState) {
 export function hasMultipleAccounts(auth: AuthState) {
   return auth.accounts.length > 1;
 }
+
+export function formatRequiredScopes() {
+  return Constants.AUTH_SCOPE.join(', ');
+}

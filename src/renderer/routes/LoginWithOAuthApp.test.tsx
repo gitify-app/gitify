@@ -3,7 +3,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { AppContext } from '../context/App';
 import type { AuthState, ClientID, ClientSecret, Hostname } from '../types';
 import * as comms from '../utils/comms';
-import { LoginWithOAuthAppRoute, validate } from './LoginWithOAuthApp';
+import { LoginWithOAuthAppRoute, validateForm } from './LoginWithOAuthApp';
 
 const mockNavigate = jest.fn();
 jest.mock('react-router-dom', () => ({
@@ -62,9 +62,9 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
     let values = {
       ...emptyValues,
     };
-    expect(validate(values).hostname).toBe('Required');
-    expect(validate(values).clientId).toBe('Required');
-    expect(validate(values).clientSecret).toBe('Required');
+    expect(validateForm(values).hostname).toBe('Hostname is required');
+    expect(validateForm(values).clientId).toBe('Client ID is required');
+    expect(validateForm(values).clientSecret).toBe('Client Secret is required');
 
     values = {
       ...emptyValues,
@@ -72,9 +72,11 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
       clientId: '!@£INVALID-.1' as ClientID,
       clientSecret: '!@£INVALID-.1' as ClientSecret,
     };
-    expect(validate(values).hostname).toBe('Invalid hostname.');
-    expect(validate(values).clientId).toBe('Invalid client id.');
-    expect(validate(values).clientSecret).toBe('Invalid client secret.');
+    expect(validateForm(values).hostname).toBe('Hostname is invalid');
+    expect(validateForm(values).clientId).toBe('Client ID format is invalid');
+    expect(validateForm(values).clientSecret).toBe(
+      'Client Secret format is invalid',
+    );
   });
 
   describe("'Create new OAuth App' button", () => {

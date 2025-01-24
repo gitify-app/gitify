@@ -2,59 +2,34 @@
 
 exports[`renderer/routes/Filters.tsx General should render itself & its children 1`] = `
 <div
-  class="flex flex-col h-screen"
+  class="Box-sc-g0xbh4-0 flex flex-col h-screen"
   data-testid="filters"
 >
   <div
-    class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-    data-align="stretch"
-    data-direction="horizontal"
-    data-justify="space-between"
-    data-padding="spacious"
-    data-wrap="nowrap"
+    class="Box-sc-g0xbh4-0 px-6 py-4"
   >
-    <button
-      aria-describedby=":r0:-loading-announcement"
-      aria-labelledby="Go Back"
-      class="types__StyledButton-sc-ws60qy-0 kQRupk"
-      data-component="IconButton"
-      data-loading="false"
-      data-no-visuals="true"
-      data-testid="header-nav-back"
-      sx="[object Object]"
-      type="button"
+    <div
+      class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+      data-align="stretch"
+      data-direction="horizontal"
+      data-justify="space-between"
+      data-padding="none"
+      data-wrap="nowrap"
     >
-      <svg
-        aria-hidden="true"
-        class="octicon octicon-arrow-left"
-        display="inline-block"
-        fill="currentColor"
-        focusable="false"
-        height="16"
-        overflow="visible"
-        style="vertical-align: text-bottom;"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          d="M7.78 12.53a.75.75 0 0 1-1.06 0L2.47 8.28a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L4.81 7h7.44a.75.75 0 0 1 0 1.5H4.81l2.97 2.97a.75.75 0 0 1 0 1.06Z"
-        />
-      </svg>
-    </button>
-    <legend>
-      <div
-        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-        data-align="center"
-        data-direction="horizontal"
-        data-gap="condensed"
-        data-justify="start"
-        data-padding="none"
-        data-wrap="nowrap"
-        id="filters"
+      <button
+        aria-describedby=":r0:-loading-announcement"
+        aria-labelledby="Go Back"
+        class="types__StyledButton-sc-ws60qy-0 kQRupk"
+        data-component="IconButton"
+        data-loading="false"
+        data-no-visuals="true"
+        data-testid="header-nav-back"
+        sx="[object Object]"
+        type="button"
       >
         <svg
           aria-hidden="true"
-          class="octicon octicon-filter"
+          class="octicon octicon-arrow-left"
           display="inline-block"
           fill="currentColor"
           focusable="false"
@@ -65,20 +40,49 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           width="16"
         >
           <path
-            d="M.75 3h14.5a.75.75 0 0 1 0 1.5H.75a.75.75 0 0 1 0-1.5ZM3 7.75A.75.75 0 0 1 3.75 7h8.5a.75.75 0 0 1 0 1.5h-8.5A.75.75 0 0 1 3 7.75Zm3 4a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z"
+            d="M7.78 12.53a.75.75 0 0 1-1.06 0L2.47 8.28a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L4.81 7h7.44a.75.75 0 0 1 0 1.5H4.81l2.97 2.97a.75.75 0 0 1 0 1.06Z"
           />
         </svg>
-        <h2
-          class="Heading__StyledHeading-sc-1c1dgg0-0 fuhZuh"
-          sx="[object Object]"
+      </button>
+      <legend>
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
+          id="filters"
         >
-          Filters
-        </h2>
-      </div>
-    </legend>
+          <svg
+            aria-hidden="true"
+            class="octicon octicon-filter"
+            display="inline-block"
+            fill="currentColor"
+            focusable="false"
+            height="16"
+            overflow="visible"
+            style="vertical-align: text-bottom;"
+            viewBox="0 0 16 16"
+            width="16"
+          >
+            <path
+              d="M.75 3h14.5a.75.75 0 0 1 0 1.5H.75a.75.75 0 0 1 0-1.5ZM3 7.75A.75.75 0 0 1 3.75 7h8.5a.75.75 0 0 1 0 1.5h-8.5A.75.75 0 0 1 3 7.75Zm3 4a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z"
+            />
+          </svg>
+          <h2
+            class="Heading__StyledHeading-sc-1c1dgg0-0 fuhZuh"
+            sx="[object Object]"
+          >
+            Filters
+          </h2>
+        </div>
+      </legend>
+    </div>
   </div>
   <div
-    class="grow overflow-x-auto px-8 pb-4"
+    class="Box-sc-g0xbh4-0 grow overflow-x-auto px-8 pb-2 mb-12 "
   >
     <fieldset
       class="mb-3"
@@ -885,62 +889,66 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
     </fieldset>
   </div>
   <div
-    class="Stack__StyledStack-sc-x3xa2i-0 duhwY bg-gitify-footer"
-    data-align="stretch"
-    data-direction="horizontal"
-    data-justify="end"
-    data-padding="condensed"
-    data-wrap="nowrap"
+    class="Box-sc-g0xbh4-0 fixed bottom-0 left-10 right-0 bg-gitify-footer"
   >
-    <span
-      aria-label="Clear all filters"
-      class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-n"
-      id=":r1:"
-      role="tooltip"
+    <div
+      class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+      data-align="stretch"
+      data-direction="horizontal"
+      data-justify="end"
+      data-padding="condensed"
+      data-wrap="nowrap"
     >
-      <button
-        aria-describedby=":r2:-loading-announcement"
-        class="types__StyledButton-sc-ws60qy-0 jTCgqj"
-        data-loading="false"
-        data-testid="filters-clear"
-        sx="[object Object]"
-        type="button"
+      <span
+        aria-label="Clear all filters"
+        class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-n"
+        id=":r1:"
+        role="tooltip"
       >
-        <span
-          class="Box-sc-g0xbh4-0 srpGE"
-          data-component="buttonContent"
+        <button
+          aria-describedby=":r2:-loading-announcement"
+          class="types__StyledButton-sc-ws60qy-0 jTCgqj"
+          data-loading="false"
+          data-testid="filters-clear"
           sx="[object Object]"
+          type="button"
         >
           <span
-            class="Box-sc-g0xbh4-0 mhHOW"
-            data-component="leadingVisual"
+            class="Box-sc-g0xbh4-0 srpGE"
+            data-component="buttonContent"
             sx="[object Object]"
           >
-            <svg
-              aria-hidden="true"
-              class="octicon octicon-filter-remove"
-              display="inline-block"
-              fill="currentColor"
-              focusable="false"
-              height="16"
-              overflow="visible"
-              style="vertical-align: text-bottom;"
-              viewBox="0 0 16 16"
-              width="16"
+            <span
+              class="Box-sc-g0xbh4-0 mhHOW"
+              data-component="leadingVisual"
+              sx="[object Object]"
             >
-              <path
-                d="M14.384 4.57a.752.752 0 0 0 1.061 0 .752.752 0 0 0 0-1.061l-.884-.884.883-.884A.75.75 0 0 0 14.384.68l-.884.884-.884-.884a.75.75 0 0 0-1.06 1.061l.883.884-.883.884a.75.75 0 0 0 1.06 1.061l.884-.884.884.884ZM.75 3a.75.75 0 0 0 0 1.5H9A.75.75 0 0 0 9 3H.75ZM3 7.75A.75.75 0 0 1 3.75 7h8.5a.75.75 0 0 1 0 1.5h-8.5A.75.75 0 0 1 3 7.75Zm3 4a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z"
-              />
-            </svg>
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-filter-remove"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M14.384 4.57a.752.752 0 0 0 1.061 0 .752.752 0 0 0 0-1.061l-.884-.884.883-.884A.75.75 0 0 0 14.384.68l-.884.884-.884-.884a.75.75 0 0 0-1.06 1.061l.883.884-.883.884a.75.75 0 0 0 1.06 1.061l.884-.884.884.884ZM.75 3a.75.75 0 0 0 0 1.5H9A.75.75 0 0 0 9 3H.75ZM3 7.75A.75.75 0 0 1 3.75 7h8.5a.75.75 0 0 1 0 1.5h-8.5A.75.75 0 0 1 3 7.75Zm3 4a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z"
+                />
+              </svg>
+            </span>
+            <span
+              data-component="text"
+            >
+              Clear filters
+            </span>
           </span>
-          <span
-            data-component="text"
-          >
-            Clear filters
-          </span>
-        </span>
-      </button>
-    </span>
+        </button>
+      </span>
+    </div>
   </div>
 </div>
 `;

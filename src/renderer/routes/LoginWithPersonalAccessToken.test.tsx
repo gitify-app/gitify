@@ -4,7 +4,7 @@ import { AppContext } from '../context/App';
 import * as comms from '../utils/comms';
 import {
   LoginWithPersonalAccessTokenRoute,
-  validate,
+  validateForm,
 } from './LoginWithPersonalAccessToken';
 
 const mockNavigate = jest.fn();
@@ -54,16 +54,16 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
     let values = {
       ...emptyValues,
     };
-    expect(validate(values).hostname).toBe('Required');
-    expect(validate(values).token).toBe('Required');
+    expect(validateForm(values).hostname).toBe('Required');
+    expect(validateForm(values).token).toBe('Required');
 
     values = {
       ...emptyValues,
       hostname: 'hello',
       token: '!@£INVALID-.1',
     };
-    expect(validate(values).hostname).toBe('Invalid hostname.');
-    expect(validate(values).token).toBe('Invalid token.');
+    expect(validateForm(values).hostname).toBe('Invalid hostname.');
+    expect(validateForm(values).token).toBe('Invalid token.');
   });
 
   describe("'Generate a PAT' button", () => {
