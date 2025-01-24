@@ -34,7 +34,7 @@ export const FieldInput: FC<IFieldInput> = ({
             type={type}
             className={cn(
               'text-sm mb-2 px-4 py-1.5 block w-full appearance-none',
-              'rounded border bg-gitify-input-rest focus:bg-gitify-input-focus focus:outline-none',
+              'rounded-sm border bg-gitify-input-rest focus:bg-gitify-input-focus focus:outline-hidden',
               error ? 'border-red-500' : 'border-gray-500',
             )}
             id={input.name}

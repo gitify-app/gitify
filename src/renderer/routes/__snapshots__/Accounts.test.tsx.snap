@@ -78,7 +78,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
     </legend>
   </div>
   <div
-    class="flex-grow overflow-x-auto px-8 pb-4"
+    class="grow overflow-x-auto px-8 pb-4"
   >
     <div
       class="rounded-md p-2 mb-4 bg-gitify-accounts"
@@ -1309,7 +1309,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
     </legend>
   </div>
   <div
-    class="flex-grow overflow-x-auto px-8 pb-4"
+    class="grow overflow-x-auto px-8 pb-4"
   >
     <div
       class="rounded-md p-2 mb-4 bg-gitify-accounts"
@@ -2540,7 +2540,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
     </legend>
   </div>
   <div
-    class="flex-grow overflow-x-auto px-8 pb-4"
+    class="grow overflow-x-auto px-8 pb-4"
   >
     <div
       class="rounded-md p-2 mb-4 bg-gitify-accounts"
