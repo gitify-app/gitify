@@ -70,6 +70,7 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
   const { loginWithPersonalAccessToken } = useContext(AppContext);
 
   const [maskClientSecret, setMaskClientSecret] = useState(true);
+  const [isVerifyingCredentials, setIsVerifyingCredentials] = useState(false);
 
   const [formData, setFormData] = useState({
     hostname: 'github.com' as Hostname,
@@ -83,6 +84,7 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
   }, [errors]);
 
   const handleSubmit = async () => {
+    setIsVerifyingCredentials(true);
     const newErrors = validateForm(formData);
 
     setErrors(newErrors);
@@ -90,6 +92,7 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
     if (!newErrors.hostname && !newErrors.token) {
       verifyLoginCredentials(formData);
     }
+    setIsVerifyingCredentials(false);
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -240,6 +243,7 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
           variant="primary"
           leadingVisual={SignInIcon}
           onClick={handleSubmit}
+          loading={isVerifyingCredentials}
           data-testid="login-submit"
         >
           Login
