@@ -69,7 +69,7 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
 
   const { loginWithPersonalAccessToken } = useContext(AppContext);
 
-  const [showPassword, setShowPassword] = useState(false);
+  const [maskClientSecret, setMaskClientSecret] = useState(true);
 
   const [formData, setFormData] = useState({
     hostname: 'github.com' as Hostname,
@@ -199,8 +199,8 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
             <FormControl.Label>Token</FormControl.Label>
             <TextInput
               name="token"
-              type={showPassword ? 'text' : 'password'}
-              placeholder="The 40 character token as generated on GitHub"
+              type={maskClientSecret ? 'password' : 'text'}
+              placeholder="Your generated token (40 characters)"
               value={formData.token}
               onChange={handleInputChange}
               aria-invalid={errors.token ? 'true' : 'false'}
@@ -211,9 +211,9 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
               }}
               trailingAction={
                 <TextInput.Action
-                  onClick={() => setShowPassword(!showPassword)}
-                  icon={showPassword ? EyeClosedIcon : EyeIcon}
-                  aria-label={showPassword ? 'Hide token' : 'Show token'}
+                  onClick={() => setMaskClientSecret(!maskClientSecret)}
+                  icon={maskClientSecret ? EyeIcon : EyeClosedIcon}
+                  aria-label={maskClientSecret ? 'Show token' : 'Hide token'}
                 />
               }
               data-testid="login-token"

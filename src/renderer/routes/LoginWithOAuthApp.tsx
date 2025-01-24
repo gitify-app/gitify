@@ -1,7 +1,13 @@
 import { type FC, useCallback, useContext, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { BookIcon, PersonIcon, SignInIcon } from '@primer/octicons-react';
+import {
+  BookIcon,
+  EyeClosedIcon,
+  EyeIcon,
+  PersonIcon,
+  SignInIcon,
+} from '@primer/octicons-react';
 import {
   Button,
   FormControl,
@@ -72,6 +78,8 @@ export const LoginWithOAuthAppRoute: FC = () => {
   const navigate = useNavigate();
 
   const { loginWithOAuthApp } = useContext(AppContext);
+
+  const [maskToken, setMaskToken] = useState(true);
 
   const [formData, setFormData] = useState({
     hostname: 'github.com' as Hostname,
@@ -178,14 +186,14 @@ export const LoginWithOAuthAppRoute: FC = () => {
               Create new OAuth App
             </Button>
             <Text className="text-xs">
-              and use your <Text as="i">client id/secret</Text> below.
+              and use your <Text as="i">client id & secret</Text> below.
             </Text>
           </Stack>
           <FormControl required>
             <FormControl.Label>Client ID</FormControl.Label>
             <TextInput
               name="clientId"
-              placeholder="The 20 character Client ID as generated on GitHub"
+              placeholder="Your generated client id (20 characters)"
               value={formData.clientId}
               onChange={handleInputChange}
               aria-invalid={errors.clientId ? 'true' : 'false'}
@@ -202,7 +210,8 @@ export const LoginWithOAuthAppRoute: FC = () => {
             <FormControl.Label>Client Secret</FormControl.Label>
             <TextInput
               name="clientSecret"
-              placeholder="The 40 character Client Secret as generated on GitHub"
+              type={maskToken ? 'password' : 'text'}
+              placeholder="Your generated client secret (40 characters)"
               value={formData.clientSecret}
               onChange={handleInputChange}
               aria-invalid={errors.clientSecret ? 'true' : 'false'}
@@ -211,6 +220,13 @@ export const LoginWithOAuthAppRoute: FC = () => {
                   ? 'danger.emphasis'
                   : 'border.default',
               }}
+              trailingAction={
+                <TextInput.Action
+                  onClick={() => setMaskToken(!maskToken)}
+                  icon={maskToken ? EyeIcon : EyeClosedIcon}
+                  aria-label={maskToken ? 'Show token' : 'Hide token'}
+                />
+              }
               data-testid="login-clientSecret"
               block
             />

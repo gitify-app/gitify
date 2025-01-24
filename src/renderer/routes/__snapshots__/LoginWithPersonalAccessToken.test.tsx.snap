@@ -286,7 +286,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
                   data-testid="login-token"
                   id=":r4:"
                   name="token"
-                  placeholder="The 40 character token as generated on GitHub"
+                  placeholder="Your generated token (40 characters)"
                   type="password"
                   value=""
                 />
@@ -728,7 +728,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
                 data-testid="login-token"
                 id=":r4:"
                 name="token"
-                placeholder="The 40 character token as generated on GitHub"
+                placeholder="Your generated token (40 characters)"
                 type="password"
                 value=""
               />
