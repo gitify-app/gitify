@@ -29,7 +29,7 @@ export const NotificationFooter: FC<INotificationFooter> = ({
     >
       {notification.subject.user ? (
         <Box
-          title={`View profile: ${notification.subject.user.login}`}
+          title={notification.subject.user.login}
           onClick={(event: MouseEvent<HTMLElement>) => {
             // Don't trigger onClick of parent element.
             event.stopPropagation();

@@ -80,7 +80,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
           </button>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY opacity-0 transition-opacity group-hover:opacity-80"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-notification-hover absolute right-0 h-full"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -285,7 +285,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
         </button>
       </div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 duhwY opacity-0 transition-opacity group-hover:opacity-80"
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-notification-hover absolute right-0 h-full"
         data-align="center"
         data-direction="horizontal"
         data-gap="none"
@@ -553,7 +553,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
           </button>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY opacity-0 transition-opacity group-hover:opacity-80"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-notification-hover absolute right-0 h-full"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -757,7 +757,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
           </button>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY opacity-0 transition-opacity group-hover:opacity-80"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-notification-hover absolute right-0 h-full"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -968,7 +968,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
         </button>
       </div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 duhwY opacity-0 transition-opacity group-hover:opacity-80"
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-notification-hover absolute right-0 h-full"
         data-align="center"
         data-direction="horizontal"
         data-gap="none"
@@ -1236,7 +1236,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
           </button>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY opacity-0 transition-opacity group-hover:opacity-80"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-notification-hover absolute right-0 h-full"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -1447,7 +1447,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
         </button>
       </div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 duhwY opacity-0 transition-opacity group-hover:opacity-80"
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-notification-hover absolute right-0 h-full"
         data-align="center"
         data-direction="horizontal"
         data-gap="none"

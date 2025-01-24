@@ -12,7 +12,7 @@ export const HoverGroup: FC<IHoverGroup> = ({ children }: IHoverGroup) => {
       direction="horizontal"
       align="center"
       gap="none"
-      className="opacity-0 transition-opacity group-hover:opacity-80"
+      className="opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-notification-hover absolute right-0 h-full"
     >
       {children}
     </Stack>
