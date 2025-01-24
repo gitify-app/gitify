@@ -145,7 +145,7 @@
     "@tailwindcss/postcss": "4.0.0",
     "@testing-library/react": "16.2.0",
     "@types/jest": "29.5.14",
-    "@types/node": "22.10.9",
+    "@types/node": "22.10.10",
     "@types/nprogress": "0.2.3",
     "@types/react": "19.0.8",
     "@types/react-dom": "19.0.3",
