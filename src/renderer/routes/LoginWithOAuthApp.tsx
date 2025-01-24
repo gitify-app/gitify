@@ -60,15 +60,13 @@ export const validateForm = (values: IFormData): IFormErrors => {
   if (!values.clientId) {
     errors.clientId = 'Client ID is required';
   } else if (!isValidClientId(values.clientId)) {
-    errors.clientId =
-      'Client ID format is invalid (must be 20 characters long)';
+    errors.clientId = 'Client ID format is invalid';
   }
 
   if (!values.clientSecret) {
     errors.clientSecret = 'Client Secret is required';
   } else if (!isValidToken(values.clientSecret as unknown as Token)) {
-    errors.clientSecret =
-      'Client Secret format is invalid (must be 40 characters long)';
+    errors.clientSecret = 'Client Secret format is invalid';
   }
 
   return errors;
@@ -148,6 +146,7 @@ export const LoginWithOAuthAppRoute: FC = () => {
                 </Stack>
               </Text>
             }
+            data-testid="login-errors"
           />
         )}
         <Stack direction="vertical" gap="normal">

@@ -58,7 +58,7 @@ export const validateForm = (values: IFormData): IFormErrors => {
   if (!values.token) {
     errors.token = 'Token is required';
   } else if (!isValidToken(values.token)) {
-    errors.token = 'Token format is invalid (must be 40 characters long)';
+    errors.token = 'Token format is invalid';
   }
 
   return errors;
@@ -142,6 +142,7 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
                 </Stack>
               </Text>
             }
+            data-testid="login-errors"
           />
         )}
         <Stack direction="vertical" gap="normal">

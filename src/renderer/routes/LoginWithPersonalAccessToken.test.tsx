@@ -63,9 +63,7 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
       token: '!@£INVALID-.1',
     };
     expect(validateForm(values).hostname).toBe('Hostname format is invalid');
-    expect(validateForm(values).token).toBe(
-      'Token format is invalid (must be 40 characters long)',
-    );
+    expect(validateForm(values).token).toBe('Token format is invalid');
   });
 
   describe("'Generate a PAT' button", () => {
@@ -192,10 +190,9 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
 
     fireEvent.click(screen.getByTestId('login-submit'));
 
-    expect(screen.getByText('Hostname format is invalid')).toBeDefined();
-    expect(
-      screen.getByText('Token format is invalid (must be 40 characters long)'),
-    ).toBeDefined();
+    expect(screen.getByTestId('login-errors')).toBeTruthy();
+    expect(screen.getByText('Hostname format is invalid')).toBeTruthy();
+    expect(screen.getByText('Token format is invalid')).toBeTruthy();
   });
 
   it('should open help docs in the browser', async () => {

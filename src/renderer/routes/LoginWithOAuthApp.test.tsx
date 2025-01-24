@@ -73,11 +73,9 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
       clientSecret: '!@£INVALID-.1' as ClientSecret,
     };
     expect(validateForm(values).hostname).toBe('Hostname format is invalid');
-    expect(validateForm(values).clientId).toBe(
-      'Client ID format is invalid (must be 20 characters long)',
-    );
+    expect(validateForm(values).clientId).toBe('Client ID format is invalid');
     expect(validateForm(values).clientSecret).toBe(
-      'Client Secret format is invalid (must be 40 characters long)',
+      'Client Secret format is invalid',
     );
   });
 
@@ -173,17 +171,10 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
 
     fireEvent.click(screen.getByTestId('login-submit'));
 
+    expect(screen.getByTestId('login-errors')).toBeTruthy();
     expect(screen.getByText('Hostname format is invalid')).toBeTruthy();
-    expect(
-      screen.getByText(
-        'Client ID format is invalid (must be 20 characters long)',
-      ),
-    ).toBeTruthy();
-    expect(
-      screen.getByText(
-        'Client Secret format is invalid (must be 40 characters long)',
-      ),
-    ).toBeTruthy();
+    expect(screen.getByText('Client ID format is invalid')).toBeTruthy();
+    expect(screen.getByText('Client Secret format is invalid')).toBeTruthy();
   });
 
   it('should open help docs in the browser', async () => {
