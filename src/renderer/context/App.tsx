@@ -86,7 +86,7 @@ const defaultNotificationSettings = {
 const defaultSystemSettings = {
   openLinks: OpenPreference.FOREGROUND,
   keyboardShortcut: true,
-  showNotificationsCountInTray: false,
+  showNotificationsCountInTray: true,
   showNotifications: true,
   playSound: true,
   useAlternateIdleIcon: false,
