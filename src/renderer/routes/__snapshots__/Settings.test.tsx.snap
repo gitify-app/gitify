@@ -236,7 +236,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             Zoom:
           </label>
           <div
-            class="ButtonGroup-sc-1gxhls1-0 jXbkKi"
+            class="ButtonGroup-sc-1gxhls1-0 jXbkKi ml-2"
           >
             <button
               aria-describedby=":r1:-loading-announcement"
@@ -969,6 +969,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             class="flex items-center"
           >
             <input
+              checked=""
               class="size-4 rounded-sm cursor-pointer"
               id="showNotificationsCountInTray"
               type="checkbox"

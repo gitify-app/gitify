@@ -119,7 +119,7 @@ export const AppearanceSettings: FC = () => {
       <div className="flex items-center mt-3 mb-2 text-sm">
         <FieldLabel name="zoom" label="Zoom:" />
 
-        <ButtonGroup>
+        <ButtonGroup className="ml-2">
           <IconButton
             aria-label="Zoom out"
             size="small"
