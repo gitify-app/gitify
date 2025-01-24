@@ -85,428 +85,6 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
             </legend>
           </div>
         </div>
-        <form
-          class="Box-sc-g0xbh4-0"
-        >
-          <div
-            class="Box-sc-g0xbh4-0 grow overflow-x-auto px-8 pb-2 mb-12 "
-          >
-            <div
-              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-              data-align="stretch"
-              data-direction="vertical"
-              data-gap="normal"
-              data-justify="start"
-              data-padding="none"
-              data-wrap="nowrap"
-            >
-              <div
-                alignitems="flex-start"
-                class="Box-sc-g0xbh4-0 XtrQP"
-                display="flex"
-                flexdirection="column"
-                sx="[object Object]"
-              >
-                <label
-                  class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 hmMihG"
-                  for=":r1:"
-                  sx="[object Object]"
-                >
-                  <span
-                    class="Box-sc-g0xbh4-0 kNbgVw"
-                    display="flex"
-                  >
-                    <div
-                      class="Box-sc-g0xbh4-0 gspezS"
-                      mr="1"
-                    >
-                      Hostname
-                    </div>
-                    <span>
-                      *
-                    </span>
-                  </span>
-                </label>
-                <span
-                  aria-busy="false"
-                  class="TextInputWrapper__TextInputBaseWrapper-sc-1mqhpbi-0 TextInputWrapper-sc-1mqhpbi-1 fGSBWG iLQRLY TextInput-wrapper"
-                  sx="[object Object]"
-                >
-                  <input
-                    aria-describedby=":r1:-caption"
-                    aria-invalid="false"
-                    aria-required="true"
-                    class="UnstyledTextInput-sc-14ypya-0 dnEFlY"
-                    data-component="input"
-                    id=":r1:"
-                    name="hostname"
-                    type="text"
-                    value="github.com"
-                  />
-                </span>
-                <span
-                  class="Text-sc-17v1xeu-0 bnvpKU"
-                  color="fg.muted"
-                  display="block"
-                  font-size="0"
-                  id=":r1:-caption"
-                >
-                  <i
-                    class="Text-sc-17v1xeu-0 hmAFGJ"
-                  >
-                    Change only if you are using GitHub Enterprise Server
-                  </i>
-                </span>
-              </div>
-              <div
-                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-                data-align="center"
-                data-direction="horizontal"
-                data-gap="condensed"
-                data-justify="start"
-                data-padding="none"
-                data-wrap="nowrap"
-              >
-                <button
-                  aria-describedby=":r2:-loading-announcement"
-                  class="types__StyledButton-sc-ws60qy-0 jTCgqj"
-                  data-loading="false"
-                  data-size="small"
-                  data-testid="login-create-oauth-app"
-                  sx="[object Object]"
-                  type="button"
-                >
-                  <span
-                    class="Box-sc-g0xbh4-0 srpGE"
-                    data-component="buttonContent"
-                    sx="[object Object]"
-                  >
-                    <span
-                      class="Box-sc-g0xbh4-0 mhHOW"
-                      data-component="leadingVisual"
-                      sx="[object Object]"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        class="octicon octicon-person"
-                        display="inline-block"
-                        fill="currentColor"
-                        focusable="false"
-                        height="16"
-                        overflow="visible"
-                        style="vertical-align: text-bottom;"
-                        viewBox="0 0 16 16"
-                        width="16"
-                      >
-                        <path
-                          d="M10.561 8.073a6.005 6.005 0 0 1 3.432 5.142.75.75 0 1 1-1.498.07 4.5 4.5 0 0 0-8.99 0 .75.75 0 0 1-1.498-.07 6.004 6.004 0 0 1 3.431-5.142 3.999 3.999 0 1 1 5.123 0ZM10.5 5a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0Z"
-                        />
-                      </svg>
-                    </span>
-                    <span
-                      data-component="text"
-                    >
-                      Create new OAuth App
-                    </span>
-                  </span>
-                </button>
-                <span
-                  class="Text-sc-17v1xeu-0 hmAFGJ text-xs"
-                >
-                  and use your 
-                  <i
-                    class="Text-sc-17v1xeu-0 hmAFGJ"
-                  >
-                    client id/secret
-                  </i>
-                   below.
-                </span>
-              </div>
-              <div
-                alignitems="flex-start"
-                class="Box-sc-g0xbh4-0 XtrQP"
-                display="flex"
-                flexdirection="column"
-                sx="[object Object]"
-              >
-                <label
-                  class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 hmMihG"
-                  for=":r3:"
-                  sx="[object Object]"
-                >
-                  <span
-                    class="Box-sc-g0xbh4-0 kNbgVw"
-                    display="flex"
-                  >
-                    <div
-                      class="Box-sc-g0xbh4-0 gspezS"
-                      mr="1"
-                    >
-                      Client ID
-                    </div>
-                    <span>
-                      *
-                    </span>
-                  </span>
-                </label>
-                <span
-                  aria-busy="false"
-                  class="TextInputWrapper__TextInputBaseWrapper-sc-1mqhpbi-0 TextInputWrapper-sc-1mqhpbi-1 fGSBWG iLQRLY TextInput-wrapper"
-                  sx="[object Object]"
-                >
-                  <input
-                    aria-describedby=""
-                    aria-invalid="false"
-                    aria-required="true"
-                    class="UnstyledTextInput-sc-14ypya-0 dnEFlY"
-                    data-component="input"
-                    id=":r3:"
-                    name="clientId"
-                    type="text"
-                    value=""
-                  />
-                </span>
-              </div>
-              <div
-                alignitems="flex-start"
-                class="Box-sc-g0xbh4-0 XtrQP"
-                display="flex"
-                flexdirection="column"
-                sx="[object Object]"
-              >
-                <label
-                  class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 hmMihG"
-                  for=":r4:"
-                  sx="[object Object]"
-                >
-                  <span
-                    class="Box-sc-g0xbh4-0 kNbgVw"
-                    display="flex"
-                  >
-                    <div
-                      class="Box-sc-g0xbh4-0 gspezS"
-                      mr="1"
-                    >
-                      Client Secret
-                    </div>
-                    <span>
-                      *
-                    </span>
-                  </span>
-                </label>
-                <span
-                  aria-busy="false"
-                  class="TextInputWrapper__TextInputBaseWrapper-sc-1mqhpbi-0 TextInputWrapper-sc-1mqhpbi-1 fGSBWG iLQRLY TextInput-wrapper"
-                  sx="[object Object]"
-                >
-                  <input
-                    aria-describedby=""
-                    aria-invalid="false"
-                    aria-required="true"
-                    class="UnstyledTextInput-sc-14ypya-0 dnEFlY"
-                    data-component="input"
-                    id=":r4:"
-                    name="clientSecret"
-                    type="text"
-                    value=""
-                  />
-                </span>
-              </div>
-            </div>
-          </div>
-          <div
-            class="Box-sc-g0xbh4-0 fixed bottom-0 left-10 right-0 bg-gitify-footer"
-          >
-            <div
-              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-              data-align="stretch"
-              data-direction="horizontal"
-              data-justify="space-between"
-              data-padding="condensed"
-              data-wrap="nowrap"
-            >
-              <span
-                aria-label="GitHub documentation"
-                class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-n"
-                id=":r5:"
-                role="tooltip"
-              >
-                <button
-                  aria-describedby=":r6:-loading-announcement"
-                  class="types__StyledButton-sc-ws60qy-0 jTCgqj"
-                  data-loading="false"
-                  data-size="small"
-                  data-testid="login-docs"
-                  sx="[object Object]"
-                  type="button"
-                >
-                  <span
-                    class="Box-sc-g0xbh4-0 srpGE"
-                    data-component="buttonContent"
-                    sx="[object Object]"
-                  >
-                    <span
-                      class="Box-sc-g0xbh4-0 mhHOW"
-                      data-component="leadingVisual"
-                      sx="[object Object]"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        class="octicon octicon-book"
-                        display="inline-block"
-                        fill="currentColor"
-                        focusable="false"
-                        height="16"
-                        overflow="visible"
-                        style="vertical-align: text-bottom;"
-                        viewBox="0 0 16 16"
-                        width="16"
-                      >
-                        <path
-                          d="M0 1.75A.75.75 0 0 1 .75 1h4.253c1.227 0 2.317.59 3 1.501A3.743 3.743 0 0 1 11.006 1h4.245a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-.75.75h-4.507a2.25 2.25 0 0 0-1.591.659l-.622.621a.75.75 0 0 1-1.06 0l-.622-.621A2.25 2.25 0 0 0 5.258 13H.75a.75.75 0 0 1-.75-.75Zm7.251 10.324.004-5.073-.002-2.253A2.25 2.25 0 0 0 5.003 2.5H1.5v9h3.757a3.75 3.75 0 0 1 1.994.574ZM8.755 4.75l-.004 7.322a3.752 3.752 0 0 1 1.992-.572H14.5v-9h-3.495a2.25 2.25 0 0 0-2.25 2.25Z"
-                        />
-                      </svg>
-                    </span>
-                    <span
-                      data-component="text"
-                    >
-                      Docs
-                    </span>
-                  </span>
-                </button>
-              </span>
-              <button
-                aria-describedby=":r7:-loading-announcement"
-                class="types__StyledButton-sc-ws60qy-0 gEWhIh"
-                data-loading="false"
-                data-testid="login-submit"
-                sx="[object Object]"
-                type="submit"
-              >
-                <span
-                  class="Box-sc-g0xbh4-0 srpGE"
-                  data-component="buttonContent"
-                  sx="[object Object]"
-                >
-                  <span
-                    class="Box-sc-g0xbh4-0 mhHOW"
-                    data-component="leadingVisual"
-                    sx="[object Object]"
-                  >
-                    <svg
-                      aria-hidden="true"
-                      class="octicon octicon-sign-in"
-                      display="inline-block"
-                      fill="currentColor"
-                      focusable="false"
-                      height="16"
-                      overflow="visible"
-                      style="vertical-align: text-bottom;"
-                      viewBox="0 0 16 16"
-                      width="16"
-                    >
-                      <path
-                        d="M2 2.75C2 1.784 2.784 1 3.75 1h2.5a.75.75 0 0 1 0 1.5h-2.5a.25.25 0 0 0-.25.25v10.5c0 .138.112.25.25.25h2.5a.75.75 0 0 1 0 1.5h-2.5A1.75 1.75 0 0 1 2 13.25Zm6.56 4.5h5.69a.75.75 0 0 1 0 1.5H8.56l1.97 1.97a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L6.22 8.53a.75.75 0 0 1 0-1.06l3.25-3.25a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734Z"
-                      />
-                    </svg>
-                  </span>
-                  <span
-                    data-component="text"
-                  >
-                    Login
-                  </span>
-                </span>
-              </button>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </body>,
-  "container": <div>
-    <div
-      class="Box-sc-g0xbh4-0 flex flex-col h-screen"
-      data-testid="Login With OAuth App"
-    >
-      <div
-        class="Box-sc-g0xbh4-0 px-6 py-4"
-      >
-        <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-          data-align="stretch"
-          data-direction="horizontal"
-          data-justify="space-between"
-          data-padding="none"
-          data-wrap="nowrap"
-        >
-          <button
-            aria-describedby=":r0:-loading-announcement"
-            aria-labelledby="Go Back"
-            class="types__StyledButton-sc-ws60qy-0 kQRupk"
-            data-component="IconButton"
-            data-loading="false"
-            data-no-visuals="true"
-            data-testid="header-nav-back"
-            sx="[object Object]"
-            type="button"
-          >
-            <svg
-              aria-hidden="true"
-              class="octicon octicon-arrow-left"
-              display="inline-block"
-              fill="currentColor"
-              focusable="false"
-              height="16"
-              overflow="visible"
-              style="vertical-align: text-bottom;"
-              viewBox="0 0 16 16"
-              width="16"
-            >
-              <path
-                d="M7.78 12.53a.75.75 0 0 1-1.06 0L2.47 8.28a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L4.81 7h7.44a.75.75 0 0 1 0 1.5H4.81l2.97 2.97a.75.75 0 0 1 0 1.06Z"
-              />
-            </svg>
-          </button>
-          <legend>
-            <div
-              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-              data-align="center"
-              data-direction="horizontal"
-              data-gap="condensed"
-              data-justify="start"
-              data-padding="none"
-              data-wrap="nowrap"
-              id="login-with oauth app"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-person"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M10.561 8.073a6.005 6.005 0 0 1 3.432 5.142.75.75 0 1 1-1.498.07 4.5 4.5 0 0 0-8.99 0 .75.75 0 0 1-1.498-.07 6.004 6.004 0 0 1 3.431-5.142 3.999 3.999 0 1 1 5.123 0ZM10.5 5a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0Z"
-                />
-              </svg>
-              <h2
-                class="Heading__StyledHeading-sc-1c1dgg0-0 fuhZuh"
-                sx="[object Object]"
-              >
-                Login with OAuth App
-              </h2>
-            </div>
-          </legend>
-        </div>
-      </div>
-      <form
-        class="Box-sc-g0xbh4-0"
-      >
         <div
           class="Box-sc-g0xbh4-0 grow overflow-x-auto px-8 pb-2 mb-12 "
         >
@@ -557,8 +135,10 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                   aria-required="true"
                   class="UnstyledTextInput-sc-14ypya-0 dnEFlY"
                   data-component="input"
+                  data-testid="login-hostname"
                   id=":r1:"
                   name="hostname"
+                  placeholder="github.com"
                   type="text"
                   value="github.com"
                 />
@@ -679,8 +259,10 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                   aria-required="true"
                   class="UnstyledTextInput-sc-14ypya-0 dnEFlY"
                   data-component="input"
+                  data-testid="login-clientId"
                   id=":r3:"
                   name="clientId"
+                  placeholder="The 20 character Client ID as generated on GitHub"
                   type="text"
                   value=""
                 />
@@ -724,8 +306,10 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                   aria-required="true"
                   class="UnstyledTextInput-sc-14ypya-0 dnEFlY"
                   data-component="input"
+                  data-testid="login-clientSecret"
                   id=":r4:"
                   name="clientSecret"
+                  placeholder="The 40 character Client Secret as generated on GitHub"
                   type="text"
                   value=""
                 />
@@ -800,7 +384,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
               data-loading="false"
               data-testid="login-submit"
               sx="[object Object]"
-              type="submit"
+              type="button"
             >
               <span
                 class="Box-sc-g0xbh4-0 srpGE"
@@ -838,7 +422,427 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
             </button>
           </div>
         </div>
-      </form>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="Box-sc-g0xbh4-0 flex flex-col h-screen"
+      data-testid="Login With OAuth App"
+    >
+      <div
+        class="Box-sc-g0xbh4-0 px-6 py-4"
+      >
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          data-align="stretch"
+          data-direction="horizontal"
+          data-justify="space-between"
+          data-padding="none"
+          data-wrap="nowrap"
+        >
+          <button
+            aria-describedby=":r0:-loading-announcement"
+            aria-labelledby="Go Back"
+            class="types__StyledButton-sc-ws60qy-0 kQRupk"
+            data-component="IconButton"
+            data-loading="false"
+            data-no-visuals="true"
+            data-testid="header-nav-back"
+            sx="[object Object]"
+            type="button"
+          >
+            <svg
+              aria-hidden="true"
+              class="octicon octicon-arrow-left"
+              display="inline-block"
+              fill="currentColor"
+              focusable="false"
+              height="16"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
+              viewBox="0 0 16 16"
+              width="16"
+            >
+              <path
+                d="M7.78 12.53a.75.75 0 0 1-1.06 0L2.47 8.28a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L4.81 7h7.44a.75.75 0 0 1 0 1.5H4.81l2.97 2.97a.75.75 0 0 1 0 1.06Z"
+              />
+            </svg>
+          </button>
+          <legend>
+            <div
+              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+              data-align="center"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+              id="login-with oauth app"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-person"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M10.561 8.073a6.005 6.005 0 0 1 3.432 5.142.75.75 0 1 1-1.498.07 4.5 4.5 0 0 0-8.99 0 .75.75 0 0 1-1.498-.07 6.004 6.004 0 0 1 3.431-5.142 3.999 3.999 0 1 1 5.123 0ZM10.5 5a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0Z"
+                />
+              </svg>
+              <h2
+                class="Heading__StyledHeading-sc-1c1dgg0-0 fuhZuh"
+                sx="[object Object]"
+              >
+                Login with OAuth App
+              </h2>
+            </div>
+          </legend>
+        </div>
+      </div>
+      <div
+        class="Box-sc-g0xbh4-0 grow overflow-x-auto px-8 pb-2 mb-12 "
+      >
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          data-align="stretch"
+          data-direction="vertical"
+          data-gap="normal"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
+        >
+          <div
+            alignitems="flex-start"
+            class="Box-sc-g0xbh4-0 XtrQP"
+            display="flex"
+            flexdirection="column"
+            sx="[object Object]"
+          >
+            <label
+              class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 hmMihG"
+              for=":r1:"
+              sx="[object Object]"
+            >
+              <span
+                class="Box-sc-g0xbh4-0 kNbgVw"
+                display="flex"
+              >
+                <div
+                  class="Box-sc-g0xbh4-0 gspezS"
+                  mr="1"
+                >
+                  Hostname
+                </div>
+                <span>
+                  *
+                </span>
+              </span>
+            </label>
+            <span
+              aria-busy="false"
+              class="TextInputWrapper__TextInputBaseWrapper-sc-1mqhpbi-0 TextInputWrapper-sc-1mqhpbi-1 fGSBWG iLQRLY TextInput-wrapper"
+              sx="[object Object]"
+            >
+              <input
+                aria-describedby=":r1:-caption"
+                aria-invalid="false"
+                aria-required="true"
+                class="UnstyledTextInput-sc-14ypya-0 dnEFlY"
+                data-component="input"
+                data-testid="login-hostname"
+                id=":r1:"
+                name="hostname"
+                placeholder="github.com"
+                type="text"
+                value="github.com"
+              />
+            </span>
+            <span
+              class="Text-sc-17v1xeu-0 bnvpKU"
+              color="fg.muted"
+              display="block"
+              font-size="0"
+              id=":r1:-caption"
+            >
+              <i
+                class="Text-sc-17v1xeu-0 hmAFGJ"
+              >
+                Change only if you are using GitHub Enterprise Server
+              </i>
+            </span>
+          </div>
+          <div
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <button
+              aria-describedby=":r2:-loading-announcement"
+              class="types__StyledButton-sc-ws60qy-0 jTCgqj"
+              data-loading="false"
+              data-size="small"
+              data-testid="login-create-oauth-app"
+              sx="[object Object]"
+              type="button"
+            >
+              <span
+                class="Box-sc-g0xbh4-0 srpGE"
+                data-component="buttonContent"
+                sx="[object Object]"
+              >
+                <span
+                  class="Box-sc-g0xbh4-0 mhHOW"
+                  data-component="leadingVisual"
+                  sx="[object Object]"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="octicon octicon-person"
+                    display="inline-block"
+                    fill="currentColor"
+                    focusable="false"
+                    height="16"
+                    overflow="visible"
+                    style="vertical-align: text-bottom;"
+                    viewBox="0 0 16 16"
+                    width="16"
+                  >
+                    <path
+                      d="M10.561 8.073a6.005 6.005 0 0 1 3.432 5.142.75.75 0 1 1-1.498.07 4.5 4.5 0 0 0-8.99 0 .75.75 0 0 1-1.498-.07 6.004 6.004 0 0 1 3.431-5.142 3.999 3.999 0 1 1 5.123 0ZM10.5 5a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0Z"
+                    />
+                  </svg>
+                </span>
+                <span
+                  data-component="text"
+                >
+                  Create new OAuth App
+                </span>
+              </span>
+            </button>
+            <span
+              class="Text-sc-17v1xeu-0 hmAFGJ text-xs"
+            >
+              and use your 
+              <i
+                class="Text-sc-17v1xeu-0 hmAFGJ"
+              >
+                client id/secret
+              </i>
+               below.
+            </span>
+          </div>
+          <div
+            alignitems="flex-start"
+            class="Box-sc-g0xbh4-0 XtrQP"
+            display="flex"
+            flexdirection="column"
+            sx="[object Object]"
+          >
+            <label
+              class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 hmMihG"
+              for=":r3:"
+              sx="[object Object]"
+            >
+              <span
+                class="Box-sc-g0xbh4-0 kNbgVw"
+                display="flex"
+              >
+                <div
+                  class="Box-sc-g0xbh4-0 gspezS"
+                  mr="1"
+                >
+                  Client ID
+                </div>
+                <span>
+                  *
+                </span>
+              </span>
+            </label>
+            <span
+              aria-busy="false"
+              class="TextInputWrapper__TextInputBaseWrapper-sc-1mqhpbi-0 TextInputWrapper-sc-1mqhpbi-1 fGSBWG iLQRLY TextInput-wrapper"
+              sx="[object Object]"
+            >
+              <input
+                aria-describedby=""
+                aria-invalid="false"
+                aria-required="true"
+                class="UnstyledTextInput-sc-14ypya-0 dnEFlY"
+                data-component="input"
+                data-testid="login-clientId"
+                id=":r3:"
+                name="clientId"
+                placeholder="The 20 character Client ID as generated on GitHub"
+                type="text"
+                value=""
+              />
+            </span>
+          </div>
+          <div
+            alignitems="flex-start"
+            class="Box-sc-g0xbh4-0 XtrQP"
+            display="flex"
+            flexdirection="column"
+            sx="[object Object]"
+          >
+            <label
+              class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 hmMihG"
+              for=":r4:"
+              sx="[object Object]"
+            >
+              <span
+                class="Box-sc-g0xbh4-0 kNbgVw"
+                display="flex"
+              >
+                <div
+                  class="Box-sc-g0xbh4-0 gspezS"
+                  mr="1"
+                >
+                  Client Secret
+                </div>
+                <span>
+                  *
+                </span>
+              </span>
+            </label>
+            <span
+              aria-busy="false"
+              class="TextInputWrapper__TextInputBaseWrapper-sc-1mqhpbi-0 TextInputWrapper-sc-1mqhpbi-1 fGSBWG iLQRLY TextInput-wrapper"
+              sx="[object Object]"
+            >
+              <input
+                aria-describedby=""
+                aria-invalid="false"
+                aria-required="true"
+                class="UnstyledTextInput-sc-14ypya-0 dnEFlY"
+                data-component="input"
+                data-testid="login-clientSecret"
+                id=":r4:"
+                name="clientSecret"
+                placeholder="The 40 character Client Secret as generated on GitHub"
+                type="text"
+                value=""
+              />
+            </span>
+          </div>
+        </div>
+      </div>
+      <div
+        class="Box-sc-g0xbh4-0 fixed bottom-0 left-10 right-0 bg-gitify-footer"
+      >
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          data-align="stretch"
+          data-direction="horizontal"
+          data-justify="space-between"
+          data-padding="condensed"
+          data-wrap="nowrap"
+        >
+          <span
+            aria-label="GitHub documentation"
+            class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-n"
+            id=":r5:"
+            role="tooltip"
+          >
+            <button
+              aria-describedby=":r6:-loading-announcement"
+              class="types__StyledButton-sc-ws60qy-0 jTCgqj"
+              data-loading="false"
+              data-size="small"
+              data-testid="login-docs"
+              sx="[object Object]"
+              type="button"
+            >
+              <span
+                class="Box-sc-g0xbh4-0 srpGE"
+                data-component="buttonContent"
+                sx="[object Object]"
+              >
+                <span
+                  class="Box-sc-g0xbh4-0 mhHOW"
+                  data-component="leadingVisual"
+                  sx="[object Object]"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="octicon octicon-book"
+                    display="inline-block"
+                    fill="currentColor"
+                    focusable="false"
+                    height="16"
+                    overflow="visible"
+                    style="vertical-align: text-bottom;"
+                    viewBox="0 0 16 16"
+                    width="16"
+                  >
+                    <path
+                      d="M0 1.75A.75.75 0 0 1 .75 1h4.253c1.227 0 2.317.59 3 1.501A3.743 3.743 0 0 1 11.006 1h4.245a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-.75.75h-4.507a2.25 2.25 0 0 0-1.591.659l-.622.621a.75.75 0 0 1-1.06 0l-.622-.621A2.25 2.25 0 0 0 5.258 13H.75a.75.75 0 0 1-.75-.75Zm7.251 10.324.004-5.073-.002-2.253A2.25 2.25 0 0 0 5.003 2.5H1.5v9h3.757a3.75 3.75 0 0 1 1.994.574ZM8.755 4.75l-.004 7.322a3.752 3.752 0 0 1 1.992-.572H14.5v-9h-3.495a2.25 2.25 0 0 0-2.25 2.25Z"
+                    />
+                  </svg>
+                </span>
+                <span
+                  data-component="text"
+                >
+                  Docs
+                </span>
+              </span>
+            </button>
+          </span>
+          <button
+            aria-describedby=":r7:-loading-announcement"
+            class="types__StyledButton-sc-ws60qy-0 gEWhIh"
+            data-loading="false"
+            data-testid="login-submit"
+            sx="[object Object]"
+            type="button"
+          >
+            <span
+              class="Box-sc-g0xbh4-0 srpGE"
+              data-component="buttonContent"
+              sx="[object Object]"
+            >
+              <span
+                class="Box-sc-g0xbh4-0 mhHOW"
+                data-component="leadingVisual"
+                sx="[object Object]"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="octicon octicon-sign-in"
+                  display="inline-block"
+                  fill="currentColor"
+                  focusable="false"
+                  height="16"
+                  overflow="visible"
+                  style="vertical-align: text-bottom;"
+                  viewBox="0 0 16 16"
+                  width="16"
+                >
+                  <path
+                    d="M2 2.75C2 1.784 2.784 1 3.75 1h2.5a.75.75 0 0 1 0 1.5h-2.5a.25.25 0 0 0-.25.25v10.5c0 .138.112.25.25.25h2.5a.75.75 0 0 1 0 1.5h-2.5A1.75 1.75 0 0 1 2 13.25Zm6.56 4.5h5.69a.75.75 0 0 1 0 1.5H8.56l1.97 1.97a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L6.22 8.53a.75.75 0 0 1 0-1.06l3.25-3.25a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734Z"
+                  />
+                </svg>
+              </span>
+              <span
+                data-component="text"
+              >
+                Login
+              </span>
+            </span>
+          </button>
+        </div>
+      </div>
     </div>
   </div>,
   "debug": [Function],

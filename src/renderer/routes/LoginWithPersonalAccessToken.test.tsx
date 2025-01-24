@@ -54,16 +54,18 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
     let values = {
       ...emptyValues,
     };
-    expect(validateForm(values).hostname).toBe('Required');
-    expect(validateForm(values).token).toBe('Required');
+    expect(validateForm(values).hostname).toBe('Hostname is required');
+    expect(validateForm(values).token).toBe('Token is required');
 
     values = {
       ...emptyValues,
       hostname: 'hello',
       token: '!@£INVALID-.1',
     };
-    expect(validateForm(values).hostname).toBe('Invalid hostname.');
-    expect(validateForm(values).token).toBe('Invalid token.');
+    expect(validateForm(values).hostname).toBe('Hostname format is invalid');
+    expect(validateForm(values).token).toBe(
+      'Token format is invalid (must be 40 characters long)',
+    );
   });
 
   describe("'Generate a PAT' button", () => {
@@ -80,7 +82,7 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
         </AppContext.Provider>,
       );
 
-      fireEvent.change(screen.getByLabelText('Hostname'), {
+      fireEvent.change(screen.getByTestId('login-hostname'), {
         target: { value: '' },
       });
 
@@ -123,12 +125,12 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
       </AppContext.Provider>,
     );
 
-    fireEvent.change(screen.getByLabelText('Token'), {
-      target: { value: '1234567890123456789012345678901234567890' },
+    fireEvent.change(screen.getByTestId('login-hostname'), {
+      target: { value: 'github.com' },
     });
 
-    fireEvent.change(screen.getByLabelText('Hostname'), {
-      target: { value: 'github.com' },
+    fireEvent.change(screen.getByTestId('login-token'), {
+      target: { value: '1234567890123456789012345678901234567890' },
     });
 
     fireEvent.click(screen.getByTestId('login-submit'));
@@ -156,12 +158,12 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
       </AppContext.Provider>,
     );
 
-    fireEvent.change(screen.getByLabelText('Token'), {
-      target: { value: '1234567890123456789012345678901234567890' },
+    fireEvent.change(screen.getByTestId('login-hostname'), {
+      target: { value: 'github.com' },
     });
 
-    fireEvent.change(screen.getByLabelText('Hostname'), {
-      target: { value: 'github.com' },
+    fireEvent.change(screen.getByTestId('login-token'), {
+      target: { value: '1234567890123456789012345678901234567890' },
     });
 
     fireEvent.click(screen.getByTestId('login-submit'));
@@ -181,17 +183,19 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
       </MemoryRouter>,
     );
 
-    fireEvent.change(screen.getByLabelText('Hostname'), {
+    fireEvent.change(screen.getByTestId('login-hostname'), {
       target: { value: 'test' },
     });
-    fireEvent.change(screen.getByLabelText('Token'), {
+    fireEvent.change(screen.getByTestId('login-token'), {
       target: { value: '123' },
     });
 
     fireEvent.click(screen.getByTestId('login-submit'));
 
-    expect(screen.getByText('Invalid hostname.')).toBeDefined();
-    expect(screen.getByText('Invalid token.')).toBeDefined();
+    expect(screen.getByText('Hostname format is invalid')).toBeDefined();
+    expect(
+      screen.getByText('Token format is invalid (must be 40 characters long)'),
+    ).toBeDefined();
   });
 
   it('should open help docs in the browser', async () => {

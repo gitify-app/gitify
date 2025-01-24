@@ -138,9 +138,6 @@ importers:
       postcss-loader:
         specifier: 8.1.1
         version: 8.1.1(postcss@8.5.1)(typescript@5.7.3)(webpack@5.97.1)
-      react-final-form:
-        specifier: 6.5.9
-        version: 6.5.9(final-form@4.20.10)(react@19.0.0)
       rimraf:
         specifier: 6.0.1
         version: 6.0.1
@@ -3637,12 +3634,6 @@ packages:
     resolution: {integrity: sha512-4GV5sHFG0e/0AD4X+ySy6UJd3jVl1iNsNHdpad0qhABJ11twS3TTBnseqsKurKcsNqCEFeGL3uLpVChpIO3QfQ==}
     peerDependencies:
       react: ^19.0.0
-
-  react-final-form@6.5.9:
-    resolution: {integrity: sha512-x3XYvozolECp3nIjly+4QqxdjSSWfcnpGEL5K8OBT6xmGrq5kBqbA6+/tOqoom9NwqIPPbxPNsOViFlbKgowbA==}
-    peerDependencies:
-      final-form: ^4.20.4
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0
 
   react-intersection-observer@9.13.1:
     resolution: {integrity: sha512-tSzDaTy0qwNPLJHg8XZhlyHTgGW6drFKTtvjdL+p6um12rcnp8Z5XstE+QNBJ7c64n5o0Lj4ilUleA41bmDoMw==}
@@ -8597,12 +8588,6 @@ snapshots:
     dependencies:
       react: 19.0.0
       scheduler: 0.25.0
-
-  react-final-form@6.5.9(final-form@4.20.10)(react@19.0.0):
-    dependencies:
-      '@babel/runtime': 7.24.1
-      final-form: 4.20.10
-      react: 19.0.0
 
   react-intersection-observer@9.13.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
     dependencies:

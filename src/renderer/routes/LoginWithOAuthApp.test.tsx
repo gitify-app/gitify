@@ -72,10 +72,12 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
       clientId: '!@£INVALID-.1' as ClientID,
       clientSecret: '!@£INVALID-.1' as ClientSecret,
     };
-    expect(validateForm(values).hostname).toBe('Hostname is invalid');
-    expect(validateForm(values).clientId).toBe('Client ID format is invalid');
+    expect(validateForm(values).hostname).toBe('Hostname format is invalid');
+    expect(validateForm(values).clientId).toBe(
+      'Client ID format is invalid (must be 20 characters long)',
+    );
     expect(validateForm(values).clientSecret).toBe(
-      'Client Secret format is invalid',
+      'Client Secret format is invalid (must be 40 characters long)',
     );
   });
 
@@ -88,6 +90,10 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
           </MemoryRouter>
         </AppContext.Provider>,
       );
+
+      fireEvent.change(screen.getByTestId('login-hostname'), {
+        target: { value: '' },
+      });
 
       fireEvent.click(screen.getByTestId('login-create-oauth-app'));
 
@@ -103,7 +109,7 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
         </AppContext.Provider>,
       );
 
-      fireEvent.change(screen.getByLabelText('Hostname'), {
+      fireEvent.change(screen.getByTestId('login-hostname'), {
         target: { value: 'company.github.com' },
       });
 
@@ -128,13 +134,13 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
       </AppContext.Provider>,
     );
 
-    fireEvent.change(screen.getByLabelText('Hostname'), {
+    fireEvent.change(screen.getByTestId('login-hostname'), {
       target: { value: 'github.com' },
     });
-    fireEvent.change(screen.getByLabelText('Client ID'), {
+    fireEvent.change(screen.getByTestId('login-clientId'), {
       target: { value: '1234567890_ASDFGHJKL' },
     });
-    fireEvent.change(screen.getByLabelText('Client Secret'), {
+    fireEvent.change(screen.getByTestId('login-clientSecret'), {
       target: { value: '1234567890_asdfghjklPOIUYTREWQ0987654321' },
     });
 
@@ -155,21 +161,29 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
       </AppContext.Provider>,
     );
 
-    fireEvent.change(screen.getByLabelText('Hostname'), {
+    fireEvent.change(screen.getByTestId('login-hostname'), {
       target: { value: 'test' },
     });
-    fireEvent.change(screen.getByLabelText('Client ID'), {
+    fireEvent.change(screen.getByTestId('login-clientId'), {
       target: { value: '123' },
     });
-    fireEvent.change(screen.getByLabelText('Client Secret'), {
+    fireEvent.change(screen.getByTestId('login-clientSecret'), {
       target: { value: 'abc' },
     });
 
     fireEvent.click(screen.getByTestId('login-submit'));
 
-    expect(screen.getByText('Invalid hostname.')).toBeTruthy();
-    expect(screen.getByText('Invalid client id.')).toBeTruthy();
-    expect(screen.getByText('Invalid client secret.')).toBeTruthy();
+    expect(screen.getByText('Hostname format is invalid')).toBeTruthy();
+    expect(
+      screen.getByText(
+        'Client ID format is invalid (must be 20 characters long)',
+      ),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(
+        'Client Secret format is invalid (must be 40 characters long)',
+      ),
+    ).toBeTruthy();
   });
 
   it('should open help docs in the browser', async () => {

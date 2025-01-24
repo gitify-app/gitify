@@ -9,7 +9,6 @@ import {
   SignInIcon,
 } from '@primer/octicons-react';
 import {
-  Box,
   Button,
   FormControl,
   Stack,
@@ -44,6 +43,7 @@ interface IFormData {
 interface IFormErrors {
   token?: string;
   hostname?: string;
+  invalidCredentialsForHost?: string;
 }
 
 export const validateForm = (values: IFormData): IFormErrors => {
@@ -69,8 +69,6 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
 
   const { loginWithPersonalAccessToken } = useContext(AppContext);
 
-  const [isValidCredentialsForHost, setIsValidCredentialsForHost] =
-    useState(true);
   const [showPassword, setShowPassword] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -81,15 +79,10 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
   const [errors, setErrors] = useState({} as IFormErrors);
 
   const hasErrors = useMemo(() => {
-    return (
-      Object.values(errors).some((error) => error !== '') ||
-      !isValidCredentialsForHost
-    );
-  }, [errors, isValidCredentialsForHost]);
+    return Object.values(errors).some((error) => error !== '');
+  }, [errors]);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
+  const handleSubmit = async () => {
     const newErrors = validateForm(formData);
 
     setErrors(newErrors);
@@ -109,7 +102,6 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
 
   const verifyLoginCredentials = useCallback(
     async (data: IFormData) => {
-      setIsValidCredentialsForHost(true);
       try {
         await loginWithPersonalAccessToken(
           data as LoginPersonalAccessTokenOptions,
@@ -121,7 +113,9 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
           'Failed to login with PAT',
           err,
         );
-        setIsValidCredentialsForHost(false);
+        setErrors({
+          invalidCredentialsForHost: `Failed to validate provided token against ${data.hostname}`,
+        });
       }
     },
     [loginWithPersonalAccessToken],
@@ -131,127 +125,125 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
     <Page id="Login With Personal Access Token">
       <Header icon={KeyIcon}>Login with Personal Access Token</Header>
 
-      <Box as="form" onSubmit={handleSubmit}>
-        <Contents>
-          {hasErrors && (
-            <Banner
-              title="Form errors"
-              variant="critical"
-              hideTitle
-              description={
-                <Text color="danger.fg">
-                  <Stack direction="vertical" gap="condensed">
-                    {errors.hostname && <Text>{errors.hostname}</Text>}
-                    {errors.token && <Text>{errors.token}</Text>}
-                    {!isValidCredentialsForHost && (
-                      <Text>
-                        Failed to validate provided token against{' '}
-                        {formData.hostname}
-                      </Text>
-                    )}
-                  </Stack>
-                </Text>
-              }
+      <Contents>
+        {hasErrors && (
+          <Banner
+            title="Form errors"
+            variant="critical"
+            hideTitle
+            description={
+              <Text color="danger.fg">
+                <Stack direction="vertical" gap="condensed">
+                  {errors.hostname && <Text>{errors.hostname}</Text>}
+                  {errors.token && <Text>{errors.token}</Text>}
+                  {errors.invalidCredentialsForHost && (
+                    <Text>{errors.invalidCredentialsForHost}</Text>
+                  )}
+                </Stack>
+              </Text>
+            }
+          />
+        )}
+        <Stack direction="vertical" gap="normal">
+          <FormControl required>
+            <FormControl.Label>Hostname</FormControl.Label>
+            <FormControl.Caption>
+              <Text as="i">
+                Change only if you are using GitHub Enterprise Server
+              </Text>
+            </FormControl.Caption>
+            <TextInput
+              name="hostname"
+              placeholder="github.com"
+              value={formData.hostname}
+              onChange={handleInputChange}
+              aria-invalid={errors.hostname ? 'true' : 'false'}
+              sx={{
+                borderColor: errors.hostname
+                  ? 'danger.emphasis'
+                  : 'border.default',
+              }}
+              data-testid="login-hostname"
+              block
             />
-          )}
-          <Stack direction="vertical" gap="normal">
-            <FormControl required>
-              <FormControl.Label>Hostname</FormControl.Label>
-              <FormControl.Caption>
-                <Text as="i">
-                  Change only if you are using GitHub Enterprise Server
-                </Text>
-              </FormControl.Caption>
-              <TextInput
-                name="hostname"
-                value={formData.hostname}
-                onChange={handleInputChange}
-                aria-invalid={errors.hostname ? 'true' : 'false'}
-                sx={{
-                  borderColor: errors.hostname
-                    ? 'danger.emphasis'
-                    : 'border.default',
-                }}
-                block
-              />
-            </FormControl>
+          </FormControl>
 
-            <Stack direction="vertical" gap="condensed">
-              <Stack direction="horizontal" align="center" gap="condensed">
-                <Button
-                  size="small"
-                  leadingVisual={KeyIcon}
-                  disabled={!formData.hostname}
-                  onClick={() =>
-                    openExternalLink(getNewTokenURL(formData.hostname))
-                  }
-                  data-testid="login-create-token"
-                >
-                  Generate a PAT
-                </Button>
-                <Text className="text-xs">
-                  on GitHub to paste the token below.
-                </Text>
-              </Stack>
-
-              <Text as="i" className="text-xs">
-                The{' '}
-                <Tooltip text={formatRequiredScopes()}>
-                  <Text as="u">required scopes</Text>
-                </Tooltip>{' '}
-                will be automatically selected for you.
+          <Stack direction="vertical" gap="condensed">
+            <Stack direction="horizontal" align="center" gap="condensed">
+              <Button
+                size="small"
+                leadingVisual={KeyIcon}
+                disabled={!formData.hostname}
+                onClick={() =>
+                  openExternalLink(getNewTokenURL(formData.hostname))
+                }
+                data-testid="login-create-token"
+              >
+                Generate a PAT
+              </Button>
+              <Text className="text-xs">
+                on GitHub to paste the token below.
               </Text>
             </Stack>
 
-            <FormControl required>
-              <FormControl.Label>Token</FormControl.Label>
-              <TextInput
-                name="token"
-                type={showPassword ? 'text' : 'password'}
-                value={formData.token}
-                onChange={handleInputChange}
-                aria-invalid={errors.token ? 'true' : 'false'}
-                placeholder="The 40 character token as generated on GitHub"
-                sx={{
-                  borderColor: errors.token
-                    ? 'danger.emphasis'
-                    : 'border.default',
-                }}
-                trailingAction={
-                  <TextInput.Action
-                    onClick={() => setShowPassword(!showPassword)}
-                    icon={showPassword ? EyeClosedIcon : EyeIcon}
-                    aria-label={showPassword ? 'Hide token' : 'Show token'}
-                  />
-                }
-                block
-              />
-            </FormControl>
+            <Text as="i" className="text-xs">
+              The{' '}
+              <Tooltip text={formatRequiredScopes()} direction="se">
+                <Text as="u">required scopes</Text>
+              </Tooltip>{' '}
+              will be automatically selected for you.
+            </Text>
           </Stack>
-        </Contents>
 
-        <Footer justify="space-between">
-          <Tooltip text="GitHub documentation" direction="ne">
-            <Button
-              size="small"
-              leadingVisual={BookIcon}
-              onClick={() => openExternalLink(Constants.GITHUB_DOCS.PAT_URL)}
-              data-testid="login-docs"
-            >
-              Docs
-            </Button>
-          </Tooltip>
+          <FormControl required>
+            <FormControl.Label>Token</FormControl.Label>
+            <TextInput
+              name="token"
+              type={showPassword ? 'text' : 'password'}
+              placeholder="The 40 character token as generated on GitHub"
+              value={formData.token}
+              onChange={handleInputChange}
+              aria-invalid={errors.token ? 'true' : 'false'}
+              sx={{
+                borderColor: errors.token
+                  ? 'danger.emphasis'
+                  : 'border.default',
+              }}
+              trailingAction={
+                <TextInput.Action
+                  onClick={() => setShowPassword(!showPassword)}
+                  icon={showPassword ? EyeClosedIcon : EyeIcon}
+                  aria-label={showPassword ? 'Hide token' : 'Show token'}
+                />
+              }
+              data-testid="login-token"
+              block
+            />
+          </FormControl>
+        </Stack>
+      </Contents>
 
+      <Footer justify="space-between">
+        <Tooltip text="GitHub documentation" direction="ne">
           <Button
-            variant="primary"
-            leadingVisual={SignInIcon}
-            type="submit"
-            data-testid="login-submit"
+            size="small"
+            leadingVisual={BookIcon}
+            onClick={() => openExternalLink(Constants.GITHUB_DOCS.PAT_URL)}
+            data-testid="login-docs"
           >
-            Login
+            Docs
           </Button>
-        </Footer>
-      </Box>
+        </Tooltip>
+
+        <Button
+          variant="primary"
+          leadingVisual={SignInIcon}
+          onClick={handleSubmit}
+          data-testid="login-submit"
+        >
+          Login
+        </Button>
+      </Footer>
     </Page>
   );
 };
