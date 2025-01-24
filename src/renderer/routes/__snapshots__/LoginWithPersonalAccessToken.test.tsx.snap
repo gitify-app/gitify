@@ -95,7 +95,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
                 Hostname
               </label>
               <input
-                class="text-sm mb-2 px-4 py-1.5 block w-full appearance-none rounded border bg-gitify-input-rest focus:bg-gitify-input-focus focus:outline-none border-gray-500"
+                class="text-sm mb-2 px-4 py-1.5 block w-full appearance-none rounded-sm border bg-gitify-input-rest focus:bg-gitify-input-focus focus:outline-hidden border-gray-500"
                 id="hostname"
                 name="hostname"
                 placeholder="github.company.com"
@@ -195,7 +195,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
                 Token
               </label>
               <input
-                class="text-sm mb-2 px-4 py-1.5 block w-full appearance-none rounded border bg-gitify-input-rest focus:bg-gitify-input-focus focus:outline-none border-red-500"
+                class="text-sm mb-2 px-4 py-1.5 block w-full appearance-none rounded-sm border bg-gitify-input-rest focus:bg-gitify-input-focus focus:outline-hidden border-red-500"
                 id="token"
                 name="token"
                 placeholder="The 40 characters token generated on GitHub"
@@ -408,7 +408,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
               Hostname
             </label>
             <input
-              class="text-sm mb-2 px-4 py-1.5 block w-full appearance-none rounded border bg-gitify-input-rest focus:bg-gitify-input-focus focus:outline-none border-gray-500"
+              class="text-sm mb-2 px-4 py-1.5 block w-full appearance-none rounded-sm border bg-gitify-input-rest focus:bg-gitify-input-focus focus:outline-hidden border-gray-500"
               id="hostname"
               name="hostname"
               placeholder="github.company.com"
@@ -508,7 +508,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
               Token
             </label>
             <input
-              class="text-sm mb-2 px-4 py-1.5 block w-full appearance-none rounded border bg-gitify-input-rest focus:bg-gitify-input-focus focus:outline-none border-red-500"
+              class="text-sm mb-2 px-4 py-1.5 block w-full appearance-none rounded-sm border bg-gitify-input-rest focus:bg-gitify-input-focus focus:outline-hidden border-red-500"
               id="token"
               name="token"
               placeholder="The 40 characters token generated on GitHub"

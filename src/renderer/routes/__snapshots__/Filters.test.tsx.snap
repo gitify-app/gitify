@@ -78,7 +78,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
     </legend>
   </div>
   <div
-    class="flex-grow overflow-x-auto px-8 pb-4"
+    class="grow overflow-x-auto px-8 pb-4"
   >
     <fieldset
       class="mb-3"
@@ -125,7 +125,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           class="flex items-center"
         >
           <input
-            class="size-4 rounded cursor-pointer"
+            class="size-4 rounded-sm cursor-pointer"
             id="hideBots"
             type="checkbox"
           />
@@ -214,7 +214,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           class="flex items-center"
         >
           <input
-            class="size-4 rounded cursor-pointer"
+            class="size-4 rounded-sm cursor-pointer"
             id="approval_requested"
             type="checkbox"
           />
@@ -259,7 +259,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           class="flex items-center"
         >
           <input
-            class="size-4 rounded cursor-pointer"
+            class="size-4 rounded-sm cursor-pointer"
             id="assign"
             type="checkbox"
           />
@@ -304,7 +304,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           class="flex items-center"
         >
           <input
-            class="size-4 rounded cursor-pointer"
+            class="size-4 rounded-sm cursor-pointer"
             id="author"
             type="checkbox"
           />
@@ -349,7 +349,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           class="flex items-center"
         >
           <input
-            class="size-4 rounded cursor-pointer"
+            class="size-4 rounded-sm cursor-pointer"
             id="ci_activity"
             type="checkbox"
           />
@@ -394,7 +394,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           class="flex items-center"
         >
           <input
-            class="size-4 rounded cursor-pointer"
+            class="size-4 rounded-sm cursor-pointer"
             id="comment"
             type="checkbox"
           />
@@ -439,7 +439,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           class="flex items-center"
         >
           <input
-            class="size-4 rounded cursor-pointer"
+            class="size-4 rounded-sm cursor-pointer"
             id="invitation"
             type="checkbox"
           />
@@ -484,7 +484,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           class="flex items-center"
         >
           <input
-            class="size-4 rounded cursor-pointer"
+            class="size-4 rounded-sm cursor-pointer"
             id="manual"
             type="checkbox"
           />
@@ -529,7 +529,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           class="flex items-center"
         >
           <input
-            class="size-4 rounded cursor-pointer"
+            class="size-4 rounded-sm cursor-pointer"
             id="member_feature_requested"
             type="checkbox"
           />
@@ -574,7 +574,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           class="flex items-center"
         >
           <input
-            class="size-4 rounded cursor-pointer"
+            class="size-4 rounded-sm cursor-pointer"
             id="mention"
             type="checkbox"
           />
@@ -619,7 +619,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           class="flex items-center"
         >
           <input
-            class="size-4 rounded cursor-pointer"
+            class="size-4 rounded-sm cursor-pointer"
             id="review_requested"
             type="checkbox"
           />
@@ -664,7 +664,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           class="flex items-center"
         >
           <input
-            class="size-4 rounded cursor-pointer"
+            class="size-4 rounded-sm cursor-pointer"
             id="security_advisory_credit"
             type="checkbox"
           />
@@ -709,7 +709,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           class="flex items-center"
         >
           <input
-            class="size-4 rounded cursor-pointer"
+            class="size-4 rounded-sm cursor-pointer"
             id="security_alert"
             type="checkbox"
           />
@@ -754,7 +754,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           class="flex items-center"
         >
           <input
-            class="size-4 rounded cursor-pointer"
+            class="size-4 rounded-sm cursor-pointer"
             id="state_change"
             type="checkbox"
           />
@@ -799,7 +799,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           class="flex items-center"
         >
           <input
-            class="size-4 rounded cursor-pointer"
+            class="size-4 rounded-sm cursor-pointer"
             id="subscribed"
             type="checkbox"
           />
@@ -844,7 +844,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           class="flex items-center"
         >
           <input
-            class="size-4 rounded cursor-pointer"
+            class="size-4 rounded-sm cursor-pointer"
             id="team_mention"
             type="checkbox"
           />
@@ -953,7 +953,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
     class="flex items-center"
   >
     <input
-      class="size-4 rounded cursor-pointer"
+      class="size-4 rounded-sm cursor-pointer"
       id="mention"
       type="checkbox"
     />
@@ -1001,7 +1001,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
     class="flex items-center"
   >
     <input
-      class="size-4 rounded cursor-pointer"
+      class="size-4 rounded-sm cursor-pointer"
       id="mention"
       type="checkbox"
     />
@@ -1049,7 +1049,7 @@ exports[`renderer/routes/Filters.tsx Users section should be able to toggle the 
     class="flex items-center"
   >
     <input
-      class="size-4 rounded cursor-pointer"
+      class="size-4 rounded-sm cursor-pointer"
       id="hideBots"
       type="checkbox"
     />
@@ -1097,7 +1097,7 @@ exports[`renderer/routes/Filters.tsx Users section should not be able to toggle 
     class="flex items-center"
   >
     <input
-      class="size-4 rounded cursor-pointer"
+      class="size-4 rounded-sm cursor-pointer"
       disabled=""
       id="hideBots"
       type="checkbox"
