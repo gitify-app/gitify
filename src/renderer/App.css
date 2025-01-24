@@ -1,3 +1,6 @@
+/** Tailwind CSS */
+@import "tailwindcss";
+
 /** GitHub Primer Design System */
 /* Size & Typography */
 @import "@primer/primitives/dist/css/base/size/size.css";
@@ -18,6 +21,9 @@
 @import "@primer/primitives/dist/css/functional/themes/dark-dimmed.css";
 @import "@primer/primitives/dist/css/functional/themes/dark-high-contrast.css";
 @import "@primer/primitives/dist/css/functional/themes/dark-tritanopia.css";
+
+/** Tailwind CSS Configuration */
+@config '../../tailwind.config.ts';
 
 html,
 body,

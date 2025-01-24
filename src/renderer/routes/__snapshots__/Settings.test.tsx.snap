@@ -78,7 +78,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
     </legend>
   </div>
   <div
-    class="flex-grow overflow-x-auto px-8 pb-4"
+    class="grow overflow-x-auto px-8 pb-4"
   >
     <div
       class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
@@ -355,7 +355,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           >
             <input
               checked=""
-              class="size-4 rounded cursor-pointer"
+              class="size-4 rounded-sm cursor-pointer"
               id="detailedNotifications"
               type="checkbox"
             />
@@ -401,7 +401,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           >
             <input
               checked=""
-              class="size-4 rounded cursor-pointer"
+              class="size-4 rounded-sm cursor-pointer"
               id="showPills"
               type="checkbox"
             />
@@ -447,7 +447,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           >
             <input
               checked=""
-              class="size-4 rounded cursor-pointer"
+              class="size-4 rounded-sm cursor-pointer"
               id="showNumber"
               type="checkbox"
             />
@@ -493,7 +493,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           >
             <input
               checked=""
-              class="size-4 rounded cursor-pointer"
+              class="size-4 rounded-sm cursor-pointer"
               disabled=""
               id="showAccountHeader"
               type="checkbox"
@@ -606,7 +606,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           >
             <input
               checked=""
-              class="size-4 rounded cursor-pointer"
+              class="size-4 rounded-sm cursor-pointer"
               id="fetchAllNotifications"
               type="checkbox"
             />
@@ -651,7 +651,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             class="flex items-center"
           >
             <input
-              class="size-4 rounded cursor-pointer"
+              class="size-4 rounded-sm cursor-pointer"
               id="showOnlyParticipating"
               type="checkbox"
             />
@@ -696,7 +696,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             class="flex items-center"
           >
             <input
-              class="size-4 rounded cursor-pointer"
+              class="size-4 rounded-sm cursor-pointer"
               id="markAsDoneOnOpen"
               type="checkbox"
             />
@@ -741,7 +741,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             class="flex items-center"
           >
             <input
-              class="size-4 rounded cursor-pointer"
+              class="size-4 rounded-sm cursor-pointer"
               id="markAsDoneOnUnsubscribe"
               type="checkbox"
             />
@@ -786,7 +786,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             class="flex items-center"
           >
             <input
-              class="size-4 rounded cursor-pointer"
+              class="size-4 rounded-sm cursor-pointer"
               id="delayNotificationState"
               type="checkbox"
             />
@@ -920,7 +920,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           >
             <input
               checked=""
-              class="size-4 rounded cursor-pointer"
+              class="size-4 rounded-sm cursor-pointer"
               id="keyboardShortcutEnabled"
               type="checkbox"
             />
@@ -965,7 +965,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             class="flex items-center"
           >
             <input
-              class="size-4 rounded cursor-pointer"
+              class="size-4 rounded-sm cursor-pointer"
               id="showNotificationsCountInTray"
               type="checkbox"
             />
@@ -989,7 +989,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           >
             <input
               checked=""
-              class="size-4 rounded cursor-pointer"
+              class="size-4 rounded-sm cursor-pointer"
               id="showNotifications"
               type="checkbox"
             />
@@ -1013,7 +1013,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           >
             <input
               checked=""
-              class="size-4 rounded cursor-pointer"
+              class="size-4 rounded-sm cursor-pointer"
               id="playSound"
               type="checkbox"
             />
@@ -1036,7 +1036,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             class="flex items-center"
           >
             <input
-              class="size-4 rounded cursor-pointer"
+              class="size-4 rounded-sm cursor-pointer"
               id="useAlternateIdleIcon"
               type="checkbox"
             />
@@ -1081,7 +1081,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             class="flex items-center"
           >
             <input
-              class="size-4 rounded cursor-pointer"
+              class="size-4 rounded-sm cursor-pointer"
               id="openAtStartUp"
               type="checkbox"
             />
