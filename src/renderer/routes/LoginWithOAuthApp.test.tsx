@@ -3,7 +3,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { AppContext } from '../context/App';
 import type { AuthState, ClientID, ClientSecret, Hostname } from '../types';
 import * as comms from '../utils/comms';
-import { LoginWithOAuthAppRoute, validate } from './LoginWithOAuthApp';
+import { LoginWithOAuthAppRoute, validateForm } from './LoginWithOAuthApp';
 
 const mockNavigate = jest.fn();
 jest.mock('react-router-dom', () => ({
@@ -62,9 +62,9 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
     let values = {
       ...emptyValues,
     };
-    expect(validate(values).hostname).toBe('Required');
-    expect(validate(values).clientId).toBe('Required');
-    expect(validate(values).clientSecret).toBe('Required');
+    expect(validateForm(values).hostname).toBe('Hostname is required');
+    expect(validateForm(values).clientId).toBe('Client ID is required');
+    expect(validateForm(values).clientSecret).toBe('Client Secret is required');
 
     values = {
       ...emptyValues,
@@ -72,9 +72,11 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
       clientId: '!@£INVALID-.1' as ClientID,
       clientSecret: '!@£INVALID-.1' as ClientSecret,
     };
-    expect(validate(values).hostname).toBe('Invalid hostname.');
-    expect(validate(values).clientId).toBe('Invalid client id.');
-    expect(validate(values).clientSecret).toBe('Invalid client secret.');
+    expect(validateForm(values).hostname).toBe('Hostname format is invalid');
+    expect(validateForm(values).clientId).toBe('Client ID format is invalid');
+    expect(validateForm(values).clientSecret).toBe(
+      'Client Secret format is invalid',
+    );
   });
 
   describe("'Create new OAuth App' button", () => {
@@ -86,6 +88,10 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
           </MemoryRouter>
         </AppContext.Provider>,
       );
+
+      fireEvent.change(screen.getByTestId('login-hostname'), {
+        target: { value: '' },
+      });
 
       fireEvent.click(screen.getByTestId('login-create-oauth-app'));
 
@@ -101,7 +107,7 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
         </AppContext.Provider>,
       );
 
-      fireEvent.change(screen.getByLabelText('Hostname'), {
+      fireEvent.change(screen.getByTestId('login-hostname'), {
         target: { value: 'company.github.com' },
       });
 
@@ -126,13 +132,13 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
       </AppContext.Provider>,
     );
 
-    fireEvent.change(screen.getByLabelText('Hostname'), {
+    fireEvent.change(screen.getByTestId('login-hostname'), {
       target: { value: 'github.com' },
     });
-    fireEvent.change(screen.getByLabelText('Client ID'), {
+    fireEvent.change(screen.getByTestId('login-clientId'), {
       target: { value: '1234567890_ASDFGHJKL' },
     });
-    fireEvent.change(screen.getByLabelText('Client Secret'), {
+    fireEvent.change(screen.getByTestId('login-clientSecret'), {
       target: { value: '1234567890_asdfghjklPOIUYTREWQ0987654321' },
     });
 
@@ -153,21 +159,22 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
       </AppContext.Provider>,
     );
 
-    fireEvent.change(screen.getByLabelText('Hostname'), {
+    fireEvent.change(screen.getByTestId('login-hostname'), {
       target: { value: 'test' },
     });
-    fireEvent.change(screen.getByLabelText('Client ID'), {
+    fireEvent.change(screen.getByTestId('login-clientId'), {
       target: { value: '123' },
     });
-    fireEvent.change(screen.getByLabelText('Client Secret'), {
+    fireEvent.change(screen.getByTestId('login-clientSecret'), {
       target: { value: 'abc' },
     });
 
     fireEvent.click(screen.getByTestId('login-submit'));
 
-    expect(screen.getByText('Invalid hostname.')).toBeTruthy();
-    expect(screen.getByText('Invalid client id.')).toBeTruthy();
-    expect(screen.getByText('Invalid client secret.')).toBeTruthy();
+    expect(screen.getByTestId('login-errors')).toBeTruthy();
+    expect(screen.getByText('Hostname format is invalid')).toBeTruthy();
+    expect(screen.getByText('Client ID format is invalid')).toBeTruthy();
+    expect(screen.getByText('Client Secret format is invalid')).toBeTruthy();
   });
 
   it('should open help docs in the browser', async () => {

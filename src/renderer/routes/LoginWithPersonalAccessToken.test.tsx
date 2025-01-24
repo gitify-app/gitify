@@ -4,7 +4,7 @@ import { AppContext } from '../context/App';
 import * as comms from '../utils/comms';
 import {
   LoginWithPersonalAccessTokenRoute,
-  validate,
+  validateForm,
 } from './LoginWithPersonalAccessToken';
 
 const mockNavigate = jest.fn();
@@ -54,16 +54,16 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
     let values = {
       ...emptyValues,
     };
-    expect(validate(values).hostname).toBe('Required');
-    expect(validate(values).token).toBe('Required');
+    expect(validateForm(values).hostname).toBe('Hostname is required');
+    expect(validateForm(values).token).toBe('Token is required');
 
     values = {
       ...emptyValues,
       hostname: 'hello',
       token: '!@£INVALID-.1',
     };
-    expect(validate(values).hostname).toBe('Invalid hostname.');
-    expect(validate(values).token).toBe('Invalid token.');
+    expect(validateForm(values).hostname).toBe('Hostname format is invalid');
+    expect(validateForm(values).token).toBe('Token format is invalid');
   });
 
   describe("'Generate a PAT' button", () => {
@@ -80,7 +80,7 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
         </AppContext.Provider>,
       );
 
-      fireEvent.change(screen.getByLabelText('Hostname'), {
+      fireEvent.change(screen.getByTestId('login-hostname'), {
         target: { value: '' },
       });
 
@@ -123,12 +123,12 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
       </AppContext.Provider>,
     );
 
-    fireEvent.change(screen.getByLabelText('Token'), {
-      target: { value: '1234567890123456789012345678901234567890' },
+    fireEvent.change(screen.getByTestId('login-hostname'), {
+      target: { value: 'github.com' },
     });
 
-    fireEvent.change(screen.getByLabelText('Hostname'), {
-      target: { value: 'github.com' },
+    fireEvent.change(screen.getByTestId('login-token'), {
+      target: { value: '1234567890123456789012345678901234567890' },
     });
 
     fireEvent.click(screen.getByTestId('login-submit'));
@@ -156,12 +156,12 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
       </AppContext.Provider>,
     );
 
-    fireEvent.change(screen.getByLabelText('Token'), {
-      target: { value: '1234567890123456789012345678901234567890' },
+    fireEvent.change(screen.getByTestId('login-hostname'), {
+      target: { value: 'github.com' },
     });
 
-    fireEvent.change(screen.getByLabelText('Hostname'), {
-      target: { value: 'github.com' },
+    fireEvent.change(screen.getByTestId('login-token'), {
+      target: { value: '1234567890123456789012345678901234567890' },
     });
 
     fireEvent.click(screen.getByTestId('login-submit'));
@@ -181,17 +181,18 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
       </MemoryRouter>,
     );
 
-    fireEvent.change(screen.getByLabelText('Hostname'), {
+    fireEvent.change(screen.getByTestId('login-hostname'), {
       target: { value: 'test' },
     });
-    fireEvent.change(screen.getByLabelText('Token'), {
+    fireEvent.change(screen.getByTestId('login-token'), {
       target: { value: '123' },
     });
 
     fireEvent.click(screen.getByTestId('login-submit'));
 
-    expect(screen.getByText('Invalid hostname.')).toBeDefined();
-    expect(screen.getByText('Invalid token.')).toBeDefined();
+    expect(screen.getByTestId('login-errors')).toBeTruthy();
+    expect(screen.getByText('Hostname format is invalid')).toBeTruthy();
+    expect(screen.getByText('Token format is invalid')).toBeTruthy();
   });
 
   it('should open help docs in the browser', async () => {

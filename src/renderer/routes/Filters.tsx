@@ -38,7 +38,7 @@ export const FiltersRoute: FC = () => {
   };
 
   return (
-    <Page id="filters" type="h-screen">
+    <Page id="filters">
       <Header fetchOnBack={true} icon={FilterIcon}>
         Filters
       </Header>

@@ -3,20 +3,17 @@ import type { FC, ReactNode } from 'react';
 
 interface ICentered {
   children: ReactNode;
-  fullHeight?: boolean;
+  fullHeight: boolean;
 }
 
-export const Centered: FC<ICentered> = ({
-  fullHeight = true,
-  ...props
-}: ICentered) => {
+export const Centered: FC<ICentered> = (props: ICentered) => {
   return (
     <Stack
       direction="vertical"
       align="center"
       justify="center"
       padding="spacious"
-      className={fullHeight && 'h-screen'}
+      className={props.fullHeight && 'h-screen'}
     >
       {props.children}
     </Stack>

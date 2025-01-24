@@ -28,9 +28,12 @@ import { Footer } from '../components/primitives/Footer';
 import { Header } from '../components/primitives/Header';
 import { AppContext } from '../context/App';
 import { type Account, Size } from '../types';
-import { getAccountUUID, refreshAccount } from '../utils/auth/utils';
+import {
+  formatRequiredScopes,
+  getAccountUUID,
+  refreshAccount,
+} from '../utils/auth/utils';
 import { updateTrayIcon, updateTrayTitle } from '../utils/comms';
-import { Constants } from '../utils/constants';
 import { getAuthMethodIcon, getPlatformIcon } from '../utils/icons';
 import {
   openAccountProfile,
@@ -77,7 +80,7 @@ export const AccountsRoute: FC = () => {
   }, []);
 
   return (
-    <Page id="accounts" type="h-screen">
+    <Page id="accounts">
       <Header icon={PersonIcon}>Accounts</Header>
 
       <Contents>
@@ -164,7 +167,7 @@ export const AccountsRoute: FC = () => {
                 <Stack direction="horizontal" gap="condensed">
                   <IconButton
                     icon={AlertFillIcon}
-                    aria-label={`This account is missing one or more required scopes: [${Constants.AUTH_SCOPE.join(', ')}]`}
+                    aria-label={`This account is missing one or more required scopes: [${formatRequiredScopes()}]`}
                     variant="danger"
                     onClick={() => openDeveloperSettings(account)}
                     size="small"
