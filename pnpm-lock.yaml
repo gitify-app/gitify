@@ -52,7 +52,7 @@ importers:
         specifier: 36.27.0
         version: 36.27.0(@types/react-dom@19.0.3(@types/react@19.0.8))(@types/react@19.0.8)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(styled-components@6.1.14(react-dom@19.0.0(react@19.0.0))(react@19.0.0))
       '@tailwindcss/postcss':
-        specifier: ^4.0.0
+        specifier: 4.0.0
         version: 4.0.0
       '@testing-library/react':
         specifier: 16.2.0
