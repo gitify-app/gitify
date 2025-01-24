@@ -1,6 +1,8 @@
 import type { Config } from 'tailwindcss';
 import colors from 'tailwindcss/colors';
 
+const sidebarWidth = '2.5rem'; // 40px
+
 const config: Config = {
   content: ['./src/**/*.js', './src/**/*.ts', './src/**/*.tsx'],
   darkMode: 'class',
@@ -8,6 +10,12 @@ const config: Config = {
     extend: {
       fontSize: {
         xxs: '0.625rem', // 10px
+      },
+      spacing: {
+        sidebar: sidebarWidth,
+      },
+      width: {
+        sidebar: sidebarWidth,
       },
       colors: {
         gitify: {
