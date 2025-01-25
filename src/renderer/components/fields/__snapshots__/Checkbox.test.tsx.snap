@@ -6,38 +6,13 @@ exports[`renderer/components/fields/Checkbox.tsx should render 1`] = `
   "baseElement": <body>
     <div>
       <div
-        class="mt-3 mb-2 text-sm"
-      >
-        <div
-          class="flex items-center"
-        >
-          <input
-            checked=""
-            class="size-4 rounded-sm cursor-pointer"
-            data-testid="checkbox-appearance"
-            id="appearance"
-            type="checkbox"
-          />
-          <div
-            class="flex items-center ml-3"
-          >
-            <label
-              class="font-medium text-gitify-font cursor-pointer"
-              for="appearance"
-            >
-              Appearance
-            </label>
-          </div>
-        </div>
-      </div>
-    </div>
-  </body>,
-  "container": <div>
-    <div
-      class="mt-3 mb-2 text-sm"
-    >
-      <div
-        class="flex items-center"
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+        data-align="center"
+        data-direction="horizontal"
+        data-gap="condensed"
+        data-justify="start"
+        data-padding="none"
+        data-wrap="nowrap"
       >
         <input
           checked=""
@@ -46,17 +21,38 @@ exports[`renderer/components/fields/Checkbox.tsx should render 1`] = `
           id="appearance"
           type="checkbox"
         />
-        <div
-          class="flex items-center ml-3"
+        <label
+          class="font-medium text-gitify-font cursor-pointer"
+          for="appearance"
         >
-          <label
-            class="font-medium text-gitify-font cursor-pointer"
-            for="appearance"
-          >
-            Appearance
-          </label>
-        </div>
+          Appearance
+        </label>
       </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+      data-align="center"
+      data-direction="horizontal"
+      data-gap="condensed"
+      data-justify="start"
+      data-padding="none"
+      data-wrap="nowrap"
+    >
+      <input
+        checked=""
+        class="size-4 rounded-sm cursor-pointer"
+        data-testid="checkbox-appearance"
+        id="appearance"
+        type="checkbox"
+      />
+      <label
+        class="font-medium text-gitify-font cursor-pointer"
+        for="appearance"
+      >
+        Appearance
+      </label>
     </div>
   </div>,
   "debug": [Function],

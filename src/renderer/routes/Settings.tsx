@@ -1,7 +1,7 @@
 import { type FC, useCallback, useContext, useState } from 'react';
 
 import { GearIcon } from '@primer/octicons-react';
-import { Button, Stack } from '@primer/react';
+import { Button, Stack, Text } from '@primer/react';
 import { Dialog } from '@primer/react/experimental';
 
 import { Contents } from '../components/layout/Contents';
@@ -64,7 +64,7 @@ export const SettingsRoute: FC = () => {
               data-testid="reset-dialog"
             >
               Please confirm that you want to reset all settings to the{' '}
-              <strong>Gitify defaults</strong>
+              <Text as="strong">Gitify defaults</Text>
             </Dialog>
           )}
         </Stack>

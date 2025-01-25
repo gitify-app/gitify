@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 
 import type { Icon } from '@primer/octicons-react';
-import { Heading, Stack } from '@primer/react';
+import { Box, Heading, Stack } from '@primer/react';
 
 interface ITitle {
   icon: Icon;
@@ -12,15 +12,17 @@ interface ITitle {
 export const Title: FC<ITitle> = ({ size = 2, ...props }) => {
   return (
     <legend>
-      <Stack
-        direction="horizontal"
-        align="center"
-        gap="condensed"
-        id={props.children.toLowerCase().replace(' ', '-')}
-      >
-        <props.icon size="small" />
-        <Heading sx={{ fontSize: size }}>{props.children}</Heading>
-      </Stack>
+      <Box className="mb-2">
+        <Stack
+          direction="horizontal"
+          align="center"
+          gap="condensed"
+          id={props.children.toLowerCase().replace(' ', '-')}
+        >
+          <props.icon size="small" />
+          <Heading sx={{ fontSize: size }}>{props.children}</Heading>
+        </Stack>
+      </Box>
     </legend>
   );
 };

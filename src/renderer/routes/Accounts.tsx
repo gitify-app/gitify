@@ -119,7 +119,7 @@ export const AccountsRoute: FC = () => {
 
                   <Box className="pl-4 pb-2 text-xs">
                     <Stack direction="vertical" gap="condensed">
-                      <div hidden={!account.user.name}>
+                      <Box hidden={!account.user.name}>
                         <Stack
                           direction="horizontal"
                           gap="condensed"
@@ -128,7 +128,7 @@ export const AccountsRoute: FC = () => {
                           <PersonIcon />
                           <Text>{account.user?.name}</Text>
                         </Stack>
-                      </div>
+                      </Box>
 
                       <button
                         title="Open host"

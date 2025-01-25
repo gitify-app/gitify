@@ -6,7 +6,7 @@ import {
   FilterRemoveIcon,
   NoteIcon,
 } from '@primer/octicons-react';
-import { Button, Text, Tooltip } from '@primer/react';
+import { Box, Button, Stack, Text, Tooltip } from '@primer/react';
 
 import { Checkbox } from '../components/fields/Checkbox';
 import { Contents } from '../components/layout/Contents';
@@ -46,6 +46,7 @@ export const FiltersRoute: FC = () => {
       <Contents>
         <fieldset className="mb-3">
           <Title icon={FeedPersonIcon}>Users</Title>
+
           <Checkbox
             name="hideBots"
             label="Hide notifications from Bot accounts"
@@ -56,39 +57,45 @@ export const FiltersRoute: FC = () => {
             }
             disabled={!settings.detailedNotifications}
             tooltip={
-              <div>
-                <div className="pb-3">
+              <Stack direction="vertical" gap="condensed">
+                <Text>
                   Hide notifications from GitHub Bot accounts, such as
                   @dependabot, @renovate, @netlify, etc
-                </div>
-                <div className="text-gitify-caution">
+                </Text>
+                <Text className="text-gitify-caution">
                   ⚠️ This filter requires the{' '}
-                  <strong>Detailed Notifications</strong> setting to be enabled.
-                </div>
-              </div>
+                  <Text as="strong">Detailed Notifications</Text> setting to be
+                  enabled.
+                </Text>
+              </Stack>
             }
           />
         </fieldset>
 
         <fieldset className="mb-3">
           <Title icon={NoteIcon}>Reason</Title>
-          <Text as="i" className="text-xs">
-            Note: If no reasons are selected, all notifications will be shown.
-          </Text>
-          {Object.keys(FORMATTED_REASONS).map((reason: Reason) => {
-            return (
-              <Checkbox
-                key={reason}
-                name={reason}
-                label={formatReason(reason).title}
-                checked={shouldShowReason(reason)}
-                onChange={(evt) =>
-                  updateReasonFilter(reason, evt.target.checked)
-                }
-                tooltip={<div>{formatReason(reason).description}</div>}
-              />
-            );
-          })}
+          <Box className="text-xs -mt-2 mb-2">
+            <Text as="i">
+              Note: If no reasons are selected, all notifications will be shown.
+            </Text>
+          </Box>
+
+          <Stack direction="vertical" gap="condensed">
+            {Object.keys(FORMATTED_REASONS).map((reason: Reason) => {
+              return (
+                <Checkbox
+                  key={reason}
+                  name={reason}
+                  label={formatReason(reason).title}
+                  checked={shouldShowReason(reason)}
+                  onChange={(evt) =>
+                    updateReasonFilter(reason, evt.target.checked)
+                  }
+                  tooltip={<Text>{formatReason(reason).description}</Text>}
+                />
+              );
+            })}
+          </Stack>
         </fieldset>
       </Contents>
 
