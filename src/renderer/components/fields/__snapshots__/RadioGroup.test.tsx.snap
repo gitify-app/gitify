@@ -6,7 +6,13 @@ exports[`renderer/components/fields/RadioGroup.tsx should render 1`] = `
   "baseElement": <body>
     <div>
       <div
-        class="flex items-start my-2 text-sm font-medium"
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+        data-align="center"
+        data-direction="horizontal"
+        data-gap="condensed"
+        data-justify="start"
+        data-padding="none"
+        data-wrap="nowrap"
       >
         <label
           class="mr-3 font-medium cursor-pointer"
@@ -15,52 +21,66 @@ exports[`renderer/components/fields/RadioGroup.tsx should render 1`] = `
           Appearance
         </label>
         <div
-          aria-labelledby="appearance"
-          class="flex items-center space-x-4"
-          role="group"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
         >
-          <div
-            class="flex items-center gap-2"
+          <input
+            class="size-4 cursor-pointer"
+            data-testid="radio-appearance-one"
+            id="radio-appearance-one"
+            name="appearance"
+            type="radio"
+            value="one"
+          />
+          <label
+            class="mr-3 font-medium cursor-pointer"
+            for="radio-appearance-one"
           >
-            <input
-              class="size-4 cursor-pointer"
-              id="appearance_one"
-              name="appearance"
-              type="radio"
-              value="one"
-            />
-            <label
-              class="mr-3 font-medium cursor-pointer"
-              for="appearance_one"
-            >
-              Value 1
-            </label>
-          </div>
-          <div
-            class="flex items-center gap-2"
+            Value 1
+          </label>
+        </div>
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
+        >
+          <input
+            checked=""
+            class="size-4 cursor-pointer"
+            data-testid="radio-appearance-two"
+            id="radio-appearance-two"
+            name="appearance"
+            type="radio"
+            value="two"
+          />
+          <label
+            class="mr-3 font-medium cursor-pointer"
+            for="radio-appearance-two"
           >
-            <input
-              checked=""
-              class="size-4 cursor-pointer"
-              id="appearance_two"
-              name="appearance"
-              type="radio"
-              value="two"
-            />
-            <label
-              class="mr-3 font-medium cursor-pointer"
-              for="appearance_two"
-            >
-              Value 2
-            </label>
-          </div>
+            Value 2
+          </label>
         </div>
       </div>
     </div>
   </body>,
   "container": <div>
     <div
-      class="flex items-start my-2 text-sm font-medium"
+      class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+      data-align="center"
+      data-direction="horizontal"
+      data-gap="condensed"
+      data-justify="start"
+      data-padding="none"
+      data-wrap="nowrap"
     >
       <label
         class="mr-3 font-medium cursor-pointer"
@@ -69,45 +89,53 @@ exports[`renderer/components/fields/RadioGroup.tsx should render 1`] = `
         Appearance
       </label>
       <div
-        aria-labelledby="appearance"
-        class="flex items-center space-x-4"
-        role="group"
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+        data-align="center"
+        data-direction="horizontal"
+        data-gap="condensed"
+        data-justify="start"
+        data-padding="none"
+        data-wrap="nowrap"
       >
-        <div
-          class="flex items-center gap-2"
+        <input
+          class="size-4 cursor-pointer"
+          data-testid="radio-appearance-one"
+          id="radio-appearance-one"
+          name="appearance"
+          type="radio"
+          value="one"
+        />
+        <label
+          class="mr-3 font-medium cursor-pointer"
+          for="radio-appearance-one"
         >
-          <input
-            class="size-4 cursor-pointer"
-            id="appearance_one"
-            name="appearance"
-            type="radio"
-            value="one"
-          />
-          <label
-            class="mr-3 font-medium cursor-pointer"
-            for="appearance_one"
-          >
-            Value 1
-          </label>
-        </div>
-        <div
-          class="flex items-center gap-2"
+          Value 1
+        </label>
+      </div>
+      <div
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+        data-align="center"
+        data-direction="horizontal"
+        data-gap="condensed"
+        data-justify="start"
+        data-padding="none"
+        data-wrap="nowrap"
+      >
+        <input
+          checked=""
+          class="size-4 cursor-pointer"
+          data-testid="radio-appearance-two"
+          id="radio-appearance-two"
+          name="appearance"
+          type="radio"
+          value="two"
+        />
+        <label
+          class="mr-3 font-medium cursor-pointer"
+          for="radio-appearance-two"
         >
-          <input
-            checked=""
-            class="size-4 cursor-pointer"
-            id="appearance_two"
-            name="appearance"
-            type="radio"
-            value="two"
-          />
-          <label
-            class="mr-3 font-medium cursor-pointer"
-            for="appearance_two"
-          >
-            Value 2
-          </label>
-        </div>
+          Value 2
+        </label>
       </div>
     </div>
   </div>,
@@ -171,7 +199,13 @@ exports[`renderer/components/fields/RadioGroup.tsx should render as disabled 1`]
   "baseElement": <body>
     <div>
       <div
-        class="flex items-start my-2 text-sm font-medium"
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+        data-align="center"
+        data-direction="horizontal"
+        data-gap="condensed"
+        data-justify="start"
+        data-padding="none"
+        data-wrap="nowrap"
       >
         <label
           class="mr-3 font-medium cursor-pointer"
@@ -180,52 +214,66 @@ exports[`renderer/components/fields/RadioGroup.tsx should render as disabled 1`]
           Appearance
         </label>
         <div
-          aria-labelledby="appearance"
-          class="flex items-center space-x-4"
-          role="group"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
         >
-          <div
-            class="flex items-center gap-2"
+          <input
+            class="size-4 cursor-pointer"
+            data-testid="radio-appearance-one"
+            id="radio-appearance-one"
+            name="appearance"
+            type="radio"
+            value="one"
+          />
+          <label
+            class="mr-3 font-medium cursor-pointer"
+            for="radio-appearance-one"
           >
-            <input
-              class="size-4 cursor-pointer"
-              id="appearance_one"
-              name="appearance"
-              type="radio"
-              value="one"
-            />
-            <label
-              class="mr-3 font-medium cursor-pointer"
-              for="appearance_one"
-            >
-              Value 1
-            </label>
-          </div>
-          <div
-            class="flex items-center gap-2"
+            Value 1
+          </label>
+        </div>
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
+        >
+          <input
+            checked=""
+            class="size-4 cursor-pointer"
+            data-testid="radio-appearance-two"
+            id="radio-appearance-two"
+            name="appearance"
+            type="radio"
+            value="two"
+          />
+          <label
+            class="mr-3 font-medium cursor-pointer"
+            for="radio-appearance-two"
           >
-            <input
-              checked=""
-              class="size-4 cursor-pointer"
-              id="appearance_two"
-              name="appearance"
-              type="radio"
-              value="two"
-            />
-            <label
-              class="mr-3 font-medium cursor-pointer"
-              for="appearance_two"
-            >
-              Value 2
-            </label>
-          </div>
+            Value 2
+          </label>
         </div>
       </div>
     </div>
   </body>,
   "container": <div>
     <div
-      class="flex items-start my-2 text-sm font-medium"
+      class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+      data-align="center"
+      data-direction="horizontal"
+      data-gap="condensed"
+      data-justify="start"
+      data-padding="none"
+      data-wrap="nowrap"
     >
       <label
         class="mr-3 font-medium cursor-pointer"
@@ -234,45 +282,53 @@ exports[`renderer/components/fields/RadioGroup.tsx should render as disabled 1`]
         Appearance
       </label>
       <div
-        aria-labelledby="appearance"
-        class="flex items-center space-x-4"
-        role="group"
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+        data-align="center"
+        data-direction="horizontal"
+        data-gap="condensed"
+        data-justify="start"
+        data-padding="none"
+        data-wrap="nowrap"
       >
-        <div
-          class="flex items-center gap-2"
+        <input
+          class="size-4 cursor-pointer"
+          data-testid="radio-appearance-one"
+          id="radio-appearance-one"
+          name="appearance"
+          type="radio"
+          value="one"
+        />
+        <label
+          class="mr-3 font-medium cursor-pointer"
+          for="radio-appearance-one"
         >
-          <input
-            class="size-4 cursor-pointer"
-            id="appearance_one"
-            name="appearance"
-            type="radio"
-            value="one"
-          />
-          <label
-            class="mr-3 font-medium cursor-pointer"
-            for="appearance_one"
-          >
-            Value 1
-          </label>
-        </div>
-        <div
-          class="flex items-center gap-2"
+          Value 1
+        </label>
+      </div>
+      <div
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+        data-align="center"
+        data-direction="horizontal"
+        data-gap="condensed"
+        data-justify="start"
+        data-padding="none"
+        data-wrap="nowrap"
+      >
+        <input
+          checked=""
+          class="size-4 cursor-pointer"
+          data-testid="radio-appearance-two"
+          id="radio-appearance-two"
+          name="appearance"
+          type="radio"
+          value="two"
+        />
+        <label
+          class="mr-3 font-medium cursor-pointer"
+          for="radio-appearance-two"
         >
-          <input
-            checked=""
-            class="size-4 cursor-pointer"
-            id="appearance_two"
-            name="appearance"
-            type="radio"
-            value="two"
-          />
-          <label
-            class="mr-3 font-medium cursor-pointer"
-            for="appearance_two"
-          >
-            Value 2
-          </label>
-        </div>
+          Value 2
+        </label>
       </div>
     </div>
   </div>,

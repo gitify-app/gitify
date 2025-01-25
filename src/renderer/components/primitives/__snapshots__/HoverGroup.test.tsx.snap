@@ -6,7 +6,7 @@ exports[`renderer/components/primitives/HoverGroup.tsx should render 1`] = `
   "baseElement": <body>
     <div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 duhwY opacity-0 transition-opacity group-hover:opacity-80"
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY absolute right-0 h-full opacity-0 transition-opacity group-hover:opacity-100 group-hover:white"
         data-align="center"
         data-direction="horizontal"
         data-gap="none"
@@ -20,7 +20,7 @@ exports[`renderer/components/primitives/HoverGroup.tsx should render 1`] = `
   </body>,
   "container": <div>
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 duhwY opacity-0 transition-opacity group-hover:opacity-80"
+      class="Stack__StyledStack-sc-x3xa2i-0 duhwY absolute right-0 h-full opacity-0 transition-opacity group-hover:opacity-100 group-hover:white"
       data-align="center"
       data-direction="horizontal"
       data-gap="none"

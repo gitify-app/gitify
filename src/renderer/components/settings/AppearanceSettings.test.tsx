@@ -140,7 +140,7 @@ describe('renderer/routes/components/settings/AppearanceSettings.tsx', () => {
       );
     });
 
-    fireEvent.click(screen.getByLabelText('Detailed notifications'));
+    fireEvent.click(screen.getByTestId('checkbox-detailedNotifications'));
 
     expect(updateSetting).toHaveBeenCalledTimes(1);
     expect(updateSetting).toHaveBeenCalledWith('detailedNotifications', false);
@@ -163,7 +163,7 @@ describe('renderer/routes/components/settings/AppearanceSettings.tsx', () => {
       );
     });
 
-    fireEvent.click(screen.getByLabelText('Show notification metric pills'));
+    fireEvent.click(screen.getByTestId('checkbox-showPills'));
 
     expect(updateSetting).toHaveBeenCalledTimes(1);
     expect(updateSetting).toHaveBeenCalledWith('showPills', false);
@@ -186,7 +186,7 @@ describe('renderer/routes/components/settings/AppearanceSettings.tsx', () => {
       );
     });
 
-    fireEvent.click(screen.getByLabelText('Show number'));
+    fireEvent.click(screen.getByTestId('checkbox-showNumber'));
 
     expect(updateSetting).toHaveBeenCalledTimes(1);
     expect(updateSetting).toHaveBeenCalledWith('showNumber', false);
@@ -211,7 +211,7 @@ describe('renderer/routes/components/settings/AppearanceSettings.tsx', () => {
       );
     });
 
-    fireEvent.click(screen.getByLabelText('Show account header'));
+    fireEvent.click(screen.getByTestId('checkbox-showAccountHeader'));
 
     expect(updateSetting).toHaveBeenCalledTimes(1);
     expect(updateSetting).toHaveBeenCalledWith('showAccountHeader', true);

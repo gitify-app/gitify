@@ -1,4 +1,7 @@
 import type { ChangeEvent, FC } from 'react';
+
+import { Stack } from '@primer/react';
+
 import type { RadioGroupItem } from '../../types';
 import { FieldLabel } from './FieldLabel';
 
@@ -12,33 +15,38 @@ export interface IRadioGroup {
 
 export const RadioGroup: FC<IRadioGroup> = (props: IRadioGroup) => {
   return (
-    <div className="flex items-start my-2 text-sm font-medium">
+    <Stack
+      direction="horizontal"
+      gap="condensed"
+      align="center"
+      className="text-sm"
+    >
       <FieldLabel name={props.name} label={props.label} />
 
-      <div
-        className="flex items-center space-x-4"
-        role="group"
-        aria-labelledby={props.name}
-      >
-        {props.options.map((item) => {
-          const name = `${props.name}_${item.value.toLowerCase()}`;
+      {props.options.map((item) => {
+        const name = `radio-${props.name}-${item.value}`.toLowerCase();
 
-          return (
-            <div className="flex items-center gap-2" key={name}>
-              <input
-                type="radio"
-                className="size-4 cursor-pointer"
-                id={name}
-                name={props.name}
-                value={item.value}
-                onChange={props.onChange}
-                checked={item.value === props.value}
-              />
-              <FieldLabel name={name} label={item.label} />
-            </div>
-          );
-        })}
-      </div>
-    </div>
+        return (
+          <Stack
+            direction="horizontal"
+            gap="condensed"
+            align="center"
+            key={name}
+          >
+            <input
+              type="radio"
+              className="size-4 cursor-pointer"
+              id={name}
+              name={props.name}
+              value={item.value}
+              onChange={props.onChange}
+              checked={item.value === props.value}
+              data-testid={name}
+            />
+            <FieldLabel name={name} label={item.label} />
+          </Stack>
+        );
+      })}
+    </Stack>
   );
 };

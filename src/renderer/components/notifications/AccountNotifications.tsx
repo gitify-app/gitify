@@ -1,7 +1,7 @@
 import { type FC, type MouseEvent, useContext, useMemo, useState } from 'react';
 
 import { GitPullRequestIcon, IssueOpenedIcon } from '@primer/octicons-react';
-import { Button, IconButton } from '@primer/react';
+import { Box, Button, Stack } from '@primer/react';
 
 import { AppContext } from '../../context/App';
 import { type Account, type GitifyError, Size } from '../../types';
@@ -16,6 +16,7 @@ import {
 import { AllRead } from '../AllRead';
 import { Oops } from '../Oops';
 import { AvatarWithFallback } from '../avatars/AvatarWithFallback';
+import { HoverButton } from '../primitives/HoverButton';
 import { HoverGroup } from '../primitives/HoverGroup';
 import { NotificationRow } from './NotificationRow';
 import { RepositoryNotifications } from './RepositoryNotifications';
@@ -34,6 +35,9 @@ export const AccountNotifications: FC<IAccountNotifications> = (
 
   const { settings } = useContext(AppContext);
 
+  const [showAccountNotifications, setShowAccountNotifications] =
+    useState(true);
+
   const groupedNotifications = Object.values(
     notifications.reduce(
       (acc: { [key: string]: Notification[] }, notification) => {
@@ -51,10 +55,7 @@ export const AccountNotifications: FC<IAccountNotifications> = (
     [notifications],
   );
 
-  const [showAccountNotifications, setShowAccountNotifications] =
-    useState(true);
-
-  const toggleAccountNotifications = () => {
+  const actionToggleAccountNotifications = () => {
     setShowAccountNotifications(!showAccountNotifications);
   };
 
@@ -69,70 +70,63 @@ export const AccountNotifications: FC<IAccountNotifications> = (
   return (
     <>
       {showAccountHeader && (
-        <div
+        <Box
           className={cn(
-            'group flex items-center justify-between pr-1 py-0.5 text-sm font-semibold',
+            'group pr-1 py-0.5',
             props.error ? 'bg-gitify-account-error' : 'bg-gitify-account-rest',
           )}
-          onClick={toggleAccountNotifications}
+          onClick={actionToggleAccountNotifications}
         >
-          <Button
-            title="Open account profile"
-            variant="invisible"
-            alignContent="center"
-            count={notifications.length}
-            onClick={(event: MouseEvent<HTMLElement>) => {
-              // Don't trigger onClick of parent element.
-              event.stopPropagation();
-              openAccountProfile(account);
-            }}
-            data-testid="account-profile"
+          <Stack
+            direction="horizontal"
+            align="center"
+            gap="condensed"
+            className="relative"
           >
-            <AvatarWithFallback
-              src={account.user.avatar}
-              alt={account.user.login}
-              name={`@${account.user.login}`}
-              size={Size.MEDIUM}
-            />
-          </Button>
-
-          <HoverGroup>
-            <IconButton
-              aria-label="My Issues"
-              icon={IssueOpenedIcon}
-              size="small"
+            <Button
+              title="Open account profile"
               variant="invisible"
+              alignContent="center"
+              count={notifications.length}
               onClick={(event: MouseEvent<HTMLElement>) => {
                 // Don't trigger onClick of parent element.
                 event.stopPropagation();
-                openGitHubIssues(account.hostname);
+                openAccountProfile(account);
               }}
-              data-testid="account-issues"
-            />
+              data-testid="account-profile"
+            >
+              <AvatarWithFallback
+                src={account.user.avatar}
+                alt={account.user.login}
+                name={`@${account.user.login}`}
+                size={Size.MEDIUM}
+              />
+            </Button>
 
-            <IconButton
-              aria-label="My Pull Requests"
-              icon={GitPullRequestIcon}
-              size="small"
-              variant="invisible"
-              onClick={(event: MouseEvent<HTMLElement>) => {
-                // Don't trigger onClick of parent element.
-                event.stopPropagation();
-                openGitHubPulls(account.hostname);
-              }}
-              data-testid="account-pull-requests"
-            />
+            <HoverGroup bgColor="bg-gitify-account-rest">
+              <HoverButton
+                label="My Issues"
+                icon={IssueOpenedIcon}
+                testid="account-issues"
+                action={() => openGitHubIssues(account.hostname)}
+              />
 
-            <IconButton
-              aria-label={Chevron.label}
-              icon={Chevron.icon}
-              size="small"
-              variant="invisible"
-              onClick={toggleAccountNotifications}
-              data-testid="account-toggle"
-            />
-          </HoverGroup>
-        </div>
+              <HoverButton
+                label="My Pull Requests"
+                icon={GitPullRequestIcon}
+                testid="account-pull-requests"
+                action={() => openGitHubPulls(account.hostname)}
+              />
+
+              <HoverButton
+                label={Chevron.label}
+                icon={Chevron.icon}
+                testid="account-toggle"
+                action={actionToggleAccountNotifications}
+              />
+            </HoverGroup>
+          </Stack>
+        </Box>
       )}
 
       {showAccountNotifications && (

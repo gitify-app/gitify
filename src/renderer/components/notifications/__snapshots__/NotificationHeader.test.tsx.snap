@@ -6,26 +6,24 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
   "baseElement": <body>
     <div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-        data-align="center"
-        data-direction="horizontal"
-        data-gap="condensed"
-        data-justify="start"
-        data-padding="none"
-        data-wrap="nowrap"
+        class="Box-sc-g0xbh4-0 py-0.5"
       >
-        <span
-          aria-label="View repository: gitify-app/notifications-test"
-          class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-se"
-          id=":r0:"
-          role="tooltip"
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
         >
           <div
             class="Box-sc-g0xbh4-0 text-xs font-medium"
             data-testid="view-repository"
+            title="Open repository"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+              class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -45,41 +43,39 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
                 width="14"
               />
               <span
-                class="Text-sc-17v1xeu-0 hmAFGJ"
+                class="Text-sc-17v1xeu-0 hmAFGJ block truncate flex-shrink overflow-ellipsis"
               >
                 gitify-app/notifications-test
               </span>
             </div>
           </div>
-        </span>
-        <div
-          class="Box-sc-g0xbh4-0 text-xxs opacity-50"
-        />
+          <div
+            class="Box-sc-g0xbh4-0 text-xxs opacity-50"
+          />
+        </div>
       </div>
     </div>
   </body>,
   "container": <div>
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-      data-align="center"
-      data-direction="horizontal"
-      data-gap="condensed"
-      data-justify="start"
-      data-padding="none"
-      data-wrap="nowrap"
+      class="Box-sc-g0xbh4-0 py-0.5"
     >
-      <span
-        aria-label="View repository: gitify-app/notifications-test"
-        class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-se"
-        id=":r0:"
-        role="tooltip"
+      <div
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+        data-align="center"
+        data-direction="horizontal"
+        data-gap="condensed"
+        data-justify="start"
+        data-padding="none"
+        data-wrap="nowrap"
       >
         <div
           class="Box-sc-g0xbh4-0 text-xs font-medium"
           data-testid="view-repository"
+          title="Open repository"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -99,16 +95,16 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
               width="14"
             />
             <span
-              class="Text-sc-17v1xeu-0 hmAFGJ"
+              class="Text-sc-17v1xeu-0 hmAFGJ block truncate flex-shrink overflow-ellipsis"
             >
               gitify-app/notifications-test
             </span>
           </div>
         </div>
-      </span>
-      <div
-        class="Box-sc-g0xbh4-0 text-xxs opacity-50"
-      />
+        <div
+          class="Box-sc-g0xbh4-0 text-xxs opacity-50"
+        />
+      </div>
     </div>
   </div>,
   "debug": [Function],
@@ -171,26 +167,24 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
   "baseElement": <body>
     <div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-        data-align="center"
-        data-direction="horizontal"
-        data-gap="condensed"
-        data-justify="start"
-        data-padding="none"
-        data-wrap="nowrap"
+        class="Box-sc-g0xbh4-0 py-0.5"
       >
-        <span
-          aria-label="View repository: gitify-app/notifications-test"
-          class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-se"
-          id=":r1:"
-          role="tooltip"
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
         >
           <div
             class="Box-sc-g0xbh4-0 text-xs font-medium"
             data-testid="view-repository"
+            title="Open repository"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+              class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -210,41 +204,39 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
                 width="14"
               />
               <span
-                class="Text-sc-17v1xeu-0 hmAFGJ"
+                class="Text-sc-17v1xeu-0 hmAFGJ block truncate flex-shrink overflow-ellipsis"
               >
                 gitify-app/notifications-test
               </span>
             </div>
           </div>
-        </span>
-        <div
-          class="Box-sc-g0xbh4-0 text-xxs opacity-50 hidden"
-        />
+          <div
+            class="Box-sc-g0xbh4-0 text-xxs opacity-50 hidden"
+          />
+        </div>
       </div>
     </div>
   </body>,
   "container": <div>
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-      data-align="center"
-      data-direction="horizontal"
-      data-gap="condensed"
-      data-justify="start"
-      data-padding="none"
-      data-wrap="nowrap"
+      class="Box-sc-g0xbh4-0 py-0.5"
     >
-      <span
-        aria-label="View repository: gitify-app/notifications-test"
-        class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-se"
-        id=":r1:"
-        role="tooltip"
+      <div
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+        data-align="center"
+        data-direction="horizontal"
+        data-gap="condensed"
+        data-justify="start"
+        data-padding="none"
+        data-wrap="nowrap"
       >
         <div
           class="Box-sc-g0xbh4-0 text-xs font-medium"
           data-testid="view-repository"
+          title="Open repository"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -264,16 +256,16 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
               width="14"
             />
             <span
-              class="Text-sc-17v1xeu-0 hmAFGJ"
+              class="Text-sc-17v1xeu-0 hmAFGJ block truncate flex-shrink overflow-ellipsis"
             >
               gitify-app/notifications-test
             </span>
           </div>
         </div>
-      </span>
-      <div
-        class="Box-sc-g0xbh4-0 text-xxs opacity-50 hidden"
-      />
+        <div
+          class="Box-sc-g0xbh4-0 text-xxs opacity-50 hidden"
+        />
+      </div>
     </div>
   </div>,
   "debug": [Function],
@@ -336,26 +328,24 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
   "baseElement": <body>
     <div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-        data-align="center"
-        data-direction="horizontal"
-        data-gap="condensed"
-        data-justify="start"
-        data-padding="none"
-        data-wrap="nowrap"
+        class="Box-sc-g0xbh4-0 py-0.5"
       >
-        <span
-          aria-label="View repository: gitify-app/notifications-test"
-          class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-se"
-          id=":r2:"
-          role="tooltip"
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
         >
           <div
             class="Box-sc-g0xbh4-0 text-xs font-medium"
             data-testid="view-repository"
+            title="Open repository"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+              class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -375,41 +365,39 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
                 width="14"
               />
               <span
-                class="Text-sc-17v1xeu-0 hmAFGJ"
+                class="Text-sc-17v1xeu-0 hmAFGJ block truncate flex-shrink overflow-ellipsis"
               >
                 gitify-app/notifications-test
               </span>
             </div>
           </div>
-        </span>
-        <div
-          class="Box-sc-g0xbh4-0 text-xxs opacity-50"
-        />
+          <div
+            class="Box-sc-g0xbh4-0 text-xxs opacity-50"
+          />
+        </div>
       </div>
     </div>
   </body>,
   "container": <div>
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-      data-align="center"
-      data-direction="horizontal"
-      data-gap="condensed"
-      data-justify="start"
-      data-padding="none"
-      data-wrap="nowrap"
+      class="Box-sc-g0xbh4-0 py-0.5"
     >
-      <span
-        aria-label="View repository: gitify-app/notifications-test"
-        class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-se"
-        id=":r2:"
-        role="tooltip"
+      <div
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+        data-align="center"
+        data-direction="horizontal"
+        data-gap="condensed"
+        data-justify="start"
+        data-padding="none"
+        data-wrap="nowrap"
       >
         <div
           class="Box-sc-g0xbh4-0 text-xs font-medium"
           data-testid="view-repository"
+          title="Open repository"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -429,16 +417,16 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
               width="14"
             />
             <span
-              class="Text-sc-17v1xeu-0 hmAFGJ"
+              class="Text-sc-17v1xeu-0 hmAFGJ block truncate flex-shrink overflow-ellipsis"
             >
               gitify-app/notifications-test
             </span>
           </div>
         </div>
-      </span>
-      <div
-        class="Box-sc-g0xbh4-0 text-xxs opacity-50"
-      />
+        <div
+          class="Box-sc-g0xbh4-0 text-xxs opacity-50"
+        />
+      </div>
     </div>
   </div>,
   "debug": [Function],

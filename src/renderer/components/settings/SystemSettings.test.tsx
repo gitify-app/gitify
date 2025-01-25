@@ -28,7 +28,7 @@ describe('renderer/routes/components/settings/SystemSettings.tsx', () => {
       );
     });
 
-    fireEvent.click(screen.getByLabelText('Background'));
+    fireEvent.click(screen.getByTestId('radio-openlinks-background'));
 
     expect(updateSetting).toHaveBeenCalledTimes(1);
     expect(updateSetting).toHaveBeenCalledWith('openLinks', 'BACKGROUND');
@@ -51,7 +51,7 @@ describe('renderer/routes/components/settings/SystemSettings.tsx', () => {
       );
     });
 
-    fireEvent.click(screen.getByLabelText('Enable keyboard shortcut'), {
+    fireEvent.click(screen.getByTestId('checkbox-keyboardShortcut'), {
       target: { checked: true },
     });
 
@@ -76,9 +76,12 @@ describe('renderer/routes/components/settings/SystemSettings.tsx', () => {
       );
     });
 
-    fireEvent.click(screen.getByLabelText('Show notifications count in tray'), {
-      target: { checked: true },
-    });
+    fireEvent.click(
+      screen.getByTestId('checkbox-showNotificationsCountInTray'),
+      {
+        target: { checked: true },
+      },
+    );
 
     expect(updateSetting).toHaveBeenCalledTimes(1);
     expect(updateSetting).toHaveBeenCalledWith(
@@ -104,7 +107,7 @@ describe('renderer/routes/components/settings/SystemSettings.tsx', () => {
       );
     });
 
-    fireEvent.click(screen.getByLabelText('Show system notifications'), {
+    fireEvent.click(screen.getByTestId('checkbox-showNotifications'), {
       target: { checked: true },
     });
 
@@ -129,7 +132,7 @@ describe('renderer/routes/components/settings/SystemSettings.tsx', () => {
       );
     });
 
-    fireEvent.click(screen.getByLabelText('Play sound'), {
+    fireEvent.click(screen.getByTestId('checkbox-playSound'), {
       target: { checked: true },
     });
 
@@ -154,7 +157,7 @@ describe('renderer/routes/components/settings/SystemSettings.tsx', () => {
       );
     });
 
-    fireEvent.click(screen.getByLabelText('Use alternate idle icon'), {
+    fireEvent.click(screen.getByTestId('checkbox-useAlternateIdleIcon'), {
       target: { checked: true },
     });
 
@@ -179,7 +182,7 @@ describe('renderer/routes/components/settings/SystemSettings.tsx', () => {
       );
     });
 
-    fireEvent.click(screen.getByLabelText('Open at startup'), {
+    fireEvent.click(screen.getByTestId('checkbox-openAtStartup'), {
       target: { checked: true },
     });
 

@@ -17,10 +17,10 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
         <div
           class="Box-sc-g0xbh4-0"
           data-testid="view-profile"
-          title="View profile: gitify-app"
+          title="gitify-app"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -157,10 +157,10 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
       <div
         class="Box-sc-g0xbh4-0"
         data-testid="view-profile"
-        title="View profile: gitify-app"
+        title="gitify-app"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -354,10 +354,10 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
         <div
           class="Box-sc-g0xbh4-0"
           data-testid="view-profile"
-          title="View profile: gitify-app"
+          title="gitify-app"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -494,10 +494,10 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
       <div
         class="Box-sc-g0xbh4-0"
         data-testid="view-profile"
-        title="View profile: gitify-app"
+        title="gitify-app"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -689,7 +689,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
         data-wrap="wrap"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -829,7 +829,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
       data-wrap="wrap"
     >
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
         data-align="center"
         data-direction="horizontal"
         data-gap="condensed"
@@ -1028,10 +1028,10 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
         <div
           class="Box-sc-g0xbh4-0"
           data-testid="view-profile"
-          title="View profile: gitify-app"
+          title="gitify-app"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1168,10 +1168,10 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
       <div
         class="Box-sc-g0xbh4-0"
         data-testid="view-profile"
-        title="View profile: gitify-app"
+        title="gitify-app"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -1365,10 +1365,10 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
         <div
           class="Box-sc-g0xbh4-0"
           data-testid="view-profile"
-          title="View profile: gitify-app"
+          title="gitify-app"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1505,10 +1505,10 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
       <div
         class="Box-sc-g0xbh4-0"
         data-testid="view-profile"
-        title="View profile: gitify-app"
+        title="gitify-app"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"

@@ -26,12 +26,15 @@ export const AvatarWithFallback: React.FC<IAvatarWithFallback> = ({
   const [isBroken, setIsBroken] = useState(false);
 
   const isNonHuman = isNonHumanUser(userType);
+
+  // TODO explore using AnchoredOverlay component (https://primer.style/components/anchored-overlay/react/alpha) to render Avatar Card on hover
   return (
     <Stack
       direction="horizontal"
       align="center"
       gap="condensed"
       data-testid="avatar"
+      className="truncate"
     >
       {!src || isBroken ? (
         isNonHuman ? (
@@ -48,7 +51,12 @@ export const AvatarWithFallback: React.FC<IAvatarWithFallback> = ({
           onError={() => setIsBroken(true)}
         />
       )}
-      {name && <Text>{name}</Text>}
+      {name && (
+        // TODO add truncation logic for long names
+        <Text className="block truncate flex-shrink overflow-ellipsis">
+          {name}
+        </Text>
+      )}
     </Stack>
   );
 };
