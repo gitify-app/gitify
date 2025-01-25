@@ -30,6 +30,7 @@ export function setDarkMode() {
 }
 
 /**
+ * TODO find a way to set scrollbar colors based on GitHub Primer Theme Provider / Design Tokens
  * @deprecated
  */
 export function setScrollbarTheme(mode?: ColorModeWithAuto) {

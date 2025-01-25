@@ -26,6 +26,8 @@ export const AvatarWithFallback: React.FC<IAvatarWithFallback> = ({
   const [isBroken, setIsBroken] = useState(false);
 
   const isNonHuman = isNonHumanUser(userType);
+
+  // TODO explore using AnchoredOverlay component (https://primer.style/components/anchored-overlay/react/alpha) to render Avatar Card on hover
   return (
     <Stack
       direction="horizontal"
