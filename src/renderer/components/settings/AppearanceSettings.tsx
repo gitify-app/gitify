@@ -18,6 +18,8 @@ import {
   ButtonGroup,
   IconButton,
   Select,
+  Stack,
+  Text,
   useTheme,
 } from '@primer/react';
 
@@ -168,17 +170,17 @@ export const AppearanceSettings: FC = () => {
           updateSetting('detailedNotifications', evt.target.checked)
         }
         tooltip={
-          <div>
-            <div className="pb-3">
+          <Stack direction="vertical" gap="condensed">
+            <Text>
               Enrich notifications with author or last commenter profile
               information, state and GitHub-like colors.
-            </div>
-            <div className="text-gitify-caution">
+            </Text>
+            <Text className="text-gitify-caution">
               ⚠️ Users with a large number of unread notifications <i>may</i>{' '}
               experience rate limiting under certain circumstances. Disable this
               setting if you experience this.
-            </div>
-          </div>
+            </Text>
+          </Stack>
         }
       />
 
@@ -228,29 +230,35 @@ export const AppearanceSettings: FC = () => {
         }
         disabled={!settings.detailedNotifications}
         tooltip={
-          <div>
+          <Stack direction="vertical" gap="condensed">
             <div>Show GitHub number for:</div>
             <div className="pl-4">
               <ul>
-                <li className="flex items-center gap-1">
-                  <CommentIcon size={Size.SMALL} />
-                  Discussion
+                <li>
+                  <Stack direction="horizontal" gap="condensed">
+                    <CommentIcon size={Size.SMALL} />
+                    Discussion
+                  </Stack>
                 </li>
-                <li className="flex items-center gap-1">
-                  <IssueClosedIcon size={Size.SMALL} />
-                  Issue
+                <li>
+                  <Stack direction="horizontal" gap="condensed">
+                    <IssueClosedIcon size={Size.SMALL} />
+                    Issue
+                  </Stack>
                 </li>
-                <li className="flex items-center gap-1">
-                  <GitPullRequestIcon size={Size.SMALL} />
-                  Pull Request
+                <li>
+                  <Stack direction="horizontal" gap="condensed">
+                    <GitPullRequestIcon size={Size.SMALL} />
+                    Pull Request
+                  </Stack>
                 </li>
               </ul>
             </div>
-            <div className="pt-3 text-gitify-caution">
-              ⚠️ This setting requires <strong>Detailed Notifications</strong> to
-              be enabled.
-            </div>
-          </div>
+            <Text className="text-gitify-caution">
+              ⚠️ This setting requires{' '}
+              <Text as="strong">Detailed Notifications</Text> to be enabled.
+            </Text>
+          </Stack>
         }
       />
 

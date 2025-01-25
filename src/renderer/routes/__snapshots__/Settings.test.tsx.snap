@@ -360,6 +360,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             <input
               checked=""
               class="size-4 rounded-sm cursor-pointer"
+              data-testid="checkbox-detailedNotifications"
               id="detailedNotifications"
               type="checkbox"
             />
@@ -372,9 +373,10 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               >
                 Detailed notifications
               </label>
-              <span
+              <div
                 aria-label="tooltip-detailedNotifications"
-                class="relative"
+                class="Box-sc-g0xbh4-0 relative"
+                data-testid="tooltip-tooltip-detailedNotifications"
                 id="tooltip-detailedNotifications"
               >
                 <svg
@@ -393,7 +395,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                     d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                   />
                 </svg>
-              </span>
+              </div>
             </div>
           </div>
         </div>
@@ -406,6 +408,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             <input
               checked=""
               class="size-4 rounded-sm cursor-pointer"
+              data-testid="checkbox-showPills"
               id="showPills"
               type="checkbox"
             />
@@ -418,9 +421,10 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               >
                 Show notification metric pills
               </label>
-              <span
+              <div
                 aria-label="tooltip-showPills"
-                class="relative"
+                class="Box-sc-g0xbh4-0 relative"
+                data-testid="tooltip-tooltip-showPills"
                 id="tooltip-showPills"
               >
                 <svg
@@ -439,7 +443,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                     d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                   />
                 </svg>
-              </span>
+              </div>
             </div>
           </div>
         </div>
@@ -452,6 +456,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             <input
               checked=""
               class="size-4 rounded-sm cursor-pointer"
+              data-testid="checkbox-showNumber"
               id="showNumber"
               type="checkbox"
             />
@@ -464,9 +469,10 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               >
                 Show number
               </label>
-              <span
+              <div
                 aria-label="tooltip-showNumber"
-                class="relative"
+                class="Box-sc-g0xbh4-0 relative"
+                data-testid="tooltip-tooltip-showNumber"
                 id="tooltip-showNumber"
               >
                 <svg
@@ -485,7 +491,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                     d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                   />
                 </svg>
-              </span>
+              </div>
             </div>
           </div>
         </div>
@@ -498,6 +504,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             <input
               checked=""
               class="size-4 rounded-sm cursor-pointer"
+              data-testid="checkbox-showAccountHeader"
               disabled=""
               id="showAccountHeader"
               type="checkbox"
@@ -571,14 +578,15 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               <input
                 checked=""
                 class="size-4 cursor-pointer"
-                id="groupBy_repository"
+                data-testid="radio-groupby-repository"
+                id="radio-groupby-repository"
                 name="groupBy"
                 type="radio"
                 value="REPOSITORY"
               />
               <label
                 class="mr-3 font-medium cursor-pointer"
-                for="groupBy_repository"
+                for="radio-groupby-repository"
               >
                 Repository
               </label>
@@ -588,14 +596,15 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             >
               <input
                 class="size-4 cursor-pointer"
-                id="groupBy_date"
+                data-testid="radio-groupby-date"
+                id="radio-groupby-date"
                 name="groupBy"
                 type="radio"
                 value="DATE"
               />
               <label
                 class="mr-3 font-medium cursor-pointer"
-                for="groupBy_date"
+                for="radio-groupby-date"
               >
                 Date
               </label>
@@ -611,6 +620,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             <input
               checked=""
               class="size-4 rounded-sm cursor-pointer"
+              data-testid="checkbox-fetchAllNotifications"
               id="fetchAllNotifications"
               type="checkbox"
             />
@@ -623,9 +633,10 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               >
                 Fetch all notifications
               </label>
-              <span
+              <div
                 aria-label="tooltip-fetchAllNotifications"
-                class="relative"
+                class="Box-sc-g0xbh4-0 relative"
+                data-testid="tooltip-tooltip-fetchAllNotifications"
                 id="tooltip-fetchAllNotifications"
               >
                 <svg
@@ -644,7 +655,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                     d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                   />
                 </svg>
-              </span>
+              </div>
             </div>
           </div>
         </div>
@@ -656,6 +667,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           >
             <input
               class="size-4 rounded-sm cursor-pointer"
+              data-testid="checkbox-showOnlyParticipating"
               id="showOnlyParticipating"
               type="checkbox"
             />
@@ -668,9 +680,10 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               >
                 Show only participating
               </label>
-              <span
+              <div
                 aria-label="tooltip-showOnlyParticipating"
-                class="relative"
+                class="Box-sc-g0xbh4-0 relative"
+                data-testid="tooltip-tooltip-showOnlyParticipating"
                 id="tooltip-showOnlyParticipating"
               >
                 <svg
@@ -689,7 +702,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                     d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                   />
                 </svg>
-              </span>
+              </div>
             </div>
           </div>
         </div>
@@ -701,6 +714,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           >
             <input
               class="size-4 rounded-sm cursor-pointer"
+              data-testid="checkbox-markAsDoneOnOpen"
               id="markAsDoneOnOpen"
               type="checkbox"
             />
@@ -713,9 +727,10 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               >
                 Mark as done on open
               </label>
-              <span
+              <div
                 aria-label="tooltip-markAsDoneOnOpen"
-                class="relative"
+                class="Box-sc-g0xbh4-0 relative"
+                data-testid="tooltip-tooltip-markAsDoneOnOpen"
                 id="tooltip-markAsDoneOnOpen"
               >
                 <svg
@@ -734,7 +749,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                     d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                   />
                 </svg>
-              </span>
+              </div>
             </div>
           </div>
         </div>
@@ -746,6 +761,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           >
             <input
               class="size-4 rounded-sm cursor-pointer"
+              data-testid="checkbox-markAsDoneOnUnsubscribe"
               id="markAsDoneOnUnsubscribe"
               type="checkbox"
             />
@@ -758,9 +774,10 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               >
                 Mark as done on unsubscribe
               </label>
-              <span
+              <div
                 aria-label="tooltip-markAsDoneOnUnsubscribe"
-                class="relative"
+                class="Box-sc-g0xbh4-0 relative"
+                data-testid="tooltip-tooltip-markAsDoneOnUnsubscribe"
                 id="tooltip-markAsDoneOnUnsubscribe"
               >
                 <svg
@@ -779,7 +796,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                     d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                   />
                 </svg>
-              </span>
+              </div>
             </div>
           </div>
         </div>
@@ -791,6 +808,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           >
             <input
               class="size-4 rounded-sm cursor-pointer"
+              data-testid="checkbox-delayNotificationState"
               id="delayNotificationState"
               type="checkbox"
             />
@@ -803,9 +821,10 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               >
                 Delay notification state
               </label>
-              <span
+              <div
                 aria-label="tooltip-delayNotificationState"
-                class="relative"
+                class="Box-sc-g0xbh4-0 relative"
+                data-testid="tooltip-tooltip-delayNotificationState"
                 id="tooltip-delayNotificationState"
               >
                 <svg
@@ -824,7 +843,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                     d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                   />
                 </svg>
-              </span>
+              </div>
             </div>
           </div>
         </div>
@@ -885,14 +904,15 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               <input
                 checked=""
                 class="size-4 cursor-pointer"
-                id="openLinks_foreground"
+                data-testid="radio-openlinks-foreground"
+                id="radio-openlinks-foreground"
                 name="openLinks"
                 type="radio"
                 value="FOREGROUND"
               />
               <label
                 class="mr-3 font-medium cursor-pointer"
-                for="openLinks_foreground"
+                for="radio-openlinks-foreground"
               >
                 Foreground
               </label>
@@ -902,14 +922,15 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             >
               <input
                 class="size-4 cursor-pointer"
-                id="openLinks_background"
+                data-testid="radio-openlinks-background"
+                id="radio-openlinks-background"
                 name="openLinks"
                 type="radio"
                 value="BACKGROUND"
               />
               <label
                 class="mr-3 font-medium cursor-pointer"
-                for="openLinks_background"
+                for="radio-openlinks-background"
               >
                 Background
               </label>
@@ -925,7 +946,8 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             <input
               checked=""
               class="size-4 rounded-sm cursor-pointer"
-              id="keyboardShortcutEnabled"
+              data-testid="checkbox-keyboardShortcut"
+              id="keyboardShortcut"
               type="checkbox"
             />
             <div
@@ -933,14 +955,15 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             >
               <label
                 class="font-medium text-gitify-font cursor-pointer"
-                for="keyboardShortcutEnabled"
+                for="keyboardShortcut"
               >
                 Enable keyboard shortcut
               </label>
-              <span
-                aria-label="tooltip-keyboardShortcutEnabled"
-                class="relative"
-                id="tooltip-keyboardShortcutEnabled"
+              <div
+                aria-label="tooltip-keyboardShortcut"
+                class="Box-sc-g0xbh4-0 relative"
+                data-testid="tooltip-tooltip-keyboardShortcut"
+                id="tooltip-keyboardShortcut"
               >
                 <svg
                   aria-hidden="true"
@@ -958,7 +981,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                     d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                   />
                 </svg>
-              </span>
+              </div>
             </div>
           </div>
         </div>
@@ -971,6 +994,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             <input
               checked=""
               class="size-4 rounded-sm cursor-pointer"
+              data-testid="checkbox-showNotificationsCountInTray"
               id="showNotificationsCountInTray"
               type="checkbox"
             />
@@ -995,6 +1019,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             <input
               checked=""
               class="size-4 rounded-sm cursor-pointer"
+              data-testid="checkbox-showNotifications"
               id="showNotifications"
               type="checkbox"
             />
@@ -1019,6 +1044,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             <input
               checked=""
               class="size-4 rounded-sm cursor-pointer"
+              data-testid="checkbox-playSound"
               id="playSound"
               type="checkbox"
             />
@@ -1042,6 +1068,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           >
             <input
               class="size-4 rounded-sm cursor-pointer"
+              data-testid="checkbox-useAlternateIdleIcon"
               id="useAlternateIdleIcon"
               type="checkbox"
             />
@@ -1054,9 +1081,10 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               >
                 Use alternate idle icon
               </label>
-              <span
+              <div
                 aria-label="tooltip-useAlternateIdleIcon"
-                class="relative"
+                class="Box-sc-g0xbh4-0 relative"
+                data-testid="tooltip-tooltip-useAlternateIdleIcon"
                 id="tooltip-useAlternateIdleIcon"
               >
                 <svg
@@ -1075,7 +1103,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                     d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                   />
                 </svg>
-              </span>
+              </div>
             </div>
           </div>
         </div>
@@ -1087,7 +1115,8 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           >
             <input
               class="size-4 rounded-sm cursor-pointer"
-              id="openAtStartUp"
+              data-testid="checkbox-openAtStartup"
+              id="openAtStartup"
               type="checkbox"
             />
             <div
@@ -1095,7 +1124,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             >
               <label
                 class="font-medium text-gitify-font cursor-pointer"
-                for="openAtStartUp"
+                for="openAtStartup"
               >
                 Open at startup
               </label>

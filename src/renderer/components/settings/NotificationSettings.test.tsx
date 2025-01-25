@@ -29,7 +29,7 @@ describe('renderer/routes/components/settings/NotificationSettings.tsx', () => {
       );
     });
 
-    fireEvent.click(screen.getByLabelText('Date'));
+    fireEvent.click(screen.getByTestId('radio-groupby-date'));
 
     expect(updateSetting).toHaveBeenCalledTimes(1);
     expect(updateSetting).toHaveBeenCalledWith('groupBy', 'DATE');
@@ -52,7 +52,7 @@ describe('renderer/routes/components/settings/NotificationSettings.tsx', () => {
       );
     });
 
-    fireEvent.click(screen.getByLabelText('Fetch all notifications'), {
+    fireEvent.click(screen.getByTestId('checkbox-fetchAllNotifications'), {
       target: { checked: true },
     });
 
@@ -77,7 +77,7 @@ describe('renderer/routes/components/settings/NotificationSettings.tsx', () => {
       );
     });
 
-    fireEvent.click(screen.getByLabelText('Show only participating'), {
+    fireEvent.click(screen.getByTestId('checkbox-showOnlyParticipating'), {
       target: { checked: true },
     });
 
@@ -141,7 +141,7 @@ describe('renderer/routes/components/settings/NotificationSettings.tsx', () => {
       );
     });
 
-    fireEvent.click(screen.getByLabelText('Mark as done on open'), {
+    fireEvent.click(screen.getByTestId('checkbox-markAsDoneOnOpen'), {
       target: { checked: true },
     });
 
@@ -166,7 +166,7 @@ describe('renderer/routes/components/settings/NotificationSettings.tsx', () => {
       );
     });
 
-    fireEvent.click(screen.getByLabelText('Mark as done on unsubscribe'), {
+    fireEvent.click(screen.getByTestId('checkbox-markAsDoneOnUnsubscribe'), {
       target: { checked: true },
     });
 
@@ -194,7 +194,7 @@ describe('renderer/routes/components/settings/NotificationSettings.tsx', () => {
       );
     });
 
-    fireEvent.click(screen.getByLabelText('Delay notification state'), {
+    fireEvent.click(screen.getByTestId('checkbox-delayNotificationState'), {
       target: { checked: true },
     });
 

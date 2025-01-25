@@ -24,14 +24,15 @@ exports[`renderer/components/fields/RadioGroup.tsx should render 1`] = `
           >
             <input
               class="size-4 cursor-pointer"
-              id="appearance_one"
+              data-testid="radio-appearance-one"
+              id="radio-appearance-one"
               name="appearance"
               type="radio"
               value="one"
             />
             <label
               class="mr-3 font-medium cursor-pointer"
-              for="appearance_one"
+              for="radio-appearance-one"
             >
               Value 1
             </label>
@@ -42,14 +43,15 @@ exports[`renderer/components/fields/RadioGroup.tsx should render 1`] = `
             <input
               checked=""
               class="size-4 cursor-pointer"
-              id="appearance_two"
+              data-testid="radio-appearance-two"
+              id="radio-appearance-two"
               name="appearance"
               type="radio"
               value="two"
             />
             <label
               class="mr-3 font-medium cursor-pointer"
-              for="appearance_two"
+              for="radio-appearance-two"
             >
               Value 2
             </label>
@@ -78,14 +80,15 @@ exports[`renderer/components/fields/RadioGroup.tsx should render 1`] = `
         >
           <input
             class="size-4 cursor-pointer"
-            id="appearance_one"
+            data-testid="radio-appearance-one"
+            id="radio-appearance-one"
             name="appearance"
             type="radio"
             value="one"
           />
           <label
             class="mr-3 font-medium cursor-pointer"
-            for="appearance_one"
+            for="radio-appearance-one"
           >
             Value 1
           </label>
@@ -96,14 +99,15 @@ exports[`renderer/components/fields/RadioGroup.tsx should render 1`] = `
           <input
             checked=""
             class="size-4 cursor-pointer"
-            id="appearance_two"
+            data-testid="radio-appearance-two"
+            id="radio-appearance-two"
             name="appearance"
             type="radio"
             value="two"
           />
           <label
             class="mr-3 font-medium cursor-pointer"
-            for="appearance_two"
+            for="radio-appearance-two"
           >
             Value 2
           </label>
@@ -189,14 +193,15 @@ exports[`renderer/components/fields/RadioGroup.tsx should render as disabled 1`]
           >
             <input
               class="size-4 cursor-pointer"
-              id="appearance_one"
+              data-testid="radio-appearance-one"
+              id="radio-appearance-one"
               name="appearance"
               type="radio"
               value="one"
             />
             <label
               class="mr-3 font-medium cursor-pointer"
-              for="appearance_one"
+              for="radio-appearance-one"
             >
               Value 1
             </label>
@@ -207,14 +212,15 @@ exports[`renderer/components/fields/RadioGroup.tsx should render as disabled 1`]
             <input
               checked=""
               class="size-4 cursor-pointer"
-              id="appearance_two"
+              data-testid="radio-appearance-two"
+              id="radio-appearance-two"
               name="appearance"
               type="radio"
               value="two"
             />
             <label
               class="mr-3 font-medium cursor-pointer"
-              for="appearance_two"
+              for="radio-appearance-two"
             >
               Value 2
             </label>
@@ -243,14 +249,15 @@ exports[`renderer/components/fields/RadioGroup.tsx should render as disabled 1`]
         >
           <input
             class="size-4 cursor-pointer"
-            id="appearance_one"
+            data-testid="radio-appearance-one"
+            id="radio-appearance-one"
             name="appearance"
             type="radio"
             value="one"
           />
           <label
             class="mr-3 font-medium cursor-pointer"
-            for="appearance_one"
+            for="radio-appearance-one"
           >
             Value 1
           </label>
@@ -261,14 +268,15 @@ exports[`renderer/components/fields/RadioGroup.tsx should render as disabled 1`]
           <input
             checked=""
             class="size-4 cursor-pointer"
-            id="appearance_two"
+            data-testid="radio-appearance-two"
+            id="radio-appearance-two"
             name="appearance"
             type="radio"
             value="two"
           />
           <label
             class="mr-3 font-medium cursor-pointer"
-            for="appearance_two"
+            for="radio-appearance-two"
           >
             Value 2
           </label>

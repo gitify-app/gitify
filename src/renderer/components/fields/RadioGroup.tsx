@@ -21,7 +21,7 @@ export const RadioGroup: FC<IRadioGroup> = (props: IRadioGroup) => {
         aria-labelledby={props.name}
       >
         {props.options.map((item) => {
-          const name = `${props.name}_${item.value.toLowerCase()}`;
+          const name = `radio-${props.name}-${item.value}`.toLowerCase();
 
           return (
             <div className="flex items-center gap-2" key={name}>
@@ -33,6 +33,7 @@ export const RadioGroup: FC<IRadioGroup> = (props: IRadioGroup) => {
                 value={item.value}
                 onChange={props.onChange}
                 checked={item.value === props.value}
+                data-testid={name}
               />
               <FieldLabel name={name} label={item.label} />
             </div>

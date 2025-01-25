@@ -1,6 +1,6 @@
 import { type FC, type MouseEvent, useContext } from 'react';
 
-import { Box, Stack, Tooltip } from '@primer/react';
+import { Box, Stack } from '@primer/react';
 
 import { AppContext } from '../../context/App';
 import { GroupBy, Opacity, Size } from '../../types';
@@ -28,9 +28,10 @@ export const NotificationHeader: FC<INotificationHeader> = ({
 
   return (
     groupByDate && (
-      <Stack direction="horizontal" align="center" gap="condensed">
-        <Tooltip text={`View repository: ${repoSlug}`} direction="se">
+      <Box className="py-0.5">
+        <Stack direction="horizontal" align="center" gap="condensed">
           <Box
+            title="Open repository"
             className="text-xs font-medium"
             onClick={(event: MouseEvent<HTMLElement>) => {
               // Don't trigger onClick of parent element.
@@ -47,17 +48,17 @@ export const NotificationHeader: FC<INotificationHeader> = ({
               userType={notification.repository.owner.type}
             />
           </Box>
-        </Tooltip>
-        <Box
-          className={cn(
-            'text-xxs',
-            Opacity.READ,
-            !settings.showNumber && 'hidden',
-          )}
-        >
-          {notificationNumber}
-        </Box>
-      </Stack>
+          <Box
+            className={cn(
+              'text-xxs',
+              Opacity.READ,
+              !settings.showNumber && 'hidden',
+            )}
+          >
+            {notificationNumber}
+          </Box>
+        </Stack>
+      </Box>
     )
   );
 };

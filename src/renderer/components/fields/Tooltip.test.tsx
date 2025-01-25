@@ -3,7 +3,7 @@ import { type ITooltip, Tooltip } from './Tooltip';
 
 describe('renderer/components/fields/Tooltip.tsx', () => {
   const props: ITooltip = {
-    name: 'tooltip',
+    name: 'test',
     tooltip: 'This is some tooltip text',
   };
 
@@ -15,7 +15,7 @@ describe('renderer/components/fields/Tooltip.tsx', () => {
   it('should display on mouse enter / leave', () => {
     render(<Tooltip {...props} />);
 
-    const tooltipElement = screen.getByLabelText('tooltip');
+    const tooltipElement = screen.getByTestId('tooltip-test');
 
     fireEvent.mouseEnter(tooltipElement);
     expect(tooltipElement).toMatchSnapshot();

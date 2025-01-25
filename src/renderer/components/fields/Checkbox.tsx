@@ -22,6 +22,7 @@ export const Checkbox: FC<ICheckbox> = (props: ICheckbox) => {
           checked={props.checked}
           onChange={props.onChange}
           disabled={props.disabled}
+          data-testid={`checkbox-${props.name}`}
         />
 
         <div className="flex items-center ml-3">

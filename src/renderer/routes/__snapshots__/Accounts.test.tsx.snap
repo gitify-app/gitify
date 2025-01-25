@@ -85,7 +85,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
     class="Box-sc-g0xbh4-0 grow overflow-x-auto px-8 pb-2 mb-12 "
   >
     <div
-      class="rounded-md p-2 mb-4 bg-gitify-accounts"
+      class="Box-sc-g0xbh4-0 rounded-md p-2 mb-4 bg-gitify-accounts"
     >
       <div
         class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
@@ -98,66 +98,62 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-          data-align="stretch"
+          data-align="start"
           data-direction="vertical"
-          data-gap="none"
+          data-gap="condensed"
           data-justify="start"
           data-padding="none"
           data-wrap="nowrap"
         >
-          <div
-            class="pb-2"
+          <button
+            aria-describedby=":r2t:-loading-announcement"
+            class="types__StyledButton-sc-ws60qy-0 jTCgqj pb-2"
+            data-loading="false"
+            data-no-visuals="true"
+            data-testid="account-profile"
+            sx="[object Object]"
+            title="Open account profile"
+            type="button"
           >
-            <button
-              aria-describedby=":r2t:-loading-announcement"
-              class="types__StyledButton-sc-ws60qy-0 jTCgqj"
-              data-loading="false"
-              data-no-visuals="true"
-              data-testid="account-profile"
+            <span
+              class="Box-sc-g0xbh4-0 srpGE"
+              data-component="buttonContent"
               sx="[object Object]"
-              title="Open account profile"
-              type="button"
             >
               <span
-                class="Box-sc-g0xbh4-0 srpGE"
-                data-component="buttonContent"
-                sx="[object Object]"
+                data-component="text"
               >
-                <span
-                  data-component="text"
+                <div
+                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
+                  data-align="center"
+                  data-direction="horizontal"
+                  data-gap="condensed"
+                  data-justify="start"
+                  data-padding="none"
+                  data-testid="avatar"
+                  data-wrap="nowrap"
                 >
-                  <div
-                    class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-                    data-align="center"
-                    data-direction="horizontal"
-                    data-gap="condensed"
-                    data-justify="start"
-                    data-padding="none"
-                    data-testid="avatar"
-                    data-wrap="nowrap"
+                  <img
+                    alt="octocat"
+                    class="Avatar__StyledAvatar-sc-2lv0r8-0 jwAMPP"
+                    data-component="Avatar"
+                    height="20"
+                    size="20"
+                    src="https://avatars.githubusercontent.com/u/583231?v=4"
+                    sx="[object Object]"
+                    width="20"
+                  />
+                  <span
+                    class="Text-sc-17v1xeu-0 hmAFGJ block truncate flex-shrink overflow-ellipsis"
                   >
-                    <img
-                      alt="octocat"
-                      class="Avatar__StyledAvatar-sc-2lv0r8-0 jwAMPP"
-                      data-component="Avatar"
-                      height="20"
-                      size="20"
-                      src="https://avatars.githubusercontent.com/u/583231?v=4"
-                      sx="[object Object]"
-                      width="20"
-                    />
-                    <span
-                      class="Text-sc-17v1xeu-0 hmAFGJ"
-                    >
-                      @octocat
-                    </span>
-                  </div>
-                </span>
+                    @octocat
+                  </span>
+                </div>
               </span>
-            </button>
-          </div>
+            </span>
+          </button>
           <div
-            class="pb-2 pl-4"
+            class="Box-sc-g0xbh4-0 pl-4 pb-2 text-xs"
           >
             <div
               class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
@@ -195,7 +191,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
                     />
                   </svg>
                   <span
-                    class="text-xs"
+                    class="Text-sc-17v1xeu-0 hmAFGJ"
                   >
                     Mona Lisa Octocat
                   </span>
@@ -232,7 +228,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
                     />
                   </svg>
                   <span
-                    class="text-xs"
+                    class="Text-sc-17v1xeu-0 hmAFGJ"
                   >
                     github.com
                   </span>
@@ -269,7 +265,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
                     />
                   </svg>
                   <span
-                    class="text-xs"
+                    class="Text-sc-17v1xeu-0 hmAFGJ"
                   >
                     Personal Access Token
                   </span>
@@ -449,7 +445,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
       </div>
     </div>
     <div
-      class="rounded-md p-2 mb-4 bg-gitify-accounts"
+      class="Box-sc-g0xbh4-0 rounded-md p-2 mb-4 bg-gitify-accounts"
     >
       <div
         class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
@@ -462,66 +458,62 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-          data-align="stretch"
+          data-align="start"
           data-direction="vertical"
-          data-gap="none"
+          data-gap="condensed"
           data-justify="start"
           data-padding="none"
           data-wrap="nowrap"
         >
-          <div
-            class="pb-2"
+          <button
+            aria-describedby=":r36:-loading-announcement"
+            class="types__StyledButton-sc-ws60qy-0 jTCgqj pb-2"
+            data-loading="false"
+            data-no-visuals="true"
+            data-testid="account-profile"
+            sx="[object Object]"
+            title="Open account profile"
+            type="button"
           >
-            <button
-              aria-describedby=":r36:-loading-announcement"
-              class="types__StyledButton-sc-ws60qy-0 jTCgqj"
-              data-loading="false"
-              data-no-visuals="true"
-              data-testid="account-profile"
+            <span
+              class="Box-sc-g0xbh4-0 srpGE"
+              data-component="buttonContent"
               sx="[object Object]"
-              title="Open account profile"
-              type="button"
             >
               <span
-                class="Box-sc-g0xbh4-0 srpGE"
-                data-component="buttonContent"
-                sx="[object Object]"
+                data-component="text"
               >
-                <span
-                  data-component="text"
+                <div
+                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
+                  data-align="center"
+                  data-direction="horizontal"
+                  data-gap="condensed"
+                  data-justify="start"
+                  data-padding="none"
+                  data-testid="avatar"
+                  data-wrap="nowrap"
                 >
-                  <div
-                    class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-                    data-align="center"
-                    data-direction="horizontal"
-                    data-gap="condensed"
-                    data-justify="start"
-                    data-padding="none"
-                    data-testid="avatar"
-                    data-wrap="nowrap"
+                  <img
+                    alt="octocat"
+                    class="Avatar__StyledAvatar-sc-2lv0r8-0 jwAMPP"
+                    data-component="Avatar"
+                    height="20"
+                    size="20"
+                    src="https://avatars.githubusercontent.com/u/583231?v=4"
+                    sx="[object Object]"
+                    width="20"
+                  />
+                  <span
+                    class="Text-sc-17v1xeu-0 hmAFGJ block truncate flex-shrink overflow-ellipsis"
                   >
-                    <img
-                      alt="octocat"
-                      class="Avatar__StyledAvatar-sc-2lv0r8-0 jwAMPP"
-                      data-component="Avatar"
-                      height="20"
-                      size="20"
-                      src="https://avatars.githubusercontent.com/u/583231?v=4"
-                      sx="[object Object]"
-                      width="20"
-                    />
-                    <span
-                      class="Text-sc-17v1xeu-0 hmAFGJ"
-                    >
-                      @octocat
-                    </span>
-                  </div>
-                </span>
+                    @octocat
+                  </span>
+                </div>
               </span>
-            </button>
-          </div>
+            </span>
+          </button>
           <div
-            class="pb-2 pl-4"
+            class="Box-sc-g0xbh4-0 pl-4 pb-2 text-xs"
           >
             <div
               class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
@@ -559,7 +551,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
                     />
                   </svg>
                   <span
-                    class="text-xs"
+                    class="Text-sc-17v1xeu-0 hmAFGJ"
                   >
                     Mona Lisa Octocat
                   </span>
@@ -596,7 +588,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
                     />
                   </svg>
                   <span
-                    class="text-xs"
+                    class="Text-sc-17v1xeu-0 hmAFGJ"
                   >
                     github.gitify.io
                   </span>
@@ -633,7 +625,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
                     />
                   </svg>
                   <span
-                    class="text-xs"
+                    class="Text-sc-17v1xeu-0 hmAFGJ"
                   >
                     OAuth App
                   </span>
@@ -813,7 +805,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
       </div>
     </div>
     <div
-      class="rounded-md p-2 mb-4 bg-gitify-accounts"
+      class="Box-sc-g0xbh4-0 rounded-md p-2 mb-4 bg-gitify-accounts"
     >
       <div
         class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
@@ -826,66 +818,62 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-          data-align="stretch"
+          data-align="start"
           data-direction="vertical"
-          data-gap="none"
+          data-gap="condensed"
           data-justify="start"
           data-padding="none"
           data-wrap="nowrap"
         >
-          <div
-            class="pb-2"
+          <button
+            aria-describedby=":r3f:-loading-announcement"
+            class="types__StyledButton-sc-ws60qy-0 jTCgqj pb-2"
+            data-loading="false"
+            data-no-visuals="true"
+            data-testid="account-profile"
+            sx="[object Object]"
+            title="Open account profile"
+            type="button"
           >
-            <button
-              aria-describedby=":r3f:-loading-announcement"
-              class="types__StyledButton-sc-ws60qy-0 jTCgqj"
-              data-loading="false"
-              data-no-visuals="true"
-              data-testid="account-profile"
+            <span
+              class="Box-sc-g0xbh4-0 srpGE"
+              data-component="buttonContent"
               sx="[object Object]"
-              title="Open account profile"
-              type="button"
             >
               <span
-                class="Box-sc-g0xbh4-0 srpGE"
-                data-component="buttonContent"
-                sx="[object Object]"
+                data-component="text"
               >
-                <span
-                  data-component="text"
+                <div
+                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
+                  data-align="center"
+                  data-direction="horizontal"
+                  data-gap="condensed"
+                  data-justify="start"
+                  data-padding="none"
+                  data-testid="avatar"
+                  data-wrap="nowrap"
                 >
-                  <div
-                    class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-                    data-align="center"
-                    data-direction="horizontal"
-                    data-gap="condensed"
-                    data-justify="start"
-                    data-padding="none"
-                    data-testid="avatar"
-                    data-wrap="nowrap"
+                  <img
+                    alt="octocat"
+                    class="Avatar__StyledAvatar-sc-2lv0r8-0 jwAMPP"
+                    data-component="Avatar"
+                    height="20"
+                    size="20"
+                    src="https://avatars.githubusercontent.com/u/583231?v=4"
+                    sx="[object Object]"
+                    width="20"
+                  />
+                  <span
+                    class="Text-sc-17v1xeu-0 hmAFGJ block truncate flex-shrink overflow-ellipsis"
                   >
-                    <img
-                      alt="octocat"
-                      class="Avatar__StyledAvatar-sc-2lv0r8-0 jwAMPP"
-                      data-component="Avatar"
-                      height="20"
-                      size="20"
-                      src="https://avatars.githubusercontent.com/u/583231?v=4"
-                      sx="[object Object]"
-                      width="20"
-                    />
-                    <span
-                      class="Text-sc-17v1xeu-0 hmAFGJ"
-                    >
-                      @octocat
-                    </span>
-                  </div>
-                </span>
+                    @octocat
+                  </span>
+                </div>
               </span>
-            </button>
-          </div>
+            </span>
+          </button>
           <div
-            class="pb-2 pl-4"
+            class="Box-sc-g0xbh4-0 pl-4 pb-2 text-xs"
           >
             <div
               class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
@@ -923,7 +911,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
                     />
                   </svg>
                   <span
-                    class="text-xs"
+                    class="Text-sc-17v1xeu-0 hmAFGJ"
                   >
                     Mona Lisa Octocat
                   </span>
@@ -960,7 +948,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
                     />
                   </svg>
                   <span
-                    class="text-xs"
+                    class="Text-sc-17v1xeu-0 hmAFGJ"
                   >
                     github.com
                   </span>
@@ -997,7 +985,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
                     />
                   </svg>
                   <span
-                    class="text-xs"
+                    class="Text-sc-17v1xeu-0 hmAFGJ"
                   >
                     GitHub App
                   </span>
@@ -1324,7 +1312,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
     class="Box-sc-g0xbh4-0 grow overflow-x-auto px-8 pb-2 mb-12 "
   >
     <div
-      class="rounded-md p-2 mb-4 bg-gitify-accounts"
+      class="Box-sc-g0xbh4-0 rounded-md p-2 mb-4 bg-gitify-accounts"
     >
       <div
         class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
@@ -1337,66 +1325,62 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-          data-align="stretch"
+          data-align="start"
           data-direction="vertical"
-          data-gap="none"
+          data-gap="condensed"
           data-justify="start"
           data-padding="none"
           data-wrap="nowrap"
         >
-          <div
-            class="pb-2"
+          <button
+            aria-describedby=":r3s:-loading-announcement"
+            class="types__StyledButton-sc-ws60qy-0 jTCgqj pb-2"
+            data-loading="false"
+            data-no-visuals="true"
+            data-testid="account-profile"
+            sx="[object Object]"
+            title="Open account profile"
+            type="button"
           >
-            <button
-              aria-describedby=":r3s:-loading-announcement"
-              class="types__StyledButton-sc-ws60qy-0 jTCgqj"
-              data-loading="false"
-              data-no-visuals="true"
-              data-testid="account-profile"
+            <span
+              class="Box-sc-g0xbh4-0 srpGE"
+              data-component="buttonContent"
               sx="[object Object]"
-              title="Open account profile"
-              type="button"
             >
               <span
-                class="Box-sc-g0xbh4-0 srpGE"
-                data-component="buttonContent"
-                sx="[object Object]"
+                data-component="text"
               >
-                <span
-                  data-component="text"
+                <div
+                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
+                  data-align="center"
+                  data-direction="horizontal"
+                  data-gap="condensed"
+                  data-justify="start"
+                  data-padding="none"
+                  data-testid="avatar"
+                  data-wrap="nowrap"
                 >
-                  <div
-                    class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-                    data-align="center"
-                    data-direction="horizontal"
-                    data-gap="condensed"
-                    data-justify="start"
-                    data-padding="none"
-                    data-testid="avatar"
-                    data-wrap="nowrap"
+                  <img
+                    alt="octocat"
+                    class="Avatar__StyledAvatar-sc-2lv0r8-0 jwAMPP"
+                    data-component="Avatar"
+                    height="20"
+                    size="20"
+                    src="https://avatars.githubusercontent.com/u/583231?v=4"
+                    sx="[object Object]"
+                    width="20"
+                  />
+                  <span
+                    class="Text-sc-17v1xeu-0 hmAFGJ block truncate flex-shrink overflow-ellipsis"
                   >
-                    <img
-                      alt="octocat"
-                      class="Avatar__StyledAvatar-sc-2lv0r8-0 jwAMPP"
-                      data-component="Avatar"
-                      height="20"
-                      size="20"
-                      src="https://avatars.githubusercontent.com/u/583231?v=4"
-                      sx="[object Object]"
-                      width="20"
-                    />
-                    <span
-                      class="Text-sc-17v1xeu-0 hmAFGJ"
-                    >
-                      @octocat
-                    </span>
-                  </div>
-                </span>
+                    @octocat
+                  </span>
+                </div>
               </span>
-            </button>
-          </div>
+            </span>
+          </button>
           <div
-            class="pb-2 pl-4"
+            class="Box-sc-g0xbh4-0 pl-4 pb-2 text-xs"
           >
             <div
               class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
@@ -1434,7 +1418,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
                     />
                   </svg>
                   <span
-                    class="text-xs"
+                    class="Text-sc-17v1xeu-0 hmAFGJ"
                   >
                     Mona Lisa Octocat
                   </span>
@@ -1471,7 +1455,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
                     />
                   </svg>
                   <span
-                    class="text-xs"
+                    class="Text-sc-17v1xeu-0 hmAFGJ"
                   >
                     github.com
                   </span>
@@ -1508,7 +1492,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
                     />
                   </svg>
                   <span
-                    class="text-xs"
+                    class="Text-sc-17v1xeu-0 hmAFGJ"
                   >
                     Personal Access Token
                   </span>
@@ -1688,7 +1672,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
       </div>
     </div>
     <div
-      class="rounded-md p-2 mb-4 bg-gitify-accounts"
+      class="Box-sc-g0xbh4-0 rounded-md p-2 mb-4 bg-gitify-accounts"
     >
       <div
         class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
@@ -1701,66 +1685,62 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-          data-align="stretch"
+          data-align="start"
           data-direction="vertical"
-          data-gap="none"
+          data-gap="condensed"
           data-justify="start"
           data-padding="none"
           data-wrap="nowrap"
         >
-          <div
-            class="pb-2"
+          <button
+            aria-describedby=":r45:-loading-announcement"
+            class="types__StyledButton-sc-ws60qy-0 jTCgqj pb-2"
+            data-loading="false"
+            data-no-visuals="true"
+            data-testid="account-profile"
+            sx="[object Object]"
+            title="Open account profile"
+            type="button"
           >
-            <button
-              aria-describedby=":r45:-loading-announcement"
-              class="types__StyledButton-sc-ws60qy-0 jTCgqj"
-              data-loading="false"
-              data-no-visuals="true"
-              data-testid="account-profile"
+            <span
+              class="Box-sc-g0xbh4-0 srpGE"
+              data-component="buttonContent"
               sx="[object Object]"
-              title="Open account profile"
-              type="button"
             >
               <span
-                class="Box-sc-g0xbh4-0 srpGE"
-                data-component="buttonContent"
-                sx="[object Object]"
+                data-component="text"
               >
-                <span
-                  data-component="text"
+                <div
+                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
+                  data-align="center"
+                  data-direction="horizontal"
+                  data-gap="condensed"
+                  data-justify="start"
+                  data-padding="none"
+                  data-testid="avatar"
+                  data-wrap="nowrap"
                 >
-                  <div
-                    class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-                    data-align="center"
-                    data-direction="horizontal"
-                    data-gap="condensed"
-                    data-justify="start"
-                    data-padding="none"
-                    data-testid="avatar"
-                    data-wrap="nowrap"
+                  <img
+                    alt="octocat"
+                    class="Avatar__StyledAvatar-sc-2lv0r8-0 jwAMPP"
+                    data-component="Avatar"
+                    height="20"
+                    size="20"
+                    src="https://avatars.githubusercontent.com/u/583231?v=4"
+                    sx="[object Object]"
+                    width="20"
+                  />
+                  <span
+                    class="Text-sc-17v1xeu-0 hmAFGJ block truncate flex-shrink overflow-ellipsis"
                   >
-                    <img
-                      alt="octocat"
-                      class="Avatar__StyledAvatar-sc-2lv0r8-0 jwAMPP"
-                      data-component="Avatar"
-                      height="20"
-                      size="20"
-                      src="https://avatars.githubusercontent.com/u/583231?v=4"
-                      sx="[object Object]"
-                      width="20"
-                    />
-                    <span
-                      class="Text-sc-17v1xeu-0 hmAFGJ"
-                    >
-                      @octocat
-                    </span>
-                  </div>
-                </span>
+                    @octocat
+                  </span>
+                </div>
               </span>
-            </button>
-          </div>
+            </span>
+          </button>
           <div
-            class="pb-2 pl-4"
+            class="Box-sc-g0xbh4-0 pl-4 pb-2 text-xs"
           >
             <div
               class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
@@ -1798,7 +1778,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
                     />
                   </svg>
                   <span
-                    class="text-xs"
+                    class="Text-sc-17v1xeu-0 hmAFGJ"
                   >
                     Mona Lisa Octocat
                   </span>
@@ -1835,7 +1815,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
                     />
                   </svg>
                   <span
-                    class="text-xs"
+                    class="Text-sc-17v1xeu-0 hmAFGJ"
                   >
                     github.gitify.io
                   </span>
@@ -1872,7 +1852,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
                     />
                   </svg>
                   <span
-                    class="text-xs"
+                    class="Text-sc-17v1xeu-0 hmAFGJ"
                   >
                     OAuth App
                   </span>
@@ -2052,7 +2032,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
       </div>
     </div>
     <div
-      class="rounded-md p-2 mb-4 bg-gitify-accounts"
+      class="Box-sc-g0xbh4-0 rounded-md p-2 mb-4 bg-gitify-accounts"
     >
       <div
         class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
@@ -2065,66 +2045,62 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-          data-align="stretch"
+          data-align="start"
           data-direction="vertical"
-          data-gap="none"
+          data-gap="condensed"
           data-justify="start"
           data-padding="none"
           data-wrap="nowrap"
         >
-          <div
-            class="pb-2"
+          <button
+            aria-describedby=":r4e:-loading-announcement"
+            class="types__StyledButton-sc-ws60qy-0 jTCgqj pb-2"
+            data-loading="false"
+            data-no-visuals="true"
+            data-testid="account-profile"
+            sx="[object Object]"
+            title="Open account profile"
+            type="button"
           >
-            <button
-              aria-describedby=":r4e:-loading-announcement"
-              class="types__StyledButton-sc-ws60qy-0 jTCgqj"
-              data-loading="false"
-              data-no-visuals="true"
-              data-testid="account-profile"
+            <span
+              class="Box-sc-g0xbh4-0 srpGE"
+              data-component="buttonContent"
               sx="[object Object]"
-              title="Open account profile"
-              type="button"
             >
               <span
-                class="Box-sc-g0xbh4-0 srpGE"
-                data-component="buttonContent"
-                sx="[object Object]"
+                data-component="text"
               >
-                <span
-                  data-component="text"
+                <div
+                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
+                  data-align="center"
+                  data-direction="horizontal"
+                  data-gap="condensed"
+                  data-justify="start"
+                  data-padding="none"
+                  data-testid="avatar"
+                  data-wrap="nowrap"
                 >
-                  <div
-                    class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-                    data-align="center"
-                    data-direction="horizontal"
-                    data-gap="condensed"
-                    data-justify="start"
-                    data-padding="none"
-                    data-testid="avatar"
-                    data-wrap="nowrap"
+                  <img
+                    alt="octocat"
+                    class="Avatar__StyledAvatar-sc-2lv0r8-0 jwAMPP"
+                    data-component="Avatar"
+                    height="20"
+                    size="20"
+                    src="https://avatars.githubusercontent.com/u/583231?v=4"
+                    sx="[object Object]"
+                    width="20"
+                  />
+                  <span
+                    class="Text-sc-17v1xeu-0 hmAFGJ block truncate flex-shrink overflow-ellipsis"
                   >
-                    <img
-                      alt="octocat"
-                      class="Avatar__StyledAvatar-sc-2lv0r8-0 jwAMPP"
-                      data-component="Avatar"
-                      height="20"
-                      size="20"
-                      src="https://avatars.githubusercontent.com/u/583231?v=4"
-                      sx="[object Object]"
-                      width="20"
-                    />
-                    <span
-                      class="Text-sc-17v1xeu-0 hmAFGJ"
-                    >
-                      @octocat
-                    </span>
-                  </div>
-                </span>
+                    @octocat
+                  </span>
+                </div>
               </span>
-            </button>
-          </div>
+            </span>
+          </button>
           <div
-            class="pb-2 pl-4"
+            class="Box-sc-g0xbh4-0 pl-4 pb-2 text-xs"
           >
             <div
               class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
@@ -2162,7 +2138,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
                     />
                   </svg>
                   <span
-                    class="text-xs"
+                    class="Text-sc-17v1xeu-0 hmAFGJ"
                   >
                     Mona Lisa Octocat
                   </span>
@@ -2199,7 +2175,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
                     />
                   </svg>
                   <span
-                    class="text-xs"
+                    class="Text-sc-17v1xeu-0 hmAFGJ"
                   >
                     github.com
                   </span>
@@ -2236,7 +2212,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
                     />
                   </svg>
                   <span
-                    class="text-xs"
+                    class="Text-sc-17v1xeu-0 hmAFGJ"
                   >
                     GitHub App
                   </span>
@@ -2563,7 +2539,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
     class="Box-sc-g0xbh4-0 grow overflow-x-auto px-8 pb-2 mb-12 "
   >
     <div
-      class="rounded-md p-2 mb-4 bg-gitify-accounts"
+      class="Box-sc-g0xbh4-0 rounded-md p-2 mb-4 bg-gitify-accounts"
     >
       <div
         class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
@@ -2576,66 +2552,62 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-          data-align="stretch"
+          data-align="start"
           data-direction="vertical"
-          data-gap="none"
+          data-gap="condensed"
           data-justify="start"
           data-padding="none"
           data-wrap="nowrap"
         >
-          <div
-            class="pb-2"
+          <button
+            aria-describedby=":r1:-loading-announcement"
+            class="types__StyledButton-sc-ws60qy-0 jTCgqj pb-2"
+            data-loading="false"
+            data-no-visuals="true"
+            data-testid="account-profile"
+            sx="[object Object]"
+            title="Open account profile"
+            type="button"
           >
-            <button
-              aria-describedby=":r1:-loading-announcement"
-              class="types__StyledButton-sc-ws60qy-0 jTCgqj"
-              data-loading="false"
-              data-no-visuals="true"
-              data-testid="account-profile"
+            <span
+              class="Box-sc-g0xbh4-0 srpGE"
+              data-component="buttonContent"
               sx="[object Object]"
-              title="Open account profile"
-              type="button"
             >
               <span
-                class="Box-sc-g0xbh4-0 srpGE"
-                data-component="buttonContent"
-                sx="[object Object]"
+                data-component="text"
               >
-                <span
-                  data-component="text"
+                <div
+                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
+                  data-align="center"
+                  data-direction="horizontal"
+                  data-gap="condensed"
+                  data-justify="start"
+                  data-padding="none"
+                  data-testid="avatar"
+                  data-wrap="nowrap"
                 >
-                  <div
-                    class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-                    data-align="center"
-                    data-direction="horizontal"
-                    data-gap="condensed"
-                    data-justify="start"
-                    data-padding="none"
-                    data-testid="avatar"
-                    data-wrap="nowrap"
+                  <img
+                    alt="octocat"
+                    class="Avatar__StyledAvatar-sc-2lv0r8-0 jwAMPP"
+                    data-component="Avatar"
+                    height="20"
+                    size="20"
+                    src="https://avatars.githubusercontent.com/u/583231?v=4"
+                    sx="[object Object]"
+                    width="20"
+                  />
+                  <span
+                    class="Text-sc-17v1xeu-0 hmAFGJ block truncate flex-shrink overflow-ellipsis"
                   >
-                    <img
-                      alt="octocat"
-                      class="Avatar__StyledAvatar-sc-2lv0r8-0 jwAMPP"
-                      data-component="Avatar"
-                      height="20"
-                      size="20"
-                      src="https://avatars.githubusercontent.com/u/583231?v=4"
-                      sx="[object Object]"
-                      width="20"
-                    />
-                    <span
-                      class="Text-sc-17v1xeu-0 hmAFGJ"
-                    >
-                      @octocat
-                    </span>
-                  </div>
-                </span>
+                    @octocat
+                  </span>
+                </div>
               </span>
-            </button>
-          </div>
+            </span>
+          </button>
           <div
-            class="pb-2 pl-4"
+            class="Box-sc-g0xbh4-0 pl-4 pb-2 text-xs"
           >
             <div
               class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
@@ -2673,7 +2645,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                     />
                   </svg>
                   <span
-                    class="text-xs"
+                    class="Text-sc-17v1xeu-0 hmAFGJ"
                   >
                     Mona Lisa Octocat
                   </span>
@@ -2710,7 +2682,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                     />
                   </svg>
                   <span
-                    class="text-xs"
+                    class="Text-sc-17v1xeu-0 hmAFGJ"
                   >
                     github.com
                   </span>
@@ -2747,7 +2719,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                     />
                   </svg>
                   <span
-                    class="text-xs"
+                    class="Text-sc-17v1xeu-0 hmAFGJ"
                   >
                     Personal Access Token
                   </span>
@@ -2927,7 +2899,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
       </div>
     </div>
     <div
-      class="rounded-md p-2 mb-4 bg-gitify-accounts"
+      class="Box-sc-g0xbh4-0 rounded-md p-2 mb-4 bg-gitify-accounts"
     >
       <div
         class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
@@ -2940,66 +2912,62 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-          data-align="stretch"
+          data-align="start"
           data-direction="vertical"
-          data-gap="none"
+          data-gap="condensed"
           data-justify="start"
           data-padding="none"
           data-wrap="nowrap"
         >
-          <div
-            class="pb-2"
+          <button
+            aria-describedby=":ra:-loading-announcement"
+            class="types__StyledButton-sc-ws60qy-0 jTCgqj pb-2"
+            data-loading="false"
+            data-no-visuals="true"
+            data-testid="account-profile"
+            sx="[object Object]"
+            title="Open account profile"
+            type="button"
           >
-            <button
-              aria-describedby=":ra:-loading-announcement"
-              class="types__StyledButton-sc-ws60qy-0 jTCgqj"
-              data-loading="false"
-              data-no-visuals="true"
-              data-testid="account-profile"
+            <span
+              class="Box-sc-g0xbh4-0 srpGE"
+              data-component="buttonContent"
               sx="[object Object]"
-              title="Open account profile"
-              type="button"
             >
               <span
-                class="Box-sc-g0xbh4-0 srpGE"
-                data-component="buttonContent"
-                sx="[object Object]"
+                data-component="text"
               >
-                <span
-                  data-component="text"
+                <div
+                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
+                  data-align="center"
+                  data-direction="horizontal"
+                  data-gap="condensed"
+                  data-justify="start"
+                  data-padding="none"
+                  data-testid="avatar"
+                  data-wrap="nowrap"
                 >
-                  <div
-                    class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-                    data-align="center"
-                    data-direction="horizontal"
-                    data-gap="condensed"
-                    data-justify="start"
-                    data-padding="none"
-                    data-testid="avatar"
-                    data-wrap="nowrap"
+                  <img
+                    alt="octocat"
+                    class="Avatar__StyledAvatar-sc-2lv0r8-0 jwAMPP"
+                    data-component="Avatar"
+                    height="20"
+                    size="20"
+                    src="https://avatars.githubusercontent.com/u/583231?v=4"
+                    sx="[object Object]"
+                    width="20"
+                  />
+                  <span
+                    class="Text-sc-17v1xeu-0 hmAFGJ block truncate flex-shrink overflow-ellipsis"
                   >
-                    <img
-                      alt="octocat"
-                      class="Avatar__StyledAvatar-sc-2lv0r8-0 jwAMPP"
-                      data-component="Avatar"
-                      height="20"
-                      size="20"
-                      src="https://avatars.githubusercontent.com/u/583231?v=4"
-                      sx="[object Object]"
-                      width="20"
-                    />
-                    <span
-                      class="Text-sc-17v1xeu-0 hmAFGJ"
-                    >
-                      @octocat
-                    </span>
-                  </div>
-                </span>
+                    @octocat
+                  </span>
+                </div>
               </span>
-            </button>
-          </div>
+            </span>
+          </button>
           <div
-            class="pb-2 pl-4"
+            class="Box-sc-g0xbh4-0 pl-4 pb-2 text-xs"
           >
             <div
               class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
@@ -3037,7 +3005,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                     />
                   </svg>
                   <span
-                    class="text-xs"
+                    class="Text-sc-17v1xeu-0 hmAFGJ"
                   >
                     Mona Lisa Octocat
                   </span>
@@ -3074,7 +3042,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                     />
                   </svg>
                   <span
-                    class="text-xs"
+                    class="Text-sc-17v1xeu-0 hmAFGJ"
                   >
                     github.gitify.io
                   </span>
@@ -3111,7 +3079,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                     />
                   </svg>
                   <span
-                    class="text-xs"
+                    class="Text-sc-17v1xeu-0 hmAFGJ"
                   >
                     OAuth App
                   </span>
@@ -3291,7 +3259,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
       </div>
     </div>
     <div
-      class="rounded-md p-2 mb-4 bg-gitify-accounts"
+      class="Box-sc-g0xbh4-0 rounded-md p-2 mb-4 bg-gitify-accounts"
     >
       <div
         class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
@@ -3304,66 +3272,62 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-          data-align="stretch"
+          data-align="start"
           data-direction="vertical"
-          data-gap="none"
+          data-gap="condensed"
           data-justify="start"
           data-padding="none"
           data-wrap="nowrap"
         >
-          <div
-            class="pb-2"
+          <button
+            aria-describedby=":rj:-loading-announcement"
+            class="types__StyledButton-sc-ws60qy-0 jTCgqj pb-2"
+            data-loading="false"
+            data-no-visuals="true"
+            data-testid="account-profile"
+            sx="[object Object]"
+            title="Open account profile"
+            type="button"
           >
-            <button
-              aria-describedby=":rj:-loading-announcement"
-              class="types__StyledButton-sc-ws60qy-0 jTCgqj"
-              data-loading="false"
-              data-no-visuals="true"
-              data-testid="account-profile"
+            <span
+              class="Box-sc-g0xbh4-0 srpGE"
+              data-component="buttonContent"
               sx="[object Object]"
-              title="Open account profile"
-              type="button"
             >
               <span
-                class="Box-sc-g0xbh4-0 srpGE"
-                data-component="buttonContent"
-                sx="[object Object]"
+                data-component="text"
               >
-                <span
-                  data-component="text"
+                <div
+                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
+                  data-align="center"
+                  data-direction="horizontal"
+                  data-gap="condensed"
+                  data-justify="start"
+                  data-padding="none"
+                  data-testid="avatar"
+                  data-wrap="nowrap"
                 >
-                  <div
-                    class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-                    data-align="center"
-                    data-direction="horizontal"
-                    data-gap="condensed"
-                    data-justify="start"
-                    data-padding="none"
-                    data-testid="avatar"
-                    data-wrap="nowrap"
+                  <img
+                    alt="octocat"
+                    class="Avatar__StyledAvatar-sc-2lv0r8-0 jwAMPP"
+                    data-component="Avatar"
+                    height="20"
+                    size="20"
+                    src="https://avatars.githubusercontent.com/u/583231?v=4"
+                    sx="[object Object]"
+                    width="20"
+                  />
+                  <span
+                    class="Text-sc-17v1xeu-0 hmAFGJ block truncate flex-shrink overflow-ellipsis"
                   >
-                    <img
-                      alt="octocat"
-                      class="Avatar__StyledAvatar-sc-2lv0r8-0 jwAMPP"
-                      data-component="Avatar"
-                      height="20"
-                      size="20"
-                      src="https://avatars.githubusercontent.com/u/583231?v=4"
-                      sx="[object Object]"
-                      width="20"
-                    />
-                    <span
-                      class="Text-sc-17v1xeu-0 hmAFGJ"
-                    >
-                      @octocat
-                    </span>
-                  </div>
-                </span>
+                    @octocat
+                  </span>
+                </div>
               </span>
-            </button>
-          </div>
+            </span>
+          </button>
           <div
-            class="pb-2 pl-4"
+            class="Box-sc-g0xbh4-0 pl-4 pb-2 text-xs"
           >
             <div
               class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
@@ -3401,7 +3365,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                     />
                   </svg>
                   <span
-                    class="text-xs"
+                    class="Text-sc-17v1xeu-0 hmAFGJ"
                   >
                     Mona Lisa Octocat
                   </span>
@@ -3438,7 +3402,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                     />
                   </svg>
                   <span
-                    class="text-xs"
+                    class="Text-sc-17v1xeu-0 hmAFGJ"
                   >
                     github.com
                   </span>
@@ -3475,7 +3439,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                     />
                   </svg>
                   <span
-                    class="text-xs"
+                    class="Text-sc-17v1xeu-0 hmAFGJ"
                   >
                     GitHub App
                   </span>

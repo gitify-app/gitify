@@ -47,7 +47,7 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
       </AppContext.Provider>,
     );
 
-    fireEvent.click(screen.getByText(props.repoName));
+    fireEvent.click(screen.getByTestId('open-repository'));
 
     expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
     expect(openExternalLinkMock).toHaveBeenCalledWith(
@@ -64,7 +64,7 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
       </AppContext.Provider>,
     );
 
-    fireEvent.click(screen.getByLabelText('Mark repository as read'));
+    fireEvent.click(screen.getByTestId('repository-mark-as-read'));
 
     expect(markNotificationsAsRead).toHaveBeenCalledWith(
       mockGitHubNotifications,
@@ -80,7 +80,7 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
       </AppContext.Provider>,
     );
 
-    fireEvent.click(screen.getByLabelText('Mark repository as done'));
+    fireEvent.click(screen.getByTestId('repository-mark-as-done'));
 
     expect(markNotificationsAsDone).toHaveBeenCalledWith(
       mockGitHubNotifications,
@@ -103,7 +103,7 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
       render(<RepositoryNotifications {...props} />);
     });
 
-    fireEvent.click(screen.getByLabelText('Hide repository notifications'));
+    fireEvent.click(screen.getByTestId('repository-toggle'));
 
     const tree = render(<RepositoryNotifications {...props} />);
     expect(tree).toMatchSnapshot();

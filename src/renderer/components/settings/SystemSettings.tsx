@@ -1,6 +1,7 @@
 import { type FC, useContext } from 'react';
 
 import { DeviceDesktopIcon } from '@primer/octicons-react';
+import { Box, Stack, Text } from '@primer/react';
 
 import { APPLICATION } from '../../../shared/constants';
 import { isLinux, isMacOS } from '../../../shared/platform';
@@ -30,20 +31,20 @@ export const SystemSettings: FC = () => {
         }}
       />
       <Checkbox
-        name="keyboardShortcutEnabled"
+        name="keyboardShortcut"
         label="Enable keyboard shortcut"
         checked={settings.keyboardShortcut}
         onChange={(evt) =>
           updateSetting('keyboardShortcut', evt.target.checked)
         }
         tooltip={
-          <div>
+          <Box>
             When enabled you can use the hotkeys{' '}
-            <span className="text-gitify-caution">
+            <Text as="strong" className="text-gitify-caution">
               {Constants.DEFAULT_KEYBOARD_SHORTCUT}
-            </span>{' '}
+            </Text>{' '}
             to show or hide {APPLICATION.NAME}.
-          </div>
+          </Box>
         }
       />
       {isMacOS() && (
@@ -78,21 +79,21 @@ export const SystemSettings: FC = () => {
           updateSetting('useAlternateIdleIcon', evt.target.checked)
         }
         tooltip={
-          <div>
-            <div className="pb-3">
+          <Stack direction="vertical" gap="condensed">
+            <Text>
               Use a white {APPLICATION.NAME} logo (instead of the default black
               logo) when all notifications are read.
-            </div>
-            <div>
+            </Text>
+            <Text>
               This is particularly useful for devices which have a dark-themed
               menubar or taskbar.
-            </div>
-          </div>
+            </Text>
+          </Stack>
         }
       />
       {!isLinux() && (
         <Checkbox
-          name="openAtStartUp"
+          name="openAtStartup"
           label="Open at startup"
           checked={settings.openAtStartup}
           onChange={(evt) => updateSetting('openAtStartup', evt.target.checked)}

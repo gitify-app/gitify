@@ -32,6 +32,7 @@ export const AvatarWithFallback: React.FC<IAvatarWithFallback> = ({
       align="center"
       gap="condensed"
       data-testid="avatar"
+      className="truncate"
     >
       {!src || isBroken ? (
         isNonHuman ? (
@@ -48,7 +49,12 @@ export const AvatarWithFallback: React.FC<IAvatarWithFallback> = ({
           onError={() => setIsBroken(true)}
         />
       )}
-      {name && <Text>{name}</Text>}
+      {name && (
+        // TODO add truncation logic for long names
+        <Text className="block truncate flex-shrink overflow-ellipsis">
+          {name}
+        </Text>
+      )}
     </Stack>
   );
 };

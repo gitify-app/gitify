@@ -15,9 +15,11 @@ import {
 import {
   ActionList,
   ActionMenu,
+  Box,
   Button,
   IconButton,
   Stack,
+  Text,
 } from '@primer/react';
 
 import { logError } from '../../shared/logger';
@@ -90,7 +92,7 @@ export const AccountsRoute: FC = () => {
           const [isRefreshingAccount, setIsRefreshingAccount] = useState(false);
 
           return (
-            <div
+            <Box
               key={getAccountUUID(account)}
               className="rounded-md p-2 mb-4 bg-gitify-accounts"
             >
@@ -100,23 +102,22 @@ export const AccountsRoute: FC = () => {
                 align="center"
                 justify="space-between"
               >
-                <Stack direction="vertical" gap="none">
-                  <div className="pb-2">
-                    <Button
-                      title="Open account profile"
-                      onClick={() => openAccountProfile(account)}
-                      data-testid="account-profile"
-                    >
-                      <AvatarWithFallback
-                        src={account.user.avatar}
-                        alt={account.user.login}
-                        name={`@${account.user.login}`}
-                        size={Size.XLARGE}
-                      />
-                    </Button>
-                  </div>
+                <Stack direction="vertical" align="start" gap="condensed">
+                  <Button
+                    title="Open account profile"
+                    onClick={() => openAccountProfile(account)}
+                    data-testid="account-profile"
+                    className="pb-2"
+                  >
+                    <AvatarWithFallback
+                      src={account.user.avatar}
+                      alt={account.user.login}
+                      name={`@${account.user.login}`}
+                      size={Size.XLARGE}
+                    />
+                  </Button>
 
-                  <div className="pb-2 pl-4">
+                  <Box className="pl-4 pb-2 text-xs">
                     <Stack direction="vertical" gap="condensed">
                       <div hidden={!account.user.name}>
                         <Stack
@@ -125,7 +126,7 @@ export const AccountsRoute: FC = () => {
                           align="center"
                         >
                           <PersonIcon />
-                          <span className="text-xs">{account.user?.name}</span>
+                          <Text>{account.user?.name}</Text>
                         </Stack>
                       </div>
 
@@ -141,7 +142,7 @@ export const AccountsRoute: FC = () => {
                           align="center"
                         >
                           <PlatformIcon />
-                          <span className="text-xs">{account.hostname}</span>
+                          <Text>{account.hostname}</Text>
                         </Stack>
                       </button>
 
@@ -157,11 +158,11 @@ export const AccountsRoute: FC = () => {
                           align="center"
                         >
                           <AuthMethodIcon />
-                          <span className="text-xs">{account.method}</span>
+                          <Text>{account.method}</Text>
                         </Stack>
                       </button>
                     </Stack>
-                  </div>
+                  </Box>
                 </Stack>
 
                 <Stack direction="horizontal" gap="condensed">
@@ -220,7 +221,7 @@ export const AccountsRoute: FC = () => {
                   />
                 </Stack>
               </Stack>
-            </div>
+            </Box>
           );
         })}
       </Contents>

@@ -1,6 +1,7 @@
 import { type FC, type MouseEvent, useContext } from 'react';
 
 import { BellIcon } from '@primer/octicons-react';
+import { Stack, Text } from '@primer/react';
 
 import { APPLICATION } from '../../../shared/constants';
 import { AppContext } from '../../context/App';
@@ -36,16 +37,16 @@ export const NotificationSettings: FC = () => {
           updateSetting('fetchAllNotifications', evt.target.checked)
         }
         tooltip={
-          <div>
-            <div className="pb-3">
-              When <em>checked</em>, Gitify will fetch <strong>all</strong>{' '}
-              notifications from your inbox.
-            </div>
-            <div>
-              When <em>unchecked</em>, Gitify will only fetch the first page of
-              notifications (max 50 records per GitHub account)
-            </div>
-          </div>
+          <Stack direction="vertical" gap="condensed">
+            <Text>
+              When <Text as="em">checked</Text>, Gitify will fetch{' '}
+              <Text as="strong">all</Text> notifications from your inbox.
+            </Text>
+            <Text>
+              When <Text as="em">unchecked</Text>, Gitify will only fetch the
+              first page of notifications (max 50 records per GitHub account)
+            </Text>
+          </Stack>
         }
       />
       <Checkbox
@@ -54,11 +55,11 @@ export const NotificationSettings: FC = () => {
         checked={settings.participating}
         onChange={(evt) => updateSetting('participating', evt.target.checked)}
         tooltip={
-          <div>
-            See
+          <Text>
+            See{' '}
             <button
               type="button"
-              className="mx-1 text-gitify-link"
+              className="text-gitify-link"
               title="Open GitHub documentation for participating and watching notifications"
               onClick={(event: MouseEvent<HTMLElement>) => {
                 // Don't trigger onClick of parent element.
@@ -67,9 +68,9 @@ export const NotificationSettings: FC = () => {
               }}
             >
               official docs
-            </button>
+            </button>{' '}
             for more details.
-          </div>
+          </Text>
         }
       />
       <Checkbox

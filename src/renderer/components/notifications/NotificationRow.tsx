@@ -1,13 +1,7 @@
-import {
-  type FC,
-  type MouseEvent,
-  useCallback,
-  useContext,
-  useState,
-} from 'react';
+import { type FC, useCallback, useContext, useState } from 'react';
 
 import { BellSlashIcon, CheckIcon, ReadIcon } from '@primer/octicons-react';
-import { Box, IconButton, Stack, Text, Tooltip } from '@primer/react';
+import { Box, Stack, Text, Tooltip } from '@primer/react';
 
 import { AppContext } from '../../context/App';
 import { GroupBy, Opacity, Size } from '../../types';
@@ -20,6 +14,7 @@ import {
   getNotificationTypeIconColor,
 } from '../../utils/icons';
 import { openNotification } from '../../utils/links';
+import { HoverButton } from '../primitives/HoverButton';
 import { HoverGroup } from '../primitives/HoverGroup';
 import { NotificationFooter } from './NotificationFooter';
 import { NotificationHeader } from './NotificationHeader';
@@ -62,10 +57,19 @@ export const NotificationRow: FC<INotificationRow> = ({
     settings,
   ]);
 
-  const unsubscribeFromThread = (event: MouseEvent<HTMLElement>) => {
-    // Don't trigger onClick of parent element.
-    event.stopPropagation();
+  const actionMarkAsDone = () => {
+    setAnimateExit(!settings.delayNotificationState);
+    setShowAsRead(settings.delayNotificationState);
+    markNotificationsAsDone([notification]);
+  };
 
+  const actionMarkAsRead = () => {
+    setAnimateExit(!settings.delayNotificationState);
+    setShowAsRead(settings.delayNotificationState);
+    markNotificationsAsRead([notification]);
+  };
+
+  const actionUnsubscribeFromThread = () => {
     unsubscribeNotification(notification);
   };
 
@@ -82,7 +86,7 @@ export const NotificationRow: FC<INotificationRow> = ({
     : '';
 
   const notificationTitle =
-    `${notification.subject.title} ${notificationNumber}`.trim();
+    `${notification.subject.title} ${notificationNumber && `[${notificationNumber}]`}`.trim();
 
   const groupByDate = settings.groupBy === GroupBy.DATE;
 
@@ -111,7 +115,7 @@ export const NotificationRow: FC<INotificationRow> = ({
         <Stack
           direction="vertical"
           gap="none"
-          className="cursor-pointer truncate w-full mr-1"
+          className="cursor-pointer truncate w-full"
           onClick={() => handleNotification()}
         >
           <NotificationHeader notification={notification} />
@@ -122,7 +126,7 @@ export const NotificationRow: FC<INotificationRow> = ({
             justify="space-between"
             gap="condensed"
             title={notificationTitle}
-            className="text-sm mb-1 truncate"
+            className="text-sm mb-0.5 truncate"
             data-testid="notification-row"
           >
             <Text className="block truncate flex-shrink overflow-ellipsis">
@@ -130,7 +134,7 @@ export const NotificationRow: FC<INotificationRow> = ({
             </Text>
             <Text
               className={cn(
-                'text-xxs ml-auto',
+                'text-xxs ml-auto mr-2',
                 Opacity.READ,
                 (groupByDate || !settings.showNumber) && 'hidden',
               )}
@@ -143,42 +147,27 @@ export const NotificationRow: FC<INotificationRow> = ({
         </Stack>
 
         {!animateExit && (
-          <HoverGroup>
-            {isMarkAsDoneFeatureSupported(notification.account) && (
-              <IconButton
-                aria-label="Mark as done"
-                icon={CheckIcon}
-                size="small"
-                variant="invisible"
-                onClick={() => {
-                  setAnimateExit(!settings.delayNotificationState);
-                  setShowAsRead(settings.delayNotificationState);
-                  markNotificationsAsDone([notification]);
-                }}
-                data-testid="notification-mark-as-done"
-              />
-            )}
-
-            <IconButton
-              aria-label="Mark as read"
-              icon={ReadIcon}
-              size="small"
-              variant="invisible"
-              onClick={() => {
-                setAnimateExit(!settings.delayNotificationState);
-                setShowAsRead(settings.delayNotificationState);
-                markNotificationsAsRead([notification]);
-              }}
-              data-testid="notification-mark-as-read"
+          <HoverGroup bgColor="bg-gitify-notification-hover">
+            <HoverButton
+              label="Mark as done"
+              icon={CheckIcon}
+              enabled={isMarkAsDoneFeatureSupported(notification.account)}
+              testid="notification-mark-as-done"
+              action={actionMarkAsDone}
             />
 
-            <IconButton
-              aria-label="Unsubscribe from thread"
+            <HoverButton
+              label="Mark as read"
+              icon={ReadIcon}
+              testid="notification-mark-as-read"
+              action={actionMarkAsRead}
+            />
+
+            <HoverButton
+              label="Unsubscribe from thread"
               icon={BellSlashIcon}
-              size="small"
-              variant="invisible"
-              onClick={unsubscribeFromThread}
-              data-testid="notification-unsubscribe-from-thread"
+              testid="notification-unsubscribe-from-thread"
+              action={actionUnsubscribeFromThread}
             />
           </HoverGroup>
         )}

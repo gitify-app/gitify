@@ -6,7 +6,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx renders the fallback
   "baseElement": <body>
     <div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
         data-align="center"
         data-direction="horizontal"
         data-gap="condensed"
@@ -32,7 +32,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx renders the fallback
           />
         </svg>
         <span
-          class="Text-sc-17v1xeu-0 hmAFGJ"
+          class="Text-sc-17v1xeu-0 hmAFGJ block truncate flex-shrink overflow-ellipsis"
         >
           @gitify-app
         </span>
@@ -41,7 +41,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx renders the fallback
   </body>,
   "container": <div>
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+      class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
       data-align="center"
       data-direction="horizontal"
       data-gap="condensed"
@@ -67,7 +67,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx renders the fallback
         />
       </svg>
       <span
-        class="Text-sc-17v1xeu-0 hmAFGJ"
+        class="Text-sc-17v1xeu-0 hmAFGJ block truncate flex-shrink overflow-ellipsis"
       >
         @gitify-app
       </span>
@@ -133,7 +133,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx renders the fallback
   "baseElement": <body>
     <div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
         data-align="center"
         data-direction="horizontal"
         data-gap="condensed"
@@ -159,7 +159,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx renders the fallback
           />
         </svg>
         <span
-          class="Text-sc-17v1xeu-0 hmAFGJ"
+          class="Text-sc-17v1xeu-0 hmAFGJ block truncate flex-shrink overflow-ellipsis"
         >
           @gitify-app
         </span>
@@ -168,7 +168,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx renders the fallback
   </body>,
   "container": <div>
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+      class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
       data-align="center"
       data-direction="horizontal"
       data-gap="condensed"
@@ -194,7 +194,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx renders the fallback
         />
       </svg>
       <span
-        class="Text-sc-17v1xeu-0 hmAFGJ"
+        class="Text-sc-17v1xeu-0 hmAFGJ block truncate flex-shrink overflow-ellipsis"
       >
         @gitify-app
       </span>
@@ -256,7 +256,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx renders the fallback
 
 exports[`renderer/components/avatars/AvatarWithFallback.tsx renders the fallback icon when the image fails to load (isBroken = true) - human user 1`] = `
 <div
-  class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+  class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
   data-align="center"
   data-direction="horizontal"
   data-gap="condensed"
@@ -276,7 +276,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx renders the fallback
     width="16"
   />
   <span
-    class="Text-sc-17v1xeu-0 hmAFGJ"
+    class="Text-sc-17v1xeu-0 hmAFGJ block truncate flex-shrink overflow-ellipsis"
   >
     @gitify-app
   </span>
@@ -285,7 +285,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx renders the fallback
 
 exports[`renderer/components/avatars/AvatarWithFallback.tsx renders the fallback icon when the image fails to load (isBroken = true) - non human user 1`] = `
 <div
-  class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+  class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
   data-align="center"
   data-direction="horizontal"
   data-gap="condensed"
@@ -305,7 +305,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx renders the fallback
     width="16"
   />
   <span
-    class="Text-sc-17v1xeu-0 hmAFGJ"
+    class="Text-sc-17v1xeu-0 hmAFGJ block truncate flex-shrink overflow-ellipsis"
   >
     @gitify-app
   </span>
@@ -318,7 +318,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx should render avatar
   "baseElement": <body>
     <div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
         data-align="center"
         data-direction="horizontal"
         data-gap="condensed"
@@ -338,7 +338,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx should render avatar
           width="16"
         />
         <span
-          class="Text-sc-17v1xeu-0 hmAFGJ"
+          class="Text-sc-17v1xeu-0 hmAFGJ block truncate flex-shrink overflow-ellipsis"
         >
           @gitify-app
         </span>
@@ -347,7 +347,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx should render avatar
   </body>,
   "container": <div>
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+      class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
       data-align="center"
       data-direction="horizontal"
       data-gap="condensed"
@@ -367,7 +367,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx should render avatar
         width="16"
       />
       <span
-        class="Text-sc-17v1xeu-0 hmAFGJ"
+        class="Text-sc-17v1xeu-0 hmAFGJ block truncate flex-shrink overflow-ellipsis"
       >
         @gitify-app
       </span>
@@ -433,7 +433,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx should render avatar
   "baseElement": <body>
     <div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
         data-align="center"
         data-direction="horizontal"
         data-gap="condensed"
@@ -453,7 +453,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx should render avatar
           width="16"
         />
         <span
-          class="Text-sc-17v1xeu-0 hmAFGJ"
+          class="Text-sc-17v1xeu-0 hmAFGJ block truncate flex-shrink overflow-ellipsis"
         >
           @gitify-app
         </span>
@@ -462,7 +462,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx should render avatar
   </body>,
   "container": <div>
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+      class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
       data-align="center"
       data-direction="horizontal"
       data-gap="condensed"
@@ -482,7 +482,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx should render avatar
         width="16"
       />
       <span
-        class="Text-sc-17v1xeu-0 hmAFGJ"
+        class="Text-sc-17v1xeu-0 hmAFGJ block truncate flex-shrink overflow-ellipsis"
       >
         @gitify-app
       </span>

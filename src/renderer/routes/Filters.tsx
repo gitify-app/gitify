@@ -6,7 +6,7 @@ import {
   FilterRemoveIcon,
   NoteIcon,
 } from '@primer/octicons-react';
-import { Button, Tooltip } from '@primer/react';
+import { Button, Text, Tooltip } from '@primer/react';
 
 import { Checkbox } from '../components/fields/Checkbox';
 import { Contents } from '../components/layout/Contents';
@@ -72,9 +72,9 @@ export const FiltersRoute: FC = () => {
 
         <fieldset className="mb-3">
           <Title icon={NoteIcon}>Reason</Title>
-          <span className="text-xs italic">
+          <Text as="i" className="text-xs">
             Note: If no reasons are selected, all notifications will be shown.
-          </span>
+          </Text>
           {Object.keys(FORMATTED_REASONS).map((reason: Reason) => {
             return (
               <Checkbox
