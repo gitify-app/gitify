@@ -1,13 +1,17 @@
 import {
   type Account,
+  type AppearanceSettingsState,
   type AuthState,
+  type FilterSettingsState,
   type GitifyState,
   type GitifyUser,
   GroupBy,
   type Hostname,
   type Link,
+  type NotificationSettingsState,
   OpenPreference,
   type SettingsState,
+  type SystemSettingsState,
   Theme,
   type Token,
 } from '../types';
@@ -80,16 +84,17 @@ export const mockAuth: AuthState = {
 
 export const mockToken = 'token-123-456' as Token;
 
-const mockAppearanceSettings = {
+const mockAppearanceSettings: AppearanceSettingsState = {
   theme: Theme.SYSTEM,
   zoomPercentage: 100,
   detailedNotifications: true,
   showPills: true,
   showNumber: true,
   showAccountHeader: false,
+  wrapNotificationTitle: false,
 };
 
-const mockNotificationSettings = {
+const mockNotificationSettings: NotificationSettingsState = {
   groupBy: GroupBy.REPOSITORY,
   fetchAllNotifications: true,
   participating: false,
@@ -98,7 +103,7 @@ const mockNotificationSettings = {
   delayNotificationState: false,
 };
 
-const mockSystemSettings = {
+const mockSystemSettings: SystemSettingsState = {
   openLinks: OpenPreference.FOREGROUND,
   keyboardShortcut: true,
   showNotificationsCountInTray: true,
@@ -108,7 +113,7 @@ const mockSystemSettings = {
   openAtStartup: false,
 };
 
-const mockFilters = {
+const mockFilters: FilterSettingsState = {
   hideBots: false,
   filterReasons: [],
 };
