@@ -37,11 +37,14 @@ const mb = menubar({
 const menuBuilder = new MenuBuilder(mb);
 const contextMenu = menuBuilder.buildMenu();
 
-/**
- * Electron Auto Updater only supports macOS and Windows
- * https://github.com/electron/update-electron-app
- */
+// Register your app as the handler for a custom protocol
+app.setAsDefaultProtocolClient('gitify');
+
 if (isMacOS() || isWindows()) {
+  /**
+   * Electron Auto Updater only supports macOS and Windows
+   * https://github.com/electron/update-electron-app
+   */
   const updater = new Updater(mb, menuBuilder);
   updater.initialize();
 }
@@ -185,4 +188,16 @@ app.whenReady().then(async () => {
   ipc.on(namespacedEvent('update-auto-launch'), (_, settings) => {
     app.setLoginItemSettings(settings);
   });
+});
+
+app.on('open-url', (event, url) => {
+  event.preventDefault();
+  const code = new URL(url).searchParams.get('code'); // Extract the authorization code
+  console.log('Authorization Code:', code);
+
+  if (code) {
+    // Exchange the code for an access token
+    mb.window.webContents.send(namespacedEvent('auth-code'), code);
+    // exchangeCodeForToken(code);
+  }
 });

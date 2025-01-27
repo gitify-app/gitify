@@ -17,79 +17,85 @@ import type {
 import type { UserDetails } from '../../typesGitHub';
 import { getAuthenticatedUser } from '../api/client';
 import { apiRequest } from '../api/request';
+import { openExternalLink } from '../comms';
 import { Constants } from '../constants';
 import { getPlatformFromHostname } from '../helpers';
 import type { AuthMethod, AuthResponse, AuthTokenResponse } from './types';
 
 // TODO - Refactor our OAuth2 flow to use system browser and local app gitify://callback - see #485 #561 #654
-export function authGitHub(
-  authOptions = Constants.DEFAULT_AUTH_OPTIONS,
-): Promise<AuthResponse> {
-  return new Promise((resolve, reject) => {
-    // Build the OAuth consent page URL
-    const authWindow = new BrowserWindow({
-      width: 548,
-      height: 736,
-      show: true,
-    });
+export function authGitHub(authOptions = Constants.DEFAULT_AUTH_OPTIONS) {
+  const authUrl = new URL(`https://${authOptions.hostname}`);
+  authUrl.pathname = '/login/oauth/authorize';
+  authUrl.searchParams.append('client_id', authOptions.clientId);
+  authUrl.searchParams.append('scope', Constants.AUTH_SCOPE.toString());
 
-    const authUrl = new URL(`https://${authOptions.hostname}`);
-    authUrl.pathname = '/login/oauth/authorize';
-    authUrl.searchParams.append('client_id', authOptions.clientId);
-    authUrl.searchParams.append('scope', Constants.AUTH_SCOPE.toString());
+  openExternalLink(authUrl.toString() as Link);
 
-    const session = authWindow.webContents.session;
-    session.clearStorageData();
+  // return new Promise((resolve, reject) => {
+  //   // Build the OAuth consent page URL
+  //   const authWindow = new BrowserWindow({
+  //     width: 548,
+  //     height: 736,
+  //     show: true,
+  //   });
 
-    authWindow.loadURL(authUrl.toString());
+  //   const authUrl = new URL(`https://${authOptions.hostname}`);
+  //   authUrl.pathname = '/login/oauth/authorize';
+  //   authUrl.searchParams.append('client_id', authOptions.clientId);
+  //   authUrl.searchParams.append('scope', Constants.AUTH_SCOPE.toString());
 
-    const handleCallback = (url: Link) => {
-      const raw_code = /code=([^&]*)/.exec(url) || null;
-      const authCode =
-        raw_code && raw_code.length > 1 ? (raw_code[1] as AuthCode) : null;
-      const error = /\?error=(.+)$/.exec(url);
-      if (authCode || error) {
-        // Close the browser if code found or error
-        authWindow.destroy();
-      }
-      // If there is a code, proceed to get token from github
-      if (authCode) {
-        resolve({ authCode, authOptions });
-      } else if (error) {
-        reject(
-          "Oops! Something went wrong and we couldn't " +
-            'log you in using GitHub. Please try again.',
-        );
-      }
-    };
+  //   const session = authWindow.webContents.session;
+  //   session.clearStorageData();
 
-    // If "Done" button is pressed, hide "Loading"
-    authWindow.on('close', () => {
-      authWindow.destroy();
-    });
+  //   authWindow.loadURL(authUrl.toString());
 
-    authWindow.webContents.on(
-      'did-fail-load',
-      (_event, _errorCode, _errorDescription, validatedURL) => {
-        if (validatedURL.includes(authOptions.hostname)) {
-          authWindow.destroy();
-          reject(
-            `Invalid Hostname. Could not load https://${authOptions.hostname}/.`,
-          );
-        }
-      },
-    );
+  //   const handleCallback = (url: Link) => {
+  //     const raw_code = /code=([^&]*)/.exec(url) || null;
+  //     const authCode =
+  //       raw_code && raw_code.length > 1 ? (raw_code[1] as AuthCode) : null;
+  //     const error = /\?error=(.+)$/.exec(url);
+  //     if (authCode || error) {
+  //       // Close the browser if code found or error
+  //       authWindow.destroy();
+  //     }
+  //     // If there is a code, proceed to get token from github
+  //     if (authCode) {
+  //       resolve({ authCode, authOptions });
+  //     } else if (error) {
+  //       reject(
+  //         "Oops! Something went wrong and we couldn't " +
+  //           'log you in using GitHub. Please try again.',
+  //       );
+  //     }
+  //   };
 
-    authWindow.webContents.on('will-redirect', (event, url) => {
-      event.preventDefault();
-      handleCallback(url as Link);
-    });
+  //   // If "Done" button is pressed, hide "Loading"
+  //   authWindow.on('close', () => {
+  //     authWindow.destroy();
+  //   });
 
-    authWindow.webContents.on('will-navigate', (event, url) => {
-      event.preventDefault();
-      handleCallback(url as Link);
-    });
-  });
+  //   authWindow.webContents.on(
+  //     'did-fail-load',
+  //     (_event, _errorCode, _errorDescription, validatedURL) => {
+  //       if (validatedURL.includes(authOptions.hostname)) {
+  //         authWindow.destroy();
+  //         reject(
+  //           `Invalid Hostname. Could not load https://${authOptions.hostname}/.`,
+  //         );
+  //       }
+  //     },
+  //   );
+
+  //   authWindow.webContents.on('will-redirect', (event, url) => {
+  //     event.preventDefault();
+  //     handleCallback(url as Link);
+  //   });
+
+  //   authWindow.webContents.on('will-navigate', (event, url) => {
+  //     event.preventDefault();
+  //     handleCallback(url as Link);
+  //   });
+  // });
 }
 
 export async function getUserData(

@@ -22,20 +22,23 @@ import {
   Text,
 } from '@primer/react';
 
-import { logError } from '../../shared/logger';
 import { AvatarWithFallback } from '../components/avatars/AvatarWithFallback';
 import { Contents } from '../components/layout/Contents';
 import { Page } from '../components/layout/Page';
 import { Footer } from '../components/primitives/Footer';
 import { Header } from '../components/primitives/Header';
 import { AppContext } from '../context/App';
-import { type Account, Size } from '../types';
+import { type Account, type Link, Size } from '../types';
 import {
   formatRequiredScopes,
   getAccountUUID,
   refreshAccount,
 } from '../utils/auth/utils';
-import { updateTrayIcon, updateTrayTitle } from '../utils/comms';
+import {
+  openExternalLink,
+  updateTrayIcon,
+  updateTrayTitle,
+} from '../utils/comms';
 import { getAuthMethodIcon, getPlatformIcon } from '../utils/icons';
 import {
   openAccountProfile,
@@ -45,8 +48,7 @@ import {
 import { saveState } from '../utils/storage';
 
 export const AccountsRoute: FC = () => {
-  const { auth, settings, loginWithGitHubApp, logoutFromAccount } =
-    useContext(AppContext);
+  const { auth, settings, logoutFromAccount } = useContext(AppContext);
   const navigate = useNavigate();
 
   const logoutAccount = useCallback(
@@ -63,14 +65,6 @@ export const AccountsRoute: FC = () => {
     auth.accounts = [account, ...auth.accounts.filter((a) => a !== account)];
     saveState({ auth, settings });
     navigate('/accounts', { replace: true });
-  }, []);
-
-  const loginWithGitHub = useCallback(async () => {
-    try {
-      await loginWithGitHubApp();
-    } catch (err) {
-      logError('loginWithGitHub', 'failed to login with GitHub', err);
-    }
   }, []);
 
   const loginWithPersonalAccessToken = useCallback(() => {
@@ -237,7 +231,7 @@ export const AccountsRoute: FC = () => {
           <ActionMenu.Overlay width="medium">
             <ActionList>
               <ActionList.Item
-                onSelect={() => loginWithGitHub()}
+                onSelect={() => openExternalLink('https://github.com' as Link)}
                 data-testid="account-add-github"
               >
                 <ActionList.LeadingVisual>
