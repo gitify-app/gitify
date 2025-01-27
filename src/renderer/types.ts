@@ -66,16 +66,17 @@ export type SettingsState = AppearanceSettingsState &
   SystemSettingsState &
   FilterSettingsState;
 
-interface AppearanceSettingsState {
+export interface AppearanceSettingsState {
   theme: Theme;
   zoomPercentage: number;
   detailedNotifications: boolean;
   showAccountHeader: boolean;
   showPills: boolean;
   showNumber: boolean;
+  wrapNotificationTitle: boolean;
 }
 
-interface NotificationSettingsState {
+export interface NotificationSettingsState {
   groupBy: GroupBy;
   fetchAllNotifications: boolean;
   participating: boolean;
@@ -84,7 +85,7 @@ interface NotificationSettingsState {
   delayNotificationState: boolean;
 }
 
-interface SystemSettingsState {
+export interface SystemSettingsState {
   openLinks: OpenPreference;
   keyboardShortcut: boolean;
   showNotificationsCountInTray: boolean;
@@ -94,7 +95,7 @@ interface SystemSettingsState {
   openAtStartup: boolean;
 }
 
-interface FilterSettingsState {
+export interface FilterSettingsState {
   hideBots: boolean;
   filterReasons: Reason[];
 }

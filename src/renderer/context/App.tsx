@@ -16,14 +16,18 @@ import { useNotifications } from '../hooks/useNotifications';
 import {
   type Account,
   type AccountNotifications,
+  type AppearanceSettingsState,
   type AuthCode,
   type AuthState,
+  type FilterSettingsState,
   type GitifyError,
   GroupBy,
+  type NotificationSettingsState,
   OpenPreference,
   type SettingsState,
   type SettingsValue,
   type Status,
+  type SystemSettingsState,
   Theme,
 } from '../types';
 import type { Notification } from '../typesGitHub';
@@ -66,16 +70,17 @@ export const defaultAuth: AuthState = {
   user: null,
 };
 
-const defaultAppearanceSettings = {
+const defaultAppearanceSettings: AppearanceSettingsState = {
   theme: Theme.SYSTEM,
   zoomPercentage: 100,
   detailedNotifications: true,
   showPills: true,
   showNumber: true,
   showAccountHeader: false,
+  wrapNotificationTitle: false,
 };
 
-const defaultNotificationSettings = {
+const defaultNotificationSettings: NotificationSettingsState = {
   groupBy: GroupBy.REPOSITORY,
   fetchAllNotifications: true,
   participating: false,
@@ -84,7 +89,7 @@ const defaultNotificationSettings = {
   delayNotificationState: false,
 };
 
-const defaultSystemSettings = {
+const defaultSystemSettings: SystemSettingsState = {
   openLinks: OpenPreference.FOREGROUND,
   keyboardShortcut: true,
   showNotificationsCountInTray: true,
@@ -94,7 +99,7 @@ const defaultSystemSettings = {
   openAtStartup: false,
 };
 
-export const defaultFilters = {
+export const defaultFilters: FilterSettingsState = {
   hideBots: false,
   filterReasons: [],
 };

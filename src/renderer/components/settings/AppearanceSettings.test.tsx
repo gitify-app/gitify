@@ -216,4 +216,29 @@ describe('renderer/routes/components/settings/AppearanceSettings.tsx', () => {
     expect(updateSetting).toHaveBeenCalledTimes(1);
     expect(updateSetting).toHaveBeenCalledWith('showAccountHeader', true);
   });
+
+  it('should toggle wrap notification title checkbox', async () => {
+    await act(async () => {
+      render(
+        <AppContext.Provider
+          value={{
+            auth: {
+              accounts: [mockGitHubAppAccount],
+            },
+            settings: mockSettings,
+            updateSetting,
+          }}
+        >
+          <MemoryRouter>
+            <AppearanceSettings />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
+    });
+
+    fireEvent.click(screen.getByTestId('checkbox-wrapNotificationTitle'));
+
+    expect(updateSetting).toHaveBeenCalledTimes(1);
+    expect(updateSetting).toHaveBeenCalledWith('wrapNotificationTitle', true);
+  });
 });

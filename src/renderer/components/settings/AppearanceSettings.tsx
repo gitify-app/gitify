@@ -290,6 +290,20 @@ export const AppearanceSettings: FC = () => {
             updateSetting('showAccountHeader', evt.target.checked)
           }
         />
+
+        <Checkbox
+          name="wrapNotificationTitle"
+          label="Show full notification title"
+          checked={settings.wrapNotificationTitle}
+          onChange={(evt) =>
+            updateSetting('wrapNotificationTitle', evt.target.checked)
+          }
+          tooltip={
+            <Text>
+              Wrap long notification titles instead of truncating them.
+            </Text>
+          }
+        />
       </Stack>
     </fieldset>
   );

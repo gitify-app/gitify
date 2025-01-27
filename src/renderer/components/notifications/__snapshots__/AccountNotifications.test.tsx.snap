@@ -833,7 +833,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             </svg>
           </span>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 duhwY cursor-pointer truncate w-full"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY cursor-pointer text-sm w-full truncate"
             data-align="stretch"
             data-direction="vertical"
             data-gap="none"
@@ -891,7 +891,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               </div>
             </div>
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm mb-0.5 truncate"
+              class="Stack__StyledStack-sc-x3xa2i-0 duhwY mb-0.5 truncate"
               data-align="start"
               data-direction="horizontal"
               data-gap="condensed"
@@ -902,7 +902,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               title="I am a robot and this is a test!"
             >
               <span
-                class="Text-sc-17v1xeu-0 hmAFGJ block truncate flex-shrink overflow-ellipsis"
+                class="Text-sc-17v1xeu-0 hmAFGJ truncate"
               >
                 I am a robot and this is a test!
               </span>
@@ -1214,7 +1214,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             </svg>
           </span>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 duhwY cursor-pointer truncate w-full"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY cursor-pointer text-sm w-full truncate"
             data-align="stretch"
             data-direction="vertical"
             data-gap="none"
@@ -1272,7 +1272,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               </div>
             </div>
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm mb-0.5 truncate"
+              class="Stack__StyledStack-sc-x3xa2i-0 duhwY mb-0.5 truncate"
               data-align="start"
               data-direction="horizontal"
               data-gap="condensed"
@@ -1283,7 +1283,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               title="Improve the UI"
             >
               <span
-                class="Text-sc-17v1xeu-0 hmAFGJ block truncate flex-shrink overflow-ellipsis"
+                class="Text-sc-17v1xeu-0 hmAFGJ truncate"
               >
                 Improve the UI
               </span>
@@ -1732,7 +1732,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           </svg>
         </span>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY cursor-pointer truncate w-full"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY cursor-pointer text-sm w-full truncate"
           data-align="stretch"
           data-direction="vertical"
           data-gap="none"
@@ -1790,7 +1790,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             </div>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm mb-0.5 truncate"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY mb-0.5 truncate"
             data-align="start"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1801,7 +1801,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             title="I am a robot and this is a test!"
           >
             <span
-              class="Text-sc-17v1xeu-0 hmAFGJ block truncate flex-shrink overflow-ellipsis"
+              class="Text-sc-17v1xeu-0 hmAFGJ truncate"
             >
               I am a robot and this is a test!
             </span>
@@ -2113,7 +2113,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           </svg>
         </span>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY cursor-pointer truncate w-full"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY cursor-pointer text-sm w-full truncate"
           data-align="stretch"
           data-direction="vertical"
           data-gap="none"
@@ -2171,7 +2171,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             </div>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm mb-0.5 truncate"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY mb-0.5 truncate"
             data-align="start"
             data-direction="horizontal"
             data-gap="condensed"
@@ -2182,7 +2182,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             title="Improve the UI"
           >
             <span
-              class="Text-sc-17v1xeu-0 hmAFGJ block truncate flex-shrink overflow-ellipsis"
+              class="Text-sc-17v1xeu-0 hmAFGJ truncate"
             >
               Improve the UI
             </span>
