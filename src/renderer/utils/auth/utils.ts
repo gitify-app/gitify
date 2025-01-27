@@ -207,11 +207,11 @@ export function getNewOAuthAppURL(hostname: Hostname): Link {
   );
   newOAuthAppURL.searchParams.append(
     'oauth_application[url]',
-    'https://www.gitify.io',
+    'https://gitify.io',
   );
   newOAuthAppURL.searchParams.append(
     'oauth_application[callback_url]',
-    'https://www.gitify.io/callback',
+    'gitify://oauth',
   );
 
   return newOAuthAppURL.toString() as Link;
