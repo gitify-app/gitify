@@ -191,7 +191,7 @@ app.whenReady().then(async () => {
   });
 });
 
-// Handle custom protocol URL events for OAuth 2.0 callback
+// Handle gitify:// custom protocol URL events for OAuth 2.0 callback
 app.on('open-url', (event, url) => {
   event.preventDefault();
 
