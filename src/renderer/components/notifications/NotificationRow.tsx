@@ -115,7 +115,10 @@ export const NotificationRow: FC<INotificationRow> = ({
         <Stack
           direction="vertical"
           gap="none"
-          className="cursor-pointer truncate w-full"
+          className={cn(
+            'cursor-pointer text-sm w-full',
+            !settings.wrapNotificationTitle && 'truncate',
+          )}
           onClick={() => handleNotification()}
         >
           <NotificationHeader notification={notification} />
@@ -126,10 +129,13 @@ export const NotificationRow: FC<INotificationRow> = ({
             justify="space-between"
             gap="condensed"
             title={notificationTitle}
-            className="text-sm mb-0.5 truncate"
+            className={cn(
+              'mb-0.5',
+              !settings.wrapNotificationTitle && 'truncate',
+            )}
             data-testid="notification-row"
           >
-            <Text className="block truncate flex-shrink overflow-ellipsis">
+            <Text className={!settings.wrapNotificationTitle && 'truncate'}>
               {notification.subject.title}
             </Text>
             <Text
