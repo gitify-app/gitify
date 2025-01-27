@@ -31,6 +31,7 @@ export const NotificationSettings: FC = () => {
             updateSetting('groupBy', evt.target.value as GroupBy);
           }}
         />
+
         <Checkbox
           name="fetchAllNotifications"
           label="Fetch all notifications"
@@ -51,6 +52,7 @@ export const NotificationSettings: FC = () => {
             </Stack>
           }
         />
+
         <Checkbox
           name="showOnlyParticipating"
           label="Show only participating"
@@ -75,6 +77,7 @@ export const NotificationSettings: FC = () => {
             </Text>
           }
         />
+
         <Checkbox
           name="markAsDoneOnOpen"
           label="Mark as done on open"
@@ -89,6 +92,7 @@ export const NotificationSettings: FC = () => {
             </Text>
           }
         />
+
         <Checkbox
           name="markAsDoneOnUnsubscribe"
           label="Mark as done on unsubscribe"
@@ -103,6 +107,7 @@ export const NotificationSettings: FC = () => {
             </Text>
           }
         />
+
         <Checkbox
           name="delayNotificationState"
           label="Delay notification state"
