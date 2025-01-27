@@ -190,14 +190,16 @@ app.whenReady().then(async () => {
   });
 });
 
+// Handle custom protocol URL events for OAuth 2.0 callback
 app.on('open-url', (event, url) => {
   event.preventDefault();
-  const code = new URL(url).searchParams.get('code'); // Extract the authorization code
-  console.log('Authorization Code:', code);
 
-  if (code) {
-    // Exchange the code for an access token
-    mb.window.webContents.send(namespacedEvent('auth-code'), code);
-    // exchangeCodeForToken(code);
+  const link = new URL(url);
+
+  const type = link.hostname;
+  const code = link.searchParams.get('code');
+
+  if (code && (type === 'auth' || type === 'oauth')) {
+    mb.window.webContents.send(namespacedEvent('auth-code'), type, code);
   }
 });

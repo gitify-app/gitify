@@ -17,7 +17,6 @@ import {
   type Account,
   type AccountNotifications,
   type AppearanceSettingsState,
-  type AuthCode,
   type AuthState,
   type FilterSettingsState,
   type GitifyError,
@@ -114,7 +113,7 @@ export const defaultSettings: SettingsState = {
 interface AppContextState {
   auth: AuthState;
   isLoggedIn: boolean;
-  loginWithGitHubApp: (authCode: AuthCode) => void;
+  loginWithGitHubApp: () => void;
   loginWithOAuthApp: (data: LoginOAuthAppOptions) => void;
   loginWithPersonalAccessToken: (data: LoginPersonalAccessTokenOptions) => void;
   logoutFromAccount: (account: Account) => void;
@@ -237,17 +236,14 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     return hasAccounts(auth);
   }, [auth]);
 
-  const loginWithGitHubApp = useCallback(
-    async (authCode: AuthCode) => {
-      // const { authCode } = await authGitHub();
-      const { token } = await getToken(authCode);
-      const hostname = Constants.DEFAULT_AUTH_OPTIONS.hostname;
-      const updatedAuth = await addAccount(auth, 'GitHub App', token, hostname);
-      setAuth(updatedAuth);
-      saveState({ auth: updatedAuth, settings });
-    },
-    [auth, settings],
-  );
+  const loginWithGitHubApp = useCallback(async () => {
+    const { authCode } = await authGitHub();
+    const { token } = await getToken(authCode);
+    const hostname = Constants.DEFAULT_AUTH_OPTIONS.hostname;
+    const updatedAuth = await addAccount(auth, 'GitHub App', token, hostname);
+    setAuth(updatedAuth);
+    saveState({ auth: updatedAuth, settings });
+  }, [auth, settings]);
 
   const loginWithOAuthApp = useCallback(
     async (data: LoginOAuthAppOptions) => {

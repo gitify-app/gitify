@@ -1,8 +1,9 @@
-import { BrowserWindow } from '@electron/remote';
 import { format } from 'date-fns';
 import semver from 'semver';
 
+import { ipcRenderer } from 'electron';
 import { APPLICATION } from '../../../shared/constants';
+import { namespacedEvent } from '../../../shared/events';
 import { logError, logWarn } from '../../../shared/logger';
 import type {
   Account,
@@ -22,80 +23,31 @@ import { Constants } from '../constants';
 import { getPlatformFromHostname } from '../helpers';
 import type { AuthMethod, AuthResponse, AuthTokenResponse } from './types';
 
-// TODO - Refactor our OAuth2 flow to use system browser and local app gitify://callback - see #485 #561 #654
-export function authGitHub(authOptions = Constants.DEFAULT_AUTH_OPTIONS) {
-  const authUrl = new URL(`https://${authOptions.hostname}`);
-  authUrl.pathname = '/login/oauth/authorize';
-  authUrl.searchParams.append('client_id', authOptions.clientId);
-  authUrl.searchParams.append('scope', Constants.AUTH_SCOPE.toString());
+export function authGitHub(
+  authOptions = Constants.DEFAULT_AUTH_OPTIONS,
+): Promise<AuthResponse> {
+  return new Promise((resolve) => {
+    //   // Build the OAuth consent page URL
+    const authUrl = new URL(`https://${authOptions.hostname}`);
+    authUrl.pathname = '/login/oauth/authorize';
+    authUrl.searchParams.append('client_id', authOptions.clientId);
+    authUrl.searchParams.append('scope', Constants.AUTH_SCOPE.toString());
 
-  openExternalLink(authUrl.toString() as Link);
+    openExternalLink(authUrl.toString() as Link);
 
-  // return new Promise((resolve, reject) => {
-  //   // Build the OAuth consent page URL
-  //   const authWindow = new BrowserWindow({
-  //     width: 548,
-  //     height: 736,
-  //     show: true,
-  //   });
+    ipcRenderer.on(
+      namespacedEvent('auth-code'),
+      (_, authType: 'auth' | 'oauth', authCode: AuthCode) => {
+        const type: AuthMethod =
+          authType === 'auth' ? 'GitHub App' : 'OAuth App';
+        handleCallback(type, authCode);
+      },
+    );
 
-  //   const authUrl = new URL(`https://${authOptions.hostname}`);
-  //   authUrl.pathname = '/login/oauth/authorize';
-  //   authUrl.searchParams.append('client_id', authOptions.clientId);
-  //   authUrl.searchParams.append('scope', Constants.AUTH_SCOPE.toString());
-
-  //   const session = authWindow.webContents.session;
-  //   session.clearStorageData();
-
-  //   authWindow.loadURL(authUrl.toString());
-
-  //   const handleCallback = (url: Link) => {
-  //     const raw_code = /code=([^&]*)/.exec(url) || null;
-  //     const authCode =
-  //       raw_code && raw_code.length > 1 ? (raw_code[1] as AuthCode) : null;
-  //     const error = /\?error=(.+)$/.exec(url);
-  //     if (authCode || error) {
-  //       // Close the browser if code found or error
-  //       authWindow.destroy();
-  //     }
-  //     // If there is a code, proceed to get token from github
-  //     if (authCode) {
-  //       resolve({ authCode, authOptions });
-  //     } else if (error) {
-  //       reject(
-  //         "Oops! Something went wrong and we couldn't " +
-  //           'log you in using GitHub. Please try again.',
-  //       );
-  //     }
-  //   };
-
-  //   // If "Done" button is pressed, hide "Loading"
-  //   authWindow.on('close', () => {
-  //     authWindow.destroy();
-  //   });
-
-  //   authWindow.webContents.on(
-  //     'did-fail-load',
-  //     (_event, _errorCode, _errorDescription, validatedURL) => {
-  //       if (validatedURL.includes(authOptions.hostname)) {
-  //         authWindow.destroy();
-  //         reject(
-  //           `Invalid Hostname. Could not load https://${authOptions.hostname}/.`,
-  //         );
-  //       }
-  //     },
-  //   );
-
-  //   authWindow.webContents.on('will-redirect', (event, url) => {
-  //     event.preventDefault();
-  //     handleCallback(url as Link);
-  //   });
-
-  //   authWindow.webContents.on('will-navigate', (event, url) => {
-  //     event.preventDefault();
-  //     handleCallback(url as Link);
-  //   });
-  // });
+    const handleCallback = (authType: AuthMethod, authCode: AuthCode) => {
+      resolve({ authType, authCode, authOptions });
+    };
+  });
 }
 
 export async function getUserData(

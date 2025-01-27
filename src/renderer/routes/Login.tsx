@@ -1,15 +1,14 @@
 import { KeyIcon, MarkGithubIcon, PersonIcon } from '@primer/octicons-react';
 import { Button, Heading, Stack, Text } from '@primer/react';
-import { type FC, useContext, useEffect } from 'react';
+import { type FC, useCallback, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { ipcRenderer } from 'electron';
-import { namespacedEvent } from '../../shared/events';
+import { logError } from '../../shared/logger';
 import { LogoIcon } from '../components/icons/LogoIcon';
 import { Centered } from '../components/layout/Centered';
 import { AppContext } from '../context/App';
-import { type AuthCode, type Link, Size } from '../types';
-import { openExternalLink, showWindow } from '../utils/comms';
+import { Size } from '../types';
+import { showWindow } from '../utils/comms';
 
 export const LoginRoute: FC = () => {
   const navigate = useNavigate();
@@ -22,20 +21,13 @@ export const LoginRoute: FC = () => {
     }
   }, [isLoggedIn]);
 
-  useEffect(() => {
-    ipcRenderer.on(namespacedEvent('auth-code'), (_, authCode: AuthCode) => {
-      console.log('RENDER AUTH CODE', authCode);
-      loginWithGitHubApp(authCode);
-    });
+  const loginUser = useCallback(() => {
+    try {
+      loginWithGitHubApp();
+    } catch (err) {
+      logError('loginWithGitHubApp', 'failed to login with GitHub', err);
+    }
   }, [loginWithGitHubApp]);
-
-  // const loginUser = useCallback(() => {
-  //   try {
-  //     loginWithGitHubApp();
-  //   } catch (err) {
-  //     logError('loginWithGitHubApp', 'failed to login with GitHub', err);
-  //   }
-  // }, [loginWithGitHubApp]);
 
   return (
     <Centered fullHeight={true}>
@@ -53,7 +45,7 @@ export const LoginRoute: FC = () => {
           <Button
             leadingVisual={MarkGithubIcon}
             variant="primary"
-            onClick={() => openExternalLink('https://github.com' as Link)}
+            onClick={() => loginUser()}
             data-testid="login-github"
           >
             GitHub
