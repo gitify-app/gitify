@@ -12,6 +12,7 @@ import type {
   AuthCode,
   AuthState,
   ClientID,
+  ClientSecret,
   Hostname,
   Token,
 } from '../../types';
@@ -31,7 +32,7 @@ describe('renderer/utils/auth/utils.ts', () => {
       jest.clearAllMocks();
     });
 
-    it('should call authGitHub - success', async () => {
+    it('should call authGitHub - auth flow', async () => {
       const mockIpcRendererOn = (
         jest.spyOn(ipcRenderer, 'on') as jest.Mock
       ).mockImplementation((event, callback) => {
@@ -54,6 +55,36 @@ describe('renderer/utils/auth/utils.ts', () => {
       );
 
       expect(res.authType).toBe('GitHub App');
+      expect(res.authCode).toBe('123-456');
+    });
+
+    it('should call authGitHub - oauth flow', async () => {
+      const mockIpcRendererOn = (
+        jest.spyOn(ipcRenderer, 'on') as jest.Mock
+      ).mockImplementation((event, callback) => {
+        if (event === 'gitify:auth-code') {
+          callback(null, 'oauth', '123-456');
+        }
+      });
+
+      const res = await auth.authGitHub({
+        clientId: 'BYO_CLIENT_ID' as ClientID,
+        clientSecret: 'BYO_CLIENT_SECRET' as ClientSecret,
+        hostname: 'my.git.com' as Hostname,
+      });
+
+      expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
+      expect(openExternalLinkMock).toHaveBeenCalledWith(
+        'https://my.git.com/login/oauth/authorize?client_id=BYO_CLIENT_ID&scope=read%3Auser%2Cnotifications%2Crepo',
+      );
+
+      expect(mockIpcRendererOn).toHaveBeenCalledTimes(1);
+      expect(mockIpcRendererOn).toHaveBeenCalledWith(
+        'gitify:auth-code',
+        expect.any(Function),
+      );
+
+      expect(res.authType).toBe('OAuth App');
       expect(res.authCode).toBe('123-456');
     });
   });
