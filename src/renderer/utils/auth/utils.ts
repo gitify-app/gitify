@@ -27,13 +27,16 @@ export function authGitHub(
   authOptions = Constants.DEFAULT_AUTH_OPTIONS,
 ): Promise<AuthResponse> {
   return new Promise((resolve) => {
-    //   // Build the OAuth consent page URL
     const authUrl = new URL(`https://${authOptions.hostname}`);
     authUrl.pathname = '/login/oauth/authorize';
     authUrl.searchParams.append('client_id', authOptions.clientId);
     authUrl.searchParams.append('scope', Constants.AUTH_SCOPE.toString());
 
     openExternalLink(authUrl.toString() as Link);
+
+    const handleCallback = (authType: AuthMethod, authCode: AuthCode) => {
+      resolve({ authType, authCode, authOptions });
+    };
 
     ipcRenderer.on(
       namespacedEvent('auth-code'),
@@ -43,10 +46,6 @@ export function authGitHub(
         handleCallback(type, authCode);
       },
     );
-
-    const handleCallback = (authType: AuthMethod, authCode: AuthCode) => {
-      resolve({ authType, authCode, authOptions });
-    };
   });
 }
 

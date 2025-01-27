@@ -1,6 +1,6 @@
-import remote from '@electron/remote';
 import axios from 'axios';
 import type { AxiosPromise, AxiosResponse } from 'axios';
+import { ipcRenderer } from 'electron';
 import nock from 'nock';
 import {
   mockAuth,
@@ -15,64 +15,46 @@ import type {
   Hostname,
   Token,
 } from '../../types';
+import * as comms from '../../utils/comms';
 import * as apiRequests from '../api/request';
 import type { AuthMethod } from './types';
 import * as auth from './utils';
 import { getNewOAuthAppURL, getNewTokenURL } from './utils';
 
-const browserWindow = new remote.BrowserWindow();
-
 describe('renderer/utils/auth/utils.ts', () => {
   describe('authGitHub', () => {
-    const loadURLMock = jest.spyOn(browserWindow, 'loadURL');
+    const openExternalLinkMock = jest
+      .spyOn(comms, 'openExternalLink')
+      .mockImplementation();
 
     afterEach(() => {
       jest.clearAllMocks();
     });
 
     it('should call authGitHub - success', async () => {
-      // Casting to jest.Mock avoids Typescript errors, where the spy is expected to match all the original
-      // function's typing. I might fix all that if the return type of this was actually used, or if I was
-      // writing this test for a new feature. Since I'm just upgrading Jest, jest.Mock is a nice escape hatch
-      (
-        jest.spyOn(browserWindow.webContents, 'on') as jest.Mock
-      ).mockImplementation((event, callback): void => {
-        if (event === 'will-redirect') {
-          const event = new Event('will-redirect');
-          callback(event, 'https://github.com/?code=123-456');
+      const mockIpcRendererOn = (
+        jest.spyOn(ipcRenderer, 'on') as jest.Mock
+      ).mockImplementation((event, callback) => {
+        if (event === 'gitify:auth-code') {
+          callback(null, 'auth', '123-456');
         }
       });
 
       const res = await auth.authGitHub();
 
-      expect(res.authCode).toBe('123-456');
-
-      expect(
-        browserWindow.webContents.session.clearStorageData,
-      ).toHaveBeenCalledTimes(1);
-
-      expect(loadURLMock).toHaveBeenCalledTimes(1);
-      expect(loadURLMock).toHaveBeenCalledWith(
+      expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
+      expect(openExternalLinkMock).toHaveBeenCalledWith(
         'https://github.com/login/oauth/authorize?client_id=FAKE_CLIENT_ID_123&scope=read%3Auser%2Cnotifications%2Crepo',
       );
 
-      expect(browserWindow.destroy).toHaveBeenCalledTimes(1);
-    });
-
-    it('should call authGitHub - failure', async () => {
-      (
-        jest.spyOn(browserWindow.webContents, 'on') as jest.Mock
-      ).mockImplementation((event, callback): void => {
-        if (event === 'will-redirect') {
-          const event = new Event('will-redirect');
-          callback(event, 'https://www.github.com/?error=Oops');
-        }
-      });
-
-      await expect(async () => await auth.authGitHub()).rejects.toEqual(
-        "Oops! Something went wrong and we couldn't log you in using GitHub. Please try again.",
+      expect(mockIpcRendererOn).toHaveBeenCalledTimes(1);
+      expect(mockIpcRendererOn).toHaveBeenCalledWith(
+        'gitify:auth-code',
+        expect.any(Function),
       );
-      expect(loadURLMock).toHaveBeenCalledTimes(1);
+
+      expect(res.authType).toBe('GitHub App');
+      expect(res.authCode).toBe('123-456');
     });
   });
 

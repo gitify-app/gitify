@@ -4,6 +4,7 @@ import { menubar } from 'menubar';
 
 import { APPLICATION } from '../shared/constants';
 import { namespacedEvent } from '../shared/events';
+import { logError } from '../shared/logger';
 import { isMacOS, isWindows } from '../shared/platform';
 import { onFirstRunMaybe } from './first-run';
 import { TrayIcons } from './icons';
@@ -201,5 +202,16 @@ app.on('open-url', (event, url) => {
 
   if (code && (type === 'auth' || type === 'oauth')) {
     mb.window.webContents.send(namespacedEvent('auth-code'), type, code);
+  }
+
+  const error = link.searchParams.get('error');
+  const errorDescription = link.searchParams.get('error_description');
+
+  if (error) {
+    logError(
+      'main:open-url',
+      `Error during OAuth 2.0 callback ${error}`,
+      new Error(errorDescription),
+    );
   }
 });
