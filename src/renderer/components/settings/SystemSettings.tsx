@@ -32,6 +32,7 @@ export const SystemSettings: FC = () => {
             updateSetting('openLinks', evt.target.value as OpenPreference);
           }}
         />
+
         <Checkbox
           name="keyboardShortcut"
           label="Enable keyboard shortcut"
@@ -49,16 +50,17 @@ export const SystemSettings: FC = () => {
             </Box>
           }
         />
-        {isMacOS() && (
-          <Checkbox
-            name="showNotificationsCountInTray"
-            label="Show notifications count in tray"
-            checked={settings.showNotificationsCountInTray}
-            onChange={(evt) =>
-              updateSetting('showNotificationsCountInTray', evt.target.checked)
-            }
-          />
-        )}
+
+        <Checkbox
+          name="showNotificationsCountInTray"
+          label="Show notifications count in tray"
+          checked={settings.showNotificationsCountInTray}
+          visible={isMacOS()}
+          onChange={(evt) =>
+            updateSetting('showNotificationsCountInTray', evt.target.checked)
+          }
+        />
+
         <Checkbox
           name="showNotifications"
           label="Show system notifications"
@@ -67,12 +69,14 @@ export const SystemSettings: FC = () => {
             updateSetting('showNotifications', evt.target.checked)
           }
         />
+
         <Checkbox
           name="playSound"
           label="Play sound"
           checked={settings.playSound}
           onChange={(evt) => updateSetting('playSound', evt.target.checked)}
         />
+
         <Checkbox
           name="useAlternateIdleIcon"
           label="Use alternate idle icon"
@@ -93,16 +97,14 @@ export const SystemSettings: FC = () => {
             </Stack>
           }
         />
-        {!isLinux() && (
-          <Checkbox
-            name="openAtStartup"
-            label="Open at startup"
-            checked={settings.openAtStartup}
-            onChange={(evt) =>
-              updateSetting('openAtStartup', evt.target.checked)
-            }
-          />
-        )}
+
+        <Checkbox
+          name="openAtStartup"
+          label="Open at startup"
+          checked={settings.openAtStartup}
+          visible={!isLinux()}
+          onChange={(evt) => updateSetting('openAtStartup', evt.target.checked)}
+        />
       </Stack>
     </fieldset>
   );
