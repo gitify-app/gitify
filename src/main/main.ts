@@ -4,6 +4,7 @@ import { menubar } from 'menubar';
 
 import { APPLICATION } from '../shared/constants';
 import { namespacedEvent } from '../shared/events';
+import { logError } from '../shared/logger';
 import { isMacOS, isWindows } from '../shared/platform';
 import { onFirstRunMaybe } from './first-run';
 import { TrayIcons } from './icons';
@@ -37,11 +38,14 @@ const mb = menubar({
 const menuBuilder = new MenuBuilder(mb);
 const contextMenu = menuBuilder.buildMenu();
 
-/**
- * Electron Auto Updater only supports macOS and Windows
- * https://github.com/electron/update-electron-app
- */
+// Register your app as the handler for a custom protocol
+app.setAsDefaultProtocolClient('gitify');
+
 if (isMacOS() || isWindows()) {
+  /**
+   * Electron Auto Updater only supports macOS and Windows
+   * https://github.com/electron/update-electron-app
+   */
   const updater = new Updater(mb, menuBuilder);
   updater.initialize();
 }
@@ -171,4 +175,29 @@ app.whenReady().then(async () => {
   ipc.on(namespacedEvent('update-auto-launch'), (_, settings) => {
     app.setLoginItemSettings(settings);
   });
+});
+
+// Handle gitify:// custom protocol URL events for OAuth 2.0 callback
+app.on('open-url', (event, url) => {
+  event.preventDefault();
+
+  const link = new URL(url);
+
+  const type = link.hostname;
+  const code = link.searchParams.get('code');
+
+  if (code && (type === 'auth' || type === 'oauth')) {
+    mb.window.webContents.send(namespacedEvent('auth-code'), type, code);
+  }
+
+  const error = link.searchParams.get('error');
+  const errorDescription = link.searchParams.get('error_description');
+
+  if (error) {
+    logError(
+      'main:open-url',
+      `Error during OAuth 2.0 callback ${error}`,
+      new Error(errorDescription),
+    );
+  }
 });
