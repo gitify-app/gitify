@@ -1111,7 +1111,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               class="font-medium text-gitify-font cursor-pointer"
               for="showNotificationsCountInTray"
             >
-              Show notifications count in tray
+              Show notification count in tray
             </label>
           </div>
           <div

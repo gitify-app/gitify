@@ -53,7 +53,7 @@ export const SystemSettings: FC = () => {
 
         <Checkbox
           name="showNotificationsCountInTray"
-          label="Show notifications count in tray"
+          label="Show notification count in tray"
           checked={settings.showNotificationsCountInTray}
           visible={isMacOS()}
           onChange={(evt) =>
