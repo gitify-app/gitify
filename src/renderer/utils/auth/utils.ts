@@ -26,7 +26,7 @@ import type { AuthMethod, AuthResponse, AuthTokenResponse } from './types';
 export function authGitHub(
   authOptions = Constants.DEFAULT_AUTH_OPTIONS,
 ): Promise<AuthResponse> {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     const authUrl = new URL(`https://${authOptions.hostname}`);
     authUrl.pathname = '/login/oauth/authorize';
     authUrl.searchParams.append('client_id', authOptions.clientId);
@@ -34,16 +34,35 @@ export function authGitHub(
 
     openExternalLink(authUrl.toString() as Link);
 
-    const handleCallback = (authType: AuthMethod, authCode: AuthCode) => {
-      resolve({ authType, authCode, authOptions });
+    const handleCallback = (callbackUrl: string) => {
+      const url = new URL(callbackUrl);
+
+      const type = url.hostname;
+      const code = url.searchParams.get('code');
+      const error = url.searchParams.get('error');
+      const errorDescription = url.searchParams.get('error_description');
+      const errorUri = url.searchParams.get('error_uri');
+
+      if (code && (type === 'auth' || type === 'oauth')) {
+        const authMethod: AuthMethod =
+          type === 'auth' ? 'GitHub App' : 'OAuth App';
+
+        resolve({
+          authMethod: authMethod,
+          authCode: code as AuthCode,
+          authOptions: authOptions,
+        });
+      } else if (error) {
+        reject(
+          `Oops! Something went wrong and we couldn't log you in using GitHub. Please try again. Reason: ${errorDescription} Docs: ${errorUri}`,
+        );
+      }
     };
 
     ipcRenderer.on(
-      namespacedEvent('auth-code'),
-      (_, authType: 'auth' | 'oauth', authCode: AuthCode) => {
-        const type: AuthMethod =
-          authType === 'auth' ? 'GitHub App' : 'OAuth App';
-        handleCallback(type, authCode);
+      namespacedEvent('auth-callback'),
+      (_, callbackUrl: string) => {
+        handleCallback(callbackUrl);
       },
     );
   });

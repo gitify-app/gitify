@@ -22,7 +22,7 @@ export interface LoginPersonalAccessTokenOptions {
 }
 
 export interface AuthResponse {
-  authType: AuthMethod;
+  authMethod: AuthMethod;
   authCode: AuthCode;
   authOptions: LoginOAuthAppOptions;
 }

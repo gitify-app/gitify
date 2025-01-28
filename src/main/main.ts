@@ -194,24 +194,5 @@ app.whenReady().then(async () => {
 // Handle gitify:// custom protocol URL events for OAuth 2.0 callback
 app.on('open-url', (event, url) => {
   event.preventDefault();
-
-  const link = new URL(url);
-
-  const type = link.hostname;
-  const code = link.searchParams.get('code');
-
-  if (code && (type === 'auth' || type === 'oauth')) {
-    mb.window.webContents.send(namespacedEvent('auth-code'), type, code);
-  }
-
-  const error = link.searchParams.get('error');
-  const errorDescription = link.searchParams.get('error_description');
-
-  if (error) {
-    logError(
-      'main:open-url',
-      `Error during OAuth 2.0 callback ${error}`,
-      new Error(errorDescription),
-    );
-  }
+  mb.window.webContents.send(namespacedEvent('auth-callback'), url);
 });
