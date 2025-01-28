@@ -94,7 +94,7 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
           </Button>
 
           {!animateExit && (
-            <HoverGroup bgColor="bg-gitify-repository">
+            <HoverGroup bgColor="group-hover:bg-gitify-repository">
               <HoverButton
                 label="Mark repository as done"
                 icon={CheckIcon}

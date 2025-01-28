@@ -103,7 +103,7 @@ export const AccountNotifications: FC<IAccountNotifications> = (
               />
             </Button>
 
-            <HoverGroup bgColor="bg-gitify-account-rest">
+            <HoverGroup bgColor="group-hover:bg-gitify-account-rest">
               <HoverButton
                 label="My Issues"
                 icon={IssueOpenedIcon}
