@@ -20,7 +20,6 @@ const browserWindowOpts = {
   resizable: false,
   skipTaskbar: true, // Hide the app from the Windows taskbar
   webPreferences: {
-    enableRemoteModule: true,
     nodeIntegration: true,
     contextIsolation: false,
   },

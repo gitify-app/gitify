@@ -107,7 +107,6 @@ export const AccountsRoute: FC = () => {
                     title="Open account profile"
                     onClick={() => openAccountProfile(account)}
                     data-testid="account-profile"
-                    className="pb-2"
                   >
                     <AvatarWithFallback
                       src={account.user.avatar}
@@ -130,10 +129,10 @@ export const AccountsRoute: FC = () => {
                         </Stack>
                       </Box>
 
-                      <button
+                      <Box
                         title="Open host"
-                        type="button"
                         onClick={() => openHost(account.hostname)}
+                        className="cursor-pointer"
                         data-testid="account-host"
                       >
                         <Stack
@@ -144,12 +143,12 @@ export const AccountsRoute: FC = () => {
                           <PlatformIcon />
                           <Text>{account.hostname}</Text>
                         </Stack>
-                      </button>
+                      </Box>
 
-                      <button
+                      <Box
                         title="Open developer settings"
-                        type="button"
                         onClick={() => openDeveloperSettings(account)}
+                        className="cursor-pointer"
                         data-testid="account-developer-settings"
                       >
                         <Stack
@@ -160,7 +159,7 @@ export const AccountsRoute: FC = () => {
                           <AuthMethodIcon />
                           <Text>{account.method}</Text>
                         </Stack>
-                      </button>
+                      </Box>
                     </Stack>
                   </Box>
                 </Stack>
