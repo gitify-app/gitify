@@ -167,95 +167,97 @@ export const AppearanceSettings: FC = () => {
           tooltip={
             <Stack direction="vertical" gap="condensed">
               <Text>
-                Enrich notifications with author or last commenter profile
-                information, state and GitHub-like colors.
+                Enrich notifications with detailed user and state information.
+              </Text>
+              <Text>
+                You may also choose to display{' '}
+                <Text as="strong">notification metric pills</Text> or{' '}
+                <Text as="strong">notification numbers</Text>.
               </Text>
               <Text className="text-gitify-caution">
                 ⚠️ Users with a large number of unread notifications <i>may</i>{' '}
-                experience rate limiting under certain circumstances. Disable
-                this setting if you experience this.
+                experience rate limiting under certain circumstances. Please
+                disable this setting if you experience this.
               </Text>
             </Stack>
           }
         />
 
-        <Checkbox
-          name="showPills"
-          label="Show notification metric pills"
-          checked={settings.showPills}
-          onChange={(evt) => updateSetting('showPills', evt.target.checked)}
-          tooltip={
-            <Box>
-              <Text>Show notification metric pills for:</Text>
-              <Box className="pl-4">
-                <ul>
-                  <li className="flex items-center gap-1">
-                    <IssueClosedIcon size={Size.SMALL} />
-                    linked issues
-                  </li>
-                  <li className="flex items-center gap-1">
-                    <CheckIcon size={Size.SMALL} />
-                    pr reviews
-                  </li>
-                  <li className="flex items-center gap-1">
-                    <CommentIcon size={Size.SMALL} />
-                    comments
-                  </li>
-                  <li className="flex items-center gap-1">
-                    <TagIcon size={Size.SMALL} />
-                    labels
-                  </li>
-                  <li className="flex items-center gap-1">
-                    <MilestoneIcon size={Size.SMALL} />
-                    milestones
-                  </li>
-                </ul>
-              </Box>
-            </Box>
-          }
-        />
+        <Box className="pl-6" hidden={!settings.detailedNotifications}>
+          <Stack direction="vertical" gap="condensed">
+            <Checkbox
+              name="showPills"
+              label="Show notification metric pills"
+              checked={settings.showPills}
+              onChange={(evt) => updateSetting('showPills', evt.target.checked)}
+              tooltip={
+                <Stack direction="vertical" gap="condensed">
+                  <Text>Show notification metric pills for:</Text>
+                  <Box className="pl-4">
+                    <ul>
+                      <li className="flex items-center gap-1">
+                        <IssueClosedIcon size={Size.SMALL} />
+                        linked issues
+                      </li>
+                      <li className="flex items-center gap-1">
+                        <CheckIcon size={Size.SMALL} />
+                        pr reviews
+                      </li>
+                      <li className="flex items-center gap-1">
+                        <CommentIcon size={Size.SMALL} />
+                        comments
+                      </li>
+                      <li className="flex items-center gap-1">
+                        <TagIcon size={Size.SMALL} />
+                        labels
+                      </li>
+                      <li className="flex items-center gap-1">
+                        <MilestoneIcon size={Size.SMALL} />
+                        milestones
+                      </li>
+                    </ul>
+                  </Box>
+                </Stack>
+              }
+            />
 
-        <Checkbox
-          name="showNumber"
-          label="Show number"
-          checked={settings.detailedNotifications && settings.showNumber}
-          onChange={(evt) =>
-            settings.detailedNotifications &&
-            updateSetting('showNumber', evt.target.checked)
-          }
-          disabled={!settings.detailedNotifications}
-          tooltip={
-            <Stack direction="vertical" gap="condensed">
-              <Text>Show GitHub number for:</Text>
-              <Box className="pl-4">
-                <ul>
-                  <li>
-                    <Stack direction="horizontal" gap="condensed">
-                      <CommentIcon size={Size.SMALL} />
-                      Discussion
-                    </Stack>
-                  </li>
-                  <li>
-                    <Stack direction="horizontal" gap="condensed">
-                      <IssueClosedIcon size={Size.SMALL} />
-                      Issue
-                    </Stack>
-                  </li>
-                  <li>
-                    <Stack direction="horizontal" gap="condensed">
-                      <GitPullRequestIcon size={Size.SMALL} />
-                      Pull Request
-                    </Stack>
-                  </li>
-                </ul>
-              </Box>
-              <Text className="text-gitify-caution">
-                ⚠️ This setting requires{' '}
-                <Text as="strong">Detailed Notifications</Text> to be enabled.
-              </Text>
-            </Stack>
-          }
-        />
+            <Checkbox
+              name="showNumber"
+              label="Show notification number"
+              checked={settings.showNumber}
+              onChange={(evt) =>
+                updateSetting('showNumber', evt.target.checked)
+              }
+              tooltip={
+                <Stack direction="vertical" gap="condensed">
+                  <Text>Show GitHub number for:</Text>
+                  <Box className="pl-4">
+                    <ul>
+                      <li>
+                        <Stack direction="horizontal" gap="condensed">
+                          <CommentIcon size={Size.SMALL} />
+                          Discussion
+                        </Stack>
+                      </li>
+                      <li>
+                        <Stack direction="horizontal" gap="condensed">
+                          <IssueClosedIcon size={Size.SMALL} />
+                          Issue
+                        </Stack>
+                      </li>
+                      <li>
+                        <Stack direction="horizontal" gap="condensed">
+                          <GitPullRequestIcon size={Size.SMALL} />
+                          Pull Request
+                        </Stack>
+                      </li>
+                    </ul>
+                  </Box>
+                </Stack>
+              }
+            />
+          </Stack>
+        </Box>
 
         <Checkbox
           name="showAccountHeader"
