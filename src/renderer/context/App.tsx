@@ -71,9 +71,6 @@ export const defaultAuth: AuthState = {
 const defaultAppearanceSettings: AppearanceSettingsState = {
   theme: Theme.SYSTEM,
   zoomPercentage: 100,
-  detailedNotifications: true,
-  showPills: true,
-  showNumber: true,
   showAccountHeader: false,
   wrapNotificationTitle: false,
 };
@@ -81,6 +78,9 @@ const defaultAppearanceSettings: AppearanceSettingsState = {
 const defaultNotificationSettings: NotificationSettingsState = {
   groupBy: GroupBy.REPOSITORY,
   fetchAllNotifications: true,
+  detailedNotifications: true,
+  showPills: true,
+  showNumber: true,
   participating: false,
   markAsDoneOnOpen: false,
   markAsDoneOnUnsubscribe: false,
