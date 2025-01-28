@@ -1,4 +1,4 @@
-import { app, globalShortcut, ipcMain as ipc, nativeTheme } from 'electron';
+import { app, globalShortcut, ipcMain as ipc } from 'electron';
 import log from 'electron-log';
 import { menubar } from 'menubar';
 
@@ -93,20 +93,6 @@ app.whenReady().then(async () => {
       mb.positioner.move('trayCenter', trayBounds);
       mb.window.resizable = false;
     });
-  });
-
-  nativeTheme.on('updated', () => {
-    if (nativeTheme.shouldUseDarkColors) {
-      mb.window.webContents.send(
-        namespacedEvent('update-theme'),
-        'DARK_DEFAULT',
-      );
-    } else {
-      mb.window.webContents.send(
-        namespacedEvent('update-theme'),
-        'LIGHT_DEFAULT',
-      );
-    }
   });
 
   /**

@@ -5,7 +5,7 @@ const sidebarWidth = '2.5rem'; // 40px
 
 const config: Config = {
   content: ['./src/**/*.js', './src/**/*.ts', './src/**/*.tsx'],
-  darkMode: 'class',
+  darkMode: ['class', '[data-color-mode="dark"]'], // GitHub Primer Theme Provider color mode custom selector
   theme: {
     extend: {
       fontSize: {
@@ -65,19 +65,16 @@ const config: Config = {
       },
     },
   },
-  variants: {
-    extend: {},
-  },
   plugins: [
     ({ addBase }) => {
-      // TODO - ideally we would move this to be controlled by GitHub Primer Design Tokens, colors and color schemes
+      // TODO - ideally we would use GitHub Primer Design Tokens instead of TailwindCSS
       addBase({
-        ':root': {
+        '[data-color-mode="light"]': {
           '--gitify-scrollbar-track': colors.gray[100],
           '--gitify-scrollbar-thumb': colors.gray[300],
           '--gitify-scrollbar-thumb-hover': colors.gray[400],
         },
-        '.dark': {
+        '[data-color-mode="dark"]': {
           '--gitify-scrollbar-track': colors.gray[900],
           '--gitify-scrollbar-thumb': colors.gray[700],
           '--gitify-scrollbar-thumb-hover': colors.gray[600],

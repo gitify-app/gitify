@@ -1,5 +1,5 @@
-import { ipcRenderer, webFrame } from 'electron';
-import { type FC, useContext, useEffect, useState } from 'react';
+import { webFrame } from 'electron';
+import { type FC, useContext, useState } from 'react';
 
 import {
   CheckIcon,
@@ -21,19 +21,11 @@ import {
   Select,
   Stack,
   Text,
-  useTheme,
 } from '@primer/react';
 
-import { namespacedEvent } from '../../../shared/events';
 import { AppContext } from '../../context/App';
 import { Size, Theme } from '../../types';
 import { hasMultipleAccounts } from '../../utils/auth/utils';
-import {
-  DEFAULT_DAY_COLOR_SCHEME,
-  DEFAULT_NIGHT_COLOR_SCHEME,
-  isDayScheme,
-  setScrollbarTheme,
-} from '../../utils/theme';
 import { zoomLevelToPercentage, zoomPercentageToLevel } from '../../utils/zoom';
 import { Checkbox } from '../fields/Checkbox';
 import { FieldLabel } from '../fields/FieldLabel';
@@ -43,26 +35,10 @@ let timeout: NodeJS.Timeout;
 const DELAY = 200;
 
 export const AppearanceSettings: FC = () => {
-  const { setColorMode, setDayScheme, setNightScheme } = useTheme();
   const { auth, settings, updateSetting } = useContext(AppContext);
   const [zoomPercentage, setZoomPercentage] = useState(
     zoomLevelToPercentage(webFrame.getZoomLevel()),
   );
-
-  useEffect(() => {
-    ipcRenderer.on(
-      namespacedEvent('update-theme'),
-      (_, updatedTheme: Theme) => {
-        if (settings.theme === Theme.SYSTEM) {
-          const mode = isDayScheme(updatedTheme) ? 'day' : 'night';
-          setColorMode('auto');
-          setDayScheme(DEFAULT_DAY_COLOR_SCHEME);
-          setNightScheme(DEFAULT_NIGHT_COLOR_SCHEME);
-          setScrollbarTheme(mode);
-        }
-      },
-    );
-  }, [settings.theme, setColorMode, setDayScheme, setNightScheme]);
 
   window.addEventListener('resize', () => {
     // clear the timeout

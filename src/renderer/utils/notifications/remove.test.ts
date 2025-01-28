@@ -27,4 +27,16 @@ describe('renderer/utils/remove.ts', () => {
 
     expect(result[0].notifications.length).toBe(1);
   });
+
+  it('should skip notification removal if nothing to remove', () => {
+    expect(mockSingleAccountNotifications[0].notifications.length).toBe(1);
+
+    const result = removeNotifications(
+      { ...mockSettings, delayNotificationState: false },
+      [],
+      mockSingleAccountNotifications,
+    );
+
+    expect(result[0].notifications.length).toBe(1);
+  });
 });

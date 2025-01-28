@@ -4,63 +4,21 @@ import { Theme } from '../types';
 export const DEFAULT_DAY_COLOR_SCHEME = 'light';
 export const DEFAULT_NIGHT_COLOR_SCHEME = 'dark';
 
-/**
- * @deprecated
- */
-export function getTheme(): Theme {
-  if (document.querySelector('html').classList.contains('dark')) {
-    return Theme.DARK;
-  }
-
-  return Theme.LIGHT;
-}
-
-/**
- * @deprecated
- */
-export function setLightMode() {
-  document.querySelector('html').classList.remove('dark');
-}
-
-/**
- * @deprecated
- */
-export function setDarkMode() {
-  document.querySelector('html').classList.add('dark');
-}
-
-/**
- * TODO find a way to set scrollbar colors based on GitHub Primer Theme Provider / Design Tokens
- * @deprecated
- */
-export function setScrollbarTheme(mode?: ColorModeWithAuto) {
-  switch (mode) {
-    case 'day':
-    case 'light':
-      setLightMode();
-      break;
-    case 'night':
-    case 'dark':
-      setDarkMode();
-      break;
-    default:
-      if (window.matchMedia?.('(prefers-color-scheme: dark)').matches) {
-        setDarkMode();
-      } else {
-        setLightMode();
-      }
-  }
-}
-
-export function isDayScheme(themeMode: Theme) {
+export function mapThemeModeToColorMode(themeMode: Theme): ColorModeWithAuto {
   switch (themeMode) {
     case Theme.LIGHT:
     case Theme.LIGHT_HIGH_CONTRAST:
     case Theme.LIGHT_COLORBLIND:
     case Theme.LIGHT_TRITANOPIA:
-      return true;
+      return 'day';
+    case Theme.DARK:
+    case Theme.DARK_HIGH_CONTRAST:
+    case Theme.DARK_COLORBLIND:
+    case Theme.DARK_TRITANOPIA:
+    case Theme.DARK_DIMMED:
+      return 'night';
     default:
-      return false;
+      return 'auto';
   }
 }
 
