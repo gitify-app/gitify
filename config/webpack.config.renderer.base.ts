@@ -40,7 +40,7 @@ const configuration: webpack.Configuration = {
   },
 
   plugins: [
-    // Development Keys - See README.md
+    // Development Keys - See CONTRIBUTING.md
     new webpack.EnvironmentPlugin({
       OAUTH_CLIENT_ID: 'Ov23liQIkFs5ehQLNzHF',
       OAUTH_CLIENT_SECRET: '404b80632292e18419dbd2a6ed25976856e95255',
