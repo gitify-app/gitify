@@ -56,13 +56,6 @@ app.whenReady().then(async () => {
   mb.on('ready', () => {
     mb.app.setAppUserModelId(APPLICATION.ID);
 
-    /**
-     * TODO: Remove @electron/remote use - see #650
-     * GitHub OAuth 2 Login Flows - Enable Remote Browser Window Launch
-     */
-    require('@electron/remote/main').initialize();
-    require('@electron/remote/main').enable(mb.window.webContents);
-
     // Tray configuration
     mb.tray.setToolTip(APPLICATION.NAME);
     mb.tray.setIgnoreDoubleClickEvents(true);
