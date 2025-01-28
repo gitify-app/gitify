@@ -260,8 +260,8 @@ export const AppearanceSettings: FC = () => {
         <Checkbox
           name="showAccountHeader"
           label="Show account header"
-          checked={settings.showAccountHeader || hasMultipleAccounts(auth)}
-          disabled={hasMultipleAccounts(auth)}
+          checked={settings.showAccountHeader}
+          visible={!hasMultipleAccounts(auth)}
           onChange={(evt) =>
             updateSetting('showAccountHeader', evt.target.checked)
           }

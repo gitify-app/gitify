@@ -108,6 +108,8 @@ export async function addAccount(
   token: Token,
   hostname: Hostname,
 ): Promise<AuthState> {
+  const accountList = auth.accounts;
+
   let newAccount = {
     hostname: hostname,
     method: method,
@@ -116,9 +118,23 @@ export async function addAccount(
   } as Account;
 
   newAccount = await refreshAccount(newAccount);
+  const newAccountUUID = getAccountUUID(newAccount);
+
+  const existingAccount = accountList.find(
+    (a) => getAccountUUID(a) === newAccountUUID,
+  );
+
+  if (existingAccount) {
+    logWarn(
+      'addAccount',
+      `account for user ${newAccount.user.login} already exists`,
+    );
+  } else {
+    accountList.push(newAccount);
+  }
 
   return {
-    accounts: [...auth.accounts, newAccount],
+    accounts: accountList,
   };
 }
 
@@ -135,6 +151,8 @@ export function removeAccount(auth: AuthState, account: Account): AuthState {
 export async function refreshAccount(account: Account): Promise<Account> {
   try {
     const res = await getAuthenticatedUser(account.hostname, account.token);
+
+    // console.log('ADAM RESPONSE', JSON.stringify(res, null, 2));
 
     // Refresh user data
     account.user = {

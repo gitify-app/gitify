@@ -49,6 +49,10 @@ export const AccountsRoute: FC = () => {
     useContext(AppContext);
   const navigate = useNavigate();
 
+  const [loadingStates, setLoadingStates] = useState<Record<string, boolean>>(
+    {},
+  );
+
   const logoutAccount = useCallback(
     (account: Account) => {
       logoutFromAccount(account);
@@ -63,6 +67,29 @@ export const AccountsRoute: FC = () => {
     auth.accounts = [account, ...auth.accounts.filter((a) => a !== account)];
     saveState({ auth, settings });
     navigate('/accounts', { replace: true });
+  }, []);
+
+  const handleRefresh = useCallback(async (account: Account) => {
+    const accountUUID = getAccountUUID(account);
+
+    setLoadingStates((prev) => ({
+      ...prev,
+      [accountUUID]: true,
+    }));
+
+    await refreshAccount(account);
+    navigate('/accounts', { replace: true });
+
+    /**
+     * Typically the above refresh API call completes very quickly,
+     * so we add an brief artificial delay to allow the icon to spin a few times
+     */
+    setTimeout(() => {
+      setLoadingStates((prev) => ({
+        ...prev,
+        [accountUUID]: false,
+      }));
+    }, 500);
   }, []);
 
   const loginWithGitHub = useCallback(async () => {
@@ -89,11 +116,11 @@ export const AccountsRoute: FC = () => {
         {auth.accounts.map((account, i) => {
           const AuthMethodIcon = getAuthMethodIcon(account.method);
           const PlatformIcon = getPlatformIcon(account.platform);
-          const [isRefreshingAccount, setIsRefreshingAccount] = useState(false);
+          const accountUUID = getAccountUUID(account);
 
           return (
             <Box
-              key={getAccountUUID(account)}
+              key={accountUUID}
               className="rounded-md p-2 mb-4 bg-gitify-accounts"
             >
               <Stack
@@ -191,22 +218,9 @@ export const AccountsRoute: FC = () => {
                   <IconButton
                     icon={SyncIcon}
                     aria-label={`Refresh ${account.user.login}`}
-                    onClick={async () => {
-                      setIsRefreshingAccount(true);
-
-                      await refreshAccount(account);
-                      navigate('/accounts', { replace: true });
-
-                      /**
-                       * Typically the above refresh API call completes very quickly,
-                       * so we add an brief artificial delay to allow the icon to spin a few times
-                       */
-                      setTimeout(() => {
-                        setIsRefreshingAccount(false);
-                      }, 500);
-                    }}
+                    onClick={() => handleRefresh(account)}
                     size="small"
-                    loading={isRefreshingAccount}
+                    loading={loadingStates[accountUUID] || false}
                     data-testid="account-refresh"
                   />
 
