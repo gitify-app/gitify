@@ -153,7 +153,7 @@ export const NotificationRow: FC<INotificationRow> = ({
         </Stack>
 
         {!animateExit && (
-          <HoverGroup bgColor="bg-gitify-notification-hover">
+          <HoverGroup bgColor="group-hover:bg-gitify-notification-hover">
             <HoverButton
               label="Mark as done"
               icon={CheckIcon}
