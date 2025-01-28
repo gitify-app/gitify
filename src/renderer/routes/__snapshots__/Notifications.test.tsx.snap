@@ -419,15 +419,25 @@ exports[`renderer/routes/Notifications.tsx should render itself & its children (
   "asFragment": [Function],
   "baseElement": <body>
     <div>
+      <div
+        class="Box-sc-g0xbh4-0 flex flex-col h-screen"
+        data-testid="notifications"
+      >
+        <p>
+          AccountNotifications
+        </p>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="Box-sc-g0xbh4-0 flex flex-col h-screen"
+      data-testid="notifications"
+    >
       <p>
         AccountNotifications
       </p>
     </div>
-  </body>,
-  "container": <div>
-    <p>
-      AccountNotifications
-    </p>
   </div>,
   "debug": [Function],
   "findAllByAltText": [Function],
@@ -488,6 +498,24 @@ exports[`renderer/routes/Notifications.tsx should render itself & its children (
   "asFragment": [Function],
   "baseElement": <body>
     <div>
+      <div
+        class="Box-sc-g0xbh4-0 flex flex-col h-screen"
+        data-testid="notifications"
+      >
+        <p>
+          AccountNotifications
+        </p>
+        <p>
+          AccountNotifications
+        </p>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="Box-sc-g0xbh4-0 flex flex-col h-screen"
+      data-testid="notifications"
+    >
       <p>
         AccountNotifications
       </p>
@@ -495,14 +523,6 @@ exports[`renderer/routes/Notifications.tsx should render itself & its children (
         AccountNotifications
       </p>
     </div>
-  </body>,
-  "container": <div>
-    <p>
-      AccountNotifications
-    </p>
-    <p>
-      AccountNotifications
-    </p>
   </div>,
   "debug": [Function],
   "findAllByAltText": [Function],

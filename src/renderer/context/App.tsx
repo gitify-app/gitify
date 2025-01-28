@@ -56,9 +56,8 @@ import { clearState, loadState, saveState } from '../utils/storage';
 import {
   DEFAULT_DAY_COLOR_SCHEME,
   DEFAULT_NIGHT_COLOR_SCHEME,
-  isDayScheme,
+  mapThemeModeToColorMode,
   mapThemeModeToColorScheme,
-  setScrollbarTheme,
 } from '../utils/theme';
 import { zoomPercentageToLevel } from '../utils/zoom';
 
@@ -155,17 +154,12 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   useEffect(() => {
+    const colorMode = mapThemeModeToColorMode(settings.theme);
     const colorScheme = mapThemeModeToColorScheme(settings.theme);
 
-    if (isDayScheme(settings.theme)) {
-      setDayScheme(colorScheme ?? DEFAULT_DAY_COLOR_SCHEME);
-      setColorMode('day');
-      setScrollbarTheme('day');
-    } else {
-      setNightScheme(colorScheme ?? DEFAULT_NIGHT_COLOR_SCHEME);
-      setColorMode('night');
-      setScrollbarTheme('night');
-    }
+    setColorMode(colorMode);
+    setDayScheme(colorScheme ?? DEFAULT_DAY_COLOR_SCHEME);
+    setNightScheme(colorScheme ?? DEFAULT_NIGHT_COLOR_SCHEME);
   }, [settings.theme, setColorMode, setDayScheme, setNightScheme]);
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: We only want fetchNotifications to be called for account changes
