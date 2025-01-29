@@ -1,6 +1,6 @@
 import { type FC, useCallback, useContext, useState } from 'react';
 
-import { Button, Text } from '@primer/react';
+import { Button, Stack, Text } from '@primer/react';
 import { Dialog } from '@primer/react/experimental';
 import { AppContext } from '../../context/App';
 
@@ -14,7 +14,7 @@ export const SettingsReset: FC = () => {
   }, [resetSettings]);
 
   return (
-    <>
+    <Stack align="center">
       <Button
         variant="danger"
         onClick={() => setIsOpen(!isOpen)}
@@ -23,29 +23,29 @@ export const SettingsReset: FC = () => {
       >
         Reset Settings
       </Button>
-      isOpen && (
-      <Dialog
-        title="Reset Settings"
-        width="large"
-        onClose={onDialogClose}
-        footerButtons={[
-          {
-            buttonType: 'default',
-            content: 'Cancel',
-            onClick: onDialogClose,
-          },
-          {
-            buttonType: 'danger',
-            content: 'Reset',
-            onClick: onDialogProceed,
-          },
-        ]}
-        data-testid="reset-dialog"
-      >
-        Please confirm that you want to reset all settings to the{' '}
-        <Text as="strong">Gitify defaults</Text>
-      </Dialog>
-      )
-    </>
+      {isOpen && (
+        <Dialog
+          title="Reset Settings"
+          width="large"
+          onClose={onDialogClose}
+          footerButtons={[
+            {
+              buttonType: 'default',
+              content: 'Cancel',
+              onClick: onDialogClose,
+            },
+            {
+              buttonType: 'danger',
+              content: 'Reset',
+              onClick: onDialogProceed,
+            },
+          ]}
+          data-testid="reset-dialog"
+        >
+          Please confirm that you want to reset all settings to the{' '}
+          <Text as="strong">Gitify defaults</Text>
+        </Dialog>
+      )}
+    </Stack>
   );
 };

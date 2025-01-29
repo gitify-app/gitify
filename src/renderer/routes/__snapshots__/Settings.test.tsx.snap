@@ -1219,29 +1219,36 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           </div>
         </div>
       </fieldset>
-      <button
-        aria-describedby=":r5:-loading-announcement"
-        class="types__StyledButton-sc-ws60qy-0 fyPjMX"
-        data-loading="false"
-        data-no-visuals="true"
-        data-testid="settings-reset"
-        sx="[object Object]"
-        type="button"
+      <div
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+        data-align="center"
+        data-direction="vertical"
+        data-justify="start"
+        data-padding="none"
+        data-wrap="nowrap"
       >
-        <span
-          class="Box-sc-g0xbh4-0 srpGE"
-          data-component="buttonContent"
+        <button
+          aria-describedby=":r5:-loading-announcement"
+          class="types__StyledButton-sc-ws60qy-0 fyPjMX"
+          data-loading="false"
+          data-no-visuals="true"
+          data-testid="settings-reset"
           sx="[object Object]"
+          type="button"
         >
           <span
-            data-component="text"
+            class="Box-sc-g0xbh4-0 srpGE"
+            data-component="buttonContent"
+            sx="[object Object]"
           >
-            Reset Settings
+            <span
+              data-component="text"
+            >
+              Reset Settings
+            </span>
           </span>
-        </span>
-      </button>
-      isOpen && (
-      )
+        </button>
+      </div>
     </div>
   </div>
   <div
@@ -1266,11 +1273,11 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
         <span
           aria-label="View release notes"
           class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-n"
-          id=":rb:"
+          id=":r6:"
           role="tooltip"
         >
           <button
-            aria-describedby=":rc:-loading-announcement"
+            aria-describedby=":r7:-loading-announcement"
             class="types__StyledButton-sc-ws60qy-0 jTCgqj"
             data-loading="false"
             data-no-visuals="true"
@@ -1306,11 +1313,11 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
         <span
           aria-label="Accounts"
           class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-n"
-          id=":rd:"
+          id=":r8:"
           role="tooltip"
         >
           <button
-            aria-describedby=":re:-loading-announcement"
+            aria-describedby=":r9:-loading-announcement"
             aria-label="Accounts"
             class="types__StyledButton-sc-ws60qy-0 jTCgqj"
             data-component="IconButton"
@@ -1341,11 +1348,11 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
         <span
           aria-label="Quit Gitify"
           class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-nw"
-          id=":rf:"
+          id=":ra:"
           role="tooltip"
         >
           <button
-            aria-describedby=":rg:-loading-announcement"
+            aria-describedby=":rb:-loading-announcement"
             aria-label="Quit Gitify"
             class="types__StyledButton-sc-ws60qy-0 cYZGEC"
             data-component="IconButton"
