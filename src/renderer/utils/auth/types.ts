@@ -31,11 +31,3 @@ export interface AuthTokenResponse {
   hostname: Hostname;
   token: Token;
 }
-
-/**
- * @deprecated This type is deprecated and will be removed in a future release.
- */
-export interface EnterpriseAccount {
-  hostname: Hostname;
-  token: Token;
-}

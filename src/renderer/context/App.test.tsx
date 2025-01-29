@@ -48,7 +48,7 @@ describe('renderer/context/App.tsx', () => {
     const unsubscribeNotificationMock = jest.fn();
 
     const mockDefaultState = {
-      auth: { accounts: [], enterpriseAccounts: [], token: null, user: null },
+      auth: { accounts: [] },
       settings: mockSettings,
     };
 
@@ -278,9 +278,6 @@ describe('renderer/context/App.tsx', () => {
       expect(saveStateMock).toHaveBeenCalledWith({
         auth: {
           accounts: [],
-          enterpriseAccounts: [],
-          token: null,
-          user: null,
         } as AuthState,
         settings: {
           ...defaultSettings,
@@ -319,9 +316,6 @@ describe('renderer/context/App.tsx', () => {
       expect(saveStateMock).toHaveBeenCalledWith({
         auth: {
           accounts: [],
-          enterpriseAccounts: [],
-          token: null,
-          user: null,
         } as AuthState,
         settings: {
           ...defaultSettings,
@@ -354,9 +348,6 @@ describe('renderer/context/App.tsx', () => {
       expect(saveStateMock).toHaveBeenCalledWith({
         auth: {
           accounts: [],
-          enterpriseAccounts: [],
-          token: null,
-          user: null,
         } as AuthState,
         settings: {
           ...mockSettings,
@@ -390,9 +381,6 @@ describe('renderer/context/App.tsx', () => {
       expect(saveStateMock).toHaveBeenCalledWith({
         auth: {
           accounts: [],
-          enterpriseAccounts: [],
-          token: null,
-          user: null,
         } as AuthState,
         settings: defaultSettings,
       });
