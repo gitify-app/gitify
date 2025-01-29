@@ -5,7 +5,7 @@ import { AppContext } from '../../context/App';
 import * as comms from '../../utils/comms';
 import { NotificationSettings } from './NotificationSettings';
 
-describe('renderer/routes/components/settings/NotificationSettings.tsx', () => {
+describe('renderer/components/settings/NotificationSettings.tsx', () => {
   const updateSetting = jest.fn();
 
   afterEach(() => {

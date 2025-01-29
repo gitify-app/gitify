@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import { EmojiText, type IEmojiText } from './EmojiText';
 
-describe('renderer/components/primitives/Emoji.tsx', () => {
+describe('renderer/components/primitives/EmojiText.tsx', () => {
   it('should render', () => {
     const props: IEmojiText = {
       text: '🍺',
