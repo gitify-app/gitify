@@ -16,7 +16,7 @@ import { APPLICATION } from '../../shared/constants';
 import { AppContext } from '../context/App';
 import { quitApp } from '../utils/comms';
 import { Constants } from '../utils/constants';
-import { hasFiltersSet } from '../utils/filters';
+import { hasAnyFiltersSet } from '../utils/filters';
 import {
   openGitHubIssues,
   openGitHubNotifications,
@@ -114,7 +114,7 @@ export const Sidebar: FC = () => {
             description="Filter notifications"
             unsafeDisableTooltip={false}
             size="small"
-            variant={hasFiltersSet(settings) ? 'primary' : 'invisible'}
+            variant={hasAnyFiltersSet(settings) ? 'primary' : 'invisible'}
             tooltipDirection="e"
             onClick={() => toggleFilters()}
             data-testid="sidebar-filter-notifications"

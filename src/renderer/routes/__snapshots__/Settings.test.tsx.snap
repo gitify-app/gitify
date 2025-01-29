@@ -409,7 +409,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             >
               <svg
                 aria-hidden="true"
-                class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+                class="octicon octicon-question text-gitify-tooltip-icon"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -571,7 +571,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             >
               <svg
                 aria-hidden="true"
-                class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+                class="octicon octicon-question text-gitify-tooltip-icon"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -617,7 +617,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             >
               <svg
                 aria-hidden="true"
-                class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+                class="octicon octicon-question text-gitify-tooltip-icon"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -675,7 +675,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                 >
                   <svg
                     aria-hidden="true"
-                    class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+                    class="octicon octicon-question text-gitify-tooltip-icon"
                     display="inline-block"
                     fill="currentColor"
                     focusable="false"
@@ -721,7 +721,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                 >
                   <svg
                     aria-hidden="true"
-                    class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+                    class="octicon octicon-question text-gitify-tooltip-icon"
                     display="inline-block"
                     fill="currentColor"
                     focusable="false"
@@ -768,7 +768,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             >
               <svg
                 aria-hidden="true"
-                class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+                class="octicon octicon-question text-gitify-tooltip-icon"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -813,7 +813,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             >
               <svg
                 aria-hidden="true"
-                class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+                class="octicon octicon-question text-gitify-tooltip-icon"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -858,7 +858,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             >
               <svg
                 aria-hidden="true"
-                class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+                class="octicon octicon-question text-gitify-tooltip-icon"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -903,7 +903,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             >
               <svg
                 aria-hidden="true"
-                class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+                class="octicon octicon-question text-gitify-tooltip-icon"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -1065,7 +1065,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             >
               <svg
                 aria-hidden="true"
-                class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+                class="octicon octicon-question text-gitify-tooltip-icon"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -1179,7 +1179,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             >
               <svg
                 aria-hidden="true"
-                class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+                class="octicon octicon-question text-gitify-tooltip-icon"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
