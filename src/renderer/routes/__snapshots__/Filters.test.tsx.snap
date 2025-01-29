@@ -159,7 +159,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+            class="octicon octicon-question text-gitify-tooltip-icon"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -265,7 +265,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+              class="octicon octicon-question text-gitify-tooltip-icon"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -310,7 +310,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+              class="octicon octicon-question text-gitify-tooltip-icon"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -355,7 +355,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+              class="octicon octicon-question text-gitify-tooltip-icon"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -400,7 +400,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+              class="octicon octicon-question text-gitify-tooltip-icon"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -445,7 +445,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+              class="octicon octicon-question text-gitify-tooltip-icon"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -490,7 +490,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+              class="octicon octicon-question text-gitify-tooltip-icon"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -535,7 +535,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+              class="octicon octicon-question text-gitify-tooltip-icon"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -580,7 +580,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+              class="octicon octicon-question text-gitify-tooltip-icon"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -625,7 +625,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+              class="octicon octicon-question text-gitify-tooltip-icon"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -670,7 +670,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+              class="octicon octicon-question text-gitify-tooltip-icon"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -715,7 +715,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+              class="octicon octicon-question text-gitify-tooltip-icon"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -760,7 +760,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+              class="octicon octicon-question text-gitify-tooltip-icon"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -805,7 +805,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+              class="octicon octicon-question text-gitify-tooltip-icon"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -850,7 +850,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+              class="octicon octicon-question text-gitify-tooltip-icon"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -895,7 +895,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+              class="octicon octicon-question text-gitify-tooltip-icon"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -1018,7 +1018,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
     >
       <svg
         aria-hidden="true"
-        class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+        class="octicon octicon-question text-gitify-tooltip-icon"
         display="inline-block"
         fill="currentColor"
         focusable="false"
@@ -1063,7 +1063,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
     >
       <svg
         aria-hidden="true"
-        class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+        class="octicon octicon-question text-gitify-tooltip-icon"
         display="inline-block"
         fill="currentColor"
         focusable="false"
@@ -1108,7 +1108,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
     >
       <svg
         aria-hidden="true"
-        class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+        class="octicon octicon-question text-gitify-tooltip-icon"
         display="inline-block"
         fill="currentColor"
         focusable="false"
@@ -1153,7 +1153,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
     >
       <svg
         aria-hidden="true"
-        class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+        class="octicon octicon-question text-gitify-tooltip-icon"
         display="inline-block"
         fill="currentColor"
         focusable="false"
@@ -1198,7 +1198,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
     >
       <svg
         aria-hidden="true"
-        class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+        class="octicon octicon-question text-gitify-tooltip-icon"
         display="inline-block"
         fill="currentColor"
         focusable="false"
@@ -1243,7 +1243,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
     >
       <svg
         aria-hidden="true"
-        class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+        class="octicon octicon-question text-gitify-tooltip-icon"
         display="inline-block"
         fill="currentColor"
         focusable="false"
@@ -1288,7 +1288,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
     >
       <svg
         aria-hidden="true"
-        class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+        class="octicon octicon-question text-gitify-tooltip-icon"
         display="inline-block"
         fill="currentColor"
         focusable="false"
@@ -1333,7 +1333,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
     >
       <svg
         aria-hidden="true"
-        class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+        class="octicon octicon-question text-gitify-tooltip-icon"
         display="inline-block"
         fill="currentColor"
         focusable="false"
@@ -1378,7 +1378,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
     >
       <svg
         aria-hidden="true"
-        class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+        class="octicon octicon-question text-gitify-tooltip-icon"
         display="inline-block"
         fill="currentColor"
         focusable="false"
@@ -1423,7 +1423,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
     >
       <svg
         aria-hidden="true"
-        class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+        class="octicon octicon-question text-gitify-tooltip-icon"
         display="inline-block"
         fill="currentColor"
         focusable="false"
@@ -1468,7 +1468,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
     >
       <svg
         aria-hidden="true"
-        class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+        class="octicon octicon-question text-gitify-tooltip-icon"
         display="inline-block"
         fill="currentColor"
         focusable="false"
@@ -1513,7 +1513,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
     >
       <svg
         aria-hidden="true"
-        class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+        class="octicon octicon-question text-gitify-tooltip-icon"
         display="inline-block"
         fill="currentColor"
         focusable="false"
@@ -1558,7 +1558,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
     >
       <svg
         aria-hidden="true"
-        class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+        class="octicon octicon-question text-gitify-tooltip-icon"
         display="inline-block"
         fill="currentColor"
         focusable="false"
@@ -1603,7 +1603,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
     >
       <svg
         aria-hidden="true"
-        class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+        class="octicon octicon-question text-gitify-tooltip-icon"
         display="inline-block"
         fill="currentColor"
         focusable="false"
@@ -1648,7 +1648,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
     >
       <svg
         aria-hidden="true"
-        class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+        class="octicon octicon-question text-gitify-tooltip-icon"
         display="inline-block"
         fill="currentColor"
         focusable="false"
@@ -1706,7 +1706,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
     >
       <svg
         aria-hidden="true"
-        class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+        class="octicon octicon-question text-gitify-tooltip-icon"
         display="inline-block"
         fill="currentColor"
         focusable="false"
@@ -1751,7 +1751,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
     >
       <svg
         aria-hidden="true"
-        class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+        class="octicon octicon-question text-gitify-tooltip-icon"
         display="inline-block"
         fill="currentColor"
         focusable="false"
@@ -1796,7 +1796,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
     >
       <svg
         aria-hidden="true"
-        class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+        class="octicon octicon-question text-gitify-tooltip-icon"
         display="inline-block"
         fill="currentColor"
         focusable="false"
@@ -1841,7 +1841,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
     >
       <svg
         aria-hidden="true"
-        class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+        class="octicon octicon-question text-gitify-tooltip-icon"
         display="inline-block"
         fill="currentColor"
         focusable="false"
@@ -1886,7 +1886,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
     >
       <svg
         aria-hidden="true"
-        class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+        class="octicon octicon-question text-gitify-tooltip-icon"
         display="inline-block"
         fill="currentColor"
         focusable="false"
@@ -1931,7 +1931,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
     >
       <svg
         aria-hidden="true"
-        class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+        class="octicon octicon-question text-gitify-tooltip-icon"
         display="inline-block"
         fill="currentColor"
         focusable="false"
@@ -1976,7 +1976,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
     >
       <svg
         aria-hidden="true"
-        class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+        class="octicon octicon-question text-gitify-tooltip-icon"
         display="inline-block"
         fill="currentColor"
         focusable="false"
@@ -2021,7 +2021,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
     >
       <svg
         aria-hidden="true"
-        class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+        class="octicon octicon-question text-gitify-tooltip-icon"
         display="inline-block"
         fill="currentColor"
         focusable="false"
@@ -2066,7 +2066,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
     >
       <svg
         aria-hidden="true"
-        class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+        class="octicon octicon-question text-gitify-tooltip-icon"
         display="inline-block"
         fill="currentColor"
         focusable="false"
@@ -2111,7 +2111,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
     >
       <svg
         aria-hidden="true"
-        class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+        class="octicon octicon-question text-gitify-tooltip-icon"
         display="inline-block"
         fill="currentColor"
         focusable="false"
@@ -2156,7 +2156,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
     >
       <svg
         aria-hidden="true"
-        class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+        class="octicon octicon-question text-gitify-tooltip-icon"
         display="inline-block"
         fill="currentColor"
         focusable="false"
@@ -2202,7 +2202,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
     >
       <svg
         aria-hidden="true"
-        class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+        class="octicon octicon-question text-gitify-tooltip-icon"
         display="inline-block"
         fill="currentColor"
         focusable="false"
@@ -2247,7 +2247,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
     >
       <svg
         aria-hidden="true"
-        class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+        class="octicon octicon-question text-gitify-tooltip-icon"
         display="inline-block"
         fill="currentColor"
         focusable="false"
@@ -2292,7 +2292,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
     >
       <svg
         aria-hidden="true"
-        class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+        class="octicon octicon-question text-gitify-tooltip-icon"
         display="inline-block"
         fill="currentColor"
         focusable="false"
@@ -2337,7 +2337,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
     >
       <svg
         aria-hidden="true"
-        class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+        class="octicon octicon-question text-gitify-tooltip-icon"
         display="inline-block"
         fill="currentColor"
         focusable="false"
@@ -2428,7 +2428,7 @@ exports[`renderer/routes/Filters.tsx Users section should be able to toggle the 
     >
       <svg
         aria-hidden="true"
-        class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+        class="octicon octicon-question text-gitify-tooltip-icon"
         display="inline-block"
         fill="currentColor"
         focusable="false"
@@ -2520,7 +2520,7 @@ exports[`renderer/routes/Filters.tsx Users section should not be able to toggle 
     >
       <svg
         aria-hidden="true"
-        class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+        class="octicon octicon-question text-gitify-tooltip-icon"
         display="inline-block"
         fill="currentColor"
         focusable="false"

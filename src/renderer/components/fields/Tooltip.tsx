@@ -19,7 +19,7 @@ export const Tooltip: FC<ITooltip> = (props: ITooltip) => {
       onMouseLeave={() => setShowTooltip(false)}
       data-testid={`tooltip-${props.name}`}
     >
-      <QuestionIcon className="ml-1 text-gitify-tooltip-icon" />
+      <QuestionIcon className="text-gitify-tooltip-icon" />
       {showTooltip && (
         <Box className="absolute left-[-80px] z-10 w-60 rounded-sm border border-gray-300 p-2 shadow-sm bg-gitify-tooltip-popout">
           <Box className="text-left text-xs text-gitify-font">

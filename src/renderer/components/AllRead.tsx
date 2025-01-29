@@ -2,7 +2,7 @@ import { type FC, useContext, useMemo } from 'react';
 
 import { AppContext } from '../context/App';
 import { Constants } from '../utils/constants';
-import { hasFiltersSet } from '../utils/filters';
+import { hasAnyFiltersSet } from '../utils/filters';
 import { EmojiSplash } from './layout/EmojiSplash';
 
 interface IAllRead {
@@ -12,7 +12,7 @@ interface IAllRead {
 export const AllRead: FC<IAllRead> = ({ fullHeight = true }: IAllRead) => {
   const { settings } = useContext(AppContext);
 
-  const hasFilters = hasFiltersSet(settings);
+  const hasFilters = hasAnyFiltersSet(settings);
 
   const emoji = useMemo(
     () =>

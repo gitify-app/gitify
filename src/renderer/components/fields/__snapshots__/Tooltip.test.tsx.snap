@@ -9,7 +9,7 @@ exports[`renderer/components/fields/Tooltip.tsx should display on mouse enter / 
 >
   <svg
     aria-hidden="true"
-    class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+    class="octicon octicon-question text-gitify-tooltip-icon"
     display="inline-block"
     fill="currentColor"
     focusable="false"
@@ -44,7 +44,7 @@ exports[`renderer/components/fields/Tooltip.tsx should display on mouse enter / 
 >
   <svg
     aria-hidden="true"
-    class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+    class="octicon octicon-question text-gitify-tooltip-icon"
     display="inline-block"
     fill="currentColor"
     focusable="false"
@@ -74,7 +74,7 @@ exports[`renderer/components/fields/Tooltip.tsx should render 1`] = `
       >
         <svg
           aria-hidden="true"
-          class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+          class="octicon octicon-question text-gitify-tooltip-icon"
           display="inline-block"
           fill="currentColor"
           focusable="false"
@@ -100,7 +100,7 @@ exports[`renderer/components/fields/Tooltip.tsx should render 1`] = `
     >
       <svg
         aria-hidden="true"
-        class="octicon octicon-question ml-1 text-gitify-tooltip-icon"
+        class="octicon octicon-question text-gitify-tooltip-icon"
         display="inline-block"
         fill="currentColor"
         focusable="false"

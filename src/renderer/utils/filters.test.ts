@@ -1,28 +1,44 @@
+import { mockSingleAccountNotifications } from '../__mocks__/notifications-mocks';
 import { defaultSettings } from '../context/App';
 import type { SettingsState } from '../types';
-import { getFilterCount, hasFiltersSet } from './filters';
+import {
+  getNonBotFilterCount,
+  getReasonFilterCount,
+  hasAnyFiltersSet,
+} from './filters';
 
 describe('renderer/utils/filters.ts', () => {
-  it('default filter settings', () => {
-    expect(getFilterCount(defaultSettings)).toBe(0);
-    expect(hasFiltersSet(defaultSettings)).toBe(false);
+  describe('has filters', () => {
+    it('default filter settings', () => {
+      expect(hasAnyFiltersSet(defaultSettings)).toBe(false);
+    });
+
+    it('non-default reason filters', () => {
+      const settings = {
+        ...defaultSettings,
+        filterReasons: ['subscribed', 'manual'],
+      } as SettingsState;
+      expect(hasAnyFiltersSet(settings)).toBe(true);
+    });
+
+    it('non-default bot filters', () => {
+      const settings = {
+        ...defaultSettings,
+        hideBots: true,
+      } as SettingsState;
+      expect(hasAnyFiltersSet(settings)).toBe(true);
+    });
   });
 
-  it('non-default reason filters', () => {
-    const settings = {
-      ...defaultSettings,
-      filterReasons: ['subscribed', 'manual'],
-    } as SettingsState;
-    expect(getFilterCount(settings)).toBe(2);
-    expect(hasFiltersSet(settings)).toBe(true);
-  });
+  describe('filter counts', () => {
+    it('hideBots', () => {
+      expect(getNonBotFilterCount(mockSingleAccountNotifications)).toBe(1);
+    });
 
-  it('non-default bot filters', () => {
-    const settings = {
-      ...defaultSettings,
-      hideBots: true,
-    } as SettingsState;
-    expect(getFilterCount(settings)).toBe(1);
-    expect(hasFiltersSet(settings)).toBe(true);
+    it('reason', () => {
+      expect(
+        getReasonFilterCount(mockSingleAccountNotifications, 'subscribed'),
+      ).toBe(1);
+    });
   });
 });

@@ -16,10 +16,12 @@ import { Header } from '../components/primitives/Header';
 import { Title } from '../components/primitives/Title';
 import { AppContext } from '../context/App';
 import type { Reason } from '../typesGitHub';
+import { getNonBotFilterCount, getReasonFilterCount } from '../utils/filters';
 import { FORMATTED_REASONS, formatReason } from '../utils/reason';
 
 export const FiltersRoute: FC = () => {
-  const { settings, clearFilters, updateSetting } = useContext(AppContext);
+  const { settings, clearFilters, updateSetting, notifications } =
+    useContext(AppContext);
 
   const updateReasonFilter = (reason: Reason, checked: boolean) => {
     let reasons: Reason[] = [...settings.filterReasons];
@@ -69,6 +71,7 @@ export const FiltersRoute: FC = () => {
                 </Text>
               </Stack>
             }
+            counter={getNonBotFilterCount(notifications)}
           />
         </fieldset>
 
@@ -82,16 +85,22 @@ export const FiltersRoute: FC = () => {
 
           <Stack direction="vertical" gap="condensed">
             {Object.keys(FORMATTED_REASONS).map((reason: Reason) => {
+              const reasonTitle = formatReason(reason).title;
+              const reasonChecked = shouldShowReason(reason);
+              const reasonDescription = formatReason(reason).description;
+              const reasonCount = getReasonFilterCount(notifications, reason);
+
               return (
                 <Checkbox
                   key={reason}
                   name={reason}
-                  label={formatReason(reason).title}
-                  checked={shouldShowReason(reason)}
+                  label={reasonTitle}
+                  checked={reasonChecked}
                   onChange={(evt) =>
                     updateReasonFilter(reason, evt.target.checked)
                   }
-                  tooltip={<Text>{formatReason(reason).description}</Text>}
+                  tooltip={<Text>{reasonDescription}</Text>}
+                  counter={reasonCount}
                 />
               );
             })}
