@@ -24,7 +24,11 @@ describe('renderer/routes/Filters.tsx', () => {
       await act(async () => {
         render(
           <AppContext.Provider
-            value={{ auth: mockAuth, settings: mockSettings }}
+            value={{
+              auth: mockAuth,
+              settings: mockSettings,
+              notifications: [],
+            }}
           >
             <MemoryRouter>
               <FiltersRoute />
@@ -43,6 +47,7 @@ describe('renderer/routes/Filters.tsx', () => {
             value={{
               auth: mockAuth,
               settings: mockSettings,
+              notifications: [],
               fetchNotifications,
             }}
           >
@@ -71,6 +76,7 @@ describe('renderer/routes/Filters.tsx', () => {
                 detailedNotifications: false,
                 hideBots: false,
               },
+              notifications: [],
               updateSetting,
             }}
           >
@@ -112,6 +118,7 @@ describe('renderer/routes/Filters.tsx', () => {
                 detailedNotifications: true,
                 hideBots: false,
               },
+              notifications: [],
               updateSetting,
             }}
           >
@@ -154,6 +161,7 @@ describe('renderer/routes/Filters.tsx', () => {
                 ...mockSettings,
                 filterReasons: [],
               },
+              notifications: [],
               updateSetting,
             }}
           >
@@ -185,6 +193,7 @@ describe('renderer/routes/Filters.tsx', () => {
                 ...mockSettings,
                 filterReasons: ['security_alert'],
               },
+              notifications: [],
               updateSetting,
             }}
           >
@@ -218,6 +227,7 @@ describe('renderer/routes/Filters.tsx', () => {
             value={{
               auth: mockAuth,
               settings: mockSettings,
+              notifications: [],
               clearFilters,
             }}
           >

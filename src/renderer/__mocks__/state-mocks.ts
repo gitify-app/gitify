@@ -79,9 +79,6 @@ export const mockToken = 'token-123-456' as Token;
 const mockAppearanceSettings: AppearanceSettingsState = {
   theme: Theme.SYSTEM,
   zoomPercentage: 100,
-  detailedNotifications: true,
-  showPills: true,
-  showNumber: true,
   showAccountHeader: false,
   wrapNotificationTitle: false,
 };
@@ -89,6 +86,9 @@ const mockAppearanceSettings: AppearanceSettingsState = {
 const mockNotificationSettings: NotificationSettingsState = {
   groupBy: GroupBy.REPOSITORY,
   fetchAllNotifications: true,
+  detailedNotifications: true,
+  showPills: true,
+  showNumber: true,
   participating: false,
   markAsDoneOnOpen: false,
   markAsDoneOnUnsubscribe: false,

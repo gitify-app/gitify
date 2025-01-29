@@ -1,8 +1,9 @@
-import { BrowserWindow } from '@electron/remote';
 import { format } from 'date-fns';
 import semver from 'semver';
 
+import { ipcRenderer } from 'electron';
 import { APPLICATION } from '../../../shared/constants';
+import { namespacedEvent } from '../../../shared/events';
 import { logError, logWarn } from '../../../shared/logger';
 import type {
   Account,
@@ -17,78 +18,53 @@ import type {
 import type { UserDetails } from '../../typesGitHub';
 import { getAuthenticatedUser } from '../api/client';
 import { apiRequest } from '../api/request';
+import { openExternalLink } from '../comms';
 import { Constants } from '../constants';
 import { getPlatformFromHostname } from '../helpers';
 import type { AuthMethod, AuthResponse, AuthTokenResponse } from './types';
 
-// TODO - Refactor our OAuth2 flow to use system browser and local app gitify://callback - see #485 #561 #654
 export function authGitHub(
   authOptions = Constants.DEFAULT_AUTH_OPTIONS,
 ): Promise<AuthResponse> {
   return new Promise((resolve, reject) => {
-    // Build the OAuth consent page URL
-    const authWindow = new BrowserWindow({
-      width: 548,
-      height: 736,
-      show: true,
-    });
-
     const authUrl = new URL(`https://${authOptions.hostname}`);
     authUrl.pathname = '/login/oauth/authorize';
     authUrl.searchParams.append('client_id', authOptions.clientId);
     authUrl.searchParams.append('scope', Constants.AUTH_SCOPE.toString());
 
-    const session = authWindow.webContents.session;
-    session.clearStorageData();
+    openExternalLink(authUrl.toString() as Link);
 
-    authWindow.loadURL(authUrl.toString());
+    const handleCallback = (callbackUrl: string) => {
+      const url = new URL(callbackUrl);
 
-    const handleCallback = (url: Link) => {
-      const raw_code = /code=([^&]*)/.exec(url) || null;
-      const authCode =
-        raw_code && raw_code.length > 1 ? (raw_code[1] as AuthCode) : null;
-      const error = /\?error=(.+)$/.exec(url);
-      if (authCode || error) {
-        // Close the browser if code found or error
-        authWindow.destroy();
-      }
-      // If there is a code, proceed to get token from github
-      if (authCode) {
-        resolve({ authCode, authOptions });
+      const type = url.hostname;
+      const code = url.searchParams.get('code');
+      const error = url.searchParams.get('error');
+      const errorDescription = url.searchParams.get('error_description');
+      const errorUri = url.searchParams.get('error_uri');
+
+      if (code && (type === 'auth' || type === 'oauth')) {
+        const authMethod: AuthMethod =
+          type === 'auth' ? 'GitHub App' : 'OAuth App';
+
+        resolve({
+          authMethod: authMethod,
+          authCode: code as AuthCode,
+          authOptions: authOptions,
+        });
       } else if (error) {
         reject(
-          "Oops! Something went wrong and we couldn't " +
-            'log you in using GitHub. Please try again.',
+          `Oops! Something went wrong and we couldn't log you in using GitHub. Please try again. Reason: ${errorDescription} Docs: ${errorUri}`,
         );
       }
     };
 
-    // If "Done" button is pressed, hide "Loading"
-    authWindow.on('close', () => {
-      authWindow.destroy();
-    });
-
-    authWindow.webContents.on(
-      'did-fail-load',
-      (_event, _errorCode, _errorDescription, validatedURL) => {
-        if (validatedURL.includes(authOptions.hostname)) {
-          authWindow.destroy();
-          reject(
-            `Invalid Hostname. Could not load https://${authOptions.hostname}/.`,
-          );
-        }
+    ipcRenderer.on(
+      namespacedEvent('auth-callback'),
+      (_, callbackUrl: string) => {
+        handleCallback(callbackUrl);
       },
     );
-
-    authWindow.webContents.on('will-redirect', (event, url) => {
-      event.preventDefault();
-      handleCallback(url as Link);
-    });
-
-    authWindow.webContents.on('will-navigate', (event, url) => {
-      event.preventDefault();
-      handleCallback(url as Link);
-    });
   });
 }
 
@@ -132,6 +108,8 @@ export async function addAccount(
   token: Token,
   hostname: Hostname,
 ): Promise<AuthState> {
+  const accountList = auth.accounts;
+
   let newAccount = {
     hostname: hostname,
     method: method,
@@ -140,9 +118,23 @@ export async function addAccount(
   } as Account;
 
   newAccount = await refreshAccount(newAccount);
+  const newAccountUUID = getAccountUUID(newAccount);
+
+  const accountAlreadyExists = accountList.some(
+    (a) => getAccountUUID(a) === newAccountUUID,
+  );
+
+  if (accountAlreadyExists) {
+    logWarn(
+      'addAccount',
+      `account for user ${newAccount.user.login} already exists`,
+    );
+  } else {
+    accountList.push(newAccount);
+  }
 
   return {
-    accounts: [...auth.accounts, newAccount],
+    accounts: accountList,
   };
 }
 
@@ -249,11 +241,11 @@ export function getNewOAuthAppURL(hostname: Hostname): Link {
   );
   newOAuthAppURL.searchParams.append(
     'oauth_application[url]',
-    'https://www.gitify.io',
+    'https://gitify.io',
   );
   newOAuthAppURL.searchParams.append(
     'oauth_application[callback_url]',
-    'https://www.gitify.io/callback',
+    'gitify://oauth',
   );
 
   return newOAuthAppURL.toString() as Link;

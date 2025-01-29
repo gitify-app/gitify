@@ -53,16 +53,16 @@ export type SettingsState = AppearanceSettingsState &
 export interface AppearanceSettingsState {
   theme: Theme;
   zoomPercentage: number;
-  detailedNotifications: boolean;
   showAccountHeader: boolean;
-  showPills: boolean;
-  showNumber: boolean;
   wrapNotificationTitle: boolean;
 }
 
 export interface NotificationSettingsState {
   groupBy: GroupBy;
   fetchAllNotifications: boolean;
+  detailedNotifications: boolean;
+  showPills: boolean;
+  showNumber: boolean;
   participating: boolean;
   markAsDoneOnOpen: boolean;
   markAsDoneOnUnsubscribe: boolean;
