@@ -19,8 +19,8 @@ const browserWindowOpts = {
   minHeight: 400,
   resizable: false,
   skipTaskbar: true, // Hide the app from the Windows taskbar
+  // TODO ideally we would disable this as use a preload script with a context bridge
   webPreferences: {
-    enableRemoteModule: true,
     nodeIntegration: true,
     contextIsolation: false,
   },
@@ -37,11 +37,14 @@ const mb = menubar({
 const menuBuilder = new MenuBuilder(mb);
 const contextMenu = menuBuilder.buildMenu();
 
-/**
- * Electron Auto Updater only supports macOS and Windows
- * https://github.com/electron/update-electron-app
- */
+// Register your app as the handler for a custom protocol
+app.setAsDefaultProtocolClient('gitify');
+
 if (isMacOS() || isWindows()) {
+  /**
+   * Electron Auto Updater only supports macOS and Windows
+   * https://github.com/electron/update-electron-app
+   */
   const updater = new Updater(mb, menuBuilder);
   updater.initialize();
 }
@@ -53,13 +56,6 @@ app.whenReady().then(async () => {
 
   mb.on('ready', () => {
     mb.app.setAppUserModelId(APPLICATION.ID);
-
-    /**
-     * TODO: Remove @electron/remote use - see #650
-     * GitHub OAuth 2 Login Flows - Enable Remote Browser Window Launch
-     */
-    require('@electron/remote/main').initialize();
-    require('@electron/remote/main').enable(mb.window.webContents);
 
     // Tray configuration
     mb.tray.setToolTip(APPLICATION.NAME);
@@ -171,4 +167,10 @@ app.whenReady().then(async () => {
   ipc.on(namespacedEvent('update-auto-launch'), (_, settings) => {
     app.setLoginItemSettings(settings);
   });
+});
+
+// Handle gitify:// custom protocol URL events for OAuth 2.0 callback
+app.on('open-url', (event, url) => {
+  event.preventDefault();
+  mb.window.webContents.send(namespacedEvent('auth-callback'), url);
 });
