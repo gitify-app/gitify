@@ -9,7 +9,6 @@ import {
 
 import { BaseStyles, Box, ThemeProvider } from '@primer/react';
 
-import { Loading } from './components/Loading';
 import { Sidebar } from './components/Sidebar';
 import { AppContext, AppProvider } from './context/App';
 import { AccountsRoute } from './routes/Accounts';
@@ -40,7 +39,6 @@ export const App = () => {
         <AppProvider>
           <Router>
             <Box className="flex flex-col min-h-screen overflow-x-hidden overflow-y-auto pl-sidebar bg-gitify-background">
-              <Loading />
               <Sidebar />
               <Routes>
                 <Route

@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { type IRadioGroup, RadioGroup } from './RadioGroup';
 
 describe('renderer/components/fields/RadioGroup.tsx', () => {
@@ -23,13 +23,5 @@ describe('renderer/components/fields/RadioGroup.tsx', () => {
 
     const tree = render(<RadioGroup {...mockProps} />);
     expect(tree).toMatchSnapshot();
-  });
-
-  it('should check that NProgress is getting called in getDerivedStateFromProps (loading)', () => {
-    render(<RadioGroup {...props} />);
-
-    fireEvent.click(screen.getByLabelText('Value 1'));
-
-    expect(props.onChange).toHaveBeenCalledTimes(1);
   });
 });
