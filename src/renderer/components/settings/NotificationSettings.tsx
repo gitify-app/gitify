@@ -1,11 +1,19 @@
 import { type FC, type MouseEvent, useContext } from 'react';
 
-import { BellIcon } from '@primer/octicons-react';
+import {
+  BellIcon,
+  CheckIcon,
+  CommentIcon,
+  GitPullRequestIcon,
+  IssueClosedIcon,
+  MilestoneIcon,
+  TagIcon,
+} from '@primer/octicons-react';
 import { Box, Stack, Text } from '@primer/react';
 
 import { APPLICATION } from '../../../shared/constants';
 import { AppContext } from '../../context/App';
-import { GroupBy } from '../../types';
+import { GroupBy, Size } from '../../types';
 import { openGitHubParticipatingDocs } from '../../utils/links';
 import { Checkbox } from '../fields/Checkbox';
 import { RadioGroup } from '../fields/RadioGroup';
@@ -42,38 +50,154 @@ export const NotificationSettings: FC = () => {
           tooltip={
             <Stack direction="vertical" gap="condensed">
               <Text>
-                When <Text as="em">checked</Text>, Gitify will fetch{' '}
+                When <Text as="u">checked</Text>, {APPLICATION.NAME} will fetch{' '}
                 <Text as="strong">all</Text> notifications from your inbox.
               </Text>
               <Text>
-                When <Text as="em">unchecked</Text>, Gitify will only fetch the
-                first page of notifications (max 50 records per GitHub account)
+                When <Text as="u">unchecked</Text>, {APPLICATION.NAME} will
+                fetch the first page of notifications (max 50 records per GitHub
+                account)
               </Text>
             </Stack>
           }
         />
 
         <Checkbox
+          name="detailedNotifications"
+          label="Fetch detailed notifications"
+          checked={settings.detailedNotifications}
+          onChange={(evt) =>
+            updateSetting('detailedNotifications', evt.target.checked)
+          }
+          tooltip={
+            <Stack direction="vertical" gap="condensed">
+              <Text>
+                When <Text as="u">checked</Text>, {APPLICATION.NAME} will enrich
+                notifications with detailed user and state information. You may
+                also choose to display{' '}
+                <Text as="strong">notification metric pills</Text> or{' '}
+                <Text as="strong">notification reference numbers</Text>.
+              </Text>
+              <Text>
+                When <Text as="u">unchecked</Text>, {APPLICATION.NAME} will only
+                fetch basic notification details.
+              </Text>
+              <Text className="text-gitify-caution">
+                ⚠️ Users with a large number of unread notifications <i>may</i>{' '}
+                experience rate limiting under certain circumstances. Please
+                disable this setting if you experience this.
+              </Text>
+            </Stack>
+          }
+        />
+
+        <Box className="pl-6" hidden={!settings.detailedNotifications}>
+          <Stack direction="vertical" gap="condensed">
+            <Checkbox
+              name="showPills"
+              label="Show notification metric pills"
+              checked={settings.showPills}
+              onChange={(evt) => updateSetting('showPills', evt.target.checked)}
+              tooltip={
+                <Stack direction="vertical" gap="condensed">
+                  <Text>Show notification metric pills for:</Text>
+                  <Box className="pl-4">
+                    <ul>
+                      <li className="flex items-center gap-1">
+                        <IssueClosedIcon size={Size.SMALL} />
+                        linked issues
+                      </li>
+                      <li className="flex items-center gap-1">
+                        <CheckIcon size={Size.SMALL} />
+                        pr reviews
+                      </li>
+                      <li className="flex items-center gap-1">
+                        <CommentIcon size={Size.SMALL} />
+                        comments
+                      </li>
+                      <li className="flex items-center gap-1">
+                        <TagIcon size={Size.SMALL} />
+                        labels
+                      </li>
+                      <li className="flex items-center gap-1">
+                        <MilestoneIcon size={Size.SMALL} />
+                        milestones
+                      </li>
+                    </ul>
+                  </Box>
+                </Stack>
+              }
+            />
+
+            <Checkbox
+              name="showNumber"
+              label="Show GitHub number"
+              checked={settings.showNumber}
+              onChange={(evt) =>
+                updateSetting('showNumber', evt.target.checked)
+              }
+              tooltip={
+                <Stack direction="vertical" gap="condensed">
+                  <Text>Show GitHub number for:</Text>
+                  <Box className="pl-4">
+                    <ul>
+                      <li>
+                        <Stack direction="horizontal" gap="condensed">
+                          <CommentIcon size={Size.SMALL} />
+                          Discussion
+                        </Stack>
+                      </li>
+                      <li>
+                        <Stack direction="horizontal" gap="condensed">
+                          <IssueClosedIcon size={Size.SMALL} />
+                          Issue
+                        </Stack>
+                      </li>
+                      <li>
+                        <Stack direction="horizontal" gap="condensed">
+                          <GitPullRequestIcon size={Size.SMALL} />
+                          Pull Request
+                        </Stack>
+                      </li>
+                    </ul>
+                  </Box>
+                </Stack>
+              }
+            />
+          </Stack>
+        </Box>
+
+        <Checkbox
           name="showOnlyParticipating"
-          label="Show only participating"
+          label="Fetch only participating"
           checked={settings.participating}
           onChange={(evt) => updateSetting('participating', evt.target.checked)}
           tooltip={
-            <Text>
-              See{' '}
-              <Box
-                className="text-gitify-link cursor-pointer"
-                title="Open GitHub documentation for participating and watching notifications"
-                onClick={(event: MouseEvent<HTMLElement>) => {
-                  // Don't trigger onClick of parent element.
-                  event.stopPropagation();
-                  openGitHubParticipatingDocs();
-                }}
-              >
-                official docs
-              </Box>{' '}
-              for more details.
-            </Text>
+            <Stack direction="vertical" gap="condensed">
+              <Text>
+                When <Text as="u">checked</Text>, {APPLICATION.NAME} will fetch
+                only participating notifications.
+              </Text>
+              <Text>
+                When <Text as="em">unchecked</Text>, {APPLICATION.NAME} will
+                fetch participating and watching notifications.
+              </Text>
+              <Text>
+                See{' '}
+                <Box
+                  className="text-gitify-link cursor-pointer"
+                  title="Open GitHub documentation for participating and watching notifications"
+                  onClick={(event: MouseEvent<HTMLElement>) => {
+                    // Don't trigger onClick of parent element.
+                    event.stopPropagation();
+                    openGitHubParticipatingDocs();
+                  }}
+                >
+                  official docs
+                </Box>{' '}
+                for more details.
+              </Text>
+            </Stack>
           }
         />
 
