@@ -111,7 +111,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
         >
           <button
             aria-describedby=":r2t:-loading-announcement"
-            class="types__StyledButton-sc-ws60qy-0 jTCgqj pb-2"
+            class="types__StyledButton-sc-ws60qy-0 jTCgqj"
             data-loading="false"
             data-no-visuals="true"
             data-testid="account-profile"
@@ -203,10 +203,10 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
                   </span>
                 </div>
               </div>
-              <button
+              <div
+                class="Box-sc-g0xbh4-0 cursor-pointer"
                 data-testid="account-host"
                 title="Open host"
-                type="button"
               >
                 <div
                   class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
@@ -239,11 +239,11 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
                     github.com
                   </span>
                 </div>
-              </button>
-              <button
+              </div>
+              <div
+                class="Box-sc-g0xbh4-0 cursor-pointer"
                 data-testid="account-developer-settings"
                 title="Open developer settings"
-                type="button"
               >
                 <div
                   class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
@@ -276,7 +276,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
                     Personal Access Token
                   </span>
                 </div>
-              </button>
+              </div>
             </div>
           </div>
         </div>
@@ -473,7 +473,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
         >
           <button
             aria-describedby=":r36:-loading-announcement"
-            class="types__StyledButton-sc-ws60qy-0 jTCgqj pb-2"
+            class="types__StyledButton-sc-ws60qy-0 jTCgqj"
             data-loading="false"
             data-no-visuals="true"
             data-testid="account-profile"
@@ -565,10 +565,10 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
                   </span>
                 </div>
               </div>
-              <button
+              <div
+                class="Box-sc-g0xbh4-0 cursor-pointer"
                 data-testid="account-host"
                 title="Open host"
-                type="button"
               >
                 <div
                   class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
@@ -601,11 +601,11 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
                     github.gitify.io
                   </span>
                 </div>
-              </button>
-              <button
+              </div>
+              <div
+                class="Box-sc-g0xbh4-0 cursor-pointer"
                 data-testid="account-developer-settings"
                 title="Open developer settings"
-                type="button"
               >
                 <div
                   class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
@@ -638,7 +638,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
                     OAuth App
                   </span>
                 </div>
-              </button>
+              </div>
             </div>
           </div>
         </div>
@@ -835,7 +835,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
         >
           <button
             aria-describedby=":r3f:-loading-announcement"
-            class="types__StyledButton-sc-ws60qy-0 jTCgqj pb-2"
+            class="types__StyledButton-sc-ws60qy-0 jTCgqj"
             data-loading="false"
             data-no-visuals="true"
             data-testid="account-profile"
@@ -927,10 +927,10 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
                   </span>
                 </div>
               </div>
-              <button
+              <div
+                class="Box-sc-g0xbh4-0 cursor-pointer"
                 data-testid="account-host"
                 title="Open host"
-                type="button"
               >
                 <div
                   class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
@@ -963,11 +963,11 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
                     github.com
                   </span>
                 </div>
-              </button>
-              <button
+              </div>
+              <div
+                class="Box-sc-g0xbh4-0 cursor-pointer"
                 data-testid="account-developer-settings"
                 title="Open developer settings"
-                type="button"
               >
                 <div
                   class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
@@ -1000,7 +1000,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
                     GitHub App
                   </span>
                 </div>
-              </button>
+              </div>
             </div>
           </div>
         </div>
@@ -1348,7 +1348,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
         >
           <button
             aria-describedby=":r3s:-loading-announcement"
-            class="types__StyledButton-sc-ws60qy-0 jTCgqj pb-2"
+            class="types__StyledButton-sc-ws60qy-0 jTCgqj"
             data-loading="false"
             data-no-visuals="true"
             data-testid="account-profile"
@@ -1440,10 +1440,10 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
                   </span>
                 </div>
               </div>
-              <button
+              <div
+                class="Box-sc-g0xbh4-0 cursor-pointer"
                 data-testid="account-host"
                 title="Open host"
-                type="button"
               >
                 <div
                   class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
@@ -1476,11 +1476,11 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
                     github.com
                   </span>
                 </div>
-              </button>
-              <button
+              </div>
+              <div
+                class="Box-sc-g0xbh4-0 cursor-pointer"
                 data-testid="account-developer-settings"
                 title="Open developer settings"
-                type="button"
               >
                 <div
                   class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
@@ -1513,7 +1513,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
                     Personal Access Token
                   </span>
                 </div>
-              </button>
+              </div>
             </div>
           </div>
         </div>
@@ -1710,7 +1710,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
         >
           <button
             aria-describedby=":r45:-loading-announcement"
-            class="types__StyledButton-sc-ws60qy-0 jTCgqj pb-2"
+            class="types__StyledButton-sc-ws60qy-0 jTCgqj"
             data-loading="false"
             data-no-visuals="true"
             data-testid="account-profile"
@@ -1802,10 +1802,10 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
                   </span>
                 </div>
               </div>
-              <button
+              <div
+                class="Box-sc-g0xbh4-0 cursor-pointer"
                 data-testid="account-host"
                 title="Open host"
-                type="button"
               >
                 <div
                   class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
@@ -1838,11 +1838,11 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
                     github.gitify.io
                   </span>
                 </div>
-              </button>
-              <button
+              </div>
+              <div
+                class="Box-sc-g0xbh4-0 cursor-pointer"
                 data-testid="account-developer-settings"
                 title="Open developer settings"
-                type="button"
               >
                 <div
                   class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
@@ -1875,7 +1875,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
                     OAuth App
                   </span>
                 </div>
-              </button>
+              </div>
             </div>
           </div>
         </div>
@@ -2072,7 +2072,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
         >
           <button
             aria-describedby=":r4e:-loading-announcement"
-            class="types__StyledButton-sc-ws60qy-0 jTCgqj pb-2"
+            class="types__StyledButton-sc-ws60qy-0 jTCgqj"
             data-loading="false"
             data-no-visuals="true"
             data-testid="account-profile"
@@ -2164,10 +2164,10 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
                   </span>
                 </div>
               </div>
-              <button
+              <div
+                class="Box-sc-g0xbh4-0 cursor-pointer"
                 data-testid="account-host"
                 title="Open host"
-                type="button"
               >
                 <div
                   class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
@@ -2200,11 +2200,11 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
                     github.com
                   </span>
                 </div>
-              </button>
-              <button
+              </div>
+              <div
+                class="Box-sc-g0xbh4-0 cursor-pointer"
                 data-testid="account-developer-settings"
                 title="Open developer settings"
-                type="button"
               >
                 <div
                   class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
@@ -2237,7 +2237,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
                     GitHub App
                   </span>
                 </div>
-              </button>
+              </div>
             </div>
           </div>
         </div>
@@ -2585,7 +2585,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
         >
           <button
             aria-describedby=":r1:-loading-announcement"
-            class="types__StyledButton-sc-ws60qy-0 jTCgqj pb-2"
+            class="types__StyledButton-sc-ws60qy-0 jTCgqj"
             data-loading="false"
             data-no-visuals="true"
             data-testid="account-profile"
@@ -2677,10 +2677,10 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                   </span>
                 </div>
               </div>
-              <button
+              <div
+                class="Box-sc-g0xbh4-0 cursor-pointer"
                 data-testid="account-host"
                 title="Open host"
-                type="button"
               >
                 <div
                   class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
@@ -2713,11 +2713,11 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                     github.com
                   </span>
                 </div>
-              </button>
-              <button
+              </div>
+              <div
+                class="Box-sc-g0xbh4-0 cursor-pointer"
                 data-testid="account-developer-settings"
                 title="Open developer settings"
-                type="button"
               >
                 <div
                   class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
@@ -2750,7 +2750,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                     Personal Access Token
                   </span>
                 </div>
-              </button>
+              </div>
             </div>
           </div>
         </div>
@@ -2947,7 +2947,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
         >
           <button
             aria-describedby=":ra:-loading-announcement"
-            class="types__StyledButton-sc-ws60qy-0 jTCgqj pb-2"
+            class="types__StyledButton-sc-ws60qy-0 jTCgqj"
             data-loading="false"
             data-no-visuals="true"
             data-testid="account-profile"
@@ -3039,10 +3039,10 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                   </span>
                 </div>
               </div>
-              <button
+              <div
+                class="Box-sc-g0xbh4-0 cursor-pointer"
                 data-testid="account-host"
                 title="Open host"
-                type="button"
               >
                 <div
                   class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
@@ -3075,11 +3075,11 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                     github.gitify.io
                   </span>
                 </div>
-              </button>
-              <button
+              </div>
+              <div
+                class="Box-sc-g0xbh4-0 cursor-pointer"
                 data-testid="account-developer-settings"
                 title="Open developer settings"
-                type="button"
               >
                 <div
                   class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
@@ -3112,7 +3112,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                     OAuth App
                   </span>
                 </div>
-              </button>
+              </div>
             </div>
           </div>
         </div>
@@ -3309,7 +3309,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
         >
           <button
             aria-describedby=":rj:-loading-announcement"
-            class="types__StyledButton-sc-ws60qy-0 jTCgqj pb-2"
+            class="types__StyledButton-sc-ws60qy-0 jTCgqj"
             data-loading="false"
             data-no-visuals="true"
             data-testid="account-profile"
@@ -3401,10 +3401,10 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                   </span>
                 </div>
               </div>
-              <button
+              <div
+                class="Box-sc-g0xbh4-0 cursor-pointer"
                 data-testid="account-host"
                 title="Open host"
-                type="button"
               >
                 <div
                   class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
@@ -3437,11 +3437,11 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                     github.com
                   </span>
                 </div>
-              </button>
-              <button
+              </div>
+              <div
+                class="Box-sc-g0xbh4-0 cursor-pointer"
                 data-testid="account-developer-settings"
                 title="Open developer settings"
-                type="button"
               >
                 <div
                   class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
@@ -3474,7 +3474,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                     GitHub App
                   </span>
                 </div>
-              </button>
+              </div>
             </div>
           </div>
         </div>

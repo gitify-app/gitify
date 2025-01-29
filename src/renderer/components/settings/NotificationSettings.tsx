@@ -1,7 +1,7 @@
 import { type FC, type MouseEvent, useContext } from 'react';
 
 import { BellIcon } from '@primer/octicons-react';
-import { Stack, Text } from '@primer/react';
+import { Box, Stack, Text } from '@primer/react';
 
 import { APPLICATION } from '../../../shared/constants';
 import { AppContext } from '../../context/App';
@@ -61,9 +61,8 @@ export const NotificationSettings: FC = () => {
           tooltip={
             <Text>
               See{' '}
-              <button
-                type="button"
-                className="text-gitify-link"
+              <Box
+                className="text-gitify-link cursor-pointer"
                 title="Open GitHub documentation for participating and watching notifications"
                 onClick={(event: MouseEvent<HTMLElement>) => {
                   // Don't trigger onClick of parent element.
@@ -72,7 +71,7 @@ export const NotificationSettings: FC = () => {
                 }}
               >
                 official docs
-              </button>{' '}
+              </Box>{' '}
               for more details.
             </Text>
           }
