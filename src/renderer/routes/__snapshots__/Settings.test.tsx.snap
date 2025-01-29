@@ -1219,15 +1219,6 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           </div>
         </div>
       </fieldset>
-    </div>
-    <div
-      class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
-      data-align="center"
-      data-direction="vertical"
-      data-justify="start"
-      data-padding="spacious"
-      data-wrap="nowrap"
-    >
       <button
         aria-describedby=":r5:-loading-announcement"
         class="types__StyledButton-sc-ws60qy-0 fyPjMX"
@@ -1249,6 +1240,8 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           </span>
         </span>
       </button>
+      isOpen && (
+      )
     </div>
   </div>
   <div
@@ -1273,11 +1266,11 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
         <span
           aria-label="View release notes"
           class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-n"
-          id=":r6:"
+          id=":rb:"
           role="tooltip"
         >
           <button
-            aria-describedby=":r7:-loading-announcement"
+            aria-describedby=":rc:-loading-announcement"
             class="types__StyledButton-sc-ws60qy-0 jTCgqj"
             data-loading="false"
             data-no-visuals="true"
@@ -1313,11 +1306,11 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
         <span
           aria-label="Accounts"
           class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-n"
-          id=":r8:"
+          id=":rd:"
           role="tooltip"
         >
           <button
-            aria-describedby=":r9:-loading-announcement"
+            aria-describedby=":re:-loading-announcement"
             aria-label="Accounts"
             class="types__StyledButton-sc-ws60qy-0 jTCgqj"
             data-component="IconButton"
@@ -1348,11 +1341,11 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
         <span
           aria-label="Quit Gitify"
           class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-nw"
-          id=":ra:"
+          id=":rf:"
           role="tooltip"
         >
           <button
-            aria-describedby=":rb:-loading-announcement"
+            aria-describedby=":rg:-loading-announcement"
             aria-label="Quit Gitify"
             class="types__StyledButton-sc-ws60qy-0 cYZGEC"
             data-component="IconButton"

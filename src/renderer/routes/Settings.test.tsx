@@ -12,7 +12,6 @@ jest.mock('react-router-dom', () => ({
 
 describe('renderer/routes/Settings.tsx', () => {
   const fetchNotifications = jest.fn();
-  const resetSettings = jest.fn();
 
   afterEach(() => {
     jest.clearAllMocks();
@@ -52,55 +51,5 @@ describe('renderer/routes/Settings.tsx', () => {
     fireEvent.click(screen.getByTestId('header-nav-back'));
     expect(fetchNotifications).toHaveBeenCalledTimes(1);
     expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
-  });
-
-  it('should reset default settings when `OK`', async () => {
-    window.confirm = jest.fn(() => true); // always click 'OK'
-
-    await act(async () => {
-      render(
-        <AppContext.Provider
-          value={{
-            auth: mockAuth,
-            settings: mockSettings,
-            resetSettings,
-          }}
-        >
-          <MemoryRouter>
-            <SettingsRoute />
-          </MemoryRouter>
-        </AppContext.Provider>,
-      );
-    });
-
-    fireEvent.click(screen.getByTestId('settings-reset'));
-    fireEvent.click(screen.getByText('Reset'));
-
-    expect(resetSettings).toHaveBeenCalled();
-  });
-
-  it('should skip reset default settings when `cancelled`', async () => {
-    window.confirm = jest.fn(() => false); // always click 'cancel'
-
-    await act(async () => {
-      render(
-        <AppContext.Provider
-          value={{
-            auth: mockAuth,
-            settings: mockSettings,
-            resetSettings,
-          }}
-        >
-          <MemoryRouter>
-            <SettingsRoute />
-          </MemoryRouter>
-        </AppContext.Provider>,
-      );
-    });
-
-    fireEvent.click(screen.getByTestId('settings-reset'));
-    fireEvent.click(screen.getByText('Cancel'));
-
-    expect(resetSettings).not.toHaveBeenCalled();
   });
 });

@@ -1,8 +1,7 @@
-import { type FC, useCallback, useContext, useState } from 'react';
+import type { FC } from 'react';
 
 import { GearIcon } from '@primer/octicons-react';
-import { Button, Stack, Text } from '@primer/react';
-import { Dialog } from '@primer/react/experimental';
+import { Stack } from '@primer/react';
 
 import { Contents } from '../components/layout/Contents';
 import { Page } from '../components/layout/Page';
@@ -10,18 +9,10 @@ import { Header } from '../components/primitives/Header';
 import { AppearanceSettings } from '../components/settings/AppearanceSettings';
 import { NotificationSettings } from '../components/settings/NotificationSettings';
 import { SettingsFooter } from '../components/settings/SettingsFooter';
+import { SettingsReset } from '../components/settings/SettingsReset';
 import { SystemSettings } from '../components/settings/SystemSettings';
-import { AppContext } from '../context/App';
 
 export const SettingsRoute: FC = () => {
-  const { resetSettings } = useContext(AppContext);
-  const [isOpen, setIsOpen] = useState(false);
-  const onDialogClose = useCallback(() => setIsOpen(false), []);
-  const onDialogProceed = useCallback(() => {
-    resetSettings();
-    setIsOpen(false);
-  }, [resetSettings]);
-
   return (
     <Page id="settings">
       <Header fetchOnBack icon={GearIcon}>
@@ -33,40 +24,7 @@ export const SettingsRoute: FC = () => {
           <AppearanceSettings />
           <NotificationSettings />
           <SystemSettings />
-        </Stack>
-
-        <Stack align="center" padding="spacious">
-          <Button
-            variant="danger"
-            onClick={() => setIsOpen(!isOpen)}
-            data-testid="settings-reset"
-            sx={{ width: '200px' }}
-          >
-            Reset Settings
-          </Button>
-          {isOpen && (
-            <Dialog
-              title="Reset Settings"
-              width="large"
-              onClose={onDialogClose}
-              footerButtons={[
-                {
-                  buttonType: 'default',
-                  content: 'Cancel',
-                  onClick: onDialogClose,
-                },
-                {
-                  buttonType: 'danger',
-                  content: 'Reset',
-                  onClick: onDialogProceed,
-                },
-              ]}
-              data-testid="reset-dialog"
-            >
-              Please confirm that you want to reset all settings to the{' '}
-              <Text as="strong">Gitify defaults</Text>
-            </Dialog>
-          )}
+          <SettingsReset />
         </Stack>
       </Contents>
 
