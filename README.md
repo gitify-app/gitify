@@ -4,7 +4,7 @@
 
 > GitHub Notifications on your menu bar. Available on macOS, Windows and Linux.
 
-![Gitify](assets/images/press.png)
+![Gitify][gitify-social]
 
 ### Download
 
@@ -33,6 +33,7 @@ For more information, see [LICENSE](LICENSE).
 <!-- LINK LABELS -->
 [website]: https://www.gitify.io
 [faqs]: https://www.gitify.io/faq/
+[gitify-social]: https://raw.githubusercontent.com/gitify-app/website/master/public/images/social.png
 
 [github]: https://github.com/gitify-app/gitify
 [github-actions]: https://github.com/gitify-app/gitify/actions
