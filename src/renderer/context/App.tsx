@@ -31,7 +31,6 @@ import {
 } from '../types';
 import type { Notification } from '../typesGitHub';
 import { headNotifications } from '../utils/api/client';
-import { migrateAuthenticatedAccounts } from '../utils/auth/migration';
 import type {
   LoginOAuthAppOptions,
   LoginPersonalAccessTokenOptions,
@@ -63,9 +62,6 @@ import { zoomPercentageToLevel } from '../utils/zoom';
 
 export const defaultAuth: AuthState = {
   accounts: [],
-  token: null,
-  enterpriseAccounts: [],
-  user: null,
 };
 
 const defaultAppearanceSettings: AppearanceSettingsState = {
@@ -279,7 +275,6 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   );
 
   const restoreSettings = useCallback(async () => {
-    await migrateAuthenticatedAccounts();
     const existing = loadState();
 
     // Restore settings before accounts to ensure filters are available before fetching notifications

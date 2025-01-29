@@ -1,11 +1,7 @@
 import type { OcticonProps } from '@primer/octicons-react';
 import type { FC } from 'react';
 import type { Notification, Reason } from './typesGitHub';
-import type {
-  AuthMethod,
-  EnterpriseAccount,
-  PlatformType,
-} from './utils/auth/types';
+import type { AuthMethod, PlatformType } from './utils/auth/types';
 
 declare const __brand: unique symbol;
 
@@ -13,18 +9,6 @@ type Brand<B> = { [__brand]: B };
 
 export interface AuthState {
   accounts: Account[];
-  /**
-   * @deprecated This attribute is deprecated and will be removed in a future release.
-   */
-  token?: Token;
-  /**
-   * @deprecated This attribute is deprecated and will be removed in a future release.
-   */
-  enterpriseAccounts?: EnterpriseAccount[];
-  /**
-   * @deprecated This attribute is deprecated and will be removed in a future release.
-   */
-  user?: GitifyUser | null;
 }
 
 export type Branded<T, B> = T & Brand<B>;

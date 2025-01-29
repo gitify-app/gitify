@@ -32,9 +32,6 @@ describe('renderer/utils/storage.ts', () => {
         user: null,
       },
     ]);
-    expect(result.auth.token).toBeUndefined();
-    expect(result.auth.enterpriseAccounts).toBeUndefined();
-    expect(result.auth.user).toBeUndefined();
     expect(result.settings.theme).toBe('DARK_DEFAULT');
   });
 
