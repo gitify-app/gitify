@@ -2,19 +2,12 @@ import { webFrame } from 'electron';
 import { type FC, useContext, useState } from 'react';
 
 import {
-  CheckIcon,
-  CommentIcon,
   DashIcon,
-  GitPullRequestIcon,
-  IssueClosedIcon,
-  MilestoneIcon,
   PaintbrushIcon,
   PlusIcon,
-  TagIcon,
   XCircleIcon,
 } from '@primer/octicons-react';
 import {
-  Box,
   Button,
   ButtonGroup,
   IconButton,
@@ -24,7 +17,7 @@ import {
 } from '@primer/react';
 
 import { AppContext } from '../../context/App';
-import { Size, Theme } from '../../types';
+import { Theme } from '../../types';
 import { hasMultipleAccounts } from '../../utils/auth/utils';
 import { zoomLevelToPercentage, zoomPercentageToLevel } from '../../utils/zoom';
 import { Checkbox } from '../fields/Checkbox';
@@ -158,112 +151,10 @@ export const AppearanceSettings: FC = () => {
         </Stack>
 
         <Checkbox
-          name="detailedNotifications"
-          label="Detailed notifications"
-          checked={settings.detailedNotifications}
-          onChange={(evt) =>
-            updateSetting('detailedNotifications', evt.target.checked)
-          }
-          tooltip={
-            <Stack direction="vertical" gap="condensed">
-              <Text>
-                Enrich notifications with detailed user and state information.
-              </Text>
-              <Text>
-                You may also choose to display{' '}
-                <Text as="strong">notification metric pills</Text> or{' '}
-                <Text as="strong">notification numbers</Text>.
-              </Text>
-              <Text className="text-gitify-caution">
-                ⚠️ Users with a large number of unread notifications <i>may</i>{' '}
-                experience rate limiting under certain circumstances. Please
-                disable this setting if you experience this.
-              </Text>
-            </Stack>
-          }
-        />
-
-        <Box className="pl-6" hidden={!settings.detailedNotifications}>
-          <Stack direction="vertical" gap="condensed">
-            <Checkbox
-              name="showPills"
-              label="Show notification metric pills"
-              checked={settings.showPills}
-              onChange={(evt) => updateSetting('showPills', evt.target.checked)}
-              tooltip={
-                <Stack direction="vertical" gap="condensed">
-                  <Text>Show notification metric pills for:</Text>
-                  <Box className="pl-4">
-                    <ul>
-                      <li className="flex items-center gap-1">
-                        <IssueClosedIcon size={Size.SMALL} />
-                        linked issues
-                      </li>
-                      <li className="flex items-center gap-1">
-                        <CheckIcon size={Size.SMALL} />
-                        pr reviews
-                      </li>
-                      <li className="flex items-center gap-1">
-                        <CommentIcon size={Size.SMALL} />
-                        comments
-                      </li>
-                      <li className="flex items-center gap-1">
-                        <TagIcon size={Size.SMALL} />
-                        labels
-                      </li>
-                      <li className="flex items-center gap-1">
-                        <MilestoneIcon size={Size.SMALL} />
-                        milestones
-                      </li>
-                    </ul>
-                  </Box>
-                </Stack>
-              }
-            />
-
-            <Checkbox
-              name="showNumber"
-              label="Show notification number"
-              checked={settings.showNumber}
-              onChange={(evt) =>
-                updateSetting('showNumber', evt.target.checked)
-              }
-              tooltip={
-                <Stack direction="vertical" gap="condensed">
-                  <Text>Show GitHub number for:</Text>
-                  <Box className="pl-4">
-                    <ul>
-                      <li>
-                        <Stack direction="horizontal" gap="condensed">
-                          <CommentIcon size={Size.SMALL} />
-                          Discussion
-                        </Stack>
-                      </li>
-                      <li>
-                        <Stack direction="horizontal" gap="condensed">
-                          <IssueClosedIcon size={Size.SMALL} />
-                          Issue
-                        </Stack>
-                      </li>
-                      <li>
-                        <Stack direction="horizontal" gap="condensed">
-                          <GitPullRequestIcon size={Size.SMALL} />
-                          Pull Request
-                        </Stack>
-                      </li>
-                    </ul>
-                  </Box>
-                </Stack>
-              }
-            />
-          </Stack>
-        </Box>
-
-        <Checkbox
           name="showAccountHeader"
           label="Show account header"
-          checked={settings.showAccountHeader || hasMultipleAccounts(auth)}
-          disabled={hasMultipleAccounts(auth)}
+          checked={settings.showAccountHeader}
+          visible={!hasMultipleAccounts(auth)}
           onChange={(evt) =>
             updateSetting('showAccountHeader', evt.target.checked)
           }

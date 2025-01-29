@@ -80,6 +80,12 @@
       "package.json"
     ],
     "electronLanguages": ["en"],
+    "protocols": [
+      {
+        "name": "Gitify",
+        "schemes": ["gitify"]
+      }
+    ],
     "mac": {
       "category": "public.app-category.developer-tools",
       "icon": "assets/images/app-icon.icns",

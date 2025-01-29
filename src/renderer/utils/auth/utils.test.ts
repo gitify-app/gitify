@@ -1,6 +1,6 @@
-import remote from '@electron/remote';
 import axios from 'axios';
 import type { AxiosPromise, AxiosResponse } from 'axios';
+import { ipcRenderer } from 'electron';
 import nock from 'nock';
 import {
   mockAuth,
@@ -12,67 +12,108 @@ import type {
   AuthCode,
   AuthState,
   ClientID,
+  ClientSecret,
   Hostname,
   Token,
 } from '../../types';
+import * as comms from '../../utils/comms';
 import * as apiRequests from '../api/request';
 import type { AuthMethod } from './types';
 import * as auth from './utils';
 import { getNewOAuthAppURL, getNewTokenURL } from './utils';
 
-const browserWindow = new remote.BrowserWindow();
-
 describe('renderer/utils/auth/utils.ts', () => {
   describe('authGitHub', () => {
-    const loadURLMock = jest.spyOn(browserWindow, 'loadURL');
+    const openExternalLinkMock = jest
+      .spyOn(comms, 'openExternalLink')
+      .mockImplementation();
 
     afterEach(() => {
       jest.clearAllMocks();
     });
 
-    it('should call authGitHub - success', async () => {
-      // Casting to jest.Mock avoids Typescript errors, where the spy is expected to match all the original
-      // function's typing. I might fix all that if the return type of this was actually used, or if I was
-      // writing this test for a new feature. Since I'm just upgrading Jest, jest.Mock is a nice escape hatch
-      (
-        jest.spyOn(browserWindow.webContents, 'on') as jest.Mock
-      ).mockImplementation((event, callback): void => {
-        if (event === 'will-redirect') {
-          const event = new Event('will-redirect');
-          callback(event, 'https://github.com/?code=123-456');
+    it('should call authGitHub - success auth flow', async () => {
+      const mockIpcRendererOn = (
+        jest.spyOn(ipcRenderer, 'on') as jest.Mock
+      ).mockImplementation((event, callback) => {
+        if (event === 'gitify:auth-callback') {
+          callback(null, 'gitify://auth?code=123-456');
         }
       });
 
       const res = await auth.authGitHub();
 
-      expect(res.authCode).toBe('123-456');
-
-      expect(
-        browserWindow.webContents.session.clearStorageData,
-      ).toHaveBeenCalledTimes(1);
-
-      expect(loadURLMock).toHaveBeenCalledTimes(1);
-      expect(loadURLMock).toHaveBeenCalledWith(
+      expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
+      expect(openExternalLinkMock).toHaveBeenCalledWith(
         'https://github.com/login/oauth/authorize?client_id=FAKE_CLIENT_ID_123&scope=read%3Auser%2Cnotifications%2Crepo',
       );
 
-      expect(browserWindow.destroy).toHaveBeenCalledTimes(1);
+      expect(mockIpcRendererOn).toHaveBeenCalledTimes(1);
+      expect(mockIpcRendererOn).toHaveBeenCalledWith(
+        'gitify:auth-callback',
+        expect.any(Function),
+      );
+
+      expect(res.authMethod).toBe('GitHub App');
+      expect(res.authCode).toBe('123-456');
+    });
+
+    it('should call authGitHub - success oauth flow', async () => {
+      const mockIpcRendererOn = (
+        jest.spyOn(ipcRenderer, 'on') as jest.Mock
+      ).mockImplementation((event, callback) => {
+        if (event === 'gitify:auth-callback') {
+          callback(null, 'gitify://oauth?code=123-456');
+        }
+      });
+
+      const res = await auth.authGitHub({
+        clientId: 'BYO_CLIENT_ID' as ClientID,
+        clientSecret: 'BYO_CLIENT_SECRET' as ClientSecret,
+        hostname: 'my.git.com' as Hostname,
+      });
+
+      expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
+      expect(openExternalLinkMock).toHaveBeenCalledWith(
+        'https://my.git.com/login/oauth/authorize?client_id=BYO_CLIENT_ID&scope=read%3Auser%2Cnotifications%2Crepo',
+      );
+
+      expect(mockIpcRendererOn).toHaveBeenCalledTimes(1);
+      expect(mockIpcRendererOn).toHaveBeenCalledWith(
+        'gitify:auth-callback',
+        expect.any(Function),
+      );
+
+      expect(res.authMethod).toBe('OAuth App');
+      expect(res.authCode).toBe('123-456');
     });
 
     it('should call authGitHub - failure', async () => {
-      (
-        jest.spyOn(browserWindow.webContents, 'on') as jest.Mock
-      ).mockImplementation((event, callback): void => {
-        if (event === 'will-redirect') {
-          const event = new Event('will-redirect');
-          callback(event, 'https://www.github.com/?error=Oops');
+      const mockIpcRendererOn = (
+        jest.spyOn(ipcRenderer, 'on') as jest.Mock
+      ).mockImplementation((event, callback) => {
+        if (event === 'gitify:auth-callback') {
+          callback(
+            null,
+            'gitify://auth?error=invalid_request&error_description=The+redirect_uri+is+missing+or+invalid.&error_uri=https://docs.github.com/en/developers/apps/troubleshooting-oauth-errors',
+          );
         }
       });
 
       await expect(async () => await auth.authGitHub()).rejects.toEqual(
-        "Oops! Something went wrong and we couldn't log you in using GitHub. Please try again.",
+        "Oops! Something went wrong and we couldn't log you in using GitHub. Please try again. Reason: The redirect_uri is missing or invalid. Docs: https://docs.github.com/en/developers/apps/troubleshooting-oauth-errors",
       );
-      expect(loadURLMock).toHaveBeenCalledTimes(1);
+
+      expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
+      expect(openExternalLinkMock).toHaveBeenCalledWith(
+        'https://github.com/login/oauth/authorize?client_id=FAKE_CLIENT_ID_123&scope=read%3Auser%2Cnotifications%2Crepo',
+      );
+
+      expect(mockIpcRendererOn).toHaveBeenCalledTimes(1);
+      expect(mockIpcRendererOn).toHaveBeenCalledWith(
+        'gitify:auth-callback',
+        expect.any(Function),
+      );
     });
   });
 
