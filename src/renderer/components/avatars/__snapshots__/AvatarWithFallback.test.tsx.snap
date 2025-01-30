@@ -36,7 +36,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx renders the fallback
           maxwidth="280"
           title="@gitify-app"
         >
-          asdokmdasoimdasoisadoindsviunafjhnfpuinfdsapiujndfp iun piunaspiufnpiuadspdsfainfdsai
+          @gitify-app
         </div>
       </div>
     </div>
@@ -73,7 +73,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx renders the fallback
         maxwidth="280"
         title="@gitify-app"
       >
-        asdokmdasoimdasoisadoindsviunafjhnfpuinfdsapiujndfp iun piunaspiufnpiuadspdsfainfdsai
+        @gitify-app
       </div>
     </div>
   </div>,
@@ -167,7 +167,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx renders the fallback
           maxwidth="280"
           title="@gitify-app"
         >
-          asdokmdasoimdasoisadoindsviunafjhnfpuinfdsapiujndfp iun piunaspiufnpiuadspdsfainfdsai
+          @gitify-app
         </div>
       </div>
     </div>
@@ -204,7 +204,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx renders the fallback
         maxwidth="280"
         title="@gitify-app"
       >
-        asdokmdasoimdasoisadoindsviunafjhnfpuinfdsapiujndfp iun piunaspiufnpiuadspdsfainfdsai
+        @gitify-app
       </div>
     </div>
   </div>,
@@ -288,7 +288,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx renders the fallback
     maxwidth="280"
     title="@gitify-app"
   >
-    asdokmdasoimdasoisadoindsviunafjhnfpuinfdsapiujndfp iun piunaspiufnpiuadspdsfainfdsai
+    @gitify-app
   </div>
 </div>
 `;
@@ -319,7 +319,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx renders the fallback
     maxwidth="280"
     title="@gitify-app"
   >
-    asdokmdasoimdasoisadoindsviunafjhnfpuinfdsapiujndfp iun piunaspiufnpiuadspdsfainfdsai
+    @gitify-app
   </div>
 </div>
 `;
@@ -354,7 +354,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx should render avatar
           maxwidth="280"
           title="@gitify-app"
         >
-          asdokmdasoimdasoisadoindsviunafjhnfpuinfdsapiujndfp iun piunaspiufnpiuadspdsfainfdsai
+          @gitify-app
         </div>
       </div>
     </div>
@@ -385,7 +385,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx should render avatar
         maxwidth="280"
         title="@gitify-app"
       >
-        asdokmdasoimdasoisadoindsviunafjhnfpuinfdsapiujndfp iun piunaspiufnpiuadspdsfainfdsai
+        @gitify-app
       </div>
     </div>
   </div>,
@@ -473,7 +473,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx should render avatar
           maxwidth="280"
           title="@gitify-app"
         >
-          asdokmdasoimdasoisadoindsviunafjhnfpuinfdsapiujndfp iun piunaspiufnpiuadspdsfainfdsai
+          @gitify-app
         </div>
       </div>
     </div>
@@ -504,7 +504,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx should render avatar
         maxwidth="280"
         title="@gitify-app"
       >
-        asdokmdasoimdasoisadoindsviunafjhnfpuinfdsapiujndfp iun piunaspiufnpiuadspdsfainfdsai
+        @gitify-app
       </div>
     </div>
   </div>,

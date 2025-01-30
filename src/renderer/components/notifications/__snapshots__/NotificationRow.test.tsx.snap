@@ -95,7 +95,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                       maxwidth="280"
                       title="gitify-app/notifications-test"
                     >
-                      asdokmdasoimdasoisadoindsviunafjhnfpuinfdsapiujndfp iun piunaspiufnpiuadspdsfainfdsai
+                      gitify-app/notifications-test
                     </div>
                   </div>
                 </div>
@@ -457,7 +457,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                     maxwidth="280"
                     title="gitify-app/notifications-test"
                   >
-                    asdokmdasoimdasoisadoindsviunafjhnfpuinfdsapiujndfp iun piunaspiufnpiuadspdsfainfdsai
+                    gitify-app/notifications-test
                   </div>
                 </div>
               </div>

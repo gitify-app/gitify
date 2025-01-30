@@ -121,10 +121,10 @@ export const AccountsRoute: FC = () => {
           return (
             <Box
               key={accountUUID}
-              className="rounded-md p-2 mb-4 bg-gitify-accounts"
+              className="rounded-md p-2 bg-gitify-accounts"
             >
-              <Stack direction="horizontal">
-                <Stack direction="vertical">
+              <Stack direction="vertical" align="stretch">
+                <Stack direction="horizontal" align="start">
                   <Button
                     title="Open account profile"
                     onClick={() => openAccountProfile(account)}
@@ -137,101 +137,101 @@ export const AccountsRoute: FC = () => {
                       size={Size.XLARGE}
                     />
                   </Button>
+                </Stack>
 
-                  <Stack
-                    direction="horizontal"
-                    justify="space-between"
-                    align="center"
-                  >
-                    <Box className="pl-4 pb-2 text-xs">
-                      <Stack direction="vertical" gap="condensed">
-                        <Box hidden={!account.user.name}>
-                          <Stack
-                            direction="horizontal"
-                            gap="condensed"
-                            align="center"
-                          >
-                            <PersonIcon />
-                            <Text>{account.user?.name}</Text>
-                          </Stack>
-                        </Box>
-
-                        <Box
-                          title="Open host"
-                          onClick={() => openHost(account.hostname)}
-                          className="cursor-pointer"
-                          data-testid="account-host"
+                <Stack
+                  direction="horizontal"
+                  justify="space-between"
+                  align="start"
+                >
+                  <Box className="pl-4 pb-2 text-xs">
+                    <Stack direction="vertical" gap="condensed">
+                      <Box hidden={!account.user.name}>
+                        <Stack
+                          direction="horizontal"
+                          gap="condensed"
+                          align="center"
                         >
-                          <Stack
-                            direction="horizontal"
-                            gap="condensed"
-                            align="center"
-                          >
-                            <PlatformIcon />
-                            <Text>{account.hostname}</Text>
-                          </Stack>
-                        </Box>
+                          <PersonIcon />
+                          <Text>{account.user?.name}</Text>
+                        </Stack>
+                      </Box>
 
-                        <Box
-                          title="Open developer settings"
-                          onClick={() => openDeveloperSettings(account)}
-                          className="cursor-pointer"
-                          data-testid="account-developer-settings"
+                      <Box
+                        title="Open host"
+                        onClick={() => openHost(account.hostname)}
+                        className="cursor-pointer"
+                        data-testid="account-host"
+                      >
+                        <Stack
+                          direction="horizontal"
+                          gap="condensed"
+                          align="center"
                         >
-                          <Stack
-                            direction="horizontal"
-                            gap="condensed"
-                            align="center"
-                          >
-                            <AuthMethodIcon />
-                            <Text>{account.method}</Text>
-                          </Stack>
-                        </Box>
-                      </Stack>
-                    </Box>
+                          <PlatformIcon />
+                          <Text>{account.hostname}</Text>
+                        </Stack>
+                      </Box>
 
-                    <Stack direction="horizontal" gap="condensed">
-                      <IconButton
-                        icon={AlertFillIcon}
-                        aria-label={`This account is missing one or more required scopes: [${formatRequiredScopes()}]`}
-                        variant="danger"
+                      <Box
+                        title="Open developer settings"
                         onClick={() => openDeveloperSettings(account)}
-                        size="small"
-                        data-testid="account-missing-scopes"
-                        className={
-                          account.hasRequiredScopes ? 'invisible' : 'visible'
-                        }
-                      />
-
-                      <IconButton
-                        icon={i === 0 ? StarFillIcon : StarIcon}
-                        aria-label={
-                          i === 0 ? 'Primary account' : 'Set as primary account'
-                        }
-                        variant={i === 0 ? 'primary' : 'default'}
-                        onClick={() => setAsPrimaryAccount(account)}
-                        size="small"
-                        data-testid="account-set-primary"
-                      />
-
-                      <IconButton
-                        icon={SyncIcon}
-                        aria-label={`Refresh ${account.user.login}`}
-                        onClick={() => handleRefresh(account)}
-                        size="small"
-                        loading={loadingStates[accountUUID] || false}
-                        data-testid="account-refresh"
-                      />
-
-                      <IconButton
-                        icon={SignOutIcon}
-                        aria-label={`Logout ${account.user.login}`}
-                        variant="danger"
-                        onClick={() => logoutAccount(account)}
-                        size="small"
-                        data-testid="account-logout"
-                      />
+                        className="cursor-pointer"
+                        data-testid="account-developer-settings"
+                      >
+                        <Stack
+                          direction="horizontal"
+                          gap="condensed"
+                          align="center"
+                        >
+                          <AuthMethodIcon />
+                          <Text>{account.method}</Text>
+                        </Stack>
+                      </Box>
                     </Stack>
+                  </Box>
+
+                  <Stack direction="horizontal" gap="condensed">
+                    <IconButton
+                      icon={AlertFillIcon}
+                      aria-label={`This account is missing one or more required scopes: [${formatRequiredScopes()}]`}
+                      variant="danger"
+                      onClick={() => openDeveloperSettings(account)}
+                      size="small"
+                      data-testid="account-missing-scopes"
+                      className={
+                        account.hasRequiredScopes ? 'invisible' : 'visible'
+                      }
+                    />
+
+                    <IconButton
+                      icon={i === 0 ? StarFillIcon : StarIcon}
+                      aria-label={
+                        i === 0 ? 'Primary account' : 'Set as primary account'
+                      }
+                      variant={i === 0 ? 'primary' : 'default'}
+                      onClick={() => setAsPrimaryAccount(account)}
+                      size="small"
+                      data-testid="account-set-primary"
+                    />
+
+                    <IconButton
+                      icon={SyncIcon}
+                      aria-label={`Refresh ${account.user.login}`}
+                      onClick={() => handleRefresh(account)}
+                      size="small"
+                      loading={loadingStates[accountUUID] || false}
+                      data-testid="account-refresh"
+                    />
+
+                    <IconButton
+                      icon={SignOutIcon}
+                      aria-label={`Logout ${account.user.login}`}
+                      variant="danger"
+                      onClick={() => logoutAccount(account)}
+                      size="small"
+                      data-testid="account-logout"
+                    />
                   </Stack>
                 </Stack>
               </Stack>

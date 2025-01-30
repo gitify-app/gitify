@@ -34,7 +34,6 @@ export const AvatarWithFallback: React.FC<IAvatarWithFallback> = ({
       align="center"
       gap="condensed"
       data-testid="avatar"
-      className="truncate"
     >
       {!src || isBroken ? (
         isNonHuman ? (
@@ -53,8 +52,7 @@ export const AvatarWithFallback: React.FC<IAvatarWithFallback> = ({
       )}
       {name && (
         <Truncate title={name} inline maxWidth={280}>
-          asdokmdasoimdasoisadoindsviunafjhnfpuinfdsapiujndfp iun
-          piunaspiufnpiuadspdsfainfdsai
+          {name}
         </Truncate>
       )}
     </Stack>
