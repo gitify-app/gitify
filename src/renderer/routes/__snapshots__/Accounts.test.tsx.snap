@@ -126,7 +126,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
                 data-component="text"
               >
                 <div
-                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
+                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                   data-align="center"
                   data-direction="horizontal"
                   data-gap="condensed"
@@ -497,7 +497,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
                 data-component="text"
               >
                 <div
-                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
+                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                   data-align="center"
                   data-direction="horizontal"
                   data-gap="condensed"
@@ -868,7 +868,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
                 data-component="text"
               >
                 <div
-                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
+                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                   data-align="center"
                   data-direction="horizontal"
                   data-gap="condensed"
@@ -1390,7 +1390,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
                 data-component="text"
               >
                 <div
-                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
+                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                   data-align="center"
                   data-direction="horizontal"
                   data-gap="condensed"
@@ -1761,7 +1761,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
                 data-component="text"
               >
                 <div
-                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
+                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                   data-align="center"
                   data-direction="horizontal"
                   data-gap="condensed"
@@ -2132,7 +2132,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
                 data-component="text"
               >
                 <div
-                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
+                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                   data-align="center"
                   data-direction="horizontal"
                   data-gap="condensed"
@@ -2654,7 +2654,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                 data-component="text"
               >
                 <div
-                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
+                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                   data-align="center"
                   data-direction="horizontal"
                   data-gap="condensed"
@@ -3025,7 +3025,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                 data-component="text"
               >
                 <div
-                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
+                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                   data-align="center"
                   data-direction="horizontal"
                   data-gap="condensed"
@@ -3396,7 +3396,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                 data-component="text"
               >
                 <div
-                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
+                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                   data-align="center"
                   data-direction="horizontal"
                   data-gap="condensed"

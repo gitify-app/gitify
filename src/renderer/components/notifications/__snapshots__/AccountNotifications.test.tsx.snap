@@ -36,7 +36,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 data-component="text"
               >
                 <div
-                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
+                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                   data-align="center"
                   data-direction="horizontal"
                   data-gap="condensed"
@@ -275,7 +275,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               data-component="text"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -571,7 +571,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 data-component="text"
               >
                 <div
-                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
+                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                   data-align="center"
                   data-direction="horizontal"
                   data-gap="condensed"
@@ -793,7 +793,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                   title="Open repository"
                 >
                   <div
-                    class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
+                    class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                     data-align="center"
                     data-direction="horizontal"
                     data-gap="condensed"
@@ -861,7 +861,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 title="gitify-app"
               >
                 <div
-                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
+                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                   data-align="center"
                   data-direction="horizontal"
                   data-gap="condensed"
@@ -1152,7 +1152,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                   title="Open repository"
                 >
                   <div
-                    class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
+                    class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                     data-align="center"
                     data-direction="horizontal"
                     data-gap="condensed"
@@ -1215,7 +1215,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               data-wrap="wrap"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -1404,7 +1404,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               data-component="text"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -1626,7 +1626,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 title="Open repository"
               >
                 <div
-                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
+                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                   data-align="center"
                   data-direction="horizontal"
                   data-gap="condensed"
@@ -1694,7 +1694,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               title="gitify-app"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -1985,7 +1985,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 title="Open repository"
               >
                 <div
-                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
+                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                   data-align="center"
                   data-direction="horizontal"
                   data-gap="condensed"
@@ -2048,7 +2048,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-wrap="wrap"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
+              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -2294,7 +2294,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 data-component="text"
               >
                 <div
-                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
+                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                   data-align="center"
                   data-direction="horizontal"
                   data-gap="condensed"
@@ -2487,7 +2487,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               data-component="text"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -2737,7 +2737,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 data-component="text"
               >
                 <div
-                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
+                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                   data-align="center"
                   data-direction="horizontal"
                   data-gap="condensed"
@@ -2971,7 +2971,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               data-component="text"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -3262,7 +3262,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
                 data-component="text"
               >
                 <div
-                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
+                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                   data-align="center"
                   data-direction="horizontal"
                   data-gap="condensed"
@@ -3451,7 +3451,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
                 data-component="text"
               >
                 <div
-                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
+                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                   data-align="center"
                   data-direction="horizontal"
                   data-gap="condensed"
@@ -3644,7 +3644,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
               data-component="text"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
