@@ -121,15 +121,10 @@ export const AccountsRoute: FC = () => {
           return (
             <Box
               key={accountUUID}
-              className="rounded-md p-2 mb-4 bg-gitify-accounts"
+              className="rounded-md p-2 bg-gitify-accounts"
             >
-              <Stack
-                direction="horizontal"
-                gap="condensed"
-                align="center"
-                justify="space-between"
-              >
-                <Stack direction="vertical" align="start" gap="condensed">
+              <Stack direction="vertical" align="stretch">
+                <Stack direction="horizontal" align="start">
                   <Button
                     title="Open account profile"
                     onClick={() => openAccountProfile(account)}
@@ -142,7 +137,13 @@ export const AccountsRoute: FC = () => {
                       size={Size.XLARGE}
                     />
                   </Button>
+                </Stack>
 
+                <Stack
+                  direction="horizontal"
+                  justify="space-between"
+                  align="start"
+                >
                   <Box className="pl-4 pb-2 text-xs">
                     <Stack direction="vertical" gap="condensed">
                       <Box hidden={!account.user.name}>
@@ -189,49 +190,49 @@ export const AccountsRoute: FC = () => {
                       </Box>
                     </Stack>
                   </Box>
-                </Stack>
 
-                <Stack direction="horizontal" gap="condensed">
-                  <IconButton
-                    icon={AlertFillIcon}
-                    aria-label={`This account is missing one or more required scopes: [${formatRequiredScopes()}]`}
-                    variant="danger"
-                    onClick={() => openDeveloperSettings(account)}
-                    size="small"
-                    data-testid="account-missing-scopes"
-                    className={
-                      account.hasRequiredScopes ? 'invisible' : 'visible'
-                    }
-                  />
+                  <Stack direction="horizontal" gap="condensed">
+                    <IconButton
+                      icon={AlertFillIcon}
+                      aria-label={`This account is missing one or more required scopes: [${formatRequiredScopes()}]`}
+                      variant="danger"
+                      onClick={() => openDeveloperSettings(account)}
+                      size="small"
+                      data-testid="account-missing-scopes"
+                      className={
+                        account.hasRequiredScopes ? 'invisible' : 'visible'
+                      }
+                    />
 
-                  <IconButton
-                    icon={i === 0 ? StarFillIcon : StarIcon}
-                    aria-label={
-                      i === 0 ? 'Primary account' : 'Set as primary account'
-                    }
-                    variant={i === 0 ? 'primary' : 'default'}
-                    onClick={() => setAsPrimaryAccount(account)}
-                    size="small"
-                    data-testid="account-set-primary"
-                  />
+                    <IconButton
+                      icon={i === 0 ? StarFillIcon : StarIcon}
+                      aria-label={
+                        i === 0 ? 'Primary account' : 'Set as primary account'
+                      }
+                      variant={i === 0 ? 'primary' : 'default'}
+                      onClick={() => setAsPrimaryAccount(account)}
+                      size="small"
+                      data-testid="account-set-primary"
+                    />
 
-                  <IconButton
-                    icon={SyncIcon}
-                    aria-label={`Refresh ${account.user.login}`}
-                    onClick={() => handleRefresh(account)}
-                    size="small"
-                    loading={loadingStates[accountUUID] || false}
-                    data-testid="account-refresh"
-                  />
+                    <IconButton
+                      icon={SyncIcon}
+                      aria-label={`Refresh ${account.user.login}`}
+                      onClick={() => handleRefresh(account)}
+                      size="small"
+                      loading={loadingStates[accountUUID] || false}
+                      data-testid="account-refresh"
+                    />
 
-                  <IconButton
-                    icon={SignOutIcon}
-                    aria-label={`Logout ${account.user.login}`}
-                    variant="danger"
-                    onClick={() => logoutAccount(account)}
-                    size="small"
-                    data-testid="account-logout"
-                  />
+                    <IconButton
+                      icon={SignOutIcon}
+                      aria-label={`Logout ${account.user.login}`}
+                      variant="danger"
+                      onClick={() => logoutAccount(account)}
+                      size="small"
+                      data-testid="account-logout"
+                    />
+                  </Stack>
                 </Stack>
               </Stack>
             </Box>

@@ -36,7 +36,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 data-component="text"
               >
                 <div
-                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
+                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                   data-align="center"
                   data-direction="horizontal"
                   data-gap="condensed"
@@ -55,11 +55,13 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                     sx="[object Object]"
                     width="16"
                   />
-                  <span
-                    class="Text-sc-17v1xeu-0 hmAFGJ block truncate flex-shrink overflow-ellipsis"
+                  <div
+                    class="Truncate__StyledTruncate-sc-23o1d2-0 ldPZNj"
+                    maxwidth="280"
+                    title="@octocat"
                   >
                     @octocat
-                  </span>
+                  </div>
                 </div>
               </span>
               <span
@@ -273,7 +275,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               data-component="text"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -292,11 +294,13 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                   sx="[object Object]"
                   width="16"
                 />
-                <span
-                  class="Text-sc-17v1xeu-0 hmAFGJ block truncate flex-shrink overflow-ellipsis"
+                <div
+                  class="Truncate__StyledTruncate-sc-23o1d2-0 ldPZNj"
+                  maxwidth="280"
+                  title="@octocat"
                 >
                   @octocat
-                </span>
+                </div>
               </div>
             </span>
             <span
@@ -567,7 +571,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 data-component="text"
               >
                 <div
-                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
+                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                   data-align="center"
                   data-direction="horizontal"
                   data-gap="condensed"
@@ -586,11 +590,13 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                     sx="[object Object]"
                     width="16"
                   />
-                  <span
-                    class="Text-sc-17v1xeu-0 hmAFGJ block truncate flex-shrink overflow-ellipsis"
+                  <div
+                    class="Truncate__StyledTruncate-sc-23o1d2-0 ldPZNj"
+                    maxwidth="280"
+                    title="@octocat"
                   >
                     @octocat
-                  </span>
+                  </div>
                 </div>
               </span>
               <span
@@ -787,7 +793,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                   title="Open repository"
                 >
                   <div
-                    class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
+                    class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                     data-align="center"
                     data-direction="horizontal"
                     data-gap="condensed"
@@ -806,11 +812,13 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                       sx="[object Object]"
                       width="14"
                     />
-                    <span
-                      class="Text-sc-17v1xeu-0 hmAFGJ block truncate flex-shrink overflow-ellipsis"
+                    <div
+                      class="Truncate__StyledTruncate-sc-23o1d2-0 ldPZNj"
+                      maxwidth="280"
+                      title="gitify-app/notifications-test"
                     >
                       gitify-app/notifications-test
-                    </span>
+                    </div>
                   </div>
                 </div>
                 <div
@@ -853,7 +861,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 title="gitify-app"
               >
                 <div
-                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
+                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                   data-align="center"
                   data-direction="horizontal"
                   data-gap="condensed"
@@ -1144,7 +1152,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                   title="Open repository"
                 >
                   <div
-                    class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
+                    class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                     data-align="center"
                     data-direction="horizontal"
                     data-gap="condensed"
@@ -1163,11 +1171,13 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                       sx="[object Object]"
                       width="14"
                     />
-                    <span
-                      class="Text-sc-17v1xeu-0 hmAFGJ block truncate flex-shrink overflow-ellipsis"
+                    <div
+                      class="Truncate__StyledTruncate-sc-23o1d2-0 ldPZNj"
+                      maxwidth="280"
+                      title="gitify-app/notifications-test"
                     >
                       gitify-app/notifications-test
-                    </span>
+                    </div>
                   </div>
                 </div>
                 <div
@@ -1205,7 +1215,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               data-wrap="wrap"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -1394,7 +1404,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               data-component="text"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -1413,11 +1423,13 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                   sx="[object Object]"
                   width="16"
                 />
-                <span
-                  class="Text-sc-17v1xeu-0 hmAFGJ block truncate flex-shrink overflow-ellipsis"
+                <div
+                  class="Truncate__StyledTruncate-sc-23o1d2-0 ldPZNj"
+                  maxwidth="280"
+                  title="@octocat"
                 >
                   @octocat
-                </span>
+                </div>
               </div>
             </span>
             <span
@@ -1614,7 +1626,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 title="Open repository"
               >
                 <div
-                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
+                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                   data-align="center"
                   data-direction="horizontal"
                   data-gap="condensed"
@@ -1633,11 +1645,13 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                     sx="[object Object]"
                     width="14"
                   />
-                  <span
-                    class="Text-sc-17v1xeu-0 hmAFGJ block truncate flex-shrink overflow-ellipsis"
+                  <div
+                    class="Truncate__StyledTruncate-sc-23o1d2-0 ldPZNj"
+                    maxwidth="280"
+                    title="gitify-app/notifications-test"
                   >
                     gitify-app/notifications-test
-                  </span>
+                  </div>
                 </div>
               </div>
               <div
@@ -1680,7 +1694,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               title="gitify-app"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -1971,7 +1985,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 title="Open repository"
               >
                 <div
-                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
+                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                   data-align="center"
                   data-direction="horizontal"
                   data-gap="condensed"
@@ -1990,11 +2004,13 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                     sx="[object Object]"
                     width="14"
                   />
-                  <span
-                    class="Text-sc-17v1xeu-0 hmAFGJ block truncate flex-shrink overflow-ellipsis"
+                  <div
+                    class="Truncate__StyledTruncate-sc-23o1d2-0 ldPZNj"
+                    maxwidth="280"
+                    title="gitify-app/notifications-test"
                   >
                     gitify-app/notifications-test
-                  </span>
+                  </div>
                 </div>
               </div>
               <div
@@ -2032,7 +2048,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-wrap="wrap"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
+              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -2278,7 +2294,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 data-component="text"
               >
                 <div
-                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
+                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                   data-align="center"
                   data-direction="horizontal"
                   data-gap="condensed"
@@ -2297,11 +2313,13 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                     sx="[object Object]"
                     width="16"
                   />
-                  <span
-                    class="Text-sc-17v1xeu-0 hmAFGJ block truncate flex-shrink overflow-ellipsis"
+                  <div
+                    class="Truncate__StyledTruncate-sc-23o1d2-0 ldPZNj"
+                    maxwidth="280"
+                    title="@octocat"
                   >
                     @octocat
-                  </span>
+                  </div>
                 </div>
               </span>
               <span
@@ -2469,7 +2487,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               data-component="text"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -2488,11 +2506,13 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                   sx="[object Object]"
                   width="16"
                 />
-                <span
-                  class="Text-sc-17v1xeu-0 hmAFGJ block truncate flex-shrink overflow-ellipsis"
+                <div
+                  class="Truncate__StyledTruncate-sc-23o1d2-0 ldPZNj"
+                  maxwidth="280"
+                  title="@octocat"
                 >
                   @octocat
-                </span>
+                </div>
               </div>
             </span>
             <span
@@ -2717,7 +2737,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 data-component="text"
               >
                 <div
-                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
+                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                   data-align="center"
                   data-direction="horizontal"
                   data-gap="condensed"
@@ -2736,11 +2756,13 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                     sx="[object Object]"
                     width="16"
                   />
-                  <span
-                    class="Text-sc-17v1xeu-0 hmAFGJ block truncate flex-shrink overflow-ellipsis"
+                  <div
+                    class="Truncate__StyledTruncate-sc-23o1d2-0 ldPZNj"
+                    maxwidth="280"
+                    title="@octocat"
                   >
                     @octocat
-                  </span>
+                  </div>
                 </div>
               </span>
               <span
@@ -2949,7 +2971,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               data-component="text"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -2968,11 +2990,13 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                   sx="[object Object]"
                   width="16"
                 />
-                <span
-                  class="Text-sc-17v1xeu-0 hmAFGJ block truncate flex-shrink overflow-ellipsis"
+                <div
+                  class="Truncate__StyledTruncate-sc-23o1d2-0 ldPZNj"
+                  maxwidth="280"
+                  title="@octocat"
                 >
                   @octocat
-                </span>
+                </div>
               </div>
             </span>
             <span
@@ -3238,7 +3262,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
                 data-component="text"
               >
                 <div
-                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
+                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                   data-align="center"
                   data-direction="horizontal"
                   data-gap="condensed"
@@ -3257,11 +3281,13 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
                     sx="[object Object]"
                     width="16"
                   />
-                  <span
-                    class="Text-sc-17v1xeu-0 hmAFGJ block truncate flex-shrink overflow-ellipsis"
+                  <div
+                    class="Truncate__StyledTruncate-sc-23o1d2-0 ldPZNj"
+                    maxwidth="280"
+                    title="@octocat"
                   >
                     @octocat
-                  </span>
+                  </div>
                 </div>
               </span>
               <span
@@ -3425,7 +3451,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
                 data-component="text"
               >
                 <div
-                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
+                  class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                   data-align="center"
                   data-direction="horizontal"
                   data-gap="condensed"
@@ -3444,11 +3470,13 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
                     sx="[object Object]"
                     width="16"
                   />
-                  <span
-                    class="Text-sc-17v1xeu-0 hmAFGJ block truncate flex-shrink overflow-ellipsis"
+                  <div
+                    class="Truncate__StyledTruncate-sc-23o1d2-0 ldPZNj"
+                    maxwidth="280"
+                    title="@octocat"
                   >
                     @octocat
-                  </span>
+                  </div>
                 </div>
               </span>
               <span
@@ -3616,7 +3644,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
               data-component="text"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 duhwY truncate"
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -3635,11 +3663,13 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
                   sx="[object Object]"
                   width="16"
                 />
-                <span
-                  class="Text-sc-17v1xeu-0 hmAFGJ block truncate flex-shrink overflow-ellipsis"
+                <div
+                  class="Truncate__StyledTruncate-sc-23o1d2-0 ldPZNj"
+                  maxwidth="280"
+                  title="@octocat"
                 >
                   @octocat
-                </span>
+                </div>
               </div>
             </span>
             <span
