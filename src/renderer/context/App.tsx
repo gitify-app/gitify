@@ -158,10 +158,10 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     setNightScheme(colorScheme ?? DEFAULT_NIGHT_COLOR_SCHEME);
   }, [settings.theme, setColorMode, setDayScheme, setNightScheme]);
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: We only want fetchNotifications to be called for account changes
+  // biome-ignore lint/correctness/useExhaustiveDependencies: We only want fetchNotifications to be called for particular state changes
   useEffect(() => {
     fetchNotifications({ auth, settings });
-  }, [auth.accounts]);
+  }, [auth.accounts, settings.filterReasons, settings.hideBots]);
 
   useInterval(() => {
     fetchNotifications({ auth, settings });

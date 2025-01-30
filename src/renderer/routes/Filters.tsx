@@ -35,7 +35,7 @@ export const FiltersRoute: FC = () => {
     updateSetting('filterReasons', reasons);
   };
 
-  const shouldShowReason = (reason: Reason) => {
+  const isReasonFilterSet = (reason: Reason) => {
     return settings.filterReasons.includes(reason);
   };
 
@@ -86,7 +86,7 @@ export const FiltersRoute: FC = () => {
           <Stack direction="vertical" gap="condensed">
             {Object.keys(FORMATTED_REASONS).map((reason: Reason) => {
               const reasonTitle = formatReason(reason).title;
-              const reasonChecked = shouldShowReason(reason);
+              const isReasonChecked = isReasonFilterSet(reason);
               const reasonDescription = formatReason(reason).description;
               const reasonCount = getReasonFilterCount(notifications, reason);
 
@@ -95,7 +95,7 @@ export const FiltersRoute: FC = () => {
                   key={reason}
                   name={reason}
                   label={reasonTitle}
-                  checked={reasonChecked}
+                  checked={isReasonChecked}
                   onChange={(evt) =>
                     updateReasonFilter(reason, evt.target.checked)
                   }
