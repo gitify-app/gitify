@@ -2,7 +2,7 @@ import type React from 'react';
 import { useState } from 'react';
 
 import { FeedPersonIcon, MarkGithubIcon } from '@primer/octicons-react';
-import { Avatar, Stack, Text } from '@primer/react';
+import { Avatar, Stack, Truncate } from '@primer/react';
 
 import { type Link, Size } from '../../types';
 import type { UserType } from '../../typesGitHub';
@@ -52,10 +52,10 @@ export const AvatarWithFallback: React.FC<IAvatarWithFallback> = ({
         />
       )}
       {name && (
-        // TODO add truncation logic for long names
-        <Text className="block truncate flex-shrink overflow-ellipsis">
-          {name}
-        </Text>
+        <Truncate title={name} inline maxWidth={280}>
+          asdokmdasoimdasoisadoindsviunafjhnfpuinfdsapiujndfp iun
+          piunaspiufnpiuadspdsfainfdsai
+        </Truncate>
       )}
     </Stack>
   );
