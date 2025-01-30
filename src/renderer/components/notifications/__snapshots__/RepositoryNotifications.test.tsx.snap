@@ -95,8 +95,8 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
             data-wrap="nowrap"
           >
             <button
-              aria-describedby=":r2:-loading-announcement"
-              aria-labelledby=":r1:"
+              aria-describedby=":r1:-loading-announcement"
+              aria-label="Mark repository as done"
               class="types__StyledButton-sc-ws60qy-0 kQRupk"
               data-component="IconButton"
               data-loading="false"
@@ -104,6 +104,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
               data-size="small"
               data-testid="repository-mark-as-done"
               sx="[object Object]"
+              title="Mark repository as done"
               type="button"
             >
               <svg
@@ -123,18 +124,9 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
                 />
               </svg>
             </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":r1:"
-              popover="auto"
-            >
-              Mark repository as done
-            </span>
             <button
-              aria-describedby=":r4:-loading-announcement"
-              aria-labelledby=":r3:"
+              aria-describedby=":r2:-loading-announcement"
+              aria-label="Mark repository as read"
               class="types__StyledButton-sc-ws60qy-0 kQRupk"
               data-component="IconButton"
               data-loading="false"
@@ -142,6 +134,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
               data-size="small"
               data-testid="repository-mark-as-read"
               sx="[object Object]"
+              title="Mark repository as read"
               type="button"
             >
               <svg
@@ -161,18 +154,9 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
                 />
               </svg>
             </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":r3:"
-              popover="auto"
-            >
-              Mark repository as read
-            </span>
             <button
-              aria-describedby=":r6:-loading-announcement"
-              aria-labelledby=":r5:"
+              aria-describedby=":r3:-loading-announcement"
+              aria-label="Hide repository notifications"
               class="types__StyledButton-sc-ws60qy-0 kQRupk"
               data-component="IconButton"
               data-loading="false"
@@ -180,6 +164,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
               data-size="small"
               data-testid="repository-toggle"
               sx="[object Object]"
+              title="Hide repository notifications"
               type="button"
             >
               <svg
@@ -199,15 +184,6 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
                 />
               </svg>
             </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":r5:"
-              popover="auto"
-            >
-              Hide repository notifications
-            </span>
           </div>
         </div>
       </div>
@@ -310,8 +286,8 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
           data-wrap="nowrap"
         >
           <button
-            aria-describedby=":r2:-loading-announcement"
-            aria-labelledby=":r1:"
+            aria-describedby=":r1:-loading-announcement"
+            aria-label="Mark repository as done"
             class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-component="IconButton"
             data-loading="false"
@@ -319,6 +295,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
             data-size="small"
             data-testid="repository-mark-as-done"
             sx="[object Object]"
+            title="Mark repository as done"
             type="button"
           >
             <svg
@@ -338,18 +315,9 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
               />
             </svg>
           </button>
-          <span
-            aria-hidden="true"
-            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-            data-direction="s"
-            id=":r1:"
-            popover="auto"
-          >
-            Mark repository as done
-          </span>
           <button
-            aria-describedby=":r4:-loading-announcement"
-            aria-labelledby=":r3:"
+            aria-describedby=":r2:-loading-announcement"
+            aria-label="Mark repository as read"
             class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-component="IconButton"
             data-loading="false"
@@ -357,6 +325,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
             data-size="small"
             data-testid="repository-mark-as-read"
             sx="[object Object]"
+            title="Mark repository as read"
             type="button"
           >
             <svg
@@ -376,18 +345,9 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
               />
             </svg>
           </button>
-          <span
-            aria-hidden="true"
-            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-            data-direction="s"
-            id=":r3:"
-            popover="auto"
-          >
-            Mark repository as read
-          </span>
           <button
-            aria-describedby=":r6:-loading-announcement"
-            aria-labelledby=":r5:"
+            aria-describedby=":r3:-loading-announcement"
+            aria-label="Hide repository notifications"
             class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-component="IconButton"
             data-loading="false"
@@ -395,6 +355,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
             data-size="small"
             data-testid="repository-toggle"
             sx="[object Object]"
+            title="Hide repository notifications"
             type="button"
           >
             <svg
@@ -414,15 +375,6 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
               />
             </svg>
           </button>
-          <span
-            aria-hidden="true"
-            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-            data-direction="s"
-            id=":r5:"
-            popover="auto"
-          >
-            Hide repository notifications
-          </span>
         </div>
       </div>
     </div>
@@ -505,7 +457,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
           data-wrap="nowrap"
         >
           <button
-            aria-describedby=":r13:-loading-announcement"
+            aria-describedby=":rk:-loading-announcement"
             class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-loading="false"
             data-no-visuals="true"
@@ -588,8 +540,8 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
             data-wrap="nowrap"
           >
             <button
-              aria-describedby=":r15:-loading-announcement"
-              aria-labelledby=":r14:"
+              aria-describedby=":rl:-loading-announcement"
+              aria-label="Mark repository as done"
               class="types__StyledButton-sc-ws60qy-0 kQRupk"
               data-component="IconButton"
               data-loading="false"
@@ -597,6 +549,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
               data-size="small"
               data-testid="repository-mark-as-done"
               sx="[object Object]"
+              title="Mark repository as done"
               type="button"
             >
               <svg
@@ -616,18 +569,9 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
                 />
               </svg>
             </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":r14:"
-              popover="auto"
-            >
-              Mark repository as done
-            </span>
             <button
-              aria-describedby=":r17:-loading-announcement"
-              aria-labelledby=":r16:"
+              aria-describedby=":rm:-loading-announcement"
+              aria-label="Mark repository as read"
               class="types__StyledButton-sc-ws60qy-0 kQRupk"
               data-component="IconButton"
               data-loading="false"
@@ -635,6 +579,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
               data-size="small"
               data-testid="repository-mark-as-read"
               sx="[object Object]"
+              title="Mark repository as read"
               type="button"
             >
               <svg
@@ -654,18 +599,9 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
                 />
               </svg>
             </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":r16:"
-              popover="auto"
-            >
-              Mark repository as read
-            </span>
             <button
-              aria-describedby=":r19:-loading-announcement"
-              aria-labelledby=":r18:"
+              aria-describedby=":rn:-loading-announcement"
+              aria-label="Show repository notifications"
               class="types__StyledButton-sc-ws60qy-0 kQRupk"
               data-component="IconButton"
               data-loading="false"
@@ -673,6 +609,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
               data-size="small"
               data-testid="repository-toggle"
               sx="[object Object]"
+              title="Show repository notifications"
               type="button"
             >
               <svg
@@ -692,15 +629,6 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
                 />
               </svg>
             </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":r18:"
-              popover="auto"
-            >
-              Show repository notifications
-            </span>
           </div>
         </div>
       </div>
@@ -719,7 +647,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
           data-wrap="nowrap"
         >
           <button
-            aria-describedby=":r1a:-loading-announcement"
+            aria-describedby=":ro:-loading-announcement"
             class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-loading="false"
             data-no-visuals="true"
@@ -802,8 +730,8 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
             data-wrap="nowrap"
           >
             <button
-              aria-describedby=":r1c:-loading-announcement"
-              aria-labelledby=":r1b:"
+              aria-describedby=":rp:-loading-announcement"
+              aria-label="Mark repository as done"
               class="types__StyledButton-sc-ws60qy-0 kQRupk"
               data-component="IconButton"
               data-loading="false"
@@ -811,6 +739,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
               data-size="small"
               data-testid="repository-mark-as-done"
               sx="[object Object]"
+              title="Mark repository as done"
               type="button"
             >
               <svg
@@ -830,18 +759,9 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
                 />
               </svg>
             </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":r1b:"
-              popover="auto"
-            >
-              Mark repository as done
-            </span>
             <button
-              aria-describedby=":r1e:-loading-announcement"
-              aria-labelledby=":r1d:"
+              aria-describedby=":rq:-loading-announcement"
+              aria-label="Mark repository as read"
               class="types__StyledButton-sc-ws60qy-0 kQRupk"
               data-component="IconButton"
               data-loading="false"
@@ -849,6 +769,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
               data-size="small"
               data-testid="repository-mark-as-read"
               sx="[object Object]"
+              title="Mark repository as read"
               type="button"
             >
               <svg
@@ -868,18 +789,9 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
                 />
               </svg>
             </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":r1d:"
-              popover="auto"
-            >
-              Mark repository as read
-            </span>
             <button
-              aria-describedby=":r1g:-loading-announcement"
-              aria-labelledby=":r1f:"
+              aria-describedby=":rr:-loading-announcement"
+              aria-label="Hide repository notifications"
               class="types__StyledButton-sc-ws60qy-0 kQRupk"
               data-component="IconButton"
               data-loading="false"
@@ -887,6 +799,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
               data-size="small"
               data-testid="repository-toggle"
               sx="[object Object]"
+              title="Hide repository notifications"
               type="button"
             >
               <svg
@@ -906,15 +819,6 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
                 />
               </svg>
             </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":r1f:"
-              popover="auto"
-            >
-              Hide repository notifications
-            </span>
           </div>
         </div>
       </div>
@@ -940,7 +844,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
         data-wrap="nowrap"
       >
         <button
-          aria-describedby=":r1a:-loading-announcement"
+          aria-describedby=":ro:-loading-announcement"
           class="types__StyledButton-sc-ws60qy-0 kQRupk"
           data-loading="false"
           data-no-visuals="true"
@@ -1023,8 +927,8 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
           data-wrap="nowrap"
         >
           <button
-            aria-describedby=":r1c:-loading-announcement"
-            aria-labelledby=":r1b:"
+            aria-describedby=":rp:-loading-announcement"
+            aria-label="Mark repository as done"
             class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-component="IconButton"
             data-loading="false"
@@ -1032,6 +936,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
             data-size="small"
             data-testid="repository-mark-as-done"
             sx="[object Object]"
+            title="Mark repository as done"
             type="button"
           >
             <svg
@@ -1051,18 +956,9 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
               />
             </svg>
           </button>
-          <span
-            aria-hidden="true"
-            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-            data-direction="s"
-            id=":r1b:"
-            popover="auto"
-          >
-            Mark repository as done
-          </span>
           <button
-            aria-describedby=":r1e:-loading-announcement"
-            aria-labelledby=":r1d:"
+            aria-describedby=":rq:-loading-announcement"
+            aria-label="Mark repository as read"
             class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-component="IconButton"
             data-loading="false"
@@ -1070,6 +966,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
             data-size="small"
             data-testid="repository-mark-as-read"
             sx="[object Object]"
+            title="Mark repository as read"
             type="button"
           >
             <svg
@@ -1089,18 +986,9 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
               />
             </svg>
           </button>
-          <span
-            aria-hidden="true"
-            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-            data-direction="s"
-            id=":r1d:"
-            popover="auto"
-          >
-            Mark repository as read
-          </span>
           <button
-            aria-describedby=":r1g:-loading-announcement"
-            aria-labelledby=":r1f:"
+            aria-describedby=":rr:-loading-announcement"
+            aria-label="Hide repository notifications"
             class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-component="IconButton"
             data-loading="false"
@@ -1108,6 +996,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
             data-size="small"
             data-testid="repository-toggle"
             sx="[object Object]"
+            title="Hide repository notifications"
             type="button"
           >
             <svg
@@ -1127,15 +1016,6 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
               />
             </svg>
           </button>
-          <span
-            aria-hidden="true"
-            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-            data-direction="s"
-            id=":r1f:"
-            popover="auto"
-          >
-            Hide repository notifications
-          </span>
         </div>
       </div>
     </div>
@@ -1218,7 +1098,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
           data-wrap="nowrap"
         >
           <button
-            aria-describedby=":rs:-loading-announcement"
+            aria-describedby=":rg:-loading-announcement"
             class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-loading="false"
             data-no-visuals="true"
@@ -1301,8 +1181,8 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
             data-wrap="nowrap"
           >
             <button
-              aria-describedby=":ru:-loading-announcement"
-              aria-labelledby=":rt:"
+              aria-describedby=":rh:-loading-announcement"
+              aria-label="Mark repository as done"
               class="types__StyledButton-sc-ws60qy-0 kQRupk"
               data-component="IconButton"
               data-loading="false"
@@ -1310,6 +1190,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
               data-size="small"
               data-testid="repository-mark-as-done"
               sx="[object Object]"
+              title="Mark repository as done"
               type="button"
             >
               <svg
@@ -1329,18 +1210,9 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
                 />
               </svg>
             </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":rt:"
-              popover="auto"
-            >
-              Mark repository as done
-            </span>
             <button
-              aria-describedby=":r10:-loading-announcement"
-              aria-labelledby=":rv:"
+              aria-describedby=":ri:-loading-announcement"
+              aria-label="Mark repository as read"
               class="types__StyledButton-sc-ws60qy-0 kQRupk"
               data-component="IconButton"
               data-loading="false"
@@ -1348,6 +1220,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
               data-size="small"
               data-testid="repository-mark-as-read"
               sx="[object Object]"
+              title="Mark repository as read"
               type="button"
             >
               <svg
@@ -1367,18 +1240,9 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
                 />
               </svg>
             </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":rv:"
-              popover="auto"
-            >
-              Mark repository as read
-            </span>
             <button
-              aria-describedby=":r12:-loading-announcement"
-              aria-labelledby=":r11:"
+              aria-describedby=":rj:-loading-announcement"
+              aria-label="Hide repository notifications"
               class="types__StyledButton-sc-ws60qy-0 kQRupk"
               data-component="IconButton"
               data-loading="false"
@@ -1386,6 +1250,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
               data-size="small"
               data-testid="repository-toggle"
               sx="[object Object]"
+              title="Hide repository notifications"
               type="button"
             >
               <svg
@@ -1405,15 +1270,6 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
                 />
               </svg>
             </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":r11:"
-              popover="auto"
-            >
-              Hide repository notifications
-            </span>
           </div>
         </div>
       </div>
@@ -1439,7 +1295,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
         data-wrap="nowrap"
       >
         <button
-          aria-describedby=":rs:-loading-announcement"
+          aria-describedby=":rg:-loading-announcement"
           class="types__StyledButton-sc-ws60qy-0 kQRupk"
           data-loading="false"
           data-no-visuals="true"
@@ -1522,8 +1378,8 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
           data-wrap="nowrap"
         >
           <button
-            aria-describedby=":ru:-loading-announcement"
-            aria-labelledby=":rt:"
+            aria-describedby=":rh:-loading-announcement"
+            aria-label="Mark repository as done"
             class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-component="IconButton"
             data-loading="false"
@@ -1531,6 +1387,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
             data-size="small"
             data-testid="repository-mark-as-done"
             sx="[object Object]"
+            title="Mark repository as done"
             type="button"
           >
             <svg
@@ -1550,18 +1407,9 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
               />
             </svg>
           </button>
-          <span
-            aria-hidden="true"
-            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-            data-direction="s"
-            id=":rt:"
-            popover="auto"
-          >
-            Mark repository as done
-          </span>
           <button
-            aria-describedby=":r10:-loading-announcement"
-            aria-labelledby=":rv:"
+            aria-describedby=":ri:-loading-announcement"
+            aria-label="Mark repository as read"
             class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-component="IconButton"
             data-loading="false"
@@ -1569,6 +1417,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
             data-size="small"
             data-testid="repository-mark-as-read"
             sx="[object Object]"
+            title="Mark repository as read"
             type="button"
           >
             <svg
@@ -1588,18 +1437,9 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
               />
             </svg>
           </button>
-          <span
-            aria-hidden="true"
-            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-            data-direction="s"
-            id=":rv:"
-            popover="auto"
-          >
-            Mark repository as read
-          </span>
           <button
-            aria-describedby=":r12:-loading-announcement"
-            aria-labelledby=":r11:"
+            aria-describedby=":rj:-loading-announcement"
+            aria-label="Hide repository notifications"
             class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-component="IconButton"
             data-loading="false"
@@ -1607,6 +1447,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
             data-size="small"
             data-testid="repository-toggle"
             sx="[object Object]"
+            title="Hide repository notifications"
             type="button"
           >
             <svg
@@ -1626,15 +1467,6 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
               />
             </svg>
           </button>
-          <span
-            aria-hidden="true"
-            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-            data-direction="s"
-            id=":r11:"
-            popover="auto"
-          >
-            Hide repository notifications
-          </span>
         </div>
       </div>
     </div>

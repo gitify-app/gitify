@@ -18,7 +18,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           data-wrap="nowrap"
         >
           <button
-            aria-describedby=":r13:-loading-announcement"
+            aria-describedby=":rk:-loading-announcement"
             class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-loading="false"
             data-no-visuals="true"
@@ -95,8 +95,8 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-wrap="nowrap"
           >
             <button
-              aria-describedby=":r15:-loading-announcement"
-              aria-labelledby=":r14:"
+              aria-describedby=":rl:-loading-announcement"
+              aria-label="My Issues"
               class="types__StyledButton-sc-ws60qy-0 kQRupk"
               data-component="IconButton"
               data-loading="false"
@@ -104,6 +104,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               data-size="small"
               data-testid="account-issues"
               sx="[object Object]"
+              title="My Issues"
               type="button"
             >
               <svg
@@ -126,18 +127,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 />
               </svg>
             </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":r14:"
-              popover="auto"
-            >
-              My Issues
-            </span>
             <button
-              aria-describedby=":r17:-loading-announcement"
-              aria-labelledby=":r16:"
+              aria-describedby=":rm:-loading-announcement"
+              aria-label="My Pull Requests"
               class="types__StyledButton-sc-ws60qy-0 kQRupk"
               data-component="IconButton"
               data-loading="false"
@@ -145,6 +137,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               data-size="small"
               data-testid="account-pull-requests"
               sx="[object Object]"
+              title="My Pull Requests"
               type="button"
             >
               <svg
@@ -164,18 +157,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 />
               </svg>
             </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":r16:"
-              popover="auto"
-            >
-              My Pull Requests
-            </span>
             <button
-              aria-describedby=":r19:-loading-announcement"
-              aria-labelledby=":r18:"
+              aria-describedby=":rn:-loading-announcement"
+              aria-label="No notifications for account"
               class="types__StyledButton-sc-ws60qy-0 kQRupk"
               data-component="IconButton"
               data-loading="false"
@@ -183,6 +167,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               data-size="small"
               data-testid="account-toggle"
               sx="[object Object]"
+              title="No notifications for account"
               type="button"
             >
               <svg
@@ -202,15 +187,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 />
               </svg>
             </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":r18:"
-              popover="auto"
-            >
-              No notifications for account
-            </span>
           </div>
         </div>
       </div>
@@ -279,7 +255,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
         data-wrap="nowrap"
       >
         <button
-          aria-describedby=":r13:-loading-announcement"
+          aria-describedby=":rk:-loading-announcement"
           class="types__StyledButton-sc-ws60qy-0 kQRupk"
           data-loading="false"
           data-no-visuals="true"
@@ -356,8 +332,8 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           data-wrap="nowrap"
         >
           <button
-            aria-describedby=":r15:-loading-announcement"
-            aria-labelledby=":r14:"
+            aria-describedby=":rl:-loading-announcement"
+            aria-label="My Issues"
             class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-component="IconButton"
             data-loading="false"
@@ -365,6 +341,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-size="small"
             data-testid="account-issues"
             sx="[object Object]"
+            title="My Issues"
             type="button"
           >
             <svg
@@ -387,18 +364,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               />
             </svg>
           </button>
-          <span
-            aria-hidden="true"
-            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-            data-direction="s"
-            id=":r14:"
-            popover="auto"
-          >
-            My Issues
-          </span>
           <button
-            aria-describedby=":r17:-loading-announcement"
-            aria-labelledby=":r16:"
+            aria-describedby=":rm:-loading-announcement"
+            aria-label="My Pull Requests"
             class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-component="IconButton"
             data-loading="false"
@@ -406,6 +374,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-size="small"
             data-testid="account-pull-requests"
             sx="[object Object]"
+            title="My Pull Requests"
             type="button"
           >
             <svg
@@ -425,18 +394,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               />
             </svg>
           </button>
-          <span
-            aria-hidden="true"
-            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-            data-direction="s"
-            id=":r16:"
-            popover="auto"
-          >
-            My Pull Requests
-          </span>
           <button
-            aria-describedby=":r19:-loading-announcement"
-            aria-labelledby=":r18:"
+            aria-describedby=":rn:-loading-announcement"
+            aria-label="No notifications for account"
             class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-component="IconButton"
             data-loading="false"
@@ -444,6 +404,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-size="small"
             data-testid="account-toggle"
             sx="[object Object]"
+            title="No notifications for account"
             type="button"
           >
             <svg
@@ -463,15 +424,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               />
             </svg>
           </button>
-          <span
-            aria-hidden="true"
-            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-            data-direction="s"
-            id=":r18:"
-            popover="auto"
-          >
-            No notifications for account
-          </span>
         </div>
       </div>
     </div>
@@ -597,7 +549,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           data-wrap="nowrap"
         >
           <button
-            aria-describedby=":r7:-loading-announcement"
+            aria-describedby=":r4:-loading-announcement"
             class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-loading="false"
             data-no-visuals="true"
@@ -674,8 +626,8 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-wrap="nowrap"
           >
             <button
-              aria-describedby=":r9:-loading-announcement"
-              aria-labelledby=":r8:"
+              aria-describedby=":r5:-loading-announcement"
+              aria-label="My Issues"
               class="types__StyledButton-sc-ws60qy-0 kQRupk"
               data-component="IconButton"
               data-loading="false"
@@ -683,6 +635,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               data-size="small"
               data-testid="account-issues"
               sx="[object Object]"
+              title="My Issues"
               type="button"
             >
               <svg
@@ -705,18 +658,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 />
               </svg>
             </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":r8:"
-              popover="auto"
-            >
-              My Issues
-            </span>
             <button
-              aria-describedby=":rb:-loading-announcement"
-              aria-labelledby=":ra:"
+              aria-describedby=":r6:-loading-announcement"
+              aria-label="My Pull Requests"
               class="types__StyledButton-sc-ws60qy-0 kQRupk"
               data-component="IconButton"
               data-loading="false"
@@ -724,6 +668,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               data-size="small"
               data-testid="account-pull-requests"
               sx="[object Object]"
+              title="My Pull Requests"
               type="button"
             >
               <svg
@@ -743,18 +688,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 />
               </svg>
             </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":ra:"
-              popover="auto"
-            >
-              My Pull Requests
-            </span>
             <button
-              aria-describedby=":rd:-loading-announcement"
-              aria-labelledby=":rc:"
+              aria-describedby=":r7:-loading-announcement"
+              aria-label="Hide account notifications"
               class="types__StyledButton-sc-ws60qy-0 kQRupk"
               data-component="IconButton"
               data-loading="false"
@@ -762,6 +698,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               data-size="small"
               data-testid="account-toggle"
               sx="[object Object]"
+              title="Hide account notifications"
               type="button"
             >
               <svg
@@ -781,15 +718,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 />
               </svg>
             </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":rc:"
-              popover="auto"
-            >
-              Hide account notifications
-            </span>
           </div>
         </div>
       </div>
@@ -809,7 +737,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           <span
             aria-label="Open Issue"
             class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-e"
-            id=":re:"
+            id=":r8:"
             role="tooltip"
           >
             <svg
@@ -1058,8 +986,8 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-wrap="nowrap"
           >
             <button
-              aria-describedby=":rg:-loading-announcement"
-              aria-labelledby=":rf:"
+              aria-describedby=":r9:-loading-announcement"
+              aria-label="Mark as done"
               class="types__StyledButton-sc-ws60qy-0 kQRupk"
               data-component="IconButton"
               data-loading="false"
@@ -1067,6 +995,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               data-size="small"
               data-testid="notification-mark-as-done"
               sx="[object Object]"
+              title="Mark as done"
               type="button"
             >
               <svg
@@ -1086,18 +1015,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 />
               </svg>
             </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":rf:"
-              popover="auto"
-            >
-              Mark as done
-            </span>
             <button
-              aria-describedby=":ri:-loading-announcement"
-              aria-labelledby=":rh:"
+              aria-describedby=":ra:-loading-announcement"
+              aria-label="Mark as read"
               class="types__StyledButton-sc-ws60qy-0 kQRupk"
               data-component="IconButton"
               data-loading="false"
@@ -1105,6 +1025,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               data-size="small"
               data-testid="notification-mark-as-read"
               sx="[object Object]"
+              title="Mark as read"
               type="button"
             >
               <svg
@@ -1124,18 +1045,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 />
               </svg>
             </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":rh:"
-              popover="auto"
-            >
-              Mark as read
-            </span>
             <button
-              aria-describedby=":rk:-loading-announcement"
-              aria-labelledby=":rj:"
+              aria-describedby=":rb:-loading-announcement"
+              aria-label="Unsubscribe from thread"
               class="types__StyledButton-sc-ws60qy-0 kQRupk"
               data-component="IconButton"
               data-loading="false"
@@ -1143,6 +1055,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               data-size="small"
               data-testid="notification-unsubscribe-from-thread"
               sx="[object Object]"
+              title="Unsubscribe from thread"
               type="button"
             >
               <svg
@@ -1162,15 +1075,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 />
               </svg>
             </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":rj:"
-              popover="auto"
-            >
-              Unsubscribe from thread
-            </span>
           </div>
         </div>
       </div>
@@ -1190,7 +1094,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           <span
             aria-label=" Issue"
             class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-e"
-            id=":rl:"
+            id=":rc:"
             role="tooltip"
           >
             <svg
@@ -1364,8 +1268,8 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-wrap="nowrap"
           >
             <button
-              aria-describedby=":rn:-loading-announcement"
-              aria-labelledby=":rm:"
+              aria-describedby=":rd:-loading-announcement"
+              aria-label="Mark as done"
               class="types__StyledButton-sc-ws60qy-0 kQRupk"
               data-component="IconButton"
               data-loading="false"
@@ -1373,6 +1277,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               data-size="small"
               data-testid="notification-mark-as-done"
               sx="[object Object]"
+              title="Mark as done"
               type="button"
             >
               <svg
@@ -1392,18 +1297,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 />
               </svg>
             </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":rm:"
-              popover="auto"
-            >
-              Mark as done
-            </span>
             <button
-              aria-describedby=":rp:-loading-announcement"
-              aria-labelledby=":ro:"
+              aria-describedby=":re:-loading-announcement"
+              aria-label="Mark as read"
               class="types__StyledButton-sc-ws60qy-0 kQRupk"
               data-component="IconButton"
               data-loading="false"
@@ -1411,6 +1307,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               data-size="small"
               data-testid="notification-mark-as-read"
               sx="[object Object]"
+              title="Mark as read"
               type="button"
             >
               <svg
@@ -1430,18 +1327,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 />
               </svg>
             </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":ro:"
-              popover="auto"
-            >
-              Mark as read
-            </span>
             <button
-              aria-describedby=":rr:-loading-announcement"
-              aria-labelledby=":rq:"
+              aria-describedby=":rf:-loading-announcement"
+              aria-label="Unsubscribe from thread"
               class="types__StyledButton-sc-ws60qy-0 kQRupk"
               data-component="IconButton"
               data-loading="false"
@@ -1449,6 +1337,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               data-size="small"
               data-testid="notification-unsubscribe-from-thread"
               sx="[object Object]"
+              title="Unsubscribe from thread"
               type="button"
             >
               <svg
@@ -1468,15 +1357,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 />
               </svg>
             </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":rq:"
-              popover="auto"
-            >
-              Unsubscribe from thread
-            </span>
           </div>
         </div>
       </div>
@@ -1496,7 +1376,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
         data-wrap="nowrap"
       >
         <button
-          aria-describedby=":r7:-loading-announcement"
+          aria-describedby=":r4:-loading-announcement"
           class="types__StyledButton-sc-ws60qy-0 kQRupk"
           data-loading="false"
           data-no-visuals="true"
@@ -1573,8 +1453,8 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           data-wrap="nowrap"
         >
           <button
-            aria-describedby=":r9:-loading-announcement"
-            aria-labelledby=":r8:"
+            aria-describedby=":r5:-loading-announcement"
+            aria-label="My Issues"
             class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-component="IconButton"
             data-loading="false"
@@ -1582,6 +1462,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-size="small"
             data-testid="account-issues"
             sx="[object Object]"
+            title="My Issues"
             type="button"
           >
             <svg
@@ -1604,18 +1485,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               />
             </svg>
           </button>
-          <span
-            aria-hidden="true"
-            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-            data-direction="s"
-            id=":r8:"
-            popover="auto"
-          >
-            My Issues
-          </span>
           <button
-            aria-describedby=":rb:-loading-announcement"
-            aria-labelledby=":ra:"
+            aria-describedby=":r6:-loading-announcement"
+            aria-label="My Pull Requests"
             class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-component="IconButton"
             data-loading="false"
@@ -1623,6 +1495,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-size="small"
             data-testid="account-pull-requests"
             sx="[object Object]"
+            title="My Pull Requests"
             type="button"
           >
             <svg
@@ -1642,18 +1515,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               />
             </svg>
           </button>
-          <span
-            aria-hidden="true"
-            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-            data-direction="s"
-            id=":ra:"
-            popover="auto"
-          >
-            My Pull Requests
-          </span>
           <button
-            aria-describedby=":rd:-loading-announcement"
-            aria-labelledby=":rc:"
+            aria-describedby=":r7:-loading-announcement"
+            aria-label="Hide account notifications"
             class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-component="IconButton"
             data-loading="false"
@@ -1661,6 +1525,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-size="small"
             data-testid="account-toggle"
             sx="[object Object]"
+            title="Hide account notifications"
             type="button"
           >
             <svg
@@ -1680,15 +1545,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               />
             </svg>
           </button>
-          <span
-            aria-hidden="true"
-            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-            data-direction="s"
-            id=":rc:"
-            popover="auto"
-          >
-            Hide account notifications
-          </span>
         </div>
       </div>
     </div>
@@ -1708,7 +1564,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
         <span
           aria-label="Open Issue"
           class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-e"
-          id=":re:"
+          id=":r8:"
           role="tooltip"
         >
           <svg
@@ -1957,8 +1813,8 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           data-wrap="nowrap"
         >
           <button
-            aria-describedby=":rg:-loading-announcement"
-            aria-labelledby=":rf:"
+            aria-describedby=":r9:-loading-announcement"
+            aria-label="Mark as done"
             class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-component="IconButton"
             data-loading="false"
@@ -1966,6 +1822,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-size="small"
             data-testid="notification-mark-as-done"
             sx="[object Object]"
+            title="Mark as done"
             type="button"
           >
             <svg
@@ -1985,18 +1842,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               />
             </svg>
           </button>
-          <span
-            aria-hidden="true"
-            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-            data-direction="s"
-            id=":rf:"
-            popover="auto"
-          >
-            Mark as done
-          </span>
           <button
-            aria-describedby=":ri:-loading-announcement"
-            aria-labelledby=":rh:"
+            aria-describedby=":ra:-loading-announcement"
+            aria-label="Mark as read"
             class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-component="IconButton"
             data-loading="false"
@@ -2004,6 +1852,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-size="small"
             data-testid="notification-mark-as-read"
             sx="[object Object]"
+            title="Mark as read"
             type="button"
           >
             <svg
@@ -2023,18 +1872,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               />
             </svg>
           </button>
-          <span
-            aria-hidden="true"
-            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-            data-direction="s"
-            id=":rh:"
-            popover="auto"
-          >
-            Mark as read
-          </span>
           <button
-            aria-describedby=":rk:-loading-announcement"
-            aria-labelledby=":rj:"
+            aria-describedby=":rb:-loading-announcement"
+            aria-label="Unsubscribe from thread"
             class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-component="IconButton"
             data-loading="false"
@@ -2042,6 +1882,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-size="small"
             data-testid="notification-unsubscribe-from-thread"
             sx="[object Object]"
+            title="Unsubscribe from thread"
             type="button"
           >
             <svg
@@ -2061,15 +1902,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               />
             </svg>
           </button>
-          <span
-            aria-hidden="true"
-            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-            data-direction="s"
-            id=":rj:"
-            popover="auto"
-          >
-            Unsubscribe from thread
-          </span>
         </div>
       </div>
     </div>
@@ -2089,7 +1921,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
         <span
           aria-label=" Issue"
           class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-e"
-          id=":rl:"
+          id=":rc:"
           role="tooltip"
         >
           <svg
@@ -2263,8 +2095,8 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           data-wrap="nowrap"
         >
           <button
-            aria-describedby=":rn:-loading-announcement"
-            aria-labelledby=":rm:"
+            aria-describedby=":rd:-loading-announcement"
+            aria-label="Mark as done"
             class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-component="IconButton"
             data-loading="false"
@@ -2272,6 +2104,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-size="small"
             data-testid="notification-mark-as-done"
             sx="[object Object]"
+            title="Mark as done"
             type="button"
           >
             <svg
@@ -2291,18 +2124,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               />
             </svg>
           </button>
-          <span
-            aria-hidden="true"
-            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-            data-direction="s"
-            id=":rm:"
-            popover="auto"
-          >
-            Mark as done
-          </span>
           <button
-            aria-describedby=":rp:-loading-announcement"
-            aria-labelledby=":ro:"
+            aria-describedby=":re:-loading-announcement"
+            aria-label="Mark as read"
             class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-component="IconButton"
             data-loading="false"
@@ -2310,6 +2134,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-size="small"
             data-testid="notification-mark-as-read"
             sx="[object Object]"
+            title="Mark as read"
             type="button"
           >
             <svg
@@ -2329,18 +2154,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               />
             </svg>
           </button>
-          <span
-            aria-hidden="true"
-            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-            data-direction="s"
-            id=":ro:"
-            popover="auto"
-          >
-            Mark as read
-          </span>
           <button
-            aria-describedby=":rr:-loading-announcement"
-            aria-labelledby=":rq:"
+            aria-describedby=":rf:-loading-announcement"
+            aria-label="Unsubscribe from thread"
             class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-component="IconButton"
             data-loading="false"
@@ -2348,6 +2164,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-size="small"
             data-testid="notification-unsubscribe-from-thread"
             sx="[object Object]"
+            title="Unsubscribe from thread"
             type="button"
           >
             <svg
@@ -2367,15 +2184,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               />
             </svg>
           </button>
-          <span
-            aria-hidden="true"
-            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-            data-direction="s"
-            id=":rq:"
-            popover="auto"
-          >
-            Unsubscribe from thread
-          </span>
         </div>
       </div>
     </div>
@@ -2529,8 +2337,8 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-wrap="nowrap"
           >
             <button
-              aria-describedby=":r2:-loading-announcement"
-              aria-labelledby=":r1:"
+              aria-describedby=":r1:-loading-announcement"
+              aria-label="My Issues"
               class="types__StyledButton-sc-ws60qy-0 kQRupk"
               data-component="IconButton"
               data-loading="false"
@@ -2538,6 +2346,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               data-size="small"
               data-testid="account-issues"
               sx="[object Object]"
+              title="My Issues"
               type="button"
             >
               <svg
@@ -2560,18 +2369,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 />
               </svg>
             </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":r1:"
-              popover="auto"
-            >
-              My Issues
-            </span>
             <button
-              aria-describedby=":r4:-loading-announcement"
-              aria-labelledby=":r3:"
+              aria-describedby=":r2:-loading-announcement"
+              aria-label="My Pull Requests"
               class="types__StyledButton-sc-ws60qy-0 kQRupk"
               data-component="IconButton"
               data-loading="false"
@@ -2579,6 +2379,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               data-size="small"
               data-testid="account-pull-requests"
               sx="[object Object]"
+              title="My Pull Requests"
               type="button"
             >
               <svg
@@ -2598,18 +2399,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 />
               </svg>
             </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":r3:"
-              popover="auto"
-            >
-              My Pull Requests
-            </span>
             <button
-              aria-describedby=":r6:-loading-announcement"
-              aria-labelledby=":r5:"
+              aria-describedby=":r3:-loading-announcement"
+              aria-label="Hide account notifications"
               class="types__StyledButton-sc-ws60qy-0 kQRupk"
               data-component="IconButton"
               data-loading="false"
@@ -2617,6 +2409,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               data-size="small"
               data-testid="account-toggle"
               sx="[object Object]"
+              title="Hide account notifications"
               type="button"
             >
               <svg
@@ -2636,15 +2429,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 />
               </svg>
             </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":r5:"
-              popover="auto"
-            >
-              Hide account notifications
-            </span>
           </div>
         </div>
       </div>
@@ -2744,8 +2528,8 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           data-wrap="nowrap"
         >
           <button
-            aria-describedby=":r2:-loading-announcement"
-            aria-labelledby=":r1:"
+            aria-describedby=":r1:-loading-announcement"
+            aria-label="My Issues"
             class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-component="IconButton"
             data-loading="false"
@@ -2753,6 +2537,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-size="small"
             data-testid="account-issues"
             sx="[object Object]"
+            title="My Issues"
             type="button"
           >
             <svg
@@ -2775,18 +2560,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               />
             </svg>
           </button>
-          <span
-            aria-hidden="true"
-            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-            data-direction="s"
-            id=":r1:"
-            popover="auto"
-          >
-            My Issues
-          </span>
           <button
-            aria-describedby=":r4:-loading-announcement"
-            aria-labelledby=":r3:"
+            aria-describedby=":r2:-loading-announcement"
+            aria-label="My Pull Requests"
             class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-component="IconButton"
             data-loading="false"
@@ -2794,6 +2570,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-size="small"
             data-testid="account-pull-requests"
             sx="[object Object]"
+            title="My Pull Requests"
             type="button"
           >
             <svg
@@ -2813,18 +2590,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               />
             </svg>
           </button>
-          <span
-            aria-hidden="true"
-            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-            data-direction="s"
-            id=":r3:"
-            popover="auto"
-          >
-            My Pull Requests
-          </span>
           <button
-            aria-describedby=":r6:-loading-announcement"
-            aria-labelledby=":r5:"
+            aria-describedby=":r3:-loading-announcement"
+            aria-label="Hide account notifications"
             class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-component="IconButton"
             data-loading="false"
@@ -2832,6 +2600,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-size="small"
             data-testid="account-toggle"
             sx="[object Object]"
+            title="Hide account notifications"
             type="button"
           >
             <svg
@@ -2851,15 +2620,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               />
             </svg>
           </button>
-          <span
-            aria-hidden="true"
-            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-            data-direction="s"
-            id=":r5:"
-            popover="auto"
-          >
-            Hide account notifications
-          </span>
         </div>
       </div>
     </div>
@@ -2939,7 +2699,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           data-wrap="nowrap"
         >
           <button
-            aria-describedby=":rs:-loading-announcement"
+            aria-describedby=":rg:-loading-announcement"
             class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-loading="false"
             data-no-visuals="true"
@@ -3016,8 +2776,8 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-wrap="nowrap"
           >
             <button
-              aria-describedby=":ru:-loading-announcement"
-              aria-labelledby=":rt:"
+              aria-describedby=":rh:-loading-announcement"
+              aria-label="My Issues"
               class="types__StyledButton-sc-ws60qy-0 kQRupk"
               data-component="IconButton"
               data-loading="false"
@@ -3025,6 +2785,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               data-size="small"
               data-testid="account-issues"
               sx="[object Object]"
+              title="My Issues"
               type="button"
             >
               <svg
@@ -3047,18 +2808,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 />
               </svg>
             </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":rt:"
-              popover="auto"
-            >
-              My Issues
-            </span>
             <button
-              aria-describedby=":r10:-loading-announcement"
-              aria-labelledby=":rv:"
+              aria-describedby=":ri:-loading-announcement"
+              aria-label="My Pull Requests"
               class="types__StyledButton-sc-ws60qy-0 kQRupk"
               data-component="IconButton"
               data-loading="false"
@@ -3066,6 +2818,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               data-size="small"
               data-testid="account-pull-requests"
               sx="[object Object]"
+              title="My Pull Requests"
               type="button"
             >
               <svg
@@ -3085,18 +2838,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 />
               </svg>
             </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":rv:"
-              popover="auto"
-            >
-              My Pull Requests
-            </span>
             <button
-              aria-describedby=":r12:-loading-announcement"
-              aria-labelledby=":r11:"
+              aria-describedby=":rj:-loading-announcement"
+              aria-label="No notifications for account"
               class="types__StyledButton-sc-ws60qy-0 kQRupk"
               data-component="IconButton"
               data-loading="false"
@@ -3104,6 +2848,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               data-size="small"
               data-testid="account-toggle"
               sx="[object Object]"
+              title="No notifications for account"
               type="button"
             >
               <svg
@@ -3123,15 +2868,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 />
               </svg>
             </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":r11:"
-              popover="auto"
-            >
-              No notifications for account
-            </span>
           </div>
         </div>
       </div>
@@ -3195,7 +2931,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
         data-wrap="nowrap"
       >
         <button
-          aria-describedby=":rs:-loading-announcement"
+          aria-describedby=":rg:-loading-announcement"
           class="types__StyledButton-sc-ws60qy-0 kQRupk"
           data-loading="false"
           data-no-visuals="true"
@@ -3272,8 +3008,8 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           data-wrap="nowrap"
         >
           <button
-            aria-describedby=":ru:-loading-announcement"
-            aria-labelledby=":rt:"
+            aria-describedby=":rh:-loading-announcement"
+            aria-label="My Issues"
             class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-component="IconButton"
             data-loading="false"
@@ -3281,6 +3017,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-size="small"
             data-testid="account-issues"
             sx="[object Object]"
+            title="My Issues"
             type="button"
           >
             <svg
@@ -3303,18 +3040,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               />
             </svg>
           </button>
-          <span
-            aria-hidden="true"
-            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-            data-direction="s"
-            id=":rt:"
-            popover="auto"
-          >
-            My Issues
-          </span>
           <button
-            aria-describedby=":r10:-loading-announcement"
-            aria-labelledby=":rv:"
+            aria-describedby=":ri:-loading-announcement"
+            aria-label="My Pull Requests"
             class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-component="IconButton"
             data-loading="false"
@@ -3322,6 +3050,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-size="small"
             data-testid="account-pull-requests"
             sx="[object Object]"
+            title="My Pull Requests"
             type="button"
           >
             <svg
@@ -3341,18 +3070,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               />
             </svg>
           </button>
-          <span
-            aria-hidden="true"
-            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-            data-direction="s"
-            id=":rv:"
-            popover="auto"
-          >
-            My Pull Requests
-          </span>
           <button
-            aria-describedby=":r12:-loading-announcement"
-            aria-labelledby=":r11:"
+            aria-describedby=":rj:-loading-announcement"
+            aria-label="No notifications for account"
             class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-component="IconButton"
             data-loading="false"
@@ -3360,6 +3080,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-size="small"
             data-testid="account-toggle"
             sx="[object Object]"
+            title="No notifications for account"
             type="button"
           >
             <svg
@@ -3379,15 +3100,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               />
             </svg>
           </button>
-          <span
-            aria-hidden="true"
-            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-            data-direction="s"
-            id=":r11:"
-            popover="auto"
-          >
-            No notifications for account
-          </span>
         </div>
       </div>
     </div>
@@ -3508,7 +3220,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
           data-wrap="nowrap"
         >
           <button
-            aria-describedby=":r1v:-loading-announcement"
+            aria-describedby=":r14:-loading-announcement"
             class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-loading="false"
             data-no-visuals="true"
@@ -3585,8 +3297,8 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
             data-wrap="nowrap"
           >
             <button
-              aria-describedby=":r21:-loading-announcement"
-              aria-labelledby=":r20:"
+              aria-describedby=":r15:-loading-announcement"
+              aria-label="My Issues"
               class="types__StyledButton-sc-ws60qy-0 kQRupk"
               data-component="IconButton"
               data-loading="false"
@@ -3594,6 +3306,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
               data-size="small"
               data-testid="account-issues"
               sx="[object Object]"
+              title="My Issues"
               type="button"
             >
               <svg
@@ -3616,18 +3329,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
                 />
               </svg>
             </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":r20:"
-              popover="auto"
-            >
-              My Issues
-            </span>
             <button
-              aria-describedby=":r23:-loading-announcement"
-              aria-labelledby=":r22:"
+              aria-describedby=":r16:-loading-announcement"
+              aria-label="My Pull Requests"
               class="types__StyledButton-sc-ws60qy-0 kQRupk"
               data-component="IconButton"
               data-loading="false"
@@ -3635,6 +3339,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
               data-size="small"
               data-testid="account-pull-requests"
               sx="[object Object]"
+              title="My Pull Requests"
               type="button"
             >
               <svg
@@ -3654,18 +3359,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
                 />
               </svg>
             </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":r22:"
-              popover="auto"
-            >
-              My Pull Requests
-            </span>
             <button
-              aria-describedby=":r25:-loading-announcement"
-              aria-labelledby=":r24:"
+              aria-describedby=":r17:-loading-announcement"
+              aria-label="Show account notifications"
               class="types__StyledButton-sc-ws60qy-0 kQRupk"
               data-component="IconButton"
               data-loading="false"
@@ -3673,6 +3369,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
               data-size="small"
               data-testid="account-toggle"
               sx="[object Object]"
+              title="Show account notifications"
               type="button"
             >
               <svg
@@ -3692,15 +3389,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
                 />
               </svg>
             </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":r24:"
-              popover="auto"
-            >
-              Show account notifications
-            </span>
           </div>
         </div>
       </div>
@@ -3719,7 +3407,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
           data-wrap="nowrap"
         >
           <button
-            aria-describedby=":r26:-loading-announcement"
+            aria-describedby=":r18:-loading-announcement"
             class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-loading="false"
             data-no-visuals="true"
@@ -3796,8 +3484,8 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
             data-wrap="nowrap"
           >
             <button
-              aria-describedby=":r28:-loading-announcement"
-              aria-labelledby=":r27:"
+              aria-describedby=":r19:-loading-announcement"
+              aria-label="My Issues"
               class="types__StyledButton-sc-ws60qy-0 kQRupk"
               data-component="IconButton"
               data-loading="false"
@@ -3805,6 +3493,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
               data-size="small"
               data-testid="account-issues"
               sx="[object Object]"
+              title="My Issues"
               type="button"
             >
               <svg
@@ -3827,18 +3516,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
                 />
               </svg>
             </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":r27:"
-              popover="auto"
-            >
-              My Issues
-            </span>
             <button
-              aria-describedby=":r2a:-loading-announcement"
-              aria-labelledby=":r29:"
+              aria-describedby=":r1a:-loading-announcement"
+              aria-label="My Pull Requests"
               class="types__StyledButton-sc-ws60qy-0 kQRupk"
               data-component="IconButton"
               data-loading="false"
@@ -3846,6 +3526,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
               data-size="small"
               data-testid="account-pull-requests"
               sx="[object Object]"
+              title="My Pull Requests"
               type="button"
             >
               <svg
@@ -3865,18 +3546,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
                 />
               </svg>
             </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":r29:"
-              popover="auto"
-            >
-              My Pull Requests
-            </span>
             <button
-              aria-describedby=":r2c:-loading-announcement"
-              aria-labelledby=":r2b:"
+              aria-describedby=":r1b:-loading-announcement"
+              aria-label="Hide account notifications"
               class="types__StyledButton-sc-ws60qy-0 kQRupk"
               data-component="IconButton"
               data-loading="false"
@@ -3884,6 +3556,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
               data-size="small"
               data-testid="account-toggle"
               sx="[object Object]"
+              title="Hide account notifications"
               type="button"
             >
               <svg
@@ -3903,15 +3576,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
                 />
               </svg>
             </button>
-            <span
-              aria-hidden="true"
-              class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-              data-direction="s"
-              id=":r2b:"
-              popover="auto"
-            >
-              Hide account notifications
-            </span>
           </div>
         </div>
       </div>
@@ -3934,7 +3598,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
         data-wrap="nowrap"
       >
         <button
-          aria-describedby=":r26:-loading-announcement"
+          aria-describedby=":r18:-loading-announcement"
           class="types__StyledButton-sc-ws60qy-0 kQRupk"
           data-loading="false"
           data-no-visuals="true"
@@ -4011,8 +3675,8 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
           data-wrap="nowrap"
         >
           <button
-            aria-describedby=":r28:-loading-announcement"
-            aria-labelledby=":r27:"
+            aria-describedby=":r19:-loading-announcement"
+            aria-label="My Issues"
             class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-component="IconButton"
             data-loading="false"
@@ -4020,6 +3684,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
             data-size="small"
             data-testid="account-issues"
             sx="[object Object]"
+            title="My Issues"
             type="button"
           >
             <svg
@@ -4042,18 +3707,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
               />
             </svg>
           </button>
-          <span
-            aria-hidden="true"
-            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-            data-direction="s"
-            id=":r27:"
-            popover="auto"
-          >
-            My Issues
-          </span>
           <button
-            aria-describedby=":r2a:-loading-announcement"
-            aria-labelledby=":r29:"
+            aria-describedby=":r1a:-loading-announcement"
+            aria-label="My Pull Requests"
             class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-component="IconButton"
             data-loading="false"
@@ -4061,6 +3717,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
             data-size="small"
             data-testid="account-pull-requests"
             sx="[object Object]"
+            title="My Pull Requests"
             type="button"
           >
             <svg
@@ -4080,18 +3737,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
               />
             </svg>
           </button>
-          <span
-            aria-hidden="true"
-            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-            data-direction="s"
-            id=":r29:"
-            popover="auto"
-          >
-            My Pull Requests
-          </span>
           <button
-            aria-describedby=":r2c:-loading-announcement"
-            aria-labelledby=":r2b:"
+            aria-describedby=":r1b:-loading-announcement"
+            aria-label="Hide account notifications"
             class="types__StyledButton-sc-ws60qy-0 kQRupk"
             data-component="IconButton"
             data-loading="false"
@@ -4099,6 +3747,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
             data-size="small"
             data-testid="account-toggle"
             sx="[object Object]"
+            title="Hide account notifications"
             type="button"
           >
             <svg
@@ -4118,15 +3767,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
               />
             </svg>
           </button>
-          <span
-            aria-hidden="true"
-            class="Tooltip__StyledTooltip-sc-e45c7z-0 eELanX"
-            data-direction="s"
-            id=":r2b:"
-            popover="auto"
-          >
-            Hide account notifications
-          </span>
         </div>
       </div>
     </div>

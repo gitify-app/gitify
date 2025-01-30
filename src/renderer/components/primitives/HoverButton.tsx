@@ -19,6 +19,8 @@ export const HoverButton: FC<IHoverButton> = ({
     enabled && (
       <IconButton
         aria-label={props.label}
+        unsafeDisableTooltip={true}
+        title={props.label}
         icon={props.icon}
         size="small"
         variant="invisible"
