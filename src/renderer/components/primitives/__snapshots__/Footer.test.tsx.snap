@@ -6,7 +6,7 @@ exports[`renderer/components/primitives/Footer.tsx should render itself & its ch
   "baseElement": <body>
     <div>
       <div
-        class="Box-sc-g0xbh4-0 fixed bottom-0 left-10 right-0 bg-gitify-footer"
+        class="Box-sc-g0xbh4-0 fixed bottom-0 left-sidebar right-0 bg-gitify-footer"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
@@ -23,7 +23,7 @@ exports[`renderer/components/primitives/Footer.tsx should render itself & its ch
   </body>,
   "container": <div>
     <div
-      class="Box-sc-g0xbh4-0 fixed bottom-0 left-10 right-0 bg-gitify-footer"
+      class="Box-sc-g0xbh4-0 fixed bottom-0 left-sidebar right-0 bg-gitify-footer"
     >
       <div
         class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
@@ -97,7 +97,7 @@ exports[`renderer/components/primitives/Footer.tsx should render itself & its ch
   "baseElement": <body>
     <div>
       <div
-        class="Box-sc-g0xbh4-0 fixed bottom-0 left-10 right-0 bg-gitify-footer"
+        class="Box-sc-g0xbh4-0 fixed bottom-0 left-sidebar right-0 bg-gitify-footer"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
@@ -114,7 +114,7 @@ exports[`renderer/components/primitives/Footer.tsx should render itself & its ch
   </body>,
   "container": <div>
     <div
-      class="Box-sc-g0xbh4-0 fixed bottom-0 left-10 right-0 bg-gitify-footer"
+      class="Box-sc-g0xbh4-0 fixed bottom-0 left-sidebar right-0 bg-gitify-footer"
     >
       <div
         class="Stack__StyledStack-sc-x3xa2i-0 duhwY"

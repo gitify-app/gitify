@@ -8,7 +8,7 @@ interface IFooter {
 
 export const Footer: FC<IFooter> = (props: IFooter) => {
   return (
-    <Box className="fixed bottom-0 left-10 right-0 bg-gitify-footer">
+    <Box className="fixed bottom-0 left-sidebar right-0 bg-gitify-footer">
       <Stack direction="horizontal" justify={props.justify} padding="condensed">
         {props.children}
       </Stack>
