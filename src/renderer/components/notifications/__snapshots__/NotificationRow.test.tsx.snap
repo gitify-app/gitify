@@ -90,11 +90,13 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                       sx="[object Object]"
                       width="14"
                     />
-                    <span
-                      class="Text-sc-17v1xeu-0 hmAFGJ block truncate flex-shrink overflow-ellipsis"
+                    <div
+                      class="Truncate__StyledTruncate-sc-23o1d2-0 ldPZNj"
+                      maxwidth="280"
+                      title="gitify-app/notifications-test"
                     >
-                      gitify-app/notifications-test
-                    </span>
+                      asdokmdasoimdasoisadoindsviunafjhnfpuinfdsapiujndfp iun piunaspiufnpiuadspdsfainfdsai
+                    </div>
                   </div>
                 </div>
                 <div
@@ -450,11 +452,13 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                     sx="[object Object]"
                     width="14"
                   />
-                  <span
-                    class="Text-sc-17v1xeu-0 hmAFGJ block truncate flex-shrink overflow-ellipsis"
+                  <div
+                    class="Truncate__StyledTruncate-sc-23o1d2-0 ldPZNj"
+                    maxwidth="280"
+                    title="gitify-app/notifications-test"
                   >
-                    gitify-app/notifications-test
-                  </span>
+                    asdokmdasoimdasoisadoindsviunafjhnfpuinfdsapiujndfp iun piunaspiufnpiuadspdsfainfdsai
+                  </div>
                 </div>
               </div>
               <div

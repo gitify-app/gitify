@@ -55,11 +55,13 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
                     sx="[object Object]"
                     width="18"
                   />
-                  <span
-                    class="Text-sc-17v1xeu-0 hmAFGJ block truncate flex-shrink overflow-ellipsis"
+                  <div
+                    class="Truncate__StyledTruncate-sc-23o1d2-0 ldPZNj"
+                    maxwidth="280"
+                    title="gitify-app/notifications-test"
                   >
-                    gitify-app/notifications-test
-                  </span>
+                    asdokmdasoimdasoisadoindsviunafjhnfpuinfdsapiujndfp iun piunaspiufnpiuadspdsfainfdsai
+                  </div>
                 </div>
               </span>
               <span
@@ -246,11 +248,13 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
                   sx="[object Object]"
                   width="18"
                 />
-                <span
-                  class="Text-sc-17v1xeu-0 hmAFGJ block truncate flex-shrink overflow-ellipsis"
+                <div
+                  class="Truncate__StyledTruncate-sc-23o1d2-0 ldPZNj"
+                  maxwidth="280"
+                  title="gitify-app/notifications-test"
                 >
-                  gitify-app/notifications-test
-                </span>
+                  asdokmdasoimdasoisadoindsviunafjhnfpuinfdsapiujndfp iun piunaspiufnpiuadspdsfainfdsai
+                </div>
               </div>
             </span>
             <span
@@ -500,11 +504,13 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
                       d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
                     />
                   </svg>
-                  <span
-                    class="Text-sc-17v1xeu-0 hmAFGJ block truncate flex-shrink overflow-ellipsis"
+                  <div
+                    class="Truncate__StyledTruncate-sc-23o1d2-0 ldPZNj"
+                    maxwidth="280"
+                    title="gitify-app/notifications-test"
                   >
-                    gitify-app/notifications-test
-                  </span>
+                    asdokmdasoimdasoisadoindsviunafjhnfpuinfdsapiujndfp iun piunaspiufnpiuadspdsfainfdsai
+                  </div>
                 </div>
               </span>
               <span
@@ -690,11 +696,13 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
                       d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
                     />
                   </svg>
-                  <span
-                    class="Text-sc-17v1xeu-0 hmAFGJ block truncate flex-shrink overflow-ellipsis"
+                  <div
+                    class="Truncate__StyledTruncate-sc-23o1d2-0 ldPZNj"
+                    maxwidth="280"
+                    title="gitify-app/notifications-test"
                   >
-                    gitify-app/notifications-test
-                  </span>
+                    asdokmdasoimdasoisadoindsviunafjhnfpuinfdsapiujndfp iun piunaspiufnpiuadspdsfainfdsai
+                  </div>
                 </div>
               </span>
               <span
@@ -887,11 +895,13 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
                     d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
                   />
                 </svg>
-                <span
-                  class="Text-sc-17v1xeu-0 hmAFGJ block truncate flex-shrink overflow-ellipsis"
+                <div
+                  class="Truncate__StyledTruncate-sc-23o1d2-0 ldPZNj"
+                  maxwidth="280"
+                  title="gitify-app/notifications-test"
                 >
-                  gitify-app/notifications-test
-                </span>
+                  asdokmdasoimdasoisadoindsviunafjhnfpuinfdsapiujndfp iun piunaspiufnpiuadspdsfainfdsai
+                </div>
               </div>
             </span>
             <span
@@ -1141,11 +1151,13 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
                       d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
                     />
                   </svg>
-                  <span
-                    class="Text-sc-17v1xeu-0 hmAFGJ block truncate flex-shrink overflow-ellipsis"
+                  <div
+                    class="Truncate__StyledTruncate-sc-23o1d2-0 ldPZNj"
+                    maxwidth="280"
+                    title="gitify-app/notifications-test"
                   >
-                    gitify-app/notifications-test
-                  </span>
+                    asdokmdasoimdasoisadoindsviunafjhnfpuinfdsapiujndfp iun piunaspiufnpiuadspdsfainfdsai
+                  </div>
                 </div>
               </span>
               <span
@@ -1338,11 +1350,13 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
                     d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
                   />
                 </svg>
-                <span
-                  class="Text-sc-17v1xeu-0 hmAFGJ block truncate flex-shrink overflow-ellipsis"
+                <div
+                  class="Truncate__StyledTruncate-sc-23o1d2-0 ldPZNj"
+                  maxwidth="280"
+                  title="gitify-app/notifications-test"
                 >
-                  gitify-app/notifications-test
-                </span>
+                  asdokmdasoimdasoisadoindsviunafjhnfpuinfdsapiujndfp iun piunaspiufnpiuadspdsfainfdsai
+                </div>
               </div>
             </span>
             <span
