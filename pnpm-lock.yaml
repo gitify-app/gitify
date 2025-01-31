@@ -30,8 +30,8 @@ importers:
         specifier: 7.1.3
         version: 7.1.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       update-electron-app:
-        specifier: 3.1.0
-        version: 3.1.0
+        specifier: 3.1.1
+        version: 3.1.1
     devDependencies:
       '@biomejs/biome':
         specifier: 1.9.4
@@ -4243,8 +4243,8 @@ packages:
     peerDependencies:
       browserslist: '>= 4.21.0'
 
-  update-electron-app@3.1.0:
-    resolution: {integrity: sha512-6U5BXxw+CTtk9pXgRBFosuaOlsXjHKq3heLZMAt6j/5cNMOuEZiN576b70zccMXO8WQuoprUPtSRyseGoXE7Jw==}
+  update-electron-app@3.1.1:
+    resolution: {integrity: sha512-7duRr6sYn014tifhKgT/5i8N+6xLzmJVJ8hVtNrHXlIDNP6QbRe6VxZ1hSi2UH5oJPzhor/PH7yKU9em5xjRzQ==}
 
   uri-js@4.4.1:
     resolution: {integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==}
@@ -9231,7 +9231,7 @@ snapshots:
       escalade: 3.2.0
       picocolors: 1.1.1
 
-  update-electron-app@3.1.0:
+  update-electron-app@3.1.1:
     dependencies:
       github-url-to-object: 4.0.6
       ms: 2.1.2
