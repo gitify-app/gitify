@@ -57,21 +57,6 @@ body {
   cursor: default;
 }
 
-#nprogress {
-  pointer-events: none;
-}
-
-#nprogress .bar {
-  position: fixed;
-  top: 0;
-  left: 50px;
-  z-index: 1031;
-  background: #203354;
-
-  width: 100%;
-  height: 2px;
-}
-
 /**
  * Set emoji size according to surrounding text.
  * Ref: https://github.com/jdecked/twemoji?tab=readme-ov-file#inline-styles
