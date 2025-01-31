@@ -134,31 +134,6 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       expect(markNotificationsAsRead).toHaveBeenCalledTimes(1);
     });
 
-    it('should open a notification in the browser - key down', () => {
-      const markNotificationsAsRead = jest.fn();
-
-      const props = {
-        notification: mockSingleNotification,
-        account: mockGitHubCloudAccount,
-      };
-
-      render(
-        <AppContext.Provider
-          value={{
-            settings: { ...mockSettings, markAsDoneOnOpen: false },
-            markNotificationsAsRead,
-            auth: mockAuth,
-          }}
-        >
-          <NotificationRow {...props} />
-        </AppContext.Provider>,
-      );
-
-      fireEvent.click(screen.getByTestId('notification-row'));
-      expect(links.openNotification).toHaveBeenCalledTimes(1);
-      expect(markNotificationsAsRead).toHaveBeenCalledTimes(1);
-    });
-
     it('should open a notification in browser & mark it as done', () => {
       const markNotificationsAsDone = jest.fn();
 
