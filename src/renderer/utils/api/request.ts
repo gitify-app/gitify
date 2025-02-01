@@ -46,6 +46,7 @@ export async function apiRequestAuth(
   fetchAllRecords = false,
 ): AxiosPromise | null {
   let apiToken = token;
+  // TODO - Remove this try-catch block in a future release
   try {
     apiToken = (await decryptValue(token)) as Token;
   } catch (err) {

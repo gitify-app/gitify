@@ -284,31 +284,19 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     if (existing.settings) {
       setKeyboardShortcut(existing.settings.keyboardShortcut);
       setAlternateIdleIcon(existing.settings.useAlternateIdleIcon);
-      setSettings({
-        ...defaultSettings,
-        ...Object.fromEntries(
-          Object.entries(existing.settings).filter(
-            ([key]) => key in defaultSettings,
-          ),
-        ),
-      });
+      setSettings({ ...defaultSettings, ...existing.settings });
       webFrame.setZoomLevel(
         zoomPercentageToLevel(existing.settings.zoomPercentage),
       );
     }
 
     if (existing.auth) {
-      setAuth({
-        ...defaultAuth,
-        ...Object.fromEntries(
-          Object.entries(existing.auth).filter(([key]) => key in defaultAuth),
-        ),
-      });
+      setAuth({ ...defaultAuth, ...existing.auth });
 
       // Refresh account data on app start
       for (const account of existing.auth.accounts) {
         /**
-         * Check if each account has an encrypted token.
+         * Check if the account is using an encrypted token.
          * If not encrypt it and save it.
          */
         try {
@@ -321,8 +309,6 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         await refreshAccount(account);
       }
     }
-
-    // saveState({  auth: existing.auth, settings });
   }, []);
 
   const fetchNotificationsWithAccounts = useCallback(
