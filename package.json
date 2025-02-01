@@ -151,7 +151,7 @@
     "@tailwindcss/postcss": "4.0.1",
     "@testing-library/react": "16.2.0",
     "@types/jest": "29.5.14",
-    "@types/node": "22.12.0",
+    "@types/node": "22.13.0",
     "@types/react": "19.0.8",
     "@types/react-dom": "19.0.3",
     "@types/react-router-dom": "5.3.3",
