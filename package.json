@@ -69,7 +69,7 @@
   "build": {
     "productName": "Gitify",
     "appId": "com.electron.gitify",
-    "copyright": "Copyright © 2024 Gitify Team",
+    "copyright": "Copyright © 2025 Gitify Team",
     "asar": true,
     "files": [
       "assets/images/*",
@@ -83,7 +83,7 @@
     "protocols": [
       {
         "name": "Gitify",
-        "schemes": ["gitify"]
+        "schemes": ["gitify", "gitify-dev"]
       }
     ],
     "mac": {
