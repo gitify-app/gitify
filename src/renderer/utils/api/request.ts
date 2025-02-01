@@ -4,8 +4,9 @@ import axios, {
   type Method,
 } from 'axios';
 
-import { logError } from '../../../shared/logger';
+import { logError, logWarn } from '../../../shared/logger';
 import type { Link, Token } from '../../types';
+import { decryptValue } from '../comms';
 import { getNextURLFromLinkHeader } from './utils';
 
 /**
@@ -44,8 +45,15 @@ export async function apiRequestAuth(
   data = {},
   fetchAllRecords = false,
 ): AxiosPromise | null {
+  let apiToken = token;
+  try {
+    apiToken = (await decryptValue(token)) as Token;
+  } catch (err) {
+    logWarn('apiRequestAuth', 'Token is not yet encrypted');
+  }
+
   axios.defaults.headers.common.Accept = 'application/json';
-  axios.defaults.headers.common.Authorization = `token ${token}`;
+  axios.defaults.headers.common.Authorization = `token ${apiToken}`;
   axios.defaults.headers.common['Content-Type'] = 'application/json';
   axios.defaults.headers.common['Cache-Control'] = shouldRequestWithNoCache(url)
     ? 'no-cache'

@@ -4,6 +4,8 @@ import { namespacedEvent } from '../../shared/events';
 import { mockSettings } from '../__mocks__/state-mocks';
 import type { Link } from '../types';
 import {
+  decryptValue,
+  encryptValue,
   getAppVersion,
   hideWindow,
   openExternalLink,
@@ -66,6 +68,24 @@ describe('renderer/utils/comms.ts', () => {
     await getAppVersion();
     expect(ipcRenderer.invoke).toHaveBeenCalledTimes(1);
     expect(ipcRenderer.invoke).toHaveBeenCalledWith(namespacedEvent('version'));
+  });
+
+  it('should encrypt a value', async () => {
+    await encryptValue('value');
+    expect(ipcRenderer.invoke).toHaveBeenCalledTimes(1);
+    expect(ipcRenderer.invoke).toHaveBeenCalledWith(
+      namespacedEvent('safe-storage-encrypt'),
+      'value',
+    );
+  });
+
+  it('should decrypt a value', async () => {
+    await decryptValue('value');
+    expect(ipcRenderer.invoke).toHaveBeenCalledTimes(1);
+    expect(ipcRenderer.invoke).toHaveBeenCalledWith(
+      namespacedEvent('safe-storage-decrypt'),
+      'value',
+    );
   });
 
   it('should quit the app', () => {

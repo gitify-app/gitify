@@ -18,7 +18,7 @@ import type {
 import type { UserDetails } from '../../typesGitHub';
 import { getAuthenticatedUser } from '../api/client';
 import { apiRequest } from '../api/request';
-import { openExternalLink } from '../comms';
+import { encryptValue, openExternalLink } from '../comms';
 import { Constants } from '../constants';
 import { getPlatformFromHostname } from '../helpers';
 import type { AuthMethod, AuthResponse, AuthTokenResponse } from './types';
@@ -109,12 +109,13 @@ export async function addAccount(
   hostname: Hostname,
 ): Promise<AuthState> {
   const accountList = auth.accounts;
+  const encryptedToken = await encryptValue(token);
 
   let newAccount = {
     hostname: hostname,
     method: method,
     platform: getPlatformFromHostname(hostname),
-    token: token,
+    token: encryptedToken,
   } as Account;
 
   newAccount = await refreshAccount(newAccount);

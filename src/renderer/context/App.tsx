@@ -28,6 +28,7 @@ import {
   type Status,
   type SystemSettingsState,
   Theme,
+  type Token,
 } from '../types';
 import type { Notification } from '../typesGitHub';
 import { headNotifications } from '../utils/api/client';
@@ -44,6 +45,8 @@ import {
   removeAccount,
 } from '../utils/auth/utils';
 import {
+  decryptValue,
+  encryptValue,
   setAlternateIdleIcon,
   setAutoLaunch,
   setKeyboardShortcut,
@@ -281,20 +284,45 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     if (existing.settings) {
       setKeyboardShortcut(existing.settings.keyboardShortcut);
       setAlternateIdleIcon(existing.settings.useAlternateIdleIcon);
-      setSettings({ ...defaultSettings, ...existing.settings });
+      setSettings({
+        ...defaultSettings,
+        ...Object.fromEntries(
+          Object.entries(existing.settings).filter(
+            ([key]) => key in defaultSettings,
+          ),
+        ),
+      });
       webFrame.setZoomLevel(
         zoomPercentageToLevel(existing.settings.zoomPercentage),
       );
     }
 
     if (existing.auth) {
-      setAuth({ ...defaultAuth, ...existing.auth });
+      setAuth({
+        ...defaultAuth,
+        ...Object.fromEntries(
+          Object.entries(existing.auth).filter(([key]) => key in defaultAuth),
+        ),
+      });
 
       // Refresh account data on app start
       for (const account of existing.auth.accounts) {
+        /**
+         * Check if each account has an encrypted token.
+         * If not encrypt it and save it.
+         */
+        try {
+          await decryptValue(account.token);
+        } catch (err) {
+          const encryptedToken = await encryptValue(account.token);
+          account.token = encryptedToken as Token;
+        }
+
         await refreshAccount(account);
       }
     }
+
+    // saveState({  auth: existing.auth, settings });
   }, []);
 
   const fetchNotificationsWithAccounts = useCallback(
