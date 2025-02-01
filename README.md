@@ -1,6 +1,6 @@
 # Gitify 
 
-[![CI Workflow][ci-workflow-badge]][github-actions] [![Release Workflow][release-workflow-badge]][github-actions] [![Coveralls][coveralls-badge]][coveralls] [![Renovate enabled][renovate-badge]][renovate] [![Contributors][contributors-badge]][github] [![Downloads - Total][downloads-total-badge]][website] [![Downloads - Latest Release][downloads-latest-badge]][website] [![OSS License][license-badge]][license] [![Latest Release][github-release-badge]][github-releases] [![Homebrew Cask][homebrew-cask-badge]][homebrew-cask]
+[![CI Workflow][ci-workflow-badge]][github-actions] [![Release Workflow][release-workflow-badge]][github-actions] [![Coverage][coverage-badge]][coverage] [![Quality Gate Status][quality-badge]][quality] [![Renovate enabled][renovate-badge]][renovate] [![Contributors][contributors-badge]][github] [![Downloads - Total][downloads-total-badge]][website] [![Downloads - Latest Release][downloads-latest-badge]][website] [![OSS License][license-badge]][license] [![Latest Release][github-release-badge]][github-releases] [![Homebrew Cask][homebrew-cask-badge]][homebrew-cask]
 
 > GitHub Notifications on your menu bar. Available on macOS, Windows and Linux.
 
@@ -43,8 +43,11 @@ For more information, see [LICENSE](LICENSE).
 [brew]: https://brew.sh/
 [homebrew-cask]: https://formulae.brew.sh/cask/gitify
 
-[coveralls]: https://coveralls.io/github/gitify-app/gitify
-[coveralls-badge]: https://img.shields.io/coverallsCoverage/github/gitify-app/gitify?logo=coveralls
+[coverage-badge]: https://img.shields.io/sonar/coverage/gitify-app_gitify?server=https%3A%2F%2Fsonarcloud.io&logo=sonarcloud
+[coverage]: https://sonarcloud.io/summary/new_code?id=gitify-app_gitify
+[quality-badge]: https://img.shields.io/sonar/quality_gate/gitify-app_gitify?server=https%3A%2F%2Fsonarcloud.io&logo=sonarcloud
+[quality]: https://sonarcloud.io/summary/new_code?id=gitify-app_gitify
+
 [ci-workflow-badge]: https://github.com/gitify-app/gitify/actions/workflows/ci.yml/badge.svg
 [release-workflow-badge]: https://github.com/gitify-app/gitify/actions/workflows/release.yml/badge.svg
 [downloads-total-badge]: https://img.shields.io/github/downloads/gitify-app/gitify/total?label=downloads@all&logo=github

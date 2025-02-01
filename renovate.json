@@ -26,5 +26,16 @@
       "matchDatasources": ["npm"],
       "commitMessageTopic": "{{depName}}"
     }
+  ],
+  "customManagers": [
+    {
+      "description": "Keep sonar.projectVersion variables in sonar-project.properties in-sync",
+      "customType": "regex",
+      "datasourceTemplate": "github-tags",
+      "depNameTemplate": "gitify-app/gitify",
+      "versioningTemplate": "loose",
+      "fileMatch": ["sonar-project.properties"],
+      "matchStrings": ["\\s?sonar.projectVersion=(?<currentValue>.+?)\\s"]
+    }
   ]
 }
