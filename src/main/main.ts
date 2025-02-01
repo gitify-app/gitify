@@ -38,9 +38,7 @@ const menuBuilder = new MenuBuilder(mb);
 const contextMenu = menuBuilder.buildMenu();
 
 // Register your app as the handler for a custom protocol
-const protocolName =
-  process.env.NODE_ENV === 'development' ? 'gitify-dev' : 'gitify';
-app.setAsDefaultProtocolClient(protocolName);
+app.setAsDefaultProtocolClient('gitify');
 
 if (isMacOS() || isWindows()) {
   /**
