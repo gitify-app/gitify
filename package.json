@@ -83,7 +83,7 @@
     "protocols": [
       {
         "name": "Gitify",
-        "schemes": ["gitify"]
+        "schemes": ["gitify", "gitify-dev"]
       }
     ],
     "mac": {
