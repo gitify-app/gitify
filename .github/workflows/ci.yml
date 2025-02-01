@@ -25,6 +25,7 @@ jobs:
     name: Tests
     uses: ./.github/workflows/test.yml
     needs: lint
+    secrets: inherit
 
   build:
     name: Build
