@@ -1,4 +1,4 @@
-import { app, globalShortcut, ipcMain as ipc } from 'electron';
+import { app, globalShortcut, ipcMain as ipc, safeStorage } from 'electron';
 import log from 'electron-log';
 import { menubar } from 'menubar';
 
@@ -169,6 +169,15 @@ app.whenReady().then(async () => {
   ipc.on(namespacedEvent('update-auto-launch'), (_, settings) => {
     app.setLoginItemSettings(settings);
   });
+});
+
+// Safe Storage
+ipc.handle(namespacedEvent('safe-storage-encrypt'), (_, settings) => {
+  return safeStorage.encryptString(settings).toString('base64');
+});
+
+ipc.handle(namespacedEvent('safe-storage-decrypt'), (_, settings) => {
+  return safeStorage.decryptString(Buffer.from(settings, 'base64'));
 });
 
 // Handle gitify:// custom protocol URL events for OAuth 2.0 callback

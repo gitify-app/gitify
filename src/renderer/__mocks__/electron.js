@@ -43,6 +43,10 @@ module.exports = {
           return Promise.resolve('darwin');
         case namespacedEvent('version'):
           return Promise.resolve('0.0.1');
+        case namespacedEvent('safe-storage-encrypt'):
+          return Promise.resolve('encrypted');
+        case namespacedEvent('safe-storage-decrypt'):
+          return Promise.resolve('decrypted');
         default:
           return Promise.reject(new Error(`Unknown channel: ${channel}`));
       }

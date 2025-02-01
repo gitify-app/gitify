@@ -28,6 +28,7 @@ import {
   type Status,
   type SystemSettingsState,
   Theme,
+  type Token,
 } from '../types';
 import type { Notification } from '../typesGitHub';
 import { headNotifications } from '../utils/api/client';
@@ -44,6 +45,8 @@ import {
   removeAccount,
 } from '../utils/auth/utils';
 import {
+  decryptValue,
+  encryptValue,
   setAlternateIdleIcon,
   setAutoLaunch,
   setKeyboardShortcut,
@@ -292,6 +295,17 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
       // Refresh account data on app start
       for (const account of existing.auth.accounts) {
+        /**
+         * Check if the account is using an encrypted token.
+         * If not encrypt it and save it.
+         */
+        try {
+          await decryptValue(account.token);
+        } catch (err) {
+          const encryptedToken = await encryptValue(account.token);
+          account.token = encryptedToken as Token;
+        }
+
         await refreshAccount(account);
       }
     }

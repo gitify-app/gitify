@@ -24,6 +24,20 @@ export async function getAppVersion(): Promise<string> {
   return await ipcRenderer.invoke(namespacedEvent('version'));
 }
 
+export async function encryptValue(value: string): Promise<string> {
+  return await ipcRenderer.invoke(
+    namespacedEvent('safe-storage-encrypt'),
+    value,
+  );
+}
+
+export async function decryptValue(value: string): Promise<string> {
+  return await ipcRenderer.invoke(
+    namespacedEvent('safe-storage-decrypt'),
+    value,
+  );
+}
+
 export function quitApp(): void {
   ipcRenderer.send(namespacedEvent('quit'));
 }

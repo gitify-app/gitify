@@ -3,7 +3,7 @@
 exports[`renderer/utils/api/client.ts getAuthenticatedUser should fetch authenticated user - enterprise 1`] = `
 {
   "Accept": "application/json",
-  "Authorization": "token token-123-456",
+  "Authorization": "token decrypted",
   "Cache-Control": "",
   "Content-Type": "application/json",
 }
@@ -12,7 +12,7 @@ exports[`renderer/utils/api/client.ts getAuthenticatedUser should fetch authenti
 exports[`renderer/utils/api/client.ts getAuthenticatedUser should fetch authenticated user - github 1`] = `
 {
   "Accept": "application/json",
-  "Authorization": "token token-123-456",
+  "Authorization": "token decrypted",
   "Cache-Control": "",
   "Content-Type": "application/json",
 }
@@ -21,7 +21,7 @@ exports[`renderer/utils/api/client.ts getAuthenticatedUser should fetch authenti
 exports[`renderer/utils/api/client.ts headNotifications should fetch notifications head - enterprise 1`] = `
 {
   "Accept": "application/json",
-  "Authorization": "token token-123-456",
+  "Authorization": "token decrypted",
   "Cache-Control": "no-cache",
   "Content-Type": "application/json",
 }
@@ -30,7 +30,7 @@ exports[`renderer/utils/api/client.ts headNotifications should fetch notificatio
 exports[`renderer/utils/api/client.ts headNotifications should fetch notifications head - github 1`] = `
 {
   "Accept": "application/json",
-  "Authorization": "token token-123-456",
+  "Authorization": "token decrypted",
   "Cache-Control": "no-cache",
   "Content-Type": "application/json",
 }
@@ -39,7 +39,7 @@ exports[`renderer/utils/api/client.ts headNotifications should fetch notificatio
 exports[`renderer/utils/api/client.ts ignoreNotificationThreadSubscription should ignore notification thread subscription - enterprise 1`] = `
 {
   "Accept": "application/json",
-  "Authorization": "token token-123-456",
+  "Authorization": "token decrypted",
   "Cache-Control": "",
   "Content-Type": "application/json",
 }
@@ -48,7 +48,7 @@ exports[`renderer/utils/api/client.ts ignoreNotificationThreadSubscription shoul
 exports[`renderer/utils/api/client.ts ignoreNotificationThreadSubscription should ignore notification thread subscription - github 1`] = `
 {
   "Accept": "application/json",
-  "Authorization": "token token-123-456",
+  "Authorization": "token decrypted",
   "Cache-Control": "",
   "Content-Type": "application/json",
 }
@@ -57,7 +57,7 @@ exports[`renderer/utils/api/client.ts ignoreNotificationThreadSubscription shoul
 exports[`renderer/utils/api/client.ts listNotificationsForAuthenticatedUser should list notifications for user - github cloud - fetchAllNotifications false 1`] = `
 {
   "Accept": "application/json",
-  "Authorization": "token token-123-456",
+  "Authorization": "token decrypted",
   "Cache-Control": "no-cache",
   "Content-Type": "application/json",
 }
@@ -66,7 +66,7 @@ exports[`renderer/utils/api/client.ts listNotificationsForAuthenticatedUser shou
 exports[`renderer/utils/api/client.ts listNotificationsForAuthenticatedUser should list notifications for user - github cloud - fetchAllNotifications true 1`] = `
 {
   "Accept": "application/json",
-  "Authorization": "token token-123-456",
+  "Authorization": "token decrypted",
   "Cache-Control": "no-cache",
   "Content-Type": "application/json",
 }
@@ -75,7 +75,7 @@ exports[`renderer/utils/api/client.ts listNotificationsForAuthenticatedUser shou
 exports[`renderer/utils/api/client.ts listNotificationsForAuthenticatedUser should list notifications for user - github enterprise server 1`] = `
 {
   "Accept": "application/json",
-  "Authorization": "token 1234568790",
+  "Authorization": "token decrypted",
   "Cache-Control": "no-cache",
   "Content-Type": "application/json",
 }
@@ -84,7 +84,7 @@ exports[`renderer/utils/api/client.ts listNotificationsForAuthenticatedUser shou
 exports[`renderer/utils/api/client.ts markNotificationThreadAsDone should mark notification thread as done - enterprise 1`] = `
 {
   "Accept": "application/json",
-  "Authorization": "token token-123-456",
+  "Authorization": "token decrypted",
   "Cache-Control": "",
   "Content-Type": "application/json",
 }
@@ -93,7 +93,7 @@ exports[`renderer/utils/api/client.ts markNotificationThreadAsDone should mark n
 exports[`renderer/utils/api/client.ts markNotificationThreadAsDone should mark notification thread as done - github 1`] = `
 {
   "Accept": "application/json",
-  "Authorization": "token token-123-456",
+  "Authorization": "token decrypted",
   "Cache-Control": "",
   "Content-Type": "application/json",
 }
@@ -102,7 +102,7 @@ exports[`renderer/utils/api/client.ts markNotificationThreadAsDone should mark n
 exports[`renderer/utils/api/client.ts markNotificationThreadAsRead should mark notification thread as read - enterprise 1`] = `
 {
   "Accept": "application/json",
-  "Authorization": "token token-123-456",
+  "Authorization": "token decrypted",
   "Cache-Control": "",
   "Content-Type": "application/json",
 }
@@ -111,7 +111,7 @@ exports[`renderer/utils/api/client.ts markNotificationThreadAsRead should mark n
 exports[`renderer/utils/api/client.ts markNotificationThreadAsRead should mark notification thread as read - github 1`] = `
 {
   "Accept": "application/json",
-  "Authorization": "token token-123-456",
+  "Authorization": "token decrypted",
   "Cache-Control": "",
   "Content-Type": "application/json",
 }

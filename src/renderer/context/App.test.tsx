@@ -237,7 +237,7 @@ describe('renderer/context/App.tsx', () => {
       expect(apiRequestAuthMock).toHaveBeenCalledWith(
         'https://api.github.com/user',
         'GET',
-        '123-456',
+        'encrypted',
       );
     });
   });
