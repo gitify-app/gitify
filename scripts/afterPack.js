@@ -1,6 +1,6 @@
 const path = require('node:path');
 const fs = require('node:fs');
-const { chmodSync, chownSync } = require('node:fs');
+const { chmodSync } = require('node:fs');
 const { AfterPackContext } = require('electron-builder');
 
 const packageJson = require('../package.json');
@@ -74,7 +74,6 @@ const fixChromeSandboxPermissions = (appOutDir) => {
   const chromeSandboxPath = path.join(appOutDir, 'chrome-sandbox');
 
   try {
-    chownSync(chromeSandboxPath, 0, 0); // Set root ownership
     chmodSync(chromeSandboxPath, 0o4755); // Set SUID bit
     // biome-ignore lint/suspicious/noConsoleLog: disabled
     console.log('[afterPack]: Fixed chrome-sandbox permissions');
