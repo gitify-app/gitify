@@ -85,8 +85,8 @@ jobs:
       - run: pnpm prepare:remove-source-maps
       - name: Fix chrome-sandbox permissions
         run: |
-          sudo chown root dist/linux-arm640-unpacked/chrome-sandbox
-          sudo chmod 4755 dist/linux-arm640-unpacked/chrome-sandbox
+          sudo chown root dist/linux-arm64-unpacked/chrome-sandbox
+          sudo chmod 4755 dist/linux-arm64-unpacked/chrome-sandbox
       - run: pnpm package:linux --publish onTagOrDraft
         env:
           GH_TOKEN: ${{ secrets.github_token }}
