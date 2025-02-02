@@ -4,7 +4,7 @@ import semver from 'semver';
 import { ipcRenderer } from 'electron';
 import { APPLICATION } from '../../../shared/constants';
 import { namespacedEvent } from '../../../shared/events';
-import { logError, logWarn } from '../../../shared/logger';
+import { logError, logInfo, logWarn } from '../../../shared/logger';
 import type {
   Account,
   AuthCode,
@@ -62,6 +62,10 @@ export function authGitHub(
     ipcRenderer.on(
       namespacedEvent('auth-callback'),
       (_, callbackUrl: string) => {
+        logInfo(
+          'renderer:auth-callback',
+          `received authentication callback URL ${callbackUrl}`,
+        );
         handleCallback(callbackUrl);
       },
     );

@@ -4,7 +4,8 @@ import { menubar } from 'menubar';
 
 import { APPLICATION } from '../shared/constants';
 import { namespacedEvent } from '../shared/events';
-import { isMacOS, isWindows } from '../shared/platform';
+import { logInfo, logWarn } from '../shared/logger';
+import { isLinux, isMacOS, isWindows } from '../shared/platform';
 import { onFirstRunMaybe } from './first-run';
 import { TrayIcons } from './icons';
 import MenuBuilder from './menu';
@@ -89,6 +90,31 @@ app.whenReady().then(async () => {
       mb.window.resizable = false;
     });
   });
+
+  /** Prevent second instances */
+  if (isWindows() || isLinux()) {
+    const gotTheLock = app.requestSingleInstanceLock();
+
+    if (!gotTheLock) {
+      logWarn('main:gotTheLock', 'Second instance detected, quitting');
+      app.quit(); // Quit the second instance
+      return;
+    }
+
+    app.on('second-instance', (_event, commandLine, _workingDirectory) => {
+      logInfo(
+        'main:second-instance',
+        'Second instance was launched.  extracting command to forward',
+      );
+
+      // Get the URL from the command line arguments
+      const url = commandLine.find((arg) => arg.startsWith(`${protocol}://`));
+
+      if (url) {
+        handleURL(url);
+      }
+    });
+  }
 
   /**
    * Gitify custom IPC events
@@ -183,5 +209,13 @@ ipc.handle(namespacedEvent('safe-storage-decrypt'), (_, settings) => {
 // Handle gitify:// custom protocol URL events for OAuth 2.0 callback
 app.on('open-url', (event, url) => {
   event.preventDefault();
-  mb.window.webContents.send(namespacedEvent('auth-callback'), url);
+  logInfo('main:open-url', `URL received ${url}`);
+  handleURL(url);
 });
+
+const handleURL = (url: string) => {
+  if (url.startsWith(`${protocol}://`)) {
+    logInfo('main:handleUrl', `forwarding URL ${url} to renderer process`);
+    mb.window.webContents.send(namespacedEvent('auth-callback'), url);
+  }
+};
