@@ -17,6 +17,7 @@ jobs:
           cache: 'pnpm'
       - run: pnpm install
       - run: pnpm build
+      - run: pnpm prepare:remove-source-maps
       - run: pnpm package:macos --publish=never -c.mac.identity=null
         env:
           CSC_LINK: ${{ secrets.mac_certs }}
@@ -42,6 +43,7 @@ jobs:
           cache: 'pnpm'
       - run: pnpm install
       - run: pnpm build
+      - run: pnpm prepare:remove-source-maps
       - run: pnpm package:win --publish=never
       - name: Clean up builds
         run: Remove-Item dist/win-unpacked -Recurse
@@ -64,6 +66,7 @@ jobs:
           cache: 'pnpm'
       - run: pnpm install
       - run: pnpm build
+      - run: pnpm prepare:remove-source-maps
       - run: pnpm package:linux --publish=never
       - name: Clean up builds
         run: rm -rfv dist/linux-unpacked

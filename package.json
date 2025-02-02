@@ -11,6 +11,7 @@
     "watch": "concurrently --names \"main,renderer\" --prefix-colors \"blue,green\" \"pnpm watch:main\" \"pnpm watch:renderer\"",
     "watch:main": "webpack --watch --config ./config/webpack.config.main.base.ts",
     "watch:renderer": "webpack --watch --config ./config/webpack.config.renderer.base.ts",
+    "prepare:remove-source-maps": "ts-node ./scripts/delete-source-maps.ts",
     "package:linux": "electron-builder --linux",
     "package:macos": "electron-builder --mac",
     "package:win": "electron-builder --win",
@@ -128,8 +129,7 @@
       "repo": "gitify"
     },
     "afterSign": "scripts/notarize.js",
-    "beforeBuild": "scripts/beforeBuild.js",
-    "afterPack": "scripts/after-pack.js"
+    "afterPack": "scripts/afterPack.js"
   },
   "dependencies": {
     "@electron/remote": "2.1.2",
