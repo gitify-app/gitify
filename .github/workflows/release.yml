@@ -14,6 +14,7 @@ jobs:
     name: Tests
     uses: ./.github/workflows/test.yml
     needs: lint
+    secrets: inherit
 
   publish:
     name: Publish

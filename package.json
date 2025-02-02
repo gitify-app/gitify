@@ -1,6 +1,6 @@
 {
   "name": "gitify",
-  "version": "5.18.0",
+  "version": "6.0.0",
   "description": "GitHub notifications on your menu bar.",
   "main": "build/main.js",
   "scripts": {
@@ -129,7 +129,7 @@
       "repo": "gitify"
     },
     "afterSign": "scripts/notarize.js",
-    "afterPack": "scripts/remove-unused-locales.js"
+    "afterPack": "scripts/afterPack.js"
   },
   "dependencies": {
     "@electron/remote": "2.1.2",

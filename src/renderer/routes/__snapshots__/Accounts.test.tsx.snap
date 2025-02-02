@@ -89,7 +89,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
     class="Box-sc-g0xbh4-0 grow overflow-x-auto px-8 pb-2 mb-12 "
   >
     <div
-      class="Box-sc-g0xbh4-0 rounded-md p-2 bg-gitify-accounts"
+      class="Box-sc-g0xbh4-0 rounded-md p-2 mb-4 bg-gitify-accounts"
     >
       <div
         class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
@@ -460,7 +460,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
       </div>
     </div>
     <div
-      class="Box-sc-g0xbh4-0 rounded-md p-2 bg-gitify-accounts"
+      class="Box-sc-g0xbh4-0 rounded-md p-2 mb-4 bg-gitify-accounts"
     >
       <div
         class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
@@ -831,7 +831,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
       </div>
     </div>
     <div
-      class="Box-sc-g0xbh4-0 rounded-md p-2 bg-gitify-accounts"
+      class="Box-sc-g0xbh4-0 rounded-md p-2 mb-4 bg-gitify-accounts"
     >
       <div
         class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
@@ -1353,7 +1353,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
     class="Box-sc-g0xbh4-0 grow overflow-x-auto px-8 pb-2 mb-12 "
   >
     <div
-      class="Box-sc-g0xbh4-0 rounded-md p-2 bg-gitify-accounts"
+      class="Box-sc-g0xbh4-0 rounded-md p-2 mb-4 bg-gitify-accounts"
     >
       <div
         class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
@@ -1724,7 +1724,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
       </div>
     </div>
     <div
-      class="Box-sc-g0xbh4-0 rounded-md p-2 bg-gitify-accounts"
+      class="Box-sc-g0xbh4-0 rounded-md p-2 mb-4 bg-gitify-accounts"
     >
       <div
         class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
@@ -2095,7 +2095,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
       </div>
     </div>
     <div
-      class="Box-sc-g0xbh4-0 rounded-md p-2 bg-gitify-accounts"
+      class="Box-sc-g0xbh4-0 rounded-md p-2 mb-4 bg-gitify-accounts"
     >
       <div
         class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
@@ -2617,7 +2617,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
     class="Box-sc-g0xbh4-0 grow overflow-x-auto px-8 pb-2 mb-12 "
   >
     <div
-      class="Box-sc-g0xbh4-0 rounded-md p-2 bg-gitify-accounts"
+      class="Box-sc-g0xbh4-0 rounded-md p-2 mb-4 bg-gitify-accounts"
     >
       <div
         class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
@@ -2988,7 +2988,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
       </div>
     </div>
     <div
-      class="Box-sc-g0xbh4-0 rounded-md p-2 bg-gitify-accounts"
+      class="Box-sc-g0xbh4-0 rounded-md p-2 mb-4 bg-gitify-accounts"
     >
       <div
         class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
@@ -3359,7 +3359,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
       </div>
     </div>
     <div
-      class="Box-sc-g0xbh4-0 rounded-md p-2 bg-gitify-accounts"
+      class="Box-sc-g0xbh4-0 rounded-md p-2 mb-4 bg-gitify-accounts"
     >
       <div
         class="Stack__StyledStack-sc-x3xa2i-0 duhwY"

@@ -121,7 +121,7 @@ export const AccountsRoute: FC = () => {
           return (
             <Box
               key={accountUUID}
-              className="rounded-md p-2 bg-gitify-accounts"
+              className="rounded-md p-2 mb-4 bg-gitify-accounts"
             >
               <Stack direction="vertical" align="stretch">
                 <Stack direction="horizontal" align="start">

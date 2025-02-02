@@ -8,14 +8,30 @@ const electronLanguages = packageJson.build.electronLanguages;
 /**
  * @param {AfterPackContext} context
  */
-const removeLocales = async (context) => {
+const afterPack = async (context) => {
+  // biome-ignore lint/suspicious/noConsoleLog: disabled
+  console.log('[afterPack]: Starting...');
+
   const appName = context.packager.appInfo.productFilename;
   const appOutDir = context.appOutDir;
   const platform = context.electronPlatformName;
 
-  if (platform !== 'darwin') {
-    return;
+  if (platform === 'darwin') {
+    removeUnusedLocales(appOutDir, appName);
   }
+
+  // biome-ignore lint/suspicious/noConsoleLog: disabled
+  console.log('[afterPack]: Completed');
+};
+
+/**
+ * Removes unused locales for macOS builds.
+ * @param {string} appOutDir
+ * @param {string} appName
+ */
+const removeUnusedLocales = (appOutDir, appName) => {
+  // biome-ignore lint/suspicious/noConsoleLog: disabled
+  console.log('[afterPack]: removing unused locales');
 
   const resourcesPath = path.join(
     appOutDir,
@@ -44,4 +60,4 @@ const removeLocales = async (context) => {
   }
 };
 
-exports.default = removeLocales;
+exports.default = afterPack;
