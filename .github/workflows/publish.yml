@@ -24,7 +24,6 @@ jobs:
         env:
           OAUTH_CLIENT_ID: ${{ secrets.oauth_client_id }}
           OAUTH_CLIENT_SECRET: ${{ secrets.oauth_client_secret }}
-      - run: pnpm prepare:remove-source-maps
       - run: pnpm package:macos --publish onTagOrDraft
         env:
           APPLEID_USERNAME: ${{ secrets.appleid_username }}
@@ -56,7 +55,6 @@ jobs:
         env:
           OAUTH_CLIENT_ID: ${{ secrets.oauth_client_id }}
           OAUTH_CLIENT_SECRET: ${{ secrets.oauth_client_secret }}
-      - run: pnpm prepare:remove-source-maps
       - run: pnpm package:win --publish onTagOrDraft
         env:
           GH_TOKEN: ${{ secrets.github_token }}
@@ -82,7 +80,6 @@ jobs:
         env:
           OAUTH_CLIENT_ID: ${{ secrets.oauth_client_id }}
           OAUTH_CLIENT_SECRET: ${{ secrets.oauth_client_secret }}
-      - run: pnpm prepare:remove-source-maps
       - run: pnpm package:linux --publish onTagOrDraft
         env:
           GH_TOKEN: ${{ secrets.github_token }}

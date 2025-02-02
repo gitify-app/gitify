@@ -1,5 +1,6 @@
 const path = require('node:path');
 const fs = require('node:fs');
+const { chmodSync, chownSync } = require('node:fs');
 const { AfterPackContext } = require('electron-builder');
 
 const packageJson = require('../package.json');
@@ -9,6 +10,9 @@ const electronLanguages = packageJson.build.electronLanguages;
  * @param {AfterPackContext} context
  */
 const afterPack = async (context) => {
+  // biome-ignore lint/suspicious/noConsoleLog: disabled
+  console.log('[afterPack]: Starting...');
+
   const appName = context.packager.appInfo.productFilename;
   const appOutDir = context.appOutDir;
   const platform = context.electronPlatformName;
@@ -18,6 +22,9 @@ const afterPack = async (context) => {
   } else if (platform === 'linux') {
     fixChromeSandboxPermissions(appOutDir);
   }
+
+  // biome-ignore lint/suspicious/noConsoleLog: disabled
+  console.log('[afterPack]: Completed');
 };
 
 /**
@@ -26,6 +33,9 @@ const afterPack = async (context) => {
  * @param {string} appName
  */
 const removeUnusedLocales = (appOutDir, appName) => {
+  // biome-ignore lint/suspicious/noConsoleLog: disabled
+  console.log('[afterPack]: removing unused locales');
+
   const resourcesPath = path.join(
     appOutDir,
     `${appName}.app`,
@@ -58,15 +68,21 @@ const removeUnusedLocales = (appOutDir, appName) => {
  * @param {string} appOutDir
  */
 const fixChromeSandboxPermissions = (appOutDir) => {
+  // biome-ignore lint/suspicious/noConsoleLog: disabled
+  console.log('[afterPack]: fix chrome sandbox permissions');
+
   const chromeSandboxPath = path.join(appOutDir, 'chrome-sandbox');
 
   try {
     chownSync(chromeSandboxPath, 0, 0); // Set root ownership
     chmodSync(chromeSandboxPath, 0o4755); // Set SUID bit
-    // biome-ignore lint/suspicious/noConsoleLog: <explanation>
-    console.log('Fixed chrome-sandbox permissions');
+    // biome-ignore lint/suspicious/noConsoleLog: disabled
+    console.log('[afterPack]: Fixed chrome-sandbox permissions');
   } catch (err) {
-    console.error('Failed to set chrome-sandbox permissions:', err);
+    console.error(
+      '[afterPack]: Failed to set chrome-sandbox permissions:',
+      err,
+    );
   }
 };
 
