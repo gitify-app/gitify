@@ -129,7 +129,7 @@
       "repo": "gitify"
     },
     "afterSign": "scripts/notarize.js",
-    "afterPack": "scripts/remove-unused-locales.js"
+    "afterPack": "scripts/after-pack.js"
   },
   "dependencies": {
     "@electron/remote": "2.1.2",

@@ -8,15 +8,24 @@ const electronLanguages = packageJson.build.electronLanguages;
 /**
  * @param {AfterPackContext} context
  */
-const removeLocales = async (context) => {
+const afterPack = async (context) => {
   const appName = context.packager.appInfo.productFilename;
   const appOutDir = context.appOutDir;
   const platform = context.electronPlatformName;
 
-  if (platform !== 'darwin') {
-    return;
+  if (platform === 'darwin') {
+    removeUnusedLocales(appOutDir, appName);
+  } else if (platform === 'linux') {
+    fixChromeSandboxPermissions(appOutDir);
   }
+};
 
+/**
+ * Removes unused locales for macOS builds.
+ * @param {string} appOutDir
+ * @param {string} appName
+ */
+const removeUnusedLocales = (appOutDir, appName) => {
   const resourcesPath = path.join(
     appOutDir,
     `${appName}.app`,
@@ -44,4 +53,21 @@ const removeLocales = async (context) => {
   }
 };
 
-exports.default = removeLocales;
+/**
+ * Fixes `chrome-sandbox` permissions for Linux builds.
+ * @param {string} appOutDir
+ */
+const fixChromeSandboxPermissions = (appOutDir) => {
+  const chromeSandboxPath = path.join(appOutDir, 'chrome-sandbox');
+
+  try {
+    chownSync(chromeSandboxPath, 0, 0); // Set root ownership
+    chmodSync(chromeSandboxPath, 0o4755); // Set SUID bit
+    // biome-ignore lint/suspicious/noConsoleLog: <explanation>
+    console.log('Fixed chrome-sandbox permissions');
+  } catch (err) {
+    console.error('Failed to set chrome-sandbox permissions:', err);
+  }
+};
+
+exports.default = afterPack;
