@@ -67,6 +67,10 @@ jobs:
       - run: pnpm install
       - run: pnpm build
       - run: pnpm prepare:remove-source-maps
+      - name: Fix chrome-sandbox permissions
+        run: |
+          sudo chown root dist/linux-arm640-unpacked/chrome-sandbox
+          sudo chmod 4755 dist/linux-arm640-unpacked/chrome-sandbox
       - run: pnpm package:linux --publish=never
       - name: Clean up builds
         run: rm -rfv dist/linux-unpacked

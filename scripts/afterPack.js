@@ -1,6 +1,5 @@
 const path = require('node:path');
 const fs = require('node:fs');
-const { chmodSync } = require('node:fs');
 const { AfterPackContext } = require('electron-builder');
 
 const packageJson = require('../package.json');
@@ -19,8 +18,6 @@ const afterPack = async (context) => {
 
   if (platform === 'darwin') {
     removeUnusedLocales(appOutDir, appName);
-  } else if (platform === 'linux') {
-    fixChromeSandboxPermissions(appOutDir);
   }
 
   // biome-ignore lint/suspicious/noConsoleLog: disabled
@@ -60,28 +57,6 @@ const removeUnusedLocales = (appOutDir, appName) => {
       const localePath = path.join(resourcesPath, locale);
       fs.rmSync(localePath, { recursive: true });
     }
-  }
-};
-
-/**
- * Fixes `chrome-sandbox` permissions for Linux builds.
- * @param {string} appOutDir
- */
-const fixChromeSandboxPermissions = (appOutDir) => {
-  // biome-ignore lint/suspicious/noConsoleLog: disabled
-  console.log('[afterPack]: fix chrome sandbox permissions');
-
-  const chromeSandboxPath = path.join(appOutDir, 'chrome-sandbox');
-
-  try {
-    chmodSync(chromeSandboxPath, 0o4755); // Set SUID bit
-    // biome-ignore lint/suspicious/noConsoleLog: disabled
-    console.log('[afterPack]: Fixed chrome-sandbox permissions');
-  } catch (err) {
-    console.error(
-      '[afterPack]: Failed to set chrome-sandbox permissions:',
-      err,
-    );
   }
 };
 
