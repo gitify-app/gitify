@@ -95,7 +95,7 @@ export const FiltersRoute: FC = () => {
   );
 
   const removeExcludeHandleToken = (tokenId: string | number) => {
-    const value = includeHandles.find((v) => v.id === tokenId)?.text || '';
+    const value = excludeHandles.find((v) => v.id === tokenId)?.text || '';
     updateFilter('filterExcludeHandles', value, false);
 
     setExcludeHandles(excludeHandles.filter((v) => v.id !== tokenId));
@@ -117,7 +117,7 @@ export const FiltersRoute: FC = () => {
         ...excludeHandles,
         { id: excludeHandles.length, text: value },
       ]);
-      updateFilter('filterExcludeHandles', value, false);
+      updateFilter('filterExcludeHandles', value, true);
 
       (event.target as HTMLInputElement).value = '';
     }
