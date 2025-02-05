@@ -245,17 +245,6 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         ? [...settings[name], value]
         : settings[name].filter((item) => item !== value);
 
-      console.log(
-        'ADAM updating filter with name: ',
-        name,
-        ' and value: ',
-        value,
-        ' and checked: ',
-        checked,
-        ' and updatedFilters: ',
-        updatedFilters,
-      );
-
       updateSetting(name, updatedFilters);
     },
     [updateSetting, settings],
