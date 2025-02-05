@@ -130,114 +130,119 @@ export const FiltersRoute: FC = () => {
       </Header>
 
       <Contents>
-        <fieldset className="mb-3">
-          <Title icon={FeedPersonIcon}>User Type</Title>
+        <Stack direction="vertical" gap="condensed">
+          <fieldset className="mb-3">
+            <Title icon={FeedPersonIcon}>User Type</Title>
 
-          <Stack direction="vertical" gap="condensed">
-            {Object.keys(FILTERS_USER_TYPES).map((userType: UserType) => {
-              const userTypeDetails = getUserTypeDetails(userType);
-              const userTypeTitle = userTypeDetails.title;
-              const userTypeDescription = userTypeDetails.description;
-              const isUserTypeChecked = isUserTypeFilterSet(settings, userType);
-              const userTypeCount = getUserTypeFilterCount(
-                notifications,
-                userType,
-              );
+            <Stack direction="horizontal" gap="normal">
+              {Object.keys(FILTERS_USER_TYPES).map((userType: UserType) => {
+                const userTypeDetails = getUserTypeDetails(userType);
+                const userTypeTitle = userTypeDetails.title;
+                const userTypeDescription = userTypeDetails.description;
+                const isUserTypeChecked = isUserTypeFilterSet(
+                  settings,
+                  userType,
+                );
+                const userTypeCount = getUserTypeFilterCount(
+                  notifications,
+                  userType,
+                );
 
-              return (
-                <Checkbox
-                  key={userType}
-                  name={userTypeTitle}
-                  label={userTypeTitle}
-                  checked={isUserTypeChecked}
-                  onChange={(evt) =>
-                    updateFilter(
-                      'filterUserTypes',
-                      userType,
-                      evt.target.checked,
-                    )
-                  }
-                  tooltip={<Text>{userTypeDescription}</Text>}
-                  counter={userTypeCount}
-                />
-              );
-            })}
-          </Stack>
-        </fieldset>
-
-        <fieldset className="mb-3">
-          <Title icon={MentionIcon}>Handles</Title>
-          <Stack direction="vertical" gap="condensed">
-            <Stack
-              direction="horizontal"
-              gap="condensed"
-              align="center"
-              className="text-sm"
-            >
-              <Box className="font-medium text-gitify-font w-28">
-                <Stack direction="horizontal" gap="condensed" align="center">
-                  <CheckCircleFillIcon className={IconColor.GREEN} />
-                  <Text>Include:</Text>
-                </Stack>
-              </Box>
-              <TextInputWithTokens
-                tokens={includeHandles}
-                onTokenRemove={removeIncludeHandleToken}
-                onKeyDown={includeHandlesKeyDown}
-                size="small"
-                block
-              />
+                return (
+                  <Checkbox
+                    key={userType}
+                    name={userTypeTitle}
+                    label={userTypeTitle}
+                    checked={isUserTypeChecked}
+                    onChange={(evt) =>
+                      updateFilter(
+                        'filterUserTypes',
+                        userType,
+                        evt.target.checked,
+                      )
+                    }
+                    tooltip={<Text>{userTypeDescription}</Text>}
+                    counter={userTypeCount}
+                  />
+                );
+              })}
             </Stack>
+          </fieldset>
 
-            <Stack
-              direction="horizontal"
-              gap="condensed"
-              align="center"
-              className="text-sm"
-            >
-              <Box className="font-medium text-gitify-font w-28">
-                <Stack direction="horizontal" gap="condensed" align="center">
-                  <NoEntryFillIcon className={IconColor.RED} />
-                  <Text>Exclude:</Text>
-                </Stack>
-              </Box>
-              <TextInputWithTokens
-                tokens={excludeHandles}
-                onTokenRemove={removeExcludeHandleToken}
-                onKeyDown={excludeHandlesKeyDown}
-                size="small"
-                block
-              />
-            </Stack>
-          </Stack>
-        </fieldset>
-
-        <fieldset className="mb-3">
-          <Title icon={NoteIcon}>Reason</Title>
-          <Stack direction="vertical" gap="condensed">
-            {Object.keys(FORMATTED_REASONS).map((reason: Reason) => {
-              const reasonDetails = getReasonDetails(reason);
-              const reasonTitle = reasonDetails.title;
-              const reasonDescription = reasonDetails.description;
-              const isReasonChecked = isReasonFilterSet(settings, reason);
-              const reasonCount = getReasonFilterCount(notifications, reason);
-
-              return (
-                <Checkbox
-                  key={reason}
-                  name={reasonTitle}
-                  label={reasonTitle}
-                  checked={isReasonChecked}
-                  onChange={(evt) =>
-                    updateFilter('filterReasons', reason, evt.target.checked)
-                  }
-                  tooltip={<Text>{reasonDescription}</Text>}
-                  counter={reasonCount}
+          <fieldset className="mb-3">
+            <Title icon={MentionIcon}>Handles</Title>
+            <Stack direction="vertical" gap="condensed">
+              <Stack
+                direction="horizontal"
+                gap="condensed"
+                align="center"
+                className="text-sm"
+              >
+                <Box className="font-medium text-gitify-font w-28">
+                  <Stack direction="horizontal" gap="condensed" align="center">
+                    <CheckCircleFillIcon className={IconColor.GREEN} />
+                    <Text>Include:</Text>
+                  </Stack>
+                </Box>
+                <TextInputWithTokens
+                  tokens={includeHandles}
+                  onTokenRemove={removeIncludeHandleToken}
+                  onKeyDown={includeHandlesKeyDown}
+                  size="small"
+                  block
                 />
-              );
-            })}
-          </Stack>
-        </fieldset>
+              </Stack>
+
+              <Stack
+                direction="horizontal"
+                gap="condensed"
+                align="center"
+                className="text-sm"
+              >
+                <Box className="font-medium text-gitify-font w-28">
+                  <Stack direction="horizontal" gap="condensed" align="center">
+                    <NoEntryFillIcon className={IconColor.RED} />
+                    <Text>Exclude:</Text>
+                  </Stack>
+                </Box>
+                <TextInputWithTokens
+                  tokens={excludeHandles}
+                  onTokenRemove={removeExcludeHandleToken}
+                  onKeyDown={excludeHandlesKeyDown}
+                  size="small"
+                  block
+                />
+              </Stack>
+            </Stack>
+          </fieldset>
+
+          <fieldset className="mb-3">
+            <Title icon={NoteIcon}>Reason</Title>
+            <Stack direction="vertical" gap="condensed">
+              {Object.keys(FORMATTED_REASONS).map((reason: Reason) => {
+                const reasonDetails = getReasonDetails(reason);
+                const reasonTitle = reasonDetails.title;
+                const reasonDescription = reasonDetails.description;
+                const isReasonChecked = isReasonFilterSet(settings, reason);
+                const reasonCount = getReasonFilterCount(notifications, reason);
+
+                return (
+                  <Checkbox
+                    key={reason}
+                    name={reasonTitle}
+                    label={reasonTitle}
+                    checked={isReasonChecked}
+                    onChange={(evt) =>
+                      updateFilter('filterReasons', reason, evt.target.checked)
+                    }
+                    tooltip={<Text>{reasonDescription}</Text>}
+                    counter={reasonCount}
+                  />
+                );
+              })}
+            </Stack>
+          </fieldset>
+        </Stack>
       </Contents>
 
       <Footer justify="end">
