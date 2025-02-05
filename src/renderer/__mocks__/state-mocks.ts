@@ -106,7 +106,9 @@ const mockSystemSettings: SystemSettingsState = {
 };
 
 const mockFilters: FilterSettingsState = {
-  hideBots: false,
+  filterUserTypes: [],
+  filterIncludeHandles: [],
+  filterExcludeHandles: [],
   filterReasons: [],
 };
 

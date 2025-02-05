@@ -35,7 +35,6 @@ describe('renderer/components/AllRead.tsx', () => {
           settings: {
             ...mockSettings,
             filterReasons: ['author'],
-            hideBots: true,
           },
         }}
       >

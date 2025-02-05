@@ -65,89 +65,79 @@ describe('renderer/routes/Filters.tsx', () => {
   });
 
   describe('Users section', () => {
-    it('should not be able to toggle the hideBots checkbox when detailedNotifications is disabled', async () => {
-      await act(async () => {
-        render(
-          <AppContext.Provider
-            value={{
-              auth: mockAuth,
-              settings: {
-                ...mockSettings,
-                detailedNotifications: false,
-                hideBots: false,
-              },
-              notifications: [],
-              updateSetting,
-            }}
-          >
-            <MemoryRouter>
-              <FiltersRoute />
-            </MemoryRouter>
-          </AppContext.Provider>,
-        );
-      });
-
-      expect(
-        screen
-          .getByLabelText('Hide notifications from Bot accounts')
-          .closest('input'),
-      ).toHaveProperty('disabled', true);
-
-      // click the checkbox
-      fireEvent.click(
-        screen.getByLabelText('Hide notifications from Bot accounts'),
-      );
-
-      // check if the checkbox is still unchecked
-      expect(updateSetting).not.toHaveBeenCalled();
-
-      expect(
-        screen.getByLabelText('Hide notifications from Bot accounts').parentNode
-          .parentNode,
-      ).toMatchSnapshot();
-    });
-
-    it('should be able to toggle the hideBots checkbox when detailedNotifications is enabled', async () => {
-      await act(async () => {
-        render(
-          <AppContext.Provider
-            value={{
-              auth: mockAuth,
-              settings: {
-                ...mockSettings,
-                detailedNotifications: true,
-                hideBots: false,
-              },
-              notifications: [],
-              updateSetting,
-            }}
-          >
-            <MemoryRouter>
-              <FiltersRoute />
-            </MemoryRouter>
-          </AppContext.Provider>,
-        );
-      });
-
-      expect(
-        screen
-          .getByLabelText('Hide notifications from Bot accounts')
-          .closest('input'),
-      ).toHaveProperty('disabled', false);
-
-      // click the checkbox
-      fireEvent.click(
-        screen.getByLabelText('Hide notifications from Bot accounts'),
-      );
-
-      // check if the checkbox is still unchecked
-      expect(updateSetting).toHaveBeenCalledWith('hideBots', true);
-
-      expect(
-        screen.getByLabelText('Hide notifications from Bot accounts').parentNode
-          .parentNode,
-      ).toMatchSnapshot();
-    });
+    // it('should not be able to toggle the hideBots checkbox when detailedNotifications is disabled', async () => {
+    //   await act(async () => {
+    //     render(
+    //       <AppContext.Provider
+    //         value={{
+    //           auth: mockAuth,
+    //           settings: {
+    //             ...mockSettings,
+    //             detailedNotifications: false,
+    //           },
+    //           notifications: [],
+    //           updateSetting,
+    //         }}
+    //       >
+    //         <MemoryRouter>
+    //           <FiltersRoute />
+    //         </MemoryRouter>
+    //       </AppContext.Provider>,
+    //     );
+    //   });
+    //   expect(
+    //     screen
+    //       .getByLabelText('Hide notifications from Bot accounts')
+    //       .closest('input'),
+    //   ).toHaveProperty('disabled', true);
+    //   // click the checkbox
+    //   fireEvent.click(
+    //     screen.getByLabelText('Hide notifications from Bot accounts'),
+    //   );
+    //   // check if the checkbox is still unchecked
+    //   expect(updateSetting).not.toHaveBeenCalled();
+    //   expect(
+    //     screen.getByLabelText('Hide notifications from Bot accounts').parentNode
+    //       .parentNode,
+    //   ).toMatchSnapshot();
+    // });
+    // it('should be able to toggle the hideBots checkbox when detailedNotifications is enabled', async () => {
+    //   await act(async () => {
+    //     render(
+    //       <AppContext.Provider
+    //         value={{
+    //           auth: mockAuth,
+    //           settings: {
+    //             ...mockSettings,
+    //             detailedNotifications: true,
+    //             hideBots: false,
+    //           },
+    //           notifications: [],
+    //           updateSetting,
+    //         }}
+    //       >
+    //         <MemoryRouter>
+    //           <FiltersRoute />
+    //         </MemoryRouter>
+    //       </AppContext.Provider>,
+    //     );
+    //   });
+    //   expect(
+    //     screen
+    //       .getByLabelText('Hide notifications from Bot accounts')
+    //       .closest('input'),
+    //   ).toHaveProperty('disabled', false);
+    //   // click the checkbox
+    //   fireEvent.click(
+    //     screen.getByLabelText('Hide notifications from Bot accounts'),
+    //   );
+    //   // check if the checkbox is still unchecked
+    //   expect(updateSetting).toHaveBeenCalledWith('hideBots', true);
+    //   expect(
+    //     screen.getByLabelText('Hide notifications from Bot accounts').parentNode
+    //       .parentNode,
+    //   ).toMatchSnapshot();
+    // });
   });
 
   describe('Reasons section', () => {

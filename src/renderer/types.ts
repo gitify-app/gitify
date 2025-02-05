@@ -1,6 +1,6 @@
 import type { OcticonProps } from '@primer/octicons-react';
 import type { FC } from 'react';
-import type { Notification, Reason } from './typesGitHub';
+import type { Notification, Reason, UserType } from './typesGitHub';
 import type { AuthMethod, PlatformType } from './utils/auth/types';
 
 declare const __brand: unique symbol;
@@ -42,8 +42,10 @@ export type SettingsValue =
   | number
   | GroupBy
   | OpenPreference
-  | Reason[]
-  | Theme;
+  | Theme
+  | FilterValue[];
+
+export type FilterValue = Reason | UserType | string;
 
 export type SettingsState = AppearanceSettingsState &
   NotificationSettingsState &
@@ -80,7 +82,9 @@ export interface SystemSettingsState {
 }
 
 export interface FilterSettingsState {
-  hideBots: boolean;
+  filterUserTypes: UserType[];
+  filterIncludeHandles: string[];
+  filterExcludeHandles: string[];
   filterReasons: Reason[];
 }
 
@@ -143,7 +147,7 @@ export type ErrorType =
   | 'RATE_LIMITED'
   | 'UNKNOWN';
 
-export interface FormattedReason {
+export interface TypeDetails {
   title: string;
   description: string;
 }
