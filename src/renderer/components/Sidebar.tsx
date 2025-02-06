@@ -16,12 +16,12 @@ import { APPLICATION } from '../../shared/constants';
 import { AppContext } from '../context/App';
 import { quitApp } from '../utils/comms';
 import { Constants } from '../utils/constants';
-import { hasAnyFiltersSet } from '../utils/filters';
 import {
   openGitHubIssues,
   openGitHubNotifications,
   openGitHubPulls,
 } from '../utils/links';
+import { hasAnyFiltersSet } from '../utils/notifications/filters/filter';
 import { getNotificationCount } from '../utils/notifications/notifications';
 import { LogoIcon } from './icons/LogoIcon';
 
