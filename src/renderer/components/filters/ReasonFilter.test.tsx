@@ -44,10 +44,8 @@ describe('renderer/components/filters/ReasonFilter.tsx', () => {
       );
     });
 
-    // click the checkbox
     fireEvent.click(screen.getByLabelText('Mentioned'));
 
-    // check if the checkbox is still unchecked
     expect(updateFilter).toHaveBeenCalledWith('filterReasons', 'mention', true);
 
     expect(
@@ -75,10 +73,8 @@ describe('renderer/components/filters/ReasonFilter.tsx', () => {
       );
     });
 
-    // click the checkbox
     fireEvent.click(screen.getByLabelText('Mentioned'));
 
-    // check if the checkbox is still unchecked
     expect(updateFilter).toHaveBeenCalledWith('filterReasons', 'mention', true);
 
     expect(

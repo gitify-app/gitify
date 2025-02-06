@@ -68,10 +68,8 @@ describe('renderer/components/filters/UserTypeFilter.tsx', () => {
       );
     });
 
-    // click the checkbox
     fireEvent.click(screen.getByLabelText('User'));
 
-    // check if the checkbox is still unchecked
     expect(updateFilter).toHaveBeenCalledWith('filterUserTypes', 'User', true);
 
     expect(
@@ -99,10 +97,8 @@ describe('renderer/components/filters/UserTypeFilter.tsx', () => {
       );
     });
 
-    // click the checkbox
     fireEvent.click(screen.getByLabelText('Bot'));
 
-    // check if the checkbox is still unchecked
     expect(updateFilter).toHaveBeenCalledWith('filterUserTypes', 'Bot', true);
 
     expect(
