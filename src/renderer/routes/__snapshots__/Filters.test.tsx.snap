@@ -9,7 +9,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
     class="Box-sc-g0xbh4-0 px-6 py-4"
   >
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+      class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
       data-align="stretch"
       data-direction="horizontal"
       data-justify="space-between"
@@ -19,7 +19,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
       <button
         aria-describedby=":r0:-loading-announcement"
         aria-labelledby="Go Back"
-        class="types__StyledButton-sc-ws60qy-0 kQRupk"
+        class="types__StyledButton-sc-ws60qy-0 fnbkrJ"
         data-component="IconButton"
         data-loading="false"
         data-no-visuals="true"
@@ -49,7 +49,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           class="Box-sc-g0xbh4-0 mb-2"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+            class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -75,7 +75,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               />
             </svg>
             <h2
-              class="Heading__StyledHeading-sc-1c1dgg0-0 fuhZuh"
+              class="Heading__StyledHeading-sc-1c1dgg0-0 edgQRQ"
               sx="[object Object]"
             >
               Filters
@@ -96,7 +96,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           class="Box-sc-g0xbh4-0 mb-2"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+            class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -122,7 +122,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               />
             </svg>
             <h2
-              class="Heading__StyledHeading-sc-1c1dgg0-0 lfvrLU"
+              class="Heading__StyledHeading-sc-1c1dgg0-0 eQYHUB"
               sx="[object Object]"
             >
               Users
@@ -131,7 +131,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
         </div>
       </legend>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+        class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
         data-align="center"
         data-direction="horizontal"
         data-gap="condensed"
@@ -184,7 +184,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           class="Box-sc-g0xbh4-0 mb-2"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+            class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -210,7 +210,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               />
             </svg>
             <h2
-              class="Heading__StyledHeading-sc-1c1dgg0-0 lfvrLU"
+              class="Heading__StyledHeading-sc-1c1dgg0-0 eQYHUB"
               sx="[object Object]"
             >
               Reason
@@ -222,13 +222,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
         class="Box-sc-g0xbh4-0 text-xs -mt-2 mb-2"
       >
         <i
-          class="Text-sc-17v1xeu-0 hmAFGJ"
+          class="Text-sc-17v1xeu-0 kbcDeY"
         >
           Note: If no reasons are selected, all notifications will be shown.
         </i>
       </div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+        class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
         data-align="stretch"
         data-direction="vertical"
         data-gap="condensed"
@@ -237,7 +237,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
         data-wrap="nowrap"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -282,7 +282,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           </div>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -327,7 +327,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           </div>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -372,7 +372,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           </div>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -417,7 +417,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           </div>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -462,7 +462,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           </div>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -507,7 +507,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           </div>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -552,7 +552,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           </div>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -597,7 +597,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           </div>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -642,7 +642,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           </div>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -687,7 +687,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           </div>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -732,7 +732,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           </div>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -777,7 +777,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           </div>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -822,7 +822,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           </div>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -867,7 +867,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           </div>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -918,7 +918,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
     class="Box-sc-g0xbh4-0 fixed bottom-0 left-sidebar right-0 bg-gitify-footer"
   >
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+      class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
       data-align="stretch"
       data-direction="horizontal"
       data-justify="end"
@@ -927,25 +927,25 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
     >
       <span
         aria-label="Clear all filters"
-        class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-n"
+        class="Tooltip__TooltipBase-sc-17tf59c-0 iKRGON tooltipped-n"
         id=":r1:"
         role="tooltip"
       >
         <button
           aria-describedby=":r2:-loading-announcement"
-          class="types__StyledButton-sc-ws60qy-0 jTCgqj"
+          class="types__StyledButton-sc-ws60qy-0 fMOLkq"
           data-loading="false"
           data-testid="filters-clear"
           sx="[object Object]"
           type="button"
         >
           <span
-            class="Box-sc-g0xbh4-0 srpGE"
+            class="Box-sc-g0xbh4-0 kBZRdd"
             data-component="buttonContent"
             sx="[object Object]"
           >
             <span
-              class="Box-sc-g0xbh4-0 mhHOW"
+              class="Box-sc-g0xbh4-0 fRxPAP"
               data-component="leadingVisual"
               sx="[object Object]"
             >
@@ -981,7 +981,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
 
 exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle reason type - none already set 1`] = `
 <div
-  class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+  class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
   data-align="stretch"
   data-direction="vertical"
   data-gap="condensed"
@@ -990,7 +990,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
   data-wrap="nowrap"
 >
   <div
-    class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
     data-align="center"
     data-direction="horizontal"
     data-gap="condensed"
@@ -1035,7 +1035,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
     </div>
   </div>
   <div
-    class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
     data-align="center"
     data-direction="horizontal"
     data-gap="condensed"
@@ -1080,7 +1080,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
     </div>
   </div>
   <div
-    class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
     data-align="center"
     data-direction="horizontal"
     data-gap="condensed"
@@ -1125,7 +1125,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
     </div>
   </div>
   <div
-    class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
     data-align="center"
     data-direction="horizontal"
     data-gap="condensed"
@@ -1170,7 +1170,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
     </div>
   </div>
   <div
-    class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
     data-align="center"
     data-direction="horizontal"
     data-gap="condensed"
@@ -1215,7 +1215,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
     </div>
   </div>
   <div
-    class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
     data-align="center"
     data-direction="horizontal"
     data-gap="condensed"
@@ -1260,7 +1260,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
     </div>
   </div>
   <div
-    class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
     data-align="center"
     data-direction="horizontal"
     data-gap="condensed"
@@ -1305,7 +1305,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
     </div>
   </div>
   <div
-    class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
     data-align="center"
     data-direction="horizontal"
     data-gap="condensed"
@@ -1350,7 +1350,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
     </div>
   </div>
   <div
-    class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
     data-align="center"
     data-direction="horizontal"
     data-gap="condensed"
@@ -1395,7 +1395,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
     </div>
   </div>
   <div
-    class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
     data-align="center"
     data-direction="horizontal"
     data-gap="condensed"
@@ -1440,7 +1440,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
     </div>
   </div>
   <div
-    class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
     data-align="center"
     data-direction="horizontal"
     data-gap="condensed"
@@ -1485,7 +1485,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
     </div>
   </div>
   <div
-    class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
     data-align="center"
     data-direction="horizontal"
     data-gap="condensed"
@@ -1530,7 +1530,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
     </div>
   </div>
   <div
-    class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
     data-align="center"
     data-direction="horizontal"
     data-gap="condensed"
@@ -1575,7 +1575,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
     </div>
   </div>
   <div
-    class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
     data-align="center"
     data-direction="horizontal"
     data-gap="condensed"
@@ -1620,7 +1620,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
     </div>
   </div>
   <div
-    class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
     data-align="center"
     data-direction="horizontal"
     data-gap="condensed"
@@ -1669,7 +1669,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
 
 exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle reason type - some filters already set 1`] = `
 <div
-  class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+  class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
   data-align="stretch"
   data-direction="vertical"
   data-gap="condensed"
@@ -1678,7 +1678,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
   data-wrap="nowrap"
 >
   <div
-    class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
     data-align="center"
     data-direction="horizontal"
     data-gap="condensed"
@@ -1723,7 +1723,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
     </div>
   </div>
   <div
-    class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
     data-align="center"
     data-direction="horizontal"
     data-gap="condensed"
@@ -1768,7 +1768,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
     </div>
   </div>
   <div
-    class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
     data-align="center"
     data-direction="horizontal"
     data-gap="condensed"
@@ -1813,7 +1813,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
     </div>
   </div>
   <div
-    class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
     data-align="center"
     data-direction="horizontal"
     data-gap="condensed"
@@ -1858,7 +1858,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
     </div>
   </div>
   <div
-    class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
     data-align="center"
     data-direction="horizontal"
     data-gap="condensed"
@@ -1903,7 +1903,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
     </div>
   </div>
   <div
-    class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
     data-align="center"
     data-direction="horizontal"
     data-gap="condensed"
@@ -1948,7 +1948,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
     </div>
   </div>
   <div
-    class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
     data-align="center"
     data-direction="horizontal"
     data-gap="condensed"
@@ -1993,7 +1993,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
     </div>
   </div>
   <div
-    class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
     data-align="center"
     data-direction="horizontal"
     data-gap="condensed"
@@ -2038,7 +2038,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
     </div>
   </div>
   <div
-    class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
     data-align="center"
     data-direction="horizontal"
     data-gap="condensed"
@@ -2083,7 +2083,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
     </div>
   </div>
   <div
-    class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
     data-align="center"
     data-direction="horizontal"
     data-gap="condensed"
@@ -2128,7 +2128,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
     </div>
   </div>
   <div
-    class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
     data-align="center"
     data-direction="horizontal"
     data-gap="condensed"
@@ -2173,7 +2173,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
     </div>
   </div>
   <div
-    class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
     data-align="center"
     data-direction="horizontal"
     data-gap="condensed"
@@ -2219,7 +2219,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
     </div>
   </div>
   <div
-    class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
     data-align="center"
     data-direction="horizontal"
     data-gap="condensed"
@@ -2264,7 +2264,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
     </div>
   </div>
   <div
-    class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
     data-align="center"
     data-direction="horizontal"
     data-gap="condensed"
@@ -2309,7 +2309,7 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
     </div>
   </div>
   <div
-    class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
     data-align="center"
     data-direction="horizontal"
     data-gap="condensed"
@@ -2365,7 +2365,7 @@ exports[`renderer/routes/Filters.tsx Users section should be able to toggle the 
       class="Box-sc-g0xbh4-0 mb-2"
     >
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+        class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
         data-align="center"
         data-direction="horizontal"
         data-gap="condensed"
@@ -2391,7 +2391,7 @@ exports[`renderer/routes/Filters.tsx Users section should be able to toggle the 
           />
         </svg>
         <h2
-          class="Heading__StyledHeading-sc-1c1dgg0-0 lfvrLU"
+          class="Heading__StyledHeading-sc-1c1dgg0-0 eQYHUB"
           sx="[object Object]"
         >
           Users
@@ -2400,7 +2400,7 @@ exports[`renderer/routes/Filters.tsx Users section should be able to toggle the 
     </div>
   </legend>
   <div
-    class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
     data-align="center"
     data-direction="horizontal"
     data-gap="condensed"
@@ -2456,7 +2456,7 @@ exports[`renderer/routes/Filters.tsx Users section should not be able to toggle 
       class="Box-sc-g0xbh4-0 mb-2"
     >
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+        class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
         data-align="center"
         data-direction="horizontal"
         data-gap="condensed"
@@ -2482,7 +2482,7 @@ exports[`renderer/routes/Filters.tsx Users section should not be able to toggle 
           />
         </svg>
         <h2
-          class="Heading__StyledHeading-sc-1c1dgg0-0 lfvrLU"
+          class="Heading__StyledHeading-sc-1c1dgg0-0 eQYHUB"
           sx="[object Object]"
         >
           Users
@@ -2491,7 +2491,7 @@ exports[`renderer/routes/Filters.tsx Users section should not be able to toggle 
     </div>
   </legend>
   <div
-    class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
     data-align="center"
     data-direction="horizontal"
     data-gap="condensed"
