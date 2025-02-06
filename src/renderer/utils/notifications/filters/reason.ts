@@ -14,8 +14,8 @@ export function getReasonFilterCount(
   reason: Reason,
 ) {
   return notifications.reduce(
-    (memo, acc) =>
-      memo + acc.notifications.filter((n) => n.reason === reason).length,
+    (sum, account) =>
+      sum + account.notifications.filter((n) => n.reason === reason).length,
     0,
   );
 }
