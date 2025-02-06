@@ -9,7 +9,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
     class="Box-sc-g0xbh4-0 px-6 py-4"
   >
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+      class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
       data-align="stretch"
       data-direction="horizontal"
       data-justify="space-between"
@@ -19,7 +19,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
       <button
         aria-describedby=":r0:-loading-announcement"
         aria-labelledby="Go Back"
-        class="types__StyledButton-sc-ws60qy-0 kQRupk"
+        class="types__StyledButton-sc-ws60qy-0 fnbkrJ"
         data-component="IconButton"
         data-loading="false"
         data-no-visuals="true"
@@ -49,7 +49,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           class="Box-sc-g0xbh4-0 mb-2"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+            class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -75,7 +75,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               />
             </svg>
             <h2
-              class="Heading__StyledHeading-sc-1c1dgg0-0 fuhZuh"
+              class="Heading__StyledHeading-sc-1c1dgg0-0 edgQRQ"
               sx="[object Object]"
             >
               Filters
@@ -150,10 +150,21 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             </div>
           </legend>
           <div
+<<<<<<< HEAD
             aria-label="tooltip-filter-user-type"
             class="Box-sc-g0xbh4-0 relative"
             data-testid="tooltip-tooltip-filter-user-type"
             id="tooltip-filter-user-type"
+=======
+            class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+            id="users"
+>>>>>>> main
           >
             <svg
               aria-hidden="true"
@@ -171,8 +182,41 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                 d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
               />
             </svg>
+<<<<<<< HEAD
           </div>
         </div>
+=======
+            <h2
+              class="Heading__StyledHeading-sc-1c1dgg0-0 eQYHUB"
+              sx="[object Object]"
+            >
+              Users
+            </h2>
+          </div>
+        </div>
+      </legend>
+      <div
+        class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+        data-align="center"
+        data-direction="horizontal"
+        data-gap="condensed"
+        data-justify="start"
+        data-padding="none"
+        data-wrap="nowrap"
+      >
+        <input
+          class="size-4 rounded-sm cursor-pointer"
+          data-testid="checkbox-hideBots"
+          id="hideBots"
+          type="checkbox"
+        />
+        <label
+          class="font-medium text-gitify-font cursor-pointer"
+          for="hideBots"
+        >
+          Hide notifications from Bot accounts
+        </label>
+>>>>>>> main
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="stretch"
@@ -205,7 +249,11 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             </label>
           </div>
           <div
+<<<<<<< HEAD
             class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+=======
+            class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
+>>>>>>> main
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -347,6 +395,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                 d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
               />
             </svg>
+<<<<<<< HEAD
           </div>
         </div>
         <div
@@ -404,6 +453,10 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             </div>
             <span
               class="TextInputWrapper__TextInputBaseWrapper-sc-1mqhpbi-0 TextInputWrapper-sc-1mqhpbi-1 dcgvNI jdagae"
+=======
+            <h2
+              class="Heading__StyledHeading-sc-1c1dgg0-0 eQYHUB"
+>>>>>>> main
               sx="[object Object]"
             >
               <div
@@ -497,10 +550,31 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             </span>
           </div>
         </div>
+<<<<<<< HEAD
       </fieldset>
       <fieldset
         class="mb-3"
         id="filter-reasons"
+=======
+      </legend>
+      <div
+        class="Box-sc-g0xbh4-0 text-xs -mt-2 mb-2"
+      >
+        <i
+          class="Text-sc-17v1xeu-0 kbcDeY"
+        >
+          Note: If no reasons are selected, all notifications will be shown.
+        </i>
+      </div>
+      <div
+        class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
+        data-align="stretch"
+        data-direction="vertical"
+        data-gap="condensed"
+        data-justify="start"
+        data-padding="none"
+        data-wrap="nowrap"
+>>>>>>> main
       >
         <legend>
           <div
@@ -542,9 +616,15 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           </div>
         </legend>
         <div
+<<<<<<< HEAD
           class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="stretch"
           data-direction="vertical"
+=======
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+          data-align="center"
+          data-direction="horizontal"
+>>>>>>> main
           data-gap="condensed"
           data-justify="start"
           data-padding="none"
@@ -1226,14 +1306,649 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             </div>
           </div>
         </div>
+<<<<<<< HEAD
       </fieldset>
     </div>
+=======
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
+        >
+          <input
+            class="size-4 rounded-sm cursor-pointer"
+            data-testid="checkbox-assign"
+            id="assign"
+            type="checkbox"
+          />
+          <label
+            class="font-medium text-gitify-font cursor-pointer"
+            for="assign"
+          >
+            Assigned
+          </label>
+          <div
+            aria-label="tooltip-assign"
+            class="Box-sc-g0xbh4-0 relative"
+            data-testid="tooltip-tooltip-assign"
+            id="tooltip-assign"
+          >
+            <svg
+              aria-hidden="true"
+              class="octicon octicon-question text-gitify-tooltip-icon"
+              display="inline-block"
+              fill="currentColor"
+              focusable="false"
+              height="16"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
+              viewBox="0 0 16 16"
+              width="16"
+            >
+              <path
+                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+              />
+            </svg>
+          </div>
+        </div>
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
+        >
+          <input
+            class="size-4 rounded-sm cursor-pointer"
+            data-testid="checkbox-author"
+            id="author"
+            type="checkbox"
+          />
+          <label
+            class="font-medium text-gitify-font cursor-pointer"
+            for="author"
+          >
+            Authored
+          </label>
+          <div
+            aria-label="tooltip-author"
+            class="Box-sc-g0xbh4-0 relative"
+            data-testid="tooltip-tooltip-author"
+            id="tooltip-author"
+          >
+            <svg
+              aria-hidden="true"
+              class="octicon octicon-question text-gitify-tooltip-icon"
+              display="inline-block"
+              fill="currentColor"
+              focusable="false"
+              height="16"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
+              viewBox="0 0 16 16"
+              width="16"
+            >
+              <path
+                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+              />
+            </svg>
+          </div>
+        </div>
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
+        >
+          <input
+            class="size-4 rounded-sm cursor-pointer"
+            data-testid="checkbox-ci_activity"
+            id="ci_activity"
+            type="checkbox"
+          />
+          <label
+            class="font-medium text-gitify-font cursor-pointer"
+            for="ci_activity"
+          >
+            Workflow Run Completed
+          </label>
+          <div
+            aria-label="tooltip-ci_activity"
+            class="Box-sc-g0xbh4-0 relative"
+            data-testid="tooltip-tooltip-ci_activity"
+            id="tooltip-ci_activity"
+          >
+            <svg
+              aria-hidden="true"
+              class="octicon octicon-question text-gitify-tooltip-icon"
+              display="inline-block"
+              fill="currentColor"
+              focusable="false"
+              height="16"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
+              viewBox="0 0 16 16"
+              width="16"
+            >
+              <path
+                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+              />
+            </svg>
+          </div>
+        </div>
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
+        >
+          <input
+            class="size-4 rounded-sm cursor-pointer"
+            data-testid="checkbox-comment"
+            id="comment"
+            type="checkbox"
+          />
+          <label
+            class="font-medium text-gitify-font cursor-pointer"
+            for="comment"
+          >
+            Commented
+          </label>
+          <div
+            aria-label="tooltip-comment"
+            class="Box-sc-g0xbh4-0 relative"
+            data-testid="tooltip-tooltip-comment"
+            id="tooltip-comment"
+          >
+            <svg
+              aria-hidden="true"
+              class="octicon octicon-question text-gitify-tooltip-icon"
+              display="inline-block"
+              fill="currentColor"
+              focusable="false"
+              height="16"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
+              viewBox="0 0 16 16"
+              width="16"
+            >
+              <path
+                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+              />
+            </svg>
+          </div>
+        </div>
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
+        >
+          <input
+            class="size-4 rounded-sm cursor-pointer"
+            data-testid="checkbox-invitation"
+            id="invitation"
+            type="checkbox"
+          />
+          <label
+            class="font-medium text-gitify-font cursor-pointer"
+            for="invitation"
+          >
+            Invitation Received
+          </label>
+          <div
+            aria-label="tooltip-invitation"
+            class="Box-sc-g0xbh4-0 relative"
+            data-testid="tooltip-tooltip-invitation"
+            id="tooltip-invitation"
+          >
+            <svg
+              aria-hidden="true"
+              class="octicon octicon-question text-gitify-tooltip-icon"
+              display="inline-block"
+              fill="currentColor"
+              focusable="false"
+              height="16"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
+              viewBox="0 0 16 16"
+              width="16"
+            >
+              <path
+                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+              />
+            </svg>
+          </div>
+        </div>
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
+        >
+          <input
+            class="size-4 rounded-sm cursor-pointer"
+            data-testid="checkbox-manual"
+            id="manual"
+            type="checkbox"
+          />
+          <label
+            class="font-medium text-gitify-font cursor-pointer"
+            for="manual"
+          >
+            Updated
+          </label>
+          <div
+            aria-label="tooltip-manual"
+            class="Box-sc-g0xbh4-0 relative"
+            data-testid="tooltip-tooltip-manual"
+            id="tooltip-manual"
+          >
+            <svg
+              aria-hidden="true"
+              class="octicon octicon-question text-gitify-tooltip-icon"
+              display="inline-block"
+              fill="currentColor"
+              focusable="false"
+              height="16"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
+              viewBox="0 0 16 16"
+              width="16"
+            >
+              <path
+                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+              />
+            </svg>
+          </div>
+        </div>
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
+        >
+          <input
+            class="size-4 rounded-sm cursor-pointer"
+            data-testid="checkbox-member_feature_requested"
+            id="member_feature_requested"
+            type="checkbox"
+          />
+          <label
+            class="font-medium text-gitify-font cursor-pointer"
+            for="member_feature_requested"
+          >
+            Member Feature Requested
+          </label>
+          <div
+            aria-label="tooltip-member_feature_requested"
+            class="Box-sc-g0xbh4-0 relative"
+            data-testid="tooltip-tooltip-member_feature_requested"
+            id="tooltip-member_feature_requested"
+          >
+            <svg
+              aria-hidden="true"
+              class="octicon octicon-question text-gitify-tooltip-icon"
+              display="inline-block"
+              fill="currentColor"
+              focusable="false"
+              height="16"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
+              viewBox="0 0 16 16"
+              width="16"
+            >
+              <path
+                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+              />
+            </svg>
+          </div>
+        </div>
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
+        >
+          <input
+            class="size-4 rounded-sm cursor-pointer"
+            data-testid="checkbox-mention"
+            id="mention"
+            type="checkbox"
+          />
+          <label
+            class="font-medium text-gitify-font cursor-pointer"
+            for="mention"
+          >
+            Mentioned
+          </label>
+          <div
+            aria-label="tooltip-mention"
+            class="Box-sc-g0xbh4-0 relative"
+            data-testid="tooltip-tooltip-mention"
+            id="tooltip-mention"
+          >
+            <svg
+              aria-hidden="true"
+              class="octicon octicon-question text-gitify-tooltip-icon"
+              display="inline-block"
+              fill="currentColor"
+              focusable="false"
+              height="16"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
+              viewBox="0 0 16 16"
+              width="16"
+            >
+              <path
+                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+              />
+            </svg>
+          </div>
+        </div>
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
+        >
+          <input
+            class="size-4 rounded-sm cursor-pointer"
+            data-testid="checkbox-review_requested"
+            id="review_requested"
+            type="checkbox"
+          />
+          <label
+            class="font-medium text-gitify-font cursor-pointer"
+            for="review_requested"
+          >
+            Review Requested
+          </label>
+          <div
+            aria-label="tooltip-review_requested"
+            class="Box-sc-g0xbh4-0 relative"
+            data-testid="tooltip-tooltip-review_requested"
+            id="tooltip-review_requested"
+          >
+            <svg
+              aria-hidden="true"
+              class="octicon octicon-question text-gitify-tooltip-icon"
+              display="inline-block"
+              fill="currentColor"
+              focusable="false"
+              height="16"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
+              viewBox="0 0 16 16"
+              width="16"
+            >
+              <path
+                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+              />
+            </svg>
+          </div>
+        </div>
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
+        >
+          <input
+            class="size-4 rounded-sm cursor-pointer"
+            data-testid="checkbox-security_advisory_credit"
+            id="security_advisory_credit"
+            type="checkbox"
+          />
+          <label
+            class="font-medium text-gitify-font cursor-pointer"
+            for="security_advisory_credit"
+          >
+            Security Advisory Credit Received
+          </label>
+          <div
+            aria-label="tooltip-security_advisory_credit"
+            class="Box-sc-g0xbh4-0 relative"
+            data-testid="tooltip-tooltip-security_advisory_credit"
+            id="tooltip-security_advisory_credit"
+          >
+            <svg
+              aria-hidden="true"
+              class="octicon octicon-question text-gitify-tooltip-icon"
+              display="inline-block"
+              fill="currentColor"
+              focusable="false"
+              height="16"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
+              viewBox="0 0 16 16"
+              width="16"
+            >
+              <path
+                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+              />
+            </svg>
+          </div>
+        </div>
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
+        >
+          <input
+            class="size-4 rounded-sm cursor-pointer"
+            data-testid="checkbox-security_alert"
+            id="security_alert"
+            type="checkbox"
+          />
+          <label
+            class="font-medium text-gitify-font cursor-pointer"
+            for="security_alert"
+          >
+            Security Alert Received
+          </label>
+          <div
+            aria-label="tooltip-security_alert"
+            class="Box-sc-g0xbh4-0 relative"
+            data-testid="tooltip-tooltip-security_alert"
+            id="tooltip-security_alert"
+          >
+            <svg
+              aria-hidden="true"
+              class="octicon octicon-question text-gitify-tooltip-icon"
+              display="inline-block"
+              fill="currentColor"
+              focusable="false"
+              height="16"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
+              viewBox="0 0 16 16"
+              width="16"
+            >
+              <path
+                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+              />
+            </svg>
+          </div>
+        </div>
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
+        >
+          <input
+            class="size-4 rounded-sm cursor-pointer"
+            data-testid="checkbox-state_change"
+            id="state_change"
+            type="checkbox"
+          />
+          <label
+            class="font-medium text-gitify-font cursor-pointer"
+            for="state_change"
+          >
+            State Changed
+          </label>
+          <div
+            aria-label="tooltip-state_change"
+            class="Box-sc-g0xbh4-0 relative"
+            data-testid="tooltip-tooltip-state_change"
+            id="tooltip-state_change"
+          >
+            <svg
+              aria-hidden="true"
+              class="octicon octicon-question text-gitify-tooltip-icon"
+              display="inline-block"
+              fill="currentColor"
+              focusable="false"
+              height="16"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
+              viewBox="0 0 16 16"
+              width="16"
+            >
+              <path
+                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+              />
+            </svg>
+          </div>
+        </div>
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
+        >
+          <input
+            class="size-4 rounded-sm cursor-pointer"
+            data-testid="checkbox-subscribed"
+            id="subscribed"
+            type="checkbox"
+          />
+          <label
+            class="font-medium text-gitify-font cursor-pointer"
+            for="subscribed"
+          >
+            Updated
+          </label>
+          <div
+            aria-label="tooltip-subscribed"
+            class="Box-sc-g0xbh4-0 relative"
+            data-testid="tooltip-tooltip-subscribed"
+            id="tooltip-subscribed"
+          >
+            <svg
+              aria-hidden="true"
+              class="octicon octicon-question text-gitify-tooltip-icon"
+              display="inline-block"
+              fill="currentColor"
+              focusable="false"
+              height="16"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
+              viewBox="0 0 16 16"
+              width="16"
+            >
+              <path
+                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+              />
+            </svg>
+          </div>
+        </div>
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
+        >
+          <input
+            class="size-4 rounded-sm cursor-pointer"
+            data-testid="checkbox-team_mention"
+            id="team_mention"
+            type="checkbox"
+          />
+          <label
+            class="font-medium text-gitify-font cursor-pointer"
+            for="team_mention"
+          >
+            Team Mentioned
+          </label>
+          <div
+            aria-label="tooltip-team_mention"
+            class="Box-sc-g0xbh4-0 relative"
+            data-testid="tooltip-tooltip-team_mention"
+            id="tooltip-team_mention"
+          >
+            <svg
+              aria-hidden="true"
+              class="octicon octicon-question text-gitify-tooltip-icon"
+              display="inline-block"
+              fill="currentColor"
+              focusable="false"
+              height="16"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
+              viewBox="0 0 16 16"
+              width="16"
+            >
+              <path
+                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+              />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+>>>>>>> main
   </div>
   <div
     class="Box-sc-g0xbh4-0 fixed bottom-0 left-sidebar right-0 bg-gitify-footer"
   >
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+      class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
       data-align="stretch"
       data-direction="horizontal"
       data-justify="end"
@@ -1242,25 +1957,25 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
     >
       <span
         aria-label="Clear all filters"
-        class="Tooltip__TooltipBase-sc-17tf59c-0 fcVRmg tooltipped-n"
+        class="Tooltip__TooltipBase-sc-17tf59c-0 iKRGON tooltipped-n"
         id=":r1:"
         role="tooltip"
       >
         <button
           aria-describedby=":r2:-loading-announcement"
-          class="types__StyledButton-sc-ws60qy-0 jTCgqj"
+          class="types__StyledButton-sc-ws60qy-0 fMOLkq"
           data-loading="false"
           data-testid="filters-clear"
           sx="[object Object]"
           type="button"
         >
           <span
-            class="Box-sc-g0xbh4-0 srpGE"
+            class="Box-sc-g0xbh4-0 kBZRdd"
             data-component="buttonContent"
             sx="[object Object]"
           >
             <span
-              class="Box-sc-g0xbh4-0 mhHOW"
+              class="Box-sc-g0xbh4-0 fRxPAP"
               data-component="leadingVisual"
               sx="[object Object]"
             >
@@ -1293,3 +2008,1566 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
   </div>
 </div>
 `;
+<<<<<<< HEAD
+=======
+
+exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle reason type - none already set 1`] = `
+<div
+  class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
+  data-align="stretch"
+  data-direction="vertical"
+  data-gap="condensed"
+  data-justify="start"
+  data-padding="none"
+  data-wrap="nowrap"
+>
+  <div
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+    data-align="center"
+    data-direction="horizontal"
+    data-gap="condensed"
+    data-justify="start"
+    data-padding="none"
+    data-wrap="nowrap"
+  >
+    <input
+      class="size-4 rounded-sm cursor-pointer"
+      data-testid="checkbox-approval_requested"
+      id="approval_requested"
+      type="checkbox"
+    />
+    <label
+      class="font-medium text-gitify-font cursor-pointer"
+      for="approval_requested"
+    >
+      Approval Requested
+    </label>
+    <div
+      aria-label="tooltip-approval_requested"
+      class="Box-sc-g0xbh4-0 relative"
+      data-testid="tooltip-tooltip-approval_requested"
+      id="tooltip-approval_requested"
+    >
+      <svg
+        aria-hidden="true"
+        class="octicon octicon-question text-gitify-tooltip-icon"
+        display="inline-block"
+        fill="currentColor"
+        focusable="false"
+        height="16"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+        />
+      </svg>
+    </div>
+  </div>
+  <div
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+    data-align="center"
+    data-direction="horizontal"
+    data-gap="condensed"
+    data-justify="start"
+    data-padding="none"
+    data-wrap="nowrap"
+  >
+    <input
+      class="size-4 rounded-sm cursor-pointer"
+      data-testid="checkbox-assign"
+      id="assign"
+      type="checkbox"
+    />
+    <label
+      class="font-medium text-gitify-font cursor-pointer"
+      for="assign"
+    >
+      Assigned
+    </label>
+    <div
+      aria-label="tooltip-assign"
+      class="Box-sc-g0xbh4-0 relative"
+      data-testid="tooltip-tooltip-assign"
+      id="tooltip-assign"
+    >
+      <svg
+        aria-hidden="true"
+        class="octicon octicon-question text-gitify-tooltip-icon"
+        display="inline-block"
+        fill="currentColor"
+        focusable="false"
+        height="16"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+        />
+      </svg>
+    </div>
+  </div>
+  <div
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+    data-align="center"
+    data-direction="horizontal"
+    data-gap="condensed"
+    data-justify="start"
+    data-padding="none"
+    data-wrap="nowrap"
+  >
+    <input
+      class="size-4 rounded-sm cursor-pointer"
+      data-testid="checkbox-author"
+      id="author"
+      type="checkbox"
+    />
+    <label
+      class="font-medium text-gitify-font cursor-pointer"
+      for="author"
+    >
+      Authored
+    </label>
+    <div
+      aria-label="tooltip-author"
+      class="Box-sc-g0xbh4-0 relative"
+      data-testid="tooltip-tooltip-author"
+      id="tooltip-author"
+    >
+      <svg
+        aria-hidden="true"
+        class="octicon octicon-question text-gitify-tooltip-icon"
+        display="inline-block"
+        fill="currentColor"
+        focusable="false"
+        height="16"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+        />
+      </svg>
+    </div>
+  </div>
+  <div
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+    data-align="center"
+    data-direction="horizontal"
+    data-gap="condensed"
+    data-justify="start"
+    data-padding="none"
+    data-wrap="nowrap"
+  >
+    <input
+      class="size-4 rounded-sm cursor-pointer"
+      data-testid="checkbox-ci_activity"
+      id="ci_activity"
+      type="checkbox"
+    />
+    <label
+      class="font-medium text-gitify-font cursor-pointer"
+      for="ci_activity"
+    >
+      Workflow Run Completed
+    </label>
+    <div
+      aria-label="tooltip-ci_activity"
+      class="Box-sc-g0xbh4-0 relative"
+      data-testid="tooltip-tooltip-ci_activity"
+      id="tooltip-ci_activity"
+    >
+      <svg
+        aria-hidden="true"
+        class="octicon octicon-question text-gitify-tooltip-icon"
+        display="inline-block"
+        fill="currentColor"
+        focusable="false"
+        height="16"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+        />
+      </svg>
+    </div>
+  </div>
+  <div
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+    data-align="center"
+    data-direction="horizontal"
+    data-gap="condensed"
+    data-justify="start"
+    data-padding="none"
+    data-wrap="nowrap"
+  >
+    <input
+      class="size-4 rounded-sm cursor-pointer"
+      data-testid="checkbox-comment"
+      id="comment"
+      type="checkbox"
+    />
+    <label
+      class="font-medium text-gitify-font cursor-pointer"
+      for="comment"
+    >
+      Commented
+    </label>
+    <div
+      aria-label="tooltip-comment"
+      class="Box-sc-g0xbh4-0 relative"
+      data-testid="tooltip-tooltip-comment"
+      id="tooltip-comment"
+    >
+      <svg
+        aria-hidden="true"
+        class="octicon octicon-question text-gitify-tooltip-icon"
+        display="inline-block"
+        fill="currentColor"
+        focusable="false"
+        height="16"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+        />
+      </svg>
+    </div>
+  </div>
+  <div
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+    data-align="center"
+    data-direction="horizontal"
+    data-gap="condensed"
+    data-justify="start"
+    data-padding="none"
+    data-wrap="nowrap"
+  >
+    <input
+      class="size-4 rounded-sm cursor-pointer"
+      data-testid="checkbox-invitation"
+      id="invitation"
+      type="checkbox"
+    />
+    <label
+      class="font-medium text-gitify-font cursor-pointer"
+      for="invitation"
+    >
+      Invitation Received
+    </label>
+    <div
+      aria-label="tooltip-invitation"
+      class="Box-sc-g0xbh4-0 relative"
+      data-testid="tooltip-tooltip-invitation"
+      id="tooltip-invitation"
+    >
+      <svg
+        aria-hidden="true"
+        class="octicon octicon-question text-gitify-tooltip-icon"
+        display="inline-block"
+        fill="currentColor"
+        focusable="false"
+        height="16"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+        />
+      </svg>
+    </div>
+  </div>
+  <div
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+    data-align="center"
+    data-direction="horizontal"
+    data-gap="condensed"
+    data-justify="start"
+    data-padding="none"
+    data-wrap="nowrap"
+  >
+    <input
+      class="size-4 rounded-sm cursor-pointer"
+      data-testid="checkbox-manual"
+      id="manual"
+      type="checkbox"
+    />
+    <label
+      class="font-medium text-gitify-font cursor-pointer"
+      for="manual"
+    >
+      Updated
+    </label>
+    <div
+      aria-label="tooltip-manual"
+      class="Box-sc-g0xbh4-0 relative"
+      data-testid="tooltip-tooltip-manual"
+      id="tooltip-manual"
+    >
+      <svg
+        aria-hidden="true"
+        class="octicon octicon-question text-gitify-tooltip-icon"
+        display="inline-block"
+        fill="currentColor"
+        focusable="false"
+        height="16"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+        />
+      </svg>
+    </div>
+  </div>
+  <div
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+    data-align="center"
+    data-direction="horizontal"
+    data-gap="condensed"
+    data-justify="start"
+    data-padding="none"
+    data-wrap="nowrap"
+  >
+    <input
+      class="size-4 rounded-sm cursor-pointer"
+      data-testid="checkbox-member_feature_requested"
+      id="member_feature_requested"
+      type="checkbox"
+    />
+    <label
+      class="font-medium text-gitify-font cursor-pointer"
+      for="member_feature_requested"
+    >
+      Member Feature Requested
+    </label>
+    <div
+      aria-label="tooltip-member_feature_requested"
+      class="Box-sc-g0xbh4-0 relative"
+      data-testid="tooltip-tooltip-member_feature_requested"
+      id="tooltip-member_feature_requested"
+    >
+      <svg
+        aria-hidden="true"
+        class="octicon octicon-question text-gitify-tooltip-icon"
+        display="inline-block"
+        fill="currentColor"
+        focusable="false"
+        height="16"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+        />
+      </svg>
+    </div>
+  </div>
+  <div
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+    data-align="center"
+    data-direction="horizontal"
+    data-gap="condensed"
+    data-justify="start"
+    data-padding="none"
+    data-wrap="nowrap"
+  >
+    <input
+      class="size-4 rounded-sm cursor-pointer"
+      data-testid="checkbox-mention"
+      id="mention"
+      type="checkbox"
+    />
+    <label
+      class="font-medium text-gitify-font cursor-pointer"
+      for="mention"
+    >
+      Mentioned
+    </label>
+    <div
+      aria-label="tooltip-mention"
+      class="Box-sc-g0xbh4-0 relative"
+      data-testid="tooltip-tooltip-mention"
+      id="tooltip-mention"
+    >
+      <svg
+        aria-hidden="true"
+        class="octicon octicon-question text-gitify-tooltip-icon"
+        display="inline-block"
+        fill="currentColor"
+        focusable="false"
+        height="16"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+        />
+      </svg>
+    </div>
+  </div>
+  <div
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+    data-align="center"
+    data-direction="horizontal"
+    data-gap="condensed"
+    data-justify="start"
+    data-padding="none"
+    data-wrap="nowrap"
+  >
+    <input
+      class="size-4 rounded-sm cursor-pointer"
+      data-testid="checkbox-review_requested"
+      id="review_requested"
+      type="checkbox"
+    />
+    <label
+      class="font-medium text-gitify-font cursor-pointer"
+      for="review_requested"
+    >
+      Review Requested
+    </label>
+    <div
+      aria-label="tooltip-review_requested"
+      class="Box-sc-g0xbh4-0 relative"
+      data-testid="tooltip-tooltip-review_requested"
+      id="tooltip-review_requested"
+    >
+      <svg
+        aria-hidden="true"
+        class="octicon octicon-question text-gitify-tooltip-icon"
+        display="inline-block"
+        fill="currentColor"
+        focusable="false"
+        height="16"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+        />
+      </svg>
+    </div>
+  </div>
+  <div
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+    data-align="center"
+    data-direction="horizontal"
+    data-gap="condensed"
+    data-justify="start"
+    data-padding="none"
+    data-wrap="nowrap"
+  >
+    <input
+      class="size-4 rounded-sm cursor-pointer"
+      data-testid="checkbox-security_advisory_credit"
+      id="security_advisory_credit"
+      type="checkbox"
+    />
+    <label
+      class="font-medium text-gitify-font cursor-pointer"
+      for="security_advisory_credit"
+    >
+      Security Advisory Credit Received
+    </label>
+    <div
+      aria-label="tooltip-security_advisory_credit"
+      class="Box-sc-g0xbh4-0 relative"
+      data-testid="tooltip-tooltip-security_advisory_credit"
+      id="tooltip-security_advisory_credit"
+    >
+      <svg
+        aria-hidden="true"
+        class="octicon octicon-question text-gitify-tooltip-icon"
+        display="inline-block"
+        fill="currentColor"
+        focusable="false"
+        height="16"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+        />
+      </svg>
+    </div>
+  </div>
+  <div
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+    data-align="center"
+    data-direction="horizontal"
+    data-gap="condensed"
+    data-justify="start"
+    data-padding="none"
+    data-wrap="nowrap"
+  >
+    <input
+      class="size-4 rounded-sm cursor-pointer"
+      data-testid="checkbox-security_alert"
+      id="security_alert"
+      type="checkbox"
+    />
+    <label
+      class="font-medium text-gitify-font cursor-pointer"
+      for="security_alert"
+    >
+      Security Alert Received
+    </label>
+    <div
+      aria-label="tooltip-security_alert"
+      class="Box-sc-g0xbh4-0 relative"
+      data-testid="tooltip-tooltip-security_alert"
+      id="tooltip-security_alert"
+    >
+      <svg
+        aria-hidden="true"
+        class="octicon octicon-question text-gitify-tooltip-icon"
+        display="inline-block"
+        fill="currentColor"
+        focusable="false"
+        height="16"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+        />
+      </svg>
+    </div>
+  </div>
+  <div
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+    data-align="center"
+    data-direction="horizontal"
+    data-gap="condensed"
+    data-justify="start"
+    data-padding="none"
+    data-wrap="nowrap"
+  >
+    <input
+      class="size-4 rounded-sm cursor-pointer"
+      data-testid="checkbox-state_change"
+      id="state_change"
+      type="checkbox"
+    />
+    <label
+      class="font-medium text-gitify-font cursor-pointer"
+      for="state_change"
+    >
+      State Changed
+    </label>
+    <div
+      aria-label="tooltip-state_change"
+      class="Box-sc-g0xbh4-0 relative"
+      data-testid="tooltip-tooltip-state_change"
+      id="tooltip-state_change"
+    >
+      <svg
+        aria-hidden="true"
+        class="octicon octicon-question text-gitify-tooltip-icon"
+        display="inline-block"
+        fill="currentColor"
+        focusable="false"
+        height="16"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+        />
+      </svg>
+    </div>
+  </div>
+  <div
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+    data-align="center"
+    data-direction="horizontal"
+    data-gap="condensed"
+    data-justify="start"
+    data-padding="none"
+    data-wrap="nowrap"
+  >
+    <input
+      class="size-4 rounded-sm cursor-pointer"
+      data-testid="checkbox-subscribed"
+      id="subscribed"
+      type="checkbox"
+    />
+    <label
+      class="font-medium text-gitify-font cursor-pointer"
+      for="subscribed"
+    >
+      Updated
+    </label>
+    <div
+      aria-label="tooltip-subscribed"
+      class="Box-sc-g0xbh4-0 relative"
+      data-testid="tooltip-tooltip-subscribed"
+      id="tooltip-subscribed"
+    >
+      <svg
+        aria-hidden="true"
+        class="octicon octicon-question text-gitify-tooltip-icon"
+        display="inline-block"
+        fill="currentColor"
+        focusable="false"
+        height="16"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+        />
+      </svg>
+    </div>
+  </div>
+  <div
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+    data-align="center"
+    data-direction="horizontal"
+    data-gap="condensed"
+    data-justify="start"
+    data-padding="none"
+    data-wrap="nowrap"
+  >
+    <input
+      class="size-4 rounded-sm cursor-pointer"
+      data-testid="checkbox-team_mention"
+      id="team_mention"
+      type="checkbox"
+    />
+    <label
+      class="font-medium text-gitify-font cursor-pointer"
+      for="team_mention"
+    >
+      Team Mentioned
+    </label>
+    <div
+      aria-label="tooltip-team_mention"
+      class="Box-sc-g0xbh4-0 relative"
+      data-testid="tooltip-tooltip-team_mention"
+      id="tooltip-team_mention"
+    >
+      <svg
+        aria-hidden="true"
+        class="octicon octicon-question text-gitify-tooltip-icon"
+        display="inline-block"
+        fill="currentColor"
+        focusable="false"
+        height="16"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+        />
+      </svg>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle reason type - some filters already set 1`] = `
+<div
+  class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
+  data-align="stretch"
+  data-direction="vertical"
+  data-gap="condensed"
+  data-justify="start"
+  data-padding="none"
+  data-wrap="nowrap"
+>
+  <div
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+    data-align="center"
+    data-direction="horizontal"
+    data-gap="condensed"
+    data-justify="start"
+    data-padding="none"
+    data-wrap="nowrap"
+  >
+    <input
+      class="size-4 rounded-sm cursor-pointer"
+      data-testid="checkbox-approval_requested"
+      id="approval_requested"
+      type="checkbox"
+    />
+    <label
+      class="font-medium text-gitify-font cursor-pointer"
+      for="approval_requested"
+    >
+      Approval Requested
+    </label>
+    <div
+      aria-label="tooltip-approval_requested"
+      class="Box-sc-g0xbh4-0 relative"
+      data-testid="tooltip-tooltip-approval_requested"
+      id="tooltip-approval_requested"
+    >
+      <svg
+        aria-hidden="true"
+        class="octicon octicon-question text-gitify-tooltip-icon"
+        display="inline-block"
+        fill="currentColor"
+        focusable="false"
+        height="16"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+        />
+      </svg>
+    </div>
+  </div>
+  <div
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+    data-align="center"
+    data-direction="horizontal"
+    data-gap="condensed"
+    data-justify="start"
+    data-padding="none"
+    data-wrap="nowrap"
+  >
+    <input
+      class="size-4 rounded-sm cursor-pointer"
+      data-testid="checkbox-assign"
+      id="assign"
+      type="checkbox"
+    />
+    <label
+      class="font-medium text-gitify-font cursor-pointer"
+      for="assign"
+    >
+      Assigned
+    </label>
+    <div
+      aria-label="tooltip-assign"
+      class="Box-sc-g0xbh4-0 relative"
+      data-testid="tooltip-tooltip-assign"
+      id="tooltip-assign"
+    >
+      <svg
+        aria-hidden="true"
+        class="octicon octicon-question text-gitify-tooltip-icon"
+        display="inline-block"
+        fill="currentColor"
+        focusable="false"
+        height="16"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+        />
+      </svg>
+    </div>
+  </div>
+  <div
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+    data-align="center"
+    data-direction="horizontal"
+    data-gap="condensed"
+    data-justify="start"
+    data-padding="none"
+    data-wrap="nowrap"
+  >
+    <input
+      class="size-4 rounded-sm cursor-pointer"
+      data-testid="checkbox-author"
+      id="author"
+      type="checkbox"
+    />
+    <label
+      class="font-medium text-gitify-font cursor-pointer"
+      for="author"
+    >
+      Authored
+    </label>
+    <div
+      aria-label="tooltip-author"
+      class="Box-sc-g0xbh4-0 relative"
+      data-testid="tooltip-tooltip-author"
+      id="tooltip-author"
+    >
+      <svg
+        aria-hidden="true"
+        class="octicon octicon-question text-gitify-tooltip-icon"
+        display="inline-block"
+        fill="currentColor"
+        focusable="false"
+        height="16"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+        />
+      </svg>
+    </div>
+  </div>
+  <div
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+    data-align="center"
+    data-direction="horizontal"
+    data-gap="condensed"
+    data-justify="start"
+    data-padding="none"
+    data-wrap="nowrap"
+  >
+    <input
+      class="size-4 rounded-sm cursor-pointer"
+      data-testid="checkbox-ci_activity"
+      id="ci_activity"
+      type="checkbox"
+    />
+    <label
+      class="font-medium text-gitify-font cursor-pointer"
+      for="ci_activity"
+    >
+      Workflow Run Completed
+    </label>
+    <div
+      aria-label="tooltip-ci_activity"
+      class="Box-sc-g0xbh4-0 relative"
+      data-testid="tooltip-tooltip-ci_activity"
+      id="tooltip-ci_activity"
+    >
+      <svg
+        aria-hidden="true"
+        class="octicon octicon-question text-gitify-tooltip-icon"
+        display="inline-block"
+        fill="currentColor"
+        focusable="false"
+        height="16"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+        />
+      </svg>
+    </div>
+  </div>
+  <div
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+    data-align="center"
+    data-direction="horizontal"
+    data-gap="condensed"
+    data-justify="start"
+    data-padding="none"
+    data-wrap="nowrap"
+  >
+    <input
+      class="size-4 rounded-sm cursor-pointer"
+      data-testid="checkbox-comment"
+      id="comment"
+      type="checkbox"
+    />
+    <label
+      class="font-medium text-gitify-font cursor-pointer"
+      for="comment"
+    >
+      Commented
+    </label>
+    <div
+      aria-label="tooltip-comment"
+      class="Box-sc-g0xbh4-0 relative"
+      data-testid="tooltip-tooltip-comment"
+      id="tooltip-comment"
+    >
+      <svg
+        aria-hidden="true"
+        class="octicon octicon-question text-gitify-tooltip-icon"
+        display="inline-block"
+        fill="currentColor"
+        focusable="false"
+        height="16"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+        />
+      </svg>
+    </div>
+  </div>
+  <div
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+    data-align="center"
+    data-direction="horizontal"
+    data-gap="condensed"
+    data-justify="start"
+    data-padding="none"
+    data-wrap="nowrap"
+  >
+    <input
+      class="size-4 rounded-sm cursor-pointer"
+      data-testid="checkbox-invitation"
+      id="invitation"
+      type="checkbox"
+    />
+    <label
+      class="font-medium text-gitify-font cursor-pointer"
+      for="invitation"
+    >
+      Invitation Received
+    </label>
+    <div
+      aria-label="tooltip-invitation"
+      class="Box-sc-g0xbh4-0 relative"
+      data-testid="tooltip-tooltip-invitation"
+      id="tooltip-invitation"
+    >
+      <svg
+        aria-hidden="true"
+        class="octicon octicon-question text-gitify-tooltip-icon"
+        display="inline-block"
+        fill="currentColor"
+        focusable="false"
+        height="16"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+        />
+      </svg>
+    </div>
+  </div>
+  <div
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+    data-align="center"
+    data-direction="horizontal"
+    data-gap="condensed"
+    data-justify="start"
+    data-padding="none"
+    data-wrap="nowrap"
+  >
+    <input
+      class="size-4 rounded-sm cursor-pointer"
+      data-testid="checkbox-manual"
+      id="manual"
+      type="checkbox"
+    />
+    <label
+      class="font-medium text-gitify-font cursor-pointer"
+      for="manual"
+    >
+      Updated
+    </label>
+    <div
+      aria-label="tooltip-manual"
+      class="Box-sc-g0xbh4-0 relative"
+      data-testid="tooltip-tooltip-manual"
+      id="tooltip-manual"
+    >
+      <svg
+        aria-hidden="true"
+        class="octicon octicon-question text-gitify-tooltip-icon"
+        display="inline-block"
+        fill="currentColor"
+        focusable="false"
+        height="16"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+        />
+      </svg>
+    </div>
+  </div>
+  <div
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+    data-align="center"
+    data-direction="horizontal"
+    data-gap="condensed"
+    data-justify="start"
+    data-padding="none"
+    data-wrap="nowrap"
+  >
+    <input
+      class="size-4 rounded-sm cursor-pointer"
+      data-testid="checkbox-member_feature_requested"
+      id="member_feature_requested"
+      type="checkbox"
+    />
+    <label
+      class="font-medium text-gitify-font cursor-pointer"
+      for="member_feature_requested"
+    >
+      Member Feature Requested
+    </label>
+    <div
+      aria-label="tooltip-member_feature_requested"
+      class="Box-sc-g0xbh4-0 relative"
+      data-testid="tooltip-tooltip-member_feature_requested"
+      id="tooltip-member_feature_requested"
+    >
+      <svg
+        aria-hidden="true"
+        class="octicon octicon-question text-gitify-tooltip-icon"
+        display="inline-block"
+        fill="currentColor"
+        focusable="false"
+        height="16"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+        />
+      </svg>
+    </div>
+  </div>
+  <div
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+    data-align="center"
+    data-direction="horizontal"
+    data-gap="condensed"
+    data-justify="start"
+    data-padding="none"
+    data-wrap="nowrap"
+  >
+    <input
+      class="size-4 rounded-sm cursor-pointer"
+      data-testid="checkbox-mention"
+      id="mention"
+      type="checkbox"
+    />
+    <label
+      class="font-medium text-gitify-font cursor-pointer"
+      for="mention"
+    >
+      Mentioned
+    </label>
+    <div
+      aria-label="tooltip-mention"
+      class="Box-sc-g0xbh4-0 relative"
+      data-testid="tooltip-tooltip-mention"
+      id="tooltip-mention"
+    >
+      <svg
+        aria-hidden="true"
+        class="octicon octicon-question text-gitify-tooltip-icon"
+        display="inline-block"
+        fill="currentColor"
+        focusable="false"
+        height="16"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+        />
+      </svg>
+    </div>
+  </div>
+  <div
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+    data-align="center"
+    data-direction="horizontal"
+    data-gap="condensed"
+    data-justify="start"
+    data-padding="none"
+    data-wrap="nowrap"
+  >
+    <input
+      class="size-4 rounded-sm cursor-pointer"
+      data-testid="checkbox-review_requested"
+      id="review_requested"
+      type="checkbox"
+    />
+    <label
+      class="font-medium text-gitify-font cursor-pointer"
+      for="review_requested"
+    >
+      Review Requested
+    </label>
+    <div
+      aria-label="tooltip-review_requested"
+      class="Box-sc-g0xbh4-0 relative"
+      data-testid="tooltip-tooltip-review_requested"
+      id="tooltip-review_requested"
+    >
+      <svg
+        aria-hidden="true"
+        class="octicon octicon-question text-gitify-tooltip-icon"
+        display="inline-block"
+        fill="currentColor"
+        focusable="false"
+        height="16"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+        />
+      </svg>
+    </div>
+  </div>
+  <div
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+    data-align="center"
+    data-direction="horizontal"
+    data-gap="condensed"
+    data-justify="start"
+    data-padding="none"
+    data-wrap="nowrap"
+  >
+    <input
+      class="size-4 rounded-sm cursor-pointer"
+      data-testid="checkbox-security_advisory_credit"
+      id="security_advisory_credit"
+      type="checkbox"
+    />
+    <label
+      class="font-medium text-gitify-font cursor-pointer"
+      for="security_advisory_credit"
+    >
+      Security Advisory Credit Received
+    </label>
+    <div
+      aria-label="tooltip-security_advisory_credit"
+      class="Box-sc-g0xbh4-0 relative"
+      data-testid="tooltip-tooltip-security_advisory_credit"
+      id="tooltip-security_advisory_credit"
+    >
+      <svg
+        aria-hidden="true"
+        class="octicon octicon-question text-gitify-tooltip-icon"
+        display="inline-block"
+        fill="currentColor"
+        focusable="false"
+        height="16"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+        />
+      </svg>
+    </div>
+  </div>
+  <div
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+    data-align="center"
+    data-direction="horizontal"
+    data-gap="condensed"
+    data-justify="start"
+    data-padding="none"
+    data-wrap="nowrap"
+  >
+    <input
+      checked=""
+      class="size-4 rounded-sm cursor-pointer"
+      data-testid="checkbox-security_alert"
+      id="security_alert"
+      type="checkbox"
+    />
+    <label
+      class="font-medium text-gitify-font cursor-pointer"
+      for="security_alert"
+    >
+      Security Alert Received
+    </label>
+    <div
+      aria-label="tooltip-security_alert"
+      class="Box-sc-g0xbh4-0 relative"
+      data-testid="tooltip-tooltip-security_alert"
+      id="tooltip-security_alert"
+    >
+      <svg
+        aria-hidden="true"
+        class="octicon octicon-question text-gitify-tooltip-icon"
+        display="inline-block"
+        fill="currentColor"
+        focusable="false"
+        height="16"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+        />
+      </svg>
+    </div>
+  </div>
+  <div
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+    data-align="center"
+    data-direction="horizontal"
+    data-gap="condensed"
+    data-justify="start"
+    data-padding="none"
+    data-wrap="nowrap"
+  >
+    <input
+      class="size-4 rounded-sm cursor-pointer"
+      data-testid="checkbox-state_change"
+      id="state_change"
+      type="checkbox"
+    />
+    <label
+      class="font-medium text-gitify-font cursor-pointer"
+      for="state_change"
+    >
+      State Changed
+    </label>
+    <div
+      aria-label="tooltip-state_change"
+      class="Box-sc-g0xbh4-0 relative"
+      data-testid="tooltip-tooltip-state_change"
+      id="tooltip-state_change"
+    >
+      <svg
+        aria-hidden="true"
+        class="octicon octicon-question text-gitify-tooltip-icon"
+        display="inline-block"
+        fill="currentColor"
+        focusable="false"
+        height="16"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+        />
+      </svg>
+    </div>
+  </div>
+  <div
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+    data-align="center"
+    data-direction="horizontal"
+    data-gap="condensed"
+    data-justify="start"
+    data-padding="none"
+    data-wrap="nowrap"
+  >
+    <input
+      class="size-4 rounded-sm cursor-pointer"
+      data-testid="checkbox-subscribed"
+      id="subscribed"
+      type="checkbox"
+    />
+    <label
+      class="font-medium text-gitify-font cursor-pointer"
+      for="subscribed"
+    >
+      Updated
+    </label>
+    <div
+      aria-label="tooltip-subscribed"
+      class="Box-sc-g0xbh4-0 relative"
+      data-testid="tooltip-tooltip-subscribed"
+      id="tooltip-subscribed"
+    >
+      <svg
+        aria-hidden="true"
+        class="octicon octicon-question text-gitify-tooltip-icon"
+        display="inline-block"
+        fill="currentColor"
+        focusable="false"
+        height="16"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+        />
+      </svg>
+    </div>
+  </div>
+  <div
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+    data-align="center"
+    data-direction="horizontal"
+    data-gap="condensed"
+    data-justify="start"
+    data-padding="none"
+    data-wrap="nowrap"
+  >
+    <input
+      class="size-4 rounded-sm cursor-pointer"
+      data-testid="checkbox-team_mention"
+      id="team_mention"
+      type="checkbox"
+    />
+    <label
+      class="font-medium text-gitify-font cursor-pointer"
+      for="team_mention"
+    >
+      Team Mentioned
+    </label>
+    <div
+      aria-label="tooltip-team_mention"
+      class="Box-sc-g0xbh4-0 relative"
+      data-testid="tooltip-tooltip-team_mention"
+      id="tooltip-team_mention"
+    >
+      <svg
+        aria-hidden="true"
+        class="octicon octicon-question text-gitify-tooltip-icon"
+        display="inline-block"
+        fill="currentColor"
+        focusable="false"
+        height="16"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+        />
+      </svg>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renderer/routes/Filters.tsx Users section should be able to toggle the hideBots checkbox when detailedNotifications is enabled 1`] = `
+<fieldset
+  class="mb-3"
+>
+  <legend>
+    <div
+      class="Box-sc-g0xbh4-0 mb-2"
+    >
+      <div
+        class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
+        data-align="center"
+        data-direction="horizontal"
+        data-gap="condensed"
+        data-justify="start"
+        data-padding="none"
+        data-wrap="nowrap"
+        id="users"
+      >
+        <svg
+          aria-hidden="true"
+          class="octicon octicon-feed-person"
+          display="inline-block"
+          fill="currentColor"
+          focusable="false"
+          height="16"
+          overflow="visible"
+          style="vertical-align: text-bottom;"
+          viewBox="0 0 16 16"
+          width="16"
+        >
+          <path
+            d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
+          />
+        </svg>
+        <h2
+          class="Heading__StyledHeading-sc-1c1dgg0-0 eQYHUB"
+          sx="[object Object]"
+        >
+          Users
+        </h2>
+      </div>
+    </div>
+  </legend>
+  <div
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+    data-align="center"
+    data-direction="horizontal"
+    data-gap="condensed"
+    data-justify="start"
+    data-padding="none"
+    data-wrap="nowrap"
+  >
+    <input
+      class="size-4 rounded-sm cursor-pointer"
+      data-testid="checkbox-hideBots"
+      id="hideBots"
+      type="checkbox"
+    />
+    <label
+      class="font-medium text-gitify-font cursor-pointer"
+      for="hideBots"
+    >
+      Hide notifications from Bot accounts
+    </label>
+    <div
+      aria-label="tooltip-hideBots"
+      class="Box-sc-g0xbh4-0 relative"
+      data-testid="tooltip-tooltip-hideBots"
+      id="tooltip-hideBots"
+    >
+      <svg
+        aria-hidden="true"
+        class="octicon octicon-question text-gitify-tooltip-icon"
+        display="inline-block"
+        fill="currentColor"
+        focusable="false"
+        height="16"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+        />
+      </svg>
+    </div>
+  </div>
+</fieldset>
+`;
+
+exports[`renderer/routes/Filters.tsx Users section should not be able to toggle the hideBots checkbox when detailedNotifications is disabled 1`] = `
+<fieldset
+  class="mb-3"
+>
+  <legend>
+    <div
+      class="Box-sc-g0xbh4-0 mb-2"
+    >
+      <div
+        class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
+        data-align="center"
+        data-direction="horizontal"
+        data-gap="condensed"
+        data-justify="start"
+        data-padding="none"
+        data-wrap="nowrap"
+        id="users"
+      >
+        <svg
+          aria-hidden="true"
+          class="octicon octicon-feed-person"
+          display="inline-block"
+          fill="currentColor"
+          focusable="false"
+          height="16"
+          overflow="visible"
+          style="vertical-align: text-bottom;"
+          viewBox="0 0 16 16"
+          width="16"
+        >
+          <path
+            d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
+          />
+        </svg>
+        <h2
+          class="Heading__StyledHeading-sc-1c1dgg0-0 eQYHUB"
+          sx="[object Object]"
+        >
+          Users
+        </h2>
+      </div>
+    </div>
+  </legend>
+  <div
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+    data-align="center"
+    data-direction="horizontal"
+    data-gap="condensed"
+    data-justify="start"
+    data-padding="none"
+    data-wrap="nowrap"
+  >
+    <input
+      class="size-4 rounded-sm cursor-pointer"
+      data-testid="checkbox-hideBots"
+      disabled=""
+      id="hideBots"
+      type="checkbox"
+    />
+    <label
+      class="font-medium text-gitify-font cursor-pointer line-through"
+      for="hideBots"
+    >
+      Hide notifications from Bot accounts
+    </label>
+    <div
+      aria-label="tooltip-hideBots"
+      class="Box-sc-g0xbh4-0 relative"
+      data-testid="tooltip-tooltip-hideBots"
+      id="tooltip-hideBots"
+    >
+      <svg
+        aria-hidden="true"
+        class="octicon octicon-question text-gitify-tooltip-icon"
+        display="inline-block"
+        fill="currentColor"
+        focusable="false"
+        height="16"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+        />
+      </svg>
+    </div>
+  </div>
+</fieldset>
+`;
+>>>>>>> main
