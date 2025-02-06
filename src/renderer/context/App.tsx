@@ -114,10 +114,12 @@ export const defaultSettings: SettingsState = {
 interface AppContextState {
   auth: AuthState;
   isLoggedIn: boolean;
-  loginWithGitHubApp: () => void;
-  loginWithOAuthApp: (data: LoginOAuthAppOptions) => void;
-  loginWithPersonalAccessToken: (data: LoginPersonalAccessTokenOptions) => void;
-  logoutFromAccount: (account: Account) => void;
+  loginWithGitHubApp: () => Promise<void>;
+  loginWithOAuthApp: (data: LoginOAuthAppOptions) => Promise<void>;
+  loginWithPersonalAccessToken: (
+    data: LoginPersonalAccessTokenOptions,
+  ) => Promise<void>;
+  logoutFromAccount: (account: Account) => Promise<void>;
 
   notifications: AccountNotifications[];
   status: Status;
