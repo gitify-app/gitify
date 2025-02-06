@@ -6,7 +6,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - disabled 1`] = 
   "baseElement": <body>
     <div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
         data-align="center"
         data-direction="horizontal"
         data-gap="condensed"
@@ -33,7 +33,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - disabled 1`] = 
   </body>,
   "container": <div>
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+      class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
       data-align="center"
       data-direction="horizontal"
       data-gap="condensed"
@@ -178,7 +178,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - positive counte
   "baseElement": <body>
     <div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
         data-align="center"
         data-direction="horizontal"
         data-gap="condensed"
@@ -201,13 +201,13 @@ exports[`renderer/components/fields/Checkbox.tsx should render - positive counte
         </label>
         <span
           aria-hidden="true"
-          class="Box-sc-g0xbh4-0 iTYOrp"
+          class="Box-sc-g0xbh4-0 bzQJGs"
           sx="[object Object]"
         >
           5
         </span>
         <span
-          class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 gbsmlL"
+          class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 hxuUuW"
         >
            (
           5
@@ -218,7 +218,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - positive counte
   </body>,
   "container": <div>
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+      class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
       data-align="center"
       data-direction="horizontal"
       data-gap="condensed"
@@ -241,13 +241,13 @@ exports[`renderer/components/fields/Checkbox.tsx should render - positive counte
       </label>
       <span
         aria-hidden="true"
-        class="Box-sc-g0xbh4-0 iTYOrp"
+        class="Box-sc-g0xbh4-0 bzQJGs"
         sx="[object Object]"
       >
         5
       </span>
       <span
-        class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 gbsmlL"
+        class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 hxuUuW"
       >
          (
         5
@@ -315,7 +315,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - positive counte
   "baseElement": <body>
     <div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
         data-align="center"
         data-direction="horizontal"
         data-gap="condensed"
@@ -337,13 +337,13 @@ exports[`renderer/components/fields/Checkbox.tsx should render - positive counte
         </label>
         <span
           aria-hidden="true"
-          class="Box-sc-g0xbh4-0 gUZDKK"
+          class="Box-sc-g0xbh4-0 bfvZWv"
           sx="[object Object]"
         >
           5
         </span>
         <span
-          class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 gbsmlL"
+          class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 hxuUuW"
         >
            (
           5
@@ -354,7 +354,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - positive counte
   </body>,
   "container": <div>
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+      class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
       data-align="center"
       data-direction="horizontal"
       data-gap="condensed"
@@ -376,13 +376,13 @@ exports[`renderer/components/fields/Checkbox.tsx should render - positive counte
       </label>
       <span
         aria-hidden="true"
-        class="Box-sc-g0xbh4-0 gUZDKK"
+        class="Box-sc-g0xbh4-0 bfvZWv"
         sx="[object Object]"
       >
         5
       </span>
       <span
-        class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 gbsmlL"
+        class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 hxuUuW"
       >
          (
         5
@@ -450,7 +450,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - tooltip 1`] = `
   "baseElement": <body>
     <div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
         data-align="center"
         data-direction="horizontal"
         data-gap="condensed"
@@ -499,7 +499,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - tooltip 1`] = `
   </body>,
   "container": <div>
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+      class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
       data-align="center"
       data-direction="horizontal"
       data-gap="condensed"
@@ -605,7 +605,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - visible 1`] = `
   "baseElement": <body>
     <div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
         data-align="center"
         data-direction="horizontal"
         data-gap="condensed"
@@ -631,7 +631,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - visible 1`] = `
   </body>,
   "container": <div>
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+      class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
       data-align="center"
       data-direction="horizontal"
       data-gap="condensed"
@@ -714,7 +714,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - zero counter 1`
   "baseElement": <body>
     <div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
         data-align="center"
         data-direction="horizontal"
         data-gap="condensed"
@@ -740,7 +740,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - zero counter 1`
   </body>,
   "container": <div>
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+      class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
       data-align="center"
       data-direction="horizontal"
       data-gap="condensed"
