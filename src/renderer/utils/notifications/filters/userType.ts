@@ -38,9 +38,9 @@ export function getUserTypeFilterCount(
   userType: UserType,
 ) {
   return notifications.reduce(
-    (memo, acc) =>
-      memo +
-      acc.notifications.filter((n) => filterNotificationByUserType(n, userType))
+    (sum, account) =>
+      sum +
+      account.notifications.filter((n) => filterNotificationByUserType(n, userType))
         .length,
     0,
   );
