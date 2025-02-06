@@ -8,16 +8,13 @@ import type { Notification, UserType } from '../../../typesGitHub';
 export const FILTERS_USER_TYPES: Record<UserType, TypeDetails> = {
   User: {
     title: 'User',
-    description: 'Notifications by users',
   },
   Bot: {
     title: 'Bot',
-    description:
-      'Notifications by Bot accounts such as @dependabot, @renovate, @netlify, etc',
+    description: 'Bot accounts such as @dependabot, @renovate, @netlify, etc',
   },
   Organization: {
     title: 'Organization',
-    description: 'Notifications from Organizations',
   },
 } as Partial<Record<UserType, TypeDetails>> as Record<UserType, TypeDetails>;
 

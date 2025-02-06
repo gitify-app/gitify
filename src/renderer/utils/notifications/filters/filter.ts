@@ -13,22 +13,24 @@ export function filterNotifications(
   settings: SettingsState,
 ): Notification[] {
   return notifications.filter((notification) => {
-    if (hasUserTypeFilters(settings)) {
-      return settings.filterUserTypes.some((userType) =>
-        filterNotificationByUserType(notification, userType),
-      );
-    }
+    if (settings.detailedNotifications) {
+      if (hasUserTypeFilters(settings)) {
+        return settings.filterUserTypes.some((userType) =>
+          filterNotificationByUserType(notification, userType),
+        );
+      }
 
-    if (hasIncludeHandleFilters(settings)) {
-      return settings.filterIncludeHandles.some((handle) =>
-        filterNotificationByHandle(notification, handle),
-      );
-    }
+      if (hasIncludeHandleFilters(settings)) {
+        return settings.filterIncludeHandles.some((handle) =>
+          filterNotificationByHandle(notification, handle),
+        );
+      }
 
-    if (hasExcludeHandleFilters(settings)) {
-      return !settings.filterExcludeHandles.some((handle) =>
-        filterNotificationByHandle(notification, handle),
-      );
+      if (hasExcludeHandleFilters(settings)) {
+        return !settings.filterExcludeHandles.some((handle) =>
+          filterNotificationByHandle(notification, handle),
+        );
+      }
     }
 
     if (hasReasonFilters(settings)) {

@@ -1,0 +1,1031 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renderer/components/filters/UserHandleFilter.tsx should render itself & its children - detailed notifications disabled 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <fieldset
+        class="mb-3"
+        id="filter-user-handles"
+      >
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          data-align="baseline"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
+        >
+          <legend>
+            <div
+              class="Box-sc-g0xbh4-0 mb-2"
+            >
+              <div
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+                data-align="center"
+                data-direction="horizontal"
+                data-gap="condensed"
+                data-justify="start"
+                data-padding="none"
+                data-wrap="nowrap"
+                id="handles"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="octicon octicon-mention"
+                  display="inline-block"
+                  fill="currentColor"
+                  focusable="false"
+                  height="16"
+                  overflow="visible"
+                  style="vertical-align: text-bottom;"
+                  viewBox="0 0 16 16"
+                  width="16"
+                >
+                  <path
+                    d="M4.75 2.37a6.501 6.501 0 0 0 6.5 11.26.75.75 0 0 1 .75 1.298A7.999 7.999 0 0 1 .989 4.148 8 8 0 0 1 16 7.75v1.5a2.75 2.75 0 0 1-5.072 1.475 3.999 3.999 0 0 1-6.65-4.19A4 4 0 0 1 12 8v1.25a1.25 1.25 0 0 0 2.5 0V7.867a6.5 6.5 0 0 0-9.75-5.496ZM10.5 8a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0Z"
+                  />
+                </svg>
+                <h2
+                  class="Heading__StyledHeading-sc-1c1dgg0-0 lfvrLU"
+                  sx="[object Object]"
+                >
+                  Handles
+                </h2>
+              </div>
+            </div>
+          </legend>
+          <div
+            aria-label="tooltip-filter-handles"
+            class="Box-sc-g0xbh4-0 relative"
+            data-testid="tooltip-tooltip-filter-handles"
+            id="tooltip-filter-handles"
+          >
+            <svg
+              aria-hidden="true"
+              class="octicon octicon-question text-gitify-tooltip-icon"
+              display="inline-block"
+              fill="currentColor"
+              focusable="false"
+              height="16"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
+              viewBox="0 0 16 16"
+              width="16"
+            >
+              <path
+                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+              />
+            </svg>
+          </div>
+        </div>
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          data-align="stretch"
+          data-direction="vertical"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
+        >
+          <div
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <div
+              class="Box-sc-g0xbh4-0 font-medium text-gitify-font w-28"
+            >
+              <div
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+                data-align="center"
+                data-direction="horizontal"
+                data-gap="condensed"
+                data-justify="start"
+                data-padding="none"
+                data-wrap="nowrap"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="octicon octicon-check-circle-fill text-gitify-icon-open"
+                  display="inline-block"
+                  fill="currentColor"
+                  focusable="false"
+                  height="16"
+                  overflow="visible"
+                  style="vertical-align: text-bottom;"
+                  viewBox="0 0 16 16"
+                  width="16"
+                >
+                  <path
+                    d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm3.78-9.72a.751.751 0 0 0-.018-1.042.751.751 0 0 0-1.042-.018L6.75 9.19 5.28 7.72a.751.751 0 0 0-1.042.018.751.751 0 0 0-.018 1.042l2 2a.75.75 0 0 0 1.06 0Z"
+                  />
+                </svg>
+                <span
+                  class="Text-sc-17v1xeu-0 hmAFGJ"
+                >
+                  Include:
+                </span>
+              </div>
+            </div>
+            <span
+              class="TextInputWrapper__TextInputBaseWrapper-sc-1mqhpbi-0 TextInputWrapper-sc-1mqhpbi-1 cnyBLo jdagae"
+              disabled=""
+              sx="[object Object]"
+            >
+              <div
+                class="Box-sc-g0xbh4-0 fmYYcM"
+                display="flex"
+                sx="[object Object]"
+              >
+                <div
+                  class="Box-sc-g0xbh4-0 bbEnWh"
+                  sx="[object Object]"
+                >
+                  <input
+                    aria-invalid="false"
+                    class="UnstyledTextInput-sc-14ypya-0 gEhuYm"
+                    disabled=""
+                    sx="[object Object]"
+                    title="Include handles"
+                    type="text"
+                  />
+                </div>
+              </div>
+            </span>
+          </div>
+          <div
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <div
+              class="Box-sc-g0xbh4-0 font-medium text-gitify-font w-28"
+            >
+              <div
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+                data-align="center"
+                data-direction="horizontal"
+                data-gap="condensed"
+                data-justify="start"
+                data-padding="none"
+                data-wrap="nowrap"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="octicon octicon-no-entry-fill text-gitify-icon-closed"
+                  display="inline-block"
+                  fill="currentColor"
+                  focusable="false"
+                  height="16"
+                  overflow="visible"
+                  style="vertical-align: text-bottom;"
+                  viewBox="0 0 12 12"
+                  width="16"
+                >
+                  <path
+                    d="M6 0a6 6 0 1 1 0 12A6 6 0 0 1 6 0Zm3 5H3v2h6Z"
+                  />
+                </svg>
+                <span
+                  class="Text-sc-17v1xeu-0 hmAFGJ"
+                >
+                  Exclude:
+                </span>
+              </div>
+            </div>
+            <span
+              class="TextInputWrapper__TextInputBaseWrapper-sc-1mqhpbi-0 TextInputWrapper-sc-1mqhpbi-1 cnyBLo jdagae"
+              disabled=""
+              sx="[object Object]"
+            >
+              <div
+                class="Box-sc-g0xbh4-0 fmYYcM"
+                display="flex"
+                sx="[object Object]"
+              >
+                <div
+                  class="Box-sc-g0xbh4-0 bbEnWh"
+                  sx="[object Object]"
+                >
+                  <input
+                    aria-invalid="false"
+                    class="UnstyledTextInput-sc-14ypya-0 gEhuYm"
+                    disabled=""
+                    sx="[object Object]"
+                    title="Exclude handles"
+                    type="text"
+                  />
+                </div>
+              </div>
+            </span>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  </body>,
+  "container": <div>
+    <fieldset
+      class="mb-3"
+      id="filter-user-handles"
+    >
+      <div
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+        data-align="baseline"
+        data-direction="horizontal"
+        data-gap="condensed"
+        data-justify="start"
+        data-padding="none"
+        data-wrap="nowrap"
+      >
+        <legend>
+          <div
+            class="Box-sc-g0xbh4-0 mb-2"
+          >
+            <div
+              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+              data-align="center"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+              id="handles"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-mention"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M4.75 2.37a6.501 6.501 0 0 0 6.5 11.26.75.75 0 0 1 .75 1.298A7.999 7.999 0 0 1 .989 4.148 8 8 0 0 1 16 7.75v1.5a2.75 2.75 0 0 1-5.072 1.475 3.999 3.999 0 0 1-6.65-4.19A4 4 0 0 1 12 8v1.25a1.25 1.25 0 0 0 2.5 0V7.867a6.5 6.5 0 0 0-9.75-5.496ZM10.5 8a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0Z"
+                />
+              </svg>
+              <h2
+                class="Heading__StyledHeading-sc-1c1dgg0-0 lfvrLU"
+                sx="[object Object]"
+              >
+                Handles
+              </h2>
+            </div>
+          </div>
+        </legend>
+        <div
+          aria-label="tooltip-filter-handles"
+          class="Box-sc-g0xbh4-0 relative"
+          data-testid="tooltip-tooltip-filter-handles"
+          id="tooltip-filter-handles"
+        >
+          <svg
+            aria-hidden="true"
+            class="octicon octicon-question text-gitify-tooltip-icon"
+            display="inline-block"
+            fill="currentColor"
+            focusable="false"
+            height="16"
+            overflow="visible"
+            style="vertical-align: text-bottom;"
+            viewBox="0 0 16 16"
+            width="16"
+          >
+            <path
+              d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+        data-align="stretch"
+        data-direction="vertical"
+        data-gap="condensed"
+        data-justify="start"
+        data-padding="none"
+        data-wrap="nowrap"
+      >
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
+        >
+          <div
+            class="Box-sc-g0xbh4-0 font-medium text-gitify-font w-28"
+          >
+            <div
+              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+              data-align="center"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-check-circle-fill text-gitify-icon-open"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm3.78-9.72a.751.751 0 0 0-.018-1.042.751.751 0 0 0-1.042-.018L6.75 9.19 5.28 7.72a.751.751 0 0 0-1.042.018.751.751 0 0 0-.018 1.042l2 2a.75.75 0 0 0 1.06 0Z"
+                />
+              </svg>
+              <span
+                class="Text-sc-17v1xeu-0 hmAFGJ"
+              >
+                Include:
+              </span>
+            </div>
+          </div>
+          <span
+            class="TextInputWrapper__TextInputBaseWrapper-sc-1mqhpbi-0 TextInputWrapper-sc-1mqhpbi-1 cnyBLo jdagae"
+            disabled=""
+            sx="[object Object]"
+          >
+            <div
+              class="Box-sc-g0xbh4-0 fmYYcM"
+              display="flex"
+              sx="[object Object]"
+            >
+              <div
+                class="Box-sc-g0xbh4-0 bbEnWh"
+                sx="[object Object]"
+              >
+                <input
+                  aria-invalid="false"
+                  class="UnstyledTextInput-sc-14ypya-0 gEhuYm"
+                  disabled=""
+                  sx="[object Object]"
+                  title="Include handles"
+                  type="text"
+                />
+              </div>
+            </div>
+          </span>
+        </div>
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
+        >
+          <div
+            class="Box-sc-g0xbh4-0 font-medium text-gitify-font w-28"
+          >
+            <div
+              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+              data-align="center"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-no-entry-fill text-gitify-icon-closed"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 12 12"
+                width="16"
+              >
+                <path
+                  d="M6 0a6 6 0 1 1 0 12A6 6 0 0 1 6 0Zm3 5H3v2h6Z"
+                />
+              </svg>
+              <span
+                class="Text-sc-17v1xeu-0 hmAFGJ"
+              >
+                Exclude:
+              </span>
+            </div>
+          </div>
+          <span
+            class="TextInputWrapper__TextInputBaseWrapper-sc-1mqhpbi-0 TextInputWrapper-sc-1mqhpbi-1 cnyBLo jdagae"
+            disabled=""
+            sx="[object Object]"
+          >
+            <div
+              class="Box-sc-g0xbh4-0 fmYYcM"
+              display="flex"
+              sx="[object Object]"
+            >
+              <div
+                class="Box-sc-g0xbh4-0 bbEnWh"
+                sx="[object Object]"
+              >
+                <input
+                  aria-invalid="false"
+                  class="UnstyledTextInput-sc-14ypya-0 gEhuYm"
+                  disabled=""
+                  sx="[object Object]"
+                  title="Exclude handles"
+                  type="text"
+                />
+              </div>
+            </div>
+          </span>
+        </div>
+      </div>
+    </fieldset>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`renderer/components/filters/UserHandleFilter.tsx should render itself & its children - detailed notifications enabled 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <fieldset
+        class="mb-3"
+        id="filter-user-handles"
+      >
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          data-align="baseline"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
+        >
+          <legend>
+            <div
+              class="Box-sc-g0xbh4-0 mb-2"
+            >
+              <div
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+                data-align="center"
+                data-direction="horizontal"
+                data-gap="condensed"
+                data-justify="start"
+                data-padding="none"
+                data-wrap="nowrap"
+                id="handles"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="octicon octicon-mention"
+                  display="inline-block"
+                  fill="currentColor"
+                  focusable="false"
+                  height="16"
+                  overflow="visible"
+                  style="vertical-align: text-bottom;"
+                  viewBox="0 0 16 16"
+                  width="16"
+                >
+                  <path
+                    d="M4.75 2.37a6.501 6.501 0 0 0 6.5 11.26.75.75 0 0 1 .75 1.298A7.999 7.999 0 0 1 .989 4.148 8 8 0 0 1 16 7.75v1.5a2.75 2.75 0 0 1-5.072 1.475 3.999 3.999 0 0 1-6.65-4.19A4 4 0 0 1 12 8v1.25a1.25 1.25 0 0 0 2.5 0V7.867a6.5 6.5 0 0 0-9.75-5.496ZM10.5 8a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0Z"
+                  />
+                </svg>
+                <h2
+                  class="Heading__StyledHeading-sc-1c1dgg0-0 lfvrLU"
+                  sx="[object Object]"
+                >
+                  Handles
+                </h2>
+              </div>
+            </div>
+          </legend>
+          <div
+            aria-label="tooltip-filter-handles"
+            class="Box-sc-g0xbh4-0 relative"
+            data-testid="tooltip-tooltip-filter-handles"
+            id="tooltip-filter-handles"
+          >
+            <svg
+              aria-hidden="true"
+              class="octicon octicon-question text-gitify-tooltip-icon"
+              display="inline-block"
+              fill="currentColor"
+              focusable="false"
+              height="16"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
+              viewBox="0 0 16 16"
+              width="16"
+            >
+              <path
+                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+              />
+            </svg>
+          </div>
+        </div>
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          data-align="stretch"
+          data-direction="vertical"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
+        >
+          <div
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <div
+              class="Box-sc-g0xbh4-0 font-medium text-gitify-font w-28"
+            >
+              <div
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+                data-align="center"
+                data-direction="horizontal"
+                data-gap="condensed"
+                data-justify="start"
+                data-padding="none"
+                data-wrap="nowrap"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="octicon octicon-check-circle-fill text-gitify-icon-open"
+                  display="inline-block"
+                  fill="currentColor"
+                  focusable="false"
+                  height="16"
+                  overflow="visible"
+                  style="vertical-align: text-bottom;"
+                  viewBox="0 0 16 16"
+                  width="16"
+                >
+                  <path
+                    d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm3.78-9.72a.751.751 0 0 0-.018-1.042.751.751 0 0 0-1.042-.018L6.75 9.19 5.28 7.72a.751.751 0 0 0-1.042.018.751.751 0 0 0-.018 1.042l2 2a.75.75 0 0 0 1.06 0Z"
+                  />
+                </svg>
+                <span
+                  class="Text-sc-17v1xeu-0 hmAFGJ"
+                >
+                  Include:
+                </span>
+              </div>
+            </div>
+            <span
+              class="TextInputWrapper__TextInputBaseWrapper-sc-1mqhpbi-0 TextInputWrapper-sc-1mqhpbi-1 dcgvNI jdagae"
+              sx="[object Object]"
+            >
+              <div
+                class="Box-sc-g0xbh4-0 fmYYcM"
+                display="flex"
+                sx="[object Object]"
+              >
+                <div
+                  class="Box-sc-g0xbh4-0 bbEnWh"
+                  sx="[object Object]"
+                >
+                  <input
+                    aria-invalid="false"
+                    class="UnstyledTextInput-sc-14ypya-0 gEhuYm"
+                    sx="[object Object]"
+                    tabindex="0"
+                    title="Include handles"
+                    type="text"
+                  />
+                </div>
+              </div>
+            </span>
+          </div>
+          <div
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <div
+              class="Box-sc-g0xbh4-0 font-medium text-gitify-font w-28"
+            >
+              <div
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+                data-align="center"
+                data-direction="horizontal"
+                data-gap="condensed"
+                data-justify="start"
+                data-padding="none"
+                data-wrap="nowrap"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="octicon octicon-no-entry-fill text-gitify-icon-closed"
+                  display="inline-block"
+                  fill="currentColor"
+                  focusable="false"
+                  height="16"
+                  overflow="visible"
+                  style="vertical-align: text-bottom;"
+                  viewBox="0 0 12 12"
+                  width="16"
+                >
+                  <path
+                    d="M6 0a6 6 0 1 1 0 12A6 6 0 0 1 6 0Zm3 5H3v2h6Z"
+                  />
+                </svg>
+                <span
+                  class="Text-sc-17v1xeu-0 hmAFGJ"
+                >
+                  Exclude:
+                </span>
+              </div>
+            </div>
+            <span
+              class="TextInputWrapper__TextInputBaseWrapper-sc-1mqhpbi-0 TextInputWrapper-sc-1mqhpbi-1 dcgvNI jdagae"
+              sx="[object Object]"
+            >
+              <div
+                class="Box-sc-g0xbh4-0 fmYYcM"
+                display="flex"
+                sx="[object Object]"
+              >
+                <div
+                  class="Box-sc-g0xbh4-0 bbEnWh"
+                  sx="[object Object]"
+                >
+                  <input
+                    aria-invalid="false"
+                    class="UnstyledTextInput-sc-14ypya-0 gEhuYm"
+                    sx="[object Object]"
+                    tabindex="0"
+                    title="Exclude handles"
+                    type="text"
+                  />
+                </div>
+              </div>
+            </span>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  </body>,
+  "container": <div>
+    <fieldset
+      class="mb-3"
+      id="filter-user-handles"
+    >
+      <div
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+        data-align="baseline"
+        data-direction="horizontal"
+        data-gap="condensed"
+        data-justify="start"
+        data-padding="none"
+        data-wrap="nowrap"
+      >
+        <legend>
+          <div
+            class="Box-sc-g0xbh4-0 mb-2"
+          >
+            <div
+              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+              data-align="center"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+              id="handles"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-mention"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M4.75 2.37a6.501 6.501 0 0 0 6.5 11.26.75.75 0 0 1 .75 1.298A7.999 7.999 0 0 1 .989 4.148 8 8 0 0 1 16 7.75v1.5a2.75 2.75 0 0 1-5.072 1.475 3.999 3.999 0 0 1-6.65-4.19A4 4 0 0 1 12 8v1.25a1.25 1.25 0 0 0 2.5 0V7.867a6.5 6.5 0 0 0-9.75-5.496ZM10.5 8a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0Z"
+                />
+              </svg>
+              <h2
+                class="Heading__StyledHeading-sc-1c1dgg0-0 lfvrLU"
+                sx="[object Object]"
+              >
+                Handles
+              </h2>
+            </div>
+          </div>
+        </legend>
+        <div
+          aria-label="tooltip-filter-handles"
+          class="Box-sc-g0xbh4-0 relative"
+          data-testid="tooltip-tooltip-filter-handles"
+          id="tooltip-filter-handles"
+        >
+          <svg
+            aria-hidden="true"
+            class="octicon octicon-question text-gitify-tooltip-icon"
+            display="inline-block"
+            fill="currentColor"
+            focusable="false"
+            height="16"
+            overflow="visible"
+            style="vertical-align: text-bottom;"
+            viewBox="0 0 16 16"
+            width="16"
+          >
+            <path
+              d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+        data-align="stretch"
+        data-direction="vertical"
+        data-gap="condensed"
+        data-justify="start"
+        data-padding="none"
+        data-wrap="nowrap"
+      >
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
+        >
+          <div
+            class="Box-sc-g0xbh4-0 font-medium text-gitify-font w-28"
+          >
+            <div
+              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+              data-align="center"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-check-circle-fill text-gitify-icon-open"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm3.78-9.72a.751.751 0 0 0-.018-1.042.751.751 0 0 0-1.042-.018L6.75 9.19 5.28 7.72a.751.751 0 0 0-1.042.018.751.751 0 0 0-.018 1.042l2 2a.75.75 0 0 0 1.06 0Z"
+                />
+              </svg>
+              <span
+                class="Text-sc-17v1xeu-0 hmAFGJ"
+              >
+                Include:
+              </span>
+            </div>
+          </div>
+          <span
+            class="TextInputWrapper__TextInputBaseWrapper-sc-1mqhpbi-0 TextInputWrapper-sc-1mqhpbi-1 dcgvNI jdagae"
+            sx="[object Object]"
+          >
+            <div
+              class="Box-sc-g0xbh4-0 fmYYcM"
+              display="flex"
+              sx="[object Object]"
+            >
+              <div
+                class="Box-sc-g0xbh4-0 bbEnWh"
+                sx="[object Object]"
+              >
+                <input
+                  aria-invalid="false"
+                  class="UnstyledTextInput-sc-14ypya-0 gEhuYm"
+                  sx="[object Object]"
+                  tabindex="0"
+                  title="Include handles"
+                  type="text"
+                />
+              </div>
+            </div>
+          </span>
+        </div>
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
+        >
+          <div
+            class="Box-sc-g0xbh4-0 font-medium text-gitify-font w-28"
+          >
+            <div
+              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+              data-align="center"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-no-entry-fill text-gitify-icon-closed"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 12 12"
+                width="16"
+              >
+                <path
+                  d="M6 0a6 6 0 1 1 0 12A6 6 0 0 1 6 0Zm3 5H3v2h6Z"
+                />
+              </svg>
+              <span
+                class="Text-sc-17v1xeu-0 hmAFGJ"
+              >
+                Exclude:
+              </span>
+            </div>
+          </div>
+          <span
+            class="TextInputWrapper__TextInputBaseWrapper-sc-1mqhpbi-0 TextInputWrapper-sc-1mqhpbi-1 dcgvNI jdagae"
+            sx="[object Object]"
+          >
+            <div
+              class="Box-sc-g0xbh4-0 fmYYcM"
+              display="flex"
+              sx="[object Object]"
+            >
+              <div
+                class="Box-sc-g0xbh4-0 bbEnWh"
+                sx="[object Object]"
+              >
+                <input
+                  aria-invalid="false"
+                  class="UnstyledTextInput-sc-14ypya-0 gEhuYm"
+                  sx="[object Object]"
+                  tabindex="0"
+                  title="Exclude handles"
+                  type="text"
+                />
+              </div>
+            </div>
+          </span>
+        </div>
+      </div>
+    </fieldset>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

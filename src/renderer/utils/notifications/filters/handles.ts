@@ -13,5 +13,5 @@ export function filterNotificationByHandle(
   notification: Notification,
   handleName: string,
 ): boolean {
-  return notification.subject?.user.login === handleName;
+  return notification.subject?.user?.login === handleName;
 }
