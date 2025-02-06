@@ -40,8 +40,9 @@ export function getUserTypeFilterCount(
   return notifications.reduce(
     (sum, account) =>
       sum +
-      account.notifications.filter((n) => filterNotificationByUserType(n, userType))
-        .length,
+      account.notifications.filter((n) =>
+        filterNotificationByUserType(n, userType),
+      ).length,
     0,
   );
 }
