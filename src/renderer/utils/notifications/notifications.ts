@@ -15,7 +15,7 @@ export function setTrayIconColor(notifications: AccountNotifications[]) {
 
 export function getNotificationCount(notifications: AccountNotifications[]) {
   return notifications.reduce(
-    (memo, acc) => memo + acc.notifications.length,
+    (sum, account) => sum + account.notifications.length,
     0,
   );
 }
