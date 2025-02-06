@@ -10,7 +10,7 @@ exports[`renderer/components/filters/UserHandleFilter.tsx should render itself &
         id="filter-user-handles"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
           data-align="baseline"
           data-direction="horizontal"
           data-gap="condensed"
@@ -23,7 +23,7 @@ exports[`renderer/components/filters/UserHandleFilter.tsx should render itself &
               class="Box-sc-g0xbh4-0 mb-2"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+                class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -49,7 +49,7 @@ exports[`renderer/components/filters/UserHandleFilter.tsx should render itself &
                   />
                 </svg>
                 <h2
-                  class="Heading__StyledHeading-sc-1c1dgg0-0 lfvrLU"
+                  class="Heading__StyledHeading-sc-1c1dgg0-0 eQYHUB"
                   sx="[object Object]"
                 >
                   Handles
@@ -82,7 +82,7 @@ exports[`renderer/components/filters/UserHandleFilter.tsx should render itself &
           </div>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
           data-align="stretch"
           data-direction="vertical"
           data-gap="condensed"
@@ -91,7 +91,7 @@ exports[`renderer/components/filters/UserHandleFilter.tsx should render itself &
           data-wrap="nowrap"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+            class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -103,7 +103,7 @@ exports[`renderer/components/filters/UserHandleFilter.tsx should render itself &
               class="Box-sc-g0xbh4-0 font-medium text-gitify-font w-28"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+                class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -128,29 +128,29 @@ exports[`renderer/components/filters/UserHandleFilter.tsx should render itself &
                   />
                 </svg>
                 <span
-                  class="Text-sc-17v1xeu-0 hmAFGJ"
+                  class="Text-sc-17v1xeu-0 kbcDeY"
                 >
                   Include:
                 </span>
               </div>
             </div>
             <span
-              class="TextInputWrapper__TextInputBaseWrapper-sc-1mqhpbi-0 TextInputWrapper-sc-1mqhpbi-1 cnyBLo jdagae"
+              class="TextInputWrapper__TextInputBaseWrapper-sc-1mqhpbi-0 TextInputWrapper-sc-1mqhpbi-1 gYeYMl cxVLuL"
               disabled=""
               sx="[object Object]"
             >
               <div
-                class="Box-sc-g0xbh4-0 fmYYcM"
+                class="Box-sc-g0xbh4-0 bHhxFZ"
                 display="flex"
                 sx="[object Object]"
               >
                 <div
-                  class="Box-sc-g0xbh4-0 bbEnWh"
+                  class="Box-sc-g0xbh4-0 kqJmqw"
                   sx="[object Object]"
                 >
                   <input
                     aria-invalid="false"
-                    class="UnstyledTextInput-sc-14ypya-0 gEhuYm"
+                    class="UnstyledTextInput-sc-14ypya-0 gCkCmL"
                     disabled=""
                     sx="[object Object]"
                     title="Include handles"
@@ -161,7 +161,7 @@ exports[`renderer/components/filters/UserHandleFilter.tsx should render itself &
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+            class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -173,7 +173,7 @@ exports[`renderer/components/filters/UserHandleFilter.tsx should render itself &
               class="Box-sc-g0xbh4-0 font-medium text-gitify-font w-28"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+                class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -198,29 +198,29 @@ exports[`renderer/components/filters/UserHandleFilter.tsx should render itself &
                   />
                 </svg>
                 <span
-                  class="Text-sc-17v1xeu-0 hmAFGJ"
+                  class="Text-sc-17v1xeu-0 kbcDeY"
                 >
                   Exclude:
                 </span>
               </div>
             </div>
             <span
-              class="TextInputWrapper__TextInputBaseWrapper-sc-1mqhpbi-0 TextInputWrapper-sc-1mqhpbi-1 cnyBLo jdagae"
+              class="TextInputWrapper__TextInputBaseWrapper-sc-1mqhpbi-0 TextInputWrapper-sc-1mqhpbi-1 gYeYMl cxVLuL"
               disabled=""
               sx="[object Object]"
             >
               <div
-                class="Box-sc-g0xbh4-0 fmYYcM"
+                class="Box-sc-g0xbh4-0 bHhxFZ"
                 display="flex"
                 sx="[object Object]"
               >
                 <div
-                  class="Box-sc-g0xbh4-0 bbEnWh"
+                  class="Box-sc-g0xbh4-0 kqJmqw"
                   sx="[object Object]"
                 >
                   <input
                     aria-invalid="false"
-                    class="UnstyledTextInput-sc-14ypya-0 gEhuYm"
+                    class="UnstyledTextInput-sc-14ypya-0 gCkCmL"
                     disabled=""
                     sx="[object Object]"
                     title="Exclude handles"
@@ -240,7 +240,7 @@ exports[`renderer/components/filters/UserHandleFilter.tsx should render itself &
       id="filter-user-handles"
     >
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+        class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
         data-align="baseline"
         data-direction="horizontal"
         data-gap="condensed"
@@ -253,7 +253,7 @@ exports[`renderer/components/filters/UserHandleFilter.tsx should render itself &
             class="Box-sc-g0xbh4-0 mb-2"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+              class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -279,7 +279,7 @@ exports[`renderer/components/filters/UserHandleFilter.tsx should render itself &
                 />
               </svg>
               <h2
-                class="Heading__StyledHeading-sc-1c1dgg0-0 lfvrLU"
+                class="Heading__StyledHeading-sc-1c1dgg0-0 eQYHUB"
                 sx="[object Object]"
               >
                 Handles
@@ -312,7 +312,7 @@ exports[`renderer/components/filters/UserHandleFilter.tsx should render itself &
         </div>
       </div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+        class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
         data-align="stretch"
         data-direction="vertical"
         data-gap="condensed"
@@ -321,7 +321,7 @@ exports[`renderer/components/filters/UserHandleFilter.tsx should render itself &
         data-wrap="nowrap"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -333,7 +333,7 @@ exports[`renderer/components/filters/UserHandleFilter.tsx should render itself &
             class="Box-sc-g0xbh4-0 font-medium text-gitify-font w-28"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+              class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -358,29 +358,29 @@ exports[`renderer/components/filters/UserHandleFilter.tsx should render itself &
                 />
               </svg>
               <span
-                class="Text-sc-17v1xeu-0 hmAFGJ"
+                class="Text-sc-17v1xeu-0 kbcDeY"
               >
                 Include:
               </span>
             </div>
           </div>
           <span
-            class="TextInputWrapper__TextInputBaseWrapper-sc-1mqhpbi-0 TextInputWrapper-sc-1mqhpbi-1 cnyBLo jdagae"
+            class="TextInputWrapper__TextInputBaseWrapper-sc-1mqhpbi-0 TextInputWrapper-sc-1mqhpbi-1 gYeYMl cxVLuL"
             disabled=""
             sx="[object Object]"
           >
             <div
-              class="Box-sc-g0xbh4-0 fmYYcM"
+              class="Box-sc-g0xbh4-0 bHhxFZ"
               display="flex"
               sx="[object Object]"
             >
               <div
-                class="Box-sc-g0xbh4-0 bbEnWh"
+                class="Box-sc-g0xbh4-0 kqJmqw"
                 sx="[object Object]"
               >
                 <input
                   aria-invalid="false"
-                  class="UnstyledTextInput-sc-14ypya-0 gEhuYm"
+                  class="UnstyledTextInput-sc-14ypya-0 gCkCmL"
                   disabled=""
                   sx="[object Object]"
                   title="Include handles"
@@ -391,7 +391,7 @@ exports[`renderer/components/filters/UserHandleFilter.tsx should render itself &
           </span>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -403,7 +403,7 @@ exports[`renderer/components/filters/UserHandleFilter.tsx should render itself &
             class="Box-sc-g0xbh4-0 font-medium text-gitify-font w-28"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+              class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -428,29 +428,29 @@ exports[`renderer/components/filters/UserHandleFilter.tsx should render itself &
                 />
               </svg>
               <span
-                class="Text-sc-17v1xeu-0 hmAFGJ"
+                class="Text-sc-17v1xeu-0 kbcDeY"
               >
                 Exclude:
               </span>
             </div>
           </div>
           <span
-            class="TextInputWrapper__TextInputBaseWrapper-sc-1mqhpbi-0 TextInputWrapper-sc-1mqhpbi-1 cnyBLo jdagae"
+            class="TextInputWrapper__TextInputBaseWrapper-sc-1mqhpbi-0 TextInputWrapper-sc-1mqhpbi-1 gYeYMl cxVLuL"
             disabled=""
             sx="[object Object]"
           >
             <div
-              class="Box-sc-g0xbh4-0 fmYYcM"
+              class="Box-sc-g0xbh4-0 bHhxFZ"
               display="flex"
               sx="[object Object]"
             >
               <div
-                class="Box-sc-g0xbh4-0 bbEnWh"
+                class="Box-sc-g0xbh4-0 kqJmqw"
                 sx="[object Object]"
               >
                 <input
                   aria-invalid="false"
-                  class="UnstyledTextInput-sc-14ypya-0 gEhuYm"
+                  class="UnstyledTextInput-sc-14ypya-0 gCkCmL"
                   disabled=""
                   sx="[object Object]"
                   title="Exclude handles"
@@ -527,7 +527,7 @@ exports[`renderer/components/filters/UserHandleFilter.tsx should render itself &
         id="filter-user-handles"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
           data-align="baseline"
           data-direction="horizontal"
           data-gap="condensed"
@@ -540,7 +540,7 @@ exports[`renderer/components/filters/UserHandleFilter.tsx should render itself &
               class="Box-sc-g0xbh4-0 mb-2"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+                class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -566,7 +566,7 @@ exports[`renderer/components/filters/UserHandleFilter.tsx should render itself &
                   />
                 </svg>
                 <h2
-                  class="Heading__StyledHeading-sc-1c1dgg0-0 lfvrLU"
+                  class="Heading__StyledHeading-sc-1c1dgg0-0 eQYHUB"
                   sx="[object Object]"
                 >
                   Handles
@@ -599,7 +599,7 @@ exports[`renderer/components/filters/UserHandleFilter.tsx should render itself &
           </div>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
           data-align="stretch"
           data-direction="vertical"
           data-gap="condensed"
@@ -608,7 +608,7 @@ exports[`renderer/components/filters/UserHandleFilter.tsx should render itself &
           data-wrap="nowrap"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+            class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -620,7 +620,7 @@ exports[`renderer/components/filters/UserHandleFilter.tsx should render itself &
               class="Box-sc-g0xbh4-0 font-medium text-gitify-font w-28"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+                class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -645,28 +645,28 @@ exports[`renderer/components/filters/UserHandleFilter.tsx should render itself &
                   />
                 </svg>
                 <span
-                  class="Text-sc-17v1xeu-0 hmAFGJ"
+                  class="Text-sc-17v1xeu-0 kbcDeY"
                 >
                   Include:
                 </span>
               </div>
             </div>
             <span
-              class="TextInputWrapper__TextInputBaseWrapper-sc-1mqhpbi-0 TextInputWrapper-sc-1mqhpbi-1 dcgvNI jdagae"
+              class="TextInputWrapper__TextInputBaseWrapper-sc-1mqhpbi-0 TextInputWrapper-sc-1mqhpbi-1 izoECp cxVLuL"
               sx="[object Object]"
             >
               <div
-                class="Box-sc-g0xbh4-0 fmYYcM"
+                class="Box-sc-g0xbh4-0 bHhxFZ"
                 display="flex"
                 sx="[object Object]"
               >
                 <div
-                  class="Box-sc-g0xbh4-0 bbEnWh"
+                  class="Box-sc-g0xbh4-0 kqJmqw"
                   sx="[object Object]"
                 >
                   <input
                     aria-invalid="false"
-                    class="UnstyledTextInput-sc-14ypya-0 gEhuYm"
+                    class="UnstyledTextInput-sc-14ypya-0 gCkCmL"
                     sx="[object Object]"
                     tabindex="0"
                     title="Include handles"
@@ -677,7 +677,7 @@ exports[`renderer/components/filters/UserHandleFilter.tsx should render itself &
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+            class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -689,7 +689,7 @@ exports[`renderer/components/filters/UserHandleFilter.tsx should render itself &
               class="Box-sc-g0xbh4-0 font-medium text-gitify-font w-28"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+                class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -714,28 +714,28 @@ exports[`renderer/components/filters/UserHandleFilter.tsx should render itself &
                   />
                 </svg>
                 <span
-                  class="Text-sc-17v1xeu-0 hmAFGJ"
+                  class="Text-sc-17v1xeu-0 kbcDeY"
                 >
                   Exclude:
                 </span>
               </div>
             </div>
             <span
-              class="TextInputWrapper__TextInputBaseWrapper-sc-1mqhpbi-0 TextInputWrapper-sc-1mqhpbi-1 dcgvNI jdagae"
+              class="TextInputWrapper__TextInputBaseWrapper-sc-1mqhpbi-0 TextInputWrapper-sc-1mqhpbi-1 izoECp cxVLuL"
               sx="[object Object]"
             >
               <div
-                class="Box-sc-g0xbh4-0 fmYYcM"
+                class="Box-sc-g0xbh4-0 bHhxFZ"
                 display="flex"
                 sx="[object Object]"
               >
                 <div
-                  class="Box-sc-g0xbh4-0 bbEnWh"
+                  class="Box-sc-g0xbh4-0 kqJmqw"
                   sx="[object Object]"
                 >
                   <input
                     aria-invalid="false"
-                    class="UnstyledTextInput-sc-14ypya-0 gEhuYm"
+                    class="UnstyledTextInput-sc-14ypya-0 gCkCmL"
                     sx="[object Object]"
                     tabindex="0"
                     title="Exclude handles"
@@ -755,7 +755,7 @@ exports[`renderer/components/filters/UserHandleFilter.tsx should render itself &
       id="filter-user-handles"
     >
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+        class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
         data-align="baseline"
         data-direction="horizontal"
         data-gap="condensed"
@@ -768,7 +768,7 @@ exports[`renderer/components/filters/UserHandleFilter.tsx should render itself &
             class="Box-sc-g0xbh4-0 mb-2"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+              class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -794,7 +794,7 @@ exports[`renderer/components/filters/UserHandleFilter.tsx should render itself &
                 />
               </svg>
               <h2
-                class="Heading__StyledHeading-sc-1c1dgg0-0 lfvrLU"
+                class="Heading__StyledHeading-sc-1c1dgg0-0 eQYHUB"
                 sx="[object Object]"
               >
                 Handles
@@ -827,7 +827,7 @@ exports[`renderer/components/filters/UserHandleFilter.tsx should render itself &
         </div>
       </div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+        class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
         data-align="stretch"
         data-direction="vertical"
         data-gap="condensed"
@@ -836,7 +836,7 @@ exports[`renderer/components/filters/UserHandleFilter.tsx should render itself &
         data-wrap="nowrap"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -848,7 +848,7 @@ exports[`renderer/components/filters/UserHandleFilter.tsx should render itself &
             class="Box-sc-g0xbh4-0 font-medium text-gitify-font w-28"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+              class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -873,28 +873,28 @@ exports[`renderer/components/filters/UserHandleFilter.tsx should render itself &
                 />
               </svg>
               <span
-                class="Text-sc-17v1xeu-0 hmAFGJ"
+                class="Text-sc-17v1xeu-0 kbcDeY"
               >
                 Include:
               </span>
             </div>
           </div>
           <span
-            class="TextInputWrapper__TextInputBaseWrapper-sc-1mqhpbi-0 TextInputWrapper-sc-1mqhpbi-1 dcgvNI jdagae"
+            class="TextInputWrapper__TextInputBaseWrapper-sc-1mqhpbi-0 TextInputWrapper-sc-1mqhpbi-1 izoECp cxVLuL"
             sx="[object Object]"
           >
             <div
-              class="Box-sc-g0xbh4-0 fmYYcM"
+              class="Box-sc-g0xbh4-0 bHhxFZ"
               display="flex"
               sx="[object Object]"
             >
               <div
-                class="Box-sc-g0xbh4-0 bbEnWh"
+                class="Box-sc-g0xbh4-0 kqJmqw"
                 sx="[object Object]"
               >
                 <input
                   aria-invalid="false"
-                  class="UnstyledTextInput-sc-14ypya-0 gEhuYm"
+                  class="UnstyledTextInput-sc-14ypya-0 gCkCmL"
                   sx="[object Object]"
                   tabindex="0"
                   title="Include handles"
@@ -905,7 +905,7 @@ exports[`renderer/components/filters/UserHandleFilter.tsx should render itself &
           </span>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -917,7 +917,7 @@ exports[`renderer/components/filters/UserHandleFilter.tsx should render itself &
             class="Box-sc-g0xbh4-0 font-medium text-gitify-font w-28"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+              class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -942,28 +942,28 @@ exports[`renderer/components/filters/UserHandleFilter.tsx should render itself &
                 />
               </svg>
               <span
-                class="Text-sc-17v1xeu-0 hmAFGJ"
+                class="Text-sc-17v1xeu-0 kbcDeY"
               >
                 Exclude:
               </span>
             </div>
           </div>
           <span
-            class="TextInputWrapper__TextInputBaseWrapper-sc-1mqhpbi-0 TextInputWrapper-sc-1mqhpbi-1 dcgvNI jdagae"
+            class="TextInputWrapper__TextInputBaseWrapper-sc-1mqhpbi-0 TextInputWrapper-sc-1mqhpbi-1 izoECp cxVLuL"
             sx="[object Object]"
           >
             <div
-              class="Box-sc-g0xbh4-0 fmYYcM"
+              class="Box-sc-g0xbh4-0 bHhxFZ"
               display="flex"
               sx="[object Object]"
             >
               <div
-                class="Box-sc-g0xbh4-0 bbEnWh"
+                class="Box-sc-g0xbh4-0 kqJmqw"
                 sx="[object Object]"
               >
                 <input
                   aria-invalid="false"
-                  class="UnstyledTextInput-sc-14ypya-0 gEhuYm"
+                  class="UnstyledTextInput-sc-14ypya-0 gCkCmL"
                   sx="[object Object]"
                   tabindex="0"
                   title="Exclude handles"
