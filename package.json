@@ -177,7 +177,7 @@
     "postcss-loader": "8.1.1",
     "rimraf": "6.0.1",
     "semver": "7.7.1",
-    "styled-components": "6.1.14",
+    "styled-components": "6.1.15",
     "tailwind-merge": "3.0.1",
     "tailwindcss": "4.0.3",
     "terser-webpack-plugin": "5.3.11",
