@@ -25,6 +25,8 @@ export type Hostname = Branded<string, 'Hostname'>;
 
 export type Link = Branded<string, 'WebUrl'>;
 
+export type UserHandle = Branded<string, 'UserHandle'>;
+
 export type Status = 'loading' | 'success' | 'error';
 
 export interface Account {
@@ -45,7 +47,7 @@ export type SettingsValue =
   | Theme
   | FilterValue[];
 
-export type FilterValue = Reason | UserType | string;
+export type FilterValue = Reason | UserType | UserHandle;
 
 export type SettingsState = AppearanceSettingsState &
   NotificationSettingsState &

@@ -8,7 +8,7 @@ import {
   NoEntryFillIcon,
 } from '@primer/octicons-react';
 import { AppContext } from '../../context/App';
-import { IconColor } from '../../types';
+import { IconColor, type UserHandle } from '../../types';
 import {
   hasExcludeHandleFilters,
   hasIncludeHandleFilters,
@@ -26,6 +26,7 @@ const tokenEvents = ['Enter', 'Tab', ' ', ','];
 export const UserHandleFilter: FC = () => {
   const { updateFilter, settings } = useContext(AppContext);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: we only want to run this effect on handle filter changes
   useEffect(() => {
     if (!hasIncludeHandleFilters(settings)) {
       setIncludeHandles([]);
@@ -49,7 +50,7 @@ export const UserHandleFilter: FC = () => {
 
   const removeIncludeHandleToken = (tokenId: string | number) => {
     const value = includeHandles.find((v) => v.id === tokenId)?.text || '';
-    updateFilter('filterIncludeHandles', value, false);
+    updateFilter('filterIncludeHandles', value as UserHandle, false);
 
     setIncludeHandles(includeHandles.filter((v) => v.id !== tokenId));
   };
@@ -70,7 +71,7 @@ export const UserHandleFilter: FC = () => {
         ...includeHandles,
         { id: includeHandles.length, text: value },
       ]);
-      updateFilter('filterIncludeHandles', value, true);
+      updateFilter('filterIncludeHandles', value as UserHandle, true);
 
       (event.target as HTMLInputElement).value = '';
     }
@@ -82,7 +83,7 @@ export const UserHandleFilter: FC = () => {
 
   const removeExcludeHandleToken = (tokenId: string | number) => {
     const value = excludeHandles.find((v) => v.id === tokenId)?.text || '';
-    updateFilter('filterExcludeHandles', value, false);
+    updateFilter('filterExcludeHandles', value as UserHandle, false);
 
     setExcludeHandles(excludeHandles.filter((v) => v.id !== tokenId));
   };
@@ -103,7 +104,7 @@ export const UserHandleFilter: FC = () => {
         ...excludeHandles,
         { id: excludeHandles.length, text: value },
       ]);
-      updateFilter('filterExcludeHandles', value, true);
+      updateFilter('filterExcludeHandles', value as UserHandle, true);
 
       (event.target as HTMLInputElement).value = '';
     }

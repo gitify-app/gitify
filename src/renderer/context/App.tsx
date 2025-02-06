@@ -245,7 +245,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         ? [...settings[name], value]
         : settings[name].filter((item) => item !== value);
 
-      updateSetting(name, updatedFilters);
+      updateSetting(name, updatedFilters as FilterValue[]);
     },
     [updateSetting, settings],
   );
