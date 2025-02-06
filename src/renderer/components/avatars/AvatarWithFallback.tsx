@@ -26,6 +26,7 @@ export const AvatarWithFallback: React.FC<IAvatarWithFallback> = ({
   const [isBroken, setIsBroken] = useState(false);
 
   const isNonHuman = isNonHumanUser(userType);
+  const DefaultUserIcon = isNonHuman ? MarkGithubIcon : FeedPersonIcon;
 
   // TODO explore using AnchoredOverlay component (https://primer.style/components/anchored-overlay/react/alpha) to render Avatar Card on hover
   return (
@@ -36,11 +37,7 @@ export const AvatarWithFallback: React.FC<IAvatarWithFallback> = ({
       data-testid="avatar"
     >
       {!src || isBroken ? (
-        isNonHuman ? (
-          <MarkGithubIcon size={size} />
-        ) : (
-          <FeedPersonIcon size={size} />
-        )
+        <DefaultUserIcon size={size} />
       ) : (
         <Avatar
           src={src}
