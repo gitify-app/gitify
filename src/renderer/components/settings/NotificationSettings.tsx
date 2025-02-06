@@ -102,28 +102,28 @@ export const NotificationSettings: FC = () => {
                 <Stack direction="vertical" gap="condensed">
                   <Text>Show notification metric pills for:</Text>
                   <Box className="pl-4">
-                    <ul>
-                      <li className="flex items-center gap-1">
+                    <Stack direction="vertical" gap="none">
+                      <Stack direction="horizontal" gap="condensed">
                         <IssueClosedIcon size={Size.SMALL} />
                         linked issues
-                      </li>
-                      <li className="flex items-center gap-1">
+                      </Stack>
+                      <Stack direction="horizontal" gap="condensed">
                         <CheckIcon size={Size.SMALL} />
                         pr reviews
-                      </li>
-                      <li className="flex items-center gap-1">
+                      </Stack>
+                      <Stack direction="horizontal" gap="condensed">
                         <CommentIcon size={Size.SMALL} />
                         comments
-                      </li>
-                      <li className="flex items-center gap-1">
+                      </Stack>
+                      <Stack direction="horizontal" gap="condensed">
                         <TagIcon size={Size.SMALL} />
                         labels
-                      </li>
-                      <li className="flex items-center gap-1">
+                      </Stack>
+                      <Stack direction="horizontal" gap="condensed">
                         <MilestoneIcon size={Size.SMALL} />
                         milestones
-                      </li>
-                    </ul>
+                      </Stack>
+                    </Stack>
                   </Box>
                 </Stack>
               }
