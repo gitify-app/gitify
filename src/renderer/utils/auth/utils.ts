@@ -54,7 +54,9 @@ export function authGitHub(
         });
       } else if (error) {
         reject(
-          `Oops! Something went wrong and we couldn't log you in using GitHub. Please try again. Reason: ${errorDescription} Docs: ${errorUri}`,
+          new Error(
+            `Oops! Something went wrong and we couldn't log you in using GitHub. Please try again. Reason: ${errorDescription} Docs: ${errorUri}`,
+          ),
         );
       }
     };

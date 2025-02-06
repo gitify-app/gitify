@@ -54,11 +54,11 @@ export const Checkbox: FC<ICheckbox> = ({
           <Tooltip name={`tooltip-${props.name}`} tooltip={props.tooltip} />
         )}
 
-        {counter && (
+        {counter ? (
           <CounterLabel scheme={props.checked ? 'primary' : 'secondary'}>
             {counter}
           </CounterLabel>
-        )}
+        ) : null}
       </Stack>
     )
   );
