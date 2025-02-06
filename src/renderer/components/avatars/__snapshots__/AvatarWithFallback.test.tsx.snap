@@ -6,7 +6,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx renders the fallback
   "baseElement": <body>
     <div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+        class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
         data-align="center"
         data-direction="horizontal"
         data-gap="condensed"
@@ -32,7 +32,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx renders the fallback
           />
         </svg>
         <div
-          class="Truncate__StyledTruncate-sc-23o1d2-0 ldPZNj"
+          class="Truncate__StyledTruncate-sc-23o1d2-0 kaotsm"
           maxwidth="280"
           title="@gitify-app"
         >
@@ -43,7 +43,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx renders the fallback
   </body>,
   "container": <div>
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+      class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
       data-align="center"
       data-direction="horizontal"
       data-gap="condensed"
@@ -69,7 +69,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx renders the fallback
         />
       </svg>
       <div
-        class="Truncate__StyledTruncate-sc-23o1d2-0 ldPZNj"
+        class="Truncate__StyledTruncate-sc-23o1d2-0 kaotsm"
         maxwidth="280"
         title="@gitify-app"
       >
@@ -137,7 +137,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx renders the fallback
   "baseElement": <body>
     <div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+        class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
         data-align="center"
         data-direction="horizontal"
         data-gap="condensed"
@@ -163,7 +163,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx renders the fallback
           />
         </svg>
         <div
-          class="Truncate__StyledTruncate-sc-23o1d2-0 ldPZNj"
+          class="Truncate__StyledTruncate-sc-23o1d2-0 kaotsm"
           maxwidth="280"
           title="@gitify-app"
         >
@@ -174,7 +174,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx renders the fallback
   </body>,
   "container": <div>
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+      class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
       data-align="center"
       data-direction="horizontal"
       data-gap="condensed"
@@ -200,7 +200,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx renders the fallback
         />
       </svg>
       <div
-        class="Truncate__StyledTruncate-sc-23o1d2-0 ldPZNj"
+        class="Truncate__StyledTruncate-sc-23o1d2-0 kaotsm"
         maxwidth="280"
         title="@gitify-app"
       >
@@ -264,7 +264,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx renders the fallback
 
 exports[`renderer/components/avatars/AvatarWithFallback.tsx renders the fallback icon when the image fails to load (isBroken = true) - human user 1`] = `
 <div
-  class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+  class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
   data-align="center"
   data-direction="horizontal"
   data-gap="condensed"
@@ -275,7 +275,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx renders the fallback
 >
   <img
     alt="gitify-app"
-    class="Avatar__StyledAvatar-sc-2lv0r8-0 kuZlm"
+    class="Avatar__StyledAvatar-sc-2lv0r8-0 eNjGPf"
     data-component="Avatar"
     height="16"
     size="16"
@@ -284,7 +284,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx renders the fallback
     width="16"
   />
   <div
-    class="Truncate__StyledTruncate-sc-23o1d2-0 ldPZNj"
+    class="Truncate__StyledTruncate-sc-23o1d2-0 kaotsm"
     maxwidth="280"
     title="@gitify-app"
   >
@@ -295,7 +295,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx renders the fallback
 
 exports[`renderer/components/avatars/AvatarWithFallback.tsx renders the fallback icon when the image fails to load (isBroken = true) - non human user 1`] = `
 <div
-  class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+  class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
   data-align="center"
   data-direction="horizontal"
   data-gap="condensed"
@@ -306,7 +306,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx renders the fallback
 >
   <img
     alt="gitify-app"
-    class="Avatar__StyledAvatar-sc-2lv0r8-0 fdrsHc"
+    class="Avatar__StyledAvatar-sc-2lv0r8-0 csxFnd"
     data-component="Avatar"
     height="16"
     size="16"
@@ -315,7 +315,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx renders the fallback
     width="16"
   />
   <div
-    class="Truncate__StyledTruncate-sc-23o1d2-0 ldPZNj"
+    class="Truncate__StyledTruncate-sc-23o1d2-0 kaotsm"
     maxwidth="280"
     title="@gitify-app"
   >
@@ -330,7 +330,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx should render avatar
   "baseElement": <body>
     <div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+        class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
         data-align="center"
         data-direction="horizontal"
         data-gap="condensed"
@@ -341,7 +341,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx should render avatar
       >
         <img
           alt="gitify-app"
-          class="Avatar__StyledAvatar-sc-2lv0r8-0 kuZlm"
+          class="Avatar__StyledAvatar-sc-2lv0r8-0 eNjGPf"
           data-component="Avatar"
           height="16"
           size="16"
@@ -350,7 +350,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx should render avatar
           width="16"
         />
         <div
-          class="Truncate__StyledTruncate-sc-23o1d2-0 ldPZNj"
+          class="Truncate__StyledTruncate-sc-23o1d2-0 kaotsm"
           maxwidth="280"
           title="@gitify-app"
         >
@@ -361,7 +361,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx should render avatar
   </body>,
   "container": <div>
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+      class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
       data-align="center"
       data-direction="horizontal"
       data-gap="condensed"
@@ -372,7 +372,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx should render avatar
     >
       <img
         alt="gitify-app"
-        class="Avatar__StyledAvatar-sc-2lv0r8-0 kuZlm"
+        class="Avatar__StyledAvatar-sc-2lv0r8-0 eNjGPf"
         data-component="Avatar"
         height="16"
         size="16"
@@ -381,7 +381,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx should render avatar
         width="16"
       />
       <div
-        class="Truncate__StyledTruncate-sc-23o1d2-0 ldPZNj"
+        class="Truncate__StyledTruncate-sc-23o1d2-0 kaotsm"
         maxwidth="280"
         title="@gitify-app"
       >
@@ -449,7 +449,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx should render avatar
   "baseElement": <body>
     <div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+        class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
         data-align="center"
         data-direction="horizontal"
         data-gap="condensed"
@@ -460,7 +460,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx should render avatar
       >
         <img
           alt="gitify-app"
-          class="Avatar__StyledAvatar-sc-2lv0r8-0 fdrsHc"
+          class="Avatar__StyledAvatar-sc-2lv0r8-0 csxFnd"
           data-component="Avatar"
           height="16"
           size="16"
@@ -469,7 +469,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx should render avatar
           width="16"
         />
         <div
-          class="Truncate__StyledTruncate-sc-23o1d2-0 ldPZNj"
+          class="Truncate__StyledTruncate-sc-23o1d2-0 kaotsm"
           maxwidth="280"
           title="@gitify-app"
         >
@@ -480,7 +480,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx should render avatar
   </body>,
   "container": <div>
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+      class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
       data-align="center"
       data-direction="horizontal"
       data-gap="condensed"
@@ -491,7 +491,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx should render avatar
     >
       <img
         alt="gitify-app"
-        class="Avatar__StyledAvatar-sc-2lv0r8-0 fdrsHc"
+        class="Avatar__StyledAvatar-sc-2lv0r8-0 csxFnd"
         data-component="Avatar"
         height="16"
         size="16"
@@ -500,7 +500,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx should render avatar
         width="16"
       />
       <div
-        class="Truncate__StyledTruncate-sc-23o1d2-0 ldPZNj"
+        class="Truncate__StyledTruncate-sc-23o1d2-0 kaotsm"
         maxwidth="280"
         title="@gitify-app"
       >
