@@ -23,7 +23,6 @@ import {
   getChevronDetails,
   getPlatformFromHostname,
   isEnterpriseServerHost,
-  isNonHumanUser,
 } from './helpers';
 
 describe('renderer/utils/helpers.ts', () => {
@@ -552,13 +551,5 @@ describe('renderer/utils/helpers.ts', () => {
         label: 'No notifications for account',
       });
     });
-  });
-
-  it('isNonHumanUser', () => {
-    expect(isNonHumanUser('User')).toBe(false);
-    expect(isNonHumanUser('EnterpriseUserAccount')).toBe(false);
-    expect(isNonHumanUser('Bot')).toBe(true);
-    expect(isNonHumanUser('Organization')).toBe(true);
-    expect(isNonHumanUser('Mannequin')).toBe(true);
   });
 });

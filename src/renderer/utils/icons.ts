@@ -7,6 +7,7 @@ import {
   DiscussionClosedIcon,
   DiscussionDuplicateIcon,
   DiscussionOutdatedIcon,
+  FeedPersonIcon,
   FileDiffIcon,
   GitCommitIcon,
   GitMergeIcon,
@@ -21,6 +22,7 @@ import {
   MailIcon,
   MarkGithubIcon,
   type OcticonProps,
+  OrganizationIcon,
   PersonIcon,
   QuestionIcon,
   RocketIcon,
@@ -32,7 +34,11 @@ import {
 } from '@primer/octicons-react';
 import type { FC } from 'react';
 import { IconColor, type PullRequestApprovalIcon } from '../types';
-import type { GitifyPullRequestReview, Subject } from '../typesGitHub';
+import type {
+  GitifyPullRequestReview,
+  Subject,
+  UserType,
+} from '../typesGitHub';
 import type { AuthMethod, PlatformType } from './auth/types';
 
 export function getNotificationTypeIcon(subject: Subject): FC<OcticonProps> {
@@ -178,5 +184,17 @@ export function getPlatformIcon(
       return ServerIcon;
     default:
       return MarkGithubIcon;
+  }
+}
+
+export function getDefaultUserIcon(userType: UserType) {
+  switch (userType) {
+    case 'Bot':
+    case 'Mannequin':
+      return MarkGithubIcon;
+    case 'Organization':
+      return OrganizationIcon;
+    default:
+      return FeedPersonIcon;
   }
 }
