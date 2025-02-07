@@ -338,8 +338,7 @@ export function parseLinkedIssuesFromPr(pr: PullRequest): string[] {
     return linkedIssues;
   }
 
-  const regexPattern = /\s*#(\d+)\s*/gi;
-
+  const regexPattern = /\s?#(\d+)\s?/gi;
   const matches = pr.body.matchAll(regexPattern);
 
   for (const match of matches) {
