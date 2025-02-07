@@ -23,7 +23,9 @@ export const MetricPill: FC<IMetricPill> = (props: IMetricPill) => {
     >
       <Stack direction="horizontal" align="center" gap="none">
         <props.icon size={Size.XSMALL} className={props.color} />
-        {props.metric && <Text className="text-xxs px-1">{props.metric}</Text>}
+        {props.metric ? (
+          <Text className="text-xxs px-1">{props.metric}</Text>
+        ) : null}
       </Stack>
     </Label>
   );

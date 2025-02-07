@@ -85,8 +85,9 @@ export const NotificationRow: FC<INotificationRow> = ({
     ? `#${notification.subject.number}`
     : '';
 
-  const notificationTitle =
-    `${notification.subject.title} ${notificationNumber && `[${notificationNumber}]`}`.trim();
+  const notificationTitle = notificationNumber
+    ? `${notification.subject.title} [${notificationNumber}]`
+    : notification.subject.title;
 
   const groupByDate = settings.groupBy === GroupBy.DATE;
 
