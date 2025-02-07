@@ -6,7 +6,7 @@ import {
 
 import { logError, logWarn } from '../../shared/logger';
 import type { Chevron, Hostname, Link } from '../types';
-import type { Notification, UserType } from '../typesGitHub';
+import type { Notification } from '../typesGitHub';
 import { getHtmlUrl, getLatestDiscussion } from './api/client';
 import type { PlatformType } from './auth/types';
 import { Constants } from './constants';
@@ -209,8 +209,4 @@ export function getChevronDetails(
     icon: ChevronRightIcon,
     label: `Show ${type} notifications`,
   };
-}
-
-export function isNonHumanUser(type: UserType): boolean {
-  return type === 'Bot' || type === 'Organization' || type === 'Mannequin';
 }

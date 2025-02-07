@@ -60,3 +60,7 @@ export function filterNotificationByUserType(
 
   return notification.subject?.user?.type === userType;
 }
+
+export function isNonHumanUser(type: UserType): boolean {
+  return type === 'Bot' || type === 'Organization' || type === 'Mannequin';
+}
