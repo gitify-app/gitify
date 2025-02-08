@@ -166,9 +166,34 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     fetchNotifications({ auth, settings });
   }, [auth.accounts, settings.filterReasons, settings.hideBots]);
 
-  useInterval(() => {
-    fetchNotifications({ auth, settings });
-  }, Constants.FETCH_NOTIFICATIONS_INTERVAL);
+  useEffect(() => {
+    let timeout: NodeJS.Timeout;
+
+    const resetTimeout = () => {
+      if (timeout) {
+        clearTimeout(timeout);
+      }
+      timeout = setTimeout(() => {
+        fetchNotifications({ auth, settings });
+      }, Constants.FETCH_NOTIFICATIONS_INTERVAL);
+    };
+
+    const handleActivity = () => {
+      console.log('Activity detected');
+      resetTimeout();
+    };
+
+    window.addEventListener('mousedown', handleActivity);
+    window.addEventListener('keydown', handleActivity);
+
+    resetTimeout();
+
+    return () => {
+      clearTimeout(timeout);
+      window.removeEventListener('mousedown', handleActivity);
+      window.removeEventListener('keydown', handleActivity);
+    };
+  }, [auth, settings, fetchNotifications]);
 
   useInterval(() => {
     for (const account of auth.accounts) {
