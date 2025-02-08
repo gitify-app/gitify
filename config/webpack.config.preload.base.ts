@@ -10,7 +10,7 @@ const configuration: webpack.Configuration = {
 
   mode: 'development',
 
-  target: 'electron-main',
+  target: 'electron-preload',
 
   entry: [path.join(webpackPaths.srcMainPath, 'preload.ts')],
 

@@ -21,12 +21,11 @@ const browserWindowOpts = {
   minHeight: 400,
   resizable: false,
   skipTaskbar: true, // Hide the app from the Windows taskbar
-  // TODO #700 refactor to use preload script with a context bridge
   webPreferences: {
     preload: path.join(__dirname, 'preload.js'),
-    contextIsolation: true, // TODO change this
+    contextIsolation: true,
     enableRemoteModule: false,
-    nodeIntegration: false, // TODO change this
+    nodeIntegration: false,
   },
 };
 

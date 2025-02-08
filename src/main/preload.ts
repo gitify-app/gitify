@@ -5,9 +5,6 @@ import { Constants } from '../renderer/utils/constants';
 import type { GitifyAPI } from './types';
 
 const api: GitifyAPI = {
-  // Define the global variable
-  global: globalThis,
-
   openExternalLink: (url) =>
     ipcRenderer.send(namespacedEvent('open-external-link'), url),
 

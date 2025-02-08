@@ -1,5 +1,4 @@
 export interface GitifyAPI {
-  global: typeof globalThis;
   openExternalLink: (url: string) => void;
   getAppVersion: () => Promise<string>;
   encryptValue: (value: string) => Promise<string>;
