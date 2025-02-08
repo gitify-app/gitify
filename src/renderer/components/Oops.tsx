@@ -13,7 +13,6 @@ export const Oops: FC<IOops> = ({ error, fullHeight = true }: IOops) => {
   const err = error ?? Errors.UNKNOWN;
 
   const emoji = useMemo(
-    // NOSONAR: Non-secure PRNG is acceptable here
     () => err.emojis[Math.floor(Math.random() * err.emojis.length)],
     [err],
   );
