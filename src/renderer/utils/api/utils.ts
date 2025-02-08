@@ -28,6 +28,6 @@ export function getNextURLFromLinkHeader(
   response: AxiosResponse,
 ): string | null {
   const linkHeader = response.headers.link;
-  const matches = linkHeader?.match(/<([^>]+)>;\s*rel="next"/);
+  const matches = linkHeader?.match(/<([^<>]+)>;\s*rel="next"/);
   return matches ? matches[1] : null;
 }
