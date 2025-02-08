@@ -5,7 +5,7 @@ import { listNotificationsForAuthenticatedUser } from '../api/client';
 import { determineFailureType } from '../api/errors';
 import { updateTrayIcon } from '../comms';
 import { getGitifySubjectDetails } from '../subject';
-import { filterNotifications } from './filter';
+import { filterNotifications } from './filters/filter';
 
 export function setTrayIconColor(notifications: AccountNotifications[]) {
   const allNotificationsCount = getNotificationCount(notifications);
@@ -15,7 +15,7 @@ export function setTrayIconColor(notifications: AccountNotifications[]) {
 
 export function getNotificationCount(notifications: AccountNotifications[]) {
   return notifications.reduce(
-    (memo, acc) => memo + acc.notifications.length,
+    (sum, account) => sum + account.notifications.length,
     0,
   );
 }

@@ -19,6 +19,7 @@ import {
   type AppearanceSettingsState,
   type AuthState,
   type FilterSettingsState,
+  type FilterValue,
   type GitifyError,
   GroupBy,
   type NotificationSettingsState,
@@ -97,7 +98,9 @@ const defaultSystemSettings: SystemSettingsState = {
 };
 
 export const defaultFilters: FilterSettingsState = {
-  hideBots: false,
+  filterUserTypes: [],
+  filterIncludeHandles: [],
+  filterExcludeHandles: [],
   filterReasons: [],
 };
 
@@ -111,10 +114,12 @@ export const defaultSettings: SettingsState = {
 interface AppContextState {
   auth: AuthState;
   isLoggedIn: boolean;
-  loginWithGitHubApp: () => void;
-  loginWithOAuthApp: (data: LoginOAuthAppOptions) => void;
-  loginWithPersonalAccessToken: (data: LoginPersonalAccessTokenOptions) => void;
-  logoutFromAccount: (account: Account) => void;
+  loginWithGitHubApp: () => Promise<void>;
+  loginWithOAuthApp: (data: LoginOAuthAppOptions) => Promise<void>;
+  loginWithPersonalAccessToken: (
+    data: LoginPersonalAccessTokenOptions,
+  ) => Promise<void>;
+  logoutFromAccount: (account: Account) => Promise<void>;
 
   notifications: AccountNotifications[];
   status: Status;
@@ -129,6 +134,11 @@ interface AppContextState {
   clearFilters: () => void;
   resetSettings: () => void;
   updateSetting: (name: keyof SettingsState, value: SettingsValue) => void;
+  updateFilter: (
+    name: keyof FilterSettingsState,
+    value: FilterValue,
+    checked: boolean,
+  ) => void;
 }
 
 export const AppContext = createContext<Partial<AppContextState>>({});
@@ -164,7 +174,13 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   // biome-ignore lint/correctness/useExhaustiveDependencies: We only want fetchNotifications to be called for particular state changes
   useEffect(() => {
     fetchNotifications({ auth, settings });
-  }, [auth.accounts, settings.filterReasons, settings.hideBots]);
+  }, [
+    auth.accounts,
+    settings.filterUserTypes,
+    settings.filterIncludeHandles,
+    settings.filterExcludeHandles,
+    settings.filterReasons,
+  ]);
 
   useEffect(() => {
     let timeout: NodeJS.Timeout;
@@ -248,6 +264,17 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       saveState({ auth, settings: newSettings });
     },
     [auth, settings],
+  );
+
+  const updateFilter = useCallback(
+    (name: keyof FilterSettingsState, value: FilterValue, checked: boolean) => {
+      const updatedFilters = checked
+        ? [...settings[name], value]
+        : settings[name].filter((item) => item !== value);
+
+      updateSetting(name, updatedFilters as FilterValue[]);
+    },
+    [updateSetting, settings],
   );
 
   const isLoggedIn = useMemo(() => {
@@ -381,6 +408,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         clearFilters,
         resetSettings,
         updateSetting,
+        updateFilter,
       }}
     >
       {children}

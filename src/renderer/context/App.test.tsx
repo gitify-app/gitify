@@ -351,7 +351,9 @@ describe('renderer/context/App.tsx', () => {
         } as AuthState,
         settings: {
           ...mockSettings,
-          hideBots: defaultSettings.hideBots,
+          filterUserTypes: defaultSettings.filterUserTypes,
+          filterIncludeHandles: defaultSettings.filterIncludeHandles,
+          filterExcludeHandles: defaultSettings.filterExcludeHandles,
           filterReasons: defaultSettings.filterReasons,
         },
       });

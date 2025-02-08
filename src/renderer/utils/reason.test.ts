@@ -1,23 +1,25 @@
 import type { Reason } from '../typesGitHub';
-import { formatReason } from './reason';
+import { getReasonDetails } from './reason';
 
 describe('renderer/utils/reason.ts', () => {
-  it('formatReason - should format the notification reason', () => {
-    expect(formatReason('approval_requested')).toMatchSnapshot();
-    expect(formatReason('assign')).toMatchSnapshot();
-    expect(formatReason('author')).toMatchSnapshot();
-    expect(formatReason('ci_activity')).toMatchSnapshot();
-    expect(formatReason('comment')).toMatchSnapshot();
-    expect(formatReason('invitation')).toMatchSnapshot();
-    expect(formatReason('manual')).toMatchSnapshot();
-    expect(formatReason('member_feature_requested')).toMatchSnapshot();
-    expect(formatReason('mention')).toMatchSnapshot();
-    expect(formatReason('review_requested')).toMatchSnapshot();
-    expect(formatReason('security_advisory_credit')).toMatchSnapshot();
-    expect(formatReason('security_alert')).toMatchSnapshot();
-    expect(formatReason('state_change')).toMatchSnapshot();
-    expect(formatReason('subscribed')).toMatchSnapshot();
-    expect(formatReason('team_mention')).toMatchSnapshot();
-    expect(formatReason('something_else_unknown' as Reason)).toMatchSnapshot();
+  it('getReasonDetails - should get details for notification reason', () => {
+    expect(getReasonDetails('approval_requested')).toMatchSnapshot();
+    expect(getReasonDetails('assign')).toMatchSnapshot();
+    expect(getReasonDetails('author')).toMatchSnapshot();
+    expect(getReasonDetails('ci_activity')).toMatchSnapshot();
+    expect(getReasonDetails('comment')).toMatchSnapshot();
+    expect(getReasonDetails('invitation')).toMatchSnapshot();
+    expect(getReasonDetails('manual')).toMatchSnapshot();
+    expect(getReasonDetails('member_feature_requested')).toMatchSnapshot();
+    expect(getReasonDetails('mention')).toMatchSnapshot();
+    expect(getReasonDetails('review_requested')).toMatchSnapshot();
+    expect(getReasonDetails('security_advisory_credit')).toMatchSnapshot();
+    expect(getReasonDetails('security_alert')).toMatchSnapshot();
+    expect(getReasonDetails('state_change')).toMatchSnapshot();
+    expect(getReasonDetails('subscribed')).toMatchSnapshot();
+    expect(getReasonDetails('team_mention')).toMatchSnapshot();
+    expect(
+      getReasonDetails('something_else_unknown' as Reason),
+    ).toMatchSnapshot();
   });
 });

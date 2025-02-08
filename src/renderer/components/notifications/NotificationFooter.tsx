@@ -6,7 +6,7 @@ import { Opacity, Size } from '../../types';
 import type { Notification } from '../../typesGitHub';
 import { cn } from '../../utils/cn';
 import { openUserProfile } from '../../utils/links';
-import { formatReason } from '../../utils/reason';
+import { getReasonDetails } from '../../utils/reason';
 import { AvatarWithFallback } from '../avatars/AvatarWithFallback';
 import { MetricGroup } from '../metrics/MetricGroup';
 
@@ -17,7 +17,7 @@ interface INotificationFooter {
 export const NotificationFooter: FC<INotificationFooter> = ({
   notification,
 }: INotificationFooter) => {
-  const reason = formatReason(notification.reason);
+  const reason = getReasonDetails(notification.reason);
 
   return (
     <Stack

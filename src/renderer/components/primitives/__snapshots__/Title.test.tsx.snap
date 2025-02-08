@@ -7,7 +7,7 @@ exports[`renderer/routes/components/primitives/Title.tsx should render the title
       class="Box-sc-g0xbh4-0 mb-2"
     >
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+        class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
         data-align="center"
         data-direction="horizontal"
         data-gap="condensed"
@@ -33,7 +33,7 @@ exports[`renderer/routes/components/primitives/Title.tsx should render the title
           />
         </svg>
         <h2
-          class="Heading__StyledHeading-sc-1c1dgg0-0 lfvrLU"
+          class="Heading__StyledHeading-sc-1c1dgg0-0 eQYHUB"
           sx="[object Object]"
         >
           Legend
@@ -51,7 +51,7 @@ exports[`renderer/routes/components/primitives/Title.tsx should render the title
       class="Box-sc-g0xbh4-0 mb-2"
     >
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+        class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
         data-align="center"
         data-direction="horizontal"
         data-gap="condensed"
@@ -77,7 +77,7 @@ exports[`renderer/routes/components/primitives/Title.tsx should render the title
           />
         </svg>
         <h2
-          class="Heading__StyledHeading-sc-1c1dgg0-0 gSteSt"
+          class="Heading__StyledHeading-sc-1c1dgg0-0 fBrWqc"
           sx="[object Object]"
         >
           Legend

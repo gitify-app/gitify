@@ -14,9 +14,7 @@ describe('renderer/components/AllRead.tsx', () => {
     const tree = render(
       <AppContext.Provider
         value={{
-          settings: {
-            ...mockSettings,
-          },
+          settings: mockSettings,
         }}
       >
         <MemoryRouter>
@@ -35,7 +33,6 @@ describe('renderer/components/AllRead.tsx', () => {
           settings: {
             ...mockSettings,
             filterReasons: ['author'],
-            hideBots: true,
           },
         }}
       >

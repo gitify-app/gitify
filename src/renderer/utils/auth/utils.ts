@@ -54,7 +54,9 @@ export function authGitHub(
         });
       } else if (error) {
         reject(
-          `Oops! Something went wrong and we couldn't log you in using GitHub. Please try again. Reason: ${errorDescription} Docs: ${errorUri}`,
+          new Error(
+            `Oops! Something went wrong and we couldn't log you in using GitHub. Please try again. Reason: ${errorDescription} Docs: ${errorUri}`,
+          ),
         );
       }
     };
@@ -257,9 +259,7 @@ export function getNewOAuthAppURL(hostname: Hostname): Link {
 }
 
 export function isValidHostname(hostname: Hostname) {
-  return /^([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}$/i.test(
-    hostname,
-  );
+  return /^([A-Z0-9]([A-Z0-9-]{0,61}[A-Z0-9])?\.)+[A-Z]{2,6}$/i.test(hostname);
 }
 
 export function isValidClientId(clientId: ClientID) {

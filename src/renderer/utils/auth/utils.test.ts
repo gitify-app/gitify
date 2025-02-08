@@ -101,7 +101,9 @@ describe('renderer/utils/auth/utils.ts', () => {
       });
 
       await expect(async () => await auth.authGitHub()).rejects.toEqual(
-        "Oops! Something went wrong and we couldn't log you in using GitHub. Please try again. Reason: The redirect_uri is missing or invalid. Docs: https://docs.github.com/en/developers/apps/troubleshooting-oauth-errors",
+        new Error(
+          "Oops! Something went wrong and we couldn't log you in using GitHub. Please try again. Reason: The redirect_uri is missing or invalid. Docs: https://docs.github.com/en/developers/apps/troubleshooting-oauth-errors",
+        ),
       );
 
       expect(openExternalLinkMock).toHaveBeenCalledTimes(1);

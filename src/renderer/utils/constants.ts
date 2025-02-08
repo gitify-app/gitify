@@ -1,5 +1,4 @@
-import type { Link } from '../types';
-import type { ClientID, ClientSecret, Hostname } from '../types';
+import type { ClientID, ClientSecret, Hostname, Link } from '../types';
 
 export const Constants = {
   REPO_SLUG: 'gitify-app/gitify',

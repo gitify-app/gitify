@@ -21,9 +21,9 @@ export const LoginRoute: FC = () => {
     }
   }, [isLoggedIn]);
 
-  const loginUser = useCallback(() => {
+  const loginUser = useCallback(async () => {
     try {
-      loginWithGitHubApp();
+      await loginWithGitHubApp();
     } catch (err) {
       logError('loginWithGitHubApp', 'failed to login with GitHub', err);
     }
