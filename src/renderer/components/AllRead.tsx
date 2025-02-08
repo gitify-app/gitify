@@ -17,6 +17,7 @@ export const AllRead: FC<IAllRead> = ({ fullHeight = true }: IAllRead) => {
   const emoji = useMemo(
     () =>
       Constants.ALL_READ_EMOJIS[
+        // NOSONAR: Non-secure PRNG is acceptable here
         Math.floor(Math.random() * Constants.ALL_READ_EMOJIS.length)
       ],
     [],
