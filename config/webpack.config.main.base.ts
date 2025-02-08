@@ -19,7 +19,7 @@ const configuration: webpack.Configuration = {
 
   output: {
     path: webpackPaths.buildPath,
-    filename: 'main.js',
+    filename: '[name].js',
     library: {
       type: 'umd',
     },
