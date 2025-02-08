@@ -1,3 +1,4 @@
+import path from 'path';
 import { app, globalShortcut, ipcMain as ipc, safeStorage } from 'electron';
 import log from 'electron-log';
 import { menubar } from 'menubar';
@@ -22,8 +23,10 @@ const browserWindowOpts = {
   skipTaskbar: true, // Hide the app from the Windows taskbar
   // TODO #700 refactor to use preload script with a context bridge
   webPreferences: {
-    nodeIntegration: true,
-    contextIsolation: false,
+    preload: path.join(__dirname, 'preload.js'),
+    contextIsolation: true, // TODO change this
+    enableRemoteModule: false,
+    nodeIntegration: false, // TODO change this
   },
 };
 
@@ -125,7 +128,7 @@ app.whenReady().then(async () => {
 
   ipc.on(namespacedEvent('window-hide'), () => mb.hideWindow());
 
-  ipc.on(namespacedEvent('quit'), () => mb.app.quit());
+  // ipc.on(namespacedEvent('quit'), () => mb.app.quit());
 
   ipc.on(
     namespacedEvent('use-alternate-idle-icon'),
