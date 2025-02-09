@@ -127,7 +127,10 @@ app.whenReady().then(async () => {
 
   ipc.on(namespacedEvent('window-hide'), () => mb.hideWindow());
 
-  // ipc.on(namespacedEvent('quit'), () => mb.app.quit());
+  ipc.on(namespacedEvent('quit'), () => {
+    console.log('MAIN DEBUGGING - quit app event');
+    mb.app.quit();
+  });
 
   ipc.on(
     namespacedEvent('use-alternate-idle-icon'),
