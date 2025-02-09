@@ -4,7 +4,7 @@ import { DeviceDesktopIcon } from '@primer/octicons-react';
 import { Box, Stack, Text } from '@primer/react';
 
 import { APPLICATION } from '../../../shared/constants';
-import { isLinux, isMacOS } from '../../../shared/platform';
+// import { isLinux, isMacOS } from '../../../shared/platform';
 import { AppContext } from '../../context/App';
 import { OpenPreference } from '../../types';
 import { Constants } from '../../utils/constants';
@@ -55,7 +55,7 @@ export const SystemSettings: FC = () => {
           name="showNotificationsCountInTray"
           label="Show notification count in tray"
           checked={settings.showNotificationsCountInTray}
-          visible={isMacOS()}
+          visible={window.gitify.isMacOS()}
           onChange={(evt) =>
             updateSetting('showNotificationsCountInTray', evt.target.checked)
           }
@@ -102,7 +102,7 @@ export const SystemSettings: FC = () => {
           name="openAtStartup"
           label="Open at startup"
           checked={settings.openAtStartup}
-          visible={!isLinux()}
+          visible={!window.gitify.isLinux()}
           onChange={(evt) => updateSetting('openAtStartup', evt.target.checked)}
         />
       </Stack>

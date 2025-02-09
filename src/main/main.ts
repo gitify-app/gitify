@@ -1,4 +1,4 @@
-import path from 'path';
+import path from 'node:path';
 import { app, globalShortcut, ipcMain as ipc, safeStorage } from 'electron';
 import log from 'electron-log';
 import { menubar } from 'menubar';

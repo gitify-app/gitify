@@ -1,4 +1,4 @@
-import type { GitifyAPI } from './main/types';
+import type { GitifyAPI } from '../main/preload';
 
 declare global {
   interface Window {

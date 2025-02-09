@@ -12,14 +12,11 @@ const configuration: webpack.Configuration = {
 
   target: 'electron-main',
 
-  entry: {
-    main: path.join(webpackPaths.srcMainPath, 'main.ts'),
-    preload: path.join(webpackPaths.srcMainPath, 'preload.ts'),
-  },
+  entry: [path.join(webpackPaths.srcMainPath, 'main.ts')],
 
   output: {
     path: webpackPaths.buildPath,
-    filename: '[name].js',
+    filename: 'main.js',
     library: {
       type: 'umd',
     },

@@ -1,23 +1,21 @@
-import { shell } from 'electron';
+// import { shell } from 'electron';
 // import { namespacedEvent } from '../../shared/events';
-import { defaultSettings } from '../context/App';
-import { type Link, OpenPreference } from '../types';
+// import { defaultSettings } from '../context/App';
+import type { Link } from '../types';
 // import { Constants } from './constants';
-import { loadState } from './storage';
+// import { loadState } from './storage';
 
-export function openExternalLink(url: Link): void {
-  if (url.toLowerCase().startsWith('https://')) {
-    // Load the state from local storage to avoid having to pass settings as a parameter
-    const { settings } = loadState();
-
-    const openPreference = settings
-      ? settings.openLinks
-      : defaultSettings.openLinks;
-
-    shell.openExternal(url, {
-      activate: openPreference === OpenPreference.FOREGROUND,
-    });
-  }
+export function openExternalLink(_url: Link): void {
+  // if (url.toLowerCase().startsWith('https://')) {
+  //   // Load the state from local storage to avoid having to pass settings as a parameter
+  //   const { settings } = loadState();
+  //   const_openPreference = settings
+  //     ? settings.openLinks
+  //     : defaultSettings.openLinks;
+  //   // shell.openExternal(url, {
+  //   //   activate: openPreference === OpenPreference.FOREGROUND,
+  //   // });
+  // }
 }
 
 export async function getAppVersion(): Promise<string> {

@@ -13,8 +13,8 @@ export const Constants = {
 
   DEFAULT_AUTH_OPTIONS: {
     hostname: 'github.com' as Hostname,
-    clientId: process.env.OAUTH_CLIENT_ID as ClientID,
-    clientSecret: process.env.OAUTH_CLIENT_SECRET as ClientSecret,
+    clientId: 'FOO' as ClientID, //process.env.OAUTH_CLIENT_ID
+    clientSecret: 'BAR' as ClientSecret, //process.env.OAUTH_CLIENT_SECRET
   },
 
   GITHUB_API_BASE_URL: 'https://api.github.com',

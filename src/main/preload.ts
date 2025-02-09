@@ -2,13 +2,18 @@ import { contextBridge, ipcRenderer } from 'electron';
 import { namespacedEvent } from '../shared/events';
 
 import { Constants } from '../renderer/utils/constants';
-import type { GitifyAPI } from './types';
 
-const api: GitifyAPI = {
+const api = {
   openExternalLink: (url) =>
     ipcRenderer.send(namespacedEvent('open-external-link'), url),
 
-  getAppVersion: () => ipcRenderer.invoke(namespacedEvent('version')),
+  getAppVersion: () => {
+    if (process.env.NODE_ENV === 'development') {
+      return 'dev';
+    }
+
+    ipcRenderer.invoke(namespacedEvent('version'));
+  },
 
   encryptValue: (value) =>
     ipcRenderer.invoke(namespacedEvent('safe-storage-encrypt'), value),
@@ -16,7 +21,11 @@ const api: GitifyAPI = {
   decryptValue: (value) =>
     ipcRenderer.invoke(namespacedEvent('safe-storage-decrypt'), value),
 
-  quitApp: () => ipcRenderer.send(namespacedEvent('quit')),
+  quitApp: () => {
+    console.log('PRELOAD DEBUGGING - QUIT APP');
+
+    ipcRenderer.send(namespacedEvent('quit'));
+  },
 
   showWindow: () => ipcRenderer.send(namespacedEvent('window-show')),
 
@@ -31,13 +40,18 @@ const api: GitifyAPI = {
   setAlternateIdleIcon: (value) =>
     ipcRenderer.send(namespacedEvent('use-alternate-idle-icon'), value),
 
-  setKeyboardShortcut: (keyboardShortcut) =>
+  setKeyboardShortcut: (keyboardShortcut) => {
+    console.log('PRELOAD DEBUGGING - setKeyboardShortcut');
+
     ipcRenderer.send(namespacedEvent('update-keyboard-shortcut'), {
       enabled: keyboardShortcut,
       keyboardShortcut: Constants.DEFAULT_KEYBOARD_SHORTCUT,
-    }),
+    });
+  },
 
   updateTrayIcon: (notificationsLength = 0) => {
+    console.log('PRELOAD DEBUGGING - UPDATE TRAY ICON');
+
     if (notificationsLength < 0) {
       ipcRenderer.send(namespacedEvent('icon-error'));
       return;
@@ -54,6 +68,20 @@ const api: GitifyAPI = {
 
   updateTrayTitle: (title = '') =>
     ipcRenderer.send(namespacedEvent('update-title'), title),
+
+  isLinux: () => {
+    return process.platform === 'linux';
+  },
+
+  isMacOS: () => {
+    return process.platform === 'darwin';
+  },
+
+  isWindows: () => {
+    return process.platform === 'win32';
+  },
 };
 
 contextBridge.exposeInMainWorld('gitify', api);
+
+export type GitifyAPI = typeof api;

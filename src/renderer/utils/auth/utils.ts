@@ -1,10 +1,10 @@
 import { format } from 'date-fns';
 import semver from 'semver';
 
-import { ipcRenderer } from 'electron';
+// import { ipcRenderer } from 'electron';
 import { APPLICATION } from '../../../shared/constants';
-import { namespacedEvent } from '../../../shared/events';
-import { logError, logInfo, logWarn } from '../../../shared/logger';
+// import { namespacedEvent } from '../../../shared/events';
+import { logError, logWarn } from '../../../shared/logger';
 import type {
   Account,
   AuthCode,
@@ -26,7 +26,7 @@ import type { AuthMethod, AuthResponse, AuthTokenResponse } from './types';
 export function authGitHub(
   authOptions = Constants.DEFAULT_AUTH_OPTIONS,
 ): Promise<AuthResponse> {
-  return new Promise((resolve, reject) => {
+  return new Promise((_resolve, _reject) => {
     const authUrl = new URL(`https://${authOptions.hostname}`);
     authUrl.pathname = '/login/oauth/authorize';
     authUrl.searchParams.append('client_id', authOptions.clientId);
@@ -34,43 +34,43 @@ export function authGitHub(
 
     openExternalLink(authUrl.toString() as Link);
 
-    const handleCallback = (callbackUrl: string) => {
-      const url = new URL(callbackUrl);
+    // const handleCallback = (callbackUrl: string) => {
+    //   const url = new URL(callbackUrl);
 
-      const type = url.hostname;
-      const code = url.searchParams.get('code');
-      const error = url.searchParams.get('error');
-      const errorDescription = url.searchParams.get('error_description');
-      const errorUri = url.searchParams.get('error_uri');
+    //   const type = url.hostname;
+    //   const code = url.searchParams.get('code');
+    //   const error = url.searchParams.get('error');
+    //   const errorDescription = url.searchParams.get('error_description');
+    //   const errorUri = url.searchParams.get('error_uri');
 
-      if (code && (type === 'auth' || type === 'oauth')) {
-        const authMethod: AuthMethod =
-          type === 'auth' ? 'GitHub App' : 'OAuth App';
+    //   if (code && (type === 'auth' || type === 'oauth')) {
+    //     const authMethod: AuthMethod =
+    //       type === 'auth' ? 'GitHub App' : 'OAuth App';
 
-        resolve({
-          authMethod: authMethod,
-          authCode: code as AuthCode,
-          authOptions: authOptions,
-        });
-      } else if (error) {
-        reject(
-          new Error(
-            `Oops! Something went wrong and we couldn't log you in using GitHub. Please try again. Reason: ${errorDescription} Docs: ${errorUri}`,
-          ),
-        );
-      }
-    };
+    //     resolve({
+    //       authMethod: authMethod,
+    //       authCode: code as AuthCode,
+    //       authOptions: authOptions,
+    //     });
+    //   } else if (error) {
+    //     reject(
+    //       new Error(
+    //         `Oops! Something went wrong and we couldn't log you in using GitHub. Please try again. Reason: ${errorDescription} Docs: ${errorUri}`,
+    //       ),
+    //     );
+    //   }
+    // };
 
-    ipcRenderer.on(
-      namespacedEvent('auth-callback'),
-      (_, callbackUrl: string) => {
-        logInfo(
-          'renderer:auth-callback',
-          `received authentication callback URL ${callbackUrl}`,
-        );
-        handleCallback(callbackUrl);
-      },
-    );
+    // ipcRenderer.on(
+    //   namespacedEvent('auth-callback'),
+    //   (_, callbackUrl: string) => {
+    //     logInfo(
+    //       'renderer:auth-callback',
+    //       `received authentication callback URL ${callbackUrl}`,
+    //     );
+    //     handleCallback(callbackUrl);
+    //   },
+    // );
   });
 }
 

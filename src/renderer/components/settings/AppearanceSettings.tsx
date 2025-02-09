@@ -1,16 +1,16 @@
-import { webFrame } from 'electron';
-import { type FC, useContext, useState } from 'react';
+// import { webFrame } from 'electron';
+import { type FC, useContext } from 'react';
 
 import {
-  DashIcon,
+  // DashIcon,
   PaintbrushIcon,
-  PlusIcon,
-  XCircleIcon,
+  // PlusIcon,
+  // XCircleIcon,
 } from '@primer/octicons-react';
 import {
-  Button,
-  ButtonGroup,
-  IconButton,
+  // Button,
+  // ButtonGroup,
+  // IconButton,
   Select,
   Stack,
   Text,
@@ -19,30 +19,30 @@ import {
 import { AppContext } from '../../context/App';
 import { Theme } from '../../types';
 import { hasMultipleAccounts } from '../../utils/auth/utils';
-import { zoomLevelToPercentage, zoomPercentageToLevel } from '../../utils/zoom';
+// import { zoomLevelToPercentage, zoomPercentageToLevel } from '../../utils/zoom';
 import { Checkbox } from '../fields/Checkbox';
 import { FieldLabel } from '../fields/FieldLabel';
 import { Title } from '../primitives/Title';
 
-let timeout: NodeJS.Timeout;
-const DELAY = 200;
+// let timeout: NodeJS.Timeout;
+// const DELAY = 200;
 
 export const AppearanceSettings: FC = () => {
   const { auth, settings, updateSetting } = useContext(AppContext);
-  const [zoomPercentage, setZoomPercentage] = useState(
-    zoomLevelToPercentage(webFrame.getZoomLevel()),
-  );
+  // const [zoomPercentage, setZoomPercentage] = useState(
+  //   zoomLevelToPercentage(webFrame.getZoomLevel()),
+  // );
 
-  window.addEventListener('resize', () => {
-    // clear the timeout
-    clearTimeout(timeout);
-    // start timing for event "completion"
-    timeout = setTimeout(() => {
-      const zoomPercentage = zoomLevelToPercentage(webFrame.getZoomLevel());
-      setZoomPercentage(zoomPercentage);
-      updateSetting('zoomPercentage', zoomPercentage);
-    }, DELAY);
-  });
+  // window.addEventListener('resize', () => {
+  //   // clear the timeout
+  //   clearTimeout(timeout);
+  //   // start timing for event "completion"
+  //   timeout = setTimeout(() => {
+  //     const zoomPercentage = zoomLevelToPercentage(webFrame.getZoomLevel());
+  //     // setZoomPercentage(zoomPercentage);
+  //     updateSetting('zoomPercentage', zoomPercentage);
+  //   }, DELAY);
+  // });
 
   return (
     <fieldset>
@@ -97,6 +97,7 @@ export const AppearanceSettings: FC = () => {
           </Select>
         </Stack>
 
+        {/*
         <Stack
           direction="horizontal"
           gap="condensed"
@@ -149,6 +150,7 @@ export const AppearanceSettings: FC = () => {
             />
           </ButtonGroup>
         </Stack>
+        */}
 
         <Checkbox
           name="showAccountHeader"
