@@ -79,16 +79,11 @@
       "node_modules/**/*",
       "package.json"
     ],
-    "electronLanguages": [
-      "en"
-    ],
+    "electronLanguages": ["en"],
     "protocols": [
       {
         "name": "Gitify",
-        "schemes": [
-          "gitify",
-          "gitify-dev"
-        ]
+        "schemes": ["gitify", "gitify-dev"]
       }
     ],
     "mac": {
@@ -99,9 +94,7 @@
       "notarize": false,
       "target": {
         "target": "default",
-        "arch": [
-          "universal"
-        ]
+        "arch": ["universal"]
       },
       "hardenedRuntime": true,
       "entitlements": "assets/entitlements.mac.plist",
@@ -126,11 +119,7 @@
       "oneClick": false
     },
     "linux": {
-      "target": [
-        "AppImage",
-        "deb",
-        "rpm"
-      ],
+      "target": ["AppImage", "deb", "rpm"],
       "category": "Development",
       "maintainer": "Gitify Team"
     },
