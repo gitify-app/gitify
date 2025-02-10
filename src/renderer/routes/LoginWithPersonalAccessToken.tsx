@@ -27,7 +27,7 @@ import { AppContext } from '../context/App';
 import type { Hostname, Token } from '../types';
 import type { LoginPersonalAccessTokenOptions } from '../utils/auth/types';
 import {
-  formatRequiredScopes,
+  formatRecommendedOAuthScopes,
   getNewTokenURL,
   isValidHostname,
   isValidToken,
@@ -192,7 +192,7 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
 
             <Text as="i" className="text-xs">
               The{' '}
-              <Tooltip text={formatRequiredScopes()} direction="se">
+              <Tooltip text={formatRecommendedOAuthScopes()} direction="se">
                 <Text as="u">required scopes</Text>
               </Tooltip>{' '}
               will be automatically selected for you.

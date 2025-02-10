@@ -31,7 +31,8 @@ import { Header } from '../components/primitives/Header';
 import { AppContext } from '../context/App';
 import { type Account, Size } from '../types';
 import {
-  formatRequiredScopes,
+  formatAlternateOAuthScopes,
+  formatRecommendedOAuthScopes,
   getAccountUUID,
   refreshAccount,
 } from '../utils/auth/utils';
@@ -194,8 +195,8 @@ export const AccountsRoute: FC = () => {
                   <Stack direction="horizontal" gap="condensed">
                     <IconButton
                       icon={AlertFillIcon}
-                      aria-label={`This account is missing one or more required scopes: [${formatRequiredScopes()}]`}
-                      variant="danger"
+                      aria-label={`This account is missing one or more required scopes: [${formatRecommendedOAuthScopes()}] or [${formatAlternateOAuthScopes()}]`}
+                      style={{ color: 'orange' }}
                       onClick={() => openDeveloperSettings(account)}
                       size="small"
                       data-testid="account-missing-scopes"

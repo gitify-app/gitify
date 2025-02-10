@@ -300,12 +300,13 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
             <button
               aria-describedby=":r2v:-loading-announcement"
               aria-labelledby=":r2u:"
-              class="types__StyledButton-sc-ws60qy-0 fgzDQD visible"
+              class="types__StyledButton-sc-ws60qy-0 fMOLkq visible"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
               data-size="small"
               data-testid="account-missing-scopes"
+              style="color: orange;"
               sx="[object Object]"
               type="button"
             >
@@ -333,7 +334,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
               id=":r2u:"
               popover="auto"
             >
-              This account is missing one or more required scopes: [read:user, notifications, repo]
+              This account is missing one or more required scopes: [read:user, notifications, repo] or [read:user, notifications, public_repo]
             </span>
             <button
               aria-describedby=":r31:-loading-announcement"
@@ -671,12 +672,13 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
             <button
               aria-describedby=":r38:-loading-announcement"
               aria-labelledby=":r37:"
-              class="types__StyledButton-sc-ws60qy-0 fgzDQD invisible"
+              class="types__StyledButton-sc-ws60qy-0 fMOLkq invisible"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
               data-size="small"
               data-testid="account-missing-scopes"
+              style="color: orange;"
               sx="[object Object]"
               type="button"
             >
@@ -704,7 +706,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
               id=":r37:"
               popover="auto"
             >
-              This account is missing one or more required scopes: [read:user, notifications, repo]
+              This account is missing one or more required scopes: [read:user, notifications, repo] or [read:user, notifications, public_repo]
             </span>
             <button
               aria-describedby=":r3a:-loading-announcement"
@@ -1042,12 +1044,13 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
             <button
               aria-describedby=":r3h:-loading-announcement"
               aria-labelledby=":r3g:"
-              class="types__StyledButton-sc-ws60qy-0 fgzDQD invisible"
+              class="types__StyledButton-sc-ws60qy-0 fMOLkq invisible"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
               data-size="small"
               data-testid="account-missing-scopes"
+              style="color: orange;"
               sx="[object Object]"
               type="button"
             >
@@ -1075,7 +1078,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
               id=":r3g:"
               popover="auto"
             >
-              This account is missing one or more required scopes: [read:user, notifications, repo]
+              This account is missing one or more required scopes: [read:user, notifications, repo] or [read:user, notifications, public_repo]
             </span>
             <button
               aria-describedby=":r3j:-loading-announcement"
@@ -1564,12 +1567,13 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
             <button
               aria-describedby=":r3u:-loading-announcement"
               aria-labelledby=":r3t:"
-              class="types__StyledButton-sc-ws60qy-0 fgzDQD invisible"
+              class="types__StyledButton-sc-ws60qy-0 fMOLkq invisible"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
               data-size="small"
               data-testid="account-missing-scopes"
+              style="color: orange;"
               sx="[object Object]"
               type="button"
             >
@@ -1597,7 +1601,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
               id=":r3t:"
               popover="auto"
             >
-              This account is missing one or more required scopes: [read:user, notifications, repo]
+              This account is missing one or more required scopes: [read:user, notifications, repo] or [read:user, notifications, public_repo]
             </span>
             <button
               aria-describedby=":r40:-loading-announcement"
@@ -1935,12 +1939,13 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
             <button
               aria-describedby=":r47:-loading-announcement"
               aria-labelledby=":r46:"
-              class="types__StyledButton-sc-ws60qy-0 fgzDQD invisible"
+              class="types__StyledButton-sc-ws60qy-0 fMOLkq invisible"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
               data-size="small"
               data-testid="account-missing-scopes"
+              style="color: orange;"
               sx="[object Object]"
               type="button"
             >
@@ -1968,7 +1973,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
               id=":r46:"
               popover="auto"
             >
-              This account is missing one or more required scopes: [read:user, notifications, repo]
+              This account is missing one or more required scopes: [read:user, notifications, repo] or [read:user, notifications, public_repo]
             </span>
             <button
               aria-describedby=":r49:-loading-announcement"
@@ -2306,12 +2311,13 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
             <button
               aria-describedby=":r4g:-loading-announcement"
               aria-labelledby=":r4f:"
-              class="types__StyledButton-sc-ws60qy-0 fgzDQD invisible"
+              class="types__StyledButton-sc-ws60qy-0 fMOLkq invisible"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
               data-size="small"
               data-testid="account-missing-scopes"
+              style="color: orange;"
               sx="[object Object]"
               type="button"
             >
@@ -2339,7 +2345,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
               id=":r4f:"
               popover="auto"
             >
-              This account is missing one or more required scopes: [read:user, notifications, repo]
+              This account is missing one or more required scopes: [read:user, notifications, repo] or [read:user, notifications, public_repo]
             </span>
             <button
               aria-describedby=":r4i:-loading-announcement"
@@ -2828,12 +2834,13 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
             <button
               aria-describedby=":r3:-loading-announcement"
               aria-labelledby=":r2:"
-              class="types__StyledButton-sc-ws60qy-0 fgzDQD invisible"
+              class="types__StyledButton-sc-ws60qy-0 fMOLkq invisible"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
               data-size="small"
               data-testid="account-missing-scopes"
+              style="color: orange;"
               sx="[object Object]"
               type="button"
             >
@@ -2861,7 +2868,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
               id=":r2:"
               popover="auto"
             >
-              This account is missing one or more required scopes: [read:user, notifications, repo]
+              This account is missing one or more required scopes: [read:user, notifications, repo] or [read:user, notifications, public_repo]
             </span>
             <button
               aria-describedby=":r5:-loading-announcement"
@@ -3199,12 +3206,13 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
             <button
               aria-describedby=":rc:-loading-announcement"
               aria-labelledby=":rb:"
-              class="types__StyledButton-sc-ws60qy-0 fgzDQD invisible"
+              class="types__StyledButton-sc-ws60qy-0 fMOLkq invisible"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
               data-size="small"
               data-testid="account-missing-scopes"
+              style="color: orange;"
               sx="[object Object]"
               type="button"
             >
@@ -3232,7 +3240,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
               id=":rb:"
               popover="auto"
             >
-              This account is missing one or more required scopes: [read:user, notifications, repo]
+              This account is missing one or more required scopes: [read:user, notifications, repo] or [read:user, notifications, public_repo]
             </span>
             <button
               aria-describedby=":re:-loading-announcement"
@@ -3570,12 +3578,13 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
             <button
               aria-describedby=":rl:-loading-announcement"
               aria-labelledby=":rk:"
-              class="types__StyledButton-sc-ws60qy-0 fgzDQD invisible"
+              class="types__StyledButton-sc-ws60qy-0 fMOLkq invisible"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
               data-size="small"
               data-testid="account-missing-scopes"
+              style="color: orange;"
               sx="[object Object]"
               type="button"
             >
@@ -3603,7 +3612,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
               id=":rk:"
               popover="auto"
             >
-              This account is missing one or more required scopes: [read:user, notifications, repo]
+              This account is missing one or more required scopes: [read:user, notifications, repo] or [read:user, notifications, public_repo]
             </span>
             <button
               aria-describedby=":rn:-loading-announcement"
