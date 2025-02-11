@@ -3,7 +3,7 @@
 exports[`apiRequestAuth should make an authenticated request with the correct parameters 1`] = `
 {
   "Accept": "application/json",
-  "Authorization": "token decrypted",
+  "Authorization": "token yourAuthToken",
   "Cache-Control": "",
   "Content-Type": "application/json",
 }
@@ -12,7 +12,7 @@ exports[`apiRequestAuth should make an authenticated request with the correct pa
 exports[`apiRequestAuth should make an authenticated request with the correct parameters and default data 1`] = `
 {
   "Accept": "application/json",
-  "Authorization": "token decrypted",
+  "Authorization": "token yourAuthToken",
   "Cache-Control": "",
   "Content-Type": "application/json",
 }

@@ -20,7 +20,6 @@ exports[`renderer/components/settings/SettingsFooter.tsx app version should show
     >
       Gitify
        
-      dev
     </span>
   </span>
 </button>
@@ -46,7 +45,6 @@ exports[`renderer/components/settings/SettingsFooter.tsx app version should show
     >
       Gitify
        
-      v0.0.1
     </span>
   </span>
 </button>

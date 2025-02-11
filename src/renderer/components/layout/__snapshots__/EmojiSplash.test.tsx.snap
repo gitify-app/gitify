@@ -34,12 +34,7 @@ exports[`renderer/components/layout/EmojiSplash.tsx should render itself & its c
             <div
               class="Box-sc-g0xbh4-0 text-5xl"
             >
-              <img
-                alt="🍺"
-                class="emoji"
-                draggable="false"
-                src="images/twemoji/1f37a.svg"
-              />
+              🍺
             </div>
             <div
               class="Box-sc-g0xbh4-0 text-xl font-semibold"
@@ -86,12 +81,7 @@ exports[`renderer/components/layout/EmojiSplash.tsx should render itself & its c
           <div
             class="Box-sc-g0xbh4-0 text-5xl"
           >
-            <img
-              alt="🍺"
-              class="emoji"
-              draggable="false"
-              src="images/twemoji/1f37a.svg"
-            />
+            🍺
           </div>
           <div
             class="Box-sc-g0xbh4-0 text-xl font-semibold"
@@ -195,12 +185,7 @@ exports[`renderer/components/layout/EmojiSplash.tsx should render itself & its c
             <div
               class="Box-sc-g0xbh4-0 text-5xl"
             >
-              <img
-                alt="🍺"
-                class="emoji"
-                draggable="false"
-                src="images/twemoji/1f37a.svg"
-              />
+              🍺
             </div>
             <div
               class="Box-sc-g0xbh4-0 text-xl font-semibold"
@@ -242,12 +227,7 @@ exports[`renderer/components/layout/EmojiSplash.tsx should render itself & its c
           <div
             class="Box-sc-g0xbh4-0 text-5xl"
           >
-            <img
-              alt="🍺"
-              class="emoji"
-              draggable="false"
-              src="images/twemoji/1f37a.svg"
-            />
+            🍺
           </div>
           <div
             class="Box-sc-g0xbh4-0 text-xl font-semibold"

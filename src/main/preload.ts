@@ -1,11 +1,18 @@
-import { contextBridge, ipcRenderer } from 'electron';
+import { contextBridge, ipcRenderer, shell } from 'electron';
 import { namespacedEvent } from '../shared/events';
 
+import { type Link, OpenPreference } from '../renderer/types';
 import { Constants } from '../renderer/utils/constants';
+import { isLinux, isMacOS, isWindows } from '../shared/platform';
 
 const api = {
-  openExternalLink: (url) =>
-    ipcRenderer.send(namespacedEvent('open-external-link'), url),
+  openExternalLink: (url: Link, openPreference: OpenPreference) => {
+    console.log('PRELOAD OPEN LINK');
+
+    shell.openExternal(url, {
+      activate: openPreference === OpenPreference.FOREGROUND,
+    });
+  },
 
   getAppVersion: () => {
     if (process.env.NODE_ENV === 'development') {
@@ -15,34 +22,28 @@ const api = {
     ipcRenderer.invoke(namespacedEvent('version'));
   },
 
-  encryptValue: (value) =>
+  encryptValue: (value: string) =>
     ipcRenderer.invoke(namespacedEvent('safe-storage-encrypt'), value),
 
-  decryptValue: (value) =>
+  decryptValue: (value: string) =>
     ipcRenderer.invoke(namespacedEvent('safe-storage-decrypt'), value),
 
-  quitApp: () => {
-    console.log('PRELOAD DEBUGGING - QUIT APP');
-
-    ipcRenderer.send(namespacedEvent('quit'));
-  },
+  quitApp: () => ipcRenderer.send(namespacedEvent('quit')),
 
   showWindow: () => ipcRenderer.send(namespacedEvent('window-show')),
 
   hideWindow: () => ipcRenderer.send(namespacedEvent('window-hide')),
 
-  setAutoLaunch: (value) =>
+  setAutoLaunch: (value: boolean) =>
     ipcRenderer.send(namespacedEvent('update-auto-launch'), {
       openAtLogin: value,
       openAsHidden: value,
     }),
 
-  setAlternateIdleIcon: (value) =>
+  setAlternateIdleIcon: (value: boolean) =>
     ipcRenderer.send(namespacedEvent('use-alternate-idle-icon'), value),
 
-  setKeyboardShortcut: (keyboardShortcut) => {
-    console.log('PRELOAD DEBUGGING - setKeyboardShortcut');
-
+  setKeyboardShortcut: (keyboardShortcut: boolean) => {
     ipcRenderer.send(namespacedEvent('update-keyboard-shortcut'), {
       enabled: keyboardShortcut,
       keyboardShortcut: Constants.DEFAULT_KEYBOARD_SHORTCUT,
@@ -50,8 +51,6 @@ const api = {
   },
 
   updateTrayIcon: (notificationsLength = 0) => {
-    console.log('PRELOAD DEBUGGING - UPDATE TRAY ICON');
-
     if (notificationsLength < 0) {
       ipcRenderer.send(namespacedEvent('icon-error'));
       return;
@@ -63,22 +62,21 @@ const api = {
     }
 
     ipcRenderer.send(namespacedEvent('icon-idle'));
-    // ipcRenderer.send(namespacedEvent('update-tray-icon'), notificationsLength),
   },
 
   updateTrayTitle: (title = '') =>
     ipcRenderer.send(namespacedEvent('update-title'), title),
 
   isLinux: () => {
-    return process.platform === 'linux';
+    return isLinux();
   },
 
   isMacOS: () => {
-    return process.platform === 'darwin';
+    return isMacOS();
   },
 
   isWindows: () => {
-    return process.platform === 'win32';
+    return isWindows();
   },
 };
 
