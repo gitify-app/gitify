@@ -173,7 +173,7 @@
     "jest-environment-jsdom": "29.7.0",
     "mini-css-extract-plugin": "2.9.2",
     "nock": "13.5.6",
-    "postcss": "8.5.1",
+    "postcss": "8.5.2",
     "postcss-loader": "8.1.1",
     "rimraf": "6.0.1",
     "semver": "7.7.1",
