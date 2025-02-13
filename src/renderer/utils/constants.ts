@@ -8,8 +8,11 @@ export const Constants = {
 
   NOTIFICATION_SOUND: 'clearly.mp3',
 
-  // GitHub OAuth
-  AUTH_SCOPE: ['read:user', 'notifications', 'repo'],
+  // GitHub OAuth Scopes
+  OAUTH_SCOPES: {
+    RECOMMENDED: ['read:user', 'notifications', 'repo'],
+    ALTERNATE: ['read:user', 'notifications', 'public_repo'],
+  },
 
   DEFAULT_AUTH_OPTIONS: {
     hostname: 'github.com' as Hostname,

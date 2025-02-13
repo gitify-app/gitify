@@ -30,7 +30,10 @@ export function authGitHub(
     const authUrl = new URL(`https://${authOptions.hostname}`);
     authUrl.pathname = '/login/oauth/authorize';
     authUrl.searchParams.append('client_id', authOptions.clientId);
-    authUrl.searchParams.append('scope', Constants.AUTH_SCOPE.toString());
+    authUrl.searchParams.append(
+      'scope',
+      Constants.OAUTH_SCOPES.RECOMMENDED.toString(),
+    );
 
     openExternalLink(authUrl.toString() as Link);
 
@@ -175,9 +178,13 @@ export async function refreshAccount(account: Account): Promise<Account> {
       ?.split(',')
       .map((scope: string) => scope.trim());
 
-    account.hasRequiredScopes = Constants.AUTH_SCOPE.every((scope) =>
-      accountScopes.includes(scope),
-    );
+    account.hasRequiredScopes =
+      Constants.OAUTH_SCOPES.RECOMMENDED.every((scope) =>
+        accountScopes.includes(scope),
+      ) ||
+      Constants.OAUTH_SCOPES.ALTERNATE.every((scope) =>
+        accountScopes.includes(scope),
+      );
 
     if (!account.hasRequiredScopes) {
       logWarn(
@@ -232,7 +239,10 @@ export function getNewTokenURL(hostname: Hostname): Link {
     'description',
     `${APPLICATION.NAME} (Created on ${date})`,
   );
-  newTokenURL.searchParams.append('scopes', Constants.AUTH_SCOPE.join(','));
+  newTokenURL.searchParams.append(
+    'scopes',
+    Constants.OAUTH_SCOPES.RECOMMENDED.join(','),
+  );
 
   return newTokenURL.toString() as Link;
 }
@@ -282,6 +292,10 @@ export function hasMultipleAccounts(auth: AuthState) {
   return auth.accounts.length > 1;
 }
 
-export function formatRequiredScopes() {
-  return Constants.AUTH_SCOPE.join(', ');
+export function formatRecommendedOAuthScopes() {
+  return Constants.OAUTH_SCOPES.RECOMMENDED.join(', ');
+}
+
+export function formatAlternateOAuthScopes() {
+  return Constants.OAUTH_SCOPES.ALTERNATE.join(', ');
 }
