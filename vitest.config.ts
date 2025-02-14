@@ -6,7 +6,7 @@ export default defineConfig({
     globals: true,
     setupFiles: ['./src/renderer/__helpers__/vitest.setup.ts'],
     coverage: {
-      reporter: ['lcov', 'text'],
+      reporter: ['lcov', 'text', 'html'],
     },
     outputFile: 'coverage/sonar-report.xml',
   },
