@@ -6,7 +6,7 @@ import type { SettingsState } from '../../types';
 import { UserTypeFilter } from './UserTypeFilter';
 
 describe('renderer/components/filters/UserTypeFilter.tsx', () => {
-  const updateFilter = jest.fn();
+  const updateFilter = vi.fn();
 
   it('should render itself & its children - detailed notifications enabled', () => {
     const tree = render(

@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render when 1 comment 1`] = `
+exports[`renderer/components/metrics/MetricGroup.tsx > comment pills > should render when 1 comment 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -373,7 +373,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
 }
 `;
 
-exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render when more than 1 comments 1`] = `
+exports[`renderer/components/metrics/MetricGroup.tsx > comment pills > should render when more than 1 comments 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -746,7 +746,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
 }
 `;
 
-exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render when no comments 1`] = `
+exports[`renderer/components/metrics/MetricGroup.tsx > comment pills > should render when no comments 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -1045,7 +1045,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
 }
 `;
 
-exports[`renderer/components/metrics/MetricGroup.tsx label pills should render labels pill 1`] = `
+exports[`renderer/components/metrics/MetricGroup.tsx > label pills > should render labels pill 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -1494,7 +1494,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx label pills should render l
 }
 `;
 
-exports[`renderer/components/metrics/MetricGroup.tsx linked issue pills should render issues pill when linked to multiple issues/prs 1`] = `
+exports[`renderer/components/metrics/MetricGroup.tsx > linked issue pills > should render issues pill when linked to multiple issues/prs 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -1793,7 +1793,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx linked issue pills should r
 }
 `;
 
-exports[`renderer/components/metrics/MetricGroup.tsx linked issue pills should render issues pill when linked to one issue/pr 1`] = `
+exports[`renderer/components/metrics/MetricGroup.tsx > linked issue pills > should render issues pill when linked to one issue/pr 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -2092,7 +2092,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx linked issue pills should r
 }
 `;
 
-exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should render closed milestone pill 1`] = `
+exports[`renderer/components/metrics/MetricGroup.tsx > milestone pills > should render closed milestone pill 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -2605,7 +2605,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
 }
 `;
 
-exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should render open milestone pill 1`] = `
+exports[`renderer/components/metrics/MetricGroup.tsx > milestone pills > should render open milestone pill 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -3118,7 +3118,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
 }
 `;
 
-exports[`renderer/components/metrics/MetricGroup.tsx showPills disabled should not render any pills when showPills is disabled 1`] = `
+exports[`renderer/components/metrics/MetricGroup.tsx > showPills disabled > should not render any pills when showPills is disabled 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>

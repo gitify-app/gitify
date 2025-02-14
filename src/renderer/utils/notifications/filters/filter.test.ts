@@ -6,7 +6,7 @@ import { filterNotifications, hasAnyFiltersSet } from './filter';
 
 describe('renderer/utils/notifications/filters/filter.ts', () => {
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   describe('filterNotifications', () => {

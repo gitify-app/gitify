@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/components/settings/SettingsFooter.tsx app version should show development app version 1`] = `
+exports[`renderer/components/settings/SettingsFooter.tsx > app version > should show development app version 1`] = `
 <button
   aria-describedby=":r7:-loading-announcement"
   class="types__StyledButton-sc-ws60qy-0 fMOLkq"
@@ -26,7 +26,7 @@ exports[`renderer/components/settings/SettingsFooter.tsx app version should show
 </button>
 `;
 
-exports[`renderer/components/settings/SettingsFooter.tsx app version should show production app version 1`] = `
+exports[`renderer/components/settings/SettingsFooter.tsx > app version > should show production app version 1`] = `
 <button
   aria-describedby=":r1:-loading-announcement"
   class="types__StyledButton-sc-ws60qy-0 hJsbeZ"
@@ -46,7 +46,6 @@ exports[`renderer/components/settings/SettingsFooter.tsx app version should show
     >
       Gitify
        
-      v0.0.1
     </span>
   </span>
 </button>

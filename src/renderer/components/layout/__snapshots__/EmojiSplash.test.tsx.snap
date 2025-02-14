@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/components/layout/EmojiSplash.tsx should render itself & its children - heading and sub-heading 1`] = `
+exports[`renderer/components/layout/EmojiSplash.tsx > should render itself & its children - heading and sub-heading 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -161,7 +161,7 @@ exports[`renderer/components/layout/EmojiSplash.tsx should render itself & its c
 }
 `;
 
-exports[`renderer/components/layout/EmojiSplash.tsx should render itself & its children - heading only 1`] = `
+exports[`renderer/components/layout/EmojiSplash.tsx > should render itself & its children - heading only 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>

@@ -8,7 +8,7 @@ import { NotificationHeader } from './NotificationHeader';
 
 describe('renderer/components/notifications/NotificationHeader.tsx', () => {
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should render itself & its children - group by repositories', async () => {
@@ -83,9 +83,9 @@ describe('renderer/components/notifications/NotificationHeader.tsx', () => {
   });
 
   it('should open notification user profile - group by date', () => {
-    const openExternalLinkMock = jest
+    const openExternalLinkMock = vi
       .spyOn(comms, 'openExternalLink')
-      .mockImplementation();
+      .mockImplementation(vi.fn());
 
     const props = {
       notification: mockSingleNotification,
