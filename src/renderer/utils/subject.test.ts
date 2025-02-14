@@ -1166,7 +1166,7 @@ describe('renderer/utils/subject.ts', () => {
 
     describe('Error', () => {
       it('catches error and logs message', async () => {
-        const logErrorSpy = jest.spyOn(logger, 'logError').mockImplementation();
+        const logErrorSpy = vi.spyOn(logger, 'logError').mockImplementation();
 
         const mockError = new Error('Test error');
         const mockNotification = partialMockNotification({

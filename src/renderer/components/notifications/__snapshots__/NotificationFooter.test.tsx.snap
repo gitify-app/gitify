@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/components/notifications/NotificationFooter.tsx security alerts should use github icon for avatar Repository Dependabot Alerts Thread 1`] = `
+exports[`renderer/components/notifications/NotificationFooter.tsx > security alerts should use github icon for avatar > Repository Dependabot Alerts Thread 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -337,7 +337,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
 }
 `;
 
-exports[`renderer/components/notifications/NotificationFooter.tsx security alerts should use github icon for avatar Repository Vulnerability Alert 1`] = `
+exports[`renderer/components/notifications/NotificationFooter.tsx > security alerts should use github icon for avatar > Repository Vulnerability Alert 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -674,7 +674,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
 }
 `;
 
-exports[`renderer/components/notifications/NotificationFooter.tsx should default to known avatar if no user found 1`] = `
+exports[`renderer/components/notifications/NotificationFooter.tsx > should default to known avatar if no user found 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -1011,7 +1011,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
 }
 `;
 
-exports[`renderer/components/notifications/NotificationFooter.tsx should render itself & its children 1`] = `
+exports[`renderer/components/notifications/NotificationFooter.tsx > should render itself & its children 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -1348,7 +1348,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
 }
 `;
 
-exports[`renderer/components/notifications/NotificationFooter.tsx should render itself & its children when last_read_at is null 1`] = `
+exports[`renderer/components/notifications/NotificationFooter.tsx > should render itself & its children when last_read_at is null 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>

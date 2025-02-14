@@ -12,7 +12,8 @@
     "allowJs": true,
     "noUnusedLocals": true,
     "skipLibCheck": true,
-    "outDir": "./build/"
+    "outDir": "./build/",
+    "types": ["vitest/globals"]
   },
   "include": ["src/**/*.js", "src/**/*.ts", "src/**/*.tsx"]
 }

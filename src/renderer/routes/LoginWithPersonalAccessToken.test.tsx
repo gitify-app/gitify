@@ -7,20 +7,20 @@ import {
   validateForm,
 } from './LoginWithPersonalAccessToken';
 
-const mockNavigate = jest.fn();
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
+const mockNavigate = vi.fn();
+vi.mock('react-router-dom', async () => ({
+  ...(await vi.importActual('react-router-dom')),
   useNavigate: () => mockNavigate,
 }));
 
 describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
-  const mockLoginWithPersonalAccessToken = jest.fn();
-  const openExternalLinkMock = jest
+  const mockLoginWithPersonalAccessToken = vi.fn();
+  const openExternalLinkMock = vi
     .spyOn(comms, 'openExternalLink')
-    .mockImplementation();
+    .mockImplementation(vi.fn());
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('renders correctly', () => {

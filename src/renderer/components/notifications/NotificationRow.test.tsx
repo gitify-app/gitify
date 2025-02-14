@@ -12,17 +12,17 @@ import * as links from '../../utils/links';
 import { NotificationRow } from './NotificationRow';
 
 describe('renderer/components/notifications/NotificationRow.tsx', () => {
-  jest.spyOn(links, 'openNotification');
-  jest.spyOn(comms, 'openExternalLink').mockImplementation();
+  vi.spyOn(links, 'openNotification');
+  vi.spyOn(comms, 'openExternalLink').mockImplementation(vi.fn());
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should render itself & its children - group by date', async () => {
-    jest
-      .spyOn(global.Date, 'now')
-      .mockImplementation(() => new Date('2024').valueOf());
+    vi.spyOn(global.Date, 'now').mockImplementation(() =>
+      new Date('2024').valueOf(),
+    );
 
     const props = {
       notification: mockSingleNotification,
@@ -40,9 +40,9 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
   });
 
   it('should render itself & its children - group by repositories', async () => {
-    jest
-      .spyOn(global.Date, 'now')
-      .mockImplementation(() => new Date('2024').valueOf());
+    vi.spyOn(global.Date, 'now').mockImplementation(() =>
+      new Date('2024').valueOf(),
+    );
 
     const props = {
       notification: mockSingleNotification,
@@ -60,9 +60,9 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
   });
 
   it('should render itself & its children - hide numbers', async () => {
-    jest
-      .spyOn(global.Date, 'now')
-      .mockImplementation(() => new Date('2024').valueOf());
+    vi.spyOn(global.Date, 'now').mockImplementation(() =>
+      new Date('2024').valueOf(),
+    );
 
     const props = {
       notification: mockSingleNotification,
@@ -81,7 +81,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
 
   describe('notification interactions', () => {
     it('should open a notification in the browser - click', () => {
-      const markNotificationsAsRead = jest.fn();
+      const markNotificationsAsRead = vi.fn();
 
       const props = {
         notification: mockSingleNotification,
@@ -106,7 +106,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
     });
 
     it('should open a notification in the browser - delay notification setting enabled', () => {
-      const markNotificationsAsRead = jest.fn();
+      const markNotificationsAsRead = vi.fn();
 
       const props = {
         notification: mockSingleNotification,
@@ -135,7 +135,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
     });
 
     it('should open a notification in browser & mark it as done', () => {
-      const markNotificationsAsDone = jest.fn();
+      const markNotificationsAsDone = vi.fn();
 
       const props = {
         notification: mockSingleNotification,
@@ -160,7 +160,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
     });
 
     it('should mark notifications as read', () => {
-      const markNotificationsAsRead = jest.fn();
+      const markNotificationsAsRead = vi.fn();
 
       const props = {
         notification: mockSingleNotification,
@@ -183,7 +183,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
     });
 
     it('should mark notifications as done', () => {
-      const markNotificationsAsDone = jest.fn();
+      const markNotificationsAsDone = vi.fn();
 
       const props = {
         notification: mockSingleNotification,
@@ -203,7 +203,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
     });
 
     it('should unsubscribe from a notification thread', () => {
-      const unsubscribeNotification = jest.fn();
+      const unsubscribeNotification = vi.fn();
 
       const props = {
         notification: mockSingleNotification,

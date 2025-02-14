@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/components/filters/UserHandleFilter.tsx should render itself & its children - detailed notifications disabled 1`] = `
+exports[`renderer/components/filters/UserHandleFilter.tsx > should render itself & its children - detailed notifications disabled 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -517,7 +517,7 @@ exports[`renderer/components/filters/UserHandleFilter.tsx should render itself &
 }
 `;
 
-exports[`renderer/components/filters/UserHandleFilter.tsx should render itself & its children - detailed notifications enabled 1`] = `
+exports[`renderer/components/filters/UserHandleFilter.tsx > should render itself & its children - detailed notifications enabled 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>

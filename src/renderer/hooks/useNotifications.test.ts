@@ -17,7 +17,7 @@ import { Errors } from '../utils/errors';
 import { useNotifications } from './useNotifications';
 
 describe('renderer/hooks/useNotifications.ts', () => {
-  const logErrorSpy = jest.spyOn(logger, 'logError').mockImplementation();
+  const logErrorSpy = vi.spyOn(logger, 'logError').mockImplementation();
 
   beforeEach(() => {
     // axios will default to using the XHR adapter which can't be intercepted
