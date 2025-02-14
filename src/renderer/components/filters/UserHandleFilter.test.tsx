@@ -6,10 +6,10 @@ import type { SettingsState } from '../../types';
 import { UserHandleFilter } from './UserHandleFilter';
 
 describe('renderer/components/filters/UserHandleFilter.tsx', () => {
-  const updateFilter = jest.fn();
+  const updateFilter = vi.fn();
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should render itself & its children - detailed notifications enabled', () => {

@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/components/fields/Checkbox.tsx should render - disabled 1`] = `
+exports[`renderer/components/fields/Checkbox.tsx > should render - disabled 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -111,7 +111,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - disabled 1`] = 
 }
 `;
 
-exports[`renderer/components/fields/Checkbox.tsx should render - not visible 1`] = `
+exports[`renderer/components/fields/Checkbox.tsx > should render - not visible 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -172,7 +172,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - not visible 1`]
 }
 `;
 
-exports[`renderer/components/fields/Checkbox.tsx should render - positive counter selected 1`] = `
+exports[`renderer/components/fields/Checkbox.tsx > should render - positive counter selected 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -309,7 +309,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - positive counte
 }
 `;
 
-exports[`renderer/components/fields/Checkbox.tsx should render - positive counter unselected 1`] = `
+exports[`renderer/components/fields/Checkbox.tsx > should render - positive counter unselected 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -444,7 +444,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - positive counte
 }
 `;
 
-exports[`renderer/components/fields/Checkbox.tsx should render - tooltip 1`] = `
+exports[`renderer/components/fields/Checkbox.tsx > should render - tooltip 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -599,7 +599,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - tooltip 1`] = `
 }
 `;
 
-exports[`renderer/components/fields/Checkbox.tsx should render - visible 1`] = `
+exports[`renderer/components/fields/Checkbox.tsx > should render - visible 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -708,7 +708,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - visible 1`] = `
 }
 `;
 
-exports[`renderer/components/fields/Checkbox.tsx should render - zero counter 1`] = `
+exports[`renderer/components/fields/Checkbox.tsx > should render - zero counter 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>

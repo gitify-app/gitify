@@ -3,7 +3,7 @@ import { getNotificationCount } from './notifications';
 
 describe('renderer/utils/notifications/notifications.ts', () => {
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('getNotificationCount', () => {

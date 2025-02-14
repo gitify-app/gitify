@@ -10,11 +10,11 @@ import { AppContext } from '../../context/App';
 import { AppearanceSettings } from './AppearanceSettings';
 
 describe('renderer/components/settings/AppearanceSettings.tsx', () => {
-  const updateSetting = jest.fn();
+  const updateSetting = vi.fn();
   const zoomTimeout = () => new Promise((r) => setTimeout(r, 300));
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should change the theme mode dropdown', async () => {
@@ -42,7 +42,7 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
   });
 
   it('should update the zoom value when using CMD + and CMD -', async () => {
-    webFrame.getZoomLevel = jest.fn().mockReturnValue(-1);
+    webFrame.getZoomLevel = vi.fn().mockReturnValue(-1);
 
     await act(async () => {
       render(
@@ -68,9 +68,9 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
   });
 
   it('should update the zoom values when using the zoom buttons', async () => {
-    webFrame.getZoomLevel = jest.fn().mockReturnValue(0);
-    webFrame.setZoomLevel = jest.fn().mockImplementation((level) => {
-      webFrame.getZoomLevel = jest.fn().mockReturnValue(level);
+    webFrame.getZoomLevel = vi.fn().mockReturnValue(0);
+    webFrame.setZoomLevel = vi.fn().mockImplementation((level) => {
+      webFrame.getZoomLevel = vi.fn().mockReturnValue(level);
       fireEvent(window, new Event('resize'));
     });
 

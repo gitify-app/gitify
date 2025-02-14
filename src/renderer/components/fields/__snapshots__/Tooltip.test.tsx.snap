@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/components/fields/Tooltip.tsx should display on mouse enter / leave 1`] = `
+exports[`renderer/components/fields/Tooltip.tsx > should display on mouse enter / leave 1`] = `
 <div
   aria-label="test"
   class="Box-sc-g0xbh4-0 relative"
@@ -35,7 +35,7 @@ exports[`renderer/components/fields/Tooltip.tsx should display on mouse enter / 
 </div>
 `;
 
-exports[`renderer/components/fields/Tooltip.tsx should display on mouse enter / leave 2`] = `
+exports[`renderer/components/fields/Tooltip.tsx > should display on mouse enter / leave 2`] = `
 <div
   aria-label="test"
   class="Box-sc-g0xbh4-0 relative"
@@ -61,7 +61,7 @@ exports[`renderer/components/fields/Tooltip.tsx should display on mouse enter / 
 </div>
 `;
 
-exports[`renderer/components/fields/Tooltip.tsx should render 1`] = `
+exports[`renderer/components/fields/Tooltip.tsx > should render 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>

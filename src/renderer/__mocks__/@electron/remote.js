@@ -8,29 +8,29 @@ class BrowserWindow {
     // biome-ignore lint/correctness/noConstructorReturn: This is a mock class
     return instance;
   }
-  loadURL = jest.fn();
+  loadURL = vi.fn();
   webContents = {
     on: () => {},
     session: {
-      clearStorageData: jest.fn(),
+      clearStorageData: vi.fn(),
     },
   };
   on() {}
-  close = jest.fn();
-  hide = jest.fn();
-  destroy = jest.fn();
+  close = vi.fn();
+  hide = vi.fn();
+  destroy = vi.fn();
 }
 
 const dialog = {
-  showErrorBox: jest.fn(),
+  showErrorBox: vi.fn(),
 };
 
 module.exports = {
   BrowserWindow: BrowserWindow,
   dialog: dialog,
   app: {
-    getLoginItemSettings: jest.fn(),
+    getLoginItemSettings: vi.fn(),
     setLoginItemSettings: () => {},
   },
-  getCurrentWindow: jest.fn(() => instance || new BrowserWindow()),
+  getCurrentWindow: vi.fn(() => instance || new BrowserWindow()),
 };

@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/components/notifications/NotificationRow.tsx should render itself & its children - group by date 1`] = `
+exports[`renderer/components/notifications/NotificationRow.tsx > should render itself & its children - group by date 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -781,7 +781,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
 }
 `;
 
-exports[`renderer/components/notifications/NotificationRow.tsx should render itself & its children - group by repositories 1`] = `
+exports[`renderer/components/notifications/NotificationRow.tsx > should render itself & its children - group by repositories 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -1460,7 +1460,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
 }
 `;
 
-exports[`renderer/components/notifications/NotificationRow.tsx should render itself & its children - hide numbers 1`] = `
+exports[`renderer/components/notifications/NotificationRow.tsx > should render itself & its children - hide numbers 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>

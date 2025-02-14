@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/routes/Accounts.tsx Account interactions should render with PAT scopes warning 1`] = `
+exports[`renderer/routes/Accounts.tsx > Account interactions > should render with PAT scopes warning 1`] = `
 <div
   class="Box-sc-g0xbh4-0 flex flex-col h-screen"
   data-testid="accounts"
@@ -1267,7 +1267,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
 </div>
 `;
 
-exports[`renderer/routes/Accounts.tsx Account interactions should set account as primary account 1`] = `
+exports[`renderer/routes/Accounts.tsx > Account interactions > should set account as primary account 1`] = `
 <div
   class="Box-sc-g0xbh4-0 flex flex-col h-screen"
   data-testid="accounts"
@@ -2534,7 +2534,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
 </div>
 `;
 
-exports[`renderer/routes/Accounts.tsx General should render itself & its children 1`] = `
+exports[`renderer/routes/Accounts.tsx > General > should render itself & its children 1`] = `
 <div
   class="Box-sc-g0xbh4-0 flex flex-col h-screen"
   data-testid="accounts"

@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/utils/emojis.ts emoji svg filenames 1`] = `
+exports[`renderer/utils/emojis.ts > emoji svg filenames 1`] = `
 [
   "1f389.svg",
   "1f38a.svg",

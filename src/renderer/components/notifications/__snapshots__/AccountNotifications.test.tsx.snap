@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/components/notifications/AccountNotifications.tsx should render itself - account error 1`] = `
+exports[`renderer/components/notifications/AccountNotifications.tsx > should render itself - account error 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -535,7 +535,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
 }
 `;
 
-exports[`renderer/components/notifications/AccountNotifications.tsx should render itself - group notifications by date 1`] = `
+exports[`renderer/components/notifications/AccountNotifications.tsx > should render itself - group notifications by date 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -2258,7 +2258,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
 }
 `;
 
-exports[`renderer/components/notifications/AccountNotifications.tsx should render itself - group notifications by repositories 1`] = `
+exports[`renderer/components/notifications/AccountNotifications.tsx > should render itself - group notifications by repositories 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -2701,7 +2701,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
 }
 `;
 
-exports[`renderer/components/notifications/AccountNotifications.tsx should render itself - no notifications 1`] = `
+exports[`renderer/components/notifications/AccountNotifications.tsx > should render itself - no notifications 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -3226,7 +3226,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
 }
 `;
 
-exports[`renderer/components/notifications/AccountNotifications.tsx should toggle account notifications visibility 1`] = `
+exports[`renderer/components/notifications/AccountNotifications.tsx > should toggle account notifications visibility 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>

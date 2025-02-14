@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/routes/components/primitives/Title.tsx should render the title - default size 1`] = `
+exports[`renderer/routes/components/primitives/Title.tsx > should render the title - default size 1`] = `
 <div>
   <legend>
     <div
@@ -44,7 +44,7 @@ exports[`renderer/routes/components/primitives/Title.tsx should render the title
 </div>
 `;
 
-exports[`renderer/routes/components/primitives/Title.tsx should render the title - specific size 1`] = `
+exports[`renderer/routes/components/primitives/Title.tsx > should render the title - specific size 1`] = `
 <div>
   <legend>
     <div

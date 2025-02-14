@@ -12,13 +12,13 @@ import { NotificationFooter } from './NotificationFooter';
 
 describe('renderer/components/notifications/NotificationFooter.tsx', () => {
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should render itself & its children', async () => {
-    jest
-      .spyOn(global.Date, 'now')
-      .mockImplementation(() => new Date('2024').valueOf());
+    vi.spyOn(global.Date, 'now').mockImplementation(() =>
+      new Date('2024').valueOf(),
+    );
 
     const props = {
       notification: mockSingleNotification,
@@ -35,9 +35,9 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
   });
 
   it('should render itself & its children when last_read_at is null', async () => {
-    jest
-      .spyOn(global.Date, 'now')
-      .mockImplementation(() => new Date('2024').valueOf());
+    vi.spyOn(global.Date, 'now').mockImplementation(() =>
+      new Date('2024').valueOf(),
+    );
 
     const mockNotification = mockSingleNotification;
     mockNotification.last_read_at = null;
@@ -56,9 +56,9 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
 
   describe('security alerts should use github icon for avatar', () => {
     it('Repository Dependabot Alerts Thread', async () => {
-      jest
-        .spyOn(global.Date, 'now')
-        .mockImplementation(() => new Date('2024').valueOf());
+      vi.spyOn(global.Date, 'now').mockImplementation(() =>
+        new Date('2024').valueOf(),
+      );
 
       const mockNotification = mockSingleNotification;
       mockNotification.subject.type = 'RepositoryDependabotAlertsThread';
@@ -76,9 +76,9 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
     });
 
     it('Repository Vulnerability Alert', async () => {
-      jest
-        .spyOn(global.Date, 'now')
-        .mockImplementation(() => new Date('2024').valueOf());
+      vi.spyOn(global.Date, 'now').mockImplementation(() =>
+        new Date('2024').valueOf(),
+      );
 
       const mockNotification = mockSingleNotification;
       mockNotification.subject.type = 'RepositoryVulnerabilityAlert';
@@ -97,9 +97,9 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
   });
 
   it('should default to known avatar if no user found', async () => {
-    jest
-      .spyOn(global.Date, 'now')
-      .mockImplementation(() => new Date('2024').valueOf());
+    vi.spyOn(global.Date, 'now').mockImplementation(() =>
+      new Date('2024').valueOf(),
+    );
 
     const mockNotification = mockSingleNotification;
     mockNotification.subject.user = null;
@@ -117,9 +117,9 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
   });
 
   it('should open notification user profile', () => {
-    const openExternalLinkMock = jest
+    const openExternalLinkMock = vi
       .spyOn(comms, 'openExternalLink')
-      .mockImplementation();
+      .mockImplementation(vi.fn());
 
     const props = {
       notification: {

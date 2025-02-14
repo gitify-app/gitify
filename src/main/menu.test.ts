@@ -2,11 +2,11 @@ import { Menu, MenuItem } from 'electron';
 import type { Menubar } from 'menubar';
 import MenuBuilder from './menu';
 
-jest.mock('electron', () => ({
+vi.mock('electron', () => ({
   Menu: {
-    buildFromTemplate: jest.fn(),
+    buildFromTemplate: vi.fn(),
   },
-  MenuItem: jest.fn(),
+  MenuItem: vi.fn(),
 }));
 
 describe('main/menu.ts', () => {

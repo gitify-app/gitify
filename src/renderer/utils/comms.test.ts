@@ -21,19 +21,19 @@ import * as storage from './storage';
 
 describe('renderer/utils/comms.ts', () => {
   beforeEach(() => {
-    jest.spyOn(ipcRenderer, 'send');
-    jest.spyOn(ipcRenderer, 'invoke');
+    vi.spyOn(ipcRenderer, 'send');
+    vi.spyOn(ipcRenderer, 'invoke');
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   describe('openExternalLink', () => {
     it('should open an external link', () => {
-      jest
-        .spyOn(storage, 'loadState')
-        .mockReturnValue({ settings: mockSettings });
+      vi.spyOn(storage, 'loadState').mockReturnValue({
+        settings: mockSettings,
+      });
 
       openExternalLink('https://www.gitify.io/' as Link);
       expect(shell.openExternal).toHaveBeenCalledTimes(1);
@@ -46,7 +46,7 @@ describe('renderer/utils/comms.ts', () => {
     });
 
     it('should use default open preference if user settings not found', () => {
-      jest.spyOn(storage, 'loadState').mockReturnValue({ settings: null });
+      vi.spyOn(storage, 'loadState').mockReturnValue({ settings: null });
 
       openExternalLink('https://www.gitify.io/' as Link);
       expect(shell.openExternal).toHaveBeenCalledTimes(1);

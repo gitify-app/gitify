@@ -2,14 +2,14 @@ import axios from 'axios';
 import type { Link, Token } from '../../types';
 import { apiRequest, apiRequestAuth } from './request';
 
-jest.mock('axios');
+vi.mock('axios');
 
 const url = 'https://example.com' as Link;
 const method = 'get';
 
 describe('renderer/utils/api/request.ts', () => {
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should make a request with the correct parameters', async () => {
@@ -44,7 +44,7 @@ describe('apiRequestAuth', () => {
   const token = 'yourAuthToken' as Token;
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should make an authenticated request with the correct parameters', async () => {

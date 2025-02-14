@@ -1,24 +1,24 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`apiRequestAuth should make an authenticated request with the correct parameters 1`] = `
+exports[`apiRequestAuth > should make an authenticated request with the correct parameters 1`] = `
 {
   "Accept": "application/json",
-  "Authorization": "token decrypted",
+  "Authorization": "token yourAuthToken",
   "Cache-Control": "",
   "Content-Type": "application/json",
 }
 `;
 
-exports[`apiRequestAuth should make an authenticated request with the correct parameters and default data 1`] = `
+exports[`apiRequestAuth > should make an authenticated request with the correct parameters and default data 1`] = `
 {
   "Accept": "application/json",
-  "Authorization": "token decrypted",
+  "Authorization": "token yourAuthToken",
   "Cache-Control": "",
   "Content-Type": "application/json",
 }
 `;
 
-exports[`renderer/utils/api/request.ts should make a request with the correct parameters 1`] = `
+exports[`renderer/utils/api/request.ts > should make a request with the correct parameters 1`] = `
 {
   "Accept": "application/json",
   "Cache-Control": "no-cache",
@@ -26,7 +26,7 @@ exports[`renderer/utils/api/request.ts should make a request with the correct pa
 }
 `;
 
-exports[`renderer/utils/api/request.ts should make a request with the correct parameters and default data 1`] = `
+exports[`renderer/utils/api/request.ts > should make a request with the correct parameters and default data 1`] = `
 {
   "Accept": "application/json",
   "Cache-Control": "no-cache",

@@ -17,7 +17,7 @@ import {
 } from './client';
 import * as apiRequests from './request';
 
-jest.mock('axios');
+vi.mock('axios');
 
 const mockGitHubHostname = 'github.com' as Hostname;
 const mockEnterpriseHostname = 'example.com' as Hostname;
@@ -25,7 +25,7 @@ const mockThreadId = '1234';
 
 describe('renderer/utils/api/client.ts', () => {
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   describe('getAuthenticatedUser', () => {
@@ -245,7 +245,7 @@ describe('renderer/utils/api/client.ts', () => {
 
   describe('getHtmlUrl', () => {
     it('should return the HTML URL', async () => {
-      const apiRequestAuthMock = jest.spyOn(apiRequests, 'apiRequestAuth');
+      const apiRequestAuthMock = vi.spyOn(apiRequests, 'apiRequestAuth');
 
       const requestPromise = new Promise((resolve) =>
         resolve({
@@ -268,9 +268,9 @@ describe('renderer/utils/api/client.ts', () => {
     });
 
     it('should handle error', async () => {
-      const logErrorSpy = jest.spyOn(logger, 'logError').mockImplementation();
+      const logErrorSpy = vi.spyOn(logger, 'logError').mockImplementation();
 
-      const apiRequestAuthMock = jest.spyOn(apiRequests, 'apiRequestAuth');
+      const apiRequestAuthMock = vi.spyOn(apiRequests, 'apiRequestAuth');
 
       const mockError = new Error('Test error');
 

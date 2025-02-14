@@ -76,10 +76,10 @@ describe('renderer/utils/helpers.ts', () => {
       'https://github.com/gitify-app/notifications-test/issues/785';
     const mockNotificationReferrer =
       'notification_referrer_id=MDE4Ok5vdGlmaWNhdGlvblRocmVhZDEzODY2MTA5NjoxMjM0NTY3ODk%3D';
-    const apiRequestAuthMock = jest.spyOn(apiRequests, 'apiRequestAuth');
+    const apiRequestAuthMock = vi.spyOn(apiRequests, 'apiRequestAuth');
 
     afterEach(() => {
-      jest.clearAllMocks();
+      vi.clearAllMocks();
     });
 
     it('Subject Latest Comment Url: when not null, fetch latest comment html url', async () => {
@@ -485,7 +485,7 @@ describe('renderer/utils/helpers.ts', () => {
       });
 
       it('defaults when exception handled during specialized html enrichment process', async () => {
-        const logErrorSpy = jest.spyOn(logger, 'logError').mockImplementation();
+        const logErrorSpy = vi.spyOn(logger, 'logError').mockImplementation();
 
         const subject = {
           title: 'generate github web url unit tests',

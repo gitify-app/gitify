@@ -5,14 +5,14 @@ import { AppContext } from '../../context/App';
 import { SettingsReset } from './SettingsReset';
 
 describe('renderer/components/settings/SettingsReset.tsx', () => {
-  const resetSettings = jest.fn();
+  const resetSettings = vi.fn();
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should reset default settings when `OK`', async () => {
-    window.confirm = jest.fn(() => true); // always click 'OK'
+    window.confirm = vi.fn(() => true); // always click 'OK'
 
     await act(async () => {
       render(
@@ -37,7 +37,7 @@ describe('renderer/components/settings/SettingsReset.tsx', () => {
   });
 
   it('should skip reset default settings when `cancelled`', async () => {
-    window.confirm = jest.fn(() => false); // always click 'cancel'
+    window.confirm = vi.fn(() => false); // always click 'cancel'
 
     await act(async () => {
       render(

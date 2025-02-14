@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/routes/Filters.tsx General should render itself & its children 1`] = `
+exports[`renderer/routes/Filters.tsx > General > should render itself & its children 1`] = `
 <div
   class="Box-sc-g0xbh4-0 flex flex-col h-screen"
   data-testid="filters"

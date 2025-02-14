@@ -9,7 +9,7 @@ describe('renderer/components/fields/RadioGroup.tsx', () => {
       { label: 'Value 1', value: 'one' },
       { label: 'Value 2', value: 'two' },
     ],
-    onChange: jest.fn(),
+    onChange: vi.fn(),
     value: 'two',
   };
 
