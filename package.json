@@ -190,6 +190,9 @@
     "webpack-merge": "6.0.1"
   },
   "packageManager": "pnpm@10.3.0",
+  "pnpm": {
+    "onlyBuiltDependencies": ["@biomejs/biome", "electron", "esbuild"]
+  },
   "lint-staged": {
     "*": "biome check --fix --no-errors-on-unmatched",
     "*.{js,ts,tsx}": "pnpm test -- --findRelatedTests -u --passWithNoTests"
