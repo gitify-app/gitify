@@ -138,7 +138,7 @@
     "menubar": "9.5.1",
     "react": "19.0.0",
     "react-dom": "19.0.0",
-    "react-router-dom": "7.1.5",
+    "react-router-dom": "7.2.0",
     "update-electron-app": "3.1.1"
   },
   "devDependencies": {
@@ -148,11 +148,11 @@
     "@primer/octicons-react": "19.15.0",
     "@primer/primitives": "10.3.4",
     "@primer/react": "36.27.0",
-    "@tailwindcss/postcss": "4.0.6",
+    "@tailwindcss/postcss": "4.0.7",
     "@testing-library/react": "16.2.0",
-    "@types/node": "22.13.2",
-    "@types/react": "19.0.8",
-    "@types/react-dom": "19.0.3",
+    "@types/node": "22.13.4",
+    "@types/react": "19.0.10",
+    "@types/react-dom": "19.0.4",
     "@types/react-router-dom": "5.3.3",
     "@types/semver": "7.5.8",
     "axios": "1.7.9",
@@ -170,13 +170,13 @@
     "husky": "9.1.7",
     "mini-css-extract-plugin": "2.9.2",
     "nock": "14.0.1",
-    "postcss": "8.5.2",
+    "postcss": "8.5.3",
     "postcss-loader": "8.1.1",
     "rimraf": "6.0.1",
     "semver": "7.7.1",
     "styled-components": "6.1.15",
     "tailwind-merge": "3.0.1",
-    "tailwindcss": "4.0.6",
+    "tailwindcss": "4.0.7",
     "terser-webpack-plugin": "5.3.11",
     "ts-loader": "9.5.2",
     "ts-node": "10.9.2",
@@ -186,12 +186,12 @@
     "webpack-cli": "6.0.1",
     "webpack-merge": "6.0.1"
   },
-  "packageManager": "pnpm@10.3.0",
-  "lint-staged": {
-    "*": "biome check --fix --no-errors-on-unmatched",
-    "*.{js,ts,tsx}": "pnpm test"
-  },
+  "packageManager": "pnpm@10.4.1",
   "pnpm": {
     "onlyBuiltDependencies": ["@biomejs/biome", "electron", "esbuild"]
+  },
+  "lint-staged": {
+    "*": "biome check --fix --no-errors-on-unmatched",
+    "*.{js,ts,tsx}": "pnpm test --run"
   }
 }

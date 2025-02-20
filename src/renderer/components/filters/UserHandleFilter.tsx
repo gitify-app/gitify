@@ -48,25 +48,14 @@ export const UserHandleFilter: FC = () => {
     mapValuesToTokens(settings.filterIncludeHandles),
   );
 
-  const removeIncludeHandleToken = (tokenId: string | number) => {
-    const value = includeHandles.find((v) => v.id === tokenId)?.text || '';
-    updateFilter('filterIncludeHandles', value as UserHandle, false);
-
-    setIncludeHandles(includeHandles.filter((v) => v.id !== tokenId));
-  };
-
-  const includeHandlesKeyDown = (
-    event: React.KeyboardEvent<HTMLInputElement>,
+  const addIncludeHandlesToken = (
+    event:
+      | React.KeyboardEvent<HTMLInputElement>
+      | React.FocusEvent<HTMLInputElement>,
   ) => {
     const value = (event.target as HTMLInputElement).value.trim();
 
-    if (
-      tokenEvents.includes(event.key) &&
-      !includeHandles.some((v) => v.text === value) &&
-      value.length > 0
-    ) {
-      event.preventDefault();
-
+    if (value.length > 0 && !includeHandles.some((v) => v.text === value)) {
       setIncludeHandles([
         ...includeHandles,
         { id: includeHandles.length, text: value },
@@ -77,9 +66,42 @@ export const UserHandleFilter: FC = () => {
     }
   };
 
+  const removeIncludeHandleToken = (tokenId: string | number) => {
+    const value = includeHandles.find((v) => v.id === tokenId)?.text || '';
+    updateFilter('filterIncludeHandles', value as UserHandle, false);
+
+    setIncludeHandles(includeHandles.filter((v) => v.id !== tokenId));
+  };
+
+  const includeHandlesKeyDown = (
+    event: React.KeyboardEvent<HTMLInputElement>,
+  ) => {
+    if (tokenEvents.includes(event.key)) {
+      addIncludeHandlesToken(event);
+    }
+  };
+
   const [excludeHandles, setExcludeHandles] = useState<InputToken[]>(
     mapValuesToTokens(settings.filterExcludeHandles),
   );
+
+  const addExcludeHandlesToken = (
+    event:
+      | React.KeyboardEvent<HTMLInputElement>
+      | React.FocusEvent<HTMLInputElement>,
+  ) => {
+    const value = (event.target as HTMLInputElement).value.trim();
+
+    if (value.length > 0 && !excludeHandles.some((v) => v.text === value)) {
+      setExcludeHandles([
+        ...excludeHandles,
+        { id: excludeHandles.length, text: value },
+      ]);
+      updateFilter('filterExcludeHandles', value as UserHandle, true);
+
+      (event.target as HTMLInputElement).value = '';
+    }
+  };
 
   const removeExcludeHandleToken = (tokenId: string | number) => {
     const value = excludeHandles.find((v) => v.id === tokenId)?.text || '';
@@ -91,22 +113,8 @@ export const UserHandleFilter: FC = () => {
   const excludeHandlesKeyDown = (
     event: React.KeyboardEvent<HTMLInputElement>,
   ) => {
-    const value = (event.target as HTMLInputElement).value.trim();
-
-    if (
-      tokenEvents.includes(event.key) &&
-      !excludeHandles.some((v) => v.text === value) &&
-      value.length > 0
-    ) {
-      event.preventDefault();
-
-      setExcludeHandles([
-        ...excludeHandles,
-        { id: excludeHandles.length, text: value },
-      ]);
-      updateFilter('filterExcludeHandles', value as UserHandle, true);
-
-      (event.target as HTMLInputElement).value = '';
+    if (tokenEvents.includes(event.key)) {
+      addExcludeHandlesToken(event);
     }
   };
 
@@ -146,6 +154,7 @@ export const UserHandleFilter: FC = () => {
             tokens={includeHandles}
             onTokenRemove={removeIncludeHandleToken}
             onKeyDown={includeHandlesKeyDown}
+            onBlur={addIncludeHandlesToken}
             size="small"
             disabled={
               !settings.detailedNotifications ||
@@ -172,6 +181,7 @@ export const UserHandleFilter: FC = () => {
             tokens={excludeHandles}
             onTokenRemove={removeExcludeHandleToken}
             onKeyDown={excludeHandlesKeyDown}
+            onBlur={addExcludeHandlesToken}
             size="small"
             disabled={
               !settings.detailedNotifications ||
