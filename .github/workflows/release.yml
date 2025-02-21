@@ -5,6 +5,9 @@ on:
     branches:
       - release/v*.*.* # macOS code-signing only works on `push` events and not `pull_request` events
 
+permissions:
+  contents: read
+
 jobs:
   lint:
     name: Lint App
