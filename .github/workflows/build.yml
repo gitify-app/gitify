@@ -3,18 +3,27 @@ name: Build
 on:
   workflow_call:
 
+permissions:
+  contents: read
+
 jobs:
   build-macos:
     name: Build macOS (electron-builder)
     runs-on: macos-latest
 
     steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v3
-      - uses: actions/setup-node@v4
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.1.0
+      
+      - name: Setup Node
+        uses: actions/setup-node@1d0ff469b7ec7b3cb9d8673fde0c81c44821de2a # v4.2.0
         with:
           node-version-file: '.nvmrc'
           cache: 'pnpm'
+      
       - run: pnpm install
       - run: pnpm build
       - run: pnpm prepare:remove-source-maps
@@ -22,9 +31,12 @@ jobs:
         env:
           CSC_LINK: ${{ secrets.mac_certs }}
           CSC_KEY_PASSWORD: ${{ secrets.mac_certs_password }}
+      
       - name: Clean up builds
         run: rm -rfv dist/mac-universal
-      - uses: actions/upload-artifact@v4
+      
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4.6.1
         with:
           name: Gitify-dist-mac
           path: dist/
@@ -35,19 +47,28 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v3
-      - uses: actions/setup-node@v4
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.1.0
+      
+      - name: Setup Node
+        uses: actions/setup-node@1d0ff469b7ec7b3cb9d8673fde0c81c44821de2a # v4.2.0
         with:
           node-version-file: '.nvmrc'
           cache: 'pnpm'
+      
       - run: pnpm install
       - run: pnpm build
       - run: pnpm prepare:remove-source-maps
       - run: pnpm package:win --publish=never
+      
       - name: Clean up builds
         run: Remove-Item dist/win-unpacked -Recurse
-      - uses: actions/upload-artifact@v4
+      
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4.6.1
         with:
           name: Gitify-dist-win
           path: dist
@@ -58,19 +79,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v3
-      - uses: actions/setup-node@v4
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.1.0
+      
+      - name: Setup Node
+        uses: actions/setup-node@1d0ff469b7ec7b3cb9d8673fde0c81c44821de2a # v4.2.0
         with:
           node-version-file: '.nvmrc'
           cache: 'pnpm'
+      
       - run: pnpm install
       - run: pnpm build
       - run: pnpm prepare:remove-source-maps
       - run: pnpm package:linux --publish=never
+      
       - name: Clean up builds
         run: rm -rfv dist/linux-unpacked
-      - uses: actions/upload-artifact@v4
+      
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4.6.1
         with:
           name: Gitify-dist-linux
           path: dist

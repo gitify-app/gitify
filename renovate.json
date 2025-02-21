@@ -5,7 +5,8 @@
     ":separateMultipleMajorReleases",
     ":enableVulnerabilityAlerts",
     "schedule:weekly",
-    "customManagers:biomeVersions"
+    "customManagers:biomeVersions",
+    "helpers:pinGitHubActionDigests"
   ],
   "labels": ["dependency"],
   "prConcurrentLimit": 5,

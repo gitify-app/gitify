@@ -6,6 +6,9 @@ on:
       - v*.*.*
   workflow_dispatch: # For manually verify website deployment
 
+permissions:
+  contents: read
+
 jobs:
   redeploy-website:
     name: Deploy Website

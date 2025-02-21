@@ -21,7 +21,7 @@ jobs:
     name: Validate PR title
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/github-script@v7
+      - uses: actions/github-script@v7.0.1
         with:
           script: |
             const title = context.payload.pull_request.title;
@@ -45,4 +45,4 @@ jobs:
     name: Auto-label PR
     runs-on: ubuntu-latest
     steps:
-      - uses: fuxingloh/multi-labeler@v4
+      - uses: fuxingloh/multi-labeler@v4.0.0
