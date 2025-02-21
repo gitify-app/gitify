@@ -29,7 +29,7 @@ jobs:
       - run: pnpm test --coverage --runInBand --verbose
       
       - name: Archive code coverage results
-        uses: actions/upload-artifact@v4.6.1
+        uses: actions/upload-artifact@4cec3d8aa04e39d1a68397de0c4cd6fb9dce8ec1 # v4.6.1
         with:
           name: code-coverage-report
           path: coverage/lcov.info
@@ -59,13 +59,13 @@ jobs:
       - run: pnpm install
      
       - name: Download a single artifact
-        uses: actions/download-artifact@v4.1.8
+        uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16 # v4.1.8
         with:
           name: code-coverage-report
           path: coverage/
       
       - name: SonarQube Cloud Scan
-        uses: SonarSource/sonarqube-scan-action@v5.0.0
+        uses: SonarSource/sonarqube-scan-action@0303d6b62e310685c0e34d0b9cde218036885c4d # v5.0.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
