@@ -5,10 +5,10 @@ import { AppContext } from '../../context/App';
 import { SystemSettings } from './SystemSettings';
 
 describe('renderer/components/settings/SystemSettings.tsx', () => {
-  const updateSetting = jest.fn();
+  const updateSetting = vi.fn();
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should change the open links radio group', async () => {

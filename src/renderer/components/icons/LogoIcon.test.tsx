@@ -16,7 +16,7 @@ describe('renderer/components/icons/LogoIcon.tsx', () => {
   });
 
   it('should click on the logo', () => {
-    const onClick = jest.fn();
+    const onClick = vi.fn();
     render(<LogoIcon onClick={onClick} size={Size.SMALL} />);
 
     fireEvent.click(screen.getByLabelText('Gitify Logo'));

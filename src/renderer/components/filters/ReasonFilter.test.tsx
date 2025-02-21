@@ -5,7 +5,7 @@ import { AppContext } from '../../context/App';
 import { ReasonFilter } from './ReasonFilter';
 
 describe('renderer/components/filters/ReasonFilter.tsx', () => {
-  const updateFilter = jest.fn();
+  const updateFilter = vi.fn();
 
   it('should render itself & its children', () => {
     const tree = render(

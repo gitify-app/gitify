@@ -5,7 +5,7 @@ window.Notification = function (title) {
   this.title = title;
 
   return {
-    onclick: jest.fn(),
+    onclick: vi.fn(),
   };
 };
 
@@ -27,17 +27,17 @@ window.localStorage = {
   setItem: function (key, item) {
     this.store[key] = item;
   },
-  removeItem: jest.fn(),
+  removeItem: vi.fn(),
 };
 
-window.alert = jest.fn();
+window.alert = vi.fn();
 
 module.exports = {
   ipcRenderer: {
-    send: jest.fn(),
-    on: jest.fn(),
-    sendSync: jest.fn(),
-    invoke: jest.fn((channel, ..._args) => {
+    send: vi.fn(),
+    on: vi.fn(),
+    sendSync: vi.fn(),
+    invoke: vi.fn((channel, ..._args) => {
       switch (channel) {
         case 'get-platform':
           return Promise.resolve('darwin');
@@ -53,10 +53,10 @@ module.exports = {
     }),
   },
   shell: {
-    openExternal: jest.fn(),
+    openExternal: vi.fn(),
   },
   webFrame: {
-    setZoomLevel: jest.fn(),
-    getZoomLevel: jest.fn(),
+    setZoomLevel: vi.fn(),
+    getZoomLevel: vi.fn(),
   },
 };

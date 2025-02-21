@@ -24,22 +24,22 @@ import { getNewOAuthAppURL, getNewTokenURL } from './utils';
 
 describe('renderer/utils/auth/utils.ts', () => {
   describe('authGitHub', () => {
-    const openExternalLinkMock = jest
+    const openExternalLinkMock = vi
       .spyOn(comms, 'openExternalLink')
-      .mockImplementation();
+      .mockImplementation(vi.fn());
 
     afterEach(() => {
-      jest.clearAllMocks();
+      vi.clearAllMocks();
     });
 
     it('should call authGitHub - success auth flow', async () => {
-      const mockIpcRendererOn = (
-        jest.spyOn(ipcRenderer, 'on') as jest.Mock
-      ).mockImplementation((event, callback) => {
-        if (event === 'gitify:auth-callback') {
-          callback(null, 'gitify://auth?code=123-456');
-        }
-      });
+      const mockIpcRendererOn = vi
+        .spyOn(ipcRenderer, 'on')
+        .mockImplementation((event, callback) => {
+          if (event === 'gitify:auth-callback') {
+            callback(null, 'gitify://auth?code=123-456');
+          }
+        });
 
       const res = await auth.authGitHub();
 
@@ -59,13 +59,14 @@ describe('renderer/utils/auth/utils.ts', () => {
     });
 
     it('should call authGitHub - success oauth flow', async () => {
-      const mockIpcRendererOn = (
-        jest.spyOn(ipcRenderer, 'on') as jest.Mock
-      ).mockImplementation((event, callback) => {
-        if (event === 'gitify:auth-callback') {
-          callback(null, 'gitify://oauth?code=123-456');
-        }
-      });
+      const mockIpcRendererOn = vi
+        .spyOn(ipcRenderer, 'on')
+        .mockImplementation((event, callback) => {
+          if (event === 'gitify:auth-callback') {
+            callback(null, 'gitify://oauth?code=123-456');
+          }
+          return ipcRenderer;
+        });
 
       const res = await auth.authGitHub({
         clientId: 'BYO_CLIENT_ID' as ClientID,
@@ -89,16 +90,16 @@ describe('renderer/utils/auth/utils.ts', () => {
     });
 
     it('should call authGitHub - failure', async () => {
-      const mockIpcRendererOn = (
-        jest.spyOn(ipcRenderer, 'on') as jest.Mock
-      ).mockImplementation((event, callback) => {
-        if (event === 'gitify:auth-callback') {
-          callback(
-            null,
-            'gitify://auth?error=invalid_request&error_description=The+redirect_uri+is+missing+or+invalid.&error_uri=https://docs.github.com/en/developers/apps/troubleshooting-oauth-errors',
-          );
-        }
-      });
+      const mockIpcRendererOn = vi
+        .spyOn(ipcRenderer, 'on')
+        .mockImplementation((event, callback) => {
+          if (event === 'gitify:auth-callback') {
+            callback(
+              null,
+              'gitify://auth?error=invalid_request&error_description=The+redirect_uri+is+missing+or+invalid.&error_uri=https://docs.github.com/en/developers/apps/troubleshooting-oauth-errors',
+            );
+          }
+        });
 
       await expect(async () => await auth.authGitHub()).rejects.toEqual(
         new Error(
@@ -121,7 +122,7 @@ describe('renderer/utils/auth/utils.ts', () => {
 
   describe('getToken', () => {
     const authCode = '123-456' as AuthCode;
-    const apiRequestMock = jest.spyOn(apiRequests, 'apiRequest');
+    const apiRequestMock = vi.spyOn(apiRequests, 'apiRequest');
 
     it('should get a token - success', async () => {
       const requestPromise = new Promise((resolve) =>
