@@ -1,4 +1,4 @@
-import { ipcRenderer, webFrame } from 'electron';
+// import { ipcRenderer, webFrame } from 'electron';
 import {
   type ReactNode,
   createContext,
@@ -10,7 +10,7 @@ import {
 
 import { useTheme } from '@primer/react';
 
-import { namespacedEvent } from '../../shared/events';
+// import { namespacedEvent } from '../../shared/events';
 import { useInterval } from '../hooks/useInterval';
 import { useNotifications } from '../hooks/useNotifications';
 import {
@@ -55,14 +55,14 @@ import {
 } from '../utils/comms';
 import { Constants } from '../utils/constants';
 import { getNotificationCount } from '../utils/notifications/notifications';
-import { clearState, loadState, saveState } from '../utils/storage';
+import { loadState, saveState } from '../utils/storage';
 import {
   DEFAULT_DAY_COLOR_SCHEME,
   DEFAULT_NIGHT_COLOR_SCHEME,
   mapThemeModeToColorMode,
   mapThemeModeToColorScheme,
 } from '../utils/theme';
-import { zoomPercentageToLevel } from '../utils/zoom';
+// import { zoomPercentageToLevel } from '../utils/zoom';
 
 export const defaultAuth: AuthState = {
   accounts: [],
@@ -206,13 +206,13 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     setKeyboardShortcut(settings.keyboardShortcut);
   }, [settings.keyboardShortcut]);
 
-  useEffect(() => {
-    ipcRenderer.on(namespacedEvent('reset-app'), () => {
-      clearState();
-      setAuth(defaultAuth);
-      setSettings(defaultSettings);
-    });
-  }, []);
+  // useEffect(() => {
+  //   ipcRenderer.on(namespacedEvent('reset-app'), () => {
+  //     clearState();
+  //     setAuth(defaultAuth);
+  //     setSettings(defaultSettings);
+  //   });
+  // }, []);
 
   const clearFilters = useCallback(() => {
     const newSettings = { ...settings, ...defaultFilters };
@@ -312,9 +312,9 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       setKeyboardShortcut(existing.settings.keyboardShortcut);
       setAlternateIdleIcon(existing.settings.useAlternateIdleIcon);
       setSettings({ ...defaultSettings, ...existing.settings });
-      webFrame.setZoomLevel(
-        zoomPercentageToLevel(existing.settings.zoomPercentage),
-      );
+      // webFrame.setZoomLevel(
+      //   zoomPercentageToLevel(existing.settings.zoomPercentage),
+      // );
     }
 
     if (existing.auth) {
