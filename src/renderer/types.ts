@@ -47,7 +47,7 @@ export type SettingsValue =
   | Theme
   | FilterValue[];
 
-export type FilterValue = Reason | UserType | UserHandle;
+export type FilterValue = Reason | UserType | UserHandle | FilterStateType;
 
 export type SettingsState = AppearanceSettingsState &
   NotificationSettingsState &
@@ -87,6 +87,7 @@ export interface FilterSettingsState {
   filterUserTypes: UserType[];
   filterIncludeHandles: string[];
   filterExcludeHandles: string[];
+  filterStates: FilterStateType[];
   filterReasons: Reason[];
 }
 
@@ -187,3 +188,5 @@ export type Chevron = {
   icon: FC<OcticonProps>;
   label: string;
 };
+
+export type FilterStateType = 'open' | 'closed' | 'merged' | 'draft' | 'other';

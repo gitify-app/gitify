@@ -33,13 +33,14 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
       }),
     ];
 
-    it('should ignore user type or handle filters if detailed notifications not enabled', async () => {
+    it('should ignore user type, handle filters and state filters if detailed notifications not enabled', async () => {
       const result = filterNotifications(mockNotifications, {
         ...mockSettings,
         detailedNotifications: false,
         filterUserTypes: ['Bot'],
         filterIncludeHandles: ['github-user'],
         filterExcludeHandles: ['github-bot'],
+        filterStates: ['merged'],
       });
 
       expect(result.length).toBe(2);
@@ -77,6 +78,18 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
 
       expect(result.length).toBe(1);
       expect(result).toEqual([mockNotifications[0]]);
+    });
+
+    it('should filter notifications by state when provided', async () => {
+      mockNotifications[0].subject.state = 'open';
+      mockNotifications[1].subject.state = 'closed';
+      const result = filterNotifications(mockNotifications, {
+        ...mockSettings,
+        filterStates: ['closed'],
+      });
+
+      expect(result.length).toBe(1);
+      expect(result).toEqual([mockNotifications[1]]);
     });
 
     it('should filter notifications by reasons when provided', async () => {
@@ -117,6 +130,14 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
       const settings = {
         ...defaultSettings,
         filterExcludeHandles: ['gitify'],
+      } as SettingsState;
+      expect(hasAnyFiltersSet(settings)).toBe(true);
+    });
+
+    it('non-default state filters', () => {
+      const settings = {
+        ...defaultSettings,
+        filterStates: ['draft', 'merged'],
       } as SettingsState;
       expect(hasAnyFiltersSet(settings)).toBe(true);
     });
