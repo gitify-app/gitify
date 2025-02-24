@@ -1,87 +1,60 @@
-import { ipcRenderer, shell } from 'electron';
-import { namespacedEvent } from '../../shared/events';
 import { defaultSettings } from '../context/App';
-import { type Link, OpenPreference } from '../types';
-import { Constants } from './constants';
+import type { Link } from '../types';
 import { loadState } from './storage';
 
 export function openExternalLink(url: Link): void {
+  // Load the state from local storage to avoid having to pass settings as a parameter
+  const { settings } = loadState();
+  const openPreference = settings
+    ? settings.openLinks
+    : defaultSettings.openLinks;
+
   if (url.toLowerCase().startsWith('https://')) {
-    // Load the state from local storage to avoid having to pass settings as a parameter
-    const { settings } = loadState();
-
-    const openPreference = settings
-      ? settings.openLinks
-      : defaultSettings.openLinks;
-
-    shell.openExternal(url, {
-      activate: openPreference === OpenPreference.FOREGROUND,
-    });
+    console.log('COMMS OPEN EXTERNAL LINK');
+    window.gitify.openExternalLink(url, openPreference);
   }
 }
 
-export async function getAppVersion(): Promise<string> {
-  return await ipcRenderer.invoke(namespacedEvent('version'));
+export function getAppVersion(): string {
+  return window.gitify.getAppVersion();
 }
 
 export async function encryptValue(value: string): Promise<string> {
-  return await ipcRenderer.invoke(
-    namespacedEvent('safe-storage-encrypt'),
-    value,
-  );
+  return await window.gitify.encryptValue(value);
 }
 
 export async function decryptValue(value: string): Promise<string> {
-  return await ipcRenderer.invoke(
-    namespacedEvent('safe-storage-decrypt'),
-    value,
-  );
+  return await window.gitify.decryptValue(value);
 }
 
 export function quitApp(): void {
-  ipcRenderer.send(namespacedEvent('quit'));
+  window.gitify.quitApp();
 }
 
 export function showWindow(): void {
-  ipcRenderer.send(namespacedEvent('window-show'));
+  window.gitify.showWindow();
 }
 
 export function hideWindow(): void {
-  ipcRenderer.send(namespacedEvent('window-hide'));
+  window.gitify.hideWindow();
 }
 
 export function setAutoLaunch(value: boolean): void {
-  ipcRenderer.send(namespacedEvent('update-auto-launch'), {
-    openAtLogin: value,
-    openAsHidden: value,
-  });
+  window.gitify.setAutoLaunch(value);
 }
 
 export function setAlternateIdleIcon(value: boolean): void {
-  ipcRenderer.send(namespacedEvent('use-alternate-idle-icon'), value);
+  window.gitify.setAlternateIdleIcon(value);
 }
 
 export function setKeyboardShortcut(keyboardShortcut: boolean): void {
-  ipcRenderer.send(namespacedEvent('update-keyboard-shortcut'), {
-    enabled: keyboardShortcut,
-    keyboardShortcut: Constants.DEFAULT_KEYBOARD_SHORTCUT,
-  });
+  window.gitify.setKeyboardShortcut(keyboardShortcut);
 }
 
 export function updateTrayIcon(notificationsLength = 0): void {
-  if (notificationsLength < 0) {
-    ipcRenderer.send(namespacedEvent('icon-error'));
-    return;
-  }
-
-  if (notificationsLength > 0) {
-    ipcRenderer.send(namespacedEvent('icon-active'));
-    return;
-  }
-
-  ipcRenderer.send(namespacedEvent('icon-idle'));
+  window.gitify.updateTrayIcon(notificationsLength);
 }
 
 export function updateTrayTitle(title = ''): void {
-  ipcRenderer.send(namespacedEvent('update-title'), title);
+  window.gitify.updateTrayTitle(title);
 }
