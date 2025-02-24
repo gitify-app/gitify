@@ -101,6 +101,7 @@ export const defaultFilters: FilterSettingsState = {
   filterUserTypes: [],
   filterIncludeHandles: [],
   filterExcludeHandles: [],
+  filterStates: [],
   filterReasons: [],
 };
 
