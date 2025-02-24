@@ -2,7 +2,7 @@
 
 exports[`renderer/components/filters/UserTypeFilter.tsx should be able to toggle user type - none already set 1`] = `
 <div
-  class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
+  class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
   data-align="stretch"
   data-direction="horizontal"
   data-gap="normal"
@@ -11,7 +11,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should be able to toggle
   data-wrap="nowrap"
 >
   <div
-    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+    class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
     data-align="center"
     data-direction="horizontal"
     data-gap="condensed"
@@ -33,7 +33,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should be able to toggle
     </label>
   </div>
   <div
-    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+    class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
     data-align="center"
     data-direction="horizontal"
     data-gap="condensed"
@@ -78,7 +78,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should be able to toggle
     </div>
   </div>
   <div
-    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+    class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
     data-align="center"
     data-direction="horizontal"
     data-gap="condensed"
@@ -104,7 +104,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should be able to toggle
 
 exports[`renderer/components/filters/UserTypeFilter.tsx should be able to toggle user type - some filters already set 1`] = `
 <div
-  class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
+  class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
   data-align="stretch"
   data-direction="horizontal"
   data-gap="normal"
@@ -113,7 +113,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should be able to toggle
   data-wrap="nowrap"
 >
   <div
-    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+    class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
     data-align="center"
     data-direction="horizontal"
     data-gap="condensed"
@@ -136,7 +136,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should be able to toggle
     </label>
   </div>
   <div
-    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+    class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
     data-align="center"
     data-direction="horizontal"
     data-gap="condensed"
@@ -181,7 +181,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should be able to toggle
     </div>
   </div>
   <div
-    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+    class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
     data-align="center"
     data-direction="horizontal"
     data-gap="condensed"
@@ -205,7 +205,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should be able to toggle
 </div>
 `;
 
-exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & its children - detailed notifications disabled 1`] = `
+exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & its children with detailed notifications disabled 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -215,7 +215,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
         id="filter-user-types"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="baseline"
           data-direction="horizontal"
           data-gap="condensed"
@@ -228,7 +228,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
               class="Box-sc-g0xbh4-0 mb-2"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -254,7 +254,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
                   />
                 </svg>
                 <h2
-                  class="Heading__StyledHeading-sc-1c1dgg0-0 eQYHUB"
+                  class="Heading__StyledHeading-sc-1c1dgg0-0 lfvrLU"
                   sx="[object Object]"
                 >
                   User Type
@@ -287,7 +287,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
           </div>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="stretch"
           data-direction="horizontal"
           data-gap="normal"
@@ -296,7 +296,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
           data-wrap="nowrap"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -317,9 +317,23 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
             >
               User
             </label>
+            <span
+              aria-hidden="true"
+              class="Box-sc-g0xbh4-0 bfvZWv"
+              sx="[object Object]"
+            >
+              1
+            </span>
+            <span
+              class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 hxuUuW"
+            >
+               (
+              1
+              )
+            </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -365,7 +379,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
             </div>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -397,7 +411,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
       id="filter-user-types"
     >
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
         data-align="baseline"
         data-direction="horizontal"
         data-gap="condensed"
@@ -410,7 +424,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
             class="Box-sc-g0xbh4-0 mb-2"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
+              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -436,7 +450,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
                 />
               </svg>
               <h2
-                class="Heading__StyledHeading-sc-1c1dgg0-0 eQYHUB"
+                class="Heading__StyledHeading-sc-1c1dgg0-0 lfvrLU"
                 sx="[object Object]"
               >
                 User Type
@@ -469,7 +483,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
         </div>
       </div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
         data-align="stretch"
         data-direction="horizontal"
         data-gap="normal"
@@ -478,7 +492,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
         data-wrap="nowrap"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -499,9 +513,23 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
           >
             User
           </label>
+          <span
+            aria-hidden="true"
+            class="Box-sc-g0xbh4-0 bfvZWv"
+            sx="[object Object]"
+          >
+            1
+          </span>
+          <span
+            class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 hxuUuW"
+          >
+             (
+            1
+            )
+          </span>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -547,7 +575,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
           </div>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -626,7 +654,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
 }
 `;
 
-exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & its children - detailed notifications enabled 1`] = `
+exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & its children with detailed notifications enabled 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -636,7 +664,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
         id="filter-user-types"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="baseline"
           data-direction="horizontal"
           data-gap="condensed"
@@ -649,7 +677,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
               class="Box-sc-g0xbh4-0 mb-2"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
+                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -675,7 +703,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
                   />
                 </svg>
                 <h2
-                  class="Heading__StyledHeading-sc-1c1dgg0-0 eQYHUB"
+                  class="Heading__StyledHeading-sc-1c1dgg0-0 lfvrLU"
                   sx="[object Object]"
                 >
                   User Type
@@ -708,7 +736,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
           </div>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
           data-align="stretch"
           data-direction="horizontal"
           data-gap="normal"
@@ -717,7 +745,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
           data-wrap="nowrap"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -737,9 +765,23 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
             >
               User
             </label>
+            <span
+              aria-hidden="true"
+              class="Box-sc-g0xbh4-0 bfvZWv"
+              sx="[object Object]"
+            >
+              1
+            </span>
+            <span
+              class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 hxuUuW"
+            >
+               (
+              1
+              )
+            </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -784,7 +826,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
             </div>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+            class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -815,7 +857,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
       id="filter-user-types"
     >
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
         data-align="baseline"
         data-direction="horizontal"
         data-gap="condensed"
@@ -828,7 +870,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
             class="Box-sc-g0xbh4-0 mb-2"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
+              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -854,7 +896,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
                 />
               </svg>
               <h2
-                class="Heading__StyledHeading-sc-1c1dgg0-0 eQYHUB"
+                class="Heading__StyledHeading-sc-1c1dgg0-0 lfvrLU"
                 sx="[object Object]"
               >
                 User Type
@@ -887,7 +929,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
         </div>
       </div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
+        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
         data-align="stretch"
         data-direction="horizontal"
         data-gap="normal"
@@ -896,7 +938,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
         data-wrap="nowrap"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -916,9 +958,23 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
           >
             User
           </label>
+          <span
+            aria-hidden="true"
+            class="Box-sc-g0xbh4-0 bfvZWv"
+            sx="[object Object]"
+          >
+            1
+          </span>
+          <span
+            class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 hxuUuW"
+          >
+             (
+            1
+            )
+          </span>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -963,7 +1019,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
           </div>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+          class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"

@@ -63,27 +63,27 @@ export function filterNotificationByState(
   notification: Notification,
   stateType: FilterStateType,
 ): boolean {
-  if (stateType === 'open') {
-    return ['open', 'reopened'].includes(notification.subject?.state);
-  }
+  const allOpenStates = ['open', 'reopened'];
+  const allClosedStates = ['closed', 'completed', 'not_planned'];
+  const allMergedStates = ['merged'];
+  const allDraftStates = ['draft'];
+  const allFilterableStates = [
+    ...allOpenStates,
+    ...allClosedStates,
+    ...allMergedStates,
+    ...allDraftStates,
+  ];
 
-  if (stateType === 'closed') {
-    return ['closed', 'completed', 'not_planned'].includes(
-      notification.subject?.state,
-    );
+  switch (stateType) {
+    case 'open':
+      return allOpenStates.includes(notification.subject?.state);
+    case 'closed':
+      return allClosedStates.includes(notification.subject?.state);
+    case 'merged':
+      return allMergedStates.includes(notification.subject?.state);
+    case 'draft':
+      return allDraftStates.includes(notification.subject?.state);
+    default:
+      return !allFilterableStates.includes(notification.subject?.state);
   }
-
-  if (stateType === 'merged' || stateType === 'draft') {
-    return notification.subject?.state === stateType;
-  }
-
-  return ![
-    'open',
-    'reopened',
-    'closed',
-    'completed',
-    'not_planned',
-    'merged',
-    'draft',
-  ].includes(notification.subject?.state);
 }
