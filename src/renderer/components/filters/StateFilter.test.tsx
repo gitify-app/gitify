@@ -4,9 +4,9 @@ import { mockAccountNotifications } from '../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../__mocks__/state-mocks';
 import { AppContext } from '../../context/App';
 import type { SettingsState } from '../../types';
-import { UserTypeFilter } from './UserTypeFilter';
+import { StateFilter } from './StateFilter';
 
-describe('renderer/components/filters/UserTypeFilter.tsx', () => {
+describe('renderer/components/filters/StateFilter.tsx', () => {
   const updateFilter = jest.fn();
 
   describe('should render itself & its children', () => {
@@ -22,7 +22,7 @@ describe('renderer/components/filters/UserTypeFilter.tsx', () => {
           }}
         >
           <MemoryRouter>
-            <UserTypeFilter />
+            <StateFilter />
           </MemoryRouter>
         </AppContext.Provider>,
       );
@@ -42,7 +42,7 @@ describe('renderer/components/filters/UserTypeFilter.tsx', () => {
           }}
         >
           <MemoryRouter>
-            <UserTypeFilter />
+            <StateFilter />
           </MemoryRouter>
         </AppContext.Provider>,
       );
@@ -58,25 +58,25 @@ describe('renderer/components/filters/UserTypeFilter.tsx', () => {
           value={{
             settings: {
               ...mockSettings,
-              filterUserTypes: [],
+              filterStates: [],
             },
             notifications: [],
             updateFilter,
           }}
         >
           <MemoryRouter>
-            <UserTypeFilter />
+            <StateFilter />
           </MemoryRouter>
         </AppContext.Provider>,
       );
     });
 
-    fireEvent.click(screen.getByLabelText('User'));
+    fireEvent.click(screen.getByLabelText('Open'));
 
-    expect(updateFilter).toHaveBeenCalledWith('filterUserTypes', 'User', true);
+    expect(updateFilter).toHaveBeenCalledWith('filterStates', 'open', true);
 
     expect(
-      screen.getByLabelText('User').parentNode.parentNode,
+      screen.getByLabelText('Open').parentNode.parentNode,
     ).toMatchSnapshot();
   });
 
@@ -87,25 +87,25 @@ describe('renderer/components/filters/UserTypeFilter.tsx', () => {
           value={{
             settings: {
               ...mockSettings,
-              filterUserTypes: ['User'],
+              filterStates: ['open'],
             },
             notifications: [],
             updateFilter,
           }}
         >
           <MemoryRouter>
-            <UserTypeFilter />
+            <StateFilter />
           </MemoryRouter>
         </AppContext.Provider>,
       );
     });
 
-    fireEvent.click(screen.getByLabelText('Bot'));
+    fireEvent.click(screen.getByLabelText('Closed'));
 
-    expect(updateFilter).toHaveBeenCalledWith('filterUserTypes', 'Bot', true);
+    expect(updateFilter).toHaveBeenCalledWith('filterStates', 'closed', true);
 
     expect(
-      screen.getByLabelText('Bot').parentNode.parentNode,
+      screen.getByLabelText('Closed').parentNode.parentNode,
     ).toMatchSnapshot();
   });
 });

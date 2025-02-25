@@ -1,11 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renderer/components/filters/UserTypeFilter.tsx should be able to toggle user type - none already set 1`] = `
+exports[`renderer/components/filters/StateFilter.tsx should be able to toggle user type - none already set 1`] = `
 <div
   class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
   data-align="stretch"
-  data-direction="horizontal"
-  data-gap="normal"
+  data-direction="vertical"
+  data-gap="condensed"
   data-justify="start"
   data-padding="none"
   data-wrap="nowrap"
@@ -21,15 +21,15 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should be able to toggle
   >
     <input
       class="size-4 rounded-sm cursor-pointer"
-      data-testid="checkbox-User"
-      id="User"
+      data-testid="checkbox-Draft"
+      id="Draft"
       type="checkbox"
     />
     <label
       class="font-medium text-gitify-font cursor-pointer"
-      for="User"
+      for="Draft"
     >
-      User
+      Draft
     </label>
   </div>
   <div
@@ -43,21 +43,21 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should be able to toggle
   >
     <input
       class="size-4 rounded-sm cursor-pointer"
-      data-testid="checkbox-Bot"
-      id="Bot"
+      data-testid="checkbox-Open"
+      id="Open"
       type="checkbox"
     />
     <label
       class="font-medium text-gitify-font cursor-pointer"
-      for="Bot"
+      for="Open"
     >
-      Bot
+      Open
     </label>
     <div
-      aria-label="tooltip-Bot"
+      aria-label="tooltip-Open"
       class="Box-sc-g0xbh4-0 relative"
-      data-testid="tooltip-tooltip-Bot"
-      id="tooltip-Bot"
+      data-testid="tooltip-tooltip-Open"
+      id="tooltip-Open"
     >
       <svg
         aria-hidden="true"
@@ -88,30 +88,142 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should be able to toggle
   >
     <input
       class="size-4 rounded-sm cursor-pointer"
-      data-testid="checkbox-Organization"
-      id="Organization"
+      data-testid="checkbox-Merged"
+      id="Merged"
       type="checkbox"
     />
     <label
       class="font-medium text-gitify-font cursor-pointer"
-      for="Organization"
+      for="Merged"
     >
-      Organization
+      Merged
     </label>
+  </div>
+  <div
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+    data-align="center"
+    data-direction="horizontal"
+    data-gap="condensed"
+    data-justify="start"
+    data-padding="none"
+    data-wrap="nowrap"
+  >
+    <input
+      class="size-4 rounded-sm cursor-pointer"
+      data-testid="checkbox-Closed"
+      id="Closed"
+      type="checkbox"
+    />
+    <label
+      class="font-medium text-gitify-font cursor-pointer"
+      for="Closed"
+    >
+      Closed
+    </label>
+    <div
+      aria-label="tooltip-Closed"
+      class="Box-sc-g0xbh4-0 relative"
+      data-testid="tooltip-tooltip-Closed"
+      id="tooltip-Closed"
+    >
+      <svg
+        aria-hidden="true"
+        class="octicon octicon-question text-gitify-tooltip-icon"
+        display="inline-block"
+        fill="currentColor"
+        focusable="false"
+        height="16"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+        />
+      </svg>
+    </div>
+  </div>
+  <div
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+    data-align="center"
+    data-direction="horizontal"
+    data-gap="condensed"
+    data-justify="start"
+    data-padding="none"
+    data-wrap="nowrap"
+  >
+    <input
+      class="size-4 rounded-sm cursor-pointer"
+      data-testid="checkbox-Other"
+      id="Other"
+      type="checkbox"
+    />
+    <label
+      class="font-medium text-gitify-font cursor-pointer"
+      for="Other"
+    >
+      Other
+    </label>
+    <div
+      aria-label="tooltip-Other"
+      class="Box-sc-g0xbh4-0 relative"
+      data-testid="tooltip-tooltip-Other"
+      id="tooltip-Other"
+    >
+      <svg
+        aria-hidden="true"
+        class="octicon octicon-question text-gitify-tooltip-icon"
+        display="inline-block"
+        fill="currentColor"
+        focusable="false"
+        height="16"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+        />
+      </svg>
+    </div>
   </div>
 </div>
 `;
 
-exports[`renderer/components/filters/UserTypeFilter.tsx should be able to toggle user type - some filters already set 1`] = `
+exports[`renderer/components/filters/StateFilter.tsx should be able to toggle user type - some filters already set 1`] = `
 <div
   class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
   data-align="stretch"
-  data-direction="horizontal"
-  data-gap="normal"
+  data-direction="vertical"
+  data-gap="condensed"
   data-justify="start"
   data-padding="none"
   data-wrap="nowrap"
 >
+  <div
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+    data-align="center"
+    data-direction="horizontal"
+    data-gap="condensed"
+    data-justify="start"
+    data-padding="none"
+    data-wrap="nowrap"
+  >
+    <input
+      class="size-4 rounded-sm cursor-pointer"
+      data-testid="checkbox-Draft"
+      id="Draft"
+      type="checkbox"
+    />
+    <label
+      class="font-medium text-gitify-font cursor-pointer"
+      for="Draft"
+    >
+      Draft
+    </label>
+  </div>
   <div
     class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
     data-align="center"
@@ -124,43 +236,21 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should be able to toggle
     <input
       checked=""
       class="size-4 rounded-sm cursor-pointer"
-      data-testid="checkbox-User"
-      id="User"
+      data-testid="checkbox-Open"
+      id="Open"
       type="checkbox"
     />
     <label
       class="font-medium text-gitify-font cursor-pointer"
-      for="User"
+      for="Open"
     >
-      User
-    </label>
-  </div>
-  <div
-    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
-    data-align="center"
-    data-direction="horizontal"
-    data-gap="condensed"
-    data-justify="start"
-    data-padding="none"
-    data-wrap="nowrap"
-  >
-    <input
-      class="size-4 rounded-sm cursor-pointer"
-      data-testid="checkbox-Bot"
-      id="Bot"
-      type="checkbox"
-    />
-    <label
-      class="font-medium text-gitify-font cursor-pointer"
-      for="Bot"
-    >
-      Bot
+      Open
     </label>
     <div
-      aria-label="tooltip-Bot"
+      aria-label="tooltip-Open"
       class="Box-sc-g0xbh4-0 relative"
-      data-testid="tooltip-tooltip-Bot"
-      id="tooltip-Bot"
+      data-testid="tooltip-tooltip-Open"
+      id="tooltip-Open"
     >
       <svg
         aria-hidden="true"
@@ -191,28 +281,118 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should be able to toggle
   >
     <input
       class="size-4 rounded-sm cursor-pointer"
-      data-testid="checkbox-Organization"
-      id="Organization"
+      data-testid="checkbox-Merged"
+      id="Merged"
       type="checkbox"
     />
     <label
       class="font-medium text-gitify-font cursor-pointer"
-      for="Organization"
+      for="Merged"
     >
-      Organization
+      Merged
     </label>
+  </div>
+  <div
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+    data-align="center"
+    data-direction="horizontal"
+    data-gap="condensed"
+    data-justify="start"
+    data-padding="none"
+    data-wrap="nowrap"
+  >
+    <input
+      class="size-4 rounded-sm cursor-pointer"
+      data-testid="checkbox-Closed"
+      id="Closed"
+      type="checkbox"
+    />
+    <label
+      class="font-medium text-gitify-font cursor-pointer"
+      for="Closed"
+    >
+      Closed
+    </label>
+    <div
+      aria-label="tooltip-Closed"
+      class="Box-sc-g0xbh4-0 relative"
+      data-testid="tooltip-tooltip-Closed"
+      id="tooltip-Closed"
+    >
+      <svg
+        aria-hidden="true"
+        class="octicon octicon-question text-gitify-tooltip-icon"
+        display="inline-block"
+        fill="currentColor"
+        focusable="false"
+        height="16"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+        />
+      </svg>
+    </div>
+  </div>
+  <div
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+    data-align="center"
+    data-direction="horizontal"
+    data-gap="condensed"
+    data-justify="start"
+    data-padding="none"
+    data-wrap="nowrap"
+  >
+    <input
+      class="size-4 rounded-sm cursor-pointer"
+      data-testid="checkbox-Other"
+      id="Other"
+      type="checkbox"
+    />
+    <label
+      class="font-medium text-gitify-font cursor-pointer"
+      for="Other"
+    >
+      Other
+    </label>
+    <div
+      aria-label="tooltip-Other"
+      class="Box-sc-g0xbh4-0 relative"
+      data-testid="tooltip-tooltip-Other"
+      id="tooltip-Other"
+    >
+      <svg
+        aria-hidden="true"
+        class="octicon octicon-question text-gitify-tooltip-icon"
+        display="inline-block"
+        fill="currentColor"
+        focusable="false"
+        height="16"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+        />
+      </svg>
+    </div>
   </div>
 </div>
 `;
 
-exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & its children with detailed notifications disabled 1`] = `
+exports[`renderer/components/filters/StateFilter.tsx should render itself & its children with detailed notifications disabled 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
       <fieldset
         class="mb-3"
-        id="filter-user-types"
+        id="filter-state"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
@@ -235,11 +415,11 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
                 data-justify="start"
                 data-padding="none"
                 data-wrap="nowrap"
-                id="user-type"
+                id="state"
               >
                 <svg
                   aria-hidden="true"
-                  class="octicon octicon-feed-person"
+                  class="octicon octicon-bell"
                   display="inline-block"
                   fill="currentColor"
                   focusable="false"
@@ -250,23 +430,23 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
                   width="16"
                 >
                   <path
-                    d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
+                    d="M8 16a2 2 0 0 0 1.985-1.75c.017-.137-.097-.25-.235-.25h-3.5c-.138 0-.252.113-.235.25A2 2 0 0 0 8 16ZM3 5a5 5 0 0 1 10 0v2.947c0 .05.015.098.042.139l1.703 2.555A1.519 1.519 0 0 1 13.482 13H2.518a1.516 1.516 0 0 1-1.263-2.36l1.703-2.554A.255.255 0 0 0 3 7.947Zm5-3.5A3.5 3.5 0 0 0 4.5 5v2.947c0 .346-.102.683-.294.97l-1.703 2.556a.017.017 0 0 0-.003.01l.001.006c0 .002.002.004.004.006l.006.004.007.001h10.964l.007-.001.006-.004.004-.006.001-.007a.017.017 0 0 0-.003-.01l-1.703-2.554a1.745 1.745 0 0 1-.294-.97V5A3.5 3.5 0 0 0 8 1.5Z"
                   />
                 </svg>
                 <h2
                   class="Heading__StyledHeading-sc-1c1dgg0-0 eQYHUB"
                   sx="[object Object]"
                 >
-                  User Type
+                  State
                 </h2>
               </div>
             </div>
           </legend>
           <div
-            aria-label="tooltip-filter-user-type"
+            aria-label="tooltip-filter-state"
             class="Box-sc-g0xbh4-0 relative"
-            data-testid="tooltip-tooltip-filter-user-type"
-            id="tooltip-filter-user-type"
+            data-testid="tooltip-tooltip-filter-state"
+            id="tooltip-filter-state"
           >
             <svg
               aria-hidden="true"
@@ -289,8 +469,8 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
           data-align="stretch"
-          data-direction="horizontal"
-          data-gap="normal"
+          data-direction="vertical"
+          data-gap="condensed"
           data-justify="start"
           data-padding="none"
           data-wrap="nowrap"
@@ -306,17 +486,63 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
           >
             <input
               class="size-4 rounded-sm cursor-pointer"
-              data-testid="checkbox-User"
+              data-testid="checkbox-Draft"
               disabled=""
-              id="User"
+              id="Draft"
               type="checkbox"
             />
             <label
               class="font-medium text-gitify-font cursor-pointer line-through"
-              for="User"
+              for="Draft"
             >
-              User
+              Draft
             </label>
+          </div>
+          <div
+            class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <input
+              class="size-4 rounded-sm cursor-pointer"
+              data-testid="checkbox-Open"
+              disabled=""
+              id="Open"
+              type="checkbox"
+            />
+            <label
+              class="font-medium text-gitify-font cursor-pointer line-through"
+              for="Open"
+            >
+              Open
+            </label>
+            <div
+              aria-label="tooltip-Open"
+              class="Box-sc-g0xbh4-0 relative"
+              data-testid="tooltip-tooltip-Open"
+              id="tooltip-Open"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-question text-gitify-tooltip-icon"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                />
+              </svg>
+            </div>
             <span
               aria-hidden="true"
               class="Box-sc-g0xbh4-0 gUZDKK"
@@ -343,22 +569,45 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
           >
             <input
               class="size-4 rounded-sm cursor-pointer"
-              data-testid="checkbox-Bot"
+              data-testid="checkbox-Merged"
               disabled=""
-              id="Bot"
+              id="Merged"
               type="checkbox"
             />
             <label
               class="font-medium text-gitify-font cursor-pointer line-through"
-              for="Bot"
+              for="Merged"
             >
-              Bot
+              Merged
+            </label>
+          </div>
+          <div
+            class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <input
+              class="size-4 rounded-sm cursor-pointer"
+              data-testid="checkbox-Closed"
+              disabled=""
+              id="Closed"
+              type="checkbox"
+            />
+            <label
+              class="font-medium text-gitify-font cursor-pointer line-through"
+              for="Closed"
+            >
+              Closed
             </label>
             <div
-              aria-label="tooltip-Bot"
+              aria-label="tooltip-Closed"
               class="Box-sc-g0xbh4-0 relative"
-              data-testid="tooltip-tooltip-Bot"
-              id="tooltip-Bot"
+              data-testid="tooltip-tooltip-Closed"
+              id="tooltip-Closed"
             >
               <svg
                 aria-hidden="true"
@@ -389,17 +638,54 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
           >
             <input
               class="size-4 rounded-sm cursor-pointer"
-              data-testid="checkbox-Organization"
+              data-testid="checkbox-Other"
               disabled=""
-              id="Organization"
+              id="Other"
               type="checkbox"
             />
             <label
               class="font-medium text-gitify-font cursor-pointer line-through"
-              for="Organization"
+              for="Other"
             >
-              Organization
+              Other
             </label>
+            <div
+              aria-label="tooltip-Other"
+              class="Box-sc-g0xbh4-0 relative"
+              data-testid="tooltip-tooltip-Other"
+              id="tooltip-Other"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-question text-gitify-tooltip-icon"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                />
+              </svg>
+            </div>
+            <span
+              aria-hidden="true"
+              class="Box-sc-g0xbh4-0 gUZDKK"
+              sx="[object Object]"
+            >
+              3
+            </span>
+            <span
+              class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 gbsmlL"
+            >
+               (
+              3
+              )
+            </span>
           </div>
         </div>
       </fieldset>
@@ -408,7 +694,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
   "container": <div>
     <fieldset
       class="mb-3"
-      id="filter-user-types"
+      id="filter-state"
     >
       <div
         class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
@@ -431,11 +717,11 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
               data-justify="start"
               data-padding="none"
               data-wrap="nowrap"
-              id="user-type"
+              id="state"
             >
               <svg
                 aria-hidden="true"
-                class="octicon octicon-feed-person"
+                class="octicon octicon-bell"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -446,23 +732,23 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
                 width="16"
               >
                 <path
-                  d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
+                  d="M8 16a2 2 0 0 0 1.985-1.75c.017-.137-.097-.25-.235-.25h-3.5c-.138 0-.252.113-.235.25A2 2 0 0 0 8 16ZM3 5a5 5 0 0 1 10 0v2.947c0 .05.015.098.042.139l1.703 2.555A1.519 1.519 0 0 1 13.482 13H2.518a1.516 1.516 0 0 1-1.263-2.36l1.703-2.554A.255.255 0 0 0 3 7.947Zm5-3.5A3.5 3.5 0 0 0 4.5 5v2.947c0 .346-.102.683-.294.97l-1.703 2.556a.017.017 0 0 0-.003.01l.001.006c0 .002.002.004.004.006l.006.004.007.001h10.964l.007-.001.006-.004.004-.006.001-.007a.017.017 0 0 0-.003-.01l-1.703-2.554a1.745 1.745 0 0 1-.294-.97V5A3.5 3.5 0 0 0 8 1.5Z"
                 />
               </svg>
               <h2
                 class="Heading__StyledHeading-sc-1c1dgg0-0 eQYHUB"
                 sx="[object Object]"
               >
-                User Type
+                State
               </h2>
             </div>
           </div>
         </legend>
         <div
-          aria-label="tooltip-filter-user-type"
+          aria-label="tooltip-filter-state"
           class="Box-sc-g0xbh4-0 relative"
-          data-testid="tooltip-tooltip-filter-user-type"
-          id="tooltip-filter-user-type"
+          data-testid="tooltip-tooltip-filter-state"
+          id="tooltip-filter-state"
         >
           <svg
             aria-hidden="true"
@@ -485,8 +771,8 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
       <div
         class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
         data-align="stretch"
-        data-direction="horizontal"
-        data-gap="normal"
+        data-direction="vertical"
+        data-gap="condensed"
         data-justify="start"
         data-padding="none"
         data-wrap="nowrap"
@@ -502,17 +788,63 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
         >
           <input
             class="size-4 rounded-sm cursor-pointer"
-            data-testid="checkbox-User"
+            data-testid="checkbox-Draft"
             disabled=""
-            id="User"
+            id="Draft"
             type="checkbox"
           />
           <label
             class="font-medium text-gitify-font cursor-pointer line-through"
-            for="User"
+            for="Draft"
           >
-            User
+            Draft
           </label>
+        </div>
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
+        >
+          <input
+            class="size-4 rounded-sm cursor-pointer"
+            data-testid="checkbox-Open"
+            disabled=""
+            id="Open"
+            type="checkbox"
+          />
+          <label
+            class="font-medium text-gitify-font cursor-pointer line-through"
+            for="Open"
+          >
+            Open
+          </label>
+          <div
+            aria-label="tooltip-Open"
+            class="Box-sc-g0xbh4-0 relative"
+            data-testid="tooltip-tooltip-Open"
+            id="tooltip-Open"
+          >
+            <svg
+              aria-hidden="true"
+              class="octicon octicon-question text-gitify-tooltip-icon"
+              display="inline-block"
+              fill="currentColor"
+              focusable="false"
+              height="16"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
+              viewBox="0 0 16 16"
+              width="16"
+            >
+              <path
+                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+              />
+            </svg>
+          </div>
           <span
             aria-hidden="true"
             class="Box-sc-g0xbh4-0 gUZDKK"
@@ -539,22 +871,45 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
         >
           <input
             class="size-4 rounded-sm cursor-pointer"
-            data-testid="checkbox-Bot"
+            data-testid="checkbox-Merged"
             disabled=""
-            id="Bot"
+            id="Merged"
             type="checkbox"
           />
           <label
             class="font-medium text-gitify-font cursor-pointer line-through"
-            for="Bot"
+            for="Merged"
           >
-            Bot
+            Merged
+          </label>
+        </div>
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
+        >
+          <input
+            class="size-4 rounded-sm cursor-pointer"
+            data-testid="checkbox-Closed"
+            disabled=""
+            id="Closed"
+            type="checkbox"
+          />
+          <label
+            class="font-medium text-gitify-font cursor-pointer line-through"
+            for="Closed"
+          >
+            Closed
           </label>
           <div
-            aria-label="tooltip-Bot"
+            aria-label="tooltip-Closed"
             class="Box-sc-g0xbh4-0 relative"
-            data-testid="tooltip-tooltip-Bot"
-            id="tooltip-Bot"
+            data-testid="tooltip-tooltip-Closed"
+            id="tooltip-Closed"
           >
             <svg
               aria-hidden="true"
@@ -585,17 +940,54 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
         >
           <input
             class="size-4 rounded-sm cursor-pointer"
-            data-testid="checkbox-Organization"
+            data-testid="checkbox-Other"
             disabled=""
-            id="Organization"
+            id="Other"
             type="checkbox"
           />
           <label
             class="font-medium text-gitify-font cursor-pointer line-through"
-            for="Organization"
+            for="Other"
           >
-            Organization
+            Other
           </label>
+          <div
+            aria-label="tooltip-Other"
+            class="Box-sc-g0xbh4-0 relative"
+            data-testid="tooltip-tooltip-Other"
+            id="tooltip-Other"
+          >
+            <svg
+              aria-hidden="true"
+              class="octicon octicon-question text-gitify-tooltip-icon"
+              display="inline-block"
+              fill="currentColor"
+              focusable="false"
+              height="16"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
+              viewBox="0 0 16 16"
+              width="16"
+            >
+              <path
+                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+              />
+            </svg>
+          </div>
+          <span
+            aria-hidden="true"
+            class="Box-sc-g0xbh4-0 gUZDKK"
+            sx="[object Object]"
+          >
+            3
+          </span>
+          <span
+            class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 gbsmlL"
+          >
+             (
+            3
+            )
+          </span>
         </div>
       </div>
     </fieldset>
@@ -654,14 +1046,14 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
 }
 `;
 
-exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & its children with detailed notifications enabled 1`] = `
+exports[`renderer/components/filters/StateFilter.tsx should render itself & its children with detailed notifications enabled 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
       <fieldset
         class="mb-3"
-        id="filter-user-types"
+        id="filter-state"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
@@ -684,11 +1076,11 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
                 data-justify="start"
                 data-padding="none"
                 data-wrap="nowrap"
-                id="user-type"
+                id="state"
               >
                 <svg
                   aria-hidden="true"
-                  class="octicon octicon-feed-person"
+                  class="octicon octicon-bell"
                   display="inline-block"
                   fill="currentColor"
                   focusable="false"
@@ -699,23 +1091,23 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
                   width="16"
                 >
                   <path
-                    d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
+                    d="M8 16a2 2 0 0 0 1.985-1.75c.017-.137-.097-.25-.235-.25h-3.5c-.138 0-.252.113-.235.25A2 2 0 0 0 8 16ZM3 5a5 5 0 0 1 10 0v2.947c0 .05.015.098.042.139l1.703 2.555A1.519 1.519 0 0 1 13.482 13H2.518a1.516 1.516 0 0 1-1.263-2.36l1.703-2.554A.255.255 0 0 0 3 7.947Zm5-3.5A3.5 3.5 0 0 0 4.5 5v2.947c0 .346-.102.683-.294.97l-1.703 2.556a.017.017 0 0 0-.003.01l.001.006c0 .002.002.004.004.006l.006.004.007.001h10.964l.007-.001.006-.004.004-.006.001-.007a.017.017 0 0 0-.003-.01l-1.703-2.554a1.745 1.745 0 0 1-.294-.97V5A3.5 3.5 0 0 0 8 1.5Z"
                   />
                 </svg>
                 <h2
                   class="Heading__StyledHeading-sc-1c1dgg0-0 eQYHUB"
                   sx="[object Object]"
                 >
-                  User Type
+                  State
                 </h2>
               </div>
             </div>
           </legend>
           <div
-            aria-label="tooltip-filter-user-type"
+            aria-label="tooltip-filter-state"
             class="Box-sc-g0xbh4-0 relative"
-            data-testid="tooltip-tooltip-filter-user-type"
-            id="tooltip-filter-user-type"
+            data-testid="tooltip-tooltip-filter-state"
+            id="tooltip-filter-state"
           >
             <svg
               aria-hidden="true"
@@ -738,8 +1130,8 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
           data-align="stretch"
-          data-direction="horizontal"
-          data-gap="normal"
+          data-direction="vertical"
+          data-gap="condensed"
           data-justify="start"
           data-padding="none"
           data-wrap="nowrap"
@@ -755,16 +1147,61 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
           >
             <input
               class="size-4 rounded-sm cursor-pointer"
-              data-testid="checkbox-User"
-              id="User"
+              data-testid="checkbox-Draft"
+              id="Draft"
               type="checkbox"
             />
             <label
               class="font-medium text-gitify-font cursor-pointer"
-              for="User"
+              for="Draft"
             >
-              User
+              Draft
             </label>
+          </div>
+          <div
+            class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <input
+              class="size-4 rounded-sm cursor-pointer"
+              data-testid="checkbox-Open"
+              id="Open"
+              type="checkbox"
+            />
+            <label
+              class="font-medium text-gitify-font cursor-pointer"
+              for="Open"
+            >
+              Open
+            </label>
+            <div
+              aria-label="tooltip-Open"
+              class="Box-sc-g0xbh4-0 relative"
+              data-testid="tooltip-tooltip-Open"
+              id="tooltip-Open"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-question text-gitify-tooltip-icon"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                />
+              </svg>
+            </div>
             <span
               aria-hidden="true"
               class="Box-sc-g0xbh4-0 gUZDKK"
@@ -791,21 +1228,43 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
           >
             <input
               class="size-4 rounded-sm cursor-pointer"
-              data-testid="checkbox-Bot"
-              id="Bot"
+              data-testid="checkbox-Merged"
+              id="Merged"
               type="checkbox"
             />
             <label
               class="font-medium text-gitify-font cursor-pointer"
-              for="Bot"
+              for="Merged"
             >
-              Bot
+              Merged
+            </label>
+          </div>
+          <div
+            class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <input
+              class="size-4 rounded-sm cursor-pointer"
+              data-testid="checkbox-Closed"
+              id="Closed"
+              type="checkbox"
+            />
+            <label
+              class="font-medium text-gitify-font cursor-pointer"
+              for="Closed"
+            >
+              Closed
             </label>
             <div
-              aria-label="tooltip-Bot"
+              aria-label="tooltip-Closed"
               class="Box-sc-g0xbh4-0 relative"
-              data-testid="tooltip-tooltip-Bot"
-              id="tooltip-Bot"
+              data-testid="tooltip-tooltip-Closed"
+              id="tooltip-Closed"
             >
               <svg
                 aria-hidden="true"
@@ -836,16 +1295,53 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
           >
             <input
               class="size-4 rounded-sm cursor-pointer"
-              data-testid="checkbox-Organization"
-              id="Organization"
+              data-testid="checkbox-Other"
+              id="Other"
               type="checkbox"
             />
             <label
               class="font-medium text-gitify-font cursor-pointer"
-              for="Organization"
+              for="Other"
             >
-              Organization
+              Other
             </label>
+            <div
+              aria-label="tooltip-Other"
+              class="Box-sc-g0xbh4-0 relative"
+              data-testid="tooltip-tooltip-Other"
+              id="tooltip-Other"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-question text-gitify-tooltip-icon"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                />
+              </svg>
+            </div>
+            <span
+              aria-hidden="true"
+              class="Box-sc-g0xbh4-0 gUZDKK"
+              sx="[object Object]"
+            >
+              3
+            </span>
+            <span
+              class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 gbsmlL"
+            >
+               (
+              3
+              )
+            </span>
           </div>
         </div>
       </fieldset>
@@ -854,7 +1350,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
   "container": <div>
     <fieldset
       class="mb-3"
-      id="filter-user-types"
+      id="filter-state"
     >
       <div
         class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
@@ -877,11 +1373,11 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
               data-justify="start"
               data-padding="none"
               data-wrap="nowrap"
-              id="user-type"
+              id="state"
             >
               <svg
                 aria-hidden="true"
-                class="octicon octicon-feed-person"
+                class="octicon octicon-bell"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -892,23 +1388,23 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
                 width="16"
               >
                 <path
-                  d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
+                  d="M8 16a2 2 0 0 0 1.985-1.75c.017-.137-.097-.25-.235-.25h-3.5c-.138 0-.252.113-.235.25A2 2 0 0 0 8 16ZM3 5a5 5 0 0 1 10 0v2.947c0 .05.015.098.042.139l1.703 2.555A1.519 1.519 0 0 1 13.482 13H2.518a1.516 1.516 0 0 1-1.263-2.36l1.703-2.554A.255.255 0 0 0 3 7.947Zm5-3.5A3.5 3.5 0 0 0 4.5 5v2.947c0 .346-.102.683-.294.97l-1.703 2.556a.017.017 0 0 0-.003.01l.001.006c0 .002.002.004.004.006l.006.004.007.001h10.964l.007-.001.006-.004.004-.006.001-.007a.017.017 0 0 0-.003-.01l-1.703-2.554a1.745 1.745 0 0 1-.294-.97V5A3.5 3.5 0 0 0 8 1.5Z"
                 />
               </svg>
               <h2
                 class="Heading__StyledHeading-sc-1c1dgg0-0 eQYHUB"
                 sx="[object Object]"
               >
-                User Type
+                State
               </h2>
             </div>
           </div>
         </legend>
         <div
-          aria-label="tooltip-filter-user-type"
+          aria-label="tooltip-filter-state"
           class="Box-sc-g0xbh4-0 relative"
-          data-testid="tooltip-tooltip-filter-user-type"
-          id="tooltip-filter-user-type"
+          data-testid="tooltip-tooltip-filter-state"
+          id="tooltip-filter-state"
         >
           <svg
             aria-hidden="true"
@@ -931,8 +1427,8 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
       <div
         class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
         data-align="stretch"
-        data-direction="horizontal"
-        data-gap="normal"
+        data-direction="vertical"
+        data-gap="condensed"
         data-justify="start"
         data-padding="none"
         data-wrap="nowrap"
@@ -948,16 +1444,61 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
         >
           <input
             class="size-4 rounded-sm cursor-pointer"
-            data-testid="checkbox-User"
-            id="User"
+            data-testid="checkbox-Draft"
+            id="Draft"
             type="checkbox"
           />
           <label
             class="font-medium text-gitify-font cursor-pointer"
-            for="User"
+            for="Draft"
           >
-            User
+            Draft
           </label>
+        </div>
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
+        >
+          <input
+            class="size-4 rounded-sm cursor-pointer"
+            data-testid="checkbox-Open"
+            id="Open"
+            type="checkbox"
+          />
+          <label
+            class="font-medium text-gitify-font cursor-pointer"
+            for="Open"
+          >
+            Open
+          </label>
+          <div
+            aria-label="tooltip-Open"
+            class="Box-sc-g0xbh4-0 relative"
+            data-testid="tooltip-tooltip-Open"
+            id="tooltip-Open"
+          >
+            <svg
+              aria-hidden="true"
+              class="octicon octicon-question text-gitify-tooltip-icon"
+              display="inline-block"
+              fill="currentColor"
+              focusable="false"
+              height="16"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
+              viewBox="0 0 16 16"
+              width="16"
+            >
+              <path
+                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+              />
+            </svg>
+          </div>
           <span
             aria-hidden="true"
             class="Box-sc-g0xbh4-0 gUZDKK"
@@ -984,21 +1525,43 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
         >
           <input
             class="size-4 rounded-sm cursor-pointer"
-            data-testid="checkbox-Bot"
-            id="Bot"
+            data-testid="checkbox-Merged"
+            id="Merged"
             type="checkbox"
           />
           <label
             class="font-medium text-gitify-font cursor-pointer"
-            for="Bot"
+            for="Merged"
           >
-            Bot
+            Merged
+          </label>
+        </div>
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
+        >
+          <input
+            class="size-4 rounded-sm cursor-pointer"
+            data-testid="checkbox-Closed"
+            id="Closed"
+            type="checkbox"
+          />
+          <label
+            class="font-medium text-gitify-font cursor-pointer"
+            for="Closed"
+          >
+            Closed
           </label>
           <div
-            aria-label="tooltip-Bot"
+            aria-label="tooltip-Closed"
             class="Box-sc-g0xbh4-0 relative"
-            data-testid="tooltip-tooltip-Bot"
-            id="tooltip-Bot"
+            data-testid="tooltip-tooltip-Closed"
+            id="tooltip-Closed"
           >
             <svg
               aria-hidden="true"
@@ -1029,16 +1592,53 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
         >
           <input
             class="size-4 rounded-sm cursor-pointer"
-            data-testid="checkbox-Organization"
-            id="Organization"
+            data-testid="checkbox-Other"
+            id="Other"
             type="checkbox"
           />
           <label
             class="font-medium text-gitify-font cursor-pointer"
-            for="Organization"
+            for="Other"
           >
-            Organization
+            Other
           </label>
+          <div
+            aria-label="tooltip-Other"
+            class="Box-sc-g0xbh4-0 relative"
+            data-testid="tooltip-tooltip-Other"
+            id="tooltip-Other"
+          >
+            <svg
+              aria-hidden="true"
+              class="octicon octicon-question text-gitify-tooltip-icon"
+              display="inline-block"
+              fill="currentColor"
+              focusable="false"
+              height="16"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
+              viewBox="0 0 16 16"
+              width="16"
+            >
+              <path
+                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+              />
+            </svg>
+          </div>
+          <span
+            aria-hidden="true"
+            class="Box-sc-g0xbh4-0 gUZDKK"
+            sx="[object Object]"
+          >
+            3
+          </span>
+          <span
+            class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 gbsmlL"
+          >
+             (
+            3
+            )
+          </span>
         </div>
       </div>
     </fieldset>

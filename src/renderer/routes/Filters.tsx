@@ -4,6 +4,7 @@ import { FilterIcon, FilterRemoveIcon } from '@primer/octicons-react';
 import { Button, Stack, Tooltip } from '@primer/react';
 
 import { ReasonFilter } from '../components/filters/ReasonFilter';
+import { StateFilter } from '../components/filters/StateFilter';
 import { UserHandleFilter } from '../components/filters/UserHandleFilter';
 import { UserTypeFilter } from '../components/filters/UserTypeFilter';
 import { Contents } from '../components/layout/Contents';
@@ -25,6 +26,7 @@ export const FiltersRoute: FC = () => {
         <Stack direction="vertical" gap="condensed">
           <UserTypeFilter />
           <UserHandleFilter />
+          <StateFilter />
           <ReasonFilter />
         </Stack>
       </Contents>

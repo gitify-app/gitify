@@ -51,11 +51,10 @@ export function filterNotificationByUserType(
   notification: Notification,
   userType: UserType,
 ): boolean {
+  const allUserTypes = ['User', 'EnterpriseUserAccount'];
+
   if (userType === 'User') {
-    return (
-      notification.subject?.user?.type === 'User' ||
-      notification.subject?.user?.type === 'EnterpriseUserAccount'
-    );
+    return allUserTypes.includes(notification.subject?.user?.type);
   }
 
   return notification.subject?.user?.type === userType;
