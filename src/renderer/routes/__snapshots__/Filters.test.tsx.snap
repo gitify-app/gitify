@@ -500,7 +500,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
       </fieldset>
       <fieldset
         class="mb-3"
-        id="filter-type"
+        id="filter-subject-type"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
@@ -551,10 +551,10 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             </div>
           </legend>
           <div
-            aria-label="tooltip-filter-type"
+            aria-label="tooltip-filter-subject-type"
             class="Box-sc-g0xbh4-0 relative"
-            data-testid="tooltip-tooltip-filter-type"
-            id="tooltip-filter-type"
+            data-testid="tooltip-tooltip-filter-subject-type"
+            id="tooltip-filter-subject-type"
           >
             <svg
               aria-hidden="true"
