@@ -2,7 +2,7 @@
 
 exports[`renderer/components/filters/StateFilter.tsx should be able to toggle user type - none already set 1`] = `
 <div
-  class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+  class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
   data-align="stretch"
   data-direction="vertical"
   data-gap="condensed"
@@ -11,7 +11,7 @@ exports[`renderer/components/filters/StateFilter.tsx should be able to toggle us
   data-wrap="nowrap"
 >
   <div
-    class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
     data-align="center"
     data-direction="horizontal"
     data-gap="condensed"
@@ -33,7 +33,7 @@ exports[`renderer/components/filters/StateFilter.tsx should be able to toggle us
     </label>
   </div>
   <div
-    class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
     data-align="center"
     data-direction="horizontal"
     data-gap="condensed"
@@ -78,7 +78,7 @@ exports[`renderer/components/filters/StateFilter.tsx should be able to toggle us
     </div>
   </div>
   <div
-    class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
     data-align="center"
     data-direction="horizontal"
     data-gap="condensed"
@@ -100,7 +100,7 @@ exports[`renderer/components/filters/StateFilter.tsx should be able to toggle us
     </label>
   </div>
   <div
-    class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
     data-align="center"
     data-direction="horizontal"
     data-gap="condensed"
@@ -145,7 +145,7 @@ exports[`renderer/components/filters/StateFilter.tsx should be able to toggle us
     </div>
   </div>
   <div
-    class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
     data-align="center"
     data-direction="horizontal"
     data-gap="condensed"
@@ -194,7 +194,7 @@ exports[`renderer/components/filters/StateFilter.tsx should be able to toggle us
 
 exports[`renderer/components/filters/StateFilter.tsx should be able to toggle user type - some filters already set 1`] = `
 <div
-  class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+  class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
   data-align="stretch"
   data-direction="vertical"
   data-gap="condensed"
@@ -203,7 +203,7 @@ exports[`renderer/components/filters/StateFilter.tsx should be able to toggle us
   data-wrap="nowrap"
 >
   <div
-    class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
     data-align="center"
     data-direction="horizontal"
     data-gap="condensed"
@@ -225,7 +225,7 @@ exports[`renderer/components/filters/StateFilter.tsx should be able to toggle us
     </label>
   </div>
   <div
-    class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
     data-align="center"
     data-direction="horizontal"
     data-gap="condensed"
@@ -271,7 +271,7 @@ exports[`renderer/components/filters/StateFilter.tsx should be able to toggle us
     </div>
   </div>
   <div
-    class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
     data-align="center"
     data-direction="horizontal"
     data-gap="condensed"
@@ -293,7 +293,7 @@ exports[`renderer/components/filters/StateFilter.tsx should be able to toggle us
     </label>
   </div>
   <div
-    class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
     data-align="center"
     data-direction="horizontal"
     data-gap="condensed"
@@ -338,7 +338,7 @@ exports[`renderer/components/filters/StateFilter.tsx should be able to toggle us
     </div>
   </div>
   <div
-    class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
     data-align="center"
     data-direction="horizontal"
     data-gap="condensed"
@@ -395,7 +395,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
         id="filter-state"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
           data-align="baseline"
           data-direction="horizontal"
           data-gap="condensed"
@@ -408,7 +408,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
               class="Box-sc-g0xbh4-0 mb-2"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+                class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -434,7 +434,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
                   />
                 </svg>
                 <h2
-                  class="Heading__StyledHeading-sc-1c1dgg0-0 lfvrLU"
+                  class="Heading__StyledHeading-sc-1c1dgg0-0 eQYHUB"
                   sx="[object Object]"
                 >
                   State
@@ -467,7 +467,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
           </div>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
           data-align="stretch"
           data-direction="vertical"
           data-gap="condensed"
@@ -476,7 +476,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
           data-wrap="nowrap"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+            class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -499,7 +499,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
             </label>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+            class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -545,13 +545,13 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
             </div>
             <span
               aria-hidden="true"
-              class="Box-sc-g0xbh4-0 bfvZWv"
+              class="Box-sc-g0xbh4-0 gUZDKK"
               sx="[object Object]"
             >
               1
             </span>
             <span
-              class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 hxuUuW"
+              class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 gbsmlL"
             >
                (
               1
@@ -559,7 +559,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+            class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -582,7 +582,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
             </label>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+            class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -628,7 +628,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
             </div>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+            class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -674,13 +674,13 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
             </div>
             <span
               aria-hidden="true"
-              class="Box-sc-g0xbh4-0 bfvZWv"
+              class="Box-sc-g0xbh4-0 gUZDKK"
               sx="[object Object]"
             >
               3
             </span>
             <span
-              class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 hxuUuW"
+              class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 gbsmlL"
             >
                (
               3
@@ -697,7 +697,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
       id="filter-state"
     >
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+        class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
         data-align="baseline"
         data-direction="horizontal"
         data-gap="condensed"
@@ -710,7 +710,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
             class="Box-sc-g0xbh4-0 mb-2"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+              class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -736,7 +736,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
                 />
               </svg>
               <h2
-                class="Heading__StyledHeading-sc-1c1dgg0-0 lfvrLU"
+                class="Heading__StyledHeading-sc-1c1dgg0-0 eQYHUB"
                 sx="[object Object]"
               >
                 State
@@ -769,7 +769,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
         </div>
       </div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+        class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
         data-align="stretch"
         data-direction="vertical"
         data-gap="condensed"
@@ -778,7 +778,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
         data-wrap="nowrap"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -801,7 +801,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
           </label>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -847,13 +847,13 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
           </div>
           <span
             aria-hidden="true"
-            class="Box-sc-g0xbh4-0 bfvZWv"
+            class="Box-sc-g0xbh4-0 gUZDKK"
             sx="[object Object]"
           >
             1
           </span>
           <span
-            class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 hxuUuW"
+            class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 gbsmlL"
           >
              (
             1
@@ -861,7 +861,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
           </span>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -884,7 +884,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
           </label>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -930,7 +930,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
           </div>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -976,13 +976,13 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
           </div>
           <span
             aria-hidden="true"
-            class="Box-sc-g0xbh4-0 bfvZWv"
+            class="Box-sc-g0xbh4-0 gUZDKK"
             sx="[object Object]"
           >
             3
           </span>
           <span
-            class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 hxuUuW"
+            class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 gbsmlL"
           >
              (
             3
@@ -1056,7 +1056,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
         id="filter-state"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
           data-align="baseline"
           data-direction="horizontal"
           data-gap="condensed"
@@ -1069,7 +1069,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
               class="Box-sc-g0xbh4-0 mb-2"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+                class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -1095,7 +1095,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
                   />
                 </svg>
                 <h2
-                  class="Heading__StyledHeading-sc-1c1dgg0-0 lfvrLU"
+                  class="Heading__StyledHeading-sc-1c1dgg0-0 eQYHUB"
                   sx="[object Object]"
                 >
                   State
@@ -1128,7 +1128,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
           </div>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
           data-align="stretch"
           data-direction="vertical"
           data-gap="condensed"
@@ -1137,7 +1137,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
           data-wrap="nowrap"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+            class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1159,7 +1159,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
             </label>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+            class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1204,13 +1204,13 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
             </div>
             <span
               aria-hidden="true"
-              class="Box-sc-g0xbh4-0 bfvZWv"
+              class="Box-sc-g0xbh4-0 gUZDKK"
               sx="[object Object]"
             >
               1
             </span>
             <span
-              class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 hxuUuW"
+              class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 gbsmlL"
             >
                (
               1
@@ -1218,7 +1218,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+            class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1240,7 +1240,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
             </label>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+            class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1285,7 +1285,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
             </div>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+            class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1330,13 +1330,13 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
             </div>
             <span
               aria-hidden="true"
-              class="Box-sc-g0xbh4-0 bfvZWv"
+              class="Box-sc-g0xbh4-0 gUZDKK"
               sx="[object Object]"
             >
               3
             </span>
             <span
-              class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 hxuUuW"
+              class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 gbsmlL"
             >
                (
               3
@@ -1353,7 +1353,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
       id="filter-state"
     >
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+        class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
         data-align="baseline"
         data-direction="horizontal"
         data-gap="condensed"
@@ -1366,7 +1366,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
             class="Box-sc-g0xbh4-0 mb-2"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+              class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -1392,7 +1392,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
                 />
               </svg>
               <h2
-                class="Heading__StyledHeading-sc-1c1dgg0-0 lfvrLU"
+                class="Heading__StyledHeading-sc-1c1dgg0-0 eQYHUB"
                 sx="[object Object]"
               >
                 State
@@ -1425,7 +1425,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
         </div>
       </div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 duhwY"
+        class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
         data-align="stretch"
         data-direction="vertical"
         data-gap="condensed"
@@ -1434,7 +1434,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
         data-wrap="nowrap"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -1456,7 +1456,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
           </label>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -1501,13 +1501,13 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
           </div>
           <span
             aria-hidden="true"
-            class="Box-sc-g0xbh4-0 bfvZWv"
+            class="Box-sc-g0xbh4-0 gUZDKK"
             sx="[object Object]"
           >
             1
           </span>
           <span
-            class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 hxuUuW"
+            class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 gbsmlL"
           >
              (
             1
@@ -1515,7 +1515,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
           </span>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -1537,7 +1537,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
           </label>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -1582,7 +1582,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
           </div>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 duhwY text-sm"
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -1627,13 +1627,13 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
           </div>
           <span
             aria-hidden="true"
-            class="Box-sc-g0xbh4-0 bfvZWv"
+            class="Box-sc-g0xbh4-0 gUZDKK"
             sx="[object Object]"
           >
             3
           </span>
           <span
-            class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 hxuUuW"
+            class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 gbsmlL"
           >
              (
             3
