@@ -42,9 +42,11 @@ export function filterNotifications(
       }
 
       if (hasStateFilters(settings)) {
-        return settings.filterStates.some((state) =>
-          filterNotificationByState(notification, state),
-        );
+        passesFilters =
+          passesFilters &&
+          settings.filterStates.some((state) =>
+            filterNotificationByState(notification, state),
+          );
       }
     }
 
