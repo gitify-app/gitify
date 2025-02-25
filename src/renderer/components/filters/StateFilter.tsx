@@ -1,6 +1,6 @@
 import { type FC, useContext } from 'react';
 
-import { BellIcon } from '@primer/octicons-react';
+import { IssueOpenedIcon } from '@primer/octicons-react';
 import { Stack, Text } from '@primer/react';
 
 import { AppContext } from '../../context/App';
@@ -21,7 +21,7 @@ export const StateFilter: FC = () => {
   return (
     <fieldset id="filter-state" className="mb-3">
       <Stack direction="horizontal" gap="condensed" align="baseline">
-        <Title icon={BellIcon}>State</Title>
+        <Title icon={IssueOpenedIcon}>State</Title>
         <Tooltip
           name="tooltip-filter-state"
           tooltip={

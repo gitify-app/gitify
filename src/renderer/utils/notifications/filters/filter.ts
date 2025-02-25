@@ -7,6 +7,10 @@ import {
 } from './handles';
 import { filterNotificationByReason, hasReasonFilters } from './reason';
 import { filterNotificationByState, hasStateFilters } from './state';
+import {
+  filterNotificationBySubjectType,
+  hasSubjectTypeFilters,
+} from './subjectType';
 import { filterNotificationByUserType, hasUserTypeFilters } from './userType';
 
 export function filterNotifications(
@@ -50,6 +54,14 @@ export function filterNotifications(
       }
     }
 
+    if (hasSubjectTypeFilters(settings)) {
+      passesFilters =
+        passesFilters &&
+        settings.filterSubjectTypes.some((subjectType) =>
+          filterNotificationBySubjectType(notification, subjectType),
+        );
+    }
+
     if (hasReasonFilters(settings)) {
       passesFilters =
         passesFilters &&
@@ -67,6 +79,7 @@ export function hasAnyFiltersSet(settings: SettingsState): boolean {
     hasUserTypeFilters(settings) ||
     hasIncludeHandleFilters(settings) ||
     hasExcludeHandleFilters(settings) ||
+    hasSubjectTypeFilters(settings) ||
     hasStateFilters(settings) ||
     hasReasonFilters(settings)
   );

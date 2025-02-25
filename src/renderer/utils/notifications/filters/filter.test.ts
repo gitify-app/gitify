@@ -80,6 +80,18 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
       expect(result).toEqual([mockNotifications[0]]);
     });
 
+    it('should filter notifications by subject type when provided', async () => {
+      mockNotifications[0].subject.type = 'Issue';
+      mockNotifications[1].subject.type = 'PullRequest';
+      const result = filterNotifications(mockNotifications, {
+        ...mockSettings,
+        filterSubjectTypes: ['Issue'],
+      });
+
+      expect(result.length).toBe(1);
+      expect(result).toEqual([mockNotifications[0]]);
+    });
+
     it('should filter notifications by state when provided', async () => {
       mockNotifications[0].subject.state = 'open';
       mockNotifications[1].subject.state = 'closed';
@@ -130,6 +142,14 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
       const settings = {
         ...defaultSettings,
         filterExcludeHandles: ['gitify'],
+      } as SettingsState;
+      expect(hasAnyFiltersSet(settings)).toBe(true);
+    });
+
+    it('non-default subject type filters', () => {
+      const settings = {
+        ...defaultSettings,
+        filterSubjectTypes: ['Issue'],
       } as SettingsState;
       expect(hasAnyFiltersSet(settings)).toBe(true);
     });
