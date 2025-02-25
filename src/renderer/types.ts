@@ -163,7 +163,7 @@ export type ErrorType =
 
 export interface TypeDetails {
   title: string;
-  description: string;
+  description?: string;
 }
 
 export enum IconColor {

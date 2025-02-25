@@ -19,11 +19,11 @@ export const SubjectTypeFilter: FC = () => {
   const { updateFilter, settings, notifications } = useContext(AppContext);
 
   return (
-    <fieldset id="filter-type" className="mb-3">
+    <fieldset id="filter-subject-type" className="mb-3">
       <Stack direction="horizontal" gap="condensed" align="baseline">
         <Title icon={BellIcon}>Type</Title>
         <Tooltip
-          name="tooltip-filter-type"
+          name="tooltip-filter-subject-type"
           tooltip={
             <Stack direction="vertical" gap="condensed">
               <Text>Filter notifications by type.</Text>

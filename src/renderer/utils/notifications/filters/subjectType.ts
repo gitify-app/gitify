@@ -36,10 +36,7 @@ export const FILTERS_SUBJECT_TYPES: Record<SubjectType, TypeDetails> = {
   WorkflowRun: {
     title: 'Workflow Run',
   },
-} as Partial<Record<SubjectType, TypeDetails>> as Record<
-  SubjectType,
-  TypeDetails
->;
+};
 
 export function getSubjectTypeDetails(subjectType: SubjectType): TypeDetails {
   return FILTERS_SUBJECT_TYPES[subjectType];
