@@ -1,6 +1,11 @@
 import type { OcticonProps } from '@primer/octicons-react';
 import type { FC } from 'react';
-import type { Notification, Reason, UserType } from './typesGitHub';
+import type {
+  Notification,
+  Reason,
+  SubjectType,
+  UserType,
+} from './typesGitHub';
 import type { AuthMethod, PlatformType } from './utils/auth/types';
 
 declare const __brand: unique symbol;
@@ -47,7 +52,12 @@ export type SettingsValue =
   | Theme
   | FilterValue[];
 
-export type FilterValue = Reason | UserType | UserHandle | FilterStateType;
+export type FilterValue =
+  | Reason
+  | UserType
+  | UserHandle
+  | FilterStateType
+  | SubjectType;
 
 export type SettingsState = AppearanceSettingsState &
   NotificationSettingsState &
@@ -87,6 +97,7 @@ export interface FilterSettingsState {
   filterUserTypes: UserType[];
   filterIncludeHandles: string[];
   filterExcludeHandles: string[];
+  filterSubjectTypes: SubjectType[];
   filterStates: FilterStateType[];
   filterReasons: Reason[];
 }
@@ -152,7 +163,7 @@ export type ErrorType =
 
 export interface TypeDetails {
   title: string;
-  description: string;
+  description?: string;
 }
 
 export enum IconColor {

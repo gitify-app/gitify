@@ -25,10 +25,7 @@ export const FILTERS_STATE_TYPES: Record<FilterStateType, TypeDetails> = {
     title: 'Other',
     description: 'Catch all for any other notification states',
   },
-} as Partial<Record<FilterStateType, TypeDetails>> as Record<
-  FilterStateType,
-  TypeDetails
->;
+};
 
 export function getStateDetails(stateType: FilterStateType): TypeDetails {
   return FILTERS_STATE_TYPES[stateType];
