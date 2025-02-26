@@ -1,14 +1,14 @@
-import type { SettingsState } from '../../../types';
-import type { Notification } from '../../../typesGitHub';
 import {
   filterNotificationByHandle,
   hasExcludeHandleFilters,
   hasIncludeHandleFilters,
-} from './handles';
-import { reasonFilter } from './reason';
-import { stateFilter } from './state';
-import { subjectTypeFilter } from './subjectType';
-import { userTypeFilter } from './userType';
+  reasonFilter,
+  stateFilter,
+  subjectTypeFilter,
+  userTypeFilter,
+} from '.';
+import type { SettingsState } from '../../../types';
+import type { Notification } from '../../../typesGitHub';
 
 export function filterNotifications(
   notifications: Notification[],
