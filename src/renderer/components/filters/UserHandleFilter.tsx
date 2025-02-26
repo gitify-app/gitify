@@ -15,6 +15,7 @@ import {
 } from '../../utils/notifications/filters/handles';
 import { Tooltip } from '../fields/Tooltip';
 import { Title } from '../primitives/Title';
+import { RequiresDetailedNotificationWarning } from './RequiresDetailedNotificationsWarning';
 
 type InputToken = {
   id: number;
@@ -127,11 +128,7 @@ export const UserHandleFilter: FC = () => {
           tooltip={
             <Stack direction="vertical" gap="condensed">
               <Text>Filter notifications by user handle.</Text>
-              <Text className="text-gitify-caution">
-                ⚠️ This filter requires the{' '}
-                <Text as="strong">Detailed Notifications</Text> setting to be
-                enabled.
-              </Text>
+              <RequiresDetailedNotificationWarning />
             </Stack>
           }
         />

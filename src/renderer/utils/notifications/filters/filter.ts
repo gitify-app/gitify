@@ -5,13 +5,10 @@ import {
   hasExcludeHandleFilters,
   hasIncludeHandleFilters,
 } from './handles';
-import { filterNotificationByReason, hasReasonFilters } from './reason';
-import { filterNotificationByState, hasStateFilters } from './state';
-import {
-  filterNotificationBySubjectType,
-  hasSubjectTypeFilters,
-} from './subjectType';
-import { filterNotificationByUserType, hasUserTypeFilters } from './userType';
+import { reasonFilter } from './reason';
+import { stateFilter } from './state';
+import { subjectTypeFilter } from './subjectType';
+import { userTypeFilter } from './userType';
 
 export function filterNotifications(
   notifications: Notification[],
@@ -21,11 +18,11 @@ export function filterNotifications(
     let passesFilters = true;
 
     if (settings.detailedNotifications) {
-      if (hasUserTypeFilters(settings)) {
+      if (userTypeFilter.hasFilters(settings)) {
         passesFilters =
           passesFilters &&
           settings.filterUserTypes.some((userType) =>
-            filterNotificationByUserType(notification, userType),
+            userTypeFilter.filterNotification(notification, userType),
           );
       }
 
@@ -45,28 +42,28 @@ export function filterNotifications(
           );
       }
 
-      if (hasStateFilters(settings)) {
+      if (stateFilter.hasFilters(settings)) {
         passesFilters =
           passesFilters &&
           settings.filterStates.some((state) =>
-            filterNotificationByState(notification, state),
+            stateFilter.filterNotification(notification, state),
           );
       }
     }
 
-    if (hasSubjectTypeFilters(settings)) {
+    if (subjectTypeFilter.hasFilters(settings)) {
       passesFilters =
         passesFilters &&
         settings.filterSubjectTypes.some((subjectType) =>
-          filterNotificationBySubjectType(notification, subjectType),
+          subjectTypeFilter.filterNotification(notification, subjectType),
         );
     }
 
-    if (hasReasonFilters(settings)) {
+    if (reasonFilter.hasFilters(settings)) {
       passesFilters =
         passesFilters &&
         settings.filterReasons.some((reason) =>
-          filterNotificationByReason(notification, reason),
+          reasonFilter.filterNotification(notification, reason),
         );
     }
 
@@ -76,11 +73,11 @@ export function filterNotifications(
 
 export function hasAnyFiltersSet(settings: SettingsState): boolean {
   return (
-    hasUserTypeFilters(settings) ||
+    userTypeFilter.hasFilters(settings) ||
     hasIncludeHandleFilters(settings) ||
     hasExcludeHandleFilters(settings) ||
-    hasSubjectTypeFilters(settings) ||
-    hasStateFilters(settings) ||
-    hasReasonFilters(settings)
+    subjectTypeFilter.hasFilters(settings) ||
+    stateFilter.hasFilters(settings) ||
+    reasonFilter.hasFilters(settings)
   );
 }

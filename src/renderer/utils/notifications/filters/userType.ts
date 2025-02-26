@@ -4,8 +4,9 @@ import type {
   TypeDetails,
 } from '../../../types';
 import type { Notification, UserType } from '../../../typesGitHub';
+import type { Filter } from './types';
 
-export const FILTERS_USER_TYPES: Record<UserType, TypeDetails> = {
+const USER_TYPE_DETAILS: Record<UserType, TypeDetails> = {
   User: {
     title: 'User',
   },
@@ -18,48 +19,46 @@ export const FILTERS_USER_TYPES: Record<UserType, TypeDetails> = {
   },
 } as Partial<Record<UserType, TypeDetails>> as Record<UserType, TypeDetails>;
 
-export function getUserTypeDetails(userType: UserType): TypeDetails {
-  return FILTERS_USER_TYPES[userType];
-}
+export const userTypeFilter: Filter<UserType> = {
+  FILTER_TYPES: USER_TYPE_DETAILS,
 
-export function hasUserTypeFilters(settings: SettingsState) {
-  return settings.filterUserTypes.length > 0;
-}
+  requiresDetailsNotifications: true,
 
-export function isUserTypeFilterSet(
-  settings: SettingsState,
-  userType: UserType,
-) {
-  return settings.filterUserTypes.includes(userType);
-}
+  getTypeDetails(userType: UserType): TypeDetails {
+    return this.FILTER_TYPES[userType];
+  },
 
-export function getUserTypeFilterCount(
-  notifications: AccountNotifications[],
-  userType: UserType,
-) {
-  return notifications.reduce(
-    (sum, account) =>
-      sum +
-      account.notifications.filter((n) =>
-        filterNotificationByUserType(n, userType),
-      ).length,
-    0,
-  );
-}
+  hasFilters(settings: SettingsState) {
+    return settings.filterUserTypes.length > 0;
+  },
 
-export function filterNotificationByUserType(
-  notification: Notification,
-  userType: UserType,
-): boolean {
-  const allUserTypes = ['User', 'EnterpriseUserAccount'];
+  isFilterSet(settings: SettingsState, userType: UserType) {
+    return settings.filterUserTypes.includes(userType);
+  },
 
-  if (userType === 'User') {
-    return allUserTypes.includes(notification.subject?.user?.type);
-  }
+  getFilterCount(notifications: AccountNotifications[], userType: UserType) {
+    return notifications.reduce(
+      (sum, account) =>
+        sum +
+        account.notifications.filter((n) =>
+          this.filterNotification(n, userType),
+        ).length,
+      0,
+    );
+  },
 
-  return notification.subject?.user?.type === userType;
-}
+  filterNotification(notification: Notification, userType: UserType): boolean {
+    const allUserTypes = ['User', 'EnterpriseUserAccount'];
 
+    if (userType === 'User') {
+      return allUserTypes.includes(notification.subject?.user?.type);
+    }
+
+    return notification.subject?.user?.type === userType;
+  },
+};
+
+// Keep this function directly exported as it's not part of the interface
 export function isNonHumanUser(type: UserType): boolean {
   return type === 'Bot' || type === 'Organization' || type === 'Mannequin';
 }

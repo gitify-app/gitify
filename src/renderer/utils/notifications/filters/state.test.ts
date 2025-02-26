@@ -1,5 +1,5 @@
 import type { Notification } from '../../../typesGitHub';
-import { filterNotificationByState } from './state';
+import { stateFilter } from './state';
 
 describe('renderer/utils/notifications/filters/state.ts', () => {
   afterEach(() => {
@@ -15,47 +15,47 @@ describe('renderer/utils/notifications/filters/state.ts', () => {
 
     // Open states
     mockPartialNotification.subject.state = 'open';
-    expect(filterNotificationByState(mockPartialNotification, 'open')).toBe(
-      true,
-    );
+    expect(
+      stateFilter.filterNotification(mockPartialNotification, 'open'),
+    ).toBe(true);
 
     mockPartialNotification.subject.state = 'reopened';
-    expect(filterNotificationByState(mockPartialNotification, 'open')).toBe(
-      true,
-    );
+    expect(
+      stateFilter.filterNotification(mockPartialNotification, 'open'),
+    ).toBe(true);
 
     // Closed states
     mockPartialNotification.subject.state = 'closed';
-    expect(filterNotificationByState(mockPartialNotification, 'closed')).toBe(
-      true,
-    );
+    expect(
+      stateFilter.filterNotification(mockPartialNotification, 'closed'),
+    ).toBe(true);
 
     mockPartialNotification.subject.state = 'completed';
-    expect(filterNotificationByState(mockPartialNotification, 'closed')).toBe(
-      true,
-    );
+    expect(
+      stateFilter.filterNotification(mockPartialNotification, 'closed'),
+    ).toBe(true);
 
     mockPartialNotification.subject.state = 'not_planned';
-    expect(filterNotificationByState(mockPartialNotification, 'closed')).toBe(
-      true,
-    );
+    expect(
+      stateFilter.filterNotification(mockPartialNotification, 'closed'),
+    ).toBe(true);
 
     // Merged states
     mockPartialNotification.subject.state = 'merged';
-    expect(filterNotificationByState(mockPartialNotification, 'merged')).toBe(
-      true,
-    );
+    expect(
+      stateFilter.filterNotification(mockPartialNotification, 'merged'),
+    ).toBe(true);
 
     // Draft states
     mockPartialNotification.subject.state = 'draft';
-    expect(filterNotificationByState(mockPartialNotification, 'draft')).toBe(
-      true,
-    );
+    expect(
+      stateFilter.filterNotification(mockPartialNotification, 'draft'),
+    ).toBe(true);
 
     // Other states
     mockPartialNotification.subject.state = 'OUTDATED';
-    expect(filterNotificationByState(mockPartialNotification, 'other')).toBe(
-      true,
-    );
+    expect(
+      stateFilter.filterNotification(mockPartialNotification, 'other'),
+    ).toBe(true);
   });
 });

@@ -1,28 +1,40 @@
-import type { AccountNotifications, SettingsState } from '../../../types';
+import type {
+  AccountNotifications,
+  SettingsState,
+  TypeDetails,
+} from '../../../types';
 import type { Notification, Reason } from '../../../typesGitHub';
+import { REASON_TYPE_DETAILS } from '../../reason';
+import type { Filter } from './types';
 
-export function hasReasonFilters(settings: SettingsState) {
-  return settings.filterReasons.length > 0;
-}
+export const reasonFilter: Filter<Reason> = {
+  FILTER_TYPES: REASON_TYPE_DETAILS,
 
-export function isReasonFilterSet(settings: SettingsState, reason: Reason) {
-  return settings.filterReasons.includes(reason);
-}
+  requiresDetailsNotifications: false,
 
-export function getReasonFilterCount(
-  notifications: AccountNotifications[],
-  reason: Reason,
-) {
-  return notifications.reduce(
-    (sum, account) =>
-      sum + account.notifications.filter((n) => n.reason === reason).length,
-    0,
-  );
-}
+  getTypeDetails(reason: Reason): TypeDetails {
+    return this.FILTER_TYPES[reason];
+  },
 
-export function filterNotificationByReason(
-  notification: Notification,
-  reason: Reason,
-): boolean {
-  return notification.reason === reason;
-}
+  hasFilters(settings: SettingsState) {
+    return settings.filterReasons.length > 0;
+  },
+
+  isFilterSet(settings: SettingsState, reason: Reason) {
+    return settings.filterReasons.includes(reason);
+  },
+
+  getFilterCount(notifications: AccountNotifications[], reason: Reason) {
+    return notifications.reduce(
+      (sum, account) =>
+        sum +
+        account.notifications.filter((n) => this.filterNotification(n, reason))
+          .length,
+      0,
+    );
+  },
+
+  filterNotification(notification: Notification, reason: Reason): boolean {
+    return notification.reason === reason;
+  },
+};
