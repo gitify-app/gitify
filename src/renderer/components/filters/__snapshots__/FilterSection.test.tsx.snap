@@ -31,6 +31,11 @@ exports[`renderer/components/filters/FilterSection.tsx should be able to toggle 
     >
       Draft
     </label>
+    <span
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+    >
+      0
+    </span>
   </div>
   <div
     class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
@@ -76,6 +81,11 @@ exports[`renderer/components/filters/FilterSection.tsx should be able to toggle 
         />
       </svg>
     </div>
+    <span
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+    >
+      0
+    </span>
   </div>
   <div
     class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
@@ -98,6 +108,11 @@ exports[`renderer/components/filters/FilterSection.tsx should be able to toggle 
     >
       Merged
     </label>
+    <span
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+    >
+      0
+    </span>
   </div>
   <div
     class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
@@ -143,6 +158,11 @@ exports[`renderer/components/filters/FilterSection.tsx should be able to toggle 
         />
       </svg>
     </div>
+    <span
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+    >
+      0
+    </span>
   </div>
   <div
     class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
@@ -188,6 +208,11 @@ exports[`renderer/components/filters/FilterSection.tsx should be able to toggle 
         />
       </svg>
     </div>
+    <span
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+    >
+      0
+    </span>
   </div>
 </div>
 `;
@@ -223,6 +248,11 @@ exports[`renderer/components/filters/FilterSection.tsx should be able to toggle 
     >
       Draft
     </label>
+    <span
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+    >
+      0
+    </span>
   </div>
   <div
     class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
@@ -269,6 +299,11 @@ exports[`renderer/components/filters/FilterSection.tsx should be able to toggle 
         />
       </svg>
     </div>
+    <span
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-primary"
+    >
+      0
+    </span>
   </div>
   <div
     class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
@@ -291,6 +326,11 @@ exports[`renderer/components/filters/FilterSection.tsx should be able to toggle 
     >
       Merged
     </label>
+    <span
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+    >
+      0
+    </span>
   </div>
   <div
     class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
@@ -336,6 +376,11 @@ exports[`renderer/components/filters/FilterSection.tsx should be able to toggle 
         />
       </svg>
     </div>
+    <span
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+    >
+      0
+    </span>
   </div>
   <div
     class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
@@ -381,6 +426,11 @@ exports[`renderer/components/filters/FilterSection.tsx should be able to toggle 
         />
       </svg>
     </div>
+    <span
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+    >
+      0
+    </span>
   </div>
 </div>
 `;
@@ -391,7 +441,6 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
   "baseElement": <body>
     <div>
       <fieldset
-        class="mb-3"
         id="FilterSectionTest"
       >
         <div
@@ -473,6 +522,11 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
             >
               Draft
             </label>
+            <span
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            >
+              0
+            </span>
           </div>
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
@@ -519,18 +573,9 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
               </svg>
             </div>
             <span
-              aria-hidden="true"
-              class="Box-sc-g0xbh4-0 gUZDKK"
-              sx="[object Object]"
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
             >
               1
-            </span>
-            <span
-              class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 gbsmlL"
-            >
-               (
-              1
-              )
             </span>
           </div>
           <div
@@ -554,6 +599,11 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
             >
               Merged
             </label>
+            <span
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            >
+              0
+            </span>
           </div>
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
@@ -599,6 +649,11 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
                 />
               </svg>
             </div>
+            <span
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            >
+              0
+            </span>
           </div>
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
@@ -645,18 +700,9 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
               </svg>
             </div>
             <span
-              aria-hidden="true"
-              class="Box-sc-g0xbh4-0 gUZDKK"
-              sx="[object Object]"
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
             >
               3
-            </span>
-            <span
-              class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 gbsmlL"
-            >
-               (
-              3
-              )
             </span>
           </div>
         </div>
@@ -665,7 +711,6 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
   </body>,
   "container": <div>
     <fieldset
-      class="mb-3"
       id="FilterSectionTest"
     >
       <div
@@ -747,6 +792,11 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
           >
             Draft
           </label>
+          <span
+            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+          >
+            0
+          </span>
         </div>
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
@@ -793,18 +843,9 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
             </svg>
           </div>
           <span
-            aria-hidden="true"
-            class="Box-sc-g0xbh4-0 gUZDKK"
-            sx="[object Object]"
+            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
           >
             1
-          </span>
-          <span
-            class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 gbsmlL"
-          >
-             (
-            1
-            )
           </span>
         </div>
         <div
@@ -828,6 +869,11 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
           >
             Merged
           </label>
+          <span
+            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+          >
+            0
+          </span>
         </div>
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
@@ -873,6 +919,11 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
               />
             </svg>
           </div>
+          <span
+            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+          >
+            0
+          </span>
         </div>
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
@@ -919,18 +970,9 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
             </svg>
           </div>
           <span
-            aria-hidden="true"
-            class="Box-sc-g0xbh4-0 gUZDKK"
-            sx="[object Object]"
+            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
           >
             3
-          </span>
-          <span
-            class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 gbsmlL"
-          >
-             (
-            3
-            )
           </span>
         </div>
       </div>
@@ -996,7 +1038,6 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
   "baseElement": <body>
     <div>
       <fieldset
-        class="mb-3"
         id="FilterSectionTest"
       >
         <div
@@ -1078,6 +1119,11 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
             >
               Draft
             </label>
+            <span
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            >
+              0
+            </span>
           </div>
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
@@ -1124,18 +1170,9 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
               </svg>
             </div>
             <span
-              aria-hidden="true"
-              class="Box-sc-g0xbh4-0 gUZDKK"
-              sx="[object Object]"
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
             >
               1
-            </span>
-            <span
-              class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 gbsmlL"
-            >
-               (
-              1
-              )
             </span>
           </div>
           <div
@@ -1159,6 +1196,11 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
             >
               Merged
             </label>
+            <span
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            >
+              0
+            </span>
           </div>
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
@@ -1204,6 +1246,11 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
                 />
               </svg>
             </div>
+            <span
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            >
+              0
+            </span>
           </div>
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
@@ -1250,18 +1297,9 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
               </svg>
             </div>
             <span
-              aria-hidden="true"
-              class="Box-sc-g0xbh4-0 gUZDKK"
-              sx="[object Object]"
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
             >
               3
-            </span>
-            <span
-              class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 gbsmlL"
-            >
-               (
-              3
-              )
             </span>
           </div>
         </div>
@@ -1270,7 +1308,6 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
   </body>,
   "container": <div>
     <fieldset
-      class="mb-3"
       id="FilterSectionTest"
     >
       <div
@@ -1352,6 +1389,11 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
           >
             Draft
           </label>
+          <span
+            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+          >
+            0
+          </span>
         </div>
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
@@ -1398,18 +1440,9 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
             </svg>
           </div>
           <span
-            aria-hidden="true"
-            class="Box-sc-g0xbh4-0 gUZDKK"
-            sx="[object Object]"
+            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
           >
             1
-          </span>
-          <span
-            class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 gbsmlL"
-          >
-             (
-            1
-            )
           </span>
         </div>
         <div
@@ -1433,6 +1466,11 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
           >
             Merged
           </label>
+          <span
+            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+          >
+            0
+          </span>
         </div>
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
@@ -1478,6 +1516,11 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
               />
             </svg>
           </div>
+          <span
+            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+          >
+            0
+          </span>
         </div>
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
@@ -1524,18 +1567,9 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
             </svg>
           </div>
           <span
-            aria-hidden="true"
-            class="Box-sc-g0xbh4-0 gUZDKK"
-            sx="[object Object]"
+            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
           >
             3
-          </span>
-          <span
-            class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 gbsmlL"
-          >
-             (
-            3
-            )
           </span>
         </div>
       </div>

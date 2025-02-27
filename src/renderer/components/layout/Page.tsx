@@ -6,10 +6,15 @@ interface IPage {
   id: string;
 }
 
-export const Page: FC<IPage> = (props: IPage) => {
+/**
+ * Page component represents a single page view.
+ * It creates a column layout for header, content, and footer.
+ * The height is 100% to fill the parent container.
+ */
+export const Page: FC<IPage> = ({ children, id }) => {
   return (
-    <Box className="flex flex-col h-screen" data-testid={props.id}>
-      {props.children}
+    <Box className="flex flex-col h-screen" data-testid={id}>
+      {children}
     </Box>
   );
 };

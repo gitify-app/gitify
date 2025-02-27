@@ -1,8 +1,8 @@
+import { Stack } from '@primer/react';
 import type { FC, ReactNode } from 'react';
 
-import { CounterLabel, Stack } from '@primer/react';
-
 import { cn } from '../../utils/cn';
+import { CustomCounter } from '../primitives/CustomCounter';
 import { Tooltip } from './Tooltip';
 
 export interface ICheckbox {
@@ -20,7 +20,7 @@ export const Checkbox: FC<ICheckbox> = ({
   visible = true,
   ...props
 }: ICheckbox) => {
-  const counter = props.counter > 0 ? props.counter : undefined;
+  const counter = props?.counter === 0 ? '0' : props.counter;
 
   return (
     visible && (
@@ -54,11 +54,12 @@ export const Checkbox: FC<ICheckbox> = ({
           <Tooltip name={`tooltip-${props.name}`} tooltip={props.tooltip} />
         )}
 
-        {counter ? (
-          <CounterLabel scheme={props.checked ? 'primary' : 'secondary'}>
-            {counter}
-          </CounterLabel>
-        ) : null}
+        {counter && (
+          <CustomCounter
+            scheme={props.checked ? 'primary' : 'secondary'}
+            value={counter}
+          />
+        )}
       </Stack>
     )
   );

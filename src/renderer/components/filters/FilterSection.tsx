@@ -33,7 +33,7 @@ export const FilterSection = <T extends FilterValue>({
   const { updateFilter, settings, notifications } = useContext(AppContext);
 
   return (
-    <fieldset id={id} className="mb-3">
+    <fieldset id={id}>
       <Stack direction="horizontal" gap="condensed" align="baseline">
         <Title icon={icon}>{title}</Title>
         {tooltip && (

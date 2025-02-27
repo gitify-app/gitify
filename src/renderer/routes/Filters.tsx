@@ -19,12 +19,12 @@ export const FiltersRoute: FC = () => {
 
   return (
     <Page id="filters">
-      <Header fetchOnBack={true} icon={FilterIcon}>
+      <Header fetchOnBack icon={FilterIcon}>
         Filters
       </Header>
 
-      <Contents>
-        <Stack direction="vertical" gap="condensed">
+      <Contents paddingBottom>
+        <Stack direction="vertical" gap="spacious">
           <UserTypeFilter />
           <UserHandleFilter />
           <SubjectTypeFilter />

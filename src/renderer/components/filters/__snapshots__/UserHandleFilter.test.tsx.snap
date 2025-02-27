@@ -6,7 +6,6 @@ exports[`renderer/components/filters/UserHandleFilter.tsx should render itself &
   "baseElement": <body>
     <div>
       <fieldset
-        class="mb-3"
         id="filter-user-handles"
       >
         <div
@@ -236,7 +235,6 @@ exports[`renderer/components/filters/UserHandleFilter.tsx should render itself &
   </body>,
   "container": <div>
     <fieldset
-      class="mb-3"
       id="filter-user-handles"
     >
       <div
@@ -523,7 +521,6 @@ exports[`renderer/components/filters/UserHandleFilter.tsx should render itself &
   "baseElement": <body>
     <div>
       <fieldset
-        class="mb-3"
         id="filter-user-handles"
       >
         <div
@@ -751,7 +748,6 @@ exports[`renderer/components/filters/UserHandleFilter.tsx should render itself &
   </body>,
   "container": <div>
     <fieldset
-      class="mb-3"
       id="filter-user-handles"
     >
       <div

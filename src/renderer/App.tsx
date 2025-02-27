@@ -7,9 +7,9 @@ import {
   useLocation,
 } from 'react-router-dom';
 
-import { BaseStyles, Box, ThemeProvider } from '@primer/react';
+import { BaseStyles, ThemeProvider } from '@primer/react';
 
-import { Sidebar } from './components/Sidebar';
+import { AppLayout } from './components/layout/AppLayout';
 import { AppContext, AppProvider } from './context/App';
 import { AccountsRoute } from './routes/Accounts';
 import { FiltersRoute } from './routes/Filters';
@@ -38,8 +38,7 @@ export const App = () => {
       <BaseStyles>
         <AppProvider>
           <Router>
-            <Box className="flex flex-col min-h-screen overflow-x-hidden overflow-y-auto pl-sidebar bg-gitify-background">
-              <Sidebar />
+            <AppLayout>
               <Routes>
                 <Route
                   path="/"
@@ -83,7 +82,7 @@ export const App = () => {
                   element={<LoginWithOAuthAppRoute />}
                 />
               </Routes>
-            </Box>
+            </AppLayout>
           </Router>
         </AppProvider>
       </BaseStyles>

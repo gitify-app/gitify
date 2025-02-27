@@ -37,7 +37,7 @@ describe('renderer/components/primitives/Header.tsx', () => {
           fetchNotifications,
         }}
       >
-        <Header fetchOnBack={true} icon={MarkGithubIcon}>
+        <Header fetchOnBack icon={MarkGithubIcon}>
           Test Header
         </Header>
       </AppContext.Provider>,
