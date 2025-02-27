@@ -180,7 +180,7 @@
     "styled-components": "6.1.15",
     "tailwind-merge": "3.0.2",
     "tailwindcss": "4.0.9",
-    "terser-webpack-plugin": "5.3.11",
+    "terser-webpack-plugin": "5.3.12",
     "ts-jest": "29.2.6",
     "ts-loader": "9.5.2",
     "ts-node": "10.9.2",
