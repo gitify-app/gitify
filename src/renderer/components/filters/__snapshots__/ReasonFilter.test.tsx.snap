@@ -55,7 +55,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should be able to toggle r
       </svg>
     </div>
     <span
-      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
     >
       0
     </span>
@@ -105,7 +105,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should be able to toggle r
       </svg>
     </div>
     <span
-      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
     >
       0
     </span>
@@ -155,7 +155,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should be able to toggle r
       </svg>
     </div>
     <span
-      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
     >
       0
     </span>
@@ -205,7 +205,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should be able to toggle r
       </svg>
     </div>
     <span
-      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
     >
       0
     </span>
@@ -255,7 +255,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should be able to toggle r
       </svg>
     </div>
     <span
-      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
     >
       0
     </span>
@@ -305,7 +305,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should be able to toggle r
       </svg>
     </div>
     <span
-      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
     >
       0
     </span>
@@ -355,7 +355,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should be able to toggle r
       </svg>
     </div>
     <span
-      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
     >
       0
     </span>
@@ -405,7 +405,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should be able to toggle r
       </svg>
     </div>
     <span
-      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
     >
       0
     </span>
@@ -455,7 +455,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should be able to toggle r
       </svg>
     </div>
     <span
-      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
     >
       0
     </span>
@@ -505,7 +505,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should be able to toggle r
       </svg>
     </div>
     <span
-      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
     >
       0
     </span>
@@ -555,7 +555,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should be able to toggle r
       </svg>
     </div>
     <span
-      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
     >
       0
     </span>
@@ -605,7 +605,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should be able to toggle r
       </svg>
     </div>
     <span
-      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
     >
       0
     </span>
@@ -655,7 +655,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should be able to toggle r
       </svg>
     </div>
     <span
-      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
     >
       0
     </span>
@@ -705,7 +705,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should be able to toggle r
       </svg>
     </div>
     <span
-      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
     >
       0
     </span>
@@ -755,7 +755,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should be able to toggle r
       </svg>
     </div>
     <span
-      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
     >
       0
     </span>
@@ -818,7 +818,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should be able to toggle r
       </svg>
     </div>
     <span
-      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
     >
       0
     </span>
@@ -868,7 +868,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should be able to toggle r
       </svg>
     </div>
     <span
-      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
     >
       0
     </span>
@@ -918,7 +918,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should be able to toggle r
       </svg>
     </div>
     <span
-      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
     >
       0
     </span>
@@ -968,7 +968,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should be able to toggle r
       </svg>
     </div>
     <span
-      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
     >
       0
     </span>
@@ -1018,7 +1018,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should be able to toggle r
       </svg>
     </div>
     <span
-      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
     >
       0
     </span>
@@ -1068,7 +1068,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should be able to toggle r
       </svg>
     </div>
     <span
-      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
     >
       0
     </span>
@@ -1118,7 +1118,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should be able to toggle r
       </svg>
     </div>
     <span
-      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
     >
       0
     </span>
@@ -1168,7 +1168,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should be able to toggle r
       </svg>
     </div>
     <span
-      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
     >
       0
     </span>
@@ -1218,7 +1218,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should be able to toggle r
       </svg>
     </div>
     <span
-      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
     >
       0
     </span>
@@ -1268,7 +1268,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should be able to toggle r
       </svg>
     </div>
     <span
-      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
     >
       0
     </span>
@@ -1318,7 +1318,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should be able to toggle r
       </svg>
     </div>
     <span
-      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
     >
       0
     </span>
@@ -1369,7 +1369,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should be able to toggle r
       </svg>
     </div>
     <span
-      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-blue-300 text-blue-800"
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-primary"
     >
       0
     </span>
@@ -1419,7 +1419,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should be able to toggle r
       </svg>
     </div>
     <span
-      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
     >
       0
     </span>
@@ -1469,7 +1469,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should be able to toggle r
       </svg>
     </div>
     <span
-      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
     >
       0
     </span>
@@ -1519,7 +1519,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should be able to toggle r
       </svg>
     </div>
     <span
-      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
     >
       0
     </span>
@@ -1628,7 +1628,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               </svg>
             </div>
             <span
-              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
             >
               0
             </span>
@@ -1678,7 +1678,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               </svg>
             </div>
             <span
-              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
             >
               0
             </span>
@@ -1728,7 +1728,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               </svg>
             </div>
             <span
-              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
             >
               1
             </span>
@@ -1778,7 +1778,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               </svg>
             </div>
             <span
-              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
             >
               0
             </span>
@@ -1828,7 +1828,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               </svg>
             </div>
             <span
-              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
             >
               0
             </span>
@@ -1878,7 +1878,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               </svg>
             </div>
             <span
-              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
             >
               0
             </span>
@@ -1928,7 +1928,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               </svg>
             </div>
             <span
-              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
             >
               0
             </span>
@@ -1978,7 +1978,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               </svg>
             </div>
             <span
-              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
             >
               0
             </span>
@@ -2028,7 +2028,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               </svg>
             </div>
             <span
-              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
             >
               0
             </span>
@@ -2078,7 +2078,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               </svg>
             </div>
             <span
-              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
             >
               0
             </span>
@@ -2128,7 +2128,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               </svg>
             </div>
             <span
-              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
             >
               0
             </span>
@@ -2178,7 +2178,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               </svg>
             </div>
             <span
-              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
             >
               0
             </span>
@@ -2228,7 +2228,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               </svg>
             </div>
             <span
-              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
             >
               0
             </span>
@@ -2278,7 +2278,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               </svg>
             </div>
             <span
-              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
             >
               3
             </span>
@@ -2328,7 +2328,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               </svg>
             </div>
             <span
-              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
             >
               0
             </span>
@@ -2434,7 +2434,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             </svg>
           </div>
           <span
-            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
           >
             0
           </span>
@@ -2484,7 +2484,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             </svg>
           </div>
           <span
-            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
           >
             0
           </span>
@@ -2534,7 +2534,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             </svg>
           </div>
           <span
-            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
           >
             1
           </span>
@@ -2584,7 +2584,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             </svg>
           </div>
           <span
-            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
           >
             0
           </span>
@@ -2634,7 +2634,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             </svg>
           </div>
           <span
-            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
           >
             0
           </span>
@@ -2684,7 +2684,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             </svg>
           </div>
           <span
-            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
           >
             0
           </span>
@@ -2734,7 +2734,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             </svg>
           </div>
           <span
-            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
           >
             0
           </span>
@@ -2784,7 +2784,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             </svg>
           </div>
           <span
-            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
           >
             0
           </span>
@@ -2834,7 +2834,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             </svg>
           </div>
           <span
-            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
           >
             0
           </span>
@@ -2884,7 +2884,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             </svg>
           </div>
           <span
-            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
           >
             0
           </span>
@@ -2934,7 +2934,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             </svg>
           </div>
           <span
-            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
           >
             0
           </span>
@@ -2984,7 +2984,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             </svg>
           </div>
           <span
-            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
           >
             0
           </span>
@@ -3034,7 +3034,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             </svg>
           </div>
           <span
-            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
           >
             0
           </span>
@@ -3084,7 +3084,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             </svg>
           </div>
           <span
-            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
           >
             3
           </span>
@@ -3134,7 +3134,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             </svg>
           </div>
           <span
-            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
           >
             0
           </span>

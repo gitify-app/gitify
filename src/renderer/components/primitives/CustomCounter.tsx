@@ -26,12 +26,11 @@ export const CustomCounter: FC<ICustomCounter> = ({
   scheme = 'secondary',
 }) => {
   const baseStyles =
-    'px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px]';
+    'px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text';
 
-  // TODO - use design tokens for these colors
   const schemeStyles = {
-    primary: 'bg-blue-300 text-blue-800',
-    secondary: 'bg-gray-100 text-gray-800',
+    primary: 'bg-gitify-counter-primary',
+    secondary: 'bg-gitify-counter-secondary',
   };
 
   return <Text className={cn(baseStyles, schemeStyles[scheme])}>{value}</Text>;

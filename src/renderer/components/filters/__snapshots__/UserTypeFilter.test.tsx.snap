@@ -32,7 +32,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should be able to toggle
       User
     </label>
     <span
-      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
     >
       0
     </span>
@@ -82,7 +82,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should be able to toggle
       </svg>
     </div>
     <span
-      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
     >
       0
     </span>
@@ -109,7 +109,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should be able to toggle
       Organization
     </label>
     <span
-      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
     >
       0
     </span>
@@ -150,7 +150,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should be able to toggle
       User
     </label>
     <span
-      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-blue-300 text-blue-800"
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-primary"
     >
       0
     </span>
@@ -200,7 +200,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should be able to toggle
       </svg>
     </div>
     <span
-      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
     >
       0
     </span>
@@ -227,7 +227,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should be able to toggle
       Organization
     </label>
     <span
-      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
     >
       0
     </span>
@@ -347,7 +347,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
               User
             </label>
             <span
-              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
             >
               1
             </span>
@@ -398,7 +398,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
               </svg>
             </div>
             <span
-              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
             >
               0
             </span>
@@ -426,7 +426,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
               Organization
             </label>
             <span
-              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
             >
               0
             </span>
@@ -543,7 +543,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
             User
           </label>
           <span
-            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
           >
             1
           </span>
@@ -594,7 +594,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
             </svg>
           </div>
           <span
-            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
           >
             0
           </span>
@@ -622,7 +622,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
             Organization
           </label>
           <span
-            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
           >
             0
           </span>
@@ -795,7 +795,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
               User
             </label>
             <span
-              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
             >
               1
             </span>
@@ -845,7 +845,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
               </svg>
             </div>
             <span
-              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
             >
               0
             </span>
@@ -872,7 +872,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
               Organization
             </label>
             <span
-              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
             >
               0
             </span>
@@ -988,7 +988,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
             User
           </label>
           <span
-            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
           >
             1
           </span>
@@ -1038,7 +1038,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
             </svg>
           </div>
           <span
-            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
           >
             0
           </span>
@@ -1065,7 +1065,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
             Organization
           </label>
           <span
-            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
           >
             0
           </span>

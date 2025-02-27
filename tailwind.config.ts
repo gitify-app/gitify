@@ -40,6 +40,12 @@ const config: Config = {
             open: 'var(--fgColor-open)',
           },
 
+          counter: {
+            text: 'var(--gitify-counter-text)',
+            primary: 'var(--gitify-counter-primary)',
+            secondary: 'var(--gitify-counter-secondary)',
+          },
+
           accounts: 'var(--bgColor-neutral-muted)',
 
           account: {
@@ -73,11 +79,19 @@ const config: Config = {
           '--gitify-scrollbar-track': colors.gray[100],
           '--gitify-scrollbar-thumb': colors.gray[300],
           '--gitify-scrollbar-thumb-hover': colors.gray[400],
+
+          '--gitify-counter-primary': colors.blue[300],
+          '--gitify-counter-secondary': colors.gray[200],
+          '--gitify-counter-text': colors.gray[800],
         },
         '[data-color-mode="dark"]': {
           '--gitify-scrollbar-track': colors.gray[900],
           '--gitify-scrollbar-thumb': colors.gray[700],
           '--gitify-scrollbar-thumb-hover': colors.gray[600],
+
+          '--gitify-counter-primary': colors.blue[400],
+          '--gitify-counter-secondary': colors.gray[600],
+          '--gitify-counter-text': colors.gray[100],
         },
       });
     },

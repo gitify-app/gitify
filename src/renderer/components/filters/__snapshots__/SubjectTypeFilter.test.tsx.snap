@@ -32,7 +32,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should be able to tog
       Check Suite
     </label>
     <span
-      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
     >
       0
     </span>
@@ -59,7 +59,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should be able to tog
       Commit
     </label>
     <span
-      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
     >
       0
     </span>
@@ -86,7 +86,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should be able to tog
       Discussion
     </label>
     <span
-      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
     >
       0
     </span>
@@ -113,7 +113,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should be able to tog
       Issue
     </label>
     <span
-      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
     >
       0
     </span>
@@ -140,7 +140,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should be able to tog
       Pull Request
     </label>
     <span
-      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
     >
       0
     </span>
@@ -167,7 +167,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should be able to tog
       Release
     </label>
     <span
-      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
     >
       0
     </span>
@@ -194,7 +194,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should be able to tog
       Dependabot Alert
     </label>
     <span
-      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
     >
       0
     </span>
@@ -221,7 +221,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should be able to tog
       Invitation
     </label>
     <span
-      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
     >
       0
     </span>
@@ -248,7 +248,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should be able to tog
       Vulnerability Alert
     </label>
     <span
-      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
     >
       0
     </span>
@@ -275,7 +275,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should be able to tog
       Workflow Run
     </label>
     <span
-      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
     >
       0
     </span>
@@ -315,7 +315,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should be able to tog
       Check Suite
     </label>
     <span
-      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
     >
       0
     </span>
@@ -342,7 +342,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should be able to tog
       Commit
     </label>
     <span
-      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
     >
       0
     </span>
@@ -369,7 +369,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should be able to tog
       Discussion
     </label>
     <span
-      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
     >
       0
     </span>
@@ -397,7 +397,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should be able to tog
       Issue
     </label>
     <span
-      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-blue-300 text-blue-800"
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-primary"
     >
       0
     </span>
@@ -424,7 +424,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should be able to tog
       Pull Request
     </label>
     <span
-      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
     >
       0
     </span>
@@ -451,7 +451,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should be able to tog
       Release
     </label>
     <span
-      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
     >
       0
     </span>
@@ -478,7 +478,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should be able to tog
       Dependabot Alert
     </label>
     <span
-      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
     >
       0
     </span>
@@ -505,7 +505,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should be able to tog
       Invitation
     </label>
     <span
-      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
     >
       0
     </span>
@@ -532,7 +532,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should be able to tog
       Vulnerability Alert
     </label>
     <span
-      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
     >
       0
     </span>
@@ -559,7 +559,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should be able to tog
       Workflow Run
     </label>
     <span
-      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
     >
       0
     </span>
@@ -678,7 +678,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
               Check Suite
             </label>
             <span
-              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
             >
               0
             </span>
@@ -705,7 +705,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
               Commit
             </label>
             <span
-              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
             >
               0
             </span>
@@ -732,7 +732,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
               Discussion
             </label>
             <span
-              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
             >
               0
             </span>
@@ -759,7 +759,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
               Issue
             </label>
             <span
-              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
             >
               2
             </span>
@@ -786,7 +786,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
               Pull Request
             </label>
             <span
-              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
             >
               1
             </span>
@@ -813,7 +813,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
               Release
             </label>
             <span
-              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
             >
               1
             </span>
@@ -840,7 +840,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
               Dependabot Alert
             </label>
             <span
-              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
             >
               0
             </span>
@@ -867,7 +867,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
               Invitation
             </label>
             <span
-              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
             >
               0
             </span>
@@ -894,7 +894,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
               Vulnerability Alert
             </label>
             <span
-              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
             >
               0
             </span>
@@ -921,7 +921,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
               Workflow Run
             </label>
             <span
-              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
             >
               0
             </span>
@@ -1037,7 +1037,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
             Check Suite
           </label>
           <span
-            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
           >
             0
           </span>
@@ -1064,7 +1064,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
             Commit
           </label>
           <span
-            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
           >
             0
           </span>
@@ -1091,7 +1091,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
             Discussion
           </label>
           <span
-            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
           >
             0
           </span>
@@ -1118,7 +1118,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
             Issue
           </label>
           <span
-            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
           >
             2
           </span>
@@ -1145,7 +1145,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
             Pull Request
           </label>
           <span
-            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
           >
             1
           </span>
@@ -1172,7 +1172,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
             Release
           </label>
           <span
-            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
           >
             1
           </span>
@@ -1199,7 +1199,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
             Dependabot Alert
           </label>
           <span
-            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
           >
             0
           </span>
@@ -1226,7 +1226,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
             Invitation
           </label>
           <span
-            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
           >
             0
           </span>
@@ -1253,7 +1253,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
             Vulnerability Alert
           </label>
           <span
-            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
           >
             0
           </span>
@@ -1280,7 +1280,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
             Workflow Run
           </label>
           <span
-            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
           >
             0
           </span>
