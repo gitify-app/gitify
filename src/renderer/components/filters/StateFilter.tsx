@@ -19,8 +19,8 @@ export const StateFilter: FC = () => {
   const { updateFilter, settings, notifications } = useContext(AppContext);
 
   return (
-    <fieldset id="filter-state" className="mb-3">
-      <Stack direction="horizontal" gap="condensed" align="baseline">
+    <fieldset id="filter-state">
+      <Stack direction="horizontal" gap="condensed">
         <Title icon={IssueOpenedIcon}>State</Title>
         <Tooltip
           name="tooltip-filter-state"

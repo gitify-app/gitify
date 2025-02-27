@@ -1,16 +1,20 @@
 import { Box, Stack } from '@primer/react';
 import type { FC, ReactNode } from 'react';
 
-interface IFooter {
+interface FooterProps {
   children: ReactNode;
-  justify: 'end' | 'space-between';
+  justify: 'end' | 'space-between' | 'start' | 'center';
 }
 
-export const Footer: FC<IFooter> = (props: IFooter) => {
+/**
+ * Footer component displays actions at the bottom of the page.
+ * It is fixed to the viewport bottom.
+ */
+export const Footer: FC<FooterProps> = ({ children, justify }) => {
   return (
-    <Box className="fixed bottom-0 left-sidebar right-0 bg-gitify-footer">
-      <Stack direction="horizontal" justify={props.justify} padding="condensed">
-        {props.children}
+    <Box className="left-sidebar bg-gitify-footer">
+      <Stack direction="horizontal" justify={justify} padding="condensed">
+        {children}
       </Stack>
     </Box>
   );

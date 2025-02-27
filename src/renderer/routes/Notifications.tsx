@@ -2,6 +2,7 @@ import { type FC, useContext, useMemo } from 'react';
 
 import { AllRead } from '../components/AllRead';
 import { Oops } from '../components/Oops';
+import { Contents } from '../components/layout/Contents';
 import { Page } from '../components/layout/Page';
 import { AccountNotifications } from '../components/notifications/AccountNotifications';
 import { AppContext } from '../context/App';
@@ -37,15 +38,19 @@ export const NotificationsRoute: FC = () => {
 
   return (
     <Page id="notifications">
-      {notifications.map((accountNotifications) => (
-        <AccountNotifications
-          key={getAccountUUID(accountNotifications.account)}
-          account={accountNotifications.account}
-          notifications={accountNotifications.notifications}
-          error={accountNotifications.error}
-          showAccountHeader={hasMultipleAccounts || settings.showAccountHeader}
-        />
-      ))}
+      <Contents padding={false}>
+        {notifications.map((accountNotifications) => (
+          <AccountNotifications
+            key={getAccountUUID(accountNotifications.account)}
+            account={accountNotifications.account}
+            notifications={accountNotifications.notifications}
+            error={accountNotifications.error}
+            showAccountHeader={
+              hasMultipleAccounts || settings.showAccountHeader
+            }
+          />
+        ))}
+      </Contents>
     </Page>
   );
 };
