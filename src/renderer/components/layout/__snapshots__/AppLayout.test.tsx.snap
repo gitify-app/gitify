@@ -6,7 +6,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
   "baseElement": <body>
     <div>
       <div
-        class="Box-sc-g0xbh4-0 flex flex-col max-h-screen bg-gitify-background"
+        class="Box-sc-g0xbh4-0 flex flex-col min-h-screen bg-gitify-background"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ fixed left-sidebar -ml-sidebar w-sidebar h-full bg-gitify-sidebar text-white"
@@ -268,7 +268,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
   </body>,
   "container": <div>
     <div
-      class="Box-sc-g0xbh4-0 flex flex-col max-h-screen bg-gitify-background"
+      class="Box-sc-g0xbh4-0 flex flex-col min-h-screen bg-gitify-background"
     >
       <div
         class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ fixed left-sidebar -ml-sidebar w-sidebar h-full bg-gitify-sidebar text-white"

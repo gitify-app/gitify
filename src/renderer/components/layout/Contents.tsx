@@ -4,16 +4,27 @@ import { cn } from '../../utils/cn';
 
 interface IContents {
   children: ReactNode;
-  padding?: boolean;
+  paddingHorizontal?: boolean;
+  paddingBottom?: boolean;
 }
 
 /**
  * Contents component holds the main content of a page.
  * It provides proper padding and handles scrolling.
  */
-export const Contents: FC<IContents> = ({ children, padding = true }) => {
+export const Contents: FC<IContents> = ({
+  children,
+  paddingHorizontal = true,
+  paddingBottom = false,
+}) => {
   return (
-    <Box className={cn('grow overflow-y-auto mb-4', padding && 'px-8')}>
+    <Box
+      className={cn(
+        'grow overflow-x-hidden overflow-y-auto',
+        paddingHorizontal && 'px-8',
+        paddingBottom && 'pb-4',
+      )}
+    >
       {children}
     </Box>
   );

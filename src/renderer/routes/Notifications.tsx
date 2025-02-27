@@ -38,7 +38,7 @@ export const NotificationsRoute: FC = () => {
 
   return (
     <Page id="notifications">
-      <Contents padding={false}>
+      <Contents paddingHorizontal={false}>
         {notifications.map((accountNotifications) => (
           <AccountNotifications
             key={getAccountUUID(accountNotifications.account)}

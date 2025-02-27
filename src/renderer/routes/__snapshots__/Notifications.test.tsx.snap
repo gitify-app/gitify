@@ -424,7 +424,7 @@ exports[`renderer/routes/Notifications.tsx should render itself & its children (
         data-testid="notifications"
       >
         <div
-          class="Box-sc-g0xbh4-0 grow overflow-y-auto mb-4"
+          class="Box-sc-g0xbh4-0 grow overflow-x-hidden overflow-y-auto"
         >
           <p>
             AccountNotifications
@@ -439,7 +439,7 @@ exports[`renderer/routes/Notifications.tsx should render itself & its children (
       data-testid="notifications"
     >
       <div
-        class="Box-sc-g0xbh4-0 grow overflow-y-auto mb-4"
+        class="Box-sc-g0xbh4-0 grow overflow-x-hidden overflow-y-auto"
       >
         <p>
           AccountNotifications
@@ -511,7 +511,7 @@ exports[`renderer/routes/Notifications.tsx should render itself & its children (
         data-testid="notifications"
       >
         <div
-          class="Box-sc-g0xbh4-0 grow overflow-y-auto mb-4"
+          class="Box-sc-g0xbh4-0 grow overflow-x-hidden overflow-y-auto"
         >
           <p>
             AccountNotifications
@@ -529,7 +529,7 @@ exports[`renderer/routes/Notifications.tsx should render itself & its children (
       data-testid="notifications"
     >
       <div
-        class="Box-sc-g0xbh4-0 grow overflow-y-auto mb-4"
+        class="Box-sc-g0xbh4-0 grow overflow-x-hidden overflow-y-auto"
       >
         <p>
           AccountNotifications

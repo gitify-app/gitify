@@ -86,7 +86,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
     </div>
   </div>
   <div
-    class="Box-sc-g0xbh4-0 grow overflow-y-auto mb-4 px-8"
+    class="Box-sc-g0xbh4-0 grow overflow-x-hidden overflow-y-auto px-8"
   >
     <div
       class="Box-sc-g0xbh4-0 rounded-md p-2 mb-4 bg-gitify-accounts"
@@ -1353,7 +1353,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
     </div>
   </div>
   <div
-    class="Box-sc-g0xbh4-0 grow overflow-y-auto mb-4 px-8"
+    class="Box-sc-g0xbh4-0 grow overflow-x-hidden overflow-y-auto px-8"
   >
     <div
       class="Box-sc-g0xbh4-0 rounded-md p-2 mb-4 bg-gitify-accounts"
@@ -2620,7 +2620,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
     </div>
   </div>
   <div
-    class="Box-sc-g0xbh4-0 grow overflow-y-auto mb-4 px-8"
+    class="Box-sc-g0xbh4-0 grow overflow-x-hidden overflow-y-auto px-8"
   >
     <div
       class="Box-sc-g0xbh4-0 rounded-md p-2 mb-4 bg-gitify-accounts"

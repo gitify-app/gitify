@@ -23,7 +23,7 @@ export const FiltersRoute: FC = () => {
         Filters
       </Header>
 
-      <Contents>
+      <Contents paddingBottom>
         <Stack direction="vertical" gap="spacious">
           <UserTypeFilter />
           <UserHandleFilter />

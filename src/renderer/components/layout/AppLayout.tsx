@@ -13,7 +13,7 @@ interface IAppLayout {
  */
 export const AppLayout: FC<IAppLayout> = ({ children }) => {
   return (
-    <Box className="flex flex-col max-h-screen bg-gitify-background">
+    <Box className="flex flex-col min-h-screen bg-gitify-background">
       <Sidebar />
       {/* Content area with left padding to make space for the sidebar */}
       <Box className="flex-1 pl-sidebar">{children}</Box>
