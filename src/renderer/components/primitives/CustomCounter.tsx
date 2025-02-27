@@ -7,9 +7,7 @@ import { cn } from '../../utils/cn';
 type CounterScheme = 'primary' | 'secondary' | 'empty';
 
 interface ICustomCounter {
-  /** The content to display within the counter */
   value: string | number;
-  /** The visual style of the counter */
   scheme?: CounterScheme;
 }
 
