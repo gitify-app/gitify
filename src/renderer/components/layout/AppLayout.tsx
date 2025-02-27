@@ -3,7 +3,7 @@ import type { FC, ReactNode } from 'react';
 
 import { Sidebar } from '../Sidebar';
 
-interface AppLayoutProps {
+interface IAppLayout {
   children: ReactNode;
 }
 
@@ -11,7 +11,7 @@ interface AppLayoutProps {
  * AppLayout is the main container for the application.
  * It handles the basic layout with sidebar and content area.
  */
-export const AppLayout: FC<AppLayoutProps> = ({ children }) => {
+export const AppLayout: FC<IAppLayout> = ({ children }) => {
   return (
     <Box className="flex flex-col max-h-screen bg-gitify-background">
       <Sidebar />
