@@ -31,6 +31,11 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should be able to toggle
     >
       User
     </label>
+    <span
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+    >
+      0
+    </span>
   </div>
   <div
     class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
@@ -76,6 +81,11 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should be able to toggle
         />
       </svg>
     </div>
+    <span
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+    >
+      0
+    </span>
   </div>
   <div
     class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
@@ -98,6 +108,11 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should be able to toggle
     >
       Organization
     </label>
+    <span
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+    >
+      0
+    </span>
   </div>
 </div>
 `;
@@ -134,6 +149,11 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should be able to toggle
     >
       User
     </label>
+    <span
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-blue-300 text-blue-800"
+    >
+      0
+    </span>
   </div>
   <div
     class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
@@ -179,6 +199,11 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should be able to toggle
         />
       </svg>
     </div>
+    <span
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+    >
+      0
+    </span>
   </div>
   <div
     class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
@@ -201,6 +226,11 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should be able to toggle
     >
       Organization
     </label>
+    <span
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+    >
+      0
+    </span>
   </div>
 </div>
 `;
@@ -211,12 +241,11 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
   "baseElement": <body>
     <div>
       <fieldset
-        class="mb-3"
         id="filter-user-types"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
-          data-align="baseline"
+          data-align="stretch"
           data-direction="horizontal"
           data-gap="condensed"
           data-justify="start"
@@ -318,18 +347,9 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
               User
             </label>
             <span
-              aria-hidden="true"
-              class="Box-sc-g0xbh4-0 gUZDKK"
-              sx="[object Object]"
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
             >
               1
-            </span>
-            <span
-              class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 gbsmlL"
-            >
-               (
-              1
-              )
             </span>
           </div>
           <div
@@ -377,6 +397,11 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
                 />
               </svg>
             </div>
+            <span
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+            >
+              0
+            </span>
           </div>
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
@@ -400,6 +425,11 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
             >
               Organization
             </label>
+            <span
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+            >
+              0
+            </span>
           </div>
         </div>
       </fieldset>
@@ -407,12 +437,11 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
   </body>,
   "container": <div>
     <fieldset
-      class="mb-3"
       id="filter-user-types"
     >
       <div
         class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
-        data-align="baseline"
+        data-align="stretch"
         data-direction="horizontal"
         data-gap="condensed"
         data-justify="start"
@@ -514,18 +543,9 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
             User
           </label>
           <span
-            aria-hidden="true"
-            class="Box-sc-g0xbh4-0 gUZDKK"
-            sx="[object Object]"
+            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
           >
             1
-          </span>
-          <span
-            class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 gbsmlL"
-          >
-             (
-            1
-            )
           </span>
         </div>
         <div
@@ -573,6 +593,11 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
               />
             </svg>
           </div>
+          <span
+            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+          >
+            0
+          </span>
         </div>
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
@@ -596,6 +621,11 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
           >
             Organization
           </label>
+          <span
+            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+          >
+            0
+          </span>
         </div>
       </div>
     </fieldset>
@@ -660,12 +690,11 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
   "baseElement": <body>
     <div>
       <fieldset
-        class="mb-3"
         id="filter-user-types"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
-          data-align="baseline"
+          data-align="stretch"
           data-direction="horizontal"
           data-gap="condensed"
           data-justify="start"
@@ -766,18 +795,9 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
               User
             </label>
             <span
-              aria-hidden="true"
-              class="Box-sc-g0xbh4-0 gUZDKK"
-              sx="[object Object]"
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
             >
               1
-            </span>
-            <span
-              class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 gbsmlL"
-            >
-               (
-              1
-              )
             </span>
           </div>
           <div
@@ -824,6 +844,11 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
                 />
               </svg>
             </div>
+            <span
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+            >
+              0
+            </span>
           </div>
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
@@ -846,6 +871,11 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
             >
               Organization
             </label>
+            <span
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+            >
+              0
+            </span>
           </div>
         </div>
       </fieldset>
@@ -853,12 +883,11 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
   </body>,
   "container": <div>
     <fieldset
-      class="mb-3"
       id="filter-user-types"
     >
       <div
         class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
-        data-align="baseline"
+        data-align="stretch"
         data-direction="horizontal"
         data-gap="condensed"
         data-justify="start"
@@ -959,18 +988,9 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
             User
           </label>
           <span
-            aria-hidden="true"
-            class="Box-sc-g0xbh4-0 gUZDKK"
-            sx="[object Object]"
+            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
           >
             1
-          </span>
-          <span
-            class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 gbsmlL"
-          >
-             (
-            1
-            )
           </span>
         </div>
         <div
@@ -1017,6 +1037,11 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
               />
             </svg>
           </div>
+          <span
+            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+          >
+            0
+          </span>
         </div>
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
@@ -1039,6 +1064,11 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
           >
             Organization
           </label>
+          <span
+            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
+          >
+            0
+          </span>
         </div>
       </div>
     </fieldset>

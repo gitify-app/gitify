@@ -1,23 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renderer/components/layout/Contents.tsx should render itself & its children 1`] = `
+exports[`renderer/components/primitives/CustomCounter.tsx should render itself & its children 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <div
-        class="Box-sc-g0xbh4-0 grow overflow-y-auto mb-4 px-8"
+      <span
+        class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
       >
-        Test
-      </div>
+        0
+      </span>
     </div>
   </body>,
   "container": <div>
-    <div
-      class="Box-sc-g0xbh4-0 grow overflow-y-auto mb-4 px-8"
+    <span
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] bg-gray-100 text-gray-800"
     >
-      Test
-    </div>
+      0
+    </span>
   </div>,
   "debug": [Function],
   "findAllByAltText": [Function],

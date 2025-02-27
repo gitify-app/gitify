@@ -26,7 +26,7 @@ export const UserTypeFilter: FC = () => {
 
   return (
     <fieldset id="filter-user-types">
-      <Stack direction="horizontal" gap="condensed" align="baseline">
+      <Stack direction="horizontal" gap="condensed">
         <Title icon={FeedPersonIcon}>User Type</Title>
         <Tooltip
           name="tooltip-filter-user-type"

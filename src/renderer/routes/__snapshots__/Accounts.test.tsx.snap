@@ -86,7 +86,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
     </div>
   </div>
   <div
-    class="Box-sc-g0xbh4-0 grow overflow-x-auto px-8 pb-2 mb-12 "
+    class="Box-sc-g0xbh4-0 grow overflow-y-auto mb-4 px-8"
   >
     <div
       class="Box-sc-g0xbh4-0 rounded-md p-2 mb-4 bg-gitify-accounts"
@@ -1206,7 +1206,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
     </div>
   </div>
   <div
-    class="Box-sc-g0xbh4-0 fixed bottom-0 left-sidebar right-0 bg-gitify-footer"
+    class="Box-sc-g0xbh4-0 left-sidebar bg-gitify-footer"
   >
     <div
       class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
@@ -1353,7 +1353,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
     </div>
   </div>
   <div
-    class="Box-sc-g0xbh4-0 grow overflow-x-auto px-8 pb-2 mb-12 "
+    class="Box-sc-g0xbh4-0 grow overflow-y-auto mb-4 px-8"
   >
     <div
       class="Box-sc-g0xbh4-0 rounded-md p-2 mb-4 bg-gitify-accounts"
@@ -2473,7 +2473,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
     </div>
   </div>
   <div
-    class="Box-sc-g0xbh4-0 fixed bottom-0 left-sidebar right-0 bg-gitify-footer"
+    class="Box-sc-g0xbh4-0 left-sidebar bg-gitify-footer"
   >
     <div
       class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
@@ -2620,7 +2620,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
     </div>
   </div>
   <div
-    class="Box-sc-g0xbh4-0 grow overflow-x-auto px-8 pb-2 mb-12 "
+    class="Box-sc-g0xbh4-0 grow overflow-y-auto mb-4 px-8"
   >
     <div
       class="Box-sc-g0xbh4-0 rounded-md p-2 mb-4 bg-gitify-accounts"
@@ -3740,7 +3740,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
     </div>
   </div>
   <div
-    class="Box-sc-g0xbh4-0 fixed bottom-0 left-sidebar right-0 bg-gitify-footer"
+    class="Box-sc-g0xbh4-0 left-sidebar bg-gitify-footer"
   >
     <div
       class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
