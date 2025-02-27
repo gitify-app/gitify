@@ -423,9 +423,13 @@ exports[`renderer/routes/Notifications.tsx should render itself & its children (
         class="Box-sc-g0xbh4-0 flex flex-col h-screen"
         data-testid="notifications"
       >
-        <p>
-          AccountNotifications
-        </p>
+        <div
+          class="Box-sc-g0xbh4-0 grow overflow-x-hidden overflow-y-auto"
+        >
+          <p>
+            AccountNotifications
+          </p>
+        </div>
       </div>
     </div>
   </body>,
@@ -434,9 +438,13 @@ exports[`renderer/routes/Notifications.tsx should render itself & its children (
       class="Box-sc-g0xbh4-0 flex flex-col h-screen"
       data-testid="notifications"
     >
-      <p>
-        AccountNotifications
-      </p>
+      <div
+        class="Box-sc-g0xbh4-0 grow overflow-x-hidden overflow-y-auto"
+      >
+        <p>
+          AccountNotifications
+        </p>
+      </div>
     </div>
   </div>,
   "debug": [Function],
@@ -502,12 +510,16 @@ exports[`renderer/routes/Notifications.tsx should render itself & its children (
         class="Box-sc-g0xbh4-0 flex flex-col h-screen"
         data-testid="notifications"
       >
-        <p>
-          AccountNotifications
-        </p>
-        <p>
-          AccountNotifications
-        </p>
+        <div
+          class="Box-sc-g0xbh4-0 grow overflow-x-hidden overflow-y-auto"
+        >
+          <p>
+            AccountNotifications
+          </p>
+          <p>
+            AccountNotifications
+          </p>
+        </div>
       </div>
     </div>
   </body>,
@@ -516,12 +528,16 @@ exports[`renderer/routes/Notifications.tsx should render itself & its children (
       class="Box-sc-g0xbh4-0 flex flex-col h-screen"
       data-testid="notifications"
     >
-      <p>
-        AccountNotifications
-      </p>
-      <p>
-        AccountNotifications
-      </p>
+      <div
+        class="Box-sc-g0xbh4-0 grow overflow-x-hidden overflow-y-auto"
+      >
+        <p>
+          AccountNotifications
+        </p>
+        <p>
+          AccountNotifications
+        </p>
+      </div>
     </div>
   </div>,
   "debug": [Function],

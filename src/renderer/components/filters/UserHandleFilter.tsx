@@ -119,7 +119,7 @@ export const UserHandleFilter: FC = () => {
   };
 
   return (
-    <fieldset id="filter-user-handles" className="mb-3">
+    <fieldset id="filter-user-handles">
       <Stack direction="horizontal" gap="condensed" align="baseline">
         <Title icon={MentionIcon}>Handles</Title>
         <Tooltip

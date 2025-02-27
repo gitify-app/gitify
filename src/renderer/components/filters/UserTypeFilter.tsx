@@ -25,8 +25,8 @@ export const UserTypeFilter: FC = () => {
   const { updateFilter, settings, notifications } = useContext(AppContext);
 
   return (
-    <fieldset id="filter-user-types" className="mb-3">
-      <Stack direction="horizontal" gap="condensed" align="baseline">
+    <fieldset id="filter-user-types">
+      <Stack direction="horizontal" gap="condensed">
         <Title icon={FeedPersonIcon}>User Type</Title>
         <Tooltip
           name="tooltip-filter-user-type"

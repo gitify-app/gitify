@@ -1,14 +1,31 @@
 import { Box } from '@primer/react';
 import type { FC, ReactNode } from 'react';
+import { cn } from '../../utils/cn';
 
 interface IContents {
   children: ReactNode;
+  paddingHorizontal?: boolean;
+  paddingBottom?: boolean;
 }
 
-export const Contents: FC<IContents> = (props: IContents) => {
+/**
+ * Contents component holds the main content of a page.
+ * It provides proper padding and handles scrolling.
+ */
+export const Contents: FC<IContents> = ({
+  children,
+  paddingHorizontal = true,
+  paddingBottom = false,
+}) => {
   return (
-    <Box className="grow overflow-x-auto px-8 pb-2 mb-12 ">
-      {props.children}
+    <Box
+      className={cn(
+        'grow overflow-x-hidden overflow-y-auto',
+        paddingHorizontal && 'px-8',
+        paddingBottom && 'pb-4',
+      )}
+    >
+      {children}
     </Box>
   );
 };

@@ -19,7 +19,7 @@ export const SettingsRoute: FC = () => {
         Settings
       </Header>
 
-      <Contents>
+      <Contents paddingBottom>
         <Stack direction="vertical" gap="spacious">
           <AppearanceSettings />
           <NotificationSettings />

@@ -86,24 +86,23 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
     </div>
   </div>
   <div
-    class="Box-sc-g0xbh4-0 grow overflow-x-auto px-8 pb-2 mb-12 "
+    class="Box-sc-g0xbh4-0 grow overflow-x-hidden overflow-y-auto px-8 pb-4"
   >
     <div
       class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
       data-align="stretch"
       data-direction="vertical"
-      data-gap="condensed"
+      data-gap="spacious"
       data-justify="start"
       data-padding="none"
       data-wrap="nowrap"
     >
       <fieldset
-        class="mb-3"
         id="filter-user-types"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
-          data-align="baseline"
+          data-align="stretch"
           data-direction="horizontal"
           data-gap="condensed"
           data-justify="start"
@@ -203,6 +202,11 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             >
               User
             </label>
+            <span
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            >
+              0
+            </span>
           </div>
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
@@ -248,6 +252,11 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                 />
               </svg>
             </div>
+            <span
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            >
+              0
+            </span>
           </div>
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
@@ -270,11 +279,15 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             >
               Organization
             </label>
+            <span
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            >
+              0
+            </span>
           </div>
         </div>
       </fieldset>
       <fieldset
-        class="mb-3"
         id="filter-user-handles"
       >
         <div
@@ -499,7 +512,6 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
         </div>
       </fieldset>
       <fieldset
-        class="mb-3"
         id="filter-subject-type"
       >
         <div
@@ -604,6 +616,11 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             >
               Check Suite
             </label>
+            <span
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            >
+              0
+            </span>
           </div>
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
@@ -626,6 +643,11 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             >
               Commit
             </label>
+            <span
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            >
+              0
+            </span>
           </div>
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
@@ -648,6 +670,11 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             >
               Discussion
             </label>
+            <span
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            >
+              0
+            </span>
           </div>
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
@@ -670,6 +697,11 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             >
               Issue
             </label>
+            <span
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            >
+              0
+            </span>
           </div>
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
@@ -692,6 +724,11 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             >
               Pull Request
             </label>
+            <span
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            >
+              0
+            </span>
           </div>
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
@@ -714,6 +751,11 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             >
               Release
             </label>
+            <span
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            >
+              0
+            </span>
           </div>
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
@@ -736,6 +778,11 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             >
               Dependabot Alert
             </label>
+            <span
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            >
+              0
+            </span>
           </div>
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
@@ -758,6 +805,11 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             >
               Invitation
             </label>
+            <span
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            >
+              0
+            </span>
           </div>
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
@@ -780,6 +832,11 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             >
               Vulnerability Alert
             </label>
+            <span
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            >
+              0
+            </span>
           </div>
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
@@ -802,16 +859,20 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             >
               Workflow Run
             </label>
+            <span
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            >
+              0
+            </span>
           </div>
         </div>
       </fieldset>
       <fieldset
-        class="mb-3"
         id="filter-state"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
-          data-align="baseline"
+          data-align="stretch"
           data-direction="horizontal"
           data-gap="condensed"
           data-justify="start"
@@ -914,6 +975,11 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             >
               Draft
             </label>
+            <span
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            >
+              0
+            </span>
           </div>
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
@@ -959,6 +1025,11 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                 />
               </svg>
             </div>
+            <span
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            >
+              0
+            </span>
           </div>
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
@@ -981,6 +1052,11 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             >
               Merged
             </label>
+            <span
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            >
+              0
+            </span>
           </div>
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
@@ -1026,6 +1102,11 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                 />
               </svg>
             </div>
+            <span
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            >
+              0
+            </span>
           </div>
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
@@ -1071,11 +1152,15 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                 />
               </svg>
             </div>
+            <span
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            >
+              0
+            </span>
           </div>
         </div>
       </fieldset>
       <fieldset
-        class="mb-3"
         id="filter-reasons"
       >
         <legend>
@@ -1170,6 +1255,11 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                 />
               </svg>
             </div>
+            <span
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            >
+              0
+            </span>
           </div>
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
@@ -1215,6 +1305,11 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                 />
               </svg>
             </div>
+            <span
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            >
+              0
+            </span>
           </div>
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
@@ -1260,6 +1355,11 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                 />
               </svg>
             </div>
+            <span
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            >
+              0
+            </span>
           </div>
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
@@ -1305,6 +1405,11 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                 />
               </svg>
             </div>
+            <span
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            >
+              0
+            </span>
           </div>
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
@@ -1350,6 +1455,11 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                 />
               </svg>
             </div>
+            <span
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            >
+              0
+            </span>
           </div>
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
@@ -1395,6 +1505,11 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                 />
               </svg>
             </div>
+            <span
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            >
+              0
+            </span>
           </div>
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
@@ -1440,6 +1555,11 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                 />
               </svg>
             </div>
+            <span
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            >
+              0
+            </span>
           </div>
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
@@ -1485,6 +1605,11 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                 />
               </svg>
             </div>
+            <span
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            >
+              0
+            </span>
           </div>
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
@@ -1530,6 +1655,11 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                 />
               </svg>
             </div>
+            <span
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            >
+              0
+            </span>
           </div>
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
@@ -1575,6 +1705,11 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                 />
               </svg>
             </div>
+            <span
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            >
+              0
+            </span>
           </div>
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
@@ -1620,6 +1755,11 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                 />
               </svg>
             </div>
+            <span
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            >
+              0
+            </span>
           </div>
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
@@ -1665,6 +1805,11 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                 />
               </svg>
             </div>
+            <span
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            >
+              0
+            </span>
           </div>
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
@@ -1710,6 +1855,11 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                 />
               </svg>
             </div>
+            <span
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            >
+              0
+            </span>
           </div>
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
@@ -1755,6 +1905,11 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                 />
               </svg>
             </div>
+            <span
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            >
+              0
+            </span>
           </div>
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
@@ -1800,13 +1955,18 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                 />
               </svg>
             </div>
+            <span
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            >
+              0
+            </span>
           </div>
         </div>
       </fieldset>
     </div>
   </div>
   <div
-    class="Box-sc-g0xbh4-0 fixed bottom-0 left-sidebar right-0 bg-gitify-footer"
+    class="Box-sc-g0xbh4-0 left-sidebar bg-gitify-footer"
   >
     <div
       class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"

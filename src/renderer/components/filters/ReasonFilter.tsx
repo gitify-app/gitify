@@ -17,8 +17,9 @@ export const ReasonFilter: FC = () => {
   const { updateFilter, settings, notifications } = useContext(AppContext);
 
   return (
-    <fieldset id="filter-reasons" className="mb-3">
+    <fieldset id="filter-reasons">
       <Title icon={NoteIcon}>Reason</Title>
+
       <Stack direction="vertical" gap="condensed">
         {Object.keys(FORMATTED_REASONS).map((reason: Reason) => {
           const reasonDetails = getReasonDetails(reason);
