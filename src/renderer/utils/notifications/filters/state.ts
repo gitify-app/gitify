@@ -5,8 +5,9 @@ import type {
   TypeDetails,
 } from '../../../types';
 import type { Notification } from '../../../typesGitHub';
+import type { Filter } from './types';
 
-export const FILTERS_STATE_TYPES: Record<FilterStateType, TypeDetails> = {
+const STATE_TYPE_DETAILS: Record<FilterStateType, TypeDetails> = {
   draft: {
     title: 'Draft',
   },
@@ -27,60 +28,63 @@ export const FILTERS_STATE_TYPES: Record<FilterStateType, TypeDetails> = {
   },
 };
 
-export function getStateDetails(stateType: FilterStateType): TypeDetails {
-  return FILTERS_STATE_TYPES[stateType];
-}
+export const stateFilter: Filter<FilterStateType> = {
+  FILTER_TYPES: STATE_TYPE_DETAILS,
 
-export function hasStateFilters(settings: SettingsState) {
-  return settings.filterStates.length > 0;
-}
+  requiresDetailsNotifications: true,
 
-export function isStateFilterSet(
-  settings: SettingsState,
-  stateType: FilterStateType,
-) {
-  return settings.filterStates.includes(stateType);
-}
+  getTypeDetails(stateType: FilterStateType): TypeDetails {
+    return this.FILTER_TYPES[stateType];
+  },
 
-export function getStateFilterCount(
-  notifications: AccountNotifications[],
-  stateType: FilterStateType,
-) {
-  return notifications.reduce(
-    (sum, account) =>
-      sum +
-      account.notifications.filter((n) =>
-        filterNotificationByState(n, stateType),
-      ).length,
-    0,
-  );
-}
+  hasFilters(settings: SettingsState) {
+    return settings.filterStates.length > 0;
+  },
 
-export function filterNotificationByState(
-  notification: Notification,
-  stateType: FilterStateType,
-): boolean {
-  const allOpenStates = ['open', 'reopened'];
-  const allClosedStates = ['closed', 'completed', 'not_planned'];
-  const allMergedStates = ['merged'];
-  const allDraftStates = ['draft'];
-  const allFilterableStates = [
-    ...allOpenStates,
-    ...allClosedStates,
-    ...allMergedStates,
-    ...allDraftStates,
-  ];
+  isFilterSet(settings: SettingsState, stateType: FilterStateType) {
+    return settings.filterStates.includes(stateType);
+  },
 
-  switch (stateType) {
-    case 'open':
-      return allOpenStates.includes(notification.subject?.state);
-    case 'closed':
-      return allClosedStates.includes(notification.subject?.state);
-    case 'merged':
-      return allMergedStates.includes(notification.subject?.state);
-    case 'draft':
-      return allDraftStates.includes(notification.subject?.state);
-    default:
-      return !allFilterableStates.includes(notification.subject?.state);
-  }
-}
+  getFilterCount(
+    notifications: AccountNotifications[],
+    stateType: FilterStateType,
+  ) {
+    return notifications.reduce(
+      (sum, account) =>
+        sum +
+        account.notifications.filter((n) =>
+          this.filterNotification(n, stateType),
+        ).length,
+      0,
+    );
+  },
+
+  filterNotification(
+    notification: Notification,
+    stateType: FilterStateType,
+  ): boolean {
+    const allOpenStates = ['open', 'reopened'];
+    const allClosedStates = ['closed', 'completed', 'not_planned'];
+    const allMergedStates = ['merged'];
+    const allDraftStates = ['draft'];
+    const allFilterableStates = [
+      ...allOpenStates,
+      ...allClosedStates,
+      ...allMergedStates,
+      ...allDraftStates,
+    ];
+
+    switch (stateType) {
+      case 'open':
+        return allOpenStates.includes(notification.subject?.state);
+      case 'closed':
+        return allClosedStates.includes(notification.subject?.state);
+      case 'merged':
+        return allMergedStates.includes(notification.subject?.state);
+      case 'draft':
+        return allDraftStates.includes(notification.subject?.state);
+      default:
+        return !allFilterableStates.includes(notification.subject?.state);
+    }
+  },
+};

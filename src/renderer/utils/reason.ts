@@ -1,7 +1,7 @@
 import type { TypeDetails } from '../types';
 import type { Reason } from '../typesGitHub';
 
-export const FORMATTED_REASONS: Record<Reason, TypeDetails> = {
+export const REASON_TYPE_DETAILS: Record<Reason, TypeDetails> = {
   approval_requested: {
     title: 'Approval Requested',
     description: 'You were requested to review and approve a deployment.',
@@ -75,5 +75,5 @@ const UNKNOWN_REASON: TypeDetails = {
 };
 
 export function getReasonDetails(reason: Reason): TypeDetails {
-  return FORMATTED_REASONS[reason] || UNKNOWN_REASON;
+  return REASON_TYPE_DETAILS[reason] || UNKNOWN_REASON;
 }

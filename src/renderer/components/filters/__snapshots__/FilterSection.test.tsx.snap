@@ -1,0 +1,1630 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renderer/components/filters/FilterSection.tsx should be able to toggle filter value - none already set 1`] = `
+<div
+  class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
+  data-align="stretch"
+  data-direction="vertical"
+  data-gap="condensed"
+  data-justify="start"
+  data-padding="none"
+  data-wrap="nowrap"
+>
+  <div
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+    data-align="center"
+    data-direction="horizontal"
+    data-gap="condensed"
+    data-justify="start"
+    data-padding="none"
+    data-wrap="nowrap"
+  >
+    <input
+      class="size-4 rounded-sm cursor-pointer"
+      data-testid="checkbox-Draft"
+      id="Draft"
+      type="checkbox"
+    />
+    <label
+      class="font-medium text-gitify-font cursor-pointer"
+      for="Draft"
+    >
+      Draft
+    </label>
+    <span
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+    >
+      0
+    </span>
+  </div>
+  <div
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+    data-align="center"
+    data-direction="horizontal"
+    data-gap="condensed"
+    data-justify="start"
+    data-padding="none"
+    data-wrap="nowrap"
+  >
+    <input
+      class="size-4 rounded-sm cursor-pointer"
+      data-testid="checkbox-Open"
+      id="Open"
+      type="checkbox"
+    />
+    <label
+      class="font-medium text-gitify-font cursor-pointer"
+      for="Open"
+    >
+      Open
+    </label>
+    <div
+      aria-label="tooltip-Open"
+      class="Box-sc-g0xbh4-0 relative"
+      data-testid="tooltip-tooltip-Open"
+      id="tooltip-Open"
+    >
+      <svg
+        aria-hidden="true"
+        class="octicon octicon-question text-gitify-tooltip-icon"
+        display="inline-block"
+        fill="currentColor"
+        focusable="false"
+        height="16"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+        />
+      </svg>
+    </div>
+    <span
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+    >
+      0
+    </span>
+  </div>
+  <div
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+    data-align="center"
+    data-direction="horizontal"
+    data-gap="condensed"
+    data-justify="start"
+    data-padding="none"
+    data-wrap="nowrap"
+  >
+    <input
+      class="size-4 rounded-sm cursor-pointer"
+      data-testid="checkbox-Merged"
+      id="Merged"
+      type="checkbox"
+    />
+    <label
+      class="font-medium text-gitify-font cursor-pointer"
+      for="Merged"
+    >
+      Merged
+    </label>
+    <span
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+    >
+      0
+    </span>
+  </div>
+  <div
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+    data-align="center"
+    data-direction="horizontal"
+    data-gap="condensed"
+    data-justify="start"
+    data-padding="none"
+    data-wrap="nowrap"
+  >
+    <input
+      class="size-4 rounded-sm cursor-pointer"
+      data-testid="checkbox-Closed"
+      id="Closed"
+      type="checkbox"
+    />
+    <label
+      class="font-medium text-gitify-font cursor-pointer"
+      for="Closed"
+    >
+      Closed
+    </label>
+    <div
+      aria-label="tooltip-Closed"
+      class="Box-sc-g0xbh4-0 relative"
+      data-testid="tooltip-tooltip-Closed"
+      id="tooltip-Closed"
+    >
+      <svg
+        aria-hidden="true"
+        class="octicon octicon-question text-gitify-tooltip-icon"
+        display="inline-block"
+        fill="currentColor"
+        focusable="false"
+        height="16"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+        />
+      </svg>
+    </div>
+    <span
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+    >
+      0
+    </span>
+  </div>
+  <div
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+    data-align="center"
+    data-direction="horizontal"
+    data-gap="condensed"
+    data-justify="start"
+    data-padding="none"
+    data-wrap="nowrap"
+  >
+    <input
+      class="size-4 rounded-sm cursor-pointer"
+      data-testid="checkbox-Other"
+      id="Other"
+      type="checkbox"
+    />
+    <label
+      class="font-medium text-gitify-font cursor-pointer"
+      for="Other"
+    >
+      Other
+    </label>
+    <div
+      aria-label="tooltip-Other"
+      class="Box-sc-g0xbh4-0 relative"
+      data-testid="tooltip-tooltip-Other"
+      id="tooltip-Other"
+    >
+      <svg
+        aria-hidden="true"
+        class="octicon octicon-question text-gitify-tooltip-icon"
+        display="inline-block"
+        fill="currentColor"
+        focusable="false"
+        height="16"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+        />
+      </svg>
+    </div>
+    <span
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+    >
+      0
+    </span>
+  </div>
+</div>
+`;
+
+exports[`renderer/components/filters/FilterSection.tsx should be able to toggle user type - some filters already set 1`] = `
+<div
+  class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
+  data-align="stretch"
+  data-direction="vertical"
+  data-gap="condensed"
+  data-justify="start"
+  data-padding="none"
+  data-wrap="nowrap"
+>
+  <div
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+    data-align="center"
+    data-direction="horizontal"
+    data-gap="condensed"
+    data-justify="start"
+    data-padding="none"
+    data-wrap="nowrap"
+  >
+    <input
+      class="size-4 rounded-sm cursor-pointer"
+      data-testid="checkbox-Draft"
+      id="Draft"
+      type="checkbox"
+    />
+    <label
+      class="font-medium text-gitify-font cursor-pointer"
+      for="Draft"
+    >
+      Draft
+    </label>
+    <span
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+    >
+      0
+    </span>
+  </div>
+  <div
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+    data-align="center"
+    data-direction="horizontal"
+    data-gap="condensed"
+    data-justify="start"
+    data-padding="none"
+    data-wrap="nowrap"
+  >
+    <input
+      checked=""
+      class="size-4 rounded-sm cursor-pointer"
+      data-testid="checkbox-Open"
+      id="Open"
+      type="checkbox"
+    />
+    <label
+      class="font-medium text-gitify-font cursor-pointer"
+      for="Open"
+    >
+      Open
+    </label>
+    <div
+      aria-label="tooltip-Open"
+      class="Box-sc-g0xbh4-0 relative"
+      data-testid="tooltip-tooltip-Open"
+      id="tooltip-Open"
+    >
+      <svg
+        aria-hidden="true"
+        class="octicon octicon-question text-gitify-tooltip-icon"
+        display="inline-block"
+        fill="currentColor"
+        focusable="false"
+        height="16"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+        />
+      </svg>
+    </div>
+    <span
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-primary"
+    >
+      0
+    </span>
+  </div>
+  <div
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+    data-align="center"
+    data-direction="horizontal"
+    data-gap="condensed"
+    data-justify="start"
+    data-padding="none"
+    data-wrap="nowrap"
+  >
+    <input
+      class="size-4 rounded-sm cursor-pointer"
+      data-testid="checkbox-Merged"
+      id="Merged"
+      type="checkbox"
+    />
+    <label
+      class="font-medium text-gitify-font cursor-pointer"
+      for="Merged"
+    >
+      Merged
+    </label>
+    <span
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+    >
+      0
+    </span>
+  </div>
+  <div
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+    data-align="center"
+    data-direction="horizontal"
+    data-gap="condensed"
+    data-justify="start"
+    data-padding="none"
+    data-wrap="nowrap"
+  >
+    <input
+      class="size-4 rounded-sm cursor-pointer"
+      data-testid="checkbox-Closed"
+      id="Closed"
+      type="checkbox"
+    />
+    <label
+      class="font-medium text-gitify-font cursor-pointer"
+      for="Closed"
+    >
+      Closed
+    </label>
+    <div
+      aria-label="tooltip-Closed"
+      class="Box-sc-g0xbh4-0 relative"
+      data-testid="tooltip-tooltip-Closed"
+      id="tooltip-Closed"
+    >
+      <svg
+        aria-hidden="true"
+        class="octicon octicon-question text-gitify-tooltip-icon"
+        display="inline-block"
+        fill="currentColor"
+        focusable="false"
+        height="16"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+        />
+      </svg>
+    </div>
+    <span
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+    >
+      0
+    </span>
+  </div>
+  <div
+    class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+    data-align="center"
+    data-direction="horizontal"
+    data-gap="condensed"
+    data-justify="start"
+    data-padding="none"
+    data-wrap="nowrap"
+  >
+    <input
+      class="size-4 rounded-sm cursor-pointer"
+      data-testid="checkbox-Other"
+      id="Other"
+      type="checkbox"
+    />
+    <label
+      class="font-medium text-gitify-font cursor-pointer"
+      for="Other"
+    >
+      Other
+    </label>
+    <div
+      aria-label="tooltip-Other"
+      class="Box-sc-g0xbh4-0 relative"
+      data-testid="tooltip-tooltip-Other"
+      id="tooltip-Other"
+    >
+      <svg
+        aria-hidden="true"
+        class="octicon octicon-question text-gitify-tooltip-icon"
+        display="inline-block"
+        fill="currentColor"
+        focusable="false"
+        height="16"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+        />
+      </svg>
+    </div>
+    <span
+      class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+    >
+      0
+    </span>
+  </div>
+</div>
+`;
+
+exports[`renderer/components/filters/FilterSection.tsx should render itself & its children with detailed notifications disabled 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <fieldset
+        id="FilterSectionTest"
+      >
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
+          data-align="baseline"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
+        >
+          <legend>
+            <div
+              class="Box-sc-g0xbh4-0 mb-2"
+            >
+              <div
+                class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
+                data-align="center"
+                data-direction="horizontal"
+                data-gap="condensed"
+                data-justify="start"
+                data-padding="none"
+                data-wrap="nowrap"
+                id="filtersectiontitle"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="octicon octicon-mark-github"
+                  display="inline-block"
+                  fill="currentColor"
+                  focusable="false"
+                  height="16"
+                  overflow="visible"
+                  style="vertical-align: text-bottom;"
+                  viewBox="0 0 16 16"
+                  width="16"
+                >
+                  <path
+                    d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"
+                  />
+                </svg>
+                <h2
+                  class="Heading__StyledHeading-sc-1c1dgg0-0 eQYHUB"
+                  sx="[object Object]"
+                >
+                  FilterSectionTitle
+                </h2>
+              </div>
+            </div>
+          </legend>
+        </div>
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
+          data-align="stretch"
+          data-direction="vertical"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
+        >
+          <div
+            class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <input
+              class="size-4 rounded-sm cursor-pointer"
+              data-testid="checkbox-Draft"
+              id="Draft"
+              type="checkbox"
+            />
+            <label
+              class="font-medium text-gitify-font cursor-pointer"
+              for="Draft"
+            >
+              Draft
+            </label>
+            <span
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            >
+              0
+            </span>
+          </div>
+          <div
+            class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <input
+              class="size-4 rounded-sm cursor-pointer"
+              data-testid="checkbox-Open"
+              id="Open"
+              type="checkbox"
+            />
+            <label
+              class="font-medium text-gitify-font cursor-pointer"
+              for="Open"
+            >
+              Open
+            </label>
+            <div
+              aria-label="tooltip-Open"
+              class="Box-sc-g0xbh4-0 relative"
+              data-testid="tooltip-tooltip-Open"
+              id="tooltip-Open"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-question text-gitify-tooltip-icon"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                />
+              </svg>
+            </div>
+            <span
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            >
+              1
+            </span>
+          </div>
+          <div
+            class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <input
+              class="size-4 rounded-sm cursor-pointer"
+              data-testid="checkbox-Merged"
+              id="Merged"
+              type="checkbox"
+            />
+            <label
+              class="font-medium text-gitify-font cursor-pointer"
+              for="Merged"
+            >
+              Merged
+            </label>
+            <span
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            >
+              0
+            </span>
+          </div>
+          <div
+            class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <input
+              class="size-4 rounded-sm cursor-pointer"
+              data-testid="checkbox-Closed"
+              id="Closed"
+              type="checkbox"
+            />
+            <label
+              class="font-medium text-gitify-font cursor-pointer"
+              for="Closed"
+            >
+              Closed
+            </label>
+            <div
+              aria-label="tooltip-Closed"
+              class="Box-sc-g0xbh4-0 relative"
+              data-testid="tooltip-tooltip-Closed"
+              id="tooltip-Closed"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-question text-gitify-tooltip-icon"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                />
+              </svg>
+            </div>
+            <span
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            >
+              0
+            </span>
+          </div>
+          <div
+            class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <input
+              class="size-4 rounded-sm cursor-pointer"
+              data-testid="checkbox-Other"
+              id="Other"
+              type="checkbox"
+            />
+            <label
+              class="font-medium text-gitify-font cursor-pointer"
+              for="Other"
+            >
+              Other
+            </label>
+            <div
+              aria-label="tooltip-Other"
+              class="Box-sc-g0xbh4-0 relative"
+              data-testid="tooltip-tooltip-Other"
+              id="tooltip-Other"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-question text-gitify-tooltip-icon"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                />
+              </svg>
+            </div>
+            <span
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            >
+              3
+            </span>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  </body>,
+  "container": <div>
+    <fieldset
+      id="FilterSectionTest"
+    >
+      <div
+        class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
+        data-align="baseline"
+        data-direction="horizontal"
+        data-gap="condensed"
+        data-justify="start"
+        data-padding="none"
+        data-wrap="nowrap"
+      >
+        <legend>
+          <div
+            class="Box-sc-g0xbh4-0 mb-2"
+          >
+            <div
+              class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
+              data-align="center"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+              id="filtersectiontitle"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-mark-github"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"
+                />
+              </svg>
+              <h2
+                class="Heading__StyledHeading-sc-1c1dgg0-0 eQYHUB"
+                sx="[object Object]"
+              >
+                FilterSectionTitle
+              </h2>
+            </div>
+          </div>
+        </legend>
+      </div>
+      <div
+        class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
+        data-align="stretch"
+        data-direction="vertical"
+        data-gap="condensed"
+        data-justify="start"
+        data-padding="none"
+        data-wrap="nowrap"
+      >
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
+        >
+          <input
+            class="size-4 rounded-sm cursor-pointer"
+            data-testid="checkbox-Draft"
+            id="Draft"
+            type="checkbox"
+          />
+          <label
+            class="font-medium text-gitify-font cursor-pointer"
+            for="Draft"
+          >
+            Draft
+          </label>
+          <span
+            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+          >
+            0
+          </span>
+        </div>
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
+        >
+          <input
+            class="size-4 rounded-sm cursor-pointer"
+            data-testid="checkbox-Open"
+            id="Open"
+            type="checkbox"
+          />
+          <label
+            class="font-medium text-gitify-font cursor-pointer"
+            for="Open"
+          >
+            Open
+          </label>
+          <div
+            aria-label="tooltip-Open"
+            class="Box-sc-g0xbh4-0 relative"
+            data-testid="tooltip-tooltip-Open"
+            id="tooltip-Open"
+          >
+            <svg
+              aria-hidden="true"
+              class="octicon octicon-question text-gitify-tooltip-icon"
+              display="inline-block"
+              fill="currentColor"
+              focusable="false"
+              height="16"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
+              viewBox="0 0 16 16"
+              width="16"
+            >
+              <path
+                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+              />
+            </svg>
+          </div>
+          <span
+            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+          >
+            1
+          </span>
+        </div>
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
+        >
+          <input
+            class="size-4 rounded-sm cursor-pointer"
+            data-testid="checkbox-Merged"
+            id="Merged"
+            type="checkbox"
+          />
+          <label
+            class="font-medium text-gitify-font cursor-pointer"
+            for="Merged"
+          >
+            Merged
+          </label>
+          <span
+            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+          >
+            0
+          </span>
+        </div>
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
+        >
+          <input
+            class="size-4 rounded-sm cursor-pointer"
+            data-testid="checkbox-Closed"
+            id="Closed"
+            type="checkbox"
+          />
+          <label
+            class="font-medium text-gitify-font cursor-pointer"
+            for="Closed"
+          >
+            Closed
+          </label>
+          <div
+            aria-label="tooltip-Closed"
+            class="Box-sc-g0xbh4-0 relative"
+            data-testid="tooltip-tooltip-Closed"
+            id="tooltip-Closed"
+          >
+            <svg
+              aria-hidden="true"
+              class="octicon octicon-question text-gitify-tooltip-icon"
+              display="inline-block"
+              fill="currentColor"
+              focusable="false"
+              height="16"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
+              viewBox="0 0 16 16"
+              width="16"
+            >
+              <path
+                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+              />
+            </svg>
+          </div>
+          <span
+            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+          >
+            0
+          </span>
+        </div>
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
+        >
+          <input
+            class="size-4 rounded-sm cursor-pointer"
+            data-testid="checkbox-Other"
+            id="Other"
+            type="checkbox"
+          />
+          <label
+            class="font-medium text-gitify-font cursor-pointer"
+            for="Other"
+          >
+            Other
+          </label>
+          <div
+            aria-label="tooltip-Other"
+            class="Box-sc-g0xbh4-0 relative"
+            data-testid="tooltip-tooltip-Other"
+            id="tooltip-Other"
+          >
+            <svg
+              aria-hidden="true"
+              class="octicon octicon-question text-gitify-tooltip-icon"
+              display="inline-block"
+              fill="currentColor"
+              focusable="false"
+              height="16"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
+              viewBox="0 0 16 16"
+              width="16"
+            >
+              <path
+                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+              />
+            </svg>
+          </div>
+          <span
+            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+          >
+            3
+          </span>
+        </div>
+      </div>
+    </fieldset>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`renderer/components/filters/FilterSection.tsx should render itself & its children with detailed notifications enabled 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <fieldset
+        id="FilterSectionTest"
+      >
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
+          data-align="baseline"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
+        >
+          <legend>
+            <div
+              class="Box-sc-g0xbh4-0 mb-2"
+            >
+              <div
+                class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
+                data-align="center"
+                data-direction="horizontal"
+                data-gap="condensed"
+                data-justify="start"
+                data-padding="none"
+                data-wrap="nowrap"
+                id="filtersectiontitle"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="octicon octicon-mark-github"
+                  display="inline-block"
+                  fill="currentColor"
+                  focusable="false"
+                  height="16"
+                  overflow="visible"
+                  style="vertical-align: text-bottom;"
+                  viewBox="0 0 16 16"
+                  width="16"
+                >
+                  <path
+                    d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"
+                  />
+                </svg>
+                <h2
+                  class="Heading__StyledHeading-sc-1c1dgg0-0 eQYHUB"
+                  sx="[object Object]"
+                >
+                  FilterSectionTitle
+                </h2>
+              </div>
+            </div>
+          </legend>
+        </div>
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
+          data-align="stretch"
+          data-direction="vertical"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
+        >
+          <div
+            class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <input
+              class="size-4 rounded-sm cursor-pointer"
+              data-testid="checkbox-Draft"
+              id="Draft"
+              type="checkbox"
+            />
+            <label
+              class="font-medium text-gitify-font cursor-pointer"
+              for="Draft"
+            >
+              Draft
+            </label>
+            <span
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            >
+              0
+            </span>
+          </div>
+          <div
+            class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <input
+              class="size-4 rounded-sm cursor-pointer"
+              data-testid="checkbox-Open"
+              id="Open"
+              type="checkbox"
+            />
+            <label
+              class="font-medium text-gitify-font cursor-pointer"
+              for="Open"
+            >
+              Open
+            </label>
+            <div
+              aria-label="tooltip-Open"
+              class="Box-sc-g0xbh4-0 relative"
+              data-testid="tooltip-tooltip-Open"
+              id="tooltip-Open"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-question text-gitify-tooltip-icon"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                />
+              </svg>
+            </div>
+            <span
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            >
+              1
+            </span>
+          </div>
+          <div
+            class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <input
+              class="size-4 rounded-sm cursor-pointer"
+              data-testid="checkbox-Merged"
+              id="Merged"
+              type="checkbox"
+            />
+            <label
+              class="font-medium text-gitify-font cursor-pointer"
+              for="Merged"
+            >
+              Merged
+            </label>
+            <span
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            >
+              0
+            </span>
+          </div>
+          <div
+            class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <input
+              class="size-4 rounded-sm cursor-pointer"
+              data-testid="checkbox-Closed"
+              id="Closed"
+              type="checkbox"
+            />
+            <label
+              class="font-medium text-gitify-font cursor-pointer"
+              for="Closed"
+            >
+              Closed
+            </label>
+            <div
+              aria-label="tooltip-Closed"
+              class="Box-sc-g0xbh4-0 relative"
+              data-testid="tooltip-tooltip-Closed"
+              id="tooltip-Closed"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-question text-gitify-tooltip-icon"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                />
+              </svg>
+            </div>
+            <span
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            >
+              0
+            </span>
+          </div>
+          <div
+            class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <input
+              class="size-4 rounded-sm cursor-pointer"
+              data-testid="checkbox-Other"
+              id="Other"
+              type="checkbox"
+            />
+            <label
+              class="font-medium text-gitify-font cursor-pointer"
+              for="Other"
+            >
+              Other
+            </label>
+            <div
+              aria-label="tooltip-Other"
+              class="Box-sc-g0xbh4-0 relative"
+              data-testid="tooltip-tooltip-Other"
+              id="tooltip-Other"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-question text-gitify-tooltip-icon"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                />
+              </svg>
+            </div>
+            <span
+              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            >
+              3
+            </span>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  </body>,
+  "container": <div>
+    <fieldset
+      id="FilterSectionTest"
+    >
+      <div
+        class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
+        data-align="baseline"
+        data-direction="horizontal"
+        data-gap="condensed"
+        data-justify="start"
+        data-padding="none"
+        data-wrap="nowrap"
+      >
+        <legend>
+          <div
+            class="Box-sc-g0xbh4-0 mb-2"
+          >
+            <div
+              class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
+              data-align="center"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+              id="filtersectiontitle"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-mark-github"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"
+                />
+              </svg>
+              <h2
+                class="Heading__StyledHeading-sc-1c1dgg0-0 eQYHUB"
+                sx="[object Object]"
+              >
+                FilterSectionTitle
+              </h2>
+            </div>
+          </div>
+        </legend>
+      </div>
+      <div
+        class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
+        data-align="stretch"
+        data-direction="vertical"
+        data-gap="condensed"
+        data-justify="start"
+        data-padding="none"
+        data-wrap="nowrap"
+      >
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
+        >
+          <input
+            class="size-4 rounded-sm cursor-pointer"
+            data-testid="checkbox-Draft"
+            id="Draft"
+            type="checkbox"
+          />
+          <label
+            class="font-medium text-gitify-font cursor-pointer"
+            for="Draft"
+          >
+            Draft
+          </label>
+          <span
+            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+          >
+            0
+          </span>
+        </div>
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
+        >
+          <input
+            class="size-4 rounded-sm cursor-pointer"
+            data-testid="checkbox-Open"
+            id="Open"
+            type="checkbox"
+          />
+          <label
+            class="font-medium text-gitify-font cursor-pointer"
+            for="Open"
+          >
+            Open
+          </label>
+          <div
+            aria-label="tooltip-Open"
+            class="Box-sc-g0xbh4-0 relative"
+            data-testid="tooltip-tooltip-Open"
+            id="tooltip-Open"
+          >
+            <svg
+              aria-hidden="true"
+              class="octicon octicon-question text-gitify-tooltip-icon"
+              display="inline-block"
+              fill="currentColor"
+              focusable="false"
+              height="16"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
+              viewBox="0 0 16 16"
+              width="16"
+            >
+              <path
+                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+              />
+            </svg>
+          </div>
+          <span
+            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+          >
+            1
+          </span>
+        </div>
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
+        >
+          <input
+            class="size-4 rounded-sm cursor-pointer"
+            data-testid="checkbox-Merged"
+            id="Merged"
+            type="checkbox"
+          />
+          <label
+            class="font-medium text-gitify-font cursor-pointer"
+            for="Merged"
+          >
+            Merged
+          </label>
+          <span
+            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+          >
+            0
+          </span>
+        </div>
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
+        >
+          <input
+            class="size-4 rounded-sm cursor-pointer"
+            data-testid="checkbox-Closed"
+            id="Closed"
+            type="checkbox"
+          />
+          <label
+            class="font-medium text-gitify-font cursor-pointer"
+            for="Closed"
+          >
+            Closed
+          </label>
+          <div
+            aria-label="tooltip-Closed"
+            class="Box-sc-g0xbh4-0 relative"
+            data-testid="tooltip-tooltip-Closed"
+            id="tooltip-Closed"
+          >
+            <svg
+              aria-hidden="true"
+              class="octicon octicon-question text-gitify-tooltip-icon"
+              display="inline-block"
+              fill="currentColor"
+              focusable="false"
+              height="16"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
+              viewBox="0 0 16 16"
+              width="16"
+            >
+              <path
+                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+              />
+            </svg>
+          </div>
+          <span
+            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+          >
+            0
+          </span>
+        </div>
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
+        >
+          <input
+            class="size-4 rounded-sm cursor-pointer"
+            data-testid="checkbox-Other"
+            id="Other"
+            type="checkbox"
+          />
+          <label
+            class="font-medium text-gitify-font cursor-pointer"
+            for="Other"
+          >
+            Other
+          </label>
+          <div
+            aria-label="tooltip-Other"
+            class="Box-sc-g0xbh4-0 relative"
+            data-testid="tooltip-tooltip-Other"
+            id="tooltip-Other"
+          >
+            <svg
+              aria-hidden="true"
+              class="octicon octicon-question text-gitify-tooltip-icon"
+              display="inline-block"
+              fill="currentColor"
+              focusable="false"
+              height="16"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
+              viewBox="0 0 16 16"
+              width="16"
+            >
+              <path
+                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+              />
+            </svg>
+          </div>
+          <span
+            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+          >
+            3
+          </span>
+        </div>
+      </div>
+    </fieldset>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

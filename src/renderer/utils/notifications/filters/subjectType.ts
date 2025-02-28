@@ -4,8 +4,9 @@ import type {
   TypeDetails,
 } from '../../../types';
 import type { Notification, SubjectType } from '../../../typesGitHub';
+import type { Filter } from './types';
 
-export const FILTERS_SUBJECT_TYPES: Record<SubjectType, TypeDetails> = {
+const SUBJECT_TYPE_DETAILS: Record<SubjectType, TypeDetails> = {
   CheckSuite: {
     title: 'Check Suite',
   },
@@ -38,38 +39,41 @@ export const FILTERS_SUBJECT_TYPES: Record<SubjectType, TypeDetails> = {
   },
 };
 
-export function getSubjectTypeDetails(subjectType: SubjectType): TypeDetails {
-  return FILTERS_SUBJECT_TYPES[subjectType];
-}
+export const subjectTypeFilter: Filter<SubjectType> = {
+  FILTER_TYPES: SUBJECT_TYPE_DETAILS,
 
-export function hasSubjectTypeFilters(settings: SettingsState) {
-  return settings.filterSubjectTypes.length > 0;
-}
+  requiresDetailsNotifications: false,
 
-export function isSubjectTypeFilterSet(
-  settings: SettingsState,
-  subjectType: SubjectType,
-) {
-  return settings.filterSubjectTypes.includes(subjectType);
-}
+  getTypeDetails(subjectType: SubjectType): TypeDetails {
+    return this.FILTER_TYPES[subjectType];
+  },
 
-export function getSubjectTypeFilterCount(
-  notifications: AccountNotifications[],
-  subjectType: SubjectType,
-) {
-  return notifications.reduce(
-    (sum, account) =>
-      sum +
-      account.notifications.filter((n) =>
-        filterNotificationBySubjectType(n, subjectType),
-      ).length,
-    0,
-  );
-}
+  hasFilters(settings: SettingsState) {
+    return settings.filterSubjectTypes.length > 0;
+  },
 
-export function filterNotificationBySubjectType(
-  notification: Notification,
-  subjectType: SubjectType,
-): boolean {
-  return notification.subject.type === subjectType;
-}
+  isFilterSet(settings: SettingsState, subjectType: SubjectType) {
+    return settings.filterSubjectTypes.includes(subjectType);
+  },
+
+  getFilterCount(
+    notifications: AccountNotifications[],
+    subjectType: SubjectType,
+  ) {
+    return notifications.reduce(
+      (sum, account) =>
+        sum +
+        account.notifications.filter((n) =>
+          this.filterNotification(n, subjectType),
+        ).length,
+      0,
+    );
+  },
+
+  filterNotification(
+    notification: Notification,
+    subjectType: SubjectType,
+  ): boolean {
+    return notification.subject.type === subjectType;
+  },
+};

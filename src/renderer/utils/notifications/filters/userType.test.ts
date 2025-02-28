@@ -1,5 +1,5 @@
 import type { Notification } from '../../../typesGitHub';
-import { filterNotificationByUserType, isNonHumanUser } from './userType';
+import { isNonHumanUser, userTypeFilter } from './userType';
 
 describe('renderer/utils/notifications/filters/userType.ts', () => {
   afterEach(() => {
@@ -24,23 +24,26 @@ describe('renderer/utils/notifications/filters/userType.ts', () => {
     } as Partial<Notification> as Notification;
 
     mockPartialNotification.subject.user.type = 'User';
-    expect(filterNotificationByUserType(mockPartialNotification, 'User')).toBe(
-      true,
-    );
+    expect(
+      userTypeFilter.filterNotification(mockPartialNotification, 'User'),
+    ).toBe(true);
 
     mockPartialNotification.subject.user.type = 'EnterpriseUserAccount';
-    expect(filterNotificationByUserType(mockPartialNotification, 'User')).toBe(
-      true,
-    );
+    expect(
+      userTypeFilter.filterNotification(mockPartialNotification, 'User'),
+    ).toBe(true);
 
     mockPartialNotification.subject.user.type = 'Bot';
-    expect(filterNotificationByUserType(mockPartialNotification, 'Bot')).toBe(
-      true,
-    );
+    expect(
+      userTypeFilter.filterNotification(mockPartialNotification, 'Bot'),
+    ).toBe(true);
 
     mockPartialNotification.subject.user.type = 'Organization';
     expect(
-      filterNotificationByUserType(mockPartialNotification, 'Organization'),
+      userTypeFilter.filterNotification(
+        mockPartialNotification,
+        'Organization',
+      ),
     ).toBe(true);
   });
 });
