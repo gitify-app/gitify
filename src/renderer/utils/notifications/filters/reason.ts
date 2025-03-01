@@ -16,15 +16,18 @@ export const reasonFilter: Filter<Reason> = {
     return this.FILTER_TYPES[reason];
   },
 
-  hasFilters(settings: SettingsState) {
+  hasFilters(settings: SettingsState): boolean {
     return settings.filterReasons.length > 0;
   },
 
-  isFilterSet(settings: SettingsState, reason: Reason) {
+  isFilterSet(settings: SettingsState, reason: Reason): boolean {
     return settings.filterReasons.includes(reason);
   },
 
-  getFilterCount(notifications: AccountNotifications[], reason: Reason) {
+  getFilterCount(
+    notifications: AccountNotifications[],
+    reason: Reason,
+  ): number {
     return notifications.reduce(
       (sum, account) =>
         sum +
