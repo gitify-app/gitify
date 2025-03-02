@@ -107,7 +107,7 @@ describe('renderer/components/filters/FilterSection.tsx', () => {
     ).toMatchSnapshot();
   });
 
-  it('should be able to toggle user type - some filters already set', async () => {
+  it('should be able to toggle filter value - some filters already set', async () => {
     await act(async () => {
       render(
         <AppContext.Provider
