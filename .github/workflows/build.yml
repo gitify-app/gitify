@@ -29,8 +29,8 @@ jobs:
       - run: pnpm prepare:remove-source-maps
       - run: pnpm package:macos --publish=never -c.mac.identity=null
         env:
-          CSC_LINK: ${{ secrets.mac_certs }}
-          CSC_KEY_PASSWORD: ${{ secrets.mac_certs_password }}
+          CSC_LINK: ${{ secrets.CSC_LINK }}
+          CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
       
       - name: Clean up builds
         run: rm -rfv dist/mac-universal
