@@ -40,8 +40,8 @@
     "tray"
   ],
   "author": {
-    "name": "Emmanouil Konstantinidis",
-    "email": "hello@manos.im"
+    "name": "Adam Setch",
+    "url": "https://github.com/setchy"
   },
   "contributors": [
     {
@@ -89,7 +89,7 @@
     "mac": {
       "category": "public.app-category.developer-tools",
       "icon": "assets/images/app-icon.icns",
-      "identity": "Emmanouil Konstantinidis (3YP8SXP3BF)",
+      "identity": "Adam Setch (5KD23H9729)",
       "type": "distribution",
       "notarize": false,
       "target": {

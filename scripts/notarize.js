@@ -30,9 +30,9 @@ const notarizeApp = async (context) => {
   return await notarize({
     appBundleId,
     appPath: `${appOutDir}/${appName}.app`,
-    appleId: process.env.APPLEID_USERNAME,
-    appleIdPassword: process.env.APPLEID_PASSWORD,
-    teamId: process.env.APPLEID_TEAM_ID,
+    appleId: process.env.APPLE_ID_USERNAME,
+    appleIdPassword: process.env.APPLE_ID_PASSWORD,
+    teamId: process.env.APPLE_ID_TEAM_ID,
     tool: 'notarytool',
   });
 };

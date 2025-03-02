@@ -28,17 +28,17 @@ jobs:
       - run: pnpm install
       - run: pnpm build
         env:
-          OAUTH_CLIENT_ID: ${{ secrets.oauth_client_id }}
-          OAUTH_CLIENT_SECRET: ${{ secrets.oauth_client_secret }}
+          OAUTH_CLIENT_ID: ${{ secrets.OAUTH_CLIENT_ID }}
+          OAUTH_CLIENT_SECRET: ${{ secrets.OAUTH_CLIENT_SECRET }}
       - run: pnpm prepare:remove-source-maps
       - run: pnpm package:macos --publish onTagOrDraft
-        env:
-          APPLEID_USERNAME: ${{ secrets.appleid_username }}
-          APPLEID_PASSWORD: ${{ secrets.appleid_password }}
-          APPLEID_TEAM_ID: ${{ secrets.appleid_teamid }}
-          CSC_LINK: ${{ secrets.mac_certs }}
-          CSC_KEY_PASSWORD: ${{ secrets.mac_certs_password }}
-          GH_TOKEN: ${{ secrets.github_token }}
+       env:
+          APPLE_ID_USERNAME: ${{ secrets.APPLE_ID_USERNAME }}
+          APPLE_ID_PASSWORD: ${{ secrets.APPLE_ID_PASSWORD }}
+          APPLE_ID_TEAM_ID: ${{ secrets.APPLE_ID_TEAM_ID }}
+          CSC_LINK: ${{ secrets.CSC_LINK }}
+          CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NOTARIZE: true
       
       - name: Upload artifacts
@@ -68,12 +68,12 @@ jobs:
       - run: pnpm install
       - run: pnpm build
         env:
-          OAUTH_CLIENT_ID: ${{ secrets.oauth_client_id }}
-          OAUTH_CLIENT_SECRET: ${{ secrets.oauth_client_secret }}
+          OAUTH_CLIENT_ID: ${{ secrets.OAUTH_CLIENT_ID }}
+          OAUTH_CLIENT_SECRET: ${{ secrets.OAUTH_CLIENT_SECRET }}
       - run: pnpm prepare:remove-source-maps
       - run: pnpm package:win --publish onTagOrDraft
         env:
-          GH_TOKEN: ${{ secrets.github_token }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
       - name: Upload artifacts
         uses: actions/upload-artifact@4cec3d8aa04e39d1a68397de0c4cd6fb9dce8ec1 # v4.6.1
@@ -102,12 +102,12 @@ jobs:
       - run: pnpm install
       - run: pnpm build
         env:
-          OAUTH_CLIENT_ID: ${{ secrets.oauth_client_id }}
-          OAUTH_CLIENT_SECRET: ${{ secrets.oauth_client_secret }}
+          OAUTH_CLIENT_ID: ${{ secrets.OAUTH_CLIENT_ID }}
+          OAUTH_CLIENT_SECRET: ${{ secrets.OAUTH_CLIENT_SECRET }}
       - run: pnpm prepare:remove-source-maps
       - run: pnpm package:linux --publish onTagOrDraft
         env:
-          GH_TOKEN: ${{ secrets.github_token }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
       - name: Upload artifacts
         uses: actions/upload-artifact@4cec3d8aa04e39d1a68397de0c4cd6fb9dce8ec1 # v4.6.1
