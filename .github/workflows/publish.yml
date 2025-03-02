@@ -32,7 +32,7 @@ jobs:
           OAUTH_CLIENT_SECRET: ${{ secrets.OAUTH_CLIENT_SECRET }}
       - run: pnpm prepare:remove-source-maps
       - run: pnpm package:macos --publish onTagOrDraft
-       env:
+        env:
           APPLE_ID_USERNAME: ${{ secrets.APPLE_ID_USERNAME }}
           APPLE_ID_PASSWORD: ${{ secrets.APPLE_ID_PASSWORD }}
           APPLE_ID_TEAM_ID: ${{ secrets.APPLE_ID_TEAM_ID }}
