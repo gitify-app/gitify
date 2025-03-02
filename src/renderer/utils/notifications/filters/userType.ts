@@ -28,15 +28,18 @@ export const userTypeFilter: Filter<UserType> = {
     return this.FILTER_TYPES[userType];
   },
 
-  hasFilters(settings: SettingsState) {
+  hasFilters(settings: SettingsState): boolean {
     return settings.filterUserTypes.length > 0;
   },
 
-  isFilterSet(settings: SettingsState, userType: UserType) {
+  isFilterSet(settings: SettingsState, userType: UserType): boolean {
     return settings.filterUserTypes.includes(userType);
   },
 
-  getFilterCount(notifications: AccountNotifications[], userType: UserType) {
+  getFilterCount(
+    notifications: AccountNotifications[],
+    userType: UserType,
+  ): number {
     return notifications.reduce(
       (sum, account) =>
         sum +

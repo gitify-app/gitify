@@ -48,18 +48,18 @@ export const subjectTypeFilter: Filter<SubjectType> = {
     return this.FILTER_TYPES[subjectType];
   },
 
-  hasFilters(settings: SettingsState) {
+  hasFilters(settings: SettingsState): boolean {
     return settings.filterSubjectTypes.length > 0;
   },
 
-  isFilterSet(settings: SettingsState, subjectType: SubjectType) {
+  isFilterSet(settings: SettingsState, subjectType: SubjectType): boolean {
     return settings.filterSubjectTypes.includes(subjectType);
   },
 
   getFilterCount(
     notifications: AccountNotifications[],
     subjectType: SubjectType,
-  ) {
+  ): number {
     return notifications.reduce(
       (sum, account) =>
         sum +

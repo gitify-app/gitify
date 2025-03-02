@@ -37,18 +37,18 @@ export const stateFilter: Filter<FilterStateType> = {
     return this.FILTER_TYPES[stateType];
   },
 
-  hasFilters(settings: SettingsState) {
+  hasFilters(settings: SettingsState): boolean {
     return settings.filterStates.length > 0;
   },
 
-  isFilterSet(settings: SettingsState, stateType: FilterStateType) {
+  isFilterSet(settings: SettingsState, stateType: FilterStateType): boolean {
     return settings.filterStates.includes(stateType);
   },
 
   getFilterCount(
     notifications: AccountNotifications[],
     stateType: FilterStateType,
-  ) {
+  ): number {
     return notifications.reduce(
       (sum, account) =>
         sum +
