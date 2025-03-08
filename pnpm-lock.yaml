@@ -12,8 +12,8 @@ importers:
         specifier: 2.1.2
         version: 2.1.2(electron@35.0.0)
       electron-log:
-        specifier: 5.3.1
-        version: 5.3.1
+        specifier: 5.3.2
+        version: 5.3.2
       electron-updater:
         specifier: 6.3.9
         version: 6.3.9
@@ -1874,8 +1874,8 @@ packages:
     engines: {node: '>=14.0.0'}
     hasBin: true
 
-  electron-log@5.3.1:
-    resolution: {integrity: sha512-STiavmnpomuGdmOy5ctskK8ftHqrZRICFiX+VzzXwhI8gt4ZY0zJSGy9sRZpRHn4Mshh/O8UNXw05D0WaDRxRQ==}
+  electron-log@5.3.2:
+    resolution: {integrity: sha512-EFI5MFFEzFJU5gyhJNpKQhfGfrRP9IWzSu0sSxrWXasWKvVAOFgBySafX8W1pbPKa/w8/DDPu2bBBtVZJdDsnw==}
     engines: {node: '>= 14'}
 
   electron-positioner@4.1.0:
@@ -6490,7 +6490,7 @@ snapshots:
       - electron-builder-squirrel-windows
       - supports-color
 
-  electron-log@5.3.1: {}
+  electron-log@5.3.2: {}
 
   electron-positioner@4.1.0: {}
 
