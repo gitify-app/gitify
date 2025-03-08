@@ -148,8 +148,8 @@ importers:
         specifier: 4.0.9
         version: 4.0.9
       terser-webpack-plugin:
-        specifier: 5.3.12
-        version: 5.3.12(webpack@5.98.0)
+        specifier: 5.3.14
+        version: 5.3.14(webpack@5.98.0)
       ts-jest:
         specifier: 29.2.6
         version: 29.2.6(@babel/core@7.24.3)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.24.3))(jest@29.7.0(@types/node@22.13.10)(ts-node@10.9.2(@types/node@22.13.10)(typescript@5.8.2)))(typescript@5.8.2)
@@ -3989,8 +3989,8 @@ packages:
   temp-file@3.4.0:
     resolution: {integrity: sha512-C5tjlC/HCtVUOi3KWVokd4vHVViOmGjtLwIh4MuzPo/nMYTV/p1urt3RnMz2IWXDdKEGJH3k5+KPxtqRsUYGtg==}
 
-  terser-webpack-plugin@5.3.12:
-    resolution: {integrity: sha512-jDLYqo7oF8tJIttjXO6jBY5Hk8p3A8W4ttih7cCEq64fQFWmgJ4VqAQjKr7WwIDlmXKEc6QeoRb5ecjZ+2afcg==}
+  terser-webpack-plugin@5.3.14:
+    resolution: {integrity: sha512-vkZjpUjb6OMS7dhV+tILUW6BhpDR7P2L/aQSAv+Uwk+m8KATX9EccViHTJR2qDtACKPIYndLGCyl3FMo+r2LMw==}
     engines: {node: '>= 10.13.0'}
     peerDependencies:
       '@swc/core': '*'
@@ -8923,7 +8923,7 @@ snapshots:
       async-exit-hook: 2.0.1
       fs-extra: 10.1.0
 
-  terser-webpack-plugin@5.3.12(webpack@5.98.0):
+  terser-webpack-plugin@5.3.14(webpack@5.98.0):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.25
       jest-worker: 27.5.1
@@ -9231,7 +9231,7 @@ snapshots:
       neo-async: 2.6.2
       schema-utils: 4.3.0
       tapable: 2.2.1
-      terser-webpack-plugin: 5.3.12(webpack@5.98.0)
+      terser-webpack-plugin: 5.3.14(webpack@5.98.0)
       watchpack: 2.4.1
       webpack-sources: 3.2.3
     optionalDependencies:
