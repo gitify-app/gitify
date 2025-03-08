@@ -91,8 +91,8 @@ importers:
         specifier: 7.1.2
         version: 7.1.2(webpack@5.98.0)
       css-minimizer-webpack-plugin:
-        specifier: 7.0.0
-        version: 7.0.0(webpack@5.98.0)
+        specifier: 7.0.2
+        version: 7.0.2(webpack@5.98.0)
       date-fns:
         specifier: 4.1.0
         version: 4.1.0
@@ -1613,8 +1613,8 @@ packages:
       webpack:
         optional: true
 
-  css-minimizer-webpack-plugin@7.0.0:
-    resolution: {integrity: sha512-niy66jxsQHqO+EYbhPuIhqRQ1mNcNVUHrMnkzzir9kFOERJUaQDDRhh7dKDz33kBpkWMF9M8Vx0QlDbc5AHOsw==}
+  css-minimizer-webpack-plugin@7.0.2:
+    resolution: {integrity: sha512-nBRWZtI77PBZQgcXMNqiIXVshiQOVLGSf2qX/WZfG8IQfMbeHUMXaBWQmiiSTmPJUflQxHjZjzAmuyO7tpL2Jg==}
     engines: {node: '>= 18.12.0'}
     peerDependencies:
       '@parcel/css': '*'
@@ -6190,13 +6190,13 @@ snapshots:
     optionalDependencies:
       webpack: 5.98.0(webpack-cli@6.0.1)
 
-  css-minimizer-webpack-plugin@7.0.0(webpack@5.98.0):
+  css-minimizer-webpack-plugin@7.0.2(webpack@5.98.0):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.25
       cssnano: 7.0.6(postcss@8.5.3)
       jest-worker: 29.7.0
       postcss: 8.5.3
-      schema-utils: 4.2.0
+      schema-utils: 4.3.0
       serialize-javascript: 6.0.2
       webpack: 5.98.0(webpack-cli@6.0.1)
 
