@@ -9,7 +9,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
         id="filter-state"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
+          class="Stack__StyledStack-sc-x3xa2i-0 iqrTOO"
           data-align="baseline"
           data-direction="horizontal"
           data-gap="condensed"
@@ -22,7 +22,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
               class="Box-sc-g0xbh4-0 mb-2"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
+                class="Stack__StyledStack-sc-x3xa2i-0 iqrTOO"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -51,7 +51,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
                   />
                 </svg>
                 <h2
-                  class="Heading__StyledHeading-sc-1c1dgg0-0 eQYHUB"
+                  class="Heading__StyledHeading-sc-1c1dgg0-0 fcWqmq"
                   sx="[object Object]"
                 >
                   State
@@ -84,7 +84,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
           </div>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
+          class="Stack__StyledStack-sc-x3xa2i-0 iqrTOO"
           data-align="stretch"
           data-direction="vertical"
           data-gap="condensed"
@@ -93,7 +93,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
           data-wrap="nowrap"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+            class="Stack__StyledStack-sc-x3xa2i-0 iqrTOO text-sm"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -114,13 +114,13 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
               Draft
             </label>
             <span
-              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="Text-sc-17v1xeu-0 druJoj px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+            class="Stack__StyledStack-sc-x3xa2i-0 iqrTOO text-sm"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -164,13 +164,13 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
               </svg>
             </div>
             <span
-              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="Text-sc-17v1xeu-0 druJoj px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
             >
               1
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+            class="Stack__StyledStack-sc-x3xa2i-0 iqrTOO text-sm"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -191,13 +191,13 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
               Merged
             </label>
             <span
-              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="Text-sc-17v1xeu-0 druJoj px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+            class="Stack__StyledStack-sc-x3xa2i-0 iqrTOO text-sm"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -241,13 +241,13 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
               </svg>
             </div>
             <span
-              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="Text-sc-17v1xeu-0 druJoj px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+            class="Stack__StyledStack-sc-x3xa2i-0 iqrTOO text-sm"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -291,7 +291,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
               </svg>
             </div>
             <span
-              class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="Text-sc-17v1xeu-0 druJoj px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
             >
               3
             </span>
@@ -305,7 +305,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
       id="filter-state"
     >
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
+        class="Stack__StyledStack-sc-x3xa2i-0 iqrTOO"
         data-align="baseline"
         data-direction="horizontal"
         data-gap="condensed"
@@ -318,7 +318,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
             class="Box-sc-g0xbh4-0 mb-2"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
+              class="Stack__StyledStack-sc-x3xa2i-0 iqrTOO"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -347,7 +347,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
                 />
               </svg>
               <h2
-                class="Heading__StyledHeading-sc-1c1dgg0-0 eQYHUB"
+                class="Heading__StyledHeading-sc-1c1dgg0-0 fcWqmq"
                 sx="[object Object]"
               >
                 State
@@ -380,7 +380,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
         </div>
       </div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
+        class="Stack__StyledStack-sc-x3xa2i-0 iqrTOO"
         data-align="stretch"
         data-direction="vertical"
         data-gap="condensed"
@@ -389,7 +389,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
         data-wrap="nowrap"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+          class="Stack__StyledStack-sc-x3xa2i-0 iqrTOO text-sm"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -410,13 +410,13 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
             Draft
           </label>
           <span
-            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            class="Text-sc-17v1xeu-0 druJoj px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
           >
             0
           </span>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+          class="Stack__StyledStack-sc-x3xa2i-0 iqrTOO text-sm"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -460,13 +460,13 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
             </svg>
           </div>
           <span
-            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            class="Text-sc-17v1xeu-0 druJoj px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
           >
             1
           </span>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+          class="Stack__StyledStack-sc-x3xa2i-0 iqrTOO text-sm"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -487,13 +487,13 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
             Merged
           </label>
           <span
-            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            class="Text-sc-17v1xeu-0 druJoj px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
           >
             0
           </span>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+          class="Stack__StyledStack-sc-x3xa2i-0 iqrTOO text-sm"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -537,13 +537,13 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
             </svg>
           </div>
           <span
-            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            class="Text-sc-17v1xeu-0 druJoj px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
           >
             0
           </span>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ text-sm"
+          class="Stack__StyledStack-sc-x3xa2i-0 iqrTOO text-sm"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -587,7 +587,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
             </svg>
           </div>
           <span
-            class="Text-sc-17v1xeu-0 kbcDeY px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            class="Text-sc-17v1xeu-0 druJoj px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
           >
             3
           </span>

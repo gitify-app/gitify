@@ -6,7 +6,7 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
   "baseElement": <body>
     <div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ h-screen"
+        class="Stack__StyledStack-sc-x3xa2i-0 iqrTOO h-screen"
         data-align="center"
         data-direction="vertical"
         data-justify="center"
@@ -14,7 +14,7 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
         data-wrap="nowrap"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
+          class="Stack__StyledStack-sc-x3xa2i-0 iqrTOO"
           data-align="center"
           data-direction="vertical"
           data-justify="start"
@@ -66,7 +66,7 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
             </g>
           </svg>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
+            class="Stack__StyledStack-sc-x3xa2i-0 iqrTOO"
             data-align="center"
             data-direction="vertical"
             data-gap="none"
@@ -75,20 +75,20 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
             data-wrap="nowrap"
           >
             <h2
-              class="Heading__StyledHeading-sc-1c1dgg0-0 fBrWqc"
+              class="Heading__StyledHeading-sc-1c1dgg0-0 esDbQP"
               sx="[object Object]"
             >
               GitHub Notifications
             </h2>
             <h2
-              class="Heading__StyledHeading-sc-1c1dgg0-0 edgQRQ"
+              class="Heading__StyledHeading-sc-1c1dgg0-0 cUrWsD"
               sx="[object Object]"
             >
               on your menu bar
             </h2>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
+            class="Stack__StyledStack-sc-x3xa2i-0 iqrTOO"
             data-align="center"
             data-direction="vertical"
             data-gap="condensed"
@@ -97,25 +97,25 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
             data-wrap="nowrap"
           >
             <span
-              class="Text-sc-17v1xeu-0 kbcDeY"
+              class="Text-sc-17v1xeu-0 druJoj"
             >
               Login with
             </span>
             <button
               aria-describedby=":r0:-loading-announcement"
-              class="types__StyledButton-sc-ws60qy-0 vZQzk"
+              class="types__StyledButton-sc-ws60qy-0 gZebIL"
               data-loading="false"
               data-testid="login-github"
               sx="[object Object]"
               type="button"
             >
               <span
-                class="Box-sc-g0xbh4-0 kBZRdd"
+                class="Box-sc-g0xbh4-0 daPfHi"
                 data-component="buttonContent"
                 sx="[object Object]"
               >
                 <span
-                  class="Box-sc-g0xbh4-0 fRxPAP"
+                  class="Box-sc-g0xbh4-0 kdRuZg"
                   data-component="leadingVisual"
                   sx="[object Object]"
                 >
@@ -145,19 +145,19 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
             </button>
             <button
               aria-describedby=":r1:-loading-announcement"
-              class="types__StyledButton-sc-ws60qy-0 fMOLkq"
+              class="types__StyledButton-sc-ws60qy-0 AwKAJ"
               data-loading="false"
               data-testid="login-pat"
               sx="[object Object]"
               type="button"
             >
               <span
-                class="Box-sc-g0xbh4-0 kBZRdd"
+                class="Box-sc-g0xbh4-0 daPfHi"
                 data-component="buttonContent"
                 sx="[object Object]"
               >
                 <span
-                  class="Box-sc-g0xbh4-0 fRxPAP"
+                  class="Box-sc-g0xbh4-0 kdRuZg"
                   data-component="leadingVisual"
                   sx="[object Object]"
                 >
@@ -187,19 +187,19 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
             </button>
             <button
               aria-describedby=":r2:-loading-announcement"
-              class="types__StyledButton-sc-ws60qy-0 fMOLkq"
+              class="types__StyledButton-sc-ws60qy-0 AwKAJ"
               data-loading="false"
               data-testid="login-oauth-app"
               sx="[object Object]"
               type="button"
             >
               <span
-                class="Box-sc-g0xbh4-0 kBZRdd"
+                class="Box-sc-g0xbh4-0 daPfHi"
                 data-component="buttonContent"
                 sx="[object Object]"
               >
                 <span
-                  class="Box-sc-g0xbh4-0 fRxPAP"
+                  class="Box-sc-g0xbh4-0 kdRuZg"
                   data-component="leadingVisual"
                   sx="[object Object]"
                 >
@@ -234,7 +234,7 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
   </body>,
   "container": <div>
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ h-screen"
+      class="Stack__StyledStack-sc-x3xa2i-0 iqrTOO h-screen"
       data-align="center"
       data-direction="vertical"
       data-justify="center"
@@ -242,7 +242,7 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
       data-wrap="nowrap"
     >
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
+        class="Stack__StyledStack-sc-x3xa2i-0 iqrTOO"
         data-align="center"
         data-direction="vertical"
         data-justify="start"
@@ -294,7 +294,7 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
           </g>
         </svg>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
+          class="Stack__StyledStack-sc-x3xa2i-0 iqrTOO"
           data-align="center"
           data-direction="vertical"
           data-gap="none"
@@ -303,20 +303,20 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
           data-wrap="nowrap"
         >
           <h2
-            class="Heading__StyledHeading-sc-1c1dgg0-0 fBrWqc"
+            class="Heading__StyledHeading-sc-1c1dgg0-0 esDbQP"
             sx="[object Object]"
           >
             GitHub Notifications
           </h2>
           <h2
-            class="Heading__StyledHeading-sc-1c1dgg0-0 edgQRQ"
+            class="Heading__StyledHeading-sc-1c1dgg0-0 cUrWsD"
             sx="[object Object]"
           >
             on your menu bar
           </h2>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
+          class="Stack__StyledStack-sc-x3xa2i-0 iqrTOO"
           data-align="center"
           data-direction="vertical"
           data-gap="condensed"
@@ -325,25 +325,25 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
           data-wrap="nowrap"
         >
           <span
-            class="Text-sc-17v1xeu-0 kbcDeY"
+            class="Text-sc-17v1xeu-0 druJoj"
           >
             Login with
           </span>
           <button
             aria-describedby=":r0:-loading-announcement"
-            class="types__StyledButton-sc-ws60qy-0 vZQzk"
+            class="types__StyledButton-sc-ws60qy-0 gZebIL"
             data-loading="false"
             data-testid="login-github"
             sx="[object Object]"
             type="button"
           >
             <span
-              class="Box-sc-g0xbh4-0 kBZRdd"
+              class="Box-sc-g0xbh4-0 daPfHi"
               data-component="buttonContent"
               sx="[object Object]"
             >
               <span
-                class="Box-sc-g0xbh4-0 fRxPAP"
+                class="Box-sc-g0xbh4-0 kdRuZg"
                 data-component="leadingVisual"
                 sx="[object Object]"
               >
@@ -373,19 +373,19 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
           </button>
           <button
             aria-describedby=":r1:-loading-announcement"
-            class="types__StyledButton-sc-ws60qy-0 fMOLkq"
+            class="types__StyledButton-sc-ws60qy-0 AwKAJ"
             data-loading="false"
             data-testid="login-pat"
             sx="[object Object]"
             type="button"
           >
             <span
-              class="Box-sc-g0xbh4-0 kBZRdd"
+              class="Box-sc-g0xbh4-0 daPfHi"
               data-component="buttonContent"
               sx="[object Object]"
             >
               <span
-                class="Box-sc-g0xbh4-0 fRxPAP"
+                class="Box-sc-g0xbh4-0 kdRuZg"
                 data-component="leadingVisual"
                 sx="[object Object]"
               >
@@ -415,19 +415,19 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
           </button>
           <button
             aria-describedby=":r2:-loading-announcement"
-            class="types__StyledButton-sc-ws60qy-0 fMOLkq"
+            class="types__StyledButton-sc-ws60qy-0 AwKAJ"
             data-loading="false"
             data-testid="login-oauth-app"
             sx="[object Object]"
             type="button"
           >
             <span
-              class="Box-sc-g0xbh4-0 kBZRdd"
+              class="Box-sc-g0xbh4-0 daPfHi"
               data-component="buttonContent"
               sx="[object Object]"
             >
               <span
-                class="Box-sc-g0xbh4-0 fRxPAP"
+                class="Box-sc-g0xbh4-0 kdRuZg"
                 data-component="leadingVisual"
                 sx="[object Object]"
               >

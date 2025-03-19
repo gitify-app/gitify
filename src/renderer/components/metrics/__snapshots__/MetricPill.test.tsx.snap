@@ -6,12 +6,12 @@ exports[`renderer/components/metrics/MetricPill.tsx should render with metric 1`
   "baseElement": <body>
     <div>
       <span
-        class="Label__StyledLabel-sc-1dgcne-0 LUrEa hover:bg-gitify-notification-pill-hover"
+        class="Label__StyledLabel-sc-1dgcne-0 bxQQNF hover:bg-gitify-notification-pill-hover"
         title="Mock Pill"
         variant="secondary"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
+          class="Stack__StyledStack-sc-x3xa2i-0 iqrTOO"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -36,7 +36,7 @@ exports[`renderer/components/metrics/MetricPill.tsx should render with metric 1`
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 kbcDeY text-xxs px-1"
+            class="Text-sc-17v1xeu-0 druJoj text-xxs px-1"
           >
             1
           </span>
@@ -46,12 +46,12 @@ exports[`renderer/components/metrics/MetricPill.tsx should render with metric 1`
   </body>,
   "container": <div>
     <span
-      class="Label__StyledLabel-sc-1dgcne-0 LUrEa hover:bg-gitify-notification-pill-hover"
+      class="Label__StyledLabel-sc-1dgcne-0 bxQQNF hover:bg-gitify-notification-pill-hover"
       title="Mock Pill"
       variant="secondary"
     >
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
+        class="Stack__StyledStack-sc-x3xa2i-0 iqrTOO"
         data-align="center"
         data-direction="horizontal"
         data-gap="none"
@@ -76,7 +76,7 @@ exports[`renderer/components/metrics/MetricPill.tsx should render with metric 1`
           />
         </svg>
         <span
-          class="Text-sc-17v1xeu-0 kbcDeY text-xxs px-1"
+          class="Text-sc-17v1xeu-0 druJoj text-xxs px-1"
         >
           1
         </span>
@@ -143,12 +143,12 @@ exports[`renderer/components/metrics/MetricPill.tsx should render without metric
   "baseElement": <body>
     <div>
       <span
-        class="Label__StyledLabel-sc-1dgcne-0 LUrEa hover:bg-gitify-notification-pill-hover"
+        class="Label__StyledLabel-sc-1dgcne-0 bxQQNF hover:bg-gitify-notification-pill-hover"
         title="Mock Pill"
         variant="secondary"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
+          class="Stack__StyledStack-sc-x3xa2i-0 iqrTOO"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -178,12 +178,12 @@ exports[`renderer/components/metrics/MetricPill.tsx should render without metric
   </body>,
   "container": <div>
     <span
-      class="Label__StyledLabel-sc-1dgcne-0 LUrEa hover:bg-gitify-notification-pill-hover"
+      class="Label__StyledLabel-sc-1dgcne-0 bxQQNF hover:bg-gitify-notification-pill-hover"
       title="Mock Pill"
       variant="secondary"
     >
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 kooAIZ"
+        class="Stack__StyledStack-sc-x3xa2i-0 iqrTOO"
         data-align="center"
         data-direction="horizontal"
         data-gap="none"

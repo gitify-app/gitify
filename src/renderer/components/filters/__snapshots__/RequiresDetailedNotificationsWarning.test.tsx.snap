@@ -6,11 +6,11 @@ exports[`renderer/components/filters/RequiresDetailedNotificationsWarning.tsx sh
   "baseElement": <body>
     <div>
       <span
-        class="Text-sc-17v1xeu-0 kbcDeY text-gitify-caution"
+        class="Text-sc-17v1xeu-0 druJoj text-gitify-caution"
       >
         ⚠️ This filter requires the 
         <strong
-          class="Text-sc-17v1xeu-0 kbcDeY"
+          class="Text-sc-17v1xeu-0 druJoj"
         >
           Detailed Notifications
         </strong>
@@ -21,11 +21,11 @@ exports[`renderer/components/filters/RequiresDetailedNotificationsWarning.tsx sh
   </body>,
   "container": <div>
     <span
-      class="Text-sc-17v1xeu-0 kbcDeY text-gitify-caution"
+      class="Text-sc-17v1xeu-0 druJoj text-gitify-caution"
     >
       ⚠️ This filter requires the 
       <strong
-        class="Text-sc-17v1xeu-0 kbcDeY"
+        class="Text-sc-17v1xeu-0 druJoj"
       >
         Detailed Notifications
       </strong>
