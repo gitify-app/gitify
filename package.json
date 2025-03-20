@@ -156,7 +156,7 @@
     "@types/react-dom": "19.0.4",
     "@types/react-router-dom": "5.3.3",
     "@types/semver": "7.5.8",
-    "axios": "1.8.3",
+    "axios": "1.8.4",
     "clsx": "2.1.1",
     "concurrently": "9.1.2",
     "copy-webpack-plugin": "13.0.0",
