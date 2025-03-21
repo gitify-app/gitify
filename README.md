@@ -8,7 +8,7 @@
 
 ### Download
 
-You can download Gitify for **free** from the website [www.gitify.io][website] or install it via [Homebrew Cask][brew].
+You can download Gitify for **free** from [gitify.io][website] or install it via [Homebrew Cask][brew].
 
 ```shell
 brew install gitify
@@ -31,8 +31,8 @@ For more information, see [LICENSE](LICENSE).
 
 
 <!-- LINK LABELS -->
-[website]: https://www.gitify.io
-[faqs]: https://www.gitify.io/faq/
+[website]: https://gitify.io
+[faqs]: https://gitify.io/faq
 [gitify-social]: https://raw.githubusercontent.com/gitify-app/website/master/public/images/social.png
 
 [github]: https://github.com/gitify-app/gitify
