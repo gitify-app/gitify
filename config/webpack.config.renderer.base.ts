@@ -4,6 +4,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import webpack from 'webpack';
 import { merge } from 'webpack-merge';
+
 import baseConfig from './webpack.config.common';
 import webpackPaths from './webpack.paths';
 
@@ -14,7 +15,7 @@ const configuration: webpack.Configuration = {
 
   mode: 'development',
 
-  target: 'electron-renderer',
+  target: ['web', 'electron-renderer'],
 
   entry: [path.join(webpackPaths.srcRendererPath, 'index.tsx')],
 
