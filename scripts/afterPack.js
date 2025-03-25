@@ -7,7 +7,7 @@ const electronLanguages = builderConfig.electronLanguages;
 
 function logAfterPackProgress(msg) {
   // biome-ignore lint/suspicious/noConsoleLog: log notarizing progress
-  console.log(`  • [afterSign]: ${msg}`);
+  console.log(`  • [afterPack]: ${msg}`);
 }
 
 /**
