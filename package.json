@@ -12,9 +12,9 @@
     "watch:main": "webpack --watch --config ./config/webpack.config.main.base.ts",
     "watch:renderer": "webpack --watch --config ./config/webpack.config.renderer.base.ts",
     "prepare:remove-source-maps": "ts-node ./scripts/delete-source-maps.ts",
-    "package:linux": "electron-builder --linux",
-    "package:macos": "electron-builder --mac",
-    "package:win": "electron-builder --win",
+    "package:linux": "electron-builder --linux --config ./config/electron-builder.js",
+    "package:macos": "electron-builder --mac --config ./config/electron-builder.js",
+    "package:win": "electron-builder --win --config ./config/electron-builder.js",
     "lint:check": "biome check",
     "lint": "biome check --fix",
     "test": "jest",
@@ -66,71 +66,6 @@
     "url": "https://github.com/gitify-app/gitify/issues"
   },
   "homepage": "https://gitify.io/",
-  "build": {
-    "productName": "Gitify",
-    "appId": "com.electron.gitify",
-    "copyright": "Copyright © 2025 Gitify Team",
-    "asar": true,
-    "files": [
-      "assets/images/*",
-      "assets/sounds/*",
-      "build/**/*",
-      "LICENSE",
-      "node_modules/**/*",
-      "package.json"
-    ],
-    "electronLanguages": ["en"],
-    "protocols": [
-      {
-        "name": "Gitify",
-        "schemes": ["gitify", "gitify-dev"]
-      }
-    ],
-    "mac": {
-      "category": "public.app-category.developer-tools",
-      "icon": "assets/images/app-icon.icns",
-      "identity": "Adam Setch (5KD23H9729)",
-      "type": "distribution",
-      "notarize": false,
-      "target": {
-        "target": "default",
-        "arch": ["universal"]
-      },
-      "hardenedRuntime": true,
-      "entitlements": "assets/entitlements.mac.plist",
-      "entitlementsInherit": "assets/entitlements.mac.plist",
-      "gatekeeperAssess": false,
-      "extendInfo": {
-        "NSBluetoothAlwaysUsageDescription": null,
-        "NSBluetoothPeripheralUsageDescription": null,
-        "NSCameraUsageDescription": null,
-        "NSMicrophoneUsageDescription": null
-      }
-    },
-    "dmg": {
-      "icon": "assets/images/app-icon.icns",
-      "sign": false
-    },
-    "win": {
-      "target": "nsis",
-      "icon": "assets/images/app-icon.ico"
-    },
-    "nsis": {
-      "oneClick": false
-    },
-    "linux": {
-      "target": ["AppImage", "deb", "rpm"],
-      "category": "Development",
-      "maintainer": "Gitify Team"
-    },
-    "publish": {
-      "provider": "github",
-      "owner": "gitify-app",
-      "repo": "gitify"
-    },
-    "afterSign": "scripts/notarize.js",
-    "afterPack": "scripts/afterPack.js"
-  },
   "dependencies": {
     "@electron/remote": "2.1.2",
     "electron-log": "5.3.2",
