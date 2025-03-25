@@ -2,8 +2,8 @@ const path = require('node:path');
 const fs = require('node:fs');
 const { AfterPackContext } = require('electron-builder');
 
-const packageJson = require('../package.json');
-const electronLanguages = packageJson.build.electronLanguages;
+const builderConfig = require('../config/electron-builder');
+const electronLanguages = builderConfig.electronLanguages;
 
 function logAfterPackProgress(msg) {
   // biome-ignore lint/suspicious/noConsoleLog: log notarizing progress
