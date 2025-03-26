@@ -133,7 +133,7 @@
   },
   "dependencies": {
     "@electron/remote": "2.1.2",
-    "electron-log": "5.3.2",
+    "electron-log": "5.3.3",
     "electron-updater": "6.3.9",
     "menubar": "9.5.1",
     "react": "19.0.0",
