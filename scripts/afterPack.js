@@ -2,15 +2,19 @@ const path = require('node:path');
 const fs = require('node:fs');
 const { AfterPackContext } = require('electron-builder');
 
-const packageJson = require('../package.json');
-const electronLanguages = packageJson.build.electronLanguages;
+const builderConfig = require('../config/electron-builder');
+const electronLanguages = builderConfig.electronLanguages;
+
+function logAfterPackProgress(msg) {
+  // biome-ignore lint/suspicious/noConsoleLog: log notarizing progress
+  console.log(`  • [afterPack]: ${msg}`);
+}
 
 /**
  * @param {AfterPackContext} context
  */
 const afterPack = async (context) => {
-  // biome-ignore lint/suspicious/noConsoleLog: disabled
-  console.log('[afterPack]: Starting...');
+  logAfterPackProgress('Starting...');
 
   const appName = context.packager.appInfo.productFilename;
   const appOutDir = context.appOutDir;
@@ -20,8 +24,7 @@ const afterPack = async (context) => {
     removeUnusedLocales(appOutDir, appName);
   }
 
-  // biome-ignore lint/suspicious/noConsoleLog: disabled
-  console.log('[afterPack]: Completed');
+  logAfterPackProgress('Completed');
 };
 
 /**
@@ -30,8 +33,7 @@ const afterPack = async (context) => {
  * @param {string} appName
  */
 const removeUnusedLocales = (appOutDir, appName) => {
-  // biome-ignore lint/suspicious/noConsoleLog: disabled
-  console.log('[afterPack]: removing unused locales');
+  logAfterPackProgress('removing unused locales');
 
   const resourcesPath = path.join(
     appOutDir,
