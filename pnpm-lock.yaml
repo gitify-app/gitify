@@ -21,14 +21,14 @@ importers:
         specifier: 9.5.1
         version: 9.5.1(electron@35.1.2)
       react:
-        specifier: 19.0.0
-        version: 19.0.0
+        specifier: 19.1.0
+        version: 19.1.0
       react-dom:
-        specifier: 19.0.0
-        version: 19.0.0(react@19.0.0)
+        specifier: 19.1.0
+        version: 19.1.0(react@19.1.0)
       react-router-dom:
         specifier: 7.4.1
-        version: 7.4.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        version: 7.4.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       update-electron-app:
         specifier: 3.1.1
         version: 3.1.1
@@ -44,19 +44,19 @@ importers:
         version: 2.5.0
       '@primer/octicons-react':
         specifier: 19.15.1
-        version: 19.15.1(react@19.0.0)
+        version: 19.15.1(react@19.1.0)
       '@primer/primitives':
         specifier: 10.5.0
         version: 10.5.0
       '@primer/react':
         specifier: 36.27.0
-        version: 36.27.0(@types/react-dom@19.0.4(@types/react@19.0.12))(@types/react@19.0.12)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(styled-components@6.1.16(react-dom@19.0.0(react@19.0.0))(react@19.0.0))
+        version: 36.27.0(@types/react-dom@19.0.4(@types/react@19.0.12))(@types/react@19.0.12)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(styled-components@6.1.16(react-dom@19.1.0(react@19.1.0))(react@19.1.0))
       '@tailwindcss/postcss':
         specifier: 4.0.17
         version: 4.0.17
       '@testing-library/react':
         specifier: 16.2.0
-        version: 16.2.0(@testing-library/dom@10.0.0)(@types/react-dom@19.0.4(@types/react@19.0.12))(@types/react@19.0.12)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        version: 16.2.0(@testing-library/dom@10.0.0)(@types/react-dom@19.0.4(@types/react@19.0.12))(@types/react@19.0.12)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@types/jest':
         specifier: 29.5.14
         version: 29.5.14
@@ -140,7 +140,7 @@ importers:
         version: 7.7.1
       styled-components:
         specifier: 6.1.16
-        version: 6.1.16(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        version: 6.1.16(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       tailwind-merge:
         specifier: 3.1.0
         version: 3.1.0
@@ -3549,10 +3549,10 @@ packages:
   randombytes@2.1.0:
     resolution: {integrity: sha512-vYl3iOX+4CKUWuxGi9Ukhie6fsqXqS9FE2Zaic4tNFD2N2QQaXOMFbuKK4QmDHC0JO6B1Zp41J0LpT0oR68amQ==}
 
-  react-dom@19.0.0:
-    resolution: {integrity: sha512-4GV5sHFG0e/0AD4X+ySy6UJd3jVl1iNsNHdpad0qhABJ11twS3TTBnseqsKurKcsNqCEFeGL3uLpVChpIO3QfQ==}
+  react-dom@19.1.0:
+    resolution: {integrity: sha512-Xs1hdnE+DyKgeHJeJznQmYMIBG3TKIHJJT95Q58nHLSrElKlGQqDTR2HQ9fx5CN/Gk6Vh/kupBTDLU11/nDk/g==}
     peerDependencies:
-      react: ^19.0.0
+      react: ^19.1.0
 
   react-intersection-observer@9.13.1:
     resolution: {integrity: sha512-tSzDaTy0qwNPLJHg8XZhlyHTgGW6drFKTtvjdL+p6um12rcnp8Z5XstE+QNBJ7c64n5o0Lj4ilUleA41bmDoMw==}
@@ -3595,8 +3595,8 @@ packages:
       react-dom:
         optional: true
 
-  react@19.0.0:
-    resolution: {integrity: sha512-V8AVnmPIICiWpGfm6GLzCR/W5FXLchHop40W4nXBmdlEceh16rCN8O8LNWm5bh5XUX91fh7KpA+W0TgMKmgTpQ==}
+  react@19.1.0:
+    resolution: {integrity: sha512-FS+XFBNvn3GTAWq26joslQgWNoFu08F4kl0J4CgdNKADkdSGXQyTCnKteIAJy96Br6YbpEU1LSzV5dYtjMkMDg==}
     engines: {node: '>=0.10.0'}
 
   read-binary-file-arch@1.0.6:
@@ -3726,8 +3726,8 @@ packages:
     resolution: {integrity: sha512-xAg7SOnEhrm5zI3puOOKyy1OMcMlIJZYNJY7xLBwSze0UjhPLnWfj2GF2EpT0jmzaJKIWKHLsaSSajf35bcYnA==}
     engines: {node: '>=v12.22.7'}
 
-  scheduler@0.25.0:
-    resolution: {integrity: sha512-xFVuu11jh+xcO7JOAGJNOXld8/TcEHK/4CituBUeUb5hqxJLj9YuemAEuvm9gQ/+pgXYfbQuqAkiYu+u7YEsNA==}
+  scheduler@0.26.0:
+    resolution: {integrity: sha512-NlHwttCI/l5gCPR3D1nNXtWABUmBwvZpEQiD4IXSbIDq8BzLIK/7Ir5gTFSGZDUu37K5cMNp0hFtzO38sC7gWA==}
 
   schema-utils@4.2.0:
     resolution: {integrity: sha512-L0jRsrPpjdckP3oPug3/VxNKt2trR8TcabrM6FOAAlvC/9Phcmm+cuAgTlxBqdBR1WJx7Naj9WHw+aOmheSVbw==}
@@ -5011,15 +5011,15 @@ snapshots:
     dependencies:
       '@lit-labs/ssr-dom-shim': 1.2.1
 
-  '@primer/octicons-react@19.15.1(react@19.0.0)':
+  '@primer/octicons-react@19.15.1(react@19.1.0)':
     dependencies:
-      react: 19.0.0
+      react: 19.1.0
 
   '@primer/primitives@10.5.0': {}
 
   '@primer/primitives@7.17.1': {}
 
-  '@primer/react@36.27.0(@types/react-dom@19.0.4(@types/react@19.0.12))(@types/react@19.0.12)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(styled-components@6.1.16(react-dom@19.0.0(react@19.0.0))(react@19.0.0))':
+  '@primer/react@36.27.0(@types/react-dom@19.0.4(@types/react@19.0.12))(@types/react@19.0.12)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(styled-components@6.1.16(react-dom@19.1.0(react@19.1.0))(react@19.1.0))':
     dependencies:
       '@github/combobox-nav': 2.3.1
       '@github/markdown-toolbar-element': 2.2.3
@@ -5030,7 +5030,7 @@ snapshots:
       '@oddbird/popover-polyfill': 0.3.8
       '@primer/behaviors': 1.8.0
       '@primer/live-region-element': 0.7.1
-      '@primer/octicons-react': 19.15.1(react@19.0.0)
+      '@primer/octicons-react': 19.15.1(react@19.1.0)
       '@primer/primitives': 7.17.1
       '@styled-system/css': 5.1.5
       '@styled-system/props': 5.1.5
@@ -5047,12 +5047,12 @@ snapshots:
       history: 5.3.0
       lodash.isempty: 4.4.0
       lodash.isobject: 3.0.2
-      react: 19.0.0
-      react-dom: 19.0.0(react@19.0.0)
-      react-intersection-observer: 9.13.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      react: 19.1.0
+      react-dom: 19.1.0(react@19.1.0)
+      react-intersection-observer: 9.13.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       react-is: 18.2.0
-      react-markdown: 8.0.7(@types/react@19.0.12)(react@19.0.0)
-      styled-components: 6.1.16(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      react-markdown: 8.0.7(@types/react@19.0.12)(react@19.1.0)
+      styled-components: 6.1.16(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       styled-system: 5.1.5
     optionalDependencies:
       '@types/react': 19.0.12
@@ -5208,12 +5208,12 @@ snapshots:
       lz-string: 1.5.0
       pretty-format: 27.5.1
 
-  '@testing-library/react@16.2.0(@testing-library/dom@10.0.0)(@types/react-dom@19.0.4(@types/react@19.0.12))(@types/react@19.0.12)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
+  '@testing-library/react@16.2.0(@testing-library/dom@10.0.0)(@types/react-dom@19.0.4(@types/react@19.0.12))(@types/react@19.0.12)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
       '@babel/runtime': 7.24.1
       '@testing-library/dom': 10.0.0
-      react: 19.0.0
-      react-dom: 19.0.0(react@19.0.0)
+      react: 19.1.0
+      react-dom: 19.1.0(react@19.1.0)
     optionalDependencies:
       '@types/react': 19.0.12
       '@types/react-dom': 19.0.4(@types/react@19.0.12)
@@ -8414,16 +8414,16 @@ snapshots:
     dependencies:
       safe-buffer: 5.2.1
 
-  react-dom@19.0.0(react@19.0.0):
+  react-dom@19.1.0(react@19.1.0):
     dependencies:
-      react: 19.0.0
-      scheduler: 0.25.0
+      react: 19.1.0
+      scheduler: 0.26.0
 
-  react-intersection-observer@9.13.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
+  react-intersection-observer@9.13.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
     dependencies:
-      react: 19.0.0
+      react: 19.1.0
     optionalDependencies:
-      react-dom: 19.0.0(react@19.0.0)
+      react-dom: 19.1.0(react@19.1.0)
 
   react-is@16.13.1: {}
 
@@ -8431,7 +8431,7 @@ snapshots:
 
   react-is@18.2.0: {}
 
-  react-markdown@8.0.7(@types/react@19.0.12)(react@19.0.0):
+  react-markdown@8.0.7(@types/react@19.0.12)(react@19.1.0):
     dependencies:
       '@types/hast': 2.3.10
       '@types/prop-types': 15.7.14
@@ -8441,7 +8441,7 @@ snapshots:
       hast-util-whitespace: 2.0.1
       prop-types: 15.8.1
       property-information: 6.5.0
-      react: 19.0.0
+      react: 19.1.0
       react-is: 18.2.0
       remark-parse: 10.0.2
       remark-rehype: 10.1.0
@@ -8453,23 +8453,23 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  react-router-dom@7.4.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
+  react-router-dom@7.4.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
     dependencies:
-      react: 19.0.0
-      react-dom: 19.0.0(react@19.0.0)
-      react-router: 7.4.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      react: 19.1.0
+      react-dom: 19.1.0(react@19.1.0)
+      react-router: 7.4.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
 
-  react-router@7.4.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
+  react-router@7.4.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
     dependencies:
       '@types/cookie': 0.6.0
       cookie: 1.0.2
-      react: 19.0.0
+      react: 19.1.0
       set-cookie-parser: 2.7.1
       turbo-stream: 2.4.0
     optionalDependencies:
-      react-dom: 19.0.0(react@19.0.0)
+      react-dom: 19.1.0(react@19.1.0)
 
-  react@19.0.0: {}
+  react@19.1.0: {}
 
   read-binary-file-arch@1.0.6:
     dependencies:
@@ -8619,7 +8619,7 @@ snapshots:
     dependencies:
       xmlchars: 2.2.0
 
-  scheduler@0.25.0: {}
+  scheduler@0.26.0: {}
 
   schema-utils@4.2.0:
     dependencies:
@@ -8778,7 +8778,7 @@ snapshots:
     dependencies:
       inline-style-parser: 0.1.1
 
-  styled-components@6.1.16(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
+  styled-components@6.1.16(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
     dependencies:
       '@emotion/is-prop-valid': 1.2.2
       '@emotion/unitless': 0.8.1
@@ -8786,8 +8786,8 @@ snapshots:
       css-to-react-native: 3.2.0
       csstype: 3.1.3
       postcss: 8.4.49
-      react: 19.0.0
-      react-dom: 19.0.0(react@19.0.0)
+      react: 19.1.0
+      react-dom: 19.1.0(react@19.1.0)
       shallowequal: 1.1.0
       stylis: 4.3.2
       tslib: 2.6.2
