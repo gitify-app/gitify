@@ -17,7 +17,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
       data-wrap="nowrap"
     >
       <button
-        aria-describedby=":r0:-loading-announcement"
+        aria-describedby="«r0»-loading-announcement"
         aria-labelledby="Go Back"
         class="types__StyledButton-sc-ws60qy-0 fLllbW"
         data-component="IconButton"
@@ -2012,11 +2012,11 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
       <span
         aria-label="Clear all filters"
         class="Tooltip__TooltipBase-sc-17tf59c-0 kTDLcS tooltipped-n"
-        id=":r1:"
+        id="«r1»"
         role="tooltip"
       >
         <button
-          aria-describedby=":r2:-loading-announcement"
+          aria-describedby="«r2»-loading-announcement"
           class="types__StyledButton-sc-ws60qy-0 AwKAJ"
           data-loading="false"
           data-testid="filters-clear"

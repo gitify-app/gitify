@@ -17,7 +17,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
       data-wrap="nowrap"
     >
       <button
-        aria-describedby=":r0:-loading-announcement"
+        aria-describedby="«r0»-loading-announcement"
         aria-labelledby="Go Back"
         class="types__StyledButton-sc-ws60qy-0 fLllbW"
         data-component="IconButton"
@@ -268,7 +268,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               class="ButtonGroup-sc-1gxhls1-0 hzEnfM ml-2"
             >
               <button
-                aria-describedby=":r1:-loading-announcement"
+                aria-describedby="«r1»-loading-announcement"
                 aria-label="Zoom out"
                 class="types__StyledButton-sc-ws60qy-0 AwKAJ"
                 data-component="IconButton"
@@ -297,7 +297,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                 </svg>
               </button>
               <button
-                aria-describedby=":r2:-loading-announcement"
+                aria-describedby="«r2»-loading-announcement"
                 aria-label="Zoom percentage"
                 class="types__StyledButton-sc-ws60qy-0 AwKAJ"
                 data-loading="false"
@@ -321,7 +321,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                 </span>
               </button>
               <button
-                aria-describedby=":r3:-loading-announcement"
+                aria-describedby="«r3»-loading-announcement"
                 aria-label="Zoom in"
                 class="types__StyledButton-sc-ws60qy-0 AwKAJ"
                 data-component="IconButton"
@@ -350,7 +350,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                 </svg>
               </button>
               <button
-                aria-describedby=":r4:-loading-announcement"
+                aria-describedby="«r4»-loading-announcement"
                 aria-label="Reset zoom"
                 class="types__StyledButton-sc-ws60qy-0 eowWPI"
                 data-component="IconButton"
@@ -1228,7 +1228,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
         data-wrap="nowrap"
       >
         <button
-          aria-describedby=":r5:-loading-announcement"
+          aria-describedby="«r5»-loading-announcement"
           class="types__StyledButton-sc-ws60qy-0 eeDlTN"
           data-loading="false"
           data-no-visuals="true"
@@ -1273,11 +1273,11 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
         <span
           aria-label="View release notes"
           class="Tooltip__TooltipBase-sc-17tf59c-0 kTDLcS tooltipped-n"
-          id=":r6:"
+          id="«r6»"
           role="tooltip"
         >
           <button
-            aria-describedby=":r7:-loading-announcement"
+            aria-describedby="«r7»-loading-announcement"
             class="types__StyledButton-sc-ws60qy-0 AwKAJ"
             data-loading="false"
             data-no-visuals="true"
@@ -1313,11 +1313,11 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
         <span
           aria-label="Accounts"
           class="Tooltip__TooltipBase-sc-17tf59c-0 kTDLcS tooltipped-n"
-          id=":r8:"
+          id="«r8»"
           role="tooltip"
         >
           <button
-            aria-describedby=":r9:-loading-announcement"
+            aria-describedby="«r9»-loading-announcement"
             aria-label="Accounts"
             class="types__StyledButton-sc-ws60qy-0 AwKAJ"
             data-component="IconButton"
@@ -1348,11 +1348,11 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
         <span
           aria-label="Quit Gitify"
           class="Tooltip__TooltipBase-sc-17tf59c-0 kTDLcS tooltipped-nw"
-          id=":ra:"
+          id="«ra»"
           role="tooltip"
         >
           <button
-            aria-describedby=":rb:-loading-announcement"
+            aria-describedby="«rb»-loading-announcement"
             aria-label="Quit Gitify"
             class="types__StyledButton-sc-ws60qy-0 eowWPI"
             data-component="IconButton"

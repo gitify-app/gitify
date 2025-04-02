@@ -21,7 +21,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
           <span
             aria-label="Open Issue"
             class="Tooltip__TooltipBase-sc-17tf59c-0 kTDLcS tooltipped-e"
-            id=":r0:"
+            id="«r0»"
             role="tooltip"
           >
             <svg
@@ -272,7 +272,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             data-wrap="nowrap"
           >
             <button
-              aria-describedby=":r1:-loading-announcement"
+              aria-describedby="«r1»-loading-announcement"
               aria-label="Mark as done"
               class="types__StyledButton-sc-ws60qy-0 fLllbW"
               data-component="IconButton"
@@ -302,7 +302,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               </svg>
             </button>
             <button
-              aria-describedby=":r2:-loading-announcement"
+              aria-describedby="«r2»-loading-announcement"
               aria-label="Mark as read"
               class="types__StyledButton-sc-ws60qy-0 fLllbW"
               data-component="IconButton"
@@ -332,7 +332,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               </svg>
             </button>
             <button
-              aria-describedby=":r3:-loading-announcement"
+              aria-describedby="«r3»-loading-announcement"
               aria-label="Unsubscribe from thread"
               class="types__StyledButton-sc-ws60qy-0 fLllbW"
               data-component="IconButton"
@@ -383,7 +383,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
         <span
           aria-label="Open Issue"
           class="Tooltip__TooltipBase-sc-17tf59c-0 kTDLcS tooltipped-e"
-          id=":r0:"
+          id="«r0»"
           role="tooltip"
         >
           <svg
@@ -634,7 +634,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
           data-wrap="nowrap"
         >
           <button
-            aria-describedby=":r1:-loading-announcement"
+            aria-describedby="«r1»-loading-announcement"
             aria-label="Mark as done"
             class="types__StyledButton-sc-ws60qy-0 fLllbW"
             data-component="IconButton"
@@ -664,7 +664,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             </svg>
           </button>
           <button
-            aria-describedby=":r2:-loading-announcement"
+            aria-describedby="«r2»-loading-announcement"
             aria-label="Mark as read"
             class="types__StyledButton-sc-ws60qy-0 fLllbW"
             data-component="IconButton"
@@ -694,7 +694,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             </svg>
           </button>
           <button
-            aria-describedby=":r3:-loading-announcement"
+            aria-describedby="«r3»-loading-announcement"
             aria-label="Unsubscribe from thread"
             class="types__StyledButton-sc-ws60qy-0 fLllbW"
             data-component="IconButton"
@@ -802,7 +802,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
           <span
             aria-label="Open Issue"
             class="Tooltip__TooltipBase-sc-17tf59c-0 kTDLcS tooltipped-e"
-            id=":r4:"
+            id="«r4»"
             role="tooltip"
           >
             <svg
@@ -1002,7 +1002,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             data-wrap="nowrap"
           >
             <button
-              aria-describedby=":r5:-loading-announcement"
+              aria-describedby="«r5»-loading-announcement"
               aria-label="Mark as done"
               class="types__StyledButton-sc-ws60qy-0 fLllbW"
               data-component="IconButton"
@@ -1032,7 +1032,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               </svg>
             </button>
             <button
-              aria-describedby=":r6:-loading-announcement"
+              aria-describedby="«r6»-loading-announcement"
               aria-label="Mark as read"
               class="types__StyledButton-sc-ws60qy-0 fLllbW"
               data-component="IconButton"
@@ -1062,7 +1062,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               </svg>
             </button>
             <button
-              aria-describedby=":r7:-loading-announcement"
+              aria-describedby="«r7»-loading-announcement"
               aria-label="Unsubscribe from thread"
               class="types__StyledButton-sc-ws60qy-0 fLllbW"
               data-component="IconButton"
@@ -1113,7 +1113,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
         <span
           aria-label="Open Issue"
           class="Tooltip__TooltipBase-sc-17tf59c-0 kTDLcS tooltipped-e"
-          id=":r4:"
+          id="«r4»"
           role="tooltip"
         >
           <svg
@@ -1313,7 +1313,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
           data-wrap="nowrap"
         >
           <button
-            aria-describedby=":r5:-loading-announcement"
+            aria-describedby="«r5»-loading-announcement"
             aria-label="Mark as done"
             class="types__StyledButton-sc-ws60qy-0 fLllbW"
             data-component="IconButton"
@@ -1343,7 +1343,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             </svg>
           </button>
           <button
-            aria-describedby=":r6:-loading-announcement"
+            aria-describedby="«r6»-loading-announcement"
             aria-label="Mark as read"
             class="types__StyledButton-sc-ws60qy-0 fLllbW"
             data-component="IconButton"
@@ -1373,7 +1373,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             </svg>
           </button>
           <button
-            aria-describedby=":r7:-loading-announcement"
+            aria-describedby="«r7»-loading-announcement"
             aria-label="Unsubscribe from thread"
             class="types__StyledButton-sc-ws60qy-0 fLllbW"
             data-component="IconButton"
@@ -1481,7 +1481,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
           <span
             aria-label="Open Issue"
             class="Tooltip__TooltipBase-sc-17tf59c-0 kTDLcS tooltipped-e"
-            id=":r8:"
+            id="«r8»"
             role="tooltip"
           >
             <svg
@@ -1681,7 +1681,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             data-wrap="nowrap"
           >
             <button
-              aria-describedby=":r9:-loading-announcement"
+              aria-describedby="«r9»-loading-announcement"
               aria-label="Mark as done"
               class="types__StyledButton-sc-ws60qy-0 fLllbW"
               data-component="IconButton"
@@ -1711,7 +1711,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               </svg>
             </button>
             <button
-              aria-describedby=":ra:-loading-announcement"
+              aria-describedby="«ra»-loading-announcement"
               aria-label="Mark as read"
               class="types__StyledButton-sc-ws60qy-0 fLllbW"
               data-component="IconButton"
@@ -1741,7 +1741,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               </svg>
             </button>
             <button
-              aria-describedby=":rb:-loading-announcement"
+              aria-describedby="«rb»-loading-announcement"
               aria-label="Unsubscribe from thread"
               class="types__StyledButton-sc-ws60qy-0 fLllbW"
               data-component="IconButton"
@@ -1792,7 +1792,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
         <span
           aria-label="Open Issue"
           class="Tooltip__TooltipBase-sc-17tf59c-0 kTDLcS tooltipped-e"
-          id=":r8:"
+          id="«r8»"
           role="tooltip"
         >
           <svg
@@ -1992,7 +1992,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
           data-wrap="nowrap"
         >
           <button
-            aria-describedby=":r9:-loading-announcement"
+            aria-describedby="«r9»-loading-announcement"
             aria-label="Mark as done"
             class="types__StyledButton-sc-ws60qy-0 fLllbW"
             data-component="IconButton"
@@ -2022,7 +2022,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             </svg>
           </button>
           <button
-            aria-describedby=":ra:-loading-announcement"
+            aria-describedby="«ra»-loading-announcement"
             aria-label="Mark as read"
             class="types__StyledButton-sc-ws60qy-0 fLllbW"
             data-component="IconButton"
@@ -2052,7 +2052,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             </svg>
           </button>
           <button
-            aria-describedby=":rb:-loading-announcement"
+            aria-describedby="«rb»-loading-announcement"
             aria-label="Unsubscribe from thread"
             class="types__StyledButton-sc-ws60qy-0 fLllbW"
             data-component="IconButton"

@@ -102,7 +102,7 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
               Login with
             </span>
             <button
-              aria-describedby=":r0:-loading-announcement"
+              aria-describedby="«r0»-loading-announcement"
               class="types__StyledButton-sc-ws60qy-0 gZebIL"
               data-loading="false"
               data-testid="login-github"
@@ -144,7 +144,7 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
               </span>
             </button>
             <button
-              aria-describedby=":r1:-loading-announcement"
+              aria-describedby="«r1»-loading-announcement"
               class="types__StyledButton-sc-ws60qy-0 AwKAJ"
               data-loading="false"
               data-testid="login-pat"
@@ -186,7 +186,7 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
               </span>
             </button>
             <button
-              aria-describedby=":r2:-loading-announcement"
+              aria-describedby="«r2»-loading-announcement"
               class="types__StyledButton-sc-ws60qy-0 AwKAJ"
               data-loading="false"
               data-testid="login-oauth-app"
@@ -330,7 +330,7 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
             Login with
           </span>
           <button
-            aria-describedby=":r0:-loading-announcement"
+            aria-describedby="«r0»-loading-announcement"
             class="types__StyledButton-sc-ws60qy-0 gZebIL"
             data-loading="false"
             data-testid="login-github"
@@ -372,7 +372,7 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
             </span>
           </button>
           <button
-            aria-describedby=":r1:-loading-announcement"
+            aria-describedby="«r1»-loading-announcement"
             class="types__StyledButton-sc-ws60qy-0 AwKAJ"
             data-loading="false"
             data-testid="login-pat"
@@ -414,7 +414,7 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
             </span>
           </button>
           <button
-            aria-describedby=":r2:-loading-announcement"
+            aria-describedby="«r2»-loading-announcement"
             class="types__StyledButton-sc-ws60qy-0 AwKAJ"
             data-loading="false"
             data-testid="login-oauth-app"

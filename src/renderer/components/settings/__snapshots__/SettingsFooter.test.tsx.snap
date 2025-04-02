@@ -2,7 +2,7 @@
 
 exports[`renderer/components/settings/SettingsFooter.tsx app version should show development app version 1`] = `
 <button
-  aria-describedby=":r7:-loading-announcement"
+  aria-describedby="«r7»-loading-announcement"
   class="types__StyledButton-sc-ws60qy-0 AwKAJ"
   data-loading="false"
   data-no-visuals="true"
@@ -28,7 +28,7 @@ exports[`renderer/components/settings/SettingsFooter.tsx app version should show
 
 exports[`renderer/components/settings/SettingsFooter.tsx app version should show production app version 1`] = `
 <button
-  aria-describedby=":r1:-loading-announcement"
+  aria-describedby="«r1»-loading-announcement"
   class="types__StyledButton-sc-ws60qy-0 gDNLUi"
   data-loading="false"
   data-no-visuals="true"

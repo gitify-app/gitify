@@ -21,7 +21,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
             data-wrap="nowrap"
           >
             <button
-              aria-describedby=":r0:-loading-announcement"
+              aria-describedby="«r0»-loading-announcement"
               aria-labelledby="Go Back"
               class="types__StyledButton-sc-ws60qy-0 fLllbW"
               data-component="IconButton"
@@ -110,7 +110,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
             >
               <label
                 class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 cydaRs"
-                for=":r1:"
+                for="«r1»"
                 sx="[object Object]"
               >
                 <span
@@ -134,13 +134,13 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                 sx="[object Object]"
               >
                 <input
-                  aria-describedby=":r1:-caption"
+                  aria-describedby="«r1»-caption"
                   aria-invalid="false"
                   aria-required="true"
                   class="UnstyledTextInput-sc-14ypya-0 kxfjQe"
                   data-component="input"
                   data-testid="login-hostname"
-                  id=":r1:"
+                  id="«r1»"
                   name="hostname"
                   placeholder="github.com"
                   type="text"
@@ -152,7 +152,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                 color="fg.muted"
                 display="block"
                 font-size="0"
-                id=":r1:-caption"
+                id="«r1»-caption"
               >
                 <i
                   class="Text-sc-17v1xeu-0 druJoj"
@@ -171,7 +171,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
               data-wrap="nowrap"
             >
               <button
-                aria-describedby=":r2:-loading-announcement"
+                aria-describedby="«r2»-loading-announcement"
                 class="types__StyledButton-sc-ws60qy-0 AwKAJ"
                 data-loading="false"
                 data-size="small"
@@ -234,7 +234,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
             >
               <label
                 class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 cydaRs"
-                for=":r3:"
+                for="«r3»"
                 sx="[object Object]"
               >
                 <span
@@ -264,7 +264,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                   class="UnstyledTextInput-sc-14ypya-0 kxfjQe"
                   data-component="input"
                   data-testid="login-clientId"
-                  id=":r3:"
+                  id="«r3»"
                   name="clientId"
                   placeholder="Your generated client id (20 characters)"
                   type="text"
@@ -281,7 +281,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
             >
               <label
                 class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 cydaRs"
-                for=":r4:"
+                for="«r4»"
                 sx="[object Object]"
               >
                 <span
@@ -311,7 +311,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                   class="UnstyledTextInput-sc-14ypya-0 kxfjQe"
                   data-component="input"
                   data-testid="login-clientSecret"
-                  id=":r4:"
+                  id="«r4»"
                   name="clientSecret"
                   placeholder="Your generated client secret (40 characters)"
                   type="password"
@@ -324,8 +324,8 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                   marginright="1"
                 >
                   <button
-                    aria-describedby=":r6:-loading-announcement"
-                    aria-labelledby=":r5:"
+                    aria-describedby="«r6»-loading-announcement"
+                    aria-labelledby="«r5»"
                     class="types__StyledButton-sc-ws60qy-0 kNBiPy"
                     data-component="IconButton"
                     data-loading="false"
@@ -355,7 +355,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                     aria-hidden="true"
                     class="Tooltip__StyledTooltip-sc-e45c7z-0 bnoNfJ"
                     data-direction="s"
-                    id=":r5:"
+                    id="«r5»"
                     popover="auto"
                   >
                     Show token
@@ -379,11 +379,11 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
             <span
               aria-label="GitHub documentation"
               class="Tooltip__TooltipBase-sc-17tf59c-0 kTDLcS tooltipped-n"
-              id=":r7:"
+              id="«r7»"
               role="tooltip"
             >
               <button
-                aria-describedby=":r8:-loading-announcement"
+                aria-describedby="«r8»-loading-announcement"
                 class="types__StyledButton-sc-ws60qy-0 AwKAJ"
                 data-loading="false"
                 data-size="small"
@@ -432,7 +432,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
               sx="[object Object]"
             >
               <button
-                aria-describedby=":r9:-loading-announcement"
+                aria-describedby="«r9»-loading-announcement"
                 class="types__StyledButton-sc-ws60qy-0 gZebIL"
                 data-loading="false"
                 data-testid="login-submit"
@@ -496,7 +496,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
           data-wrap="nowrap"
         >
           <button
-            aria-describedby=":r0:-loading-announcement"
+            aria-describedby="«r0»-loading-announcement"
             aria-labelledby="Go Back"
             class="types__StyledButton-sc-ws60qy-0 fLllbW"
             data-component="IconButton"
@@ -585,7 +585,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
           >
             <label
               class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 cydaRs"
-              for=":r1:"
+              for="«r1»"
               sx="[object Object]"
             >
               <span
@@ -609,13 +609,13 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
               sx="[object Object]"
             >
               <input
-                aria-describedby=":r1:-caption"
+                aria-describedby="«r1»-caption"
                 aria-invalid="false"
                 aria-required="true"
                 class="UnstyledTextInput-sc-14ypya-0 kxfjQe"
                 data-component="input"
                 data-testid="login-hostname"
-                id=":r1:"
+                id="«r1»"
                 name="hostname"
                 placeholder="github.com"
                 type="text"
@@ -627,7 +627,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
               color="fg.muted"
               display="block"
               font-size="0"
-              id=":r1:-caption"
+              id="«r1»-caption"
             >
               <i
                 class="Text-sc-17v1xeu-0 druJoj"
@@ -646,7 +646,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
             data-wrap="nowrap"
           >
             <button
-              aria-describedby=":r2:-loading-announcement"
+              aria-describedby="«r2»-loading-announcement"
               class="types__StyledButton-sc-ws60qy-0 AwKAJ"
               data-loading="false"
               data-size="small"
@@ -709,7 +709,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
           >
             <label
               class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 cydaRs"
-              for=":r3:"
+              for="«r3»"
               sx="[object Object]"
             >
               <span
@@ -739,7 +739,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                 class="UnstyledTextInput-sc-14ypya-0 kxfjQe"
                 data-component="input"
                 data-testid="login-clientId"
-                id=":r3:"
+                id="«r3»"
                 name="clientId"
                 placeholder="Your generated client id (20 characters)"
                 type="text"
@@ -756,7 +756,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
           >
             <label
               class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 cydaRs"
-              for=":r4:"
+              for="«r4»"
               sx="[object Object]"
             >
               <span
@@ -786,7 +786,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                 class="UnstyledTextInput-sc-14ypya-0 kxfjQe"
                 data-component="input"
                 data-testid="login-clientSecret"
-                id=":r4:"
+                id="«r4»"
                 name="clientSecret"
                 placeholder="Your generated client secret (40 characters)"
                 type="password"
@@ -799,8 +799,8 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                 marginright="1"
               >
                 <button
-                  aria-describedby=":r6:-loading-announcement"
-                  aria-labelledby=":r5:"
+                  aria-describedby="«r6»-loading-announcement"
+                  aria-labelledby="«r5»"
                   class="types__StyledButton-sc-ws60qy-0 kNBiPy"
                   data-component="IconButton"
                   data-loading="false"
@@ -830,7 +830,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                   aria-hidden="true"
                   class="Tooltip__StyledTooltip-sc-e45c7z-0 bnoNfJ"
                   data-direction="s"
-                  id=":r5:"
+                  id="«r5»"
                   popover="auto"
                 >
                   Show token
@@ -854,11 +854,11 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
           <span
             aria-label="GitHub documentation"
             class="Tooltip__TooltipBase-sc-17tf59c-0 kTDLcS tooltipped-n"
-            id=":r7:"
+            id="«r7»"
             role="tooltip"
           >
             <button
-              aria-describedby=":r8:-loading-announcement"
+              aria-describedby="«r8»-loading-announcement"
               class="types__StyledButton-sc-ws60qy-0 AwKAJ"
               data-loading="false"
               data-size="small"
@@ -907,7 +907,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
             sx="[object Object]"
           >
             <button
-              aria-describedby=":r9:-loading-announcement"
+              aria-describedby="«r9»-loading-announcement"
               class="types__StyledButton-sc-ws60qy-0 gZebIL"
               data-loading="false"
               data-testid="login-submit"

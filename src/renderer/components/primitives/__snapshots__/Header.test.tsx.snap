@@ -17,7 +17,7 @@ exports[`renderer/components/primitives/Header.tsx should render itself & its ch
           data-wrap="nowrap"
         >
           <button
-            aria-describedby=":r0:-loading-announcement"
+            aria-describedby="«r0»-loading-announcement"
             aria-labelledby="Go Back"
             class="types__StyledButton-sc-ws60qy-0 fLllbW"
             data-component="IconButton"
@@ -100,7 +100,7 @@ exports[`renderer/components/primitives/Header.tsx should render itself & its ch
         data-wrap="nowrap"
       >
         <button
-          aria-describedby=":r0:-loading-announcement"
+          aria-describedby="«r0»-loading-announcement"
           aria-labelledby="Go Back"
           class="types__StyledButton-sc-ws60qy-0 fLllbW"
           data-component="IconButton"
