@@ -9,7 +9,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
         id="filter-user-types"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 iqrTOO"
+          class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
           data-align="baseline"
           data-direction="horizontal"
           data-gap="condensed"
@@ -22,7 +22,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
               class="Box-sc-g0xbh4-0 mb-2"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 iqrTOO"
+                class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -48,7 +48,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
                   />
                 </svg>
                 <h2
-                  class="Heading__StyledHeading-sc-1c1dgg0-0 fcWqmq"
+                  class="Heading__StyledHeading-sc-1c1dgg0-0 Nyvxf"
                   sx="[object Object]"
                 >
                   User Type
@@ -81,7 +81,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
           </div>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 iqrTOO"
+          class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
           data-align="stretch"
           data-direction="horizontal"
           data-gap="normal"
@@ -90,7 +90,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
           data-wrap="nowrap"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 iqrTOO text-sm"
+            class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv text-sm"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -111,13 +111,13 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
               User
             </label>
             <span
-              class="Text-sc-17v1xeu-0 druJoj px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="Text-sc-17v1xeu-0 gfWGMy px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
             >
               1
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 iqrTOO text-sm"
+            class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv text-sm"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -161,13 +161,13 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
               </svg>
             </div>
             <span
-              class="Text-sc-17v1xeu-0 druJoj px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="Text-sc-17v1xeu-0 gfWGMy px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 iqrTOO text-sm"
+            class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv text-sm"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -188,7 +188,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
               Organization
             </label>
             <span
-              class="Text-sc-17v1xeu-0 druJoj px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="Text-sc-17v1xeu-0 gfWGMy px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
             >
               0
             </span>
@@ -202,7 +202,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
       id="filter-user-types"
     >
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 iqrTOO"
+        class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
         data-align="baseline"
         data-direction="horizontal"
         data-gap="condensed"
@@ -215,7 +215,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
             class="Box-sc-g0xbh4-0 mb-2"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 iqrTOO"
+              class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -241,7 +241,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
                 />
               </svg>
               <h2
-                class="Heading__StyledHeading-sc-1c1dgg0-0 fcWqmq"
+                class="Heading__StyledHeading-sc-1c1dgg0-0 Nyvxf"
                 sx="[object Object]"
               >
                 User Type
@@ -274,7 +274,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
         </div>
       </div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 iqrTOO"
+        class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
         data-align="stretch"
         data-direction="horizontal"
         data-gap="normal"
@@ -283,7 +283,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
         data-wrap="nowrap"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 iqrTOO text-sm"
+          class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv text-sm"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -304,13 +304,13 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
             User
           </label>
           <span
-            class="Text-sc-17v1xeu-0 druJoj px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            class="Text-sc-17v1xeu-0 gfWGMy px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
           >
             1
           </span>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 iqrTOO text-sm"
+          class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv text-sm"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -354,13 +354,13 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
             </svg>
           </div>
           <span
-            class="Text-sc-17v1xeu-0 druJoj px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            class="Text-sc-17v1xeu-0 gfWGMy px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
           >
             0
           </span>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 iqrTOO text-sm"
+          class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv text-sm"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -381,7 +381,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
             Organization
           </label>
           <span
-            class="Text-sc-17v1xeu-0 druJoj px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            class="Text-sc-17v1xeu-0 gfWGMy px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
           >
             0
           </span>
