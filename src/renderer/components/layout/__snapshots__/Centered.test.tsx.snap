@@ -6,7 +6,7 @@ exports[`renderer/components/layout/Centered.tsx should render itself & its chil
   "baseElement": <body>
     <div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 iqrTOO"
+        class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
         data-align="center"
         data-direction="vertical"
         data-justify="center"
@@ -19,7 +19,7 @@ exports[`renderer/components/layout/Centered.tsx should render itself & its chil
   </body>,
   "container": <div>
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 iqrTOO"
+      class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
       data-align="center"
       data-direction="vertical"
       data-justify="center"
@@ -89,7 +89,7 @@ exports[`renderer/components/layout/Centered.tsx should render itself & its chil
   "baseElement": <body>
     <div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 iqrTOO h-screen"
+        class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv h-screen"
         data-align="center"
         data-direction="vertical"
         data-justify="center"
@@ -102,7 +102,7 @@ exports[`renderer/components/layout/Centered.tsx should render itself & its chil
   </body>,
   "container": <div>
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 iqrTOO h-screen"
+      class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv h-screen"
       data-align="center"
       data-direction="vertical"
       data-justify="center"
