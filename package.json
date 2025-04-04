@@ -79,7 +79,7 @@
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
     "@discordapp/twemoji": "15.1.0",
-    "@electron/notarize": "2.5.0",
+    "@electron/notarize": "3.0.1",
     "@primer/octicons-react": "19.15.1",
     "@primer/primitives": "10.5.0",
     "@primer/react": "36.27.0",
@@ -99,7 +99,7 @@
     "css-minimizer-webpack-plugin": "7.0.2",
     "date-fns": "4.1.0",
     "electron": "35.1.2",
-    "electron-builder": "26.0.12",
+    "electron-builder": "25.1.8",
     "final-form": "4.20.10",
     "graphql-tag": "2.12.6",
     "html-webpack-plugin": "5.6.3",
