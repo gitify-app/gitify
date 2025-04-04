@@ -50,7 +50,7 @@ importers:
         version: 10.5.0
       '@primer/react':
         specifier: 36.27.0
-        version: 36.27.0(@types/react-dom@19.1.1(@types/react@19.1.0))(@types/react@19.1.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(styled-components@6.1.16(react-dom@19.1.0(react@19.1.0))(react@19.1.0))
+        version: 36.27.0(@types/react-dom@19.1.1(@types/react@19.1.0))(@types/react@19.1.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(styled-components@6.1.17(react-dom@19.1.0(react@19.1.0))(react@19.1.0))
       '@tailwindcss/postcss':
         specifier: 4.1.1
         version: 4.1.1
@@ -139,8 +139,8 @@ importers:
         specifier: 7.7.1
         version: 7.7.1
       styled-components:
-        specifier: 6.1.16
-        version: 6.1.16(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        specifier: 6.1.17
+        version: 6.1.17(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       tailwind-merge:
         specifier: 3.1.0
         version: 3.1.0
@@ -3936,8 +3936,8 @@ packages:
   style-to-object@0.4.4:
     resolution: {integrity: sha512-HYNoHZa2GorYNyqiCaBgsxvcJIn7OHq6inEga+E6Ke3m5JkoqpQbnFssk4jwe+K7AhGa2fcha4wSOf1Kn01dMg==}
 
-  styled-components@6.1.16:
-    resolution: {integrity: sha512-KpWB6ORAWGmbWM10cDJfEV6sXc/uVkkkQV3SLwTNQ/E/PqWgNHIoMSLh1Lnk2FkB9+JHK7uuMq1i+9ArxDD7iQ==}
+  styled-components@6.1.17:
+    resolution: {integrity: sha512-97D7DwWanI7nN24v0D4SvbfjLE9656umNSJZkBkDIWL37aZqG/wRQ+Y9pWtXyBIM/NSfcBzHLErEsqHmJNSVUg==}
     engines: {node: '>= 16'}
     peerDependencies:
       react: '>= 16.8.0'
@@ -4676,7 +4676,7 @@ snapshots:
 
   '@electron/notarize@2.2.1':
     dependencies:
-      debug: 4.3.4
+      debug: 4.4.0
       fs-extra: 9.1.0
       promise-retry: 2.0.1
     transitivePeerDependencies:
@@ -4700,7 +4700,7 @@ snapshots:
   '@electron/osx-sign@1.0.5':
     dependencies:
       compare-version: 0.1.2
-      debug: 4.3.4
+      debug: 4.4.0
       fs-extra: 10.1.0
       isbinaryfile: 4.0.10
       minimist: 1.2.8
@@ -4747,7 +4747,7 @@ snapshots:
     dependencies:
       '@electron/asar': 3.2.18
       '@malept/cross-spawn-promise': 1.1.1
-      debug: 4.3.4
+      debug: 4.4.0
       dir-compare: 3.3.0
       fs-extra: 9.1.0
       minimatch: 3.1.2
@@ -5045,7 +5045,7 @@ snapshots:
 
   '@primer/primitives@7.17.1': {}
 
-  '@primer/react@36.27.0(@types/react-dom@19.1.1(@types/react@19.1.0))(@types/react@19.1.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(styled-components@6.1.16(react-dom@19.1.0(react@19.1.0))(react@19.1.0))':
+  '@primer/react@36.27.0(@types/react-dom@19.1.1(@types/react@19.1.0))(@types/react@19.1.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(styled-components@6.1.17(react-dom@19.1.0(react@19.1.0))(react@19.1.0))':
     dependencies:
       '@github/combobox-nav': 2.3.1
       '@github/markdown-toolbar-element': 2.2.3
@@ -5078,7 +5078,7 @@ snapshots:
       react-intersection-observer: 9.13.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       react-is: 18.2.0
       react-markdown: 8.0.7(@types/react@19.1.0)(react@19.1.0)
-      styled-components: 6.1.16(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      styled-components: 6.1.17(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       styled-system: 5.1.5
     optionalDependencies:
       '@types/react': 19.1.0
@@ -5632,7 +5632,7 @@ snapshots:
       builder-util: 24.13.1
       builder-util-runtime: 9.2.4
       chromium-pickle-js: 0.2.0
-      debug: 4.3.4
+      debug: 4.4.0
       dmg-builder: 25.1.8(electron-builder-squirrel-windows@24.13.3)
       ejs: 3.1.10
       electron-builder-squirrel-windows: 24.13.3(dmg-builder@25.1.8)
@@ -5893,7 +5893,7 @@ snapshots:
 
   builder-util-runtime@9.2.4:
     dependencies:
-      debug: 4.3.4
+      debug: 4.4.0
       sax: 1.3.0
     transitivePeerDependencies:
       - supports-color
@@ -5914,7 +5914,7 @@ snapshots:
       builder-util-runtime: 9.2.4
       chalk: 4.1.2
       cross-spawn: 7.0.6
-      debug: 4.3.4
+      debug: 4.4.0
       fs-extra: 10.1.0
       http-proxy-agent: 5.0.0
       https-proxy-agent: 5.0.1
@@ -8862,7 +8862,7 @@ snapshots:
     dependencies:
       inline-style-parser: 0.1.1
 
-  styled-components@6.1.16(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
+  styled-components@6.1.17(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
     dependencies:
       '@emotion/is-prop-valid': 1.2.2
       '@emotion/unitless': 0.8.1
