@@ -73,7 +73,7 @@
     "menubar": "9.5.1",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "react-router-dom": "7.4.1",
+    "react-router-dom": "7.5.0",
     "update-electron-app": "3.1.1"
   },
   "devDependencies": {
