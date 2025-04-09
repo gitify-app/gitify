@@ -88,7 +88,7 @@
     "@types/jest": "29.5.14",
     "@types/node": "22.14.0",
     "@types/react": "19.1.0",
-    "@types/react-dom": "19.1.1",
+    "@types/react-dom": "19.1.2",
     "@types/react-router-dom": "5.3.3",
     "@types/semver": "7.7.0",
     "axios": "1.8.4",
