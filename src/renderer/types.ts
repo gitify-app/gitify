@@ -81,7 +81,6 @@ export interface NotificationSettingsState {
   markAsDoneOnOpen: boolean;
   markAsDoneOnUnsubscribe: boolean;
   delayNotificationState: boolean;
-  notificationVolume: number;
 }
 
 export interface SystemSettingsState {
@@ -92,6 +91,7 @@ export interface SystemSettingsState {
   useAlternateIdleIcon: boolean;
   playSound: boolean;
   openAtStartup: boolean;
+  notificationVolume: number;
 }
 
 export interface FilterSettingsState {

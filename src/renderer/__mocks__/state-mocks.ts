@@ -93,7 +93,6 @@ const mockNotificationSettings: NotificationSettingsState = {
   markAsDoneOnOpen: false,
   markAsDoneOnUnsubscribe: false,
   delayNotificationState: false,
-  notificationVolume: 20,
 };
 
 const mockSystemSettings: SystemSettingsState = {
@@ -104,6 +103,7 @@ const mockSystemSettings: SystemSettingsState = {
   playSound: true,
   useAlternateIdleIcon: false,
   openAtStartup: false,
+  notificationVolume: 20,
 };
 
 const mockFilters: FilterSettingsState = {

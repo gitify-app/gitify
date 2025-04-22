@@ -919,32 +919,6 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               </svg>
             </div>
           </div>
-          <div
-            alignitems="center"
-            class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
-            data-align="stretch"
-            data-direction="horizontal"
-            data-gap="condensed"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
-          >
-            <label
-              class="Text-sc-17v1xeu-0 gfWGMy"
-              for="notificationVolume"
-            >
-              Notification Volume:
-            </label>
-            <input
-              id="notificationVolume"
-              max="100"
-              min="0"
-              step="1"
-              style="width: 3rem; text-align: center; border: 1px solid #ccc; border-radius: 4px;"
-              type="number"
-              value="20"
-            />
-          </div>
         </div>
       </fieldset>
       <fieldset>
@@ -1185,6 +1159,137 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             data-padding="none"
             data-wrap="nowrap"
           >
+            <label
+              class="mr-3 font-medium cursor-pointer"
+              for="notificationVolume"
+            >
+              Notification volume:
+            </label>
+            <div
+              class="ButtonGroup-sc-1gxhls1-0 ePLgSl ml-2"
+            >
+              <button
+                aria-describedby="«r5»-loading-announcement"
+                aria-label="Volume down"
+                class="types__StyledButton-sc-ws60qy-0 QOGvM"
+                data-component="IconButton"
+                data-loading="false"
+                data-no-visuals="true"
+                data-size="small"
+                data-testid="settings-volume-down"
+                sx="[object Object]"
+                type="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="octicon octicon-dash"
+                  display="inline-block"
+                  fill="currentColor"
+                  focusable="false"
+                  height="16"
+                  overflow="visible"
+                  style="vertical-align: text-bottom;"
+                  viewBox="0 0 16 16"
+                  width="16"
+                >
+                  <path
+                    d="M2 7.75A.75.75 0 0 1 2.75 7h10a.75.75 0 0 1 0 1.5h-10A.75.75 0 0 1 2 7.75Z"
+                  />
+                </svg>
+              </button>
+              <button
+                aria-describedby="«r6»-loading-announcement"
+                aria-label="Volume percentage"
+                class="types__StyledButton-sc-ws60qy-0 QOGvM"
+                data-loading="false"
+                data-no-visuals="true"
+                data-size="small"
+                disabled=""
+                sx="[object Object]"
+                type="button"
+              >
+                <span
+                  class="Box-sc-g0xbh4-0 cNXQpH"
+                  data-component="buttonContent"
+                  sx="[object Object]"
+                >
+                  <span
+                    data-component="text"
+                  >
+                    20
+                    %
+                  </span>
+                </span>
+              </button>
+              <button
+                aria-describedby="«r7»-loading-announcement"
+                aria-label="Volume up"
+                class="types__StyledButton-sc-ws60qy-0 QOGvM"
+                data-component="IconButton"
+                data-loading="false"
+                data-no-visuals="true"
+                data-size="small"
+                data-testid="settings-volume-up"
+                sx="[object Object]"
+                type="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="octicon octicon-plus"
+                  display="inline-block"
+                  fill="currentColor"
+                  focusable="false"
+                  height="16"
+                  overflow="visible"
+                  style="vertical-align: text-bottom;"
+                  viewBox="0 0 16 16"
+                  width="16"
+                >
+                  <path
+                    d="M7.75 2a.75.75 0 0 1 .75.75V7h4.25a.75.75 0 0 1 0 1.5H8.5v4.25a.75.75 0 0 1-1.5 0V8.5H2.75a.75.75 0 0 1 0-1.5H7V2.75A.75.75 0 0 1 7.75 2Z"
+                  />
+                </svg>
+              </button>
+              <button
+                aria-describedby="«r8»-loading-announcement"
+                aria-label="Reset volume"
+                class="types__StyledButton-sc-ws60qy-0 gjscLt"
+                data-component="IconButton"
+                data-loading="false"
+                data-no-visuals="true"
+                data-size="small"
+                data-testid="settings-volume-reset"
+                sx="[object Object]"
+                type="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="octicon octicon-x-circle"
+                  display="inline-block"
+                  fill="currentColor"
+                  focusable="false"
+                  height="16"
+                  overflow="visible"
+                  style="vertical-align: text-bottom;"
+                  viewBox="0 0 16 16"
+                  width="16"
+                >
+                  <path
+                    d="M2.344 2.343h-.001a8 8 0 0 1 11.314 11.314A8.002 8.002 0 0 1 .234 10.089a8 8 0 0 1 2.11-7.746Zm1.06 10.253a6.5 6.5 0 1 0 9.108-9.275 6.5 6.5 0 0 0-9.108 9.275ZM6.03 4.97 8 6.94l1.97-1.97a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734L9.06 8l1.97 1.97a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L8 9.06l-1.97 1.97a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L6.94 8 4.97 6.03a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018Z"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div
+            class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv text-sm"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
             <input
               class="size-4 rounded-sm cursor-pointer"
               data-testid="checkbox-useAlternateIdleIcon"
@@ -1254,7 +1359,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
         data-wrap="nowrap"
       >
         <button
-          aria-describedby="«r5»-loading-announcement"
+          aria-describedby="«r9»-loading-announcement"
           class="types__StyledButton-sc-ws60qy-0 fZJSho"
           data-loading="false"
           data-no-visuals="true"
@@ -1299,11 +1404,11 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
         <span
           aria-label="View release notes"
           class="Tooltip__TooltipBase-sc-17tf59c-0 iTeBSL tooltipped-n"
-          id="«r6»"
+          id="«ra»"
           role="tooltip"
         >
           <button
-            aria-describedby="«r7»-loading-announcement"
+            aria-describedby="«rb»-loading-announcement"
             class="types__StyledButton-sc-ws60qy-0 QOGvM"
             data-loading="false"
             data-no-visuals="true"
@@ -1339,11 +1444,11 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
         <span
           aria-label="Accounts"
           class="Tooltip__TooltipBase-sc-17tf59c-0 iTeBSL tooltipped-n"
-          id="«r8»"
+          id="«rc»"
           role="tooltip"
         >
           <button
-            aria-describedby="«r9»-loading-announcement"
+            aria-describedby="«rd»-loading-announcement"
             aria-label="Accounts"
             class="types__StyledButton-sc-ws60qy-0 QOGvM"
             data-component="IconButton"
@@ -1374,11 +1479,11 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
         <span
           aria-label="Quit Gitify"
           class="Tooltip__TooltipBase-sc-17tf59c-0 iTeBSL tooltipped-nw"
-          id="«ra»"
+          id="«re»"
           role="tooltip"
         >
           <button
-            aria-describedby="«rb»-loading-announcement"
+            aria-describedby="«rf»-loading-announcement"
             aria-label="Quit Gitify"
             class="types__StyledButton-sc-ws60qy-0 gjscLt"
             data-component="IconButton"
