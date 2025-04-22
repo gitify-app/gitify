@@ -96,6 +96,7 @@ const defaultSystemSettings: SystemSettingsState = {
   notificationVolume: 20,
   useAlternateIdleIcon: false,
   openAtStartup: false,
+  notificationVolume: 20,
 };
 
 export const defaultFilters: FilterSettingsState = {
