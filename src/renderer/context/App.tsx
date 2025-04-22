@@ -85,7 +85,6 @@ const defaultNotificationSettings: NotificationSettingsState = {
   markAsDoneOnOpen: false,
   markAsDoneOnUnsubscribe: false,
   delayNotificationState: false,
-  notificationVolume: 20,
 };
 
 const defaultSystemSettings: SystemSettingsState = {
@@ -94,6 +93,7 @@ const defaultSystemSettings: SystemSettingsState = {
   showNotificationsCountInTray: true,
   showNotifications: true,
   playSound: true,
+  notificationVolume: 20,
   useAlternateIdleIcon: false,
   openAtStartup: false,
 };

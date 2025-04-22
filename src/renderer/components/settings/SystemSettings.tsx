@@ -18,7 +18,7 @@ import {
 
 import { APPLICATION } from '../../../shared/constants';
 import { isLinux, isMacOS } from '../../../shared/platform';
-import { AppContext } from '../../context/App';
+import { AppContext, defaultSettings } from '../../context/App';
 import { OpenPreference } from '../../types';
 import { Constants } from '../../utils/constants';
 import { Checkbox } from '../fields/Checkbox';
@@ -91,7 +91,7 @@ export const SystemSettings: FC = () => {
           onChange={(evt) => updateSetting('playSound', evt.target.checked)}
         />
 
-        {settings.playSound && (
+        <Box className="pl-6" hidden={!settings.playSound}>
           <Stack
             direction="horizontal"
             gap="condensed"
@@ -145,13 +145,16 @@ export const SystemSettings: FC = () => {
                 icon={XCircleIcon}
                 unsafeDisableTooltip={true}
                 onClick={() => {
-                  updateSetting('notificationVolume', 20);
+                  updateSetting(
+                    'notificationVolume',
+                    defaultSettings.notificationVolume,
+                  );
                 }}
                 data-testid="settings-volume-reset"
               />
             </ButtonGroup>
           </Stack>
-        )}
+        </Box>
 
         <Checkbox
           name="useAlternateIdleIcon"
