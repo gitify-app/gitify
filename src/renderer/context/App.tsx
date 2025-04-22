@@ -85,6 +85,7 @@ const defaultNotificationSettings: NotificationSettingsState = {
   markAsDoneOnOpen: false,
   markAsDoneOnUnsubscribe: false,
   delayNotificationState: false,
+  notificationVolume: 20,
 };
 
 const defaultSystemSettings: SystemSettingsState = {

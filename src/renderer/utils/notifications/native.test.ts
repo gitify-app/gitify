@@ -134,4 +134,33 @@ describe('renderer/utils/notifications/native.ts', () => {
       expect(window.Audio.prototype.play).toHaveBeenCalledTimes(1);
     });
   });
+
+  describe('triggerNativeNotifications', () => {
+    afterEach(() => {
+      jest.clearAllMocks();
+    });
+
+    it('should raise only sound notification with correct volume', () => {
+      const settings: SettingsState = {
+        ...defaultSettings,
+        playSound: true,
+        showNotifications: false,
+        notificationVolume: 80,
+      };
+
+      const raiseSoundNotificationMock = jest.spyOn(
+        native,
+        'raiseSoundNotification',
+      );
+      jest.spyOn(native, 'raiseNativeNotification');
+
+      native.triggerNativeNotifications([], mockAccountNotifications, {
+        auth: mockAuth,
+        settings,
+      });
+
+      expect(raiseSoundNotificationMock).toHaveBeenCalledWith(0.8);
+      expect(native.raiseNativeNotification).not.toHaveBeenCalled();
+    });
+  });
 });

@@ -246,6 +246,26 @@ export const NotificationSettings: FC = () => {
             </Text>
           }
         />
+
+        <Box>
+          <Text as="label" htmlFor="notificationVolume">
+            Notification Volume: {settings.notificationVolume}%
+          </Text>
+          <input
+            id="notificationVolume"
+            type="range"
+            min={0}
+            max={100}
+            step={1}
+            value={settings.notificationVolume}
+            onChange={(evt) =>
+              updateSetting(
+                'notificationVolume',
+                Number.parseInt(evt.target.value, 10),
+              )
+            }
+          />
+        </Box>
       </Stack>
     </fieldset>
   );

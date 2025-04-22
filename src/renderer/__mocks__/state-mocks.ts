@@ -93,6 +93,7 @@ const mockNotificationSettings: NotificationSettingsState = {
   markAsDoneOnOpen: false,
   markAsDoneOnUnsubscribe: false,
   delayNotificationState: false,
+  notificationVolume: 20,
 };
 
 const mockSystemSettings: SystemSettingsState = {
