@@ -1,7 +1,20 @@
 import { type FC, useContext } from 'react';
 
-import { DeviceDesktopIcon } from '@primer/octicons-react';
-import { Box, Stack, Text } from '@primer/react';
+import {
+  DashIcon,
+  DeviceDesktopIcon,
+  PlusIcon,
+  XCircleIcon,
+} from '@primer/octicons-react';
+
+import {
+  Box,
+  Button,
+  ButtonGroup,
+  IconButton,
+  Stack,
+  Text,
+} from '@primer/react';
 
 import { APPLICATION } from '../../../shared/constants';
 import { isLinux, isMacOS } from '../../../shared/platform';
@@ -9,6 +22,7 @@ import { AppContext } from '../../context/App';
 import { OpenPreference } from '../../types';
 import { Constants } from '../../utils/constants';
 import { Checkbox } from '../fields/Checkbox';
+import { FieldLabel } from '../fields/FieldLabel';
 import { RadioGroup } from '../fields/RadioGroup';
 import { Title } from '../primitives/Title';
 
@@ -76,6 +90,68 @@ export const SystemSettings: FC = () => {
           checked={settings.playSound}
           onChange={(evt) => updateSetting('playSound', evt.target.checked)}
         />
+
+        {settings.playSound && (
+          <Stack
+            direction="horizontal"
+            gap="condensed"
+            align="center"
+            className="text-sm"
+          >
+            <FieldLabel
+              name="notificationVolume"
+              label="Notification volume:"
+            />
+
+            <ButtonGroup className="ml-2">
+              <IconButton
+                aria-label="Volume down"
+                size="small"
+                icon={DashIcon}
+                unsafeDisableTooltip={true}
+                onClick={() => {
+                  const newVolume = Math.max(
+                    settings.notificationVolume - 10,
+                    0,
+                  );
+                  updateSetting('notificationVolume', newVolume);
+                }}
+                data-testid="settings-volume-down"
+              />
+
+              <Button aria-label="Volume percentage" size="small" disabled>
+                {settings.notificationVolume.toFixed(0)}%
+              </Button>
+
+              <IconButton
+                aria-label="Volume up"
+                size="small"
+                icon={PlusIcon}
+                unsafeDisableTooltip={true}
+                onClick={() => {
+                  const newVolume = Math.min(
+                    settings.notificationVolume + 10,
+                    100,
+                  );
+                  updateSetting('notificationVolume', newVolume);
+                }}
+                data-testid="settings-volume-up"
+              />
+
+              <IconButton
+                aria-label="Reset volume"
+                size="small"
+                variant="danger"
+                icon={XCircleIcon}
+                unsafeDisableTooltip={true}
+                onClick={() => {
+                  updateSetting('notificationVolume', 20);
+                }}
+                data-testid="settings-volume-reset"
+              />
+            </ButtonGroup>
+          </Stack>
+        )}
 
         <Checkbox
           name="useAlternateIdleIcon"
