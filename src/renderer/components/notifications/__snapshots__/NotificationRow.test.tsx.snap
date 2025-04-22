@@ -179,7 +179,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                   class="sc-Qotzb"
                   datetime="2017-05-20T17:51:57.000Z"
                 >
-                  May 20, 2017
+                  May 21, 2017
                 </relative-time>
               </div>
               <div
@@ -541,7 +541,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 class="sc-Qotzb"
                 datetime="2017-05-20T17:51:57.000Z"
               >
-                May 20, 2017
+                May 21, 2017
               </relative-time>
             </div>
             <div
@@ -909,7 +909,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                   class="sc-Qotzb"
                   datetime="2017-05-20T17:51:57.000Z"
                 >
-                  May 20, 2017
+                  May 21, 2017
                 </relative-time>
               </div>
               <div
@@ -1220,7 +1220,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 class="sc-Qotzb"
                 datetime="2017-05-20T17:51:57.000Z"
               >
-                May 20, 2017
+                May 21, 2017
               </relative-time>
             </div>
             <div
@@ -1588,7 +1588,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                   class="sc-Qotzb"
                   datetime="2017-05-20T17:51:57.000Z"
                 >
-                  May 20, 2017
+                  May 21, 2017
                 </relative-time>
               </div>
               <div
@@ -1899,7 +1899,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 class="sc-Qotzb"
                 datetime="2017-05-20T17:51:57.000Z"
               >
-                May 20, 2017
+                May 21, 2017
               </relative-time>
             </div>
             <div

@@ -247,25 +247,32 @@ export const NotificationSettings: FC = () => {
           }
         />
 
-        <Box>
+        <Stack direction="horizontal" gap="condensed" alignItems="center">
           <Text as="label" htmlFor="notificationVolume">
-            Notification Volume: {settings.notificationVolume}%
+            Notification Volume:
           </Text>
           <input
             id="notificationVolume"
-            type="range"
+            type="number"
             min={0}
             max={100}
             step={1}
             value={settings.notificationVolume}
-            onChange={(evt) =>
-              updateSetting(
-                'notificationVolume',
-                Number.parseInt(evt.target.value, 10),
-              )
-            }
+            onChange={(evt) => {
+              let val = Number(evt.target.value);
+              if (Number.isNaN(val)) val = 0;
+              if (val > 100) val = 100;
+              if (val < 0) val = 0;
+              updateSetting('notificationVolume', val);
+            }}
+            style={{
+              width: '3rem',
+              textAlign: 'center',
+              border: '1px solid #ccc',
+              borderRadius: '4px',
+            }}
           />
-        </Box>
+        </Stack>
       </Stack>
     </fieldset>
   );

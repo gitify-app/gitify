@@ -919,6 +919,32 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               </svg>
             </div>
           </div>
+          <div
+            alignitems="center"
+            class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+            data-align="stretch"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <label
+              class="Text-sc-17v1xeu-0 gfWGMy"
+              for="notificationVolume"
+            >
+              Notification Volume:
+            </label>
+            <input
+              id="notificationVolume"
+              max="100"
+              min="0"
+              step="1"
+              style="width: 3rem; text-align: center; border: 1px solid #ccc; border-radius: 4px;"
+              type="number"
+              value="20"
+            />
+          </div>
         </div>
       </fieldset>
       <fieldset>
