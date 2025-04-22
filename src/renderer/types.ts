@@ -92,7 +92,6 @@ export interface SystemSettingsState {
   playSound: boolean;
   notificationVolume: number;
   openAtStartup: boolean;
-  notificationVolume: number;
 }
 
 export interface FilterSettingsState {
