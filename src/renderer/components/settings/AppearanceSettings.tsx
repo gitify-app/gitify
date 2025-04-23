@@ -2,10 +2,10 @@ import { webFrame } from 'electron';
 import { type FC, useContext, useState } from 'react';
 
 import {
-  DashIcon,
   PaintbrushIcon,
-  PlusIcon,
-  XCircleIcon,
+  SyncIcon,
+  ZoomInIcon,
+  ZoomOutIcon,
 } from '@primer/octicons-react';
 import {
   Button,
@@ -109,7 +109,7 @@ export const AppearanceSettings: FC = () => {
             <IconButton
               aria-label="Zoom out"
               size="small"
-              icon={DashIcon}
+              icon={ZoomOutIcon}
               unsafeDisableTooltip={true}
               onClick={() =>
                 zoomPercentage > 0 &&
@@ -127,7 +127,7 @@ export const AppearanceSettings: FC = () => {
             <IconButton
               aria-label="Zoom in"
               size="small"
-              icon={PlusIcon}
+              icon={ZoomInIcon}
               unsafeDisableTooltip={true}
               onClick={() =>
                 zoomPercentage < 120 &&
@@ -142,7 +142,7 @@ export const AppearanceSettings: FC = () => {
               aria-label="Reset zoom"
               size="small"
               variant="danger"
-              icon={XCircleIcon}
+              icon={SyncIcon}
               unsafeDisableTooltip={true}
               onClick={() => webFrame.setZoomLevel(0)}
               data-testid="settings-zoom-reset"
