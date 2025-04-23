@@ -90,6 +90,7 @@ export interface SystemSettingsState {
   showNotifications: boolean;
   useAlternateIdleIcon: boolean;
   playSound: boolean;
+  notificationVolume: number;
   openAtStartup: boolean;
 }
 

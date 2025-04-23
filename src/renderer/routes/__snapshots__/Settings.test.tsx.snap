@@ -1134,27 +1134,160 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             </label>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv text-sm"
-            data-align="center"
-            data-direction="horizontal"
-            data-gap="condensed"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
+            class="Box-sc-g0xbh4-0"
           >
-            <input
-              checked=""
-              class="size-4 rounded-sm cursor-pointer"
-              data-testid="checkbox-playSound"
-              id="playSound"
-              type="checkbox"
-            />
-            <label
-              class="font-medium text-gitify-font cursor-pointer"
-              for="playSound"
+            <div
+              class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv text-sm"
+              data-align="center"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
             >
-              Play sound
-            </label>
+              <div
+                class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv text-sm"
+                data-align="center"
+                data-direction="horizontal"
+                data-gap="condensed"
+                data-justify="start"
+                data-padding="none"
+                data-wrap="nowrap"
+              >
+                <input
+                  checked=""
+                  class="size-4 rounded-sm cursor-pointer"
+                  data-testid="checkbox-playSound"
+                  id="playSound"
+                  type="checkbox"
+                />
+                <label
+                  class="font-medium text-gitify-font cursor-pointer"
+                  for="playSound"
+                >
+                  Play sound
+                </label>
+              </div>
+              <div
+                class="ButtonGroup-sc-1gxhls1-0 ePLgSl ml-2"
+              >
+                <button
+                  aria-describedby="«r5»-loading-announcement"
+                  aria-label="Volume down"
+                  class="types__StyledButton-sc-ws60qy-0 QOGvM"
+                  data-component="IconButton"
+                  data-loading="false"
+                  data-no-visuals="true"
+                  data-size="small"
+                  data-testid="settings-volume-down"
+                  sx="[object Object]"
+                  type="button"
+                >
+                  <svg
+                    aria-label="Volume Down Icon"
+                    class="size-4"
+                    height="24"
+                    role="img"
+                    viewBox="0 0 24 24"
+                    width="24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g
+                      transform="translate(2, 0)"
+                    >
+                      <path
+                        d="M11.553 3.064A.75.75 0 0 1 12 3.75v16.5a.75.75 0 0 1-1.255.555L5.46 16H2.75A1.75 1.75 0 0 1 1 14.25v-4.5C1 8.784 1.784 8 2.75 8h2.71l5.285-4.805a.752.752 0 0 1 .808-.13ZM10.5 5.445l-4.245 3.86a.748.748 0 0 1-.505.195h-3a.25.25 0 0 0-.25.25v4.5c0 .138.112.25.25.25h3c.187 0 .367.069.505.195l4.245 3.86z"
+                      />
+                      <path
+                        d="M16.243 7.757a.75.75 0 1 0-1.061 1.061 4.5 4.5 0 0 1 0 6.364.75.75 0 0 0 1.06 1.06 6 6 0 0 0 0-8.485Z"
+                      />
+                    </g>
+                  </svg>
+                </button>
+                <button
+                  aria-describedby="«r6»-loading-announcement"
+                  aria-label="Volume percentage"
+                  class="types__StyledButton-sc-ws60qy-0 QOGvM"
+                  data-loading="false"
+                  data-no-visuals="true"
+                  data-size="small"
+                  disabled=""
+                  sx="[object Object]"
+                  type="button"
+                >
+                  <span
+                    class="Box-sc-g0xbh4-0 cNXQpH"
+                    data-component="buttonContent"
+                    sx="[object Object]"
+                  >
+                    <span
+                      data-component="text"
+                    >
+                      20
+                      %
+                    </span>
+                  </span>
+                </button>
+                <button
+                  aria-describedby="«r7»-loading-announcement"
+                  aria-label="Volume up"
+                  class="types__StyledButton-sc-ws60qy-0 QOGvM"
+                  data-component="IconButton"
+                  data-loading="false"
+                  data-no-visuals="true"
+                  data-size="small"
+                  data-testid="settings-volume-up"
+                  sx="[object Object]"
+                  type="button"
+                >
+                  <svg
+                    aria-label="Volume Up Icon"
+                    class="size-4"
+                    height="24"
+                    role="img"
+                    viewBox="0 0 24 24"
+                    width="24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M11.553 3.064A.75.75 0 0 1 12 3.75v16.5a.75.75 0 0 1-1.255.555L5.46 16H2.75A1.75 1.75 0 0 1 1 14.25v-4.5C1 8.784 1.784 8 2.75 8h2.71l5.285-4.805a.752.752 0 0 1 .808-.13ZM10.5 5.445l-4.245 3.86a.748.748 0 0 1-.505.195h-3a.25.25 0 0 0-.25.25v4.5c0 .138.112.25.25.25h3c.187 0 .367.069.505.195l4.245 3.86Zm8.218-1.223a.75.75 0 0 1 1.06 0c4.296 4.296 4.296 11.26 0 15.556a.75.75 0 0 1-1.06-1.06 9.5 9.5 0 0 0 0-13.436.75.75 0 0 1 0-1.06Z"
+                    />
+                    <path
+                      d="M16.243 7.757a.75.75 0 1 0-1.061 1.061 4.5 4.5 0 0 1 0 6.364.75.75 0 0 0 1.06 1.06 6 6 0 0 0 0-8.485Z"
+                    />
+                  </svg>
+                </button>
+                <button
+                  aria-describedby="«r8»-loading-announcement"
+                  aria-label="Reset volume"
+                  class="types__StyledButton-sc-ws60qy-0 gjscLt"
+                  data-component="IconButton"
+                  data-loading="false"
+                  data-no-visuals="true"
+                  data-size="small"
+                  data-testid="settings-volume-reset"
+                  sx="[object Object]"
+                  type="button"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="octicon octicon-sync"
+                    display="inline-block"
+                    fill="currentColor"
+                    focusable="false"
+                    height="16"
+                    overflow="visible"
+                    style="vertical-align: text-bottom;"
+                    viewBox="0 0 16 16"
+                    width="16"
+                  >
+                    <path
+                      d="M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
           </div>
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv text-sm"
@@ -1234,7 +1367,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
         data-wrap="nowrap"
       >
         <button
-          aria-describedby="«r5»-loading-announcement"
+          aria-describedby="«r9»-loading-announcement"
           class="types__StyledButton-sc-ws60qy-0 fZJSho"
           data-loading="false"
           data-no-visuals="true"
@@ -1279,11 +1412,11 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
         <span
           aria-label="View release notes"
           class="Tooltip__TooltipBase-sc-17tf59c-0 iTeBSL tooltipped-n"
-          id="«r6»"
+          id="«ra»"
           role="tooltip"
         >
           <button
-            aria-describedby="«r7»-loading-announcement"
+            aria-describedby="«rb»-loading-announcement"
             class="types__StyledButton-sc-ws60qy-0 QOGvM"
             data-loading="false"
             data-no-visuals="true"
@@ -1319,11 +1452,11 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
         <span
           aria-label="Accounts"
           class="Tooltip__TooltipBase-sc-17tf59c-0 iTeBSL tooltipped-n"
-          id="«r8»"
+          id="«rc»"
           role="tooltip"
         >
           <button
-            aria-describedby="«r9»-loading-announcement"
+            aria-describedby="«rd»-loading-announcement"
             aria-label="Accounts"
             class="types__StyledButton-sc-ws60qy-0 QOGvM"
             data-component="IconButton"
@@ -1354,11 +1487,11 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
         <span
           aria-label="Quit Gitify"
           class="Tooltip__TooltipBase-sc-17tf59c-0 iTeBSL tooltipped-nw"
-          id="«ra»"
+          id="«re»"
           role="tooltip"
         >
           <button
-            aria-describedby="«rb»-loading-announcement"
+            aria-describedby="«rf»-loading-announcement"
             aria-label="Quit Gitify"
             class="types__StyledButton-sc-ws60qy-0 gjscLt"
             data-component="IconButton"

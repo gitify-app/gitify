@@ -1,15 +1,24 @@
 import { type FC, useContext } from 'react';
 
-import { DeviceDesktopIcon } from '@primer/octicons-react';
-import { Box, Stack, Text } from '@primer/react';
+import { DeviceDesktopIcon, SyncIcon } from '@primer/octicons-react';
+import {
+  Box,
+  Button,
+  ButtonGroup,
+  IconButton,
+  Stack,
+  Text,
+} from '@primer/react';
 
 import { APPLICATION } from '../../../shared/constants';
 import { isLinux, isMacOS } from '../../../shared/platform';
-import { AppContext } from '../../context/App';
+import { AppContext, defaultSettings } from '../../context/App';
 import { OpenPreference } from '../../types';
 import { Constants } from '../../utils/constants';
 import { Checkbox } from '../fields/Checkbox';
 import { RadioGroup } from '../fields/RadioGroup';
+import { VolumeDownIcon } from '../icons/VolumeDownIcon';
+import { VolumeUpIcon } from '../icons/VolumeUpIcon';
 import { Title } from '../primitives/Title';
 
 export const SystemSettings: FC = () => {
@@ -70,12 +79,72 @@ export const SystemSettings: FC = () => {
           }
         />
 
-        <Checkbox
-          name="playSound"
-          label="Play sound"
-          checked={settings.playSound}
-          onChange={(evt) => updateSetting('playSound', evt.target.checked)}
-        />
+        <Box>
+          <Stack
+            direction="horizontal"
+            gap="condensed"
+            align="center"
+            className="text-sm"
+          >
+            <Checkbox
+              name="playSound"
+              label="Play sound"
+              checked={settings.playSound}
+              onChange={(evt) => updateSetting('playSound', evt.target.checked)}
+            />
+
+            <ButtonGroup className="ml-2" hidden={!settings.playSound}>
+              <IconButton
+                aria-label="Volume down"
+                size="small"
+                icon={VolumeDownIcon}
+                unsafeDisableTooltip={true}
+                onClick={() => {
+                  const newVolume = Math.max(
+                    settings.notificationVolume - 10,
+                    0,
+                  );
+                  updateSetting('notificationVolume', newVolume);
+                }}
+                data-testid="settings-volume-down"
+              />
+
+              <Button aria-label="Volume percentage" size="small" disabled>
+                {settings.notificationVolume.toFixed(0)}%
+              </Button>
+
+              <IconButton
+                aria-label="Volume up"
+                size="small"
+                icon={VolumeUpIcon}
+                unsafeDisableTooltip={true}
+                onClick={() => {
+                  const newVolume = Math.min(
+                    settings.notificationVolume + 10,
+                    100,
+                  );
+                  updateSetting('notificationVolume', newVolume);
+                }}
+                data-testid="settings-volume-up"
+              />
+
+              <IconButton
+                aria-label="Reset volume"
+                size="small"
+                variant="danger"
+                icon={SyncIcon}
+                unsafeDisableTooltip={true}
+                onClick={() => {
+                  updateSetting(
+                    'notificationVolume',
+                    defaultSettings.notificationVolume,
+                  );
+                }}
+                data-testid="settings-volume-reset"
+              />
+            </ButtonGroup>
+          </Stack>
+        </Box>
 
         <Checkbox
           name="useAlternateIdleIcon"

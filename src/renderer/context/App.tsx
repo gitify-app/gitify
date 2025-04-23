@@ -93,6 +93,7 @@ const defaultSystemSettings: SystemSettingsState = {
   showNotificationsCountInTray: true,
   showNotifications: true,
   playSound: true,
+  notificationVolume: 20,
   useAlternateIdleIcon: false,
   openAtStartup: false,
 };

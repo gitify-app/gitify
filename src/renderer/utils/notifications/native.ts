@@ -2,6 +2,7 @@ import path from 'node:path';
 
 import { APPLICATION } from '../../../shared/constants';
 import { isWindows } from '../../../shared/platform';
+import { defaultSettings } from '../../context/App';
 import type { AccountNotifications, GitifyState } from '../../types';
 import { Notification } from '../../typesGitHub';
 import { getAccountUUID } from '../auth/utils';
@@ -48,7 +49,7 @@ export const triggerNativeNotifications = (
   }
 
   if (state.settings.playSound) {
-    raiseSoundNotification();
+    raiseSoundNotification(state.settings.notificationVolume / 100);
   }
 
   if (state.settings.showNotifications) {
@@ -86,7 +87,9 @@ export const raiseNativeNotification = (notifications: Notification[]) => {
   return nativeNotification;
 };
 
-export const raiseSoundNotification = () => {
+export const raiseSoundNotification = (
+  volume = defaultSettings.notificationVolume / 100,
+) => {
   const audio = new Audio(
     path.join(
       __dirname,
@@ -96,6 +99,6 @@ export const raiseSoundNotification = () => {
       Constants.NOTIFICATION_SOUND,
     ),
   );
-  audio.volume = 0.2;
+  audio.volume = volume;
   audio.play();
 };
