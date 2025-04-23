@@ -1,12 +1,6 @@
 import { type FC, useContext } from 'react';
 
-import {
-  DashIcon,
-  DeviceDesktopIcon,
-  PlusIcon,
-  XCircleIcon,
-} from '@primer/octicons-react';
-
+import { DeviceDesktopIcon, SyncIcon } from '@primer/octicons-react';
 import {
   Box,
   Button,
@@ -22,8 +16,9 @@ import { AppContext, defaultSettings } from '../../context/App';
 import { OpenPreference } from '../../types';
 import { Constants } from '../../utils/constants';
 import { Checkbox } from '../fields/Checkbox';
-import { FieldLabel } from '../fields/FieldLabel';
 import { RadioGroup } from '../fields/RadioGroup';
+import { VolumeDownIcon } from '../icons/VolumeDownIcon';
+import { VolumeUpIcon } from '../icons/VolumeUpIcon';
 import { Title } from '../primitives/Title';
 
 export const SystemSettings: FC = () => {
@@ -84,30 +79,25 @@ export const SystemSettings: FC = () => {
           }
         />
 
-        <Checkbox
-          name="playSound"
-          label="Play sound"
-          checked={settings.playSound}
-          onChange={(evt) => updateSetting('playSound', evt.target.checked)}
-        />
-
-        <Box className="pl-6" hidden={!settings.playSound}>
+        <Box>
           <Stack
             direction="horizontal"
             gap="condensed"
             align="center"
             className="text-sm"
           >
-            <FieldLabel
-              name="notificationVolume"
-              label="Notification volume:"
+            <Checkbox
+              name="playSound"
+              label="Play sound"
+              checked={settings.playSound}
+              onChange={(evt) => updateSetting('playSound', evt.target.checked)}
             />
 
-            <ButtonGroup className="ml-2">
+            <ButtonGroup className="ml-2" hidden={!settings.playSound}>
               <IconButton
                 aria-label="Volume down"
                 size="small"
-                icon={DashIcon}
+                icon={VolumeDownIcon}
                 unsafeDisableTooltip={true}
                 onClick={() => {
                   const newVolume = Math.max(
@@ -126,7 +116,7 @@ export const SystemSettings: FC = () => {
               <IconButton
                 aria-label="Volume up"
                 size="small"
-                icon={PlusIcon}
+                icon={VolumeUpIcon}
                 unsafeDisableTooltip={true}
                 onClick={() => {
                   const newVolume = Math.min(
@@ -142,7 +132,7 @@ export const SystemSettings: FC = () => {
                 aria-label="Reset volume"
                 size="small"
                 variant="danger"
-                icon={XCircleIcon}
+                icon={SyncIcon}
                 unsafeDisableTooltip={true}
                 onClick={() => {
                   updateSetting(
