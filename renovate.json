@@ -29,7 +29,7 @@
       "datasourceTemplate": "github-tags",
       "depNameTemplate": "gitify-app/gitify",
       "versioningTemplate": "loose",
-      "fileMatch": ["sonar-project.properties"],
+      "managerFilePatterns": ["/sonar-project.properties/"],
       "matchStrings": ["\\s?sonar.projectVersion=(?<currentValue>.+?)\\s"]
     }
   ]
