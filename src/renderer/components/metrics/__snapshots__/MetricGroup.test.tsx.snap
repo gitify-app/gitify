@@ -9,12 +9,12 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
         class="Box-sc-g0xbh4-0 flex gap-1"
       >
         <span
-          class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+          class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
           title="Linked to issues #1, #2"
           variant="secondary"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
             data-align="center"
             data-direction="horizontal"
             data-gap="none"
@@ -42,19 +42,19 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+              class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
             >
               2
             </span>
           </div>
         </span>
         <span
-          class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+          class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
           title="octocat approved these changes"
           variant="secondary"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
             data-align="center"
             data-direction="horizontal"
             data-gap="none"
@@ -79,19 +79,19 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+              class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
             >
               1
             </span>
           </div>
         </span>
         <span
-          class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+          class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
           title="gitify-app requested changes"
           variant="secondary"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
             data-align="center"
             data-direction="horizontal"
             data-gap="none"
@@ -116,19 +116,19 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+              class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
             >
               1
             </span>
           </div>
         </span>
         <span
-          class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+          class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
           title="1 comment"
           variant="secondary"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
             data-align="center"
             data-direction="horizontal"
             data-gap="none"
@@ -153,7 +153,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+              class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
             >
               1
             </span>
@@ -167,12 +167,12 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
       class="Box-sc-g0xbh4-0 flex gap-1"
     >
       <span
-        class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+        class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
         title="Linked to issues #1, #2"
         variant="secondary"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -200,19 +200,19 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+            class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
           >
             2
           </span>
         </div>
       </span>
       <span
-        class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+        class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
         title="octocat approved these changes"
         variant="secondary"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -237,19 +237,19 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+            class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
           >
             1
           </span>
         </div>
       </span>
       <span
-        class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+        class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
         title="gitify-app requested changes"
         variant="secondary"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -274,19 +274,19 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+            class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
           >
             1
           </span>
         </div>
       </span>
       <span
-        class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+        class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
         title="1 comment"
         variant="secondary"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -311,7 +311,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+            class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
           >
             1
           </span>
@@ -382,12 +382,12 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
         class="Box-sc-g0xbh4-0 flex gap-1"
       >
         <span
-          class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+          class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
           title="Linked to issues #1, #2"
           variant="secondary"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
             data-align="center"
             data-direction="horizontal"
             data-gap="none"
@@ -415,19 +415,19 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+              class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
             >
               2
             </span>
           </div>
         </span>
         <span
-          class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+          class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
           title="octocat approved these changes"
           variant="secondary"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
             data-align="center"
             data-direction="horizontal"
             data-gap="none"
@@ -452,19 +452,19 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+              class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
             >
               1
             </span>
           </div>
         </span>
         <span
-          class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+          class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
           title="gitify-app requested changes"
           variant="secondary"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
             data-align="center"
             data-direction="horizontal"
             data-gap="none"
@@ -489,19 +489,19 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+              class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
             >
               1
             </span>
           </div>
         </span>
         <span
-          class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+          class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
           title="2 comments"
           variant="secondary"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
             data-align="center"
             data-direction="horizontal"
             data-gap="none"
@@ -526,7 +526,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+              class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
             >
               2
             </span>
@@ -540,12 +540,12 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
       class="Box-sc-g0xbh4-0 flex gap-1"
     >
       <span
-        class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+        class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
         title="Linked to issues #1, #2"
         variant="secondary"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -573,19 +573,19 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+            class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
           >
             2
           </span>
         </div>
       </span>
       <span
-        class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+        class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
         title="octocat approved these changes"
         variant="secondary"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -610,19 +610,19 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+            class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
           >
             1
           </span>
         </div>
       </span>
       <span
-        class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+        class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
         title="gitify-app requested changes"
         variant="secondary"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -647,19 +647,19 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+            class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
           >
             1
           </span>
         </div>
       </span>
       <span
-        class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+        class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
         title="2 comments"
         variant="secondary"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -684,7 +684,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+            class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
           >
             2
           </span>
@@ -755,12 +755,12 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
         class="Box-sc-g0xbh4-0 flex gap-1"
       >
         <span
-          class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+          class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
           title="Linked to issues #1, #2"
           variant="secondary"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
             data-align="center"
             data-direction="horizontal"
             data-gap="none"
@@ -788,19 +788,19 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+              class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
             >
               2
             </span>
           </div>
         </span>
         <span
-          class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+          class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
           title="octocat approved these changes"
           variant="secondary"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
             data-align="center"
             data-direction="horizontal"
             data-gap="none"
@@ -825,19 +825,19 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+              class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
             >
               1
             </span>
           </div>
         </span>
         <span
-          class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+          class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
           title="gitify-app requested changes"
           variant="secondary"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
             data-align="center"
             data-direction="horizontal"
             data-gap="none"
@@ -862,7 +862,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+              class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
             >
               1
             </span>
@@ -876,12 +876,12 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
       class="Box-sc-g0xbh4-0 flex gap-1"
     >
       <span
-        class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+        class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
         title="Linked to issues #1, #2"
         variant="secondary"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -909,19 +909,19 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+            class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
           >
             2
           </span>
         </div>
       </span>
       <span
-        class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+        class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
         title="octocat approved these changes"
         variant="secondary"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -946,19 +946,19 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+            class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
           >
             1
           </span>
         </div>
       </span>
       <span
-        class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+        class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
         title="gitify-app requested changes"
         variant="secondary"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -983,7 +983,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+            class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
           >
             1
           </span>
@@ -1054,12 +1054,12 @@ exports[`renderer/components/metrics/MetricGroup.tsx label pills should render l
         class="Box-sc-g0xbh4-0 flex gap-1"
       >
         <span
-          class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+          class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
           title="Linked to issues #1, #2"
           variant="secondary"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
             data-align="center"
             data-direction="horizontal"
             data-gap="none"
@@ -1087,19 +1087,19 @@ exports[`renderer/components/metrics/MetricGroup.tsx label pills should render l
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+              class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
             >
               2
             </span>
           </div>
         </span>
         <span
-          class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+          class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
           title="octocat approved these changes"
           variant="secondary"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
             data-align="center"
             data-direction="horizontal"
             data-gap="none"
@@ -1124,19 +1124,19 @@ exports[`renderer/components/metrics/MetricGroup.tsx label pills should render l
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+              class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
             >
               1
             </span>
           </div>
         </span>
         <span
-          class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+          class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
           title="gitify-app requested changes"
           variant="secondary"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
             data-align="center"
             data-direction="horizontal"
             data-gap="none"
@@ -1161,19 +1161,19 @@ exports[`renderer/components/metrics/MetricGroup.tsx label pills should render l
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+              class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
             >
               1
             </span>
           </div>
         </span>
         <span
-          class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+          class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
           title="2 comments"
           variant="secondary"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
             data-align="center"
             data-direction="horizontal"
             data-gap="none"
@@ -1198,20 +1198,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx label pills should render l
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+              class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
             >
               2
             </span>
           </div>
         </span>
         <span
-          class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+          class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
           title="🏷️ enhancement
 🏷️ good-first-issue"
           variant="secondary"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
             data-align="center"
             data-direction="horizontal"
             data-gap="none"
@@ -1236,7 +1236,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx label pills should render l
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+              class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
             >
               2
             </span>
@@ -1250,12 +1250,12 @@ exports[`renderer/components/metrics/MetricGroup.tsx label pills should render l
       class="Box-sc-g0xbh4-0 flex gap-1"
     >
       <span
-        class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+        class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
         title="Linked to issues #1, #2"
         variant="secondary"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -1283,19 +1283,19 @@ exports[`renderer/components/metrics/MetricGroup.tsx label pills should render l
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+            class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
           >
             2
           </span>
         </div>
       </span>
       <span
-        class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+        class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
         title="octocat approved these changes"
         variant="secondary"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -1320,19 +1320,19 @@ exports[`renderer/components/metrics/MetricGroup.tsx label pills should render l
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+            class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
           >
             1
           </span>
         </div>
       </span>
       <span
-        class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+        class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
         title="gitify-app requested changes"
         variant="secondary"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -1357,19 +1357,19 @@ exports[`renderer/components/metrics/MetricGroup.tsx label pills should render l
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+            class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
           >
             1
           </span>
         </div>
       </span>
       <span
-        class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+        class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
         title="2 comments"
         variant="secondary"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -1394,20 +1394,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx label pills should render l
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+            class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
           >
             2
           </span>
         </div>
       </span>
       <span
-        class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+        class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
         title="🏷️ enhancement
 🏷️ good-first-issue"
         variant="secondary"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -1432,7 +1432,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx label pills should render l
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+            class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
           >
             2
           </span>
@@ -1503,12 +1503,12 @@ exports[`renderer/components/metrics/MetricGroup.tsx linked issue pills should r
         class="Box-sc-g0xbh4-0 flex gap-1"
       >
         <span
-          class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+          class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
           title="Linked to issues #1, #2"
           variant="secondary"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
             data-align="center"
             data-direction="horizontal"
             data-gap="none"
@@ -1536,19 +1536,19 @@ exports[`renderer/components/metrics/MetricGroup.tsx linked issue pills should r
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+              class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
             >
               2
             </span>
           </div>
         </span>
         <span
-          class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+          class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
           title="octocat approved these changes"
           variant="secondary"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
             data-align="center"
             data-direction="horizontal"
             data-gap="none"
@@ -1573,19 +1573,19 @@ exports[`renderer/components/metrics/MetricGroup.tsx linked issue pills should r
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+              class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
             >
               1
             </span>
           </div>
         </span>
         <span
-          class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+          class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
           title="gitify-app requested changes"
           variant="secondary"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
             data-align="center"
             data-direction="horizontal"
             data-gap="none"
@@ -1610,7 +1610,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx linked issue pills should r
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+              class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
             >
               1
             </span>
@@ -1624,12 +1624,12 @@ exports[`renderer/components/metrics/MetricGroup.tsx linked issue pills should r
       class="Box-sc-g0xbh4-0 flex gap-1"
     >
       <span
-        class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+        class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
         title="Linked to issues #1, #2"
         variant="secondary"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -1657,19 +1657,19 @@ exports[`renderer/components/metrics/MetricGroup.tsx linked issue pills should r
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+            class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
           >
             2
           </span>
         </div>
       </span>
       <span
-        class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+        class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
         title="octocat approved these changes"
         variant="secondary"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -1694,19 +1694,19 @@ exports[`renderer/components/metrics/MetricGroup.tsx linked issue pills should r
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+            class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
           >
             1
           </span>
         </div>
       </span>
       <span
-        class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+        class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
         title="gitify-app requested changes"
         variant="secondary"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -1731,7 +1731,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx linked issue pills should r
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+            class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
           >
             1
           </span>
@@ -1802,12 +1802,12 @@ exports[`renderer/components/metrics/MetricGroup.tsx linked issue pills should r
         class="Box-sc-g0xbh4-0 flex gap-1"
       >
         <span
-          class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+          class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
           title="Linked to issue #1"
           variant="secondary"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
             data-align="center"
             data-direction="horizontal"
             data-gap="none"
@@ -1835,19 +1835,19 @@ exports[`renderer/components/metrics/MetricGroup.tsx linked issue pills should r
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+              class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
             >
               1
             </span>
           </div>
         </span>
         <span
-          class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+          class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
           title="octocat approved these changes"
           variant="secondary"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
             data-align="center"
             data-direction="horizontal"
             data-gap="none"
@@ -1872,19 +1872,19 @@ exports[`renderer/components/metrics/MetricGroup.tsx linked issue pills should r
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+              class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
             >
               1
             </span>
           </div>
         </span>
         <span
-          class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+          class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
           title="gitify-app requested changes"
           variant="secondary"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
             data-align="center"
             data-direction="horizontal"
             data-gap="none"
@@ -1909,7 +1909,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx linked issue pills should r
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+              class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
             >
               1
             </span>
@@ -1923,12 +1923,12 @@ exports[`renderer/components/metrics/MetricGroup.tsx linked issue pills should r
       class="Box-sc-g0xbh4-0 flex gap-1"
     >
       <span
-        class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+        class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
         title="Linked to issue #1"
         variant="secondary"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -1956,19 +1956,19 @@ exports[`renderer/components/metrics/MetricGroup.tsx linked issue pills should r
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+            class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
           >
             1
           </span>
         </div>
       </span>
       <span
-        class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+        class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
         title="octocat approved these changes"
         variant="secondary"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -1993,19 +1993,19 @@ exports[`renderer/components/metrics/MetricGroup.tsx linked issue pills should r
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+            class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
           >
             1
           </span>
         </div>
       </span>
       <span
-        class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+        class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
         title="gitify-app requested changes"
         variant="secondary"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -2030,7 +2030,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx linked issue pills should r
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+            class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
           >
             1
           </span>
@@ -2101,12 +2101,12 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
         class="Box-sc-g0xbh4-0 flex gap-1"
       >
         <span
-          class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+          class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
           title="Linked to issues #1, #2"
           variant="secondary"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
             data-align="center"
             data-direction="horizontal"
             data-gap="none"
@@ -2134,19 +2134,19 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+              class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
             >
               2
             </span>
           </div>
         </span>
         <span
-          class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+          class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
           title="octocat approved these changes"
           variant="secondary"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
             data-align="center"
             data-direction="horizontal"
             data-gap="none"
@@ -2171,19 +2171,19 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+              class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
             >
               1
             </span>
           </div>
         </span>
         <span
-          class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+          class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
           title="gitify-app requested changes"
           variant="secondary"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
             data-align="center"
             data-direction="horizontal"
             data-gap="none"
@@ -2208,19 +2208,19 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+              class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
             >
               1
             </span>
           </div>
         </span>
         <span
-          class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+          class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
           title="2 comments"
           variant="secondary"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
             data-align="center"
             data-direction="horizontal"
             data-gap="none"
@@ -2245,20 +2245,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+              class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
             >
               2
             </span>
           </div>
         </span>
         <span
-          class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+          class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
           title="🏷️ enhancement
 🏷️ good-first-issue"
           variant="secondary"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
             data-align="center"
             data-direction="horizontal"
             data-gap="none"
@@ -2283,19 +2283,19 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+              class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
             >
               2
             </span>
           </div>
         </span>
         <span
-          class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+          class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
           title="Milestone 1"
           variant="secondary"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
             data-align="center"
             data-direction="horizontal"
             data-gap="none"
@@ -2329,12 +2329,12 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
       class="Box-sc-g0xbh4-0 flex gap-1"
     >
       <span
-        class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+        class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
         title="Linked to issues #1, #2"
         variant="secondary"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -2362,19 +2362,19 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+            class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
           >
             2
           </span>
         </div>
       </span>
       <span
-        class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+        class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
         title="octocat approved these changes"
         variant="secondary"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -2399,19 +2399,19 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+            class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
           >
             1
           </span>
         </div>
       </span>
       <span
-        class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+        class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
         title="gitify-app requested changes"
         variant="secondary"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -2436,19 +2436,19 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+            class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
           >
             1
           </span>
         </div>
       </span>
       <span
-        class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+        class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
         title="2 comments"
         variant="secondary"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -2473,20 +2473,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+            class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
           >
             2
           </span>
         </div>
       </span>
       <span
-        class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+        class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
         title="🏷️ enhancement
 🏷️ good-first-issue"
         variant="secondary"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -2511,19 +2511,19 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+            class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
           >
             2
           </span>
         </div>
       </span>
       <span
-        class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+        class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
         title="Milestone 1"
         variant="secondary"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -2614,12 +2614,12 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
         class="Box-sc-g0xbh4-0 flex gap-1"
       >
         <span
-          class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+          class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
           title="Linked to issues #1, #2"
           variant="secondary"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
             data-align="center"
             data-direction="horizontal"
             data-gap="none"
@@ -2647,19 +2647,19 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+              class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
             >
               2
             </span>
           </div>
         </span>
         <span
-          class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+          class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
           title="octocat approved these changes"
           variant="secondary"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
             data-align="center"
             data-direction="horizontal"
             data-gap="none"
@@ -2684,19 +2684,19 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+              class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
             >
               1
             </span>
           </div>
         </span>
         <span
-          class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+          class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
           title="gitify-app requested changes"
           variant="secondary"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
             data-align="center"
             data-direction="horizontal"
             data-gap="none"
@@ -2721,19 +2721,19 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+              class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
             >
               1
             </span>
           </div>
         </span>
         <span
-          class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+          class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
           title="2 comments"
           variant="secondary"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
             data-align="center"
             data-direction="horizontal"
             data-gap="none"
@@ -2758,20 +2758,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+              class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
             >
               2
             </span>
           </div>
         </span>
         <span
-          class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+          class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
           title="🏷️ enhancement
 🏷️ good-first-issue"
           variant="secondary"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
             data-align="center"
             data-direction="horizontal"
             data-gap="none"
@@ -2796,19 +2796,19 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
               />
             </svg>
             <span
-              class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+              class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
             >
               2
             </span>
           </div>
         </span>
         <span
-          class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+          class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
           title="Milestone 1"
           variant="secondary"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
             data-align="center"
             data-direction="horizontal"
             data-gap="none"
@@ -2842,12 +2842,12 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
       class="Box-sc-g0xbh4-0 flex gap-1"
     >
       <span
-        class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+        class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
         title="Linked to issues #1, #2"
         variant="secondary"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -2875,19 +2875,19 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+            class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
           >
             2
           </span>
         </div>
       </span>
       <span
-        class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+        class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
         title="octocat approved these changes"
         variant="secondary"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -2912,19 +2912,19 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+            class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
           >
             1
           </span>
         </div>
       </span>
       <span
-        class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+        class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
         title="gitify-app requested changes"
         variant="secondary"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -2949,19 +2949,19 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+            class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
           >
             1
           </span>
         </div>
       </span>
       <span
-        class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+        class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
         title="2 comments"
         variant="secondary"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -2986,20 +2986,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+            class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
           >
             2
           </span>
         </div>
       </span>
       <span
-        class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+        class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
         title="🏷️ enhancement
 🏷️ good-first-issue"
         variant="secondary"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -3024,19 +3024,19 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
             />
           </svg>
           <span
-            class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+            class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
           >
             2
           </span>
         </div>
       </span>
       <span
-        class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+        class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
         title="Milestone 1"
         variant="secondary"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"

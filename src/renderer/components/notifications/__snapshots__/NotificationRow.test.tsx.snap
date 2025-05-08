@@ -10,7 +10,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
         id="138661096"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv relative"
+          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI relative"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -20,7 +20,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
         >
           <span
             aria-label="Open Issue"
-            class="Tooltip__TooltipBase-sc-17tf59c-0 iTeBSL tooltipped-e"
+            class="Tooltip__TooltipBase-sc-17tf59c-0 ezknIY tooltipped-e"
             id="«r0»"
             role="tooltip"
           >
@@ -45,7 +45,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             </svg>
           </span>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv cursor-pointer text-sm w-full truncate"
+            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI cursor-pointer text-sm w-full truncate"
             data-align="stretch"
             data-direction="vertical"
             data-gap="none"
@@ -57,7 +57,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               class="Box-sc-g0xbh4-0 py-0.5"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+                class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -71,7 +71,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                   title="Open repository"
                 >
                   <div
-                    class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+                    class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
                     data-align="center"
                     data-direction="horizontal"
                     data-gap="condensed"
@@ -82,7 +82,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                   >
                     <img
                       alt="gitify-app/notifications-test"
-                      class="Avatar__StyledAvatar-sc-2lv0r8-0 cQsrln"
+                      class="Avatar__StyledAvatar-sc-2lv0r8-0 kgCEBA"
                       data-component="Avatar"
                       height="14"
                       size="14"
@@ -91,7 +91,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                       width="14"
                     />
                     <div
-                      class="Truncate__StyledTruncate-sc-23o1d2-0 cocpco"
+                      class="Truncate__StyledTruncate-sc-23o1d2-0 bPOncX"
                       maxwidth="280"
                       title="gitify-app/notifications-test"
                     >
@@ -105,7 +105,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               </div>
             </div>
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv mb-0.5 truncate"
+              class="Stack__StyledStack-sc-x3xa2i-0 oXGHI mb-0.5 truncate"
               data-align="start"
               data-direction="horizontal"
               data-gap="condensed"
@@ -116,16 +116,16 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               title="I am a robot and this is a test!"
             >
               <span
-                class="Text-sc-17v1xeu-0 gfWGMy truncate"
+                class="Text-sc-17v1xeu-0 bLmNQN truncate"
               >
                 I am a robot and this is a test!
               </span>
               <span
-                class="Text-sc-17v1xeu-0 gfWGMy text-xxs ml-auto mr-2 opacity-50 hidden"
+                class="Text-sc-17v1xeu-0 bLmNQN text-xxs ml-auto mr-2 opacity-50 hidden"
               />
             </div>
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv text-xs opacity-80"
+              class="Stack__StyledStack-sc-x3xa2i-0 oXGHI text-xs opacity-80"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -139,7 +139,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 title="gitify-app"
               >
                 <div
-                  class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+                  class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
                   data-align="center"
                   data-direction="horizontal"
                   data-gap="condensed"
@@ -150,7 +150,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 >
                   <img
                     alt="gitify-app"
-                    class="Avatar__StyledAvatar-sc-2lv0r8-0 cQsrln"
+                    class="Avatar__StyledAvatar-sc-2lv0r8-0 kgCEBA"
                     data-component="Avatar"
                     height="14"
                     size="14"
@@ -161,7 +161,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 </div>
               </div>
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+                class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
                 data-align="stretch"
                 data-direction="horizontal"
                 data-gap="none"
@@ -170,28 +170,28 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 data-wrap="nowrap"
               >
                 <span
-                  class="Text-sc-17v1xeu-0 gfWGMy pr-1"
+                  class="Text-sc-17v1xeu-0 bLmNQN pr-1"
                   title="You're watching the repository."
                 >
                   Updated
                 </span>
                 <relative-time
-                  class="sc-Qotzb"
+                  class="sc-bXdtCk"
                   datetime="2017-05-20T17:51:57.000Z"
                 >
-                  May 20, 2017
+                  May 21, 2017
                 </relative-time>
               </div>
               <div
                 class="Box-sc-g0xbh4-0 flex gap-1"
               >
                 <span
-                  class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+                  class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
                   title="octocat approved these changes"
                   variant="secondary"
                 >
                   <div
-                    class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+                    class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
                     data-align="center"
                     data-direction="horizontal"
                     data-gap="none"
@@ -216,19 +216,19 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                       />
                     </svg>
                     <span
-                      class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+                      class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
                     >
                       1
                     </span>
                   </div>
                 </span>
                 <span
-                  class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+                  class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
                   title="gitify-app requested changes"
                   variant="secondary"
                 >
                   <div
-                    class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+                    class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
                     data-align="center"
                     data-direction="horizontal"
                     data-gap="none"
@@ -253,7 +253,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                       />
                     </svg>
                     <span
-                      class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+                      class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
                     >
                       1
                     </span>
@@ -263,7 +263,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             </div>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv absolute right-0 h-full opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-notification-hover"
+            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI absolute right-0 h-full opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-notification-hover"
             data-align="center"
             data-direction="horizontal"
             data-gap="none"
@@ -274,7 +274,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             <button
               aria-describedby="«r1»-loading-announcement"
               aria-label="Mark as done"
-              class="types__StyledButton-sc-ws60qy-0 gVycBz"
+              class="types__StyledButton-sc-ws60qy-0 gbYXLg"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -304,7 +304,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             <button
               aria-describedby="«r2»-loading-announcement"
               aria-label="Mark as read"
-              class="types__StyledButton-sc-ws60qy-0 gVycBz"
+              class="types__StyledButton-sc-ws60qy-0 gbYXLg"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -334,7 +334,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             <button
               aria-describedby="«r3»-loading-announcement"
               aria-label="Unsubscribe from thread"
-              class="types__StyledButton-sc-ws60qy-0 gVycBz"
+              class="types__StyledButton-sc-ws60qy-0 gbYXLg"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -372,7 +372,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
       id="138661096"
     >
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv relative"
+        class="Stack__StyledStack-sc-x3xa2i-0 oXGHI relative"
         data-align="center"
         data-direction="horizontal"
         data-gap="condensed"
@@ -382,7 +382,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
       >
         <span
           aria-label="Open Issue"
-          class="Tooltip__TooltipBase-sc-17tf59c-0 iTeBSL tooltipped-e"
+          class="Tooltip__TooltipBase-sc-17tf59c-0 ezknIY tooltipped-e"
           id="«r0»"
           role="tooltip"
         >
@@ -407,7 +407,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
           </svg>
         </span>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv cursor-pointer text-sm w-full truncate"
+          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI cursor-pointer text-sm w-full truncate"
           data-align="stretch"
           data-direction="vertical"
           data-gap="none"
@@ -419,7 +419,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             class="Box-sc-g0xbh4-0 py-0.5"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+              class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -433,7 +433,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 title="Open repository"
               >
                 <div
-                  class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+                  class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
                   data-align="center"
                   data-direction="horizontal"
                   data-gap="condensed"
@@ -444,7 +444,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 >
                   <img
                     alt="gitify-app/notifications-test"
-                    class="Avatar__StyledAvatar-sc-2lv0r8-0 cQsrln"
+                    class="Avatar__StyledAvatar-sc-2lv0r8-0 kgCEBA"
                     data-component="Avatar"
                     height="14"
                     size="14"
@@ -453,7 +453,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                     width="14"
                   />
                   <div
-                    class="Truncate__StyledTruncate-sc-23o1d2-0 cocpco"
+                    class="Truncate__StyledTruncate-sc-23o1d2-0 bPOncX"
                     maxwidth="280"
                     title="gitify-app/notifications-test"
                   >
@@ -467,7 +467,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             </div>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv mb-0.5 truncate"
+            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI mb-0.5 truncate"
             data-align="start"
             data-direction="horizontal"
             data-gap="condensed"
@@ -478,16 +478,16 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             title="I am a robot and this is a test!"
           >
             <span
-              class="Text-sc-17v1xeu-0 gfWGMy truncate"
+              class="Text-sc-17v1xeu-0 bLmNQN truncate"
             >
               I am a robot and this is a test!
             </span>
             <span
-              class="Text-sc-17v1xeu-0 gfWGMy text-xxs ml-auto mr-2 opacity-50 hidden"
+              class="Text-sc-17v1xeu-0 bLmNQN text-xxs ml-auto mr-2 opacity-50 hidden"
             />
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv text-xs opacity-80"
+            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI text-xs opacity-80"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -501,7 +501,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               title="gitify-app"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+                class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -512,7 +512,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               >
                 <img
                   alt="gitify-app"
-                  class="Avatar__StyledAvatar-sc-2lv0r8-0 cQsrln"
+                  class="Avatar__StyledAvatar-sc-2lv0r8-0 kgCEBA"
                   data-component="Avatar"
                   height="14"
                   size="14"
@@ -523,7 +523,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               </div>
             </div>
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+              class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
               data-align="stretch"
               data-direction="horizontal"
               data-gap="none"
@@ -532,28 +532,28 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               data-wrap="nowrap"
             >
               <span
-                class="Text-sc-17v1xeu-0 gfWGMy pr-1"
+                class="Text-sc-17v1xeu-0 bLmNQN pr-1"
                 title="You're watching the repository."
               >
                 Updated
               </span>
               <relative-time
-                class="sc-Qotzb"
+                class="sc-bXdtCk"
                 datetime="2017-05-20T17:51:57.000Z"
               >
-                May 20, 2017
+                May 21, 2017
               </relative-time>
             </div>
             <div
               class="Box-sc-g0xbh4-0 flex gap-1"
             >
               <span
-                class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+                class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
                 title="octocat approved these changes"
                 variant="secondary"
               >
                 <div
-                  class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+                  class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
                   data-align="center"
                   data-direction="horizontal"
                   data-gap="none"
@@ -578,19 +578,19 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                     />
                   </svg>
                   <span
-                    class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+                    class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
                   >
                     1
                   </span>
                 </div>
               </span>
               <span
-                class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+                class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
                 title="gitify-app requested changes"
                 variant="secondary"
               >
                 <div
-                  class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+                  class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
                   data-align="center"
                   data-direction="horizontal"
                   data-gap="none"
@@ -615,7 +615,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                     />
                   </svg>
                   <span
-                    class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+                    class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
                   >
                     1
                   </span>
@@ -625,7 +625,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
           </div>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv absolute right-0 h-full opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-notification-hover"
+          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI absolute right-0 h-full opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-notification-hover"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -636,7 +636,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
           <button
             aria-describedby="«r1»-loading-announcement"
             aria-label="Mark as done"
-            class="types__StyledButton-sc-ws60qy-0 gVycBz"
+            class="types__StyledButton-sc-ws60qy-0 gbYXLg"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
@@ -666,7 +666,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
           <button
             aria-describedby="«r2»-loading-announcement"
             aria-label="Mark as read"
-            class="types__StyledButton-sc-ws60qy-0 gVycBz"
+            class="types__StyledButton-sc-ws60qy-0 gbYXLg"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
@@ -696,7 +696,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
           <button
             aria-describedby="«r3»-loading-announcement"
             aria-label="Unsubscribe from thread"
-            class="types__StyledButton-sc-ws60qy-0 gVycBz"
+            class="types__StyledButton-sc-ws60qy-0 gbYXLg"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
@@ -791,7 +791,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
         id="138661096"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv relative"
+          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI relative"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -801,7 +801,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
         >
           <span
             aria-label="Open Issue"
-            class="Tooltip__TooltipBase-sc-17tf59c-0 iTeBSL tooltipped-e"
+            class="Tooltip__TooltipBase-sc-17tf59c-0 ezknIY tooltipped-e"
             id="«r4»"
             role="tooltip"
           >
@@ -826,7 +826,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             </svg>
           </span>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv cursor-pointer text-sm w-full truncate"
+            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI cursor-pointer text-sm w-full truncate"
             data-align="stretch"
             data-direction="vertical"
             data-gap="none"
@@ -835,7 +835,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             data-wrap="nowrap"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv mb-0.5 truncate"
+              class="Stack__StyledStack-sc-x3xa2i-0 oXGHI mb-0.5 truncate"
               data-align="start"
               data-direction="horizontal"
               data-gap="condensed"
@@ -846,16 +846,16 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               title="I am a robot and this is a test!"
             >
               <span
-                class="Text-sc-17v1xeu-0 gfWGMy truncate"
+                class="Text-sc-17v1xeu-0 bLmNQN truncate"
               >
                 I am a robot and this is a test!
               </span>
               <span
-                class="Text-sc-17v1xeu-0 gfWGMy text-xxs ml-auto mr-2 opacity-50"
+                class="Text-sc-17v1xeu-0 bLmNQN text-xxs ml-auto mr-2 opacity-50"
               />
             </div>
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv text-xs opacity-80"
+              class="Stack__StyledStack-sc-x3xa2i-0 oXGHI text-xs opacity-80"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -869,7 +869,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 title="gitify-app"
               >
                 <div
-                  class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+                  class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
                   data-align="center"
                   data-direction="horizontal"
                   data-gap="condensed"
@@ -880,7 +880,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 >
                   <img
                     alt="gitify-app"
-                    class="Avatar__StyledAvatar-sc-2lv0r8-0 cQsrln"
+                    class="Avatar__StyledAvatar-sc-2lv0r8-0 kgCEBA"
                     data-component="Avatar"
                     height="14"
                     size="14"
@@ -891,7 +891,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 </div>
               </div>
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+                class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
                 data-align="stretch"
                 data-direction="horizontal"
                 data-gap="none"
@@ -900,28 +900,28 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 data-wrap="nowrap"
               >
                 <span
-                  class="Text-sc-17v1xeu-0 gfWGMy pr-1"
+                  class="Text-sc-17v1xeu-0 bLmNQN pr-1"
                   title="You're watching the repository."
                 >
                   Updated
                 </span>
                 <relative-time
-                  class="sc-Qotzb"
+                  class="sc-bXdtCk"
                   datetime="2017-05-20T17:51:57.000Z"
                 >
-                  May 20, 2017
+                  May 21, 2017
                 </relative-time>
               </div>
               <div
                 class="Box-sc-g0xbh4-0 flex gap-1"
               >
                 <span
-                  class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+                  class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
                   title="octocat approved these changes"
                   variant="secondary"
                 >
                   <div
-                    class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+                    class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
                     data-align="center"
                     data-direction="horizontal"
                     data-gap="none"
@@ -946,19 +946,19 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                       />
                     </svg>
                     <span
-                      class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+                      class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
                     >
                       1
                     </span>
                   </div>
                 </span>
                 <span
-                  class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+                  class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
                   title="gitify-app requested changes"
                   variant="secondary"
                 >
                   <div
-                    class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+                    class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
                     data-align="center"
                     data-direction="horizontal"
                     data-gap="none"
@@ -983,7 +983,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                       />
                     </svg>
                     <span
-                      class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+                      class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
                     >
                       1
                     </span>
@@ -993,7 +993,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             </div>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv absolute right-0 h-full opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-notification-hover"
+            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI absolute right-0 h-full opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-notification-hover"
             data-align="center"
             data-direction="horizontal"
             data-gap="none"
@@ -1004,7 +1004,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             <button
               aria-describedby="«r5»-loading-announcement"
               aria-label="Mark as done"
-              class="types__StyledButton-sc-ws60qy-0 gVycBz"
+              class="types__StyledButton-sc-ws60qy-0 gbYXLg"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -1034,7 +1034,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             <button
               aria-describedby="«r6»-loading-announcement"
               aria-label="Mark as read"
-              class="types__StyledButton-sc-ws60qy-0 gVycBz"
+              class="types__StyledButton-sc-ws60qy-0 gbYXLg"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -1064,7 +1064,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             <button
               aria-describedby="«r7»-loading-announcement"
               aria-label="Unsubscribe from thread"
-              class="types__StyledButton-sc-ws60qy-0 gVycBz"
+              class="types__StyledButton-sc-ws60qy-0 gbYXLg"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -1102,7 +1102,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
       id="138661096"
     >
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv relative"
+        class="Stack__StyledStack-sc-x3xa2i-0 oXGHI relative"
         data-align="center"
         data-direction="horizontal"
         data-gap="condensed"
@@ -1112,7 +1112,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
       >
         <span
           aria-label="Open Issue"
-          class="Tooltip__TooltipBase-sc-17tf59c-0 iTeBSL tooltipped-e"
+          class="Tooltip__TooltipBase-sc-17tf59c-0 ezknIY tooltipped-e"
           id="«r4»"
           role="tooltip"
         >
@@ -1137,7 +1137,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
           </svg>
         </span>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv cursor-pointer text-sm w-full truncate"
+          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI cursor-pointer text-sm w-full truncate"
           data-align="stretch"
           data-direction="vertical"
           data-gap="none"
@@ -1146,7 +1146,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
           data-wrap="nowrap"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv mb-0.5 truncate"
+            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI mb-0.5 truncate"
             data-align="start"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1157,16 +1157,16 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             title="I am a robot and this is a test!"
           >
             <span
-              class="Text-sc-17v1xeu-0 gfWGMy truncate"
+              class="Text-sc-17v1xeu-0 bLmNQN truncate"
             >
               I am a robot and this is a test!
             </span>
             <span
-              class="Text-sc-17v1xeu-0 gfWGMy text-xxs ml-auto mr-2 opacity-50"
+              class="Text-sc-17v1xeu-0 bLmNQN text-xxs ml-auto mr-2 opacity-50"
             />
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv text-xs opacity-80"
+            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI text-xs opacity-80"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1180,7 +1180,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               title="gitify-app"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+                class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -1191,7 +1191,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               >
                 <img
                   alt="gitify-app"
-                  class="Avatar__StyledAvatar-sc-2lv0r8-0 cQsrln"
+                  class="Avatar__StyledAvatar-sc-2lv0r8-0 kgCEBA"
                   data-component="Avatar"
                   height="14"
                   size="14"
@@ -1202,7 +1202,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               </div>
             </div>
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+              class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
               data-align="stretch"
               data-direction="horizontal"
               data-gap="none"
@@ -1211,28 +1211,28 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               data-wrap="nowrap"
             >
               <span
-                class="Text-sc-17v1xeu-0 gfWGMy pr-1"
+                class="Text-sc-17v1xeu-0 bLmNQN pr-1"
                 title="You're watching the repository."
               >
                 Updated
               </span>
               <relative-time
-                class="sc-Qotzb"
+                class="sc-bXdtCk"
                 datetime="2017-05-20T17:51:57.000Z"
               >
-                May 20, 2017
+                May 21, 2017
               </relative-time>
             </div>
             <div
               class="Box-sc-g0xbh4-0 flex gap-1"
             >
               <span
-                class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+                class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
                 title="octocat approved these changes"
                 variant="secondary"
               >
                 <div
-                  class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+                  class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
                   data-align="center"
                   data-direction="horizontal"
                   data-gap="none"
@@ -1257,19 +1257,19 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                     />
                   </svg>
                   <span
-                    class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+                    class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
                   >
                     1
                   </span>
                 </div>
               </span>
               <span
-                class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+                class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
                 title="gitify-app requested changes"
                 variant="secondary"
               >
                 <div
-                  class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+                  class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
                   data-align="center"
                   data-direction="horizontal"
                   data-gap="none"
@@ -1294,7 +1294,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                     />
                   </svg>
                   <span
-                    class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+                    class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
                   >
                     1
                   </span>
@@ -1304,7 +1304,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
           </div>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv absolute right-0 h-full opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-notification-hover"
+          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI absolute right-0 h-full opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-notification-hover"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -1315,7 +1315,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
           <button
             aria-describedby="«r5»-loading-announcement"
             aria-label="Mark as done"
-            class="types__StyledButton-sc-ws60qy-0 gVycBz"
+            class="types__StyledButton-sc-ws60qy-0 gbYXLg"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
@@ -1345,7 +1345,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
           <button
             aria-describedby="«r6»-loading-announcement"
             aria-label="Mark as read"
-            class="types__StyledButton-sc-ws60qy-0 gVycBz"
+            class="types__StyledButton-sc-ws60qy-0 gbYXLg"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
@@ -1375,7 +1375,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
           <button
             aria-describedby="«r7»-loading-announcement"
             aria-label="Unsubscribe from thread"
-            class="types__StyledButton-sc-ws60qy-0 gVycBz"
+            class="types__StyledButton-sc-ws60qy-0 gbYXLg"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
@@ -1470,7 +1470,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
         id="138661096"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv relative"
+          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI relative"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -1480,7 +1480,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
         >
           <span
             aria-label="Open Issue"
-            class="Tooltip__TooltipBase-sc-17tf59c-0 iTeBSL tooltipped-e"
+            class="Tooltip__TooltipBase-sc-17tf59c-0 ezknIY tooltipped-e"
             id="«r8»"
             role="tooltip"
           >
@@ -1505,7 +1505,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             </svg>
           </span>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv cursor-pointer text-sm w-full truncate"
+            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI cursor-pointer text-sm w-full truncate"
             data-align="stretch"
             data-direction="vertical"
             data-gap="none"
@@ -1514,7 +1514,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             data-wrap="nowrap"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv mb-0.5 truncate"
+              class="Stack__StyledStack-sc-x3xa2i-0 oXGHI mb-0.5 truncate"
               data-align="start"
               data-direction="horizontal"
               data-gap="condensed"
@@ -1525,16 +1525,16 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               title="I am a robot and this is a test!"
             >
               <span
-                class="Text-sc-17v1xeu-0 gfWGMy truncate"
+                class="Text-sc-17v1xeu-0 bLmNQN truncate"
               >
                 I am a robot and this is a test!
               </span>
               <span
-                class="Text-sc-17v1xeu-0 gfWGMy text-xxs ml-auto mr-2 opacity-50 hidden"
+                class="Text-sc-17v1xeu-0 bLmNQN text-xxs ml-auto mr-2 opacity-50 hidden"
               />
             </div>
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv text-xs opacity-80"
+              class="Stack__StyledStack-sc-x3xa2i-0 oXGHI text-xs opacity-80"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -1548,7 +1548,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 title="gitify-app"
               >
                 <div
-                  class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+                  class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
                   data-align="center"
                   data-direction="horizontal"
                   data-gap="condensed"
@@ -1559,7 +1559,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 >
                   <img
                     alt="gitify-app"
-                    class="Avatar__StyledAvatar-sc-2lv0r8-0 cQsrln"
+                    class="Avatar__StyledAvatar-sc-2lv0r8-0 kgCEBA"
                     data-component="Avatar"
                     height="14"
                     size="14"
@@ -1570,7 +1570,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 </div>
               </div>
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+                class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
                 data-align="stretch"
                 data-direction="horizontal"
                 data-gap="none"
@@ -1579,28 +1579,28 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 data-wrap="nowrap"
               >
                 <span
-                  class="Text-sc-17v1xeu-0 gfWGMy pr-1"
+                  class="Text-sc-17v1xeu-0 bLmNQN pr-1"
                   title="You're watching the repository."
                 >
                   Updated
                 </span>
                 <relative-time
-                  class="sc-Qotzb"
+                  class="sc-bXdtCk"
                   datetime="2017-05-20T17:51:57.000Z"
                 >
-                  May 20, 2017
+                  May 21, 2017
                 </relative-time>
               </div>
               <div
                 class="Box-sc-g0xbh4-0 flex gap-1"
               >
                 <span
-                  class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+                  class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
                   title="octocat approved these changes"
                   variant="secondary"
                 >
                   <div
-                    class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+                    class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
                     data-align="center"
                     data-direction="horizontal"
                     data-gap="none"
@@ -1625,19 +1625,19 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                       />
                     </svg>
                     <span
-                      class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+                      class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
                     >
                       1
                     </span>
                   </div>
                 </span>
                 <span
-                  class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+                  class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
                   title="gitify-app requested changes"
                   variant="secondary"
                 >
                   <div
-                    class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+                    class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
                     data-align="center"
                     data-direction="horizontal"
                     data-gap="none"
@@ -1662,7 +1662,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                       />
                     </svg>
                     <span
-                      class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+                      class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
                     >
                       1
                     </span>
@@ -1672,7 +1672,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             </div>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv absolute right-0 h-full opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-notification-hover"
+            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI absolute right-0 h-full opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-notification-hover"
             data-align="center"
             data-direction="horizontal"
             data-gap="none"
@@ -1683,7 +1683,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             <button
               aria-describedby="«r9»-loading-announcement"
               aria-label="Mark as done"
-              class="types__StyledButton-sc-ws60qy-0 gVycBz"
+              class="types__StyledButton-sc-ws60qy-0 gbYXLg"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -1713,7 +1713,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             <button
               aria-describedby="«ra»-loading-announcement"
               aria-label="Mark as read"
-              class="types__StyledButton-sc-ws60qy-0 gVycBz"
+              class="types__StyledButton-sc-ws60qy-0 gbYXLg"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -1743,7 +1743,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             <button
               aria-describedby="«rb»-loading-announcement"
               aria-label="Unsubscribe from thread"
-              class="types__StyledButton-sc-ws60qy-0 gVycBz"
+              class="types__StyledButton-sc-ws60qy-0 gbYXLg"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
@@ -1781,7 +1781,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
       id="138661096"
     >
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv relative"
+        class="Stack__StyledStack-sc-x3xa2i-0 oXGHI relative"
         data-align="center"
         data-direction="horizontal"
         data-gap="condensed"
@@ -1791,7 +1791,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
       >
         <span
           aria-label="Open Issue"
-          class="Tooltip__TooltipBase-sc-17tf59c-0 iTeBSL tooltipped-e"
+          class="Tooltip__TooltipBase-sc-17tf59c-0 ezknIY tooltipped-e"
           id="«r8»"
           role="tooltip"
         >
@@ -1816,7 +1816,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
           </svg>
         </span>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv cursor-pointer text-sm w-full truncate"
+          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI cursor-pointer text-sm w-full truncate"
           data-align="stretch"
           data-direction="vertical"
           data-gap="none"
@@ -1825,7 +1825,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
           data-wrap="nowrap"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv mb-0.5 truncate"
+            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI mb-0.5 truncate"
             data-align="start"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1836,16 +1836,16 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             title="I am a robot and this is a test!"
           >
             <span
-              class="Text-sc-17v1xeu-0 gfWGMy truncate"
+              class="Text-sc-17v1xeu-0 bLmNQN truncate"
             >
               I am a robot and this is a test!
             </span>
             <span
-              class="Text-sc-17v1xeu-0 gfWGMy text-xxs ml-auto mr-2 opacity-50 hidden"
+              class="Text-sc-17v1xeu-0 bLmNQN text-xxs ml-auto mr-2 opacity-50 hidden"
             />
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv text-xs opacity-80"
+            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI text-xs opacity-80"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1859,7 +1859,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               title="gitify-app"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+                class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -1870,7 +1870,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               >
                 <img
                   alt="gitify-app"
-                  class="Avatar__StyledAvatar-sc-2lv0r8-0 cQsrln"
+                  class="Avatar__StyledAvatar-sc-2lv0r8-0 kgCEBA"
                   data-component="Avatar"
                   height="14"
                   size="14"
@@ -1881,7 +1881,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               </div>
             </div>
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+              class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
               data-align="stretch"
               data-direction="horizontal"
               data-gap="none"
@@ -1890,28 +1890,28 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               data-wrap="nowrap"
             >
               <span
-                class="Text-sc-17v1xeu-0 gfWGMy pr-1"
+                class="Text-sc-17v1xeu-0 bLmNQN pr-1"
                 title="You're watching the repository."
               >
                 Updated
               </span>
               <relative-time
-                class="sc-Qotzb"
+                class="sc-bXdtCk"
                 datetime="2017-05-20T17:51:57.000Z"
               >
-                May 20, 2017
+                May 21, 2017
               </relative-time>
             </div>
             <div
               class="Box-sc-g0xbh4-0 flex gap-1"
             >
               <span
-                class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+                class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
                 title="octocat approved these changes"
                 variant="secondary"
               >
                 <div
-                  class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+                  class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
                   data-align="center"
                   data-direction="horizontal"
                   data-gap="none"
@@ -1936,19 +1936,19 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                     />
                   </svg>
                   <span
-                    class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+                    class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
                   >
                     1
                   </span>
                 </div>
               </span>
               <span
-                class="Label__StyledLabel-sc-1dgcne-0 bfuyfM hover:bg-gitify-notification-pill-hover"
+                class="Label__StyledLabel-sc-1dgcne-0 iMIKon hover:bg-gitify-notification-pill-hover"
                 title="gitify-app requested changes"
                 variant="secondary"
               >
                 <div
-                  class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv"
+                  class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
                   data-align="center"
                   data-direction="horizontal"
                   data-gap="none"
@@ -1973,7 +1973,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                     />
                   </svg>
                   <span
-                    class="Text-sc-17v1xeu-0 gfWGMy text-xxs px-1"
+                    class="Text-sc-17v1xeu-0 bLmNQN text-xxs px-1"
                   >
                     1
                   </span>
@@ -1983,7 +1983,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
           </div>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 cRiRbv absolute right-0 h-full opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-notification-hover"
+          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI absolute right-0 h-full opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-notification-hover"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -1994,7 +1994,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
           <button
             aria-describedby="«r9»-loading-announcement"
             aria-label="Mark as done"
-            class="types__StyledButton-sc-ws60qy-0 gVycBz"
+            class="types__StyledButton-sc-ws60qy-0 gbYXLg"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
@@ -2024,7 +2024,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
           <button
             aria-describedby="«ra»-loading-announcement"
             aria-label="Mark as read"
-            class="types__StyledButton-sc-ws60qy-0 gVycBz"
+            class="types__StyledButton-sc-ws60qy-0 gbYXLg"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
@@ -2054,7 +2054,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
           <button
             aria-describedby="«rb»-loading-announcement"
             aria-label="Unsubscribe from thread"
-            class="types__StyledButton-sc-ws60qy-0 gVycBz"
+            class="types__StyledButton-sc-ws60qy-0 gbYXLg"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
