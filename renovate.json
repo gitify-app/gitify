@@ -8,17 +8,23 @@
     "customManagers:biomeVersions",
     "helpers:pinGitHubActionDigests"
   ],
-  "labels": ["dependency"],
+  "labels": [
+    "dependency"
+  ],
   "prConcurrentLimit": 5,
   "rangeStrategy": "pin",
   "packageRules": [
     {
-      "matchDepTypes": ["engines"],
+      "matchDepTypes": [
+        "engines"
+      ],
       "rangeStrategy": "auto"
     },
     {
       "description": "Remove word `dependency` from commit messages and PR titles",
-      "matchDatasources": ["npm"],
+      "matchDatasources": [
+        "npm"
+      ],
       "commitMessageTopic": "{{depName}}"
     }
   ],
@@ -29,8 +35,12 @@
       "datasourceTemplate": "github-tags",
       "depNameTemplate": "gitify-app/gitify",
       "versioningTemplate": "loose",
-      "fileMatch": ["sonar-project.properties"],
-      "matchStrings": ["\\s?sonar.projectVersion=(?<currentValue>.+?)\\s"]
+      "managerFilePatterns": [
+        "/sonar-project.properties/"
+      ],
+      "matchStrings": [
+        "\\s?sonar.projectVersion=(?<currentValue>.+?)\\s"
+      ]
     }
   ]
 }
