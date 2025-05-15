@@ -126,7 +126,12 @@
   },
   "packageManager": "pnpm@10.11.0",
   "pnpm": {
-    "onlyBuiltDependencies": ["@biomejs/biome", "electron", "esbuild"]
+    "onlyBuiltDependencies": [
+      "@biomejs/biome",
+      "@tailwindcss/oxide",
+      "electron",
+      "esbuild"
+    ]
   },
   "lint-staged": {
     "*": "biome check --fix --no-errors-on-unmatched",
