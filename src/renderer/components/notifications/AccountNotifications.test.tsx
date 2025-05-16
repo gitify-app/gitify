@@ -1,4 +1,6 @@
-import { act, fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+
 import {
   mockGitHubCloudAccount,
   mockSettings,
@@ -34,6 +36,7 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
         <AccountNotifications {...props} />
       </AppContext.Provider>,
     );
+
     expect(tree).toMatchSnapshot();
   });
 
@@ -52,6 +55,7 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
         <AccountNotifications {...props} />
       </AppContext.Provider>,
     );
+
     expect(tree).toMatchSnapshot();
   });
 
@@ -68,6 +72,7 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
         <AccountNotifications {...props} />
       </AppContext.Provider>,
     );
+
     expect(tree).toMatchSnapshot();
   });
 
@@ -88,6 +93,7 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
         <AccountNotifications {...props} />
       </AppContext.Provider>,
     );
+
     expect(tree).toMatchSnapshot();
   });
 
@@ -103,15 +109,13 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
       error: null,
     };
 
-    await act(async () => {
-      render(
-        <AppContext.Provider value={{ settings: mockSettings }}>
-          <AccountNotifications {...props} />
-        </AppContext.Provider>,
-      );
-    });
+    render(
+      <AppContext.Provider value={{ settings: mockSettings }}>
+        <AccountNotifications {...props} />
+      </AppContext.Provider>,
+    );
 
-    fireEvent.click(screen.getByTestId('account-profile'));
+    await userEvent.click(screen.getByTestId('account-profile'));
 
     expect(openAccountProfileMock).toHaveBeenCalledTimes(1);
     expect(openAccountProfileMock).toHaveBeenCalledWith(mockGitHubCloudAccount);
@@ -129,15 +133,13 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
       error: null,
     };
 
-    await act(async () => {
-      render(
-        <AppContext.Provider value={{ settings: mockSettings }}>
-          <AccountNotifications {...props} />
-        </AppContext.Provider>,
-      );
-    });
+    render(
+      <AppContext.Provider value={{ settings: mockSettings }}>
+        <AccountNotifications {...props} />
+      </AppContext.Provider>,
+    );
 
-    fireEvent.click(screen.getByTestId('account-issues'));
+    await userEvent.click(screen.getByTestId('account-issues'));
 
     expect(openMyIssuesMock).toHaveBeenCalledTimes(1);
     expect(openMyIssuesMock).toHaveBeenCalledWith(
@@ -157,15 +159,13 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
       error: null,
     };
 
-    await act(async () => {
-      render(
-        <AppContext.Provider value={{ settings: mockSettings }}>
-          <AccountNotifications {...props} />
-        </AppContext.Provider>,
-      );
-    });
+    render(
+      <AppContext.Provider value={{ settings: mockSettings }}>
+        <AccountNotifications {...props} />
+      </AppContext.Provider>,
+    );
 
-    fireEvent.click(screen.getByTestId('account-pull-requests'));
+    await userEvent.click(screen.getByTestId('account-pull-requests'));
 
     expect(openPullRequestsMock).toHaveBeenCalledTimes(1);
     expect(openPullRequestsMock).toHaveBeenCalledWith(
@@ -181,15 +181,13 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
       error: null,
     };
 
-    await act(async () => {
-      render(
-        <AppContext.Provider value={{ settings: mockSettings }}>
-          <AccountNotifications {...props} />
-        </AppContext.Provider>,
-      );
-    });
+    render(
+      <AppContext.Provider value={{ settings: mockSettings }}>
+        <AccountNotifications {...props} />
+      </AppContext.Provider>,
+    );
 
-    fireEvent.click(screen.getByTestId('account-toggle'));
+    await userEvent.click(screen.getByTestId('account-toggle'));
 
     const tree = render(
       <AppContext.Provider value={{ settings: mockSettings }}>

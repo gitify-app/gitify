@@ -1,4 +1,6 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+
 import {
   mockAuth,
   mockGitHubCloudAccount,
@@ -36,6 +38,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
         <NotificationRow {...props} />
       </AppContext.Provider>,
     );
+
     expect(tree).toMatchSnapshot();
   });
 
@@ -56,6 +59,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
         <NotificationRow {...props} />
       </AppContext.Provider>,
     );
+
     expect(tree).toMatchSnapshot();
   });
 
@@ -76,11 +80,12 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
         <NotificationRow {...props} />
       </AppContext.Provider>,
     );
+
     expect(tree).toMatchSnapshot();
   });
 
   describe('notification interactions', () => {
-    it('should open a notification in the browser - click', () => {
+    it('should open a notification in the browser - click', async () => {
       const markNotificationsAsRead = jest.fn();
 
       const props = {
@@ -100,12 +105,13 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
         </AppContext.Provider>,
       );
 
-      fireEvent.click(screen.getByTestId('notification-row'));
+      await userEvent.click(screen.getByTestId('notification-row'));
+
       expect(links.openNotification).toHaveBeenCalledTimes(1);
       expect(markNotificationsAsRead).toHaveBeenCalledTimes(1);
     });
 
-    it('should open a notification in the browser - delay notification setting enabled', () => {
+    it('should open a notification in the browser - delay notification setting enabled', async () => {
       const markNotificationsAsRead = jest.fn();
 
       const props = {
@@ -129,12 +135,13 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
         </AppContext.Provider>,
       );
 
-      fireEvent.click(screen.getByTestId('notification-row'));
+      await userEvent.click(screen.getByTestId('notification-row'));
+
       expect(links.openNotification).toHaveBeenCalledTimes(1);
       expect(markNotificationsAsRead).toHaveBeenCalledTimes(1);
     });
 
-    it('should open a notification in browser & mark it as done', () => {
+    it('should open a notification in browser & mark it as done', async () => {
       const markNotificationsAsDone = jest.fn();
 
       const props = {
@@ -154,12 +161,13 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
         </AppContext.Provider>,
       );
 
-      fireEvent.click(screen.getByTestId('notification-row'));
+      await userEvent.click(screen.getByTestId('notification-row'));
+
       expect(links.openNotification).toHaveBeenCalledTimes(1);
       expect(markNotificationsAsDone).toHaveBeenCalledTimes(1);
     });
 
-    it('should mark notifications as read', () => {
+    it('should mark notifications as read', async () => {
       const markNotificationsAsRead = jest.fn();
 
       const props = {
@@ -178,11 +186,12 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
         </AppContext.Provider>,
       );
 
-      fireEvent.click(screen.getByTestId('notification-mark-as-read'));
+      await userEvent.click(screen.getByTestId('notification-mark-as-read'));
+
       expect(markNotificationsAsRead).toHaveBeenCalledTimes(1);
     });
 
-    it('should mark notifications as done', () => {
+    it('should mark notifications as done', async () => {
       const markNotificationsAsDone = jest.fn();
 
       const props = {
@@ -198,11 +207,12 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
         </AppContext.Provider>,
       );
 
-      fireEvent.click(screen.getByTestId('notification-mark-as-done'));
+      await userEvent.click(screen.getByTestId('notification-mark-as-done'));
+
       expect(markNotificationsAsDone).toHaveBeenCalledTimes(1);
     });
 
-    it('should unsubscribe from a notification thread', () => {
+    it('should unsubscribe from a notification thread', async () => {
       const unsubscribeNotification = jest.fn();
 
       const props = {
@@ -219,9 +229,11 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
           </AppContext.Provider>
         </AppContext.Provider>,
       );
-      fireEvent.click(
+
+      await userEvent.click(
         screen.getByTestId('notification-unsubscribe-from-thread'),
       );
+
       expect(unsubscribeNotification).toHaveBeenCalledTimes(1);
     });
   });
