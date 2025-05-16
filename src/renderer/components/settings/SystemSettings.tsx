@@ -93,7 +93,11 @@ export const SystemSettings: FC = () => {
               onChange={(evt) => updateSetting('playSound', evt.target.checked)}
             />
 
-            <ButtonGroup className="ml-2" hidden={!settings.playSound}>
+            <ButtonGroup
+              className="ml-2"
+              hidden={!settings.playSound}
+              data-testid="settings-volume-group"
+            >
               <IconButton
                 aria-label="Volume down"
                 size="small"
