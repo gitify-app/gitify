@@ -1,5 +1,7 @@
-import { act, fireEvent, render, screen } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
+
 import { mockAuth, mockSettings } from '../../__mocks__/state-mocks';
 import { AppContext } from '../../context/App';
 import { SystemSettings } from './SystemSettings';
@@ -28,7 +30,7 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
       );
     });
 
-    fireEvent.click(screen.getByTestId('radio-openlinks-background'));
+    await userEvent.click(screen.getByTestId('radio-openLinks-background'));
 
     expect(updateSetting).toHaveBeenCalledTimes(1);
     expect(updateSetting).toHaveBeenCalledWith('openLinks', 'BACKGROUND');
@@ -51,9 +53,7 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
       );
     });
 
-    fireEvent.click(screen.getByTestId('checkbox-keyboardShortcut'), {
-      target: { checked: true },
-    });
+    await userEvent.click(screen.getByTestId('checkbox-keyboardShortcut'));
 
     expect(updateSetting).toHaveBeenCalledTimes(1);
     expect(updateSetting).toHaveBeenCalledWith('keyboardShortcut', false);
@@ -76,11 +76,8 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
       );
     });
 
-    fireEvent.click(
+    await userEvent.click(
       screen.getByTestId('checkbox-showNotificationsCountInTray'),
-      {
-        target: { checked: true },
-      },
     );
 
     expect(updateSetting).toHaveBeenCalledTimes(1);
@@ -107,16 +104,52 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
       );
     });
 
-    fireEvent.click(screen.getByTestId('checkbox-showNotifications'), {
-      target: { checked: true },
-    });
+    await userEvent.click(screen.getByTestId('checkbox-showNotifications'));
 
     expect(updateSetting).toHaveBeenCalledTimes(1);
     expect(updateSetting).toHaveBeenCalledWith('showNotifications', false);
   });
 
-  it('should toggle the playSound checkbox', async () => {
-    await act(async () => {
+  describe('playSound', () => {
+    it('should toggle the playSound checkbox', async () => {
+      const { rerender } = render(
+        <AppContext.Provider
+          value={{
+            auth: mockAuth,
+            settings: mockSettings,
+            updateSetting,
+          }}
+        >
+          <MemoryRouter>
+            <SystemSettings />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
+
+      await userEvent.click(screen.getByTestId('checkbox-playSound'));
+
+      expect(updateSetting).toHaveBeenCalledTimes(1);
+      expect(updateSetting).toHaveBeenCalledWith('playSound', false);
+
+      // Simulate update to context with playSound = false
+      rerender(
+        <AppContext.Provider
+          value={{
+            auth: mockAuth,
+            settings: { ...mockSettings, playSound: false },
+            updateSetting,
+          }}
+        >
+          <MemoryRouter>
+            <SystemSettings />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
+
+      expect(screen.getByTestId('settings-volume-group')).not.toBeVisible();
+    });
+
+    it('should increase playSound volume', async () => {
       render(
         <AppContext.Provider
           value={{
@@ -130,14 +163,57 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
           </MemoryRouter>
         </AppContext.Provider>,
       );
+
+      await userEvent.click(screen.getByTestId('settings-volume-up'));
+
+      expect(updateSetting).toHaveBeenCalledTimes(1);
+      expect(updateSetting).toHaveBeenCalledWith('notificationVolume', 30);
     });
 
-    fireEvent.click(screen.getByTestId('checkbox-playSound'), {
-      target: { checked: true },
+    it('should decrease playSound volume', async () => {
+      render(
+        <AppContext.Provider
+          value={{
+            auth: mockAuth,
+            settings: mockSettings,
+            updateSetting,
+          }}
+        >
+          <MemoryRouter>
+            <SystemSettings />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
+
+      await userEvent.click(screen.getByTestId('settings-volume-down'));
+
+      expect(updateSetting).toHaveBeenCalledTimes(1);
+      expect(updateSetting).toHaveBeenCalledWith('notificationVolume', 10);
     });
 
-    expect(updateSetting).toHaveBeenCalledTimes(1);
-    expect(updateSetting).toHaveBeenCalledWith('playSound', false);
+    it('should reset playSound volume', async () => {
+      render(
+        <AppContext.Provider
+          value={{
+            auth: mockAuth,
+            settings: {
+              ...mockSettings,
+              notificationVolume: 30,
+            },
+            updateSetting,
+          }}
+        >
+          <MemoryRouter>
+            <SystemSettings />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
+
+      await userEvent.click(screen.getByTestId('settings-volume-reset'));
+
+      expect(updateSetting).toHaveBeenCalledTimes(1);
+      expect(updateSetting).toHaveBeenCalledWith('notificationVolume', 20);
+    });
   });
 
   it('should toggle the useAlternateIdleIcon checkbox', async () => {
@@ -157,12 +233,10 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
       );
     });
 
-    fireEvent.click(screen.getByTestId('checkbox-useAlternateIdleIcon'), {
-      target: { checked: true },
-    });
+    await userEvent.click(screen.getByTestId('checkbox-useAlternateIdleIcon'));
 
     expect(updateSetting).toHaveBeenCalledTimes(1);
-    expect(updateSetting).toHaveBeenCalledWith('useAlternateIdleIcon', false);
+    expect(updateSetting).toHaveBeenCalledWith('useAlternateIdleIcon', true);
   });
 
   it('should toggle the openAtStartup checkbox', async () => {
@@ -182,11 +256,9 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
       );
     });
 
-    fireEvent.click(screen.getByTestId('checkbox-openAtStartup'), {
-      target: { checked: true },
-    });
+    await userEvent.click(screen.getByTestId('checkbox-openAtStartup'));
 
     expect(updateSetting).toHaveBeenCalledTimes(1);
-    expect(updateSetting).toHaveBeenCalledWith('openAtStartup', false);
+    expect(updateSetting).toHaveBeenCalledWith('openAtStartup', true);
   });
 });

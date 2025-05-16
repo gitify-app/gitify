@@ -24,7 +24,7 @@ export const RadioGroup: FC<IRadioGroup> = (props: IRadioGroup) => {
       <FieldLabel name={props.name} label={props.label} />
 
       {props.options.map((item) => {
-        const name = `radio-${props.name}-${item.value}`.toLowerCase();
+        const name = `radio-${props.name}-${item.value.toLowerCase()}`;
 
         return (
           <Stack

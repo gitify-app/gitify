@@ -509,15 +509,15 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               <input
                 checked=""
                 class="size-4 cursor-pointer"
-                data-testid="radio-groupby-repository"
-                id="radio-groupby-repository"
+                data-testid="radio-groupBy-repository"
+                id="radio-groupBy-repository"
                 name="groupBy"
                 type="radio"
                 value="REPOSITORY"
               />
               <label
                 class="mr-3 font-medium cursor-pointer"
-                for="radio-groupby-repository"
+                for="radio-groupBy-repository"
               >
                 Repository
               </label>
@@ -533,15 +533,15 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             >
               <input
                 class="size-4 cursor-pointer"
-                data-testid="radio-groupby-date"
-                id="radio-groupby-date"
+                data-testid="radio-groupBy-date"
+                id="radio-groupBy-date"
                 name="groupBy"
                 type="radio"
                 value="DATE"
               />
               <label
                 class="mr-3 font-medium cursor-pointer"
-                for="radio-groupby-date"
+                for="radio-groupBy-date"
               >
                 Date
               </label>
@@ -1003,15 +1003,15 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               <input
                 checked=""
                 class="size-4 cursor-pointer"
-                data-testid="radio-openlinks-foreground"
-                id="radio-openlinks-foreground"
+                data-testid="radio-openLinks-foreground"
+                id="radio-openLinks-foreground"
                 name="openLinks"
                 type="radio"
                 value="FOREGROUND"
               />
               <label
                 class="mr-3 font-medium cursor-pointer"
-                for="radio-openlinks-foreground"
+                for="radio-openLinks-foreground"
               >
                 Foreground
               </label>
@@ -1027,15 +1027,15 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             >
               <input
                 class="size-4 cursor-pointer"
-                data-testid="radio-openlinks-background"
-                id="radio-openlinks-background"
+                data-testid="radio-openLinks-background"
+                id="radio-openLinks-background"
                 name="openLinks"
                 type="radio"
                 value="BACKGROUND"
               />
               <label
                 class="mr-3 font-medium cursor-pointer"
-                for="radio-openlinks-background"
+                for="radio-openLinks-background"
               >
                 Background
               </label>
@@ -1170,6 +1170,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               </div>
               <div
                 class="ButtonGroup-sc-1gxhls1-0 kzlbFy ml-2"
+                data-testid="settings-volume-group"
               >
                 <button
                   aria-describedby="«r5»-loading-announcement"
