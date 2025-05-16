@@ -29,7 +29,7 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
       );
     });
 
-    fireEvent.click(screen.getByTestId('radio-groupby-date'));
+    fireEvent.click(screen.getByTestId('radio-groupBy-date'));
 
     expect(updateSetting).toHaveBeenCalledTimes(1);
     expect(updateSetting).toHaveBeenCalledWith('groupBy', 'DATE');
