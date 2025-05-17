@@ -1,6 +1,8 @@
 import { MarkGithubIcon } from '@primer/octicons-react';
-import { act, fireEvent, render, screen } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
+
 import { mockAccountNotifications } from '../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../__mocks__/state-mocks';
 import { AppContext } from '../../context/App';
@@ -98,7 +100,7 @@ describe('renderer/components/filters/FilterSection.tsx', () => {
       );
     });
 
-    fireEvent.click(screen.getByLabelText('Open'));
+    await userEvent.click(screen.getByLabelText('Open'));
 
     expect(updateFilter).toHaveBeenCalledWith(mockFilterSetting, 'open', true);
 
@@ -133,7 +135,7 @@ describe('renderer/components/filters/FilterSection.tsx', () => {
       );
     });
 
-    fireEvent.click(screen.getByLabelText('Closed'));
+    await userEvent.click(screen.getByLabelText('Closed'));
 
     expect(updateFilter).toHaveBeenCalledWith(
       mockFilterSetting,

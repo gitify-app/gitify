@@ -1,4 +1,5 @@
 import { render } from '@testing-library/react';
+
 import { Contents } from './Contents';
 
 describe('renderer/components/layout/Contents.tsx', () => {

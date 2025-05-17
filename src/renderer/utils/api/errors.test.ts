@@ -1,4 +1,5 @@
 import { AxiosError, type AxiosResponse } from 'axios';
+
 import type { Link } from '../../types';
 import type { GitHubRESTError } from '../../typesGitHub';
 import { Errors } from '../errors';

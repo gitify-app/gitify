@@ -2,6 +2,7 @@ import axios from 'axios';
 import type { AxiosPromise, AxiosResponse } from 'axios';
 import { ipcRenderer } from 'electron';
 import nock from 'nock';
+
 import {
   mockAuth,
   mockGitHubCloudAccount,

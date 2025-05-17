@@ -1,5 +1,7 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
+
 import { AppContext } from '../context/App';
 import type { AuthState, ClientID, ClientSecret, Hostname } from '../types';
 import * as comms from '../utils/comms';
@@ -38,7 +40,7 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('let us go back', () => {
+  it('let us go back', async () => {
     render(
       <AppContext.Provider value={{ auth: mockAuth }}>
         <MemoryRouter>
@@ -47,7 +49,7 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
       </AppContext.Provider>,
     );
 
-    fireEvent.click(screen.getByTestId('header-nav-back'));
+    await userEvent.click(screen.getByTestId('header-nav-back'));
 
     expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
   });
@@ -89,11 +91,9 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
         </AppContext.Provider>,
       );
 
-      fireEvent.change(screen.getByTestId('login-hostname'), {
-        target: { value: '' },
-      });
+      await userEvent.clear(screen.getByTestId('login-hostname'));
 
-      fireEvent.click(screen.getByTestId('login-create-oauth-app'));
+      await userEvent.click(screen.getByTestId('login-create-oauth-app'));
 
       expect(openExternalLinkMock).toHaveBeenCalledTimes(0);
     });
@@ -107,11 +107,11 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
         </AppContext.Provider>,
       );
 
-      fireEvent.change(screen.getByTestId('login-hostname'), {
-        target: { value: 'company.github.com' },
-      });
+      const hostname = screen.getByTestId('login-hostname');
+      await userEvent.clear(hostname);
+      await userEvent.type(hostname, 'company.github.com');
 
-      fireEvent.click(screen.getByTestId('login-create-oauth-app'));
+      await userEvent.click(screen.getByTestId('login-create-oauth-app'));
 
       expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
     });
@@ -132,25 +132,27 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
       </AppContext.Provider>,
     );
 
-    fireEvent.change(screen.getByTestId('login-hostname'), {
-      target: { value: 'github.com' },
-    });
-    fireEvent.change(screen.getByTestId('login-clientId'), {
-      target: { value: '1234567890_ASDFGHJKL' },
-    });
-    fireEvent.change(screen.getByTestId('login-clientSecret'), {
-      target: { value: '1234567890_asdfghjklPOIUYTREWQ0987654321' },
-    });
+    const hostname = screen.getByTestId('login-hostname');
+    await userEvent.clear(hostname);
+    await userEvent.type(hostname, 'github.com');
 
-    fireEvent.click(screen.getByTestId('login-submit'));
+    await userEvent.type(
+      screen.getByTestId('login-clientId'),
+      '1234567890_ASDFGHJKL',
+    );
 
-    await waitFor(() => expect(mockLoginWithOAuthApp).toHaveBeenCalledTimes(1));
+    await userEvent.type(
+      screen.getByTestId('login-clientSecret'),
+      '1234567890_asdfghjklPOIUYTREWQ0987654321',
+    );
+
+    await userEvent.click(screen.getByTestId('login-submit'));
 
     expect(mockLoginWithOAuthApp).toHaveBeenCalledTimes(1);
     expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
   });
 
-  it('should render the form with errors', () => {
+  it('should render the form with errors', async () => {
     render(
       <AppContext.Provider value={{ auth: mockAuth }}>
         <MemoryRouter>
@@ -159,22 +161,22 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
       </AppContext.Provider>,
     );
 
-    fireEvent.change(screen.getByTestId('login-hostname'), {
-      target: { value: 'test' },
-    });
-    fireEvent.change(screen.getByTestId('login-clientId'), {
-      target: { value: '123' },
-    });
-    fireEvent.change(screen.getByTestId('login-clientSecret'), {
-      target: { value: 'abc' },
-    });
+    const hostname = screen.getByTestId('login-hostname');
+    await userEvent.clear(hostname);
+    await userEvent.type(hostname, 'test');
 
-    fireEvent.click(screen.getByTestId('login-submit'));
+    await userEvent.type(screen.getByTestId('login-clientId'), '123');
 
-    expect(screen.getByTestId('login-errors')).toBeTruthy();
-    expect(screen.getByText('Hostname format is invalid')).toBeTruthy();
-    expect(screen.getByText('Client ID format is invalid')).toBeTruthy();
-    expect(screen.getByText('Client Secret format is invalid')).toBeTruthy();
+    await userEvent.type(screen.getByTestId('login-clientSecret'), 'abc');
+
+    await userEvent.click(screen.getByTestId('login-submit'));
+
+    expect(screen.getByTestId('login-errors')).toBeInTheDocument();
+    expect(screen.getByText('Hostname format is invalid')).toBeInTheDocument();
+    expect(screen.getByText('Client ID format is invalid')).toBeInTheDocument();
+    expect(
+      screen.getByText('Client Secret format is invalid'),
+    ).toBeInTheDocument();
   });
 
   it('should open help docs in the browser', async () => {
@@ -186,7 +188,7 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
       </AppContext.Provider>,
     );
 
-    fireEvent.click(screen.getByTestId('login-docs'));
+    await userEvent.click(screen.getByTestId('login-docs'));
 
     expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
   });

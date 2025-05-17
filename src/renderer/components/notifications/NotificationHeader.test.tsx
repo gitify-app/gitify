@@ -1,4 +1,6 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+
 import { mockSettings } from '../../__mocks__/state-mocks';
 import { AppContext } from '../../context/App';
 import { GroupBy } from '../../types';
@@ -23,6 +25,7 @@ describe('renderer/components/notifications/NotificationHeader.tsx', () => {
         <NotificationHeader {...props} />
       </AppContext.Provider>,
     );
+
     expect(tree).toMatchSnapshot();
   });
 
@@ -39,6 +42,7 @@ describe('renderer/components/notifications/NotificationHeader.tsx', () => {
           <NotificationHeader {...props} />
         </AppContext.Provider>,
       );
+
       expect(tree).toMatchSnapshot();
     });
 
@@ -60,6 +64,7 @@ describe('renderer/components/notifications/NotificationHeader.tsx', () => {
           <NotificationHeader {...props} />
         </AppContext.Provider>,
       );
+
       expect(tree).toMatchSnapshot();
     });
 
@@ -78,11 +83,12 @@ describe('renderer/components/notifications/NotificationHeader.tsx', () => {
           <NotificationHeader {...props} />
         </AppContext.Provider>,
       );
+
       expect(tree).toMatchSnapshot();
     });
   });
 
-  it('should open notification user profile - group by date', () => {
+  it('should open notification user profile - group by date', async () => {
     const openExternalLinkMock = jest
       .spyOn(comms, 'openExternalLink')
       .mockImplementation();
@@ -99,7 +105,8 @@ describe('renderer/components/notifications/NotificationHeader.tsx', () => {
       </AppContext.Provider>,
     );
 
-    fireEvent.click(screen.getByTestId('view-repository'));
+    await userEvent.click(screen.getByTestId('view-repository'));
+
     expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
     expect(openExternalLinkMock).toHaveBeenCalledWith(
       props.notification.repository.html_url,

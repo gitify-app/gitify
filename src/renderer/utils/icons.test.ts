@@ -6,6 +6,7 @@ import {
   MarkGithubIcon,
   OrganizationIcon,
 } from '@primer/octicons-react';
+
 import { IconColor } from '../types';
 import type {
   GitifyPullRequestReview,

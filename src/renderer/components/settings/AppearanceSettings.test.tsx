@@ -1,6 +1,8 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { webFrame } from 'electron';
 import { MemoryRouter } from 'react-router-dom';
+
 import {
   mockAuth,
   mockGitHubAppAccount,
@@ -34,8 +36,10 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
       );
     });
 
-    const select = screen.getByTestId('settings-theme') as HTMLSelectElement;
-    fireEvent.change(select, { target: { value: 'LIGHT' } });
+    await userEvent.selectOptions(
+      screen.getByTestId('settings-theme'),
+      'LIGHT',
+    );
 
     expect(updateSetting).toHaveBeenCalledTimes(1);
     expect(updateSetting).toHaveBeenCalledWith('theme', 'LIGHT');
@@ -90,32 +94,35 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
       );
     });
 
+    // Zoom Out
     await act(async () => {
-      fireEvent.click(screen.getByTestId('settings-zoom-out'));
+      await userEvent.click(screen.getByTestId('settings-zoom-out'));
       await zoomTimeout();
+
+      expect(updateSetting).toHaveBeenCalledTimes(1);
+      expect(updateSetting).toHaveBeenCalledWith('zoomPercentage', 90);
     });
 
-    expect(updateSetting).toHaveBeenCalledTimes(1);
-    expect(updateSetting).toHaveBeenCalledWith('zoomPercentage', 90);
-
     await act(async () => {
-      fireEvent.click(screen.getByTestId('settings-zoom-out'));
+      await userEvent.click(screen.getByTestId('settings-zoom-out'));
       await zoomTimeout();
 
       expect(updateSetting).toHaveBeenCalledTimes(2);
       expect(updateSetting).toHaveBeenNthCalledWith(2, 'zoomPercentage', 80);
     });
 
+    // Zoom In
     await act(async () => {
-      fireEvent.click(screen.getByTestId('settings-zoom-in'));
+      await userEvent.click(screen.getByTestId('settings-zoom-in'));
       await zoomTimeout();
 
       expect(updateSetting).toHaveBeenCalledTimes(3);
       expect(updateSetting).toHaveBeenNthCalledWith(3, 'zoomPercentage', 90);
     });
 
+    // Zoom Reset
     await act(async () => {
-      fireEvent.click(screen.getByTestId('settings-zoom-reset'));
+      await userEvent.click(screen.getByTestId('settings-zoom-reset'));
       await zoomTimeout();
 
       expect(updateSetting).toHaveBeenCalledTimes(4);
@@ -142,7 +149,7 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
       );
     });
 
-    fireEvent.click(screen.getByTestId('checkbox-showAccountHeader'));
+    await userEvent.click(screen.getByTestId('checkbox-showAccountHeader'));
 
     expect(updateSetting).toHaveBeenCalledTimes(1);
     expect(updateSetting).toHaveBeenCalledWith('showAccountHeader', true);
@@ -167,7 +174,7 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
       );
     });
 
-    fireEvent.click(screen.getByTestId('checkbox-wrapNotificationTitle'));
+    await userEvent.click(screen.getByTestId('checkbox-wrapNotificationTitle'));
 
     expect(updateSetting).toHaveBeenCalledTimes(1);
     expect(updateSetting).toHaveBeenCalledWith('wrapNotificationTitle', true);

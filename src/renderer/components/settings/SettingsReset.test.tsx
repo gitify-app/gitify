@@ -1,5 +1,7 @@
-import { act, fireEvent, render, screen } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
+
 import { mockAuth, mockSettings } from '../../__mocks__/state-mocks';
 import { AppContext } from '../../context/App';
 import { SettingsReset } from './SettingsReset';
@@ -30,8 +32,8 @@ describe('renderer/components/settings/SettingsReset.tsx', () => {
       );
     });
 
-    fireEvent.click(screen.getByTestId('settings-reset'));
-    fireEvent.click(screen.getByText('Reset'));
+    await userEvent.click(screen.getByTestId('settings-reset'));
+    await userEvent.click(screen.getByText('Reset'));
 
     expect(resetSettings).toHaveBeenCalled();
   });
@@ -55,8 +57,8 @@ describe('renderer/components/settings/SettingsReset.tsx', () => {
       );
     });
 
-    fireEvent.click(screen.getByTestId('settings-reset'));
-    fireEvent.click(screen.getByText('Cancel'));
+    await userEvent.click(screen.getByTestId('settings-reset'));
+    await userEvent.click(screen.getByText('Cancel'));
 
     expect(resetSettings).not.toHaveBeenCalled();
   });

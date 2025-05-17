@@ -1,4 +1,6 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+
 import { type ITooltip, Tooltip } from './Tooltip';
 
 describe('renderer/components/fields/Tooltip.tsx', () => {
@@ -12,15 +14,15 @@ describe('renderer/components/fields/Tooltip.tsx', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('should display on mouse enter / leave', () => {
+  it('should display on mouse enter / leave', async () => {
     render(<Tooltip {...props} />);
 
     const tooltipElement = screen.getByTestId('tooltip-test');
 
-    fireEvent.mouseEnter(tooltipElement);
+    await userEvent.hover(tooltipElement);
     expect(tooltipElement).toMatchSnapshot();
 
-    fireEvent.mouseLeave(tooltipElement);
+    await userEvent.unhover(tooltipElement);
     expect(tooltipElement).toMatchSnapshot();
   });
 });

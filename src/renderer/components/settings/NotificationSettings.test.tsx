@@ -1,5 +1,7 @@
-import { act, fireEvent, render, screen } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
+
 import { mockAuth, mockSettings } from '../../__mocks__/state-mocks';
 import { AppContext } from '../../context/App';
 import * as comms from '../../utils/comms';
@@ -29,7 +31,7 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
       );
     });
 
-    fireEvent.click(screen.getByTestId('radio-groupBy-date'));
+    await userEvent.click(screen.getByTestId('radio-groupBy-date'));
 
     expect(updateSetting).toHaveBeenCalledTimes(1);
     expect(updateSetting).toHaveBeenCalledWith('groupBy', 'DATE');
@@ -52,9 +54,7 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
       );
     });
 
-    fireEvent.click(screen.getByTestId('checkbox-fetchAllNotifications'), {
-      target: { checked: true },
-    });
+    await userEvent.click(screen.getByTestId('checkbox-fetchAllNotifications'));
 
     expect(updateSetting).toHaveBeenCalledTimes(1);
     expect(updateSetting).toHaveBeenCalledWith('fetchAllNotifications', false);
@@ -77,7 +77,7 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
       );
     });
 
-    fireEvent.click(screen.getByTestId('checkbox-detailedNotifications'));
+    await userEvent.click(screen.getByTestId('checkbox-detailedNotifications'));
 
     expect(updateSetting).toHaveBeenCalledTimes(1);
     expect(updateSetting).toHaveBeenCalledWith('detailedNotifications', false);
@@ -100,7 +100,7 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
       );
     });
 
-    fireEvent.click(screen.getByTestId('checkbox-showPills'));
+    await userEvent.click(screen.getByTestId('checkbox-showPills'));
 
     expect(updateSetting).toHaveBeenCalledTimes(1);
     expect(updateSetting).toHaveBeenCalledWith('showPills', false);
@@ -123,7 +123,7 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
       );
     });
 
-    fireEvent.click(screen.getByTestId('checkbox-showNumber'));
+    await userEvent.click(screen.getByTestId('checkbox-showNumber'));
 
     expect(updateSetting).toHaveBeenCalledTimes(1);
     expect(updateSetting).toHaveBeenCalledWith('showNumber', false);
@@ -146,12 +146,10 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
       );
     });
 
-    fireEvent.click(screen.getByTestId('checkbox-showOnlyParticipating'), {
-      target: { checked: true },
-    });
+    await userEvent.click(screen.getByTestId('checkbox-showOnlyParticipating'));
 
     expect(updateSetting).toHaveBeenCalledTimes(1);
-    expect(updateSetting).toHaveBeenCalledWith('participating', false);
+    expect(updateSetting).toHaveBeenCalledWith('participating', true);
   });
 
   it('should open official docs for showOnlyParticipating tooltip', async () => {
@@ -179,9 +177,8 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
       'tooltip-showOnlyParticipating',
     );
 
-    fireEvent.mouseEnter(tooltipElement);
-
-    fireEvent.click(
+    await userEvent.hover(tooltipElement);
+    await userEvent.click(
       screen.getByTitle(
         'Open GitHub documentation for participating and watching notifications',
       ),
@@ -210,12 +207,10 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
       );
     });
 
-    fireEvent.click(screen.getByTestId('checkbox-markAsDoneOnOpen'), {
-      target: { checked: true },
-    });
+    await userEvent.click(screen.getByTestId('checkbox-markAsDoneOnOpen'));
 
     expect(updateSetting).toHaveBeenCalledTimes(1);
-    expect(updateSetting).toHaveBeenCalledWith('markAsDoneOnOpen', false);
+    expect(updateSetting).toHaveBeenCalledWith('markAsDoneOnOpen', true);
   });
 
   it('should toggle the markAsDoneOnUnsubscribe checkbox', async () => {
@@ -235,15 +230,12 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
       );
     });
 
-    fireEvent.click(screen.getByTestId('checkbox-markAsDoneOnUnsubscribe'), {
-      target: { checked: true },
-    });
+    await userEvent.click(
+      screen.getByTestId('checkbox-markAsDoneOnUnsubscribe'),
+    );
 
     expect(updateSetting).toHaveBeenCalledTimes(1);
-    expect(updateSetting).toHaveBeenCalledWith(
-      'markAsDoneOnUnsubscribe',
-      false,
-    );
+    expect(updateSetting).toHaveBeenCalledWith('markAsDoneOnUnsubscribe', true);
   });
 
   it('should toggle the delayNotificationState checkbox', async () => {
@@ -263,11 +255,11 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
       );
     });
 
-    fireEvent.click(screen.getByTestId('checkbox-delayNotificationState'), {
-      target: { checked: true },
-    });
+    await userEvent.click(
+      screen.getByTestId('checkbox-delayNotificationState'),
+    );
 
     expect(updateSetting).toHaveBeenCalledTimes(1);
-    expect(updateSetting).toHaveBeenCalledWith('delayNotificationState', false);
+    expect(updateSetting).toHaveBeenCalledWith('delayNotificationState', true);
   });
 });

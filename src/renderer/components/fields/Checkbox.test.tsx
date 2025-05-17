@@ -1,4 +1,5 @@
 import { render } from '@testing-library/react';
+
 import { Checkbox, type ICheckbox } from './Checkbox';
 
 describe('renderer/components/fields/Checkbox.tsx', () => {

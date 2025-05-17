@@ -1,5 +1,7 @@
-import { act, fireEvent, render, screen } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
+
 import { mockAuth, mockSettings } from '../../__mocks__/state-mocks';
 import { AppContext } from '../../context/App';
 import * as comms from '../../utils/comms';
@@ -98,7 +100,7 @@ describe('renderer/components/settings/SettingsFooter.tsx', () => {
       );
     });
 
-    fireEvent.click(screen.getByTestId('settings-release-notes'));
+    await userEvent.click(screen.getByTestId('settings-release-notes'));
 
     expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
     expect(openExternalLinkMock).toHaveBeenCalledWith(
@@ -122,7 +124,7 @@ describe('renderer/components/settings/SettingsFooter.tsx', () => {
       );
     });
 
-    fireEvent.click(screen.getByTestId('settings-accounts'));
+    await userEvent.click(screen.getByTestId('settings-accounts'));
 
     expect(mockNavigate).toHaveBeenCalledWith('/accounts');
   });
@@ -145,7 +147,7 @@ describe('renderer/components/settings/SettingsFooter.tsx', () => {
       );
     });
 
-    fireEvent.click(screen.getByTestId('settings-quit'));
+    await userEvent.click(screen.getByTestId('settings-quit'));
 
     expect(quitAppMock).toHaveBeenCalledTimes(1);
   });

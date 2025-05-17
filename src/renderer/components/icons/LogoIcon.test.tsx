@@ -1,4 +1,6 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+
 import { Size } from '../../types';
 import { LogoIcon } from './LogoIcon';
 
@@ -15,11 +17,11 @@ describe('renderer/components/icons/LogoIcon.tsx', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('should click on the logo', () => {
+  it('should click on the logo', async () => {
     const onClick = jest.fn();
     render(<LogoIcon onClick={onClick} size={Size.SMALL} />);
 
-    fireEvent.click(screen.getByLabelText('Gitify Logo'));
+    await userEvent.click(screen.getByLabelText('Gitify Logo'));
 
     expect(onClick).toHaveBeenCalledTimes(1);
   });

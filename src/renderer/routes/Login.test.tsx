@@ -1,5 +1,7 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
+
 import { AppContext } from '../context/App';
 import * as comms from '../utils/comms';
 import { LoginRoute } from './Login';
@@ -48,7 +50,7 @@ describe('renderer/routes/Login.tsx', () => {
     expect(mockNavigate).toHaveBeenNthCalledWith(1, '/', { replace: true });
   });
 
-  it('should login with github', () => {
+  it('should login with github', async () => {
     const mockLoginWithGitHubApp = jest.fn();
     render(
       <AppContext.Provider
@@ -63,19 +65,19 @@ describe('renderer/routes/Login.tsx', () => {
       </AppContext.Provider>,
     );
 
-    fireEvent.click(screen.getByTestId('login-github'));
+    await userEvent.click(screen.getByTestId('login-github'));
 
     expect(mockLoginWithGitHubApp).toHaveBeenCalled();
   });
 
-  it('should navigate to login with personal access token', () => {
+  it('should navigate to login with personal access token', async () => {
     render(
       <MemoryRouter>
         <LoginRoute />
       </MemoryRouter>,
     );
 
-    fireEvent.click(screen.getByTestId('login-pat'));
+    await userEvent.click(screen.getByTestId('login-pat'));
 
     expect(mockNavigate).toHaveBeenNthCalledWith(
       1,
@@ -83,14 +85,14 @@ describe('renderer/routes/Login.tsx', () => {
     );
   });
 
-  it('should navigate to login with oauth app', () => {
+  it('should navigate to login with oauth app', async () => {
     render(
       <MemoryRouter>
         <LoginRoute />
       </MemoryRouter>,
     );
 
-    fireEvent.click(screen.getByTestId('login-oauth-app'));
+    await userEvent.click(screen.getByTestId('login-oauth-app'));
 
     expect(mockNavigate).toHaveBeenNthCalledWith(1, '/login-oauth-app');
   });

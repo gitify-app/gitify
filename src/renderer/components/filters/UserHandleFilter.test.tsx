@@ -1,5 +1,7 @@
-import { act, fireEvent, render, screen } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
+
 import { mockAccountNotifications } from '../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../__mocks__/state-mocks';
 import { AppContext } from '../../context/App';
@@ -76,14 +78,10 @@ describe('renderer/components/filters/UserHandleFilter.tsx', () => {
         );
       });
 
-      fireEvent.change(screen.getByTitle('Include handles'), {
-        target: { value: 'github-user' },
-      });
-
-      fireEvent.keyDown(screen.getByTitle('Include handles'), {
-        key: 'Enter',
-        code: 'Enter',
-      });
+      await userEvent.type(
+        screen.getByTitle('Include handles'),
+        'github-user{enter}',
+      );
 
       expect(updateFilter).toHaveBeenCalledWith(
         'filterIncludeHandles',
@@ -112,14 +110,10 @@ describe('renderer/components/filters/UserHandleFilter.tsx', () => {
         );
       });
 
-      fireEvent.change(screen.getByTitle('Include handles'), {
-        target: { value: 'github-user' },
-      });
-
-      fireEvent.keyDown(screen.getByTitle('Include handles'), {
-        key: 'Enter',
-        code: 'Enter',
-      });
+      await userEvent.type(
+        screen.getByTitle('Include handles'),
+        'github-user{enter}',
+      );
 
       expect(updateFilter).toHaveBeenCalledTimes(0);
     });
@@ -146,14 +140,10 @@ describe('renderer/components/filters/UserHandleFilter.tsx', () => {
         );
       });
 
-      fireEvent.change(screen.getByTitle('Exclude handles'), {
-        target: { value: 'github-user' },
-      });
-
-      fireEvent.keyDown(screen.getByTitle('Exclude handles'), {
-        key: 'Enter',
-        code: 'Enter',
-      });
+      await userEvent.type(
+        screen.getByTitle('Exclude handles'),
+        'github-user{enter}',
+      );
 
       expect(updateFilter).toHaveBeenCalledWith(
         'filterExcludeHandles',
@@ -182,14 +172,10 @@ describe('renderer/components/filters/UserHandleFilter.tsx', () => {
         );
       });
 
-      fireEvent.change(screen.getByTitle('Exclude handles'), {
-        target: { value: 'github-user' },
-      });
-
-      fireEvent.keyDown(screen.getByTitle('Exclude handles'), {
-        key: 'Enter',
-        code: 'Enter',
-      });
+      await userEvent.type(
+        screen.getByTitle('Exclude handles'),
+        'github-user{enter}',
+      );
 
       expect(updateFilter).toHaveBeenCalledTimes(0);
     });

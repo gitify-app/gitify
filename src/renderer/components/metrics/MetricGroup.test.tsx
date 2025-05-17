@@ -1,4 +1,5 @@
 import { render } from '@testing-library/react';
+
 import { mockSettings } from '../../__mocks__/state-mocks';
 import { AppContext } from '../../context/App';
 import type { Milestone } from '../../typesGitHub';

@@ -1,4 +1,5 @@
 import { render } from '@testing-library/react';
+
 import { Footer } from './Footer';
 
 describe('renderer/components/primitives/Footer.tsx', () => {

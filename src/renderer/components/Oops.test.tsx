@@ -1,4 +1,5 @@
 import { render } from '@testing-library/react';
+
 import { ensureStableEmojis } from '../__mocks__/utils';
 import { Oops } from './Oops';
 

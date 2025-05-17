@@ -1,4 +1,6 @@
-import { act, fireEvent, render, screen } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+
 import {
   mockGitHubCloudAccount,
   mockSettings,
@@ -33,10 +35,11 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
         <RepositoryNotifications {...props} />
       </AppContext.Provider>,
     );
+
     expect(tree).toMatchSnapshot();
   });
 
-  it('should open the browser when clicking on the repo name', () => {
+  it('should open the browser when clicking on the repo name', async () => {
     const openExternalLinkMock = jest
       .spyOn(comms, 'openExternalLink')
       .mockImplementation();
@@ -47,7 +50,7 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
       </AppContext.Provider>,
     );
 
-    fireEvent.click(screen.getByTestId('open-repository'));
+    await userEvent.click(screen.getByTestId('open-repository'));
 
     expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
     expect(openExternalLinkMock).toHaveBeenCalledWith(
@@ -55,7 +58,7 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
     );
   });
 
-  it('should mark a repo as read', () => {
+  it('should mark a repo as read', async () => {
     render(
       <AppContext.Provider
         value={{ settings: { ...mockSettings }, markNotificationsAsRead }}
@@ -64,14 +67,14 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
       </AppContext.Provider>,
     );
 
-    fireEvent.click(screen.getByTestId('repository-mark-as-read'));
+    await userEvent.click(screen.getByTestId('repository-mark-as-read'));
 
     expect(markNotificationsAsRead).toHaveBeenCalledWith(
       mockGitHubNotifications,
     );
   });
 
-  it('should mark a repo as done', () => {
+  it('should mark a repo as done', async () => {
     render(
       <AppContext.Provider
         value={{ settings: { ...mockSettings }, markNotificationsAsDone }}
@@ -80,7 +83,7 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
       </AppContext.Provider>,
     );
 
-    fireEvent.click(screen.getByTestId('repository-mark-as-done'));
+    await userEvent.click(screen.getByTestId('repository-mark-as-done'));
 
     expect(markNotificationsAsDone).toHaveBeenCalledWith(
       mockGitHubNotifications,
@@ -95,6 +98,7 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
         <RepositoryNotifications {...props} />
       </AppContext.Provider>,
     );
+
     expect(tree).toMatchSnapshot();
   });
 
@@ -103,7 +107,7 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
       render(<RepositoryNotifications {...props} />);
     });
 
-    fireEvent.click(screen.getByTestId('repository-toggle'));
+    await userEvent.click(screen.getByTestId('repository-toggle'));
 
     const tree = render(<RepositoryNotifications {...props} />);
     expect(tree).toMatchSnapshot();

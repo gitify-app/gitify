@@ -1,13 +1,7 @@
-import {
-  act,
-  fireEvent,
-  render,
-  screen,
-  waitFor,
-} from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
-
 import { BaseStyles, ThemeProvider } from '@primer/react';
+import { act, render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { MemoryRouter } from 'react-router-dom';
 
 import {
   mockAuth,
@@ -76,7 +70,7 @@ describe('renderer/routes/Accounts.tsx', () => {
         );
       });
 
-      fireEvent.click(screen.getByTestId('header-nav-back'));
+      await userEvent.click(screen.getByTestId('header-nav-back'));
 
       expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
     });
@@ -105,7 +99,7 @@ describe('renderer/routes/Accounts.tsx', () => {
         );
       });
 
-      fireEvent.click(screen.getByTestId('account-profile'));
+      await userEvent.click(screen.getByTestId('account-profile'));
 
       expect(openAccountProfileMock).toHaveBeenCalledTimes(1);
       expect(openAccountProfileMock).toHaveBeenCalledWith(
@@ -135,7 +129,7 @@ describe('renderer/routes/Accounts.tsx', () => {
         );
       });
 
-      fireEvent.click(screen.getByTestId('account-host'));
+      await userEvent.click(screen.getByTestId('account-host'));
 
       expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
       expect(openExternalLinkMock).toHaveBeenCalledWith('https://github.com');
@@ -163,7 +157,7 @@ describe('renderer/routes/Accounts.tsx', () => {
         );
       });
 
-      fireEvent.click(screen.getByTestId('account-developer-settings'));
+      await userEvent.click(screen.getByTestId('account-developer-settings'));
 
       expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
       expect(openExternalLinkMock).toHaveBeenCalledWith(
@@ -202,7 +196,7 @@ describe('renderer/routes/Accounts.tsx', () => {
 
       expect(screen.getByTestId('accounts')).toMatchSnapshot();
 
-      fireEvent.click(screen.getAllByTestId('account-missing-scopes')[0]);
+      await userEvent.click(screen.getAllByTestId('account-missing-scopes')[0]);
 
       expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
       expect(openExternalLinkMock).toHaveBeenCalledWith(
@@ -238,7 +232,7 @@ describe('renderer/routes/Accounts.tsx', () => {
 
       expect(screen.getByTestId('accounts')).toMatchSnapshot();
 
-      fireEvent.click(screen.getAllByTestId('account-set-primary')[0]);
+      await userEvent.click(screen.getAllByTestId('account-set-primary')[0]);
 
       expect(saveStateMock).toHaveBeenCalled();
     });
@@ -263,7 +257,7 @@ describe('renderer/routes/Accounts.tsx', () => {
         );
       });
 
-      fireEvent.click(screen.getByTestId('account-refresh'));
+      await userEvent.click(screen.getByTestId('account-refresh'));
 
       expect(apiRequestAuthMock).toHaveBeenCalledTimes(1);
       expect(apiRequestAuthMock).toHaveBeenCalledWith(
@@ -301,10 +295,9 @@ describe('renderer/routes/Accounts.tsx', () => {
         );
       });
 
-      fireEvent.click(screen.getByTestId('account-logout'));
+      await userEvent.click(screen.getByTestId('account-logout'));
 
       expect(logoutFromAccountMock).toHaveBeenCalledTimes(1);
-
       expect(updateTrayIconMock).toHaveBeenCalledTimes(1);
       expect(updateTrayIconMock).toHaveBeenCalledWith();
       expect(updateTrayTitleMock).toHaveBeenCalledTimes(1);
@@ -337,8 +330,8 @@ describe('renderer/routes/Accounts.tsx', () => {
         );
       });
 
-      fireEvent.click(screen.getByTestId('account-add-new'));
-      fireEvent.click(screen.getByTestId('account-add-github'));
+      await userEvent.click(screen.getByTestId('account-add-new'));
+      await userEvent.click(screen.getByTestId('account-add-github'));
 
       expect(mockLoginWithGitHubApp).toHaveBeenCalled();
     });
@@ -363,8 +356,8 @@ describe('renderer/routes/Accounts.tsx', () => {
         );
       });
 
-      fireEvent.click(screen.getByTestId('account-add-new'));
-      fireEvent.click(screen.getByTestId('account-add-pat'));
+      await userEvent.click(screen.getByTestId('account-add-new'));
+      await userEvent.click(screen.getByTestId('account-add-pat'));
 
       expect(mockNavigate).toHaveBeenNthCalledWith(
         1,
@@ -395,8 +388,8 @@ describe('renderer/routes/Accounts.tsx', () => {
         );
       });
 
-      fireEvent.click(screen.getByTestId('account-add-new'));
-      fireEvent.click(screen.getByTestId('account-add-oauth-app'));
+      await userEvent.click(screen.getByTestId('account-add-new'));
+      await userEvent.click(screen.getByTestId('account-add-oauth-app'));
 
       expect(mockNavigate).toHaveBeenNthCalledWith(1, '/login-oauth-app', {
         replace: true,

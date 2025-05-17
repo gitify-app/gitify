@@ -1,4 +1,6 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+
 import {
   mockGitHubCloudAccount,
   mockSettings,
@@ -31,6 +33,7 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
         <NotificationFooter {...props} />
       </AppContext.Provider>,
     );
+
     expect(tree).toMatchSnapshot();
   });
 
@@ -51,6 +54,7 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
         <NotificationFooter {...props} />
       </AppContext.Provider>,
     );
+
     expect(tree).toMatchSnapshot();
   });
 
@@ -72,6 +76,7 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
           <NotificationFooter {...props} />
         </AppContext.Provider>,
       );
+
       expect(tree).toMatchSnapshot();
     });
 
@@ -92,6 +97,7 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
           <NotificationFooter {...props} />
         </AppContext.Provider>,
       );
+
       expect(tree).toMatchSnapshot();
     });
   });
@@ -113,10 +119,11 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
         <NotificationFooter {...props} />
       </AppContext.Provider>,
     );
+
     expect(tree).toMatchSnapshot();
   });
 
-  it('should open notification user profile', () => {
+  it('should open notification user profile', async () => {
     const openExternalLinkMock = jest
       .spyOn(comms, 'openExternalLink')
       .mockImplementation();
@@ -149,7 +156,8 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
       </AppContext.Provider>,
     );
 
-    fireEvent.click(screen.getByTestId('view-profile'));
+    await userEvent.click(screen.getByTestId('view-profile'));
+
     expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
     expect(openExternalLinkMock).toHaveBeenCalledWith(
       props.notification.subject.user.html_url,

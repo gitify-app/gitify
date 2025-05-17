@@ -1,4 +1,5 @@
 import { render } from '@testing-library/react';
+
 import { FieldLabel, type IFieldLabel } from './FieldLabel';
 
 describe('renderer/components/fields/FieldLabel.tsx', () => {

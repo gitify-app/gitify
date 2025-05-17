@@ -1,4 +1,5 @@
 import { render } from '@testing-library/react';
+
 import { EmojiSplash } from './EmojiSplash';
 
 describe('renderer/components/layout/EmojiSplash.tsx', () => {
