@@ -1,5 +1,7 @@
-import { act, fireEvent, render, screen } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
+
 import { mockAuth, mockSettings } from '../__mocks__/state-mocks';
 import { AppContext } from '../context/App';
 import { FiltersRoute } from './Filters';
@@ -57,7 +59,8 @@ describe('renderer/routes/Filters.tsx', () => {
         );
       });
 
-      fireEvent.click(screen.getByTestId('header-nav-back'));
+      await userEvent.click(screen.getByTestId('header-nav-back'));
+
       expect(fetchNotifications).toHaveBeenCalledTimes(1);
       expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
     });
@@ -82,7 +85,7 @@ describe('renderer/routes/Filters.tsx', () => {
         );
       });
 
-      fireEvent.click(screen.getByTestId('filters-clear'));
+      await userEvent.click(screen.getByTestId('filters-clear'));
 
       expect(clearFilters).toHaveBeenCalled();
     });

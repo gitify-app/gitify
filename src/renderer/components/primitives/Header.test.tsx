@@ -1,5 +1,7 @@
 import { MarkGithubIcon } from '@primer/octicons-react';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+
 import { AppContext } from '../../context/App';
 import { Header } from './Header';
 
@@ -22,15 +24,15 @@ describe('renderer/components/primitives/Header.tsx', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('should navigate back', () => {
+  it('should navigate back', async () => {
     render(<Header icon={MarkGithubIcon}>Test Header</Header>);
 
-    fireEvent.click(screen.getByTestId('header-nav-back'));
+    await userEvent.click(screen.getByTestId('header-nav-back'));
 
     expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
   });
 
-  it('should navigate back and fetch notifications', () => {
+  it('should navigate back and fetch notifications', async () => {
     render(
       <AppContext.Provider
         value={{
@@ -43,7 +45,7 @@ describe('renderer/components/primitives/Header.tsx', () => {
       </AppContext.Provider>,
     );
 
-    fireEvent.click(screen.getByTestId('header-nav-back'));
+    await userEvent.click(screen.getByTestId('header-nav-back'));
 
     expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
     expect(fetchNotifications).toHaveBeenCalledTimes(1);
