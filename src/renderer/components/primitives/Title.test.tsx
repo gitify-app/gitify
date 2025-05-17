@@ -1,5 +1,6 @@
 import { PersonFillIcon } from '@primer/octicons-react';
 import { render } from '@testing-library/react';
+
 import { Title } from './Title';
 
 describe('renderer/routes/components/primitives/Title.tsx', () => {

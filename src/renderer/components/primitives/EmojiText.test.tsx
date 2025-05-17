@@ -1,4 +1,5 @@
 import { render } from '@testing-library/react';
+
 import { EmojiText, type IEmojiText } from './EmojiText';
 
 describe('renderer/components/primitives/EmojiText.tsx', () => {

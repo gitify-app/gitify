@@ -1,5 +1,6 @@
 import { Menu, MenuItem } from 'electron';
 import type { Menubar } from 'menubar';
+
 import MenuBuilder from './menu';
 
 jest.mock('electron', () => ({

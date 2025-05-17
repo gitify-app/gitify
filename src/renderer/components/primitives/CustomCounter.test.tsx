@@ -1,4 +1,5 @@
 import { render } from '@testing-library/react';
+
 import { CustomCounter } from './CustomCounter';
 
 describe('renderer/components/primitives/CustomCounter.tsx', () => {

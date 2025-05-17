@@ -1,4 +1,5 @@
 import { render } from '@testing-library/react';
+
 import { type IRadioGroup, RadioGroup } from './RadioGroup';
 
 describe('renderer/components/fields/RadioGroup.tsx', () => {

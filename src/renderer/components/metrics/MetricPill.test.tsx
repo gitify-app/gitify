@@ -1,5 +1,6 @@
 import { MarkGithubIcon } from '@primer/octicons-react';
 import { render } from '@testing-library/react';
+
 import { IconColor } from '../../types';
 import { type IMetricPill, MetricPill } from './MetricPill';
 
