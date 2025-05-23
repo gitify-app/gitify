@@ -100,7 +100,7 @@
     "css-loader": "7.1.2",
     "css-minimizer-webpack-plugin": "7.0.2",
     "date-fns": "4.1.0",
-    "electron": "36.3.0",
+    "electron": "36.3.1",
     "electron-builder": "25.1.8",
     "final-form": "4.20.10",
     "graphql-tag": "2.12.6",
