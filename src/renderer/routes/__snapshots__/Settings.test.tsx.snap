@@ -1436,7 +1436,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                 data-component="text"
               >
                 Gitify
-
+                 
                 v0.0.1
               </span>
             </span>
