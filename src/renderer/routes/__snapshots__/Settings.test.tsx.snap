@@ -1187,6 +1187,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                   <svg
                     aria-label="Volume Down Icon"
                     class="size-4"
+                    fill="currentColor"
                     height="24"
                     role="img"
                     viewBox="0 0 24 24"
@@ -1244,6 +1245,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                   <svg
                     aria-label="Volume Up Icon"
                     class="size-4"
+                    fill="currentColor"
                     height="24"
                     role="img"
                     viewBox="0 0 24 24"
@@ -1434,7 +1436,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                 data-component="text"
               >
                 Gitify
-                 
+
                 v0.0.1
               </span>
             </span>
