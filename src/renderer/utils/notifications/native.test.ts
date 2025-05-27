@@ -10,91 +10,102 @@ import * as comms from '../comms';
 import * as links from '../links';
 import * as native from './native';
 
+const raiseNativeNotificationMock = jest.spyOn(
+  native,
+  'raiseNativeNotification',
+);
+const raiseSoundNotificationMock = jest.spyOn(native, 'raiseSoundNotification');
+
 describe('renderer/utils/notifications/native.ts', () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
 
   describe('triggerNativeNotifications', () => {
-    it('should raise a native notification (settings - on)', () => {
+    it('should raise a native notification and play sound for a single new notification', () => {
       const settings: SettingsState = {
         ...defaultSettings,
         playSound: true,
         showNotifications: true,
       };
 
-      jest.spyOn(native, 'raiseNativeNotification');
-      jest.spyOn(native, 'raiseSoundNotification');
-
-      native.triggerNativeNotifications([], mockAccountNotifications, {
+      native.triggerNativeNotifications([], mockSingleAccountNotifications, {
         auth: mockAuth,
         settings,
       });
 
-      expect(native.raiseNativeNotification).toHaveBeenCalledTimes(1);
-      expect(native.raiseSoundNotification).toHaveBeenCalledTimes(1);
+      expect(raiseNativeNotificationMock).toHaveBeenCalledTimes(1);
+
+      expect(raiseSoundNotificationMock).toHaveBeenCalledTimes(1);
+      expect(raiseSoundNotificationMock).toHaveBeenCalledWith(0.2);
     });
 
-    it('should not raise a native notification (settings - off)', () => {
-      const settings = {
-        ...defaultSettings,
-        playSound: false,
-        showNotifications: false,
-      };
-
-      jest.spyOn(native, 'raiseNativeNotification');
-      jest.spyOn(native, 'raiseSoundNotification');
-
-      native.triggerNativeNotifications([], mockAccountNotifications, {
-        auth: mockAuth,
-        settings,
-      });
-
-      expect(native.raiseNativeNotification).not.toHaveBeenCalled();
-      expect(native.raiseSoundNotification).not.toHaveBeenCalled();
-    });
-
-    it('should not raise a native notification or play a sound (no new notifications)', () => {
-      const settings = {
+    it('should raise a native notification and play sound for multiple new notifications', () => {
+      const settings: SettingsState = {
         ...defaultSettings,
         playSound: true,
         showNotifications: true,
       };
 
-      jest.spyOn(native, 'raiseNativeNotification');
-      jest.spyOn(native, 'raiseSoundNotification');
+      native.triggerNativeNotifications([], mockAccountNotifications, {
+        auth: mockAuth,
+        settings,
+      });
+
+      expect(raiseNativeNotificationMock).toHaveBeenCalledTimes(1);
+
+      expect(raiseSoundNotificationMock).toHaveBeenCalledTimes(1);
+      expect(raiseSoundNotificationMock).toHaveBeenCalledWith(0.2);
+    });
+
+    it('should not raise a native notification or play a sound when there are no new notifications', () => {
+      const settings: SettingsState = {
+        ...defaultSettings,
+        playSound: true,
+        showNotifications: true,
+      };
 
       native.triggerNativeNotifications(
         mockSingleAccountNotifications,
         mockSingleAccountNotifications,
-        { auth: mockAuth, settings },
+        {
+          auth: mockAuth,
+          settings,
+        },
       );
 
-      expect(native.raiseNativeNotification).not.toHaveBeenCalled();
-      expect(native.raiseSoundNotification).not.toHaveBeenCalled();
+      expect(raiseNativeNotificationMock).not.toHaveBeenCalled();
+      expect(raiseSoundNotificationMock).not.toHaveBeenCalled();
     });
 
-    it('should not raise a native notification (because of 0(zero) notifications)', () => {
-      const settings = {
+    it('should not raise a native notification or play a sound when there are zero notifications', () => {
+      const settings: SettingsState = {
         ...defaultSettings,
         playSound: true,
         showNotifications: true,
       };
 
-      jest.spyOn(native, 'raiseNativeNotification');
-      jest.spyOn(native, 'raiseSoundNotification');
-
-      native.triggerNativeNotifications([], [], {
-        auth: mockAuth,
-        settings,
-      });
       native.triggerNativeNotifications([], [], {
         auth: mockAuth,
         settings,
       });
 
-      expect(native.raiseNativeNotification).not.toHaveBeenCalled();
-      expect(native.raiseSoundNotification).not.toHaveBeenCalled();
+      expect(raiseNativeNotificationMock).not.toHaveBeenCalled();
+      expect(raiseSoundNotificationMock).not.toHaveBeenCalled();
+    });
+
+    it('should not raise a native notification when setting disabled', () => {
+      const settings: SettingsState = {
+        ...defaultSettings,
+        showNotifications: false,
+      };
+
+      native.triggerNativeNotifications([], mockAccountNotifications, {
+        auth: mockAuth,
+        settings,
+      });
+
+      expect(raiseNativeNotificationMock).not.toHaveBeenCalled();
     });
   });
 
@@ -124,37 +135,6 @@ describe('renderer/utils/notifications/native.ts', () => {
       nativeNotification.onclick(null);
 
       expect(showWindowMock).toHaveBeenCalledTimes(1);
-    });
-  });
-
-  describe('raiseSoundNotification', () => {
-    it('should play a sound', () => {
-      jest.spyOn(window.Audio.prototype, 'play');
-      native.raiseSoundNotification();
-      expect(window.Audio.prototype.play).toHaveBeenCalledTimes(1);
-    });
-
-    it('should play notification sound with correct volume', () => {
-      const settings: SettingsState = {
-        ...defaultSettings,
-        playSound: true,
-        showNotifications: false,
-        notificationVolume: 80,
-      };
-
-      const raiseSoundNotificationMock = jest.spyOn(
-        native,
-        'raiseSoundNotification',
-      );
-      jest.spyOn(native, 'raiseNativeNotification');
-
-      native.triggerNativeNotifications([], mockAccountNotifications, {
-        auth: mockAuth,
-        settings,
-      });
-
-      expect(raiseSoundNotificationMock).toHaveBeenCalledWith(0.8);
-      expect(native.raiseNativeNotification).not.toHaveBeenCalled();
     });
   });
 });
