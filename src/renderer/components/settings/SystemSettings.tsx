@@ -106,7 +106,7 @@ export const SystemSettings: FC = () => {
                 onClick={() => {
                   const newVolume = Math.max(
                     settings.notificationVolume - 10,
-                    0,
+                    10,
                   );
                   updateSetting('notificationVolume', newVolume);
                 }}
