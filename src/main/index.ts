@@ -11,6 +11,9 @@ import { TrayIcons } from './icons';
 import MenuBuilder from './menu';
 import Updater from './updater';
 
+// https://github.com/electron/electron/issues/46538
+if (isLinux) app.commandLine?.appendSwitch('gtk-version', '3');
+
 log.initialize();
 
 const browserWindowOpts = {

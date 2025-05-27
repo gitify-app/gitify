@@ -123,50 +123,50 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
     });
 
     it('non-default user type filters', () => {
-      const settings = {
+      const settings: SettingsState = {
         ...defaultSettings,
         filterUserTypes: ['Bot'],
-      } as SettingsState;
+      };
       expect(hasAnyFiltersSet(settings)).toBe(true);
     });
 
     it('non-default user handle includes filters', () => {
-      const settings = {
+      const settings: SettingsState = {
         ...defaultSettings,
         filterIncludeHandles: ['gitify'],
-      } as SettingsState;
+      };
       expect(hasAnyFiltersSet(settings)).toBe(true);
     });
 
     it('non-default user handle excludes filters', () => {
-      const settings = {
+      const settings: SettingsState = {
         ...defaultSettings,
         filterExcludeHandles: ['gitify'],
-      } as SettingsState;
+      };
       expect(hasAnyFiltersSet(settings)).toBe(true);
     });
 
     it('non-default subject type filters', () => {
-      const settings = {
+      const settings: SettingsState = {
         ...defaultSettings,
         filterSubjectTypes: ['Issue'],
-      } as SettingsState;
+      };
       expect(hasAnyFiltersSet(settings)).toBe(true);
     });
 
     it('non-default state filters', () => {
-      const settings = {
+      const settings: SettingsState = {
         ...defaultSettings,
         filterStates: ['draft', 'merged'],
-      } as SettingsState;
+      };
       expect(hasAnyFiltersSet(settings)).toBe(true);
     });
 
     it('non-default reason filters', () => {
-      const settings = {
+      const settings: SettingsState = {
         ...defaultSettings,
         filterReasons: ['subscribed', 'manual'],
-      } as SettingsState;
+      };
       expect(hasAnyFiltersSet(settings)).toBe(true);
     });
   });
