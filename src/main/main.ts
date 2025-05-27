@@ -1,4 +1,10 @@
-import { app, globalShortcut, ipcMain as ipc, safeStorage } from 'electron';
+import {
+  type BrowserWindowConstructorOptions,
+  app,
+  globalShortcut,
+  ipcMain as ipc,
+  safeStorage,
+} from 'electron';
 import log from 'electron-log';
 import { menubar } from 'menubar';
 
@@ -13,12 +19,13 @@ import Updater from './updater';
 
 log.initialize();
 
-const browserWindowOpts = {
+const browserWindowOpts: BrowserWindowConstructorOptions = {
   width: 500,
   height: 400,
   minWidth: 500,
   minHeight: 400,
   resizable: false,
+  alwaysOnTop: true, // Prevent the app to open behind tray
   skipTaskbar: true, // Hide the app from the Windows taskbar
   // TODO #700 refactor to use preload script with a context bridge
   webPreferences: {
