@@ -149,7 +149,7 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
       expect(screen.getByTestId('settings-volume-group')).not.toBeVisible();
     });
 
-    it('should increase playSound volume', async () => {
+    it('should increase notification volume', async () => {
       render(
         <AppContext.Provider
           value={{
@@ -170,7 +170,7 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
       expect(updateSetting).toHaveBeenCalledWith('notificationVolume', 30);
     });
 
-    it('should decrease playSound volume', async () => {
+    it('should decrease notification volume', async () => {
       render(
         <AppContext.Provider
           value={{
@@ -191,7 +191,7 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
       expect(updateSetting).toHaveBeenCalledWith('notificationVolume', 10);
     });
 
-    it('should reset playSound volume', async () => {
+    it('should reset notification volume', async () => {
       render(
         <AppContext.Provider
           value={{
