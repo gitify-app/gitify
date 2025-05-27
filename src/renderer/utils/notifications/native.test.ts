@@ -133,14 +133,8 @@ describe('renderer/utils/notifications/native.ts', () => {
       native.raiseSoundNotification();
       expect(window.Audio.prototype.play).toHaveBeenCalledTimes(1);
     });
-  });
 
-  describe('triggerNativeNotifications', () => {
-    afterEach(() => {
-      jest.clearAllMocks();
-    });
-
-    it('should raise only sound notification with correct volume', () => {
+    it('should play notification sound with correct volume', () => {
       const settings: SettingsState = {
         ...defaultSettings,
         playSound: true,
