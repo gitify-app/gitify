@@ -11,7 +11,7 @@ const configuration: webpack.Configuration = {
 
   target: 'electron-main',
 
-  entry: [path.join(webpackPaths.srcMainPath, 'main.ts')],
+  entry: [path.join(webpackPaths.srcMainPath, 'index.ts')],
 
   output: {
     path: webpackPaths.buildPath,
