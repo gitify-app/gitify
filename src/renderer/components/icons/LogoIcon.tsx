@@ -24,9 +24,9 @@ export const LogoIcon: FC<ILogoIcon> = ({
 }: ILogoIcon) => (
   <svg
     className={cn(
-      size === Size.SMALL && 'size-5',
-      size === Size.MEDIUM && 'size-10',
-      size === Size.LARGE && 'size-16',
+      size === Size.SMALL && 'size-2.5',
+      size === Size.MEDIUM && 'size-5',
+      size === Size.LARGE && 'size-8',
     )}
     onClick={() => onClick?.()}
     xmlns="https://www.w3.org/2000/svg"

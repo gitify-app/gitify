@@ -22,8 +22,8 @@ export const Contents: FC<IContents> = ({
     <Box
       className={cn(
         'grow overflow-x-hidden overflow-y-auto',
-        paddingHorizontal && 'px-8',
-        paddingBottom && 'pb-4',
+        paddingHorizontal && 'px-4',
+        paddingBottom && 'pb-2',
       )}
     >
       {children}

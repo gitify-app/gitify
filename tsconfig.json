@@ -2,11 +2,11 @@
   "compilerOptions": {
     "incremental": true,
     "target": "es2022",
-    "module": "commonjs",
+    "module": "NodeNext",
     "lib": ["dom", "es2022"],
     "jsx": "react-jsx",
     "sourceMap": true,
-    "moduleResolution": "node",
+    "moduleResolution": "nodenext",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "allowJs": true,

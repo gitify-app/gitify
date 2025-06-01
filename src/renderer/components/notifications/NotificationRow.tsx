@@ -96,7 +96,7 @@ export const NotificationRow: FC<INotificationRow> = ({
       id={notification.id}
       className={cn(
         'group border-b',
-        'pl-3 pr-1 py-1.5',
+        'pl-1.5 pr-1 py-0.75',
         'text-gitify-font border-gitify-notification-border hover:bg-gitify-notification-hover',
         (isAnimated || animateExit) &&
           'translate-x-full opacity-0 transition duration-[350ms] ease-in-out',
@@ -110,7 +110,10 @@ export const NotificationRow: FC<INotificationRow> = ({
         className="relative"
       >
         <Tooltip text={notificationType} direction="e">
-          <NotificationIcon size={Size.LARGE} className={iconColor} />
+          {/* Using a fragment here because Tooltip require button inside it for some reason :cringe */}
+          <>
+            <NotificationIcon size={Size.LARGE} className={iconColor} />
+          </>
         </Tooltip>
 
         <Stack
