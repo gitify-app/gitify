@@ -82,7 +82,7 @@
     "@electron/notarize": "3.0.1",
     "@primer/octicons-react": "19.15.2",
     "@primer/primitives": "10.7.0",
-    "@primer/react": "36.27.0",
+    "@primer/react": "37.25.0",
     "@tailwindcss/postcss": "4.1.8",
     "@testing-library/jest-dom": "6.6.3",
     "@testing-library/react": "16.3.0",

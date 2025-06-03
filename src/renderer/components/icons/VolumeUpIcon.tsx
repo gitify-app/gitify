@@ -2,7 +2,7 @@ import type { FC } from 'react';
 
 export const VolumeUpIcon: FC = () => (
   <svg
-    className="size-4"
+    className="size-2"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
     width="24"

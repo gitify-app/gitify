@@ -35,7 +35,7 @@ export const RadioGroup: FC<IRadioGroup> = (props: IRadioGroup) => {
           >
             <input
               type="radio"
-              className="size-4 cursor-pointer"
+              className="size-2 cursor-pointer"
               id={name}
               name={props.name}
               value={item.value}
