@@ -102,7 +102,7 @@
     "date-fns": "4.1.0",
     "electron": "36.4.0",
     "electron-builder": "25.1.8",
-    "final-form": "4.20.10",
+    "final-form": "5.0.0",
     "graphql-tag": "2.12.6",
     "html-webpack-plugin": "5.6.3",
     "husky": "9.1.7",
