@@ -12,8 +12,8 @@ importers:
         specifier: 2.1.2
         version: 2.1.2(electron@36.4.0)
       electron-log:
-        specifier: 5.4.0
-        version: 5.4.0
+        specifier: 5.4.1
+        version: 5.4.1
       electron-updater:
         specifier: 6.6.2
         version: 6.6.2
@@ -1579,11 +1579,6 @@ packages:
     resolution: {integrity: sha512-DSRm+US/FCB4xPDD6Rnslb6PAF9Bej1DZ+1u4aTiqJnk7ZX12eHsnDiIOqjGvITCq+u6wLqUhgS+faCNbVY8+g==}
     engines: {node: ^18.14.0 || ^20.0.0 || ^22.0.0 || >=24.0.0}
 
-  babel-preset-current-node-syntax@1.0.1:
-    resolution: {integrity: sha512-M7LQ0bxarkxQoN+vz5aJPsLBn77n8QgTFmo8WK0/44auK2xlCXrYcUxHFxgU7qW5Yzw/CjmLRK2uJzaCd7LvqQ==}
-    peerDependencies:
-      '@babel/core': ^7.0.0
-
   babel-preset-current-node-syntax@1.1.0:
     resolution: {integrity: sha512-ldYss8SbBlWva1bs28q78Ju5Zq1F+8BrqBZZ0VFhLBvhh6lCpC2o3gDJi/5DRLs9FgYZCnmPYIVFU4lRXCkyUw==}
     peerDependencies:
@@ -2220,8 +2215,8 @@ packages:
     engines: {node: '>=14.0.0'}
     hasBin: true
 
-  electron-log@5.4.0:
-    resolution: {integrity: sha512-AXI5OVppskrWxEAmCxuv8ovX+s2Br39CpCAgkGMNHQtjYT3IiVbSQTncEjFVGPgoH35ZygRm/mvUMBDWwhRxgg==}
+  electron-log@5.4.1:
+    resolution: {integrity: sha512-QvisA18Z++8E3Th0zmhUelys9dEv7aIeXJlbFw3UrxCc8H9qSRW0j8/ooTef/EtHui8tVmbKSL+EIQzP9GoRLg==}
     engines: {node: '>= 14'}
 
   electron-positioner@4.1.0:
@@ -3692,10 +3687,6 @@ packages:
   picomatch@4.0.2:
     resolution: {integrity: sha512-M7BAV6Rlcy5u+m6oPhAPFgJTzAioX/6B0DxyvDlo9l8+T3nLKbrczg2WLUyzd45L8RqfUMyGPzekbMvX2Ldkwg==}
     engines: {node: '>=12'}
-
-  pirates@4.0.6:
-    resolution: {integrity: sha512-saLsH7WeYYPiD25LDuLRRY/i+6HaPYr6G1OUlN39otzkSTxKnubR9RTxS3/Kk50s1g2JTgFwWQDQyplC5/SHZg==}
-    engines: {node: '>= 6'}
 
   pirates@4.0.7:
     resolution: {integrity: sha512-TfySrs/5nm8fQJDcBDuUng3VOUKsd7S+zqvbOTiGXHfxX4wK31ard+hoNuvkicM/2YFzlpDgABOevKSsB4G/FA==}
@@ -5565,7 +5556,7 @@ snapshots:
 
   '@jest/transform@29.7.0':
     dependencies:
-      '@babel/core': 7.24.3
+      '@babel/core': 7.27.4
       '@jest/types': 29.6.3
       '@jridgewell/trace-mapping': 0.3.25
       babel-plugin-istanbul: 6.1.1
@@ -5577,7 +5568,7 @@ snapshots:
       jest-regex-util: 29.6.3
       jest-util: 29.7.0
       micromatch: 4.0.8
-      pirates: 4.0.6
+      pirates: 4.0.7
       slash: 3.0.0
       write-file-atomic: 4.0.2
     transitivePeerDependencies:
@@ -5903,7 +5894,7 @@ snapshots:
 
   '@testing-library/dom@10.0.0':
     dependencies:
-      '@babel/code-frame': 7.24.2
+      '@babel/code-frame': 7.27.1
       '@babel/runtime': 7.24.1
       '@types/aria-query': 5.0.4
       aria-query: 5.3.0
@@ -6549,7 +6540,7 @@ snapshots:
 
   babel-plugin-istanbul@6.1.1:
     dependencies:
-      '@babel/helper-plugin-utils': 7.24.0
+      '@babel/helper-plugin-utils': 7.27.1
       '@istanbuljs/load-nyc-config': 1.1.0
       '@istanbuljs/schema': 0.1.3
       istanbul-lib-instrument: 5.2.1
@@ -6570,8 +6561,8 @@ snapshots:
 
   babel-plugin-jest-hoist@29.6.3:
     dependencies:
-      '@babel/template': 7.24.0
-      '@babel/types': 7.24.0
+      '@babel/template': 7.27.2
+      '@babel/types': 7.27.6
       '@types/babel__core': 7.20.5
       '@types/babel__traverse': 7.20.5
     optional: true
@@ -6581,23 +6572,6 @@ snapshots:
       '@babel/template': 7.27.2
       '@babel/types': 7.27.6
       '@types/babel__core': 7.20.5
-
-  babel-preset-current-node-syntax@1.0.1(@babel/core@7.27.4):
-    dependencies:
-      '@babel/core': 7.27.4
-      '@babel/plugin-syntax-async-generators': 7.8.4(@babel/core@7.27.4)
-      '@babel/plugin-syntax-bigint': 7.8.3(@babel/core@7.27.4)
-      '@babel/plugin-syntax-class-properties': 7.12.13(@babel/core@7.27.4)
-      '@babel/plugin-syntax-import-meta': 7.10.4(@babel/core@7.27.4)
-      '@babel/plugin-syntax-json-strings': 7.8.3(@babel/core@7.27.4)
-      '@babel/plugin-syntax-logical-assignment-operators': 7.10.4(@babel/core@7.27.4)
-      '@babel/plugin-syntax-nullish-coalescing-operator': 7.8.3(@babel/core@7.27.4)
-      '@babel/plugin-syntax-numeric-separator': 7.10.4(@babel/core@7.27.4)
-      '@babel/plugin-syntax-object-rest-spread': 7.8.3(@babel/core@7.27.4)
-      '@babel/plugin-syntax-optional-catch-binding': 7.8.3(@babel/core@7.27.4)
-      '@babel/plugin-syntax-optional-chaining': 7.8.3(@babel/core@7.27.4)
-      '@babel/plugin-syntax-top-level-await': 7.14.5(@babel/core@7.27.4)
-    optional: true
 
   babel-preset-current-node-syntax@1.1.0(@babel/core@7.27.4):
     dependencies:
@@ -6622,7 +6596,7 @@ snapshots:
     dependencies:
       '@babel/core': 7.27.4
       babel-plugin-jest-hoist: 29.6.3
-      babel-preset-current-node-syntax: 1.0.1(@babel/core@7.27.4)
+      babel-preset-current-node-syntax: 1.1.0(@babel/core@7.27.4)
     optional: true
 
   babel-preset-jest@30.0.0(@babel/core@7.27.4):
@@ -7326,7 +7300,7 @@ snapshots:
       - electron-builder-squirrel-windows
       - supports-color
 
-  electron-log@5.4.0: {}
+  electron-log@5.4.1: {}
 
   electron-positioner@4.1.0: {}
 
@@ -7947,8 +7921,8 @@ snapshots:
 
   istanbul-lib-instrument@5.2.1:
     dependencies:
-      '@babel/core': 7.24.3
-      '@babel/parser': 7.24.1
+      '@babel/core': 7.27.4
+      '@babel/parser': 7.27.5
       '@istanbuljs/schema': 0.1.3
       istanbul-lib-coverage: 3.2.2
       semver: 6.3.1
@@ -9106,9 +9080,6 @@ snapshots:
   picomatch@2.3.1: {}
 
   picomatch@4.0.2: {}
-
-  pirates@4.0.6:
-    optional: true
 
   pirates@4.0.7: {}
 
