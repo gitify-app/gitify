@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`renderer/components/AllRead.tsx should render itself & its children - no filters 1`] = `
 {
@@ -6,7 +6,7 @@ exports[`renderer/components/AllRead.tsx should render itself & its children - n
   "baseElement": <body>
     <div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 oXGHI h-screen"
+        class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ h-screen"
         data-align="center"
         data-direction="vertical"
         data-justify="center"
@@ -14,7 +14,7 @@ exports[`renderer/components/AllRead.tsx should render itself & its children - n
         data-wrap="nowrap"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
+          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
           data-align="center"
           data-direction="vertical"
           data-gap="condensed"
@@ -23,7 +23,7 @@ exports[`renderer/components/AllRead.tsx should render itself & its children - n
           data-wrap="nowrap"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
+            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
             data-align="center"
             data-direction="vertical"
             data-gap="spacious"
@@ -53,7 +53,7 @@ exports[`renderer/components/AllRead.tsx should render itself & its children - n
   </body>,
   "container": <div>
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 oXGHI h-screen"
+      class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ h-screen"
       data-align="center"
       data-direction="vertical"
       data-justify="center"
@@ -61,7 +61,7 @@ exports[`renderer/components/AllRead.tsx should render itself & its children - n
       data-wrap="nowrap"
     >
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
+        class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
         data-align="center"
         data-direction="vertical"
         data-gap="condensed"
@@ -70,7 +70,7 @@ exports[`renderer/components/AllRead.tsx should render itself & its children - n
         data-wrap="nowrap"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
+          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
           data-align="center"
           data-direction="vertical"
           data-gap="spacious"
@@ -157,7 +157,7 @@ exports[`renderer/components/AllRead.tsx should render itself & its children - w
   "baseElement": <body>
     <div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 oXGHI h-screen"
+        class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ h-screen"
         data-align="center"
         data-direction="vertical"
         data-justify="center"
@@ -165,7 +165,7 @@ exports[`renderer/components/AllRead.tsx should render itself & its children - w
         data-wrap="nowrap"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
+          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
           data-align="center"
           data-direction="vertical"
           data-gap="condensed"
@@ -174,7 +174,7 @@ exports[`renderer/components/AllRead.tsx should render itself & its children - w
           data-wrap="nowrap"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
+            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
             data-align="center"
             data-direction="vertical"
             data-gap="spacious"
@@ -204,7 +204,7 @@ exports[`renderer/components/AllRead.tsx should render itself & its children - w
   </body>,
   "container": <div>
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 oXGHI h-screen"
+      class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ h-screen"
       data-align="center"
       data-direction="vertical"
       data-justify="center"
@@ -212,7 +212,7 @@ exports[`renderer/components/AllRead.tsx should render itself & its children - w
       data-wrap="nowrap"
     >
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
+        class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
         data-align="center"
         data-direction="vertical"
         data-gap="condensed"
@@ -221,7 +221,7 @@ exports[`renderer/components/AllRead.tsx should render itself & its children - w
         data-wrap="nowrap"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
+          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
           data-align="center"
           data-direction="vertical"
           data-gap="spacious"

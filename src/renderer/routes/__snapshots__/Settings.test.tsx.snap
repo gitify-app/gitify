@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = `
 <div
@@ -9,7 +9,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
     class="Box-sc-g0xbh4-0 px-6 py-4"
   >
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
+      class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
       data-align="stretch"
       data-direction="horizontal"
       data-justify="space-between"
@@ -19,7 +19,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
       <button
         aria-describedby="«r0»-loading-announcement"
         aria-labelledby="Go Back"
-        class="types__StyledButton-sc-ws60qy-0 gbYXLg"
+        class="types__StyledButton-sc-ws60qy-0 yiNNF"
         data-component="IconButton"
         data-loading="false"
         data-no-visuals="true"
@@ -49,7 +49,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           class="Box-sc-g0xbh4-0 mb-2"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
+            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -75,7 +75,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               />
             </svg>
             <h2
-              class="Heading__StyledHeading-sc-1c1dgg0-0 iNQihF"
+              class="Heading__StyledHeading-sc-1c1dgg0-0 hwOZFo"
               sx="[object Object]"
             >
               Settings
@@ -89,7 +89,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
     class="Box-sc-g0xbh4-0 grow overflow-x-hidden overflow-y-auto px-8 pb-4"
   >
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
+      class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
       data-align="stretch"
       data-direction="vertical"
       data-gap="spacious"
@@ -103,7 +103,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             class="Box-sc-g0xbh4-0 mb-2"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
+              class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -129,7 +129,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                 />
               </svg>
               <h2
-                class="Heading__StyledHeading-sc-1c1dgg0-0 nlGdY"
+                class="Heading__StyledHeading-sc-1c1dgg0-0 fokFLB"
                 sx="[object Object]"
               >
                 Appearance
@@ -138,7 +138,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           </div>
         </legend>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
+          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
           data-align="stretch"
           data-direction="vertical"
           data-gap="condensed"
@@ -147,7 +147,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           data-wrap="nowrap"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI text-sm"
+            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -162,12 +162,12 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               Theme:
             </label>
             <span
-              class="TextInputWrapper__TextInputBaseWrapper-sc-1mqhpbi-0 TextInputWrapper-sc-1mqhpbi-1 hrIuPp bspwW"
+              class="TextInputWrapper__TextInputBaseWrapper-sc-1mqhpbi-0 TextInputWrapper-sc-1mqhpbi-1 jYaBKI RufFD"
               sx="[object Object]"
             >
               <select
                 aria-invalid="false"
-                class="Select__StyledSelect-sc-li6bhs-0 chhOie"
+                class="Select__StyledSelect-sc-li6bhs-0 flMRcT"
                 data-hasplaceholder="false"
                 data-testid="settings-theme"
                 id="theme"
@@ -237,7 +237,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               </select>
               <svg
                 aria-hidden="true"
-                class="Select__ArrowIndicator-sc-li6bhs-1 iDogej"
+                class="Select__ArrowIndicator-sc-li6bhs-1 bGTcqy"
                 fill="currentColor"
                 height="16"
                 width="16"
@@ -250,7 +250,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI text-sm"
+            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -265,12 +265,12 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               Zoom:
             </label>
             <div
-              class="ButtonGroup-sc-1gxhls1-0 kzlbFy ml-2"
+              class="ButtonGroup-sc-1gxhls1-0 XclBP ml-2"
             >
               <button
                 aria-describedby="«r1»-loading-announcement"
                 aria-label="Zoom out"
-                class="types__StyledButton-sc-ws60qy-0 juGpbb"
+                class="types__StyledButton-sc-ws60qy-0 fnSTVi"
                 data-component="IconButton"
                 data-loading="false"
                 data-no-visuals="true"
@@ -302,7 +302,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               <button
                 aria-describedby="«r2»-loading-announcement"
                 aria-label="Zoom percentage"
-                class="types__StyledButton-sc-ws60qy-0 juGpbb"
+                class="types__StyledButton-sc-ws60qy-0 fnSTVi"
                 data-loading="false"
                 data-no-visuals="true"
                 data-size="small"
@@ -311,7 +311,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                 type="button"
               >
                 <span
-                  class="Box-sc-g0xbh4-0 jJSkGI"
+                  class="Box-sc-g0xbh4-0 iEfcEl"
                   data-component="buttonContent"
                   sx="[object Object]"
                 >
@@ -326,7 +326,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               <button
                 aria-describedby="«r3»-loading-announcement"
                 aria-label="Zoom in"
-                class="types__StyledButton-sc-ws60qy-0 juGpbb"
+                class="types__StyledButton-sc-ws60qy-0 fnSTVi"
                 data-component="IconButton"
                 data-loading="false"
                 data-no-visuals="true"
@@ -358,7 +358,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               <button
                 aria-describedby="«r4»-loading-announcement"
                 aria-label="Reset zoom"
-                class="types__StyledButton-sc-ws60qy-0 jsQxcG"
+                class="types__StyledButton-sc-ws60qy-0 kUKPL"
                 data-component="IconButton"
                 data-loading="false"
                 data-no-visuals="true"
@@ -387,7 +387,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             </div>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI text-sm"
+            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -439,7 +439,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             class="Box-sc-g0xbh4-0 mb-2"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
+              class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -465,7 +465,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                 />
               </svg>
               <h2
-                class="Heading__StyledHeading-sc-1c1dgg0-0 nlGdY"
+                class="Heading__StyledHeading-sc-1c1dgg0-0 fokFLB"
                 sx="[object Object]"
               >
                 Notifications
@@ -474,7 +474,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           </div>
         </legend>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
+          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
           data-align="stretch"
           data-direction="vertical"
           data-gap="condensed"
@@ -483,7 +483,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           data-wrap="nowrap"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI text-sm"
+            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -498,7 +498,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               Group by:
             </label>
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
+              class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -523,7 +523,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               </label>
             </div>
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
+              class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -548,7 +548,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             </div>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI text-sm"
+            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -594,7 +594,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             </div>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI text-sm"
+            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -643,7 +643,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             class="Box-sc-g0xbh4-0 pl-6"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
+              class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
               data-align="stretch"
               data-direction="vertical"
               data-gap="condensed"
@@ -652,7 +652,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               data-wrap="nowrap"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 oXGHI text-sm"
+                class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -698,7 +698,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                 </div>
               </div>
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 oXGHI text-sm"
+                class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -746,7 +746,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             </div>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI text-sm"
+            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -791,7 +791,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             </div>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI text-sm"
+            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -836,7 +836,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             </div>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI text-sm"
+            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -881,7 +881,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             </div>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI text-sm"
+            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -933,7 +933,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             class="Box-sc-g0xbh4-0 mb-2"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
+              class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -959,7 +959,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                 />
               </svg>
               <h2
-                class="Heading__StyledHeading-sc-1c1dgg0-0 nlGdY"
+                class="Heading__StyledHeading-sc-1c1dgg0-0 fokFLB"
                 sx="[object Object]"
               >
                 System
@@ -968,7 +968,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           </div>
         </legend>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
+          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
           data-align="stretch"
           data-direction="vertical"
           data-gap="condensed"
@@ -977,7 +977,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           data-wrap="nowrap"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI text-sm"
+            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -992,7 +992,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               Open Links:
             </label>
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
+              class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -1017,7 +1017,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               </label>
             </div>
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
+              class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -1042,7 +1042,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             </div>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI text-sm"
+            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1088,7 +1088,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             </div>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI text-sm"
+            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1111,7 +1111,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             </label>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI text-sm"
+            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1137,7 +1137,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             class="Box-sc-g0xbh4-0"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 oXGHI text-sm"
+              class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -1146,7 +1146,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               data-wrap="nowrap"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 oXGHI text-sm"
+                class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -1169,13 +1169,13 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                 </label>
               </div>
               <div
-                class="ButtonGroup-sc-1gxhls1-0 kzlbFy ml-2"
+                class="ButtonGroup-sc-1gxhls1-0 XclBP ml-2"
                 data-testid="settings-volume-group"
               >
                 <button
                   aria-describedby="«r5»-loading-announcement"
                   aria-label="Volume down"
-                  class="types__StyledButton-sc-ws60qy-0 juGpbb"
+                  class="types__StyledButton-sc-ws60qy-0 fnSTVi"
                   data-component="IconButton"
                   data-loading="false"
                   data-no-visuals="true"
@@ -1209,7 +1209,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                 <button
                   aria-describedby="«r6»-loading-announcement"
                   aria-label="Volume percentage"
-                  class="types__StyledButton-sc-ws60qy-0 juGpbb"
+                  class="types__StyledButton-sc-ws60qy-0 fnSTVi"
                   data-loading="false"
                   data-no-visuals="true"
                   data-size="small"
@@ -1218,7 +1218,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                   type="button"
                 >
                   <span
-                    class="Box-sc-g0xbh4-0 jJSkGI"
+                    class="Box-sc-g0xbh4-0 iEfcEl"
                     data-component="buttonContent"
                     sx="[object Object]"
                   >
@@ -1233,7 +1233,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                 <button
                   aria-describedby="«r7»-loading-announcement"
                   aria-label="Volume up"
-                  class="types__StyledButton-sc-ws60qy-0 juGpbb"
+                  class="types__StyledButton-sc-ws60qy-0 fnSTVi"
                   data-component="IconButton"
                   data-loading="false"
                   data-no-visuals="true"
@@ -1263,7 +1263,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                 <button
                   aria-describedby="«r8»-loading-announcement"
                   aria-label="Reset volume"
-                  class="types__StyledButton-sc-ws60qy-0 jsQxcG"
+                  class="types__StyledButton-sc-ws60qy-0 kUKPL"
                   data-component="IconButton"
                   data-loading="false"
                   data-no-visuals="true"
@@ -1293,7 +1293,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             </div>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI text-sm"
+            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1338,7 +1338,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             </div>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI text-sm"
+            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1362,7 +1362,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
         </div>
       </fieldset>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
+        class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
         data-align="center"
         data-direction="vertical"
         data-justify="start"
@@ -1371,7 +1371,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
       >
         <button
           aria-describedby="«r9»-loading-announcement"
-          class="types__StyledButton-sc-ws60qy-0 bQJNcD"
+          class="types__StyledButton-sc-ws60qy-0 KMprq"
           data-loading="false"
           data-no-visuals="true"
           data-testid="settings-reset"
@@ -1379,7 +1379,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           type="button"
         >
           <span
-            class="Box-sc-g0xbh4-0 jJSkGI"
+            class="Box-sc-g0xbh4-0 iEfcEl"
             data-component="buttonContent"
             sx="[object Object]"
           >
@@ -1397,7 +1397,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
     class="Box-sc-g0xbh4-0 left-sidebar bg-gitify-footer"
   >
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
+      class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
       data-align="stretch"
       data-direction="horizontal"
       data-justify="space-between"
@@ -1405,7 +1405,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
       data-wrap="nowrap"
     >
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
+        class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
         data-align="stretch"
         data-direction="horizontal"
         data-justify="start"
@@ -1414,13 +1414,13 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
       >
         <span
           aria-label="View release notes"
-          class="Tooltip__TooltipBase-sc-17tf59c-0 ezknIY tooltipped-n"
+          class="Tooltip__TooltipBase-sc-17tf59c-0 ihgdlF tooltipped-n"
           id="«ra»"
           role="tooltip"
         >
           <button
             aria-describedby="«rb»-loading-announcement"
-            class="types__StyledButton-sc-ws60qy-0 juGpbb"
+            class="types__StyledButton-sc-ws60qy-0 fnSTVi"
             data-loading="false"
             data-no-visuals="true"
             data-testid="settings-release-notes"
@@ -1428,7 +1428,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             type="button"
           >
             <span
-              class="Box-sc-g0xbh4-0 jJSkGI"
+              class="Box-sc-g0xbh4-0 iEfcEl"
               data-component="buttonContent"
               sx="[object Object]"
             >
@@ -1444,7 +1444,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
         </span>
       </div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
+        class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
         data-align="stretch"
         data-direction="horizontal"
         data-gap="normal"
@@ -1454,14 +1454,14 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
       >
         <span
           aria-label="Accounts"
-          class="Tooltip__TooltipBase-sc-17tf59c-0 ezknIY tooltipped-n"
+          class="Tooltip__TooltipBase-sc-17tf59c-0 ihgdlF tooltipped-n"
           id="«rc»"
           role="tooltip"
         >
           <button
             aria-describedby="«rd»-loading-announcement"
             aria-label="Accounts"
-            class="types__StyledButton-sc-ws60qy-0 juGpbb"
+            class="types__StyledButton-sc-ws60qy-0 fnSTVi"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
@@ -1489,14 +1489,14 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
         </span>
         <span
           aria-label="Quit Gitify"
-          class="Tooltip__TooltipBase-sc-17tf59c-0 ezknIY tooltipped-nw"
+          class="Tooltip__TooltipBase-sc-17tf59c-0 ihgdlF tooltipped-nw"
           id="«re»"
           role="tooltip"
         >
           <button
             aria-describedby="«rf»-loading-announcement"
             aria-label="Quit Gitify"
-            class="types__StyledButton-sc-ws60qy-0 jsQxcG"
+            class="types__StyledButton-sc-ws60qy-0 kUKPL"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"

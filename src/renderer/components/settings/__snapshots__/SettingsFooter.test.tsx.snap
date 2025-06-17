@@ -1,9 +1,9 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`renderer/components/settings/SettingsFooter.tsx app version should show development app version 1`] = `
 <button
   aria-describedby="«r7»-loading-announcement"
-  class="types__StyledButton-sc-ws60qy-0 juGpbb"
+  class="types__StyledButton-sc-ws60qy-0 fnSTVi"
   data-loading="false"
   data-no-visuals="true"
   data-testid="settings-release-notes"
@@ -11,7 +11,7 @@ exports[`renderer/components/settings/SettingsFooter.tsx app version should show
   type="button"
 >
   <span
-    class="Box-sc-g0xbh4-0 jJSkGI"
+    class="Box-sc-g0xbh4-0 iEfcEl"
     data-component="buttonContent"
     sx="[object Object]"
   >
@@ -29,7 +29,7 @@ exports[`renderer/components/settings/SettingsFooter.tsx app version should show
 exports[`renderer/components/settings/SettingsFooter.tsx app version should show production app version 1`] = `
 <button
   aria-describedby="«r1»-loading-announcement"
-  class="types__StyledButton-sc-ws60qy-0 evglGo"
+  class="types__StyledButton-sc-ws60qy-0 kZYxt"
   data-loading="false"
   data-no-visuals="true"
   data-testid="settings-release-notes"
@@ -37,7 +37,7 @@ exports[`renderer/components/settings/SettingsFooter.tsx app version should show
   type="button"
 >
   <span
-    class="Box-sc-g0xbh4-0 jJSkGI"
+    class="Box-sc-g0xbh4-0 iEfcEl"
     data-component="buttonContent"
     sx="[object Object]"
   >
