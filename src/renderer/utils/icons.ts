@@ -1,3 +1,5 @@
+import type { FC } from 'react';
+
 import {
   AlertIcon,
   AppsIcon,
@@ -32,7 +34,7 @@ import {
   TagIcon,
   XIcon,
 } from '@primer/octicons-react';
-import type { FC } from 'react';
+
 import { IconColor, type PullRequestApprovalIcon } from '../types';
 import type {
   GitifyPullRequestReview,

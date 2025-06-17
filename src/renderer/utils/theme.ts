@@ -1,4 +1,5 @@
 import type { ColorModeWithAuto } from '@primer/react/lib/ThemeProvider';
+
 import { Theme } from '../types';
 
 export const DEFAULT_DAY_COLOR_SCHEME = 'light';

@@ -1,12 +1,12 @@
 import { type FC, useContext, useEffect, useState } from 'react';
 
-import { Box, Stack, Text, TextInputWithTokens } from '@primer/react';
-
 import {
   CheckCircleFillIcon,
   MentionIcon,
   NoEntryFillIcon,
 } from '@primer/octicons-react';
+import { Box, Stack, Text, TextInputWithTokens } from '@primer/react';
+
 import { AppContext } from '../../context/App';
 import { IconColor, type UserHandle } from '../../types';
 import {

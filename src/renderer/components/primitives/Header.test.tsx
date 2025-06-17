@@ -1,6 +1,7 @@
-import { MarkGithubIcon } from '@primer/octicons-react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+
+import { MarkGithubIcon } from '@primer/octicons-react';
 
 import { AppContext } from '../../context/App';
 import { Header } from './Header';

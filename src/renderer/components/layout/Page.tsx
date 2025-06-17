@@ -1,5 +1,6 @@
-import { Box } from '@primer/react';
 import type { FC, ReactNode } from 'react';
+
+import { Box } from '@primer/react';
 
 interface IPage {
   children: ReactNode;

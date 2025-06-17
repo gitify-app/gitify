@@ -1,5 +1,6 @@
-import { webFrame } from 'electron';
 import { type FC, useContext, useState } from 'react';
+
+import { webFrame } from 'electron';
 
 import {
   PaintbrushIcon,

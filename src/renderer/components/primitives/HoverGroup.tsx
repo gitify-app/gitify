@@ -1,6 +1,7 @@
 import type { FC, ReactNode } from 'react';
 
 import { Stack } from '@primer/react';
+
 import { cn } from '../../utils/cn';
 
 interface IHoverGroup {

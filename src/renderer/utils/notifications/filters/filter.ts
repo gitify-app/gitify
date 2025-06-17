@@ -1,3 +1,5 @@
+import type { SettingsState } from '../../../types';
+import type { Notification } from '../../../typesGitHub';
 import {
   filterNotificationByHandle,
   hasExcludeHandleFilters,
@@ -7,8 +9,6 @@ import {
   subjectTypeFilter,
   userTypeFilter,
 } from '.';
-import type { SettingsState } from '../../../types';
-import type { Notification } from '../../../typesGitHub';
 
 export function filterNotifications(
   notifications: Notification[],

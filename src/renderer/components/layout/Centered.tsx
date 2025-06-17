@@ -1,5 +1,6 @@
-import { Stack } from '@primer/react';
 import type { FC, ReactNode } from 'react';
+
+import { Stack } from '@primer/react';
 
 interface ICentered {
   children: ReactNode;

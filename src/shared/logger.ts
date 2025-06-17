@@ -28,7 +28,7 @@ export function logError(
 }
 
 function logMessage(
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  // biome-ignore lint/suspicious/noExplicitAny: Allow any for logging purposes
   logFunction: (...params: any[]) => void,
   type: string,
   message: string,

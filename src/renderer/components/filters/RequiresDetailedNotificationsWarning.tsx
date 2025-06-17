@@ -1,5 +1,6 @@
-import { Text } from '@primer/react';
 import type { FC } from 'react';
+
+import { Text } from '@primer/react';
 
 export const RequiresDetailedNotificationWarning: FC = () => (
   <Text className="text-gitify-caution">

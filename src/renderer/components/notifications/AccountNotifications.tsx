@@ -14,8 +14,8 @@ import {
   openGitHubPulls,
 } from '../../utils/links';
 import { AllRead } from '../AllRead';
-import { Oops } from '../Oops';
 import { AvatarWithFallback } from '../avatars/AvatarWithFallback';
+import { Oops } from '../Oops';
 import { HoverButton } from '../primitives/HoverButton';
 import { HoverGroup } from '../primitives/HoverGroup';
 import { NotificationRow } from './NotificationRow';

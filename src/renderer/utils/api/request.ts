@@ -1,6 +1,6 @@
 import axios, {
-  type AxiosResponse,
   type AxiosPromise,
+  type AxiosResponse,
   type Method,
 } from 'axios';
 

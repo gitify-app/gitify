@@ -2,6 +2,7 @@ import { type FC, useCallback, useContext, useState } from 'react';
 
 import { Button, Stack, Text } from '@primer/react';
 import { Dialog } from '@primer/react/experimental';
+
 import { AppContext } from '../../context/App';
 
 export const SettingsReset: FC = () => {

@@ -1,5 +1,6 @@
-import { PersonFillIcon } from '@primer/octicons-react';
 import { render } from '@testing-library/react';
+
+import { PersonFillIcon } from '@primer/octicons-react';
 
 import { Title } from './Title';
 

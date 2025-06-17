@@ -2,6 +2,7 @@ import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
 import type webpack from 'webpack';
 import { merge } from 'webpack-merge';
+
 import baseConfig from './webpack.config.renderer.base';
 
 const configuration: webpack.Configuration = {

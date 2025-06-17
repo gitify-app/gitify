@@ -1,4 +1,5 @@
 import semver from 'semver';
+
 import type { Account } from '../types';
 import { isEnterpriseServerHost } from './helpers';
 

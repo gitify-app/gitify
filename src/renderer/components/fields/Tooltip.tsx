@@ -1,6 +1,7 @@
+import { type FC, type ReactNode, useState } from 'react';
+
 import { QuestionIcon } from '@primer/octicons-react';
 import { Box } from '@primer/react';
-import { type FC, type ReactNode, useState } from 'react';
 
 export interface ITooltip {
   name: string;

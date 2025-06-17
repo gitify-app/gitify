@@ -2,7 +2,6 @@ import {
   mockGitHubCloudAccount,
   mockGitHubEnterpriseServerAccount,
 } from '../__mocks__/state-mocks';
-
 import {
   isAnsweredDiscussionFeatureSupported,
   isMarkAsDoneFeatureSupported,

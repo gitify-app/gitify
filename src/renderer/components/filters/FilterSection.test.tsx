@@ -1,7 +1,8 @@
-import { MarkGithubIcon } from '@primer/octicons-react';
 import { act, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
+
+import { MarkGithubIcon } from '@primer/octicons-react';
 
 import { mockAccountNotifications } from '../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../__mocks__/state-mocks';
