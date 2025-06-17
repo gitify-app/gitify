@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`renderer/components/layout/EmojiSplash.tsx should render itself & its children - heading and sub-heading 1`] = `
 {
@@ -6,7 +6,7 @@ exports[`renderer/components/layout/EmojiSplash.tsx should render itself & its c
   "baseElement": <body>
     <div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 oXGHI h-screen"
+        class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ h-screen"
         data-align="center"
         data-direction="vertical"
         data-justify="center"
@@ -14,7 +14,7 @@ exports[`renderer/components/layout/EmojiSplash.tsx should render itself & its c
         data-wrap="nowrap"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
+          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
           data-align="center"
           data-direction="vertical"
           data-gap="condensed"
@@ -23,7 +23,7 @@ exports[`renderer/components/layout/EmojiSplash.tsx should render itself & its c
           data-wrap="nowrap"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
+            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
             data-align="center"
             data-direction="vertical"
             data-gap="spacious"
@@ -58,7 +58,7 @@ exports[`renderer/components/layout/EmojiSplash.tsx should render itself & its c
   </body>,
   "container": <div>
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 oXGHI h-screen"
+      class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ h-screen"
       data-align="center"
       data-direction="vertical"
       data-justify="center"
@@ -66,7 +66,7 @@ exports[`renderer/components/layout/EmojiSplash.tsx should render itself & its c
       data-wrap="nowrap"
     >
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
+        class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
         data-align="center"
         data-direction="vertical"
         data-gap="condensed"
@@ -75,7 +75,7 @@ exports[`renderer/components/layout/EmojiSplash.tsx should render itself & its c
         data-wrap="nowrap"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
+          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
           data-align="center"
           data-direction="vertical"
           data-gap="spacious"
@@ -167,7 +167,7 @@ exports[`renderer/components/layout/EmojiSplash.tsx should render itself & its c
   "baseElement": <body>
     <div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 oXGHI h-screen"
+        class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ h-screen"
         data-align="center"
         data-direction="vertical"
         data-justify="center"
@@ -175,7 +175,7 @@ exports[`renderer/components/layout/EmojiSplash.tsx should render itself & its c
         data-wrap="nowrap"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
+          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
           data-align="center"
           data-direction="vertical"
           data-gap="condensed"
@@ -184,7 +184,7 @@ exports[`renderer/components/layout/EmojiSplash.tsx should render itself & its c
           data-wrap="nowrap"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
+            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
             data-align="center"
             data-direction="vertical"
             data-gap="spacious"
@@ -214,7 +214,7 @@ exports[`renderer/components/layout/EmojiSplash.tsx should render itself & its c
   </body>,
   "container": <div>
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 oXGHI h-screen"
+      class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ h-screen"
       data-align="center"
       data-direction="vertical"
       data-justify="center"
@@ -222,7 +222,7 @@ exports[`renderer/components/layout/EmojiSplash.tsx should render itself & its c
       data-wrap="nowrap"
     >
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
+        class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
         data-align="center"
         data-direction="vertical"
         data-gap="condensed"
@@ -231,7 +231,7 @@ exports[`renderer/components/layout/EmojiSplash.tsx should render itself & its c
         data-wrap="nowrap"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
+          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
           data-align="center"
           data-direction="vertical"
           data-gap="spacious"

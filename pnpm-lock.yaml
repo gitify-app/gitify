@@ -50,7 +50,7 @@ importers:
         version: 10.7.0
       '@primer/react':
         specifier: 36.27.0
-        version: 36.27.0(@types/react-dom@19.1.6(@types/react@19.1.8))(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(styled-components@6.1.18(react-dom@19.1.0(react@19.1.0))(react@19.1.0))
+        version: 36.27.0(@types/react-dom@19.1.6(@types/react@19.1.8))(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(styled-components@6.1.19(react-dom@19.1.0(react@19.1.0))(react@19.1.0))
       '@tailwindcss/postcss':
         specifier: 4.1.10
         version: 4.1.10
@@ -145,8 +145,8 @@ importers:
         specifier: 7.7.2
         version: 7.7.2
       styled-components:
-        specifier: 6.1.18
-        version: 6.1.18(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        specifier: 6.1.19
+        version: 6.1.19(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       tailwind-merge:
         specifier: 3.3.1
         version: 3.3.1
@@ -4251,8 +4251,8 @@ packages:
   style-to-object@0.4.4:
     resolution: {integrity: sha512-HYNoHZa2GorYNyqiCaBgsxvcJIn7OHq6inEga+E6Ke3m5JkoqpQbnFssk4jwe+K7AhGa2fcha4wSOf1Kn01dMg==}
 
-  styled-components@6.1.18:
-    resolution: {integrity: sha512-Mvf3gJFzZCkhjY2Y/Fx9z1m3dxbza0uI9H1CbNZm/jSHCojzJhQ0R7bByrlFJINnMzz/gPulpoFFGymNwrsMcw==}
+  styled-components@6.1.19:
+    resolution: {integrity: sha512-1v/e3Dl1BknC37cXMhwGomhO8AkYmN41CqyX9xhUDxry1ns3BFQy2lLDRQXJRdVVWB9OHemv/53xaStimvWyuA==}
     engines: {node: '>= 16'}
     peerDependencies:
       react: '>= 16.8.0'
@@ -5590,7 +5590,7 @@ snapshots:
 
   '@primer/primitives@7.17.1': {}
 
-  '@primer/react@36.27.0(@types/react-dom@19.1.6(@types/react@19.1.8))(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(styled-components@6.1.18(react-dom@19.1.0(react@19.1.0))(react@19.1.0))':
+  '@primer/react@36.27.0(@types/react-dom@19.1.6(@types/react@19.1.8))(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(styled-components@6.1.19(react-dom@19.1.0(react@19.1.0))(react@19.1.0))':
     dependencies:
       '@github/combobox-nav': 2.3.1
       '@github/markdown-toolbar-element': 2.2.3
@@ -5623,7 +5623,7 @@ snapshots:
       react-intersection-observer: 9.13.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       react-is: 18.2.0
       react-markdown: 8.0.7(@types/react@19.1.8)(react@19.1.0)
-      styled-components: 6.1.18(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      styled-components: 6.1.19(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       styled-system: 5.1.5
     optionalDependencies:
       '@types/react': 19.1.8
@@ -9499,7 +9499,7 @@ snapshots:
     dependencies:
       inline-style-parser: 0.1.1
 
-  styled-components@6.1.18(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
+  styled-components@6.1.19(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
     dependencies:
       '@emotion/is-prop-valid': 1.2.2
       '@emotion/unitless': 0.8.1

@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its children 1`] = `
 {
@@ -9,7 +9,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
         id="filter-reasons"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
+          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
           data-align="baseline"
           data-direction="horizontal"
           data-gap="condensed"
@@ -22,7 +22,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               class="Box-sc-g0xbh4-0 mb-2"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
+                class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -48,7 +48,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
                   />
                 </svg>
                 <h2
-                  class="Heading__StyledHeading-sc-1c1dgg0-0 nlGdY"
+                  class="Heading__StyledHeading-sc-1c1dgg0-0 fokFLB"
                   sx="[object Object]"
                 >
                   Reason
@@ -81,7 +81,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
           </div>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
+          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
           data-align="stretch"
           data-direction="vertical"
           data-gap="condensed"
@@ -90,7 +90,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
           data-wrap="nowrap"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI text-sm"
+            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -134,13 +134,13 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               </svg>
             </div>
             <span
-              class="Text-sc-17v1xeu-0 bLmNQN px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI text-sm"
+            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -184,13 +184,13 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               </svg>
             </div>
             <span
-              class="Text-sc-17v1xeu-0 bLmNQN px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI text-sm"
+            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -234,13 +234,13 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               </svg>
             </div>
             <span
-              class="Text-sc-17v1xeu-0 bLmNQN px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
             >
               1
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI text-sm"
+            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -284,13 +284,13 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               </svg>
             </div>
             <span
-              class="Text-sc-17v1xeu-0 bLmNQN px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI text-sm"
+            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -334,13 +334,13 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               </svg>
             </div>
             <span
-              class="Text-sc-17v1xeu-0 bLmNQN px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI text-sm"
+            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -384,13 +384,13 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               </svg>
             </div>
             <span
-              class="Text-sc-17v1xeu-0 bLmNQN px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI text-sm"
+            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -434,13 +434,13 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               </svg>
             </div>
             <span
-              class="Text-sc-17v1xeu-0 bLmNQN px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI text-sm"
+            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -484,13 +484,13 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               </svg>
             </div>
             <span
-              class="Text-sc-17v1xeu-0 bLmNQN px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI text-sm"
+            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -534,13 +534,13 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               </svg>
             </div>
             <span
-              class="Text-sc-17v1xeu-0 bLmNQN px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI text-sm"
+            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -584,13 +584,13 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               </svg>
             </div>
             <span
-              class="Text-sc-17v1xeu-0 bLmNQN px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI text-sm"
+            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -634,13 +634,13 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               </svg>
             </div>
             <span
-              class="Text-sc-17v1xeu-0 bLmNQN px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI text-sm"
+            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -684,13 +684,13 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               </svg>
             </div>
             <span
-              class="Text-sc-17v1xeu-0 bLmNQN px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI text-sm"
+            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -734,13 +734,13 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               </svg>
             </div>
             <span
-              class="Text-sc-17v1xeu-0 bLmNQN px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI text-sm"
+            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -784,13 +784,13 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               </svg>
             </div>
             <span
-              class="Text-sc-17v1xeu-0 bLmNQN px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
             >
               3
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 oXGHI text-sm"
+            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -834,7 +834,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               </svg>
             </div>
             <span
-              class="Text-sc-17v1xeu-0 bLmNQN px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
             >
               0
             </span>
@@ -848,7 +848,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
       id="filter-reasons"
     >
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
+        class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
         data-align="baseline"
         data-direction="horizontal"
         data-gap="condensed"
@@ -861,7 +861,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             class="Box-sc-g0xbh4-0 mb-2"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
+              class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -887,7 +887,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
                 />
               </svg>
               <h2
-                class="Heading__StyledHeading-sc-1c1dgg0-0 nlGdY"
+                class="Heading__StyledHeading-sc-1c1dgg0-0 fokFLB"
                 sx="[object Object]"
               >
                 Reason
@@ -920,7 +920,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
         </div>
       </div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 oXGHI"
+        class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
         data-align="stretch"
         data-direction="vertical"
         data-gap="condensed"
@@ -929,7 +929,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
         data-wrap="nowrap"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI text-sm"
+          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -973,13 +973,13 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             </svg>
           </div>
           <span
-            class="Text-sc-17v1xeu-0 bLmNQN px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
           >
             0
           </span>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI text-sm"
+          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -1023,13 +1023,13 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             </svg>
           </div>
           <span
-            class="Text-sc-17v1xeu-0 bLmNQN px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
           >
             0
           </span>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI text-sm"
+          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -1073,13 +1073,13 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             </svg>
           </div>
           <span
-            class="Text-sc-17v1xeu-0 bLmNQN px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
           >
             1
           </span>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI text-sm"
+          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -1123,13 +1123,13 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             </svg>
           </div>
           <span
-            class="Text-sc-17v1xeu-0 bLmNQN px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
           >
             0
           </span>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI text-sm"
+          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -1173,13 +1173,13 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             </svg>
           </div>
           <span
-            class="Text-sc-17v1xeu-0 bLmNQN px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
           >
             0
           </span>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI text-sm"
+          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -1223,13 +1223,13 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             </svg>
           </div>
           <span
-            class="Text-sc-17v1xeu-0 bLmNQN px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
           >
             0
           </span>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI text-sm"
+          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -1273,13 +1273,13 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             </svg>
           </div>
           <span
-            class="Text-sc-17v1xeu-0 bLmNQN px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
           >
             0
           </span>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI text-sm"
+          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -1323,13 +1323,13 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             </svg>
           </div>
           <span
-            class="Text-sc-17v1xeu-0 bLmNQN px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
           >
             0
           </span>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI text-sm"
+          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -1373,13 +1373,13 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             </svg>
           </div>
           <span
-            class="Text-sc-17v1xeu-0 bLmNQN px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
           >
             0
           </span>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI text-sm"
+          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -1423,13 +1423,13 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             </svg>
           </div>
           <span
-            class="Text-sc-17v1xeu-0 bLmNQN px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
           >
             0
           </span>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI text-sm"
+          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -1473,13 +1473,13 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             </svg>
           </div>
           <span
-            class="Text-sc-17v1xeu-0 bLmNQN px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
           >
             0
           </span>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI text-sm"
+          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -1523,13 +1523,13 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             </svg>
           </div>
           <span
-            class="Text-sc-17v1xeu-0 bLmNQN px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
           >
             0
           </span>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI text-sm"
+          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -1573,13 +1573,13 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             </svg>
           </div>
           <span
-            class="Text-sc-17v1xeu-0 bLmNQN px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
           >
             0
           </span>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI text-sm"
+          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -1623,13 +1623,13 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             </svg>
           </div>
           <span
-            class="Text-sc-17v1xeu-0 bLmNQN px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
           >
             3
           </span>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 oXGHI text-sm"
+          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -1673,7 +1673,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             </svg>
           </div>
           <span
-            class="Text-sc-17v1xeu-0 bLmNQN px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
           >
             0
           </span>
