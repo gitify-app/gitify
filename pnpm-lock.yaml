@@ -10,7 +10,7 @@ importers:
     dependencies:
       '@electron/remote':
         specifier: 2.1.2
-        version: 2.1.2(electron@36.4.0)
+        version: 2.1.2(electron@36.5.0)
       electron-log:
         specifier: 5.4.1
         version: 5.4.1
@@ -19,7 +19,7 @@ importers:
         version: 6.6.2
       menubar:
         specifier: 9.5.1
-        version: 9.5.1(electron@36.4.0)
+        version: 9.5.1(electron@36.5.0)
       react:
         specifier: 19.1.0
         version: 19.1.0
@@ -103,8 +103,8 @@ importers:
         specifier: 4.1.0
         version: 4.1.0
       electron:
-        specifier: 36.4.0
-        version: 36.4.0
+        specifier: 36.5.0
+        version: 36.5.0
       electron-builder:
         specifier: 25.1.8
         version: 25.1.8(electron-builder-squirrel-windows@24.13.3)
@@ -2191,8 +2191,8 @@ packages:
   electron-updater@6.6.2:
     resolution: {integrity: sha512-Cr4GDOkbAUqRHP5/oeOmH/L2Bn6+FQPxVLZtPbcmKZC63a1F3uu5EefYOssgZXG3u/zBlubbJ5PJdITdMVggbw==}
 
-  electron@36.4.0:
-    resolution: {integrity: sha512-LLOOZEuW5oqvnjC7HBQhIqjIIJAZCIFjQxltQGLfEC7XFsBoZgQ3u3iFj+Kzw68Xj97u1n57Jdt7P98qLvUibQ==}
+  electron@36.5.0:
+    resolution: {integrity: sha512-ouVtHbHDFsRBHPGx9G6RDm4ccPaSCmrrR8tbUGZuqbJhqIClVBkVMz94Spjihag2Zo1eHtYD+KevALrc/94g1g==}
     engines: {node: '>= 12.20.55'}
     hasBin: true
 
@@ -5212,9 +5212,9 @@ snapshots:
       - bluebird
       - supports-color
 
-  '@electron/remote@2.1.2(electron@36.4.0)':
+  '@electron/remote@2.1.2(electron@36.5.0)':
     dependencies:
-      electron: 36.4.0
+      electron: 36.5.0
 
   '@electron/universal@1.5.1':
     dependencies:
@@ -7182,7 +7182,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  electron@36.4.0:
+  electron@36.5.0:
     dependencies:
       '@electron/get': 2.0.3
       '@types/node': 22.15.32
@@ -8431,9 +8431,9 @@ snapshots:
 
   mdn-data@2.0.30: {}
 
-  menubar@9.5.1(electron@36.4.0):
+  menubar@9.5.1(electron@36.5.0):
     dependencies:
-      electron: 36.4.0
+      electron: 36.5.0
       electron-positioner: 4.1.0
 
   merge-stream@2.0.0: {}
