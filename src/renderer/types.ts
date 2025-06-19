@@ -1,5 +1,7 @@
-import type { OcticonProps } from '@primer/octicons-react';
 import type { FC } from 'react';
+
+import type { OcticonProps } from '@primer/octicons-react';
+
 import type {
   Notification,
   Reason,

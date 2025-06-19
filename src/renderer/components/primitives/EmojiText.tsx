@@ -1,6 +1,7 @@
 import { type FC, useEffect, useRef } from 'react';
 
 import { Box } from '@primer/react';
+
 import { convertTextToEmojiImgHtml } from '../../utils/emojis';
 
 export interface IEmojiText {

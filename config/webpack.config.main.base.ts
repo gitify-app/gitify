@@ -1,6 +1,8 @@
 import path from 'node:path';
+
 import type webpack from 'webpack';
 import { merge } from 'webpack-merge';
+
 import baseConfig from './webpack.config.common';
 import webpackPaths from './webpack.paths';
 

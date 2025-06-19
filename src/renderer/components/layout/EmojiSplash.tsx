@@ -1,5 +1,6 @@
-import { Box, Stack } from '@primer/react';
 import type { FC } from 'react';
+
+import { Box, Stack } from '@primer/react';
 
 import { EmojiText } from '../primitives/EmojiText';
 import { Centered } from './Centered';

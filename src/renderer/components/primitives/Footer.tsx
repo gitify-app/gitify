@@ -1,5 +1,6 @@
-import { Box, Stack } from '@primer/react';
 import type { FC, ReactNode } from 'react';
+
+import { Box, Stack } from '@primer/react';
 
 interface IFooter {
   children: ReactNode;

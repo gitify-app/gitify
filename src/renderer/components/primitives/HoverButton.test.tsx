@@ -1,5 +1,6 @@
-import { MarkGithubIcon } from '@primer/octicons-react';
 import { render } from '@testing-library/react';
+
+import { MarkGithubIcon } from '@primer/octicons-react';
 
 import { HoverButton } from './HoverButton';
 

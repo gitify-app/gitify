@@ -1,7 +1,8 @@
+import { ipcRenderer } from 'electron';
+
 import { format } from 'date-fns';
 import semver from 'semver';
 
-import { ipcRenderer } from 'electron';
 import { APPLICATION } from '../../../shared/constants';
 import { namespacedEvent } from '../../../shared/events';
 import { logError, logInfo, logWarn } from '../../../shared/logger';

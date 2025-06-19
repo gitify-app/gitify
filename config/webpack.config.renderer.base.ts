@@ -1,13 +1,14 @@
 import path from 'node:path';
+
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import webpack from 'webpack';
 import { merge } from 'webpack-merge';
-import baseConfig from './webpack.config.common';
-import webpackPaths from './webpack.paths';
 
 import { ALL_EMOJI_SVG_FILENAMES } from '../src/renderer/utils/emojis';
+import baseConfig from './webpack.config.common';
+import webpackPaths from './webpack.paths';
 
 const configuration: webpack.Configuration = {
   devtool: 'inline-source-map',

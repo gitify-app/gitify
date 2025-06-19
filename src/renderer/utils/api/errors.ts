@@ -1,4 +1,5 @@
 import { AxiosError } from 'axios';
+
 import type { GitifyError } from '../../types';
 import type { GitHubRESTError } from '../../typesGitHub';
 import { Errors } from '../errors';

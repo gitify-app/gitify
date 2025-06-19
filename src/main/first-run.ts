@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+
 import { app, dialog } from 'electron';
 
 import { APPLICATION } from '../shared/constants';

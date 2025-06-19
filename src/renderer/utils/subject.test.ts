@@ -31,6 +31,7 @@ const mockDiscussionAuthor: DiscussionAuthor = {
   avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4' as Link,
   type: 'User',
 };
+
 import * as logger from '../../shared/logger';
 
 describe('renderer/utils/subject.ts', () => {

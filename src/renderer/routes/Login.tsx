@@ -1,7 +1,8 @@
-import { KeyIcon, MarkGithubIcon, PersonIcon } from '@primer/octicons-react';
-import { Button, Heading, Stack, Text } from '@primer/react';
 import { type FC, useCallback, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import { KeyIcon, MarkGithubIcon, PersonIcon } from '@primer/octicons-react';
+import { Button, Heading, Stack, Text } from '@primer/react';
 
 import { logError } from '../../shared/logger';
 import { LogoIcon } from '../components/icons/LogoIcon';

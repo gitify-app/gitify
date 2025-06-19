@@ -1,17 +1,52 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
-  "organizeImports": {
-    "enabled": true
+  "$schema": "https://biomejs.dev/schemas/2.0.0/schema.json",
+  "assist": {
+    "actions": {
+      "source": {
+        "organizeImports": {
+          "level": "on",
+          "options": {
+            "groups": [
+              ":NODE:",
+              ":BLANK_LINE:",
+              ["react*", "@testing-library/**"],
+              ":BLANK_LINE:",
+              ["*electron*", "menubar"],
+              ":BLANK_LINE:",
+              "@primer/**",
+              ":BLANK_LINE:",
+              ":PACKAGE:",
+              ":BLANK_LINE:",
+              "**"
+            ]
+          }
+        }
+      }
+    }
   },
   "linter": {
     "enabled": true,
+    "domains": {
+      "react": "recommended",
+      "test": "recommended"
+    },
     "rules": {
       "recommended": true,
       "suspicious": {
-        "noConsoleLog": "error"
+        "noConsole": "error"
       },
       "style": {
-        "useDefaultSwitchClause": "error"
+        "useDefaultSwitchClause": "error",
+        "noParameterAssign": "error",
+        "useAsConstAssertion": "error",
+        "useDefaultParameterLast": "error",
+        "useEnumInitializers": "error",
+        "useSelfClosingElements": "error",
+        "useSingleVarDeclarator": "error",
+        "noUnusedTemplateLiteral": "error",
+        "useNumberNamespace": "error",
+        "noInferrableTypes": "error",
+        "noUselessElse": "error"
       },
       "a11y": {
         "useKeyWithClickEvents": "off",
@@ -25,6 +60,9 @@
             "hooks": [{ "name": "useNavigate", "stableResult": true }]
           }
         }
+      },
+      "nursery": {
+        "useUniqueElementIds": "warn"
       }
     }
   },

@@ -1,6 +1,7 @@
+import { type FC, type MouseEvent, useContext, useState } from 'react';
+
 import { CheckIcon, ReadIcon } from '@primer/octicons-react';
 import { Box, Button, Stack } from '@primer/react';
-import { type FC, type MouseEvent, useContext, useState } from 'react';
 
 import { AppContext } from '../../context/App';
 import { Opacity, Size } from '../../types';

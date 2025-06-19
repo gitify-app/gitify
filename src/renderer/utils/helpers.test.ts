@@ -3,6 +3,7 @@ import {
   ChevronLeftIcon,
   ChevronRightIcon,
 } from '@primer/octicons-react';
+
 import type { AxiosPromise, AxiosResponse } from 'axios';
 
 import * as logger from '../../shared/logger';
@@ -14,7 +15,6 @@ import {
   mockSingleNotification,
 } from './api/__mocks__/response-mocks';
 import * as apiRequests from './api/request';
-
 import {
   formatForDisplay,
   generateGitHubWebUrl,

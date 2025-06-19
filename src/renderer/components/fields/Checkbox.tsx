@@ -1,5 +1,6 @@
-import { Stack } from '@primer/react';
 import type { FC, ReactNode } from 'react';
+
+import { Stack } from '@primer/react';
 
 import { cn } from '../../utils/cn';
 import { CustomCounter } from '../primitives/CustomCounter';

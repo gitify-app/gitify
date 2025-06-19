@@ -1,12 +1,13 @@
-import { ipcRenderer, webFrame } from 'electron';
 import {
-  type ReactNode,
   createContext,
+  type ReactNode,
   useCallback,
   useEffect,
   useMemo,
   useState,
 } from 'react';
+
+import { ipcRenderer, webFrame } from 'electron';
 
 import { useTheme } from '@primer/react';
 
@@ -331,7 +332,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
          */
         try {
           await decryptValue(account.token);
-        } catch (err) {
+        } catch (_err) {
           const encryptedToken = await encryptValue(account.token);
           account.token = encryptedToken as Token;
         }
