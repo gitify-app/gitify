@@ -11,6 +11,7 @@
   "labels": ["dependency"],
   "prConcurrentLimit": 5,
   "rangeStrategy": "pin",
+  "minimumReleaseAge": "3 days",
   "packageRules": [
     {
       "matchDepTypes": ["engines"],
