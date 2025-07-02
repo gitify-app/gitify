@@ -37,8 +37,8 @@ importers:
         specifier: 2.0.6
         version: 2.0.6
       '@discordapp/twemoji':
-        specifier: 15.1.0
-        version: 15.1.0
+        specifier: 16.0.1
+        version: 16.0.1
       '@electron/notarize':
         specifier: 3.0.1
         version: 3.0.1
@@ -459,8 +459,8 @@ packages:
     resolution: {integrity: sha512-0cp4PsWQ/9avqTVMCtZ+GirikIA36ikvjtHweU4/j8yLtgObI0+JUPhYFScgwlteveGB1rt3Cm8UhN04XayDig==}
     engines: {node: '>= 8.9.0'}
 
-  '@discordapp/twemoji@15.1.0':
-    resolution: {integrity: sha512-QdpV4ifTONAXvDjRrMohausZeGrQ1ac/Ox6togUh6Xl3XKJ/KAaMMuAEi0qsb0wDwoVTSZBll5Y6+N3hB2ktBw==}
+  '@discordapp/twemoji@16.0.1':
+    resolution: {integrity: sha512-figLiBWzjS5cyrAjLaGjM8AAaowO3qvK8rg5bA2dElB4qsaPMvBVlFDMO2d3x+nC1igt7kgWH4dvNmvvUHUF8w==}
 
   '@discoveryjs/json-ext@0.6.3':
     resolution: {integrity: sha512-4B4OijXeVNOPZlYA2oEwWOTkzyltLao+xbotHQeqN++Rv27Y6s818+n2Qkp8q+Fxhn0t/5lA5X1Mxktud8eayQ==}
@@ -997,8 +997,8 @@ packages:
   '@tsconfig/node16@1.0.4':
     resolution: {integrity: sha512-vxhUy4J8lyeyinH7Azl1pdd43GJhZH/tP2weN8TntQblOY+A0XbT8DJk1/oCPuOOyg/Ja757rG0CgHcWC8OfMA==}
 
-  '@twemoji/parser@15.1.0':
-    resolution: {integrity: sha512-3HTiSxPvkWUJ4kZeCvwyKlIwkpTUfBOk6igpBBRQni58ceQMv5YK4smkc8vX/eqOlMMNER/9qobv+Q6Q8LVrqA==}
+  '@twemoji/parser@16.0.0':
+    resolution: {integrity: sha512-jmuIjkp3OIaEemwMy3sArBwZSuZkRqmueGwRe2Zk4cFzbUJISFBJSZLDUUBNIgq3c+nY49ideYN2OiII6JUqwA==}
 
   '@tybys/wasm-util@0.9.0':
     resolution: {integrity: sha512-6+7nlbMVX/PVDCwaIQ8nTOPveOcFLSt8GcXdx8hD0bt39uWxYT88uXzqTd4fTvqta7oeUJqudepapKNt2DYJFw==}
@@ -4966,9 +4966,9 @@ snapshots:
       ajv: 6.12.6
       ajv-keywords: 3.5.2(ajv@6.12.6)
 
-  '@discordapp/twemoji@15.1.0':
+  '@discordapp/twemoji@16.0.1':
     dependencies:
-      '@twemoji/parser': 15.1.0
+      '@twemoji/parser': 16.0.0
       fs-extra: 8.1.0
       jsonfile: 5.0.0
       universalify: 0.1.2
@@ -5702,7 +5702,7 @@ snapshots:
 
   '@tsconfig/node16@1.0.4': {}
 
-  '@twemoji/parser@15.1.0': {}
+  '@twemoji/parser@16.0.0': {}
 
   '@tybys/wasm-util@0.9.0':
     dependencies:
