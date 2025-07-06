@@ -68,6 +68,7 @@ export type SettingsState = AppearanceSettingsState &
 
 export interface AppearanceSettingsState {
   theme: Theme;
+  increaseContrast: boolean;
   zoomPercentage: number;
   showAccountHeader: boolean;
   wrapNotificationTitle: boolean;
@@ -113,11 +114,9 @@ export interface GitifyState {
 export enum Theme {
   SYSTEM = 'SYSTEM',
   LIGHT = 'LIGHT',
-  LIGHT_HIGH_CONTRAST = 'LIGHT_HIGH_CONTRAST',
   LIGHT_COLORBLIND = 'LIGHT_COLORBLIND',
   LIGHT_TRITANOPIA = 'LIGHT_TRITANOPIA',
   DARK = 'DARK',
-  DARK_HIGH_CONTRAST = 'DARK_HIGH_CONTRAST',
   DARK_COLORBLIND = 'DARK_COLORBLIND',
   DARK_TRITANOPIA = 'DARK_TRITANOPIA',
   DARK_DIMMED = 'DARK_DIMMED',

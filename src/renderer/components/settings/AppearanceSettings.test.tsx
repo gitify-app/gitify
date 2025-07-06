@@ -46,6 +46,31 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
     expect(updateSetting).toHaveBeenCalledWith('theme', 'LIGHT');
   });
 
+  it('should toggle increase contrast checkbox', async () => {
+    await act(async () => {
+      render(
+        <AppContext.Provider
+          value={{
+            auth: {
+              accounts: [mockGitHubAppAccount],
+            },
+            settings: mockSettings,
+            updateSetting,
+          }}
+        >
+          <MemoryRouter>
+            <AppearanceSettings />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
+    });
+
+    await userEvent.click(screen.getByTestId('checkbox-increaseContrast'));
+
+    expect(updateSetting).toHaveBeenCalledTimes(1);
+    expect(updateSetting).toHaveBeenCalledWith('increaseContrast', true);
+  });
+
   it('should update the zoom value when using CMD + and CMD -', async () => {
     webFrame.getZoomLevel = jest.fn().mockReturnValue(-1);
 

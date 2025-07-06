@@ -71,6 +71,7 @@ export const defaultAuth: AuthState = {
 
 const defaultAppearanceSettings: AppearanceSettingsState = {
   theme: Theme.SYSTEM,
+  increaseContrast: false,
   zoomPercentage: 100,
   showAccountHeader: false,
   wrapNotificationTitle: false,
@@ -168,12 +169,21 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     const colorMode = mapThemeModeToColorMode(settings.theme);
-    const colorScheme = mapThemeModeToColorScheme(settings.theme);
+    const colorScheme = mapThemeModeToColorScheme(
+      settings.theme,
+      settings.increaseContrast,
+    );
 
     setColorMode(colorMode);
     setDayScheme(colorScheme ?? DEFAULT_DAY_COLOR_SCHEME);
     setNightScheme(colorScheme ?? DEFAULT_NIGHT_COLOR_SCHEME);
-  }, [settings.theme, setColorMode, setDayScheme, setNightScheme]);
+  }, [
+    settings.theme,
+    settings.increaseContrast,
+    setColorMode,
+    setDayScheme,
+    setNightScheme,
+  ]);
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: We only want fetchNotifications to be called for particular state changes
   useEffect(() => {

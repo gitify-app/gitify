@@ -70,11 +70,8 @@ export const AppearanceSettings: FC = () => {
             </Select.OptGroup>
             <Select.OptGroup label="Light">
               <Select.Option value={Theme.LIGHT}>Light default</Select.Option>
-              <Select.Option value={Theme.LIGHT_HIGH_CONTRAST}>
-                Light high contrast
-              </Select.Option>
               <Select.Option value={Theme.LIGHT_COLORBLIND}>
-                Light Protanopia & Deuteranopia
+                Light colorblind
               </Select.Option>
               <Select.Option value={Theme.LIGHT_TRITANOPIA}>
                 Light Tritanopia
@@ -82,21 +79,26 @@ export const AppearanceSettings: FC = () => {
             </Select.OptGroup>
             <Select.OptGroup label="Dark">
               <Select.Option value={Theme.DARK}>Dark default</Select.Option>
-              <Select.Option value={Theme.DARK_HIGH_CONTRAST}>
-                Dark high contrast
-              </Select.Option>
               <Select.Option value={Theme.DARK_COLORBLIND}>
-                Dark Protanopia & Deuteranopia
+                Dark colorblind
               </Select.Option>
               <Select.Option value={Theme.DARK_TRITANOPIA}>
                 Dark Tritanopia
               </Select.Option>
-              <Select.Option value={Theme.DARK_DIMMED}>
-                Dark dimmed
-              </Select.Option>
+              <Select.Option value={Theme.DARK_DIMMED}>Soft dark</Select.Option>
             </Select.OptGroup>
           </Select>
         </Stack>
+
+        <Checkbox
+          name="increaseContrast"
+          label="Increase contrast"
+          checked={settings.increaseContrast}
+          onChange={(evt) =>
+            updateSetting('increaseContrast', evt.target.checked)
+          }
+          tooltip={<Text>Enable high contrast.</Text>}
+        />
 
         <Stack
           direction="horizontal"
