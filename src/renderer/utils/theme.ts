@@ -8,12 +8,10 @@ export const DEFAULT_NIGHT_COLOR_SCHEME = 'dark';
 export function mapThemeModeToColorMode(themeMode: Theme): ColorModeWithAuto {
   switch (themeMode) {
     case Theme.LIGHT:
-    case Theme.LIGHT_HIGH_CONTRAST:
     case Theme.LIGHT_COLORBLIND:
     case Theme.LIGHT_TRITANOPIA:
       return 'day';
     case Theme.DARK:
-    case Theme.DARK_HIGH_CONTRAST:
     case Theme.DARK_COLORBLIND:
     case Theme.DARK_TRITANOPIA:
     case Theme.DARK_DIMMED:
@@ -23,27 +21,37 @@ export function mapThemeModeToColorMode(themeMode: Theme): ColorModeWithAuto {
   }
 }
 
-export function mapThemeModeToColorScheme(themeMode: Theme): string | null {
+export function mapThemeModeToColorScheme(
+  themeMode: Theme,
+  increaseContrast: boolean,
+): string | null {
+  let base: string | null;
+
   switch (themeMode) {
     case Theme.LIGHT:
-      return 'light';
-    case Theme.LIGHT_HIGH_CONTRAST:
-      return 'light_high_contrast';
+      base = 'light';
+      break;
     case Theme.LIGHT_COLORBLIND:
-      return 'light_colorblind';
+      base = 'light_colorblind';
+      break;
     case Theme.LIGHT_TRITANOPIA:
-      return 'light_tritanopia';
+      base = 'light_tritanopia';
+      break;
     case Theme.DARK:
-      return 'dark';
-    case Theme.DARK_HIGH_CONTRAST:
-      return 'dark_high_contrast';
+      base = 'dark';
+      break;
     case Theme.DARK_COLORBLIND:
-      return 'dark_colorblind';
+      base = 'dark_colorblind';
+      break;
     case Theme.DARK_TRITANOPIA:
-      return 'dark_tritanopia';
+      base = 'dark_tritanopia';
+      break;
     case Theme.DARK_DIMMED:
-      return 'dark_dimmed';
+      base = 'dark_dimmed';
+      break;
     default:
       return null;
   }
+
+  return increaseContrast ? `${base}_high_contrast` : base;
 }

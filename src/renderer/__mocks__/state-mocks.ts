@@ -78,6 +78,7 @@ export const mockToken = 'token-123-456' as Token;
 
 const mockAppearanceSettings: AppearanceSettingsState = {
   theme: Theme.SYSTEM,
+  increaseContrast: false,
   zoomPercentage: 100,
   showAccountHeader: false,
   wrapNotificationTitle: false,
