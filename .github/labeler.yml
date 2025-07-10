@@ -36,6 +36,11 @@ labels:
     matcher:
       branch: '^release/.*'
 
+  - label: 'chore'
+    sync: true
+    matcher:
+      title: '^chore(\(\w+\))?: .*'
+
   - label: 'dependency'
     sync: true
     matcher:
@@ -46,8 +51,8 @@ labels:
 checks:
   - context: 'Semantic Pull Request'
     description:
-      success: Ready for review & merge.
-      failure: Missing semantic label for merge.
+      success: Ready for review & merge
+      failure: Missing semantic label for merge
     labels:
       any:
         - enhancement
@@ -56,5 +61,6 @@ checks:
         - documentation
         - test
         - build
-        - dependency
         - release
+        - chore
+        - dependency
