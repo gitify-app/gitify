@@ -40,6 +40,7 @@ labels:
     sync: true
     matcher:
       title: '^chore(\(\w+\))?: .*'
+      branch: '^(?!renovate/).*'
 
   - label: 'dependency'
     sync: true
