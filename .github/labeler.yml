@@ -1,53 +1,51 @@
 version: v1
 
 labels:
-  - label: 'enhancement'
-    sync: true
-    matcher:
-      title: '^feat(\(\w+\))?: .*'
-
   - label: 'bug'
     sync: true
     matcher:
       title: '^fix(\(\w+\))?: .*'
 
-  - label: 'refactor'
+  - label: 'build'
     sync: true
     matcher:
-      title: '^refactor(\(\w+\))?: .*'
+      title: '^(ci|build)(\((?!release)\w+\))?: (?!.*\brelease\b).*'  
+
+  - label: 'chore'
+    sync: true
+    matcher:
+      title: '^chore(\((?!deps)\w+\))?: .*'
+
+  - label: 'dependency'
+    sync: true
+    matcher:
+      branch: '^renovate/.*'
+      files: ['pnpm-lock.yaml']
 
   - label: 'documentation'
     sync: true
     matcher:
       title: '^docs(\(\w+\))?: .*'
 
-  - label: 'test'
+  - label: 'enhancement'
     sync: true
     matcher:
-      title: '^test(\(\w+\))?: .*'
+      title: '^feat(\(\w+\))?: .*'
 
-  - label: 'build'
+  - label: 'refactor'
     sync: true
     matcher:
-      title: '^(ci|build)(\((?!release)\w+\))?: (?!.*\brelease\b).*'
+      title: '^refactor(\(\w+\))?: .*'
 
   - label: 'release'
     sync: true
     matcher:
       branch: '^release/.*'
 
-  - label: 'chore'
+  - label: 'test'
     sync: true
     matcher:
-      title: '^chore(\(\w+\))?: .*'
-      branch: '^(?!renovate/).*'
-
-  - label: 'dependency'
-    sync: true
-    matcher:
-      title: '^deps(\(\w+\))?: .*'
-      branch: '^renovate/.*'
-      files: ['pnpm-lock.yaml']
+      title: '^test(\(\w+\))?: .*'
  
 checks:
   - context: 'Semantic Pull Request'
