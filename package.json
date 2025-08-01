@@ -84,7 +84,7 @@
     "@primer/primitives": "11.0.0",
     "@primer/react": "36.27.0",
     "@tailwindcss/postcss": "4.1.11",
-    "@testing-library/jest-dom": "6.6.3",
+    "@testing-library/jest-dom": "6.6.4",
     "@testing-library/react": "16.3.0",
     "@testing-library/user-event": "14.6.1",
     "@types/jest": "30.0.0",
