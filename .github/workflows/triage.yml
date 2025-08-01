@@ -2,13 +2,14 @@ name: Triage PR
 
 on:
   pull_request_target:
+    branches: 
+      - main
     types: 
       - opened
+      - reopened
       - edited
       - synchronize
       - ready_for_review
-    branches: 
-      - main
 
 permissions:
   contents: read # the config file
@@ -17,31 +18,15 @@ permissions:
   checks: write # to generate status
 
 jobs:
-  pr-lint:
+  pr-title:
     name: Validate PR title
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
-        with:
-          script: |
-            const title = context.payload.pull_request.title;
-            const regex = /^(?<type>build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test|deps)(?<scope>\([\w\-\/]+\)?((?=:\s)|(?=!:\s)))?(?<breaking>!)?(?<subject>:\s.*)?/gm;
-            const match = regex.exec(title);
-
-            if (!match) {
-              core.setFailed('Invalid PR title');
-            }
-            if (!match.groups.type && !match.groups.subject) {
-              core.setFailed('Missing type and subject in PR title');
-            }
-            if (!match.groups.type) {
-              core.setFailed('Missing type in PR title');
-            }
-            if (!match.groups.subject) {
-              core.setFailed('Missing subject in PR title');
-            }
-              
-  labeler:
+      - uses: amannn/action-semantic-pull-request@0723387faaf9b38adef4775cd42cfd5155ed6017 # v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                          
+  pr-labeler:
     name: Auto-label PR
     runs-on: ubuntu-latest
     steps:
