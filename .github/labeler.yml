@@ -4,7 +4,7 @@ labels:
   - label: 'bug'
     sync: true
     matcher:
-      title: '^fix(\(\w+\))?: .*'
+      title: '^fix(\((?!deps)\w+\))?: .*'
 
   - label: 'build'
     sync: true
