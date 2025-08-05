@@ -46,8 +46,8 @@ importers:
         specifier: 19.15.5
         version: 19.15.5(react@19.1.1)
       '@primer/primitives':
-        specifier: 11.0.0
-        version: 11.0.0
+        specifier: 11.1.0
+        version: 11.1.0
       '@primer/react':
         specifier: 36.27.0
         version: 36.27.0(@types/react-dom@19.1.7(@types/react@19.1.9))(@types/react@19.1.9)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(styled-components@6.1.19(react-dom@19.1.1(react@19.1.1))(react@19.1.1))
@@ -771,8 +771,8 @@ packages:
     peerDependencies:
       react: '>=16.3'
 
-  '@primer/primitives@11.0.0':
-    resolution: {integrity: sha512-GREFF8jTAyfs8lMhLQLAtuqmd9LJqodfI1ejmUSL3IEWtoATRSQAy8eqksjV/LcJnJoKNft42hyAeAbawskpaw==}
+  '@primer/primitives@11.1.0':
+    resolution: {integrity: sha512-edsofzVG67EobXGRrqFc/kfjzKh8wbq1wEmRc1vmRNqDJNMxBRWZ9bT2AzKvcv+Hbf7olDAPkrSqVHbO4hhr/A==}
 
   '@primer/primitives@7.17.1':
     resolution: {integrity: sha512-SiPzEb+up1nDpV2NGwNiY8m6sGnF3OUqRb0has5s6T40vq6Li/g3cYVgl+oolEa4DUoNygEPs09jwJt24f/3zg==}
@@ -5510,7 +5510,7 @@ snapshots:
     dependencies:
       react: 19.1.1
 
-  '@primer/primitives@11.0.0': {}
+  '@primer/primitives@11.1.0': {}
 
   '@primer/primitives@7.17.1': {}
 
