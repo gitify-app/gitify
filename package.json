@@ -81,7 +81,7 @@
     "@discordapp/twemoji": "16.0.1",
     "@electron/notarize": "3.0.1",
     "@primer/octicons-react": "19.15.5",
-    "@primer/primitives": "11.0.0",
+    "@primer/primitives": "11.1.0",
     "@primer/react": "36.27.0",
     "@tailwindcss/postcss": "4.1.11",
     "@testing-library/jest-dom": "6.6.4",
