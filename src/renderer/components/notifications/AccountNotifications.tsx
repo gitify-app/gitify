@@ -1,4 +1,4 @@
-import { type FC, type MouseEvent, useContext, useMemo, useState } from 'react';
+import { type FC, type MouseEvent, useContext, useMemo, useState, useEffect, useRef } from 'react';
 
 import { GitPullRequestIcon, IssueOpenedIcon } from '@primer/octicons-react';
 import { Box, Button, Stack } from '@primer/react';
@@ -38,17 +38,46 @@ export const AccountNotifications: FC<IAccountNotifications> = (
   const [showAccountNotifications, setShowAccountNotifications] =
     useState(true);
 
-  const groupedNotifications = Object.values(
-    notifications.reduce(
-      (acc: { [key: string]: Notification[] }, notification) => {
-        const key = notification.repository.full_name;
-        if (!acc[key]) acc[key] = [];
-        acc[key].push(notification);
-        return acc;
-      },
-      {},
-    ),
-  );
+
+  // Store the order of repo groups as a ref so it persists across re-renders
+  const groupOrderRef = useRef<string[]>([]);
+  const [groupedNotifications, setGroupedNotifications] = useState<Notification[][]>([]);
+
+  // Helper to group notifications by repo, preserving order
+  const groupByRepo = (notifs: Notification[], prevOrder: string[]) => {
+    const groups: { [key: string]: Notification[] } = {};
+    for (const n of notifs) {
+      const key = n.repository.full_name;
+      if (!groups[key]) groups[key] = [];
+      groups[key].push(n);
+    }
+    // Preserve previous order, add new repos at the end
+    const allKeys = Object.keys(groups);
+    const orderedKeys = prevOrder.filter(k => allKeys.includes(k)).concat(allKeys.filter(k => !prevOrder.includes(k)));
+    return orderedKeys.map(k => groups[k]);
+  };
+
+  // Only update group order when notifications array changes length (i.e., after fetch)
+  useEffect(() => {
+    // If the number of notifications changes, update group order
+    const repoKeys = notifications.map(n => n.repository.full_name);
+    const uniqueKeys = Array.from(new Set(repoKeys));
+    // If the set of repos changed (e.g., after fetch), update order
+    if (
+      uniqueKeys.length !== groupOrderRef.current.length ||
+      uniqueKeys.some((k, i) => groupOrderRef.current[i] !== k)
+    ) {
+      groupOrderRef.current = uniqueKeys;
+    }
+    setGroupedNotifications(groupByRepo(notifications, groupOrderRef.current));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [notifications.length]);
+
+  // When notifications content changes but length doesn't (e.g., marking as read), just regroup with same order
+  useEffect(() => {
+    setGroupedNotifications(groupByRepo(notifications, groupOrderRef.current));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [notifications]);
 
   const hasNotifications = useMemo(
     () => notifications.length > 0,
@@ -134,9 +163,8 @@ export const AccountNotifications: FC<IAccountNotifications> = (
           {props.error && <Oops error={props.error} fullHeight={false} />}
           {!hasNotifications && !props.error && <AllRead fullHeight={false} />}
           {isGroupByRepository
-            ? Object.values(groupedNotifications).map((repoNotifications) => {
+            ? groupedNotifications.map((repoNotifications) => {
                 const repoSlug = repoNotifications[0].repository.full_name;
-
                 return (
                   <RepositoryNotifications
                     key={repoSlug}
