@@ -43,36 +43,37 @@ export const AccountNotifications: FC<IAccountNotifications> = (
   const groupOrderRef = useRef<string[]>([]);
   const [groupedNotifications, setGroupedNotifications] = useState<Notification[][]>([]);
 
-  // Helper to group notifications by repo, preserving order
-  const groupByRepo = (notifs: Notification[], prevOrder: string[]) => {
+  // Helper to group notifications by repo, strictly preserving insertion order
+  const groupByRepo = (notifs: Notification[], order: string[]) => {
+    // Build groups
     const groups: { [key: string]: Notification[] } = {};
     for (const n of notifs) {
       const key = n.repository.full_name;
       if (!groups[key]) groups[key] = [];
       groups[key].push(n);
     }
-    // Preserve previous order, add new repos at the end
-    const allKeys = Object.keys(groups);
-    const orderedKeys = prevOrder.filter(k => allKeys.includes(k)).concat(allKeys.filter(k => !prevOrder.includes(k)));
+    // Only use the order array, and filter out any keys that no longer exist
+    const orderedKeys = order.filter(k => groups[k]);
     return orderedKeys.map(k => groups[k]);
   };
 
 
   // Only update group order when the set of repository keys changes (not just length)
   useEffect(() => {
+    // Get all repo keys in the current notifications
     const repoKeys = notifications.map(n => n.repository.full_name);
     const uniqueKeys = Array.from(new Set(repoKeys));
-    const prevKeys = groupOrderRef.current;
-    // Only update order if the set of keys (not just length) has changed
-    const keysChanged =
-      uniqueKeys.length !== prevKeys.length ||
-      uniqueKeys.some((k, i) => prevKeys[i] !== k);
-    if (keysChanged) {
-      groupOrderRef.current = uniqueKeys;
-    } else {
-      // Remove any keys from prevKeys that are no longer present
-      groupOrderRef.current = prevKeys.filter(k => uniqueKeys.includes(k));
-    }
+    const prevOrder = groupOrderRef.current;
+
+    // Append any new keys to the end, but never re-sort or rebuild
+    let newOrder = [...prevOrder];
+    uniqueKeys.forEach(k => {
+      if (!newOrder.includes(k)) newOrder.push(k);
+    });
+    // Remove any keys that no longer exist
+    newOrder = newOrder.filter(k => uniqueKeys.includes(k));
+    groupOrderRef.current = newOrder;
+
     setGroupedNotifications(groupByRepo(notifications, groupOrderRef.current));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [notifications]);
