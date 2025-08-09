@@ -57,24 +57,22 @@ export const AccountNotifications: FC<IAccountNotifications> = (
     return orderedKeys.map(k => groups[k]);
   };
 
-  // Only update group order when notifications array changes length (i.e., after fetch)
+
+  // Only update group order when the set of repository keys changes (not just length)
   useEffect(() => {
-    // If the number of notifications changes, update group order
     const repoKeys = notifications.map(n => n.repository.full_name);
     const uniqueKeys = Array.from(new Set(repoKeys));
-    // If the set of repos changed (e.g., after fetch), update order
-    if (
-      uniqueKeys.length !== groupOrderRef.current.length ||
-      uniqueKeys.some((k, i) => groupOrderRef.current[i] !== k)
-    ) {
+    const prevKeys = groupOrderRef.current;
+    // Only update order if the set of keys (not just length) has changed
+    const keysChanged =
+      uniqueKeys.length !== prevKeys.length ||
+      uniqueKeys.some((k, i) => prevKeys[i] !== k);
+    if (keysChanged) {
       groupOrderRef.current = uniqueKeys;
+    } else {
+      // Remove any keys from prevKeys that are no longer present
+      groupOrderRef.current = prevKeys.filter(k => uniqueKeys.includes(k));
     }
-    setGroupedNotifications(groupByRepo(notifications, groupOrderRef.current));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [notifications.length]);
-
-  // When notifications content changes but length doesn't (e.g., marking as read), just regroup with same order
-  useEffect(() => {
     setGroupedNotifications(groupByRepo(notifications, groupOrderRef.current));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [notifications]);
