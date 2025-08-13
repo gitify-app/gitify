@@ -12,7 +12,7 @@ import type { PlatformType } from './auth/types';
 import { Constants } from './constants';
 import {
   getCheckSuiteAttributes,
-  getLatestDiscussionComment,
+  getClosestDiscussionCommentOrReply,
   getWorkflowRunAttributes,
 } from './subject';
 
@@ -93,10 +93,12 @@ async function getDiscussionUrl(notification: Notification): Promise<Link> {
   if (discussion) {
     url.href = discussion.url;
 
-    const latestComment = getLatestDiscussionComment(discussion.comments.nodes);
-
-    if (latestComment) {
-      url.hash = `#discussioncomment-${latestComment.databaseId}`;
+    const closestComment = getClosestDiscussionCommentOrReply(
+      notification,
+      discussion.comments.nodes,
+    );
+    if (closestComment) {
+      url.hash = `#discussioncomment-${closestComment.databaseId}`;
     }
   }
 

@@ -248,8 +248,8 @@ export async function searchDiscussions(
           notification.subject.title,
         ),
         firstDiscussions: 1,
-        lastComments: 1,
-        lastReplies: 1,
+        lastComments: 100,
+        lastReplies: 100,
         includeIsAnswered: isAnsweredDiscussionFeatureSupported(
           notification.account,
         ),
