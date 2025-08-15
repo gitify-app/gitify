@@ -32,9 +32,19 @@
     },
     "rules": {
       "recommended": true,
-      "suspicious": {
-        "noConsole": "error",
-        "noUnknownAtRules": "warn"
+      "a11y": {
+        "useKeyWithClickEvents": "off",
+        "useSemanticElements": "off"
+      },
+      "correctness": {
+        "noUnusedFunctionParameters": "error",
+        "useExhaustiveDependencies": {
+          "level": "warn",
+          "options": {
+            "hooks": [{ "name": "useNavigate", "stableResult": true }]
+          }
+        },
+        "useUniqueElementIds": "warn"
       },
       "style": {
         "useDefaultSwitchClause": "error",
@@ -49,19 +59,9 @@
         "noInferrableTypes": "error",
         "noUselessElse": "error"
       },
-      "a11y": {
-        "useKeyWithClickEvents": "off",
-        "useSemanticElements": "off"
-      },
-      "correctness": {
-        "noUnusedFunctionParameters": "error",
-        "useExhaustiveDependencies": {
-          "level": "warn",
-          "options": {
-            "hooks": [{ "name": "useNavigate", "stableResult": true }]
-          }
-        },
-        "useUniqueElementIds": "warn"
+      "suspicious": {
+        "noConsole": "error",
+        "noUnknownAtRules": "warn"
       }
     }
   },
