@@ -79,7 +79,7 @@
   "devDependencies": {
     "@biomejs/biome": "2.1.4",
     "@discordapp/twemoji": "16.0.1",
-    "@electron/notarize": "3.0.1",
+    "@electron/notarize": "3.0.2",
     "@primer/octicons-react": "19.15.5",
     "@primer/primitives": "11.1.0",
     "@primer/react": "36.27.0",
