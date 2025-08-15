@@ -2,14 +2,18 @@ import '@testing-library/jest-dom';
 
 import { TextDecoder, TextEncoder } from 'node:util';
 
-if (!global.TextEncoder || !global.TextDecoder) {
-  /**
-   * Prevent the following errors with jest:
-   * - ReferenceError: TextEncoder is not defined
-   * - ReferenceError: TextDecoder is not defined
-   */
-  global.TextEncoder = TextEncoder;
-  global.TextDecoder = TextDecoder;
+/**
+ * Prevent the following errors with jest:
+ * - ReferenceError: TextEncoder is not defined
+ * - ReferenceError: TextDecoder is not defined
+ */
+if (!('TextEncoder' in globalThis)) {
+  (globalThis as unknown as { TextEncoder: typeof TextEncoder }).TextEncoder =
+    TextEncoder;
+}
+if (!('TextDecoder' in globalThis)) {
+  (globalThis as unknown as { TextDecoder: typeof TextDecoder }).TextDecoder =
+    TextDecoder;
 }
 
 // Mock OAuth client ID and secret
