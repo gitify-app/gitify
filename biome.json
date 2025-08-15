@@ -33,7 +33,8 @@
     "rules": {
       "recommended": true,
       "suspicious": {
-        "noConsole": "error"
+        "noConsole": "error",
+        "noUnknownAtRules": "warn"
       },
       "style": {
         "useDefaultSwitchClause": "error",
@@ -59,9 +60,7 @@
           "options": {
             "hooks": [{ "name": "useNavigate", "stableResult": true }]
           }
-        }
-      },
-      "nursery": {
+        },
         "useUniqueElementIds": "warn"
       }
     }

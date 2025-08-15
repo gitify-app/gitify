@@ -1,6 +1,5 @@
 const { namespacedEvent } = require('../../shared/events');
 
-// @ts-ignore
 window.Notification = function (title) {
   this.title = title;
 
@@ -9,7 +8,6 @@ window.Notification = function (title) {
   };
 };
 
-// @ts-ignore
 window.Audio = class Audio {
   constructor(path) {
     this.path = path;
@@ -18,7 +16,6 @@ window.Audio = class Audio {
   play() {}
 };
 
-// @ts-ignore
 window.localStorage = {
   store: {},
   getItem: function (key) {
