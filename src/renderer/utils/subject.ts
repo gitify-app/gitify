@@ -25,7 +25,7 @@ import {
   getPullRequestReviews,
   getRelease,
 } from './api/client';
-import { isNotificationStateVisible } from './notifications/filters/filter';
+import { wouldStateBeHiddenByFilters } from './notifications/filters/filter';
 
 export async function getGitifySubjectDetails(
   notification: Notification,
@@ -165,21 +165,14 @@ async function getGitifySubjectForDiscussion(
     }
   }
 
-  let latestDiscussionComment: DiscussionComment;
-  if (
-    isNotificationStateVisible(
-      {
-        subject: {
-          state: discussionState,
-        },
-      } as Notification,
-      settings,
-    )
-  ) {
-    latestDiscussionComment = getLatestDiscussionComment(
-      discussion.comments.nodes,
-    );
+  // Return early if this notification would be hidden by filters
+  if (wouldStateBeHiddenByFilters(discussionState, settings)) {
+    return null;
   }
+
+  const latestDiscussionComment = getLatestDiscussionComment(
+    discussion.comments.nodes,
+  );
 
   let discussionUser: SubjectUser = {
     login: discussion.author.login,
@@ -231,27 +224,21 @@ async function getGitifySubjectForIssue(
 
   const issueState = issue.state_reason ?? issue.state;
 
+  // Return early if this notification would be hidden by filters
+  if (wouldStateBeHiddenByFilters(issueState, settings)) {
+    return null;
+  }
+
   let issueCommentUser: User;
 
-  if (
-    isNotificationStateVisible(
-      {
-        subject: {
-          state: issueState,
-        },
-      } as Notification,
-      settings,
-    )
-  ) {
-    if (notification.subject.latest_comment_url) {
-      const issueComment = (
-        await getIssueOrPullRequestComment(
-          notification.subject.latest_comment_url,
-          notification.account.token,
-        )
-      ).data;
-      issueCommentUser = issueComment.user;
-    }
+  if (notification.subject.latest_comment_url) {
+    const issueComment = (
+      await getIssueOrPullRequestComment(
+        notification.subject.latest_comment_url,
+        notification.account.token,
+      )
+    ).data;
+    issueCommentUser = issueComment.user;
   }
 
   return {
@@ -280,35 +267,26 @@ async function getGitifySubjectForPullRequest(
   }
 
   let prCommentUser: User;
-  let reviews: GitifyPullRequestReview[];
-  let linkedIssues: string[];
 
-  if (
-    isNotificationStateVisible(
-      {
-        subject: {
-          state: prState,
-        },
-      } as Notification,
-      settings,
-    )
-  ) {
-    if (
-      notification.subject.latest_comment_url &&
-      notification.subject.latest_comment_url !== notification.subject.url
-    ) {
-      const prComment = (
-        await getIssueOrPullRequestComment(
-          notification.subject.latest_comment_url,
-          notification.account.token,
-        )
-      ).data;
-      prCommentUser = prComment.user;
-    }
-
-    reviews = await getLatestReviewForReviewers(notification);
-    linkedIssues = parseLinkedIssuesFromPr(pr);
+  // Return early if this notification would be hidden by filters
+  if (wouldStateBeHiddenByFilters(prState, settings)) {
+    return null;
   }
+  if (
+    notification.subject.latest_comment_url &&
+    notification.subject.latest_comment_url !== notification.subject.url
+  ) {
+    const prComment = (
+      await getIssueOrPullRequestComment(
+        notification.subject.latest_comment_url,
+        notification.account.token,
+      )
+    ).data;
+    prCommentUser = prComment.user;
+  }
+
+  const reviews = await getLatestReviewForReviewers(notification);
+  const linkedIssues = parseLinkedIssuesFromPr(pr);
 
   return {
     number: pr.number,

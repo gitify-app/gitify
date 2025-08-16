@@ -1,5 +1,5 @@
 import type { SettingsState } from '../../../types';
-import type { Notification } from '../../../typesGitHub';
+import type { Notification, StateType } from '../../../typesGitHub';
 import {
   filterNotificationByHandle,
   hasExcludeHandleFilters,
@@ -88,7 +88,7 @@ export function hasAnyFiltersSet(settings: SettingsState): boolean {
   );
 }
 
-export function isNotificationStateVisible(
+function isNotificationStateVisible(
   notification: Notification,
   settings: SettingsState,
 ): boolean {
@@ -99,4 +99,13 @@ export function isNotificationStateVisible(
   }
 
   return true;
+}
+
+export function wouldStateBeHiddenByFilters(
+  state: StateType,
+  settings: SettingsState,
+): boolean {
+  const notification = { subject: { state } } as Notification;
+
+  return !isNotificationStateVisible(notification, settings);
 }
