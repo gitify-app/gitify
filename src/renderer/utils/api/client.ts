@@ -13,7 +13,6 @@ import type {
   Commit,
   CommitComment,
   Discussion,
-  GraphQLSearch,
   Issue,
   IssueOrPullRequestComment,
   Notification,
@@ -26,8 +25,9 @@ import type {
 import { isAnsweredDiscussionFeatureSupported } from '../features';
 import { QUERY_SEARCH_DISCUSSIONS } from './graphql/discussions';
 import { formatAsGitHubSearchSyntax } from './graphql/utils';
+import { createOctokitClient } from './octokit';
 import { apiRequestAuth } from './request';
-import { getGitHubAPIBaseUrl, getGitHubGraphQLUrl } from './utils';
+import { getGitHubAPIBaseUrl } from './utils';
 
 /**
  * Get the authenticated user
@@ -234,29 +234,33 @@ export async function getHtmlUrl(url: Link, token: Token): Promise<string> {
  */
 export async function searchDiscussions(
   notification: Notification,
-): AxiosPromise<GraphQLSearch<Discussion>> {
-  const url = getGitHubGraphQLUrl(notification.account.hostname);
-  return apiRequestAuth(
-    url.toString() as Link,
-    'POST',
+): Promise<any> {
+  const octokit = await createOctokitClient(
+    notification.account.hostname,
     notification.account.token,
-    {
-      query: print(QUERY_SEARCH_DISCUSSIONS),
-      variables: {
-        queryStatement: formatAsGitHubSearchSyntax(
-          notification.repository.full_name,
-          notification.subject.title,
-        ),
-        firstDiscussions: 1,
-        lastComments: 1,
-        lastReplies: 1,
-        firstLabels: 100,
-        includeIsAnswered: isAnsweredDiscussionFeatureSupported(
-          notification.account,
-        ),
-      },
-    },
   );
+  
+  const result = await octokit.graphql(print(QUERY_SEARCH_DISCUSSIONS), {
+    queryStatement: formatAsGitHubSearchSyntax(
+      notification.repository.full_name,
+      notification.subject.title,
+    ),
+    firstDiscussions: 1,
+    lastComments: 1,
+    lastReplies: 1,
+    firstLabels: 100,
+    includeIsAnswered: isAnsweredDiscussionFeatureSupported(
+      notification.account,
+    ),
+  });
+
+  // Return axios-like response format
+  return {
+    data: result,
+    status: 200,
+    statusText: 'OK',
+    headers: {},
+  } as any;
 }
 
 /**
@@ -268,7 +272,7 @@ export async function getLatestDiscussion(
   try {
     const response = await searchDiscussions(notification);
     return (
-      response.data?.data.search.nodes.filter(
+      response?.data.data.search.nodes.filter(
         (discussion) => discussion.title === notification.subject.title,
       )[0] ?? null
     );
