@@ -108,7 +108,10 @@ export async function enrichNotifications(
       let additionalSubjectDetails: GitifySubject = {};
 
       try {
-        additionalSubjectDetails = await getGitifySubjectDetails(notification);
+        additionalSubjectDetails = await getGitifySubjectDetails(
+          notification,
+          settings,
+        );
       } catch (err) {
         logError(
           'enrichNotifications',

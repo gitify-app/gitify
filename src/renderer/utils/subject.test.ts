@@ -33,6 +33,7 @@ const mockDiscussionAuthor: DiscussionAuthor = {
 };
 
 import * as logger from '../../shared/logger';
+import { mockSettings } from '../__mocks__/state-mocks';
 
 describe('renderer/utils/subject.ts', () => {
   beforeEach(() => {
@@ -49,7 +50,10 @@ describe('renderer/utils/subject.ts', () => {
           type: 'CheckSuite',
         });
 
-        const result = await getGitifySubjectDetails(mockNotification);
+        const result = await getGitifySubjectDetails(
+          mockNotification,
+          mockSettings,
+        );
 
         expect(result).toEqual({
           state: 'cancelled',
@@ -63,7 +67,10 @@ describe('renderer/utils/subject.ts', () => {
           type: 'CheckSuite',
         });
 
-        const result = await getGitifySubjectDetails(mockNotification);
+        const result = await getGitifySubjectDetails(
+          mockNotification,
+          mockSettings,
+        );
 
         expect(result).toEqual({
           state: 'failure',
@@ -77,7 +84,10 @@ describe('renderer/utils/subject.ts', () => {
           type: 'CheckSuite',
         });
 
-        const result = await getGitifySubjectDetails(mockNotification);
+        const result = await getGitifySubjectDetails(
+          mockNotification,
+          mockSettings,
+        );
 
         expect(result).toEqual({
           state: 'failure',
@@ -91,7 +101,10 @@ describe('renderer/utils/subject.ts', () => {
           type: 'CheckSuite',
         });
 
-        const result = await getGitifySubjectDetails(mockNotification);
+        const result = await getGitifySubjectDetails(
+          mockNotification,
+          mockSettings,
+        );
 
         expect(result).toEqual({
           state: 'failure',
@@ -105,7 +118,10 @@ describe('renderer/utils/subject.ts', () => {
           type: 'CheckSuite',
         });
 
-        const result = await getGitifySubjectDetails(mockNotification);
+        const result = await getGitifySubjectDetails(
+          mockNotification,
+          mockSettings,
+        );
 
         expect(result).toEqual({
           state: 'skipped',
@@ -119,7 +135,10 @@ describe('renderer/utils/subject.ts', () => {
           type: 'CheckSuite',
         });
 
-        const result = await getGitifySubjectDetails(mockNotification);
+        const result = await getGitifySubjectDetails(
+          mockNotification,
+          mockSettings,
+        );
 
         expect(result).toEqual({
           state: 'success',
@@ -133,7 +152,10 @@ describe('renderer/utils/subject.ts', () => {
           type: 'CheckSuite',
         });
 
-        const result = await getGitifySubjectDetails(mockNotification);
+        const result = await getGitifySubjectDetails(
+          mockNotification,
+          mockSettings,
+        );
 
         expect(result).toBeNull();
       });
@@ -144,7 +166,10 @@ describe('renderer/utils/subject.ts', () => {
           type: 'CheckSuite',
         });
 
-        const result = await getGitifySubjectDetails(mockNotification);
+        const result = await getGitifySubjectDetails(
+          mockNotification,
+          mockSettings,
+        );
 
         expect(result).toBeNull();
       });
@@ -169,7 +194,10 @@ describe('renderer/utils/subject.ts', () => {
           .get('/repos/gitify-app/notifications-test/comments/141012658')
           .reply(200, { user: mockCommenter });
 
-        const result = await getGitifySubjectDetails(mockNotification);
+        const result = await getGitifySubjectDetails(
+          mockNotification,
+          mockSettings,
+        );
 
         expect(result).toEqual({
           state: null,
@@ -196,7 +224,10 @@ describe('renderer/utils/subject.ts', () => {
           )
           .reply(200, { author: mockAuthor });
 
-        const result = await getGitifySubjectDetails(mockNotification);
+        const result = await getGitifySubjectDetails(
+          mockNotification,
+          mockSettings,
+        );
 
         expect(result).toEqual({
           state: null,
@@ -235,7 +266,10 @@ describe('renderer/utils/subject.ts', () => {
             },
           });
 
-        const result = await getGitifySubjectDetails(mockNotification);
+        const result = await getGitifySubjectDetails(
+          mockNotification,
+          mockSettings,
+        );
 
         expect(result).toEqual({
           number: 123,
@@ -262,7 +296,10 @@ describe('renderer/utils/subject.ts', () => {
             },
           });
 
-        const result = await getGitifySubjectDetails(mockNotification);
+        const result = await getGitifySubjectDetails(
+          mockNotification,
+          mockSettings,
+        );
 
         expect(result).toEqual({
           number: 123,
@@ -289,7 +326,10 @@ describe('renderer/utils/subject.ts', () => {
             },
           });
 
-        const result = await getGitifySubjectDetails(mockNotification);
+        const result = await getGitifySubjectDetails(
+          mockNotification,
+          mockSettings,
+        );
 
         expect(result).toEqual({
           number: 123,
@@ -316,7 +356,10 @@ describe('renderer/utils/subject.ts', () => {
             },
           });
 
-        const result = await getGitifySubjectDetails(mockNotification);
+        const result = await getGitifySubjectDetails(
+          mockNotification,
+          mockSettings,
+        );
 
         expect(result).toEqual({
           number: 123,
@@ -343,7 +386,10 @@ describe('renderer/utils/subject.ts', () => {
             },
           });
 
-        const result = await getGitifySubjectDetails(mockNotification);
+        const result = await getGitifySubjectDetails(
+          mockNotification,
+          mockSettings,
+        );
 
         expect(result).toEqual({
           number: 123,
@@ -370,7 +416,10 @@ describe('renderer/utils/subject.ts', () => {
             },
           });
 
-        const result = await getGitifySubjectDetails(mockNotification);
+        const result = await getGitifySubjectDetails(
+          mockNotification,
+          mockSettings,
+        );
 
         expect(result).toEqual({
           number: 123,
@@ -405,7 +454,10 @@ describe('renderer/utils/subject.ts', () => {
             },
           });
 
-        const result = await getGitifySubjectDetails(mockNotification);
+        const result = await getGitifySubjectDetails(
+          mockNotification,
+          mockSettings,
+        );
 
         expect(result).toEqual({
           number: 123,
@@ -449,7 +501,10 @@ describe('renderer/utils/subject.ts', () => {
           .get('/repos/gitify-app/notifications-test/issues/comments/302888448')
           .reply(200, { user: mockCommenter });
 
-        const result = await getGitifySubjectDetails(mockNotification);
+        const result = await getGitifySubjectDetails(
+          mockNotification,
+          mockSettings,
+        );
 
         expect(result).toEqual({
           number: 123,
@@ -478,7 +533,10 @@ describe('renderer/utils/subject.ts', () => {
           .get('/repos/gitify-app/notifications-test/issues/comments/302888448')
           .reply(200, { user: mockCommenter });
 
-        const result = await getGitifySubjectDetails(mockNotification);
+        const result = await getGitifySubjectDetails(
+          mockNotification,
+          mockSettings,
+        );
 
         expect(result).toEqual({
           number: 123,
@@ -508,7 +566,10 @@ describe('renderer/utils/subject.ts', () => {
           .get('/repos/gitify-app/notifications-test/issues/comments/302888448')
           .reply(200, { user: mockCommenter });
 
-        const result = await getGitifySubjectDetails(mockNotification);
+        const result = await getGitifySubjectDetails(
+          mockNotification,
+          mockSettings,
+        );
 
         expect(result).toEqual({
           number: 123,
@@ -538,7 +599,10 @@ describe('renderer/utils/subject.ts', () => {
           .get('/repos/gitify-app/notifications-test/issues/comments/302888448')
           .reply(200, { user: mockCommenter });
 
-        const result = await getGitifySubjectDetails(mockNotification);
+        const result = await getGitifySubjectDetails(
+          mockNotification,
+          mockSettings,
+        );
 
         expect(result).toEqual({
           number: 123,
@@ -568,7 +632,10 @@ describe('renderer/utils/subject.ts', () => {
           .get('/repos/gitify-app/notifications-test/issues/comments/302888448')
           .reply(200, { user: mockCommenter });
 
-        const result = await getGitifySubjectDetails(mockNotification);
+        const result = await getGitifySubjectDetails(
+          mockNotification,
+          mockSettings,
+        );
 
         expect(result).toEqual({
           number: 123,
@@ -597,7 +664,10 @@ describe('renderer/utils/subject.ts', () => {
             labels: [],
           });
 
-        const result = await getGitifySubjectDetails(mockNotification);
+        const result = await getGitifySubjectDetails(
+          mockNotification,
+          mockSettings,
+        );
 
         expect(result).toEqual({
           number: 123,
@@ -629,7 +699,10 @@ describe('renderer/utils/subject.ts', () => {
             )
             .reply(200, { user: mockCommenter });
 
-          const result = await getGitifySubjectDetails(mockNotification);
+          const result = await getGitifySubjectDetails(
+            mockNotification,
+            mockSettings,
+          );
 
           expect(result).toEqual({
             number: 123,
@@ -660,7 +733,10 @@ describe('renderer/utils/subject.ts', () => {
             )
             .reply(200, { user: mockCommenter });
 
-          const result = await getGitifySubjectDetails(mockNotification);
+          const result = await getGitifySubjectDetails(
+            mockNotification,
+            mockSettings,
+          );
 
           expect(result).toEqual({
             number: 123,
@@ -710,7 +786,10 @@ describe('renderer/utils/subject.ts', () => {
           .get('/repos/gitify-app/notifications-test/pulls/1/reviews')
           .reply(200, []);
 
-        const result = await getGitifySubjectDetails(mockNotification);
+        const result = await getGitifySubjectDetails(
+          mockNotification,
+          mockSettings,
+        );
 
         expect(result).toEqual({
           number: 123,
@@ -747,7 +826,10 @@ describe('renderer/utils/subject.ts', () => {
           .get('/repos/gitify-app/notifications-test/pulls/1/reviews')
           .reply(200, []);
 
-        const result = await getGitifySubjectDetails(mockNotification);
+        const result = await getGitifySubjectDetails(
+          mockNotification,
+          mockSettings,
+        );
 
         expect(result).toEqual({
           number: 123,
@@ -784,7 +866,10 @@ describe('renderer/utils/subject.ts', () => {
           .get('/repos/gitify-app/notifications-test/pulls/1/reviews')
           .reply(200, []);
 
-        const result = await getGitifySubjectDetails(mockNotification);
+        const result = await getGitifySubjectDetails(
+          mockNotification,
+          mockSettings,
+        );
 
         expect(result).toEqual({
           number: 123,
@@ -821,7 +906,10 @@ describe('renderer/utils/subject.ts', () => {
           .get('/repos/gitify-app/notifications-test/pulls/1/reviews')
           .reply(200, []);
 
-        const result = await getGitifySubjectDetails(mockNotification);
+        const result = await getGitifySubjectDetails(
+          mockNotification,
+          mockSettings,
+        );
 
         expect(result).toEqual({
           number: 123,
@@ -857,7 +945,10 @@ describe('renderer/utils/subject.ts', () => {
           .get('/repos/gitify-app/notifications-test/pulls/1/reviews')
           .reply(200, []);
 
-        const result = await getGitifySubjectDetails(mockNotification);
+        const result = await getGitifySubjectDetails(
+          mockNotification,
+          mockSettings,
+        );
 
         expect(result).toEqual({
           number: 123,
@@ -892,7 +983,10 @@ describe('renderer/utils/subject.ts', () => {
           .get('/repos/gitify-app/notifications-test/pulls/1/reviews')
           .reply(200, []);
 
-        const result = await getGitifySubjectDetails(mockNotification);
+        const result = await getGitifySubjectDetails(
+          mockNotification,
+          mockSettings,
+        );
 
         expect(result).toEqual({
           number: 123,
@@ -990,7 +1084,10 @@ describe('renderer/utils/subject.ts', () => {
             .get('/repos/gitify-app/notifications-test/pulls/1/reviews')
             .reply(200, []);
 
-          const result = await getGitifySubjectDetails(mockNotification);
+          const result = await getGitifySubjectDetails(
+            mockNotification,
+            mockSettings,
+          );
 
           expect(result).toEqual({
             number: 123,
@@ -1029,7 +1126,10 @@ describe('renderer/utils/subject.ts', () => {
             .get('/repos/gitify-app/notifications-test/pulls/1/reviews')
             .reply(200, []);
 
-          const result = await getGitifySubjectDetails(mockNotification);
+          const result = await getGitifySubjectDetails(
+            mockNotification,
+            mockSettings,
+          );
 
           expect(result).toEqual({
             number: 123,
@@ -1098,7 +1198,10 @@ describe('renderer/utils/subject.ts', () => {
           .get('/repos/gitify-app/notifications-test/releases/1')
           .reply(200, { author: mockAuthor });
 
-        const result = await getGitifySubjectDetails(mockNotification);
+        const result = await getGitifySubjectDetails(
+          mockNotification,
+          mockSettings,
+        );
 
         expect(result).toEqual({
           state: null,
@@ -1119,7 +1222,10 @@ describe('renderer/utils/subject.ts', () => {
           type: 'WorkflowRun',
         });
 
-        const result = await getGitifySubjectDetails(mockNotification);
+        const result = await getGitifySubjectDetails(
+          mockNotification,
+          mockSettings,
+        );
 
         expect(result).toEqual({
           state: 'waiting',
@@ -1134,7 +1240,10 @@ describe('renderer/utils/subject.ts', () => {
           type: 'WorkflowRun',
         });
 
-        const result = await getGitifySubjectDetails(mockNotification);
+        const result = await getGitifySubjectDetails(
+          mockNotification,
+          mockSettings,
+        );
 
         expect(result).toBeNull();
       });
@@ -1145,7 +1254,10 @@ describe('renderer/utils/subject.ts', () => {
           type: 'WorkflowRun',
         });
 
-        const result = await getGitifySubjectDetails(mockNotification);
+        const result = await getGitifySubjectDetails(
+          mockNotification,
+          mockSettings,
+        );
 
         expect(result).toBeNull();
       });
@@ -1159,7 +1271,10 @@ describe('renderer/utils/subject.ts', () => {
           type: 'RepositoryInvitation',
         });
 
-        const result = await getGitifySubjectDetails(mockNotification);
+        const result = await getGitifySubjectDetails(
+          mockNotification,
+          mockSettings,
+        );
 
         expect(result).toBeNull();
       });
@@ -1184,7 +1299,7 @@ describe('renderer/utils/subject.ts', () => {
           .get('/repos/gitify-app/notifications-test/issues/1')
           .replyWithError(mockError);
 
-        await getGitifySubjectDetails(mockNotification);
+        await getGitifySubjectDetails(mockNotification, mockSettings);
 
         expect(logErrorSpy).toHaveBeenCalledWith(
           'getGitifySubjectDetails',

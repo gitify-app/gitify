@@ -1,5 +1,5 @@
 import { logError } from '../../shared/logger';
-import type { Link } from '../types';
+import type { Link, SettingsState } from '../types';
 import type {
   CheckSuiteAttributes,
   CheckSuiteStatus,
@@ -25,9 +25,11 @@ import {
   getPullRequestReviews,
   getRelease,
 } from './api/client';
+import { isNotificationStateVisible } from './notifications/filters/filter';
 
 export async function getGitifySubjectDetails(
   notification: Notification,
+  settings: SettingsState,
 ): Promise<GitifySubject> {
   try {
     switch (notification.subject.type) {
@@ -36,11 +38,11 @@ export async function getGitifySubjectDetails(
       case 'Commit':
         return getGitifySubjectForCommit(notification);
       case 'Discussion':
-        return await getGitifySubjectForDiscussion(notification);
+        return await getGitifySubjectForDiscussion(notification, settings);
       case 'Issue':
-        return await getGitifySubjectForIssue(notification);
+        return await getGitifySubjectForIssue(notification, settings);
       case 'PullRequest':
-        return await getGitifySubjectForPullRequest(notification);
+        return await getGitifySubjectForPullRequest(notification, settings);
       case 'Release':
         return await getGitifySubjectForRelease(notification);
       case 'WorkflowRun':
@@ -148,6 +150,7 @@ async function getGitifySubjectForCommit(
 
 async function getGitifySubjectForDiscussion(
   notification: Notification,
+  settings: SettingsState,
 ): Promise<GitifySubject> {
   const discussion = await getLatestDiscussion(notification);
   let discussionState: DiscussionStateType = 'OPEN';
@@ -162,9 +165,21 @@ async function getGitifySubjectForDiscussion(
     }
   }
 
-  const latestDiscussionComment = getLatestDiscussionComment(
-    discussion.comments.nodes,
-  );
+  let latestDiscussionComment: DiscussionComment;
+  if (
+    isNotificationStateVisible(
+      {
+        subject: {
+          state: discussionState,
+        },
+      } as Notification,
+      settings,
+    )
+  ) {
+    latestDiscussionComment = getLatestDiscussionComment(
+      discussion.comments.nodes,
+    );
+  }
 
   let discussionUser: SubjectUser = {
     login: discussion.author.login,
@@ -208,21 +223,35 @@ export function getLatestDiscussionComment(
 
 async function getGitifySubjectForIssue(
   notification: Notification,
+  settings: SettingsState,
 ): Promise<GitifySubject> {
   const issue = (
     await getIssue(notification.subject.url, notification.account.token)
   ).data;
 
+  const issueState = issue.state_reason ?? issue.state;
+
   let issueCommentUser: User;
 
-  if (notification.subject.latest_comment_url) {
-    const issueComment = (
-      await getIssueOrPullRequestComment(
-        notification.subject.latest_comment_url,
-        notification.account.token,
-      )
-    ).data;
-    issueCommentUser = issueComment.user;
+  if (
+    isNotificationStateVisible(
+      {
+        subject: {
+          state: issueState,
+        },
+      } as Notification,
+      settings,
+    )
+  ) {
+    if (notification.subject.latest_comment_url) {
+      const issueComment = (
+        await getIssueOrPullRequestComment(
+          notification.subject.latest_comment_url,
+          notification.account.token,
+        )
+      ).data;
+      issueCommentUser = issueComment.user;
+    }
   }
 
   return {
@@ -237,6 +266,7 @@ async function getGitifySubjectForIssue(
 
 async function getGitifySubjectForPullRequest(
   notification: Notification,
+  settings: SettingsState,
 ): Promise<GitifySubject> {
   const pr = (
     await getPullRequest(notification.subject.url, notification.account.token)
@@ -250,22 +280,35 @@ async function getGitifySubjectForPullRequest(
   }
 
   let prCommentUser: User;
+  let reviews: GitifyPullRequestReview[];
+  let linkedIssues: string[];
 
   if (
-    notification.subject.latest_comment_url &&
-    notification.subject.latest_comment_url !== notification.subject.url
+    isNotificationStateVisible(
+      {
+        subject: {
+          state: prState,
+        },
+      } as Notification,
+      settings,
+    )
   ) {
-    const prComment = (
-      await getIssueOrPullRequestComment(
-        notification.subject.latest_comment_url,
-        notification.account.token,
-      )
-    ).data;
-    prCommentUser = prComment.user;
-  }
+    if (
+      notification.subject.latest_comment_url &&
+      notification.subject.latest_comment_url !== notification.subject.url
+    ) {
+      const prComment = (
+        await getIssueOrPullRequestComment(
+          notification.subject.latest_comment_url,
+          notification.account.token,
+        )
+      ).data;
+      prCommentUser = prComment.user;
+    }
 
-  const reviews = await getLatestReviewForReviewers(notification);
-  const linkedIssues = parseLinkedIssuesFromPr(pr);
+    reviews = await getLatestReviewForReviewers(notification);
+    linkedIssues = parseLinkedIssuesFromPr(pr);
+  }
 
   return {
     number: pr.number,

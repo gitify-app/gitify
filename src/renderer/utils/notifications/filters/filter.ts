@@ -69,13 +69,8 @@ export function filterDetailedNotifications(
           );
       }
 
-      if (stateFilter.hasFilters(settings)) {
-        passesFilters =
-          passesFilters &&
-          settings.filterStates.some((state) =>
-            stateFilter.filterNotification(notification, state),
-          );
-      }
+      passesFilters =
+        passesFilters && isNotificationStateVisible(notification, settings);
     }
 
     return passesFilters;
@@ -91,4 +86,17 @@ export function hasAnyFiltersSet(settings: SettingsState): boolean {
     stateFilter.hasFilters(settings) ||
     reasonFilter.hasFilters(settings)
   );
+}
+
+export function isNotificationStateVisible(
+  notification: Notification,
+  settings: SettingsState,
+): boolean {
+  if (stateFilter.hasFilters(settings)) {
+    return settings.filterStates.some((state) =>
+      stateFilter.filterNotification(notification, state),
+    );
+  }
+
+  return true;
 }
