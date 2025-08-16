@@ -11,6 +11,7 @@ import type {
   PullRequest,
   PullRequestReview,
   PullRequestStateType,
+  StateType,
   SubjectUser,
   User,
   WorkflowRunAttributes,
@@ -36,7 +37,7 @@ export async function getGitifySubjectDetails(
       case 'CheckSuite':
         return getGitifySubjectForCheckSuite(notification);
       case 'Commit':
-        return getGitifySubjectForCommit(notification);
+        return getGitifySubjectForCommit(notification, settings);
       case 'Discussion':
         return await getGitifySubjectForDiscussion(notification, settings);
       case 'Issue':
@@ -44,7 +45,7 @@ export async function getGitifySubjectDetails(
       case 'PullRequest':
         return await getGitifySubjectForPullRequest(notification, settings);
       case 'Release':
-        return await getGitifySubjectForRelease(notification);
+        return await getGitifySubjectForRelease(notification, settings);
       case 'WorkflowRun':
         return getGitifySubjectForWorkflowRun(notification);
       default:
@@ -122,8 +123,15 @@ function getGitifySubjectForCheckSuite(
 
 async function getGitifySubjectForCommit(
   notification: Notification,
+  settings: SettingsState,
 ): Promise<GitifySubject> {
   let user: User;
+  const commitState: StateType = null; // Commit notifications are stateless
+
+  // Return early if this notification would be hidden by filters
+  if (isStateFilteredOut(commitState, settings)) {
+    return null;
+  }
 
   if (notification.subject.latest_comment_url) {
     const commitComment = (
@@ -143,7 +151,7 @@ async function getGitifySubjectForCommit(
   }
 
   return {
-    state: null,
+    state: commitState,
     user: getSubjectUser([user]),
   };
 }
@@ -373,13 +381,21 @@ export function parseLinkedIssuesFromPr(pr: PullRequest): string[] {
 
 async function getGitifySubjectForRelease(
   notification: Notification,
+  settings: SettingsState,
 ): Promise<GitifySubject> {
+  const releaseState: StateType = null; // Release notifications are stateless
+
+  // Return early if this notification would be hidden by filters
+  if (isStateFilteredOut(releaseState, settings)) {
+    return null;
+  }
+
   const release = (
     await getRelease(notification.subject.url, notification.account.token)
   ).data;
 
   return {
-    state: null,
+    state: releaseState,
     user: getSubjectUser([release.author]),
   };
 }

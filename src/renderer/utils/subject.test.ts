@@ -239,6 +239,22 @@ describe('renderer/utils/subject.ts', () => {
           },
         });
       });
+
+      it('return early if commit state filtered', async () => {
+        const mockNotification = partialMockNotification({
+          title: 'This is a commit with comments',
+          type: 'Commit',
+          url: 'https://api.github.com/repos/gitify-app/notifications-test/commits/d2a86d80e3d24ea9510d5de6c147e53c30f313a8' as Link,
+          latest_comment_url: null,
+        });
+
+        const result = await getGitifySubjectDetails(mockNotification, {
+          ...mockSettings,
+          filterStates: ['closed'],
+        });
+
+        expect(result).toEqual(null);
+      });
     });
 
     describe('Discussions', () => {
@@ -1269,6 +1285,23 @@ describe('renderer/utils/subject.ts', () => {
             type: mockAuthor.type,
           },
         });
+      });
+
+      it('return early if release state filtered', async () => {
+        const mockNotification = partialMockNotification({
+          title: 'This is a mock release',
+          type: 'Release',
+          url: 'https://api.github.com/repos/gitify-app/notifications-test/releases/1' as Link,
+          latest_comment_url:
+            'https://api.github.com/repos/gitify-app/notifications-test/releases/1' as Link,
+        });
+
+        const result = await getGitifySubjectDetails(mockNotification, {
+          ...mockSettings,
+          filterStates: ['closed'],
+        });
+
+        expect(result).toEqual(null);
       });
     });
 
