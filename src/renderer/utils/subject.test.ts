@@ -472,6 +472,25 @@ describe('renderer/utils/subject.ts', () => {
           labels: ['enhancement'],
         });
       });
+
+      it('early return if discussion state filtered', async () => {
+        nock('https://api.github.com')
+          .post('/graphql')
+          .reply(200, {
+            data: {
+              search: {
+                nodes: [mockDiscussionNode(null, false)],
+              },
+            },
+          });
+
+        const result = await getGitifySubjectDetails(mockNotification, {
+          ...mockSettings,
+          filterStates: ['closed'],
+        });
+
+        expect(result).toEqual(null);
+      });
     });
 
     describe('Issues', () => {
@@ -750,6 +769,24 @@ describe('renderer/utils/subject.ts', () => {
             labels: [],
           });
         });
+      });
+
+      it('early return if issue state filtered out', async () => {
+        nock('https://api.github.com')
+          .get('/repos/gitify-app/notifications-test/issues/1')
+          .reply(200, {
+            number: 123,
+            state: 'open',
+            user: mockAuthor,
+            labels: [],
+          });
+
+        const result = await getGitifySubjectDetails(mockNotification, {
+          ...mockSettings,
+          filterStates: ['closed'],
+        });
+
+        expect(result).toEqual(null);
       });
     });
 
@@ -1181,6 +1218,26 @@ describe('renderer/utils/subject.ts', () => {
           const result = parseLinkedIssuesFromPr(mockPr);
           expect(result).toEqual(['#1', '#2', '#3']);
         });
+      });
+
+      it('early return if pull request state filtered', async () => {
+        nock('https://api.github.com')
+          .get('/repos/gitify-app/notifications-test/pulls/1')
+          .reply(200, {
+            number: 123,
+            state: 'open',
+            draft: false,
+            merged: false,
+            user: mockAuthor,
+            labels: [],
+          });
+
+        const result = await getGitifySubjectDetails(mockNotification, {
+          ...mockSettings,
+          filterStates: ['closed'],
+        });
+
+        expect(result).toEqual(null);
       });
     });
 
