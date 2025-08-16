@@ -1,11 +1,18 @@
 import { logError, logWarn } from '../../../shared/logger';
-import type { AccountNotifications, GitifyState } from '../../types';
+import type {
+  AccountNotifications,
+  GitifyState,
+  SettingsState,
+} from '../../types';
 import type { GitifySubject, Notification } from '../../typesGitHub';
 import { listNotificationsForAuthenticatedUser } from '../api/client';
 import { determineFailureType } from '../api/errors';
 import { updateTrayIcon } from '../comms';
 import { getGitifySubjectDetails } from '../subject';
-import { filterNotifications } from './filters/filter';
+import {
+  filterBaseNotifications,
+  filterDetailedNotifications,
+} from './filters/filter';
 
 export function setTrayIconColor(notifications: AccountNotifications[]) {
   const allNotificationsCount = getNotificationCount(notifications);
@@ -49,9 +56,20 @@ export async function getAllNotifications(
             account: accountNotifications.account,
           }));
 
-          notifications = await enrichNotifications(notifications, state);
+          notifications = filterBaseNotifications(
+            notifications,
+            state.settings,
+          );
 
-          notifications = filterNotifications(notifications, state.settings);
+          notifications = await enrichNotifications(
+            notifications,
+            state.settings,
+          );
+
+          notifications = filterDetailedNotifications(
+            notifications,
+            state.settings,
+          );
 
           return {
             account: accountNotifications.account,
@@ -79,9 +97,9 @@ export async function getAllNotifications(
 
 export async function enrichNotifications(
   notifications: Notification[],
-  state: GitifyState,
+  settings: SettingsState,
 ): Promise<Notification[]> {
-  if (!state.settings.detailedNotifications) {
+  if (!settings.detailedNotifications) {
     return notifications;
   }
 

@@ -10,7 +10,34 @@ import {
   userTypeFilter,
 } from '.';
 
-export function filterNotifications(
+export function filterBaseNotifications(
+  notifications: Notification[],
+  settings: SettingsState,
+): Notification[] {
+  return notifications.filter((notification) => {
+    let passesFilters = true;
+
+    if (subjectTypeFilter.hasFilters(settings)) {
+      passesFilters =
+        passesFilters &&
+        settings.filterSubjectTypes.some((subjectType) =>
+          subjectTypeFilter.filterNotification(notification, subjectType),
+        );
+    }
+
+    if (reasonFilter.hasFilters(settings)) {
+      passesFilters =
+        passesFilters &&
+        settings.filterReasons.some((reason) =>
+          reasonFilter.filterNotification(notification, reason),
+        );
+    }
+
+    return passesFilters;
+  });
+}
+
+export function filterDetailedNotifications(
   notifications: Notification[],
   settings: SettingsState,
 ): Notification[] {
@@ -49,22 +76,6 @@ export function filterNotifications(
             stateFilter.filterNotification(notification, state),
           );
       }
-    }
-
-    if (subjectTypeFilter.hasFilters(settings)) {
-      passesFilters =
-        passesFilters &&
-        settings.filterSubjectTypes.some((subjectType) =>
-          subjectTypeFilter.filterNotification(notification, subjectType),
-        );
-    }
-
-    if (reasonFilter.hasFilters(settings)) {
-      passesFilters =
-        passesFilters &&
-        settings.filterReasons.some((reason) =>
-          reasonFilter.filterNotification(notification, reason),
-        );
     }
 
     return passesFilters;
