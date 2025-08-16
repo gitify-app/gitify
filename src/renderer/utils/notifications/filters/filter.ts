@@ -70,7 +70,7 @@ export function filterDetailedNotifications(
       }
 
       passesFilters =
-        passesFilters && isNotificationStateVisible(notification, settings);
+        passesFilters && passesStateFilter(notification, settings);
     }
 
     return passesFilters;
@@ -88,7 +88,7 @@ export function hasAnyFiltersSet(settings: SettingsState): boolean {
   );
 }
 
-function isNotificationStateVisible(
+function passesStateFilter(
   notification: Notification,
   settings: SettingsState,
 ): boolean {
@@ -101,11 +101,11 @@ function isNotificationStateVisible(
   return true;
 }
 
-export function wouldStateBeHiddenByFilters(
+export function isStateFilteredOut(
   state: StateType,
   settings: SettingsState,
 ): boolean {
   const notification = { subject: { state } } as Notification;
 
-  return !isNotificationStateVisible(notification, settings);
+  return !passesStateFilter(notification, settings);
 }

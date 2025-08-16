@@ -25,7 +25,7 @@ import {
   getPullRequestReviews,
   getRelease,
 } from './api/client';
-import { wouldStateBeHiddenByFilters } from './notifications/filters/filter';
+import { isStateFilteredOut } from './notifications/filters/filter';
 
 export async function getGitifySubjectDetails(
   notification: Notification,
@@ -166,7 +166,7 @@ async function getGitifySubjectForDiscussion(
   }
 
   // Return early if this notification would be hidden by filters
-  if (wouldStateBeHiddenByFilters(discussionState, settings)) {
+  if (isStateFilteredOut(discussionState, settings)) {
     return null;
   }
 
@@ -225,7 +225,7 @@ async function getGitifySubjectForIssue(
   const issueState = issue.state_reason ?? issue.state;
 
   // Return early if this notification would be hidden by filters
-  if (wouldStateBeHiddenByFilters(issueState, settings)) {
+  if (isStateFilteredOut(issueState, settings)) {
     return null;
   }
 
@@ -269,7 +269,7 @@ async function getGitifySubjectForPullRequest(
   let prCommentUser: User;
 
   // Return early if this notification would be hidden by filters
-  if (wouldStateBeHiddenByFilters(prState, settings)) {
+  if (isStateFilteredOut(prState, settings)) {
     return null;
   }
   if (
