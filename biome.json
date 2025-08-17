@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.1.4/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.2.0/schema.json",
   "assist": {
     "actions": {
       "source": {
@@ -32,8 +32,19 @@
     },
     "rules": {
       "recommended": true,
-      "suspicious": {
-        "noConsole": "error"
+      "a11y": {
+        "useKeyWithClickEvents": "off",
+        "useSemanticElements": "off"
+      },
+      "correctness": {
+        "noUnusedFunctionParameters": "error",
+        "useExhaustiveDependencies": {
+          "level": "warn",
+          "options": {
+            "hooks": [{ "name": "useNavigate", "stableResult": true }]
+          }
+        },
+        "useUniqueElementIds": "warn"
       },
       "style": {
         "useDefaultSwitchClause": "error",
@@ -48,21 +59,9 @@
         "noInferrableTypes": "error",
         "noUselessElse": "error"
       },
-      "a11y": {
-        "useKeyWithClickEvents": "off",
-        "useSemanticElements": "off"
-      },
-      "correctness": {
-        "noUnusedFunctionParameters": "error",
-        "useExhaustiveDependencies": {
-          "level": "warn",
-          "options": {
-            "hooks": [{ "name": "useNavigate", "stableResult": true }]
-          }
-        }
-      },
-      "nursery": {
-        "useUniqueElementIds": "warn"
+      "suspicious": {
+        "noConsole": "error",
+        "noUnknownAtRules": "warn"
       }
     }
   },

@@ -27,6 +27,7 @@ export const QUERY_SEARCH_DISCUSSIONS = gql`
     $firstDiscussions: Int
     $lastComments: Int
     $lastReplies: Int
+    $firstLabels: Int
     $includeIsAnswered: Boolean!
   ) {
     search(query: $queryStatement, type: DISCUSSION, first: $firstDiscussions) {
@@ -51,7 +52,7 @@ export const QUERY_SEARCH_DISCUSSIONS = gql`
               }
             }
           }
-          labels {
+          labels(first: $firstLabels) {
             nodes {
               name
             }

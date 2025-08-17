@@ -250,6 +250,7 @@ export async function searchDiscussions(
         firstDiscussions: 1,
         lastComments: 100,
         lastReplies: 100,
+        firstLabels: 100,
         includeIsAnswered: isAnsweredDiscussionFeatureSupported(
           notification.account,
         ),
