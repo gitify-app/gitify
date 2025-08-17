@@ -1,5 +1,9 @@
 import type { SettingsState } from '../../../types';
-import type { Notification, StateType } from '../../../typesGitHub';
+import type {
+  Notification,
+  StateType,
+  SubjectUser,
+} from '../../../typesGitHub';
 import {
   filterNotificationByHandle,
   hasExcludeHandleFilters,
@@ -45,29 +49,8 @@ export function filterDetailedNotifications(
     let passesFilters = true;
 
     if (settings.detailedNotifications) {
-      if (userTypeFilter.hasFilters(settings)) {
-        passesFilters =
-          passesFilters &&
-          settings.filterUserTypes.some((userType) =>
-            userTypeFilter.filterNotification(notification, userType),
-          );
-      }
-
-      if (hasIncludeHandleFilters(settings)) {
-        passesFilters =
-          passesFilters &&
-          settings.filterIncludeHandles.some((handle) =>
-            filterNotificationByHandle(notification, handle),
-          );
-      }
-
-      if (hasExcludeHandleFilters(settings)) {
-        passesFilters =
-          passesFilters &&
-          !settings.filterExcludeHandles.some((handle) =>
-            filterNotificationByHandle(notification, handle),
-          );
-      }
+      passesFilters =
+        passesFilters && passesUserFilters(notification, settings);
 
       passesFilters =
         passesFilters && passesStateFilter(notification, settings);
@@ -88,6 +71,39 @@ export function hasAnyFiltersSet(settings: SettingsState): boolean {
   );
 }
 
+function passesUserFilters(
+  notification: Notification,
+  settings: SettingsState,
+): boolean {
+  let passesFilters = true;
+
+  if (userTypeFilter.hasFilters(settings)) {
+    passesFilters =
+      passesFilters &&
+      settings.filterUserTypes.some((userType) =>
+        userTypeFilter.filterNotification(notification, userType),
+      );
+  }
+
+  if (hasIncludeHandleFilters(settings)) {
+    passesFilters =
+      passesFilters &&
+      settings.filterIncludeHandles.some((handle) =>
+        filterNotificationByHandle(notification, handle),
+      );
+  }
+
+  if (hasExcludeHandleFilters(settings)) {
+    passesFilters =
+      passesFilters &&
+      !settings.filterExcludeHandles.some((handle) =>
+        filterNotificationByHandle(notification, handle),
+      );
+  }
+
+  return passesFilters;
+}
+
 function passesStateFilter(
   notification: Notification,
   settings: SettingsState,
@@ -105,7 +121,16 @@ export function isStateFilteredOut(
   state: StateType,
   settings: SettingsState,
 ): boolean {
-  const notification = { subject: { state } } as Notification;
+  const notification = { subject: { state: state } } as Notification;
 
   return !passesStateFilter(notification, settings);
+}
+
+export function isUserFilteredOut(
+  user: SubjectUser,
+  settings: SettingsState,
+): boolean {
+  const notification = { subject: { user: user } } as Notification;
+
+  return !passesUserFilters(notification, settings);
 }

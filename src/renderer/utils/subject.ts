@@ -26,7 +26,10 @@ import {
   getPullRequestReviews,
   getRelease,
 } from './api/client';
-import { isStateFilteredOut } from './notifications/filters/filter';
+import {
+  isStateFilteredOut,
+  isUserFilteredOut,
+} from './notifications/filters/filter';
 
 export async function getGitifySubjectDetails(
   notification: Notification,
@@ -274,12 +277,12 @@ async function getGitifySubjectForPullRequest(
     prState = 'draft';
   }
 
-  let prCommentUser: User;
-
-  // Return early if this notification would be hidden by filters
+  // Return early if this notification would be hidden by state filters
   if (isStateFilteredOut(prState, settings)) {
     return null;
   }
+
+  let prCommentUser: User;
   if (
     notification.subject.latest_comment_url &&
     notification.subject.latest_comment_url !== notification.subject.url
@@ -293,13 +296,20 @@ async function getGitifySubjectForPullRequest(
     prCommentUser = prComment.user;
   }
 
+  const prUser = getSubjectUser([prCommentUser, pr.user]);
+
+  // Return early if this notification would be hidden by user filters
+  if (isUserFilteredOut(prUser, settings)) {
+    return null;
+  }
+
   const reviews = await getLatestReviewForReviewers(notification);
   const linkedIssues = parseLinkedIssuesFromPr(pr);
 
   return {
     number: pr.number,
     state: prState,
-    user: getSubjectUser([prCommentUser, pr.user]),
+    user: prUser,
     reviews: reviews,
     comments: pr.comments,
     labels: pr.labels?.map((label) => label.name) ?? [],
