@@ -217,7 +217,7 @@ export function getClosestDiscussionCommentOrReply(
       differenceInMilliseconds(curr.createdAt, targetTimestamp),
     );
     return currDiff < prevDiff ? curr : prev;
-  });
+  }, allCommentsAndReplies[0]);
 
   return closestComment;
 }
