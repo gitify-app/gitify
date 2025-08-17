@@ -1,7 +1,7 @@
 import { differenceInMilliseconds } from 'date-fns';
 
 import { logError } from '../../shared/logger';
-import type { Link } from '../types';
+import type { Link, SettingsState } from '../types';
 import type {
   CheckSuiteAttributes,
   CheckSuiteStatus,
@@ -13,6 +13,7 @@ import type {
   PullRequest,
   PullRequestReview,
   PullRequestStateType,
+  StateType,
   SubjectUser,
   User,
   WorkflowRunAttributes,
@@ -27,24 +28,29 @@ import {
   getPullRequestReviews,
   getRelease,
 } from './api/client';
+import {
+  isStateFilteredOut,
+  isUserFilteredOut,
+} from './notifications/filters/filter';
 
 export async function getGitifySubjectDetails(
   notification: Notification,
+  settings: SettingsState,
 ): Promise<GitifySubject> {
   try {
     switch (notification.subject.type) {
       case 'CheckSuite':
         return getGitifySubjectForCheckSuite(notification);
       case 'Commit':
-        return getGitifySubjectForCommit(notification);
+        return getGitifySubjectForCommit(notification, settings);
       case 'Discussion':
-        return await getGitifySubjectForDiscussion(notification);
+        return await getGitifySubjectForDiscussion(notification, settings);
       case 'Issue':
-        return await getGitifySubjectForIssue(notification);
+        return await getGitifySubjectForIssue(notification, settings);
       case 'PullRequest':
-        return await getGitifySubjectForPullRequest(notification);
+        return await getGitifySubjectForPullRequest(notification, settings);
       case 'Release':
-        return await getGitifySubjectForRelease(notification);
+        return await getGitifySubjectForRelease(notification, settings);
       case 'WorkflowRun':
         return getGitifySubjectForWorkflowRun(notification);
       default:
@@ -122,8 +128,15 @@ function getGitifySubjectForCheckSuite(
 
 async function getGitifySubjectForCommit(
   notification: Notification,
+  settings: SettingsState,
 ): Promise<GitifySubject> {
   let user: User;
+  const commitState: StateType = null; // Commit notifications are stateless
+
+  // Return early if this notification would be hidden by filters
+  if (isStateFilteredOut(commitState, settings)) {
+    return null;
+  }
 
   if (notification.subject.latest_comment_url) {
     const commitComment = (
@@ -143,13 +156,14 @@ async function getGitifySubjectForCommit(
   }
 
   return {
-    state: null,
+    state: commitState,
     user: getSubjectUser([user]),
   };
 }
 
 async function getGitifySubjectForDiscussion(
   notification: Notification,
+  settings: SettingsState,
 ): Promise<GitifySubject> {
   const discussion = await getLatestDiscussion(notification);
   let discussionState: DiscussionStateType = 'OPEN';
@@ -162,6 +176,16 @@ async function getGitifySubjectForDiscussion(
     if (discussion.stateReason) {
       discussionState = discussion.stateReason;
     }
+  }
+
+  // Return early if this notification would be hidden by filters
+  if (isStateFilteredOut(discussionState, settings)) {
+    return null;
+  }
+
+  // Return early if this notification would be hidden by filters
+  if (isStateFilteredOut(discussionState, settings)) {
+    return null;
   }
 
   const latestDiscussionComment = getClosestDiscussionCommentOrReply(
@@ -224,10 +248,18 @@ export function getClosestDiscussionCommentOrReply(
 
 async function getGitifySubjectForIssue(
   notification: Notification,
+  settings: SettingsState,
 ): Promise<GitifySubject> {
   const issue = (
     await getIssue(notification.subject.url, notification.account.token)
   ).data;
+
+  const issueState = issue.state_reason ?? issue.state;
+
+  // Return early if this notification would be hidden by filters
+  if (isStateFilteredOut(issueState, settings)) {
+    return null;
+  }
 
   let issueCommentUser: User;
 
@@ -253,6 +285,7 @@ async function getGitifySubjectForIssue(
 
 async function getGitifySubjectForPullRequest(
   notification: Notification,
+  settings: SettingsState,
 ): Promise<GitifySubject> {
   const pr = (
     await getPullRequest(notification.subject.url, notification.account.token)
@@ -265,8 +298,12 @@ async function getGitifySubjectForPullRequest(
     prState = 'draft';
   }
 
-  let prCommentUser: User;
+  // Return early if this notification would be hidden by state filters
+  if (isStateFilteredOut(prState, settings)) {
+    return null;
+  }
 
+  let prCommentUser: User;
   if (
     notification.subject.latest_comment_url &&
     notification.subject.latest_comment_url !== notification.subject.url
@@ -280,13 +317,20 @@ async function getGitifySubjectForPullRequest(
     prCommentUser = prComment.user;
   }
 
+  const prUser = getSubjectUser([prCommentUser, pr.user]);
+
+  // Return early if this notification would be hidden by user filters
+  if (isUserFilteredOut(prUser, settings)) {
+    return null;
+  }
+
   const reviews = await getLatestReviewForReviewers(notification);
   const linkedIssues = parseLinkedIssuesFromPr(pr);
 
   return {
     number: pr.number,
     state: prState,
-    user: getSubjectUser([prCommentUser, pr.user]),
+    user: prUser,
     reviews: reviews,
     comments: pr.comments,
     labels: pr.labels?.map((label) => label.name) ?? [],
@@ -368,13 +412,21 @@ export function parseLinkedIssuesFromPr(pr: PullRequest): string[] {
 
 async function getGitifySubjectForRelease(
   notification: Notification,
+  settings: SettingsState,
 ): Promise<GitifySubject> {
+  const releaseState: StateType = null; // Release notifications are stateless
+
+  // Return early if this notification would be hidden by filters
+  if (isStateFilteredOut(releaseState, settings)) {
+    return null;
+  }
+
   const release = (
     await getRelease(notification.subject.url, notification.account.token)
   ).data;
 
   return {
-    state: null,
+    state: releaseState,
     user: getSubjectUser([release.author]),
   };
 }
