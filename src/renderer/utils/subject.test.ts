@@ -1255,6 +1255,30 @@ describe('renderer/utils/subject.ts', () => {
 
         expect(result).toEqual(null);
       });
+
+      it('early return if pull request user filtered', async () => {
+        nock('https://api.github.com')
+          .get('/repos/gitify-app/notifications-test/pulls/1')
+          .reply(200, {
+            number: 123,
+            state: 'open',
+            draft: false,
+            merged: false,
+            user: mockAuthor,
+            labels: [],
+          });
+
+        nock('https://api.github.com')
+          .get('/repos/gitify-app/notifications-test/issues/comments/302888448')
+          .reply(200, { user: mockCommenter });
+
+        const result = await getGitifySubjectDetails(mockNotification, {
+          ...mockSettings,
+          filterUserTypes: ['Bot'],
+        });
+
+        expect(result).toEqual(null);
+      });
     });
 
     describe('Releases', () => {
