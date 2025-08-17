@@ -10,11 +10,9 @@ import type { Notification } from '../typesGitHub';
 import { getHtmlUrl, getLatestDiscussion } from './api/client';
 import type { PlatformType } from './auth/types';
 import { Constants } from './constants';
-import {
-  getCheckSuiteAttributes,
-  getClosestDiscussionCommentOrReply,
-  getWorkflowRunAttributes,
-} from './subject';
+import { getCheckSuiteAttributes } from './notifications/handlers/checkSuite';
+import { getClosestDiscussionCommentOrReply } from './notifications/handlers/discussion';
+import { getWorkflowRunAttributes } from './notifications/handlers/workflowRun';
 
 export function getPlatformFromHostname(hostname: string): PlatformType {
   return hostname.endsWith(Constants.DEFAULT_AUTH_OPTIONS.hostname)

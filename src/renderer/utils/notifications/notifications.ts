@@ -8,11 +8,11 @@ import type { GitifySubject, Notification } from '../../typesGitHub';
 import { listNotificationsForAuthenticatedUser } from '../api/client';
 import { determineFailureType } from '../api/errors';
 import { updateTrayIcon } from '../comms';
-import { getGitifySubjectDetails } from '../subject';
 import {
   filterBaseNotifications,
   filterDetailedNotifications,
 } from './filters/filter';
+import { createNotificationHandler } from './handlers';
 
 export function setTrayIconColor(notifications: AccountNotifications[]) {
   const allNotificationsCount = getNotificationCount(notifications);
@@ -108,10 +108,13 @@ export async function enrichNotifications(
       let additionalSubjectDetails: GitifySubject = {};
 
       try {
-        additionalSubjectDetails = await getGitifySubjectDetails(
-          notification,
-          settings,
-        );
+        const handler = createNotificationHandler(notification);
+        if (handler) {
+          additionalSubjectDetails = await handler.enrich(
+            notification,
+            settings,
+          );
+        }
       } catch (err) {
         logError(
           'enrichNotifications',

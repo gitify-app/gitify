@@ -1,38 +1,17 @@
 import type { FC } from 'react';
 
 import {
-  AlertIcon,
   AppsIcon,
   CheckIcon,
-  CommentDiscussionIcon,
   CommentIcon,
-  DiscussionClosedIcon,
-  DiscussionDuplicateIcon,
-  DiscussionOutdatedIcon,
   FeedPersonIcon,
   FileDiffIcon,
-  GitCommitIcon,
-  GitMergeIcon,
-  GitPullRequestClosedIcon,
-  GitPullRequestDraftIcon,
-  GitPullRequestIcon,
-  IssueClosedIcon,
-  IssueDraftIcon,
-  IssueOpenedIcon,
-  IssueReopenedIcon,
   KeyIcon,
-  MailIcon,
   MarkGithubIcon,
   type OcticonProps,
   OrganizationIcon,
   PersonIcon,
-  QuestionIcon,
-  RocketIcon,
   ServerIcon,
-  SkipIcon,
-  StopIcon,
-  TagIcon,
-  XIcon,
 } from '@primer/octicons-react';
 
 import { IconColor, type PullRequestApprovalIcon } from '../types';
@@ -42,74 +21,6 @@ import type {
   UserType,
 } from '../typesGitHub';
 import type { AuthMethod, PlatformType } from './auth/types';
-
-export function getNotificationTypeIcon(subject: Subject): FC<OcticonProps> {
-  switch (subject.type) {
-    case 'CheckSuite':
-      switch (subject.state) {
-        case 'cancelled':
-          return StopIcon;
-        case 'failure':
-          return XIcon;
-        case 'skipped':
-          return SkipIcon;
-        case 'success':
-          return CheckIcon;
-        default:
-          return RocketIcon;
-      }
-    case 'Commit':
-      return GitCommitIcon;
-    case 'Discussion':
-      switch (subject.state) {
-        case 'DUPLICATE':
-          return DiscussionDuplicateIcon;
-        case 'OUTDATED':
-          return DiscussionOutdatedIcon;
-        case 'RESOLVED':
-          return DiscussionClosedIcon;
-        default:
-          return CommentDiscussionIcon;
-      }
-    case 'Issue':
-      switch (subject.state) {
-        case 'draft':
-          return IssueDraftIcon;
-        case 'closed':
-        case 'completed':
-          return IssueClosedIcon;
-        case 'not_planned':
-          return SkipIcon;
-        case 'reopened':
-          return IssueReopenedIcon;
-        default:
-          return IssueOpenedIcon;
-      }
-    case 'PullRequest':
-      switch (subject.state) {
-        case 'draft':
-          return GitPullRequestDraftIcon;
-        case 'closed':
-          return GitPullRequestClosedIcon;
-        case 'merged':
-          return GitMergeIcon;
-        default:
-          return GitPullRequestIcon;
-      }
-    case 'Release':
-      return TagIcon;
-    case 'RepositoryDependabotAlertsThread':
-      return AlertIcon;
-    case 'RepositoryInvitation':
-      return MailIcon;
-    case 'RepositoryVulnerabilityAlert':
-      return AlertIcon;
-    case 'WorkflowRun':
-      return RocketIcon;
-    default:
-      return QuestionIcon;
-  }
-}
 
 export function getNotificationTypeIconColor(subject: Subject): IconColor {
   switch (subject.state) {
