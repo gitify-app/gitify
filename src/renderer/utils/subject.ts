@@ -1,3 +1,5 @@
+import { differenceInMilliseconds } from 'date-fns';
+
 import { logError } from '../../shared/logger';
 import type { Link, SettingsState } from '../types';
 import type {
@@ -181,7 +183,13 @@ async function getGitifySubjectForDiscussion(
     return null;
   }
 
-  const latestDiscussionComment = getLatestDiscussionComment(
+  // Return early if this notification would be hidden by filters
+  if (isStateFilteredOut(discussionState, settings)) {
+    return null;
+  }
+
+  const latestDiscussionComment = getClosestDiscussionCommentOrReply(
+    notification,
     discussion.comments.nodes,
   );
 
@@ -209,20 +217,33 @@ async function getGitifySubjectForDiscussion(
   };
 }
 
-export function getLatestDiscussionComment(
+export function getClosestDiscussionCommentOrReply(
+  notification: Notification,
   comments: DiscussionComment[],
 ): DiscussionComment | null {
   if (!comments || comments.length === 0) {
     return null;
   }
 
-  // Return latest reply if available
-  if (comments[0].replies.nodes.length === 1) {
-    return comments[0].replies.nodes[0];
-  }
+  const targetTimestamp = notification.updated_at;
 
-  // Return latest comment if no replies
-  return comments[0];
+  const allCommentsAndReplies = comments.flatMap((comment) => [
+    comment,
+    ...comment.replies.nodes,
+  ]);
+
+  // Find the closest match using the target timestamp
+  const closestComment = allCommentsAndReplies.reduce((prev, curr) => {
+    const prevDiff = Math.abs(
+      differenceInMilliseconds(prev.createdAt, targetTimestamp),
+    );
+    const currDiff = Math.abs(
+      differenceInMilliseconds(curr.createdAt, targetTimestamp),
+    );
+    return currDiff < prevDiff ? curr : prev;
+  }, allCommentsAndReplies[0]);
+
+  return closestComment;
 }
 
 async function getGitifySubjectForIssue(

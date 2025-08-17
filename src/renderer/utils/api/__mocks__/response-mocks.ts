@@ -390,13 +390,13 @@ export const mockDiscussionComments: DiscussionComments = {
   nodes: [
     {
       databaseId: 2258799,
-      createdAt: '2022-02-27T01:22:20Z',
+      createdAt: '2017-02-20T17:51:57Z',
       author: mockDiscussionAuthor,
       replies: {
         nodes: [
           {
             databaseId: 2300902,
-            createdAt: '2022-03-05T17:43:52Z',
+            createdAt: '2017-05-20T17:51:57Z',
             author: mockDiscussionReplier,
           },
         ],
