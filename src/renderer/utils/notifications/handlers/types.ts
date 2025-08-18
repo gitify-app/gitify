@@ -23,10 +23,4 @@ export interface NotificationTypeHandler {
 
   /** Return an icon component for this notification type. */
   getIcon(subject: Subject): FC<OcticonProps> | null;
-
-  /** Build a URL for this notification type (subject urls / comments resolved separately upstream). */
-  buildUrl?(notification: Notification): Promise<Link> | Link;
-
-  /** Optional color helper if we later move color logic into handlers. */
-  getIconColor?(subject: Subject): string | undefined;
 }
