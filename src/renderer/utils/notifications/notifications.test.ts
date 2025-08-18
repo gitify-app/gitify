@@ -4,9 +4,9 @@ import * as logger from '../../../shared/logger';
 import { mockSingleAccountNotifications } from '../../__mocks__/notifications-mocks';
 import { partialMockNotification } from '../../__mocks__/partial-mocks';
 import { mockSettings } from '../../__mocks__/state-mocks';
+import type { Link } from '../../types';
 import type { Repository } from '../../typesGitHub';
 import { enrichNotification, getNotificationCount } from './notifications';
-import { Link } from '../../types';
 
 describe('renderer/utils/notifications/notifications.ts', () => {
   afterEach(() => {
