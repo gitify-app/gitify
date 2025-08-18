@@ -41,7 +41,7 @@ describe('renderer/utils/notifications/notifications.ts', () => {
 
     expect(logErrorSpy).toHaveBeenCalledWith(
       'enrichNotification',
-      'failed to fetch details for notification for',
+      'failed to enrich notification details for',
       mockError,
       mockNotification,
     );
