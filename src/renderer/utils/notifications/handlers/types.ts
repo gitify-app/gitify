@@ -2,7 +2,7 @@ import type { FC } from 'react';
 
 import type { OcticonProps } from '@primer/octicons-react';
 
-import type { Link, SettingsState } from '../../../types';
+import type { SettingsState } from '../../../types';
 import type {
   GitifySubject,
   Notification,
