@@ -9,7 +9,6 @@ import axios from 'axios';
  */
 axios.defaults.adapter = 'http';
 
-
 /**
  * Prevent the following errors with jest:
  * - ReferenceError: TextEncoder is not defined
