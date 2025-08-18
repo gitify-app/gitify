@@ -16,7 +16,7 @@ class DefaultHandler implements NotificationTypeHandler {
     _notification: Notification,
     _settings: SettingsState,
   ): Promise<GitifySubject> {
-    return;
+    return null;
   }
 
   getIcon(_subject: Subject): FC<OcticonProps> | null {

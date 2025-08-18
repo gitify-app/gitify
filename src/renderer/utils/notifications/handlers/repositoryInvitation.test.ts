@@ -1,0 +1,14 @@
+import { createSubjectMock } from '../../../__mocks__/notifications-mocks';
+import { repositoryInvitationHandler } from './repositoryInvitation';
+
+describe('renderer/utils/notifications/handlers/repositoryInvitation.ts', () => {
+  it('getIcon', () => {
+    expect(
+      repositoryInvitationHandler.getIcon(
+        createSubjectMock({
+          type: 'RepositoryInvitation',
+        }),
+      ).displayName,
+    ).toBe('MailIcon');
+  });
+});

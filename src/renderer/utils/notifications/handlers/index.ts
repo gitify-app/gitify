@@ -6,7 +6,7 @@ import { discussionHandler } from './discussion';
 import { issueHandler } from './issue';
 import { pullRequestHandler } from './pullRequest';
 import { releaseHandler } from './release';
-import { repositoryDependabotAlertsThreadHandler } from './repositoryDependabotAlertsThread copy';
+import { repositoryDependabotAlertsThreadHandler } from './repositoryDependabotAlertsThread';
 import { repositoryInvitationHandler } from './repositoryInvitation';
 import { repositoryVulnerabilityAlertHandler } from './repositoryVulnerabilityAlert';
 import type { NotificationTypeHandler } from './types';
@@ -18,8 +18,6 @@ export function createNotificationHandler(
   switch (notification.subject.type) {
     case 'CheckSuite':
       return checkSuiteHandler;
-    case 'WorkflowRun':
-      return workflowRunHandler;
     case 'Commit':
       return commitHandler;
     case 'Discussion':
@@ -36,6 +34,8 @@ export function createNotificationHandler(
       return repositoryInvitationHandler;
     case 'RepositoryVulnerabilityAlert':
       return repositoryVulnerabilityAlertHandler;
+    case 'WorkflowRun':
+      return workflowRunHandler;
     default:
       return defaultHandler;
   }
@@ -43,10 +43,14 @@ export function createNotificationHandler(
 
 export const handlers = {
   checkSuiteHandler,
-  workflowRunHandler,
   commitHandler,
   discussionHandler,
   issueHandler,
   pullRequestHandler,
   releaseHandler,
+  repositoryDependabotAlertsThreadHandler,
+  repositoryInvitationHandler,
+  repositoryVulnerabilityAlertHandler,
+  workflowRunHandler,
+  defaultHandler,
 };

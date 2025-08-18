@@ -48,11 +48,6 @@ class DiscussionHandler implements NotificationTypeHandler {
       return null;
     }
 
-    // Return early if this notification would be hidden by filters
-    if (isStateFilteredOut(discussionState, settings)) {
-      return null;
-    }
-
     const latestDiscussionComment = getClosestDiscussionCommentOrReply(
       notification,
       discussion.comments.nodes,

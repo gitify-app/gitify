@@ -51,3 +51,29 @@ exports[`renderer/components/settings/SettingsFooter.tsx app version should show
   </span>
 </button>
 `;
+
+exports[`renderer/components/settings/SettingsFooter.tsx should open release notes 1`] = `
+<button
+  aria-describedby="«rd»-loading-announcement"
+  class="types__StyledButton-sc-ws60qy-0 kZYxt"
+  data-loading="false"
+  data-no-visuals="true"
+  data-testid="settings-release-notes"
+  sx="[object Object]"
+  type="button"
+>
+  <span
+    class="Box-sc-g0xbh4-0 iEfcEl"
+    data-component="buttonContent"
+    sx="[object Object]"
+  >
+    <span
+      data-component="text"
+    >
+      Gitify
+       
+      v0.0.1
+    </span>
+  </span>
+</button>
+`;

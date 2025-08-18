@@ -1,6 +1,7 @@
 import '@testing-library/jest-dom';
-
 import { TextDecoder, TextEncoder } from 'node:util';
+
+import axios from 'axios';
 
 /**
  * Prevent the following errors with jest:
@@ -36,3 +37,7 @@ global.ResizeObserver = class {
   unobserve() {}
   disconnect() {}
 };
+
+// axios will default to using the XHR adapter which can't be intercepted
+// by nock. So, configure axios to use the node adapter.
+axios.defaults.adapter = 'http';
