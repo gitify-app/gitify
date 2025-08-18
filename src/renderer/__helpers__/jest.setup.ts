@@ -4,6 +4,13 @@ import { TextDecoder, TextEncoder } from 'node:util';
 import axios from 'axios';
 
 /**
+ * axios will default to using the XHR adapter which can't be intercepted
+ * by nock. So, configure axios to use the node adapter.
+ */
+axios.defaults.adapter = 'http';
+
+
+/**
  * Prevent the following errors with jest:
  * - ReferenceError: TextEncoder is not defined
  * - ReferenceError: TextDecoder is not defined
@@ -37,7 +44,3 @@ global.ResizeObserver = class {
   unobserve() {}
   disconnect() {}
 };
-
-// axios will default to using the XHR adapter which can't be intercepted
-// by nock. So, configure axios to use the node adapter.
-axios.defaults.adapter = 'http';
