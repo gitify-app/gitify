@@ -9,7 +9,7 @@ import { DefaultHandler } from './default';
 class RepositoryDependabotAlertsThreadHandler extends DefaultHandler {
   readonly type = 'RepositoryDependabotAlertsThread';
 
-  getIcon(_subject: Subject): FC<OcticonProps> | null {
+  iconType(_subject: Subject): FC<OcticonProps> | null {
     return AlertIcon;
   }
 }

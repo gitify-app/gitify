@@ -55,7 +55,7 @@ class CommitHandler extends DefaultHandler {
     };
   }
 
-  getIcon(_subject: Subject): FC<OcticonProps> | null {
+  iconType(_subject: Subject): FC<OcticonProps> | null {
     return GitCommitIcon;
   }
 }

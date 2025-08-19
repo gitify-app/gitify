@@ -97,9 +97,9 @@ describe('renderer/utils/notifications/handlers/commit.ts', () => {
     });
   });
 
-  it('getIcon', () => {
+  it('iconType', () => {
     expect(
-      commitHandler.getIcon(createSubjectMock({ type: 'Commit' })).displayName,
+      commitHandler.iconType(createSubjectMock({ type: 'Commit' })).displayName,
     ).toBe('GitCommitIcon');
   });
 });

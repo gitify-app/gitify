@@ -32,7 +32,7 @@ class WorkflowRunHandler extends DefaultHandler {
     return null;
   }
 
-  getIcon(_subject: Subject): FC<OcticonProps> | null {
+  iconType(_subject: Subject): FC<OcticonProps> | null {
     return RocketIcon;
   }
 }

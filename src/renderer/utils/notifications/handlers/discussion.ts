@@ -77,7 +77,7 @@ class DiscussionHandler extends DefaultHandler {
     };
   }
 
-  getIcon(subject: Subject): FC<OcticonProps> | null {
+  iconType(subject: Subject): FC<OcticonProps> | null {
     switch (subject.state) {
       case 'DUPLICATE':
         return DiscussionDuplicateIcon;

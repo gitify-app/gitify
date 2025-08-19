@@ -23,13 +23,13 @@ describe('renderer/utils/notifications/handlers/default.ts', () => {
     });
   });
 
-  it('getIcon', () => {
-    expect(defaultHandler.getIcon(createSubjectMock({})).displayName).toBe(
+  it('iconType', () => {
+    expect(defaultHandler.iconType(createSubjectMock({})).displayName).toBe(
       'QuestionIcon',
     );
   });
 
-  describe('getIconColor', () => {
+  describe('iconColor', () => {
     const cases: Array<[StateType | null, IconColor]> = [
       ['open' as StateType, IconColor.GREEN],
       ['reopened' as StateType, IconColor.GREEN],
@@ -51,7 +51,7 @@ describe('renderer/utils/notifications/handlers/default.ts', () => {
 
     it.each(cases)('returns correct color for state %s', (state, expected) => {
       const subject = createSubjectMock({ state });
-      expect(defaultHandler.getIconColor(subject)).toBe(expected);
+      expect(defaultHandler.iconColor(subject)).toBe(expected);
     });
   });
 });

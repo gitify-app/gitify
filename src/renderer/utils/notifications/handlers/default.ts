@@ -9,10 +9,14 @@ import type {
   GitifySubject,
   Notification,
   Subject,
+  SubjectType,
 } from '../../../typesGitHub';
+import { formatForDisplay } from '../../helpers';
 import type { NotificationTypeHandler } from './types';
 
 export class DefaultHandler implements NotificationTypeHandler {
+  type?: SubjectType;
+
   async enrich(
     _notification: Notification,
     _settings: SettingsState,
@@ -20,11 +24,11 @@ export class DefaultHandler implements NotificationTypeHandler {
     return null;
   }
 
-  getIcon(_subject: Subject): FC<OcticonProps> | null {
+  iconType(_subject: Subject): FC<OcticonProps> | null {
     return QuestionIcon;
   }
 
-  getIconColor(subject: Subject): IconColor {
+  iconColor(subject: Subject): IconColor {
     switch (subject.state) {
       case 'open':
       case 'reopened':
@@ -41,6 +45,26 @@ export class DefaultHandler implements NotificationTypeHandler {
       default:
         return IconColor.GRAY;
     }
+  }
+
+  formattedNotificationType(notification: Notification): string {
+    return formatForDisplay([
+      notification.subject.state,
+      notification.subject.type,
+    ]);
+  }
+  formattedNotificationNumber(notification: Notification): string {
+    return notification.subject?.number
+      ? `#${notification.subject.number}`
+      : '';
+  }
+  formattedNotificationTitle(notification: Notification): string {
+    let title = notification.subject.title;
+
+    if (notification.subject?.number) {
+      title = `${title} [${this.formattedNotificationNumber(notification)}]`;
+    }
+    return title;
   }
 }
 

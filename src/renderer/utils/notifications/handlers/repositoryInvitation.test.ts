@@ -2,9 +2,9 @@ import { createSubjectMock } from '../../../__mocks__/notifications-mocks';
 import { repositoryInvitationHandler } from './repositoryInvitation';
 
 describe('renderer/utils/notifications/handlers/repositoryInvitation.ts', () => {
-  it('getIcon', () => {
+  it('iconType', () => {
     expect(
-      repositoryInvitationHandler.getIcon(
+      repositoryInvitationHandler.iconType(
         createSubjectMock({
           type: 'RepositoryInvitation',
         }),

@@ -38,7 +38,7 @@ class CheckSuiteHandler extends DefaultHandler {
     return null;
   }
 
-  getIcon(subject: Subject): FC<OcticonProps> | null {
+  iconType(subject: Subject): FC<OcticonProps> | null {
     switch (subject.state) {
       case 'cancelled':
         return StopIcon;

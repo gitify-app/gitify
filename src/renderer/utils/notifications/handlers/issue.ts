@@ -61,7 +61,7 @@ class IssueHandler extends DefaultHandler {
     };
   }
 
-  getIcon(subject: Subject): FC<OcticonProps> | null {
+  iconType(subject: Subject): FC<OcticonProps> | null {
     switch (subject.state) {
       case 'draft':
         return IssueDraftIcon;

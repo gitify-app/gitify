@@ -52,9 +52,9 @@ describe('renderer/utils/notifications/handlers/workflowRun.ts', () => {
     });
   });
 
-  it('getIcon', () => {
+  it('iconType', () => {
     expect(
-      workflowRunHandler.getIcon(
+      workflowRunHandler.iconType(
         createSubjectMock({
           type: 'WorkflowRun',
         }),

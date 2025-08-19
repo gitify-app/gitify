@@ -8,7 +8,7 @@ import { DefaultHandler } from './default';
 class RepositoryInvitationHandler extends DefaultHandler {
   readonly type = 'RepositoryInvitation';
 
-  getIcon(_subject: Subject): FC<OcticonProps> | null {
+  iconType(_subject: Subject): FC<OcticonProps> | null {
     return MailIcon;
   }
 }
