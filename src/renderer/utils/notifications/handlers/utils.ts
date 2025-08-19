@@ -36,5 +36,6 @@ export function formatForDisplay(text: string[]): string {
     .replace(/\w+/g, (word) => {
       // Convert to proper case (capitalize first letter of each word)
       return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-    });
+    })
+    .trim();
 }

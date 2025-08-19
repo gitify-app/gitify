@@ -54,4 +54,78 @@ describe('renderer/utils/notifications/handlers/default.ts', () => {
       expect(defaultHandler.iconColor(subject)).toBe(expected);
     });
   });
+
+  describe('formattedNotificationType', () => {
+    it('formats state and type with proper casing and spacing', () => {
+      const notification = partialMockNotification({
+        title: 'Sample',
+        type: 'PullRequest',
+        state: 'open',
+      });
+
+      expect(defaultHandler.formattedNotificationType(notification)).toBe(
+        'Open Pull Request',
+      );
+    });
+
+    it('handles missing state (null) gracefully', () => {
+      const notification = partialMockNotification({
+        title: 'Sample',
+        type: 'Issue',
+        state: null,
+      });
+
+      expect(defaultHandler.formattedNotificationType(notification)).toBe(
+        'Issue',
+      );
+    });
+  });
+
+  describe('formattedNotificationNumber', () => {
+    it('returns formatted number when present', () => {
+      const notification = partialMockNotification({
+        title: 'Sample',
+        type: 'Issue',
+        state: 'open',
+      });
+      notification.subject.number = 42;
+      expect(defaultHandler.formattedNotificationNumber(notification)).toBe(
+        '#42',
+      );
+    });
+
+    it('returns empty string when number absent', () => {
+      const notification = partialMockNotification({
+        title: 'Sample',
+        type: 'Issue',
+        state: 'open',
+      });
+      expect(defaultHandler.formattedNotificationNumber(notification)).toBe('');
+    });
+  });
+
+  describe('formattedNotificationTitle', () => {
+    it('appends number in brackets when present', () => {
+      const notification = partialMockNotification({
+        title: 'Fix bug',
+        type: 'Issue',
+        state: 'open',
+      });
+      notification.subject.number = 101;
+      expect(defaultHandler.formattedNotificationTitle(notification)).toBe(
+        'Fix bug [#101]',
+      );
+    });
+
+    it('returns title unchanged when number missing', () => {
+      const notification = partialMockNotification({
+        title: 'Improve docs',
+        type: 'Issue',
+        state: 'open',
+      });
+      expect(defaultHandler.formattedNotificationTitle(notification)).toBe(
+        'Improve docs',
+      );
+    });
+  });
 });
