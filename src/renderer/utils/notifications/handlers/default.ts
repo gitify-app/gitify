@@ -4,14 +4,19 @@ import type { OcticonProps } from '@primer/octicons-react';
 import { QuestionIcon } from '@primer/octicons-react';
 
 import type { SettingsState } from '../../../types';
+import { IconColor } from '../../../types';
 import type {
   GitifySubject,
   Notification,
   Subject,
+  SubjectType,
 } from '../../../typesGitHub';
 import type { NotificationTypeHandler } from './types';
+import { formatForDisplay } from './utils';
 
-class DefaultHandler implements NotificationTypeHandler {
+export class DefaultHandler implements NotificationTypeHandler {
+  type?: SubjectType;
+
   async enrich(
     _notification: Notification,
     _settings: SettingsState,
@@ -19,8 +24,47 @@ class DefaultHandler implements NotificationTypeHandler {
     return null;
   }
 
-  getIcon(_subject: Subject): FC<OcticonProps> | null {
+  iconType(_subject: Subject): FC<OcticonProps> | null {
     return QuestionIcon;
+  }
+
+  iconColor(subject: Subject): IconColor {
+    switch (subject.state) {
+      case 'open':
+      case 'reopened':
+      case 'ANSWERED':
+      case 'success':
+        return IconColor.GREEN;
+      case 'closed':
+      case 'failure':
+        return IconColor.RED;
+      case 'completed':
+      case 'RESOLVED':
+      case 'merged':
+        return IconColor.PURPLE;
+      default:
+        return IconColor.GRAY;
+    }
+  }
+
+  formattedNotificationType(notification: Notification): string {
+    return formatForDisplay([
+      notification.subject.state,
+      notification.subject.type,
+    ]);
+  }
+  formattedNotificationNumber(notification: Notification): string {
+    return notification.subject?.number
+      ? `#${notification.subject.number}`
+      : '';
+  }
+  formattedNotificationTitle(notification: Notification): string {
+    let title = notification.subject.title;
+
+    if (notification.subject?.number) {
+      title = `${title} [${this.formattedNotificationNumber(notification)}]`;
+    }
+    return title;
   }
 }
 

@@ -15,31 +15,8 @@ import {
 } from '@primer/octicons-react';
 
 import { IconColor, type PullRequestApprovalIcon } from '../types';
-import type {
-  GitifyPullRequestReview,
-  Subject,
-  UserType,
-} from '../typesGitHub';
+import type { GitifyPullRequestReview, UserType } from '../typesGitHub';
 import type { AuthMethod, PlatformType } from './auth/types';
-
-export function getNotificationTypeIconColor(subject: Subject): IconColor {
-  switch (subject.state) {
-    case 'open':
-    case 'reopened':
-    case 'ANSWERED':
-    case 'success':
-      return IconColor.GREEN;
-    case 'closed':
-    case 'failure':
-      return IconColor.RED;
-    case 'completed':
-    case 'RESOLVED':
-    case 'merged':
-      return IconColor.PURPLE;
-    default:
-      return IconColor.GRAY;
-  }
-}
 
 export function getPullRequestReviewIcon(
   review: GitifyPullRequestReview,

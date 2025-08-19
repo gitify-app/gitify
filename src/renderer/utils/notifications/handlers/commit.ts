@@ -13,10 +13,10 @@ import type {
 } from '../../../typesGitHub';
 import { getCommit, getCommitComment } from '../../api/client';
 import { isStateFilteredOut } from '../filters/filter';
-import type { NotificationTypeHandler } from './types';
+import { DefaultHandler } from './default';
 import { getSubjectUser } from './utils';
 
-class CommitHandler implements NotificationTypeHandler {
+class CommitHandler extends DefaultHandler {
   readonly type = 'Commit';
 
   async enrich(
@@ -55,7 +55,7 @@ class CommitHandler implements NotificationTypeHandler {
     };
   }
 
-  getIcon(_subject: Subject): FC<OcticonProps> | null {
+  iconType(_subject: Subject): FC<OcticonProps> | null {
     return GitCommitIcon;
   }
 }

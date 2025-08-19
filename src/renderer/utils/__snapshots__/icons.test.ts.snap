@@ -34,33 +34,3 @@ exports[` 5`] = `
   "render": [Function],
 }
 `;
-
-exports[`renderer/utils/icons.ts getNotificationTypeIconColor should format the notification color for check suite 1`] = `"text-gitify-icon-muted"`;
-
-exports[`renderer/utils/icons.ts getNotificationTypeIconColor should format the notification color for check suite 2`] = `"text-gitify-icon-closed"`;
-
-exports[`renderer/utils/icons.ts getNotificationTypeIconColor should format the notification color for check suite 3`] = `"text-gitify-icon-muted"`;
-
-exports[`renderer/utils/icons.ts getNotificationTypeIconColor should format the notification color for check suite 4`] = `"text-gitify-icon-open"`;
-
-exports[`renderer/utils/icons.ts getNotificationTypeIconColor should format the notification color for check suite 5`] = `"text-gitify-icon-muted"`;
-
-exports[`renderer/utils/icons.ts getNotificationTypeIconColor should format the notification color for state 1`] = `"text-gitify-icon-open"`;
-
-exports[`renderer/utils/icons.ts getNotificationTypeIconColor should format the notification color for state 2`] = `"text-gitify-icon-closed"`;
-
-exports[`renderer/utils/icons.ts getNotificationTypeIconColor should format the notification color for state 3`] = `"text-gitify-icon-done"`;
-
-exports[`renderer/utils/icons.ts getNotificationTypeIconColor should format the notification color for state 4`] = `"text-gitify-icon-muted"`;
-
-exports[`renderer/utils/icons.ts getNotificationTypeIconColor should format the notification color for state 5`] = `"text-gitify-icon-done"`;
-
-exports[`renderer/utils/icons.ts getNotificationTypeIconColor should format the notification color for state 6`] = `"text-gitify-icon-muted"`;
-
-exports[`renderer/utils/icons.ts getNotificationTypeIconColor should format the notification color for state 7`] = `"text-gitify-icon-open"`;
-
-exports[`renderer/utils/icons.ts getNotificationTypeIconColor should format the notification color for state 8`] = `"text-gitify-icon-open"`;
-
-exports[`renderer/utils/icons.ts getNotificationTypeIconColor should format the notification color for state 9`] = `"text-gitify-icon-done"`;
-
-exports[`renderer/utils/icons.ts getNotificationTypeIconColor should format the notification color for state 10`] = `"text-gitify-icon-muted"`;

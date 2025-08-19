@@ -12,10 +12,10 @@ import type {
 } from '../../../typesGitHub';
 import { getRelease } from '../../api/client';
 import { isStateFilteredOut } from '../filters/filter';
-import type { NotificationTypeHandler } from './types';
+import { DefaultHandler } from './default';
 import { getSubjectUser } from './utils';
 
-class ReleaseHandler implements NotificationTypeHandler {
+class ReleaseHandler extends DefaultHandler {
   readonly type = 'Release';
 
   async enrich(
@@ -39,7 +39,7 @@ class ReleaseHandler implements NotificationTypeHandler {
     };
   }
 
-  getIcon(_subject: Subject): FC<OcticonProps> | null {
+  iconType(_subject: Subject): FC<OcticonProps> | null {
     return TagIcon;
   }
 }

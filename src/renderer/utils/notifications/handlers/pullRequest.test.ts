@@ -438,14 +438,14 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
     });
   });
 
-  it('getIcon', () => {
+  it('iconType', () => {
     expect(
-      pullRequestHandler.getIcon(createSubjectMock({ type: 'PullRequest' }))
+      pullRequestHandler.iconType(createSubjectMock({ type: 'PullRequest' }))
         .displayName,
     ).toBe('GitPullRequestIcon');
 
     expect(
-      pullRequestHandler.getIcon(
+      pullRequestHandler.iconType(
         createSubjectMock({
           type: 'PullRequest',
           state: 'draft',
@@ -454,7 +454,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
     ).toBe('GitPullRequestDraftIcon');
 
     expect(
-      pullRequestHandler.getIcon(
+      pullRequestHandler.iconType(
         createSubjectMock({
           type: 'PullRequest',
           state: 'closed',
@@ -463,7 +463,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
     ).toBe('GitPullRequestClosedIcon');
 
     expect(
-      pullRequestHandler.getIcon(
+      pullRequestHandler.iconType(
         createSubjectMock({
           type: 'PullRequest',
           state: 'merged',

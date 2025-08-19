@@ -67,9 +67,9 @@ describe('renderer/utils/notifications/handlers/release.ts', () => {
     });
   });
 
-  it('getIcon', () => {
+  it('iconType', () => {
     expect(
-      releaseHandler.getIcon(
+      releaseHandler.iconType(
         createSubjectMock({
           type: 'Release',
         }),

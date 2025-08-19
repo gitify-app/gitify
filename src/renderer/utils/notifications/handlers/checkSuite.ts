@@ -17,9 +17,9 @@ import type {
   Notification,
   Subject,
 } from '../../../typesGitHub';
-import type { NotificationTypeHandler } from './types';
+import { DefaultHandler } from './default';
 
-class CheckSuiteHandler implements NotificationTypeHandler {
+class CheckSuiteHandler extends DefaultHandler {
   readonly type = 'CheckSuite';
 
   async enrich(
@@ -38,7 +38,7 @@ class CheckSuiteHandler implements NotificationTypeHandler {
     return null;
   }
 
-  getIcon(subject: Subject): FC<OcticonProps> | null {
+  iconType(subject: Subject): FC<OcticonProps> | null {
     switch (subject.state) {
       case 'cancelled':
         return StopIcon;

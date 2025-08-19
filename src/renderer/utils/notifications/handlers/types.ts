@@ -21,6 +21,28 @@ export interface NotificationTypeHandler {
     settings: SettingsState,
   ): Promise<GitifySubject>;
 
-  /** Return an icon component for this notification type. */
-  getIcon(subject: Subject): FC<OcticonProps> | null;
+  /**
+   * Return the icon component for this notification type.
+   */
+  iconType(subject: Subject): FC<OcticonProps> | null;
+
+  /**
+   * Return the icon color for this notification type.
+   */
+  iconColor(subject: Subject): string | undefined;
+
+  /**
+   * Return the formatted notification type for this notification.
+   */
+  formattedNotificationType(notification: Notification): string;
+
+  /**
+   * Return the formatted notification number for this notification.
+   */
+  formattedNotificationNumber(notification: Notification): string;
+
+  /**
+   * Return the formatted notification title for this notification.
+   */
+  formattedNotificationTitle(notification: Notification): string;
 }

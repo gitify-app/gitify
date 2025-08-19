@@ -21,9 +21,9 @@ import type {
 } from '../../../typesGitHub';
 import { getLatestDiscussion } from '../../api/client';
 import { isStateFilteredOut } from '../filters/filter';
-import type { NotificationTypeHandler } from './types';
+import { DefaultHandler } from './default';
 
-class DiscussionHandler implements NotificationTypeHandler {
+class DiscussionHandler extends DefaultHandler {
   readonly type = 'Discussion';
 
   async enrich(
@@ -77,7 +77,7 @@ class DiscussionHandler implements NotificationTypeHandler {
     };
   }
 
-  getIcon(subject: Subject): FC<OcticonProps> | null {
+  iconType(subject: Subject): FC<OcticonProps> | null {
     switch (subject.state) {
       case 'DUPLICATE':
         return DiscussionDuplicateIcon;

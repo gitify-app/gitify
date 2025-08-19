@@ -279,26 +279,26 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
     });
   });
 
-  it('getIcon', () => {
+  it('iconType', () => {
     expect(
-      discussionHandler.getIcon(createSubjectMock({ type: 'Discussion' }))
+      discussionHandler.iconType(createSubjectMock({ type: 'Discussion' }))
         .displayName,
     ).toBe('CommentDiscussionIcon');
 
     expect(
-      discussionHandler.getIcon(
+      discussionHandler.iconType(
         createSubjectMock({ type: 'Discussion', state: 'DUPLICATE' }),
       ).displayName,
     ).toBe('DiscussionDuplicateIcon');
 
     expect(
-      discussionHandler.getIcon(
+      discussionHandler.iconType(
         createSubjectMock({ type: 'Discussion', state: 'OUTDATED' }),
       ).displayName,
     ).toBe('DiscussionOutdatedIcon');
 
     expect(
-      discussionHandler.getIcon(
+      discussionHandler.iconType(
         createSubjectMock({ type: 'Discussion', state: 'RESOLVED' }),
       ).displayName,
     ).toBe('DiscussionClosedIcon');

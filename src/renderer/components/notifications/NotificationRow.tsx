@@ -8,8 +8,6 @@ import { GroupBy, Opacity, Size } from '../../types';
 import type { Notification } from '../../typesGitHub';
 import { cn } from '../../utils/cn';
 import { isMarkAsDoneFeatureSupported } from '../../utils/features';
-import { formatForDisplay } from '../../utils/helpers';
-import { getNotificationTypeIconColor } from '../../utils/icons';
 import { openNotification } from '../../utils/links';
 import { createNotificationHandler } from '../../utils/notifications/handlers';
 import { HoverButton } from '../primitives/HoverButton';
@@ -72,22 +70,11 @@ export const NotificationRow: FC<INotificationRow> = ({
   };
 
   const handler = createNotificationHandler(notification);
-
-  const NotificationIcon = handler.getIcon(notification.subject);
-  const iconColor = getNotificationTypeIconColor(notification.subject);
-
-  const notificationType = formatForDisplay([
-    notification.subject.state,
-    notification.subject.type,
-  ]);
-
-  const notificationNumber = notification.subject?.number
-    ? `#${notification.subject.number}`
-    : '';
-
-  const notificationTitle = notificationNumber
-    ? `${notification.subject.title} [${notificationNumber}]`
-    : notification.subject.title;
+  const NotificationIcon = handler.iconType(notification.subject);
+  const iconColor = handler.iconColor(notification.subject);
+  const notificationType = handler.formattedNotificationType(notification);
+  const notificationNumber = handler.formattedNotificationNumber(notification);
+  const notificationTitle = handler.formattedNotificationTitle(notification);
 
   const groupByDate = settings.groupBy === GroupBy.DATE;
 

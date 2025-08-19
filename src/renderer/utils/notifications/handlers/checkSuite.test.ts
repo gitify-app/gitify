@@ -136,15 +136,15 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
     });
   });
 
-  it('getIcon', () => {
+  it('iconType', () => {
     expect(
-      checkSuiteHandler.getIcon(
+      checkSuiteHandler.iconType(
         createSubjectMock({ type: 'CheckSuite', state: null }),
       ).displayName,
     ).toBe('RocketIcon');
 
     expect(
-      checkSuiteHandler.getIcon(
+      checkSuiteHandler.iconType(
         createSubjectMock({
           type: 'CheckSuite',
           state: 'cancelled',
@@ -153,7 +153,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
     ).toBe('StopIcon');
 
     expect(
-      checkSuiteHandler.getIcon(
+      checkSuiteHandler.iconType(
         createSubjectMock({
           type: 'CheckSuite',
           state: 'failure',
@@ -162,7 +162,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
     ).toBe('XIcon');
 
     expect(
-      checkSuiteHandler.getIcon(
+      checkSuiteHandler.iconType(
         createSubjectMock({
           type: 'CheckSuite',
           state: 'skipped',
@@ -171,7 +171,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
     ).toBe('SkipIcon');
 
     expect(
-      checkSuiteHandler.getIcon(
+      checkSuiteHandler.iconType(
         createSubjectMock({
           type: 'CheckSuite',
           state: 'success',

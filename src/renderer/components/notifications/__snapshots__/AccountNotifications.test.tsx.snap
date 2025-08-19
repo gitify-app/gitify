@@ -1100,7 +1100,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           data-wrap="nowrap"
         >
           <span
-            aria-label=" Issue"
+            aria-label="Issue"
             class="Tooltip__TooltipBase-sc-17tf59c-0 ihgdlF tooltipped-e"
             id="«rc»"
             role="tooltip"
@@ -1933,7 +1933,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
         data-wrap="nowrap"
       >
         <span
-          aria-label=" Issue"
+          aria-label="Issue"
           class="Tooltip__TooltipBase-sc-17tf59c-0 ihgdlF tooltipped-e"
           id="«rc»"
           role="tooltip"

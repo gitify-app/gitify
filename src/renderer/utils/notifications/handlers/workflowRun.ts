@@ -11,9 +11,9 @@ import type {
   Subject,
   WorkflowRunAttributes,
 } from '../../../typesGitHub';
-import type { NotificationTypeHandler } from './types';
+import { DefaultHandler } from './default';
 
-class WorkflowRunHandler implements NotificationTypeHandler {
+class WorkflowRunHandler extends DefaultHandler {
   readonly type = 'WorkflowRun';
 
   async enrich(
@@ -32,7 +32,7 @@ class WorkflowRunHandler implements NotificationTypeHandler {
     return null;
   }
 
-  getIcon(_subject: Subject): FC<OcticonProps> | null {
+  iconType(_subject: Subject): FC<OcticonProps> | null {
     return RocketIcon;
   }
 }

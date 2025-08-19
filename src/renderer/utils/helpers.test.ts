@@ -16,7 +16,6 @@ import {
 } from './api/__mocks__/response-mocks';
 import * as apiRequests from './api/request';
 import {
-  formatForDisplay,
   generateGitHubWebUrl,
   generateNotificationReferrerId,
   getChevronDetails,
@@ -514,22 +513,6 @@ describe('renderer/utils/helpers.ts', () => {
         );
         expect(logErrorSpy).toHaveBeenCalledTimes(2);
       });
-    });
-  });
-
-  describe('formatting', () => {
-    it('formatForDisplay', () => {
-      expect(formatForDisplay(null)).toBe('');
-      expect(formatForDisplay([])).toBe('');
-      expect(formatForDisplay(['open', 'PullRequest'])).toBe(
-        'Open Pull Request',
-      );
-      expect(formatForDisplay(['OUTDATED', 'Discussion'])).toBe(
-        'Outdated Discussion',
-      );
-      expect(formatForDisplay(['not_planned', 'Issue'])).toBe(
-        'Not Planned Issue',
-      );
     });
   });
 
