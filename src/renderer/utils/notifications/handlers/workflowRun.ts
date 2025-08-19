@@ -46,22 +46,22 @@ export const workflowRunHandler = new WorkflowRunHandler();
 export function getWorkflowRunAttributes(
   notification: Notification,
 ): WorkflowRunAttributes | null {
-  const regexPattern =
+  const regex =
     /^(?<user>.*?) requested your (?<statusDisplayName>.*?) to deploy to an environment$/;
 
-  const matches = regexPattern.exec(notification.subject.title);
+  const match = regex.exec(notification.subject.title);
 
-  if (matches) {
-    const { groups } = matches;
-
-    return {
-      user: groups.user,
-      status: getWorkflowRunStatus(groups.statusDisplayName),
-      statusDisplayName: groups.statusDisplayName,
-    };
+  if (!match?.groups) {
+    return null;
   }
 
-  return null;
+  const { user, statusDisplayName } = match.groups;
+
+  return {
+    user: user,
+    status: getWorkflowRunStatus(statusDisplayName),
+    statusDisplayName: statusDisplayName,
+  };
 }
 
 function getWorkflowRunStatus(statusDisplayName: string): CheckSuiteStatus {

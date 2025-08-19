@@ -63,26 +63,25 @@ export const checkSuiteHandler = new CheckSuiteHandler();
 export function getCheckSuiteAttributes(
   notification: Notification,
 ): CheckSuiteAttributes | null {
-  const regexPattern =
+  const regex =
     /^(?<workflowName>.*?) workflow run(, Attempt #(?<attemptNumber>\d+))? (?<statusDisplayName>.*?) for (?<branchName>.*?) branch$/;
 
-  const matches = regexPattern.exec(notification.subject.title);
+  const match = regex.exec(notification.subject.title);
 
-  if (matches) {
-    const { groups } = matches;
-
-    return {
-      workflowName: groups.workflowName,
-      attemptNumber: groups.attemptNumber
-        ? Number.parseInt(groups.attemptNumber)
-        : null,
-      status: getCheckSuiteStatus(groups.statusDisplayName),
-      statusDisplayName: groups.statusDisplayName,
-      branchName: groups.branchName,
-    };
+  if (!match?.groups) {
+    return null;
   }
 
-  return null;
+  const { workflowName, attemptNumber, statusDisplayName, branchName } =
+    match.groups;
+
+  return {
+    workflowName,
+    attemptNumber: attemptNumber ? Number.parseInt(attemptNumber) : null,
+    status: getCheckSuiteStatus(statusDisplayName),
+    statusDisplayName,
+    branchName,
+  };
 }
 
 function getCheckSuiteStatus(statusDisplayName: string): CheckSuiteStatus {
