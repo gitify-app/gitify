@@ -14,7 +14,7 @@ import { workflowRunHandler } from './workflowRun';
 
 export function createNotificationHandler(
   notification: Notification,
-): NotificationTypeHandler | null {
+): NotificationTypeHandler {
   switch (notification.subject.type) {
     case 'CheckSuite':
       return checkSuiteHandler;

@@ -1,6 +1,7 @@
 import { ipcRenderer } from 'electron';
 
 import type { AxiosPromise, AxiosResponse } from 'axios';
+import axios from 'axios';
 import nock from 'nock';
 
 import {
@@ -168,6 +169,10 @@ describe('renderer/utils/auth/utils.ts', () => {
       mockAuthState = {
         accounts: [],
       };
+
+      // axios will default to using the XHR adapter which can't be intercepted
+      // by nock. So, configure axios to use the node adapter.
+      axios.defaults.adapter = 'http';
     });
 
     describe('should add GitHub Cloud account', () => {

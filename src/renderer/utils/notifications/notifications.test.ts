@@ -1,3 +1,4 @@
+import axios from 'axios';
 import nock from 'nock';
 
 import * as logger from '../../../shared/logger';
@@ -9,6 +10,12 @@ import type { Repository } from '../../typesGitHub';
 import { enrichNotification, getNotificationCount } from './notifications';
 
 describe('renderer/utils/notifications/notifications.ts', () => {
+  beforeEach(() => {
+    // axios will default to using the XHR adapter which can't be intercepted
+    // by nock. So, configure axios to use the node adapter.
+    axios.defaults.adapter = 'http';
+  });
+
   afterEach(() => {
     jest.clearAllMocks();
   });

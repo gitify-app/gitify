@@ -120,9 +120,7 @@ export async function enrichNotification(
 
   try {
     const handler = createNotificationHandler(notification);
-    if (handler) {
-      additionalSubjectDetails = await handler.enrich(notification, settings);
-    }
+    additionalSubjectDetails = await handler.enrich(notification, settings);
   } catch (err) {
     logError(
       'enrichNotification',

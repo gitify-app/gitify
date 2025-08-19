@@ -1,3 +1,4 @@
+import axios from 'axios';
 import nock from 'nock';
 
 import { createSubjectMock } from '../../../__mocks__/notifications-mocks';
@@ -33,6 +34,12 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
     mockNotification.repository = {
       ...(partialRepository as Repository),
     };
+
+    beforeEach(() => {
+      // axios will default to using the XHR adapter which can't be intercepted
+      // by nock. So, configure axios to use the node adapter.
+      axios.defaults.adapter = 'http';
+    });
 
     it('answered discussion state', async () => {
       nock('https://api.github.com')
