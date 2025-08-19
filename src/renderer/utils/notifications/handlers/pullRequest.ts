@@ -121,7 +121,7 @@ export async function getLatestReviewForReviewers(
 
   // Find the most recent review for each reviewer
   const latestReviews: PullRequestReview[] = [];
-  const sortedReviews = prReviews.data.reverse();
+  const sortedReviews = prReviews.data.slice().reverse();
   for (const prReview of sortedReviews) {
     const reviewerFound = latestReviews.find(
       (review) => review.user.login === prReview.user.login,
