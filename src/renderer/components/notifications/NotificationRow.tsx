@@ -70,7 +70,6 @@ export const NotificationRow: FC<INotificationRow> = ({
   };
 
   const handler = createNotificationHandler(notification);
-
   const NotificationIcon = handler.iconType(notification.subject);
   const iconColor = handler.iconColor(notification.subject);
   const notificationType = handler.formattedNotificationType(notification);

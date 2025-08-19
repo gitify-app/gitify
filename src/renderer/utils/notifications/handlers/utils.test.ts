@@ -1,5 +1,5 @@
 import { partialMockUser } from '../../../__mocks__/partial-mocks';
-import { getSubjectUser } from './utils';
+import { formatForDisplay, getSubjectUser } from './utils';
 
 describe('renderer/utils/notifications/handlers/utils.ts', () => {
   describe('getSubjectUser', () => {
@@ -32,5 +32,17 @@ describe('renderer/utils/notifications/handlers/utils.ts', () => {
         type: mockAuthor.type,
       });
     });
+  });
+
+  it('formatForDisplay', () => {
+    expect(formatForDisplay(null)).toBe('');
+    expect(formatForDisplay([])).toBe('');
+    expect(formatForDisplay(['open', 'PullRequest'])).toBe('Open Pull Request');
+    expect(formatForDisplay(['OUTDATED', 'Discussion'])).toBe(
+      'Outdated Discussion',
+    );
+    expect(formatForDisplay(['not_planned', 'Issue'])).toBe(
+      'Not Planned Issue',
+    );
   });
 });

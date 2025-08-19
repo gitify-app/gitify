@@ -11,8 +11,8 @@ import type {
   Subject,
   SubjectType,
 } from '../../../typesGitHub';
-import { formatForDisplay } from '../../helpers';
 import type { NotificationTypeHandler } from './types';
+import { formatForDisplay } from './utils';
 
 export class DefaultHandler implements NotificationTypeHandler {
   type?: SubjectType;
