@@ -3,7 +3,7 @@ import type { FC } from 'react';
 import type { OcticonProps } from '@primer/octicons-react';
 import { TagIcon } from '@primer/octicons-react';
 
-import type { SettingsState } from '../../../types';
+import { IconColor, type SettingsState } from '../../../types';
 import type {
   GitifySubject,
   Notification,
@@ -12,10 +12,10 @@ import type {
 } from '../../../typesGitHub';
 import { getRelease } from '../../api/client';
 import { isStateFilteredOut } from '../filters/filter';
-import type { NotificationTypeHandler } from './types';
+import { DefaultHandler } from './default';
 import { getSubjectUser } from './utils';
 
-class ReleaseHandler implements NotificationTypeHandler {
+class ReleaseHandler extends DefaultHandler {
   readonly type = 'Release';
 
   async enrich(
@@ -41,6 +41,10 @@ class ReleaseHandler implements NotificationTypeHandler {
 
   getIcon(_subject: Subject): FC<OcticonProps> | null {
     return TagIcon;
+  }
+
+  getIconColor(_subject: Subject): IconColor {
+    return IconColor.GREEN;
   }
 }
 

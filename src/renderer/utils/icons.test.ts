@@ -8,118 +8,15 @@ import {
 } from '@primer/octicons-react';
 
 import { IconColor } from '../types';
-import type {
-  GitifyPullRequestReview,
-  StateType,
-  Subject,
-  SubjectType,
-} from '../typesGitHub';
+import type { GitifyPullRequestReview } from '../typesGitHub';
 import {
   getAuthMethodIcon,
   getDefaultUserIcon,
-  getNotificationTypeIconColor,
   getPlatformIcon,
   getPullRequestReviewIcon,
 } from './icons';
 
 describe('renderer/utils/icons.ts', () => {
-  describe('getNotificationTypeIconColor', () => {
-    it('should format the notification color for check suite', () => {
-      expect(
-        getNotificationTypeIconColor(
-          createSubjectMock({
-            type: 'CheckSuite',
-            state: 'cancelled',
-          }),
-        ),
-      ).toMatchSnapshot();
-
-      expect(
-        getNotificationTypeIconColor(
-          createSubjectMock({
-            type: 'CheckSuite',
-            state: 'failure',
-          }),
-        ),
-      ).toMatchSnapshot();
-
-      expect(
-        getNotificationTypeIconColor(
-          createSubjectMock({
-            type: 'CheckSuite',
-            state: 'skipped',
-          }),
-        ),
-      ).toMatchSnapshot();
-
-      expect(
-        getNotificationTypeIconColor(
-          createSubjectMock({
-            type: 'CheckSuite',
-            state: 'success',
-          }),
-        ),
-      ).toMatchSnapshot();
-
-      expect(
-        getNotificationTypeIconColor(
-          createSubjectMock({
-            type: 'CheckSuite',
-            state: null,
-          }),
-        ),
-      ).toMatchSnapshot();
-    });
-
-    it('should format the notification color for state', () => {
-      expect(
-        getNotificationTypeIconColor(createSubjectMock({ state: 'ANSWERED' })),
-      ).toMatchSnapshot();
-
-      expect(
-        getNotificationTypeIconColor(createSubjectMock({ state: 'closed' })),
-      ).toMatchSnapshot();
-
-      expect(
-        getNotificationTypeIconColor(createSubjectMock({ state: 'completed' })),
-      ).toMatchSnapshot();
-
-      expect(
-        getNotificationTypeIconColor(createSubjectMock({ state: 'draft' })),
-      ).toMatchSnapshot();
-
-      expect(
-        getNotificationTypeIconColor(createSubjectMock({ state: 'merged' })),
-      ).toMatchSnapshot();
-
-      expect(
-        getNotificationTypeIconColor(
-          createSubjectMock({ state: 'not_planned' }),
-        ),
-      ).toMatchSnapshot();
-
-      expect(
-        getNotificationTypeIconColor(createSubjectMock({ state: 'open' })),
-      ).toMatchSnapshot();
-
-      expect(
-        getNotificationTypeIconColor(createSubjectMock({ state: 'reopened' })),
-      ).toMatchSnapshot();
-
-      expect(
-        getNotificationTypeIconColor(createSubjectMock({ state: 'RESOLVED' })),
-      ).toMatchSnapshot();
-
-      expect(
-        getNotificationTypeIconColor(
-          createSubjectMock({
-            state: 'something_else_unknown' as StateType,
-          }),
-        ),
-      ).toMatchSnapshot();
-    });
-  });
-
   describe('getPullRequestReviewIcon', () => {
     let mockReviewSingleReviewer: GitifyPullRequestReview;
     let mockReviewMultipleReviewer: GitifyPullRequestReview;
@@ -235,17 +132,3 @@ describe('renderer/utils/icons.ts', () => {
     expect(getDefaultUserIcon('User')).toBe(FeedPersonIcon);
   });
 });
-
-function createSubjectMock(mocks: {
-  title?: string;
-  type?: SubjectType;
-  state?: StateType;
-}): Subject {
-  return {
-    title: mocks.title ?? 'Mock Subject',
-    type: mocks.type ?? ('Unknown' as SubjectType),
-    state: mocks.state ?? ('Unknown' as StateType),
-    url: null,
-    latest_comment_url: null,
-  };
-}

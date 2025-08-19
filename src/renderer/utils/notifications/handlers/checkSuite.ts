@@ -17,9 +17,9 @@ import type {
   Notification,
   Subject,
 } from '../../../typesGitHub';
-import type { NotificationTypeHandler } from './types';
+import { DefaultHandler } from './default';
 
-class CheckSuiteHandler implements NotificationTypeHandler {
+class CheckSuiteHandler extends DefaultHandler {
   readonly type = 'CheckSuite';
 
   async enrich(

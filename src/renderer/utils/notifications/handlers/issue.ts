@@ -18,10 +18,10 @@ import type {
 } from '../../../typesGitHub';
 import { getIssue, getIssueOrPullRequestComment } from '../../api/client';
 import { isStateFilteredOut } from '../filters/filter';
-import type { NotificationTypeHandler } from './types';
+import { DefaultHandler } from './default';
 import { getSubjectUser } from './utils';
 
-class IssueHandler implements NotificationTypeHandler {
+class IssueHandler extends DefaultHandler {
   readonly type = 'Issue';
 
   async enrich(

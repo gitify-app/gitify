@@ -25,10 +25,10 @@ import {
   getPullRequestReviews,
 } from '../../api/client';
 import { isStateFilteredOut, isUserFilteredOut } from '../filters/filter';
-import type { NotificationTypeHandler } from './types';
+import { DefaultHandler } from './default';
 import { getSubjectUser } from './utils';
 
-class PullRequestHandler implements NotificationTypeHandler {
+class PullRequestHandler extends DefaultHandler {
   readonly type = 'PullRequest' as const;
 
   async enrich(

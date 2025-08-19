@@ -23,4 +23,7 @@ export interface NotificationTypeHandler {
 
   /** Return an icon component for this notification type. */
   getIcon(subject: Subject): FC<OcticonProps> | null;
+
+  /** Return a color for this notification type. */
+  getIconColor(subject: Subject): string | undefined;
 }
