@@ -8,11 +8,11 @@ import type { GitifySubject, Notification } from '../../typesGitHub';
 import { listNotificationsForAuthenticatedUser } from '../api/client';
 import { determineFailureType } from '../api/errors';
 import { updateTrayIcon } from '../comms';
-import { getGitifySubjectDetails } from '../subject';
 import {
   filterBaseNotifications,
   filterDetailedNotifications,
 } from './filters/filter';
+import { createNotificationHandler } from './handlers';
 
 export function setTrayIconColor(notifications: AccountNotifications[]) {
   const allNotificationsCount = getNotificationCount(notifications);
@@ -105,36 +105,38 @@ export async function enrichNotifications(
 
   const enrichedNotifications = await Promise.all(
     notifications.map(async (notification: Notification) => {
-      let additionalSubjectDetails: GitifySubject = {};
-
-      try {
-        additionalSubjectDetails = await getGitifySubjectDetails(
-          notification,
-          settings,
-        );
-      } catch (err) {
-        logError(
-          'enrichNotifications',
-          'failed to enrich notification details for',
-          err,
-          notification,
-        );
-
-        logWarn(
-          'enrichNotifications',
-          'Continuing with base notification details',
-        );
-      }
-
-      return {
-        ...notification,
-        subject: {
-          ...notification.subject,
-          ...additionalSubjectDetails,
-        },
-      };
+      return enrichNotification(notification, settings);
     }),
   );
 
   return enrichedNotifications;
+}
+
+export async function enrichNotification(
+  notification: Notification,
+  settings: SettingsState,
+) {
+  let additionalSubjectDetails: GitifySubject = {};
+
+  try {
+    const handler = createNotificationHandler(notification);
+    additionalSubjectDetails = await handler.enrich(notification, settings);
+  } catch (err) {
+    logError(
+      'enrichNotification',
+      'failed to enrich notification details for',
+      err,
+      notification,
+    );
+
+    logWarn('enrichNotification', 'Continuing with base notification details');
+  }
+
+  return {
+    ...notification,
+    subject: {
+      ...notification.subject,
+      ...additionalSubjectDetails,
+    },
+  };
 }
