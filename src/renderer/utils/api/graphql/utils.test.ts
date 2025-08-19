@@ -5,7 +5,7 @@ describe('renderer/utils/api/graphql/utils.ts', () => {
     test('formats search query string correctly', () => {
       const result = formatAsGitHubSearchSyntax('exampleRepo', 'exampleTitle');
 
-      expect(result).toBe('exampleTitle in:title repo:exampleRepo');
+      expect(result).toBe('"exampleTitle" in:title repo:exampleRepo');
     });
   });
 });
