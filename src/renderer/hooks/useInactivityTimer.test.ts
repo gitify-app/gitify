@@ -151,6 +151,8 @@ describe('hooks/useInactivityTimer.ts', () => {
   it('should not set timer when delay is null', () => {
     const mockCallback = jest.fn();
 
+    // Intentional: passing null to validate hook ignores timer
+    // biome-ignore lint/suspicious/noExplicitAny: test intentionally passes invalid value
     renderHook(() => useInactivityTimer(mockCallback, null as any));
 
     act(() => {
@@ -179,5 +181,66 @@ describe('hooks/useInactivityTimer.ts', () => {
 
     expect(mockCallback1).not.toHaveBeenCalled();
     expect(mockCallback2).toHaveBeenCalledTimes(1);
+  });
+
+  it('should fire repeatedly after each inactivity interval', () => {
+    const mockCallback = jest.fn();
+    const delay = 1000;
+
+    renderHook(() => useInactivityTimer(mockCallback, delay));
+
+    act(() => {
+      jest.advanceTimersByTime(delay); // 1st
+      jest.advanceTimersByTime(delay); // 2nd
+      jest.advanceTimersByTime(delay); // 3rd
+    });
+
+    expect(mockCallback).toHaveBeenCalledTimes(3);
+  });
+
+  it('returned reset function should manually restart timer', () => {
+    const mockCallback = jest.fn();
+    const delay = 1000;
+
+    const { result } = renderHook(() =>
+      useInactivityTimer(mockCallback, delay),
+    );
+
+    act(() => {
+      jest.advanceTimersByTime(delay); // first fire
+    });
+    expect(mockCallback).toHaveBeenCalledTimes(1);
+
+    act(() => {
+      result.current(); // manual reset
+      jest.advanceTimersByTime(500); // half way
+    });
+    expect(mockCallback).toHaveBeenCalledTimes(1);
+
+    act(() => {
+      jest.advanceTimersByTime(500); // complete second interval
+    });
+    expect(mockCallback).toHaveBeenCalledTimes(2);
+  });
+
+  it('should clear timers on unmount and not fire afterward', () => {
+    const mockCallback = jest.fn();
+    const delay = 1000;
+
+    const { unmount } = renderHook(() =>
+      useInactivityTimer(mockCallback, delay),
+    );
+
+    act(() => {
+      jest.advanceTimersByTime(500); // not yet fired
+    });
+    expect(mockCallback).not.toHaveBeenCalled();
+
+    unmount();
+
+    act(() => {
+      jest.advanceTimersByTime(2000); // would have fired twice if mounted
+    });
+    expect(mockCallback).not.toHaveBeenCalled();
   });
 });
