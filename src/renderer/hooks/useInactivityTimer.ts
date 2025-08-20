@@ -6,7 +6,7 @@ import { useCallback, useEffect, useRef } from 'react';
  */
 export const useInactivityTimer = (callback: () => void, delay: number) => {
   const savedCallback = useRef<(() => void) | null>(null);
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Remember the latest callback
   useEffect(() => {
@@ -18,10 +18,12 @@ export const useInactivityTimer = (callback: () => void, delay: number) => {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
-
     if (delay !== null && savedCallback.current) {
       timeoutRef.current = setTimeout(() => {
+        // Fire callback once inactivity threshold reached
         savedCallback.current?.();
+        // Schedule next run while still inactive
+        resetTimer();
       }, delay);
     }
   }, [delay]);
@@ -31,8 +33,6 @@ export const useInactivityTimer = (callback: () => void, delay: number) => {
     if (delay === null) {
       return;
     }
-
-    // Events that indicate user activity
     const events = [
       'mousedown',
       'mousemove',
@@ -47,7 +47,7 @@ export const useInactivityTimer = (callback: () => void, delay: number) => {
       document.addEventListener(event, resetTimer, { passive: true });
     });
 
-    // Start the initial timer
+    // Start initial timer
     resetTimer();
 
     // Cleanup function
