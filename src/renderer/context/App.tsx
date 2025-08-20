@@ -12,6 +12,7 @@ import { ipcRenderer, webFrame } from 'electron';
 import { useTheme } from '@primer/react';
 
 import { namespacedEvent } from '../../shared/events';
+import { useInactivityTimer } from '../hooks/useInactivityTimer';
 import { useInterval } from '../hooks/useInterval';
 import { useNotifications } from '../hooks/useNotifications';
 import {
@@ -196,7 +197,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     settings.filterReasons,
   ]);
 
-  useInterval(() => {
+  useInactivityTimer(() => {
     fetchNotifications({ auth, settings });
   }, Constants.FETCH_NOTIFICATIONS_INTERVAL);
 
