@@ -37,12 +37,6 @@ const config = {
     entitlements: 'assets/entitlements.mac.plist',
     entitlementsInherit: 'assets/entitlements.mac.plist',
     gatekeeperAssess: false,
-    extendInfo: {
-      NSBluetoothAlwaysUsageDescription: null,
-      NSBluetoothPeripheralUsageDescription: null,
-      NSCameraUsageDescription: null,
-      NSMicrophoneUsageDescription: null,
-    },
   },
   dmg: {
     icon: 'assets/images/app-icon.icns',
