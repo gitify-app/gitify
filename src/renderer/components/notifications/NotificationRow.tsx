@@ -86,7 +86,7 @@ export const NotificationRow: FC<INotificationRow> = ({
         'pl-3 pr-1 py-1.5',
         'text-gitify-font border-gitify-notification-border hover:bg-gitify-notification-hover',
         (isAnimated || animateExit) &&
-          'translate-x-full opacity-0 transition duration-[350ms] ease-in-out',
+          'translate-x-full opacity-0 transition duration-350 ease-in-out',
         (isRead || showAsRead) && Opacity.READ,
       )}
     >
