@@ -62,7 +62,7 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
           'group pr-1 py-0.5',
           'bg-gitify-repository',
           animateExit &&
-            'translate-x-full opacity-0 transition duration-[350ms] ease-in-out',
+            'translate-x-full opacity-0 transition duration-350 ease-in-out',
           showAsRead && Opacity.READ,
         )}
         onClick={actionToggleRepositoryNotifications}
