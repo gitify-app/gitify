@@ -34,6 +34,8 @@ export type Link = Branded<string, 'WebUrl'>;
 
 export type UserHandle = Branded<string, 'UserHandle'>;
 
+export type Organization = Branded<string, 'Organization'>;
+
 export type Status = 'loading' | 'success' | 'error';
 
 export interface Account {
@@ -58,6 +60,7 @@ export type FilterValue =
   | Reason
   | UserType
   | UserHandle
+  | Organization
   | FilterStateType
   | SubjectType;
 
@@ -101,6 +104,8 @@ export interface FilterSettingsState {
   filterUserTypes: UserType[];
   filterIncludeHandles: string[];
   filterExcludeHandles: string[];
+  filterIncludeOrganizations: string[];
+  filterExcludeOrganizations: string[];
   filterSubjectTypes: SubjectType[];
   filterStates: FilterStateType[];
   filterReasons: Reason[];

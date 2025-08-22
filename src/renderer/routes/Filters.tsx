@@ -3,6 +3,7 @@ import { type FC, useContext } from 'react';
 import { FilterIcon, FilterRemoveIcon } from '@primer/octicons-react';
 import { Button, Stack, Tooltip } from '@primer/react';
 
+import { OrganizationFilter } from '../components/filters/OrganizationFilter';
 import { ReasonFilter } from '../components/filters/ReasonFilter';
 import { StateFilter } from '../components/filters/StateFilter';
 import { SubjectTypeFilter } from '../components/filters/SubjectTypeFilter';
@@ -27,6 +28,7 @@ export const FiltersRoute: FC = () => {
         <Stack direction="vertical" gap="spacious">
           <UserTypeFilter />
           <UserHandleFilter />
+          <OrganizationFilter />
           <SubjectTypeFilter />
           <StateFilter />
           <ReasonFilter />

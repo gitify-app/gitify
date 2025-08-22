@@ -6,8 +6,11 @@ import type {
 } from '../../../typesGitHub';
 import {
   filterNotificationByHandle,
+  filterNotificationByOrganization,
   hasExcludeHandleFilters,
+  hasExcludeOrganizationFilters,
   hasIncludeHandleFilters,
+  hasIncludeOrganizationFilters,
   reasonFilter,
   stateFilter,
   subjectTypeFilter,
@@ -48,6 +51,23 @@ export function filterDetailedNotifications(
   return notifications.filter((notification) => {
     let passesFilters = true;
 
+    // Organization filters should always apply, regardless of detailed notifications setting
+    if (hasIncludeOrganizationFilters(settings)) {
+      passesFilters =
+        passesFilters &&
+        settings.filterIncludeOrganizations.some((organization) =>
+          filterNotificationByOrganization(notification, organization),
+        );
+    }
+
+    if (hasExcludeOrganizationFilters(settings)) {
+      passesFilters =
+        passesFilters &&
+        !settings.filterExcludeOrganizations.some((organization) =>
+          filterNotificationByOrganization(notification, organization),
+        );
+    }
+
     if (settings.detailedNotifications) {
       passesFilters =
         passesFilters && passesUserFilters(notification, settings);
@@ -65,6 +85,8 @@ export function hasAnyFiltersSet(settings: SettingsState): boolean {
     userTypeFilter.hasFilters(settings) ||
     hasIncludeHandleFilters(settings) ||
     hasExcludeHandleFilters(settings) ||
+    hasIncludeOrganizationFilters(settings) ||
+    hasExcludeOrganizationFilters(settings) ||
     subjectTypeFilter.hasFilters(settings) ||
     stateFilter.hasFilters(settings) ||
     reasonFilter.hasFilters(settings)
