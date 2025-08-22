@@ -42,6 +42,9 @@ importers:
       '@electron/notarize':
         specifier: 3.0.2
         version: 3.0.2
+      '@primer/css':
+        specifier: 22.0.2
+        version: 22.0.2(@primer/primitives@11.1.0)
       '@primer/octicons-react':
         specifier: 19.15.5
         version: 19.15.5(react@19.1.1)
@@ -774,6 +777,12 @@ packages:
 
   '@primer/behaviors@1.8.0':
     resolution: {integrity: sha512-ZUfhWVY4ZBKc2Fh3fIa2Qwwa3SnOi914lY5wcmN+UNtsBxeXsjWNwpohJbwRwWZm+nJ3C1n9qJFWpHuBlDVU1A==}
+
+  '@primer/css@22.0.2':
+    resolution: {integrity: sha512-FfXd1ga05oewKjDRi9cPmy7BSnb/6QOjTIxAtDj94Hoyk+qJxHhgvhbcnZwBfL3WKP6HeUT3PnsT9k+43Bmg3Q==}
+    engines: {node: '>=16.0.0'}
+    peerDependencies:
+      '@primer/primitives': 10.x || 11.x
 
   '@primer/live-region-element@0.7.1':
     resolution: {integrity: sha512-9uQCeBCb3wefz3kJNSo+PECc7T7TNB3k22JUdHY08Zlv9bd1rtsQgpazM5umcbZQrACzGbgufAfdbhGUBXI3jA==}
@@ -5489,6 +5498,10 @@ snapshots:
   '@pkgr/core@0.2.7': {}
 
   '@primer/behaviors@1.8.0': {}
+
+  '@primer/css@22.0.2(@primer/primitives@11.1.0)':
+    dependencies:
+      '@primer/primitives': 11.1.0
 
   '@primer/live-region-element@0.7.1':
     dependencies:
