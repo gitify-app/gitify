@@ -140,7 +140,15 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
 
         mockNotifications[0].repository.owner.login = 'microsoft';
         mockNotifications[1].repository.owner.login = 'github';
-        const result = filterDetailedNotifications(mockNotifications, {
+
+        // Apply base filtering first (where organization filtering now happens)
+        let result = filterBaseNotifications(mockNotifications, {
+          ...mockSettings,
+          filterIncludeOrganizations: ['microsoft'],
+        });
+
+        // Then apply detailed filtering
+        result = filterDetailedNotifications(result, {
           ...mockSettings,
           detailedNotifications: true,
           filterIncludeOrganizations: ['microsoft'],
@@ -167,7 +175,15 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
 
         mockNotifications[0].repository.owner.login = 'microsoft';
         mockNotifications[1].repository.owner.login = 'github';
-        const result = filterDetailedNotifications(mockNotifications, {
+
+        // Apply base filtering first (where organization filtering now happens)
+        let result = filterBaseNotifications(mockNotifications, {
+          ...mockSettings,
+          filterExcludeOrganizations: ['github'],
+        });
+
+        // Then apply detailed filtering
+        result = filterDetailedNotifications(result, {
           ...mockSettings,
           detailedNotifications: true,
           filterExcludeOrganizations: ['github'],

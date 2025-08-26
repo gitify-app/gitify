@@ -13,5 +13,8 @@ export function filterNotificationByOrganization(
   notification: Notification,
   organizationName: string,
 ): boolean {
-  return notification.repository.owner.login === organizationName;
+  return (
+    notification.repository.owner.login.toLowerCase() ===
+    organizationName.toLowerCase()
+  );
 }

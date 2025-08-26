@@ -15,7 +15,6 @@ import {
 } from '../../utils/notifications/filters/organizations';
 import { Tooltip } from '../fields/Tooltip';
 import { Title } from '../primitives/Title';
-import { RequiresDetailedNotificationWarning } from './RequiresDetailedNotificationsWarning';
 
 type InputToken = {
   id: number;
@@ -143,7 +142,6 @@ export const OrganizationFilter: FC = () => {
           tooltip={
             <Stack direction="vertical" gap="condensed">
               <Text>Filter notifications by organization.</Text>
-              <RequiresDetailedNotificationWarning />
             </Stack>
           }
         />

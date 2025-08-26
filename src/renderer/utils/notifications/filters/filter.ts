@@ -24,6 +24,23 @@ export function filterBaseNotifications(
   return notifications.filter((notification) => {
     let passesFilters = true;
 
+    // Organization filters should always apply, regardless of detailed notifications setting
+    if (hasIncludeOrganizationFilters(settings)) {
+      passesFilters =
+        passesFilters &&
+        settings.filterIncludeOrganizations.some((organization) =>
+          filterNotificationByOrganization(notification, organization),
+        );
+    }
+
+    if (hasExcludeOrganizationFilters(settings)) {
+      passesFilters =
+        passesFilters &&
+        !settings.filterExcludeOrganizations.some((organization) =>
+          filterNotificationByOrganization(notification, organization),
+        );
+    }
+
     if (subjectTypeFilter.hasFilters(settings)) {
       passesFilters =
         passesFilters &&
@@ -50,23 +67,6 @@ export function filterDetailedNotifications(
 ): Notification[] {
   return notifications.filter((notification) => {
     let passesFilters = true;
-
-    // Organization filters should always apply, regardless of detailed notifications setting
-    if (hasIncludeOrganizationFilters(settings)) {
-      passesFilters =
-        passesFilters &&
-        settings.filterIncludeOrganizations.some((organization) =>
-          filterNotificationByOrganization(notification, organization),
-        );
-    }
-
-    if (hasExcludeOrganizationFilters(settings)) {
-      passesFilters =
-        passesFilters &&
-        !settings.filterExcludeOrganizations.some((organization) =>
-          filterNotificationByOrganization(notification, organization),
-        );
-    }
 
     if (settings.detailedNotifications) {
       passesFilters =
