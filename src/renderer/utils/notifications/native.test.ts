@@ -3,7 +3,7 @@ import {
   mockSingleAccountNotifications,
 } from '../../__mocks__/notifications-mocks';
 import { mockAuth } from '../../__mocks__/state-mocks';
-import { defaultSettings } from '../../context/App';
+import { defaultSettings } from '../../context/defaults';
 import type { SettingsState } from '../../types';
 import { mockGitHubNotifications } from '../api/__mocks__/response-mocks';
 import * as comms from '../comms';

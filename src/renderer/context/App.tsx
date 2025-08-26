@@ -14,23 +14,17 @@ import { useTheme } from '@primer/react';
 import { namespacedEvent } from '../../shared/events';
 import { useInterval } from '../hooks/useInterval';
 import { useNotifications } from '../hooks/useNotifications';
-import {
-  type Account,
-  type AccountNotifications,
-  type AppearanceSettingsState,
-  type AuthState,
-  type FilterSettingsState,
-  type FilterValue,
-  type GitifyError,
-  GroupBy,
-  type NotificationSettingsState,
-  OpenPreference,
-  type SettingsState,
-  type SettingsValue,
-  type Status,
-  type SystemSettingsState,
-  Theme,
-  type Token,
+import type {
+  Account,
+  AccountNotifications,
+  AuthState,
+  FilterSettingsState,
+  FilterValue,
+  GitifyError,
+  SettingsState,
+  SettingsValue,
+  Status,
+  Token,
 } from '../types';
 import type { Notification } from '../typesGitHub';
 import { headNotifications } from '../utils/api/client';
@@ -64,59 +58,7 @@ import {
   mapThemeModeToColorScheme,
 } from '../utils/theme';
 import { zoomPercentageToLevel } from '../utils/zoom';
-
-export const defaultAuth: AuthState = {
-  accounts: [],
-};
-
-const defaultAppearanceSettings: AppearanceSettingsState = {
-  theme: Theme.SYSTEM,
-  increaseContrast: false,
-  zoomPercentage: 100,
-  showAccountHeader: false,
-  wrapNotificationTitle: false,
-};
-
-const defaultNotificationSettings: NotificationSettingsState = {
-  groupBy: GroupBy.REPOSITORY,
-  fetchAllNotifications: true,
-  detailedNotifications: true,
-  showPills: true,
-  showNumber: true,
-  participating: false,
-  markAsDoneOnOpen: false,
-  markAsDoneOnUnsubscribe: false,
-  delayNotificationState: false,
-};
-
-const defaultSystemSettings: SystemSettingsState = {
-  openLinks: OpenPreference.FOREGROUND,
-  keyboardShortcut: true,
-  showNotificationsCountInTray: true,
-  showNotifications: true,
-  playSound: true,
-  notificationVolume: 20,
-  useAlternateIdleIcon: false,
-  openAtStartup: false,
-};
-
-export const defaultFilters: FilterSettingsState = {
-  filterUserTypes: [],
-  filterIncludeHandles: [],
-  filterExcludeHandles: [],
-  filterIncludeOrganizations: [],
-  filterExcludeOrganizations: [],
-  filterSubjectTypes: [],
-  filterStates: [],
-  filterReasons: [],
-};
-
-export const defaultSettings: SettingsState = {
-  ...defaultAppearanceSettings,
-  ...defaultNotificationSettings,
-  ...defaultSystemSettings,
-  ...defaultFilters,
-};
+import { defaultAuth, defaultFilters, defaultSettings } from './defaults';
 
 interface AppContextState {
   auth: AuthState;
