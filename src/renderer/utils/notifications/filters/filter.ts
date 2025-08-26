@@ -6,8 +6,11 @@ import type {
 } from '../../../typesGitHub';
 import {
   filterNotificationByHandle,
+  filterNotificationByOrganization,
   hasExcludeHandleFilters,
+  hasExcludeOrganizationFilters,
   hasIncludeHandleFilters,
+  hasIncludeOrganizationFilters,
   reasonFilter,
   stateFilter,
   subjectTypeFilter,
@@ -20,6 +23,9 @@ export function filterBaseNotifications(
 ): Notification[] {
   return notifications.filter((notification) => {
     let passesFilters = true;
+
+    passesFilters =
+      passesFilters && passesOrganizationFilters(notification, settings);
 
     if (subjectTypeFilter.hasFilters(settings)) {
       passesFilters =
@@ -65,6 +71,8 @@ export function hasAnyFiltersSet(settings: SettingsState): boolean {
     userTypeFilter.hasFilters(settings) ||
     hasIncludeHandleFilters(settings) ||
     hasExcludeHandleFilters(settings) ||
+    hasIncludeOrganizationFilters(settings) ||
+    hasExcludeOrganizationFilters(settings) ||
     subjectTypeFilter.hasFilters(settings) ||
     stateFilter.hasFilters(settings) ||
     reasonFilter.hasFilters(settings)
@@ -98,6 +106,31 @@ function passesUserFilters(
       passesFilters &&
       !settings.filterExcludeHandles.some((handle) =>
         filterNotificationByHandle(notification, handle),
+      );
+  }
+
+  return passesFilters;
+}
+
+function passesOrganizationFilters(
+  notification: Notification,
+  settings: SettingsState,
+): boolean {
+  let passesFilters = true;
+
+  if (hasIncludeOrganizationFilters(settings)) {
+    passesFilters =
+      passesFilters &&
+      settings.filterIncludeOrganizations.some((organization) =>
+        filterNotificationByOrganization(notification, organization),
+      );
+  }
+
+  if (hasExcludeOrganizationFilters(settings)) {
+    passesFilters =
+      passesFilters &&
+      !settings.filterExcludeOrganizations.some((organization) =>
+        filterNotificationByOrganization(notification, organization),
       );
   }
 

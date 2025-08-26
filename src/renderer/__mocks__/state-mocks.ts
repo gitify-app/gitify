@@ -111,6 +111,8 @@ const mockFilters: FilterSettingsState = {
   filterUserTypes: [],
   filterIncludeHandles: [],
   filterExcludeHandles: [],
+  filterIncludeOrganizations: [],
+  filterExcludeOrganizations: [],
   filterSubjectTypes: [],
   filterStates: [],
   filterReasons: [],

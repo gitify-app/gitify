@@ -122,6 +122,76 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
         expect(result.length).toBe(1);
         expect(result).toEqual([mockNotifications[1]]);
       });
+
+      it('should filter notifications that match include organization', async () => {
+        // Initialize repository owner structure if it doesn't exist
+        if (!mockNotifications[0].repository) {
+          mockNotifications[0].repository = {} as any;
+        }
+        if (!mockNotifications[0].repository.owner) {
+          mockNotifications[0].repository.owner = {} as any;
+        }
+        if (!mockNotifications[1].repository) {
+          mockNotifications[1].repository = {} as any;
+        }
+        if (!mockNotifications[1].repository.owner) {
+          mockNotifications[1].repository.owner = {} as any;
+        }
+
+        mockNotifications[0].repository.owner.login = 'microsoft';
+        mockNotifications[1].repository.owner.login = 'github';
+
+        // Apply base filtering first (where organization filtering now happens)
+        let result = filterBaseNotifications(mockNotifications, {
+          ...mockSettings,
+          filterIncludeOrganizations: ['microsoft'],
+        });
+
+        // Then apply detailed filtering
+        result = filterDetailedNotifications(result, {
+          ...mockSettings,
+          detailedNotifications: true,
+          filterIncludeOrganizations: ['microsoft'],
+        });
+
+        expect(result.length).toBe(1);
+        expect(result).toEqual([mockNotifications[0]]);
+      });
+
+      it('should filter notifications that match exclude organization', async () => {
+        // Initialize repository owner structure if it doesn't exist
+        if (!mockNotifications[0].repository) {
+          mockNotifications[0].repository = {} as any;
+        }
+        if (!mockNotifications[0].repository.owner) {
+          mockNotifications[0].repository.owner = {} as any;
+        }
+        if (!mockNotifications[1].repository) {
+          mockNotifications[1].repository = {} as any;
+        }
+        if (!mockNotifications[1].repository.owner) {
+          mockNotifications[1].repository.owner = {} as any;
+        }
+
+        mockNotifications[0].repository.owner.login = 'microsoft';
+        mockNotifications[1].repository.owner.login = 'github';
+
+        // Apply base filtering first (where organization filtering now happens)
+        let result = filterBaseNotifications(mockNotifications, {
+          ...mockSettings,
+          filterExcludeOrganizations: ['github'],
+        });
+
+        // Then apply detailed filtering
+        result = filterDetailedNotifications(result, {
+          ...mockSettings,
+          detailedNotifications: true,
+          filterExcludeOrganizations: ['github'],
+        });
+
+        expect(result.length).toBe(1);
+        expect(result).toEqual([mockNotifications[0]]);
+      });
     });
   });
 
@@ -150,6 +220,22 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
       const settings: SettingsState = {
         ...defaultSettings,
         filterExcludeHandles: ['gitify'],
+      };
+      expect(hasAnyFiltersSet(settings)).toBe(true);
+    });
+
+    it('non-default organization includes filters', () => {
+      const settings: SettingsState = {
+        ...defaultSettings,
+        filterIncludeOrganizations: ['microsoft'],
+      };
+      expect(hasAnyFiltersSet(settings)).toBe(true);
+    });
+
+    it('non-default organization excludes filters', () => {
+      const settings: SettingsState = {
+        ...defaultSettings,
+        filterExcludeOrganizations: ['github'],
       };
       expect(hasAnyFiltersSet(settings)).toBe(true);
     });

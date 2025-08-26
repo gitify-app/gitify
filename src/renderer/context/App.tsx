@@ -104,6 +104,8 @@ export const defaultFilters: FilterSettingsState = {
   filterUserTypes: [],
   filterIncludeHandles: [],
   filterExcludeHandles: [],
+  filterIncludeOrganizations: [],
+  filterExcludeOrganizations: [],
   filterSubjectTypes: [],
   filterStates: [],
   filterReasons: [],
@@ -193,6 +195,8 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     settings.filterUserTypes,
     settings.filterIncludeHandles,
     settings.filterExcludeHandles,
+    settings.filterIncludeOrganizations,
+    settings.filterExcludeOrganizations,
     settings.filterReasons,
   ]);
 
