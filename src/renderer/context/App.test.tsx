@@ -10,7 +10,8 @@ import * as comms from '../utils/comms';
 import { Constants } from '../utils/constants';
 import * as notifications from '../utils/notifications/notifications';
 import * as storage from '../utils/storage';
-import { AppContext, AppProvider, defaultSettings } from './App';
+import { AppContext, AppProvider } from './App';
+import { defaultSettings } from './defaults';
 
 jest.mock('../hooks/useNotifications');
 

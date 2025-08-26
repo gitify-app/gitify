@@ -1,6 +1,6 @@
 import { partialMockNotification } from '../../../__mocks__/partial-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
-import { defaultSettings } from '../../../context/App';
+import { defaultSettings } from '../../../context/defaults';
 import type { Link, SettingsState } from '../../../types';
 import {
   filterBaseNotifications,

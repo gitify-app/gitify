@@ -12,7 +12,8 @@ import {
 
 import { APPLICATION } from '../../../shared/constants';
 import { isLinux, isMacOS } from '../../../shared/platform';
-import { AppContext, defaultSettings } from '../../context/App';
+import { AppContext } from '../../context/App';
+import { defaultSettings } from '../../context/defaults';
 import { OpenPreference } from '../../types';
 import { Constants } from '../../utils/constants';
 import { Checkbox } from '../fields/Checkbox';
