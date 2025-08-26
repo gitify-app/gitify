@@ -1,7 +1,9 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import { mockSettings } from '../../__mocks__/state-mocks';
 import { AppContext } from '../../context/App';
+import type { SettingsState } from '../../types';
 import { OrganizationFilter } from './OrganizationFilter';
 
 const mockUpdateFilter = jest.fn();
@@ -28,49 +30,101 @@ describe('components/filters/OrganizationFilter.tsx', () => {
     expect(screen.getByText('Exclude:')).toBeInTheDocument();
   });
 
-  it('should handle organization includes', () => {
-    const props = {
-      updateFilter: mockUpdateFilter,
-      settings: mockSettings,
-    };
+  describe('Include organizations', () => {
+    it('should handle organization includes', async () => {
+      const props = {
+        updateFilter: mockUpdateFilter,
+        settings: mockSettings,
+      };
 
-    render(
-      <AppContext.Provider value={props}>
-        <OrganizationFilter />
-      </AppContext.Provider>,
-    );
+      render(
+        <AppContext.Provider value={props}>
+          <OrganizationFilter />
+        </AppContext.Provider>,
+      );
 
-    const includeInput = screen.getByTitle('Include organizations');
-    fireEvent.change(includeInput, { target: { value: 'microsoft' } });
-    fireEvent.blur(includeInput);
+      await userEvent.type(
+        screen.getByTitle('Include organizations'),
+        'microsoft{enter}',
+      );
 
-    expect(mockUpdateFilter).toHaveBeenCalledWith(
-      'filterIncludeOrganizations',
-      'microsoft',
-      true,
-    );
+      expect(mockUpdateFilter).toHaveBeenCalledWith(
+        'filterIncludeOrganizations',
+        'microsoft',
+        true,
+      );
+    });
+
+    it('should not allow duplicate include organizations', async () => {
+      const props = {
+        updateFilter: mockUpdateFilter,
+        settings: {
+          ...mockSettings,
+          filterIncludeOrganizations: ['microsoft'],
+        } as SettingsState,
+      };
+
+      render(
+        <AppContext.Provider value={props}>
+          <OrganizationFilter />
+        </AppContext.Provider>,
+      );
+
+      await userEvent.type(
+        screen.getByTitle('Include organizations'),
+        'microsoft{enter}',
+      );
+
+      expect(mockUpdateFilter).toHaveBeenCalledTimes(0);
+    });
   });
 
-  it('should handle organization excludes', () => {
-    const props = {
-      updateFilter: mockUpdateFilter,
-      settings: mockSettings,
-    };
+  describe('Exclude organizations', () => {
+    it('should handle organization excludes', async () => {
+      const props = {
+        updateFilter: mockUpdateFilter,
+        settings: mockSettings,
+      };
 
-    render(
-      <AppContext.Provider value={props}>
-        <OrganizationFilter />
-      </AppContext.Provider>,
-    );
+      render(
+        <AppContext.Provider value={props}>
+          <OrganizationFilter />
+        </AppContext.Provider>,
+      );
 
-    const excludeInput = screen.getByTitle('Exclude organizations');
-    fireEvent.change(excludeInput, { target: { value: 'github' } });
-    fireEvent.blur(excludeInput);
+      await userEvent.type(
+        screen.getByTitle('Exclude organizations'),
+        'github{enter}',
+      );
 
-    expect(mockUpdateFilter).toHaveBeenCalledWith(
-      'filterExcludeOrganizations',
-      'github',
-      true,
-    );
+      expect(mockUpdateFilter).toHaveBeenCalledWith(
+        'filterExcludeOrganizations',
+        'github',
+        true,
+      );
+    });
+
+    it('should not allow duplicate exclude organizations', async () => {
+      const props = {
+        updateFilter: mockUpdateFilter,
+        settings: {
+          ...mockSettings,
+          filterExcludeOrganizations: ['github'],
+        } as SettingsState,
+      };
+
+      render(
+        <AppContext.Provider value={props}>
+          <OrganizationFilter />
+        </AppContext.Provider>,
+      );
+
+      await userEvent.type(
+        screen.getByTitle('Exclude organizations'),
+        'github{enter}',
+      );
+
+      expect(mockUpdateFilter).toHaveBeenCalledTimes(0);
+    });
   });
 });
