@@ -4,7 +4,7 @@ import axios, {
   type Method,
 } from 'axios';
 
-import { logError, logWarn } from '../../../shared/logger';
+import { logError } from '../../../shared/logger';
 import type { Link, Token } from '../../types';
 import { decryptValue } from '../comms';
 import { getNextURLFromLinkHeader } from './utils';
@@ -17,15 +17,14 @@ import { getNextURLFromLinkHeader } from './utils';
  * @param data
  * @returns
  */
-export function apiRequest(
+export async function apiRequest(
   url: Link,
   method: Method,
   data = {},
-): AxiosPromise | null {
-  axios.defaults.headers.common.Accept = 'application/json';
-  axios.defaults.headers.common['Content-Type'] = 'application/json';
-  axios.defaults.headers.common['Cache-Control'] = 'no-cache';
-  return axios({ method, url, data });
+): Promise<AxiosPromise | null> {
+  const headers = await getHeaders(url);
+
+  return axios({ method, url, data, headers });
 }
 
 /**
@@ -45,23 +44,10 @@ export async function apiRequestAuth(
   data = {},
   fetchAllRecords = false,
 ): AxiosPromise | null {
-  let apiToken = token;
-  // TODO - Remove this try-catch block in a future release
-  try {
-    apiToken = (await decryptValue(token)) as Token;
-  } catch (err) {
-    logWarn('apiRequestAuth', 'Token is not yet encrypted');
-  }
-
-  axios.defaults.headers.common.Accept = 'application/json';
-  axios.defaults.headers.common.Authorization = `token ${apiToken}`;
-  axios.defaults.headers.common['Content-Type'] = 'application/json';
-  axios.defaults.headers.common['Cache-Control'] = shouldRequestWithNoCache(url)
-    ? 'no-cache'
-    : '';
+  const headers = await getHeaders(url, token);
 
   if (!fetchAllRecords) {
-    return axios({ method, url, data });
+    return axios({ method, url, data, headers });
   }
 
   let response: AxiosResponse | null = null;
@@ -71,7 +57,7 @@ export async function apiRequestAuth(
     let nextUrl: string | null = url;
 
     while (nextUrl) {
-      response = await axios({ method, url: nextUrl, data });
+      response = await axios({ method, url: nextUrl, data, headers });
 
       // If no data is returned, break the loop
       if (!response?.data) {
@@ -104,10 +90,34 @@ function shouldRequestWithNoCache(url: string) {
   const parsedUrl = new URL(url);
 
   switch (parsedUrl.pathname) {
-    case '/notifications':
     case '/api/v3/notifications':
+    case '/login/oauth/access_token':
+    case '/notifications':
       return true;
     default:
       return false;
   }
+}
+
+/**
+ * Construct headers for API requests
+ *
+ * @param username
+ * @param token
+ * @returns
+ */
+async function getHeaders(url: Link, token?: Token) {
+  const headers: Record<string, string> = {
+    Accept: 'application/json',
+    'Cache-Control': shouldRequestWithNoCache(url) ? 'no-cache' : '',
+    'Content-Type': 'application/json',
+  };
+
+  if (token) {
+    const decryptedToken = (await decryptValue(token)) as Token;
+
+    headers.Authorization = `token ${decryptedToken}`;
+  }
+
+  return headers;
 }
