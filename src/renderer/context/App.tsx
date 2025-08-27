@@ -7,12 +7,9 @@ import {
   useState,
 } from 'react';
 
-import { ipcRenderer, webFrame } from 'electron';
-
 import { useTheme } from '@primer/react';
 
-import { namespacedEvent } from '../../shared/events';
-
+import { Constants } from '../constants';
 import { useInterval } from '../hooks/useInterval';
 import { useNotifications } from '../hooks/useNotifications';
 import type {
@@ -49,7 +46,6 @@ import {
   setKeyboardShortcut,
   updateTrayTitle,
 } from '../utils/comms';
-import { Constants } from '../utils/constants';
 import { getNotificationCount } from '../utils/notifications/notifications';
 import { clearState, loadState, saveState } from '../utils/storage';
 import {
@@ -145,13 +141,13 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
   useInterval(() => {
     fetchNotifications({ auth, settings });
-  }, Constants.FETCH_NOTIFICATIONS_INTERVAL);
+  }, Constants.FETCH_NOTIFICATIONS_INTERVAL_MS);
 
   useInterval(() => {
     for (const account of auth.accounts) {
       refreshAccount(account);
     }
-  }, Constants.REFRESH_ACCOUNTS_INTERVAL);
+  }, Constants.REFRESH_ACCOUNTS_INTERVAL_MS);
 
   useEffect(() => {
     const count = getNotificationCount(notifications);
@@ -168,7 +164,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   }, [settings.keyboardShortcut]);
 
   useEffect(() => {
-    ipcRenderer.on(namespacedEvent('reset-app'), () => {
+    window.gitify.onResetApp(() => {
       clearState();
       setAuth(defaultAuth);
       setSettings(defaultSettings);
@@ -273,7 +269,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       setKeyboardShortcut(existing.settings.keyboardShortcut);
       setAlternateIdleIcon(existing.settings.useAlternateIdleIcon);
       setSettings({ ...defaultSettings, ...existing.settings });
-      webFrame.setZoomLevel(
+      window.gitify.zoom.setLevel(
         zoomPercentageToLevel(existing.settings.zoomPercentage),
       );
     }

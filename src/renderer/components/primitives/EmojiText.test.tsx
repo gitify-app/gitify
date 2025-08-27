@@ -1,13 +1,19 @@
-import { render } from '@testing-library/react';
+import { act, render } from '@testing-library/react';
 
 import { EmojiText, type IEmojiText } from './EmojiText';
 
 describe('renderer/components/primitives/EmojiText.tsx', () => {
-  it('should render', () => {
+  it('should render', async () => {
     const props: IEmojiText = {
       text: '🍺',
     };
-    const tree = render(<EmojiText {...props} />);
+
+    let tree: ReturnType<typeof render> | null = null;
+
+    await act(async () => {
+      tree = render(<EmojiText {...props} />);
+    });
+
     expect(tree).toMatchSnapshot();
   });
 });

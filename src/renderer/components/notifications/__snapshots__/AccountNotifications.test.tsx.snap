@@ -225,7 +225,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 alt="🔥"
                 class="emoji"
                 draggable="false"
-                src="images/twemoji/1f525.svg"
+                src="/mock/images/assets/1f525.svg"
               />
             </div>
             <div
@@ -464,7 +464,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               alt="🔥"
               class="emoji"
               draggable="false"
-              src="images/twemoji/1f525.svg"
+              src="/mock/images/assets/1f525.svg"
             />
           </div>
           <div
@@ -2926,7 +2926,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 alt="🎊"
                 class="emoji"
                 draggable="false"
-                src="images/twemoji/1f38a.svg"
+                src="/mock/images/assets/1f38a.svg"
               />
             </div>
             <div
@@ -3160,7 +3160,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               alt="🎊"
               class="emoji"
               draggable="false"
-              src="images/twemoji/1f38a.svg"
+              src="/mock/images/assets/1f38a.svg"
             />
           </div>
           <div

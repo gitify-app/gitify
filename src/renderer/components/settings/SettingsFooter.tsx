@@ -16,12 +16,8 @@ export const SettingsFooter: FC = () => {
 
   useEffect(() => {
     (async () => {
-      if (process.env.NODE_ENV === 'development') {
-        setAppVersion('dev');
-      } else {
-        const result = await getAppVersion();
-        setAppVersion(`v${result}`);
-      }
+      const result = await getAppVersion();
+      setAppVersion(result);
     })();
   }, []);
 

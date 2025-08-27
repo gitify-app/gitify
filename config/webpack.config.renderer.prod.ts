@@ -6,7 +6,7 @@ import { merge } from 'webpack-merge';
 import baseConfig from './webpack.config.renderer.base';
 
 const configuration: webpack.Configuration = {
-  devtool: 'source-map',
+  devtool: false,
 
   mode: 'production',
 

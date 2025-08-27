@@ -1,7 +1,5 @@
 import { type FC, useContext, useState } from 'react';
 
-import { webFrame } from 'electron';
-
 import {
   PaintbrushIcon,
   SyncIcon,
@@ -31,7 +29,7 @@ const DELAY = 200;
 export const AppearanceSettings: FC = () => {
   const { auth, settings, updateSetting } = useContext(AppContext);
   const [zoomPercentage, setZoomPercentage] = useState(
-    zoomLevelToPercentage(webFrame.getZoomLevel()),
+    zoomLevelToPercentage(window.gitify.zoom.getLevel()),
   );
 
   window.addEventListener('resize', () => {
@@ -39,7 +37,9 @@ export const AppearanceSettings: FC = () => {
     clearTimeout(timeout);
     // start timing for event "completion"
     timeout = setTimeout(() => {
-      const zoomPercentage = zoomLevelToPercentage(webFrame.getZoomLevel());
+      const zoomPercentage = zoomLevelToPercentage(
+        window.gitify.zoom.getLevel(),
+      );
       setZoomPercentage(zoomPercentage);
       updateSetting('zoomPercentage', zoomPercentage);
     }, DELAY);
@@ -115,7 +115,7 @@ export const AppearanceSettings: FC = () => {
               icon={ZoomOutIcon}
               onClick={() =>
                 zoomPercentage > 0 &&
-                webFrame.setZoomLevel(
+                window.gitify.zoom.setLevel(
                   zoomPercentageToLevel(zoomPercentage - 10),
                 )
               }
@@ -133,7 +133,7 @@ export const AppearanceSettings: FC = () => {
               icon={ZoomInIcon}
               onClick={() =>
                 zoomPercentage < 120 &&
-                webFrame.setZoomLevel(
+                window.gitify.zoom.setLevel(
                   zoomPercentageToLevel(zoomPercentage + 10),
                 )
               }
@@ -145,7 +145,7 @@ export const AppearanceSettings: FC = () => {
               aria-label="Reset zoom"
               data-testid="settings-zoom-reset"
               icon={SyncIcon}
-              onClick={() => webFrame.setZoomLevel(0)}
+              onClick={() => window.gitify.zoom.setLevel(0)}
               size="small"
               unsafeDisableTooltip={true}
               variant="danger"

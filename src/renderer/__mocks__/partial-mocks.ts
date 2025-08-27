@@ -1,6 +1,6 @@
+import { Constants } from '../constants';
 import type { Hostname, Link } from '../types';
 import type { Notification, Subject, User } from '../typesGitHub';
-import { Constants } from '../utils/constants';
 import { mockGitifyUser, mockToken } from './state-mocks';
 
 export function partialMockNotification(

@@ -26,61 +26,26 @@ describe('renderer/components/settings/SettingsFooter.tsx', () => {
     process.env = originalEnv;
   });
 
-  describe('app version', () => {
-    it('should show production app version', async () => {
-      process.env = {
-        ...originalEnv,
-        NODE_ENV: 'production',
-      };
-
-      await act(async () => {
-        render(
-          <AppContext.Provider
-            value={{
-              auth: mockAuth,
-              settings: mockSettings,
-            }}
-          >
-            <MemoryRouter>
-              <SettingsFooter />
-            </MemoryRouter>
-          </AppContext.Provider>,
-        );
-      });
-
-      expect(screen.getByTestId('settings-release-notes')).toMatchSnapshot();
+  it('should show app version', async () => {
+    await act(async () => {
+      render(
+        <AppContext.Provider
+          value={{
+            auth: mockAuth,
+            settings: mockSettings,
+          }}
+        >
+          <MemoryRouter>
+            <SettingsFooter />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
     });
 
-    it('should show development app version', async () => {
-      process.env = {
-        ...originalEnv,
-        NODE_ENV: 'development',
-      };
-
-      await act(async () => {
-        render(
-          <AppContext.Provider
-            value={{
-              auth: mockAuth,
-              settings: mockSettings,
-            }}
-          >
-            <MemoryRouter>
-              <SettingsFooter />
-            </MemoryRouter>
-          </AppContext.Provider>,
-        );
-      });
-
-      expect(screen.getByTestId('settings-release-notes')).toMatchSnapshot();
-    });
+    expect(screen.getByTestId('settings-release-notes')).toMatchSnapshot();
   });
 
   it('should open release notes', async () => {
-    process.env = {
-      ...originalEnv,
-      NODE_ENV: 'production',
-    };
     const openExternalLinkMock = jest
       .spyOn(comms, 'openExternalLink')
       .mockImplementation();

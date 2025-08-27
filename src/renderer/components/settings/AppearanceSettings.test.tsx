@@ -2,8 +2,6 @@ import { act, fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 
-import { webFrame } from 'electron';
-
 import {
   mockAuth,
   mockGitHubAppAccount,
@@ -72,7 +70,7 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
   });
 
   it('should update the zoom value when using CMD + and CMD -', async () => {
-    webFrame.getZoomLevel = jest.fn().mockReturnValue(-1);
+    window.gitify.zoom.getLevel = jest.fn().mockReturnValue(-1);
 
     await act(async () => {
       render(
@@ -98,9 +96,9 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
   });
 
   it('should update the zoom values when using the zoom buttons', async () => {
-    webFrame.getZoomLevel = jest.fn().mockReturnValue(0);
-    webFrame.setZoomLevel = jest.fn().mockImplementation((level) => {
-      webFrame.getZoomLevel = jest.fn().mockReturnValue(level);
+    window.gitify.zoom.getLevel = jest.fn().mockReturnValue(0);
+    window.gitify.zoom.setLevel = jest.fn().mockImplementation((level) => {
+      window.gitify.zoom.getLevel = jest.fn().mockReturnValue(level);
       fireEvent(window, new Event('resize'));
     });
 
