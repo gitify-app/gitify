@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`renderer/components/fields/Tooltip.tsx should display on mouse enter / leave 1`] = `
 <div
