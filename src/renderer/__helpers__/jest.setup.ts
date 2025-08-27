@@ -31,6 +31,11 @@ if (!CSS.supports) {
   CSS.supports = () => true;
 }
 
+// @ts-expect-error
+window.Audio = class Audio {
+  play() {}
+};
+
 window.gitify = {
   app: {
     version: jest.fn().mockResolvedValue('v0.0.1'),

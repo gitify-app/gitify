@@ -51,7 +51,7 @@ const browserWindowOpts: BrowserWindowConstructorOptions = {
   skipTaskbar: true, // Hide the app from the Windows taskbar
   webPreferences: {
     preload: preloadFilePath,
-    contextIsolation: false,
+    contextIsolation: true,
     nodeIntegration: false,
   },
 };
