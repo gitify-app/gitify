@@ -5,11 +5,11 @@ import { menubar } from 'menubar';
 import { APPLICATION } from '../shared/constants';
 import { namespacedEvent } from '../shared/events';
 import { logInfo, logWarn } from '../shared/logger';
-import { isLinux, isMacOS, isWindows } from '../shared/platform';
+import { isLinux, isWindows } from '../shared/platform';
 import { onFirstRunMaybe } from './first-run';
 import { TrayIcons } from './icons';
 import MenuBuilder from './menu';
-import Updater from './updater';
+import AppUpdater from './updater';
 
 log.initialize();
 
@@ -43,19 +43,14 @@ const protocol =
   process.env.NODE_ENV === 'development' ? 'gitify-dev' : 'gitify';
 app.setAsDefaultProtocolClient(protocol);
 
-if (isMacOS() || isWindows()) {
-  /**
-   * Electron Auto Updater only supports macOS and Windows
-   * https://github.com/electron/update-electron-app
-   */
-  const updater = new Updater(mb, menuBuilder);
-  updater.initialize();
-}
+const appUpdater = new AppUpdater(mb, menuBuilder);
 
 let shouldUseAlternateIdleIcon = false;
 
 app.whenReady().then(async () => {
   await onFirstRunMaybe();
+
+  appUpdater.start();
 
   mb.on('ready', () => {
     mb.app.setAppUserModelId(APPLICATION.ID);
