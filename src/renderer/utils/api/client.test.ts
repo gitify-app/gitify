@@ -35,11 +35,15 @@ describe('renderer/utils/api/client.ts', () => {
 
       expect(axios).toHaveBeenCalledWith({
         url: 'https://api.github.com/user',
+        headers: {
+          Accept: 'application/json',
+          Authorization: 'token decrypted',
+          'Cache-Control': '',
+          'Content-Type': 'application/json',
+        },
         method: 'GET',
         data: {},
       });
-
-      expect(axios.defaults.headers.common).toMatchSnapshot();
     });
 
     it('should fetch authenticated user - enterprise', async () => {
@@ -47,11 +51,15 @@ describe('renderer/utils/api/client.ts', () => {
 
       expect(axios).toHaveBeenCalledWith({
         url: 'https://example.com/api/v3/user',
+        headers: {
+          Accept: 'application/json',
+          Authorization: 'token decrypted',
+          'Cache-Control': '',
+          'Content-Type': 'application/json',
+        },
         method: 'GET',
         data: {},
       });
-
-      expect(axios.defaults.headers.common).toMatchSnapshot();
     });
   });
 
@@ -61,11 +69,15 @@ describe('renderer/utils/api/client.ts', () => {
 
       expect(axios).toHaveBeenCalledWith({
         url: 'https://api.github.com/notifications',
+        headers: {
+          Accept: 'application/json',
+          Authorization: 'token decrypted',
+          'Cache-Control': 'no-cache',
+          'Content-Type': 'application/json',
+        },
         method: 'HEAD',
         data: {},
       });
-
-      expect(axios.defaults.headers.common).toMatchSnapshot();
     });
 
     it('should fetch notifications head - enterprise', async () => {
@@ -73,11 +85,15 @@ describe('renderer/utils/api/client.ts', () => {
 
       expect(axios).toHaveBeenCalledWith({
         url: 'https://example.com/api/v3/notifications',
+        headers: {
+          Accept: 'application/json',
+          Authorization: 'token decrypted',
+          'Cache-Control': 'no-cache',
+          'Content-Type': 'application/json',
+        },
         method: 'HEAD',
         data: {},
       });
-
-      expect(axios.defaults.headers.common).toMatchSnapshot();
     });
   });
 
@@ -95,11 +111,15 @@ describe('renderer/utils/api/client.ts', () => {
 
       expect(axios).toHaveBeenCalledWith({
         url: 'https://api.github.com/notifications?participating=true',
+        headers: {
+          Accept: 'application/json',
+          Authorization: 'token decrypted',
+          'Cache-Control': 'no-cache',
+          'Content-Type': 'application/json',
+        },
         method: 'GET',
         data: {},
       });
-
-      expect(axios.defaults.headers.common).toMatchSnapshot();
     });
 
     it('should list notifications for user - github cloud - fetchAllNotifications false', async () => {
@@ -115,11 +135,15 @@ describe('renderer/utils/api/client.ts', () => {
 
       expect(axios).toHaveBeenCalledWith({
         url: 'https://api.github.com/notifications?participating=true',
+        headers: {
+          Accept: 'application/json',
+          Authorization: 'token decrypted',
+          'Cache-Control': 'no-cache',
+          'Content-Type': 'application/json',
+        },
         method: 'GET',
         data: {},
       });
-
-      expect(axios.defaults.headers.common).toMatchSnapshot();
     });
 
     it('should list notifications for user - github enterprise server', async () => {
@@ -134,11 +158,15 @@ describe('renderer/utils/api/client.ts', () => {
 
       expect(axios).toHaveBeenCalledWith({
         url: 'https://github.gitify.io/api/v3/notifications?participating=true',
+        headers: {
+          Accept: 'application/json',
+          Authorization: 'token decrypted',
+          'Cache-Control': 'no-cache',
+          'Content-Type': 'application/json',
+        },
         method: 'GET',
         data: {},
       });
-
-      expect(axios.defaults.headers.common).toMatchSnapshot();
     });
   });
 
@@ -152,11 +180,15 @@ describe('renderer/utils/api/client.ts', () => {
 
       expect(axios).toHaveBeenCalledWith({
         url: `https://api.github.com/notifications/threads/${mockThreadId}`,
+        headers: {
+          Accept: 'application/json',
+          Authorization: 'token decrypted',
+          'Cache-Control': '',
+          'Content-Type': 'application/json',
+        },
         method: 'PATCH',
         data: {},
       });
-
-      expect(axios.defaults.headers.common).toMatchSnapshot();
     });
 
     it('should mark notification thread as read - enterprise', async () => {
@@ -168,11 +200,15 @@ describe('renderer/utils/api/client.ts', () => {
 
       expect(axios).toHaveBeenCalledWith({
         url: `https://example.com/api/v3/notifications/threads/${mockThreadId}`,
+        headers: {
+          Accept: 'application/json',
+          Authorization: 'token decrypted',
+          'Cache-Control': '',
+          'Content-Type': 'application/json',
+        },
         method: 'PATCH',
         data: {},
       });
-
-      expect(axios.defaults.headers.common).toMatchSnapshot();
     });
   });
 
@@ -186,11 +222,15 @@ describe('renderer/utils/api/client.ts', () => {
 
       expect(axios).toHaveBeenCalledWith({
         url: `https://api.github.com/notifications/threads/${mockThreadId}`,
+        headers: {
+          Accept: 'application/json',
+          Authorization: 'token decrypted',
+          'Cache-Control': '',
+          'Content-Type': 'application/json',
+        },
         method: 'DELETE',
         data: {},
       });
-
-      expect(axios.defaults.headers.common).toMatchSnapshot();
     });
 
     it('should mark notification thread as done - enterprise', async () => {
@@ -202,11 +242,15 @@ describe('renderer/utils/api/client.ts', () => {
 
       expect(axios).toHaveBeenCalledWith({
         url: `https://example.com/api/v3/notifications/threads/${mockThreadId}`,
+        headers: {
+          Accept: 'application/json',
+          Authorization: 'token decrypted',
+          'Cache-Control': '',
+          'Content-Type': 'application/json',
+        },
         method: 'DELETE',
         data: {},
       });
-
-      expect(axios.defaults.headers.common).toMatchSnapshot();
     });
   });
 
@@ -220,11 +264,15 @@ describe('renderer/utils/api/client.ts', () => {
 
       expect(axios).toHaveBeenCalledWith({
         url: `https://api.github.com/notifications/threads/${mockThreadId}/subscription`,
+        headers: {
+          Accept: 'application/json',
+          Authorization: 'token decrypted',
+          'Cache-Control': '',
+          'Content-Type': 'application/json',
+        },
         method: 'PUT',
         data: { ignored: true },
       });
-
-      expect(axios.defaults.headers.common).toMatchSnapshot();
     });
 
     it('should ignore notification thread subscription - enterprise', async () => {
@@ -236,11 +284,15 @@ describe('renderer/utils/api/client.ts', () => {
 
       expect(axios).toHaveBeenCalledWith({
         url: `https://example.com/api/v3/notifications/threads/${mockThreadId}/subscription`,
+        headers: {
+          Accept: 'application/json',
+          Authorization: 'token decrypted',
+          'Cache-Control': '',
+          'Content-Type': 'application/json',
+        },
         method: 'PUT',
         data: { ignored: true },
       });
-
-      expect(axios.defaults.headers.common).toMatchSnapshot();
     });
   });
 

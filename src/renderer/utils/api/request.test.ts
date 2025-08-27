@@ -22,9 +22,12 @@ describe('renderer/utils/api/request.ts', () => {
       method,
       url,
       data,
+      headers: {
+        Accept: 'application/json',
+        'Cache-Control': '',
+        'Content-Type': 'application/json',
+      },
     });
-
-    expect(axios.defaults.headers.common).toMatchSnapshot();
   });
 
   it('should make a request with the correct parameters and default data', async () => {
@@ -35,9 +38,12 @@ describe('renderer/utils/api/request.ts', () => {
       method,
       url,
       data,
+      headers: {
+        Accept: 'application/json',
+        'Cache-Control': '',
+        'Content-Type': 'application/json',
+      },
     });
-
-    expect(axios.defaults.headers.common).toMatchSnapshot();
   });
 });
 
@@ -57,9 +63,13 @@ describe('apiRequestAuth', () => {
       method,
       url,
       data,
+      headers: {
+        Accept: 'application/json',
+        Authorization: 'token decrypted',
+        'Cache-Control': '',
+        'Content-Type': 'application/json',
+      },
     });
-
-    expect(axios.defaults.headers.common).toMatchSnapshot();
   });
 
   it('should make an authenticated request with the correct parameters and default data', async () => {
@@ -71,8 +81,12 @@ describe('apiRequestAuth', () => {
       method,
       url,
       data,
+      headers: {
+        Accept: 'application/json',
+        Authorization: 'token decrypted',
+        'Cache-Control': '',
+        'Content-Type': 'application/json',
+      },
     });
-
-    expect(axios.defaults.headers.common).toMatchSnapshot();
   });
 });
