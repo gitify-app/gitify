@@ -14,9 +14,9 @@ import { IconButton, Stack } from '@primer/react';
 
 import { APPLICATION } from '../../shared/constants';
 
+import { Constants } from '../constants';
 import { AppContext } from '../context/App';
 import { quitApp } from '../utils/comms';
-import { Constants } from '../utils/constants';
 import {
   openGitHubIssues,
   openGitHubNotifications,

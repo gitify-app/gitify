@@ -1,12 +1,7 @@
-import type { ClientID, ClientSecret, Hostname, Link } from '../types';
+import type { ClientID, ClientSecret, Hostname, Link } from './types';
 
 export const Constants = {
-  REPO_SLUG: 'gitify-app/gitify',
-
-  // Storage
   STORAGE_KEY: 'gitify-storage',
-
-  NOTIFICATION_SOUND: 'clearly.mp3',
 
   // GitHub OAuth Scopes
   OAUTH_SCOPES: {
@@ -25,10 +20,9 @@ export const Constants = {
 
   ALL_READ_EMOJIS: ['🎉', '🎊', '🥳', '👏', '🙌', '😎', '🏖️', '🚀', '✨', '🏆'],
 
-  FETCH_NOTIFICATIONS_INTERVAL: 60000,
-  REFRESH_ACCOUNTS_INTERVAL: 3600000,
+  FETCH_NOTIFICATIONS_INTERVAL_MS: 60 * 1000, // 1 minute
 
-  DEFAULT_KEYBOARD_SHORTCUT: 'CommandOrControl+Shift+G',
+  REFRESH_ACCOUNTS_INTERVAL_MS: 60 * 60 * 1000, // 1 hour
 
   // GitHub Docs
   GITHUB_DOCS: {

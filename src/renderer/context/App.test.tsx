@@ -2,12 +2,12 @@ import { act, fireEvent, render, waitFor } from '@testing-library/react';
 import { useContext } from 'react';
 
 import { mockAuth, mockSettings } from '../__mocks__/state-mocks';
+import { Constants } from '../constants';
 import { useNotifications } from '../hooks/useNotifications';
 import type { AuthState, Hostname, SettingsState, Token } from '../types';
 import { mockSingleNotification } from '../utils/api/__mocks__/response-mocks';
 import * as apiRequests from '../utils/api/request';
 import * as comms from '../utils/comms';
-import { Constants } from '../utils/constants';
 import * as notifications from '../utils/notifications/notifications';
 import * as storage from '../utils/storage';
 import { AppContext, AppProvider } from './App';
@@ -77,19 +77,19 @@ describe('renderer/context/App.tsx', () => {
       );
 
       act(() => {
-        jest.advanceTimersByTime(Constants.FETCH_NOTIFICATIONS_INTERVAL);
+        jest.advanceTimersByTime(Constants.FETCH_NOTIFICATIONS_INTERVAL_MS);
         return;
       });
       expect(fetchNotificationsMock).toHaveBeenCalledTimes(2);
 
       act(() => {
-        jest.advanceTimersByTime(Constants.FETCH_NOTIFICATIONS_INTERVAL);
+        jest.advanceTimersByTime(Constants.FETCH_NOTIFICATIONS_INTERVAL_MS);
         return;
       });
       expect(fetchNotificationsMock).toHaveBeenCalledTimes(3);
 
       act(() => {
-        jest.advanceTimersByTime(Constants.FETCH_NOTIFICATIONS_INTERVAL);
+        jest.advanceTimersByTime(Constants.FETCH_NOTIFICATIONS_INTERVAL_MS);
         return;
       });
       expect(fetchNotificationsMock).toHaveBeenCalledTimes(4);

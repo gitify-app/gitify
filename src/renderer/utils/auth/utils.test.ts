@@ -1,5 +1,3 @@
-import { ipcRenderer } from 'electron';
-
 import type { AxiosPromise, AxiosResponse } from 'axios';
 import axios from 'axios';
 import nock from 'nock';
@@ -36,7 +34,7 @@ describe('renderer/utils/auth/utils.ts', () => {
 
     it('should call authGitHub - success auth flow', async () => {
       const mockIpcRendererOn = (
-        jest.spyOn(ipcRenderer, 'on') as jest.Mock
+        jest.spyOn(window.gitify, 'onAuthCallback') as jest.Mock
       ).mockImplementation((event, callback) => {
         if (event === 'gitify:auth-callback') {
           callback(null, 'gitify://auth?code=123-456');
@@ -62,7 +60,7 @@ describe('renderer/utils/auth/utils.ts', () => {
 
     it('should call authGitHub - success oauth flow', async () => {
       const mockIpcRendererOn = (
-        jest.spyOn(ipcRenderer, 'on') as jest.Mock
+        jest.spyOn(window.gitify, 'onAuthCallback') as jest.Mock
       ).mockImplementation((event, callback) => {
         if (event === 'gitify:auth-callback') {
           callback(null, 'gitify://oauth?code=123-456');
@@ -92,7 +90,7 @@ describe('renderer/utils/auth/utils.ts', () => {
 
     it('should call authGitHub - failure', async () => {
       const mockIpcRendererOn = (
-        jest.spyOn(ipcRenderer, 'on') as jest.Mock
+        jest.spyOn(window.gitify, 'onAuthCallback') as jest.Mock
       ).mockImplementation((event, callback) => {
         if (event === 'gitify:auth-callback') {
           callback(

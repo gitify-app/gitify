@@ -16,7 +16,6 @@ import { isLinux, isMacOS } from '../../../shared/platform';
 import { AppContext } from '../../context/App';
 import { defaultSettings } from '../../context/defaults';
 import { OpenPreference } from '../../types';
-import { Constants } from '../../utils/constants';
 import { Checkbox } from '../fields/Checkbox';
 import { RadioGroup } from '../fields/RadioGroup';
 import { VolumeDownIcon } from '../icons/VolumeDownIcon';
@@ -55,7 +54,7 @@ export const SystemSettings: FC = () => {
             <Box>
               When enabled you can use the hotkeys{' '}
               <Text as="strong" className="text-gitify-caution">
-                {Constants.DEFAULT_KEYBOARD_SHORTCUT}
+                {APPLICATION.DEFAULT_KEYBOARD_SHORTCUT}
               </Text>{' '}
               to show or hide {APPLICATION.NAME}.
             </Box>

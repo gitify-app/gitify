@@ -1,7 +1,7 @@
 import type { AxiosResponse } from 'axios';
 
+import { Constants } from '../../constants';
 import type { Hostname } from '../../types';
-import { Constants } from '../constants';
 import { isEnterpriseServerHost } from '../helpers';
 
 export function getGitHubAPIBaseUrl(hostname: Hostname): URL {

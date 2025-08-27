@@ -1,3 +1,4 @@
+import { Constants } from '../constants';
 import {
   type Account,
   type AppearanceSettingsState,
@@ -15,7 +16,6 @@ import {
   Theme,
   type Token,
 } from '../types';
-import { Constants } from '../utils/constants';
 
 export const mockGitifyUser: GitifyUser = {
   login: 'octocat',

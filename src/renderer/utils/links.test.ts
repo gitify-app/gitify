@@ -1,11 +1,11 @@
 import { partialMockUser } from '../__mocks__/partial-mocks';
 import { mockGitHubCloudAccount } from '../__mocks__/state-mocks';
+import { Constants } from '../constants';
 import type { Hostname, Link } from '../types';
 import type { Repository } from '../typesGitHub';
 import { mockSingleNotification } from './api/__mocks__/response-mocks';
 import * as authUtils from './auth/utils';
 import * as comms from './comms';
-import { Constants } from './constants';
 import * as helpers from './helpers';
 import {
   openAccountProfile,

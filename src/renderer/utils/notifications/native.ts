@@ -1,14 +1,8 @@
-import path from 'node:path';
-
 import { APPLICATION } from '../../../shared/constants';
-import { isWindows } from '../../../shared/platform';
 
 import type { AccountNotifications, GitifyState } from '../../types';
-import { Notification } from '../../typesGitHub';
+import type { Notification } from '../../typesGitHub';
 import { getAccountUUID } from '../auth/utils';
-import { hideWindow, showWindow } from '../comms';
-import { Constants } from '../constants';
-import { openNotification } from '../links';
 import { setTrayIconColor } from './notifications';
 
 export const triggerNativeNotifications = (
@@ -60,43 +54,27 @@ export const triggerNativeNotifications = (
 export const raiseNativeNotification = (notifications: Notification[]) => {
   let title: string;
   let body: string;
+  const url: string = null;
 
   if (notifications.length === 1) {
     const notification = notifications[0];
-    title = isWindows() ? '' : notification.repository.full_name;
+    title = window.gitify.platform.isWindows()
+      ? ''
+      : notification.repository.full_name;
     body = notification.subject.title;
+    // TODO FIXME = set url to notification url
   } else {
     title = APPLICATION.NAME;
     body = `You have ${notifications.length} notifications.`;
   }
 
-  const nativeNotification = new Notification(title, {
-    body,
-    silent: true,
-  });
-
-  nativeNotification.onclick = () => {
-    if (notifications.length === 1) {
-      hideWindow();
-      openNotification(notifications[0]);
-    } else {
-      showWindow();
-    }
-  };
-
-  return nativeNotification;
+  return window.gitify.raiseNativeNotification(title, body, url);
 };
 
-export const raiseSoundNotification = (volume: number) => {
-  const audio = new Audio(
-    path.join(
-      __dirname,
-      '..',
-      'assets',
-      'sounds',
-      Constants.NOTIFICATION_SOUND,
-    ),
-  );
+export const raiseSoundNotification = async (volume: number) => {
+  const path = await window.gitify.notificationSoundPath();
+
+  const audio = new Audio(path);
   audio.volume = volume;
   audio.play();
 };
