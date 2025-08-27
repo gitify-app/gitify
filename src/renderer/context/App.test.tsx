@@ -100,7 +100,7 @@ describe('renderer/context/App.tsx', () => {
         const { fetchNotifications } = useContext(AppContext);
 
         return (
-          <button type="button" onClick={fetchNotifications}>
+          <button onClick={fetchNotifications} type="button">
             Test Case
           </button>
         );
@@ -121,8 +121,8 @@ describe('renderer/context/App.tsx', () => {
 
         return (
           <button
-            type="button"
             onClick={() => markNotificationsAsRead([mockSingleNotification])}
+            type="button"
           >
             Test Case
           </button>
@@ -146,8 +146,8 @@ describe('renderer/context/App.tsx', () => {
 
         return (
           <button
-            type="button"
             onClick={() => markNotificationsAsDone([mockSingleNotification])}
+            type="button"
           >
             Test Case
           </button>
@@ -171,8 +171,8 @@ describe('renderer/context/App.tsx', () => {
 
         return (
           <button
-            type="button"
             onClick={() => unsubscribeNotification(mockSingleNotification)}
+            type="button"
           >
             Test Case
           </button>
@@ -209,13 +209,13 @@ describe('renderer/context/App.tsx', () => {
 
         return (
           <button
-            type="button"
             onClick={() =>
               loginWithPersonalAccessToken({
                 hostname: 'github.com' as Hostname,
                 token: '123-456' as Token,
               })
             }
+            type="button"
           >
             Test Case
           </button>
@@ -263,8 +263,8 @@ describe('renderer/context/App.tsx', () => {
 
         return (
           <button
-            type="button"
             onClick={() => updateSetting('participating', true)}
+            type="button"
           >
             Test Case
           </button>
@@ -299,8 +299,8 @@ describe('renderer/context/App.tsx', () => {
 
         return (
           <button
-            type="button"
             onClick={() => updateSetting('openAtStartup', true)}
+            type="button"
           >
             Test Case
           </button>
@@ -335,7 +335,7 @@ describe('renderer/context/App.tsx', () => {
         const { clearFilters } = useContext(AppContext);
 
         return (
-          <button type="button" onClick={() => clearFilters()}>
+          <button onClick={() => clearFilters()} type="button">
             Test Case
           </button>
         );
@@ -370,7 +370,7 @@ describe('renderer/context/App.tsx', () => {
         const { resetSettings } = useContext(AppContext);
 
         return (
-          <button type="button" onClick={() => resetSettings()}>
+          <button onClick={() => resetSettings()} type="button">
             Test Case
           </button>
         );

@@ -23,6 +23,7 @@ import {
 } from '@primer/react';
 
 import { logError } from '../../shared/logger';
+
 import { AvatarWithFallback } from '../components/avatars/AvatarWithFallback';
 import { Contents } from '../components/layout/Contents';
 import { Page } from '../components/layout/Page';
@@ -121,37 +122,37 @@ export const AccountsRoute: FC = () => {
 
           return (
             <Box
-              key={accountUUID}
               className="rounded-md p-2 mb-4 bg-gitify-accounts"
+              key={accountUUID}
             >
-              <Stack direction="vertical" align="stretch">
-                <Stack direction="horizontal" align="start">
+              <Stack align="stretch" direction="vertical">
+                <Stack align="start" direction="horizontal">
                   <Button
-                    title="Open account profile"
-                    onClick={() => openAccountProfile(account)}
                     data-testid="account-profile"
+                    onClick={() => openAccountProfile(account)}
+                    title="Open account profile"
                   >
                     <AvatarWithFallback
-                      src={account.user.avatar}
                       alt={account.user.login}
                       name={`@${account.user.login}`}
                       size={Size.XLARGE}
+                      src={account.user.avatar}
                     />
                   </Button>
                 </Stack>
 
                 <Stack
+                  align="start"
                   direction="horizontal"
                   justify="space-between"
-                  align="start"
                 >
                   <Box className="pl-4 pb-2 text-xs">
                     <Stack direction="vertical" gap="condensed">
                       <Box hidden={!account.user.name}>
                         <Stack
+                          align="center"
                           direction="horizontal"
                           gap="condensed"
-                          align="center"
                         >
                           <PersonIcon />
                           <Text>{account.user?.name}</Text>
@@ -159,15 +160,15 @@ export const AccountsRoute: FC = () => {
                       </Box>
 
                       <Box
-                        title="Open host"
-                        onClick={() => openHost(account.hostname)}
                         className="cursor-pointer"
                         data-testid="account-host"
+                        onClick={() => openHost(account.hostname)}
+                        title="Open host"
                       >
                         <Stack
+                          align="center"
                           direction="horizontal"
                           gap="condensed"
-                          align="center"
                         >
                           <PlatformIcon />
                           <Text>{account.hostname}</Text>
@@ -175,15 +176,15 @@ export const AccountsRoute: FC = () => {
                       </Box>
 
                       <Box
-                        title="Open developer settings"
-                        onClick={() => openDeveloperSettings(account)}
                         className="cursor-pointer"
                         data-testid="account-developer-settings"
+                        onClick={() => openDeveloperSettings(account)}
+                        title="Open developer settings"
                       >
                         <Stack
+                          align="center"
                           direction="horizontal"
                           gap="condensed"
-                          align="center"
                         >
                           <AuthMethodIcon />
                           <Text>{account.method}</Text>
@@ -194,44 +195,44 @@ export const AccountsRoute: FC = () => {
 
                   <Stack direction="horizontal" gap="condensed">
                     <IconButton
-                      icon={AlertFillIcon}
                       aria-label={`This account is missing one or more required scopes: [${formatRecommendedOAuthScopes()}] or [${formatAlternateOAuthScopes()}]`}
-                      style={{ color: 'orange' }}
-                      onClick={() => openDeveloperSettings(account)}
-                      size="small"
-                      data-testid="account-missing-scopes"
                       className={
                         account.hasRequiredScopes ? 'invisible' : 'visible'
                       }
+                      data-testid="account-missing-scopes"
+                      icon={AlertFillIcon}
+                      onClick={() => openDeveloperSettings(account)}
+                      size="small"
+                      style={{ color: 'orange' }}
                     />
 
                     <IconButton
-                      icon={i === 0 ? StarFillIcon : StarIcon}
                       aria-label={
                         i === 0 ? 'Primary account' : 'Set as primary account'
                       }
-                      variant={i === 0 ? 'primary' : 'default'}
+                      data-testid="account-set-primary"
+                      icon={i === 0 ? StarFillIcon : StarIcon}
                       onClick={() => setAsPrimaryAccount(account)}
                       size="small"
-                      data-testid="account-set-primary"
+                      variant={i === 0 ? 'primary' : 'default'}
                     />
 
                     <IconButton
-                      icon={SyncIcon}
                       aria-label={`Refresh ${account.user.login}`}
+                      data-testid="account-refresh"
+                      icon={SyncIcon}
+                      loading={loadingStates[accountUUID] || false}
                       onClick={() => handleRefresh(account)}
                       size="small"
-                      loading={loadingStates[accountUUID] || false}
-                      data-testid="account-refresh"
                     />
 
                     <IconButton
-                      icon={SignOutIcon}
                       aria-label={`Logout ${account.user.login}`}
-                      variant="danger"
+                      data-testid="account-logout"
+                      icon={SignOutIcon}
                       onClick={() => logoutAccount(account)}
                       size="small"
-                      data-testid="account-logout"
+                      variant="danger"
                     />
                   </Stack>
                 </Stack>
@@ -244,7 +245,7 @@ export const AccountsRoute: FC = () => {
       <Footer justify="end">
         <ActionMenu>
           <ActionMenu.Anchor>
-            <Button leadingVisual={PersonAddIcon} data-testid="account-add-new">
+            <Button data-testid="account-add-new" leadingVisual={PersonAddIcon}>
               Add new account
             </Button>
           </ActionMenu.Anchor>
@@ -252,8 +253,8 @@ export const AccountsRoute: FC = () => {
           <ActionMenu.Overlay width="medium">
             <ActionList>
               <ActionList.Item
-                onSelect={() => loginWithGitHub()}
                 data-testid="account-add-github"
+                onSelect={() => loginWithGitHub()}
               >
                 <ActionList.LeadingVisual>
                   <MarkGithubIcon />
@@ -262,8 +263,8 @@ export const AccountsRoute: FC = () => {
               </ActionList.Item>
 
               <ActionList.Item
-                onSelect={() => loginWithPersonalAccessToken()}
                 data-testid="account-add-pat"
+                onSelect={() => loginWithPersonalAccessToken()}
               >
                 <ActionList.LeadingVisual>
                   <KeyIcon />
@@ -272,8 +273,8 @@ export const AccountsRoute: FC = () => {
               </ActionList.Item>
 
               <ActionList.Item
-                onSelect={() => loginWithOAuthApp()}
                 data-testid="account-add-oauth-app"
+                onSelect={() => loginWithOAuthApp()}
               >
                 <ActionList.LeadingVisual>
                   <PersonIcon />

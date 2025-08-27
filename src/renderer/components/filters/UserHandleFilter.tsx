@@ -121,7 +121,7 @@ export const UserHandleFilter: FC = () => {
 
   return (
     <fieldset id="filter-user-handles">
-      <Stack direction="horizontal" gap="condensed" align="baseline">
+      <Stack align="baseline" direction="horizontal" gap="condensed">
         <Title icon={MentionIcon}>Handles</Title>
         <Tooltip
           name="tooltip-filter-handles"
@@ -135,56 +135,56 @@ export const UserHandleFilter: FC = () => {
       </Stack>
       <Stack direction="vertical" gap="condensed">
         <Stack
-          direction="horizontal"
-          gap="condensed"
           align="center"
           className="text-sm"
+          direction="horizontal"
+          gap="condensed"
         >
           <Box className="font-medium text-gitify-font w-28">
-            <Stack direction="horizontal" gap="condensed" align="center">
+            <Stack align="center" direction="horizontal" gap="condensed">
               <CheckCircleFillIcon className={IconColor.GREEN} />
               <Text>Include:</Text>
             </Stack>
           </Box>
           <TextInputWithTokens
-            title="Include handles"
-            tokens={includeHandles}
-            onTokenRemove={removeIncludeHandleToken}
-            onKeyDown={includeHandlesKeyDown}
-            onBlur={addIncludeHandlesToken}
-            size="small"
+            block
             disabled={
               !settings.detailedNotifications ||
               hasExcludeHandleFilters(settings)
             }
-            block
+            onBlur={addIncludeHandlesToken}
+            onKeyDown={includeHandlesKeyDown}
+            onTokenRemove={removeIncludeHandleToken}
+            size="small"
+            title="Include handles"
+            tokens={includeHandles}
           />
         </Stack>
 
         <Stack
-          direction="horizontal"
-          gap="condensed"
           align="center"
           className="text-sm"
+          direction="horizontal"
+          gap="condensed"
         >
           <Box className="font-medium text-gitify-font w-28">
-            <Stack direction="horizontal" gap="condensed" align="center">
+            <Stack align="center" direction="horizontal" gap="condensed">
               <NoEntryFillIcon className={IconColor.RED} />
               <Text>Exclude:</Text>
             </Stack>
           </Box>
           <TextInputWithTokens
-            title="Exclude handles"
-            tokens={excludeHandles}
-            onTokenRemove={removeExcludeHandleToken}
-            onKeyDown={excludeHandlesKeyDown}
-            onBlur={addExcludeHandlesToken}
-            size="small"
+            block
             disabled={
               !settings.detailedNotifications ||
               hasIncludeHandleFilters(settings)
             }
-            block
+            onBlur={addExcludeHandlesToken}
+            onKeyDown={excludeHandlesKeyDown}
+            onTokenRemove={removeExcludeHandleToken}
+            size="small"
+            title="Exclude handles"
+            tokens={excludeHandles}
           />
         </Stack>
       </Stack>

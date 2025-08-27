@@ -4,6 +4,7 @@ import axios, { AxiosError } from 'axios';
 import nock from 'nock';
 
 import * as logger from '../../shared/logger';
+
 import {
   mockAuth,
   mockGitHubCloudAccount,

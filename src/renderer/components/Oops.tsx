@@ -20,9 +20,9 @@ export const Oops: FC<IOops> = ({ error, fullHeight = true }: IOops) => {
   return (
     <EmojiSplash
       emoji={emoji}
+      fullHeight={fullHeight}
       heading={err.title}
       subHeadings={err.descriptions}
-      fullHeight={fullHeight}
     />
   );
 };

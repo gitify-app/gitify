@@ -6,6 +6,7 @@ import semver from 'semver';
 import { APPLICATION } from '../../../shared/constants';
 import { namespacedEvent } from '../../../shared/events';
 import { logError, logInfo, logWarn } from '../../../shared/logger';
+
 import type {
   Account,
   AuthCode,

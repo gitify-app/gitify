@@ -5,6 +5,7 @@ import type { Menubar } from 'menubar';
 
 import { APPLICATION } from '../shared/constants';
 import { logError, logInfo } from '../shared/logger';
+
 import type MenuBuilder from './menu';
 
 /**

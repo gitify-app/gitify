@@ -2,6 +2,7 @@ import axios from 'axios';
 import nock from 'nock';
 
 import * as logger from '../../../shared/logger';
+
 import { mockSingleAccountNotifications } from '../../__mocks__/notifications-mocks';
 import { partialMockNotification } from '../../__mocks__/partial-mocks';
 import { mockSettings } from '../../__mocks__/state-mocks';

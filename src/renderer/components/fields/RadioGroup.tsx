@@ -16,34 +16,34 @@ export interface IRadioGroup {
 export const RadioGroup: FC<IRadioGroup> = (props: IRadioGroup) => {
   return (
     <Stack
-      direction="horizontal"
-      gap="condensed"
       align="center"
       className="text-sm"
+      direction="horizontal"
+      gap="condensed"
     >
-      <FieldLabel name={props.name} label={props.label} />
+      <FieldLabel label={props.label} name={props.name} />
 
       {props.options.map((item) => {
         const name = `radio-${props.name}-${item.value.toLowerCase()}`;
 
         return (
           <Stack
+            align="center"
             direction="horizontal"
             gap="condensed"
-            align="center"
             key={name}
           >
             <input
-              type="radio"
+              checked={item.value === props.value}
               className="size-4 cursor-pointer"
+              data-testid={name}
               id={name}
               name={props.name}
-              value={item.value}
               onChange={props.onChange}
-              checked={item.value === props.value}
-              data-testid={name}
+              type="radio"
+              value={item.value}
             />
-            <FieldLabel name={name} label={item.label} />
+            <FieldLabel label={item.label} name={name} />
           </Stack>
         );
       })}

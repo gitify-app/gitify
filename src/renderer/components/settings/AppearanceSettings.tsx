@@ -51,19 +51,19 @@ export const AppearanceSettings: FC = () => {
 
       <Stack direction="vertical" gap="condensed">
         <Stack
-          direction="horizontal"
-          gap="condensed"
           align="center"
           className="text-sm"
+          direction="horizontal"
+          gap="condensed"
         >
-          <FieldLabel name="theme" label="Theme:" />
+          <FieldLabel label="Theme:" name="theme" />
           <Select
+            data-testid="settings-theme"
             id="theme"
-            value={settings.theme}
             onChange={(evt) =>
               updateSetting('theme', evt.target.value as Theme)
             }
-            data-testid="settings-theme"
+            value={settings.theme}
           >
             <Select.OptGroup label="System">
               <Select.Option value={Theme.SYSTEM}>System</Select.Option>
@@ -91,9 +91,9 @@ export const AppearanceSettings: FC = () => {
         </Stack>
 
         <Checkbox
-          name="increaseContrast"
-          label="Increase contrast"
           checked={settings.increaseContrast}
+          label="Increase contrast"
+          name="increaseContrast"
           onChange={(evt) =>
             updateSetting('increaseContrast', evt.target.checked)
           }
@@ -101,72 +101,72 @@ export const AppearanceSettings: FC = () => {
         />
 
         <Stack
-          direction="horizontal"
-          gap="condensed"
           align="center"
           className="text-sm"
+          direction="horizontal"
+          gap="condensed"
         >
-          <FieldLabel name="zoom" label="Zoom:" />
+          <FieldLabel label="Zoom:" name="zoom" />
 
           <ButtonGroup className="ml-2">
             <IconButton
               aria-label="Zoom out"
-              size="small"
+              data-testid="settings-zoom-out"
               icon={ZoomOutIcon}
-              unsafeDisableTooltip={true}
               onClick={() =>
                 zoomPercentage > 0 &&
                 webFrame.setZoomLevel(
                   zoomPercentageToLevel(zoomPercentage - 10),
                 )
               }
-              data-testid="settings-zoom-out"
+              size="small"
+              unsafeDisableTooltip={true}
             />
 
-            <Button aria-label="Zoom percentage" size="small" disabled>
+            <Button aria-label="Zoom percentage" disabled size="small">
               {zoomPercentage.toFixed(0)}%
             </Button>
 
             <IconButton
               aria-label="Zoom in"
-              size="small"
+              data-testid="settings-zoom-in"
               icon={ZoomInIcon}
-              unsafeDisableTooltip={true}
               onClick={() =>
                 zoomPercentage < 120 &&
                 webFrame.setZoomLevel(
                   zoomPercentageToLevel(zoomPercentage + 10),
                 )
               }
-              data-testid="settings-zoom-in"
+              size="small"
+              unsafeDisableTooltip={true}
             />
 
             <IconButton
               aria-label="Reset zoom"
-              size="small"
-              variant="danger"
-              icon={SyncIcon}
-              unsafeDisableTooltip={true}
-              onClick={() => webFrame.setZoomLevel(0)}
               data-testid="settings-zoom-reset"
+              icon={SyncIcon}
+              onClick={() => webFrame.setZoomLevel(0)}
+              size="small"
+              unsafeDisableTooltip={true}
+              variant="danger"
             />
           </ButtonGroup>
         </Stack>
 
         <Checkbox
-          name="showAccountHeader"
-          label="Show account header"
           checked={settings.showAccountHeader}
-          visible={!hasMultipleAccounts(auth)}
+          label="Show account header"
+          name="showAccountHeader"
           onChange={(evt) =>
             updateSetting('showAccountHeader', evt.target.checked)
           }
+          visible={!hasMultipleAccounts(auth)}
         />
 
         <Checkbox
-          name="wrapNotificationTitle"
-          label="Show full notification title"
           checked={settings.wrapNotificationTitle}
+          label="Show full notification title"
+          name="wrapNotificationTitle"
           onChange={(evt) =>
             updateSetting('wrapNotificationTitle', evt.target.checked)
           }

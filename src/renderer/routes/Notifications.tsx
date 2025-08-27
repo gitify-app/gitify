@@ -41,10 +41,10 @@ export const NotificationsRoute: FC = () => {
       <Contents paddingHorizontal={false}>
         {notifications.map((accountNotifications) => (
           <AccountNotifications
-            key={getAccountUUID(accountNotifications.account)}
             account={accountNotifications.account}
-            notifications={accountNotifications.notifications}
             error={accountNotifications.error}
+            key={getAccountUUID(accountNotifications.account)}
+            notifications={accountNotifications.notifications}
             showAccountHeader={
               hasMultipleAccounts || settings.showAccountHeader
             }

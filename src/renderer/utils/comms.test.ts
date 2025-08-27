@@ -1,6 +1,7 @@
 import { ipcRenderer, shell } from 'electron';
 
 import { namespacedEvent } from '../../shared/events';
+
 import { mockSettings } from '../__mocks__/state-mocks';
 import type { Link } from '../types';
 import {

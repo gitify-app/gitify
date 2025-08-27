@@ -19,6 +19,7 @@ import {
 import { Banner } from '@primer/react/experimental';
 
 import { logError } from '../../shared/logger';
+
 import { Contents } from '../components/layout/Contents';
 import { Page } from '../components/layout/Page';
 import { Footer } from '../components/primitives/Footer';
@@ -131,9 +132,7 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
       <Contents>
         {hasErrors && (
           <Banner
-            title="Form errors"
-            variant="critical"
-            hideTitle
+            data-testid="login-errors"
             description={
               <Text color="danger.fg">
                 <Stack direction="vertical" gap="condensed">
@@ -145,7 +144,9 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
                 </Stack>
               </Text>
             }
-            data-testid="login-errors"
+            hideTitle
+            title="Form errors"
+            variant="critical"
           />
         )}
         <Stack direction="vertical" gap="normal">
@@ -157,31 +158,31 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
               </Text>
             </FormControl.Caption>
             <TextInput
-              name="hostname"
-              placeholder="github.com"
-              value={formData.hostname}
-              onChange={handleInputChange}
               aria-invalid={errors.hostname ? 'true' : 'false'}
+              block
+              data-testid="login-hostname"
+              name="hostname"
+              onChange={handleInputChange}
+              placeholder="github.com"
               sx={{
                 borderColor: errors.hostname
                   ? 'danger.emphasis'
                   : 'border.default',
               }}
-              data-testid="login-hostname"
-              block
+              value={formData.hostname}
             />
           </FormControl>
 
           <Stack direction="vertical" gap="condensed">
-            <Stack direction="horizontal" align="center" gap="condensed">
+            <Stack align="center" direction="horizontal" gap="condensed">
               <Button
-                size="small"
-                leadingVisual={KeyIcon}
+                data-testid="login-create-token"
                 disabled={!formData.hostname}
+                leadingVisual={KeyIcon}
                 onClick={() =>
                   openExternalLink(getNewTokenURL(formData.hostname))
                 }
-                data-testid="login-create-token"
+                size="small"
               >
                 Generate a PAT
               </Button>
@@ -192,7 +193,7 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
 
             <Text as="i" className="text-xs">
               The{' '}
-              <Tooltip text={formatRecommendedOAuthScopes()} direction="se">
+              <Tooltip direction="se" text={formatRecommendedOAuthScopes()}>
                 <Text as="u">required scopes</Text>
               </Tooltip>{' '}
               will be automatically selected for you.
@@ -202,12 +203,12 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
           <FormControl required>
             <FormControl.Label>Token</FormControl.Label>
             <TextInput
-              name="token"
-              type={maskClientSecret ? 'password' : 'text'}
-              placeholder="Your generated token (40 characters)"
-              value={formData.token}
-              onChange={handleInputChange}
               aria-invalid={errors.token ? 'true' : 'false'}
+              block
+              data-testid="login-token"
+              name="token"
+              onChange={handleInputChange}
+              placeholder="Your generated token (40 characters)"
               sx={{
                 borderColor: errors.token
                   ? 'danger.emphasis'
@@ -215,36 +216,36 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
               }}
               trailingAction={
                 <TextInput.Action
-                  onClick={() => setMaskClientSecret(!maskClientSecret)}
-                  icon={maskClientSecret ? EyeIcon : EyeClosedIcon}
                   aria-label={maskClientSecret ? 'Show token' : 'Hide token'}
+                  icon={maskClientSecret ? EyeIcon : EyeClosedIcon}
+                  onClick={() => setMaskClientSecret(!maskClientSecret)}
                 />
               }
-              data-testid="login-token"
-              block
+              type={maskClientSecret ? 'password' : 'text'}
+              value={formData.token}
             />
           </FormControl>
         </Stack>
       </Contents>
 
       <Footer justify="space-between">
-        <Tooltip text="GitHub documentation" direction="ne">
+        <Tooltip direction="ne" text="GitHub documentation">
           <Button
-            size="small"
+            data-testid="login-docs"
             leadingVisual={BookIcon}
             onClick={() => openExternalLink(Constants.GITHUB_DOCS.PAT_URL)}
-            data-testid="login-docs"
+            size="small"
           >
             Docs
           </Button>
         </Tooltip>
 
         <Button
-          variant="primary"
-          leadingVisual={SignInIcon}
-          onClick={handleSubmit}
-          loading={isVerifyingCredentials}
           data-testid="login-submit"
+          leadingVisual={SignInIcon}
+          loading={isVerifyingCredentials}
+          onClick={handleSubmit}
+          variant="primary"
         >
           Login
         </Button>

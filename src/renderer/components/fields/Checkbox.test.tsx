@@ -33,12 +33,12 @@ describe('renderer/components/fields/Checkbox.tsx', () => {
   });
 
   it('should render - positive counter unselected', () => {
-    const tree = render(<Checkbox {...props} counter={5} checked={false} />);
+    const tree = render(<Checkbox {...props} checked={false} counter={5} />);
     expect(tree).toMatchSnapshot();
   });
 
   it('should render - positive counter selected', () => {
-    const tree = render(<Checkbox {...props} counter={5} checked={true} />);
+    const tree = render(<Checkbox {...props} checked={true} counter={5} />);
     expect(tree).toMatchSnapshot();
   });
 

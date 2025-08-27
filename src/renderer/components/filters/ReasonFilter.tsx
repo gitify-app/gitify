@@ -9,11 +9,11 @@ import { FilterSection } from './FilterSection';
 export const ReasonFilter: FC = () => {
   return (
     <FilterSection
-      id="filter-reasons"
-      title="Reason"
-      icon={NoteIcon}
       filter={reasonFilter}
       filterSetting="filterReasons"
+      icon={NoteIcon}
+      id="filter-reasons"
+      title="Reason"
       tooltip={<Text>Filter notifications by reason.</Text>}
     />
   );

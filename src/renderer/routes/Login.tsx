@@ -5,6 +5,7 @@ import { KeyIcon, MarkGithubIcon, PersonIcon } from '@primer/octicons-react';
 import { Button, Heading, Stack, Text } from '@primer/react';
 
 import { logError } from '../../shared/logger';
+
 import { LogoIcon } from '../components/icons/LogoIcon';
 import { Centered } from '../components/layout/Centered';
 import { AppContext } from '../context/App';
@@ -32,8 +33,8 @@ export const LoginRoute: FC = () => {
 
   return (
     <Centered fullHeight={true}>
-      <Stack direction="vertical" align="center">
-        <LogoIcon size={Size.LARGE} isDark />
+      <Stack align="center" direction="vertical">
+        <LogoIcon isDark size={Size.LARGE} />
 
         <Stack align="center" gap="none">
           <Heading sx={{ fontSize: 4 }}>GitHub Notifications</Heading>
@@ -44,26 +45,26 @@ export const LoginRoute: FC = () => {
           <Text>Login with</Text>
 
           <Button
-            leadingVisual={MarkGithubIcon}
-            variant="primary"
-            onClick={() => loginUser()}
             data-testid="login-github"
+            leadingVisual={MarkGithubIcon}
+            onClick={() => loginUser()}
+            variant="primary"
           >
             GitHub
           </Button>
 
           <Button
+            data-testid="login-pat"
             leadingVisual={KeyIcon}
             onClick={() => navigate('/login-personal-access-token')}
-            data-testid="login-pat"
           >
             Personal Access Token
           </Button>
 
           <Button
+            data-testid="login-oauth-app"
             leadingVisual={PersonIcon}
             onClick={() => navigate('/login-oauth-app')}
-            data-testid="login-oauth-app"
           >
             OAuth App
           </Button>

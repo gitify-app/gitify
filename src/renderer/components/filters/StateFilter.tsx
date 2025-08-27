@@ -9,11 +9,11 @@ import { FilterSection } from './FilterSection';
 export const StateFilter: FC = () => {
   return (
     <FilterSection
-      id="filter-state"
-      title="State"
-      icon={IssueOpenedIcon}
       filter={stateFilter}
       filterSetting="filterStates"
+      icon={IssueOpenedIcon}
+      id="filter-state"
+      title="State"
       tooltip={<Text>Filter notifications by state.</Text>}
     />
   );

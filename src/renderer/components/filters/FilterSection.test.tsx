@@ -31,14 +31,14 @@ describe('renderer/components/filters/FilterSection.tsx', () => {
         >
           <MemoryRouter>
             <FilterSection
-              id={'FilterSectionTest'}
-              title={'FilterSectionTitle'}
-              icon={MarkGithubIcon}
               filter={{
                 ...mockFilter,
                 requiresDetailsNotifications: true,
               }}
               filterSetting={mockFilterSetting}
+              icon={MarkGithubIcon}
+              id={'FilterSectionTest'}
+              title={'FilterSectionTitle'}
             />
           </MemoryRouter>
         </AppContext.Provider>,
@@ -59,14 +59,14 @@ describe('renderer/components/filters/FilterSection.tsx', () => {
           }}
         >
           <FilterSection
-            id={'FilterSectionTest'}
-            title={'FilterSectionTitle'}
-            icon={MarkGithubIcon}
             filter={{
               ...mockFilter,
               requiresDetailsNotifications: false,
             }}
             filterSetting={mockFilterSetting}
+            icon={MarkGithubIcon}
+            id={'FilterSectionTest'}
+            title={'FilterSectionTitle'}
           />
         </AppContext.Provider>,
       );
@@ -90,11 +90,11 @@ describe('renderer/components/filters/FilterSection.tsx', () => {
         >
           <MemoryRouter>
             <FilterSection
-              id={'FilterSectionTest'}
-              title={'FilterSectionTitle'}
-              icon={MarkGithubIcon}
               filter={mockFilter}
               filterSetting={mockFilterSetting}
+              icon={MarkGithubIcon}
+              id={'FilterSectionTest'}
+              title={'FilterSectionTitle'}
             />
           </MemoryRouter>
         </AppContext.Provider>,
@@ -125,11 +125,11 @@ describe('renderer/components/filters/FilterSection.tsx', () => {
         >
           <MemoryRouter>
             <FilterSection
-              id={'FilterSectionTest'}
-              title={'FilterSectionTitle'}
-              icon={MarkGithubIcon}
               filter={mockFilter}
               filterSetting={mockFilterSetting}
+              icon={MarkGithubIcon}
+              id={'FilterSectionTest'}
+              title={'FilterSectionTitle'}
             />
           </MemoryRouter>
         </AppContext.Provider>,

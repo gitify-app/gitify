@@ -1,6 +1,7 @@
 import { useCallback, useState } from 'react';
 
 import { logError } from '../../shared/logger';
+
 import type {
   Account,
   AccountNotifications,

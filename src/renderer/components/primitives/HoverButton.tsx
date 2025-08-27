@@ -19,16 +19,16 @@ export const HoverButton: FC<IHoverButton> = ({
     enabled && (
       <IconButton
         aria-label={props.label}
-        unsafeDisableTooltip={true}
-        title={props.label}
+        data-testid={props.testid}
         icon={props.icon}
-        size="small"
-        variant="invisible"
         onClick={(event) => {
           event.stopPropagation();
           props.action();
         }}
-        data-testid={props.testid}
+        size="small"
+        title={props.label}
+        unsafeDisableTooltip={true}
+        variant="invisible"
       />
     )
   );

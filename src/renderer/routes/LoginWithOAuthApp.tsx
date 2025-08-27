@@ -19,6 +19,7 @@ import {
 import { Banner } from '@primer/react/experimental';
 
 import { logError } from '../../shared/logger';
+
 import { Contents } from '../components/layout/Contents';
 import { Page } from '../components/layout/Page';
 import { Footer } from '../components/primitives/Footer';
@@ -135,9 +136,7 @@ export const LoginWithOAuthAppRoute: FC = () => {
       <Contents>
         {hasErrors && (
           <Banner
-            title="Validation errors"
-            variant="critical"
-            hideTitle
+            data-testid="login-errors"
             description={
               <Text color="danger.fg">
                 <Stack direction="vertical" gap="condensed">
@@ -150,7 +149,9 @@ export const LoginWithOAuthAppRoute: FC = () => {
                 </Stack>
               </Text>
             }
-            data-testid="login-errors"
+            hideTitle
+            title="Validation errors"
+            variant="critical"
           />
         )}
         <Stack direction="vertical" gap="normal">
@@ -162,29 +163,29 @@ export const LoginWithOAuthAppRoute: FC = () => {
               </Text>
             </FormControl.Caption>
             <TextInput
-              name="hostname"
-              placeholder="github.com"
-              value={formData.hostname}
-              onChange={handleInputChange}
               aria-invalid={errors.hostname ? 'true' : 'false'}
+              block
+              data-testid="login-hostname"
+              name="hostname"
+              onChange={handleInputChange}
+              placeholder="github.com"
               sx={{
                 borderColor: errors.hostname
                   ? 'danger.emphasis'
                   : 'border.default',
               }}
-              data-testid="login-hostname"
-              block
+              value={formData.hostname}
             />
           </FormControl>
-          <Stack direction="horizontal" align="center" gap="condensed">
+          <Stack align="center" direction="horizontal" gap="condensed">
             <Button
-              size="small"
-              leadingVisual={PersonIcon}
+              data-testid="login-create-oauth-app"
               disabled={!formData.hostname}
+              leadingVisual={PersonIcon}
               onClick={() =>
                 openExternalLink(getNewOAuthAppURL(formData.hostname))
               }
-              data-testid="login-create-oauth-app"
+              size="small"
             >
               Create new OAuth App
             </Button>
@@ -195,29 +196,29 @@ export const LoginWithOAuthAppRoute: FC = () => {
           <FormControl required>
             <FormControl.Label>Client ID</FormControl.Label>
             <TextInput
-              name="clientId"
-              placeholder="Your generated client id (20 characters)"
-              value={formData.clientId}
-              onChange={handleInputChange}
               aria-invalid={errors.clientId ? 'true' : 'false'}
+              block
+              data-testid="login-clientId"
+              name="clientId"
+              onChange={handleInputChange}
+              placeholder="Your generated client id (20 characters)"
               sx={{
                 borderColor: errors.clientId
                   ? 'danger.emphasis'
                   : 'border.default',
               }}
-              data-testid="login-clientId"
-              block
+              value={formData.clientId}
             />
           </FormControl>
           <FormControl required>
             <FormControl.Label>Client Secret</FormControl.Label>
             <TextInput
-              name="clientSecret"
-              type={maskToken ? 'password' : 'text'}
-              placeholder="Your generated client secret (40 characters)"
-              value={formData.clientSecret}
-              onChange={handleInputChange}
               aria-invalid={errors.clientSecret ? 'true' : 'false'}
+              block
+              data-testid="login-clientSecret"
+              name="clientSecret"
+              onChange={handleInputChange}
+              placeholder="Your generated client secret (40 characters)"
               sx={{
                 borderColor: errors.clientSecret
                   ? 'danger.emphasis'
@@ -225,13 +226,13 @@ export const LoginWithOAuthAppRoute: FC = () => {
               }}
               trailingAction={
                 <TextInput.Action
-                  onClick={() => setMaskToken(!maskToken)}
-                  icon={maskToken ? EyeIcon : EyeClosedIcon}
                   aria-label={maskToken ? 'Show token' : 'Hide token'}
+                  icon={maskToken ? EyeIcon : EyeClosedIcon}
+                  onClick={() => setMaskToken(!maskToken)}
                 />
               }
-              data-testid="login-clientSecret"
-              block
+              type={maskToken ? 'password' : 'text'}
+              value={formData.clientSecret}
             />
           </FormControl>
         </Stack>
@@ -240,21 +241,21 @@ export const LoginWithOAuthAppRoute: FC = () => {
       <Footer justify="space-between">
         <Tooltip text="GitHub documentation">
           <Button
-            size="small"
+            data-testid="login-docs"
             leadingVisual={BookIcon}
             onClick={() => openExternalLink(Constants.GITHUB_DOCS.OAUTH_URL)}
-            data-testid="login-docs"
+            size="small"
           >
             Docs
           </Button>
         </Tooltip>
 
         <Button
-          variant="primary"
-          leadingVisual={SignInIcon}
-          onClick={handleSubmit}
-          loading={isVerifyingCredentials}
           data-testid="login-submit"
+          leadingVisual={SignInIcon}
+          loading={isVerifyingCredentials}
+          onClick={handleSubmit}
+          variant="primary"
         >
           Login
         </Button>

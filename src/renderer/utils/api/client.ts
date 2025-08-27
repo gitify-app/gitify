@@ -2,6 +2,7 @@ import type { AxiosPromise } from 'axios';
 import { print } from 'graphql/language/printer';
 
 import { logError } from '../../../shared/logger';
+
 import type {
   Account,
   Hostname,

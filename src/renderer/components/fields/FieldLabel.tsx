@@ -7,7 +7,7 @@ export interface IFieldLabel {
 
 export const FieldLabel: FC<IFieldLabel> = (props: IFieldLabel) => {
   return (
-    <label htmlFor={props.name} className="mr-3 font-medium cursor-pointer">
+    <label className="mr-3 font-medium cursor-pointer" htmlFor={props.name}>
       {props.label}
     </label>
   );

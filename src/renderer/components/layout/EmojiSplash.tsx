@@ -33,7 +33,7 @@ export const EmojiSplash: FC<IEmojiSplash> = ({
         {subHeadings.map((description, i) => {
           return (
             // biome-ignore lint/suspicious/noArrayIndexKey: using index for key to keep the error constants clean
-            <Box key={`error_description_${i}`} className="text-center">
+            <Box className="text-center" key={`error_description_${i}`}>
               {description}
             </Box>
           );

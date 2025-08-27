@@ -1,6 +1,7 @@
 import axios, { type AxiosPromise, type AxiosResponse } from 'axios';
 
 import * as logger from '../../../shared/logger';
+
 import {
   mockGitHubCloudAccount,
   mockGitHubEnterpriseServerAccount,

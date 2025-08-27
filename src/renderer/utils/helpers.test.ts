@@ -7,6 +7,7 @@ import {
 import type { AxiosPromise, AxiosResponse } from 'axios';
 
 import * as logger from '../../shared/logger';
+
 import { mockPersonalAccessTokenAccount } from '../__mocks__/state-mocks';
 import type { Hostname, Link } from '../types';
 import type { SubjectType } from '../typesGitHub';

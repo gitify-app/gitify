@@ -80,7 +80,6 @@ export const NotificationRow: FC<INotificationRow> = ({
 
   return (
     <Box
-      id={notification.id}
       className={cn(
         'group border-b',
         'pl-3 pr-1 py-1.5',
@@ -89,39 +88,40 @@ export const NotificationRow: FC<INotificationRow> = ({
           'translate-x-full opacity-0 transition duration-350 ease-in-out',
         (isRead || showAsRead) && Opacity.READ,
       )}
+      id={notification.id}
     >
       <Stack
-        direction="horizontal"
         align="center"
-        gap="condensed"
         className="relative"
+        direction="horizontal"
+        gap="condensed"
       >
-        <Tooltip text={notificationType} direction="e">
-          <NotificationIcon size={Size.LARGE} className={iconColor} />
+        <Tooltip direction="e" text={notificationType}>
+          <NotificationIcon className={iconColor} size={Size.LARGE} />
         </Tooltip>
 
         <Stack
-          direction="vertical"
-          gap="none"
           className={cn(
             'cursor-pointer text-sm w-full',
             !settings.wrapNotificationTitle && 'truncate',
           )}
+          direction="vertical"
+          gap="none"
           onClick={() => handleNotification()}
         >
           <NotificationHeader notification={notification} />
 
           <Stack
-            direction="horizontal"
             align="start"
-            justify="space-between"
-            gap="condensed"
-            title={notificationTitle}
             className={cn(
               'mb-0.5',
               !settings.wrapNotificationTitle && 'truncate',
             )}
             data-testid="notification-row"
+            direction="horizontal"
+            gap="condensed"
+            justify="space-between"
+            title={notificationTitle}
           >
             <Text className={!settings.wrapNotificationTitle && 'truncate'}>
               {notification.subject.title}
@@ -143,25 +143,25 @@ export const NotificationRow: FC<INotificationRow> = ({
         {!animateExit && (
           <HoverGroup bgColor="group-hover:bg-gitify-notification-hover">
             <HoverButton
-              label="Mark as done"
-              icon={CheckIcon}
-              enabled={isMarkAsDoneFeatureSupported(notification.account)}
-              testid="notification-mark-as-done"
               action={actionMarkAsDone}
+              enabled={isMarkAsDoneFeatureSupported(notification.account)}
+              icon={CheckIcon}
+              label="Mark as done"
+              testid="notification-mark-as-done"
             />
 
             <HoverButton
-              label="Mark as read"
-              icon={ReadIcon}
-              testid="notification-mark-as-read"
               action={actionMarkAsRead}
+              icon={ReadIcon}
+              label="Mark as read"
+              testid="notification-mark-as-read"
             />
 
             <HoverButton
-              label="Unsubscribe from thread"
-              icon={BellSlashIcon}
-              testid="notification-unsubscribe-from-thread"
               action={actionUnsubscribeFromThread}
+              icon={BellSlashIcon}
+              label="Unsubscribe from thread"
+              testid="notification-unsubscribe-from-thread"
             />
           </HoverGroup>
         )}

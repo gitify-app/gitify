@@ -13,6 +13,7 @@ import {
 import { IconButton, Stack } from '@primer/react';
 
 import { APPLICATION } from '../../shared/constants';
+
 import { AppContext } from '../context/App';
 import { quitApp } from '../utils/comms';
 import { Constants } from '../utils/constants';
@@ -72,129 +73,129 @@ export const Sidebar: FC = () => {
 
   return (
     <Stack
+      className="fixed left-sidebar -ml-sidebar w-sidebar h-full bg-gitify-sidebar text-white"
       direction="vertical"
       justify="space-between"
-      className="fixed left-sidebar -ml-sidebar w-sidebar h-full bg-gitify-sidebar text-white"
     >
       <Stack
-        direction="vertical"
         align="center"
+        direction="vertical"
         gap="condensed"
         padding="normal"
       >
         <IconButton
-          icon={LogoIcon}
           aria-label={APPLICATION.NAME}
-          description="Home"
-          unsafeDisableTooltip={false}
-          size="small"
-          variant="invisible"
-          tooltipDirection="e"
-          onClick={() => navigate('/', { replace: true })}
           data-testid="sidebar-home"
+          description="Home"
+          icon={LogoIcon}
+          onClick={() => navigate('/', { replace: true })}
+          size="small"
+          tooltipDirection="e"
+          unsafeDisableTooltip={false}
+          variant="invisible"
         />
 
         <IconButton
-          icon={BellIcon}
           aria-label="Notifications"
-          description={`${notificationsCount} unread notifications`}
-          unsafeDisableTooltip={false}
-          size="small"
-          variant={notificationsCount > 0 ? 'primary' : 'invisible'}
-          tooltipDirection="e"
-          onClick={() => openGitHubNotifications(primaryAccountHostname)}
           data-testid="sidebar-notifications"
+          description={`${notificationsCount} unread notifications`}
+          icon={BellIcon}
+          onClick={() => openGitHubNotifications(primaryAccountHostname)}
+          size="small"
           sx={sidebarButtonStyle}
+          tooltipDirection="e"
+          unsafeDisableTooltip={false}
+          variant={notificationsCount > 0 ? 'primary' : 'invisible'}
         />
 
         {isLoggedIn && (
           <IconButton
-            icon={FilterIcon}
             aria-label="Filters"
-            description="Filter notifications"
-            unsafeDisableTooltip={false}
-            size="small"
-            variant={hasAnyFiltersSet(settings) ? 'primary' : 'invisible'}
-            tooltipDirection="e"
-            onClick={() => toggleFilters()}
             data-testid="sidebar-filter-notifications"
+            description="Filter notifications"
+            icon={FilterIcon}
+            onClick={() => toggleFilters()}
+            size="small"
             sx={sidebarButtonStyle}
+            tooltipDirection="e"
+            unsafeDisableTooltip={false}
+            variant={hasAnyFiltersSet(settings) ? 'primary' : 'invisible'}
           />
         )}
 
         <IconButton
-          icon={IssueOpenedIcon}
           aria-label="My issues"
-          unsafeDisableTooltip={false}
-          size="small"
-          variant="invisible"
-          tooltipDirection="e"
-          onClick={() => openGitHubIssues(primaryAccountHostname)}
           data-testid="sidebar-my-issues"
+          icon={IssueOpenedIcon}
+          onClick={() => openGitHubIssues(primaryAccountHostname)}
+          size="small"
           sx={sidebarButtonStyle}
+          tooltipDirection="e"
+          unsafeDisableTooltip={false}
+          variant="invisible"
         />
 
         <IconButton
-          icon={GitPullRequestIcon}
           aria-label="My pull requests"
-          unsafeDisableTooltip={false}
-          size="small"
-          variant="invisible"
-          tooltipDirection="e"
-          onClick={() => openGitHubPulls(primaryAccountHostname)}
           data-testid="sidebar-my-pull-requests"
+          icon={GitPullRequestIcon}
+          onClick={() => openGitHubPulls(primaryAccountHostname)}
+          size="small"
           sx={sidebarButtonStyle}
+          tooltipDirection="e"
+          unsafeDisableTooltip={false}
+          variant="invisible"
         />
       </Stack>
 
       <Stack
-        direction="vertical"
         align="center"
+        direction="vertical"
         gap="condensed"
         padding="normal"
       >
         {isLoggedIn && (
           <>
             <IconButton
-              icon={SyncIcon}
               aria-label="Refresh"
-              description="Refresh notifications"
-              unsafeDisableTooltip={false}
-              size="small"
-              variant="invisible"
-              tooltipDirection="e"
-              loading={status === 'loading'}
-              disabled={status === 'loading'}
-              onClick={() => refreshNotifications()}
               data-testid="sidebar-refresh"
+              description="Refresh notifications"
+              disabled={status === 'loading'}
+              icon={SyncIcon}
+              loading={status === 'loading'}
+              onClick={() => refreshNotifications()}
+              size="small"
               sx={sidebarButtonStyle}
+              tooltipDirection="e"
+              unsafeDisableTooltip={false}
+              variant="invisible"
             />
 
             <IconButton
-              icon={GearIcon}
               aria-label="Settings"
-              unsafeDisableTooltip={false}
-              size="small"
-              variant="invisible"
-              tooltipDirection="e"
-              onClick={() => toggleSettings()}
               data-testid="sidebar-settings"
+              icon={GearIcon}
+              onClick={() => toggleSettings()}
+              size="small"
               sx={sidebarButtonStyle}
+              tooltipDirection="e"
+              unsafeDisableTooltip={false}
+              variant="invisible"
             />
           </>
         )}
 
         {!isLoggedIn && (
           <IconButton
-            icon={XCircleIcon}
             aria-label={`Quit ${APPLICATION.NAME}`}
-            unsafeDisableTooltip={false}
-            size="small"
-            variant="invisible"
-            tooltipDirection="e"
-            onClick={() => quitApp()}
             data-testid="sidebar-quit"
+            icon={XCircleIcon}
+            onClick={() => quitApp()}
+            size="small"
             sx={sidebarButtonStyle}
+            tooltipDirection="e"
+            unsafeDisableTooltip={false}
+            variant="invisible"
           />
         )}
       </Stack>
