@@ -11,7 +11,6 @@ import {
 } from '@primer/react';
 
 import { APPLICATION } from '../../../shared/constants';
-import { isLinux, isMacOS } from '../../../shared/platform';
 
 import { AppContext } from '../../context/App';
 import { defaultSettings } from '../../context/defaults';
@@ -68,7 +67,7 @@ export const SystemSettings: FC = () => {
           onChange={(evt) =>
             updateSetting('showNotificationsCountInTray', evt.target.checked)
           }
-          visible={isMacOS()}
+          visible={window.gitify.platform.isMacOS()}
         />
 
         <Checkbox
@@ -177,7 +176,7 @@ export const SystemSettings: FC = () => {
           label="Open at startup"
           name="openAtStartup"
           onChange={(evt) => updateSetting('openAtStartup', evt.target.checked)}
-          visible={!isLinux()}
+          visible={!window.gitify.platform.isLinux()}
         />
       </Stack>
     </fieldset>
