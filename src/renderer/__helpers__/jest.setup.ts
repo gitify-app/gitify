@@ -1,41 +1,10 @@
 import '@testing-library/jest-dom';
 
-import { TextDecoder, TextEncoder } from 'node:util';
+import { TextEncoder } from 'node:util';
 
 /**
- * Prevent the following errors with jest:
- * - ReferenceError: TextEncoder is not defined
- * - ReferenceError: TextDecoder is not defined
+ * Gitify context bridge API
  */
-if (!('TextEncoder' in globalThis)) {
-  (globalThis as unknown as { TextEncoder: typeof TextEncoder }).TextEncoder =
-    TextEncoder;
-}
-if (!('TextDecoder' in globalThis)) {
-  (globalThis as unknown as { TextDecoder: typeof TextDecoder }).TextDecoder =
-    TextDecoder;
-}
-
-// Mock OAuth client ID and secret
-process.env.OAUTH_CLIENT_ID = 'FAKE_CLIENT_ID_123';
-process.env.OAUTH_CLIENT_SECRET = 'FAKE_CLIENT_SECRET_123';
-
-/**
- * Primer Setup
- */
-if (typeof CSS === 'undefined') {
-  global.CSS = {} as typeof CSS;
-}
-
-if (!CSS.supports) {
-  CSS.supports = () => true;
-}
-
-// @ts-expect-error
-window.Audio = class Audio {
-  play() {}
-};
-
 window.gitify = {
   app: {
     version: jest.fn().mockResolvedValue('v0.0.1'),
@@ -68,4 +37,33 @@ window.gitify = {
   setAutoLaunch: jest.fn(),
   setKeyboardShortcut: jest.fn(),
   raiseNativeNotification: jest.fn(),
+};
+
+// Mock OAuth client ID and secret
+process.env.OAUTH_CLIENT_ID = 'FAKE_CLIENT_ID_123';
+process.env.OAUTH_CLIENT_SECRET = 'FAKE_CLIENT_SECRET_123';
+
+/**
+ * Primer (@primer/react) Setup
+ *
+ * Borrowed from https://github.com/primer/react/blob/main/packages/react/src/utils/test-helpers.tsx
+ */
+// @ts-expect-error: prevent ReferenceError: TextEncoder is not defined
+global.TextEncoder = TextEncoder;
+
+// JSDOM doesn't mock ResizeObserver
+global.ResizeObserver = jest.fn().mockImplementation(() => {
+  return {
+    observe: jest.fn(),
+    disconnect: jest.fn(),
+    unobserve: jest.fn(),
+  };
+});
+
+// @ts-expect-error only declare properties used internally
+global.CSS = {
+  escape: jest.fn(),
+  supports: jest.fn().mockImplementation(() => {
+    return false;
+  }),
 };
