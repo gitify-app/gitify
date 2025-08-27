@@ -17,10 +17,13 @@
               ":BLANK_LINE:",
               ":PACKAGE:",
               ":BLANK_LINE:",
+              "**/shared/**",
+              ":BLANK_LINE:",
               "**"
             ]
           }
-        }
+        },
+        "useSortedAttributes": "on"
       }
     }
   },
@@ -41,7 +44,12 @@
         "useExhaustiveDependencies": {
           "level": "warn",
           "options": {
-            "hooks": [{ "name": "useNavigate", "stableResult": true }]
+            "hooks": [
+              {
+                "name": "useNavigate",
+                "stableResult": true
+              }
+            ]
           }
         },
         "useUniqueElementIds": "warn"

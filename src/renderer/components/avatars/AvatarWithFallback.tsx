@@ -31,24 +31,24 @@ export const AvatarWithFallback: React.FC<IAvatarWithFallback> = ({
   // TODO explore using AnchoredOverlay component (https://primer.style/components/anchored-overlay/react/alpha) to render Avatar Card on hover
   return (
     <Stack
-      direction="horizontal"
       align="center"
-      gap="condensed"
       data-testid="avatar"
+      direction="horizontal"
+      gap="condensed"
     >
       {!src || isBroken ? (
         <DefaultUserIcon size={size} />
       ) : (
         <Avatar
-          src={src}
           alt={alt}
+          onError={() => setIsBroken(true)}
           size={size}
           square={isNonHuman}
-          onError={() => setIsBroken(true)}
+          src={src}
         />
       )}
       {name && (
-        <Truncate title={name} inline maxWidth={280}>
+        <Truncate inline maxWidth={280} title={name}>
           {name}
         </Truncate>
       )}

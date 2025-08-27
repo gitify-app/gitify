@@ -34,7 +34,7 @@ export const FilterSection = <T extends FilterValue>({
 
   return (
     <fieldset id={id}>
-      <Stack direction="horizontal" gap="condensed" align="baseline">
+      <Stack align="baseline" direction="horizontal" gap="condensed">
         <Title icon={icon}>{title}</Title>
         {tooltip && (
           <Tooltip
@@ -64,19 +64,19 @@ export const FilterSection = <T extends FilterValue>({
 
           return (
             <Checkbox
-              key={type as string}
-              name={typeTitle}
-              label={typeTitle}
               checked={isChecked}
-              onChange={(evt) =>
-                updateFilter(filterSetting, type, evt.target.checked)
-              }
-              tooltip={typeDescription ? <Text>{typeDescription}</Text> : null}
+              counter={count}
               disabled={
                 filter.requiresDetailsNotifications &&
                 !settings.detailedNotifications
               }
-              counter={count}
+              key={type as string}
+              label={typeTitle}
+              name={typeTitle}
+              onChange={(evt) =>
+                updateFilter(filterSetting, type, evt.target.checked)
+              }
+              tooltip={typeDescription ? <Text>{typeDescription}</Text> : null}
             />
           );
         })}

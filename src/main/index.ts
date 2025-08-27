@@ -6,6 +6,7 @@ import { APPLICATION } from '../shared/constants';
 import { namespacedEvent } from '../shared/events';
 import { logInfo, logWarn } from '../shared/logger';
 import { isLinux, isMacOS, isWindows } from '../shared/platform';
+
 import { onFirstRunMaybe } from './first-run';
 import { TrayIcons } from './icons';
 import MenuBuilder from './menu';

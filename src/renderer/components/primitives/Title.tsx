@@ -14,8 +14,8 @@ export const Title: FC<ITitle> = ({ size = 2, ...props }) => {
     <legend>
       <Box className="mb-2">
         <Stack
-          direction="horizontal"
           align="center"
+          direction="horizontal"
           gap="condensed"
           id={props.children.toLowerCase().replace(' ', '-')}
         >

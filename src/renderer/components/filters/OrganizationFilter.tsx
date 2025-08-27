@@ -135,7 +135,7 @@ export const OrganizationFilter: FC = () => {
 
   return (
     <fieldset id="filter-organizations">
-      <Stack direction="horizontal" gap="condensed" align="baseline">
+      <Stack align="baseline" direction="horizontal" gap="condensed">
         <Title icon={OrganizationIcon}>Organizations</Title>
         <Tooltip
           name="tooltip-filter-organizations"
@@ -148,56 +148,56 @@ export const OrganizationFilter: FC = () => {
       </Stack>
       <Stack direction="vertical" gap="condensed">
         <Stack
-          direction="horizontal"
-          gap="condensed"
           align="center"
           className="text-sm"
+          direction="horizontal"
+          gap="condensed"
         >
           <Box className="font-medium text-gitify-font w-28">
-            <Stack direction="horizontal" gap="condensed" align="center">
+            <Stack align="center" direction="horizontal" gap="condensed">
               <CheckCircleFillIcon className={IconColor.GREEN} />
               <Text>Include:</Text>
             </Stack>
           </Box>
           <TextInputWithTokens
-            title="Include organizations"
-            tokens={includeOrganizations}
-            onTokenRemove={removeIncludeOrganizationToken}
-            onKeyDown={includeOrganizationsKeyDown}
-            onBlur={addIncludeOrganizationsToken}
-            size="small"
+            block
             disabled={
               !settings.detailedNotifications ||
               hasExcludeOrganizationFilters(settings)
             }
-            block
+            onBlur={addIncludeOrganizationsToken}
+            onKeyDown={includeOrganizationsKeyDown}
+            onTokenRemove={removeIncludeOrganizationToken}
+            size="small"
+            title="Include organizations"
+            tokens={includeOrganizations}
           />
         </Stack>
 
         <Stack
-          direction="horizontal"
-          gap="condensed"
           align="center"
           className="text-sm"
+          direction="horizontal"
+          gap="condensed"
         >
           <Box className="font-medium text-gitify-font w-28">
-            <Stack direction="horizontal" gap="condensed" align="center">
+            <Stack align="center" direction="horizontal" gap="condensed">
               <NoEntryFillIcon className={IconColor.RED} />
               <Text>Exclude:</Text>
             </Stack>
           </Box>
           <TextInputWithTokens
-            title="Exclude organizations"
-            tokens={excludeOrganizations}
-            onTokenRemove={removeExcludeOrganizationToken}
-            onKeyDown={excludeOrganizationsKeyDown}
-            onBlur={addExcludeOrganizationsToken}
-            size="small"
+            block
             disabled={
               !settings.detailedNotifications ||
               hasIncludeOrganizationFilters(settings)
             }
-            block
+            onBlur={addExcludeOrganizationsToken}
+            onKeyDown={excludeOrganizationsKeyDown}
+            onTokenRemove={removeExcludeOrganizationToken}
+            size="small"
+            title="Exclude organizations"
+            tokens={excludeOrganizations}
           />
         </Stack>
       </Stack>

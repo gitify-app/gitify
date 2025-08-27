@@ -78,51 +78,51 @@ export const AccountNotifications: FC<IAccountNotifications> = (
           onClick={actionToggleAccountNotifications}
         >
           <Stack
-            direction="horizontal"
             align="center"
-            gap="condensed"
             className="relative"
+            direction="horizontal"
+            gap="condensed"
           >
             <Button
-              title="Open account profile"
-              variant="invisible"
               alignContent="center"
               count={notifications.length}
+              data-testid="account-profile"
               onClick={(event: MouseEvent<HTMLElement>) => {
                 // Don't trigger onClick of parent element.
                 event.stopPropagation();
                 openAccountProfile(account);
               }}
-              data-testid="account-profile"
+              title="Open account profile"
+              variant="invisible"
             >
               <AvatarWithFallback
-                src={account.user.avatar}
                 alt={account.user.login}
                 name={`@${account.user.login}`}
                 size={Size.MEDIUM}
+                src={account.user.avatar}
               />
             </Button>
 
             <HoverGroup bgColor="group-hover:bg-gitify-account-rest">
               <HoverButton
-                label="My Issues"
-                icon={IssueOpenedIcon}
-                testid="account-issues"
                 action={() => openGitHubIssues(account.hostname)}
+                icon={IssueOpenedIcon}
+                label="My Issues"
+                testid="account-issues"
               />
 
               <HoverButton
-                label="My Pull Requests"
-                icon={GitPullRequestIcon}
-                testid="account-pull-requests"
                 action={() => openGitHubPulls(account.hostname)}
+                icon={GitPullRequestIcon}
+                label="My Pull Requests"
+                testid="account-pull-requests"
               />
 
               <HoverButton
-                label={Chevron.label}
-                icon={Chevron.icon}
-                testid="account-toggle"
                 action={actionToggleAccountNotifications}
+                icon={Chevron.icon}
+                label={Chevron.label}
+                testid="account-toggle"
               />
             </HoverGroup>
           </Stack>

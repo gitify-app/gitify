@@ -1,4 +1,5 @@
 import { logError, logWarn } from '../../../shared/logger';
+
 import type {
   AccountNotifications,
   GitifyState,

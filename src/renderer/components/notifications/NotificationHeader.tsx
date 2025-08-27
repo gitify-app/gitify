@@ -29,22 +29,22 @@ export const NotificationHeader: FC<INotificationHeader> = ({
   return (
     groupByDate && (
       <Box className="py-0.5">
-        <Stack direction="horizontal" align="center" gap="condensed">
+        <Stack align="center" direction="horizontal" gap="condensed">
           <Box
-            title="Open repository"
             className="text-xs font-medium"
+            data-testid="view-repository"
             onClick={(event: MouseEvent<HTMLElement>) => {
               // Don't trigger onClick of parent element.
               event.stopPropagation();
               openRepository(notification.repository);
             }}
-            data-testid="view-repository"
+            title="Open repository"
           >
             <AvatarWithFallback
-              src={notification.repository.owner.avatar_url}
               alt={repoSlug}
               name={repoSlug}
               size={Size.SMALL}
+              src={notification.repository.owner.avatar_url}
               userType={notification.repository.owner.type}
             />
           </Box>

@@ -9,11 +9,11 @@ import { FilterSection } from './FilterSection';
 export const SubjectTypeFilter: FC = () => {
   return (
     <FilterSection
-      id="filter-subject-type"
-      title="Type"
-      icon={BellIcon}
       filter={subjectTypeFilter}
       filterSetting="filterSubjectTypes"
+      icon={BellIcon}
+      id="filter-subject-type"
+      title="Type"
       tooltip={<Text>Filter notifications by type.</Text>}
     />
   );

@@ -23,8 +23,7 @@ export const Header: FC<IHeader> = (props: IHeader) => {
       <Stack direction="horizontal" justify="space-between">
         <IconButton
           aria-labelledby="Go Back"
-          variant="invisible"
-          tooltipDirection="e"
+          data-testid="header-nav-back"
           icon={ArrowLeftIcon}
           onClick={() => {
             navigate(-1);
@@ -32,7 +31,8 @@ export const Header: FC<IHeader> = (props: IHeader) => {
               fetchNotifications();
             }
           }}
-          data-testid="header-nav-back"
+          tooltipDirection="e"
+          variant="invisible"
         />
 
         <Title icon={props.icon} size={3}>

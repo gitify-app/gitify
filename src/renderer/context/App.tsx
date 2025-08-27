@@ -12,6 +12,7 @@ import { ipcRenderer, webFrame } from 'electron';
 import { useTheme } from '@primer/react';
 
 import { namespacedEvent } from '../../shared/events';
+
 import { useInterval } from '../hooks/useInterval';
 import { useNotifications } from '../hooks/useNotifications';
 import type {

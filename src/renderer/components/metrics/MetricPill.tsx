@@ -16,13 +16,13 @@ export interface IMetricPill {
 export const MetricPill: FC<IMetricPill> = (props: IMetricPill) => {
   return (
     <Label
-      variant="secondary"
+      className="hover:bg-gitify-notification-pill-hover"
       size="small"
       title={props.title}
-      className="hover:bg-gitify-notification-pill-hover"
+      variant="secondary"
     >
-      <Stack direction="horizontal" align="center" gap="none">
-        <props.icon size={Size.XSMALL} className={props.color} />
+      <Stack align="center" direction="horizontal" gap="none">
+        <props.icon className={props.color} size={Size.XSMALL} />
         {props.metric ? (
           <Text className="text-xxs px-1">{props.metric}</Text>
         ) : null}

@@ -36,11 +36,11 @@ export const FiltersRoute: FC = () => {
       </Contents>
 
       <Footer justify="end">
-        <Tooltip text="Clear all filters" direction="n">
+        <Tooltip direction="n" text="Clear all filters">
           <Button
+            data-testid="filters-clear"
             leadingVisual={FilterRemoveIcon}
             onClick={clearFilters}
-            data-testid="filters-clear"
           >
             Clear filters
           </Button>

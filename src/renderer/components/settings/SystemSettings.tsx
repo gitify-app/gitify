@@ -12,6 +12,7 @@ import {
 
 import { APPLICATION } from '../../../shared/constants';
 import { isLinux, isMacOS } from '../../../shared/platform';
+
 import { AppContext } from '../../context/App';
 import { defaultSettings } from '../../context/defaults';
 import { OpenPreference } from '../../types';
@@ -31,22 +32,22 @@ export const SystemSettings: FC = () => {
 
       <Stack direction="vertical" gap="condensed">
         <RadioGroup
-          name="openLinks"
           label="Open Links:"
-          value={settings.openLinks}
+          name="openLinks"
+          onChange={(evt) => {
+            updateSetting('openLinks', evt.target.value as OpenPreference);
+          }}
           options={[
             { label: 'Foreground', value: OpenPreference.FOREGROUND },
             { label: 'Background', value: OpenPreference.BACKGROUND },
           ]}
-          onChange={(evt) => {
-            updateSetting('openLinks', evt.target.value as OpenPreference);
-          }}
+          value={settings.openLinks}
         />
 
         <Checkbox
-          name="keyboardShortcut"
-          label="Enable keyboard shortcut"
           checked={settings.keyboardShortcut}
+          label="Enable keyboard shortcut"
+          name="keyboardShortcut"
           onChange={(evt) =>
             updateSetting('keyboardShortcut', evt.target.checked)
           }
@@ -62,19 +63,19 @@ export const SystemSettings: FC = () => {
         />
 
         <Checkbox
-          name="showNotificationsCountInTray"
-          label="Show notification count in tray"
           checked={settings.showNotificationsCountInTray}
-          visible={isMacOS()}
+          label="Show notification count in tray"
+          name="showNotificationsCountInTray"
           onChange={(evt) =>
             updateSetting('showNotificationsCountInTray', evt.target.checked)
           }
+          visible={isMacOS()}
         />
 
         <Checkbox
-          name="showNotifications"
-          label="Show system notifications"
           checked={settings.showNotifications}
+          label="Show system notifications"
+          name="showNotifications"
           onChange={(evt) =>
             updateSetting('showNotifications', evt.target.checked)
           }
@@ -82,28 +83,27 @@ export const SystemSettings: FC = () => {
 
         <Box>
           <Stack
-            direction="horizontal"
-            gap="condensed"
             align="center"
             className="text-sm"
+            direction="horizontal"
+            gap="condensed"
           >
             <Checkbox
-              name="playSound"
-              label="Play sound"
               checked={settings.playSound}
+              label="Play sound"
+              name="playSound"
               onChange={(evt) => updateSetting('playSound', evt.target.checked)}
             />
 
             <ButtonGroup
               className="ml-2"
-              hidden={!settings.playSound}
               data-testid="settings-volume-group"
+              hidden={!settings.playSound}
             >
               <IconButton
                 aria-label="Volume down"
-                size="small"
+                data-testid="settings-volume-down"
                 icon={VolumeDownIcon}
-                unsafeDisableTooltip={true}
                 onClick={() => {
                   const newVolume = Math.max(
                     settings.notificationVolume - 10,
@@ -111,18 +111,18 @@ export const SystemSettings: FC = () => {
                   );
                   updateSetting('notificationVolume', newVolume);
                 }}
-                data-testid="settings-volume-down"
+                size="small"
+                unsafeDisableTooltip={true}
               />
 
-              <Button aria-label="Volume percentage" size="small" disabled>
+              <Button aria-label="Volume percentage" disabled size="small">
                 {settings.notificationVolume.toFixed(0)}%
               </Button>
 
               <IconButton
                 aria-label="Volume up"
-                size="small"
+                data-testid="settings-volume-up"
                 icon={VolumeUpIcon}
-                unsafeDisableTooltip={true}
                 onClick={() => {
                   const newVolume = Math.min(
                     settings.notificationVolume + 10,
@@ -130,31 +130,32 @@ export const SystemSettings: FC = () => {
                   );
                   updateSetting('notificationVolume', newVolume);
                 }}
-                data-testid="settings-volume-up"
+                size="small"
+                unsafeDisableTooltip={true}
               />
 
               <IconButton
                 aria-label="Reset volume"
-                size="small"
-                variant="danger"
+                data-testid="settings-volume-reset"
                 icon={SyncIcon}
-                unsafeDisableTooltip={true}
                 onClick={() => {
                   updateSetting(
                     'notificationVolume',
                     defaultSettings.notificationVolume,
                   );
                 }}
-                data-testid="settings-volume-reset"
+                size="small"
+                unsafeDisableTooltip={true}
+                variant="danger"
               />
             </ButtonGroup>
           </Stack>
         </Box>
 
         <Checkbox
-          name="useAlternateIdleIcon"
-          label="Use alternate idle icon"
           checked={settings.useAlternateIdleIcon}
+          label="Use alternate idle icon"
+          name="useAlternateIdleIcon"
           onChange={(evt) =>
             updateSetting('useAlternateIdleIcon', evt.target.checked)
           }
@@ -173,11 +174,11 @@ export const SystemSettings: FC = () => {
         />
 
         <Checkbox
-          name="openAtStartup"
-          label="Open at startup"
           checked={settings.openAtStartup}
-          visible={!isLinux()}
+          label="Open at startup"
+          name="openAtStartup"
           onChange={(evt) => updateSetting('openAtStartup', evt.target.checked)}
+          visible={!isLinux()}
         />
       </Stack>
     </fieldset>

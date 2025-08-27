@@ -5,6 +5,7 @@ import axios, {
 } from 'axios';
 
 import { logError } from '../../../shared/logger';
+
 import type { Link, Token } from '../../types';
 import { decryptValue } from '../comms';
 import { getNextURLFromLinkHeader } from './utils';

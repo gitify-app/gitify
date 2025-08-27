@@ -5,6 +5,7 @@ import {
 } from '@primer/octicons-react';
 
 import { logError, logWarn } from '../../shared/logger';
+
 import type { Chevron, Hostname, Link } from '../types';
 import type { Notification } from '../typesGitHub';
 import { getHtmlUrl, getLatestDiscussion } from './api/client';

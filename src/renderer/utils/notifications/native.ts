@@ -2,6 +2,7 @@ import path from 'node:path';
 
 import { APPLICATION } from '../../../shared/constants';
 import { isWindows } from '../../../shared/platform';
+
 import type { AccountNotifications, GitifyState } from '../../types';
 import { Notification } from '../../typesGitHub';
 import { getAccountUUID } from '../auth/utils';

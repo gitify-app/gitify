@@ -25,6 +25,6 @@ export const AllRead: FC<IAllRead> = ({ fullHeight = true }: IAllRead) => {
   const heading = `No new ${hasFilters ? 'filtered ' : ''} notifications`;
 
   return (
-    <EmojiSplash emoji={emoji} heading={heading} fullHeight={fullHeight} />
+    <EmojiSplash emoji={emoji} fullHeight={fullHeight} heading={heading} />
   );
 };

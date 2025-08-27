@@ -21,26 +21,26 @@ export const NotificationFooter: FC<INotificationFooter> = ({
 
   return (
     <Stack
-      direction="horizontal"
       align="center"
+      className={cn('text-xs', Opacity.MEDIUM)}
+      direction="horizontal"
       gap="condensed"
       wrap="wrap"
-      className={cn('text-xs', Opacity.MEDIUM)}
     >
       {notification.subject.user ? (
         <Box
-          title={notification.subject.user.login}
+          data-testid="view-profile"
           onClick={(event: MouseEvent<HTMLElement>) => {
             // Don't trigger onClick of parent element.
             event.stopPropagation();
             openUserProfile(notification.subject.user);
           }}
-          data-testid="view-profile"
+          title={notification.subject.user.login}
         >
           <AvatarWithFallback
-            src={notification.subject.user.avatar_url}
             alt={notification.subject.user.login}
             size={Size.SMALL}
+            src={notification.subject.user.avatar_url}
             userType={notification.subject.user.type}
           />
         </Box>
@@ -57,7 +57,7 @@ export const NotificationFooter: FC<INotificationFooter> = ({
       )}
 
       <Stack direction="horizontal" gap="none">
-        <Text title={reason.description} className="pr-1">
+        <Text className="pr-1" title={reason.description}>
           {reason.title}
         </Text>
         <RelativeTime datetime={notification.updated_at} />

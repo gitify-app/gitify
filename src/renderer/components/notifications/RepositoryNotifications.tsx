@@ -68,28 +68,28 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
         onClick={actionToggleRepositoryNotifications}
       >
         <Stack
-          direction="horizontal"
           align="center"
-          gap="condensed"
           className="relative"
+          direction="horizontal"
+          gap="condensed"
         >
           <Button
-            title="Open repository"
-            variant="invisible"
             alignContent="center"
             count={repoNotifications.length}
+            data-testid="open-repository"
             onClick={(event: MouseEvent<HTMLElement>) => {
               // Don't trigger onClick of parent element.
               event.stopPropagation();
               openRepository(repoNotifications[0].repository);
             }}
-            data-testid="open-repository"
+            title="Open repository"
+            variant="invisible"
           >
             <AvatarWithFallback
-              src={avatarUrl}
               alt={repoName}
               name={repoName}
               size={Size.LARGE}
+              src={avatarUrl}
               userType={repoNotifications[0].repository.owner.type}
             />
           </Button>
@@ -97,27 +97,27 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
           {!animateExit && (
             <HoverGroup bgColor="group-hover:bg-gitify-repository">
               <HoverButton
-                label="Mark repository as done"
-                icon={CheckIcon}
+                action={actionMarkAsDone}
                 enabled={isMarkAsDoneFeatureSupported(
                   repoNotifications[0].account,
                 )}
+                icon={CheckIcon}
+                label="Mark repository as done"
                 testid="repository-mark-as-done"
-                action={actionMarkAsDone}
               />
 
               <HoverButton
-                label="Mark repository as read"
-                icon={ReadIcon}
-                testid="repository-mark-as-read"
                 action={actionMarkAsRead}
+                icon={ReadIcon}
+                label="Mark repository as read"
+                testid="repository-mark-as-read"
               />
 
               <HoverButton
-                label={Chevron.label}
-                icon={Chevron.icon}
-                testid="repository-toggle"
                 action={actionToggleRepositoryNotifications}
+                icon={Chevron.icon}
+                label={Chevron.label}
+                testid="repository-toggle"
               />
             </HoverGroup>
           )}
@@ -127,10 +127,10 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
       {showRepositoryNotifications &&
         repoNotifications.map((notification) => (
           <NotificationRow
-            key={notification.id}
-            notification={notification}
             isAnimated={animateExit}
             isRead={showAsRead}
+            key={notification.id}
+            notification={notification}
           />
         ))}
     </>

@@ -15,12 +15,12 @@ import { FilterSection } from './FilterSection';
 export const UserTypeFilter: FC = () => {
   return (
     <FilterSection
-      id="filter-user-types"
-      title="User Type"
-      icon={FeedPersonIcon}
       filter={userTypeFilter}
       filterSetting="filterUserTypes"
+      icon={FeedPersonIcon}
+      id="filter-user-types"
       layout="horizontal"
+      title="User Type"
       tooltip={
         <Stack direction="vertical" gap="condensed">
           <Text>Filter notifications by user type:</Text>

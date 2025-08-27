@@ -5,6 +5,7 @@ import { updateElectronApp } from 'update-electron-app';
 
 import { APPLICATION } from '../shared/constants';
 import { logError, logInfo } from '../shared/logger';
+
 import type MenuBuilder from './menu';
 
 export default class Updater {
