@@ -18,9 +18,6 @@ const configuration: webpack.Configuration = {
   output: {
     path: webpackPaths.buildPath,
     filename: 'preload.js',
-    library: {
-      type: 'umd',
-    },
   },
 };
 

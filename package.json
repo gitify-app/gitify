@@ -13,7 +13,6 @@
     "watch:main": "webpack --watch --config ./config/webpack.config.main.base.ts",
     "watch:preload": "webpack --watch --config ./config/webpack.config.preload.base.ts",
     "watch:renderer": "webpack --watch --config ./config/webpack.config.renderer.base.ts",
-    "prepare:remove-source-maps": "ts-node ./scripts/delete-source-maps.ts",
     "package:linux": "electron-builder --linux --config ./config/electron-builder.js",
     "package:macos": "electron-builder --mac --config ./config/electron-builder.js",
     "package:win": "electron-builder --win --config ./config/electron-builder.js",
