@@ -22,8 +22,6 @@ import {
   Text,
 } from '@primer/react';
 
-import { logError } from '../../shared/logger';
-
 import { AvatarWithFallback } from '../components/avatars/AvatarWithFallback';
 import { Contents } from '../components/layout/Contents';
 import { Page } from '../components/layout/Page';
@@ -44,6 +42,7 @@ import {
   openDeveloperSettings,
   openHost,
 } from '../utils/links';
+import { rendererLogError } from '../utils/logger';
 import { saveState } from '../utils/storage';
 
 export const AccountsRoute: FC = () => {
@@ -98,7 +97,7 @@ export const AccountsRoute: FC = () => {
     try {
       await loginWithGitHubApp();
     } catch (err) {
-      logError('loginWithGitHub', 'failed to login with GitHub', err);
+      rendererLogError('loginWithGitHub', 'failed to login with GitHub', err);
     }
   }, []);
 

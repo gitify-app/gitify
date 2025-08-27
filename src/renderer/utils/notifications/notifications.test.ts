@@ -1,13 +1,12 @@
 import axios from 'axios';
 import nock from 'nock';
 
-import * as logger from '../../../shared/logger';
-
 import { mockSingleAccountNotifications } from '../../__mocks__/notifications-mocks';
 import { partialMockNotification } from '../../__mocks__/partial-mocks';
 import { mockSettings } from '../../__mocks__/state-mocks';
 import type { Link } from '../../types';
 import type { Repository } from '../../typesGitHub';
+import * as logger from '../../utils/logger';
 import { enrichNotification, getNotificationCount } from './notifications';
 
 describe('renderer/utils/notifications/notifications.ts', () => {
@@ -28,7 +27,9 @@ describe('renderer/utils/notifications/notifications.ts', () => {
   });
 
   it('enrichNotification - catches error and logs message', async () => {
-    const logErrorSpy = jest.spyOn(logger, 'logError').mockImplementation();
+    const rendererLogErrorSpy = jest
+      .spyOn(logger, 'rendererLogError')
+      .mockImplementation();
 
     const mockError = new Error('Test error');
     const mockNotification = partialMockNotification({
@@ -47,7 +48,7 @@ describe('renderer/utils/notifications/notifications.ts', () => {
 
     await enrichNotification(mockNotification, mockSettings);
 
-    expect(logErrorSpy).toHaveBeenCalledWith(
+    expect(rendererLogErrorSpy).toHaveBeenCalledWith(
       'enrichNotification',
       'failed to enrich notification details for',
       mockError,

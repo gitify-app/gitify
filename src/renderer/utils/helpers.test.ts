@@ -6,11 +6,10 @@ import {
 
 import type { AxiosPromise, AxiosResponse } from 'axios';
 
-import * as logger from '../../shared/logger';
-
 import { mockPersonalAccessTokenAccount } from '../__mocks__/state-mocks';
 import type { Hostname, Link } from '../types';
 import type { SubjectType } from '../typesGitHub';
+import * as logger from '../utils/logger';
 import {
   mockGraphQLResponse,
   mockSingleNotification,
@@ -484,7 +483,9 @@ describe('renderer/utils/helpers.ts', () => {
       });
 
       it('defaults when exception handled during specialized html enrichment process', async () => {
-        const logErrorSpy = jest.spyOn(logger, 'logError').mockImplementation();
+        const rendererLogErrorSpy = jest
+          .spyOn(logger, 'rendererLogError')
+          .mockImplementation();
 
         const subject = {
           title: 'generate github web url unit tests',
@@ -512,7 +513,7 @@ describe('renderer/utils/helpers.ts', () => {
         expect(result).toBe(
           `https://github.com/gitify-app/notifications-test?${mockNotificationReferrer}`,
         );
-        expect(logErrorSpy).toHaveBeenCalledTimes(2);
+        expect(rendererLogErrorSpy).toHaveBeenCalledTimes(2);
       });
     });
   });
