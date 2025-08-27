@@ -8,4 +8,6 @@ export const APPLICATION = {
   FIRST_RUN_FOLDER: 'gitify-first-run',
 
   WEBSITE: 'https://gitify.io',
+
+  UPDATE_CHECK_INTERVAL_MS: 24 * 60 * 60 * 1000, // 24 hours
 };
