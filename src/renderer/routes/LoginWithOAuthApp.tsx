@@ -18,8 +18,6 @@ import {
 } from '@primer/react';
 import { Banner } from '@primer/react/experimental';
 
-import { logError } from '../../shared/logger';
-
 import { Contents } from '../components/layout/Contents';
 import { Page } from '../components/layout/Page';
 import { Footer } from '../components/primitives/Footer';
@@ -35,6 +33,7 @@ import {
 } from '../utils/auth/utils';
 import { openExternalLink } from '../utils/comms';
 import { Constants } from '../utils/constants';
+import { rendererLogError } from '../utils/logger';
 
 interface IFormData {
   hostname?: Hostname;
@@ -120,7 +119,11 @@ export const LoginWithOAuthAppRoute: FC = () => {
         await loginWithOAuthApp(data as LoginOAuthAppOptions);
         navigate(-1);
       } catch (err) {
-        logError('loginWithOAuthApp', 'Failed to login with OAuth App', err);
+        rendererLogError(
+          'loginWithOAuthApp',
+          'Failed to login with OAuth App',
+          err,
+        );
         setErrors({
           invalidCredentialsForHost: `Failed to validate provided Client ID and Secret against ${data.hostname}`,
         });

@@ -18,8 +18,6 @@ import {
 } from '@primer/react';
 import { Banner } from '@primer/react/experimental';
 
-import { logError } from '../../shared/logger';
-
 import { Contents } from '../components/layout/Contents';
 import { Page } from '../components/layout/Page';
 import { Footer } from '../components/primitives/Footer';
@@ -35,6 +33,7 @@ import {
 } from '../utils/auth/utils';
 import { openExternalLink } from '../utils/comms';
 import { Constants } from '../utils/constants';
+import { rendererLogError } from '../utils/logger';
 
 interface IFormData {
   token?: Token;
@@ -112,7 +111,7 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
         );
         navigate(-1);
       } catch (err) {
-        logError(
+        rendererLogError(
           'loginWithPersonalAccessToken',
           'Failed to login with PAT',
           err,

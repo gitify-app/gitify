@@ -4,13 +4,12 @@ import { useNavigate } from 'react-router-dom';
 import { KeyIcon, MarkGithubIcon, PersonIcon } from '@primer/octicons-react';
 import { Button, Heading, Stack, Text } from '@primer/react';
 
-import { logError } from '../../shared/logger';
-
 import { LogoIcon } from '../components/icons/LogoIcon';
 import { Centered } from '../components/layout/Centered';
 import { AppContext } from '../context/App';
 import { Size } from '../types';
 import { showWindow } from '../utils/comms';
+import { rendererLogError } from '../utils/logger';
 
 export const LoginRoute: FC = () => {
   const navigate = useNavigate();
@@ -27,7 +26,11 @@ export const LoginRoute: FC = () => {
     try {
       await loginWithGitHubApp();
     } catch (err) {
-      logError('loginWithGitHubApp', 'failed to login with GitHub', err);
+      rendererLogError(
+        'loginWithGitHubApp',
+        'failed to login with GitHub',
+        err,
+      );
     }
   }, [loginWithGitHubApp]);
 

@@ -1,5 +1,3 @@
-import { logError, logWarn } from '../../../shared/logger';
-
 import type {
   AccountNotifications,
   GitifyState,
@@ -9,6 +7,7 @@ import type { GitifySubject, Notification } from '../../typesGitHub';
 import { listNotificationsForAuthenticatedUser } from '../api/client';
 import { determineFailureType } from '../api/errors';
 import { updateTrayIcon } from '../comms';
+import { rendererLogError, rendererLogWarn } from '../logger';
 import {
   filterBaseNotifications,
   filterDetailedNotifications,
@@ -78,7 +77,7 @@ export async function getAllNotifications(
             error: null,
           };
         } catch (err) {
-          logError(
+          rendererLogError(
             'getAllNotifications',
             'error occurred while fetching account notifications',
             err,
@@ -123,14 +122,17 @@ export async function enrichNotification(
     const handler = createNotificationHandler(notification);
     additionalSubjectDetails = await handler.enrich(notification, settings);
   } catch (err) {
-    logError(
+    rendererLogError(
       'enrichNotification',
       'failed to enrich notification details for',
       err,
       notification,
     );
 
-    logWarn('enrichNotification', 'Continuing with base notification details');
+    rendererLogWarn(
+      'enrichNotification',
+      'Continuing with base notification details',
+    );
   }
 
   return {

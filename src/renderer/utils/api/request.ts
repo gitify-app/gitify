@@ -4,10 +4,9 @@ import axios, {
   type Method,
 } from 'axios';
 
-import { logError } from '../../../shared/logger';
-
 import type { Link, Token } from '../../types';
 import { decryptValue } from '../comms';
+import { rendererLogError } from '../logger';
 import { getNextURLFromLinkHeader } from './utils';
 
 /**
@@ -70,7 +69,7 @@ export async function apiRequestAuth(
       nextUrl = getNextURLFromLinkHeader(response);
     }
   } catch (err) {
-    logError('apiRequestAuth', 'API request failed:', err);
+    rendererLogError('apiRequestAuth', 'API request failed:', err);
 
     throw err;
   }

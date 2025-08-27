@@ -3,6 +3,7 @@ import type { StateType, Subject, SubjectType } from '../typesGitHub';
 import {
   mockEnterpriseNotifications,
   mockGitHubNotifications,
+  mockSingleNotification,
 } from '../utils/api/__mocks__/response-mocks';
 import {
   mockGitHubCloudAccount,
@@ -25,7 +26,7 @@ export const mockAccountNotifications: AccountNotifications[] = [
 export const mockSingleAccountNotifications: AccountNotifications[] = [
   {
     account: mockGitHubCloudAccount,
-    notifications: [mockGitHubNotifications[0]],
+    notifications: [mockSingleNotification],
     error: null,
   },
 ];

@@ -1,13 +1,12 @@
 import axios, { type AxiosPromise, type AxiosResponse } from 'axios';
 
-import * as logger from '../../../shared/logger';
-
 import {
   mockGitHubCloudAccount,
   mockGitHubEnterpriseServerAccount,
   mockToken,
 } from '../../__mocks__/state-mocks';
 import type { Hostname, Link, SettingsState, Token } from '../../types';
+import * as logger from '../../utils/logger';
 import {
   getAuthenticatedUser,
   getHtmlUrl,
@@ -322,7 +321,9 @@ describe('renderer/utils/api/client.ts', () => {
     });
 
     it('should handle error', async () => {
-      const logErrorSpy = jest.spyOn(logger, 'logError').mockImplementation();
+      const rendererLogErrorSpy = jest
+        .spyOn(logger, 'rendererLogError')
+        .mockImplementation();
 
       const apiRequestAuthMock = jest.spyOn(apiRequests, 'apiRequestAuth');
 
@@ -335,7 +336,7 @@ describe('renderer/utils/api/client.ts', () => {
         '123' as Token,
       );
 
-      expect(logErrorSpy).toHaveBeenCalledTimes(1);
+      expect(rendererLogErrorSpy).toHaveBeenCalledTimes(1);
     });
   });
 });

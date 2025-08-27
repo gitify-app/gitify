@@ -5,7 +5,10 @@ import {
 import { mockAuth } from '../../__mocks__/state-mocks';
 import { defaultSettings } from '../../context/defaults';
 import type { SettingsState } from '../../types';
-import { mockGitHubNotifications } from '../api/__mocks__/response-mocks';
+import {
+  mockGitHubNotifications,
+  mockSingleNotification,
+} from '../api/__mocks__/response-mocks';
 import * as comms from '../comms';
 import * as links from '../links';
 import * as native from './native';
@@ -115,13 +118,13 @@ describe('renderer/utils/notifications/native.ts', () => {
       jest.spyOn(links, 'openNotification');
 
       const nativeNotification: Notification = native.raiseNativeNotification([
-        mockGitHubNotifications[0],
+        mockSingleNotification,
       ]);
       nativeNotification.onclick(null);
 
       expect(links.openNotification).toHaveBeenCalledTimes(1);
       expect(links.openNotification).toHaveBeenLastCalledWith(
-        mockGitHubNotifications[0],
+        mockSingleNotification,
       );
       expect(hideWindowMock).toHaveBeenCalledTimes(1);
     });

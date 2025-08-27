@@ -3,8 +3,6 @@ import { act, renderHook, waitFor } from '@testing-library/react';
 import axios, { AxiosError } from 'axios';
 import nock from 'nock';
 
-import * as logger from '../../shared/logger';
-
 import {
   mockAuth,
   mockGitHubCloudAccount,
@@ -16,16 +14,19 @@ import {
   mockSingleNotification,
 } from '../utils/api/__mocks__/response-mocks';
 import { Errors } from '../utils/errors';
+import * as logger from '../utils/logger';
 import { useNotifications } from './useNotifications';
 
 describe('renderer/hooks/useNotifications.ts', () => {
-  const logErrorSpy = jest.spyOn(logger, 'logError').mockImplementation();
+  const rendererLogErrorSpy = jest
+    .spyOn(logger, 'rendererLogError')
+    .mockImplementation();
 
   beforeEach(() => {
     // axios will default to using the XHR adapter which can't be intercepted
     // by nock. So, configure axios to use the node adapter.
     axios.defaults.adapter = 'http';
-    logErrorSpy.mockReset();
+    rendererLogErrorSpy.mockReset();
   });
 
   const id = mockSingleNotification.id;
@@ -300,7 +301,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
       });
 
       expect(result.current.globalError).toBe(Errors.BAD_CREDENTIALS);
-      expect(logErrorSpy).toHaveBeenCalledTimes(4);
+      expect(rendererLogErrorSpy).toHaveBeenCalledTimes(4);
     });
 
     it('should fetch notifications with different failures', async () => {
@@ -343,7 +344,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
       });
 
       expect(result.current.globalError).toBeNull();
-      expect(logErrorSpy).toHaveBeenCalledTimes(4);
+      expect(rendererLogErrorSpy).toHaveBeenCalledTimes(4);
     });
   });
 
@@ -386,7 +387,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
       });
 
       expect(result.current.notifications.length).toBe(0);
-      expect(logErrorSpy).toHaveBeenCalledTimes(1);
+      expect(rendererLogErrorSpy).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -429,7 +430,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
       });
 
       expect(result.current.notifications.length).toBe(0);
-      expect(logErrorSpy).toHaveBeenCalledTimes(1);
+      expect(rendererLogErrorSpy).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -521,7 +522,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
       });
 
       expect(result.current.notifications.length).toBe(0);
-      expect(logErrorSpy).toHaveBeenCalledTimes(1);
+      expect(rendererLogErrorSpy).toHaveBeenCalledTimes(1);
     });
   });
 });

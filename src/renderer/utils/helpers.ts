@@ -4,13 +4,12 @@ import {
   ChevronRightIcon,
 } from '@primer/octicons-react';
 
-import { logError, logWarn } from '../../shared/logger';
-
 import type { Chevron, Hostname, Link } from '../types';
 import type { Notification } from '../typesGitHub';
 import { getHtmlUrl, getLatestDiscussion } from './api/client';
 import type { PlatformType } from './auth/types';
 import { Constants } from './constants';
+import { rendererLogError, rendererLogWarn } from './logger';
 import { getCheckSuiteAttributes } from './notifications/handlers/checkSuite';
 import { getClosestDiscussionCommentOrReply } from './notifications/handlers/discussion';
 import { getWorkflowRunAttributes } from './notifications/handlers/workflowRun';
@@ -151,14 +150,14 @@ export async function generateGitHubWebUrl(
       }
     }
   } catch (err) {
-    logError(
+    rendererLogError(
       'generateGitHubWebUrl',
       'Failed to resolve specific notification html url for',
       err,
       notification,
     );
 
-    logWarn(
+    rendererLogWarn(
       'generateGitHubWebUrl',
       `Falling back to repository root url: ${notification.repository.full_name}`,
     );
