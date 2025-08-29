@@ -2,7 +2,7 @@ import { type FC, useContext } from 'react';
 
 import {
   CommentIcon,
-  IssueClosedIcon,
+  IssueOpenedIcon,
   MilestoneIcon,
   TagIcon,
 } from '@primer/octicons-react';
@@ -40,8 +40,8 @@ export const MetricGroup: FC<IMetricGroup> = ({
       <Box className="flex gap-1">
         {notification.subject?.linkedIssues?.length > 0 && (
           <MetricPill
-            color={IconColor.GREEN}
-            icon={IssueClosedIcon}
+            color={IconColor.GRAY}
+            icon={IssueOpenedIcon}
             metric={notification.subject.linkedIssues.length}
             title={linkedIssuesPillDescription}
           />
