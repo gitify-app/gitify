@@ -27,10 +27,8 @@ export function isEnterpriseServerHost(hostname: Hostname): boolean {
 export function generateNotificationReferrerId(
   notification: Notification,
 ): string {
-  const buffer = Buffer.from(
-    `018:NotificationThread${notification.id}:${notification.account.user.id}`,
-  );
-  return buffer.toString('base64');
+  const raw = `018:NotificationThread${notification.id}:${notification.account.user.id}`;
+  return btoa(raw);
 }
 
 export function getCheckSuiteUrl(notification: Notification): Link {
