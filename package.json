@@ -92,7 +92,7 @@
     "@types/react": "19.1.12",
     "@types/react-dom": "19.1.9",
     "@types/react-router-dom": "5.3.3",
-    "@types/semver": "7.7.0",
+    "@types/semver": "7.7.1",
     "axios": "1.11.0",
     "clsx": "2.1.1",
     "concurrently": "9.2.1",
