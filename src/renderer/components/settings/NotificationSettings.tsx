@@ -5,7 +5,7 @@ import {
   CheckIcon,
   CommentIcon,
   GitPullRequestIcon,
-  IssueClosedIcon,
+  IssueOpenedIcon,
   MilestoneIcon,
   TagIcon,
 } from '@primer/octicons-react';
@@ -105,7 +105,7 @@ export const NotificationSettings: FC = () => {
                   <Box className="pl-4">
                     <Stack direction="vertical" gap="none">
                       <Stack direction="horizontal" gap="condensed">
-                        <IssueClosedIcon size={Size.SMALL} />
+                        <IssueOpenedIcon size={Size.SMALL} />
                         linked issues
                       </Stack>
                       <Stack direction="horizontal" gap="condensed">
@@ -150,7 +150,7 @@ export const NotificationSettings: FC = () => {
                       </li>
                       <li>
                         <Stack direction="horizontal" gap="condensed">
-                          <IssueClosedIcon size={Size.SMALL} />
+                          <IssueOpenedIcon size={Size.SMALL} />
                           Issue
                         </Stack>
                       </li>
