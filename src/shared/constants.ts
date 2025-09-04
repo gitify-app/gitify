@@ -11,5 +11,9 @@ export const APPLICATION = {
 
   REPO_SLUG: 'gitify-app/gitify',
 
+  DEFAULT_KEYBOARD_SHORTCUT: 'CommandOrControl+Shift+G',
+
+  NOTIFICATION_SOUND: 'clearly.mp3',
+
   UPDATE_CHECK_INTERVAL_MS: 24 * 60 * 60 * 1000, // 24 hours
 };

@@ -22,6 +22,7 @@ import { Contents } from '../components/layout/Contents';
 import { Page } from '../components/layout/Page';
 import { Footer } from '../components/primitives/Footer';
 import { Header } from '../components/primitives/Header';
+import { Constants } from '../constants';
 import { AppContext } from '../context/App';
 import type { Hostname, Token } from '../types';
 import type { LoginPersonalAccessTokenOptions } from '../utils/auth/types';
@@ -32,7 +33,6 @@ import {
   isValidToken,
 } from '../utils/auth/utils';
 import { openExternalLink } from '../utils/comms';
-import { Constants } from '../utils/constants';
 import { rendererLogError } from '../utils/logger';
 
 interface IFormData {

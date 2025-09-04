@@ -9,12 +9,16 @@ export interface IEmojiText {
 }
 
 export const EmojiText: FC<IEmojiText> = ({ text }) => {
-  const ref = useRef(null);
+  const ref = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
-    if (ref.current) {
-      ref.current.innerHTML = convertTextToEmojiImgHtml(text);
-    }
+    const updateEmojiText = async () => {
+      if (ref.current) {
+        const emojiHtml = await convertTextToEmojiImgHtml(text);
+        ref.current.innerHTML = emojiHtml;
+      }
+    };
+    updateEmojiText();
   }, [text]);
 
   return <Box className="text-5xl" ref={ref} />;

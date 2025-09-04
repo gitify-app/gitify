@@ -1,11 +1,9 @@
-import { ipcRenderer } from 'electron';
-
 import { format } from 'date-fns';
 import semver from 'semver';
 
 import { APPLICATION } from '../../../shared/constants';
-import { namespacedEvent } from '../../../shared/events';
 
+import { Constants } from '../../constants';
 import type {
   Account,
   AuthCode,
@@ -20,7 +18,6 @@ import type { UserDetails } from '../../typesGitHub';
 import { getAuthenticatedUser } from '../api/client';
 import { apiRequest } from '../api/request';
 import { encryptValue, openExternalLink } from '../comms';
-import { Constants } from '../constants';
 import { getPlatformFromHostname } from '../helpers';
 import { rendererLogError, rendererLogInfo, rendererLogWarn } from '../logger';
 import type { AuthMethod, AuthResponse, AuthTokenResponse } from './types';
@@ -66,16 +63,13 @@ export function authGitHub(
       }
     };
 
-    ipcRenderer.on(
-      namespacedEvent('auth-callback'),
-      (_, callbackUrl: string) => {
-        rendererLogInfo(
-          'renderer:auth-callback',
-          `received authentication callback URL ${callbackUrl}`,
-        );
-        handleCallback(callbackUrl);
-      },
-    );
+    window.gitify.onAuthCallback((callbackUrl: string) => {
+      rendererLogInfo(
+        'renderer:auth-callback',
+        `received authentication callback URL ${callbackUrl}`,
+      );
+      handleCallback(callbackUrl);
+    });
   });
 }
 

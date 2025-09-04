@@ -1,5 +1,3 @@
-import { ipcRenderer } from 'electron';
-
 import type { AxiosPromise, AxiosResponse } from 'axios';
 import axios from 'axios';
 import nock from 'nock';
@@ -35,13 +33,11 @@ describe('renderer/utils/auth/utils.ts', () => {
     });
 
     it('should call authGitHub - success auth flow', async () => {
-      const mockIpcRendererOn = (
-        jest.spyOn(ipcRenderer, 'on') as jest.Mock
-      ).mockImplementation((event, callback) => {
-        if (event === 'gitify:auth-callback') {
-          callback(null, 'gitify://auth?code=123-456');
-        }
-      });
+      window.gitify.onAuthCallback = jest
+        .fn()
+        .mockImplementation((callback) => {
+          callback('gitify://auth?code=123-456');
+        });
 
       const res = await auth.authGitHub();
 
@@ -50,9 +46,8 @@ describe('renderer/utils/auth/utils.ts', () => {
         'https://github.com/login/oauth/authorize?client_id=FAKE_CLIENT_ID_123&scope=read%3Auser%2Cnotifications%2Crepo',
       );
 
-      expect(mockIpcRendererOn).toHaveBeenCalledTimes(1);
-      expect(mockIpcRendererOn).toHaveBeenCalledWith(
-        'gitify:auth-callback',
+      expect(window.gitify.onAuthCallback).toHaveBeenCalledTimes(1);
+      expect(window.gitify.onAuthCallback).toHaveBeenCalledWith(
         expect.any(Function),
       );
 
@@ -61,13 +56,11 @@ describe('renderer/utils/auth/utils.ts', () => {
     });
 
     it('should call authGitHub - success oauth flow', async () => {
-      const mockIpcRendererOn = (
-        jest.spyOn(ipcRenderer, 'on') as jest.Mock
-      ).mockImplementation((event, callback) => {
-        if (event === 'gitify:auth-callback') {
-          callback(null, 'gitify://oauth?code=123-456');
-        }
-      });
+      window.gitify.onAuthCallback = jest
+        .fn()
+        .mockImplementation((callback) => {
+          callback('gitify://oauth?code=123-456');
+        });
 
       const res = await auth.authGitHub({
         clientId: 'BYO_CLIENT_ID' as ClientID,
@@ -80,9 +73,8 @@ describe('renderer/utils/auth/utils.ts', () => {
         'https://my.git.com/login/oauth/authorize?client_id=BYO_CLIENT_ID&scope=read%3Auser%2Cnotifications%2Crepo',
       );
 
-      expect(mockIpcRendererOn).toHaveBeenCalledTimes(1);
-      expect(mockIpcRendererOn).toHaveBeenCalledWith(
-        'gitify:auth-callback',
+      expect(window.gitify.onAuthCallback).toHaveBeenCalledTimes(1);
+      expect(window.gitify.onAuthCallback).toHaveBeenCalledWith(
         expect.any(Function),
       );
 
@@ -91,16 +83,13 @@ describe('renderer/utils/auth/utils.ts', () => {
     });
 
     it('should call authGitHub - failure', async () => {
-      const mockIpcRendererOn = (
-        jest.spyOn(ipcRenderer, 'on') as jest.Mock
-      ).mockImplementation((event, callback) => {
-        if (event === 'gitify:auth-callback') {
+      window.gitify.onAuthCallback = jest
+        .fn()
+        .mockImplementation((callback) => {
           callback(
-            null,
             'gitify://auth?error=invalid_request&error_description=The+redirect_uri+is+missing+or+invalid.&error_uri=https://docs.github.com/en/developers/apps/troubleshooting-oauth-errors',
           );
-        }
-      });
+        });
 
       await expect(async () => await auth.authGitHub()).rejects.toEqual(
         new Error(
@@ -113,9 +102,8 @@ describe('renderer/utils/auth/utils.ts', () => {
         'https://github.com/login/oauth/authorize?client_id=FAKE_CLIENT_ID_123&scope=read%3Auser%2Cnotifications%2Crepo',
       );
 
-      expect(mockIpcRendererOn).toHaveBeenCalledTimes(1);
-      expect(mockIpcRendererOn).toHaveBeenCalledWith(
-        'gitify:auth-callback',
+      expect(window.gitify.onAuthCallback).toHaveBeenCalledTimes(1);
+      expect(window.gitify.onAuthCallback).toHaveBeenCalledWith(
         expect.any(Function),
       );
     });

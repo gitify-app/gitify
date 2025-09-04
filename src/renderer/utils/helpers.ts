@@ -4,11 +4,11 @@ import {
   ChevronRightIcon,
 } from '@primer/octicons-react';
 
+import { Constants } from '../constants';
 import type { Chevron, Hostname, Link } from '../types';
 import type { Notification } from '../typesGitHub';
 import { getHtmlUrl, getLatestDiscussion } from './api/client';
 import type { PlatformType } from './auth/types';
-import { Constants } from './constants';
 import { rendererLogError, rendererLogWarn } from './logger';
 import { getCheckSuiteAttributes } from './notifications/handlers/checkSuite';
 import { getClosestDiscussionCommentOrReply } from './notifications/handlers/discussion';
@@ -27,10 +27,8 @@ export function isEnterpriseServerHost(hostname: Hostname): boolean {
 export function generateNotificationReferrerId(
   notification: Notification,
 ): string {
-  const buffer = Buffer.from(
-    `018:NotificationThread${notification.id}:${notification.account.user.id}`,
-  );
-  return buffer.toString('base64');
+  const raw = `018:NotificationThread${notification.id}:${notification.account.user.id}`;
+  return btoa(raw);
 }
 
 export function getCheckSuiteUrl(notification: Notification): Link {

@@ -11,13 +11,13 @@ const configuration: webpack.Configuration = {
 
   mode: 'development',
 
-  target: 'electron-main',
+  target: 'electron-preload',
 
-  entry: [path.join(webpackPaths.srcMainPath, 'index.ts')],
+  entry: [path.join(webpackPaths.srcPreloadPath, 'index.ts')],
 
   output: {
     path: webpackPaths.buildPath,
-    filename: 'main.js',
+    filename: 'preload.js',
   },
 };
 

@@ -12,7 +12,7 @@ exports[`renderer/components/primitives/EmojiText.tsx should render 1`] = `
           alt="🍺"
           class="emoji"
           draggable="false"
-          src="images/twemoji/1f37a.svg"
+          src="/mock/images/assets/1f37a.svg"
         />
       </div>
     </div>
@@ -25,7 +25,7 @@ exports[`renderer/components/primitives/EmojiText.tsx should render 1`] = `
         alt="🍺"
         class="emoji"
         draggable="false"
-        src="images/twemoji/1f37a.svg"
+        src="/mock/images/assets/1f37a.svg"
       />
     </div>
   </div>,

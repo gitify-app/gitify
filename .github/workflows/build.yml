@@ -26,7 +26,6 @@ jobs:
       
       - run: pnpm install
       - run: pnpm build
-      - run: pnpm prepare:remove-source-maps
       - run: pnpm package:macos --publish=never -c.mac.identity=null
         env:
           CSC_LINK: ${{ secrets.CSC_LINK }}
@@ -61,7 +60,6 @@ jobs:
       
       - run: pnpm install
       - run: pnpm build
-      - run: pnpm prepare:remove-source-maps
       - run: pnpm package:win --publish=never
       
       - name: Clean up builds
@@ -93,7 +91,6 @@ jobs:
       
       - run: pnpm install
       - run: pnpm build
-      - run: pnpm prepare:remove-source-maps
       - run: pnpm package:linux --publish=never
       
       - name: Clean up builds

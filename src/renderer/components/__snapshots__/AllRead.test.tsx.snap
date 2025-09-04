@@ -38,7 +38,7 @@ exports[`renderer/components/AllRead.tsx should render itself & its children - n
                 alt="🎊"
                 class="emoji"
                 draggable="false"
-                src="images/twemoji/1f38a.svg"
+                src="/mock/images/assets/1f38a.svg"
               />
             </div>
             <div
@@ -85,7 +85,7 @@ exports[`renderer/components/AllRead.tsx should render itself & its children - n
               alt="🎊"
               class="emoji"
               draggable="false"
-              src="images/twemoji/1f38a.svg"
+              src="/mock/images/assets/1f38a.svg"
             />
           </div>
           <div
@@ -189,7 +189,7 @@ exports[`renderer/components/AllRead.tsx should render itself & its children - w
                 alt="🎊"
                 class="emoji"
                 draggable="false"
-                src="images/twemoji/1f38a.svg"
+                src="/mock/images/assets/1f38a.svg"
               />
             </div>
             <div
@@ -236,7 +236,7 @@ exports[`renderer/components/AllRead.tsx should render itself & its children - w
               alt="🎊"
               class="emoji"
               draggable="false"
-              src="images/twemoji/1f38a.svg"
+              src="/mock/images/assets/1f38a.svg"
             />
           </div>
           <div

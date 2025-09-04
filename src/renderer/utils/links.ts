@@ -1,13 +1,15 @@
+import { APPLICATION } from '../../shared/constants';
+
+import { Constants } from '../constants';
 import type { Account, Hostname, Link } from '../types';
 import type { Notification, Repository, SubjectUser } from '../typesGitHub';
 import { getDeveloperSettingsURL } from './auth/utils';
 import { openExternalLink } from './comms';
-import { Constants } from './constants';
 import { generateGitHubWebUrl } from './helpers';
 
 export function openGitifyReleaseNotes(version: string) {
   openExternalLink(
-    `https://github.com/${Constants.REPO_SLUG}/releases/tag/${version}` as Link,
+    `https://github.com/${APPLICATION.REPO_SLUG}/releases/tag/${version}` as Link,
   );
 }
 

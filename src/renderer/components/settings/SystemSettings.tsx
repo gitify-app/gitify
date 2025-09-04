@@ -11,12 +11,10 @@ import {
 } from '@primer/react';
 
 import { APPLICATION } from '../../../shared/constants';
-import { isLinux, isMacOS } from '../../../shared/platform';
 
 import { AppContext } from '../../context/App';
 import { defaultSettings } from '../../context/defaults';
 import { OpenPreference } from '../../types';
-import { Constants } from '../../utils/constants';
 import { Checkbox } from '../fields/Checkbox';
 import { RadioGroup } from '../fields/RadioGroup';
 import { VolumeDownIcon } from '../icons/VolumeDownIcon';
@@ -55,7 +53,7 @@ export const SystemSettings: FC = () => {
             <Box>
               When enabled you can use the hotkeys{' '}
               <Text as="strong" className="text-gitify-caution">
-                {Constants.DEFAULT_KEYBOARD_SHORTCUT}
+                {APPLICATION.DEFAULT_KEYBOARD_SHORTCUT}
               </Text>{' '}
               to show or hide {APPLICATION.NAME}.
             </Box>
@@ -69,7 +67,7 @@ export const SystemSettings: FC = () => {
           onChange={(evt) =>
             updateSetting('showNotificationsCountInTray', evt.target.checked)
           }
-          visible={isMacOS()}
+          visible={window.gitify.platform.isMacOS()}
         />
 
         <Checkbox
@@ -178,7 +176,7 @@ export const SystemSettings: FC = () => {
           label="Open at startup"
           name="openAtStartup"
           onChange={(evt) => updateSetting('openAtStartup', evt.target.checked)}
-          visible={!isLinux()}
+          visible={!window.gitify.platform.isLinux()}
         />
       </Stack>
     </fieldset>

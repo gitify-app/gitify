@@ -38,7 +38,7 @@ exports[`renderer/components/Oops.tsx should render itself & its children - fall
                 alt="🤔"
                 class="emoji"
                 draggable="false"
-                src="images/twemoji/1f914.svg"
+                src="/mock/images/assets/1f914.svg"
               />
             </div>
             <div
@@ -90,7 +90,7 @@ exports[`renderer/components/Oops.tsx should render itself & its children - fall
               alt="🤔"
               class="emoji"
               draggable="false"
-              src="images/twemoji/1f914.svg"
+              src="/mock/images/assets/1f914.svg"
             />
           </div>
           <div
@@ -199,7 +199,7 @@ exports[`renderer/components/Oops.tsx should render itself & its children - spec
                 alt="🔥"
                 class="emoji"
                 draggable="false"
-                src="images/twemoji/1f525.svg"
+                src="/mock/images/assets/1f525.svg"
               />
             </div>
             <div
@@ -251,7 +251,7 @@ exports[`renderer/components/Oops.tsx should render itself & its children - spec
               alt="🔥"
               class="emoji"
               draggable="false"
-              src="images/twemoji/1f525.svg"
+              src="/mock/images/assets/1f525.svg"
             />
           </div>
           <div
