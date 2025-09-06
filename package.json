@@ -78,7 +78,7 @@
     "@discordapp/twemoji": "16.0.1",
     "@electron/notarize": "3.1.0",
     "@primer/css": "22.0.2",
-    "@primer/octicons-react": "19.16.0",
+    "@primer/octicons-react": "19.17.0",
     "@primer/primitives": "11.1.0",
     "@primer/react": "36.27.0",
     "@tailwindcss/postcss": "4.1.13",
