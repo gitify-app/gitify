@@ -354,8 +354,8 @@ describe('renderer/context/App.tsx', () => {
         settings: {
           ...mockSettings,
           filterUserTypes: defaultSettings.filterUserTypes,
-          filterIncludeHandles: defaultSettings.filterIncludeHandles,
-          filterExcludeHandles: defaultSettings.filterExcludeHandles,
+          filterIncludeActors: defaultSettings.filterIncludeSearchTokens,
+          filterExcludeActors: defaultSettings.filterExcludeSearchTokens,
           filterReasons: defaultSettings.filterReasons,
         },
       });

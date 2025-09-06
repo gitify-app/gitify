@@ -5,12 +5,10 @@ import type {
   SubjectUser,
 } from '../../../typesGitHub';
 import {
-  filterNotificationByHandle,
-  filterNotificationByOrganization,
-  hasExcludeHandleFilters,
-  hasExcludeOrganizationFilters,
-  hasIncludeHandleFilters,
-  hasIncludeOrganizationFilters,
+  filterNotificationBySearchTerm,
+  hasExcludeSearchFilters,
+  hasIncludeSearchFilters,
+  isUserToken,
   reasonFilter,
   stateFilter,
   subjectTypeFilter,
@@ -25,7 +23,7 @@ export function filterBaseNotifications(
     let passesFilters = true;
 
     passesFilters =
-      passesFilters && passesOrganizationFilters(notification, settings);
+      passesFilters && passesActorIncludeExcludeFilters(notification, settings);
 
     if (subjectTypeFilter.hasFilters(settings)) {
       passesFilters =
@@ -69,10 +67,8 @@ export function filterDetailedNotifications(
 export function hasAnyFiltersSet(settings: SettingsState): boolean {
   return (
     userTypeFilter.hasFilters(settings) ||
-    hasIncludeHandleFilters(settings) ||
-    hasExcludeHandleFilters(settings) ||
-    hasIncludeOrganizationFilters(settings) ||
-    hasExcludeOrganizationFilters(settings) ||
+    hasIncludeSearchFilters(settings) ||
+    hasExcludeSearchFilters(settings) ||
     subjectTypeFilter.hasFilters(settings) ||
     stateFilter.hasFilters(settings) ||
     reasonFilter.hasFilters(settings)
@@ -93,44 +89,53 @@ function passesUserFilters(
       );
   }
 
-  if (hasIncludeHandleFilters(settings)) {
-    passesFilters =
-      passesFilters &&
-      settings.filterIncludeHandles.some((handle) =>
-        filterNotificationByHandle(notification, handle),
-      );
+  // Apply user-specific actor include filters (user: prefix) during detailed filtering
+  if (hasIncludeSearchFilters(settings)) {
+    const userIncludeTokens =
+      settings.filterIncludeSearchTokens.filter(isUserToken);
+    if (userIncludeTokens.length > 0) {
+      passesFilters =
+        passesFilters &&
+        userIncludeTokens.some((token) =>
+          filterNotificationBySearchTerm(notification, token),
+        );
+    }
   }
 
-  if (hasExcludeHandleFilters(settings)) {
-    passesFilters =
-      passesFilters &&
-      !settings.filterExcludeHandles.some((handle) =>
-        filterNotificationByHandle(notification, handle),
-      );
+  if (hasExcludeSearchFilters(settings)) {
+    const userExcludeTokens =
+      settings.filterExcludeSearchTokens.filter(isUserToken);
+    if (userExcludeTokens.length > 0) {
+      passesFilters =
+        passesFilters &&
+        !userExcludeTokens.some((token) =>
+          filterNotificationBySearchTerm(notification, token),
+        );
+    }
   }
 
   return passesFilters;
 }
 
-function passesOrganizationFilters(
+function passesActorIncludeExcludeFilters(
   notification: Notification,
   settings: SettingsState,
 ): boolean {
   let passesFilters = true;
 
-  if (hasIncludeOrganizationFilters(settings)) {
+  if (hasIncludeSearchFilters(settings)) {
     passesFilters =
       passesFilters &&
-      settings.filterIncludeOrganizations.some((organization) =>
-        filterNotificationByOrganization(notification, organization),
+      settings.filterIncludeSearchTokens.some((token) =>
+        filterNotificationBySearchTerm(notification, token),
       );
   }
 
-  if (hasExcludeOrganizationFilters(settings)) {
+  if (hasExcludeSearchFilters(settings)) {
     passesFilters =
       passesFilters &&
-      !settings.filterExcludeOrganizations.some((organization) =>
-        filterNotificationByOrganization(notification, organization),
+      !settings.filterExcludeSearchTokens.some((token) =>
+        filterNotificationBySearchTerm(notification, token),
       );
   }
 
