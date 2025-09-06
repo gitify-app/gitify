@@ -33,26 +33,29 @@ type InputToken = { id: number; text: string };
 type Qualifier = {
   key: string; // the qualifier prefix shown to user (author, org, repo)
   description: string;
-  example: string;
 };
 
 const QUALIFIERS: Qualifier[] = [
-  {
-    key: 'author:',
-    description: 'Filter by notification author',
-    example: 'author:octocat',
-  },
-  {
-    key: 'org:',
-    description: 'Filter by organization owner',
-    example: 'org:microsoft',
-  },
-  {
-    key: 'repo:',
-    description: 'Filter by repository full name',
-    example: 'repo:gitify-app/gitify',
-  },
+  { key: 'author:', description: 'Filter by notification author' },
+  { key: 'org:', description: 'Filter by organization owner' },
+  { key: 'repo:', description: 'Filter by repository full name' },
 ];
+
+const INCLUDE_EXAMPLES: Record<string, string> = {
+  'author:': 'author:octocat',
+  'org:': 'org:gitify-app',
+  'repo:': 'repo:gitify-app/gitify',
+};
+
+const EXCLUDE_EXAMPLES: Record<string, string> = {
+  'author:': 'author:spambot',
+  'org:': 'org:hooli',
+  'repo:': 'repo:hooli/nucleas',
+};
+
+function getExample(key: string, mode: 'include' | 'exclude') {
+  return (mode === 'include' ? INCLUDE_EXAMPLES : EXCLUDE_EXAMPLES)[key] || '';
+}
 
 const tokenEvents = ['Enter', 'Tab', ' ', ','];
 
@@ -209,7 +212,7 @@ export const SearchFilter: FC = () => {
           direction="horizontal"
           gap="condensed"
         >
-          <Box className="font-medium text-gitify-font w-28">
+          <Box className="font-medium text-gitify-font w-20">
             <Stack align="center" direction="horizontal" gap="condensed">
               <CheckCircleFillIcon className={IconColor.GREEN} />
               <Text>Include:</Text>
@@ -236,9 +239,17 @@ export const SearchFilter: FC = () => {
                   setShowIncludeSuggestions(false);
                 }
               }}
+              onFocus={(e) => {
+                if (
+                  !hasExcludeSearchFilters(settings) &&
+                  !!settings.detailedNotifications &&
+                  (e.target as HTMLInputElement).value.trim() === ''
+                ) {
+                  setShowIncludeSuggestions(true);
+                }
+              }}
               onKeyDown={includeSearchTokensKeyDown}
               onTokenRemove={removeIncludeSearchToken}
-              placeholder="author:octocat org:microsoft repo:gitify"
               size="small"
               title="Include searches"
               tokens={includeSearchTokens}
@@ -271,10 +282,17 @@ export const SearchFilter: FC = () => {
                           setShowIncludeSuggestions(false);
                         }}
                       >
-                        <Stack direction="vertical" gap="none">
-                          <Text>{q.key}</Text>
-                          <Text className="text-xs opacity-70">
+                        <Stack
+                          className="text-xs"
+                          direction="vertical"
+                          gap="none"
+                        >
+                          <Text className="text-xs font-semibold">{q.key}</Text>
+                          <Text className="text-[10px] opacity-70">
                             {q.description}
+                          </Text>
+                          <Text className="text-[10px] font-mono opacity-80">
+                            {getExample(q.key, 'include')}
                           </Text>
                         </Stack>
                       </ActionList.Item>
@@ -292,7 +310,7 @@ export const SearchFilter: FC = () => {
           direction="horizontal"
           gap="condensed"
         >
-          <Box className="font-medium text-gitify-font w-28">
+          <Box className="font-medium text-gitify-font w-20">
             <Stack align="center" direction="horizontal" gap="condensed">
               <NoEntryFillIcon className={IconColor.RED} />
               <Text>Exclude:</Text>
@@ -318,9 +336,17 @@ export const SearchFilter: FC = () => {
                   setShowExcludeSuggestions(false);
                 }
               }}
+              onFocus={(e) => {
+                if (
+                  !hasIncludeSearchFilters(settings) &&
+                  !!settings.detailedNotifications &&
+                  (e.target as HTMLInputElement).value.trim() === ''
+                ) {
+                  setShowExcludeSuggestions(true);
+                }
+              }}
               onKeyDown={excludeSearchTokensKeyDown}
               onTokenRemove={removeExcludeSearchToken}
-              placeholder="author:spambot org:legacycorp repo:oldrepo"
               size="small"
               title="Exclude searches"
               tokens={excludeSearchTokens}
@@ -353,10 +379,17 @@ export const SearchFilter: FC = () => {
                           setShowExcludeSuggestions(false);
                         }}
                       >
-                        <Stack direction="vertical" gap="none">
-                          <Text>{q.key}</Text>
-                          <Text className="text-xs opacity-70">
+                        <Stack
+                          className="text-xs"
+                          direction="vertical"
+                          gap="none"
+                        >
+                          <Text className="text-xs font-semibold">{q.key}</Text>
+                          <Text className="text-[10px] opacity-70">
                             {q.description}
+                          </Text>
+                          <Text className="text-[10px] font-mono opacity-80">
+                            {getExample(q.key, 'exclude')}
                           </Text>
                         </Stack>
                       </ActionList.Item>

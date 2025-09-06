@@ -48,7 +48,7 @@ export function filterNotificationBySearchTerm(
 
   if (isRepoToken(token)) {
     const repo = stripPrefix(token);
-    const name = notification.repository?.name;
+    const name = notification.repository?.full_name;
     return name?.toLowerCase() === repo.toLowerCase();
   }
 

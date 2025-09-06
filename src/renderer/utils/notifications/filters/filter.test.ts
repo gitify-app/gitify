@@ -2,7 +2,7 @@ import { partialMockNotification } from '../../../__mocks__/partial-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
 import { defaultSettings } from '../../../context/defaults';
 import type { Link, SearchToken, SettingsState } from '../../../types';
-import type { Notification } from '../../../typesGitHub';
+import type { Repository } from '../../../typesGitHub';
 import {
   filterBaseNotifications,
   filterDetailedNotifications,
@@ -125,34 +125,29 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
       });
 
       it('should filter notifications that match include organization', async () => {
-        // Initialize repository owner structure if it doesn't exist
-        // @ts-expect-error augment mock notification repository shape
-        if (!mockNotifications[0].repository)
-          mockNotifications[0].repository = {};
-        // @ts-expect-error augment mock notification repository owner
-        if (!mockNotifications[0].repository.owner)
-          mockNotifications[0].repository.owner = {};
-        // @ts-expect-error augment mock notification repository shape
-        if (!mockNotifications[1].repository)
-          mockNotifications[1].repository = {};
-        // @ts-expect-error augment mock notification repository owner
-        if (!mockNotifications[1].repository.owner)
-          mockNotifications[1].repository.owner = {};
+        mockNotifications[1].repository = {
+          owner: {
+            login: 'gitify-app',
+          },
+        } as Repository;
 
-        mockNotifications[0].repository.owner.login = 'microsoft';
-        mockNotifications[1].repository.owner.login = 'github';
+        mockNotifications[1].repository = {
+          owner: {
+            login: 'github',
+          },
+        } as Repository;
 
         // Apply base filtering first (where organization filtering now happens)
         let result = filterBaseNotifications(mockNotifications, {
           ...mockSettings,
-          filterIncludeSearchTokens: ['org:microsoft' as SearchToken],
+          filterIncludeSearchTokens: ['org:gitify-app' as SearchToken],
         });
 
         // Then apply detailed filtering
         result = filterDetailedNotifications(result, {
           ...mockSettings,
           detailedNotifications: true,
-          filterIncludeSearchTokens: ['org:microsoft' as SearchToken],
+          filterIncludeSearchTokens: ['org:gitify-app' as SearchToken],
         });
 
         expect(result.length).toBe(1);
@@ -160,18 +155,17 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
       });
 
       it('should filter notifications that match exclude organization', async () => {
-        // Initialize repository owner structure if it doesn't exist
-        if (!mockNotifications[0].repository)
-          mockNotifications[0].repository = {};
-        if (!mockNotifications[0].repository.owner)
-          mockNotifications[0].repository.owner = {};
-        if (!mockNotifications[1].repository)
-          mockNotifications[1].repository = {};
-        if (!mockNotifications[1].repository.owner)
-          mockNotifications[1].repository.owner = {};
+        mockNotifications[1].repository = {
+          owner: {
+            login: 'gitify-app',
+          },
+        } as Repository;
 
-        mockNotifications[0].repository.owner.login = 'microsoft';
-        mockNotifications[1].repository.owner.login = 'github';
+        mockNotifications[1].repository = {
+          owner: {
+            login: 'github',
+          },
+        } as Repository;
 
         // Apply base filtering first (where organization filtering now happens)
         let result = filterBaseNotifications(mockNotifications, {
@@ -191,25 +185,23 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
       });
 
       it('should filter notifications that match include repository', async () => {
-        // Ensure repository name structure
-        // @ts-expect-error augment mock shape for repository filtering
-        if (!mockNotifications[0].repository)
-          mockNotifications[0].repository = {};
-        // @ts-expect-error augment mock shape for repository filtering
-        if (!mockNotifications[1].repository)
-          mockNotifications[1].repository = {};
-        mockNotifications[0].repository.name = 'gitify';
-        mockNotifications[1].repository.name = 'other';
+        mockNotifications[1].repository = {
+          full_name: 'gitify-app/gitify',
+        } as Repository;
+
+        mockNotifications[1].repository = {
+          full_name: 'other/other',
+        } as Repository;
 
         let result = filterBaseNotifications(mockNotifications, {
           ...mockSettings,
-          filterIncludeSearchTokens: ['repo:gitify' as SearchToken],
+          filterIncludeSearchTokens: ['repo:gitify-app/gitify' as SearchToken],
         });
 
         result = filterDetailedNotifications(result, {
           ...mockSettings,
           detailedNotifications: true,
-          filterIncludeSearchTokens: ['repo:gitify' as SearchToken],
+          filterIncludeSearchTokens: ['repo:gitify-app/gitify' as SearchToken],
         });
 
         expect(result.length).toBe(1);
@@ -217,24 +209,27 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
       });
 
       it('should filter notifications that match exclude repository', async () => {
-        // @ts-expect-error augment mock shape for repository filtering
-        if (!mockNotifications[0].repository)
-          mockNotifications[0].repository = {};
-        // @ts-expect-error augment mock shape for repository filtering
-        if (!mockNotifications[1].repository)
-          mockNotifications[1].repository = {};
-        mockNotifications[0].repository.name = 'gitify';
-        mockNotifications[1].repository.name = 'other';
+        mockNotifications[1].repository = {
+          id: 1,
+          name: 'gitify',
+          full_name: 'gitify-app/gitify',
+        } as Repository;
+
+        mockNotifications[1].repository = {
+          id: 2,
+          name: 'other',
+          full_name: 'other/other',
+        } as Repository;
 
         let result = filterBaseNotifications(mockNotifications, {
           ...mockSettings,
-          filterExcludeSearchTokens: ['repo:other'],
+          filterExcludeSearchTokens: ['repo:other/other' as SearchToken],
         });
 
         result = filterDetailedNotifications(result, {
           ...mockSettings,
           detailedNotifications: true,
-          filterExcludeSearchTokens: ['repo:other'],
+          filterExcludeSearchTokens: ['repo:other/other' as SearchToken],
         });
 
         expect(result.length).toBe(1);
