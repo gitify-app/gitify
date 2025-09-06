@@ -5,10 +5,10 @@ import type {
   SubjectUser,
 } from '../../../typesGitHub';
 import {
+  AUTHOR_PREFIX,
   filterNotificationBySearchTerm,
   hasExcludeSearchFilters,
   hasIncludeSearchFilters,
-  isAuthorToken,
   reasonFilter,
   stateFilter,
   subjectTypeFilter,
@@ -91,8 +91,9 @@ function passesUserFilters(
 
   // Apply user-specific actor include filters (user: prefix) during detailed filtering
   if (hasIncludeSearchFilters(settings)) {
-    const userIncludeTokens =
-      settings.filterIncludeSearchTokens.filter(isAuthorToken);
+    const userIncludeTokens = settings.filterIncludeSearchTokens.filter((t) =>
+      t.startsWith(AUTHOR_PREFIX),
+    );
     if (userIncludeTokens.length > 0) {
       passesFilters =
         passesFilters &&
@@ -103,8 +104,9 @@ function passesUserFilters(
   }
 
   if (hasExcludeSearchFilters(settings)) {
-    const userExcludeTokens =
-      settings.filterExcludeSearchTokens.filter(isAuthorToken);
+    const userExcludeTokens = settings.filterExcludeSearchTokens.filter((t) =>
+      t.startsWith(AUTHOR_PREFIX),
+    );
     if (userExcludeTokens.length > 0) {
       passesFilters =
         passesFilters &&

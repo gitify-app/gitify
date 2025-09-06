@@ -8,14 +8,7 @@ import {
   RepoIcon,
   SearchIcon,
 } from '@primer/octicons-react';
-import {
-  ActionList,
-  Box,
-  Popover,
-  Stack,
-  Text,
-  TextInputWithTokens,
-} from '@primer/react';
+import { Box, Stack, Text, TextInputWithTokens } from '@primer/react';
 
 import { AppContext } from '../../context/App';
 import { IconColor, type SearchToken, Size } from '../../types';
@@ -30,32 +23,7 @@ import { RequiresDetailedNotificationWarning } from './RequiresDetailedNotificat
 
 type InputToken = { id: number; text: string };
 
-type Qualifier = {
-  key: string; // the qualifier prefix shown to user (author, org, repo)
-  description: string;
-};
-
-const QUALIFIERS: Qualifier[] = [
-  { key: 'author:', description: 'Filter by notification author' },
-  { key: 'org:', description: 'Filter by organization owner' },
-  { key: 'repo:', description: 'Filter by repository full name' },
-];
-
-const INCLUDE_EXAMPLES: Record<string, string> = {
-  'author:': 'author:octocat',
-  'org:': 'org:gitify-app',
-  'repo:': 'repo:gitify-app/gitify',
-};
-
-const EXCLUDE_EXAMPLES: Record<string, string> = {
-  'author:': 'author:spambot',
-  'org:': 'org:hooli',
-  'repo:': 'repo:hooli/nucleas',
-};
-
-function getExample(key: string, mode: 'include' | 'exclude') {
-  return (mode === 'include' ? INCLUDE_EXAMPLES : EXCLUDE_EXAMPLES)[key] || '';
-}
+import { SearchFilterSuggestions } from './SearchFilterSuggestions';
 
 const tokenEvents = ['Enter', 'Tab', ' ', ','];
 
@@ -193,10 +161,10 @@ export const SearchFilter: FC = () => {
                   </Stack>
                   <Stack direction="horizontal" gap="condensed">
                     <OrganizationIcon size={Size.SMALL} />
-                    Organization (org:orgname)
+                    Organization (org:name)
                   </Stack>
                   <Stack direction="horizontal" gap="condensed">
-                    <RepoIcon size={Size.SMALL} /> Repository (repo:reponame)
+                    <RepoIcon size={Size.SMALL} /> Repository (repo:fullname)
                   </Stack>
                 </Stack>
               </Box>
@@ -221,10 +189,7 @@ export const SearchFilter: FC = () => {
           <Box flexGrow={1} position="relative">
             <TextInputWithTokens
               block
-              disabled={
-                !settings.detailedNotifications ||
-                hasExcludeSearchFilters(settings)
-              }
+              disabled={!settings.detailedNotifications}
               onBlur={(e) => {
                 addIncludeSearchToken(e);
                 setShowIncludeSuggestions(false);
@@ -254,53 +219,11 @@ export const SearchFilter: FC = () => {
               title="Include searches"
               tokens={includeSearchTokens}
             />
-            {showIncludeSuggestions && (
-              <Popover
-                caret={false}
-                onOpenChange={() => setShowIncludeSuggestions(false)}
-                open
-              >
-                <Popover.Content sx={{ p: 0, mt: 1, width: '100%' }}>
-                  <ActionList>
-                    {QUALIFIERS.filter(
-                      (q) =>
-                        q.key.startsWith(includeInputValue.toLowerCase()) ||
-                        includeInputValue === '',
-                    ).map((q) => (
-                      <ActionList.Item
-                        key={q.key}
-                        onSelect={() => {
-                          setIncludeInputValue(`${q.key}:`);
-                          const inputEl =
-                            document.querySelector<HTMLInputElement>(
-                              `fieldset#${fieldsetId} input[title='Include searches']`,
-                            );
-                          if (inputEl) {
-                            inputEl.value = `${q.key}:`;
-                            inputEl.focus();
-                          }
-                          setShowIncludeSuggestions(false);
-                        }}
-                      >
-                        <Stack
-                          className="text-xs"
-                          direction="vertical"
-                          gap="none"
-                        >
-                          <Text className="text-xs font-semibold">{q.key}</Text>
-                          <Text className="text-[10px] opacity-70">
-                            {q.description}
-                          </Text>
-                          <Text className="text-[10px] font-mono opacity-80">
-                            {getExample(q.key, 'include')}
-                          </Text>
-                        </Stack>
-                      </ActionList.Item>
-                    ))}
-                  </ActionList>
-                </Popover.Content>
-              </Popover>
-            )}
+            <SearchFilterSuggestions
+              inputValue={includeInputValue}
+              onClose={() => setShowIncludeSuggestions(false)}
+              open={showIncludeSuggestions}
+            />
           </Box>
         </Stack>
 
@@ -319,10 +242,7 @@ export const SearchFilter: FC = () => {
           <Box flexGrow={1} position="relative">
             <TextInputWithTokens
               block
-              disabled={
-                !settings.detailedNotifications ||
-                hasIncludeSearchFilters(settings)
-              }
+              disabled={!settings.detailedNotifications}
               onBlur={(e) => {
                 addExcludeSearchToken(e);
                 setShowExcludeSuggestions(false);
@@ -351,53 +271,11 @@ export const SearchFilter: FC = () => {
               title="Exclude searches"
               tokens={excludeSearchTokens}
             />
-            {showExcludeSuggestions && (
-              <Popover
-                caret={false}
-                onOpenChange={() => setShowExcludeSuggestions(false)}
-                open
-              >
-                <Popover.Content sx={{ p: 0, mt: 1, width: '100%' }}>
-                  <ActionList>
-                    {QUALIFIERS.filter(
-                      (q) =>
-                        q.key.startsWith(excludeInputValue.toLowerCase()) ||
-                        excludeInputValue === '',
-                    ).map((q) => (
-                      <ActionList.Item
-                        key={q.key}
-                        onSelect={() => {
-                          setExcludeInputValue(`${q.key}:`);
-                          const inputEl =
-                            document.querySelector<HTMLInputElement>(
-                              `fieldset#${fieldsetId} input[title='Exclude searches']`,
-                            );
-                          if (inputEl) {
-                            inputEl.value = `${q.key}:`;
-                            inputEl.focus();
-                          }
-                          setShowExcludeSuggestions(false);
-                        }}
-                      >
-                        <Stack
-                          className="text-xs"
-                          direction="vertical"
-                          gap="none"
-                        >
-                          <Text className="text-xs font-semibold">{q.key}</Text>
-                          <Text className="text-[10px] opacity-70">
-                            {q.description}
-                          </Text>
-                          <Text className="text-[10px] font-mono opacity-80">
-                            {getExample(q.key, 'exclude')}
-                          </Text>
-                        </Stack>
-                      </ActionList.Item>
-                    ))}
-                  </ActionList>
-                </Popover.Content>
-              </Popover>
-            )}
+            <SearchFilterSuggestions
+              inputValue={excludeInputValue}
+              onClose={() => setShowExcludeSuggestions(false)}
+              open={showExcludeSuggestions}
+            />
           </Box>
         </Stack>
       </Stack>
