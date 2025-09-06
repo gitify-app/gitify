@@ -3,12 +3,15 @@ import { type FC, useContext, useEffect, useId, useState } from 'react';
 import {
   CheckCircleFillIcon,
   NoEntryFillIcon,
+  OrganizationIcon,
+  PersonIcon,
+  RepoIcon,
   SearchIcon,
 } from '@primer/octicons-react';
 import { Box, Stack, Text, TextInputWithTokens } from '@primer/react';
 
 import { AppContext } from '../../context/App';
-import { IconColor, type SearchToken } from '../../types';
+import { IconColor, type SearchToken, Size } from '../../types';
 import {
   hasExcludeSearchFilters,
   hasIncludeSearchFilters,
@@ -138,13 +141,15 @@ export const SearchFilter: FC = () => {
               <Box className="pl-4">
                 <Stack direction="vertical" gap="condensed">
                   <Stack direction="horizontal" gap="condensed">
+                    <PersonIcon size={Size.SMALL} />
                     Author (author:handle)
                   </Stack>
                   <Stack direction="horizontal" gap="condensed">
+                    <OrganizationIcon size={Size.SMALL} />
                     Organization (org:orgname)
                   </Stack>
                   <Stack direction="horizontal" gap="condensed">
-                    Repository (repo:reponame)
+                    <RepoIcon size={Size.SMALL} /> Repository (repo:reponame)
                   </Stack>
                 </Stack>
               </Box>

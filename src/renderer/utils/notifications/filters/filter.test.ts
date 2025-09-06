@@ -1,7 +1,7 @@
 import { partialMockNotification } from '../../../__mocks__/partial-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
 import { defaultSettings } from '../../../context/defaults';
-import type { Link, SettingsState } from '../../../types';
+import type { Link, SearchToken, SettingsState } from '../../../types';
 import type { Notification } from '../../../typesGitHub';
 import {
   filterBaseNotifications,
@@ -145,14 +145,14 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
         // Apply base filtering first (where organization filtering now happens)
         let result = filterBaseNotifications(mockNotifications, {
           ...mockSettings,
-          filterIncludeSearchTokens: ['org:microsoft'],
+          filterIncludeSearchTokens: ['org:microsoft' as SearchToken],
         });
 
         // Then apply detailed filtering
         result = filterDetailedNotifications(result, {
           ...mockSettings,
           detailedNotifications: true,
-          filterIncludeSearchTokens: ['org:microsoft'],
+          filterIncludeSearchTokens: ['org:microsoft' as SearchToken],
         });
 
         expect(result.length).toBe(1);
@@ -161,16 +161,12 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
 
       it('should filter notifications that match exclude organization', async () => {
         // Initialize repository owner structure if it doesn't exist
-        // @ts-expect-error augment mock notification repository shape
         if (!mockNotifications[0].repository)
           mockNotifications[0].repository = {};
-        // @ts-expect-error augment mock notification repository owner
         if (!mockNotifications[0].repository.owner)
           mockNotifications[0].repository.owner = {};
-        // @ts-expect-error augment mock notification repository shape
         if (!mockNotifications[1].repository)
           mockNotifications[1].repository = {};
-        // @ts-expect-error augment mock notification repository owner
         if (!mockNotifications[1].repository.owner)
           mockNotifications[1].repository.owner = {};
 
