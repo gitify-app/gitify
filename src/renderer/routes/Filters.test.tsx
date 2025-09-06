@@ -1,6 +1,5 @@
 import { act, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { MemoryRouter } from 'react-router-dom';
 
 import { mockAuth, mockSettings } from '../__mocks__/state-mocks';
 import { AppContext } from '../context/App';
@@ -31,9 +30,7 @@ describe('renderer/routes/Filters.tsx', () => {
               notifications: [],
             }}
           >
-            <MemoryRouter>
-              <FiltersRoute />
-            </MemoryRouter>
+            <FiltersRoute />
           </AppContext.Provider>,
         );
       });
@@ -52,9 +49,7 @@ describe('renderer/routes/Filters.tsx', () => {
               fetchNotifications,
             }}
           >
-            <MemoryRouter>
-              <FiltersRoute />
-            </MemoryRouter>
+            <FiltersRoute />
           </AppContext.Provider>,
         );
       });
@@ -78,9 +73,7 @@ describe('renderer/routes/Filters.tsx', () => {
               clearFilters,
             }}
           >
-            <MemoryRouter>
-              <FiltersRoute />
-            </MemoryRouter>
+            <FiltersRoute />
           </AppContext.Provider>,
         );
       });

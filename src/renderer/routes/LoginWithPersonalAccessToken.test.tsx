@@ -1,6 +1,5 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { MemoryRouter } from 'react-router-dom';
 
 import { AppContext } from '../context/App';
 import * as comms from '../utils/comms';
@@ -26,21 +25,13 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
   });
 
   it('renders correctly', () => {
-    const tree = render(
-      <MemoryRouter>
-        <LoginWithPersonalAccessTokenRoute />
-      </MemoryRouter>,
-    );
+    const tree = render(<LoginWithPersonalAccessTokenRoute />);
 
     expect(tree).toMatchSnapshot();
   });
 
   it('let us go back', async () => {
-    render(
-      <MemoryRouter>
-        <LoginWithPersonalAccessTokenRoute />
-      </MemoryRouter>,
-    );
+    render(<LoginWithPersonalAccessTokenRoute />);
 
     await userEvent.click(screen.getByTestId('header-nav-back'));
 
@@ -76,9 +67,7 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
             loginWithPersonalAccessToken: mockLoginWithPersonalAccessToken,
           }}
         >
-          <MemoryRouter>
-            <LoginWithPersonalAccessTokenRoute />
-          </MemoryRouter>
+          <LoginWithPersonalAccessTokenRoute />
         </AppContext.Provider>,
       );
 
@@ -96,9 +85,7 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
             loginWithPersonalAccessToken: mockLoginWithPersonalAccessToken,
           }}
         >
-          <MemoryRouter>
-            <LoginWithPersonalAccessTokenRoute />
-          </MemoryRouter>
+          <LoginWithPersonalAccessTokenRoute />
         </AppContext.Provider>,
       );
 
@@ -117,9 +104,7 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
           loginWithPersonalAccessToken: mockLoginWithPersonalAccessToken,
         }}
       >
-        <MemoryRouter>
-          <LoginWithPersonalAccessTokenRoute />
-        </MemoryRouter>
+        <LoginWithPersonalAccessTokenRoute />
       </AppContext.Provider>,
     );
 
@@ -151,9 +136,7 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
           loginWithPersonalAccessToken: mockLoginWithPersonalAccessToken,
         }}
       >
-        <MemoryRouter>
-          <LoginWithPersonalAccessTokenRoute />
-        </MemoryRouter>
+        <LoginWithPersonalAccessTokenRoute />
       </AppContext.Provider>,
     );
 
@@ -177,11 +160,7 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
   });
 
   it('should render the form with errors', async () => {
-    render(
-      <MemoryRouter>
-        <LoginWithPersonalAccessTokenRoute />
-      </MemoryRouter>,
-    );
+    render(<LoginWithPersonalAccessTokenRoute />);
 
     const hostname = screen.getByTestId('login-hostname');
     await userEvent.clear(hostname);
@@ -203,9 +182,7 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
           loginWithPersonalAccessToken: mockLoginWithPersonalAccessToken,
         }}
       >
-        <MemoryRouter>
-          <LoginWithPersonalAccessTokenRoute />
-        </MemoryRouter>
+        <LoginWithPersonalAccessTokenRoute />
       </AppContext.Provider>,
     );
 

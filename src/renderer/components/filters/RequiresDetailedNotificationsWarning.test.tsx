@@ -1,5 +1,4 @@
 import { render } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
 
 import { mockAccountNotifications } from '../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../__mocks__/state-mocks';
@@ -15,9 +14,7 @@ describe('renderer/components/filters/RequiresDetailedNotificationsWarning.tsx',
           notifications: mockAccountNotifications,
         }}
       >
-        <MemoryRouter>
-          <RequiresDetailedNotificationWarning />
-        </MemoryRouter>
+        <RequiresDetailedNotificationWarning />
       </AppContext.Provider>,
     );
 
