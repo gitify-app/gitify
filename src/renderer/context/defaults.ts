@@ -47,10 +47,8 @@ const defaultSystemSettings: SystemSettingsState = {
 
 export const defaultFilters: FilterSettingsState = {
   filterUserTypes: [],
-  filterIncludeHandles: [],
-  filterExcludeHandles: [],
-  filterIncludeOrganizations: [],
-  filterExcludeOrganizations: [],
+  filterIncludeSearchTokens: [],
+  filterExcludeSearchTokens: [],
   filterSubjectTypes: [],
   filterStates: [],
   filterReasons: [],

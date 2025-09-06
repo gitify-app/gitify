@@ -32,9 +32,7 @@ export type Hostname = Branded<string, 'Hostname'>;
 
 export type Link = Branded<string, 'WebUrl'>;
 
-export type UserHandle = Branded<string, 'UserHandle'>;
-
-export type Organization = Branded<string, 'Organization'>;
+export type SearchToken = Branded<string, 'SearchToken'>;
 
 export type Status = 'loading' | 'success' | 'error';
 
@@ -57,12 +55,11 @@ export type SettingsValue =
   | FilterValue[];
 
 export type FilterValue =
-  | Reason
-  | UserType
-  | UserHandle
-  | Organization
   | FilterStateType
-  | SubjectType;
+  | Reason
+  | SearchToken
+  | SubjectType
+  | UserType;
 
 export type SettingsState = AppearanceSettingsState &
   NotificationSettingsState &
@@ -101,11 +98,9 @@ export interface SystemSettingsState {
 }
 
 export interface FilterSettingsState {
+  filterIncludeSearchTokens: SearchToken[];
+  filterExcludeSearchTokens: SearchToken[];
   filterUserTypes: UserType[];
-  filterIncludeHandles: string[];
-  filterExcludeHandles: string[];
-  filterIncludeOrganizations: string[];
-  filterExcludeOrganizations: string[];
   filterSubjectTypes: SubjectType[];
   filterStates: FilterStateType[];
   filterReasons: Reason[];

@@ -1,7 +1,8 @@
 import { partialMockNotification } from '../../../__mocks__/partial-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
 import { defaultSettings } from '../../../context/defaults';
-import type { Link, SettingsState } from '../../../types';
+import type { Link, SearchToken, SettingsState } from '../../../types';
+import type { Repository } from '../../../typesGitHub';
 import {
   filterBaseNotifications,
   filterDetailedNotifications,
@@ -69,8 +70,8 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
           ...mockSettings,
           detailedNotifications: false,
           filterUserTypes: ['Bot'],
-          filterIncludeHandles: ['github-user'],
-          filterExcludeHandles: ['github-bot'],
+          filterIncludeSearchTokens: ['author:github-user' as SearchToken],
+          filterExcludeSearchTokens: ['author:github-bot' as SearchToken],
           filterStates: ['merged'],
         });
 
@@ -89,22 +90,22 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
         expect(result).toEqual([mockNotifications[1]]);
       });
 
-      it('should filter notifications that match include user handle', async () => {
+      it('should filter notifications that match include author handle', async () => {
         const result = filterDetailedNotifications(mockNotifications, {
           ...mockSettings,
           detailedNotifications: true,
-          filterIncludeHandles: ['github-user'],
+          filterIncludeSearchTokens: ['author:github-user' as SearchToken],
         });
 
         expect(result.length).toBe(1);
         expect(result).toEqual([mockNotifications[0]]);
       });
 
-      it('should filter notifications that match exclude user handle', async () => {
+      it('should filter notifications that match exclude author handle', async () => {
         const result = filterDetailedNotifications(mockNotifications, {
           ...mockSettings,
           detailedNotifications: true,
-          filterExcludeHandles: ['github-bot'],
+          filterExcludeSearchTokens: ['author:github-bot' as SearchToken],
         });
 
         expect(result.length).toBe(1);
@@ -124,34 +125,29 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
       });
 
       it('should filter notifications that match include organization', async () => {
-        // Initialize repository owner structure if it doesn't exist
-        if (!mockNotifications[0].repository) {
-          mockNotifications[0].repository = {} as any;
-        }
-        if (!mockNotifications[0].repository.owner) {
-          mockNotifications[0].repository.owner = {} as any;
-        }
-        if (!mockNotifications[1].repository) {
-          mockNotifications[1].repository = {} as any;
-        }
-        if (!mockNotifications[1].repository.owner) {
-          mockNotifications[1].repository.owner = {} as any;
-        }
+        mockNotifications[1].repository = {
+          owner: {
+            login: 'gitify-app',
+          },
+        } as Repository;
 
-        mockNotifications[0].repository.owner.login = 'microsoft';
-        mockNotifications[1].repository.owner.login = 'github';
+        mockNotifications[1].repository = {
+          owner: {
+            login: 'github',
+          },
+        } as Repository;
 
         // Apply base filtering first (where organization filtering now happens)
         let result = filterBaseNotifications(mockNotifications, {
           ...mockSettings,
-          filterIncludeOrganizations: ['microsoft'],
+          filterIncludeSearchTokens: ['org:gitify-app' as SearchToken],
         });
 
         // Then apply detailed filtering
         result = filterDetailedNotifications(result, {
           ...mockSettings,
           detailedNotifications: true,
-          filterIncludeOrganizations: ['microsoft'],
+          filterIncludeSearchTokens: ['org:gitify-app' as SearchToken],
         });
 
         expect(result.length).toBe(1);
@@ -159,34 +155,81 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
       });
 
       it('should filter notifications that match exclude organization', async () => {
-        // Initialize repository owner structure if it doesn't exist
-        if (!mockNotifications[0].repository) {
-          mockNotifications[0].repository = {} as any;
-        }
-        if (!mockNotifications[0].repository.owner) {
-          mockNotifications[0].repository.owner = {} as any;
-        }
-        if (!mockNotifications[1].repository) {
-          mockNotifications[1].repository = {} as any;
-        }
-        if (!mockNotifications[1].repository.owner) {
-          mockNotifications[1].repository.owner = {} as any;
-        }
+        mockNotifications[1].repository = {
+          owner: {
+            login: 'gitify-app',
+          },
+        } as Repository;
 
-        mockNotifications[0].repository.owner.login = 'microsoft';
-        mockNotifications[1].repository.owner.login = 'github';
+        mockNotifications[1].repository = {
+          owner: {
+            login: 'github',
+          },
+        } as Repository;
 
         // Apply base filtering first (where organization filtering now happens)
         let result = filterBaseNotifications(mockNotifications, {
           ...mockSettings,
-          filterExcludeOrganizations: ['github'],
+          filterExcludeSearchTokens: ['org:github' as SearchToken],
         });
 
         // Then apply detailed filtering
         result = filterDetailedNotifications(result, {
           ...mockSettings,
           detailedNotifications: true,
-          filterExcludeOrganizations: ['github'],
+          filterExcludeSearchTokens: ['org:github' as SearchToken],
+        });
+
+        expect(result.length).toBe(1);
+        expect(result).toEqual([mockNotifications[0]]);
+      });
+
+      it('should filter notifications that match include repository', async () => {
+        mockNotifications[1].repository = {
+          full_name: 'gitify-app/gitify',
+        } as Repository;
+
+        mockNotifications[1].repository = {
+          full_name: 'other/other',
+        } as Repository;
+
+        let result = filterBaseNotifications(mockNotifications, {
+          ...mockSettings,
+          filterIncludeSearchTokens: ['repo:gitify-app/gitify' as SearchToken],
+        });
+
+        result = filterDetailedNotifications(result, {
+          ...mockSettings,
+          detailedNotifications: true,
+          filterIncludeSearchTokens: ['repo:gitify-app/gitify' as SearchToken],
+        });
+
+        expect(result.length).toBe(1);
+        expect(result).toEqual([mockNotifications[0]]);
+      });
+
+      it('should filter notifications that match exclude repository', async () => {
+        mockNotifications[1].repository = {
+          id: 1,
+          name: 'gitify',
+          full_name: 'gitify-app/gitify',
+        } as Repository;
+
+        mockNotifications[1].repository = {
+          id: 2,
+          name: 'other',
+          full_name: 'other/other',
+        } as Repository;
+
+        let result = filterBaseNotifications(mockNotifications, {
+          ...mockSettings,
+          filterExcludeSearchTokens: ['repo:other/other' as SearchToken],
+        });
+
+        result = filterDetailedNotifications(result, {
+          ...mockSettings,
+          detailedNotifications: true,
+          filterExcludeSearchTokens: ['repo:other/other' as SearchToken],
         });
 
         expect(result.length).toBe(1);
@@ -200,42 +243,26 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
       expect(hasAnyFiltersSet(defaultSettings)).toBe(false);
     });
 
+    it('non-default search token includes filters', () => {
+      const settings: SettingsState = {
+        ...defaultSettings,
+        filterIncludeSearchTokens: ['author:gitify' as SearchToken],
+      };
+      expect(hasAnyFiltersSet(settings)).toBe(true);
+    });
+
+    it('non-default search token excludes filters', () => {
+      const settings: SettingsState = {
+        ...defaultSettings,
+        filterExcludeSearchTokens: ['org:github' as SearchToken],
+      };
+      expect(hasAnyFiltersSet(settings)).toBe(true);
+    });
+
     it('non-default user type filters', () => {
       const settings: SettingsState = {
         ...defaultSettings,
         filterUserTypes: ['Bot'],
-      };
-      expect(hasAnyFiltersSet(settings)).toBe(true);
-    });
-
-    it('non-default user handle includes filters', () => {
-      const settings: SettingsState = {
-        ...defaultSettings,
-        filterIncludeHandles: ['gitify'],
-      };
-      expect(hasAnyFiltersSet(settings)).toBe(true);
-    });
-
-    it('non-default user handle excludes filters', () => {
-      const settings: SettingsState = {
-        ...defaultSettings,
-        filterExcludeHandles: ['gitify'],
-      };
-      expect(hasAnyFiltersSet(settings)).toBe(true);
-    });
-
-    it('non-default organization includes filters', () => {
-      const settings: SettingsState = {
-        ...defaultSettings,
-        filterIncludeOrganizations: ['microsoft'],
-      };
-      expect(hasAnyFiltersSet(settings)).toBe(true);
-    });
-
-    it('non-default organization excludes filters', () => {
-      const settings: SettingsState = {
-        ...defaultSettings,
-        filterExcludeOrganizations: ['github'],
       };
       expect(hasAnyFiltersSet(settings)).toBe(true);
     });
