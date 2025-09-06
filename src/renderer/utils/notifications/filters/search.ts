@@ -1,9 +1,11 @@
 import type { SettingsState } from '../../../types';
 import type { Notification } from '../../../typesGitHub';
 
-const USER_PREFIX = 'user:';
+const AUTHOR_PREFIX = 'author:';
 const ORG_PREFIX = 'org:';
 const REPO_PREFIX = 'repo:';
+
+export const SEARCH_PREFIXES = [AUTHOR_PREFIX, ORG_PREFIX, REPO_PREFIX];
 
 export function hasIncludeSearchFilters(settings: SettingsState) {
   return settings.filterIncludeSearchTokens.length > 0;
@@ -13,8 +15,8 @@ export function hasExcludeSearchFilters(settings: SettingsState) {
   return settings.filterExcludeSearchTokens.length > 0;
 }
 
-export function isUserToken(token: string) {
-  return token.startsWith(USER_PREFIX);
+export function isAuthorToken(token: string) {
+  return token.startsWith(AUTHOR_PREFIX);
 }
 
 export function isOrgToken(token: string) {
@@ -33,7 +35,7 @@ export function filterNotificationBySearchTerm(
   notification: Notification,
   token: string,
 ): boolean {
-  if (isUserToken(token)) {
+  if (isAuthorToken(token)) {
     const handle = stripPrefix(token);
     return notification.subject?.user?.login === handle;
   }
@@ -53,6 +55,9 @@ export function filterNotificationBySearchTerm(
   return false;
 }
 
-export function buildSearchToken(type: 'user' | 'org' | 'repo', value: string) {
+export function buildSearchToken(
+  type: 'author' | 'org' | 'repo',
+  value: string,
+) {
   return `${type}:${value}`;
 }

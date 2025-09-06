@@ -70,8 +70,8 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
           ...mockSettings,
           detailedNotifications: false,
           filterUserTypes: ['Bot'],
-          filterIncludeSearchTokens: ['user:github-user'],
-          filterExcludeSearchTokens: ['user:github-bot'],
+          filterIncludeSearchTokens: ['author:github-user' as SearchToken],
+          filterExcludeSearchTokens: ['author:github-bot' as SearchToken],
           filterStates: ['merged'],
         });
 
@@ -90,22 +90,22 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
         expect(result).toEqual([mockNotifications[1]]);
       });
 
-      it('should filter notifications that match include user handle', async () => {
+      it('should filter notifications that match include author handle', async () => {
         const result = filterDetailedNotifications(mockNotifications, {
           ...mockSettings,
           detailedNotifications: true,
-          filterIncludeSearchTokens: ['user:github-user'],
+          filterIncludeSearchTokens: ['author:github-user' as SearchToken],
         });
 
         expect(result.length).toBe(1);
         expect(result).toEqual([mockNotifications[0]]);
       });
 
-      it('should filter notifications that match exclude user handle', async () => {
+      it('should filter notifications that match exclude author handle', async () => {
         const result = filterDetailedNotifications(mockNotifications, {
           ...mockSettings,
           detailedNotifications: true,
-          filterExcludeSearchTokens: ['user:github-bot'],
+          filterExcludeSearchTokens: ['author:github-bot' as SearchToken],
         });
 
         expect(result.length).toBe(1);
@@ -176,14 +176,14 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
         // Apply base filtering first (where organization filtering now happens)
         let result = filterBaseNotifications(mockNotifications, {
           ...mockSettings,
-          filterExcludeSearchTokens: ['org:github'],
+          filterExcludeSearchTokens: ['org:github' as SearchToken],
         });
 
         // Then apply detailed filtering
         result = filterDetailedNotifications(result, {
           ...mockSettings,
           detailedNotifications: true,
-          filterExcludeSearchTokens: ['org:github'],
+          filterExcludeSearchTokens: ['org:github' as SearchToken],
         });
 
         expect(result.length).toBe(1);
@@ -203,13 +203,13 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
 
         let result = filterBaseNotifications(mockNotifications, {
           ...mockSettings,
-          filterIncludeSearchTokens: ['repo:gitify'],
+          filterIncludeSearchTokens: ['repo:gitify' as SearchToken],
         });
 
         result = filterDetailedNotifications(result, {
           ...mockSettings,
           detailedNotifications: true,
-          filterIncludeSearchTokens: ['repo:gitify'],
+          filterIncludeSearchTokens: ['repo:gitify' as SearchToken],
         });
 
         expect(result.length).toBe(1);
@@ -248,42 +248,26 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
       expect(hasAnyFiltersSet(defaultSettings)).toBe(false);
     });
 
+    it('non-default search token includes filters', () => {
+      const settings: SettingsState = {
+        ...defaultSettings,
+        filterIncludeSearchTokens: ['author:gitify' as SearchToken],
+      };
+      expect(hasAnyFiltersSet(settings)).toBe(true);
+    });
+
+    it('non-default search token excludes filters', () => {
+      const settings: SettingsState = {
+        ...defaultSettings,
+        filterExcludeSearchTokens: ['org:github' as SearchToken],
+      };
+      expect(hasAnyFiltersSet(settings)).toBe(true);
+    });
+
     it('non-default user type filters', () => {
       const settings: SettingsState = {
         ...defaultSettings,
         filterUserTypes: ['Bot'],
-      };
-      expect(hasAnyFiltersSet(settings)).toBe(true);
-    });
-
-    it('non-default user handle includes filters', () => {
-      const settings: SettingsState = {
-        ...defaultSettings,
-        filterIncludeSearchTokens: ['user:gitify'],
-      };
-      expect(hasAnyFiltersSet(settings)).toBe(true);
-    });
-
-    it('non-default user handle excludes filters', () => {
-      const settings: SettingsState = {
-        ...defaultSettings,
-        filterExcludeSearchTokens: ['user:gitify'],
-      };
-      expect(hasAnyFiltersSet(settings)).toBe(true);
-    });
-
-    it('non-default organization includes filters', () => {
-      const settings: SettingsState = {
-        ...defaultSettings,
-        filterIncludeSearchTokens: ['org:microsoft'],
-      };
-      expect(hasAnyFiltersSet(settings)).toBe(true);
-    });
-
-    it('non-default organization excludes filters', () => {
-      const settings: SettingsState = {
-        ...defaultSettings,
-        filterExcludeSearchTokens: ['org:github'],
       };
       expect(hasAnyFiltersSet(settings)).toBe(true);
     });
