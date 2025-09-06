@@ -1,6 +1,5 @@
 import { act, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { MemoryRouter } from 'react-router-dom';
 
 import { BaseStyles, ThemeProvider } from '@primer/react';
 
@@ -45,9 +44,7 @@ describe('renderer/routes/Accounts.tsx', () => {
               settings: mockSettings,
             }}
           >
-            <MemoryRouter>
-              <AccountsRoute />
-            </MemoryRouter>
+            <AccountsRoute />
           </AppContext.Provider>,
         );
       });
@@ -64,9 +61,7 @@ describe('renderer/routes/Accounts.tsx', () => {
               settings: mockSettings,
             }}
           >
-            <MemoryRouter>
-              <AccountsRoute />
-            </MemoryRouter>
+            <AccountsRoute />
           </AppContext.Provider>,
         );
       });
@@ -93,9 +88,7 @@ describe('renderer/routes/Accounts.tsx', () => {
               settings: mockSettings,
             }}
           >
-            <MemoryRouter>
-              <AccountsRoute />
-            </MemoryRouter>
+            <AccountsRoute />
           </AppContext.Provider>,
         );
       });
@@ -123,9 +116,7 @@ describe('renderer/routes/Accounts.tsx', () => {
               settings: mockSettings,
             }}
           >
-            <MemoryRouter>
-              <AccountsRoute />
-            </MemoryRouter>
+            <AccountsRoute />
           </AppContext.Provider>,
         );
       });
@@ -151,9 +142,7 @@ describe('renderer/routes/Accounts.tsx', () => {
               settings: mockSettings,
             }}
           >
-            <MemoryRouter>
-              <AccountsRoute />
-            </MemoryRouter>
+            <AccountsRoute />
           </AppContext.Provider>,
         );
       });
@@ -188,9 +177,7 @@ describe('renderer/routes/Accounts.tsx', () => {
               settings: mockSettings,
             }}
           >
-            <MemoryRouter>
-              <AccountsRoute />
-            </MemoryRouter>
+            <AccountsRoute />
           </AppContext.Provider>,
         );
       });
@@ -224,9 +211,7 @@ describe('renderer/routes/Accounts.tsx', () => {
               settings: mockSettings,
             }}
           >
-            <MemoryRouter>
-              <AccountsRoute />
-            </MemoryRouter>
+            <AccountsRoute />
           </AppContext.Provider>,
         );
       });
@@ -251,9 +236,7 @@ describe('renderer/routes/Accounts.tsx', () => {
               settings: mockSettings,
             }}
           >
-            <MemoryRouter>
-              <AccountsRoute />
-            </MemoryRouter>
+            <AccountsRoute />
           </AppContext.Provider>,
         );
       });
@@ -289,9 +272,7 @@ describe('renderer/routes/Accounts.tsx', () => {
               logoutFromAccount: logoutFromAccountMock,
             }}
           >
-            <MemoryRouter>
-              <AccountsRoute />
-            </MemoryRouter>
+            <AccountsRoute />
           </AppContext.Provider>,
         );
       });
@@ -322,9 +303,7 @@ describe('renderer/routes/Accounts.tsx', () => {
                   loginWithGitHubApp: mockLoginWithGitHubApp,
                 }}
               >
-                <MemoryRouter>
-                  <AccountsRoute />
-                </MemoryRouter>
+                <AccountsRoute />
               </AppContext.Provider>
             </BaseStyles>
           </ThemeProvider>,
@@ -348,9 +327,7 @@ describe('renderer/routes/Accounts.tsx', () => {
                   settings: mockSettings,
                 }}
               >
-                <MemoryRouter>
-                  <AccountsRoute />
-                </MemoryRouter>
+                <AccountsRoute />
               </AppContext.Provider>
             </BaseStyles>
           </ThemeProvider>,
@@ -380,9 +357,7 @@ describe('renderer/routes/Accounts.tsx', () => {
                   settings: mockSettings,
                 }}
               >
-                <MemoryRouter>
-                  <AccountsRoute />
-                </MemoryRouter>
+                <AccountsRoute />
               </AppContext.Provider>
             </BaseStyles>
           </ThemeProvider>,

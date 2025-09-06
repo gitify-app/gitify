@@ -1,6 +1,5 @@
 import { act, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { MemoryRouter } from 'react-router-dom';
 
 import { mockAuth, mockSettings } from '../__mocks__/state-mocks';
 import { AppContext } from '../context/App';
@@ -23,9 +22,7 @@ describe('renderer/routes/Settings.tsx', () => {
     await act(async () => {
       render(
         <AppContext.Provider value={{ auth: mockAuth, settings: mockSettings }}>
-          <MemoryRouter>
-            <SettingsRoute />
-          </MemoryRouter>
+          <SettingsRoute />
         </AppContext.Provider>,
       );
     });
@@ -43,9 +40,7 @@ describe('renderer/routes/Settings.tsx', () => {
             fetchNotifications,
           }}
         >
-          <MemoryRouter>
-            <SettingsRoute />
-          </MemoryRouter>
+          <SettingsRoute />
         </AppContext.Provider>,
       );
     });

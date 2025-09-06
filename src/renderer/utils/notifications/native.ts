@@ -65,7 +65,7 @@ export const raiseNativeNotification = (notifications: Notification[]) => {
     // TODO FIXME = set url to notification url
   } else {
     title = APPLICATION.NAME;
-    body = `You have ${notifications.length} notifications.`;
+    body = `You have ${notifications.length} notifications`;
   }
 
   return window.gitify.raiseNativeNotification(title, body, url);

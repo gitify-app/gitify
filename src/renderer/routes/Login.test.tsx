@@ -1,6 +1,5 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { MemoryRouter } from 'react-router-dom';
 
 import { AppContext } from '../context/App';
 import * as comms from '../utils/comms';
@@ -18,11 +17,7 @@ describe('renderer/routes/Login.tsx', () => {
   });
 
   it('should render itself & its children', () => {
-    const tree = render(
-      <MemoryRouter>
-        <LoginRoute />
-      </MemoryRouter>,
-    );
+    const tree = render(<LoginRoute />);
 
     expect(tree).toMatchSnapshot();
   });
@@ -32,17 +27,13 @@ describe('renderer/routes/Login.tsx', () => {
 
     const { rerender } = render(
       <AppContext.Provider value={{ isLoggedIn: false }}>
-        <MemoryRouter>
-          <LoginRoute />
-        </MemoryRouter>
+        <LoginRoute />
       </AppContext.Provider>,
     );
 
     rerender(
       <AppContext.Provider value={{ isLoggedIn: true }}>
-        <MemoryRouter>
-          <LoginRoute />
-        </MemoryRouter>
+        <LoginRoute />
       </AppContext.Provider>,
     );
 
@@ -58,10 +49,7 @@ describe('renderer/routes/Login.tsx', () => {
           loginWithGitHubApp: mockLoginWithGitHubApp,
         }}
       >
-        <MemoryRouter>
-          <LoginRoute />
-        </MemoryRouter>
-        ,
+        <LoginRoute />
       </AppContext.Provider>,
     );
 
@@ -71,11 +59,7 @@ describe('renderer/routes/Login.tsx', () => {
   });
 
   it('should navigate to login with personal access token', async () => {
-    render(
-      <MemoryRouter>
-        <LoginRoute />
-      </MemoryRouter>,
-    );
+    render(<LoginRoute />);
 
     await userEvent.click(screen.getByTestId('login-pat'));
 
@@ -86,11 +70,7 @@ describe('renderer/routes/Login.tsx', () => {
   });
 
   it('should navigate to login with oauth app', async () => {
-    render(
-      <MemoryRouter>
-        <LoginRoute />
-      </MemoryRouter>,
-    );
+    render(<LoginRoute />);
 
     await userEvent.click(screen.getByTestId('login-oauth-app'));
 

@@ -1,6 +1,5 @@
 import { act, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { MemoryRouter } from 'react-router-dom';
 
 import { mockAccountNotifications } from '../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../__mocks__/state-mocks';
@@ -27,9 +26,7 @@ describe('renderer/components/filters/UserHandleFilter.tsx', () => {
             notifications: mockAccountNotifications,
           }}
         >
-          <MemoryRouter>
-            <UserHandleFilter />
-          </MemoryRouter>
+          <UserHandleFilter />
         </AppContext.Provider>,
       );
 
@@ -47,9 +44,7 @@ describe('renderer/components/filters/UserHandleFilter.tsx', () => {
             notifications: mockAccountNotifications,
           }}
         >
-          <MemoryRouter>
-            <UserHandleFilter />
-          </MemoryRouter>
+          <UserHandleFilter />
         </AppContext.Provider>,
       );
 
@@ -71,9 +66,7 @@ describe('renderer/components/filters/UserHandleFilter.tsx', () => {
               updateFilter,
             }}
           >
-            <MemoryRouter>
-              <UserHandleFilter />
-            </MemoryRouter>
+            <UserHandleFilter />
           </AppContext.Provider>,
         );
       });
@@ -103,9 +96,7 @@ describe('renderer/components/filters/UserHandleFilter.tsx', () => {
               updateFilter,
             }}
           >
-            <MemoryRouter>
-              <UserHandleFilter />
-            </MemoryRouter>
+            <UserHandleFilter />
           </AppContext.Provider>,
         );
       });
@@ -133,9 +124,7 @@ describe('renderer/components/filters/UserHandleFilter.tsx', () => {
               updateFilter,
             }}
           >
-            <MemoryRouter>
-              <UserHandleFilter />
-            </MemoryRouter>
+            <UserHandleFilter />
           </AppContext.Provider>,
         );
       });
@@ -165,9 +154,7 @@ describe('renderer/components/filters/UserHandleFilter.tsx', () => {
               updateFilter,
             }}
           >
-            <MemoryRouter>
-              <UserHandleFilter />
-            </MemoryRouter>
+            <UserHandleFilter />
           </AppContext.Provider>,
         );
       });

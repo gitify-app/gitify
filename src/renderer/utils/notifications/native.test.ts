@@ -5,11 +5,6 @@ import {
 import { mockAuth } from '../../__mocks__/state-mocks';
 import { defaultSettings } from '../../context/defaults';
 import type { SettingsState } from '../../types';
-import {
-  mockGitHubNotifications,
-  mockSingleNotification,
-} from '../api/__mocks__/response-mocks';
-import * as links from '../links';
 import * as native from './native';
 
 const raiseSoundNotificationMock = jest.spyOn(native, 'raiseSoundNotification');
@@ -33,6 +28,17 @@ describe('renderer/utils/notifications/native.ts', () => {
       });
 
       expect(window.gitify.raiseNativeNotification).toHaveBeenCalledTimes(1);
+      expect(window.gitify.raiseNativeNotification).toHaveBeenCalledWith(
+        expect.stringContaining(
+          mockSingleAccountNotifications[0].notifications[0].repository
+            .full_name,
+        ),
+        expect.stringContaining(
+          mockSingleAccountNotifications[0].notifications[0].subject.title,
+        ),
+        null,
+      );
+
       expect(raiseSoundNotificationMock).toHaveBeenCalledTimes(1);
       expect(raiseSoundNotificationMock).toHaveBeenCalledWith(0.2);
     });
@@ -50,6 +56,12 @@ describe('renderer/utils/notifications/native.ts', () => {
       });
 
       expect(window.gitify.raiseNativeNotification).toHaveBeenCalledTimes(1);
+      expect(window.gitify.raiseNativeNotification).toHaveBeenCalledWith(
+        'Gitify',
+        'You have 4 notifications',
+        null,
+      );
+
       expect(raiseSoundNotificationMock).toHaveBeenCalledTimes(1);
       expect(raiseSoundNotificationMock).toHaveBeenCalledWith(0.2);
     });
@@ -102,32 +114,6 @@ describe('renderer/utils/notifications/native.ts', () => {
       });
 
       expect(window.gitify.raiseNativeNotification).not.toHaveBeenCalled();
-    });
-  });
-
-  describe.skip('raiseNativeNotification', () => {
-    it('should click on a native notification (with 1 notification)', () => {
-      jest.spyOn(links, 'openNotification');
-
-      const nativeNotification: Notification = native.raiseNativeNotification([
-        mockSingleNotification,
-      ]);
-      nativeNotification.onclick(null);
-
-      expect(links.openNotification).toHaveBeenCalledTimes(1);
-      expect(links.openNotification).toHaveBeenLastCalledWith(
-        mockSingleNotification,
-      );
-      expect(window.gitify.app.hide).toHaveBeenCalledTimes(1);
-    });
-
-    it('should click on a native notification (with more than 1 notification)', () => {
-      const nativeNotification = native.raiseNativeNotification(
-        mockGitHubNotifications,
-      );
-      nativeNotification.onclick(null);
-
-      expect(window.gitify.app.show).toHaveBeenCalledTimes(1);
     });
   });
 });

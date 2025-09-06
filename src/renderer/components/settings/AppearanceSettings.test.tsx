@@ -1,6 +1,5 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { MemoryRouter } from 'react-router-dom';
 
 import {
   mockAuth,
@@ -28,9 +27,7 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
             updateSetting,
           }}
         >
-          <MemoryRouter>
-            <AppearanceSettings />
-          </MemoryRouter>
+          <AppearanceSettings />
         </AppContext.Provider>,
       );
     });
@@ -56,9 +53,7 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
             updateSetting,
           }}
         >
-          <MemoryRouter>
-            <AppearanceSettings />
-          </MemoryRouter>
+          <AppearanceSettings />
         </AppContext.Provider>,
       );
     });
@@ -81,9 +76,7 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
             updateSetting,
           }}
         >
-          <MemoryRouter>
-            <AppearanceSettings />
-          </MemoryRouter>
+          <AppearanceSettings />
         </AppContext.Provider>,
       );
     });
@@ -111,9 +104,7 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
             updateSetting,
           }}
         >
-          <MemoryRouter>
-            <AppearanceSettings />
-          </MemoryRouter>
+          <AppearanceSettings />
         </AppContext.Provider>,
       );
     });
@@ -166,9 +157,7 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
             updateSetting,
           }}
         >
-          <MemoryRouter>
-            <AppearanceSettings />
-          </MemoryRouter>
+          <AppearanceSettings />
         </AppContext.Provider>,
       );
     });
@@ -191,9 +180,7 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
             updateSetting,
           }}
         >
-          <MemoryRouter>
-            <AppearanceSettings />
-          </MemoryRouter>
+          <AppearanceSettings />
         </AppContext.Provider>,
       );
     });
