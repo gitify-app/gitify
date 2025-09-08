@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 
 import { type Link, Size } from '../../types';
 import {
@@ -47,8 +47,8 @@ describe('renderer/components/avatars/AvatarWithFallback.tsx', () => {
     // Find the avatar element by its alt text
     const avatar = screen.getByAltText('gitify-app') as HTMLImageElement;
 
-    // Simulate an error event on the image element
-    avatar.dispatchEvent(new Event('error'));
+    // Simulate image load error (wrapped in act via fireEvent)
+    fireEvent.error(avatar);
 
     expect(screen.getByTestId('avatar')).toMatchSnapshot();
   });
@@ -59,8 +59,8 @@ describe('renderer/components/avatars/AvatarWithFallback.tsx', () => {
     // Find the avatar element by its alt text
     const avatar = screen.getByAltText('gitify-app') as HTMLImageElement;
 
-    // Simulate an error event on the image element
-    avatar.dispatchEvent(new Event('error'));
+    // Simulate image load error (wrapped in act via fireEvent)
+    fireEvent.error(avatar);
 
     expect(screen.getByTestId('avatar')).toMatchSnapshot();
   });
