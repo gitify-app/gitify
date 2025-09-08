@@ -52,7 +52,10 @@ export function getAvailableSearchQualifiers(
   detailedNotificationsEnabled: boolean,
 ): readonly SearchQualifier[] {
   const all = Object.values(SEARCH_QUALIFIERS) as readonly SearchQualifier[];
-  if (detailedNotificationsEnabled) return all;
+  if (detailedNotificationsEnabled) {
+    return all;
+  }
+
   return all.filter((q) => !q.requiresDetailsNotifications);
 }
 
@@ -91,9 +94,15 @@ export interface ParsedSearchToken {
 
 export function parseSearchToken(token: string): ParsedSearchToken | null {
   const qualifier = matchQualifierByPrefix(token);
-  if (!qualifier) return null;
+  if (!qualifier) {
+    return null;
+  }
+
   const value = stripPrefix(token, qualifier);
-  if (!value) return null;
+  if (!value) {
+    return null;
+  }
+
   return { qualifier, value, valueLower: value.toLowerCase() };
 }
 
@@ -101,13 +110,23 @@ export function parseSearchToken(token: string): ParsedSearchToken | null {
 // Returns null if no known prefix or no value after prefix yet.
 export function normalizeSearchInputToToken(raw: string): string | null {
   const value = raw.trim();
-  if (!value) return null;
+  if (!value) {
+    return null;
+  }
+
   const lower = value.toLowerCase();
   const matched = SEARCH_PREFIXES.find((p) => lower.startsWith(p));
-  if (!matched) return null;
+
+  if (!matched) {
+    return null;
+  }
+
   const rest = value.substring(matched.length);
-  if (rest.length === 0) return null; // prefix only, incomplete token
-  return `${matched}${rest}`; // preserve original rest casing
+  if (rest.length === 0) {
+    return null; // prefix only, incomplete token
+  }
+
+  return `${matched}${rest}`;
 }
 
 export function filterNotificationBySearchTerm(
@@ -115,7 +134,10 @@ export function filterNotificationBySearchTerm(
   token: string,
 ): boolean {
   const parsed = parseSearchToken(token);
-  if (!parsed) return false;
+  if (!parsed) {
+    return false;
+  }
+
   const fieldValue = parsed.qualifier.extract(notification);
   return fieldValue?.toLowerCase() === parsed.valueLower;
 }

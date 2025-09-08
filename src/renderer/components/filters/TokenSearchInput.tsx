@@ -35,7 +35,6 @@ export const TokenSearchInput: FC<TokenSearchInputProps> = ({
   const [inputValue, setInputValue] = useState('');
   const [showSuggestions, setShowSuggestions] = useState(false);
 
-  // FIXME - remove this
   const tokenItems = tokens.map((text, id) => ({ id, text }));
 
   function tryAddToken(
