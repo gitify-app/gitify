@@ -15,7 +15,6 @@ interface TokenSearchInputProps {
   iconColorClass: string;
   tokens: readonly SearchToken[]; // raw token strings
   showSuggestionsOnFocusIfEmpty: boolean;
-  isDetailedNotificationsEnabled: boolean;
   onAdd: (token: SearchToken) => void;
   onRemove: (token: SearchToken) => void;
 }
@@ -28,7 +27,6 @@ export const TokenSearchInput: FC<TokenSearchInputProps> = ({
   iconColorClass,
   tokens,
   showSuggestionsOnFocusIfEmpty,
-  isDetailedNotificationsEnabled,
   onAdd,
   onRemove,
 }) => {
@@ -117,7 +115,6 @@ export const TokenSearchInput: FC<TokenSearchInputProps> = ({
         />
         <SearchFilterSuggestions
           inputValue={inputValue}
-          isDetailedNotificationsEnabled={isDetailedNotificationsEnabled}
           onClose={() => setShowSuggestions(false)}
           open={showSuggestions}
         />

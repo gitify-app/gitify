@@ -374,6 +374,30 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
                 <span
                   class="Text-sc-17v1xeu-0 ezOLpc text-xs font-semibold"
                 >
+                  author:
+                </span>
+                <span
+                  class="Text-sc-17v1xeu-0 ezOLpc text-xs opacity-90"
+                >
+                  filter by notification author
+                </span>
+              </div>
+            </div>
+            <div
+              class="Box-sc-g0xbh4-0"
+            >
+              <div
+                class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+                data-align="stretch"
+                data-direction="vertical"
+                data-gap="none"
+                data-justify="start"
+                data-padding="none"
+                data-wrap="nowrap"
+              >
+                <span
+                  class="Text-sc-17v1xeu-0 ezOLpc text-xs font-semibold"
+                >
                   org:
                 </span>
                 <span
@@ -430,6 +454,30 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
           data-padding="none"
           data-wrap="nowrap"
         >
+          <div
+            class="Box-sc-g0xbh4-0"
+          >
+            <div
+              class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+              data-align="stretch"
+              data-direction="vertical"
+              data-gap="none"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+            >
+              <span
+                class="Text-sc-17v1xeu-0 ezOLpc text-xs font-semibold"
+              >
+                author:
+              </span>
+              <span
+                class="Text-sc-17v1xeu-0 ezOLpc text-xs opacity-90"
+              >
+                filter by notification author
+              </span>
+            </div>
+          </div>
           <div
             class="Box-sc-g0xbh4-0"
           >

@@ -1,4 +1,4 @@
-import type { FC } from 'react';
+import { useContext, type FC } from 'react';
 
 import { Box, Popover, Stack, Text } from '@primer/react';
 
@@ -9,26 +9,28 @@ import {
   BASE_SEARCH_QUALIFIERS,
   SEARCH_DELIMITER,
 } from '../../utils/notifications/filters/search';
+import { AppContext } from '../../context/App';
 
 interface SearchFilterSuggestionsProps {
   open: boolean;
   inputValue: string;
-  isDetailedNotificationsEnabled: boolean;
   onClose: () => void;
 }
 
 export const SearchFilterSuggestions: FC<SearchFilterSuggestionsProps> = ({
   open,
   inputValue,
-  isDetailedNotificationsEnabled,
   onClose,
 }) => {
+
+  const { settings } = useContext(AppContext);
+
   if (!open) {
     return null;
   }
 
   const lower = inputValue.toLowerCase();
-  const base = isDetailedNotificationsEnabled
+  const base = settings.detailedNotifications
     ? ALL_SEARCH_QUALIFIERS
     : BASE_SEARCH_QUALIFIERS;
   const suggestions = base.filter(
