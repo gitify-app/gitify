@@ -4,7 +4,7 @@ import { Box, Stack, Text, TextInputWithTokens } from '@primer/react';
 
 import type { SearchToken } from '../../types';
 import {
-  normalizeSearchInputToToken,
+  parseSearchInput,
   SEARCH_DELIMITER,
 } from '../../utils/notifications/filters/search';
 import { SearchFilterSuggestions } from './SearchFilterSuggestions';
@@ -20,7 +20,7 @@ interface TokenSearchInputProps {
   onRemove: (token: SearchToken) => void;
 }
 
-const tokenEvents = ['Enter', 'Tab', ' ', ','];
+const INPUT_KEY_EVENTS = ['Enter', 'Tab', ' ', ','];
 
 export const TokenSearchInput: FC<TokenSearchInputProps> = ({
   label,
@@ -43,16 +43,17 @@ export const TokenSearchInput: FC<TokenSearchInputProps> = ({
       | React.FocusEvent<HTMLInputElement>,
   ) {
     const raw = (event.target as HTMLInputElement).value;
-    const value = normalizeSearchInputToToken(raw);
-    if (value && !tokens.includes(value as SearchToken)) {
-      onAdd(value as SearchToken);
+    const parsed = parseSearchInput(raw);
+    const token = parsed?.token as SearchToken | undefined;
+    if (token && !tokens.includes(token)) {
+      onAdd(token);
       (event.target as HTMLInputElement).value = '';
       setInputValue('');
     }
   }
 
   function onKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
-    if (tokenEvents.includes(e.key)) {
+    if (INPUT_KEY_EVENTS.includes(e.key)) {
       tryAddToken(e);
       setShowSuggestions(false);
     } else if (e.key === 'ArrowDown') {

@@ -33,15 +33,11 @@ export const ALL_SEARCH_QUALIFIERS: readonly SearchQualifier[] = Object.values(
   SEARCH_QUALIFIERS,
 ) as readonly SearchQualifier[];
 
+export const BASE_SEARCH_QUALIFIERS: readonly SearchQualifier[] =
+  ALL_SEARCH_QUALIFIERS.filter((q) => !q.requiresDetailsNotifications);
 
-export const BASE_SEARCH_QUALIFIERS: readonly SearchQualifier[] = ALL_SEARCH_QUALIFIERS.filter(
-  (q) => !q.requiresDetailsNotifications,
-);
-
-export const DETAILED_ONLY_SEARCH_QUALIFIERS: readonly SearchQualifier[] = ALL_SEARCH_QUALIFIERS.filter(
-  (q) => q.requiresDetailsNotifications,
-);
-
+export const DETAILED_ONLY_SEARCH_QUALIFIERS: readonly SearchQualifier[] =
+  ALL_SEARCH_QUALIFIERS.filter((q) => q.requiresDetailsNotifications);
 
 export function hasIncludeSearchFilters(settings: SettingsState) {
   return settings.filterIncludeSearchTokens.length > 0;
@@ -51,63 +47,46 @@ export function hasExcludeSearchFilters(settings: SettingsState) {
   return settings.filterExcludeSearchTokens.length > 0;
 }
 
-function stripPrefix(token: string, qualifier: SearchQualifier) {
-  return token.slice(qualifier.prefix.length).trim();
-}
-
 export interface ParsedSearchToken {
-  qualifier: SearchQualifier;
-  value: string;
-  valueLower: string;
+  qualifier: SearchQualifier; // matched qualifier
+  value: string; // original-case value after prefix
+  valueLower: string; // lowercase cached
+  token: string; // canonical stored token (prefix + value)
 }
 
-export function parseSearchToken(token: string): ParsedSearchToken | null {
-  if (!token) {
+export function parseSearchInput(raw: string): ParsedSearchToken | null {
+  const trimmed = raw.trim();
+  if (!trimmed) {
     return null;
   }
 
+  const lower = trimmed.toLowerCase();
+
   for (const qualifier of ALL_SEARCH_QUALIFIERS) {
-    if (token.startsWith(qualifier.prefix)) {
-      const value = stripPrefix(token, qualifier);
-  
-      if (!value) {
-        return null; // prefix only
+    if (lower.startsWith(qualifier.prefix)) {
+      const valuePart = trimmed.slice(qualifier.prefix.length).trim();
+      if (!valuePart) {
+        return null;
       }
-      
-      return { qualifier, value, valueLower: value.toLowerCase() };
+
+      const token = qualifier.prefix + valuePart;
+      return {
+        qualifier,
+        value: valuePart,
+        valueLower: valuePart.toLowerCase(),
+        token,
+      };
     }
   }
   return null;
-}
-
-// Normalize raw user input from the token text field into a SearchToken (string)
-// Returns null if no known prefix or no value after prefix yet.
-export function normalizeSearchInputToToken(raw: string): string | null {
-  const value = raw.trim();
-  if (!value) {
-    return null;
-  }
-
-  const lower = value.toLowerCase();
-  const matchedQualifier = ALL_SEARCH_QUALIFIERS.find((q) => lower.startsWith(q.prefix));
-
-  if (!matchedQualifier) {
-    return null;
-  }
-
-  const rest = value.substring(matchedQualifier.prefix.length);
-  if (rest.length === 0) {
-    return null; // prefix only, incomplete token
-  }
-
-  return `${matchedQualifier.prefix}${rest}`;
 }
 
 export function filterNotificationBySearchTerm(
   notification: Notification,
   token: string,
 ): boolean {
-  const parsed = parseSearchToken(token);
+  const parsed = parseSearchInput(token);
+
   if (!parsed) {
     return false;
   }

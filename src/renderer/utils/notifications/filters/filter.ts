@@ -5,19 +5,17 @@ import type {
   SubjectUser,
 } from '../../../typesGitHub';
 import {
+  BASE_SEARCH_QUALIFIERS,
+  DETAILED_ONLY_SEARCH_QUALIFIERS,
   filterNotificationBySearchTerm,
   hasExcludeSearchFilters,
   hasIncludeSearchFilters,
   reasonFilter,
+  type SearchQualifier,
   stateFilter,
   subjectTypeFilter,
   userTypeFilter,
-  type SearchQualifier,
-  BASE_SEARCH_QUALIFIERS,
-  DETAILED_ONLY_SEARCH_QUALIFIERS,
 } from '.';
-
-
 
 export function filterBaseNotifications(
   notifications: Notification[],
@@ -28,7 +26,10 @@ export function filterBaseNotifications(
 
     // Apply base qualifier include/exclude filters (org, repo, etc.)
     for (const qualifier of BASE_SEARCH_QUALIFIERS) {
-      if (!passesFilters) break;
+      if (!passesFilters) {
+        break;
+      }
+
       passesFilters =
         passesFilters &&
         passesSearchTokenFiltersForQualifier(notification, settings, qualifier);
@@ -140,7 +141,10 @@ function passesUserFilters(
 
   // Apply detailed-only qualifier search token filters (e.g. author)
   for (const qualifier of DETAILED_ONLY_SEARCH_QUALIFIERS) {
-    if (!passesFilters) break;
+    if (!passesFilters) {
+      break;
+    }
+
     passesFilters =
       passesFilters &&
       passesSearchTokenFiltersForQualifier(notification, settings, qualifier);
