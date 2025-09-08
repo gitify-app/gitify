@@ -14,7 +14,7 @@ exports[`renderer/routes/components/primitives/Title.tsx should render the title
         data-justify="start"
         data-padding="none"
         data-wrap="nowrap"
-        id="legend"
+        id="title-legend"
       >
         <svg
           aria-hidden="true"
@@ -58,7 +58,7 @@ exports[`renderer/routes/components/primitives/Title.tsx should render the title
         data-justify="start"
         data-padding="none"
         data-wrap="nowrap"
-        id="legend"
+        id="title-legend"
       >
         <svg
           aria-hidden="true"

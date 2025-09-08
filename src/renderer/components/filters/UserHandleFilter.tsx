@@ -13,7 +13,6 @@ import {
   hasExcludeHandleFilters,
   hasIncludeHandleFilters,
 } from '../../utils/notifications/filters/handles';
-import { Tooltip } from '../fields/Tooltip';
 import { Title } from '../primitives/Title';
 import { RequiresDetailedNotificationWarning } from './RequiresDetailedNotificationsWarning';
 
@@ -121,18 +120,18 @@ export const UserHandleFilter: FC = () => {
 
   return (
     <fieldset id="filter-user-handles">
-      <Stack align="baseline" direction="horizontal" gap="condensed">
-        <Title icon={MentionIcon}>Handles</Title>
-        <Tooltip
-          name="tooltip-filter-handles"
-          tooltip={
-            <Stack direction="vertical" gap="condensed">
-              <Text>Filter notifications by user handle.</Text>
-              <RequiresDetailedNotificationWarning />
-            </Stack>
-          }
-        />
-      </Stack>
+      <Title
+        icon={MentionIcon}
+        tooltip={
+          <Stack direction="vertical" gap="condensed">
+            <Text>Filter notifications by user handle.</Text>
+            <RequiresDetailedNotificationWarning />
+          </Stack>
+        }
+      >
+        Handles
+      </Title>
+
       <Stack direction="vertical" gap="condensed">
         <Stack
           align="center"

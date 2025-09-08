@@ -13,7 +13,6 @@ import {
   hasExcludeOrganizationFilters,
   hasIncludeOrganizationFilters,
 } from '../../utils/notifications/filters/organizations';
-import { Tooltip } from '../fields/Tooltip';
 import { Title } from '../primitives/Title';
 
 type InputToken = {
@@ -135,17 +134,17 @@ export const OrganizationFilter: FC = () => {
 
   return (
     <fieldset id="filter-organizations">
-      <Stack align="baseline" direction="horizontal" gap="condensed">
-        <Title icon={OrganizationIcon}>Organizations</Title>
-        <Tooltip
-          name="tooltip-filter-organizations"
-          tooltip={
-            <Stack direction="vertical" gap="condensed">
-              <Text>Filter notifications by organization.</Text>
-            </Stack>
-          }
-        />
-      </Stack>
+      <Title
+        icon={OrganizationIcon}
+        tooltip={
+          <Stack direction="vertical" gap="condensed">
+            <Text>Filter notifications by organization.</Text>
+          </Stack>
+        }
+      >
+        Organizations
+      </Title>
+
       <Stack direction="vertical" gap="condensed">
         <Stack
           align="center"
