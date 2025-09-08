@@ -1,5 +1,7 @@
 import { AxiosError, type AxiosResponse } from 'axios';
 
+import { EVENTS } from '../../../shared/events';
+
 import type { Link } from '../../types';
 import type { GitHubRESTError } from '../../typesGitHub';
 import { Errors } from '../errors';
@@ -91,6 +93,18 @@ describe('renderer/utils/api/errors.ts', () => {
 
       expect(result).toBe(Errors.UNKNOWN);
     });
+  });
+
+  it('bad credentials - safe storage', async () => {
+    const mockError: Partial<AxiosError<GitHubRESTError>> = {
+      message: `Error invoking remote method '${EVENTS.SAFE_STORAGE_DECRYPT}': Error: Error while decrypting the ciphertext provided to safeStorage.decryptString. Ciphertext does not appear to be encrypted.`,
+    };
+
+    const result = determineFailureType(
+      mockError as AxiosError<GitHubRESTError>,
+    );
+
+    expect(result).toBe(Errors.BAD_CREDENTIALS);
   });
 
   it('unknown error', async () => {
