@@ -128,23 +128,23 @@ export const SearchFilter: FC = () => {
         <TokenSearchInput
           icon={CheckCircleFillIcon}
           iconColorClass={IconColor.GREEN}
+          isDetailedNotificationsEnabled={settings.detailedNotifications}
           label="Include"
           onAdd={addIncludeSearchToken}
           onRemove={removeIncludeSearchToken}
           showSuggestionsOnFocusIfEmpty={!hasIncludeSearchFilters(settings)}
           tokens={includeSearchTokens}
-          isDetailedNotificationsEnabled={settings.detailedNotifications}
         />
 
         <TokenSearchInput
           icon={NoEntryFillIcon}
           iconColorClass={IconColor.RED}
+          isDetailedNotificationsEnabled={settings.detailedNotifications}
           label="Exclude"
           onAdd={addExcludeSearchToken}
           onRemove={removeExcludeSearchToken}
           showSuggestionsOnFocusIfEmpty={!hasExcludeSearchFilters(settings)}
           tokens={excludeSearchTokens}
-          isDetailedNotificationsEnabled={settings.detailedNotifications}
         />
       </Stack>
     </fieldset>

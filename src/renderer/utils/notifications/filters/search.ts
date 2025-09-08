@@ -56,8 +56,10 @@ export function getAvailableSearchQualifiers(
   return all.filter((q) => !q.requiresDetailsNotifications);
 }
 
-export const BASE_SEARCH_QUALIFIERS: readonly SearchQualifier[] = getAvailableSearchQualifiers(false);
-export const ALL_SEARCH_QUALIFIERS: readonly SearchQualifier[] = getAvailableSearchQualifiers(true);
+export const BASE_SEARCH_QUALIFIERS: readonly SearchQualifier[] =
+  getAvailableSearchQualifiers(false);
+export const ALL_SEARCH_QUALIFIERS: readonly SearchQualifier[] =
+  getAvailableSearchQualifiers(true);
 
 export function hasIncludeSearchFilters(settings: SettingsState) {
   return settings.filterIncludeSearchTokens.length > 0;

@@ -5,8 +5,8 @@ import { Box, Popover, Stack, Text } from '@primer/react';
 import { Opacity } from '../../types';
 import { cn } from '../../utils/cn';
 import {
-  SEARCH_DELIMITER,
   getAvailableSearchQualifiers,
+  SEARCH_DELIMITER,
 } from '../../utils/notifications/filters/search';
 
 interface SearchFilterSuggestionsProps {
@@ -31,9 +31,7 @@ export const SearchFilterSuggestions: FC<SearchFilterSuggestionsProps> = ({
   const suggestions = base.filter(
     (q) => q.prefix.startsWith(lower) || inputValue === '',
   );
-  const beginsWithKnownQualifier = base.some((q) =>
-    lower.startsWith(q.prefix),
-  );
+  const beginsWithKnownQualifier = base.some((q) => lower.startsWith(q.prefix));
 
   return (
     <Popover caret={false} onOpenChange={onClose} open>
@@ -56,9 +54,9 @@ export const SearchFilterSuggestions: FC<SearchFilterSuggestionsProps> = ({
               <Box>
                 <Text className={cn('text-xs', Opacity.HIGH)}>
                   Please use one of the supported filters [
-                  {base.map((q) =>
-                    q.prefix.replace(SEARCH_DELIMITER, ''),
-                  ).join(', ')}
+                  {base
+                    .map((q) => q.prefix.replace(SEARCH_DELIMITER, ''))
+                    .join(', ')}
                   ]
                 </Text>
               </Box>
