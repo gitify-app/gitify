@@ -6,10 +6,8 @@ import { Opacity } from '../../types';
 import { cn } from '../../utils/cn';
 import {
   SEARCH_DELIMITER,
-  SEARCH_QUALIFIERS,
+  getAvailableSearchQualifiers,
 } from '../../utils/notifications/filters/search';
-
-const QUALIFIERS = Object.values(SEARCH_QUALIFIERS);
 
 interface SearchFilterSuggestionsProps {
   open: boolean;
@@ -29,9 +27,7 @@ export const SearchFilterSuggestions: FC<SearchFilterSuggestionsProps> = ({
   }
 
   const lower = inputValue.toLowerCase();
-  const base = isDetailedNotificationsEnabled
-    ? QUALIFIERS
-    : QUALIFIERS.filter((q) => !q.requiresDetailsNotifications);
+  const base = getAvailableSearchQualifiers(isDetailedNotificationsEnabled);
   const suggestions = base.filter(
     (q) => q.prefix.startsWith(lower) || inputValue === '',
   );

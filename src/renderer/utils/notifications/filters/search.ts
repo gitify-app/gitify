@@ -47,6 +47,18 @@ export const AUTHOR_PREFIX: SearchPrefix = SEARCH_QUALIFIERS.author.prefix;
 export const ORG_PREFIX: SearchPrefix = SEARCH_QUALIFIERS.org.prefix;
 export const REPO_PREFIX: SearchPrefix = SEARCH_QUALIFIERS.repo.prefix;
 
+// Qualifier selection helpers (centralized to avoid duplicating logic in UI components)
+export function getAvailableSearchQualifiers(
+  detailedNotificationsEnabled: boolean,
+): readonly SearchQualifier[] {
+  const all = Object.values(SEARCH_QUALIFIERS) as readonly SearchQualifier[];
+  if (detailedNotificationsEnabled) return all;
+  return all.filter((q) => !q.requiresDetailsNotifications);
+}
+
+export const BASE_SEARCH_QUALIFIERS: readonly SearchQualifier[] = getAvailableSearchQualifiers(false);
+export const ALL_SEARCH_QUALIFIERS: readonly SearchQualifier[] = getAvailableSearchQualifiers(true);
+
 export function hasIncludeSearchFilters(settings: SettingsState) {
   return settings.filterIncludeSearchTokens.length > 0;
 }
