@@ -112,7 +112,7 @@ export const SearchFilter: FC = () => {
           onAdd={addIncludeSearchToken}
           onRemove={removeIncludeSearchToken}
           showSuggestionsOnFocusIfEmpty={
-            !hasExcludeSearchFilters(settings) && !!settings.detailedNotifications
+            !hasIncludeSearchFilters(settings)
           }
           tokens={includeSearchTokens}
         />
@@ -123,7 +123,7 @@ export const SearchFilter: FC = () => {
           onAdd={addExcludeSearchToken}
           onRemove={removeExcludeSearchToken}
           showSuggestionsOnFocusIfEmpty={
-            !hasIncludeSearchFilters(settings) && !!settings.detailedNotifications
+            !hasExcludeSearchFilters(settings)
           }
           tokens={excludeSearchTokens}
         />
