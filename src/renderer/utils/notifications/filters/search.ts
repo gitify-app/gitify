@@ -1,6 +1,8 @@
 import type { SettingsState } from '../../../types';
 import type { Notification } from '../../../typesGitHub';
 
+export const SEARCH_DELIMITER = ':';
+
 export const SEARCH_QUALIFIERS = {
   author: {
     prefix: 'author:',

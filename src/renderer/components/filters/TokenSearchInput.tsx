@@ -3,7 +3,10 @@ import { type FC, useState } from 'react';
 import { Box, Stack, Text, TextInputWithTokens } from '@primer/react';
 
 import type { SearchToken } from '../../types';
-import { normalizeSearchInputToToken } from '../../utils/notifications/filters/search';
+import {
+  normalizeSearchInputToToken,
+  SEARCH_DELIMITER,
+} from '../../utils/notifications/filters/search';
 import { SearchFilterSuggestions } from './SearchFilterSuggestions';
 
 export interface TokenInputItem {
@@ -81,7 +84,10 @@ export const TokenSearchInput: FC<TokenSearchInputProps> = ({
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setInputValue(e.target.value);
             const val = e.target.value.trim();
-            if (!val.includes(':') || val.endsWith(':')) {
+            if (
+              !val.includes(SEARCH_DELIMITER) ||
+              val.endsWith(SEARCH_DELIMITER)
+            ) {
               setShowSuggestions(true);
             } else {
               setShowSuggestions(false);
