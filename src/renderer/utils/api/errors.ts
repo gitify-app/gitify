@@ -13,6 +13,10 @@ export function determineFailureType(
     return Errors.NETWORK;
   }
 
+  if (err.message?.includes('safeStorage')) {
+    return Errors.BAD_CREDENTIALS;
+  }
+
   if (code !== AxiosError.ERR_BAD_REQUEST) {
     return Errors.UNKNOWN;
   }
