@@ -60,7 +60,7 @@ describe('main/updater.ts', () => {
     public setUpdateAvailableMenuVisibility = jest.fn();
     public setUpdateReadyForInstallMenuVisibility = jest.fn();
   }
-  
+
   let menuBuilder: TestMenuBuilder;
   let updater: AppUpdater;
 
