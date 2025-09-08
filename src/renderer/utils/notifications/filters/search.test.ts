@@ -6,9 +6,8 @@ import {
   filterNotificationBySearchTerm,
   matchQualifierByPrefix,
   ORG_PREFIX,
+  QUALIFIERS,
   REPO_PREFIX,
-  SEARCH_PREFIXES,
-  SEARCH_QUALIFIERS,
 } from './search';
 
 // (helper removed – no longer used)
@@ -25,16 +24,11 @@ describe('renderer/utils/notifications/filters/search.ts', () => {
     });
 
     it('matches each known qualifier by its exact prefix and additional value', () => {
-      for (const prefix of SEARCH_PREFIXES) {
-        const token = prefix + 'someValue';
+      for (const q of QUALIFIERS) {
+        const token = q.prefix + 'someValue';
         const qualifier = matchQualifierByPrefix(token);
         expect(qualifier).not.toBeNull();
-        if (qualifier) {
-          const found = Object.values(SEARCH_QUALIFIERS).find(
-            (q) => q.prefix === prefix,
-          );
-          expect(qualifier).toBe(found);
-        }
+        expect(qualifier).toBe(q);
       }
     });
 

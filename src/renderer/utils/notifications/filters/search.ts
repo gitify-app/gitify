@@ -3,7 +3,7 @@ import type { Notification } from '../../../typesGitHub';
 
 export const SEARCH_DELIMITER = ':';
 
-export const SEARCH_QUALIFIERS = {
+const SEARCH_QUALIFIERS = {
   author: {
     prefix: 'author:',
     description: 'filter by notification author',
@@ -25,23 +25,13 @@ export const SEARCH_QUALIFIERS = {
   },
 } as const;
 
-export type SearchQualifierKey = keyof typeof SEARCH_QUALIFIERS;
-export type SearchQualifier = (typeof SEARCH_QUALIFIERS)[SearchQualifierKey];
+type SearchQualifierKey = keyof typeof SEARCH_QUALIFIERS;
+type SearchQualifier = (typeof SEARCH_QUALIFIERS)[SearchQualifierKey];
 export type SearchPrefix = SearchQualifier['prefix'];
 
-export const SEARCH_PREFIXES: readonly SearchPrefix[] = Object.values(
+export const QUALIFIERS: readonly SearchQualifier[] = Object.values(
   SEARCH_QUALIFIERS,
-).map((q) => q.prefix) as readonly SearchPrefix[];
-
-// Map prefix -> qualifier for fast lookup after prefix detection
-export const QUALIFIER_BY_PREFIX: Record<SearchPrefix, SearchQualifier> =
-  Object.values(SEARCH_QUALIFIERS).reduce(
-    (acc, q) => {
-      acc[q.prefix as SearchPrefix] = q;
-      return acc;
-    },
-    {} as Record<SearchPrefix, SearchQualifier>,
-  );
+) as readonly SearchQualifier[];
 
 export const AUTHOR_PREFIX: SearchPrefix = SEARCH_QUALIFIERS.author.prefix;
 export const ORG_PREFIX: SearchPrefix = SEARCH_QUALIFIERS.org.prefix;
@@ -73,10 +63,9 @@ export function hasExcludeSearchFilters(settings: SettingsState) {
 }
 
 export function matchQualifierByPrefix(token: string) {
-  // Iterate prefixes (tiny list) then direct map lookup; preserves ordering behavior
-  for (const prefix of SEARCH_PREFIXES) {
-    if (token.startsWith(prefix)) {
-      return QUALIFIER_BY_PREFIX[prefix] || null;
+  for (const qualifier of QUALIFIERS) {
+    if (token.startsWith(qualifier.prefix)) {
+      return qualifier;
     }
   }
   return null;
@@ -115,18 +104,18 @@ export function normalizeSearchInputToToken(raw: string): string | null {
   }
 
   const lower = value.toLowerCase();
-  const matched = SEARCH_PREFIXES.find((p) => lower.startsWith(p));
+  const matchedQualifier = QUALIFIERS.find((q) => lower.startsWith(q.prefix));
 
-  if (!matched) {
+  if (!matchedQualifier) {
     return null;
   }
 
-  const rest = value.substring(matched.length);
+  const rest = value.substring(matchedQualifier.prefix.length);
   if (rest.length === 0) {
     return null; // prefix only, incomplete token
   }
 
-  return `${matched}${rest}`;
+  return `${matchedQualifier.prefix}${rest}`;
 }
 
 export function filterNotificationBySearchTerm(

@@ -97,9 +97,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
       data-padding="none"
       data-wrap="nowrap"
     >
-      <fieldset
-        id="«r1»"
-      >
+      <fieldset>
         <legend>
           <div
             class="Box-sc-g0xbh4-0 mb-2"
@@ -1976,11 +1974,11 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
       <span
         aria-label="Clear all filters"
         class="Tooltip__TooltipBase-sc-17tf59c-0 ihgdlF tooltipped-n"
-        id="«r2»"
+        id="«r1»"
         role="tooltip"
       >
         <button
-          aria-describedby="«r3»-loading-announcement"
+          aria-describedby="«r2»-loading-announcement"
           class="types__StyledButton-sc-ws60qy-0 fnSTVi"
           data-loading="false"
           data-testid="filters-clear"
