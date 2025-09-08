@@ -6,7 +6,7 @@ exports[`renderer/components/primitives/Header.tsx should render itself & its ch
   "baseElement": <body>
     <div>
       <div
-        class="Box-sc-g0xbh4-0 px-6 py-4"
+        class="Box-sc-g0xbh4-0 pl-4 pr-6 pt-3 pb-1"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
@@ -89,7 +89,7 @@ exports[`renderer/components/primitives/Header.tsx should render itself & its ch
   </body>,
   "container": <div>
     <div
-      class="Box-sc-g0xbh4-0 px-6 py-4"
+      class="Box-sc-g0xbh4-0 pl-4 pr-6 pt-3 pb-1"
     >
       <div
         class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"

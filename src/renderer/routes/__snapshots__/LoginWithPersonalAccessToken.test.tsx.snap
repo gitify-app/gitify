@@ -10,7 +10,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
         data-testid="Login With Personal Access Token"
       >
         <div
-          class="Box-sc-g0xbh4-0 px-6 py-4"
+          class="Box-sc-g0xbh4-0 pl-4 pr-6 pt-3 pb-1"
         >
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
@@ -462,7 +462,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
       data-testid="Login With Personal Access Token"
     >
       <div
-        class="Box-sc-g0xbh4-0 px-6 py-4"
+        class="Box-sc-g0xbh4-0 pl-4 pr-6 pt-3 pb-1"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
