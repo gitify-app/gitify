@@ -19,7 +19,9 @@ export const SearchFilterSuggestions: FC<SearchFilterSuggestionsProps> = ({
   inputValue,
   onClose,
 }) => {
-  if (!open) return null;
+  if (!open) {
+    return null;
+  }
 
   return (
     <Popover caret={false} onOpenChange={onClose} open>
