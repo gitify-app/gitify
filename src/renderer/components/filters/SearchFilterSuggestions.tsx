@@ -5,7 +5,8 @@ import { Box, Popover, Stack, Text } from '@primer/react';
 import { Opacity } from '../../types';
 import { cn } from '../../utils/cn';
 import {
-  getAvailableSearchQualifiers,
+  BASE_QUALIFIERS,
+  QUALIFIERS,
   SEARCH_DELIMITER,
 } from '../../utils/notifications/filters/search';
 
@@ -27,7 +28,7 @@ export const SearchFilterSuggestions: FC<SearchFilterSuggestionsProps> = ({
   }
 
   const lower = inputValue.toLowerCase();
-  const base = getAvailableSearchQualifiers(isDetailedNotificationsEnabled);
+  const base = isDetailedNotificationsEnabled ? QUALIFIERS : BASE_QUALIFIERS;
   const suggestions = base.filter(
     (q) => q.prefix.startsWith(lower) || inputValue === '',
   );

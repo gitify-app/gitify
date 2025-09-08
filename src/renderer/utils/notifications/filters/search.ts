@@ -25,13 +25,23 @@ const SEARCH_QUALIFIERS = {
   },
 } as const;
 
-type SearchQualifierKey = keyof typeof SEARCH_QUALIFIERS;
-type SearchQualifier = (typeof SEARCH_QUALIFIERS)[SearchQualifierKey];
+export type SearchQualifierKey = keyof typeof SEARCH_QUALIFIERS;
+export type SearchQualifier = (typeof SEARCH_QUALIFIERS)[SearchQualifierKey];
 export type SearchPrefix = SearchQualifier['prefix'];
 
 export const QUALIFIERS: readonly SearchQualifier[] = Object.values(
   SEARCH_QUALIFIERS,
 ) as readonly SearchQualifier[];
+
+
+// Pre-split qualifier sets so we don't filter each time for every notification
+export const BASE_QUALIFIERS: readonly SearchQualifier[] = QUALIFIERS.filter(
+  (q) => !q.requiresDetailsNotifications,
+);
+
+export const DETAILED_ONLY_QUALIFIERS: readonly SearchQualifier[] = QUALIFIERS.filter(
+  (q) => q.requiresDetailsNotifications,
+);
 
 export const AUTHOR_PREFIX: SearchPrefix = SEARCH_QUALIFIERS.author.prefix;
 export const ORG_PREFIX: SearchPrefix = SEARCH_QUALIFIERS.org.prefix;

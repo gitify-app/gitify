@@ -5,18 +5,19 @@ import type {
   SubjectUser,
 } from '../../../typesGitHub';
 import {
-  AUTHOR_PREFIX,
   filterNotificationBySearchTerm,
   hasExcludeSearchFilters,
   hasIncludeSearchFilters,
-  ORG_PREFIX,
-  REPO_PREFIX,
   reasonFilter,
-  type SearchPrefix,
   stateFilter,
   subjectTypeFilter,
   userTypeFilter,
+  type SearchQualifier,
+  BASE_QUALIFIERS,
+  DETAILED_ONLY_QUALIFIERS,
 } from '.';
+
+
 
 export function filterBaseNotifications(
   notifications: Notification[],
@@ -25,13 +26,13 @@ export function filterBaseNotifications(
   return notifications.filter((notification) => {
     let passesFilters = true;
 
-    passesFilters =
-      passesFilters &&
-      passesSearchTokenFiltersForPrefix(notification, settings, ORG_PREFIX);
-
-    passesFilters =
-      passesFilters &&
-      passesSearchTokenFiltersForPrefix(notification, settings, REPO_PREFIX);
+    // Apply base qualifier include/exclude filters (org, repo, etc.)
+    for (const qualifier of BASE_QUALIFIERS) {
+      if (!passesFilters) break;
+      passesFilters =
+        passesFilters &&
+        passesSearchTokenFiltersForQualifier(notification, settings, qualifier);
+    }
 
     if (subjectTypeFilter.hasFilters(settings)) {
       passesFilters =
@@ -86,12 +87,13 @@ export function hasAnyFiltersSet(settings: SettingsState): boolean {
 /**
  * Apply include/exclude search token logic for a specific search qualifier prefix.
  */
-function passesSearchTokenFiltersForPrefix(
+function passesSearchTokenFiltersForQualifier(
   notification: Notification,
   settings: SettingsState,
-  prefix: SearchPrefix,
+  qualifier: SearchQualifier,
 ): boolean {
   let passes = true;
+  const prefix = qualifier.prefix;
 
   if (hasIncludeSearchFilters(settings)) {
     const includeTokens = settings.filterIncludeSearchTokens.filter((t) =>
@@ -136,10 +138,13 @@ function passesUserFilters(
       );
   }
 
-  // Apply author-specific search token filters during detailed filtering
-  passesFilters =
-    passesFilters &&
-    passesSearchTokenFiltersForPrefix(notification, settings, AUTHOR_PREFIX);
+  // Apply detailed-only qualifier search token filters (e.g. author)
+  for (const qualifier of DETAILED_ONLY_QUALIFIERS) {
+    if (!passesFilters) break;
+    passesFilters =
+      passesFilters &&
+      passesSearchTokenFiltersForQualifier(notification, settings, qualifier);
+  }
 
   return passesFilters;
 }
