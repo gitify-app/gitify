@@ -59,10 +59,8 @@ describe('main/updater.ts', () => {
     public setNoUpdateAvailableMenuVisibility = jest.fn();
     public setUpdateAvailableMenuVisibility = jest.fn();
     public setUpdateReadyForInstallMenuVisibility = jest.fn();
-    constructor(mb: Menubar) {
-      super(mb);
-    }
   }
+  
   let menuBuilder: TestMenuBuilder;
   let updater: AppUpdater;
 
