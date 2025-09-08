@@ -1,44 +1,40 @@
 import { partialMockNotification } from '../../../__mocks__/partial-mocks';
 import type { Link } from '../../../types';
 import type { Owner } from '../../../typesGitHub';
-import {
-  filterNotificationBySearchTerm,
-  matchQualifierByPrefix,
-  QUALIFIERS,
-} from './search';
+import { filterNotificationBySearchTerm, parseSearchToken, ALL_SEARCH_QUALIFIERS } from './search';
 
 // (helper removed – no longer used)
 
 describe('renderer/utils/notifications/filters/search.ts', () => {
-  describe('matchQualifierByPrefix', () => {
+  describe('parseSearchToken (prefix matching behavior)', () => {
     it('returns null for empty string', () => {
-      expect(matchQualifierByPrefix('')).toBeNull();
+      expect(parseSearchToken('')).toBeNull();
     });
 
     it('returns null when no qualifier prefix matches', () => {
-      expect(matchQualifierByPrefix('unknown:value')).toBeNull();
-      expect(matchQualifierByPrefix('auth:foo')).toBeNull(); // near miss
+      expect(parseSearchToken('unknown:value')).toBeNull();
+      expect(parseSearchToken('auth:foo')).toBeNull(); // near miss
     });
 
     it('matches each known qualifier by its exact prefix and additional value', () => {
-      for (const q of QUALIFIERS) {
+      for (const q of ALL_SEARCH_QUALIFIERS) {
         const token = q.prefix + 'someValue';
-        const qualifier = matchQualifierByPrefix(token);
-        expect(qualifier).not.toBeNull();
-        expect(qualifier).toBe(q);
+        const parsed = parseSearchToken(token);
+        expect(parsed).not.toBeNull();
+        expect(parsed?.qualifier).toBe(q);
       }
     });
 
     it('is case-sensitive (does not match mismatched casing)', () => {
       // Intentionally alter case of prefix characters
-      expect(matchQualifierByPrefix('Author:foo')).toBeNull();
-      expect(matchQualifierByPrefix('ORG:bar')).toBeNull();
-      expect(matchQualifierByPrefix('Repo:baz')).toBeNull();
+      expect(parseSearchToken('Author:foo')).toBeNull();
+      expect(parseSearchToken('ORG:bar')).toBeNull();
+      expect(parseSearchToken('Repo:baz')).toBeNull();
     });
 
     it('does not match when prefix appears later in the token', () => {
-      expect(matchQualifierByPrefix('xauthor:foo')).toBeNull();
-      expect(matchQualifierByPrefix('xxorg:bar')).toBeNull();
+      expect(parseSearchToken('xauthor:foo')).toBeNull();
+      expect(parseSearchToken('xxorg:bar')).toBeNull();
     });
   });
 

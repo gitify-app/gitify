@@ -13,8 +13,8 @@ import {
   subjectTypeFilter,
   userTypeFilter,
   type SearchQualifier,
-  BASE_QUALIFIERS,
-  DETAILED_ONLY_QUALIFIERS,
+  BASE_SEARCH_QUALIFIERS,
+  DETAILED_ONLY_SEARCH_QUALIFIERS,
 } from '.';
 
 
@@ -27,7 +27,7 @@ export function filterBaseNotifications(
     let passesFilters = true;
 
     // Apply base qualifier include/exclude filters (org, repo, etc.)
-    for (const qualifier of BASE_QUALIFIERS) {
+    for (const qualifier of BASE_SEARCH_QUALIFIERS) {
       if (!passesFilters) break;
       passesFilters =
         passesFilters &&
@@ -139,7 +139,7 @@ function passesUserFilters(
   }
 
   // Apply detailed-only qualifier search token filters (e.g. author)
-  for (const qualifier of DETAILED_ONLY_QUALIFIERS) {
+  for (const qualifier of DETAILED_ONLY_SEARCH_QUALIFIERS) {
     if (!passesFilters) break;
     passesFilters =
       passesFilters &&

@@ -29,36 +29,19 @@ export type SearchQualifierKey = keyof typeof SEARCH_QUALIFIERS;
 export type SearchQualifier = (typeof SEARCH_QUALIFIERS)[SearchQualifierKey];
 export type SearchPrefix = SearchQualifier['prefix'];
 
-export const QUALIFIERS: readonly SearchQualifier[] = Object.values(
+export const ALL_SEARCH_QUALIFIERS: readonly SearchQualifier[] = Object.values(
   SEARCH_QUALIFIERS,
 ) as readonly SearchQualifier[];
 
 
-export const BASE_QUALIFIERS: readonly SearchQualifier[] = QUALIFIERS.filter(
+export const BASE_SEARCH_QUALIFIERS: readonly SearchQualifier[] = ALL_SEARCH_QUALIFIERS.filter(
   (q) => !q.requiresDetailsNotifications,
 );
 
-export const DETAILED_ONLY_QUALIFIERS: readonly SearchQualifier[] = QUALIFIERS.filter(
+export const DETAILED_ONLY_SEARCH_QUALIFIERS: readonly SearchQualifier[] = ALL_SEARCH_QUALIFIERS.filter(
   (q) => q.requiresDetailsNotifications,
 );
 
-
-// Qualifier selection helpers (centralized to avoid duplicating logic in UI components)
-export function getAvailableSearchQualifiers(
-  detailedNotificationsEnabled: boolean,
-): readonly SearchQualifier[] {
-  const all = Object.values(SEARCH_QUALIFIERS) as readonly SearchQualifier[];
-  if (detailedNotificationsEnabled) {
-    return all;
-  }
-
-  return all.filter((q) => !q.requiresDetailsNotifications);
-}
-
-export const BASE_SEARCH_QUALIFIERS: readonly SearchQualifier[] =
-  getAvailableSearchQualifiers(false);
-export const ALL_SEARCH_QUALIFIERS: readonly SearchQualifier[] =
-  getAvailableSearchQualifiers(true);
 
 export function hasIncludeSearchFilters(settings: SettingsState) {
   return settings.filterIncludeSearchTokens.length > 0;
@@ -66,15 +49,6 @@ export function hasIncludeSearchFilters(settings: SettingsState) {
 
 export function hasExcludeSearchFilters(settings: SettingsState) {
   return settings.filterExcludeSearchTokens.length > 0;
-}
-
-export function matchQualifierByPrefix(token: string) {
-  for (const qualifier of QUALIFIERS) {
-    if (token.startsWith(qualifier.prefix)) {
-      return qualifier;
-    }
-  }
-  return null;
 }
 
 function stripPrefix(token: string, qualifier: SearchQualifier) {
@@ -88,17 +62,22 @@ export interface ParsedSearchToken {
 }
 
 export function parseSearchToken(token: string): ParsedSearchToken | null {
-  const qualifier = matchQualifierByPrefix(token);
-  if (!qualifier) {
+  if (!token) {
     return null;
   }
 
-  const value = stripPrefix(token, qualifier);
-  if (!value) {
-    return null;
+  for (const qualifier of ALL_SEARCH_QUALIFIERS) {
+    if (token.startsWith(qualifier.prefix)) {
+      const value = stripPrefix(token, qualifier);
+  
+      if (!value) {
+        return null; // prefix only
+      }
+      
+      return { qualifier, value, valueLower: value.toLowerCase() };
+    }
   }
-
-  return { qualifier, value, valueLower: value.toLowerCase() };
+  return null;
 }
 
 // Normalize raw user input from the token text field into a SearchToken (string)
@@ -110,7 +89,7 @@ export function normalizeSearchInputToToken(raw: string): string | null {
   }
 
   const lower = value.toLowerCase();
-  const matchedQualifier = QUALIFIERS.find((q) => lower.startsWith(q.prefix));
+  const matchedQualifier = ALL_SEARCH_QUALIFIERS.find((q) => lower.startsWith(q.prefix));
 
   if (!matchedQualifier) {
     return null;
