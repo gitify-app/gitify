@@ -133,7 +133,9 @@ export const SearchFilter: FC = () => {
           onRemove={removeIncludeSearchToken}
           showSuggestionsOnFocusIfEmpty={!hasIncludeSearchFilters(settings)}
           tokens={includeSearchTokens}
+          isDetailedNotificationsEnabled={settings.detailedNotifications}
         />
+
         <TokenSearchInput
           icon={NoEntryFillIcon}
           iconColorClass={IconColor.RED}
@@ -142,6 +144,7 @@ export const SearchFilter: FC = () => {
           onRemove={removeExcludeSearchToken}
           showSuggestionsOnFocusIfEmpty={!hasExcludeSearchFilters(settings)}
           tokens={excludeSearchTokens}
+          isDetailedNotificationsEnabled={settings.detailedNotifications}
         />
       </Stack>
     </fieldset>

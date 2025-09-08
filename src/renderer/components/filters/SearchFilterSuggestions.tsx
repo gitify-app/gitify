@@ -14,12 +14,14 @@ const QUALIFIERS = Object.values(SEARCH_QUALIFIERS);
 interface SearchFilterSuggestionsProps {
   open: boolean;
   inputValue: string;
+  isDetailedNotificationsEnabled: boolean;
   onClose: () => void;
 }
 
 export const SearchFilterSuggestions: FC<SearchFilterSuggestionsProps> = ({
   open,
   inputValue,
+  isDetailedNotificationsEnabled,
   onClose,
 }) => {
   if (!open) {
@@ -27,10 +29,13 @@ export const SearchFilterSuggestions: FC<SearchFilterSuggestionsProps> = ({
   }
 
   const lower = inputValue.toLowerCase();
-  const suggestions = QUALIFIERS.filter(
+  const base = isDetailedNotificationsEnabled
+    ? QUALIFIERS
+    : QUALIFIERS.filter((q) => !q.requiresDetailsNotifications);
+  const suggestions = base.filter(
     (q) => q.prefix.startsWith(lower) || inputValue === '',
   );
-  const beginsWithKnownQualifier = QUALIFIERS.some((q) =>
+  const beginsWithKnownQualifier = base.some((q) =>
     lower.startsWith(q.prefix),
   );
 
@@ -55,7 +60,7 @@ export const SearchFilterSuggestions: FC<SearchFilterSuggestionsProps> = ({
               <Box>
                 <Text className={cn('text-xs', Opacity.HIGH)}>
                   Please use one of the supported filters [
-                  {QUALIFIERS.map((q) =>
+                  {base.map((q) =>
                     q.prefix.replace(SEARCH_DELIMITER, ''),
                   ).join(', ')}
                   ]

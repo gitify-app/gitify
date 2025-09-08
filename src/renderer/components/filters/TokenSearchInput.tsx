@@ -15,11 +15,12 @@ export interface TokenInputItem {
 }
 
 interface TokenSearchInputProps {
-  label: string; // "Include" | "Exclude"
+  label: string;
   icon: FC<{ className?: string }>;
   iconColorClass: string;
   tokens: TokenInputItem[];
-  showSuggestionsOnFocusIfEmpty: boolean; // parent pre-computed condition
+  showSuggestionsOnFocusIfEmpty: boolean; 
+  isDetailedNotificationsEnabled: boolean;
   onAdd: (token: string) => void;
   onRemove: (tokenId: string | number) => void;
 }
@@ -32,6 +33,7 @@ export const TokenSearchInput: FC<TokenSearchInputProps> = ({
   iconColorClass,
   tokens,
   showSuggestionsOnFocusIfEmpty,
+  isDetailedNotificationsEnabled,
   onAdd,
   onRemove,
 }) => {
@@ -110,6 +112,7 @@ export const TokenSearchInput: FC<TokenSearchInputProps> = ({
         <SearchFilterSuggestions
           inputValue={inputValue}
           onClose={() => setShowSuggestions(false)}
+          isDetailedNotificationsEnabled={isDetailedNotificationsEnabled}
           open={showSuggestions}
         />
       </Box>
