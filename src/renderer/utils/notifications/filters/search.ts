@@ -34,7 +34,6 @@ export const QUALIFIERS: readonly SearchQualifier[] = Object.values(
 ) as readonly SearchQualifier[];
 
 
-// Pre-split qualifier sets so we don't filter each time for every notification
 export const BASE_QUALIFIERS: readonly SearchQualifier[] = QUALIFIERS.filter(
   (q) => !q.requiresDetailsNotifications,
 );
