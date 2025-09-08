@@ -17,7 +17,6 @@ import {
   hasIncludeSearchFilters,
   SEARCH_PREFIXES,
 } from '../../utils/notifications/filters/search';
-import { Tooltip } from '../fields/Tooltip';
 import { Title } from '../primitives/Title';
 import { RequiresDetailedNotificationWarning } from './RequiresDetailedNotificationsWarning';
 
@@ -146,33 +145,33 @@ export const SearchFilter: FC = () => {
 
   return (
     <fieldset id={fieldsetId}>
-      <Stack align="baseline" direction="horizontal" gap="condensed">
-        <Title icon={SearchIcon}>Search</Title>
-        <Tooltip
-          name="tooltip-filter-actors"
-          tooltip={
-            <Stack direction="vertical" gap="condensed">
-              <Text>Filter notifications by:</Text>
-              <Box className="pl-4">
-                <Stack direction="vertical" gap="condensed">
-                  <Stack direction="horizontal" gap="condensed">
-                    <PersonIcon size={Size.SMALL} />
-                    Author (author:handle)
-                  </Stack>
-                  <Stack direction="horizontal" gap="condensed">
-                    <OrganizationIcon size={Size.SMALL} />
-                    Organization (org:name)
-                  </Stack>
-                  <Stack direction="horizontal" gap="condensed">
-                    <RepoIcon size={Size.SMALL} /> Repository (repo:fullname)
-                  </Stack>
+      <Title
+        icon={SearchIcon}
+        tooltip={
+          <Stack direction="vertical" gap="condensed">
+            <Text>Filter notifications by:</Text>
+            <Box className="pl-4">
+              <Stack direction="vertical" gap="condensed">
+                <Stack direction="horizontal" gap="condensed">
+                  <PersonIcon size={Size.SMALL} />
+                  Author (author:handle)
                 </Stack>
-              </Box>
-              <RequiresDetailedNotificationWarning />
-            </Stack>
-          }
-        />
-      </Stack>
+                <Stack direction="horizontal" gap="condensed">
+                  <OrganizationIcon size={Size.SMALL} />
+                  Organization (org:name)
+                </Stack>
+                <Stack direction="horizontal" gap="condensed">
+                  <RepoIcon size={Size.SMALL} /> Repository (repo:fullname)
+                </Stack>
+              </Stack>
+            </Box>
+            <RequiresDetailedNotificationWarning />
+          </Stack>
+        }
+      >
+        Search
+      </Title>
+
       <Stack direction="vertical" gap="condensed">
         <Stack
           align="center"

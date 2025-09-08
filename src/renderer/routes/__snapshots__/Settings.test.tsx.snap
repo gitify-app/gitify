@@ -6,7 +6,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
   data-testid="settings"
 >
   <div
-    class="Box-sc-g0xbh4-0 px-6 py-4"
+    class="Box-sc-g0xbh4-0 pl-4 pr-6 pt-3 pb-1"
   >
     <div
       class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
@@ -56,7 +56,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             data-justify="start"
             data-padding="none"
             data-wrap="nowrap"
-            id="settings"
+            id="title-settings"
           >
             <svg
               aria-hidden="true"
@@ -110,7 +110,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               data-justify="start"
               data-padding="none"
               data-wrap="nowrap"
-              id="appearance"
+              id="title-appearance"
             >
               <svg
                 aria-hidden="true"
@@ -481,7 +481,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               data-justify="start"
               data-padding="none"
               data-wrap="nowrap"
-              id="notifications"
+              id="title-notifications"
             >
               <svg
                 aria-hidden="true"
@@ -975,7 +975,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               data-justify="start"
               data-padding="none"
               data-wrap="nowrap"
-              id="system"
+              id="title-system"
             >
               <svg
                 aria-hidden="true"

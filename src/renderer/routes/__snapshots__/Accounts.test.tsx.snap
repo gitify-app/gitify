@@ -6,7 +6,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
   data-testid="accounts"
 >
   <div
-    class="Box-sc-g0xbh4-0 px-6 py-4"
+    class="Box-sc-g0xbh4-0 pl-4 pr-6 pt-3 pb-1"
   >
     <div
       class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
@@ -56,7 +56,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
             data-justify="start"
             data-padding="none"
             data-wrap="nowrap"
-            id="accounts"
+            id="title-accounts"
           >
             <svg
               aria-hidden="true"
@@ -1273,7 +1273,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
   data-testid="accounts"
 >
   <div
-    class="Box-sc-g0xbh4-0 px-6 py-4"
+    class="Box-sc-g0xbh4-0 pl-4 pr-6 pt-3 pb-1"
   >
     <div
       class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
@@ -1323,7 +1323,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
             data-justify="start"
             data-padding="none"
             data-wrap="nowrap"
-            id="accounts"
+            id="title-accounts"
           >
             <svg
               aria-hidden="true"
@@ -2540,7 +2540,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
   data-testid="accounts"
 >
   <div
-    class="Box-sc-g0xbh4-0 px-6 py-4"
+    class="Box-sc-g0xbh4-0 pl-4 pr-6 pt-3 pb-1"
   >
     <div
       class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
@@ -2590,7 +2590,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
             data-justify="start"
             data-padding="none"
             data-wrap="nowrap"
-            id="accounts"
+            id="title-accounts"
           >
             <svg
               aria-hidden="true"
