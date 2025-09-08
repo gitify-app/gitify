@@ -58,7 +58,7 @@ export const SearchFilter: FC = () => {
   };
 
   const [excludeSearchTokens, setExcludeSearchTokens] = useState<SearchToken[]>(
-    settings.filterExcludeSearchTokens as SearchToken[],
+    settings.filterExcludeSearchTokens,
   );
 
   const addExcludeSearchToken = (value: string) => {
