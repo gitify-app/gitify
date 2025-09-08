@@ -51,7 +51,7 @@ export function matchQualifierByPrefix(token: string) {
 }
 
 function stripPrefix(token: string) {
-  return token.substring(token.indexOf(':') + 1);
+  return token.substring(token.indexOf(':') + 1).trim();
 }
 
 export function filterNotificationBySearchTerm(
@@ -64,20 +64,25 @@ export function filterNotificationBySearchTerm(
   }
 
   const value = stripPrefix(token);
+  const valueLower = value.toLowerCase();
+
+  if (valueLower.length === 0) {
+    return false;
+  }
 
   if (qualifier === SEARCH_QUALIFIERS.author) {
     const author = notification.subject?.user?.login;
-    return author.toLowerCase() === value.toLowerCase();
+    return author?.toLowerCase() === valueLower;
   }
 
   if (qualifier === SEARCH_QUALIFIERS.org) {
     const owner = notification.repository?.owner?.login;
-    return owner?.toLowerCase() === value.toLowerCase();
+    return owner?.toLowerCase() === valueLower;
   }
 
   if (qualifier === SEARCH_QUALIFIERS.repo) {
     const name = notification.repository?.full_name;
-    return name?.toLowerCase() === value.toLowerCase();
+    return name?.toLowerCase() === valueLower;
   }
 
   return false;

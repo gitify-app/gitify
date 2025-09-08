@@ -143,6 +143,12 @@ describe('renderer/utils/notifications/filters/search.ts', () => {
       ).toBe(false);
     });
 
+    it('returns false for empty value', () => {
+      expect(filterNotificationBySearchTerm(mockNotification, 'repo:')).toBe(
+        false,
+      );
+    });
+
     it('returns false for empty token', () => {
       expect(filterNotificationBySearchTerm(mockNotification, '')).toBe(false);
     });
