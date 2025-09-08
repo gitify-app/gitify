@@ -56,7 +56,7 @@ exports[`renderer/components/primitives/Header.tsx should render itself & its ch
                 data-justify="start"
                 data-padding="none"
                 data-wrap="nowrap"
-                id="test-header"
+                id="title-test-header"
               >
                 <svg
                   aria-hidden="true"
@@ -139,7 +139,7 @@ exports[`renderer/components/primitives/Header.tsx should render itself & its ch
               data-justify="start"
               data-padding="none"
               data-wrap="nowrap"
-              id="test-header"
+              id="title-test-header"
             >
               <svg
                 aria-hidden="true"

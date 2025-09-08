@@ -56,7 +56,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
             data-justify="start"
             data-padding="none"
             data-wrap="nowrap"
-            id="accounts"
+            id="title-accounts"
           >
             <svg
               aria-hidden="true"
@@ -1323,7 +1323,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
             data-justify="start"
             data-padding="none"
             data-wrap="nowrap"
-            id="accounts"
+            id="title-accounts"
           >
             <svg
               aria-hidden="true"
@@ -2590,7 +2590,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
             data-justify="start"
             data-padding="none"
             data-wrap="nowrap"
-            id="accounts"
+            id="title-accounts"
           >
             <svg
               aria-hidden="true"

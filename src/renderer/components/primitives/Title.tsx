@@ -1,15 +1,20 @@
-import type { FC } from 'react';
+import type { FC, ReactNode } from 'react';
 
 import type { Icon } from '@primer/octicons-react';
 import { Box, Heading, Stack } from '@primer/react';
+
+import { Tooltip } from '../fields/Tooltip';
 
 interface ITitle {
   icon: Icon;
   children: string;
   size?: number;
+  tooltip?: ReactNode;
 }
 
 export const Title: FC<ITitle> = ({ size = 2, ...props }) => {
+  const name = props.children.toLowerCase().replace(' ', '-');
+
   return (
     <legend>
       <Box className="mb-2">
@@ -17,10 +22,20 @@ export const Title: FC<ITitle> = ({ size = 2, ...props }) => {
           align="center"
           direction="horizontal"
           gap="condensed"
-          id={props.children.toLowerCase().replace(' ', '-')}
+          id={`title-${name}`}
         >
           <props.icon size="small" />
           <Heading sx={{ fontSize: size }}>{props.children}</Heading>
+          {props.tooltip && (
+            <Tooltip
+              name={`tooltip-${name}`}
+              tooltip={
+                <Stack direction="vertical" gap="condensed">
+                  {props.tooltip}
+                </Stack>
+              }
+            />
+          )}
         </Stack>
       </Box>
     </legend>
