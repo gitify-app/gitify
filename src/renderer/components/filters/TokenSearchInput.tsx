@@ -101,9 +101,7 @@ export const TokenSearchInput: FC<TokenSearchInputProps> = ({
           }}
           onKeyDown={onKeyDown}
           onTokenRemove={(id) => {
-            const token = tokenItems.find((t) => t.id === id)?.text as
-              | SearchToken
-              | undefined;
+            const token = tokenItems.find((t) => t.id === id)?.text;
 
             if (token) {
               onRemove(token);

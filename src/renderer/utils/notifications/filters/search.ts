@@ -8,20 +8,19 @@ const SEARCH_QUALIFIERS = {
     prefix: 'author:',
     description: 'filter by notification author',
     requiresDetailsNotifications: true,
-    extract: (n: Notification) => n.subject?.user?.login as string | undefined,
+    extract: (n: Notification) => n.subject?.user?.login,
   },
   org: {
     prefix: 'org:',
     description: 'filter by organization owner',
     requiresDetailsNotifications: false,
-    extract: (n: Notification) =>
-      n.repository?.owner?.login as string | undefined,
+    extract: (n: Notification) => n.repository?.owner?.login,
   },
   repo: {
     prefix: 'repo:',
     description: 'filter by repository full name',
     requiresDetailsNotifications: false,
-    extract: (n: Notification) => n.repository?.full_name as string | undefined,
+    extract: (n: Notification) => n.repository?.full_name,
   },
 } as const;
 

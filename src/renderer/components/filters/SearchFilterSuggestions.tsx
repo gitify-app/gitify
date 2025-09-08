@@ -1,7 +1,8 @@
-import { useContext, type FC } from 'react';
+import { type FC, useContext } from 'react';
 
 import { Box, Popover, Stack, Text } from '@primer/react';
 
+import { AppContext } from '../../context/App';
 import { Opacity } from '../../types';
 import { cn } from '../../utils/cn';
 import {
@@ -9,7 +10,6 @@ import {
   BASE_SEARCH_QUALIFIERS,
   SEARCH_DELIMITER,
 } from '../../utils/notifications/filters/search';
-import { AppContext } from '../../context/App';
 
 interface SearchFilterSuggestionsProps {
   open: boolean;
@@ -22,7 +22,6 @@ export const SearchFilterSuggestions: FC<SearchFilterSuggestionsProps> = ({
   inputValue,
   onClose,
 }) => {
-
   const { settings } = useContext(AppContext);
 
   if (!open) {
