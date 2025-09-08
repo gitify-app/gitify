@@ -2,12 +2,24 @@ import type { SettingsState } from '../../../types';
 import type { Notification } from '../../../typesGitHub';
 
 export const SEARCH_QUALIFIERS = {
-  author: { prefix: 'author:', description: 'filter by notification author' },
-  org: { prefix: 'org:', description: 'filter by organization owner' },
-  repo: { prefix: 'repo:', description: 'filter by repository full name' },
+  author: {
+    prefix: 'author:',
+    description: 'filter by notification author',
+    requiresDetailsNotifications: true,
+  },
+  org: {
+    prefix: 'org:',
+    description: 'filter by organization owner',
+    requiresDetailsNotifications: false,
+  },
+  repo: {
+    prefix: 'repo:',
+    description: 'filter by repository full name',
+    requiresDetailsNotifications: false,
+  },
 } as const;
 
-export type SearchQualifierKey = keyof typeof SEARCH_QUALIFIERS; // 'author' | 'org' | 'repo'
+export type SearchQualifierKey = keyof typeof SEARCH_QUALIFIERS;
 export type SearchQualifier = (typeof SEARCH_QUALIFIERS)[SearchQualifierKey];
 export type SearchPrefix = SearchQualifier['prefix'];
 
@@ -29,7 +41,10 @@ export function hasExcludeSearchFilters(settings: SettingsState) {
 
 export function matchQualifierByPrefix(token: string) {
   const prefix = SEARCH_PREFIXES.find((p) => token.startsWith(p));
-  if (!prefix) return null;
+  if (!prefix) {
+    return null;
+  }
+
   return (
     Object.values(SEARCH_QUALIFIERS).find((q) => q.prefix === prefix) || null
   );
@@ -44,26 +59,26 @@ export function filterNotificationBySearchTerm(
   token: string,
 ): boolean {
   const qualifier = matchQualifierByPrefix(token);
-  if (!qualifier) return false;
+  if (!qualifier) {
+    return false;
+  }
+
+  const value = stripPrefix(token);
 
   if (qualifier === SEARCH_QUALIFIERS.author) {
-    const handle = stripPrefix(token);
-    return notification.subject?.user?.login === handle;
+    const author = notification.subject?.user?.login;
+    return author.toLowerCase() === value.toLowerCase();
   }
+
   if (qualifier === SEARCH_QUALIFIERS.org) {
-    const org = stripPrefix(token);
     const owner = notification.repository?.owner?.login;
-    return owner?.toLowerCase() === org.toLowerCase();
+    return owner?.toLowerCase() === value.toLowerCase();
   }
+
   if (qualifier === SEARCH_QUALIFIERS.repo) {
-    const repo = stripPrefix(token);
     const name = notification.repository?.full_name;
-    return name?.toLowerCase() === repo.toLowerCase();
+    return name?.toLowerCase() === value.toLowerCase();
   }
 
   return false;
-}
-
-export function buildSearchToken(type: SearchQualifierKey, value: string) {
-  return `${SEARCH_QUALIFIERS[type].prefix}${value}`;
 }

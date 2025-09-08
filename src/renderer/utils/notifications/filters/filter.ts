@@ -6,6 +6,9 @@ import type {
 } from '../../../typesGitHub';
 import {
   AUTHOR_PREFIX,
+  ORG_PREFIX,
+  REPO_PREFIX,
+  type SearchPrefix,
   filterNotificationBySearchTerm,
   hasExcludeSearchFilters,
   hasIncludeSearchFilters,
@@ -22,8 +25,16 @@ export function filterBaseNotifications(
   return notifications.filter((notification) => {
     let passesFilters = true;
 
-    passesFilters =
-      passesFilters && passesActorIncludeExcludeFilters(notification, settings);
+
+  passesFilters =
+    passesFilters &&
+    passesSearchTokenFiltersForPrefix(notification, settings, ORG_PREFIX);
+
+      passesFilters =
+    passesFilters &&
+    passesSearchTokenFiltersForPrefix(notification, settings, REPO_PREFIX);
+
+
 
     if (subjectTypeFilter.hasFilters(settings)) {
       passesFilters =
@@ -75,6 +86,45 @@ export function hasAnyFiltersSet(settings: SettingsState): boolean {
   );
 }
 
+/**
+ * Apply include/exclude search token logic for a specific search qualifier prefix.
+ */
+function passesSearchTokenFiltersForPrefix(
+  notification: Notification,
+  settings: SettingsState,
+  prefix: SearchPrefix,
+): boolean {
+  let passes = true;
+
+  if (hasIncludeSearchFilters(settings)) {
+    const includeTokens = settings.filterIncludeSearchTokens.filter((t) =>
+      t.startsWith(prefix),
+    );
+    if (includeTokens.length > 0) {
+      passes =
+        passes &&
+        includeTokens.some((token) =>
+          filterNotificationBySearchTerm(notification, token),
+        );
+    }
+  }
+
+  if (hasExcludeSearchFilters(settings)) {
+    const excludeTokens = settings.filterExcludeSearchTokens.filter((t) =>
+      t.startsWith(prefix),
+    );
+    if (excludeTokens.length > 0) {
+      passes =
+        passes &&
+        !excludeTokens.some((token) =>
+          filterNotificationBySearchTerm(notification, token),
+        );
+    }
+  }
+
+  return passes;
+}
+
 function passesUserFilters(
   notification: Notification,
   settings: SettingsState,
@@ -89,57 +139,10 @@ function passesUserFilters(
       );
   }
 
-  // Apply user-specific actor include filters (user: prefix) during detailed filtering
-  if (hasIncludeSearchFilters(settings)) {
-    const userIncludeTokens = settings.filterIncludeSearchTokens.filter((t) =>
-      t.startsWith(AUTHOR_PREFIX),
-    );
-    if (userIncludeTokens.length > 0) {
-      passesFilters =
-        passesFilters &&
-        userIncludeTokens.some((token) =>
-          filterNotificationBySearchTerm(notification, token),
-        );
-    }
-  }
-
-  if (hasExcludeSearchFilters(settings)) {
-    const userExcludeTokens = settings.filterExcludeSearchTokens.filter((t) =>
-      t.startsWith(AUTHOR_PREFIX),
-    );
-    if (userExcludeTokens.length > 0) {
-      passesFilters =
-        passesFilters &&
-        !userExcludeTokens.some((token) =>
-          filterNotificationBySearchTerm(notification, token),
-        );
-    }
-  }
-
-  return passesFilters;
-}
-
-function passesActorIncludeExcludeFilters(
-  notification: Notification,
-  settings: SettingsState,
-): boolean {
-  let passesFilters = true;
-
-  if (hasIncludeSearchFilters(settings)) {
-    passesFilters =
-      passesFilters &&
-      settings.filterIncludeSearchTokens.some((token) =>
-        filterNotificationBySearchTerm(notification, token),
-      );
-  }
-
-  if (hasExcludeSearchFilters(settings)) {
-    passesFilters =
-      passesFilters &&
-      !settings.filterExcludeSearchTokens.some((token) =>
-        filterNotificationBySearchTerm(notification, token),
-      );
-  }
+  // Apply author-specific search token filters during detailed filtering
+  passesFilters =
+    passesFilters &&
+    passesSearchTokenFiltersForPrefix(notification, settings, AUTHOR_PREFIX);
 
   return passesFilters;
 }

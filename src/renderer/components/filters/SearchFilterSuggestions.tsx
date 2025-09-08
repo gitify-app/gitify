@@ -1,7 +1,9 @@
 import type { FC } from 'react';
 
-import { ActionList, Popover, Text } from '@primer/react';
+import { Box, Popover, Stack, Text } from '@primer/react';
 
+import { Opacity } from '../../types';
+import { cn } from '../../utils/cn';
 import { SEARCH_QUALIFIERS } from '../../utils/notifications/filters/search';
 
 const QUALIFIERS = Object.values(SEARCH_QUALIFIERS);
@@ -21,21 +23,23 @@ export const SearchFilterSuggestions: FC<SearchFilterSuggestionsProps> = ({
 
   return (
     <Popover caret={false} onOpenChange={onClose} open>
-      <Popover.Content sx={{ p: 0, mt: 1, width: '100%' }}>
-        <ActionList>
+      <Popover.Content sx={{ p: 2, mt: 2, width: '100%' }}>
+        <Stack direction="vertical" gap="condensed">
           {QUALIFIERS.filter(
             (q) =>
               q.prefix.startsWith(inputValue.toLowerCase()) ||
               inputValue === '',
           ).map((q) => (
-            <ActionList.Item key={q.prefix}>
-              <Text className="text-xs">{q.prefix}</Text>
-              <ActionList.Description variant="block">
-                <Text className="text-xs">{q.description}</Text>
-              </ActionList.Description>
-            </ActionList.Item>
+            <Box key={q.prefix}>
+              <Stack direction="vertical" gap="none">
+                <Text className="text-xs font-semibold">{q.prefix}</Text>
+                <Text className={cn('text-xs', Opacity.HIGH)}>
+                  {q.description}
+                </Text>
+              </Stack>
+            </Box>
           ))}
-        </ActionList>
+        </Stack>
       </Popover.Content>
     </Popover>
   );
