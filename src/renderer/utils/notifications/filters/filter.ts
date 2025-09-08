@@ -6,13 +6,13 @@ import type {
 } from '../../../typesGitHub';
 import {
   AUTHOR_PREFIX,
-  ORG_PREFIX,
-  REPO_PREFIX,
-  type SearchPrefix,
   filterNotificationBySearchTerm,
   hasExcludeSearchFilters,
   hasIncludeSearchFilters,
+  ORG_PREFIX,
+  REPO_PREFIX,
   reasonFilter,
+  type SearchPrefix,
   stateFilter,
   subjectTypeFilter,
   userTypeFilter,
@@ -25,16 +25,13 @@ export function filterBaseNotifications(
   return notifications.filter((notification) => {
     let passesFilters = true;
 
+    passesFilters =
+      passesFilters &&
+      passesSearchTokenFiltersForPrefix(notification, settings, ORG_PREFIX);
 
-  passesFilters =
-    passesFilters &&
-    passesSearchTokenFiltersForPrefix(notification, settings, ORG_PREFIX);
-
-      passesFilters =
-    passesFilters &&
-    passesSearchTokenFiltersForPrefix(notification, settings, REPO_PREFIX);
-
-
+    passesFilters =
+      passesFilters &&
+      passesSearchTokenFiltersForPrefix(notification, settings, REPO_PREFIX);
 
     if (subjectTypeFilter.hasFilters(settings)) {
       passesFilters =
