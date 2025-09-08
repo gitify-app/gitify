@@ -4,7 +4,7 @@ import { Page } from './Page';
 
 describe('renderer/components/layout/Page.tsx', () => {
   it('should render itself & its children', () => {
-    const tree = render(<Page id="test">Test</Page>);
+    const tree = render(<Page testId="test">Test</Page>);
 
     expect(tree).toMatchSnapshot();
   });

@@ -133,7 +133,7 @@ export const LoginWithOAuthAppRoute: FC = () => {
   );
 
   return (
-    <Page id="Login With OAuth App">
+    <Page testId="Login With OAuth App">
       <Header icon={PersonIcon}>Login with OAuth App</Header>
 
       <Contents>

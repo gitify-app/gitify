@@ -125,7 +125,7 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
   );
 
   return (
-    <Page id="Login With Personal Access Token">
+    <Page testId="Login With Personal Access Token">
       <Header icon={KeyIcon}>Login with Personal Access Token</Header>
 
       <Contents>
