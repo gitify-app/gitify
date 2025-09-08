@@ -1,0 +1,784 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render itself & its children - closed 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div />
+  </body>,
+  "container": <div />,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render itself & its children - input token invalid 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="Popover-sc-q9r75g-0 kZtvVv caret-pos--false"
+        open=""
+      >
+        <div
+          class="Popover__PopoverContent-sc-q9r75g-1 WOpWG"
+          sx="[object Object]"
+        >
+          <div
+            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+            data-align="stretch"
+            data-direction="vertical"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <div
+              class="Box-sc-g0xbh4-0"
+            >
+              <span
+                class="Text-sc-17v1xeu-0 ezOLpc text-xs opacity-90"
+              >
+                Please use one of the supported filters [
+                org, repo
+                ]
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="Popover-sc-q9r75g-0 kZtvVv caret-pos--false"
+      open=""
+    >
+      <div
+        class="Popover__PopoverContent-sc-q9r75g-1 WOpWG"
+        sx="[object Object]"
+      >
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+          data-align="stretch"
+          data-direction="vertical"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
+        >
+          <div
+            class="Box-sc-g0xbh4-0"
+          >
+            <span
+              class="Text-sc-17v1xeu-0 ezOLpc text-xs opacity-90"
+            >
+              Please use one of the supported filters [
+              org, repo
+              ]
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render itself & its children - input token valid 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="Popover-sc-q9r75g-0 kZtvVv caret-pos--false"
+        open=""
+      >
+        <div
+          class="Popover__PopoverContent-sc-q9r75g-1 WOpWG"
+          sx="[object Object]"
+        >
+          <div
+            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+            data-align="stretch"
+            data-direction="vertical"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <div
+              class="Box-sc-g0xbh4-0"
+            >
+              <div
+                class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+                data-align="stretch"
+                data-direction="vertical"
+                data-gap="none"
+                data-justify="start"
+                data-padding="none"
+                data-wrap="nowrap"
+              >
+                <span
+                  class="Text-sc-17v1xeu-0 ezOLpc text-xs font-semibold"
+                >
+                  repo:
+                </span>
+                <span
+                  class="Text-sc-17v1xeu-0 ezOLpc text-xs opacity-90"
+                >
+                  filter by repository full name
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="Popover-sc-q9r75g-0 kZtvVv caret-pos--false"
+      open=""
+    >
+      <div
+        class="Popover__PopoverContent-sc-q9r75g-1 WOpWG"
+        sx="[object Object]"
+      >
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+          data-align="stretch"
+          data-direction="vertical"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
+        >
+          <div
+            class="Box-sc-g0xbh4-0"
+          >
+            <div
+              class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+              data-align="stretch"
+              data-direction="vertical"
+              data-gap="none"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+            >
+              <span
+                class="Text-sc-17v1xeu-0 ezOLpc text-xs font-semibold"
+              >
+                repo:
+              </span>
+              <span
+                class="Text-sc-17v1xeu-0 ezOLpc text-xs opacity-90"
+              >
+                filter by repository full name
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render itself & its children - open 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="Popover-sc-q9r75g-0 kZtvVv caret-pos--false"
+        open=""
+      >
+        <div
+          class="Popover__PopoverContent-sc-q9r75g-1 WOpWG"
+          sx="[object Object]"
+        >
+          <div
+            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+            data-align="stretch"
+            data-direction="vertical"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <div
+              class="Box-sc-g0xbh4-0"
+            >
+              <div
+                class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+                data-align="stretch"
+                data-direction="vertical"
+                data-gap="none"
+                data-justify="start"
+                data-padding="none"
+                data-wrap="nowrap"
+              >
+                <span
+                  class="Text-sc-17v1xeu-0 ezOLpc text-xs font-semibold"
+                >
+                  org:
+                </span>
+                <span
+                  class="Text-sc-17v1xeu-0 ezOLpc text-xs opacity-90"
+                >
+                  filter by organization owner
+                </span>
+              </div>
+            </div>
+            <div
+              class="Box-sc-g0xbh4-0"
+            >
+              <div
+                class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+                data-align="stretch"
+                data-direction="vertical"
+                data-gap="none"
+                data-justify="start"
+                data-padding="none"
+                data-wrap="nowrap"
+              >
+                <span
+                  class="Text-sc-17v1xeu-0 ezOLpc text-xs font-semibold"
+                >
+                  repo:
+                </span>
+                <span
+                  class="Text-sc-17v1xeu-0 ezOLpc text-xs opacity-90"
+                >
+                  filter by repository full name
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="Popover-sc-q9r75g-0 kZtvVv caret-pos--false"
+      open=""
+    >
+      <div
+        class="Popover__PopoverContent-sc-q9r75g-1 WOpWG"
+        sx="[object Object]"
+      >
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+          data-align="stretch"
+          data-direction="vertical"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
+        >
+          <div
+            class="Box-sc-g0xbh4-0"
+          >
+            <div
+              class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+              data-align="stretch"
+              data-direction="vertical"
+              data-gap="none"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+            >
+              <span
+                class="Text-sc-17v1xeu-0 ezOLpc text-xs font-semibold"
+              >
+                org:
+              </span>
+              <span
+                class="Text-sc-17v1xeu-0 ezOLpc text-xs opacity-90"
+              >
+                filter by organization owner
+              </span>
+            </div>
+          </div>
+          <div
+            class="Box-sc-g0xbh4-0"
+          >
+            <div
+              class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+              data-align="stretch"
+              data-direction="vertical"
+              data-gap="none"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+            >
+              <span
+                class="Text-sc-17v1xeu-0 ezOLpc text-xs font-semibold"
+              >
+                repo:
+              </span>
+              <span
+                class="Text-sc-17v1xeu-0 ezOLpc text-xs opacity-90"
+              >
+                filter by repository full name
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render itself & its children - open with detailed enabled 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="Popover-sc-q9r75g-0 kZtvVv caret-pos--false"
+        open=""
+      >
+        <div
+          class="Popover__PopoverContent-sc-q9r75g-1 WOpWG"
+          sx="[object Object]"
+        >
+          <div
+            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+            data-align="stretch"
+            data-direction="vertical"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <div
+              class="Box-sc-g0xbh4-0"
+            >
+              <div
+                class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+                data-align="stretch"
+                data-direction="vertical"
+                data-gap="none"
+                data-justify="start"
+                data-padding="none"
+                data-wrap="nowrap"
+              >
+                <span
+                  class="Text-sc-17v1xeu-0 ezOLpc text-xs font-semibold"
+                >
+                  author:
+                </span>
+                <span
+                  class="Text-sc-17v1xeu-0 ezOLpc text-xs opacity-90"
+                >
+                  filter by notification author
+                </span>
+              </div>
+            </div>
+            <div
+              class="Box-sc-g0xbh4-0"
+            >
+              <div
+                class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+                data-align="stretch"
+                data-direction="vertical"
+                data-gap="none"
+                data-justify="start"
+                data-padding="none"
+                data-wrap="nowrap"
+              >
+                <span
+                  class="Text-sc-17v1xeu-0 ezOLpc text-xs font-semibold"
+                >
+                  org:
+                </span>
+                <span
+                  class="Text-sc-17v1xeu-0 ezOLpc text-xs opacity-90"
+                >
+                  filter by organization owner
+                </span>
+              </div>
+            </div>
+            <div
+              class="Box-sc-g0xbh4-0"
+            >
+              <div
+                class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+                data-align="stretch"
+                data-direction="vertical"
+                data-gap="none"
+                data-justify="start"
+                data-padding="none"
+                data-wrap="nowrap"
+              >
+                <span
+                  class="Text-sc-17v1xeu-0 ezOLpc text-xs font-semibold"
+                >
+                  repo:
+                </span>
+                <span
+                  class="Text-sc-17v1xeu-0 ezOLpc text-xs opacity-90"
+                >
+                  filter by repository full name
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="Popover-sc-q9r75g-0 kZtvVv caret-pos--false"
+      open=""
+    >
+      <div
+        class="Popover__PopoverContent-sc-q9r75g-1 WOpWG"
+        sx="[object Object]"
+      >
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+          data-align="stretch"
+          data-direction="vertical"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
+        >
+          <div
+            class="Box-sc-g0xbh4-0"
+          >
+            <div
+              class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+              data-align="stretch"
+              data-direction="vertical"
+              data-gap="none"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+            >
+              <span
+                class="Text-sc-17v1xeu-0 ezOLpc text-xs font-semibold"
+              >
+                author:
+              </span>
+              <span
+                class="Text-sc-17v1xeu-0 ezOLpc text-xs opacity-90"
+              >
+                filter by notification author
+              </span>
+            </div>
+          </div>
+          <div
+            class="Box-sc-g0xbh4-0"
+          >
+            <div
+              class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+              data-align="stretch"
+              data-direction="vertical"
+              data-gap="none"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+            >
+              <span
+                class="Text-sc-17v1xeu-0 ezOLpc text-xs font-semibold"
+              >
+                org:
+              </span>
+              <span
+                class="Text-sc-17v1xeu-0 ezOLpc text-xs opacity-90"
+              >
+                filter by organization owner
+              </span>
+            </div>
+          </div>
+          <div
+            class="Box-sc-g0xbh4-0"
+          >
+            <div
+              class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+              data-align="stretch"
+              data-direction="vertical"
+              data-gap="none"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+            >
+              <span
+                class="Text-sc-17v1xeu-0 ezOLpc text-xs font-semibold"
+              >
+                repo:
+              </span>
+              <span
+                class="Text-sc-17v1xeu-0 ezOLpc text-xs opacity-90"
+              >
+                filter by repository full name
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
