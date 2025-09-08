@@ -1,4 +1,4 @@
-import { type FC, useContext, useEffect, useId, useState } from 'react';
+import { type FC, useContext, useEffect, useState } from 'react';
 
 import {
   CheckCircleFillIcon,
@@ -21,8 +21,6 @@ import { Title } from '../primitives/Title';
 import { RequiresDetailedNotificationWarning } from './RequiresDetailedNotificationsWarning';
 import { TokenSearchInput } from './TokenSearchInput';
 
-type InputToken = { id: number; text: string };
-
 export const SearchFilter: FC = () => {
   const { updateFilter, settings } = useContext(AppContext);
 
@@ -37,58 +35,52 @@ export const SearchFilter: FC = () => {
     }
   }, [settings.filterIncludeSearchTokens, settings.filterExcludeSearchTokens]);
 
-  const mapValuesToTokens = (values: string[]): InputToken[] =>
-    values.map((value, index) => ({ id: index, text: value }));
-
-  const [includeSearchTokens, setIncludeSearchTokens] = useState<InputToken[]>(
-    mapValuesToTokens(settings.filterIncludeSearchTokens),
+  const [includeSearchTokens, setIncludeSearchTokens] = useState<SearchToken[]>(
+    settings.filterIncludeSearchTokens,
   );
 
   const addIncludeSearchToken = (value: string) => {
-    if (!value || includeSearchTokens.some((v) => v.text === value)) return;
-    const nextId =
-      includeSearchTokens.reduce((m, t) => Math.max(m, t.id), -1) + 1;
-    setIncludeSearchTokens([
-      ...includeSearchTokens,
-      { id: nextId, text: value },
-    ]);
+    if (!value || includeSearchTokens.includes(value as SearchToken)) {
+      return;
+    }
+
+    setIncludeSearchTokens([...includeSearchTokens, value as SearchToken]);
     updateFilter('filterIncludeSearchTokens', value as SearchToken, true);
   };
 
-  const removeIncludeSearchToken = (tokenId: string | number) => {
-    const value = includeSearchTokens.find((v) => v.id === tokenId)?.text || '';
-    if (value)
-      updateFilter('filterIncludeSearchTokens', value as SearchToken, false);
-    setIncludeSearchTokens(includeSearchTokens.filter((v) => v.id !== tokenId));
+  const removeIncludeSearchToken = (token: SearchToken) => {
+    if (!token) {
+      return;
+    }
+
+    updateFilter('filterIncludeSearchTokens', token, false);
+    setIncludeSearchTokens(includeSearchTokens.filter((t) => t !== token));
   };
 
-  const [excludeSearchTokens, setExcludeSearchTokens] = useState<InputToken[]>(
-    mapValuesToTokens(settings.filterExcludeSearchTokens),
+  const [excludeSearchTokens, setExcludeSearchTokens] = useState<SearchToken[]>(
+    settings.filterExcludeSearchTokens as SearchToken[],
   );
 
   const addExcludeSearchToken = (value: string) => {
-    if (!value || excludeSearchTokens.some((v) => v.text === value)) return;
-    const nextId =
-      excludeSearchTokens.reduce((m, t) => Math.max(m, t.id), -1) + 1;
-    setExcludeSearchTokens([
-      ...excludeSearchTokens,
-      { id: nextId, text: value },
-    ]);
+    if (!value || excludeSearchTokens.includes(value as SearchToken)) {
+      return;
+    }
+
+    setExcludeSearchTokens([...excludeSearchTokens, value as SearchToken]);
     updateFilter('filterExcludeSearchTokens', value as SearchToken, true);
   };
 
-  const removeExcludeSearchToken = (tokenId: string | number) => {
-    const value = excludeSearchTokens.find((v) => v.id === tokenId)?.text || '';
-    if (value)
-      updateFilter('filterExcludeSearchTokens', value as SearchToken, false);
-    setExcludeSearchTokens(excludeSearchTokens.filter((v) => v.id !== tokenId));
+  const removeExcludeSearchToken = (token: SearchToken) => {
+    if (!token) {
+      return;
+    }
+
+    updateFilter('filterExcludeSearchTokens', token, false);
+    setExcludeSearchTokens(excludeSearchTokens.filter((t) => t !== token));
   };
 
-  // Basic suggestions for prefixes
-  const fieldsetId = useId();
-
   return (
-    <fieldset id={fieldsetId}>
+    <fieldset>
       <Title
         icon={SearchIcon}
         tooltip={

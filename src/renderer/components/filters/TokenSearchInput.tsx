@@ -9,20 +9,15 @@ import {
 } from '../../utils/notifications/filters/search';
 import { SearchFilterSuggestions } from './SearchFilterSuggestions';
 
-export interface TokenInputItem {
-  id: number; // stable index-based id (unique within its list)
-  text: string; // actual token string (e.g. "author:octocat")
-}
-
 interface TokenSearchInputProps {
   label: string;
   icon: FC<{ className?: string }>;
   iconColorClass: string;
-  tokens: TokenInputItem[];
+  tokens: readonly SearchToken[]; // raw token strings
   showSuggestionsOnFocusIfEmpty: boolean;
   isDetailedNotificationsEnabled: boolean;
-  onAdd: (token: string) => void;
-  onRemove: (tokenId: string | number) => void;
+  onAdd: (token: SearchToken) => void;
+  onRemove: (token: SearchToken) => void;
 }
 
 const tokenEvents = ['Enter', 'Tab', ' ', ','];
@@ -40,6 +35,9 @@ export const TokenSearchInput: FC<TokenSearchInputProps> = ({
   const [inputValue, setInputValue] = useState('');
   const [showSuggestions, setShowSuggestions] = useState(false);
 
+  // FIXME - remove this
+  const tokenItems = tokens.map((text, id) => ({ id, text }));
+
   function tryAddToken(
     event:
       | React.KeyboardEvent<HTMLInputElement>
@@ -47,7 +45,7 @@ export const TokenSearchInput: FC<TokenSearchInputProps> = ({
   ) {
     const raw = (event.target as HTMLInputElement).value;
     const value = normalizeSearchInputToToken(raw);
-    if (value && !tokens.some((t) => t.text === value)) {
+    if (value && !tokens.includes(value as SearchToken)) {
       onAdd(value as SearchToken);
       (event.target as HTMLInputElement).value = '';
       setInputValue('');
@@ -104,10 +102,18 @@ export const TokenSearchInput: FC<TokenSearchInputProps> = ({
             }
           }}
           onKeyDown={onKeyDown}
-          onTokenRemove={onRemove}
+          onTokenRemove={(id) => {
+            const token = tokenItems.find((t) => t.id === id)?.text as
+              | SearchToken
+              | undefined;
+
+            if (token) {
+              onRemove(token);
+            }
+          }}
           size="small"
           title={`${label} searches`}
-          tokens={tokens}
+          tokens={tokenItems}
         />
         <SearchFilterSuggestions
           inputValue={inputValue}

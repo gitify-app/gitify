@@ -58,6 +58,7 @@
         "useDefaultSwitchClause": "error",
         "noParameterAssign": "error",
         "useAsConstAssertion": "error",
+        "useBlockStatements": "error",
         "useDefaultParameterLast": "error",
         "useEnumInitializers": "error",
         "useSelfClosingElements": "error",
