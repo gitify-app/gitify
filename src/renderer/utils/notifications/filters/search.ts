@@ -42,9 +42,6 @@ export const DETAILED_ONLY_QUALIFIERS: readonly SearchQualifier[] = QUALIFIERS.f
   (q) => q.requiresDetailsNotifications,
 );
 
-export const AUTHOR_PREFIX: SearchPrefix = SEARCH_QUALIFIERS.author.prefix;
-export const ORG_PREFIX: SearchPrefix = SEARCH_QUALIFIERS.org.prefix;
-export const REPO_PREFIX: SearchPrefix = SEARCH_QUALIFIERS.repo.prefix;
 
 // Qualifier selection helpers (centralized to avoid duplicating logic in UI components)
 export function getAvailableSearchQualifiers(

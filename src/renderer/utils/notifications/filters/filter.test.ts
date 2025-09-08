@@ -8,7 +8,6 @@ import {
   filterDetailedNotifications,
   hasAnyFiltersSet,
 } from './filter';
-import { AUTHOR_PREFIX, ORG_PREFIX, REPO_PREFIX } from './search';
 
 describe('renderer/utils/notifications/filters/filter.ts', () => {
   afterEach(() => {
@@ -83,7 +82,7 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
       it('should filter notifications that match include organization', async () => {
         const result = filterBaseNotifications(mockNotifications, {
           ...mockSettings,
-          filterIncludeSearchTokens: [`${ORG_PREFIX}gitify-app` as SearchToken],
+          filterIncludeSearchTokens: ['org:gitify-app' as SearchToken],
         });
 
         expect(result.length).toBe(1);
@@ -93,7 +92,7 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
       it('should filter notifications that match exclude organization', async () => {
         const result = filterBaseNotifications(mockNotifications, {
           ...mockSettings,
-          filterExcludeSearchTokens: [`${ORG_PREFIX}github` as SearchToken],
+          filterExcludeSearchTokens: ['org:github' as SearchToken],
         });
 
         expect(result.length).toBe(1);
@@ -103,9 +102,7 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
       it('should filter notifications that match include repository', async () => {
         const result = filterBaseNotifications(mockNotifications, {
           ...mockSettings,
-          filterIncludeSearchTokens: [
-            `${REPO_PREFIX}gitify-app/gitify` as SearchToken,
-          ],
+          filterIncludeSearchTokens: ['repo:gitify-app/gitify' as SearchToken],
         });
 
         expect(result.length).toBe(1);
@@ -115,9 +112,7 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
       it('should filter notifications that match exclude repository', async () => {
         const result = filterBaseNotifications(mockNotifications, {
           ...mockSettings,
-          filterExcludeSearchTokens: [
-            `${REPO_PREFIX}github/github` as SearchToken,
-          ],
+          filterExcludeSearchTokens: ['repo:github/github' as SearchToken],
         });
 
         expect(result.length).toBe(1);
@@ -131,12 +126,8 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
           ...mockSettings,
           detailedNotifications: false,
           filterUserTypes: ['Bot'],
-          filterIncludeSearchTokens: [
-            `${AUTHOR_PREFIX}github-user` as SearchToken,
-          ],
-          filterExcludeSearchTokens: [
-            `${AUTHOR_PREFIX}github-bot` as SearchToken,
-          ],
+          filterIncludeSearchTokens: ['author:github-user' as SearchToken],
+          filterExcludeSearchTokens: ['author:github-bot' as SearchToken],
           filterStates: ['merged'],
         });
 
@@ -159,9 +150,7 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
         const result = filterDetailedNotifications(mockNotifications, {
           ...mockSettings,
           detailedNotifications: true,
-          filterIncludeSearchTokens: [
-            `${AUTHOR_PREFIX}github-user` as SearchToken,
-          ],
+          filterIncludeSearchTokens: ['author:github-user' as SearchToken],
         });
 
         expect(result.length).toBe(1);
@@ -172,9 +161,7 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
         const result = filterDetailedNotifications(mockNotifications, {
           ...mockSettings,
           detailedNotifications: true,
-          filterExcludeSearchTokens: [
-            `${AUTHOR_PREFIX}github-bot` as SearchToken,
-          ],
+          filterExcludeSearchTokens: ['author:github-bot' as SearchToken],
         });
 
         expect(result.length).toBe(1);
@@ -203,7 +190,7 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
     it('non-default search token includes filters', () => {
       const settings: SettingsState = {
         ...defaultSettings,
-        filterIncludeSearchTokens: [`${AUTHOR_PREFIX}gitify` as SearchToken],
+        filterIncludeSearchTokens: ['author:gitify' as SearchToken],
       };
       expect(hasAnyFiltersSet(settings)).toBe(true);
     });
@@ -211,7 +198,7 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
     it('non-default search token excludes filters', () => {
       const settings: SettingsState = {
         ...defaultSettings,
-        filterExcludeSearchTokens: [`${ORG_PREFIX}github` as SearchToken],
+        filterExcludeSearchTokens: ['org:github' as SearchToken],
       };
       expect(hasAnyFiltersSet(settings)).toBe(true);
     });

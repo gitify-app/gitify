@@ -2,12 +2,9 @@ import { partialMockNotification } from '../../../__mocks__/partial-mocks';
 import type { Link } from '../../../types';
 import type { Owner } from '../../../typesGitHub';
 import {
-  AUTHOR_PREFIX,
   filterNotificationBySearchTerm,
   matchQualifierByPrefix,
-  ORG_PREFIX,
   QUALIFIERS,
-  REPO_PREFIX,
 } from './search';
 
 // (helper removed – no longer used)
@@ -67,23 +64,20 @@ describe('renderer/utils/notifications/filters/search.ts', () => {
 
     it('matches author qualifier (case-insensitive)', () => {
       expect(
+        filterNotificationBySearchTerm(mockNotification, `author:github-user`),
+      ).toBe(true);
+
+      expect(
         filterNotificationBySearchTerm(
           mockNotification,
-          `${AUTHOR_PREFIX}github-user`,
+          `author:GITHUB-USER`,
         ),
       ).toBe(true);
 
       expect(
         filterNotificationBySearchTerm(
           mockNotification,
-          `${AUTHOR_PREFIX}GITHUB-USER`,
-        ),
-      ).toBe(true);
-
-      expect(
-        filterNotificationBySearchTerm(
-          mockNotification,
-          `${AUTHOR_PREFIX}some-bot`,
+          `author:some-bot`,
         ),
       ).toBe(false);
     });
@@ -92,19 +86,19 @@ describe('renderer/utils/notifications/filters/search.ts', () => {
       expect(
         filterNotificationBySearchTerm(
           mockNotification,
-          `${ORG_PREFIX}gitify-app`,
+          `org:gitify-app`,
         ),
       ).toBe(true);
 
       expect(
         filterNotificationBySearchTerm(
           mockNotification,
-          `${ORG_PREFIX}GITIFY-APP`,
+          `org:GITIFY-APP`,
         ),
       ).toBe(true);
 
       expect(
-        filterNotificationBySearchTerm(mockNotification, `${ORG_PREFIX}github`),
+        filterNotificationBySearchTerm(mockNotification, `org:github`),
       ).toBe(false);
     });
 
@@ -112,21 +106,21 @@ describe('renderer/utils/notifications/filters/search.ts', () => {
       expect(
         filterNotificationBySearchTerm(
           mockNotification,
-          `${REPO_PREFIX}gitify-app/gitify`,
+          `repo:gitify-app/gitify`,
         ),
       ).toBe(true);
 
       expect(
         filterNotificationBySearchTerm(
           mockNotification,
-          `${REPO_PREFIX}Gitify-App/Gitify`,
+          `repo:Gitify-App/Gitify`,
         ),
       ).toBe(true);
 
       expect(
         filterNotificationBySearchTerm(
           mockNotification,
-          `${REPO_PREFIX}github/other`,
+          `repo:github/other`,
         ),
       ).toBe(false);
     });
