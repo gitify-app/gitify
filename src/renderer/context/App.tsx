@@ -223,7 +223,9 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   const loginWithOAuthApp = useCallback(
     async (data: LoginOAuthAppOptions) => {
       const { authOptions, authCode } = await authGitHub(data);
+
       const { token, hostname } = await getToken(authCode, authOptions);
+
       const updatedAuth = await addAccount(auth, 'OAuth App', token, hostname);
       setAuth(updatedAuth);
       saveState({ auth: updatedAuth, settings });
@@ -233,7 +235,9 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
   const loginWithPersonalAccessToken = useCallback(
     async ({ token, hostname }: LoginPersonalAccessTokenOptions) => {
-      await headNotifications(hostname, token);
+      const encryptedToken = (await encryptValue(token)) as Token;
+      await headNotifications(hostname, encryptedToken);
+
       const updatedAuth = await addAccount(
         auth,
         'Personal Access Token',
@@ -248,10 +252,8 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
   const logoutFromAccount = useCallback(
     async (account: Account) => {
-      // Remove notifications for account
       removeAccountNotifications(account);
 
-      // Remove from auth state
       const updatedAuth = removeAccount(auth, account);
       setAuth(updatedAuth);
       saveState({ auth: updatedAuth, settings });

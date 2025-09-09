@@ -77,7 +77,7 @@ export function getCheckSuiteAttributes(
 
   return {
     workflowName,
-    attemptNumber: attemptNumber ? Number.parseInt(attemptNumber) : null,
+    attemptNumber: attemptNumber ? Number.parseInt(attemptNumber, 10) : null,
     status: getCheckSuiteStatus(statusDisplayName),
     statusDisplayName,
     branchName,

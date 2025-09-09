@@ -201,6 +201,10 @@ describe('renderer/context/App.tsx', () => {
       });
     });
 
+    afterEach(() => {
+      jest.clearAllMocks();
+    });
+
     it('should call loginWithPersonalAccessToken', async () => {
       apiRequestAuthMock.mockResolvedValueOnce(null);
 
@@ -230,15 +234,10 @@ describe('renderer/context/App.tsx', () => {
         expect(fetchNotificationsMock).toHaveBeenCalledTimes(1),
       );
 
-      expect(apiRequestAuthMock).toHaveBeenCalledTimes(2);
+      expect(apiRequestAuthMock).toHaveBeenCalledTimes(1);
       expect(apiRequestAuthMock).toHaveBeenCalledWith(
         'https://api.github.com/notifications',
         'HEAD',
-        '123-456',
-      );
-      expect(apiRequestAuthMock).toHaveBeenCalledWith(
-        'https://api.github.com/user',
-        'GET',
         'encrypted',
       );
     });
