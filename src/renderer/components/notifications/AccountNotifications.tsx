@@ -42,7 +42,10 @@ export const AccountNotifications: FC<IAccountNotifications> = (
     notifications.reduce(
       (acc: { [key: string]: Notification[] }, notification) => {
         const key = notification.repository.full_name;
-        if (!acc[key]) acc[key] = [];
+        if (!acc[key]) {
+          acc[key] = [];
+        }
+
         acc[key].push(notification);
         return acc;
       },

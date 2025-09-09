@@ -5,13 +5,13 @@ import type {
   SubjectUser,
 } from '../../../typesGitHub';
 import {
-  filterNotificationByHandle,
-  filterNotificationByOrganization,
-  hasExcludeHandleFilters,
-  hasExcludeOrganizationFilters,
-  hasIncludeHandleFilters,
-  hasIncludeOrganizationFilters,
+  BASE_SEARCH_QUALIFIERS,
+  DETAILED_ONLY_SEARCH_QUALIFIERS,
+  filterNotificationBySearchTerm,
+  hasExcludeSearchFilters,
+  hasIncludeSearchFilters,
   reasonFilter,
+  type SearchQualifier,
   stateFilter,
   subjectTypeFilter,
   userTypeFilter,
@@ -24,8 +24,16 @@ export function filterBaseNotifications(
   return notifications.filter((notification) => {
     let passesFilters = true;
 
-    passesFilters =
-      passesFilters && passesOrganizationFilters(notification, settings);
+    // Apply base qualifier include/exclude filters (org, repo, etc.)
+    for (const qualifier of BASE_SEARCH_QUALIFIERS) {
+      if (!passesFilters) {
+        break;
+      }
+
+      passesFilters =
+        passesFilters &&
+        passesSearchTokenFiltersForQualifier(notification, settings, qualifier);
+    }
 
     if (subjectTypeFilter.hasFilters(settings)) {
       passesFilters =
@@ -69,14 +77,52 @@ export function filterDetailedNotifications(
 export function hasAnyFiltersSet(settings: SettingsState): boolean {
   return (
     userTypeFilter.hasFilters(settings) ||
-    hasIncludeHandleFilters(settings) ||
-    hasExcludeHandleFilters(settings) ||
-    hasIncludeOrganizationFilters(settings) ||
-    hasExcludeOrganizationFilters(settings) ||
+    hasIncludeSearchFilters(settings) ||
+    hasExcludeSearchFilters(settings) ||
     subjectTypeFilter.hasFilters(settings) ||
     stateFilter.hasFilters(settings) ||
     reasonFilter.hasFilters(settings)
   );
+}
+
+/**
+ * Apply include/exclude search token logic for a specific search qualifier prefix.
+ */
+function passesSearchTokenFiltersForQualifier(
+  notification: Notification,
+  settings: SettingsState,
+  qualifier: SearchQualifier,
+): boolean {
+  let passes = true;
+  const prefix = qualifier.prefix;
+
+  if (hasIncludeSearchFilters(settings)) {
+    const includeTokens = settings.filterIncludeSearchTokens.filter((t) =>
+      t.startsWith(prefix),
+    );
+    if (includeTokens.length > 0) {
+      passes =
+        passes &&
+        includeTokens.some((token) =>
+          filterNotificationBySearchTerm(notification, token),
+        );
+    }
+  }
+
+  if (hasExcludeSearchFilters(settings)) {
+    const excludeTokens = settings.filterExcludeSearchTokens.filter((t) =>
+      t.startsWith(prefix),
+    );
+    if (excludeTokens.length > 0) {
+      passes =
+        passes &&
+        !excludeTokens.some((token) =>
+          filterNotificationBySearchTerm(notification, token),
+        );
+    }
+  }
+
+  return passes;
 }
 
 function passesUserFilters(
@@ -93,45 +139,15 @@ function passesUserFilters(
       );
   }
 
-  if (hasIncludeHandleFilters(settings)) {
+  // Apply detailed-only qualifier search token filters (e.g. author)
+  for (const qualifier of DETAILED_ONLY_SEARCH_QUALIFIERS) {
+    if (!passesFilters) {
+      break;
+    }
+
     passesFilters =
       passesFilters &&
-      settings.filterIncludeHandles.some((handle) =>
-        filterNotificationByHandle(notification, handle),
-      );
-  }
-
-  if (hasExcludeHandleFilters(settings)) {
-    passesFilters =
-      passesFilters &&
-      !settings.filterExcludeHandles.some((handle) =>
-        filterNotificationByHandle(notification, handle),
-      );
-  }
-
-  return passesFilters;
-}
-
-function passesOrganizationFilters(
-  notification: Notification,
-  settings: SettingsState,
-): boolean {
-  let passesFilters = true;
-
-  if (hasIncludeOrganizationFilters(settings)) {
-    passesFilters =
-      passesFilters &&
-      settings.filterIncludeOrganizations.some((organization) =>
-        filterNotificationByOrganization(notification, organization),
-      );
-  }
-
-  if (hasExcludeOrganizationFilters(settings)) {
-    passesFilters =
-      passesFilters &&
-      !settings.filterExcludeOrganizations.some((organization) =>
-        filterNotificationByOrganization(notification, organization),
-      );
+      passesSearchTokenFiltersForQualifier(notification, settings, qualifier);
   }
 
   return passesFilters;

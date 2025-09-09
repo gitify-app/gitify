@@ -22,7 +22,9 @@ const listeners: ListenerMap = {};
 jest.mock('electron-updater', () => ({
   autoUpdater: {
     on: jest.fn((event: string, cb: Listener) => {
-      if (!listeners[event]) listeners[event] = [];
+      if (!listeners[event]) {
+        listeners[event] = [];
+      }
       listeners[event].push(cb);
       return this;
     }),
@@ -66,7 +68,9 @@ describe('main/updater.ts', () => {
 
   beforeEach(() => {
     jest.clearAllMocks();
-    for (const k of Object.keys(listeners)) delete listeners[k];
+    for (const k of Object.keys(listeners)) {
+      delete listeners[k];
+    }
 
     menubar = {
       app: {

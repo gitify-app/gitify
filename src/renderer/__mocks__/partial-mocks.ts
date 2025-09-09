@@ -1,10 +1,11 @@
 import { Constants } from '../constants';
 import type { Hostname, Link } from '../types';
-import type { Notification, Subject, User } from '../typesGitHub';
+import type { Notification, Repository, Subject, User } from '../typesGitHub';
 import { mockGitifyUser, mockToken } from './state-mocks';
 
 export function partialMockNotification(
   subject: Partial<Subject>,
+  repository?: Partial<Repository>,
 ): Notification {
   const mockNotification: Partial<Notification> = {
     account: {
@@ -16,6 +17,7 @@ export function partialMockNotification(
       hasRequiredScopes: true,
     },
     subject: subject as Subject,
+    repository: repository as Repository,
   };
 
   return mockNotification as Notification;

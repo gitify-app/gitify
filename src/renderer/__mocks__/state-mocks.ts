@@ -109,10 +109,8 @@ const mockSystemSettings: SystemSettingsState = {
 
 const mockFilters: FilterSettingsState = {
   filterUserTypes: [],
-  filterIncludeHandles: [],
-  filterExcludeHandles: [],
-  filterIncludeOrganizations: [],
-  filterExcludeOrganizations: [],
+  filterIncludeSearchTokens: [],
+  filterExcludeSearchTokens: [],
   filterSubjectTypes: [],
   filterStates: [],
   filterReasons: [],

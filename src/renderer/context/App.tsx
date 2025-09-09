@@ -132,10 +132,8 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   }, [
     auth.accounts,
     settings.filterUserTypes,
-    settings.filterIncludeHandles,
-    settings.filterExcludeHandles,
-    settings.filterIncludeOrganizations,
-    settings.filterExcludeOrganizations,
+    settings.filterIncludeSearchTokens,
+    settings.filterExcludeSearchTokens,
     settings.filterReasons,
   ]);
 

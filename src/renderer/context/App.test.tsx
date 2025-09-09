@@ -352,9 +352,11 @@ describe('renderer/context/App.tsx', () => {
         } as AuthState,
         settings: {
           ...mockSettings,
+          filterIncludeSearchTokens: defaultSettings.filterIncludeSearchTokens,
+          filterExcludeSearchTokens: defaultSettings.filterExcludeSearchTokens,
           filterUserTypes: defaultSettings.filterUserTypes,
-          filterIncludeHandles: defaultSettings.filterIncludeHandles,
-          filterExcludeHandles: defaultSettings.filterExcludeHandles,
+          filterSubjectTypes: defaultSettings.filterSubjectTypes,
+          filterStates: defaultSettings.filterStates,
           filterReasons: defaultSettings.filterReasons,
         },
       });
