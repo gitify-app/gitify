@@ -17,10 +17,14 @@ export async function onFirstRunMaybe() {
  * Ask user if the app should be moved to the applications folder (masOS).
  */
 async function promptMoveToApplicationsFolder() {
-  if (!isMacOS()) return;
+  if (!isMacOS()) {
+    return;
+  }
 
   const isDevMode = !!process.defaultApp;
-  if (isDevMode || app.isInApplicationsFolder()) return;
+  if (isDevMode || app.isInApplicationsFolder()) {
+    return;
+  }
 
   const { response } = await dialog.showMessageBox({
     type: 'question',
