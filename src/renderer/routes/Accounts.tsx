@@ -110,7 +110,7 @@ export const AccountsRoute: FC = () => {
   }, []);
 
   return (
-    <Page id="accounts">
+    <Page testId="accounts">
       <Header icon={PersonIcon}>Accounts</Header>
 
       <Contents>

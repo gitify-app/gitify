@@ -67,3 +67,5 @@ global.CSS = {
     return false;
   }),
 };
+
+window.HTMLMediaElement.prototype.play = jest.fn();

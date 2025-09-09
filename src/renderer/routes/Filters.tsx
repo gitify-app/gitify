@@ -18,7 +18,7 @@ export const FiltersRoute: FC = () => {
   const { clearFilters } = useContext(AppContext);
 
   return (
-    <Page id="filters">
+    <Page testId="filters">
       <Header fetchOnBack icon={FilterIcon}>
         Filters
       </Header>

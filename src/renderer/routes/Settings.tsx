@@ -14,7 +14,7 @@ import { SystemSettings } from '../components/settings/SystemSettings';
 
 export const SettingsRoute: FC = () => {
   return (
-    <Page id="settings">
+    <Page testId="settings">
       <Header fetchOnBack icon={GearIcon}>
         Settings
       </Header>
