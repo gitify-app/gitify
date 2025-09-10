@@ -3,27 +3,6 @@ import userEvent from '@testing-library/user-event';
 
 import { BaseStyles, ThemeProvider } from '@primer/react';
 
-// Polyfills for DOM APIs used by Primer components that jsdom doesn't implement
-// Minimal no-op implementations if jsdom environment lacks them
-const g = global as unknown as Record<string, unknown>;
-if (typeof g.ResizeObserver === 'undefined') {
-  g.ResizeObserver = class {
-    observe() {}
-    unobserve() {}
-    disconnect() {}
-  };
-}
-if (typeof g.IntersectionObserver === 'undefined') {
-  g.IntersectionObserver = class {
-    observe() {}
-    unobserve() {}
-    disconnect() {}
-    takeRecords() {
-      return [];
-    }
-  };
-}
-
 import {
   mockAuth,
   mockGitHubAppAccount,
@@ -38,6 +17,8 @@ import * as links from '../utils/links';
 import * as storage from '../utils/storage';
 import { AccountsRoute } from './Accounts';
 
+// import { setupMatchMedia } from '../__helpers__/jest.setup';
+
 const mockNavigate = jest.fn();
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
@@ -47,6 +28,7 @@ jest.mock('react-router-dom', () => ({
 describe('renderer/routes/Accounts.tsx', () => {
   afterEach(() => {
     jest.clearAllMocks();
+    // setupMatchMedia()
   });
 
   describe('General', () => {

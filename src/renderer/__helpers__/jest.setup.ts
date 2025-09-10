@@ -44,12 +44,10 @@ process.env.OAUTH_CLIENT_ID = 'FAKE_CLIENT_ID_123';
 process.env.OAUTH_CLIENT_SECRET = 'FAKE_CLIENT_SECRET_123';
 
 /**
- * Primer (@primer/react) Setup
+ * Primer (@primer/react) Setup - START
  *
  * Borrowed from https://github.com/primer/react/blob/main/packages/react/src/utils/test-helpers.tsx
  */
-// @ts-expect-error: prevent ReferenceError: TextEncoder is not defined
-global.TextEncoder = TextEncoder;
 
 // JSDOM doesn't mock ResizeObserver
 global.ResizeObserver = jest.fn().mockImplementation(() => {
@@ -68,18 +66,22 @@ global.CSS = {
   }),
 };
 
+// @ts-expect-error: prevent ReferenceError: TextEncoder is not defined
+global.TextEncoder = TextEncoder;
+
+/**
+ * Primer (@primer/react) Setup - END
+ */
+
 window.HTMLMediaElement.prototype.play = jest.fn();
 
-// JSDOM doesn't implement matchMedia; needed for Primer media queries (useMedia hook)
-if (!window.matchMedia) {
-  window.matchMedia = (query: string): MediaQueryList => ({
-    matches: false,
-    media: query,
-    onchange: null,
-    addListener: () => {}, // deprecated
-    removeListener: () => {}, // deprecated
-    addEventListener: () => {},
-    removeEventListener: () => {},
-    dispatchEvent: () => false,
-  });
-}
+window.matchMedia = (query: string): MediaQueryList => ({
+  matches: false,
+  media: query,
+  onchange: null,
+  addListener: () => {}, // deprecated
+  removeListener: () => {}, // deprecated
+  addEventListener: () => {},
+  removeEventListener: () => {},
+  dispatchEvent: () => false,
+});
