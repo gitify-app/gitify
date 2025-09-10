@@ -67,15 +67,19 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
   "baseElement": <body>
     <div>
       <div
-        class="Popover-sc-q9r75g-0 kZtvVv caret-pos--false"
-        open=""
+        class="prc-Popover-Popover-v1ShS"
+        data-caret="top"
+        data-open=""
       >
         <div
-          class="Popover__PopoverContent-sc-q9r75g-1 WOpWG"
+          class="Box-sc-g0xbh4-0 bSAmtD prc-Popover-PopoverContent-nMzFS"
+          data-height="fit-content"
+          data-overflow="auto"
+          data-width="small"
           sx="[object Object]"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+            class="prc-Stack-Stack-WJVsK"
             data-align="stretch"
             data-direction="vertical"
             data-gap="condensed"
@@ -83,11 +87,9 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
             data-padding="none"
             data-wrap="nowrap"
           >
-            <div
-              class="Box-sc-g0xbh4-0"
-            >
+            <div>
               <span
-                class="Text-sc-17v1xeu-0 ezOLpc text-xs opacity-90"
+                class="text-xs opacity-90 prc-Text-Text-0ima0"
               >
                 Please use one of the supported filters [
                 org, repo
@@ -101,15 +103,19 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
   </body>,
   "container": <div>
     <div
-      class="Popover-sc-q9r75g-0 kZtvVv caret-pos--false"
-      open=""
+      class="prc-Popover-Popover-v1ShS"
+      data-caret="top"
+      data-open=""
     >
       <div
-        class="Popover__PopoverContent-sc-q9r75g-1 WOpWG"
+        class="Box-sc-g0xbh4-0 bSAmtD prc-Popover-PopoverContent-nMzFS"
+        data-height="fit-content"
+        data-overflow="auto"
+        data-width="small"
         sx="[object Object]"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+          class="prc-Stack-Stack-WJVsK"
           data-align="stretch"
           data-direction="vertical"
           data-gap="condensed"
@@ -117,11 +123,9 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
           data-padding="none"
           data-wrap="nowrap"
         >
-          <div
-            class="Box-sc-g0xbh4-0"
-          >
+          <div>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc text-xs opacity-90"
+              class="text-xs opacity-90 prc-Text-Text-0ima0"
             >
               Please use one of the supported filters [
               org, repo
@@ -192,15 +196,19 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
   "baseElement": <body>
     <div>
       <div
-        class="Popover-sc-q9r75g-0 kZtvVv caret-pos--false"
-        open=""
+        class="prc-Popover-Popover-v1ShS"
+        data-caret="top"
+        data-open=""
       >
         <div
-          class="Popover__PopoverContent-sc-q9r75g-1 WOpWG"
+          class="Box-sc-g0xbh4-0 bSAmtD prc-Popover-PopoverContent-nMzFS"
+          data-height="fit-content"
+          data-overflow="auto"
+          data-width="small"
           sx="[object Object]"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+            class="prc-Stack-Stack-WJVsK"
             data-align="stretch"
             data-direction="vertical"
             data-gap="condensed"
@@ -208,11 +216,9 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
             data-padding="none"
             data-wrap="nowrap"
           >
-            <div
-              class="Box-sc-g0xbh4-0"
-            >
+            <div>
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+                class="prc-Stack-Stack-WJVsK"
                 data-align="stretch"
                 data-direction="vertical"
                 data-gap="none"
@@ -221,12 +227,12 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
                 data-wrap="nowrap"
               >
                 <span
-                  class="Text-sc-17v1xeu-0 ezOLpc text-xs font-semibold"
+                  class="text-xs font-semibold prc-Text-Text-0ima0"
                 >
                   repo:
                 </span>
                 <span
-                  class="Text-sc-17v1xeu-0 ezOLpc text-xs opacity-90"
+                  class="text-xs opacity-90 prc-Text-Text-0ima0"
                 >
                   filter by repository full name
                 </span>
@@ -239,15 +245,19 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
   </body>,
   "container": <div>
     <div
-      class="Popover-sc-q9r75g-0 kZtvVv caret-pos--false"
-      open=""
+      class="prc-Popover-Popover-v1ShS"
+      data-caret="top"
+      data-open=""
     >
       <div
-        class="Popover__PopoverContent-sc-q9r75g-1 WOpWG"
+        class="Box-sc-g0xbh4-0 bSAmtD prc-Popover-PopoverContent-nMzFS"
+        data-height="fit-content"
+        data-overflow="auto"
+        data-width="small"
         sx="[object Object]"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+          class="prc-Stack-Stack-WJVsK"
           data-align="stretch"
           data-direction="vertical"
           data-gap="condensed"
@@ -255,11 +265,9 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
           data-padding="none"
           data-wrap="nowrap"
         >
-          <div
-            class="Box-sc-g0xbh4-0"
-          >
+          <div>
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+              class="prc-Stack-Stack-WJVsK"
               data-align="stretch"
               data-direction="vertical"
               data-gap="none"
@@ -268,12 +276,12 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
               data-wrap="nowrap"
             >
               <span
-                class="Text-sc-17v1xeu-0 ezOLpc text-xs font-semibold"
+                class="text-xs font-semibold prc-Text-Text-0ima0"
               >
                 repo:
               </span>
               <span
-                class="Text-sc-17v1xeu-0 ezOLpc text-xs opacity-90"
+                class="text-xs opacity-90 prc-Text-Text-0ima0"
               >
                 filter by repository full name
               </span>
@@ -343,15 +351,19 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
   "baseElement": <body>
     <div>
       <div
-        class="Popover-sc-q9r75g-0 kZtvVv caret-pos--false"
-        open=""
+        class="prc-Popover-Popover-v1ShS"
+        data-caret="top"
+        data-open=""
       >
         <div
-          class="Popover__PopoverContent-sc-q9r75g-1 WOpWG"
+          class="Box-sc-g0xbh4-0 bSAmtD prc-Popover-PopoverContent-nMzFS"
+          data-height="fit-content"
+          data-overflow="auto"
+          data-width="small"
           sx="[object Object]"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+            class="prc-Stack-Stack-WJVsK"
             data-align="stretch"
             data-direction="vertical"
             data-gap="condensed"
@@ -359,11 +371,9 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
             data-padding="none"
             data-wrap="nowrap"
           >
-            <div
-              class="Box-sc-g0xbh4-0"
-            >
+            <div>
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+                class="prc-Stack-Stack-WJVsK"
                 data-align="stretch"
                 data-direction="vertical"
                 data-gap="none"
@@ -372,22 +382,20 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
                 data-wrap="nowrap"
               >
                 <span
-                  class="Text-sc-17v1xeu-0 ezOLpc text-xs font-semibold"
+                  class="text-xs font-semibold prc-Text-Text-0ima0"
                 >
                   author:
                 </span>
                 <span
-                  class="Text-sc-17v1xeu-0 ezOLpc text-xs opacity-90"
+                  class="text-xs opacity-90 prc-Text-Text-0ima0"
                 >
                   filter by notification author
                 </span>
               </div>
             </div>
-            <div
-              class="Box-sc-g0xbh4-0"
-            >
+            <div>
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+                class="prc-Stack-Stack-WJVsK"
                 data-align="stretch"
                 data-direction="vertical"
                 data-gap="none"
@@ -396,22 +404,20 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
                 data-wrap="nowrap"
               >
                 <span
-                  class="Text-sc-17v1xeu-0 ezOLpc text-xs font-semibold"
+                  class="text-xs font-semibold prc-Text-Text-0ima0"
                 >
                   org:
                 </span>
                 <span
-                  class="Text-sc-17v1xeu-0 ezOLpc text-xs opacity-90"
+                  class="text-xs opacity-90 prc-Text-Text-0ima0"
                 >
                   filter by organization owner
                 </span>
               </div>
             </div>
-            <div
-              class="Box-sc-g0xbh4-0"
-            >
+            <div>
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+                class="prc-Stack-Stack-WJVsK"
                 data-align="stretch"
                 data-direction="vertical"
                 data-gap="none"
@@ -420,12 +426,12 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
                 data-wrap="nowrap"
               >
                 <span
-                  class="Text-sc-17v1xeu-0 ezOLpc text-xs font-semibold"
+                  class="text-xs font-semibold prc-Text-Text-0ima0"
                 >
                   repo:
                 </span>
                 <span
-                  class="Text-sc-17v1xeu-0 ezOLpc text-xs opacity-90"
+                  class="text-xs opacity-90 prc-Text-Text-0ima0"
                 >
                   filter by repository full name
                 </span>
@@ -438,15 +444,19 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
   </body>,
   "container": <div>
     <div
-      class="Popover-sc-q9r75g-0 kZtvVv caret-pos--false"
-      open=""
+      class="prc-Popover-Popover-v1ShS"
+      data-caret="top"
+      data-open=""
     >
       <div
-        class="Popover__PopoverContent-sc-q9r75g-1 WOpWG"
+        class="Box-sc-g0xbh4-0 bSAmtD prc-Popover-PopoverContent-nMzFS"
+        data-height="fit-content"
+        data-overflow="auto"
+        data-width="small"
         sx="[object Object]"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+          class="prc-Stack-Stack-WJVsK"
           data-align="stretch"
           data-direction="vertical"
           data-gap="condensed"
@@ -454,11 +464,9 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
           data-padding="none"
           data-wrap="nowrap"
         >
-          <div
-            class="Box-sc-g0xbh4-0"
-          >
+          <div>
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+              class="prc-Stack-Stack-WJVsK"
               data-align="stretch"
               data-direction="vertical"
               data-gap="none"
@@ -467,22 +475,20 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
               data-wrap="nowrap"
             >
               <span
-                class="Text-sc-17v1xeu-0 ezOLpc text-xs font-semibold"
+                class="text-xs font-semibold prc-Text-Text-0ima0"
               >
                 author:
               </span>
               <span
-                class="Text-sc-17v1xeu-0 ezOLpc text-xs opacity-90"
+                class="text-xs opacity-90 prc-Text-Text-0ima0"
               >
                 filter by notification author
               </span>
             </div>
           </div>
-          <div
-            class="Box-sc-g0xbh4-0"
-          >
+          <div>
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+              class="prc-Stack-Stack-WJVsK"
               data-align="stretch"
               data-direction="vertical"
               data-gap="none"
@@ -491,22 +497,20 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
               data-wrap="nowrap"
             >
               <span
-                class="Text-sc-17v1xeu-0 ezOLpc text-xs font-semibold"
+                class="text-xs font-semibold prc-Text-Text-0ima0"
               >
                 org:
               </span>
               <span
-                class="Text-sc-17v1xeu-0 ezOLpc text-xs opacity-90"
+                class="text-xs opacity-90 prc-Text-Text-0ima0"
               >
                 filter by organization owner
               </span>
             </div>
           </div>
-          <div
-            class="Box-sc-g0xbh4-0"
-          >
+          <div>
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+              class="prc-Stack-Stack-WJVsK"
               data-align="stretch"
               data-direction="vertical"
               data-gap="none"
@@ -515,12 +519,12 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
               data-wrap="nowrap"
             >
               <span
-                class="Text-sc-17v1xeu-0 ezOLpc text-xs font-semibold"
+                class="text-xs font-semibold prc-Text-Text-0ima0"
               >
                 repo:
               </span>
               <span
-                class="Text-sc-17v1xeu-0 ezOLpc text-xs opacity-90"
+                class="text-xs opacity-90 prc-Text-Text-0ima0"
               >
                 filter by repository full name
               </span>
@@ -590,15 +594,19 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
   "baseElement": <body>
     <div>
       <div
-        class="Popover-sc-q9r75g-0 kZtvVv caret-pos--false"
-        open=""
+        class="prc-Popover-Popover-v1ShS"
+        data-caret="top"
+        data-open=""
       >
         <div
-          class="Popover__PopoverContent-sc-q9r75g-1 WOpWG"
+          class="Box-sc-g0xbh4-0 bSAmtD prc-Popover-PopoverContent-nMzFS"
+          data-height="fit-content"
+          data-overflow="auto"
+          data-width="small"
           sx="[object Object]"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+            class="prc-Stack-Stack-WJVsK"
             data-align="stretch"
             data-direction="vertical"
             data-gap="condensed"
@@ -606,11 +614,9 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
             data-padding="none"
             data-wrap="nowrap"
           >
-            <div
-              class="Box-sc-g0xbh4-0"
-            >
+            <div>
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+                class="prc-Stack-Stack-WJVsK"
                 data-align="stretch"
                 data-direction="vertical"
                 data-gap="none"
@@ -619,22 +625,20 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
                 data-wrap="nowrap"
               >
                 <span
-                  class="Text-sc-17v1xeu-0 ezOLpc text-xs font-semibold"
+                  class="text-xs font-semibold prc-Text-Text-0ima0"
                 >
                   author:
                 </span>
                 <span
-                  class="Text-sc-17v1xeu-0 ezOLpc text-xs opacity-90"
+                  class="text-xs opacity-90 prc-Text-Text-0ima0"
                 >
                   filter by notification author
                 </span>
               </div>
             </div>
-            <div
-              class="Box-sc-g0xbh4-0"
-            >
+            <div>
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+                class="prc-Stack-Stack-WJVsK"
                 data-align="stretch"
                 data-direction="vertical"
                 data-gap="none"
@@ -643,22 +647,20 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
                 data-wrap="nowrap"
               >
                 <span
-                  class="Text-sc-17v1xeu-0 ezOLpc text-xs font-semibold"
+                  class="text-xs font-semibold prc-Text-Text-0ima0"
                 >
                   org:
                 </span>
                 <span
-                  class="Text-sc-17v1xeu-0 ezOLpc text-xs opacity-90"
+                  class="text-xs opacity-90 prc-Text-Text-0ima0"
                 >
                   filter by organization owner
                 </span>
               </div>
             </div>
-            <div
-              class="Box-sc-g0xbh4-0"
-            >
+            <div>
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+                class="prc-Stack-Stack-WJVsK"
                 data-align="stretch"
                 data-direction="vertical"
                 data-gap="none"
@@ -667,12 +669,12 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
                 data-wrap="nowrap"
               >
                 <span
-                  class="Text-sc-17v1xeu-0 ezOLpc text-xs font-semibold"
+                  class="text-xs font-semibold prc-Text-Text-0ima0"
                 >
                   repo:
                 </span>
                 <span
-                  class="Text-sc-17v1xeu-0 ezOLpc text-xs opacity-90"
+                  class="text-xs opacity-90 prc-Text-Text-0ima0"
                 >
                   filter by repository full name
                 </span>
@@ -685,15 +687,19 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
   </body>,
   "container": <div>
     <div
-      class="Popover-sc-q9r75g-0 kZtvVv caret-pos--false"
-      open=""
+      class="prc-Popover-Popover-v1ShS"
+      data-caret="top"
+      data-open=""
     >
       <div
-        class="Popover__PopoverContent-sc-q9r75g-1 WOpWG"
+        class="Box-sc-g0xbh4-0 bSAmtD prc-Popover-PopoverContent-nMzFS"
+        data-height="fit-content"
+        data-overflow="auto"
+        data-width="small"
         sx="[object Object]"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+          class="prc-Stack-Stack-WJVsK"
           data-align="stretch"
           data-direction="vertical"
           data-gap="condensed"
@@ -701,11 +707,9 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
           data-padding="none"
           data-wrap="nowrap"
         >
-          <div
-            class="Box-sc-g0xbh4-0"
-          >
+          <div>
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+              class="prc-Stack-Stack-WJVsK"
               data-align="stretch"
               data-direction="vertical"
               data-gap="none"
@@ -714,22 +718,20 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
               data-wrap="nowrap"
             >
               <span
-                class="Text-sc-17v1xeu-0 ezOLpc text-xs font-semibold"
+                class="text-xs font-semibold prc-Text-Text-0ima0"
               >
                 author:
               </span>
               <span
-                class="Text-sc-17v1xeu-0 ezOLpc text-xs opacity-90"
+                class="text-xs opacity-90 prc-Text-Text-0ima0"
               >
                 filter by notification author
               </span>
             </div>
           </div>
-          <div
-            class="Box-sc-g0xbh4-0"
-          >
+          <div>
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+              class="prc-Stack-Stack-WJVsK"
               data-align="stretch"
               data-direction="vertical"
               data-gap="none"
@@ -738,22 +740,20 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
               data-wrap="nowrap"
             >
               <span
-                class="Text-sc-17v1xeu-0 ezOLpc text-xs font-semibold"
+                class="text-xs font-semibold prc-Text-Text-0ima0"
               >
                 org:
               </span>
               <span
-                class="Text-sc-17v1xeu-0 ezOLpc text-xs opacity-90"
+                class="text-xs opacity-90 prc-Text-Text-0ima0"
               >
                 filter by organization owner
               </span>
             </div>
           </div>
-          <div
-            class="Box-sc-g0xbh4-0"
-          >
+          <div>
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+              class="prc-Stack-Stack-WJVsK"
               data-align="stretch"
               data-direction="vertical"
               data-gap="none"
@@ -762,12 +762,12 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
               data-wrap="nowrap"
             >
               <span
-                class="Text-sc-17v1xeu-0 ezOLpc text-xs font-semibold"
+                class="text-xs font-semibold prc-Text-Text-0ima0"
               >
                 repo:
               </span>
               <span
-                class="Text-sc-17v1xeu-0 ezOLpc text-xs opacity-90"
+                class="text-xs opacity-90 prc-Text-Text-0ima0"
               >
                 filter by repository full name
               </span>

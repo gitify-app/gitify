@@ -6,7 +6,7 @@ exports[`renderer/components/fields/RadioGroup.tsx should render 1`] = `
   "baseElement": <body>
     <div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+        class="text-sm prc-Stack-Stack-WJVsK"
         data-align="center"
         data-direction="horizontal"
         data-gap="condensed"
@@ -21,7 +21,7 @@ exports[`renderer/components/fields/RadioGroup.tsx should render 1`] = `
           Appearance
         </label>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+          class="prc-Stack-Stack-WJVsK"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -30,7 +30,7 @@ exports[`renderer/components/fields/RadioGroup.tsx should render 1`] = `
           data-wrap="nowrap"
         >
           <input
-            class="size-4 cursor-pointer"
+            class="size-2 cursor-pointer"
             data-testid="radio-appearance-one"
             id="radio-appearance-one"
             name="appearance"
@@ -45,7 +45,7 @@ exports[`renderer/components/fields/RadioGroup.tsx should render 1`] = `
           </label>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+          class="prc-Stack-Stack-WJVsK"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -55,7 +55,7 @@ exports[`renderer/components/fields/RadioGroup.tsx should render 1`] = `
         >
           <input
             checked=""
-            class="size-4 cursor-pointer"
+            class="size-2 cursor-pointer"
             data-testid="radio-appearance-two"
             id="radio-appearance-two"
             name="appearance"
@@ -74,7 +74,7 @@ exports[`renderer/components/fields/RadioGroup.tsx should render 1`] = `
   </body>,
   "container": <div>
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+      class="text-sm prc-Stack-Stack-WJVsK"
       data-align="center"
       data-direction="horizontal"
       data-gap="condensed"
@@ -89,7 +89,7 @@ exports[`renderer/components/fields/RadioGroup.tsx should render 1`] = `
         Appearance
       </label>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+        class="prc-Stack-Stack-WJVsK"
         data-align="center"
         data-direction="horizontal"
         data-gap="condensed"
@@ -98,7 +98,7 @@ exports[`renderer/components/fields/RadioGroup.tsx should render 1`] = `
         data-wrap="nowrap"
       >
         <input
-          class="size-4 cursor-pointer"
+          class="size-2 cursor-pointer"
           data-testid="radio-appearance-one"
           id="radio-appearance-one"
           name="appearance"
@@ -113,7 +113,7 @@ exports[`renderer/components/fields/RadioGroup.tsx should render 1`] = `
         </label>
       </div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+        class="prc-Stack-Stack-WJVsK"
         data-align="center"
         data-direction="horizontal"
         data-gap="condensed"
@@ -123,7 +123,7 @@ exports[`renderer/components/fields/RadioGroup.tsx should render 1`] = `
       >
         <input
           checked=""
-          class="size-4 cursor-pointer"
+          class="size-2 cursor-pointer"
           data-testid="radio-appearance-two"
           id="radio-appearance-two"
           name="appearance"
@@ -199,7 +199,7 @@ exports[`renderer/components/fields/RadioGroup.tsx should render as disabled 1`]
   "baseElement": <body>
     <div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+        class="text-sm prc-Stack-Stack-WJVsK"
         data-align="center"
         data-direction="horizontal"
         data-gap="condensed"
@@ -214,7 +214,7 @@ exports[`renderer/components/fields/RadioGroup.tsx should render as disabled 1`]
           Appearance
         </label>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+          class="prc-Stack-Stack-WJVsK"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -223,7 +223,7 @@ exports[`renderer/components/fields/RadioGroup.tsx should render as disabled 1`]
           data-wrap="nowrap"
         >
           <input
-            class="size-4 cursor-pointer"
+            class="size-2 cursor-pointer"
             data-testid="radio-appearance-one"
             id="radio-appearance-one"
             name="appearance"
@@ -238,7 +238,7 @@ exports[`renderer/components/fields/RadioGroup.tsx should render as disabled 1`]
           </label>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+          class="prc-Stack-Stack-WJVsK"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -248,7 +248,7 @@ exports[`renderer/components/fields/RadioGroup.tsx should render as disabled 1`]
         >
           <input
             checked=""
-            class="size-4 cursor-pointer"
+            class="size-2 cursor-pointer"
             data-testid="radio-appearance-two"
             id="radio-appearance-two"
             name="appearance"
@@ -267,7 +267,7 @@ exports[`renderer/components/fields/RadioGroup.tsx should render as disabled 1`]
   </body>,
   "container": <div>
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+      class="text-sm prc-Stack-Stack-WJVsK"
       data-align="center"
       data-direction="horizontal"
       data-gap="condensed"
@@ -282,7 +282,7 @@ exports[`renderer/components/fields/RadioGroup.tsx should render as disabled 1`]
         Appearance
       </label>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+        class="prc-Stack-Stack-WJVsK"
         data-align="center"
         data-direction="horizontal"
         data-gap="condensed"
@@ -291,7 +291,7 @@ exports[`renderer/components/fields/RadioGroup.tsx should render as disabled 1`]
         data-wrap="nowrap"
       >
         <input
-          class="size-4 cursor-pointer"
+          class="size-2 cursor-pointer"
           data-testid="radio-appearance-one"
           id="radio-appearance-one"
           name="appearance"
@@ -306,7 +306,7 @@ exports[`renderer/components/fields/RadioGroup.tsx should render as disabled 1`]
         </label>
       </div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+        class="prc-Stack-Stack-WJVsK"
         data-align="center"
         data-direction="horizontal"
         data-gap="condensed"
@@ -316,7 +316,7 @@ exports[`renderer/components/fields/RadioGroup.tsx should render as disabled 1`]
       >
         <input
           checked=""
-          class="size-4 cursor-pointer"
+          class="size-2 cursor-pointer"
           data-testid="radio-appearance-two"
           id="radio-appearance-two"
           name="appearance"

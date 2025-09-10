@@ -2,14 +2,14 @@
 
 exports[`renderer/routes/Filters.tsx General should render itself & its children 1`] = `
 <div
-  class="Box-sc-g0xbh4-0 flex flex-col h-screen"
+  class="flex flex-col h-screen"
   data-testid="filters"
 >
   <div
-    class="Box-sc-g0xbh4-0 pl-4 pr-6 pt-3 pb-1"
+    class="pl-4 pr-6 pt-3 pb-1"
   >
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+      class="prc-Stack-Stack-WJVsK"
       data-align="stretch"
       data-direction="horizontal"
       data-justify="space-between"
@@ -19,12 +19,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
       <button
         aria-describedby="«r0»-loading-announcement"
         aria-labelledby="Go Back"
-        class="types__StyledButton-sc-ws60qy-0 yiNNF"
+        class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
         data-component="IconButton"
         data-loading="false"
         data-no-visuals="true"
+        data-size="medium"
         data-testid="header-nav-back"
-        sx="[object Object]"
+        data-variant="invisible"
         type="button"
       >
         <svg
@@ -46,10 +47,10 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
       </button>
       <legend>
         <div
-          class="Box-sc-g0xbh4-0 mb-2"
+          class="mb-2"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+            class="prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -75,7 +76,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               />
             </svg>
             <h2
-              class="Heading__StyledHeading-sc-1c1dgg0-0 hwOZFo"
+              class="Box-sc-g0xbh4-0 gKIXLF prc-Heading-Heading-6CmGO"
               sx="[object Object]"
             >
               Filters
@@ -86,10 +87,10 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
     </div>
   </div>
   <div
-    class="Box-sc-g0xbh4-0 grow overflow-x-hidden overflow-y-auto px-8 pb-4"
+    class="grow overflow-x-hidden overflow-y-auto px-5 pb-2"
   >
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+      class="prc-Stack-Stack-WJVsK"
       data-align="stretch"
       data-direction="vertical"
       data-gap="spacious"
@@ -100,10 +101,10 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
       <fieldset>
         <legend>
           <div
-            class="Box-sc-g0xbh4-0 mb-2"
+            class="mb-2"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+              class="prc-Stack-Stack-WJVsK"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -129,16 +130,17 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                 />
               </svg>
               <h2
-                class="Heading__StyledHeading-sc-1c1dgg0-0 fokFLB"
+                class="Box-sc-g0xbh4-0 mIkfY prc-Heading-Heading-6CmGO"
                 sx="[object Object]"
               >
                 Search
               </h2>
-              <div
+              <button
                 aria-label="tooltip-search"
-                class="Box-sc-g0xbh4-0 relative"
+                class="relative"
                 data-testid="tooltip-tooltip-search"
                 id="tooltip-search"
+                type="button"
               >
                 <svg
                   aria-hidden="true"
@@ -156,12 +158,12 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                     d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                   />
                 </svg>
-              </div>
+              </button>
             </div>
           </div>
         </legend>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+          class="prc-Stack-Stack-WJVsK"
           data-align="stretch"
           data-direction="vertical"
           data-gap="condensed"
@@ -170,7 +172,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           data-wrap="nowrap"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -179,10 +181,10 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             data-wrap="nowrap"
           >
             <div
-              class="Box-sc-g0xbh4-0 font-medium text-gitify-font w-20"
+              class="font-medium text-gitify-font w-20"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+                class="prc-Stack-Stack-WJVsK"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -207,7 +209,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                   />
                 </svg>
                 <span
-                  class="Text-sc-17v1xeu-0 ezOLpc"
+                  class="prc-Text-Text-0ima0"
                 >
                   Include
                   :
@@ -215,27 +217,23 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               </div>
             </div>
             <div
-              class="Box-sc-g0xbh4-0 keyEPu"
-              flexgrow="1"
-              position="relative"
+              class="relative grow"
             >
               <span
-                class="TextInputWrapper__TextInputBaseWrapper-sc-1mqhpbi-0 TextInputWrapper-sc-1mqhpbi-1 khKVBN gesWdT"
-                sx="[object Object]"
+                class="prc-TextInputWithTokens-TextInputWrapper-kj1cB prc-components-TextInputWrapper-i1ofR prc-components-TextInputBaseWrapper-ueK9q"
+                data-block="true"
+                data-size="small"
               >
                 <div
-                  class="Box-sc-g0xbh4-0 gYTInF"
-                  display="flex"
-                  sx="[object Object]"
+                  class="prc-TextInputWithTokens-Container-mBzq-"
+                  data-prevent-token-wrapping="false"
                 >
                   <div
-                    class="Box-sc-g0xbh4-0 gffXDM"
-                    sx="[object Object]"
+                    class="prc-TextInputWithTokens-InputWrapper-wloGg"
                   >
                     <input
                       aria-invalid="false"
-                      class="UnstyledTextInput-sc-14ypya-0 iVOvhD"
-                      sx="[object Object]"
+                      class="prc-TextInputWithTokens-UnstyledTextInput-F582M prc-components-Input-Ic-y8"
                       tabindex="0"
                       title="Include searches"
                       type="text"
@@ -246,7 +244,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             </div>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -255,10 +253,10 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             data-wrap="nowrap"
           >
             <div
-              class="Box-sc-g0xbh4-0 font-medium text-gitify-font w-20"
+              class="font-medium text-gitify-font w-20"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+                class="prc-Stack-Stack-WJVsK"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -283,7 +281,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                   />
                 </svg>
                 <span
-                  class="Text-sc-17v1xeu-0 ezOLpc"
+                  class="prc-Text-Text-0ima0"
                 >
                   Exclude
                   :
@@ -291,27 +289,23 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               </div>
             </div>
             <div
-              class="Box-sc-g0xbh4-0 keyEPu"
-              flexgrow="1"
-              position="relative"
+              class="relative grow"
             >
               <span
-                class="TextInputWrapper__TextInputBaseWrapper-sc-1mqhpbi-0 TextInputWrapper-sc-1mqhpbi-1 khKVBN gesWdT"
-                sx="[object Object]"
+                class="prc-TextInputWithTokens-TextInputWrapper-kj1cB prc-components-TextInputWrapper-i1ofR prc-components-TextInputBaseWrapper-ueK9q"
+                data-block="true"
+                data-size="small"
               >
                 <div
-                  class="Box-sc-g0xbh4-0 gYTInF"
-                  display="flex"
-                  sx="[object Object]"
+                  class="prc-TextInputWithTokens-Container-mBzq-"
+                  data-prevent-token-wrapping="false"
                 >
                   <div
-                    class="Box-sc-g0xbh4-0 gffXDM"
-                    sx="[object Object]"
+                    class="prc-TextInputWithTokens-InputWrapper-wloGg"
                   >
                     <input
                       aria-invalid="false"
-                      class="UnstyledTextInput-sc-14ypya-0 iVOvhD"
-                      sx="[object Object]"
+                      class="prc-TextInputWithTokens-UnstyledTextInput-F582M prc-components-Input-Ic-y8"
                       tabindex="0"
                       title="Exclude searches"
                       type="text"
@@ -328,10 +322,10 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
       >
         <legend>
           <div
-            class="Box-sc-g0xbh4-0 mb-2"
+            class="mb-2"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+              class="prc-Stack-Stack-WJVsK"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -357,16 +351,17 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                 />
               </svg>
               <h2
-                class="Heading__StyledHeading-sc-1c1dgg0-0 fokFLB"
+                class="Box-sc-g0xbh4-0 mIkfY prc-Heading-Heading-6CmGO"
                 sx="[object Object]"
               >
                 User Type
               </h2>
-              <div
+              <button
                 aria-label="tooltip-user-type"
-                class="Box-sc-g0xbh4-0 relative"
+                class="relative"
                 data-testid="tooltip-tooltip-user-type"
                 id="tooltip-user-type"
+                type="button"
               >
                 <svg
                   aria-hidden="true"
@@ -384,12 +379,12 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                     d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                   />
                 </svg>
-              </div>
+              </button>
             </div>
           </div>
         </legend>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+          class="prc-Stack-Stack-WJVsK"
           data-align="stretch"
           data-direction="horizontal"
           data-gap="normal"
@@ -398,7 +393,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           data-wrap="nowrap"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -407,7 +402,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             data-wrap="nowrap"
           >
             <input
-              class="size-4 rounded-sm cursor-pointer"
+              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-User"
               id="User"
               type="checkbox"
@@ -419,13 +414,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               User
             </label>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -434,7 +429,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             data-wrap="nowrap"
           >
             <input
-              class="size-4 rounded-sm cursor-pointer"
+              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-Bot"
               id="Bot"
               type="checkbox"
@@ -445,11 +440,12 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             >
               Bot
             </label>
-            <div
+            <button
               aria-label="tooltip-Bot"
-              class="Box-sc-g0xbh4-0 relative"
+              class="relative"
               data-testid="tooltip-tooltip-Bot"
               id="tooltip-Bot"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -467,15 +463,15 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                   d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                 />
               </svg>
-            </div>
+            </button>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -484,7 +480,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             data-wrap="nowrap"
           >
             <input
-              class="size-4 rounded-sm cursor-pointer"
+              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-Organization"
               id="Organization"
               type="checkbox"
@@ -496,7 +492,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Organization
             </label>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
@@ -508,10 +504,10 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
       >
         <legend>
           <div
-            class="Box-sc-g0xbh4-0 mb-2"
+            class="mb-2"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+              class="prc-Stack-Stack-WJVsK"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -537,16 +533,17 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                 />
               </svg>
               <h2
-                class="Heading__StyledHeading-sc-1c1dgg0-0 fokFLB"
+                class="Box-sc-g0xbh4-0 mIkfY prc-Heading-Heading-6CmGO"
                 sx="[object Object]"
               >
                 Type
               </h2>
-              <div
+              <button
                 aria-label="tooltip-type"
-                class="Box-sc-g0xbh4-0 relative"
+                class="relative"
                 data-testid="tooltip-tooltip-type"
                 id="tooltip-type"
+                type="button"
               >
                 <svg
                   aria-hidden="true"
@@ -564,12 +561,12 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                     d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                   />
                 </svg>
-              </div>
+              </button>
             </div>
           </div>
         </legend>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+          class="prc-Stack-Stack-WJVsK"
           data-align="stretch"
           data-direction="vertical"
           data-gap="condensed"
@@ -578,7 +575,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           data-wrap="nowrap"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -587,7 +584,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             data-wrap="nowrap"
           >
             <input
-              class="size-4 rounded-sm cursor-pointer"
+              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-Check Suite"
               id="Check Suite"
               type="checkbox"
@@ -599,13 +596,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Check Suite
             </label>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -614,7 +611,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             data-wrap="nowrap"
           >
             <input
-              class="size-4 rounded-sm cursor-pointer"
+              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-Commit"
               id="Commit"
               type="checkbox"
@@ -626,13 +623,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Commit
             </label>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -641,7 +638,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             data-wrap="nowrap"
           >
             <input
-              class="size-4 rounded-sm cursor-pointer"
+              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-Discussion"
               id="Discussion"
               type="checkbox"
@@ -653,13 +650,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Discussion
             </label>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -668,7 +665,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             data-wrap="nowrap"
           >
             <input
-              class="size-4 rounded-sm cursor-pointer"
+              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-Issue"
               id="Issue"
               type="checkbox"
@@ -680,13 +677,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Issue
             </label>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -695,7 +692,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             data-wrap="nowrap"
           >
             <input
-              class="size-4 rounded-sm cursor-pointer"
+              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-Pull Request"
               id="Pull Request"
               type="checkbox"
@@ -707,13 +704,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Pull Request
             </label>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -722,7 +719,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             data-wrap="nowrap"
           >
             <input
-              class="size-4 rounded-sm cursor-pointer"
+              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-Release"
               id="Release"
               type="checkbox"
@@ -734,13 +731,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Release
             </label>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -749,7 +746,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             data-wrap="nowrap"
           >
             <input
-              class="size-4 rounded-sm cursor-pointer"
+              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-Dependabot Alert"
               id="Dependabot Alert"
               type="checkbox"
@@ -761,13 +758,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Dependabot Alert
             </label>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -776,7 +773,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             data-wrap="nowrap"
           >
             <input
-              class="size-4 rounded-sm cursor-pointer"
+              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-Invitation"
               id="Invitation"
               type="checkbox"
@@ -788,13 +785,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Invitation
             </label>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -803,7 +800,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             data-wrap="nowrap"
           >
             <input
-              class="size-4 rounded-sm cursor-pointer"
+              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-Vulnerability Alert"
               id="Vulnerability Alert"
               type="checkbox"
@@ -815,13 +812,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Vulnerability Alert
             </label>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -830,7 +827,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             data-wrap="nowrap"
           >
             <input
-              class="size-4 rounded-sm cursor-pointer"
+              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-Workflow Run"
               id="Workflow Run"
               type="checkbox"
@@ -842,7 +839,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Workflow Run
             </label>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
@@ -854,10 +851,10 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
       >
         <legend>
           <div
-            class="Box-sc-g0xbh4-0 mb-2"
+            class="mb-2"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+              class="prc-Stack-Stack-WJVsK"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -886,16 +883,17 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                 />
               </svg>
               <h2
-                class="Heading__StyledHeading-sc-1c1dgg0-0 fokFLB"
+                class="Box-sc-g0xbh4-0 mIkfY prc-Heading-Heading-6CmGO"
                 sx="[object Object]"
               >
                 State
               </h2>
-              <div
+              <button
                 aria-label="tooltip-state"
-                class="Box-sc-g0xbh4-0 relative"
+                class="relative"
                 data-testid="tooltip-tooltip-state"
                 id="tooltip-state"
+                type="button"
               >
                 <svg
                   aria-hidden="true"
@@ -913,12 +911,12 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                     d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                   />
                 </svg>
-              </div>
+              </button>
             </div>
           </div>
         </legend>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+          class="prc-Stack-Stack-WJVsK"
           data-align="stretch"
           data-direction="vertical"
           data-gap="condensed"
@@ -927,7 +925,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           data-wrap="nowrap"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -936,7 +934,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             data-wrap="nowrap"
           >
             <input
-              class="size-4 rounded-sm cursor-pointer"
+              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-Draft"
               id="Draft"
               type="checkbox"
@@ -948,13 +946,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Draft
             </label>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -963,7 +961,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             data-wrap="nowrap"
           >
             <input
-              class="size-4 rounded-sm cursor-pointer"
+              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-Open"
               id="Open"
               type="checkbox"
@@ -974,11 +972,12 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             >
               Open
             </label>
-            <div
+            <button
               aria-label="tooltip-Open"
-              class="Box-sc-g0xbh4-0 relative"
+              class="relative"
               data-testid="tooltip-tooltip-Open"
               id="tooltip-Open"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -996,15 +995,15 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                   d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                 />
               </svg>
-            </div>
+            </button>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1013,7 +1012,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             data-wrap="nowrap"
           >
             <input
-              class="size-4 rounded-sm cursor-pointer"
+              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-Merged"
               id="Merged"
               type="checkbox"
@@ -1025,13 +1024,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Merged
             </label>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1040,7 +1039,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             data-wrap="nowrap"
           >
             <input
-              class="size-4 rounded-sm cursor-pointer"
+              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-Closed"
               id="Closed"
               type="checkbox"
@@ -1051,11 +1050,12 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             >
               Closed
             </label>
-            <div
+            <button
               aria-label="tooltip-Closed"
-              class="Box-sc-g0xbh4-0 relative"
+              class="relative"
               data-testid="tooltip-tooltip-Closed"
               id="tooltip-Closed"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -1073,15 +1073,15 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                   d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                 />
               </svg>
-            </div>
+            </button>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1090,7 +1090,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             data-wrap="nowrap"
           >
             <input
-              class="size-4 rounded-sm cursor-pointer"
+              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-Other"
               id="Other"
               type="checkbox"
@@ -1101,11 +1101,12 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             >
               Other
             </label>
-            <div
+            <button
               aria-label="tooltip-Other"
-              class="Box-sc-g0xbh4-0 relative"
+              class="relative"
               data-testid="tooltip-tooltip-Other"
               id="tooltip-Other"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -1123,9 +1124,9 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                   d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                 />
               </svg>
-            </div>
+            </button>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
@@ -1137,10 +1138,10 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
       >
         <legend>
           <div
-            class="Box-sc-g0xbh4-0 mb-2"
+            class="mb-2"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+              class="prc-Stack-Stack-WJVsK"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -1166,16 +1167,17 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                 />
               </svg>
               <h2
-                class="Heading__StyledHeading-sc-1c1dgg0-0 fokFLB"
+                class="Box-sc-g0xbh4-0 mIkfY prc-Heading-Heading-6CmGO"
                 sx="[object Object]"
               >
                 Reason
               </h2>
-              <div
+              <button
                 aria-label="tooltip-reason"
-                class="Box-sc-g0xbh4-0 relative"
+                class="relative"
                 data-testid="tooltip-tooltip-reason"
                 id="tooltip-reason"
+                type="button"
               >
                 <svg
                   aria-hidden="true"
@@ -1193,12 +1195,12 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                     d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                   />
                 </svg>
-              </div>
+              </button>
             </div>
           </div>
         </legend>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+          class="prc-Stack-Stack-WJVsK"
           data-align="stretch"
           data-direction="vertical"
           data-gap="condensed"
@@ -1207,7 +1209,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           data-wrap="nowrap"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1216,7 +1218,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             data-wrap="nowrap"
           >
             <input
-              class="size-4 rounded-sm cursor-pointer"
+              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-Approval Requested"
               id="Approval Requested"
               type="checkbox"
@@ -1227,11 +1229,12 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             >
               Approval Requested
             </label>
-            <div
+            <button
               aria-label="tooltip-Approval Requested"
-              class="Box-sc-g0xbh4-0 relative"
+              class="relative"
               data-testid="tooltip-tooltip-Approval Requested"
               id="tooltip-Approval Requested"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -1249,15 +1252,15 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                   d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                 />
               </svg>
-            </div>
+            </button>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1266,7 +1269,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             data-wrap="nowrap"
           >
             <input
-              class="size-4 rounded-sm cursor-pointer"
+              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-Assigned"
               id="Assigned"
               type="checkbox"
@@ -1277,11 +1280,12 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             >
               Assigned
             </label>
-            <div
+            <button
               aria-label="tooltip-Assigned"
-              class="Box-sc-g0xbh4-0 relative"
+              class="relative"
               data-testid="tooltip-tooltip-Assigned"
               id="tooltip-Assigned"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -1299,15 +1303,15 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                   d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                 />
               </svg>
-            </div>
+            </button>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1316,7 +1320,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             data-wrap="nowrap"
           >
             <input
-              class="size-4 rounded-sm cursor-pointer"
+              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-Authored"
               id="Authored"
               type="checkbox"
@@ -1327,11 +1331,12 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             >
               Authored
             </label>
-            <div
+            <button
               aria-label="tooltip-Authored"
-              class="Box-sc-g0xbh4-0 relative"
+              class="relative"
               data-testid="tooltip-tooltip-Authored"
               id="tooltip-Authored"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -1349,15 +1354,15 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                   d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                 />
               </svg>
-            </div>
+            </button>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1366,7 +1371,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             data-wrap="nowrap"
           >
             <input
-              class="size-4 rounded-sm cursor-pointer"
+              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-Workflow Run Completed"
               id="Workflow Run Completed"
               type="checkbox"
@@ -1377,11 +1382,12 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             >
               Workflow Run Completed
             </label>
-            <div
+            <button
               aria-label="tooltip-Workflow Run Completed"
-              class="Box-sc-g0xbh4-0 relative"
+              class="relative"
               data-testid="tooltip-tooltip-Workflow Run Completed"
               id="tooltip-Workflow Run Completed"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -1399,15 +1405,15 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                   d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                 />
               </svg>
-            </div>
+            </button>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1416,7 +1422,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             data-wrap="nowrap"
           >
             <input
-              class="size-4 rounded-sm cursor-pointer"
+              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-Commented"
               id="Commented"
               type="checkbox"
@@ -1427,11 +1433,12 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             >
               Commented
             </label>
-            <div
+            <button
               aria-label="tooltip-Commented"
-              class="Box-sc-g0xbh4-0 relative"
+              class="relative"
               data-testid="tooltip-tooltip-Commented"
               id="tooltip-Commented"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -1449,15 +1456,15 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                   d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                 />
               </svg>
-            </div>
+            </button>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1466,7 +1473,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             data-wrap="nowrap"
           >
             <input
-              class="size-4 rounded-sm cursor-pointer"
+              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-Invitation Received"
               id="Invitation Received"
               type="checkbox"
@@ -1477,11 +1484,12 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             >
               Invitation Received
             </label>
-            <div
+            <button
               aria-label="tooltip-Invitation Received"
-              class="Box-sc-g0xbh4-0 relative"
+              class="relative"
               data-testid="tooltip-tooltip-Invitation Received"
               id="tooltip-Invitation Received"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -1499,15 +1507,15 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                   d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                 />
               </svg>
-            </div>
+            </button>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1516,7 +1524,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             data-wrap="nowrap"
           >
             <input
-              class="size-4 rounded-sm cursor-pointer"
+              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-Updated"
               id="Updated"
               type="checkbox"
@@ -1527,11 +1535,12 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             >
               Updated
             </label>
-            <div
+            <button
               aria-label="tooltip-Updated"
-              class="Box-sc-g0xbh4-0 relative"
+              class="relative"
               data-testid="tooltip-tooltip-Updated"
               id="tooltip-Updated"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -1549,15 +1558,15 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                   d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                 />
               </svg>
-            </div>
+            </button>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1566,7 +1575,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             data-wrap="nowrap"
           >
             <input
-              class="size-4 rounded-sm cursor-pointer"
+              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-Member Feature Requested"
               id="Member Feature Requested"
               type="checkbox"
@@ -1577,11 +1586,12 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             >
               Member Feature Requested
             </label>
-            <div
+            <button
               aria-label="tooltip-Member Feature Requested"
-              class="Box-sc-g0xbh4-0 relative"
+              class="relative"
               data-testid="tooltip-tooltip-Member Feature Requested"
               id="tooltip-Member Feature Requested"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -1599,15 +1609,15 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                   d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                 />
               </svg>
-            </div>
+            </button>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1616,7 +1626,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             data-wrap="nowrap"
           >
             <input
-              class="size-4 rounded-sm cursor-pointer"
+              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-Mentioned"
               id="Mentioned"
               type="checkbox"
@@ -1627,11 +1637,12 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             >
               Mentioned
             </label>
-            <div
+            <button
               aria-label="tooltip-Mentioned"
-              class="Box-sc-g0xbh4-0 relative"
+              class="relative"
               data-testid="tooltip-tooltip-Mentioned"
               id="tooltip-Mentioned"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -1649,15 +1660,15 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                   d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                 />
               </svg>
-            </div>
+            </button>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1666,7 +1677,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             data-wrap="nowrap"
           >
             <input
-              class="size-4 rounded-sm cursor-pointer"
+              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-Review Requested"
               id="Review Requested"
               type="checkbox"
@@ -1677,11 +1688,12 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             >
               Review Requested
             </label>
-            <div
+            <button
               aria-label="tooltip-Review Requested"
-              class="Box-sc-g0xbh4-0 relative"
+              class="relative"
               data-testid="tooltip-tooltip-Review Requested"
               id="tooltip-Review Requested"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -1699,15 +1711,15 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                   d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                 />
               </svg>
-            </div>
+            </button>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1716,7 +1728,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             data-wrap="nowrap"
           >
             <input
-              class="size-4 rounded-sm cursor-pointer"
+              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-Security Advisory Credit Received"
               id="Security Advisory Credit Received"
               type="checkbox"
@@ -1727,11 +1739,12 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             >
               Security Advisory Credit Received
             </label>
-            <div
+            <button
               aria-label="tooltip-Security Advisory Credit Received"
-              class="Box-sc-g0xbh4-0 relative"
+              class="relative"
               data-testid="tooltip-tooltip-Security Advisory Credit Received"
               id="tooltip-Security Advisory Credit Received"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -1749,15 +1762,15 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                   d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                 />
               </svg>
-            </div>
+            </button>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1766,7 +1779,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             data-wrap="nowrap"
           >
             <input
-              class="size-4 rounded-sm cursor-pointer"
+              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-Security Alert Received"
               id="Security Alert Received"
               type="checkbox"
@@ -1777,11 +1790,12 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             >
               Security Alert Received
             </label>
-            <div
+            <button
               aria-label="tooltip-Security Alert Received"
-              class="Box-sc-g0xbh4-0 relative"
+              class="relative"
               data-testid="tooltip-tooltip-Security Alert Received"
               id="tooltip-Security Alert Received"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -1799,15 +1813,15 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                   d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                 />
               </svg>
-            </div>
+            </button>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1816,7 +1830,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             data-wrap="nowrap"
           >
             <input
-              class="size-4 rounded-sm cursor-pointer"
+              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-State Changed"
               id="State Changed"
               type="checkbox"
@@ -1827,11 +1841,12 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             >
               State Changed
             </label>
-            <div
+            <button
               aria-label="tooltip-State Changed"
-              class="Box-sc-g0xbh4-0 relative"
+              class="relative"
               data-testid="tooltip-tooltip-State Changed"
               id="tooltip-State Changed"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -1849,15 +1864,15 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                   d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                 />
               </svg>
-            </div>
+            </button>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1866,7 +1881,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             data-wrap="nowrap"
           >
             <input
-              class="size-4 rounded-sm cursor-pointer"
+              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-Updated"
               id="Updated"
               type="checkbox"
@@ -1877,11 +1892,12 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             >
               Updated
             </label>
-            <div
+            <button
               aria-label="tooltip-Updated"
-              class="Box-sc-g0xbh4-0 relative"
+              class="relative"
               data-testid="tooltip-tooltip-Updated"
               id="tooltip-Updated"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -1899,15 +1915,15 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                   d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                 />
               </svg>
-            </div>
+            </button>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1916,7 +1932,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             data-wrap="nowrap"
           >
             <input
-              class="size-4 rounded-sm cursor-pointer"
+              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-Team Mentioned"
               id="Team Mentioned"
               type="checkbox"
@@ -1927,11 +1943,12 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             >
               Team Mentioned
             </label>
-            <div
+            <button
               aria-label="tooltip-Team Mentioned"
-              class="Box-sc-g0xbh4-0 relative"
+              class="relative"
               data-testid="tooltip-tooltip-Team Mentioned"
               id="tooltip-Team Mentioned"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -1949,9 +1966,9 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                   d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                 />
               </svg>
-            </div>
+            </button>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
@@ -1961,64 +1978,68 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
     </div>
   </div>
   <div
-    class="Box-sc-g0xbh4-0 left-sidebar bg-gitify-footer"
+    class="left-sidebar bg-gitify-footer"
   >
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+      class="prc-Stack-Stack-WJVsK"
       data-align="stretch"
       data-direction="horizontal"
       data-justify="end"
       data-padding="condensed"
       data-wrap="nowrap"
     >
-      <span
-        aria-label="Clear all filters"
-        class="Tooltip__TooltipBase-sc-17tf59c-0 ihgdlF tooltipped-n"
-        id="«r1»"
-        role="tooltip"
+      <button
+        aria-describedby="«r2»-loading-announcement «r1»"
+        class="prc-Button-ButtonBase-c50BI"
+        data-loading="false"
+        data-size="medium"
+        data-testid="filters-clear"
+        data-variant="default"
+        type="button"
       >
-        <button
-          aria-describedby="«r2»-loading-announcement"
-          class="types__StyledButton-sc-ws60qy-0 fnSTVi"
-          data-loading="false"
-          data-testid="filters-clear"
-          sx="[object Object]"
-          type="button"
+        <span
+          class="prc-Button-ButtonContent-HKbr-"
+          data-align="center"
+          data-component="buttonContent"
         >
           <span
-            class="Box-sc-g0xbh4-0 iEfcEl"
-            data-component="buttonContent"
-            sx="[object Object]"
+            class="prc-Button-Visual-2epfX prc-Button-VisualWrap-Db-eB"
+            data-component="leadingVisual"
           >
-            <span
-              class="Box-sc-g0xbh4-0 brHwkL"
-              data-component="leadingVisual"
-              sx="[object Object]"
+            <svg
+              aria-hidden="true"
+              class="octicon octicon-filter-remove"
+              display="inline-block"
+              fill="currentColor"
+              focusable="false"
+              height="16"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
+              viewBox="0 0 16 16"
+              width="16"
             >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-filter-remove"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M14.384 4.57a.752.752 0 0 0 1.061 0 .752.752 0 0 0 0-1.061l-.884-.884.883-.884A.75.75 0 0 0 14.384.68l-.884.884-.884-.884a.75.75 0 0 0-1.06 1.061l.883.884-.883.884a.75.75 0 0 0 1.06 1.061l.884-.884.884.884ZM.75 3a.75.75 0 0 0 0 1.5H9A.75.75 0 0 0 9 3H.75ZM3 7.75A.75.75 0 0 1 3.75 7h8.5a.75.75 0 0 1 0 1.5h-8.5A.75.75 0 0 1 3 7.75Zm3 4a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z"
-                />
-              </svg>
-            </span>
-            <span
-              data-component="text"
-            >
-              Clear filters
-            </span>
+              <path
+                d="M14.384 4.57a.752.752 0 0 0 1.061 0 .752.752 0 0 0 0-1.061l-.884-.884.883-.884A.75.75 0 0 0 14.384.68l-.884.884-.884-.884a.75.75 0 0 0-1.06 1.061l.883.884-.883.884a.75.75 0 0 0 1.06 1.061l.884-.884.884.884ZM.75 3a.75.75 0 0 0 0 1.5H9A.75.75 0 0 0 9 3H.75ZM3 7.75A.75.75 0 0 1 3.75 7h8.5a.75.75 0 0 1 0 1.5h-8.5A.75.75 0 0 1 3 7.75Zm3 4a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z"
+              />
+            </svg>
           </span>
-        </button>
+          <span
+            class="prc-Button-Label-pTQ3x"
+            data-component="text"
+          >
+            Clear filters
+          </span>
+        </span>
+      </button>
+      <span
+        aria-hidden="true"
+        class="prc-TooltipV2-Tooltip-cYMVY"
+        data-direction="n"
+        id="«r1»"
+        popover="auto"
+        role="tooltip"
+      >
+        Clear all filters
       </span>
     </div>
   </div>

@@ -1,6 +1,6 @@
 import { type FC, useState } from 'react';
 
-import { Box, Stack, Text, TextInputWithTokens } from '@primer/react';
+import { Stack, Text, TextInputWithTokens } from '@primer/react';
 
 import type { SearchToken } from '../../types';
 import {
@@ -66,13 +66,13 @@ export const TokenSearchInput: FC<TokenSearchInputProps> = ({
       direction="horizontal"
       gap="condensed"
     >
-      <Box className="font-medium text-gitify-font w-20">
+      <div className="font-medium text-gitify-font w-20">
         <Stack align="center" direction="horizontal" gap="condensed">
           <Icon className={iconColorClass} />
           <Text>{label}:</Text>
         </Stack>
-      </Box>
-      <Box flexGrow={1} position="relative">
+      </div>
+      <div className="relative grow">
         <TextInputWithTokens
           block
           onBlur={(e) => {
@@ -113,10 +113,9 @@ export const TokenSearchInput: FC<TokenSearchInputProps> = ({
         />
         <SearchFilterSuggestions
           inputValue={inputValue}
-          onClose={() => setShowSuggestions(false)}
           open={showSuggestions}
         />
-      </Box>
+      </div>
     </Stack>
   );
 };

@@ -6,7 +6,6 @@ import {
   MilestoneIcon,
   TagIcon,
 } from '@primer/octicons-react';
-import { Box } from '@primer/react';
 
 import { AppContext } from '../../context/App';
 import { IconColor } from '../../types';
@@ -37,7 +36,7 @@ export const MetricGroup: FC<IMetricGroup> = ({
 
   return (
     settings.showPills && (
-      <Box className="flex gap-1">
+      <div className="flex gap-1">
         {notification.subject?.linkedIssues?.length > 0 && (
           <MetricPill
             color={IconColor.GRAY}
@@ -90,7 +89,7 @@ export const MetricGroup: FC<IMetricGroup> = ({
             title={notification.subject.milestone.title}
           />
         )}
-      </Box>
+      </div>
     )
   );
 };

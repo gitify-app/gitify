@@ -1,7 +1,7 @@
 import { type FC, useCallback, useContext, useState } from 'react';
 
 import { BellSlashIcon, CheckIcon, ReadIcon } from '@primer/octicons-react';
-import { Box, Stack, Text, Tooltip } from '@primer/react';
+import { Stack, Text, Tooltip } from '@primer/react';
 
 import { AppContext } from '../../context/App';
 import { GroupBy, Opacity, Size } from '../../types';
@@ -79,10 +79,10 @@ export const NotificationRow: FC<INotificationRow> = ({
   const groupByDate = settings.groupBy === GroupBy.DATE;
 
   return (
-    <Box
+    <div
       className={cn(
         'group border-b',
-        'pl-3 pr-1 py-1.5',
+        'pl-1.5 pr-1 py-0.75',
         'text-gitify-font border-gitify-notification-border hover:bg-gitify-notification-hover',
         (isAnimated || animateExit) &&
           'translate-x-full opacity-0 transition duration-350 ease-in-out',
@@ -97,7 +97,13 @@ export const NotificationRow: FC<INotificationRow> = ({
         gap="condensed"
       >
         <Tooltip direction="e" text={notificationType}>
-          <NotificationIcon className={iconColor} size={Size.LARGE} />
+          <button type="button">
+            <NotificationIcon
+              aria-label={notificationType}
+              className={iconColor}
+              size={Size.LARGE}
+            />
+          </button>
         </Tooltip>
 
         <Stack
@@ -166,6 +172,6 @@ export const NotificationRow: FC<INotificationRow> = ({
           </HoverGroup>
         )}
       </Stack>
-    </Box>
+    </div>
   );
 };

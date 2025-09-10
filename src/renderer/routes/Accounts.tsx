@@ -15,7 +15,6 @@ import {
 import {
   ActionList,
   ActionMenu,
-  Box,
   Button,
   IconButton,
   Stack,
@@ -120,7 +119,7 @@ export const AccountsRoute: FC = () => {
           const accountUUID = getAccountUUID(account);
 
           return (
-            <Box
+            <div
               className="rounded-md p-2 mb-4 bg-gitify-accounts"
               key={accountUUID}
             >
@@ -145,52 +144,45 @@ export const AccountsRoute: FC = () => {
                   direction="horizontal"
                   justify="space-between"
                 >
-                  <Box className="pl-4 pb-2 text-xs">
+                  <div className="pl-4 pb-2 text-xs">
                     <Stack direction="vertical" gap="condensed">
-                      <Box hidden={!account.user.name}>
-                        <Stack
-                          align="center"
-                          direction="horizontal"
-                          gap="condensed"
-                        >
-                          <PersonIcon />
-                          <Text>{account.user?.name}</Text>
-                        </Stack>
-                      </Box>
+                      <Stack
+                        align="center"
+                        direction="horizontal"
+                        gap="condensed"
+                        hidden={!account.user.name}
+                      >
+                        <PersonIcon />
+                        <Text>{account.user?.name}</Text>
+                      </Stack>
 
-                      <Box
+                      <Stack
+                        align="center"
                         className="cursor-pointer"
                         data-testid="account-host"
+                        direction="horizontal"
+                        gap="condensed"
                         onClick={() => openHost(account.hostname)}
                         title="Open host"
                       >
-                        <Stack
-                          align="center"
-                          direction="horizontal"
-                          gap="condensed"
-                        >
-                          <PlatformIcon />
-                          <Text>{account.hostname}</Text>
-                        </Stack>
-                      </Box>
+                        <PlatformIcon />
+                        <Text>{account.hostname}</Text>
+                      </Stack>
 
-                      <Box
+                      <Stack
+                        align="center"
                         className="cursor-pointer"
                         data-testid="account-developer-settings"
+                        direction="horizontal"
+                        gap="condensed"
                         onClick={() => openDeveloperSettings(account)}
                         title="Open developer settings"
                       >
-                        <Stack
-                          align="center"
-                          direction="horizontal"
-                          gap="condensed"
-                        >
-                          <AuthMethodIcon />
-                          <Text>{account.method}</Text>
-                        </Stack>
-                      </Box>
+                        <AuthMethodIcon />
+                        <Text>{account.method}</Text>
+                      </Stack>
                     </Stack>
-                  </Box>
+                  </div>
 
                   <Stack direction="horizontal" gap="condensed">
                     <IconButton
@@ -236,7 +228,7 @@ export const AccountsRoute: FC = () => {
                   </Stack>
                 </Stack>
               </Stack>
-            </Box>
+            </div>
           );
         })}
       </Contents>

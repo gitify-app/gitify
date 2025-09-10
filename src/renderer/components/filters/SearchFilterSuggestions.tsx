@@ -1,6 +1,6 @@
 import { type FC, useContext } from 'react';
 
-import { Box, Popover, Stack, Text } from '@primer/react';
+import { Popover, Stack, Text } from '@primer/react';
 
 import { AppContext } from '../../context/App';
 import { Opacity } from '../../types';
@@ -14,13 +14,11 @@ import {
 interface SearchFilterSuggestionsProps {
   open: boolean;
   inputValue: string;
-  onClose: () => void;
 }
 
 export const SearchFilterSuggestions: FC<SearchFilterSuggestionsProps> = ({
   open,
   inputValue,
-  onClose,
 }) => {
   const { settings } = useContext(AppContext);
 
@@ -38,24 +36,24 @@ export const SearchFilterSuggestions: FC<SearchFilterSuggestionsProps> = ({
   const beginsWithKnownQualifier = base.some((q) => lower.startsWith(q.prefix));
 
   return (
-    <Popover caret={false} onOpenChange={onClose} open>
+    <Popover open>
       <Popover.Content sx={{ p: 2, mt: 2, width: '100%' }}>
         <Stack direction="vertical" gap="condensed">
           {suggestions.length > 0 &&
             suggestions.map((q) => (
-              <Box key={q.prefix}>
+              <div key={q.prefix}>
                 <Stack direction="vertical" gap="none">
                   <Text className="text-xs font-semibold">{q.prefix}</Text>
                   <Text className={cn('text-xs', Opacity.HIGH)}>
                     {q.description}
                   </Text>
                 </Stack>
-              </Box>
+              </div>
             ))}
           {inputValue !== '' &&
             suggestions.length === 0 &&
             !beginsWithKnownQualifier && (
-              <Box>
+              <div>
                 <Text className={cn('text-xs', Opacity.HIGH)}>
                   Please use one of the supported filters [
                   {base
@@ -63,7 +61,7 @@ export const SearchFilterSuggestions: FC<SearchFilterSuggestionsProps> = ({
                     .join(', ')}
                   ]
                 </Text>
-              </Box>
+              </div>
             )}
         </Stack>
       </Popover.Content>

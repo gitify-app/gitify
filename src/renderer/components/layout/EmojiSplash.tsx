@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 
-import { Box, Stack } from '@primer/react';
+import { Stack } from '@primer/react';
 
 import { EmojiText } from '../primitives/EmojiText';
 import { Centered } from './Centered';
@@ -27,15 +27,15 @@ export const EmojiSplash: FC<IEmojiSplash> = ({
       >
         <Stack align="center" direction="vertical" gap="spacious">
           <EmojiText text={props.emoji} />
-          <Box className="text-xl font-semibold">{props.heading}</Box>
+          <div className="text-xl font-semibold">{props.heading}</div>
         </Stack>
 
         {subHeadings.map((description, i) => {
           return (
             // biome-ignore lint/suspicious/noArrayIndexKey: using index for key to keep the error constants clean
-            <Box className="text-center" key={`error_description_${i}`}>
+            <div className="text-center" key={`error_description_${i}`}>
               {description}
-            </Box>
+            </div>
           );
         })}
       </Stack>

@@ -1,14 +1,7 @@
 import { type FC, useContext } from 'react';
 
 import { DeviceDesktopIcon, SyncIcon } from '@primer/octicons-react';
-import {
-  Box,
-  Button,
-  ButtonGroup,
-  IconButton,
-  Stack,
-  Text,
-} from '@primer/react';
+import { Button, ButtonGroup, IconButton, Stack, Text } from '@primer/react';
 
 import { APPLICATION } from '../../../shared/constants';
 
@@ -50,13 +43,13 @@ export const SystemSettings: FC = () => {
             updateSetting('keyboardShortcut', evt.target.checked)
           }
           tooltip={
-            <Box>
+            <div>
               When enabled you can use the hotkeys{' '}
               <Text as="strong" className="text-gitify-caution">
                 {APPLICATION.DEFAULT_KEYBOARD_SHORTCUT}
               </Text>{' '}
               to show or hide {APPLICATION.NAME}.
-            </Box>
+            </div>
           }
         />
 
@@ -79,76 +72,74 @@ export const SystemSettings: FC = () => {
           }
         />
 
-        <Box>
-          <Stack
-            align="center"
-            className="text-sm"
-            direction="horizontal"
-            gap="condensed"
+        <Stack
+          align="center"
+          className="text-sm"
+          direction="horizontal"
+          gap="condensed"
+        >
+          <Checkbox
+            checked={settings.playSound}
+            label="Play sound"
+            name="playSound"
+            onChange={(evt) => updateSetting('playSound', evt.target.checked)}
+          />
+
+          <ButtonGroup
+            className="ml-2"
+            data-testid="settings-volume-group"
+            hidden={!settings.playSound}
           >
-            <Checkbox
-              checked={settings.playSound}
-              label="Play sound"
-              name="playSound"
-              onChange={(evt) => updateSetting('playSound', evt.target.checked)}
+            <IconButton
+              aria-label="Volume down"
+              data-testid="settings-volume-down"
+              icon={VolumeDownIcon}
+              onClick={() => {
+                const newVolume = Math.max(
+                  settings.notificationVolume - 10,
+                  10,
+                );
+                updateSetting('notificationVolume', newVolume);
+              }}
+              size="small"
+              unsafeDisableTooltip={true}
             />
 
-            <ButtonGroup
-              className="ml-2"
-              data-testid="settings-volume-group"
-              hidden={!settings.playSound}
-            >
-              <IconButton
-                aria-label="Volume down"
-                data-testid="settings-volume-down"
-                icon={VolumeDownIcon}
-                onClick={() => {
-                  const newVolume = Math.max(
-                    settings.notificationVolume - 10,
-                    10,
-                  );
-                  updateSetting('notificationVolume', newVolume);
-                }}
-                size="small"
-                unsafeDisableTooltip={true}
-              />
+            <Button aria-label="Volume percentage" disabled size="small">
+              {settings.notificationVolume.toFixed(0)}%
+            </Button>
 
-              <Button aria-label="Volume percentage" disabled size="small">
-                {settings.notificationVolume.toFixed(0)}%
-              </Button>
+            <IconButton
+              aria-label="Volume up"
+              data-testid="settings-volume-up"
+              icon={VolumeUpIcon}
+              onClick={() => {
+                const newVolume = Math.min(
+                  settings.notificationVolume + 10,
+                  100,
+                );
+                updateSetting('notificationVolume', newVolume);
+              }}
+              size="small"
+              unsafeDisableTooltip={true}
+            />
 
-              <IconButton
-                aria-label="Volume up"
-                data-testid="settings-volume-up"
-                icon={VolumeUpIcon}
-                onClick={() => {
-                  const newVolume = Math.min(
-                    settings.notificationVolume + 10,
-                    100,
-                  );
-                  updateSetting('notificationVolume', newVolume);
-                }}
-                size="small"
-                unsafeDisableTooltip={true}
-              />
-
-              <IconButton
-                aria-label="Reset volume"
-                data-testid="settings-volume-reset"
-                icon={SyncIcon}
-                onClick={() => {
-                  updateSetting(
-                    'notificationVolume',
-                    defaultSettings.notificationVolume,
-                  );
-                }}
-                size="small"
-                unsafeDisableTooltip={true}
-                variant="danger"
-              />
-            </ButtonGroup>
-          </Stack>
-        </Box>
+            <IconButton
+              aria-label="Reset volume"
+              data-testid="settings-volume-reset"
+              icon={SyncIcon}
+              onClick={() => {
+                updateSetting(
+                  'notificationVolume',
+                  defaultSettings.notificationVolume,
+                );
+              }}
+              size="small"
+              unsafeDisableTooltip={true}
+              variant="danger"
+            />
+          </ButtonGroup>
+        </Stack>
 
         <Checkbox
           checked={settings.useAlternateIdleIcon}

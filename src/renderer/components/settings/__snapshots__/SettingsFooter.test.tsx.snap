@@ -2,20 +2,22 @@
 
 exports[`renderer/components/settings/SettingsFooter.tsx should show app version 1`] = `
 <button
-  aria-describedby="«r1»-loading-announcement"
-  class="types__StyledButton-sc-ws60qy-0 fnSTVi"
+  aria-describedby="«r1»-loading-announcement «r0»"
+  class="prc-Button-ButtonBase-c50BI"
   data-loading="false"
   data-no-visuals="true"
+  data-size="medium"
   data-testid="settings-release-notes"
-  sx="[object Object]"
+  data-variant="default"
   type="button"
 >
   <span
-    class="Box-sc-g0xbh4-0 iEfcEl"
+    class="prc-Button-ButtonContent-HKbr-"
+    data-align="center"
     data-component="buttonContent"
-    sx="[object Object]"
   >
     <span
+      class="prc-Button-Label-pTQ3x"
       data-component="text"
     >
       Gitify

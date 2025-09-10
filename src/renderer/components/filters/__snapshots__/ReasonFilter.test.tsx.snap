@@ -10,10 +10,10 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
       >
         <legend>
           <div
-            class="Box-sc-g0xbh4-0 mb-2"
+            class="mb-2"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+              class="prc-Stack-Stack-WJVsK"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -39,16 +39,17 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
                 />
               </svg>
               <h2
-                class="Heading__StyledHeading-sc-1c1dgg0-0 fokFLB"
+                class="Box-sc-g0xbh4-0 mIkfY prc-Heading-Heading-6CmGO"
                 sx="[object Object]"
               >
                 Reason
               </h2>
-              <div
+              <button
                 aria-label="tooltip-reason"
-                class="Box-sc-g0xbh4-0 relative"
+                class="relative"
                 data-testid="tooltip-tooltip-reason"
                 id="tooltip-reason"
+                type="button"
               >
                 <svg
                   aria-hidden="true"
@@ -66,12 +67,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
                     d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                   />
                 </svg>
-              </div>
+              </button>
             </div>
           </div>
         </legend>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+          class="prc-Stack-Stack-WJVsK"
           data-align="stretch"
           data-direction="vertical"
           data-gap="condensed"
@@ -80,7 +81,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
           data-wrap="nowrap"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -89,7 +90,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             data-wrap="nowrap"
           >
             <input
-              class="size-4 rounded-sm cursor-pointer"
+              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-Approval Requested"
               id="Approval Requested"
               type="checkbox"
@@ -100,11 +101,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             >
               Approval Requested
             </label>
-            <div
+            <button
               aria-label="tooltip-Approval Requested"
-              class="Box-sc-g0xbh4-0 relative"
+              class="relative"
               data-testid="tooltip-tooltip-Approval Requested"
               id="tooltip-Approval Requested"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -122,15 +124,15 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
                   d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                 />
               </svg>
-            </div>
+            </button>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -139,7 +141,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             data-wrap="nowrap"
           >
             <input
-              class="size-4 rounded-sm cursor-pointer"
+              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-Assigned"
               id="Assigned"
               type="checkbox"
@@ -150,11 +152,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             >
               Assigned
             </label>
-            <div
+            <button
               aria-label="tooltip-Assigned"
-              class="Box-sc-g0xbh4-0 relative"
+              class="relative"
               data-testid="tooltip-tooltip-Assigned"
               id="tooltip-Assigned"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -172,15 +175,15 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
                   d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                 />
               </svg>
-            </div>
+            </button>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -189,7 +192,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             data-wrap="nowrap"
           >
             <input
-              class="size-4 rounded-sm cursor-pointer"
+              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-Authored"
               id="Authored"
               type="checkbox"
@@ -200,11 +203,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             >
               Authored
             </label>
-            <div
+            <button
               aria-label="tooltip-Authored"
-              class="Box-sc-g0xbh4-0 relative"
+              class="relative"
               data-testid="tooltip-tooltip-Authored"
               id="tooltip-Authored"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -222,15 +226,15 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
                   d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                 />
               </svg>
-            </div>
+            </button>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               1
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -239,7 +243,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             data-wrap="nowrap"
           >
             <input
-              class="size-4 rounded-sm cursor-pointer"
+              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-Workflow Run Completed"
               id="Workflow Run Completed"
               type="checkbox"
@@ -250,11 +254,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             >
               Workflow Run Completed
             </label>
-            <div
+            <button
               aria-label="tooltip-Workflow Run Completed"
-              class="Box-sc-g0xbh4-0 relative"
+              class="relative"
               data-testid="tooltip-tooltip-Workflow Run Completed"
               id="tooltip-Workflow Run Completed"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -272,15 +277,15 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
                   d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                 />
               </svg>
-            </div>
+            </button>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -289,7 +294,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             data-wrap="nowrap"
           >
             <input
-              class="size-4 rounded-sm cursor-pointer"
+              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-Commented"
               id="Commented"
               type="checkbox"
@@ -300,11 +305,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             >
               Commented
             </label>
-            <div
+            <button
               aria-label="tooltip-Commented"
-              class="Box-sc-g0xbh4-0 relative"
+              class="relative"
               data-testid="tooltip-tooltip-Commented"
               id="tooltip-Commented"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -322,15 +328,15 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
                   d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                 />
               </svg>
-            </div>
+            </button>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -339,7 +345,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             data-wrap="nowrap"
           >
             <input
-              class="size-4 rounded-sm cursor-pointer"
+              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-Invitation Received"
               id="Invitation Received"
               type="checkbox"
@@ -350,11 +356,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             >
               Invitation Received
             </label>
-            <div
+            <button
               aria-label="tooltip-Invitation Received"
-              class="Box-sc-g0xbh4-0 relative"
+              class="relative"
               data-testid="tooltip-tooltip-Invitation Received"
               id="tooltip-Invitation Received"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -372,15 +379,15 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
                   d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                 />
               </svg>
-            </div>
+            </button>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -389,7 +396,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             data-wrap="nowrap"
           >
             <input
-              class="size-4 rounded-sm cursor-pointer"
+              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-Updated"
               id="Updated"
               type="checkbox"
@@ -400,11 +407,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             >
               Updated
             </label>
-            <div
+            <button
               aria-label="tooltip-Updated"
-              class="Box-sc-g0xbh4-0 relative"
+              class="relative"
               data-testid="tooltip-tooltip-Updated"
               id="tooltip-Updated"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -422,15 +430,15 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
                   d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                 />
               </svg>
-            </div>
+            </button>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -439,7 +447,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             data-wrap="nowrap"
           >
             <input
-              class="size-4 rounded-sm cursor-pointer"
+              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-Member Feature Requested"
               id="Member Feature Requested"
               type="checkbox"
@@ -450,11 +458,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             >
               Member Feature Requested
             </label>
-            <div
+            <button
               aria-label="tooltip-Member Feature Requested"
-              class="Box-sc-g0xbh4-0 relative"
+              class="relative"
               data-testid="tooltip-tooltip-Member Feature Requested"
               id="tooltip-Member Feature Requested"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -472,15 +481,15 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
                   d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                 />
               </svg>
-            </div>
+            </button>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -489,7 +498,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             data-wrap="nowrap"
           >
             <input
-              class="size-4 rounded-sm cursor-pointer"
+              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-Mentioned"
               id="Mentioned"
               type="checkbox"
@@ -500,11 +509,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             >
               Mentioned
             </label>
-            <div
+            <button
               aria-label="tooltip-Mentioned"
-              class="Box-sc-g0xbh4-0 relative"
+              class="relative"
               data-testid="tooltip-tooltip-Mentioned"
               id="tooltip-Mentioned"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -522,15 +532,15 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
                   d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                 />
               </svg>
-            </div>
+            </button>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -539,7 +549,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             data-wrap="nowrap"
           >
             <input
-              class="size-4 rounded-sm cursor-pointer"
+              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-Review Requested"
               id="Review Requested"
               type="checkbox"
@@ -550,11 +560,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             >
               Review Requested
             </label>
-            <div
+            <button
               aria-label="tooltip-Review Requested"
-              class="Box-sc-g0xbh4-0 relative"
+              class="relative"
               data-testid="tooltip-tooltip-Review Requested"
               id="tooltip-Review Requested"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -572,15 +583,15 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
                   d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                 />
               </svg>
-            </div>
+            </button>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -589,7 +600,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             data-wrap="nowrap"
           >
             <input
-              class="size-4 rounded-sm cursor-pointer"
+              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-Security Advisory Credit Received"
               id="Security Advisory Credit Received"
               type="checkbox"
@@ -600,11 +611,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             >
               Security Advisory Credit Received
             </label>
-            <div
+            <button
               aria-label="tooltip-Security Advisory Credit Received"
-              class="Box-sc-g0xbh4-0 relative"
+              class="relative"
               data-testid="tooltip-tooltip-Security Advisory Credit Received"
               id="tooltip-Security Advisory Credit Received"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -622,15 +634,15 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
                   d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                 />
               </svg>
-            </div>
+            </button>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -639,7 +651,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             data-wrap="nowrap"
           >
             <input
-              class="size-4 rounded-sm cursor-pointer"
+              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-Security Alert Received"
               id="Security Alert Received"
               type="checkbox"
@@ -650,11 +662,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             >
               Security Alert Received
             </label>
-            <div
+            <button
               aria-label="tooltip-Security Alert Received"
-              class="Box-sc-g0xbh4-0 relative"
+              class="relative"
               data-testid="tooltip-tooltip-Security Alert Received"
               id="tooltip-Security Alert Received"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -672,15 +685,15 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
                   d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                 />
               </svg>
-            </div>
+            </button>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -689,7 +702,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             data-wrap="nowrap"
           >
             <input
-              class="size-4 rounded-sm cursor-pointer"
+              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-State Changed"
               id="State Changed"
               type="checkbox"
@@ -700,11 +713,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             >
               State Changed
             </label>
-            <div
+            <button
               aria-label="tooltip-State Changed"
-              class="Box-sc-g0xbh4-0 relative"
+              class="relative"
               data-testid="tooltip-tooltip-State Changed"
               id="tooltip-State Changed"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -722,15 +736,15 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
                   d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                 />
               </svg>
-            </div>
+            </button>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -739,7 +753,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             data-wrap="nowrap"
           >
             <input
-              class="size-4 rounded-sm cursor-pointer"
+              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-Updated"
               id="Updated"
               type="checkbox"
@@ -750,11 +764,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             >
               Updated
             </label>
-            <div
+            <button
               aria-label="tooltip-Updated"
-              class="Box-sc-g0xbh4-0 relative"
+              class="relative"
               data-testid="tooltip-tooltip-Updated"
               id="tooltip-Updated"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -772,15 +787,15 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
                   d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                 />
               </svg>
-            </div>
+            </button>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               3
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -789,7 +804,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             data-wrap="nowrap"
           >
             <input
-              class="size-4 rounded-sm cursor-pointer"
+              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-Team Mentioned"
               id="Team Mentioned"
               type="checkbox"
@@ -800,11 +815,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             >
               Team Mentioned
             </label>
-            <div
+            <button
               aria-label="tooltip-Team Mentioned"
-              class="Box-sc-g0xbh4-0 relative"
+              class="relative"
               data-testid="tooltip-tooltip-Team Mentioned"
               id="tooltip-Team Mentioned"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -822,9 +838,9 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
                   d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                 />
               </svg>
-            </div>
+            </button>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
@@ -839,10 +855,10 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
     >
       <legend>
         <div
-          class="Box-sc-g0xbh4-0 mb-2"
+          class="mb-2"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+            class="prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -868,16 +884,17 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               />
             </svg>
             <h2
-              class="Heading__StyledHeading-sc-1c1dgg0-0 fokFLB"
+              class="Box-sc-g0xbh4-0 mIkfY prc-Heading-Heading-6CmGO"
               sx="[object Object]"
             >
               Reason
             </h2>
-            <div
+            <button
               aria-label="tooltip-reason"
-              class="Box-sc-g0xbh4-0 relative"
+              class="relative"
               data-testid="tooltip-tooltip-reason"
               id="tooltip-reason"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -895,12 +912,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
                   d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                 />
               </svg>
-            </div>
+            </button>
           </div>
         </div>
       </legend>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+        class="prc-Stack-Stack-WJVsK"
         data-align="stretch"
         data-direction="vertical"
         data-gap="condensed"
@@ -909,7 +926,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
         data-wrap="nowrap"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+          class="text-sm prc-Stack-Stack-WJVsK"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -918,7 +935,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
           data-wrap="nowrap"
         >
           <input
-            class="size-4 rounded-sm cursor-pointer"
+            class="size-2 rounded-sm cursor-pointer"
             data-testid="checkbox-Approval Requested"
             id="Approval Requested"
             type="checkbox"
@@ -929,11 +946,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
           >
             Approval Requested
           </label>
-          <div
+          <button
             aria-label="tooltip-Approval Requested"
-            class="Box-sc-g0xbh4-0 relative"
+            class="relative"
             data-testid="tooltip-tooltip-Approval Requested"
             id="tooltip-Approval Requested"
+            type="button"
           >
             <svg
               aria-hidden="true"
@@ -951,15 +969,15 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
                 d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
               />
             </svg>
-          </div>
+          </button>
           <span
-            class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
           >
             0
           </span>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+          class="text-sm prc-Stack-Stack-WJVsK"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -968,7 +986,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
           data-wrap="nowrap"
         >
           <input
-            class="size-4 rounded-sm cursor-pointer"
+            class="size-2 rounded-sm cursor-pointer"
             data-testid="checkbox-Assigned"
             id="Assigned"
             type="checkbox"
@@ -979,11 +997,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
           >
             Assigned
           </label>
-          <div
+          <button
             aria-label="tooltip-Assigned"
-            class="Box-sc-g0xbh4-0 relative"
+            class="relative"
             data-testid="tooltip-tooltip-Assigned"
             id="tooltip-Assigned"
+            type="button"
           >
             <svg
               aria-hidden="true"
@@ -1001,15 +1020,15 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
                 d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
               />
             </svg>
-          </div>
+          </button>
           <span
-            class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
           >
             0
           </span>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+          class="text-sm prc-Stack-Stack-WJVsK"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -1018,7 +1037,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
           data-wrap="nowrap"
         >
           <input
-            class="size-4 rounded-sm cursor-pointer"
+            class="size-2 rounded-sm cursor-pointer"
             data-testid="checkbox-Authored"
             id="Authored"
             type="checkbox"
@@ -1029,11 +1048,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
           >
             Authored
           </label>
-          <div
+          <button
             aria-label="tooltip-Authored"
-            class="Box-sc-g0xbh4-0 relative"
+            class="relative"
             data-testid="tooltip-tooltip-Authored"
             id="tooltip-Authored"
+            type="button"
           >
             <svg
               aria-hidden="true"
@@ -1051,15 +1071,15 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
                 d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
               />
             </svg>
-          </div>
+          </button>
           <span
-            class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
           >
             1
           </span>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+          class="text-sm prc-Stack-Stack-WJVsK"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -1068,7 +1088,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
           data-wrap="nowrap"
         >
           <input
-            class="size-4 rounded-sm cursor-pointer"
+            class="size-2 rounded-sm cursor-pointer"
             data-testid="checkbox-Workflow Run Completed"
             id="Workflow Run Completed"
             type="checkbox"
@@ -1079,11 +1099,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
           >
             Workflow Run Completed
           </label>
-          <div
+          <button
             aria-label="tooltip-Workflow Run Completed"
-            class="Box-sc-g0xbh4-0 relative"
+            class="relative"
             data-testid="tooltip-tooltip-Workflow Run Completed"
             id="tooltip-Workflow Run Completed"
+            type="button"
           >
             <svg
               aria-hidden="true"
@@ -1101,15 +1122,15 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
                 d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
               />
             </svg>
-          </div>
+          </button>
           <span
-            class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
           >
             0
           </span>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+          class="text-sm prc-Stack-Stack-WJVsK"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -1118,7 +1139,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
           data-wrap="nowrap"
         >
           <input
-            class="size-4 rounded-sm cursor-pointer"
+            class="size-2 rounded-sm cursor-pointer"
             data-testid="checkbox-Commented"
             id="Commented"
             type="checkbox"
@@ -1129,11 +1150,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
           >
             Commented
           </label>
-          <div
+          <button
             aria-label="tooltip-Commented"
-            class="Box-sc-g0xbh4-0 relative"
+            class="relative"
             data-testid="tooltip-tooltip-Commented"
             id="tooltip-Commented"
+            type="button"
           >
             <svg
               aria-hidden="true"
@@ -1151,15 +1173,15 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
                 d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
               />
             </svg>
-          </div>
+          </button>
           <span
-            class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
           >
             0
           </span>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+          class="text-sm prc-Stack-Stack-WJVsK"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -1168,7 +1190,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
           data-wrap="nowrap"
         >
           <input
-            class="size-4 rounded-sm cursor-pointer"
+            class="size-2 rounded-sm cursor-pointer"
             data-testid="checkbox-Invitation Received"
             id="Invitation Received"
             type="checkbox"
@@ -1179,11 +1201,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
           >
             Invitation Received
           </label>
-          <div
+          <button
             aria-label="tooltip-Invitation Received"
-            class="Box-sc-g0xbh4-0 relative"
+            class="relative"
             data-testid="tooltip-tooltip-Invitation Received"
             id="tooltip-Invitation Received"
+            type="button"
           >
             <svg
               aria-hidden="true"
@@ -1201,15 +1224,15 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
                 d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
               />
             </svg>
-          </div>
+          </button>
           <span
-            class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
           >
             0
           </span>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+          class="text-sm prc-Stack-Stack-WJVsK"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -1218,7 +1241,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
           data-wrap="nowrap"
         >
           <input
-            class="size-4 rounded-sm cursor-pointer"
+            class="size-2 rounded-sm cursor-pointer"
             data-testid="checkbox-Updated"
             id="Updated"
             type="checkbox"
@@ -1229,11 +1252,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
           >
             Updated
           </label>
-          <div
+          <button
             aria-label="tooltip-Updated"
-            class="Box-sc-g0xbh4-0 relative"
+            class="relative"
             data-testid="tooltip-tooltip-Updated"
             id="tooltip-Updated"
+            type="button"
           >
             <svg
               aria-hidden="true"
@@ -1251,15 +1275,15 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
                 d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
               />
             </svg>
-          </div>
+          </button>
           <span
-            class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
           >
             0
           </span>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+          class="text-sm prc-Stack-Stack-WJVsK"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -1268,7 +1292,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
           data-wrap="nowrap"
         >
           <input
-            class="size-4 rounded-sm cursor-pointer"
+            class="size-2 rounded-sm cursor-pointer"
             data-testid="checkbox-Member Feature Requested"
             id="Member Feature Requested"
             type="checkbox"
@@ -1279,11 +1303,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
           >
             Member Feature Requested
           </label>
-          <div
+          <button
             aria-label="tooltip-Member Feature Requested"
-            class="Box-sc-g0xbh4-0 relative"
+            class="relative"
             data-testid="tooltip-tooltip-Member Feature Requested"
             id="tooltip-Member Feature Requested"
+            type="button"
           >
             <svg
               aria-hidden="true"
@@ -1301,15 +1326,15 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
                 d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
               />
             </svg>
-          </div>
+          </button>
           <span
-            class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
           >
             0
           </span>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+          class="text-sm prc-Stack-Stack-WJVsK"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -1318,7 +1343,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
           data-wrap="nowrap"
         >
           <input
-            class="size-4 rounded-sm cursor-pointer"
+            class="size-2 rounded-sm cursor-pointer"
             data-testid="checkbox-Mentioned"
             id="Mentioned"
             type="checkbox"
@@ -1329,11 +1354,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
           >
             Mentioned
           </label>
-          <div
+          <button
             aria-label="tooltip-Mentioned"
-            class="Box-sc-g0xbh4-0 relative"
+            class="relative"
             data-testid="tooltip-tooltip-Mentioned"
             id="tooltip-Mentioned"
+            type="button"
           >
             <svg
               aria-hidden="true"
@@ -1351,15 +1377,15 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
                 d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
               />
             </svg>
-          </div>
+          </button>
           <span
-            class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
           >
             0
           </span>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+          class="text-sm prc-Stack-Stack-WJVsK"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -1368,7 +1394,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
           data-wrap="nowrap"
         >
           <input
-            class="size-4 rounded-sm cursor-pointer"
+            class="size-2 rounded-sm cursor-pointer"
             data-testid="checkbox-Review Requested"
             id="Review Requested"
             type="checkbox"
@@ -1379,11 +1405,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
           >
             Review Requested
           </label>
-          <div
+          <button
             aria-label="tooltip-Review Requested"
-            class="Box-sc-g0xbh4-0 relative"
+            class="relative"
             data-testid="tooltip-tooltip-Review Requested"
             id="tooltip-Review Requested"
+            type="button"
           >
             <svg
               aria-hidden="true"
@@ -1401,15 +1428,15 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
                 d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
               />
             </svg>
-          </div>
+          </button>
           <span
-            class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
           >
             0
           </span>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+          class="text-sm prc-Stack-Stack-WJVsK"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -1418,7 +1445,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
           data-wrap="nowrap"
         >
           <input
-            class="size-4 rounded-sm cursor-pointer"
+            class="size-2 rounded-sm cursor-pointer"
             data-testid="checkbox-Security Advisory Credit Received"
             id="Security Advisory Credit Received"
             type="checkbox"
@@ -1429,11 +1456,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
           >
             Security Advisory Credit Received
           </label>
-          <div
+          <button
             aria-label="tooltip-Security Advisory Credit Received"
-            class="Box-sc-g0xbh4-0 relative"
+            class="relative"
             data-testid="tooltip-tooltip-Security Advisory Credit Received"
             id="tooltip-Security Advisory Credit Received"
+            type="button"
           >
             <svg
               aria-hidden="true"
@@ -1451,15 +1479,15 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
                 d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
               />
             </svg>
-          </div>
+          </button>
           <span
-            class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
           >
             0
           </span>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+          class="text-sm prc-Stack-Stack-WJVsK"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -1468,7 +1496,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
           data-wrap="nowrap"
         >
           <input
-            class="size-4 rounded-sm cursor-pointer"
+            class="size-2 rounded-sm cursor-pointer"
             data-testid="checkbox-Security Alert Received"
             id="Security Alert Received"
             type="checkbox"
@@ -1479,11 +1507,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
           >
             Security Alert Received
           </label>
-          <div
+          <button
             aria-label="tooltip-Security Alert Received"
-            class="Box-sc-g0xbh4-0 relative"
+            class="relative"
             data-testid="tooltip-tooltip-Security Alert Received"
             id="tooltip-Security Alert Received"
+            type="button"
           >
             <svg
               aria-hidden="true"
@@ -1501,15 +1530,15 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
                 d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
               />
             </svg>
-          </div>
+          </button>
           <span
-            class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
           >
             0
           </span>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+          class="text-sm prc-Stack-Stack-WJVsK"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -1518,7 +1547,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
           data-wrap="nowrap"
         >
           <input
-            class="size-4 rounded-sm cursor-pointer"
+            class="size-2 rounded-sm cursor-pointer"
             data-testid="checkbox-State Changed"
             id="State Changed"
             type="checkbox"
@@ -1529,11 +1558,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
           >
             State Changed
           </label>
-          <div
+          <button
             aria-label="tooltip-State Changed"
-            class="Box-sc-g0xbh4-0 relative"
+            class="relative"
             data-testid="tooltip-tooltip-State Changed"
             id="tooltip-State Changed"
+            type="button"
           >
             <svg
               aria-hidden="true"
@@ -1551,15 +1581,15 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
                 d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
               />
             </svg>
-          </div>
+          </button>
           <span
-            class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
           >
             0
           </span>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+          class="text-sm prc-Stack-Stack-WJVsK"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -1568,7 +1598,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
           data-wrap="nowrap"
         >
           <input
-            class="size-4 rounded-sm cursor-pointer"
+            class="size-2 rounded-sm cursor-pointer"
             data-testid="checkbox-Updated"
             id="Updated"
             type="checkbox"
@@ -1579,11 +1609,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
           >
             Updated
           </label>
-          <div
+          <button
             aria-label="tooltip-Updated"
-            class="Box-sc-g0xbh4-0 relative"
+            class="relative"
             data-testid="tooltip-tooltip-Updated"
             id="tooltip-Updated"
+            type="button"
           >
             <svg
               aria-hidden="true"
@@ -1601,15 +1632,15 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
                 d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
               />
             </svg>
-          </div>
+          </button>
           <span
-            class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
           >
             3
           </span>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+          class="text-sm prc-Stack-Stack-WJVsK"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -1618,7 +1649,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
           data-wrap="nowrap"
         >
           <input
-            class="size-4 rounded-sm cursor-pointer"
+            class="size-2 rounded-sm cursor-pointer"
             data-testid="checkbox-Team Mentioned"
             id="Team Mentioned"
             type="checkbox"
@@ -1629,11 +1660,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
           >
             Team Mentioned
           </label>
-          <div
+          <button
             aria-label="tooltip-Team Mentioned"
-            class="Box-sc-g0xbh4-0 relative"
+            class="relative"
             data-testid="tooltip-tooltip-Team Mentioned"
             id="tooltip-Team Mentioned"
+            type="button"
           >
             <svg
               aria-hidden="true"
@@ -1651,9 +1683,9 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
                 d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
               />
             </svg>
-          </div>
+          </button>
           <span
-            class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
           >
             0
           </span>

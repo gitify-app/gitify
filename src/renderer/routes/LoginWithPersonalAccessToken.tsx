@@ -193,7 +193,9 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
             <Text as="i" className="text-xs">
               The{' '}
               <Tooltip direction="se" text={formatRecommendedOAuthScopes()}>
-                <Text as="u">required scopes</Text>
+                <button type="button">
+                  <Text as="u">required scopes</Text>
+                </button>
               </Tooltip>{' '}
               will be automatically selected for you.
             </Text>

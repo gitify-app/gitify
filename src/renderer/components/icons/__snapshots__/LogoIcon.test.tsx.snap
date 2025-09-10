@@ -7,7 +7,7 @@ exports[`renderer/components/icons/LogoIcon.tsx renders correctly (dark) 1`] = `
     <div>
       <svg
         aria-label="Gitify Logo"
-        class="size-5"
+        class="size-2.5"
         role="img"
         viewBox="0 0 500 500"
         xmlns="https://www.w3.org/2000/svg"
@@ -54,7 +54,7 @@ exports[`renderer/components/icons/LogoIcon.tsx renders correctly (dark) 1`] = `
   "container": <div>
     <svg
       aria-label="Gitify Logo"
-      class="size-5"
+      class="size-2.5"
       role="img"
       viewBox="0 0 500 500"
       xmlns="https://www.w3.org/2000/svg"
@@ -158,7 +158,7 @@ exports[`renderer/components/icons/LogoIcon.tsx renders correctly (light) 1`] = 
     <div>
       <svg
         aria-label="Gitify Logo"
-        class="size-5"
+        class="size-2.5"
         role="img"
         viewBox="0 0 500 500"
         xmlns="https://www.w3.org/2000/svg"
@@ -205,7 +205,7 @@ exports[`renderer/components/icons/LogoIcon.tsx renders correctly (light) 1`] = 
   "container": <div>
     <svg
       aria-label="Gitify Logo"
-      class="size-5"
+      class="size-2.5"
       role="img"
       viewBox="0 0 500 500"
       xmlns="https://www.w3.org/2000/svg"
@@ -309,7 +309,7 @@ exports[`renderer/components/icons/LogoIcon.tsx should render large size 1`] = `
     <div>
       <svg
         aria-label="Gitify Logo"
-        class="size-16"
+        class="size-8"
         role="img"
         viewBox="0 0 500 500"
         xmlns="https://www.w3.org/2000/svg"
@@ -356,7 +356,7 @@ exports[`renderer/components/icons/LogoIcon.tsx should render large size 1`] = `
   "container": <div>
     <svg
       aria-label="Gitify Logo"
-      class="size-16"
+      class="size-8"
       role="img"
       viewBox="0 0 500 500"
       xmlns="https://www.w3.org/2000/svg"
@@ -460,7 +460,7 @@ exports[`renderer/components/icons/LogoIcon.tsx should render medium size 1`] = 
     <div>
       <svg
         aria-label="Gitify Logo"
-        class="size-10"
+        class="size-5"
         role="img"
         viewBox="0 0 500 500"
         xmlns="https://www.w3.org/2000/svg"
@@ -507,7 +507,7 @@ exports[`renderer/components/icons/LogoIcon.tsx should render medium size 1`] = 
   "container": <div>
     <svg
       aria-label="Gitify Logo"
-      class="size-10"
+      class="size-5"
       role="img"
       viewBox="0 0 500 500"
       xmlns="https://www.w3.org/2000/svg"
@@ -611,7 +611,7 @@ exports[`renderer/components/icons/LogoIcon.tsx should render small size 1`] = `
     <div>
       <svg
         aria-label="Gitify Logo"
-        class="size-5"
+        class="size-2.5"
         role="img"
         viewBox="0 0 500 500"
         xmlns="https://www.w3.org/2000/svg"
@@ -658,7 +658,7 @@ exports[`renderer/components/icons/LogoIcon.tsx should render small size 1`] = `
   "container": <div>
     <svg
       aria-label="Gitify Logo"
-      class="size-5"
+      class="size-2.5"
       role="img"
       viewBox="0 0 500 500"
       xmlns="https://www.w3.org/2000/svg"

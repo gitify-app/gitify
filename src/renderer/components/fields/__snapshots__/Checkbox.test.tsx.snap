@@ -6,7 +6,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - disabled 1`] = 
   "baseElement": <body>
     <div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+        class="text-sm prc-Stack-Stack-WJVsK"
         data-align="center"
         data-direction="horizontal"
         data-gap="condensed"
@@ -16,7 +16,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - disabled 1`] = 
       >
         <input
           checked=""
-          class="size-4 rounded-sm cursor-pointer"
+          class="size-2 rounded-sm cursor-pointer"
           data-testid="checkbox-appearance"
           disabled=""
           id="appearance"
@@ -33,7 +33,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - disabled 1`] = 
   </body>,
   "container": <div>
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+      class="text-sm prc-Stack-Stack-WJVsK"
       data-align="center"
       data-direction="horizontal"
       data-gap="condensed"
@@ -43,7 +43,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - disabled 1`] = 
     >
       <input
         checked=""
-        class="size-4 rounded-sm cursor-pointer"
+        class="size-2 rounded-sm cursor-pointer"
         data-testid="checkbox-appearance"
         disabled=""
         id="appearance"
@@ -178,7 +178,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - positive counte
   "baseElement": <body>
     <div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+        class="text-sm prc-Stack-Stack-WJVsK"
         data-align="center"
         data-direction="horizontal"
         data-gap="condensed"
@@ -188,7 +188,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - positive counte
       >
         <input
           checked=""
-          class="size-4 rounded-sm cursor-pointer"
+          class="size-2 rounded-sm cursor-pointer"
           data-testid="checkbox-appearance"
           id="appearance"
           type="checkbox"
@@ -200,7 +200,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - positive counte
           Appearance
         </label>
         <span
-          class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-primary"
+          class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-primary prc-Text-Text-0ima0"
         >
           5
         </span>
@@ -209,7 +209,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - positive counte
   </body>,
   "container": <div>
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+      class="text-sm prc-Stack-Stack-WJVsK"
       data-align="center"
       data-direction="horizontal"
       data-gap="condensed"
@@ -219,7 +219,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - positive counte
     >
       <input
         checked=""
-        class="size-4 rounded-sm cursor-pointer"
+        class="size-2 rounded-sm cursor-pointer"
         data-testid="checkbox-appearance"
         id="appearance"
         type="checkbox"
@@ -231,7 +231,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - positive counte
         Appearance
       </label>
       <span
-        class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-primary"
+        class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-primary prc-Text-Text-0ima0"
       >
         5
       </span>
@@ -297,7 +297,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - positive counte
   "baseElement": <body>
     <div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+        class="text-sm prc-Stack-Stack-WJVsK"
         data-align="center"
         data-direction="horizontal"
         data-gap="condensed"
@@ -306,7 +306,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - positive counte
         data-wrap="nowrap"
       >
         <input
-          class="size-4 rounded-sm cursor-pointer"
+          class="size-2 rounded-sm cursor-pointer"
           data-testid="checkbox-appearance"
           id="appearance"
           type="checkbox"
@@ -318,7 +318,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - positive counte
           Appearance
         </label>
         <span
-          class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+          class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
         >
           5
         </span>
@@ -327,7 +327,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - positive counte
   </body>,
   "container": <div>
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+      class="text-sm prc-Stack-Stack-WJVsK"
       data-align="center"
       data-direction="horizontal"
       data-gap="condensed"
@@ -336,7 +336,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - positive counte
       data-wrap="nowrap"
     >
       <input
-        class="size-4 rounded-sm cursor-pointer"
+        class="size-2 rounded-sm cursor-pointer"
         data-testid="checkbox-appearance"
         id="appearance"
         type="checkbox"
@@ -348,7 +348,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - positive counte
         Appearance
       </label>
       <span
-        class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+        class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
       >
         5
       </span>
@@ -414,7 +414,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - tooltip 1`] = `
   "baseElement": <body>
     <div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+        class="text-sm prc-Stack-Stack-WJVsK"
         data-align="center"
         data-direction="horizontal"
         data-gap="condensed"
@@ -424,7 +424,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - tooltip 1`] = `
       >
         <input
           checked=""
-          class="size-4 rounded-sm cursor-pointer"
+          class="size-2 rounded-sm cursor-pointer"
           data-testid="checkbox-appearance"
           id="appearance"
           type="checkbox"
@@ -435,11 +435,12 @@ exports[`renderer/components/fields/Checkbox.tsx should render - tooltip 1`] = `
         >
           Appearance
         </label>
-        <div
+        <button
           aria-label="tooltip-appearance"
-          class="Box-sc-g0xbh4-0 relative"
+          class="relative"
           data-testid="tooltip-tooltip-appearance"
           id="tooltip-appearance"
+          type="button"
         >
           <svg
             aria-hidden="true"
@@ -457,13 +458,13 @@ exports[`renderer/components/fields/Checkbox.tsx should render - tooltip 1`] = `
               d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
             />
           </svg>
-        </div>
+        </button>
       </div>
     </div>
   </body>,
   "container": <div>
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+      class="text-sm prc-Stack-Stack-WJVsK"
       data-align="center"
       data-direction="horizontal"
       data-gap="condensed"
@@ -473,7 +474,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - tooltip 1`] = `
     >
       <input
         checked=""
-        class="size-4 rounded-sm cursor-pointer"
+        class="size-2 rounded-sm cursor-pointer"
         data-testid="checkbox-appearance"
         id="appearance"
         type="checkbox"
@@ -484,11 +485,12 @@ exports[`renderer/components/fields/Checkbox.tsx should render - tooltip 1`] = `
       >
         Appearance
       </label>
-      <div
+      <button
         aria-label="tooltip-appearance"
-        class="Box-sc-g0xbh4-0 relative"
+        class="relative"
         data-testid="tooltip-tooltip-appearance"
         id="tooltip-appearance"
+        type="button"
       >
         <svg
           aria-hidden="true"
@@ -506,7 +508,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - tooltip 1`] = `
             d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
           />
         </svg>
-      </div>
+      </button>
     </div>
   </div>,
   "debug": [Function],
@@ -569,7 +571,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - visible 1`] = `
   "baseElement": <body>
     <div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+        class="text-sm prc-Stack-Stack-WJVsK"
         data-align="center"
         data-direction="horizontal"
         data-gap="condensed"
@@ -579,7 +581,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - visible 1`] = `
       >
         <input
           checked=""
-          class="size-4 rounded-sm cursor-pointer"
+          class="size-2 rounded-sm cursor-pointer"
           data-testid="checkbox-appearance"
           id="appearance"
           type="checkbox"
@@ -595,7 +597,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - visible 1`] = `
   </body>,
   "container": <div>
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+      class="text-sm prc-Stack-Stack-WJVsK"
       data-align="center"
       data-direction="horizontal"
       data-gap="condensed"
@@ -605,7 +607,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - visible 1`] = `
     >
       <input
         checked=""
-        class="size-4 rounded-sm cursor-pointer"
+        class="size-2 rounded-sm cursor-pointer"
         data-testid="checkbox-appearance"
         id="appearance"
         type="checkbox"
@@ -678,7 +680,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - zero counter 1`
   "baseElement": <body>
     <div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+        class="text-sm prc-Stack-Stack-WJVsK"
         data-align="center"
         data-direction="horizontal"
         data-gap="condensed"
@@ -688,7 +690,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - zero counter 1`
       >
         <input
           checked=""
-          class="size-4 rounded-sm cursor-pointer"
+          class="size-2 rounded-sm cursor-pointer"
           data-testid="checkbox-appearance"
           id="appearance"
           type="checkbox"
@@ -700,7 +702,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - zero counter 1`
           Appearance
         </label>
         <span
-          class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-primary"
+          class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-primary prc-Text-Text-0ima0"
         >
           0
         </span>
@@ -709,7 +711,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - zero counter 1`
   </body>,
   "container": <div>
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+      class="text-sm prc-Stack-Stack-WJVsK"
       data-align="center"
       data-direction="horizontal"
       data-gap="condensed"
@@ -719,7 +721,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - zero counter 1`
     >
       <input
         checked=""
-        class="size-4 rounded-sm cursor-pointer"
+        class="size-2 rounded-sm cursor-pointer"
         data-testid="checkbox-appearance"
         id="appearance"
         type="checkbox"
@@ -731,7 +733,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - zero counter 1`
         Appearance
       </label>
       <span
-        class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-primary"
+        class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-primary prc-Text-Text-0ima0"
       >
         0
       </span>

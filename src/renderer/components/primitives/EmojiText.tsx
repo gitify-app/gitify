@@ -1,7 +1,5 @@
 import { type FC, useEffect, useRef } from 'react';
 
-import { Box } from '@primer/react';
-
 import { convertTextToEmojiImgHtml } from '../../utils/emojis';
 
 export interface IEmojiText {
@@ -9,7 +7,7 @@ export interface IEmojiText {
 }
 
 export const EmojiText: FC<IEmojiText> = ({ text }) => {
-  const ref = useRef<HTMLSpanElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const updateEmojiText = async () => {
@@ -21,5 +19,5 @@ export const EmojiText: FC<IEmojiText> = ({ text }) => {
     updateEmojiText();
   }, [text]);
 
-  return <Box className="text-5xl" ref={ref} />;
+  return <div className="text-5xl" ref={ref} />;
 };

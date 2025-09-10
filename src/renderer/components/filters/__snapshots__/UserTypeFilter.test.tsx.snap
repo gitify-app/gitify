@@ -10,10 +10,10 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
       >
         <legend>
           <div
-            class="Box-sc-g0xbh4-0 mb-2"
+            class="mb-2"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+              class="prc-Stack-Stack-WJVsK"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -39,16 +39,17 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
                 />
               </svg>
               <h2
-                class="Heading__StyledHeading-sc-1c1dgg0-0 fokFLB"
+                class="Box-sc-g0xbh4-0 mIkfY prc-Heading-Heading-6CmGO"
                 sx="[object Object]"
               >
                 User Type
               </h2>
-              <div
+              <button
                 aria-label="tooltip-user-type"
-                class="Box-sc-g0xbh4-0 relative"
+                class="relative"
                 data-testid="tooltip-tooltip-user-type"
                 id="tooltip-user-type"
+                type="button"
               >
                 <svg
                   aria-hidden="true"
@@ -66,12 +67,12 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
                     d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                   />
                 </svg>
-              </div>
+              </button>
             </div>
           </div>
         </legend>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+          class="prc-Stack-Stack-WJVsK"
           data-align="stretch"
           data-direction="horizontal"
           data-gap="normal"
@@ -80,7 +81,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
           data-wrap="nowrap"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -89,7 +90,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
             data-wrap="nowrap"
           >
             <input
-              class="size-4 rounded-sm cursor-pointer"
+              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-User"
               id="User"
               type="checkbox"
@@ -101,13 +102,13 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
               User
             </label>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               1
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -116,7 +117,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
             data-wrap="nowrap"
           >
             <input
-              class="size-4 rounded-sm cursor-pointer"
+              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-Bot"
               id="Bot"
               type="checkbox"
@@ -127,11 +128,12 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
             >
               Bot
             </label>
-            <div
+            <button
               aria-label="tooltip-Bot"
-              class="Box-sc-g0xbh4-0 relative"
+              class="relative"
               data-testid="tooltip-tooltip-Bot"
               id="tooltip-Bot"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -149,15 +151,15 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
                   d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                 />
               </svg>
-            </div>
+            </button>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -166,7 +168,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
             data-wrap="nowrap"
           >
             <input
-              class="size-4 rounded-sm cursor-pointer"
+              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-Organization"
               id="Organization"
               type="checkbox"
@@ -178,7 +180,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
               Organization
             </label>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
@@ -193,10 +195,10 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
     >
       <legend>
         <div
-          class="Box-sc-g0xbh4-0 mb-2"
+          class="mb-2"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+            class="prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -222,16 +224,17 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
               />
             </svg>
             <h2
-              class="Heading__StyledHeading-sc-1c1dgg0-0 fokFLB"
+              class="Box-sc-g0xbh4-0 mIkfY prc-Heading-Heading-6CmGO"
               sx="[object Object]"
             >
               User Type
             </h2>
-            <div
+            <button
               aria-label="tooltip-user-type"
-              class="Box-sc-g0xbh4-0 relative"
+              class="relative"
               data-testid="tooltip-tooltip-user-type"
               id="tooltip-user-type"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -249,12 +252,12 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
                   d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                 />
               </svg>
-            </div>
+            </button>
           </div>
         </div>
       </legend>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+        class="prc-Stack-Stack-WJVsK"
         data-align="stretch"
         data-direction="horizontal"
         data-gap="normal"
@@ -263,7 +266,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
         data-wrap="nowrap"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+          class="text-sm prc-Stack-Stack-WJVsK"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -272,7 +275,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
           data-wrap="nowrap"
         >
           <input
-            class="size-4 rounded-sm cursor-pointer"
+            class="size-2 rounded-sm cursor-pointer"
             data-testid="checkbox-User"
             id="User"
             type="checkbox"
@@ -284,13 +287,13 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
             User
           </label>
           <span
-            class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
           >
             1
           </span>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+          class="text-sm prc-Stack-Stack-WJVsK"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -299,7 +302,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
           data-wrap="nowrap"
         >
           <input
-            class="size-4 rounded-sm cursor-pointer"
+            class="size-2 rounded-sm cursor-pointer"
             data-testid="checkbox-Bot"
             id="Bot"
             type="checkbox"
@@ -310,11 +313,12 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
           >
             Bot
           </label>
-          <div
+          <button
             aria-label="tooltip-Bot"
-            class="Box-sc-g0xbh4-0 relative"
+            class="relative"
             data-testid="tooltip-tooltip-Bot"
             id="tooltip-Bot"
+            type="button"
           >
             <svg
               aria-hidden="true"
@@ -332,15 +336,15 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
                 d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
               />
             </svg>
-          </div>
+          </button>
           <span
-            class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
           >
             0
           </span>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+          class="text-sm prc-Stack-Stack-WJVsK"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -349,7 +353,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
           data-wrap="nowrap"
         >
           <input
-            class="size-4 rounded-sm cursor-pointer"
+            class="size-2 rounded-sm cursor-pointer"
             data-testid="checkbox-Organization"
             id="Organization"
             type="checkbox"
@@ -361,7 +365,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
             Organization
           </label>
           <span
-            class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
           >
             0
           </span>

@@ -1,7 +1,5 @@
 import type { FC, ReactNode } from 'react';
 
-import { Box } from '@primer/react';
-
 import { cn } from '../../utils/cn';
 
 interface IContents {
@@ -20,14 +18,14 @@ export const Contents: FC<IContents> = ({
   paddingBottom = false,
 }) => {
   return (
-    <Box
+    <div
       className={cn(
         'grow overflow-x-hidden overflow-y-auto',
-        paddingHorizontal && 'px-8',
-        paddingBottom && 'pb-4',
+        paddingHorizontal && 'px-5',
+        paddingBottom && 'pb-2',
       )}
     >
       {children}
-    </Box>
+    </div>
   );
 };

@@ -6,14 +6,14 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
   "baseElement": <body>
     <div>
       <div
-        class="Box-sc-g0xbh4-0 flex flex-col h-screen"
+        class="flex flex-col h-screen"
         data-testid="Login With Personal Access Token"
       >
         <div
-          class="Box-sc-g0xbh4-0 pl-4 pr-6 pt-3 pb-1"
+          class="pl-4 pr-6 pt-3 pb-1"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+            class="prc-Stack-Stack-WJVsK"
             data-align="stretch"
             data-direction="horizontal"
             data-justify="space-between"
@@ -23,12 +23,13 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
             <button
               aria-describedby="«r0»-loading-announcement"
               aria-labelledby="Go Back"
-              class="types__StyledButton-sc-ws60qy-0 yiNNF"
+              class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
+              data-size="medium"
               data-testid="header-nav-back"
-              sx="[object Object]"
+              data-variant="invisible"
               type="button"
             >
               <svg
@@ -50,10 +51,10 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
             </button>
             <legend>
               <div
-                class="Box-sc-g0xbh4-0 mb-2"
+                class="mb-2"
               >
                 <div
-                  class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+                  class="prc-Stack-Stack-WJVsK"
                   data-align="center"
                   data-direction="horizontal"
                   data-gap="condensed"
@@ -79,7 +80,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
                     />
                   </svg>
                   <h2
-                    class="Heading__StyledHeading-sc-1c1dgg0-0 hwOZFo"
+                    class="Box-sc-g0xbh4-0 gKIXLF prc-Heading-Heading-6CmGO"
                     sx="[object Object]"
                   >
                     Login with Personal Access Token
@@ -90,10 +91,10 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
           </div>
         </div>
         <div
-          class="Box-sc-g0xbh4-0 grow overflow-x-hidden overflow-y-auto px-8"
+          class="grow overflow-x-hidden overflow-y-auto px-5"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+            class="prc-Stack-Stack-WJVsK"
             data-align="stretch"
             data-direction="vertical"
             data-gap="normal"
@@ -102,27 +103,19 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
             data-wrap="nowrap"
           >
             <div
-              alignitems="flex-start"
-              class="Box-sc-g0xbh4-0 fFjJPO"
-              display="flex"
-              flexdirection="column"
-              sx="[object Object]"
+              class="prc-FormControl-ControlVerticalLayout-wOp8f"
+              data-has-label=""
             >
               <label
-                class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 gaUAmX"
+                class="prc-components-Label-bE-kK"
                 for="«r1»"
-                sx="[object Object]"
               >
                 <span
-                  class="Box-sc-g0xbh4-0 XnFUh"
-                  display="flex"
+                  class="prc-components-RequiredText-ztJvt"
                 >
-                  <div
-                    class="Box-sc-g0xbh4-0 fxjYOn"
-                    mr="1"
-                  >
+                  <span>
                     Hostname
-                  </div>
+                  </span>
                   <span>
                     *
                   </span>
@@ -130,14 +123,15 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
               </label>
               <span
                 aria-busy="false"
-                class="TextInputWrapper__TextInputBaseWrapper-sc-1mqhpbi-0 TextInputWrapper-sc-1mqhpbi-1 dbydEv hmkUCB TextInput-wrapper"
+                class="Box-sc-g0xbh4-0 fUrNRR TextInput-wrapper prc-components-TextInputWrapper-i1ofR prc-components-TextInputBaseWrapper-ueK9q"
+                data-block="true"
                 sx="[object Object]"
               >
                 <input
                   aria-describedby="«r1»-caption"
                   aria-invalid="false"
                   aria-required="true"
-                  class="UnstyledTextInput-sc-14ypya-0 gOHhHV"
+                  class="prc-components-Input-Ic-y8"
                   data-component="input"
                   data-testid="login-hostname"
                   id="«r1»"
@@ -148,21 +142,18 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
                 />
               </span>
               <span
-                class="Text-sc-17v1xeu-0 hkVEXV"
-                color="fg.muted"
-                display="block"
-                font-size="0"
+                class="prc-FormControl-Caption-tfuKU prc-Text-Text-0ima0"
                 id="«r1»-caption"
               >
                 <i
-                  class="Text-sc-17v1xeu-0 ezOLpc"
+                  class="prc-Text-Text-0ima0"
                 >
                   Change only if you are using GitHub Enterprise Server
                 </i>
               </span>
             </div>
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+              class="prc-Stack-Stack-WJVsK"
               data-align="stretch"
               data-direction="vertical"
               data-gap="condensed"
@@ -171,7 +162,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
               data-wrap="nowrap"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+                class="prc-Stack-Stack-WJVsK"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -180,23 +171,22 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
                 data-wrap="nowrap"
               >
                 <button
-                  aria-describedby="«r2»-loading-announcement"
-                  class="types__StyledButton-sc-ws60qy-0 fnSTVi"
+                  aria-describedby="«r5»-loading-announcement"
+                  class="prc-Button-ButtonBase-c50BI"
                   data-loading="false"
                   data-size="small"
                   data-testid="login-create-token"
-                  sx="[object Object]"
+                  data-variant="default"
                   type="button"
                 >
                   <span
-                    class="Box-sc-g0xbh4-0 iEfcEl"
+                    class="prc-Button-ButtonContent-HKbr-"
+                    data-align="center"
                     data-component="buttonContent"
-                    sx="[object Object]"
                   >
                     <span
-                      class="Box-sc-g0xbh4-0 brHwkL"
+                      class="prc-Button-Visual-2epfX prc-Button-VisualWrap-Db-eB"
                       data-component="leadingVisual"
-                      sx="[object Object]"
                     >
                       <svg
                         aria-hidden="true"
@@ -216,6 +206,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
                       </svg>
                     </span>
                     <span
+                      class="prc-Button-Label-pTQ3x"
                       data-component="text"
                     >
                       Generate a PAT
@@ -223,54 +214,54 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
                   </span>
                 </button>
                 <span
-                  class="Text-sc-17v1xeu-0 ezOLpc text-xs"
+                  class="text-xs prc-Text-Text-0ima0"
                 >
                   on GitHub to paste the token below.
                 </span>
               </div>
               <i
-                class="Text-sc-17v1xeu-0 ezOLpc text-xs"
+                class="text-xs prc-Text-Text-0ima0"
               >
                 The
                  
-                <span
-                  aria-label="read:user, notifications, repo"
-                  class="Tooltip__TooltipBase-sc-17tf59c-0 ihgdlF tooltipped-se"
-                  id="«r3»"
-                  role="tooltip"
+                <button
+                  aria-describedby="«r6»"
+                  type="button"
                 >
                   <u
-                    class="Text-sc-17v1xeu-0 ezOLpc"
+                    class="prc-Text-Text-0ima0"
                   >
                     required scopes
                   </u>
+                </button>
+                <span
+                  aria-hidden="true"
+                  class="prc-TooltipV2-Tooltip-cYMVY"
+                  data-direction="se"
+                  id="«r6»"
+                  popover="auto"
+                  role="tooltip"
+                >
+                  read:user, notifications, repo
                 </span>
                  
                 will be automatically selected for you.
               </i>
             </div>
             <div
-              alignitems="flex-start"
-              class="Box-sc-g0xbh4-0 fFjJPO"
-              display="flex"
-              flexdirection="column"
-              sx="[object Object]"
+              class="prc-FormControl-ControlVerticalLayout-wOp8f"
+              data-has-label=""
             >
               <label
-                class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 gaUAmX"
-                for="«r4»"
-                sx="[object Object]"
+                class="prc-components-Label-bE-kK"
+                for="«r7»"
               >
                 <span
-                  class="Box-sc-g0xbh4-0 XnFUh"
-                  display="flex"
+                  class="prc-components-RequiredText-ztJvt"
                 >
-                  <div
-                    class="Box-sc-g0xbh4-0 fxjYOn"
-                    mr="1"
-                  >
+                  <span>
                     Token
-                  </div>
+                  </span>
                   <span>
                     *
                   </span>
@@ -278,36 +269,35 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
               </label>
               <span
                 aria-busy="false"
-                class="TextInputWrapper__TextInputBaseWrapper-sc-1mqhpbi-0 TextInputWrapper-sc-1mqhpbi-1 bpTEIL ilTUrC TextInput-wrapper"
+                class="Box-sc-g0xbh4-0 fUrNRR TextInput-wrapper prc-components-TextInputWrapper-i1ofR prc-components-TextInputBaseWrapper-ueK9q"
+                data-block="true"
+                data-trailing-action="true"
                 sx="[object Object]"
               >
                 <input
-                  aria-describedby=""
                   aria-invalid="false"
                   aria-required="true"
-                  class="UnstyledTextInput-sc-14ypya-0 gOHhHV"
+                  class="prc-components-Input-Ic-y8"
                   data-component="input"
                   data-testid="login-token"
-                  id="«r4»"
+                  id="«r7»"
                   name="token"
                   placeholder="Your generated token (40 characters)"
                   type="password"
                   value=""
                 />
                 <span
-                  class="Box-sc-g0xbh4-0 kwNTMT TextInput-action"
-                  lineheight="0"
-                  marginleft="1"
-                  marginright="1"
+                  class="TextInput-action prc-components-TextInputAction-YT3YI"
                 >
                   <button
-                    aria-describedby="«r6»-loading-announcement"
-                    aria-labelledby="«r5»"
-                    class="types__StyledButton-sc-ws60qy-0 gkqJdx"
+                    aria-describedby="«rc»-loading-announcement"
+                    aria-labelledby="«rb»"
+                    class="Box-sc-g0xbh4-0 prc-Button-ButtonBase-c50BI prc-components-Invisible-uIWry prc-Button-IconButton-szpyj"
                     data-component="IconButton"
                     data-loading="false"
                     data-no-visuals="true"
                     data-size="small"
+                    data-variant="invisible"
                     sx="[object Object]"
                     type="button"
                   >
@@ -330,9 +320,9 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
                   </button>
                   <span
                     aria-hidden="true"
-                    class="Tooltip__StyledTooltip-sc-e45c7z-0 cCRMCi"
+                    class="prc-TooltipV2-Tooltip-cYMVY"
                     data-direction="s"
-                    id="«r5»"
+                    id="«rb»"
                     popover="auto"
                   >
                     Show token
@@ -343,88 +333,90 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
           </div>
         </div>
         <div
-          class="Box-sc-g0xbh4-0 left-sidebar bg-gitify-footer"
+          class="left-sidebar bg-gitify-footer"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+            class="prc-Stack-Stack-WJVsK"
             data-align="stretch"
             data-direction="horizontal"
             data-justify="space-between"
             data-padding="condensed"
             data-wrap="nowrap"
           >
+            <button
+              aria-describedby="«re»-loading-announcement «rd»"
+              class="prc-Button-ButtonBase-c50BI"
+              data-loading="false"
+              data-size="small"
+              data-testid="login-docs"
+              data-variant="default"
+              type="button"
+            >
+              <span
+                class="prc-Button-ButtonContent-HKbr-"
+                data-align="center"
+                data-component="buttonContent"
+              >
+                <span
+                  class="prc-Button-Visual-2epfX prc-Button-VisualWrap-Db-eB"
+                  data-component="leadingVisual"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="octicon octicon-book"
+                    display="inline-block"
+                    fill="currentColor"
+                    focusable="false"
+                    height="16"
+                    overflow="visible"
+                    style="vertical-align: text-bottom;"
+                    viewBox="0 0 16 16"
+                    width="16"
+                  >
+                    <path
+                      d="M0 1.75A.75.75 0 0 1 .75 1h4.253c1.227 0 2.317.59 3 1.501A3.743 3.743 0 0 1 11.006 1h4.245a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-.75.75h-4.507a2.25 2.25 0 0 0-1.591.659l-.622.621a.75.75 0 0 1-1.06 0l-.622-.621A2.25 2.25 0 0 0 5.258 13H.75a.75.75 0 0 1-.75-.75Zm7.251 10.324.004-5.073-.002-2.253A2.25 2.25 0 0 0 5.003 2.5H1.5v9h3.757a3.75 3.75 0 0 1 1.994.574ZM8.755 4.75l-.004 7.322a3.752 3.752 0 0 1 1.992-.572H14.5v-9h-3.495a2.25 2.25 0 0 0-2.25 2.25Z"
+                    />
+                  </svg>
+                </span>
+                <span
+                  class="prc-Button-Label-pTQ3x"
+                  data-component="text"
+                >
+                  Docs
+                </span>
+              </span>
+            </button>
             <span
-              aria-label="GitHub documentation"
-              class="Tooltip__TooltipBase-sc-17tf59c-0 ihgdlF tooltipped-ne"
-              id="«r7»"
+              aria-hidden="true"
+              class="prc-TooltipV2-Tooltip-cYMVY"
+              data-direction="ne"
+              id="«rd»"
+              popover="auto"
               role="tooltip"
             >
-              <button
-                aria-describedby="«r8»-loading-announcement"
-                class="types__StyledButton-sc-ws60qy-0 fnSTVi"
-                data-loading="false"
-                data-size="small"
-                data-testid="login-docs"
-                sx="[object Object]"
-                type="button"
-              >
-                <span
-                  class="Box-sc-g0xbh4-0 iEfcEl"
-                  data-component="buttonContent"
-                  sx="[object Object]"
-                >
-                  <span
-                    class="Box-sc-g0xbh4-0 brHwkL"
-                    data-component="leadingVisual"
-                    sx="[object Object]"
-                  >
-                    <svg
-                      aria-hidden="true"
-                      class="octicon octicon-book"
-                      display="inline-block"
-                      fill="currentColor"
-                      focusable="false"
-                      height="16"
-                      overflow="visible"
-                      style="vertical-align: text-bottom;"
-                      viewBox="0 0 16 16"
-                      width="16"
-                    >
-                      <path
-                        d="M0 1.75A.75.75 0 0 1 .75 1h4.253c1.227 0 2.317.59 3 1.501A3.743 3.743 0 0 1 11.006 1h4.245a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-.75.75h-4.507a2.25 2.25 0 0 0-1.591.659l-.622.621a.75.75 0 0 1-1.06 0l-.622-.621A2.25 2.25 0 0 0 5.258 13H.75a.75.75 0 0 1-.75-.75Zm7.251 10.324.004-5.073-.002-2.253A2.25 2.25 0 0 0 5.003 2.5H1.5v9h3.757a3.75 3.75 0 0 1 1.994.574ZM8.755 4.75l-.004 7.322a3.752 3.752 0 0 1 1.992-.572H14.5v-9h-3.495a2.25 2.25 0 0 0-2.25 2.25Z"
-                      />
-                    </svg>
-                  </span>
-                  <span
-                    data-component="text"
-                  >
-                    Docs
-                  </span>
-                </span>
-              </button>
+              GitHub documentation
             </span>
             <div
-              class="Box-sc-g0xbh4-0 gTaNMT"
+              class="Box-sc-g0xbh4-0"
               data-loading-wrapper="true"
-              sx="[object Object]"
             >
               <button
-                aria-describedby="«r9»-loading-announcement"
-                class="types__StyledButton-sc-ws60qy-0 fcXnbU"
+                aria-describedby="«rf»-loading-announcement"
+                class="prc-Button-ButtonBase-c50BI"
                 data-loading="false"
+                data-size="medium"
                 data-testid="login-submit"
-                sx="[object Object]"
+                data-variant="primary"
                 type="button"
               >
                 <span
-                  class="Box-sc-g0xbh4-0 iEfcEl"
+                  class="prc-Button-ButtonContent-HKbr-"
+                  data-align="center"
                   data-component="buttonContent"
-                  sx="[object Object]"
                 >
                   <span
-                    class="Box-sc-g0xbh4-0 brHwkL"
+                    class="prc-Button-Visual-2epfX prc-Button-VisualWrap-Db-eB"
                     data-component="leadingVisual"
-                    sx="[object Object]"
                   >
                     <svg
                       aria-hidden="true"
@@ -444,6 +436,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
                     </svg>
                   </span>
                   <span
+                    class="prc-Button-Label-pTQ3x"
                     data-component="text"
                   >
                     Login
@@ -458,14 +451,14 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
   </body>,
   "container": <div>
     <div
-      class="Box-sc-g0xbh4-0 flex flex-col h-screen"
+      class="flex flex-col h-screen"
       data-testid="Login With Personal Access Token"
     >
       <div
-        class="Box-sc-g0xbh4-0 pl-4 pr-6 pt-3 pb-1"
+        class="pl-4 pr-6 pt-3 pb-1"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+          class="prc-Stack-Stack-WJVsK"
           data-align="stretch"
           data-direction="horizontal"
           data-justify="space-between"
@@ -475,12 +468,13 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
           <button
             aria-describedby="«r0»-loading-announcement"
             aria-labelledby="Go Back"
-            class="types__StyledButton-sc-ws60qy-0 yiNNF"
+            class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
+            data-size="medium"
             data-testid="header-nav-back"
-            sx="[object Object]"
+            data-variant="invisible"
             type="button"
           >
             <svg
@@ -502,10 +496,10 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
           </button>
           <legend>
             <div
-              class="Box-sc-g0xbh4-0 mb-2"
+              class="mb-2"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+                class="prc-Stack-Stack-WJVsK"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -531,7 +525,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
                   />
                 </svg>
                 <h2
-                  class="Heading__StyledHeading-sc-1c1dgg0-0 hwOZFo"
+                  class="Box-sc-g0xbh4-0 gKIXLF prc-Heading-Heading-6CmGO"
                   sx="[object Object]"
                 >
                   Login with Personal Access Token
@@ -542,10 +536,10 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
         </div>
       </div>
       <div
-        class="Box-sc-g0xbh4-0 grow overflow-x-hidden overflow-y-auto px-8"
+        class="grow overflow-x-hidden overflow-y-auto px-5"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+          class="prc-Stack-Stack-WJVsK"
           data-align="stretch"
           data-direction="vertical"
           data-gap="normal"
@@ -554,27 +548,19 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
           data-wrap="nowrap"
         >
           <div
-            alignitems="flex-start"
-            class="Box-sc-g0xbh4-0 fFjJPO"
-            display="flex"
-            flexdirection="column"
-            sx="[object Object]"
+            class="prc-FormControl-ControlVerticalLayout-wOp8f"
+            data-has-label=""
           >
             <label
-              class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 gaUAmX"
+              class="prc-components-Label-bE-kK"
               for="«r1»"
-              sx="[object Object]"
             >
               <span
-                class="Box-sc-g0xbh4-0 XnFUh"
-                display="flex"
+                class="prc-components-RequiredText-ztJvt"
               >
-                <div
-                  class="Box-sc-g0xbh4-0 fxjYOn"
-                  mr="1"
-                >
+                <span>
                   Hostname
-                </div>
+                </span>
                 <span>
                   *
                 </span>
@@ -582,14 +568,15 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
             </label>
             <span
               aria-busy="false"
-              class="TextInputWrapper__TextInputBaseWrapper-sc-1mqhpbi-0 TextInputWrapper-sc-1mqhpbi-1 dbydEv hmkUCB TextInput-wrapper"
+              class="Box-sc-g0xbh4-0 fUrNRR TextInput-wrapper prc-components-TextInputWrapper-i1ofR prc-components-TextInputBaseWrapper-ueK9q"
+              data-block="true"
               sx="[object Object]"
             >
               <input
                 aria-describedby="«r1»-caption"
                 aria-invalid="false"
                 aria-required="true"
-                class="UnstyledTextInput-sc-14ypya-0 gOHhHV"
+                class="prc-components-Input-Ic-y8"
                 data-component="input"
                 data-testid="login-hostname"
                 id="«r1»"
@@ -600,21 +587,18 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
               />
             </span>
             <span
-              class="Text-sc-17v1xeu-0 hkVEXV"
-              color="fg.muted"
-              display="block"
-              font-size="0"
+              class="prc-FormControl-Caption-tfuKU prc-Text-Text-0ima0"
               id="«r1»-caption"
             >
               <i
-                class="Text-sc-17v1xeu-0 ezOLpc"
+                class="prc-Text-Text-0ima0"
               >
                 Change only if you are using GitHub Enterprise Server
               </i>
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+            class="prc-Stack-Stack-WJVsK"
             data-align="stretch"
             data-direction="vertical"
             data-gap="condensed"
@@ -623,7 +607,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
             data-wrap="nowrap"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+              class="prc-Stack-Stack-WJVsK"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -632,23 +616,22 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
               data-wrap="nowrap"
             >
               <button
-                aria-describedby="«r2»-loading-announcement"
-                class="types__StyledButton-sc-ws60qy-0 fnSTVi"
+                aria-describedby="«r5»-loading-announcement"
+                class="prc-Button-ButtonBase-c50BI"
                 data-loading="false"
                 data-size="small"
                 data-testid="login-create-token"
-                sx="[object Object]"
+                data-variant="default"
                 type="button"
               >
                 <span
-                  class="Box-sc-g0xbh4-0 iEfcEl"
+                  class="prc-Button-ButtonContent-HKbr-"
+                  data-align="center"
                   data-component="buttonContent"
-                  sx="[object Object]"
                 >
                   <span
-                    class="Box-sc-g0xbh4-0 brHwkL"
+                    class="prc-Button-Visual-2epfX prc-Button-VisualWrap-Db-eB"
                     data-component="leadingVisual"
-                    sx="[object Object]"
                   >
                     <svg
                       aria-hidden="true"
@@ -668,6 +651,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
                     </svg>
                   </span>
                   <span
+                    class="prc-Button-Label-pTQ3x"
                     data-component="text"
                   >
                     Generate a PAT
@@ -675,54 +659,54 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
                 </span>
               </button>
               <span
-                class="Text-sc-17v1xeu-0 ezOLpc text-xs"
+                class="text-xs prc-Text-Text-0ima0"
               >
                 on GitHub to paste the token below.
               </span>
             </div>
             <i
-              class="Text-sc-17v1xeu-0 ezOLpc text-xs"
+              class="text-xs prc-Text-Text-0ima0"
             >
               The
                
-              <span
-                aria-label="read:user, notifications, repo"
-                class="Tooltip__TooltipBase-sc-17tf59c-0 ihgdlF tooltipped-se"
-                id="«r3»"
-                role="tooltip"
+              <button
+                aria-describedby="«r6»"
+                type="button"
               >
                 <u
-                  class="Text-sc-17v1xeu-0 ezOLpc"
+                  class="prc-Text-Text-0ima0"
                 >
                   required scopes
                 </u>
+              </button>
+              <span
+                aria-hidden="true"
+                class="prc-TooltipV2-Tooltip-cYMVY"
+                data-direction="se"
+                id="«r6»"
+                popover="auto"
+                role="tooltip"
+              >
+                read:user, notifications, repo
               </span>
                
               will be automatically selected for you.
             </i>
           </div>
           <div
-            alignitems="flex-start"
-            class="Box-sc-g0xbh4-0 fFjJPO"
-            display="flex"
-            flexdirection="column"
-            sx="[object Object]"
+            class="prc-FormControl-ControlVerticalLayout-wOp8f"
+            data-has-label=""
           >
             <label
-              class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 gaUAmX"
-              for="«r4»"
-              sx="[object Object]"
+              class="prc-components-Label-bE-kK"
+              for="«r7»"
             >
               <span
-                class="Box-sc-g0xbh4-0 XnFUh"
-                display="flex"
+                class="prc-components-RequiredText-ztJvt"
               >
-                <div
-                  class="Box-sc-g0xbh4-0 fxjYOn"
-                  mr="1"
-                >
+                <span>
                   Token
-                </div>
+                </span>
                 <span>
                   *
                 </span>
@@ -730,36 +714,35 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
             </label>
             <span
               aria-busy="false"
-              class="TextInputWrapper__TextInputBaseWrapper-sc-1mqhpbi-0 TextInputWrapper-sc-1mqhpbi-1 bpTEIL ilTUrC TextInput-wrapper"
+              class="Box-sc-g0xbh4-0 fUrNRR TextInput-wrapper prc-components-TextInputWrapper-i1ofR prc-components-TextInputBaseWrapper-ueK9q"
+              data-block="true"
+              data-trailing-action="true"
               sx="[object Object]"
             >
               <input
-                aria-describedby=""
                 aria-invalid="false"
                 aria-required="true"
-                class="UnstyledTextInput-sc-14ypya-0 gOHhHV"
+                class="prc-components-Input-Ic-y8"
                 data-component="input"
                 data-testid="login-token"
-                id="«r4»"
+                id="«r7»"
                 name="token"
                 placeholder="Your generated token (40 characters)"
                 type="password"
                 value=""
               />
               <span
-                class="Box-sc-g0xbh4-0 kwNTMT TextInput-action"
-                lineheight="0"
-                marginleft="1"
-                marginright="1"
+                class="TextInput-action prc-components-TextInputAction-YT3YI"
               >
                 <button
-                  aria-describedby="«r6»-loading-announcement"
-                  aria-labelledby="«r5»"
-                  class="types__StyledButton-sc-ws60qy-0 gkqJdx"
+                  aria-describedby="«rc»-loading-announcement"
+                  aria-labelledby="«rb»"
+                  class="Box-sc-g0xbh4-0 prc-Button-ButtonBase-c50BI prc-components-Invisible-uIWry prc-Button-IconButton-szpyj"
                   data-component="IconButton"
                   data-loading="false"
                   data-no-visuals="true"
                   data-size="small"
+                  data-variant="invisible"
                   sx="[object Object]"
                   type="button"
                 >
@@ -782,9 +765,9 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
                 </button>
                 <span
                   aria-hidden="true"
-                  class="Tooltip__StyledTooltip-sc-e45c7z-0 cCRMCi"
+                  class="prc-TooltipV2-Tooltip-cYMVY"
                   data-direction="s"
-                  id="«r5»"
+                  id="«rb»"
                   popover="auto"
                 >
                   Show token
@@ -795,88 +778,90 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
         </div>
       </div>
       <div
-        class="Box-sc-g0xbh4-0 left-sidebar bg-gitify-footer"
+        class="left-sidebar bg-gitify-footer"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+          class="prc-Stack-Stack-WJVsK"
           data-align="stretch"
           data-direction="horizontal"
           data-justify="space-between"
           data-padding="condensed"
           data-wrap="nowrap"
         >
+          <button
+            aria-describedby="«re»-loading-announcement «rd»"
+            class="prc-Button-ButtonBase-c50BI"
+            data-loading="false"
+            data-size="small"
+            data-testid="login-docs"
+            data-variant="default"
+            type="button"
+          >
+            <span
+              class="prc-Button-ButtonContent-HKbr-"
+              data-align="center"
+              data-component="buttonContent"
+            >
+              <span
+                class="prc-Button-Visual-2epfX prc-Button-VisualWrap-Db-eB"
+                data-component="leadingVisual"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="octicon octicon-book"
+                  display="inline-block"
+                  fill="currentColor"
+                  focusable="false"
+                  height="16"
+                  overflow="visible"
+                  style="vertical-align: text-bottom;"
+                  viewBox="0 0 16 16"
+                  width="16"
+                >
+                  <path
+                    d="M0 1.75A.75.75 0 0 1 .75 1h4.253c1.227 0 2.317.59 3 1.501A3.743 3.743 0 0 1 11.006 1h4.245a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-.75.75h-4.507a2.25 2.25 0 0 0-1.591.659l-.622.621a.75.75 0 0 1-1.06 0l-.622-.621A2.25 2.25 0 0 0 5.258 13H.75a.75.75 0 0 1-.75-.75Zm7.251 10.324.004-5.073-.002-2.253A2.25 2.25 0 0 0 5.003 2.5H1.5v9h3.757a3.75 3.75 0 0 1 1.994.574ZM8.755 4.75l-.004 7.322a3.752 3.752 0 0 1 1.992-.572H14.5v-9h-3.495a2.25 2.25 0 0 0-2.25 2.25Z"
+                  />
+                </svg>
+              </span>
+              <span
+                class="prc-Button-Label-pTQ3x"
+                data-component="text"
+              >
+                Docs
+              </span>
+            </span>
+          </button>
           <span
-            aria-label="GitHub documentation"
-            class="Tooltip__TooltipBase-sc-17tf59c-0 ihgdlF tooltipped-ne"
-            id="«r7»"
+            aria-hidden="true"
+            class="prc-TooltipV2-Tooltip-cYMVY"
+            data-direction="ne"
+            id="«rd»"
+            popover="auto"
             role="tooltip"
           >
-            <button
-              aria-describedby="«r8»-loading-announcement"
-              class="types__StyledButton-sc-ws60qy-0 fnSTVi"
-              data-loading="false"
-              data-size="small"
-              data-testid="login-docs"
-              sx="[object Object]"
-              type="button"
-            >
-              <span
-                class="Box-sc-g0xbh4-0 iEfcEl"
-                data-component="buttonContent"
-                sx="[object Object]"
-              >
-                <span
-                  class="Box-sc-g0xbh4-0 brHwkL"
-                  data-component="leadingVisual"
-                  sx="[object Object]"
-                >
-                  <svg
-                    aria-hidden="true"
-                    class="octicon octicon-book"
-                    display="inline-block"
-                    fill="currentColor"
-                    focusable="false"
-                    height="16"
-                    overflow="visible"
-                    style="vertical-align: text-bottom;"
-                    viewBox="0 0 16 16"
-                    width="16"
-                  >
-                    <path
-                      d="M0 1.75A.75.75 0 0 1 .75 1h4.253c1.227 0 2.317.59 3 1.501A3.743 3.743 0 0 1 11.006 1h4.245a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-.75.75h-4.507a2.25 2.25 0 0 0-1.591.659l-.622.621a.75.75 0 0 1-1.06 0l-.622-.621A2.25 2.25 0 0 0 5.258 13H.75a.75.75 0 0 1-.75-.75Zm7.251 10.324.004-5.073-.002-2.253A2.25 2.25 0 0 0 5.003 2.5H1.5v9h3.757a3.75 3.75 0 0 1 1.994.574ZM8.755 4.75l-.004 7.322a3.752 3.752 0 0 1 1.992-.572H14.5v-9h-3.495a2.25 2.25 0 0 0-2.25 2.25Z"
-                    />
-                  </svg>
-                </span>
-                <span
-                  data-component="text"
-                >
-                  Docs
-                </span>
-              </span>
-            </button>
+            GitHub documentation
           </span>
           <div
-            class="Box-sc-g0xbh4-0 gTaNMT"
+            class="Box-sc-g0xbh4-0"
             data-loading-wrapper="true"
-            sx="[object Object]"
           >
             <button
-              aria-describedby="«r9»-loading-announcement"
-              class="types__StyledButton-sc-ws60qy-0 fcXnbU"
+              aria-describedby="«rf»-loading-announcement"
+              class="prc-Button-ButtonBase-c50BI"
               data-loading="false"
+              data-size="medium"
               data-testid="login-submit"
-              sx="[object Object]"
+              data-variant="primary"
               type="button"
             >
               <span
-                class="Box-sc-g0xbh4-0 iEfcEl"
+                class="prc-Button-ButtonContent-HKbr-"
+                data-align="center"
                 data-component="buttonContent"
-                sx="[object Object]"
               >
                 <span
-                  class="Box-sc-g0xbh4-0 brHwkL"
+                  class="prc-Button-Visual-2epfX prc-Button-VisualWrap-Db-eB"
                   data-component="leadingVisual"
-                  sx="[object Object]"
                 >
                   <svg
                     aria-hidden="true"
@@ -896,6 +881,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
                   </svg>
                 </span>
                 <span
+                  class="prc-Button-Label-pTQ3x"
                   data-component="text"
                 >
                   Login

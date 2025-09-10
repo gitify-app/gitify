@@ -6,10 +6,10 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
   "baseElement": <body>
     <div>
       <div
-        class="Box-sc-g0xbh4-0 py-0.5"
+        class="py-0.5"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+          class="prc-Stack-Stack-WJVsK"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -17,13 +17,14 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
           data-padding="none"
           data-wrap="nowrap"
         >
-          <div
-            class="Box-sc-g0xbh4-0 text-xs font-medium"
+          <button
+            class="text-xs font-medium"
             data-testid="view-repository"
             title="Open repository"
+            type="button"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+              class="prc-Stack-Stack-WJVsK"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -34,25 +35,25 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
             >
               <img
                 alt="gitify-app/notifications-test"
-                class="Avatar__StyledAvatar-sc-2lv0r8-0 fNmquh"
+                class="prc-Avatar-Avatar-ZRS-m"
                 data-component="Avatar"
                 height="14"
-                size="14"
                 src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-                sx="[object Object]"
+                style="--avatarSize-regular: 14px;"
                 width="14"
               />
               <div
-                class="Truncate__StyledTruncate-sc-23o1d2-0 MmGIa"
-                maxwidth="280"
+                class="prc-Truncate-Truncate-A9Wn6"
+                data-inline="true"
+                style="--truncate-max-width: 280px;"
                 title="gitify-app/notifications-test"
               >
                 gitify-app/notifications-test
               </div>
             </div>
-          </div>
+          </button>
           <div
-            class="Box-sc-g0xbh4-0 text-xxs opacity-50"
+            class="text-xxs opacity-50"
           />
         </div>
       </div>
@@ -60,10 +61,10 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
   </body>,
   "container": <div>
     <div
-      class="Box-sc-g0xbh4-0 py-0.5"
+      class="py-0.5"
     >
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+        class="prc-Stack-Stack-WJVsK"
         data-align="center"
         data-direction="horizontal"
         data-gap="condensed"
@@ -71,13 +72,14 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
         data-padding="none"
         data-wrap="nowrap"
       >
-        <div
-          class="Box-sc-g0xbh4-0 text-xs font-medium"
+        <button
+          class="text-xs font-medium"
           data-testid="view-repository"
           title="Open repository"
+          type="button"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+            class="prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -88,25 +90,25 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
           >
             <img
               alt="gitify-app/notifications-test"
-              class="Avatar__StyledAvatar-sc-2lv0r8-0 fNmquh"
+              class="prc-Avatar-Avatar-ZRS-m"
               data-component="Avatar"
               height="14"
-              size="14"
               src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-              sx="[object Object]"
+              style="--avatarSize-regular: 14px;"
               width="14"
             />
             <div
-              class="Truncate__StyledTruncate-sc-23o1d2-0 MmGIa"
-              maxwidth="280"
+              class="prc-Truncate-Truncate-A9Wn6"
+              data-inline="true"
+              style="--truncate-max-width: 280px;"
               title="gitify-app/notifications-test"
             >
               gitify-app/notifications-test
             </div>
           </div>
-        </div>
+        </button>
         <div
-          class="Box-sc-g0xbh4-0 text-xxs opacity-50"
+          class="text-xxs opacity-50"
         />
       </div>
     </div>
@@ -171,10 +173,10 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
   "baseElement": <body>
     <div>
       <div
-        class="Box-sc-g0xbh4-0 py-0.5"
+        class="py-0.5"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+          class="prc-Stack-Stack-WJVsK"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -182,13 +184,14 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
           data-padding="none"
           data-wrap="nowrap"
         >
-          <div
-            class="Box-sc-g0xbh4-0 text-xs font-medium"
+          <button
+            class="text-xs font-medium"
             data-testid="view-repository"
             title="Open repository"
+            type="button"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+              class="prc-Stack-Stack-WJVsK"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -199,25 +202,25 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
             >
               <img
                 alt="gitify-app/notifications-test"
-                class="Avatar__StyledAvatar-sc-2lv0r8-0 fNmquh"
+                class="prc-Avatar-Avatar-ZRS-m"
                 data-component="Avatar"
                 height="14"
-                size="14"
                 src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-                sx="[object Object]"
+                style="--avatarSize-regular: 14px;"
                 width="14"
               />
               <div
-                class="Truncate__StyledTruncate-sc-23o1d2-0 MmGIa"
-                maxwidth="280"
+                class="prc-Truncate-Truncate-A9Wn6"
+                data-inline="true"
+                style="--truncate-max-width: 280px;"
                 title="gitify-app/notifications-test"
               >
                 gitify-app/notifications-test
               </div>
             </div>
-          </div>
+          </button>
           <div
-            class="Box-sc-g0xbh4-0 text-xxs opacity-50 hidden"
+            class="text-xxs opacity-50 hidden"
           />
         </div>
       </div>
@@ -225,10 +228,10 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
   </body>,
   "container": <div>
     <div
-      class="Box-sc-g0xbh4-0 py-0.5"
+      class="py-0.5"
     >
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+        class="prc-Stack-Stack-WJVsK"
         data-align="center"
         data-direction="horizontal"
         data-gap="condensed"
@@ -236,13 +239,14 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
         data-padding="none"
         data-wrap="nowrap"
       >
-        <div
-          class="Box-sc-g0xbh4-0 text-xs font-medium"
+        <button
+          class="text-xs font-medium"
           data-testid="view-repository"
           title="Open repository"
+          type="button"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+            class="prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -253,25 +257,25 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
           >
             <img
               alt="gitify-app/notifications-test"
-              class="Avatar__StyledAvatar-sc-2lv0r8-0 fNmquh"
+              class="prc-Avatar-Avatar-ZRS-m"
               data-component="Avatar"
               height="14"
-              size="14"
               src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-              sx="[object Object]"
+              style="--avatarSize-regular: 14px;"
               width="14"
             />
             <div
-              class="Truncate__StyledTruncate-sc-23o1d2-0 MmGIa"
-              maxwidth="280"
+              class="prc-Truncate-Truncate-A9Wn6"
+              data-inline="true"
+              style="--truncate-max-width: 280px;"
               title="gitify-app/notifications-test"
             >
               gitify-app/notifications-test
             </div>
           </div>
-        </div>
+        </button>
         <div
-          class="Box-sc-g0xbh4-0 text-xxs opacity-50 hidden"
+          class="text-xxs opacity-50 hidden"
         />
       </div>
     </div>
@@ -336,10 +340,10 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
   "baseElement": <body>
     <div>
       <div
-        class="Box-sc-g0xbh4-0 py-0.5"
+        class="py-0.5"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+          class="prc-Stack-Stack-WJVsK"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -347,13 +351,14 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
           data-padding="none"
           data-wrap="nowrap"
         >
-          <div
-            class="Box-sc-g0xbh4-0 text-xs font-medium"
+          <button
+            class="text-xs font-medium"
             data-testid="view-repository"
             title="Open repository"
+            type="button"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+              class="prc-Stack-Stack-WJVsK"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -364,25 +369,25 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
             >
               <img
                 alt="gitify-app/notifications-test"
-                class="Avatar__StyledAvatar-sc-2lv0r8-0 fNmquh"
+                class="prc-Avatar-Avatar-ZRS-m"
                 data-component="Avatar"
                 height="14"
-                size="14"
                 src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-                sx="[object Object]"
+                style="--avatarSize-regular: 14px;"
                 width="14"
               />
               <div
-                class="Truncate__StyledTruncate-sc-23o1d2-0 MmGIa"
-                maxwidth="280"
+                class="prc-Truncate-Truncate-A9Wn6"
+                data-inline="true"
+                style="--truncate-max-width: 280px;"
                 title="gitify-app/notifications-test"
               >
                 gitify-app/notifications-test
               </div>
             </div>
-          </div>
+          </button>
           <div
-            class="Box-sc-g0xbh4-0 text-xxs opacity-50"
+            class="text-xxs opacity-50"
           />
         </div>
       </div>
@@ -390,10 +395,10 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
   </body>,
   "container": <div>
     <div
-      class="Box-sc-g0xbh4-0 py-0.5"
+      class="py-0.5"
     >
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+        class="prc-Stack-Stack-WJVsK"
         data-align="center"
         data-direction="horizontal"
         data-gap="condensed"
@@ -401,13 +406,14 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
         data-padding="none"
         data-wrap="nowrap"
       >
-        <div
-          class="Box-sc-g0xbh4-0 text-xs font-medium"
+        <button
+          class="text-xs font-medium"
           data-testid="view-repository"
           title="Open repository"
+          type="button"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+            class="prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -418,25 +424,25 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
           >
             <img
               alt="gitify-app/notifications-test"
-              class="Avatar__StyledAvatar-sc-2lv0r8-0 fNmquh"
+              class="prc-Avatar-Avatar-ZRS-m"
               data-component="Avatar"
               height="14"
-              size="14"
               src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-              sx="[object Object]"
+              style="--avatarSize-regular: 14px;"
               width="14"
             />
             <div
-              class="Truncate__StyledTruncate-sc-23o1d2-0 MmGIa"
-              maxwidth="280"
+              class="prc-Truncate-Truncate-A9Wn6"
+              data-inline="true"
+              style="--truncate-max-width: 280px;"
               title="gitify-app/notifications-test"
             >
               gitify-app/notifications-test
             </div>
           </div>
-        </div>
+        </button>
         <div
-          class="Box-sc-g0xbh4-0 text-xxs opacity-50"
+          class="text-xxs opacity-50"
         />
       </div>
     </div>

@@ -33,7 +33,7 @@ export const Checkbox: FC<ICheckbox> = ({
       >
         <input
           checked={props.checked}
-          className="size-4 rounded-sm cursor-pointer"
+          className="size-2 rounded-sm cursor-pointer"
           data-testid={`checkbox-${props.name}`}
           disabled={props.disabled}
           id={props.name}

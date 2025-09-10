@@ -420,11 +420,11 @@ exports[`renderer/routes/Notifications.tsx should render itself & its children (
   "baseElement": <body>
     <div>
       <div
-        class="Box-sc-g0xbh4-0 flex flex-col h-screen"
+        class="flex flex-col h-screen"
         data-testid="notifications"
       >
         <div
-          class="Box-sc-g0xbh4-0 grow overflow-x-hidden overflow-y-auto"
+          class="grow overflow-x-hidden overflow-y-auto"
         >
           <p>
             AccountNotifications
@@ -435,11 +435,11 @@ exports[`renderer/routes/Notifications.tsx should render itself & its children (
   </body>,
   "container": <div>
     <div
-      class="Box-sc-g0xbh4-0 flex flex-col h-screen"
+      class="flex flex-col h-screen"
       data-testid="notifications"
     >
       <div
-        class="Box-sc-g0xbh4-0 grow overflow-x-hidden overflow-y-auto"
+        class="grow overflow-x-hidden overflow-y-auto"
       >
         <p>
           AccountNotifications
@@ -507,11 +507,11 @@ exports[`renderer/routes/Notifications.tsx should render itself & its children (
   "baseElement": <body>
     <div>
       <div
-        class="Box-sc-g0xbh4-0 flex flex-col h-screen"
+        class="flex flex-col h-screen"
         data-testid="notifications"
       >
         <div
-          class="Box-sc-g0xbh4-0 grow overflow-x-hidden overflow-y-auto"
+          class="grow overflow-x-hidden overflow-y-auto"
         >
           <p>
             AccountNotifications
@@ -525,11 +525,11 @@ exports[`renderer/routes/Notifications.tsx should render itself & its children (
   </body>,
   "container": <div>
     <div
-      class="Box-sc-g0xbh4-0 flex flex-col h-screen"
+      class="flex flex-col h-screen"
       data-testid="notifications"
     >
       <div
-        class="Box-sc-g0xbh4-0 grow overflow-x-hidden overflow-y-auto"
+        class="grow overflow-x-hidden overflow-y-auto"
       >
         <p>
           AccountNotifications

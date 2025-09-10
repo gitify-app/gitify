@@ -1,7 +1,7 @@
 import { type FC, type MouseEvent, useContext, useMemo, useState } from 'react';
 
 import { GitPullRequestIcon, IssueOpenedIcon } from '@primer/octicons-react';
-import { Box, Button, Stack } from '@primer/react';
+import { Button, Stack } from '@primer/react';
 
 import { AppContext } from '../../context/App';
 import { type Account, type GitifyError, Size } from '../../types';
@@ -73,63 +73,57 @@ export const AccountNotifications: FC<IAccountNotifications> = (
   return (
     <>
       {showAccountHeader && (
-        <Box
+        <Stack
           className={cn(
-            'group pr-1 py-0.5',
+            'group relative pr-1 py-0.5',
             props.error ? 'bg-gitify-account-error' : 'bg-gitify-account-rest',
           )}
+          direction="horizontal"
           onClick={actionToggleAccountNotifications}
         >
-          <Stack
-            align="center"
-            className="relative"
-            direction="horizontal"
-            gap="condensed"
+          <Button
+            alignContent="center"
+            count={notifications.length}
+            data-testid="account-profile"
+            onClick={(event: MouseEvent<HTMLElement>) => {
+              // Don't trigger onClick of parent element.
+              event.stopPropagation();
+              openAccountProfile(account);
+            }}
+            title="Open account profile"
+            variant="invisible"
           >
-            <Button
-              alignContent="center"
-              count={notifications.length}
-              data-testid="account-profile"
-              onClick={(event: MouseEvent<HTMLElement>) => {
-                // Don't trigger onClick of parent element.
-                event.stopPropagation();
-                openAccountProfile(account);
-              }}
-              title="Open account profile"
-              variant="invisible"
-            >
-              <AvatarWithFallback
-                alt={account.user.login}
-                name={`@${account.user.login}`}
-                size={Size.MEDIUM}
-                src={account.user.avatar}
-              />
-            </Button>
+            <AvatarWithFallback
+              alt={account.user.login}
+              name={`@${account.user.login}`}
+              size={Size.MEDIUM}
+              src={account.user.avatar}
+            />
+          </Button>
 
-            <HoverGroup bgColor="group-hover:bg-gitify-account-rest">
-              <HoverButton
-                action={() => openGitHubIssues(account.hostname)}
-                icon={IssueOpenedIcon}
-                label="My Issues"
-                testid="account-issues"
-              />
+          <HoverGroup bgColor="group-hover:bg-gitify-account-rest">
+            <HoverButton
+              action={() => openGitHubIssues(account.hostname)}
+              icon={IssueOpenedIcon}
+              label="My Issues"
+              testid="account-issues"
+            />
 
-              <HoverButton
-                action={() => openGitHubPulls(account.hostname)}
-                icon={GitPullRequestIcon}
-                label="My Pull Requests"
-                testid="account-pull-requests"
-              />
+            <HoverButton
+              action={() => openGitHubPulls(account.hostname)}
+              icon={GitPullRequestIcon}
+              label="My Pull Requests"
+              testid="account-pull-requests"
+            />
 
-              <HoverButton
-                action={actionToggleAccountNotifications}
-                icon={Chevron.icon}
-                label={Chevron.label}
-                testid="account-toggle"
-              />
-            </HoverGroup>
-          </Stack>
-        </Box>
+            <HoverButton
+              action={actionToggleAccountNotifications}
+              icon={Chevron.icon}
+              label={Chevron.label}
+              testid="account-toggle"
+            />
+          </HoverGroup>
+        </Stack>
       )}
 
       {showAccountNotifications && (
