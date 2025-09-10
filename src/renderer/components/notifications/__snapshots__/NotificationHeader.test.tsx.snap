@@ -6,7 +6,7 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
   "baseElement": <body>
     <div>
       <div
-        class="Box-sc-g0xbh4-0 py-0.5"
+        class="py-0.5"
       >
         <div
           class="prc-Stack-Stack-WJVsK"
@@ -17,10 +17,11 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
           data-padding="none"
           data-wrap="nowrap"
         >
-          <div
-            class="Box-sc-g0xbh4-0 text-xs font-medium"
+          <button
+            class="text-xs font-medium"
             data-testid="view-repository"
             title="Open repository"
+            type="button"
           >
             <div
               class="prc-Stack-Stack-WJVsK"
@@ -50,9 +51,9 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
                 gitify-app/notifications-test
               </div>
             </div>
-          </div>
+          </button>
           <div
-            class="Box-sc-g0xbh4-0 text-xxs opacity-50"
+            class="text-xxs opacity-50"
           />
         </div>
       </div>
@@ -60,7 +61,7 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
   </body>,
   "container": <div>
     <div
-      class="Box-sc-g0xbh4-0 py-0.5"
+      class="py-0.5"
     >
       <div
         class="prc-Stack-Stack-WJVsK"
@@ -71,10 +72,11 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
         data-padding="none"
         data-wrap="nowrap"
       >
-        <div
-          class="Box-sc-g0xbh4-0 text-xs font-medium"
+        <button
+          class="text-xs font-medium"
           data-testid="view-repository"
           title="Open repository"
+          type="button"
         >
           <div
             class="prc-Stack-Stack-WJVsK"
@@ -104,9 +106,9 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
               gitify-app/notifications-test
             </div>
           </div>
-        </div>
+        </button>
         <div
-          class="Box-sc-g0xbh4-0 text-xxs opacity-50"
+          class="text-xxs opacity-50"
         />
       </div>
     </div>
@@ -171,7 +173,7 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
   "baseElement": <body>
     <div>
       <div
-        class="Box-sc-g0xbh4-0 py-0.5"
+        class="py-0.5"
       >
         <div
           class="prc-Stack-Stack-WJVsK"
@@ -182,10 +184,11 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
           data-padding="none"
           data-wrap="nowrap"
         >
-          <div
-            class="Box-sc-g0xbh4-0 text-xs font-medium"
+          <button
+            class="text-xs font-medium"
             data-testid="view-repository"
             title="Open repository"
+            type="button"
           >
             <div
               class="prc-Stack-Stack-WJVsK"
@@ -215,9 +218,9 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
                 gitify-app/notifications-test
               </div>
             </div>
-          </div>
+          </button>
           <div
-            class="Box-sc-g0xbh4-0 text-xxs opacity-50 hidden"
+            class="text-xxs opacity-50 hidden"
           />
         </div>
       </div>
@@ -225,7 +228,7 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
   </body>,
   "container": <div>
     <div
-      class="Box-sc-g0xbh4-0 py-0.5"
+      class="py-0.5"
     >
       <div
         class="prc-Stack-Stack-WJVsK"
@@ -236,10 +239,11 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
         data-padding="none"
         data-wrap="nowrap"
       >
-        <div
-          class="Box-sc-g0xbh4-0 text-xs font-medium"
+        <button
+          class="text-xs font-medium"
           data-testid="view-repository"
           title="Open repository"
+          type="button"
         >
           <div
             class="prc-Stack-Stack-WJVsK"
@@ -269,9 +273,9 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
               gitify-app/notifications-test
             </div>
           </div>
-        </div>
+        </button>
         <div
-          class="Box-sc-g0xbh4-0 text-xxs opacity-50 hidden"
+          class="text-xxs opacity-50 hidden"
         />
       </div>
     </div>
@@ -336,7 +340,7 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
   "baseElement": <body>
     <div>
       <div
-        class="Box-sc-g0xbh4-0 py-0.5"
+        class="py-0.5"
       >
         <div
           class="prc-Stack-Stack-WJVsK"
@@ -347,10 +351,11 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
           data-padding="none"
           data-wrap="nowrap"
         >
-          <div
-            class="Box-sc-g0xbh4-0 text-xs font-medium"
+          <button
+            class="text-xs font-medium"
             data-testid="view-repository"
             title="Open repository"
+            type="button"
           >
             <div
               class="prc-Stack-Stack-WJVsK"
@@ -380,9 +385,9 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
                 gitify-app/notifications-test
               </div>
             </div>
-          </div>
+          </button>
           <div
-            class="Box-sc-g0xbh4-0 text-xxs opacity-50"
+            class="text-xxs opacity-50"
           />
         </div>
       </div>
@@ -390,7 +395,7 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
   </body>,
   "container": <div>
     <div
-      class="Box-sc-g0xbh4-0 py-0.5"
+      class="py-0.5"
     >
       <div
         class="prc-Stack-Stack-WJVsK"
@@ -401,10 +406,11 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
         data-padding="none"
         data-wrap="nowrap"
       >
-        <div
-          class="Box-sc-g0xbh4-0 text-xs font-medium"
+        <button
+          class="text-xs font-medium"
           data-testid="view-repository"
           title="Open repository"
+          type="button"
         >
           <div
             class="prc-Stack-Stack-WJVsK"
@@ -434,9 +440,9 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
               gitify-app/notifications-test
             </div>
           </div>
-        </div>
+        </button>
         <div
-          class="Box-sc-g0xbh4-0 text-xxs opacity-50"
+          class="text-xxs opacity-50"
         />
       </div>
     </div>

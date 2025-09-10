@@ -6,7 +6,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
   "baseElement": <body>
     <div>
       <div
-        class="Box-sc-g0xbh4-0 flex gap-1"
+        class="flex gap-1"
       >
         <span
           class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
@@ -168,7 +168,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
   </body>,
   "container": <div>
     <div
-      class="Box-sc-g0xbh4-0 flex gap-1"
+      class="flex gap-1"
     >
       <span
         class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
@@ -387,7 +387,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
   "baseElement": <body>
     <div>
       <div
-        class="Box-sc-g0xbh4-0 flex gap-1"
+        class="flex gap-1"
       >
         <span
           class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
@@ -549,7 +549,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
   </body>,
   "container": <div>
     <div
-      class="Box-sc-g0xbh4-0 flex gap-1"
+      class="flex gap-1"
     >
       <span
         class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
@@ -768,7 +768,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
   "baseElement": <body>
     <div>
       <div
-        class="Box-sc-g0xbh4-0 flex gap-1"
+        class="flex gap-1"
       >
         <span
           class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
@@ -892,7 +892,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
   </body>,
   "container": <div>
     <div
-      class="Box-sc-g0xbh4-0 flex gap-1"
+      class="flex gap-1"
     >
       <span
         class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
@@ -1073,7 +1073,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx label pills should render l
   "baseElement": <body>
     <div>
       <div
-        class="Box-sc-g0xbh4-0 flex gap-1"
+        class="flex gap-1"
       >
         <span
           class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
@@ -1274,7 +1274,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx label pills should render l
   </body>,
   "container": <div>
     <div
-      class="Box-sc-g0xbh4-0 flex gap-1"
+      class="flex gap-1"
     >
       <span
         class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
@@ -1532,7 +1532,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx linked issue pills should r
   "baseElement": <body>
     <div>
       <div
-        class="Box-sc-g0xbh4-0 flex gap-1"
+        class="flex gap-1"
       >
         <span
           class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
@@ -1656,7 +1656,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx linked issue pills should r
   </body>,
   "container": <div>
     <div
-      class="Box-sc-g0xbh4-0 flex gap-1"
+      class="flex gap-1"
     >
       <span
         class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
@@ -1837,7 +1837,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx linked issue pills should r
   "baseElement": <body>
     <div>
       <div
-        class="Box-sc-g0xbh4-0 flex gap-1"
+        class="flex gap-1"
       >
         <span
           class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
@@ -1961,7 +1961,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx linked issue pills should r
   </body>,
   "container": <div>
     <div
-      class="Box-sc-g0xbh4-0 flex gap-1"
+      class="flex gap-1"
     >
       <span
         class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
@@ -2142,7 +2142,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
   "baseElement": <body>
     <div>
       <div
-        class="Box-sc-g0xbh4-0 flex gap-1"
+        class="flex gap-1"
       >
         <span
           class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
@@ -2376,7 +2376,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
   </body>,
   "container": <div>
     <div
-      class="Box-sc-g0xbh4-0 flex gap-1"
+      class="flex gap-1"
     >
       <span
         class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
@@ -2667,7 +2667,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
   "baseElement": <body>
     <div>
       <div
-        class="Box-sc-g0xbh4-0 flex gap-1"
+        class="flex gap-1"
       >
         <span
           class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
@@ -2901,7 +2901,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
   </body>,
   "container": <div>
     <div
-      class="Box-sc-g0xbh4-0 flex gap-1"
+      class="flex gap-1"
     >
       <span
         class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"

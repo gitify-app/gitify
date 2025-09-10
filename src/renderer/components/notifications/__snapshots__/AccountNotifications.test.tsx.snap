@@ -5,8 +5,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <div
-        class="Box-sc-g0xbh4-0 group pr-1 py-0.5 bg-gitify-account-error"
+      <button
+        class="group pr-1 py-0.5 bg-gitify-account-error"
+        type="button"
       >
         <div
           class="relative prc-Stack-Stack-WJVsK"
@@ -193,7 +194,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             </button>
           </div>
         </div>
-      </div>
+      </button>
       <div
         class="prc-Stack-Stack-WJVsK"
         data-align="center"
@@ -221,7 +222,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-wrap="nowrap"
           >
             <div
-              class="Box-sc-g0xbh4-0 text-5xl"
+              class="text-5xl"
             >
               <img
                 alt="🔥"
@@ -231,13 +232,13 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               />
             </div>
             <div
-              class="Box-sc-g0xbh4-0 text-xl font-semibold"
+              class="text-xl font-semibold"
             >
               Error title
             </div>
           </div>
           <div
-            class="Box-sc-g0xbh4-0 text-center"
+            class="text-center"
           >
             Error description
           </div>
@@ -246,8 +247,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
     </div>
   </body>,
   "container": <div>
-    <div
-      class="Box-sc-g0xbh4-0 group pr-1 py-0.5 bg-gitify-account-error"
+    <button
+      class="group pr-1 py-0.5 bg-gitify-account-error"
+      type="button"
     >
       <div
         class="relative prc-Stack-Stack-WJVsK"
@@ -434,7 +436,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           </button>
         </div>
       </div>
-    </div>
+    </button>
     <div
       class="prc-Stack-Stack-WJVsK"
       data-align="center"
@@ -462,7 +464,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           data-wrap="nowrap"
         >
           <div
-            class="Box-sc-g0xbh4-0 text-5xl"
+            class="text-5xl"
           >
             <img
               alt="🔥"
@@ -472,13 +474,13 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             />
           </div>
           <div
-            class="Box-sc-g0xbh4-0 text-xl font-semibold"
+            class="text-xl font-semibold"
           >
             Error title
           </div>
         </div>
         <div
-          class="Box-sc-g0xbh4-0 text-center"
+          class="text-center"
         >
           Error description
         </div>
@@ -544,8 +546,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <div
-        class="Box-sc-g0xbh4-0 group pr-1 py-0.5 bg-gitify-account-rest"
+      <button
+        class="group pr-1 py-0.5 bg-gitify-account-rest"
+        type="button"
       >
         <div
           class="relative prc-Stack-Stack-WJVsK"
@@ -732,9 +735,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             </button>
           </div>
         </div>
-      </div>
+      </button>
       <div
-        class="Box-sc-g0xbh4-0 group border-b pl-3 pr-1 py-1.5 text-gitify-font border-gitify-notification-border hover:bg-gitify-notification-hover"
+        class="group border-b pl-3 pr-1 py-1.5 text-gitify-font border-gitify-notification-border hover:bg-gitify-notification-hover"
         id="138661096"
       >
         <div
@@ -791,7 +794,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-wrap="nowrap"
           >
             <div
-              class="Box-sc-g0xbh4-0 py-0.5"
+              class="py-0.5"
             >
               <div
                 class="prc-Stack-Stack-WJVsK"
@@ -802,10 +805,11 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 data-padding="none"
                 data-wrap="nowrap"
               >
-                <div
-                  class="Box-sc-g0xbh4-0 text-xs font-medium"
+                <button
+                  class="text-xs font-medium"
                   data-testid="view-repository"
                   title="Open repository"
+                  type="button"
                 >
                   <div
                     class="prc-Stack-Stack-WJVsK"
@@ -835,9 +839,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                       gitify-app/notifications-test
                     </div>
                   </div>
-                </div>
+                </button>
                 <div
-                  class="Box-sc-g0xbh4-0 text-xxs opacity-50"
+                  class="text-xxs opacity-50"
                 />
               </div>
             </div>
@@ -870,10 +874,10 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               data-padding="none"
               data-wrap="wrap"
             >
-              <div
-                class="Box-sc-g0xbh4-0"
+              <button
                 data-testid="view-profile"
                 title="gitify-app"
+                type="button"
               >
                 <div
                   class="prc-Stack-Stack-WJVsK"
@@ -895,7 +899,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                     width="14"
                   />
                 </div>
-              </div>
+              </button>
               <div
                 class="prc-Stack-Stack-WJVsK"
                 data-align="stretch"
@@ -919,7 +923,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 </relative-time>
               </div>
               <div
-                class="Box-sc-g0xbh4-0 flex gap-1"
+                class="flex gap-1"
               >
                 <span
                   class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
@@ -1103,7 +1107,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
         </div>
       </div>
       <div
-        class="Box-sc-g0xbh4-0 group border-b pl-3 pr-1 py-1.5 text-gitify-font border-gitify-notification-border hover:bg-gitify-notification-hover"
+        class="group border-b pl-3 pr-1 py-1.5 text-gitify-font border-gitify-notification-border hover:bg-gitify-notification-hover"
         id="148827438"
       >
         <div
@@ -1160,7 +1164,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-wrap="nowrap"
           >
             <div
-              class="Box-sc-g0xbh4-0 py-0.5"
+              class="py-0.5"
             >
               <div
                 class="prc-Stack-Stack-WJVsK"
@@ -1171,10 +1175,11 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 data-padding="none"
                 data-wrap="nowrap"
               >
-                <div
-                  class="Box-sc-g0xbh4-0 text-xs font-medium"
+                <button
+                  class="text-xs font-medium"
                   data-testid="view-repository"
                   title="Open repository"
+                  type="button"
                 >
                   <div
                     class="prc-Stack-Stack-WJVsK"
@@ -1204,9 +1209,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                       gitify-app/notifications-test
                     </div>
                   </div>
-                </div>
+                </button>
                 <div
-                  class="Box-sc-g0xbh4-0 text-xxs opacity-50"
+                  class="text-xxs opacity-50"
                 />
               </div>
             </div>
@@ -1289,7 +1294,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 </relative-time>
               </div>
               <div
-                class="Box-sc-g0xbh4-0 flex gap-1"
+                class="flex gap-1"
               />
             </div>
           </div>
@@ -1398,8 +1403,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
     </div>
   </body>,
   "container": <div>
-    <div
-      class="Box-sc-g0xbh4-0 group pr-1 py-0.5 bg-gitify-account-rest"
+    <button
+      class="group pr-1 py-0.5 bg-gitify-account-rest"
+      type="button"
     >
       <div
         class="relative prc-Stack-Stack-WJVsK"
@@ -1586,9 +1592,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           </button>
         </div>
       </div>
-    </div>
+    </button>
     <div
-      class="Box-sc-g0xbh4-0 group border-b pl-3 pr-1 py-1.5 text-gitify-font border-gitify-notification-border hover:bg-gitify-notification-hover"
+      class="group border-b pl-3 pr-1 py-1.5 text-gitify-font border-gitify-notification-border hover:bg-gitify-notification-hover"
       id="138661096"
     >
       <div
@@ -1645,7 +1651,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           data-wrap="nowrap"
         >
           <div
-            class="Box-sc-g0xbh4-0 py-0.5"
+            class="py-0.5"
           >
             <div
               class="prc-Stack-Stack-WJVsK"
@@ -1656,10 +1662,11 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               data-padding="none"
               data-wrap="nowrap"
             >
-              <div
-                class="Box-sc-g0xbh4-0 text-xs font-medium"
+              <button
+                class="text-xs font-medium"
                 data-testid="view-repository"
                 title="Open repository"
+                type="button"
               >
                 <div
                   class="prc-Stack-Stack-WJVsK"
@@ -1689,9 +1696,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                     gitify-app/notifications-test
                   </div>
                 </div>
-              </div>
+              </button>
               <div
-                class="Box-sc-g0xbh4-0 text-xxs opacity-50"
+                class="text-xxs opacity-50"
               />
             </div>
           </div>
@@ -1724,10 +1731,10 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-padding="none"
             data-wrap="wrap"
           >
-            <div
-              class="Box-sc-g0xbh4-0"
+            <button
               data-testid="view-profile"
               title="gitify-app"
+              type="button"
             >
               <div
                 class="prc-Stack-Stack-WJVsK"
@@ -1749,7 +1756,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                   width="14"
                 />
               </div>
-            </div>
+            </button>
             <div
               class="prc-Stack-Stack-WJVsK"
               data-align="stretch"
@@ -1773,7 +1780,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               </relative-time>
             </div>
             <div
-              class="Box-sc-g0xbh4-0 flex gap-1"
+              class="flex gap-1"
             >
               <span
                 class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
@@ -1957,7 +1964,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
       </div>
     </div>
     <div
-      class="Box-sc-g0xbh4-0 group border-b pl-3 pr-1 py-1.5 text-gitify-font border-gitify-notification-border hover:bg-gitify-notification-hover"
+      class="group border-b pl-3 pr-1 py-1.5 text-gitify-font border-gitify-notification-border hover:bg-gitify-notification-hover"
       id="148827438"
     >
       <div
@@ -2014,7 +2021,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           data-wrap="nowrap"
         >
           <div
-            class="Box-sc-g0xbh4-0 py-0.5"
+            class="py-0.5"
           >
             <div
               class="prc-Stack-Stack-WJVsK"
@@ -2025,10 +2032,11 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               data-padding="none"
               data-wrap="nowrap"
             >
-              <div
-                class="Box-sc-g0xbh4-0 text-xs font-medium"
+              <button
+                class="text-xs font-medium"
                 data-testid="view-repository"
                 title="Open repository"
+                type="button"
               >
                 <div
                   class="prc-Stack-Stack-WJVsK"
@@ -2058,9 +2066,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                     gitify-app/notifications-test
                   </div>
                 </div>
-              </div>
+              </button>
               <div
-                class="Box-sc-g0xbh4-0 text-xxs opacity-50"
+                class="text-xxs opacity-50"
               />
             </div>
           </div>
@@ -2143,7 +2151,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               </relative-time>
             </div>
             <div
-              class="Box-sc-g0xbh4-0 flex gap-1"
+              class="flex gap-1"
             />
           </div>
         </div>
@@ -2309,8 +2317,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <div
-        class="Box-sc-g0xbh4-0 group pr-1 py-0.5 bg-gitify-account-rest"
+      <button
+        class="group pr-1 py-0.5 bg-gitify-account-rest"
+        type="button"
       >
         <div
           class="relative prc-Stack-Stack-WJVsK"
@@ -2497,15 +2506,16 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             </button>
           </div>
         </div>
-      </div>
+      </button>
       <div>
         Repository Notifications
       </div>
     </div>
   </body>,
   "container": <div>
-    <div
-      class="Box-sc-g0xbh4-0 group pr-1 py-0.5 bg-gitify-account-rest"
+    <button
+      class="group pr-1 py-0.5 bg-gitify-account-rest"
+      type="button"
     >
       <div
         class="relative prc-Stack-Stack-WJVsK"
@@ -2692,7 +2702,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           </button>
         </div>
       </div>
-    </div>
+    </button>
     <div>
       Repository Notifications
     </div>
@@ -2756,8 +2766,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <div
-        class="Box-sc-g0xbh4-0 group pr-1 py-0.5 bg-gitify-account-rest"
+      <button
+        class="group pr-1 py-0.5 bg-gitify-account-rest"
+        type="button"
       >
         <div
           class="relative prc-Stack-Stack-WJVsK"
@@ -2944,7 +2955,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             </button>
           </div>
         </div>
-      </div>
+      </button>
       <div
         class="prc-Stack-Stack-WJVsK"
         data-align="center"
@@ -2972,7 +2983,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-wrap="nowrap"
           >
             <div
-              class="Box-sc-g0xbh4-0 text-5xl"
+              class="text-5xl"
             >
               <img
                 alt="🎊"
@@ -2982,7 +2993,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               />
             </div>
             <div
-              class="Box-sc-g0xbh4-0 text-xl font-semibold"
+              class="text-xl font-semibold"
             >
               No new  notifications
             </div>
@@ -2992,8 +3003,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
     </div>
   </body>,
   "container": <div>
-    <div
-      class="Box-sc-g0xbh4-0 group pr-1 py-0.5 bg-gitify-account-rest"
+    <button
+      class="group pr-1 py-0.5 bg-gitify-account-rest"
+      type="button"
     >
       <div
         class="relative prc-Stack-Stack-WJVsK"
@@ -3180,7 +3192,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           </button>
         </div>
       </div>
-    </div>
+    </button>
     <div
       class="prc-Stack-Stack-WJVsK"
       data-align="center"
@@ -3208,7 +3220,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           data-wrap="nowrap"
         >
           <div
-            class="Box-sc-g0xbh4-0 text-5xl"
+            class="text-5xl"
           >
             <img
               alt="🎊"
@@ -3218,7 +3230,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             />
           </div>
           <div
-            class="Box-sc-g0xbh4-0 text-xl font-semibold"
+            class="text-xl font-semibold"
           >
             No new  notifications
           </div>
@@ -3285,8 +3297,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <div
-        class="Box-sc-g0xbh4-0 group pr-1 py-0.5 bg-gitify-account-rest"
+      <button
+        class="group pr-1 py-0.5 bg-gitify-account-rest"
+        type="button"
       >
         <div
           class="relative prc-Stack-Stack-WJVsK"
@@ -3473,11 +3486,12 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
             </button>
           </div>
         </div>
-      </div>
+      </button>
     </div>
     <div>
-      <div
-        class="Box-sc-g0xbh4-0 group pr-1 py-0.5 bg-gitify-account-rest"
+      <button
+        class="group pr-1 py-0.5 bg-gitify-account-rest"
+        type="button"
       >
         <div
           class="relative prc-Stack-Stack-WJVsK"
@@ -3664,15 +3678,16 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
             </button>
           </div>
         </div>
-      </div>
+      </button>
       <div>
         Repository Notifications
       </div>
     </div>
   </body>,
   "container": <div>
-    <div
-      class="Box-sc-g0xbh4-0 group pr-1 py-0.5 bg-gitify-account-rest"
+    <button
+      class="group pr-1 py-0.5 bg-gitify-account-rest"
+      type="button"
     >
       <div
         class="relative prc-Stack-Stack-WJVsK"
@@ -3859,7 +3874,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
           </button>
         </div>
       </div>
-    </div>
+    </button>
     <div>
       Repository Notifications
     </div>

@@ -5,8 +5,9 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <div
-        class="Box-sc-g0xbh4-0 group pr-1 py-0.5 bg-gitify-repository"
+      <button
+        class="group pr-1 py-0.5 bg-gitify-repository"
+        type="button"
       >
         <div
           class="relative prc-Stack-Stack-WJVsK"
@@ -190,7 +191,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
             </button>
           </div>
         </div>
-      </div>
+      </button>
       <div>
         NotificationRow
       </div>
@@ -200,8 +201,9 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
     </div>
   </body>,
   "container": <div>
-    <div
-      class="Box-sc-g0xbh4-0 group pr-1 py-0.5 bg-gitify-repository"
+    <button
+      class="group pr-1 py-0.5 bg-gitify-repository"
+      type="button"
     >
       <div
         class="relative prc-Stack-Stack-WJVsK"
@@ -385,7 +387,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
           </button>
         </div>
       </div>
-    </div>
+    </button>
     <div>
       NotificationRow
     </div>
@@ -452,8 +454,9 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <div
-        class="Box-sc-g0xbh4-0 group pr-1 py-0.5 bg-gitify-repository"
+      <button
+        class="group pr-1 py-0.5 bg-gitify-repository"
+        type="button"
       >
         <div
           class="relative prc-Stack-Stack-WJVsK"
@@ -644,11 +647,12 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
             </button>
           </div>
         </div>
-      </div>
+      </button>
     </div>
     <div>
-      <div
-        class="Box-sc-g0xbh4-0 group pr-1 py-0.5 bg-gitify-repository"
+      <button
+        class="group pr-1 py-0.5 bg-gitify-repository"
+        type="button"
       >
         <div
           class="relative prc-Stack-Stack-WJVsK"
@@ -839,7 +843,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
             </button>
           </div>
         </div>
-      </div>
+      </button>
       <div>
         NotificationRow
       </div>
@@ -849,8 +853,9 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
     </div>
   </body>,
   "container": <div>
-    <div
-      class="Box-sc-g0xbh4-0 group pr-1 py-0.5 bg-gitify-repository"
+    <button
+      class="group pr-1 py-0.5 bg-gitify-repository"
+      type="button"
     >
       <div
         class="relative prc-Stack-Stack-WJVsK"
@@ -1041,7 +1046,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
           </button>
         </div>
       </div>
-    </div>
+    </button>
     <div>
       NotificationRow
     </div>
@@ -1108,8 +1113,9 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <div
-        class="Box-sc-g0xbh4-0 group pr-1 py-0.5 bg-gitify-repository"
+      <button
+        class="group pr-1 py-0.5 bg-gitify-repository"
+        type="button"
       >
         <div
           class="relative prc-Stack-Stack-WJVsK"
@@ -1300,7 +1306,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
             </button>
           </div>
         </div>
-      </div>
+      </button>
       <div>
         NotificationRow
       </div>
@@ -1310,8 +1316,9 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
     </div>
   </body>,
   "container": <div>
-    <div
-      class="Box-sc-g0xbh4-0 group pr-1 py-0.5 bg-gitify-repository"
+    <button
+      class="group pr-1 py-0.5 bg-gitify-repository"
+      type="button"
     >
       <div
         class="relative prc-Stack-Stack-WJVsK"
@@ -1502,7 +1509,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
           </button>
         </div>
       </div>
-    </div>
+    </button>
     <div>
       NotificationRow
     </div>

@@ -32,7 +32,7 @@ exports[`renderer/components/AllRead.tsx should render itself & its children - n
             data-wrap="nowrap"
           >
             <div
-              class="Box-sc-g0xbh4-0 text-5xl"
+              class="text-5xl"
             >
               <img
                 alt="🎊"
@@ -42,7 +42,7 @@ exports[`renderer/components/AllRead.tsx should render itself & its children - n
               />
             </div>
             <div
-              class="Box-sc-g0xbh4-0 text-xl font-semibold"
+              class="text-xl font-semibold"
             >
               No new  notifications
             </div>
@@ -79,7 +79,7 @@ exports[`renderer/components/AllRead.tsx should render itself & its children - n
           data-wrap="nowrap"
         >
           <div
-            class="Box-sc-g0xbh4-0 text-5xl"
+            class="text-5xl"
           >
             <img
               alt="🎊"
@@ -89,7 +89,7 @@ exports[`renderer/components/AllRead.tsx should render itself & its children - n
             />
           </div>
           <div
-            class="Box-sc-g0xbh4-0 text-xl font-semibold"
+            class="text-xl font-semibold"
           >
             No new  notifications
           </div>
@@ -183,7 +183,7 @@ exports[`renderer/components/AllRead.tsx should render itself & its children - w
             data-wrap="nowrap"
           >
             <div
-              class="Box-sc-g0xbh4-0 text-5xl"
+              class="text-5xl"
             >
               <img
                 alt="🎊"
@@ -193,7 +193,7 @@ exports[`renderer/components/AllRead.tsx should render itself & its children - w
               />
             </div>
             <div
-              class="Box-sc-g0xbh4-0 text-xl font-semibold"
+              class="text-xl font-semibold"
             >
               No new filtered  notifications
             </div>
@@ -230,7 +230,7 @@ exports[`renderer/components/AllRead.tsx should render itself & its children - w
           data-wrap="nowrap"
         >
           <div
-            class="Box-sc-g0xbh4-0 text-5xl"
+            class="text-5xl"
           >
             <img
               alt="🎊"
@@ -240,7 +240,7 @@ exports[`renderer/components/AllRead.tsx should render itself & its children - w
             />
           </div>
           <div
-            class="Box-sc-g0xbh4-0 text-xl font-semibold"
+            class="text-xl font-semibold"
           >
             No new filtered  notifications
           </div>

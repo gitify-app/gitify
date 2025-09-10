@@ -10,7 +10,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
       >
         <legend>
           <div
-            class="Box-sc-g0xbh4-0 mb-2"
+            class="mb-2"
           >
             <div
               class="prc-Stack-Stack-WJVsK"
@@ -44,11 +44,12 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
               >
                 Type
               </h2>
-              <div
+              <button
                 aria-label="tooltip-type"
-                class="Box-sc-g0xbh4-0 relative"
+                class="relative"
                 data-testid="tooltip-tooltip-type"
                 id="tooltip-type"
+                type="button"
               >
                 <svg
                   aria-hidden="true"
@@ -66,7 +67,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
                     d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                   />
                 </svg>
-              </div>
+              </button>
             </div>
           </div>
         </legend>
@@ -89,7 +90,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
             data-wrap="nowrap"
           >
             <input
-              class="size-4 rounded-sm cursor-pointer"
+              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-Check Suite"
               id="Check Suite"
               type="checkbox"
@@ -116,7 +117,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
             data-wrap="nowrap"
           >
             <input
-              class="size-4 rounded-sm cursor-pointer"
+              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-Commit"
               id="Commit"
               type="checkbox"
@@ -143,7 +144,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
             data-wrap="nowrap"
           >
             <input
-              class="size-4 rounded-sm cursor-pointer"
+              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-Discussion"
               id="Discussion"
               type="checkbox"
@@ -170,7 +171,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
             data-wrap="nowrap"
           >
             <input
-              class="size-4 rounded-sm cursor-pointer"
+              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-Issue"
               id="Issue"
               type="checkbox"
@@ -197,7 +198,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
             data-wrap="nowrap"
           >
             <input
-              class="size-4 rounded-sm cursor-pointer"
+              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-Pull Request"
               id="Pull Request"
               type="checkbox"
@@ -224,7 +225,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
             data-wrap="nowrap"
           >
             <input
-              class="size-4 rounded-sm cursor-pointer"
+              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-Release"
               id="Release"
               type="checkbox"
@@ -251,7 +252,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
             data-wrap="nowrap"
           >
             <input
-              class="size-4 rounded-sm cursor-pointer"
+              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-Dependabot Alert"
               id="Dependabot Alert"
               type="checkbox"
@@ -278,7 +279,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
             data-wrap="nowrap"
           >
             <input
-              class="size-4 rounded-sm cursor-pointer"
+              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-Invitation"
               id="Invitation"
               type="checkbox"
@@ -305,7 +306,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
             data-wrap="nowrap"
           >
             <input
-              class="size-4 rounded-sm cursor-pointer"
+              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-Vulnerability Alert"
               id="Vulnerability Alert"
               type="checkbox"
@@ -332,7 +333,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
             data-wrap="nowrap"
           >
             <input
-              class="size-4 rounded-sm cursor-pointer"
+              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-Workflow Run"
               id="Workflow Run"
               type="checkbox"
@@ -359,7 +360,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
     >
       <legend>
         <div
-          class="Box-sc-g0xbh4-0 mb-2"
+          class="mb-2"
         >
           <div
             class="prc-Stack-Stack-WJVsK"
@@ -393,11 +394,12 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
             >
               Type
             </h2>
-            <div
+            <button
               aria-label="tooltip-type"
-              class="Box-sc-g0xbh4-0 relative"
+              class="relative"
               data-testid="tooltip-tooltip-type"
               id="tooltip-type"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -415,7 +417,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
                   d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                 />
               </svg>
-            </div>
+            </button>
           </div>
         </div>
       </legend>
@@ -438,7 +440,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
           data-wrap="nowrap"
         >
           <input
-            class="size-4 rounded-sm cursor-pointer"
+            class="size-2 rounded-sm cursor-pointer"
             data-testid="checkbox-Check Suite"
             id="Check Suite"
             type="checkbox"
@@ -465,7 +467,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
           data-wrap="nowrap"
         >
           <input
-            class="size-4 rounded-sm cursor-pointer"
+            class="size-2 rounded-sm cursor-pointer"
             data-testid="checkbox-Commit"
             id="Commit"
             type="checkbox"
@@ -492,7 +494,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
           data-wrap="nowrap"
         >
           <input
-            class="size-4 rounded-sm cursor-pointer"
+            class="size-2 rounded-sm cursor-pointer"
             data-testid="checkbox-Discussion"
             id="Discussion"
             type="checkbox"
@@ -519,7 +521,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
           data-wrap="nowrap"
         >
           <input
-            class="size-4 rounded-sm cursor-pointer"
+            class="size-2 rounded-sm cursor-pointer"
             data-testid="checkbox-Issue"
             id="Issue"
             type="checkbox"
@@ -546,7 +548,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
           data-wrap="nowrap"
         >
           <input
-            class="size-4 rounded-sm cursor-pointer"
+            class="size-2 rounded-sm cursor-pointer"
             data-testid="checkbox-Pull Request"
             id="Pull Request"
             type="checkbox"
@@ -573,7 +575,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
           data-wrap="nowrap"
         >
           <input
-            class="size-4 rounded-sm cursor-pointer"
+            class="size-2 rounded-sm cursor-pointer"
             data-testid="checkbox-Release"
             id="Release"
             type="checkbox"
@@ -600,7 +602,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
           data-wrap="nowrap"
         >
           <input
-            class="size-4 rounded-sm cursor-pointer"
+            class="size-2 rounded-sm cursor-pointer"
             data-testid="checkbox-Dependabot Alert"
             id="Dependabot Alert"
             type="checkbox"
@@ -627,7 +629,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
           data-wrap="nowrap"
         >
           <input
-            class="size-4 rounded-sm cursor-pointer"
+            class="size-2 rounded-sm cursor-pointer"
             data-testid="checkbox-Invitation"
             id="Invitation"
             type="checkbox"
@@ -654,7 +656,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
           data-wrap="nowrap"
         >
           <input
-            class="size-4 rounded-sm cursor-pointer"
+            class="size-2 rounded-sm cursor-pointer"
             data-testid="checkbox-Vulnerability Alert"
             id="Vulnerability Alert"
             type="checkbox"
@@ -681,7 +683,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
           data-wrap="nowrap"
         >
           <input
-            class="size-4 rounded-sm cursor-pointer"
+            class="size-2 rounded-sm cursor-pointer"
             data-testid="checkbox-Workflow Run"
             id="Workflow Run"
             type="checkbox"

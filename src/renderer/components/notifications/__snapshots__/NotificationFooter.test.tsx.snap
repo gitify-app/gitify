@@ -14,10 +14,10 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
         data-padding="none"
         data-wrap="wrap"
       >
-        <div
-          class="Box-sc-g0xbh4-0"
+        <button
           data-testid="view-profile"
           title="gitify-app"
+          type="button"
         >
           <div
             class="prc-Stack-Stack-WJVsK"
@@ -39,7 +39,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
               width="14"
             />
           </div>
-        </div>
+        </button>
         <div
           class="prc-Stack-Stack-WJVsK"
           data-align="stretch"
@@ -63,7 +63,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
           </relative-time>
         </div>
         <div
-          class="Box-sc-g0xbh4-0 flex gap-1"
+          class="flex gap-1"
         >
           <span
             class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
@@ -155,10 +155,10 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
       data-padding="none"
       data-wrap="wrap"
     >
-      <div
-        class="Box-sc-g0xbh4-0"
+      <button
         data-testid="view-profile"
         title="gitify-app"
+        type="button"
       >
         <div
           class="prc-Stack-Stack-WJVsK"
@@ -180,7 +180,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
             width="14"
           />
         </div>
-      </div>
+      </button>
       <div
         class="prc-Stack-Stack-WJVsK"
         data-align="stretch"
@@ -204,7 +204,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
         </relative-time>
       </div>
       <div
-        class="Box-sc-g0xbh4-0 flex gap-1"
+        class="flex gap-1"
       >
         <span
           class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
@@ -353,10 +353,10 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
         data-padding="none"
         data-wrap="wrap"
       >
-        <div
-          class="Box-sc-g0xbh4-0"
+        <button
           data-testid="view-profile"
           title="gitify-app"
+          type="button"
         >
           <div
             class="prc-Stack-Stack-WJVsK"
@@ -378,7 +378,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
               width="14"
             />
           </div>
-        </div>
+        </button>
         <div
           class="prc-Stack-Stack-WJVsK"
           data-align="stretch"
@@ -402,7 +402,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
           </relative-time>
         </div>
         <div
-          class="Box-sc-g0xbh4-0 flex gap-1"
+          class="flex gap-1"
         >
           <span
             class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
@@ -494,10 +494,10 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
       data-padding="none"
       data-wrap="wrap"
     >
-      <div
-        class="Box-sc-g0xbh4-0"
+      <button
         data-testid="view-profile"
         title="gitify-app"
+        type="button"
       >
         <div
           class="prc-Stack-Stack-WJVsK"
@@ -519,7 +519,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
             width="14"
           />
         </div>
-      </div>
+      </button>
       <div
         class="prc-Stack-Stack-WJVsK"
         data-align="stretch"
@@ -543,7 +543,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
         </relative-time>
       </div>
       <div
-        class="Box-sc-g0xbh4-0 flex gap-1"
+        class="flex gap-1"
       >
         <span
           class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
@@ -742,7 +742,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
           </relative-time>
         </div>
         <div
-          class="Box-sc-g0xbh4-0 flex gap-1"
+          class="flex gap-1"
         >
           <span
             class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
@@ -884,7 +884,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
         </relative-time>
       </div>
       <div
-        class="Box-sc-g0xbh4-0 flex gap-1"
+        class="flex gap-1"
       >
         <span
           class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
@@ -1033,10 +1033,10 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
         data-padding="none"
         data-wrap="wrap"
       >
-        <div
-          class="Box-sc-g0xbh4-0"
+        <button
           data-testid="view-profile"
           title="gitify-app"
+          type="button"
         >
           <div
             class="prc-Stack-Stack-WJVsK"
@@ -1058,7 +1058,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
               width="14"
             />
           </div>
-        </div>
+        </button>
         <div
           class="prc-Stack-Stack-WJVsK"
           data-align="stretch"
@@ -1082,7 +1082,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
           </relative-time>
         </div>
         <div
-          class="Box-sc-g0xbh4-0 flex gap-1"
+          class="flex gap-1"
         >
           <span
             class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
@@ -1174,10 +1174,10 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
       data-padding="none"
       data-wrap="wrap"
     >
-      <div
-        class="Box-sc-g0xbh4-0"
+      <button
         data-testid="view-profile"
         title="gitify-app"
+        type="button"
       >
         <div
           class="prc-Stack-Stack-WJVsK"
@@ -1199,7 +1199,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
             width="14"
           />
         </div>
-      </div>
+      </button>
       <div
         class="prc-Stack-Stack-WJVsK"
         data-align="stretch"
@@ -1223,7 +1223,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
         </relative-time>
       </div>
       <div
-        class="Box-sc-g0xbh4-0 flex gap-1"
+        class="flex gap-1"
       >
         <span
           class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
@@ -1372,10 +1372,10 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
         data-padding="none"
         data-wrap="wrap"
       >
-        <div
-          class="Box-sc-g0xbh4-0"
+        <button
           data-testid="view-profile"
           title="gitify-app"
+          type="button"
         >
           <div
             class="prc-Stack-Stack-WJVsK"
@@ -1397,7 +1397,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
               width="14"
             />
           </div>
-        </div>
+        </button>
         <div
           class="prc-Stack-Stack-WJVsK"
           data-align="stretch"
@@ -1421,7 +1421,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
           </relative-time>
         </div>
         <div
-          class="Box-sc-g0xbh4-0 flex gap-1"
+          class="flex gap-1"
         >
           <span
             class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
@@ -1513,10 +1513,10 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
       data-padding="none"
       data-wrap="wrap"
     >
-      <div
-        class="Box-sc-g0xbh4-0"
+      <button
         data-testid="view-profile"
         title="gitify-app"
+        type="button"
       >
         <div
           class="prc-Stack-Stack-WJVsK"
@@ -1538,7 +1538,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
             width="14"
           />
         </div>
-      </div>
+      </button>
       <div
         class="prc-Stack-Stack-WJVsK"
         data-align="stretch"
@@ -1562,7 +1562,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
         </relative-time>
       </div>
       <div
-        class="Box-sc-g0xbh4-0 flex gap-1"
+        class="flex gap-1"
       >
         <span
           class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"

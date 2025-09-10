@@ -6,7 +6,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
   "baseElement": <body>
     <div>
       <div
-        class="Box-sc-g0xbh4-0 flex flex-col min-h-screen bg-gitify-background"
+        class="flex flex-col min-h-screen bg-gitify-background"
       >
         <div
           class="fixed left-sidebar -ml-sidebar w-sidebar h-full bg-gitify-sidebar text-white prc-Stack-Stack-WJVsK"
@@ -39,7 +39,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
             >
               <svg
                 aria-label="Gitify Logo"
-                class="size-5"
+                class="size-2.5"
                 role="img"
                 viewBox="0 0 500 500"
                 xmlns="https://www.w3.org/2000/svg"
@@ -265,7 +265,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
           </div>
         </div>
         <div
-          class="Box-sc-g0xbh4-0 flex-1 pl-sidebar"
+          class="flex-1 pl-sidebar"
         >
           Test
         </div>
@@ -274,7 +274,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
   </body>,
   "container": <div>
     <div
-      class="Box-sc-g0xbh4-0 flex flex-col min-h-screen bg-gitify-background"
+      class="flex flex-col min-h-screen bg-gitify-background"
     >
       <div
         class="fixed left-sidebar -ml-sidebar w-sidebar h-full bg-gitify-sidebar text-white prc-Stack-Stack-WJVsK"
@@ -307,7 +307,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
           >
             <svg
               aria-label="Gitify Logo"
-              class="size-5"
+              class="size-2.5"
               role="img"
               viewBox="0 0 500 500"
               xmlns="https://www.w3.org/2000/svg"
@@ -533,7 +533,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
         </div>
       </div>
       <div
-        class="Box-sc-g0xbh4-0 flex-1 pl-sidebar"
+        class="flex-1 pl-sidebar"
       >
         Test
       </div>

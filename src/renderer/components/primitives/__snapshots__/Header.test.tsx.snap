@@ -6,7 +6,7 @@ exports[`renderer/components/primitives/Header.tsx should render itself & its ch
   "baseElement": <body>
     <div>
       <div
-        class="Box-sc-g0xbh4-0 pl-4 pr-6 pt-3 pb-1"
+        class="pl-4 pr-6 pt-3 pb-1"
       >
         <div
           class="prc-Stack-Stack-WJVsK"
@@ -47,7 +47,7 @@ exports[`renderer/components/primitives/Header.tsx should render itself & its ch
           </button>
           <legend>
             <div
-              class="Box-sc-g0xbh4-0 mb-2"
+              class="mb-2"
             >
               <div
                 class="prc-Stack-Stack-WJVsK"
@@ -90,7 +90,7 @@ exports[`renderer/components/primitives/Header.tsx should render itself & its ch
   </body>,
   "container": <div>
     <div
-      class="Box-sc-g0xbh4-0 pl-4 pr-6 pt-3 pb-1"
+      class="pl-4 pr-6 pt-3 pb-1"
     >
       <div
         class="prc-Stack-Stack-WJVsK"
@@ -131,7 +131,7 @@ exports[`renderer/components/primitives/Header.tsx should render itself & its ch
         </button>
         <legend>
           <div
-            class="Box-sc-g0xbh4-0 mb-2"
+            class="mb-2"
           >
             <div
               class="prc-Stack-Stack-WJVsK"

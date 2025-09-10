@@ -87,9 +87,7 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
             data-padding="none"
             data-wrap="nowrap"
           >
-            <div
-              class="Box-sc-g0xbh4-0"
-            >
+            <div>
               <span
                 class="text-xs opacity-90 prc-Text-Text-0ima0"
               >
@@ -125,9 +123,7 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
           data-padding="none"
           data-wrap="nowrap"
         >
-          <div
-            class="Box-sc-g0xbh4-0"
-          >
+          <div>
             <span
               class="text-xs opacity-90 prc-Text-Text-0ima0"
             >
@@ -220,9 +216,7 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
             data-padding="none"
             data-wrap="nowrap"
           >
-            <div
-              class="Box-sc-g0xbh4-0"
-            >
+            <div>
               <div
                 class="prc-Stack-Stack-WJVsK"
                 data-align="stretch"
@@ -271,9 +265,7 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
           data-padding="none"
           data-wrap="nowrap"
         >
-          <div
-            class="Box-sc-g0xbh4-0"
-          >
+          <div>
             <div
               class="prc-Stack-Stack-WJVsK"
               data-align="stretch"
@@ -379,9 +371,7 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
             data-padding="none"
             data-wrap="nowrap"
           >
-            <div
-              class="Box-sc-g0xbh4-0"
-            >
+            <div>
               <div
                 class="prc-Stack-Stack-WJVsK"
                 data-align="stretch"
@@ -403,9 +393,7 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
                 </span>
               </div>
             </div>
-            <div
-              class="Box-sc-g0xbh4-0"
-            >
+            <div>
               <div
                 class="prc-Stack-Stack-WJVsK"
                 data-align="stretch"
@@ -427,9 +415,7 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
                 </span>
               </div>
             </div>
-            <div
-              class="Box-sc-g0xbh4-0"
-            >
+            <div>
               <div
                 class="prc-Stack-Stack-WJVsK"
                 data-align="stretch"
@@ -478,9 +464,7 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
           data-padding="none"
           data-wrap="nowrap"
         >
-          <div
-            class="Box-sc-g0xbh4-0"
-          >
+          <div>
             <div
               class="prc-Stack-Stack-WJVsK"
               data-align="stretch"
@@ -502,9 +486,7 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
               </span>
             </div>
           </div>
-          <div
-            class="Box-sc-g0xbh4-0"
-          >
+          <div>
             <div
               class="prc-Stack-Stack-WJVsK"
               data-align="stretch"
@@ -526,9 +508,7 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
               </span>
             </div>
           </div>
-          <div
-            class="Box-sc-g0xbh4-0"
-          >
+          <div>
             <div
               class="prc-Stack-Stack-WJVsK"
               data-align="stretch"
@@ -634,9 +614,7 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
             data-padding="none"
             data-wrap="nowrap"
           >
-            <div
-              class="Box-sc-g0xbh4-0"
-            >
+            <div>
               <div
                 class="prc-Stack-Stack-WJVsK"
                 data-align="stretch"
@@ -658,9 +636,7 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
                 </span>
               </div>
             </div>
-            <div
-              class="Box-sc-g0xbh4-0"
-            >
+            <div>
               <div
                 class="prc-Stack-Stack-WJVsK"
                 data-align="stretch"
@@ -682,9 +658,7 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
                 </span>
               </div>
             </div>
-            <div
-              class="Box-sc-g0xbh4-0"
-            >
+            <div>
               <div
                 class="prc-Stack-Stack-WJVsK"
                 data-align="stretch"
@@ -733,9 +707,7 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
           data-padding="none"
           data-wrap="nowrap"
         >
-          <div
-            class="Box-sc-g0xbh4-0"
-          >
+          <div>
             <div
               class="prc-Stack-Stack-WJVsK"
               data-align="stretch"
@@ -757,9 +729,7 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
               </span>
             </div>
           </div>
-          <div
-            class="Box-sc-g0xbh4-0"
-          >
+          <div>
             <div
               class="prc-Stack-Stack-WJVsK"
               data-align="stretch"
@@ -781,9 +751,7 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
               </span>
             </div>
           </div>
-          <div
-            class="Box-sc-g0xbh4-0"
-          >
+          <div>
             <div
               class="prc-Stack-Stack-WJVsK"
               data-align="stretch"

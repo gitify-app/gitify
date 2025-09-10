@@ -2,11 +2,11 @@
 
 exports[`renderer/routes/Accounts.tsx Account interactions should render with PAT scopes warning 1`] = `
 <div
-  class="Box-sc-g0xbh4-0 flex flex-col h-screen"
+  class="flex flex-col h-screen"
   data-testid="accounts"
 >
   <div
-    class="Box-sc-g0xbh4-0 pl-4 pr-6 pt-3 pb-1"
+    class="pl-4 pr-6 pt-3 pb-1"
   >
     <div
       class="prc-Stack-Stack-WJVsK"
@@ -47,7 +47,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
       </button>
       <legend>
         <div
-          class="Box-sc-g0xbh4-0 mb-2"
+          class="mb-2"
         >
           <div
             class="prc-Stack-Stack-WJVsK"
@@ -87,10 +87,10 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
     </div>
   </div>
   <div
-    class="Box-sc-g0xbh4-0 grow overflow-x-hidden overflow-y-auto px-8"
+    class="grow overflow-x-hidden overflow-y-auto px-5"
   >
     <div
-      class="Box-sc-g0xbh4-0 rounded-md p-2 mb-4 bg-gitify-accounts"
+      class="rounded-md p-2 mb-4 bg-gitify-accounts"
     >
       <div
         class="prc-Stack-Stack-WJVsK"
@@ -169,7 +169,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
           data-wrap="nowrap"
         >
           <div
-            class="Box-sc-g0xbh4-0 pl-4 pb-2 text-xs"
+            class="pl-4 pb-2 text-xs"
           >
             <div
               class="prc-Stack-Stack-WJVsK"
@@ -180,9 +180,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
               data-padding="none"
               data-wrap="nowrap"
             >
-              <div
-                class="Box-sc-g0xbh4-0"
-              >
+              <div>
                 <div
                   class="prc-Stack-Stack-WJVsK"
                   data-align="center"
@@ -216,7 +214,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
                 </div>
               </div>
               <div
-                class="Box-sc-g0xbh4-0 cursor-pointer"
+                class="cursor-pointer"
                 data-testid="account-host"
                 title="Open host"
               >
@@ -252,10 +250,11 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
                   </span>
                 </div>
               </div>
-              <div
-                class="Box-sc-g0xbh4-0 cursor-pointer"
+              <button
+                class="cursor-pointer"
                 data-testid="account-developer-settings"
                 title="Open developer settings"
+                type="button"
               >
                 <div
                   class="prc-Stack-Stack-WJVsK"
@@ -288,7 +287,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
                     Personal Access Token
                   </span>
                 </div>
-              </div>
+              </button>
             </div>
           </div>
           <div
@@ -463,7 +462,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
       </div>
     </div>
     <div
-      class="Box-sc-g0xbh4-0 rounded-md p-2 mb-4 bg-gitify-accounts"
+      class="rounded-md p-2 mb-4 bg-gitify-accounts"
     >
       <div
         class="prc-Stack-Stack-WJVsK"
@@ -542,7 +541,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
           data-wrap="nowrap"
         >
           <div
-            class="Box-sc-g0xbh4-0 pl-4 pb-2 text-xs"
+            class="pl-4 pb-2 text-xs"
           >
             <div
               class="prc-Stack-Stack-WJVsK"
@@ -553,9 +552,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
               data-padding="none"
               data-wrap="nowrap"
             >
-              <div
-                class="Box-sc-g0xbh4-0"
-              >
+              <div>
                 <div
                   class="prc-Stack-Stack-WJVsK"
                   data-align="center"
@@ -589,7 +586,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
                 </div>
               </div>
               <div
-                class="Box-sc-g0xbh4-0 cursor-pointer"
+                class="cursor-pointer"
                 data-testid="account-host"
                 title="Open host"
               >
@@ -625,10 +622,11 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
                   </span>
                 </div>
               </div>
-              <div
-                class="Box-sc-g0xbh4-0 cursor-pointer"
+              <button
+                class="cursor-pointer"
                 data-testid="account-developer-settings"
                 title="Open developer settings"
+                type="button"
               >
                 <div
                   class="prc-Stack-Stack-WJVsK"
@@ -661,7 +659,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
                     OAuth App
                   </span>
                 </div>
-              </div>
+              </button>
             </div>
           </div>
           <div
@@ -836,7 +834,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
       </div>
     </div>
     <div
-      class="Box-sc-g0xbh4-0 rounded-md p-2 mb-4 bg-gitify-accounts"
+      class="rounded-md p-2 mb-4 bg-gitify-accounts"
     >
       <div
         class="prc-Stack-Stack-WJVsK"
@@ -915,7 +913,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
           data-wrap="nowrap"
         >
           <div
-            class="Box-sc-g0xbh4-0 pl-4 pb-2 text-xs"
+            class="pl-4 pb-2 text-xs"
           >
             <div
               class="prc-Stack-Stack-WJVsK"
@@ -926,9 +924,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
               data-padding="none"
               data-wrap="nowrap"
             >
-              <div
-                class="Box-sc-g0xbh4-0"
-              >
+              <div>
                 <div
                   class="prc-Stack-Stack-WJVsK"
                   data-align="center"
@@ -962,7 +958,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
                 </div>
               </div>
               <div
-                class="Box-sc-g0xbh4-0 cursor-pointer"
+                class="cursor-pointer"
                 data-testid="account-host"
                 title="Open host"
               >
@@ -998,10 +994,11 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
                   </span>
                 </div>
               </div>
-              <div
-                class="Box-sc-g0xbh4-0 cursor-pointer"
+              <button
+                class="cursor-pointer"
                 data-testid="account-developer-settings"
                 title="Open developer settings"
+                type="button"
               >
                 <div
                   class="prc-Stack-Stack-WJVsK"
@@ -1034,7 +1031,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
                     GitHub App
                   </span>
                 </div>
-              </div>
+              </button>
             </div>
           </div>
           <div
@@ -1210,7 +1207,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
     </div>
   </div>
   <div
-    class="Box-sc-g0xbh4-0 left-sidebar bg-gitify-footer"
+    class="left-sidebar bg-gitify-footer"
   >
     <div
       class="prc-Stack-Stack-WJVsK"
@@ -1274,11 +1271,11 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
 
 exports[`renderer/routes/Accounts.tsx Account interactions should set account as primary account 1`] = `
 <div
-  class="Box-sc-g0xbh4-0 flex flex-col h-screen"
+  class="flex flex-col h-screen"
   data-testid="accounts"
 >
   <div
-    class="Box-sc-g0xbh4-0 pl-4 pr-6 pt-3 pb-1"
+    class="pl-4 pr-6 pt-3 pb-1"
   >
     <div
       class="prc-Stack-Stack-WJVsK"
@@ -1319,7 +1316,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
       </button>
       <legend>
         <div
-          class="Box-sc-g0xbh4-0 mb-2"
+          class="mb-2"
         >
           <div
             class="prc-Stack-Stack-WJVsK"
@@ -1359,10 +1356,10 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
     </div>
   </div>
   <div
-    class="Box-sc-g0xbh4-0 grow overflow-x-hidden overflow-y-auto px-8"
+    class="grow overflow-x-hidden overflow-y-auto px-5"
   >
     <div
-      class="Box-sc-g0xbh4-0 rounded-md p-2 mb-4 bg-gitify-accounts"
+      class="rounded-md p-2 mb-4 bg-gitify-accounts"
     >
       <div
         class="prc-Stack-Stack-WJVsK"
@@ -1441,7 +1438,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
           data-wrap="nowrap"
         >
           <div
-            class="Box-sc-g0xbh4-0 pl-4 pb-2 text-xs"
+            class="pl-4 pb-2 text-xs"
           >
             <div
               class="prc-Stack-Stack-WJVsK"
@@ -1452,9 +1449,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
               data-padding="none"
               data-wrap="nowrap"
             >
-              <div
-                class="Box-sc-g0xbh4-0"
-              >
+              <div>
                 <div
                   class="prc-Stack-Stack-WJVsK"
                   data-align="center"
@@ -1488,7 +1483,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
                 </div>
               </div>
               <div
-                class="Box-sc-g0xbh4-0 cursor-pointer"
+                class="cursor-pointer"
                 data-testid="account-host"
                 title="Open host"
               >
@@ -1524,10 +1519,11 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
                   </span>
                 </div>
               </div>
-              <div
-                class="Box-sc-g0xbh4-0 cursor-pointer"
+              <button
+                class="cursor-pointer"
                 data-testid="account-developer-settings"
                 title="Open developer settings"
+                type="button"
               >
                 <div
                   class="prc-Stack-Stack-WJVsK"
@@ -1560,7 +1556,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
                     Personal Access Token
                   </span>
                 </div>
-              </div>
+              </button>
             </div>
           </div>
           <div
@@ -1735,7 +1731,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
       </div>
     </div>
     <div
-      class="Box-sc-g0xbh4-0 rounded-md p-2 mb-4 bg-gitify-accounts"
+      class="rounded-md p-2 mb-4 bg-gitify-accounts"
     >
       <div
         class="prc-Stack-Stack-WJVsK"
@@ -1814,7 +1810,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
           data-wrap="nowrap"
         >
           <div
-            class="Box-sc-g0xbh4-0 pl-4 pb-2 text-xs"
+            class="pl-4 pb-2 text-xs"
           >
             <div
               class="prc-Stack-Stack-WJVsK"
@@ -1825,9 +1821,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
               data-padding="none"
               data-wrap="nowrap"
             >
-              <div
-                class="Box-sc-g0xbh4-0"
-              >
+              <div>
                 <div
                   class="prc-Stack-Stack-WJVsK"
                   data-align="center"
@@ -1861,7 +1855,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
                 </div>
               </div>
               <div
-                class="Box-sc-g0xbh4-0 cursor-pointer"
+                class="cursor-pointer"
                 data-testid="account-host"
                 title="Open host"
               >
@@ -1897,10 +1891,11 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
                   </span>
                 </div>
               </div>
-              <div
-                class="Box-sc-g0xbh4-0 cursor-pointer"
+              <button
+                class="cursor-pointer"
                 data-testid="account-developer-settings"
                 title="Open developer settings"
+                type="button"
               >
                 <div
                   class="prc-Stack-Stack-WJVsK"
@@ -1933,7 +1928,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
                     OAuth App
                   </span>
                 </div>
-              </div>
+              </button>
             </div>
           </div>
           <div
@@ -2108,7 +2103,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
       </div>
     </div>
     <div
-      class="Box-sc-g0xbh4-0 rounded-md p-2 mb-4 bg-gitify-accounts"
+      class="rounded-md p-2 mb-4 bg-gitify-accounts"
     >
       <div
         class="prc-Stack-Stack-WJVsK"
@@ -2187,7 +2182,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
           data-wrap="nowrap"
         >
           <div
-            class="Box-sc-g0xbh4-0 pl-4 pb-2 text-xs"
+            class="pl-4 pb-2 text-xs"
           >
             <div
               class="prc-Stack-Stack-WJVsK"
@@ -2198,9 +2193,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
               data-padding="none"
               data-wrap="nowrap"
             >
-              <div
-                class="Box-sc-g0xbh4-0"
-              >
+              <div>
                 <div
                   class="prc-Stack-Stack-WJVsK"
                   data-align="center"
@@ -2234,7 +2227,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
                 </div>
               </div>
               <div
-                class="Box-sc-g0xbh4-0 cursor-pointer"
+                class="cursor-pointer"
                 data-testid="account-host"
                 title="Open host"
               >
@@ -2270,10 +2263,11 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
                   </span>
                 </div>
               </div>
-              <div
-                class="Box-sc-g0xbh4-0 cursor-pointer"
+              <button
+                class="cursor-pointer"
                 data-testid="account-developer-settings"
                 title="Open developer settings"
+                type="button"
               >
                 <div
                   class="prc-Stack-Stack-WJVsK"
@@ -2306,7 +2300,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
                     GitHub App
                   </span>
                 </div>
-              </div>
+              </button>
             </div>
           </div>
           <div
@@ -2482,7 +2476,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
     </div>
   </div>
   <div
-    class="Box-sc-g0xbh4-0 left-sidebar bg-gitify-footer"
+    class="left-sidebar bg-gitify-footer"
   >
     <div
       class="prc-Stack-Stack-WJVsK"
@@ -2546,11 +2540,11 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
 
 exports[`renderer/routes/Accounts.tsx General should render itself & its children 1`] = `
 <div
-  class="Box-sc-g0xbh4-0 flex flex-col h-screen"
+  class="flex flex-col h-screen"
   data-testid="accounts"
 >
   <div
-    class="Box-sc-g0xbh4-0 pl-4 pr-6 pt-3 pb-1"
+    class="pl-4 pr-6 pt-3 pb-1"
   >
     <div
       class="prc-Stack-Stack-WJVsK"
@@ -2591,7 +2585,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
       </button>
       <legend>
         <div
-          class="Box-sc-g0xbh4-0 mb-2"
+          class="mb-2"
         >
           <div
             class="prc-Stack-Stack-WJVsK"
@@ -2631,10 +2625,10 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
     </div>
   </div>
   <div
-    class="Box-sc-g0xbh4-0 grow overflow-x-hidden overflow-y-auto px-8"
+    class="grow overflow-x-hidden overflow-y-auto px-5"
   >
     <div
-      class="Box-sc-g0xbh4-0 rounded-md p-2 mb-4 bg-gitify-accounts"
+      class="rounded-md p-2 mb-4 bg-gitify-accounts"
     >
       <div
         class="prc-Stack-Stack-WJVsK"
@@ -2713,7 +2707,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
           data-wrap="nowrap"
         >
           <div
-            class="Box-sc-g0xbh4-0 pl-4 pb-2 text-xs"
+            class="pl-4 pb-2 text-xs"
           >
             <div
               class="prc-Stack-Stack-WJVsK"
@@ -2724,9 +2718,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
               data-padding="none"
               data-wrap="nowrap"
             >
-              <div
-                class="Box-sc-g0xbh4-0"
-              >
+              <div>
                 <div
                   class="prc-Stack-Stack-WJVsK"
                   data-align="center"
@@ -2760,7 +2752,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                 </div>
               </div>
               <div
-                class="Box-sc-g0xbh4-0 cursor-pointer"
+                class="cursor-pointer"
                 data-testid="account-host"
                 title="Open host"
               >
@@ -2796,10 +2788,11 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                   </span>
                 </div>
               </div>
-              <div
-                class="Box-sc-g0xbh4-0 cursor-pointer"
+              <button
+                class="cursor-pointer"
                 data-testid="account-developer-settings"
                 title="Open developer settings"
+                type="button"
               >
                 <div
                   class="prc-Stack-Stack-WJVsK"
@@ -2832,7 +2825,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                     Personal Access Token
                   </span>
                 </div>
-              </div>
+              </button>
             </div>
           </div>
           <div
@@ -3007,7 +3000,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
       </div>
     </div>
     <div
-      class="Box-sc-g0xbh4-0 rounded-md p-2 mb-4 bg-gitify-accounts"
+      class="rounded-md p-2 mb-4 bg-gitify-accounts"
     >
       <div
         class="prc-Stack-Stack-WJVsK"
@@ -3086,7 +3079,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
           data-wrap="nowrap"
         >
           <div
-            class="Box-sc-g0xbh4-0 pl-4 pb-2 text-xs"
+            class="pl-4 pb-2 text-xs"
           >
             <div
               class="prc-Stack-Stack-WJVsK"
@@ -3097,9 +3090,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
               data-padding="none"
               data-wrap="nowrap"
             >
-              <div
-                class="Box-sc-g0xbh4-0"
-              >
+              <div>
                 <div
                   class="prc-Stack-Stack-WJVsK"
                   data-align="center"
@@ -3133,7 +3124,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                 </div>
               </div>
               <div
-                class="Box-sc-g0xbh4-0 cursor-pointer"
+                class="cursor-pointer"
                 data-testid="account-host"
                 title="Open host"
               >
@@ -3169,10 +3160,11 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                   </span>
                 </div>
               </div>
-              <div
-                class="Box-sc-g0xbh4-0 cursor-pointer"
+              <button
+                class="cursor-pointer"
                 data-testid="account-developer-settings"
                 title="Open developer settings"
+                type="button"
               >
                 <div
                   class="prc-Stack-Stack-WJVsK"
@@ -3205,7 +3197,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                     OAuth App
                   </span>
                 </div>
-              </div>
+              </button>
             </div>
           </div>
           <div
@@ -3380,7 +3372,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
       </div>
     </div>
     <div
-      class="Box-sc-g0xbh4-0 rounded-md p-2 mb-4 bg-gitify-accounts"
+      class="rounded-md p-2 mb-4 bg-gitify-accounts"
     >
       <div
         class="prc-Stack-Stack-WJVsK"
@@ -3459,7 +3451,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
           data-wrap="nowrap"
         >
           <div
-            class="Box-sc-g0xbh4-0 pl-4 pb-2 text-xs"
+            class="pl-4 pb-2 text-xs"
           >
             <div
               class="prc-Stack-Stack-WJVsK"
@@ -3470,9 +3462,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
               data-padding="none"
               data-wrap="nowrap"
             >
-              <div
-                class="Box-sc-g0xbh4-0"
-              >
+              <div>
                 <div
                   class="prc-Stack-Stack-WJVsK"
                   data-align="center"
@@ -3506,7 +3496,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                 </div>
               </div>
               <div
-                class="Box-sc-g0xbh4-0 cursor-pointer"
+                class="cursor-pointer"
                 data-testid="account-host"
                 title="Open host"
               >
@@ -3542,10 +3532,11 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                   </span>
                 </div>
               </div>
-              <div
-                class="Box-sc-g0xbh4-0 cursor-pointer"
+              <button
+                class="cursor-pointer"
                 data-testid="account-developer-settings"
                 title="Open developer settings"
+                type="button"
               >
                 <div
                   class="prc-Stack-Stack-WJVsK"
@@ -3578,7 +3569,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                     GitHub App
                   </span>
                 </div>
-              </div>
+              </button>
             </div>
           </div>
           <div
@@ -3754,7 +3745,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
     </div>
   </div>
   <div
-    class="Box-sc-g0xbh4-0 left-sidebar bg-gitify-footer"
+    class="left-sidebar bg-gitify-footer"
   >
     <div
       class="prc-Stack-Stack-WJVsK"

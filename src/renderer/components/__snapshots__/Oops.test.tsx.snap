@@ -32,7 +32,7 @@ exports[`renderer/components/Oops.tsx should render itself & its children - fall
             data-wrap="nowrap"
           >
             <div
-              class="Box-sc-g0xbh4-0 text-5xl"
+              class="text-5xl"
             >
               <img
                 alt="🤔"
@@ -42,13 +42,13 @@ exports[`renderer/components/Oops.tsx should render itself & its children - fall
               />
             </div>
             <div
-              class="Box-sc-g0xbh4-0 text-xl font-semibold"
+              class="text-xl font-semibold"
             >
               Oops! Something went wrong
             </div>
           </div>
           <div
-            class="Box-sc-g0xbh4-0 text-center"
+            class="text-center"
           >
             Please try again later.
           </div>
@@ -84,7 +84,7 @@ exports[`renderer/components/Oops.tsx should render itself & its children - fall
           data-wrap="nowrap"
         >
           <div
-            class="Box-sc-g0xbh4-0 text-5xl"
+            class="text-5xl"
           >
             <img
               alt="🤔"
@@ -94,13 +94,13 @@ exports[`renderer/components/Oops.tsx should render itself & its children - fall
             />
           </div>
           <div
-            class="Box-sc-g0xbh4-0 text-xl font-semibold"
+            class="text-xl font-semibold"
           >
             Oops! Something went wrong
           </div>
         </div>
         <div
-          class="Box-sc-g0xbh4-0 text-center"
+          class="text-center"
         >
           Please try again later.
         </div>
@@ -193,7 +193,7 @@ exports[`renderer/components/Oops.tsx should render itself & its children - spec
             data-wrap="nowrap"
           >
             <div
-              class="Box-sc-g0xbh4-0 text-5xl"
+              class="text-5xl"
             >
               <img
                 alt="🔥"
@@ -203,13 +203,13 @@ exports[`renderer/components/Oops.tsx should render itself & its children - spec
               />
             </div>
             <div
-              class="Box-sc-g0xbh4-0 text-xl font-semibold"
+              class="text-xl font-semibold"
             >
               Error title
             </div>
           </div>
           <div
-            class="Box-sc-g0xbh4-0 text-center"
+            class="text-center"
           >
             Error description
           </div>
@@ -245,7 +245,7 @@ exports[`renderer/components/Oops.tsx should render itself & its children - spec
           data-wrap="nowrap"
         >
           <div
-            class="Box-sc-g0xbh4-0 text-5xl"
+            class="text-5xl"
           >
             <img
               alt="🔥"
@@ -255,13 +255,13 @@ exports[`renderer/components/Oops.tsx should render itself & its children - spec
             />
           </div>
           <div
-            class="Box-sc-g0xbh4-0 text-xl font-semibold"
+            class="text-xl font-semibold"
           >
             Error title
           </div>
         </div>
         <div
-          class="Box-sc-g0xbh4-0 text-center"
+          class="text-center"
         >
           Error description
         </div>

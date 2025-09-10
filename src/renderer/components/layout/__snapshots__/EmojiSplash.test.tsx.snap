@@ -32,7 +32,7 @@ exports[`renderer/components/layout/EmojiSplash.tsx should render itself & its c
             data-wrap="nowrap"
           >
             <div
-              class="Box-sc-g0xbh4-0 text-5xl"
+              class="text-5xl"
             >
               <img
                 alt="🍺"
@@ -42,13 +42,13 @@ exports[`renderer/components/layout/EmojiSplash.tsx should render itself & its c
               />
             </div>
             <div
-              class="Box-sc-g0xbh4-0 text-xl font-semibold"
+              class="text-xl font-semibold"
             >
               Test Heading
             </div>
           </div>
           <div
-            class="Box-sc-g0xbh4-0 text-center"
+            class="text-center"
           >
             Test Sub-Heading
           </div>
@@ -84,7 +84,7 @@ exports[`renderer/components/layout/EmojiSplash.tsx should render itself & its c
           data-wrap="nowrap"
         >
           <div
-            class="Box-sc-g0xbh4-0 text-5xl"
+            class="text-5xl"
           >
             <img
               alt="🍺"
@@ -94,13 +94,13 @@ exports[`renderer/components/layout/EmojiSplash.tsx should render itself & its c
             />
           </div>
           <div
-            class="Box-sc-g0xbh4-0 text-xl font-semibold"
+            class="text-xl font-semibold"
           >
             Test Heading
           </div>
         </div>
         <div
-          class="Box-sc-g0xbh4-0 text-center"
+          class="text-center"
         >
           Test Sub-Heading
         </div>
@@ -193,7 +193,7 @@ exports[`renderer/components/layout/EmojiSplash.tsx should render itself & its c
             data-wrap="nowrap"
           >
             <div
-              class="Box-sc-g0xbh4-0 text-5xl"
+              class="text-5xl"
             >
               <img
                 alt="🍺"
@@ -203,7 +203,7 @@ exports[`renderer/components/layout/EmojiSplash.tsx should render itself & its c
               />
             </div>
             <div
-              class="Box-sc-g0xbh4-0 text-xl font-semibold"
+              class="text-xl font-semibold"
             >
               Test Heading
             </div>
@@ -240,7 +240,7 @@ exports[`renderer/components/layout/EmojiSplash.tsx should render itself & its c
           data-wrap="nowrap"
         >
           <div
-            class="Box-sc-g0xbh4-0 text-5xl"
+            class="text-5xl"
           >
             <img
               alt="🍺"
@@ -250,7 +250,7 @@ exports[`renderer/components/layout/EmojiSplash.tsx should render itself & its c
             />
           </div>
           <div
-            class="Box-sc-g0xbh4-0 text-xl font-semibold"
+            class="text-xl font-semibold"
           >
             Test Heading
           </div>

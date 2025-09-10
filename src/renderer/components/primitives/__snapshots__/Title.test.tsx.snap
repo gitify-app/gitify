@@ -4,7 +4,7 @@ exports[`renderer/routes/components/primitives/Title.tsx should render the title
 <div>
   <legend>
     <div
-      class="Box-sc-g0xbh4-0 mb-2"
+      class="mb-2"
     >
       <div
         class="prc-Stack-Stack-WJVsK"
@@ -48,7 +48,7 @@ exports[`renderer/routes/components/primitives/Title.tsx should render the title
 <div>
   <legend>
     <div
-      class="Box-sc-g0xbh4-0 mb-2"
+      class="mb-2"
     >
       <div
         class="prc-Stack-Stack-WJVsK"

@@ -102,7 +102,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
           >
             <svg
               aria-label="Gitify Logo"
-              class="size-5"
+              class="size-2.5"
               role="img"
               viewBox="0 0 500 500"
               xmlns="https://www.w3.org/2000/svg"
@@ -361,7 +361,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
         >
           <svg
             aria-label="Gitify Logo"
-            class="size-5"
+            class="size-2.5"
             role="img"
             viewBox="0 0 500 500"
             xmlns="https://www.w3.org/2000/svg"
@@ -677,7 +677,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
           >
             <svg
               aria-label="Gitify Logo"
-              class="size-5"
+              class="size-2.5"
               role="img"
               viewBox="0 0 500 500"
               xmlns="https://www.w3.org/2000/svg"
@@ -936,7 +936,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
         >
           <svg
             aria-label="Gitify Logo"
-            class="size-5"
+            class="size-2.5"
             role="img"
             viewBox="0 0 500 500"
             xmlns="https://www.w3.org/2000/svg"

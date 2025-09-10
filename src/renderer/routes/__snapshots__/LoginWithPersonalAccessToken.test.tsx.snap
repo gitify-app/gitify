@@ -6,11 +6,11 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
   "baseElement": <body>
     <div>
       <div
-        class="Box-sc-g0xbh4-0 flex flex-col h-screen"
+        class="flex flex-col h-screen"
         data-testid="Login With Personal Access Token"
       >
         <div
-          class="Box-sc-g0xbh4-0 pl-4 pr-6 pt-3 pb-1"
+          class="pl-4 pr-6 pt-3 pb-1"
         >
           <div
             class="prc-Stack-Stack-WJVsK"
@@ -51,7 +51,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
             </button>
             <legend>
               <div
-                class="Box-sc-g0xbh4-0 mb-2"
+                class="mb-2"
               >
                 <div
                   class="prc-Stack-Stack-WJVsK"
@@ -91,7 +91,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
           </div>
         </div>
         <div
-          class="Box-sc-g0xbh4-0 grow overflow-x-hidden overflow-y-auto px-8"
+          class="grow overflow-x-hidden overflow-y-auto px-5"
         >
           <div
             class="prc-Stack-Stack-WJVsK"
@@ -333,7 +333,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
           </div>
         </div>
         <div
-          class="Box-sc-g0xbh4-0 left-sidebar bg-gitify-footer"
+          class="left-sidebar bg-gitify-footer"
         >
           <div
             class="prc-Stack-Stack-WJVsK"
@@ -451,11 +451,11 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
   </body>,
   "container": <div>
     <div
-      class="Box-sc-g0xbh4-0 flex flex-col h-screen"
+      class="flex flex-col h-screen"
       data-testid="Login With Personal Access Token"
     >
       <div
-        class="Box-sc-g0xbh4-0 pl-4 pr-6 pt-3 pb-1"
+        class="pl-4 pr-6 pt-3 pb-1"
       >
         <div
           class="prc-Stack-Stack-WJVsK"
@@ -496,7 +496,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
           </button>
           <legend>
             <div
-              class="Box-sc-g0xbh4-0 mb-2"
+              class="mb-2"
             >
               <div
                 class="prc-Stack-Stack-WJVsK"
@@ -536,7 +536,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
         </div>
       </div>
       <div
-        class="Box-sc-g0xbh4-0 grow overflow-x-hidden overflow-y-auto px-8"
+        class="grow overflow-x-hidden overflow-y-auto px-5"
       >
         <div
           class="prc-Stack-Stack-WJVsK"
@@ -778,7 +778,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
         </div>
       </div>
       <div
-        class="Box-sc-g0xbh4-0 left-sidebar bg-gitify-footer"
+        class="left-sidebar bg-gitify-footer"
       >
         <div
           class="prc-Stack-Stack-WJVsK"
