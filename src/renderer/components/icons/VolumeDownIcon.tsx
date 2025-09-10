@@ -3,7 +3,7 @@ import type { FC } from 'react';
 export const VolumeDownIcon: FC = () => (
   <svg
     aria-label="Volume Down Icon"
-    className="size-4"
+    className="size-2"
     fill="currentColor"
     height="24"
     role="img"

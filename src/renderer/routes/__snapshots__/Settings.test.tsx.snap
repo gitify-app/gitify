@@ -1239,7 +1239,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                 >
                   <svg
                     aria-label="Volume Down Icon"
-                    class="size-4"
+                    class="size-2"
                     fill="currentColor"
                     height="24"
                     role="img"
@@ -1302,7 +1302,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                 >
                   <svg
                     aria-label="Volume Up Icon"
-                    class="size-4"
+                    class="size-2"
                     fill="currentColor"
                     height="24"
                     role="img"
