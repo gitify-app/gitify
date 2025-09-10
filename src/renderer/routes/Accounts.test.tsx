@@ -17,8 +17,6 @@ import * as links from '../utils/links';
 import * as storage from '../utils/storage';
 import { AccountsRoute } from './Accounts';
 
-// import { setupMatchMedia } from '../__helpers__/jest.setup';
-
 const mockNavigate = jest.fn();
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
@@ -28,58 +26,43 @@ jest.mock('react-router-dom', () => ({
 describe('renderer/routes/Accounts.tsx', () => {
   afterEach(() => {
     jest.clearAllMocks();
-    // setupMatchMedia()
   });
 
   describe('General', () => {
     it('should render itself & its children', async () => {
       await act(async () => {
         render(
-          <ThemeProvider>
-            <BaseStyles>
-              <AppContext.Provider
-                value={{
-                  auth: {
-                    accounts: [
-                      mockPersonalAccessTokenAccount,
-                      mockOAuthAccount,
-                      mockGitHubAppAccount,
-                    ],
-                  },
-                  settings: mockSettings,
-                }}
-              >
-                <AccountsRoute />
-              </AppContext.Provider>
-            </BaseStyles>
-          </ThemeProvider>,
+          <AppContext.Provider
+            value={{
+              auth: {
+                accounts: [
+                  mockPersonalAccessTokenAccount,
+                  mockOAuthAccount,
+                  mockGitHubAppAccount,
+                ],
+              },
+              settings: mockSettings,
+            }}
+          >
+            <AccountsRoute />
+          </AppContext.Provider>,
         );
       });
-      // Semantic assertions instead of brittle full DOM snapshot
-      expect(screen.getByTestId('accounts')).toBeInTheDocument();
-      // We expect 3 accounts rendered (PAT, OAuth, GitHub App)
-      expect(screen.getAllByTestId('account-profile')).toHaveLength(3);
-      // Primary account star/set-primary button should exist for at least one non-primary account
-      expect(
-        screen.getAllByTestId('account-set-primary').length,
-      ).toBeGreaterThan(0);
+
+      expect(screen.getByTestId('accounts')).toMatchSnapshot();
     });
 
     it('should go back by pressing the icon', async () => {
       await act(async () => {
         render(
-          <ThemeProvider>
-            <BaseStyles>
-              <AppContext.Provider
-                value={{
-                  auth: mockAuth,
-                  settings: mockSettings,
-                }}
-              >
-                <AccountsRoute />
-              </AppContext.Provider>
-            </BaseStyles>
-          </ThemeProvider>,
+          <AppContext.Provider
+            value={{
+              auth: mockAuth,
+              settings: mockSettings,
+            }}
+          >
+            <AccountsRoute />
+          </AppContext.Provider>,
         );
       });
 
@@ -97,20 +80,16 @@ describe('renderer/routes/Accounts.tsx', () => {
 
       await act(async () => {
         render(
-          <ThemeProvider>
-            <BaseStyles>
-              <AppContext.Provider
-                value={{
-                  auth: {
-                    accounts: [mockPersonalAccessTokenAccount],
-                  },
-                  settings: mockSettings,
-                }}
-              >
-                <AccountsRoute />
-              </AppContext.Provider>
-            </BaseStyles>
-          </ThemeProvider>,
+          <AppContext.Provider
+            value={{
+              auth: {
+                accounts: [mockPersonalAccessTokenAccount],
+              },
+              settings: mockSettings,
+            }}
+          >
+            <AccountsRoute />
+          </AppContext.Provider>,
         );
       });
 
@@ -129,20 +108,16 @@ describe('renderer/routes/Accounts.tsx', () => {
 
       await act(async () => {
         render(
-          <ThemeProvider>
-            <BaseStyles>
-              <AppContext.Provider
-                value={{
-                  auth: {
-                    accounts: [mockPersonalAccessTokenAccount],
-                  },
-                  settings: mockSettings,
-                }}
-              >
-                <AccountsRoute />
-              </AppContext.Provider>
-            </BaseStyles>
-          </ThemeProvider>,
+          <AppContext.Provider
+            value={{
+              auth: {
+                accounts: [mockPersonalAccessTokenAccount],
+              },
+              settings: mockSettings,
+            }}
+          >
+            <AccountsRoute />
+          </AppContext.Provider>,
         );
       });
 
@@ -159,20 +134,16 @@ describe('renderer/routes/Accounts.tsx', () => {
 
       await act(async () => {
         render(
-          <ThemeProvider>
-            <BaseStyles>
-              <AppContext.Provider
-                value={{
-                  auth: {
-                    accounts: [mockPersonalAccessTokenAccount],
-                  },
-                  settings: mockSettings,
-                }}
-              >
-                <AccountsRoute />
-              </AppContext.Provider>
-            </BaseStyles>
-          </ThemeProvider>,
+          <AppContext.Provider
+            value={{
+              auth: {
+                accounts: [mockPersonalAccessTokenAccount],
+              },
+              settings: mockSettings,
+            }}
+          >
+            <AccountsRoute />
+          </AppContext.Provider>,
         );
       });
 
@@ -210,10 +181,8 @@ describe('renderer/routes/Accounts.tsx', () => {
           </AppContext.Provider>,
         );
       });
-      // Validate missing scopes warning button is rendered (invisible icon button present)
-      expect(
-        screen.getAllByTestId('account-missing-scopes').length,
-      ).toBeGreaterThan(0);
+
+      expect(screen.getByTestId('accounts')).toMatchSnapshot();
 
       await userEvent.click(screen.getAllByTestId('account-missing-scopes')[0]);
 
@@ -230,29 +199,24 @@ describe('renderer/routes/Accounts.tsx', () => {
 
       await act(async () => {
         render(
-          <ThemeProvider>
-            <BaseStyles>
-              <AppContext.Provider
-                value={{
-                  auth: {
-                    accounts: [
-                      mockPersonalAccessTokenAccount,
-                      mockOAuthAccount,
-                      mockGitHubAppAccount,
-                    ],
-                  },
-                  settings: mockSettings,
-                }}
-              >
-                <AccountsRoute />
-              </AppContext.Provider>
-            </BaseStyles>
-          </ThemeProvider>,
+          <AppContext.Provider
+            value={{
+              auth: {
+                accounts: [
+                  mockPersonalAccessTokenAccount,
+                  mockOAuthAccount,
+                  mockGitHubAppAccount,
+                ],
+              },
+              settings: mockSettings,
+            }}
+          >
+            <AccountsRoute />
+          </AppContext.Provider>,
         );
       });
-      // Assert initial state shows a set-primary action before click
-      const setPrimaryButtons = screen.getAllByTestId('account-set-primary');
-      expect(setPrimaryButtons.length).toBeGreaterThan(0);
+
+      expect(screen.getByTestId('accounts')).toMatchSnapshot();
 
       await userEvent.click(screen.getAllByTestId('account-set-primary')[0]);
 
@@ -264,20 +228,16 @@ describe('renderer/routes/Accounts.tsx', () => {
 
       await act(async () => {
         render(
-          <ThemeProvider>
-            <BaseStyles>
-              <AppContext.Provider
-                value={{
-                  auth: {
-                    accounts: [mockPersonalAccessTokenAccount],
-                  },
-                  settings: mockSettings,
-                }}
-              >
-                <AccountsRoute />
-              </AppContext.Provider>
-            </BaseStyles>
-          </ThemeProvider>,
+          <AppContext.Provider
+            value={{
+              auth: {
+                accounts: [mockPersonalAccessTokenAccount],
+              },
+              settings: mockSettings,
+            }}
+          >
+            <AccountsRoute />
+          </AppContext.Provider>,
         );
       });
 
@@ -303,21 +263,17 @@ describe('renderer/routes/Accounts.tsx', () => {
 
       await act(async () => {
         render(
-          <ThemeProvider>
-            <BaseStyles>
-              <AppContext.Provider
-                value={{
-                  auth: {
-                    accounts: [mockPersonalAccessTokenAccount],
-                  },
-                  settings: mockSettings,
-                  logoutFromAccount: logoutFromAccountMock,
-                }}
-              >
-                <AccountsRoute />
-              </AppContext.Provider>
-            </BaseStyles>
-          </ThemeProvider>,
+          <AppContext.Provider
+            value={{
+              auth: {
+                accounts: [mockPersonalAccessTokenAccount],
+              },
+              settings: mockSettings,
+              logoutFromAccount: logoutFromAccountMock,
+            }}
+          >
+            <AccountsRoute />
+          </AppContext.Provider>,
         );
       });
 

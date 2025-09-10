@@ -20,18 +20,17 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
         >
           <button
             aria-describedby="«r0»"
-            aria-label="Open Issue"
-            class="inline-flex bg-transparent p-0 border-0 cursor-default"
             type="button"
           >
             <svg
-              aria-hidden="true"
+              aria-label="Open Issue"
               class="octicon octicon-issue-opened text-gitify-icon-open"
               display="inline-block"
               fill="currentColor"
               focusable="false"
               height="18"
               overflow="visible"
+              role="img"
               style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="18"
@@ -393,18 +392,17 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
       >
         <button
           aria-describedby="«r0»"
-          aria-label="Open Issue"
-          class="inline-flex bg-transparent p-0 border-0 cursor-default"
           type="button"
         >
           <svg
-            aria-hidden="true"
+            aria-label="Open Issue"
             class="octicon octicon-issue-opened text-gitify-icon-open"
             display="inline-block"
             fill="currentColor"
             focusable="false"
             height="18"
             overflow="visible"
+            role="img"
             style="vertical-align: text-bottom;"
             viewBox="0 0 16 16"
             width="18"
@@ -823,18 +821,17 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
         >
           <button
             aria-describedby="«r4»"
-            aria-label="Open Issue"
-            class="inline-flex bg-transparent p-0 border-0 cursor-default"
             type="button"
           >
             <svg
-              aria-hidden="true"
+              aria-label="Open Issue"
               class="octicon octicon-issue-opened text-gitify-icon-open"
               display="inline-block"
               fill="currentColor"
               focusable="false"
               height="18"
               overflow="visible"
+              role="img"
               style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="18"
@@ -1145,18 +1142,17 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
       >
         <button
           aria-describedby="«r4»"
-          aria-label="Open Issue"
-          class="inline-flex bg-transparent p-0 border-0 cursor-default"
           type="button"
         >
           <svg
-            aria-hidden="true"
+            aria-label="Open Issue"
             class="octicon octicon-issue-opened text-gitify-icon-open"
             display="inline-block"
             fill="currentColor"
             focusable="false"
             height="18"
             overflow="visible"
+            role="img"
             style="vertical-align: text-bottom;"
             viewBox="0 0 16 16"
             width="18"
@@ -1524,18 +1520,17 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
         >
           <button
             aria-describedby="«r8»"
-            aria-label="Open Issue"
-            class="inline-flex bg-transparent p-0 border-0 cursor-default"
             type="button"
           >
             <svg
-              aria-hidden="true"
+              aria-label="Open Issue"
               class="octicon octicon-issue-opened text-gitify-icon-open"
               display="inline-block"
               fill="currentColor"
               focusable="false"
               height="18"
               overflow="visible"
+              role="img"
               style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="18"
@@ -1846,18 +1841,17 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
       >
         <button
           aria-describedby="«r8»"
-          aria-label="Open Issue"
-          class="inline-flex bg-transparent p-0 border-0 cursor-default"
           type="button"
         >
           <svg
-            aria-hidden="true"
+            aria-label="Open Issue"
             class="octicon octicon-issue-opened text-gitify-icon-open"
             display="inline-block"
             fill="currentColor"
             focusable="false"
             height="18"
             overflow="visible"
+            role="img"
             style="vertical-align: text-bottom;"
             viewBox="0 0 16 16"
             width="18"

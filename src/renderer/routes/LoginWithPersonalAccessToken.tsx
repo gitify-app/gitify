@@ -192,14 +192,11 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
 
             <Text as="i" className="text-xs">
               The{' '}
-              <Text
-                aria-label={`Required scopes: ${formatRecommendedOAuthScopes()}`}
-                as="u"
-                tabIndex={0}
-                title={formatRecommendedOAuthScopes()}
-              >
-                required scopes
-              </Text>{' '}
+              <Tooltip direction="se" text={formatRecommendedOAuthScopes()}>
+                <button type="button">
+                  <Text as="u">required scopes</Text>
+                </button>
+              </Tooltip>{' '}
               will be automatically selected for you.
             </Text>
           </Stack>

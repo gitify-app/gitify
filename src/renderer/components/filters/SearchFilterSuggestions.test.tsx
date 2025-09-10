@@ -6,8 +6,6 @@ import type { SettingsState } from '../../types';
 import { SearchFilterSuggestions } from './SearchFilterSuggestions';
 
 describe('renderer/components/filters/SearchFilterSuggestions.tsx', () => {
-  // onClose prop removed in v37 migration
-
   it('should render itself & its children - closed', () => {
     const tree = render(
       <AppContext.Provider
