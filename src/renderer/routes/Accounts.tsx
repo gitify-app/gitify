@@ -146,48 +146,41 @@ export const AccountsRoute: FC = () => {
                 >
                   <div className="pl-4 pb-2 text-xs">
                     <Stack direction="vertical" gap="condensed">
-                      <div hidden={!account.user.name}>
-                        <Stack
-                          align="center"
-                          direction="horizontal"
-                          gap="condensed"
-                        >
-                          <PersonIcon />
-                          <Text>{account.user?.name}</Text>
-                        </Stack>
-                      </div>
+                      <Stack
+                        align="center"
+                        direction="horizontal"
+                        gap="condensed"
+                        hidden={!account.user.name}
+                      >
+                        <PersonIcon />
+                        <Text>{account.user?.name}</Text>
+                      </Stack>
 
-                      <div
+                      <Stack
+                        align="center"
                         className="cursor-pointer"
                         data-testid="account-host"
+                        direction="horizontal"
+                        gap="condensed"
                         onClick={() => openHost(account.hostname)}
                         title="Open host"
                       >
-                        <Stack
-                          align="center"
-                          direction="horizontal"
-                          gap="condensed"
-                        >
-                          <PlatformIcon />
-                          <Text>{account.hostname}</Text>
-                        </Stack>
-                      </div>
+                        <PlatformIcon />
+                        <Text>{account.hostname}</Text>
+                      </Stack>
 
-                      <button type="button"
+                      <Stack
+                        align="center"
                         className="cursor-pointer"
                         data-testid="account-developer-settings"
+                        direction="horizontal"
+                        gap="condensed"
                         onClick={() => openDeveloperSettings(account)}
                         title="Open developer settings"
                       >
-                        <Stack
-                          align="center"
-                          direction="horizontal"
-                          gap="condensed"
-                        >
-                          <AuthMethodIcon />
-                          <Text>{account.method}</Text>
-                        </Stack>
-                      </button>
+                        <AuthMethodIcon />
+                        <Text>{account.method}</Text>
+                      </Stack>
                     </Stack>
                   </div>
 
