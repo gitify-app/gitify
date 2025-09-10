@@ -8,7 +8,7 @@ import {
   RepoIcon,
   SearchIcon,
 } from '@primer/octicons-react';
-import { Box, Stack, Text } from '@primer/react';
+import { Stack, Text } from '@primer/react';
 
 import { AppContext } from '../../context/App';
 import { IconColor, type SearchToken, Size } from '../../types';
@@ -86,7 +86,7 @@ export const SearchFilter: FC = () => {
         tooltip={
           <Stack direction="vertical" gap="condensed">
             <Text>Filter notifications by:</Text>
-            <Box className="pl-4">
+            <div className="pl-4">
               <Stack direction="vertical" gap="condensed">
                 <Stack direction="horizontal" gap="condensed">
                   <PersonIcon size={Size.SMALL} />
@@ -108,7 +108,7 @@ export const SearchFilter: FC = () => {
                   <Text>Repository (repo:fullname)</Text>
                 </Stack>
               </Stack>
-            </Box>
+            </div>
             <RequiresDetailedNotificationWarning />
           </Stack>
         }

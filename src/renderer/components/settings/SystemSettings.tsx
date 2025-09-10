@@ -1,14 +1,7 @@
 import { type FC, useContext } from 'react';
 
 import { DeviceDesktopIcon, SyncIcon } from '@primer/octicons-react';
-import {
-  Box,
-  Button,
-  ButtonGroup,
-  IconButton,
-  Stack,
-  Text,
-} from '@primer/react';
+import { Button, ButtonGroup, IconButton, Stack, Text } from '@primer/react';
 
 import { APPLICATION } from '../../../shared/constants';
 
@@ -50,13 +43,13 @@ export const SystemSettings: FC = () => {
             updateSetting('keyboardShortcut', evt.target.checked)
           }
           tooltip={
-            <Box>
+            <div>
               When enabled you can use the hotkeys{' '}
               <Text as="strong" className="text-gitify-caution">
                 {APPLICATION.DEFAULT_KEYBOARD_SHORTCUT}
               </Text>{' '}
               to show or hide {APPLICATION.NAME}.
-            </Box>
+            </div>
           }
         />
 
@@ -79,7 +72,7 @@ export const SystemSettings: FC = () => {
           }
         />
 
-        <Box>
+        <div>
           <Stack
             align="center"
             className="text-sm"
@@ -148,7 +141,7 @@ export const SystemSettings: FC = () => {
               />
             </ButtonGroup>
           </Stack>
-        </Box>
+        </div>
 
         <Checkbox
           checked={settings.useAlternateIdleIcon}

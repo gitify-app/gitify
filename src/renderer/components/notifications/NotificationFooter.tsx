@@ -1,6 +1,6 @@
 import type { FC, MouseEvent } from 'react';
 
-import { Box, RelativeTime, Stack, Text } from '@primer/react';
+import { RelativeTime, Stack, Text } from '@primer/react';
 
 import { Opacity, Size } from '../../types';
 import type { Notification } from '../../typesGitHub';
@@ -28,7 +28,7 @@ export const NotificationFooter: FC<INotificationFooter> = ({
       wrap="wrap"
     >
       {notification.subject.user ? (
-        <Box
+        <button
           data-testid="view-profile"
           onClick={(event: MouseEvent<HTMLElement>) => {
             // Don't trigger onClick of parent element.
@@ -36,6 +36,7 @@ export const NotificationFooter: FC<INotificationFooter> = ({
             openUserProfile(notification.subject.user);
           }}
           title={notification.subject.user.login}
+          type="button"
         >
           <AvatarWithFallback
             alt={notification.subject.user.login}
@@ -43,7 +44,7 @@ export const NotificationFooter: FC<INotificationFooter> = ({
             src={notification.subject.user.avatar_url}
             userType={notification.subject.user.type}
           />
-        </Box>
+        </button>
       ) : (
         <AvatarWithFallback
           size={Size.SMALL}

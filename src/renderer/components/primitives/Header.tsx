@@ -2,7 +2,7 @@ import { type FC, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { ArrowLeftIcon, type Icon } from '@primer/octicons-react';
-import { Box, IconButton, Stack } from '@primer/react';
+import { IconButton, Stack } from '@primer/react';
 
 import { AppContext } from '../../context/App';
 import { Title } from './Title';
@@ -19,7 +19,7 @@ export const Header: FC<IHeader> = (props: IHeader) => {
   const { fetchNotifications } = useContext(AppContext);
 
   return (
-    <Box className="pl-4 pr-6 pt-3 pb-1">
+    <div className="pl-4 pr-6 pt-3 pb-1">
       <Stack direction="horizontal" justify="space-between">
         <IconButton
           aria-labelledby="Go Back"
@@ -39,6 +39,6 @@ export const Header: FC<IHeader> = (props: IHeader) => {
           {props.children}
         </Title>
       </Stack>
-    </Box>
+    </div>
   );
 };

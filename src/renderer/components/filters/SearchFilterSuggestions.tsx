@@ -1,6 +1,6 @@
 import { type FC, useContext } from 'react';
 
-import { Box, Popover, Stack, Text } from '@primer/react';
+import { Popover, Stack, Text } from '@primer/react';
 
 import { AppContext } from '../../context/App';
 import { Opacity } from '../../types';
@@ -41,19 +41,19 @@ export const SearchFilterSuggestions: FC<SearchFilterSuggestionsProps> = ({
         <Stack direction="vertical" gap="condensed">
           {suggestions.length > 0 &&
             suggestions.map((q) => (
-              <Box key={q.prefix}>
+              <div key={q.prefix}>
                 <Stack direction="vertical" gap="none">
                   <Text className="text-xs font-semibold">{q.prefix}</Text>
                   <Text className={cn('text-xs', Opacity.HIGH)}>
                     {q.description}
                   </Text>
                 </Stack>
-              </Box>
+              </div>
             ))}
           {inputValue !== '' &&
             suggestions.length === 0 &&
             !beginsWithKnownQualifier && (
-              <Box>
+              <div>
                 <Text className={cn('text-xs', Opacity.HIGH)}>
                   Please use one of the supported filters [
                   {base
@@ -61,7 +61,7 @@ export const SearchFilterSuggestions: FC<SearchFilterSuggestionsProps> = ({
                     .join(', ')}
                   ]
                 </Text>
-              </Box>
+              </div>
             )}
         </Stack>
       </Popover.Content>

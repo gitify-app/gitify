@@ -1,7 +1,7 @@
 import type { FC, ReactNode } from 'react';
 
 import type { Icon } from '@primer/octicons-react';
-import { Box, Heading, Stack } from '@primer/react';
+import { Heading, Stack } from '@primer/react';
 
 import { Tooltip } from '../fields/Tooltip';
 
@@ -17,7 +17,7 @@ export const Title: FC<ITitle> = ({ size = 2, ...props }) => {
 
   return (
     <legend>
-      <Box className="mb-2">
+      <div className="mb-2">
         <Stack
           align="center"
           direction="horizontal"
@@ -37,7 +37,7 @@ export const Title: FC<ITitle> = ({ size = 2, ...props }) => {
             />
           )}
         </Stack>
-      </Box>
+      </div>
     </legend>
   );
 };

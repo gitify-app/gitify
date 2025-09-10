@@ -1,7 +1,5 @@
 import type { FC, ReactNode } from 'react';
 
-import { Box } from '@primer/react';
-
 interface IPage {
   children: ReactNode;
   testId?: string;
@@ -14,8 +12,8 @@ interface IPage {
  */
 export const Page: FC<IPage> = ({ children, testId }) => {
   return (
-    <Box className="flex flex-col h-screen" data-testid={testId}>
+    <div className="flex flex-col h-screen" data-testid={testId}>
       {children}
-    </Box>
+    </div>
   );
 };

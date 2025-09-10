@@ -1,7 +1,7 @@
 import { type FC, useCallback, useContext, useState } from 'react';
 
 import { BellSlashIcon, CheckIcon, ReadIcon } from '@primer/octicons-react';
-import { Box, Stack, Text, Tooltip } from '@primer/react';
+import { Stack, Text, Tooltip } from '@primer/react';
 
 import { AppContext } from '../../context/App';
 import { GroupBy, Opacity, Size } from '../../types';
@@ -79,7 +79,7 @@ export const NotificationRow: FC<INotificationRow> = ({
   const groupByDate = settings.groupBy === GroupBy.DATE;
 
   return (
-    <Box
+    <div
       className={cn(
         'group border-b',
         'pl-3 pr-1 py-1.5',
@@ -172,6 +172,6 @@ export const NotificationRow: FC<INotificationRow> = ({
           </HoverGroup>
         )}
       </Stack>
-    </Box>
+    </div>
   );
 };

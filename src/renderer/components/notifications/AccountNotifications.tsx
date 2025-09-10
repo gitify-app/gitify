@@ -1,7 +1,7 @@
 import { type FC, type MouseEvent, useContext, useMemo, useState } from 'react';
 
 import { GitPullRequestIcon, IssueOpenedIcon } from '@primer/octicons-react';
-import { Box, Button, Stack } from '@primer/react';
+import { Button, Stack } from '@primer/react';
 
 import { AppContext } from '../../context/App';
 import { type Account, type GitifyError, Size } from '../../types';
@@ -73,12 +73,13 @@ export const AccountNotifications: FC<IAccountNotifications> = (
   return (
     <>
       {showAccountHeader && (
-        <Box
+        <button
           className={cn(
             'group pr-1 py-0.5',
             props.error ? 'bg-gitify-account-error' : 'bg-gitify-account-rest',
           )}
           onClick={actionToggleAccountNotifications}
+          type="button"
         >
           <Stack
             align="center"
@@ -129,7 +130,7 @@ export const AccountNotifications: FC<IAccountNotifications> = (
               />
             </HoverGroup>
           </Stack>
-        </Box>
+        </button>
       )}
 
       {showAccountNotifications && (

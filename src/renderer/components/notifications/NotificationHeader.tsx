@@ -1,6 +1,6 @@
 import { type FC, type MouseEvent, useContext } from 'react';
 
-import { Box, Stack } from '@primer/react';
+import { Stack } from '@primer/react';
 
 import { AppContext } from '../../context/App';
 import { GroupBy, Opacity, Size } from '../../types';
@@ -28,9 +28,9 @@ export const NotificationHeader: FC<INotificationHeader> = ({
 
   return (
     groupByDate && (
-      <Box className="py-0.5">
+      <div className="py-0.5">
         <Stack align="center" direction="horizontal" gap="condensed">
-          <Box
+          <button
             className="text-xs font-medium"
             data-testid="view-repository"
             onClick={(event: MouseEvent<HTMLElement>) => {
@@ -39,6 +39,7 @@ export const NotificationHeader: FC<INotificationHeader> = ({
               openRepository(notification.repository);
             }}
             title="Open repository"
+            type="button"
           >
             <AvatarWithFallback
               alt={repoSlug}
@@ -47,8 +48,8 @@ export const NotificationHeader: FC<INotificationHeader> = ({
               src={notification.repository.owner.avatar_url}
               userType={notification.repository.owner.type}
             />
-          </Box>
-          <Box
+          </button>
+          <div
             className={cn(
               'text-xxs',
               Opacity.READ,
@@ -56,9 +57,9 @@ export const NotificationHeader: FC<INotificationHeader> = ({
             )}
           >
             {notificationNumber}
-          </Box>
+          </div>
         </Stack>
-      </Box>
+      </div>
     )
   );
 };

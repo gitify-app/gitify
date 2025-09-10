@@ -1,7 +1,7 @@
 import { type FC, type MouseEvent, useContext, useState } from 'react';
 
 import { CheckIcon, ReadIcon } from '@primer/octicons-react';
-import { Box, Button, Stack } from '@primer/react';
+import { Button, Stack } from '@primer/react';
 
 import { AppContext } from '../../context/App';
 import { Opacity, Size } from '../../types';
@@ -57,7 +57,7 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
 
   return (
     <>
-      <Box
+      <button
         className={cn(
           'group pr-1 py-0.5',
           'bg-gitify-repository',
@@ -66,6 +66,7 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
           showAsRead && Opacity.READ,
         )}
         onClick={actionToggleRepositoryNotifications}
+        type="button"
       >
         <Stack
           align="center"
@@ -122,7 +123,7 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
             </HoverGroup>
           )}
         </Stack>
-      </Box>
+      </button>
 
       {showRepositoryNotifications &&
         repoNotifications.map((notification) => (

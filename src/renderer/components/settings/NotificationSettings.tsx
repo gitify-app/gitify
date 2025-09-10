@@ -9,7 +9,7 @@ import {
   MilestoneIcon,
   TagIcon,
 } from '@primer/octicons-react';
-import { Box, Stack, Text } from '@primer/react';
+import { Stack, Text } from '@primer/react';
 
 import { APPLICATION } from '../../../shared/constants';
 
@@ -92,7 +92,7 @@ export const NotificationSettings: FC = () => {
           }
         />
 
-        <Box className="pl-6" hidden={!settings.detailedNotifications}>
+        <div className="pl-6" hidden={!settings.detailedNotifications}>
           <Stack direction="vertical" gap="condensed">
             <Checkbox
               checked={settings.showPills}
@@ -102,7 +102,7 @@ export const NotificationSettings: FC = () => {
               tooltip={
                 <Stack direction="vertical" gap="condensed">
                   <Text>Show notification metric pills for:</Text>
-                  <Box className="pl-4">
+                  <div className="pl-4">
                     <Stack direction="vertical" gap="none">
                       <Stack direction="horizontal" gap="condensed">
                         <IssueOpenedIcon size={Size.SMALL} />
@@ -125,7 +125,7 @@ export const NotificationSettings: FC = () => {
                         milestones
                       </Stack>
                     </Stack>
-                  </Box>
+                  </div>
                 </Stack>
               }
             />
@@ -140,7 +140,7 @@ export const NotificationSettings: FC = () => {
               tooltip={
                 <Stack direction="vertical" gap="condensed">
                   <Text>Show GitHub number for:</Text>
-                  <Box className="pl-4">
+                  <div className="pl-4">
                     <ul>
                       <li>
                         <Stack direction="horizontal" gap="condensed">
@@ -161,12 +161,12 @@ export const NotificationSettings: FC = () => {
                         </Stack>
                       </li>
                     </ul>
-                  </Box>
+                  </div>
                 </Stack>
               }
             />
           </Stack>
-        </Box>
+        </div>
 
         <Checkbox
           checked={settings.participating}
@@ -185,7 +185,7 @@ export const NotificationSettings: FC = () => {
               </Text>
               <Text>
                 See{' '}
-                <Box
+                <button
                   className="text-gitify-link cursor-pointer"
                   onClick={(event: MouseEvent<HTMLElement>) => {
                     // Don't trigger onClick of parent element.
@@ -193,9 +193,10 @@ export const NotificationSettings: FC = () => {
                     openGitHubParticipatingDocs();
                   }}
                   title="Open GitHub documentation for participating and watching notifications"
+                  type="button"
                 >
                   official docs
-                </Box>{' '}
+                </button>{' '}
                 for more details.
               </Text>
             </Stack>

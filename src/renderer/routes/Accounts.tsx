@@ -15,7 +15,6 @@ import {
 import {
   ActionList,
   ActionMenu,
-  Box,
   Button,
   IconButton,
   Stack,
@@ -120,7 +119,7 @@ export const AccountsRoute: FC = () => {
           const accountUUID = getAccountUUID(account);
 
           return (
-            <Box
+            <div
               className="rounded-md p-2 mb-4 bg-gitify-accounts"
               key={accountUUID}
             >
@@ -145,9 +144,9 @@ export const AccountsRoute: FC = () => {
                   direction="horizontal"
                   justify="space-between"
                 >
-                  <Box className="pl-4 pb-2 text-xs">
+                  <div className="pl-4 pb-2 text-xs">
                     <Stack direction="vertical" gap="condensed">
-                      <Box hidden={!account.user.name}>
+                      <div hidden={!account.user.name}>
                         <Stack
                           align="center"
                           direction="horizontal"
@@ -156,9 +155,9 @@ export const AccountsRoute: FC = () => {
                           <PersonIcon />
                           <Text>{account.user?.name}</Text>
                         </Stack>
-                      </Box>
+                      </div>
 
-                      <Box
+                      <div
                         className="cursor-pointer"
                         data-testid="account-host"
                         onClick={() => openHost(account.hostname)}
@@ -172,9 +171,9 @@ export const AccountsRoute: FC = () => {
                           <PlatformIcon />
                           <Text>{account.hostname}</Text>
                         </Stack>
-                      </Box>
+                      </div>
 
-                      <Box
+                      <button type="button"
                         className="cursor-pointer"
                         data-testid="account-developer-settings"
                         onClick={() => openDeveloperSettings(account)}
@@ -188,9 +187,9 @@ export const AccountsRoute: FC = () => {
                           <AuthMethodIcon />
                           <Text>{account.method}</Text>
                         </Stack>
-                      </Box>
+                      </button>
                     </Stack>
-                  </Box>
+                  </div>
 
                   <Stack direction="horizontal" gap="condensed">
                     <IconButton
@@ -236,7 +235,7 @@ export const AccountsRoute: FC = () => {
                   </Stack>
                 </Stack>
               </Stack>
-            </Box>
+            </div>
           );
         })}
       </Contents>
