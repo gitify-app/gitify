@@ -69,13 +69,13 @@ exports[`renderer/components/primitives/HoverButton.tsx should render 1`] = `
       <button
         aria-describedby="«r0»-loading-announcement"
         aria-label="Hover Button"
-        class="types__StyledButton-sc-ws60qy-0 yiNNF"
+        class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
         data-component="IconButton"
         data-loading="false"
         data-no-visuals="true"
         data-size="small"
         data-testid="hover-button"
-        sx="[object Object]"
+        data-variant="invisible"
         title="Hover Button"
         type="button"
       >
@@ -102,13 +102,13 @@ exports[`renderer/components/primitives/HoverButton.tsx should render 1`] = `
     <button
       aria-describedby="«r0»-loading-announcement"
       aria-label="Hover Button"
-      class="types__StyledButton-sc-ws60qy-0 yiNNF"
+      class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
       data-component="IconButton"
       data-loading="false"
       data-no-visuals="true"
       data-size="small"
       data-testid="hover-button"
-      sx="[object Object]"
+      data-variant="invisible"
       title="Hover Button"
       type="button"
     >

@@ -2,7 +2,7 @@
 
 exports[`renderer/components/filters/FilterSection.tsx should be able to toggle filter value - none already set 1`] = `
 <div
-  class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+  class="prc-Stack-Stack-WJVsK"
   data-align="stretch"
   data-direction="vertical"
   data-gap="condensed"
@@ -11,7 +11,7 @@ exports[`renderer/components/filters/FilterSection.tsx should be able to toggle 
   data-wrap="nowrap"
 >
   <div
-    class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+    class="text-sm prc-Stack-Stack-WJVsK"
     data-align="center"
     data-direction="horizontal"
     data-gap="condensed"
@@ -32,13 +32,13 @@ exports[`renderer/components/filters/FilterSection.tsx should be able to toggle 
       Draft
     </label>
     <span
-      class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+      class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
     >
       0
     </span>
   </div>
   <div
-    class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+    class="text-sm prc-Stack-Stack-WJVsK"
     data-align="center"
     data-direction="horizontal"
     data-gap="condensed"
@@ -82,13 +82,13 @@ exports[`renderer/components/filters/FilterSection.tsx should be able to toggle 
       </svg>
     </div>
     <span
-      class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+      class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
     >
       0
     </span>
   </div>
   <div
-    class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+    class="text-sm prc-Stack-Stack-WJVsK"
     data-align="center"
     data-direction="horizontal"
     data-gap="condensed"
@@ -109,13 +109,13 @@ exports[`renderer/components/filters/FilterSection.tsx should be able to toggle 
       Merged
     </label>
     <span
-      class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+      class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
     >
       0
     </span>
   </div>
   <div
-    class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+    class="text-sm prc-Stack-Stack-WJVsK"
     data-align="center"
     data-direction="horizontal"
     data-gap="condensed"
@@ -159,13 +159,13 @@ exports[`renderer/components/filters/FilterSection.tsx should be able to toggle 
       </svg>
     </div>
     <span
-      class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+      class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
     >
       0
     </span>
   </div>
   <div
-    class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+    class="text-sm prc-Stack-Stack-WJVsK"
     data-align="center"
     data-direction="horizontal"
     data-gap="condensed"
@@ -209,7 +209,7 @@ exports[`renderer/components/filters/FilterSection.tsx should be able to toggle 
       </svg>
     </div>
     <span
-      class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+      class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
     >
       0
     </span>
@@ -219,7 +219,7 @@ exports[`renderer/components/filters/FilterSection.tsx should be able to toggle 
 
 exports[`renderer/components/filters/FilterSection.tsx should be able to toggle filter value - some filters already set 1`] = `
 <div
-  class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+  class="prc-Stack-Stack-WJVsK"
   data-align="stretch"
   data-direction="vertical"
   data-gap="condensed"
@@ -228,7 +228,7 @@ exports[`renderer/components/filters/FilterSection.tsx should be able to toggle 
   data-wrap="nowrap"
 >
   <div
-    class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+    class="text-sm prc-Stack-Stack-WJVsK"
     data-align="center"
     data-direction="horizontal"
     data-gap="condensed"
@@ -249,13 +249,13 @@ exports[`renderer/components/filters/FilterSection.tsx should be able to toggle 
       Draft
     </label>
     <span
-      class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+      class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
     >
       0
     </span>
   </div>
   <div
-    class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+    class="text-sm prc-Stack-Stack-WJVsK"
     data-align="center"
     data-direction="horizontal"
     data-gap="condensed"
@@ -300,13 +300,13 @@ exports[`renderer/components/filters/FilterSection.tsx should be able to toggle 
       </svg>
     </div>
     <span
-      class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-primary"
+      class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-primary prc-Text-Text-0ima0"
     >
       0
     </span>
   </div>
   <div
-    class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+    class="text-sm prc-Stack-Stack-WJVsK"
     data-align="center"
     data-direction="horizontal"
     data-gap="condensed"
@@ -327,13 +327,13 @@ exports[`renderer/components/filters/FilterSection.tsx should be able to toggle 
       Merged
     </label>
     <span
-      class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+      class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
     >
       0
     </span>
   </div>
   <div
-    class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+    class="text-sm prc-Stack-Stack-WJVsK"
     data-align="center"
     data-direction="horizontal"
     data-gap="condensed"
@@ -377,13 +377,13 @@ exports[`renderer/components/filters/FilterSection.tsx should be able to toggle 
       </svg>
     </div>
     <span
-      class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+      class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
     >
       0
     </span>
   </div>
   <div
-    class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+    class="text-sm prc-Stack-Stack-WJVsK"
     data-align="center"
     data-direction="horizontal"
     data-gap="condensed"
@@ -427,7 +427,7 @@ exports[`renderer/components/filters/FilterSection.tsx should be able to toggle 
       </svg>
     </div>
     <span
-      class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+      class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
     >
       0
     </span>
@@ -448,7 +448,7 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
             class="Box-sc-g0xbh4-0 mb-2"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+              class="prc-Stack-Stack-WJVsK"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -474,7 +474,7 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
                 />
               </svg>
               <h2
-                class="Heading__StyledHeading-sc-1c1dgg0-0 fokFLB"
+                class="Box-sc-g0xbh4-0 mIkfY prc-Heading-Heading-6CmGO"
                 sx="[object Object]"
               >
                 FilterSectionTitle
@@ -483,7 +483,7 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
           </div>
         </legend>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+          class="prc-Stack-Stack-WJVsK"
           data-align="stretch"
           data-direction="vertical"
           data-gap="condensed"
@@ -492,7 +492,7 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
           data-wrap="nowrap"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -513,13 +513,13 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
               Draft
             </label>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -563,13 +563,13 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
               </svg>
             </div>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               1
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -590,13 +590,13 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
               Merged
             </label>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -640,13 +640,13 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
               </svg>
             </div>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -690,7 +690,7 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
               </svg>
             </div>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               3
             </span>
@@ -708,7 +708,7 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
           class="Box-sc-g0xbh4-0 mb-2"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+            class="prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -734,7 +734,7 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
               />
             </svg>
             <h2
-              class="Heading__StyledHeading-sc-1c1dgg0-0 fokFLB"
+              class="Box-sc-g0xbh4-0 mIkfY prc-Heading-Heading-6CmGO"
               sx="[object Object]"
             >
               FilterSectionTitle
@@ -743,7 +743,7 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
         </div>
       </legend>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+        class="prc-Stack-Stack-WJVsK"
         data-align="stretch"
         data-direction="vertical"
         data-gap="condensed"
@@ -752,7 +752,7 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
         data-wrap="nowrap"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+          class="text-sm prc-Stack-Stack-WJVsK"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -773,13 +773,13 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
             Draft
           </label>
           <span
-            class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
           >
             0
           </span>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+          class="text-sm prc-Stack-Stack-WJVsK"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -823,13 +823,13 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
             </svg>
           </div>
           <span
-            class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
           >
             1
           </span>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+          class="text-sm prc-Stack-Stack-WJVsK"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -850,13 +850,13 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
             Merged
           </label>
           <span
-            class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
           >
             0
           </span>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+          class="text-sm prc-Stack-Stack-WJVsK"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -900,13 +900,13 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
             </svg>
           </div>
           <span
-            class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
           >
             0
           </span>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+          class="text-sm prc-Stack-Stack-WJVsK"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -950,7 +950,7 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
             </svg>
           </div>
           <span
-            class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
           >
             3
           </span>
@@ -1025,7 +1025,7 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
             class="Box-sc-g0xbh4-0 mb-2"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+              class="prc-Stack-Stack-WJVsK"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -1051,7 +1051,7 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
                 />
               </svg>
               <h2
-                class="Heading__StyledHeading-sc-1c1dgg0-0 fokFLB"
+                class="Box-sc-g0xbh4-0 mIkfY prc-Heading-Heading-6CmGO"
                 sx="[object Object]"
               >
                 FilterSectionTitle
@@ -1060,7 +1060,7 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
           </div>
         </legend>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+          class="prc-Stack-Stack-WJVsK"
           data-align="stretch"
           data-direction="vertical"
           data-gap="condensed"
@@ -1069,7 +1069,7 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
           data-wrap="nowrap"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1090,13 +1090,13 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
               Draft
             </label>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1140,13 +1140,13 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
               </svg>
             </div>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               1
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1167,13 +1167,13 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
               Merged
             </label>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1217,13 +1217,13 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
               </svg>
             </div>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1267,7 +1267,7 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
               </svg>
             </div>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               3
             </span>
@@ -1285,7 +1285,7 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
           class="Box-sc-g0xbh4-0 mb-2"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+            class="prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1311,7 +1311,7 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
               />
             </svg>
             <h2
-              class="Heading__StyledHeading-sc-1c1dgg0-0 fokFLB"
+              class="Box-sc-g0xbh4-0 mIkfY prc-Heading-Heading-6CmGO"
               sx="[object Object]"
             >
               FilterSectionTitle
@@ -1320,7 +1320,7 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
         </div>
       </legend>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+        class="prc-Stack-Stack-WJVsK"
         data-align="stretch"
         data-direction="vertical"
         data-gap="condensed"
@@ -1329,7 +1329,7 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
         data-wrap="nowrap"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+          class="text-sm prc-Stack-Stack-WJVsK"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -1350,13 +1350,13 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
             Draft
           </label>
           <span
-            class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
           >
             0
           </span>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+          class="text-sm prc-Stack-Stack-WJVsK"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -1400,13 +1400,13 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
             </svg>
           </div>
           <span
-            class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
           >
             1
           </span>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+          class="text-sm prc-Stack-Stack-WJVsK"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -1427,13 +1427,13 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
             Merged
           </label>
           <span
-            class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
           >
             0
           </span>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+          class="text-sm prc-Stack-Stack-WJVsK"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -1477,13 +1477,13 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
             </svg>
           </div>
           <span
-            class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
           >
             0
           </span>
         </div>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+          class="text-sm prc-Stack-Stack-WJVsK"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -1527,7 +1527,7 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
             </svg>
           </div>
           <span
-            class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+            class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
           >
             3
           </span>

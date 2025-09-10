@@ -6,7 +6,7 @@ exports[`renderer/components/Oops.tsx should render itself & its children - fall
   "baseElement": <body>
     <div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ h-screen"
+        class="h-screen prc-Stack-Stack-WJVsK"
         data-align="center"
         data-direction="vertical"
         data-justify="center"
@@ -14,7 +14,7 @@ exports[`renderer/components/Oops.tsx should render itself & its children - fall
         data-wrap="nowrap"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+          class="prc-Stack-Stack-WJVsK"
           data-align="center"
           data-direction="vertical"
           data-gap="condensed"
@@ -23,7 +23,7 @@ exports[`renderer/components/Oops.tsx should render itself & its children - fall
           data-wrap="nowrap"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+            class="prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="vertical"
             data-gap="spacious"
@@ -58,7 +58,7 @@ exports[`renderer/components/Oops.tsx should render itself & its children - fall
   </body>,
   "container": <div>
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ h-screen"
+      class="h-screen prc-Stack-Stack-WJVsK"
       data-align="center"
       data-direction="vertical"
       data-justify="center"
@@ -66,7 +66,7 @@ exports[`renderer/components/Oops.tsx should render itself & its children - fall
       data-wrap="nowrap"
     >
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+        class="prc-Stack-Stack-WJVsK"
         data-align="center"
         data-direction="vertical"
         data-gap="condensed"
@@ -75,7 +75,7 @@ exports[`renderer/components/Oops.tsx should render itself & its children - fall
         data-wrap="nowrap"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+          class="prc-Stack-Stack-WJVsK"
           data-align="center"
           data-direction="vertical"
           data-gap="spacious"
@@ -167,7 +167,7 @@ exports[`renderer/components/Oops.tsx should render itself & its children - spec
   "baseElement": <body>
     <div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ h-screen"
+        class="h-screen prc-Stack-Stack-WJVsK"
         data-align="center"
         data-direction="vertical"
         data-justify="center"
@@ -175,7 +175,7 @@ exports[`renderer/components/Oops.tsx should render itself & its children - spec
         data-wrap="nowrap"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+          class="prc-Stack-Stack-WJVsK"
           data-align="center"
           data-direction="vertical"
           data-gap="condensed"
@@ -184,7 +184,7 @@ exports[`renderer/components/Oops.tsx should render itself & its children - spec
           data-wrap="nowrap"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+            class="prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="vertical"
             data-gap="spacious"
@@ -219,7 +219,7 @@ exports[`renderer/components/Oops.tsx should render itself & its children - spec
   </body>,
   "container": <div>
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ h-screen"
+      class="h-screen prc-Stack-Stack-WJVsK"
       data-align="center"
       data-direction="vertical"
       data-justify="center"
@@ -227,7 +227,7 @@ exports[`renderer/components/Oops.tsx should render itself & its children - spec
       data-wrap="nowrap"
     >
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+        class="prc-Stack-Stack-WJVsK"
         data-align="center"
         data-direction="vertical"
         data-gap="condensed"
@@ -236,7 +236,7 @@ exports[`renderer/components/Oops.tsx should render itself & its children - spec
         data-wrap="nowrap"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+          class="prc-Stack-Stack-WJVsK"
           data-align="center"
           data-direction="vertical"
           data-gap="spacious"

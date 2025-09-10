@@ -69,3 +69,17 @@ global.CSS = {
 };
 
 window.HTMLMediaElement.prototype.play = jest.fn();
+
+// JSDOM doesn't implement matchMedia; needed for Primer media queries (useMedia hook)
+if (!window.matchMedia) {
+  window.matchMedia = (query: string): MediaQueryList => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addListener: () => {}, // deprecated
+    removeListener: () => {}, // deprecated
+    addEventListener: () => {},
+    removeEventListener: () => {},
+    dispatchEvent: () => false,
+  });
+}

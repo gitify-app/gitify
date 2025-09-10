@@ -14,13 +14,11 @@ import {
 interface SearchFilterSuggestionsProps {
   open: boolean;
   inputValue: string;
-  onClose: () => void;
 }
 
 export const SearchFilterSuggestions: FC<SearchFilterSuggestionsProps> = ({
   open,
   inputValue,
-  onClose,
 }) => {
   const { settings } = useContext(AppContext);
 
@@ -38,7 +36,7 @@ export const SearchFilterSuggestions: FC<SearchFilterSuggestionsProps> = ({
   const beginsWithKnownQualifier = base.some((q) => lower.startsWith(q.prefix));
 
   return (
-    <Popover caret={false} onOpenChange={onClose} open>
+    <Popover open>
       <Popover.Content sx={{ p: 2, mt: 2, width: '100%' }}>
         <Stack direction="vertical" gap="condensed">
           {suggestions.length > 0 &&

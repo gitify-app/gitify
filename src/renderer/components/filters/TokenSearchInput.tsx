@@ -113,7 +113,6 @@ export const TokenSearchInput: FC<TokenSearchInputProps> = ({
         />
         <SearchFilterSuggestions
           inputValue={inputValue}
-          onClose={() => setShowSuggestions(false)}
           open={showSuggestions}
         />
       </Box>

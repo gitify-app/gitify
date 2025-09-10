@@ -9,7 +9,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
         class="Box-sc-g0xbh4-0 group pr-1 py-0.5 bg-gitify-repository"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ relative"
+          class="relative prc-Stack-Stack-WJVsK"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -19,24 +19,27 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
         >
           <button
             aria-describedby="«r0»-loading-announcement"
-            class="types__StyledButton-sc-ws60qy-0 yiNNF"
+            class="prc-Button-ButtonBase-c50BI"
+            data-has-count="true"
             data-loading="false"
             data-no-visuals="true"
+            data-size="medium"
             data-testid="open-repository"
-            sx="[object Object]"
+            data-variant="invisible"
             title="Open repository"
             type="button"
           >
             <span
-              class="Box-sc-g0xbh4-0 iEfcEl"
+              class="prc-Button-ButtonContent-HKbr-"
+              data-align="center"
               data-component="buttonContent"
-              sx="[object Object]"
             >
               <span
+                class="prc-Button-Label-pTQ3x"
                 data-component="text"
               >
                 <div
-                  class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+                  class="prc-Stack-Stack-WJVsK"
                   data-align="center"
                   data-direction="horizontal"
                   data-gap="condensed"
@@ -47,17 +50,17 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
                 >
                   <img
                     alt="gitify-app/notifications-test"
-                    class="Avatar__StyledAvatar-sc-2lv0r8-0 kRabN"
+                    class="prc-Avatar-Avatar-ZRS-m"
                     data-component="Avatar"
                     height="18"
-                    size="18"
                     src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-                    sx="[object Object]"
+                    style="--avatarSize-regular: 18px;"
                     width="18"
                   />
                   <div
-                    class="Truncate__StyledTruncate-sc-23o1d2-0 MmGIa"
-                    maxwidth="280"
+                    class="prc-Truncate-Truncate-A9Wn6"
+                    data-inline="true"
+                    style="--truncate-max-width: 280px;"
                     title="gitify-app/notifications-test"
                   >
                     gitify-app/notifications-test
@@ -65,20 +68,19 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
                 </div>
               </span>
               <span
-                class="Box-sc-g0xbh4-0 brHwkL"
+                class="prc-Button-VisualWrap-Db-eB"
                 data-component="trailingVisual"
-                sx="[object Object]"
               >
                 <span
                   aria-hidden="true"
-                  class="Box-sc-g0xbh4-0 dRdzsq"
+                  class="prc-Button-CounterLabel-f5-4u prc-CounterLabel-CounterLabel-ZwXPe"
                   data-component="ButtonCounter"
-                  sx="[object Object]"
+                  data-scheme="secondary"
                 >
                   2
                 </span>
                 <span
-                  class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 bmechH"
+                  class="prc-VisuallyHidden-VisuallyHidden-UNWQp"
                 >
                    (
                   2
@@ -88,7 +90,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
             </span>
           </button>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ absolute right-0 h-full opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-repository"
+            class="absolute right-0 h-full opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-repository prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="none"
@@ -99,13 +101,13 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
             <button
               aria-describedby="«r1»-loading-announcement"
               aria-label="Mark repository as done"
-              class="types__StyledButton-sc-ws60qy-0 yiNNF"
+              class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
               data-size="small"
               data-testid="repository-mark-as-done"
-              sx="[object Object]"
+              data-variant="invisible"
               title="Mark repository as done"
               type="button"
             >
@@ -129,13 +131,13 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
             <button
               aria-describedby="«r2»-loading-announcement"
               aria-label="Mark repository as read"
-              class="types__StyledButton-sc-ws60qy-0 yiNNF"
+              class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
               data-size="small"
               data-testid="repository-mark-as-read"
-              sx="[object Object]"
+              data-variant="invisible"
               title="Mark repository as read"
               type="button"
             >
@@ -159,13 +161,13 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
             <button
               aria-describedby="«r3»-loading-announcement"
               aria-label="Hide repository notifications"
-              class="types__StyledButton-sc-ws60qy-0 yiNNF"
+              class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
               data-size="small"
               data-testid="repository-toggle"
-              sx="[object Object]"
+              data-variant="invisible"
               title="Hide repository notifications"
               type="button"
             >
@@ -202,7 +204,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
       class="Box-sc-g0xbh4-0 group pr-1 py-0.5 bg-gitify-repository"
     >
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ relative"
+        class="relative prc-Stack-Stack-WJVsK"
         data-align="center"
         data-direction="horizontal"
         data-gap="condensed"
@@ -212,24 +214,27 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
       >
         <button
           aria-describedby="«r0»-loading-announcement"
-          class="types__StyledButton-sc-ws60qy-0 yiNNF"
+          class="prc-Button-ButtonBase-c50BI"
+          data-has-count="true"
           data-loading="false"
           data-no-visuals="true"
+          data-size="medium"
           data-testid="open-repository"
-          sx="[object Object]"
+          data-variant="invisible"
           title="Open repository"
           type="button"
         >
           <span
-            class="Box-sc-g0xbh4-0 iEfcEl"
+            class="prc-Button-ButtonContent-HKbr-"
+            data-align="center"
             data-component="buttonContent"
-            sx="[object Object]"
           >
             <span
+              class="prc-Button-Label-pTQ3x"
               data-component="text"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+                class="prc-Stack-Stack-WJVsK"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -240,17 +245,17 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
               >
                 <img
                   alt="gitify-app/notifications-test"
-                  class="Avatar__StyledAvatar-sc-2lv0r8-0 kRabN"
+                  class="prc-Avatar-Avatar-ZRS-m"
                   data-component="Avatar"
                   height="18"
-                  size="18"
                   src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-                  sx="[object Object]"
+                  style="--avatarSize-regular: 18px;"
                   width="18"
                 />
                 <div
-                  class="Truncate__StyledTruncate-sc-23o1d2-0 MmGIa"
-                  maxwidth="280"
+                  class="prc-Truncate-Truncate-A9Wn6"
+                  data-inline="true"
+                  style="--truncate-max-width: 280px;"
                   title="gitify-app/notifications-test"
                 >
                   gitify-app/notifications-test
@@ -258,20 +263,19 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
               </div>
             </span>
             <span
-              class="Box-sc-g0xbh4-0 brHwkL"
+              class="prc-Button-VisualWrap-Db-eB"
               data-component="trailingVisual"
-              sx="[object Object]"
             >
               <span
                 aria-hidden="true"
-                class="Box-sc-g0xbh4-0 dRdzsq"
+                class="prc-Button-CounterLabel-f5-4u prc-CounterLabel-CounterLabel-ZwXPe"
                 data-component="ButtonCounter"
-                sx="[object Object]"
+                data-scheme="secondary"
               >
                 2
               </span>
               <span
-                class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 bmechH"
+                class="prc-VisuallyHidden-VisuallyHidden-UNWQp"
               >
                  (
                 2
@@ -281,7 +285,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
           </span>
         </button>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ absolute right-0 h-full opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-repository"
+          class="absolute right-0 h-full opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-repository prc-Stack-Stack-WJVsK"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -292,13 +296,13 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
           <button
             aria-describedby="«r1»-loading-announcement"
             aria-label="Mark repository as done"
-            class="types__StyledButton-sc-ws60qy-0 yiNNF"
+            class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
             data-size="small"
             data-testid="repository-mark-as-done"
-            sx="[object Object]"
+            data-variant="invisible"
             title="Mark repository as done"
             type="button"
           >
@@ -322,13 +326,13 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
           <button
             aria-describedby="«r2»-loading-announcement"
             aria-label="Mark repository as read"
-            class="types__StyledButton-sc-ws60qy-0 yiNNF"
+            class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
             data-size="small"
             data-testid="repository-mark-as-read"
-            sx="[object Object]"
+            data-variant="invisible"
             title="Mark repository as read"
             type="button"
           >
@@ -352,13 +356,13 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
           <button
             aria-describedby="«r3»-loading-announcement"
             aria-label="Hide repository notifications"
-            class="types__StyledButton-sc-ws60qy-0 yiNNF"
+            class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
             data-size="small"
             data-testid="repository-toggle"
-            sx="[object Object]"
+            data-variant="invisible"
             title="Hide repository notifications"
             type="button"
           >
@@ -452,7 +456,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
         class="Box-sc-g0xbh4-0 group pr-1 py-0.5 bg-gitify-repository"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ relative"
+          class="relative prc-Stack-Stack-WJVsK"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -462,24 +466,27 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
         >
           <button
             aria-describedby="«rk»-loading-announcement"
-            class="types__StyledButton-sc-ws60qy-0 yiNNF"
+            class="prc-Button-ButtonBase-c50BI"
+            data-has-count="true"
             data-loading="false"
             data-no-visuals="true"
+            data-size="medium"
             data-testid="open-repository"
-            sx="[object Object]"
+            data-variant="invisible"
             title="Open repository"
             type="button"
           >
             <span
-              class="Box-sc-g0xbh4-0 iEfcEl"
+              class="prc-Button-ButtonContent-HKbr-"
+              data-align="center"
               data-component="buttonContent"
-              sx="[object Object]"
             >
               <span
+                class="prc-Button-Label-pTQ3x"
                 data-component="text"
               >
                 <div
-                  class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+                  class="prc-Stack-Stack-WJVsK"
                   data-align="center"
                   data-direction="horizontal"
                   data-gap="condensed"
@@ -505,8 +512,9 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
                     />
                   </svg>
                   <div
-                    class="Truncate__StyledTruncate-sc-23o1d2-0 MmGIa"
-                    maxwidth="280"
+                    class="prc-Truncate-Truncate-A9Wn6"
+                    data-inline="true"
+                    style="--truncate-max-width: 280px;"
                     title="gitify-app/notifications-test"
                   >
                     gitify-app/notifications-test
@@ -514,20 +522,19 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
                 </div>
               </span>
               <span
-                class="Box-sc-g0xbh4-0 brHwkL"
+                class="prc-Button-VisualWrap-Db-eB"
                 data-component="trailingVisual"
-                sx="[object Object]"
               >
                 <span
                   aria-hidden="true"
-                  class="Box-sc-g0xbh4-0 dRdzsq"
+                  class="prc-Button-CounterLabel-f5-4u prc-CounterLabel-CounterLabel-ZwXPe"
                   data-component="ButtonCounter"
-                  sx="[object Object]"
+                  data-scheme="secondary"
                 >
                   2
                 </span>
                 <span
-                  class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 bmechH"
+                  class="prc-VisuallyHidden-VisuallyHidden-UNWQp"
                 >
                    (
                   2
@@ -537,7 +544,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
             </span>
           </button>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ absolute right-0 h-full opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-repository"
+            class="absolute right-0 h-full opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-repository prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="none"
@@ -548,13 +555,13 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
             <button
               aria-describedby="«rl»-loading-announcement"
               aria-label="Mark repository as done"
-              class="types__StyledButton-sc-ws60qy-0 yiNNF"
+              class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
               data-size="small"
               data-testid="repository-mark-as-done"
-              sx="[object Object]"
+              data-variant="invisible"
               title="Mark repository as done"
               type="button"
             >
@@ -578,13 +585,13 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
             <button
               aria-describedby="«rm»-loading-announcement"
               aria-label="Mark repository as read"
-              class="types__StyledButton-sc-ws60qy-0 yiNNF"
+              class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
               data-size="small"
               data-testid="repository-mark-as-read"
-              sx="[object Object]"
+              data-variant="invisible"
               title="Mark repository as read"
               type="button"
             >
@@ -608,13 +615,13 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
             <button
               aria-describedby="«rn»-loading-announcement"
               aria-label="Show repository notifications"
-              class="types__StyledButton-sc-ws60qy-0 yiNNF"
+              class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
               data-size="small"
               data-testid="repository-toggle"
-              sx="[object Object]"
+              data-variant="invisible"
               title="Show repository notifications"
               type="button"
             >
@@ -644,7 +651,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
         class="Box-sc-g0xbh4-0 group pr-1 py-0.5 bg-gitify-repository"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ relative"
+          class="relative prc-Stack-Stack-WJVsK"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -654,24 +661,27 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
         >
           <button
             aria-describedby="«ro»-loading-announcement"
-            class="types__StyledButton-sc-ws60qy-0 yiNNF"
+            class="prc-Button-ButtonBase-c50BI"
+            data-has-count="true"
             data-loading="false"
             data-no-visuals="true"
+            data-size="medium"
             data-testid="open-repository"
-            sx="[object Object]"
+            data-variant="invisible"
             title="Open repository"
             type="button"
           >
             <span
-              class="Box-sc-g0xbh4-0 iEfcEl"
+              class="prc-Button-ButtonContent-HKbr-"
+              data-align="center"
               data-component="buttonContent"
-              sx="[object Object]"
             >
               <span
+                class="prc-Button-Label-pTQ3x"
                 data-component="text"
               >
                 <div
-                  class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+                  class="prc-Stack-Stack-WJVsK"
                   data-align="center"
                   data-direction="horizontal"
                   data-gap="condensed"
@@ -697,8 +707,9 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
                     />
                   </svg>
                   <div
-                    class="Truncate__StyledTruncate-sc-23o1d2-0 MmGIa"
-                    maxwidth="280"
+                    class="prc-Truncate-Truncate-A9Wn6"
+                    data-inline="true"
+                    style="--truncate-max-width: 280px;"
                     title="gitify-app/notifications-test"
                   >
                     gitify-app/notifications-test
@@ -706,20 +717,19 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
                 </div>
               </span>
               <span
-                class="Box-sc-g0xbh4-0 brHwkL"
+                class="prc-Button-VisualWrap-Db-eB"
                 data-component="trailingVisual"
-                sx="[object Object]"
               >
                 <span
                   aria-hidden="true"
-                  class="Box-sc-g0xbh4-0 dRdzsq"
+                  class="prc-Button-CounterLabel-f5-4u prc-CounterLabel-CounterLabel-ZwXPe"
                   data-component="ButtonCounter"
-                  sx="[object Object]"
+                  data-scheme="secondary"
                 >
                   2
                 </span>
                 <span
-                  class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 bmechH"
+                  class="prc-VisuallyHidden-VisuallyHidden-UNWQp"
                 >
                    (
                   2
@@ -729,7 +739,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
             </span>
           </button>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ absolute right-0 h-full opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-repository"
+            class="absolute right-0 h-full opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-repository prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="none"
@@ -740,13 +750,13 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
             <button
               aria-describedby="«rp»-loading-announcement"
               aria-label="Mark repository as done"
-              class="types__StyledButton-sc-ws60qy-0 yiNNF"
+              class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
               data-size="small"
               data-testid="repository-mark-as-done"
-              sx="[object Object]"
+              data-variant="invisible"
               title="Mark repository as done"
               type="button"
             >
@@ -770,13 +780,13 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
             <button
               aria-describedby="«rq»-loading-announcement"
               aria-label="Mark repository as read"
-              class="types__StyledButton-sc-ws60qy-0 yiNNF"
+              class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
               data-size="small"
               data-testid="repository-mark-as-read"
-              sx="[object Object]"
+              data-variant="invisible"
               title="Mark repository as read"
               type="button"
             >
@@ -800,13 +810,13 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
             <button
               aria-describedby="«rr»-loading-announcement"
               aria-label="Hide repository notifications"
-              class="types__StyledButton-sc-ws60qy-0 yiNNF"
+              class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
               data-size="small"
               data-testid="repository-toggle"
-              sx="[object Object]"
+              data-variant="invisible"
               title="Hide repository notifications"
               type="button"
             >
@@ -843,7 +853,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
       class="Box-sc-g0xbh4-0 group pr-1 py-0.5 bg-gitify-repository"
     >
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ relative"
+        class="relative prc-Stack-Stack-WJVsK"
         data-align="center"
         data-direction="horizontal"
         data-gap="condensed"
@@ -853,24 +863,27 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
       >
         <button
           aria-describedby="«ro»-loading-announcement"
-          class="types__StyledButton-sc-ws60qy-0 yiNNF"
+          class="prc-Button-ButtonBase-c50BI"
+          data-has-count="true"
           data-loading="false"
           data-no-visuals="true"
+          data-size="medium"
           data-testid="open-repository"
-          sx="[object Object]"
+          data-variant="invisible"
           title="Open repository"
           type="button"
         >
           <span
-            class="Box-sc-g0xbh4-0 iEfcEl"
+            class="prc-Button-ButtonContent-HKbr-"
+            data-align="center"
             data-component="buttonContent"
-            sx="[object Object]"
           >
             <span
+              class="prc-Button-Label-pTQ3x"
               data-component="text"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+                class="prc-Stack-Stack-WJVsK"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -896,8 +909,9 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
                   />
                 </svg>
                 <div
-                  class="Truncate__StyledTruncate-sc-23o1d2-0 MmGIa"
-                  maxwidth="280"
+                  class="prc-Truncate-Truncate-A9Wn6"
+                  data-inline="true"
+                  style="--truncate-max-width: 280px;"
                   title="gitify-app/notifications-test"
                 >
                   gitify-app/notifications-test
@@ -905,20 +919,19 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
               </div>
             </span>
             <span
-              class="Box-sc-g0xbh4-0 brHwkL"
+              class="prc-Button-VisualWrap-Db-eB"
               data-component="trailingVisual"
-              sx="[object Object]"
             >
               <span
                 aria-hidden="true"
-                class="Box-sc-g0xbh4-0 dRdzsq"
+                class="prc-Button-CounterLabel-f5-4u prc-CounterLabel-CounterLabel-ZwXPe"
                 data-component="ButtonCounter"
-                sx="[object Object]"
+                data-scheme="secondary"
               >
                 2
               </span>
               <span
-                class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 bmechH"
+                class="prc-VisuallyHidden-VisuallyHidden-UNWQp"
               >
                  (
                 2
@@ -928,7 +941,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
           </span>
         </button>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ absolute right-0 h-full opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-repository"
+          class="absolute right-0 h-full opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-repository prc-Stack-Stack-WJVsK"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -939,13 +952,13 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
           <button
             aria-describedby="«rp»-loading-announcement"
             aria-label="Mark repository as done"
-            class="types__StyledButton-sc-ws60qy-0 yiNNF"
+            class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
             data-size="small"
             data-testid="repository-mark-as-done"
-            sx="[object Object]"
+            data-variant="invisible"
             title="Mark repository as done"
             type="button"
           >
@@ -969,13 +982,13 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
           <button
             aria-describedby="«rq»-loading-announcement"
             aria-label="Mark repository as read"
-            class="types__StyledButton-sc-ws60qy-0 yiNNF"
+            class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
             data-size="small"
             data-testid="repository-mark-as-read"
-            sx="[object Object]"
+            data-variant="invisible"
             title="Mark repository as read"
             type="button"
           >
@@ -999,13 +1012,13 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
           <button
             aria-describedby="«rr»-loading-announcement"
             aria-label="Hide repository notifications"
-            class="types__StyledButton-sc-ws60qy-0 yiNNF"
+            class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
             data-size="small"
             data-testid="repository-toggle"
-            sx="[object Object]"
+            data-variant="invisible"
             title="Hide repository notifications"
             type="button"
           >
@@ -1099,7 +1112,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
         class="Box-sc-g0xbh4-0 group pr-1 py-0.5 bg-gitify-repository"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ relative"
+          class="relative prc-Stack-Stack-WJVsK"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -1109,24 +1122,27 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
         >
           <button
             aria-describedby="«rg»-loading-announcement"
-            class="types__StyledButton-sc-ws60qy-0 yiNNF"
+            class="prc-Button-ButtonBase-c50BI"
+            data-has-count="true"
             data-loading="false"
             data-no-visuals="true"
+            data-size="medium"
             data-testid="open-repository"
-            sx="[object Object]"
+            data-variant="invisible"
             title="Open repository"
             type="button"
           >
             <span
-              class="Box-sc-g0xbh4-0 iEfcEl"
+              class="prc-Button-ButtonContent-HKbr-"
+              data-align="center"
               data-component="buttonContent"
-              sx="[object Object]"
             >
               <span
+                class="prc-Button-Label-pTQ3x"
                 data-component="text"
               >
                 <div
-                  class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+                  class="prc-Stack-Stack-WJVsK"
                   data-align="center"
                   data-direction="horizontal"
                   data-gap="condensed"
@@ -1152,8 +1168,9 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
                     />
                   </svg>
                   <div
-                    class="Truncate__StyledTruncate-sc-23o1d2-0 MmGIa"
-                    maxwidth="280"
+                    class="prc-Truncate-Truncate-A9Wn6"
+                    data-inline="true"
+                    style="--truncate-max-width: 280px;"
                     title="gitify-app/notifications-test"
                   >
                     gitify-app/notifications-test
@@ -1161,20 +1178,19 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
                 </div>
               </span>
               <span
-                class="Box-sc-g0xbh4-0 brHwkL"
+                class="prc-Button-VisualWrap-Db-eB"
                 data-component="trailingVisual"
-                sx="[object Object]"
               >
                 <span
                   aria-hidden="true"
-                  class="Box-sc-g0xbh4-0 dRdzsq"
+                  class="prc-Button-CounterLabel-f5-4u prc-CounterLabel-CounterLabel-ZwXPe"
                   data-component="ButtonCounter"
-                  sx="[object Object]"
+                  data-scheme="secondary"
                 >
                   2
                 </span>
                 <span
-                  class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 bmechH"
+                  class="prc-VisuallyHidden-VisuallyHidden-UNWQp"
                 >
                    (
                   2
@@ -1184,7 +1200,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
             </span>
           </button>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ absolute right-0 h-full opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-repository"
+            class="absolute right-0 h-full opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-repository prc-Stack-Stack-WJVsK"
             data-align="center"
             data-direction="horizontal"
             data-gap="none"
@@ -1195,13 +1211,13 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
             <button
               aria-describedby="«rh»-loading-announcement"
               aria-label="Mark repository as done"
-              class="types__StyledButton-sc-ws60qy-0 yiNNF"
+              class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
               data-size="small"
               data-testid="repository-mark-as-done"
-              sx="[object Object]"
+              data-variant="invisible"
               title="Mark repository as done"
               type="button"
             >
@@ -1225,13 +1241,13 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
             <button
               aria-describedby="«ri»-loading-announcement"
               aria-label="Mark repository as read"
-              class="types__StyledButton-sc-ws60qy-0 yiNNF"
+              class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
               data-size="small"
               data-testid="repository-mark-as-read"
-              sx="[object Object]"
+              data-variant="invisible"
               title="Mark repository as read"
               type="button"
             >
@@ -1255,13 +1271,13 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
             <button
               aria-describedby="«rj»-loading-announcement"
               aria-label="Hide repository notifications"
-              class="types__StyledButton-sc-ws60qy-0 yiNNF"
+              class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
               data-size="small"
               data-testid="repository-toggle"
-              sx="[object Object]"
+              data-variant="invisible"
               title="Hide repository notifications"
               type="button"
             >
@@ -1298,7 +1314,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
       class="Box-sc-g0xbh4-0 group pr-1 py-0.5 bg-gitify-repository"
     >
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ relative"
+        class="relative prc-Stack-Stack-WJVsK"
         data-align="center"
         data-direction="horizontal"
         data-gap="condensed"
@@ -1308,24 +1324,27 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
       >
         <button
           aria-describedby="«rg»-loading-announcement"
-          class="types__StyledButton-sc-ws60qy-0 yiNNF"
+          class="prc-Button-ButtonBase-c50BI"
+          data-has-count="true"
           data-loading="false"
           data-no-visuals="true"
+          data-size="medium"
           data-testid="open-repository"
-          sx="[object Object]"
+          data-variant="invisible"
           title="Open repository"
           type="button"
         >
           <span
-            class="Box-sc-g0xbh4-0 iEfcEl"
+            class="prc-Button-ButtonContent-HKbr-"
+            data-align="center"
             data-component="buttonContent"
-            sx="[object Object]"
           >
             <span
+              class="prc-Button-Label-pTQ3x"
               data-component="text"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+                class="prc-Stack-Stack-WJVsK"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -1351,8 +1370,9 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
                   />
                 </svg>
                 <div
-                  class="Truncate__StyledTruncate-sc-23o1d2-0 MmGIa"
-                  maxwidth="280"
+                  class="prc-Truncate-Truncate-A9Wn6"
+                  data-inline="true"
+                  style="--truncate-max-width: 280px;"
                   title="gitify-app/notifications-test"
                 >
                   gitify-app/notifications-test
@@ -1360,20 +1380,19 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
               </div>
             </span>
             <span
-              class="Box-sc-g0xbh4-0 brHwkL"
+              class="prc-Button-VisualWrap-Db-eB"
               data-component="trailingVisual"
-              sx="[object Object]"
             >
               <span
                 aria-hidden="true"
-                class="Box-sc-g0xbh4-0 dRdzsq"
+                class="prc-Button-CounterLabel-f5-4u prc-CounterLabel-CounterLabel-ZwXPe"
                 data-component="ButtonCounter"
-                sx="[object Object]"
+                data-scheme="secondary"
               >
                 2
               </span>
               <span
-                class="_VisuallyHidden__VisuallyHidden-sc-11jhm7a-0 bmechH"
+                class="prc-VisuallyHidden-VisuallyHidden-UNWQp"
               >
                  (
                 2
@@ -1383,7 +1402,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
           </span>
         </button>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ absolute right-0 h-full opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-repository"
+          class="absolute right-0 h-full opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-repository prc-Stack-Stack-WJVsK"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -1394,13 +1413,13 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
           <button
             aria-describedby="«rh»-loading-announcement"
             aria-label="Mark repository as done"
-            class="types__StyledButton-sc-ws60qy-0 yiNNF"
+            class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
             data-size="small"
             data-testid="repository-mark-as-done"
-            sx="[object Object]"
+            data-variant="invisible"
             title="Mark repository as done"
             type="button"
           >
@@ -1424,13 +1443,13 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
           <button
             aria-describedby="«ri»-loading-announcement"
             aria-label="Mark repository as read"
-            class="types__StyledButton-sc-ws60qy-0 yiNNF"
+            class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
             data-size="small"
             data-testid="repository-mark-as-read"
-            sx="[object Object]"
+            data-variant="invisible"
             title="Mark repository as read"
             type="button"
           >
@@ -1454,13 +1473,13 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
           <button
             aria-describedby="«rj»-loading-announcement"
             aria-label="Hide repository notifications"
-            class="types__StyledButton-sc-ws60qy-0 yiNNF"
+            class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
             data-size="small"
             data-testid="repository-toggle"
-            sx="[object Object]"
+            data-variant="invisible"
             title="Hide repository notifications"
             type="button"
           >

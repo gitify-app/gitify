@@ -6,7 +6,7 @@ import type { SettingsState } from '../../types';
 import { SearchFilterSuggestions } from './SearchFilterSuggestions';
 
 describe('renderer/components/filters/SearchFilterSuggestions.tsx', () => {
-  const mockOnClose = jest.fn();
+  // onClose prop removed in v37 migration
 
   it('should render itself & its children - closed', () => {
     const tree = render(
@@ -18,11 +18,7 @@ describe('renderer/components/filters/SearchFilterSuggestions.tsx', () => {
           } as SettingsState,
         }}
       >
-        <SearchFilterSuggestions
-          inputValue={''}
-          onClose={mockOnClose}
-          open={false}
-        />
+        <SearchFilterSuggestions inputValue={''} open={false} />
       </AppContext.Provider>,
     );
 
@@ -39,11 +35,7 @@ describe('renderer/components/filters/SearchFilterSuggestions.tsx', () => {
           } as SettingsState,
         }}
       >
-        <SearchFilterSuggestions
-          inputValue={''}
-          onClose={mockOnClose}
-          open={true}
-        />
+        <SearchFilterSuggestions inputValue={''} open={true} />
       </AppContext.Provider>,
     );
 
@@ -60,11 +52,7 @@ describe('renderer/components/filters/SearchFilterSuggestions.tsx', () => {
           } as SettingsState,
         }}
       >
-        <SearchFilterSuggestions
-          inputValue={''}
-          onClose={mockOnClose}
-          open={true}
-        />
+        <SearchFilterSuggestions inputValue={''} open={true} />
       </AppContext.Provider>,
     );
 
@@ -81,11 +69,7 @@ describe('renderer/components/filters/SearchFilterSuggestions.tsx', () => {
           } as SettingsState,
         }}
       >
-        <SearchFilterSuggestions
-          inputValue={'invalid'}
-          onClose={mockOnClose}
-          open={true}
-        />
+        <SearchFilterSuggestions inputValue={'invalid'} open={true} />
       </AppContext.Provider>,
     );
 
@@ -102,11 +86,7 @@ describe('renderer/components/filters/SearchFilterSuggestions.tsx', () => {
           } as SettingsState,
         }}
       >
-        <SearchFilterSuggestions
-          inputValue={'repo:'}
-          onClose={mockOnClose}
-          open={true}
-        />
+        <SearchFilterSuggestions inputValue={'repo:'} open={true} />
       </AppContext.Provider>,
     );
 

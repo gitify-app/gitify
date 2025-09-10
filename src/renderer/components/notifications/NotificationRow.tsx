@@ -97,7 +97,13 @@ export const NotificationRow: FC<INotificationRow> = ({
         gap="condensed"
       >
         <Tooltip direction="e" text={notificationType}>
-          <NotificationIcon className={iconColor} size={Size.LARGE} />
+          <button
+            aria-label={notificationType}
+            className="inline-flex bg-transparent p-0 border-0 cursor-default"
+            type="button"
+          >
+            <NotificationIcon className={iconColor} size={Size.LARGE} />
+          </button>
         </Tooltip>
 
         <Stack

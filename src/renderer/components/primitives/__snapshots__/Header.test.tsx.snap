@@ -9,7 +9,7 @@ exports[`renderer/components/primitives/Header.tsx should render itself & its ch
         class="Box-sc-g0xbh4-0 pl-4 pr-6 pt-3 pb-1"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+          class="prc-Stack-Stack-WJVsK"
           data-align="stretch"
           data-direction="horizontal"
           data-justify="space-between"
@@ -19,12 +19,13 @@ exports[`renderer/components/primitives/Header.tsx should render itself & its ch
           <button
             aria-describedby="«r0»-loading-announcement"
             aria-labelledby="Go Back"
-            class="types__StyledButton-sc-ws60qy-0 yiNNF"
+            class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
+            data-size="medium"
             data-testid="header-nav-back"
-            sx="[object Object]"
+            data-variant="invisible"
             type="button"
           >
             <svg
@@ -49,7 +50,7 @@ exports[`renderer/components/primitives/Header.tsx should render itself & its ch
               class="Box-sc-g0xbh4-0 mb-2"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+                class="prc-Stack-Stack-WJVsK"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -75,7 +76,7 @@ exports[`renderer/components/primitives/Header.tsx should render itself & its ch
                   />
                 </svg>
                 <h2
-                  class="Heading__StyledHeading-sc-1c1dgg0-0 hwOZFo"
+                  class="Box-sc-g0xbh4-0 gKIXLF prc-Heading-Heading-6CmGO"
                   sx="[object Object]"
                 >
                   Test Header
@@ -92,7 +93,7 @@ exports[`renderer/components/primitives/Header.tsx should render itself & its ch
       class="Box-sc-g0xbh4-0 pl-4 pr-6 pt-3 pb-1"
     >
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+        class="prc-Stack-Stack-WJVsK"
         data-align="stretch"
         data-direction="horizontal"
         data-justify="space-between"
@@ -102,12 +103,13 @@ exports[`renderer/components/primitives/Header.tsx should render itself & its ch
         <button
           aria-describedby="«r0»-loading-announcement"
           aria-labelledby="Go Back"
-          class="types__StyledButton-sc-ws60qy-0 yiNNF"
+          class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
           data-component="IconButton"
           data-loading="false"
           data-no-visuals="true"
+          data-size="medium"
           data-testid="header-nav-back"
-          sx="[object Object]"
+          data-variant="invisible"
           type="button"
         >
           <svg
@@ -132,7 +134,7 @@ exports[`renderer/components/primitives/Header.tsx should render itself & its ch
             class="Box-sc-g0xbh4-0 mb-2"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+              class="prc-Stack-Stack-WJVsK"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -158,7 +160,7 @@ exports[`renderer/components/primitives/Header.tsx should render itself & its ch
                 />
               </svg>
               <h2
-                class="Heading__StyledHeading-sc-1c1dgg0-0 hwOZFo"
+                class="Box-sc-g0xbh4-0 gKIXLF prc-Heading-Heading-6CmGO"
                 sx="[object Object]"
               >
                 Test Header
