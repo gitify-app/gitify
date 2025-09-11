@@ -490,6 +490,11 @@ export interface Release {
 
 export interface GitHubGraphQLResponse<TData> {
   data: TData;
+  errors?: GitHubGraphQLError[];
+}
+
+interface GitHubGraphQLError {
+  message: string;
 }
 
 export interface Discussion {
