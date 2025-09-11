@@ -11,7 +11,7 @@ import type {
   Commit,
   CommitComment,
   Discussion,
-  GraphQLSearch,
+  GitHubGraphQLResponse,
   Issue,
   IssueOrPullRequestComment,
   Notification,
@@ -24,6 +24,7 @@ import type {
 import { isAnsweredDiscussionFeatureSupported } from '../features';
 import { rendererLogError } from '../logger';
 import { QUERY_SEARCH_DISCUSSIONS } from './graphql/discussions';
+import type { FetchDiscussionsQuery } from './graphql/generated/graphql';
 import { formatAsGitHubSearchSyntax } from './graphql/utils';
 import { apiRequestAuth } from './request';
 import { getGitHubAPIBaseUrl, getGitHubGraphQLUrl } from './utils';
@@ -233,7 +234,7 @@ export async function getHtmlUrl(url: Link, token: Token): Promise<string> {
  */
 export async function searchDiscussions(
   notification: Notification,
-): AxiosPromise<GraphQLSearch<Discussion>> {
+): AxiosPromise<GitHubGraphQLResponse<FetchDiscussionsQuery>> {
   const url = getGitHubGraphQLUrl(notification.account.hostname);
   return apiRequestAuth(
     url.toString() as Link,

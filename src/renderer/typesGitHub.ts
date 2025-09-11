@@ -488,12 +488,8 @@ export interface Release {
   published_at: string | null;
 }
 
-export interface GraphQLSearch<T> {
-  data: {
-    search: {
-      nodes: T[];
-    };
-  };
+export interface GitHubGraphQLResponse<TData> {
+  data: TData;
 }
 
 export interface Discussion {
