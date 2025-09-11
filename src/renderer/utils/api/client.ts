@@ -1,5 +1,4 @@
 import type { AxiosPromise } from 'axios';
-import { print } from 'graphql/language/printer';
 
 import type {
   Account,
@@ -241,7 +240,7 @@ export async function searchDiscussions(
     'POST',
     notification.account.token,
     {
-      query: print(QUERY_SEARCH_DISCUSSIONS),
+      query: QUERY_SEARCH_DISCUSSIONS,
       variables: {
         queryStatement: formatAsGitHubSearchSyntax(
           notification.repository.full_name,

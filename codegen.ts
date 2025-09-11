@@ -15,12 +15,12 @@ const config: CodegenConfig = {
         documentMode: 'string',
       },
     },
-    // 'src/renderer/utils/api/graphql/generated/schema.graphql': {
-    //   plugins: ['schema-ast'],
-    //   config: {
-    //     includeDirectives: true,
-    //   },
-    // },
+    'src/renderer/utils/api/graphql/generated/schema.graphql': {
+      plugins: ['schema-ast'],
+      config: {
+        includeDirectives: true,
+      },
+    },
   },
 };
 

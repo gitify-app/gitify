@@ -1,6 +1,6 @@
 import { graphql } from './generated/gql';
 
-const FRAGMENT_AUTHOR = graphql(`
+export const FRAGMENT_AUTHOR = graphql(`
   fragment AuthorFields on Actor {
     login
     url
@@ -9,7 +9,7 @@ const FRAGMENT_AUTHOR = graphql(`
   }
 `);
 
-const FRAGMENT_COMMENTS = graphql(`
+export const FRAGMENT_COMMENTS = graphql(`
   fragment CommentFields on DiscussionComment {
     databaseId
     createdAt
@@ -17,8 +17,6 @@ const FRAGMENT_COMMENTS = graphql(`
       ...AuthorFields
     }
   }
-
-  ${FRAGMENT_AUTHOR}
 `);
 
 export const QUERY_SEARCH_DISCUSSIONS = graphql(`
@@ -61,7 +59,4 @@ export const QUERY_SEARCH_DISCUSSIONS = graphql(`
       }
     }
   }
-
-  ${FRAGMENT_AUTHOR}
-  ${FRAGMENT_COMMENTS}
 `);
