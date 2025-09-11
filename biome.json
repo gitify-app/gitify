@@ -36,8 +36,7 @@
     "rules": {
       "recommended": true,
       "a11y": {
-        "useKeyWithClickEvents": "off",
-        "useSemanticElements": "off"
+        "useKeyWithClickEvents": "off"
       },
       "correctness": {
         "noUnusedFunctionParameters": "error",
@@ -51,8 +50,7 @@
               }
             ]
           }
-        },
-        "useUniqueElementIds": "warn"
+        }
       },
       "style": {
         "useDefaultSwitchClause": "error",
@@ -69,8 +67,7 @@
         "noUselessElse": "error"
       },
       "suspicious": {
-        "noConsole": "error",
-        "noUnknownAtRules": "warn"
+        "noConsole": "error"
       }
     }
   },
@@ -94,5 +91,8 @@
     "parser": {
       "allowComments": true
     }
+  },
+  "files": {
+    "includes": ["**", "!**/generated/**/*"]
   }
 }

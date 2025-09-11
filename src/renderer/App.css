@@ -1,3 +1,5 @@
+/* biome-ignore-all lint/suspicious/noUnknownAtRules: Tailwind CSS directives */
+
 /** Tailwind CSS */
 @import "tailwindcss";
 
