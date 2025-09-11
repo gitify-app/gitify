@@ -6,7 +6,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
   data-testid="accounts"
 >
   <div
-    class="pl-4 pr-6 pt-3 pb-1"
+    class="pl-4 pr-5 pt-3 pb-1"
   >
     <div
       class="prc-Stack-Stack-WJVsK"
@@ -169,7 +169,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
           data-wrap="nowrap"
         >
           <div
-            class="pl-4 pb-2 text-xs"
+            class="pl-2 pb-2 text-xs"
           >
             <div
               class="prc-Stack-Stack-WJVsK"
@@ -530,7 +530,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
           data-wrap="nowrap"
         >
           <div
-            class="pl-4 pb-2 text-xs"
+            class="pl-2 pb-2 text-xs"
           >
             <div
               class="prc-Stack-Stack-WJVsK"
@@ -891,7 +891,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
           data-wrap="nowrap"
         >
           <div
-            class="pl-4 pb-2 text-xs"
+            class="pl-2 pb-2 text-xs"
           >
             <div
               class="prc-Stack-Stack-WJVsK"
@@ -1242,7 +1242,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
   data-testid="accounts"
 >
   <div
-    class="pl-4 pr-6 pt-3 pb-1"
+    class="pl-4 pr-5 pt-3 pb-1"
   >
     <div
       class="prc-Stack-Stack-WJVsK"
@@ -1405,7 +1405,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
           data-wrap="nowrap"
         >
           <div
-            class="pl-4 pb-2 text-xs"
+            class="pl-2 pb-2 text-xs"
           >
             <div
               class="prc-Stack-Stack-WJVsK"
@@ -1766,7 +1766,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
           data-wrap="nowrap"
         >
           <div
-            class="pl-4 pb-2 text-xs"
+            class="pl-2 pb-2 text-xs"
           >
             <div
               class="prc-Stack-Stack-WJVsK"
@@ -2127,7 +2127,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
           data-wrap="nowrap"
         >
           <div
-            class="pl-4 pb-2 text-xs"
+            class="pl-2 pb-2 text-xs"
           >
             <div
               class="prc-Stack-Stack-WJVsK"
@@ -2478,7 +2478,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
   data-testid="accounts"
 >
   <div
-    class="pl-4 pr-6 pt-3 pb-1"
+    class="pl-4 pr-5 pt-3 pb-1"
   >
     <div
       class="prc-Stack-Stack-WJVsK"
@@ -2641,7 +2641,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
           data-wrap="nowrap"
         >
           <div
-            class="pl-4 pb-2 text-xs"
+            class="pl-2 pb-2 text-xs"
           >
             <div
               class="prc-Stack-Stack-WJVsK"
@@ -3002,7 +3002,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
           data-wrap="nowrap"
         >
           <div
-            class="pl-4 pb-2 text-xs"
+            class="pl-2 pb-2 text-xs"
           >
             <div
               class="prc-Stack-Stack-WJVsK"
@@ -3363,7 +3363,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
           data-wrap="nowrap"
         >
           <div
-            class="pl-4 pb-2 text-xs"
+            class="pl-2 pb-2 text-xs"
           >
             <div
               class="prc-Stack-Stack-WJVsK"

@@ -144,7 +144,7 @@ export const AccountsRoute: FC = () => {
                   direction="horizontal"
                   justify="space-between"
                 >
-                  <div className="pl-4 pb-2 text-xs">
+                  <div className="pl-2 pb-2 text-xs">
                     <Stack direction="vertical" gap="condensed">
                       <Stack
                         align="center"

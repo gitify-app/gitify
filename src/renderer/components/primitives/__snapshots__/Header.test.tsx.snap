@@ -6,7 +6,7 @@ exports[`renderer/components/primitives/Header.tsx should render itself & its ch
   "baseElement": <body>
     <div>
       <div
-        class="pl-4 pr-6 pt-3 pb-1"
+        class="pl-4 pr-5 pt-3 pb-1"
       >
         <div
           class="prc-Stack-Stack-WJVsK"
@@ -90,7 +90,7 @@ exports[`renderer/components/primitives/Header.tsx should render itself & its ch
   </body>,
   "container": <div>
     <div
-      class="pl-4 pr-6 pt-3 pb-1"
+      class="pl-4 pr-5 pt-3 pb-1"
     >
       <div
         class="prc-Stack-Stack-WJVsK"

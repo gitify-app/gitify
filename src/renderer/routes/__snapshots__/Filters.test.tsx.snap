@@ -6,7 +6,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
   data-testid="filters"
 >
   <div
-    class="pl-4 pr-6 pt-3 pb-1"
+    class="pl-4 pr-5 pt-3 pb-1"
   >
     <div
       class="prc-Stack-Stack-WJVsK"

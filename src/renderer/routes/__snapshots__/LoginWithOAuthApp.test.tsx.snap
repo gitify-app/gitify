@@ -10,7 +10,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
         data-testid="Login With OAuth App"
       >
         <div
-          class="pl-4 pr-6 pt-3 pb-1"
+          class="pl-4 pr-5 pt-3 pb-1"
         >
           <div
             class="prc-Stack-Stack-WJVsK"
@@ -462,7 +462,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
       data-testid="Login With OAuth App"
     >
       <div
-        class="pl-4 pr-6 pt-3 pb-1"
+        class="pl-4 pr-5 pt-3 pb-1"
       >
         <div
           class="prc-Stack-Stack-WJVsK"

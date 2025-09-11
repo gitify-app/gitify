@@ -6,7 +6,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
   data-testid="settings"
 >
   <div
-    class="pl-4 pr-6 pt-3 pb-1"
+    class="pl-4 pr-5 pt-3 pb-1"
   >
     <div
       class="prc-Stack-Stack-WJVsK"
