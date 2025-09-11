@@ -1,15 +1,15 @@
-import gql from 'graphql-tag';
+import { graphql } from './generated/gql';
 
-const FRAGMENT_AUTHOR = gql`
+const FRAGMENT_AUTHOR = graphql(`
   fragment AuthorFields on Actor {
     login
     url
     avatar_url: avatarUrl
     type: __typename
   }
-`;
+`);
 
-const FRAGMENT_COMMENTS = gql`
+const FRAGMENT_COMMENTS = graphql(`
   fragment CommentFields on DiscussionComment {
     databaseId
     createdAt
@@ -19,9 +19,9 @@ const FRAGMENT_COMMENTS = gql`
   }
 
   ${FRAGMENT_AUTHOR}
-`;
+`);
 
-export const QUERY_SEARCH_DISCUSSIONS = gql`
+export const QUERY_SEARCH_DISCUSSIONS = graphql(`
   query fetchDiscussions(
     $queryStatement: String!
     $firstDiscussions: Int
@@ -64,4 +64,4 @@ export const QUERY_SEARCH_DISCUSSIONS = gql`
 
   ${FRAGMENT_AUTHOR}
   ${FRAGMENT_COMMENTS}
-`;
+`);

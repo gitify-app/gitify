@@ -1,4 +1,6 @@
 {
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "include": ["src/**/*.js", "src/**/*.ts", "src/**/*.tsx"],
   "compilerOptions": {
     "incremental": true,
     "target": "ES2024",
@@ -14,7 +16,13 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "skipLibCheck": true
-  },
-  "include": ["src/**/*.js", "src/**/*.ts", "src/**/*.tsx"]
+    "skipLibCheck": true,
+
+    "plugins": [
+      {
+        "name": "@0no-co/graphqlsp",
+        "schema": "./src/renderer/utils/api/gql/schema.graphql"
+      }
+    ]
+  }
 }
