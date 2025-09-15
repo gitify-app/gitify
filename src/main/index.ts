@@ -31,8 +31,8 @@ log.initialize();
 /**
  * File paths
  */
-const preloadFilePath = path.join(__dirname, 'preload.js');
-const indexHtmlFilePath = `file://${__dirname}/index.html`;
+const preloadFilePath = path.join(__dirname, '..', 'preload', 'index.js');
+const indexHtmlFilePath = `file://${path.join(__dirname, '..', 'renderer', 'index.html')}`;
 const notificationSoundFilePath = path.join(
   __dirname,
   '..',

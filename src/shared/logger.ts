@@ -1,4 +1,9 @@
-import log from 'electron-log';
+// Use conditional import for electron-log to avoid issues in preload context
+const isMain =
+  typeof window === 'undefined' &&
+  typeof process !== 'undefined' &&
+  process.type === 'browser';
+const log = isMain ? require('electron-log') : console;
 
 type AllowedLogFunction = typeof log.info | typeof log.warn | typeof log.error;
 
