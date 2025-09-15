@@ -4,8 +4,86 @@
 /** GitHub Primer Design System */
 @import "@primer/css/dist/primer.css";
 
-/** Tailwind CSS Configuration */
-@config '../../tailwind.config.ts';
+/** Tailwind CSS v4 Configuration */
+@theme {
+  --font-size-xxs: 0.625rem; /* 10px */
+
+  --spacing-sidebar: 2.5rem; /* 40px */
+  --size-sidebar: 2.5rem; /* 40px */
+
+  /* Size utilities used throughout the app */
+  --size-2: 0.5rem; /* 8px for checkboxes */
+  --size-2\.5: 0.625rem; /* 10px for Size.SMALL LogoIcon */
+  --size-5: 1.25rem; /* 20px for Size.MEDIUM LogoIcon */
+  --size-8: 2rem; /* 32px for Size.LARGE LogoIcon */
+
+  /* Width utilities */
+  --width-20: 5rem; /* 80px for w-20 */
+
+  /* Define gitify colors - use the exact structure from v3 config */
+  --color-gitify-font: var(--fgColor-default);
+  --color-gitify-background: var(--bgColor-muted);
+  --color-gitify-sidebar: #24292e;
+  --color-gitify-footer: var(--bgColor-neutral-muted);
+
+  --color-gitify-caution: #ea580c;
+  --color-gitify-error: var(--fgColor-danger);
+  --color-gitify-link: var(--fgColor-link);
+
+  --color-gitify-input-rest: var(--control-bgColor-rest);
+  --color-gitify-input-focus: var(--control-bgColor-active);
+
+  --color-gitify-icon-attention: var(--fgColor-attention);
+  --color-gitify-icon-closed: var(--fgColor-closed);
+  --color-gitify-icon-done: var(--fgColor-done);
+  --color-gitify-icon-muted: var(--fgColor-muted);
+  --color-gitify-icon-open: var(--fgColor-open);
+
+  --color-gitify-counter-text: var(--gitify-counter-text);
+  --color-gitify-counter-primary: var(--gitify-counter-primary);
+  --color-gitify-counter-secondary: var(--gitify-counter-secondary);
+
+  --color-gitify-accounts: var(--bgColor-neutral-muted);
+  --color-gitify-account-rest: var(--control-bgColor-active);
+  --color-gitify-account-error: var(--bgColor-danger-emphasis);
+
+  --color-gitify-repository: var(--control-bgColor-disabled);
+
+  --color-gitify-notification-border: var(--borderColor-disabled);
+  --color-gitify-notification-hover: var(--control-bgColor-hover);
+  --color-gitify-notification-pill-hover: var(--control-bgColor-active);
+
+  --color-gitify-tooltip-icon: var(--fgColor-accent);
+  --color-gitify-tooltip-popout: var(--bgColor-disabled);
+}
+
+/** Dark Mode Configuration - GitHub Primer Theme Provider selector */
+@media (prefers-color-scheme: dark) {
+  @theme {
+    /* Dark mode remains same as most colors use CSS variables from Primer */
+  }
+}
+
+/** Light/Dark mode custom properties for scrollbar and counters */
+[data-color-mode="light"] {
+  --gitify-scrollbar-track: #f3f4f6;
+  --gitify-scrollbar-thumb: #d1d5db;
+  --gitify-scrollbar-thumb-hover: #9ca3af;
+
+  --gitify-counter-primary: #93c5fd;
+  --gitify-counter-secondary: #e5e7eb;
+  --gitify-counter-text: #1f2937;
+}
+
+[data-color-mode="dark"] {
+  --gitify-scrollbar-track: #111827;
+  --gitify-scrollbar-thumb: #374151;
+  --gitify-scrollbar-thumb-hover: #4b5563;
+
+  --gitify-counter-primary: #60a5fa;
+  --gitify-counter-secondary: #4b5563;
+  --gitify-counter-text: #f3f4f6;
+}
 
 html,
 body,

@@ -1,6 +1,7 @@
 # Build files
 dist/
 build/
+out/
 
 # Dependency directories
 node_modules/
