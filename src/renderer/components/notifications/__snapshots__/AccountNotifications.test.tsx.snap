@@ -216,7 +216,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-wrap="nowrap"
           >
             <div
-              class="text-5xl"
+              class="text-7xl"
             >
               <img
                 alt="🔥"
@@ -452,7 +452,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           data-wrap="nowrap"
         >
           <div
-            class="text-5xl"
+            class="text-7xl"
           >
             <img
               alt="🔥"
@@ -2941,7 +2941,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-wrap="nowrap"
           >
             <div
-              class="text-5xl"
+              class="text-7xl"
             >
               <img
                 alt="🎊"
@@ -3172,7 +3172,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           data-wrap="nowrap"
         >
           <div
-            class="text-5xl"
+            class="text-7xl"
           >
             <img
               alt="🎊"
