@@ -19,5 +19,5 @@ export const EmojiText: FC<IEmojiText> = ({ text }) => {
     updateEmojiText();
   }, [text]);
 
-  return <div className="text-5xl" ref={ref} />;
+  return <div className="text-7xl" ref={ref} />;
 };

@@ -32,7 +32,7 @@ exports[`renderer/components/Oops.tsx should render itself & its children - fall
             data-wrap="nowrap"
           >
             <div
-              class="text-5xl"
+              class="text-7xl"
             >
               <img
                 alt="🤔"
@@ -84,7 +84,7 @@ exports[`renderer/components/Oops.tsx should render itself & its children - fall
           data-wrap="nowrap"
         >
           <div
-            class="text-5xl"
+            class="text-7xl"
           >
             <img
               alt="🤔"
@@ -193,7 +193,7 @@ exports[`renderer/components/Oops.tsx should render itself & its children - spec
             data-wrap="nowrap"
           >
             <div
-              class="text-5xl"
+              class="text-7xl"
             >
               <img
                 alt="🔥"
@@ -245,7 +245,7 @@ exports[`renderer/components/Oops.tsx should render itself & its children - spec
           data-wrap="nowrap"
         >
           <div
-            class="text-5xl"
+            class="text-7xl"
           >
             <img
               alt="🔥"
