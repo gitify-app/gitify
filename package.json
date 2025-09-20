@@ -117,7 +117,7 @@
     "tailwind-merge": "3.3.1",
     "tailwindcss": "4.1.13",
     "terser-webpack-plugin": "5.3.14",
-    "ts-jest": "29.4.3",
+    "ts-jest": "29.4.4",
     "ts-loader": "9.5.4",
     "ts-node": "10.9.2",
     "typescript": "5.9.2",
