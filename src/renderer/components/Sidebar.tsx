@@ -22,7 +22,7 @@ import {
   openGitHubNotifications,
   openGitHubPulls,
 } from '../utils/links';
-import { hasAnyFiltersSet } from '../utils/notifications/filters/filter';
+import { hasActiveFilters } from '../utils/notifications/filters/filter';
 import { getNotificationCount } from '../utils/notifications/notifications';
 import { LogoIcon } from './icons/LogoIcon';
 
@@ -119,7 +119,7 @@ export const Sidebar: FC = () => {
             sx={sidebarButtonStyle}
             tooltipDirection="e"
             unsafeDisableTooltip={false}
-            variant={hasAnyFiltersSet(settings) ? 'primary' : 'invisible'}
+            variant={hasActiveFilters(settings) ? 'primary' : 'invisible'}
           />
         )}
 

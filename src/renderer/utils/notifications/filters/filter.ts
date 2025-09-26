@@ -74,7 +74,7 @@ export function filterDetailedNotifications(
   });
 }
 
-export function hasAnyFiltersSet(settings: SettingsState): boolean {
+export function hasActiveFilters(settings: SettingsState): boolean {
   return (
     userTypeFilter.hasFilters(settings) ||
     hasIncludeSearchFilters(settings) ||
