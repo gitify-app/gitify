@@ -38,13 +38,13 @@ importers:
         version: 3.1.0
       '@primer/css':
         specifier: 22.0.2
-        version: 22.0.2(@primer/primitives@11.1.0)
+        version: 22.0.2(@primer/primitives@11.2.0)
       '@primer/octicons-react':
         specifier: 19.18.0
         version: 19.18.0(react@19.1.1)
       '@primer/primitives':
-        specifier: 11.1.0
-        version: 11.1.0
+        specifier: 11.2.0
+        version: 11.2.0
       '@primer/react':
         specifier: 37.31.0
         version: 37.31.0(@types/react-dom@19.1.9(@types/react@19.1.13))(@types/react-is@18.3.0)(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react-is@18.3.1)(react@19.1.1)(styled-components@6.1.19(react-dom@19.1.1(react@19.1.1))(react@19.1.1))
@@ -771,8 +771,8 @@ packages:
     peerDependencies:
       react: '>=16.3'
 
-  '@primer/primitives@11.1.0':
-    resolution: {integrity: sha512-edsofzVG67EobXGRrqFc/kfjzKh8wbq1wEmRc1vmRNqDJNMxBRWZ9bT2AzKvcv+Hbf7olDAPkrSqVHbO4hhr/A==}
+  '@primer/primitives@11.2.0':
+    resolution: {integrity: sha512-JDX0kFjPqQ2gEv7ryDzS1tk9ZM8cylCet1VzImaK9Mv8/jj+/I5Ox7Z1UdM8N35y0aUetJzB3HqodtMnQ2oPBg==}
 
   '@primer/react@37.31.0':
     resolution: {integrity: sha512-sK+/Ggy05yg3TaFdJRfEmRuaZBsmFD5P7nH1qyVqO9OeT8o2jnqnlBhef8TYX0gpNrLwWNcVrIIOP2Em6T6rrA==}
@@ -5220,9 +5220,9 @@ snapshots:
 
   '@primer/behaviors@1.8.0': {}
 
-  '@primer/css@22.0.2(@primer/primitives@11.1.0)':
+  '@primer/css@22.0.2(@primer/primitives@11.2.0)':
     dependencies:
-      '@primer/primitives': 11.1.0
+      '@primer/primitives': 11.2.0
 
   '@primer/live-region-element@0.7.1':
     dependencies:
@@ -5232,7 +5232,7 @@ snapshots:
     dependencies:
       react: 19.1.1
 
-  '@primer/primitives@11.1.0': {}
+  '@primer/primitives@11.2.0': {}
 
   '@primer/react@37.31.0(@types/react-dom@19.1.9(@types/react@19.1.13))(@types/react-is@18.3.0)(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react-is@18.3.1)(react@19.1.1)(styled-components@6.1.19(react-dom@19.1.1(react@19.1.1))(react@19.1.1))':
     dependencies:
@@ -5243,7 +5243,7 @@ snapshots:
       '@primer/behaviors': 1.8.0
       '@primer/live-region-element': 0.7.1
       '@primer/octicons-react': 19.18.0(react@19.1.1)
-      '@primer/primitives': 11.1.0
+      '@primer/primitives': 11.2.0
       '@styled-system/css': 5.1.5
       '@styled-system/props': 5.1.5
       '@styled-system/theme-get': 5.1.2
