@@ -6,7 +6,7 @@ import type { Owner } from '../../../typesGitHub';
 import {
   filterBaseNotifications,
   filterDetailedNotifications,
-  hasAnyFiltersSet,
+  hasActiveFilters,
 } from './filter';
 
 describe('renderer/utils/notifications/filters/filter.ts', () => {
@@ -182,9 +182,9 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
     });
   });
 
-  describe('has filters', () => {
+  describe('hasActiveFilters', () => {
     it('default filter settings', () => {
-      expect(hasAnyFiltersSet(defaultSettings)).toBe(false);
+      expect(hasActiveFilters(defaultSettings)).toBe(false);
     });
 
     it('non-default search token includes filters', () => {
@@ -192,7 +192,7 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
         ...defaultSettings,
         filterIncludeSearchTokens: ['author:gitify' as SearchToken],
       };
-      expect(hasAnyFiltersSet(settings)).toBe(true);
+      expect(hasActiveFilters(settings)).toBe(true);
     });
 
     it('non-default search token excludes filters', () => {
@@ -200,7 +200,7 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
         ...defaultSettings,
         filterExcludeSearchTokens: ['org:github' as SearchToken],
       };
-      expect(hasAnyFiltersSet(settings)).toBe(true);
+      expect(hasActiveFilters(settings)).toBe(true);
     });
 
     it('non-default user type filters', () => {
@@ -208,7 +208,7 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
         ...defaultSettings,
         filterUserTypes: ['Bot'],
       };
-      expect(hasAnyFiltersSet(settings)).toBe(true);
+      expect(hasActiveFilters(settings)).toBe(true);
     });
 
     it('non-default subject type filters', () => {
@@ -216,7 +216,7 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
         ...defaultSettings,
         filterSubjectTypes: ['Issue'],
       };
-      expect(hasAnyFiltersSet(settings)).toBe(true);
+      expect(hasActiveFilters(settings)).toBe(true);
     });
 
     it('non-default state filters', () => {
@@ -224,7 +224,7 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
         ...defaultSettings,
         filterStates: ['draft', 'merged'],
       };
-      expect(hasAnyFiltersSet(settings)).toBe(true);
+      expect(hasActiveFilters(settings)).toBe(true);
     });
 
     it('non-default reason filters', () => {
@@ -232,7 +232,7 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
         ...defaultSettings,
         filterReasons: ['subscribed', 'manual'],
       };
-      expect(hasAnyFiltersSet(settings)).toBe(true);
+      expect(hasActiveFilters(settings)).toBe(true);
     });
   });
 });
