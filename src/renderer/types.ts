@@ -63,6 +63,7 @@ export type FilterValue =
 
 export type SettingsState = AppearanceSettingsState &
   NotificationSettingsState &
+  TraySettingsState &
   SystemSettingsState &
   FilterSettingsState;
 
@@ -86,12 +87,16 @@ export interface NotificationSettingsState {
   delayNotificationState: boolean;
 }
 
+export interface TraySettingsState {
+  showNotificationsCountInTray: boolean;
+  useAlternateIdleIcon: boolean;
+  trayIconStatusColors: boolean;
+}
+
 export interface SystemSettingsState {
   openLinks: OpenPreference;
   keyboardShortcut: boolean;
-  showNotificationsCountInTray: boolean;
   showNotifications: boolean;
-  useAlternateIdleIcon: boolean;
   playSound: boolean;
   notificationVolume: number;
   openAtStartup: boolean;

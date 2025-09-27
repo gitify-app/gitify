@@ -44,6 +44,7 @@ import {
   setAlternateIdleIcon,
   setAutoLaunch,
   setKeyboardShortcut,
+  setTrayIconStatusColors,
   updateTrayTitle,
 } from '../utils/comms';
 import { getNotificationCount } from '../utils/notifications/notifications';
@@ -185,6 +186,11 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       if (name === 'openAtStartup') {
         setAutoLaunch(value as boolean);
       }
+
+      if (name === 'trayIconStatusColors') {
+        setTrayIconStatusColors(value as boolean);
+      }
+
       if (name === 'useAlternateIdleIcon') {
         setAlternateIdleIcon(value as boolean);
       }

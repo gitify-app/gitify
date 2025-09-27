@@ -994,6 +994,176 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               data-justify="start"
               data-padding="none"
               data-wrap="nowrap"
+              id="title-tray"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-devices"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 2.75C0 1.784.784 1 1.75 1h12.5c.966 0 1.75.784 1.75 1.75V5a.75.75 0 0 1-1.5 0V2.75a.25.25 0 0 0-.25-.25H1.75a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25H7A.75.75 0 0 1 7 12h-.268a5.712 5.712 0 0 1-.765 2.5H7A.75.75 0 0 1 7 16H4.5a.75.75 0 0 1-.565-1.243c.772-.885 1.193-1.716 1.292-2.757H1.75A1.75 1.75 0 0 1 0 10.25v-7.5Z"
+                />
+                <path
+                  d="M10.75 7h3.5c.967 0 1.75.784 1.75 1.75v5.5A1.75 1.75 0 0 1 14.25 16h-3.5A1.75 1.75 0 0 1 9 14.25v-5.5C9 7.784 9.783 7 10.75 7Zm-.25 1.75v5.5c0 .138.112.25.25.25h3.5a.25.25 0 0 0 .25-.25v-5.5a.25.25 0 0 0-.25-.25h-3.5a.25.25 0 0 0-.25.25Z"
+                />
+              </svg>
+              <h2
+                class="Box-sc-g0xbh4-0 mIkfY prc-Heading-Heading-6CmGO"
+                sx="[object Object]"
+              >
+                Tray
+              </h2>
+            </div>
+          </div>
+        </legend>
+        <div
+          class="prc-Stack-Stack-WJVsK"
+          data-align="stretch"
+          data-direction="vertical"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
+        >
+          <div
+            class="text-sm prc-Stack-Stack-WJVsK"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <input
+              checked=""
+              class="size-2 rounded-sm cursor-pointer"
+              data-testid="checkbox-showNotificationsCountInTray"
+              id="showNotificationsCountInTray"
+              type="checkbox"
+            />
+            <label
+              class="font-medium text-gitify-font cursor-pointer"
+              for="showNotificationsCountInTray"
+            >
+              Show notification count in tray
+            </label>
+          </div>
+          <div
+            class="text-sm prc-Stack-Stack-WJVsK"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <input
+              checked=""
+              class="size-2 rounded-sm cursor-pointer"
+              data-testid="checkbox-trayIconStatusColors"
+              id="trayIconStatusColors"
+              type="checkbox"
+            />
+            <label
+              class="font-medium text-gitify-font cursor-pointer"
+              for="trayIconStatusColors"
+            >
+              Show tray icon status colors
+            </label>
+            <button
+              aria-label="tooltip-trayIconStatusColors"
+              class="relative"
+              data-testid="tooltip-tooltip-trayIconStatusColors"
+              id="tooltip-trayIconStatusColors"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-question text-gitify-tooltip-icon"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                />
+              </svg>
+            </button>
+          </div>
+          <div
+            class="text-sm prc-Stack-Stack-WJVsK"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <input
+              class="size-2 rounded-sm cursor-pointer"
+              data-testid="checkbox-useAlternateIdleIcon"
+              id="useAlternateIdleIcon"
+              type="checkbox"
+            />
+            <label
+              class="font-medium text-gitify-font cursor-pointer"
+              for="useAlternateIdleIcon"
+            >
+              Use alternate idle icon
+            </label>
+            <button
+              aria-label="tooltip-useAlternateIdleIcon"
+              class="relative"
+              data-testid="tooltip-tooltip-useAlternateIdleIcon"
+              id="tooltip-useAlternateIdleIcon"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-question text-gitify-tooltip-icon"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>
+          <div
+            class="mb-2"
+          >
+            <div
+              class="prc-Stack-Stack-WJVsK"
+              data-align="center"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
               id="title-system"
             >
               <svg
@@ -1141,29 +1311,6 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                 />
               </svg>
             </button>
-          </div>
-          <div
-            class="text-sm prc-Stack-Stack-WJVsK"
-            data-align="center"
-            data-direction="horizontal"
-            data-gap="condensed"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
-          >
-            <input
-              checked=""
-              class="size-2 rounded-sm cursor-pointer"
-              data-testid="checkbox-showNotificationsCountInTray"
-              id="showNotificationsCountInTray"
-              type="checkbox"
-            />
-            <label
-              class="font-medium text-gitify-font cursor-pointer"
-              for="showNotificationsCountInTray"
-            >
-              Show notification count in tray
-            </label>
           </div>
           <div
             class="text-sm prc-Stack-Stack-WJVsK"
@@ -1351,52 +1498,6 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                 </button>
               </div>
             </div>
-          </div>
-          <div
-            class="text-sm prc-Stack-Stack-WJVsK"
-            data-align="center"
-            data-direction="horizontal"
-            data-gap="condensed"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
-          >
-            <input
-              class="size-2 rounded-sm cursor-pointer"
-              data-testid="checkbox-useAlternateIdleIcon"
-              id="useAlternateIdleIcon"
-              type="checkbox"
-            />
-            <label
-              class="font-medium text-gitify-font cursor-pointer"
-              for="useAlternateIdleIcon"
-            >
-              Use alternate idle icon
-            </label>
-            <button
-              aria-label="tooltip-useAlternateIdleIcon"
-              class="relative"
-              data-testid="tooltip-tooltip-useAlternateIdleIcon"
-              id="tooltip-useAlternateIdleIcon"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-question text-gitify-tooltip-icon"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
-                />
-              </svg>
-            </button>
           </div>
           <div
             class="text-sm prc-Stack-Stack-WJVsK"
