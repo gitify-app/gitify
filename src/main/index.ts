@@ -75,6 +75,7 @@ app.setAsDefaultProtocolClient(protocol);
 const appUpdater = new AppUpdater(mb, menuBuilder);
 
 let shouldUseAlternateIdleIcon = false;
+let shouldUseTrayIconStatusColors = true;
 
 app.whenReady().then(async () => {
   await onFirstRunMaybe();
@@ -160,14 +161,22 @@ app.whenReady().then(async () => {
     },
   );
 
+  onMainEvent(
+    EVENTS.TRAY_ICON_STATUS_COLORS,
+    (_, trayIconStatusColors: boolean) => {
+      shouldUseTrayIconStatusColors = trayIconStatusColors;
+      setIdleIcon();
+    },
+  );
+
   onMainEvent(EVENTS.ICON_ERROR, () => {
-    if (!mb.tray.isDestroyed()) {
+    if (!mb.tray.isDestroyed() && shouldUseTrayIconStatusColors) {
       mb.tray.setImage(TrayIcons.error);
     }
   });
 
   onMainEvent(EVENTS.ICON_ACTIVE, () => {
-    if (!mb.tray.isDestroyed()) {
+    if (!mb.tray.isDestroyed() && shouldUseTrayIconStatusColors) {
       mb.tray.setImage(
         menuBuilder.isUpdateAvailable()
           ? TrayIcons.activeWithUpdate
@@ -178,19 +187,7 @@ app.whenReady().then(async () => {
 
   onMainEvent(EVENTS.ICON_IDLE, () => {
     if (!mb.tray.isDestroyed()) {
-      if (shouldUseAlternateIdleIcon) {
-        mb.tray.setImage(
-          menuBuilder.isUpdateAvailable()
-            ? TrayIcons.idleAlternateWithUpdate
-            : TrayIcons.idleAlternate,
-        );
-      } else {
-        mb.tray.setImage(
-          menuBuilder.isUpdateAvailable()
-            ? TrayIcons.idleWithUpdate
-            : TrayIcons.idle,
-        );
-      }
+      setIdleIcon();
     }
   });
 
@@ -258,3 +255,19 @@ const handleURL = (url: string) => {
     sendRendererEvent(mb, EVENTS.AUTH_CALLBACK, url);
   }
 };
+
+function setIdleIcon() {
+  if (shouldUseAlternateIdleIcon) {
+    mb.tray.setImage(
+      menuBuilder.isUpdateAvailable()
+        ? TrayIcons.idleAlternateWithUpdate
+        : TrayIcons.idleAlternate,
+    );
+  } else {
+    mb.tray.setImage(
+      menuBuilder.isUpdateAvailable()
+        ? TrayIcons.idleWithUpdate
+        : TrayIcons.idle,
+    );
+  }
+}

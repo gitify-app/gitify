@@ -12,6 +12,7 @@ export const EVENTS = {
   WINDOW_HIDE: `${P}window-hide`,
   VERSION: `${P}version`,
   UPDATE_TITLE: `${P}update-title`,
+  TRAY_ICON_STATUS_COLORS: `${P}tray-icon-status-colors`,
   USE_ALTERNATE_IDLE_ICON: `${P}use-alternate-idle-icon`,
   UPDATE_KEYBOARD_SHORTCUT: `${P}update-keyboard-shortcut`,
   UPDATE_AUTO_LAUNCH: `${P}update-auto-launch`,

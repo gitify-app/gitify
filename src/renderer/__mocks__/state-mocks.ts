@@ -15,6 +15,7 @@ import {
   type SystemSettingsState,
   Theme,
   type Token,
+  type TraySettingsState,
 } from '../types';
 
 export const mockGitifyUser: GitifyUser = {
@@ -96,14 +97,18 @@ const mockNotificationSettings: NotificationSettingsState = {
   delayNotificationState: false,
 };
 
+const mockTraySettings: TraySettingsState = {
+  showNotificationsCountInTray: true,
+  useAlternateIdleIcon: false,
+  trayIconStatusColors: true,
+};
+
 const mockSystemSettings: SystemSettingsState = {
   openLinks: OpenPreference.FOREGROUND,
   keyboardShortcut: true,
-  showNotificationsCountInTray: true,
   showNotifications: true,
   playSound: true,
   notificationVolume: 20,
-  useAlternateIdleIcon: false,
   openAtStartup: false,
 };
 
@@ -119,6 +124,7 @@ const mockFilters: FilterSettingsState = {
 export const mockSettings: SettingsState = {
   ...mockAppearanceSettings,
   ...mockNotificationSettings,
+  ...mockTraySettings,
   ...mockSystemSettings,
   ...mockFilters,
 };
