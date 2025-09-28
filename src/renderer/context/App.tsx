@@ -44,7 +44,8 @@ import {
   setAlternateIdleIcon,
   setAutoLaunch,
   setKeyboardShortcut,
-  setTrayIconStatusColors,
+  setMonochromeIcon,
+  updateTrayIcon,
   updateTrayTitle,
 } from '../utils/comms';
 import { getNotificationCount } from '../utils/notifications/notifications';
@@ -159,6 +160,22 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   }, [settings.showNotificationsCountInTray, notifications]);
 
   useEffect(() => {
+    const count = getNotificationCount(notifications);
+
+    setMonochromeIcon(settings.useMonochromeIcon);
+
+    updateTrayIcon(count);
+  }, [settings.useMonochromeIcon, notifications]);
+
+  useEffect(() => {
+    setAutoLaunch(settings.openAtStartup);
+  }, [settings.openAtStartup]);
+
+  useEffect(() => {
+    setAlternateIdleIcon(settings.useAlternateIdleIcon);
+  }, [settings.useAlternateIdleIcon]);
+
+  useEffect(() => {
     setKeyboardShortcut(settings.keyboardShortcut);
   }, [settings.keyboardShortcut]);
 
@@ -183,18 +200,6 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
   const updateSetting = useCallback(
     (name: keyof SettingsState, value: SettingsValue) => {
-      if (name === 'openAtStartup') {
-        setAutoLaunch(value as boolean);
-      }
-
-      if (name === 'trayIconStatusColors') {
-        setTrayIconStatusColors(value as boolean);
-      }
-
-      if (name === 'useAlternateIdleIcon') {
-        setAlternateIdleIcon(value as boolean);
-      }
-
       const newSettings = { ...settings, [name]: value };
       setSettings(newSettings);
       saveState({ auth, settings: newSettings });
@@ -273,6 +278,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     // Restore settings before accounts to ensure filters are available before fetching notifications
     if (existing.settings) {
       setKeyboardShortcut(existing.settings.keyboardShortcut);
+      setMonochromeIcon(existing.settings.useMonochromeIcon);
       setAlternateIdleIcon(existing.settings.useAlternateIdleIcon);
       setSettings({ ...defaultSettings, ...existing.settings });
       window.gitify.zoom.setLevel(

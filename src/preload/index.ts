@@ -51,11 +51,11 @@ export const api = {
 
     updateTitle: (title = '') => sendMainEvent(EVENTS.UPDATE_TITLE, title),
 
-    trayIconStatusColors: (value: boolean) =>
-      sendMainEvent(EVENTS.TRAY_ICON_STATUS_COLORS, value),
-
     useAlternateIdleIcon: (value: boolean) =>
       sendMainEvent(EVENTS.USE_ALTERNATE_IDLE_ICON, value),
+
+    useMonochromeIcon: (value: boolean) =>
+      sendMainEvent(EVENTS.USE_MONOCHROME_ICON, value),
   },
 
   notificationSoundPath: () => invokeMainEvent(EVENTS.NOTIFICATION_SOUND_PATH),

@@ -37,7 +37,7 @@ const defaultNotificationSettings: NotificationSettingsState = {
 
 const defaultTraySettings: TraySettingsState = {
   showNotificationsCountInTray: true,
-  trayIconStatusColors: true,
+  useMonochromeIcon: false,
   useAlternateIdleIcon: false,
 };
 

@@ -89,8 +89,8 @@ export interface NotificationSettingsState {
 
 export interface TraySettingsState {
   showNotificationsCountInTray: boolean;
+  useMonochromeIcon: boolean;
   useAlternateIdleIcon: boolean;
-  trayIconStatusColors: boolean;
 }
 
 export interface SystemSettingsState {

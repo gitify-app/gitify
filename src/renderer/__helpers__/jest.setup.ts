@@ -28,8 +28,8 @@ window.gitify = {
   tray: {
     updateIcon: jest.fn(),
     updateTitle: jest.fn(),
-    trayIconStatusColors: jest.fn(),
     useAlternateIdleIcon: jest.fn(),
+    useMonochromeIcon: jest.fn(),
   },
   notificationSoundPath: jest.fn(),
   onAuthCallback: jest.fn(),

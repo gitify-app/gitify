@@ -1053,7 +1053,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               class="font-medium text-gitify-font cursor-pointer"
               for="showNotificationsCountInTray"
             >
-              Show notification count in tray
+              Show notification count
             </label>
           </div>
           <div
@@ -1068,21 +1068,21 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             <input
               checked=""
               class="size-2 rounded-sm cursor-pointer"
-              data-testid="checkbox-trayIconStatusColors"
-              id="trayIconStatusColors"
+              data-testid="checkbox-useMonochromeIcon"
+              id="useMonochromeIcon"
               type="checkbox"
             />
             <label
               class="font-medium text-gitify-font cursor-pointer"
-              for="trayIconStatusColors"
+              for="useMonochromeIcon"
             >
-              Show tray icon status colors
+              Use monochrome icon
             </label>
             <button
-              aria-label="tooltip-trayIconStatusColors"
+              aria-label="tooltip-useMonochromeIcon"
               class="relative"
-              data-testid="tooltip-tooltip-trayIconStatusColors"
-              id="tooltip-trayIconStatusColors"
+              data-testid="tooltip-tooltip-useMonochromeIcon"
+              id="tooltip-useMonochromeIcon"
               type="button"
             >
               <svg

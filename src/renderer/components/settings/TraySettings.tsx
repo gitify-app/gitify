@@ -19,7 +19,7 @@ export const TraySettings: FC = () => {
       <Stack direction="vertical" gap="condensed">
         <Checkbox
           checked={settings.showNotificationsCountInTray}
-          label="Show notification count in tray"
+          label="Show notification count"
           name="showNotificationsCountInTray"
           onChange={(evt) =>
             updateSetting('showNotificationsCountInTray', evt.target.checked)
@@ -28,21 +28,17 @@ export const TraySettings: FC = () => {
         />
 
         <Checkbox
-          checked={settings.trayIconStatusColors}
-          label="Show tray icon status colors"
-          name="trayIconStatusColors"
+          checked={settings.useMonochromeIcon}
+          label="Use monochrome icon"
+          name="useMonochromeIcon"
           onChange={(evt) =>
-            updateSetting('trayIconStatusColors', evt.target.checked)
+            updateSetting('useMonochromeIcon', evt.target.checked)
           }
           tooltip={
             <Stack direction="vertical" gap="condensed">
               <Text>
-                When enabled the {APPLICATION.NAME} tray icon will change color
-                to indicate active, idle or error statuses.
-              </Text>
-              <Text>
-                When disabled the {APPLICATION.NAME} tray icon will not show any
-                status information.
+                Display a neutral (monochrome) icon for unread notifications and
+                errors, instead of using color highlights.
               </Text>
             </Stack>
           }

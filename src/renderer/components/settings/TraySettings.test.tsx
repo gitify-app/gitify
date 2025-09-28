@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 
 import { mockAuth, mockSettings } from '../../__mocks__/state-mocks';
 import { AppContext } from '../../context/App';
-import { SystemSettings } from './SystemSettings';
+import { TraySettings } from './TraySettings';
 
 describe('renderer/components/settings/TraySettings.tsx', () => {
   const updateSetting = jest.fn();
@@ -22,7 +22,7 @@ describe('renderer/components/settings/TraySettings.tsx', () => {
             updateSetting,
           }}
         >
-          <SystemSettings />
+          <TraySettings />
         </AppContext.Provider>,
       );
     });
@@ -38,6 +38,27 @@ describe('renderer/components/settings/TraySettings.tsx', () => {
     );
   });
 
+  it('should toggle the useMonochromeIcon checkbox', async () => {
+    await act(async () => {
+      render(
+        <AppContext.Provider
+          value={{
+            auth: mockAuth,
+            settings: mockSettings,
+            updateSetting,
+          }}
+        >
+          <TraySettings />
+        </AppContext.Provider>,
+      );
+    });
+
+    await userEvent.click(screen.getByTestId('checkbox-useMonochromeIcon'));
+
+    expect(updateSetting).toHaveBeenCalledTimes(1);
+    expect(updateSetting).toHaveBeenCalledWith('useMonochromeIcon', true);
+  });
+
   it('should toggle the useAlternateIdleIcon checkbox', async () => {
     await act(async () => {
       render(
@@ -48,7 +69,7 @@ describe('renderer/components/settings/TraySettings.tsx', () => {
             updateSetting,
           }}
         >
-          <SystemSettings />
+          <TraySettings />
         </AppContext.Provider>,
       );
     });
@@ -57,26 +78,5 @@ describe('renderer/components/settings/TraySettings.tsx', () => {
 
     expect(updateSetting).toHaveBeenCalledTimes(1);
     expect(updateSetting).toHaveBeenCalledWith('useAlternateIdleIcon', true);
-  });
-
-  it('should toggle the trayIconStatusColors checkbox', async () => {
-    await act(async () => {
-      render(
-        <AppContext.Provider
-          value={{
-            auth: mockAuth,
-            settings: mockSettings,
-            updateSetting,
-          }}
-        >
-          <SystemSettings />
-        </AppContext.Provider>,
-      );
-    });
-
-    await userEvent.click(screen.getByTestId('checkbox-trayIconStatusColors'));
-
-    expect(updateSetting).toHaveBeenCalledTimes(1);
-    expect(updateSetting).toHaveBeenCalledWith('trayIconStatusColors', true);
   });
 });

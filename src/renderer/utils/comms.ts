@@ -45,12 +45,12 @@ export function setAutoLaunch(value: boolean): void {
   window.gitify.setAutoLaunch(value);
 }
 
-export function setTrayIconStatusColors(value: boolean): void {
-  window.gitify.tray.trayIconStatusColors(value);
-}
-
 export function setAlternateIdleIcon(value: boolean): void {
   window.gitify.tray.useAlternateIdleIcon(value);
+}
+
+export function setMonochromeIcon(value: boolean): void {
+  window.gitify.tray.useMonochromeIcon(value);
 }
 
 export function setKeyboardShortcut(keyboardShortcut: boolean): void {
