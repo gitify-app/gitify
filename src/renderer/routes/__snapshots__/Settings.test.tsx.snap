@@ -1066,7 +1066,6 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             data-wrap="nowrap"
           >
             <input
-              checked=""
               class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-useMonochromeIcon"
               id="useMonochromeIcon"
