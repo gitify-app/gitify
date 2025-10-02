@@ -54,16 +54,6 @@ export const SystemSettings: FC = () => {
         />
 
         <Checkbox
-          checked={settings.showNotificationsCountInTray}
-          label="Show notification count in tray"
-          name="showNotificationsCountInTray"
-          onChange={(evt) =>
-            updateSetting('showNotificationsCountInTray', evt.target.checked)
-          }
-          visible={window.gitify.platform.isMacOS()}
-        />
-
-        <Checkbox
           checked={settings.showNotifications}
           label="Show system notifications"
           name="showNotifications"
@@ -140,27 +130,6 @@ export const SystemSettings: FC = () => {
             />
           </ButtonGroup>
         </Stack>
-
-        <Checkbox
-          checked={settings.useAlternateIdleIcon}
-          label="Use alternate idle icon"
-          name="useAlternateIdleIcon"
-          onChange={(evt) =>
-            updateSetting('useAlternateIdleIcon', evt.target.checked)
-          }
-          tooltip={
-            <Stack direction="vertical" gap="condensed">
-              <Text>
-                Use a white {APPLICATION.NAME} logo (instead of the default
-                black logo) when all notifications are read.
-              </Text>
-              <Text>
-                This is particularly useful for devices which have a dark-themed
-                menubar or taskbar.
-              </Text>
-            </Stack>
-          }
-        />
 
         <Checkbox
           checked={settings.openAtStartup}

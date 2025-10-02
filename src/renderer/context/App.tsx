@@ -41,9 +41,11 @@ import {
 import {
   decryptValue,
   encryptValue,
-  setAlternateIdleIcon,
   setAutoLaunch,
   setKeyboardShortcut,
+  setUseAlternateIdleIcon,
+  setUseUnreadActiveIcon,
+  updateTrayIcon,
   updateTrayTitle,
 } from '../utils/comms';
 import { getNotificationCount } from '../utils/notifications/notifications';
@@ -158,6 +160,22 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   }, [settings.showNotificationsCountInTray, notifications]);
 
   useEffect(() => {
+    const count = getNotificationCount(notifications);
+
+    setUseUnreadActiveIcon(settings.useUnreadActiveIcon);
+
+    updateTrayIcon(count);
+  }, [settings.useUnreadActiveIcon, notifications]);
+
+  useEffect(() => {
+    setAutoLaunch(settings.openAtStartup);
+  }, [settings.openAtStartup]);
+
+  useEffect(() => {
+    setUseAlternateIdleIcon(settings.useAlternateIdleIcon);
+  }, [settings.useAlternateIdleIcon]);
+
+  useEffect(() => {
     setKeyboardShortcut(settings.keyboardShortcut);
   }, [settings.keyboardShortcut]);
 
@@ -182,13 +200,6 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
   const updateSetting = useCallback(
     (name: keyof SettingsState, value: SettingsValue) => {
-      if (name === 'openAtStartup') {
-        setAutoLaunch(value as boolean);
-      }
-      if (name === 'useAlternateIdleIcon') {
-        setAlternateIdleIcon(value as boolean);
-      }
-
       const newSettings = { ...settings, [name]: value };
       setSettings(newSettings);
       saveState({ auth, settings: newSettings });
@@ -267,7 +278,8 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     // Restore settings before accounts to ensure filters are available before fetching notifications
     if (existing.settings) {
       setKeyboardShortcut(existing.settings.keyboardShortcut);
-      setAlternateIdleIcon(existing.settings.useAlternateIdleIcon);
+      setUseUnreadActiveIcon(existing.settings.useUnreadActiveIcon);
+      setUseAlternateIdleIcon(existing.settings.useAlternateIdleIcon);
       setSettings({ ...defaultSettings, ...existing.settings });
       window.gitify.zoom.setLevel(
         zoomPercentageToLevel(existing.settings.zoomPercentage),
