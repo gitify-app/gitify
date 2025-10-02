@@ -9,10 +9,10 @@ import {
   quitApp,
   setAutoLaunch,
   setKeyboardShortcut,
+  setUseAlternateIdleIcon,
   showWindow,
   updateTrayIcon,
   updateTrayTitle,
-  useAlternateIdleIcon,
 } from './comms';
 import * as storage from './storage';
 
@@ -123,7 +123,7 @@ describe('renderer/utils/comms.ts', () => {
     });
 
     it('sets alternate idle icon', () => {
-      useAlternateIdleIcon(false);
+      setUseAlternateIdleIcon(false);
 
       expect(window.gitify.tray.useAlternateIdleIcon).toHaveBeenCalledTimes(1);
       expect(window.gitify.tray.useAlternateIdleIcon).toHaveBeenCalledWith(
