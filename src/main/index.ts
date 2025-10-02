@@ -75,7 +75,7 @@ app.setAsDefaultProtocolClient(protocol);
 const appUpdater = new AppUpdater(mb, menuBuilder);
 
 let shouldUseAlternateIdleIcon = false;
-let shouldUseUnreadActiveIcon = false;
+let shouldUseUnreadActiveIcon = true;
 
 app.whenReady().then(async () => {
   await onFirstRunMaybe();
@@ -166,7 +166,9 @@ app.whenReady().then(async () => {
     (_, useUnreadActiveIcon: boolean) => {
       shouldUseUnreadActiveIcon = useUnreadActiveIcon;
 
-      if (!shouldUseUnreadActiveIcon) {
+      if (shouldUseUnreadActiveIcon) {
+        setActiveIcon();
+      } else {
         setIdleIcon();
       }
     },
@@ -180,11 +182,6 @@ app.whenReady().then(async () => {
 
   onMainEvent(EVENTS.ICON_ACTIVE, () => {
     if (!mb.tray.isDestroyed() && shouldUseUnreadActiveIcon) {
-      mb.tray.setImage(
-        menuBuilder.isUpdateAvailable()
-          ? TrayIcons.activeWithUpdate
-          : TrayIcons.active,
-      );
     }
   });
 
@@ -258,6 +255,14 @@ const handleURL = (url: string) => {
     sendRendererEvent(mb, EVENTS.AUTH_CALLBACK, url);
   }
 };
+
+function setActiveIcon() {
+  mb.tray.setImage(
+    menuBuilder.isUpdateAvailable()
+      ? TrayIcons.activeWithUpdate
+      : TrayIcons.active,
+  );
+}
 
 function setIdleIcon() {
   if (shouldUseAlternateIdleIcon) {

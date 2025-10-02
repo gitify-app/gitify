@@ -45,7 +45,6 @@ import {
   setKeyboardShortcut,
   setUseAlternateIdleIcon,
   setUseUnreadActiveIcon,
-  updateTrayIcon,
   updateTrayTitle,
 } from '../utils/comms';
 import { getNotificationCount } from '../utils/notifications/notifications';
@@ -69,11 +68,13 @@ interface AppContextState {
   ) => Promise<void>;
   logoutFromAccount: (account: Account) => Promise<void>;
 
-  notifications: AccountNotifications[];
   status: Status;
   globalError: GitifyError;
-  removeAccountNotifications: (account: Account) => Promise<void>;
+
+  notifications: AccountNotifications[];
   fetchNotifications: () => Promise<void>;
+  removeAccountNotifications: (account: Account) => Promise<void>;
+
   markNotificationsAsRead: (notifications: Notification[]) => Promise<void>;
   markNotificationsAsDone: (notifications: Notification[]) => Promise<void>;
   unsubscribeNotification: (notification: Notification) => Promise<void>;
@@ -106,6 +107,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     unsubscribeNotification,
   } = useNotifications();
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: restoreSettings is stable and should run only once
   useEffect(() => {
     restoreSettings();
   }, []);
@@ -164,12 +166,8 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
     setUseUnreadActiveIcon(settings.useUnreadActiveIcon);
 
-    updateTrayIcon(count);
+    updateTrayTitle(count.toString());
   }, [settings.useUnreadActiveIcon, notifications]);
-
-  useEffect(() => {
-    setAutoLaunch(settings.openAtStartup);
-  }, [settings.openAtStartup]);
 
   useEffect(() => {
     setUseAlternateIdleIcon(settings.useAlternateIdleIcon);
@@ -178,6 +176,10 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     setKeyboardShortcut(settings.keyboardShortcut);
   }, [settings.keyboardShortcut]);
+
+  useEffect(() => {
+    setAutoLaunch(settings.openAtStartup);
+  }, [settings.openAtStartup]);
 
   useEffect(() => {
     window.gitify.onResetApp(() => {
@@ -277,9 +279,9 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
     // Restore settings before accounts to ensure filters are available before fetching notifications
     if (existing.settings) {
-      setKeyboardShortcut(existing.settings.keyboardShortcut);
       setUseUnreadActiveIcon(existing.settings.useUnreadActiveIcon);
       setUseAlternateIdleIcon(existing.settings.useAlternateIdleIcon);
+      setKeyboardShortcut(existing.settings.keyboardShortcut);
       setSettings({ ...defaultSettings, ...existing.settings });
       window.gitify.zoom.setLevel(
         zoomPercentageToLevel(existing.settings.zoomPercentage),
