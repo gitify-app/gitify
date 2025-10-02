@@ -75,7 +75,7 @@ app.setAsDefaultProtocolClient(protocol);
 const appUpdater = new AppUpdater(mb, menuBuilder);
 
 let shouldUseAlternateIdleIcon = false;
-let shouldUseMonochromeIcon = false;
+let shouldUseUnreadActiveIcon = false;
 
 app.whenReady().then(async () => {
   await onFirstRunMaybe();
@@ -161,22 +161,25 @@ app.whenReady().then(async () => {
     },
   );
 
-  onMainEvent(EVENTS.USE_MONOCHROME_ICON, (_, useMonochromeIcon: boolean) => {
-    shouldUseMonochromeIcon = useMonochromeIcon;
+  onMainEvent(
+    EVENTS.USE_UNREAD_ACTIVE_ICON,
+    (_, useUnreadActiveIcon: boolean) => {
+      shouldUseUnreadActiveIcon = useUnreadActiveIcon;
 
-    if (shouldUseMonochromeIcon) {
-      setIdleIcon();
-    }
-  });
+      if (!shouldUseUnreadActiveIcon) {
+        setIdleIcon();
+      }
+    },
+  );
 
   onMainEvent(EVENTS.ICON_ERROR, () => {
-    if (!mb.tray.isDestroyed() && !shouldUseMonochromeIcon) {
+    if (!mb.tray.isDestroyed()) {
       mb.tray.setImage(TrayIcons.error);
     }
   });
 
   onMainEvent(EVENTS.ICON_ACTIVE, () => {
-    if (!mb.tray.isDestroyed() && !shouldUseMonochromeIcon) {
+    if (!mb.tray.isDestroyed() && shouldUseUnreadActiveIcon) {
       mb.tray.setImage(
         menuBuilder.isUpdateAvailable()
           ? TrayIcons.activeWithUpdate

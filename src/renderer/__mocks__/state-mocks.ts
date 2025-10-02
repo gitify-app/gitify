@@ -99,7 +99,7 @@ const mockNotificationSettings: NotificationSettingsState = {
 
 const mockTraySettings: TraySettingsState = {
   showNotificationsCountInTray: true,
-  useMonochromeIcon: false,
+  useUnreadActiveIcon: true,
   useAlternateIdleIcon: false,
 };
 

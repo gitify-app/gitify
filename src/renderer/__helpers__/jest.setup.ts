@@ -29,7 +29,7 @@ window.gitify = {
     updateIcon: jest.fn(),
     updateTitle: jest.fn(),
     useAlternateIdleIcon: jest.fn(),
-    useMonochromeIcon: jest.fn(),
+    useUnreadActiveIcon: jest.fn(),
   },
   notificationSoundPath: jest.fn(),
   onAuthCallback: jest.fn(),

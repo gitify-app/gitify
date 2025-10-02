@@ -41,12 +41,12 @@ import {
 import {
   decryptValue,
   encryptValue,
-  setAlternateIdleIcon,
   setAutoLaunch,
   setKeyboardShortcut,
-  setMonochromeIcon,
   updateTrayIcon,
   updateTrayTitle,
+  useAlternateIdleIcon,
+  useUnreadActiveIcon,
 } from '../utils/comms';
 import { getNotificationCount } from '../utils/notifications/notifications';
 import { clearState, loadState, saveState } from '../utils/storage';
@@ -162,17 +162,17 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     const count = getNotificationCount(notifications);
 
-    setMonochromeIcon(settings.useMonochromeIcon);
+    useUnreadActiveIcon(settings.useUnreadActiveIcon);
 
     updateTrayIcon(count);
-  }, [settings.useMonochromeIcon, notifications]);
+  }, [settings.useUnreadActiveIcon, notifications]);
 
   useEffect(() => {
     setAutoLaunch(settings.openAtStartup);
   }, [settings.openAtStartup]);
 
   useEffect(() => {
-    setAlternateIdleIcon(settings.useAlternateIdleIcon);
+    useAlternateIdleIcon(settings.useAlternateIdleIcon);
   }, [settings.useAlternateIdleIcon]);
 
   useEffect(() => {
@@ -278,8 +278,8 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     // Restore settings before accounts to ensure filters are available before fetching notifications
     if (existing.settings) {
       setKeyboardShortcut(existing.settings.keyboardShortcut);
-      setMonochromeIcon(existing.settings.useMonochromeIcon);
-      setAlternateIdleIcon(existing.settings.useAlternateIdleIcon);
+      useUnreadActiveIcon(existing.settings.useUnreadActiveIcon);
+      useAlternateIdleIcon(existing.settings.useAlternateIdleIcon);
       setSettings({ ...defaultSettings, ...existing.settings });
       window.gitify.zoom.setLevel(
         zoomPercentageToLevel(existing.settings.zoomPercentage),

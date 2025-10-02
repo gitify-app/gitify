@@ -1066,22 +1066,23 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             data-wrap="nowrap"
           >
             <input
+              checked=""
               class="size-2 rounded-sm cursor-pointer"
-              data-testid="checkbox-useMonochromeIcon"
-              id="useMonochromeIcon"
+              data-testid="checkbox-useUnreadActiveIcon"
+              id="useUnreadActiveIcon"
               type="checkbox"
             />
             <label
               class="font-medium text-gitify-font cursor-pointer"
-              for="useMonochromeIcon"
+              for="useUnreadActiveIcon"
             >
-              Use monochrome icon
+              Highlight unread notifications
             </label>
             <button
-              aria-label="tooltip-useMonochromeIcon"
+              aria-label="tooltip-useUnreadActiveIcon"
               class="relative"
-              data-testid="tooltip-tooltip-useMonochromeIcon"
-              id="tooltip-useMonochromeIcon"
+              data-testid="tooltip-tooltip-useUnreadActiveIcon"
+              id="tooltip-useUnreadActiveIcon"
               type="button"
             >
               <svg

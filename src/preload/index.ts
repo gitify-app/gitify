@@ -54,8 +54,8 @@ export const api = {
     useAlternateIdleIcon: (value: boolean) =>
       sendMainEvent(EVENTS.USE_ALTERNATE_IDLE_ICON, value),
 
-    useMonochromeIcon: (value: boolean) =>
-      sendMainEvent(EVENTS.USE_MONOCHROME_ICON, value),
+    useUnreadActiveIcon: (value: boolean) =>
+      sendMainEvent(EVENTS.USE_UNREAD_ACTIVE_ICON, value),
   },
 
   notificationSoundPath: () => invokeMainEvent(EVENTS.NOTIFICATION_SOUND_PATH),

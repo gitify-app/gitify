@@ -13,7 +13,7 @@ export const EVENTS = {
   VERSION: `${P}version`,
   UPDATE_TITLE: `${P}update-title`,
   USE_ALTERNATE_IDLE_ICON: `${P}use-alternate-idle-icon`,
-  USE_MONOCHROME_ICON: `${P}use-monochrome-icon`,
+  USE_UNREAD_ACTIVE_ICON: `${P}use-unread-active-icon`,
   UPDATE_KEYBOARD_SHORTCUT: `${P}update-keyboard-shortcut`,
   UPDATE_AUTO_LAUNCH: `${P}update-auto-launch`,
   SAFE_STORAGE_ENCRYPT: `${P}safe-storage-encrypt`,

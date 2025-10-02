@@ -38,7 +38,7 @@ describe('renderer/components/settings/TraySettings.tsx', () => {
     );
   });
 
-  it('should toggle the useMonochromeIcon checkbox', async () => {
+  it('should toggle the useUnreadActiveIcon checkbox', async () => {
     await act(async () => {
       render(
         <AppContext.Provider
@@ -53,10 +53,10 @@ describe('renderer/components/settings/TraySettings.tsx', () => {
       );
     });
 
-    await userEvent.click(screen.getByTestId('checkbox-useMonochromeIcon'));
+    await userEvent.click(screen.getByTestId('checkbox-useUnreadActiveIcon'));
 
     expect(updateSetting).toHaveBeenCalledTimes(1);
-    expect(updateSetting).toHaveBeenCalledWith('useMonochromeIcon', true);
+    expect(updateSetting).toHaveBeenCalledWith('useUnreadActiveIcon', false);
   });
 
   it('should toggle the useAlternateIdleIcon checkbox', async () => {

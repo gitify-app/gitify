@@ -28,17 +28,17 @@ export const TraySettings: FC = () => {
         />
 
         <Checkbox
-          checked={settings.useMonochromeIcon}
-          label="Use monochrome icon"
-          name="useMonochromeIcon"
+          checked={settings.useUnreadActiveIcon}
+          label="Highlight unread notifications"
+          name="useUnreadActiveIcon"
           onChange={(evt) =>
-            updateSetting('useMonochromeIcon', evt.target.checked)
+            updateSetting('useUnreadActiveIcon', evt.target.checked)
           }
           tooltip={
             <Stack direction="vertical" gap="condensed">
               <Text>
-                Display a neutral (monochrome) icon for unread notifications and
-                errors, instead of using color highlights.
+                Use a green {APPLICATION.NAME} logo when there are unread
+                notifications.
               </Text>
             </Stack>
           }
