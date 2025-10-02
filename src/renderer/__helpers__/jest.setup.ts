@@ -26,7 +26,7 @@ window.gitify = {
     setLevel: jest.fn(),
   },
   tray: {
-    updateIcon: jest.fn(),
+    updateColor: jest.fn(),
     updateTitle: jest.fn(),
     useAlternateIdleIcon: jest.fn(),
     useUnreadActiveIcon: jest.fn(),

@@ -52,7 +52,7 @@ describe('preload/utils', () => {
   it('onRendererEvent registers listener and receives emitted data', () => {
     const handler = jest.fn();
     onRendererEvent(
-      EVENTS.UPDATE_TITLE,
+      EVENTS.UPDATE_ICON_TITLE,
       handler as unknown as (
         e: Electron.IpcRendererEvent,
         args: string,
@@ -62,8 +62,11 @@ describe('preload/utils', () => {
       ipcRenderer as unknown as {
         __emit: (channel: string, ...a: unknown[]) => void;
       }
-    ).__emit(EVENTS.UPDATE_TITLE, 'payload');
-    expect(ipcRenderer.on).toHaveBeenCalledWith(EVENTS.UPDATE_TITLE, handler);
+    ).__emit(EVENTS.UPDATE_ICON_TITLE, 'payload');
+    expect(ipcRenderer.on).toHaveBeenCalledWith(
+      EVENTS.UPDATE_ICON_TITLE,
+      handler,
+    );
     expect(handler).toHaveBeenCalledWith({}, 'payload');
   });
 });

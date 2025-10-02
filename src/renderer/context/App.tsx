@@ -45,6 +45,7 @@ import {
   setKeyboardShortcut,
   setUseAlternateIdleIcon,
   setUseUnreadActiveIcon,
+  updateTrayColor,
   updateTrayTitle,
 } from '../utils/comms';
 import { getNotificationCount } from '../utils/notifications/notifications';
@@ -154,24 +155,22 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     const count = getNotificationCount(notifications);
 
+    let title = '';
     if (settings.showNotificationsCountInTray && count > 0) {
-      updateTrayTitle(count.toString());
-    } else {
-      updateTrayTitle();
+      title = count.toString();
     }
-  }, [settings.showNotificationsCountInTray, notifications]);
-
-  useEffect(() => {
-    const count = getNotificationCount(notifications);
 
     setUseUnreadActiveIcon(settings.useUnreadActiveIcon);
-
-    updateTrayTitle(count.toString());
-  }, [settings.useUnreadActiveIcon, notifications]);
-
-  useEffect(() => {
     setUseAlternateIdleIcon(settings.useAlternateIdleIcon);
-  }, [settings.useAlternateIdleIcon]);
+
+    updateTrayColor(count);
+    updateTrayTitle(title);
+  }, [
+    settings.showNotificationsCountInTray,
+    settings.useUnreadActiveIcon,
+    settings.useAlternateIdleIcon,
+    notifications,
+  ]);
 
   useEffect(() => {
     setKeyboardShortcut(settings.keyboardShortcut);

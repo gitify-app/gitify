@@ -52,7 +52,7 @@ class MockNotification {
   MockNotification;
 
 interface TestApi {
-  tray: { updateIcon: (n?: number) => void };
+  tray: { updateColor: (n?: number) => void };
   openExternalLink: (u: string, f: boolean) => void;
   app: { version: () => Promise<string>; show?: () => void; hide?: () => void };
   onSystemThemeUpdate: (cb: (t: string) => void) => void;
@@ -90,15 +90,15 @@ describe('preload/index', () => {
     expect(api).toHaveProperty('openExternalLink');
   });
 
-  it('tray.updateIcon sends correct events', async () => {
+  it('tray.updateColor sends correct events', async () => {
     await importPreload();
     const api = (window as unknown as { gitify: TestApi }).gitify; // casting only in test boundary
-    api.tray.updateIcon(-1);
-    api.tray.updateIcon(5);
-    api.tray.updateIcon(0);
-    expect(sendMainEvent).toHaveBeenNthCalledWith(1, EVENTS.ICON_ERROR);
-    expect(sendMainEvent).toHaveBeenNthCalledWith(2, EVENTS.ICON_ACTIVE);
-    expect(sendMainEvent).toHaveBeenNthCalledWith(3, EVENTS.ICON_IDLE);
+    api.tray.updateColor(-1);
+    expect(sendMainEvent).toHaveBeenNthCalledWith(
+      1,
+      EVENTS.UPDATE_ICON_COLOR,
+      -1,
+    );
   });
 
   it('openExternalLink sends event with payload', async () => {

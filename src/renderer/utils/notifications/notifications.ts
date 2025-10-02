@@ -6,7 +6,7 @@ import type {
 import type { GitifySubject, Notification } from '../../typesGitHub';
 import { listNotificationsForAuthenticatedUser } from '../api/client';
 import { determineFailureType } from '../api/errors';
-import { updateTrayIcon } from '../comms';
+import { updateTrayColor } from '../comms';
 import { rendererLogError, rendererLogWarn } from '../logger';
 import {
   filterBaseNotifications,
@@ -17,7 +17,7 @@ import { createNotificationHandler } from './handlers';
 export function setTrayIconColor(notifications: AccountNotifications[]) {
   const allNotificationsCount = getNotificationCount(notifications);
 
-  updateTrayIcon(allNotificationsCount);
+  updateTrayColor(allNotificationsCount);
 }
 
 export function getNotificationCount(notifications: AccountNotifications[]) {
