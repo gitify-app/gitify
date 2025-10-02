@@ -19,7 +19,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
           data-wrap="nowrap"
         >
           <button
-            aria-describedby="«r0»"
+            aria-describedby="_r_0_"
             type="button"
           >
             <svg
@@ -47,7 +47,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             aria-hidden="true"
             class="prc-TooltipV2-Tooltip-cYMVY"
             data-direction="e"
-            id="«r0»"
+            id="_r_0_"
             popover="auto"
             role="tooltip"
           >
@@ -283,7 +283,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             data-wrap="nowrap"
           >
             <button
-              aria-describedby="«r1»-loading-announcement"
+              aria-describedby="_r_1_-loading-announcement"
               aria-label="Mark as done"
               class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
               data-component="IconButton"
@@ -313,7 +313,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               </svg>
             </button>
             <button
-              aria-describedby="«r2»-loading-announcement"
+              aria-describedby="_r_2_-loading-announcement"
               aria-label="Mark as read"
               class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
               data-component="IconButton"
@@ -343,7 +343,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               </svg>
             </button>
             <button
-              aria-describedby="«r3»-loading-announcement"
+              aria-describedby="_r_3_-loading-announcement"
               aria-label="Unsubscribe from thread"
               class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
               data-component="IconButton"
@@ -392,7 +392,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
         data-wrap="nowrap"
       >
         <button
-          aria-describedby="«r0»"
+          aria-describedby="_r_0_"
           type="button"
         >
           <svg
@@ -420,7 +420,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
           aria-hidden="true"
           class="prc-TooltipV2-Tooltip-cYMVY"
           data-direction="e"
-          id="«r0»"
+          id="_r_0_"
           popover="auto"
           role="tooltip"
         >
@@ -656,7 +656,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
           data-wrap="nowrap"
         >
           <button
-            aria-describedby="«r1»-loading-announcement"
+            aria-describedby="_r_1_-loading-announcement"
             aria-label="Mark as done"
             class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
             data-component="IconButton"
@@ -686,7 +686,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             </svg>
           </button>
           <button
-            aria-describedby="«r2»-loading-announcement"
+            aria-describedby="_r_2_-loading-announcement"
             aria-label="Mark as read"
             class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
             data-component="IconButton"
@@ -716,7 +716,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             </svg>
           </button>
           <button
-            aria-describedby="«r3»-loading-announcement"
+            aria-describedby="_r_3_-loading-announcement"
             aria-label="Unsubscribe from thread"
             class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
             data-component="IconButton"
@@ -822,7 +822,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
           data-wrap="nowrap"
         >
           <button
-            aria-describedby="«r4»"
+            aria-describedby="_r_4_"
             type="button"
           >
             <svg
@@ -850,7 +850,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             aria-hidden="true"
             class="prc-TooltipV2-Tooltip-cYMVY"
             data-direction="e"
-            id="«r4»"
+            id="_r_4_"
             popover="auto"
             role="tooltip"
           >
@@ -1034,7 +1034,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             data-wrap="nowrap"
           >
             <button
-              aria-describedby="«r5»-loading-announcement"
+              aria-describedby="_r_5_-loading-announcement"
               aria-label="Mark as done"
               class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
               data-component="IconButton"
@@ -1064,7 +1064,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               </svg>
             </button>
             <button
-              aria-describedby="«r6»-loading-announcement"
+              aria-describedby="_r_6_-loading-announcement"
               aria-label="Mark as read"
               class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
               data-component="IconButton"
@@ -1094,7 +1094,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               </svg>
             </button>
             <button
-              aria-describedby="«r7»-loading-announcement"
+              aria-describedby="_r_7_-loading-announcement"
               aria-label="Unsubscribe from thread"
               class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
               data-component="IconButton"
@@ -1143,7 +1143,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
         data-wrap="nowrap"
       >
         <button
-          aria-describedby="«r4»"
+          aria-describedby="_r_4_"
           type="button"
         >
           <svg
@@ -1171,7 +1171,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
           aria-hidden="true"
           class="prc-TooltipV2-Tooltip-cYMVY"
           data-direction="e"
-          id="«r4»"
+          id="_r_4_"
           popover="auto"
           role="tooltip"
         >
@@ -1355,7 +1355,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
           data-wrap="nowrap"
         >
           <button
-            aria-describedby="«r5»-loading-announcement"
+            aria-describedby="_r_5_-loading-announcement"
             aria-label="Mark as done"
             class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
             data-component="IconButton"
@@ -1385,7 +1385,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             </svg>
           </button>
           <button
-            aria-describedby="«r6»-loading-announcement"
+            aria-describedby="_r_6_-loading-announcement"
             aria-label="Mark as read"
             class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
             data-component="IconButton"
@@ -1415,7 +1415,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             </svg>
           </button>
           <button
-            aria-describedby="«r7»-loading-announcement"
+            aria-describedby="_r_7_-loading-announcement"
             aria-label="Unsubscribe from thread"
             class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
             data-component="IconButton"
@@ -1521,7 +1521,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
           data-wrap="nowrap"
         >
           <button
-            aria-describedby="«r8»"
+            aria-describedby="_r_8_"
             type="button"
           >
             <svg
@@ -1549,7 +1549,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             aria-hidden="true"
             class="prc-TooltipV2-Tooltip-cYMVY"
             data-direction="e"
-            id="«r8»"
+            id="_r_8_"
             popover="auto"
             role="tooltip"
           >
@@ -1733,7 +1733,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             data-wrap="nowrap"
           >
             <button
-              aria-describedby="«r9»-loading-announcement"
+              aria-describedby="_r_9_-loading-announcement"
               aria-label="Mark as done"
               class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
               data-component="IconButton"
@@ -1763,7 +1763,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               </svg>
             </button>
             <button
-              aria-describedby="«ra»-loading-announcement"
+              aria-describedby="_r_a_-loading-announcement"
               aria-label="Mark as read"
               class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
               data-component="IconButton"
@@ -1793,7 +1793,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               </svg>
             </button>
             <button
-              aria-describedby="«rb»-loading-announcement"
+              aria-describedby="_r_b_-loading-announcement"
               aria-label="Unsubscribe from thread"
               class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
               data-component="IconButton"
@@ -1842,7 +1842,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
         data-wrap="nowrap"
       >
         <button
-          aria-describedby="«r8»"
+          aria-describedby="_r_8_"
           type="button"
         >
           <svg
@@ -1870,7 +1870,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
           aria-hidden="true"
           class="prc-TooltipV2-Tooltip-cYMVY"
           data-direction="e"
-          id="«r8»"
+          id="_r_8_"
           popover="auto"
           role="tooltip"
         >
@@ -2054,7 +2054,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
           data-wrap="nowrap"
         >
           <button
-            aria-describedby="«r9»-loading-announcement"
+            aria-describedby="_r_9_-loading-announcement"
             aria-label="Mark as done"
             class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
             data-component="IconButton"
@@ -2084,7 +2084,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             </svg>
           </button>
           <button
-            aria-describedby="«ra»-loading-announcement"
+            aria-describedby="_r_a_-loading-announcement"
             aria-label="Mark as read"
             class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
             data-component="IconButton"
@@ -2114,7 +2114,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             </svg>
           </button>
           <button
-            aria-describedby="«rb»-loading-announcement"
+            aria-describedby="_r_b_-loading-announcement"
             aria-label="Unsubscribe from thread"
             class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
             data-component="IconButton"

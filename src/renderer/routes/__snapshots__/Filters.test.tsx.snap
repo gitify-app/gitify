@@ -17,7 +17,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
       data-wrap="nowrap"
     >
       <button
-        aria-describedby="«r0»-loading-announcement"
+        aria-describedby="_r_0_-loading-announcement"
         aria-labelledby="Go Back"
         class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
         data-component="IconButton"
@@ -1989,7 +1989,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
       data-wrap="nowrap"
     >
       <button
-        aria-describedby="«r2»-loading-announcement «r1»"
+        aria-describedby="_r_2_-loading-announcement _r_1_"
         class="prc-Button-ButtonBase-c50BI"
         data-loading="false"
         data-size="medium"
@@ -2035,7 +2035,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
         aria-hidden="true"
         class="prc-TooltipV2-Tooltip-cYMVY"
         data-direction="n"
-        id="«r1»"
+        id="_r_1_"
         popover="auto"
         role="tooltip"
       >

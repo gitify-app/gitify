@@ -17,7 +17,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
       data-wrap="nowrap"
     >
       <button
-        aria-describedby="«r0»-loading-announcement"
+        aria-describedby="_r_0_-loading-announcement"
         aria-labelledby="Go Back"
         class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
         data-component="IconButton"
@@ -305,7 +305,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             >
               <div>
                 <button
-                  aria-describedby="«r1»-loading-announcement"
+                  aria-describedby="_r_1_-loading-announcement"
                   aria-label="Zoom out"
                   class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
                   data-component="IconButton"
@@ -339,7 +339,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               </div>
               <div>
                 <button
-                  aria-describedby="«r2»-loading-announcement"
+                  aria-describedby="_r_2_-loading-announcement"
                   aria-label="Zoom percentage"
                   class="prc-Button-ButtonBase-c50BI"
                   data-loading="false"
@@ -366,7 +366,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               </div>
               <div>
                 <button
-                  aria-describedby="«r3»-loading-announcement"
+                  aria-describedby="_r_3_-loading-announcement"
                   aria-label="Zoom in"
                   class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
                   data-component="IconButton"
@@ -400,7 +400,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               </div>
               <div>
                 <button
-                  aria-describedby="«r4»-loading-announcement"
+                  aria-describedby="_r_4_-loading-announcement"
                   aria-label="Reset zoom"
                   class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
                   data-component="IconButton"
@@ -1373,7 +1373,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             >
               <div>
                 <button
-                  aria-describedby="«r5»-loading-announcement"
+                  aria-describedby="_r_5_-loading-announcement"
                   aria-label="Volume down"
                   class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
                   data-component="IconButton"
@@ -1409,7 +1409,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               </div>
               <div>
                 <button
-                  aria-describedby="«r6»-loading-announcement"
+                  aria-describedby="_r_6_-loading-announcement"
                   aria-label="Volume percentage"
                   class="prc-Button-ButtonBase-c50BI"
                   data-loading="false"
@@ -1436,7 +1436,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               </div>
               <div>
                 <button
-                  aria-describedby="«r7»-loading-announcement"
+                  aria-describedby="_r_7_-loading-announcement"
                   aria-label="Volume up"
                   class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
                   data-component="IconButton"
@@ -1468,7 +1468,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               </div>
               <div>
                 <button
-                  aria-describedby="«r8»-loading-announcement"
+                  aria-describedby="_r_8_-loading-announcement"
                   aria-label="Reset volume"
                   class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
                   data-component="IconButton"
@@ -1532,7 +1532,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
         data-wrap="nowrap"
       >
         <button
-          aria-describedby="«r9»-loading-announcement"
+          aria-describedby="_r_9_-loading-announcement"
           class="Box-sc-g0xbh4-0 jRKXQy prc-Button-ButtonBase-c50BI"
           data-loading="false"
           data-no-visuals="true"
@@ -1578,7 +1578,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
         data-wrap="nowrap"
       >
         <button
-          aria-describedby="«rb»-loading-announcement «ra»"
+          aria-describedby="_r_b_-loading-announcement _r_a_"
           class="prc-Button-ButtonBase-c50BI"
           data-loading="false"
           data-no-visuals="true"
@@ -1606,7 +1606,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           aria-hidden="true"
           class="prc-TooltipV2-Tooltip-cYMVY"
           data-direction="n"
-          id="«ra»"
+          id="_r_a_"
           popover="auto"
           role="tooltip"
         >
@@ -1623,7 +1623,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
         data-wrap="nowrap"
       >
         <button
-          aria-describedby="«rd»-loading-announcement «rc»"
+          aria-describedby="_r_d_-loading-announcement _r_c_"
           aria-label="Accounts"
           class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
           data-component="IconButton"
@@ -1655,14 +1655,14 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           aria-hidden="true"
           class="prc-TooltipV2-Tooltip-cYMVY"
           data-direction="n"
-          id="«rc»"
+          id="_r_c_"
           popover="auto"
           role="tooltip"
         >
           Accounts
         </span>
         <button
-          aria-describedby="«rf»-loading-announcement «re»"
+          aria-describedby="_r_f_-loading-announcement _r_e_"
           aria-label="Quit Gitify"
           class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
           data-component="IconButton"
@@ -1694,7 +1694,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           aria-hidden="true"
           class="prc-TooltipV2-Tooltip-cYMVY"
           data-direction="nw"
-          id="«re»"
+          id="_r_e_"
           popover="auto"
           role="tooltip"
         >

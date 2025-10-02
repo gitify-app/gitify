@@ -102,7 +102,7 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
               Login with
             </span>
             <button
-              aria-describedby="«r0»-loading-announcement"
+              aria-describedby="_r_0_-loading-announcement"
               class="prc-Button-ButtonBase-c50BI"
               data-loading="false"
               data-size="medium"
@@ -145,7 +145,7 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
               </span>
             </button>
             <button
-              aria-describedby="«r1»-loading-announcement"
+              aria-describedby="_r_1_-loading-announcement"
               class="prc-Button-ButtonBase-c50BI"
               data-loading="false"
               data-size="medium"
@@ -188,7 +188,7 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
               </span>
             </button>
             <button
-              aria-describedby="«r2»-loading-announcement"
+              aria-describedby="_r_2_-loading-announcement"
               class="prc-Button-ButtonBase-c50BI"
               data-loading="false"
               data-size="medium"
@@ -333,7 +333,7 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
             Login with
           </span>
           <button
-            aria-describedby="«r0»-loading-announcement"
+            aria-describedby="_r_0_-loading-announcement"
             class="prc-Button-ButtonBase-c50BI"
             data-loading="false"
             data-size="medium"
@@ -376,7 +376,7 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
             </span>
           </button>
           <button
-            aria-describedby="«r1»-loading-announcement"
+            aria-describedby="_r_1_-loading-announcement"
             class="prc-Button-ButtonBase-c50BI"
             data-loading="false"
             data-size="medium"
@@ -419,7 +419,7 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
             </span>
           </button>
           <button
-            aria-describedby="«r2»-loading-announcement"
+            aria-describedby="_r_2_-loading-announcement"
             class="prc-Button-ButtonBase-c50BI"
             data-loading="false"
             data-size="medium"

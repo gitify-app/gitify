@@ -14,7 +14,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
         data-wrap="nowrap"
       >
         <button
-          aria-describedby="«r0»-loading-announcement"
+          aria-describedby="_r_0_-loading-announcement"
           class="prc-Button-ButtonBase-c50BI"
           data-has-count="true"
           data-loading="false"
@@ -95,7 +95,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
           data-wrap="nowrap"
         >
           <button
-            aria-describedby="«r1»-loading-announcement"
+            aria-describedby="_r_1_-loading-announcement"
             aria-label="Mark repository as done"
             class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
             data-component="IconButton"
@@ -125,7 +125,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
             </svg>
           </button>
           <button
-            aria-describedby="«r2»-loading-announcement"
+            aria-describedby="_r_2_-loading-announcement"
             aria-label="Mark repository as read"
             class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
             data-component="IconButton"
@@ -155,7 +155,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
             </svg>
           </button>
           <button
-            aria-describedby="«r3»-loading-announcement"
+            aria-describedby="_r_3_-loading-announcement"
             aria-label="Hide repository notifications"
             class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
             data-component="IconButton"
@@ -204,7 +204,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
       data-wrap="nowrap"
     >
       <button
-        aria-describedby="«r0»-loading-announcement"
+        aria-describedby="_r_0_-loading-announcement"
         class="prc-Button-ButtonBase-c50BI"
         data-has-count="true"
         data-loading="false"
@@ -285,7 +285,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
         data-wrap="nowrap"
       >
         <button
-          aria-describedby="«r1»-loading-announcement"
+          aria-describedby="_r_1_-loading-announcement"
           aria-label="Mark repository as done"
           class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
           data-component="IconButton"
@@ -315,7 +315,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
           </svg>
         </button>
         <button
-          aria-describedby="«r2»-loading-announcement"
+          aria-describedby="_r_2_-loading-announcement"
           aria-label="Mark repository as read"
           class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
           data-component="IconButton"
@@ -345,7 +345,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
           </svg>
         </button>
         <button
-          aria-describedby="«r3»-loading-announcement"
+          aria-describedby="_r_3_-loading-announcement"
           aria-label="Hide repository notifications"
           class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
           data-component="IconButton"
@@ -451,7 +451,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
         data-wrap="nowrap"
       >
         <button
-          aria-describedby="«rk»-loading-announcement"
+          aria-describedby="_r_k_-loading-announcement"
           class="prc-Button-ButtonBase-c50BI"
           data-has-count="true"
           data-loading="false"
@@ -539,7 +539,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
           data-wrap="nowrap"
         >
           <button
-            aria-describedby="«rl»-loading-announcement"
+            aria-describedby="_r_l_-loading-announcement"
             aria-label="Mark repository as done"
             class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
             data-component="IconButton"
@@ -569,7 +569,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
             </svg>
           </button>
           <button
-            aria-describedby="«rm»-loading-announcement"
+            aria-describedby="_r_m_-loading-announcement"
             aria-label="Mark repository as read"
             class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
             data-component="IconButton"
@@ -599,7 +599,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
             </svg>
           </button>
           <button
-            aria-describedby="«rn»-loading-announcement"
+            aria-describedby="_r_n_-loading-announcement"
             aria-label="Show repository notifications"
             class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
             data-component="IconButton"
@@ -641,7 +641,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
         data-wrap="nowrap"
       >
         <button
-          aria-describedby="«ro»-loading-announcement"
+          aria-describedby="_r_o_-loading-announcement"
           class="prc-Button-ButtonBase-c50BI"
           data-has-count="true"
           data-loading="false"
@@ -729,7 +729,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
           data-wrap="nowrap"
         >
           <button
-            aria-describedby="«rp»-loading-announcement"
+            aria-describedby="_r_p_-loading-announcement"
             aria-label="Mark repository as done"
             class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
             data-component="IconButton"
@@ -759,7 +759,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
             </svg>
           </button>
           <button
-            aria-describedby="«rq»-loading-announcement"
+            aria-describedby="_r_q_-loading-announcement"
             aria-label="Mark repository as read"
             class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
             data-component="IconButton"
@@ -789,7 +789,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
             </svg>
           </button>
           <button
-            aria-describedby="«rr»-loading-announcement"
+            aria-describedby="_r_r_-loading-announcement"
             aria-label="Hide repository notifications"
             class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
             data-component="IconButton"
@@ -838,7 +838,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
       data-wrap="nowrap"
     >
       <button
-        aria-describedby="«ro»-loading-announcement"
+        aria-describedby="_r_o_-loading-announcement"
         class="prc-Button-ButtonBase-c50BI"
         data-has-count="true"
         data-loading="false"
@@ -926,7 +926,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
         data-wrap="nowrap"
       >
         <button
-          aria-describedby="«rp»-loading-announcement"
+          aria-describedby="_r_p_-loading-announcement"
           aria-label="Mark repository as done"
           class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
           data-component="IconButton"
@@ -956,7 +956,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
           </svg>
         </button>
         <button
-          aria-describedby="«rq»-loading-announcement"
+          aria-describedby="_r_q_-loading-announcement"
           aria-label="Mark repository as read"
           class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
           data-component="IconButton"
@@ -986,7 +986,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
           </svg>
         </button>
         <button
-          aria-describedby="«rr»-loading-announcement"
+          aria-describedby="_r_r_-loading-announcement"
           aria-label="Hide repository notifications"
           class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
           data-component="IconButton"
@@ -1092,7 +1092,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
         data-wrap="nowrap"
       >
         <button
-          aria-describedby="«rg»-loading-announcement"
+          aria-describedby="_r_g_-loading-announcement"
           class="prc-Button-ButtonBase-c50BI"
           data-has-count="true"
           data-loading="false"
@@ -1180,7 +1180,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
           data-wrap="nowrap"
         >
           <button
-            aria-describedby="«rh»-loading-announcement"
+            aria-describedby="_r_h_-loading-announcement"
             aria-label="Mark repository as done"
             class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
             data-component="IconButton"
@@ -1210,7 +1210,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
             </svg>
           </button>
           <button
-            aria-describedby="«ri»-loading-announcement"
+            aria-describedby="_r_i_-loading-announcement"
             aria-label="Mark repository as read"
             class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
             data-component="IconButton"
@@ -1240,7 +1240,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
             </svg>
           </button>
           <button
-            aria-describedby="«rj»-loading-announcement"
+            aria-describedby="_r_j_-loading-announcement"
             aria-label="Hide repository notifications"
             class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
             data-component="IconButton"
@@ -1289,7 +1289,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
       data-wrap="nowrap"
     >
       <button
-        aria-describedby="«rg»-loading-announcement"
+        aria-describedby="_r_g_-loading-announcement"
         class="prc-Button-ButtonBase-c50BI"
         data-has-count="true"
         data-loading="false"
@@ -1377,7 +1377,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
         data-wrap="nowrap"
       >
         <button
-          aria-describedby="«rh»-loading-announcement"
+          aria-describedby="_r_h_-loading-announcement"
           aria-label="Mark repository as done"
           class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
           data-component="IconButton"
@@ -1407,7 +1407,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
           </svg>
         </button>
         <button
-          aria-describedby="«ri»-loading-announcement"
+          aria-describedby="_r_i_-loading-announcement"
           aria-label="Mark repository as read"
           class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
           data-component="IconButton"
@@ -1437,7 +1437,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
           </svg>
         </button>
         <button
-          aria-describedby="«rj»-loading-announcement"
+          aria-describedby="_r_j_-loading-announcement"
           aria-label="Hide repository notifications"
           class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
           data-component="IconButton"
