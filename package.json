@@ -69,8 +69,8 @@
     "electron-log": "5.4.3",
     "electron-updater": "6.6.2",
     "menubar": "9.5.1",
-    "react": "19.1.1",
-    "react-dom": "19.1.1",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
     "react-router-dom": "7.9.3"
   },
   "devDependencies": {
@@ -87,8 +87,8 @@
     "@testing-library/user-event": "14.6.1",
     "@types/jest": "30.0.0",
     "@types/node": "22.18.7",
-    "@types/react": "19.1.16",
-    "@types/react-dom": "19.1.9",
+    "@types/react": "19.2.0",
+    "@types/react-dom": "19.2.0",
     "@types/react-router-dom": "5.3.3",
     "@types/semver": "7.7.1",
     "identity-obj-proxy": "3.0.0",
