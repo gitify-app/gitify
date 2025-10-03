@@ -35,21 +35,11 @@ export const api = {
   },
 
   tray: {
-    updateIcon: (notificationsLength = 0) => {
-      if (notificationsLength < 0) {
-        sendMainEvent(EVENTS.ICON_ERROR);
-        return;
-      }
-
-      if (notificationsLength > 0) {
-        sendMainEvent(EVENTS.ICON_ACTIVE);
-        return;
-      }
-
-      sendMainEvent(EVENTS.ICON_IDLE);
+    updateColor: (notificationsCount = 0) => {
+      sendMainEvent(EVENTS.UPDATE_ICON_COLOR, notificationsCount);
     },
 
-    updateTitle: (title = '') => sendMainEvent(EVENTS.UPDATE_TITLE, title),
+    updateTitle: (title = '') => sendMainEvent(EVENTS.UPDATE_ICON_TITLE, title),
 
     useAlternateIdleIcon: (value: boolean) =>
       sendMainEvent(EVENTS.USE_ALTERNATE_IDLE_ICON, value),

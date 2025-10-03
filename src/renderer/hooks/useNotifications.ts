@@ -13,7 +13,7 @@ import {
   markNotificationThreadAsDone,
   markNotificationThreadAsRead,
 } from '../utils/api/client';
-import { updateTrayIcon } from '../utils/comms';
+import { updateTrayColor } from '../utils/comms';
 import { isMarkAsDoneFeatureSupported } from '../utils/features';
 import { rendererLogError } from '../utils/logger';
 import { triggerNativeNotifications } from '../utils/notifications/native';
@@ -93,7 +93,7 @@ export const useNotifications = (): NotificationsState => {
       if (allAccountsHaveErrors) {
         setStatus('error');
         setGlobalError(accountErrorsAreAllSame ? accountError : null);
-        updateTrayIcon(-1);
+        updateTrayColor(-1);
         return;
       }
 

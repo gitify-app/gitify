@@ -57,8 +57,8 @@ export function setKeyboardShortcut(keyboardShortcut: boolean): void {
   window.gitify.setKeyboardShortcut(keyboardShortcut);
 }
 
-export function updateTrayIcon(notificationsLength = 0): void {
-  window.gitify.tray.updateIcon(notificationsLength);
+export function updateTrayColor(notificationsLength = 0): void {
+  window.gitify.tray.updateColor(notificationsLength);
 }
 
 export function updateTrayTitle(title = ''): void {
