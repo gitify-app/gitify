@@ -112,7 +112,7 @@
     "postcss": "8.5.6",
     "postcss-loader": "8.2.0",
     "rimraf": "6.0.1",
-    "semver": "7.7.2",
+    "semver": "7.7.3",
     "styled-components": "6.1.19",
     "tailwind-merge": "3.3.1",
     "tailwindcss": "4.1.14",
