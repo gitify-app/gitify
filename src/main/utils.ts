@@ -14,7 +14,7 @@ import { sendRendererEvent } from './events';
 
 export function takeScreenshot(mb: Menubar) {
   const date = new Date();
-  const dateStr = date.toISOString().replace(/:/g, '-');
+  const dateStr = date.toISOString().replaceAll(':', '-');
 
   const capturedPicFilePath = path.join(
     os.homedir(),

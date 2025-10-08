@@ -13,7 +13,7 @@ interface ITitle {
 }
 
 export const Title: FC<ITitle> = ({ size = 2, ...props }) => {
-  const name = props.children.toLowerCase().replace(' ', '-');
+  const name = props.children.toLowerCase().replaceAll(' ', '-');
 
   return (
     <legend>
