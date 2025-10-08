@@ -22,12 +22,13 @@ export const triggerNativeNotifications = (
         return accountNotifications.notifications;
       }
 
-      const accountPreviousNotificationsIds =
-        accountPreviousNotifications.notifications.map((item) => item.id);
+      const accountPreviousNotificationsIds = new Set<string>(
+        accountPreviousNotifications.notifications.map((item) => item.id),
+      );
 
       const accountNewNotifications = accountNotifications.notifications.filter(
         (item) => {
-          return !accountPreviousNotificationsIds.includes(`${item.id}`);
+          return !accountPreviousNotificationsIds.has(`${item.id}`);
         },
       );
 

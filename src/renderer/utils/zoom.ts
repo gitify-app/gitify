@@ -7,7 +7,7 @@ const MULTIPLIER = 2;
  * @returns zoomLevel -2 to 0.5
  */
 export const zoomPercentageToLevel = (percentage: number): number => {
-  if (typeof percentage === 'undefined') {
+  if (percentage === undefined) {
     return 0;
   }
 
@@ -20,7 +20,7 @@ export const zoomPercentageToLevel = (percentage: number): number => {
  * @returns percentage 0-150
  */
 export const zoomLevelToPercentage = (zoom: number): number => {
-  if (typeof zoom === 'undefined') {
+  if (zoom === undefined) {
     return 100;
   }
 

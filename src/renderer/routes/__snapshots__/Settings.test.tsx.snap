@@ -170,7 +170,6 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                 class="prc-Select-Select-F7Flx"
                 data-hasplaceholder="false"
                 data-testid="settings-theme"
-                id="theme"
               >
                 <optgroup
                   label="System"

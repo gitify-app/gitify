@@ -16,8 +16,8 @@ export function removeNotifications(
   }
 
   const removeNotificationAccount = notificationsToRemove[0].account;
-  const removeNotificationIDs = notificationsToRemove.map(
-    (notification) => notification.id,
+  const removeNotificationIDs = new Set<string>(
+    notificationsToRemove.map((notification) => notification.id),
   );
 
   const accountIndex = allNotifications.findIndex(
@@ -31,7 +31,7 @@ export function removeNotifications(
     updatedNotifications[accountIndex] = {
       ...updatedNotifications[accountIndex],
       notifications: updatedNotifications[accountIndex].notifications.filter(
-        (notification) => !removeNotificationIDs.includes(notification.id),
+        (notification) => !removeNotificationIDs.has(notification.id),
       ),
     };
     return updatedNotifications;
