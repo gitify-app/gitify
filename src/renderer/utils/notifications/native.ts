@@ -10,31 +10,29 @@ export const triggerNativeNotifications = (
   newNotifications: AccountNotifications[],
   state: GitifyState,
 ) => {
-  const diffNotifications = newNotifications
-    .map((accountNotifications) => {
-      const accountPreviousNotifications = previousNotifications.find(
-        (item) =>
-          getAccountUUID(item.account) ===
-          getAccountUUID(accountNotifications.account),
-      );
+  const diffNotifications = newNotifications.flatMap((accountNotifications) => {
+    const accountPreviousNotifications = previousNotifications.find(
+      (item) =>
+        getAccountUUID(item.account) ===
+        getAccountUUID(accountNotifications.account),
+    );
 
-      if (!accountPreviousNotifications) {
-        return accountNotifications.notifications;
-      }
+    if (!accountPreviousNotifications) {
+      return accountNotifications.notifications;
+    }
 
-      const accountPreviousNotificationsIds = new Set<string>(
-        accountPreviousNotifications.notifications.map((item) => item.id),
-      );
+    const accountPreviousNotificationsIds = new Set<string>(
+      accountPreviousNotifications.notifications.map((item) => item.id),
+    );
 
-      const accountNewNotifications = accountNotifications.notifications.filter(
-        (item) => {
-          return !accountPreviousNotificationsIds.has(`${item.id}`);
-        },
-      );
+    const accountNewNotifications = accountNotifications.notifications.filter(
+      (item) => {
+        return !accountPreviousNotificationsIds.has(`${item.id}`);
+      },
+    );
 
-      return accountNewNotifications;
-    })
-    .reduce((acc, val) => acc.concat(val), []);
+    return accountNewNotifications;
+  });
 
   setTrayIconColor(newNotifications);
 
@@ -63,7 +61,7 @@ export const raiseNativeNotification = (notifications: Notification[]) => {
       ? ''
       : notification.repository.full_name;
     body = notification.subject.title;
-    // TODO FIXME = set url to notification url
+    // url intentionally left null (no direct subject URL available)
   } else {
     title = APPLICATION.NAME;
     body = `You have ${notifications.length} notifications`;
