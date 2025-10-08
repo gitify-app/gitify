@@ -42,10 +42,8 @@ function getNotifications(state: GitifyState) {
 export async function getAllNotifications(
   state: GitifyState,
 ): Promise<AccountNotifications[]> {
-  const responses = await Promise.all(getNotifications(state));
-
   const notifications: AccountNotifications[] = await Promise.all(
-    responses
+    getNotifications(state)
       .filter((response) => !!response)
       .map(async (accountNotifications) => {
         try {
