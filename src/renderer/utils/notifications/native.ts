@@ -26,8 +26,8 @@ export const triggerNativeNotifications = (
     );
 
     const accountNewNotifications = accountNotifications.notifications.filter(
-      (item) => {
-        return !accountPreviousNotificationsIds.has(`${item.id}`);
+      (notification) => {
+        return !accountPreviousNotificationsIds.has(notification.id);
       },
     );
 
