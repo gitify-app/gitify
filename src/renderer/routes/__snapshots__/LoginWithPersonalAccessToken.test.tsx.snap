@@ -61,7 +61,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
                   data-justify="start"
                   data-padding="none"
                   data-wrap="nowrap"
-                  id="title-login-with personal access token"
+                  id="title-login-with-personal-access-token"
                 >
                   <svg
                     aria-hidden="true"
@@ -506,7 +506,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
                 data-justify="start"
                 data-padding="none"
                 data-wrap="nowrap"
-                id="title-login-with personal access token"
+                id="title-login-with-personal-access-token"
               >
                 <svg
                   aria-hidden="true"

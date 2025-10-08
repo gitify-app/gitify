@@ -77,7 +77,7 @@ export function actionsURL(repositoryURL: string, filters: string[]): Link {
   }
 
   // Note: the GitHub Actions UI cannot handle encoded '+' characters.
-  return url.toString().replace(/%2B/g, '+') as Link;
+  return url.toString().replaceAll('%2B', '+') as Link;
 }
 
 async function getDiscussionUrl(notification: Notification): Promise<Link> {

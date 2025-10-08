@@ -19,7 +19,7 @@ interface TokenSearchInputProps {
   onRemove: (token: SearchToken) => void;
 }
 
-const INPUT_KEY_EVENTS = ['Enter', 'Tab', ' ', ','];
+const INPUT_KEY_EVENTS: Set<string> = new Set(['Enter', 'Tab', ' ', ',']);
 
 export const TokenSearchInput: FC<TokenSearchInputProps> = ({
   label,
@@ -51,7 +51,7 @@ export const TokenSearchInput: FC<TokenSearchInputProps> = ({
   }
 
   function onKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
-    if (INPUT_KEY_EVENTS.includes(e.key)) {
+    if (INPUT_KEY_EVENTS.has(e.key)) {
       tryAddToken(e);
       setShowSuggestions(false);
     } else if (e.key === 'ArrowDown') {

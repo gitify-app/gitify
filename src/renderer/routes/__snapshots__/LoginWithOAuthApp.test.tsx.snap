@@ -61,7 +61,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                   data-justify="start"
                   data-padding="none"
                   data-wrap="nowrap"
-                  id="title-login-with oauth app"
+                  id="title-login-with-oauth-app"
                 >
                   <svg
                     aria-hidden="true"
@@ -513,7 +513,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                 data-justify="start"
                 data-padding="none"
                 data-wrap="nowrap"
-                id="title-login-with oauth app"
+                id="title-login-with-oauth-app"
               >
                 <svg
                   aria-hidden="true"
