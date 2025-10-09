@@ -18,7 +18,6 @@ import {
   type IOpenExternal,
 } from '../shared/events';
 import { logInfo, logWarn } from '../shared/logger';
-import { isLinux, isWindows } from '../shared/platform';
 
 import { handleMainEvent, onMainEvent, sendRendererEvent } from './events';
 import { onFirstRunMaybe } from './first-run';
