@@ -78,6 +78,8 @@ let shouldUseAlternateIdleIcon = false;
 let shouldUseUnreadActiveIcon = true;
 
 app.whenReady().then(async () => {
+  preventSecondInstance();
+
   await onFirstRunMaybe();
 
   appUpdater.start();
@@ -115,31 +117,6 @@ app.whenReady().then(async () => {
       mb.window.resizable = false;
     });
   });
-
-  /** Prevent second instances */
-  if (isWindows() || isLinux()) {
-    const gotTheLock = app.requestSingleInstanceLock();
-
-    if (!gotTheLock) {
-      logWarn('main:gotTheLock', 'Second instance detected, quitting');
-      app.quit(); // Quit the second instance
-      return;
-    }
-
-    app.on('second-instance', (_event, commandLine, _workingDirectory) => {
-      logInfo(
-        'main:second-instance',
-        'Second instance was launched.  extracting command to forward',
-      );
-
-      // Get the URL from the command line arguments
-      const url = commandLine.find((arg) => arg.startsWith(`${protocol}://`));
-
-      if (url) {
-        handleURL(url);
-      }
-    });
-  }
 
   /**
    * Gitify custom IPC events - no response expected
@@ -279,4 +256,31 @@ function setActiveIcon() {
 
 function setErrorIcon() {
   mb.tray.setImage(TrayIcons.error);
+}
+
+/**
+ * Prevent second instances
+ */
+function preventSecondInstance() {
+  const gotTheLock = app.requestSingleInstanceLock();
+
+  if (!gotTheLock) {
+    logWarn('main:gotTheLock', 'Second instance detected, quitting');
+    app.quit(); // Quit the second instance
+    return;
+  }
+
+  app.on('second-instance', (_event, commandLine, _workingDirectory) => {
+    logInfo(
+      'main:second-instance',
+      'Second instance was launched.  extracting command to forward',
+    );
+
+    // Get the URL from the command line arguments
+    const url = commandLine.find((arg) => arg.startsWith(`${protocol}://`));
+
+    if (url) {
+      handleURL(url);
+    }
+  });
 }
