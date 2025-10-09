@@ -331,32 +331,57 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     [auth, settings, unsubscribeNotification],
   );
 
+  const contextValues = useMemo(
+    () => ({
+      auth,
+      isLoggedIn,
+      loginWithGitHubApp,
+      loginWithOAuthApp,
+      loginWithPersonalAccessToken,
+      logoutFromAccount,
+
+      status,
+      globalError,
+
+      notifications,
+      fetchNotifications: fetchNotificationsWithAccounts,
+
+      markNotificationsAsRead: markNotificationsAsReadWithAccounts,
+      markNotificationsAsDone: markNotificationsAsDoneWithAccounts,
+      unsubscribeNotification: unsubscribeNotificationWithAccounts,
+
+      settings,
+      clearFilters,
+      resetSettings,
+      updateSetting,
+      updateFilter,
+    }),
+    [
+      auth,
+      isLoggedIn,
+      loginWithGitHubApp,
+      loginWithOAuthApp,
+      loginWithPersonalAccessToken,
+      logoutFromAccount,
+
+      status,
+      globalError,
+
+      notifications,
+      fetchNotificationsWithAccounts,
+      markNotificationsAsReadWithAccounts,
+      markNotificationsAsDoneWithAccounts,
+      unsubscribeNotificationWithAccounts,
+
+      settings,
+      clearFilters,
+      resetSettings,
+      updateSetting,
+      updateFilter,
+    ],
+  );
+
   return (
-    <AppContext.Provider
-      value={{
-        auth,
-        isLoggedIn,
-        loginWithGitHubApp,
-        loginWithOAuthApp,
-        loginWithPersonalAccessToken,
-        logoutFromAccount,
-
-        notifications,
-        status,
-        globalError,
-        fetchNotifications: fetchNotificationsWithAccounts,
-        markNotificationsAsRead: markNotificationsAsReadWithAccounts,
-        markNotificationsAsDone: markNotificationsAsDoneWithAccounts,
-        unsubscribeNotification: unsubscribeNotificationWithAccounts,
-
-        settings,
-        clearFilters,
-        resetSettings,
-        updateSetting,
-        updateFilter,
-      }}
-    >
-      {children}
-    </AppContext.Provider>
+    <AppContext.Provider value={contextValues}>{children}</AppContext.Provider>
   );
 };
