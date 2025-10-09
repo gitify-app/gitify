@@ -268,9 +268,9 @@ export async function getLatestDiscussion(
   try {
     const response = await searchDiscussions(notification);
     return (
-      response.data?.data.search.nodes.filter(
+      response.data?.data.search.nodes.find(
         (discussion) => discussion.title === notification.subject.title,
-      )[0] ?? null
+      ) ?? null
     );
   } catch (err) {
     rendererLogError(

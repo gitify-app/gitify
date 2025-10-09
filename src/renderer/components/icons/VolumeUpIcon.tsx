@@ -2,11 +2,11 @@ import type { FC } from 'react';
 
 export const VolumeUpIcon: FC = () => (
   <svg
+    aria-hidden="true"
     aria-label="Volume Up Icon"
     className="size-2"
     fill="currentColor"
     height="24"
-    role="img"
     viewBox="0 0 24 24"
     width="24"
     xmlns="http://www.w3.org/2000/svg"
