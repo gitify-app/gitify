@@ -24,6 +24,7 @@ export const LogoIcon: FC<ILogoIcon> = ({
   ...props
 }: ILogoIcon) => (
   <svg
+    aria-hidden="true"
     aria-label={`${APPLICATION.NAME} Logo`}
     className={cn(
       size === Size.SMALL && 'size-2.5',
@@ -31,7 +32,6 @@ export const LogoIcon: FC<ILogoIcon> = ({
       size === Size.LARGE && 'size-8',
     )}
     onClick={() => onClick?.()}
-    role="img"
     viewBox="0 0 500 500"
     xmlns="https://www.w3.org/2000/svg"
     xmlnsXlink="https://www.w3.org/1999/xlink"
