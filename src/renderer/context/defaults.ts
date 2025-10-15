@@ -1,6 +1,7 @@
 import {
   type AppearanceSettingsState,
   type AuthState,
+  FetchType,
   type FilterSettingsState,
   GroupBy,
   type NotificationSettingsState,
@@ -25,6 +26,7 @@ const defaultAppearanceSettings: AppearanceSettingsState = {
 
 const defaultNotificationSettings: NotificationSettingsState = {
   groupBy: GroupBy.REPOSITORY,
+  fetchType: FetchType.INTERVAL,
   fetchAllNotifications: true,
   detailedNotifications: true,
   showPills: true,

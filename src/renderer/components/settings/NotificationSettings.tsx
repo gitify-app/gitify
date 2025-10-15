@@ -14,7 +14,7 @@ import { Stack, Text } from '@primer/react';
 import { APPLICATION } from '../../../shared/constants';
 
 import { AppContext } from '../../context/App';
-import { GroupBy, Size } from '../../types';
+import { FetchType, GroupBy, Size } from '../../types';
 import { openGitHubParticipatingDocs } from '../../utils/links';
 import { Checkbox } from '../fields/Checkbox';
 import { RadioGroup } from '../fields/RadioGroup';
@@ -39,6 +39,33 @@ export const NotificationSettings: FC = () => {
             { label: 'Date', value: GroupBy.DATE },
           ]}
           value={settings.groupBy}
+        />
+
+        <RadioGroup
+          label="Fetch type:"
+          name="fetchType"
+          onChange={(evt) => {
+            updateSetting('fetchType', evt.target.value as FetchType);
+          }}
+          options={[
+            { label: 'Interval', value: FetchType.INTERVAL },
+            { label: 'Inactivity', value: FetchType.INACTIVITY },
+          ]}
+          tooltip={
+            <Stack direction="vertical" gap="condensed">
+              <Text>Controls how new notifications are fetched.</Text>
+              <Text>
+                <Text as="strong">Interval</Text> will check for new
+                notifications on a regular scheduled interval.
+              </Text>
+              <Text>
+                <Text as="strong">Inactivity</Text> will check for new
+                notifications only when there has been no user activity within{' '}
+                {APPLICATION.NAME} for a specified period of time.
+              </Text>
+            </Stack>
+          }
+          value={settings.fetchType}
         />
 
         <Checkbox
@@ -102,7 +129,7 @@ export const NotificationSettings: FC = () => {
               tooltip={
                 <Stack direction="vertical" gap="condensed">
                   <Text>Show notification metric pills for:</Text>
-                  <div className="pl-4">
+                  <div className="pl-2">
                     <Stack direction="vertical" gap="none">
                       <Stack direction="horizontal" gap="condensed">
                         <IssueOpenedIcon size={Size.SMALL} />
@@ -140,27 +167,23 @@ export const NotificationSettings: FC = () => {
               tooltip={
                 <Stack direction="vertical" gap="condensed">
                   <Text>Show GitHub number for:</Text>
-                  <div className="pl-4">
-                    <ul>
-                      <li>
-                        <Stack direction="horizontal" gap="condensed">
-                          <CommentIcon size={Size.SMALL} />
-                          Discussion
-                        </Stack>
-                      </li>
-                      <li>
-                        <Stack direction="horizontal" gap="condensed">
-                          <IssueOpenedIcon size={Size.SMALL} />
-                          Issue
-                        </Stack>
-                      </li>
-                      <li>
-                        <Stack direction="horizontal" gap="condensed">
-                          <GitPullRequestIcon size={Size.SMALL} />
-                          Pull Request
-                        </Stack>
-                      </li>
-                    </ul>
+                  <div className="pl-2">
+                    <Stack direction="vertical" gap="none">
+                      <Stack direction="horizontal" gap="condensed">
+                        <CommentIcon size={Size.SMALL} />
+                        Discussion
+                      </Stack>
+
+                      <Stack direction="horizontal" gap="condensed">
+                        <IssueOpenedIcon size={Size.SMALL} />
+                        Issue
+                      </Stack>
+
+                      <Stack direction="horizontal" gap="condensed">
+                        <GitPullRequestIcon size={Size.SMALL} />
+                        Pull Request
+                      </Stack>
+                    </Stack>
                   </div>
                 </Stack>
               }

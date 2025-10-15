@@ -3,6 +3,7 @@ import {
   type Account,
   type AppearanceSettingsState,
   type AuthState,
+  FetchType,
   type FilterSettingsState,
   type GitifyState,
   type GitifyUser,
@@ -87,6 +88,7 @@ const mockAppearanceSettings: AppearanceSettingsState = {
 
 const mockNotificationSettings: NotificationSettingsState = {
   groupBy: GroupBy.REPOSITORY,
+  fetchType: FetchType.INTERVAL,
   fetchAllNotifications: true,
   detailedNotifications: true,
   showPills: true,
