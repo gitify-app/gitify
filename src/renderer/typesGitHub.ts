@@ -113,7 +113,6 @@ export interface GitHubNotification {
 export interface GitifyNotification {
   account: Account;
   order: number;
-  groupName: string | null;
 }
 
 export type UserDetails = User & UserProfile;
