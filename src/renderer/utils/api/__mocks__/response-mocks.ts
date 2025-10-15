@@ -45,6 +45,7 @@ export const mockNotificationUser: User = {
 export const mockGitHubNotifications: Notification[] = [
   {
     account: mockGitHubCloudAccount,
+    order: 0,
     id: '138661096',
     unread: true,
     reason: 'subscribed',
@@ -197,6 +198,7 @@ export const mockGitHubNotifications: Notification[] = [
   },
   {
     account: mockGitHubCloudAccount,
+    order: 1,
     id: '148827438',
     unread: true,
     reason: 'author',
@@ -260,6 +262,7 @@ export const mockGitHubNotifications: Notification[] = [
 export const mockEnterpriseNotifications: Notification[] = [
   {
     account: mockGitHubEnterpriseServerAccount,
+    order: 0,
     id: '3',
     unread: true,
     reason: 'subscribed',
@@ -316,6 +319,7 @@ export const mockEnterpriseNotifications: Notification[] = [
   },
   {
     account: mockGitHubEnterpriseServerAccount,
+    order: 1,
     id: '4',
     unread: true,
     reason: 'subscribed',

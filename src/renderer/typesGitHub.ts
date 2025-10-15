@@ -112,6 +112,7 @@ export interface GitHubNotification {
 // Note: This is not in the official GitHub API. We add this to make notification interactions easier.
 export interface GitifyNotification {
   account: Account;
+  order: number;
 }
 
 export type UserDetails = User & UserProfile;
