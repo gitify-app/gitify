@@ -13,6 +13,10 @@ import {
   openGitHubIssues,
   openGitHubPulls,
 } from '../../utils/links';
+import {
+  groupNotificationsByRepository,
+  isGroupByRepository,
+} from '../../utils/notifications/group';
 import { AllRead } from '../AllRead';
 import { AvatarWithFallback } from '../avatars/AvatarWithFallback';
 import { Oops } from '../Oops';
@@ -31,27 +35,25 @@ interface IAccountNotifications {
 export const AccountNotifications: FC<IAccountNotifications> = (
   props: IAccountNotifications,
 ) => {
-  const { account, showAccountHeader, notifications } = props;
+  const { account, showAccountHeader, error, notifications } = props;
 
   const { settings } = useContext(AppContext);
 
   const [showAccountNotifications, setShowAccountNotifications] =
     useState(true);
 
-  const groupedNotifications = Object.values(
-    notifications.reduce(
-      (acc: { [key: string]: Notification[] }, notification) => {
-        const key = notification.repository.full_name;
-        if (!acc[key]) {
-          acc[key] = [];
-        }
-
-        acc[key].push(notification);
-        return acc;
-      },
-      {},
-    ),
+  const sortedNotifications = useMemo(
+    () => [...notifications].sort((a, b) => a.order - b.order),
+    [notifications],
   );
+
+  const groupedNotifications = useMemo(() => {
+    const map = groupNotificationsByRepository([
+      { account, error, notifications: sortedNotifications },
+    ]);
+
+    return Array.from(map.values());
+  }, [account, error, sortedNotifications]);
 
   const hasNotifications = useMemo(
     () => notifications.length > 0,
@@ -67,8 +69,6 @@ export const AccountNotifications: FC<IAccountNotifications> = (
     showAccountNotifications,
     'account',
   );
-
-  const isGroupByRepository = settings.groupBy === 'REPOSITORY';
 
   return (
     <>
@@ -130,7 +130,7 @@ export const AccountNotifications: FC<IAccountNotifications> = (
         <>
           {props.error && <Oops error={props.error} fullHeight={false} />}
           {!hasNotifications && !props.error && <AllRead fullHeight={false} />}
-          {isGroupByRepository
+          {isGroupByRepository(settings)
             ? Object.values(groupedNotifications).map((repoNotifications) => {
                 const repoSlug = repoNotifications[0].repository.full_name;
 
@@ -142,7 +142,7 @@ export const AccountNotifications: FC<IAccountNotifications> = (
                   />
                 );
               })
-            : notifications.map((notification) => (
+            : sortedNotifications.map((notification) => (
                 <NotificationRow
                   key={notification.id}
                   notification={notification}

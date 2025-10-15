@@ -39,17 +39,19 @@ export const NotificationsRoute: FC = () => {
   return (
     <Page testId="notifications">
       <Contents paddingHorizontal={false}>
-        {notifications.map((accountNotifications) => (
-          <AccountNotifications
-            account={accountNotifications.account}
-            error={accountNotifications.error}
-            key={getAccountUUID(accountNotifications.account)}
-            notifications={accountNotifications.notifications}
-            showAccountHeader={
-              hasMultipleAccounts || settings.showAccountHeader
-            }
-          />
-        ))}
+        {notifications.map((accountNotification) => {
+          return (
+            <AccountNotifications
+              account={accountNotification.account}
+              error={accountNotification.error}
+              key={getAccountUUID(accountNotification.account)}
+              notifications={accountNotification.notifications}
+              showAccountHeader={
+                hasMultipleAccounts || settings.showAccountHeader
+              }
+            />
+          );
+        })}
       </Contents>
     </Page>
   );
