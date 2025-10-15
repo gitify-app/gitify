@@ -39,9 +39,9 @@ export const useInactivityTimer = (callback: () => void, delay: number) => {
     }
 
     // Add event listeners to track activity
-    events.forEach((event) => {
+    for (const event of events) {
       document.addEventListener(event, resetTimer, { passive: true });
-    });
+    }
 
     // Start initial timer
     resetTimer();
@@ -52,9 +52,9 @@ export const useInactivityTimer = (callback: () => void, delay: number) => {
         clearTimeout(timeoutRef.current);
       }
 
-      events.forEach((event) => {
+      for (const event of events) {
         document.removeEventListener(event, resetTimer);
-      });
+      }
     };
   }, [delay, resetTimer]);
 };

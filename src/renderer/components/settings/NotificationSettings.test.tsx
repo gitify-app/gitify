@@ -34,6 +34,27 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
     expect(updateSetting).toHaveBeenCalledWith('groupBy', 'DATE');
   });
 
+  it('should change the fetchType radio group', async () => {
+    await act(async () => {
+      render(
+        <AppContext.Provider
+          value={{
+            auth: mockAuth,
+            settings: mockSettings,
+            updateSetting,
+          }}
+        >
+          <NotificationSettings />
+        </AppContext.Provider>,
+      );
+    });
+
+    await userEvent.click(screen.getByTestId('radio-fetchType-inactivity'));
+
+    expect(updateSetting).toHaveBeenCalledTimes(1);
+    expect(updateSetting).toHaveBeenCalledWith('fetchType', 'INACTIVITY');
+  });
+
   it('should toggle the fetchAllNotifications checkbox', async () => {
     await act(async () => {
       render(
