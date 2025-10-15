@@ -1,4 +1,10 @@
-import { type FC, type MouseEvent, useContext } from 'react';
+import {
+  type FC,
+  type MouseEvent,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 
 import {
   BellIcon,
@@ -29,6 +35,13 @@ import { Title } from '../primitives/Title';
 
 export const NotificationSettings: FC = () => {
   const { settings, updateSetting } = useContext(AppContext);
+  const [fetchInterval, setFetchInterval] = useState<number>(
+    settings.fetchInterval,
+  );
+
+  useEffect(() => {
+    setFetchInterval(settings.fetchInterval);
+  }, [settings.fetchInterval]);
 
   return (
     <fieldset>
@@ -89,14 +102,16 @@ export const NotificationSettings: FC = () => {
               data-testid="settings-fetch-interval-decrease"
               icon={DashIcon}
               onClick={() => {
-                updateSetting(
-                  'fetchInterval',
-                  Math.max(
-                    settings.fetchInterval -
-                      Constants.FETCH_NOTIFICATIONS_INTERVAL_STEP_MS,
-                    Constants.MIN_FETCH_NOTIFICATIONS_INTERVAL_MS,
-                  ),
+                const newInterval = Math.max(
+                  fetchInterval -
+                    Constants.FETCH_NOTIFICATIONS_INTERVAL_STEP_MS,
+                  Constants.MIN_FETCH_NOTIFICATIONS_INTERVAL_MS,
                 );
+
+                if (newInterval !== fetchInterval) {
+                  setFetchInterval(newInterval);
+                  updateSetting('fetchInterval', newInterval);
+                }
               }}
               size="small"
               unsafeDisableTooltip={true}
@@ -104,7 +119,7 @@ export const NotificationSettings: FC = () => {
 
             <Button aria-label="Fetch interval" disabled size="small">
               {formatDuration({
-                minutes: millisecondsToMinutes(settings.fetchInterval),
+                minutes: millisecondsToMinutes(fetchInterval),
               })}
             </Button>
 
@@ -113,14 +128,16 @@ export const NotificationSettings: FC = () => {
               data-testid="settings-fetch-interval-increase"
               icon={PlusIcon}
               onClick={() => {
-                updateSetting(
-                  'fetchInterval',
-                  Math.min(
-                    settings.fetchInterval +
-                      Constants.FETCH_NOTIFICATIONS_INTERVAL_STEP_MS,
-                    Constants.MAX_FETCH_NOTIFICATIONS_INTERVAL_MS,
-                  ),
+                const newInterval = Math.min(
+                  fetchInterval +
+                    Constants.FETCH_NOTIFICATIONS_INTERVAL_STEP_MS,
+                  Constants.MAX_FETCH_NOTIFICATIONS_INTERVAL_MS,
                 );
+
+                if (newInterval !== fetchInterval) {
+                  setFetchInterval(newInterval);
+                  updateSetting('fetchInterval', newInterval);
+                }
               }}
               size="small"
               unsafeDisableTooltip={true}
@@ -131,6 +148,9 @@ export const NotificationSettings: FC = () => {
               data-testid="settings-fetch-interval-reset"
               icon={SyncIcon}
               onClick={() => {
+                setFetchInterval(
+                  Constants.DEFAULT_FETCH_NOTIFICATIONS_INTERVAL_MS,
+                );
                 updateSetting(
                   'fetchInterval',
                   Constants.DEFAULT_FETCH_NOTIFICATIONS_INTERVAL_MS,
