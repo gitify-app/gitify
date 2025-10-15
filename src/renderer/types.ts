@@ -49,10 +49,11 @@ export interface Account {
 export type SettingsValue =
   | boolean
   | number
+  | FetchType
+  | FilterValue[]
   | GroupBy
   | OpenPreference
-  | Theme
-  | FilterValue[];
+  | Theme;
 
 export type FilterValue =
   | FilterStateType
@@ -77,6 +78,7 @@ export interface AppearanceSettingsState {
 
 export interface NotificationSettingsState {
   groupBy: GroupBy;
+  fetchType: FetchType;
   fetchAllNotifications: boolean;
   detailedNotifications: boolean;
   showPills: boolean;
@@ -135,6 +137,11 @@ export enum OpenPreference {
 export enum GroupBy {
   REPOSITORY = 'REPOSITORY',
   DATE = 'DATE',
+}
+
+export enum FetchType {
+  INTERVAL = 'INTERVAL',
+  INACTIVITY = 'INACTIVITY',
 }
 
 export type RadioGroupItem = {

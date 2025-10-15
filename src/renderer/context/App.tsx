@@ -10,7 +10,8 @@ import {
 import { useTheme } from '@primer/react';
 
 import { Constants } from '../constants';
-import { useInterval } from '../hooks/useInterval';
+import { useInactivityTimer } from '../hooks/timers/useInactivityTimer';
+import { useIntervalTimer } from '../hooks/timers/useIntervalTimer';
 import { useNotifications } from '../hooks/useNotifications';
 import type {
   Account,
@@ -24,6 +25,7 @@ import type {
   Status,
   Token,
 } from '../types';
+import { FetchType } from '../types';
 import type { Notification } from '../typesGitHub';
 import { headNotifications } from '../utils/api/client';
 import type {
@@ -142,11 +144,25 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     settings.filterReasons,
   ]);
 
-  useInterval(() => {
-    fetchNotifications({ auth, settings });
-  }, Constants.FETCH_NOTIFICATIONS_INTERVAL_MS);
+  useIntervalTimer(
+    () => {
+      fetchNotifications({ auth, settings });
+    },
+    settings.fetchType === FetchType.INTERVAL
+      ? Constants.FETCH_NOTIFICATIONS_INTERVAL_MS
+      : null,
+  );
 
-  useInterval(() => {
+  useInactivityTimer(
+    () => {
+      fetchNotifications({ auth, settings });
+    },
+    settings.fetchType === FetchType.INACTIVITY
+      ? Constants.FETCH_NOTIFICATIONS_INTERVAL_MS
+      : null,
+  );
+
+  useIntervalTimer(() => {
     for (const account of auth.accounts) {
       refreshAccount(account);
     }

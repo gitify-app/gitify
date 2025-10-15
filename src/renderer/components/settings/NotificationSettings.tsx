@@ -14,7 +14,7 @@ import { Stack, Text } from '@primer/react';
 import { APPLICATION } from '../../../shared/constants';
 
 import { AppContext } from '../../context/App';
-import { GroupBy, Size } from '../../types';
+import { FetchType, GroupBy, Size } from '../../types';
 import { openGitHubParticipatingDocs } from '../../utils/links';
 import { Checkbox } from '../fields/Checkbox';
 import { RadioGroup } from '../fields/RadioGroup';
@@ -39,6 +39,19 @@ export const NotificationSettings: FC = () => {
             { label: 'Date', value: GroupBy.DATE },
           ]}
           value={settings.groupBy}
+        />
+
+        <RadioGroup
+          label="Fetch type:"
+          name="fetchType"
+          onChange={(evt) => {
+            updateSetting('fetchType', evt.target.value as FetchType);
+          }}
+          options={[
+            { label: 'Interval', value: FetchType.INTERVAL },
+            { label: 'Inactivity', value: FetchType.INACTIVITY },
+          ]}
+          value={settings.fetchType}
         />
 
         <Checkbox

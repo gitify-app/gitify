@@ -15,7 +15,7 @@ exports[`renderer/components/fields/RadioGroup.tsx should render 1`] = `
         data-wrap="nowrap"
       >
         <label
-          class="mr-3 font-medium cursor-pointer"
+          class="mr-1 font-medium cursor-pointer"
           for="appearance"
         >
           Appearance
@@ -38,7 +38,7 @@ exports[`renderer/components/fields/RadioGroup.tsx should render 1`] = `
             value="one"
           />
           <label
-            class="mr-3 font-medium cursor-pointer"
+            class="mr-1 font-medium cursor-pointer"
             for="radio-appearance-one"
           >
             Value 1
@@ -63,7 +63,7 @@ exports[`renderer/components/fields/RadioGroup.tsx should render 1`] = `
             value="two"
           />
           <label
-            class="mr-3 font-medium cursor-pointer"
+            class="mr-1 font-medium cursor-pointer"
             for="radio-appearance-two"
           >
             Value 2
@@ -83,7 +83,7 @@ exports[`renderer/components/fields/RadioGroup.tsx should render 1`] = `
       data-wrap="nowrap"
     >
       <label
-        class="mr-3 font-medium cursor-pointer"
+        class="mr-1 font-medium cursor-pointer"
         for="appearance"
       >
         Appearance
@@ -106,7 +106,7 @@ exports[`renderer/components/fields/RadioGroup.tsx should render 1`] = `
           value="one"
         />
         <label
-          class="mr-3 font-medium cursor-pointer"
+          class="mr-1 font-medium cursor-pointer"
           for="radio-appearance-one"
         >
           Value 1
@@ -131,7 +131,7 @@ exports[`renderer/components/fields/RadioGroup.tsx should render 1`] = `
           value="two"
         />
         <label
-          class="mr-3 font-medium cursor-pointer"
+          class="mr-1 font-medium cursor-pointer"
           for="radio-appearance-two"
         >
           Value 2
@@ -208,7 +208,7 @@ exports[`renderer/components/fields/RadioGroup.tsx should render as disabled 1`]
         data-wrap="nowrap"
       >
         <label
-          class="mr-3 font-medium cursor-pointer"
+          class="mr-1 font-medium cursor-pointer"
           for="appearance"
         >
           Appearance
@@ -231,7 +231,7 @@ exports[`renderer/components/fields/RadioGroup.tsx should render as disabled 1`]
             value="one"
           />
           <label
-            class="mr-3 font-medium cursor-pointer"
+            class="mr-1 font-medium cursor-pointer"
             for="radio-appearance-one"
           >
             Value 1
@@ -256,7 +256,7 @@ exports[`renderer/components/fields/RadioGroup.tsx should render as disabled 1`]
             value="two"
           />
           <label
-            class="mr-3 font-medium cursor-pointer"
+            class="mr-1 font-medium cursor-pointer"
             for="radio-appearance-two"
           >
             Value 2
@@ -276,7 +276,7 @@ exports[`renderer/components/fields/RadioGroup.tsx should render as disabled 1`]
       data-wrap="nowrap"
     >
       <label
-        class="mr-3 font-medium cursor-pointer"
+        class="mr-1 font-medium cursor-pointer"
         for="appearance"
       >
         Appearance
@@ -299,7 +299,7 @@ exports[`renderer/components/fields/RadioGroup.tsx should render as disabled 1`]
           value="one"
         />
         <label
-          class="mr-3 font-medium cursor-pointer"
+          class="mr-1 font-medium cursor-pointer"
           for="radio-appearance-one"
         >
           Value 1
@@ -324,7 +324,7 @@ exports[`renderer/components/fields/RadioGroup.tsx should render as disabled 1`]
           value="two"
         />
         <label
-          class="mr-3 font-medium cursor-pointer"
+          class="mr-1 font-medium cursor-pointer"
           for="radio-appearance-two"
         >
           Value 2

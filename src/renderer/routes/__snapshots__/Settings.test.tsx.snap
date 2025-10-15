@@ -157,7 +157,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             data-wrap="nowrap"
           >
             <label
-              class="mr-3 font-medium cursor-pointer"
+              class="mr-1 font-medium cursor-pointer"
               for="theme"
             >
               Theme:
@@ -294,7 +294,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             data-wrap="nowrap"
           >
             <label
-              class="mr-3 font-medium cursor-pointer"
+              class="mr-1 font-medium cursor-pointer"
               for="zoom"
             >
               Zoom:
@@ -537,7 +537,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             data-wrap="nowrap"
           >
             <label
-              class="mr-3 font-medium cursor-pointer"
+              class="mr-1 font-medium cursor-pointer"
               for="groupBy"
             >
               Group by:
@@ -561,7 +561,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                 value="REPOSITORY"
               />
               <label
-                class="mr-3 font-medium cursor-pointer"
+                class="mr-1 font-medium cursor-pointer"
                 for="radio-groupBy-repository"
               >
                 Repository
@@ -585,10 +585,75 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                 value="DATE"
               />
               <label
-                class="mr-3 font-medium cursor-pointer"
+                class="mr-1 font-medium cursor-pointer"
                 for="radio-groupBy-date"
               >
                 Date
+              </label>
+            </div>
+          </div>
+          <div
+            class="text-sm prc-Stack-Stack-WJVsK"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <label
+              class="mr-1 font-medium cursor-pointer"
+              for="fetchType"
+            >
+              Fetch type:
+            </label>
+            <div
+              class="prc-Stack-Stack-WJVsK"
+              data-align="center"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+            >
+              <input
+                checked=""
+                class="size-2 cursor-pointer"
+                data-testid="radio-fetchType-interval"
+                id="radio-fetchType-interval"
+                name="fetchType"
+                type="radio"
+                value="INTERVAL"
+              />
+              <label
+                class="mr-1 font-medium cursor-pointer"
+                for="radio-fetchType-interval"
+              >
+                Interval
+              </label>
+            </div>
+            <div
+              class="prc-Stack-Stack-WJVsK"
+              data-align="center"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+            >
+              <input
+                class="size-2 cursor-pointer"
+                data-testid="radio-fetchType-inactivity"
+                id="radio-fetchType-inactivity"
+                name="fetchType"
+                type="radio"
+                value="INACTIVITY"
+              />
+              <label
+                class="mr-1 font-medium cursor-pointer"
+                for="radio-fetchType-inactivity"
+              >
+                Inactivity
               </label>
             </div>
           </div>
@@ -1209,7 +1274,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             data-wrap="nowrap"
           >
             <label
-              class="mr-3 font-medium cursor-pointer"
+              class="mr-1 font-medium cursor-pointer"
               for="openLinks"
             >
               Open Links:
@@ -1233,7 +1298,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                 value="FOREGROUND"
               />
               <label
-                class="mr-3 font-medium cursor-pointer"
+                class="mr-1 font-medium cursor-pointer"
                 for="radio-openLinks-foreground"
               >
                 Foreground
@@ -1257,7 +1322,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                 value="BACKGROUND"
               />
               <label
-                class="mr-3 font-medium cursor-pointer"
+                class="mr-1 font-medium cursor-pointer"
                 for="radio-openLinks-background"
               >
                 Background
