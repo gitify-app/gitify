@@ -12,11 +12,7 @@ import {
   filterBaseNotifications,
   filterDetailedNotifications,
 } from './filters/filter';
-import {
-  flattenRepoGroups,
-  groupNotificationsByRepository,
-  isGroupByRepository,
-} from './group';
+import { getFlattenedNotificationsByRepo } from './group';
 import { createNotificationHandler } from './handlers';
 
 export function setTrayIconColor(notifications: AccountNotifications[]) {
@@ -154,23 +150,14 @@ export function stabilizeNotificationsOrder(
   notifications: AccountNotifications[],
   settings: SettingsState,
 ) {
-  if (isGroupByRepository(settings)) {
-    const repoGroups = groupNotificationsByRepository(notifications);
-    const flattened = flattenRepoGroups(repoGroups);
+  const flattenedNotifications = getFlattenedNotificationsByRepo(
+    notifications,
+    settings,
+  );
 
-    let orderIndex = 0;
+  let orderIndex = 0;
 
-    for (const n of flattened) {
-      n.order = orderIndex++;
-    }
-  } else {
-    // Non-repository grouping: assign sequential order across all notifications
-    let orderIndex = 0;
-
-    for (const accountNotifications of notifications) {
-      for (const notification of accountNotifications.notifications) {
-        notification.order = orderIndex++;
-      }
-    }
+  for (const n of flattenedNotifications) {
+    n.order = orderIndex++;
   }
 }

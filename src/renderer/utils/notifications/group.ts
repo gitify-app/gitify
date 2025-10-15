@@ -1,6 +1,9 @@
 import type { AccountNotifications, SettingsState } from '../../types';
 import type { Notification } from '../../typesGitHub';
 
+/**
+ * Returns true when settings say to group by repository.
+ */
 export function isGroupByRepository(settings: SettingsState) {
   return settings.groupBy === 'REPOSITORY';
 }
@@ -31,8 +34,17 @@ export function groupNotificationsByRepository(
 }
 
 /**
- * Flatten the Map values into a single array, preserving Map insertion order (first-seen repo order).
+ * Returns a flattened, ordered Notification[] according to repository-first-seen order
+ * (when grouped) or the natural account->notification order otherwise.
  */
-export function flattenRepoGroups(repoGroups: Map<string, Notification[]>) {
-  return Array.from(repoGroups.values()).flat();
+export function getFlattenedNotificationsByRepo(
+  accounts: AccountNotifications[],
+  settings: SettingsState,
+): Notification[] {
+  if (isGroupByRepository(settings)) {
+    const repoGroups = groupNotificationsByRepository(accounts);
+    return Array.from(repoGroups.values()).flat();
+  }
+
+  return accounts.flatMap((a) => a.notifications);
 }
