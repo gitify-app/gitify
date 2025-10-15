@@ -86,7 +86,7 @@ export const NotificationSettings: FC = () => {
           <ButtonGroup className="ml-2">
             <IconButton
               aria-label="Decrease fetch interval"
-              data-testid="settings-decrease-fetch-interval"
+              data-testid="settings-fetch-interval-decrease"
               icon={DashIcon}
               onClick={() => {
                 updateSetting(
@@ -110,7 +110,7 @@ export const NotificationSettings: FC = () => {
 
             <IconButton
               aria-label="Increase fetch interval"
-              data-testid="settings-increase-fetch-interval"
+              data-testid="settings-fetch-interval-increase"
               icon={PlusIcon}
               onClick={() => {
                 updateSetting(
@@ -127,8 +127,8 @@ export const NotificationSettings: FC = () => {
             />
 
             <IconButton
-              aria-label="Reset zoom"
-              data-testid="settings-zoom-reset"
+              aria-label="Reset fetch interval"
+              data-testid="settings-fetch-interval-reset"
               icon={SyncIcon}
               onClick={() => {
                 updateSetting(

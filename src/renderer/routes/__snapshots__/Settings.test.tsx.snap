@@ -690,6 +690,145 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             data-padding="none"
             data-wrap="nowrap"
           >
+            <label
+              class="mr-1 font-medium cursor-pointer"
+              for="fetchInterval"
+            >
+              Fetch interval:
+            </label>
+            <div
+              class="ml-2 prc-ButtonGroup-ButtonGroup-vcMeG"
+            >
+              <div>
+                <button
+                  aria-describedby="_r_5_-loading-announcement"
+                  aria-label="Decrease fetch interval"
+                  class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
+                  data-component="IconButton"
+                  data-loading="false"
+                  data-no-visuals="true"
+                  data-size="small"
+                  data-testid="settings-fetch-interval-decrease"
+                  data-variant="default"
+                  type="button"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="octicon octicon-dash"
+                    display="inline-block"
+                    fill="currentColor"
+                    focusable="false"
+                    height="16"
+                    overflow="visible"
+                    style="vertical-align: text-bottom;"
+                    viewBox="0 0 16 16"
+                    width="16"
+                  >
+                    <path
+                      d="M2 7.75A.75.75 0 0 1 2.75 7h10a.75.75 0 0 1 0 1.5h-10A.75.75 0 0 1 2 7.75Z"
+                    />
+                  </svg>
+                </button>
+              </div>
+              <div>
+                <button
+                  aria-describedby="_r_6_-loading-announcement"
+                  aria-label="Fetch interval"
+                  class="prc-Button-ButtonBase-c50BI"
+                  data-loading="false"
+                  data-no-visuals="true"
+                  data-size="small"
+                  data-variant="default"
+                  disabled=""
+                  type="button"
+                >
+                  <span
+                    class="prc-Button-ButtonContent-HKbr-"
+                    data-align="center"
+                    data-component="buttonContent"
+                  >
+                    <span
+                      class="prc-Button-Label-pTQ3x"
+                      data-component="text"
+                    >
+                      1 minute
+                    </span>
+                  </span>
+                </button>
+              </div>
+              <div>
+                <button
+                  aria-describedby="_r_7_-loading-announcement"
+                  aria-label="Increase fetch interval"
+                  class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
+                  data-component="IconButton"
+                  data-loading="false"
+                  data-no-visuals="true"
+                  data-size="small"
+                  data-testid="settings-fetch-interval-increase"
+                  data-variant="default"
+                  type="button"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="octicon octicon-plus"
+                    display="inline-block"
+                    fill="currentColor"
+                    focusable="false"
+                    height="16"
+                    overflow="visible"
+                    style="vertical-align: text-bottom;"
+                    viewBox="0 0 16 16"
+                    width="16"
+                  >
+                    <path
+                      d="M7.75 2a.75.75 0 0 1 .75.75V7h4.25a.75.75 0 0 1 0 1.5H8.5v4.25a.75.75 0 0 1-1.5 0V8.5H2.75a.75.75 0 0 1 0-1.5H7V2.75A.75.75 0 0 1 7.75 2Z"
+                    />
+                  </svg>
+                </button>
+              </div>
+              <div>
+                <button
+                  aria-describedby="_r_8_-loading-announcement"
+                  aria-label="Reset fetch interval"
+                  class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
+                  data-component="IconButton"
+                  data-loading="false"
+                  data-no-visuals="true"
+                  data-size="small"
+                  data-testid="settings-fetch-interval-reset"
+                  data-variant="danger"
+                  type="button"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="octicon octicon-sync"
+                    display="inline-block"
+                    fill="currentColor"
+                    focusable="false"
+                    height="16"
+                    overflow="visible"
+                    style="vertical-align: text-bottom;"
+                    viewBox="0 0 16 16"
+                    width="16"
+                  >
+                    <path
+                      d="M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div
+            class="text-sm prc-Stack-Stack-WJVsK"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
             <input
               checked=""
               class="size-2 rounded-sm cursor-pointer"
@@ -1461,7 +1600,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             >
               <div>
                 <button
-                  aria-describedby="_r_5_-loading-announcement"
+                  aria-describedby="_r_9_-loading-announcement"
                   aria-label="Volume down"
                   class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
                   data-component="IconButton"
@@ -1497,7 +1636,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               </div>
               <div>
                 <button
-                  aria-describedby="_r_6_-loading-announcement"
+                  aria-describedby="_r_a_-loading-announcement"
                   aria-label="Volume percentage"
                   class="prc-Button-ButtonBase-c50BI"
                   data-loading="false"
@@ -1524,7 +1663,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               </div>
               <div>
                 <button
-                  aria-describedby="_r_7_-loading-announcement"
+                  aria-describedby="_r_b_-loading-announcement"
                   aria-label="Volume up"
                   class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
                   data-component="IconButton"
@@ -1556,7 +1695,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               </div>
               <div>
                 <button
-                  aria-describedby="_r_8_-loading-announcement"
+                  aria-describedby="_r_c_-loading-announcement"
                   aria-label="Reset volume"
                   class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
                   data-component="IconButton"
@@ -1620,7 +1759,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
         data-wrap="nowrap"
       >
         <button
-          aria-describedby="_r_9_-loading-announcement"
+          aria-describedby="_r_d_-loading-announcement"
           class="Box-sc-g0xbh4-0 jRKXQy prc-Button-ButtonBase-c50BI"
           data-loading="false"
           data-no-visuals="true"
@@ -1666,7 +1805,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
         data-wrap="nowrap"
       >
         <button
-          aria-describedby="_r_b_-loading-announcement _r_a_"
+          aria-describedby="_r_f_-loading-announcement _r_e_"
           class="prc-Button-ButtonBase-c50BI"
           data-loading="false"
           data-no-visuals="true"
@@ -1694,7 +1833,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           aria-hidden="true"
           class="prc-TooltipV2-Tooltip-cYMVY"
           data-direction="n"
-          id="_r_a_"
+          id="_r_e_"
           popover="auto"
           role="tooltip"
         >
@@ -1711,7 +1850,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
         data-wrap="nowrap"
       >
         <button
-          aria-describedby="_r_d_-loading-announcement _r_c_"
+          aria-describedby="_r_h_-loading-announcement _r_g_"
           aria-label="Accounts"
           class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
           data-component="IconButton"
@@ -1743,14 +1882,14 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           aria-hidden="true"
           class="prc-TooltipV2-Tooltip-cYMVY"
           data-direction="n"
-          id="_r_c_"
+          id="_r_g_"
           popover="auto"
           role="tooltip"
         >
           Accounts
         </span>
         <button
-          aria-describedby="_r_f_-loading-announcement _r_e_"
+          aria-describedby="_r_j_-loading-announcement _r_i_"
           aria-label="Quit Gitify"
           class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
           data-component="IconButton"
@@ -1782,7 +1921,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           aria-hidden="true"
           class="prc-TooltipV2-Tooltip-cYMVY"
           data-direction="nw"
-          id="_r_e_"
+          id="_r_i_"
           popover="auto"
           role="tooltip"
         >

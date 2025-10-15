@@ -55,6 +55,71 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
     expect(updateSetting).toHaveBeenCalledWith('fetchType', 'INACTIVITY');
   });
 
+  it('should update the fetch interval values when using the buttons', async () => {
+    await act(async () => {
+      render(
+        <AppContext.Provider
+          value={{
+            auth: mockAuth,
+            settings: mockSettings,
+            updateSetting,
+          }}
+        >
+          <NotificationSettings />
+        </AppContext.Provider>,
+      );
+    });
+
+    // Increase fetch interval
+    await act(async () => {
+      await userEvent.click(
+        screen.getByTestId('settings-fetch-interval-increase'),
+      );
+
+      expect(updateSetting).toHaveBeenCalledTimes(1);
+      expect(updateSetting).toHaveBeenCalledWith('fetchInterval', 120000);
+    });
+
+    await act(async () => {
+      await userEvent.click(
+        screen.getByTestId('settings-fetch-interval-increase'),
+      );
+
+      expect(updateSetting).toHaveBeenCalledTimes(2);
+      expect(updateSetting).toHaveBeenNthCalledWith(2, 'fetchInterval', 180000);
+    });
+
+    // Decrease fetch interval
+    await act(async () => {
+      await userEvent.click(
+        screen.getByTestId('settings-fetch-interval-decrease'),
+      );
+
+      expect(updateSetting).toHaveBeenCalledTimes(3);
+      expect(updateSetting).toHaveBeenNthCalledWith(3, 'fetchInterval', 120000);
+    });
+
+    // Fetch interval reset
+    await act(async () => {
+      await userEvent.click(
+        screen.getByTestId('settings-fetch-interval-reset'),
+      );
+
+      expect(updateSetting).toHaveBeenCalledTimes(4);
+      expect(updateSetting).toHaveBeenNthCalledWith(4, 'fetchInterval', 60000);
+    });
+
+    // Prevent going lower than minimum interval
+    await act(async () => {
+      await userEvent.click(
+        screen.getByTestId('settings-fetch-interval-decrease'),
+      );
+
+      expect(updateSetting).toHaveBeenCalledTimes(4);
+      expect(updateSetting).toHaveBeenNthCalledWith(4, 'fetchInterval', 60000);
+    });
+  });
+
   it('should toggle the fetchAllNotifications checkbox', async () => {
     await act(async () => {
       render(
