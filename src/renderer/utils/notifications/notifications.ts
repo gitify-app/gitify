@@ -146,6 +146,13 @@ export async function enrichNotification(
   };
 }
 
+/**
+ * Assign an order property to each notification to stabilize how they are displayed
+ * during notification interaction events (mark as read, mark as done, etc.)
+ *
+ * @param notifications
+ * @param settings
+ */
 export function stabilizeNotificationsOrder(
   notifications: AccountNotifications[],
   settings: SettingsState,
