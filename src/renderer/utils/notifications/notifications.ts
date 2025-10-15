@@ -167,10 +167,10 @@ export function stabilizeNotificationsOrder(
     // Non-repository grouping: assign sequential order across all notifications
     let orderIndex = 0;
 
-    notifications.forEach((accountNotifications) => {
-      accountNotifications.notifications.forEach((notification) => {
+    for (const accountNotifications of notifications) {
+      for (const notification of accountNotifications.notifications) {
         notification.order = orderIndex++;
-      });
-    });
+      }
+    }
   }
 }
