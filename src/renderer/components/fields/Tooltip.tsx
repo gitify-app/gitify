@@ -14,8 +14,6 @@ export const Tooltip: FC<ITooltip> = (props: ITooltip) => {
   return (
     <AnchoredOverlay
       align="center"
-      onClose={() => setShowTooltip(false)}
-      onOpen={() => setShowTooltip(true)}
       open={showTooltip}
       renderAnchor={(anchorProps) => (
         <button
