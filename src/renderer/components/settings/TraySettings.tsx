@@ -24,6 +24,12 @@ export const TraySettings: FC = () => {
           onChange={(evt) =>
             updateSetting('showNotificationsCountInTray', evt.target.checked)
           }
+          tooltip={
+            <Text>
+              Show the unread notification count next to the tray icon. Useful
+              for a quick glance at unread activity.
+            </Text>
+          }
           visible={window.gitify.platform.isMacOS()}
         />
 

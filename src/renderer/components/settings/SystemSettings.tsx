@@ -32,6 +32,21 @@ export const SystemSettings: FC = () => {
             { label: 'Foreground', value: OpenPreference.FOREGROUND },
             { label: 'Background', value: OpenPreference.BACKGROUND },
           ]}
+          tooltip={
+            <Stack direction="vertical" gap="condensed">
+              <Text>
+                Controls the behavior of how external links should opened.
+              </Text>
+              <Text>
+                <Text as="strong">Foreground</Text> will open the link and bring
+                the opened window or browser to the front.
+              </Text>
+              <Text>
+                <Text as="strong">Background</Text> opens the link without
+                stealing focus from the current window.
+              </Text>
+            </Stack>
+          }
           value={settings.openLinks}
         />
 
@@ -59,6 +74,12 @@ export const SystemSettings: FC = () => {
           name="showNotifications"
           onChange={(evt) =>
             updateSetting('showNotifications', evt.target.checked)
+          }
+          tooltip={
+            <Text>
+              Display native operating system notifications for new unread
+              notifications.
+            </Text>
           }
         />
 
@@ -136,6 +157,9 @@ export const SystemSettings: FC = () => {
           label="Open at startup"
           name="openAtStartup"
           onChange={(evt) => updateSetting('openAtStartup', evt.target.checked)}
+          tooltip={
+            <Text>Launch {APPLICATION.NAME} automatically at startup.</Text>
+          }
           visible={!window.gitify.platform.isLinux()}
         />
       </Stack>
