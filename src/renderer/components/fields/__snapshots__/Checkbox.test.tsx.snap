@@ -436,10 +436,12 @@ exports[`renderer/components/fields/Checkbox.tsx should render - tooltip 1`] = `
           Appearance
         </label>
         <button
+          aria-expanded="false"
+          aria-haspopup="true"
           aria-label="tooltip-appearance"
-          class="relative"
           data-testid="tooltip-tooltip-appearance"
           id="tooltip-appearance"
+          tabindex="0"
           type="button"
         >
           <svg
@@ -486,10 +488,12 @@ exports[`renderer/components/fields/Checkbox.tsx should render - tooltip 1`] = `
         Appearance
       </label>
       <button
+        aria-expanded="false"
+        aria-haspopup="true"
         aria-label="tooltip-appearance"
-        class="relative"
         data-testid="tooltip-tooltip-appearance"
         id="tooltip-appearance"
+        tabindex="0"
         type="button"
       >
         <svg

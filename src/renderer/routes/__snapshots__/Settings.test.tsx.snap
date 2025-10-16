@@ -260,10 +260,12 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               Increase contrast
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-increaseContrast"
-              class="relative"
               data-testid="tooltip-tooltip-increaseContrast"
               id="tooltip-increaseContrast"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -304,7 +306,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             >
               <div>
                 <button
-                  aria-describedby="_r_1_-loading-announcement"
+                  aria-describedby="_r_2_-loading-announcement"
                   aria-label="Zoom out"
                   class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
                   data-component="IconButton"
@@ -338,7 +340,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               </div>
               <div>
                 <button
-                  aria-describedby="_r_2_-loading-announcement"
+                  aria-describedby="_r_3_-loading-announcement"
                   aria-label="Zoom percentage"
                   class="prc-Button-ButtonBase-c50BI"
                   data-loading="false"
@@ -365,7 +367,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               </div>
               <div>
                 <button
-                  aria-describedby="_r_3_-loading-announcement"
+                  aria-describedby="_r_4_-loading-announcement"
                   aria-label="Zoom in"
                   class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
                   data-component="IconButton"
@@ -399,7 +401,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               </div>
               <div>
                 <button
-                  aria-describedby="_r_4_-loading-announcement"
+                  aria-describedby="_r_5_-loading-announcement"
                   aria-label="Reset zoom"
                   class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
                   data-component="IconButton"
@@ -452,10 +454,12 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               Show full notification title
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-wrapNotificationTitle"
-              class="relative"
               data-testid="tooltip-tooltip-wrapNotificationTitle"
               id="tooltip-wrapNotificationTitle"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -592,10 +596,12 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               </label>
             </div>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-groupBy"
-              class="relative"
               data-testid="tooltip-tooltip-groupBy"
               id="tooltip-groupBy"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -681,10 +687,12 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               </label>
             </div>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-fetchType"
-              class="relative"
               data-testid="tooltip-tooltip-fetchType"
               id="tooltip-fetchType"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -725,7 +733,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             >
               <div>
                 <button
-                  aria-describedby="_r_5_-loading-announcement"
+                  aria-describedby="_r_9_-loading-announcement"
                   aria-label="Decrease fetch interval"
                   class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
                   data-component="IconButton"
@@ -756,7 +764,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               </div>
               <div>
                 <button
-                  aria-describedby="_r_6_-loading-announcement"
+                  aria-describedby="_r_a_-loading-announcement"
                   aria-label="Fetch interval"
                   class="prc-Button-ButtonBase-c50BI"
                   data-loading="false"
@@ -782,7 +790,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               </div>
               <div>
                 <button
-                  aria-describedby="_r_7_-loading-announcement"
+                  aria-describedby="_r_b_-loading-announcement"
                   aria-label="Increase fetch interval"
                   class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
                   data-component="IconButton"
@@ -813,7 +821,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               </div>
               <div>
                 <button
-                  aria-describedby="_r_8_-loading-announcement"
+                  aria-describedby="_r_c_-loading-announcement"
                   aria-label="Reset fetch interval"
                   class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
                   data-component="IconButton"
@@ -867,10 +875,12 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               Fetch all notifications
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-fetchAllNotifications"
-              class="relative"
               data-testid="tooltip-tooltip-fetchAllNotifications"
               id="tooltip-fetchAllNotifications"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -914,10 +924,12 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               Fetch detailed notifications
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-detailedNotifications"
-              class="relative"
               data-testid="tooltip-tooltip-detailedNotifications"
               id="tooltip-detailedNotifications"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -973,10 +985,12 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                   Show notification metric pills
                 </label>
                 <button
+                  aria-expanded="false"
+                  aria-haspopup="true"
                   aria-label="tooltip-showPills"
-                  class="relative"
                   data-testid="tooltip-tooltip-showPills"
                   id="tooltip-showPills"
+                  tabindex="0"
                   type="button"
                 >
                   <svg
@@ -1020,10 +1034,12 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                   Show GitHub number
                 </label>
                 <button
+                  aria-expanded="false"
+                  aria-haspopup="true"
                   aria-label="tooltip-showNumber"
-                  class="relative"
                   data-testid="tooltip-tooltip-showNumber"
                   id="tooltip-showNumber"
+                  tabindex="0"
                   type="button"
                 >
                   <svg
@@ -1068,10 +1084,12 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               Fetch only participating
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-showOnlyParticipating"
-              class="relative"
               data-testid="tooltip-tooltip-showOnlyParticipating"
               id="tooltip-showOnlyParticipating"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -1114,10 +1132,12 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               Mark as done on open
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-markAsDoneOnOpen"
-              class="relative"
               data-testid="tooltip-tooltip-markAsDoneOnOpen"
               id="tooltip-markAsDoneOnOpen"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -1160,10 +1180,12 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               Mark as done on unsubscribe
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-markAsDoneOnUnsubscribe"
-              class="relative"
               data-testid="tooltip-tooltip-markAsDoneOnUnsubscribe"
               id="tooltip-markAsDoneOnUnsubscribe"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -1206,10 +1228,12 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               Delay notification state
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-delayNotificationState"
-              class="relative"
               data-testid="tooltip-tooltip-delayNotificationState"
               id="tooltip-delayNotificationState"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -1307,10 +1331,12 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               Show notification count
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-showNotificationsCountInTray"
-              class="relative"
               data-testid="tooltip-tooltip-showNotificationsCountInTray"
               id="tooltip-showNotificationsCountInTray"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -1354,10 +1380,12 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               Highlight unread notifications
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-useUnreadActiveIcon"
-              class="relative"
               data-testid="tooltip-tooltip-useUnreadActiveIcon"
               id="tooltip-useUnreadActiveIcon"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -1400,10 +1428,12 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               Use alternate idle icon
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-useAlternateIdleIcon"
-              class="relative"
               data-testid="tooltip-tooltip-useAlternateIdleIcon"
               id="tooltip-useAlternateIdleIcon"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -1540,10 +1570,12 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               </label>
             </div>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-openLinks"
-              class="relative"
               data-testid="tooltip-tooltip-openLinks"
               id="tooltip-openLinks"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -1587,10 +1619,12 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               Enable keyboard shortcut
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-keyboardShortcut"
-              class="relative"
               data-testid="tooltip-tooltip-keyboardShortcut"
               id="tooltip-keyboardShortcut"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -1634,10 +1668,12 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               Show system notifications
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-showNotifications"
-              class="relative"
               data-testid="tooltip-tooltip-showNotifications"
               id="tooltip-showNotifications"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -1696,7 +1732,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             >
               <div>
                 <button
-                  aria-describedby="_r_9_-loading-announcement"
+                  aria-describedby="_r_r_-loading-announcement"
                   aria-label="Volume down"
                   class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
                   data-component="IconButton"
@@ -1732,7 +1768,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               </div>
               <div>
                 <button
-                  aria-describedby="_r_a_-loading-announcement"
+                  aria-describedby="_r_s_-loading-announcement"
                   aria-label="Volume percentage"
                   class="prc-Button-ButtonBase-c50BI"
                   data-loading="false"
@@ -1759,7 +1795,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               </div>
               <div>
                 <button
-                  aria-describedby="_r_b_-loading-announcement"
+                  aria-describedby="_r_t_-loading-announcement"
                   aria-label="Volume up"
                   class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
                   data-component="IconButton"
@@ -1791,7 +1827,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               </div>
               <div>
                 <button
-                  aria-describedby="_r_c_-loading-announcement"
+                  aria-describedby="_r_u_-loading-announcement"
                   aria-label="Reset volume"
                   class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
                   data-component="IconButton"
@@ -1844,10 +1880,12 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               Open at startup
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-openAtStartup"
-              class="relative"
               data-testid="tooltip-tooltip-openAtStartup"
               id="tooltip-openAtStartup"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -1879,7 +1917,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
         data-wrap="nowrap"
       >
         <button
-          aria-describedby="_r_d_-loading-announcement"
+          aria-describedby="_r_10_-loading-announcement"
           class="Box-sc-g0xbh4-0 jRKXQy prc-Button-ButtonBase-c50BI"
           data-loading="false"
           data-no-visuals="true"
@@ -1925,7 +1963,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
         data-wrap="nowrap"
       >
         <button
-          aria-describedby="_r_f_-loading-announcement _r_e_"
+          aria-describedby="_r_12_-loading-announcement _r_11_"
           class="prc-Button-ButtonBase-c50BI"
           data-loading="false"
           data-no-visuals="true"
@@ -1953,7 +1991,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           aria-hidden="true"
           class="prc-TooltipV2-Tooltip-cYMVY"
           data-direction="n"
-          id="_r_e_"
+          id="_r_11_"
           popover="auto"
           role="tooltip"
         >
@@ -1970,7 +2008,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
         data-wrap="nowrap"
       >
         <button
-          aria-describedby="_r_h_-loading-announcement _r_g_"
+          aria-describedby="_r_14_-loading-announcement _r_13_"
           aria-label="Accounts"
           class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
           data-component="IconButton"
@@ -2002,14 +2040,14 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           aria-hidden="true"
           class="prc-TooltipV2-Tooltip-cYMVY"
           data-direction="n"
-          id="_r_g_"
+          id="_r_13_"
           popover="auto"
           role="tooltip"
         >
           Accounts
         </span>
         <button
-          aria-describedby="_r_j_-loading-announcement _r_i_"
+          aria-describedby="_r_16_-loading-announcement _r_15_"
           aria-label="Quit Gitify"
           class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
           data-component="IconButton"
@@ -2041,7 +2079,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           aria-hidden="true"
           class="prc-TooltipV2-Tooltip-cYMVY"
           data-direction="nw"
-          id="_r_i_"
+          id="_r_15_"
           popover="auto"
           role="tooltip"
         >

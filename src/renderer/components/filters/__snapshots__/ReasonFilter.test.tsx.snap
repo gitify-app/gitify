@@ -45,10 +45,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
                 Reason
               </h2>
               <button
+                aria-expanded="false"
+                aria-haspopup="true"
                 aria-label="tooltip-reason"
-                class="relative"
                 data-testid="tooltip-tooltip-reason"
                 id="tooltip-reason"
+                tabindex="0"
                 type="button"
               >
                 <svg
@@ -102,10 +104,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               Approval Requested
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-Approval Requested"
-              class="relative"
               data-testid="tooltip-tooltip-Approval Requested"
               id="tooltip-Approval Requested"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -153,10 +157,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               Assigned
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-Assigned"
-              class="relative"
               data-testid="tooltip-tooltip-Assigned"
               id="tooltip-Assigned"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -204,10 +210,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               Authored
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-Authored"
-              class="relative"
               data-testid="tooltip-tooltip-Authored"
               id="tooltip-Authored"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -255,10 +263,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               Workflow Run Completed
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-Workflow Run Completed"
-              class="relative"
               data-testid="tooltip-tooltip-Workflow Run Completed"
               id="tooltip-Workflow Run Completed"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -306,10 +316,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               Commented
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-Commented"
-              class="relative"
               data-testid="tooltip-tooltip-Commented"
               id="tooltip-Commented"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -357,10 +369,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               Invitation Received
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-Invitation Received"
-              class="relative"
               data-testid="tooltip-tooltip-Invitation Received"
               id="tooltip-Invitation Received"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -408,10 +422,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               Updated
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-Updated"
-              class="relative"
               data-testid="tooltip-tooltip-Updated"
               id="tooltip-Updated"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -459,10 +475,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               Member Feature Requested
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-Member Feature Requested"
-              class="relative"
               data-testid="tooltip-tooltip-Member Feature Requested"
               id="tooltip-Member Feature Requested"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -510,10 +528,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               Mentioned
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-Mentioned"
-              class="relative"
               data-testid="tooltip-tooltip-Mentioned"
               id="tooltip-Mentioned"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -561,10 +581,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               Review Requested
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-Review Requested"
-              class="relative"
               data-testid="tooltip-tooltip-Review Requested"
               id="tooltip-Review Requested"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -612,10 +634,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               Security Advisory Credit Received
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-Security Advisory Credit Received"
-              class="relative"
               data-testid="tooltip-tooltip-Security Advisory Credit Received"
               id="tooltip-Security Advisory Credit Received"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -663,10 +687,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               Security Alert Received
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-Security Alert Received"
-              class="relative"
               data-testid="tooltip-tooltip-Security Alert Received"
               id="tooltip-Security Alert Received"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -714,10 +740,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               State Changed
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-State Changed"
-              class="relative"
               data-testid="tooltip-tooltip-State Changed"
               id="tooltip-State Changed"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -765,10 +793,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               Updated
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-Updated"
-              class="relative"
               data-testid="tooltip-tooltip-Updated"
               id="tooltip-Updated"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -816,10 +846,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               Team Mentioned
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-Team Mentioned"
-              class="relative"
               data-testid="tooltip-tooltip-Team Mentioned"
               id="tooltip-Team Mentioned"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -890,10 +922,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               Reason
             </h2>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-reason"
-              class="relative"
               data-testid="tooltip-tooltip-reason"
               id="tooltip-reason"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -947,10 +981,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             Approval Requested
           </label>
           <button
+            aria-expanded="false"
+            aria-haspopup="true"
             aria-label="tooltip-Approval Requested"
-            class="relative"
             data-testid="tooltip-tooltip-Approval Requested"
             id="tooltip-Approval Requested"
+            tabindex="0"
             type="button"
           >
             <svg
@@ -998,10 +1034,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             Assigned
           </label>
           <button
+            aria-expanded="false"
+            aria-haspopup="true"
             aria-label="tooltip-Assigned"
-            class="relative"
             data-testid="tooltip-tooltip-Assigned"
             id="tooltip-Assigned"
+            tabindex="0"
             type="button"
           >
             <svg
@@ -1049,10 +1087,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             Authored
           </label>
           <button
+            aria-expanded="false"
+            aria-haspopup="true"
             aria-label="tooltip-Authored"
-            class="relative"
             data-testid="tooltip-tooltip-Authored"
             id="tooltip-Authored"
+            tabindex="0"
             type="button"
           >
             <svg
@@ -1100,10 +1140,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             Workflow Run Completed
           </label>
           <button
+            aria-expanded="false"
+            aria-haspopup="true"
             aria-label="tooltip-Workflow Run Completed"
-            class="relative"
             data-testid="tooltip-tooltip-Workflow Run Completed"
             id="tooltip-Workflow Run Completed"
+            tabindex="0"
             type="button"
           >
             <svg
@@ -1151,10 +1193,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             Commented
           </label>
           <button
+            aria-expanded="false"
+            aria-haspopup="true"
             aria-label="tooltip-Commented"
-            class="relative"
             data-testid="tooltip-tooltip-Commented"
             id="tooltip-Commented"
+            tabindex="0"
             type="button"
           >
             <svg
@@ -1202,10 +1246,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             Invitation Received
           </label>
           <button
+            aria-expanded="false"
+            aria-haspopup="true"
             aria-label="tooltip-Invitation Received"
-            class="relative"
             data-testid="tooltip-tooltip-Invitation Received"
             id="tooltip-Invitation Received"
+            tabindex="0"
             type="button"
           >
             <svg
@@ -1253,10 +1299,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             Updated
           </label>
           <button
+            aria-expanded="false"
+            aria-haspopup="true"
             aria-label="tooltip-Updated"
-            class="relative"
             data-testid="tooltip-tooltip-Updated"
             id="tooltip-Updated"
+            tabindex="0"
             type="button"
           >
             <svg
@@ -1304,10 +1352,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             Member Feature Requested
           </label>
           <button
+            aria-expanded="false"
+            aria-haspopup="true"
             aria-label="tooltip-Member Feature Requested"
-            class="relative"
             data-testid="tooltip-tooltip-Member Feature Requested"
             id="tooltip-Member Feature Requested"
+            tabindex="0"
             type="button"
           >
             <svg
@@ -1355,10 +1405,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             Mentioned
           </label>
           <button
+            aria-expanded="false"
+            aria-haspopup="true"
             aria-label="tooltip-Mentioned"
-            class="relative"
             data-testid="tooltip-tooltip-Mentioned"
             id="tooltip-Mentioned"
+            tabindex="0"
             type="button"
           >
             <svg
@@ -1406,10 +1458,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             Review Requested
           </label>
           <button
+            aria-expanded="false"
+            aria-haspopup="true"
             aria-label="tooltip-Review Requested"
-            class="relative"
             data-testid="tooltip-tooltip-Review Requested"
             id="tooltip-Review Requested"
+            tabindex="0"
             type="button"
           >
             <svg
@@ -1457,10 +1511,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             Security Advisory Credit Received
           </label>
           <button
+            aria-expanded="false"
+            aria-haspopup="true"
             aria-label="tooltip-Security Advisory Credit Received"
-            class="relative"
             data-testid="tooltip-tooltip-Security Advisory Credit Received"
             id="tooltip-Security Advisory Credit Received"
+            tabindex="0"
             type="button"
           >
             <svg
@@ -1508,10 +1564,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             Security Alert Received
           </label>
           <button
+            aria-expanded="false"
+            aria-haspopup="true"
             aria-label="tooltip-Security Alert Received"
-            class="relative"
             data-testid="tooltip-tooltip-Security Alert Received"
             id="tooltip-Security Alert Received"
+            tabindex="0"
             type="button"
           >
             <svg
@@ -1559,10 +1617,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             State Changed
           </label>
           <button
+            aria-expanded="false"
+            aria-haspopup="true"
             aria-label="tooltip-State Changed"
-            class="relative"
             data-testid="tooltip-tooltip-State Changed"
             id="tooltip-State Changed"
+            tabindex="0"
             type="button"
           >
             <svg
@@ -1610,10 +1670,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             Updated
           </label>
           <button
+            aria-expanded="false"
+            aria-haspopup="true"
             aria-label="tooltip-Updated"
-            class="relative"
             data-testid="tooltip-tooltip-Updated"
             id="tooltip-Updated"
+            tabindex="0"
             type="button"
           >
             <svg
@@ -1661,10 +1723,12 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             Team Mentioned
           </label>
           <button
+            aria-expanded="false"
+            aria-haspopup="true"
             aria-label="tooltip-Team Mentioned"
-            class="relative"
             data-testid="tooltip-tooltip-Team Mentioned"
             id="tooltip-Team Mentioned"
+            tabindex="0"
             type="button"
           >
             <svg

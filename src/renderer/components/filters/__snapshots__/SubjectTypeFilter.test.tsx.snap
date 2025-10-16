@@ -45,10 +45,12 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
                 Type
               </h2>
               <button
+                aria-expanded="false"
+                aria-haspopup="true"
                 aria-label="tooltip-type"
-                class="relative"
                 data-testid="tooltip-tooltip-type"
                 id="tooltip-type"
+                tabindex="0"
                 type="button"
               >
                 <svg
@@ -395,10 +397,12 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
               Type
             </h2>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-type"
-              class="relative"
               data-testid="tooltip-tooltip-type"
               id="tooltip-type"
+              tabindex="0"
               type="button"
             >
               <svg

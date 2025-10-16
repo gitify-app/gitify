@@ -69,10 +69,12 @@ exports[`renderer/components/fields/Tooltip.tsx should render 1`] = `
   "baseElement": <body>
     <div>
       <button
+        aria-expanded="false"
+        aria-haspopup="true"
         aria-label="test"
-        class="relative"
         data-testid="tooltip-test"
         id="test"
+        tabindex="0"
         type="button"
       >
         <svg
@@ -96,10 +98,12 @@ exports[`renderer/components/fields/Tooltip.tsx should render 1`] = `
   </body>,
   "container": <div>
     <button
+      aria-expanded="false"
+      aria-haspopup="true"
       aria-label="test"
-      class="relative"
       data-testid="tooltip-test"
       id="test"
+      tabindex="0"
       type="button"
     >
       <svg

@@ -48,10 +48,12 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
                 State
               </h2>
               <button
+                aria-expanded="false"
+                aria-haspopup="true"
                 aria-label="tooltip-state"
-                class="relative"
                 data-testid="tooltip-tooltip-state"
                 id="tooltip-state"
+                tabindex="0"
                 type="button"
               >
                 <svg
@@ -132,10 +134,12 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
               Open
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-Open"
-              class="relative"
               data-testid="tooltip-tooltip-Open"
               id="tooltip-Open"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -210,10 +214,12 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
               Closed
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-Closed"
-              class="relative"
               data-testid="tooltip-tooltip-Closed"
               id="tooltip-Closed"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -261,10 +267,12 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
               Other
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-Other"
-              class="relative"
               data-testid="tooltip-tooltip-Other"
               id="tooltip-Other"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -338,10 +346,12 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
               State
             </h2>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-state"
-              class="relative"
               data-testid="tooltip-tooltip-state"
               id="tooltip-state"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -422,10 +432,12 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
             Open
           </label>
           <button
+            aria-expanded="false"
+            aria-haspopup="true"
             aria-label="tooltip-Open"
-            class="relative"
             data-testid="tooltip-tooltip-Open"
             id="tooltip-Open"
+            tabindex="0"
             type="button"
           >
             <svg
@@ -500,10 +512,12 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
             Closed
           </label>
           <button
+            aria-expanded="false"
+            aria-haspopup="true"
             aria-label="tooltip-Closed"
-            class="relative"
             data-testid="tooltip-tooltip-Closed"
             id="tooltip-Closed"
+            tabindex="0"
             type="button"
           >
             <svg
@@ -551,10 +565,12 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
             Other
           </label>
           <button
+            aria-expanded="false"
+            aria-haspopup="true"
             aria-label="tooltip-Other"
-            class="relative"
             data-testid="tooltip-tooltip-Other"
             id="tooltip-Other"
+            tabindex="0"
             type="button"
           >
             <svg
