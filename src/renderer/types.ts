@@ -79,6 +79,7 @@ export interface AppearanceSettingsState {
 export interface NotificationSettingsState {
   groupBy: GroupBy;
   fetchType: FetchType;
+  fetchInterval: number;
   fetchAllNotifications: boolean;
   detailedNotifications: boolean;
   showPills: boolean;

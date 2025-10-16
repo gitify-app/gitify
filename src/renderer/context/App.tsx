@@ -148,18 +148,14 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     () => {
       fetchNotifications({ auth, settings });
     },
-    settings.fetchType === FetchType.INTERVAL
-      ? Constants.FETCH_NOTIFICATIONS_INTERVAL_MS
-      : null,
+    settings.fetchType === FetchType.INTERVAL ? settings.fetchInterval : null,
   );
 
   useInactivityTimer(
     () => {
       fetchNotifications({ auth, settings });
     },
-    settings.fetchType === FetchType.INACTIVITY
-      ? Constants.FETCH_NOTIFICATIONS_INTERVAL_MS
-      : null,
+    settings.fetchType === FetchType.INACTIVITY ? settings.fetchInterval : null,
   );
 
   useIntervalTimer(() => {

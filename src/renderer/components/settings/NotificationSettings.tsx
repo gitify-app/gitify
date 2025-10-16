@@ -1,27 +1,47 @@
-import { type FC, type MouseEvent, useContext } from 'react';
+import {
+  type FC,
+  type MouseEvent,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 
 import {
   BellIcon,
   CheckIcon,
   CommentIcon,
+  DashIcon,
   GitPullRequestIcon,
   IssueOpenedIcon,
   MilestoneIcon,
+  PlusIcon,
+  SyncIcon,
   TagIcon,
 } from '@primer/octicons-react';
-import { Stack, Text } from '@primer/react';
+import { Button, ButtonGroup, IconButton, Stack, Text } from '@primer/react';
+
+import { formatDuration, millisecondsToMinutes } from 'date-fns';
 
 import { APPLICATION } from '../../../shared/constants';
 
+import { Constants } from '../../constants';
 import { AppContext } from '../../context/App';
 import { FetchType, GroupBy, Size } from '../../types';
 import { openGitHubParticipatingDocs } from '../../utils/links';
 import { Checkbox } from '../fields/Checkbox';
+import { FieldLabel } from '../fields/FieldLabel';
 import { RadioGroup } from '../fields/RadioGroup';
 import { Title } from '../primitives/Title';
 
 export const NotificationSettings: FC = () => {
   const { settings, updateSetting } = useContext(AppContext);
+  const [fetchInterval, setFetchInterval] = useState<number>(
+    settings.fetchInterval,
+  );
+
+  useEffect(() => {
+    setFetchInterval(settings.fetchInterval);
+  }, [settings.fetchInterval]);
 
   return (
     <fieldset>
@@ -67,6 +87,81 @@ export const NotificationSettings: FC = () => {
           }
           value={settings.fetchType}
         />
+
+        <Stack
+          align="center"
+          className="text-sm"
+          direction="horizontal"
+          gap="condensed"
+        >
+          <FieldLabel label="Fetch interval:" name="fetchInterval" />
+
+          <ButtonGroup className="ml-2">
+            <IconButton
+              aria-label="Decrease fetch interval"
+              data-testid="settings-fetch-interval-decrease"
+              icon={DashIcon}
+              onClick={() => {
+                const newInterval = Math.max(
+                  fetchInterval -
+                    Constants.FETCH_NOTIFICATIONS_INTERVAL_STEP_MS,
+                  Constants.MIN_FETCH_NOTIFICATIONS_INTERVAL_MS,
+                );
+
+                if (newInterval !== fetchInterval) {
+                  setFetchInterval(newInterval);
+                  updateSetting('fetchInterval', newInterval);
+                }
+              }}
+              size="small"
+              unsafeDisableTooltip={true}
+            />
+
+            <Button aria-label="Fetch interval" disabled size="small">
+              {formatDuration({
+                minutes: millisecondsToMinutes(fetchInterval),
+              })}
+            </Button>
+
+            <IconButton
+              aria-label="Increase fetch interval"
+              data-testid="settings-fetch-interval-increase"
+              icon={PlusIcon}
+              onClick={() => {
+                const newInterval = Math.min(
+                  fetchInterval +
+                    Constants.FETCH_NOTIFICATIONS_INTERVAL_STEP_MS,
+                  Constants.MAX_FETCH_NOTIFICATIONS_INTERVAL_MS,
+                );
+
+                if (newInterval !== fetchInterval) {
+                  setFetchInterval(newInterval);
+                  updateSetting('fetchInterval', newInterval);
+                }
+              }}
+              size="small"
+              unsafeDisableTooltip={true}
+            />
+
+            <IconButton
+              aria-label="Reset fetch interval"
+              data-testid="settings-fetch-interval-reset"
+              icon={SyncIcon}
+              onClick={() => {
+                setFetchInterval(
+                  Constants.DEFAULT_FETCH_NOTIFICATIONS_INTERVAL_MS,
+                );
+                updateSetting(
+                  'fetchInterval',
+                  Constants.DEFAULT_FETCH_NOTIFICATIONS_INTERVAL_MS,
+                );
+              }}
+              size="small"
+              unsafeDisableTooltip={true}
+              variant="danger"
+            />
+          </ButtonGroup>
+        </Stack>
 
         <Checkbox
           checked={settings.fetchAllNotifications}
