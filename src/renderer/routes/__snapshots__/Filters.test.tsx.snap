@@ -136,10 +136,12 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                 Search
               </h2>
               <button
+                aria-expanded="false"
+                aria-haspopup="true"
                 aria-label="tooltip-search"
-                class="relative"
                 data-testid="tooltip-tooltip-search"
                 id="tooltip-search"
+                tabindex="0"
                 type="button"
               >
                 <svg
@@ -357,10 +359,12 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                 User Type
               </h2>
               <button
+                aria-expanded="false"
+                aria-haspopup="true"
                 aria-label="tooltip-user-type"
-                class="relative"
                 data-testid="tooltip-tooltip-user-type"
                 id="tooltip-user-type"
+                tabindex="0"
                 type="button"
               >
                 <svg
@@ -441,10 +445,12 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Bot
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-Bot"
-              class="relative"
               data-testid="tooltip-tooltip-Bot"
               id="tooltip-Bot"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -539,10 +545,12 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                 Type
               </h2>
               <button
+                aria-expanded="false"
+                aria-haspopup="true"
                 aria-label="tooltip-type"
-                class="relative"
                 data-testid="tooltip-tooltip-type"
                 id="tooltip-type"
+                tabindex="0"
                 type="button"
               >
                 <svg
@@ -889,10 +897,12 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                 State
               </h2>
               <button
+                aria-expanded="false"
+                aria-haspopup="true"
                 aria-label="tooltip-state"
-                class="relative"
                 data-testid="tooltip-tooltip-state"
                 id="tooltip-state"
+                tabindex="0"
                 type="button"
               >
                 <svg
@@ -973,10 +983,12 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Open
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-Open"
-              class="relative"
               data-testid="tooltip-tooltip-Open"
               id="tooltip-Open"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -1051,10 +1063,12 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Closed
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-Closed"
-              class="relative"
               data-testid="tooltip-tooltip-Closed"
               id="tooltip-Closed"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -1102,10 +1116,12 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Other
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-Other"
-              class="relative"
               data-testid="tooltip-tooltip-Other"
               id="tooltip-Other"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -1173,10 +1189,12 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                 Reason
               </h2>
               <button
+                aria-expanded="false"
+                aria-haspopup="true"
                 aria-label="tooltip-reason"
-                class="relative"
                 data-testid="tooltip-tooltip-reason"
                 id="tooltip-reason"
+                tabindex="0"
                 type="button"
               >
                 <svg
@@ -1230,10 +1248,12 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Approval Requested
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-Approval Requested"
-              class="relative"
               data-testid="tooltip-tooltip-Approval Requested"
               id="tooltip-Approval Requested"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -1281,10 +1301,12 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Assigned
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-Assigned"
-              class="relative"
               data-testid="tooltip-tooltip-Assigned"
               id="tooltip-Assigned"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -1332,10 +1354,12 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Authored
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-Authored"
-              class="relative"
               data-testid="tooltip-tooltip-Authored"
               id="tooltip-Authored"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -1383,10 +1407,12 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Workflow Run Completed
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-Workflow Run Completed"
-              class="relative"
               data-testid="tooltip-tooltip-Workflow Run Completed"
               id="tooltip-Workflow Run Completed"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -1434,10 +1460,12 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Commented
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-Commented"
-              class="relative"
               data-testid="tooltip-tooltip-Commented"
               id="tooltip-Commented"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -1485,10 +1513,12 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Invitation Received
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-Invitation Received"
-              class="relative"
               data-testid="tooltip-tooltip-Invitation Received"
               id="tooltip-Invitation Received"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -1536,10 +1566,12 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Updated
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-Updated"
-              class="relative"
               data-testid="tooltip-tooltip-Updated"
               id="tooltip-Updated"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -1587,10 +1619,12 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Member Feature Requested
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-Member Feature Requested"
-              class="relative"
               data-testid="tooltip-tooltip-Member Feature Requested"
               id="tooltip-Member Feature Requested"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -1638,10 +1672,12 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Mentioned
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-Mentioned"
-              class="relative"
               data-testid="tooltip-tooltip-Mentioned"
               id="tooltip-Mentioned"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -1689,10 +1725,12 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Review Requested
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-Review Requested"
-              class="relative"
               data-testid="tooltip-tooltip-Review Requested"
               id="tooltip-Review Requested"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -1740,10 +1778,12 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Security Advisory Credit Received
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-Security Advisory Credit Received"
-              class="relative"
               data-testid="tooltip-tooltip-Security Advisory Credit Received"
               id="tooltip-Security Advisory Credit Received"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -1791,10 +1831,12 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Security Alert Received
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-Security Alert Received"
-              class="relative"
               data-testid="tooltip-tooltip-Security Alert Received"
               id="tooltip-Security Alert Received"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -1842,10 +1884,12 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               State Changed
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-State Changed"
-              class="relative"
               data-testid="tooltip-tooltip-State Changed"
               id="tooltip-State Changed"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -1893,10 +1937,12 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Updated
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-Updated"
-              class="relative"
               data-testid="tooltip-tooltip-Updated"
               id="tooltip-Updated"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -1944,10 +1990,12 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Team Mentioned
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-Team Mentioned"
-              class="relative"
               data-testid="tooltip-tooltip-Team Mentioned"
               id="tooltip-Team Mentioned"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -1989,7 +2037,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
       data-wrap="nowrap"
     >
       <button
-        aria-describedby="_r_2_-loading-announcement _r_1_"
+        aria-describedby="_r_q_-loading-announcement _r_p_"
         class="prc-Button-ButtonBase-c50BI"
         data-loading="false"
         data-size="medium"
@@ -2035,7 +2083,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
         aria-hidden="true"
         class="prc-TooltipV2-Tooltip-cYMVY"
         data-direction="n"
-        id="_r_1_"
+        id="_r_p_"
         popover="auto"
         role="tooltip"
       >

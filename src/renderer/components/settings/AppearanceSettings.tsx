@@ -96,7 +96,13 @@ export const AppearanceSettings: FC = () => {
           onChange={(evt) =>
             updateSetting('increaseContrast', evt.target.checked)
           }
-          tooltip={<Text>Enable high contrast.</Text>}
+          tooltip={
+            <Text>
+              Enable high contrast colors for improved legibility. This
+              increases color contrast across the UI and may affect some
+              color-specific themes.
+            </Text>
+          }
         />
 
         <Stack
@@ -159,6 +165,12 @@ export const AppearanceSettings: FC = () => {
           onChange={(evt) =>
             updateSetting('showAccountHeader', evt.target.checked)
           }
+          tooltip={
+            <Text>
+              When enabled, displays an account header (avatar, username and
+              quick links) above the notifications list.
+            </Text>
+          }
           visible={!hasMultipleAccounts(auth)}
         />
 
@@ -171,7 +183,9 @@ export const AppearanceSettings: FC = () => {
           }
           tooltip={
             <Text>
-              Wrap long notification titles instead of truncating them.
+              Wrap long notification titles onto multiple lines instead of
+              truncating with an ellipsis. This shows the full title but may
+              increase the height of the notification list.
             </Text>
           }
         />

@@ -58,6 +58,19 @@ export const NotificationSettings: FC = () => {
             { label: 'Repository', value: GroupBy.REPOSITORY },
             { label: 'Date', value: GroupBy.DATE },
           ]}
+          tooltip={
+            <Stack direction="vertical" gap="condensed">
+              <Text>Choose how notifications are displayed in the list.</Text>
+              <Text>
+                <Text as="strong">Repository</Text> groups notifications by
+                their repository full name.
+              </Text>
+              <Text>
+                <Text as="strong">Date</Text> shows notifications in
+                chronological order.
+              </Text>
+            </Stack>
+          }
           value={settings.groupBy}
         />
 
@@ -298,7 +311,7 @@ export const NotificationSettings: FC = () => {
                 only participating notifications.
               </Text>
               <Text>
-                When <Text as="em">unchecked</Text>, {APPLICATION.NAME} will
+                When <Text as="u">unchecked</Text>, {APPLICATION.NAME} will
                 fetch participating and watching notifications.
               </Text>
               <Text>

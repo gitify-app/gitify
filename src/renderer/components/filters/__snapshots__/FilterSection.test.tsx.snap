@@ -59,10 +59,12 @@ exports[`renderer/components/filters/FilterSection.tsx should be able to toggle 
       Open
     </label>
     <button
+      aria-expanded="false"
+      aria-haspopup="true"
       aria-label="tooltip-Open"
-      class="relative"
       data-testid="tooltip-tooltip-Open"
       id="tooltip-Open"
+      tabindex="0"
       type="button"
     >
       <svg
@@ -137,10 +139,12 @@ exports[`renderer/components/filters/FilterSection.tsx should be able to toggle 
       Closed
     </label>
     <button
+      aria-expanded="false"
+      aria-haspopup="true"
       aria-label="tooltip-Closed"
-      class="relative"
       data-testid="tooltip-tooltip-Closed"
       id="tooltip-Closed"
+      tabindex="0"
       type="button"
     >
       <svg
@@ -188,10 +192,12 @@ exports[`renderer/components/filters/FilterSection.tsx should be able to toggle 
       Other
     </label>
     <button
+      aria-expanded="false"
+      aria-haspopup="true"
       aria-label="tooltip-Other"
-      class="relative"
       data-testid="tooltip-tooltip-Other"
       id="tooltip-Other"
+      tabindex="0"
       type="button"
     >
       <svg
@@ -280,10 +286,12 @@ exports[`renderer/components/filters/FilterSection.tsx should be able to toggle 
       Open
     </label>
     <button
+      aria-expanded="false"
+      aria-haspopup="true"
       aria-label="tooltip-Open"
-      class="relative"
       data-testid="tooltip-tooltip-Open"
       id="tooltip-Open"
+      tabindex="0"
       type="button"
     >
       <svg
@@ -358,10 +366,12 @@ exports[`renderer/components/filters/FilterSection.tsx should be able to toggle 
       Closed
     </label>
     <button
+      aria-expanded="false"
+      aria-haspopup="true"
       aria-label="tooltip-Closed"
-      class="relative"
       data-testid="tooltip-tooltip-Closed"
       id="tooltip-Closed"
+      tabindex="0"
       type="button"
     >
       <svg
@@ -409,10 +419,12 @@ exports[`renderer/components/filters/FilterSection.tsx should be able to toggle 
       Other
     </label>
     <button
+      aria-expanded="false"
+      aria-haspopup="true"
       aria-label="tooltip-Other"
-      class="relative"
       data-testid="tooltip-tooltip-Other"
       id="tooltip-Other"
+      tabindex="0"
       type="button"
     >
       <svg
@@ -546,10 +558,12 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
               Open
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-Open"
-              class="relative"
               data-testid="tooltip-tooltip-Open"
               id="tooltip-Open"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -624,10 +638,12 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
               Closed
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-Closed"
-              class="relative"
               data-testid="tooltip-tooltip-Closed"
               id="tooltip-Closed"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -675,10 +691,12 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
               Other
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-Other"
-              class="relative"
               data-testid="tooltip-tooltip-Other"
               id="tooltip-Other"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -809,10 +827,12 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
             Open
           </label>
           <button
+            aria-expanded="false"
+            aria-haspopup="true"
             aria-label="tooltip-Open"
-            class="relative"
             data-testid="tooltip-tooltip-Open"
             id="tooltip-Open"
+            tabindex="0"
             type="button"
           >
             <svg
@@ -887,10 +907,12 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
             Closed
           </label>
           <button
+            aria-expanded="false"
+            aria-haspopup="true"
             aria-label="tooltip-Closed"
-            class="relative"
             data-testid="tooltip-tooltip-Closed"
             id="tooltip-Closed"
+            tabindex="0"
             type="button"
           >
             <svg
@@ -938,10 +960,12 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
             Other
           </label>
           <button
+            aria-expanded="false"
+            aria-haspopup="true"
             aria-label="tooltip-Other"
-            class="relative"
             data-testid="tooltip-tooltip-Other"
             id="tooltip-Other"
+            tabindex="0"
             type="button"
           >
             <svg
@@ -1129,10 +1153,12 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
               Open
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-Open"
-              class="relative"
               data-testid="tooltip-tooltip-Open"
               id="tooltip-Open"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -1207,10 +1233,12 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
               Closed
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-Closed"
-              class="relative"
               data-testid="tooltip-tooltip-Closed"
               id="tooltip-Closed"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -1258,10 +1286,12 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
               Other
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-Other"
-              class="relative"
               data-testid="tooltip-tooltip-Other"
               id="tooltip-Other"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -1392,10 +1422,12 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
             Open
           </label>
           <button
+            aria-expanded="false"
+            aria-haspopup="true"
             aria-label="tooltip-Open"
-            class="relative"
             data-testid="tooltip-tooltip-Open"
             id="tooltip-Open"
+            tabindex="0"
             type="button"
           >
             <svg
@@ -1470,10 +1502,12 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
             Closed
           </label>
           <button
+            aria-expanded="false"
+            aria-haspopup="true"
             aria-label="tooltip-Closed"
-            class="relative"
             data-testid="tooltip-tooltip-Closed"
             id="tooltip-Closed"
+            tabindex="0"
             type="button"
           >
             <svg
@@ -1521,10 +1555,12 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
             Other
           </label>
           <button
+            aria-expanded="false"
+            aria-haspopup="true"
             aria-label="tooltip-Other"
-            class="relative"
             data-testid="tooltip-tooltip-Other"
             id="tooltip-Other"
+            tabindex="0"
             type="button"
           >
             <svg

@@ -45,10 +45,12 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
                 User Type
               </h2>
               <button
+                aria-expanded="false"
+                aria-haspopup="true"
                 aria-label="tooltip-user-type"
-                class="relative"
                 data-testid="tooltip-tooltip-user-type"
                 id="tooltip-user-type"
+                tabindex="0"
                 type="button"
               >
                 <svg
@@ -129,10 +131,12 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
               Bot
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-Bot"
-              class="relative"
               data-testid="tooltip-tooltip-Bot"
               id="tooltip-Bot"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -230,10 +234,12 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
               User Type
             </h2>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-user-type"
-              class="relative"
               data-testid="tooltip-tooltip-user-type"
               id="tooltip-user-type"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -314,10 +320,12 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
             Bot
           </label>
           <button
+            aria-expanded="false"
+            aria-haspopup="true"
             aria-label="tooltip-Bot"
-            class="relative"
             data-testid="tooltip-tooltip-Bot"
             id="tooltip-Bot"
+            tabindex="0"
             type="button"
           >
             <svg
