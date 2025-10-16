@@ -116,7 +116,7 @@ export function markNotificationThreadAsDone(
 }
 
 /**
- * Ignore future notifications for threads until you comment on the thread or get an`@mention`.
+ * Ignore future notifications for threads until you comment on the thread or get a `@mention`.
  *
  * Endpoint documentation: https://docs.github.com/en/rest/activity/notifications#delete-a-thread-subscription
  */
