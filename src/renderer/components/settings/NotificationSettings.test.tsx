@@ -1,6 +1,8 @@
 import { act, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+import { BaseStyles, ThemeProvider } from '@primer/react';
+
 import { mockAuth, mockSettings } from '../../__mocks__/state-mocks';
 import { Constants } from '../../constants';
 import { AppContext } from '../../context/App';
@@ -323,15 +325,19 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
 
     await act(async () => {
       render(
-        <AppContext.Provider
-          value={{
-            auth: mockAuth,
-            settings: mockSettings,
-            updateSetting,
-          }}
-        >
-          <NotificationSettings />
-        </AppContext.Provider>,
+        <ThemeProvider>
+          <BaseStyles>
+            <AppContext.Provider
+              value={{
+                auth: mockAuth,
+                settings: mockSettings,
+                updateSetting,
+              }}
+            >
+              <NotificationSettings />
+            </AppContext.Provider>
+          </BaseStyles>
+        </ThemeProvider>,
       );
     });
 
