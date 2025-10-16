@@ -2,6 +2,7 @@ import { act, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { mockAuth, mockSettings } from '../../__mocks__/state-mocks';
+import { Constants } from '../../constants';
 import { AppContext } from '../../context/App';
 import * as comms from '../../utils/comms';
 import { NotificationSettings } from './NotificationSettings';
@@ -55,68 +56,158 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
     expect(updateSetting).toHaveBeenCalledWith('fetchType', 'INACTIVITY');
   });
 
-  it('should update the fetch interval values when using the buttons', async () => {
-    await act(async () => {
-      render(
-        <AppContext.Provider
-          value={{
-            auth: mockAuth,
-            settings: mockSettings,
-            updateSetting,
-          }}
-        >
-          <NotificationSettings />
-        </AppContext.Provider>,
-      );
+  describe('fetch interval settings', () => {
+    it('should update the fetch interval values when using the buttons', async () => {
+      await act(async () => {
+        render(
+          <AppContext.Provider
+            value={{
+              auth: mockAuth,
+              settings: mockSettings,
+              updateSetting,
+            }}
+          >
+            <NotificationSettings />
+          </AppContext.Provider>,
+        );
+      });
+
+      // Increase fetch interval
+      await act(async () => {
+        await userEvent.click(
+          screen.getByTestId('settings-fetch-interval-increase'),
+        );
+
+        expect(updateSetting).toHaveBeenCalledTimes(1);
+        expect(updateSetting).toHaveBeenCalledWith('fetchInterval', 120000);
+      });
+
+      await act(async () => {
+        await userEvent.click(
+          screen.getByTestId('settings-fetch-interval-increase'),
+        );
+
+        expect(updateSetting).toHaveBeenCalledTimes(2);
+        expect(updateSetting).toHaveBeenNthCalledWith(
+          2,
+          'fetchInterval',
+          180000,
+        );
+      });
+
+      // Decrease fetch interval
+      await act(async () => {
+        await userEvent.click(
+          screen.getByTestId('settings-fetch-interval-decrease'),
+        );
+
+        expect(updateSetting).toHaveBeenCalledTimes(3);
+        expect(updateSetting).toHaveBeenNthCalledWith(
+          3,
+          'fetchInterval',
+          120000,
+        );
+      });
+
+      // Fetch interval reset
+      await act(async () => {
+        await userEvent.click(
+          screen.getByTestId('settings-fetch-interval-reset'),
+        );
+
+        expect(updateSetting).toHaveBeenCalledTimes(4);
+        expect(updateSetting).toHaveBeenNthCalledWith(
+          4,
+          'fetchInterval',
+          60000,
+        );
+      });
     });
 
-    // Increase fetch interval
-    await act(async () => {
-      await userEvent.click(
-        screen.getByTestId('settings-fetch-interval-increase'),
-      );
+    it('should prevent going lower than minimum interval', async () => {
+      await act(async () => {
+        render(
+          <AppContext.Provider
+            value={{
+              auth: mockAuth,
+              settings: {
+                ...mockSettings,
+                fetchInterval:
+                  Constants.MIN_FETCH_NOTIFICATIONS_INTERVAL_MS +
+                  Constants.FETCH_NOTIFICATIONS_INTERVAL_STEP_MS,
+              },
+              updateSetting,
+            }}
+          >
+            <NotificationSettings />
+          </AppContext.Provider>,
+        );
+      });
 
-      expect(updateSetting).toHaveBeenCalledTimes(1);
-      expect(updateSetting).toHaveBeenCalledWith('fetchInterval', 120000);
+      await act(async () => {
+        await userEvent.click(
+          screen.getByTestId('settings-fetch-interval-decrease'),
+        );
+
+        expect(updateSetting).toHaveBeenCalledTimes(1);
+        expect(updateSetting).toHaveBeenNthCalledWith(
+          1,
+          'fetchInterval',
+          60000,
+        );
+      });
+
+      // Attempt to go below the minimum interval, update settings should not be called
+      await act(async () => {
+        await userEvent.click(
+          screen.getByTestId('settings-fetch-interval-decrease'),
+        );
+
+        expect(updateSetting).toHaveBeenCalledTimes(1);
+      });
     });
 
-    await act(async () => {
-      await userEvent.click(
-        screen.getByTestId('settings-fetch-interval-increase'),
-      );
+    it('should prevent going above maximum interval', async () => {
+      await act(async () => {
+        render(
+          <AppContext.Provider
+            value={{
+              auth: mockAuth,
+              settings: {
+                ...mockSettings,
+                fetchInterval:
+                  Constants.MAX_FETCH_NOTIFICATIONS_INTERVAL_MS -
+                  Constants.FETCH_NOTIFICATIONS_INTERVAL_STEP_MS,
+              },
+              updateSetting,
+            }}
+          >
+            <NotificationSettings />
+          </AppContext.Provider>,
+        );
+      });
 
-      expect(updateSetting).toHaveBeenCalledTimes(2);
-      expect(updateSetting).toHaveBeenNthCalledWith(2, 'fetchInterval', 180000);
-    });
+      await act(async () => {
+        await userEvent.click(
+          screen.getByTestId('settings-fetch-interval-increase'),
+        );
 
-    // Decrease fetch interval
-    await act(async () => {
-      await userEvent.click(
-        screen.getByTestId('settings-fetch-interval-decrease'),
-      );
+        expect(updateSetting).toHaveBeenCalledTimes(1);
+        expect(updateSetting).toHaveBeenNthCalledWith(
+          1,
+          'fetchInterval',
+          3600000,
+        );
+      });
 
-      expect(updateSetting).toHaveBeenCalledTimes(3);
-      expect(updateSetting).toHaveBeenNthCalledWith(3, 'fetchInterval', 120000);
-    });
+      // Attempt to go above the maximum interval, update settings should not be called
+      await act(async () => {
+        await userEvent.click(
+          screen.getByTestId('settings-fetch-interval-increase'),
+        );
 
-    // Fetch interval reset
-    await act(async () => {
-      await userEvent.click(
-        screen.getByTestId('settings-fetch-interval-reset'),
-      );
-
-      expect(updateSetting).toHaveBeenCalledTimes(4);
-      expect(updateSetting).toHaveBeenNthCalledWith(4, 'fetchInterval', 60000);
-    });
-
-    // Prevent going lower than minimum interval
-    await act(async () => {
-      await userEvent.click(
-        screen.getByTestId('settings-fetch-interval-decrease'),
-      );
-
-      expect(updateSetting).toHaveBeenCalledTimes(4);
-      expect(updateSetting).toHaveBeenNthCalledWith(4, 'fetchInterval', 60000);
+        expect(updateSetting).toHaveBeenCalledTimes(1);
+      });
     });
   });
 
