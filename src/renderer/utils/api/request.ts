@@ -13,25 +13,19 @@ import { getNextURLFromLinkHeader } from './utils';
 
 type AxiosRequestConfigWithAccount = AxiosRequestConfig & { account: Account };
 
-const MUTATION_HTTP_METHODS: Set<Method> = new Set(['PATCH', 'PUT', 'DELETE']);
-
 const instance = Axios.create();
 const axios = setupCache(instance, {
   location: 'client',
 
-  // Respect ETags and cache headers from GitHub API
   interpretHeader: true,
-
-  // Set a reasonable TTL to ensure cache freshness (60 seconds)
-  // This ensures external changes (GitHub web/mobile) are picked up periodically
-  // ttl: 1000 * 60, // 60 seconds
-
-  cachePredicate: {
-    ignoreUrls: ['/login/oauth/access_token'],
-  },
 
   methods: ['get'],
 
+  cachePredicate: {
+    ignoreUrls: ['login/oauth/access_token', 'notifications'],
+  },
+
+  // Generate unique cache keys per account to prevent cross-account pollution
   generateKey: buildKeyGenerator((request: AxiosRequestConfigWithAccount) => {
     return {
       method: request.method,
@@ -40,24 +34,6 @@ const axios = setupCache(instance, {
     };
   }),
 });
-
-// Invalidate cache on mutating requests (PATCH, PUT, DELETE)
-// Only clears cache entries for the same account that made the mutation
-axios.interceptors.response.use(
-  async (response) => {
-    const method = response.config.method?.toUpperCase() as Method;
-    const config = response.config as AxiosRequestConfigWithAccount;
-
-    if (MUTATION_HTTP_METHODS.has(method) && config.account) {
-      await clearFullApiCache();
-    }
-    return response;
-  },
-  (error: Error) => {
-    // Pass through errors without clearing cache
-    return Promise.reject(error);
-  },
-);
 
 /**
  * Perform an unauthenticated API request
@@ -145,14 +121,15 @@ export async function apiRequestAuth(
 /**
  * Construct headers for API requests
  *
- * @param username
  * @param token
+ * @param skipCache - If true, adds cache-control: no-cache to force fresh data
  * @returns
  */
 async function getHeaders(token?: Token) {
   const headers: Record<string, string> = {
     Accept: 'application/json',
     'Content-Type': 'application/json',
+    'Cache-Control': 'no-cache',
   };
 
   if (token) {
@@ -162,12 +139,4 @@ async function getHeaders(token?: Token) {
   }
 
   return headers;
-}
-
-export async function clearFullApiCache(): Promise<void> {
-  try {
-    axios.storage.clear();
-  } catch (err) {
-    rendererLogError('clearFullApiCache', 'Failed to clear API cache', err);
-  }
 }
