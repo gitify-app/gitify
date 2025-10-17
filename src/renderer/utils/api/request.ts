@@ -13,7 +13,7 @@ import { getNextURLFromLinkHeader } from './utils';
 
 type AxiosRequestConfigWithAccount = AxiosRequestConfig & { account: Account };
 
-// const MUTATION_HTTP_METHODS: Set<Method> = new Set(['PATCH', 'PUT', 'DELETE']);
+const MUTATION_HTTP_METHODS: Set<Method> = new Set(['PATCH', 'PUT', 'DELETE']);
 
 const instance = Axios.create();
 const axios = setupCache(instance, {
@@ -43,21 +43,21 @@ const axios = setupCache(instance, {
 
 // Invalidate cache on mutating requests (PATCH, PUT, DELETE)
 // Only clears cache entries for the same account that made the mutation
-// axios.interceptors.response.use(
-//   async (response) => {
-//     const method = response.config.method?.toUpperCase() as Method;
-//     const config = response.config as AxiosRequestConfigWithAccount;
+axios.interceptors.response.use(
+  async (response) => {
+    const method = response.config.method?.toUpperCase() as Method;
+    const config = response.config as AxiosRequestConfigWithAccount;
 
-//     if (MUTATION_HTTP_METHODS.has(method) && config.account) {
-//       await clearFullApiCache();
-//     }
-//     return response;
-//   },
-//   (error: Error) => {
-//     // Pass through errors without clearing cache
-//     return Promise.reject(error);
-//   },
-// );
+    if (MUTATION_HTTP_METHODS.has(method) && config.account) {
+      await clearFullApiCache();
+    }
+    return response;
+  },
+  (error: Error) => {
+    // Pass through errors without clearing cache
+    return Promise.reject(error);
+  },
+);
 
 /**
  * Perform an unauthenticated API request
@@ -165,9 +165,9 @@ async function getHeaders(token?: Token) {
 }
 
 export async function clearFullApiCache(): Promise<void> {
-  // try {
-  //   axios.storage.clear();
-  // } catch (err) {
-  //   rendererLogError('clearFullApiCache', 'Failed to clear API cache', err);
-  // }
+  try {
+    axios.storage.clear();
+  } catch (err) {
+    rendererLogError('clearFullApiCache', 'Failed to clear API cache', err);
+  }
 }
