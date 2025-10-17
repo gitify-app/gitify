@@ -1,13 +1,26 @@
-import axios, {
+import Axios, {
   type AxiosPromise,
   type AxiosResponse,
   type Method,
 } from 'axios';
+import { setupCache } from 'axios-cache-interceptor';
 
 import type { Link, Token } from '../../types';
 import { decryptValue } from '../comms';
 import { rendererLogError } from '../logger';
 import { getNextURLFromLinkHeader } from './utils';
+
+const instance = Axios.create();
+const axios = setupCache(instance, {
+  location: 'client',
+  cachePredicate: {
+    ignoreUrls: [
+      '/login/oauth/access_token',
+      '/notifications',
+      '/api/v3/notifications',
+    ],
+  },
+});
 
 /**
  * Perform an unauthenticated API request
@@ -22,7 +35,7 @@ export async function apiRequest(
   method: Method,
   data = {},
 ): Promise<AxiosPromise | null> {
-  const headers = await getHeaders(url);
+  const headers = await getHeaders();
 
   return axios({ method, url, data, headers });
 }
@@ -44,7 +57,7 @@ export async function apiRequestAuth(
   data = {},
   fetchAllRecords = false,
 ): AxiosPromise | null {
-  const headers = await getHeaders(url, token);
+  const headers = await getHeaders(token);
 
   if (!fetchAllRecords) {
     return axios({ method, url, data, headers });
@@ -57,7 +70,12 @@ export async function apiRequestAuth(
     let nextUrl: string | null = url;
 
     while (nextUrl) {
-      response = await axios({ method, url: nextUrl, data, headers });
+      response = await axios({
+        method,
+        url: nextUrl,
+        data,
+        headers,
+      });
 
       // If no data is returned, break the loop
       if (!response?.data) {
@@ -81,35 +99,15 @@ export async function apiRequestAuth(
 }
 
 /**
- * Return true if the request should be made with no-cache
- *
- * @param url
- * @returns boolean
- */
-function shouldRequestWithNoCache(url: string) {
-  const parsedUrl = new URL(url);
-
-  switch (parsedUrl.pathname) {
-    case '/api/v3/notifications':
-    case '/login/oauth/access_token':
-    case '/notifications':
-      return true;
-    default:
-      return false;
-  }
-}
-
-/**
  * Construct headers for API requests
  *
  * @param username
  * @param token
  * @returns
  */
-async function getHeaders(url: Link, token?: Token) {
+async function getHeaders(token?: Token) {
   const headers: Record<string, string> = {
     Accept: 'application/json',
-    'Cache-Control': shouldRequestWithNoCache(url) ? 'no-cache' : '',
     'Content-Type': 'application/json',
   };
 
