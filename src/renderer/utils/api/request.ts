@@ -8,7 +8,7 @@ import { buildKeyGenerator, setupCache } from 'axios-cache-interceptor';
 
 import type { Account, Link, Token } from '../../types';
 import { decryptValue } from '../comms';
-import { rendererLogError } from '../logger';
+import { rendererLogError  } from '../logger';
 import { getNextURLFromLinkHeader } from './utils';
 
 type AxiosRequestConfigWithAccount = AxiosRequestConfig & { account: Account };
@@ -26,8 +26,6 @@ const axios = setupCache(instance, {
   },
 
   generateKey: buildKeyGenerator((request: AxiosRequestConfigWithAccount) => {
-    const req = request.account.user.id;
-    console.log('Generating cache key for request:', req);
     return {
       method: request.method,
       url: request.url,
@@ -139,4 +137,12 @@ async function getHeaders(token?: Token) {
   }
 
   return headers;
+}
+
+export async function clearApiCache(): Promise<void> {
+  try {
+    axios.storage.clear();
+  } catch (err) {
+    rendererLogError('clearApiCache', 'Failed to clear API cache', err);
+  }
 }

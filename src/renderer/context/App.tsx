@@ -28,6 +28,7 @@ import type {
 import { FetchType } from '../types';
 import type { Notification } from '../typesGitHub';
 import { headNotifications } from '../utils/api/client';
+import { clearApiCache } from '../utils/api/request';
 import type {
   LoginOAuthAppOptions,
   LoginPersonalAccessTokenOptions,
@@ -135,6 +136,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: We only want fetchNotifications to be called for particular state changes
   useEffect(() => {
+    clearApiCache();
     fetchNotifications({ auth, settings });
   }, [
     auth.accounts,
