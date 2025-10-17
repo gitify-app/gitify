@@ -193,7 +193,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
             popover="auto"
             role="tooltip"
           >
-            4 unread notifications
+            4 unread notifications ↗
           </span>
           <button
             aria-describedby="_r_5_-loading-announcement"
@@ -235,7 +235,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
             id="_r_4_"
             popover="auto"
           >
-            My issues
+            My issues ↗
           </span>
           <button
             aria-describedby="_r_7_-loading-announcement"
@@ -274,7 +274,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
             id="_r_6_"
             popover="auto"
           >
-            My pull requests
+            My pull requests ↗
           </span>
         </div>
         <div
@@ -452,7 +452,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
           popover="auto"
           role="tooltip"
         >
-          4 unread notifications
+          4 unread notifications ↗
         </span>
         <button
           aria-describedby="_r_5_-loading-announcement"
@@ -494,7 +494,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
           id="_r_4_"
           popover="auto"
         >
-          My issues
+          My issues ↗
         </span>
         <button
           aria-describedby="_r_7_-loading-announcement"
@@ -533,7 +533,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
           id="_r_6_"
           popover="auto"
         >
-          My pull requests
+          My pull requests ↗
         </span>
       </div>
       <div
@@ -768,7 +768,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
             popover="auto"
             role="tooltip"
           >
-            4 unread notifications
+            4 unread notifications ↗
           </span>
           <button
             aria-describedby="_r_f_-loading-announcement"
@@ -810,7 +810,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
             id="_r_e_"
             popover="auto"
           >
-            My issues
+            My issues ↗
           </span>
           <button
             aria-describedby="_r_h_-loading-announcement"
@@ -849,7 +849,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
             id="_r_g_"
             popover="auto"
           >
-            My pull requests
+            My pull requests ↗
           </span>
         </div>
         <div
@@ -1027,7 +1027,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
           popover="auto"
           role="tooltip"
         >
-          4 unread notifications
+          4 unread notifications ↗
         </span>
         <button
           aria-describedby="_r_f_-loading-announcement"
@@ -1069,7 +1069,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
           id="_r_e_"
           popover="auto"
         >
-          My issues
+          My issues ↗
         </span>
         <button
           aria-describedby="_r_h_-loading-announcement"
@@ -1108,7 +1108,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
           id="_r_g_"
           popover="auto"
         >
-          My pull requests
+          My pull requests ↗
         </span>
       </div>
       <div

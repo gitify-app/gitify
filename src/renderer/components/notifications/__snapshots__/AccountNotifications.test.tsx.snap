@@ -96,7 +96,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
         >
           <button
             aria-describedby="_r_l_-loading-announcement"
-            aria-label="My Issues"
+            aria-label="My issues ↗"
             class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
             data-component="IconButton"
             data-loading="false"
@@ -104,7 +104,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-size="small"
             data-testid="account-issues"
             data-variant="invisible"
-            title="My Issues"
+            title="My issues ↗"
             type="button"
           >
             <svg
@@ -129,7 +129,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           </button>
           <button
             aria-describedby="_r_m_-loading-announcement"
-            aria-label="My Pull Requests"
+            aria-label="My pull requests ↗"
             class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
             data-component="IconButton"
             data-loading="false"
@@ -137,7 +137,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-size="small"
             data-testid="account-pull-requests"
             data-variant="invisible"
-            title="My Pull Requests"
+            title="My pull requests ↗"
             type="button"
           >
             <svg
@@ -332,7 +332,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
       >
         <button
           aria-describedby="_r_l_-loading-announcement"
-          aria-label="My Issues"
+          aria-label="My issues ↗"
           class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
           data-component="IconButton"
           data-loading="false"
@@ -340,7 +340,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           data-size="small"
           data-testid="account-issues"
           data-variant="invisible"
-          title="My Issues"
+          title="My issues ↗"
           type="button"
         >
           <svg
@@ -365,7 +365,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
         </button>
         <button
           aria-describedby="_r_m_-loading-announcement"
-          aria-label="My Pull Requests"
+          aria-label="My pull requests ↗"
           class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
           data-component="IconButton"
           data-loading="false"
@@ -373,7 +373,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           data-size="small"
           data-testid="account-pull-requests"
           data-variant="invisible"
-          title="My Pull Requests"
+          title="My pull requests ↗"
           type="button"
         >
           <svg
@@ -625,7 +625,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
         >
           <button
             aria-describedby="_r_5_-loading-announcement"
-            aria-label="My Issues"
+            aria-label="My issues ↗"
             class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
             data-component="IconButton"
             data-loading="false"
@@ -633,7 +633,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-size="small"
             data-testid="account-issues"
             data-variant="invisible"
-            title="My Issues"
+            title="My issues ↗"
             type="button"
           >
             <svg
@@ -658,7 +658,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           </button>
           <button
             aria-describedby="_r_6_-loading-announcement"
-            aria-label="My Pull Requests"
+            aria-label="My pull requests ↗"
             class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
             data-component="IconButton"
             data-loading="false"
@@ -666,7 +666,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-size="small"
             data-testid="account-pull-requests"
             data-variant="invisible"
-            title="My Pull Requests"
+            title="My pull requests ↗"
             type="button"
           >
             <svg
@@ -1476,7 +1476,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
       >
         <button
           aria-describedby="_r_5_-loading-announcement"
-          aria-label="My Issues"
+          aria-label="My issues ↗"
           class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
           data-component="IconButton"
           data-loading="false"
@@ -1484,7 +1484,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           data-size="small"
           data-testid="account-issues"
           data-variant="invisible"
-          title="My Issues"
+          title="My issues ↗"
           type="button"
         >
           <svg
@@ -1509,7 +1509,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
         </button>
         <button
           aria-describedby="_r_6_-loading-announcement"
-          aria-label="My Pull Requests"
+          aria-label="My pull requests ↗"
           class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
           data-component="IconButton"
           data-loading="false"
@@ -1517,7 +1517,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           data-size="small"
           data-testid="account-pull-requests"
           data-variant="invisible"
-          title="My Pull Requests"
+          title="My pull requests ↗"
           type="button"
         >
           <svg
@@ -2384,7 +2384,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
         >
           <button
             aria-describedby="_r_1_-loading-announcement"
-            aria-label="My Issues"
+            aria-label="My issues ↗"
             class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
             data-component="IconButton"
             data-loading="false"
@@ -2392,7 +2392,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-size="small"
             data-testid="account-issues"
             data-variant="invisible"
-            title="My Issues"
+            title="My issues ↗"
             type="button"
           >
             <svg
@@ -2417,7 +2417,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           </button>
           <button
             aria-describedby="_r_2_-loading-announcement"
-            aria-label="My Pull Requests"
+            aria-label="My pull requests ↗"
             class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
             data-component="IconButton"
             data-loading="false"
@@ -2425,7 +2425,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-size="small"
             data-testid="account-pull-requests"
             data-variant="invisible"
-            title="My Pull Requests"
+            title="My pull requests ↗"
             type="button"
           >
             <svg
@@ -2574,7 +2574,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
       >
         <button
           aria-describedby="_r_1_-loading-announcement"
-          aria-label="My Issues"
+          aria-label="My issues ↗"
           class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
           data-component="IconButton"
           data-loading="false"
@@ -2582,7 +2582,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           data-size="small"
           data-testid="account-issues"
           data-variant="invisible"
-          title="My Issues"
+          title="My issues ↗"
           type="button"
         >
           <svg
@@ -2607,7 +2607,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
         </button>
         <button
           aria-describedby="_r_2_-loading-announcement"
-          aria-label="My Pull Requests"
+          aria-label="My pull requests ↗"
           class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
           data-component="IconButton"
           data-loading="false"
@@ -2615,7 +2615,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           data-size="small"
           data-testid="account-pull-requests"
           data-variant="invisible"
-          title="My Pull Requests"
+          title="My pull requests ↗"
           type="button"
         >
           <svg
@@ -2821,7 +2821,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
         >
           <button
             aria-describedby="_r_h_-loading-announcement"
-            aria-label="My Issues"
+            aria-label="My issues ↗"
             class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
             data-component="IconButton"
             data-loading="false"
@@ -2829,7 +2829,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-size="small"
             data-testid="account-issues"
             data-variant="invisible"
-            title="My Issues"
+            title="My issues ↗"
             type="button"
           >
             <svg
@@ -2854,7 +2854,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           </button>
           <button
             aria-describedby="_r_i_-loading-announcement"
-            aria-label="My Pull Requests"
+            aria-label="My pull requests ↗"
             class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
             data-component="IconButton"
             data-loading="false"
@@ -2862,7 +2862,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-size="small"
             data-testid="account-pull-requests"
             data-variant="invisible"
-            title="My Pull Requests"
+            title="My pull requests ↗"
             type="button"
           >
             <svg
@@ -3052,7 +3052,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
       >
         <button
           aria-describedby="_r_h_-loading-announcement"
-          aria-label="My Issues"
+          aria-label="My issues ↗"
           class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
           data-component="IconButton"
           data-loading="false"
@@ -3060,7 +3060,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           data-size="small"
           data-testid="account-issues"
           data-variant="invisible"
-          title="My Issues"
+          title="My issues ↗"
           type="button"
         >
           <svg
@@ -3085,7 +3085,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
         </button>
         <button
           aria-describedby="_r_i_-loading-announcement"
-          aria-label="My Pull Requests"
+          aria-label="My pull requests ↗"
           class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
           data-component="IconButton"
           data-loading="false"
@@ -3093,7 +3093,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           data-size="small"
           data-testid="account-pull-requests"
           data-variant="invisible"
-          title="My Pull Requests"
+          title="My pull requests ↗"
           type="button"
         >
           <svg
@@ -3340,7 +3340,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
         >
           <button
             aria-describedby="_r_15_-loading-announcement"
-            aria-label="My Issues"
+            aria-label="My issues ↗"
             class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
             data-component="IconButton"
             data-loading="false"
@@ -3348,7 +3348,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
             data-size="small"
             data-testid="account-issues"
             data-variant="invisible"
-            title="My Issues"
+            title="My issues ↗"
             type="button"
           >
             <svg
@@ -3373,7 +3373,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
           </button>
           <button
             aria-describedby="_r_16_-loading-announcement"
-            aria-label="My Pull Requests"
+            aria-label="My pull requests ↗"
             class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
             data-component="IconButton"
             data-loading="false"
@@ -3381,7 +3381,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
             data-size="small"
             data-testid="account-pull-requests"
             data-variant="invisible"
-            title="My Pull Requests"
+            title="My pull requests ↗"
             type="button"
           >
             <svg
@@ -3526,7 +3526,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
         >
           <button
             aria-describedby="_r_19_-loading-announcement"
-            aria-label="My Issues"
+            aria-label="My issues ↗"
             class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
             data-component="IconButton"
             data-loading="false"
@@ -3534,7 +3534,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
             data-size="small"
             data-testid="account-issues"
             data-variant="invisible"
-            title="My Issues"
+            title="My issues ↗"
             type="button"
           >
             <svg
@@ -3559,7 +3559,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
           </button>
           <button
             aria-describedby="_r_1a_-loading-announcement"
-            aria-label="My Pull Requests"
+            aria-label="My pull requests ↗"
             class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
             data-component="IconButton"
             data-loading="false"
@@ -3567,7 +3567,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
             data-size="small"
             data-testid="account-pull-requests"
             data-variant="invisible"
-            title="My Pull Requests"
+            title="My pull requests ↗"
             type="button"
           >
             <svg
@@ -3716,7 +3716,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
       >
         <button
           aria-describedby="_r_19_-loading-announcement"
-          aria-label="My Issues"
+          aria-label="My issues ↗"
           class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
           data-component="IconButton"
           data-loading="false"
@@ -3724,7 +3724,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
           data-size="small"
           data-testid="account-issues"
           data-variant="invisible"
-          title="My Issues"
+          title="My issues ↗"
           type="button"
         >
           <svg
@@ -3749,7 +3749,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
         </button>
         <button
           aria-describedby="_r_1a_-loading-announcement"
-          aria-label="My Pull Requests"
+          aria-label="My pull requests ↗"
           class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
           data-component="IconButton"
           data-loading="false"
@@ -3757,7 +3757,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
           data-size="small"
           data-testid="account-pull-requests"
           data-variant="invisible"
-          title="My Pull Requests"
+          title="My pull requests ↗"
           type="button"
         >
           <svg
