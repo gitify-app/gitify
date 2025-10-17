@@ -130,7 +130,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
               popover="auto"
               role="tooltip"
             >
-              0 unread notifications
+              0 unread notifications ↗
             </span>
             <button
               aria-describedby="_r_5_-loading-announcement"
@@ -172,7 +172,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
               id="_r_4_"
               popover="auto"
             >
-              My issues
+              My issues ↗
             </span>
             <button
               aria-describedby="_r_7_-loading-announcement"
@@ -211,7 +211,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
               id="_r_6_"
               popover="auto"
             >
-              My pull requests
+              My pull requests ↗
             </span>
           </div>
           <div
@@ -398,7 +398,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
             popover="auto"
             role="tooltip"
           >
-            0 unread notifications
+            0 unread notifications ↗
           </span>
           <button
             aria-describedby="_r_5_-loading-announcement"
@@ -440,7 +440,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
             id="_r_4_"
             popover="auto"
           >
-            My issues
+            My issues ↗
           </span>
           <button
             aria-describedby="_r_7_-loading-announcement"
@@ -479,7 +479,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
             id="_r_6_"
             popover="auto"
           >
-            My pull requests
+            My pull requests ↗
           </span>
         </div>
         <div

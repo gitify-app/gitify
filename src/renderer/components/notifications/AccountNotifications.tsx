@@ -105,14 +105,14 @@ export const AccountNotifications: FC<IAccountNotifications> = (
             <HoverButton
               action={() => openGitHubIssues(account.hostname)}
               icon={IssueOpenedIcon}
-              label="My Issues"
+              label="My issues ↗"
               testid="account-issues"
             />
 
             <HoverButton
               action={() => openGitHubPulls(account.hostname)}
               icon={GitPullRequestIcon}
-              label="My Pull Requests"
+              label="My pull requests ↗"
               testid="account-pull-requests"
             />
 

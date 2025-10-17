@@ -98,7 +98,7 @@ export const Sidebar: FC = () => {
         <IconButton
           aria-label="Notifications"
           data-testid="sidebar-notifications"
-          description={`${notificationsCount} unread notifications`}
+          description={`${notificationsCount} unread notifications ↗`}
           icon={BellIcon}
           onClick={() => openGitHubNotifications(primaryAccountHostname)}
           size="small"
@@ -124,7 +124,7 @@ export const Sidebar: FC = () => {
         )}
 
         <IconButton
-          aria-label="My issues"
+          aria-label="My issues ↗"
           data-testid="sidebar-my-issues"
           icon={IssueOpenedIcon}
           onClick={() => openGitHubIssues(primaryAccountHostname)}
@@ -136,7 +136,7 @@ export const Sidebar: FC = () => {
         />
 
         <IconButton
-          aria-label="My pull requests"
+          aria-label="My pull requests ↗"
           data-testid="sidebar-my-pull-requests"
           icon={GitPullRequestIcon}
           onClick={() => openGitHubPulls(primaryAccountHostname)}
