@@ -18,11 +18,14 @@ const axios = setupCache(instance, {
   location: 'client',
 
   interpretHeader: true,
+  etag: false,
+  modifiedSince: true,
 
   methods: ['get'],
 
   cachePredicate: {
-    ignoreUrls: ['login/oauth/access_token', 'notifications'],
+    ignoreUrls: ['login/oauth/access_token'],
+    // ignoreUrls: ['login/oauth/access_token', 'notifications'],
   },
 
   // Generate unique cache keys per account to prevent cross-account pollution
