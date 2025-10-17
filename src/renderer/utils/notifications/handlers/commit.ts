@@ -35,15 +35,15 @@ class CommitHandler extends DefaultHandler {
     if (notification.subject.latest_comment_url) {
       const commitComment = (
         await getCommitComment(
+          notification.account,
           notification.subject.latest_comment_url,
-          notification.account.token,
         )
       ).data;
 
       user = commitComment.user;
     } else {
       const commit = (
-        await getCommit(notification.subject.url, notification.account.token)
+        await getCommit(notification.account, notification.subject.url)
       ).data;
 
       user = commit.author;

@@ -3,7 +3,7 @@ import Axios, {
   type AxiosResponse,
   type Method,
 } from 'axios';
-import { setupCache } from 'axios-cache-interceptor';
+import { buildKeyGenerator, setupCache } from 'axios-cache-interceptor';
 
 import type { Link, Token } from '../../types';
 import { decryptValue } from '../comms';
@@ -13,13 +13,20 @@ import { getNextURLFromLinkHeader } from './utils';
 const instance = Axios.create();
 const axios = setupCache(instance, {
   location: 'client',
+
   cachePredicate: {
     ignoreUrls: [
       '/login/oauth/access_token',
-      '/notifications',
-      '/api/v3/notifications',
+      // '/notifications',
+      // '/api/v3/notifications',
     ],
   },
+
+  generateKey: buildKeyGenerator((request) => ({
+    method: request.method,
+    url: request.url,
+    custom: request.auth,
+  })),
 });
 
 /**

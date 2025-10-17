@@ -5,7 +5,7 @@ import {
   mockGitHubEnterpriseServerAccount,
   mockToken,
 } from '../../__mocks__/state-mocks';
-import type { Hostname, Link, SettingsState, Token } from '../../types';
+import type { Hostname, Link, SettingsState } from '../../types';
 import * as logger from '../../utils/logger';
 import {
   getAuthenticatedUser,
@@ -172,11 +172,7 @@ describe('renderer/utils/api/client.ts', () => {
 
   describe('markNotificationThreadAsRead', () => {
     it('should mark notification thread as read - github', async () => {
-      await markNotificationThreadAsRead(
-        mockThreadId,
-        mockGitHubHostname,
-        mockToken,
-      );
+      await markNotificationThreadAsRead(mockGitHubCloudAccount, mockThreadId);
 
       expect(axios).toHaveBeenCalledWith({
         url: `https://api.github.com/notifications/threads/${mockThreadId}`,
@@ -193,13 +189,12 @@ describe('renderer/utils/api/client.ts', () => {
 
     it('should mark notification thread as read - enterprise', async () => {
       await markNotificationThreadAsRead(
+        mockGitHubEnterpriseServerAccount,
         mockThreadId,
-        mockEnterpriseHostname,
-        mockToken,
       );
 
       expect(axios).toHaveBeenCalledWith({
-        url: `https://example.com/api/v3/notifications/threads/${mockThreadId}`,
+        url: `https://github.gitify.io/api/v3/notifications/threads/${mockThreadId}`,
         headers: {
           Accept: 'application/json',
           Authorization: 'token decrypted',
@@ -214,11 +209,7 @@ describe('renderer/utils/api/client.ts', () => {
 
   describe('markNotificationThreadAsDone', () => {
     it('should mark notification thread as done - github', async () => {
-      await markNotificationThreadAsDone(
-        mockThreadId,
-        mockGitHubHostname,
-        mockToken,
-      );
+      await markNotificationThreadAsDone(mockGitHubCloudAccount, mockThreadId);
 
       expect(axios).toHaveBeenCalledWith({
         url: `https://api.github.com/notifications/threads/${mockThreadId}`,
@@ -235,9 +226,8 @@ describe('renderer/utils/api/client.ts', () => {
 
     it('should mark notification thread as done - enterprise', async () => {
       await markNotificationThreadAsDone(
+        mockGitHubEnterpriseServerAccount,
         mockThreadId,
-        mockEnterpriseHostname,
-        mockToken,
       );
 
       expect(axios).toHaveBeenCalledWith({
@@ -257,9 +247,8 @@ describe('renderer/utils/api/client.ts', () => {
   describe('ignoreNotificationThreadSubscription', () => {
     it('should ignore notification thread subscription - github', async () => {
       await ignoreNotificationThreadSubscription(
+        mockGitHubCloudAccount,
         mockThreadId,
-        mockGitHubHostname,
-        mockToken,
       );
 
       expect(axios).toHaveBeenCalledWith({
@@ -277,13 +266,12 @@ describe('renderer/utils/api/client.ts', () => {
 
     it('should ignore notification thread subscription - enterprise', async () => {
       await ignoreNotificationThreadSubscription(
+        mockGitHubEnterpriseServerAccount,
         mockThreadId,
-        mockEnterpriseHostname,
-        mockToken,
       );
 
       expect(axios).toHaveBeenCalledWith({
-        url: `https://example.com/api/v3/notifications/threads/${mockThreadId}/subscription`,
+        url: `https://github.gitify.io/api/v3/notifications/threads/${mockThreadId}/subscription`,
         headers: {
           Accept: 'application/json',
           Authorization: 'token decrypted',
@@ -312,8 +300,8 @@ describe('renderer/utils/api/client.ts', () => {
       apiRequestAuthMock.mockResolvedValue(requestPromise);
 
       const result = await getHtmlUrl(
+        mockGitHubCloudAccount,
         'https://api.github.com/repos/gitify-app/notifications-test/issues/785' as Link,
-        '123' as Token,
       );
       expect(result).toBe(
         'https://github.com/gitify-app/notifications-test/issues/785',
@@ -332,8 +320,8 @@ describe('renderer/utils/api/client.ts', () => {
       apiRequestAuthMock.mockRejectedValue(mockError);
 
       await getHtmlUrl(
+        mockGitHubCloudAccount,
         'https://api.github.com/repos/gitify-app/gitify/issues/785' as Link,
-        '123' as Token,
       );
 
       expect(rendererLogErrorSpy).toHaveBeenCalledTimes(1);

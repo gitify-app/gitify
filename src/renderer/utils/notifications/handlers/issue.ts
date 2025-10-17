@@ -29,7 +29,7 @@ class IssueHandler extends DefaultHandler {
     settings: SettingsState,
   ): Promise<GitifySubject> {
     const issue = (
-      await getIssue(notification.subject.url, notification.account.token)
+      await getIssue(notification.account, notification.subject.url)
     ).data;
 
     const issueState = issue.state_reason ?? issue.state;
@@ -44,8 +44,8 @@ class IssueHandler extends DefaultHandler {
     if (notification.subject.latest_comment_url) {
       const issueComment = (
         await getIssueOrPullRequestComment(
+          notification.account,
           notification.subject.latest_comment_url,
-          notification.account.token,
         )
       ).data;
       issueCommentUser = issueComment.user;

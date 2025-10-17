@@ -36,7 +36,7 @@ class PullRequestHandler extends DefaultHandler {
     settings: SettingsState,
   ): Promise<GitifySubject> {
     const pr = (
-      await getPullRequest(notification.subject.url, notification.account.token)
+      await getPullRequest(notification.account, notification.subject.url)
     ).data;
 
     let prState: PullRequestStateType = pr.state;
@@ -58,8 +58,8 @@ class PullRequestHandler extends DefaultHandler {
     ) {
       const prComment = (
         await getIssueOrPullRequestComment(
+          notification.account,
           notification.subject.latest_comment_url,
-          notification.account.token,
         )
       ).data;
       prCommentUser = prComment.user;
@@ -111,8 +111,8 @@ export async function getLatestReviewForReviewers(
   }
 
   const prReviews = await getPullRequestReviews(
+    notification.account,
     `${notification.subject.url}/reviews` as Link,
-    notification.account.token,
   );
 
   if (!prReviews.data.length) {

@@ -117,13 +117,13 @@ export async function generateGitHubWebUrl(
   try {
     if (notification.subject.latest_comment_url) {
       url.href = await getHtmlUrl(
+        notification.account,
         notification.subject.latest_comment_url,
-        notification.account.token,
       );
     } else if (notification.subject.url) {
       url.href = await getHtmlUrl(
+        notification.account,
         notification.subject.url,
-        notification.account.token,
       );
     } else {
       // Perform any specific notification type handling (only required for a few special notification scenarios)

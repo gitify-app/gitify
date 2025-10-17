@@ -30,7 +30,7 @@ class ReleaseHandler extends DefaultHandler {
     }
 
     const release = (
-      await getRelease(notification.subject.url, notification.account.token)
+      await getRelease(notification.account, notification.subject.url)
     ).data;
 
     return {
