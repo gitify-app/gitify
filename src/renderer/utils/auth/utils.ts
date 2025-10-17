@@ -9,12 +9,10 @@ import type {
   AuthCode,
   AuthState,
   ClientID,
-  GitifyUser,
   Hostname,
   Link,
   Token,
 } from '../../types';
-import type { UserDetails } from '../../typesGitHub';
 import { getAuthenticatedUser } from '../api/client';
 import { apiRequest } from '../api/request';
 import { encryptValue, openExternalLink } from '../comms';
@@ -71,21 +69,6 @@ export function authGitHub(
       handleCallback(callbackUrl);
     });
   });
-}
-
-export async function getUserData(
-  token: Token,
-  hostname: Hostname,
-): Promise<GitifyUser> {
-  const response: UserDetails = (await getAuthenticatedUser(hostname, token))
-    .data;
-
-  return {
-    id: response.id,
-    login: response.login,
-    name: response.name,
-    avatar: response.avatar_url,
-  };
 }
 
 export async function getToken(
@@ -156,7 +139,7 @@ export function removeAccount(auth: AuthState, account: Account): AuthState {
 
 export async function refreshAccount(account: Account): Promise<Account> {
   try {
-    const res = await getAuthenticatedUser(account.hostname, account.token);
+    const res = await getAuthenticatedUser(account);
 
     // Refresh user data
     account.user = {

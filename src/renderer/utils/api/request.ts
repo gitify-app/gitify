@@ -1,14 +1,17 @@
 import Axios, {
   type AxiosPromise,
+  type AxiosRequestConfig,
   type AxiosResponse,
   type Method,
 } from 'axios';
 import { buildKeyGenerator, setupCache } from 'axios-cache-interceptor';
 
-import type { Link, Token } from '../../types';
+import type { Account, Link, Token } from '../../types';
 import { decryptValue } from '../comms';
 import { rendererLogError } from '../logger';
 import { getNextURLFromLinkHeader } from './utils';
+
+type AxiosRequestConfigWithAccount = AxiosRequestConfig & { account: Account };
 
 const instance = Axios.create();
 const axios = setupCache(instance, {
@@ -22,11 +25,15 @@ const axios = setupCache(instance, {
     ],
   },
 
-  generateKey: buildKeyGenerator((request) => ({
-    method: request.method,
-    url: request.url,
-    custom: request.auth,
-  })),
+  generateKey: buildKeyGenerator((request: AxiosRequestConfigWithAccount) => {
+    const req = request.account.user.id;
+    console.log('Generating cache key for request:', req);
+    return {
+      method: request.method,
+      url: request.url,
+      custom: request.account.user.id,
+    };
+  }),
 });
 
 /**
@@ -52,7 +59,7 @@ export async function apiRequest(
  *
  * @param url
  * @param method
- * @param token
+ * @param account
  * @param data
  * @param fetchAllRecords whether to fetch all records or just the first page
  * @returns
@@ -60,36 +67,43 @@ export async function apiRequest(
 export async function apiRequestAuth(
   url: Link,
   method: Method,
-  token: Token,
-  data = {},
+  account: Account,
+  data: Record<string, unknown> = {},
   fetchAllRecords = false,
 ): AxiosPromise | null {
-  const headers = await getHeaders(token);
+  const headers = await getHeaders(account.token);
+
+  const baseConfig: AxiosRequestConfigWithAccount = {
+    method,
+    url,
+    data,
+    headers,
+    account,
+  };
 
   if (!fetchAllRecords) {
-    return axios({ method, url, data, headers });
+    return axios(baseConfig);
   }
 
   let response: AxiosResponse | null = null;
-  let combinedData = [];
+  let combinedData: unknown[] = [];
 
   try {
     let nextUrl: string | null = url;
 
     while (nextUrl) {
-      response = await axios({
-        method,
+      const cfg: AxiosRequestConfigWithAccount = {
+        ...baseConfig,
         url: nextUrl,
-        data,
-        headers,
-      });
+      };
+      response = await axios(cfg);
 
       // If no data is returned, break the loop
       if (!response?.data) {
         break;
       }
 
-      combinedData = combinedData.concat(response.data); // Accumulate data
+      combinedData = combinedData.concat(response.data as unknown[]); // Accumulate data
 
       nextUrl = getNextURLFromLinkHeader(response);
     }

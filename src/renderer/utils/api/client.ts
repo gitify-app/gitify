@@ -35,13 +35,12 @@ import { getGitHubAPIBaseUrl, getGitHubGraphQLUrl } from './utils';
  * Endpoint documentation: https://docs.github.com/en/rest/users/users#get-the-authenticated-user
  */
 export function getAuthenticatedUser(
-  hostname: Hostname,
-  token: Token,
+  account: Account,
 ): AxiosPromise<UserDetails> {
-  const url = getGitHubAPIBaseUrl(hostname);
+  const url = getGitHubAPIBaseUrl(account.hostname);
   url.pathname += 'user';
 
-  return apiRequestAuth(url.toString() as Link, 'GET', token);
+  return apiRequestAuth(url.toString() as Link, 'GET', account);
 }
 
 /**
@@ -56,7 +55,12 @@ export function headNotifications(
   const url = getGitHubAPIBaseUrl(hostname);
   url.pathname += 'notifications';
 
-  return apiRequestAuth(url.toString() as Link, 'HEAD', token);
+  const tmpAccount: Account = {
+    hostname,
+    token,
+  } as Partial<Account> as Account;
+
+  return apiRequestAuth(url.toString() as Link, 'HEAD', tmpAccount);
 }
 
 /**
@@ -75,7 +79,7 @@ export function listNotificationsForAuthenticatedUser(
   return apiRequestAuth(
     url.toString() as Link,
     'GET',
-    account.token,
+    account,
     {},
     settings.fetchAllNotifications,
   );
@@ -94,7 +98,7 @@ export function markNotificationThreadAsRead(
   const url = getGitHubAPIBaseUrl(account.hostname);
   url.pathname += `notifications/threads/${threadId}`;
 
-  return apiRequestAuth(url.toString() as Link, 'PATCH', account.token, {});
+  return apiRequestAuth(url.toString() as Link, 'PATCH', account, {}, false);
 }
 
 /**
@@ -112,7 +116,7 @@ export function markNotificationThreadAsDone(
   const url = getGitHubAPIBaseUrl(account.hostname);
   url.pathname += `notifications/threads/${threadId}`;
 
-  return apiRequestAuth(url.toString() as Link, 'DELETE', account.token, {});
+  return apiRequestAuth(url.toString() as Link, 'DELETE', account, {}, false);
 }
 
 /**
@@ -127,9 +131,15 @@ export function ignoreNotificationThreadSubscription(
   const url = getGitHubAPIBaseUrl(account.hostname);
   url.pathname += `notifications/threads/${threadId}/subscription`;
 
-  return apiRequestAuth(url.toString() as Link, 'PUT', account.token, {
-    ignored: true,
-  });
+  return apiRequestAuth(
+    url.toString() as Link,
+    'PUT',
+    account,
+    {
+      ignored: true,
+    },
+    false,
+  );
 }
 
 /**
@@ -138,7 +148,7 @@ export function ignoreNotificationThreadSubscription(
  * Endpoint documentation: https://docs.github.com/en/rest/commits/commits#get-a-commit
  */
 export function getCommit(account: Account, url: Link): AxiosPromise<Commit> {
-  return apiRequestAuth(url, 'GET', account.token);
+  return apiRequestAuth(url, 'GET', account, {}, false);
 }
 
 /**
@@ -151,7 +161,7 @@ export function getCommitComment(
   account: Account,
   url: Link,
 ): AxiosPromise<CommitComment> {
-  return apiRequestAuth(url, 'GET', account.token);
+  return apiRequestAuth(url, 'GET', account, {}, false);
 }
 
 /**
@@ -160,7 +170,7 @@ export function getCommitComment(
  * Endpoint documentation: https://docs.github.com/en/rest/issues/issues#get-an-issue
  */
 export function getIssue(account: Account, url: Link): AxiosPromise<Issue> {
-  return apiRequestAuth(url, 'GET', account.token);
+  return apiRequestAuth(url, 'GET', account, {}, false);
 }
 
 /**
@@ -173,7 +183,7 @@ export function getIssueOrPullRequestComment(
   account: Account,
   url: Link,
 ): AxiosPromise<IssueOrPullRequestComment> {
-  return apiRequestAuth(url, 'GET', account.token);
+  return apiRequestAuth(url, 'GET', account, {}, false);
 }
 
 /**
@@ -185,7 +195,7 @@ export function getPullRequest(
   account: Account,
   url: Link,
 ): AxiosPromise<PullRequest> {
-  return apiRequestAuth(url, 'GET', account.token);
+  return apiRequestAuth(url, 'GET', account, {}, false);
 }
 
 /**
@@ -197,7 +207,7 @@ export function getPullRequestReviews(
   account: Account,
   url: Link,
 ): AxiosPromise<PullRequestReview[]> {
-  return apiRequestAuth(url, 'GET', account.token);
+  return apiRequestAuth(url, 'GET', account, {}, false);
 }
 
 /**
@@ -206,7 +216,7 @@ export function getPullRequestReviews(
  * Endpoint documentation: https://docs.github.com/en/rest/releases/releases#get-a-release
  */
 export function getRelease(account: Account, url: Link): AxiosPromise<Release> {
-  return apiRequestAuth(url, 'GET', account.token);
+  return apiRequestAuth(url, 'GET', account);
 }
 
 /**
@@ -214,7 +224,8 @@ export function getRelease(account: Account, url: Link): AxiosPromise<Release> {
  */
 export async function getHtmlUrl(account: Account, url: Link): Promise<string> {
   try {
-    const response = (await apiRequestAuth(url, 'GET', account.token)).data;
+    const response = (await apiRequestAuth(url, 'GET', account, {}, false))
+      .data;
     return response.html_url;
   } catch (err) {
     rendererLogError(
@@ -238,7 +249,7 @@ export async function searchDiscussions(
   return apiRequestAuth(
     url.toString() as Link,
     'POST',
-    notification.account.token,
+    notification.account,
     {
       query: print(QUERY_SEARCH_DISCUSSIONS),
       variables: {
@@ -255,6 +266,7 @@ export async function searchDiscussions(
         ),
       },
     },
+    false,
   );
 }
 

@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-import type { Link, Token } from '../../types';
+import { mockGitHubCloudAccount } from '../../__mocks__/state-mocks';
+import type { Link } from '../../types';
 import { apiRequest, apiRequestAuth } from './request';
 
 jest.mock('axios');
@@ -48,8 +49,6 @@ describe('renderer/utils/api/request.ts', () => {
 });
 
 describe('apiRequestAuth', () => {
-  const token = 'yourAuthToken' as Token;
-
   afterEach(() => {
     jest.clearAllMocks();
   });
@@ -57,7 +56,7 @@ describe('apiRequestAuth', () => {
   it('should make an authenticated request with the correct parameters', async () => {
     const data = { key: 'value' };
 
-    await apiRequestAuth(url, method, token, data);
+    await apiRequestAuth(url, method, mockGitHubCloudAccount, data);
 
     expect(axios).toHaveBeenCalledWith({
       method,
@@ -75,7 +74,7 @@ describe('apiRequestAuth', () => {
   it('should make an authenticated request with the correct parameters and default data', async () => {
     const data = {};
 
-    await apiRequestAuth(url, method, token);
+    await apiRequestAuth(url, method, mockGitHubCloudAccount);
 
     expect(axios).toHaveBeenCalledWith({
       method,

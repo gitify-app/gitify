@@ -31,7 +31,7 @@ describe('renderer/utils/api/client.ts', () => {
 
   describe('getAuthenticatedUser', () => {
     it('should fetch authenticated user - github', async () => {
-      await getAuthenticatedUser(mockGitHubHostname, mockToken);
+      await getAuthenticatedUser(mockGitHubCloudAccount);
 
       expect(axios).toHaveBeenCalledWith({
         url: 'https://api.github.com/user',
@@ -47,10 +47,10 @@ describe('renderer/utils/api/client.ts', () => {
     });
 
     it('should fetch authenticated user - enterprise', async () => {
-      await getAuthenticatedUser(mockEnterpriseHostname, mockToken);
+      await getAuthenticatedUser(mockGitHubEnterpriseServerAccount);
 
       expect(axios).toHaveBeenCalledWith({
-        url: 'https://example.com/api/v3/user',
+        url: 'https://github.gitify.io/api/v3/user',
         headers: {
           Accept: 'application/json',
           Authorization: 'token decrypted',
