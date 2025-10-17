@@ -1,5 +1,6 @@
 import { Octokit } from '@octokit/core';
 import { paginateRest } from '@octokit/plugin-paginate-rest';
+import { restEndpointMethods } from '@octokit/plugin-rest-endpoint-methods';
 
 import { logWarn } from '../../../shared/logger';
 import type { Hostname, Token } from '../../types';
@@ -7,7 +8,7 @@ import { decryptValue } from '../comms';
 import { getGitHubAPIBaseUrl } from './utils';
 
 // Create the Octokit class with pagination plugin
-const OctokitWithPagination = Octokit.plugin(paginateRest);
+const OctokitWithPagination = Octokit.plugin(restEndpointMethods, paginateRest);
 
 /**
  * Create an Octokit client instance for a given hostname and token
@@ -20,7 +21,7 @@ export async function createOctokitClient(
   // TODO - Remove this try-catch block in a future release
   try {
     apiToken = (await decryptValue(token)) as Token;
-  } catch (err) {
+  } catch (_err) {
     logWarn('createOctokitClient', 'Token is not yet encrypted');
   }
 

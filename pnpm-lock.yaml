@@ -51,6 +51,9 @@ importers:
       '@octokit/core':
         specifier: ^6.1.6
         version: 6.1.6
+      '@octokit/plugin-rest-endpoint-methods':
+        specifier: ^16.1.0
+        version: 16.1.0(@octokit/core@6.1.6)
       '@primer/octicons-react':
         specifier: 19.15.5
         version: 19.15.5(react@19.1.1)
@@ -779,8 +782,17 @@ packages:
   '@octokit/openapi-types@25.1.0':
     resolution: {integrity: sha512-idsIggNXUKkk0+BExUn1dQ92sfysJrje03Q0bv0e+KPLrvyqZF8MnBpFz8UNfYDwB3Ie7Z0TByjWfzxt7vseaA==}
 
+  '@octokit/openapi-types@26.0.0':
+    resolution: {integrity: sha512-7AtcfKtpo77j7Ts73b4OWhOZHTKo/gGY8bB3bNBQz4H+GRSWqx2yvj8TXRsbdTE0eRmYmXOEY66jM7mJ7LzfsA==}
+
   '@octokit/plugin-paginate-rest@13.1.1':
     resolution: {integrity: sha512-q9iQGlZlxAVNRN2jDNskJW/Cafy7/XE52wjZ5TTvyhyOD904Cvx//DNyoO3J/MXJ0ve3rPoNWKEg5iZrisQSuw==}
+    engines: {node: '>= 20'}
+    peerDependencies:
+      '@octokit/core': '>=6'
+
+  '@octokit/plugin-rest-endpoint-methods@16.1.0':
+    resolution: {integrity: sha512-nCsyiKoGRnhH5LkH8hJEZb9swpqOcsW+VXv1QoyUNQXJeVODG4+xM6UICEqyqe9XFr6LkL8BIiFCPev8zMDXPw==}
     engines: {node: '>= 20'}
     peerDependencies:
       '@octokit/core': '>=6'
@@ -795,6 +807,9 @@ packages:
 
   '@octokit/types@14.1.0':
     resolution: {integrity: sha512-1y6DgTy8Jomcpu33N+p5w58l6xyt55Ar2I91RPiIA0xCJBXyUAhXCcmZaDWSANiha7R9a6qJJ2CRomGPZ6f46g==}
+
+  '@octokit/types@15.0.0':
+    resolution: {integrity: sha512-8o6yDfmoGJUIeR9OfYU0/TUJTnMPG2r68+1yEdUeG2Fdqpj8Qetg0ziKIgcBm0RW/j29H41WP37CYCEhp6GoHQ==}
 
   '@oddbird/popover-polyfill@0.3.8':
     resolution: {integrity: sha512-+aK7EHL3VggfsWGVqUwvtli2+kP5OWyseAsrefhzR2XWoi2oALUCeoDn63i5WS3ZOmLiXHRNBwHPeta8w+aM1g==}
@@ -5575,10 +5590,17 @@ snapshots:
 
   '@octokit/openapi-types@25.1.0': {}
 
+  '@octokit/openapi-types@26.0.0': {}
+
   '@octokit/plugin-paginate-rest@13.1.1(@octokit/core@6.1.6)':
     dependencies:
       '@octokit/core': 6.1.6
       '@octokit/types': 14.1.0
+
+  '@octokit/plugin-rest-endpoint-methods@16.1.0(@octokit/core@6.1.6)':
+    dependencies:
+      '@octokit/core': 6.1.6
+      '@octokit/types': 15.0.0
 
   '@octokit/request-error@6.1.8':
     dependencies:
@@ -5595,6 +5617,10 @@ snapshots:
   '@octokit/types@14.1.0':
     dependencies:
       '@octokit/openapi-types': 25.1.0
+
+  '@octokit/types@15.0.0':
+    dependencies:
+      '@octokit/openapi-types': 26.0.0
 
   '@oddbird/popover-polyfill@0.3.8': {}
 

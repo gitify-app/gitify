@@ -64,20 +64,45 @@ export function headNotifications(
  *
  * Endpoint documentation: https://docs.github.com/en/rest/activity/notifications#list-notifications-for-the-authenticated-user
  */
-export function listNotificationsForAuthenticatedUser(
+export async function listNotificationsForAuthenticatedUser(
   account: Account,
   settings: SettingsState,
-): AxiosPromise<Notification[]> {
-  const url = getGitHubAPIBaseUrl(account.hostname);
-  url.pathname += 'notifications';
-  url.searchParams.append('participating', String(settings.participating));
-  return apiRequestAuth(
-    url.toString() as Link,
-    'GET',
-    account.token,
-    {},
-    settings.fetchAllNotifications,
-  );
+): Promise<AxiosPromise<Notification[]>> {
+  const octokit = await createOctokitClient(account.hostname, account.token);
+
+  let response: any;
+
+  if (settings.fetchAllNotifications) {
+    response = await octokit.paginate.iterator(
+      octokit.rest.activity.listNotificationsForAuthenticatedUser,
+      {
+        participating: settings.participating,
+      },
+    );
+  }
+
+  response = await octokit.rest.activity.listNotificationsForAuthenticatedUser({
+    participating: settings.participating,
+  });
+
+  // Return axios-like response format
+  return {
+    data: response,
+    status: 200,
+    statusText: 'OK',
+    headers: {},
+  } as any;
+
+  // const url = getGitHubAPIBaseUrl(account.hostname);
+  // url.pathname += 'notifications';
+  // url.searchParams.append('participating', String(settings.participating));
+  // return apiRequestAuth(
+  //   url.toString() as Link,
+  //   'GET',
+  //   account.token,
+  //   {},
+  //   settings.fetchAllNotifications,
+  // );
 }
 
 /**
@@ -239,7 +264,7 @@ export async function searchDiscussions(
     notification.account.hostname,
     notification.account.token,
   );
-  
+
   const result = await octokit.graphql(print(QUERY_SEARCH_DISCUSSIONS), {
     queryStatement: formatAsGitHubSearchSyntax(
       notification.repository.full_name,
