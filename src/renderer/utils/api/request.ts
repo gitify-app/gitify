@@ -8,22 +8,29 @@ import { buildKeyGenerator, setupCache } from 'axios-cache-interceptor';
 
 import type { Account, Link, Token } from '../../types';
 import { decryptValue } from '../comms';
-import { rendererLogError  } from '../logger';
+import { rendererLogError } from '../logger';
 import { getNextURLFromLinkHeader } from './utils';
 
 type AxiosRequestConfigWithAccount = AxiosRequestConfig & { account: Account };
+
+// const MUTATION_HTTP_METHODS: Set<Method> = new Set(['PATCH', 'PUT', 'DELETE']);
 
 const instance = Axios.create();
 const axios = setupCache(instance, {
   location: 'client',
 
+  // Respect ETags and cache headers from GitHub API
+  interpretHeader: true,
+
+  // Set a reasonable TTL to ensure cache freshness (60 seconds)
+  // This ensures external changes (GitHub web/mobile) are picked up periodically
+  // ttl: 1000 * 60, // 60 seconds
+
   cachePredicate: {
-    ignoreUrls: [
-      '/login/oauth/access_token',
-      // '/notifications',
-      // '/api/v3/notifications',
-    ],
+    ignoreUrls: ['/login/oauth/access_token'],
   },
+
+  methods: ['get'],
 
   generateKey: buildKeyGenerator((request: AxiosRequestConfigWithAccount) => {
     return {
@@ -33,6 +40,24 @@ const axios = setupCache(instance, {
     };
   }),
 });
+
+// Invalidate cache on mutating requests (PATCH, PUT, DELETE)
+// Only clears cache entries for the same account that made the mutation
+// axios.interceptors.response.use(
+//   async (response) => {
+//     const method = response.config.method?.toUpperCase() as Method;
+//     const config = response.config as AxiosRequestConfigWithAccount;
+
+//     if (MUTATION_HTTP_METHODS.has(method) && config.account) {
+//       await clearFullApiCache();
+//     }
+//     return response;
+//   },
+//   (error: Error) => {
+//     // Pass through errors without clearing cache
+//     return Promise.reject(error);
+//   },
+// );
 
 /**
  * Perform an unauthenticated API request
@@ -139,10 +164,10 @@ async function getHeaders(token?: Token) {
   return headers;
 }
 
-export async function clearApiCache(): Promise<void> {
-  try {
-    axios.storage.clear();
-  } catch (err) {
-    rendererLogError('clearApiCache', 'Failed to clear API cache', err);
-  }
+export async function clearFullApiCache(): Promise<void> {
+  // try {
+  //   axios.storage.clear();
+  // } catch (err) {
+  //   rendererLogError('clearFullApiCache', 'Failed to clear API cache', err);
+  // }
 }

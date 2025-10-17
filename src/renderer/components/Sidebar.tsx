@@ -16,7 +16,7 @@ import { APPLICATION } from '../../shared/constants';
 
 import { Constants } from '../constants';
 import { AppContext } from '../context/App';
-import { clearApiCache } from '../utils/api/request';
+import { clearFullApiCache } from '../utils/api/request';
 import { quitApp } from '../utils/comms';
 import {
   openGitHubIssues,
@@ -65,7 +65,7 @@ export const Sidebar: FC = () => {
     navigate('/', { replace: true });
 
     // Clear client cache so we fetch fresh data when user manually refreshes
-    clearApiCache();
+    clearFullApiCache();
     fetchNotifications();
   };
 
