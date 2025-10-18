@@ -6,7 +6,7 @@ exports[`renderer/components/primitives/CustomCounter.tsx should render itself &
   "baseElement": <body>
     <div>
       <span
-        class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+        class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
       >
         100
       </span>
@@ -14,7 +14,7 @@ exports[`renderer/components/primitives/CustomCounter.tsx should render itself &
   </body>,
   "container": <div>
     <span
-      class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+      class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
     >
       100
     </span>

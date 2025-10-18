@@ -130,7 +130,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               </svg>
             </button>
             <span
-              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
@@ -183,7 +183,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               </svg>
             </button>
             <span
-              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
@@ -236,7 +236,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               </svg>
             </button>
             <span
-              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               1
             </span>
@@ -289,7 +289,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               </svg>
             </button>
             <span
-              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
@@ -342,7 +342,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               </svg>
             </button>
             <span
-              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
@@ -395,7 +395,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               </svg>
             </button>
             <span
-              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
@@ -448,7 +448,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               </svg>
             </button>
             <span
-              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
@@ -501,7 +501,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               </svg>
             </button>
             <span
-              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
@@ -554,7 +554,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               </svg>
             </button>
             <span
-              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
@@ -607,7 +607,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               </svg>
             </button>
             <span
-              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
@@ -660,7 +660,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               </svg>
             </button>
             <span
-              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
@@ -713,7 +713,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               </svg>
             </button>
             <span
-              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
@@ -766,7 +766,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               </svg>
             </button>
             <span
-              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
@@ -819,7 +819,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               </svg>
             </button>
             <span
-              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               3
             </span>
@@ -872,7 +872,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               </svg>
             </button>
             <span
-              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
@@ -1007,7 +1007,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             </svg>
           </button>
           <span
-            class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+            class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
           >
             0
           </span>
@@ -1060,7 +1060,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             </svg>
           </button>
           <span
-            class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+            class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
           >
             0
           </span>
@@ -1113,7 +1113,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             </svg>
           </button>
           <span
-            class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+            class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
           >
             1
           </span>
@@ -1166,7 +1166,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             </svg>
           </button>
           <span
-            class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+            class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
           >
             0
           </span>
@@ -1219,7 +1219,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             </svg>
           </button>
           <span
-            class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+            class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
           >
             0
           </span>
@@ -1272,7 +1272,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             </svg>
           </button>
           <span
-            class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+            class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
           >
             0
           </span>
@@ -1325,7 +1325,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             </svg>
           </button>
           <span
-            class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+            class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
           >
             0
           </span>
@@ -1378,7 +1378,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             </svg>
           </button>
           <span
-            class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+            class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
           >
             0
           </span>
@@ -1431,7 +1431,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             </svg>
           </button>
           <span
-            class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+            class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
           >
             0
           </span>
@@ -1484,7 +1484,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             </svg>
           </button>
           <span
-            class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+            class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
           >
             0
           </span>
@@ -1537,7 +1537,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             </svg>
           </button>
           <span
-            class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+            class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
           >
             0
           </span>
@@ -1590,7 +1590,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             </svg>
           </button>
           <span
-            class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+            class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
           >
             0
           </span>
@@ -1643,7 +1643,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             </svg>
           </button>
           <span
-            class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+            class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
           >
             0
           </span>
@@ -1696,7 +1696,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             </svg>
           </button>
           <span
-            class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+            class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
           >
             3
           </span>
@@ -1749,7 +1749,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
             </svg>
           </button>
           <span
-            class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+            class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
           >
             0
           </span>

@@ -418,7 +418,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               User
             </label>
             <span
-              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
@@ -471,7 +471,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               </svg>
             </button>
             <span
-              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
@@ -498,7 +498,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Organization
             </label>
             <span
-              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
@@ -604,7 +604,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Check Suite
             </label>
             <span
-              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
@@ -631,7 +631,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Commit
             </label>
             <span
-              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
@@ -658,7 +658,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Discussion
             </label>
             <span
-              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
@@ -685,7 +685,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Issue
             </label>
             <span
-              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
@@ -712,7 +712,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Pull Request
             </label>
             <span
-              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
@@ -739,7 +739,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Release
             </label>
             <span
-              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
@@ -766,7 +766,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Dependabot Alert
             </label>
             <span
-              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
@@ -793,7 +793,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Invitation
             </label>
             <span
-              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
@@ -820,7 +820,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Vulnerability Alert
             </label>
             <span
-              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
@@ -847,7 +847,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Workflow Run
             </label>
             <span
-              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
@@ -956,7 +956,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Draft
             </label>
             <span
-              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
@@ -1009,7 +1009,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               </svg>
             </button>
             <span
-              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
@@ -1036,7 +1036,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Merged
             </label>
             <span
-              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
@@ -1089,7 +1089,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               </svg>
             </button>
             <span
-              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
@@ -1142,7 +1142,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               </svg>
             </button>
             <span
-              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
@@ -1274,7 +1274,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               </svg>
             </button>
             <span
-              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
@@ -1327,7 +1327,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               </svg>
             </button>
             <span
-              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
@@ -1380,7 +1380,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               </svg>
             </button>
             <span
-              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
@@ -1433,7 +1433,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               </svg>
             </button>
             <span
-              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
@@ -1486,7 +1486,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               </svg>
             </button>
             <span
-              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
@@ -1539,7 +1539,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               </svg>
             </button>
             <span
-              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
@@ -1592,7 +1592,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               </svg>
             </button>
             <span
-              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
@@ -1645,7 +1645,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               </svg>
             </button>
             <span
-              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
@@ -1698,7 +1698,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               </svg>
             </button>
             <span
-              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
@@ -1751,7 +1751,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               </svg>
             </button>
             <span
-              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
@@ -1804,7 +1804,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               </svg>
             </button>
             <span
-              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
@@ -1857,7 +1857,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               </svg>
             </button>
             <span
-              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
@@ -1910,7 +1910,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               </svg>
             </button>
             <span
-              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
@@ -1963,7 +1963,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               </svg>
             </button>
             <span
-              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
@@ -2016,7 +2016,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               </svg>
             </button>
             <span
-              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>

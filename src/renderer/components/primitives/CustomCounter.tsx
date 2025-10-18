@@ -24,7 +24,7 @@ export const CustomCounter: FC<ICustomCounter> = ({
   scheme = 'secondary',
 }) => {
   const baseStyles =
-    'px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text';
+    'px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text';
 
   const schemeStyles = {
     primary: 'bg-gitify-counter-primary',
