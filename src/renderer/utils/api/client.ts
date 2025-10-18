@@ -71,6 +71,7 @@ export function listNotificationsForAuthenticatedUser(
   const url = getGitHubAPIBaseUrl(account.hostname);
   url.pathname += 'notifications';
   url.searchParams.append('participating', String(settings.participating));
+
   return apiRequestAuth(
     url.toString() as Link,
     'GET',
@@ -112,6 +113,7 @@ export function markNotificationThreadAsDone(
 ): AxiosPromise<void> {
   const url = getGitHubAPIBaseUrl(hostname);
   url.pathname += `notifications/threads/${threadId}`;
+
   return apiRequestAuth(url.toString() as Link, 'DELETE', token, {});
 }
 
@@ -216,6 +218,7 @@ export function getRelease(url: Link, token: Token): AxiosPromise<Release> {
 export async function getHtmlUrl(url: Link, token: Token): Promise<string> {
   try {
     const response = (await apiRequestAuth(url, 'GET', token)).data;
+
     return response.html_url;
   } catch (err) {
     rendererLogError(
@@ -236,6 +239,7 @@ export async function searchDiscussions(
   notification: Notification,
 ): AxiosPromise<GraphQLSearch<Discussion>> {
   const url = getGitHubGraphQLUrl(notification.account.hostname);
+
   return apiRequestAuth(
     url.toString() as Link,
     'POST',
