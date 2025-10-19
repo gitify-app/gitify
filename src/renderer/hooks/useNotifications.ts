@@ -23,6 +23,18 @@ import {
 } from '../utils/notifications/notifications';
 import { removeNotifications } from '../utils/notifications/remove';
 
+// Apply optimistic local updates for read state when delayNotificationState is enabled
+function applyLocalOptimisticRead(
+  state: GitifyState,
+  targetNotifications: Notification[],
+) {
+  if (state.settings.delayNotificationState) {
+    for (const n of targetNotifications) {
+      n.unread = false;
+    }
+  }
+}
+
 interface NotificationsState {
   notifications: AccountNotifications[];
   removeAccountNotifications: (account: Account) => Promise<void>;
@@ -125,6 +137,8 @@ export const useNotifications = (): NotificationsState => {
           notifications,
         );
 
+        applyLocalOptimisticRead(state, readNotifications);
+
         setNotifications(updatedNotifications);
         setTrayIconColor(updatedNotifications);
       } catch (err) {
@@ -162,6 +176,8 @@ export const useNotifications = (): NotificationsState => {
           doneNotifications,
           notifications,
         );
+
+        applyLocalOptimisticRead(state, doneNotifications);
 
         setNotifications(updatedNotifications);
         setTrayIconColor(updatedNotifications);

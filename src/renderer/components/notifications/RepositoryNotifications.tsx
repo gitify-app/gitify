@@ -27,7 +27,6 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
   const { settings, markNotificationsAsRead, markNotificationsAsDone } =
     useContext(AppContext);
   const [animateExit, setAnimateExit] = useState(false);
-  const [showAsRead, setShowAsRead] = useState(false);
   const [showRepositoryNotifications, setShowRepositoryNotifications] =
     useState(true);
 
@@ -35,19 +34,21 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
 
   const actionMarkAsDone = () => {
     setAnimateExit(!settings.delayNotificationState);
-    setShowAsRead(settings.delayNotificationState);
     markNotificationsAsDone(repoNotifications);
   };
 
   const actionMarkAsRead = () => {
     setAnimateExit(!settings.delayNotificationState);
-    setShowAsRead(settings.delayNotificationState);
     markNotificationsAsRead(repoNotifications);
   };
 
   const actionToggleRepositoryNotifications = () => {
     setShowRepositoryNotifications(!showRepositoryNotifications);
   };
+
+  const areAllRepoNotificationsRead = repoNotifications.every(
+    (notification) => !notification.unread,
+  );
 
   const Chevron = getChevronDetails(
     true,
@@ -63,7 +64,7 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
           'bg-gitify-repository',
           animateExit &&
             'translate-x-full opacity-0 transition duration-350 ease-in-out',
-          showAsRead && Opacity.READ,
+          areAllRepoNotificationsRead && Opacity.READ,
         )}
         direction="horizontal"
         onClick={actionToggleRepositoryNotifications}
@@ -122,7 +123,6 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
         repoNotifications.map((notification) => (
           <NotificationRow
             isAnimated={animateExit}
-            isRead={showAsRead}
             key={notification.id}
             notification={notification}
           />
