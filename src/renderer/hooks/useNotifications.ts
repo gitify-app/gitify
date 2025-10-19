@@ -156,21 +156,23 @@ export const useNotifications = (): NotificationsState => {
 
   const markNotificationsAsDone = useCallback(
     async (state: GitifyState, doneNotifications: Notification[]) => {
+      if (!isMarkAsDoneFeatureSupported(doneNotifications[0].account)) {
+        return;
+      }
+
       setStatus('loading');
 
       try {
-        if (isMarkAsDoneFeatureSupported(doneNotifications[0].account)) {
-          await Promise.all(
-            doneNotifications.map((notification) =>
-              markNotificationThreadAsDone(
-                notification.id,
-                notification.account.hostname,
-                notification.account.token,
-              ),
+        await Promise.all(
+          doneNotifications.map((notification) =>
+            markNotificationThreadAsDone(
+              notification.id,
+              notification.account.hostname,
+              notification.account.token,
             ),
-          );
-        }
-
+          ),
+        );
+        
         const updatedNotifications = removeNotifications(
           state.settings,
           doneNotifications,
