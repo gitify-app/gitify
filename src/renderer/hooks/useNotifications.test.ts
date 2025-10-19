@@ -27,6 +27,9 @@ describe('renderer/hooks/useNotifications.ts', () => {
     // by nock. So, configure axios to use the node adapter.
     axios.defaults.adapter = 'http';
     rendererLogErrorSpy.mockReset();
+
+    // Reset mock notification state between tests since it's mutated
+    mockSingleNotification.unread = true;
   });
 
   const id = mockSingleNotification.id;
@@ -367,6 +370,32 @@ describe('renderer/hooks/useNotifications.ts', () => {
       });
 
       expect(result.current.notifications.length).toBe(0);
+      expect(mockSingleNotification.unread).toBeTruthy();
+    });
+
+    it('should mark notifications as read with success - delayNotificationState', async () => {
+      nock('https://api.github.com/')
+        .patch(`/notifications/threads/${id}`)
+        .reply(200);
+
+      const { result } = renderHook(() => useNotifications());
+
+      act(() => {
+        result.current.markNotificationsAsRead(
+          {
+            ...mockState,
+            settings: { ...mockState.settings, delayNotificationState: true },
+          },
+          [mockSingleNotification],
+        );
+      });
+
+      await waitFor(() => {
+        expect(result.current.status).toBe('success');
+      });
+
+      expect(result.current.notifications.length).toBe(0);
+      expect(mockSingleNotification.unread).toBeFalsy();
     });
 
     it('should mark notifications as read with failure', async () => {
@@ -410,6 +439,32 @@ describe('renderer/hooks/useNotifications.ts', () => {
       });
 
       expect(result.current.notifications.length).toBe(0);
+      expect(mockSingleNotification.unread).toBeTruthy();
+    });
+
+    it('should mark notifications as done with success - delayNotificationState', async () => {
+      nock('https://api.github.com/')
+        .delete(`/notifications/threads/${id}`)
+        .reply(200);
+
+      const { result } = renderHook(() => useNotifications());
+
+      act(() => {
+        result.current.markNotificationsAsDone(
+          {
+            ...mockState,
+            settings: { ...mockState.settings, delayNotificationState: true },
+          },
+          [mockSingleNotification],
+        );
+      });
+
+      await waitFor(() => {
+        expect(result.current.status).toBe('success');
+      });
+
+      expect(result.current.notifications.length).toBe(0);
+      expect(mockSingleNotification.unread).toBeFalsy();
     });
 
     it('should mark notifications as done with failure', async () => {
