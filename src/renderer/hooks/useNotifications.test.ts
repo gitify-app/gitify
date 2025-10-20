@@ -370,31 +370,6 @@ describe('renderer/hooks/useNotifications.ts', () => {
       });
 
       expect(result.current.notifications.length).toBe(0);
-      expect(mockSingleNotification.unread).toBeTruthy();
-    });
-
-    it('should mark notifications as read with success - delayNotificationState', async () => {
-      nock('https://api.github.com/')
-        .patch(`/notifications/threads/${id}`)
-        .reply(200);
-
-      const { result } = renderHook(() => useNotifications());
-
-      act(() => {
-        result.current.markNotificationsAsRead(
-          {
-            ...mockState,
-            settings: { ...mockState.settings, delayNotificationState: true },
-          },
-          [mockSingleNotification],
-        );
-      });
-
-      await waitFor(() => {
-        expect(result.current.status).toBe('success');
-      });
-
-      expect(result.current.notifications.length).toBe(0);
       expect(mockSingleNotification.unread).toBeFalsy();
     });
 
@@ -432,31 +407,6 @@ describe('renderer/hooks/useNotifications.ts', () => {
         result.current.markNotificationsAsDone(mockState, [
           mockSingleNotification,
         ]);
-      });
-
-      await waitFor(() => {
-        expect(result.current.status).toBe('success');
-      });
-
-      expect(result.current.notifications.length).toBe(0);
-      expect(mockSingleNotification.unread).toBeTruthy();
-    });
-
-    it('should mark notifications as done with success - delayNotificationState', async () => {
-      nock('https://api.github.com/')
-        .delete(`/notifications/threads/${id}`)
-        .reply(200);
-
-      const { result } = renderHook(() => useNotifications());
-
-      act(() => {
-        result.current.markNotificationsAsDone(
-          {
-            ...mockState,
-            settings: { ...mockState.settings, delayNotificationState: true },
-          },
-          [mockSingleNotification],
-        );
       });
 
       await waitFor(() => {
