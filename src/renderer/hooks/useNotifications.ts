@@ -172,7 +172,7 @@ export const useNotifications = (): NotificationsState => {
             ),
           ),
         );
-        
+
         const updatedNotifications = removeNotifications(
           state.settings,
           doneNotifications,
