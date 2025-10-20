@@ -23,6 +23,16 @@ import {
 } from '../utils/notifications/notifications';
 import { removeNotifications } from '../utils/notifications/remove';
 
+/**
+ * Apply optimistic local updates for read state.  This helps with some
+ * rendering edge cases between fetch notification intervals.
+ */
+function markNotificationsAsReadLocally(targetNotifications: Notification[]) {
+  for (const n of targetNotifications) {
+    n.unread = false;
+  }
+}
+
 interface NotificationsState {
   notifications: AccountNotifications[];
   removeAccountNotifications: (account: Account) => Promise<void>;
@@ -125,6 +135,8 @@ export const useNotifications = (): NotificationsState => {
           notifications,
         );
 
+        markNotificationsAsReadLocally(readNotifications);
+
         setNotifications(updatedNotifications);
         setTrayIconColor(updatedNotifications);
       } catch (err) {
@@ -142,26 +154,30 @@ export const useNotifications = (): NotificationsState => {
 
   const markNotificationsAsDone = useCallback(
     async (state: GitifyState, doneNotifications: Notification[]) => {
+      if (!isMarkAsDoneFeatureSupported(doneNotifications[0].account)) {
+        return;
+      }
+
       setStatus('loading');
 
       try {
-        if (isMarkAsDoneFeatureSupported(doneNotifications[0].account)) {
-          await Promise.all(
-            doneNotifications.map((notification) =>
-              markNotificationThreadAsDone(
-                notification.id,
-                notification.account.hostname,
-                notification.account.token,
-              ),
+        await Promise.all(
+          doneNotifications.map((notification) =>
+            markNotificationThreadAsDone(
+              notification.id,
+              notification.account.hostname,
+              notification.account.token,
             ),
-          );
-        }
+          ),
+        );
 
         const updatedNotifications = removeNotifications(
           state.settings,
           doneNotifications,
           notifications,
         );
+
+        markNotificationsAsReadLocally(doneNotifications);
 
         setNotifications(updatedNotifications);
         setTrayIconColor(updatedNotifications);
