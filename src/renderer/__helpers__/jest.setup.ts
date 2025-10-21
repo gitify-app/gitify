@@ -67,7 +67,7 @@ global.CSS = {
   }),
 };
 
-// @ts-expect-error: prevent ReferenceError: TextEncoder is not defined
+// prevent ReferenceError: TextEncoder is not defined
 global.TextEncoder = TextEncoder;
 
 /**
