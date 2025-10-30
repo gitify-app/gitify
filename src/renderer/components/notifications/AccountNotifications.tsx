@@ -52,7 +52,7 @@ export const AccountNotifications: FC<IAccountNotifications> = (
       { account, error, notifications: sortedNotifications },
     ]);
 
-    return Array.from(map.values());
+    return Array.from(map.entries());
   }, [account, error, sortedNotifications]);
 
   const hasNotifications = useMemo(
@@ -131,17 +131,13 @@ export const AccountNotifications: FC<IAccountNotifications> = (
           {props.error && <Oops error={props.error} fullHeight={false} />}
           {!hasNotifications && !props.error && <AllRead fullHeight={false} />}
           {isGroupByRepository(settings)
-            ? groupedNotifications.map((repoNotifications) => {
-                const repoSlug = repoNotifications[0].repository.full_name;
-
-                return (
-                  <RepositoryNotifications
-                    key={repoSlug}
-                    repoName={repoSlug}
-                    repoNotifications={repoNotifications}
-                  />
-                );
-              })
+            ? groupedNotifications.map(([repoSlug, repoNotifications]) => (
+                <RepositoryNotifications
+                  key={repoSlug}
+                  repoName={repoSlug}
+                  repoNotifications={repoNotifications}
+                />
+              ))
             : sortedNotifications.map((notification) => (
                 <NotificationRow
                   key={notification.id}

@@ -24,13 +24,25 @@ import {
 import { removeNotifications } from '../utils/notifications/remove';
 
 /**
- * Apply optimistic local updates for read state.  This helps with some
- * rendering edge cases between fetch notification intervals.
+ * Apply read state updates to all notifications, replacing the target notifications
+ * with new objects that have unread: false. This is used for optimistic UI updates.
  */
-function markNotificationsAsReadLocally(targetNotifications: Notification[]) {
-  for (const n of targetNotifications) {
-    n.unread = false;
-  }
+function applyReadStateToNotifications(
+  allNotifications: AccountNotifications[],
+  readNotifications: Notification[],
+): AccountNotifications[] {
+  const readNotificationIDs = new Set<string>(
+    readNotifications.map((notification) => notification.id),
+  );
+
+  return allNotifications.map((accountNotifications) => ({
+    ...accountNotifications,
+    notifications: accountNotifications.notifications.map((notification) =>
+      readNotificationIDs.has(notification.id)
+        ? { ...notification, unread: false }
+        : notification,
+    ),
+  }));
 }
 
 interface NotificationsState {
@@ -129,13 +141,16 @@ export const useNotifications = (): NotificationsState => {
           ),
         );
 
-        const updatedNotifications = removeNotifications(
+        let updatedNotifications = removeNotifications(
           state.settings,
           readNotifications,
           notifications,
         );
 
-        markNotificationsAsReadLocally(readNotifications);
+        updatedNotifications = applyReadStateToNotifications(
+          updatedNotifications,
+          readNotifications,
+        );
 
         setNotifications(updatedNotifications);
         setTrayIconColor(updatedNotifications);
@@ -171,13 +186,16 @@ export const useNotifications = (): NotificationsState => {
           ),
         );
 
-        const updatedNotifications = removeNotifications(
+        let updatedNotifications = removeNotifications(
           state.settings,
           doneNotifications,
           notifications,
         );
 
-        markNotificationsAsReadLocally(doneNotifications);
+        updatedNotifications = applyReadStateToNotifications(
+          updatedNotifications,
+          doneNotifications,
+        );
 
         setNotifications(updatedNotifications);
         setTrayIconColor(updatedNotifications);
