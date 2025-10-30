@@ -42,6 +42,10 @@ describe('renderer/context/App.tsx', () => {
       .spyOn(notifications, 'setTrayIconColorAndTitle')
       .mockImplementation(jest.fn());
 
+    jest
+      .spyOn(notifications, 'getUnreadNotificationCount')
+      .mockImplementation(jest.fn());
+
     const fetchNotificationsMock = jest.fn();
     const markNotificationsAsReadMock = jest.fn();
     const markNotificationsAsDoneMock = jest.fn();
@@ -70,8 +74,6 @@ describe('renderer/context/App.tsx', () => {
     it('fetch notifications every minute', async () => {
       customRender(null);
 
-      // Wait for the useEffects, for settings.participating and accounts, to run.
-      // Those aren't what we're testing
       await waitFor(() =>
         expect(fetchNotificationsMock).toHaveBeenCalledTimes(1),
       );
@@ -80,7 +82,6 @@ describe('renderer/context/App.tsx', () => {
         jest.advanceTimersByTime(
           Constants.DEFAULT_FETCH_NOTIFICATIONS_INTERVAL_MS,
         );
-        return;
       });
       expect(fetchNotificationsMock).toHaveBeenCalledTimes(2);
 
@@ -88,7 +89,6 @@ describe('renderer/context/App.tsx', () => {
         jest.advanceTimersByTime(
           Constants.DEFAULT_FETCH_NOTIFICATIONS_INTERVAL_MS,
         );
-        return;
       });
       expect(fetchNotificationsMock).toHaveBeenCalledTimes(3);
 
@@ -96,7 +96,6 @@ describe('renderer/context/App.tsx', () => {
         jest.advanceTimersByTime(
           Constants.DEFAULT_FETCH_NOTIFICATIONS_INTERVAL_MS,
         );
-        return;
       });
       expect(fetchNotificationsMock).toHaveBeenCalledTimes(4);
     });

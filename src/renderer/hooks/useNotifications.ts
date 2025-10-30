@@ -83,6 +83,7 @@ export const useNotifications = (): NotificationsState => {
       setStatus('loading');
       setGlobalError(null);
 
+      const previousNotifications = notifications;
       const fetchedNotifications = await getAllNotifications(state);
 
       // Set Global Error if all accounts have the same error
@@ -109,8 +110,13 @@ export const useNotifications = (): NotificationsState => {
         return;
       }
 
+      triggerNativeNotifications(
+        previousNotifications,
+        fetchedNotifications,
+        state,
+      );
+
       setNotifications(fetchedNotifications);
-      triggerNativeNotifications(notifications, fetchedNotifications, state);
 
       setStatus('success');
     },
