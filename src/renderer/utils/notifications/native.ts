@@ -3,6 +3,7 @@ import { APPLICATION } from '../../../shared/constants';
 import type { AccountNotifications, GitifyState } from '../../types';
 import type { Notification } from '../../typesGitHub';
 import { getAccountUUID } from '../auth/utils';
+import { generateGitHubWebUrl } from '../helpers';
 import { setTrayIconColor } from './notifications';
 
 export const triggerNativeNotifications = (
@@ -50,10 +51,12 @@ export const triggerNativeNotifications = (
   }
 };
 
-export const raiseNativeNotification = (notifications: Notification[]) => {
+export const raiseNativeNotification = async (
+  notifications: Notification[],
+) => {
   let title: string;
   let body: string;
-  const url: string = null;
+  let url: string = null;
 
   if (notifications.length === 1) {
     const notification = notifications[0];
@@ -61,7 +64,7 @@ export const raiseNativeNotification = (notifications: Notification[]) => {
       ? ''
       : notification.repository.full_name;
     body = notification.subject.title;
-    // url intentionally left null (no direct subject URL available)
+    url = await generateGitHubWebUrl(notification);
   } else {
     title = APPLICATION.NAME;
     body = `You have ${notifications.length} notifications`;
