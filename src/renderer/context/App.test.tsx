@@ -38,16 +38,15 @@ describe('renderer/context/App.tsx', () => {
   });
 
   describe('notification methods', () => {
-    const getNotificationCountMock = jest.spyOn(
-      notifications,
-      'getNotificationCount',
-    );
-    getNotificationCountMock.mockReturnValue(1);
+    const setTrayIconColorAndTitleMock = jest
+      .spyOn(notifications, 'setTrayIconColorAndTitle')
+      .mockImplementation(jest.fn());
 
     const fetchNotificationsMock = jest.fn();
     const markNotificationsAsReadMock = jest.fn();
     const markNotificationsAsDoneMock = jest.fn();
     const unsubscribeNotificationMock = jest.fn();
+    const setTrayIconColorAndTitle = jest.fn();
 
     const mockDefaultState = {
       auth: { accounts: [] },
@@ -60,6 +59,7 @@ describe('renderer/context/App.tsx', () => {
         markNotificationsAsRead: markNotificationsAsReadMock,
         markNotificationsAsDone: markNotificationsAsDoneMock,
         unsubscribeNotification: unsubscribeNotificationMock,
+        setTrayIconColorAndTitle,
       });
     });
 
@@ -144,6 +144,7 @@ describe('renderer/context/App.tsx', () => {
         mockDefaultState,
         [mockSingleNotification],
       );
+      expect(setTrayIconColorAndTitleMock).toHaveBeenCalledTimes(1);
     });
 
     it('should call markNotificationsAsDone', async () => {
@@ -169,6 +170,7 @@ describe('renderer/context/App.tsx', () => {
         mockDefaultState,
         [mockSingleNotification],
       );
+      expect(setTrayIconColorAndTitleMock).toHaveBeenCalledTimes(1);
     });
 
     it('should call unsubscribeNotification', async () => {
@@ -194,6 +196,7 @@ describe('renderer/context/App.tsx', () => {
         mockDefaultState,
         mockSingleNotification,
       );
+      expect(setTrayIconColorAndTitleMock).toHaveBeenCalledTimes(1);
     });
   });
 

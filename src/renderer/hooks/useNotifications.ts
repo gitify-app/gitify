@@ -19,7 +19,7 @@ import { rendererLogError } from '../utils/logger';
 import { triggerNativeNotifications } from '../utils/notifications/native';
 import {
   getAllNotifications,
-  setTrayIconColor,
+  setTrayIconColorAndTitle,
 } from '../utils/notifications/notifications';
 import { removeNotifications } from '../utils/notifications/remove';
 
@@ -34,9 +34,13 @@ function markNotificationsAsReadLocally(targetNotifications: Notification[]) {
 }
 
 interface NotificationsState {
+  status: Status;
+  globalError: GitifyError;
+
   notifications: AccountNotifications[];
-  removeAccountNotifications: (account: Account) => Promise<void>;
   fetchNotifications: (state: GitifyState) => Promise<void>;
+  removeAccountNotifications: (account: Account) => Promise<void>;
+
   markNotificationsAsRead: (
     state: GitifyState,
     notifications: Notification[],
@@ -49,8 +53,6 @@ interface NotificationsState {
     state: GitifyState,
     notification: Notification,
   ) => Promise<void>;
-  status: Status;
-  globalError: GitifyError;
 }
 
 export const useNotifications = (): NotificationsState => {
@@ -70,7 +72,7 @@ export const useNotifications = (): NotificationsState => {
       );
 
       setNotifications(updatedNotifications);
-      setTrayIconColor(updatedNotifications);
+
       setStatus('success');
     },
     [notifications],
@@ -109,6 +111,7 @@ export const useNotifications = (): NotificationsState => {
 
       setNotifications(fetchedNotifications);
       triggerNativeNotifications(notifications, fetchedNotifications, state);
+
       setStatus('success');
     },
     [notifications],
@@ -138,7 +141,7 @@ export const useNotifications = (): NotificationsState => {
         markNotificationsAsReadLocally(readNotifications);
 
         setNotifications(updatedNotifications);
-        setTrayIconColor(updatedNotifications);
+        setTrayIconColorAndTitle(updatedNotifications, state.settings);
       } catch (err) {
         rendererLogError(
           'markNotificationsAsRead',
@@ -180,7 +183,7 @@ export const useNotifications = (): NotificationsState => {
         markNotificationsAsReadLocally(doneNotifications);
 
         setNotifications(updatedNotifications);
-        setTrayIconColor(updatedNotifications);
+        setTrayIconColorAndTitle(updatedNotifications, state.settings);
       } catch (err) {
         rendererLogError(
           'markNotificationsAsDone',

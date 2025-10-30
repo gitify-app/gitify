@@ -47,10 +47,8 @@ import {
   setKeyboardShortcut,
   setUseAlternateIdleIcon,
   setUseUnreadActiveIcon,
-  updateTrayColor,
-  updateTrayTitle,
 } from '../utils/comms';
-import { getNotificationCount } from '../utils/notifications/notifications';
+import { setTrayIconColorAndTitle } from '../utils/notifications/notifications';
 import { clearState, loadState, saveState } from '../utils/storage';
 import {
   DEFAULT_DAY_COLOR_SCHEME,
@@ -164,19 +162,11 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     }
   }, Constants.REFRESH_ACCOUNTS_INTERVAL_MS);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: We also want to update the tray on setting changes
   useEffect(() => {
-    const count = getNotificationCount(notifications);
-
-    let title = '';
-    if (settings.showNotificationsCountInTray && count > 0) {
-      title = count.toString();
-    }
-
     setUseUnreadActiveIcon(settings.useUnreadActiveIcon);
     setUseAlternateIdleIcon(settings.useAlternateIdleIcon);
-
-    updateTrayColor(count);
-    updateTrayTitle(title);
+    setTrayIconColorAndTitle(notifications, settings);
   }, [
     settings.showNotificationsCountInTray,
     settings.useUnreadActiveIcon,

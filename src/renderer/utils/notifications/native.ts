@@ -4,7 +4,7 @@ import type { AccountNotifications, GitifyState } from '../../types';
 import type { Notification } from '../../typesGitHub';
 import { getAccountUUID } from '../auth/utils';
 import { generateGitHubWebUrl } from '../helpers';
-import { setTrayIconColor } from './notifications';
+import { setTrayIconColorAndTitle } from './notifications';
 
 export const triggerNativeNotifications = (
   previousNotifications: AccountNotifications[],
@@ -35,7 +35,7 @@ export const triggerNativeNotifications = (
     return accountNewNotifications;
   });
 
-  setTrayIconColor(newNotifications);
+  setTrayIconColorAndTitle(newNotifications, state.settings);
 
   // If there are no new notifications just stop there
   if (!diffNotifications.length) {

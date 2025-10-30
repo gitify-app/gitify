@@ -1,4 +1,4 @@
-import { type FC, useContext, useMemo } from 'react';
+import { type FC, useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import {
@@ -23,7 +23,7 @@ import {
   openGitHubPulls,
 } from '../utils/links';
 import { hasActiveFilters } from '../utils/notifications/filters/filter';
-import { getNotificationCount } from '../utils/notifications/notifications';
+import { getUnreadNotificationCount } from '../utils/notifications/notifications';
 import { LogoIcon } from './icons/LogoIcon';
 
 export const Sidebar: FC = () => {
@@ -65,9 +65,7 @@ export const Sidebar: FC = () => {
     fetchNotifications();
   };
 
-  const notificationsCount = useMemo(() => {
-    return getNotificationCount(notifications);
-  }, [notifications]);
+  const notificationsCount = getUnreadNotificationCount(notifications);
 
   const sidebarButtonStyle = { color: 'white' };
 
