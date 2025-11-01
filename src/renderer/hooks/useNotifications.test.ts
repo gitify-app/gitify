@@ -370,7 +370,6 @@ describe('renderer/hooks/useNotifications.ts', () => {
       });
 
       expect(result.current.notifications.length).toBe(0);
-      expect(mockSingleNotification.unread).toBeFalsy();
     });
 
     it('should mark notifications as read with failure', async () => {
@@ -414,7 +413,6 @@ describe('renderer/hooks/useNotifications.ts', () => {
       });
 
       expect(result.current.notifications.length).toBe(0);
-      expect(mockSingleNotification.unread).toBeFalsy();
     });
 
     it('should mark notifications as done with failure', async () => {

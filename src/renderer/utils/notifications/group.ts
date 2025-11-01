@@ -11,6 +11,7 @@ export function isGroupByRepository(settings: SettingsState) {
 /**
  * Group notifications by repository.full_name preserving first-seen repo order.
  * Returns a Map where keys are repo full_names and values are arrays of notifications.
+ * Skips notifications without valid repository data.
  */
 export function groupNotificationsByRepository(
   accounts: AccountNotifications[],
@@ -19,7 +20,13 @@ export function groupNotificationsByRepository(
 
   for (const account of accounts) {
     for (const notification of account.notifications) {
-      const repo = notification.repository?.full_name ?? '';
+      const repo = notification.repository?.full_name;
+
+      // Skip notifications without valid repository data
+      if (!repo) {
+        continue;
+      }
+
       const group = repoGroups.get(repo);
 
       if (group) {
