@@ -7,7 +7,10 @@ import { mockSettings } from '../../__mocks__/state-mocks';
 import type { Link } from '../../types';
 import type { Repository } from '../../typesGitHub';
 import * as logger from '../../utils/logger';
-import { enrichNotification, getNotificationCount } from './notifications';
+import {
+  enrichNotification,
+  getUnreadNotificationCount,
+} from './notifications';
 
 describe('renderer/utils/notifications/notifications.ts', () => {
   beforeEach(() => {
@@ -20,8 +23,8 @@ describe('renderer/utils/notifications/notifications.ts', () => {
     jest.clearAllMocks();
   });
 
-  it('getNotificationCount', () => {
-    const result = getNotificationCount(mockSingleAccountNotifications);
+  it('getUnreadNotificationCount', () => {
+    const result = getUnreadNotificationCount(mockSingleAccountNotifications);
 
     expect(result).toBe(1);
   });

@@ -28,6 +28,7 @@ describe('renderer/utils/notifications/native.ts', () => {
         auth: mockAuth,
         settings,
       });
+
       // wait for async native handling (generateGitHubWebUrl) to complete
       await waitFor(() =>
         expect(window.gitify.raiseNativeNotification).toHaveBeenCalledTimes(1),
@@ -64,6 +65,7 @@ describe('renderer/utils/notifications/native.ts', () => {
         auth: mockAuth,
         settings,
       });
+
       await waitFor(() =>
         expect(window.gitify.raiseNativeNotification).toHaveBeenCalledTimes(1),
       );

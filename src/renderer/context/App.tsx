@@ -47,10 +47,11 @@ import {
   setKeyboardShortcut,
   setUseAlternateIdleIcon,
   setUseUnreadActiveIcon,
-  updateTrayColor,
-  updateTrayTitle,
 } from '../utils/comms';
-import { getNotificationCount } from '../utils/notifications/notifications';
+import {
+  getUnreadNotificationCount,
+  setTrayIconColorAndTitle,
+} from '../utils/notifications/notifications';
 import { clearState, loadState, saveState } from '../utils/storage';
 import {
   DEFAULT_DAY_COLOR_SCHEME,
@@ -75,6 +76,8 @@ interface AppContextState {
   globalError: GitifyError;
 
   notifications: AccountNotifications[];
+  unreadCount: number;
+  hasNotifications: boolean;
   fetchNotifications: () => Promise<void>;
   removeAccountNotifications: (account: Account) => Promise<void>;
 
@@ -109,6 +112,10 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     markNotificationsAsDone,
     unsubscribeNotification,
   } = useNotifications();
+
+  const unreadCount = getUnreadNotificationCount(notifications);
+
+  const hasNotifications = useMemo(() => unreadCount > 0, [unreadCount]);
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: restoreSettings is stable and should run only once
   useEffect(() => {
@@ -164,19 +171,11 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     }
   }, Constants.REFRESH_ACCOUNTS_INTERVAL_MS);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: We also want to update the tray on setting changes
   useEffect(() => {
-    const count = getNotificationCount(notifications);
-
-    let title = '';
-    if (settings.showNotificationsCountInTray && count > 0) {
-      title = count.toString();
-    }
-
     setUseUnreadActiveIcon(settings.useUnreadActiveIcon);
     setUseAlternateIdleIcon(settings.useAlternateIdleIcon);
-
-    updateTrayColor(count);
-    updateTrayTitle(title);
+    setTrayIconColorAndTitle(notifications, settings);
   }, [
     settings.showNotificationsCountInTray,
     settings.useUnreadActiveIcon,
@@ -356,6 +355,8 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       globalError,
 
       notifications,
+      unreadCount,
+      hasNotifications,
       fetchNotifications: fetchNotificationsWithAccounts,
 
       markNotificationsAsRead: markNotificationsAsReadWithAccounts,
@@ -380,6 +381,8 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       globalError,
 
       notifications,
+      unreadCount,
+      hasNotifications,
       fetchNotificationsWithAccounts,
       markNotificationsAsReadWithAccounts,
       markNotificationsAsDoneWithAccounts,

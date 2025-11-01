@@ -6,7 +6,7 @@ import type {
 import type { GitifySubject, Notification } from '../../typesGitHub';
 import { listNotificationsForAuthenticatedUser } from '../api/client';
 import { determineFailureType } from '../api/errors';
-import { updateTrayColor } from '../comms';
+import { updateTrayColor, updateTrayTitle } from '../comms';
 import { rendererLogError, rendererLogWarn } from '../logger';
 import {
   filterBaseNotifications,
@@ -15,15 +15,32 @@ import {
 import { getFlattenedNotificationsByRepo } from './group';
 import { createNotificationHandler } from './handlers';
 
-export function setTrayIconColor(notifications: AccountNotifications[]) {
-  const allNotificationsCount = getNotificationCount(notifications);
+/**
+ * Sets the tray icon color and title based on the number of unread notifications.
+ * @param notifications
+ * @param settings
+ */
+export function setTrayIconColorAndTitle(
+  notifications: AccountNotifications[],
+  settings: SettingsState,
+) {
+  const totalUnreadNotifications = getUnreadNotificationCount(notifications);
 
-  updateTrayColor(allNotificationsCount);
+  let title = '';
+  if (settings.showNotificationsCountInTray && totalUnreadNotifications > 0) {
+    title = totalUnreadNotifications.toString();
+  }
+
+  updateTrayColor(totalUnreadNotifications);
+  updateTrayTitle(title);
 }
 
-export function getNotificationCount(notifications: AccountNotifications[]) {
+export function getUnreadNotificationCount(
+  notifications: AccountNotifications[],
+) {
   return notifications.reduce(
-    (sum, account) => sum + account.notifications.length,
+    (sum, account) =>
+      sum + account.notifications.filter((n) => n.unread === true).length,
     0,
   );
 }

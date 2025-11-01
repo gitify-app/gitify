@@ -419,33 +419,15 @@ exports[`renderer/routes/Notifications.tsx should render itself & its children (
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <div
-        class="flex flex-col h-screen"
-        data-testid="notifications"
-      >
-        <div
-          class="grow overflow-x-hidden overflow-y-auto"
-        >
-          <p>
-            AccountNotifications
-          </p>
-        </div>
-      </div>
+      <p>
+        AllRead
+      </p>
     </div>
   </body>,
   "container": <div>
-    <div
-      class="flex flex-col h-screen"
-      data-testid="notifications"
-    >
-      <div
-        class="grow overflow-x-hidden overflow-y-auto"
-      >
-        <p>
-          AccountNotifications
-        </p>
-      </div>
-    </div>
+    <p>
+      AllRead
+    </p>
   </div>,
   "debug": [Function],
   "findAllByAltText": [Function],
@@ -506,39 +488,15 @@ exports[`renderer/routes/Notifications.tsx should render itself & its children (
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <div
-        class="flex flex-col h-screen"
-        data-testid="notifications"
-      >
-        <div
-          class="grow overflow-x-hidden overflow-y-auto"
-        >
-          <p>
-            AccountNotifications
-          </p>
-          <p>
-            AccountNotifications
-          </p>
-        </div>
-      </div>
+      <p>
+        AllRead
+      </p>
     </div>
   </body>,
   "container": <div>
-    <div
-      class="flex flex-col h-screen"
-      data-testid="notifications"
-    >
-      <div
-        class="grow overflow-x-hidden overflow-y-auto"
-      >
-        <p>
-          AccountNotifications
-        </p>
-        <p>
-          AccountNotifications
-        </p>
-      </div>
-    </div>
+    <p>
+      AllRead
+    </p>
   </div>,
   "debug": [Function],
   "findAllByAltText": [Function],
