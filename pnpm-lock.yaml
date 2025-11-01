@@ -34,8 +34,8 @@ importers:
         specifier: 16.0.1
         version: 16.0.1
       '@electron/notarize':
-        specifier: 3.1.0
-        version: 3.1.0
+        specifier: 3.1.1
+        version: 3.1.1
       '@primer/css':
         specifier: 22.0.2
         version: 22.0.2(@primer/primitives@11.2.1)
@@ -485,8 +485,8 @@ packages:
     resolution: {integrity: sha512-jNT8nwH1f9X5GEITXaQ8IF/KdskvIkOFfB2CvwumsveVidzpSc+mvhhTMdAGSYF3O+Nq49lJ7y+ssODRXu06+A==}
     engines: {node: '>= 10.0.0'}
 
-  '@electron/notarize@3.1.0':
-    resolution: {integrity: sha512-DHePlWvmUKTNok2+yoOp2ZZ+3ZaLlDWdWD43BfzZhRlUPrBs+EwXDBq3kTJlO+jw2KZzeC3GGlypgw4HQZTD5w==}
+  '@electron/notarize@3.1.1':
+    resolution: {integrity: sha512-uQQSlOiJnqRkTL1wlEBAxe90nVN/Fc/hEmk0bqpKk8nKjV1if/tXLHKUPePtv9Xsx90PtZU8aidx5lAiOpjkQQ==}
     engines: {node: '>= 22.12.0'}
 
   '@electron/osx-sign@1.0.5':
@@ -4789,7 +4789,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@electron/notarize@3.1.0':
+  '@electron/notarize@3.1.1':
     dependencies:
       debug: 4.4.0
       promise-retry: 2.0.1
