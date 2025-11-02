@@ -33,8 +33,7 @@ exports[`renderer/routes/components/primitives/Title.tsx should render the title
           />
         </svg>
         <h2
-          class="Box-sc-g0xbh4-0 mIkfY prc-Heading-Heading-6CmGO"
-          sx="[object Object]"
+          class="prc-Heading-Heading-6CmGO"
         >
           Legend
         </h2>
@@ -77,8 +76,7 @@ exports[`renderer/routes/components/primitives/Title.tsx should render the title
           />
         </svg>
         <h2
-          class="Box-sc-g0xbh4-0 ckXLih prc-Heading-Heading-6CmGO"
-          sx="[object Object]"
+          class="prc-Heading-Heading-6CmGO"
         >
           Legend
         </h2>

@@ -72,11 +72,9 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
         data-open=""
       >
         <div
-          class="Box-sc-g0xbh4-0 bSAmtD prc-Popover-PopoverContent-nMzFS"
+          class="prc-Popover-PopoverContent-nMzFS"
           data-height="fit-content"
-          data-overflow="auto"
           data-width="small"
-          sx="[object Object]"
         >
           <div
             class="prc-Stack-Stack-WJVsK"
@@ -108,11 +106,9 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
       data-open=""
     >
       <div
-        class="Box-sc-g0xbh4-0 bSAmtD prc-Popover-PopoverContent-nMzFS"
+        class="prc-Popover-PopoverContent-nMzFS"
         data-height="fit-content"
-        data-overflow="auto"
         data-width="small"
-        sx="[object Object]"
       >
         <div
           class="prc-Stack-Stack-WJVsK"
@@ -201,11 +197,9 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
         data-open=""
       >
         <div
-          class="Box-sc-g0xbh4-0 bSAmtD prc-Popover-PopoverContent-nMzFS"
+          class="prc-Popover-PopoverContent-nMzFS"
           data-height="fit-content"
-          data-overflow="auto"
           data-width="small"
-          sx="[object Object]"
         >
           <div
             class="prc-Stack-Stack-WJVsK"
@@ -250,11 +244,9 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
       data-open=""
     >
       <div
-        class="Box-sc-g0xbh4-0 bSAmtD prc-Popover-PopoverContent-nMzFS"
+        class="prc-Popover-PopoverContent-nMzFS"
         data-height="fit-content"
-        data-overflow="auto"
         data-width="small"
-        sx="[object Object]"
       >
         <div
           class="prc-Stack-Stack-WJVsK"
@@ -356,11 +348,9 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
         data-open=""
       >
         <div
-          class="Box-sc-g0xbh4-0 bSAmtD prc-Popover-PopoverContent-nMzFS"
+          class="prc-Popover-PopoverContent-nMzFS"
           data-height="fit-content"
-          data-overflow="auto"
           data-width="small"
-          sx="[object Object]"
         >
           <div
             class="prc-Stack-Stack-WJVsK"
@@ -449,11 +439,9 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
       data-open=""
     >
       <div
-        class="Box-sc-g0xbh4-0 bSAmtD prc-Popover-PopoverContent-nMzFS"
+        class="prc-Popover-PopoverContent-nMzFS"
         data-height="fit-content"
-        data-overflow="auto"
         data-width="small"
-        sx="[object Object]"
       >
         <div
           class="prc-Stack-Stack-WJVsK"
@@ -599,11 +587,9 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
         data-open=""
       >
         <div
-          class="Box-sc-g0xbh4-0 bSAmtD prc-Popover-PopoverContent-nMzFS"
+          class="prc-Popover-PopoverContent-nMzFS"
           data-height="fit-content"
-          data-overflow="auto"
           data-width="small"
-          sx="[object Object]"
         >
           <div
             class="prc-Stack-Stack-WJVsK"
@@ -692,11 +678,9 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
       data-open=""
     >
       <div
-        class="Box-sc-g0xbh4-0 bSAmtD prc-Popover-PopoverContent-nMzFS"
+        class="prc-Popover-PopoverContent-nMzFS"
         data-height="fit-content"
-        data-overflow="auto"
         data-width="small"
-        sx="[object Object]"
       >
         <div
           class="prc-Stack-Stack-WJVsK"

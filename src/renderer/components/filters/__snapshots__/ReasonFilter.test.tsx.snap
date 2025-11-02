@@ -39,8 +39,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
                 />
               </svg>
               <h2
-                class="Box-sc-g0xbh4-0 mIkfY prc-Heading-Heading-6CmGO"
-                sx="[object Object]"
+                class="prc-Heading-Heading-6CmGO"
               >
                 Reason
               </h2>
@@ -916,8 +915,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               />
             </svg>
             <h2
-              class="Box-sc-g0xbh4-0 mIkfY prc-Heading-Heading-6CmGO"
-              sx="[object Object]"
+              class="prc-Heading-Heading-6CmGO"
             >
               Reason
             </h2>

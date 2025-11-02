@@ -76,8 +76,7 @@ exports[`renderer/components/primitives/Header.tsx should render itself & its ch
                   />
                 </svg>
                 <h2
-                  class="Box-sc-g0xbh4-0 gKIXLF prc-Heading-Heading-6CmGO"
-                  sx="[object Object]"
+                  class="prc-Heading-Heading-6CmGO"
                 >
                   Test Header
                 </h2>
@@ -160,8 +159,7 @@ exports[`renderer/components/primitives/Header.tsx should render itself & its ch
                 />
               </svg>
               <h2
-                class="Box-sc-g0xbh4-0 gKIXLF prc-Heading-Heading-6CmGO"
-                sx="[object Object]"
+                class="prc-Heading-Heading-6CmGO"
               >
                 Test Header
               </h2>

@@ -75,14 +75,12 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
             data-wrap="nowrap"
           >
             <h2
-              class="Box-sc-g0xbh4-0 ckXLih prc-Heading-Heading-6CmGO"
-              sx="[object Object]"
+              class="prc-Heading-Heading-6CmGO"
             >
               GitHub Notifications
             </h2>
             <h2
-              class="Box-sc-g0xbh4-0 gKIXLF prc-Heading-Heading-6CmGO"
-              sx="[object Object]"
+              class="prc-Heading-Heading-6CmGO"
             >
               on your menu bar
             </h2>
@@ -306,14 +304,12 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
           data-wrap="nowrap"
         >
           <h2
-            class="Box-sc-g0xbh4-0 ckXLih prc-Heading-Heading-6CmGO"
-            sx="[object Object]"
+            class="prc-Heading-Heading-6CmGO"
           >
             GitHub Notifications
           </h2>
           <h2
-            class="Box-sc-g0xbh4-0 gKIXLF prc-Heading-Heading-6CmGO"
-            sx="[object Object]"
+            class="prc-Heading-Heading-6CmGO"
           >
             on your menu bar
           </h2>

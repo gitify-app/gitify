@@ -39,8 +39,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
                 />
               </svg>
               <h2
-                class="Box-sc-g0xbh4-0 mIkfY prc-Heading-Heading-6CmGO"
-                sx="[object Object]"
+                class="prc-Heading-Heading-6CmGO"
               >
                 User Type
               </h2>
@@ -228,8 +227,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
               />
             </svg>
             <h2
-              class="Box-sc-g0xbh4-0 mIkfY prc-Heading-Heading-6CmGO"
-              sx="[object Object]"
+              class="prc-Heading-Heading-6CmGO"
             >
               User Type
             </h2>

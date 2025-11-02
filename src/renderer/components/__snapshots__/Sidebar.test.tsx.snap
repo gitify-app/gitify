@@ -4,14 +4,13 @@ exports[`renderer/components/Sidebar.tsx notifications icon renders correct icon
 <button
   aria-describedby="_r_1f_-loading-announcement _r_1e_"
   aria-label="Notifications"
-  class="Box-sc-g0xbh4-0 eIPRae prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
+  class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
   data-component="IconButton"
   data-loading="false"
   data-no-visuals="true"
   data-size="small"
   data-testid="sidebar-notifications"
   data-variant="invisible"
-  sx="[object Object]"
   type="button"
 >
   <svg
@@ -37,14 +36,13 @@ exports[`renderer/components/Sidebar.tsx notifications icon renders correct icon
 <button
   aria-describedby="_r_1t_-loading-announcement _r_1s_"
   aria-label="Notifications"
-  class="Box-sc-g0xbh4-0 eIPRae prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
+  class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
   data-component="IconButton"
   data-loading="false"
   data-no-visuals="true"
   data-size="small"
   data-testid="sidebar-notifications"
   data-variant="invisible"
-  sx="[object Object]"
   type="button"
 >
   <svg
@@ -158,14 +156,13 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
           <button
             aria-describedby="_r_3_-loading-announcement _r_2_"
             aria-label="Notifications"
-            class="Box-sc-g0xbh4-0 eIPRae prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
+            class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
             data-size="small"
             data-testid="sidebar-notifications"
             data-variant="primary"
-            sx="[object Object]"
             type="button"
           >
             <svg
@@ -198,14 +195,13 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
           <button
             aria-describedby="_r_5_-loading-announcement"
             aria-labelledby="_r_4_"
-            class="Box-sc-g0xbh4-0 eIPRae prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
+            class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
             data-size="small"
             data-testid="sidebar-my-issues"
             data-variant="invisible"
-            sx="[object Object]"
             type="button"
           >
             <svg
@@ -240,14 +236,13 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
           <button
             aria-describedby="_r_7_-loading-announcement"
             aria-labelledby="_r_6_"
-            class="Box-sc-g0xbh4-0 eIPRae prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
+            class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
             data-size="small"
             data-testid="sidebar-my-pull-requests"
             data-variant="invisible"
-            sx="[object Object]"
             type="button"
           >
             <svg
@@ -289,14 +284,13 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
           <button
             aria-describedby="_r_9_-loading-announcement"
             aria-labelledby="_r_8_"
-            class="Box-sc-g0xbh4-0 eIPRae prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
+            class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
             data-size="small"
             data-testid="sidebar-quit"
             data-variant="invisible"
-            sx="[object Object]"
             type="button"
           >
             <svg
@@ -417,14 +411,13 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
         <button
           aria-describedby="_r_3_-loading-announcement _r_2_"
           aria-label="Notifications"
-          class="Box-sc-g0xbh4-0 eIPRae prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
+          class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
           data-component="IconButton"
           data-loading="false"
           data-no-visuals="true"
           data-size="small"
           data-testid="sidebar-notifications"
           data-variant="primary"
-          sx="[object Object]"
           type="button"
         >
           <svg
@@ -457,14 +450,13 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
         <button
           aria-describedby="_r_5_-loading-announcement"
           aria-labelledby="_r_4_"
-          class="Box-sc-g0xbh4-0 eIPRae prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
+          class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
           data-component="IconButton"
           data-loading="false"
           data-no-visuals="true"
           data-size="small"
           data-testid="sidebar-my-issues"
           data-variant="invisible"
-          sx="[object Object]"
           type="button"
         >
           <svg
@@ -499,14 +491,13 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
         <button
           aria-describedby="_r_7_-loading-announcement"
           aria-labelledby="_r_6_"
-          class="Box-sc-g0xbh4-0 eIPRae prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
+          class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
           data-component="IconButton"
           data-loading="false"
           data-no-visuals="true"
           data-size="small"
           data-testid="sidebar-my-pull-requests"
           data-variant="invisible"
-          sx="[object Object]"
           type="button"
         >
           <svg
@@ -548,14 +539,13 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
         <button
           aria-describedby="_r_9_-loading-announcement"
           aria-labelledby="_r_8_"
-          class="Box-sc-g0xbh4-0 eIPRae prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
+          class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
           data-component="IconButton"
           data-loading="false"
           data-no-visuals="true"
           data-size="small"
           data-testid="sidebar-quit"
           data-variant="invisible"
-          sx="[object Object]"
           type="button"
         >
           <svg
@@ -733,14 +723,13 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
           <button
             aria-describedby="_r_d_-loading-announcement _r_c_"
             aria-label="Notifications"
-            class="Box-sc-g0xbh4-0 eIPRae prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
+            class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
             data-size="small"
             data-testid="sidebar-notifications"
             data-variant="primary"
-            sx="[object Object]"
             type="button"
           >
             <svg
@@ -773,14 +762,13 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
           <button
             aria-describedby="_r_f_-loading-announcement"
             aria-labelledby="_r_e_"
-            class="Box-sc-g0xbh4-0 eIPRae prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
+            class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
             data-size="small"
             data-testid="sidebar-my-issues"
             data-variant="invisible"
-            sx="[object Object]"
             type="button"
           >
             <svg
@@ -815,14 +803,13 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
           <button
             aria-describedby="_r_h_-loading-announcement"
             aria-labelledby="_r_g_"
-            class="Box-sc-g0xbh4-0 eIPRae prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
+            class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
             data-size="small"
             data-testid="sidebar-my-pull-requests"
             data-variant="invisible"
-            sx="[object Object]"
             type="button"
           >
             <svg
@@ -864,14 +851,13 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
           <button
             aria-describedby="_r_j_-loading-announcement"
             aria-labelledby="_r_i_"
-            class="Box-sc-g0xbh4-0 eIPRae prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
+            class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
             data-size="small"
             data-testid="sidebar-quit"
             data-variant="invisible"
-            sx="[object Object]"
             type="button"
           >
             <svg
@@ -992,14 +978,13 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
         <button
           aria-describedby="_r_d_-loading-announcement _r_c_"
           aria-label="Notifications"
-          class="Box-sc-g0xbh4-0 eIPRae prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
+          class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
           data-component="IconButton"
           data-loading="false"
           data-no-visuals="true"
           data-size="small"
           data-testid="sidebar-notifications"
           data-variant="primary"
-          sx="[object Object]"
           type="button"
         >
           <svg
@@ -1032,14 +1017,13 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
         <button
           aria-describedby="_r_f_-loading-announcement"
           aria-labelledby="_r_e_"
-          class="Box-sc-g0xbh4-0 eIPRae prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
+          class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
           data-component="IconButton"
           data-loading="false"
           data-no-visuals="true"
           data-size="small"
           data-testid="sidebar-my-issues"
           data-variant="invisible"
-          sx="[object Object]"
           type="button"
         >
           <svg
@@ -1074,14 +1058,13 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
         <button
           aria-describedby="_r_h_-loading-announcement"
           aria-labelledby="_r_g_"
-          class="Box-sc-g0xbh4-0 eIPRae prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
+          class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
           data-component="IconButton"
           data-loading="false"
           data-no-visuals="true"
           data-size="small"
           data-testid="sidebar-my-pull-requests"
           data-variant="invisible"
-          sx="[object Object]"
           type="button"
         >
           <svg
@@ -1123,14 +1106,13 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
         <button
           aria-describedby="_r_j_-loading-announcement"
           aria-labelledby="_r_i_"
-          class="Box-sc-g0xbh4-0 eIPRae prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
+          class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
           data-component="IconButton"
           data-loading="false"
           data-no-visuals="true"
           data-size="small"
           data-testid="sidebar-quit"
           data-variant="invisible"
-          sx="[object Object]"
           type="button"
         >
           <svg

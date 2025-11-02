@@ -9,6 +9,7 @@ import {
   SignInIcon,
 } from '@primer/octicons-react';
 import {
+  Banner,
   Button,
   FormControl,
   Stack,
@@ -16,7 +17,6 @@ import {
   TextInput,
   Tooltip,
 } from '@primer/react';
-import { Banner } from '@primer/react/experimental';
 
 import { Contents } from '../components/layout/Contents';
 import { Page } from '../components/layout/Page';

@@ -898,7 +898,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                   Updated
                 </span>
                 <relative-time
-                  class="sc-bRKDuR"
                   datetime="2017-05-20T17:51:57.000Z"
                 >
                   May 20, 2017
@@ -1269,7 +1268,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                   Authored
                 </span>
                 <relative-time
-                  class="sc-bRKDuR"
                   datetime="2017-05-20T17:06:34.000Z"
                 >
                   May 20, 2017
@@ -1749,7 +1747,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 Updated
               </span>
               <relative-time
-                class="sc-bRKDuR"
                 datetime="2017-05-20T17:51:57.000Z"
               >
                 May 20, 2017
@@ -2120,7 +2117,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 Authored
               </span>
               <relative-time
-                class="sc-bRKDuR"
                 datetime="2017-05-20T17:06:34.000Z"
               >
                 May 20, 2017

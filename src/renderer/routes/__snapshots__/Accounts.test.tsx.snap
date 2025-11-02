@@ -76,8 +76,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
               />
             </svg>
             <h2
-              class="Box-sc-g0xbh4-0 gKIXLF prc-Heading-Heading-6CmGO"
-              sx="[object Object]"
+              class="prc-Heading-Heading-6CmGO"
             >
               Accounts
             </h2>
@@ -366,7 +365,6 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
               Primary account
             </span>
             <div
-              class="Box-sc-g0xbh4-0"
               data-loading-wrapper="true"
             >
               <button
@@ -727,7 +725,6 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
               Set as primary account
             </span>
             <div
-              class="Box-sc-g0xbh4-0"
               data-loading-wrapper="true"
             >
               <button
@@ -1088,7 +1085,6 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
               Set as primary account
             </span>
             <div
-              class="Box-sc-g0xbh4-0"
               data-loading-wrapper="true"
             >
               <button
@@ -1312,8 +1308,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
               />
             </svg>
             <h2
-              class="Box-sc-g0xbh4-0 gKIXLF prc-Heading-Heading-6CmGO"
-              sx="[object Object]"
+              class="prc-Heading-Heading-6CmGO"
             >
               Accounts
             </h2>
@@ -1602,7 +1597,6 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
               Primary account
             </span>
             <div
-              class="Box-sc-g0xbh4-0"
               data-loading-wrapper="true"
             >
               <button
@@ -1963,7 +1957,6 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
               Set as primary account
             </span>
             <div
-              class="Box-sc-g0xbh4-0"
               data-loading-wrapper="true"
             >
               <button
@@ -2324,7 +2317,6 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
               Set as primary account
             </span>
             <div
-              class="Box-sc-g0xbh4-0"
               data-loading-wrapper="true"
             >
               <button
@@ -2548,8 +2540,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
               />
             </svg>
             <h2
-              class="Box-sc-g0xbh4-0 gKIXLF prc-Heading-Heading-6CmGO"
-              sx="[object Object]"
+              class="prc-Heading-Heading-6CmGO"
             >
               Accounts
             </h2>
@@ -2838,7 +2829,6 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
               Primary account
             </span>
             <div
-              class="Box-sc-g0xbh4-0"
               data-loading-wrapper="true"
             >
               <button
@@ -3199,7 +3189,6 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
               Set as primary account
             </span>
             <div
-              class="Box-sc-g0xbh4-0"
               data-loading-wrapper="true"
             >
               <button
@@ -3560,7 +3549,6 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
               Set as primary account
             </span>
             <div
-              class="Box-sc-g0xbh4-0"
               data-loading-wrapper="true"
             >
               <button

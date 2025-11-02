@@ -76,8 +76,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               />
             </svg>
             <h2
-              class="Box-sc-g0xbh4-0 gKIXLF prc-Heading-Heading-6CmGO"
-              sx="[object Object]"
+              class="prc-Heading-Heading-6CmGO"
             >
               Filters
             </h2>
@@ -130,8 +129,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                 />
               </svg>
               <h2
-                class="Box-sc-g0xbh4-0 mIkfY prc-Heading-Heading-6CmGO"
-                sx="[object Object]"
+                class="prc-Heading-Heading-6CmGO"
               >
                 Search
               </h2>
@@ -353,8 +351,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                 />
               </svg>
               <h2
-                class="Box-sc-g0xbh4-0 mIkfY prc-Heading-Heading-6CmGO"
-                sx="[object Object]"
+                class="prc-Heading-Heading-6CmGO"
               >
                 User Type
               </h2>
@@ -539,8 +536,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                 />
               </svg>
               <h2
-                class="Box-sc-g0xbh4-0 mIkfY prc-Heading-Heading-6CmGO"
-                sx="[object Object]"
+                class="prc-Heading-Heading-6CmGO"
               >
                 Type
               </h2>
@@ -891,8 +887,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                 />
               </svg>
               <h2
-                class="Box-sc-g0xbh4-0 mIkfY prc-Heading-Heading-6CmGO"
-                sx="[object Object]"
+                class="prc-Heading-Heading-6CmGO"
               >
                 State
               </h2>
@@ -1183,8 +1178,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                 />
               </svg>
               <h2
-                class="Box-sc-g0xbh4-0 mIkfY prc-Heading-Heading-6CmGO"
-                sx="[object Object]"
+                class="prc-Heading-Heading-6CmGO"
               >
                 Reason
               </h2>

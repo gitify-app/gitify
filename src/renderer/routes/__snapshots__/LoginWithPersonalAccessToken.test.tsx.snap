@@ -80,8 +80,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
                     />
                   </svg>
                   <h2
-                    class="Box-sc-g0xbh4-0 gKIXLF prc-Heading-Heading-6CmGO"
-                    sx="[object Object]"
+                    class="prc-Heading-Heading-6CmGO"
                   >
                     Login with Personal Access Token
                   </h2>
@@ -123,9 +122,8 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
               </label>
               <span
                 aria-busy="false"
-                class="Box-sc-g0xbh4-0 fUrNRR TextInput-wrapper prc-components-TextInputWrapper-i1ofR prc-components-TextInputBaseWrapper-ueK9q"
+                class="TextInput-wrapper prc-components-TextInputWrapper-i1ofR prc-components-TextInputBaseWrapper-ueK9q"
                 data-block="true"
-                sx="[object Object]"
               >
                 <input
                   aria-describedby="_r_1_-caption"
@@ -269,10 +267,9 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
               </label>
               <span
                 aria-busy="false"
-                class="Box-sc-g0xbh4-0 fUrNRR TextInput-wrapper prc-components-TextInputWrapper-i1ofR prc-components-TextInputBaseWrapper-ueK9q"
+                class="TextInput-wrapper prc-components-TextInputWrapper-i1ofR prc-components-TextInputBaseWrapper-ueK9q"
                 data-block="true"
                 data-trailing-action="true"
-                sx="[object Object]"
               >
                 <input
                   aria-invalid="false"
@@ -292,13 +289,12 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
                   <button
                     aria-describedby="_r_c_-loading-announcement"
                     aria-labelledby="_r_b_"
-                    class="Box-sc-g0xbh4-0 prc-Button-ButtonBase-c50BI prc-components-Invisible-uIWry prc-Button-IconButton-szpyj"
+                    class="prc-Button-ButtonBase-c50BI prc-components-Invisible-uIWry prc-Button-IconButton-szpyj"
                     data-component="IconButton"
                     data-loading="false"
                     data-no-visuals="true"
                     data-size="small"
                     data-variant="invisible"
-                    sx="[object Object]"
                     type="button"
                   >
                     <svg
@@ -397,7 +393,6 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
               GitHub documentation
             </span>
             <div
-              class="Box-sc-g0xbh4-0"
               data-loading-wrapper="true"
             >
               <button
@@ -525,8 +520,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
                   />
                 </svg>
                 <h2
-                  class="Box-sc-g0xbh4-0 gKIXLF prc-Heading-Heading-6CmGO"
-                  sx="[object Object]"
+                  class="prc-Heading-Heading-6CmGO"
                 >
                   Login with Personal Access Token
                 </h2>
@@ -568,9 +562,8 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
             </label>
             <span
               aria-busy="false"
-              class="Box-sc-g0xbh4-0 fUrNRR TextInput-wrapper prc-components-TextInputWrapper-i1ofR prc-components-TextInputBaseWrapper-ueK9q"
+              class="TextInput-wrapper prc-components-TextInputWrapper-i1ofR prc-components-TextInputBaseWrapper-ueK9q"
               data-block="true"
-              sx="[object Object]"
             >
               <input
                 aria-describedby="_r_1_-caption"
@@ -714,10 +707,9 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
             </label>
             <span
               aria-busy="false"
-              class="Box-sc-g0xbh4-0 fUrNRR TextInput-wrapper prc-components-TextInputWrapper-i1ofR prc-components-TextInputBaseWrapper-ueK9q"
+              class="TextInput-wrapper prc-components-TextInputWrapper-i1ofR prc-components-TextInputBaseWrapper-ueK9q"
               data-block="true"
               data-trailing-action="true"
-              sx="[object Object]"
             >
               <input
                 aria-invalid="false"
@@ -737,13 +729,12 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
                 <button
                   aria-describedby="_r_c_-loading-announcement"
                   aria-labelledby="_r_b_"
-                  class="Box-sc-g0xbh4-0 prc-Button-ButtonBase-c50BI prc-components-Invisible-uIWry prc-Button-IconButton-szpyj"
+                  class="prc-Button-ButtonBase-c50BI prc-components-Invisible-uIWry prc-Button-IconButton-szpyj"
                   data-component="IconButton"
                   data-loading="false"
                   data-no-visuals="true"
                   data-size="small"
                   data-variant="invisible"
-                  sx="[object Object]"
                   type="button"
                 >
                   <svg
@@ -842,7 +833,6 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
             GitHub documentation
           </span>
           <div
-            class="Box-sc-g0xbh4-0"
             data-loading-wrapper="true"
           >
             <button

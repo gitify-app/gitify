@@ -39,8 +39,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
                 />
               </svg>
               <h2
-                class="Box-sc-g0xbh4-0 mIkfY prc-Heading-Heading-6CmGO"
-                sx="[object Object]"
+                class="prc-Heading-Heading-6CmGO"
               >
                 Type
               </h2>
@@ -391,8 +390,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
               />
             </svg>
             <h2
-              class="Box-sc-g0xbh4-0 mIkfY prc-Heading-Heading-6CmGO"
-              sx="[object Object]"
+              class="prc-Heading-Heading-6CmGO"
             >
               Type
             </h2>

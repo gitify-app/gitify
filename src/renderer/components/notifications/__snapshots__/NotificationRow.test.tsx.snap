@@ -185,7 +185,6 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                   Updated
                 </span>
                 <relative-time
-                  class="sc-bRKDuR"
                   datetime="2017-05-20T17:51:57.000Z"
                 >
                   May 20, 2017
@@ -558,7 +557,6 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 Updated
               </span>
               <relative-time
-                class="sc-bRKDuR"
                 datetime="2017-05-20T17:51:57.000Z"
               >
                 May 20, 2017
@@ -936,7 +934,6 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                   Updated
                 </span>
                 <relative-time
-                  class="sc-bRKDuR"
                   datetime="2017-05-20T17:51:57.000Z"
                 >
                   May 20, 2017
@@ -1257,7 +1254,6 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 Updated
               </span>
               <relative-time
-                class="sc-bRKDuR"
                 datetime="2017-05-20T17:51:57.000Z"
               >
                 May 20, 2017
@@ -1635,7 +1631,6 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                   Updated
                 </span>
                 <relative-time
-                  class="sc-bRKDuR"
                   datetime="2017-05-20T17:51:57.000Z"
                 >
                   May 20, 2017
@@ -1956,7 +1951,6 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 Updated
               </span>
               <relative-time
-                class="sc-bRKDuR"
                 datetime="2017-05-20T17:51:57.000Z"
               >
                 May 20, 2017
@@ -2334,7 +2328,6 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                   Updated
                 </span>
                 <relative-time
-                  class="sc-bRKDuR"
                   datetime="2017-05-20T17:51:57.000Z"
                 >
                   May 20, 2017
@@ -2655,7 +2648,6 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 Updated
               </span>
               <relative-time
-                class="sc-bRKDuR"
                 datetime="2017-05-20T17:51:57.000Z"
               >
                 May 20, 2017
