@@ -172,11 +172,11 @@ export const LoginWithOAuthAppRoute: FC = () => {
               name="hostname"
               onChange={handleInputChange}
               placeholder="github.com"
-              sx={{
-                borderColor: errors.hostname
-                  ? 'danger.emphasis'
-                  : 'border.default',
-              }}
+              // sx={{
+              //   borderColor: errors.hostname
+              //     ? 'danger.emphasis'
+              //     : 'border.default',
+              // }}
               value={formData.hostname}
             />
           </FormControl>
@@ -205,11 +205,11 @@ export const LoginWithOAuthAppRoute: FC = () => {
               name="clientId"
               onChange={handleInputChange}
               placeholder="Your generated client id (20 characters)"
-              sx={{
-                borderColor: errors.clientId
-                  ? 'danger.emphasis'
-                  : 'border.default',
-              }}
+              // sx={{
+              //   borderColor: errors.clientId
+              //     ? 'danger.emphasis'
+              //     : 'border.default',
+              // }}
               value={formData.clientId}
             />
           </FormControl>
@@ -222,11 +222,11 @@ export const LoginWithOAuthAppRoute: FC = () => {
               name="clientSecret"
               onChange={handleInputChange}
               placeholder="Your generated client secret (40 characters)"
-              sx={{
-                borderColor: errors.clientSecret
-                  ? 'danger.emphasis'
-                  : 'border.default',
-              }}
+              // sx={{
+              //   borderColor: errors.clientSecret
+              //     ? 'danger.emphasis'
+              //     : 'border.default',
+              // }}
               trailingAction={
                 <TextInput.Action
                   aria-label={maskToken ? 'Show token' : 'Hide token'}

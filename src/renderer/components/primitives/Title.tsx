@@ -25,7 +25,11 @@ export const Title: FC<ITitle> = ({ size = 2, ...props }) => {
           id={`title-${name}`}
         >
           <props.icon size="small" />
-          <Heading sx={{ fontSize: size }}>{props.children}</Heading>
+          <Heading
+          // sx={{ fontSize: size }}
+          >
+            {props.children}
+          </Heading>
           {props.tooltip && (
             <Tooltip
               name={`tooltip-${name}`}

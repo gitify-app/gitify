@@ -163,11 +163,11 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
               name="hostname"
               onChange={handleInputChange}
               placeholder="github.com"
-              sx={{
-                borderColor: errors.hostname
-                  ? 'danger.emphasis'
-                  : 'border.default',
-              }}
+              // sx={{
+              //   borderColor: errors.hostname
+              //     ? 'danger.emphasis'
+              //     : 'border.default',
+              // }}
               value={formData.hostname}
             />
           </FormControl>
@@ -210,11 +210,11 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
               name="token"
               onChange={handleInputChange}
               placeholder="Your generated token (40 characters)"
-              sx={{
-                borderColor: errors.token
-                  ? 'danger.emphasis'
-                  : 'border.default',
-              }}
+              // sx={{
+              //   borderColor: errors.token
+              //     ? 'danger.emphasis'
+              //     : 'border.default',
+              // }}
               trailingAction={
                 <TextInput.Action
                   aria-label={maskClientSecret ? 'Show token' : 'Hide token'}

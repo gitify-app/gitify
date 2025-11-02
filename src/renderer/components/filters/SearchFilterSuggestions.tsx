@@ -37,7 +37,9 @@ export const SearchFilterSuggestions: FC<SearchFilterSuggestionsProps> = ({
 
   return (
     <Popover open>
-      <Popover.Content sx={{ p: 2, mt: 2, width: '100%' }}>
+      <Popover.Content
+      // sx={{ p: 2, mt: 2, width: '100%' }}
+      >
         <Stack direction="vertical" gap="condensed">
           {suggestions.length > 0 &&
             suggestions.map((q) => (

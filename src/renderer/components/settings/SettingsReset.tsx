@@ -32,7 +32,7 @@ export const SettingsReset: FC = () => {
       <Button
         data-testid="settings-reset"
         onClick={handleReset}
-        sx={{ width: '200px' }}
+        // sx={{ width: '200px' }}
         variant="danger"
       >
         Reset Settings
