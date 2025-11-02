@@ -41,11 +41,11 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
                   d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"
                 />
               </svg>
-              <h2
+              <h4
                 class="prc-Heading-Heading-6CmGO"
               >
                 State
-              </h2>
+              </h4>
               <button
                 aria-expanded="false"
                 aria-haspopup="true"
@@ -94,7 +94,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
             data-wrap="nowrap"
           >
             <input
-              class="size-2 rounded-sm cursor-pointer"
+              class="size-4 rounded-sm cursor-pointer"
               data-testid="checkbox-Draft"
               id="Draft"
               type="checkbox"
@@ -121,7 +121,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
             data-wrap="nowrap"
           >
             <input
-              class="size-2 rounded-sm cursor-pointer"
+              class="size-4 rounded-sm cursor-pointer"
               data-testid="checkbox-Open"
               id="Open"
               type="checkbox"
@@ -174,7 +174,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
             data-wrap="nowrap"
           >
             <input
-              class="size-2 rounded-sm cursor-pointer"
+              class="size-4 rounded-sm cursor-pointer"
               data-testid="checkbox-Merged"
               id="Merged"
               type="checkbox"
@@ -201,7 +201,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
             data-wrap="nowrap"
           >
             <input
-              class="size-2 rounded-sm cursor-pointer"
+              class="size-4 rounded-sm cursor-pointer"
               data-testid="checkbox-Closed"
               id="Closed"
               type="checkbox"
@@ -254,7 +254,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
             data-wrap="nowrap"
           >
             <input
-              class="size-2 rounded-sm cursor-pointer"
+              class="size-4 rounded-sm cursor-pointer"
               data-testid="checkbox-Other"
               id="Other"
               type="checkbox"
@@ -338,11 +338,11 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
                 d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"
               />
             </svg>
-            <h2
+            <h4
               class="prc-Heading-Heading-6CmGO"
             >
               State
-            </h2>
+            </h4>
             <button
               aria-expanded="false"
               aria-haspopup="true"
@@ -391,7 +391,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
           data-wrap="nowrap"
         >
           <input
-            class="size-2 rounded-sm cursor-pointer"
+            class="size-4 rounded-sm cursor-pointer"
             data-testid="checkbox-Draft"
             id="Draft"
             type="checkbox"
@@ -418,7 +418,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
           data-wrap="nowrap"
         >
           <input
-            class="size-2 rounded-sm cursor-pointer"
+            class="size-4 rounded-sm cursor-pointer"
             data-testid="checkbox-Open"
             id="Open"
             type="checkbox"
@@ -471,7 +471,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
           data-wrap="nowrap"
         >
           <input
-            class="size-2 rounded-sm cursor-pointer"
+            class="size-4 rounded-sm cursor-pointer"
             data-testid="checkbox-Merged"
             id="Merged"
             type="checkbox"
@@ -498,7 +498,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
           data-wrap="nowrap"
         >
           <input
-            class="size-2 rounded-sm cursor-pointer"
+            class="size-4 rounded-sm cursor-pointer"
             data-testid="checkbox-Closed"
             id="Closed"
             type="checkbox"
@@ -551,7 +551,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
           data-wrap="nowrap"
         >
           <input
-            class="size-2 rounded-sm cursor-pointer"
+            class="size-4 rounded-sm cursor-pointer"
             data-testid="checkbox-Other"
             id="Other"
             type="checkbox"

@@ -37,7 +37,7 @@ export const RadioGroup: FC<IRadioGroup> = (props: IRadioGroup) => {
           >
             <input
               checked={item.value === props.value}
-              className="size-2 cursor-pointer"
+              className="size-4 cursor-pointer"
               data-testid={name}
               id={name}
               name={props.name}

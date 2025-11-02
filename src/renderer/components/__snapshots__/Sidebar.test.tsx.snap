@@ -70,7 +70,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
   "baseElement": <body>
     <div>
       <div
-        class="fixed left-sidebar -ml-sidebar w-sidebar h-full bg-gitify-sidebar text-white prc-Stack-Stack-WJVsK"
+        class="fixed left-sidebar -ml-sidebar w-sidebar h-full bg-gitify-sidebar [&_svg]:text-white prc-Stack-Stack-WJVsK"
         data-align="stretch"
         data-direction="vertical"
         data-justify="space-between"
@@ -101,7 +101,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
             <svg
               aria-hidden="true"
               aria-label="Gitify Logo"
-              class="size-2.5"
+              class="size-5"
               viewBox="0 0 500 500"
               xmlns="https://www.w3.org/2000/svg"
               xmlns:xlink="https://www.w3.org/1999/xlink"
@@ -325,7 +325,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
   </body>,
   "container": <div>
     <div
-      class="fixed left-sidebar -ml-sidebar w-sidebar h-full bg-gitify-sidebar text-white prc-Stack-Stack-WJVsK"
+      class="fixed left-sidebar -ml-sidebar w-sidebar h-full bg-gitify-sidebar [&_svg]:text-white prc-Stack-Stack-WJVsK"
       data-align="stretch"
       data-direction="vertical"
       data-justify="space-between"
@@ -356,7 +356,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
           <svg
             aria-hidden="true"
             aria-label="Gitify Logo"
-            class="size-2.5"
+            class="size-5"
             viewBox="0 0 500 500"
             xmlns="https://www.w3.org/2000/svg"
             xmlns:xlink="https://www.w3.org/1999/xlink"
@@ -637,7 +637,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
   "baseElement": <body>
     <div>
       <div
-        class="fixed left-sidebar -ml-sidebar w-sidebar h-full bg-gitify-sidebar text-white prc-Stack-Stack-WJVsK"
+        class="fixed left-sidebar -ml-sidebar w-sidebar h-full bg-gitify-sidebar [&_svg]:text-white prc-Stack-Stack-WJVsK"
         data-align="stretch"
         data-direction="vertical"
         data-justify="space-between"
@@ -668,7 +668,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
             <svg
               aria-hidden="true"
               aria-label="Gitify Logo"
-              class="size-2.5"
+              class="size-5"
               viewBox="0 0 500 500"
               xmlns="https://www.w3.org/2000/svg"
               xmlns:xlink="https://www.w3.org/1999/xlink"
@@ -892,7 +892,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
   </body>,
   "container": <div>
     <div
-      class="fixed left-sidebar -ml-sidebar w-sidebar h-full bg-gitify-sidebar text-white prc-Stack-Stack-WJVsK"
+      class="fixed left-sidebar -ml-sidebar w-sidebar h-full bg-gitify-sidebar [&_svg]:text-white prc-Stack-Stack-WJVsK"
       data-align="stretch"
       data-direction="vertical"
       data-justify="space-between"
@@ -923,7 +923,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
           <svg
             aria-hidden="true"
             aria-label="Gitify Logo"
-            class="size-2.5"
+            class="size-5"
             viewBox="0 0 500 500"
             xmlns="https://www.w3.org/2000/svg"
             xmlns:xlink="https://www.w3.org/1999/xlink"

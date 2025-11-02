@@ -68,13 +68,13 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
     <div>
       <div
         class="prc-Popover-Popover-v1ShS"
-        data-caret="top"
+        data-caret="top-left"
         data-open=""
       >
         <div
-          class="prc-Popover-PopoverContent-nMzFS"
-          data-height="fit-content"
-          data-width="small"
+          class="p-2 mt-2 prc-Popover-PopoverContent-nMzFS"
+          data-height="auto"
+          data-width="auto"
         >
           <div
             class="prc-Stack-Stack-WJVsK"
@@ -102,13 +102,13 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
   "container": <div>
     <div
       class="prc-Popover-Popover-v1ShS"
-      data-caret="top"
+      data-caret="top-left"
       data-open=""
     >
       <div
-        class="prc-Popover-PopoverContent-nMzFS"
-        data-height="fit-content"
-        data-width="small"
+        class="p-2 mt-2 prc-Popover-PopoverContent-nMzFS"
+        data-height="auto"
+        data-width="auto"
       >
         <div
           class="prc-Stack-Stack-WJVsK"
@@ -193,13 +193,13 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
     <div>
       <div
         class="prc-Popover-Popover-v1ShS"
-        data-caret="top"
+        data-caret="top-left"
         data-open=""
       >
         <div
-          class="prc-Popover-PopoverContent-nMzFS"
-          data-height="fit-content"
-          data-width="small"
+          class="p-2 mt-2 prc-Popover-PopoverContent-nMzFS"
+          data-height="auto"
+          data-width="auto"
         >
           <div
             class="prc-Stack-Stack-WJVsK"
@@ -240,13 +240,13 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
   "container": <div>
     <div
       class="prc-Popover-Popover-v1ShS"
-      data-caret="top"
+      data-caret="top-left"
       data-open=""
     >
       <div
-        class="prc-Popover-PopoverContent-nMzFS"
-        data-height="fit-content"
-        data-width="small"
+        class="p-2 mt-2 prc-Popover-PopoverContent-nMzFS"
+        data-height="auto"
+        data-width="auto"
       >
         <div
           class="prc-Stack-Stack-WJVsK"
@@ -344,13 +344,13 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
     <div>
       <div
         class="prc-Popover-Popover-v1ShS"
-        data-caret="top"
+        data-caret="top-left"
         data-open=""
       >
         <div
-          class="prc-Popover-PopoverContent-nMzFS"
-          data-height="fit-content"
-          data-width="small"
+          class="p-2 mt-2 prc-Popover-PopoverContent-nMzFS"
+          data-height="auto"
+          data-width="auto"
         >
           <div
             class="prc-Stack-Stack-WJVsK"
@@ -435,13 +435,13 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
   "container": <div>
     <div
       class="prc-Popover-Popover-v1ShS"
-      data-caret="top"
+      data-caret="top-left"
       data-open=""
     >
       <div
-        class="prc-Popover-PopoverContent-nMzFS"
-        data-height="fit-content"
-        data-width="small"
+        class="p-2 mt-2 prc-Popover-PopoverContent-nMzFS"
+        data-height="auto"
+        data-width="auto"
       >
         <div
           class="prc-Stack-Stack-WJVsK"
@@ -583,13 +583,13 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
     <div>
       <div
         class="prc-Popover-Popover-v1ShS"
-        data-caret="top"
+        data-caret="top-left"
         data-open=""
       >
         <div
-          class="prc-Popover-PopoverContent-nMzFS"
-          data-height="fit-content"
-          data-width="small"
+          class="p-2 mt-2 prc-Popover-PopoverContent-nMzFS"
+          data-height="auto"
+          data-width="auto"
         >
           <div
             class="prc-Stack-Stack-WJVsK"
@@ -674,13 +674,13 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
   "container": <div>
     <div
       class="prc-Popover-Popover-v1ShS"
-      data-caret="top"
+      data-caret="top-left"
       data-open=""
     >
       <div
-        class="prc-Popover-PopoverContent-nMzFS"
-        data-height="fit-content"
-        data-width="small"
+        class="p-2 mt-2 prc-Popover-PopoverContent-nMzFS"
+        data-height="auto"
+        data-width="auto"
       >
         <div
           class="prc-Stack-Stack-WJVsK"

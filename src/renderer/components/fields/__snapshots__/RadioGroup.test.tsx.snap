@@ -30,7 +30,7 @@ exports[`renderer/components/fields/RadioGroup.tsx should render 1`] = `
           data-wrap="nowrap"
         >
           <input
-            class="size-2 cursor-pointer"
+            class="size-4 cursor-pointer"
             data-testid="radio-appearance-one"
             id="radio-appearance-one"
             name="appearance"
@@ -55,7 +55,7 @@ exports[`renderer/components/fields/RadioGroup.tsx should render 1`] = `
         >
           <input
             checked=""
-            class="size-2 cursor-pointer"
+            class="size-4 cursor-pointer"
             data-testid="radio-appearance-two"
             id="radio-appearance-two"
             name="appearance"
@@ -98,7 +98,7 @@ exports[`renderer/components/fields/RadioGroup.tsx should render 1`] = `
         data-wrap="nowrap"
       >
         <input
-          class="size-2 cursor-pointer"
+          class="size-4 cursor-pointer"
           data-testid="radio-appearance-one"
           id="radio-appearance-one"
           name="appearance"
@@ -123,7 +123,7 @@ exports[`renderer/components/fields/RadioGroup.tsx should render 1`] = `
       >
         <input
           checked=""
-          class="size-2 cursor-pointer"
+          class="size-4 cursor-pointer"
           data-testid="radio-appearance-two"
           id="radio-appearance-two"
           name="appearance"
@@ -223,7 +223,7 @@ exports[`renderer/components/fields/RadioGroup.tsx should render as disabled 1`]
           data-wrap="nowrap"
         >
           <input
-            class="size-2 cursor-pointer"
+            class="size-4 cursor-pointer"
             data-testid="radio-appearance-one"
             id="radio-appearance-one"
             name="appearance"
@@ -248,7 +248,7 @@ exports[`renderer/components/fields/RadioGroup.tsx should render as disabled 1`]
         >
           <input
             checked=""
-            class="size-2 cursor-pointer"
+            class="size-4 cursor-pointer"
             data-testid="radio-appearance-two"
             id="radio-appearance-two"
             name="appearance"
@@ -291,7 +291,7 @@ exports[`renderer/components/fields/RadioGroup.tsx should render as disabled 1`]
         data-wrap="nowrap"
       >
         <input
-          class="size-2 cursor-pointer"
+          class="size-4 cursor-pointer"
           data-testid="radio-appearance-one"
           id="radio-appearance-one"
           name="appearance"
@@ -316,7 +316,7 @@ exports[`renderer/components/fields/RadioGroup.tsx should render as disabled 1`]
       >
         <input
           checked=""
-          class="size-2 cursor-pointer"
+          class="size-4 cursor-pointer"
           data-testid="radio-appearance-two"
           id="radio-appearance-two"
           name="appearance"

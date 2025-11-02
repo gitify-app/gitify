@@ -9,7 +9,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
         class="flex flex-col min-h-screen bg-gitify-background"
       >
         <div
-          class="fixed left-sidebar -ml-sidebar w-sidebar h-full bg-gitify-sidebar text-white prc-Stack-Stack-WJVsK"
+          class="fixed left-sidebar -ml-sidebar w-sidebar h-full bg-gitify-sidebar [&_svg]:text-white prc-Stack-Stack-WJVsK"
           data-align="stretch"
           data-direction="vertical"
           data-justify="space-between"
@@ -40,7 +40,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
               <svg
                 aria-hidden="true"
                 aria-label="Gitify Logo"
-                class="size-2.5"
+                class="size-5"
                 viewBox="0 0 500 500"
                 xmlns="https://www.w3.org/2000/svg"
                 xmlns:xlink="https://www.w3.org/1999/xlink"
@@ -273,7 +273,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
       class="flex flex-col min-h-screen bg-gitify-background"
     >
       <div
-        class="fixed left-sidebar -ml-sidebar w-sidebar h-full bg-gitify-sidebar text-white prc-Stack-Stack-WJVsK"
+        class="fixed left-sidebar -ml-sidebar w-sidebar h-full bg-gitify-sidebar [&_svg]:text-white prc-Stack-Stack-WJVsK"
         data-align="stretch"
         data-direction="vertical"
         data-justify="space-between"
@@ -304,7 +304,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
             <svg
               aria-hidden="true"
               aria-label="Gitify Logo"
-              class="size-2.5"
+              class="size-5"
               viewBox="0 0 500 500"
               xmlns="https://www.w3.org/2000/svg"
               xmlns:xlink="https://www.w3.org/1999/xlink"

@@ -1,4 +1,4 @@
-import { type FC, useCallback, useContext, useMemo, useState } from 'react';
+import { type FC, useCallback, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import {
@@ -79,10 +79,6 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
 
   const [errors, setErrors] = useState({} as IFormErrors);
 
-  const hasErrors = useMemo(() => {
-    return Object.values(errors).some((error) => error !== '');
-  }, [errors]);
-
   const handleSubmit = async () => {
     setIsVerifyingCredentials(true);
     const newErrors = validateForm(formData);
@@ -129,17 +125,13 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
       <Header icon={KeyIcon}>Login with Personal Access Token</Header>
 
       <Contents>
-        {hasErrors && (
+        {errors.invalidCredentialsForHost && (
           <Banner
             data-testid="login-errors"
             description={
               <Text color="danger.fg">
                 <Stack direction="vertical" gap="condensed">
-                  {errors.hostname && <Text>{errors.hostname}</Text>}
-                  {errors.token && <Text>{errors.token}</Text>}
-                  {errors.invalidCredentialsForHost && (
-                    <Text>{errors.invalidCredentialsForHost}</Text>
-                  )}
+                  <Text>{errors.invalidCredentialsForHost}</Text>
                 </Stack>
               </Text>
             }
@@ -163,13 +155,13 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
               name="hostname"
               onChange={handleInputChange}
               placeholder="github.com"
-              // sx={{
-              //   borderColor: errors.hostname
-              //     ? 'danger.emphasis'
-              //     : 'border.default',
-              // }}
               value={formData.hostname}
             />
+            {errors.hostname && (
+              <FormControl.Validation variant="error">
+                {errors.hostname}
+              </FormControl.Validation>
+            )}
           </FormControl>
 
           <Stack direction="vertical" gap="condensed">
@@ -206,15 +198,16 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
             <TextInput
               aria-invalid={errors.token ? 'true' : 'false'}
               block
+              // className={
+              //   errors.token
+              //     ? 'border-gitify-textInput-error'
+              //     : 'border-gitify-textInput-default'
+              // }
+              className="border-red-600"
               data-testid="login-token"
               name="token"
               onChange={handleInputChange}
               placeholder="Your generated token (40 characters)"
-              // sx={{
-              //   borderColor: errors.token
-              //     ? 'danger.emphasis'
-              //     : 'border.default',
-              // }}
               trailingAction={
                 <TextInput.Action
                   aria-label={maskClientSecret ? 'Show token' : 'Hide token'}
@@ -225,6 +218,11 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
               type={maskClientSecret ? 'password' : 'text'}
               value={formData.token}
             />
+            {errors.token && (
+              <FormControl.Validation variant="error">
+                {errors.token}
+              </FormControl.Validation>
+            )}
           </FormControl>
         </Stack>
       </Contents>

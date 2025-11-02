@@ -1,4 +1,4 @@
-import { type FC, useCallback, useContext, useMemo, useState } from 'react';
+import { type FC, useCallback, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import {
@@ -88,10 +88,6 @@ export const LoginWithOAuthAppRoute: FC = () => {
 
   const [errors, setErrors] = useState({} as IFormErrors);
 
-  const hasErrors = useMemo(() => {
-    return Object.values(errors).some((error) => error !== '');
-  }, [errors]);
-
   const handleSubmit = async () => {
     setIsVerifyingCredentials(true);
 
@@ -137,18 +133,13 @@ export const LoginWithOAuthAppRoute: FC = () => {
       <Header icon={PersonIcon}>Login with OAuth App</Header>
 
       <Contents>
-        {hasErrors && (
+        {errors.invalidCredentialsForHost && (
           <Banner
             data-testid="login-errors"
             description={
               <Text color="danger.fg">
                 <Stack direction="vertical" gap="condensed">
-                  {errors.hostname && <Text>{errors.hostname}</Text>}
-                  {errors.clientId && <Text>{errors.clientId}</Text>}
-                  {errors.clientSecret && <Text>{errors.clientSecret}</Text>}
-                  {errors.invalidCredentialsForHost && (
-                    <Text>{errors.invalidCredentialsForHost}</Text>
-                  )}
+                  <Text>{errors.invalidCredentialsForHost}</Text>
                 </Stack>
               </Text>
             }
@@ -168,17 +159,22 @@ export const LoginWithOAuthAppRoute: FC = () => {
             <TextInput
               aria-invalid={errors.hostname ? 'true' : 'false'}
               block
+              className={
+                errors.hostname
+                  ? 'border-gitify-textInput-error'
+                  : 'border-gitify-textInput-default'
+              }
               data-testid="login-hostname"
               name="hostname"
               onChange={handleInputChange}
               placeholder="github.com"
-              // sx={{
-              //   borderColor: errors.hostname
-              //     ? 'danger.emphasis'
-              //     : 'border.default',
-              // }}
               value={formData.hostname}
             />
+            {errors.hostname && (
+              <FormControl.Validation variant="error">
+                {errors.hostname}
+              </FormControl.Validation>
+            )}
           </FormControl>
           <Stack align="center" direction="horizontal" gap="condensed">
             <Button
@@ -205,13 +201,13 @@ export const LoginWithOAuthAppRoute: FC = () => {
               name="clientId"
               onChange={handleInputChange}
               placeholder="Your generated client id (20 characters)"
-              // sx={{
-              //   borderColor: errors.clientId
-              //     ? 'danger.emphasis'
-              //     : 'border.default',
-              // }}
               value={formData.clientId}
             />
+            {errors.clientId && (
+              <FormControl.Validation variant="error">
+                {errors.clientId}
+              </FormControl.Validation>
+            )}
           </FormControl>
           <FormControl required>
             <FormControl.Label>Client Secret</FormControl.Label>
@@ -222,11 +218,6 @@ export const LoginWithOAuthAppRoute: FC = () => {
               name="clientSecret"
               onChange={handleInputChange}
               placeholder="Your generated client secret (40 characters)"
-              // sx={{
-              //   borderColor: errors.clientSecret
-              //     ? 'danger.emphasis'
-              //     : 'border.default',
-              // }}
               trailingAction={
                 <TextInput.Action
                   aria-label={maskToken ? 'Show token' : 'Hide token'}
@@ -237,6 +228,11 @@ export const LoginWithOAuthAppRoute: FC = () => {
               type={maskToken ? 'password' : 'text'}
               value={formData.clientSecret}
             />
+            {errors.clientSecret && (
+              <FormControl.Validation variant="error">
+                {errors.clientSecret}
+              </FormControl.Validation>
+            )}
           </FormControl>
         </Stack>
       </Contents>

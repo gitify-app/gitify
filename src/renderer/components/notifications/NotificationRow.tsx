@@ -77,7 +77,7 @@ export const NotificationRow: FC<INotificationRow> = ({
     <div
       className={cn(
         'group border-b',
-        'pl-1.5 pr-1 py-0.75',
+        'pl-2.75 pr-1 py-0.75',
         'text-gitify-font border-gitify-notification-border hover:bg-gitify-notification-hover',
         (isAnimated || animateExit) &&
           'translate-x-full opacity-0 transition duration-350 ease-in-out',
