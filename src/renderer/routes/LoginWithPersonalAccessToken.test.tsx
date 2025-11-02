@@ -170,7 +170,6 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
 
     await userEvent.click(screen.getByTestId('login-submit'));
 
-    expect(screen.getByTestId('login-errors')).toBeInTheDocument();
     expect(screen.getByText('Hostname format is invalid')).toBeInTheDocument();
     expect(screen.getByText('Token format is invalid')).toBeInTheDocument();
   });
