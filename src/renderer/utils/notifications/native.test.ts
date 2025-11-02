@@ -1,3 +1,5 @@
+import { waitFor } from '@testing-library/react';
+
 import {
   mockAccountNotifications,
   mockSingleAccountNotifications,
@@ -15,7 +17,7 @@ describe('renderer/utils/notifications/native.ts', () => {
   });
 
   describe('triggerNativeNotifications', () => {
-    it('should raise a native notification and play sound for a single new notification', () => {
+    it('should raise a native notification and play sound for a single new notification', async () => {
       const settings: SettingsState = {
         ...defaultSettings,
         playSound: true,
@@ -26,8 +28,11 @@ describe('renderer/utils/notifications/native.ts', () => {
         auth: mockAuth,
         settings,
       });
+      // wait for async native handling (generateGitHubWebUrl) to complete
+      await waitFor(() =>
+        expect(window.gitify.raiseNativeNotification).toHaveBeenCalledTimes(1),
+      );
 
-      expect(window.gitify.raiseNativeNotification).toHaveBeenCalledTimes(1);
       expect(window.gitify.raiseNativeNotification).toHaveBeenCalledWith(
         expect.stringContaining(
           mockSingleAccountNotifications[0].notifications[0].repository
@@ -36,14 +41,19 @@ describe('renderer/utils/notifications/native.ts', () => {
         expect.stringContaining(
           mockSingleAccountNotifications[0].notifications[0].subject.title,
         ),
-        null,
+        expect.stringContaining(
+          mockSingleAccountNotifications[0].notifications[0].repository
+            .html_url,
+        ),
       );
 
-      expect(raiseSoundNotificationMock).toHaveBeenCalledTimes(1);
+      await waitFor(() =>
+        expect(raiseSoundNotificationMock).toHaveBeenCalledTimes(1),
+      );
       expect(raiseSoundNotificationMock).toHaveBeenCalledWith(0.2);
     });
 
-    it('should raise a native notification and play sound for multiple new notifications', () => {
+    it('should raise a native notification and play sound for multiple new notifications', async () => {
       const settings: SettingsState = {
         ...defaultSettings,
         playSound: true,
@@ -54,15 +64,19 @@ describe('renderer/utils/notifications/native.ts', () => {
         auth: mockAuth,
         settings,
       });
+      await waitFor(() =>
+        expect(window.gitify.raiseNativeNotification).toHaveBeenCalledTimes(1),
+      );
 
-      expect(window.gitify.raiseNativeNotification).toHaveBeenCalledTimes(1);
       expect(window.gitify.raiseNativeNotification).toHaveBeenCalledWith(
         'Gitify',
         'You have 4 notifications',
         null,
       );
 
-      expect(raiseSoundNotificationMock).toHaveBeenCalledTimes(1);
+      await waitFor(() =>
+        expect(raiseSoundNotificationMock).toHaveBeenCalledTimes(1),
+      );
       expect(raiseSoundNotificationMock).toHaveBeenCalledWith(0.2);
     });
 
