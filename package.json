@@ -74,7 +74,7 @@
     "react-router-dom": "7.9.5"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.3.3",
+    "@biomejs/biome": "2.3.4",
     "@discordapp/twemoji": "16.0.1",
     "@electron/notarize": "3.1.1",
     "@primer/css": "22.0.2",
