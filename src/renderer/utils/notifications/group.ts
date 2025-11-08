@@ -9,7 +9,7 @@ export function isGroupByRepository(settings: SettingsState) {
 }
 
 /**
- * Group notifications by repository.full_name preserving first-seen repo order.
+ * Group notifications by repository.full_name preserving first-seen repository order.
  * Returns a Map where keys are repo full_names and values are arrays of notifications.
  * Skips notifications without valid repository data.
  */
