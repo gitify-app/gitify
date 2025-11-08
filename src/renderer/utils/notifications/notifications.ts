@@ -6,6 +6,7 @@ import type {
 import type { GitifySubject, Notification } from '../../typesGitHub';
 import { listNotificationsForAuthenticatedUser } from '../api/client';
 import { determineFailureType } from '../api/errors';
+import { getAccountUUID } from '../auth/utils';
 import { updateTrayColor, updateTrayTitle } from '../comms';
 import { rendererLogError, rendererLogWarn } from '../logger';
 import {
@@ -17,6 +18,7 @@ import { createNotificationHandler } from './handlers';
 
 /**
  * Sets the tray icon color and title based on the number of unread notifications.
+ *
  * @param notifications
  * @param settings
  */
@@ -35,6 +37,12 @@ export function setTrayIconColorAndTitle(
   updateTrayTitle(title);
 }
 
+/**
+ * Get the count of unread notifications.
+ *
+ * @param notifications - The notifications to check.
+ * @returns The count of unread notifications.
+ */
 export function getUnreadNotificationCount(
   notifications: AccountNotifications[],
 ) {
@@ -57,6 +65,12 @@ function getNotifications(state: GitifyState) {
   });
 }
 
+/**
+ * Get all notifications for all accounts.
+ *
+ * @param state - The Gitify state.
+ * @returns A promise that resolves to an array of account notifications.
+ */
 export async function getAllNotifications(
   state: GitifyState,
 ): Promise<AccountNotifications[]> {
@@ -131,6 +145,13 @@ export async function enrichNotifications(
   return enrichedNotifications;
 }
 
+/**
+ * Enrich a notification with additional details.
+ *
+ * @param notification - The notification to enrich.
+ * @param settings - The settings to use for enrichment.
+ * @returns The enriched notification.
+ */
 export async function enrichNotification(
   notification: Notification,
   settings: SettingsState,
@@ -185,3 +206,49 @@ export function stabilizeNotificationsOrder(
     n.order = orderIndex++;
   }
 }
+
+/**
+ * Find the account index for a given notification
+ *
+ * @param allNotifications - The list of all account notifications
+ * @param notification - The notification to find the account index for
+ * @returns The index of the account in the allNotifications array
+ */
+export const findAccountIndex = (
+  allNotifications: AccountNotifications[],
+  notification: Notification,
+): number => {
+  return allNotifications.findIndex(
+    (accountNotifications) =>
+      getAccountUUID(accountNotifications.account) ===
+      getAccountUUID(notification.account),
+  );
+};
+
+/**
+ * Find notifications that exist in newNotifications but not in previousNotifications
+ */
+export const getNewNotifications = (
+  previousNotifications: AccountNotifications[],
+  newNotifications: AccountNotifications[],
+): Notification[] => {
+  return newNotifications.flatMap((accountNotifications) => {
+    const accountPreviousNotifications = previousNotifications.find(
+      (item) =>
+        getAccountUUID(item.account) ===
+        getAccountUUID(accountNotifications.account),
+    );
+
+    if (!accountPreviousNotifications) {
+      return accountNotifications.notifications;
+    }
+
+    const previousIds = new Set(
+      accountPreviousNotifications.notifications.map((item) => item.id),
+    );
+
+    return accountNotifications.notifications.filter(
+      (notification) => !previousIds.has(notification.id),
+    );
+  });
+};

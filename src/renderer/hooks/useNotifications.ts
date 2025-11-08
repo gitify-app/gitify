@@ -16,22 +16,15 @@ import {
 import { updateTrayColor } from '../utils/comms';
 import { isMarkAsDoneFeatureSupported } from '../utils/features';
 import { rendererLogError } from '../utils/logger';
-import { triggerNativeNotifications } from '../utils/notifications/native';
+import {
+  raiseNativeNotification,
+  raiseSoundNotification,
+} from '../utils/notifications/native';
 import {
   getAllNotifications,
-  setTrayIconColorAndTitle,
+  getNewNotifications,
 } from '../utils/notifications/notifications';
 import { removeNotifications } from '../utils/notifications/remove';
-
-/**
- * Apply optimistic local updates for read state.  This helps with some
- * rendering edge cases between fetch notification intervals.
- */
-function markNotificationsAsReadLocally(targetNotifications: Notification[]) {
-  for (const n of targetNotifications) {
-    n.unread = false;
-  }
-}
 
 interface NotificationsState {
   status: Status;
@@ -110,11 +103,23 @@ export const useNotifications = (): NotificationsState => {
         return;
       }
 
-      triggerNativeNotifications(
+      const diffNotifications = getNewNotifications(
         previousNotifications,
         fetchedNotifications,
-        state,
       );
+
+      // If there are no new notifications just stop there
+      if (!diffNotifications.length) {
+        return;
+      }
+
+      if (state.settings.playSound) {
+        raiseSoundNotification(state.settings.notificationVolume / 100);
+      }
+
+      if (state.settings.showNotifications) {
+        raiseNativeNotification(diffNotifications);
+      }
 
       setNotifications(fetchedNotifications);
 
@@ -144,10 +149,7 @@ export const useNotifications = (): NotificationsState => {
           notifications,
         );
 
-        markNotificationsAsReadLocally(readNotifications);
-
         setNotifications(updatedNotifications);
-        setTrayIconColorAndTitle(updatedNotifications, state.settings);
       } catch (err) {
         rendererLogError(
           'markNotificationsAsRead',
@@ -186,10 +188,7 @@ export const useNotifications = (): NotificationsState => {
           notifications,
         );
 
-        markNotificationsAsReadLocally(doneNotifications);
-
         setNotifications(updatedNotifications);
-        setTrayIconColorAndTitle(updatedNotifications, state.settings);
       } catch (err) {
         rendererLogError(
           'markNotificationsAsDone',

@@ -180,7 +180,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     settings.showNotificationsCountInTray,
     settings.useUnreadActiveIcon,
     settings.useAlternateIdleIcon,
-    notifications,
+    unreadCount,
   ]);
 
   useEffect(() => {
