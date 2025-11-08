@@ -15,9 +15,9 @@ export function removeNotifications(
 
   // If delay notifications is enabled, mark notifications as read but do not remove them
   if (settings.delayNotificationState) {
-    return allNotifications.map((account) => ({
-      ...account,
-      notifications: account.notifications.map((notification) =>
+    return allNotifications.map((accountNotifications) => ({
+      ...accountNotifications,
+      notifications: accountNotifications.notifications.map((notification) =>
         removeIds.has(notification.id)
           ? { ...notification, unread: false }
           : notification,
