@@ -74,6 +74,7 @@ export const useNotifications = (): NotificationsState => {
 
       const previousNotifications = notifications;
       const fetchedNotifications = await getAllNotifications(state);
+      setNotifications(fetchedNotifications);
 
       // Set Global Error if all accounts have the same error
       const allAccountsHaveErrors =
@@ -104,20 +105,15 @@ export const useNotifications = (): NotificationsState => {
         fetchedNotifications,
       );
 
-      // If there are no new notifications just stop there
-      if (!diffNotifications.length) {
-        return;
-      }
+      if (diffNotifications.length > 0) {
+        if (state.settings.playSound) {
+          raiseSoundNotification(state.settings.notificationVolume / 100);
+        }
 
-      if (state.settings.playSound) {
-        raiseSoundNotification(state.settings.notificationVolume / 100);
+        if (state.settings.showNotifications) {
+          raiseNativeNotification(diffNotifications);
+        }
       }
-
-      if (state.settings.showNotifications) {
-        raiseNativeNotification(diffNotifications);
-      }
-
-      setNotifications(fetchedNotifications);
 
       setStatus('success');
     },
