@@ -16,15 +16,11 @@ import {
 import { updateTrayColor } from '../utils/comms';
 import { isMarkAsDoneFeatureSupported } from '../utils/features';
 import { rendererLogError } from '../utils/logger';
-import {
-  raiseNativeNotification,
-  raiseSoundNotification,
-} from '../utils/notifications/native';
-import {
-  getAllNotifications,
-  getNewNotifications,
-} from '../utils/notifications/notifications';
+import { raiseNativeNotification } from '../utils/notifications/native';
+import { getAllNotifications } from '../utils/notifications/notifications';
 import { removeNotifications } from '../utils/notifications/remove';
+import { raiseSoundNotification } from '../utils/notifications/sound';
+import { getNewNotifications } from '../utils/notifications/utils';
 
 interface NotificationsState {
   status: Status;

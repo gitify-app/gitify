@@ -48,10 +48,8 @@ import {
   setUseAlternateIdleIcon,
   setUseUnreadActiveIcon,
 } from '../utils/comms';
-import {
-  getUnreadNotificationCount,
-  setTrayIconColorAndTitle,
-} from '../utils/notifications/notifications';
+import { getUnreadNotificationCount } from '../utils/notifications/notifications';
+import { setTrayIconColorAndTitle } from '../utils/notifications/tray';
 import { clearState, loadState, saveState } from '../utils/storage';
 import {
   DEFAULT_DAY_COLOR_SCHEME,

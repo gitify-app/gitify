@@ -9,6 +9,7 @@ import { mockSingleNotification } from '../utils/api/__mocks__/response-mocks';
 import * as apiRequests from '../utils/api/request';
 import * as comms from '../utils/comms';
 import * as notifications from '../utils/notifications/notifications';
+import * as tray from '../utils/notifications/tray';
 import * as storage from '../utils/storage';
 import { AppContext, AppProvider } from './App';
 import { defaultSettings } from './defaults';
@@ -39,7 +40,7 @@ describe('renderer/context/App.tsx', () => {
 
   describe('notification methods', () => {
     const setTrayIconColorAndTitleMock = jest
-      .spyOn(notifications, 'setTrayIconColorAndTitle')
+      .spyOn(tray, 'setTrayIconColorAndTitle')
       .mockImplementation(jest.fn());
 
     jest

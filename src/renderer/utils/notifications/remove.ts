@@ -1,6 +1,6 @@
 import type { AccountNotifications, SettingsState } from '../../types';
 import type { Notification } from '../../typesGitHub';
-import { findAccountIndex } from './notifications';
+import { findAccountIndex } from './utils';
 
 export function removeNotifications(
   settings: SettingsState,
@@ -34,12 +34,14 @@ export function removeNotifications(
     return allNotifications;
   }
 
-  const updatedNotifications = [...allNotifications];
-  updatedNotifications[accountIndex] = {
-    ...updatedNotifications[accountIndex],
-    notifications: updatedNotifications[accountIndex].notifications.filter(
-      (notification) => !removeIds.has(notification.id),
-    ),
-  };
-  return updatedNotifications;
+  return allNotifications.map((account, index) =>
+    index === accountIndex
+      ? {
+          ...account,
+          notifications: account.notifications.filter(
+            (notification) => !removeIds.has(notification.id),
+          ),
+        }
+      : account,
+  );
 }
