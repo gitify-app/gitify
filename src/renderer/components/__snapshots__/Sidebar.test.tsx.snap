@@ -162,12 +162,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
             data-no-visuals="true"
             data-size="small"
             data-testid="sidebar-notifications"
-<<<<<<< HEAD
-            data-variant="primary"
-=======
             data-variant="invisible"
-            sx="[object Object]"
->>>>>>> main
             type="button"
           >
             <svg
@@ -422,12 +417,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
           data-no-visuals="true"
           data-size="small"
           data-testid="sidebar-notifications"
-<<<<<<< HEAD
-          data-variant="primary"
-=======
           data-variant="invisible"
-          sx="[object Object]"
->>>>>>> main
           type="button"
         >
           <svg
@@ -739,12 +729,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
             data-no-visuals="true"
             data-size="small"
             data-testid="sidebar-notifications"
-<<<<<<< HEAD
-            data-variant="primary"
-=======
             data-variant="invisible"
-            sx="[object Object]"
->>>>>>> main
             type="button"
           >
             <svg
@@ -999,12 +984,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
           data-no-visuals="true"
           data-size="small"
           data-testid="sidebar-notifications"
-<<<<<<< HEAD
-          data-variant="primary"
-=======
           data-variant="invisible"
-          sx="[object Object]"
->>>>>>> main
           type="button"
         >
           <svg
