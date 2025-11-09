@@ -94,10 +94,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
             data-wrap="nowrap"
           >
             <input
-<<<<<<< HEAD
               class="size-4 rounded-sm cursor-pointer"
-=======
-              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-Closed"
               id="Closed"
               type="checkbox"
@@ -150,8 +147,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
             data-wrap="nowrap"
           >
             <input
-              class="size-2 rounded-sm cursor-pointer"
->>>>>>> main
+              class="size-4 rounded-sm cursor-pointer"
               data-testid="checkbox-Draft"
               id="Draft"
               type="checkbox"
@@ -178,10 +174,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
             data-wrap="nowrap"
           >
             <input
-<<<<<<< HEAD
               class="size-4 rounded-sm cursor-pointer"
-=======
-              class="size-2 rounded-sm cursor-pointer"
               data-testid="checkbox-Merged"
               id="Merged"
               type="checkbox"
@@ -208,8 +201,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
             data-wrap="nowrap"
           >
             <input
-              class="size-2 rounded-sm cursor-pointer"
->>>>>>> main
+              class="size-4 rounded-sm cursor-pointer"
               data-testid="checkbox-Open"
               id="Open"
               type="checkbox"
@@ -262,91 +254,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
             data-wrap="nowrap"
           >
             <input
-<<<<<<< HEAD
               class="size-4 rounded-sm cursor-pointer"
-              data-testid="checkbox-Merged"
-              id="Merged"
-              type="checkbox"
-            />
-            <label
-              class="font-medium text-gitify-font cursor-pointer"
-              for="Merged"
-            >
-              Merged
-            </label>
-            <span
-              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
-            >
-              0
-            </span>
-          </div>
-          <div
-            class="text-sm prc-Stack-Stack-WJVsK"
-            data-align="center"
-            data-direction="horizontal"
-            data-gap="condensed"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
-          >
-            <input
-              class="size-4 rounded-sm cursor-pointer"
-              data-testid="checkbox-Closed"
-              id="Closed"
-              type="checkbox"
-            />
-            <label
-              class="font-medium text-gitify-font cursor-pointer"
-              for="Closed"
-            >
-              Closed
-            </label>
-            <button
-              aria-expanded="false"
-              aria-haspopup="true"
-              aria-label="tooltip-Closed"
-              data-testid="tooltip-tooltip-Closed"
-              id="tooltip-Closed"
-              tabindex="0"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-question text-gitify-tooltip-icon"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
-                />
-              </svg>
-            </button>
-            <span
-              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
-            >
-              0
-            </span>
-          </div>
-          <div
-            class="text-sm prc-Stack-Stack-WJVsK"
-            data-align="center"
-            data-direction="horizontal"
-            data-gap="condensed"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
-          >
-            <input
-              class="size-4 rounded-sm cursor-pointer"
-=======
-              class="size-2 rounded-sm cursor-pointer"
->>>>>>> main
               data-testid="checkbox-Other"
               id="Other"
               type="checkbox"
@@ -483,10 +391,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
           data-wrap="nowrap"
         >
           <input
-<<<<<<< HEAD
             class="size-4 rounded-sm cursor-pointer"
-=======
-            class="size-2 rounded-sm cursor-pointer"
             data-testid="checkbox-Closed"
             id="Closed"
             type="checkbox"
@@ -539,8 +444,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
           data-wrap="nowrap"
         >
           <input
-            class="size-2 rounded-sm cursor-pointer"
->>>>>>> main
+            class="size-4 rounded-sm cursor-pointer"
             data-testid="checkbox-Draft"
             id="Draft"
             type="checkbox"
@@ -567,10 +471,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
           data-wrap="nowrap"
         >
           <input
-<<<<<<< HEAD
             class="size-4 rounded-sm cursor-pointer"
-=======
-            class="size-2 rounded-sm cursor-pointer"
             data-testid="checkbox-Merged"
             id="Merged"
             type="checkbox"
@@ -597,8 +498,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
           data-wrap="nowrap"
         >
           <input
-            class="size-2 rounded-sm cursor-pointer"
->>>>>>> main
+            class="size-4 rounded-sm cursor-pointer"
             data-testid="checkbox-Open"
             id="Open"
             type="checkbox"
@@ -651,91 +551,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
           data-wrap="nowrap"
         >
           <input
-<<<<<<< HEAD
             class="size-4 rounded-sm cursor-pointer"
-            data-testid="checkbox-Merged"
-            id="Merged"
-            type="checkbox"
-          />
-          <label
-            class="font-medium text-gitify-font cursor-pointer"
-            for="Merged"
-          >
-            Merged
-          </label>
-          <span
-            class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
-          >
-            0
-          </span>
-        </div>
-        <div
-          class="text-sm prc-Stack-Stack-WJVsK"
-          data-align="center"
-          data-direction="horizontal"
-          data-gap="condensed"
-          data-justify="start"
-          data-padding="none"
-          data-wrap="nowrap"
-        >
-          <input
-            class="size-4 rounded-sm cursor-pointer"
-            data-testid="checkbox-Closed"
-            id="Closed"
-            type="checkbox"
-          />
-          <label
-            class="font-medium text-gitify-font cursor-pointer"
-            for="Closed"
-          >
-            Closed
-          </label>
-          <button
-            aria-expanded="false"
-            aria-haspopup="true"
-            aria-label="tooltip-Closed"
-            data-testid="tooltip-tooltip-Closed"
-            id="tooltip-Closed"
-            tabindex="0"
-            type="button"
-          >
-            <svg
-              aria-hidden="true"
-              class="octicon octicon-question text-gitify-tooltip-icon"
-              display="inline-block"
-              fill="currentColor"
-              focusable="false"
-              height="16"
-              overflow="visible"
-              style="vertical-align: text-bottom;"
-              viewBox="0 0 16 16"
-              width="16"
-            >
-              <path
-                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
-              />
-            </svg>
-          </button>
-          <span
-            class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
-          >
-            0
-          </span>
-        </div>
-        <div
-          class="text-sm prc-Stack-Stack-WJVsK"
-          data-align="center"
-          data-direction="horizontal"
-          data-gap="condensed"
-          data-justify="start"
-          data-padding="none"
-          data-wrap="nowrap"
-        >
-          <input
-            class="size-4 rounded-sm cursor-pointer"
-=======
-            class="size-2 rounded-sm cursor-pointer"
->>>>>>> main
             data-testid="checkbox-Other"
             id="Other"
             type="checkbox"

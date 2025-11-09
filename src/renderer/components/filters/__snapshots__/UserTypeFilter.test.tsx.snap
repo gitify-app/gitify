@@ -91,38 +91,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
             data-wrap="nowrap"
           >
             <input
-<<<<<<< HEAD
               class="size-4 rounded-sm cursor-pointer"
-              data-testid="checkbox-User"
-              id="User"
-              type="checkbox"
-            />
-            <label
-              class="font-medium text-gitify-font cursor-pointer"
-              for="User"
-            >
-              User
-            </label>
-            <span
-              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
-            >
-              1
-            </span>
-          </div>
-          <div
-            class="text-sm prc-Stack-Stack-WJVsK"
-            data-align="center"
-            data-direction="horizontal"
-            data-gap="condensed"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
-          >
-            <input
-              class="size-4 rounded-sm cursor-pointer"
-=======
-              class="size-2 rounded-sm cursor-pointer"
->>>>>>> main
               data-testid="checkbox-Bot"
               id="Bot"
               type="checkbox"
@@ -202,7 +171,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
             data-wrap="nowrap"
           >
             <input
-              class="size-2 rounded-sm cursor-pointer"
+              class="size-4 rounded-sm cursor-pointer"
               data-testid="checkbox-User"
               id="User"
               type="checkbox"
@@ -310,38 +279,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
           data-wrap="nowrap"
         >
           <input
-<<<<<<< HEAD
             class="size-4 rounded-sm cursor-pointer"
-            data-testid="checkbox-User"
-            id="User"
-            type="checkbox"
-          />
-          <label
-            class="font-medium text-gitify-font cursor-pointer"
-            for="User"
-          >
-            User
-          </label>
-          <span
-            class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
-          >
-            1
-          </span>
-        </div>
-        <div
-          class="text-sm prc-Stack-Stack-WJVsK"
-          data-align="center"
-          data-direction="horizontal"
-          data-gap="condensed"
-          data-justify="start"
-          data-padding="none"
-          data-wrap="nowrap"
-        >
-          <input
-            class="size-4 rounded-sm cursor-pointer"
-=======
-            class="size-2 rounded-sm cursor-pointer"
->>>>>>> main
             data-testid="checkbox-Bot"
             id="Bot"
             type="checkbox"
@@ -421,7 +359,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
           data-wrap="nowrap"
         >
           <input
-            class="size-2 rounded-sm cursor-pointer"
+            class="size-4 rounded-sm cursor-pointer"
             data-testid="checkbox-User"
             id="User"
             type="checkbox"
