@@ -30,9 +30,9 @@ export const SettingsReset: FC = () => {
   return (
     <Stack align="center">
       <Button
+        className="w-[200px]"
         data-testid="settings-reset"
         onClick={handleReset}
-        sx={{ width: '200px' }}
         variant="danger"
       >
         Reset Settings

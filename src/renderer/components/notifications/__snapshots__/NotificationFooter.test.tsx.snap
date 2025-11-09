@@ -56,7 +56,6 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
             Updated
           </span>
           <relative-time
-            class="sc-bRKDuR"
             datetime="2017-05-20T17:51:57.000Z"
           >
             May 20, 2017
@@ -197,7 +196,6 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
           Updated
         </span>
         <relative-time
-          class="sc-bRKDuR"
           datetime="2017-05-20T17:51:57.000Z"
         >
           May 20, 2017
@@ -395,7 +393,6 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
             Updated
           </span>
           <relative-time
-            class="sc-bRKDuR"
             datetime="2017-05-20T17:51:57.000Z"
           >
             May 20, 2017
@@ -536,7 +533,6 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
           Updated
         </span>
         <relative-time
-          class="sc-bRKDuR"
           datetime="2017-05-20T17:51:57.000Z"
         >
           May 20, 2017
@@ -735,7 +731,6 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
             Updated
           </span>
           <relative-time
-            class="sc-bRKDuR"
             datetime="2017-05-20T17:51:57.000Z"
           >
             May 20, 2017
@@ -877,7 +872,6 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
           Updated
         </span>
         <relative-time
-          class="sc-bRKDuR"
           datetime="2017-05-20T17:51:57.000Z"
         >
           May 20, 2017
@@ -1075,7 +1069,6 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
             Updated
           </span>
           <relative-time
-            class="sc-bRKDuR"
             datetime="2017-05-20T17:51:57.000Z"
           >
             May 20, 2017
@@ -1216,7 +1209,6 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
           Updated
         </span>
         <relative-time
-          class="sc-bRKDuR"
           datetime="2017-05-20T17:51:57.000Z"
         >
           May 20, 2017
@@ -1414,7 +1406,6 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
             Updated
           </span>
           <relative-time
-            class="sc-bRKDuR"
             datetime="2017-05-20T17:51:57.000Z"
           >
             May 20, 2017
@@ -1555,7 +1546,6 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
           Updated
         </span>
         <relative-time
-          class="sc-bRKDuR"
           datetime="2017-05-20T17:51:57.000Z"
         >
           May 20, 2017

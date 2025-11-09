@@ -24,7 +24,7 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
           <svg
             aria-hidden="true"
             aria-label="Gitify Logo"
-            class="size-8"
+            class="size-16"
             viewBox="0 0 500 500"
             xmlns="https://www.w3.org/2000/svg"
             xmlns:xlink="https://www.w3.org/1999/xlink"
@@ -75,17 +75,15 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
             data-wrap="nowrap"
           >
             <h2
-              class="Box-sc-g0xbh4-0 ckXLih prc-Heading-Heading-6CmGO"
-              sx="[object Object]"
+              class="prc-Heading-Heading-6CmGO"
             >
               GitHub Notifications
             </h2>
-            <h2
-              class="Box-sc-g0xbh4-0 gKIXLF prc-Heading-Heading-6CmGO"
-              sx="[object Object]"
+            <h3
+              class="prc-Heading-Heading-6CmGO"
             >
               on your menu bar
-            </h2>
+            </h3>
           </div>
           <div
             class="prc-Stack-Stack-WJVsK"
@@ -255,7 +253,7 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
         <svg
           aria-hidden="true"
           aria-label="Gitify Logo"
-          class="size-8"
+          class="size-16"
           viewBox="0 0 500 500"
           xmlns="https://www.w3.org/2000/svg"
           xmlns:xlink="https://www.w3.org/1999/xlink"
@@ -306,17 +304,15 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
           data-wrap="nowrap"
         >
           <h2
-            class="Box-sc-g0xbh4-0 ckXLih prc-Heading-Heading-6CmGO"
-            sx="[object Object]"
+            class="prc-Heading-Heading-6CmGO"
           >
             GitHub Notifications
           </h2>
-          <h2
-            class="Box-sc-g0xbh4-0 gKIXLF prc-Heading-Heading-6CmGO"
-            sx="[object Object]"
+          <h3
+            class="prc-Heading-Heading-6CmGO"
           >
             on your menu bar
-          </h2>
+          </h3>
         </div>
         <div
           class="prc-Stack-Stack-WJVsK"

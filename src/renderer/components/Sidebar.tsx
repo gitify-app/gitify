@@ -65,11 +65,9 @@ export const Sidebar: FC = () => {
     fetchNotifications();
   };
 
-  const sidebarButtonStyle = { color: 'white' };
-
   return (
     <Stack
-      className="fixed left-sidebar -ml-sidebar w-sidebar h-full bg-gitify-sidebar text-white"
+      className="fixed left-sidebar -ml-sidebar w-sidebar h-full bg-gitify-sidebar [&_svg]:text-white"
       direction="vertical"
       justify="space-between"
     >
@@ -98,7 +96,6 @@ export const Sidebar: FC = () => {
           icon={BellIcon}
           onClick={() => openGitHubNotifications(primaryAccountHostname)}
           size="small"
-          sx={sidebarButtonStyle}
           tooltipDirection="e"
           unsafeDisableTooltip={false}
           variant={hasNotifications ? 'primary' : 'invisible'}
@@ -112,7 +109,6 @@ export const Sidebar: FC = () => {
             icon={FilterIcon}
             onClick={() => toggleFilters()}
             size="small"
-            sx={sidebarButtonStyle}
             tooltipDirection="e"
             unsafeDisableTooltip={false}
             variant={hasActiveFilters(settings) ? 'primary' : 'invisible'}
@@ -125,7 +121,6 @@ export const Sidebar: FC = () => {
           icon={IssueOpenedIcon}
           onClick={() => openGitHubIssues(primaryAccountHostname)}
           size="small"
-          sx={sidebarButtonStyle}
           tooltipDirection="e"
           unsafeDisableTooltip={false}
           variant="invisible"
@@ -137,7 +132,6 @@ export const Sidebar: FC = () => {
           icon={GitPullRequestIcon}
           onClick={() => openGitHubPulls(primaryAccountHostname)}
           size="small"
-          sx={sidebarButtonStyle}
           tooltipDirection="e"
           unsafeDisableTooltip={false}
           variant="invisible"
@@ -161,7 +155,6 @@ export const Sidebar: FC = () => {
               loading={status === 'loading'}
               onClick={() => refreshNotifications()}
               size="small"
-              sx={sidebarButtonStyle}
               tooltipDirection="e"
               unsafeDisableTooltip={false}
               variant="invisible"
@@ -173,7 +166,6 @@ export const Sidebar: FC = () => {
               icon={GearIcon}
               onClick={() => toggleSettings()}
               size="small"
-              sx={sidebarButtonStyle}
               tooltipDirection="e"
               unsafeDisableTooltip={false}
               variant="invisible"
@@ -188,7 +180,6 @@ export const Sidebar: FC = () => {
             icon={XCircleIcon}
             onClick={() => quitApp()}
             size="small"
-            sx={sidebarButtonStyle}
             tooltipDirection="e"
             unsafeDisableTooltip={false}
             variant="invisible"

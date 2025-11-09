@@ -27,9 +27,9 @@ export const LogoIcon: FC<ILogoIcon> = ({
     aria-hidden="true"
     aria-label={`${APPLICATION.NAME} Logo`}
     className={cn(
-      size === Size.SMALL && 'size-2.5',
-      size === Size.MEDIUM && 'size-5',
-      size === Size.LARGE && 'size-8',
+      size === Size.SMALL && 'size-5',
+      size === Size.MEDIUM && 'size-10',
+      size === Size.LARGE && 'size-16',
     )}
     onClick={() => onClick?.()}
     viewBox="0 0 500 500"

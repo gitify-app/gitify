@@ -32,12 +32,11 @@ exports[`renderer/routes/components/primitives/Title.tsx should render the title
             d="M4.243 4.757a3.757 3.757 0 1 1 5.851 3.119 6.006 6.006 0 0 1 3.9 5.339.75.75 0 0 1-.715.784H2.721a.75.75 0 0 1-.714-.784 6.006 6.006 0 0 1 3.9-5.34 3.753 3.753 0 0 1-1.664-3.118Z"
           />
         </svg>
-        <h2
-          class="Box-sc-g0xbh4-0 mIkfY prc-Heading-Heading-6CmGO"
-          sx="[object Object]"
+        <h4
+          class="prc-Heading-Heading-6CmGO"
         >
           Legend
-        </h2>
+        </h4>
       </div>
     </div>
   </legend>
@@ -76,12 +75,11 @@ exports[`renderer/routes/components/primitives/Title.tsx should render the title
             d="M4.243 4.757a3.757 3.757 0 1 1 5.851 3.119 6.006 6.006 0 0 1 3.9 5.339.75.75 0 0 1-.715.784H2.721a.75.75 0 0 1-.714-.784 6.006 6.006 0 0 1 3.9-5.34 3.753 3.753 0 0 1-1.664-3.118Z"
           />
         </svg>
-        <h2
-          class="Box-sc-g0xbh4-0 ckXLih prc-Heading-Heading-6CmGO"
-          sx="[object Object]"
+        <h4
+          class="prc-Heading-Heading-6CmGO"
         >
           Legend
-        </h2>
+        </h4>
       </div>
     </div>
   </legend>

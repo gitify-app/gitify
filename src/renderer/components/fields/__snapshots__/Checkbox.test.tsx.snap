@@ -16,7 +16,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - disabled 1`] = 
       >
         <input
           checked=""
-          class="size-2 rounded-sm cursor-pointer"
+          class="size-4 rounded-sm cursor-pointer"
           data-testid="checkbox-appearance"
           disabled=""
           id="appearance"
@@ -43,7 +43,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - disabled 1`] = 
     >
       <input
         checked=""
-        class="size-2 rounded-sm cursor-pointer"
+        class="size-4 rounded-sm cursor-pointer"
         data-testid="checkbox-appearance"
         disabled=""
         id="appearance"
@@ -188,7 +188,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - positive counte
       >
         <input
           checked=""
-          class="size-2 rounded-sm cursor-pointer"
+          class="size-4 rounded-sm cursor-pointer"
           data-testid="checkbox-appearance"
           id="appearance"
           type="checkbox"
@@ -219,7 +219,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - positive counte
     >
       <input
         checked=""
-        class="size-2 rounded-sm cursor-pointer"
+        class="size-4 rounded-sm cursor-pointer"
         data-testid="checkbox-appearance"
         id="appearance"
         type="checkbox"
@@ -306,7 +306,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - positive counte
         data-wrap="nowrap"
       >
         <input
-          class="size-2 rounded-sm cursor-pointer"
+          class="size-4 rounded-sm cursor-pointer"
           data-testid="checkbox-appearance"
           id="appearance"
           type="checkbox"
@@ -336,7 +336,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - positive counte
       data-wrap="nowrap"
     >
       <input
-        class="size-2 rounded-sm cursor-pointer"
+        class="size-4 rounded-sm cursor-pointer"
         data-testid="checkbox-appearance"
         id="appearance"
         type="checkbox"
@@ -424,7 +424,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - tooltip 1`] = `
       >
         <input
           checked=""
-          class="size-2 rounded-sm cursor-pointer"
+          class="size-4 rounded-sm cursor-pointer"
           data-testid="checkbox-appearance"
           id="appearance"
           type="checkbox"
@@ -476,7 +476,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - tooltip 1`] = `
     >
       <input
         checked=""
-        class="size-2 rounded-sm cursor-pointer"
+        class="size-4 rounded-sm cursor-pointer"
         data-testid="checkbox-appearance"
         id="appearance"
         type="checkbox"
@@ -585,7 +585,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - visible 1`] = `
       >
         <input
           checked=""
-          class="size-2 rounded-sm cursor-pointer"
+          class="size-4 rounded-sm cursor-pointer"
           data-testid="checkbox-appearance"
           id="appearance"
           type="checkbox"
@@ -611,7 +611,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - visible 1`] = `
     >
       <input
         checked=""
-        class="size-2 rounded-sm cursor-pointer"
+        class="size-4 rounded-sm cursor-pointer"
         data-testid="checkbox-appearance"
         id="appearance"
         type="checkbox"
@@ -694,7 +694,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - zero counter 1`
       >
         <input
           checked=""
-          class="size-2 rounded-sm cursor-pointer"
+          class="size-4 rounded-sm cursor-pointer"
           data-testid="checkbox-appearance"
           id="appearance"
           type="checkbox"
@@ -725,7 +725,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - zero counter 1`
     >
       <input
         checked=""
-        class="size-2 rounded-sm cursor-pointer"
+        class="size-4 rounded-sm cursor-pointer"
         data-testid="checkbox-appearance"
         id="appearance"
         type="checkbox"

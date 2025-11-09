@@ -36,8 +36,8 @@ export const SearchFilterSuggestions: FC<SearchFilterSuggestionsProps> = ({
   const beginsWithKnownQualifier = base.some((q) => lower.startsWith(q.prefix));
 
   return (
-    <Popover open>
-      <Popover.Content sx={{ p: 2, mt: 2, width: '100%' }}>
+    <Popover caret="top-left" open>
+      <Popover.Content className="p-2 mt-2" height="auto" width="auto">
         <Stack direction="vertical" gap="condensed">
           {suggestions.length > 0 &&
             suggestions.map((q) => (

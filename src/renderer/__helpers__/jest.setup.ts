@@ -1,11 +1,16 @@
 import '@testing-library/jest-dom';
 
-import { TextEncoder } from 'node:util';
+/**
+ * Primer React testing helpers (per docs)
+ * - https://primer.style/product/getting-started/react/#testing
+ * - https://github.com/primer/react/blob/main/packages/react/src/utils/test-helpers.tsx
+ */
+import '@primer/react/test-helpers';
 
 /**
  * Gitify context bridge API
  */
-window.gitify = {
+globalThis.gitify = {
   app: {
     version: jest.fn().mockResolvedValue('v0.0.1'),
     hide: jest.fn(),
@@ -44,39 +49,9 @@ window.gitify = {
 process.env.OAUTH_CLIENT_ID = 'FAKE_CLIENT_ID_123';
 process.env.OAUTH_CLIENT_SECRET = 'FAKE_CLIENT_SECRET_123';
 
-/**
- * Primer (@primer/react) Setup - START
- *
- * Borrowed from https://github.com/primer/react/blob/main/packages/react/src/utils/test-helpers.tsx
- */
+globalThis.HTMLMediaElement.prototype.play = jest.fn();
 
-// JSDOM doesn't mock ResizeObserver
-global.ResizeObserver = jest.fn().mockImplementation(() => {
-  return {
-    observe: jest.fn(),
-    disconnect: jest.fn(),
-    unobserve: jest.fn(),
-  };
-});
-
-// @ts-expect-error only declare properties used internally
-global.CSS = {
-  escape: jest.fn(),
-  supports: jest.fn().mockImplementation(() => {
-    return false;
-  }),
-};
-
-// prevent ReferenceError: TextEncoder is not defined
-global.TextEncoder = TextEncoder;
-
-/**
- * Primer (@primer/react) Setup - END
- */
-
-window.HTMLMediaElement.prototype.play = jest.fn();
-
-window.matchMedia = (query: string): MediaQueryList => ({
+globalThis.matchMedia = (query: string): MediaQueryList => ({
   matches: false,
   media: query,
   onchange: null,
