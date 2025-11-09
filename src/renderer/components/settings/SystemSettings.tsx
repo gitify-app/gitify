@@ -8,6 +8,12 @@ import { APPLICATION } from '../../../shared/constants';
 import { AppContext } from '../../context/App';
 import { defaultSettings } from '../../context/defaults';
 import { OpenPreference } from '../../types';
+import {
+  canDecreaseVolume,
+  canIncreaseVolume,
+  decreaseVolume,
+  increaseVolume,
+} from '../../utils/notifications/sound';
 import { Checkbox } from '../fields/Checkbox';
 import { RadioGroup } from '../fields/RadioGroup';
 import { VolumeDownIcon } from '../icons/VolumeDownIcon';
@@ -104,13 +110,13 @@ export const SystemSettings: FC = () => {
             <IconButton
               aria-label="Volume down"
               data-testid="settings-volume-down"
+              disabled={!canDecreaseVolume(settings.notificationVolume)}
               icon={VolumeDownIcon}
               onClick={() => {
-                const newVolume = Math.max(
-                  settings.notificationVolume - 10,
-                  10,
+                updateSetting(
+                  'notificationVolume',
+                  decreaseVolume(settings.notificationVolume),
                 );
-                updateSetting('notificationVolume', newVolume);
               }}
               size="small"
               unsafeDisableTooltip={true}
@@ -123,13 +129,13 @@ export const SystemSettings: FC = () => {
             <IconButton
               aria-label="Volume up"
               data-testid="settings-volume-up"
+              disabled={!canIncreaseVolume(settings.notificationVolume)}
               icon={VolumeUpIcon}
               onClick={() => {
-                const newVolume = Math.min(
-                  settings.notificationVolume + 10,
-                  100,
+                updateSetting(
+                  'notificationVolume',
+                  increaseVolume(settings.notificationVolume),
                 );
-                updateSetting('notificationVolume', newVolume);
               }}
               size="small"
               unsafeDisableTooltip={true}

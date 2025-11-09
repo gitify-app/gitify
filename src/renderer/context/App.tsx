@@ -47,10 +47,8 @@ import {
   setKeyboardShortcut,
   setUseAlternateIdleIcon,
   setUseUnreadActiveIcon,
-  updateTrayColor,
-  updateTrayTitle,
 } from '../utils/comms';
-import { getNotificationCount } from '../utils/notifications/notifications';
+import { getUnreadNotificationCount } from '../utils/notifications/notifications';
 import { clearState, loadState, saveState } from '../utils/storage';
 import {
   DEFAULT_DAY_COLOR_SCHEME,
@@ -58,6 +56,7 @@ import {
   mapThemeModeToColorMode,
   mapThemeModeToColorScheme,
 } from '../utils/theme';
+import { setTrayIconColorAndTitle } from '../utils/tray';
 import { zoomPercentageToLevel } from '../utils/zoom';
 import { defaultAuth, defaultFilters, defaultSettings } from './defaults';
 
@@ -75,6 +74,8 @@ interface AppContextState {
   globalError: GitifyError;
 
   notifications: AccountNotifications[];
+  unreadCount: number;
+  hasNotifications: boolean;
   fetchNotifications: () => Promise<void>;
   removeAccountNotifications: (account: Account) => Promise<void>;
 
@@ -110,6 +111,10 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     unsubscribeNotification,
   } = useNotifications();
 
+  const unreadCount = getUnreadNotificationCount(notifications);
+
+  const hasNotifications = useMemo(() => unreadCount > 0, [unreadCount]);
+
   // biome-ignore lint/correctness/useExhaustiveDependencies: restoreSettings is stable and should run only once
   useEffect(() => {
     restoreSettings();
@@ -133,14 +138,16 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     setNightScheme,
   ]);
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: We only want fetchNotifications to be called for particular state changes
+  // biome-ignore lint/correctness/useExhaustiveDependencies: Fetch new notifications when account count or filters change
   useEffect(() => {
     fetchNotifications({ auth, settings });
   }, [
-    auth.accounts,
-    settings.filterUserTypes,
+    auth.accounts.length,
     settings.filterIncludeSearchTokens,
     settings.filterExcludeSearchTokens,
+    settings.filterUserTypes,
+    settings.filterSubjectTypes,
+    settings.filterStates,
     settings.filterReasons,
   ]);
 
@@ -164,24 +171,16 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     }
   }, Constants.REFRESH_ACCOUNTS_INTERVAL_MS);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: We also want to update the tray on setting changes
   useEffect(() => {
-    const count = getNotificationCount(notifications);
-
-    let title = '';
-    if (settings.showNotificationsCountInTray && count > 0) {
-      title = count.toString();
-    }
-
     setUseUnreadActiveIcon(settings.useUnreadActiveIcon);
     setUseAlternateIdleIcon(settings.useAlternateIdleIcon);
-
-    updateTrayColor(count);
-    updateTrayTitle(title);
+    setTrayIconColorAndTitle(unreadCount, settings);
   }, [
     settings.showNotificationsCountInTray,
     settings.useUnreadActiveIcon,
     settings.useAlternateIdleIcon,
-    notifications,
+    unreadCount,
   ]);
 
   useEffect(() => {
@@ -239,7 +238,9 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     const { authCode } = await authGitHub();
     const { token } = await getToken(authCode);
     const hostname = Constants.DEFAULT_AUTH_OPTIONS.hostname;
+
     const updatedAuth = await addAccount(auth, 'GitHub App', token, hostname);
+
     setAuth(updatedAuth);
     saveState({ auth: updatedAuth, settings });
   }, [auth, settings]);
@@ -247,10 +248,10 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   const loginWithOAuthApp = useCallback(
     async (data: LoginOAuthAppOptions) => {
       const { authOptions, authCode } = await authGitHub(data);
-
       const { token, hostname } = await getToken(authCode, authOptions);
 
       const updatedAuth = await addAccount(auth, 'OAuth App', token, hostname);
+
       setAuth(updatedAuth);
       saveState({ auth: updatedAuth, settings });
     },
@@ -268,6 +269,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         token,
         hostname,
       );
+
       setAuth(updatedAuth);
       saveState({ auth: updatedAuth, settings });
     },
@@ -279,10 +281,11 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       removeAccountNotifications(account);
 
       const updatedAuth = removeAccount(auth, account);
+
       setAuth(updatedAuth);
       saveState({ auth: updatedAuth, settings });
     },
-    [auth, settings],
+    [auth, settings, removeAccountNotifications],
   );
 
   const restoreSettings = useCallback(async () => {
@@ -356,6 +359,8 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       globalError,
 
       notifications,
+      unreadCount,
+      hasNotifications,
       fetchNotifications: fetchNotificationsWithAccounts,
 
       markNotificationsAsRead: markNotificationsAsReadWithAccounts,
@@ -380,6 +385,8 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       globalError,
 
       notifications,
+      unreadCount,
+      hasNotifications,
       fetchNotificationsWithAccounts,
       markNotificationsAsReadWithAccounts,
       markNotificationsAsDoneWithAccounts,

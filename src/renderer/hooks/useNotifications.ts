@@ -14,29 +14,26 @@ import {
   markNotificationThreadAsRead,
 } from '../utils/api/client';
 import { updateTrayColor } from '../utils/comms';
+import {
+  areAllAccountErrorsSame,
+  doesAllAccountsHaveErrors,
+} from '../utils/errors';
 import { isMarkAsDoneFeatureSupported } from '../utils/features';
 import { rendererLogError } from '../utils/logger';
-import { triggerNativeNotifications } from '../utils/notifications/native';
-import {
-  getAllNotifications,
-  setTrayIconColor,
-} from '../utils/notifications/notifications';
-import { removeNotifications } from '../utils/notifications/remove';
-
-/**
- * Apply optimistic local updates for read state.  This helps with some
- * rendering edge cases between fetch notification intervals.
- */
-function markNotificationsAsReadLocally(targetNotifications: Notification[]) {
-  for (const n of targetNotifications) {
-    n.unread = false;
-  }
-}
+import { raiseNativeNotification } from '../utils/notifications/native';
+import { getAllNotifications } from '../utils/notifications/notifications';
+import { removeNotificationsForAccount } from '../utils/notifications/remove';
+import { raiseSoundNotification } from '../utils/notifications/sound';
+import { getNewNotifications } from '../utils/notifications/utils';
 
 interface NotificationsState {
+  status: Status;
+  globalError: GitifyError;
+
   notifications: AccountNotifications[];
-  removeAccountNotifications: (account: Account) => Promise<void>;
   fetchNotifications: (state: GitifyState) => Promise<void>;
+  removeAccountNotifications: (account: Account) => Promise<void>;
+
   markNotificationsAsRead: (
     state: GitifyState,
     notifications: Notification[],
@@ -49,8 +46,6 @@ interface NotificationsState {
     state: GitifyState,
     notification: Notification,
   ) => Promise<void>;
-  status: Status;
-  globalError: GitifyError;
 }
 
 export const useNotifications = (): NotificationsState => {
@@ -70,7 +65,7 @@ export const useNotifications = (): NotificationsState => {
       );
 
       setNotifications(updatedNotifications);
-      setTrayIconColor(updatedNotifications);
+
       setStatus('success');
     },
     [notifications],
@@ -81,34 +76,39 @@ export const useNotifications = (): NotificationsState => {
       setStatus('loading');
       setGlobalError(null);
 
+      const previousNotifications = notifications;
       const fetchedNotifications = await getAllNotifications(state);
+      setNotifications(fetchedNotifications);
 
       // Set Global Error if all accounts have the same error
       const allAccountsHaveErrors =
-        fetchedNotifications.length > 0 &&
-        fetchedNotifications.every((account) => {
-          return account.error !== null;
-        });
-
-      let accountErrorsAreAllSame = true;
-      const accountError = fetchedNotifications[0]?.error;
-
-      for (const fetchedNotification of fetchedNotifications) {
-        if (accountError !== fetchedNotification.error) {
-          accountErrorsAreAllSame = false;
-          break;
-        }
-      }
+        doesAllAccountsHaveErrors(fetchedNotifications);
+      const allAccountErrorsAreSame =
+        areAllAccountErrorsSame(fetchedNotifications);
 
       if (allAccountsHaveErrors) {
+        const accountError = fetchedNotifications[0].error;
         setStatus('error');
-        setGlobalError(accountErrorsAreAllSame ? accountError : null);
+        setGlobalError(allAccountErrorsAreSame ? accountError : null);
         updateTrayColor(-1);
         return;
       }
 
-      setNotifications(fetchedNotifications);
-      triggerNativeNotifications(notifications, fetchedNotifications, state);
+      const diffNotifications = getNewNotifications(
+        previousNotifications,
+        fetchedNotifications,
+      );
+
+      if (diffNotifications.length > 0) {
+        if (state.settings.playSound) {
+          raiseSoundNotification(state.settings.notificationVolume);
+        }
+
+        if (state.settings.showNotifications) {
+          raiseNativeNotification(diffNotifications);
+        }
+      }
+
       setStatus('success');
     },
     [notifications],
@@ -129,16 +129,14 @@ export const useNotifications = (): NotificationsState => {
           ),
         );
 
-        const updatedNotifications = removeNotifications(
+        const updatedNotifications = removeNotificationsForAccount(
+          readNotifications[0].account,
           state.settings,
           readNotifications,
           notifications,
         );
 
-        markNotificationsAsReadLocally(readNotifications);
-
         setNotifications(updatedNotifications);
-        setTrayIconColor(updatedNotifications);
       } catch (err) {
         rendererLogError(
           'markNotificationsAsRead',
@@ -171,16 +169,14 @@ export const useNotifications = (): NotificationsState => {
           ),
         );
 
-        const updatedNotifications = removeNotifications(
+        const updatedNotifications = removeNotificationsForAccount(
+          doneNotifications[0].account,
           state.settings,
           doneNotifications,
           notifications,
         );
 
-        markNotificationsAsReadLocally(doneNotifications);
-
         setNotifications(updatedNotifications);
-        setTrayIconColor(updatedNotifications);
       } catch (err) {
         rendererLogError(
           'markNotificationsAsDone',
@@ -227,10 +223,11 @@ export const useNotifications = (): NotificationsState => {
   return {
     status,
     globalError,
-    notifications,
 
-    removeAccountNotifications,
+    notifications,
     fetchNotifications,
+    removeAccountNotifications,
+
     markNotificationsAsRead,
     markNotificationsAsDone,
     unsubscribeNotification,

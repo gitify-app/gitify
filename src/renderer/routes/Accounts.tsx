@@ -34,7 +34,6 @@ import {
   getAccountUUID,
   refreshAccount,
 } from '../utils/auth/utils';
-import { updateTrayColor, updateTrayTitle } from '../utils/comms';
 import { getAuthMethodIcon, getPlatformIcon } from '../utils/icons';
 import {
   openAccountProfile,
@@ -57,8 +56,6 @@ export const AccountsRoute: FC = () => {
     (account: Account) => {
       logoutFromAccount(account);
       navigate(-1);
-      updateTrayColor();
-      updateTrayTitle();
     },
     [logoutFromAccount],
   );

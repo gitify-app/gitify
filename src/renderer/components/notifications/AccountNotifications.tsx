@@ -35,7 +35,7 @@ interface IAccountNotifications {
 export const AccountNotifications: FC<IAccountNotifications> = (
   props: IAccountNotifications,
 ) => {
-  const { account, showAccountHeader, error, notifications } = props;
+  const { account, showAccountHeader, notifications } = props;
 
   const { settings } = useContext(AppContext);
 
@@ -48,12 +48,10 @@ export const AccountNotifications: FC<IAccountNotifications> = (
   );
 
   const groupedNotifications = useMemo(() => {
-    const map = groupNotificationsByRepository([
-      { account, error, notifications: sortedNotifications },
-    ]);
+    const map = groupNotificationsByRepository(sortedNotifications);
 
-    return Array.from(map.values());
-  }, [account, error, sortedNotifications]);
+    return Array.from(map.entries());
+  }, [sortedNotifications]);
 
   const hasNotifications = useMemo(
     () => notifications.length > 0,
@@ -129,19 +127,17 @@ export const AccountNotifications: FC<IAccountNotifications> = (
       {showAccountNotifications && (
         <>
           {props.error && <Oops error={props.error} fullHeight={false} />}
-          {!hasNotifications && !props.error && <AllRead fullHeight={false} />}
-          {isGroupByRepository(settings)
-            ? groupedNotifications.map((repoNotifications) => {
-                const repoSlug = repoNotifications[0].repository.full_name;
 
-                return (
-                  <RepositoryNotifications
-                    key={repoSlug}
-                    repoName={repoSlug}
-                    repoNotifications={repoNotifications}
-                  />
-                );
-              })
+          {!hasNotifications && !props.error && <AllRead fullHeight={false} />}
+
+          {isGroupByRepository(settings)
+            ? groupedNotifications.map(([repoSlug, repoNotifications]) => (
+                <RepositoryNotifications
+                  key={repoSlug}
+                  repoName={repoSlug}
+                  repoNotifications={repoNotifications}
+                />
+              ))
             : sortedNotifications.map((notification) => (
                 <NotificationRow
                   key={notification.id}
