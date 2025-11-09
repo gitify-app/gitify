@@ -6,10 +6,10 @@ const config: Config = {
   testEnvironment: 'jsdom',
   collectCoverage: true,
   collectCoverageFrom: ['src/**/*', '!**/__snapshots__/**'],
-  // Use ts-jest for TS and babel-jest for JS so we can transpile ESM from node_modules (@primer/react)
+  // Use ts-jest for TS/TSX and babel-jest only for plain JS/ESM (no JSX handled there)
   transform: {
     '^.+\\.(ts|tsx)$': ['ts-jest', { tsconfig: { jsx: 'react-jsx' } }],
-    '^.+\\.(js|jsx|mjs)$': 'babel-jest',
+    '^.+\\.(js|mjs)$': 'babel-jest',
   },
   // Allow transforming specific ESM packages in node_modules
   transformIgnorePatterns: [

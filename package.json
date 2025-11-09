@@ -76,8 +76,6 @@
   "devDependencies": {
     "@babel/core": "7.28.5",
     "@babel/preset-env": "7.28.5",
-    "@babel/preset-react": "7.28.5",
-    "@babel/preset-typescript": "7.28.5",
     "@biomejs/biome": "2.3.4",
     "@discordapp/twemoji": "16.0.1",
     "@electron/notarize": "3.1.1",
