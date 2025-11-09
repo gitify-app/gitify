@@ -44,6 +44,10 @@ describe('renderer/context/App.tsx', () => {
       .mockImplementation(jest.fn());
 
     jest
+      .spyOn(notifications, 'getNotificationCount')
+      .mockImplementation(jest.fn());
+
+    jest
       .spyOn(notifications, 'getUnreadNotificationCount')
       .mockImplementation(jest.fn());
 

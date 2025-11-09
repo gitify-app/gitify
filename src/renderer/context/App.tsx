@@ -48,7 +48,10 @@ import {
   setUseAlternateIdleIcon,
   setUseUnreadActiveIcon,
 } from '../utils/comms';
-import { getUnreadNotificationCount } from '../utils/notifications/notifications';
+import {
+  getNotificationCount,
+  getUnreadNotificationCount,
+} from '../utils/notifications/notifications';
 import { clearState, loadState, saveState } from '../utils/storage';
 import {
   DEFAULT_DAY_COLOR_SCHEME,
@@ -75,6 +78,7 @@ interface AppContextState {
 
   notifications: AccountNotifications[];
   unreadCount: number;
+  hasUnreadNotifications: boolean;
   hasNotifications: boolean;
   fetchNotifications: () => Promise<void>;
   removeAccountNotifications: (account: Account) => Promise<void>;
@@ -111,9 +115,17 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     unsubscribeNotification,
   } = useNotifications();
 
-  const unreadCount = getUnreadNotificationCount(notifications);
+  const notificationCount = getNotificationCount(notifications);
+  const unreadNotificationCount = getUnreadNotificationCount(notifications);
 
-  const hasNotifications = useMemo(() => unreadCount > 0, [unreadCount]);
+  const hasNotifications = useMemo(
+    () => notificationCount > 0,
+    [notificationCount],
+  );
+  const hasUnreadNotifications = useMemo(
+    () => unreadNotificationCount > 0,
+    [unreadNotificationCount],
+  );
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: restoreSettings is stable and should run only once
   useEffect(() => {
@@ -175,12 +187,12 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     setUseUnreadActiveIcon(settings.useUnreadActiveIcon);
     setUseAlternateIdleIcon(settings.useAlternateIdleIcon);
-    setTrayIconColorAndTitle(unreadCount, settings);
+    setTrayIconColorAndTitle(unreadNotificationCount, settings);
   }, [
     settings.showNotificationsCountInTray,
     settings.useUnreadActiveIcon,
     settings.useAlternateIdleIcon,
-    unreadCount,
+    unreadNotificationCount,
   ]);
 
   useEffect(() => {
@@ -359,8 +371,10 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       globalError,
 
       notifications,
-      unreadCount,
+      notificationCount,
+      unreadNotificationCount,
       hasNotifications,
+      hasUnreadNotifications,
       fetchNotifications: fetchNotificationsWithAccounts,
 
       markNotificationsAsRead: markNotificationsAsReadWithAccounts,
@@ -385,8 +399,10 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       globalError,
 
       notifications,
-      unreadCount,
+      notificationCount,
+      unreadNotificationCount,
       hasNotifications,
+      hasUnreadNotifications,
       fetchNotificationsWithAccounts,
       markNotificationsAsReadWithAccounts,
       markNotificationsAsDoneWithAccounts,

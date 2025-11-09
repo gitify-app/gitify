@@ -15,9 +15,22 @@ import { getFlattenedNotificationsByRepo } from './group';
 import { createNotificationHandler } from './handlers';
 
 /**
- * Get the count of unread notifications.
+ * Get the count of notifications across all accounts.
  *
- * @param notifications - The notifications to check.
+ * @param notifications - The account notifications to check.
+ * @returns The count of all notifications.
+ */
+export function getNotificationCount(notifications: AccountNotifications[]) {
+  return notifications.reduce(
+    (sum, account) => sum + account.notifications.length,
+    0,
+  );
+}
+
+/**
+ * Get the count of notifications across all accounts.
+ *
+ * @param notifications - The account notifications to check.
  * @returns The count of unread notifications.
  */
 export function getUnreadNotificationCount(

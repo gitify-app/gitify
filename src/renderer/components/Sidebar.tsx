@@ -36,7 +36,7 @@ export const Sidebar: FC = () => {
     settings,
     auth,
     unreadCount,
-    hasNotifications,
+    hasUnreadNotifications,
   } = useContext(AppContext);
 
   // We naively assume that the first account is the primary account for the purposes of our sidebar quick links
@@ -98,7 +98,7 @@ export const Sidebar: FC = () => {
           size="small"
           tooltipDirection="e"
           unsafeDisableTooltip={false}
-          variant={hasNotifications ? 'primary' : 'invisible'}
+          variant={hasUnreadNotifications ? 'primary' : 'invisible'}
         />
 
         {isLoggedIn && (
