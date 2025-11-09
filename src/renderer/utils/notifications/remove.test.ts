@@ -26,6 +26,7 @@ describe('renderer/utils/remove.ts', () => {
     );
 
     expect(result[0].notifications.length).toBe(1);
+    expect(result[0].notifications[0].unread).toBe(false);
   });
 
   it('should skip notification removal if nothing to remove', () => {
