@@ -32,7 +32,7 @@ export const Tooltip: FC<ITooltip> = (props: ITooltip) => {
     >
       <div
         className={
-          'z-10 w-30 rounded-sm border border-gray-300 p-2 shadow-sm bg-gitify-tooltip-popout text-left text-xs text-gitify-font'
+          'z-10 w-60 rounded-sm border border-gray-300 p-2 shadow-sm bg-gitify-tooltip-popout text-left text-xs text-gitify-font'
         }
       >
         {props.tooltip}
