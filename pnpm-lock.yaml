@@ -58,8 +58,8 @@ importers:
         specifier: 11.3.0
         version: 11.3.0
       '@primer/react':
-        specifier: 38.0.0
-        version: 38.0.0(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react-is@18.3.0)(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react-is@18.3.1)(react@19.2.0)
+        specifier: 38.1.0
+        version: 38.1.0(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react-is@18.3.0)(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react-is@18.3.1)(react@19.2.0)
       '@tailwindcss/postcss':
         specifier: 4.1.17
         version: 4.1.17
@@ -1247,8 +1247,8 @@ packages:
   '@primer/primitives@11.3.0':
     resolution: {integrity: sha512-eQkAaODy7/T1LwX38YLdQUKNTcLdiIY5DN8u2Ylov0Y1MOGpMCW4yF6/oH8slS3WDnQVbtNOAqqyuGYM8Un41g==}
 
-  '@primer/react@38.0.0':
-    resolution: {integrity: sha512-MFmbmcal44IPxUIem9kEd7SF0XmJLjXGWMl1OQqsqMAiAhp0fEPpbrz/pmuIkCfg+5ZRJcw36RkQDrBe7fsyqg==}
+  '@primer/react@38.1.0':
+    resolution: {integrity: sha512-942b59FzsHyKDSyfCnXGjot3c0O68sa0sjto7S0ZhLUj4wnrnPK9nopt3xmcQZa+z5ShwCOgfwKHrnQwjvn+Zg==}
     engines: {node: '>=12', npm: '>=7'}
     peerDependencies:
       '@types/react': 18.x || 19.x
@@ -4146,8 +4146,8 @@ packages:
   randombytes@2.1.0:
     resolution: {integrity: sha512-vYl3iOX+4CKUWuxGi9Ukhie6fsqXqS9FE2Zaic4tNFD2N2QQaXOMFbuKK4QmDHC0JO6B1Zp41J0LpT0oR68amQ==}
 
-  react-compiler-runtime@19.1.0-rc.3:
-    resolution: {integrity: sha512-Cssogys2XZu6SqxRdX2xd8cQAf57BBvFbLEBlIa77161lninbKUn/EqbecCe7W3eqDQfg3rIoOwzExzgCh7h/g==}
+  react-compiler-runtime@1.0.0:
+    resolution: {integrity: sha512-rRfjYv66HlG8896yPUDONgKzG5BxZD1nV9U6rkm+7VCuvQc903C4MjcoZR4zPw53IKSOX9wMQVpA1IAbRtzQ7w==}
     peerDependencies:
       react: ^17.0.0 || ^18.0.0 || ^19.0.0 || ^0.0.0-experimental
 
@@ -6337,7 +6337,7 @@ snapshots:
 
   '@primer/primitives@11.3.0': {}
 
-  '@primer/react@38.0.0(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react-is@18.3.0)(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react-is@18.3.1)(react@19.2.0)':
+  '@primer/react@38.1.0(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react-is@18.3.0)(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react-is@18.3.1)(react@19.2.0)':
     dependencies:
       '@github/mini-throttle': 2.1.1
       '@github/relative-time-element': 4.4.8
@@ -6357,7 +6357,7 @@ snapshots:
       lodash.isempty: 4.4.0
       lodash.isobject: 3.0.2
       react: 19.2.0
-      react-compiler-runtime: 19.1.0-rc.3(react@19.2.0)
+      react-compiler-runtime: 1.0.0(react@19.2.0)
       react-dom: 19.2.0(react@19.2.0)
       react-intersection-observer: 9.16.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       react-is: 18.3.1
@@ -9604,7 +9604,7 @@ snapshots:
     dependencies:
       safe-buffer: 5.2.1
 
-  react-compiler-runtime@19.1.0-rc.3(react@19.2.0):
+  react-compiler-runtime@1.0.0(react@19.2.0):
     dependencies:
       react: 19.2.0
 
