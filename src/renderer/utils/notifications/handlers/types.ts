@@ -11,37 +11,35 @@ import type {
 
 export interface NotificationTypeHandler {
   readonly type?: SubjectType;
+  readonly notification: Notification;
 
   /**
    * Enrich a notification. Settings may be unused for some handlers.
    */
-  enrich(
-    notification: Notification,
-    settings: SettingsState,
-  ): Promise<GitifySubject>;
+  enrich(settings: SettingsState): Promise<GitifySubject>;
 
   /**
    * Return the icon component for this notification type.
    */
-  iconType(notification: Notification): FC<OcticonProps> | null;
+  iconType(): FC<OcticonProps> | null;
 
   /**
    * Return the icon color for this notification type.
    */
-  iconColor(notification: Notification): string | undefined;
+  iconColor(): string | undefined;
 
   /**
    * Return the formatted notification type for this notification.
    */
-  formattedNotificationType(notification: Notification): string;
+  formattedNotificationType(): string;
 
   /**
    * Return the formatted notification number for this notification.
    */
-  formattedNotificationNumber(notification: Notification): string;
+  formattedNotificationNumber(): string;
 
   /**
    * Return the formatted notification title for this notification.
    */
-  formattedNotificationTitle(notification: Notification): string;
+  formattedNotificationTitle(): string;
 }

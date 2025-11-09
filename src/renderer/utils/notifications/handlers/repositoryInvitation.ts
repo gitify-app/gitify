@@ -4,13 +4,18 @@ import { MailIcon, type OcticonProps } from '@primer/octicons-react';
 
 import type { Notification } from '../../../typesGitHub';
 import { DefaultHandler } from './default';
+import type { NotificationTypeHandler } from './types';
 
 class RepositoryInvitationHandler extends DefaultHandler {
   readonly type = 'RepositoryInvitation';
 
-  iconType(_notification: Notification): FC<OcticonProps> | null {
+  iconType(): FC<OcticonProps> | null {
     return MailIcon;
   }
 }
 
-export const repositoryInvitationHandler = new RepositoryInvitationHandler();
+export function createRepositoryInvitationHandler(
+  notification: Notification,
+): NotificationTypeHandler {
+  return new RepositoryInvitationHandler(notification);
+}

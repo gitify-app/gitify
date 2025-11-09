@@ -63,11 +63,11 @@ export const NotificationRow: FC<INotificationRow> = ({
   };
 
   const handler = createNotificationHandler(notification);
-  const NotificationIcon = handler.iconType(notification);
-  const iconColor = handler.iconColor(notification);
-  const notificationType = handler.formattedNotificationType(notification);
-  const notificationNumber = handler.formattedNotificationNumber(notification);
-  const notificationTitle = handler.formattedNotificationTitle(notification);
+  const NotificationIcon = handler.iconType();
+  const iconColor = handler.iconColor();
+  const notificationType = handler.formattedNotificationType();
+  const notificationNumber = handler.formattedNotificationNumber();
+  const notificationTitle = handler.formattedNotificationTitle();
 
   const groupByDate = settings.groupBy === GroupBy.DATE;
 

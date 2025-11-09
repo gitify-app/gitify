@@ -14,17 +14,18 @@ import type { GitifySubject, Notification, User } from '../../../typesGitHub';
 import { getIssue, getIssueOrPullRequestComment } from '../../api/client';
 import { isStateFilteredOut } from '../filters/filter';
 import { DefaultHandler } from './default';
+import type { NotificationTypeHandler } from './types';
 import { getSubjectUser } from './utils';
 
 class IssueHandler extends DefaultHandler {
   readonly type = 'Issue';
 
-  async enrich(
-    notification: Notification,
-    settings: SettingsState,
-  ): Promise<GitifySubject> {
+  async enrich(settings: SettingsState): Promise<GitifySubject> {
     const issue = (
-      await getIssue(notification.subject.url, notification.account.token)
+      await getIssue(
+        this.notification.subject.url,
+        this.notification.account.token,
+      )
     ).data;
 
     const issueState = issue.state_reason ?? issue.state;
@@ -36,11 +37,11 @@ class IssueHandler extends DefaultHandler {
 
     let issueCommentUser: User;
 
-    if (notification.subject.latest_comment_url) {
+    if (this.notification.subject.latest_comment_url) {
       const issueComment = (
         await getIssueOrPullRequestComment(
-          notification.subject.latest_comment_url,
-          notification.account.token,
+          this.notification.subject.latest_comment_url,
+          this.notification.account.token,
         )
       ).data;
       issueCommentUser = issueComment.user;
@@ -56,8 +57,8 @@ class IssueHandler extends DefaultHandler {
     };
   }
 
-  iconType(notification: Notification): FC<OcticonProps> | null {
-    switch (notification.subject.state) {
+  iconType(): FC<OcticonProps> | null {
+    switch (this.notification.subject.state) {
       case 'draft':
         return IssueDraftIcon;
       case 'closed':
@@ -73,4 +74,8 @@ class IssueHandler extends DefaultHandler {
   }
 }
 
-export const issueHandler = new IssueHandler();
+export function createIssueHandler(
+  notification: Notification,
+): NotificationTypeHandler {
+  return new IssueHandler(notification);
+}

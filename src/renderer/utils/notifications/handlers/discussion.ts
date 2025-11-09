@@ -21,15 +21,13 @@ import type {
 import { getLatestDiscussion } from '../../api/client';
 import { isStateFilteredOut } from '../filters/filter';
 import { DefaultHandler } from './default';
+import type { NotificationTypeHandler } from './types';
 
 class DiscussionHandler extends DefaultHandler {
   readonly type = 'Discussion';
 
-  async enrich(
-    notification: Notification,
-    settings: SettingsState,
-  ): Promise<GitifySubject> {
-    const discussion = await getLatestDiscussion(notification);
+  async enrich(settings: SettingsState): Promise<GitifySubject> {
+    const discussion = await getLatestDiscussion(this.notification);
     let discussionState: DiscussionStateType = 'OPEN';
 
     if (discussion) {
@@ -48,7 +46,7 @@ class DiscussionHandler extends DefaultHandler {
     }
 
     const latestDiscussionComment = getClosestDiscussionCommentOrReply(
-      notification,
+      this.notification,
       discussion.comments.nodes,
     );
 
@@ -76,8 +74,8 @@ class DiscussionHandler extends DefaultHandler {
     };
   }
 
-  iconType(notification: Notification): FC<OcticonProps> | null {
-    switch (notification.subject.state) {
+  iconType(): FC<OcticonProps> | null {
+    switch (this.notification.subject.state) {
       case 'DUPLICATE':
         return DiscussionDuplicateIcon;
       case 'OUTDATED':
@@ -90,7 +88,11 @@ class DiscussionHandler extends DefaultHandler {
   }
 }
 
-export const discussionHandler = new DiscussionHandler();
+export function createDiscussionHandler(
+  notification: Notification,
+): NotificationTypeHandler {
+  return new DiscussionHandler(notification);
+}
 
 export function getClosestDiscussionCommentOrReply(
   notification: Notification,

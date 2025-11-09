@@ -25,17 +25,18 @@ import {
 } from '../../api/client';
 import { isStateFilteredOut, isUserFilteredOut } from '../filters/filter';
 import { DefaultHandler } from './default';
+import type { NotificationTypeHandler } from './types';
 import { getSubjectUser } from './utils';
 
 class PullRequestHandler extends DefaultHandler {
   readonly type = 'PullRequest' as const;
 
-  async enrich(
-    notification: Notification,
-    settings: SettingsState,
-  ): Promise<GitifySubject> {
+  async enrich(settings: SettingsState): Promise<GitifySubject> {
     const pr = (
-      await getPullRequest(notification.subject.url, notification.account.token)
+      await getPullRequest(
+        this.notification.subject.url,
+        this.notification.account.token,
+      )
     ).data;
 
     let prState: PullRequestStateType = pr.state;
@@ -52,13 +53,14 @@ class PullRequestHandler extends DefaultHandler {
 
     let prCommentUser: User;
     if (
-      notification.subject.latest_comment_url &&
-      notification.subject.latest_comment_url !== notification.subject.url
+      this.notification.subject.latest_comment_url &&
+      this.notification.subject.latest_comment_url !==
+        this.notification.subject.url
     ) {
       const prComment = (
         await getIssueOrPullRequestComment(
-          notification.subject.latest_comment_url,
-          notification.account.token,
+          this.notification.subject.latest_comment_url,
+          this.notification.account.token,
         )
       ).data;
       prCommentUser = prComment.user;
@@ -71,7 +73,7 @@ class PullRequestHandler extends DefaultHandler {
       return null;
     }
 
-    const reviews = await getLatestReviewForReviewers(notification);
+    const reviews = await getLatestReviewForReviewers(this.notification);
     const linkedIssues = parseLinkedIssuesFromPr(pr);
 
     return {
@@ -86,8 +88,8 @@ class PullRequestHandler extends DefaultHandler {
     };
   }
 
-  iconType(notification: Notification): FC<OcticonProps> | null {
-    switch (notification.subject.state) {
+  iconType(): FC<OcticonProps> | null {
+    switch (this.notification.subject.state) {
       case 'draft':
         return GitPullRequestDraftIcon;
       case 'closed':
@@ -100,7 +102,11 @@ class PullRequestHandler extends DefaultHandler {
   }
 }
 
-export const pullRequestHandler = new PullRequestHandler();
+export function createPullRequestHandler(
+  notification: Notification,
+): NotificationTypeHandler {
+  return new PullRequestHandler(notification);
+}
 
 export async function getLatestReviewForReviewers(
   notification: Notification,

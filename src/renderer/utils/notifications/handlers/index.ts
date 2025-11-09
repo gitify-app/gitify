@@ -1,56 +1,42 @@
 import type { Notification } from '../../../typesGitHub';
-import { checkSuiteHandler } from './checkSuite';
-import { commitHandler } from './commit';
-import { defaultHandler } from './default';
-import { discussionHandler } from './discussion';
-import { issueHandler } from './issue';
-import { pullRequestHandler } from './pullRequest';
-import { releaseHandler } from './release';
-import { repositoryDependabotAlertsThreadHandler } from './repositoryDependabotAlertsThread';
-import { repositoryInvitationHandler } from './repositoryInvitation';
-import { repositoryVulnerabilityAlertHandler } from './repositoryVulnerabilityAlert';
+import { createCheckSuiteHandler } from './checkSuite';
+import { createCommitHandler } from './commit';
+import { createDefaultHandler } from './default';
+import { createDiscussionHandler } from './discussion';
+import { createIssueHandler } from './issue';
+import { createPullRequestHandler } from './pullRequest';
+import { createReleaseHandler } from './release';
+import { createRepositoryDependabotAlertsThreadHandler } from './repositoryDependabotAlertsThread';
+import { createRepositoryInvitationHandler } from './repositoryInvitation';
+import { createRepositoryVulnerabilityAlertHandler } from './repositoryVulnerabilityAlert';
 import type { NotificationTypeHandler } from './types';
-import { workflowRunHandler } from './workflowRun';
+import { createWorkflowRunHandler } from './workflowRun';
 
 export function createNotificationHandler(
   notification: Notification,
 ): NotificationTypeHandler {
   switch (notification.subject.type) {
     case 'CheckSuite':
-      return checkSuiteHandler;
+      return createCheckSuiteHandler(notification);
     case 'Commit':
-      return commitHandler;
+      return createCommitHandler(notification);
     case 'Discussion':
-      return discussionHandler;
+      return createDiscussionHandler(notification);
     case 'Issue':
-      return issueHandler;
+      return createIssueHandler(notification);
     case 'PullRequest':
-      return pullRequestHandler;
+      return createPullRequestHandler(notification);
     case 'Release':
-      return releaseHandler;
+      return createReleaseHandler(notification);
     case 'RepositoryDependabotAlertsThread':
-      return repositoryDependabotAlertsThreadHandler;
+      return createRepositoryDependabotAlertsThreadHandler(notification);
     case 'RepositoryInvitation':
-      return repositoryInvitationHandler;
+      return createRepositoryInvitationHandler(notification);
     case 'RepositoryVulnerabilityAlert':
-      return repositoryVulnerabilityAlertHandler;
+      return createRepositoryVulnerabilityAlertHandler(notification);
     case 'WorkflowRun':
-      return workflowRunHandler;
+      return createWorkflowRunHandler(notification);
     default:
-      return defaultHandler;
+      return createDefaultHandler(notification);
   }
 }
-
-export const handlers = {
-  checkSuiteHandler,
-  commitHandler,
-  discussionHandler,
-  issueHandler,
-  pullRequestHandler,
-  releaseHandler,
-  repositoryDependabotAlertsThreadHandler,
-  repositoryInvitationHandler,
-  repositoryVulnerabilityAlertHandler,
-  workflowRunHandler,
-  defaultHandler,
-};

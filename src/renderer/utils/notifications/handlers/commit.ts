@@ -13,15 +13,13 @@ import type {
 import { getCommit, getCommitComment } from '../../api/client';
 import { isStateFilteredOut } from '../filters/filter';
 import { DefaultHandler } from './default';
+import type { NotificationTypeHandler } from './types';
 import { getSubjectUser } from './utils';
 
 class CommitHandler extends DefaultHandler {
   readonly type = 'Commit';
 
-  async enrich(
-    notification: Notification,
-    settings: SettingsState,
-  ): Promise<GitifySubject> {
+  async enrich(settings: SettingsState): Promise<GitifySubject> {
     const commitState: StateType = null; // Commit notifications are stateless
 
     // Return early if this notification would be hidden by filters
@@ -31,18 +29,21 @@ class CommitHandler extends DefaultHandler {
 
     let user: User;
 
-    if (notification.subject.latest_comment_url) {
+    if (this.notification.subject.latest_comment_url) {
       const commitComment = (
         await getCommitComment(
-          notification.subject.latest_comment_url,
-          notification.account.token,
+          this.notification.subject.latest_comment_url,
+          this.notification.account.token,
         )
       ).data;
 
       user = commitComment.user;
     } else {
       const commit = (
-        await getCommit(notification.subject.url, notification.account.token)
+        await getCommit(
+          this.notification.subject.url,
+          this.notification.account.token,
+        )
       ).data;
 
       user = commit.author;
@@ -54,9 +55,13 @@ class CommitHandler extends DefaultHandler {
     };
   }
 
-  iconType(_notification: Notification): FC<OcticonProps> | null {
+  iconType(): FC<OcticonProps> | null {
     return GitCommitIcon;
   }
 }
 
-export const commitHandler = new CommitHandler();
+export function createCommitHandler(
+  notification: Notification,
+): NotificationTypeHandler {
+  return new CommitHandler(notification);
+}

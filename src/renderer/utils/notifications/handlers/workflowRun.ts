@@ -11,15 +11,13 @@ import type {
   WorkflowRunAttributes,
 } from '../../../typesGitHub';
 import { DefaultHandler } from './default';
+import type { NotificationTypeHandler } from './types';
 
 class WorkflowRunHandler extends DefaultHandler {
   readonly type = 'WorkflowRun';
 
-  async enrich(
-    notification: Notification,
-    _settings: SettingsState,
-  ): Promise<GitifySubject> {
-    const state = getWorkflowRunAttributes(notification)?.status;
+  async enrich(_settings: SettingsState): Promise<GitifySubject> {
+    const state = getWorkflowRunAttributes(this.notification)?.status;
 
     if (state) {
       return {
@@ -31,12 +29,16 @@ class WorkflowRunHandler extends DefaultHandler {
     return null;
   }
 
-  iconType(_notification: Notification): FC<OcticonProps> | null {
+  iconType(): FC<OcticonProps> | null {
     return RocketIcon;
   }
 }
 
-export const workflowRunHandler = new WorkflowRunHandler();
+export function createWorkflowRunHandler(
+  notification: Notification,
+): NotificationTypeHandler {
+  return new WorkflowRunHandler(notification);
+}
 
 /**
  * Ideally we would be using a GitHub API to fetch the CheckSuite / WorkflowRun state,
