@@ -22,7 +22,7 @@ import { isMarkAsDoneFeatureSupported } from '../utils/features';
 import { rendererLogError } from '../utils/logger';
 import { raiseNativeNotification } from '../utils/notifications/native';
 import { getAllNotifications } from '../utils/notifications/notifications';
-import { removeNotifications } from '../utils/notifications/remove';
+import { removeNotificationsForAccount } from '../utils/notifications/remove';
 import { raiseSoundNotification } from '../utils/notifications/sound';
 import { getNewNotifications } from '../utils/notifications/utils';
 
@@ -129,7 +129,8 @@ export const useNotifications = (): NotificationsState => {
           ),
         );
 
-        const updatedNotifications = removeNotifications(
+        const updatedNotifications = removeNotificationsForAccount(
+          readNotifications[0].account,
           state.settings,
           readNotifications,
           notifications,
@@ -168,7 +169,8 @@ export const useNotifications = (): NotificationsState => {
           ),
         );
 
-        const updatedNotifications = removeNotifications(
+        const updatedNotifications = removeNotificationsForAccount(
+          doneNotifications[0].account,
           state.settings,
           doneNotifications,
           notifications,

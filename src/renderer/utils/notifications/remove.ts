@@ -1,8 +1,14 @@
-import type { AccountNotifications, SettingsState } from '../../types';
+import type { Account, AccountNotifications, SettingsState } from '../../types';
 import type { Notification } from '../../typesGitHub';
-import { findAccountIndex } from './utils';
+import { getAccountUUID } from '../auth/utils';
 
-export function removeNotifications(
+/**
+ * Remove notifications from the account notifications list.
+ *
+ * If delayNotificationState is enabled in settings, mark notifications as read instead of removing them.
+ */
+export function removeNotificationsForAccount(
+  account: Account,
   settings: SettingsState,
   notificationsToRemove: Notification[],
   allNotifications: AccountNotifications[],
@@ -11,37 +17,24 @@ export function removeNotifications(
     return allNotifications;
   }
 
-  const removeIds = new Set(notificationsToRemove.map((n) => n.id));
-
-  // If delay notifications is enabled, mark notifications as read but do not remove them
-  if (settings.delayNotificationState) {
-    return allNotifications.map((accountNotifications) => ({
-      ...accountNotifications,
-      notifications: accountNotifications.notifications.map((notification) =>
-        removeIds.has(notification.id)
-          ? { ...notification, unread: false }
-          : notification,
-      ),
-    }));
-  }
-
-  const accountIndex = findAccountIndex(
-    allNotifications,
-    notificationsToRemove[0],
+  const notificationIDsToRemove = new Set(
+    notificationsToRemove.map((n) => n.id),
   );
 
-  if (accountIndex === -1) {
-    return allNotifications;
-  }
-
-  return allNotifications.map((account, index) =>
-    index === accountIndex
+  return allNotifications.map((accountNotifications) =>
+    getAccountUUID(account) === getAccountUUID(accountNotifications.account)
       ? {
-          ...account,
-          notifications: account.notifications.filter(
-            (notification) => !removeIds.has(notification.id),
-          ),
+          ...accountNotifications,
+          notifications: settings.delayNotificationState
+            ? accountNotifications.notifications.map((notification) =>
+                notificationIDsToRemove.has(notification.id)
+                  ? { ...notification, unread: false }
+                  : notification,
+              )
+            : accountNotifications.notifications.filter(
+                (notification) => !notificationIDsToRemove.has(notification.id),
+              ),
         }
-      : account,
+      : accountNotifications,
   );
 }

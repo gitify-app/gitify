@@ -3,24 +3,6 @@ import type { Notification } from '../../typesGitHub';
 import { getAccountUUID } from '../auth/utils';
 
 /**
- * Find the account index for a given notification
- *
- * @param allNotifications - The list of all account notifications
- * @param notification - The notification to find the account index for
- * @returns The index of the account in the allNotifications array
- */
-export function findAccountIndex(
-  allNotifications: AccountNotifications[],
-  notification: Notification,
-): number {
-  return allNotifications.findIndex(
-    (accountNotifications) =>
-      getAccountUUID(accountNotifications.account) ===
-      getAccountUUID(notification.account),
-  );
-}
-
-/**
  * Find notifications that exist in newNotifications but not in previousNotifications
  */
 export function getNewNotifications(
