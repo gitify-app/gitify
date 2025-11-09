@@ -157,14 +157,16 @@ export function stabilizeNotificationsOrder(
   notifications: AccountNotifications[],
   settings: SettingsState,
 ) {
-  const flattenedNotifications = getFlattenedNotificationsByRepo(
-    notifications,
-    settings,
-  );
-
   let orderIndex = 0;
 
-  for (const n of flattenedNotifications) {
-    n.order = orderIndex++;
+  for (const account of notifications) {
+    const flattenedNotifications = getFlattenedNotificationsByRepo(
+      account.notifications,
+      settings,
+    );
+
+    for (const n of flattenedNotifications) {
+      n.order = orderIndex++;
+    }
   }
 }
