@@ -28,4 +28,4 @@ const config: Config = {
   modulePathIgnorePatterns: ['<rootDir>/build', '<rootDir>/node_modules'],
 };
 
-export default config;
+module.exports = config;
