@@ -1,4 +1,4 @@
-import type { AccountNotifications, SettingsState } from '../../types';
+import type { SettingsState } from '../../types';
 import type { Notification } from '../../typesGitHub';
 
 /**
@@ -14,26 +14,24 @@ export function isGroupByRepository(settings: SettingsState) {
  * Skips notifications without valid repository data.
  */
 export function groupNotificationsByRepository(
-  accounts: AccountNotifications[],
+  notifications: Notification[],
 ): Map<string, Notification[]> {
   const repoGroups = new Map<string, Notification[]>();
 
-  for (const account of accounts) {
-    for (const notification of account.notifications) {
-      const repo = notification.repository?.full_name;
+  for (const notification of notifications) {
+    const repo = notification.repository?.full_name;
 
-      // Skip notifications without valid repository data
-      if (!repo) {
-        continue;
-      }
+    // Skip notifications without valid repository data
+    if (!repo) {
+      continue;
+    }
 
-      const group = repoGroups.get(repo);
+    const group = repoGroups.get(repo);
 
-      if (group) {
-        group.push(notification);
-      } else {
-        repoGroups.set(repo, [notification]);
-      }
+    if (group) {
+      group.push(notification);
+    } else {
+      repoGroups.set(repo, [notification]);
     }
   }
 
@@ -45,13 +43,14 @@ export function groupNotificationsByRepository(
  * (when grouped) or the natural account->notification order otherwise.
  */
 export function getFlattenedNotificationsByRepo(
-  accounts: AccountNotifications[],
+  notifications: Notification[],
   settings: SettingsState,
 ): Notification[] {
   if (isGroupByRepository(settings)) {
-    const repoGroups = groupNotificationsByRepository(accounts);
-    return Array.from(repoGroups.values()).flat();
+    const groupedNotifications = groupNotificationsByRepository(notifications);
+
+    return Array.from(groupedNotifications.values()).flat();
   }
 
-  return accounts.flatMap((a) => a.notifications);
+  return notifications;
 }

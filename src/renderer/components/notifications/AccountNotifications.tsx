@@ -35,7 +35,7 @@ interface IAccountNotifications {
 export const AccountNotifications: FC<IAccountNotifications> = (
   props: IAccountNotifications,
 ) => {
-  const { account, showAccountHeader, error, notifications } = props;
+  const { account, showAccountHeader, notifications } = props;
 
   const { settings } = useContext(AppContext);
 
@@ -48,12 +48,10 @@ export const AccountNotifications: FC<IAccountNotifications> = (
   );
 
   const groupedNotifications = useMemo(() => {
-    const map = groupNotificationsByRepository([
-      { account, error, notifications: sortedNotifications },
-    ]);
+    const map = groupNotificationsByRepository(sortedNotifications);
 
     return Array.from(map.entries());
-  }, [account, error, sortedNotifications]);
+  }, [sortedNotifications]);
 
   const hasNotifications = useMemo(
     () => notifications.length > 0,
