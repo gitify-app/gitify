@@ -20,25 +20,10 @@ export function volumePercentageToLevel(percentage: Percentage): number {
 }
 
 /**
- * Decrease volume by step amount
+ * Returns true if can decrease volume percentage further
  */
-export function decreaseVolume(volume: Percentage) {
-  if (canDecreaseVolume(volume)) {
-    return volume - VOLUME_STEP;
-  }
-
-  return volume;
-}
-
-/**
- * Increase volume by step amount
- */
-export function increaseVolume(volume: Percentage) {
-  if (canIncreaseVolume(volume)) {
-    return volume + VOLUME_STEP;
-  }
-
-  return volume;
+export function canDecreaseVolume(volumePercentage: Percentage) {
+  return volumePercentage - VOLUME_STEP >= MINIMUM_VOLUME_PERCENTAGE;
 }
 
 /**
@@ -49,8 +34,23 @@ export function canIncreaseVolume(volumePercentage: Percentage) {
 }
 
 /**
- * Returns true if can decrease volume percentage further
+ * Decrease volume by step amount
  */
-export function canDecreaseVolume(volumePercentage: Percentage) {
-  return volumePercentage - VOLUME_STEP >= MINIMUM_VOLUME_PERCENTAGE;
+export function decreaseVolume(volume: Percentage) {
+  if (canDecreaseVolume(volume)) {
+    return volume - VOLUME_STEP;
+  }
+
+  return MINIMUM_VOLUME_PERCENTAGE;
+}
+
+/**
+ * Increase volume by step amount
+ */
+export function increaseVolume(volume: Percentage) {
+  if (canIncreaseVolume(volume)) {
+    return volume + VOLUME_STEP;
+  }
+
+  return MAXIMUM_VOLUME_PERCENTAGE;
 }

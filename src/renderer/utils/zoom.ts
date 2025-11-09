@@ -37,6 +37,20 @@ export function zoomLevelToPercentage(zoom: number): Percentage {
 }
 
 /**
+ * Returns true if can decrease zoom percentage further
+ */
+export function canDecreaseZoom(zoomPercentage: Percentage) {
+  return zoomPercentage - ZOOM_STEP >= MINIMUM_ZOOM_PERCENTAGE;
+}
+
+/**
+ * Returns true if can increase zoom percentage further
+ */
+export function canIncreaseZoom(zoomPercentage: Percentage) {
+  return zoomPercentage + ZOOM_STEP <= MAXIMUM_ZOOM_PERCENTAGE;
+}
+
+/**
  * Decrease zoom by step amount
  */
 export function decreaseZoom(zoomPercentage: Percentage) {
@@ -56,18 +70,4 @@ export function increaseZoom(zoomPercentage: Percentage) {
       zoomPercentageToLevel((zoomPercentage + ZOOM_STEP) as Percentage),
     );
   }
-}
-
-/**
- * Returns true if can increase zoom percentage further
- */
-export function canIncreaseZoom(zoomPercentage: Percentage) {
-  return zoomPercentage + ZOOM_STEP <= MAXIMUM_ZOOM_PERCENTAGE;
-}
-
-/**
- * Returns true if can decrease zoom percentage further
- */
-export function canDecreaseZoom(zoomPercentage: Percentage) {
-  return zoomPercentage - ZOOM_STEP >= MINIMUM_ZOOM_PERCENTAGE;
 }
