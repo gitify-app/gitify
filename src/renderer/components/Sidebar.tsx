@@ -35,7 +35,7 @@ export const Sidebar: FC = () => {
     status,
     settings,
     auth,
-    unreadCount,
+    unreadNotificationCount,
     hasUnreadNotifications,
   } = useContext(AppContext);
 
@@ -92,7 +92,7 @@ export const Sidebar: FC = () => {
         <IconButton
           aria-label="Notifications"
           data-testid="sidebar-notifications"
-          description={`${unreadCount} unread notifications ↗`}
+          description={`${unreadNotificationCount} unread notifications ↗`}
           icon={BellIcon}
           onClick={() => openGitHubNotifications(primaryAccountHostname)}
           size="small"

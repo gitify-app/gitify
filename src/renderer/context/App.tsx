@@ -77,12 +77,13 @@ interface AppContextState {
   globalError: GitifyError;
 
   notifications: AccountNotifications[];
-  unreadCount: number;
-  hasUnreadNotifications: boolean;
+  notificationCount: number;
+  unreadNotificationCount: number;
   hasNotifications: boolean;
+  hasUnreadNotifications: boolean;
+
   fetchNotifications: () => Promise<void>;
   removeAccountNotifications: (account: Account) => Promise<void>;
-
   markNotificationsAsRead: (notifications: Notification[]) => Promise<void>;
   markNotificationsAsDone: (notifications: Notification[]) => Promise<void>;
   unsubscribeNotification: (notification: Notification) => Promise<void>;
@@ -375,8 +376,8 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       unreadNotificationCount,
       hasNotifications,
       hasUnreadNotifications,
-      fetchNotifications: fetchNotificationsWithAccounts,
 
+      fetchNotifications: fetchNotificationsWithAccounts,
       markNotificationsAsRead: markNotificationsAsReadWithAccounts,
       markNotificationsAsDone: markNotificationsAsDoneWithAccounts,
       unsubscribeNotification: unsubscribeNotificationWithAccounts,
@@ -403,6 +404,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       unreadNotificationCount,
       hasNotifications,
       hasUnreadNotifications,
+
       fetchNotificationsWithAccounts,
       markNotificationsAsReadWithAccounts,
       markNotificationsAsDoneWithAccounts,
