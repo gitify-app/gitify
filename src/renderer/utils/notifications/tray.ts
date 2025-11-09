@@ -1,24 +1,21 @@
-import type { AccountNotifications, SettingsState } from '../../types';
+import type { SettingsState } from '../../types';
 import { updateTrayColor, updateTrayTitle } from '../comms';
-import { getUnreadNotificationCount } from './notifications';
 
 /**
  * Sets the tray icon color and title based on the number of unread notifications.
  *
- * @param notifications
- * @param settings
+ * @param unreadNotifications - The number of unread notifications
+ * @param settings - The application settings
  */
 export function setTrayIconColorAndTitle(
-  notifications: AccountNotifications[],
+  unreadNotifications: number,
   settings: SettingsState,
 ) {
-  const totalUnreadNotifications = getUnreadNotificationCount(notifications);
-
   let title = '';
-  if (settings.showNotificationsCountInTray && totalUnreadNotifications > 0) {
-    title = totalUnreadNotifications.toString();
+  if (settings.showNotificationsCountInTray && unreadNotifications > 0) {
+    title = unreadNotifications.toString();
   }
 
-  updateTrayColor(totalUnreadNotifications);
+  updateTrayColor(unreadNotifications);
   updateTrayTitle(title);
 }

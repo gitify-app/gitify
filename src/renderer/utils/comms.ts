@@ -57,10 +57,21 @@ export function setKeyboardShortcut(keyboardShortcut: boolean): void {
   window.gitify.setKeyboardShortcut(keyboardShortcut);
 }
 
-export function updateTrayColor(notificationsLength = 0): void {
+/**
+ * Updates the tray icon color based on the number of unread notifications.
+ *
+ * Passing a negative number will set the error state color.
+ *
+ * @param notificationsLength The number of unread notifications
+ */
+export function updateTrayColor(notificationsLength: number): void {
   window.gitify.tray.updateColor(notificationsLength);
 }
-
-export function updateTrayTitle(title = ''): void {
+/**
+ * Updates the tray icon title.
+ *
+ * @param title The title to set on the tray icon
+ */
+export function updateTrayTitle(title: string): void {
   window.gitify.tray.updateTitle(title);
 }
