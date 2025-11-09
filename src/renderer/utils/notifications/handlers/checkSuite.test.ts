@@ -1,4 +1,4 @@
-import { createSubjectMock } from '../../../__mocks__/notifications-mocks';
+import { mockNotificationWithSubject } from '../../../__mocks__/notifications-mocks';
 import { partialMockNotification } from '../../../__mocks__/partial-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
 import { checkSuiteHandler, getCheckSuiteAttributes } from './checkSuite';
@@ -139,13 +139,13 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
   it('iconType', () => {
     expect(
       checkSuiteHandler.iconType(
-        createSubjectMock({ type: 'CheckSuite', state: null }),
+        mockNotificationWithSubject({ type: 'CheckSuite', state: null }),
       ).displayName,
     ).toBe('RocketIcon');
 
     expect(
       checkSuiteHandler.iconType(
-        createSubjectMock({
+        mockNotificationWithSubject({
           type: 'CheckSuite',
           state: 'cancelled',
         }),
@@ -154,7 +154,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
 
     expect(
       checkSuiteHandler.iconType(
-        createSubjectMock({
+        mockNotificationWithSubject({
           type: 'CheckSuite',
           state: 'failure',
         }),
@@ -163,7 +163,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
 
     expect(
       checkSuiteHandler.iconType(
-        createSubjectMock({
+        mockNotificationWithSubject({
           type: 'CheckSuite',
           state: 'skipped',
         }),
@@ -172,7 +172,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
 
     expect(
       checkSuiteHandler.iconType(
-        createSubjectMock({
+        mockNotificationWithSubject({
           type: 'CheckSuite',
           state: 'success',
         }),

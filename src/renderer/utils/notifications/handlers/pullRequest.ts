@@ -16,7 +16,6 @@ import type {
   PullRequest,
   PullRequestReview,
   PullRequestStateType,
-  Subject,
   User,
 } from '../../../typesGitHub';
 import {
@@ -87,8 +86,8 @@ class PullRequestHandler extends DefaultHandler {
     };
   }
 
-  iconType(subject: Subject): FC<OcticonProps> | null {
-    switch (subject.state) {
+  iconType(notification: Notification): FC<OcticonProps> | null {
+    switch (notification.subject.state) {
       case 'draft':
         return GitPullRequestDraftIcon;
       case 'closed':

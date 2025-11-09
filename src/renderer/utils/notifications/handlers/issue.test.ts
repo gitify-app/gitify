@@ -1,7 +1,7 @@
 import axios from 'axios';
 import nock from 'nock';
 
-import { createSubjectMock } from '../../../__mocks__/notifications-mocks';
+import { mockNotificationWithSubject } from '../../../__mocks__/notifications-mocks';
 import {
   partialMockNotification,
   partialMockUser,
@@ -296,18 +296,19 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
 
   it('iconType', () => {
     expect(
-      issueHandler.iconType(createSubjectMock({ type: 'Issue' })).displayName,
+      issueHandler.iconType(mockNotificationWithSubject({ type: 'Issue' }))
+        .displayName,
     ).toBe('IssueOpenedIcon');
 
     expect(
       issueHandler.iconType(
-        createSubjectMock({ type: 'Issue', state: 'draft' }),
+        mockNotificationWithSubject({ type: 'Issue', state: 'draft' }),
       ).displayName,
     ).toBe('IssueDraftIcon');
 
     expect(
       issueHandler.iconType(
-        createSubjectMock({
+        mockNotificationWithSubject({
           type: 'Issue',
           state: 'closed',
         }),
@@ -316,7 +317,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
 
     expect(
       issueHandler.iconType(
-        createSubjectMock({
+        mockNotificationWithSubject({
           type: 'Issue',
           state: 'completed',
         }),
@@ -325,7 +326,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
 
     expect(
       issueHandler.iconType(
-        createSubjectMock({
+        mockNotificationWithSubject({
           type: 'Issue',
           state: 'not_planned',
         }),
@@ -334,7 +335,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
 
     expect(
       issueHandler.iconType(
-        createSubjectMock({
+        mockNotificationWithSubject({
           type: 'Issue',
           state: 'reopened',
         }),

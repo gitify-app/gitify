@@ -8,7 +8,6 @@ import { IconColor } from '../../../types';
 import type {
   GitifySubject,
   Notification,
-  Subject,
   SubjectType,
 } from '../../../typesGitHub';
 import type { NotificationTypeHandler } from './types';
@@ -24,12 +23,12 @@ export class DefaultHandler implements NotificationTypeHandler {
     return null;
   }
 
-  iconType(_subject: Subject): FC<OcticonProps> | null {
+  iconType(_notification: Notification): FC<OcticonProps> | null {
     return QuestionIcon;
   }
 
-  iconColor(subject: Subject): IconColor {
-    switch (subject.state) {
+  iconColor(notification: Notification): IconColor {
+    switch (notification.subject.state) {
       case 'open':
       case 'reopened':
       case 'ANSWERED':

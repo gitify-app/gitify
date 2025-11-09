@@ -16,7 +16,6 @@ import type {
   DiscussionStateType,
   GitifySubject,
   Notification,
-  Subject,
   SubjectUser,
 } from '../../../typesGitHub';
 import { getLatestDiscussion } from '../../api/client';
@@ -77,8 +76,8 @@ class DiscussionHandler extends DefaultHandler {
     };
   }
 
-  iconType(subject: Subject): FC<OcticonProps> | null {
-    switch (subject.state) {
+  iconType(notification: Notification): FC<OcticonProps> | null {
+    switch (notification.subject.state) {
       case 'DUPLICATE':
         return DiscussionDuplicateIcon;
       case 'OUTDATED':

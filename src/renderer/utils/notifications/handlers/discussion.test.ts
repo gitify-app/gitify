@@ -1,7 +1,7 @@
 import axios from 'axios';
 import nock from 'nock';
 
-import { createSubjectMock } from '../../../__mocks__/notifications-mocks';
+import { mockNotificationWithSubject } from '../../../__mocks__/notifications-mocks';
 import { partialMockNotification } from '../../../__mocks__/partial-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
 import type { Link } from '../../../types';
@@ -281,25 +281,26 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
 
   it('iconType', () => {
     expect(
-      discussionHandler.iconType(createSubjectMock({ type: 'Discussion' }))
-        .displayName,
+      discussionHandler.iconType(
+        mockNotificationWithSubject({ type: 'Discussion' }),
+      ).displayName,
     ).toBe('CommentDiscussionIcon');
 
     expect(
       discussionHandler.iconType(
-        createSubjectMock({ type: 'Discussion', state: 'DUPLICATE' }),
+        mockNotificationWithSubject({ type: 'Discussion', state: 'DUPLICATE' }),
       ).displayName,
     ).toBe('DiscussionDuplicateIcon');
 
     expect(
       discussionHandler.iconType(
-        createSubjectMock({ type: 'Discussion', state: 'OUTDATED' }),
+        mockNotificationWithSubject({ type: 'Discussion', state: 'OUTDATED' }),
       ).displayName,
     ).toBe('DiscussionOutdatedIcon');
 
     expect(
       discussionHandler.iconType(
-        createSubjectMock({ type: 'Discussion', state: 'RESOLVED' }),
+        mockNotificationWithSubject({ type: 'Discussion', state: 'RESOLVED' }),
       ).displayName,
     ).toBe('DiscussionClosedIcon');
   });

@@ -1,4 +1,4 @@
-import { createMockNotificationForRepoName } from '../../__mocks__/notifications-mocks';
+import { mockNotificationWithRepoName } from '../../__mocks__/notifications-mocks';
 import {
   mockGitHubCloudAccount,
   mockGitHubEnterpriseServerAccount,
@@ -13,9 +13,9 @@ describe('renderer/utils/notifications/utils.ts', () => {
         {
           account: mockGitHubCloudAccount,
           notifications: [
-            createMockNotificationForRepoName('1', 'some/repo'),
-            createMockNotificationForRepoName('2', 'some/repo'),
-            createMockNotificationForRepoName('3', 'some/repo'),
+            mockNotificationWithRepoName('1', 'some/repo'),
+            mockNotificationWithRepoName('2', 'some/repo'),
+            mockNotificationWithRepoName('3', 'some/repo'),
           ],
           error: null,
         },
@@ -31,7 +31,7 @@ describe('renderer/utils/notifications/utils.ts', () => {
       const previousNotifications: AccountNotifications[] = [
         {
           account: mockGitHubCloudAccount,
-          notifications: [createMockNotificationForRepoName('1', 'some/repo')],
+          notifications: [mockNotificationWithRepoName('1', 'some/repo')],
           error: null,
         },
       ];
@@ -52,8 +52,8 @@ describe('renderer/utils/notifications/utils.ts', () => {
         {
           account: mockGitHubCloudAccount,
           notifications: [
-            createMockNotificationForRepoName('1', 'some/repo'),
-            createMockNotificationForRepoName('2', 'some/repo'),
+            mockNotificationWithRepoName('1', 'some/repo'),
+            mockNotificationWithRepoName('2', 'some/repo'),
           ],
           error: null,
         },
@@ -63,9 +63,9 @@ describe('renderer/utils/notifications/utils.ts', () => {
         {
           account: mockGitHubCloudAccount,
           notifications: [
-            createMockNotificationForRepoName('2', 'some/repo'),
-            createMockNotificationForRepoName('3', 'some/repo'),
-            createMockNotificationForRepoName('4', 'some/repo'),
+            mockNotificationWithRepoName('2', 'some/repo'),
+            mockNotificationWithRepoName('3', 'some/repo'),
+            mockNotificationWithRepoName('4', 'some/repo'),
           ],
           error: null,
         },
@@ -85,9 +85,9 @@ describe('renderer/utils/notifications/utils.ts', () => {
         {
           account: mockGitHubCloudAccount,
           notifications: [
-            createMockNotificationForRepoName('1', 'some/repo'),
-            createMockNotificationForRepoName('2', 'some/repo'),
-            createMockNotificationForRepoName('3', 'some/repo'),
+            mockNotificationWithRepoName('1', 'some/repo'),
+            mockNotificationWithRepoName('2', 'some/repo'),
+            mockNotificationWithRepoName('3', 'some/repo'),
           ],
           error: null,
         },
@@ -97,9 +97,9 @@ describe('renderer/utils/notifications/utils.ts', () => {
         {
           account: mockGitHubCloudAccount,
           notifications: [
-            createMockNotificationForRepoName('1', 'some/repo'),
-            createMockNotificationForRepoName('2', 'some/repo'),
-            createMockNotificationForRepoName('3', 'some/repo'),
+            mockNotificationWithRepoName('1', 'some/repo'),
+            mockNotificationWithRepoName('2', 'some/repo'),
+            mockNotificationWithRepoName('3', 'some/repo'),
           ],
           error: null,
         },
@@ -117,12 +117,12 @@ describe('renderer/utils/notifications/utils.ts', () => {
       const previousNotifications: AccountNotifications[] = [
         {
           account: mockGitHubCloudAccount,
-          notifications: [createMockNotificationForRepoName('1', 'some/repo')],
+          notifications: [mockNotificationWithRepoName('1', 'some/repo')],
           error: null,
         },
         {
           account: mockGitHubEnterpriseServerAccount,
-          notifications: [createMockNotificationForRepoName('10', 'some/repo')],
+          notifications: [mockNotificationWithRepoName('10', 'some/repo')],
           error: null,
         },
       ];
@@ -131,16 +131,16 @@ describe('renderer/utils/notifications/utils.ts', () => {
         {
           account: mockGitHubCloudAccount,
           notifications: [
-            createMockNotificationForRepoName('1', 'some/repo'),
-            createMockNotificationForRepoName('2', 'some/repo'),
+            mockNotificationWithRepoName('1', 'some/repo'),
+            mockNotificationWithRepoName('2', 'some/repo'),
           ],
           error: null,
         },
         {
           account: mockGitHubEnterpriseServerAccount,
           notifications: [
-            createMockNotificationForRepoName('10', 'some/repo'),
-            createMockNotificationForRepoName('11', 'some/repo'),
+            mockNotificationWithRepoName('10', 'some/repo'),
+            mockNotificationWithRepoName('11', 'some/repo'),
           ],
           error: null,
         },
@@ -159,7 +159,7 @@ describe('renderer/utils/notifications/utils.ts', () => {
       const previousNotifications: AccountNotifications[] = [
         {
           account: mockGitHubCloudAccount,
-          notifications: [createMockNotificationForRepoName('1', 'some/repo')],
+          notifications: [mockNotificationWithRepoName('1', 'some/repo')],
           error: null,
         },
       ];
@@ -167,14 +167,14 @@ describe('renderer/utils/notifications/utils.ts', () => {
       const newNotifications: AccountNotifications[] = [
         {
           account: mockGitHubCloudAccount,
-          notifications: [createMockNotificationForRepoName('1', 'some/repo')],
+          notifications: [mockNotificationWithRepoName('1', 'some/repo')],
           error: null,
         },
         {
           account: mockGitHubEnterpriseServerAccount,
           notifications: [
-            createMockNotificationForRepoName('10', 'some/repo'),
-            createMockNotificationForRepoName('11', 'some/repo'),
+            mockNotificationWithRepoName('10', 'some/repo'),
+            mockNotificationWithRepoName('11', 'some/repo'),
           ],
           error: null,
         },
@@ -193,7 +193,7 @@ describe('renderer/utils/notifications/utils.ts', () => {
       const previousNotifications: AccountNotifications[] = [
         {
           account: mockGitHubCloudAccount,
-          notifications: [createMockNotificationForRepoName('1', 'some/repo')],
+          notifications: [mockNotificationWithRepoName('1', 'some/repo')],
           error: null,
         },
       ];
@@ -218,7 +218,7 @@ describe('renderer/utils/notifications/utils.ts', () => {
       const previousNotifications: AccountNotifications[] = [
         {
           account: mockGitHubCloudAccount,
-          notifications: [createMockNotificationForRepoName('1', 'some/repo')],
+          notifications: [mockNotificationWithRepoName('1', 'some/repo')],
           error: null,
         },
       ];
@@ -227,9 +227,9 @@ describe('renderer/utils/notifications/utils.ts', () => {
         {
           account: mockGitHubCloudAccount,
           notifications: [
-            createMockNotificationForRepoName('5', 'some/repo'),
-            createMockNotificationForRepoName('3', 'some/repo'),
-            createMockNotificationForRepoName('4', 'some/repo'),
+            mockNotificationWithRepoName('5', 'some/repo'),
+            mockNotificationWithRepoName('3', 'some/repo'),
+            mockNotificationWithRepoName('4', 'some/repo'),
           ],
           error: null,
         },
@@ -248,12 +248,12 @@ describe('renderer/utils/notifications/utils.ts', () => {
       const previousNotifications: AccountNotifications[] = [
         {
           account: mockGitHubCloudAccount,
-          notifications: [createMockNotificationForRepoName('1', 'some/repo')],
+          notifications: [mockNotificationWithRepoName('1', 'some/repo')],
           error: null,
         },
         {
           account: mockGitHubEnterpriseServerAccount,
-          notifications: [createMockNotificationForRepoName('10', 'some/repo')],
+          notifications: [mockNotificationWithRepoName('10', 'some/repo')],
           error: null,
         },
       ];
@@ -262,8 +262,8 @@ describe('renderer/utils/notifications/utils.ts', () => {
         {
           account: mockGitHubCloudAccount,
           notifications: [
-            createMockNotificationForRepoName('1', 'some/repo'),
-            createMockNotificationForRepoName('2', 'some/repo'),
+            mockNotificationWithRepoName('1', 'some/repo'),
+            mockNotificationWithRepoName('2', 'some/repo'),
           ],
           error: null,
         },
@@ -286,16 +286,16 @@ describe('renderer/utils/notifications/utils.ts', () => {
         {
           account: mockGitHubCloudAccount,
           notifications: [
-            createMockNotificationForRepoName('1', 'some/repo'),
-            createMockNotificationForRepoName('2', 'some/repo'),
+            mockNotificationWithRepoName('1', 'some/repo'),
+            mockNotificationWithRepoName('2', 'some/repo'),
           ],
           error: null,
         },
         {
           account: mockGitHubEnterpriseServerAccount,
           notifications: [
-            createMockNotificationForRepoName('10', 'some/repo'),
-            createMockNotificationForRepoName('11', 'some/repo'),
+            mockNotificationWithRepoName('10', 'some/repo'),
+            mockNotificationWithRepoName('11', 'some/repo'),
           ],
           error: null,
         },

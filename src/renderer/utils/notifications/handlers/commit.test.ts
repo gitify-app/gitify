@@ -1,7 +1,7 @@
 import axios from 'axios';
 import nock from 'nock';
 
-import { createSubjectMock } from '../../../__mocks__/notifications-mocks';
+import { mockNotificationWithSubject } from '../../../__mocks__/notifications-mocks';
 import {
   partialMockNotification,
   partialMockUser,
@@ -99,7 +99,8 @@ describe('renderer/utils/notifications/handlers/commit.ts', () => {
 
   it('iconType', () => {
     expect(
-      commitHandler.iconType(createSubjectMock({ type: 'Commit' })).displayName,
+      commitHandler.iconType(mockNotificationWithSubject({ type: 'Commit' }))
+        .displayName,
     ).toBe('GitCommitIcon');
   });
 });

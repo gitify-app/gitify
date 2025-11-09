@@ -8,7 +8,6 @@ import type {
   GitifySubject,
   Notification,
   StateType,
-  Subject,
 } from '../../../typesGitHub';
 import { getRelease } from '../../api/client';
 import { isStateFilteredOut } from '../filters/filter';
@@ -39,7 +38,7 @@ class ReleaseHandler extends DefaultHandler {
     };
   }
 
-  iconType(_subject: Subject): FC<OcticonProps> | null {
+  iconType(_notification: Notification): FC<OcticonProps> | null {
     return TagIcon;
   }
 }

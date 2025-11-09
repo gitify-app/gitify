@@ -1,7 +1,7 @@
 import axios from 'axios';
 import nock from 'nock';
 
-import { createSubjectMock } from '../../../__mocks__/notifications-mocks';
+import { mockNotificationWithSubject } from '../../../__mocks__/notifications-mocks';
 import {
   partialMockNotification,
   partialMockUser,
@@ -440,13 +440,14 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
 
   it('iconType', () => {
     expect(
-      pullRequestHandler.iconType(createSubjectMock({ type: 'PullRequest' }))
-        .displayName,
+      pullRequestHandler.iconType(
+        mockNotificationWithSubject({ type: 'PullRequest' }),
+      ).displayName,
     ).toBe('GitPullRequestIcon');
 
     expect(
       pullRequestHandler.iconType(
-        createSubjectMock({
+        mockNotificationWithSubject({
           type: 'PullRequest',
           state: 'draft',
         }),
@@ -455,7 +456,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
 
     expect(
       pullRequestHandler.iconType(
-        createSubjectMock({
+        mockNotificationWithSubject({
           type: 'PullRequest',
           state: 'closed',
         }),
@@ -464,7 +465,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
 
     expect(
       pullRequestHandler.iconType(
-        createSubjectMock({
+        mockNotificationWithSubject({
           type: 'PullRequest',
           state: 'merged',
         }),

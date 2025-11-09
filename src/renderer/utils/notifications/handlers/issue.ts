@@ -10,12 +10,7 @@ import {
 } from '@primer/octicons-react';
 
 import type { SettingsState } from '../../../types';
-import type {
-  GitifySubject,
-  Notification,
-  Subject,
-  User,
-} from '../../../typesGitHub';
+import type { GitifySubject, Notification, User } from '../../../typesGitHub';
 import { getIssue, getIssueOrPullRequestComment } from '../../api/client';
 import { isStateFilteredOut } from '../filters/filter';
 import { DefaultHandler } from './default';
@@ -61,8 +56,8 @@ class IssueHandler extends DefaultHandler {
     };
   }
 
-  iconType(subject: Subject): FC<OcticonProps> | null {
-    switch (subject.state) {
+  iconType(notification: Notification): FC<OcticonProps> | null {
+    switch (notification.subject.state) {
       case 'draft':
         return IssueDraftIcon;
       case 'closed':

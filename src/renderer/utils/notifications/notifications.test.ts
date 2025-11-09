@@ -2,7 +2,7 @@ import axios from 'axios';
 import nock from 'nock';
 
 import {
-  createMockNotificationForRepoName,
+  mockNotificationWithRepoName,
   mockSingleAccountNotifications,
 } from '../../__mocks__/notifications-mocks';
 import { partialMockNotification } from '../../__mocks__/partial-mocks';
@@ -83,9 +83,9 @@ describe('renderer/utils/notifications/notifications.ts', () => {
     const acc1: AccountNotifications = {
       account: mockGitHubCloudAccount,
       notifications: [
-        createMockNotificationForRepoName('a1', 'owner/repo-1'),
-        createMockNotificationForRepoName('a2', 'owner/repo-2'),
-        createMockNotificationForRepoName('a3', 'owner/repo-1'),
+        mockNotificationWithRepoName('a1', 'owner/repo-1'),
+        mockNotificationWithRepoName('a2', 'owner/repo-2'),
+        mockNotificationWithRepoName('a3', 'owner/repo-1'),
       ],
       error: null,
     };
@@ -93,9 +93,9 @@ describe('renderer/utils/notifications/notifications.ts', () => {
     const acc2: AccountNotifications = {
       account: mockGitHubEnterpriseServerAccount,
       notifications: [
-        createMockNotificationForRepoName('b1', 'owner/repo-3'),
-        createMockNotificationForRepoName('b2', 'owner/repo-4'),
-        createMockNotificationForRepoName('b3', 'owner/repo-3'),
+        mockNotificationWithRepoName('b1', 'owner/repo-3'),
+        mockNotificationWithRepoName('b2', 'owner/repo-4'),
+        mockNotificationWithRepoName('b3', 'owner/repo-3'),
       ],
       error: null,
     };

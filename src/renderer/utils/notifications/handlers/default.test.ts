@@ -1,4 +1,4 @@
-import { createSubjectMock } from '../../../__mocks__/notifications-mocks';
+import { mockNotificationWithSubject } from '../../../__mocks__/notifications-mocks';
 import { partialMockNotification } from '../../../__mocks__/partial-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
 import { IconColor } from '../../../types';
@@ -24,9 +24,9 @@ describe('renderer/utils/notifications/handlers/default.ts', () => {
   });
 
   it('iconType', () => {
-    expect(defaultHandler.iconType(createSubjectMock({})).displayName).toBe(
-      'QuestionIcon',
-    );
+    expect(
+      defaultHandler.iconType(mockNotificationWithSubject({})).displayName,
+    ).toBe('QuestionIcon');
   });
 
   describe('iconColor', () => {
@@ -50,7 +50,7 @@ describe('renderer/utils/notifications/handlers/default.ts', () => {
     ];
 
     it.each(cases)('returns correct color for state %s', (state, expected) => {
-      const subject = createSubjectMock({ state });
+      const subject = mockNotificationWithSubject({ state });
       expect(defaultHandler.iconColor(subject)).toBe(expected);
     });
   });

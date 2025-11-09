@@ -1,7 +1,7 @@
 import axios from 'axios';
 import nock from 'nock';
 
-import { createSubjectMock } from '../../../__mocks__/notifications-mocks';
+import { mockNotificationWithSubject } from '../../../__mocks__/notifications-mocks';
 import {
   partialMockNotification,
   partialMockUser,
@@ -70,7 +70,7 @@ describe('renderer/utils/notifications/handlers/release.ts', () => {
   it('iconType', () => {
     expect(
       releaseHandler.iconType(
-        createSubjectMock({
+        mockNotificationWithSubject({
           type: 'Release',
         }),
       ).displayName,

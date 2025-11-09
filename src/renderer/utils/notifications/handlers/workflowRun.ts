@@ -8,7 +8,6 @@ import type {
   CheckSuiteStatus,
   GitifySubject,
   Notification,
-  Subject,
   WorkflowRunAttributes,
 } from '../../../typesGitHub';
 import { DefaultHandler } from './default';
@@ -32,7 +31,7 @@ class WorkflowRunHandler extends DefaultHandler {
     return null;
   }
 
-  iconType(_subject: Subject): FC<OcticonProps> | null {
+  iconType(_notification: Notification): FC<OcticonProps> | null {
     return RocketIcon;
   }
 }

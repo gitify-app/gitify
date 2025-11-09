@@ -1,4 +1,4 @@
-import { createSubjectMock } from '../../../__mocks__/notifications-mocks';
+import { mockNotificationWithSubject } from '../../../__mocks__/notifications-mocks';
 import { partialMockNotification } from '../../../__mocks__/partial-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
 import { getWorkflowRunAttributes, workflowRunHandler } from './workflowRun';
@@ -55,7 +55,7 @@ describe('renderer/utils/notifications/handlers/workflowRun.ts', () => {
   it('iconType', () => {
     expect(
       workflowRunHandler.iconType(
-        createSubjectMock({
+        mockNotificationWithSubject({
           type: 'WorkflowRun',
         }),
       ).displayName,

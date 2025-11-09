@@ -6,7 +6,6 @@ import type { SettingsState } from '../../../types';
 import type {
   GitifySubject,
   Notification,
-  Subject,
   SubjectType,
 } from '../../../typesGitHub';
 
@@ -24,12 +23,12 @@ export interface NotificationTypeHandler {
   /**
    * Return the icon component for this notification type.
    */
-  iconType(subject: Subject): FC<OcticonProps> | null;
+  iconType(notification: Notification): FC<OcticonProps> | null;
 
   /**
    * Return the icon color for this notification type.
    */
-  iconColor(subject: Subject): string | undefined;
+  iconColor(notification: Notification): string | undefined;
 
   /**
    * Return the formatted notification type for this notification.

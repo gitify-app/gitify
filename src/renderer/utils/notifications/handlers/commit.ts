@@ -8,7 +8,6 @@ import type {
   GitifySubject,
   Notification,
   StateType,
-  Subject,
   User,
 } from '../../../typesGitHub';
 import { getCommit, getCommitComment } from '../../api/client';
@@ -55,7 +54,7 @@ class CommitHandler extends DefaultHandler {
     };
   }
 
-  iconType(_subject: Subject): FC<OcticonProps> | null {
+  iconType(_notification: Notification): FC<OcticonProps> | null {
     return GitCommitIcon;
   }
 }

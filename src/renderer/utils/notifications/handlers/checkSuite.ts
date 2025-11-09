@@ -15,7 +15,6 @@ import type {
   CheckSuiteStatus,
   GitifySubject,
   Notification,
-  Subject,
 } from '../../../typesGitHub';
 import { DefaultHandler } from './default';
 
@@ -38,8 +37,8 @@ class CheckSuiteHandler extends DefaultHandler {
     return null;
   }
 
-  iconType(subject: Subject): FC<OcticonProps> | null {
-    switch (subject.state) {
+  iconType(notification: Notification): FC<OcticonProps> | null {
+    switch (notification.subject.state) {
       case 'cancelled':
         return StopIcon;
       case 'failure':
