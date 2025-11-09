@@ -101,7 +101,7 @@ export const useNotifications = (): NotificationsState => {
 
       if (diffNotifications.length > 0) {
         if (state.settings.playSound) {
-          raiseSoundNotification(state.settings.notificationVolume / 100);
+          raiseSoundNotification(state.settings.notificationVolume);
         }
 
         if (state.settings.showNotifications) {

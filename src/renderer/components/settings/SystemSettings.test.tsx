@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 
 import { mockAuth, mockSettings } from '../../__mocks__/state-mocks';
 import { AppContext } from '../../context/App';
+import type { Percentage } from '../../types';
 import { SystemSettings } from './SystemSettings';
 
 describe('renderer/components/settings/SystemSettings.tsx', () => {
@@ -155,7 +156,7 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
             auth: mockAuth,
             settings: {
               ...mockSettings,
-              notificationVolume: 30,
+              notificationVolume: 30 as Percentage,
             },
             updateSetting,
           }}

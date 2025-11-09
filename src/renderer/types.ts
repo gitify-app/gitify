@@ -36,6 +36,8 @@ export type SearchToken = Branded<string, 'SearchToken'>;
 
 export type Status = 'loading' | 'success' | 'error';
 
+export type Percentage = Branded<number, 'Percentage'>;
+
 export interface Account {
   method: AuthMethod;
   platform: PlatformType;
@@ -53,6 +55,7 @@ export type SettingsValue =
   | FilterValue[]
   | GroupBy
   | OpenPreference
+  | Percentage
   | Theme;
 
 export type FilterValue =
@@ -71,7 +74,7 @@ export type SettingsState = AppearanceSettingsState &
 export interface AppearanceSettingsState {
   theme: Theme;
   increaseContrast: boolean;
-  zoomPercentage: number;
+  zoomPercentage: Percentage;
   showAccountHeader: boolean;
   wrapNotificationTitle: boolean;
 }
@@ -101,7 +104,7 @@ export interface SystemSettingsState {
   keyboardShortcut: boolean;
   showNotifications: boolean;
   playSound: boolean;
-  notificationVolume: number;
+  notificationVolume: Percentage;
   openAtStartup: boolean;
 }
 
