@@ -1,7 +1,7 @@
-export const raiseSoundNotification = async (volume: number) => {
-  const path = await window.gitify.notificationSoundPath();
+export async function raiseSoundNotification(volume: number) {
+  const path = await globalThis.gitify.notificationSoundPath();
 
   const audio = new Audio(path);
   audio.volume = volume;
   audio.play();
-};
+}

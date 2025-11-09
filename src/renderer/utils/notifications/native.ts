@@ -3,9 +3,7 @@ import { APPLICATION } from '../../../shared/constants';
 import type { Notification } from '../../typesGitHub';
 import { generateGitHubWebUrl } from '../helpers';
 
-export const raiseNativeNotification = async (
-  notifications: Notification[],
-) => {
+export async function raiseNativeNotification(notifications: Notification[]) {
   let title: string;
   let body: string;
   let url: string = null;
@@ -23,4 +21,4 @@ export const raiseNativeNotification = async (
   }
 
   return window.gitify.raiseNativeNotification(title, body, url);
-};
+}

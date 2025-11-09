@@ -9,24 +9,24 @@ import { getAccountUUID } from '../auth/utils';
  * @param notification - The notification to find the account index for
  * @returns The index of the account in the allNotifications array
  */
-export const findAccountIndex = (
+export function findAccountIndex(
   allNotifications: AccountNotifications[],
   notification: Notification,
-): number => {
+): number {
   return allNotifications.findIndex(
     (accountNotifications) =>
       getAccountUUID(accountNotifications.account) ===
       getAccountUUID(notification.account),
   );
-};
+}
 
 /**
  * Find notifications that exist in newNotifications but not in previousNotifications
  */
-export const getNewNotifications = (
+export function getNewNotifications(
   previousNotifications: AccountNotifications[],
   newNotifications: AccountNotifications[],
-): Notification[] => {
+): Notification[] {
   return newNotifications.flatMap((accountNotifications) => {
     const accountPreviousNotifications = previousNotifications.find(
       (item) =>
@@ -46,4 +46,4 @@ export const getNewNotifications = (
       (notification) => !previousIds.has(notification.id),
     );
   });
-};
+}

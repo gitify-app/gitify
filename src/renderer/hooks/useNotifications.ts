@@ -227,10 +227,11 @@ export const useNotifications = (): NotificationsState => {
   return {
     status,
     globalError,
-    notifications,
 
-    removeAccountNotifications,
+    notifications,
     fetchNotifications,
+    removeAccountNotifications,
+
     markNotificationsAsRead,
     markNotificationsAsDone,
     unsubscribeNotification,

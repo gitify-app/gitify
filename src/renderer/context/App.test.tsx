@@ -51,7 +51,6 @@ describe('renderer/context/App.tsx', () => {
     const markNotificationsAsReadMock = jest.fn();
     const markNotificationsAsDoneMock = jest.fn();
     const unsubscribeNotificationMock = jest.fn();
-    const setTrayIconColorAndTitle = jest.fn();
 
     const mockDefaultState = {
       auth: { accounts: [] },
@@ -64,7 +63,6 @@ describe('renderer/context/App.tsx', () => {
         markNotificationsAsRead: markNotificationsAsReadMock,
         markNotificationsAsDone: markNotificationsAsDoneMock,
         unsubscribeNotification: unsubscribeNotificationMock,
-        setTrayIconColorAndTitle,
       });
     });
 
