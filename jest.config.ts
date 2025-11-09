@@ -11,7 +11,9 @@ const config: Config = {
     '^.+\\.(ts|tsx)$': ['ts-jest', { tsconfig: { jsx: 'react-jsx' } }],
     '^.+\\.(js|mjs)$': 'babel-jest',
   },
-  // Allow transforming specific ESM packages in node_modules
+  // Allow transforming specific ESM packages in node_modules that ship untranspiled ESM.
+  // @primer/* libraries rely on lit and @lit-labs/react internally for some components.
+  // We also include GitHub web components that ship ESM-only builds.
   transformIgnorePatterns: [
     'node_modules/(?!(?:@primer/react|@primer/primitives|@primer/octicons-react|@lit-labs/react|lit|@github/relative-time-element|@github/tab-container-element)/)',
   ],
@@ -26,4 +28,4 @@ const config: Config = {
   modulePathIgnorePatterns: ['<rootDir>/build', '<rootDir>/node_modules'],
 };
 
-module.exports = config;
+export default config;

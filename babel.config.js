@@ -4,6 +4,8 @@ module.exports = {
       '@babel/preset-env',
       {
         targets: { node: 'current' },
+        // Ensure ESM in node_modules is converted to CommonJS for Jest
+        modules: 'commonjs',
       },
     ],
   ],
