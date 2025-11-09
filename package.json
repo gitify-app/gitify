@@ -114,7 +114,7 @@
     "rimraf": "6.1.0",
     "semver": "7.7.3",
     "styled-components": "6.1.19",
-    "tailwind-merge": "3.3.1",
+    "tailwind-merge": "3.4.0",
     "tailwindcss": "4.1.17",
     "terser-webpack-plugin": "5.3.14",
     "ts-jest": "29.4.5",
