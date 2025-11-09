@@ -1,5 +1,8 @@
 import { mockSingleAccountNotifications } from '../../__mocks__/notifications-mocks';
-import { mockSettings } from '../../__mocks__/state-mocks';
+import {
+  mockGitHubEnterpriseServerAccount,
+  mockSettings,
+} from '../../__mocks__/state-mocks';
 import { mockSingleNotification } from '../api/__mocks__/response-mocks';
 import { removeNotificationsForAccount } from './remove';
 
@@ -61,5 +64,20 @@ describe('renderer/utils/remove.ts', () => {
     );
 
     expect(result[0].notifications.length).toBe(1);
+  });
+
+  it('should not modify notifications when account UUID does not match', () => {
+    const result = removeNotificationsForAccount(
+      mockGitHubEnterpriseServerAccount, // Different account
+      { ...mockSettings, delayNotificationState: false },
+      [mockSingleNotification],
+      mockSingleAccountNotifications,
+    );
+
+    // Should return unchanged
+    expect(result[0].notifications.length).toBe(1);
+    expect(result[0].notifications[0]).toBe(
+      mockSingleAccountNotifications[0].notifications[0],
+    );
   });
 });
