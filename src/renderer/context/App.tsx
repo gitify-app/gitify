@@ -133,14 +133,16 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     setNightScheme,
   ]);
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: We only want fetchNotifications to be called for particular state changes
+  // biome-ignore lint/correctness/useExhaustiveDependencies: Fetch new notifications when account count or filters change
   useEffect(() => {
     fetchNotifications({ auth, settings });
   }, [
-    auth.accounts,
-    settings.filterUserTypes,
+    auth.accounts.length,
     settings.filterIncludeSearchTokens,
     settings.filterExcludeSearchTokens,
+    settings.filterUserTypes,
+    settings.filterSubjectTypes,
+    settings.filterStates,
     settings.filterReasons,
   ]);
 
@@ -239,7 +241,9 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     const { authCode } = await authGitHub();
     const { token } = await getToken(authCode);
     const hostname = Constants.DEFAULT_AUTH_OPTIONS.hostname;
+
     const updatedAuth = await addAccount(auth, 'GitHub App', token, hostname);
+
     setAuth(updatedAuth);
     saveState({ auth: updatedAuth, settings });
   }, [auth, settings]);
@@ -247,10 +251,10 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   const loginWithOAuthApp = useCallback(
     async (data: LoginOAuthAppOptions) => {
       const { authOptions, authCode } = await authGitHub(data);
-
       const { token, hostname } = await getToken(authCode, authOptions);
 
       const updatedAuth = await addAccount(auth, 'OAuth App', token, hostname);
+
       setAuth(updatedAuth);
       saveState({ auth: updatedAuth, settings });
     },
@@ -268,6 +272,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         token,
         hostname,
       );
+
       setAuth(updatedAuth);
       saveState({ auth: updatedAuth, settings });
     },
@@ -279,10 +284,11 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       removeAccountNotifications(account);
 
       const updatedAuth = removeAccount(auth, account);
+
       setAuth(updatedAuth);
       saveState({ auth: updatedAuth, settings });
     },
-    [auth, settings],
+    [auth, settings, removeAccountNotifications],
   );
 
   const restoreSettings = useCallback(async () => {
