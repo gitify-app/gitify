@@ -1,4 +1,4 @@
-import type { AccountNotifications } from '../types';
+import type { AccountNotifications, GitifyError } from '../types';
 import type {
   Notification,
   StateType,
@@ -47,6 +47,14 @@ export function createSubjectMock(mocks: {
     state: mocks.state ?? ('Unknown' as StateType),
     url: null,
     latest_comment_url: null,
+  };
+}
+
+export function mockAccountWithError(error: GitifyError): AccountNotifications {
+  return {
+    account: mockGitHubCloudAccount,
+    notifications: [],
+    error,
   };
 }
 

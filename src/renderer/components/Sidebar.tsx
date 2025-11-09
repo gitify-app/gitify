@@ -1,4 +1,4 @@
-import { type FC, useContext, useMemo } from 'react';
+import { type FC, useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import {
@@ -23,7 +23,6 @@ import {
   openGitHubPulls,
 } from '../utils/links';
 import { hasActiveFilters } from '../utils/notifications/filters/filter';
-import { getNotificationCount } from '../utils/notifications/notifications';
 import { LogoIcon } from './icons/LogoIcon';
 
 export const Sidebar: FC = () => {
@@ -31,12 +30,13 @@ export const Sidebar: FC = () => {
   const location = useLocation();
 
   const {
-    notifications,
     fetchNotifications,
     isLoggedIn,
     status,
     settings,
     auth,
+    unreadCount,
+    hasNotifications,
   } = useContext(AppContext);
 
   // We naively assume that the first account is the primary account for the purposes of our sidebar quick links
@@ -64,10 +64,6 @@ export const Sidebar: FC = () => {
     navigate('/', { replace: true });
     fetchNotifications();
   };
-
-  const notificationsCount = useMemo(() => {
-    return getNotificationCount(notifications);
-  }, [notifications]);
 
   const sidebarButtonStyle = { color: 'white' };
 
@@ -98,14 +94,14 @@ export const Sidebar: FC = () => {
         <IconButton
           aria-label="Notifications"
           data-testid="sidebar-notifications"
-          description={`${notificationsCount} unread notifications ↗`}
+          description={`${unreadCount} unread notifications ↗`}
           icon={BellIcon}
           onClick={() => openGitHubNotifications(primaryAccountHostname)}
           size="small"
           sx={sidebarButtonStyle}
           tooltipDirection="e"
           unsafeDisableTooltip={false}
-          variant={notificationsCount > 0 ? 'primary' : 'invisible'}
+          variant={hasNotifications ? 'primary' : 'invisible'}
         />
 
         {isLoggedIn && (

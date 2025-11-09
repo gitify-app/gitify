@@ -127,7 +127,9 @@ export const AccountNotifications: FC<IAccountNotifications> = (
       {showAccountNotifications && (
         <>
           {props.error && <Oops error={props.error} fullHeight={false} />}
+
           {!hasNotifications && !props.error && <AllRead fullHeight={false} />}
+
           {isGroupByRepository(settings)
             ? groupedNotifications.map(([repoSlug, repoNotifications]) => (
                 <RepositoryNotifications

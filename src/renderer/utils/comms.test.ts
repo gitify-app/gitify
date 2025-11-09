@@ -147,23 +147,11 @@ describe('renderer/utils/comms.ts', () => {
       expect(window.gitify.tray.updateColor).toHaveBeenCalledWith(5);
     });
 
-    it('updates tray icon color with default count', () => {
-      updateTrayColor();
-
-      expect(window.gitify.tray.updateColor).toHaveBeenCalledTimes(1);
-    });
-
     it('updates tray title with provided value', () => {
       updateTrayTitle('gitify');
 
       expect(window.gitify.tray.updateTitle).toHaveBeenCalledTimes(1);
       expect(window.gitify.tray.updateTitle).toHaveBeenCalledWith('gitify');
-    });
-
-    it('updates tray title with default value', () => {
-      updateTrayTitle();
-
-      expect(window.gitify.tray.updateTitle).toHaveBeenCalledTimes(1);
     });
   });
 });

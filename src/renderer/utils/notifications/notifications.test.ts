@@ -21,7 +21,7 @@ import type { Repository } from '../../typesGitHub';
 import * as logger from '../../utils/logger';
 import {
   enrichNotification,
-  getNotificationCount,
+  getUnreadNotificationCount,
   stabilizeNotificationsOrder,
 } from './notifications';
 
@@ -36,8 +36,8 @@ describe('renderer/utils/notifications/notifications.ts', () => {
     jest.clearAllMocks();
   });
 
-  it('getNotificationCount', () => {
-    const result = getNotificationCount(mockSingleAccountNotifications);
+  it('getUnreadNotificationCount', () => {
+    const result = getUnreadNotificationCount(mockSingleAccountNotifications);
 
     expect(result).toBe(1);
   });
