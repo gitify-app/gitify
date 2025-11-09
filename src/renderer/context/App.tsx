@@ -49,7 +49,6 @@ import {
   setUseUnreadActiveIcon,
 } from '../utils/comms';
 import { getUnreadNotificationCount } from '../utils/notifications/notifications';
-import { setTrayIconColorAndTitle } from '../utils/notifications/tray';
 import { clearState, loadState, saveState } from '../utils/storage';
 import {
   DEFAULT_DAY_COLOR_SCHEME,
@@ -57,6 +56,7 @@ import {
   mapThemeModeToColorMode,
   mapThemeModeToColorScheme,
 } from '../utils/theme';
+import { setTrayIconColorAndTitle } from '../utils/tray';
 import { zoomPercentageToLevel } from '../utils/zoom';
 import { defaultAuth, defaultFilters, defaultSettings } from './defaults';
 

@@ -9,8 +9,8 @@ import { mockSingleNotification } from '../utils/api/__mocks__/response-mocks';
 import * as apiRequests from '../utils/api/request';
 import * as comms from '../utils/comms';
 import * as notifications from '../utils/notifications/notifications';
-import * as tray from '../utils/notifications/tray';
 import * as storage from '../utils/storage';
+import * as tray from '../utils/tray';
 import { AppContext, AppProvider } from './App';
 import { defaultSettings } from './defaults';
 

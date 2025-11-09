@@ -1,8 +1,8 @@
-import { mockSettings } from '../../__mocks__/state-mocks';
-import * as comms from '../comms';
+import { mockSettings } from '../__mocks__/state-mocks';
+import * as comms from './comms';
 import { setTrayIconColorAndTitle } from './tray';
 
-describe('renderer/utils/notifications/tray.ts', () => {
+describe('renderer/utils/tray.ts', () => {
   const updateTrayColorSpy = jest.spyOn(comms, 'updateTrayColor');
   const updateTrayTitleSpy = jest.spyOn(comms, 'updateTrayTitle');
 

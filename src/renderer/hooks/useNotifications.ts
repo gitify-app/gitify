@@ -14,6 +14,10 @@ import {
   markNotificationThreadAsRead,
 } from '../utils/api/client';
 import { updateTrayColor } from '../utils/comms';
+import {
+  areAllAccountErrorsSame,
+  doesAllAccountsHaveErrors,
+} from '../utils/errors';
 import { isMarkAsDoneFeatureSupported } from '../utils/features';
 import { rendererLogError } from '../utils/logger';
 import { raiseNativeNotification } from '../utils/notifications/native';
@@ -78,24 +82,14 @@ export const useNotifications = (): NotificationsState => {
 
       // Set Global Error if all accounts have the same error
       const allAccountsHaveErrors =
-        fetchedNotifications.length > 0 &&
-        fetchedNotifications.every((account) => {
-          return account.error !== null;
-        });
-
-      let accountErrorsAreAllSame = true;
-      const accountError = fetchedNotifications[0]?.error;
-
-      for (const fetchedNotification of fetchedNotifications) {
-        if (accountError !== fetchedNotification.error) {
-          accountErrorsAreAllSame = false;
-          break;
-        }
-      }
+        doesAllAccountsHaveErrors(fetchedNotifications);
+      const allAccountErrorsAreSame =
+        areAllAccountErrorsSame(fetchedNotifications);
 
       if (allAccountsHaveErrors) {
+        const accountError = fetchedNotifications[0].error;
         setStatus('error');
-        setGlobalError(accountErrorsAreAllSame ? accountError : null);
+        setGlobalError(allAccountErrorsAreSame ? accountError : null);
         updateTrayColor(-1);
         return;
       }

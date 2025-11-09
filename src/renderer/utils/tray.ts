@@ -1,5 +1,5 @@
-import type { SettingsState } from '../../types';
-import { updateTrayColor, updateTrayTitle } from '../comms';
+import type { SettingsState } from '../types';
+import { updateTrayColor, updateTrayTitle } from './comms';
 
 /**
  * Sets the tray icon color and title based on the number of unread notifications.
