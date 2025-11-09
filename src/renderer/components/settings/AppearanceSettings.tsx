@@ -18,7 +18,13 @@ import {
 import { AppContext } from '../../context/App';
 import { Theme } from '../../types';
 import { hasMultipleAccounts } from '../../utils/auth/utils';
-import { zoomLevelToPercentage, zoomPercentageToLevel } from '../../utils/zoom';
+import {
+  canDecreaseZoom,
+  canIncreaseZoom,
+  decreaseZoom,
+  increaseZoom,
+  zoomLevelToPercentage,
+} from '../../utils/zoom';
 import { Checkbox } from '../fields/Checkbox';
 import { FieldLabel } from '../fields/FieldLabel';
 import { Title } from '../primitives/Title';
@@ -117,13 +123,9 @@ export const AppearanceSettings: FC = () => {
             <IconButton
               aria-label="Zoom out"
               data-testid="settings-zoom-out"
+              disabled={!canDecreaseZoom(zoomPercentage)}
               icon={ZoomOutIcon}
-              onClick={() =>
-                zoomPercentage > 0 &&
-                window.gitify.zoom.setLevel(
-                  zoomPercentageToLevel(zoomPercentage - 10),
-                )
-              }
+              onClick={() => decreaseZoom(zoomPercentage)}
               size="small"
               unsafeDisableTooltip={true}
             />
@@ -135,13 +137,9 @@ export const AppearanceSettings: FC = () => {
             <IconButton
               aria-label="Zoom in"
               data-testid="settings-zoom-in"
+              disabled={!canIncreaseZoom(zoomPercentage)}
               icon={ZoomInIcon}
-              onClick={() =>
-                zoomPercentage < 120 &&
-                window.gitify.zoom.setLevel(
-                  zoomPercentageToLevel(zoomPercentage + 10),
-                )
-              }
+              onClick={() => increaseZoom(zoomPercentage)}
               size="small"
               unsafeDisableTooltip={true}
             />

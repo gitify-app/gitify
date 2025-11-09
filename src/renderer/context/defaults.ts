@@ -7,6 +7,7 @@ import {
   GroupBy,
   type NotificationSettingsState,
   OpenPreference,
+  type Percentage,
   type SettingsState,
   type SystemSettingsState,
   Theme,
@@ -20,7 +21,7 @@ export const defaultAuth: AuthState = {
 const defaultAppearanceSettings: AppearanceSettingsState = {
   theme: Theme.SYSTEM,
   increaseContrast: false,
-  zoomPercentage: 100,
+  zoomPercentage: 100 as Percentage,
   showAccountHeader: false,
   wrapNotificationTitle: false,
 };
@@ -50,7 +51,7 @@ const defaultSystemSettings: SystemSettingsState = {
   keyboardShortcut: true,
   showNotifications: true,
   playSound: true,
-  notificationVolume: 20,
+  notificationVolume: 20 as Percentage,
   openAtStartup: false,
 };
 

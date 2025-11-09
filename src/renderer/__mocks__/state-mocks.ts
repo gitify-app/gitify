@@ -12,6 +12,7 @@ import {
   type Link,
   type NotificationSettingsState,
   OpenPreference,
+  type Percentage,
   type SettingsState,
   type SystemSettingsState,
   Theme,
@@ -81,7 +82,7 @@ export const mockToken = 'token-123-456' as Token;
 const mockAppearanceSettings: AppearanceSettingsState = {
   theme: Theme.SYSTEM,
   increaseContrast: false,
-  zoomPercentage: 100,
+  zoomPercentage: 100 as Percentage,
   showAccountHeader: false,
   wrapNotificationTitle: false,
 };
@@ -111,7 +112,7 @@ const mockSystemSettings: SystemSettingsState = {
   keyboardShortcut: true,
   showNotifications: true,
   playSound: true,
-  notificationVolume: 20,
+  notificationVolume: 20 as Percentage,
   openAtStartup: false,
 };
 
