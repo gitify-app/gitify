@@ -359,7 +359,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     [auth, settings, unsubscribeNotification],
   );
 
-  const contextValues = useMemo(
+  const contextValues: AppContextState = useMemo(
     () => ({
       auth,
       isLoggedIn,
@@ -378,6 +378,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       hasUnreadNotifications,
 
       fetchNotifications: fetchNotificationsWithAccounts,
+      removeAccountNotifications,
       markNotificationsAsRead: markNotificationsAsReadWithAccounts,
       markNotificationsAsDone: markNotificationsAsDoneWithAccounts,
       unsubscribeNotification: unsubscribeNotificationWithAccounts,
@@ -406,6 +407,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       hasUnreadNotifications,
 
       fetchNotificationsWithAccounts,
+      removeAccountNotifications,
       markNotificationsAsReadWithAccounts,
       markNotificationsAsDoneWithAccounts,
       unsubscribeNotificationWithAccounts,
