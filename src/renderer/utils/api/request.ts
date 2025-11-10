@@ -86,7 +86,7 @@ export async function apiRequestAuth(
  * @param url
  * @returns boolean
  */
-function shouldRequestWithNoCache(url: string) {
+export function shouldRequestWithNoCache(url: string) {
   const parsedUrl = new URL(url);
 
   switch (parsedUrl.pathname) {
@@ -106,7 +106,7 @@ function shouldRequestWithNoCache(url: string) {
  * @param token
  * @returns
  */
-async function getHeaders(url: Link, token?: Token) {
+export async function getHeaders(url: Link, token?: Token) {
   const headers: Record<string, string> = {
     Accept: 'application/json',
     'Cache-Control': shouldRequestWithNoCache(url) ? 'no-cache' : '',
