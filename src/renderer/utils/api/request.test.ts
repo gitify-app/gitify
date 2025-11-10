@@ -1,7 +1,17 @@
 import axios from 'axios';
 
 import type { Link, Token } from '../../types';
-import { apiRequest, apiRequestAuth } from './request';
+import {
+  mockAuthHeaders,
+  mockNoAuthHeaders,
+  mockNonCachedAuthHeaders,
+} from './__mocks__/request-mocks';
+import {
+  apiRequest,
+  apiRequestAuth,
+  getHeaders,
+  shouldRequestWithNoCache,
+} from './request';
 
 jest.mock('axios');
 
@@ -22,11 +32,7 @@ describe('renderer/utils/api/request.ts', () => {
       method,
       url,
       data,
-      headers: {
-        Accept: 'application/json',
-        'Cache-Control': '',
-        'Content-Type': 'application/json',
-      },
+      headers: mockNoAuthHeaders,
     });
   });
 
@@ -38,11 +44,7 @@ describe('renderer/utils/api/request.ts', () => {
       method,
       url,
       data,
-      headers: {
-        Accept: 'application/json',
-        'Cache-Control': '',
-        'Content-Type': 'application/json',
-      },
+      headers: mockNoAuthHeaders,
     });
   });
 });
@@ -63,12 +65,7 @@ describe('apiRequestAuth', () => {
       method,
       url,
       data,
-      headers: {
-        Accept: 'application/json',
-        Authorization: 'token decrypted',
-        'Cache-Control': '',
-        'Content-Type': 'application/json',
-      },
+      headers: mockAuthHeaders,
     });
   });
 
@@ -81,12 +78,38 @@ describe('apiRequestAuth', () => {
       method,
       url,
       data,
-      headers: {
-        Accept: 'application/json',
-        Authorization: 'token decrypted',
-        'Cache-Control': '',
-        'Content-Type': 'application/json',
-      },
+      headers: mockAuthHeaders,
     });
+  });
+
+  it('shouldRequestWithNoCache', () => {
+    expect(
+      shouldRequestWithNoCache('https://example.com/api/v3/notifications'),
+    ).toBe(true);
+
+    expect(
+      shouldRequestWithNoCache('https://example.com/login/oauth/access_token'),
+    ).toBe(true);
+
+    expect(shouldRequestWithNoCache('https://example.com/notifications')).toBe(
+      true,
+    );
+
+    expect(
+      shouldRequestWithNoCache('https://example.com/some/other/endpoint'),
+    ).toBe(false);
+  });
+
+  it('should get headers correctly', async () => {
+    expect(await getHeaders(url)).toEqual(mockNoAuthHeaders);
+
+    expect(await getHeaders(url, token)).toEqual(mockAuthHeaders);
+
+    expect(
+      await getHeaders(
+        'https://example.com/api/v3/notifications' as Link,
+        token,
+      ),
+    ).toEqual(mockNonCachedAuthHeaders);
   });
 });
