@@ -8,8 +8,8 @@ import {
 } from '../../../__mocks__/partial-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
 import type { Link } from '../../../types';
-import type { Notification } from '../../../typesGitHub';
-import { issueHandler } from './issue';
+import type { Notification, StateType } from '../../../typesGitHub';
+import { createIssueHandler } from './issue';
 
 describe('renderer/utils/notifications/handlers/issue.ts', () => {
   describe('enrich', () => {
@@ -46,7 +46,8 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         .get('/repos/gitify-app/notifications-test/issues/comments/302888448')
         .reply(200, { user: mockCommenter });
 
-      const result = await issueHandler.enrich(mockNotification, mockSettings);
+      const handler = createIssueHandler(mockNotification);
+      const result = await handler.enrich(mockSettings);
 
       expect(result).toEqual({
         number: 123,
@@ -75,7 +76,8 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         .get('/repos/gitify-app/notifications-test/issues/comments/302888448')
         .reply(200, { user: mockCommenter });
 
-      const result = await issueHandler.enrich(mockNotification, mockSettings);
+      const handler = createIssueHandler(mockNotification);
+      const result = await handler.enrich(mockSettings);
 
       expect(result).toEqual({
         number: 123,
@@ -105,7 +107,8 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         .get('/repos/gitify-app/notifications-test/issues/comments/302888448')
         .reply(200, { user: mockCommenter });
 
-      const result = await issueHandler.enrich(mockNotification, mockSettings);
+      const handler = createIssueHandler(mockNotification);
+      const result = await handler.enrich(mockSettings);
 
       expect(result).toEqual({
         number: 123,
@@ -135,7 +138,8 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         .get('/repos/gitify-app/notifications-test/issues/comments/302888448')
         .reply(200, { user: mockCommenter });
 
-      const result = await issueHandler.enrich(mockNotification, mockSettings);
+      const handler = createIssueHandler(mockNotification);
+      const result = await handler.enrich(mockSettings);
 
       expect(result).toEqual({
         number: 123,
@@ -165,7 +169,8 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         .get('/repos/gitify-app/notifications-test/issues/comments/302888448')
         .reply(200, { user: mockCommenter });
 
-      const result = await issueHandler.enrich(mockNotification, mockSettings);
+      const handler = createIssueHandler(mockNotification);
+      const result = await handler.enrich(mockSettings);
 
       expect(result).toEqual({
         number: 123,
@@ -194,7 +199,8 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
           labels: [],
         });
 
-      const result = await issueHandler.enrich(mockNotification, mockSettings);
+      const handler = createIssueHandler(mockNotification);
+      const result = await handler.enrich(mockSettings);
 
       expect(result).toEqual({
         number: 123,
@@ -224,10 +230,8 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
           .get('/repos/gitify-app/notifications-test/issues/comments/302888448')
           .reply(200, { user: mockCommenter });
 
-        const result = await issueHandler.enrich(
-          mockNotification,
-          mockSettings,
-        );
+        const handler = createIssueHandler(mockNotification);
+        const result = await handler.enrich(mockSettings);
 
         expect(result).toEqual({
           number: 123,
@@ -256,10 +260,8 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
           .get('/repos/gitify-app/notifications-test/issues/comments/302888448')
           .reply(200, { user: mockCommenter });
 
-        const result = await issueHandler.enrich(
-          mockNotification,
-          mockSettings,
-        );
+        const handler = createIssueHandler(mockNotification);
+        const result = await handler.enrich(mockSettings);
 
         expect(result).toEqual({
           number: 123,
@@ -285,7 +287,8 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
           labels: [],
         });
 
-      const result = await issueHandler.enrich(mockNotification, {
+      const handler = createIssueHandler(mockNotification);
+      const result = await handler.enrich({
         ...mockSettings,
         filterStates: ['closed'],
       });
@@ -294,52 +297,22 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
     });
   });
 
-  it('iconType', () => {
-    expect(
-      issueHandler.iconType(mockNotificationWithSubject({ type: 'Issue' }))
-        .displayName,
-    ).toBe('IssueOpenedIcon');
+  describe('iconType', () => {
+    const cases: Array<[StateType, string]> = [
+      [null, 'IssueOpenedIcon'],
+      ['draft', 'IssueDraftIcon'],
+      ['closed', 'IssueClosedIcon'],
+      ['completed', 'IssueClosedIcon'],
+      ['not_planned', 'SkipIcon'],
+      ['reopened', 'IssueReopenedIcon'],
+    ];
 
-    expect(
-      issueHandler.iconType(
-        mockNotificationWithSubject({ type: 'Issue', state: 'draft' }),
-      ).displayName,
-    ).toBe('IssueDraftIcon');
+    it.each(cases)('returns expected icon for %s', (state, expectedIcon) => {
+      const handler = createIssueHandler(
+        mockNotificationWithSubject({ type: 'Issue', state }),
+      );
 
-    expect(
-      issueHandler.iconType(
-        mockNotificationWithSubject({
-          type: 'Issue',
-          state: 'closed',
-        }),
-      ).displayName,
-    ).toBe('IssueClosedIcon');
-
-    expect(
-      issueHandler.iconType(
-        mockNotificationWithSubject({
-          type: 'Issue',
-          state: 'completed',
-        }),
-      ).displayName,
-    ).toBe('IssueClosedIcon');
-
-    expect(
-      issueHandler.iconType(
-        mockNotificationWithSubject({
-          type: 'Issue',
-          state: 'not_planned',
-        }),
-      ).displayName,
-    ).toBe('SkipIcon');
-
-    expect(
-      issueHandler.iconType(
-        mockNotificationWithSubject({
-          type: 'Issue',
-          state: 'reopened',
-        }),
-      ).displayName,
-    ).toBe('IssueReopenedIcon');
+      expect(handler.iconType().displayName).toBe(expectedIcon);
+    });
   });
 });

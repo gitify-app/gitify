@@ -8,11 +8,15 @@ import {
 } from '../../../__mocks__/partial-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
 import type { Link } from '../../../types';
-import type { Notification, PullRequest } from '../../../typesGitHub';
+import type {
+  Notification,
+  PullRequest,
+  StateType,
+} from '../../../typesGitHub';
 import {
+  createPullRequestHandler,
   getLatestReviewForReviewers,
   parseLinkedIssuesFromPr,
-  pullRequestHandler,
 } from './pullRequest';
 
 describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
@@ -58,10 +62,8 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         .get('/repos/gitify-app/notifications-test/pulls/1/reviews')
         .reply(200, []);
 
-      const result = await pullRequestHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
+      const handler = createPullRequestHandler(mockNotification);
+      const result = await handler.enrich(mockSettings);
 
       expect(result).toEqual({
         number: 123,
@@ -98,10 +100,8 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         .get('/repos/gitify-app/notifications-test/pulls/1/reviews')
         .reply(200, []);
 
-      const result = await pullRequestHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
+      const handler = createPullRequestHandler(mockNotification);
+      const result = await handler.enrich(mockSettings);
 
       expect(result).toEqual({
         number: 123,
@@ -138,10 +138,8 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         .get('/repos/gitify-app/notifications-test/pulls/1/reviews')
         .reply(200, []);
 
-      const result = await pullRequestHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
+      const handler = createPullRequestHandler(mockNotification);
+      const result = await handler.enrich(mockSettings);
 
       expect(result).toEqual({
         number: 123,
@@ -178,10 +176,8 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         .get('/repos/gitify-app/notifications-test/pulls/1/reviews')
         .reply(200, []);
 
-      const result = await pullRequestHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
+      const handler = createPullRequestHandler(mockNotification);
+      const result = await handler.enrich(mockSettings);
 
       expect(result).toEqual({
         number: 123,
@@ -217,10 +213,8 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         .get('/repos/gitify-app/notifications-test/pulls/1/reviews')
         .reply(200, []);
 
-      const result = await pullRequestHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
+      const handler = createPullRequestHandler(mockNotification);
+      const result = await handler.enrich(mockSettings);
 
       expect(result).toEqual({
         number: 123,
@@ -255,10 +249,8 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         .get('/repos/gitify-app/notifications-test/pulls/1/reviews')
         .reply(200, []);
 
-      const result = await pullRequestHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
+      const handler = createPullRequestHandler(mockNotification);
+      const result = await handler.enrich(mockSettings);
 
       expect(result).toEqual({
         number: 123,
@@ -296,10 +288,8 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
           .get('/repos/gitify-app/notifications-test/pulls/1/reviews')
           .reply(200, []);
 
-        const result = await pullRequestHandler.enrich(
-          mockNotification,
-          mockSettings,
-        );
+        const handler = createPullRequestHandler(mockNotification);
+        const result = await handler.enrich(mockSettings);
 
         expect(result).toEqual({
           number: 123,
@@ -336,10 +326,8 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
           .get('/repos/gitify-app/notifications-test/pulls/1/reviews')
           .reply(200, []);
 
-        const result = await pullRequestHandler.enrich(
-          mockNotification,
-          mockSettings,
-        );
+        const handler = createPullRequestHandler(mockNotification);
+        const result = await handler.enrich(mockSettings);
 
         expect(result).toEqual({
           number: 123,
@@ -405,7 +393,8 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
           labels: [],
         });
 
-      const result = await pullRequestHandler.enrich(mockNotification, {
+      const handler = createPullRequestHandler(mockNotification);
+      const result = await handler.enrich({
         ...mockSettings,
         filterStates: ['closed'],
       });
@@ -429,7 +418,8 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         .get('/repos/gitify-app/notifications-test/issues/comments/302888448')
         .reply(200, { user: mockCommenter });
 
-      const result = await pullRequestHandler.enrich(mockNotification, {
+      const handler = createPullRequestHandler(mockNotification);
+      const result = await handler.enrich({
         ...mockSettings,
         filterUserTypes: ['Bot'],
       });
@@ -438,39 +428,21 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
     });
   });
 
-  it('iconType', () => {
-    expect(
-      pullRequestHandler.iconType(
-        mockNotificationWithSubject({ type: 'PullRequest' }),
-      ).displayName,
-    ).toBe('GitPullRequestIcon');
+  describe('iconType', () => {
+    const cases: Array<[StateType, string]> = [
+      [null, 'GitPullRequestIcon'],
+      ['draft', 'GitPullRequestDraftIcon'],
+      ['closed', 'GitPullRequestClosedIcon'],
+      ['merged', 'GitMergeIcon'],
+    ];
 
-    expect(
-      pullRequestHandler.iconType(
-        mockNotificationWithSubject({
-          type: 'PullRequest',
-          state: 'draft',
-        }),
-      ).displayName,
-    ).toBe('GitPullRequestDraftIcon');
+    it.each(cases)('returns expected icon for %s', (state, expectedIcon) => {
+      const handler = createPullRequestHandler(
+        mockNotificationWithSubject({ type: 'PullRequest', state }),
+      );
 
-    expect(
-      pullRequestHandler.iconType(
-        mockNotificationWithSubject({
-          type: 'PullRequest',
-          state: 'closed',
-        }),
-      ).displayName,
-    ).toBe('GitPullRequestClosedIcon');
-
-    expect(
-      pullRequestHandler.iconType(
-        mockNotificationWithSubject({
-          type: 'PullRequest',
-          state: 'merged',
-        }),
-      ).displayName,
-    ).toBe('GitMergeIcon');
+      expect(handler.iconType().displayName).toBe(expectedIcon);
+    });
   });
 
   describe('Pull Request Reviews - Latest Reviews By Reviewer', () => {

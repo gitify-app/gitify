@@ -8,7 +8,7 @@ import {
 } from '../../../__mocks__/partial-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
 import type { Link } from '../../../types';
-import { commitHandler } from './commit';
+import { createCommitHandler } from './commit';
 
 describe('renderer/utils/notifications/handlers/commit.ts', () => {
   describe('enrich', () => {
@@ -40,7 +40,8 @@ describe('renderer/utils/notifications/handlers/commit.ts', () => {
         .get('/repos/gitify-app/notifications-test/comments/141012658')
         .reply(200, { user: mockCommenter });
 
-      const result = await commitHandler.enrich(mockNotification, mockSettings);
+      const handler = createCommitHandler(mockNotification);
+      const result = await handler.enrich(mockSettings);
 
       expect(result).toEqual({
         state: null,
@@ -67,7 +68,8 @@ describe('renderer/utils/notifications/handlers/commit.ts', () => {
         )
         .reply(200, { author: mockAuthor });
 
-      const result = await commitHandler.enrich(mockNotification, mockSettings);
+      const handler = createCommitHandler(mockNotification);
+      const result = await handler.enrich(mockSettings);
 
       expect(result).toEqual({
         state: null,
@@ -88,7 +90,8 @@ describe('renderer/utils/notifications/handlers/commit.ts', () => {
         latest_comment_url: null,
       });
 
-      const result = await commitHandler.enrich(mockNotification, {
+      const handler = createCommitHandler(mockNotification);
+      const result = await handler.enrich({
         ...mockSettings,
         filterStates: ['closed'],
       });
@@ -98,9 +101,12 @@ describe('renderer/utils/notifications/handlers/commit.ts', () => {
   });
 
   it('iconType', () => {
-    expect(
-      commitHandler.iconType(mockNotificationWithSubject({ type: 'Commit' }))
-        .displayName,
-    ).toBe('GitCommitIcon');
+    const handler = createCommitHandler(
+      mockNotificationWithSubject({
+        type: 'Commit',
+      }),
+    );
+
+    expect(handler.iconType().displayName).toBe('GitCommitIcon');
   });
 });

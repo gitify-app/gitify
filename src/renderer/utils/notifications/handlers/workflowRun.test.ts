@@ -1,7 +1,10 @@
 import { mockNotificationWithSubject } from '../../../__mocks__/notifications-mocks';
 import { partialMockNotification } from '../../../__mocks__/partial-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
-import { getWorkflowRunAttributes, workflowRunHandler } from './workflowRun';
+import {
+  createWorkflowRunHandler,
+  getWorkflowRunAttributes,
+} from './workflowRun';
 
 describe('renderer/utils/notifications/handlers/workflowRun.ts', () => {
   describe('enrich', () => {
@@ -11,10 +14,8 @@ describe('renderer/utils/notifications/handlers/workflowRun.ts', () => {
         type: 'WorkflowRun',
       });
 
-      const result = await workflowRunHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
+      const handler = createWorkflowRunHandler(mockNotification);
+      const result = await handler.enrich(mockSettings);
 
       expect(result).toEqual({
         state: 'waiting',
@@ -29,10 +30,8 @@ describe('renderer/utils/notifications/handlers/workflowRun.ts', () => {
         type: 'WorkflowRun',
       });
 
-      const result = await workflowRunHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
+      const handler = createWorkflowRunHandler(mockNotification);
+      const result = await handler.enrich(mockSettings);
 
       expect(result).toBeNull();
     });
@@ -43,23 +42,21 @@ describe('renderer/utils/notifications/handlers/workflowRun.ts', () => {
         type: 'WorkflowRun',
       });
 
-      const result = await workflowRunHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
+      const handler = createWorkflowRunHandler(mockNotification);
+      const result = await handler.enrich(mockSettings);
 
       expect(result).toBeNull();
     });
   });
 
   it('iconType', () => {
-    expect(
-      workflowRunHandler.iconType(
-        mockNotificationWithSubject({
-          type: 'WorkflowRun',
-        }),
-      ).displayName,
-    ).toBe('RocketIcon');
+    const handler = createWorkflowRunHandler(
+      mockNotificationWithSubject({
+        type: 'WorkflowRun',
+      }),
+    );
+
+    expect(handler.iconType().displayName).toBe('RocketIcon');
   });
 
   describe('getWorkflowRunAttributes', () => {

@@ -1,7 +1,8 @@
 import { mockNotificationWithSubject } from '../../../__mocks__/notifications-mocks';
 import { partialMockNotification } from '../../../__mocks__/partial-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
-import { checkSuiteHandler, getCheckSuiteAttributes } from './checkSuite';
+import type { StateType } from '../../../typesGitHub';
+import { createCheckSuiteHandler, getCheckSuiteAttributes } from './checkSuite';
 
 describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
   describe('enrich', () => {
@@ -11,10 +12,8 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
         type: 'CheckSuite',
       });
 
-      const result = await checkSuiteHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
+      const handler = createCheckSuiteHandler(mockNotification);
+      const result = await handler.enrich(mockSettings);
 
       expect(result).toEqual({
         state: 'cancelled',
@@ -28,10 +27,8 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
         type: 'CheckSuite',
       });
 
-      const result = await checkSuiteHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
+      const handler = createCheckSuiteHandler(mockNotification);
+      const result = await handler.enrich(mockSettings);
 
       expect(result).toEqual({
         state: 'failure',
@@ -45,10 +42,8 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
         type: 'CheckSuite',
       });
 
-      const result = await checkSuiteHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
+      const handler = createCheckSuiteHandler(mockNotification);
+      const result = await handler.enrich(mockSettings);
 
       expect(result).toEqual({
         state: 'failure',
@@ -62,10 +57,8 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
         type: 'CheckSuite',
       });
 
-      const result = await checkSuiteHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
+      const handler = createCheckSuiteHandler(mockNotification);
+      const result = await handler.enrich(mockSettings);
 
       expect(result).toEqual({
         state: 'failure',
@@ -79,10 +72,8 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
         type: 'CheckSuite',
       });
 
-      const result = await checkSuiteHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
+      const handler = createCheckSuiteHandler(mockNotification);
+      const result = await handler.enrich(mockSettings);
 
       expect(result).toEqual({
         state: 'skipped',
@@ -96,10 +87,8 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
         type: 'CheckSuite',
       });
 
-      const result = await checkSuiteHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
+      const handler = createCheckSuiteHandler(mockNotification);
+      const result = await handler.enrich(mockSettings);
 
       expect(result).toEqual({
         state: 'success',
@@ -113,10 +102,8 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
         type: 'CheckSuite',
       });
 
-      const result = await checkSuiteHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
+      const handler = createCheckSuiteHandler(mockNotification);
+      const result = await handler.enrich(mockSettings);
 
       expect(result).toBeNull();
     });
@@ -127,57 +114,29 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
         type: 'CheckSuite',
       });
 
-      const result = await checkSuiteHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
+      const handler = createCheckSuiteHandler(mockNotification);
+      const result = await handler.enrich(mockSettings);
 
       expect(result).toBeNull();
     });
   });
 
-  it('iconType', () => {
-    expect(
-      checkSuiteHandler.iconType(
-        mockNotificationWithSubject({ type: 'CheckSuite', state: null }),
-      ).displayName,
-    ).toBe('RocketIcon');
+  describe('iconType', () => {
+    const cases: Array<[StateType, string]> = [
+      [null, 'RocketIcon'],
+      ['cancelled', 'StopIcon'],
+      ['failure', 'XIcon'],
+      ['skipped', 'SkipIcon'],
+      ['success', 'CheckIcon'],
+    ];
 
-    expect(
-      checkSuiteHandler.iconType(
-        mockNotificationWithSubject({
-          type: 'CheckSuite',
-          state: 'cancelled',
-        }),
-      ).displayName,
-    ).toBe('StopIcon');
+    it.each(cases)('returns expected icon for %s', (state, expectedIcon) => {
+      const handler = createCheckSuiteHandler(
+        mockNotificationWithSubject({ type: 'CheckSuite', state }),
+      );
 
-    expect(
-      checkSuiteHandler.iconType(
-        mockNotificationWithSubject({
-          type: 'CheckSuite',
-          state: 'failure',
-        }),
-      ).displayName,
-    ).toBe('XIcon');
-
-    expect(
-      checkSuiteHandler.iconType(
-        mockNotificationWithSubject({
-          type: 'CheckSuite',
-          state: 'skipped',
-        }),
-      ).displayName,
-    ).toBe('SkipIcon');
-
-    expect(
-      checkSuiteHandler.iconType(
-        mockNotificationWithSubject({
-          type: 'CheckSuite',
-          state: 'success',
-        }),
-      ).displayName,
-    ).toBe('CheckIcon');
+      expect(handler.iconType().displayName).toBe(expectedIcon);
+    });
   });
 
   describe('getCheckSuiteState', () => {

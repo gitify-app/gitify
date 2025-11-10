@@ -8,7 +8,7 @@ import {
 } from '../../../__mocks__/partial-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
 import type { Link } from '../../../types';
-import { releaseHandler } from './release';
+import { createReleaseHandler } from './release';
 
 describe('renderer/utils/notifications/handlers/release.ts', () => {
   describe('enrich', () => {
@@ -33,10 +33,8 @@ describe('renderer/utils/notifications/handlers/release.ts', () => {
         .get('/repos/gitify-app/notifications-test/releases/1')
         .reply(200, { author: mockAuthor });
 
-      const result = await releaseHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
+      const handler = createReleaseHandler(mockNotification);
+      const result = await handler.enrich(mockSettings);
 
       expect(result).toEqual({
         state: null,
@@ -58,7 +56,8 @@ describe('renderer/utils/notifications/handlers/release.ts', () => {
           'https://api.github.com/repos/gitify-app/notifications-test/releases/1' as Link,
       });
 
-      const result = await releaseHandler.enrich(mockNotification, {
+      const handler = createReleaseHandler(mockNotification);
+      const result = await handler.enrich({
         ...mockSettings,
         filterStates: ['closed'],
       });
@@ -68,12 +67,12 @@ describe('renderer/utils/notifications/handlers/release.ts', () => {
   });
 
   it('iconType', () => {
-    expect(
-      releaseHandler.iconType(
-        mockNotificationWithSubject({
-          type: 'Release',
-        }),
-      ).displayName,
-    ).toBe('TagIcon');
+    const handler = createReleaseHandler(
+      mockNotificationWithSubject({
+        type: 'Release',
+      }),
+    );
+
+    expect(handler.iconType().displayName).toBe('TagIcon');
   });
 });

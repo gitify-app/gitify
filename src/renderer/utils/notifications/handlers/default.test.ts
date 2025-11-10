@@ -3,7 +3,7 @@ import { partialMockNotification } from '../../../__mocks__/partial-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
 import { IconColor } from '../../../types';
 import type { StateType } from '../../../typesGitHub';
-import { defaultHandler } from './default';
+import { createDefaultHandler } from './default';
 
 describe('renderer/utils/notifications/handlers/default.ts', () => {
   describe('enrich', () => {
@@ -14,19 +14,17 @@ describe('renderer/utils/notifications/handlers/default.ts', () => {
         type: 'RepositoryInvitation',
       });
 
-      const result = await defaultHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
+      const handler = createDefaultHandler(mockNotification);
+      const result = await handler.enrich(mockSettings);
 
       expect(result).toBeNull();
     });
   });
 
   it('iconType', () => {
-    expect(
-      defaultHandler.iconType(mockNotificationWithSubject({})).displayName,
-    ).toBe('QuestionIcon');
+    const handler = createDefaultHandler(mockNotificationWithSubject({}));
+
+    expect(handler.iconType().displayName).toBe('QuestionIcon');
   });
 
   describe('iconColor', () => {
@@ -50,8 +48,11 @@ describe('renderer/utils/notifications/handlers/default.ts', () => {
     ];
 
     it.each(cases)('returns correct color for state %s', (state, expected) => {
-      const subject = mockNotificationWithSubject({ state });
-      expect(defaultHandler.iconColor(subject)).toBe(expected);
+      const handler = createDefaultHandler(
+        mockNotificationWithSubject({ state }),
+      );
+
+      expect(handler.iconColor()).toBe(expected);
     });
   });
 
@@ -63,9 +64,9 @@ describe('renderer/utils/notifications/handlers/default.ts', () => {
         state: 'open',
       });
 
-      expect(defaultHandler.formattedNotificationType(notification)).toBe(
-        'Open Pull Request',
-      );
+      const handler = createDefaultHandler(notification);
+
+      expect(handler.formattedNotificationType()).toBe('Open Pull Request');
     });
 
     it('handles missing state (null) gracefully', () => {
@@ -75,9 +76,9 @@ describe('renderer/utils/notifications/handlers/default.ts', () => {
         state: null,
       });
 
-      expect(defaultHandler.formattedNotificationType(notification)).toBe(
-        'Issue',
-      );
+      const handler = createDefaultHandler(notification);
+
+      expect(handler.formattedNotificationType()).toBe('Issue');
     });
   });
 
@@ -89,9 +90,10 @@ describe('renderer/utils/notifications/handlers/default.ts', () => {
         state: 'open',
       });
       notification.subject.number = 42;
-      expect(defaultHandler.formattedNotificationNumber(notification)).toBe(
-        '#42',
-      );
+
+      const handler = createDefaultHandler(notification);
+
+      expect(handler.formattedNotificationNumber()).toBe('#42');
     });
 
     it('returns empty string when number absent', () => {
@@ -100,7 +102,10 @@ describe('renderer/utils/notifications/handlers/default.ts', () => {
         type: 'Issue',
         state: 'open',
       });
-      expect(defaultHandler.formattedNotificationNumber(notification)).toBe('');
+
+      const handler = createDefaultHandler(notification);
+
+      expect(handler.formattedNotificationNumber()).toBe('');
     });
   });
 
@@ -112,9 +117,10 @@ describe('renderer/utils/notifications/handlers/default.ts', () => {
         state: 'open',
       });
       notification.subject.number = 101;
-      expect(defaultHandler.formattedNotificationTitle(notification)).toBe(
-        'Fix bug [#101]',
-      );
+
+      const handler = createDefaultHandler(notification);
+
+      expect(handler.formattedNotificationTitle()).toBe('Fix bug [#101]');
     });
 
     it('returns title unchanged when number missing', () => {
@@ -123,9 +129,10 @@ describe('renderer/utils/notifications/handlers/default.ts', () => {
         type: 'Issue',
         state: 'open',
       });
-      expect(defaultHandler.formattedNotificationTitle(notification)).toBe(
-        'Improve docs',
-      );
+
+      const handler = createDefaultHandler(notification);
+
+      expect(handler.formattedNotificationTitle()).toBe('Improve docs');
     });
   });
 });

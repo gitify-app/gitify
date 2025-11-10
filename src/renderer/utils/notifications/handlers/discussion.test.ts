@@ -10,8 +10,9 @@ import type {
   DiscussionAuthor,
   DiscussionStateType,
   Repository,
+  StateType,
 } from '../../../typesGitHub';
-import { discussionHandler } from './discussion';
+import { createDiscussionHandler } from './discussion';
 
 const mockDiscussionAuthor: DiscussionAuthor = {
   login: 'discussion-author',
@@ -52,10 +53,8 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
           },
         });
 
-      const result = await discussionHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
+      const handler = createDiscussionHandler(mockNotification);
+      const result = await handler.enrich(mockSettings);
 
       expect(result).toEqual({
         number: 123,
@@ -82,10 +81,8 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
           },
         });
 
-      const result = await discussionHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
+      const handler = createDiscussionHandler(mockNotification);
+      const result = await handler.enrich(mockSettings);
 
       expect(result).toEqual({
         number: 123,
@@ -112,10 +109,8 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
           },
         });
 
-      const result = await discussionHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
+      const handler = createDiscussionHandler(mockNotification);
+      const result = await handler.enrich(mockSettings);
 
       expect(result).toEqual({
         number: 123,
@@ -142,10 +137,8 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
           },
         });
 
-      const result = await discussionHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
+      const handler = createDiscussionHandler(mockNotification);
+      const result = await handler.enrich(mockSettings);
 
       expect(result).toEqual({
         number: 123,
@@ -172,10 +165,8 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
           },
         });
 
-      const result = await discussionHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
+      const handler = createDiscussionHandler(mockNotification);
+      const result = await handler.enrich(mockSettings);
 
       expect(result).toEqual({
         number: 123,
@@ -202,10 +193,8 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
           },
         });
 
-      const result = await discussionHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
+      const handler = createDiscussionHandler(mockNotification);
+      const result = await handler.enrich(mockSettings);
 
       expect(result).toEqual({
         number: 123,
@@ -240,10 +229,8 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
           },
         });
 
-      const result = await discussionHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
+      const handler = createDiscussionHandler(mockNotification);
+      const result = await handler.enrich(mockSettings);
 
       expect(result).toEqual({
         number: 123,
@@ -270,7 +257,8 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
           },
         });
 
-      const result = await discussionHandler.enrich(mockNotification, {
+      const handler = createDiscussionHandler(mockNotification);
+      const result = await handler.enrich({
         ...mockSettings,
         filterStates: ['closed'],
       });
@@ -279,30 +267,21 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
     });
   });
 
-  it('iconType', () => {
-    expect(
-      discussionHandler.iconType(
-        mockNotificationWithSubject({ type: 'Discussion' }),
-      ).displayName,
-    ).toBe('CommentDiscussionIcon');
+  describe('iconType', () => {
+    const cases: Array<[StateType, string]> = [
+      [null, 'CommentDiscussionIcon'],
+      ['DUPLICATE', 'DiscussionDuplicateIcon'],
+      ['OUTDATED', 'DiscussionOutdatedIcon'],
+      ['RESOLVED', 'DiscussionClosedIcon'],
+    ];
 
-    expect(
-      discussionHandler.iconType(
-        mockNotificationWithSubject({ type: 'Discussion', state: 'DUPLICATE' }),
-      ).displayName,
-    ).toBe('DiscussionDuplicateIcon');
+    it.each(cases)('returns expected icon for %s', (state, expectedIcon) => {
+      const handler = createDiscussionHandler(
+        mockNotificationWithSubject({ type: 'Discussion', state }),
+      );
 
-    expect(
-      discussionHandler.iconType(
-        mockNotificationWithSubject({ type: 'Discussion', state: 'OUTDATED' }),
-      ).displayName,
-    ).toBe('DiscussionOutdatedIcon');
-
-    expect(
-      discussionHandler.iconType(
-        mockNotificationWithSubject({ type: 'Discussion', state: 'RESOLVED' }),
-      ).displayName,
-    ).toBe('DiscussionClosedIcon');
+      expect(handler.iconType().displayName).toBe(expectedIcon);
+    });
   });
 });
 
