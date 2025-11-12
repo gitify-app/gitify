@@ -6,9 +6,9 @@ exports[`renderer/components/icons/LogoIcon.tsx renders correctly (dark) 1`] = `
   "baseElement": <body>
     <div>
       <svg
-        aria-hidden="true"
         aria-label="Gitify Logo"
         class="size-5"
+        role="img"
         viewBox="0 0 500 500"
         xmlns="https://www.w3.org/2000/svg"
         xmlns:xlink="https://www.w3.org/1999/xlink"
@@ -53,9 +53,9 @@ exports[`renderer/components/icons/LogoIcon.tsx renders correctly (dark) 1`] = `
   </body>,
   "container": <div>
     <svg
-      aria-hidden="true"
       aria-label="Gitify Logo"
       class="size-5"
+      role="img"
       viewBox="0 0 500 500"
       xmlns="https://www.w3.org/2000/svg"
       xmlns:xlink="https://www.w3.org/1999/xlink"
@@ -157,9 +157,9 @@ exports[`renderer/components/icons/LogoIcon.tsx renders correctly (light) 1`] = 
   "baseElement": <body>
     <div>
       <svg
-        aria-hidden="true"
         aria-label="Gitify Logo"
         class="size-5"
+        role="img"
         viewBox="0 0 500 500"
         xmlns="https://www.w3.org/2000/svg"
         xmlns:xlink="https://www.w3.org/1999/xlink"
@@ -204,9 +204,9 @@ exports[`renderer/components/icons/LogoIcon.tsx renders correctly (light) 1`] = 
   </body>,
   "container": <div>
     <svg
-      aria-hidden="true"
       aria-label="Gitify Logo"
       class="size-5"
+      role="img"
       viewBox="0 0 500 500"
       xmlns="https://www.w3.org/2000/svg"
       xmlns:xlink="https://www.w3.org/1999/xlink"
@@ -308,9 +308,9 @@ exports[`renderer/components/icons/LogoIcon.tsx should render large size 1`] = `
   "baseElement": <body>
     <div>
       <svg
-        aria-hidden="true"
         aria-label="Gitify Logo"
         class="size-16"
+        role="img"
         viewBox="0 0 500 500"
         xmlns="https://www.w3.org/2000/svg"
         xmlns:xlink="https://www.w3.org/1999/xlink"
@@ -355,9 +355,9 @@ exports[`renderer/components/icons/LogoIcon.tsx should render large size 1`] = `
   </body>,
   "container": <div>
     <svg
-      aria-hidden="true"
       aria-label="Gitify Logo"
       class="size-16"
+      role="img"
       viewBox="0 0 500 500"
       xmlns="https://www.w3.org/2000/svg"
       xmlns:xlink="https://www.w3.org/1999/xlink"
@@ -459,9 +459,9 @@ exports[`renderer/components/icons/LogoIcon.tsx should render medium size 1`] = 
   "baseElement": <body>
     <div>
       <svg
-        aria-hidden="true"
         aria-label="Gitify Logo"
         class="size-10"
+        role="img"
         viewBox="0 0 500 500"
         xmlns="https://www.w3.org/2000/svg"
         xmlns:xlink="https://www.w3.org/1999/xlink"
@@ -506,9 +506,9 @@ exports[`renderer/components/icons/LogoIcon.tsx should render medium size 1`] = 
   </body>,
   "container": <div>
     <svg
-      aria-hidden="true"
       aria-label="Gitify Logo"
       class="size-10"
+      role="img"
       viewBox="0 0 500 500"
       xmlns="https://www.w3.org/2000/svg"
       xmlns:xlink="https://www.w3.org/1999/xlink"
@@ -610,9 +610,9 @@ exports[`renderer/components/icons/LogoIcon.tsx should render small size 1`] = `
   "baseElement": <body>
     <div>
       <svg
-        aria-hidden="true"
         aria-label="Gitify Logo"
         class="size-5"
+        role="img"
         viewBox="0 0 500 500"
         xmlns="https://www.w3.org/2000/svg"
         xmlns:xlink="https://www.w3.org/1999/xlink"
@@ -657,9 +657,9 @@ exports[`renderer/components/icons/LogoIcon.tsx should render small size 1`] = `
   </body>,
   "container": <div>
     <svg
-      aria-hidden="true"
       aria-label="Gitify Logo"
       class="size-5"
+      role="img"
       viewBox="0 0 500 500"
       xmlns="https://www.w3.org/2000/svg"
       xmlns:xlink="https://www.w3.org/1999/xlink"

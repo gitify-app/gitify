@@ -99,9 +99,9 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
             type="button"
           >
             <svg
-              aria-hidden="true"
               aria-label="Gitify Logo"
               class="size-5"
+              role="img"
               viewBox="0 0 500 500"
               xmlns="https://www.w3.org/2000/svg"
               xmlns:xlink="https://www.w3.org/1999/xlink"
@@ -354,9 +354,9 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
           type="button"
         >
           <svg
-            aria-hidden="true"
             aria-label="Gitify Logo"
             class="size-5"
+            role="img"
             viewBox="0 0 500 500"
             xmlns="https://www.w3.org/2000/svg"
             xmlns:xlink="https://www.w3.org/1999/xlink"
@@ -666,9 +666,9 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
             type="button"
           >
             <svg
-              aria-hidden="true"
               aria-label="Gitify Logo"
               class="size-5"
+              role="img"
               viewBox="0 0 500 500"
               xmlns="https://www.w3.org/2000/svg"
               xmlns:xlink="https://www.w3.org/1999/xlink"
@@ -921,9 +921,9 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
           type="button"
         >
           <svg
-            aria-hidden="true"
             aria-label="Gitify Logo"
             class="size-5"
+            role="img"
             viewBox="0 0 500 500"
             xmlns="https://www.w3.org/2000/svg"
             xmlns:xlink="https://www.w3.org/1999/xlink"
