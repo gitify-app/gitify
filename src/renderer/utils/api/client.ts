@@ -71,6 +71,7 @@ export function listNotificationsForAuthenticatedUser(
   const url = getGitHubAPIBaseUrl(account.hostname);
   url.pathname += 'notifications';
   url.searchParams.append('participating', String(settings.participating));
+
   return apiRequestAuth(
     url.toString() as Link,
     'GET',
@@ -112,11 +113,12 @@ export function markNotificationThreadAsDone(
 ): AxiosPromise<void> {
   const url = getGitHubAPIBaseUrl(hostname);
   url.pathname += `notifications/threads/${threadId}`;
+
   return apiRequestAuth(url.toString() as Link, 'DELETE', token, {});
 }
 
 /**
- * Ignore future notifications for threads until you comment on the thread or get an`@mention`.
+ * Ignore future notifications for threads until you comment on the thread or get a `@mention`.
  *
  * Endpoint documentation: https://docs.github.com/en/rest/activity/notifications#delete-a-thread-subscription
  */
@@ -216,6 +218,7 @@ export function getRelease(url: Link, token: Token): AxiosPromise<Release> {
 export async function getHtmlUrl(url: Link, token: Token): Promise<string> {
   try {
     const response = (await apiRequestAuth(url, 'GET', token)).data;
+
     return response.html_url;
   } catch (err) {
     rendererLogError(
@@ -236,6 +239,7 @@ export async function searchDiscussions(
   notification: Notification,
 ): AxiosPromise<GraphQLSearch<Discussion>> {
   const url = getGitHubGraphQLUrl(notification.account.hostname);
+
   return apiRequestAuth(
     url.toString() as Link,
     'POST',
@@ -268,9 +272,9 @@ export async function getLatestDiscussion(
   try {
     const response = await searchDiscussions(notification);
     return (
-      response.data?.data.search.nodes.filter(
+      response.data?.data.search.nodes.find(
         (discussion) => discussion.title === notification.subject.title,
-      )[0] ?? null
+      ) ?? null
     );
   } catch (err) {
     rendererLogError(

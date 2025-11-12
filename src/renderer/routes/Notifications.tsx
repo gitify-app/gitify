@@ -7,10 +7,9 @@ import { AccountNotifications } from '../components/notifications/AccountNotific
 import { Oops } from '../components/Oops';
 import { AppContext } from '../context/App';
 import { getAccountUUID } from '../utils/auth/utils';
-import { getNotificationCount } from '../utils/notifications/notifications';
 
 export const NotificationsRoute: FC = () => {
-  const { notifications, status, globalError, settings } =
+  const { notifications, status, globalError, settings, hasNotifications } =
     useContext(AppContext);
 
   const hasMultipleAccounts = useMemo(
@@ -20,11 +19,6 @@ export const NotificationsRoute: FC = () => {
 
   const hasNoAccountErrors = useMemo(
     () => notifications.every((account) => account.error === null),
-    [notifications],
-  );
-
-  const hasNotifications = useMemo(
-    () => getNotificationCount(notifications) > 0,
     [notifications],
   );
 
@@ -39,17 +33,19 @@ export const NotificationsRoute: FC = () => {
   return (
     <Page testId="notifications">
       <Contents paddingHorizontal={false}>
-        {notifications.map((accountNotifications) => (
-          <AccountNotifications
-            account={accountNotifications.account}
-            error={accountNotifications.error}
-            key={getAccountUUID(accountNotifications.account)}
-            notifications={accountNotifications.notifications}
-            showAccountHeader={
-              hasMultipleAccounts || settings.showAccountHeader
-            }
-          />
-        ))}
+        {notifications.map((accountNotification) => {
+          return (
+            <AccountNotifications
+              account={accountNotification.account}
+              error={accountNotification.error}
+              key={getAccountUUID(accountNotification.account)}
+              notifications={accountNotification.notifications}
+              showAccountHeader={
+                hasMultipleAccounts || settings.showAccountHeader
+              }
+            />
+          );
+        })}
       </Contents>
     </Page>
   );

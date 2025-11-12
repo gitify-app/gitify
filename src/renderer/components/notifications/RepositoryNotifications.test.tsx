@@ -39,6 +39,20 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
     expect(tree).toMatchSnapshot();
   });
 
+  it('should render itself & its children - all notifications are read', () => {
+    for (const n of props.repoNotifications) {
+      n.unread = false;
+    }
+
+    const tree = render(
+      <AppContext.Provider value={{}}>
+        <RepositoryNotifications {...props} />
+      </AppContext.Provider>,
+    );
+
+    expect(tree).toMatchSnapshot();
+  });
+
   it('should open the browser when clicking on the repo name', async () => {
     const openExternalLinkMock = jest
       .spyOn(comms, 'openExternalLink')

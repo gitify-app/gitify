@@ -12,5 +12,9 @@
   "tailwindCSS.experimental.classRegex": [
     ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
     ["cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
-  ]
+  ],
+  "sonarlint.connectedMode.project": {
+    "connectionId": "gitify-app",
+    "projectKey": "gitify-app_gitify"
+  }
 }

@@ -9,7 +9,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
         class="flex flex-col min-h-screen bg-gitify-background"
       >
         <div
-          class="fixed left-sidebar -ml-sidebar w-sidebar h-full bg-gitify-sidebar text-white prc-Stack-Stack-WJVsK"
+          class="fixed left-sidebar -ml-sidebar w-sidebar h-full bg-gitify-sidebar [&_svg]:text-white prc-Stack-Stack-WJVsK"
           data-align="stretch"
           data-direction="vertical"
           data-justify="space-between"
@@ -26,7 +26,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
             data-wrap="nowrap"
           >
             <button
-              aria-describedby="«r1»-loading-announcement «r0»"
+              aria-describedby="_r_1_-loading-announcement _r_0_"
               aria-label="Gitify"
               class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
               data-component="IconButton"
@@ -38,9 +38,9 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
               type="button"
             >
               <svg
+                aria-hidden="true"
                 aria-label="Gitify Logo"
-                class="size-2.5"
-                role="img"
+                class="size-5"
                 viewBox="0 0 500 500"
                 xmlns="https://www.w3.org/2000/svg"
                 xmlns:xlink="https://www.w3.org/1999/xlink"
@@ -86,23 +86,22 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-cYMVY"
               data-direction="e"
-              id="«r0»"
+              id="_r_0_"
               popover="auto"
               role="tooltip"
             >
               Home
             </span>
             <button
-              aria-describedby="«r3»-loading-announcement «r2»"
+              aria-describedby="_r_3_-loading-announcement _r_2_"
               aria-label="Notifications"
-              class="Box-sc-g0xbh4-0 eIPRae prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
+              class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
               data-size="small"
               data-testid="sidebar-notifications"
               data-variant="invisible"
-              sx="[object Object]"
               type="button"
             >
               <svg
@@ -126,23 +125,22 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-cYMVY"
               data-direction="e"
-              id="«r2»"
+              id="_r_2_"
               popover="auto"
               role="tooltip"
             >
-              0 unread notifications
+              undefined unread notifications ↗
             </span>
             <button
-              aria-describedby="«r5»-loading-announcement"
-              aria-labelledby="«r4»"
-              class="Box-sc-g0xbh4-0 eIPRae prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
+              aria-describedby="_r_5_-loading-announcement"
+              aria-labelledby="_r_4_"
+              class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
               data-size="small"
               data-testid="sidebar-my-issues"
               data-variant="invisible"
-              sx="[object Object]"
               type="button"
             >
               <svg
@@ -169,22 +167,21 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-cYMVY"
               data-direction="e"
-              id="«r4»"
+              id="_r_4_"
               popover="auto"
             >
-              My issues
+              My issues ↗
             </span>
             <button
-              aria-describedby="«r7»-loading-announcement"
-              aria-labelledby="«r6»"
-              class="Box-sc-g0xbh4-0 eIPRae prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
+              aria-describedby="_r_7_-loading-announcement"
+              aria-labelledby="_r_6_"
+              class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
               data-size="small"
               data-testid="sidebar-my-pull-requests"
               data-variant="invisible"
-              sx="[object Object]"
               type="button"
             >
               <svg
@@ -208,10 +205,10 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-cYMVY"
               data-direction="e"
-              id="«r6»"
+              id="_r_6_"
               popover="auto"
             >
-              My pull requests
+              My pull requests ↗
             </span>
           </div>
           <div
@@ -224,16 +221,15 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
             data-wrap="nowrap"
           >
             <button
-              aria-describedby="«r9»-loading-announcement"
-              aria-labelledby="«r8»"
-              class="Box-sc-g0xbh4-0 eIPRae prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
+              aria-describedby="_r_9_-loading-announcement"
+              aria-labelledby="_r_8_"
+              class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
               data-component="IconButton"
               data-loading="false"
               data-no-visuals="true"
               data-size="small"
               data-testid="sidebar-quit"
               data-variant="invisible"
-              sx="[object Object]"
               type="button"
             >
               <svg
@@ -257,7 +253,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-cYMVY"
               data-direction="e"
-              id="«r8»"
+              id="_r_8_"
               popover="auto"
             >
               Quit Gitify
@@ -277,7 +273,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
       class="flex flex-col min-h-screen bg-gitify-background"
     >
       <div
-        class="fixed left-sidebar -ml-sidebar w-sidebar h-full bg-gitify-sidebar text-white prc-Stack-Stack-WJVsK"
+        class="fixed left-sidebar -ml-sidebar w-sidebar h-full bg-gitify-sidebar [&_svg]:text-white prc-Stack-Stack-WJVsK"
         data-align="stretch"
         data-direction="vertical"
         data-justify="space-between"
@@ -294,7 +290,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
           data-wrap="nowrap"
         >
           <button
-            aria-describedby="«r1»-loading-announcement «r0»"
+            aria-describedby="_r_1_-loading-announcement _r_0_"
             aria-label="Gitify"
             class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
             data-component="IconButton"
@@ -306,9 +302,9 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
             type="button"
           >
             <svg
+              aria-hidden="true"
               aria-label="Gitify Logo"
-              class="size-2.5"
-              role="img"
+              class="size-5"
               viewBox="0 0 500 500"
               xmlns="https://www.w3.org/2000/svg"
               xmlns:xlink="https://www.w3.org/1999/xlink"
@@ -354,23 +350,22 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
             aria-hidden="true"
             class="prc-TooltipV2-Tooltip-cYMVY"
             data-direction="e"
-            id="«r0»"
+            id="_r_0_"
             popover="auto"
             role="tooltip"
           >
             Home
           </span>
           <button
-            aria-describedby="«r3»-loading-announcement «r2»"
+            aria-describedby="_r_3_-loading-announcement _r_2_"
             aria-label="Notifications"
-            class="Box-sc-g0xbh4-0 eIPRae prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
+            class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
             data-size="small"
             data-testid="sidebar-notifications"
             data-variant="invisible"
-            sx="[object Object]"
             type="button"
           >
             <svg
@@ -394,23 +389,22 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
             aria-hidden="true"
             class="prc-TooltipV2-Tooltip-cYMVY"
             data-direction="e"
-            id="«r2»"
+            id="_r_2_"
             popover="auto"
             role="tooltip"
           >
-            0 unread notifications
+            undefined unread notifications ↗
           </span>
           <button
-            aria-describedby="«r5»-loading-announcement"
-            aria-labelledby="«r4»"
-            class="Box-sc-g0xbh4-0 eIPRae prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
+            aria-describedby="_r_5_-loading-announcement"
+            aria-labelledby="_r_4_"
+            class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
             data-size="small"
             data-testid="sidebar-my-issues"
             data-variant="invisible"
-            sx="[object Object]"
             type="button"
           >
             <svg
@@ -437,22 +431,21 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
             aria-hidden="true"
             class="prc-TooltipV2-Tooltip-cYMVY"
             data-direction="e"
-            id="«r4»"
+            id="_r_4_"
             popover="auto"
           >
-            My issues
+            My issues ↗
           </span>
           <button
-            aria-describedby="«r7»-loading-announcement"
-            aria-labelledby="«r6»"
-            class="Box-sc-g0xbh4-0 eIPRae prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
+            aria-describedby="_r_7_-loading-announcement"
+            aria-labelledby="_r_6_"
+            class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
             data-size="small"
             data-testid="sidebar-my-pull-requests"
             data-variant="invisible"
-            sx="[object Object]"
             type="button"
           >
             <svg
@@ -476,10 +469,10 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
             aria-hidden="true"
             class="prc-TooltipV2-Tooltip-cYMVY"
             data-direction="e"
-            id="«r6»"
+            id="_r_6_"
             popover="auto"
           >
-            My pull requests
+            My pull requests ↗
           </span>
         </div>
         <div
@@ -492,16 +485,15 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
           data-wrap="nowrap"
         >
           <button
-            aria-describedby="«r9»-loading-announcement"
-            aria-labelledby="«r8»"
-            class="Box-sc-g0xbh4-0 eIPRae prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
+            aria-describedby="_r_9_-loading-announcement"
+            aria-labelledby="_r_8_"
+            class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
             data-size="small"
             data-testid="sidebar-quit"
             data-variant="invisible"
-            sx="[object Object]"
             type="button"
           >
             <svg
@@ -525,7 +517,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
             aria-hidden="true"
             class="prc-TooltipV2-Tooltip-cYMVY"
             data-direction="e"
-            id="«r8»"
+            id="_r_8_"
             popover="auto"
           >
             Quit Gitify

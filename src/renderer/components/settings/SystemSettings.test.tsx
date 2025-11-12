@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 
 import { mockAuth, mockSettings } from '../../__mocks__/state-mocks';
 import { AppContext } from '../../context/App';
+import type { Percentage } from '../../types';
 import { SystemSettings } from './SystemSettings';
 
 describe('renderer/components/settings/SystemSettings.tsx', () => {
@@ -52,32 +53,6 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
 
     expect(updateSetting).toHaveBeenCalledTimes(1);
     expect(updateSetting).toHaveBeenCalledWith('keyboardShortcut', false);
-  });
-
-  it('should toggle the showNotificationsCountInTray checkbox', async () => {
-    await act(async () => {
-      render(
-        <AppContext.Provider
-          value={{
-            auth: mockAuth,
-            settings: mockSettings,
-            updateSetting,
-          }}
-        >
-          <SystemSettings />
-        </AppContext.Provider>,
-      );
-    });
-
-    await userEvent.click(
-      screen.getByTestId('checkbox-showNotificationsCountInTray'),
-    );
-
-    expect(updateSetting).toHaveBeenCalledTimes(1);
-    expect(updateSetting).toHaveBeenCalledWith(
-      'showNotificationsCountInTray',
-      false,
-    );
   });
 
   it('should toggle the showNotifications checkbox', async () => {
@@ -181,7 +156,7 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
             auth: mockAuth,
             settings: {
               ...mockSettings,
-              notificationVolume: 30,
+              notificationVolume: 30 as Percentage,
             },
             updateSetting,
           }}
@@ -195,27 +170,6 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
       expect(updateSetting).toHaveBeenCalledTimes(1);
       expect(updateSetting).toHaveBeenCalledWith('notificationVolume', 20);
     });
-  });
-
-  it('should toggle the useAlternateIdleIcon checkbox', async () => {
-    await act(async () => {
-      render(
-        <AppContext.Provider
-          value={{
-            auth: mockAuth,
-            settings: mockSettings,
-            updateSetting,
-          }}
-        >
-          <SystemSettings />
-        </AppContext.Provider>,
-      );
-    });
-
-    await userEvent.click(screen.getByTestId('checkbox-useAlternateIdleIcon'));
-
-    expect(updateSetting).toHaveBeenCalledTimes(1);
-    expect(updateSetting).toHaveBeenCalledWith('useAlternateIdleIcon', true);
   });
 
   it('should toggle the openAtStartup checkbox', async () => {

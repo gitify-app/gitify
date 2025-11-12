@@ -45,18 +45,33 @@ export function setAutoLaunch(value: boolean): void {
   window.gitify.setAutoLaunch(value);
 }
 
-export function setAlternateIdleIcon(value: boolean): void {
+export function setUseAlternateIdleIcon(value: boolean): void {
   window.gitify.tray.useAlternateIdleIcon(value);
+}
+
+export function setUseUnreadActiveIcon(value: boolean): void {
+  window.gitify.tray.useUnreadActiveIcon(value);
 }
 
 export function setKeyboardShortcut(keyboardShortcut: boolean): void {
   window.gitify.setKeyboardShortcut(keyboardShortcut);
 }
 
-export function updateTrayIcon(notificationsLength = 0): void {
-  window.gitify.tray.updateIcon(notificationsLength);
+/**
+ * Updates the tray icon color based on the number of unread notifications.
+ *
+ * Passing a negative number will set the error state color.
+ *
+ * @param notificationsLength The number of unread notifications
+ */
+export function updateTrayColor(notificationsLength: number): void {
+  window.gitify.tray.updateColor(notificationsLength);
 }
-
-export function updateTrayTitle(title = ''): void {
+/**
+ * Updates the tray icon title.
+ *
+ * @param title The title to set on the tray icon
+ */
+export function updateTrayTitle(title: string): void {
   window.gitify.tray.updateTitle(title);
 }

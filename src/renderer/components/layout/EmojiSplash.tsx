@@ -31,9 +31,9 @@ export const EmojiSplash: FC<IEmojiSplash> = ({
         </Stack>
 
         {subHeadings.map((description, i) => {
+          const key = `error_description_${i}`;
           return (
-            // biome-ignore lint/suspicious/noArrayIndexKey: using index for key to keep the error constants clean
-            <div className="text-center" key={`error_description_${i}`}>
+            <div className="text-center" key={key}>
               {description}
             </div>
           );

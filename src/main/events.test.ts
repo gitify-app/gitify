@@ -45,8 +45,12 @@ describe('main/events', () => {
   it('sendRendererEvent forwards event to webContents with data', () => {
     const send = jest.fn();
     const mb: MockMenubar = { window: { webContents: { send } } };
-    sendRendererEvent(mb as unknown as Menubar, EVENTS.UPDATE_TITLE, 'title');
-    expect(send).toHaveBeenCalledWith(EVENTS.UPDATE_TITLE, 'title');
+    sendRendererEvent(
+      mb as unknown as Menubar,
+      EVENTS.UPDATE_ICON_TITLE,
+      'title',
+    );
+    expect(send).toHaveBeenCalledWith(EVENTS.UPDATE_ICON_TITLE, 'title');
   });
 
   it('sendRendererEvent forwards event without data', () => {

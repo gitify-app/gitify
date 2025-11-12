@@ -1,4 +1,4 @@
-import type { ColorModeWithAuto } from '@primer/react/lib/ThemeProvider';
+import type { ColorModeWithAuto } from '@primer/react/dist/ThemeProvider';
 
 import { Theme } from '../types';
 

@@ -17,7 +17,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
       data-wrap="nowrap"
     >
       <button
-        aria-describedby="«r2s»-loading-announcement"
+        aria-describedby="_r_2s_-loading-announcement"
         aria-labelledby="Go Back"
         class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
         data-component="IconButton"
@@ -75,12 +75,11 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
                 d="M10.561 8.073a6.005 6.005 0 0 1 3.432 5.142.75.75 0 1 1-1.498.07 4.5 4.5 0 0 0-8.99 0 .75.75 0 0 1-1.498-.07 6.004 6.004 0 0 1 3.431-5.142 3.999 3.999 0 1 1 5.123 0ZM10.5 5a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0Z"
               />
             </svg>
-            <h2
-              class="Box-sc-g0xbh4-0 gKIXLF prc-Heading-Heading-6CmGO"
-              sx="[object Object]"
+            <h4
+              class="prc-Heading-Heading-6CmGO"
             >
               Accounts
-            </h2>
+            </h4>
           </div>
         </div>
       </legend>
@@ -109,14 +108,14 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
           data-wrap="nowrap"
         >
           <button
-            aria-describedby="«r2t»-loading-announcement"
+            aria-describedby="_r_2t_-loading-announcement"
             class="prc-Button-ButtonBase-c50BI"
             data-loading="false"
             data-no-visuals="true"
             data-size="medium"
             data-testid="account-profile"
             data-variant="default"
-            title="Open account profile"
+            title="Open account profile ↗"
             type="button"
           >
             <span
@@ -220,7 +219,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
                 data-padding="none"
                 data-testid="account-host"
                 data-wrap="nowrap"
-                title="Open host"
+                title="Open host ↗"
               >
                 <svg
                   aria-hidden="true"
@@ -253,7 +252,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
                 data-padding="none"
                 data-testid="account-developer-settings"
                 data-wrap="nowrap"
-                title="Open developer settings"
+                title="Open developer settings ↗"
               >
                 <svg
                   aria-hidden="true"
@@ -289,8 +288,8 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
             data-wrap="nowrap"
           >
             <button
-              aria-describedby="«r2v»-loading-announcement"
-              aria-labelledby="«r2u»"
+              aria-describedby="_r_2v_-loading-announcement"
+              aria-labelledby="_r_2u_"
               class="prc-Button-ButtonBase-c50BI visible prc-Button-IconButton-szpyj"
               data-component="IconButton"
               data-loading="false"
@@ -322,14 +321,14 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-cYMVY"
               data-direction="s"
-              id="«r2u»"
+              id="_r_2u_"
               popover="auto"
             >
               This account is missing one or more required scopes: [read:user, notifications, repo] or [read:user, notifications, public_repo]
             </span>
             <button
-              aria-describedby="«r31»-loading-announcement"
-              aria-labelledby="«r30»"
+              aria-describedby="_r_31_-loading-announcement"
+              aria-labelledby="_r_30_"
               class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
               data-component="IconButton"
               data-loading="false"
@@ -360,18 +359,17 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-cYMVY"
               data-direction="s"
-              id="«r30»"
+              id="_r_30_"
               popover="auto"
             >
               Primary account
             </span>
             <div
-              class="Box-sc-g0xbh4-0"
               data-loading-wrapper="true"
             >
               <button
-                aria-describedby="«r33»-loading-announcement"
-                aria-labelledby="«r32»"
+                aria-describedby="_r_33_-loading-announcement"
+                aria-labelledby="_r_32_"
                 class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
                 data-component="IconButton"
                 data-loading="false"
@@ -403,14 +401,14 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-cYMVY"
               data-direction="s"
-              id="«r32»"
+              id="_r_32_"
               popover="auto"
             >
               Refresh octocat
             </span>
             <button
-              aria-describedby="«r35»-loading-announcement"
-              aria-labelledby="«r34»"
+              aria-describedby="_r_35_-loading-announcement"
+              aria-labelledby="_r_34_"
               class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
               data-component="IconButton"
               data-loading="false"
@@ -441,7 +439,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-cYMVY"
               data-direction="s"
-              id="«r34»"
+              id="_r_34_"
               popover="auto"
             >
               Logout octocat
@@ -470,14 +468,14 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
           data-wrap="nowrap"
         >
           <button
-            aria-describedby="«r36»-loading-announcement"
+            aria-describedby="_r_36_-loading-announcement"
             class="prc-Button-ButtonBase-c50BI"
             data-loading="false"
             data-no-visuals="true"
             data-size="medium"
             data-testid="account-profile"
             data-variant="default"
-            title="Open account profile"
+            title="Open account profile ↗"
             type="button"
           >
             <span
@@ -581,7 +579,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
                 data-padding="none"
                 data-testid="account-host"
                 data-wrap="nowrap"
-                title="Open host"
+                title="Open host ↗"
               >
                 <svg
                   aria-hidden="true"
@@ -614,7 +612,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
                 data-padding="none"
                 data-testid="account-developer-settings"
                 data-wrap="nowrap"
-                title="Open developer settings"
+                title="Open developer settings ↗"
               >
                 <svg
                   aria-hidden="true"
@@ -650,8 +648,8 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
             data-wrap="nowrap"
           >
             <button
-              aria-describedby="«r38»-loading-announcement"
-              aria-labelledby="«r37»"
+              aria-describedby="_r_38_-loading-announcement"
+              aria-labelledby="_r_37_"
               class="prc-Button-ButtonBase-c50BI invisible prc-Button-IconButton-szpyj"
               data-component="IconButton"
               data-loading="false"
@@ -683,14 +681,14 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-cYMVY"
               data-direction="s"
-              id="«r37»"
+              id="_r_37_"
               popover="auto"
             >
               This account is missing one or more required scopes: [read:user, notifications, repo] or [read:user, notifications, public_repo]
             </span>
             <button
-              aria-describedby="«r3a»-loading-announcement"
-              aria-labelledby="«r39»"
+              aria-describedby="_r_3a_-loading-announcement"
+              aria-labelledby="_r_39_"
               class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
               data-component="IconButton"
               data-loading="false"
@@ -721,18 +719,17 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-cYMVY"
               data-direction="s"
-              id="«r39»"
+              id="_r_39_"
               popover="auto"
             >
               Set as primary account
             </span>
             <div
-              class="Box-sc-g0xbh4-0"
               data-loading-wrapper="true"
             >
               <button
-                aria-describedby="«r3c»-loading-announcement"
-                aria-labelledby="«r3b»"
+                aria-describedby="_r_3c_-loading-announcement"
+                aria-labelledby="_r_3b_"
                 class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
                 data-component="IconButton"
                 data-loading="false"
@@ -764,14 +761,14 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-cYMVY"
               data-direction="s"
-              id="«r3b»"
+              id="_r_3b_"
               popover="auto"
             >
               Refresh octocat
             </span>
             <button
-              aria-describedby="«r3e»-loading-announcement"
-              aria-labelledby="«r3d»"
+              aria-describedby="_r_3e_-loading-announcement"
+              aria-labelledby="_r_3d_"
               class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
               data-component="IconButton"
               data-loading="false"
@@ -802,7 +799,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-cYMVY"
               data-direction="s"
-              id="«r3d»"
+              id="_r_3d_"
               popover="auto"
             >
               Logout octocat
@@ -831,14 +828,14 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
           data-wrap="nowrap"
         >
           <button
-            aria-describedby="«r3f»-loading-announcement"
+            aria-describedby="_r_3f_-loading-announcement"
             class="prc-Button-ButtonBase-c50BI"
             data-loading="false"
             data-no-visuals="true"
             data-size="medium"
             data-testid="account-profile"
             data-variant="default"
-            title="Open account profile"
+            title="Open account profile ↗"
             type="button"
           >
             <span
@@ -942,7 +939,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
                 data-padding="none"
                 data-testid="account-host"
                 data-wrap="nowrap"
-                title="Open host"
+                title="Open host ↗"
               >
                 <svg
                   aria-hidden="true"
@@ -975,7 +972,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
                 data-padding="none"
                 data-testid="account-developer-settings"
                 data-wrap="nowrap"
-                title="Open developer settings"
+                title="Open developer settings ↗"
               >
                 <svg
                   aria-hidden="true"
@@ -1011,8 +1008,8 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
             data-wrap="nowrap"
           >
             <button
-              aria-describedby="«r3h»-loading-announcement"
-              aria-labelledby="«r3g»"
+              aria-describedby="_r_3h_-loading-announcement"
+              aria-labelledby="_r_3g_"
               class="prc-Button-ButtonBase-c50BI invisible prc-Button-IconButton-szpyj"
               data-component="IconButton"
               data-loading="false"
@@ -1044,14 +1041,14 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-cYMVY"
               data-direction="s"
-              id="«r3g»"
+              id="_r_3g_"
               popover="auto"
             >
               This account is missing one or more required scopes: [read:user, notifications, repo] or [read:user, notifications, public_repo]
             </span>
             <button
-              aria-describedby="«r3j»-loading-announcement"
-              aria-labelledby="«r3i»"
+              aria-describedby="_r_3j_-loading-announcement"
+              aria-labelledby="_r_3i_"
               class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
               data-component="IconButton"
               data-loading="false"
@@ -1082,18 +1079,17 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-cYMVY"
               data-direction="s"
-              id="«r3i»"
+              id="_r_3i_"
               popover="auto"
             >
               Set as primary account
             </span>
             <div
-              class="Box-sc-g0xbh4-0"
               data-loading-wrapper="true"
             >
               <button
-                aria-describedby="«r3l»-loading-announcement"
-                aria-labelledby="«r3k»"
+                aria-describedby="_r_3l_-loading-announcement"
+                aria-labelledby="_r_3k_"
                 class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
                 data-component="IconButton"
                 data-loading="false"
@@ -1125,14 +1121,14 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-cYMVY"
               data-direction="s"
-              id="«r3k»"
+              id="_r_3k_"
               popover="auto"
             >
               Refresh octocat
             </span>
             <button
-              aria-describedby="«r3n»-loading-announcement"
-              aria-labelledby="«r3m»"
+              aria-describedby="_r_3n_-loading-announcement"
+              aria-labelledby="_r_3m_"
               class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
               data-component="IconButton"
               data-loading="false"
@@ -1163,7 +1159,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-cYMVY"
               data-direction="s"
-              id="«r3m»"
+              id="_r_3m_"
               popover="auto"
             >
               Logout octocat
@@ -1185,7 +1181,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
       data-wrap="nowrap"
     >
       <button
-        aria-describedby="«r3o»-loading-announcement"
+        aria-describedby="_r_3o_-loading-announcement"
         aria-expanded="false"
         aria-haspopup="true"
         class="prc-Button-ButtonBase-c50BI"
@@ -1193,7 +1189,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should render with PA
         data-size="medium"
         data-testid="account-add-new"
         data-variant="default"
-        id="«r3o»"
+        id="_r_3o_"
         tabindex="0"
         type="button"
       >
@@ -1253,7 +1249,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
       data-wrap="nowrap"
     >
       <button
-        aria-describedby="«r3r»-loading-announcement"
+        aria-describedby="_r_3r_-loading-announcement"
         aria-labelledby="Go Back"
         class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
         data-component="IconButton"
@@ -1311,12 +1307,11 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
                 d="M10.561 8.073a6.005 6.005 0 0 1 3.432 5.142.75.75 0 1 1-1.498.07 4.5 4.5 0 0 0-8.99 0 .75.75 0 0 1-1.498-.07 6.004 6.004 0 0 1 3.431-5.142 3.999 3.999 0 1 1 5.123 0ZM10.5 5a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0Z"
               />
             </svg>
-            <h2
-              class="Box-sc-g0xbh4-0 gKIXLF prc-Heading-Heading-6CmGO"
-              sx="[object Object]"
+            <h4
+              class="prc-Heading-Heading-6CmGO"
             >
               Accounts
-            </h2>
+            </h4>
           </div>
         </div>
       </legend>
@@ -1345,14 +1340,14 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
           data-wrap="nowrap"
         >
           <button
-            aria-describedby="«r3s»-loading-announcement"
+            aria-describedby="_r_3s_-loading-announcement"
             class="prc-Button-ButtonBase-c50BI"
             data-loading="false"
             data-no-visuals="true"
             data-size="medium"
             data-testid="account-profile"
             data-variant="default"
-            title="Open account profile"
+            title="Open account profile ↗"
             type="button"
           >
             <span
@@ -1456,7 +1451,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
                 data-padding="none"
                 data-testid="account-host"
                 data-wrap="nowrap"
-                title="Open host"
+                title="Open host ↗"
               >
                 <svg
                   aria-hidden="true"
@@ -1489,7 +1484,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
                 data-padding="none"
                 data-testid="account-developer-settings"
                 data-wrap="nowrap"
-                title="Open developer settings"
+                title="Open developer settings ↗"
               >
                 <svg
                   aria-hidden="true"
@@ -1525,8 +1520,8 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
             data-wrap="nowrap"
           >
             <button
-              aria-describedby="«r3u»-loading-announcement"
-              aria-labelledby="«r3t»"
+              aria-describedby="_r_3u_-loading-announcement"
+              aria-labelledby="_r_3t_"
               class="prc-Button-ButtonBase-c50BI invisible prc-Button-IconButton-szpyj"
               data-component="IconButton"
               data-loading="false"
@@ -1558,14 +1553,14 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-cYMVY"
               data-direction="s"
-              id="«r3t»"
+              id="_r_3t_"
               popover="auto"
             >
               This account is missing one or more required scopes: [read:user, notifications, repo] or [read:user, notifications, public_repo]
             </span>
             <button
-              aria-describedby="«r40»-loading-announcement"
-              aria-labelledby="«r3v»"
+              aria-describedby="_r_40_-loading-announcement"
+              aria-labelledby="_r_3v_"
               class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
               data-component="IconButton"
               data-loading="false"
@@ -1596,18 +1591,17 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-cYMVY"
               data-direction="s"
-              id="«r3v»"
+              id="_r_3v_"
               popover="auto"
             >
               Primary account
             </span>
             <div
-              class="Box-sc-g0xbh4-0"
               data-loading-wrapper="true"
             >
               <button
-                aria-describedby="«r42»-loading-announcement"
-                aria-labelledby="«r41»"
+                aria-describedby="_r_42_-loading-announcement"
+                aria-labelledby="_r_41_"
                 class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
                 data-component="IconButton"
                 data-loading="false"
@@ -1639,14 +1633,14 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-cYMVY"
               data-direction="s"
-              id="«r41»"
+              id="_r_41_"
               popover="auto"
             >
               Refresh octocat
             </span>
             <button
-              aria-describedby="«r44»-loading-announcement"
-              aria-labelledby="«r43»"
+              aria-describedby="_r_44_-loading-announcement"
+              aria-labelledby="_r_43_"
               class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
               data-component="IconButton"
               data-loading="false"
@@ -1677,7 +1671,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-cYMVY"
               data-direction="s"
-              id="«r43»"
+              id="_r_43_"
               popover="auto"
             >
               Logout octocat
@@ -1706,14 +1700,14 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
           data-wrap="nowrap"
         >
           <button
-            aria-describedby="«r45»-loading-announcement"
+            aria-describedby="_r_45_-loading-announcement"
             class="prc-Button-ButtonBase-c50BI"
             data-loading="false"
             data-no-visuals="true"
             data-size="medium"
             data-testid="account-profile"
             data-variant="default"
-            title="Open account profile"
+            title="Open account profile ↗"
             type="button"
           >
             <span
@@ -1817,7 +1811,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
                 data-padding="none"
                 data-testid="account-host"
                 data-wrap="nowrap"
-                title="Open host"
+                title="Open host ↗"
               >
                 <svg
                   aria-hidden="true"
@@ -1850,7 +1844,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
                 data-padding="none"
                 data-testid="account-developer-settings"
                 data-wrap="nowrap"
-                title="Open developer settings"
+                title="Open developer settings ↗"
               >
                 <svg
                   aria-hidden="true"
@@ -1886,8 +1880,8 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
             data-wrap="nowrap"
           >
             <button
-              aria-describedby="«r47»-loading-announcement"
-              aria-labelledby="«r46»"
+              aria-describedby="_r_47_-loading-announcement"
+              aria-labelledby="_r_46_"
               class="prc-Button-ButtonBase-c50BI invisible prc-Button-IconButton-szpyj"
               data-component="IconButton"
               data-loading="false"
@@ -1919,14 +1913,14 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-cYMVY"
               data-direction="s"
-              id="«r46»"
+              id="_r_46_"
               popover="auto"
             >
               This account is missing one or more required scopes: [read:user, notifications, repo] or [read:user, notifications, public_repo]
             </span>
             <button
-              aria-describedby="«r49»-loading-announcement"
-              aria-labelledby="«r48»"
+              aria-describedby="_r_49_-loading-announcement"
+              aria-labelledby="_r_48_"
               class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
               data-component="IconButton"
               data-loading="false"
@@ -1957,18 +1951,17 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-cYMVY"
               data-direction="s"
-              id="«r48»"
+              id="_r_48_"
               popover="auto"
             >
               Set as primary account
             </span>
             <div
-              class="Box-sc-g0xbh4-0"
               data-loading-wrapper="true"
             >
               <button
-                aria-describedby="«r4b»-loading-announcement"
-                aria-labelledby="«r4a»"
+                aria-describedby="_r_4b_-loading-announcement"
+                aria-labelledby="_r_4a_"
                 class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
                 data-component="IconButton"
                 data-loading="false"
@@ -2000,14 +1993,14 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-cYMVY"
               data-direction="s"
-              id="«r4a»"
+              id="_r_4a_"
               popover="auto"
             >
               Refresh octocat
             </span>
             <button
-              aria-describedby="«r4d»-loading-announcement"
-              aria-labelledby="«r4c»"
+              aria-describedby="_r_4d_-loading-announcement"
+              aria-labelledby="_r_4c_"
               class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
               data-component="IconButton"
               data-loading="false"
@@ -2038,7 +2031,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-cYMVY"
               data-direction="s"
-              id="«r4c»"
+              id="_r_4c_"
               popover="auto"
             >
               Logout octocat
@@ -2067,14 +2060,14 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
           data-wrap="nowrap"
         >
           <button
-            aria-describedby="«r4e»-loading-announcement"
+            aria-describedby="_r_4e_-loading-announcement"
             class="prc-Button-ButtonBase-c50BI"
             data-loading="false"
             data-no-visuals="true"
             data-size="medium"
             data-testid="account-profile"
             data-variant="default"
-            title="Open account profile"
+            title="Open account profile ↗"
             type="button"
           >
             <span
@@ -2178,7 +2171,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
                 data-padding="none"
                 data-testid="account-host"
                 data-wrap="nowrap"
-                title="Open host"
+                title="Open host ↗"
               >
                 <svg
                   aria-hidden="true"
@@ -2211,7 +2204,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
                 data-padding="none"
                 data-testid="account-developer-settings"
                 data-wrap="nowrap"
-                title="Open developer settings"
+                title="Open developer settings ↗"
               >
                 <svg
                   aria-hidden="true"
@@ -2247,8 +2240,8 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
             data-wrap="nowrap"
           >
             <button
-              aria-describedby="«r4g»-loading-announcement"
-              aria-labelledby="«r4f»"
+              aria-describedby="_r_4g_-loading-announcement"
+              aria-labelledby="_r_4f_"
               class="prc-Button-ButtonBase-c50BI invisible prc-Button-IconButton-szpyj"
               data-component="IconButton"
               data-loading="false"
@@ -2280,14 +2273,14 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-cYMVY"
               data-direction="s"
-              id="«r4f»"
+              id="_r_4f_"
               popover="auto"
             >
               This account is missing one or more required scopes: [read:user, notifications, repo] or [read:user, notifications, public_repo]
             </span>
             <button
-              aria-describedby="«r4i»-loading-announcement"
-              aria-labelledby="«r4h»"
+              aria-describedby="_r_4i_-loading-announcement"
+              aria-labelledby="_r_4h_"
               class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
               data-component="IconButton"
               data-loading="false"
@@ -2318,18 +2311,17 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-cYMVY"
               data-direction="s"
-              id="«r4h»"
+              id="_r_4h_"
               popover="auto"
             >
               Set as primary account
             </span>
             <div
-              class="Box-sc-g0xbh4-0"
               data-loading-wrapper="true"
             >
               <button
-                aria-describedby="«r4k»-loading-announcement"
-                aria-labelledby="«r4j»"
+                aria-describedby="_r_4k_-loading-announcement"
+                aria-labelledby="_r_4j_"
                 class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
                 data-component="IconButton"
                 data-loading="false"
@@ -2361,14 +2353,14 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-cYMVY"
               data-direction="s"
-              id="«r4j»"
+              id="_r_4j_"
               popover="auto"
             >
               Refresh octocat
             </span>
             <button
-              aria-describedby="«r4m»-loading-announcement"
-              aria-labelledby="«r4l»"
+              aria-describedby="_r_4m_-loading-announcement"
+              aria-labelledby="_r_4l_"
               class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
               data-component="IconButton"
               data-loading="false"
@@ -2399,7 +2391,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-cYMVY"
               data-direction="s"
-              id="«r4l»"
+              id="_r_4l_"
               popover="auto"
             >
               Logout octocat
@@ -2421,7 +2413,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
       data-wrap="nowrap"
     >
       <button
-        aria-describedby="«r4n»-loading-announcement"
+        aria-describedby="_r_4n_-loading-announcement"
         aria-expanded="false"
         aria-haspopup="true"
         class="prc-Button-ButtonBase-c50BI"
@@ -2429,7 +2421,7 @@ exports[`renderer/routes/Accounts.tsx Account interactions should set account as
         data-size="medium"
         data-testid="account-add-new"
         data-variant="default"
-        id="«r4n»"
+        id="_r_4n_"
         tabindex="0"
         type="button"
       >
@@ -2489,7 +2481,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
       data-wrap="nowrap"
     >
       <button
-        aria-describedby="«r0»-loading-announcement"
+        aria-describedby="_r_0_-loading-announcement"
         aria-labelledby="Go Back"
         class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
         data-component="IconButton"
@@ -2547,12 +2539,11 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                 d="M10.561 8.073a6.005 6.005 0 0 1 3.432 5.142.75.75 0 1 1-1.498.07 4.5 4.5 0 0 0-8.99 0 .75.75 0 0 1-1.498-.07 6.004 6.004 0 0 1 3.431-5.142 3.999 3.999 0 1 1 5.123 0ZM10.5 5a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0Z"
               />
             </svg>
-            <h2
-              class="Box-sc-g0xbh4-0 gKIXLF prc-Heading-Heading-6CmGO"
-              sx="[object Object]"
+            <h4
+              class="prc-Heading-Heading-6CmGO"
             >
               Accounts
-            </h2>
+            </h4>
           </div>
         </div>
       </legend>
@@ -2581,14 +2572,14 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
           data-wrap="nowrap"
         >
           <button
-            aria-describedby="«r1»-loading-announcement"
+            aria-describedby="_r_1_-loading-announcement"
             class="prc-Button-ButtonBase-c50BI"
             data-loading="false"
             data-no-visuals="true"
             data-size="medium"
             data-testid="account-profile"
             data-variant="default"
-            title="Open account profile"
+            title="Open account profile ↗"
             type="button"
           >
             <span
@@ -2692,7 +2683,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                 data-padding="none"
                 data-testid="account-host"
                 data-wrap="nowrap"
-                title="Open host"
+                title="Open host ↗"
               >
                 <svg
                   aria-hidden="true"
@@ -2725,7 +2716,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                 data-padding="none"
                 data-testid="account-developer-settings"
                 data-wrap="nowrap"
-                title="Open developer settings"
+                title="Open developer settings ↗"
               >
                 <svg
                   aria-hidden="true"
@@ -2761,8 +2752,8 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
             data-wrap="nowrap"
           >
             <button
-              aria-describedby="«r3»-loading-announcement"
-              aria-labelledby="«r2»"
+              aria-describedby="_r_3_-loading-announcement"
+              aria-labelledby="_r_2_"
               class="prc-Button-ButtonBase-c50BI invisible prc-Button-IconButton-szpyj"
               data-component="IconButton"
               data-loading="false"
@@ -2794,14 +2785,14 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-cYMVY"
               data-direction="s"
-              id="«r2»"
+              id="_r_2_"
               popover="auto"
             >
               This account is missing one or more required scopes: [read:user, notifications, repo] or [read:user, notifications, public_repo]
             </span>
             <button
-              aria-describedby="«r5»-loading-announcement"
-              aria-labelledby="«r4»"
+              aria-describedby="_r_5_-loading-announcement"
+              aria-labelledby="_r_4_"
               class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
               data-component="IconButton"
               data-loading="false"
@@ -2832,18 +2823,17 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-cYMVY"
               data-direction="s"
-              id="«r4»"
+              id="_r_4_"
               popover="auto"
             >
               Primary account
             </span>
             <div
-              class="Box-sc-g0xbh4-0"
               data-loading-wrapper="true"
             >
               <button
-                aria-describedby="«r7»-loading-announcement"
-                aria-labelledby="«r6»"
+                aria-describedby="_r_7_-loading-announcement"
+                aria-labelledby="_r_6_"
                 class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
                 data-component="IconButton"
                 data-loading="false"
@@ -2875,14 +2865,14 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-cYMVY"
               data-direction="s"
-              id="«r6»"
+              id="_r_6_"
               popover="auto"
             >
               Refresh octocat
             </span>
             <button
-              aria-describedby="«r9»-loading-announcement"
-              aria-labelledby="«r8»"
+              aria-describedby="_r_9_-loading-announcement"
+              aria-labelledby="_r_8_"
               class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
               data-component="IconButton"
               data-loading="false"
@@ -2913,7 +2903,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-cYMVY"
               data-direction="s"
-              id="«r8»"
+              id="_r_8_"
               popover="auto"
             >
               Logout octocat
@@ -2942,14 +2932,14 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
           data-wrap="nowrap"
         >
           <button
-            aria-describedby="«ra»-loading-announcement"
+            aria-describedby="_r_a_-loading-announcement"
             class="prc-Button-ButtonBase-c50BI"
             data-loading="false"
             data-no-visuals="true"
             data-size="medium"
             data-testid="account-profile"
             data-variant="default"
-            title="Open account profile"
+            title="Open account profile ↗"
             type="button"
           >
             <span
@@ -3053,7 +3043,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                 data-padding="none"
                 data-testid="account-host"
                 data-wrap="nowrap"
-                title="Open host"
+                title="Open host ↗"
               >
                 <svg
                   aria-hidden="true"
@@ -3086,7 +3076,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                 data-padding="none"
                 data-testid="account-developer-settings"
                 data-wrap="nowrap"
-                title="Open developer settings"
+                title="Open developer settings ↗"
               >
                 <svg
                   aria-hidden="true"
@@ -3122,8 +3112,8 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
             data-wrap="nowrap"
           >
             <button
-              aria-describedby="«rc»-loading-announcement"
-              aria-labelledby="«rb»"
+              aria-describedby="_r_c_-loading-announcement"
+              aria-labelledby="_r_b_"
               class="prc-Button-ButtonBase-c50BI invisible prc-Button-IconButton-szpyj"
               data-component="IconButton"
               data-loading="false"
@@ -3155,14 +3145,14 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-cYMVY"
               data-direction="s"
-              id="«rb»"
+              id="_r_b_"
               popover="auto"
             >
               This account is missing one or more required scopes: [read:user, notifications, repo] or [read:user, notifications, public_repo]
             </span>
             <button
-              aria-describedby="«re»-loading-announcement"
-              aria-labelledby="«rd»"
+              aria-describedby="_r_e_-loading-announcement"
+              aria-labelledby="_r_d_"
               class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
               data-component="IconButton"
               data-loading="false"
@@ -3193,18 +3183,17 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-cYMVY"
               data-direction="s"
-              id="«rd»"
+              id="_r_d_"
               popover="auto"
             >
               Set as primary account
             </span>
             <div
-              class="Box-sc-g0xbh4-0"
               data-loading-wrapper="true"
             >
               <button
-                aria-describedby="«rg»-loading-announcement"
-                aria-labelledby="«rf»"
+                aria-describedby="_r_g_-loading-announcement"
+                aria-labelledby="_r_f_"
                 class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
                 data-component="IconButton"
                 data-loading="false"
@@ -3236,14 +3225,14 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-cYMVY"
               data-direction="s"
-              id="«rf»"
+              id="_r_f_"
               popover="auto"
             >
               Refresh octocat
             </span>
             <button
-              aria-describedby="«ri»-loading-announcement"
-              aria-labelledby="«rh»"
+              aria-describedby="_r_i_-loading-announcement"
+              aria-labelledby="_r_h_"
               class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
               data-component="IconButton"
               data-loading="false"
@@ -3274,7 +3263,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-cYMVY"
               data-direction="s"
-              id="«rh»"
+              id="_r_h_"
               popover="auto"
             >
               Logout octocat
@@ -3303,14 +3292,14 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
           data-wrap="nowrap"
         >
           <button
-            aria-describedby="«rj»-loading-announcement"
+            aria-describedby="_r_j_-loading-announcement"
             class="prc-Button-ButtonBase-c50BI"
             data-loading="false"
             data-no-visuals="true"
             data-size="medium"
             data-testid="account-profile"
             data-variant="default"
-            title="Open account profile"
+            title="Open account profile ↗"
             type="button"
           >
             <span
@@ -3414,7 +3403,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                 data-padding="none"
                 data-testid="account-host"
                 data-wrap="nowrap"
-                title="Open host"
+                title="Open host ↗"
               >
                 <svg
                   aria-hidden="true"
@@ -3447,7 +3436,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                 data-padding="none"
                 data-testid="account-developer-settings"
                 data-wrap="nowrap"
-                title="Open developer settings"
+                title="Open developer settings ↗"
               >
                 <svg
                   aria-hidden="true"
@@ -3483,8 +3472,8 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
             data-wrap="nowrap"
           >
             <button
-              aria-describedby="«rl»-loading-announcement"
-              aria-labelledby="«rk»"
+              aria-describedby="_r_l_-loading-announcement"
+              aria-labelledby="_r_k_"
               class="prc-Button-ButtonBase-c50BI invisible prc-Button-IconButton-szpyj"
               data-component="IconButton"
               data-loading="false"
@@ -3516,14 +3505,14 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-cYMVY"
               data-direction="s"
-              id="«rk»"
+              id="_r_k_"
               popover="auto"
             >
               This account is missing one or more required scopes: [read:user, notifications, repo] or [read:user, notifications, public_repo]
             </span>
             <button
-              aria-describedby="«rn»-loading-announcement"
-              aria-labelledby="«rm»"
+              aria-describedby="_r_n_-loading-announcement"
+              aria-labelledby="_r_m_"
               class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
               data-component="IconButton"
               data-loading="false"
@@ -3554,18 +3543,17 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-cYMVY"
               data-direction="s"
-              id="«rm»"
+              id="_r_m_"
               popover="auto"
             >
               Set as primary account
             </span>
             <div
-              class="Box-sc-g0xbh4-0"
               data-loading-wrapper="true"
             >
               <button
-                aria-describedby="«rp»-loading-announcement"
-                aria-labelledby="«ro»"
+                aria-describedby="_r_p_-loading-announcement"
+                aria-labelledby="_r_o_"
                 class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
                 data-component="IconButton"
                 data-loading="false"
@@ -3597,14 +3585,14 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-cYMVY"
               data-direction="s"
-              id="«ro»"
+              id="_r_o_"
               popover="auto"
             >
               Refresh octocat
             </span>
             <button
-              aria-describedby="«rr»-loading-announcement"
-              aria-labelledby="«rq»"
+              aria-describedby="_r_r_-loading-announcement"
+              aria-labelledby="_r_q_"
               class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
               data-component="IconButton"
               data-loading="false"
@@ -3635,7 +3623,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-cYMVY"
               data-direction="s"
-              id="«rq»"
+              id="_r_q_"
               popover="auto"
             >
               Logout octocat
@@ -3657,7 +3645,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
       data-wrap="nowrap"
     >
       <button
-        aria-describedby="«rs»-loading-announcement"
+        aria-describedby="_r_s_-loading-announcement"
         aria-expanded="false"
         aria-haspopup="true"
         class="prc-Button-ButtonBase-c50BI"
@@ -3665,7 +3653,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
         data-size="medium"
         data-testid="account-add-new"
         data-variant="default"
-        id="«rs»"
+        id="_r_s_"
         tabindex="0"
         type="button"
       >

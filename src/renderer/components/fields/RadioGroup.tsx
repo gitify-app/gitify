@@ -1,9 +1,10 @@
-import type { ChangeEvent, FC } from 'react';
+import type { ChangeEvent, FC, ReactNode } from 'react';
 
 import { Stack } from '@primer/react';
 
 import type { RadioGroupItem } from '../../types';
 import { FieldLabel } from './FieldLabel';
+import { Tooltip } from './Tooltip';
 
 export interface IRadioGroup {
   name: string;
@@ -11,6 +12,7 @@ export interface IRadioGroup {
   options: RadioGroupItem[];
   value: string;
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  tooltip?: ReactNode | string;
 }
 
 export const RadioGroup: FC<IRadioGroup> = (props: IRadioGroup) => {
@@ -35,7 +37,7 @@ export const RadioGroup: FC<IRadioGroup> = (props: IRadioGroup) => {
           >
             <input
               checked={item.value === props.value}
-              className="size-2 cursor-pointer"
+              className="size-4 cursor-pointer"
               data-testid={name}
               id={name}
               name={props.name}
@@ -47,6 +49,10 @@ export const RadioGroup: FC<IRadioGroup> = (props: IRadioGroup) => {
           </Stack>
         );
       })}
+
+      {props.tooltip && (
+        <Tooltip name={`tooltip-${props.name}`} tooltip={props.tooltip} />
+      )}
     </Stack>
   );
 };

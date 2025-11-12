@@ -13,7 +13,7 @@ interface ITitle {
 }
 
 export const Title: FC<ITitle> = ({ size = 2, ...props }) => {
-  const name = props.children.toLowerCase().replace(' ', '-');
+  const name = props.children.toLowerCase().replaceAll(' ', '-');
 
   return (
     <legend>
@@ -25,7 +25,7 @@ export const Title: FC<ITitle> = ({ size = 2, ...props }) => {
           id={`title-${name}`}
         >
           <props.icon size="small" />
-          <Heading sx={{ fontSize: size }}>{props.children}</Heading>
+          <Heading as="h4">{props.children}</Heading>
           {props.tooltip && (
             <Tooltip
               name={`tooltip-${name}`}

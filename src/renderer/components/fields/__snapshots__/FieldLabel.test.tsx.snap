@@ -6,7 +6,7 @@ exports[`renderer/components/fields/FieldLabel.tsx should render 1`] = `
   "baseElement": <body>
     <div>
       <label
-        class="mr-3 font-medium cursor-pointer"
+        class="mr-1 font-medium cursor-pointer"
         for="appearance"
       >
         Appearance
@@ -15,7 +15,7 @@ exports[`renderer/components/fields/FieldLabel.tsx should render 1`] = `
   </body>,
   "container": <div>
     <label
-      class="mr-3 font-medium cursor-pointer"
+      class="mr-1 font-medium cursor-pointer"
       for="appearance"
     >
       Appearance

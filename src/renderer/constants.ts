@@ -20,7 +20,10 @@ export const Constants = {
 
   ALL_READ_EMOJIS: ['🎉', '🎊', '🥳', '👏', '🙌', '😎', '🏖️', '🚀', '✨', '🏆'],
 
-  FETCH_NOTIFICATIONS_INTERVAL_MS: 60 * 1000, // 1 minute
+  DEFAULT_FETCH_NOTIFICATIONS_INTERVAL_MS: 60 * 1000, // 1 minute
+  MIN_FETCH_NOTIFICATIONS_INTERVAL_MS: 60 * 1000, // 1 minute
+  MAX_FETCH_NOTIFICATIONS_INTERVAL_MS: 60 * 60 * 1000, // 1 hour
+  FETCH_NOTIFICATIONS_INTERVAL_STEP_MS: 60 * 1000, // 1 minute
 
   REFRESH_ACCOUNTS_INTERVAL_MS: 60 * 60 * 1000, // 1 hour
 

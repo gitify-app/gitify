@@ -38,17 +38,18 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
                   d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
                 />
               </svg>
-              <h2
-                class="Box-sc-g0xbh4-0 mIkfY prc-Heading-Heading-6CmGO"
-                sx="[object Object]"
+              <h4
+                class="prc-Heading-Heading-6CmGO"
               >
                 User Type
-              </h2>
+              </h4>
               <button
+                aria-expanded="false"
+                aria-haspopup="true"
                 aria-label="tooltip-user-type"
-                class="relative"
                 data-testid="tooltip-tooltip-user-type"
                 id="tooltip-user-type"
+                tabindex="0"
                 type="button"
               >
                 <svg
@@ -90,34 +91,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
             data-wrap="nowrap"
           >
             <input
-              class="size-2 rounded-sm cursor-pointer"
-              data-testid="checkbox-User"
-              id="User"
-              type="checkbox"
-            />
-            <label
-              class="font-medium text-gitify-font cursor-pointer"
-              for="User"
-            >
-              User
-            </label>
-            <span
-              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
-            >
-              1
-            </span>
-          </div>
-          <div
-            class="text-sm prc-Stack-Stack-WJVsK"
-            data-align="center"
-            data-direction="horizontal"
-            data-gap="condensed"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
-          >
-            <input
-              class="size-2 rounded-sm cursor-pointer"
+              class="size-4 rounded-sm cursor-pointer"
               data-testid="checkbox-Bot"
               id="Bot"
               type="checkbox"
@@ -129,10 +103,12 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
               Bot
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-Bot"
-              class="relative"
               data-testid="tooltip-tooltip-Bot"
               id="tooltip-Bot"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -153,7 +129,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
               </svg>
             </button>
             <span
-              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
             </span>
@@ -168,7 +144,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
             data-wrap="nowrap"
           >
             <input
-              class="size-2 rounded-sm cursor-pointer"
+              class="size-4 rounded-sm cursor-pointer"
               data-testid="checkbox-Organization"
               id="Organization"
               type="checkbox"
@@ -180,9 +156,36 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
               Organization
             </label>
             <span
-              class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
             >
               0
+            </span>
+          </div>
+          <div
+            class="text-sm prc-Stack-Stack-WJVsK"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <input
+              class="size-4 rounded-sm cursor-pointer"
+              data-testid="checkbox-User"
+              id="User"
+              type="checkbox"
+            />
+            <label
+              class="font-medium text-gitify-font cursor-pointer"
+              for="User"
+            >
+              User
+            </label>
+            <span
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+            >
+              1
             </span>
           </div>
         </div>
@@ -223,17 +226,18 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
                 d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
               />
             </svg>
-            <h2
-              class="Box-sc-g0xbh4-0 mIkfY prc-Heading-Heading-6CmGO"
-              sx="[object Object]"
+            <h4
+              class="prc-Heading-Heading-6CmGO"
             >
               User Type
-            </h2>
+            </h4>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-user-type"
-              class="relative"
               data-testid="tooltip-tooltip-user-type"
               id="tooltip-user-type"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -275,34 +279,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
           data-wrap="nowrap"
         >
           <input
-            class="size-2 rounded-sm cursor-pointer"
-            data-testid="checkbox-User"
-            id="User"
-            type="checkbox"
-          />
-          <label
-            class="font-medium text-gitify-font cursor-pointer"
-            for="User"
-          >
-            User
-          </label>
-          <span
-            class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
-          >
-            1
-          </span>
-        </div>
-        <div
-          class="text-sm prc-Stack-Stack-WJVsK"
-          data-align="center"
-          data-direction="horizontal"
-          data-gap="condensed"
-          data-justify="start"
-          data-padding="none"
-          data-wrap="nowrap"
-        >
-          <input
-            class="size-2 rounded-sm cursor-pointer"
+            class="size-4 rounded-sm cursor-pointer"
             data-testid="checkbox-Bot"
             id="Bot"
             type="checkbox"
@@ -314,10 +291,12 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
             Bot
           </label>
           <button
+            aria-expanded="false"
+            aria-haspopup="true"
             aria-label="tooltip-Bot"
-            class="relative"
             data-testid="tooltip-tooltip-Bot"
             id="tooltip-Bot"
+            tabindex="0"
             type="button"
           >
             <svg
@@ -338,7 +317,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
             </svg>
           </button>
           <span
-            class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+            class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
           >
             0
           </span>
@@ -353,7 +332,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
           data-wrap="nowrap"
         >
           <input
-            class="size-2 rounded-sm cursor-pointer"
+            class="size-4 rounded-sm cursor-pointer"
             data-testid="checkbox-Organization"
             id="Organization"
             type="checkbox"
@@ -365,9 +344,36 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
             Organization
           </label>
           <span
-            class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+            class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
           >
             0
+          </span>
+        </div>
+        <div
+          class="text-sm prc-Stack-Stack-WJVsK"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
+        >
+          <input
+            class="size-4 rounded-sm cursor-pointer"
+            data-testid="checkbox-User"
+            id="User"
+            type="checkbox"
+          />
+          <label
+            class="font-medium text-gitify-font cursor-pointer"
+            for="User"
+          >
+            User
+          </label>
+          <span
+            class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+          >
+            1
           </span>
         </div>
       </div>

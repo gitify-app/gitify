@@ -16,7 +16,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - disabled 1`] = 
       >
         <input
           checked=""
-          class="size-2 rounded-sm cursor-pointer"
+          class="size-4 rounded-sm cursor-pointer"
           data-testid="checkbox-appearance"
           disabled=""
           id="appearance"
@@ -43,7 +43,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - disabled 1`] = 
     >
       <input
         checked=""
-        class="size-2 rounded-sm cursor-pointer"
+        class="size-4 rounded-sm cursor-pointer"
         data-testid="checkbox-appearance"
         disabled=""
         id="appearance"
@@ -188,7 +188,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - positive counte
       >
         <input
           checked=""
-          class="size-2 rounded-sm cursor-pointer"
+          class="size-4 rounded-sm cursor-pointer"
           data-testid="checkbox-appearance"
           id="appearance"
           type="checkbox"
@@ -200,7 +200,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - positive counte
           Appearance
         </label>
         <span
-          class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-primary prc-Text-Text-0ima0"
+          class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-primary prc-Text-Text-0ima0"
         >
           5
         </span>
@@ -219,7 +219,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - positive counte
     >
       <input
         checked=""
-        class="size-2 rounded-sm cursor-pointer"
+        class="size-4 rounded-sm cursor-pointer"
         data-testid="checkbox-appearance"
         id="appearance"
         type="checkbox"
@@ -231,7 +231,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - positive counte
         Appearance
       </label>
       <span
-        class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-primary prc-Text-Text-0ima0"
+        class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-primary prc-Text-Text-0ima0"
       >
         5
       </span>
@@ -306,7 +306,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - positive counte
         data-wrap="nowrap"
       >
         <input
-          class="size-2 rounded-sm cursor-pointer"
+          class="size-4 rounded-sm cursor-pointer"
           data-testid="checkbox-appearance"
           id="appearance"
           type="checkbox"
@@ -318,7 +318,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - positive counte
           Appearance
         </label>
         <span
-          class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+          class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
         >
           5
         </span>
@@ -336,7 +336,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - positive counte
       data-wrap="nowrap"
     >
       <input
-        class="size-2 rounded-sm cursor-pointer"
+        class="size-4 rounded-sm cursor-pointer"
         data-testid="checkbox-appearance"
         id="appearance"
         type="checkbox"
@@ -348,7 +348,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - positive counte
         Appearance
       </label>
       <span
-        class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+        class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
       >
         5
       </span>
@@ -424,7 +424,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - tooltip 1`] = `
       >
         <input
           checked=""
-          class="size-2 rounded-sm cursor-pointer"
+          class="size-4 rounded-sm cursor-pointer"
           data-testid="checkbox-appearance"
           id="appearance"
           type="checkbox"
@@ -436,10 +436,12 @@ exports[`renderer/components/fields/Checkbox.tsx should render - tooltip 1`] = `
           Appearance
         </label>
         <button
+          aria-expanded="false"
+          aria-haspopup="true"
           aria-label="tooltip-appearance"
-          class="relative"
           data-testid="tooltip-tooltip-appearance"
           id="tooltip-appearance"
+          tabindex="0"
           type="button"
         >
           <svg
@@ -474,7 +476,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - tooltip 1`] = `
     >
       <input
         checked=""
-        class="size-2 rounded-sm cursor-pointer"
+        class="size-4 rounded-sm cursor-pointer"
         data-testid="checkbox-appearance"
         id="appearance"
         type="checkbox"
@@ -486,10 +488,12 @@ exports[`renderer/components/fields/Checkbox.tsx should render - tooltip 1`] = `
         Appearance
       </label>
       <button
+        aria-expanded="false"
+        aria-haspopup="true"
         aria-label="tooltip-appearance"
-        class="relative"
         data-testid="tooltip-tooltip-appearance"
         id="tooltip-appearance"
+        tabindex="0"
         type="button"
       >
         <svg
@@ -581,7 +585,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - visible 1`] = `
       >
         <input
           checked=""
-          class="size-2 rounded-sm cursor-pointer"
+          class="size-4 rounded-sm cursor-pointer"
           data-testid="checkbox-appearance"
           id="appearance"
           type="checkbox"
@@ -607,7 +611,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - visible 1`] = `
     >
       <input
         checked=""
-        class="size-2 rounded-sm cursor-pointer"
+        class="size-4 rounded-sm cursor-pointer"
         data-testid="checkbox-appearance"
         id="appearance"
         type="checkbox"
@@ -690,7 +694,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - zero counter 1`
       >
         <input
           checked=""
-          class="size-2 rounded-sm cursor-pointer"
+          class="size-4 rounded-sm cursor-pointer"
           data-testid="checkbox-appearance"
           id="appearance"
           type="checkbox"
@@ -702,7 +706,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - zero counter 1`
           Appearance
         </label>
         <span
-          class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-primary prc-Text-Text-0ima0"
+          class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-primary prc-Text-Text-0ima0"
         >
           0
         </span>
@@ -721,7 +725,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - zero counter 1`
     >
       <input
         checked=""
-        class="size-2 rounded-sm cursor-pointer"
+        class="size-4 rounded-sm cursor-pointer"
         data-testid="checkbox-appearance"
         id="appearance"
         type="checkbox"
@@ -733,7 +737,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - zero counter 1`
         Appearance
       </label>
       <span
-        class="px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-primary prc-Text-Text-0ima0"
+        class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-primary prc-Text-Text-0ima0"
       >
         0
       </span>

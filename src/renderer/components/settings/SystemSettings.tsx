@@ -8,6 +8,12 @@ import { APPLICATION } from '../../../shared/constants';
 import { AppContext } from '../../context/App';
 import { defaultSettings } from '../../context/defaults';
 import { OpenPreference } from '../../types';
+import {
+  canDecreaseVolume,
+  canIncreaseVolume,
+  decreaseVolume,
+  increaseVolume,
+} from '../../utils/notifications/sound';
 import { Checkbox } from '../fields/Checkbox';
 import { RadioGroup } from '../fields/RadioGroup';
 import { VolumeDownIcon } from '../icons/VolumeDownIcon';
@@ -32,6 +38,21 @@ export const SystemSettings: FC = () => {
             { label: 'Foreground', value: OpenPreference.FOREGROUND },
             { label: 'Background', value: OpenPreference.BACKGROUND },
           ]}
+          tooltip={
+            <Stack direction="vertical" gap="condensed">
+              <Text>
+                Controls the behavior of how external links should opened.
+              </Text>
+              <Text>
+                <Text as="strong">Foreground</Text> will open the link and bring
+                the opened window or browser to the front.
+              </Text>
+              <Text>
+                <Text as="strong">Background</Text> opens the link without
+                stealing focus from the current window.
+              </Text>
+            </Stack>
+          }
           value={settings.openLinks}
         />
 
@@ -54,21 +75,17 @@ export const SystemSettings: FC = () => {
         />
 
         <Checkbox
-          checked={settings.showNotificationsCountInTray}
-          label="Show notification count in tray"
-          name="showNotificationsCountInTray"
-          onChange={(evt) =>
-            updateSetting('showNotificationsCountInTray', evt.target.checked)
-          }
-          visible={window.gitify.platform.isMacOS()}
-        />
-
-        <Checkbox
           checked={settings.showNotifications}
           label="Show system notifications"
           name="showNotifications"
           onChange={(evt) =>
             updateSetting('showNotifications', evt.target.checked)
+          }
+          tooltip={
+            <Text>
+              Display native operating system notifications for new unread
+              notifications.
+            </Text>
           }
         />
 
@@ -93,13 +110,13 @@ export const SystemSettings: FC = () => {
             <IconButton
               aria-label="Volume down"
               data-testid="settings-volume-down"
+              disabled={!canDecreaseVolume(settings.notificationVolume)}
               icon={VolumeDownIcon}
               onClick={() => {
-                const newVolume = Math.max(
-                  settings.notificationVolume - 10,
-                  10,
+                updateSetting(
+                  'notificationVolume',
+                  decreaseVolume(settings.notificationVolume),
                 );
-                updateSetting('notificationVolume', newVolume);
               }}
               size="small"
               unsafeDisableTooltip={true}
@@ -112,13 +129,13 @@ export const SystemSettings: FC = () => {
             <IconButton
               aria-label="Volume up"
               data-testid="settings-volume-up"
+              disabled={!canIncreaseVolume(settings.notificationVolume)}
               icon={VolumeUpIcon}
               onClick={() => {
-                const newVolume = Math.min(
-                  settings.notificationVolume + 10,
-                  100,
+                updateSetting(
+                  'notificationVolume',
+                  increaseVolume(settings.notificationVolume),
                 );
-                updateSetting('notificationVolume', newVolume);
               }}
               size="small"
               unsafeDisableTooltip={true}
@@ -142,31 +159,13 @@ export const SystemSettings: FC = () => {
         </Stack>
 
         <Checkbox
-          checked={settings.useAlternateIdleIcon}
-          label="Use alternate idle icon"
-          name="useAlternateIdleIcon"
-          onChange={(evt) =>
-            updateSetting('useAlternateIdleIcon', evt.target.checked)
-          }
-          tooltip={
-            <Stack direction="vertical" gap="condensed">
-              <Text>
-                Use a white {APPLICATION.NAME} logo (instead of the default
-                black logo) when all notifications are read.
-              </Text>
-              <Text>
-                This is particularly useful for devices which have a dark-themed
-                menubar or taskbar.
-              </Text>
-            </Stack>
-          }
-        />
-
-        <Checkbox
           checked={settings.openAtStartup}
           label="Open at startup"
           name="openAtStartup"
           onChange={(evt) => updateSetting('openAtStartup', evt.target.checked)}
+          tooltip={
+            <Text>Launch {APPLICATION.NAME} automatically at startup.</Text>
+          }
           visible={!window.gitify.platform.isLinux()}
         />
       </Stack>

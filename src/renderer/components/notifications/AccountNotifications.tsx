@@ -13,6 +13,10 @@ import {
   openGitHubIssues,
   openGitHubPulls,
 } from '../../utils/links';
+import {
+  groupNotificationsByRepository,
+  isGroupByRepository,
+} from '../../utils/notifications/group';
 import { AllRead } from '../AllRead';
 import { AvatarWithFallback } from '../avatars/AvatarWithFallback';
 import { Oops } from '../Oops';
@@ -38,20 +42,16 @@ export const AccountNotifications: FC<IAccountNotifications> = (
   const [showAccountNotifications, setShowAccountNotifications] =
     useState(true);
 
-  const groupedNotifications = Object.values(
-    notifications.reduce(
-      (acc: { [key: string]: Notification[] }, notification) => {
-        const key = notification.repository.full_name;
-        if (!acc[key]) {
-          acc[key] = [];
-        }
-
-        acc[key].push(notification);
-        return acc;
-      },
-      {},
-    ),
+  const sortedNotifications = useMemo(
+    () => [...notifications].sort((a, b) => a.order - b.order),
+    [notifications],
   );
+
+  const groupedNotifications = useMemo(() => {
+    const map = groupNotificationsByRepository(sortedNotifications);
+
+    return Array.from(map.entries());
+  }, [sortedNotifications]);
 
   const hasNotifications = useMemo(
     () => notifications.length > 0,
@@ -67,8 +67,6 @@ export const AccountNotifications: FC<IAccountNotifications> = (
     showAccountNotifications,
     'account',
   );
-
-  const isGroupByRepository = settings.groupBy === 'REPOSITORY';
 
   return (
     <>
@@ -105,14 +103,14 @@ export const AccountNotifications: FC<IAccountNotifications> = (
             <HoverButton
               action={() => openGitHubIssues(account.hostname)}
               icon={IssueOpenedIcon}
-              label="My Issues"
+              label="My issues ↗"
               testid="account-issues"
             />
 
             <HoverButton
               action={() => openGitHubPulls(account.hostname)}
               icon={GitPullRequestIcon}
-              label="My Pull Requests"
+              label="My pull requests ↗"
               testid="account-pull-requests"
             />
 
@@ -129,20 +127,18 @@ export const AccountNotifications: FC<IAccountNotifications> = (
       {showAccountNotifications && (
         <>
           {props.error && <Oops error={props.error} fullHeight={false} />}
-          {!hasNotifications && !props.error && <AllRead fullHeight={false} />}
-          {isGroupByRepository
-            ? Object.values(groupedNotifications).map((repoNotifications) => {
-                const repoSlug = repoNotifications[0].repository.full_name;
 
-                return (
-                  <RepositoryNotifications
-                    key={repoSlug}
-                    repoName={repoSlug}
-                    repoNotifications={repoNotifications}
-                  />
-                );
-              })
-            : notifications.map((notification) => (
+          {!hasNotifications && !props.error && <AllRead fullHeight={false} />}
+
+          {isGroupByRepository(settings)
+            ? groupedNotifications.map(([repoSlug, repoNotifications]) => (
+                <RepositoryNotifications
+                  key={repoSlug}
+                  repoName={repoSlug}
+                  repoNotifications={repoNotifications}
+                />
+              ))
+            : sortedNotifications.map((notification) => (
                 <NotificationRow
                   key={notification.id}
                   notification={notification}

@@ -17,7 +17,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
       data-wrap="nowrap"
     >
       <button
-        aria-describedby="«r0»-loading-announcement"
+        aria-describedby="_r_0_-loading-announcement"
         aria-labelledby="Go Back"
         class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
         data-component="IconButton"
@@ -75,12 +75,11 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                 d="M8 0a8.2 8.2 0 0 1 .701.031C9.444.095 9.99.645 10.16 1.29l.288 1.107c.018.066.079.158.212.224.231.114.454.243.668.386.123.082.233.09.299.071l1.103-.303c.644-.176 1.392.021 1.82.63.27.385.506.792.704 1.218.315.675.111 1.422-.364 1.891l-.814.806c-.049.048-.098.147-.088.294.016.257.016.515 0 .772-.01.147.038.246.088.294l.814.806c.475.469.679 1.216.364 1.891a7.977 7.977 0 0 1-.704 1.217c-.428.61-1.176.807-1.82.63l-1.102-.302c-.067-.019-.177-.011-.3.071a5.909 5.909 0 0 1-.668.386c-.133.066-.194.158-.211.224l-.29 1.106c-.168.646-.715 1.196-1.458 1.26a8.006 8.006 0 0 1-1.402 0c-.743-.064-1.289-.614-1.458-1.26l-.289-1.106c-.018-.066-.079-.158-.212-.224a5.738 5.738 0 0 1-.668-.386c-.123-.082-.233-.09-.299-.071l-1.103.303c-.644.176-1.392-.021-1.82-.63a8.12 8.12 0 0 1-.704-1.218c-.315-.675-.111-1.422.363-1.891l.815-.806c.05-.048.098-.147.088-.294a6.214 6.214 0 0 1 0-.772c.01-.147-.038-.246-.088-.294l-.815-.806C.635 6.045.431 5.298.746 4.623a7.92 7.92 0 0 1 .704-1.217c.428-.61 1.176-.807 1.82-.63l1.102.302c.067.019.177.011.3-.071.214-.143.437-.272.668-.386.133-.066.194-.158.211-.224l.29-1.106C6.009.645 6.556.095 7.299.03 7.53.01 7.764 0 8 0Zm-.571 1.525c-.036.003-.108.036-.137.146l-.289 1.105c-.147.561-.549.967-.998 1.189-.173.086-.34.183-.5.29-.417.278-.97.423-1.529.27l-1.103-.303c-.109-.03-.175.016-.195.045-.22.312-.412.644-.573.99-.014.031-.021.11.059.19l.815.806c.411.406.562.957.53 1.456a4.709 4.709 0 0 0 0 .582c.032.499-.119 1.05-.53 1.456l-.815.806c-.081.08-.073.159-.059.19.162.346.353.677.573.989.02.03.085.076.195.046l1.102-.303c.56-.153 1.113-.008 1.53.27.161.107.328.204.501.29.447.222.85.629.997 1.189l.289 1.105c.029.109.101.143.137.146a6.6 6.6 0 0 0 1.142 0c.036-.003.108-.036.137-.146l.289-1.105c.147-.561.549-.967.998-1.189.173-.086.34-.183.5-.29.417-.278.97-.423 1.529-.27l1.103.303c.109.029.175-.016.195-.045.22-.313.411-.644.573-.99.014-.031.021-.11-.059-.19l-.815-.806c-.411-.406-.562-.957-.53-1.456a4.709 4.709 0 0 0 0-.582c-.032-.499.119-1.05.53-1.456l.815-.806c.081-.08.073-.159.059-.19a6.464 6.464 0 0 0-.573-.989c-.02-.03-.085-.076-.195-.046l-1.102.303c-.56.153-1.113.008-1.53-.27a4.44 4.44 0 0 0-.501-.29c-.447-.222-.85-.629-.997-1.189l-.289-1.105c-.029-.11-.101-.143-.137-.146a6.6 6.6 0 0 0-1.142 0ZM11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM9.5 8a1.5 1.5 0 1 0-3.001.001A1.5 1.5 0 0 0 9.5 8Z"
               />
             </svg>
-            <h2
-              class="Box-sc-g0xbh4-0 gKIXLF prc-Heading-Heading-6CmGO"
-              sx="[object Object]"
+            <h4
+              class="prc-Heading-Heading-6CmGO"
             >
               Settings
-            </h2>
+            </h4>
           </div>
         </div>
       </legend>
@@ -129,12 +128,11 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                   d="M11.134 1.535c.7-.509 1.416-.942 2.076-1.155.649-.21 1.463-.267 2.069.34.603.601.568 1.411.368 2.07-.202.668-.624 1.39-1.125 2.096-1.011 1.424-2.496 2.987-3.775 4.249-1.098 1.084-2.132 1.839-3.04 2.3a3.744 3.744 0 0 1-1.055 3.217c-.431.431-1.065.691-1.657.861-.614.177-1.294.287-1.914.357A21.151 21.151 0 0 1 .797 16H.743l.007-.75H.749L.742 16a.75.75 0 0 1-.743-.742l.743-.008-.742.007v-.054a21.25 21.25 0 0 1 .13-2.284c.067-.647.187-1.287.358-1.914.17-.591.43-1.226.86-1.657a3.746 3.746 0 0 1 3.227-1.054c.466-.893 1.225-1.907 2.314-2.982 1.271-1.255 2.833-2.75 4.245-3.777ZM1.62 13.089c-.051.464-.086.929-.104 1.395.466-.018.932-.053 1.396-.104a10.511 10.511 0 0 0 1.668-.309c.526-.151.856-.325 1.011-.48a2.25 2.25 0 1 0-3.182-3.182c-.155.155-.329.485-.48 1.01a10.515 10.515 0 0 0-.309 1.67Zm10.396-10.34c-1.224.89-2.605 2.189-3.822 3.384l1.718 1.718c1.21-1.205 2.51-2.597 3.387-3.833.47-.662.78-1.227.912-1.662.134-.444.032-.551.009-.575h-.001V1.78c-.014-.014-.113-.113-.548.027-.432.14-.995.462-1.655.942Zm-4.832 7.266-.001.001a9.859 9.859 0 0 0 1.63-1.142L7.155 7.216a9.7 9.7 0 0 0-1.161 1.607c.482.302.889.71 1.19 1.192Z"
                 />
               </svg>
-              <h2
-                class="Box-sc-g0xbh4-0 mIkfY prc-Heading-Heading-6CmGO"
-                sx="[object Object]"
+              <h4
+                class="prc-Heading-Heading-6CmGO"
               >
                 Appearance
-              </h2>
+              </h4>
             </div>
           </div>
         </legend>
@@ -157,7 +155,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             data-wrap="nowrap"
           >
             <label
-              class="mr-3 font-medium cursor-pointer"
+              class="mr-1 font-medium cursor-pointer"
               for="theme"
             >
               Theme:
@@ -170,7 +168,6 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                 class="prc-Select-Select-F7Flx"
                 data-hasplaceholder="false"
                 data-testid="settings-theme"
-                id="theme"
               >
                 <optgroup
                   label="System"
@@ -249,7 +246,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             data-wrap="nowrap"
           >
             <input
-              class="size-2 rounded-sm cursor-pointer"
+              class="size-4 rounded-sm cursor-pointer"
               data-testid="checkbox-increaseContrast"
               id="increaseContrast"
               type="checkbox"
@@ -261,10 +258,12 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               Increase contrast
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-increaseContrast"
-              class="relative"
               data-testid="tooltip-tooltip-increaseContrast"
               id="tooltip-increaseContrast"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -295,7 +294,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             data-wrap="nowrap"
           >
             <label
-              class="mr-3 font-medium cursor-pointer"
+              class="mr-1 font-medium cursor-pointer"
               for="zoom"
             >
               Zoom:
@@ -305,7 +304,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             >
               <div>
                 <button
-                  aria-describedby="«r1»-loading-announcement"
+                  aria-describedby="_r_2_-loading-announcement"
                   aria-label="Zoom out"
                   class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
                   data-component="IconButton"
@@ -339,7 +338,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               </div>
               <div>
                 <button
-                  aria-describedby="«r2»-loading-announcement"
+                  aria-describedby="_r_3_-loading-announcement"
                   aria-label="Zoom percentage"
                   class="prc-Button-ButtonBase-c50BI"
                   data-loading="false"
@@ -366,7 +365,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               </div>
               <div>
                 <button
-                  aria-describedby="«r3»-loading-announcement"
+                  aria-describedby="_r_4_-loading-announcement"
                   aria-label="Zoom in"
                   class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
                   data-component="IconButton"
@@ -400,7 +399,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               </div>
               <div>
                 <button
-                  aria-describedby="«r4»-loading-announcement"
+                  aria-describedby="_r_5_-loading-announcement"
                   aria-label="Reset zoom"
                   class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
                   data-component="IconButton"
@@ -441,7 +440,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             data-wrap="nowrap"
           >
             <input
-              class="size-2 rounded-sm cursor-pointer"
+              class="size-4 rounded-sm cursor-pointer"
               data-testid="checkbox-wrapNotificationTitle"
               id="wrapNotificationTitle"
               type="checkbox"
@@ -453,10 +452,12 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               Show full notification title
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-wrapNotificationTitle"
-              class="relative"
               data-testid="tooltip-tooltip-wrapNotificationTitle"
               id="tooltip-wrapNotificationTitle"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -510,12 +511,11 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                   d="M8 16a2 2 0 0 0 1.985-1.75c.017-.137-.097-.25-.235-.25h-3.5c-.138 0-.252.113-.235.25A2 2 0 0 0 8 16ZM3 5a5 5 0 0 1 10 0v2.947c0 .05.015.098.042.139l1.703 2.555A1.519 1.519 0 0 1 13.482 13H2.518a1.516 1.516 0 0 1-1.263-2.36l1.703-2.554A.255.255 0 0 0 3 7.947Zm5-3.5A3.5 3.5 0 0 0 4.5 5v2.947c0 .346-.102.683-.294.97l-1.703 2.556a.017.017 0 0 0-.003.01l.001.006c0 .002.002.004.004.006l.006.004.007.001h10.964l.007-.001.006-.004.004-.006.001-.007a.017.017 0 0 0-.003-.01l-1.703-2.554a1.745 1.745 0 0 1-.294-.97V5A3.5 3.5 0 0 0 8 1.5Z"
                 />
               </svg>
-              <h2
-                class="Box-sc-g0xbh4-0 mIkfY prc-Heading-Heading-6CmGO"
-                sx="[object Object]"
+              <h4
+                class="prc-Heading-Heading-6CmGO"
               >
                 Notifications
-              </h2>
+              </h4>
             </div>
           </div>
         </legend>
@@ -538,7 +538,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             data-wrap="nowrap"
           >
             <label
-              class="mr-3 font-medium cursor-pointer"
+              class="mr-1 font-medium cursor-pointer"
               for="groupBy"
             >
               Group by:
@@ -554,7 +554,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             >
               <input
                 checked=""
-                class="size-2 cursor-pointer"
+                class="size-4 cursor-pointer"
                 data-testid="radio-groupBy-repository"
                 id="radio-groupBy-repository"
                 name="groupBy"
@@ -562,7 +562,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                 value="REPOSITORY"
               />
               <label
-                class="mr-3 font-medium cursor-pointer"
+                class="mr-1 font-medium cursor-pointer"
                 for="radio-groupBy-repository"
               >
                 Repository
@@ -578,7 +578,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               data-wrap="nowrap"
             >
               <input
-                class="size-2 cursor-pointer"
+                class="size-4 cursor-pointer"
                 data-testid="radio-groupBy-date"
                 id="radio-groupBy-date"
                 name="groupBy"
@@ -586,11 +586,267 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                 value="DATE"
               />
               <label
-                class="mr-3 font-medium cursor-pointer"
+                class="mr-1 font-medium cursor-pointer"
                 for="radio-groupBy-date"
               >
                 Date
               </label>
+            </div>
+            <button
+              aria-expanded="false"
+              aria-haspopup="true"
+              aria-label="tooltip-groupBy"
+              data-testid="tooltip-tooltip-groupBy"
+              id="tooltip-groupBy"
+              tabindex="0"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-question text-gitify-tooltip-icon"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                />
+              </svg>
+            </button>
+          </div>
+          <div
+            class="text-sm prc-Stack-Stack-WJVsK"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <label
+              class="mr-1 font-medium cursor-pointer"
+              for="fetchType"
+            >
+              Fetch type:
+            </label>
+            <div
+              class="prc-Stack-Stack-WJVsK"
+              data-align="center"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+            >
+              <input
+                checked=""
+                class="size-4 cursor-pointer"
+                data-testid="radio-fetchType-interval"
+                id="radio-fetchType-interval"
+                name="fetchType"
+                type="radio"
+                value="INTERVAL"
+              />
+              <label
+                class="mr-1 font-medium cursor-pointer"
+                for="radio-fetchType-interval"
+              >
+                Interval
+              </label>
+            </div>
+            <div
+              class="prc-Stack-Stack-WJVsK"
+              data-align="center"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+            >
+              <input
+                class="size-4 cursor-pointer"
+                data-testid="radio-fetchType-inactivity"
+                id="radio-fetchType-inactivity"
+                name="fetchType"
+                type="radio"
+                value="INACTIVITY"
+              />
+              <label
+                class="mr-1 font-medium cursor-pointer"
+                for="radio-fetchType-inactivity"
+              >
+                Inactivity
+              </label>
+            </div>
+            <button
+              aria-expanded="false"
+              aria-haspopup="true"
+              aria-label="tooltip-fetchType"
+              data-testid="tooltip-tooltip-fetchType"
+              id="tooltip-fetchType"
+              tabindex="0"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-question text-gitify-tooltip-icon"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                />
+              </svg>
+            </button>
+          </div>
+          <div
+            class="text-sm prc-Stack-Stack-WJVsK"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <label
+              class="mr-1 font-medium cursor-pointer"
+              for="fetchInterval"
+            >
+              Fetch interval:
+            </label>
+            <div
+              class="ml-2 prc-ButtonGroup-ButtonGroup-vcMeG"
+            >
+              <div>
+                <button
+                  aria-describedby="_r_9_-loading-announcement"
+                  aria-label="Decrease fetch interval"
+                  class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
+                  data-component="IconButton"
+                  data-loading="false"
+                  data-no-visuals="true"
+                  data-size="small"
+                  data-testid="settings-fetch-interval-decrease"
+                  data-variant="default"
+                  type="button"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="octicon octicon-dash"
+                    display="inline-block"
+                    fill="currentColor"
+                    focusable="false"
+                    height="16"
+                    overflow="visible"
+                    style="vertical-align: text-bottom;"
+                    viewBox="0 0 16 16"
+                    width="16"
+                  >
+                    <path
+                      d="M2 7.75A.75.75 0 0 1 2.75 7h10a.75.75 0 0 1 0 1.5h-10A.75.75 0 0 1 2 7.75Z"
+                    />
+                  </svg>
+                </button>
+              </div>
+              <div>
+                <button
+                  aria-describedby="_r_a_-loading-announcement"
+                  aria-label="Fetch interval"
+                  class="prc-Button-ButtonBase-c50BI"
+                  data-loading="false"
+                  data-no-visuals="true"
+                  data-size="small"
+                  data-variant="default"
+                  disabled=""
+                  type="button"
+                >
+                  <span
+                    class="prc-Button-ButtonContent-HKbr-"
+                    data-align="center"
+                    data-component="buttonContent"
+                  >
+                    <span
+                      class="prc-Button-Label-pTQ3x"
+                      data-component="text"
+                    >
+                      1 minute
+                    </span>
+                  </span>
+                </button>
+              </div>
+              <div>
+                <button
+                  aria-describedby="_r_b_-loading-announcement"
+                  aria-label="Increase fetch interval"
+                  class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
+                  data-component="IconButton"
+                  data-loading="false"
+                  data-no-visuals="true"
+                  data-size="small"
+                  data-testid="settings-fetch-interval-increase"
+                  data-variant="default"
+                  type="button"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="octicon octicon-plus"
+                    display="inline-block"
+                    fill="currentColor"
+                    focusable="false"
+                    height="16"
+                    overflow="visible"
+                    style="vertical-align: text-bottom;"
+                    viewBox="0 0 16 16"
+                    width="16"
+                  >
+                    <path
+                      d="M7.75 2a.75.75 0 0 1 .75.75V7h4.25a.75.75 0 0 1 0 1.5H8.5v4.25a.75.75 0 0 1-1.5 0V8.5H2.75a.75.75 0 0 1 0-1.5H7V2.75A.75.75 0 0 1 7.75 2Z"
+                    />
+                  </svg>
+                </button>
+              </div>
+              <div>
+                <button
+                  aria-describedby="_r_c_-loading-announcement"
+                  aria-label="Reset fetch interval"
+                  class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
+                  data-component="IconButton"
+                  data-loading="false"
+                  data-no-visuals="true"
+                  data-size="small"
+                  data-testid="settings-fetch-interval-reset"
+                  data-variant="danger"
+                  type="button"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="octicon octicon-sync"
+                    display="inline-block"
+                    fill="currentColor"
+                    focusable="false"
+                    height="16"
+                    overflow="visible"
+                    style="vertical-align: text-bottom;"
+                    viewBox="0 0 16 16"
+                    width="16"
+                  >
+                    <path
+                      d="M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z"
+                    />
+                  </svg>
+                </button>
+              </div>
             </div>
           </div>
           <div
@@ -604,7 +860,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           >
             <input
               checked=""
-              class="size-2 rounded-sm cursor-pointer"
+              class="size-4 rounded-sm cursor-pointer"
               data-testid="checkbox-fetchAllNotifications"
               id="fetchAllNotifications"
               type="checkbox"
@@ -616,10 +872,12 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               Fetch all notifications
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-fetchAllNotifications"
-              class="relative"
               data-testid="tooltip-tooltip-fetchAllNotifications"
               id="tooltip-fetchAllNotifications"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -651,7 +909,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           >
             <input
               checked=""
-              class="size-2 rounded-sm cursor-pointer"
+              class="size-4 rounded-sm cursor-pointer"
               data-testid="checkbox-detailedNotifications"
               id="detailedNotifications"
               type="checkbox"
@@ -663,10 +921,12 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               Fetch detailed notifications
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-detailedNotifications"
-              class="relative"
               data-testid="tooltip-tooltip-detailedNotifications"
               id="tooltip-detailedNotifications"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -710,7 +970,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               >
                 <input
                   checked=""
-                  class="size-2 rounded-sm cursor-pointer"
+                  class="size-4 rounded-sm cursor-pointer"
                   data-testid="checkbox-showPills"
                   id="showPills"
                   type="checkbox"
@@ -722,10 +982,12 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                   Show notification metric pills
                 </label>
                 <button
+                  aria-expanded="false"
+                  aria-haspopup="true"
                   aria-label="tooltip-showPills"
-                  class="relative"
                   data-testid="tooltip-tooltip-showPills"
                   id="tooltip-showPills"
+                  tabindex="0"
                   type="button"
                 >
                   <svg
@@ -757,7 +1019,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               >
                 <input
                   checked=""
-                  class="size-2 rounded-sm cursor-pointer"
+                  class="size-4 rounded-sm cursor-pointer"
                   data-testid="checkbox-showNumber"
                   id="showNumber"
                   type="checkbox"
@@ -769,10 +1031,12 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                   Show GitHub number
                 </label>
                 <button
+                  aria-expanded="false"
+                  aria-haspopup="true"
                   aria-label="tooltip-showNumber"
-                  class="relative"
                   data-testid="tooltip-tooltip-showNumber"
                   id="tooltip-showNumber"
+                  tabindex="0"
                   type="button"
                 >
                   <svg
@@ -805,7 +1069,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             data-wrap="nowrap"
           >
             <input
-              class="size-2 rounded-sm cursor-pointer"
+              class="size-4 rounded-sm cursor-pointer"
               data-testid="checkbox-showOnlyParticipating"
               id="showOnlyParticipating"
               type="checkbox"
@@ -817,10 +1081,12 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               Fetch only participating
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-showOnlyParticipating"
-              class="relative"
               data-testid="tooltip-tooltip-showOnlyParticipating"
               id="tooltip-showOnlyParticipating"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -851,7 +1117,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             data-wrap="nowrap"
           >
             <input
-              class="size-2 rounded-sm cursor-pointer"
+              class="size-4 rounded-sm cursor-pointer"
               data-testid="checkbox-markAsDoneOnOpen"
               id="markAsDoneOnOpen"
               type="checkbox"
@@ -863,10 +1129,12 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               Mark as done on open
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-markAsDoneOnOpen"
-              class="relative"
               data-testid="tooltip-tooltip-markAsDoneOnOpen"
               id="tooltip-markAsDoneOnOpen"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -897,7 +1165,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             data-wrap="nowrap"
           >
             <input
-              class="size-2 rounded-sm cursor-pointer"
+              class="size-4 rounded-sm cursor-pointer"
               data-testid="checkbox-markAsDoneOnUnsubscribe"
               id="markAsDoneOnUnsubscribe"
               type="checkbox"
@@ -909,10 +1177,12 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               Mark as done on unsubscribe
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-markAsDoneOnUnsubscribe"
-              class="relative"
               data-testid="tooltip-tooltip-markAsDoneOnUnsubscribe"
               id="tooltip-markAsDoneOnUnsubscribe"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -943,7 +1213,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             data-wrap="nowrap"
           >
             <input
-              class="size-2 rounded-sm cursor-pointer"
+              class="size-4 rounded-sm cursor-pointer"
               data-testid="checkbox-delayNotificationState"
               id="delayNotificationState"
               type="checkbox"
@@ -955,10 +1225,211 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               Delay notification state
             </label>
             <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-delayNotificationState"
-              class="relative"
               data-testid="tooltip-tooltip-delayNotificationState"
               id="tooltip-delayNotificationState"
+              tabindex="0"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-question text-gitify-tooltip-icon"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>
+          <div
+            class="mb-2"
+          >
+            <div
+              class="prc-Stack-Stack-WJVsK"
+              data-align="center"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+              id="title-tray"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-devices"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 2.75C0 1.784.784 1 1.75 1h12.5c.966 0 1.75.784 1.75 1.75V5a.75.75 0 0 1-1.5 0V2.75a.25.25 0 0 0-.25-.25H1.75a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25H7A.75.75 0 0 1 7 12h-.268a5.712 5.712 0 0 1-.765 2.5H7A.75.75 0 0 1 7 16H4.5a.75.75 0 0 1-.565-1.243c.772-.885 1.193-1.716 1.292-2.757H1.75A1.75 1.75 0 0 1 0 10.25v-7.5Z"
+                />
+                <path
+                  d="M10.75 7h3.5c.967 0 1.75.784 1.75 1.75v5.5A1.75 1.75 0 0 1 14.25 16h-3.5A1.75 1.75 0 0 1 9 14.25v-5.5C9 7.784 9.783 7 10.75 7Zm-.25 1.75v5.5c0 .138.112.25.25.25h3.5a.25.25 0 0 0 .25-.25v-5.5a.25.25 0 0 0-.25-.25h-3.5a.25.25 0 0 0-.25.25Z"
+                />
+              </svg>
+              <h4
+                class="prc-Heading-Heading-6CmGO"
+              >
+                Tray
+              </h4>
+            </div>
+          </div>
+        </legend>
+        <div
+          class="prc-Stack-Stack-WJVsK"
+          data-align="stretch"
+          data-direction="vertical"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
+        >
+          <div
+            class="text-sm prc-Stack-Stack-WJVsK"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <input
+              checked=""
+              class="size-4 rounded-sm cursor-pointer"
+              data-testid="checkbox-showNotificationsCountInTray"
+              id="showNotificationsCountInTray"
+              type="checkbox"
+            />
+            <label
+              class="font-medium text-gitify-font cursor-pointer"
+              for="showNotificationsCountInTray"
+            >
+              Show notification count
+            </label>
+            <button
+              aria-expanded="false"
+              aria-haspopup="true"
+              aria-label="tooltip-showNotificationsCountInTray"
+              data-testid="tooltip-tooltip-showNotificationsCountInTray"
+              id="tooltip-showNotificationsCountInTray"
+              tabindex="0"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-question text-gitify-tooltip-icon"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                />
+              </svg>
+            </button>
+          </div>
+          <div
+            class="text-sm prc-Stack-Stack-WJVsK"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <input
+              checked=""
+              class="size-4 rounded-sm cursor-pointer"
+              data-testid="checkbox-useUnreadActiveIcon"
+              id="useUnreadActiveIcon"
+              type="checkbox"
+            />
+            <label
+              class="font-medium text-gitify-font cursor-pointer"
+              for="useUnreadActiveIcon"
+            >
+              Highlight unread notifications
+            </label>
+            <button
+              aria-expanded="false"
+              aria-haspopup="true"
+              aria-label="tooltip-useUnreadActiveIcon"
+              data-testid="tooltip-tooltip-useUnreadActiveIcon"
+              id="tooltip-useUnreadActiveIcon"
+              tabindex="0"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-question text-gitify-tooltip-icon"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                />
+              </svg>
+            </button>
+          </div>
+          <div
+            class="text-sm prc-Stack-Stack-WJVsK"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <input
+              class="size-4 rounded-sm cursor-pointer"
+              data-testid="checkbox-useAlternateIdleIcon"
+              id="useAlternateIdleIcon"
+              type="checkbox"
+            />
+            <label
+              class="font-medium text-gitify-font cursor-pointer"
+              for="useAlternateIdleIcon"
+            >
+              Use alternate idle icon
+            </label>
+            <button
+              aria-expanded="false"
+              aria-haspopup="true"
+              aria-label="tooltip-useAlternateIdleIcon"
+              data-testid="tooltip-tooltip-useAlternateIdleIcon"
+              id="tooltip-useAlternateIdleIcon"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -1012,12 +1483,11 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                   d="M14.25 1c.966 0 1.75.784 1.75 1.75v7.5A1.75 1.75 0 0 1 14.25 12h-3.727c.099 1.041.52 1.872 1.292 2.757A.752.752 0 0 1 11.25 16h-6.5a.75.75 0 0 1-.565-1.243c.772-.885 1.192-1.716 1.292-2.757H1.75A1.75 1.75 0 0 1 0 10.25v-7.5C0 1.784.784 1 1.75 1ZM1.75 2.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25ZM9.018 12H6.982a5.72 5.72 0 0 1-.765 2.5h3.566a5.72 5.72 0 0 1-.765-2.5Z"
                 />
               </svg>
-              <h2
-                class="Box-sc-g0xbh4-0 mIkfY prc-Heading-Heading-6CmGO"
-                sx="[object Object]"
+              <h4
+                class="prc-Heading-Heading-6CmGO"
               >
                 System
-              </h2>
+              </h4>
             </div>
           </div>
         </legend>
@@ -1040,7 +1510,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             data-wrap="nowrap"
           >
             <label
-              class="mr-3 font-medium cursor-pointer"
+              class="mr-1 font-medium cursor-pointer"
               for="openLinks"
             >
               Open Links:
@@ -1056,7 +1526,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             >
               <input
                 checked=""
-                class="size-2 cursor-pointer"
+                class="size-4 cursor-pointer"
                 data-testid="radio-openLinks-foreground"
                 id="radio-openLinks-foreground"
                 name="openLinks"
@@ -1064,7 +1534,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                 value="FOREGROUND"
               />
               <label
-                class="mr-3 font-medium cursor-pointer"
+                class="mr-1 font-medium cursor-pointer"
                 for="radio-openLinks-foreground"
               >
                 Foreground
@@ -1080,7 +1550,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               data-wrap="nowrap"
             >
               <input
-                class="size-2 cursor-pointer"
+                class="size-4 cursor-pointer"
                 data-testid="radio-openLinks-background"
                 id="radio-openLinks-background"
                 name="openLinks"
@@ -1088,40 +1558,19 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                 value="BACKGROUND"
               />
               <label
-                class="mr-3 font-medium cursor-pointer"
+                class="mr-1 font-medium cursor-pointer"
                 for="radio-openLinks-background"
               >
                 Background
               </label>
             </div>
-          </div>
-          <div
-            class="text-sm prc-Stack-Stack-WJVsK"
-            data-align="center"
-            data-direction="horizontal"
-            data-gap="condensed"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
-          >
-            <input
-              checked=""
-              class="size-2 rounded-sm cursor-pointer"
-              data-testid="checkbox-keyboardShortcut"
-              id="keyboardShortcut"
-              type="checkbox"
-            />
-            <label
-              class="font-medium text-gitify-font cursor-pointer"
-              for="keyboardShortcut"
-            >
-              Enable keyboard shortcut
-            </label>
             <button
-              aria-label="tooltip-keyboardShortcut"
-              class="relative"
-              data-testid="tooltip-tooltip-keyboardShortcut"
-              id="tooltip-keyboardShortcut"
+              aria-expanded="false"
+              aria-haspopup="true"
+              aria-label="tooltip-openLinks"
+              data-testid="tooltip-tooltip-openLinks"
+              id="tooltip-openLinks"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -1153,17 +1602,43 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           >
             <input
               checked=""
-              class="size-2 rounded-sm cursor-pointer"
-              data-testid="checkbox-showNotificationsCountInTray"
-              id="showNotificationsCountInTray"
+              class="size-4 rounded-sm cursor-pointer"
+              data-testid="checkbox-keyboardShortcut"
+              id="keyboardShortcut"
               type="checkbox"
             />
             <label
               class="font-medium text-gitify-font cursor-pointer"
-              for="showNotificationsCountInTray"
+              for="keyboardShortcut"
             >
-              Show notification count in tray
+              Enable keyboard shortcut
             </label>
+            <button
+              aria-expanded="false"
+              aria-haspopup="true"
+              aria-label="tooltip-keyboardShortcut"
+              data-testid="tooltip-tooltip-keyboardShortcut"
+              id="tooltip-keyboardShortcut"
+              tabindex="0"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-question text-gitify-tooltip-icon"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                />
+              </svg>
+            </button>
           </div>
           <div
             class="text-sm prc-Stack-Stack-WJVsK"
@@ -1176,7 +1651,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           >
             <input
               checked=""
-              class="size-2 rounded-sm cursor-pointer"
+              class="size-4 rounded-sm cursor-pointer"
               data-testid="checkbox-showNotifications"
               id="showNotifications"
               type="checkbox"
@@ -1187,6 +1662,32 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             >
               Show system notifications
             </label>
+            <button
+              aria-expanded="false"
+              aria-haspopup="true"
+              aria-label="tooltip-showNotifications"
+              data-testid="tooltip-tooltip-showNotifications"
+              id="tooltip-showNotifications"
+              tabindex="0"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-question text-gitify-tooltip-icon"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                />
+              </svg>
+            </button>
           </div>
           <div
             class="text-sm prc-Stack-Stack-WJVsK"
@@ -1208,7 +1709,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             >
               <input
                 checked=""
-                class="size-2 rounded-sm cursor-pointer"
+                class="size-4 rounded-sm cursor-pointer"
                 data-testid="checkbox-playSound"
                 id="playSound"
                 type="checkbox"
@@ -1226,7 +1727,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             >
               <div>
                 <button
-                  aria-describedby="«r5»-loading-announcement"
+                  aria-describedby="_r_r_-loading-announcement"
                   aria-label="Volume down"
                   class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
                   data-component="IconButton"
@@ -1238,11 +1739,11 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                   type="button"
                 >
                   <svg
+                    aria-hidden="true"
                     aria-label="Volume Down Icon"
                     class="size-2"
                     fill="currentColor"
                     height="24"
-                    role="img"
                     viewBox="0 0 24 24"
                     width="24"
                     xmlns="http://www.w3.org/2000/svg"
@@ -1262,7 +1763,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               </div>
               <div>
                 <button
-                  aria-describedby="«r6»-loading-announcement"
+                  aria-describedby="_r_s_-loading-announcement"
                   aria-label="Volume percentage"
                   class="prc-Button-ButtonBase-c50BI"
                   data-loading="false"
@@ -1289,7 +1790,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               </div>
               <div>
                 <button
-                  aria-describedby="«r7»-loading-announcement"
+                  aria-describedby="_r_t_-loading-announcement"
                   aria-label="Volume up"
                   class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
                   data-component="IconButton"
@@ -1301,11 +1802,11 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                   type="button"
                 >
                   <svg
+                    aria-hidden="true"
                     aria-label="Volume Up Icon"
                     class="size-2"
                     fill="currentColor"
                     height="24"
-                    role="img"
                     viewBox="0 0 24 24"
                     width="24"
                     xmlns="http://www.w3.org/2000/svg"
@@ -1321,7 +1822,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               </div>
               <div>
                 <button
-                  aria-describedby="«r8»-loading-announcement"
+                  aria-describedby="_r_u_-loading-announcement"
                   aria-label="Reset volume"
                   class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
                   data-component="IconButton"
@@ -1362,22 +1863,24 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             data-wrap="nowrap"
           >
             <input
-              class="size-2 rounded-sm cursor-pointer"
-              data-testid="checkbox-useAlternateIdleIcon"
-              id="useAlternateIdleIcon"
+              class="size-4 rounded-sm cursor-pointer"
+              data-testid="checkbox-openAtStartup"
+              id="openAtStartup"
               type="checkbox"
             />
             <label
               class="font-medium text-gitify-font cursor-pointer"
-              for="useAlternateIdleIcon"
+              for="openAtStartup"
             >
-              Use alternate idle icon
+              Open at startup
             </label>
             <button
-              aria-label="tooltip-useAlternateIdleIcon"
-              class="relative"
-              data-testid="tooltip-tooltip-useAlternateIdleIcon"
-              id="tooltip-useAlternateIdleIcon"
+              aria-expanded="false"
+              aria-haspopup="true"
+              aria-label="tooltip-openAtStartup"
+              data-testid="tooltip-tooltip-openAtStartup"
+              id="tooltip-openAtStartup"
+              tabindex="0"
               type="button"
             >
               <svg
@@ -1398,28 +1901,6 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               </svg>
             </button>
           </div>
-          <div
-            class="text-sm prc-Stack-Stack-WJVsK"
-            data-align="center"
-            data-direction="horizontal"
-            data-gap="condensed"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
-          >
-            <input
-              class="size-2 rounded-sm cursor-pointer"
-              data-testid="checkbox-openAtStartup"
-              id="openAtStartup"
-              type="checkbox"
-            />
-            <label
-              class="font-medium text-gitify-font cursor-pointer"
-              for="openAtStartup"
-            >
-              Open at startup
-            </label>
-          </div>
         </div>
       </fieldset>
       <div
@@ -1431,20 +1912,19 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
         data-wrap="nowrap"
       >
         <button
-          aria-describedby="«r9»-loading-announcement"
-          class="Box-sc-g0xbh4-0 jRKXQy prc-Button-ButtonBase-c50BI"
+          aria-describedby="_r_10_-loading-announcement"
+          class="prc-Button-ButtonBase-c50BI w-[200px]"
           data-loading="false"
           data-no-visuals="true"
           data-size="medium"
           data-testid="settings-reset"
           data-variant="danger"
-          sx="[object Object]"
           type="button"
         >
           <span
-            class="Box-sc-g0xbh4-0 iEfcEl prc-Button-ButtonContent-HKbr-"
+            class="prc-Button-ButtonContent-HKbr-"
+            data-align="center"
             data-component="buttonContent"
-            sx="[object Object]"
           >
             <span
               class="prc-Button-Label-pTQ3x"
@@ -1477,7 +1957,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
         data-wrap="nowrap"
       >
         <button
-          aria-describedby="«rb»-loading-announcement «ra»"
+          aria-describedby="_r_12_-loading-announcement _r_11_"
           class="prc-Button-ButtonBase-c50BI"
           data-loading="false"
           data-no-visuals="true"
@@ -1505,7 +1985,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           aria-hidden="true"
           class="prc-TooltipV2-Tooltip-cYMVY"
           data-direction="n"
-          id="«ra»"
+          id="_r_11_"
           popover="auto"
           role="tooltip"
         >
@@ -1522,7 +2002,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
         data-wrap="nowrap"
       >
         <button
-          aria-describedby="«rd»-loading-announcement «rc»"
+          aria-describedby="_r_14_-loading-announcement _r_13_"
           aria-label="Accounts"
           class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
           data-component="IconButton"
@@ -1554,14 +2034,14 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           aria-hidden="true"
           class="prc-TooltipV2-Tooltip-cYMVY"
           data-direction="n"
-          id="«rc»"
+          id="_r_13_"
           popover="auto"
           role="tooltip"
         >
           Accounts
         </span>
         <button
-          aria-describedby="«rf»-loading-announcement «re»"
+          aria-describedby="_r_16_-loading-announcement _r_15_"
           aria-label="Quit Gitify"
           class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
           data-component="IconButton"
@@ -1593,7 +2073,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           aria-hidden="true"
           class="prc-TooltipV2-Tooltip-cYMVY"
           data-direction="nw"
-          id="«re»"
+          id="_r_15_"
           popover="auto"
           role="tooltip"
         >

@@ -36,6 +36,8 @@ export type SearchToken = Branded<string, 'SearchToken'>;
 
 export type Status = 'loading' | 'success' | 'error';
 
+export type Percentage = Branded<number, 'Percentage'>;
+
 export interface Account {
   method: AuthMethod;
   platform: PlatformType;
@@ -49,10 +51,12 @@ export interface Account {
 export type SettingsValue =
   | boolean
   | number
+  | FetchType
+  | FilterValue[]
   | GroupBy
   | OpenPreference
-  | Theme
-  | FilterValue[];
+  | Percentage
+  | Theme;
 
 export type FilterValue =
   | FilterStateType
@@ -63,19 +67,22 @@ export type FilterValue =
 
 export type SettingsState = AppearanceSettingsState &
   NotificationSettingsState &
+  TraySettingsState &
   SystemSettingsState &
   FilterSettingsState;
 
 export interface AppearanceSettingsState {
   theme: Theme;
   increaseContrast: boolean;
-  zoomPercentage: number;
+  zoomPercentage: Percentage;
   showAccountHeader: boolean;
   wrapNotificationTitle: boolean;
 }
 
 export interface NotificationSettingsState {
   groupBy: GroupBy;
+  fetchType: FetchType;
+  fetchInterval: number;
   fetchAllNotifications: boolean;
   detailedNotifications: boolean;
   showPills: boolean;
@@ -86,14 +93,18 @@ export interface NotificationSettingsState {
   delayNotificationState: boolean;
 }
 
+export interface TraySettingsState {
+  showNotificationsCountInTray: boolean;
+  useUnreadActiveIcon: boolean;
+  useAlternateIdleIcon: boolean;
+}
+
 export interface SystemSettingsState {
   openLinks: OpenPreference;
   keyboardShortcut: boolean;
-  showNotificationsCountInTray: boolean;
   showNotifications: boolean;
-  useAlternateIdleIcon: boolean;
   playSound: boolean;
-  notificationVolume: number;
+  notificationVolume: Percentage;
   openAtStartup: boolean;
 }
 
@@ -130,6 +141,11 @@ export enum OpenPreference {
 export enum GroupBy {
   REPOSITORY = 'REPOSITORY',
   DATE = 'DATE',
+}
+
+export enum FetchType {
+  INTERVAL = 'INTERVAL',
+  INACTIVITY = 'INACTIVITY',
 }
 
 export type RadioGroupItem = {

@@ -72,7 +72,7 @@ describe('renderer/utils/features.ts', () => {
         version: null,
       };
 
-      expect(isMarkAsDoneFeatureSupported(account)).toBe(false);
+      expect(isAnsweredDiscussionFeatureSupported(account)).toBe(false);
     });
   });
 });

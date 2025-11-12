@@ -18,13 +18,11 @@ import { NotificationHeader } from './NotificationHeader';
 interface INotificationRow {
   notification: Notification;
   isAnimated?: boolean;
-  isRead?: boolean;
 }
 
 export const NotificationRow: FC<INotificationRow> = ({
   notification,
   isAnimated = false,
-  isRead = false,
 }: INotificationRow) => {
   const {
     settings,
@@ -33,12 +31,9 @@ export const NotificationRow: FC<INotificationRow> = ({
     unsubscribeNotification,
   } = useContext(AppContext);
   const [animateExit, setAnimateExit] = useState(false);
-  const [showAsRead, setShowAsRead] = useState(false);
 
   const handleNotification = useCallback(() => {
     setAnimateExit(!settings.delayNotificationState);
-    setShowAsRead(settings.delayNotificationState);
-
     openNotification(notification);
 
     if (settings.markAsDoneOnOpen) {
@@ -55,13 +50,11 @@ export const NotificationRow: FC<INotificationRow> = ({
 
   const actionMarkAsDone = () => {
     setAnimateExit(!settings.delayNotificationState);
-    setShowAsRead(settings.delayNotificationState);
     markNotificationsAsDone([notification]);
   };
 
   const actionMarkAsRead = () => {
     setAnimateExit(!settings.delayNotificationState);
-    setShowAsRead(settings.delayNotificationState);
     markNotificationsAsRead([notification]);
   };
 
@@ -78,15 +71,17 @@ export const NotificationRow: FC<INotificationRow> = ({
 
   const groupByDate = settings.groupBy === GroupBy.DATE;
 
+  const isNotificationRead = !notification.unread;
+
   return (
     <div
       className={cn(
         'group border-b',
-        'pl-1.5 pr-1 py-0.75',
+        'pl-2.75 pr-1 py-0.75',
         'text-gitify-font border-gitify-notification-border hover:bg-gitify-notification-hover',
         (isAnimated || animateExit) &&
           'translate-x-full opacity-0 transition duration-350 ease-in-out',
-        (isRead || showAsRead) && Opacity.READ,
+        isNotificationRead && Opacity.READ,
       )}
       id={notification.id}
     >

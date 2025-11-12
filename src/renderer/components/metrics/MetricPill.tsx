@@ -6,7 +6,6 @@ import { Label, Stack, Text } from '@primer/react';
 import { type IconColor, Size } from '../../types';
 
 export interface IMetricPill {
-  key?: string;
   title: string;
   metric?: number;
   icon: Icon;
@@ -14,6 +13,8 @@ export interface IMetricPill {
 }
 
 export const MetricPill: FC<IMetricPill> = (props: IMetricPill) => {
+  const Icon = props.icon;
+
   return (
     <Label
       className="hover:bg-gitify-notification-pill-hover"
@@ -22,7 +23,7 @@ export const MetricPill: FC<IMetricPill> = (props: IMetricPill) => {
       variant="secondary"
     >
       <Stack align="center" direction="horizontal" gap="none">
-        <props.icon className={props.color} size={Size.XSMALL} />
+        <Icon className={props.color} size={Size.XSMALL} />
         {props.metric ? (
           <Text className="text-xxs px-1">{props.metric}</Text>
         ) : null}

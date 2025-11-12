@@ -139,13 +139,13 @@ export async function getLatestReviewForReviewers(
       (review) => review.state === prReview.state,
     );
 
-    if (!reviewerFound) {
+    if (reviewerFound) {
+      reviewerFound.users.push(prReview.user.login);
+    } else {
       reviewers.push({
         state: prReview.state,
         users: [prReview.user.login],
       });
-    } else {
-      reviewerFound.users.push(prReview.user.login);
     }
   }
 

@@ -158,7 +158,6 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
 
     await userEvent.click(screen.getByTestId('login-submit'));
 
-    expect(screen.getByTestId('login-errors')).toBeInTheDocument();
     expect(screen.getByText('Hostname format is invalid')).toBeInTheDocument();
     expect(screen.getByText('Client ID format is invalid')).toBeInTheDocument();
     expect(

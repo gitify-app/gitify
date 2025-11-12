@@ -4,15 +4,14 @@ const P = APPLICATION.EVENT_PREFIX;
 
 export const EVENTS = {
   AUTH_CALLBACK: `${P}auth-callback`,
-  ICON_IDLE: `${P}icon-idle`,
-  ICON_ACTIVE: `${P}icon-active`,
-  ICON_ERROR: `${P}icon-error`,
   QUIT: `${P}quit`,
   WINDOW_SHOW: `${P}window-show`,
   WINDOW_HIDE: `${P}window-hide`,
   VERSION: `${P}version`,
-  UPDATE_TITLE: `${P}update-title`,
+  UPDATE_ICON_COLOR: `${P}update-icon-color`,
+  UPDATE_ICON_TITLE: `${P}update-icon-title`,
   USE_ALTERNATE_IDLE_ICON: `${P}use-alternate-idle-icon`,
+  USE_UNREAD_ACTIVE_ICON: `${P}use-unread-active-icon`,
   UPDATE_KEYBOARD_SHORTCUT: `${P}update-keyboard-shortcut`,
   UPDATE_AUTO_LAUNCH: `${P}update-auto-launch`,
   SAFE_STORAGE_ENCRYPT: `${P}safe-storage-encrypt`,
@@ -43,6 +42,7 @@ export interface IOpenExternal {
 
 export type EventData =
   | string
+  | number
   | boolean
   | IKeyboardShortcut
   | IAutoLaunch

@@ -84,6 +84,28 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
     expect(tree).toMatchSnapshot();
   });
 
+  it('should render itself & its children - notification is read', async () => {
+    jest
+      .spyOn(global.Date, 'now')
+      .mockImplementation(() => new Date('2024').valueOf());
+
+    const props = {
+      notification: {
+        ...mockSingleNotification,
+        unread: false,
+      },
+      account: mockGitHubCloudAccount,
+    };
+
+    const tree = render(
+      <AppContext.Provider value={{ settings: mockSettings }}>
+        <NotificationRow {...props} />
+      </AppContext.Provider>,
+    );
+
+    expect(tree).toMatchSnapshot();
+  });
+
   describe('notification interactions', () => {
     it('should open a notification in the browser - click', async () => {
       const markNotificationsAsRead = jest.fn();

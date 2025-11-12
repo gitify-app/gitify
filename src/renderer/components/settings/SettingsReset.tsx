@@ -1,51 +1,42 @@
-import { type FC, useCallback, useContext, useState } from 'react';
+import { type FC, useContext } from 'react';
 
-import { Button, Dialog, Stack, Text } from '@primer/react';
+import { Button, Stack, useConfirm } from '@primer/react';
 
 import { AppContext } from '../../context/App';
+import { rendererLogInfo } from '../../utils/logger';
 
 export const SettingsReset: FC = () => {
   const { resetSettings } = useContext(AppContext);
-  const [isOpen, setIsOpen] = useState(false);
-  const onDialogClose = useCallback(() => setIsOpen(false), []);
-  const onDialogProceed = useCallback(() => {
-    resetSettings();
-    setIsOpen(false);
-  }, [resetSettings]);
+
+  const confirm = useConfirm();
+
+  const handleReset = async () => {
+    const confirmed = await confirm({
+      title: 'Reset settings?',
+      content:
+        'Please confirm that you want to reset all settings to the Gitify defaults',
+
+      confirmButtonContent: 'Reset',
+      cancelButtonContent: 'Cancel',
+      confirmButtonType: 'danger',
+    });
+
+    if (confirmed) {
+      resetSettings();
+      rendererLogInfo('settingsReset', 'Settings have been reset to defaults');
+    }
+  };
 
   return (
     <Stack align="center">
       <Button
+        className="w-[200px]"
         data-testid="settings-reset"
-        onClick={() => setIsOpen(!isOpen)}
-        sx={{ width: '200px' }}
+        onClick={handleReset}
         variant="danger"
       >
         Reset Settings
       </Button>
-      {isOpen && (
-        <Dialog
-          data-testid="reset-dialog"
-          footerButtons={[
-            {
-              buttonType: 'default',
-              content: 'Cancel',
-              onClick: onDialogClose,
-            },
-            {
-              buttonType: 'danger',
-              content: 'Reset',
-              onClick: onDialogProceed,
-            },
-          ]}
-          onClose={onDialogClose}
-          title="Reset Settings"
-          width="large"
-        >
-          Please confirm that you want to reset all settings to the{' '}
-          <Text as="strong">Gitify defaults</Text>
-        </Dialog>
-      )}
     </Stack>
   );
 };

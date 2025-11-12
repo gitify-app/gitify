@@ -10,7 +10,8 @@ import {
 import { useTheme } from '@primer/react';
 
 import { Constants } from '../constants';
-import { useInterval } from '../hooks/useInterval';
+import { useInactivityTimer } from '../hooks/timers/useInactivityTimer';
+import { useIntervalTimer } from '../hooks/timers/useIntervalTimer';
 import { useNotifications } from '../hooks/useNotifications';
 import type {
   Account,
@@ -24,6 +25,7 @@ import type {
   Status,
   Token,
 } from '../types';
+import { FetchType } from '../types';
 import type { Notification } from '../typesGitHub';
 import { headNotifications } from '../utils/api/client';
 import type {
@@ -41,12 +43,15 @@ import {
 import {
   decryptValue,
   encryptValue,
-  setAlternateIdleIcon,
   setAutoLaunch,
   setKeyboardShortcut,
-  updateTrayTitle,
+  setUseAlternateIdleIcon,
+  setUseUnreadActiveIcon,
 } from '../utils/comms';
-import { getNotificationCount } from '../utils/notifications/notifications';
+import {
+  getNotificationCount,
+  getUnreadNotificationCount,
+} from '../utils/notifications/notifications';
 import { clearState, loadState, saveState } from '../utils/storage';
 import {
   DEFAULT_DAY_COLOR_SCHEME,
@@ -54,6 +59,7 @@ import {
   mapThemeModeToColorMode,
   mapThemeModeToColorScheme,
 } from '../utils/theme';
+import { setTrayIconColorAndTitle } from '../utils/tray';
 import { zoomPercentageToLevel } from '../utils/zoom';
 import { defaultAuth, defaultFilters, defaultSettings } from './defaults';
 
@@ -67,11 +73,17 @@ interface AppContextState {
   ) => Promise<void>;
   logoutFromAccount: (account: Account) => Promise<void>;
 
-  notifications: AccountNotifications[];
   status: Status;
   globalError: GitifyError;
-  removeAccountNotifications: (account: Account) => Promise<void>;
+
+  notifications: AccountNotifications[];
+  notificationCount: number;
+  unreadNotificationCount: number;
+  hasNotifications: boolean;
+  hasUnreadNotifications: boolean;
+
   fetchNotifications: () => Promise<void>;
+  removeAccountNotifications: (account: Account) => Promise<void>;
   markNotificationsAsRead: (notifications: Notification[]) => Promise<void>;
   markNotificationsAsDone: (notifications: Notification[]) => Promise<void>;
   unsubscribeNotification: (notification: Notification) => Promise<void>;
@@ -104,6 +116,19 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     unsubscribeNotification,
   } = useNotifications();
 
+  const notificationCount = getNotificationCount(notifications);
+  const unreadNotificationCount = getUnreadNotificationCount(notifications);
+
+  const hasNotifications = useMemo(
+    () => notificationCount > 0,
+    [notificationCount],
+  );
+  const hasUnreadNotifications = useMemo(
+    () => unreadNotificationCount > 0,
+    [unreadNotificationCount],
+  );
+
+  // biome-ignore lint/correctness/useExhaustiveDependencies: restoreSettings is stable and should run only once
   useEffect(() => {
     restoreSettings();
   }, []);
@@ -126,40 +151,58 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     setNightScheme,
   ]);
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: We only want fetchNotifications to be called for particular state changes
+  // biome-ignore lint/correctness/useExhaustiveDependencies: Fetch new notifications when account count or filters change
   useEffect(() => {
     fetchNotifications({ auth, settings });
   }, [
-    auth.accounts,
-    settings.filterUserTypes,
+    auth.accounts.length,
     settings.filterIncludeSearchTokens,
     settings.filterExcludeSearchTokens,
+    settings.filterUserTypes,
+    settings.filterSubjectTypes,
+    settings.filterStates,
     settings.filterReasons,
   ]);
 
-  useInterval(() => {
-    fetchNotifications({ auth, settings });
-  }, Constants.FETCH_NOTIFICATIONS_INTERVAL_MS);
+  useIntervalTimer(
+    () => {
+      fetchNotifications({ auth, settings });
+    },
+    settings.fetchType === FetchType.INTERVAL ? settings.fetchInterval : null,
+  );
 
-  useInterval(() => {
+  useInactivityTimer(
+    () => {
+      fetchNotifications({ auth, settings });
+    },
+    settings.fetchType === FetchType.INACTIVITY ? settings.fetchInterval : null,
+  );
+
+  useIntervalTimer(() => {
     for (const account of auth.accounts) {
       refreshAccount(account);
     }
   }, Constants.REFRESH_ACCOUNTS_INTERVAL_MS);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: We also want to update the tray on setting changes
   useEffect(() => {
-    const count = getNotificationCount(notifications);
-
-    if (settings.showNotificationsCountInTray && count > 0) {
-      updateTrayTitle(count.toString());
-    } else {
-      updateTrayTitle();
-    }
-  }, [settings.showNotificationsCountInTray, notifications]);
+    setUseUnreadActiveIcon(settings.useUnreadActiveIcon);
+    setUseAlternateIdleIcon(settings.useAlternateIdleIcon);
+    setTrayIconColorAndTitle(unreadNotificationCount, settings);
+  }, [
+    settings.showNotificationsCountInTray,
+    settings.useUnreadActiveIcon,
+    settings.useAlternateIdleIcon,
+    unreadNotificationCount,
+  ]);
 
   useEffect(() => {
     setKeyboardShortcut(settings.keyboardShortcut);
   }, [settings.keyboardShortcut]);
+
+  useEffect(() => {
+    setAutoLaunch(settings.openAtStartup);
+  }, [settings.openAtStartup]);
 
   useEffect(() => {
     window.gitify.onResetApp(() => {
@@ -182,13 +225,6 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
   const updateSetting = useCallback(
     (name: keyof SettingsState, value: SettingsValue) => {
-      if (name === 'openAtStartup') {
-        setAutoLaunch(value as boolean);
-      }
-      if (name === 'useAlternateIdleIcon') {
-        setAlternateIdleIcon(value as boolean);
-      }
-
       const newSettings = { ...settings, [name]: value };
       setSettings(newSettings);
       saveState({ auth, settings: newSettings });
@@ -215,7 +251,9 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     const { authCode } = await authGitHub();
     const { token } = await getToken(authCode);
     const hostname = Constants.DEFAULT_AUTH_OPTIONS.hostname;
+
     const updatedAuth = await addAccount(auth, 'GitHub App', token, hostname);
+
     setAuth(updatedAuth);
     saveState({ auth: updatedAuth, settings });
   }, [auth, settings]);
@@ -223,10 +261,10 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   const loginWithOAuthApp = useCallback(
     async (data: LoginOAuthAppOptions) => {
       const { authOptions, authCode } = await authGitHub(data);
-
       const { token, hostname } = await getToken(authCode, authOptions);
 
       const updatedAuth = await addAccount(auth, 'OAuth App', token, hostname);
+
       setAuth(updatedAuth);
       saveState({ auth: updatedAuth, settings });
     },
@@ -244,6 +282,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         token,
         hostname,
       );
+
       setAuth(updatedAuth);
       saveState({ auth: updatedAuth, settings });
     },
@@ -255,10 +294,11 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       removeAccountNotifications(account);
 
       const updatedAuth = removeAccount(auth, account);
+
       setAuth(updatedAuth);
       saveState({ auth: updatedAuth, settings });
     },
-    [auth, settings],
+    [auth, settings, removeAccountNotifications],
   );
 
   const restoreSettings = useCallback(async () => {
@@ -266,8 +306,9 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
     // Restore settings before accounts to ensure filters are available before fetching notifications
     if (existing.settings) {
+      setUseUnreadActiveIcon(existing.settings.useUnreadActiveIcon);
+      setUseAlternateIdleIcon(existing.settings.useAlternateIdleIcon);
       setKeyboardShortcut(existing.settings.keyboardShortcut);
-      setAlternateIdleIcon(existing.settings.useAlternateIdleIcon);
       setSettings({ ...defaultSettings, ...existing.settings });
       window.gitify.zoom.setLevel(
         zoomPercentageToLevel(existing.settings.zoomPercentage),
@@ -318,32 +359,68 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     [auth, settings, unsubscribeNotification],
   );
 
+  const contextValues: AppContextState = useMemo(
+    () => ({
+      auth,
+      isLoggedIn,
+      loginWithGitHubApp,
+      loginWithOAuthApp,
+      loginWithPersonalAccessToken,
+      logoutFromAccount,
+
+      status,
+      globalError,
+
+      notifications,
+      notificationCount,
+      unreadNotificationCount,
+      hasNotifications,
+      hasUnreadNotifications,
+
+      fetchNotifications: fetchNotificationsWithAccounts,
+      removeAccountNotifications,
+      markNotificationsAsRead: markNotificationsAsReadWithAccounts,
+      markNotificationsAsDone: markNotificationsAsDoneWithAccounts,
+      unsubscribeNotification: unsubscribeNotificationWithAccounts,
+
+      settings,
+      clearFilters,
+      resetSettings,
+      updateSetting,
+      updateFilter,
+    }),
+    [
+      auth,
+      isLoggedIn,
+      loginWithGitHubApp,
+      loginWithOAuthApp,
+      loginWithPersonalAccessToken,
+      logoutFromAccount,
+
+      status,
+      globalError,
+
+      notifications,
+      notificationCount,
+      unreadNotificationCount,
+      hasNotifications,
+      hasUnreadNotifications,
+
+      fetchNotificationsWithAccounts,
+      removeAccountNotifications,
+      markNotificationsAsReadWithAccounts,
+      markNotificationsAsDoneWithAccounts,
+      unsubscribeNotificationWithAccounts,
+
+      settings,
+      clearFilters,
+      resetSettings,
+      updateSetting,
+      updateFilter,
+    ],
+  );
+
   return (
-    <AppContext.Provider
-      value={{
-        auth,
-        isLoggedIn,
-        loginWithGitHubApp,
-        loginWithOAuthApp,
-        loginWithPersonalAccessToken,
-        logoutFromAccount,
-
-        notifications,
-        status,
-        globalError,
-        fetchNotifications: fetchNotificationsWithAccounts,
-        markNotificationsAsRead: markNotificationsAsReadWithAccounts,
-        markNotificationsAsDone: markNotificationsAsDoneWithAccounts,
-        unsubscribeNotification: unsubscribeNotificationWithAccounts,
-
-        settings,
-        clearFilters,
-        resetSettings,
-        updateSetting,
-        updateFilter,
-      }}
-    >
-      {children}
-    </AppContext.Provider>
+    <AppContext.Provider value={contextValues}>{children}</AppContext.Provider>
   );
 };

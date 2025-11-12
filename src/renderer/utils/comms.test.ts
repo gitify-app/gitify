@@ -7,11 +7,11 @@ import {
   hideWindow,
   openExternalLink,
   quitApp,
-  setAlternateIdleIcon,
   setAutoLaunch,
   setKeyboardShortcut,
+  setUseAlternateIdleIcon,
   showWindow,
-  updateTrayIcon,
+  updateTrayColor,
   updateTrayTitle,
 } from './comms';
 import * as storage from './storage';
@@ -123,7 +123,7 @@ describe('renderer/utils/comms.ts', () => {
     });
 
     it('sets alternate idle icon', () => {
-      setAlternateIdleIcon(false);
+      setUseAlternateIdleIcon(false);
 
       expect(window.gitify.tray.useAlternateIdleIcon).toHaveBeenCalledTimes(1);
       expect(window.gitify.tray.useAlternateIdleIcon).toHaveBeenCalledWith(
@@ -140,16 +140,11 @@ describe('renderer/utils/comms.ts', () => {
   });
 
   describe('tray helpers', () => {
-    it('updates tray icon with count', () => {
-      updateTrayIcon(5);
+    it('updates tray icon color with count', () => {
+      updateTrayColor(5);
 
-      expect(window.gitify.tray.updateIcon).toHaveBeenCalledTimes(1);
-      expect(window.gitify.tray.updateIcon).toHaveBeenCalledWith(5);
-    });
-
-    it('updates tray icon with default count', () => {
-      updateTrayIcon();
-      expect(window.gitify.tray.updateIcon).toHaveBeenCalledTimes(1);
+      expect(window.gitify.tray.updateColor).toHaveBeenCalledTimes(1);
+      expect(window.gitify.tray.updateColor).toHaveBeenCalledWith(5);
     });
 
     it('updates tray title with provided value', () => {
@@ -157,11 +152,6 @@ describe('renderer/utils/comms.ts', () => {
 
       expect(window.gitify.tray.updateTitle).toHaveBeenCalledTimes(1);
       expect(window.gitify.tray.updateTitle).toHaveBeenCalledWith('gitify');
-    });
-
-    it('updates tray title with default value', () => {
-      updateTrayTitle();
-      expect(window.gitify.tray.updateTitle).toHaveBeenCalledTimes(1);
     });
   });
 });

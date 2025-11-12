@@ -18,7 +18,13 @@ import {
 import { AppContext } from '../../context/App';
 import { Theme } from '../../types';
 import { hasMultipleAccounts } from '../../utils/auth/utils';
-import { zoomLevelToPercentage, zoomPercentageToLevel } from '../../utils/zoom';
+import {
+  canDecreaseZoom,
+  canIncreaseZoom,
+  decreaseZoom,
+  increaseZoom,
+  zoomLevelToPercentage,
+} from '../../utils/zoom';
 import { Checkbox } from '../fields/Checkbox';
 import { FieldLabel } from '../fields/FieldLabel';
 import { Title } from '../primitives/Title';
@@ -59,7 +65,6 @@ export const AppearanceSettings: FC = () => {
           <FieldLabel label="Theme:" name="theme" />
           <Select
             data-testid="settings-theme"
-            id="theme"
             onChange={(evt) =>
               updateSetting('theme', evt.target.value as Theme)
             }
@@ -97,7 +102,13 @@ export const AppearanceSettings: FC = () => {
           onChange={(evt) =>
             updateSetting('increaseContrast', evt.target.checked)
           }
-          tooltip={<Text>Enable high contrast.</Text>}
+          tooltip={
+            <Text>
+              Enable high contrast colors for improved legibility. This
+              increases color contrast across the UI and may affect some
+              color-specific themes.
+            </Text>
+          }
         />
 
         <Stack
@@ -112,13 +123,9 @@ export const AppearanceSettings: FC = () => {
             <IconButton
               aria-label="Zoom out"
               data-testid="settings-zoom-out"
+              disabled={!canDecreaseZoom(zoomPercentage)}
               icon={ZoomOutIcon}
-              onClick={() =>
-                zoomPercentage > 0 &&
-                window.gitify.zoom.setLevel(
-                  zoomPercentageToLevel(zoomPercentage - 10),
-                )
-              }
+              onClick={() => decreaseZoom(zoomPercentage)}
               size="small"
               unsafeDisableTooltip={true}
             />
@@ -130,13 +137,9 @@ export const AppearanceSettings: FC = () => {
             <IconButton
               aria-label="Zoom in"
               data-testid="settings-zoom-in"
+              disabled={!canIncreaseZoom(zoomPercentage)}
               icon={ZoomInIcon}
-              onClick={() =>
-                zoomPercentage < 120 &&
-                window.gitify.zoom.setLevel(
-                  zoomPercentageToLevel(zoomPercentage + 10),
-                )
-              }
+              onClick={() => increaseZoom(zoomPercentage)}
               size="small"
               unsafeDisableTooltip={true}
             />
@@ -160,6 +163,12 @@ export const AppearanceSettings: FC = () => {
           onChange={(evt) =>
             updateSetting('showAccountHeader', evt.target.checked)
           }
+          tooltip={
+            <Text>
+              When enabled, displays an account header (avatar, username and
+              quick links) above the notifications list.
+            </Text>
+          }
           visible={!hasMultipleAccounts(auth)}
         />
 
@@ -172,7 +181,9 @@ export const AppearanceSettings: FC = () => {
           }
           tooltip={
             <Text>
-              Wrap long notification titles instead of truncating them.
+              Wrap long notification titles onto multiple lines instead of
+              truncating with an ellipsis. This shows the full title but may
+              increase the height of the notification list.
             </Text>
           }
         />

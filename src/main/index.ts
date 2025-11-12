@@ -18,7 +18,6 @@ import {
   type IOpenExternal,
 } from '../shared/events';
 import { logInfo, logWarn } from '../shared/logger';
-import { isLinux, isWindows } from '../shared/platform';
 
 import { handleMainEvent, onMainEvent, sendRendererEvent } from './events';
 import { onFirstRunMaybe } from './first-run';
@@ -75,8 +74,11 @@ app.setAsDefaultProtocolClient(protocol);
 const appUpdater = new AppUpdater(mb, menuBuilder);
 
 let shouldUseAlternateIdleIcon = false;
+let shouldUseUnreadActiveIcon = true;
 
 app.whenReady().then(async () => {
+  preventSecondInstance();
+
   await onFirstRunMaybe();
 
   appUpdater.start();
@@ -115,31 +117,6 @@ app.whenReady().then(async () => {
     });
   });
 
-  /** Prevent second instances */
-  if (isWindows() || isLinux()) {
-    const gotTheLock = app.requestSingleInstanceLock();
-
-    if (!gotTheLock) {
-      logWarn('main:gotTheLock', 'Second instance detected, quitting');
-      app.quit(); // Quit the second instance
-      return;
-    }
-
-    app.on('second-instance', (_event, commandLine, _workingDirectory) => {
-      logInfo(
-        'main:second-instance',
-        'Second instance was launched.  extracting command to forward',
-      );
-
-      // Get the URL from the command line arguments
-      const url = commandLine.find((arg) => arg.startsWith(`${protocol}://`));
-
-      if (url) {
-        handleURL(url);
-      }
-    });
-  }
-
   /**
    * Gitify custom IPC events - no response expected
    */
@@ -160,41 +137,30 @@ app.whenReady().then(async () => {
     },
   );
 
-  onMainEvent(EVENTS.ICON_ERROR, () => {
-    if (!mb.tray.isDestroyed()) {
-      mb.tray.setImage(TrayIcons.error);
-    }
-  });
+  onMainEvent(
+    EVENTS.USE_UNREAD_ACTIVE_ICON,
+    (_, useUnreadActiveIcon: boolean) => {
+      shouldUseUnreadActiveIcon = useUnreadActiveIcon;
+    },
+  );
 
-  onMainEvent(EVENTS.ICON_ACTIVE, () => {
+  onMainEvent(EVENTS.UPDATE_ICON_COLOR, (_, notificationsCount: number) => {
     if (!mb.tray.isDestroyed()) {
-      mb.tray.setImage(
-        menuBuilder.isUpdateAvailable()
-          ? TrayIcons.activeWithUpdate
-          : TrayIcons.active,
-      );
-    }
-  });
-
-  onMainEvent(EVENTS.ICON_IDLE, () => {
-    if (!mb.tray.isDestroyed()) {
-      if (shouldUseAlternateIdleIcon) {
-        mb.tray.setImage(
-          menuBuilder.isUpdateAvailable()
-            ? TrayIcons.idleAlternateWithUpdate
-            : TrayIcons.idleAlternate,
-        );
-      } else {
-        mb.tray.setImage(
-          menuBuilder.isUpdateAvailable()
-            ? TrayIcons.idleWithUpdate
-            : TrayIcons.idle,
-        );
+      if (notificationsCount < 0) {
+        setErrorIcon();
+        return;
       }
+
+      if (notificationsCount > 0) {
+        setActiveIcon();
+        return;
+      }
+
+      setIdleIcon();
     }
   });
 
-  onMainEvent(EVENTS.UPDATE_TITLE, (_, title: string) => {
+  onMainEvent(EVENTS.UPDATE_ICON_TITLE, (_, title: string) => {
     if (!mb.tray.isDestroyed()) {
       mb.tray.setTitle(title);
     }
@@ -258,3 +224,62 @@ const handleURL = (url: string) => {
     sendRendererEvent(mb, EVENTS.AUTH_CALLBACK, url);
   }
 };
+
+function setIdleIcon() {
+  if (shouldUseAlternateIdleIcon) {
+    mb.tray.setImage(
+      menuBuilder.isUpdateAvailable()
+        ? TrayIcons.idleAlternateWithUpdate
+        : TrayIcons.idleAlternate,
+    );
+  } else {
+    mb.tray.setImage(
+      menuBuilder.isUpdateAvailable()
+        ? TrayIcons.idleWithUpdate
+        : TrayIcons.idle,
+    );
+  }
+}
+
+function setActiveIcon() {
+  if (shouldUseUnreadActiveIcon) {
+    mb.tray.setImage(
+      menuBuilder.isUpdateAvailable()
+        ? TrayIcons.activeWithUpdate
+        : TrayIcons.active,
+    );
+  } else {
+    setIdleIcon();
+  }
+}
+
+function setErrorIcon() {
+  mb.tray.setImage(TrayIcons.error);
+}
+
+/**
+ * Prevent second instances
+ */
+function preventSecondInstance() {
+  const gotTheLock = app.requestSingleInstanceLock();
+
+  if (!gotTheLock) {
+    logWarn('main:gotTheLock', 'Second instance detected, quitting');
+    app.quit(); // Quit the second instance
+    return;
+  }
+
+  app.on('second-instance', (_event, commandLine, _workingDirectory) => {
+    logInfo(
+      'main:second-instance',
+      'Second instance was launched.  extracting command to forward',
+    );
+
+    // Get the URL from the command line arguments
+    const url = commandLine.find((arg) => arg.startsWith(`${protocol}://`));
+
+    if (url) {
+      handleURL(url);
+    }
+  });
+}

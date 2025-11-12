@@ -1,27 +1,47 @@
-import { type FC, type MouseEvent, useContext } from 'react';
+import {
+  type FC,
+  type MouseEvent,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 
 import {
   BellIcon,
   CheckIcon,
   CommentIcon,
+  DashIcon,
   GitPullRequestIcon,
   IssueOpenedIcon,
   MilestoneIcon,
+  PlusIcon,
+  SyncIcon,
   TagIcon,
 } from '@primer/octicons-react';
-import { Stack, Text } from '@primer/react';
+import { Button, ButtonGroup, IconButton, Stack, Text } from '@primer/react';
+
+import { formatDuration, millisecondsToMinutes } from 'date-fns';
 
 import { APPLICATION } from '../../../shared/constants';
 
+import { Constants } from '../../constants';
 import { AppContext } from '../../context/App';
-import { GroupBy, Size } from '../../types';
+import { FetchType, GroupBy, Size } from '../../types';
 import { openGitHubParticipatingDocs } from '../../utils/links';
 import { Checkbox } from '../fields/Checkbox';
+import { FieldLabel } from '../fields/FieldLabel';
 import { RadioGroup } from '../fields/RadioGroup';
 import { Title } from '../primitives/Title';
 
 export const NotificationSettings: FC = () => {
   const { settings, updateSetting } = useContext(AppContext);
+  const [fetchInterval, setFetchInterval] = useState<number>(
+    settings.fetchInterval,
+  );
+
+  useEffect(() => {
+    setFetchInterval(settings.fetchInterval);
+  }, [settings.fetchInterval]);
 
   return (
     <fieldset>
@@ -38,8 +58,123 @@ export const NotificationSettings: FC = () => {
             { label: 'Repository', value: GroupBy.REPOSITORY },
             { label: 'Date', value: GroupBy.DATE },
           ]}
+          tooltip={
+            <Stack direction="vertical" gap="condensed">
+              <Text>Choose how notifications are displayed in the list.</Text>
+              <Text>
+                <Text as="strong">Repository</Text> groups notifications by
+                their repository full name.
+              </Text>
+              <Text>
+                <Text as="strong">Date</Text> shows notifications in
+                chronological order.
+              </Text>
+            </Stack>
+          }
           value={settings.groupBy}
         />
+
+        <RadioGroup
+          label="Fetch type:"
+          name="fetchType"
+          onChange={(evt) => {
+            updateSetting('fetchType', evt.target.value as FetchType);
+          }}
+          options={[
+            { label: 'Interval', value: FetchType.INTERVAL },
+            { label: 'Inactivity', value: FetchType.INACTIVITY },
+          ]}
+          tooltip={
+            <Stack direction="vertical" gap="condensed">
+              <Text>Controls how new notifications are fetched.</Text>
+              <Text>
+                <Text as="strong">Interval</Text> will check for new
+                notifications on a regular scheduled interval.
+              </Text>
+              <Text>
+                <Text as="strong">Inactivity</Text> will check for new
+                notifications only when there has been no user activity within{' '}
+                {APPLICATION.NAME} for a specified period of time.
+              </Text>
+            </Stack>
+          }
+          value={settings.fetchType}
+        />
+
+        <Stack
+          align="center"
+          className="text-sm"
+          direction="horizontal"
+          gap="condensed"
+        >
+          <FieldLabel label="Fetch interval:" name="fetchInterval" />
+
+          <ButtonGroup className="ml-2">
+            <IconButton
+              aria-label="Decrease fetch interval"
+              data-testid="settings-fetch-interval-decrease"
+              icon={DashIcon}
+              onClick={() => {
+                const newInterval = Math.max(
+                  fetchInterval -
+                    Constants.FETCH_NOTIFICATIONS_INTERVAL_STEP_MS,
+                  Constants.MIN_FETCH_NOTIFICATIONS_INTERVAL_MS,
+                );
+
+                if (newInterval !== fetchInterval) {
+                  setFetchInterval(newInterval);
+                  updateSetting('fetchInterval', newInterval);
+                }
+              }}
+              size="small"
+              unsafeDisableTooltip={true}
+            />
+
+            <Button aria-label="Fetch interval" disabled size="small">
+              {formatDuration({
+                minutes: millisecondsToMinutes(fetchInterval),
+              })}
+            </Button>
+
+            <IconButton
+              aria-label="Increase fetch interval"
+              data-testid="settings-fetch-interval-increase"
+              icon={PlusIcon}
+              onClick={() => {
+                const newInterval = Math.min(
+                  fetchInterval +
+                    Constants.FETCH_NOTIFICATIONS_INTERVAL_STEP_MS,
+                  Constants.MAX_FETCH_NOTIFICATIONS_INTERVAL_MS,
+                );
+
+                if (newInterval !== fetchInterval) {
+                  setFetchInterval(newInterval);
+                  updateSetting('fetchInterval', newInterval);
+                }
+              }}
+              size="small"
+              unsafeDisableTooltip={true}
+            />
+
+            <IconButton
+              aria-label="Reset fetch interval"
+              data-testid="settings-fetch-interval-reset"
+              icon={SyncIcon}
+              onClick={() => {
+                setFetchInterval(
+                  Constants.DEFAULT_FETCH_NOTIFICATIONS_INTERVAL_MS,
+                );
+                updateSetting(
+                  'fetchInterval',
+                  Constants.DEFAULT_FETCH_NOTIFICATIONS_INTERVAL_MS,
+                );
+              }}
+              size="small"
+              unsafeDisableTooltip={true}
+              variant="danger"
+            />
+          </ButtonGroup>
+        </Stack>
 
         <Checkbox
           checked={settings.fetchAllNotifications}
@@ -102,7 +237,7 @@ export const NotificationSettings: FC = () => {
               tooltip={
                 <Stack direction="vertical" gap="condensed">
                   <Text>Show notification metric pills for:</Text>
-                  <div className="pl-4">
+                  <div className="pl-2">
                     <Stack direction="vertical" gap="none">
                       <Stack direction="horizontal" gap="condensed">
                         <IssueOpenedIcon size={Size.SMALL} />
@@ -140,27 +275,23 @@ export const NotificationSettings: FC = () => {
               tooltip={
                 <Stack direction="vertical" gap="condensed">
                   <Text>Show GitHub number for:</Text>
-                  <div className="pl-4">
-                    <ul>
-                      <li>
-                        <Stack direction="horizontal" gap="condensed">
-                          <CommentIcon size={Size.SMALL} />
-                          Discussion
-                        </Stack>
-                      </li>
-                      <li>
-                        <Stack direction="horizontal" gap="condensed">
-                          <IssueOpenedIcon size={Size.SMALL} />
-                          Issue
-                        </Stack>
-                      </li>
-                      <li>
-                        <Stack direction="horizontal" gap="condensed">
-                          <GitPullRequestIcon size={Size.SMALL} />
-                          Pull Request
-                        </Stack>
-                      </li>
-                    </ul>
+                  <div className="pl-2">
+                    <Stack direction="vertical" gap="none">
+                      <Stack direction="horizontal" gap="condensed">
+                        <CommentIcon size={Size.SMALL} />
+                        Discussion
+                      </Stack>
+
+                      <Stack direction="horizontal" gap="condensed">
+                        <IssueOpenedIcon size={Size.SMALL} />
+                        Issue
+                      </Stack>
+
+                      <Stack direction="horizontal" gap="condensed">
+                        <GitPullRequestIcon size={Size.SMALL} />
+                        Pull Request
+                      </Stack>
+                    </Stack>
                   </div>
                 </Stack>
               }
@@ -180,7 +311,7 @@ export const NotificationSettings: FC = () => {
                 only participating notifications.
               </Text>
               <Text>
-                When <Text as="em">unchecked</Text>, {APPLICATION.NAME} will
+                When <Text as="u">unchecked</Text>, {APPLICATION.NAME} will
                 fetch participating and watching notifications.
               </Text>
               <Text>

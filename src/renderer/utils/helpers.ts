@@ -77,7 +77,7 @@ export function actionsURL(repositoryURL: string, filters: string[]): Link {
   }
 
   // Note: the GitHub Actions UI cannot handle encoded '+' characters.
-  return url.toString().replace(/%2B/g, '+') as Link;
+  return url.toString().replaceAll('%2B', '+') as Link;
 }
 
 async function getDiscussionUrl(notification: Notification): Promise<Link> {
@@ -106,9 +106,11 @@ export async function generateGitHubWebUrl(
 ): Promise<Link> {
   const url = new URL(notification.repository.html_url);
 
-  // FIXME see #1583
-  // Upstream GitHub API has started returning subject urls for Discussion notification types,
-  // however these URLs are broken.  Temporarily downgrading to use discussion lookup process.
+  /**
+   * Discussions - override generic response values for subject and comment urls,
+   * as we will fetch more specific html urls ourselves below
+   * See issue #1583:
+   */
   if (notification.subject.type === 'Discussion') {
     notification.subject.url = null;
     notification.subject.latest_comment_url = null;

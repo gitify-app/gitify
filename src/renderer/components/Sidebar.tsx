@@ -1,4 +1,4 @@
-import { type FC, useContext, useMemo } from 'react';
+import { type FC, useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import {
@@ -22,8 +22,7 @@ import {
   openGitHubNotifications,
   openGitHubPulls,
 } from '../utils/links';
-import { hasAnyFiltersSet } from '../utils/notifications/filters/filter';
-import { getNotificationCount } from '../utils/notifications/notifications';
+import { hasActiveFilters } from '../utils/notifications/filters/filter';
 import { LogoIcon } from './icons/LogoIcon';
 
 export const Sidebar: FC = () => {
@@ -31,12 +30,13 @@ export const Sidebar: FC = () => {
   const location = useLocation();
 
   const {
-    notifications,
     fetchNotifications,
     isLoggedIn,
     status,
     settings,
     auth,
+    unreadNotificationCount,
+    hasUnreadNotifications,
   } = useContext(AppContext);
 
   // We naively assume that the first account is the primary account for the purposes of our sidebar quick links
@@ -65,15 +65,9 @@ export const Sidebar: FC = () => {
     fetchNotifications();
   };
 
-  const notificationsCount = useMemo(() => {
-    return getNotificationCount(notifications);
-  }, [notifications]);
-
-  const sidebarButtonStyle = { color: 'white' };
-
   return (
     <Stack
-      className="fixed left-sidebar -ml-sidebar w-sidebar h-full bg-gitify-sidebar text-white"
+      className="fixed left-sidebar -ml-sidebar w-sidebar h-full bg-gitify-sidebar [&_svg]:text-white"
       direction="vertical"
       justify="space-between"
     >
@@ -98,14 +92,13 @@ export const Sidebar: FC = () => {
         <IconButton
           aria-label="Notifications"
           data-testid="sidebar-notifications"
-          description={`${notificationsCount} unread notifications`}
+          description={`${unreadNotificationCount} unread notifications ↗`}
           icon={BellIcon}
           onClick={() => openGitHubNotifications(primaryAccountHostname)}
           size="small"
-          sx={sidebarButtonStyle}
           tooltipDirection="e"
           unsafeDisableTooltip={false}
-          variant={notificationsCount > 0 ? 'primary' : 'invisible'}
+          variant={hasUnreadNotifications ? 'primary' : 'invisible'}
         />
 
         {isLoggedIn && (
@@ -116,32 +109,29 @@ export const Sidebar: FC = () => {
             icon={FilterIcon}
             onClick={() => toggleFilters()}
             size="small"
-            sx={sidebarButtonStyle}
             tooltipDirection="e"
             unsafeDisableTooltip={false}
-            variant={hasAnyFiltersSet(settings) ? 'primary' : 'invisible'}
+            variant={hasActiveFilters(settings) ? 'primary' : 'invisible'}
           />
         )}
 
         <IconButton
-          aria-label="My issues"
+          aria-label="My issues ↗"
           data-testid="sidebar-my-issues"
           icon={IssueOpenedIcon}
           onClick={() => openGitHubIssues(primaryAccountHostname)}
           size="small"
-          sx={sidebarButtonStyle}
           tooltipDirection="e"
           unsafeDisableTooltip={false}
           variant="invisible"
         />
 
         <IconButton
-          aria-label="My pull requests"
+          aria-label="My pull requests ↗"
           data-testid="sidebar-my-pull-requests"
           icon={GitPullRequestIcon}
           onClick={() => openGitHubPulls(primaryAccountHostname)}
           size="small"
-          sx={sidebarButtonStyle}
           tooltipDirection="e"
           unsafeDisableTooltip={false}
           variant="invisible"
@@ -165,7 +155,6 @@ export const Sidebar: FC = () => {
               loading={status === 'loading'}
               onClick={() => refreshNotifications()}
               size="small"
-              sx={sidebarButtonStyle}
               tooltipDirection="e"
               unsafeDisableTooltip={false}
               variant="invisible"
@@ -177,7 +166,6 @@ export const Sidebar: FC = () => {
               icon={GearIcon}
               onClick={() => toggleSettings()}
               size="small"
-              sx={sidebarButtonStyle}
               tooltipDirection="e"
               unsafeDisableTooltip={false}
               variant="invisible"
@@ -192,7 +180,6 @@ export const Sidebar: FC = () => {
             icon={XCircleIcon}
             onClick={() => quitApp()}
             size="small"
-            sx={sidebarButtonStyle}
             tooltipDirection="e"
             unsafeDisableTooltip={false}
             variant="invisible"
