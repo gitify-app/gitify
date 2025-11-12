@@ -53,7 +53,7 @@ importers:
         version: 11.3.0
       '@primer/react':
         specifier: 38.1.0
-        version: 38.1.0(@types/react-dom@19.2.3(@types/react@19.2.3))(@types/react-is@18.3.0)(@types/react@19.2.3)(react-dom@19.2.0(react@19.2.0))(react-is@18.3.1)(react@19.2.0)
+        version: 38.1.0(@types/react-dom@19.2.3(@types/react@19.2.4))(@types/react-is@18.3.0)(@types/react@19.2.4)(react-dom@19.2.0(react@19.2.0))(react-is@18.3.1)(react@19.2.0)
       '@tailwindcss/postcss':
         specifier: 4.1.17
         version: 4.1.17
@@ -62,7 +62,7 @@ importers:
         version: 6.9.1
       '@testing-library/react':
         specifier: 16.3.0
-        version: 16.3.0(@testing-library/dom@10.0.0)(@types/react-dom@19.2.3(@types/react@19.2.3))(@types/react@19.2.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        version: 16.3.0(@testing-library/dom@10.0.0)(@types/react-dom@19.2.3(@types/react@19.2.4))(@types/react@19.2.4)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@testing-library/user-event':
         specifier: 14.6.1
         version: 14.6.1(@testing-library/dom@10.0.0)
@@ -73,11 +73,11 @@ importers:
         specifier: 24.10.1
         version: 24.10.1
       '@types/react':
-        specifier: 19.2.3
-        version: 19.2.3
+        specifier: 19.2.4
+        version: 19.2.4
       '@types/react-dom':
         specifier: 19.2.3
-        version: 19.2.3(@types/react@19.2.3)
+        version: 19.2.3(@types/react@19.2.4)
       '@types/react-router-dom':
         specifier: 5.3.3
         version: 5.3.3
@@ -1469,8 +1469,8 @@ packages:
   '@types/react-router@5.1.20':
     resolution: {integrity: sha512-jGjmu/ZqS7FjSH6owMcD5qpq19+1RS9DeVRqfl1FeBMxTDQAGwlMWOcs52NDoXaNKyG3d1cYQFMs9rCrb88o9Q==}
 
-  '@types/react@19.2.3':
-    resolution: {integrity: sha512-k5dJVszUiNr1DSe8Cs+knKR6IrqhqdhpUwzqhkS8ecQTSf3THNtbfIp/umqHMpX2bv+9dkx3fwDv/86LcSfvSg==}
+  '@types/react@19.2.4':
+    resolution: {integrity: sha512-tBFxBp9Nfyy5rsmefN+WXc1JeW/j2BpBHFdLZbEVfs9wn3E3NRFxwV0pJg8M1qQAexFpvz73hJXFofV0ZAu92A==}
 
   '@types/responselike@1.0.3':
     resolution: {integrity: sha512-H/+L+UkTV33uf49PH5pCAUBVPNj2nDBXTN+qS1dOwyyg24l3CcicicCA7ca+HMvJBZcFgl5r8e+RR6elsb4Lyw==}
@@ -6226,7 +6226,7 @@ snapshots:
 
   '@primer/primitives@11.3.0': {}
 
-  '@primer/react@38.1.0(@types/react-dom@19.2.3(@types/react@19.2.3))(@types/react-is@18.3.0)(@types/react@19.2.3)(react-dom@19.2.0(react@19.2.0))(react-is@18.3.1)(react@19.2.0)':
+  '@primer/react@38.1.0(@types/react-dom@19.2.3(@types/react@19.2.4))(@types/react-is@18.3.0)(@types/react@19.2.4)(react-dom@19.2.0(react@19.2.0))(react-is@18.3.1)(react@19.2.0)':
     dependencies:
       '@github/mini-throttle': 2.1.1
       '@github/relative-time-element': 4.4.8
@@ -6251,8 +6251,8 @@ snapshots:
       react-intersection-observer: 9.16.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       react-is: 18.3.1
     optionalDependencies:
-      '@types/react': 19.2.3
-      '@types/react-dom': 19.2.3(@types/react@19.2.3)
+      '@types/react': 19.2.4
+      '@types/react-dom': 19.2.3(@types/react@19.2.4)
       '@types/react-is': 18.3.0
 
   '@sinclair/typebox@0.27.8': {}
@@ -6362,15 +6362,15 @@ snapshots:
       picocolors: 1.1.1
       redent: 3.0.0
 
-  '@testing-library/react@16.3.0(@testing-library/dom@10.0.0)(@types/react-dom@19.2.3(@types/react@19.2.3))(@types/react@19.2.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)':
+  '@testing-library/react@16.3.0(@testing-library/dom@10.0.0)(@types/react-dom@19.2.3(@types/react@19.2.4))(@types/react@19.2.4)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)':
     dependencies:
       '@babel/runtime': 7.24.1
       '@testing-library/dom': 10.0.0
       react: 19.2.0
       react-dom: 19.2.0(react@19.2.0)
     optionalDependencies:
-      '@types/react': 19.2.3
-      '@types/react-dom': 19.2.3(@types/react@19.2.3)
+      '@types/react': 19.2.4
+      '@types/react-dom': 19.2.3(@types/react@19.2.4)
 
   '@testing-library/user-event@14.6.1(@testing-library/dom@10.0.0)':
     dependencies:
@@ -6494,27 +6494,27 @@ snapshots:
       xmlbuilder: 15.1.1
     optional: true
 
-  '@types/react-dom@19.2.3(@types/react@19.2.3)':
+  '@types/react-dom@19.2.3(@types/react@19.2.4)':
     dependencies:
-      '@types/react': 19.2.3
+      '@types/react': 19.2.4
 
   '@types/react-is@18.3.0':
     dependencies:
-      '@types/react': 19.2.3
+      '@types/react': 19.2.4
     optional: true
 
   '@types/react-router-dom@5.3.3':
     dependencies:
       '@types/history': 4.7.11
-      '@types/react': 19.2.3
+      '@types/react': 19.2.4
       '@types/react-router': 5.1.20
 
   '@types/react-router@5.1.20':
     dependencies:
       '@types/history': 4.7.11
-      '@types/react': 19.2.3
+      '@types/react': 19.2.4
 
-  '@types/react@19.2.3':
+  '@types/react@19.2.4':
     dependencies:
       csstype: 3.1.3
 
