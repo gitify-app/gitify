@@ -78,7 +78,7 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
             event.stopPropagation();
             openRepository(repoNotifications[0].repository);
           }}
-          title="Open repository"
+          title="Open repository ↗"
           variant="invisible"
         >
           <AvatarWithFallback

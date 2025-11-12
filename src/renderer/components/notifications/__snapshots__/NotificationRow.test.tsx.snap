@@ -77,7 +77,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 <button
                   class="text-xs font-medium"
                   data-testid="view-repository"
-                  title="Open repository"
+                  title="Open repository ↗"
                   type="button"
                 >
                   <div
@@ -449,7 +449,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               <button
                 class="text-xs font-medium"
                 data-testid="view-repository"
-                title="Open repository"
+                title="Open repository ↗"
                 type="button"
               >
                 <div

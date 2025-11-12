@@ -22,7 +22,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
           data-size="medium"
           data-testid="open-repository"
           data-variant="invisible"
-          title="Open repository"
+          title="Open repository ↗"
           type="button"
         >
           <span
@@ -212,7 +212,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
         data-size="medium"
         data-testid="open-repository"
         data-variant="invisible"
-        title="Open repository"
+        title="Open repository ↗"
         type="button"
       >
         <span
@@ -459,7 +459,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
           data-size="medium"
           data-testid="open-repository"
           data-variant="invisible"
-          title="Open repository"
+          title="Open repository ↗"
           type="button"
         >
           <span
@@ -649,7 +649,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
         data-size="medium"
         data-testid="open-repository"
         data-variant="invisible"
-        title="Open repository"
+        title="Open repository ↗"
         type="button"
       >
         <span
@@ -896,7 +896,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
           data-size="medium"
           data-testid="open-repository"
           data-variant="invisible"
-          title="Open repository"
+          title="Open repository ↗"
           type="button"
         >
           <span
@@ -1086,7 +1086,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
           data-size="medium"
           data-testid="open-repository"
           data-variant="invisible"
-          title="Open repository"
+          title="Open repository ↗"
           type="button"
         >
           <span
@@ -1283,7 +1283,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
         data-size="medium"
         data-testid="open-repository"
         data-variant="invisible"
-        title="Open repository"
+        title="Open repository ↗"
         type="button"
       >
         <span
@@ -1537,7 +1537,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
           data-size="medium"
           data-testid="open-repository"
           data-variant="invisible"
-          title="Open repository"
+          title="Open repository ↗"
           type="button"
         >
           <span
@@ -1734,7 +1734,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
         data-size="medium"
         data-testid="open-repository"
         data-variant="invisible"
-        title="Open repository"
+        title="Open repository ↗"
         type="button"
       >
         <span

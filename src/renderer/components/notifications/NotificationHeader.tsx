@@ -38,7 +38,7 @@ export const NotificationHeader: FC<INotificationHeader> = ({
               event.stopPropagation();
               openRepository(notification.repository);
             }}
-            title="Open repository"
+            title="Open repository ↗"
             type="button"
           >
             <AvatarWithFallback
