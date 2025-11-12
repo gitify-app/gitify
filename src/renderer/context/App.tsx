@@ -184,7 +184,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     }
   }, Constants.REFRESH_ACCOUNTS_INTERVAL_MS);
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: We also want to update the tray on setting changes
+  // biome-ignore lint/correctness/useExhaustiveDependencies: We want to update the tray on setting or notification changes
   useEffect(() => {
     setUseUnreadActiveIcon(settings.useUnreadActiveIcon);
     setUseAlternateIdleIcon(settings.useAlternateIdleIcon);
@@ -193,7 +193,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     settings.showNotificationsCountInTray,
     settings.useUnreadActiveIcon,
     settings.useAlternateIdleIcon,
-    unreadNotificationCount,
+    notifications,
   ]);
 
   useEffect(() => {
