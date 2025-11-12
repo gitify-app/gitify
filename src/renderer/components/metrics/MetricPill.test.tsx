@@ -2,6 +2,8 @@ import { render } from '@testing-library/react';
 
 import { MarkGithubIcon } from '@primer/octicons-react';
 
+import { describe, expect, it } from 'vitest';
+
 import { IconColor } from '../../types';
 import { type IMetricPill, MetricPill } from './MetricPill';
 

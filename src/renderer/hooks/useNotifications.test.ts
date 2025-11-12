@@ -2,6 +2,7 @@ import { act, renderHook, waitFor } from '@testing-library/react';
 
 import axios, { AxiosError } from 'axios';
 import nock from 'nock';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import {
   mockAuth,
@@ -18,7 +19,7 @@ import * as logger from '../utils/logger';
 import { useNotifications } from './useNotifications';
 
 describe('renderer/hooks/useNotifications.ts', () => {
-  const rendererLogErrorSpy = jest
+  const rendererLogErrorSpy = vi
     .spyOn(logger, 'rendererLogError')
     .mockImplementation();
 

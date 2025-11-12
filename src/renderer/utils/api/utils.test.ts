@@ -1,4 +1,5 @@
 import type { AxiosResponse } from 'axios';
+import { describe, expect, it } from 'vitest';
 
 import type { Hostname } from '../../types';
 import {

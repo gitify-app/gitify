@@ -2,6 +2,8 @@ import { render } from '@testing-library/react';
 
 import { PersonFillIcon } from '@primer/octicons-react';
 
+import { describe, expect, it } from 'vitest';
+
 import { Title } from './Title';
 
 describe('renderer/routes/components/primitives/Title.tsx', () => {

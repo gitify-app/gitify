@@ -1,22 +1,24 @@
 import { act, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+import { afterEach, describe, expect, it, vi } from 'vitest';
+
 import { mockAuth, mockSettings } from '../__mocks__/state-mocks';
 import { AppContext } from '../context/App';
 import { FiltersRoute } from './Filters';
 
-const mockNavigate = jest.fn();
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
+const mockNavigate = vi.fn();
+vi.mock('react-router-dom', () => ({
+  ...vi.importActual('react-router-dom'),
   useNavigate: () => mockNavigate,
 }));
 
 describe('renderer/routes/Filters.tsx', () => {
-  const clearFilters = jest.fn();
-  const fetchNotifications = jest.fn();
+  const clearFilters = vi.fn();
+  const fetchNotifications = vi.fn();
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   describe('General', () => {

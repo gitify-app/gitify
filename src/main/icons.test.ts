@@ -1,3 +1,5 @@
+import { describe, expect, it } from 'vitest';
+
 import { TrayIcons } from './icons';
 
 describe('main/icons.ts', () => {

@@ -1,18 +1,18 @@
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+
 import * as logger from '../../shared/logger';
 
 import { mockSingleNotification } from './api/__mocks__/response-mocks';
 import { rendererLogError, rendererLogInfo, rendererLogWarn } from './logger';
 
 describe('renderer/utils/logger.ts', () => {
-  const logInfoSpy = jest.spyOn(logger, 'logInfo').mockImplementation();
-  const logWarnSpy = jest.spyOn(logger, 'logWarn').mockImplementation();
-  const logErrorSpy = jest.spyOn(logger, 'logError').mockImplementation();
+  const logInfoSpy = vi.spyOn(logger, 'logInfo').mockImplementation(() => {});
+  const logWarnSpy = vi.spyOn(logger, 'logWarn').mockImplementation(() => {});
+  const logErrorSpy = vi.spyOn(logger, 'logError').mockImplementation(() => {});
   const mockError = new Error('boom');
 
   beforeEach(() => {
-    logInfoSpy.mockReset();
-    logWarnSpy.mockReset();
-    logErrorSpy.mockReset();
+    vi.clearAllMocks();
   });
 
   it('logs info without notification', () => {

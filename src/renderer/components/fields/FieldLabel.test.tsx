@@ -1,5 +1,7 @@
 import { render } from '@testing-library/react';
 
+import { describe, expect, it } from 'vitest';
+
 import { FieldLabel, type IFieldLabel } from './FieldLabel';
 
 describe('renderer/components/fields/FieldLabel.tsx', () => {

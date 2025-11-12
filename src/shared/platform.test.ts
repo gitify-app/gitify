@@ -1,3 +1,5 @@
+import { describe, expect, it } from 'vitest';
+
 import { isLinux, isMacOS, isWindows } from './platform';
 
 describe('shared/platform.ts', () => {

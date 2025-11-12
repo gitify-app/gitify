@@ -1,3 +1,5 @@
+import { afterEach, describe, expect, it, vi } from 'vitest';
+
 import {
   mockAccountNotifications,
   mockSingleAccountNotifications,
@@ -7,11 +9,11 @@ import { defaultSettings } from '../../context/defaults';
 import type { SettingsState } from '../../types';
 import * as native from './native';
 
-const raiseSoundNotificationMock = jest.spyOn(native, 'raiseSoundNotification');
+const raiseSoundNotificationMock = vi.spyOn(native, 'raiseSoundNotification');
 
 describe('renderer/utils/notifications/native.ts', () => {
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   describe('triggerNativeNotifications', () => {

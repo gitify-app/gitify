@@ -1,6 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+import { afterEach, describe, expect, it, vi } from 'vitest';
+
 import { mockSettings } from '../../__mocks__/state-mocks';
 import { AppContext } from '../../context/App';
 import { GroupBy } from '../../types';
@@ -10,7 +12,7 @@ import { NotificationHeader } from './NotificationHeader';
 
 describe('renderer/components/notifications/NotificationHeader.tsx', () => {
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should render itself & its children - group by repositories', async () => {
@@ -89,7 +91,7 @@ describe('renderer/components/notifications/NotificationHeader.tsx', () => {
   });
 
   it('should open notification user profile - group by date', async () => {
-    const openExternalLinkMock = jest
+    const openExternalLinkMock = vi
       .spyOn(comms, 'openExternalLink')
       .mockImplementation();
 

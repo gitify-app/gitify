@@ -1,3 +1,5 @@
+import { describe, expect, it } from 'vitest';
+
 import { Theme } from '../types';
 import { mapThemeModeToColorMode, mapThemeModeToColorScheme } from './theme';
 

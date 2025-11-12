@@ -1,6 +1,8 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+import { afterEach, describe, expect, it, vi } from 'vitest';
+
 import { AppContext } from '../context/App';
 import * as comms from '../utils/comms';
 import {
@@ -8,20 +10,20 @@ import {
   validateForm,
 } from './LoginWithPersonalAccessToken';
 
-const mockNavigate = jest.fn();
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
+const mockNavigate = vi.fn();
+vi.mock('react-router-dom', () => ({
+  ...vi.importActual('react-router-dom'),
   useNavigate: () => mockNavigate,
 }));
 
 describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
-  const mockLoginWithPersonalAccessToken = jest.fn();
-  const openExternalLinkMock = jest
+  const mockLoginWithPersonalAccessToken = vi.fn();
+  const openExternalLinkMock = vi
     .spyOn(comms, 'openExternalLink')
     .mockImplementation();
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('renders correctly', () => {

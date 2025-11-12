@@ -1,5 +1,7 @@
 import { act, render } from '@testing-library/react';
 
+import { beforeEach, describe, expect, it } from 'vitest';
+
 import { ensureStableEmojis } from '../__mocks__/utils';
 import { Oops } from './Oops';
 

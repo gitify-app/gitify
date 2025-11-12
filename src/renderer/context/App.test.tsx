@@ -1,6 +1,8 @@
 import { act, fireEvent, render, waitFor } from '@testing-library/react';
 import { useContext } from 'react';
 
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+
 import { mockAuth, mockSettings } from '../__mocks__/state-mocks';
 import { Constants } from '../constants';
 import { useNotifications } from '../hooks/useNotifications';
@@ -13,7 +15,7 @@ import * as storage from '../utils/storage';
 import { AppContext, AppProvider } from './App';
 import { defaultSettings } from './defaults';
 
-jest.mock('../hooks/useNotifications');
+vi.mock('../hooks/useNotifications');
 
 const customRender = (
   ui,
@@ -29,25 +31,25 @@ const customRender = (
 
 describe('renderer/context/App.tsx', () => {
   beforeEach(() => {
-    jest.useFakeTimers();
+    vi.useFakeTimers();
   });
 
   afterEach(() => {
-    jest.clearAllTimers();
-    jest.clearAllMocks();
+    vi.clearAllTimers();
+    vi.clearAllMocks();
   });
 
   describe('notification methods', () => {
-    const getNotificationCountMock = jest.spyOn(
+    const getNotificationCountMock = vi.spyOn(
       notifications,
       'getNotificationCount',
     );
     getNotificationCountMock.mockReturnValue(1);
 
-    const fetchNotificationsMock = jest.fn();
-    const markNotificationsAsReadMock = jest.fn();
-    const markNotificationsAsDoneMock = jest.fn();
-    const unsubscribeNotificationMock = jest.fn();
+    const fetchNotificationsMock = vi.fn();
+    const markNotificationsAsReadMock = vi.fn();
+    const markNotificationsAsDoneMock = vi.fn();
+    const unsubscribeNotificationMock = vi.fn();
 
     const mockDefaultState = {
       auth: { accounts: [] },
@@ -55,7 +57,7 @@ describe('renderer/context/App.tsx', () => {
     };
 
     beforeEach(() => {
-      (useNotifications as jest.Mock).mockReturnValue({
+      (useNotifications as vi.Mock).mockReturnValue({
         fetchNotifications: fetchNotificationsMock,
         markNotificationsAsRead: markNotificationsAsReadMock,
         markNotificationsAsDone: markNotificationsAsDoneMock,
@@ -64,7 +66,7 @@ describe('renderer/context/App.tsx', () => {
     });
 
     afterEach(() => {
-      jest.clearAllMocks();
+      vi.clearAllMocks();
     });
 
     it('fetch notifications every minute', async () => {
@@ -77,19 +79,19 @@ describe('renderer/context/App.tsx', () => {
       );
 
       act(() => {
-        jest.advanceTimersByTime(Constants.FETCH_NOTIFICATIONS_INTERVAL_MS);
+        vi.advanceTimersByTime(Constants.FETCH_NOTIFICATIONS_INTERVAL_MS);
         return;
       });
       expect(fetchNotificationsMock).toHaveBeenCalledTimes(2);
 
       act(() => {
-        jest.advanceTimersByTime(Constants.FETCH_NOTIFICATIONS_INTERVAL_MS);
+        vi.advanceTimersByTime(Constants.FETCH_NOTIFICATIONS_INTERVAL_MS);
         return;
       });
       expect(fetchNotificationsMock).toHaveBeenCalledTimes(3);
 
       act(() => {
-        jest.advanceTimersByTime(Constants.FETCH_NOTIFICATIONS_INTERVAL_MS);
+        vi.advanceTimersByTime(Constants.FETCH_NOTIFICATIONS_INTERVAL_MS);
         return;
       });
       expect(fetchNotificationsMock).toHaveBeenCalledTimes(4);
@@ -192,17 +194,17 @@ describe('renderer/context/App.tsx', () => {
   });
 
   describe('authentication methods', () => {
-    const apiRequestAuthMock = jest.spyOn(apiRequests, 'apiRequestAuth');
-    const fetchNotificationsMock = jest.fn();
+    const apiRequestAuthMock = vi.spyOn(apiRequests, 'apiRequestAuth');
+    const fetchNotificationsMock = vi.fn();
 
     beforeEach(() => {
-      (useNotifications as jest.Mock).mockReturnValue({
+      (useNotifications as vi.Mock).mockReturnValue({
         fetchNotifications: fetchNotificationsMock,
       });
     });
 
     afterEach(() => {
-      jest.clearAllMocks();
+      vi.clearAllMocks();
     });
 
     it('should call loginWithPersonalAccessToken', async () => {
@@ -244,18 +246,18 @@ describe('renderer/context/App.tsx', () => {
   });
 
   describe('settings methods', () => {
-    const fetchNotificationsMock = jest.fn();
+    const fetchNotificationsMock = vi.fn();
 
     beforeEach(() => {
-      (useNotifications as jest.Mock).mockReturnValue({
+      (useNotifications as vi.Mock).mockReturnValue({
         fetchNotifications: fetchNotificationsMock,
       });
     });
 
     it('should call updateSetting', async () => {
-      const saveStateMock = jest
+      const saveStateMock = vi
         .spyOn(storage, 'saveState')
-        .mockImplementation(jest.fn());
+        .mockImplementation(vi.fn());
 
       const TestComponent = () => {
         const { updateSetting } = useContext(AppContext);
@@ -288,10 +290,10 @@ describe('renderer/context/App.tsx', () => {
     });
 
     it('should call updateSetting and set auto launch(openAtStartup)', async () => {
-      const setAutoLaunchMock = jest.spyOn(comms, 'setAutoLaunch');
-      const saveStateMock = jest
+      const setAutoLaunchMock = vi.spyOn(comms, 'setAutoLaunch');
+      const saveStateMock = vi
         .spyOn(storage, 'saveState')
-        .mockImplementation(jest.fn());
+        .mockImplementation(vi.fn());
 
       const TestComponent = () => {
         const { updateSetting } = useContext(AppContext);
@@ -326,9 +328,9 @@ describe('renderer/context/App.tsx', () => {
     });
 
     it('should clear filters back to default', async () => {
-      const saveStateMock = jest
+      const saveStateMock = vi
         .spyOn(storage, 'saveState')
-        .mockImplementation(jest.fn());
+        .mockImplementation(vi.fn());
 
       const TestComponent = () => {
         const { clearFilters } = useContext(AppContext);
@@ -363,9 +365,9 @@ describe('renderer/context/App.tsx', () => {
     });
 
     it('should call resetSettings', async () => {
-      const saveStateMock = jest
+      const saveStateMock = vi
         .spyOn(storage, 'saveState')
-        .mockImplementation(jest.fn());
+        .mockImplementation(vi.fn());
 
       const TestComponent = () => {
         const { resetSettings } = useContext(AppContext);

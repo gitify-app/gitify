@@ -7,6 +7,8 @@ import {
   OrganizationIcon,
 } from '@primer/octicons-react';
 
+import { beforeEach, describe, expect, it } from 'vitest';
+
 import { IconColor } from '../types';
 import type { GitifyPullRequestReview } from '../typesGitHub';
 import {
@@ -111,24 +113,36 @@ describe('renderer/utils/icons.ts', () => {
   });
 
   describe('getAuthMethodIcon', () => {
-    expect(getAuthMethodIcon('GitHub App')).toMatchSnapshot();
+    it('should match snapshot for GitHub App', () => {
+      expect(getAuthMethodIcon('GitHub App')).toMatchSnapshot();
+    });
 
-    expect(getAuthMethodIcon('OAuth App')).toMatchSnapshot();
+    it('should match snapshot for OAuth App', () => {
+      expect(getAuthMethodIcon('OAuth App')).toMatchSnapshot();
+    });
 
-    expect(getAuthMethodIcon('Personal Access Token')).toMatchSnapshot();
+    it('should match snapshot for Personal Access Token', () => {
+      expect(getAuthMethodIcon('Personal Access Token')).toMatchSnapshot();
+    });
   });
 
   describe('getPlatformIcon', () => {
-    expect(getPlatformIcon('GitHub Cloud')).toMatchSnapshot();
+    it('should match snapshot for GitHub Cloud', () => {
+      expect(getPlatformIcon('GitHub Cloud')).toMatchSnapshot();
+    });
 
-    expect(getPlatformIcon('GitHub Enterprise Server')).toMatchSnapshot();
+    it('should match snapshot for GitHub Enterprise Server', () => {
+      expect(getPlatformIcon('GitHub Enterprise Server')).toMatchSnapshot();
+    });
   });
 
   describe('getDefaultUserIcon', () => {
-    expect(getDefaultUserIcon('Bot')).toBe(MarkGithubIcon);
-    expect(getDefaultUserIcon('EnterpriseUserAccount')).toBe(FeedPersonIcon);
-    expect(getDefaultUserIcon('Mannequin')).toBe(MarkGithubIcon);
-    expect(getDefaultUserIcon('Organization')).toBe(OrganizationIcon);
-    expect(getDefaultUserIcon('User')).toBe(FeedPersonIcon);
+    it('should return correct icons for different user types', () => {
+      expect(getDefaultUserIcon('Bot')).toBe(MarkGithubIcon);
+      expect(getDefaultUserIcon('EnterpriseUserAccount')).toBe(FeedPersonIcon);
+      expect(getDefaultUserIcon('Mannequin')).toBe(MarkGithubIcon);
+      expect(getDefaultUserIcon('Organization')).toBe(OrganizationIcon);
+      expect(getDefaultUserIcon('User')).toBe(FeedPersonIcon);
+    });
   });
 });

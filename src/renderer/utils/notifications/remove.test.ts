@@ -1,3 +1,5 @@
+import { describe, expect, it } from 'vitest';
+
 import { mockSingleAccountNotifications } from '../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../__mocks__/state-mocks';
 import { mockSingleNotification } from '../api/__mocks__/response-mocks';

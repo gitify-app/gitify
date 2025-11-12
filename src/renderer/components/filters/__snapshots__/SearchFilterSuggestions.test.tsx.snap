@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render itself & its children - closed 1`] = `
+exports[`renderer/components/filters/SearchFilterSuggestions.tsx > should render itself & its children - closed 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -61,7 +61,7 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
 }
 `;
 
-exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render itself & its children - input token invalid 1`] = `
+exports[`renderer/components/filters/SearchFilterSuggestions.tsx > should render itself & its children - input token invalid 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -190,7 +190,7 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
 }
 `;
 
-exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render itself & its children - input token valid 1`] = `
+exports[`renderer/components/filters/SearchFilterSuggestions.tsx > should render itself & its children - input token valid 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -345,7 +345,7 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
 }
 `;
 
-exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render itself & its children - open 1`] = `
+exports[`renderer/components/filters/SearchFilterSuggestions.tsx > should render itself & its children - open 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -588,7 +588,7 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
 }
 `;
 
-exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render itself & its children - open with detailed enabled 1`] = `
+exports[`renderer/components/filters/SearchFilterSuggestions.tsx > should render itself & its children - open with detailed enabled 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>

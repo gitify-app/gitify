@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/routes/Notifications.tsx should render itself & its children (all read notifications) 1`] = `
+exports[`renderer/routes/Notifications.tsx > should render itself & its children (all read notifications) 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -69,7 +69,7 @@ exports[`renderer/routes/Notifications.tsx should render itself & its children (
 }
 `;
 
-exports[`renderer/routes/Notifications.tsx should render itself & its children (error conditions - oops) bad credentials 1`] = `
+exports[`renderer/routes/Notifications.tsx > should render itself & its children (error conditions - oops) > bad credentials 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -138,7 +138,7 @@ exports[`renderer/routes/Notifications.tsx should render itself & its children (
 }
 `;
 
-exports[`renderer/routes/Notifications.tsx should render itself & its children (error conditions - oops) default error 1`] = `
+exports[`renderer/routes/Notifications.tsx > should render itself & its children (error conditions - oops) > default error 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -207,7 +207,7 @@ exports[`renderer/routes/Notifications.tsx should render itself & its children (
 }
 `;
 
-exports[`renderer/routes/Notifications.tsx should render itself & its children (error conditions - oops) missing scopes 1`] = `
+exports[`renderer/routes/Notifications.tsx > should render itself & its children (error conditions - oops) > missing scopes 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -276,7 +276,7 @@ exports[`renderer/routes/Notifications.tsx should render itself & its children (
 }
 `;
 
-exports[`renderer/routes/Notifications.tsx should render itself & its children (error conditions - oops) rate limited 1`] = `
+exports[`renderer/routes/Notifications.tsx > should render itself & its children (error conditions - oops) > rate limited 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -345,7 +345,7 @@ exports[`renderer/routes/Notifications.tsx should render itself & its children (
 }
 `;
 
-exports[`renderer/routes/Notifications.tsx should render itself & its children (error conditions - oops) unknown error 1`] = `
+exports[`renderer/routes/Notifications.tsx > should render itself & its children (error conditions - oops) > unknown error 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -414,7 +414,7 @@ exports[`renderer/routes/Notifications.tsx should render itself & its children (
 }
 `;
 
-exports[`renderer/routes/Notifications.tsx should render itself & its children (show account header) 1`] = `
+exports[`renderer/routes/Notifications.tsx > should render itself & its children (show account header) 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -501,7 +501,7 @@ exports[`renderer/routes/Notifications.tsx should render itself & its children (
 }
 `;
 
-exports[`renderer/routes/Notifications.tsx should render itself & its children (with notifications) 1`] = `
+exports[`renderer/routes/Notifications.tsx > should render itself & its children (with notifications) 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>

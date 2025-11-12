@@ -1,5 +1,7 @@
 import { render } from '@testing-library/react';
 
+import { describe, expect, it, vi } from 'vitest';
+
 import { type IRadioGroup, RadioGroup } from './RadioGroup';
 
 describe('renderer/components/fields/RadioGroup.tsx', () => {
@@ -10,7 +12,7 @@ describe('renderer/components/fields/RadioGroup.tsx', () => {
       { label: 'Value 1', value: 'one' },
       { label: 'Value 2', value: 'two' },
     ],
-    onChange: jest.fn(),
+    onChange: vi.fn(),
     value: 'two',
   };
 

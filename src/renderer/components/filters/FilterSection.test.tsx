@@ -3,6 +3,8 @@ import userEvent from '@testing-library/user-event';
 
 import { MarkGithubIcon } from '@primer/octicons-react';
 
+import { describe, expect, it, vi } from 'vitest';
+
 import { mockAccountNotifications } from '../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../__mocks__/state-mocks';
 import { AppContext } from '../../context/App';
@@ -11,7 +13,7 @@ import { stateFilter } from '../../utils/notifications/filters';
 import { FilterSection } from './FilterSection';
 
 describe('renderer/components/filters/FilterSection.tsx', () => {
-  const updateFilter = jest.fn();
+  const updateFilter = vi.fn();
 
   const mockFilter = stateFilter;
   const mockFilterSetting = 'filterStates';

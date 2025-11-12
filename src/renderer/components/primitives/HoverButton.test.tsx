@@ -2,11 +2,13 @@ import { render } from '@testing-library/react';
 
 import { MarkGithubIcon } from '@primer/octicons-react';
 
+import { describe, expect, it, vi } from 'vitest';
+
 import { HoverButton } from './HoverButton';
 
 describe('renderer/components/primitives/HoverButton.tsx', () => {
   it('should render', () => {
-    const mockAction = jest.fn();
+    const mockAction = vi.fn();
 
     const tree = render(
       <HoverButton
@@ -20,7 +22,7 @@ describe('renderer/components/primitives/HoverButton.tsx', () => {
   });
 
   it('should render - disabled', () => {
-    const mockAction = jest.fn();
+    const mockAction = vi.fn();
 
     const tree = render(
       <HoverButton

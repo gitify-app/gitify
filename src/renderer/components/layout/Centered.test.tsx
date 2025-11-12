@@ -1,5 +1,7 @@
 import { render } from '@testing-library/react';
 
+import { describe, expect, it } from 'vitest';
+
 import { Centered } from './Centered';
 
 describe('renderer/components/layout/Centered.tsx', () => {

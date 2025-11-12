@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/components/settings/SettingsFooter.tsx should show app version 1`] = `
+exports[`renderer/components/settings/SettingsFooter.tsx > should show app version 1`] = `
 <button
   aria-describedby="«r1»-loading-announcement «r0»"
   class="prc-Button-ButtonBase-c50BI"

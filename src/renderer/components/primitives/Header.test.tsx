@@ -3,20 +3,22 @@ import userEvent from '@testing-library/user-event';
 
 import { MarkGithubIcon } from '@primer/octicons-react';
 
+import { afterEach, describe, expect, it, vi } from 'vitest';
+
 import { AppContext } from '../../context/App';
 import { Header } from './Header';
 
-const mockNavigate = jest.fn();
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
+const mockNavigate = vi.fn();
+vi.mock('react-router-dom', () => ({
+  ...vi.importActual('react-router-dom'),
   useNavigate: () => mockNavigate,
 }));
 
 describe('renderer/components/primitives/Header.tsx', () => {
-  const fetchNotifications = jest.fn();
+  const fetchNotifications = vi.fn();
 
   afterEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
   it('should render itself & its children', () => {

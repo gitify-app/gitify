@@ -1,3 +1,5 @@
+import { describe, expect, it } from 'vitest';
+
 import { partialMockUser } from '../../../__mocks__/partial-mocks';
 import { formatForDisplay, getSubjectUser } from './utils';
 

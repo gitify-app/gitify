@@ -2,26 +2,28 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 
+import { afterEach, describe, expect, it, vi } from 'vitest';
+
 import { mockAccountNotifications } from '../__mocks__/notifications-mocks';
 import { mockAuth, mockSettings } from '../__mocks__/state-mocks';
 import { AppContext } from '../context/App';
 import * as comms from '../utils/comms';
 import { Sidebar } from './Sidebar';
 
-const mockNavigate = jest.fn();
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
+const mockNavigate = vi.fn();
+vi.mock('react-router-dom', async () => ({
+  ...(await vi.importActual('react-router-dom')),
   useNavigate: () => mockNavigate,
 }));
 
 describe('renderer/components/Sidebar.tsx', () => {
-  const fetchNotifications = jest.fn();
-  const openExternalLinkMock = jest
+  const fetchNotifications = vi.fn();
+  const openExternalLinkMock = vi
     .spyOn(comms, 'openExternalLink')
     .mockImplementation();
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should render itself & its children (logged in)', () => {
@@ -335,7 +337,7 @@ describe('renderer/components/Sidebar.tsx', () => {
   });
 
   it('should quit the app', async () => {
-    const quitAppMock = jest.spyOn(comms, 'quitApp');
+    const quitAppMock = vi.spyOn(comms, 'quitApp');
 
     render(
       <AppContext.Provider

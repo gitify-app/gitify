@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/components/notifications/RepositoryNotifications.tsx should render itself & its children 1`] = `
+exports[`renderer/components/notifications/RepositoryNotifications.tsx > should render itself & its children 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -437,7 +437,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
 }
 `;
 
-exports[`renderer/components/notifications/RepositoryNotifications.tsx should toggle repository notifications visibility 1`] = `
+exports[`renderer/components/notifications/RepositoryNotifications.tsx > should toggle repository notifications visibility 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -1078,7 +1078,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
 }
 `;
 
-exports[`renderer/components/notifications/RepositoryNotifications.tsx should use default repository icon when avatar is not available 1`] = `
+exports[`renderer/components/notifications/RepositoryNotifications.tsx > should use default repository icon when avatar is not available 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>

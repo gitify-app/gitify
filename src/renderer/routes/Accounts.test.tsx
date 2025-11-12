@@ -3,6 +3,8 @@ import userEvent from '@testing-library/user-event';
 
 import { BaseStyles, ThemeProvider } from '@primer/react';
 
+import { afterEach, describe, expect, it, vi } from 'vitest';
+
 import {
   mockAuth,
   mockGitHubAppAccount,
@@ -17,15 +19,15 @@ import * as links from '../utils/links';
 import * as storage from '../utils/storage';
 import { AccountsRoute } from './Accounts';
 
-const mockNavigate = jest.fn();
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
+const mockNavigate = vi.fn();
+vi.mock('react-router-dom', () => ({
+  ...vi.importActual('react-router-dom'),
   useNavigate: () => mockNavigate,
 }));
 
 describe('renderer/routes/Accounts.tsx', () => {
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   describe('General', () => {
@@ -74,7 +76,7 @@ describe('renderer/routes/Accounts.tsx', () => {
 
   describe('Account interactions', () => {
     it('open profile in external browser', async () => {
-      const openAccountProfileMock = jest
+      const openAccountProfileMock = vi
         .spyOn(links, 'openAccountProfile')
         .mockImplementation();
 
@@ -102,7 +104,7 @@ describe('renderer/routes/Accounts.tsx', () => {
     });
 
     it('open host in external browser', async () => {
-      const openExternalLinkMock = jest
+      const openExternalLinkMock = vi
         .spyOn(comms, 'openExternalLink')
         .mockImplementation();
 
@@ -128,7 +130,7 @@ describe('renderer/routes/Accounts.tsx', () => {
     });
 
     it('open developer settings in external browser', async () => {
-      const openExternalLinkMock = jest
+      const openExternalLinkMock = vi
         .spyOn(comms, 'openExternalLink')
         .mockImplementation();
 
@@ -156,7 +158,7 @@ describe('renderer/routes/Accounts.tsx', () => {
     });
 
     it('should render with PAT scopes warning', async () => {
-      const openExternalLinkMock = jest
+      const openExternalLinkMock = vi
         .spyOn(comms, 'openExternalLink')
         .mockImplementation();
 
@@ -193,9 +195,7 @@ describe('renderer/routes/Accounts.tsx', () => {
     });
 
     it('should set account as primary account', async () => {
-      const saveStateMock = jest
-        .spyOn(storage, 'saveState')
-        .mockImplementation();
+      const saveStateMock = vi.spyOn(storage, 'saveState').mockImplementation();
 
       await act(async () => {
         render(
@@ -224,7 +224,7 @@ describe('renderer/routes/Accounts.tsx', () => {
     });
 
     it('should refresh account', async () => {
-      const apiRequestAuthMock = jest.spyOn(apiRequests, 'apiRequestAuth');
+      const apiRequestAuthMock = vi.spyOn(apiRequests, 'apiRequestAuth');
 
       await act(async () => {
         render(
@@ -257,9 +257,9 @@ describe('renderer/routes/Accounts.tsx', () => {
     });
 
     it('should logout', async () => {
-      const logoutFromAccountMock = jest.fn();
-      const updateTrayIconMock = jest.spyOn(comms, 'updateTrayIcon');
-      const updateTrayTitleMock = jest.spyOn(comms, 'updateTrayTitle');
+      const logoutFromAccountMock = vi.fn();
+      const updateTrayIconMock = vi.spyOn(comms, 'updateTrayIcon');
+      const updateTrayTitleMock = vi.spyOn(comms, 'updateTrayTitle');
 
       await act(async () => {
         render(
@@ -290,7 +290,7 @@ describe('renderer/routes/Accounts.tsx', () => {
 
   describe('Add new accounts', () => {
     it('should show login with github app', async () => {
-      const mockLoginWithGitHubApp = jest.fn();
+      const mockLoginWithGitHubApp = vi.fn();
 
       await act(async () => {
         render(

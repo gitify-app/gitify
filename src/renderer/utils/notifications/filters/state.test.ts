@@ -1,9 +1,11 @@
+import { afterEach, describe, expect, it, vi } from 'vitest';
+
 import type { Notification } from '../../../typesGitHub';
 import { stateFilter } from './state';
 
 describe('renderer/utils/notifications/filters/state.ts', () => {
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('can filter by notification states', () => {

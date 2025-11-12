@@ -13,7 +13,7 @@
     "package:win": "electron-builder --win --config ./config/electron-builder.js",
     "lint:check": "biome check",
     "lint": "biome check --fix",
-    "test": "jest",
+    "test": "vitest",
     "start": "electron out/main/index.js --enable-logging",
     "prepare": "husky"
   },
@@ -80,12 +80,12 @@
     "@testing-library/jest-dom": "6.8.0",
     "@testing-library/react": "16.3.0",
     "@testing-library/user-event": "14.6.1",
-    "@types/jest": "30.0.0",
     "@types/node": "22.18.1",
     "@types/react": "19.1.12",
     "@types/react-dom": "19.1.9",
     "@types/react-router-dom": "5.3.3",
     "@types/semver": "7.7.1",
+    "@vitest/ui": "^3.2.4",
     "axios": "1.11.0",
     "clsx": "2.1.1",
     "concurrently": "9.2.1",
@@ -96,9 +96,7 @@
     "final-form": "5.0.0",
     "graphql-tag": "2.12.6",
     "husky": "9.1.7",
-    "identity-obj-proxy": "3.0.0",
-    "jest": "30.1.3",
-    "jest-environment-jsdom": "30.1.2",
+    "jsdom": "^27.0.0",
     "nock": "13.5.6",
     "rimraf": "6.0.1",
     "semver": "7.7.2",
@@ -106,11 +104,11 @@
     "tailwind-merge": "3.3.1",
     "tailwindcss": "4.1.13",
     "to-fast-properties": "^4.0.0",
-    "ts-jest": "29.4.1",
     "ts-node": "10.9.2",
     "typescript": "5.9.2",
     "vite": "7.1.5",
-    "vite-plugin-static-copy": "3.1.2"
+    "vite-plugin-static-copy": "3.1.2",
+    "vitest": "^3.2.4"
   },
   "packageManager": "pnpm@10.15.1",
   "pnpm": {
@@ -123,6 +121,6 @@
   },
   "lint-staged": {
     "*": "biome check --fix --no-errors-on-unmatched",
-    "*.{js,ts,tsx}": "pnpm test --findRelatedTests --passWithNoTests --updateSnapshot"
+    "*.{js,ts,tsx}": "pnpm test --run --reporter=verbose"
   }
 }

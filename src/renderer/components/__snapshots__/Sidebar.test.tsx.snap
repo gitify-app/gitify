@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/components/Sidebar.tsx notifications icon renders correct icon when there are no notifications 1`] = `
+exports[`renderer/components/Sidebar.tsx > notifications icon > renders correct icon when there are no notifications 1`] = `
 <button
   aria-describedby="«r1f»-loading-announcement «r1e»"
   aria-label="Notifications"
@@ -33,7 +33,7 @@ exports[`renderer/components/Sidebar.tsx notifications icon renders correct icon
 </button>
 `;
 
-exports[`renderer/components/Sidebar.tsx notifications icon renders correct icon when there are notifications 1`] = `
+exports[`renderer/components/Sidebar.tsx > notifications icon > renders correct icon when there are notifications 1`] = `
 <button
   aria-describedby="«r1t»-loading-announcement «r1s»"
   aria-label="Notifications"
@@ -66,7 +66,7 @@ exports[`renderer/components/Sidebar.tsx notifications icon renders correct icon
 </button>
 `;
 
-exports[`renderer/components/Sidebar.tsx should render itself & its children (logged in) 1`] = `
+exports[`renderer/components/Sidebar.tsx > should render itself & its children (logged in) 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -641,7 +641,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
 }
 `;
 
-exports[`renderer/components/Sidebar.tsx should render itself & its children (logged out) 1`] = `
+exports[`renderer/components/Sidebar.tsx > should render itself & its children (logged out) 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>

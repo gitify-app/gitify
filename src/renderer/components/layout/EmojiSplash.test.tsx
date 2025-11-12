@@ -1,5 +1,7 @@
 import { act, render } from '@testing-library/react';
 
+import { describe, expect, it } from 'vitest';
+
 import { EmojiSplash } from './EmojiSplash';
 
 describe('renderer/components/layout/EmojiSplash.tsx', () => {

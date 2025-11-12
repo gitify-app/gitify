@@ -1,6 +1,8 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+import { afterEach, describe, expect, it, vi } from 'vitest';
+
 import {
   mockAuth,
   mockGitHubAppAccount,
@@ -10,11 +12,11 @@ import { AppContext } from '../../context/App';
 import { AppearanceSettings } from './AppearanceSettings';
 
 describe('renderer/components/settings/AppearanceSettings.tsx', () => {
-  const updateSetting = jest.fn();
+  const updateSetting = vi.fn();
   const zoomTimeout = () => new Promise((r) => setTimeout(r, 300));
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should change the theme mode dropdown', async () => {
@@ -65,7 +67,7 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
   });
 
   it('should update the zoom value when using CMD + and CMD -', async () => {
-    window.gitify.zoom.getLevel = jest.fn().mockReturnValue(-1);
+    window.gitify.zoom.getLevel = vi.fn().mockReturnValue(-1);
 
     await act(async () => {
       render(
@@ -89,9 +91,9 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
   });
 
   it('should update the zoom values when using the zoom buttons', async () => {
-    window.gitify.zoom.getLevel = jest.fn().mockReturnValue(0);
-    window.gitify.zoom.setLevel = jest.fn().mockImplementation((level) => {
-      window.gitify.zoom.getLevel = jest.fn().mockReturnValue(level);
+    window.gitify.zoom.getLevel = vi.fn().mockReturnValue(0);
+    window.gitify.zoom.setLevel = vi.fn().mockImplementation((level) => {
+      window.gitify.zoom.getLevel = vi.fn().mockReturnValue(level);
       fireEvent(window, new Event('resize'));
     });
 

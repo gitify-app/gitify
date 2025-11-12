@@ -1,16 +1,18 @@
 import { act, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+import { afterEach, describe, expect, it, vi } from 'vitest';
+
 import { mockAuth, mockSettings } from '../../__mocks__/state-mocks';
 import { AppContext } from '../../context/App';
 import * as comms from '../../utils/comms';
 import { NotificationSettings } from './NotificationSettings';
 
 describe('renderer/components/settings/NotificationSettings.tsx', () => {
-  const updateSetting = jest.fn();
+  const updateSetting = vi.fn();
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should change the groupBy radio group', async () => {
@@ -140,7 +142,7 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
   });
 
   it('should open official docs for showOnlyParticipating tooltip', async () => {
-    const openExternalLinkMock = jest
+    const openExternalLinkMock = vi
       .spyOn(comms, 'openExternalLink')
       .mockImplementation();
 

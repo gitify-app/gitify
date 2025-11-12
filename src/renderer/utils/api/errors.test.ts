@@ -1,4 +1,5 @@
 import { AxiosError, type AxiosResponse } from 'axios';
+import { describe, expect, it } from 'vitest';
 
 import { EVENTS } from '../../../shared/events';
 

@@ -1,5 +1,7 @@
 import { render } from '@testing-library/react';
 
+import { describe, expect, it, vi } from 'vitest';
+
 import { Checkbox, type ICheckbox } from './Checkbox';
 
 describe('renderer/components/fields/Checkbox.tsx', () => {
@@ -7,7 +9,7 @@ describe('renderer/components/fields/Checkbox.tsx', () => {
     name: 'appearance',
     label: 'Appearance',
     checked: true,
-    onChange: jest.fn(),
+    onChange: vi.fn(),
   };
 
   it('should render - visible', () => {

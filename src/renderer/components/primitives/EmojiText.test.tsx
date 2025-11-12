@@ -1,5 +1,7 @@
 import { act, render } from '@testing-library/react';
 
+import { describe, expect, it } from 'vitest';
+
 import { EmojiText, type IEmojiText } from './EmojiText';
 
 describe('renderer/components/primitives/EmojiText.tsx', () => {

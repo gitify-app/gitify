@@ -1,17 +1,17 @@
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+
 import { logError, logInfo, logWarn } from './logger';
 
 describe('shared/logger.ts', () => {
   // In test environment, the logger uses console instead of electron-log
-  const logInfoSpy = jest.spyOn(console, 'info').mockImplementation();
-  const logWarnSpy = jest.spyOn(console, 'warn').mockImplementation();
-  const logErrorSpy = jest.spyOn(console, 'error').mockImplementation();
+  const logInfoSpy = vi.spyOn(console, 'info').mockImplementation(() => {});
+  const logWarnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+  const logErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
 
   const mockError = new Error('baz');
 
   beforeEach(() => {
-    logInfoSpy.mockReset();
-    logWarnSpy.mockReset();
-    logErrorSpy.mockReset();
+    vi.clearAllMocks();
   });
 
   describe('logInfo', () => {

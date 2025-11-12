@@ -1,3 +1,5 @@
+import { describe, expect, it } from 'vitest';
+
 import type { Reason } from '../typesGitHub';
 import { getReasonDetails } from './reason';
 

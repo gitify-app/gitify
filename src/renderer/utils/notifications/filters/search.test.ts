@@ -1,3 +1,5 @@
+import { describe, expect, it } from 'vitest';
+
 import { partialMockNotification } from '../../../__mocks__/partial-mocks';
 import type { Link } from '../../../types';
 import type { Owner } from '../../../typesGitHub';
@@ -22,7 +24,7 @@ describe('renderer/utils/notifications/filters/search.ts', () => {
 
     it('matches each known qualifier by its exact prefix and additional value', () => {
       for (const q of ALL_SEARCH_QUALIFIERS) {
-        const token = q.prefix + 'someValue';
+        const token = `${q.prefix}someValue`;
         const parsed = parseSearchInput(token);
         expect(parsed).not.toBeNull();
         expect(parsed?.qualifier).toBe(q);

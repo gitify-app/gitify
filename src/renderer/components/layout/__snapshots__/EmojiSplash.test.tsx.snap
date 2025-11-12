@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/components/layout/EmojiSplash.tsx should render itself & its children - heading and sub-heading 1`] = `
+exports[`renderer/components/layout/EmojiSplash.tsx > should render itself & its children - heading and sub-heading 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -33,14 +33,7 @@ exports[`renderer/components/layout/EmojiSplash.tsx should render itself & its c
           >
             <div
               class="text-5xl"
-            >
-              <img
-                alt="🍺"
-                class="emoji"
-                draggable="false"
-                src="/mock/images/assets/1f37a.svg"
-              />
-            </div>
+            />
             <div
               class="text-xl font-semibold"
             >
@@ -85,14 +78,7 @@ exports[`renderer/components/layout/EmojiSplash.tsx should render itself & its c
         >
           <div
             class="text-5xl"
-          >
-            <img
-              alt="🍺"
-              class="emoji"
-              draggable="false"
-              src="/mock/images/assets/1f37a.svg"
-            />
-          </div>
+          />
           <div
             class="text-xl font-semibold"
           >
@@ -161,7 +147,7 @@ exports[`renderer/components/layout/EmojiSplash.tsx should render itself & its c
 }
 `;
 
-exports[`renderer/components/layout/EmojiSplash.tsx should render itself & its children - heading only 1`] = `
+exports[`renderer/components/layout/EmojiSplash.tsx > should render itself & its children - heading only 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -194,14 +180,7 @@ exports[`renderer/components/layout/EmojiSplash.tsx should render itself & its c
           >
             <div
               class="text-5xl"
-            >
-              <img
-                alt="🍺"
-                class="emoji"
-                draggable="false"
-                src="/mock/images/assets/1f37a.svg"
-              />
-            </div>
+            />
             <div
               class="text-xl font-semibold"
             >
@@ -241,14 +220,7 @@ exports[`renderer/components/layout/EmojiSplash.tsx should render itself & its c
         >
           <div
             class="text-5xl"
-          >
-            <img
-              alt="🍺"
-              class="emoji"
-              draggable="false"
-              src="/mock/images/assets/1f37a.svg"
-            />
-          </div>
+          />
           <div
             class="text-xl font-semibold"
           >

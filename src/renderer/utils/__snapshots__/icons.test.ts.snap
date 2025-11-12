@@ -1,34 +1,34 @@
-// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[` 1`] = `
+exports[`renderer/utils/icons.ts > getAuthMethodIcon > should match snapshot for GitHub App 1`] = `
 {
   "$$typeof": Symbol(react.forward_ref),
   "render": [Function],
 }
 `;
 
-exports[` 2`] = `
+exports[`renderer/utils/icons.ts > getAuthMethodIcon > should match snapshot for OAuth App 1`] = `
 {
   "$$typeof": Symbol(react.forward_ref),
   "render": [Function],
 }
 `;
 
-exports[` 3`] = `
+exports[`renderer/utils/icons.ts > getAuthMethodIcon > should match snapshot for Personal Access Token 1`] = `
 {
   "$$typeof": Symbol(react.forward_ref),
   "render": [Function],
 }
 `;
 
-exports[` 4`] = `
+exports[`renderer/utils/icons.ts > getPlatformIcon > should match snapshot for GitHub Cloud 1`] = `
 {
   "$$typeof": Symbol(react.forward_ref),
   "render": [Function],
 }
 `;
 
-exports[` 5`] = `
+exports[`renderer/utils/icons.ts > getPlatformIcon > should match snapshot for GitHub Enterprise Server 1`] = `
 {
   "$$typeof": Symbol(react.forward_ref),
   "render": [Function],

@@ -1,6 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+import { describe, expect, it, vi } from 'vitest';
+
 import { Size } from '../../types';
 import { LogoIcon } from './LogoIcon';
 
@@ -18,7 +20,7 @@ describe('renderer/components/icons/LogoIcon.tsx', () => {
   });
 
   it('should click on the logo', async () => {
-    const onClick = jest.fn();
+    const onClick = vi.fn();
     render(<LogoIcon onClick={onClick} size={Size.SMALL} />);
 
     await userEvent.click(screen.getByLabelText('Gitify Logo'));

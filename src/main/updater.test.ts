@@ -1,12 +1,14 @@
 import { dialog } from 'electron';
 import type { Menubar } from 'menubar';
 
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+
 import { APPLICATION } from '../shared/constants';
 import { logError, logInfo } from '../shared/logger';
 
-jest.mock('../shared/logger', () => ({
-  logInfo: jest.fn(),
-  logError: jest.fn(),
+vi.mock('../shared/logger', () => ({
+  logInfo: vi.fn(),
+  logError: vi.fn(),
 }));
 
 import MenuBuilder from './menu';
@@ -19,28 +21,28 @@ type Listener = (arg: ListenerArgs) => void;
 type ListenerMap = Record<string, Listener[]>;
 const listeners: ListenerMap = {};
 
-jest.mock('electron-updater', () => ({
+vi.mock('electron-updater', () => ({
   autoUpdater: {
-    on: jest.fn((event: string, cb: Listener) => {
+    on: vi.fn((event: string, cb: Listener) => {
       if (!listeners[event]) {
         listeners[event] = [];
       }
       listeners[event].push(cb);
       return this;
     }),
-    checkForUpdatesAndNotify: jest.fn().mockResolvedValue(undefined),
-    quitAndInstall: jest.fn(),
+    checkForUpdatesAndNotify: vi.fn().mockResolvedValue(undefined),
+    quitAndInstall: vi.fn(),
   },
 }));
 
 // Mock electron (dialog + basic Menu API used by MenuBuilder constructor)
-jest.mock('electron', () => {
-  const MenuItem = jest.fn().mockImplementation((opts: unknown) => opts);
+vi.mock('electron', () => {
+  const MenuItem = vi.fn().mockImplementation((opts: unknown) => opts);
   return {
-    dialog: { showMessageBox: jest.fn() },
+    dialog: { showMessageBox: vi.fn() },
     MenuItem,
-    Menu: { buildFromTemplate: jest.fn() },
-    shell: { openExternal: jest.fn() },
+    Menu: { buildFromTemplate: vi.fn() },
+    shell: { openExternal: vi.fn() },
   };
 });
 
@@ -57,17 +59,17 @@ import { autoUpdater } from 'electron-updater';
 describe('main/updater.ts', () => {
   let menubar: Menubar;
   class TestMenuBuilder extends MenuBuilder {
-    public setCheckForUpdatesMenuEnabled = jest.fn();
-    public setNoUpdateAvailableMenuVisibility = jest.fn();
-    public setUpdateAvailableMenuVisibility = jest.fn();
-    public setUpdateReadyForInstallMenuVisibility = jest.fn();
+    public setCheckForUpdatesMenuEnabled = vi.fn();
+    public setNoUpdateAvailableMenuVisibility = vi.fn();
+    public setUpdateAvailableMenuVisibility = vi.fn();
+    public setUpdateReadyForInstallMenuVisibility = vi.fn();
   }
 
   let menuBuilder: TestMenuBuilder;
   let updater: AppUpdater;
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     for (const k of Object.keys(listeners)) {
       delete listeners[k];
     }
@@ -76,9 +78,9 @@ describe('main/updater.ts', () => {
       app: {
         isPackaged: true,
         // updater.initialize is now only called after app is ready externally
-        on: jest.fn(),
+        on: vi.fn(),
       },
-      tray: { setToolTip: jest.fn() },
+      tray: { setToolTip: vi.fn() },
     } as unknown as Menubar;
 
     menuBuilder = new TestMenuBuilder(menubar);
@@ -87,7 +89,7 @@ describe('main/updater.ts', () => {
 
   describe('update available dialog', () => {
     it('shows dialog with expected message and does NOT install when user chooses Later', async () => {
-      (dialog.showMessageBox as jest.Mock).mockResolvedValue({ response: 1 }); // "Later"
+      (dialog.showMessageBox as vi.Mock).mockResolvedValue({ response: 1 }); // "Later"
 
       await updater.start();
 
@@ -114,7 +116,7 @@ describe('main/updater.ts', () => {
     });
 
     it('invokes quitAndInstall when user clicks Restart', async () => {
-      (dialog.showMessageBox as jest.Mock).mockResolvedValue({ response: 0 }); // "Restart"
+      (dialog.showMessageBox as vi.Mock).mockResolvedValue({ response: 0 }); // "Restart"
 
       await updater.start();
       emit('update-downloaded', { releaseName: 'v9.9.9' });
@@ -206,7 +208,7 @@ describe('main/updater.ts', () => {
 
     it('performs initial check and schedules periodic checks', async () => {
       const originalSetInterval = global.setInterval;
-      const setIntervalSpy = jest
+      const setIntervalSpy = vi
         .spyOn(global, 'setInterval')
         .mockImplementation(((fn: () => void) => {
           fn();
@@ -216,7 +218,7 @@ describe('main/updater.ts', () => {
         await updater.start();
         // initial + immediate scheduled invocation
         expect(
-          (autoUpdater.checkForUpdatesAndNotify as jest.Mock).mock.calls.length,
+          (autoUpdater.checkForUpdatesAndNotify as vi.Mock).mock.calls.length,
         ).toBe(2);
         expect(setIntervalSpy).toHaveBeenCalledWith(
           expect.any(Function),

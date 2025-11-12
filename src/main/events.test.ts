@@ -1,9 +1,11 @@
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+
 import { EVENTS } from '../shared/events';
 
-const onMock = jest.fn();
-const handleMock = jest.fn();
+const onMock = vi.fn();
+const handleMock = vi.fn();
 
-jest.mock('electron', () => ({
+vi.mock('electron', () => ({
   ipcMain: {
     on: (...args: unknown[]) => onMock(...args),
     handle: (...args: unknown[]) => handleMock(...args),
@@ -14,15 +16,17 @@ import type { Menubar } from 'menubar';
 
 import { handleMainEvent, onMainEvent, sendRendererEvent } from './events';
 
-type MockMenubar = { window: { webContents: { send: jest.Mock } } };
+type MockMenubar = {
+  window: { webContents: { send: ReturnType<typeof vi.fn> } };
+};
 
 describe('main/events', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('onMainEvent registers ipcMain.on listener', () => {
-    const listener = jest.fn();
+    const listener = vi.fn();
     onMainEvent(
       EVENTS.WINDOW_SHOW,
       listener as unknown as (e: Electron.IpcMainEvent, d: unknown) => void,
@@ -31,7 +35,7 @@ describe('main/events', () => {
   });
 
   it('handleMainEvent registers ipcMain.handle listener', () => {
-    const listener = jest.fn();
+    const listener = vi.fn();
     handleMainEvent(
       EVENTS.VERSION,
       listener as unknown as (
@@ -43,14 +47,14 @@ describe('main/events', () => {
   });
 
   it('sendRendererEvent forwards event to webContents with data', () => {
-    const send = jest.fn();
+    const send = vi.fn();
     const mb: MockMenubar = { window: { webContents: { send } } };
     sendRendererEvent(mb as unknown as Menubar, EVENTS.UPDATE_TITLE, 'title');
     expect(send).toHaveBeenCalledWith(EVENTS.UPDATE_TITLE, 'title');
   });
 
   it('sendRendererEvent forwards event without data', () => {
-    const send = jest.fn();
+    const send = vi.fn();
     const mb: MockMenubar = { window: { webContents: { send } } };
     sendRendererEvent(mb as unknown as Menubar, EVENTS.RESET_APP);
     expect(send).toHaveBeenCalledWith(EVENTS.RESET_APP, undefined);

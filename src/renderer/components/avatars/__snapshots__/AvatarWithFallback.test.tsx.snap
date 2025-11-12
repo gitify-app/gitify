@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/components/avatars/AvatarWithFallback.tsx renders the fallback icon when no src url - human user 1`] = `
+exports[`renderer/components/avatars/AvatarWithFallback.tsx > renders the fallback icon when no src url - human user 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -133,7 +133,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx renders the fallback
 }
 `;
 
-exports[`renderer/components/avatars/AvatarWithFallback.tsx renders the fallback icon when no src url - non human user 1`] = `
+exports[`renderer/components/avatars/AvatarWithFallback.tsx > renders the fallback icon when no src url - non human user 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -266,7 +266,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx renders the fallback
 }
 `;
 
-exports[`renderer/components/avatars/AvatarWithFallback.tsx renders the fallback icon when the image fails to load (isBroken = true) - human user 1`] = `
+exports[`renderer/components/avatars/AvatarWithFallback.tsx > renders the fallback icon when the image fails to load (isBroken = true) - human user 1`] = `
 <div
   class="prc-Stack-Stack-WJVsK"
   data-align="center"
@@ -304,7 +304,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx renders the fallback
 </div>
 `;
 
-exports[`renderer/components/avatars/AvatarWithFallback.tsx renders the fallback icon when the image fails to load (isBroken = true) - non human user 1`] = `
+exports[`renderer/components/avatars/AvatarWithFallback.tsx > renders the fallback icon when the image fails to load (isBroken = true) - non human user 1`] = `
 <div
   class="prc-Stack-Stack-WJVsK"
   data-align="center"
@@ -342,7 +342,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx renders the fallback
 </div>
 `;
 
-exports[`renderer/components/avatars/AvatarWithFallback.tsx should render avatar - human user 1`] = `
+exports[`renderer/components/avatars/AvatarWithFallback.tsx > should render avatar - human user 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -461,7 +461,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx should render avatar
 }
 `;
 
-exports[`renderer/components/avatars/AvatarWithFallback.tsx should render avatar - non-human user 1`] = `
+exports[`renderer/components/avatars/AvatarWithFallback.tsx > should render avatar - non-human user 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>

@@ -1,6 +1,8 @@
 import { act, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+
 import {
   mockGitHubCloudAccount,
   mockSettings,
@@ -12,7 +14,7 @@ import { mockGitHubNotifications } from '../../utils/api/__mocks__/response-mock
 import * as links from '../../utils/links';
 import { AccountNotifications } from './AccountNotifications';
 
-jest.mock('./RepositoryNotifications', () => ({
+vi.mock('./RepositoryNotifications', () => ({
   RepositoryNotifications: () => <div>Repository Notifications</div>,
 }));
 
@@ -106,7 +108,7 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
   });
 
   it('should open profile when clicked', async () => {
-    const openAccountProfileMock = jest
+    const openAccountProfileMock = vi
       .spyOn(links, 'openAccountProfile')
       .mockImplementation();
 
@@ -130,7 +132,7 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
   });
 
   it('should open my issues when clicked', async () => {
-    const openMyIssuesMock = jest
+    const openMyIssuesMock = vi
       .spyOn(links, 'openGitHubIssues')
       .mockImplementation();
 
@@ -156,7 +158,7 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
   });
 
   it('should open my pull requests when clicked', async () => {
-    const openPullRequestsMock = jest
+    const openPullRequestsMock = vi
       .spyOn(links, 'openGitHubPulls')
       .mockImplementation();
 

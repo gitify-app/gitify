@@ -1,3 +1,5 @@
+import { describe, expect, it } from 'vitest';
+
 import { partialMockNotification } from '../../../__mocks__/partial-mocks';
 import type { SubjectType } from '../../../typesGitHub';
 import { checkSuiteHandler } from './checkSuite';

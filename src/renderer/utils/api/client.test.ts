@@ -1,4 +1,5 @@
 import axios, { type AxiosPromise, type AxiosResponse } from 'axios';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import {
   mockGitHubCloudAccount,
@@ -18,7 +19,9 @@ import {
 } from './client';
 import * as apiRequests from './request';
 
-jest.mock('axios');
+vi.mock('axios', () => ({
+  default: vi.fn(),
+}));
 
 const mockGitHubHostname = 'github.com' as Hostname;
 const mockEnterpriseHostname = 'example.com' as Hostname;
@@ -26,7 +29,7 @@ const mockThreadId = '1234';
 
 describe('renderer/utils/api/client.ts', () => {
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   describe('getAuthenticatedUser', () => {
@@ -298,7 +301,7 @@ describe('renderer/utils/api/client.ts', () => {
 
   describe('getHtmlUrl', () => {
     it('should return the HTML URL', async () => {
-      const apiRequestAuthMock = jest.spyOn(apiRequests, 'apiRequestAuth');
+      const apiRequestAuthMock = vi.spyOn(apiRequests, 'apiRequestAuth');
 
       const requestPromise = new Promise((resolve) =>
         resolve({
@@ -325,7 +328,7 @@ describe('renderer/utils/api/client.ts', () => {
         .spyOn(logger, 'rendererLogError')
         .mockImplementation();
 
-      const apiRequestAuthMock = jest.spyOn(apiRequests, 'apiRequestAuth');
+      const apiRequestAuthMock = vi.spyOn(apiRequests, 'apiRequestAuth');
 
       const mockError = new Error('Test error');
 

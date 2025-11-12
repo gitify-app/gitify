@@ -1,5 +1,7 @@
 import { render } from '@testing-library/react';
 
+import { describe, expect, it } from 'vitest';
+
 import { HoverGroup } from './HoverGroup';
 
 describe('renderer/components/primitives/HoverGroup.tsx', () => {

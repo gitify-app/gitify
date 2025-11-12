@@ -1,6 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+import { afterEach, describe, expect, it, vi } from 'vitest';
+
 import {
   mockAuth,
   mockGitHubCloudAccount,
@@ -14,11 +16,11 @@ import * as links from '../../utils/links';
 import { NotificationRow } from './NotificationRow';
 
 describe('renderer/components/notifications/NotificationRow.tsx', () => {
-  jest.spyOn(links, 'openNotification');
-  jest.spyOn(comms, 'openExternalLink').mockImplementation();
+  vi.spyOn(links, 'openNotification');
+  vi.spyOn(comms, 'openExternalLink').mockImplementation();
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should render itself & its children - group by date', async () => {
@@ -86,7 +88,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
 
   describe('notification interactions', () => {
     it('should open a notification in the browser - click', async () => {
-      const markNotificationsAsRead = jest.fn();
+      const markNotificationsAsRead = vi.fn();
 
       const props = {
         notification: mockSingleNotification,
@@ -112,7 +114,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
     });
 
     it('should open a notification in the browser - delay notification setting enabled', async () => {
-      const markNotificationsAsRead = jest.fn();
+      const markNotificationsAsRead = vi.fn();
 
       const props = {
         notification: mockSingleNotification,
@@ -142,7 +144,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
     });
 
     it('should open a notification in browser & mark it as done', async () => {
-      const markNotificationsAsDone = jest.fn();
+      const markNotificationsAsDone = vi.fn();
 
       const props = {
         notification: mockSingleNotification,
@@ -168,7 +170,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
     });
 
     it('should mark notifications as read', async () => {
-      const markNotificationsAsRead = jest.fn();
+      const markNotificationsAsRead = vi.fn();
 
       const props = {
         notification: mockSingleNotification,
@@ -192,7 +194,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
     });
 
     it('should mark notifications as done', async () => {
-      const markNotificationsAsDone = jest.fn();
+      const markNotificationsAsDone = vi.fn();
 
       const props = {
         notification: mockSingleNotification,
@@ -213,7 +215,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
     });
 
     it('should unsubscribe from a notification thread', async () => {
-      const unsubscribeNotification = jest.fn();
+      const unsubscribeNotification = vi.fn();
 
       const props = {
         notification: mockSingleNotification,

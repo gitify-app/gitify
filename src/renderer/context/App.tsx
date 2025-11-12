@@ -106,7 +106,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     restoreSettings();
-  }, []);
+  }, [restoreSettings]);
 
   useEffect(() => {
     const colorMode = mapThemeModeToColorMode(settings.theme);
@@ -258,7 +258,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       setAuth(updatedAuth);
       saveState({ auth: updatedAuth, settings });
     },
-    [auth, settings],
+    [auth, settings, removeAccountNotifications],
   );
 
   const restoreSettings = useCallback(async () => {

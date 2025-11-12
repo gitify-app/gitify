@@ -1,14 +1,16 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 
+import { afterEach, describe, expect, it, vi } from 'vitest';
+
 import { mockSettings } from '../../__mocks__/state-mocks';
 import { AppContext } from '../../context/App';
 import { SearchFilter } from './SearchFilter';
 
-const updateFilter = jest.fn();
+const updateFilter = vi.fn();
 
 describe('renderer/components/filters/SearchFilter.tsx', () => {
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   describe('Include Search Tokens', () => {

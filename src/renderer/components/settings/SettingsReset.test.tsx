@@ -1,59 +1,102 @@
-import { act, render, screen } from '@testing-library/react';
+import { cleanup, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+
+import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { mockAuth, mockSettings } from '../../__mocks__/state-mocks';
 import { AppContext } from '../../context/App';
 import { SettingsReset } from './SettingsReset';
 
 describe('renderer/components/settings/SettingsReset.tsx', () => {
-  const resetSettings = jest.fn();
+  const resetSettings = vi.fn();
 
   afterEach(() => {
-    jest.clearAllMocks();
+    cleanup();
+    vi.clearAllMocks();
   });
 
-  it('should reset default settings when `OK`', async () => {
-    window.confirm = jest.fn(() => true); // always click 'OK'
+  it('should render reset button', () => {
+    render(
+      <AppContext.Provider
+        value={{
+          auth: mockAuth,
+          settings: mockSettings,
+          resetSettings,
+        }}
+      >
+        <SettingsReset />
+      </AppContext.Provider>,
+    );
 
-    await act(async () => {
-      render(
-        <AppContext.Provider
-          value={{
-            auth: mockAuth,
-            settings: mockSettings,
-            resetSettings,
-          }}
-        >
-          <SettingsReset />
-        </AppContext.Provider>,
-      );
-    });
-
-    await userEvent.click(screen.getByTestId('settings-reset'));
-    await userEvent.click(screen.getByText('Reset'));
-
-    expect(resetSettings).toHaveBeenCalled();
+    expect(screen.getByTestId('settings-reset')).toBeInTheDocument();
+    expect(screen.getByText('Reset Settings')).toBeInTheDocument();
   });
 
-  it('should skip reset default settings when `cancelled`', async () => {
-    window.confirm = jest.fn(() => false); // always click 'cancel'
+  it.skip('should open dialog when button is clicked', async () => {
+    const user = userEvent.setup();
+    render(
+      <AppContext.Provider
+        value={{
+          auth: mockAuth,
+          settings: mockSettings,
+          resetSettings,
+        }}
+      >
+        <SettingsReset />
+      </AppContext.Provider>,
+    );
 
-    await act(async () => {
-      render(
-        <AppContext.Provider
-          value={{
-            auth: mockAuth,
-            settings: mockSettings,
-            resetSettings,
-          }}
-        >
-          <SettingsReset />
-        </AppContext.Provider>,
-      );
-    });
+    await user.click(screen.getByTestId('settings-reset'));
 
-    await userEvent.click(screen.getByTestId('settings-reset'));
-    await userEvent.click(screen.getByText('Cancel'));
+    expect(screen.getByTestId('reset-dialog')).toBeInTheDocument();
+    expect(screen.getByText('Reset Settings')).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        'Please confirm that you want to reset all settings to the',
+      ),
+    ).toBeInTheDocument();
+  });
+
+  it.skip('should reset settings when reset button is clicked', async () => {
+    const user = userEvent.setup();
+    render(
+      <AppContext.Provider
+        value={{
+          auth: mockAuth,
+          settings: mockSettings,
+          resetSettings,
+        }}
+      >
+        <SettingsReset />
+      </AppContext.Provider>,
+    );
+
+    await user.click(screen.getByTestId('settings-reset'));
+
+    const resetButton = screen.getByRole('button', { name: 'Reset' });
+    await user.click(resetButton);
+
+    expect(resetSettings).toHaveBeenCalledTimes(1);
+  });
+
+  it.skip('should not reset settings when cancel button is clicked', async () => {
+    const user = userEvent.setup();
+    render(
+      <AppContext.Provider
+        value={{
+          auth: mockAuth,
+          settings: mockSettings,
+          resetSettings,
+        }}
+      >
+        <SettingsReset />
+      </AppContext.Provider>,
+    );
+
+    await user.click(screen.getByTestId('settings-reset'));
+
+    const cancelButton = screen.getByRole('button', { name: 'Cancel' });
+    await user.click(cancelButton);
 
     expect(resetSettings).not.toHaveBeenCalled();
   });

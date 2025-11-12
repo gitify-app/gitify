@@ -1,27 +1,29 @@
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+
 import { EVENTS } from '../shared/events';
 
 // Mocks shared modules used inside preload
-const sendMainEvent = jest.fn();
-const invokeMainEvent = jest.fn();
-const onRendererEvent = jest.fn();
-const logError = jest.fn();
+const sendMainEvent = vi.fn();
+const invokeMainEvent = vi.fn();
+const onRendererEvent = vi.fn();
+const logError = vi.fn();
 
-jest.mock('./utils', () => ({
+vi.mock('./utils', () => ({
   sendMainEvent: (...args: unknown[]) => sendMainEvent(...args),
   invokeMainEvent: (...args: unknown[]) => invokeMainEvent(...args),
   onRendererEvent: (...args: unknown[]) => onRendererEvent(...args),
 }));
 
-jest.mock('../shared/logger', () => ({
+vi.mock('../shared/logger', () => ({
   logError: (...args: unknown[]) => logError(...args),
 }));
 
 // We'll reconfigure the electron mock per context isolation scenario.
-const exposeInMainWorld = jest.fn();
-const getZoomLevel = jest.fn(() => 1);
-const setZoomLevel = jest.fn((_level: number) => undefined);
+const exposeInMainWorld = vi.fn();
+const getZoomLevel = vi.fn(() => 1);
+const setZoomLevel = vi.fn((_level: number) => undefined);
 
-jest.mock('electron', () => ({
+vi.mock('electron', () => ({
   contextBridge: {
     exposeInMainWorld: (key: string, value: unknown) =>
       exposeInMainWorld(key, value),
@@ -61,7 +63,7 @@ interface TestApi {
 
 describe('preload/index', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     // default to non-isolated environment for most tests
     (process as unknown as { contextIsolated?: boolean }).contextIsolated =
       false;
@@ -69,7 +71,7 @@ describe('preload/index', () => {
 
   const importPreload = async () => {
     // Ensure a fresh module instance each time
-    jest.resetModules();
+    vi.resetModules();
     return await import('./index');
   };
 
@@ -133,7 +135,7 @@ describe('preload/index', () => {
   it('onSystemThemeUpdate registers listener', async () => {
     await importPreload();
     const api = (window as unknown as { gitify: TestApi }).gitify;
-    const callback = jest.fn();
+    const callback = vi.fn();
     api.onSystemThemeUpdate(callback);
     expect(onRendererEvent).toHaveBeenCalledWith(
       EVENTS.UPDATE_THEME,
@@ -148,7 +150,7 @@ describe('preload/index', () => {
   it('raiseNativeNotification without url calls app.show', async () => {
     await importPreload();
     const api = (window as unknown as { gitify: TestApi }).gitify;
-    api.app.show = jest.fn();
+    api.app.show = vi.fn();
     const notification = api.raiseNativeNotification(
       'Title',
       'Body',
@@ -160,8 +162,8 @@ describe('preload/index', () => {
   it('raiseNativeNotification with url hides app then opens link', async () => {
     await importPreload();
     const api = (window as unknown as { gitify: TestApi }).gitify;
-    api.app.hide = jest.fn();
-    api.openExternalLink = jest.fn();
+    api.app.hide = vi.fn();
+    api.openExternalLink = vi.fn();
     const notification = api.raiseNativeNotification(
       'Title',
       'Body',

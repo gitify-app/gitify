@@ -1,6 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+import { afterEach, describe, expect, it, vi } from 'vitest';
+
 import {
   mockGitHubCloudAccount,
   mockSettings,
@@ -14,7 +16,7 @@ import { NotificationFooter } from './NotificationFooter';
 
 describe('renderer/components/notifications/NotificationFooter.tsx', () => {
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should render itself & its children', async () => {
@@ -124,7 +126,7 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
   });
 
   it('should open notification user profile', async () => {
-    const openExternalLinkMock = jest
+    const openExternalLinkMock = vi
       .spyOn(comms, 'openExternalLink')
       .mockImplementation();
 

@@ -1,19 +1,21 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+import { afterEach, describe, expect, it, vi } from 'vitest';
+
 import { AppContext } from '../context/App';
 import * as comms from '../utils/comms';
 import { LoginRoute } from './Login';
 
-const mockNavigate = jest.fn();
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
+const mockNavigate = vi.fn();
+vi.mock('react-router-dom', () => ({
+  ...vi.importActual('react-router-dom'),
   useNavigate: () => mockNavigate,
 }));
 
 describe('renderer/routes/Login.tsx', () => {
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should render itself & its children', () => {
@@ -23,7 +25,7 @@ describe('renderer/routes/Login.tsx', () => {
   });
 
   it('should redirect to notifications once logged in', () => {
-    const showWindowMock = jest.spyOn(comms, 'showWindow');
+    const showWindowMock = vi.spyOn(comms, 'showWindow');
 
     const { rerender } = render(
       <AppContext.Provider value={{ isLoggedIn: false }}>
@@ -42,7 +44,7 @@ describe('renderer/routes/Login.tsx', () => {
   });
 
   it('should login with github', async () => {
-    const mockLoginWithGitHubApp = jest.fn();
+    const mockLoginWithGitHubApp = vi.fn();
     render(
       <AppContext.Provider
         value={{

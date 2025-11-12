@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/components/fields/Tooltip.tsx should display on mouse enter / leave 1`] = `
+exports[`renderer/components/fields/Tooltip.tsx > should display on mouse enter / leave 1`] = `
 <button
   aria-label="test"
   class="relative"
@@ -36,7 +36,7 @@ exports[`renderer/components/fields/Tooltip.tsx should display on mouse enter / 
 </button>
 `;
 
-exports[`renderer/components/fields/Tooltip.tsx should display on mouse enter / leave 2`] = `
+exports[`renderer/components/fields/Tooltip.tsx > should display on mouse enter / leave 2`] = `
 <button
   aria-label="test"
   class="relative"
@@ -63,7 +63,7 @@ exports[`renderer/components/fields/Tooltip.tsx should display on mouse enter / 
 </button>
 `;
 
-exports[`renderer/components/fields/Tooltip.tsx should render 1`] = `
+exports[`renderer/components/fields/Tooltip.tsx > should render 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>

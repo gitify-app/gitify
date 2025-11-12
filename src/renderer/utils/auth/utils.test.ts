@@ -1,6 +1,7 @@
 import type { AxiosPromise, AxiosResponse } from 'axios';
 import axios from 'axios';
 import nock from 'nock';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import {
   mockAuth,
@@ -29,7 +30,7 @@ describe('renderer/utils/auth/utils.ts', () => {
       .mockImplementation();
 
     afterEach(() => {
-      jest.clearAllMocks();
+      vi.clearAllMocks();
     });
 
     it('should call authGitHub - success auth flow', async () => {
@@ -111,7 +112,7 @@ describe('renderer/utils/auth/utils.ts', () => {
 
   describe('getToken', () => {
     const authCode = '123-456' as AuthCode;
-    const apiRequestMock = jest.spyOn(apiRequests, 'apiRequest');
+    const apiRequestMock = vi.spyOn(apiRequests, 'apiRequest');
 
     it('should get a token - success', async () => {
       const requestPromise = new Promise((resolve) =>

@@ -1,6 +1,8 @@
 import { act, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+import { afterEach, describe, expect, it, vi } from 'vitest';
+
 import {
   mockGitHubCloudAccount,
   mockSettings,
@@ -11,13 +13,13 @@ import { mockGitHubNotifications } from '../../utils/api/__mocks__/response-mock
 import * as comms from '../../utils/comms';
 import { RepositoryNotifications } from './RepositoryNotifications';
 
-jest.mock('./NotificationRow', () => ({
+vi.mock('./NotificationRow', () => ({
   NotificationRow: () => <div>NotificationRow</div>,
 }));
 
 describe('renderer/components/notifications/RepositoryNotifications.tsx', () => {
-  const markNotificationsAsRead = jest.fn();
-  const markNotificationsAsDone = jest.fn();
+  const markNotificationsAsRead = vi.fn();
+  const markNotificationsAsDone = vi.fn();
 
   const props = {
     account: mockGitHubCloudAccount,
@@ -26,7 +28,7 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
   };
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should render itself & its children', () => {
@@ -40,7 +42,7 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
   });
 
   it('should open the browser when clicking on the repo name', async () => {
-    const openExternalLinkMock = jest
+    const openExternalLinkMock = vi
       .spyOn(comms, 'openExternalLink')
       .mockImplementation();
 

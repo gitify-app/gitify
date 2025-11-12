@@ -1,9 +1,11 @@
+import { afterEach, describe, expect, it, vi } from 'vitest';
+
 import type { Notification } from '../../../typesGitHub';
 import { isNonHumanUser, userTypeFilter } from './userType';
 
 describe('renderer/utils/notifications/filters/userType.ts', () => {
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('isNonHumanUser', () => {

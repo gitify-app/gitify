@@ -5,6 +5,7 @@ import {
 } from '@primer/octicons-react';
 
 import type { AxiosPromise, AxiosResponse } from 'axios';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { mockPersonalAccessTokenAccount } from '../__mocks__/state-mocks';
 import type { Hostname, Link } from '../types';
@@ -74,10 +75,10 @@ describe('renderer/utils/helpers.ts', () => {
       'https://github.com/gitify-app/notifications-test/issues/785';
     const mockNotificationReferrer =
       'notification_referrer_id=MDE4Ok5vdGlmaWNhdGlvblRocmVhZDEzODY2MTA5NjoxMjM0NTY3ODk%3D';
-    const apiRequestAuthMock = jest.spyOn(apiRequests, 'apiRequestAuth');
+    const apiRequestAuthMock = vi.spyOn(apiRequests, 'apiRequestAuth');
 
     afterEach(() => {
-      jest.clearAllMocks();
+      vi.clearAllMocks();
     });
 
     it('Subject Latest Comment Url: when not null, fetch latest comment html url', async () => {
@@ -483,7 +484,7 @@ describe('renderer/utils/helpers.ts', () => {
       });
 
       it('defaults when exception handled during specialized html enrichment process', async () => {
-        const rendererLogErrorSpy = jest
+        const rendererLogErrorSpy = vi
           .spyOn(logger, 'rendererLogError')
           .mockImplementation();
 

@@ -1,3 +1,5 @@
+import { afterEach, describe, expect, it, vi } from 'vitest';
+
 import { partialMockUser } from '../__mocks__/partial-mocks';
 import { mockGitHubCloudAccount } from '../__mocks__/state-mocks';
 import { Constants } from '../constants';
@@ -22,12 +24,12 @@ import {
 } from './links';
 
 describe('renderer/utils/links.ts', () => {
-  const openExternalLinkMock = jest
+  const openExternalLinkMock = vi
     .spyOn(comms, 'openExternalLink')
     .mockImplementation();
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('openGitifyReleaseNotes', () => {

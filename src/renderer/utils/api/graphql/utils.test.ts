@@ -1,3 +1,5 @@
+import { describe, expect } from 'vitest';
+
 import { formatAsGitHubSearchSyntax } from './utils';
 
 describe('renderer/utils/api/graphql/utils.ts', () => {
