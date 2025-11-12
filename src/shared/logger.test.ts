@@ -1,11 +1,10 @@
-import log from 'electron-log';
-
 import { logError, logInfo, logWarn } from './logger';
 
 describe('shared/logger.ts', () => {
-  const logInfoSpy = jest.spyOn(log, 'info').mockImplementation();
-  const logWarnSpy = jest.spyOn(log, 'warn').mockImplementation();
-  const logErrorSpy = jest.spyOn(log, 'error').mockImplementation();
+  // In test environment, the logger uses console instead of electron-log
+  const logInfoSpy = jest.spyOn(console, 'info').mockImplementation();
+  const logWarnSpy = jest.spyOn(console, 'warn').mockImplementation();
+  const logErrorSpy = jest.spyOn(console, 'error').mockImplementation();
 
   const mockError = new Error('baz');
 
