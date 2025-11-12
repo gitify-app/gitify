@@ -2,6 +2,7 @@ import { act, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import {
+  mockAuth,
   mockGitHubCloudAccount,
   mockSettings,
 } from '../../__mocks__/state-mocks';
@@ -80,7 +81,7 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('should render itself - account error', async () => {
+  it('should render itself - account error for single account', async () => {
     const props = {
       account: mockGitHubCloudAccount,
       notifications: [],
@@ -96,7 +97,37 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
 
     await act(async () => {
       tree = render(
-        <AppContext.Provider value={{ settings: mockSettings }}>
+        <AppContext.Provider
+          value={{
+            auth: { accounts: [mockGitHubCloudAccount] },
+            settings: mockSettings,
+          }}
+        >
+          <AccountNotifications {...props} />
+        </AppContext.Provider>,
+      );
+    });
+
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('should render itself - account error for multiple accounts', async () => {
+    const props = {
+      account: mockGitHubCloudAccount,
+      notifications: [],
+      error: {
+        title: 'Error title',
+        descriptions: ['Error description'],
+        emojis: ['🔥'],
+      },
+      showAccountHeader: true,
+    };
+
+    let tree: ReturnType<typeof render> | null = null;
+
+    await act(async () => {
+      tree = render(
+        <AppContext.Provider value={{ auth: mockAuth, settings: mockSettings }}>
           <AccountNotifications {...props} />
         </AppContext.Provider>,
       );
