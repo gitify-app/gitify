@@ -67,7 +67,7 @@ export const Sidebar: FC = () => {
 
   return (
     <Stack
-      className="fixed left-sidebar -ml-sidebar w-sidebar h-full bg-gitify-sidebar [&_svg]:text-white"
+      className="fixed w-sidebar h-full bg-gitify-sidebar [&_svg]:text-white"
       direction="vertical"
       justify="space-between"
     >
