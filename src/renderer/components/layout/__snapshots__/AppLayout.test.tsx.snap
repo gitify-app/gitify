@@ -6,7 +6,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
   "baseElement": <body>
     <div>
       <div
-        class="flex min-h-screen bg-gitify-background"
+        class="flex flex-col min-h-screen bg-gitify-background"
       >
         <button
           aria-label="initial focus"
@@ -277,7 +277,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
   </body>,
   "container": <div>
     <div
-      class="flex min-h-screen bg-gitify-background"
+      class="flex flex-col min-h-screen bg-gitify-background"
     >
       <button
         aria-label="initial focus"

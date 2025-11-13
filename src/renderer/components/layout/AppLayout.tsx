@@ -18,7 +18,7 @@ export const AppLayout: FC<AppLayoutProps> = ({ children }) => {
   };
 
   return (
-    <div className="flex min-h-screen bg-gitify-background">
+    <div className="flex flex-col min-h-screen bg-gitify-background">
       {/* Hidden focus sentinel; grabs initial focus via callback ref */}
       <button
         aria-label="initial focus"
