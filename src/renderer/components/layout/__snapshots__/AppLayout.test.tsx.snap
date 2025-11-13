@@ -8,11 +8,13 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
       <div
         class="flex flex-col min-h-screen bg-gitify-background"
       >
-        <div
-          class="flex-1 pl-sidebar"
-        >
-          Test
-        </div>
+        <button
+          aria-label="initial focus"
+          class="sr-only focus-visible"
+          data-focus-visible-added=""
+          data-testid="initial-focus-sentinel"
+          type="button"
+        />
         <div
           class="fixed left-sidebar -ml-sidebar w-sidebar h-full bg-gitify-sidebar [&_svg]:text-white prc-Stack-Stack-WJVsK"
           data-align="stretch"
@@ -265,6 +267,11 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
             </span>
           </div>
         </div>
+        <div
+          class="flex-1 pl-sidebar"
+        >
+          Test
+        </div>
       </div>
     </div>
   </body>,
@@ -272,11 +279,13 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
     <div
       class="flex flex-col min-h-screen bg-gitify-background"
     >
-      <div
-        class="flex-1 pl-sidebar"
-      >
-        Test
-      </div>
+      <button
+        aria-label="initial focus"
+        class="sr-only focus-visible"
+        data-focus-visible-added=""
+        data-testid="initial-focus-sentinel"
+        type="button"
+      />
       <div
         class="fixed left-sidebar -ml-sidebar w-sidebar h-full bg-gitify-sidebar [&_svg]:text-white prc-Stack-Stack-WJVsK"
         data-align="stretch"
@@ -528,6 +537,11 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
             Quit Gitify
           </span>
         </div>
+      </div>
+      <div
+        class="flex-1 pl-sidebar"
+      >
+        Test
       </div>
     </div>
   </div>,
