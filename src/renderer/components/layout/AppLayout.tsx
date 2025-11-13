@@ -13,9 +13,10 @@ interface IAppLayout {
 export const AppLayout: FC<IAppLayout> = ({ children }) => {
   return (
     <div className="flex flex-col min-h-screen bg-gitify-background">
-      <Sidebar />
-      {/* Content area with left padding to make space for the sidebar */}
+      {/* Content first in DOM so initial focus won't land on sidebar buttons */}
       <div className="flex-1 pl-sidebar">{children}</div>
+
+      <Sidebar />
     </div>
   );
 };
