@@ -1,9 +1,9 @@
 import { render } from '@testing-library/react';
 
-import { type IRadioGroup, RadioGroup } from './RadioGroup';
+import { RadioGroup, type RadioGroupProps } from './RadioGroup';
 
 describe('renderer/components/fields/RadioGroup.tsx', () => {
-  const props: IRadioGroup = {
+  const props: RadioGroupProps = {
     label: 'Appearance',
     name: 'appearance',
     options: [

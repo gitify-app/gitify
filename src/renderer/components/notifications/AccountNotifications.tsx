@@ -26,15 +26,15 @@ import { HoverGroup } from '../primitives/HoverGroup';
 import { NotificationRow } from './NotificationRow';
 import { RepositoryNotifications } from './RepositoryNotifications';
 
-interface IAccountNotifications {
+interface AccountNotificationsProps {
   account: Account;
   notifications: Notification[];
   error: GitifyError | null;
   showAccountHeader: boolean;
 }
 
-export const AccountNotifications: FC<IAccountNotifications> = (
-  props: IAccountNotifications,
+export const AccountNotifications: FC<AccountNotificationsProps> = (
+  props: AccountNotificationsProps,
 ) => {
   const { account, showAccountHeader, notifications } = props;
 

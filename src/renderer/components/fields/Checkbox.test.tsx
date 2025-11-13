@@ -1,9 +1,9 @@
 import { render } from '@testing-library/react';
 
-import { Checkbox, type ICheckbox } from './Checkbox';
+import { Checkbox, type CheckboxProps } from './Checkbox';
 
 describe('renderer/components/fields/Checkbox.tsx', () => {
-  const props: ICheckbox = {
+  const props: CheckboxProps = {
     name: 'appearance',
     label: 'Appearance',
     checked: true,

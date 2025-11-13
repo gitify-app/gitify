@@ -5,18 +5,18 @@ import { Stack } from '@primer/react';
 import { EmojiText } from '../primitives/EmojiText';
 import { Centered } from './Centered';
 
-interface IEmojiSplash {
+interface EmojiSplashProps {
   emoji: string;
   heading: string;
   subHeadings?: string[];
   fullHeight?: boolean;
 }
 
-export const EmojiSplash: FC<IEmojiSplash> = ({
+export const EmojiSplash: FC<EmojiSplashProps> = ({
   fullHeight = true,
   subHeadings = [],
   ...props
-}: IEmojiSplash) => {
+}: EmojiSplashProps) => {
   return (
     <Centered fullHeight={fullHeight}>
       <Stack

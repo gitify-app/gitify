@@ -5,14 +5,14 @@ import { Heading, Stack } from '@primer/react';
 
 import { Tooltip } from '../fields/Tooltip';
 
-interface ITitle {
+interface TitleProps {
   icon: Icon;
   children: string;
   size?: number;
   tooltip?: ReactNode;
 }
 
-export const Title: FC<ITitle> = ({ size = 2, ...props }) => {
+export const Title: FC<TitleProps> = ({ size = 2, ...props }) => {
   const name = props.children.toLowerCase().replaceAll(' ', '-');
 
   return (

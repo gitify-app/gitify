@@ -6,7 +6,7 @@ import { cn } from '../../utils/cn';
 
 type CounterScheme = 'primary' | 'secondary' | 'empty';
 
-interface ICustomCounter {
+interface CustomCounterProps {
   value: string | number;
   scheme?: CounterScheme;
 }
@@ -19,7 +19,7 @@ interface ICustomCounter {
  * - would show screen vertical scrollbar which is undesirable.
  * - would not render '0' within a counter.
  */
-export const CustomCounter: FC<ICustomCounter> = ({
+export const CustomCounter: FC<CustomCounterProps> = ({
   value,
   scheme = 'secondary',
 }) => {

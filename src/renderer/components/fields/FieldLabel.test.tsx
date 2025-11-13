@@ -1,9 +1,9 @@
 import { render } from '@testing-library/react';
 
-import { FieldLabel, type IFieldLabel } from './FieldLabel';
+import { FieldLabel, type FieldLabelProps } from './FieldLabel';
 
 describe('renderer/components/fields/FieldLabel.tsx', () => {
-  const props: IFieldLabel = {
+  const props: FieldLabelProps = {
     name: 'appearance',
     label: 'Appearance',
   };

@@ -5,12 +5,12 @@ import { AnchoredOverlay } from '@primer/react';
 
 import { cn } from '../../utils/cn';
 
-export interface ITooltip {
+export interface TooltipProps {
   name: string;
   tooltip: ReactNode | string;
 }
 
-export const Tooltip: FC<ITooltip> = (props: ITooltip) => {
+export const Tooltip: FC<TooltipProps> = (props: TooltipProps) => {
   const [showTooltip, setShowTooltip] = useState(false);
 
   return (

@@ -10,7 +10,7 @@ import { Checkbox } from '../fields/Checkbox';
 import { Title } from '../primitives/Title';
 import { RequiresDetailedNotificationWarning } from './RequiresDetailedNotificationsWarning';
 
-export interface IFilterSection<T extends FilterValue> {
+export interface FilterSectionProps<T extends FilterValue> {
   id: string;
   title: string;
   icon: Icon;
@@ -28,7 +28,7 @@ export const FilterSection = <T extends FilterValue>({
   filterSetting,
   tooltip,
   layout = 'vertical',
-}: IFilterSection<T>) => {
+}: FilterSectionProps<T>) => {
   const { updateFilter, settings, notifications } = useContext(AppContext);
 
   return (

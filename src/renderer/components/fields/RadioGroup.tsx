@@ -6,7 +6,7 @@ import type { RadioGroupItem } from '../../types';
 import { FieldLabel } from './FieldLabel';
 import { Tooltip } from './Tooltip';
 
-export interface IRadioGroup {
+export interface RadioGroupProps {
   name: string;
   label: string;
   options: RadioGroupItem[];
@@ -15,7 +15,7 @@ export interface IRadioGroup {
   tooltip?: ReactNode | string;
 }
 
-export const RadioGroup: FC<IRadioGroup> = (props: IRadioGroup) => {
+export const RadioGroup: FC<RadioGroupProps> = (props: RadioGroupProps) => {
   return (
     <Stack
       align="center"

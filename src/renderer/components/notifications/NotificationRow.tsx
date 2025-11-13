@@ -15,15 +15,15 @@ import { HoverGroup } from '../primitives/HoverGroup';
 import { NotificationFooter } from './NotificationFooter';
 import { NotificationHeader } from './NotificationHeader';
 
-interface INotificationRow {
+interface NotificationRowProps {
   notification: Notification;
   isAnimated?: boolean;
 }
 
-export const NotificationRow: FC<INotificationRow> = ({
+export const NotificationRow: FC<NotificationRowProps> = ({
   notification,
   isAnimated = false,
-}: INotificationRow) => {
+}: NotificationRowProps) => {
   const {
     settings,
     markNotificationsAsRead,
