@@ -2,7 +2,7 @@ import type { FC, ReactNode } from 'react';
 
 interface IPage {
   children: ReactNode;
-  testId?: string;
+  testId: string;
 }
 
 /**

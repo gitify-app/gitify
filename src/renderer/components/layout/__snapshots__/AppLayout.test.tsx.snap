@@ -6,7 +6,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
   "baseElement": <body>
     <div>
       <div
-        class="flex flex-col min-h-screen bg-gitify-background"
+        class="flex min-h-screen bg-gitify-background"
       >
         <button
           aria-label="initial focus"
@@ -16,7 +16,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
           type="button"
         />
         <div
-          class="fixed left-sidebar -ml-sidebar w-sidebar h-full bg-gitify-sidebar [&_svg]:text-white prc-Stack-Stack-WJVsK"
+          class="fixed w-sidebar h-full bg-gitify-sidebar [&_svg]:text-white prc-Stack-Stack-WJVsK"
           data-align="stretch"
           data-direction="vertical"
           data-justify="space-between"
@@ -277,7 +277,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
   </body>,
   "container": <div>
     <div
-      class="flex flex-col min-h-screen bg-gitify-background"
+      class="flex min-h-screen bg-gitify-background"
     >
       <button
         aria-label="initial focus"
@@ -287,7 +287,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
         type="button"
       />
       <div
-        class="fixed left-sidebar -ml-sidebar w-sidebar h-full bg-gitify-sidebar [&_svg]:text-white prc-Stack-Stack-WJVsK"
+        class="fixed w-sidebar h-full bg-gitify-sidebar [&_svg]:text-white prc-Stack-Stack-WJVsK"
         data-align="stretch"
         data-direction="vertical"
         data-justify="space-between"
