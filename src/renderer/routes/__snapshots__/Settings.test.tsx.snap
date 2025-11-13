@@ -1984,7 +1984,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
         <span
           aria-hidden="true"
           class="prc-TooltipV2-Tooltip-cYMVY"
-          data-direction="n"
+          data-direction="ne"
           id="_r_11_"
           popover="auto"
           role="tooltip"
