@@ -22,9 +22,9 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
           data-wrap="nowrap"
         >
           <svg
+            aria-hidden="true"
             aria-label="Gitify Logo"
             class="size-16"
-            role="img"
             viewBox="0 0 500 500"
             xmlns="https://www.w3.org/2000/svg"
             xmlns:xlink="https://www.w3.org/1999/xlink"
@@ -251,9 +251,9 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
         data-wrap="nowrap"
       >
         <svg
+          aria-hidden="true"
           aria-label="Gitify Logo"
           class="size-16"
-          role="img"
           viewBox="0 0 500 500"
           xmlns="https://www.w3.org/2000/svg"
           xmlns:xlink="https://www.w3.org/1999/xlink"
