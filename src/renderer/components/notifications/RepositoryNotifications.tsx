@@ -15,12 +15,12 @@ import { HoverButton } from '../primitives/HoverButton';
 import { HoverGroup } from '../primitives/HoverGroup';
 import { NotificationRow } from './NotificationRow';
 
-interface IRepositoryNotifications {
+interface RepositoryNotificationsProps {
   repoNotifications: Notification[];
   repoName: string;
 }
 
-export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
+export const RepositoryNotifications: FC<RepositoryNotificationsProps> = ({
   repoName,
   repoNotifications,
 }) => {

@@ -4,7 +4,7 @@ import { Stack } from '@primer/react';
 
 import { cn } from '../../utils/cn';
 
-interface IHoverGroup {
+interface HoverGroupProps {
   children: ReactNode;
   bgColor:
     | 'group-hover:bg-gitify-account-rest'
@@ -12,10 +12,10 @@ interface IHoverGroup {
     | 'group-hover:bg-gitify-notification-hover';
 }
 
-export const HoverGroup: FC<IHoverGroup> = ({
+export const HoverGroup: FC<HoverGroupProps> = ({
   bgColor,
   children,
-}: IHoverGroup) => {
+}: HoverGroupProps) => {
   return (
     <Stack
       align="center"

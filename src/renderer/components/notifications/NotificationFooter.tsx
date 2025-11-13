@@ -10,13 +10,13 @@ import { getReasonDetails } from '../../utils/reason';
 import { AvatarWithFallback } from '../avatars/AvatarWithFallback';
 import { MetricGroup } from '../metrics/MetricGroup';
 
-interface INotificationFooter {
+interface NotificationFooterProps {
   notification: Notification;
 }
 
-export const NotificationFooter: FC<INotificationFooter> = ({
+export const NotificationFooter: FC<NotificationFooterProps> = ({
   notification,
-}: INotificationFooter) => {
+}: NotificationFooterProps) => {
   const reason = getReasonDetails(notification.reason);
 
   return (

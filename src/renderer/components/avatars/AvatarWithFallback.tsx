@@ -8,7 +8,7 @@ import type { UserType } from '../../typesGitHub';
 import { getDefaultUserIcon } from '../../utils/icons';
 import { isNonHumanUser } from '../../utils/notifications/filters/userType';
 
-export interface IAvatarWithFallback {
+export interface AvatarWithFallbackProps {
   src?: Link;
   alt?: string;
   name?: string;
@@ -16,7 +16,7 @@ export interface IAvatarWithFallback {
   userType?: UserType;
 }
 
-export const AvatarWithFallback: React.FC<IAvatarWithFallback> = ({
+export const AvatarWithFallback: React.FC<AvatarWithFallbackProps> = ({
   src,
   alt,
   name,

@@ -5,7 +5,7 @@ import { APPLICATION } from '../../../shared/constants';
 import { Size } from '../../types';
 import { cn } from '../../utils/cn';
 
-interface ILogoIcon {
+interface LogoIconProps {
   isDark?: boolean;
   onClick?: () => void;
   size: Size.SMALL | Size.MEDIUM | Size.LARGE;
@@ -17,12 +17,12 @@ const LIGHT_GRADIENT_END = '#FFFFFF';
 const DARK_GRADIENT_START = '#22283B';
 const DARK_GRADIENT_END = '#555B6E';
 
-export const LogoIcon: FC<ILogoIcon> = ({
+export const LogoIcon: FC<LogoIconProps> = ({
   isDark,
   onClick,
   size = Size.SMALL,
   ...props
-}: ILogoIcon) => (
+}: LogoIconProps) => (
   <svg
     aria-hidden="true"
     aria-label={`${APPLICATION.NAME} Logo`}

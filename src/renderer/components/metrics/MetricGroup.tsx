@@ -13,13 +13,13 @@ import type { Notification } from '../../typesGitHub';
 import { getPullRequestReviewIcon } from '../../utils/icons';
 import { MetricPill } from './MetricPill';
 
-interface IMetricGroup {
+interface MetricGroupProps {
   notification: Notification;
 }
 
-export const MetricGroup: FC<IMetricGroup> = ({
+export const MetricGroup: FC<MetricGroupProps> = ({
   notification,
-}: IMetricGroup) => {
+}: MetricGroupProps) => {
   const { settings } = useContext(AppContext);
 
   const commentsPillDescription = `${notification.subject.comments} ${

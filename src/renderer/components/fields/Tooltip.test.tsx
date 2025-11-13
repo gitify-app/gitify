@@ -5,10 +5,10 @@ import { BaseStyles, ThemeProvider } from '@primer/react';
 
 import { mockSettings } from '../../__mocks__/state-mocks';
 import { AppContext } from '../../context/App';
-import { type ITooltip, Tooltip } from './Tooltip';
+import { Tooltip, type TooltipProps } from './Tooltip';
 
 describe('renderer/components/fields/Tooltip.tsx', () => {
-  const props: ITooltip = {
+  const props: TooltipProps = {
     name: 'test',
     tooltip: 'This is some tooltip text',
   };
