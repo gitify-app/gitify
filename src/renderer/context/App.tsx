@@ -189,7 +189,9 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     setUseUnreadActiveIcon(settings.useUnreadActiveIcon);
     setUseAlternateIdleIcon(settings.useAlternateIdleIcon);
-    setTrayIconColorAndTitle(unreadNotificationCount, settings);
+
+    const trayCount = status === 'error' ? -1 : unreadNotificationCount;
+    setTrayIconColorAndTitle(trayCount, settings);
   }, [
     settings.showNotificationsCountInTray,
     settings.useUnreadActiveIcon,

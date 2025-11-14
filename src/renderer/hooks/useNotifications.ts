@@ -13,7 +13,6 @@ import {
   markNotificationThreadAsDone,
   markNotificationThreadAsRead,
 } from '../utils/api/client';
-import { updateTrayColor } from '../utils/comms';
 import {
   areAllAccountErrorsSame,
   doesAllAccountsHaveErrors,
@@ -91,7 +90,6 @@ export const useNotifications = (): NotificationsState => {
         const accountError = fetchedNotifications[0].error;
         setStatus('error');
         setGlobalError(allAccountErrorsAreSame ? accountError : null);
-        updateTrayColor(-1);
         return;
       }
 
