@@ -84,6 +84,7 @@ interface AppContextState {
 
   fetchNotifications: () => Promise<void>;
   removeAccountNotifications: (account: Account) => Promise<void>;
+
   markNotificationsAsRead: (notifications: Notification[]) => Promise<void>;
   markNotificationsAsDone: (notifications: Notification[]) => Promise<void>;
   unsubscribeNotification: (notification: Notification) => Promise<void>;
@@ -379,6 +380,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
       fetchNotifications: fetchNotificationsWithAccounts,
       removeAccountNotifications,
+
       markNotificationsAsRead: markNotificationsAsReadWithAccounts,
       markNotificationsAsDone: markNotificationsAsDoneWithAccounts,
       unsubscribeNotification: unsubscribeNotificationWithAccounts,
@@ -408,6 +410,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
       fetchNotificationsWithAccounts,
       removeAccountNotifications,
+
       markNotificationsAsReadWithAccounts,
       markNotificationsAsDoneWithAccounts,
       unsubscribeNotificationWithAccounts,

@@ -64,6 +64,9 @@ describe('renderer/utils/remove.ts', () => {
     );
 
     expect(result[0].notifications.length).toBe(1);
+    expect(result[0].notifications[0]).toBe(
+      mockSingleAccountNotifications[0].notifications[0],
+    );
   });
 
   it('should not modify notifications when account UUID does not match', () => {
@@ -74,7 +77,6 @@ describe('renderer/utils/remove.ts', () => {
       mockSingleAccountNotifications,
     );
 
-    // Should return unchanged
     expect(result[0].notifications.length).toBe(1);
     expect(result[0].notifications[0]).toBe(
       mockSingleAccountNotifications[0].notifications[0],

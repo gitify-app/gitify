@@ -67,6 +67,7 @@ export function setKeyboardShortcut(keyboardShortcut: boolean): void {
 export function updateTrayColor(notificationsLength: number): void {
   window.gitify.tray.updateColor(notificationsLength);
 }
+
 /**
  * Updates the tray icon title.
  *

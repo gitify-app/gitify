@@ -31,6 +31,7 @@ interface NotificationsState {
   globalError: GitifyError;
 
   notifications: AccountNotifications[];
+
   fetchNotifications: (state: GitifyState) => Promise<void>;
   removeAccountNotifications: (account: Account) => Promise<void>;
 
@@ -225,6 +226,7 @@ export const useNotifications = (): NotificationsState => {
     globalError,
 
     notifications,
+
     fetchNotifications,
     removeAccountNotifications,
 
