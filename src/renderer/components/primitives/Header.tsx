@@ -7,13 +7,13 @@ import { IconButton, Stack } from '@primer/react';
 import { AppContext } from '../../context/App';
 import { Title } from './Title';
 
-interface IHeader {
+interface HeaderProps {
   icon: Icon;
   children: string;
   fetchOnBack?: boolean;
 }
 
-export const Header: FC<IHeader> = (props: IHeader) => {
+export const Header: FC<HeaderProps> = (props: HeaderProps) => {
   const navigate = useNavigate();
 
   const { fetchNotifications } = useContext(AppContext);

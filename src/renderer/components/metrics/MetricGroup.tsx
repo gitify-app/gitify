@@ -13,13 +13,13 @@ import type { Notification } from '../../typesGitHub';
 import { getPullRequestReviewIcon } from '../../utils/icons';
 import { MetricPill } from './MetricPill';
 
-interface IMetricGroup {
+interface MetricGroupProps {
   notification: Notification;
 }
 
-export const MetricGroup: FC<IMetricGroup> = ({
+export const MetricGroup: FC<MetricGroupProps> = ({
   notification,
-}: IMetricGroup) => {
+}: MetricGroupProps) => {
   const { settings } = useContext(AppContext);
 
   const commentsPillDescription = `${notification.subject.comments} ${
@@ -62,6 +62,7 @@ export const MetricGroup: FC<IMetricGroup> = ({
             />
           );
         })}
+
         {notification.subject?.comments > 0 && (
           <MetricPill
             color={IconColor.GRAY}
@@ -70,6 +71,7 @@ export const MetricGroup: FC<IMetricGroup> = ({
             title={commentsPillDescription}
           />
         )}
+
         {notification.subject?.labels?.length > 0 && (
           <MetricPill
             color={IconColor.GRAY}
@@ -78,6 +80,7 @@ export const MetricGroup: FC<IMetricGroup> = ({
             title={labelsPillDescription}
           />
         )}
+
         {notification.subject.milestone && (
           <MetricPill
             color={

@@ -84,6 +84,7 @@ interface AppContextState {
 
   fetchNotifications: () => Promise<void>;
   removeAccountNotifications: (account: Account) => Promise<void>;
+
   markNotificationsAsRead: (notifications: Notification[]) => Promise<void>;
   markNotificationsAsDone: (notifications: Notification[]) => Promise<void>;
   unsubscribeNotification: (notification: Notification) => Promise<void>;
@@ -184,16 +185,18 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     }
   }, Constants.REFRESH_ACCOUNTS_INTERVAL_MS);
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: We also want to update the tray on setting changes
+  // biome-ignore lint/correctness/useExhaustiveDependencies: We want to update the tray on setting or notification changes
   useEffect(() => {
     setUseUnreadActiveIcon(settings.useUnreadActiveIcon);
     setUseAlternateIdleIcon(settings.useAlternateIdleIcon);
-    setTrayIconColorAndTitle(unreadNotificationCount, settings);
+
+    const trayCount = status === 'error' ? -1 : unreadNotificationCount;
+    setTrayIconColorAndTitle(trayCount, settings);
   }, [
     settings.showNotificationsCountInTray,
     settings.useUnreadActiveIcon,
     settings.useAlternateIdleIcon,
-    unreadNotificationCount,
+    notifications,
   ]);
 
   useEffect(() => {
@@ -359,7 +362,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     [auth, settings, unsubscribeNotification],
   );
 
-  const contextValues = useMemo(
+  const contextValues: AppContextState = useMemo(
     () => ({
       auth,
       isLoggedIn,
@@ -378,6 +381,8 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       hasUnreadNotifications,
 
       fetchNotifications: fetchNotificationsWithAccounts,
+      removeAccountNotifications,
+
       markNotificationsAsRead: markNotificationsAsReadWithAccounts,
       markNotificationsAsDone: markNotificationsAsDoneWithAccounts,
       unsubscribeNotification: unsubscribeNotificationWithAccounts,
@@ -406,6 +411,8 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       hasUnreadNotifications,
 
       fetchNotificationsWithAccounts,
+      removeAccountNotifications,
+
       markNotificationsAsReadWithAccounts,
       markNotificationsAsDoneWithAccounts,
       unsubscribeNotificationWithAccounts,

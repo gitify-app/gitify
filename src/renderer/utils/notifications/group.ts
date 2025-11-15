@@ -36,11 +36,10 @@ export function groupNotificationsByRepository(
   }
 
   return repoGroups;
-}
-
-/**
- * Returns a flattened, ordered Notification[] according to repository-first-seen order
- * (when grouped) or the natural account->notification order otherwise.
+} /**
+ * Returns a flattened, ordered notifications list according to:
+ *   - repository-first-seen order (when grouped)
+ *   - natural notifications order otherwise
  */
 export function getFlattenedNotificationsByRepo(
   notifications: Notification[],

@@ -5,14 +5,14 @@ import { Label, Stack, Text } from '@primer/react';
 
 import { type IconColor, Size } from '../../types';
 
-export interface IMetricPill {
+export interface MetricPillProps {
   title: string;
   metric?: number;
   icon: Icon;
   color: IconColor;
 }
 
-export const MetricPill: FC<IMetricPill> = (props: IMetricPill) => {
+export const MetricPill: FC<MetricPillProps> = (props: MetricPillProps) => {
   const Icon = props.icon;
 
   return (

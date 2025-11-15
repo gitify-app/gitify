@@ -24,7 +24,7 @@ export const SettingsFooter: FC = () => {
   return (
     <Footer justify="space-between">
       <Stack direction="horizontal">
-        <Tooltip direction="n" text="View release notes">
+        <Tooltip direction="ne" text="View release notes">
           <Button
             data-testid="settings-release-notes"
             onClick={() => openGitifyReleaseNotes(appVersion)}

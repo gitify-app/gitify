@@ -5,11 +5,13 @@ import { AppContext } from '../context/App';
 import { hasActiveFilters } from '../utils/notifications/filters/filter';
 import { EmojiSplash } from './layout/EmojiSplash';
 
-interface IAllRead {
+interface AllReadProps {
   fullHeight?: boolean;
 }
 
-export const AllRead: FC<IAllRead> = ({ fullHeight = true }: IAllRead) => {
+export const AllRead: FC<AllReadProps> = ({
+  fullHeight = true,
+}: AllReadProps) => {
   const { settings } = useContext(AppContext);
 
   const hasFilters = hasActiveFilters(settings);

@@ -3,11 +3,11 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { type Link, Size } from '../../types';
 import {
   AvatarWithFallback,
-  type IAvatarWithFallback,
+  type AvatarWithFallbackProps,
 } from './AvatarWithFallback';
 
 describe('renderer/components/avatars/AvatarWithFallback.tsx', () => {
-  const props: IAvatarWithFallback = {
+  const props: AvatarWithFallbackProps = {
     src: 'https://avatars.githubusercontent.com/u/133795385?s=200&v=4' as Link,
     alt: 'gitify-app',
     name: '@gitify-app',

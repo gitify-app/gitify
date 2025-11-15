@@ -15,15 +15,15 @@ import { HoverGroup } from '../primitives/HoverGroup';
 import { NotificationFooter } from './NotificationFooter';
 import { NotificationHeader } from './NotificationHeader';
 
-interface INotificationRow {
+interface NotificationRowProps {
   notification: Notification;
   isAnimated?: boolean;
 }
 
-export const NotificationRow: FC<INotificationRow> = ({
+export const NotificationRow: FC<NotificationRowProps> = ({
   notification,
   isAnimated = false,
-}: INotificationRow) => {
+}: NotificationRowProps) => {
   const {
     settings,
     markNotificationsAsRead,
@@ -76,7 +76,7 @@ export const NotificationRow: FC<INotificationRow> = ({
   return (
     <div
       className={cn(
-        'group border-b',
+        'group relative border-b',
         'pl-2.75 pr-1 py-0.75',
         'text-gitify-font border-gitify-notification-border hover:bg-gitify-notification-hover',
         (isAnimated || animateExit) &&
@@ -85,12 +85,7 @@ export const NotificationRow: FC<INotificationRow> = ({
       )}
       id={notification.id}
     >
-      <Stack
-        align="center"
-        className="relative"
-        direction="horizontal"
-        gap="condensed"
-      >
+      <Stack align="center" direction="horizontal" gap="condensed">
         <Tooltip direction="e" text={notificationType}>
           <button type="button">
             <NotificationIcon
@@ -140,33 +135,33 @@ export const NotificationRow: FC<INotificationRow> = ({
 
           <NotificationFooter notification={notification} />
         </Stack>
-
-        {!animateExit && (
-          <HoverGroup bgColor="group-hover:bg-gitify-notification-hover">
-            <HoverButton
-              action={actionMarkAsDone}
-              enabled={isMarkAsDoneFeatureSupported(notification.account)}
-              icon={CheckIcon}
-              label="Mark as done"
-              testid="notification-mark-as-done"
-            />
-
-            <HoverButton
-              action={actionMarkAsRead}
-              icon={ReadIcon}
-              label="Mark as read"
-              testid="notification-mark-as-read"
-            />
-
-            <HoverButton
-              action={actionUnsubscribeFromThread}
-              icon={BellSlashIcon}
-              label="Unsubscribe from thread"
-              testid="notification-unsubscribe-from-thread"
-            />
-          </HoverGroup>
-        )}
       </Stack>
+
+      {!animateExit && (
+        <HoverGroup bgColor="group-hover:bg-gitify-notification-hover">
+          <HoverButton
+            action={actionMarkAsDone}
+            enabled={isMarkAsDoneFeatureSupported(notification.account)}
+            icon={CheckIcon}
+            label="Mark as done"
+            testid="notification-mark-as-done"
+          />
+
+          <HoverButton
+            action={actionMarkAsRead}
+            icon={ReadIcon}
+            label="Mark as read"
+            testid="notification-mark-as-read"
+          />
+
+          <HoverButton
+            action={actionUnsubscribeFromThread}
+            icon={BellSlashIcon}
+            label="Unsubscribe from thread"
+            testid="notification-unsubscribe-from-thread"
+          />
+        </HoverGroup>
+      )}
     </div>
   );
 };

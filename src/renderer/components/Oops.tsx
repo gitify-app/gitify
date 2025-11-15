@@ -4,12 +4,15 @@ import type { GitifyError } from '../types';
 import { Errors } from '../utils/errors';
 import { EmojiSplash } from './layout/EmojiSplash';
 
-interface IOops {
+interface OopsProps {
   error: GitifyError;
   fullHeight?: boolean;
 }
 
-export const Oops: FC<IOops> = ({ error, fullHeight = true }: IOops) => {
+export const Oops: FC<OopsProps> = ({
+  error,
+  fullHeight = true,
+}: OopsProps) => {
   const err = error ?? Errors.UNKNOWN;
 
   const emoji = useMemo(

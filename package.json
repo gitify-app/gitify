@@ -1,6 +1,6 @@
 {
   "name": "gitify",
-  "version": "6.11.1",
+  "version": "6.13.0",
   "description": "GitHub notifications on your menu bar.",
   "main": "build/main.js",
   "scripts": {
@@ -71,16 +71,16 @@
     "menubar": "9.5.2",
     "react": "19.2.0",
     "react-dom": "19.2.0",
-    "react-router-dom": "7.9.5"
+    "react-router-dom": "7.9.6"
   },
   "devDependencies": {
     "@babel/core": "7.28.5",
     "@babel/preset-env": "7.28.5",
-    "@biomejs/biome": "2.3.4",
+    "@biomejs/biome": "2.3.5",
     "@discordapp/twemoji": "16.0.1",
     "@electron/notarize": "3.1.1",
     "@primer/css": "22.0.2",
-    "@primer/octicons-react": "19.20.0",
+    "@primer/octicons-react": "19.21.0",
     "@primer/primitives": "11.3.0",
     "@primer/react": "38.1.0",
     "@tailwindcss/postcss": "4.1.17",
@@ -88,9 +88,9 @@
     "@testing-library/react": "16.3.0",
     "@testing-library/user-event": "14.6.1",
     "@types/jest": "30.0.0",
-    "@types/node": "24.10.0",
-    "@types/react": "19.2.2",
-    "@types/react-dom": "19.2.2",
+    "@types/node": "24.10.1",
+    "@types/react": "19.2.4",
+    "@types/react-dom": "19.2.3",
     "@types/react-router-dom": "5.3.3",
     "@types/semver": "7.7.1",
     "axios": "1.13.2",
@@ -101,7 +101,7 @@
     "css-loader": "7.1.2",
     "css-minimizer-webpack-plugin": "7.0.2",
     "date-fns": "4.1.0",
-    "electron": "39.1.1",
+    "electron": "39.2.0",
     "electron-builder": "26.0.12",
     "final-form": "5.0.0",
     "graphql-tag": "2.12.6",
@@ -128,7 +128,7 @@
     "webpack-cli": "6.0.1",
     "webpack-merge": "6.0.1"
   },
-  "packageManager": "pnpm@10.20.0",
+  "packageManager": "pnpm@10.22.0",
   "pnpm": {
     "onlyBuiltDependencies": [
       "@biomejs/biome",

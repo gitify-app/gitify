@@ -70,7 +70,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
   "baseElement": <body>
     <div>
       <div
-        class="fixed left-sidebar -ml-sidebar w-sidebar h-full bg-gitify-sidebar [&_svg]:text-white prc-Stack-Stack-WJVsK"
+        class="fixed w-sidebar h-full bg-gitify-sidebar [&_svg]:text-white prc-Stack-Stack-WJVsK"
         data-align="stretch"
         data-direction="vertical"
         data-justify="space-between"
@@ -325,7 +325,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
   </body>,
   "container": <div>
     <div
-      class="fixed left-sidebar -ml-sidebar w-sidebar h-full bg-gitify-sidebar [&_svg]:text-white prc-Stack-Stack-WJVsK"
+      class="fixed w-sidebar h-full bg-gitify-sidebar [&_svg]:text-white prc-Stack-Stack-WJVsK"
       data-align="stretch"
       data-direction="vertical"
       data-justify="space-between"
@@ -637,7 +637,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
   "baseElement": <body>
     <div>
       <div
-        class="fixed left-sidebar -ml-sidebar w-sidebar h-full bg-gitify-sidebar [&_svg]:text-white prc-Stack-Stack-WJVsK"
+        class="fixed w-sidebar h-full bg-gitify-sidebar [&_svg]:text-white prc-Stack-Stack-WJVsK"
         data-align="stretch"
         data-direction="vertical"
         data-justify="space-between"
@@ -892,7 +892,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
   </body>,
   "container": <div>
     <div
-      class="fixed left-sidebar -ml-sidebar w-sidebar h-full bg-gitify-sidebar [&_svg]:text-white prc-Stack-Stack-WJVsK"
+      class="fixed w-sidebar h-full bg-gitify-sidebar [&_svg]:text-white prc-Stack-Stack-WJVsK"
       data-align="stretch"
       data-direction="vertical"
       data-justify="space-between"

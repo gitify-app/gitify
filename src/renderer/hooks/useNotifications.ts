@@ -13,7 +13,6 @@ import {
   markNotificationThreadAsDone,
   markNotificationThreadAsRead,
 } from '../utils/api/client';
-import { updateTrayColor } from '../utils/comms';
 import {
   areAllAccountErrorsSame,
   doesAllAccountsHaveErrors,
@@ -31,6 +30,7 @@ interface NotificationsState {
   globalError: GitifyError;
 
   notifications: AccountNotifications[];
+
   fetchNotifications: (state: GitifyState) => Promise<void>;
   removeAccountNotifications: (account: Account) => Promise<void>;
 
@@ -90,7 +90,6 @@ export const useNotifications = (): NotificationsState => {
         const accountError = fetchedNotifications[0].error;
         setStatus('error');
         setGlobalError(allAccountErrorsAreSame ? accountError : null);
-        updateTrayColor(-1);
         return;
       }
 
@@ -225,6 +224,7 @@ export const useNotifications = (): NotificationsState => {
     globalError,
 
     notifications,
+
     fetchNotifications,
     removeAccountNotifications,
 

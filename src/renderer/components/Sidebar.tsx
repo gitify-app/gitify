@@ -67,7 +67,7 @@ export const Sidebar: FC = () => {
 
   return (
     <Stack
-      className="fixed left-sidebar -ml-sidebar w-sidebar h-full bg-gitify-sidebar [&_svg]:text-white"
+      className="fixed w-sidebar h-full bg-gitify-sidebar [&_svg]:text-white"
       direction="vertical"
       justify="space-between"
     >
@@ -85,7 +85,6 @@ export const Sidebar: FC = () => {
           onClick={() => navigate('/', { replace: true })}
           size="small"
           tooltipDirection="e"
-          unsafeDisableTooltip={false}
           variant="invisible"
         />
 
@@ -97,7 +96,6 @@ export const Sidebar: FC = () => {
           onClick={() => openGitHubNotifications(primaryAccountHostname)}
           size="small"
           tooltipDirection="e"
-          unsafeDisableTooltip={false}
           variant={hasUnreadNotifications ? 'primary' : 'invisible'}
         />
 
@@ -110,7 +108,6 @@ export const Sidebar: FC = () => {
             onClick={() => toggleFilters()}
             size="small"
             tooltipDirection="e"
-            unsafeDisableTooltip={false}
             variant={hasActiveFilters(settings) ? 'primary' : 'invisible'}
           />
         )}
@@ -122,7 +119,6 @@ export const Sidebar: FC = () => {
           onClick={() => openGitHubIssues(primaryAccountHostname)}
           size="small"
           tooltipDirection="e"
-          unsafeDisableTooltip={false}
           variant="invisible"
         />
 
@@ -133,7 +129,6 @@ export const Sidebar: FC = () => {
           onClick={() => openGitHubPulls(primaryAccountHostname)}
           size="small"
           tooltipDirection="e"
-          unsafeDisableTooltip={false}
           variant="invisible"
         />
       </Stack>
@@ -156,7 +151,6 @@ export const Sidebar: FC = () => {
               onClick={() => refreshNotifications()}
               size="small"
               tooltipDirection="e"
-              unsafeDisableTooltip={false}
               variant="invisible"
             />
 
@@ -167,7 +161,6 @@ export const Sidebar: FC = () => {
               onClick={() => toggleSettings()}
               size="small"
               tooltipDirection="e"
-              unsafeDisableTooltip={false}
               variant="invisible"
             />
           </>
@@ -181,7 +174,6 @@ export const Sidebar: FC = () => {
             onClick={() => quitApp()}
             size="small"
             tooltipDirection="e"
-            unsafeDisableTooltip={false}
             variant="invisible"
           />
         )}

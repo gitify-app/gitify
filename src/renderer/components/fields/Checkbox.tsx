@@ -6,7 +6,7 @@ import { cn } from '../../utils/cn';
 import { CustomCounter } from '../primitives/CustomCounter';
 import { Tooltip } from './Tooltip';
 
-export interface ICheckbox {
+export interface CheckboxProps {
   name: string;
   label: string;
   counter?: number;
@@ -17,10 +17,10 @@ export interface ICheckbox {
   onChange: (evt: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const Checkbox: FC<ICheckbox> = ({
+export const Checkbox: FC<CheckboxProps> = ({
   visible = true,
   ...props
-}: ICheckbox) => {
+}: CheckboxProps) => {
   const counter = props?.counter === 0 ? '0' : props.counter;
 
   return (

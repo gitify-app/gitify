@@ -22,7 +22,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
           data-size="medium"
           data-testid="open-repository"
           data-variant="invisible"
-          title="Open repository"
+          title="Open repository ↗"
           type="button"
         >
           <span
@@ -86,7 +86,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
           </span>
         </button>
         <div
-          class="absolute right-0 h-full opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-repository prc-Stack-Stack-WJVsK"
+          class="absolute inset-y-0 right-0 pr-1 opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-repository prc-Stack-Stack-WJVsK"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -212,7 +212,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
         data-size="medium"
         data-testid="open-repository"
         data-variant="invisible"
-        title="Open repository"
+        title="Open repository ↗"
         type="button"
       >
         <span
@@ -276,7 +276,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
         </span>
       </button>
       <div
-        class="absolute right-0 h-full opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-repository prc-Stack-Stack-WJVsK"
+        class="absolute inset-y-0 right-0 pr-1 opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-repository prc-Stack-Stack-WJVsK"
         data-align="center"
         data-direction="horizontal"
         data-gap="none"
@@ -459,7 +459,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
           data-size="medium"
           data-testid="open-repository"
           data-variant="invisible"
-          title="Open repository"
+          title="Open repository ↗"
           type="button"
         >
           <span
@@ -523,7 +523,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
           </span>
         </button>
         <div
-          class="absolute right-0 h-full opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-repository prc-Stack-Stack-WJVsK"
+          class="absolute inset-y-0 right-0 pr-1 opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-repository prc-Stack-Stack-WJVsK"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -649,7 +649,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
         data-size="medium"
         data-testid="open-repository"
         data-variant="invisible"
-        title="Open repository"
+        title="Open repository ↗"
         type="button"
       >
         <span
@@ -713,7 +713,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
         </span>
       </button>
       <div
-        class="absolute right-0 h-full opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-repository prc-Stack-Stack-WJVsK"
+        class="absolute inset-y-0 right-0 pr-1 opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-repository prc-Stack-Stack-WJVsK"
         data-align="center"
         data-direction="horizontal"
         data-gap="none"
@@ -896,7 +896,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
           data-size="medium"
           data-testid="open-repository"
           data-variant="invisible"
-          title="Open repository"
+          title="Open repository ↗"
           type="button"
         >
           <span
@@ -967,7 +967,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
           </span>
         </button>
         <div
-          class="absolute right-0 h-full opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-repository prc-Stack-Stack-WJVsK"
+          class="absolute inset-y-0 right-0 pr-1 opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-repository prc-Stack-Stack-WJVsK"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -1086,7 +1086,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
           data-size="medium"
           data-testid="open-repository"
           data-variant="invisible"
-          title="Open repository"
+          title="Open repository ↗"
           type="button"
         >
           <span
@@ -1157,7 +1157,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
           </span>
         </button>
         <div
-          class="absolute right-0 h-full opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-repository prc-Stack-Stack-WJVsK"
+          class="absolute inset-y-0 right-0 pr-1 opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-repository prc-Stack-Stack-WJVsK"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -1283,7 +1283,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
         data-size="medium"
         data-testid="open-repository"
         data-variant="invisible"
-        title="Open repository"
+        title="Open repository ↗"
         type="button"
       >
         <span
@@ -1354,7 +1354,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
         </span>
       </button>
       <div
-        class="absolute right-0 h-full opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-repository prc-Stack-Stack-WJVsK"
+        class="absolute inset-y-0 right-0 pr-1 opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-repository prc-Stack-Stack-WJVsK"
         data-align="center"
         data-direction="horizontal"
         data-gap="none"
@@ -1537,7 +1537,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
           data-size="medium"
           data-testid="open-repository"
           data-variant="invisible"
-          title="Open repository"
+          title="Open repository ↗"
           type="button"
         >
           <span
@@ -1608,7 +1608,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
           </span>
         </button>
         <div
-          class="absolute right-0 h-full opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-repository prc-Stack-Stack-WJVsK"
+          class="absolute inset-y-0 right-0 pr-1 opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-repository prc-Stack-Stack-WJVsK"
           data-align="center"
           data-direction="horizontal"
           data-gap="none"
@@ -1734,7 +1734,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
         data-size="medium"
         data-testid="open-repository"
         data-variant="invisible"
-        title="Open repository"
+        title="Open repository ↗"
         type="button"
       >
         <span
@@ -1805,7 +1805,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
         </span>
       </button>
       <div
-        class="absolute right-0 h-full opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-repository prc-Stack-Stack-WJVsK"
+        class="absolute inset-y-0 right-0 pr-1 opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-repository prc-Stack-Stack-WJVsK"
         data-align="center"
         data-direction="horizontal"
         data-gap="none"

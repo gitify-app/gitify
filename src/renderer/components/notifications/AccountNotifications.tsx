@@ -6,6 +6,7 @@ import { Button, Stack } from '@primer/react';
 import { AppContext } from '../../context/App';
 import { type Account, type GitifyError, Size } from '../../types';
 import type { Notification } from '../../typesGitHub';
+import { hasMultipleAccounts } from '../../utils/auth/utils';
 import { cn } from '../../utils/cn';
 import { getChevronDetails } from '../../utils/helpers';
 import {
@@ -25,19 +26,19 @@ import { HoverGroup } from '../primitives/HoverGroup';
 import { NotificationRow } from './NotificationRow';
 import { RepositoryNotifications } from './RepositoryNotifications';
 
-interface IAccountNotifications {
+interface AccountNotificationsProps {
   account: Account;
   notifications: Notification[];
   error: GitifyError | null;
   showAccountHeader: boolean;
 }
 
-export const AccountNotifications: FC<IAccountNotifications> = (
-  props: IAccountNotifications,
+export const AccountNotifications: FC<AccountNotificationsProps> = (
+  props: AccountNotificationsProps,
 ) => {
   const { account, showAccountHeader, notifications } = props;
 
-  const { settings } = useContext(AppContext);
+  const { auth, settings } = useContext(AppContext);
 
   const [showAccountNotifications, setShowAccountNotifications] =
     useState(true);
@@ -126,7 +127,9 @@ export const AccountNotifications: FC<IAccountNotifications> = (
 
       {showAccountNotifications && (
         <>
-          {props.error && <Oops error={props.error} fullHeight={false} />}
+          {props.error && (
+            <Oops error={props.error} fullHeight={!hasMultipleAccounts(auth)} />
+          )}
 
           {!hasNotifications && !props.error && <AllRead fullHeight={false} />}
 

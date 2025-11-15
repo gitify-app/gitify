@@ -9,13 +9,13 @@ import { cn } from '../../utils/cn';
 import { openRepository } from '../../utils/links';
 import { AvatarWithFallback } from '../avatars/AvatarWithFallback';
 
-interface INotificationHeader {
+interface NotificationHeaderProps {
   notification: Notification;
 }
 
-export const NotificationHeader: FC<INotificationHeader> = ({
+export const NotificationHeader: FC<NotificationHeaderProps> = ({
   notification,
-}: INotificationHeader) => {
+}: NotificationHeaderProps) => {
   const { settings } = useContext(AppContext);
 
   const repoSlug = notification.repository.full_name;
@@ -38,7 +38,7 @@ export const NotificationHeader: FC<INotificationHeader> = ({
               event.stopPropagation();
               openRepository(notification.repository);
             }}
-            title="Open repository"
+            title="Open repository ↗"
             type="button"
           >
             <AvatarWithFallback

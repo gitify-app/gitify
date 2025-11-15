@@ -8,8 +8,15 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
       <div
         class="flex flex-col min-h-screen bg-gitify-background"
       >
+        <button
+          aria-label="initial focus"
+          class="sr-only focus-visible"
+          data-focus-visible-added=""
+          data-testid="initial-focus-sentinel"
+          type="button"
+        />
         <div
-          class="fixed left-sidebar -ml-sidebar w-sidebar h-full bg-gitify-sidebar [&_svg]:text-white prc-Stack-Stack-WJVsK"
+          class="fixed w-sidebar h-full bg-gitify-sidebar [&_svg]:text-white prc-Stack-Stack-WJVsK"
           data-align="stretch"
           data-direction="vertical"
           data-justify="space-between"
@@ -272,8 +279,15 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
     <div
       class="flex flex-col min-h-screen bg-gitify-background"
     >
+      <button
+        aria-label="initial focus"
+        class="sr-only focus-visible"
+        data-focus-visible-added=""
+        data-testid="initial-focus-sentinel"
+        type="button"
+      />
       <div
-        class="fixed left-sidebar -ml-sidebar w-sidebar h-full bg-gitify-sidebar [&_svg]:text-white prc-Stack-Stack-WJVsK"
+        class="fixed w-sidebar h-full bg-gitify-sidebar [&_svg]:text-white prc-Stack-Stack-WJVsK"
         data-align="stretch"
         data-direction="vertical"
         data-justify="space-between"

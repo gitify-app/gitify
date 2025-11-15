@@ -5,7 +5,7 @@ const MAXIMUM_VOLUME_PERCENTAGE = 100 as Percentage;
 const VOLUME_STEP = 10 as Percentage;
 
 export async function raiseSoundNotification(volume: Percentage) {
-  const path = await globalThis.gitify.notificationSoundPath();
+  const path = await window.gitify.notificationSoundPath();
 
   const audio = new Audio(path);
   audio.volume = volumePercentageToLevel(volume);
