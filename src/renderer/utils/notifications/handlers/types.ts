@@ -6,43 +6,40 @@ import type { SettingsState } from '../../../types';
 import type {
   GitifySubject,
   Notification,
-  Subject,
   SubjectType,
 } from '../../../typesGitHub';
 
 export interface NotificationTypeHandler {
   readonly type?: SubjectType;
+  readonly notification: Notification;
 
   /**
    * Enrich a notification. Settings may be unused for some handlers.
    */
-  enrich(
-    notification: Notification,
-    settings: SettingsState,
-  ): Promise<GitifySubject>;
+  enrich(settings: SettingsState): Promise<GitifySubject>;
 
   /**
    * Return the icon component for this notification type.
    */
-  iconType(subject: Subject): FC<OcticonProps> | null;
+  iconType(): FC<OcticonProps> | null;
 
   /**
    * Return the icon color for this notification type.
    */
-  iconColor(subject: Subject): string | undefined;
+  iconColor(): string | undefined;
 
   /**
    * Return the formatted notification type for this notification.
    */
-  formattedNotificationType(notification: Notification): string;
+  formattedNotificationType(): string;
 
   /**
    * Return the formatted notification number for this notification.
    */
-  formattedNotificationNumber(notification: Notification): string;
+  formattedNotificationNumber(): string;
 
   /**
    * Return the formatted notification title for this notification.
    */
-  formattedNotificationTitle(notification: Notification): string;
+  formattedNotificationTitle(): string;
 }

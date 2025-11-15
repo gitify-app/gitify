@@ -8,20 +8,17 @@ import type {
   GitifySubject,
   Notification,
   StateType,
-  Subject,
 } from '../../../typesGitHub';
 import { getRelease } from '../../api/client';
 import { isStateFilteredOut } from '../filters/filter';
 import { DefaultHandler } from './default';
+import type { NotificationTypeHandler } from './types';
 import { getSubjectUser } from './utils';
 
 class ReleaseHandler extends DefaultHandler {
   readonly type = 'Release';
 
-  async enrich(
-    notification: Notification,
-    settings: SettingsState,
-  ): Promise<GitifySubject> {
+  async enrich(settings: SettingsState): Promise<GitifySubject> {
     const releaseState: StateType = null; // Release notifications are stateless
 
     // Return early if this notification would be hidden by filters
@@ -30,7 +27,10 @@ class ReleaseHandler extends DefaultHandler {
     }
 
     const release = (
-      await getRelease(notification.subject.url, notification.account.token)
+      await getRelease(
+        this.notification.subject.url,
+        this.notification.account.token,
+      )
     ).data;
 
     return {
@@ -39,9 +39,13 @@ class ReleaseHandler extends DefaultHandler {
     };
   }
 
-  iconType(_subject: Subject): FC<OcticonProps> | null {
+  iconType(): FC<OcticonProps> | null {
     return TagIcon;
   }
 }
 
-export const releaseHandler = new ReleaseHandler();
+export function createReleaseHandler(
+  notification: Notification,
+): NotificationTypeHandler {
+  return new ReleaseHandler(notification);
+}

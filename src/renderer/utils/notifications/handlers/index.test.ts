@@ -1,42 +1,47 @@
 import { partialMockNotification } from '../../../__mocks__/partial-mocks';
 import type { SubjectType } from '../../../typesGitHub';
-import { checkSuiteHandler } from './checkSuite';
-import { commitHandler } from './commit';
-import { defaultHandler } from './default';
-import { discussionHandler } from './discussion';
+import { createCheckSuiteHandler } from './checkSuite';
+import { createCommitHandler } from './commit';
+import { createDefaultHandler } from './default';
+import { createDiscussionHandler } from './discussion';
 import { createNotificationHandler } from './index';
-import { issueHandler } from './issue';
-import { pullRequestHandler } from './pullRequest';
-import { releaseHandler } from './release';
-import { repositoryDependabotAlertsThreadHandler } from './repositoryDependabotAlertsThread';
-import { repositoryInvitationHandler } from './repositoryInvitation';
-import { repositoryVulnerabilityAlertHandler } from './repositoryVulnerabilityAlert';
-import { workflowRunHandler } from './workflowRun';
+import { createIssueHandler } from './issue';
+import { createPullRequestHandler } from './pullRequest';
+import { createReleaseHandler } from './release';
+import { createRepositoryDependabotAlertsThreadHandler } from './repositoryDependabotAlertsThread';
+import { createRepositoryInvitationHandler } from './repositoryInvitation';
+import { createRepositoryVulnerabilityAlertHandler } from './repositoryVulnerabilityAlert';
+import { createWorkflowRunHandler } from './workflowRun';
 
 describe('renderer/utils/notifications/handlers/index.ts', () => {
   describe('createNotificationHandler', () => {
     const cases: Array<[SubjectType, object]> = [
-      ['CheckSuite', checkSuiteHandler],
-      ['Commit', commitHandler],
-      ['Discussion', discussionHandler],
-      ['Issue', issueHandler],
-      ['PullRequest', pullRequestHandler],
-      ['Release', releaseHandler],
+      ['CheckSuite', createCheckSuiteHandler],
+      ['Commit', createCommitHandler],
+      ['Discussion', createDiscussionHandler],
+      ['Issue', createIssueHandler],
+      ['PullRequest', createPullRequestHandler],
+      ['Release', createReleaseHandler],
       [
         'RepositoryDependabotAlertsThread',
-        repositoryDependabotAlertsThreadHandler,
+        createRepositoryDependabotAlertsThreadHandler,
       ],
-      ['RepositoryInvitation', repositoryInvitationHandler],
-      ['RepositoryVulnerabilityAlert', repositoryVulnerabilityAlertHandler],
-      ['WorkflowRun', workflowRunHandler],
+      ['RepositoryInvitation', createRepositoryInvitationHandler],
+      [
+        'RepositoryVulnerabilityAlert',
+        createRepositoryVulnerabilityAlertHandler,
+      ],
+      ['WorkflowRun', createWorkflowRunHandler],
     ];
 
     it.each(cases)(
       'returns expected handler instance for %s',
       (type, expected) => {
         const notification = partialMockNotification({ type });
-        const handler = createNotificationHandler(notification);
-        expect(handler).toBe(expected);
+
+        createNotificationHandler(notification);
+
+        expect(expected).toHaveBeenCalledWith(notification);
       },
     );
 
@@ -44,8 +49,10 @@ describe('renderer/utils/notifications/handlers/index.ts', () => {
       const notification = partialMockNotification({
         type: 'SomeFutureType' as SubjectType,
       });
-      const handler = createNotificationHandler(notification);
-      expect(handler).toBe(defaultHandler);
+
+      createNotificationHandler(notification);
+
+      expect(createDefaultHandler).toHaveBeenCalledWith(notification);
     });
   });
 });

@@ -15,18 +15,15 @@ import type {
   CheckSuiteStatus,
   GitifySubject,
   Notification,
-  Subject,
 } from '../../../typesGitHub';
 import { DefaultHandler } from './default';
+import type { NotificationTypeHandler } from './types';
 
 class CheckSuiteHandler extends DefaultHandler {
   readonly type = 'CheckSuite';
 
-  async enrich(
-    notification: Notification,
-    _settings: SettingsState,
-  ): Promise<GitifySubject> {
-    const state = getCheckSuiteAttributes(notification)?.status;
+  async enrich(_settings: SettingsState): Promise<GitifySubject> {
+    const state = getCheckSuiteAttributes(this.notification)?.status;
 
     if (state) {
       return {
@@ -38,8 +35,8 @@ class CheckSuiteHandler extends DefaultHandler {
     return null;
   }
 
-  iconType(subject: Subject): FC<OcticonProps> | null {
-    switch (subject.state) {
+  iconType(): FC<OcticonProps> | null {
+    switch (this.notification.subject.state) {
       case 'cancelled':
         return StopIcon;
       case 'failure':
@@ -54,7 +51,11 @@ class CheckSuiteHandler extends DefaultHandler {
   }
 }
 
-export const checkSuiteHandler = new CheckSuiteHandler();
+export function createCheckSuiteHandler(
+  notification: Notification,
+): NotificationTypeHandler {
+  return new CheckSuiteHandler(notification);
+}
 
 /**
  * Ideally we would be using a GitHub API to fetch the CheckSuite / WorkflowRun state,
