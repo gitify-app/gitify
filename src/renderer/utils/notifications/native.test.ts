@@ -4,9 +4,17 @@ import {
   mockAccountNotifications,
   mockSingleAccountNotifications,
 } from '../../__mocks__/notifications-mocks';
+import * as helpers from '../helpers';
 import * as native from './native';
 
 describe('renderer/utils/notifications/native.ts', () => {
+  const mockHtmlUrl =
+    mockSingleAccountNotifications[0].notifications[0].repository.html_url;
+
+  jest
+    .spyOn(helpers, 'generateGitHubWebUrl')
+    .mockImplementation(async () => mockHtmlUrl);
+
   afterEach(() => {
     jest.clearAllMocks();
   });
@@ -28,10 +36,9 @@ describe('renderer/utils/notifications/native.ts', () => {
       expect.stringContaining(
         mockSingleAccountNotifications[0].notifications[0].subject.title,
       ),
-      expect.stringContaining(
-        mockSingleAccountNotifications[0].notifications[0].repository.html_url,
-      ),
+      expect.stringContaining(mockHtmlUrl),
     );
+    expect(helpers.generateGitHubWebUrl).toHaveBeenCalledTimes(1);
   });
 
   it('should raise a native notification for multiple new notifications', async () => {
@@ -46,5 +53,6 @@ describe('renderer/utils/notifications/native.ts', () => {
       'You have 2 notifications',
       null,
     );
+    expect(helpers.generateGitHubWebUrl).toHaveBeenCalledTimes(0);
   });
 });
