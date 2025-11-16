@@ -1,10 +1,7 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import {
-  AppContextProvider,
-  renderWithAppContext,
-} from '../__helpers__/test-utils';
+import { renderWithAppContext } from '../__helpers__/test-utils';
 import * as comms from '../utils/comms';
 import { LoginRoute } from './Login';
 
@@ -20,25 +17,19 @@ describe('renderer/routes/Login.tsx', () => {
   });
 
   it('should render itself & its children', () => {
-    const tree = renderWithAppContext(<LoginRoute />);
+    const tree = renderWithAppContext(<LoginRoute />, { isLoggedIn: false });
 
     expect(tree).toMatchSnapshot();
+
+    expect(mockNavigate).toHaveBeenCalledTimes(0);
   });
 
   it('should redirect to notifications once logged in', () => {
     const mockShowWindow = jest.spyOn(comms, 'showWindow');
 
-    const { rerender } = render(
-      <AppContextProvider value={{ isLoggedIn: false }}>
-        <LoginRoute />
-      </AppContextProvider>,
-    );
-
-    rerender(
-      <AppContextProvider value={{ isLoggedIn: true }}>
-        <LoginRoute />
-      </AppContextProvider>,
-    );
+    renderWithAppContext(<LoginRoute />, {
+      isLoggedIn: true,
+    });
 
     expect(mockShowWindow).toHaveBeenCalledTimes(1);
     expect(mockNavigate).toHaveBeenNthCalledWith(1, '/', { replace: true });
@@ -46,6 +37,7 @@ describe('renderer/routes/Login.tsx', () => {
 
   it('should login with github', async () => {
     const mockLoginWithGitHubApp = jest.fn();
+
     renderWithAppContext(<LoginRoute />, {
       loginWithGitHubApp: mockLoginWithGitHubApp,
     });
