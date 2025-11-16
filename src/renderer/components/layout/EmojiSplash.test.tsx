@@ -1,14 +1,17 @@
-import { act, render } from '@testing-library/react';
+import { act } from '@testing-library/react';
 
+import { renderWithAppContext } from '../../__helpers__/test-utils';
 import { EmojiSplash } from './EmojiSplash';
 
 describe('renderer/components/layout/EmojiSplash.tsx', () => {
   it('should render itself & its children - heading only', async () => {
-    let tree: ReturnType<typeof render> | null = null;
+    let tree: ReturnType<typeof renderWithAppContext> | null = null;
 
     await act(async () => {
       tree = await act(async () => {
-        return render(<EmojiSplash emoji="🍺" heading="Test Heading" />);
+        return renderWithAppContext(
+          <EmojiSplash emoji="🍺" heading="Test Heading" />,
+        );
       });
     });
 
@@ -16,11 +19,11 @@ describe('renderer/components/layout/EmojiSplash.tsx', () => {
   });
 
   it('should render itself & its children - heading and sub-heading', async () => {
-    let tree: ReturnType<typeof render> | null = null;
+    let tree: ReturnType<typeof renderWithAppContext> | null = null;
 
     await act(async () => {
       tree = await act(async () => {
-        return render(
+        return renderWithAppContext(
           <EmojiSplash
             emoji="🍺"
             heading="Test Heading"

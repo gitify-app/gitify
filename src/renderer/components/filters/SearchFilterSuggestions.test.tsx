@@ -1,91 +1,67 @@
-import { render } from '@testing-library/react';
-
+import { renderWithAppContext } from '../../__helpers__/test-utils';
 import { mockSettings } from '../../__mocks__/state-mocks';
-import { AppContext } from '../../context/App';
-import type { SettingsState } from '../../types';
 import { SearchFilterSuggestions } from './SearchFilterSuggestions';
 
 describe('renderer/components/filters/SearchFilterSuggestions.tsx', () => {
   it('should render itself & its children - closed', () => {
-    const tree = render(
-      <AppContext.Provider
-        value={{
-          settings: {
-            ...mockSettings,
-            detailedNotifications: false,
-          } as SettingsState,
-        }}
-      >
-        <SearchFilterSuggestions inputValue={''} open={false} />
-      </AppContext.Provider>,
+    const tree = renderWithAppContext(
+      <SearchFilterSuggestions inputValue={''} open={false} />,
     );
 
     expect(tree).toMatchSnapshot();
   });
 
-  it('should render itself & its children - open', () => {
-    const tree = render(
-      <AppContext.Provider
-        value={{
-          settings: {
-            ...mockSettings,
-            detailedNotifications: true,
-          } as SettingsState,
-        }}
-      >
-        <SearchFilterSuggestions inputValue={''} open={true} />
-      </AppContext.Provider>,
+  it('should render itself & its children - open without detailed notifications enabled', () => {
+    const tree = renderWithAppContext(
+      <SearchFilterSuggestions inputValue={''} open={true} />,
+      {
+        settings: {
+          ...mockSettings,
+          detailedNotifications: false,
+        },
+      },
     );
 
     expect(tree).toMatchSnapshot();
   });
 
-  it('should render itself & its children - open with detailed enabled', () => {
-    const tree = render(
-      <AppContext.Provider
-        value={{
-          settings: {
-            ...mockSettings,
-            detailedNotifications: true,
-          } as SettingsState,
-        }}
-      >
-        <SearchFilterSuggestions inputValue={''} open={true} />
-      </AppContext.Provider>,
+  it('should render itself & its children - open with detailed notifications enabled', () => {
+    const tree = renderWithAppContext(
+      <SearchFilterSuggestions inputValue={''} open={true} />,
+      {
+        settings: {
+          ...mockSettings,
+          detailedNotifications: true,
+        },
+      },
     );
 
     expect(tree).toMatchSnapshot();
   });
 
   it('should render itself & its children - input token invalid', () => {
-    const tree = render(
-      <AppContext.Provider
-        value={{
-          settings: {
-            ...mockSettings,
-            detailedNotifications: false,
-          } as SettingsState,
-        }}
-      >
-        <SearchFilterSuggestions inputValue={'invalid'} open={true} />
-      </AppContext.Provider>,
+    const tree = renderWithAppContext(
+      <SearchFilterSuggestions inputValue={'invalid'} open={true} />,
+      {
+        settings: {
+          ...mockSettings,
+          detailedNotifications: false,
+        },
+      },
     );
 
     expect(tree).toMatchSnapshot();
   });
 
   it('should render itself & its children - input token valid', () => {
-    const tree = render(
-      <AppContext.Provider
-        value={{
-          settings: {
-            ...mockSettings,
-            detailedNotifications: false,
-          } as SettingsState,
-        }}
-      >
-        <SearchFilterSuggestions inputValue={'repo:'} open={true} />
-      </AppContext.Provider>,
+    const tree = renderWithAppContext(
+      <SearchFilterSuggestions inputValue={'repo:'} open={true} />,
+      {
+        settings: {
+          ...mockSettings,
+          detailedNotifications: false,
+        },
+      },
     );
 
     expect(tree).toMatchSnapshot();

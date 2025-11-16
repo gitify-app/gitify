@@ -1,7 +1,7 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { AppContext } from '../context/App';
+import { renderWithAppContext } from '../__helpers__/test-utils';
 import * as comms from '../utils/comms';
 import { LoginRoute } from './Login';
 
@@ -17,41 +17,30 @@ describe('renderer/routes/Login.tsx', () => {
   });
 
   it('should render itself & its children', () => {
-    const tree = render(<LoginRoute />);
+    const tree = renderWithAppContext(<LoginRoute />, { isLoggedIn: false });
 
     expect(tree).toMatchSnapshot();
+
+    expect(mockNavigate).toHaveBeenCalledTimes(0);
   });
 
   it('should redirect to notifications once logged in', () => {
-    const showWindowMock = jest.spyOn(comms, 'showWindow');
+    const mockShowWindow = jest.spyOn(comms, 'showWindow');
 
-    const { rerender } = render(
-      <AppContext.Provider value={{ isLoggedIn: false }}>
-        <LoginRoute />
-      </AppContext.Provider>,
-    );
+    renderWithAppContext(<LoginRoute />, {
+      isLoggedIn: true,
+    });
 
-    rerender(
-      <AppContext.Provider value={{ isLoggedIn: true }}>
-        <LoginRoute />
-      </AppContext.Provider>,
-    );
-
-    expect(showWindowMock).toHaveBeenCalledTimes(1);
+    expect(mockShowWindow).toHaveBeenCalledTimes(1);
     expect(mockNavigate).toHaveBeenNthCalledWith(1, '/', { replace: true });
   });
 
   it('should login with github', async () => {
     const mockLoginWithGitHubApp = jest.fn();
-    render(
-      <AppContext.Provider
-        value={{
-          loginWithGitHubApp: mockLoginWithGitHubApp,
-        }}
-      >
-        <LoginRoute />
-      </AppContext.Provider>,
-    );
+
+    renderWithAppContext(<LoginRoute />, {
+      loginWithGitHubApp: mockLoginWithGitHubApp,
+    });
 
     await userEvent.click(screen.getByTestId('login-github'));
 
@@ -59,7 +48,7 @@ describe('renderer/routes/Login.tsx', () => {
   });
 
   it('should navigate to login with personal access token', async () => {
-    render(<LoginRoute />);
+    renderWithAppContext(<LoginRoute />);
 
     await userEvent.click(screen.getByTestId('login-pat'));
 
@@ -70,7 +59,7 @@ describe('renderer/routes/Login.tsx', () => {
   });
 
   it('should navigate to login with oauth app', async () => {
-    render(<LoginRoute />);
+    renderWithAppContext(<LoginRoute />);
 
     await userEvent.click(screen.getByTestId('login-oauth-app'));
 

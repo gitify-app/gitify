@@ -1,8 +1,7 @@
-import { act, render, screen } from '@testing-library/react';
+import { act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { mockAuth, mockSettings } from '../../__mocks__/state-mocks';
-import { AppContext } from '../../context/App';
+import { renderWithAppContext } from '../../__helpers__/test-utils';
 import * as comms from '../../utils/comms';
 import { SettingsFooter } from './SettingsFooter';
 
@@ -27,59 +26,32 @@ describe('renderer/components/settings/SettingsFooter.tsx', () => {
 
   it('should show app version', async () => {
     await act(async () => {
-      render(
-        <AppContext.Provider
-          value={{
-            auth: mockAuth,
-            settings: mockSettings,
-          }}
-        >
-          <SettingsFooter />
-        </AppContext.Provider>,
-      );
+      renderWithAppContext(<SettingsFooter />);
     });
 
     expect(screen.getByTestId('settings-release-notes')).toMatchSnapshot();
   });
 
   it('should open release notes', async () => {
-    const openExternalLinkMock = jest
+    const mockOpenExternalLink = jest
       .spyOn(comms, 'openExternalLink')
       .mockImplementation();
 
     await act(async () => {
-      render(
-        <AppContext.Provider
-          value={{
-            auth: mockAuth,
-            settings: mockSettings,
-          }}
-        >
-          <SettingsFooter />
-        </AppContext.Provider>,
-      );
+      renderWithAppContext(<SettingsFooter />);
     });
 
     await userEvent.click(screen.getByTestId('settings-release-notes'));
 
-    expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
-    expect(openExternalLinkMock).toHaveBeenCalledWith(
+    expect(mockOpenExternalLink).toHaveBeenCalledTimes(1);
+    expect(mockOpenExternalLink).toHaveBeenCalledWith(
       'https://github.com/gitify-app/gitify/releases/tag/v0.0.1',
     );
   });
 
   it('should open account management', async () => {
     await act(async () => {
-      render(
-        <AppContext.Provider
-          value={{
-            auth: mockAuth,
-            settings: mockSettings,
-          }}
-        >
-          <SettingsFooter />
-        </AppContext.Provider>,
-      );
+      renderWithAppContext(<SettingsFooter />);
     });
 
     await userEvent.click(screen.getByTestId('settings-accounts'));
@@ -88,23 +60,14 @@ describe('renderer/components/settings/SettingsFooter.tsx', () => {
   });
 
   it('should quit the app', async () => {
-    const quitAppMock = jest.spyOn(comms, 'quitApp');
+    const mockQuitApp = jest.spyOn(comms, 'quitApp');
 
     await act(async () => {
-      render(
-        <AppContext.Provider
-          value={{
-            auth: mockAuth,
-            settings: mockSettings,
-          }}
-        >
-          <SettingsFooter />
-        </AppContext.Provider>,
-      );
+      renderWithAppContext(<SettingsFooter />);
     });
 
     await userEvent.click(screen.getByTestId('settings-quit'));
 
-    expect(quitAppMock).toHaveBeenCalledTimes(1);
+    expect(mockQuitApp).toHaveBeenCalledTimes(1);
   });
 });

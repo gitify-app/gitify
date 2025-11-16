@@ -1,10 +1,7 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { BaseStyles, ThemeProvider } from '@primer/react';
-
-import { mockSettings } from '../../__mocks__/state-mocks';
-import { AppContext } from '../../context/App';
+import { renderWithAppContext } from '../../__helpers__/test-utils';
 import { Tooltip, type TooltipProps } from './Tooltip';
 
 describe('renderer/components/fields/Tooltip.tsx', () => {
@@ -14,37 +11,13 @@ describe('renderer/components/fields/Tooltip.tsx', () => {
   };
 
   it('should render', () => {
-    render(
-      <ThemeProvider>
-        <BaseStyles>
-          <AppContext.Provider
-            value={{
-              settings: mockSettings,
-            }}
-          >
-            <Tooltip {...props} />
-          </AppContext.Provider>
-        </BaseStyles>
-      </ThemeProvider>,
-    );
+    renderWithAppContext(<Tooltip {...props} />, {});
 
     expect(screen.getByTestId('tooltip-test')).toBeInTheDocument();
   });
 
   it('should display on mouse enter / leave', async () => {
-    render(
-      <ThemeProvider>
-        <BaseStyles>
-          <AppContext.Provider
-            value={{
-              settings: mockSettings,
-            }}
-          >
-            <Tooltip {...props} />
-          </AppContext.Provider>
-        </BaseStyles>
-      </ThemeProvider>,
-    );
+    renderWithAppContext(<Tooltip {...props} />, {});
 
     const tooltipElement = screen.getByTestId('tooltip-test');
 

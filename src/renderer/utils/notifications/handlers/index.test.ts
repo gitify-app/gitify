@@ -1,4 +1,4 @@
-import { partialMockNotification } from '../../../__mocks__/partial-mocks';
+import { createPartialMockNotification } from '../../../__mocks__/notifications-mocks';
 import type { SubjectType } from '../../../typesGitHub';
 import { checkSuiteHandler } from './checkSuite';
 import { commitHandler } from './commit';
@@ -34,14 +34,14 @@ describe('renderer/utils/notifications/handlers/index.ts', () => {
     it.each(cases)(
       'returns expected handler instance for %s',
       (type, expected) => {
-        const notification = partialMockNotification({ type });
+        const notification = createPartialMockNotification({ type });
         const handler = createNotificationHandler(notification);
         expect(handler).toBe(expected);
       },
     );
 
     it('falls back to default handler for unknown type', () => {
-      const notification = partialMockNotification({
+      const notification = createPartialMockNotification({
         type: 'SomeFutureType' as SubjectType,
       });
       const handler = createNotificationHandler(notification);

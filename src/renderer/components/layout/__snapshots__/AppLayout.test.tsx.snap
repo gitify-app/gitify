@@ -6,542 +6,564 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
   "baseElement": <body>
     <div>
       <div
-        class="flex flex-col min-h-screen bg-gitify-background"
+        data-color-mode="light"
+        data-dark-theme="dark"
+        data-light-theme="light"
       >
-        <button
-          aria-label="initial focus"
-          class="sr-only focus-visible"
-          data-focus-visible-added=""
-          data-testid="initial-focus-sentinel"
-          type="button"
-        />
         <div
-          class="fixed w-sidebar h-full bg-gitify-sidebar [&_svg]:text-white prc-Stack-Stack-WJVsK"
-          data-align="stretch"
-          data-direction="vertical"
-          data-justify="space-between"
-          data-padding="none"
-          data-wrap="nowrap"
+          class="prc-src-BaseStyles-dl-St"
+          data-portal-root="true"
         >
           <div
-            class="prc-Stack-Stack-WJVsK"
-            data-align="center"
-            data-direction="vertical"
-            data-gap="condensed"
-            data-justify="start"
-            data-padding="normal"
-            data-wrap="nowrap"
+            class="flex flex-col min-h-screen bg-gitify-background"
           >
             <button
-              aria-describedby="_r_1_-loading-announcement _r_0_"
-              aria-label="Gitify"
-              class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
-              data-component="IconButton"
-              data-loading="false"
-              data-no-visuals="true"
-              data-size="small"
-              data-testid="sidebar-home"
-              data-variant="invisible"
+              aria-label="initial focus"
+              class="sr-only focus-visible"
+              data-focus-visible-added=""
+              data-testid="initial-focus-sentinel"
               type="button"
+            />
+            <div
+              class="fixed w-sidebar h-full bg-gitify-sidebar [&_svg]:text-white prc-Stack-Stack-WJVsK"
+              data-align="stretch"
+              data-direction="vertical"
+              data-justify="space-between"
+              data-padding="none"
+              data-wrap="nowrap"
             >
-              <svg
-                aria-hidden="true"
-                aria-label="Gitify Logo"
-                class="size-5"
-                viewBox="0 0 500 500"
-                xmlns="https://www.w3.org/2000/svg"
-                xmlns:xlink="https://www.w3.org/1999/xlink"
+              <div
+                class="prc-Stack-Stack-WJVsK"
+                data-align="center"
+                data-direction="vertical"
+                data-gap="condensed"
+                data-justify="start"
+                data-padding="normal"
+                data-wrap="nowrap"
               >
-                <defs>
-                  <lineargradient
-                    id="linearGradient-light"
-                    x1="90.8779989%"
-                    x2="-1.30249747%"
-                    y1="80.0676288%"
-                    y2="32.7108237%"
-                  >
-                    <stop
-                      offset="0%"
-                      stop-color="#CCCCCC"
-                    />
-                    <stop
-                      offset="100%"
-                      stop-color="#FFFFFF"
-                    />
-                  </lineargradient>
-                </defs>
-                <g
-                  fill="none"
-                  fill-rule="evenodd"
-                  stroke="none"
-                  stroke-width="1"
+                <button
+                  aria-describedby="_r_2_-loading-announcement _r_1_"
+                  aria-label="Gitify"
+                  class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
+                  data-component="IconButton"
+                  data-loading="false"
+                  data-no-visuals="true"
+                  data-size="small"
+                  data-testid="sidebar-home"
+                  data-variant="invisible"
+                  type="button"
                 >
-                  <g
-                    fill="url(#linearGradient-light)"
-                    fill-rule="nonzero"
-                    id="Logo"
-                    transform="translate(6.000000, 6.000000)"
+                  <svg
+                    aria-hidden="true"
+                    aria-label="Gitify Logo"
+                    class="size-5"
+                    viewBox="0 0 500 500"
+                    xmlns="https://www.w3.org/2000/svg"
+                    xmlns:xlink="https://www.w3.org/1999/xlink"
+                  >
+                    <defs>
+                      <lineargradient
+                        id="linearGradient-light"
+                        x1="90.8779989%"
+                        x2="-1.30249747%"
+                        y1="80.0676288%"
+                        y2="32.7108237%"
+                      >
+                        <stop
+                          offset="0%"
+                          stop-color="#CCCCCC"
+                        />
+                        <stop
+                          offset="100%"
+                          stop-color="#FFFFFF"
+                        />
+                      </lineargradient>
+                    </defs>
+                    <g
+                      fill="none"
+                      fill-rule="evenodd"
+                      stroke="none"
+                      stroke-width="1"
+                    >
+                      <g
+                        fill="url(#linearGradient-light)"
+                        fill-rule="nonzero"
+                        id="Logo"
+                        transform="translate(6.000000, 6.000000)"
+                      >
+                        <path
+                          d="M330.391053,10.2526316 C361.413773,10.2526316 386.562656,35.4015165 386.562656,66.4242368 C386.562656,97.4469571 361.413773,122.595841 330.391053,122.595842 L330.365421,122.570211 L247.319105,122.570211 C180.042515,122.499128 125.399186,176.890222 125.159,244.166421 L125.133789,244.219632 L125.154247,245.84774 C126.219609,301.255958 164.473457,349.116728 218.453292,362.268048 C272.940509,375.542983 329.466993,350.045988 355.583747,300.428701 L272.258632,300.427737 C257.346614,300.427737 243.046846,294.496977 232.512078,283.942976 C221.97731,273.388975 216.072618,259.078414 216.099748,244.166421 C216.099748,213.150778 241.242989,188.007632 272.258632,188.007632 L371.119632,188.007632 C379.28704,188.480415 386.935401,192.166372 392.393842,198.260263 L474.869789,300.324632 L474.978789,300.325211 L474.952789,300.426632 L474.953158,300.427737 L474.951789,300.427632 L474.173714,303.448935 C446.939817,406.220475 353.906452,478.028529 247.319105,478.080211 C118.007789,478.080211 12.8157895,373.144526 12.8157895,244.166421 C12.8157895,115.188316 117.905263,10.2526316 247.319105,10.2526316 L330.391053,10.2526316 Z"
+                        />
+                      </g>
+                    </g>
+                  </svg>
+                </button>
+                <span
+                  aria-hidden="true"
+                  class="prc-TooltipV2-Tooltip-cYMVY"
+                  data-direction="e"
+                  id="_r_1_"
+                  popover="auto"
+                  role="tooltip"
+                >
+                  Home
+                </span>
+                <button
+                  aria-describedby="_r_4_-loading-announcement _r_3_"
+                  aria-label="Notifications"
+                  class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
+                  data-component="IconButton"
+                  data-loading="false"
+                  data-no-visuals="true"
+                  data-size="small"
+                  data-testid="sidebar-notifications"
+                  data-variant="invisible"
+                  type="button"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="octicon octicon-bell"
+                    display="inline-block"
+                    fill="currentColor"
+                    focusable="false"
+                    height="16"
+                    overflow="visible"
+                    style="vertical-align: text-bottom;"
+                    viewBox="0 0 16 16"
+                    width="16"
                   >
                     <path
-                      d="M330.391053,10.2526316 C361.413773,10.2526316 386.562656,35.4015165 386.562656,66.4242368 C386.562656,97.4469571 361.413773,122.595841 330.391053,122.595842 L330.365421,122.570211 L247.319105,122.570211 C180.042515,122.499128 125.399186,176.890222 125.159,244.166421 L125.133789,244.219632 L125.154247,245.84774 C126.219609,301.255958 164.473457,349.116728 218.453292,362.268048 C272.940509,375.542983 329.466993,350.045988 355.583747,300.428701 L272.258632,300.427737 C257.346614,300.427737 243.046846,294.496977 232.512078,283.942976 C221.97731,273.388975 216.072618,259.078414 216.099748,244.166421 C216.099748,213.150778 241.242989,188.007632 272.258632,188.007632 L371.119632,188.007632 C379.28704,188.480415 386.935401,192.166372 392.393842,198.260263 L474.869789,300.324632 L474.978789,300.325211 L474.952789,300.426632 L474.953158,300.427737 L474.951789,300.427632 L474.173714,303.448935 C446.939817,406.220475 353.906452,478.028529 247.319105,478.080211 C118.007789,478.080211 12.8157895,373.144526 12.8157895,244.166421 C12.8157895,115.188316 117.905263,10.2526316 247.319105,10.2526316 L330.391053,10.2526316 Z"
+                      d="M8 16a2 2 0 0 0 1.985-1.75c.017-.137-.097-.25-.235-.25h-3.5c-.138 0-.252.113-.235.25A2 2 0 0 0 8 16ZM3 5a5 5 0 0 1 10 0v2.947c0 .05.015.098.042.139l1.703 2.555A1.519 1.519 0 0 1 13.482 13H2.518a1.516 1.516 0 0 1-1.263-2.36l1.703-2.554A.255.255 0 0 0 3 7.947Zm5-3.5A3.5 3.5 0 0 0 4.5 5v2.947c0 .346-.102.683-.294.97l-1.703 2.556a.017.017 0 0 0-.003.01l.001.006c0 .002.002.004.004.006l.006.004.007.001h10.964l.007-.001.006-.004.004-.006.001-.007a.017.017 0 0 0-.003-.01l-1.703-2.554a1.745 1.745 0 0 1-.294-.97V5A3.5 3.5 0 0 0 8 1.5Z"
                     />
-                  </g>
-                </g>
-              </svg>
-            </button>
-            <span
-              aria-hidden="true"
-              class="prc-TooltipV2-Tooltip-cYMVY"
-              data-direction="e"
-              id="_r_0_"
-              popover="auto"
-              role="tooltip"
-            >
-              Home
-            </span>
-            <button
-              aria-describedby="_r_3_-loading-announcement _r_2_"
-              aria-label="Notifications"
-              class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
-              data-component="IconButton"
-              data-loading="false"
-              data-no-visuals="true"
-              data-size="small"
-              data-testid="sidebar-notifications"
-              data-variant="invisible"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-bell"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
+                  </svg>
+                </button>
+                <span
+                  aria-hidden="true"
+                  class="prc-TooltipV2-Tooltip-cYMVY"
+                  data-direction="e"
+                  id="_r_3_"
+                  popover="auto"
+                  role="tooltip"
+                >
+                  undefined unread notifications ↗
+                </span>
+                <button
+                  aria-describedby="_r_6_-loading-announcement"
+                  aria-labelledby="_r_5_"
+                  class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
+                  data-component="IconButton"
+                  data-loading="false"
+                  data-no-visuals="true"
+                  data-size="small"
+                  data-testid="sidebar-my-issues"
+                  data-variant="invisible"
+                  type="button"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="octicon octicon-issue-opened"
+                    display="inline-block"
+                    fill="currentColor"
+                    focusable="false"
+                    height="16"
+                    overflow="visible"
+                    style="vertical-align: text-bottom;"
+                    viewBox="0 0 16 16"
+                    width="16"
+                  >
+                    <path
+                      d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
+                    />
+                    <path
+                      d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"
+                    />
+                  </svg>
+                </button>
+                <span
+                  aria-hidden="true"
+                  class="prc-TooltipV2-Tooltip-cYMVY"
+                  data-direction="e"
+                  id="_r_5_"
+                  popover="auto"
+                >
+                  My issues ↗
+                </span>
+                <button
+                  aria-describedby="_r_8_-loading-announcement"
+                  aria-labelledby="_r_7_"
+                  class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
+                  data-component="IconButton"
+                  data-loading="false"
+                  data-no-visuals="true"
+                  data-size="small"
+                  data-testid="sidebar-my-pull-requests"
+                  data-variant="invisible"
+                  type="button"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="octicon octicon-git-pull-request"
+                    display="inline-block"
+                    fill="currentColor"
+                    focusable="false"
+                    height="16"
+                    overflow="visible"
+                    style="vertical-align: text-bottom;"
+                    viewBox="0 0 16 16"
+                    width="16"
+                  >
+                    <path
+                      d="M1.5 3.25a2.25 2.25 0 1 1 3 2.122v5.256a2.251 2.251 0 1 1-1.5 0V5.372A2.25 2.25 0 0 1 1.5 3.25Zm5.677-.177L9.573.677A.25.25 0 0 1 10 .854V2.5h1A2.5 2.5 0 0 1 13.5 5v5.628a2.251 2.251 0 1 1-1.5 0V5a1 1 0 0 0-1-1h-1v1.646a.25.25 0 0 1-.427.177L7.177 3.427a.25.25 0 0 1 0-.354ZM3.75 2.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm0 9.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm8.25.75a.75.75 0 1 0 1.5 0 .75.75 0 0 0-1.5 0Z"
+                    />
+                  </svg>
+                </button>
+                <span
+                  aria-hidden="true"
+                  class="prc-TooltipV2-Tooltip-cYMVY"
+                  data-direction="e"
+                  id="_r_7_"
+                  popover="auto"
+                >
+                  My pull requests ↗
+                </span>
+              </div>
+              <div
+                class="prc-Stack-Stack-WJVsK"
+                data-align="center"
+                data-direction="vertical"
+                data-gap="condensed"
+                data-justify="start"
+                data-padding="normal"
+                data-wrap="nowrap"
               >
-                <path
-                  d="M8 16a2 2 0 0 0 1.985-1.75c.017-.137-.097-.25-.235-.25h-3.5c-.138 0-.252.113-.235.25A2 2 0 0 0 8 16ZM3 5a5 5 0 0 1 10 0v2.947c0 .05.015.098.042.139l1.703 2.555A1.519 1.519 0 0 1 13.482 13H2.518a1.516 1.516 0 0 1-1.263-2.36l1.703-2.554A.255.255 0 0 0 3 7.947Zm5-3.5A3.5 3.5 0 0 0 4.5 5v2.947c0 .346-.102.683-.294.97l-1.703 2.556a.017.017 0 0 0-.003.01l.001.006c0 .002.002.004.004.006l.006.004.007.001h10.964l.007-.001.006-.004.004-.006.001-.007a.017.017 0 0 0-.003-.01l-1.703-2.554a1.745 1.745 0 0 1-.294-.97V5A3.5 3.5 0 0 0 8 1.5Z"
-                />
-              </svg>
-            </button>
-            <span
-              aria-hidden="true"
-              class="prc-TooltipV2-Tooltip-cYMVY"
-              data-direction="e"
-              id="_r_2_"
-              popover="auto"
-              role="tooltip"
+                <button
+                  aria-describedby="_r_a_-loading-announcement"
+                  aria-labelledby="_r_9_"
+                  class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
+                  data-component="IconButton"
+                  data-loading="false"
+                  data-no-visuals="true"
+                  data-size="small"
+                  data-testid="sidebar-quit"
+                  data-variant="invisible"
+                  type="button"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="octicon octicon-x-circle"
+                    display="inline-block"
+                    fill="currentColor"
+                    focusable="false"
+                    height="16"
+                    overflow="visible"
+                    style="vertical-align: text-bottom;"
+                    viewBox="0 0 16 16"
+                    width="16"
+                  >
+                    <path
+                      d="M2.344 2.343h-.001a8 8 0 0 1 11.314 11.314A8.002 8.002 0 0 1 .234 10.089a8 8 0 0 1 2.11-7.746Zm1.06 10.253a6.5 6.5 0 1 0 9.108-9.275 6.5 6.5 0 0 0-9.108 9.275ZM6.03 4.97 8 6.94l1.97-1.97a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734L9.06 8l1.97 1.97a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L8 9.06l-1.97 1.97a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L6.94 8 4.97 6.03a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018Z"
+                    />
+                  </svg>
+                </button>
+                <span
+                  aria-hidden="true"
+                  class="prc-TooltipV2-Tooltip-cYMVY"
+                  data-direction="e"
+                  id="_r_9_"
+                  popover="auto"
+                >
+                  Quit Gitify
+                </span>
+              </div>
+            </div>
+            <div
+              class="flex-1 pl-sidebar"
             >
-              undefined unread notifications ↗
-            </span>
-            <button
-              aria-describedby="_r_5_-loading-announcement"
-              aria-labelledby="_r_4_"
-              class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
-              data-component="IconButton"
-              data-loading="false"
-              data-no-visuals="true"
-              data-size="small"
-              data-testid="sidebar-my-issues"
-              data-variant="invisible"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-issue-opened"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
-                />
-                <path
-                  d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"
-                />
-              </svg>
-            </button>
-            <span
-              aria-hidden="true"
-              class="prc-TooltipV2-Tooltip-cYMVY"
-              data-direction="e"
-              id="_r_4_"
-              popover="auto"
-            >
-              My issues ↗
-            </span>
-            <button
-              aria-describedby="_r_7_-loading-announcement"
-              aria-labelledby="_r_6_"
-              class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
-              data-component="IconButton"
-              data-loading="false"
-              data-no-visuals="true"
-              data-size="small"
-              data-testid="sidebar-my-pull-requests"
-              data-variant="invisible"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-git-pull-request"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M1.5 3.25a2.25 2.25 0 1 1 3 2.122v5.256a2.251 2.251 0 1 1-1.5 0V5.372A2.25 2.25 0 0 1 1.5 3.25Zm5.677-.177L9.573.677A.25.25 0 0 1 10 .854V2.5h1A2.5 2.5 0 0 1 13.5 5v5.628a2.251 2.251 0 1 1-1.5 0V5a1 1 0 0 0-1-1h-1v1.646a.25.25 0 0 1-.427.177L7.177 3.427a.25.25 0 0 1 0-.354ZM3.75 2.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm0 9.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm8.25.75a.75.75 0 1 0 1.5 0 .75.75 0 0 0-1.5 0Z"
-                />
-              </svg>
-            </button>
-            <span
-              aria-hidden="true"
-              class="prc-TooltipV2-Tooltip-cYMVY"
-              data-direction="e"
-              id="_r_6_"
-              popover="auto"
-            >
-              My pull requests ↗
-            </span>
+              Test
+            </div>
           </div>
-          <div
-            class="prc-Stack-Stack-WJVsK"
-            data-align="center"
-            data-direction="vertical"
-            data-gap="condensed"
-            data-justify="start"
-            data-padding="normal"
-            data-wrap="nowrap"
-          >
-            <button
-              aria-describedby="_r_9_-loading-announcement"
-              aria-labelledby="_r_8_"
-              class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
-              data-component="IconButton"
-              data-loading="false"
-              data-no-visuals="true"
-              data-size="small"
-              data-testid="sidebar-quit"
-              data-variant="invisible"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-x-circle"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M2.344 2.343h-.001a8 8 0 0 1 11.314 11.314A8.002 8.002 0 0 1 .234 10.089a8 8 0 0 1 2.11-7.746Zm1.06 10.253a6.5 6.5 0 1 0 9.108-9.275 6.5 6.5 0 0 0-9.108 9.275ZM6.03 4.97 8 6.94l1.97-1.97a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734L9.06 8l1.97 1.97a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L8 9.06l-1.97 1.97a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L6.94 8 4.97 6.03a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018Z"
-                />
-              </svg>
-            </button>
-            <span
-              aria-hidden="true"
-              class="prc-TooltipV2-Tooltip-cYMVY"
-              data-direction="e"
-              id="_r_8_"
-              popover="auto"
-            >
-              Quit Gitify
-            </span>
-          </div>
-        </div>
-        <div
-          class="flex-1 pl-sidebar"
-        >
-          Test
         </div>
       </div>
     </div>
   </body>,
   "container": <div>
     <div
-      class="flex flex-col min-h-screen bg-gitify-background"
+      data-color-mode="light"
+      data-dark-theme="dark"
+      data-light-theme="light"
     >
-      <button
-        aria-label="initial focus"
-        class="sr-only focus-visible"
-        data-focus-visible-added=""
-        data-testid="initial-focus-sentinel"
-        type="button"
-      />
       <div
-        class="fixed w-sidebar h-full bg-gitify-sidebar [&_svg]:text-white prc-Stack-Stack-WJVsK"
-        data-align="stretch"
-        data-direction="vertical"
-        data-justify="space-between"
-        data-padding="none"
-        data-wrap="nowrap"
+        class="prc-src-BaseStyles-dl-St"
+        data-portal-root="true"
       >
         <div
-          class="prc-Stack-Stack-WJVsK"
-          data-align="center"
-          data-direction="vertical"
-          data-gap="condensed"
-          data-justify="start"
-          data-padding="normal"
-          data-wrap="nowrap"
+          class="flex flex-col min-h-screen bg-gitify-background"
         >
           <button
-            aria-describedby="_r_1_-loading-announcement _r_0_"
-            aria-label="Gitify"
-            class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
-            data-component="IconButton"
-            data-loading="false"
-            data-no-visuals="true"
-            data-size="small"
-            data-testid="sidebar-home"
-            data-variant="invisible"
+            aria-label="initial focus"
+            class="sr-only focus-visible"
+            data-focus-visible-added=""
+            data-testid="initial-focus-sentinel"
             type="button"
+          />
+          <div
+            class="fixed w-sidebar h-full bg-gitify-sidebar [&_svg]:text-white prc-Stack-Stack-WJVsK"
+            data-align="stretch"
+            data-direction="vertical"
+            data-justify="space-between"
+            data-padding="none"
+            data-wrap="nowrap"
           >
-            <svg
-              aria-hidden="true"
-              aria-label="Gitify Logo"
-              class="size-5"
-              viewBox="0 0 500 500"
-              xmlns="https://www.w3.org/2000/svg"
-              xmlns:xlink="https://www.w3.org/1999/xlink"
+            <div
+              class="prc-Stack-Stack-WJVsK"
+              data-align="center"
+              data-direction="vertical"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="normal"
+              data-wrap="nowrap"
             >
-              <defs>
-                <lineargradient
-                  id="linearGradient-light"
-                  x1="90.8779989%"
-                  x2="-1.30249747%"
-                  y1="80.0676288%"
-                  y2="32.7108237%"
-                >
-                  <stop
-                    offset="0%"
-                    stop-color="#CCCCCC"
-                  />
-                  <stop
-                    offset="100%"
-                    stop-color="#FFFFFF"
-                  />
-                </lineargradient>
-              </defs>
-              <g
-                fill="none"
-                fill-rule="evenodd"
-                stroke="none"
-                stroke-width="1"
+              <button
+                aria-describedby="_r_2_-loading-announcement _r_1_"
+                aria-label="Gitify"
+                class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
+                data-component="IconButton"
+                data-loading="false"
+                data-no-visuals="true"
+                data-size="small"
+                data-testid="sidebar-home"
+                data-variant="invisible"
+                type="button"
               >
-                <g
-                  fill="url(#linearGradient-light)"
-                  fill-rule="nonzero"
-                  id="Logo"
-                  transform="translate(6.000000, 6.000000)"
+                <svg
+                  aria-hidden="true"
+                  aria-label="Gitify Logo"
+                  class="size-5"
+                  viewBox="0 0 500 500"
+                  xmlns="https://www.w3.org/2000/svg"
+                  xmlns:xlink="https://www.w3.org/1999/xlink"
+                >
+                  <defs>
+                    <lineargradient
+                      id="linearGradient-light"
+                      x1="90.8779989%"
+                      x2="-1.30249747%"
+                      y1="80.0676288%"
+                      y2="32.7108237%"
+                    >
+                      <stop
+                        offset="0%"
+                        stop-color="#CCCCCC"
+                      />
+                      <stop
+                        offset="100%"
+                        stop-color="#FFFFFF"
+                      />
+                    </lineargradient>
+                  </defs>
+                  <g
+                    fill="none"
+                    fill-rule="evenodd"
+                    stroke="none"
+                    stroke-width="1"
+                  >
+                    <g
+                      fill="url(#linearGradient-light)"
+                      fill-rule="nonzero"
+                      id="Logo"
+                      transform="translate(6.000000, 6.000000)"
+                    >
+                      <path
+                        d="M330.391053,10.2526316 C361.413773,10.2526316 386.562656,35.4015165 386.562656,66.4242368 C386.562656,97.4469571 361.413773,122.595841 330.391053,122.595842 L330.365421,122.570211 L247.319105,122.570211 C180.042515,122.499128 125.399186,176.890222 125.159,244.166421 L125.133789,244.219632 L125.154247,245.84774 C126.219609,301.255958 164.473457,349.116728 218.453292,362.268048 C272.940509,375.542983 329.466993,350.045988 355.583747,300.428701 L272.258632,300.427737 C257.346614,300.427737 243.046846,294.496977 232.512078,283.942976 C221.97731,273.388975 216.072618,259.078414 216.099748,244.166421 C216.099748,213.150778 241.242989,188.007632 272.258632,188.007632 L371.119632,188.007632 C379.28704,188.480415 386.935401,192.166372 392.393842,198.260263 L474.869789,300.324632 L474.978789,300.325211 L474.952789,300.426632 L474.953158,300.427737 L474.951789,300.427632 L474.173714,303.448935 C446.939817,406.220475 353.906452,478.028529 247.319105,478.080211 C118.007789,478.080211 12.8157895,373.144526 12.8157895,244.166421 C12.8157895,115.188316 117.905263,10.2526316 247.319105,10.2526316 L330.391053,10.2526316 Z"
+                      />
+                    </g>
+                  </g>
+                </svg>
+              </button>
+              <span
+                aria-hidden="true"
+                class="prc-TooltipV2-Tooltip-cYMVY"
+                data-direction="e"
+                id="_r_1_"
+                popover="auto"
+                role="tooltip"
+              >
+                Home
+              </span>
+              <button
+                aria-describedby="_r_4_-loading-announcement _r_3_"
+                aria-label="Notifications"
+                class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
+                data-component="IconButton"
+                data-loading="false"
+                data-no-visuals="true"
+                data-size="small"
+                data-testid="sidebar-notifications"
+                data-variant="invisible"
+                type="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="octicon octicon-bell"
+                  display="inline-block"
+                  fill="currentColor"
+                  focusable="false"
+                  height="16"
+                  overflow="visible"
+                  style="vertical-align: text-bottom;"
+                  viewBox="0 0 16 16"
+                  width="16"
                 >
                   <path
-                    d="M330.391053,10.2526316 C361.413773,10.2526316 386.562656,35.4015165 386.562656,66.4242368 C386.562656,97.4469571 361.413773,122.595841 330.391053,122.595842 L330.365421,122.570211 L247.319105,122.570211 C180.042515,122.499128 125.399186,176.890222 125.159,244.166421 L125.133789,244.219632 L125.154247,245.84774 C126.219609,301.255958 164.473457,349.116728 218.453292,362.268048 C272.940509,375.542983 329.466993,350.045988 355.583747,300.428701 L272.258632,300.427737 C257.346614,300.427737 243.046846,294.496977 232.512078,283.942976 C221.97731,273.388975 216.072618,259.078414 216.099748,244.166421 C216.099748,213.150778 241.242989,188.007632 272.258632,188.007632 L371.119632,188.007632 C379.28704,188.480415 386.935401,192.166372 392.393842,198.260263 L474.869789,300.324632 L474.978789,300.325211 L474.952789,300.426632 L474.953158,300.427737 L474.951789,300.427632 L474.173714,303.448935 C446.939817,406.220475 353.906452,478.028529 247.319105,478.080211 C118.007789,478.080211 12.8157895,373.144526 12.8157895,244.166421 C12.8157895,115.188316 117.905263,10.2526316 247.319105,10.2526316 L330.391053,10.2526316 Z"
+                    d="M8 16a2 2 0 0 0 1.985-1.75c.017-.137-.097-.25-.235-.25h-3.5c-.138 0-.252.113-.235.25A2 2 0 0 0 8 16ZM3 5a5 5 0 0 1 10 0v2.947c0 .05.015.098.042.139l1.703 2.555A1.519 1.519 0 0 1 13.482 13H2.518a1.516 1.516 0 0 1-1.263-2.36l1.703-2.554A.255.255 0 0 0 3 7.947Zm5-3.5A3.5 3.5 0 0 0 4.5 5v2.947c0 .346-.102.683-.294.97l-1.703 2.556a.017.017 0 0 0-.003.01l.001.006c0 .002.002.004.004.006l.006.004.007.001h10.964l.007-.001.006-.004.004-.006.001-.007a.017.017 0 0 0-.003-.01l-1.703-2.554a1.745 1.745 0 0 1-.294-.97V5A3.5 3.5 0 0 0 8 1.5Z"
                   />
-                </g>
-              </g>
-            </svg>
-          </button>
-          <span
-            aria-hidden="true"
-            class="prc-TooltipV2-Tooltip-cYMVY"
-            data-direction="e"
-            id="_r_0_"
-            popover="auto"
-            role="tooltip"
-          >
-            Home
-          </span>
-          <button
-            aria-describedby="_r_3_-loading-announcement _r_2_"
-            aria-label="Notifications"
-            class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
-            data-component="IconButton"
-            data-loading="false"
-            data-no-visuals="true"
-            data-size="small"
-            data-testid="sidebar-notifications"
-            data-variant="invisible"
-            type="button"
-          >
-            <svg
-              aria-hidden="true"
-              class="octicon octicon-bell"
-              display="inline-block"
-              fill="currentColor"
-              focusable="false"
-              height="16"
-              overflow="visible"
-              style="vertical-align: text-bottom;"
-              viewBox="0 0 16 16"
-              width="16"
+                </svg>
+              </button>
+              <span
+                aria-hidden="true"
+                class="prc-TooltipV2-Tooltip-cYMVY"
+                data-direction="e"
+                id="_r_3_"
+                popover="auto"
+                role="tooltip"
+              >
+                undefined unread notifications ↗
+              </span>
+              <button
+                aria-describedby="_r_6_-loading-announcement"
+                aria-labelledby="_r_5_"
+                class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
+                data-component="IconButton"
+                data-loading="false"
+                data-no-visuals="true"
+                data-size="small"
+                data-testid="sidebar-my-issues"
+                data-variant="invisible"
+                type="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="octicon octicon-issue-opened"
+                  display="inline-block"
+                  fill="currentColor"
+                  focusable="false"
+                  height="16"
+                  overflow="visible"
+                  style="vertical-align: text-bottom;"
+                  viewBox="0 0 16 16"
+                  width="16"
+                >
+                  <path
+                    d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
+                  />
+                  <path
+                    d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"
+                  />
+                </svg>
+              </button>
+              <span
+                aria-hidden="true"
+                class="prc-TooltipV2-Tooltip-cYMVY"
+                data-direction="e"
+                id="_r_5_"
+                popover="auto"
+              >
+                My issues ↗
+              </span>
+              <button
+                aria-describedby="_r_8_-loading-announcement"
+                aria-labelledby="_r_7_"
+                class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
+                data-component="IconButton"
+                data-loading="false"
+                data-no-visuals="true"
+                data-size="small"
+                data-testid="sidebar-my-pull-requests"
+                data-variant="invisible"
+                type="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="octicon octicon-git-pull-request"
+                  display="inline-block"
+                  fill="currentColor"
+                  focusable="false"
+                  height="16"
+                  overflow="visible"
+                  style="vertical-align: text-bottom;"
+                  viewBox="0 0 16 16"
+                  width="16"
+                >
+                  <path
+                    d="M1.5 3.25a2.25 2.25 0 1 1 3 2.122v5.256a2.251 2.251 0 1 1-1.5 0V5.372A2.25 2.25 0 0 1 1.5 3.25Zm5.677-.177L9.573.677A.25.25 0 0 1 10 .854V2.5h1A2.5 2.5 0 0 1 13.5 5v5.628a2.251 2.251 0 1 1-1.5 0V5a1 1 0 0 0-1-1h-1v1.646a.25.25 0 0 1-.427.177L7.177 3.427a.25.25 0 0 1 0-.354ZM3.75 2.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm0 9.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm8.25.75a.75.75 0 1 0 1.5 0 .75.75 0 0 0-1.5 0Z"
+                  />
+                </svg>
+              </button>
+              <span
+                aria-hidden="true"
+                class="prc-TooltipV2-Tooltip-cYMVY"
+                data-direction="e"
+                id="_r_7_"
+                popover="auto"
+              >
+                My pull requests ↗
+              </span>
+            </div>
+            <div
+              class="prc-Stack-Stack-WJVsK"
+              data-align="center"
+              data-direction="vertical"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="normal"
+              data-wrap="nowrap"
             >
-              <path
-                d="M8 16a2 2 0 0 0 1.985-1.75c.017-.137-.097-.25-.235-.25h-3.5c-.138 0-.252.113-.235.25A2 2 0 0 0 8 16ZM3 5a5 5 0 0 1 10 0v2.947c0 .05.015.098.042.139l1.703 2.555A1.519 1.519 0 0 1 13.482 13H2.518a1.516 1.516 0 0 1-1.263-2.36l1.703-2.554A.255.255 0 0 0 3 7.947Zm5-3.5A3.5 3.5 0 0 0 4.5 5v2.947c0 .346-.102.683-.294.97l-1.703 2.556a.017.017 0 0 0-.003.01l.001.006c0 .002.002.004.004.006l.006.004.007.001h10.964l.007-.001.006-.004.004-.006.001-.007a.017.017 0 0 0-.003-.01l-1.703-2.554a1.745 1.745 0 0 1-.294-.97V5A3.5 3.5 0 0 0 8 1.5Z"
-              />
-            </svg>
-          </button>
-          <span
-            aria-hidden="true"
-            class="prc-TooltipV2-Tooltip-cYMVY"
-            data-direction="e"
-            id="_r_2_"
-            popover="auto"
-            role="tooltip"
+              <button
+                aria-describedby="_r_a_-loading-announcement"
+                aria-labelledby="_r_9_"
+                class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
+                data-component="IconButton"
+                data-loading="false"
+                data-no-visuals="true"
+                data-size="small"
+                data-testid="sidebar-quit"
+                data-variant="invisible"
+                type="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="octicon octicon-x-circle"
+                  display="inline-block"
+                  fill="currentColor"
+                  focusable="false"
+                  height="16"
+                  overflow="visible"
+                  style="vertical-align: text-bottom;"
+                  viewBox="0 0 16 16"
+                  width="16"
+                >
+                  <path
+                    d="M2.344 2.343h-.001a8 8 0 0 1 11.314 11.314A8.002 8.002 0 0 1 .234 10.089a8 8 0 0 1 2.11-7.746Zm1.06 10.253a6.5 6.5 0 1 0 9.108-9.275 6.5 6.5 0 0 0-9.108 9.275ZM6.03 4.97 8 6.94l1.97-1.97a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734L9.06 8l1.97 1.97a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L8 9.06l-1.97 1.97a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L6.94 8 4.97 6.03a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018Z"
+                  />
+                </svg>
+              </button>
+              <span
+                aria-hidden="true"
+                class="prc-TooltipV2-Tooltip-cYMVY"
+                data-direction="e"
+                id="_r_9_"
+                popover="auto"
+              >
+                Quit Gitify
+              </span>
+            </div>
+          </div>
+          <div
+            class="flex-1 pl-sidebar"
           >
-            undefined unread notifications ↗
-          </span>
-          <button
-            aria-describedby="_r_5_-loading-announcement"
-            aria-labelledby="_r_4_"
-            class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
-            data-component="IconButton"
-            data-loading="false"
-            data-no-visuals="true"
-            data-size="small"
-            data-testid="sidebar-my-issues"
-            data-variant="invisible"
-            type="button"
-          >
-            <svg
-              aria-hidden="true"
-              class="octicon octicon-issue-opened"
-              display="inline-block"
-              fill="currentColor"
-              focusable="false"
-              height="16"
-              overflow="visible"
-              style="vertical-align: text-bottom;"
-              viewBox="0 0 16 16"
-              width="16"
-            >
-              <path
-                d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
-              />
-              <path
-                d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"
-              />
-            </svg>
-          </button>
-          <span
-            aria-hidden="true"
-            class="prc-TooltipV2-Tooltip-cYMVY"
-            data-direction="e"
-            id="_r_4_"
-            popover="auto"
-          >
-            My issues ↗
-          </span>
-          <button
-            aria-describedby="_r_7_-loading-announcement"
-            aria-labelledby="_r_6_"
-            class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
-            data-component="IconButton"
-            data-loading="false"
-            data-no-visuals="true"
-            data-size="small"
-            data-testid="sidebar-my-pull-requests"
-            data-variant="invisible"
-            type="button"
-          >
-            <svg
-              aria-hidden="true"
-              class="octicon octicon-git-pull-request"
-              display="inline-block"
-              fill="currentColor"
-              focusable="false"
-              height="16"
-              overflow="visible"
-              style="vertical-align: text-bottom;"
-              viewBox="0 0 16 16"
-              width="16"
-            >
-              <path
-                d="M1.5 3.25a2.25 2.25 0 1 1 3 2.122v5.256a2.251 2.251 0 1 1-1.5 0V5.372A2.25 2.25 0 0 1 1.5 3.25Zm5.677-.177L9.573.677A.25.25 0 0 1 10 .854V2.5h1A2.5 2.5 0 0 1 13.5 5v5.628a2.251 2.251 0 1 1-1.5 0V5a1 1 0 0 0-1-1h-1v1.646a.25.25 0 0 1-.427.177L7.177 3.427a.25.25 0 0 1 0-.354ZM3.75 2.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm0 9.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm8.25.75a.75.75 0 1 0 1.5 0 .75.75 0 0 0-1.5 0Z"
-              />
-            </svg>
-          </button>
-          <span
-            aria-hidden="true"
-            class="prc-TooltipV2-Tooltip-cYMVY"
-            data-direction="e"
-            id="_r_6_"
-            popover="auto"
-          >
-            My pull requests ↗
-          </span>
+            Test
+          </div>
         </div>
-        <div
-          class="prc-Stack-Stack-WJVsK"
-          data-align="center"
-          data-direction="vertical"
-          data-gap="condensed"
-          data-justify="start"
-          data-padding="normal"
-          data-wrap="nowrap"
-        >
-          <button
-            aria-describedby="_r_9_-loading-announcement"
-            aria-labelledby="_r_8_"
-            class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
-            data-component="IconButton"
-            data-loading="false"
-            data-no-visuals="true"
-            data-size="small"
-            data-testid="sidebar-quit"
-            data-variant="invisible"
-            type="button"
-          >
-            <svg
-              aria-hidden="true"
-              class="octicon octicon-x-circle"
-              display="inline-block"
-              fill="currentColor"
-              focusable="false"
-              height="16"
-              overflow="visible"
-              style="vertical-align: text-bottom;"
-              viewBox="0 0 16 16"
-              width="16"
-            >
-              <path
-                d="M2.344 2.343h-.001a8 8 0 0 1 11.314 11.314A8.002 8.002 0 0 1 .234 10.089a8 8 0 0 1 2.11-7.746Zm1.06 10.253a6.5 6.5 0 1 0 9.108-9.275 6.5 6.5 0 0 0-9.108 9.275ZM6.03 4.97 8 6.94l1.97-1.97a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734L9.06 8l1.97 1.97a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L8 9.06l-1.97 1.97a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L6.94 8 4.97 6.03a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018Z"
-              />
-            </svg>
-          </button>
-          <span
-            aria-hidden="true"
-            class="prc-TooltipV2-Tooltip-cYMVY"
-            data-direction="e"
-            id="_r_8_"
-            popover="auto"
-          >
-            Quit Gitify
-          </span>
-        </div>
-      </div>
-      <div
-        class="flex-1 pl-sidebar"
-      >
-        Test
       </div>
     </div>
   </div>,

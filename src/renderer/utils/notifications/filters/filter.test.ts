@@ -1,4 +1,4 @@
-import { partialMockNotification } from '../../../__mocks__/partial-mocks';
+import { createPartialMockNotification } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
 import { defaultSettings } from '../../../context/defaults';
 import type { Link, SearchToken, SettingsState } from '../../../types';
@@ -16,7 +16,7 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
 
   describe('filterNotifications', () => {
     const mockNotifications = [
-      partialMockNotification(
+      createPartialMockNotification(
         {
           title: 'User authored notification',
           user: {
@@ -34,7 +34,7 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
           full_name: 'gitify-app/gitify',
         },
       ),
-      partialMockNotification(
+      createPartialMockNotification(
         {
           title: 'Bot authored notification',
           user: {

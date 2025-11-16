@@ -1,5 +1,7 @@
-import { createSubjectMock } from '../../../__mocks__/notifications-mocks';
-import { partialMockNotification } from '../../../__mocks__/partial-mocks';
+import {
+  createMockSubject,
+  createPartialMockNotification,
+} from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
 import { IconColor } from '../../../types';
 import type { StateType } from '../../../typesGitHub';
@@ -8,7 +10,7 @@ import { defaultHandler } from './default';
 describe('renderer/utils/notifications/handlers/default.ts', () => {
   describe('enrich', () => {
     it('unhandled subject details', async () => {
-      const mockNotification = partialMockNotification({
+      const mockNotification = createPartialMockNotification({
         title:
           'There is no special subject handling for this notification type',
         type: 'RepositoryInvitation',
@@ -24,7 +26,7 @@ describe('renderer/utils/notifications/handlers/default.ts', () => {
   });
 
   it('iconType', () => {
-    expect(defaultHandler.iconType(createSubjectMock({})).displayName).toBe(
+    expect(defaultHandler.iconType(createMockSubject({})).displayName).toBe(
       'QuestionIcon',
     );
   });
@@ -50,14 +52,14 @@ describe('renderer/utils/notifications/handlers/default.ts', () => {
     ];
 
     it.each(cases)('returns correct color for state %s', (state, expected) => {
-      const subject = createSubjectMock({ state });
+      const subject = createMockSubject({ state });
       expect(defaultHandler.iconColor(subject)).toBe(expected);
     });
   });
 
   describe('formattedNotificationType', () => {
     it('formats state and type with proper casing and spacing', () => {
-      const notification = partialMockNotification({
+      const notification = createPartialMockNotification({
         title: 'Sample',
         type: 'PullRequest',
         state: 'open',
@@ -69,7 +71,7 @@ describe('renderer/utils/notifications/handlers/default.ts', () => {
     });
 
     it('handles missing state (null) gracefully', () => {
-      const notification = partialMockNotification({
+      const notification = createPartialMockNotification({
         title: 'Sample',
         type: 'Issue',
         state: null,
@@ -83,7 +85,7 @@ describe('renderer/utils/notifications/handlers/default.ts', () => {
 
   describe('formattedNotificationNumber', () => {
     it('returns formatted number when present', () => {
-      const notification = partialMockNotification({
+      const notification = createPartialMockNotification({
         title: 'Sample',
         type: 'Issue',
         state: 'open',
@@ -95,7 +97,7 @@ describe('renderer/utils/notifications/handlers/default.ts', () => {
     });
 
     it('returns empty string when number absent', () => {
-      const notification = partialMockNotification({
+      const notification = createPartialMockNotification({
         title: 'Sample',
         type: 'Issue',
         state: 'open',
@@ -106,7 +108,7 @@ describe('renderer/utils/notifications/handlers/default.ts', () => {
 
   describe('formattedNotificationTitle', () => {
     it('appends number in brackets when present', () => {
-      const notification = partialMockNotification({
+      const notification = createPartialMockNotification({
         title: 'Fix bug',
         type: 'Issue',
         state: 'open',
@@ -118,7 +120,7 @@ describe('renderer/utils/notifications/handlers/default.ts', () => {
     });
 
     it('returns title unchanged when number missing', () => {
-      const notification = partialMockNotification({
+      const notification = createPartialMockNotification({
         title: 'Improve docs',
         type: 'Issue',
         state: 'open',

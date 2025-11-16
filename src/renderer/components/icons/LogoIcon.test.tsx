@@ -1,25 +1,26 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+import { renderWithAppContext } from '../../__helpers__/test-utils';
 import { Size } from '../../types';
 import { LogoIcon } from './LogoIcon';
 
 describe('renderer/components/icons/LogoIcon.tsx', () => {
   it('renders correctly (light)', () => {
-    const tree = render(<LogoIcon size={Size.SMALL} />);
+    const tree = renderWithAppContext(<LogoIcon size={Size.SMALL} />);
 
     expect(tree).toMatchSnapshot();
   });
 
   it('renders correctly (dark)', () => {
-    const tree = render(<LogoIcon isDark size={Size.SMALL} />);
+    const tree = renderWithAppContext(<LogoIcon isDark size={Size.SMALL} />);
 
     expect(tree).toMatchSnapshot();
   });
 
   it('should click on the logo', async () => {
     const onClick = jest.fn();
-    render(<LogoIcon onClick={onClick} size={Size.SMALL} />);
+    renderWithAppContext(<LogoIcon onClick={onClick} size={Size.SMALL} />);
 
     await userEvent.click(screen.getByLabelText('Gitify Logo'));
 
@@ -27,19 +28,19 @@ describe('renderer/components/icons/LogoIcon.tsx', () => {
   });
 
   it('should render small size', () => {
-    const tree = render(<LogoIcon size={Size.SMALL} />);
+    const tree = renderWithAppContext(<LogoIcon size={Size.SMALL} />);
 
     expect(tree).toMatchSnapshot();
   });
 
   it('should render medium size', () => {
-    const tree = render(<LogoIcon size={Size.MEDIUM} />);
+    const tree = renderWithAppContext(<LogoIcon size={Size.MEDIUM} />);
 
     expect(tree).toMatchSnapshot();
   });
 
   it('should render large size', () => {
-    const tree = render(<LogoIcon size={Size.LARGE} />);
+    const tree = renderWithAppContext(<LogoIcon size={Size.LARGE} />);
 
     expect(tree).toMatchSnapshot();
   });

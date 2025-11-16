@@ -1,12 +1,14 @@
-import { createSubjectMock } from '../../../__mocks__/notifications-mocks';
-import { partialMockNotification } from '../../../__mocks__/partial-mocks';
+import {
+  createMockSubject,
+  createPartialMockNotification,
+} from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
 import { checkSuiteHandler, getCheckSuiteAttributes } from './checkSuite';
 
 describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
   describe('enrich', () => {
     it('cancelled check suite state', async () => {
-      const mockNotification = partialMockNotification({
+      const mockNotification = createPartialMockNotification({
         title: 'Demo workflow run cancelled for main branch',
         type: 'CheckSuite',
       });
@@ -23,7 +25,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
     });
 
     it('failed check suite state', async () => {
-      const mockNotification = partialMockNotification({
+      const mockNotification = createPartialMockNotification({
         title: 'Demo workflow run failed for main branch',
         type: 'CheckSuite',
       });
@@ -40,7 +42,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
     });
 
     it('failed at startup check suite state', async () => {
-      const mockNotification = partialMockNotification({
+      const mockNotification = createPartialMockNotification({
         title: 'Demo workflow run failed at startup for main branch',
         type: 'CheckSuite',
       });
@@ -57,7 +59,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
     });
 
     it('multiple attempts failed check suite state', async () => {
-      const mockNotification = partialMockNotification({
+      const mockNotification = createPartialMockNotification({
         title: 'Demo workflow run, Attempt #3 failed for main branch',
         type: 'CheckSuite',
       });
@@ -74,7 +76,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
     });
 
     it('skipped check suite state', async () => {
-      const mockNotification = partialMockNotification({
+      const mockNotification = createPartialMockNotification({
         title: 'Demo workflow run skipped for main branch',
         type: 'CheckSuite',
       });
@@ -91,7 +93,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
     });
 
     it('successful check suite state', async () => {
-      const mockNotification = partialMockNotification({
+      const mockNotification = createPartialMockNotification({
         title: 'Demo workflow run succeeded for main branch',
         type: 'CheckSuite',
       });
@@ -108,7 +110,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
     });
 
     it('unknown check suite state', async () => {
-      const mockNotification = partialMockNotification({
+      const mockNotification = createPartialMockNotification({
         title: 'Demo workflow run unknown-status for main branch',
         type: 'CheckSuite',
       });
@@ -122,7 +124,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
     });
 
     it('unhandled check suite title', async () => {
-      const mockNotification = partialMockNotification({
+      const mockNotification = createPartialMockNotification({
         title: 'A title that is not in the structure we expect',
         type: 'CheckSuite',
       });
@@ -139,13 +141,13 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
   it('iconType', () => {
     expect(
       checkSuiteHandler.iconType(
-        createSubjectMock({ type: 'CheckSuite', state: null }),
+        createMockSubject({ type: 'CheckSuite', state: null }),
       ).displayName,
     ).toBe('RocketIcon');
 
     expect(
       checkSuiteHandler.iconType(
-        createSubjectMock({
+        createMockSubject({
           type: 'CheckSuite',
           state: 'cancelled',
         }),
@@ -154,7 +156,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
 
     expect(
       checkSuiteHandler.iconType(
-        createSubjectMock({
+        createMockSubject({
           type: 'CheckSuite',
           state: 'failure',
         }),
@@ -163,7 +165,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
 
     expect(
       checkSuiteHandler.iconType(
-        createSubjectMock({
+        createMockSubject({
           type: 'CheckSuite',
           state: 'skipped',
         }),
@@ -172,7 +174,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
 
     expect(
       checkSuiteHandler.iconType(
-        createSubjectMock({
+        createMockSubject({
           type: 'CheckSuite',
           state: 'success',
         }),
@@ -182,7 +184,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
 
   describe('getCheckSuiteState', () => {
     it('cancelled check suite state', async () => {
-      const mockNotification = partialMockNotification({
+      const mockNotification = createPartialMockNotification({
         title: 'Demo workflow run cancelled for feature/foo branch',
         type: 'CheckSuite',
       });
@@ -199,7 +201,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
     });
 
     it('failed check suite state', async () => {
-      const mockNotification = partialMockNotification({
+      const mockNotification = createPartialMockNotification({
         title: 'Demo workflow run failed for main branch',
         type: 'CheckSuite',
       });
@@ -216,7 +218,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
     });
 
     it('multiple attempts failed check suite state', async () => {
-      const mockNotification = partialMockNotification({
+      const mockNotification = createPartialMockNotification({
         title: 'Demo workflow run, Attempt #3 failed for main branch',
         type: 'CheckSuite',
       });
@@ -233,7 +235,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
     });
 
     it('skipped check suite state', async () => {
-      const mockNotification = partialMockNotification({
+      const mockNotification = createPartialMockNotification({
         title: 'Demo workflow run skipped for main branch',
         type: 'CheckSuite',
       });
@@ -250,7 +252,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
     });
 
     it('successful check suite state', async () => {
-      const mockNotification = partialMockNotification({
+      const mockNotification = createPartialMockNotification({
         title: 'Demo workflow run succeeded for main branch',
         type: 'CheckSuite',
       });
@@ -267,7 +269,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
     });
 
     it('unknown check suite state', async () => {
-      const mockNotification = partialMockNotification({
+      const mockNotification = createPartialMockNotification({
         title: 'Demo workflow run unknown-status for main branch',
         type: 'CheckSuite',
       });
@@ -284,7 +286,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
     });
 
     it('unhandled check suite title', async () => {
-      const mockNotification = partialMockNotification({
+      const mockNotification = createPartialMockNotification({
         title: 'A title that is not in the structure we expect',
         type: 'CheckSuite',
       });

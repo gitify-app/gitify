@@ -1,25 +1,12 @@
-import { render } from '@testing-library/react';
-
+import { renderWithAppContext } from '../../__helpers__/test-utils';
 import { mockAccountNotifications } from '../../__mocks__/notifications-mocks';
-import { mockSettings } from '../../__mocks__/state-mocks';
-import { AppContext } from '../../context/App';
-import type { SettingsState } from '../../types';
 import { SubjectTypeFilter } from './SubjectTypeFilter';
 
 describe('renderer/components/filters/SubjectTypeFilter.tsx', () => {
   it('should render itself & its children', () => {
-    const tree = render(
-      <AppContext.Provider
-        value={{
-          settings: {
-            ...mockSettings,
-          } as SettingsState,
-          notifications: mockAccountNotifications,
-        }}
-      >
-        <SubjectTypeFilter />
-      </AppContext.Provider>,
-    );
+    const tree = renderWithAppContext(<SubjectTypeFilter />, {
+      notifications: mockAccountNotifications,
+    });
 
     expect(tree).toMatchSnapshot();
   });

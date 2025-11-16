@@ -1,7 +1,8 @@
-import { act, fireEvent, render, waitFor } from '@testing-library/react';
+import { act, fireEvent, waitFor } from '@testing-library/react';
 import { useContext } from 'react';
 
-import { mockAuth, mockSettings } from '../__mocks__/state-mocks';
+import { renderWithAppContext } from '../__helpers__/test-utils';
+import { mockSettings } from '../__mocks__/state-mocks';
 import { Constants } from '../constants';
 import { useNotifications } from '../hooks/useNotifications';
 import type { AuthState, Hostname, SettingsState, Token } from '../types';
@@ -16,18 +17,6 @@ import { defaultSettings } from './defaults';
 
 jest.mock('../hooks/useNotifications');
 
-const customRender = (
-  ui,
-  auth: AuthState = mockAuth,
-  settings: SettingsState = mockSettings,
-) => {
-  return render(
-    <AppContext.Provider value={{ auth, settings }}>
-      <AppProvider>{ui}</AppProvider>
-    </AppContext.Provider>,
-  );
-};
-
 describe('renderer/context/App.tsx', () => {
   beforeEach(() => {
     jest.useFakeTimers();
@@ -39,7 +28,7 @@ describe('renderer/context/App.tsx', () => {
   });
 
   describe('notification methods', () => {
-    const setTrayIconColorAndTitleMock = jest
+    const mockSetTrayIconColorAndTitle = jest
       .spyOn(tray, 'setTrayIconColorAndTitle')
       .mockImplementation(jest.fn());
 
@@ -51,10 +40,10 @@ describe('renderer/context/App.tsx', () => {
       .spyOn(notifications, 'getUnreadNotificationCount')
       .mockImplementation(jest.fn());
 
-    const fetchNotificationsMock = jest.fn();
-    const markNotificationsAsReadMock = jest.fn();
-    const markNotificationsAsDoneMock = jest.fn();
-    const unsubscribeNotificationMock = jest.fn();
+    const mockFetchNotifications = jest.fn();
+    const mockMarkNotificationsAsRead = jest.fn();
+    const mockMarkNotificationsAsDone = jest.fn();
+    const mockUnsubscribeNotification = jest.fn();
 
     const mockDefaultState = {
       auth: { accounts: [] },
@@ -63,10 +52,10 @@ describe('renderer/context/App.tsx', () => {
 
     beforeEach(() => {
       (useNotifications as jest.Mock).mockReturnValue({
-        fetchNotifications: fetchNotificationsMock,
-        markNotificationsAsRead: markNotificationsAsReadMock,
-        markNotificationsAsDone: markNotificationsAsDoneMock,
-        unsubscribeNotification: unsubscribeNotificationMock,
+        fetchNotifications: mockFetchNotifications,
+        markNotificationsAsRead: mockMarkNotificationsAsRead,
+        markNotificationsAsDone: mockMarkNotificationsAsDone,
+        unsubscribeNotification: mockUnsubscribeNotification,
       });
     });
 
@@ -75,10 +64,10 @@ describe('renderer/context/App.tsx', () => {
     });
 
     it('fetch notifications every minute', async () => {
-      customRender(null);
+      renderWithAppContext(<AppProvider>{null}</AppProvider>);
 
       await waitFor(() =>
-        expect(fetchNotificationsMock).toHaveBeenCalledTimes(1),
+        expect(mockFetchNotifications).toHaveBeenCalledTimes(1),
       );
 
       act(() => {
@@ -86,21 +75,21 @@ describe('renderer/context/App.tsx', () => {
           Constants.DEFAULT_FETCH_NOTIFICATIONS_INTERVAL_MS,
         );
       });
-      expect(fetchNotificationsMock).toHaveBeenCalledTimes(2);
+      expect(mockFetchNotifications).toHaveBeenCalledTimes(2);
 
       act(() => {
         jest.advanceTimersByTime(
           Constants.DEFAULT_FETCH_NOTIFICATIONS_INTERVAL_MS,
         );
       });
-      expect(fetchNotificationsMock).toHaveBeenCalledTimes(3);
+      expect(mockFetchNotifications).toHaveBeenCalledTimes(3);
 
       act(() => {
         jest.advanceTimersByTime(
           Constants.DEFAULT_FETCH_NOTIFICATIONS_INTERVAL_MS,
         );
       });
-      expect(fetchNotificationsMock).toHaveBeenCalledTimes(4);
+      expect(mockFetchNotifications).toHaveBeenCalledTimes(4);
     });
 
     it('should call fetchNotifications', async () => {
@@ -114,13 +103,17 @@ describe('renderer/context/App.tsx', () => {
         );
       };
 
-      const { getByText } = customRender(<TestComponent />);
+      const { getByText } = renderWithAppContext(
+        <AppProvider>
+          <TestComponent />
+        </AppProvider>,
+      );
 
-      fetchNotificationsMock.mockReset();
+      mockFetchNotifications.mockReset();
 
       fireEvent.click(getByText('Test Case'));
 
-      expect(fetchNotificationsMock).toHaveBeenCalledTimes(1);
+      expect(mockFetchNotifications).toHaveBeenCalledTimes(1);
     });
 
     it('should call markNotificationsAsRead', async () => {
@@ -137,16 +130,20 @@ describe('renderer/context/App.tsx', () => {
         );
       };
 
-      const { getByText } = customRender(<TestComponent />);
+      const { getByText } = renderWithAppContext(
+        <AppProvider>
+          <TestComponent />
+        </AppProvider>,
+      );
 
       fireEvent.click(getByText('Test Case'));
 
-      expect(markNotificationsAsReadMock).toHaveBeenCalledTimes(1);
-      expect(markNotificationsAsReadMock).toHaveBeenCalledWith(
+      expect(mockMarkNotificationsAsRead).toHaveBeenCalledTimes(1);
+      expect(mockMarkNotificationsAsRead).toHaveBeenCalledWith(
         mockDefaultState,
         [mockSingleNotification],
       );
-      expect(setTrayIconColorAndTitleMock).toHaveBeenCalledTimes(1);
+      expect(mockSetTrayIconColorAndTitle).toHaveBeenCalledTimes(1);
     });
 
     it('should call markNotificationsAsDone', async () => {
@@ -163,16 +160,20 @@ describe('renderer/context/App.tsx', () => {
         );
       };
 
-      const { getByText } = customRender(<TestComponent />);
+      const { getByText } = renderWithAppContext(
+        <AppProvider>
+          <TestComponent />
+        </AppProvider>,
+      );
 
       fireEvent.click(getByText('Test Case'));
 
-      expect(markNotificationsAsDoneMock).toHaveBeenCalledTimes(1);
-      expect(markNotificationsAsDoneMock).toHaveBeenCalledWith(
+      expect(mockMarkNotificationsAsDone).toHaveBeenCalledTimes(1);
+      expect(mockMarkNotificationsAsDone).toHaveBeenCalledWith(
         mockDefaultState,
         [mockSingleNotification],
       );
-      expect(setTrayIconColorAndTitleMock).toHaveBeenCalledTimes(1);
+      expect(mockSetTrayIconColorAndTitle).toHaveBeenCalledTimes(1);
     });
 
     it('should call unsubscribeNotification', async () => {
@@ -189,26 +190,30 @@ describe('renderer/context/App.tsx', () => {
         );
       };
 
-      const { getByText } = customRender(<TestComponent />);
+      const { getByText } = renderWithAppContext(
+        <AppProvider>
+          <TestComponent />
+        </AppProvider>,
+      );
 
       fireEvent.click(getByText('Test Case'));
 
-      expect(unsubscribeNotificationMock).toHaveBeenCalledTimes(1);
-      expect(unsubscribeNotificationMock).toHaveBeenCalledWith(
+      expect(mockUnsubscribeNotification).toHaveBeenCalledTimes(1);
+      expect(mockUnsubscribeNotification).toHaveBeenCalledWith(
         mockDefaultState,
         mockSingleNotification,
       );
-      expect(setTrayIconColorAndTitleMock).toHaveBeenCalledTimes(1);
+      expect(mockSetTrayIconColorAndTitle).toHaveBeenCalledTimes(1);
     });
   });
 
   describe('authentication methods', () => {
-    const apiRequestAuthMock = jest.spyOn(apiRequests, 'apiRequestAuth');
-    const fetchNotificationsMock = jest.fn();
+    const mockApiRequestAuth = jest.spyOn(apiRequests, 'apiRequestAuth');
+    const mockFetchNotifications = jest.fn();
 
     beforeEach(() => {
       (useNotifications as jest.Mock).mockReturnValue({
-        fetchNotifications: fetchNotificationsMock,
+        fetchNotifications: mockFetchNotifications,
       });
     });
 
@@ -217,7 +222,7 @@ describe('renderer/context/App.tsx', () => {
     });
 
     it('should call loginWithPersonalAccessToken', async () => {
-      apiRequestAuthMock.mockResolvedValueOnce(null);
+      mockApiRequestAuth.mockResolvedValueOnce(null);
 
       const TestComponent = () => {
         const { loginWithPersonalAccessToken } = useContext(AppContext);
@@ -237,16 +242,20 @@ describe('renderer/context/App.tsx', () => {
         );
       };
 
-      const { getByText } = customRender(<TestComponent />);
+      const { getByText } = renderWithAppContext(
+        <AppProvider>
+          <TestComponent />
+        </AppProvider>,
+      );
 
       fireEvent.click(getByText('Test Case'));
 
       await waitFor(() =>
-        expect(fetchNotificationsMock).toHaveBeenCalledTimes(1),
+        expect(mockFetchNotifications).toHaveBeenCalledTimes(1),
       );
 
-      expect(apiRequestAuthMock).toHaveBeenCalledTimes(1);
-      expect(apiRequestAuthMock).toHaveBeenCalledWith(
+      expect(mockApiRequestAuth).toHaveBeenCalledTimes(1);
+      expect(mockApiRequestAuth).toHaveBeenCalledWith(
         'https://api.github.com/notifications',
         'HEAD',
         'encrypted',
@@ -255,16 +264,16 @@ describe('renderer/context/App.tsx', () => {
   });
 
   describe('settings methods', () => {
-    const fetchNotificationsMock = jest.fn();
+    const mockFetchNotifications = jest.fn();
 
     beforeEach(() => {
       (useNotifications as jest.Mock).mockReturnValue({
-        fetchNotifications: fetchNotificationsMock,
+        fetchNotifications: mockFetchNotifications,
       });
     });
 
     it('should call updateSetting', async () => {
-      const saveStateMock = jest
+      const mockSaveState = jest
         .spyOn(storage, 'saveState')
         .mockImplementation(jest.fn());
 
@@ -281,13 +290,17 @@ describe('renderer/context/App.tsx', () => {
         );
       };
 
-      const { getByText } = customRender(<TestComponent />);
+      const { getByText } = renderWithAppContext(
+        <AppProvider>
+          <TestComponent />
+        </AppProvider>,
+      );
 
       act(() => {
         fireEvent.click(getByText('Test Case'));
       });
 
-      expect(saveStateMock).toHaveBeenCalledWith({
+      expect(mockSaveState).toHaveBeenCalledWith({
         auth: {
           accounts: [],
         } as AuthState,
@@ -299,8 +312,8 @@ describe('renderer/context/App.tsx', () => {
     });
 
     it('should call updateSetting and set auto launch(openAtStartup)', async () => {
-      const setAutoLaunchMock = jest.spyOn(comms, 'setAutoLaunch');
-      const saveStateMock = jest
+      const mockSetAutoLaunch = jest.spyOn(comms, 'setAutoLaunch');
+      const mockSaveState = jest
         .spyOn(storage, 'saveState')
         .mockImplementation(jest.fn());
 
@@ -317,15 +330,19 @@ describe('renderer/context/App.tsx', () => {
         );
       };
 
-      const { getByText } = customRender(<TestComponent />);
+      const { getByText } = renderWithAppContext(
+        <AppProvider>
+          <TestComponent />
+        </AppProvider>,
+      );
 
       act(() => {
         fireEvent.click(getByText('Test Case'));
       });
 
-      expect(setAutoLaunchMock).toHaveBeenCalledWith(true);
+      expect(mockSetAutoLaunch).toHaveBeenCalledWith(true);
 
-      expect(saveStateMock).toHaveBeenCalledWith({
+      expect(mockSaveState).toHaveBeenCalledWith({
         auth: {
           accounts: [],
         } as AuthState,
@@ -337,7 +354,7 @@ describe('renderer/context/App.tsx', () => {
     });
 
     it('should clear filters back to default', async () => {
-      const saveStateMock = jest
+      const mockSaveState = jest
         .spyOn(storage, 'saveState')
         .mockImplementation(jest.fn());
 
@@ -351,13 +368,17 @@ describe('renderer/context/App.tsx', () => {
         );
       };
 
-      const { getByText } = customRender(<TestComponent />);
+      const { getByText } = renderWithAppContext(
+        <AppProvider>
+          <TestComponent />
+        </AppProvider>,
+      );
 
       act(() => {
         fireEvent.click(getByText('Test Case'));
       });
 
-      expect(saveStateMock).toHaveBeenCalledWith({
+      expect(mockSaveState).toHaveBeenCalledWith({
         auth: {
           accounts: [],
         } as AuthState,
@@ -374,7 +395,7 @@ describe('renderer/context/App.tsx', () => {
     });
 
     it('should call resetSettings', async () => {
-      const saveStateMock = jest
+      const mockSaveState = jest
         .spyOn(storage, 'saveState')
         .mockImplementation(jest.fn());
 
@@ -388,13 +409,17 @@ describe('renderer/context/App.tsx', () => {
         );
       };
 
-      const { getByText } = customRender(<TestComponent />);
+      const { getByText } = renderWithAppContext(
+        <AppProvider>
+          <TestComponent />
+        </AppProvider>,
+      );
 
       act(() => {
         fireEvent.click(getByText('Test Case'));
       });
 
-      expect(saveStateMock).toHaveBeenCalledWith({
+      expect(mockSaveState).toHaveBeenCalledWith({
         auth: {
           accounts: [],
         } as AuthState,

@@ -1,8 +1,8 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+import { renderWithAppContext } from '../../__helpers__/test-utils';
 import { mockSettings } from '../../__mocks__/state-mocks';
-import { AppContext } from '../../context/App';
 import { GroupBy } from '../../types';
 import { mockSingleNotification } from '../../utils/api/__mocks__/response-mocks';
 import * as comms from '../../utils/comms';
@@ -18,13 +18,9 @@ describe('renderer/components/notifications/NotificationHeader.tsx', () => {
       notification: mockSingleNotification,
     };
 
-    const tree = render(
-      <AppContext.Provider
-        value={{ settings: { ...mockSettings, groupBy: GroupBy.REPOSITORY } }}
-      >
-        <NotificationHeader {...props} />
-      </AppContext.Provider>,
-    );
+    const tree = renderWithAppContext(<NotificationHeader {...props} />, {
+      settings: { ...mockSettings, groupBy: GroupBy.REPOSITORY },
+    });
 
     expect(tree).toMatchSnapshot();
   });
@@ -35,13 +31,9 @@ describe('renderer/components/notifications/NotificationHeader.tsx', () => {
         notification: mockSingleNotification,
       };
 
-      const tree = render(
-        <AppContext.Provider
-          value={{ settings: { ...mockSettings, groupBy: GroupBy.DATE } }}
-        >
-          <NotificationHeader {...props} />
-        </AppContext.Provider>,
-      );
+      const tree = renderWithAppContext(<NotificationHeader {...props} />, {
+        settings: { ...mockSettings, groupBy: GroupBy.DATE },
+      });
 
       expect(tree).toMatchSnapshot();
     });
@@ -51,19 +43,13 @@ describe('renderer/components/notifications/NotificationHeader.tsx', () => {
         notification: mockSingleNotification,
       };
 
-      const tree = render(
-        <AppContext.Provider
-          value={{
-            settings: {
-              ...mockSettings,
-              showNumber: false,
-              groupBy: GroupBy.DATE,
-            },
-          }}
-        >
-          <NotificationHeader {...props} />
-        </AppContext.Provider>,
-      );
+      const tree = renderWithAppContext(<NotificationHeader {...props} />, {
+        settings: {
+          ...mockSettings,
+          showNumber: false,
+          groupBy: GroupBy.DATE,
+        },
+      });
 
       expect(tree).toMatchSnapshot();
     });
@@ -76,20 +62,16 @@ describe('renderer/components/notifications/NotificationHeader.tsx', () => {
         },
       };
 
-      const tree = render(
-        <AppContext.Provider
-          value={{ settings: { ...mockSettings, groupBy: GroupBy.DATE } }}
-        >
-          <NotificationHeader {...props} />
-        </AppContext.Provider>,
-      );
+      const tree = renderWithAppContext(<NotificationHeader {...props} />, {
+        settings: { ...mockSettings, groupBy: GroupBy.DATE },
+      });
 
       expect(tree).toMatchSnapshot();
     });
   });
 
   it('should open notification user profile - group by date', async () => {
-    const openExternalLinkMock = jest
+    const mockOpenExternalLink = jest
       .spyOn(comms, 'openExternalLink')
       .mockImplementation();
 
@@ -97,18 +79,14 @@ describe('renderer/components/notifications/NotificationHeader.tsx', () => {
       notification: mockSingleNotification,
     };
 
-    render(
-      <AppContext.Provider
-        value={{ settings: { ...mockSettings, groupBy: GroupBy.DATE } }}
-      >
-        <NotificationHeader {...props} />
-      </AppContext.Provider>,
-    );
+    renderWithAppContext(<NotificationHeader {...props} />, {
+      settings: { ...mockSettings, groupBy: GroupBy.DATE },
+    });
 
     await userEvent.click(screen.getByTestId('view-repository'));
 
-    expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
-    expect(openExternalLinkMock).toHaveBeenCalledWith(
+    expect(mockOpenExternalLink).toHaveBeenCalledTimes(1);
+    expect(mockOpenExternalLink).toHaveBeenCalledWith(
       props.notification.repository.html_url,
     );
   });

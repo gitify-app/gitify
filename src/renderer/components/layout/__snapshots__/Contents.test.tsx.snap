@@ -6,17 +6,39 @@ exports[`renderer/components/layout/Contents.tsx should render itself & its chil
   "baseElement": <body>
     <div>
       <div
-        class="grow overflow-x-hidden overflow-y-auto px-5"
+        data-color-mode="light"
+        data-dark-theme="dark"
+        data-light-theme="light"
       >
-        Test
+        <div
+          class="prc-src-BaseStyles-dl-St"
+          data-portal-root="true"
+        >
+          <div
+            class="grow overflow-x-hidden overflow-y-auto px-5"
+          >
+            Test
+          </div>
+        </div>
       </div>
     </div>
   </body>,
   "container": <div>
     <div
-      class="grow overflow-x-hidden overflow-y-auto px-5"
+      data-color-mode="light"
+      data-dark-theme="dark"
+      data-light-theme="light"
     >
-      Test
+      <div
+        class="prc-src-BaseStyles-dl-St"
+        data-portal-root="true"
+      >
+        <div
+          class="grow overflow-x-hidden overflow-y-auto px-5"
+        >
+          Test
+        </div>
+      </div>
     </div>
   </div>,
   "debug": [Function],

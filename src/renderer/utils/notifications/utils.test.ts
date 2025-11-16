@@ -1,8 +1,8 @@
-import { createMockNotificationForRepoName } from '../../__mocks__/notifications-mocks';
 import {
   mockGitHubCloudAccount,
   mockGitHubEnterpriseServerAccount,
-} from '../../__mocks__/state-mocks';
+} from '../../__mocks__/account-mocks';
+import { createMockNotificationForRepoName } from '../../__mocks__/notifications-mocks';
 import type { AccountNotifications } from '../../types';
 import { getNewNotifications } from './utils';
 

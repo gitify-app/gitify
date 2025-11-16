@@ -205,12 +205,12 @@ describe('main/updater.ts', () => {
     });
 
     it('performs initial check and schedules periodic checks', async () => {
-      const originalSetInterval = global.setInterval;
+      const originalSetInterval = globalThis.setInterval;
       const setIntervalSpy = jest
-        .spyOn(global, 'setInterval')
+        .spyOn(globalThis, 'setInterval')
         .mockImplementation(((fn: () => void) => {
           fn();
-          return 0 as unknown as NodeJS.Timer;
+          return 0 as unknown as NodeJS.Timeout;
         }) as unknown as typeof setInterval);
       try {
         await updater.start();
@@ -224,7 +224,7 @@ describe('main/updater.ts', () => {
         );
       } finally {
         setIntervalSpy.mockRestore();
-        global.setInterval = originalSetInterval;
+        globalThis.setInterval = originalSetInterval;
       }
     });
   });

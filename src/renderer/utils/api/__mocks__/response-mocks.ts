@@ -1,7 +1,7 @@
 import {
   mockGitHubCloudAccount,
   mockGitHubEnterpriseServerAccount,
-} from '../../../__mocks__/state-mocks';
+} from '../../../__mocks__/account-mocks';
 import type { Link } from '../../../types';
 import type {
   Discussion,

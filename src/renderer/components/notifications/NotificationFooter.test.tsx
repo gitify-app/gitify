@@ -1,12 +1,9 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import {
-  mockGitHubCloudAccount,
-  mockSettings,
-} from '../../__mocks__/state-mocks';
-import { AppContext } from '../../context/App';
-import { GroupBy, type Link } from '../../types';
+import { renderWithAppContext } from '../../__helpers__/test-utils';
+import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
+import type { Link } from '../../types';
 import type { UserType } from '../../typesGitHub';
 import { mockSingleNotification } from '../../utils/api/__mocks__/response-mocks';
 import * as comms from '../../utils/comms';
@@ -19,27 +16,21 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
 
   it('should render itself & its children', async () => {
     jest
-      .spyOn(global.Date, 'now')
+      .spyOn(globalThis.Date, 'now')
       .mockImplementation(() => new Date('2024').valueOf());
 
     const props = {
       notification: mockSingleNotification,
     };
 
-    const tree = render(
-      <AppContext.Provider
-        value={{ settings: { ...mockSettings, groupBy: GroupBy.DATE } }}
-      >
-        <NotificationFooter {...props} />
-      </AppContext.Provider>,
-    );
+    const tree = renderWithAppContext(<NotificationFooter {...props} />);
 
     expect(tree).toMatchSnapshot();
   });
 
   it('should render itself & its children when last_read_at is null', async () => {
     jest
-      .spyOn(global.Date, 'now')
+      .spyOn(globalThis.Date, 'now')
       .mockImplementation(() => new Date('2024').valueOf());
 
     const mockNotification = mockSingleNotification;
@@ -49,11 +40,7 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
       notification: mockNotification,
     };
 
-    const tree = render(
-      <AppContext.Provider value={{ settings: mockSettings }}>
-        <NotificationFooter {...props} />
-      </AppContext.Provider>,
-    );
+    const tree = renderWithAppContext(<NotificationFooter {...props} />);
 
     expect(tree).toMatchSnapshot();
   });
@@ -61,7 +48,7 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
   describe('security alerts should use github icon for avatar', () => {
     it('Repository Dependabot Alerts Thread', async () => {
       jest
-        .spyOn(global.Date, 'now')
+        .spyOn(globalThis.Date, 'now')
         .mockImplementation(() => new Date('2024').valueOf());
 
       const mockNotification = mockSingleNotification;
@@ -71,18 +58,14 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
         notification: mockNotification,
       };
 
-      const tree = render(
-        <AppContext.Provider value={{ settings: mockSettings }}>
-          <NotificationFooter {...props} />
-        </AppContext.Provider>,
-      );
+      const tree = renderWithAppContext(<NotificationFooter {...props} />);
 
       expect(tree).toMatchSnapshot();
     });
 
     it('Repository Vulnerability Alert', async () => {
       jest
-        .spyOn(global.Date, 'now')
+        .spyOn(globalThis.Date, 'now')
         .mockImplementation(() => new Date('2024').valueOf());
 
       const mockNotification = mockSingleNotification;
@@ -92,11 +75,7 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
         notification: mockNotification,
       };
 
-      const tree = render(
-        <AppContext.Provider value={{ settings: mockSettings }}>
-          <NotificationFooter {...props} />
-        </AppContext.Provider>,
-      );
+      const tree = renderWithAppContext(<NotificationFooter {...props} />);
 
       expect(tree).toMatchSnapshot();
     });
@@ -104,7 +83,7 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
 
   it('should default to known avatar if no user found', async () => {
     jest
-      .spyOn(global.Date, 'now')
+      .spyOn(globalThis.Date, 'now')
       .mockImplementation(() => new Date('2024').valueOf());
 
     const mockNotification = mockSingleNotification;
@@ -114,17 +93,13 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
       notification: mockNotification,
     };
 
-    const tree = render(
-      <AppContext.Provider value={{ settings: mockSettings }}>
-        <NotificationFooter {...props} />
-      </AppContext.Provider>,
-    );
+    const tree = renderWithAppContext(<NotificationFooter {...props} />);
 
     expect(tree).toMatchSnapshot();
   });
 
   it('should open notification user profile', async () => {
-    const openExternalLinkMock = jest
+    const mockOpenExternalLink = jest
       .spyOn(comms, 'openExternalLink')
       .mockImplementation();
 
@@ -146,20 +121,12 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
       account: mockGitHubCloudAccount,
     };
 
-    render(
-      <AppContext.Provider
-        value={{
-          settings: { ...mockSettings },
-        }}
-      >
-        <NotificationFooter {...props} />
-      </AppContext.Provider>,
-    );
+    renderWithAppContext(<NotificationFooter {...props} />);
 
     await userEvent.click(screen.getByTestId('view-profile'));
 
-    expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
-    expect(openExternalLinkMock).toHaveBeenCalledWith(
+    expect(mockOpenExternalLink).toHaveBeenCalledTimes(1);
+    expect(mockOpenExternalLink).toHaveBeenCalledWith(
       props.notification.subject.user.html_url,
     );
   });

@@ -6,34 +6,56 @@ exports[`renderer/components/primitives/Footer.tsx should render itself & its ch
   "baseElement": <body>
     <div>
       <div
-        class="left-sidebar bg-gitify-footer"
+        data-color-mode="light"
+        data-dark-theme="dark"
+        data-light-theme="light"
       >
         <div
-          class="prc-Stack-Stack-WJVsK"
-          data-align="stretch"
-          data-direction="horizontal"
-          data-justify="end"
-          data-padding="condensed"
-          data-wrap="nowrap"
+          class="prc-src-BaseStyles-dl-St"
+          data-portal-root="true"
         >
-          Test
+          <div
+            class="left-sidebar bg-gitify-footer"
+          >
+            <div
+              class="prc-Stack-Stack-WJVsK"
+              data-align="stretch"
+              data-direction="horizontal"
+              data-justify="end"
+              data-padding="condensed"
+              data-wrap="nowrap"
+            >
+              Test
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </body>,
   "container": <div>
     <div
-      class="left-sidebar bg-gitify-footer"
+      data-color-mode="light"
+      data-dark-theme="dark"
+      data-light-theme="light"
     >
       <div
-        class="prc-Stack-Stack-WJVsK"
-        data-align="stretch"
-        data-direction="horizontal"
-        data-justify="end"
-        data-padding="condensed"
-        data-wrap="nowrap"
+        class="prc-src-BaseStyles-dl-St"
+        data-portal-root="true"
       >
-        Test
+        <div
+          class="left-sidebar bg-gitify-footer"
+        >
+          <div
+            class="prc-Stack-Stack-WJVsK"
+            data-align="stretch"
+            data-direction="horizontal"
+            data-justify="end"
+            data-padding="condensed"
+            data-wrap="nowrap"
+          >
+            Test
+          </div>
+        </div>
       </div>
     </div>
   </div>,
@@ -97,34 +119,56 @@ exports[`renderer/components/primitives/Footer.tsx should render itself & its ch
   "baseElement": <body>
     <div>
       <div
-        class="left-sidebar bg-gitify-footer"
+        data-color-mode="light"
+        data-dark-theme="dark"
+        data-light-theme="light"
       >
         <div
-          class="prc-Stack-Stack-WJVsK"
-          data-align="stretch"
-          data-direction="horizontal"
-          data-justify="space-between"
-          data-padding="condensed"
-          data-wrap="nowrap"
+          class="prc-src-BaseStyles-dl-St"
+          data-portal-root="true"
         >
-          Test
+          <div
+            class="left-sidebar bg-gitify-footer"
+          >
+            <div
+              class="prc-Stack-Stack-WJVsK"
+              data-align="stretch"
+              data-direction="horizontal"
+              data-justify="space-between"
+              data-padding="condensed"
+              data-wrap="nowrap"
+            >
+              Test
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </body>,
   "container": <div>
     <div
-      class="left-sidebar bg-gitify-footer"
+      data-color-mode="light"
+      data-dark-theme="dark"
+      data-light-theme="light"
     >
       <div
-        class="prc-Stack-Stack-WJVsK"
-        data-align="stretch"
-        data-direction="horizontal"
-        data-justify="space-between"
-        data-padding="condensed"
-        data-wrap="nowrap"
+        class="prc-src-BaseStyles-dl-St"
+        data-portal-root="true"
       >
-        Test
+        <div
+          class="left-sidebar bg-gitify-footer"
+        >
+          <div
+            class="prc-Stack-Stack-WJVsK"
+            data-align="stretch"
+            data-direction="horizontal"
+            data-justify="space-between"
+            data-padding="condensed"
+            data-wrap="nowrap"
+          >
+            Test
+          </div>
+        </div>
       </div>
     </div>
   </div>,

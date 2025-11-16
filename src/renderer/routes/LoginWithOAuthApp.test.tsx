@@ -1,8 +1,8 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { AppContext } from '../context/App';
-import type { AuthState, ClientID, ClientSecret, Hostname } from '../types';
+import { renderWithAppContext } from '../__helpers__/test-utils';
+import type { ClientID, ClientSecret, Hostname } from '../types';
 import * as comms from '../utils/comms';
 import { LoginWithOAuthAppRoute, validateForm } from './LoginWithOAuthApp';
 
@@ -15,34 +15,22 @@ jest.mock('react-router-dom', () => ({
 describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
   const mockLoginWithOAuthApp = jest.fn();
 
-  const openExternalLinkMock = jest
+  const mockOpenExternalLink = jest
     .spyOn(comms, 'openExternalLink')
     .mockImplementation();
-
-  const mockAuth: AuthState = {
-    accounts: [],
-  };
 
   afterEach(() => {
     jest.clearAllMocks();
   });
 
   it('renders correctly', () => {
-    const tree = render(
-      <AppContext.Provider value={{ auth: mockAuth }}>
-        <LoginWithOAuthAppRoute />
-      </AppContext.Provider>,
-    );
+    const tree = renderWithAppContext(<LoginWithOAuthAppRoute />);
 
     expect(tree).toMatchSnapshot();
   });
 
   it('let us go back', async () => {
-    render(
-      <AppContext.Provider value={{ auth: mockAuth }}>
-        <LoginWithOAuthAppRoute />
-      </AppContext.Provider>,
-    );
+    renderWithAppContext(<LoginWithOAuthAppRoute />);
 
     await userEvent.click(screen.getByTestId('header-nav-back'));
 
@@ -78,25 +66,17 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
 
   describe("'Create new OAuth App' button", () => {
     it('should be disabled if no hostname configured', async () => {
-      render(
-        <AppContext.Provider value={{ auth: mockAuth }}>
-          <LoginWithOAuthAppRoute />
-        </AppContext.Provider>,
-      );
+      renderWithAppContext(<LoginWithOAuthAppRoute />);
 
       await userEvent.clear(screen.getByTestId('login-hostname'));
 
       await userEvent.click(screen.getByTestId('login-create-oauth-app'));
 
-      expect(openExternalLinkMock).toHaveBeenCalledTimes(0);
+      expect(mockOpenExternalLink).toHaveBeenCalledTimes(0);
     });
 
     it('should open in browser if hostname configured', async () => {
-      render(
-        <AppContext.Provider value={{ auth: mockAuth }}>
-          <LoginWithOAuthAppRoute />
-        </AppContext.Provider>,
-      );
+      renderWithAppContext(<LoginWithOAuthAppRoute />);
 
       const hostname = screen.getByTestId('login-hostname');
       await userEvent.clear(hostname);
@@ -104,22 +84,16 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
 
       await userEvent.click(screen.getByTestId('login-create-oauth-app'));
 
-      expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
+      expect(mockOpenExternalLink).toHaveBeenCalledTimes(1);
     });
   });
 
   it('should login using a token - success', async () => {
     mockLoginWithOAuthApp.mockResolvedValueOnce(null);
 
-    render(
-      <AppContext.Provider
-        value={{
-          loginWithOAuthApp: mockLoginWithOAuthApp,
-        }}
-      >
-        <LoginWithOAuthAppRoute />
-      </AppContext.Provider>,
-    );
+    renderWithAppContext(<LoginWithOAuthAppRoute />, {
+      loginWithOAuthApp: mockLoginWithOAuthApp,
+    });
 
     const hostname = screen.getByTestId('login-hostname');
     await userEvent.clear(hostname);
@@ -142,11 +116,7 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
   });
 
   it('should render the form with errors', async () => {
-    render(
-      <AppContext.Provider value={{ auth: mockAuth }}>
-        <LoginWithOAuthAppRoute />
-      </AppContext.Provider>,
-    );
+    renderWithAppContext(<LoginWithOAuthAppRoute />);
 
     const hostname = screen.getByTestId('login-hostname');
     await userEvent.clear(hostname);
@@ -166,14 +136,10 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
   });
 
   it('should open help docs in the browser', async () => {
-    render(
-      <AppContext.Provider value={{ auth: mockAuth }}>
-        <LoginWithOAuthAppRoute />
-      </AppContext.Provider>,
-    );
+    renderWithAppContext(<LoginWithOAuthAppRoute />);
 
     await userEvent.click(screen.getByTestId('login-docs'));
 
-    expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
+    expect(mockOpenExternalLink).toHaveBeenCalledTimes(1);
   });
 });

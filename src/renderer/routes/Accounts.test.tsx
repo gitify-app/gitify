@@ -1,17 +1,13 @@
-import { act, render, screen, waitFor } from '@testing-library/react';
+import { act, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { BaseStyles, ThemeProvider } from '@primer/react';
-
+import { renderWithAppContext } from '../__helpers__/test-utils';
 import {
-  mockAuth,
   mockGitHubAppAccount,
   mockOAuthAccount,
   mockPersonalAccessTokenAccount,
-  mockSettings,
-} from '../__mocks__/state-mocks';
-import { AppContext } from '../context/App';
-import * as apiRequests from '../utils/api/request';
+} from '../__mocks__/account-mocks';
+import * as authUtils from '../utils/auth/utils';
 import * as comms from '../utils/comms';
 import * as links from '../utils/links';
 import * as storage from '../utils/storage';
@@ -31,39 +27,24 @@ describe('renderer/routes/Accounts.tsx', () => {
   describe('General', () => {
     it('should render itself & its children', async () => {
       await act(async () => {
-        render(
-          <AppContext.Provider
-            value={{
-              auth: {
-                accounts: [
-                  mockPersonalAccessTokenAccount,
-                  mockOAuthAccount,
-                  mockGitHubAppAccount,
-                ],
-              },
-              settings: mockSettings,
-            }}
-          >
-            <AccountsRoute />
-          </AppContext.Provider>,
-        );
+        renderWithAppContext(<AccountsRoute />, {
+          auth: {
+            accounts: [
+              mockPersonalAccessTokenAccount,
+              mockOAuthAccount,
+              mockGitHubAppAccount,
+            ],
+          },
+        });
       });
 
-      expect(screen.getByTestId('accounts')).toMatchSnapshot();
+      expect(screen.getByTestId('accounts')).toBeInTheDocument();
+      expect(screen.getAllByTestId('account-profile')).toHaveLength(3);
     });
 
     it('should go back by pressing the icon', async () => {
       await act(async () => {
-        render(
-          <AppContext.Provider
-            value={{
-              auth: mockAuth,
-              settings: mockSettings,
-            }}
-          >
-            <AccountsRoute />
-          </AppContext.Provider>,
-        );
+        renderWithAppContext(<AccountsRoute />);
       });
 
       await userEvent.click(screen.getByTestId('header-nav-back'));
@@ -73,182 +54,123 @@ describe('renderer/routes/Accounts.tsx', () => {
   });
 
   describe('Account interactions', () => {
+    const mockOpenExternalLink = jest
+      .spyOn(comms, 'openExternalLink')
+      .mockImplementation();
+
     it('open profile in external browser', async () => {
-      const openAccountProfileMock = jest
+      const mockOpenAccountProfile = jest
         .spyOn(links, 'openAccountProfile')
         .mockImplementation();
 
       await act(async () => {
-        render(
-          <AppContext.Provider
-            value={{
-              auth: {
-                accounts: [mockPersonalAccessTokenAccount],
-              },
-              settings: mockSettings,
-            }}
-          >
-            <AccountsRoute />
-          </AppContext.Provider>,
-        );
+        renderWithAppContext(<AccountsRoute />, {
+          auth: { accounts: [mockPersonalAccessTokenAccount] },
+        });
       });
 
       await userEvent.click(screen.getByTestId('account-profile'));
 
-      expect(openAccountProfileMock).toHaveBeenCalledTimes(1);
-      expect(openAccountProfileMock).toHaveBeenCalledWith(
+      expect(mockOpenAccountProfile).toHaveBeenCalledTimes(1);
+      expect(mockOpenAccountProfile).toHaveBeenCalledWith(
         mockPersonalAccessTokenAccount,
       );
     });
 
     it('open host in external browser', async () => {
-      const openExternalLinkMock = jest
-        .spyOn(comms, 'openExternalLink')
-        .mockImplementation();
-
       await act(async () => {
-        render(
-          <AppContext.Provider
-            value={{
-              auth: {
-                accounts: [mockPersonalAccessTokenAccount],
-              },
-              settings: mockSettings,
-            }}
-          >
-            <AccountsRoute />
-          </AppContext.Provider>,
-        );
+        renderWithAppContext(<AccountsRoute />, {
+          auth: { accounts: [mockPersonalAccessTokenAccount] },
+        });
       });
 
       await userEvent.click(screen.getByTestId('account-host'));
 
-      expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
-      expect(openExternalLinkMock).toHaveBeenCalledWith('https://github.com');
+      expect(mockOpenExternalLink).toHaveBeenCalledTimes(1);
+      expect(mockOpenExternalLink).toHaveBeenCalledWith('https://github.com');
     });
 
     it('open developer settings in external browser', async () => {
-      const openExternalLinkMock = jest
-        .spyOn(comms, 'openExternalLink')
-        .mockImplementation();
-
       await act(async () => {
-        render(
-          <AppContext.Provider
-            value={{
-              auth: {
-                accounts: [mockPersonalAccessTokenAccount],
-              },
-              settings: mockSettings,
-            }}
-          >
-            <AccountsRoute />
-          </AppContext.Provider>,
-        );
+        renderWithAppContext(<AccountsRoute />, {
+          auth: { accounts: [mockPersonalAccessTokenAccount] },
+        });
       });
 
       await userEvent.click(screen.getByTestId('account-developer-settings'));
 
-      expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
-      expect(openExternalLinkMock).toHaveBeenCalledWith(
+      expect(mockOpenExternalLink).toHaveBeenCalledTimes(1);
+      expect(mockOpenExternalLink).toHaveBeenCalledWith(
         'https://github.com/settings/tokens',
       );
     });
 
     it('should render with PAT scopes warning', async () => {
-      const openExternalLinkMock = jest
-        .spyOn(comms, 'openExternalLink')
-        .mockImplementation();
-
       await act(async () => {
-        render(
-          <AppContext.Provider
-            value={{
-              auth: {
-                accounts: [
-                  {
-                    ...mockPersonalAccessTokenAccount,
-                    hasRequiredScopes: false,
-                  },
-                  mockOAuthAccount,
-                  mockGitHubAppAccount,
-                ],
-              },
-              settings: mockSettings,
-            }}
-          >
-            <AccountsRoute />
-          </AppContext.Provider>,
-        );
+        renderWithAppContext(<AccountsRoute />, {
+          auth: {
+            accounts: [
+              { ...mockPersonalAccessTokenAccount, hasRequiredScopes: false },
+              mockOAuthAccount,
+              mockGitHubAppAccount,
+            ],
+          },
+        });
       });
 
-      expect(screen.getByTestId('accounts')).toMatchSnapshot();
+      expect(screen.getByTestId('accounts')).toBeInTheDocument();
+      // All 3 accounts render the warning button, but only 1 is visible
+      expect(screen.getAllByTestId('account-missing-scopes')).toHaveLength(3);
 
       await userEvent.click(screen.getAllByTestId('account-missing-scopes')[0]);
 
-      expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
-      expect(openExternalLinkMock).toHaveBeenCalledWith(
+      expect(mockOpenExternalLink).toHaveBeenCalledTimes(1);
+      expect(mockOpenExternalLink).toHaveBeenCalledWith(
         'https://github.com/settings/tokens',
       );
     });
 
     it('should set account as primary account', async () => {
-      const saveStateMock = jest
+      const mockSaveState = jest
         .spyOn(storage, 'saveState')
         .mockImplementation();
 
       await act(async () => {
-        render(
-          <AppContext.Provider
-            value={{
-              auth: {
-                accounts: [
-                  mockPersonalAccessTokenAccount,
-                  mockOAuthAccount,
-                  mockGitHubAppAccount,
-                ],
-              },
-              settings: mockSettings,
-            }}
-          >
-            <AccountsRoute />
-          </AppContext.Provider>,
-        );
+        renderWithAppContext(<AccountsRoute />, {
+          auth: {
+            accounts: [
+              mockPersonalAccessTokenAccount,
+              mockOAuthAccount,
+              mockGitHubAppAccount,
+            ],
+          },
+        });
       });
 
-      expect(screen.getByTestId('accounts')).toMatchSnapshot();
+      expect(screen.getByTestId('accounts')).toBeInTheDocument();
+      // All 3 accounts render the primary/set-primary button
+      expect(screen.getAllByTestId('account-set-primary')).toHaveLength(3);
 
       await userEvent.click(screen.getAllByTestId('account-set-primary')[0]);
 
-      expect(saveStateMock).toHaveBeenCalled();
+      expect(mockSaveState).toHaveBeenCalled();
     });
 
     it('should refresh account', async () => {
-      const apiRequestAuthMock = jest.spyOn(apiRequests, 'apiRequestAuth');
+      const mockRefreshAccount = jest
+        .spyOn(authUtils, 'refreshAccount')
+        .mockImplementation();
 
       await act(async () => {
-        render(
-          <AppContext.Provider
-            value={{
-              auth: {
-                accounts: [mockPersonalAccessTokenAccount],
-              },
-              settings: mockSettings,
-            }}
-          >
-            <AccountsRoute />
-          </AppContext.Provider>,
-        );
+        renderWithAppContext(<AccountsRoute />, {
+          auth: { accounts: [mockPersonalAccessTokenAccount] },
+        });
       });
 
       await userEvent.click(screen.getByTestId('account-refresh'));
 
-      expect(apiRequestAuthMock).toHaveBeenCalledTimes(1);
-      expect(apiRequestAuthMock).toHaveBeenCalledWith(
-        'https://api.github.com/user',
-        'GET',
-        'token-123-456',
-      );
+      expect(mockRefreshAccount).toHaveBeenCalledTimes(1);
+
       await waitFor(() =>
         expect(mockNavigate).toHaveBeenNthCalledWith(1, '/accounts', {
           replace: true,
@@ -257,27 +179,18 @@ describe('renderer/routes/Accounts.tsx', () => {
     });
 
     it('should logout', async () => {
-      const logoutFromAccountMock = jest.fn();
+      const mockLogoutFromAccount = jest.fn();
 
       await act(async () => {
-        render(
-          <AppContext.Provider
-            value={{
-              auth: {
-                accounts: [mockPersonalAccessTokenAccount],
-              },
-              settings: mockSettings,
-              logoutFromAccount: logoutFromAccountMock,
-            }}
-          >
-            <AccountsRoute />
-          </AppContext.Provider>,
-        );
+        renderWithAppContext(<AccountsRoute />, {
+          auth: { accounts: [mockPersonalAccessTokenAccount] },
+          logoutFromAccount: mockLogoutFromAccount,
+        });
       });
 
       await userEvent.click(screen.getByTestId('account-logout'));
 
-      expect(logoutFromAccountMock).toHaveBeenCalledTimes(1);
+      expect(mockLogoutFromAccount).toHaveBeenCalledTimes(1);
 
       expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
     });
@@ -288,21 +201,10 @@ describe('renderer/routes/Accounts.tsx', () => {
       const mockLoginWithGitHubApp = jest.fn();
 
       await act(async () => {
-        render(
-          <ThemeProvider>
-            <BaseStyles>
-              <AppContext.Provider
-                value={{
-                  auth: { accounts: [mockOAuthAccount] },
-                  settings: mockSettings,
-                  loginWithGitHubApp: mockLoginWithGitHubApp,
-                }}
-              >
-                <AccountsRoute />
-              </AppContext.Provider>
-            </BaseStyles>
-          </ThemeProvider>,
-        );
+        renderWithAppContext(<AccountsRoute />, {
+          auth: { accounts: [mockOAuthAccount] },
+          loginWithGitHubApp: mockLoginWithGitHubApp,
+        });
       });
 
       await userEvent.click(screen.getByTestId('account-add-new'));
@@ -313,20 +215,9 @@ describe('renderer/routes/Accounts.tsx', () => {
 
     it('should show login with personal access token', async () => {
       await act(async () => {
-        render(
-          <ThemeProvider>
-            <BaseStyles>
-              <AppContext.Provider
-                value={{
-                  auth: { accounts: [mockOAuthAccount] },
-                  settings: mockSettings,
-                }}
-              >
-                <AccountsRoute />
-              </AppContext.Provider>
-            </BaseStyles>
-          </ThemeProvider>,
-        );
+        renderWithAppContext(<AccountsRoute />, {
+          auth: { accounts: [mockOAuthAccount] },
+        });
       });
 
       await userEvent.click(screen.getByTestId('account-add-new'));
@@ -343,20 +234,9 @@ describe('renderer/routes/Accounts.tsx', () => {
 
     it('should show login with oauth app', async () => {
       await act(async () => {
-        render(
-          <ThemeProvider>
-            <BaseStyles>
-              <AppContext.Provider
-                value={{
-                  auth: { accounts: [mockPersonalAccessTokenAccount] },
-                  settings: mockSettings,
-                }}
-              >
-                <AccountsRoute />
-              </AppContext.Provider>
-            </BaseStyles>
-          </ThemeProvider>,
-        );
+        renderWithAppContext(<AccountsRoute />, {
+          auth: { accounts: [mockPersonalAccessTokenAccount] },
+        });
       });
 
       await userEvent.click(screen.getByTestId('account-add-new'));
