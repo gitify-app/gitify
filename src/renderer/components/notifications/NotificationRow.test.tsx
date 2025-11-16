@@ -2,10 +2,8 @@ import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { renderWithAppContext } from '../../__helpers__/test-utils';
-import {
-  mockGitHubCloudAccount,
-  mockSettings,
-} from '../../__mocks__/state-mocks';
+import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
+import { mockSettings } from '../../__mocks__/state-mocks';
 import { GroupBy } from '../../types';
 import { mockSingleNotification } from '../../utils/api/__mocks__/response-mocks';
 import * as comms from '../../utils/comms';

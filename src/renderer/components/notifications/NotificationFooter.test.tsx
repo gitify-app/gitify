@@ -2,7 +2,7 @@ import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { renderWithAppContext } from '../../__helpers__/test-utils';
-import { mockGitHubCloudAccount } from '../../__mocks__/state-mocks';
+import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
 import type { Link } from '../../types';
 import type { UserType } from '../../typesGitHub';
 import { mockSingleNotification } from '../../utils/api/__mocks__/response-mocks';

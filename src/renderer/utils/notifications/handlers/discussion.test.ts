@@ -1,8 +1,10 @@
 import axios from 'axios';
 import nock from 'nock';
 
-import { createSubjectMock } from '../../../__mocks__/notifications-mocks';
-import { partialMockNotification } from '../../../__mocks__/partial-mocks';
+import {
+  createMockSubject,
+  createPartialMockNotification,
+} from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
 import type { Link } from '../../../types';
 import type {
@@ -26,7 +28,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
       full_name: 'gitify-app/notifications-test',
     };
 
-    const mockNotification = partialMockNotification({
+    const mockNotification = createPartialMockNotification({
       title: 'This is a mock discussion',
       type: 'Discussion',
     });
@@ -281,25 +283,25 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
 
   it('iconType', () => {
     expect(
-      discussionHandler.iconType(createSubjectMock({ type: 'Discussion' }))
+      discussionHandler.iconType(createMockSubject({ type: 'Discussion' }))
         .displayName,
     ).toBe('CommentDiscussionIcon');
 
     expect(
       discussionHandler.iconType(
-        createSubjectMock({ type: 'Discussion', state: 'DUPLICATE' }),
+        createMockSubject({ type: 'Discussion', state: 'DUPLICATE' }),
       ).displayName,
     ).toBe('DiscussionDuplicateIcon');
 
     expect(
       discussionHandler.iconType(
-        createSubjectMock({ type: 'Discussion', state: 'OUTDATED' }),
+        createMockSubject({ type: 'Discussion', state: 'OUTDATED' }),
       ).displayName,
     ).toBe('DiscussionOutdatedIcon');
 
     expect(
       discussionHandler.iconType(
-        createSubjectMock({ type: 'Discussion', state: 'RESOLVED' }),
+        createMockSubject({ type: 'Discussion', state: 'RESOLVED' }),
       ).displayName,
     ).toBe('DiscussionClosedIcon');
   });

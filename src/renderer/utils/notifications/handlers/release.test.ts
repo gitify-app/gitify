@@ -1,18 +1,18 @@
 import axios from 'axios';
 import nock from 'nock';
 
-import { createSubjectMock } from '../../../__mocks__/notifications-mocks';
 import {
-  partialMockNotification,
-  partialMockUser,
-} from '../../../__mocks__/partial-mocks';
+  createMockSubject,
+  createPartialMockNotification,
+} from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
+import { createPartialMockUser } from '../../../__mocks__/user-mocks';
 import type { Link } from '../../../types';
 import { releaseHandler } from './release';
 
 describe('renderer/utils/notifications/handlers/release.ts', () => {
   describe('enrich', () => {
-    const mockAuthor = partialMockUser('some-author');
+    const mockAuthor = createPartialMockUser('some-author');
 
     beforeEach(() => {
       // axios will default to using the XHR adapter which can't be intercepted
@@ -21,7 +21,7 @@ describe('renderer/utils/notifications/handlers/release.ts', () => {
     });
 
     it('release notification', async () => {
-      const mockNotification = partialMockNotification({
+      const mockNotification = createPartialMockNotification({
         title: 'This is a mock release',
         type: 'Release',
         url: 'https://api.github.com/repos/gitify-app/notifications-test/releases/1' as Link,
@@ -50,7 +50,7 @@ describe('renderer/utils/notifications/handlers/release.ts', () => {
     });
 
     it('return early if release state filtered', async () => {
-      const mockNotification = partialMockNotification({
+      const mockNotification = createPartialMockNotification({
         title: 'This is a mock release',
         type: 'Release',
         url: 'https://api.github.com/repos/gitify-app/notifications-test/releases/1' as Link,
@@ -70,7 +70,7 @@ describe('renderer/utils/notifications/handlers/release.ts', () => {
   it('iconType', () => {
     expect(
       releaseHandler.iconType(
-        createSubjectMock({
+        createMockSubject({
           type: 'Release',
         }),
       ).displayName,

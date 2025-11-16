@@ -1,4 +1,4 @@
-import { partialMockNotification } from '../../../__mocks__/partial-mocks';
+import { createPartialMockNotification } from '../../../__mocks__/notifications-mocks';
 import type { Link } from '../../../types';
 import type { Owner } from '../../../typesGitHub';
 import {
@@ -36,7 +36,7 @@ describe('renderer/utils/notifications/filters/search.ts', () => {
   });
 
   describe('filterNotificationBySearchTerm', () => {
-    const mockNotification = partialMockNotification(
+    const mockNotification = createPartialMockNotification(
       {
         title: 'User authored notification',
         user: {

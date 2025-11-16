@@ -1,15 +1,11 @@
 import { Constants } from '../constants';
 import {
-  type Account,
   type AppearanceSettingsState,
   type AuthState,
   FetchType,
   type FilterSettingsState,
   type GitifyState,
-  type GitifyUser,
   GroupBy,
-  type Hostname,
-  type Link,
   type NotificationSettingsState,
   OpenPreference,
   type Percentage,
@@ -19,59 +15,10 @@ import {
   type Token,
   type TraySettingsState,
 } from '../types';
-
-export const mockGitifyUser: GitifyUser = {
-  login: 'octocat',
-  name: 'Mona Lisa Octocat',
-  id: 123456789,
-  avatar: 'https://avatars.githubusercontent.com/u/583231?v=4' as Link,
-};
-
-export const mockPersonalAccessTokenAccount: Account = {
-  platform: 'GitHub Cloud',
-  method: 'Personal Access Token',
-  token: 'token-123-456' as Token,
-  hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
-  user: mockGitifyUser,
-  hasRequiredScopes: true,
-};
-
-export const mockOAuthAccount: Account = {
-  platform: 'GitHub Enterprise Server',
-  method: 'OAuth App',
-  token: '1234568790' as Token,
-  hostname: 'github.gitify.io' as Hostname,
-  user: mockGitifyUser,
-  hasRequiredScopes: true,
-};
-
-export const mockGitHubCloudAccount: Account = {
-  platform: 'GitHub Cloud',
-  method: 'Personal Access Token',
-  token: 'token-123-456' as Token,
-  hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
-  user: mockGitifyUser,
-  version: 'latest',
-  hasRequiredScopes: true,
-};
-
-export const mockGitHubEnterpriseServerAccount: Account = {
-  platform: 'GitHub Enterprise Server',
-  method: 'Personal Access Token',
-  token: '1234568790' as Token,
-  hostname: 'github.gitify.io' as Hostname,
-  user: mockGitifyUser,
-  hasRequiredScopes: true,
-};
-
-export const mockGitHubAppAccount: Account = {
-  platform: 'GitHub Cloud',
-  method: 'GitHub App',
-  token: '987654321' as Token,
-  hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
-  user: mockGitifyUser,
-  hasRequiredScopes: true,
-};
+import {
+  mockGitHubCloudAccount,
+  mockGitHubEnterpriseServerAccount,
+} from './account-mocks';
 
 export const mockAuth: AuthState = {
   accounts: [mockGitHubCloudAccount, mockGitHubEnterpriseServerAccount],

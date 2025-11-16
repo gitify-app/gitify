@@ -3,12 +3,8 @@ import { act, renderHook, waitFor } from '@testing-library/react';
 import axios, { AxiosError } from 'axios';
 import nock from 'nock';
 
-import {
-  mockAuth,
-  mockGitHubCloudAccount,
-  mockSettings,
-  mockState,
-} from '../__mocks__/state-mocks';
+import { mockGitHubCloudAccount } from '../__mocks__/account-mocks';
+import { mockAuth, mockSettings, mockState } from '../__mocks__/state-mocks';
 import {
   mockNotificationUser,
   mockSingleNotification,

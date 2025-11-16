@@ -1,25 +1,25 @@
 import axios from 'axios';
 import nock from 'nock';
 
-import { createSubjectMock } from '../../../__mocks__/notifications-mocks';
 import {
-  partialMockNotification,
-  partialMockUser,
-} from '../../../__mocks__/partial-mocks';
+  createMockSubject,
+  createPartialMockNotification,
+} from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
+import { createPartialMockUser } from '../../../__mocks__/user-mocks';
 import type { Link } from '../../../types';
 import type { Notification } from '../../../typesGitHub';
 import { issueHandler } from './issue';
 
 describe('renderer/utils/notifications/handlers/issue.ts', () => {
   describe('enrich', () => {
-    const mockAuthor = partialMockUser('some-author');
-    const mockCommenter = partialMockUser('some-commenter');
+    const mockAuthor = createPartialMockUser('some-author');
+    const mockCommenter = createPartialMockUser('some-commenter');
 
     let mockNotification: Notification;
 
     beforeEach(() => {
-      mockNotification = partialMockNotification({
+      mockNotification = createPartialMockNotification({
         title: 'This is a mock issue',
         type: 'Issue',
         url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1' as Link,
@@ -296,18 +296,18 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
 
   it('iconType', () => {
     expect(
-      issueHandler.iconType(createSubjectMock({ type: 'Issue' })).displayName,
+      issueHandler.iconType(createMockSubject({ type: 'Issue' })).displayName,
     ).toBe('IssueOpenedIcon');
 
     expect(
       issueHandler.iconType(
-        createSubjectMock({ type: 'Issue', state: 'draft' }),
+        createMockSubject({ type: 'Issue', state: 'draft' }),
       ).displayName,
     ).toBe('IssueDraftIcon');
 
     expect(
       issueHandler.iconType(
-        createSubjectMock({
+        createMockSubject({
           type: 'Issue',
           state: 'closed',
         }),
@@ -316,7 +316,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
 
     expect(
       issueHandler.iconType(
-        createSubjectMock({
+        createMockSubject({
           type: 'Issue',
           state: 'completed',
         }),
@@ -325,7 +325,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
 
     expect(
       issueHandler.iconType(
-        createSubjectMock({
+        createMockSubject({
           type: 'Issue',
           state: 'not_planned',
         }),
@@ -334,7 +334,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
 
     expect(
       issueHandler.iconType(
-        createSubjectMock({
+        createMockSubject({
           type: 'Issue',
           state: 'reopened',
         }),

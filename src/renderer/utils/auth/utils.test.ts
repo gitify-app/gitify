@@ -2,11 +2,9 @@ import type { AxiosPromise, AxiosResponse } from 'axios';
 import axios from 'axios';
 import nock from 'nock';
 
-import {
-  mockAuth,
-  mockGitHubCloudAccount,
-  mockGitifyUser,
-} from '../../__mocks__/state-mocks';
+import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
+import { mockAuth } from '../../__mocks__/state-mocks';
+import { mockGitifyUser } from '../../__mocks__/user-mocks';
 import type {
   Account,
   AuthCode,

@@ -1,12 +1,12 @@
 import axios from 'axios';
 import nock from 'nock';
 
-import { createSubjectMock } from '../../../__mocks__/notifications-mocks';
 import {
-  partialMockNotification,
-  partialMockUser,
-} from '../../../__mocks__/partial-mocks';
+  createMockSubject,
+  createPartialMockNotification,
+} from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
+import { createPartialMockUser } from '../../../__mocks__/user-mocks';
 import type { Link } from '../../../types';
 import type { Notification, PullRequest } from '../../../typesGitHub';
 import {
@@ -19,7 +19,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
   let mockNotification: Notification;
 
   beforeEach(() => {
-    mockNotification = partialMockNotification({
+    mockNotification = createPartialMockNotification({
       title: 'This is a mock pull request',
       type: 'PullRequest',
       url: 'https://api.github.com/repos/gitify-app/notifications-test/pulls/1' as Link,
@@ -29,8 +29,8 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
   });
 
   describe('enrich', () => {
-    const mockAuthor = partialMockUser('some-author');
-    const mockCommenter = partialMockUser('some-commenter');
+    const mockAuthor = createPartialMockUser('some-author');
+    const mockCommenter = createPartialMockUser('some-commenter');
 
     beforeEach(() => {
       // axios will default to using the XHR adapter which can't be intercepted
@@ -440,13 +440,13 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
 
   it('iconType', () => {
     expect(
-      pullRequestHandler.iconType(createSubjectMock({ type: 'PullRequest' }))
+      pullRequestHandler.iconType(createMockSubject({ type: 'PullRequest' }))
         .displayName,
     ).toBe('GitPullRequestIcon');
 
     expect(
       pullRequestHandler.iconType(
-        createSubjectMock({
+        createMockSubject({
           type: 'PullRequest',
           state: 'draft',
         }),
@@ -455,7 +455,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
 
     expect(
       pullRequestHandler.iconType(
-        createSubjectMock({
+        createMockSubject({
           type: 'PullRequest',
           state: 'closed',
         }),
@@ -464,7 +464,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
 
     expect(
       pullRequestHandler.iconType(
-        createSubjectMock({
+        createMockSubject({
           type: 'PullRequest',
           state: 'merged',
         }),

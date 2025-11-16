@@ -2,7 +2,7 @@ import { act, fireEvent, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { renderWithAppContext } from '../../__helpers__/test-utils';
-import { mockGitHubAppAccount } from '../../__mocks__/state-mocks';
+import { mockGitHubAppAccount } from '../../__mocks__/account-mocks';
 import { AppearanceSettings } from './AppearanceSettings';
 
 describe('renderer/components/settings/AppearanceSettings.tsx', () => {

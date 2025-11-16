@@ -2,15 +2,15 @@ import axios from 'axios';
 import nock from 'nock';
 
 import {
-  createMockNotificationForRepoName,
-  mockSingleAccountNotifications,
-} from '../../__mocks__/notifications-mocks';
-import { partialMockNotification } from '../../__mocks__/partial-mocks';
-import {
   mockGitHubCloudAccount,
   mockGitHubEnterpriseServerAccount,
-  mockSettings,
-} from '../../__mocks__/state-mocks';
+  mockSingleAccountNotifications,
+} from '../../__mocks__/account-mocks';
+import {
+  createMockNotificationForRepoName,
+  createPartialMockNotification,
+} from '../../__mocks__/notifications-mocks';
+import { mockSettings } from '../../__mocks__/state-mocks';
 import {
   type AccountNotifications,
   GroupBy,
@@ -55,7 +55,7 @@ describe('renderer/utils/notifications/notifications.ts', () => {
       .mockImplementation();
 
     const mockError = new Error('Test error');
-    const mockNotification = partialMockNotification({
+    const mockNotification = createPartialMockNotification({
       title: 'This issue will throw an error',
       type: 'Issue',
       url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1' as Link,

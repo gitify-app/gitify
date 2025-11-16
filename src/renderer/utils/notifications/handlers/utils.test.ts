@@ -1,9 +1,9 @@
-import { partialMockUser } from '../../../__mocks__/partial-mocks';
+import { createPartialMockUser } from '../../../__mocks__/user-mocks';
 import { formatForDisplay, getSubjectUser } from './utils';
 
 describe('renderer/utils/notifications/handlers/utils.ts', () => {
   describe('getSubjectUser', () => {
-    const mockAuthor = partialMockUser('some-author');
+    const mockAuthor = createPartialMockUser('some-author');
 
     it('returns null when all users are null', () => {
       const result = getSubjectUser([null, null]);

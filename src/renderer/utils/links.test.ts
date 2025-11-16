@@ -1,5 +1,5 @@
-import { partialMockUser } from '../__mocks__/partial-mocks';
-import { mockGitHubCloudAccount } from '../__mocks__/state-mocks';
+import { mockGitHubCloudAccount } from '../__mocks__/account-mocks';
+import { createPartialMockUser } from '../__mocks__/user-mocks';
 import { Constants } from '../constants';
 import type { Hostname, Link } from '../types';
 import type { Repository } from '../typesGitHub';
@@ -66,7 +66,7 @@ describe('renderer/utils/links.ts', () => {
   });
 
   it('openUserProfile', () => {
-    const mockUser = partialMockUser('mock-user');
+    const mockUser = createPartialMockUser('mock-user');
     openUserProfile(mockUser);
     expect(mockOpenExternalLink).toHaveBeenCalledWith(
       'https://github.com/mock-user',

@@ -1,6 +1,7 @@
 import axios, { type AxiosPromise, type AxiosResponse } from 'axios';
 
-import { mockGitHubCloudAccount, mockToken } from '../../__mocks__/state-mocks';
+import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
+import { mockToken } from '../../__mocks__/state-mocks';
 import type { Hostname, Link, SettingsState, Token } from '../../types';
 import * as logger from '../../utils/logger';
 import {
