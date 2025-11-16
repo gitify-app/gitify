@@ -6,6 +6,14 @@ describe('renderer/components/filters/SearchFilterSuggestions.tsx', () => {
   it('should render itself & its children - closed', () => {
     const tree = renderWithAppContext(
       <SearchFilterSuggestions inputValue={''} open={false} />,
+    );
+
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('should render itself & its children - open without detailed notifications enabled', () => {
+    const tree = renderWithAppContext(
+      <SearchFilterSuggestions inputValue={''} open={true} />,
       {
         settings: {
           ...mockSettings,
@@ -17,21 +25,7 @@ describe('renderer/components/filters/SearchFilterSuggestions.tsx', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('should render itself & its children - open', () => {
-    const tree = renderWithAppContext(
-      <SearchFilterSuggestions inputValue={''} open={true} />,
-      {
-        settings: {
-          ...mockSettings,
-          detailedNotifications: true,
-        },
-      },
-    );
-
-    expect(tree).toMatchSnapshot();
-  });
-
-  it('should render itself & its children - open with detailed enabled', () => {
+  it('should render itself & its children - open with detailed notifications enabled', () => {
     const tree = renderWithAppContext(
       <SearchFilterSuggestions inputValue={''} open={true} />,
       {
