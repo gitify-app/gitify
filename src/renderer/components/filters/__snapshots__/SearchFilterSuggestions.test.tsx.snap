@@ -403,7 +403,7 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
 }
 `;
 
-exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render itself & its children - open 1`] = `
+exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render itself & its children - open with detailed notifications enabled 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -664,7 +664,7 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
 }
 `;
 
-exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render itself & its children - open with detailed enabled 1`] = `
+exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render itself & its children - open without detailed notifications enabled 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -697,28 +697,6 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
                 data-padding="none"
                 data-wrap="nowrap"
               >
-                <div>
-                  <div
-                    class="prc-Stack-Stack-WJVsK"
-                    data-align="stretch"
-                    data-direction="vertical"
-                    data-gap="none"
-                    data-justify="start"
-                    data-padding="none"
-                    data-wrap="nowrap"
-                  >
-                    <span
-                      class="text-xs font-semibold prc-Text-Text-0ima0"
-                    >
-                      author:
-                    </span>
-                    <span
-                      class="text-xs opacity-90 prc-Text-Text-0ima0"
-                    >
-                      filter by notification author
-                    </span>
-                  </div>
-                </div>
                 <div>
                   <div
                     class="prc-Stack-Stack-WJVsK"
@@ -799,28 +777,6 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
               data-padding="none"
               data-wrap="nowrap"
             >
-              <div>
-                <div
-                  class="prc-Stack-Stack-WJVsK"
-                  data-align="stretch"
-                  data-direction="vertical"
-                  data-gap="none"
-                  data-justify="start"
-                  data-padding="none"
-                  data-wrap="nowrap"
-                >
-                  <span
-                    class="text-xs font-semibold prc-Text-Text-0ima0"
-                  >
-                    author:
-                  </span>
-                  <span
-                    class="text-xs opacity-90 prc-Text-Text-0ima0"
-                  >
-                    filter by notification author
-                  </span>
-                </div>
-              </div>
               <div>
                 <div
                   class="prc-Stack-Stack-WJVsK"
