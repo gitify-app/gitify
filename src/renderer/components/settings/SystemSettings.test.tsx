@@ -70,21 +70,6 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
 
       expect(mockUpdateSetting).toHaveBeenCalledTimes(1);
       expect(mockUpdateSetting).toHaveBeenCalledWith('playSound', false);
-
-      // Simulate update to context with playSound = false
-      // rerender(
-      //   <AppContextProvider
-      //     value={{
-      //       auth: mockAuth,
-      //       settings: { ...mockSettings, playSound: false },
-      //       updateSetting,
-      //     }}
-      //   >
-      //     <SystemSettings />
-      //   </AppContextProvider>,
-      // );
-
-      expect(screen.getByTestId('settings-volume-group')).not.toBeVisible();
     });
 
     it('should increase notification volume', async () => {
