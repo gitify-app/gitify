@@ -15,9 +15,10 @@ describe('renderer/components/AllRead.tsx', () => {
 
     await act(async () => {
       tree = renderWithAppContext(<AllRead />, {
-        
-          settings: {
-            ...mockSettings } });
+        settings: {
+          ...mockSettings,
+        },
+      });
     });
 
     expect(tree).toMatchSnapshot();
@@ -28,10 +29,11 @@ describe('renderer/components/AllRead.tsx', () => {
 
     await act(async () => {
       tree = renderWithAppContext(<AllRead />, {
-        
-          settings: {
-            ...mockSettings,
-            filterReasons: ['author'] } });
+        settings: {
+          ...mockSettings,
+          filterReasons: ['author'],
+        },
+      });
     });
 
     expect(tree).toMatchSnapshot();

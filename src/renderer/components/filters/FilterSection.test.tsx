@@ -81,7 +81,6 @@ describe('renderer/components/filters/FilterSection.tsx', () => {
             ...mockSettings,
             filterStates: [],
           },
-          notifications: [],
           updateFilter: mockUpdateFilter,
         },
       );
@@ -115,7 +114,6 @@ describe('renderer/components/filters/FilterSection.tsx', () => {
             ...mockSettings,
             filterStates: ['open'],
           },
-          notifications: [],
           updateFilter: mockUpdateFilter,
         },
       );

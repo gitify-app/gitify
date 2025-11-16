@@ -30,7 +30,7 @@ describe('renderer/components/Sidebar.tsx', () => {
         <Sidebar />
       </MemoryRouter>,
       {
-        notifications: mockAccountNotifications,
+        isLoggedIn: true,
       },
     );
 
@@ -44,7 +44,6 @@ describe('renderer/components/Sidebar.tsx', () => {
       </MemoryRouter>,
       {
         isLoggedIn: false,
-        notifications: mockAccountNotifications,
       },
     );
 
@@ -58,7 +57,6 @@ describe('renderer/components/Sidebar.tsx', () => {
       </MemoryRouter>,
       {
         isLoggedIn: false,
-        notifications: [],
       },
     );
 
@@ -75,7 +73,6 @@ describe('renderer/components/Sidebar.tsx', () => {
         </MemoryRouter>,
         {
           isLoggedIn: true,
-          notifications: [],
         },
       );
 
@@ -108,7 +105,7 @@ describe('renderer/components/Sidebar.tsx', () => {
         </MemoryRouter>,
         {
           isLoggedIn: true,
-          notifications: [],
+          notifications: mockAccountNotifications,
         },
       );
 
@@ -124,7 +121,6 @@ describe('renderer/components/Sidebar.tsx', () => {
         </MemoryRouter>,
         {
           isLoggedIn: true,
-          notifications: [],
         },
       );
 
@@ -140,7 +136,6 @@ describe('renderer/components/Sidebar.tsx', () => {
         </MemoryRouter>,
         {
           isLoggedIn: true,
-          notifications: [],
         },
       );
 
@@ -236,7 +231,6 @@ describe('renderer/components/Sidebar.tsx', () => {
         </MemoryRouter>,
         {
           isLoggedIn: true,
-          notifications: [],
         },
       );
 
@@ -252,7 +246,6 @@ describe('renderer/components/Sidebar.tsx', () => {
         </MemoryRouter>,
         {
           isLoggedIn: true,
-          notifications: [],
           fetchNotifications: mockFetchNotifications,
         },
       );
@@ -273,9 +266,6 @@ describe('renderer/components/Sidebar.tsx', () => {
       </MemoryRouter>,
       {
         isLoggedIn: false,
-        notifications: [],
-        auth: mockAuth,
-        settings: mockSettings,
       },
     );
 

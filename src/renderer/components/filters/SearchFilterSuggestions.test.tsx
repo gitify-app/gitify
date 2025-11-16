@@ -8,10 +8,11 @@ describe('renderer/components/filters/SearchFilterSuggestions.tsx', () => {
     const tree = renderWithAppContext(
       <SearchFilterSuggestions inputValue={''} open={false} />,
       {
-        
-          settings: {
-            ...mockSettings,
-            detailedNotifications: false } as SettingsState },
+        settings: {
+          ...mockSettings,
+          detailedNotifications: false,
+        } as SettingsState,
+      },
     );
 
     expect(tree).toMatchSnapshot();
@@ -21,10 +22,11 @@ describe('renderer/components/filters/SearchFilterSuggestions.tsx', () => {
     const tree = renderWithAppContext(
       <SearchFilterSuggestions inputValue={''} open={true} />,
       {
-        
-          settings: {
-            ...mockSettings,
-            detailedNotifications: true } as SettingsState },
+        settings: {
+          ...mockSettings,
+          detailedNotifications: true,
+        } as SettingsState,
+      },
     );
 
     expect(tree).toMatchSnapshot();
@@ -34,10 +36,11 @@ describe('renderer/components/filters/SearchFilterSuggestions.tsx', () => {
     const tree = renderWithAppContext(
       <SearchFilterSuggestions inputValue={''} open={true} />,
       {
-        
-          settings: {
-            ...mockSettings,
-            detailedNotifications: true } as SettingsState },
+        settings: {
+          ...mockSettings,
+          detailedNotifications: true,
+        } as SettingsState,
+      },
     );
 
     expect(tree).toMatchSnapshot();
@@ -47,10 +50,11 @@ describe('renderer/components/filters/SearchFilterSuggestions.tsx', () => {
     const tree = renderWithAppContext(
       <SearchFilterSuggestions inputValue={'invalid'} open={true} />,
       {
-        
-          settings: {
-            ...mockSettings,
-            detailedNotifications: false } as SettingsState },
+        settings: {
+          ...mockSettings,
+          detailedNotifications: false,
+        } as SettingsState,
+      },
     );
 
     expect(tree).toMatchSnapshot();
@@ -60,10 +64,11 @@ describe('renderer/components/filters/SearchFilterSuggestions.tsx', () => {
     const tree = renderWithAppContext(
       <SearchFilterSuggestions inputValue={'repo:'} open={true} />,
       {
-        
-          settings: {
-            ...mockSettings,
-            detailedNotifications: false } as SettingsState },
+        settings: {
+          ...mockSettings,
+          detailedNotifications: false,
+        } as SettingsState,
+      },
     );
 
     expect(tree).toMatchSnapshot();

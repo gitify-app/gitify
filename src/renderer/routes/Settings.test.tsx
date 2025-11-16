@@ -11,7 +11,7 @@ jest.mock('react-router-dom', () => ({
 }));
 
 describe('renderer/routes/Settings.tsx', () => {
-  const fetchNotifications = jest.fn();
+  const mockFetchNotifications = jest.fn();
 
   afterEach(() => {
     jest.clearAllMocks();
@@ -28,13 +28,13 @@ describe('renderer/routes/Settings.tsx', () => {
   it('should go back by pressing the icon', async () => {
     await act(async () => {
       renderWithAppContext(<SettingsRoute />, {
-        fetchNotifications,
+        fetchNotifications: mockFetchNotifications,
       });
     });
 
     await userEvent.click(screen.getByTestId('header-nav-back'));
 
-    expect(fetchNotifications).toHaveBeenCalledTimes(1);
+    expect(mockFetchNotifications).toHaveBeenCalledTimes(1);
     expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
   });
 });

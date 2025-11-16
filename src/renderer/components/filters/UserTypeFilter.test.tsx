@@ -7,11 +7,12 @@ import { UserTypeFilter } from './UserTypeFilter';
 describe('renderer/components/filters/UserTypeFilter.tsx', () => {
   it('should render itself & its children', () => {
     const tree = renderWithAppContext(<UserTypeFilter />, {
-      
-        settings: {
-          ...mockSettings,
-          detailedNotifications: true } as SettingsState,
-        notifications: mockAccountNotifications });
+      settings: {
+        ...mockSettings,
+        detailedNotifications: true,
+      } as SettingsState,
+      notifications: mockAccountNotifications,
+    });
 
     expect(tree).toMatchSnapshot();
   });

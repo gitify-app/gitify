@@ -9,9 +9,6 @@ describe('renderer/components/layout/AppLayout.tsx', () => {
       <MemoryRouter>
         <AppLayout>Test</AppLayout>
       </MemoryRouter>,
-      {
-        notifications: [],
-      },
     );
 
     expect(tree).toMatchSnapshot();

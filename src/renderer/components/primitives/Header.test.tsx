@@ -9,10 +9,11 @@ import { Header } from './Header';
 const mockNavigate = jest.fn();
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
-  useNavigate: () => mockNavigate }));
+  useNavigate: () => mockNavigate,
+}));
 
 describe('renderer/components/primitives/Header.tsx', () => {
-  const fetchNotifications = jest.fn();
+  const mockFetchNotifications = jest.fn();
 
   afterEach(() => {
     jest.resetAllMocks();
@@ -39,12 +40,12 @@ describe('renderer/components/primitives/Header.tsx', () => {
       <Header fetchOnBack icon={MarkGithubIcon}>
         Test Header
       </Header>,
-      {  fetchNotifications  },
+      { fetchNotifications: mockFetchNotifications },
     );
 
     await userEvent.click(screen.getByTestId('header-nav-back'));
 
     expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
-    expect(fetchNotifications).toHaveBeenCalledTimes(1);
+    expect(mockFetchNotifications).toHaveBeenCalledTimes(1);
   });
 });

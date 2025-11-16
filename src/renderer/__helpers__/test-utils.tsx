@@ -27,11 +27,12 @@ export function AppContextProvider({
   const defaultValue: Partial<AppContextState> = useMemo(() => {
     return {
       auth: mockAuth,
+      settings: mockSettings,
+
+      notifications: [],
 
       status: 'success',
       globalError: null,
-
-      settings: mockSettings,
 
       ...value,
     } as Partial<AppContextState>;
