@@ -2,7 +2,7 @@ import { act, fireEvent, waitFor } from '@testing-library/react';
 import { useContext } from 'react';
 
 import { renderWithAppContext } from '../__helpers__/test-utils';
-import { mockAuth, mockSettings } from '../__mocks__/state-mocks';
+import { mockSettings } from '../__mocks__/state-mocks';
 import { Constants } from '../constants';
 import { useNotifications } from '../hooks/useNotifications';
 import type { AuthState, Hostname, SettingsState, Token } from '../types';

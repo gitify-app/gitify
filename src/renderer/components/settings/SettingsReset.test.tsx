@@ -2,7 +2,6 @@ import { act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { renderWithAppContext } from '../../__helpers__/test-utils';
-import { mockAuth, mockSettings } from '../../__mocks__/state-mocks';
 import { SettingsReset } from './SettingsReset';
 
 describe('renderer/components/settings/SettingsReset.tsx', () => {

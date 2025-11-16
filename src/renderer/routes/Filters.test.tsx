@@ -2,7 +2,6 @@ import { act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { renderWithAppContext } from '../__helpers__/test-utils';
-import { mockAuth, mockSettings } from '../__mocks__/state-mocks';
 import { FiltersRoute } from './Filters';
 
 const mockNavigate = jest.fn();

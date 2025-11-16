@@ -3,7 +3,6 @@ import userEvent from '@testing-library/user-event';
 
 import { renderWithAppContext } from '../../__helpers__/test-utils';
 import {
-  mockAuth,
   mockGitHubCloudAccount,
   mockSettings,
 } from '../../__mocks__/state-mocks';

@@ -2,7 +2,7 @@ import { act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { renderWithAppContext } from '../../__helpers__/test-utils';
-import { mockAuth, mockSettings } from '../../__mocks__/state-mocks';
+import { mockSettings } from '../../__mocks__/state-mocks';
 import { Constants } from '../../constants';
 import * as comms from '../../utils/comms';
 import { NotificationSettings } from './NotificationSettings';
