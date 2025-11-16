@@ -250,7 +250,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
                 <span
                   class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
                 >
-                  0
+                  1
                 </span>
               </div>
               <div
@@ -303,7 +303,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
                 <span
                   class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
                 >
-                  0
+                  3
                 </span>
               </div>
             </div>
@@ -558,7 +558,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
               <span
                 class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
               >
-                0
+                1
               </span>
             </div>
             <div
@@ -611,7 +611,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
               <span
                 class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
               >
-                0
+                3
               </span>
             </div>
           </div>
