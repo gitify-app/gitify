@@ -1,5 +1,5 @@
 import { Constants } from '../constants';
-import type { Hostname } from '../types';
+import type { AccountNotifications, Hostname } from '../types';
 import type {
   Notification,
   Repository,
@@ -7,7 +7,15 @@ import type {
   Subject,
   SubjectType,
 } from '../typesGitHub';
-import { mockGitHubCloudAccount } from './account-mocks';
+import {
+  mockEnterpriseNotifications,
+  mockGitHubNotifications,
+  mockSingleNotification,
+} from '../utils/api/__mocks__/response-mocks';
+import {
+  mockGitHubCloudAccount,
+  mockGitHubEnterpriseServerAccount,
+} from './account-mocks';
 import { mockToken } from './state-mocks';
 import { mockGitifyUser } from './user-mocks';
 
@@ -55,3 +63,24 @@ export function createMockNotificationForRepoName(
     account: mockGitHubCloudAccount,
   } as Notification;
 }
+
+export const mockAccountNotifications: AccountNotifications[] = [
+  {
+    account: mockGitHubCloudAccount,
+    notifications: mockGitHubNotifications,
+    error: null,
+  },
+  {
+    account: mockGitHubEnterpriseServerAccount,
+    notifications: mockEnterpriseNotifications,
+    error: null,
+  },
+];
+
+export const mockSingleAccountNotifications: AccountNotifications[] = [
+  {
+    account: mockGitHubCloudAccount,
+    notifications: [mockSingleNotification],
+    error: null,
+  },
+];

@@ -1,8 +1,10 @@
 import { act } from '@testing-library/react';
 
-import { renderWithAppContext } from '../__helpers__/test-utils';
+import {
+  ensureStableEmojis,
+  renderWithAppContext,
+} from '../__helpers__/test-utils';
 import { mockSettings } from '../__mocks__/state-mocks';
-import { ensureStableEmojis } from '../__mocks__/utils';
 import { AllRead } from './AllRead';
 
 describe('renderer/components/AllRead.tsx', () => {

@@ -1,7 +1,5 @@
-import {
-  mockGitHubEnterpriseServerAccount,
-  mockSingleAccountNotifications,
-} from '../../__mocks__/account-mocks';
+import { mockGitHubEnterpriseServerAccount } from '../../__mocks__/account-mocks';
+import { mockSingleAccountNotifications } from '../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../__mocks__/state-mocks';
 import { mockSingleNotification } from '../api/__mocks__/response-mocks';
 import { removeNotificationsForAccount } from './remove';

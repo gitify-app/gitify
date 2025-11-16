@@ -1,5 +1,5 @@
 import { renderWithAppContext } from '../../__helpers__/test-utils';
-import { mockAccountNotifications } from '../../__mocks__/account-mocks';
+import { mockAccountNotifications } from '../../__mocks__/notifications-mocks';
 import { ReasonFilter } from './ReasonFilter';
 
 describe('renderer/components/filters/ReasonFilter.tsx', () => {

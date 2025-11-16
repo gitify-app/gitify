@@ -1,7 +1,9 @@
 import { act } from '@testing-library/react';
 
-import { renderWithAppContext } from '../__helpers__/test-utils';
-import { ensureStableEmojis } from '../__mocks__/utils';
+import {
+  ensureStableEmojis,
+  renderWithAppContext,
+} from '../__helpers__/test-utils';
 import { Oops } from './Oops';
 
 describe('renderer/components/Oops.tsx', () => {

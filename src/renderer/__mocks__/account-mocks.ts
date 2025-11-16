@@ -6,11 +6,6 @@ import type {
   Hostname,
   Token,
 } from '../types';
-import {
-  mockEnterpriseNotifications,
-  mockGitHubNotifications,
-  mockSingleNotification,
-} from '../utils/api/__mocks__/response-mocks';
 import { mockGitifyUser } from './user-mocks';
 
 export const mockPersonalAccessTokenAccount: Account = {
@@ -58,27 +53,6 @@ export const mockGitHubAppAccount: Account = {
   user: mockGitifyUser,
   hasRequiredScopes: true,
 };
-
-export const mockAccountNotifications: AccountNotifications[] = [
-  {
-    account: mockGitHubCloudAccount,
-    notifications: mockGitHubNotifications,
-    error: null,
-  },
-  {
-    account: mockGitHubEnterpriseServerAccount,
-    notifications: mockEnterpriseNotifications,
-    error: null,
-  },
-];
-
-export const mockSingleAccountNotifications: AccountNotifications[] = [
-  {
-    account: mockGitHubCloudAccount,
-    notifications: [mockSingleNotification],
-    error: null,
-  },
-];
 
 export function mockAccountWithError(error: GitifyError): AccountNotifications {
   return {

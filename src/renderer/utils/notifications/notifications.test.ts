@@ -4,11 +4,11 @@ import nock from 'nock';
 import {
   mockGitHubCloudAccount,
   mockGitHubEnterpriseServerAccount,
-  mockSingleAccountNotifications,
 } from '../../__mocks__/account-mocks';
 import {
   createMockNotificationForRepoName,
   createPartialMockNotification,
+  mockSingleAccountNotifications,
 } from '../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../__mocks__/state-mocks';
 import {

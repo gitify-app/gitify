@@ -3,7 +3,7 @@ import { waitFor } from '@testing-library/react';
 import {
   mockAccountNotifications,
   mockSingleAccountNotifications,
-} from '../../__mocks__/account-mocks';
+} from '../../__mocks__/notifications-mocks';
 import * as native from './native';
 
 describe('renderer/utils/notifications/native.ts', () => {
