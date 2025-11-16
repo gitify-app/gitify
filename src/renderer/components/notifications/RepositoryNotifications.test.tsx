@@ -56,7 +56,7 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
       .spyOn(comms, 'openExternalLink')
       .mockImplementation();
 
-    renderWithAppContext(<RepositoryNotifications {...props} />, {});
+    renderWithAppContext(<RepositoryNotifications {...props} />);
 
     await userEvent.click(screen.getByTestId('open-repository'));
 

@@ -38,7 +38,6 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
         auth: {
           accounts: [mockGitHubAppAccount],
         },
-        settings: mockSettings,
         updateSetting: mockUpdateSetting,
       });
     });
@@ -132,7 +131,6 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
         auth: {
           accounts: [mockGitHubAppAccount],
         },
-        settings: mockSettings,
         updateSetting: mockUpdateSetting,
       });
     });
@@ -149,7 +147,6 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
         auth: {
           accounts: [mockGitHubAppAccount],
         },
-        settings: mockSettings,
         updateSetting: mockUpdateSetting,
       });
     });

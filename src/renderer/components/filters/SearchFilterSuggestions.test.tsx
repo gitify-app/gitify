@@ -11,7 +11,7 @@ describe('renderer/components/filters/SearchFilterSuggestions.tsx', () => {
         settings: {
           ...mockSettings,
           detailedNotifications: false,
-        } as SettingsState,
+        },
       },
     );
 
@@ -25,7 +25,7 @@ describe('renderer/components/filters/SearchFilterSuggestions.tsx', () => {
         settings: {
           ...mockSettings,
           detailedNotifications: true,
-        } as SettingsState,
+        },
       },
     );
 
@@ -39,7 +39,7 @@ describe('renderer/components/filters/SearchFilterSuggestions.tsx', () => {
         settings: {
           ...mockSettings,
           detailedNotifications: true,
-        } as SettingsState,
+        },
       },
     );
 
@@ -53,7 +53,7 @@ describe('renderer/components/filters/SearchFilterSuggestions.tsx', () => {
         settings: {
           ...mockSettings,
           detailedNotifications: false,
-        } as SettingsState,
+        },
       },
     );
 
@@ -67,7 +67,7 @@ describe('renderer/components/filters/SearchFilterSuggestions.tsx', () => {
         settings: {
           ...mockSettings,
           detailedNotifications: false,
-        } as SettingsState,
+        },
       },
     );
 

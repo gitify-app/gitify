@@ -62,9 +62,7 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
     let tree: ReturnType<typeof renderWithAppContext> | null = null;
 
     await act(async () => {
-      tree = renderWithAppContext(<AccountNotifications {...props} />, {
-        settings: mockSettings,
-      });
+      tree = renderWithAppContext(<AccountNotifications {...props} />);
     });
 
     expect(tree).toMatchSnapshot();
@@ -87,7 +85,6 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
     await act(async () => {
       tree = renderWithAppContext(<AccountNotifications {...props} />, {
         auth: { accounts: [mockGitHubCloudAccount] },
-        settings: mockSettings,
       });
     });
 
@@ -127,9 +124,7 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
       error: null,
     };
 
-    renderWithAppContext(<AccountNotifications {...props} />, {
-      settings: mockSettings,
-    });
+    renderWithAppContext(<AccountNotifications {...props} />);
 
     await userEvent.click(screen.getByTestId('account-profile'));
 
@@ -149,9 +144,7 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
       error: null,
     };
 
-    renderWithAppContext(<AccountNotifications {...props} />, {
-      settings: mockSettings,
-    });
+    renderWithAppContext(<AccountNotifications {...props} />);
 
     await userEvent.click(screen.getByTestId('account-issues'));
 
@@ -173,9 +166,7 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
       error: null,
     };
 
-    renderWithAppContext(<AccountNotifications {...props} />, {
-      settings: mockSettings,
-    });
+    renderWithAppContext(<AccountNotifications {...props} />);
 
     await userEvent.click(screen.getByTestId('account-pull-requests'));
 
@@ -193,15 +184,12 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
       error: null,
     };
 
-    renderWithAppContext(<AccountNotifications {...props} />, {
-      settings: mockSettings,
-    });
+    renderWithAppContext(<AccountNotifications {...props} />);
 
     await userEvent.click(screen.getByTestId('account-toggle'));
 
-    const tree = renderWithAppContext(<AccountNotifications {...props} />, {
-      settings: mockSettings,
-    });
+    const tree = renderWithAppContext(<AccountNotifications {...props} />);
+
     expect(tree).toMatchSnapshot();
   });
 });

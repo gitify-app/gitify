@@ -36,7 +36,6 @@ describe('renderer/routes/Accounts.tsx', () => {
               mockGitHubAppAccount,
             ],
           },
-          settings: mockSettings,
         });
       });
 
@@ -68,7 +67,6 @@ describe('renderer/routes/Accounts.tsx', () => {
       await act(async () => {
         renderWithAppContext(<AccountsRoute />, {
           auth: { accounts: [mockPersonalAccessTokenAccount] },
-          settings: mockSettings,
         });
       });
 
@@ -84,7 +82,6 @@ describe('renderer/routes/Accounts.tsx', () => {
       await act(async () => {
         renderWithAppContext(<AccountsRoute />, {
           auth: { accounts: [mockPersonalAccessTokenAccount] },
-          settings: mockSettings,
         });
       });
 
@@ -98,7 +95,6 @@ describe('renderer/routes/Accounts.tsx', () => {
       await act(async () => {
         renderWithAppContext(<AccountsRoute />, {
           auth: { accounts: [mockPersonalAccessTokenAccount] },
-          settings: mockSettings,
         });
       });
 
@@ -120,7 +116,6 @@ describe('renderer/routes/Accounts.tsx', () => {
               mockGitHubAppAccount,
             ],
           },
-          settings: mockSettings,
         });
       });
 
@@ -150,7 +145,6 @@ describe('renderer/routes/Accounts.tsx', () => {
               mockGitHubAppAccount,
             ],
           },
-          settings: mockSettings,
         });
       });
 
@@ -171,7 +165,6 @@ describe('renderer/routes/Accounts.tsx', () => {
       await act(async () => {
         renderWithAppContext(<AccountsRoute />, {
           auth: { accounts: [mockPersonalAccessTokenAccount] },
-          settings: mockSettings,
         });
       });
 
@@ -192,7 +185,6 @@ describe('renderer/routes/Accounts.tsx', () => {
       await act(async () => {
         renderWithAppContext(<AccountsRoute />, {
           auth: { accounts: [mockPersonalAccessTokenAccount] },
-          settings: mockSettings,
           logoutFromAccount: mockLogoutFromAccount,
         });
       });
@@ -212,7 +204,6 @@ describe('renderer/routes/Accounts.tsx', () => {
       await act(async () => {
         renderWithAppContext(<AccountsRoute />, {
           auth: { accounts: [mockOAuthAccount] },
-          settings: mockSettings,
           loginWithGitHubApp: mockLoginWithGitHubApp,
         });
       });
@@ -227,7 +218,6 @@ describe('renderer/routes/Accounts.tsx', () => {
       await act(async () => {
         renderWithAppContext(<AccountsRoute />, {
           auth: { accounts: [mockOAuthAccount] },
-          settings: mockSettings,
         });
       });
 
@@ -247,7 +237,6 @@ describe('renderer/routes/Accounts.tsx', () => {
       await act(async () => {
         renderWithAppContext(<AccountsRoute />, {
           auth: { accounts: [mockPersonalAccessTokenAccount] },
-          settings: mockSettings,
         });
       });
 

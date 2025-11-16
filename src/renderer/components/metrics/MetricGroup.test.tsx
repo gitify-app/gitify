@@ -29,9 +29,7 @@ describe('renderer/components/metrics/MetricGroup.tsx', () => {
         notification: mockNotification,
       };
 
-      const tree = renderWithAppContext(<MetricGroup {...props} />, {
-        settings: mockSettings,
-      });
+      const tree = renderWithAppContext(<MetricGroup {...props} />);
       expect(tree).toMatchSnapshot();
     });
 
@@ -43,9 +41,7 @@ describe('renderer/components/metrics/MetricGroup.tsx', () => {
         notification: mockNotification,
       };
 
-      const tree = renderWithAppContext(<MetricGroup {...props} />, {
-        settings: mockSettings,
-      });
+      const tree = renderWithAppContext(<MetricGroup {...props} />);
       expect(tree).toMatchSnapshot();
     });
   });
@@ -59,9 +55,7 @@ describe('renderer/components/metrics/MetricGroup.tsx', () => {
         notification: mockNotification,
       };
 
-      const tree = renderWithAppContext(<MetricGroup {...props} />, {
-        settings: mockSettings,
-      });
+      const tree = renderWithAppContext(<MetricGroup {...props} />);
       expect(tree).toMatchSnapshot();
     });
 
@@ -73,9 +67,7 @@ describe('renderer/components/metrics/MetricGroup.tsx', () => {
         notification: mockNotification,
       };
 
-      const tree = renderWithAppContext(<MetricGroup {...props} />, {
-        settings: mockSettings,
-      });
+      const tree = renderWithAppContext(<MetricGroup {...props} />);
       expect(tree).toMatchSnapshot();
     });
 
@@ -87,9 +79,7 @@ describe('renderer/components/metrics/MetricGroup.tsx', () => {
         notification: mockNotification,
       };
 
-      const tree = renderWithAppContext(<MetricGroup {...props} />, {
-        settings: mockSettings,
-      });
+      const tree = renderWithAppContext(<MetricGroup {...props} />);
       expect(tree).toMatchSnapshot();
     });
   });
@@ -103,9 +93,7 @@ describe('renderer/components/metrics/MetricGroup.tsx', () => {
         notification: mockNotification,
       };
 
-      const tree = renderWithAppContext(<MetricGroup {...props} />, {
-        settings: mockSettings,
-      });
+      const tree = renderWithAppContext(<MetricGroup {...props} />);
       expect(tree).toMatchSnapshot();
     });
   });
@@ -122,9 +110,7 @@ describe('renderer/components/metrics/MetricGroup.tsx', () => {
         notification: mockNotification,
       };
 
-      const tree = renderWithAppContext(<MetricGroup {...props} />, {
-        settings: mockSettings,
-      });
+      const tree = renderWithAppContext(<MetricGroup {...props} />);
       expect(tree).toMatchSnapshot();
     });
 
@@ -139,9 +125,7 @@ describe('renderer/components/metrics/MetricGroup.tsx', () => {
         notification: mockNotification,
       };
 
-      const tree = renderWithAppContext(<MetricGroup {...props} />, {
-        settings: mockSettings,
-      });
+      const tree = renderWithAppContext(<MetricGroup {...props} />);
       expect(tree).toMatchSnapshot();
     });
   });

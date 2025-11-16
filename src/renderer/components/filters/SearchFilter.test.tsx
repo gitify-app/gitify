@@ -14,7 +14,6 @@ describe('renderer/components/filters/SearchFilter.tsx', () => {
   describe('Include Search Tokens', () => {
     it('adds include actor token with prefix', () => {
       renderWithAppContext(<SearchFilter />, {
-        settings: mockSettings,
         updateFilter: mockUpdateFilter,
       });
 
@@ -31,7 +30,6 @@ describe('renderer/components/filters/SearchFilter.tsx', () => {
 
     it('adds include org token with prefix', () => {
       renderWithAppContext(<SearchFilter />, {
-        settings: mockSettings,
         updateFilter: mockUpdateFilter,
       });
 
@@ -48,7 +46,6 @@ describe('renderer/components/filters/SearchFilter.tsx', () => {
 
     it('adds include repo token with prefix', () => {
       renderWithAppContext(<SearchFilter />, {
-        settings: mockSettings,
         updateFilter: mockUpdateFilter,
       });
 
@@ -67,7 +64,6 @@ describe('renderer/components/filters/SearchFilter.tsx', () => {
 
     it('prevent unrecognized include prefixes', () => {
       renderWithAppContext(<SearchFilter />, {
-        settings: mockSettings,
         updateFilter: mockUpdateFilter,
       });
 
@@ -84,7 +80,6 @@ describe('renderer/components/filters/SearchFilter.tsx', () => {
   describe('Exclude Search Tokens', () => {
     it('adds exclude actor token with prefix', () => {
       renderWithAppContext(<SearchFilter />, {
-        settings: mockSettings,
         updateFilter: mockUpdateFilter,
       });
 
@@ -101,7 +96,6 @@ describe('renderer/components/filters/SearchFilter.tsx', () => {
 
     it('adds exclude org token with prefix', () => {
       renderWithAppContext(<SearchFilter />, {
-        settings: mockSettings,
         updateFilter: mockUpdateFilter,
       });
 
@@ -118,7 +112,6 @@ describe('renderer/components/filters/SearchFilter.tsx', () => {
 
     it('adds exclude repo token with prefix', () => {
       renderWithAppContext(<SearchFilter />, {
-        settings: mockSettings,
         updateFilter: mockUpdateFilter,
       });
 
@@ -137,7 +130,6 @@ describe('renderer/components/filters/SearchFilter.tsx', () => {
 
     it('prevent unrecognized exclude prefixes', () => {
       renderWithAppContext(<SearchFilter />, {
-        settings: mockSettings,
         updateFilter: mockUpdateFilter,
       });
 

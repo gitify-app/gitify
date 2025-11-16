@@ -33,7 +33,7 @@ describe('renderer/components/filters/FilterSection.tsx', () => {
           settings: {
             ...mockSettings,
             detailedNotifications: true,
-          } as SettingsState,
+          },
           notifications: mockAccountNotifications,
         },
       );
@@ -57,7 +57,7 @@ describe('renderer/components/filters/FilterSection.tsx', () => {
           settings: {
             ...mockSettings,
             detailedNotifications: false,
-          } as SettingsState,
+          },
           notifications: mockAccountNotifications,
         },
       );

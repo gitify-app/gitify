@@ -246,7 +246,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
                 <span
                   class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
                 >
-                  1
+                  0
                 </span>
               </div>
               <div
@@ -829,7 +829,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
                 <span
                   class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
                 >
-                  3
+                  0
                 </span>
               </div>
               <div
@@ -1133,7 +1133,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               <span
                 class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
               >
-                1
+                0
               </span>
             </div>
             <div
@@ -1716,7 +1716,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx should render itself & its
               <span
                 class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
               >
-                3
+                0
               </span>
             </div>
             <div

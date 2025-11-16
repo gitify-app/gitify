@@ -4,7 +4,6 @@ import { MemoryRouter } from 'react-router-dom';
 
 import { renderWithAppContext } from '../__helpers__/test-utils';
 import { mockAccountNotifications } from '../__mocks__/notifications-mocks';
-import { mockAuth, mockSettings } from '../__mocks__/state-mocks';
 import * as comms from '../utils/comms';
 import { Sidebar } from './Sidebar';
 
