@@ -4,9 +4,31 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
 {
   "asFragment": [Function],
   "baseElement": <body>
-    <div />
+    <div>
+      <div
+        data-color-mode="light"
+        data-dark-theme="dark"
+        data-light-theme="light"
+      >
+        <div
+          class="prc-src-BaseStyles-dl-St"
+          data-portal-root="true"
+        />
+      </div>
+    </div>
   </body>,
-  "container": <div />,
+  "container": <div>
+    <div
+      data-color-mode="light"
+      data-dark-theme="dark"
+      data-light-theme="light"
+    >
+      <div
+        class="prc-src-BaseStyles-dl-St"
+        data-portal-root="true"
+      />
+    </div>
+  </div>,
   "debug": [Function],
   "findAllByAltText": [Function],
   "findAllByDisplayValue": [Function],
@@ -67,32 +89,43 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
   "baseElement": <body>
     <div>
       <div
-        class="prc-Popover-Popover-v1ShS"
-        data-caret="top-left"
-        data-open=""
+        data-color-mode="light"
+        data-dark-theme="dark"
+        data-light-theme="light"
       >
         <div
-          class="p-2 mt-2 prc-Popover-PopoverContent-nMzFS"
-          data-height="auto"
-          data-width="auto"
+          class="prc-src-BaseStyles-dl-St"
+          data-portal-root="true"
         >
           <div
-            class="prc-Stack-Stack-WJVsK"
-            data-align="stretch"
-            data-direction="vertical"
-            data-gap="condensed"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
+            class="prc-Popover-Popover-v1ShS"
+            data-caret="top-left"
+            data-open=""
           >
-            <div>
-              <span
-                class="text-xs opacity-90 prc-Text-Text-0ima0"
+            <div
+              class="p-2 mt-2 prc-Popover-PopoverContent-nMzFS"
+              data-height="auto"
+              data-width="auto"
+            >
+              <div
+                class="prc-Stack-Stack-WJVsK"
+                data-align="stretch"
+                data-direction="vertical"
+                data-gap="condensed"
+                data-justify="start"
+                data-padding="none"
+                data-wrap="nowrap"
               >
-                Please use one of the supported filters [
-                org, repo
-                ]
-              </span>
+                <div>
+                  <span
+                    class="text-xs opacity-90 prc-Text-Text-0ima0"
+                  >
+                    Please use one of the supported filters [
+                    org, repo
+                    ]
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -101,32 +134,43 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
   </body>,
   "container": <div>
     <div
-      class="prc-Popover-Popover-v1ShS"
-      data-caret="top-left"
-      data-open=""
+      data-color-mode="light"
+      data-dark-theme="dark"
+      data-light-theme="light"
     >
       <div
-        class="p-2 mt-2 prc-Popover-PopoverContent-nMzFS"
-        data-height="auto"
-        data-width="auto"
+        class="prc-src-BaseStyles-dl-St"
+        data-portal-root="true"
       >
         <div
-          class="prc-Stack-Stack-WJVsK"
-          data-align="stretch"
-          data-direction="vertical"
-          data-gap="condensed"
-          data-justify="start"
-          data-padding="none"
-          data-wrap="nowrap"
+          class="prc-Popover-Popover-v1ShS"
+          data-caret="top-left"
+          data-open=""
         >
-          <div>
-            <span
-              class="text-xs opacity-90 prc-Text-Text-0ima0"
+          <div
+            class="p-2 mt-2 prc-Popover-PopoverContent-nMzFS"
+            data-height="auto"
+            data-width="auto"
+          >
+            <div
+              class="prc-Stack-Stack-WJVsK"
+              data-align="stretch"
+              data-direction="vertical"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
             >
-              Please use one of the supported filters [
-              org, repo
-              ]
-            </span>
+              <div>
+                <span
+                  class="text-xs opacity-90 prc-Text-Text-0ima0"
+                >
+                  Please use one of the supported filters [
+                  org, repo
+                  ]
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -192,44 +236,55 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
   "baseElement": <body>
     <div>
       <div
-        class="prc-Popover-Popover-v1ShS"
-        data-caret="top-left"
-        data-open=""
+        data-color-mode="light"
+        data-dark-theme="dark"
+        data-light-theme="light"
       >
         <div
-          class="p-2 mt-2 prc-Popover-PopoverContent-nMzFS"
-          data-height="auto"
-          data-width="auto"
+          class="prc-src-BaseStyles-dl-St"
+          data-portal-root="true"
         >
           <div
-            class="prc-Stack-Stack-WJVsK"
-            data-align="stretch"
-            data-direction="vertical"
-            data-gap="condensed"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
+            class="prc-Popover-Popover-v1ShS"
+            data-caret="top-left"
+            data-open=""
           >
-            <div>
+            <div
+              class="p-2 mt-2 prc-Popover-PopoverContent-nMzFS"
+              data-height="auto"
+              data-width="auto"
+            >
               <div
                 class="prc-Stack-Stack-WJVsK"
                 data-align="stretch"
                 data-direction="vertical"
-                data-gap="none"
+                data-gap="condensed"
                 data-justify="start"
                 data-padding="none"
                 data-wrap="nowrap"
               >
-                <span
-                  class="text-xs font-semibold prc-Text-Text-0ima0"
-                >
-                  repo:
-                </span>
-                <span
-                  class="text-xs opacity-90 prc-Text-Text-0ima0"
-                >
-                  filter by repository full name
-                </span>
+                <div>
+                  <div
+                    class="prc-Stack-Stack-WJVsK"
+                    data-align="stretch"
+                    data-direction="vertical"
+                    data-gap="none"
+                    data-justify="start"
+                    data-padding="none"
+                    data-wrap="nowrap"
+                  >
+                    <span
+                      class="text-xs font-semibold prc-Text-Text-0ima0"
+                    >
+                      repo:
+                    </span>
+                    <span
+                      class="text-xs opacity-90 prc-Text-Text-0ima0"
+                    >
+                      filter by repository full name
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -239,44 +294,55 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
   </body>,
   "container": <div>
     <div
-      class="prc-Popover-Popover-v1ShS"
-      data-caret="top-left"
-      data-open=""
+      data-color-mode="light"
+      data-dark-theme="dark"
+      data-light-theme="light"
     >
       <div
-        class="p-2 mt-2 prc-Popover-PopoverContent-nMzFS"
-        data-height="auto"
-        data-width="auto"
+        class="prc-src-BaseStyles-dl-St"
+        data-portal-root="true"
       >
         <div
-          class="prc-Stack-Stack-WJVsK"
-          data-align="stretch"
-          data-direction="vertical"
-          data-gap="condensed"
-          data-justify="start"
-          data-padding="none"
-          data-wrap="nowrap"
+          class="prc-Popover-Popover-v1ShS"
+          data-caret="top-left"
+          data-open=""
         >
-          <div>
+          <div
+            class="p-2 mt-2 prc-Popover-PopoverContent-nMzFS"
+            data-height="auto"
+            data-width="auto"
+          >
             <div
               class="prc-Stack-Stack-WJVsK"
               data-align="stretch"
               data-direction="vertical"
-              data-gap="none"
+              data-gap="condensed"
               data-justify="start"
               data-padding="none"
               data-wrap="nowrap"
             >
-              <span
-                class="text-xs font-semibold prc-Text-Text-0ima0"
-              >
-                repo:
-              </span>
-              <span
-                class="text-xs opacity-90 prc-Text-Text-0ima0"
-              >
-                filter by repository full name
-              </span>
+              <div>
+                <div
+                  class="prc-Stack-Stack-WJVsK"
+                  data-align="stretch"
+                  data-direction="vertical"
+                  data-gap="none"
+                  data-justify="start"
+                  data-padding="none"
+                  data-wrap="nowrap"
+                >
+                  <span
+                    class="text-xs font-semibold prc-Text-Text-0ima0"
+                  >
+                    repo:
+                  </span>
+                  <span
+                    class="text-xs opacity-90 prc-Text-Text-0ima0"
+                  >
+                    filter by repository full name
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -343,88 +409,99 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
   "baseElement": <body>
     <div>
       <div
-        class="prc-Popover-Popover-v1ShS"
-        data-caret="top-left"
-        data-open=""
+        data-color-mode="light"
+        data-dark-theme="dark"
+        data-light-theme="light"
       >
         <div
-          class="p-2 mt-2 prc-Popover-PopoverContent-nMzFS"
-          data-height="auto"
-          data-width="auto"
+          class="prc-src-BaseStyles-dl-St"
+          data-portal-root="true"
         >
           <div
-            class="prc-Stack-Stack-WJVsK"
-            data-align="stretch"
-            data-direction="vertical"
-            data-gap="condensed"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
+            class="prc-Popover-Popover-v1ShS"
+            data-caret="top-left"
+            data-open=""
           >
-            <div>
+            <div
+              class="p-2 mt-2 prc-Popover-PopoverContent-nMzFS"
+              data-height="auto"
+              data-width="auto"
+            >
               <div
                 class="prc-Stack-Stack-WJVsK"
                 data-align="stretch"
                 data-direction="vertical"
-                data-gap="none"
+                data-gap="condensed"
                 data-justify="start"
                 data-padding="none"
                 data-wrap="nowrap"
               >
-                <span
-                  class="text-xs font-semibold prc-Text-Text-0ima0"
-                >
-                  author:
-                </span>
-                <span
-                  class="text-xs opacity-90 prc-Text-Text-0ima0"
-                >
-                  filter by notification author
-                </span>
-              </div>
-            </div>
-            <div>
-              <div
-                class="prc-Stack-Stack-WJVsK"
-                data-align="stretch"
-                data-direction="vertical"
-                data-gap="none"
-                data-justify="start"
-                data-padding="none"
-                data-wrap="nowrap"
-              >
-                <span
-                  class="text-xs font-semibold prc-Text-Text-0ima0"
-                >
-                  org:
-                </span>
-                <span
-                  class="text-xs opacity-90 prc-Text-Text-0ima0"
-                >
-                  filter by organization owner
-                </span>
-              </div>
-            </div>
-            <div>
-              <div
-                class="prc-Stack-Stack-WJVsK"
-                data-align="stretch"
-                data-direction="vertical"
-                data-gap="none"
-                data-justify="start"
-                data-padding="none"
-                data-wrap="nowrap"
-              >
-                <span
-                  class="text-xs font-semibold prc-Text-Text-0ima0"
-                >
-                  repo:
-                </span>
-                <span
-                  class="text-xs opacity-90 prc-Text-Text-0ima0"
-                >
-                  filter by repository full name
-                </span>
+                <div>
+                  <div
+                    class="prc-Stack-Stack-WJVsK"
+                    data-align="stretch"
+                    data-direction="vertical"
+                    data-gap="none"
+                    data-justify="start"
+                    data-padding="none"
+                    data-wrap="nowrap"
+                  >
+                    <span
+                      class="text-xs font-semibold prc-Text-Text-0ima0"
+                    >
+                      author:
+                    </span>
+                    <span
+                      class="text-xs opacity-90 prc-Text-Text-0ima0"
+                    >
+                      filter by notification author
+                    </span>
+                  </div>
+                </div>
+                <div>
+                  <div
+                    class="prc-Stack-Stack-WJVsK"
+                    data-align="stretch"
+                    data-direction="vertical"
+                    data-gap="none"
+                    data-justify="start"
+                    data-padding="none"
+                    data-wrap="nowrap"
+                  >
+                    <span
+                      class="text-xs font-semibold prc-Text-Text-0ima0"
+                    >
+                      org:
+                    </span>
+                    <span
+                      class="text-xs opacity-90 prc-Text-Text-0ima0"
+                    >
+                      filter by organization owner
+                    </span>
+                  </div>
+                </div>
+                <div>
+                  <div
+                    class="prc-Stack-Stack-WJVsK"
+                    data-align="stretch"
+                    data-direction="vertical"
+                    data-gap="none"
+                    data-justify="start"
+                    data-padding="none"
+                    data-wrap="nowrap"
+                  >
+                    <span
+                      class="text-xs font-semibold prc-Text-Text-0ima0"
+                    >
+                      repo:
+                    </span>
+                    <span
+                      class="text-xs opacity-90 prc-Text-Text-0ima0"
+                    >
+                      filter by repository full name
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -434,88 +511,99 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
   </body>,
   "container": <div>
     <div
-      class="prc-Popover-Popover-v1ShS"
-      data-caret="top-left"
-      data-open=""
+      data-color-mode="light"
+      data-dark-theme="dark"
+      data-light-theme="light"
     >
       <div
-        class="p-2 mt-2 prc-Popover-PopoverContent-nMzFS"
-        data-height="auto"
-        data-width="auto"
+        class="prc-src-BaseStyles-dl-St"
+        data-portal-root="true"
       >
         <div
-          class="prc-Stack-Stack-WJVsK"
-          data-align="stretch"
-          data-direction="vertical"
-          data-gap="condensed"
-          data-justify="start"
-          data-padding="none"
-          data-wrap="nowrap"
+          class="prc-Popover-Popover-v1ShS"
+          data-caret="top-left"
+          data-open=""
         >
-          <div>
+          <div
+            class="p-2 mt-2 prc-Popover-PopoverContent-nMzFS"
+            data-height="auto"
+            data-width="auto"
+          >
             <div
               class="prc-Stack-Stack-WJVsK"
               data-align="stretch"
               data-direction="vertical"
-              data-gap="none"
+              data-gap="condensed"
               data-justify="start"
               data-padding="none"
               data-wrap="nowrap"
             >
-              <span
-                class="text-xs font-semibold prc-Text-Text-0ima0"
-              >
-                author:
-              </span>
-              <span
-                class="text-xs opacity-90 prc-Text-Text-0ima0"
-              >
-                filter by notification author
-              </span>
-            </div>
-          </div>
-          <div>
-            <div
-              class="prc-Stack-Stack-WJVsK"
-              data-align="stretch"
-              data-direction="vertical"
-              data-gap="none"
-              data-justify="start"
-              data-padding="none"
-              data-wrap="nowrap"
-            >
-              <span
-                class="text-xs font-semibold prc-Text-Text-0ima0"
-              >
-                org:
-              </span>
-              <span
-                class="text-xs opacity-90 prc-Text-Text-0ima0"
-              >
-                filter by organization owner
-              </span>
-            </div>
-          </div>
-          <div>
-            <div
-              class="prc-Stack-Stack-WJVsK"
-              data-align="stretch"
-              data-direction="vertical"
-              data-gap="none"
-              data-justify="start"
-              data-padding="none"
-              data-wrap="nowrap"
-            >
-              <span
-                class="text-xs font-semibold prc-Text-Text-0ima0"
-              >
-                repo:
-              </span>
-              <span
-                class="text-xs opacity-90 prc-Text-Text-0ima0"
-              >
-                filter by repository full name
-              </span>
+              <div>
+                <div
+                  class="prc-Stack-Stack-WJVsK"
+                  data-align="stretch"
+                  data-direction="vertical"
+                  data-gap="none"
+                  data-justify="start"
+                  data-padding="none"
+                  data-wrap="nowrap"
+                >
+                  <span
+                    class="text-xs font-semibold prc-Text-Text-0ima0"
+                  >
+                    author:
+                  </span>
+                  <span
+                    class="text-xs opacity-90 prc-Text-Text-0ima0"
+                  >
+                    filter by notification author
+                  </span>
+                </div>
+              </div>
+              <div>
+                <div
+                  class="prc-Stack-Stack-WJVsK"
+                  data-align="stretch"
+                  data-direction="vertical"
+                  data-gap="none"
+                  data-justify="start"
+                  data-padding="none"
+                  data-wrap="nowrap"
+                >
+                  <span
+                    class="text-xs font-semibold prc-Text-Text-0ima0"
+                  >
+                    org:
+                  </span>
+                  <span
+                    class="text-xs opacity-90 prc-Text-Text-0ima0"
+                  >
+                    filter by organization owner
+                  </span>
+                </div>
+              </div>
+              <div>
+                <div
+                  class="prc-Stack-Stack-WJVsK"
+                  data-align="stretch"
+                  data-direction="vertical"
+                  data-gap="none"
+                  data-justify="start"
+                  data-padding="none"
+                  data-wrap="nowrap"
+                >
+                  <span
+                    class="text-xs font-semibold prc-Text-Text-0ima0"
+                  >
+                    repo:
+                  </span>
+                  <span
+                    class="text-xs opacity-90 prc-Text-Text-0ima0"
+                  >
+                    filter by repository full name
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -582,88 +670,99 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
   "baseElement": <body>
     <div>
       <div
-        class="prc-Popover-Popover-v1ShS"
-        data-caret="top-left"
-        data-open=""
+        data-color-mode="light"
+        data-dark-theme="dark"
+        data-light-theme="light"
       >
         <div
-          class="p-2 mt-2 prc-Popover-PopoverContent-nMzFS"
-          data-height="auto"
-          data-width="auto"
+          class="prc-src-BaseStyles-dl-St"
+          data-portal-root="true"
         >
           <div
-            class="prc-Stack-Stack-WJVsK"
-            data-align="stretch"
-            data-direction="vertical"
-            data-gap="condensed"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
+            class="prc-Popover-Popover-v1ShS"
+            data-caret="top-left"
+            data-open=""
           >
-            <div>
+            <div
+              class="p-2 mt-2 prc-Popover-PopoverContent-nMzFS"
+              data-height="auto"
+              data-width="auto"
+            >
               <div
                 class="prc-Stack-Stack-WJVsK"
                 data-align="stretch"
                 data-direction="vertical"
-                data-gap="none"
+                data-gap="condensed"
                 data-justify="start"
                 data-padding="none"
                 data-wrap="nowrap"
               >
-                <span
-                  class="text-xs font-semibold prc-Text-Text-0ima0"
-                >
-                  author:
-                </span>
-                <span
-                  class="text-xs opacity-90 prc-Text-Text-0ima0"
-                >
-                  filter by notification author
-                </span>
-              </div>
-            </div>
-            <div>
-              <div
-                class="prc-Stack-Stack-WJVsK"
-                data-align="stretch"
-                data-direction="vertical"
-                data-gap="none"
-                data-justify="start"
-                data-padding="none"
-                data-wrap="nowrap"
-              >
-                <span
-                  class="text-xs font-semibold prc-Text-Text-0ima0"
-                >
-                  org:
-                </span>
-                <span
-                  class="text-xs opacity-90 prc-Text-Text-0ima0"
-                >
-                  filter by organization owner
-                </span>
-              </div>
-            </div>
-            <div>
-              <div
-                class="prc-Stack-Stack-WJVsK"
-                data-align="stretch"
-                data-direction="vertical"
-                data-gap="none"
-                data-justify="start"
-                data-padding="none"
-                data-wrap="nowrap"
-              >
-                <span
-                  class="text-xs font-semibold prc-Text-Text-0ima0"
-                >
-                  repo:
-                </span>
-                <span
-                  class="text-xs opacity-90 prc-Text-Text-0ima0"
-                >
-                  filter by repository full name
-                </span>
+                <div>
+                  <div
+                    class="prc-Stack-Stack-WJVsK"
+                    data-align="stretch"
+                    data-direction="vertical"
+                    data-gap="none"
+                    data-justify="start"
+                    data-padding="none"
+                    data-wrap="nowrap"
+                  >
+                    <span
+                      class="text-xs font-semibold prc-Text-Text-0ima0"
+                    >
+                      author:
+                    </span>
+                    <span
+                      class="text-xs opacity-90 prc-Text-Text-0ima0"
+                    >
+                      filter by notification author
+                    </span>
+                  </div>
+                </div>
+                <div>
+                  <div
+                    class="prc-Stack-Stack-WJVsK"
+                    data-align="stretch"
+                    data-direction="vertical"
+                    data-gap="none"
+                    data-justify="start"
+                    data-padding="none"
+                    data-wrap="nowrap"
+                  >
+                    <span
+                      class="text-xs font-semibold prc-Text-Text-0ima0"
+                    >
+                      org:
+                    </span>
+                    <span
+                      class="text-xs opacity-90 prc-Text-Text-0ima0"
+                    >
+                      filter by organization owner
+                    </span>
+                  </div>
+                </div>
+                <div>
+                  <div
+                    class="prc-Stack-Stack-WJVsK"
+                    data-align="stretch"
+                    data-direction="vertical"
+                    data-gap="none"
+                    data-justify="start"
+                    data-padding="none"
+                    data-wrap="nowrap"
+                  >
+                    <span
+                      class="text-xs font-semibold prc-Text-Text-0ima0"
+                    >
+                      repo:
+                    </span>
+                    <span
+                      class="text-xs opacity-90 prc-Text-Text-0ima0"
+                    >
+                      filter by repository full name
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -673,88 +772,99 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
   </body>,
   "container": <div>
     <div
-      class="prc-Popover-Popover-v1ShS"
-      data-caret="top-left"
-      data-open=""
+      data-color-mode="light"
+      data-dark-theme="dark"
+      data-light-theme="light"
     >
       <div
-        class="p-2 mt-2 prc-Popover-PopoverContent-nMzFS"
-        data-height="auto"
-        data-width="auto"
+        class="prc-src-BaseStyles-dl-St"
+        data-portal-root="true"
       >
         <div
-          class="prc-Stack-Stack-WJVsK"
-          data-align="stretch"
-          data-direction="vertical"
-          data-gap="condensed"
-          data-justify="start"
-          data-padding="none"
-          data-wrap="nowrap"
+          class="prc-Popover-Popover-v1ShS"
+          data-caret="top-left"
+          data-open=""
         >
-          <div>
+          <div
+            class="p-2 mt-2 prc-Popover-PopoverContent-nMzFS"
+            data-height="auto"
+            data-width="auto"
+          >
             <div
               class="prc-Stack-Stack-WJVsK"
               data-align="stretch"
               data-direction="vertical"
-              data-gap="none"
+              data-gap="condensed"
               data-justify="start"
               data-padding="none"
               data-wrap="nowrap"
             >
-              <span
-                class="text-xs font-semibold prc-Text-Text-0ima0"
-              >
-                author:
-              </span>
-              <span
-                class="text-xs opacity-90 prc-Text-Text-0ima0"
-              >
-                filter by notification author
-              </span>
-            </div>
-          </div>
-          <div>
-            <div
-              class="prc-Stack-Stack-WJVsK"
-              data-align="stretch"
-              data-direction="vertical"
-              data-gap="none"
-              data-justify="start"
-              data-padding="none"
-              data-wrap="nowrap"
-            >
-              <span
-                class="text-xs font-semibold prc-Text-Text-0ima0"
-              >
-                org:
-              </span>
-              <span
-                class="text-xs opacity-90 prc-Text-Text-0ima0"
-              >
-                filter by organization owner
-              </span>
-            </div>
-          </div>
-          <div>
-            <div
-              class="prc-Stack-Stack-WJVsK"
-              data-align="stretch"
-              data-direction="vertical"
-              data-gap="none"
-              data-justify="start"
-              data-padding="none"
-              data-wrap="nowrap"
-            >
-              <span
-                class="text-xs font-semibold prc-Text-Text-0ima0"
-              >
-                repo:
-              </span>
-              <span
-                class="text-xs opacity-90 prc-Text-Text-0ima0"
-              >
-                filter by repository full name
-              </span>
+              <div>
+                <div
+                  class="prc-Stack-Stack-WJVsK"
+                  data-align="stretch"
+                  data-direction="vertical"
+                  data-gap="none"
+                  data-justify="start"
+                  data-padding="none"
+                  data-wrap="nowrap"
+                >
+                  <span
+                    class="text-xs font-semibold prc-Text-Text-0ima0"
+                  >
+                    author:
+                  </span>
+                  <span
+                    class="text-xs opacity-90 prc-Text-Text-0ima0"
+                  >
+                    filter by notification author
+                  </span>
+                </div>
+              </div>
+              <div>
+                <div
+                  class="prc-Stack-Stack-WJVsK"
+                  data-align="stretch"
+                  data-direction="vertical"
+                  data-gap="none"
+                  data-justify="start"
+                  data-padding="none"
+                  data-wrap="nowrap"
+                >
+                  <span
+                    class="text-xs font-semibold prc-Text-Text-0ima0"
+                  >
+                    org:
+                  </span>
+                  <span
+                    class="text-xs opacity-90 prc-Text-Text-0ima0"
+                  >
+                    filter by organization owner
+                  </span>
+                </div>
+              </div>
+              <div>
+                <div
+                  class="prc-Stack-Stack-WJVsK"
+                  data-align="stretch"
+                  data-direction="vertical"
+                  data-gap="none"
+                  data-justify="start"
+                  data-padding="none"
+                  data-wrap="nowrap"
+                >
+                  <span
+                    class="text-xs font-semibold prc-Text-Text-0ima0"
+                  >
+                    repo:
+                  </span>
+                  <span
+                    class="text-xs opacity-90 prc-Text-Text-0ima0"
+                  >
+                    filter by repository full name
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
         </div>

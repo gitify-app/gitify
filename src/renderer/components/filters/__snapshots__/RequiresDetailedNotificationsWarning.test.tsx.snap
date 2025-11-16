@@ -5,33 +5,55 @@ exports[`renderer/components/filters/RequiresDetailedNotificationsWarning.tsx sh
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <span
-        class="text-gitify-caution prc-Text-Text-0ima0"
+      <div
+        data-color-mode="light"
+        data-dark-theme="dark"
+        data-light-theme="light"
       >
-        ⚠️ This filter requires the 
-        <strong
-          class="prc-Text-Text-0ima0"
+        <div
+          class="prc-src-BaseStyles-dl-St"
+          data-portal-root="true"
         >
-          Detailed Notifications
-        </strong>
-         
-        setting to be enabled.
-      </span>
+          <span
+            class="text-gitify-caution prc-Text-Text-0ima0"
+          >
+            ⚠️ This filter requires the 
+            <strong
+              class="prc-Text-Text-0ima0"
+            >
+              Detailed Notifications
+            </strong>
+             
+            setting to be enabled.
+          </span>
+        </div>
+      </div>
     </div>
   </body>,
   "container": <div>
-    <span
-      class="text-gitify-caution prc-Text-Text-0ima0"
+    <div
+      data-color-mode="light"
+      data-dark-theme="dark"
+      data-light-theme="light"
     >
-      ⚠️ This filter requires the 
-      <strong
-        class="prc-Text-Text-0ima0"
+      <div
+        class="prc-src-BaseStyles-dl-St"
+        data-portal-root="true"
       >
-        Detailed Notifications
-      </strong>
-       
-      setting to be enabled.
-    </span>
+        <span
+          class="text-gitify-caution prc-Text-Text-0ima0"
+        >
+          ⚠️ This filter requires the 
+          <strong
+            class="prc-Text-Text-0ima0"
+          >
+            Detailed Notifications
+          </strong>
+           
+          setting to be enabled.
+        </span>
+      </div>
+    </div>
   </div>,
   "debug": [Function],
   "findAllByAltText": [Function],

@@ -2,86 +2,108 @@
 
 exports[`renderer/routes/components/primitives/Title.tsx should render the title - default size 1`] = `
 <div>
-  <legend>
+  <div
+    data-color-mode="light"
+    data-dark-theme="dark"
+    data-light-theme="light"
+  >
     <div
-      class="mb-2"
+      class="prc-src-BaseStyles-dl-St"
+      data-portal-root="true"
     >
-      <div
-        class="prc-Stack-Stack-WJVsK"
-        data-align="center"
-        data-direction="horizontal"
-        data-gap="condensed"
-        data-justify="start"
-        data-padding="none"
-        data-wrap="nowrap"
-        id="title-legend"
-      >
-        <svg
-          aria-hidden="true"
-          class="octicon octicon-person-fill"
-          display="inline-block"
-          fill="currentColor"
-          focusable="false"
-          height="16"
-          overflow="visible"
-          style="vertical-align: text-bottom;"
-          viewBox="0 0 16 16"
-          width="16"
+      <legend>
+        <div
+          class="mb-2"
         >
-          <path
-            d="M4.243 4.757a3.757 3.757 0 1 1 5.851 3.119 6.006 6.006 0 0 1 3.9 5.339.75.75 0 0 1-.715.784H2.721a.75.75 0 0 1-.714-.784 6.006 6.006 0 0 1 3.9-5.34 3.753 3.753 0 0 1-1.664-3.118Z"
-          />
-        </svg>
-        <h4
-          class="prc-Heading-Heading-6CmGO"
-        >
-          Legend
-        </h4>
-      </div>
+          <div
+            class="prc-Stack-Stack-WJVsK"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+            id="title-legend"
+          >
+            <svg
+              aria-hidden="true"
+              class="octicon octicon-person-fill"
+              display="inline-block"
+              fill="currentColor"
+              focusable="false"
+              height="16"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
+              viewBox="0 0 16 16"
+              width="16"
+            >
+              <path
+                d="M4.243 4.757a3.757 3.757 0 1 1 5.851 3.119 6.006 6.006 0 0 1 3.9 5.339.75.75 0 0 1-.715.784H2.721a.75.75 0 0 1-.714-.784 6.006 6.006 0 0 1 3.9-5.34 3.753 3.753 0 0 1-1.664-3.118Z"
+              />
+            </svg>
+            <h4
+              class="prc-Heading-Heading-6CmGO"
+            >
+              Legend
+            </h4>
+          </div>
+        </div>
+      </legend>
     </div>
-  </legend>
+  </div>
 </div>
 `;
 
 exports[`renderer/routes/components/primitives/Title.tsx should render the title - specific size 1`] = `
 <div>
-  <legend>
+  <div
+    data-color-mode="light"
+    data-dark-theme="dark"
+    data-light-theme="light"
+  >
     <div
-      class="mb-2"
+      class="prc-src-BaseStyles-dl-St"
+      data-portal-root="true"
     >
-      <div
-        class="prc-Stack-Stack-WJVsK"
-        data-align="center"
-        data-direction="horizontal"
-        data-gap="condensed"
-        data-justify="start"
-        data-padding="none"
-        data-wrap="nowrap"
-        id="title-legend"
-      >
-        <svg
-          aria-hidden="true"
-          class="octicon octicon-person-fill"
-          display="inline-block"
-          fill="currentColor"
-          focusable="false"
-          height="16"
-          overflow="visible"
-          style="vertical-align: text-bottom;"
-          viewBox="0 0 16 16"
-          width="16"
+      <legend>
+        <div
+          class="mb-2"
         >
-          <path
-            d="M4.243 4.757a3.757 3.757 0 1 1 5.851 3.119 6.006 6.006 0 0 1 3.9 5.339.75.75 0 0 1-.715.784H2.721a.75.75 0 0 1-.714-.784 6.006 6.006 0 0 1 3.9-5.34 3.753 3.753 0 0 1-1.664-3.118Z"
-          />
-        </svg>
-        <h4
-          class="prc-Heading-Heading-6CmGO"
-        >
-          Legend
-        </h4>
-      </div>
+          <div
+            class="prc-Stack-Stack-WJVsK"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+            id="title-legend"
+          >
+            <svg
+              aria-hidden="true"
+              class="octicon octicon-person-fill"
+              display="inline-block"
+              fill="currentColor"
+              focusable="false"
+              height="16"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
+              viewBox="0 0 16 16"
+              width="16"
+            >
+              <path
+                d="M4.243 4.757a3.757 3.757 0 1 1 5.851 3.119 6.006 6.006 0 0 1 3.9 5.339.75.75 0 0 1-.715.784H2.721a.75.75 0 0 1-.714-.784 6.006 6.006 0 0 1 3.9-5.34 3.753 3.753 0 0 1-1.664-3.118Z"
+              />
+            </svg>
+            <h4
+              class="prc-Heading-Heading-6CmGO"
+            >
+              Legend
+            </h4>
+          </div>
+        </div>
+      </legend>
     </div>
-  </legend>
+  </div>
 </div>
 `;

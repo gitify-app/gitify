@@ -5,21 +5,43 @@ exports[`renderer/components/fields/FieldLabel.tsx should render 1`] = `
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <label
-        class="mr-1 font-medium cursor-pointer"
-        for="appearance"
+      <div
+        data-color-mode="light"
+        data-dark-theme="dark"
+        data-light-theme="light"
       >
-        Appearance
-      </label>
+        <div
+          class="prc-src-BaseStyles-dl-St"
+          data-portal-root="true"
+        >
+          <label
+            class="mr-1 font-medium cursor-pointer"
+            for="appearance"
+          >
+            Appearance
+          </label>
+        </div>
+      </div>
     </div>
   </body>,
   "container": <div>
-    <label
-      class="mr-1 font-medium cursor-pointer"
-      for="appearance"
+    <div
+      data-color-mode="light"
+      data-dark-theme="dark"
+      data-light-theme="light"
     >
-      Appearance
-    </label>
+      <div
+        class="prc-src-BaseStyles-dl-St"
+        data-portal-root="true"
+      >
+        <label
+          class="mr-1 font-medium cursor-pointer"
+          for="appearance"
+        >
+          Appearance
+        </label>
+      </div>
+    </div>
   </div>,
   "debug": [Function],
   "findAllByAltText": [Function],

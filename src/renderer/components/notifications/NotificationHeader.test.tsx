@@ -1,8 +1,8 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+import { renderWithAppContext } from '../../__helpers__/test-utils';
 import { mockSettings } from '../../__mocks__/state-mocks';
-import { AppContext } from '../../context/App';
 import { GroupBy } from '../../types';
 import { mockSingleNotification } from '../../utils/api/__mocks__/response-mocks';
 import * as comms from '../../utils/comms';
@@ -15,16 +15,11 @@ describe('renderer/components/notifications/NotificationHeader.tsx', () => {
 
   it('should render itself & its children - group by repositories', async () => {
     const props = {
-      notification: mockSingleNotification,
-    };
+      notification: mockSingleNotification };
 
-    const tree = render(
-      <AppContext.Provider
-        value={{ settings: { ...mockSettings, groupBy: GroupBy.REPOSITORY } }}
-      >
-        <NotificationHeader {...props} />
-      </AppContext.Provider>,
-    );
+    const tree = renderWithAppContext(<NotificationHeader {...props} />, {
+      
+        settings: { ...mockSettings, groupBy: GroupBy.REPOSITORY } });
 
     expect(tree).toMatchSnapshot();
   });
@@ -32,38 +27,24 @@ describe('renderer/components/notifications/NotificationHeader.tsx', () => {
   describe('should render itself & its children - group by date', () => {
     it('with notification number', async () => {
       const props = {
-        notification: mockSingleNotification,
-      };
+        notification: mockSingleNotification };
 
-      const tree = render(
-        <AppContext.Provider
-          value={{ settings: { ...mockSettings, groupBy: GroupBy.DATE } }}
-        >
-          <NotificationHeader {...props} />
-        </AppContext.Provider>,
-      );
+      const tree = renderWithAppContext(<NotificationHeader {...props} />, {
+         settings: { ...mockSettings, groupBy: GroupBy.DATE }  });
 
       expect(tree).toMatchSnapshot();
     });
 
     it('with showNumber setting disabled', async () => {
       const props = {
-        notification: mockSingleNotification,
-      };
+        notification: mockSingleNotification };
 
-      const tree = render(
-        <AppContext.Provider
-          value={{
-            settings: {
-              ...mockSettings,
-              showNumber: false,
-              groupBy: GroupBy.DATE,
-            },
-          }}
-        >
-          <NotificationHeader {...props} />
-        </AppContext.Provider>,
-      );
+      const tree = renderWithAppContext(<NotificationHeader {...props} />, {
+        
+          settings: {
+            ...mockSettings,
+            showNumber: false,
+            groupBy: GroupBy.DATE } });
 
       expect(tree).toMatchSnapshot();
     });
@@ -72,17 +53,10 @@ describe('renderer/components/notifications/NotificationHeader.tsx', () => {
       const props = {
         notification: {
           ...mockSingleNotification,
-          subject: { ...mockSingleNotification.subject, number: null },
-        },
-      };
+          subject: { ...mockSingleNotification.subject, number: null } } };
 
-      const tree = render(
-        <AppContext.Provider
-          value={{ settings: { ...mockSettings, groupBy: GroupBy.DATE } }}
-        >
-          <NotificationHeader {...props} />
-        </AppContext.Provider>,
-      );
+      const tree = renderWithAppContext(<NotificationHeader {...props} />, {
+         settings: { ...mockSettings, groupBy: GroupBy.DATE }  });
 
       expect(tree).toMatchSnapshot();
     });
@@ -94,16 +68,10 @@ describe('renderer/components/notifications/NotificationHeader.tsx', () => {
       .mockImplementation();
 
     const props = {
-      notification: mockSingleNotification,
-    };
+      notification: mockSingleNotification };
 
-    render(
-      <AppContext.Provider
-        value={{ settings: { ...mockSettings, groupBy: GroupBy.DATE } }}
-      >
-        <NotificationHeader {...props} />
-      </AppContext.Provider>,
-    );
+    renderWithAppContext(<NotificationHeader {...props} />, {
+       settings: { ...mockSettings, groupBy: GroupBy.DATE }  });
 
     await userEvent.click(screen.getByTestId('view-repository'));
 

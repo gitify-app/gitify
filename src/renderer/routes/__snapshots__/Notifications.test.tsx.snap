@@ -5,15 +5,37 @@ exports[`renderer/routes/Notifications.tsx should render itself & its children (
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <p>
-        AllRead
-      </p>
+      <div
+        data-color-mode="light"
+        data-dark-theme="dark"
+        data-light-theme="light"
+      >
+        <div
+          class="prc-src-BaseStyles-dl-St"
+          data-portal-root="true"
+        >
+          <p>
+            AllRead
+          </p>
+        </div>
+      </div>
     </div>
   </body>,
   "container": <div>
-    <p>
-      AllRead
-    </p>
+    <div
+      data-color-mode="light"
+      data-dark-theme="dark"
+      data-light-theme="light"
+    >
+      <div
+        class="prc-src-BaseStyles-dl-St"
+        data-portal-root="true"
+      >
+        <p>
+          AllRead
+        </p>
+      </div>
+    </div>
   </div>,
   "debug": [Function],
   "findAllByAltText": [Function],
@@ -74,15 +96,37 @@ exports[`renderer/routes/Notifications.tsx should render itself & its children (
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <p>
-        Oops
-      </p>
+      <div
+        data-color-mode="light"
+        data-dark-theme="dark"
+        data-light-theme="light"
+      >
+        <div
+          class="prc-src-BaseStyles-dl-St"
+          data-portal-root="true"
+        >
+          <p>
+            Oops
+          </p>
+        </div>
+      </div>
     </div>
   </body>,
   "container": <div>
-    <p>
-      Oops
-    </p>
+    <div
+      data-color-mode="light"
+      data-dark-theme="dark"
+      data-light-theme="light"
+    >
+      <div
+        class="prc-src-BaseStyles-dl-St"
+        data-portal-root="true"
+      >
+        <p>
+          Oops
+        </p>
+      </div>
+    </div>
   </div>,
   "debug": [Function],
   "findAllByAltText": [Function],
@@ -143,15 +187,37 @@ exports[`renderer/routes/Notifications.tsx should render itself & its children (
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <p>
-        Oops
-      </p>
+      <div
+        data-color-mode="light"
+        data-dark-theme="dark"
+        data-light-theme="light"
+      >
+        <div
+          class="prc-src-BaseStyles-dl-St"
+          data-portal-root="true"
+        >
+          <p>
+            Oops
+          </p>
+        </div>
+      </div>
     </div>
   </body>,
   "container": <div>
-    <p>
-      Oops
-    </p>
+    <div
+      data-color-mode="light"
+      data-dark-theme="dark"
+      data-light-theme="light"
+    >
+      <div
+        class="prc-src-BaseStyles-dl-St"
+        data-portal-root="true"
+      >
+        <p>
+          Oops
+        </p>
+      </div>
+    </div>
   </div>,
   "debug": [Function],
   "findAllByAltText": [Function],
@@ -212,15 +278,37 @@ exports[`renderer/routes/Notifications.tsx should render itself & its children (
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <p>
-        Oops
-      </p>
+      <div
+        data-color-mode="light"
+        data-dark-theme="dark"
+        data-light-theme="light"
+      >
+        <div
+          class="prc-src-BaseStyles-dl-St"
+          data-portal-root="true"
+        >
+          <p>
+            Oops
+          </p>
+        </div>
+      </div>
     </div>
   </body>,
   "container": <div>
-    <p>
-      Oops
-    </p>
+    <div
+      data-color-mode="light"
+      data-dark-theme="dark"
+      data-light-theme="light"
+    >
+      <div
+        class="prc-src-BaseStyles-dl-St"
+        data-portal-root="true"
+      >
+        <p>
+          Oops
+        </p>
+      </div>
+    </div>
   </div>,
   "debug": [Function],
   "findAllByAltText": [Function],
@@ -281,15 +369,37 @@ exports[`renderer/routes/Notifications.tsx should render itself & its children (
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <p>
-        Oops
-      </p>
+      <div
+        data-color-mode="light"
+        data-dark-theme="dark"
+        data-light-theme="light"
+      >
+        <div
+          class="prc-src-BaseStyles-dl-St"
+          data-portal-root="true"
+        >
+          <p>
+            Oops
+          </p>
+        </div>
+      </div>
     </div>
   </body>,
   "container": <div>
-    <p>
-      Oops
-    </p>
+    <div
+      data-color-mode="light"
+      data-dark-theme="dark"
+      data-light-theme="light"
+    >
+      <div
+        class="prc-src-BaseStyles-dl-St"
+        data-portal-root="true"
+      >
+        <p>
+          Oops
+        </p>
+      </div>
+    </div>
   </div>,
   "debug": [Function],
   "findAllByAltText": [Function],
@@ -350,15 +460,37 @@ exports[`renderer/routes/Notifications.tsx should render itself & its children (
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <p>
-        Oops
-      </p>
+      <div
+        data-color-mode="light"
+        data-dark-theme="dark"
+        data-light-theme="light"
+      >
+        <div
+          class="prc-src-BaseStyles-dl-St"
+          data-portal-root="true"
+        >
+          <p>
+            Oops
+          </p>
+        </div>
+      </div>
     </div>
   </body>,
   "container": <div>
-    <p>
-      Oops
-    </p>
+    <div
+      data-color-mode="light"
+      data-dark-theme="dark"
+      data-light-theme="light"
+    >
+      <div
+        class="prc-src-BaseStyles-dl-St"
+        data-portal-root="true"
+      >
+        <p>
+          Oops
+        </p>
+      </div>
+    </div>
   </div>,
   "debug": [Function],
   "findAllByAltText": [Function],
@@ -419,15 +551,37 @@ exports[`renderer/routes/Notifications.tsx should render itself & its children (
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <p>
-        AllRead
-      </p>
+      <div
+        data-color-mode="light"
+        data-dark-theme="dark"
+        data-light-theme="light"
+      >
+        <div
+          class="prc-src-BaseStyles-dl-St"
+          data-portal-root="true"
+        >
+          <p>
+            AllRead
+          </p>
+        </div>
+      </div>
     </div>
   </body>,
   "container": <div>
-    <p>
-      AllRead
-    </p>
+    <div
+      data-color-mode="light"
+      data-dark-theme="dark"
+      data-light-theme="light"
+    >
+      <div
+        class="prc-src-BaseStyles-dl-St"
+        data-portal-root="true"
+      >
+        <p>
+          AllRead
+        </p>
+      </div>
+    </div>
   </div>,
   "debug": [Function],
   "findAllByAltText": [Function],
@@ -488,15 +642,37 @@ exports[`renderer/routes/Notifications.tsx should render itself & its children (
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <p>
-        AllRead
-      </p>
+      <div
+        data-color-mode="light"
+        data-dark-theme="dark"
+        data-light-theme="light"
+      >
+        <div
+          class="prc-src-BaseStyles-dl-St"
+          data-portal-root="true"
+        >
+          <p>
+            AllRead
+          </p>
+        </div>
+      </div>
     </div>
   </body>,
   "container": <div>
-    <p>
-      AllRead
-    </p>
+    <div
+      data-color-mode="light"
+      data-dark-theme="dark"
+      data-light-theme="light"
+    >
+      <div
+        class="prc-src-BaseStyles-dl-St"
+        data-portal-root="true"
+      >
+        <p>
+          AllRead
+        </p>
+      </div>
+    </div>
   </div>,
   "debug": [Function],
   "findAllByAltText": [Function],

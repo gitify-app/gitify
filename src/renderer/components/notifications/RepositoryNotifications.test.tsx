@@ -1,19 +1,17 @@
-import { act, render, screen } from '@testing-library/react';
+import { act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+import { renderWithAppContext } from '../../__helpers__/test-utils';
 import {
   mockGitHubCloudAccount,
-  mockSettings,
-} from '../../__mocks__/state-mocks';
-import { AppContext } from '../../context/App';
+  mockSettings } from '../../__mocks__/state-mocks';
 import type { Link } from '../../types';
 import { mockGitHubNotifications } from '../../utils/api/__mocks__/response-mocks';
 import * as comms from '../../utils/comms';
 import { RepositoryNotifications } from './RepositoryNotifications';
 
 jest.mock('./NotificationRow', () => ({
-  NotificationRow: () => <div>NotificationRow</div>,
-}));
+  NotificationRow: () => <div>NotificationRow</div> }));
 
 describe('renderer/components/notifications/RepositoryNotifications.tsx', () => {
   const markNotificationsAsRead = jest.fn();
@@ -22,19 +20,15 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
   const props = {
     account: mockGitHubCloudAccount,
     repoName: 'gitify-app/notifications-test',
-    repoNotifications: mockGitHubNotifications,
-  };
+    repoNotifications: mockGitHubNotifications };
 
   afterEach(() => {
     jest.clearAllMocks();
   });
 
   it('should render itself & its children', () => {
-    const tree = render(
-      <AppContext.Provider value={{}}>
-        <RepositoryNotifications {...props} />
-      </AppContext.Provider>,
-    );
+    const tree = renderWithAppContext(<RepositoryNotifications {...props} />, { 
+    });
 
     expect(tree).toMatchSnapshot();
   });
@@ -44,11 +38,8 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
       n.unread = false;
     }
 
-    const tree = render(
-      <AppContext.Provider value={{}}>
-        <RepositoryNotifications {...props} />
-      </AppContext.Provider>,
-    );
+    const tree = renderWithAppContext(<RepositoryNotifications {...props} />, { 
+    });
 
     expect(tree).toMatchSnapshot();
   });
@@ -58,11 +49,8 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
       .spyOn(comms, 'openExternalLink')
       .mockImplementation();
 
-    render(
-      <AppContext.Provider value={{}}>
-        <RepositoryNotifications {...props} />
-      </AppContext.Provider>,
-    );
+    renderWithAppContext(<RepositoryNotifications {...props} />, { 
+    });
 
     await userEvent.click(screen.getByTestId('open-repository'));
 
@@ -73,13 +61,8 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
   });
 
   it('should mark a repo as read', async () => {
-    render(
-      <AppContext.Provider
-        value={{ settings: { ...mockSettings }, markNotificationsAsRead }}
-      >
-        <RepositoryNotifications {...props} />
-      </AppContext.Provider>,
-    );
+    renderWithAppContext(<RepositoryNotifications {...props} />, {
+       settings: { ...mockSettings }, markNotificationsAsRead  });
 
     await userEvent.click(screen.getByTestId('repository-mark-as-read'));
 
@@ -89,13 +72,8 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
   });
 
   it('should mark a repo as done', async () => {
-    render(
-      <AppContext.Provider
-        value={{ settings: { ...mockSettings }, markNotificationsAsDone }}
-      >
-        <RepositoryNotifications {...props} />
-      </AppContext.Provider>,
-    );
+    renderWithAppContext(<RepositoryNotifications {...props} />, {
+       settings: { ...mockSettings }, markNotificationsAsDone  });
 
     await userEvent.click(screen.getByTestId('repository-mark-as-done'));
 
@@ -107,23 +85,20 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
   it('should use default repository icon when avatar is not available', () => {
     props.repoNotifications[0].repository.owner.avatar_url = '' as Link;
 
-    const tree = render(
-      <AppContext.Provider value={{}}>
-        <RepositoryNotifications {...props} />
-      </AppContext.Provider>,
-    );
+    const tree = renderWithAppContext(<RepositoryNotifications {...props} />, { 
+    });
 
     expect(tree).toMatchSnapshot();
   });
 
   it('should toggle repository notifications visibility', async () => {
     await act(async () => {
-      render(<RepositoryNotifications {...props} />);
+      renderWithAppContext(<RepositoryNotifications {...props} />);
     });
 
     await userEvent.click(screen.getByTestId('repository-toggle'));
 
-    const tree = render(<RepositoryNotifications {...props} />);
+    const tree = renderWithAppContext(<RepositoryNotifications {...props} />);
     expect(tree).toMatchSnapshot();
   });
 });

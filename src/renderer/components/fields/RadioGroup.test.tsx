@@ -1,5 +1,4 @@
-import { render } from '@testing-library/react';
-
+import { renderWithAppContext } from '../../__helpers__/test-utils';
 import { RadioGroup, type RadioGroupProps } from './RadioGroup';
 
 describe('renderer/components/fields/RadioGroup.tsx', () => {
@@ -15,14 +14,14 @@ describe('renderer/components/fields/RadioGroup.tsx', () => {
   };
 
   it('should render', () => {
-    const tree = render(<RadioGroup {...props} />);
+    const tree = renderWithAppContext(<RadioGroup {...props} />);
     expect(tree).toMatchSnapshot();
   });
 
   it('should render as disabled', () => {
     const mockProps = { ...props, disabled: true };
 
-    const tree = render(<RadioGroup {...mockProps} />);
+    const tree = renderWithAppContext(<RadioGroup {...mockProps} />);
     expect(tree).toMatchSnapshot();
   });
 });

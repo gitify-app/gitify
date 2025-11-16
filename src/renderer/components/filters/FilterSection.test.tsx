@@ -1,11 +1,11 @@
-import { act, render, screen } from '@testing-library/react';
+import { act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { MarkGithubIcon } from '@primer/octicons-react';
 
+import { renderWithAppContext } from '../../__helpers__/test-utils';
 import { mockAccountNotifications } from '../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../__mocks__/state-mocks';
-import { AppContext } from '../../context/App';
 import type { SettingsState } from '../../types';
 import { stateFilter } from '../../utils/notifications/filters';
 import { FilterSection } from './FilterSection';
@@ -18,54 +18,44 @@ describe('renderer/components/filters/FilterSection.tsx', () => {
 
   describe('should render itself & its children', () => {
     it('with detailed notifications enabled', () => {
-      const tree = render(
-        <AppContext.Provider
-          value={{
+      const tree = renderWithAppContext(
+        <FilterSection
+          filter={{
+            ...mockFilter,
+            requiresDetailsNotifications: true }}
+          filterSetting={mockFilterSetting}
+          icon={MarkGithubIcon}
+          id={'FilterSectionTest'}
+          title={'FilterSectionTitle'}
+        />,
+        {
+          
             settings: {
               ...mockSettings,
-              detailedNotifications: true,
-            } as SettingsState,
-            notifications: mockAccountNotifications,
-          }}
-        >
-          <FilterSection
-            filter={{
-              ...mockFilter,
-              requiresDetailsNotifications: true,
-            }}
-            filterSetting={mockFilterSetting}
-            icon={MarkGithubIcon}
-            id={'FilterSectionTest'}
-            title={'FilterSectionTitle'}
-          />
-        </AppContext.Provider>,
+              detailedNotifications: true } as SettingsState,
+            notifications: mockAccountNotifications },
       );
 
       expect(tree).toMatchSnapshot();
     });
 
     it('with detailed notifications disabled', () => {
-      const tree = render(
-        <AppContext.Provider
-          value={{
+      const tree = renderWithAppContext(
+        <FilterSection
+          filter={{
+            ...mockFilter,
+            requiresDetailsNotifications: false }}
+          filterSetting={mockFilterSetting}
+          icon={MarkGithubIcon}
+          id={'FilterSectionTest'}
+          title={'FilterSectionTitle'}
+        />,
+        {
+          
             settings: {
               ...mockSettings,
-              detailedNotifications: false,
-            } as SettingsState,
-            notifications: mockAccountNotifications,
-          }}
-        >
-          <FilterSection
-            filter={{
-              ...mockFilter,
-              requiresDetailsNotifications: false,
-            }}
-            filterSetting={mockFilterSetting}
-            icon={MarkGithubIcon}
-            id={'FilterSectionTest'}
-            title={'FilterSectionTitle'}
-          />
-        </AppContext.Provider>,
+              detailedNotifications: false } as SettingsState,
+            notifications: mockAccountNotifications },
       );
 
       expect(tree).toMatchSnapshot();
@@ -74,25 +64,21 @@ describe('renderer/components/filters/FilterSection.tsx', () => {
 
   it('should be able to toggle filter value - none already set', async () => {
     await act(async () => {
-      render(
-        <AppContext.Provider
-          value={{
+      renderWithAppContext(
+        <FilterSection
+          filter={mockFilter}
+          filterSetting={mockFilterSetting}
+          icon={MarkGithubIcon}
+          id={'FilterSectionTest'}
+          title={'FilterSectionTitle'}
+        />,
+        {
+          
             settings: {
               ...mockSettings,
-              filterStates: [],
-            },
+              filterStates: [] },
             notifications: [],
-            updateFilter,
-          }}
-        >
-          <FilterSection
-            filter={mockFilter}
-            filterSetting={mockFilterSetting}
-            icon={MarkGithubIcon}
-            id={'FilterSectionTest'}
-            title={'FilterSectionTitle'}
-          />
-        </AppContext.Provider>,
+            updateFilter },
       );
     });
 
@@ -107,25 +93,21 @@ describe('renderer/components/filters/FilterSection.tsx', () => {
 
   it('should be able to toggle filter value - some filters already set', async () => {
     await act(async () => {
-      render(
-        <AppContext.Provider
-          value={{
+      renderWithAppContext(
+        <FilterSection
+          filter={mockFilter}
+          filterSetting={mockFilterSetting}
+          icon={MarkGithubIcon}
+          id={'FilterSectionTest'}
+          title={'FilterSectionTitle'}
+        />,
+        {
+          
             settings: {
               ...mockSettings,
-              filterStates: ['open'],
-            },
+              filterStates: ['open'] },
             notifications: [],
-            updateFilter,
-          }}
-        >
-          <FilterSection
-            filter={mockFilter}
-            filterSetting={mockFilterSetting}
-            icon={MarkGithubIcon}
-            id={'FilterSectionTest'}
-            title={'FilterSectionTitle'}
-          />
-        </AppContext.Provider>,
+            updateFilter },
       );
     });
 

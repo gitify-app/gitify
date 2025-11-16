@@ -6,136 +6,158 @@ exports[`renderer/components/fields/RadioGroup.tsx should render 1`] = `
   "baseElement": <body>
     <div>
       <div
-        class="text-sm prc-Stack-Stack-WJVsK"
-        data-align="center"
-        data-direction="horizontal"
-        data-gap="condensed"
-        data-justify="start"
-        data-padding="none"
-        data-wrap="nowrap"
+        data-color-mode="light"
+        data-dark-theme="dark"
+        data-light-theme="light"
       >
-        <label
-          class="mr-1 font-medium cursor-pointer"
-          for="appearance"
-        >
-          Appearance
-        </label>
         <div
-          class="prc-Stack-Stack-WJVsK"
-          data-align="center"
-          data-direction="horizontal"
-          data-gap="condensed"
-          data-justify="start"
-          data-padding="none"
-          data-wrap="nowrap"
+          class="prc-src-BaseStyles-dl-St"
+          data-portal-root="true"
         >
-          <input
-            class="size-4 cursor-pointer"
-            data-testid="radio-appearance-one"
-            id="radio-appearance-one"
-            name="appearance"
-            type="radio"
-            value="one"
-          />
-          <label
-            class="mr-1 font-medium cursor-pointer"
-            for="radio-appearance-one"
+          <div
+            class="text-sm prc-Stack-Stack-WJVsK"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
           >
-            Value 1
-          </label>
-        </div>
-        <div
-          class="prc-Stack-Stack-WJVsK"
-          data-align="center"
-          data-direction="horizontal"
-          data-gap="condensed"
-          data-justify="start"
-          data-padding="none"
-          data-wrap="nowrap"
-        >
-          <input
-            checked=""
-            class="size-4 cursor-pointer"
-            data-testid="radio-appearance-two"
-            id="radio-appearance-two"
-            name="appearance"
-            type="radio"
-            value="two"
-          />
-          <label
-            class="mr-1 font-medium cursor-pointer"
-            for="radio-appearance-two"
-          >
-            Value 2
-          </label>
+            <label
+              class="mr-1 font-medium cursor-pointer"
+              for="appearance"
+            >
+              Appearance
+            </label>
+            <div
+              class="prc-Stack-Stack-WJVsK"
+              data-align="center"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+            >
+              <input
+                class="size-4 cursor-pointer"
+                data-testid="radio-appearance-one"
+                id="radio-appearance-one"
+                name="appearance"
+                type="radio"
+                value="one"
+              />
+              <label
+                class="mr-1 font-medium cursor-pointer"
+                for="radio-appearance-one"
+              >
+                Value 1
+              </label>
+            </div>
+            <div
+              class="prc-Stack-Stack-WJVsK"
+              data-align="center"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+            >
+              <input
+                checked=""
+                class="size-4 cursor-pointer"
+                data-testid="radio-appearance-two"
+                id="radio-appearance-two"
+                name="appearance"
+                type="radio"
+                value="two"
+              />
+              <label
+                class="mr-1 font-medium cursor-pointer"
+                for="radio-appearance-two"
+              >
+                Value 2
+              </label>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </body>,
   "container": <div>
     <div
-      class="text-sm prc-Stack-Stack-WJVsK"
-      data-align="center"
-      data-direction="horizontal"
-      data-gap="condensed"
-      data-justify="start"
-      data-padding="none"
-      data-wrap="nowrap"
+      data-color-mode="light"
+      data-dark-theme="dark"
+      data-light-theme="light"
     >
-      <label
-        class="mr-1 font-medium cursor-pointer"
-        for="appearance"
-      >
-        Appearance
-      </label>
       <div
-        class="prc-Stack-Stack-WJVsK"
-        data-align="center"
-        data-direction="horizontal"
-        data-gap="condensed"
-        data-justify="start"
-        data-padding="none"
-        data-wrap="nowrap"
+        class="prc-src-BaseStyles-dl-St"
+        data-portal-root="true"
       >
-        <input
-          class="size-4 cursor-pointer"
-          data-testid="radio-appearance-one"
-          id="radio-appearance-one"
-          name="appearance"
-          type="radio"
-          value="one"
-        />
-        <label
-          class="mr-1 font-medium cursor-pointer"
-          for="radio-appearance-one"
+        <div
+          class="text-sm prc-Stack-Stack-WJVsK"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
         >
-          Value 1
-        </label>
-      </div>
-      <div
-        class="prc-Stack-Stack-WJVsK"
-        data-align="center"
-        data-direction="horizontal"
-        data-gap="condensed"
-        data-justify="start"
-        data-padding="none"
-        data-wrap="nowrap"
-      >
-        <input
-          checked=""
-          class="size-4 cursor-pointer"
-          data-testid="radio-appearance-two"
-          id="radio-appearance-two"
-          name="appearance"
-          type="radio"
-          value="two"
-        />
-        <label
-          class="mr-1 font-medium cursor-pointer"
-          for="radio-appearance-two"
-        >
-          Value 2
-        </label>
+          <label
+            class="mr-1 font-medium cursor-pointer"
+            for="appearance"
+          >
+            Appearance
+          </label>
+          <div
+            class="prc-Stack-Stack-WJVsK"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <input
+              class="size-4 cursor-pointer"
+              data-testid="radio-appearance-one"
+              id="radio-appearance-one"
+              name="appearance"
+              type="radio"
+              value="one"
+            />
+            <label
+              class="mr-1 font-medium cursor-pointer"
+              for="radio-appearance-one"
+            >
+              Value 1
+            </label>
+          </div>
+          <div
+            class="prc-Stack-Stack-WJVsK"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <input
+              checked=""
+              class="size-4 cursor-pointer"
+              data-testid="radio-appearance-two"
+              id="radio-appearance-two"
+              name="appearance"
+              type="radio"
+              value="two"
+            />
+            <label
+              class="mr-1 font-medium cursor-pointer"
+              for="radio-appearance-two"
+            >
+              Value 2
+            </label>
+          </div>
+        </div>
       </div>
     </div>
   </div>,
@@ -199,136 +221,158 @@ exports[`renderer/components/fields/RadioGroup.tsx should render as disabled 1`]
   "baseElement": <body>
     <div>
       <div
-        class="text-sm prc-Stack-Stack-WJVsK"
-        data-align="center"
-        data-direction="horizontal"
-        data-gap="condensed"
-        data-justify="start"
-        data-padding="none"
-        data-wrap="nowrap"
+        data-color-mode="light"
+        data-dark-theme="dark"
+        data-light-theme="light"
       >
-        <label
-          class="mr-1 font-medium cursor-pointer"
-          for="appearance"
-        >
-          Appearance
-        </label>
         <div
-          class="prc-Stack-Stack-WJVsK"
-          data-align="center"
-          data-direction="horizontal"
-          data-gap="condensed"
-          data-justify="start"
-          data-padding="none"
-          data-wrap="nowrap"
+          class="prc-src-BaseStyles-dl-St"
+          data-portal-root="true"
         >
-          <input
-            class="size-4 cursor-pointer"
-            data-testid="radio-appearance-one"
-            id="radio-appearance-one"
-            name="appearance"
-            type="radio"
-            value="one"
-          />
-          <label
-            class="mr-1 font-medium cursor-pointer"
-            for="radio-appearance-one"
+          <div
+            class="text-sm prc-Stack-Stack-WJVsK"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
           >
-            Value 1
-          </label>
-        </div>
-        <div
-          class="prc-Stack-Stack-WJVsK"
-          data-align="center"
-          data-direction="horizontal"
-          data-gap="condensed"
-          data-justify="start"
-          data-padding="none"
-          data-wrap="nowrap"
-        >
-          <input
-            checked=""
-            class="size-4 cursor-pointer"
-            data-testid="radio-appearance-two"
-            id="radio-appearance-two"
-            name="appearance"
-            type="radio"
-            value="two"
-          />
-          <label
-            class="mr-1 font-medium cursor-pointer"
-            for="radio-appearance-two"
-          >
-            Value 2
-          </label>
+            <label
+              class="mr-1 font-medium cursor-pointer"
+              for="appearance"
+            >
+              Appearance
+            </label>
+            <div
+              class="prc-Stack-Stack-WJVsK"
+              data-align="center"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+            >
+              <input
+                class="size-4 cursor-pointer"
+                data-testid="radio-appearance-one"
+                id="radio-appearance-one"
+                name="appearance"
+                type="radio"
+                value="one"
+              />
+              <label
+                class="mr-1 font-medium cursor-pointer"
+                for="radio-appearance-one"
+              >
+                Value 1
+              </label>
+            </div>
+            <div
+              class="prc-Stack-Stack-WJVsK"
+              data-align="center"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+            >
+              <input
+                checked=""
+                class="size-4 cursor-pointer"
+                data-testid="radio-appearance-two"
+                id="radio-appearance-two"
+                name="appearance"
+                type="radio"
+                value="two"
+              />
+              <label
+                class="mr-1 font-medium cursor-pointer"
+                for="radio-appearance-two"
+              >
+                Value 2
+              </label>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </body>,
   "container": <div>
     <div
-      class="text-sm prc-Stack-Stack-WJVsK"
-      data-align="center"
-      data-direction="horizontal"
-      data-gap="condensed"
-      data-justify="start"
-      data-padding="none"
-      data-wrap="nowrap"
+      data-color-mode="light"
+      data-dark-theme="dark"
+      data-light-theme="light"
     >
-      <label
-        class="mr-1 font-medium cursor-pointer"
-        for="appearance"
-      >
-        Appearance
-      </label>
       <div
-        class="prc-Stack-Stack-WJVsK"
-        data-align="center"
-        data-direction="horizontal"
-        data-gap="condensed"
-        data-justify="start"
-        data-padding="none"
-        data-wrap="nowrap"
+        class="prc-src-BaseStyles-dl-St"
+        data-portal-root="true"
       >
-        <input
-          class="size-4 cursor-pointer"
-          data-testid="radio-appearance-one"
-          id="radio-appearance-one"
-          name="appearance"
-          type="radio"
-          value="one"
-        />
-        <label
-          class="mr-1 font-medium cursor-pointer"
-          for="radio-appearance-one"
+        <div
+          class="text-sm prc-Stack-Stack-WJVsK"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
         >
-          Value 1
-        </label>
-      </div>
-      <div
-        class="prc-Stack-Stack-WJVsK"
-        data-align="center"
-        data-direction="horizontal"
-        data-gap="condensed"
-        data-justify="start"
-        data-padding="none"
-        data-wrap="nowrap"
-      >
-        <input
-          checked=""
-          class="size-4 cursor-pointer"
-          data-testid="radio-appearance-two"
-          id="radio-appearance-two"
-          name="appearance"
-          type="radio"
-          value="two"
-        />
-        <label
-          class="mr-1 font-medium cursor-pointer"
-          for="radio-appearance-two"
-        >
-          Value 2
-        </label>
+          <label
+            class="mr-1 font-medium cursor-pointer"
+            for="appearance"
+          >
+            Appearance
+          </label>
+          <div
+            class="prc-Stack-Stack-WJVsK"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <input
+              class="size-4 cursor-pointer"
+              data-testid="radio-appearance-one"
+              id="radio-appearance-one"
+              name="appearance"
+              type="radio"
+              value="one"
+            />
+            <label
+              class="mr-1 font-medium cursor-pointer"
+              for="radio-appearance-one"
+            >
+              Value 1
+            </label>
+          </div>
+          <div
+            class="prc-Stack-Stack-WJVsK"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <input
+              checked=""
+              class="size-4 cursor-pointer"
+              data-testid="radio-appearance-two"
+              id="radio-appearance-two"
+              name="appearance"
+              type="radio"
+              value="two"
+            />
+            <label
+              class="mr-1 font-medium cursor-pointer"
+              for="radio-appearance-two"
+            >
+              Value 2
+            </label>
+          </div>
+        </div>
       </div>
     </div>
   </div>,

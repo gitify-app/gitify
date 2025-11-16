@@ -1,5 +1,4 @@
-import { render } from '@testing-library/react';
-
+import { renderWithAppContext } from '../../__helpers__/test-utils';
 import { FieldLabel, type FieldLabelProps } from './FieldLabel';
 
 describe('renderer/components/fields/FieldLabel.tsx', () => {
@@ -9,7 +8,7 @@ describe('renderer/components/fields/FieldLabel.tsx', () => {
   };
 
   it('should render', () => {
-    const tree = render(<FieldLabel {...props} />);
+    const tree = renderWithAppContext(<FieldLabel {...props} />);
     expect(tree).toMatchSnapshot();
   });
 });

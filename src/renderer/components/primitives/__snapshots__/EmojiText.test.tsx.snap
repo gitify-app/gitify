@@ -6,27 +6,49 @@ exports[`renderer/components/primitives/EmojiText.tsx should render 1`] = `
   "baseElement": <body>
     <div>
       <div
-        class="text-7xl"
+        data-color-mode="light"
+        data-dark-theme="dark"
+        data-light-theme="light"
       >
-        <img
-          alt="🍺"
-          class="emoji"
-          draggable="false"
-          src="/mock/images/assets/1f37a.svg"
-        />
+        <div
+          class="prc-src-BaseStyles-dl-St"
+          data-portal-root="true"
+        >
+          <div
+            class="text-7xl"
+          >
+            <img
+              alt="🍺"
+              class="emoji"
+              draggable="false"
+              src="/mock/images/assets/1f37a.svg"
+            />
+          </div>
+        </div>
       </div>
     </div>
   </body>,
   "container": <div>
     <div
-      class="text-7xl"
+      data-color-mode="light"
+      data-dark-theme="dark"
+      data-light-theme="light"
     >
-      <img
-        alt="🍺"
-        class="emoji"
-        draggable="false"
-        src="/mock/images/assets/1f37a.svg"
-      />
+      <div
+        class="prc-src-BaseStyles-dl-St"
+        data-portal-root="true"
+      >
+        <div
+          class="text-7xl"
+        >
+          <img
+            alt="🍺"
+            class="emoji"
+            draggable="false"
+            src="/mock/images/assets/1f37a.svg"
+          />
+        </div>
+      </div>
     </div>
   </div>,
   "debug": [Function],

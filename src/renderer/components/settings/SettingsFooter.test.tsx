@@ -1,8 +1,7 @@
-import { act, render, screen } from '@testing-library/react';
+import { act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { mockAuth, mockSettings } from '../../__mocks__/state-mocks';
-import { AppContext } from '../../context/App';
+import { renderWithAppContext } from '../../__helpers__/test-utils';
 import * as comms from '../../utils/comms';
 import { SettingsFooter } from './SettingsFooter';
 
@@ -27,16 +26,7 @@ describe('renderer/components/settings/SettingsFooter.tsx', () => {
 
   it('should show app version', async () => {
     await act(async () => {
-      render(
-        <AppContext.Provider
-          value={{
-            auth: mockAuth,
-            settings: mockSettings,
-          }}
-        >
-          <SettingsFooter />
-        </AppContext.Provider>,
-      );
+      renderWithAppContext(<SettingsFooter />);
     });
 
     expect(screen.getByTestId('settings-release-notes')).toMatchSnapshot();
@@ -48,16 +38,7 @@ describe('renderer/components/settings/SettingsFooter.tsx', () => {
       .mockImplementation();
 
     await act(async () => {
-      render(
-        <AppContext.Provider
-          value={{
-            auth: mockAuth,
-            settings: mockSettings,
-          }}
-        >
-          <SettingsFooter />
-        </AppContext.Provider>,
-      );
+      renderWithAppContext(<SettingsFooter />);
     });
 
     await userEvent.click(screen.getByTestId('settings-release-notes'));
@@ -70,16 +51,7 @@ describe('renderer/components/settings/SettingsFooter.tsx', () => {
 
   it('should open account management', async () => {
     await act(async () => {
-      render(
-        <AppContext.Provider
-          value={{
-            auth: mockAuth,
-            settings: mockSettings,
-          }}
-        >
-          <SettingsFooter />
-        </AppContext.Provider>,
-      );
+      renderWithAppContext(<SettingsFooter />);
     });
 
     await userEvent.click(screen.getByTestId('settings-accounts'));
@@ -91,16 +63,7 @@ describe('renderer/components/settings/SettingsFooter.tsx', () => {
     const quitAppMock = jest.spyOn(comms, 'quitApp');
 
     await act(async () => {
-      render(
-        <AppContext.Provider
-          value={{
-            auth: mockAuth,
-            settings: mockSettings,
-          }}
-        >
-          <SettingsFooter />
-        </AppContext.Provider>,
-      );
+      renderWithAppContext(<SettingsFooter />);
     });
 
     await userEvent.click(screen.getByTestId('settings-quit'));

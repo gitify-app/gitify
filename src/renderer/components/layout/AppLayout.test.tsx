@@ -1,25 +1,11 @@
-import { render } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
-
+import { renderWithAppContext } from '../../__helpers__/test-utils';
 import { mockAuth, mockSettings } from '../../__mocks__/state-mocks';
-import { AppContext } from '../../context/App';
 import { AppLayout } from './AppLayout';
 
 describe('renderer/components/layout/AppLayout.tsx', () => {
   it('should render itself & its children', () => {
-    const tree = render(
-      <AppContext.Provider
-        value={{
-          auth: mockAuth,
-          settings: mockSettings,
-          notifications: [],
-        }}
-      >
-        <MemoryRouter>
-          <AppLayout>Test</AppLayout>
-        </MemoryRouter>
-      </AppContext.Provider>,
-    );
+    const tree = renderWithAppContext(<AppLayout>Test</AppLayout>, {
+       auth: mockAuth, settings: mockSettings, notifications: []  });
 
     expect(tree).toMatchSnapshot();
   });

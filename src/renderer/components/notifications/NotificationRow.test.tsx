@@ -1,12 +1,12 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+import { renderWithAppContext } from '../../__helpers__/test-utils';
 import {
   mockAuth,
   mockGitHubCloudAccount,
   mockSettings,
 } from '../../__mocks__/state-mocks';
-import { AppContext } from '../../context/App';
 import { GroupBy } from '../../types';
 import { mockSingleNotification } from '../../utils/api/__mocks__/response-mocks';
 import * as comms from '../../utils/comms';
@@ -23,7 +23,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
 
   it('should render itself & its children - group by date', async () => {
     jest
-      .spyOn(global.Date, 'now')
+      .spyOn(globalThis.Date, 'now')
       .mockImplementation(() => new Date('2024').valueOf());
 
     const props = {
@@ -31,20 +31,16 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       account: mockGitHubCloudAccount,
     };
 
-    const tree = render(
-      <AppContext.Provider
-        value={{ settings: { ...mockSettings, groupBy: GroupBy.DATE } }}
-      >
-        <NotificationRow {...props} />
-      </AppContext.Provider>,
-    );
+    const tree = renderWithAppContext(<NotificationRow {...props} />, {
+      settings: { ...mockSettings, groupBy: GroupBy.DATE },
+    });
 
     expect(tree).toMatchSnapshot();
   });
 
   it('should render itself & its children - group by repositories', async () => {
     jest
-      .spyOn(global.Date, 'now')
+      .spyOn(globalThis.Date, 'now')
       .mockImplementation(() => new Date('2024').valueOf());
 
     const props = {
@@ -52,20 +48,16 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       account: mockGitHubCloudAccount,
     };
 
-    const tree = render(
-      <AppContext.Provider
-        value={{ settings: { ...mockSettings, groupBy: GroupBy.REPOSITORY } }}
-      >
-        <NotificationRow {...props} />
-      </AppContext.Provider>,
-    );
+    const tree = renderWithAppContext(<NotificationRow {...props} />, {
+      settings: { ...mockSettings, groupBy: GroupBy.REPOSITORY },
+    });
 
     expect(tree).toMatchSnapshot();
   });
 
   it('should render itself & its children - hide numbers', async () => {
     jest
-      .spyOn(global.Date, 'now')
+      .spyOn(globalThis.Date, 'now')
       .mockImplementation(() => new Date('2024').valueOf());
 
     const props = {
@@ -73,13 +65,9 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       account: mockGitHubCloudAccount,
     };
 
-    const tree = render(
-      <AppContext.Provider
-        value={{ settings: { ...mockSettings, showNumber: false } }}
-      >
-        <NotificationRow {...props} />
-      </AppContext.Provider>,
-    );
+    const tree = renderWithAppContext(<NotificationRow {...props} />, {
+      settings: { ...mockSettings, showNumber: false },
+    });
 
     expect(tree).toMatchSnapshot();
   });
@@ -97,11 +85,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       account: mockGitHubCloudAccount,
     };
 
-    const tree = render(
-      <AppContext.Provider value={{ settings: mockSettings }}>
-        <NotificationRow {...props} />
-      </AppContext.Provider>,
-    );
+    const tree = renderWithAppContext(<NotificationRow {...props} />);
 
     expect(tree).toMatchSnapshot();
   });
@@ -115,17 +99,11 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
         account: mockGitHubCloudAccount,
       };
 
-      render(
-        <AppContext.Provider
-          value={{
-            settings: { ...mockSettings, markAsDoneOnOpen: false },
-            markNotificationsAsRead,
-            auth: mockAuth,
-          }}
-        >
-          <NotificationRow {...props} />
-        </AppContext.Provider>,
-      );
+      renderWithAppContext(<NotificationRow {...props} />, {
+        settings: { ...mockSettings, markAsDoneOnOpen: false },
+        markNotificationsAsRead,
+        auth: mockAuth,
+      });
 
       await userEvent.click(screen.getByTestId('notification-row'));
 
@@ -141,21 +119,15 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
         account: mockGitHubCloudAccount,
       };
 
-      render(
-        <AppContext.Provider
-          value={{
-            settings: {
-              ...mockSettings,
-              markAsDoneOnOpen: false,
-              delayNotificationState: true,
-            },
-            markNotificationsAsRead,
-            auth: mockAuth,
-          }}
-        >
-          <NotificationRow {...props} />
-        </AppContext.Provider>,
-      );
+      renderWithAppContext(<NotificationRow {...props} />, {
+        settings: {
+          ...mockSettings,
+          markAsDoneOnOpen: false,
+          delayNotificationState: true,
+        },
+        markNotificationsAsRead,
+        auth: mockAuth,
+      });
 
       await userEvent.click(screen.getByTestId('notification-row'));
 
@@ -171,17 +143,11 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
         account: mockGitHubCloudAccount,
       };
 
-      render(
-        <AppContext.Provider
-          value={{
-            settings: { ...mockSettings, markAsDoneOnOpen: true },
-            markNotificationsAsDone,
-            auth: mockAuth,
-          }}
-        >
-          <NotificationRow {...props} />
-        </AppContext.Provider>,
-      );
+      renderWithAppContext(<NotificationRow {...props} />, {
+        settings: { ...mockSettings, markAsDoneOnOpen: true },
+        markNotificationsAsDone,
+        auth: mockAuth,
+      });
 
       await userEvent.click(screen.getByTestId('notification-row'));
 
@@ -197,16 +163,10 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
         account: mockGitHubCloudAccount,
       };
 
-      render(
-        <AppContext.Provider
-          value={{
-            settings: { ...mockSettings, markAsDoneOnOpen: false },
-            markNotificationsAsRead,
-          }}
-        >
-          <NotificationRow {...props} />
-        </AppContext.Provider>,
-      );
+      renderWithAppContext(<NotificationRow {...props} />, {
+        settings: { ...mockSettings, markAsDoneOnOpen: false },
+        markNotificationsAsRead,
+      });
 
       await userEvent.click(screen.getByTestId('notification-mark-as-read'));
 
@@ -221,13 +181,10 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
         account: mockGitHubCloudAccount,
       };
 
-      render(
-        <AppContext.Provider
-          value={{ settings: mockSettings, markNotificationsAsDone }}
-        >
-          <NotificationRow {...props} />
-        </AppContext.Provider>,
-      );
+      renderWithAppContext(<NotificationRow {...props} />, {
+        settings: mockSettings,
+        markNotificationsAsDone,
+      });
 
       await userEvent.click(screen.getByTestId('notification-mark-as-done'));
 
@@ -242,15 +199,10 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
         account: mockGitHubCloudAccount,
       };
 
-      render(
-        <AppContext.Provider value={{}}>
-          <AppContext.Provider
-            value={{ settings: mockSettings, unsubscribeNotification }}
-          >
-            <NotificationRow {...props} />
-          </AppContext.Provider>
-        </AppContext.Provider>,
-      );
+      renderWithAppContext(<NotificationRow {...props} />, {
+        settings: mockSettings,
+        unsubscribeNotification,
+      });
 
       await userEvent.click(
         screen.getByTestId('notification-unsubscribe-from-thread'),

@@ -1,8 +1,8 @@
-import { act, render, screen } from '@testing-library/react';
+import { act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+import { renderWithAppContext } from '../../__helpers__/test-utils';
 import { mockAuth, mockSettings } from '../../__mocks__/state-mocks';
-import { AppContext } from '../../context/App';
 import { SettingsReset } from './SettingsReset';
 
 describe('renderer/components/settings/SettingsReset.tsx', () => {
@@ -13,20 +13,11 @@ describe('renderer/components/settings/SettingsReset.tsx', () => {
   });
 
   it('should reset default settings when `OK`', async () => {
-    window.confirm = jest.fn(() => true); // always click 'OK'
+    globalThis.confirm = jest.fn(() => true); // always click 'OK'
 
     await act(async () => {
-      render(
-        <AppContext.Provider
-          value={{
-            auth: mockAuth,
-            settings: mockSettings,
-            resetSettings,
-          }}
-        >
-          <SettingsReset />
-        </AppContext.Provider>,
-      );
+      renderWithAppContext(<SettingsReset />, {
+         auth: mockAuth, settings: mockSettings, resetSettings  });
     });
 
     await userEvent.click(screen.getByTestId('settings-reset'));
@@ -36,20 +27,11 @@ describe('renderer/components/settings/SettingsReset.tsx', () => {
   });
 
   it('should skip reset default settings when `cancelled`', async () => {
-    window.confirm = jest.fn(() => false); // always click 'cancel'
+    globalThis.confirm = jest.fn(() => false); // always click 'cancel'
 
     await act(async () => {
-      render(
-        <AppContext.Provider
-          value={{
-            auth: mockAuth,
-            settings: mockSettings,
-            resetSettings,
-          }}
-        >
-          <SettingsReset />
-        </AppContext.Provider>,
-      );
+      renderWithAppContext(<SettingsReset />, {
+         auth: mockAuth, settings: mockSettings, resetSettings  });
     });
 
     await userEvent.click(screen.getByTestId('settings-reset'));

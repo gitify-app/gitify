@@ -1,16 +1,15 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { MarkGithubIcon } from '@primer/octicons-react';
 
-import { AppContext } from '../../context/App';
+import { renderWithAppContext } from '../../__helpers__/test-utils';
 import { Header } from './Header';
 
 const mockNavigate = jest.fn();
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
-  useNavigate: () => mockNavigate,
-}));
+  useNavigate: () => mockNavigate }));
 
 describe('renderer/components/primitives/Header.tsx', () => {
   const fetchNotifications = jest.fn();
@@ -20,13 +19,15 @@ describe('renderer/components/primitives/Header.tsx', () => {
   });
 
   it('should render itself & its children', () => {
-    const tree = render(<Header icon={MarkGithubIcon}>Test Header</Header>);
+    const tree = renderWithAppContext(
+      <Header icon={MarkGithubIcon}>Test Header</Header>,
+    );
 
     expect(tree).toMatchSnapshot();
   });
 
   it('should navigate back', async () => {
-    render(<Header icon={MarkGithubIcon}>Test Header</Header>);
+    renderWithAppContext(<Header icon={MarkGithubIcon}>Test Header</Header>);
 
     await userEvent.click(screen.getByTestId('header-nav-back'));
 
@@ -34,16 +35,11 @@ describe('renderer/components/primitives/Header.tsx', () => {
   });
 
   it('should navigate back and fetch notifications', async () => {
-    render(
-      <AppContext.Provider
-        value={{
-          fetchNotifications,
-        }}
-      >
-        <Header fetchOnBack icon={MarkGithubIcon}>
-          Test Header
-        </Header>
-      </AppContext.Provider>,
+    renderWithAppContext(
+      <Header fetchOnBack icon={MarkGithubIcon}>
+        Test Header
+      </Header>,
+      {  fetchNotifications  },
     );
 
     await userEvent.click(screen.getByTestId('header-nav-back'));

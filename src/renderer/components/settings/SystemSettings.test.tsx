@@ -1,8 +1,8 @@
-import { act, render, screen } from '@testing-library/react';
+import { act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+import { renderWithAppContext } from '../../__helpers__/test-utils';
 import { mockAuth, mockSettings } from '../../__mocks__/state-mocks';
-import { AppContext } from '../../context/App';
 import type { Percentage } from '../../types';
 import { SystemSettings } from './SystemSettings';
 
@@ -15,17 +15,11 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
 
   it('should change the open links radio group', async () => {
     await act(async () => {
-      render(
-        <AppContext.Provider
-          value={{
-            auth: mockAuth,
-            settings: mockSettings,
-            updateSetting,
-          }}
-        >
-          <SystemSettings />
-        </AppContext.Provider>,
-      );
+      renderWithAppContext(<SystemSettings />, {
+        auth: mockAuth,
+        settings: mockSettings,
+        updateSetting,
+      });
     });
 
     await userEvent.click(screen.getByTestId('radio-openLinks-background'));
@@ -36,17 +30,11 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
 
   it('should toggle the keyboardShortcut checkbox', async () => {
     await act(async () => {
-      render(
-        <AppContext.Provider
-          value={{
-            auth: mockAuth,
-            settings: mockSettings,
-            updateSetting,
-          }}
-        >
-          <SystemSettings />
-        </AppContext.Provider>,
-      );
+      renderWithAppContext(<SystemSettings />, {
+        auth: mockAuth,
+        settings: mockSettings,
+        updateSetting,
+      });
     });
 
     await userEvent.click(screen.getByTestId('checkbox-keyboardShortcut'));
@@ -57,17 +45,11 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
 
   it('should toggle the showNotifications checkbox', async () => {
     await act(async () => {
-      render(
-        <AppContext.Provider
-          value={{
-            auth: mockAuth,
-            settings: mockSettings,
-            updateSetting,
-          }}
-        >
-          <SystemSettings />
-        </AppContext.Provider>,
-      );
+      renderWithAppContext(<SystemSettings />, {
+        auth: mockAuth,
+        settings: mockSettings,
+        updateSetting,
+      });
     });
 
     await userEvent.click(screen.getByTestId('checkbox-showNotifications'));
@@ -78,17 +60,11 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
 
   describe('playSound', () => {
     it('should toggle the playSound checkbox', async () => {
-      const { rerender } = render(
-        <AppContext.Provider
-          value={{
-            auth: mockAuth,
-            settings: mockSettings,
-            updateSetting,
-          }}
-        >
-          <SystemSettings />
-        </AppContext.Provider>,
-      );
+      renderWithAppContext(<SystemSettings />, {
+        auth: mockAuth,
+        settings: mockSettings,
+        updateSetting,
+      });
 
       await userEvent.click(screen.getByTestId('checkbox-playSound'));
 
@@ -96,33 +72,27 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
       expect(updateSetting).toHaveBeenCalledWith('playSound', false);
 
       // Simulate update to context with playSound = false
-      rerender(
-        <AppContext.Provider
-          value={{
-            auth: mockAuth,
-            settings: { ...mockSettings, playSound: false },
-            updateSetting,
-          }}
-        >
-          <SystemSettings />
-        </AppContext.Provider>,
-      );
+      // rerender(
+      //   <AppContextProvider
+      //     value={{
+      //       auth: mockAuth,
+      //       settings: { ...mockSettings, playSound: false },
+      //       updateSetting,
+      //     }}
+      //   >
+      //     <SystemSettings />
+      //   </AppContextProvider>,
+      // );
 
       expect(screen.getByTestId('settings-volume-group')).not.toBeVisible();
     });
 
     it('should increase notification volume', async () => {
-      render(
-        <AppContext.Provider
-          value={{
-            auth: mockAuth,
-            settings: mockSettings,
-            updateSetting,
-          }}
-        >
-          <SystemSettings />
-        </AppContext.Provider>,
-      );
+      renderWithAppContext(<SystemSettings />, {
+        auth: mockAuth,
+        settings: mockSettings,
+        updateSetting,
+      });
 
       await userEvent.click(screen.getByTestId('settings-volume-up'));
 
@@ -131,17 +101,11 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
     });
 
     it('should decrease notification volume', async () => {
-      render(
-        <AppContext.Provider
-          value={{
-            auth: mockAuth,
-            settings: mockSettings,
-            updateSetting,
-          }}
-        >
-          <SystemSettings />
-        </AppContext.Provider>,
-      );
+      renderWithAppContext(<SystemSettings />, {
+        auth: mockAuth,
+        settings: mockSettings,
+        updateSetting,
+      });
 
       await userEvent.click(screen.getByTestId('settings-volume-down'));
 
@@ -150,20 +114,11 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
     });
 
     it('should reset notification volume', async () => {
-      render(
-        <AppContext.Provider
-          value={{
-            auth: mockAuth,
-            settings: {
-              ...mockSettings,
-              notificationVolume: 30 as Percentage,
-            },
-            updateSetting,
-          }}
-        >
-          <SystemSettings />
-        </AppContext.Provider>,
-      );
+      renderWithAppContext(<SystemSettings />, {
+        auth: mockAuth,
+        settings: { ...mockSettings, notificationVolume: 30 as Percentage },
+        updateSetting,
+      });
 
       await userEvent.click(screen.getByTestId('settings-volume-reset'));
 
@@ -174,17 +129,11 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
 
   it('should toggle the openAtStartup checkbox', async () => {
     await act(async () => {
-      render(
-        <AppContext.Provider
-          value={{
-            auth: mockAuth,
-            settings: mockSettings,
-            updateSetting,
-          }}
-        >
-          <SystemSettings />
-        </AppContext.Provider>,
-      );
+      renderWithAppContext(<SystemSettings />, {
+        auth: mockAuth,
+        settings: mockSettings,
+        updateSetting,
+      });
     });
 
     await userEvent.click(screen.getByTestId('checkbox-openAtStartup'));

@@ -1,6 +1,7 @@
-import { act, fireEvent, render, waitFor } from '@testing-library/react';
+import { act, fireEvent, waitFor } from '@testing-library/react';
 import { useContext } from 'react';
 
+import { renderWithAppContext } from '../__helpers__/test-utils';
 import { mockAuth, mockSettings } from '../__mocks__/state-mocks';
 import { Constants } from '../constants';
 import { useNotifications } from '../hooks/useNotifications';
@@ -15,18 +16,6 @@ import { AppContext, AppProvider } from './App';
 import { defaultSettings } from './defaults';
 
 jest.mock('../hooks/useNotifications');
-
-const customRender = (
-  ui,
-  auth: AuthState = mockAuth,
-  settings: SettingsState = mockSettings,
-) => {
-  return render(
-    <AppContext.Provider value={{ auth, settings }}>
-      <AppProvider>{ui}</AppProvider>
-    </AppContext.Provider>,
-  );
-};
 
 describe('renderer/context/App.tsx', () => {
   beforeEach(() => {
@@ -75,7 +64,7 @@ describe('renderer/context/App.tsx', () => {
     });
 
     it('fetch notifications every minute', async () => {
-      customRender(null);
+      renderWithAppContext(<AppProvider>{null}</AppProvider>);
 
       await waitFor(() =>
         expect(fetchNotificationsMock).toHaveBeenCalledTimes(1),
@@ -114,7 +103,11 @@ describe('renderer/context/App.tsx', () => {
         );
       };
 
-      const { getByText } = customRender(<TestComponent />);
+      const { getByText } = renderWithAppContext(
+        <AppProvider>
+          <TestComponent />
+        </AppProvider>,
+      );
 
       fetchNotificationsMock.mockReset();
 
@@ -137,7 +130,11 @@ describe('renderer/context/App.tsx', () => {
         );
       };
 
-      const { getByText } = customRender(<TestComponent />);
+      const { getByText } = renderWithAppContext(
+        <AppProvider>
+          <TestComponent />
+        </AppProvider>,
+      );
 
       fireEvent.click(getByText('Test Case'));
 
@@ -163,7 +160,11 @@ describe('renderer/context/App.tsx', () => {
         );
       };
 
-      const { getByText } = customRender(<TestComponent />);
+      const { getByText } = renderWithAppContext(
+        <AppProvider>
+          <TestComponent />
+        </AppProvider>,
+      );
 
       fireEvent.click(getByText('Test Case'));
 
@@ -189,7 +190,11 @@ describe('renderer/context/App.tsx', () => {
         );
       };
 
-      const { getByText } = customRender(<TestComponent />);
+      const { getByText } = renderWithAppContext(
+        <AppProvider>
+          <TestComponent />
+        </AppProvider>,
+      );
 
       fireEvent.click(getByText('Test Case'));
 
@@ -237,7 +242,11 @@ describe('renderer/context/App.tsx', () => {
         );
       };
 
-      const { getByText } = customRender(<TestComponent />);
+      const { getByText } = renderWithAppContext(
+        <AppProvider>
+          <TestComponent />
+        </AppProvider>,
+      );
 
       fireEvent.click(getByText('Test Case'));
 
@@ -281,7 +290,11 @@ describe('renderer/context/App.tsx', () => {
         );
       };
 
-      const { getByText } = customRender(<TestComponent />);
+      const { getByText } = renderWithAppContext(
+        <AppProvider>
+          <TestComponent />
+        </AppProvider>,
+      );
 
       act(() => {
         fireEvent.click(getByText('Test Case'));
@@ -317,7 +330,11 @@ describe('renderer/context/App.tsx', () => {
         );
       };
 
-      const { getByText } = customRender(<TestComponent />);
+      const { getByText } = renderWithAppContext(
+        <AppProvider>
+          <TestComponent />
+        </AppProvider>,
+      );
 
       act(() => {
         fireEvent.click(getByText('Test Case'));
@@ -351,7 +368,12 @@ describe('renderer/context/App.tsx', () => {
         );
       };
 
-      const { getByText } = customRender(<TestComponent />);
+      const { getByText } = renderWithAppContext(
+        <AppProvider>
+          <TestComponent />
+        </AppProvider>,
+        { auth: mockAuth, settings: mockSettings },
+      );
 
       act(() => {
         fireEvent.click(getByText('Test Case'));
@@ -388,7 +410,12 @@ describe('renderer/context/App.tsx', () => {
         );
       };
 
-      const { getByText } = customRender(<TestComponent />);
+      const { getByText } = renderWithAppContext(
+        <AppProvider>
+          <TestComponent />
+        </AppProvider>,
+        { auth: mockAuth, settings: mockSettings },
+      );
 
       act(() => {
         fireEvent.click(getByText('Test Case'));

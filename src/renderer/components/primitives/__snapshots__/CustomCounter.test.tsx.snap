@@ -5,19 +5,41 @@ exports[`renderer/components/primitives/CustomCounter.tsx should render itself &
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <span
-        class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+      <div
+        data-color-mode="light"
+        data-dark-theme="dark"
+        data-light-theme="light"
       >
-        100
-      </span>
+        <div
+          class="prc-src-BaseStyles-dl-St"
+          data-portal-root="true"
+        >
+          <span
+            class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+          >
+            100
+          </span>
+        </div>
+      </div>
     </div>
   </body>,
   "container": <div>
-    <span
-      class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+    <div
+      data-color-mode="light"
+      data-dark-theme="dark"
+      data-light-theme="light"
     >
-      100
-    </span>
+      <div
+        class="prc-src-BaseStyles-dl-St"
+        data-portal-root="true"
+      >
+        <span
+          class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+        >
+          100
+        </span>
+      </div>
+    </div>
   </div>,
   "debug": [Function],
   "findAllByAltText": [Function],

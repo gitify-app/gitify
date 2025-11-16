@@ -1,7 +1,6 @@
-import { render } from '@testing-library/react';
-
 import { MarkGithubIcon } from '@primer/octicons-react';
 
+import { renderWithAppContext } from '../../__helpers__/test-utils';
 import { IconColor } from '../../types';
 import { MetricPill, type MetricPillProps } from './MetricPill';
 
@@ -13,7 +12,7 @@ describe('renderer/components/metrics/MetricPill.tsx', () => {
       icon: MarkGithubIcon,
       color: IconColor.GREEN,
     };
-    const tree = render(<MetricPill {...props} />);
+    const tree = renderWithAppContext(<MetricPill {...props} />);
     expect(tree).toMatchSnapshot();
   });
 
@@ -23,7 +22,7 @@ describe('renderer/components/metrics/MetricPill.tsx', () => {
       icon: MarkGithubIcon,
       color: IconColor.GREEN,
     };
-    const tree = render(<MetricPill {...props} />);
+    const tree = renderWithAppContext(<MetricPill {...props} />);
     expect(tree).toMatchSnapshot();
   });
 });
