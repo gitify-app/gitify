@@ -1,14 +1,14 @@
-import { createSubjectMock } from '../../../__mocks__/notifications-mocks';
-import { repositoryDependabotAlertsThreadHandler } from './repositoryDependabotAlertsThread';
+import { mockNotificationWithSubject } from '../../../__mocks__/notifications-mocks';
+import { createRepositoryDependabotAlertsThreadHandler } from './repositoryDependabotAlertsThread';
 
 describe('renderer/utils/notifications/handlers/repositoryDependabotAlertsThread.ts', () => {
   it('iconType', () => {
-    expect(
-      repositoryDependabotAlertsThreadHandler.iconType(
-        createSubjectMock({
-          type: 'RepositoryDependabotAlertsThread',
-        }),
-      ).displayName,
-    ).toBe('AlertIcon');
+    const handler = createRepositoryDependabotAlertsThreadHandler(
+      mockNotificationWithSubject({
+        type: 'RepositoryDependabotAlertsThread',
+      }),
+    );
+
+    expect(handler.iconType().displayName).toBe('AlertIcon');
   });
 });

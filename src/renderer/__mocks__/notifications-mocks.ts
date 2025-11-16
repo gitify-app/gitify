@@ -1,10 +1,5 @@
 import type { AccountNotifications, GitifyError } from '../types';
-import type {
-  Notification,
-  StateType,
-  Subject,
-  SubjectType,
-} from '../typesGitHub';
+import type { Notification, StateType, SubjectType } from '../typesGitHub';
 import {
   mockEnterpriseNotifications,
   mockGitHubNotifications,
@@ -36,18 +31,20 @@ export const mockSingleAccountNotifications: AccountNotifications[] = [
   },
 ];
 
-export function createSubjectMock(mocks: {
+export function mockNotificationWithSubject(mocks: {
   title?: string;
   type?: SubjectType;
   state?: StateType;
-}): Subject {
+}): Notification {
   return {
-    title: mocks.title ?? 'Mock Subject',
-    type: mocks.type ?? ('Unknown' as SubjectType),
-    state: mocks.state ?? ('Unknown' as StateType),
-    url: null,
-    latest_comment_url: null,
-  };
+    subject: {
+      title: mocks.title ?? 'Mock Subject',
+      type: mocks.type ?? ('Unknown' as SubjectType),
+      state: mocks.state ?? ('Unknown' as StateType),
+      url: null,
+      latest_comment_url: null,
+    },
+  } as Notification;
 }
 
 export function mockAccountWithError(error: GitifyError): AccountNotifications {
@@ -58,7 +55,7 @@ export function mockAccountWithError(error: GitifyError): AccountNotifications {
   };
 }
 
-export function createMockNotificationForRepoName(
+export function mockNotificationWithRepoName(
   id: string,
   repoFullName: string | null,
 ): Notification {

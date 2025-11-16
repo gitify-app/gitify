@@ -8,7 +8,6 @@ import { IconColor } from '../../../types';
 import type {
   GitifySubject,
   Notification,
-  Subject,
   SubjectType,
 } from '../../../typesGitHub';
 import type { NotificationTypeHandler } from './types';
@@ -16,20 +15,22 @@ import { formatForDisplay } from './utils';
 
 export class DefaultHandler implements NotificationTypeHandler {
   type?: SubjectType;
+  notification: Notification;
 
-  async enrich(
-    _notification: Notification,
-    _settings: SettingsState,
-  ): Promise<GitifySubject> {
+  constructor(notification: Notification) {
+    this.notification = notification;
+  }
+
+  async enrich(_settings: SettingsState): Promise<GitifySubject> {
     return null;
   }
 
-  iconType(_subject: Subject): FC<OcticonProps> | null {
+  iconType(): FC<OcticonProps> | null {
     return QuestionIcon;
   }
 
-  iconColor(subject: Subject): IconColor {
-    switch (subject.state) {
+  iconColor(): IconColor {
+    switch (this.notification.subject.state) {
       case 'open':
       case 'reopened':
       case 'ANSWERED':
@@ -47,25 +48,29 @@ export class DefaultHandler implements NotificationTypeHandler {
     }
   }
 
-  formattedNotificationType(notification: Notification): string {
+  formattedNotificationType(): string {
     return formatForDisplay([
-      notification.subject.state,
-      notification.subject.type,
+      this.notification.subject.state,
+      this.notification.subject.type,
     ]);
   }
-  formattedNotificationNumber(notification: Notification): string {
-    return notification.subject?.number
-      ? `#${notification.subject.number}`
+  formattedNotificationNumber(): string {
+    return this.notification.subject?.number
+      ? `#${this.notification.subject.number}`
       : '';
   }
-  formattedNotificationTitle(notification: Notification): string {
-    let title = notification.subject.title;
+  formattedNotificationTitle(): string {
+    let title = this.notification.subject.title;
 
-    if (notification.subject?.number) {
-      title = `${title} [${this.formattedNotificationNumber(notification)}]`;
+    if (this.notification.subject?.number) {
+      title = `${title} [${this.formattedNotificationNumber()}]`;
     }
     return title;
   }
 }
 
-export const defaultHandler = new DefaultHandler();
+export function createDefaultHandler(
+  notification: Notification,
+): NotificationTypeHandler {
+  return new DefaultHandler(notification);
+}

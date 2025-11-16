@@ -1,14 +1,14 @@
-import { createSubjectMock } from '../../../__mocks__/notifications-mocks';
-import { repositoryInvitationHandler } from './repositoryInvitation';
+import { mockNotificationWithSubject } from '../../../__mocks__/notifications-mocks';
+import { createRepositoryInvitationHandler } from './repositoryInvitation';
 
 describe('renderer/utils/notifications/handlers/repositoryInvitation.ts', () => {
   it('iconType', () => {
-    expect(
-      repositoryInvitationHandler.iconType(
-        createSubjectMock({
-          type: 'RepositoryInvitation',
-        }),
-      ).displayName,
-    ).toBe('MailIcon');
+    const handler = createRepositoryInvitationHandler(
+      mockNotificationWithSubject({
+        type: 'RepositoryInvitation',
+      }),
+    );
+
+    expect(handler.iconType().displayName).toBe('MailIcon');
   });
 });
