@@ -6,7 +6,7 @@ import { mockAuth, mockSettings } from '../../__mocks__/state-mocks';
 import { TraySettings } from './TraySettings';
 
 describe('renderer/components/settings/TraySettings.tsx', () => {
-  const updateSetting = jest.fn();
+  const mockUpdateSetting = jest.fn();
 
   afterEach(() => {
     jest.clearAllMocks();
@@ -15,18 +15,18 @@ describe('renderer/components/settings/TraySettings.tsx', () => {
   it('should toggle the showNotificationsCountInTray checkbox', async () => {
     await act(async () => {
       renderWithAppContext(<TraySettings />, {
-        
-          auth: mockAuth,
-          settings: mockSettings,
-          updateSetting });
+        auth: mockAuth,
+        settings: mockSettings,
+        updateSetting: mockUpdateSetting,
+      });
     });
 
     await userEvent.click(
       screen.getByTestId('checkbox-showNotificationsCountInTray'),
     );
 
-    expect(updateSetting).toHaveBeenCalledTimes(1);
-    expect(updateSetting).toHaveBeenCalledWith(
+    expect(mockUpdateSetting).toHaveBeenCalledTimes(1);
+    expect(mockUpdateSetting).toHaveBeenCalledWith(
       'showNotificationsCountInTray',
       false,
     );
@@ -35,30 +35,36 @@ describe('renderer/components/settings/TraySettings.tsx', () => {
   it('should toggle the useUnreadActiveIcon checkbox', async () => {
     await act(async () => {
       renderWithAppContext(<TraySettings />, {
-        
-          auth: mockAuth,
-          settings: mockSettings,
-          updateSetting });
+        auth: mockAuth,
+        settings: mockSettings,
+        updateSetting: mockUpdateSetting,
+      });
     });
 
     await userEvent.click(screen.getByTestId('checkbox-useUnreadActiveIcon'));
 
-    expect(updateSetting).toHaveBeenCalledTimes(1);
-    expect(updateSetting).toHaveBeenCalledWith('useUnreadActiveIcon', false);
+    expect(mockUpdateSetting).toHaveBeenCalledTimes(1);
+    expect(mockUpdateSetting).toHaveBeenCalledWith(
+      'useUnreadActiveIcon',
+      false,
+    );
   });
 
   it('should toggle the useAlternateIdleIcon checkbox', async () => {
     await act(async () => {
       renderWithAppContext(<TraySettings />, {
-        
-          auth: mockAuth,
-          settings: mockSettings,
-          updateSetting });
+        auth: mockAuth,
+        settings: mockSettings,
+        updateSetting: mockUpdateSetting,
+      });
     });
 
     await userEvent.click(screen.getByTestId('checkbox-useAlternateIdleIcon'));
 
-    expect(updateSetting).toHaveBeenCalledTimes(1);
-    expect(updateSetting).toHaveBeenCalledWith('useAlternateIdleIcon', true);
+    expect(mockUpdateSetting).toHaveBeenCalledTimes(1);
+    expect(mockUpdateSetting).toHaveBeenCalledWith(
+      'useAlternateIdleIcon',
+      true,
+    );
   });
 });

@@ -115,7 +115,9 @@ export function renderWithAppContext(
     'updateFilter',
   ];
 
-  const { appContext, ...rest } = options as Partial<Record<string, unknown>> & {
+  const { appContext, ...rest } = options as Partial<
+    Record<string, unknown>
+  > & {
     appContext?: Partial<AppContextState>;
   };
 

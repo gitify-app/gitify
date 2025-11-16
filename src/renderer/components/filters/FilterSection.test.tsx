@@ -11,7 +11,7 @@ import { stateFilter } from '../../utils/notifications/filters';
 import { FilterSection } from './FilterSection';
 
 describe('renderer/components/filters/FilterSection.tsx', () => {
-  const updateFilter = jest.fn();
+  const mockUpdateFilter = jest.fn();
 
   const mockFilter = stateFilter;
   const mockFilterSetting = 'filterStates';
@@ -22,18 +22,20 @@ describe('renderer/components/filters/FilterSection.tsx', () => {
         <FilterSection
           filter={{
             ...mockFilter,
-            requiresDetailsNotifications: true }}
+            requiresDetailsNotifications: true,
+          }}
           filterSetting={mockFilterSetting}
           icon={MarkGithubIcon}
           id={'FilterSectionTest'}
           title={'FilterSectionTitle'}
         />,
         {
-          
-            settings: {
-              ...mockSettings,
-              detailedNotifications: true } as SettingsState,
-            notifications: mockAccountNotifications },
+          settings: {
+            ...mockSettings,
+            detailedNotifications: true,
+          } as SettingsState,
+          notifications: mockAccountNotifications,
+        },
       );
 
       expect(tree).toMatchSnapshot();
@@ -44,18 +46,20 @@ describe('renderer/components/filters/FilterSection.tsx', () => {
         <FilterSection
           filter={{
             ...mockFilter,
-            requiresDetailsNotifications: false }}
+            requiresDetailsNotifications: false,
+          }}
           filterSetting={mockFilterSetting}
           icon={MarkGithubIcon}
           id={'FilterSectionTest'}
           title={'FilterSectionTitle'}
         />,
         {
-          
-            settings: {
-              ...mockSettings,
-              detailedNotifications: false } as SettingsState,
-            notifications: mockAccountNotifications },
+          settings: {
+            ...mockSettings,
+            detailedNotifications: false,
+          } as SettingsState,
+          notifications: mockAccountNotifications,
+        },
       );
 
       expect(tree).toMatchSnapshot();
@@ -73,18 +77,23 @@ describe('renderer/components/filters/FilterSection.tsx', () => {
           title={'FilterSectionTitle'}
         />,
         {
-          
-            settings: {
-              ...mockSettings,
-              filterStates: [] },
-            notifications: [],
-            updateFilter },
+          settings: {
+            ...mockSettings,
+            filterStates: [],
+          },
+          notifications: [],
+          updateFilter: mockUpdateFilter,
+        },
       );
     });
 
     await userEvent.click(screen.getByLabelText('Open'));
 
-    expect(updateFilter).toHaveBeenCalledWith(mockFilterSetting, 'open', true);
+    expect(mockUpdateFilter).toHaveBeenCalledWith(
+      mockFilterSetting,
+      'open',
+      true,
+    );
 
     expect(
       screen.getByLabelText('Open').parentNode.parentNode,
@@ -102,18 +111,19 @@ describe('renderer/components/filters/FilterSection.tsx', () => {
           title={'FilterSectionTitle'}
         />,
         {
-          
-            settings: {
-              ...mockSettings,
-              filterStates: ['open'] },
-            notifications: [],
-            updateFilter },
+          settings: {
+            ...mockSettings,
+            filterStates: ['open'],
+          },
+          notifications: [],
+          updateFilter: mockUpdateFilter,
+        },
       );
     });
 
     await userEvent.click(screen.getByLabelText('Closed'));
 
-    expect(updateFilter).toHaveBeenCalledWith(
+    expect(mockUpdateFilter).toHaveBeenCalledWith(
       mockFilterSetting,
       'closed',
       true,
