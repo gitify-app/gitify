@@ -15,8 +15,6 @@ describe('renderer/components/settings/TraySettings.tsx', () => {
   it('should toggle the showNotificationsCountInTray checkbox', async () => {
     await act(async () => {
       renderWithAppContext(<TraySettings />, {
-        auth: mockAuth,
-        settings: mockSettings,
         updateSetting: mockUpdateSetting,
       });
     });
@@ -35,8 +33,6 @@ describe('renderer/components/settings/TraySettings.tsx', () => {
   it('should toggle the useUnreadActiveIcon checkbox', async () => {
     await act(async () => {
       renderWithAppContext(<TraySettings />, {
-        auth: mockAuth,
-        settings: mockSettings,
         updateSetting: mockUpdateSetting,
       });
     });
@@ -53,8 +49,6 @@ describe('renderer/components/settings/TraySettings.tsx', () => {
   it('should toggle the useAlternateIdleIcon checkbox', async () => {
     await act(async () => {
       renderWithAppContext(<TraySettings />, {
-        auth: mockAuth,
-        settings: mockSettings,
         updateSetting: mockUpdateSetting,
       });
     });

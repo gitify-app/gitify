@@ -47,10 +47,7 @@ describe('renderer/routes/Accounts.tsx', () => {
 
     it('should go back by pressing the icon', async () => {
       await act(async () => {
-        renderWithAppContext(<AccountsRoute />, {
-          auth: mockAuth,
-          settings: mockSettings,
-        });
+        renderWithAppContext(<AccountsRoute />);
       });
 
       await userEvent.click(screen.getByTestId('header-nav-back'));
@@ -60,8 +57,12 @@ describe('renderer/routes/Accounts.tsx', () => {
   });
 
   describe('Account interactions', () => {
+    const mockOpenExternalLink = jest
+      .spyOn(comms, 'openExternalLink')
+      .mockImplementation();
+
     it('open profile in external browser', async () => {
-      const openAccountProfileMock = jest
+      const mockOpenAccountProfile = jest
         .spyOn(links, 'openAccountProfile')
         .mockImplementation();
 
@@ -74,17 +75,13 @@ describe('renderer/routes/Accounts.tsx', () => {
 
       await userEvent.click(screen.getByTestId('account-profile'));
 
-      expect(openAccountProfileMock).toHaveBeenCalledTimes(1);
-      expect(openAccountProfileMock).toHaveBeenCalledWith(
+      expect(mockOpenAccountProfile).toHaveBeenCalledTimes(1);
+      expect(mockOpenAccountProfile).toHaveBeenCalledWith(
         mockPersonalAccessTokenAccount,
       );
     });
 
     it('open host in external browser', async () => {
-      const openExternalLinkMock = jest
-        .spyOn(comms, 'openExternalLink')
-        .mockImplementation();
-
       await act(async () => {
         renderWithAppContext(<AccountsRoute />, {
           auth: { accounts: [mockPersonalAccessTokenAccount] },
@@ -94,15 +91,11 @@ describe('renderer/routes/Accounts.tsx', () => {
 
       await userEvent.click(screen.getByTestId('account-host'));
 
-      expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
-      expect(openExternalLinkMock).toHaveBeenCalledWith('https://github.com');
+      expect(mockOpenExternalLink).toHaveBeenCalledTimes(1);
+      expect(mockOpenExternalLink).toHaveBeenCalledWith('https://github.com');
     });
 
     it('open developer settings in external browser', async () => {
-      const openExternalLinkMock = jest
-        .spyOn(comms, 'openExternalLink')
-        .mockImplementation();
-
       await act(async () => {
         renderWithAppContext(<AccountsRoute />, {
           auth: { accounts: [mockPersonalAccessTokenAccount] },
@@ -112,17 +105,13 @@ describe('renderer/routes/Accounts.tsx', () => {
 
       await userEvent.click(screen.getByTestId('account-developer-settings'));
 
-      expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
-      expect(openExternalLinkMock).toHaveBeenCalledWith(
+      expect(mockOpenExternalLink).toHaveBeenCalledTimes(1);
+      expect(mockOpenExternalLink).toHaveBeenCalledWith(
         'https://github.com/settings/tokens',
       );
     });
 
     it('should render with PAT scopes warning', async () => {
-      const openExternalLinkMock = jest
-        .spyOn(comms, 'openExternalLink')
-        .mockImplementation();
-
       await act(async () => {
         renderWithAppContext(<AccountsRoute />, {
           auth: {
@@ -142,14 +131,14 @@ describe('renderer/routes/Accounts.tsx', () => {
 
       await userEvent.click(screen.getAllByTestId('account-missing-scopes')[0]);
 
-      expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
-      expect(openExternalLinkMock).toHaveBeenCalledWith(
+      expect(mockOpenExternalLink).toHaveBeenCalledTimes(1);
+      expect(mockOpenExternalLink).toHaveBeenCalledWith(
         'https://github.com/settings/tokens',
       );
     });
 
     it('should set account as primary account', async () => {
-      const saveStateMock = jest
+      const mockSaveState = jest
         .spyOn(storage, 'saveState')
         .mockImplementation();
 
@@ -172,11 +161,11 @@ describe('renderer/routes/Accounts.tsx', () => {
 
       await userEvent.click(screen.getAllByTestId('account-set-primary')[0]);
 
-      expect(saveStateMock).toHaveBeenCalled();
+      expect(mockSaveState).toHaveBeenCalled();
     });
 
     it('should refresh account', async () => {
-      const refreshAccountMock = jest
+      const mockRefreshAccount = jest
         .spyOn(authUtils, 'refreshAccount')
         .mockImplementation();
 
@@ -189,7 +178,7 @@ describe('renderer/routes/Accounts.tsx', () => {
 
       await userEvent.click(screen.getByTestId('account-refresh'));
 
-      expect(refreshAccountMock).toHaveBeenCalledTimes(1);
+      expect(mockRefreshAccount).toHaveBeenCalledTimes(1);
 
       await waitFor(() =>
         expect(mockNavigate).toHaveBeenNthCalledWith(1, '/accounts', {
@@ -199,19 +188,19 @@ describe('renderer/routes/Accounts.tsx', () => {
     });
 
     it('should logout', async () => {
-      const logoutFromAccountMock = jest.fn();
+      const mockLogoutFromAccount = jest.fn();
 
       await act(async () => {
         renderWithAppContext(<AccountsRoute />, {
           auth: { accounts: [mockPersonalAccessTokenAccount] },
           settings: mockSettings,
-          logoutFromAccount: logoutFromAccountMock,
+          logoutFromAccount: mockLogoutFromAccount,
         });
       });
 
       await userEvent.click(screen.getByTestId('account-logout'));
 
-      expect(logoutFromAccountMock).toHaveBeenCalledTimes(1);
+      expect(mockLogoutFromAccount).toHaveBeenCalledTimes(1);
 
       expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
     });

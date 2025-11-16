@@ -15,11 +15,12 @@ describe('renderer/components/notifications/NotificationHeader.tsx', () => {
 
   it('should render itself & its children - group by repositories', async () => {
     const props = {
-      notification: mockSingleNotification };
+      notification: mockSingleNotification,
+    };
 
     const tree = renderWithAppContext(<NotificationHeader {...props} />, {
-      
-        settings: { ...mockSettings, groupBy: GroupBy.REPOSITORY } });
+      settings: { ...mockSettings, groupBy: GroupBy.REPOSITORY },
+    });
 
     expect(tree).toMatchSnapshot();
   });
@@ -27,24 +28,28 @@ describe('renderer/components/notifications/NotificationHeader.tsx', () => {
   describe('should render itself & its children - group by date', () => {
     it('with notification number', async () => {
       const props = {
-        notification: mockSingleNotification };
+        notification: mockSingleNotification,
+      };
 
       const tree = renderWithAppContext(<NotificationHeader {...props} />, {
-         settings: { ...mockSettings, groupBy: GroupBy.DATE }  });
+        settings: { ...mockSettings, groupBy: GroupBy.DATE },
+      });
 
       expect(tree).toMatchSnapshot();
     });
 
     it('with showNumber setting disabled', async () => {
       const props = {
-        notification: mockSingleNotification };
+        notification: mockSingleNotification,
+      };
 
       const tree = renderWithAppContext(<NotificationHeader {...props} />, {
-        
-          settings: {
-            ...mockSettings,
-            showNumber: false,
-            groupBy: GroupBy.DATE } });
+        settings: {
+          ...mockSettings,
+          showNumber: false,
+          groupBy: GroupBy.DATE,
+        },
+      });
 
       expect(tree).toMatchSnapshot();
     });
@@ -53,30 +58,35 @@ describe('renderer/components/notifications/NotificationHeader.tsx', () => {
       const props = {
         notification: {
           ...mockSingleNotification,
-          subject: { ...mockSingleNotification.subject, number: null } } };
+          subject: { ...mockSingleNotification.subject, number: null },
+        },
+      };
 
       const tree = renderWithAppContext(<NotificationHeader {...props} />, {
-         settings: { ...mockSettings, groupBy: GroupBy.DATE }  });
+        settings: { ...mockSettings, groupBy: GroupBy.DATE },
+      });
 
       expect(tree).toMatchSnapshot();
     });
   });
 
   it('should open notification user profile - group by date', async () => {
-    const openExternalLinkMock = jest
+    const mockOpenExternalLink = jest
       .spyOn(comms, 'openExternalLink')
       .mockImplementation();
 
     const props = {
-      notification: mockSingleNotification };
+      notification: mockSingleNotification,
+    };
 
     renderWithAppContext(<NotificationHeader {...props} />, {
-       settings: { ...mockSettings, groupBy: GroupBy.DATE }  });
+      settings: { ...mockSettings, groupBy: GroupBy.DATE },
+    });
 
     await userEvent.click(screen.getByTestId('view-repository'));
 
-    expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
-    expect(openExternalLinkMock).toHaveBeenCalledWith(
+    expect(mockOpenExternalLink).toHaveBeenCalledTimes(1);
+    expect(mockOpenExternalLink).toHaveBeenCalledWith(
       props.notification.repository.html_url,
     );
   });

@@ -99,7 +99,7 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
   });
 
   it('should open notification user profile', async () => {
-    const openExternalLinkMock = jest
+    const mockOpenExternalLink = jest
       .spyOn(comms, 'openExternalLink')
       .mockImplementation();
 
@@ -125,8 +125,8 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
 
     await userEvent.click(screen.getByTestId('view-profile'));
 
-    expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
-    expect(openExternalLinkMock).toHaveBeenCalledWith(
+    expect(mockOpenExternalLink).toHaveBeenCalledTimes(1);
+    expect(mockOpenExternalLink).toHaveBeenCalledWith(
       props.notification.subject.user.html_url,
     );
   });

@@ -26,7 +26,7 @@ describe('renderer/routes/Login.tsx', () => {
   });
 
   it('should redirect to notifications once logged in', () => {
-    const showWindowMock = jest.spyOn(comms, 'showWindow');
+    const mockShowWindow = jest.spyOn(comms, 'showWindow');
 
     const { rerender } = render(
       <AppContextProvider value={{ isLoggedIn: false }}>
@@ -40,7 +40,7 @@ describe('renderer/routes/Login.tsx', () => {
       </AppContextProvider>,
     );
 
-    expect(showWindowMock).toHaveBeenCalledTimes(1);
+    expect(mockShowWindow).toHaveBeenCalledTimes(1);
     expect(mockNavigate).toHaveBeenNthCalledWith(1, '/', { replace: true });
   });
 

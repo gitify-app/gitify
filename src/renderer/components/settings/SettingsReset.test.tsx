@@ -6,7 +6,7 @@ import { mockAuth, mockSettings } from '../../__mocks__/state-mocks';
 import { SettingsReset } from './SettingsReset';
 
 describe('renderer/components/settings/SettingsReset.tsx', () => {
-  const resetSettings = jest.fn();
+  const mockResetSettings = jest.fn();
 
   afterEach(() => {
     jest.clearAllMocks();
@@ -17,13 +17,14 @@ describe('renderer/components/settings/SettingsReset.tsx', () => {
 
     await act(async () => {
       renderWithAppContext(<SettingsReset />, {
-         auth: mockAuth, settings: mockSettings, resetSettings  });
+        resetSettings: mockResetSettings,
+      });
     });
 
     await userEvent.click(screen.getByTestId('settings-reset'));
     await userEvent.click(screen.getByText('Reset'));
 
-    expect(resetSettings).toHaveBeenCalled();
+    expect(mockResetSettings).toHaveBeenCalled();
   });
 
   it('should skip reset default settings when `cancelled`', async () => {
@@ -31,12 +32,13 @@ describe('renderer/components/settings/SettingsReset.tsx', () => {
 
     await act(async () => {
       renderWithAppContext(<SettingsReset />, {
-         auth: mockAuth, settings: mockSettings, resetSettings  });
+        resetSettings: mockResetSettings,
+      });
     });
 
     await userEvent.click(screen.getByTestId('settings-reset'));
     await userEvent.click(screen.getByText('Cancel'));
 
-    expect(resetSettings).not.toHaveBeenCalled();
+    expect(mockResetSettings).not.toHaveBeenCalled();
   });
 });

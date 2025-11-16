@@ -16,7 +16,7 @@ jest.mock('react-router-dom', () => ({
 
 describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
   const mockLoginWithPersonalAccessToken = jest.fn();
-  const openExternalLinkMock = jest
+  const mockOpenExternalLink = jest
     .spyOn(comms, 'openExternalLink')
     .mockImplementation();
 
@@ -69,7 +69,7 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
 
       await userEvent.click(screen.getByTestId('login-create-token'));
 
-      expect(openExternalLinkMock).toHaveBeenCalledTimes(0);
+      expect(mockOpenExternalLink).toHaveBeenCalledTimes(0);
     });
 
     it('should open in browser if hostname configured', async () => {
@@ -79,7 +79,7 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
 
       await userEvent.click(screen.getByTestId('login-create-token'));
 
-      expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
+      expect(mockOpenExternalLink).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -157,6 +157,6 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
 
     await userEvent.click(screen.getByTestId('login-docs'));
 
-    expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
+    expect(mockOpenExternalLink).toHaveBeenCalledTimes(1);
   });
 });

@@ -8,7 +8,8 @@ import { FiltersRoute } from './Filters';
 const mockNavigate = jest.fn();
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
-  useNavigate: () => mockNavigate }));
+  useNavigate: () => mockNavigate,
+}));
 
 describe('renderer/routes/Filters.tsx', () => {
   const clearFilters = jest.fn();
@@ -22,10 +23,8 @@ describe('renderer/routes/Filters.tsx', () => {
     it('should render itself & its children', async () => {
       await act(async () => {
         renderWithAppContext(<FiltersRoute />, {
-          
-            auth: mockAuth,
-            settings: mockSettings,
-            notifications: [] });
+          notifications: [],
+        });
       });
 
       expect(screen.getByTestId('filters')).toMatchSnapshot();
@@ -34,11 +33,9 @@ describe('renderer/routes/Filters.tsx', () => {
     it('should go back by pressing the icon', async () => {
       await act(async () => {
         renderWithAppContext(<FiltersRoute />, {
-          
-            auth: mockAuth,
-            settings: mockSettings,
-            notifications: [],
-            fetchNotifications });
+          notifications: [],
+          fetchNotifications,
+        });
       });
 
       await userEvent.click(screen.getByTestId('header-nav-back'));
@@ -52,11 +49,9 @@ describe('renderer/routes/Filters.tsx', () => {
     it('should clear filters', async () => {
       await act(async () => {
         renderWithAppContext(<FiltersRoute />, {
-          
-            auth: mockAuth,
-            settings: mockSettings,
-            notifications: [],
-            clearFilters });
+          notifications: [],
+          clearFilters,
+        });
       });
 
       await userEvent.click(screen.getByTestId('filters-clear'));

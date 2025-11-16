@@ -16,8 +16,6 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
   it('should change the open links radio group', async () => {
     await act(async () => {
       renderWithAppContext(<SystemSettings />, {
-        auth: mockAuth,
-        settings: mockSettings,
         updateSetting: mockUpdateSetting,
       });
     });
@@ -31,8 +29,6 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
   it('should toggle the keyboardShortcut checkbox', async () => {
     await act(async () => {
       renderWithAppContext(<SystemSettings />, {
-        auth: mockAuth,
-        settings: mockSettings,
         updateSetting: mockUpdateSetting,
       });
     });
@@ -46,8 +42,6 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
   it('should toggle the showNotifications checkbox', async () => {
     await act(async () => {
       renderWithAppContext(<SystemSettings />, {
-        auth: mockAuth,
-        settings: mockSettings,
         updateSetting: mockUpdateSetting,
       });
     });
@@ -61,8 +55,6 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
   describe('playSound', () => {
     it('should toggle the playSound checkbox', async () => {
       renderWithAppContext(<SystemSettings />, {
-        auth: mockAuth,
-        settings: mockSettings,
         updateSetting: mockUpdateSetting,
       });
 
@@ -74,8 +66,6 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
 
     it('should increase notification volume', async () => {
       renderWithAppContext(<SystemSettings />, {
-        auth: mockAuth,
-        settings: mockSettings,
         updateSetting: mockUpdateSetting,
       });
 
@@ -87,8 +77,6 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
 
     it('should decrease notification volume', async () => {
       renderWithAppContext(<SystemSettings />, {
-        auth: mockAuth,
-        settings: mockSettings,
         updateSetting: mockUpdateSetting,
       });
 
@@ -100,7 +88,6 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
 
     it('should reset notification volume', async () => {
       renderWithAppContext(<SystemSettings />, {
-        auth: mockAuth,
         settings: { ...mockSettings, notificationVolume: 30 as Percentage },
         updateSetting: mockUpdateSetting,
       });
@@ -115,8 +102,6 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
   it('should toggle the openAtStartup checkbox', async () => {
     await act(async () => {
       renderWithAppContext(<SystemSettings />, {
-        auth: mockAuth,
-        settings: mockSettings,
         updateSetting: mockUpdateSetting,
       });
     });

@@ -11,11 +11,12 @@ import { Sidebar } from './Sidebar';
 const mockNavigate = jest.fn();
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
-  useNavigate: () => mockNavigate }));
+  useNavigate: () => mockNavigate,
+}));
 
 describe('renderer/components/Sidebar.tsx', () => {
-  const fetchNotifications = jest.fn();
-  const openExternalLinkMock = jest
+  const mockFetchNotifications = jest.fn();
+  const mockOpenExternalLink = jest
     .spyOn(comms, 'openExternalLink')
     .mockImplementation();
 
@@ -29,10 +30,8 @@ describe('renderer/components/Sidebar.tsx', () => {
         <Sidebar />
       </MemoryRouter>,
       {
-        
-          notifications: mockAccountNotifications,
-          auth: mockAuth,
-          settings: mockSettings },
+        notifications: mockAccountNotifications,
+      },
     );
 
     expect(tree).toMatchSnapshot();
@@ -44,11 +43,9 @@ describe('renderer/components/Sidebar.tsx', () => {
         <Sidebar />
       </MemoryRouter>,
       {
-        
-          isLoggedIn: false,
-          notifications: mockAccountNotifications,
-          auth: mockAuth,
-          settings: mockSettings },
+        isLoggedIn: false,
+        notifications: mockAccountNotifications,
+      },
     );
 
     expect(tree).toMatchSnapshot();
@@ -60,11 +57,9 @@ describe('renderer/components/Sidebar.tsx', () => {
         <Sidebar />
       </MemoryRouter>,
       {
-        
-          isLoggedIn: false,
-          notifications: [],
-          auth: mockAuth,
-          settings: mockSettings },
+        isLoggedIn: false,
+        notifications: [],
+      },
     );
 
     await userEvent.click(screen.getByTestId('sidebar-home'));
@@ -79,17 +74,15 @@ describe('renderer/components/Sidebar.tsx', () => {
           <Sidebar />
         </MemoryRouter>,
         {
-          
-            isLoggedIn: true,
-            notifications: [],
-            auth: mockAuth,
-            settings: mockSettings },
+          isLoggedIn: true,
+          notifications: [],
+        },
       );
 
       await userEvent.click(screen.getByTestId('sidebar-notifications'));
 
-      expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
-      expect(openExternalLinkMock).toHaveBeenCalledWith(
+      expect(mockOpenExternalLink).toHaveBeenCalledTimes(1);
+      expect(mockOpenExternalLink).toHaveBeenCalledWith(
         'https://github.com/notifications',
       );
     });
@@ -100,11 +93,9 @@ describe('renderer/components/Sidebar.tsx', () => {
           <Sidebar />
         </MemoryRouter>,
         {
-          
-            isLoggedIn: true,
-            notifications: [],
-            auth: mockAuth,
-            settings: mockSettings },
+          isLoggedIn: true,
+          notifications: [],
+        },
       );
 
       expect(screen.getByTestId('sidebar-notifications')).toMatchSnapshot();
@@ -116,11 +107,9 @@ describe('renderer/components/Sidebar.tsx', () => {
           <Sidebar />
         </MemoryRouter>,
         {
-          
-            isLoggedIn: true,
-            notifications: [],
-            auth: mockAuth,
-            settings: mockSettings },
+          isLoggedIn: true,
+          notifications: [],
+        },
       );
 
       expect(screen.getByTestId('sidebar-notifications')).toMatchSnapshot();
@@ -134,11 +123,9 @@ describe('renderer/components/Sidebar.tsx', () => {
           <Sidebar />
         </MemoryRouter>,
         {
-          
-            isLoggedIn: true,
-            notifications: [],
-            auth: mockAuth,
-            settings: mockSettings },
+          isLoggedIn: true,
+          notifications: [],
+        },
       );
 
       await userEvent.click(screen.getByTestId('sidebar-filter-notifications'));
@@ -152,11 +139,9 @@ describe('renderer/components/Sidebar.tsx', () => {
           <Sidebar />
         </MemoryRouter>,
         {
-          
-            isLoggedIn: true,
-            notifications: [],
-            auth: mockAuth,
-            settings: mockSettings },
+          isLoggedIn: true,
+          notifications: [],
+        },
       );
 
       await userEvent.click(screen.getByTestId('sidebar-filter-notifications'));
@@ -172,17 +157,15 @@ describe('renderer/components/Sidebar.tsx', () => {
           <Sidebar />
         </MemoryRouter>,
         {
-          
-            isLoggedIn: true,
-            notifications: mockAccountNotifications,
-            auth: mockAuth,
-            settings: mockSettings },
+          isLoggedIn: true,
+          notifications: mockAccountNotifications,
+        },
       );
 
       await userEvent.click(screen.getByTestId('sidebar-my-issues'));
 
-      expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
-      expect(openExternalLinkMock).toHaveBeenCalledWith(
+      expect(mockOpenExternalLink).toHaveBeenCalledTimes(1);
+      expect(mockOpenExternalLink).toHaveBeenCalledWith(
         'https://github.com/issues',
       );
     });
@@ -193,17 +176,15 @@ describe('renderer/components/Sidebar.tsx', () => {
           <Sidebar />
         </MemoryRouter>,
         {
-          
-            isLoggedIn: true,
-            notifications: mockAccountNotifications,
-            auth: mockAuth,
-            settings: mockSettings },
+          isLoggedIn: true,
+          notifications: mockAccountNotifications,
+        },
       );
 
       await userEvent.click(screen.getByTestId('sidebar-my-pull-requests'));
 
-      expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
-      expect(openExternalLinkMock).toHaveBeenCalledWith(
+      expect(mockOpenExternalLink).toHaveBeenCalledTimes(1);
+      expect(mockOpenExternalLink).toHaveBeenCalledWith(
         'https://github.com/pulls',
       );
     });
@@ -216,18 +197,16 @@ describe('renderer/components/Sidebar.tsx', () => {
           <Sidebar />
         </MemoryRouter>,
         {
-          
-            isLoggedIn: true,
-            notifications: [],
-            auth: mockAuth,
-            settings: mockSettings,
-            fetchNotifications,
-            status: 'success' },
+          isLoggedIn: true,
+          notifications: [],
+          fetchNotifications: mockFetchNotifications,
+          status: 'success',
+        },
       );
 
       await userEvent.click(screen.getByTestId('sidebar-refresh'));
 
-      expect(fetchNotifications).toHaveBeenCalledTimes(1);
+      expect(mockFetchNotifications).toHaveBeenCalledTimes(1);
     });
 
     it('should not refresh the notifications when status is loading', async () => {
@@ -236,18 +215,16 @@ describe('renderer/components/Sidebar.tsx', () => {
           <Sidebar />
         </MemoryRouter>,
         {
-          
-            isLoggedIn: true,
-            notifications: [],
-            auth: mockAuth,
-            settings: mockSettings,
-            fetchNotifications,
-            status: 'loading' },
+          isLoggedIn: true,
+          notifications: [],
+          fetchNotifications: mockFetchNotifications,
+          status: 'loading',
+        },
       );
 
       await userEvent.click(screen.getByTestId('sidebar-refresh'));
 
-      expect(fetchNotifications).not.toHaveBeenCalled();
+      expect(mockFetchNotifications).not.toHaveBeenCalled();
     });
   });
 
@@ -258,11 +235,9 @@ describe('renderer/components/Sidebar.tsx', () => {
           <Sidebar />
         </MemoryRouter>,
         {
-          
-            isLoggedIn: true,
-            notifications: [],
-            auth: mockAuth,
-            settings: mockSettings },
+          isLoggedIn: true,
+          notifications: [],
+        },
       );
 
       await userEvent.click(screen.getByTestId('sidebar-settings'));
@@ -276,38 +251,36 @@ describe('renderer/components/Sidebar.tsx', () => {
           <Sidebar />
         </MemoryRouter>,
         {
-          
-            isLoggedIn: true,
-            notifications: [],
-            auth: mockAuth,
-            settings: mockSettings,
-            fetchNotifications },
+          isLoggedIn: true,
+          notifications: [],
+          fetchNotifications: mockFetchNotifications,
+        },
       );
 
       await userEvent.click(screen.getByTestId('sidebar-settings'));
 
-      expect(fetchNotifications).toHaveBeenCalledTimes(1);
+      expect(mockFetchNotifications).toHaveBeenCalledTimes(1);
       expect(mockNavigate).toHaveBeenNthCalledWith(1, '/', { replace: true });
     });
   });
 
   it('should quit the app', async () => {
-    const quitAppMock = jest.spyOn(comms, 'quitApp');
+    const mockQuitApp = jest.spyOn(comms, 'quitApp');
 
     renderWithAppContext(
       <MemoryRouter>
         <Sidebar />
       </MemoryRouter>,
       {
-        
-          isLoggedIn: false,
-          notifications: [],
-          auth: mockAuth,
-          settings: mockSettings },
+        isLoggedIn: false,
+        notifications: [],
+        auth: mockAuth,
+        settings: mockSettings,
+      },
     );
 
     await userEvent.click(screen.getByTestId('sidebar-quit'));
 
-    expect(quitAppMock).toHaveBeenCalledTimes(1);
+    expect(mockQuitApp).toHaveBeenCalledTimes(1);
   });
 });

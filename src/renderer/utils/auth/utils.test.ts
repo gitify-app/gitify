@@ -24,7 +24,7 @@ import { getNewOAuthAppURL, getNewTokenURL } from './utils';
 
 describe('renderer/utils/auth/utils.ts', () => {
   describe('authGitHub', () => {
-    const openExternalLinkMock = jest
+    const mockOpenExternalLink = jest
       .spyOn(comms, 'openExternalLink')
       .mockImplementation();
 
@@ -41,8 +41,8 @@ describe('renderer/utils/auth/utils.ts', () => {
 
       const res = await auth.authGitHub();
 
-      expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
-      expect(openExternalLinkMock).toHaveBeenCalledWith(
+      expect(mockOpenExternalLink).toHaveBeenCalledTimes(1);
+      expect(mockOpenExternalLink).toHaveBeenCalledWith(
         'https://github.com/login/oauth/authorize?client_id=FAKE_CLIENT_ID_123&scope=read%3Auser%2Cnotifications%2Crepo',
       );
 
@@ -68,8 +68,8 @@ describe('renderer/utils/auth/utils.ts', () => {
         hostname: 'my.git.com' as Hostname,
       });
 
-      expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
-      expect(openExternalLinkMock).toHaveBeenCalledWith(
+      expect(mockOpenExternalLink).toHaveBeenCalledTimes(1);
+      expect(mockOpenExternalLink).toHaveBeenCalledWith(
         'https://my.git.com/login/oauth/authorize?client_id=BYO_CLIENT_ID&scope=read%3Auser%2Cnotifications%2Crepo',
       );
 
@@ -97,8 +97,8 @@ describe('renderer/utils/auth/utils.ts', () => {
         ),
       );
 
-      expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
-      expect(openExternalLinkMock).toHaveBeenCalledWith(
+      expect(mockOpenExternalLink).toHaveBeenCalledTimes(1);
+      expect(mockOpenExternalLink).toHaveBeenCalledWith(
         'https://github.com/login/oauth/authorize?client_id=FAKE_CLIENT_ID_123&scope=read%3Auser%2Cnotifications%2Crepo',
       );
 
@@ -111,14 +111,14 @@ describe('renderer/utils/auth/utils.ts', () => {
 
   describe('getToken', () => {
     const authCode = '123-456' as AuthCode;
-    const apiRequestMock = jest.spyOn(apiRequests, 'apiRequest');
+    const mockApiRequest = jest.spyOn(apiRequests, 'apiRequest');
 
     it('should get a token - success', async () => {
       const requestPromise = new Promise((resolve) =>
         resolve({ data: { access_token: 'this-is-a-token' } } as AxiosResponse),
       ) as AxiosPromise;
 
-      apiRequestMock.mockResolvedValueOnce(requestPromise);
+      mockApiRequest.mockResolvedValueOnce(requestPromise);
 
       const res = await auth.getToken(authCode);
 
@@ -142,7 +142,7 @@ describe('renderer/utils/auth/utils.ts', () => {
         reject({ data: { message } } as AxiosResponse),
       ) as AxiosPromise;
 
-      apiRequestMock.mockResolvedValueOnce(requestPromise);
+      mockApiRequest.mockResolvedValueOnce(requestPromise);
 
       const call = async () => await auth.getToken(authCode);
 

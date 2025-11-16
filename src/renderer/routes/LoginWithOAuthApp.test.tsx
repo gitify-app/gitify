@@ -2,7 +2,6 @@ import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { renderWithAppContext } from '../__helpers__/test-utils';
-import { mockAuth } from '../__mocks__/state-mocks';
 import type { ClientID, ClientSecret, Hostname } from '../types';
 import * as comms from '../utils/comms';
 import { LoginWithOAuthAppRoute, validateForm } from './LoginWithOAuthApp';
@@ -16,7 +15,7 @@ jest.mock('react-router-dom', () => ({
 describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
   const mockLoginWithOAuthApp = jest.fn();
 
-  const openExternalLinkMock = jest
+  const mockOpenExternalLink = jest
     .spyOn(comms, 'openExternalLink')
     .mockImplementation();
 
@@ -25,15 +24,13 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
   });
 
   it('renders correctly', () => {
-    const tree = renderWithAppContext(<LoginWithOAuthAppRoute />, {
-      auth: mockAuth,
-    });
+    const tree = renderWithAppContext(<LoginWithOAuthAppRoute />);
 
     expect(tree).toMatchSnapshot();
   });
 
   it('let us go back', async () => {
-    renderWithAppContext(<LoginWithOAuthAppRoute />, { auth: mockAuth });
+    renderWithAppContext(<LoginWithOAuthAppRoute />);
 
     await userEvent.click(screen.getByTestId('header-nav-back'));
 
@@ -69,17 +66,17 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
 
   describe("'Create new OAuth App' button", () => {
     it('should be disabled if no hostname configured', async () => {
-      renderWithAppContext(<LoginWithOAuthAppRoute />, { auth: mockAuth });
+      renderWithAppContext(<LoginWithOAuthAppRoute />);
 
       await userEvent.clear(screen.getByTestId('login-hostname'));
 
       await userEvent.click(screen.getByTestId('login-create-oauth-app'));
 
-      expect(openExternalLinkMock).toHaveBeenCalledTimes(0);
+      expect(mockOpenExternalLink).toHaveBeenCalledTimes(0);
     });
 
     it('should open in browser if hostname configured', async () => {
-      renderWithAppContext(<LoginWithOAuthAppRoute />, { auth: mockAuth });
+      renderWithAppContext(<LoginWithOAuthAppRoute />);
 
       const hostname = screen.getByTestId('login-hostname');
       await userEvent.clear(hostname);
@@ -87,7 +84,7 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
 
       await userEvent.click(screen.getByTestId('login-create-oauth-app'));
 
-      expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
+      expect(mockOpenExternalLink).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -119,7 +116,7 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
   });
 
   it('should render the form with errors', async () => {
-    renderWithAppContext(<LoginWithOAuthAppRoute />, { auth: mockAuth });
+    renderWithAppContext(<LoginWithOAuthAppRoute />);
 
     const hostname = screen.getByTestId('login-hostname');
     await userEvent.clear(hostname);
@@ -139,10 +136,10 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
   });
 
   it('should open help docs in the browser', async () => {
-    renderWithAppContext(<LoginWithOAuthAppRoute />, { auth: mockAuth });
+    renderWithAppContext(<LoginWithOAuthAppRoute />);
 
     await userEvent.click(screen.getByTestId('login-docs'));
 
-    expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
+    expect(mockOpenExternalLink).toHaveBeenCalledTimes(1);
   });
 });

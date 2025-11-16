@@ -17,8 +17,6 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
   it('should change the groupBy radio group', async () => {
     await act(async () => {
       renderWithAppContext(<NotificationSettings />, {
-        auth: mockAuth,
-        settings: mockSettings,
         updateSetting: mockUpdateSetting,
       });
     });
@@ -32,8 +30,6 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
   it('should change the fetchType radio group', async () => {
     await act(async () => {
       renderWithAppContext(<NotificationSettings />, {
-        auth: mockAuth,
-        settings: mockSettings,
         updateSetting: mockUpdateSetting,
       });
     });
@@ -48,8 +44,6 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
     it('should update the fetch interval values when using the buttons', async () => {
       await act(async () => {
         renderWithAppContext(<NotificationSettings />, {
-          auth: mockAuth,
-          settings: mockSettings,
           updateSetting: mockUpdateSetting,
         });
       });
@@ -109,7 +103,6 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
     it('should prevent going lower than minimum interval', async () => {
       await act(async () => {
         renderWithAppContext(<NotificationSettings />, {
-          auth: mockAuth,
           settings: {
             ...mockSettings,
             fetchInterval:
@@ -146,7 +139,6 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
     it('should prevent going above maximum interval', async () => {
       await act(async () => {
         renderWithAppContext(<NotificationSettings />, {
-          auth: mockAuth,
           settings: {
             ...mockSettings,
             fetchInterval:
@@ -184,8 +176,6 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
   it('should toggle the fetchAllNotifications checkbox', async () => {
     await act(async () => {
       renderWithAppContext(<NotificationSettings />, {
-        auth: mockAuth,
-        settings: mockSettings,
         updateSetting: mockUpdateSetting,
       });
     });
@@ -202,8 +192,6 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
   it('should toggle detailed notifications checkbox', async () => {
     await act(async () => {
       renderWithAppContext(<NotificationSettings />, {
-        auth: mockAuth,
-        settings: mockSettings,
         updateSetting: mockUpdateSetting,
       });
     });
@@ -220,8 +208,6 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
   it('should toggle metric pills checkbox', async () => {
     await act(async () => {
       renderWithAppContext(<NotificationSettings />, {
-        auth: mockAuth,
-        settings: mockSettings,
         updateSetting: mockUpdateSetting,
       });
     });
@@ -235,8 +221,6 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
   it('should toggle show number checkbox', async () => {
     await act(async () => {
       renderWithAppContext(<NotificationSettings />, {
-        auth: mockAuth,
-        settings: mockSettings,
         updateSetting: mockUpdateSetting,
       });
     });
@@ -250,8 +234,6 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
   it('should toggle the showOnlyParticipating checkbox', async () => {
     await act(async () => {
       renderWithAppContext(<NotificationSettings />, {
-        auth: mockAuth,
-        settings: mockSettings,
         updateSetting: mockUpdateSetting,
       });
     });
@@ -263,14 +245,12 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
   });
 
   it('should open official docs for showOnlyParticipating tooltip', async () => {
-    const openExternalLinkMock = jest
+    const mockOpenExternalLink = jest
       .spyOn(comms, 'openExternalLink')
       .mockImplementation();
 
     await act(async () => {
       renderWithAppContext(<NotificationSettings />, {
-        auth: mockAuth,
-        settings: mockSettings,
         updateSetting: mockUpdateSetting,
       });
     });
@@ -286,8 +266,8 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
       ),
     );
 
-    expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
-    expect(openExternalLinkMock).toHaveBeenCalledWith(
+    expect(mockOpenExternalLink).toHaveBeenCalledTimes(1);
+    expect(mockOpenExternalLink).toHaveBeenCalledWith(
       'https://docs.github.com/en/account-and-profile/managing-subscriptions-and-notifications-on-github/setting-up-notifications/configuring-notifications#about-participating-and-watching-notifications',
     );
   });
@@ -295,8 +275,6 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
   it('should toggle the markAsDoneOnOpen checkbox', async () => {
     await act(async () => {
       renderWithAppContext(<NotificationSettings />, {
-        auth: mockAuth,
-        settings: mockSettings,
         updateSetting: mockUpdateSetting,
       });
     });
@@ -310,8 +288,6 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
   it('should toggle the markAsDoneOnUnsubscribe checkbox', async () => {
     await act(async () => {
       renderWithAppContext(<NotificationSettings />, {
-        auth: mockAuth,
-        settings: mockSettings,
         updateSetting: mockUpdateSetting,
       });
     });
@@ -330,8 +306,6 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
   it('should toggle the delayNotificationState checkbox', async () => {
     await act(async () => {
       renderWithAppContext(<NotificationSettings />, {
-        auth: mockAuth,
-        settings: mockSettings,
         updateSetting: mockUpdateSetting,
       });
     });

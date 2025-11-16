@@ -199,7 +199,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
                 popover="auto"
                 role="tooltip"
               >
-                0 unread notifications ↗
+                undefined unread notifications ↗
               </span>
               <button
                 aria-describedby="_r_6_-loading-announcement"
@@ -465,7 +465,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
               popover="auto"
               role="tooltip"
             >
-              0 unread notifications ↗
+              undefined unread notifications ↗
             </span>
             <button
               aria-describedby="_r_6_-loading-announcement"
@@ -788,7 +788,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
                 popover="auto"
                 role="tooltip"
               >
-                0 unread notifications ↗
+                undefined unread notifications ↗
               </span>
               <button
                 aria-describedby="_r_h_-loading-announcement"
@@ -1054,7 +1054,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
               popover="auto"
               role="tooltip"
             >
-              0 unread notifications ↗
+              undefined unread notifications ↗
             </span>
             <button
               aria-describedby="_r_h_-loading-announcement"

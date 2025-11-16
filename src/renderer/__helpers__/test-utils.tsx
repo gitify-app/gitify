@@ -1,4 +1,3 @@
-import type { RenderOptions } from '@testing-library/react';
 import { render } from '@testing-library/react';
 import type { ReactElement, ReactNode } from 'react';
 import { useMemo } from 'react';
@@ -28,33 +27,11 @@ export function AppContextProvider({
   const defaultValue: Partial<AppContextState> = useMemo(() => {
     return {
       auth: mockAuth,
-      isLoggedIn: false,
-      loginWithGitHubApp: async () => {},
-      loginWithOAuthApp: async () => {},
-      loginWithPersonalAccessToken: async () => {},
-      logoutFromAccount: async () => {},
 
       status: 'success',
-      globalError: { title: '', descriptions: [], emojis: [] },
-
-      notifications: [],
-      notificationCount: 0,
-      unreadNotificationCount: 0,
-      hasNotifications: false,
-      hasUnreadNotifications: false,
-
-      fetchNotifications: async () => {},
-      removeAccountNotifications: async () => {},
-
-      markNotificationsAsRead: async () => {},
-      markNotificationsAsDone: async () => {},
-      unsubscribeNotification: async () => {},
+      globalError: null,
 
       settings: mockSettings,
-      clearFilters: () => {},
-      resetSettings: () => {},
-      updateSetting: () => {},
-      updateFilter: () => {},
 
       ...value,
     } as Partial<AppContextState>;
@@ -72,71 +49,20 @@ export function AppContextProvider({
 }
 
 /**
- * Custom render function that wraps components with AppContextProvider by default.
+ * Custom render that wraps components with AppContextProvider by default.
  *
- * Usage (simplified):
- *   renderWithAppContext(<MyComponent />, { auth, settings })
- *
- * Legacy (still supported):
- *   renderWithAppContext(<MyComponent />, { appContext: { auth, settings } })
+ * Usage:
+ *   renderWithAppContext(<MyComponent />, { auth, settings, ... })
  */
-type RenderWithAppContextOptions = Omit<RenderOptions, 'wrapper'> &
-  Partial<AppContextState> & {
-    appContext?: Partial<AppContextState>;
-  };
-
 export function renderWithAppContext(
   ui: ReactElement,
-  options: RenderWithAppContextOptions = {},
+  context: Partial<AppContextState> = {},
 ) {
-  const CONTEXT_KEYS: Array<keyof AppContextState> = [
-    'auth',
-    'isLoggedIn',
-    'loginWithGitHubApp',
-    'loginWithOAuthApp',
-    'loginWithPersonalAccessToken',
-    'logoutFromAccount',
-    'status',
-    'globalError',
-    'notifications',
-    'notificationCount',
-    'unreadNotificationCount',
-    'hasNotifications',
-    'hasUnreadNotifications',
-    'fetchNotifications',
-    'removeAccountNotifications',
-    'markNotificationsAsRead',
-    'markNotificationsAsDone',
-    'unsubscribeNotification',
-    'settings',
-    'clearFilters',
-    'resetSettings',
-    'updateSetting',
-    'updateFilter',
-  ];
-
-  const { appContext, ...rest } = options as Partial<
-    Record<string, unknown>
-  > & {
-    appContext?: Partial<AppContextState>;
-  };
-
-  const ctxFromTopLevel: Partial<AppContextState> = {};
-  for (const key of CONTEXT_KEYS) {
-    if (key in rest && rest[key] !== undefined) {
-      (ctxFromTopLevel as Partial<Record<string, unknown>>)[key] = rest[key];
-    }
-  }
-
-  const value: Partial<AppContextState> = { ...ctxFromTopLevel };
-  if (appContext) {
-    Object.assign(value, appContext);
-  }
+  const value: Partial<AppContextState> = { ...context };
 
   return render(ui, {
     wrapper: ({ children }) => (
       <AppContextProvider value={value}>{children}</AppContextProvider>
     ),
-    // No additional render options by default
   });
 }

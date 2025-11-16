@@ -20,8 +20,6 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
   it('should change the theme mode dropdown', async () => {
     await act(async () => {
       renderWithAppContext(<AppearanceSettings />, {
-        auth: mockAuth,
-        settings: mockSettings,
         updateSetting: mockUpdateSetting,
       });
     });
@@ -57,8 +55,6 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
 
     await act(async () => {
       renderWithAppContext(<AppearanceSettings />, {
-        auth: mockAuth,
-        settings: mockSettings,
         updateSetting: mockUpdateSetting,
       });
     });
@@ -79,8 +75,6 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
 
     await act(async () => {
       renderWithAppContext(<AppearanceSettings />, {
-        auth: mockAuth,
-        settings: mockSettings,
         updateSetting: mockUpdateSetting,
       });
     });

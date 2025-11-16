@@ -102,7 +102,6 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       renderWithAppContext(<NotificationRow {...props} />, {
         settings: { ...mockSettings, markAsDoneOnOpen: false },
         markNotificationsAsRead,
-        auth: mockAuth,
       });
 
       await userEvent.click(screen.getByTestId('notification-row'));
@@ -126,7 +125,6 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
           delayNotificationState: true,
         },
         markNotificationsAsRead,
-        auth: mockAuth,
       });
 
       await userEvent.click(screen.getByTestId('notification-row'));
@@ -146,7 +144,6 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       renderWithAppContext(<NotificationRow {...props} />, {
         settings: { ...mockSettings, markAsDoneOnOpen: true },
         markNotificationsAsDone,
-        auth: mockAuth,
       });
 
       await userEvent.click(screen.getByTestId('notification-row'));

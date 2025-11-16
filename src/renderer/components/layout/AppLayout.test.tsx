@@ -11,8 +11,6 @@ describe('renderer/components/layout/AppLayout.tsx', () => {
         <AppLayout>Test</AppLayout>
       </MemoryRouter>,
       {
-        auth: mockAuth,
-        settings: mockSettings,
         notifications: [],
       },
     );
