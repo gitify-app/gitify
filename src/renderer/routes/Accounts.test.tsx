@@ -6,7 +6,6 @@ import {
   mockGitHubAppAccount,
   mockOAuthAccount,
   mockPersonalAccessTokenAccount,
-  mockSettings,
 } from '../__mocks__/state-mocks';
 import * as authUtils from '../utils/auth/utils';
 import * as comms from '../utils/comms';

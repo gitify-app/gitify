@@ -6,7 +6,6 @@ import { MarkGithubIcon } from '@primer/octicons-react';
 import { renderWithAppContext } from '../../__helpers__/test-utils';
 import { mockAccountNotifications } from '../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../__mocks__/state-mocks';
-import type { SettingsState } from '../../types';
 import { stateFilter } from '../../utils/notifications/filters';
 import { FilterSection } from './FilterSection';
 

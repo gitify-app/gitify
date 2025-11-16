@@ -1,6 +1,5 @@
 import { renderWithAppContext } from '../../__helpers__/test-utils';
 import { mockSettings } from '../../__mocks__/state-mocks';
-import type { SettingsState } from '../../types';
 import { SearchFilterSuggestions } from './SearchFilterSuggestions';
 
 describe('renderer/components/filters/SearchFilterSuggestions.tsx', () => {
