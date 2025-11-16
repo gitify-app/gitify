@@ -13,14 +13,10 @@ describe('renderer/components/AllRead.tsx', () => {
   });
 
   it('should render itself & its children - no filters', async () => {
-    let tree: ReturnType<typeof renderWithAppContext> | null = null;
-
-    await act(async () => {
-      tree = renderWithAppContext(<AllRead />, {
-        settings: {
-          ...mockSettings,
-        },
-      });
+    const tree = renderWithAppContext(<AllRead />, {
+      settings: {
+        ...mockSettings,
+      },
     });
 
     expect(tree).toMatchSnapshot();

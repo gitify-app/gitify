@@ -71,7 +71,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
 
   it('should render itself & its children - notification is read', async () => {
     jest
-      .spyOn(global.Date, 'now')
+      .spyOn(globalThis.Date, 'now')
       .mockImplementation(() => new Date('2024').valueOf());
 
     const props = {
