@@ -26,6 +26,7 @@ export function AppContextProvider({
     return {
       auth: mockAuth,
       settings: mockSettings,
+      isLoggedIn: true,
 
       notifications: [],
 

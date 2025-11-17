@@ -1,8 +1,40 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
+exports[`renderer/components/Sidebar.tsx Filter notifications highlight filters sidebar if any are saved 1`] = `
+<button
+  aria-describedby="_r_3q_-loading-announcement _r_3p_"
+  aria-label="Filters"
+  class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
+  data-component="IconButton"
+  data-loading="false"
+  data-no-visuals="true"
+  data-size="small"
+  data-testid="sidebar-filter-notifications"
+  data-variant="primary"
+  type="button"
+>
+  <svg
+    aria-hidden="true"
+    class="octicon octicon-filter"
+    display="inline-block"
+    fill="currentColor"
+    focusable="false"
+    height="16"
+    overflow="visible"
+    style="vertical-align: text-bottom;"
+    viewBox="0 0 16 16"
+    width="16"
+  >
+    <path
+      d="M.75 3h14.5a.75.75 0 0 1 0 1.5H.75a.75.75 0 0 1 0-1.5ZM3 7.75A.75.75 0 0 1 3.75 7h8.5a.75.75 0 0 1 0 1.5h-8.5A.75.75 0 0 1 3 7.75Zm3 4a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z"
+    />
+  </svg>
+</button>
+`;
+
 exports[`renderer/components/Sidebar.tsx notifications icon renders correct icon when there are no notifications 1`] = `
 <button
-  aria-describedby="_r_1o_-loading-announcement _r_1n_"
+  aria-describedby="_r_1s_-loading-announcement _r_1r_"
   aria-label="Notifications"
   class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
   data-component="IconButton"
@@ -34,7 +66,7 @@ exports[`renderer/components/Sidebar.tsx notifications icon renders correct icon
 
 exports[`renderer/components/Sidebar.tsx notifications icon renders correct icon when there are notifications 1`] = `
 <button
-  aria-describedby="_r_27_-loading-announcement _r_26_"
+  aria-describedby="_r_2b_-loading-announcement _r_2a_"
   aria-label="Notifications"
   class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
   data-component="IconButton"

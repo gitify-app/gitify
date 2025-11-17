@@ -11,14 +11,14 @@ import {
   validateForm,
 } from './LoginWithOAuthApp';
 
-const mockNavigate = jest.fn();
+const navigateMock = jest.fn();
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
-  useNavigate: () => mockNavigate,
+  useNavigate: () => navigateMock,
 }));
 
 describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
-  const mockLoginWithOAuthApp = jest.fn();
+  const loginWithOAuthAppMock = jest.fn();
 
   const openExternalLinkSpy = jest
     .spyOn(comms, 'openExternalLink')
@@ -39,8 +39,8 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
 
     await userEvent.click(screen.getByTestId('header-nav-back'));
 
-    expect(mockNavigate).toHaveBeenCalledTimes(1);
-    expect(mockNavigate).toHaveBeenCalledWith(-1);
+    expect(navigateMock).toHaveBeenCalledTimes(1);
+    expect(navigateMock).toHaveBeenCalledWith(-1);
   });
 
   describe('form validation', () => {
@@ -98,10 +98,10 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
   });
 
   it('should login using a token - success', async () => {
-    mockLoginWithOAuthApp.mockResolvedValueOnce(null);
+    loginWithOAuthAppMock.mockResolvedValueOnce(null);
 
     renderWithAppContext(<LoginWithOAuthAppRoute />, {
-      loginWithOAuthApp: mockLoginWithOAuthApp,
+      loginWithOAuthApp: loginWithOAuthAppMock,
     });
 
     const hostname = screen.getByTestId('login-hostname');
@@ -120,19 +120,19 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
 
     await userEvent.click(screen.getByTestId('login-submit'));
 
-    expect(mockLoginWithOAuthApp).toHaveBeenCalledTimes(1);
-    expect(mockNavigate).toHaveBeenCalledTimes(1);
-    expect(mockNavigate).toHaveBeenCalledWith(-1);
+    expect(loginWithOAuthAppMock).toHaveBeenCalledTimes(1);
+    expect(navigateMock).toHaveBeenCalledTimes(1);
+    expect(navigateMock).toHaveBeenCalledWith(-1);
   });
 
   it('should login using a token - failure', async () => {
     const rendererLogErrorSpy = jest
       .spyOn(logger, 'rendererLogError')
       .mockImplementation();
-    mockLoginWithOAuthApp.mockRejectedValueOnce(null);
+    loginWithOAuthAppMock.mockRejectedValueOnce(null);
 
     renderWithAppContext(<LoginWithOAuthAppRoute />, {
-      loginWithOAuthApp: mockLoginWithOAuthApp,
+      loginWithOAuthApp: loginWithOAuthAppMock,
     });
 
     const hostname = screen.getByTestId('login-hostname');
@@ -151,8 +151,8 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
 
     await userEvent.click(screen.getByTestId('login-submit'));
 
-    expect(mockLoginWithOAuthApp).toHaveBeenCalledTimes(1);
-    expect(mockNavigate).toHaveBeenCalledTimes(0);
+    expect(loginWithOAuthAppMock).toHaveBeenCalledTimes(1);
+    expect(navigateMock).toHaveBeenCalledTimes(0);
     expect(rendererLogErrorSpy).toHaveBeenCalledTimes(1);
   });
 

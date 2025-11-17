@@ -50,10 +50,10 @@ describe('preload/utils', () => {
   });
 
   it('onRendererEvent registers listener and receives emitted data', () => {
-    const handler = jest.fn();
+    const handlerMock = jest.fn();
     onRendererEvent(
       EVENTS.UPDATE_ICON_TITLE,
-      handler as unknown as (
+      handlerMock as unknown as (
         e: Electron.IpcRendererEvent,
         args: string,
       ) => void,
@@ -65,8 +65,8 @@ describe('preload/utils', () => {
     ).__emit(EVENTS.UPDATE_ICON_TITLE, 'payload');
     expect(ipcRenderer.on).toHaveBeenCalledWith(
       EVENTS.UPDATE_ICON_TITLE,
-      handler,
+      handlerMock,
     );
-    expect(handler).toHaveBeenCalledWith({}, 'payload');
+    expect(handlerMock).toHaveBeenCalledWith({}, 'payload');
   });
 });

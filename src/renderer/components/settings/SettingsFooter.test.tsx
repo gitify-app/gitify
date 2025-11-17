@@ -5,10 +5,10 @@ import { renderWithAppContext } from '../../__helpers__/test-utils';
 import * as comms from '../../utils/comms';
 import { SettingsFooter } from './SettingsFooter';
 
-const mockNavigate = jest.fn();
+const navigateMock = jest.fn();
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
-  useNavigate: () => mockNavigate,
+  useNavigate: () => navigateMock,
 }));
 
 describe('renderer/components/settings/SettingsFooter.tsx', () => {
@@ -56,7 +56,7 @@ describe('renderer/components/settings/SettingsFooter.tsx', () => {
 
     await userEvent.click(screen.getByTestId('settings-accounts'));
 
-    expect(mockNavigate).toHaveBeenCalledWith('/accounts');
+    expect(navigateMock).toHaveBeenCalledWith('/accounts');
   });
 
   it('should quit the app', async () => {

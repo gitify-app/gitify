@@ -14,8 +14,8 @@ jest.mock('./NotificationRow', () => ({
 }));
 
 describe('renderer/components/notifications/RepositoryNotifications.tsx', () => {
-  const markNotificationsAsRead = jest.fn();
-  const markNotificationsAsDone = jest.fn();
+  const markNotificationsAsReadMock = jest.fn();
+  const markNotificationsAsDoneMock = jest.fn();
 
   const props = {
     account: mockGitHubCloudAccount,
@@ -28,10 +28,7 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
   });
 
   it('should render itself & its children', () => {
-    const tree = renderWithAppContext(
-      <RepositoryNotifications {...props} />,
-      {},
-    );
+    const tree = renderWithAppContext(<RepositoryNotifications {...props} />);
 
     expect(tree).toMatchSnapshot();
   });
@@ -41,10 +38,7 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
       n.unread = false;
     }
 
-    const tree = renderWithAppContext(
-      <RepositoryNotifications {...props} />,
-      {},
-    );
+    const tree = renderWithAppContext(<RepositoryNotifications {...props} />);
 
     expect(tree).toMatchSnapshot();
   });
@@ -67,12 +61,12 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
   it('should mark a repo as read', async () => {
     renderWithAppContext(<RepositoryNotifications {...props} />, {
       settings: { ...mockSettings },
-      markNotificationsAsRead,
+      markNotificationsAsRead: markNotificationsAsReadMock,
     });
 
     await userEvent.click(screen.getByTestId('repository-mark-as-read'));
 
-    expect(markNotificationsAsRead).toHaveBeenCalledWith(
+    expect(markNotificationsAsReadMock).toHaveBeenCalledWith(
       mockGitHubNotifications,
     );
   });
@@ -80,12 +74,12 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
   it('should mark a repo as done', async () => {
     renderWithAppContext(<RepositoryNotifications {...props} />, {
       settings: { ...mockSettings },
-      markNotificationsAsDone,
+      markNotificationsAsDone: markNotificationsAsDoneMock,
     });
 
     await userEvent.click(screen.getByTestId('repository-mark-as-done'));
 
-    expect(markNotificationsAsDone).toHaveBeenCalledWith(
+    expect(markNotificationsAsDoneMock).toHaveBeenCalledWith(
       mockGitHubNotifications,
     );
   });
@@ -93,10 +87,7 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
   it('should use default repository icon when avatar is not available', () => {
     props.repoNotifications[0].repository.owner.avatar_url = '' as Link;
 
-    const tree = renderWithAppContext(
-      <RepositoryNotifications {...props} />,
-      {},
-    );
+    const tree = renderWithAppContext(<RepositoryNotifications {...props} />);
 
     expect(tree).toMatchSnapshot();
   });

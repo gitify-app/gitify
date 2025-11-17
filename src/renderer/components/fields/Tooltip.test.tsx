@@ -11,13 +11,13 @@ describe('renderer/components/fields/Tooltip.tsx', () => {
   };
 
   it('should render', () => {
-    renderWithAppContext(<Tooltip {...props} />, {});
+    renderWithAppContext(<Tooltip {...props} />);
 
     expect(screen.getByTestId('tooltip-test')).toBeInTheDocument();
   });
 
   it('should display on mouse enter / leave', async () => {
-    renderWithAppContext(<Tooltip {...props} />, {});
+    renderWithAppContext(<Tooltip {...props} />);
 
     const tooltipElement = screen.getByTestId('tooltip-test');
 

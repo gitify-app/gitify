@@ -1,39 +1,39 @@
 import path from 'node:path';
 
-// Mocks
-const existsSync = jest.fn();
-const mkdirSync = jest.fn();
-const writeFileSync = jest.fn();
+const existsSyncMock = jest.fn();
+const mkdirSyncMock = jest.fn();
+const writeFileSyncMock = jest.fn();
+
 jest.mock('node:fs', () => ({
   __esModule: true,
   default: {
-    existsSync: (...a: unknown[]) => existsSync(...a),
-    mkdirSync: (...a: unknown[]) => mkdirSync(...a),
-    writeFileSync: (...a: unknown[]) => writeFileSync(...a),
+    existsSync: (...a: unknown[]) => existsSyncMock(...a),
+    mkdirSync: (...a: unknown[]) => mkdirSyncMock(...a),
+    writeFileSync: (...a: unknown[]) => writeFileSyncMock(...a),
   },
-  existsSync: (...a: unknown[]) => existsSync(...a),
-  mkdirSync: (...a: unknown[]) => mkdirSync(...a),
-  writeFileSync: (...a: unknown[]) => writeFileSync(...a),
+  existsSync: (...a: unknown[]) => existsSyncMock(...a),
+  mkdirSync: (...a: unknown[]) => mkdirSyncMock(...a),
+  writeFileSync: (...a: unknown[]) => writeFileSyncMock(...a),
 }));
 
-const moveToApplicationsFolder = jest.fn();
-const isInApplicationsFolder = jest.fn(() => false);
-const getPath = jest.fn(() => '/User/Data');
+const moveToApplicationsFolderMock = jest.fn();
+const isInApplicationsFolderMock = jest.fn(() => false);
+const getPathMock = jest.fn(() => '/User/Data');
 
-const showMessageBox = jest.fn(async () => ({ response: 0 }));
+const showMessageBoxMock = jest.fn(async () => ({ response: 0 }));
 
 jest.mock('electron', () => ({
   app: {
-    getPath: () => getPath(),
-    isInApplicationsFolder: () => isInApplicationsFolder(),
-    moveToApplicationsFolder: () => moveToApplicationsFolder(),
+    getPath: () => getPathMock(),
+    isInApplicationsFolder: () => isInApplicationsFolderMock(),
+    moveToApplicationsFolder: () => moveToApplicationsFolderMock(),
   },
-  dialog: { showMessageBox: () => showMessageBox() },
+  dialog: { showMessageBox: () => showMessageBoxMock() },
 }));
 
-const logError = jest.fn();
+const logErrorMock = jest.fn();
 jest.mock('../shared/logger', () => ({
-  logError: (...a: unknown[]) => logError(...a),
+  logError: (...a: unknown[]) => logErrorMock(...a),
 }));
 
 let mac = true;
@@ -54,28 +54,28 @@ describe('main/first-run', () => {
   });
 
   it('creates first-run marker when not existing and returns true', async () => {
-    existsSync.mockReturnValueOnce(false); // marker absent
-    existsSync.mockReturnValueOnce(false); // folder absent
+    existsSyncMock.mockReturnValueOnce(false); // marker absent
+    existsSyncMock.mockReturnValueOnce(false); // folder absent
     await onFirstRunMaybe();
-    expect(mkdirSync).toHaveBeenCalledWith(path.dirname(configPath()));
-    expect(writeFileSync).toHaveBeenCalledWith(configPath(), '');
+    expect(mkdirSyncMock).toHaveBeenCalledWith(path.dirname(configPath()));
+    expect(writeFileSyncMock).toHaveBeenCalledWith(configPath(), '');
   });
 
   it('skips writing when marker exists', async () => {
-    existsSync.mockReturnValueOnce(true); // marker present
+    existsSyncMock.mockReturnValueOnce(true); // marker present
     await onFirstRunMaybe();
-    expect(writeFileSync).not.toHaveBeenCalled();
-    expect(mkdirSync).not.toHaveBeenCalled();
+    expect(writeFileSyncMock).not.toHaveBeenCalled();
+    expect(mkdirSyncMock).not.toHaveBeenCalled();
   });
 
   it('handles fs write error gracefully', async () => {
-    existsSync.mockReturnValueOnce(false); // marker absent
-    existsSync.mockReturnValueOnce(true); // folder exists
-    writeFileSync.mockImplementation(() => {
+    existsSyncMock.mockReturnValueOnce(false); // marker absent
+    existsSyncMock.mockReturnValueOnce(true); // folder exists
+    writeFileSyncMock.mockImplementation(() => {
       throw new Error('fail');
     });
     await onFirstRunMaybe();
-    expect(logError).toHaveBeenCalledWith(
+    expect(logErrorMock).toHaveBeenCalledWith(
       'isFirstRun',
       'Unable to write firstRun file',
       expect.any(Error),
@@ -83,26 +83,26 @@ describe('main/first-run', () => {
   });
 
   it('prompts and moves app on macOS when user accepts', async () => {
-    existsSync.mockReturnValueOnce(false); // marker
-    existsSync.mockReturnValueOnce(false); // folder
-    showMessageBox.mockResolvedValueOnce({ response: 0 });
+    existsSyncMock.mockReturnValueOnce(false); // marker
+    existsSyncMock.mockReturnValueOnce(false); // folder
+    showMessageBoxMock.mockResolvedValueOnce({ response: 0 });
     await onFirstRunMaybe();
-    expect(moveToApplicationsFolder).toHaveBeenCalled();
+    expect(moveToApplicationsFolderMock).toHaveBeenCalled();
   });
 
   it('does not move when user declines', async () => {
-    existsSync.mockReturnValueOnce(false);
-    existsSync.mockReturnValueOnce(false);
-    showMessageBox.mockResolvedValueOnce({ response: 1 });
+    existsSyncMock.mockReturnValueOnce(false);
+    existsSyncMock.mockReturnValueOnce(false);
+    showMessageBoxMock.mockResolvedValueOnce({ response: 1 });
     await onFirstRunMaybe();
-    expect(moveToApplicationsFolder).not.toHaveBeenCalled();
+    expect(moveToApplicationsFolderMock).not.toHaveBeenCalled();
   });
 
   it('skips prompt on non-macOS', async () => {
     mac = false;
-    existsSync.mockReturnValueOnce(false);
-    existsSync.mockReturnValueOnce(false);
+    existsSyncMock.mockReturnValueOnce(false);
+    existsSyncMock.mockReturnValueOnce(false);
     await onFirstRunMaybe();
-    expect(showMessageBox).not.toHaveBeenCalled();
+    expect(showMessageBoxMock).not.toHaveBeenCalled();
   });
 });
