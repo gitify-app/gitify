@@ -187,9 +187,8 @@ describe('main/updater.ts', () => {
       jest.useFakeTimers();
       try {
         await updater.start();
-        (
-          menuBuilder.setNoUpdateAvailableMenuVisibility as jest.Mock
-        ).mockClear();
+
+        menuBuilder.setNoUpdateAvailableMenuVisibility.mockClear();
 
         emit('update-not-available');
         // Immediately shows the message
@@ -211,9 +210,7 @@ describe('main/updater.ts', () => {
       jest.useFakeTimers();
       try {
         await updater.start();
-        (
-          menuBuilder.setNoUpdateAvailableMenuVisibility as jest.Mock
-        ).mockClear();
+        menuBuilder.setNoUpdateAvailableMenuVisibility.mockClear();
 
         emit('update-not-available');
         // Message shown
@@ -227,16 +224,14 @@ describe('main/updater.ts', () => {
           menuBuilder.setNoUpdateAvailableMenuVisibility,
         ).toHaveBeenLastCalledWith(false);
 
-        const callsBefore = (
-          menuBuilder.setNoUpdateAvailableMenuVisibility as jest.Mock
-        ).mock.calls.length;
+        const callsBefore =
+          menuBuilder.setNoUpdateAvailableMenuVisibility.mock.calls.length;
         jest.advanceTimersByTime(
           APPLICATION.UPDATE_NOT_AVAILABLE_DISPLAY_MS * 2,
         );
         // No additional hide call due to cleared timeout
         expect(
-          (menuBuilder.setNoUpdateAvailableMenuVisibility as jest.Mock).mock
-            .calls.length,
+          menuBuilder.setNoUpdateAvailableMenuVisibility.mock.calls.length,
         ).toBe(callsBefore);
       } finally {
         jest.useRealTimers();
