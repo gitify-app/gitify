@@ -15,7 +15,7 @@ jest.mock('react-router-dom', () => ({
 
 describe('renderer/components/Sidebar.tsx', () => {
   const mockFetchNotifications = jest.fn();
-  const mockOpenExternalLink = jest
+  const openExternalLinkSpy = jest
     .spyOn(comms, 'openExternalLink')
     .mockImplementation();
 
@@ -61,7 +61,8 @@ describe('renderer/components/Sidebar.tsx', () => {
 
     await userEvent.click(screen.getByTestId('sidebar-home'));
 
-    expect(mockNavigate).toHaveBeenNthCalledWith(1, '/', { replace: true });
+    expect(mockNavigate).toHaveBeenCalledTimes(1);
+    expect(mockNavigate).toHaveBeenCalledWith('/', { replace: true });
   });
 
   describe('notifications icon', () => {
@@ -77,8 +78,8 @@ describe('renderer/components/Sidebar.tsx', () => {
 
       await userEvent.click(screen.getByTestId('sidebar-notifications'));
 
-      expect(mockOpenExternalLink).toHaveBeenCalledTimes(1);
-      expect(mockOpenExternalLink).toHaveBeenCalledWith(
+      expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
+      expect(openExternalLinkSpy).toHaveBeenCalledWith(
         'https://github.com/notifications',
       );
     });
@@ -125,7 +126,8 @@ describe('renderer/components/Sidebar.tsx', () => {
 
       await userEvent.click(screen.getByTestId('sidebar-filter-notifications'));
 
-      expect(mockNavigate).toHaveBeenNthCalledWith(1, '/filters');
+      expect(mockNavigate).toHaveBeenCalledTimes(1);
+      expect(mockNavigate).toHaveBeenCalledWith('/filters');
     });
 
     it('go to the home if filters path already shown', async () => {
@@ -140,7 +142,8 @@ describe('renderer/components/Sidebar.tsx', () => {
 
       await userEvent.click(screen.getByTestId('sidebar-filter-notifications'));
 
-      expect(mockNavigate).toHaveBeenNthCalledWith(1, '/', { replace: true });
+      expect(mockNavigate).toHaveBeenCalledTimes(1);
+      expect(mockNavigate).toHaveBeenCalledWith('/', { replace: true });
     });
   });
 
@@ -158,8 +161,8 @@ describe('renderer/components/Sidebar.tsx', () => {
 
       await userEvent.click(screen.getByTestId('sidebar-my-issues'));
 
-      expect(mockOpenExternalLink).toHaveBeenCalledTimes(1);
-      expect(mockOpenExternalLink).toHaveBeenCalledWith(
+      expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
+      expect(openExternalLinkSpy).toHaveBeenCalledWith(
         'https://github.com/issues',
       );
     });
@@ -177,8 +180,8 @@ describe('renderer/components/Sidebar.tsx', () => {
 
       await userEvent.click(screen.getByTestId('sidebar-my-pull-requests'));
 
-      expect(mockOpenExternalLink).toHaveBeenCalledTimes(1);
-      expect(mockOpenExternalLink).toHaveBeenCalledWith(
+      expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
+      expect(openExternalLinkSpy).toHaveBeenCalledWith(
         'https://github.com/pulls',
       );
     });
@@ -235,7 +238,8 @@ describe('renderer/components/Sidebar.tsx', () => {
 
       await userEvent.click(screen.getByTestId('sidebar-settings'));
 
-      expect(mockNavigate).toHaveBeenNthCalledWith(1, '/settings');
+      expect(mockNavigate).toHaveBeenCalledTimes(1);
+      expect(mockNavigate).toHaveBeenCalledWith('/settings');
     });
 
     it('go to the home if settings path already shown', async () => {
@@ -252,12 +256,13 @@ describe('renderer/components/Sidebar.tsx', () => {
       await userEvent.click(screen.getByTestId('sidebar-settings'));
 
       expect(mockFetchNotifications).toHaveBeenCalledTimes(1);
-      expect(mockNavigate).toHaveBeenNthCalledWith(1, '/', { replace: true });
+      expect(mockNavigate).toHaveBeenCalledTimes(1);
+      expect(mockNavigate).toHaveBeenCalledWith('/', { replace: true });
     });
   });
 
   it('should quit the app', async () => {
-    const mockQuitApp = jest.spyOn(comms, 'quitApp');
+    const quitAppSpy = jest.spyOn(comms, 'quitApp').mockImplementation();
 
     renderWithAppContext(
       <MemoryRouter>
@@ -270,6 +275,6 @@ describe('renderer/components/Sidebar.tsx', () => {
 
     await userEvent.click(screen.getByTestId('sidebar-quit'));
 
-    expect(mockQuitApp).toHaveBeenCalledTimes(1);
+    expect(quitAppSpy).toHaveBeenCalledTimes(1);
   });
 });

@@ -33,7 +33,7 @@ describe('renderer/components/settings/SettingsFooter.tsx', () => {
   });
 
   it('should open release notes', async () => {
-    const mockOpenExternalLink = jest
+    const openExternalLinkSpy = jest
       .spyOn(comms, 'openExternalLink')
       .mockImplementation();
 
@@ -43,8 +43,8 @@ describe('renderer/components/settings/SettingsFooter.tsx', () => {
 
     await userEvent.click(screen.getByTestId('settings-release-notes'));
 
-    expect(mockOpenExternalLink).toHaveBeenCalledTimes(1);
-    expect(mockOpenExternalLink).toHaveBeenCalledWith(
+    expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
+    expect(openExternalLinkSpy).toHaveBeenCalledWith(
       'https://github.com/gitify-app/gitify/releases/tag/v0.0.1',
     );
   });
@@ -60,7 +60,7 @@ describe('renderer/components/settings/SettingsFooter.tsx', () => {
   });
 
   it('should quit the app', async () => {
-    const mockQuitApp = jest.spyOn(comms, 'quitApp');
+    const quitAppSpy = jest.spyOn(comms, 'quitApp').mockImplementation();
 
     await act(async () => {
       renderWithAppContext(<SettingsFooter />);
@@ -68,6 +68,6 @@ describe('renderer/components/settings/SettingsFooter.tsx', () => {
 
     await userEvent.click(screen.getByTestId('settings-quit'));
 
-    expect(mockQuitApp).toHaveBeenCalledTimes(1);
+    expect(quitAppSpy).toHaveBeenCalledTimes(1);
   });
 });

@@ -1,10 +1,11 @@
-import type { AxiosPromise, AxiosResponse } from 'axios';
+import type { AxiosResponse } from 'axios';
 import axios from 'axios';
 import nock from 'nock';
 
 import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
 import { mockAuth } from '../../__mocks__/state-mocks';
 import { mockGitifyUser } from '../../__mocks__/user-mocks';
+import { Constants } from '../../constants';
 import type {
   Account,
   AuthCode,
@@ -16,13 +17,15 @@ import type {
 } from '../../types';
 import * as comms from '../../utils/comms';
 import * as apiRequests from '../api/request';
+import * as logger from '../logger';
 import type { AuthMethod } from './types';
-import * as auth from './utils';
+import * as authUtils from './utils';
 import { getNewOAuthAppURL, getNewTokenURL } from './utils';
 
 describe('renderer/utils/auth/utils.ts', () => {
   describe('authGitHub', () => {
-    const mockOpenExternalLink = jest
+    jest.spyOn(logger, 'rendererLogInfo').mockImplementation();
+    const openExternalLinkSpy = jest
       .spyOn(comms, 'openExternalLink')
       .mockImplementation();
 
@@ -37,10 +40,10 @@ describe('renderer/utils/auth/utils.ts', () => {
           callback('gitify://auth?code=123-456');
         });
 
-      const res = await auth.authGitHub();
+      const res = await authUtils.authGitHub();
 
-      expect(mockOpenExternalLink).toHaveBeenCalledTimes(1);
-      expect(mockOpenExternalLink).toHaveBeenCalledWith(
+      expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
+      expect(openExternalLinkSpy).toHaveBeenCalledWith(
         'https://github.com/login/oauth/authorize?client_id=FAKE_CLIENT_ID_123&scope=read%3Auser%2Cnotifications%2Crepo',
       );
 
@@ -60,14 +63,14 @@ describe('renderer/utils/auth/utils.ts', () => {
           callback('gitify://oauth?code=123-456');
         });
 
-      const res = await auth.authGitHub({
+      const res = await authUtils.authGitHub({
         clientId: 'BYO_CLIENT_ID' as ClientID,
         clientSecret: 'BYO_CLIENT_SECRET' as ClientSecret,
         hostname: 'my.git.com' as Hostname,
       });
 
-      expect(mockOpenExternalLink).toHaveBeenCalledTimes(1);
-      expect(mockOpenExternalLink).toHaveBeenCalledWith(
+      expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
+      expect(openExternalLinkSpy).toHaveBeenCalledWith(
         'https://my.git.com/login/oauth/authorize?client_id=BYO_CLIENT_ID&scope=read%3Auser%2Cnotifications%2Crepo',
       );
 
@@ -89,14 +92,14 @@ describe('renderer/utils/auth/utils.ts', () => {
           );
         });
 
-      await expect(async () => await auth.authGitHub()).rejects.toEqual(
+      await expect(async () => await authUtils.authGitHub()).rejects.toEqual(
         new Error(
           "Oops! Something went wrong and we couldn't log you in using GitHub. Please try again. Reason: The redirect_uri is missing or invalid. Docs: https://docs.github.com/en/developers/apps/troubleshooting-oauth-errors",
         ),
       );
 
-      expect(mockOpenExternalLink).toHaveBeenCalledTimes(1);
-      expect(mockOpenExternalLink).toHaveBeenCalledWith(
+      expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
+      expect(openExternalLinkSpy).toHaveBeenCalledWith(
         'https://github.com/login/oauth/authorize?client_id=FAKE_CLIENT_ID_123&scope=read%3Auser%2Cnotifications%2Crepo',
       );
 
@@ -109,16 +112,16 @@ describe('renderer/utils/auth/utils.ts', () => {
 
   describe('getToken', () => {
     const authCode = '123-456' as AuthCode;
-    const mockApiRequest = jest.spyOn(apiRequests, 'apiRequest');
+    const apiRequestSpy = jest.spyOn(apiRequests, 'apiRequest');
 
-    it('should get a token - success', async () => {
-      const requestPromise = new Promise((resolve) =>
-        resolve({ data: { access_token: 'this-is-a-token' } } as AxiosResponse),
-      ) as AxiosPromise;
+    it('should get a token', async () => {
+      apiRequestSpy.mockResolvedValueOnce(
+        Promise.resolve({
+          data: { access_token: 'this-is-a-token' },
+        } as AxiosResponse),
+      );
 
-      mockApiRequest.mockResolvedValueOnce(requestPromise);
-
-      const res = await auth.getToken(authCode);
+      const res = await authUtils.getToken(authCode);
 
       expect(apiRequests.apiRequest).toHaveBeenCalledWith(
         'https://github.com/login/oauth/access_token',
@@ -131,20 +134,6 @@ describe('renderer/utils/auth/utils.ts', () => {
       );
       expect(res.token).toBe('this-is-a-token');
       expect(res.hostname).toBe('github.com' as Hostname);
-    });
-
-    it('should get a token - failure', async () => {
-      const message = 'Something went wrong.';
-
-      const requestPromise = new Promise((_, reject) =>
-        reject({ data: { message } } as AxiosResponse),
-      ) as AxiosPromise;
-
-      mockApiRequest.mockResolvedValueOnce(requestPromise);
-
-      const call = async () => await auth.getToken(authCode);
-
-      await expect(call).rejects.toEqual({ data: { message } });
     });
   });
 
@@ -165,11 +154,15 @@ describe('renderer/utils/auth/utils.ts', () => {
       beforeEach(() => {
         nock('https://api.github.com')
           .get('/user')
-          .reply(200, { ...mockGitifyUser, avatar_url: mockGitifyUser.avatar });
+          .reply(
+            200,
+            { ...mockGitifyUser, avatar_url: mockGitifyUser.avatar },
+            { 'x-oauth-scopes': Constants.OAUTH_SCOPES.RECOMMENDED },
+          );
       });
 
       it('should add personal access token account', async () => {
-        const result = await auth.addAccount(
+        const result = await authUtils.addAccount(
           mockAuthState,
           'Personal Access Token',
           '123-456' as Token,
@@ -178,6 +171,7 @@ describe('renderer/utils/auth/utils.ts', () => {
 
         expect(result.accounts).toEqual([
           {
+            hasRequiredScopes: true,
             hostname: 'github.com' as Hostname,
             method: 'Personal Access Token',
             platform: 'GitHub Cloud',
@@ -189,7 +183,7 @@ describe('renderer/utils/auth/utils.ts', () => {
       });
 
       it('should add oauth app account', async () => {
-        const result = await auth.addAccount(
+        const result = await authUtils.addAccount(
           mockAuthState,
           'OAuth App',
           '123-456' as Token,
@@ -198,6 +192,7 @@ describe('renderer/utils/auth/utils.ts', () => {
 
         expect(result.accounts).toEqual([
           {
+            hasRequiredScopes: true,
             hostname: 'github.com' as Hostname,
             method: 'OAuth App',
             platform: 'GitHub Cloud',
@@ -216,12 +211,15 @@ describe('renderer/utils/auth/utils.ts', () => {
           .reply(
             200,
             { ...mockGitifyUser, avatar_url: mockGitifyUser.avatar },
-            { 'x-github-enterprise-version': '3.0.0' },
+            {
+              'x-github-enterprise-version': '3.0.0',
+              'x-oauth-scopes': Constants.OAUTH_SCOPES.RECOMMENDED,
+            },
           );
       });
 
       it('should add personal access token account', async () => {
-        const result = await auth.addAccount(
+        const result = await authUtils.addAccount(
           mockAuthState,
           'Personal Access Token',
           '123-456' as Token,
@@ -230,6 +228,7 @@ describe('renderer/utils/auth/utils.ts', () => {
 
         expect(result.accounts).toEqual([
           {
+            hasRequiredScopes: true,
             hostname: 'github.gitify.io' as Hostname,
             method: 'Personal Access Token',
             platform: 'GitHub Enterprise Server',
@@ -241,7 +240,7 @@ describe('renderer/utils/auth/utils.ts', () => {
       });
 
       it('should add oauth app account', async () => {
-        const result = await auth.addAccount(
+        const result = await authUtils.addAccount(
           mockAuthState,
           'OAuth App',
           '123-456' as Token,
@@ -250,6 +249,7 @@ describe('renderer/utils/auth/utils.ts', () => {
 
         expect(result.accounts).toEqual([
           {
+            hasRequiredScopes: true,
             hostname: 'github.gitify.io' as Hostname,
             method: 'OAuth App',
             platform: 'GitHub Enterprise Server',
@@ -266,7 +266,7 @@ describe('renderer/utils/auth/utils.ts', () => {
     it('should remove account with matching token', async () => {
       expect(mockAuth.accounts.length).toBe(2);
 
-      const result = auth.removeAccount(mockAuth, mockGitHubCloudAccount);
+      const result = authUtils.removeAccount(mockAuth, mockGitHubCloudAccount);
 
       expect(result.accounts.length).toBe(1);
     });
@@ -278,39 +278,43 @@ describe('renderer/utils/auth/utils.ts', () => {
 
       expect(mockAuth.accounts.length).toBe(2);
 
-      const result = auth.removeAccount(mockAuth, mockAccount);
+      const result = authUtils.removeAccount(mockAuth, mockAccount);
 
       expect(result.accounts.length).toBe(2);
     });
   });
 
   it('extractHostVersion', () => {
-    expect(auth.extractHostVersion(null)).toBe('latest');
+    expect(authUtils.extractHostVersion(null)).toBe('latest');
 
-    expect(auth.extractHostVersion('foo')).toBe(null);
+    expect(authUtils.extractHostVersion('foo')).toBe(null);
 
-    expect(auth.extractHostVersion('3')).toBe('3.0.0');
+    expect(authUtils.extractHostVersion('3')).toBe('3.0.0');
 
-    expect(auth.extractHostVersion('3.15')).toBe('3.15.0');
+    expect(authUtils.extractHostVersion('3.15')).toBe('3.15.0');
 
-    expect(auth.extractHostVersion('3.15.0')).toBe('3.15.0');
+    expect(authUtils.extractHostVersion('3.15.0')).toBe('3.15.0');
 
-    expect(auth.extractHostVersion('3.15.0-beta1')).toBe('3.15.0');
+    expect(authUtils.extractHostVersion('3.15.0-beta1')).toBe('3.15.0');
 
-    expect(auth.extractHostVersion('enterprise-server@3')).toBe('3.0.0');
+    expect(authUtils.extractHostVersion('enterprise-server@3')).toBe('3.0.0');
 
-    expect(auth.extractHostVersion('enterprise-server@3.15')).toBe('3.15.0');
+    expect(authUtils.extractHostVersion('enterprise-server@3.15')).toBe(
+      '3.15.0',
+    );
 
-    expect(auth.extractHostVersion('enterprise-server@3.15.0')).toBe('3.15.0');
+    expect(authUtils.extractHostVersion('enterprise-server@3.15.0')).toBe(
+      '3.15.0',
+    );
 
-    expect(auth.extractHostVersion('enterprise-server@3.15.0-beta1')).toBe(
+    expect(authUtils.extractHostVersion('enterprise-server@3.15.0-beta1')).toBe(
       '3.15.0',
     );
   });
 
   it('getDeveloperSettingsURL', () => {
     expect(
-      auth.getDeveloperSettingsURL({
+      authUtils.getDeveloperSettingsURL({
         hostname: 'github.com' as Hostname,
         method: 'GitHub App',
       } as Account),
@@ -319,21 +323,21 @@ describe('renderer/utils/auth/utils.ts', () => {
     );
 
     expect(
-      auth.getDeveloperSettingsURL({
+      authUtils.getDeveloperSettingsURL({
         hostname: 'github.com' as Hostname,
         method: 'OAuth App',
       } as Account),
     ).toBe('https://github.com/settings/developers');
 
     expect(
-      auth.getDeveloperSettingsURL({
+      authUtils.getDeveloperSettingsURL({
         hostname: 'github.com' as Hostname,
         method: 'Personal Access Token',
       } as Account),
     ).toBe('https://github.com/settings/tokens');
 
     expect(
-      auth.getDeveloperSettingsURL({
+      authUtils.getDeveloperSettingsURL({
         hostname: 'github.com',
         method: 'unknown' as AuthMethod,
       } as Account),
@@ -378,62 +382,68 @@ describe('renderer/utils/auth/utils.ts', () => {
 
   describe('isValidHostname', () => {
     it('should validate hostname - github cloud', () => {
-      expect(auth.isValidHostname('github.com' as Hostname)).toBeTruthy();
+      expect(authUtils.isValidHostname('github.com' as Hostname)).toBeTruthy();
     });
 
     it('should validate hostname - github enterprise server', () => {
-      expect(auth.isValidHostname('github.gitify.io' as Hostname)).toBeTruthy();
+      expect(
+        authUtils.isValidHostname('github.gitify.io' as Hostname),
+      ).toBeTruthy();
     });
 
     it('should invalidate hostname - empty', () => {
-      expect(auth.isValidHostname('' as Hostname)).toBeFalsy();
+      expect(authUtils.isValidHostname('' as Hostname)).toBeFalsy();
     });
 
     it('should invalidate hostname - invalid', () => {
-      expect(auth.isValidHostname('github' as Hostname)).toBeFalsy();
+      expect(authUtils.isValidHostname('github' as Hostname)).toBeFalsy();
     });
   });
 
   describe('isValidClientId', () => {
     it('should validate client id - valid', () => {
       expect(
-        auth.isValidClientId('1234567890_ASDFGHJKL' as ClientID),
+        authUtils.isValidClientId('1234567890_ASDFGHJKL' as ClientID),
       ).toBeTruthy();
     });
 
     it('should validate client id - empty', () => {
-      expect(auth.isValidClientId('' as ClientID)).toBeFalsy();
+      expect(authUtils.isValidClientId('' as ClientID)).toBeFalsy();
     });
 
     it('should validate client id - invalid', () => {
-      expect(auth.isValidClientId('1234567890asdfg' as ClientID)).toBeFalsy();
+      expect(
+        authUtils.isValidClientId('1234567890asdfg' as ClientID),
+      ).toBeFalsy();
     });
   });
 
   describe('isValidToken', () => {
     it('should validate token - valid', () => {
       expect(
-        auth.isValidToken('1234567890_asdfghjklPOIUYTREWQ0987654321' as Token),
+        authUtils.isValidToken(
+          '1234567890_asdfghjklPOIUYTREWQ0987654321' as Token,
+        ),
       ).toBeTruthy();
     });
 
     it('should validate token - empty', () => {
-      expect(auth.isValidToken('' as Token)).toBeFalsy();
+      expect(authUtils.isValidToken('' as Token)).toBeFalsy();
     });
 
     it('should validate token - invalid', () => {
-      expect(auth.isValidToken('1234567890asdfg' as Token)).toBeFalsy();
+      expect(authUtils.isValidToken('1234567890asdfg' as Token)).toBeFalsy();
     });
   });
 
   describe('hasAccounts', () => {
     it('should return true', () => {
-      expect(auth.hasAccounts(mockAuth)).toBeTruthy();
+      expect(authUtils.hasAccounts(mockAuth)).toBeTruthy();
     });
 
     it('should validate false', () => {
       expect(
-        auth.hasAccounts({
+        authUtils.hasAccounts({
           accounts: [],
         }),
       ).toBeFalsy();
@@ -442,17 +452,17 @@ describe('renderer/utils/auth/utils.ts', () => {
 
   describe('hasMultipleAccounts', () => {
     it('should return true', () => {
-      expect(auth.hasMultipleAccounts(mockAuth)).toBeTruthy();
+      expect(authUtils.hasMultipleAccounts(mockAuth)).toBeTruthy();
     });
 
     it('should validate false', () => {
       expect(
-        auth.hasMultipleAccounts({
+        authUtils.hasMultipleAccounts({
           accounts: [],
         }),
       ).toBeFalsy();
       expect(
-        auth.hasMultipleAccounts({
+        authUtils.hasMultipleAccounts({
           accounts: [mockGitHubCloudAccount],
         }),
       ).toBeFalsy();

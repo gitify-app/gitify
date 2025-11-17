@@ -196,10 +196,10 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
             </div>
           </div>
           <div>
-            Notification Row
+            NotificationRow
           </div>
           <div>
-            Notification Row
+            NotificationRow
           </div>
         </div>
       </div>
@@ -397,10 +397,10 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
           </div>
         </div>
         <div>
-          Notification Row
+          NotificationRow
         </div>
         <div>
-          Notification Row
+          NotificationRow
         </div>
       </div>
     </div>
@@ -655,10 +655,10 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
             </div>
           </div>
           <div>
-            Notification Row
+            NotificationRow
           </div>
           <div>
-            Notification Row
+            NotificationRow
           </div>
         </div>
       </div>
@@ -856,10 +856,10 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
           </div>
         </div>
         <div>
-          Notification Row
+          NotificationRow
         </div>
         <div>
-          Notification Row
+          NotificationRow
         </div>
       </div>
     </div>
@@ -1322,10 +1322,10 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
             </div>
           </div>
           <div>
-            Notification Row
+            NotificationRow
           </div>
           <div>
-            Notification Row
+            NotificationRow
           </div>
         </div>
       </div>
@@ -1530,10 +1530,10 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
           </div>
         </div>
         <div>
-          Notification Row
+          NotificationRow
         </div>
         <div>
-          Notification Row
+          NotificationRow
         </div>
       </div>
     </div>
@@ -1795,10 +1795,10 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
             </div>
           </div>
           <div>
-            Notification Row
+            NotificationRow
           </div>
           <div>
-            Notification Row
+            NotificationRow
           </div>
         </div>
       </div>
@@ -2003,10 +2003,10 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
           </div>
         </div>
         <div>
-          Notification Row
+          NotificationRow
         </div>
         <div>
-          Notification Row
+          NotificationRow
         </div>
       </div>
     </div>

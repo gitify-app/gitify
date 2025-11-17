@@ -13,7 +13,7 @@ import * as links from '../../utils/links';
 import { AccountNotifications } from './AccountNotifications';
 
 jest.mock('./RepositoryNotifications', () => ({
-  RepositoryNotifications: () => <div>Repository Notifications</div>,
+  RepositoryNotifications: () => <div>RepositoryNotifications</div>,
 }));
 
 describe('renderer/components/notifications/AccountNotifications.tsx', () => {
@@ -113,7 +113,7 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
   });
 
   it('should open profile when clicked', async () => {
-    const mockOpenAccountProfile = jest
+    const openAccountProfileSpy = jest
       .spyOn(links, 'openAccountProfile')
       .mockImplementation();
 
@@ -128,12 +128,12 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
 
     await userEvent.click(screen.getByTestId('account-profile'));
 
-    expect(mockOpenAccountProfile).toHaveBeenCalledTimes(1);
-    expect(mockOpenAccountProfile).toHaveBeenCalledWith(mockGitHubCloudAccount);
+    expect(openAccountProfileSpy).toHaveBeenCalledTimes(1);
+    expect(openAccountProfileSpy).toHaveBeenCalledWith(mockGitHubCloudAccount);
   });
 
   it('should open my issues when clicked', async () => {
-    const mockOpenGitHubIssues = jest
+    const openGitHubIssuesSpy = jest
       .spyOn(links, 'openGitHubIssues')
       .mockImplementation();
 
@@ -148,14 +148,14 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
 
     await userEvent.click(screen.getByTestId('account-issues'));
 
-    expect(mockOpenGitHubIssues).toHaveBeenCalledTimes(1);
-    expect(mockOpenGitHubIssues).toHaveBeenCalledWith(
+    expect(openGitHubIssuesSpy).toHaveBeenCalledTimes(1);
+    expect(openGitHubIssuesSpy).toHaveBeenCalledWith(
       mockGitHubCloudAccount.hostname,
     );
   });
 
   it('should open my pull requests when clicked', async () => {
-    const mockOpenGitHubPulls = jest
+    const openGitHubPullsSpy = jest
       .spyOn(links, 'openGitHubPulls')
       .mockImplementation();
 
@@ -170,8 +170,8 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
 
     await userEvent.click(screen.getByTestId('account-pull-requests'));
 
-    expect(mockOpenGitHubPulls).toHaveBeenCalledTimes(1);
-    expect(mockOpenGitHubPulls).toHaveBeenCalledWith(
+    expect(openGitHubPullsSpy).toHaveBeenCalledTimes(1);
+    expect(openGitHubPullsSpy).toHaveBeenCalledWith(
       mockGitHubCloudAccount.hostname,
     );
   });

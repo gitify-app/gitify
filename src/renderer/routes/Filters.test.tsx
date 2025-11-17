@@ -37,7 +37,8 @@ describe('renderer/routes/Filters.tsx', () => {
       await userEvent.click(screen.getByTestId('header-nav-back'));
 
       expect(mockFetchNotifications).toHaveBeenCalledTimes(1);
-      expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
+      expect(mockNavigate).toHaveBeenCalledTimes(1);
+      expect(mockNavigate).toHaveBeenCalledWith(-1);
     });
   });
 

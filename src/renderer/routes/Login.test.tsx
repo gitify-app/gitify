@@ -25,14 +25,15 @@ describe('renderer/routes/Login.tsx', () => {
   });
 
   it('should redirect to notifications once logged in', () => {
-    const mockShowWindow = jest.spyOn(comms, 'showWindow');
+    const showWindowSpy = jest.spyOn(comms, 'showWindow');
 
     renderWithAppContext(<LoginRoute />, {
       isLoggedIn: true,
     });
 
-    expect(mockShowWindow).toHaveBeenCalledTimes(1);
-    expect(mockNavigate).toHaveBeenNthCalledWith(1, '/', { replace: true });
+    expect(showWindowSpy).toHaveBeenCalledTimes(1);
+    expect(mockNavigate).toHaveBeenCalledTimes(1);
+    expect(mockNavigate).toHaveBeenCalledWith('/', { replace: true });
   });
 
   it('should login with github', async () => {
@@ -52,10 +53,8 @@ describe('renderer/routes/Login.tsx', () => {
 
     await userEvent.click(screen.getByTestId('login-pat'));
 
-    expect(mockNavigate).toHaveBeenNthCalledWith(
-      1,
-      '/login-personal-access-token',
-    );
+    expect(mockNavigate).toHaveBeenCalledTimes(1);
+    expect(mockNavigate).toHaveBeenCalledWith('/login-personal-access-token');
   });
 
   it('should navigate to login with oauth app', async () => {
@@ -63,6 +62,7 @@ describe('renderer/routes/Login.tsx', () => {
 
     await userEvent.click(screen.getByTestId('login-oauth-app'));
 
-    expect(mockNavigate).toHaveBeenNthCalledWith(1, '/login-oauth-app');
+    expect(mockNavigate).toHaveBeenCalledTimes(1);
+    expect(mockNavigate).toHaveBeenCalledWith('/login-oauth-app');
   });
 });

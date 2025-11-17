@@ -136,18 +136,16 @@ describe('renderer/utils/api/client.ts', () => {
 
   describe('getHtmlUrl', () => {
     it('should return the HTML URL', async () => {
-      const mockApiRequestAuth = jest.spyOn(apiRequests, 'apiRequestAuth');
+      const apiRequestAuthSpy = jest.spyOn(apiRequests, 'apiRequestAuth');
 
-      const requestPromise = new Promise((resolve) =>
-        resolve({
-          data: {
-            html_url:
-              'https://github.com/gitify-app/notifications-test/issues/785',
-          },
-        } as AxiosResponse),
-      ) as AxiosPromise;
+      const requestPromise = Promise.resolve({
+        data: {
+          html_url:
+            'https://github.com/gitify-app/notifications-test/issues/785',
+        },
+      } as AxiosResponse) as AxiosPromise;
 
-      mockApiRequestAuth.mockResolvedValue(requestPromise);
+      apiRequestAuthSpy.mockResolvedValue(requestPromise);
 
       const result = await getHtmlUrl(
         'https://api.github.com/repos/gitify-app/notifications-test/issues/785' as Link,
@@ -163,11 +161,11 @@ describe('renderer/utils/api/client.ts', () => {
         .spyOn(logger, 'rendererLogError')
         .mockImplementation();
 
-      const mockApiRequestAuth = jest.spyOn(apiRequests, 'apiRequestAuth');
+      const apiRequestAuthSpy = jest.spyOn(apiRequests, 'apiRequestAuth');
 
       const mockError = new Error('Test error');
 
-      mockApiRequestAuth.mockRejectedValue(mockError);
+      apiRequestAuthSpy.mockRejectedValue(mockError);
 
       await getHtmlUrl(
         'https://api.github.com/repos/gitify-app/gitify/issues/785' as Link,

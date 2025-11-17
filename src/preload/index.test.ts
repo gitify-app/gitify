@@ -75,7 +75,9 @@ describe('preload/index', () => {
 
   it('exposes api on window when context isolation disabled', async () => {
     await importPreload();
+
     const w = window as unknown as { gitify: Record<string, unknown> };
+
     expect(w.gitify).toBeDefined();
     expect(exposeInMainWorld).not.toHaveBeenCalled();
   });
@@ -84,7 +86,9 @@ describe('preload/index', () => {
     (process as unknown as { contextIsolated?: boolean }).contextIsolated =
       true;
     await importPreload();
+
     expect(exposeInMainWorld).toHaveBeenCalledTimes(1);
+
     const [key, api] = exposeInMainWorld.mock.calls[0];
     expect(key).toBe('gitify');
     expect(api).toHaveProperty('openExternalLink');
@@ -92,8 +96,10 @@ describe('preload/index', () => {
 
   it('tray.updateColor sends correct events', async () => {
     await importPreload();
+
     const api = (window as unknown as { gitify: TestApi }).gitify; // casting only in test boundary
     api.tray.updateColor(-1);
+
     expect(sendMainEvent).toHaveBeenNthCalledWith(
       1,
       EVENTS.UPDATE_ICON_COLOR,
@@ -103,8 +109,10 @@ describe('preload/index', () => {
 
   it('openExternalLink sends event with payload', async () => {
     await importPreload();
+
     const api = (window as unknown as { gitify: TestApi }).gitify;
     api.openExternalLink('https://example.com', true);
+
     expect(sendMainEvent).toHaveBeenCalledWith(EVENTS.OPEN_EXTERNAL, {
       url: 'https://example.com',
       activate: true,
@@ -114,8 +122,11 @@ describe('preload/index', () => {
   it('app.version returns dev in development', async () => {
     const originalEnv = process.env.NODE_ENV;
     process.env.NODE_ENV = 'development';
+
     await importPreload();
+
     const api = (window as unknown as { gitify: TestApi }).gitify;
+
     await expect(api.app.version()).resolves.toBe('dev');
     process.env.NODE_ENV = originalEnv;
   });
@@ -123,51 +134,67 @@ describe('preload/index', () => {
   it('app.version prefixes production version', async () => {
     const originalEnv = process.env.NODE_ENV;
     process.env.NODE_ENV = 'production';
+
     invokeMainEvent.mockResolvedValueOnce('1.2.3');
+
     await importPreload();
+
     const api = (window as unknown as { gitify: TestApi }).gitify;
+
     await expect(api.app.version()).resolves.toBe('v1.2.3');
     process.env.NODE_ENV = originalEnv;
   });
 
   it('onSystemThemeUpdate registers listener', async () => {
     await importPreload();
+
     const api = (window as unknown as { gitify: TestApi }).gitify;
     const callback = jest.fn();
     api.onSystemThemeUpdate(callback);
+
     expect(onRendererEvent).toHaveBeenCalledWith(
       EVENTS.UPDATE_THEME,
       expect.any(Function),
     );
+
     // Simulate event
     const listener = onRendererEvent.mock.calls[0][1];
     listener({}, 'dark');
+
     expect(callback).toHaveBeenCalledWith('dark');
   });
 
   it('raiseNativeNotification without url calls app.show', async () => {
     await importPreload();
+
     const api = (window as unknown as { gitify: TestApi }).gitify;
     api.app.show = jest.fn();
+
     const notification = api.raiseNativeNotification(
       'Title',
       'Body',
     ) as MockNotification;
+
     notification.triggerClick();
+
     expect(api.app.show).toHaveBeenCalled();
   });
 
   it('raiseNativeNotification with url hides app then opens link', async () => {
     await importPreload();
+
     const api = (window as unknown as { gitify: TestApi }).gitify;
     api.app.hide = jest.fn();
     api.openExternalLink = jest.fn();
+
     const notification = api.raiseNativeNotification(
       'Title',
       'Body',
       'https://x',
     ) as MockNotification;
+
     notification.triggerClick();
+
     expect(api.app.hide).toHaveBeenCalled();
     expect(api.openExternalLink).toHaveBeenCalledWith('https://x', true);
   });

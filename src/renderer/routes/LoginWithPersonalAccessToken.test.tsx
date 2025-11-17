@@ -1,9 +1,12 @@
-import { screen, waitFor } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { renderWithAppContext } from '../__helpers__/test-utils';
+import type { Hostname, Token } from '../types';
 import * as comms from '../utils/comms';
+import * as logger from '../utils/logger';
 import {
+  type IFormData,
   LoginWithPersonalAccessTokenRoute,
   validateForm,
 } from './LoginWithPersonalAccessToken';
@@ -16,7 +19,7 @@ jest.mock('react-router-dom', () => ({
 
 describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
   const mockLoginWithPersonalAccessToken = jest.fn();
-  const mockOpenExternalLink = jest
+  const openExternalLinkSpy = jest
     .spyOn(comms, 'openExternalLink')
     .mockImplementation();
 
@@ -35,28 +38,29 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
 
     await userEvent.click(screen.getByTestId('header-nav-back'));
 
-    expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
+    expect(mockNavigate).toHaveBeenCalledTimes(1);
+    expect(mockNavigate).toHaveBeenCalledWith(-1);
   });
 
-  it('should validate the form values', () => {
-    const emptyValues = {
-      hostname: null,
-      token: null,
-    };
+  describe('form validation', () => {
+    it('should validate the form values are not empty', () => {
+      const values: IFormData = {
+        hostname: null,
+        token: null,
+      };
+      expect(validateForm(values).hostname).toBe('Hostname is required');
+      expect(validateForm(values).token).toBe('Token is required');
+    });
 
-    let values = {
-      ...emptyValues,
-    };
-    expect(validateForm(values).hostname).toBe('Hostname is required');
-    expect(validateForm(values).token).toBe('Token is required');
+    it('should validate the form values are correct format', () => {
+      const values: IFormData = {
+        hostname: 'hello' as Hostname,
+        token: '!@£INVALID-.1' as Token,
+      };
 
-    values = {
-      ...emptyValues,
-      hostname: 'hello',
-      token: '!@£INVALID-.1',
-    };
-    expect(validateForm(values).hostname).toBe('Hostname format is invalid');
-    expect(validateForm(values).token).toBe('Token format is invalid');
+      expect(validateForm(values).hostname).toBe('Hostname format is invalid');
+      expect(validateForm(values).token).toBe('Token format is invalid');
+    });
   });
 
   describe("'Generate a PAT' button", () => {
@@ -69,7 +73,7 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
 
       await userEvent.click(screen.getByTestId('login-create-token'));
 
-      expect(mockOpenExternalLink).toHaveBeenCalledTimes(0);
+      expect(openExternalLinkSpy).toHaveBeenCalledTimes(0);
     });
 
     it('should open in browser if hostname configured', async () => {
@@ -79,7 +83,7 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
 
       await userEvent.click(screen.getByTestId('login-create-token'));
 
-      expect(mockOpenExternalLink).toHaveBeenCalledTimes(1);
+      expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -101,15 +105,15 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
 
     await userEvent.click(screen.getByTestId('login-submit'));
 
-    await waitFor(() =>
-      expect(mockLoginWithPersonalAccessToken).toHaveBeenCalledTimes(1),
-    );
-
     expect(mockLoginWithPersonalAccessToken).toHaveBeenCalledTimes(1);
-    expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
+    expect(mockNavigate).toHaveBeenCalledTimes(1);
+    expect(mockNavigate).toHaveBeenCalledWith(-1);
   });
 
   it('should login using a token - failure', async () => {
+    const rendererLogErrorSpy = jest
+      .spyOn(logger, 'rendererLogError')
+      .mockImplementation();
     mockLoginWithPersonalAccessToken.mockRejectedValueOnce(null);
 
     renderWithAppContext(<LoginWithPersonalAccessTokenRoute />, {
@@ -127,12 +131,9 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
 
     await userEvent.click(screen.getByTestId('login-submit'));
 
-    await waitFor(() =>
-      expect(mockLoginWithPersonalAccessToken).toHaveBeenCalledTimes(1),
-    );
-
     expect(mockLoginWithPersonalAccessToken).toHaveBeenCalledTimes(1);
     expect(mockNavigate).toHaveBeenCalledTimes(0);
+    expect(rendererLogErrorSpy).toHaveBeenCalledTimes(1);
   });
 
   it('should render the form with errors', async () => {
@@ -157,6 +158,6 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
 
     await userEvent.click(screen.getByTestId('login-docs'));
 
-    expect(mockOpenExternalLink).toHaveBeenCalledTimes(1);
+    expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
   });
 });

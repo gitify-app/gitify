@@ -3078,7 +3078,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             </div>
           </div>
           <div>
-            Repository Notifications
+            RepositoryNotifications
           </div>
         </div>
       </div>
@@ -3279,7 +3279,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           </div>
         </div>
         <div>
-          Repository Notifications
+          RepositoryNotifications
         </div>
       </div>
     </div>
@@ -4275,7 +4275,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
             </div>
           </div>
           <div>
-            Repository Notifications
+            RepositoryNotifications
           </div>
         </div>
       </div>
@@ -4476,7 +4476,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
           </div>
         </div>
         <div>
-          Repository Notifications
+          RepositoryNotifications
         </div>
       </div>
     </div>

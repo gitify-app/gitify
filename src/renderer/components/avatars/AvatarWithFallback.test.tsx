@@ -48,7 +48,7 @@ describe('renderer/components/avatars/AvatarWithFallback.tsx', () => {
     renderWithAppContext(<AvatarWithFallback {...props} />);
 
     // Find the avatar element by its alt text
-    const avatar = screen.getByAltText('gitify-app') as HTMLImageElement;
+    const avatar = screen.getByAltText('gitify-app');
 
     // Simulate image load error (wrapped in act via fireEvent)
     fireEvent.error(avatar);
@@ -60,7 +60,7 @@ describe('renderer/components/avatars/AvatarWithFallback.tsx', () => {
     renderWithAppContext(<AvatarWithFallback {...props} userType={'Bot'} />);
 
     // Find the avatar element by its alt text
-    const avatar = screen.getByAltText('gitify-app') as HTMLImageElement;
+    const avatar = screen.getByAltText('gitify-app');
 
     // Simulate image load error (wrapped in act via fireEvent)
     fireEvent.error(avatar);

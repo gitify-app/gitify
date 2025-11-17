@@ -35,10 +35,10 @@ import {
 import { openExternalLink } from '../utils/comms';
 import { rendererLogError } from '../utils/logger';
 
-interface IFormData {
-  hostname?: Hostname;
-  clientId?: ClientID;
-  clientSecret?: ClientSecret;
+export interface IFormData {
+  hostname: Hostname;
+  clientId: ClientID;
+  clientSecret: ClientSecret;
 }
 
 interface IFormErrors {
