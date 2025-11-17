@@ -50,7 +50,7 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
   });
 
   it('should open the browser when clicking on the repo name', async () => {
-    const mockOpenExternalLink = jest
+    const openExternalLinkSpy = jest
       .spyOn(comms, 'openExternalLink')
       .mockImplementation();
 
@@ -58,8 +58,8 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
 
     await userEvent.click(screen.getByTestId('open-repository'));
 
-    expect(mockOpenExternalLink).toHaveBeenCalledTimes(1);
-    expect(mockOpenExternalLink).toHaveBeenCalledWith(
+    expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
+    expect(openExternalLinkSpy).toHaveBeenCalledWith(
       'https://github.com/gitify-app/notifications-test',
     );
   });

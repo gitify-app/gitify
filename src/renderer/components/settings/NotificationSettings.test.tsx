@@ -245,7 +245,7 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
   });
 
   it('should open official docs for showOnlyParticipating tooltip', async () => {
-    const mockOpenExternalLink = jest
+    const openExternalLinkSpy = jest
       .spyOn(comms, 'openExternalLink')
       .mockImplementation();
 
@@ -266,8 +266,8 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
       ),
     );
 
-    expect(mockOpenExternalLink).toHaveBeenCalledTimes(1);
-    expect(mockOpenExternalLink).toHaveBeenCalledWith(
+    expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
+    expect(openExternalLinkSpy).toHaveBeenCalledWith(
       'https://docs.github.com/en/account-and-profile/managing-subscriptions-and-notifications-on-github/setting-up-notifications/configuring-notifications#about-participating-and-watching-notifications',
     );
   });

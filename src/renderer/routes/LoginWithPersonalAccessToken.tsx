@@ -35,9 +35,9 @@ import {
 import { openExternalLink } from '../utils/comms';
 import { rendererLogError } from '../utils/logger';
 
-interface IFormData {
-  token?: Token;
-  hostname?: Hostname;
+export interface IFormData {
+  token: Token;
+  hostname: Hostname;
 }
 
 interface IFormErrors {

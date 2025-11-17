@@ -1,4 +1,4 @@
-import { act, screen, waitFor } from '@testing-library/react';
+import { act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { renderWithAppContext } from '../__helpers__/test-utils';
@@ -49,17 +49,18 @@ describe('renderer/routes/Accounts.tsx', () => {
 
       await userEvent.click(screen.getByTestId('header-nav-back'));
 
-      expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
+      expect(mockNavigate).toHaveBeenCalledTimes(1);
+      expect(mockNavigate).toHaveBeenCalledWith(-1);
     });
   });
 
   describe('Account interactions', () => {
-    const mockOpenExternalLink = jest
+    const openExternalLinkSpy = jest
       .spyOn(comms, 'openExternalLink')
       .mockImplementation();
 
     it('open profile in external browser', async () => {
-      const mockOpenAccountProfile = jest
+      const openAccountProfileSpy = jest
         .spyOn(links, 'openAccountProfile')
         .mockImplementation();
 
@@ -71,8 +72,8 @@ describe('renderer/routes/Accounts.tsx', () => {
 
       await userEvent.click(screen.getByTestId('account-profile'));
 
-      expect(mockOpenAccountProfile).toHaveBeenCalledTimes(1);
-      expect(mockOpenAccountProfile).toHaveBeenCalledWith(
+      expect(openAccountProfileSpy).toHaveBeenCalledTimes(1);
+      expect(openAccountProfileSpy).toHaveBeenCalledWith(
         mockPersonalAccessTokenAccount,
       );
     });
@@ -86,8 +87,8 @@ describe('renderer/routes/Accounts.tsx', () => {
 
       await userEvent.click(screen.getByTestId('account-host'));
 
-      expect(mockOpenExternalLink).toHaveBeenCalledTimes(1);
-      expect(mockOpenExternalLink).toHaveBeenCalledWith('https://github.com');
+      expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
+      expect(openExternalLinkSpy).toHaveBeenCalledWith('https://github.com');
     });
 
     it('open developer settings in external browser', async () => {
@@ -99,8 +100,8 @@ describe('renderer/routes/Accounts.tsx', () => {
 
       await userEvent.click(screen.getByTestId('account-developer-settings'));
 
-      expect(mockOpenExternalLink).toHaveBeenCalledTimes(1);
-      expect(mockOpenExternalLink).toHaveBeenCalledWith(
+      expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
+      expect(openExternalLinkSpy).toHaveBeenCalledWith(
         'https://github.com/settings/tokens',
       );
     });
@@ -124,14 +125,14 @@ describe('renderer/routes/Accounts.tsx', () => {
 
       await userEvent.click(screen.getAllByTestId('account-missing-scopes')[0]);
 
-      expect(mockOpenExternalLink).toHaveBeenCalledTimes(1);
-      expect(mockOpenExternalLink).toHaveBeenCalledWith(
+      expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
+      expect(openExternalLinkSpy).toHaveBeenCalledWith(
         'https://github.com/settings/tokens',
       );
     });
 
     it('should set account as primary account', async () => {
-      const mockSaveState = jest
+      const saveStateSpy = jest
         .spyOn(storage, 'saveState')
         .mockImplementation();
 
@@ -153,11 +154,11 @@ describe('renderer/routes/Accounts.tsx', () => {
 
       await userEvent.click(screen.getAllByTestId('account-set-primary')[0]);
 
-      expect(mockSaveState).toHaveBeenCalled();
+      expect(saveStateSpy).toHaveBeenCalled();
     });
 
     it('should refresh account', async () => {
-      const mockRefreshAccount = jest
+      const refreshAccountSpy = jest
         .spyOn(authUtils, 'refreshAccount')
         .mockImplementation();
 
@@ -169,13 +170,11 @@ describe('renderer/routes/Accounts.tsx', () => {
 
       await userEvent.click(screen.getByTestId('account-refresh'));
 
-      expect(mockRefreshAccount).toHaveBeenCalledTimes(1);
-
-      await waitFor(() =>
-        expect(mockNavigate).toHaveBeenNthCalledWith(1, '/accounts', {
-          replace: true,
-        }),
-      );
+      expect(refreshAccountSpy).toHaveBeenCalledTimes(1);
+      expect(mockNavigate).toHaveBeenCalledTimes(1);
+      expect(mockNavigate).toHaveBeenCalledWith('/accounts', {
+        replace: true,
+      });
     });
 
     it('should logout', async () => {
@@ -191,8 +190,8 @@ describe('renderer/routes/Accounts.tsx', () => {
       await userEvent.click(screen.getByTestId('account-logout'));
 
       expect(mockLogoutFromAccount).toHaveBeenCalledTimes(1);
-
-      expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
+      expect(mockNavigate).toHaveBeenCalledTimes(1);
+      expect(mockNavigate).toHaveBeenCalledWith(-1);
     });
   });
 
@@ -223,8 +222,8 @@ describe('renderer/routes/Accounts.tsx', () => {
       await userEvent.click(screen.getByTestId('account-add-new'));
       await userEvent.click(screen.getByTestId('account-add-pat'));
 
-      expect(mockNavigate).toHaveBeenNthCalledWith(
-        1,
+      expect(mockNavigate).toHaveBeenCalledTimes(1);
+      expect(mockNavigate).toHaveBeenCalledWith(
         '/login-personal-access-token',
         {
           replace: true,
@@ -242,7 +241,8 @@ describe('renderer/routes/Accounts.tsx', () => {
       await userEvent.click(screen.getByTestId('account-add-new'));
       await userEvent.click(screen.getByTestId('account-add-oauth-app'));
 
-      expect(mockNavigate).toHaveBeenNthCalledWith(1, '/login-oauth-app', {
+      expect(mockNavigate).toHaveBeenCalledTimes(1);
+      expect(mockNavigate).toHaveBeenCalledWith('/login-oauth-app', {
         replace: true,
       });
     });

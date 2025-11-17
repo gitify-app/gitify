@@ -53,6 +53,9 @@ describe('renderer/utils/notifications/notifications.ts', () => {
     const rendererLogErrorSpy = jest
       .spyOn(logger, 'rendererLogError')
       .mockImplementation();
+    const rendererLogWarnSpy = jest
+      .spyOn(logger, 'rendererLogWarn')
+      .mockImplementation();
 
     const mockError = new Error('Test error');
     const mockNotification = createPartialMockNotification({
@@ -76,6 +79,11 @@ describe('renderer/utils/notifications/notifications.ts', () => {
       'failed to enrich notification details for',
       mockError,
       mockNotification,
+    );
+
+    expect(rendererLogWarnSpy).toHaveBeenCalledWith(
+      'enrichNotification',
+      'Continuing with base notification details',
     );
   });
 

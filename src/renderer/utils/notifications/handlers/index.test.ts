@@ -31,13 +31,14 @@ describe('renderer/utils/notifications/handlers/index.ts', () => {
       ['WorkflowRun', workflowRunHandler],
     ];
 
-    it.each(
-      cases,
-    )('returns expected handler instance for %s', (type, expected) => {
-      const notification = createPartialMockNotification({ type });
-      const handler = createNotificationHandler(notification);
-      expect(handler).toBe(expected);
-    });
+    it.each(cases)(
+      'returns expected handler instance for %s',
+      (type, expected) => {
+        const notification = createPartialMockNotification({ type });
+        const handler = createNotificationHandler(notification);
+        expect(handler).toBe(expected);
+      },
+    );
 
     it('falls back to default handler for unknown type', () => {
       const notification = createPartialMockNotification({

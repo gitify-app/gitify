@@ -11,18 +11,17 @@ import * as links from '../../utils/links';
 import { NotificationRow } from './NotificationRow';
 
 describe('renderer/components/notifications/NotificationRow.tsx', () => {
-  jest.spyOn(links, 'openNotification');
+  jest.spyOn(links, 'openNotification').mockImplementation();
   jest.spyOn(comms, 'openExternalLink').mockImplementation();
+  jest
+    .spyOn(globalThis.Date, 'now')
+    .mockImplementation(() => new Date('2024').valueOf());
 
   afterEach(() => {
     jest.clearAllMocks();
   });
 
   it('should render itself & its children - group by date', async () => {
-    jest
-      .spyOn(globalThis.Date, 'now')
-      .mockImplementation(() => new Date('2024').valueOf());
-
     const props = {
       notification: mockSingleNotification,
       account: mockGitHubCloudAccount,
@@ -36,10 +35,6 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
   });
 
   it('should render itself & its children - group by repositories', async () => {
-    jest
-      .spyOn(globalThis.Date, 'now')
-      .mockImplementation(() => new Date('2024').valueOf());
-
     const props = {
       notification: mockSingleNotification,
       account: mockGitHubCloudAccount,
@@ -53,10 +48,6 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
   });
 
   it('should render itself & its children - hide numbers', async () => {
-    jest
-      .spyOn(globalThis.Date, 'now')
-      .mockImplementation(() => new Date('2024').valueOf());
-
     const props = {
       notification: mockSingleNotification,
       account: mockGitHubCloudAccount,
@@ -70,10 +61,6 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
   });
 
   it('should render itself & its children - notification is read', async () => {
-    jest
-      .spyOn(globalThis.Date, 'now')
-      .mockImplementation(() => new Date('2024').valueOf());
-
     const props = {
       notification: {
         ...mockSingleNotification,

@@ -10,15 +10,15 @@ import * as comms from '../../utils/comms';
 import { NotificationFooter } from './NotificationFooter';
 
 describe('renderer/components/notifications/NotificationFooter.tsx', () => {
+  jest
+    .spyOn(globalThis.Date, 'now')
+    .mockImplementation(() => new Date('2024').valueOf());
+
   afterEach(() => {
     jest.clearAllMocks();
   });
 
   it('should render itself & its children', async () => {
-    jest
-      .spyOn(globalThis.Date, 'now')
-      .mockImplementation(() => new Date('2024').valueOf());
-
     const props = {
       notification: mockSingleNotification,
     };
@@ -29,10 +29,6 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
   });
 
   it('should render itself & its children when last_read_at is null', async () => {
-    jest
-      .spyOn(globalThis.Date, 'now')
-      .mockImplementation(() => new Date('2024').valueOf());
-
     const mockNotification = mockSingleNotification;
     mockNotification.last_read_at = null;
 
@@ -47,10 +43,6 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
 
   describe('security alerts should use github icon for avatar', () => {
     it('Repository Dependabot Alerts Thread', async () => {
-      jest
-        .spyOn(globalThis.Date, 'now')
-        .mockImplementation(() => new Date('2024').valueOf());
-
       const mockNotification = mockSingleNotification;
       mockNotification.subject.type = 'RepositoryDependabotAlertsThread';
 
@@ -64,10 +56,6 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
     });
 
     it('Repository Vulnerability Alert', async () => {
-      jest
-        .spyOn(globalThis.Date, 'now')
-        .mockImplementation(() => new Date('2024').valueOf());
-
       const mockNotification = mockSingleNotification;
       mockNotification.subject.type = 'RepositoryVulnerabilityAlert';
 
@@ -82,10 +70,6 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
   });
 
   it('should default to known avatar if no user found', async () => {
-    jest
-      .spyOn(globalThis.Date, 'now')
-      .mockImplementation(() => new Date('2024').valueOf());
-
     const mockNotification = mockSingleNotification;
     mockNotification.subject.user = null;
 
@@ -99,7 +83,7 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
   });
 
   it('should open notification user profile', async () => {
-    const mockOpenExternalLink = jest
+    const openExternalLinkSpy = jest
       .spyOn(comms, 'openExternalLink')
       .mockImplementation();
 
@@ -125,8 +109,8 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
 
     await userEvent.click(screen.getByTestId('view-profile'));
 
-    expect(mockOpenExternalLink).toHaveBeenCalledTimes(1);
-    expect(mockOpenExternalLink).toHaveBeenCalledWith(
+    expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
+    expect(openExternalLinkSpy).toHaveBeenCalledWith(
       props.notification.subject.user.html_url,
     );
   });

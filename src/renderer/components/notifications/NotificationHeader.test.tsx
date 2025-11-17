@@ -71,7 +71,7 @@ describe('renderer/components/notifications/NotificationHeader.tsx', () => {
   });
 
   it('should open notification user profile - group by date', async () => {
-    const mockOpenExternalLink = jest
+    const openExternalLinkSpy = jest
       .spyOn(comms, 'openExternalLink')
       .mockImplementation();
 
@@ -85,8 +85,8 @@ describe('renderer/components/notifications/NotificationHeader.tsx', () => {
 
     await userEvent.click(screen.getByTestId('view-repository'));
 
-    expect(mockOpenExternalLink).toHaveBeenCalledTimes(1);
-    expect(mockOpenExternalLink).toHaveBeenCalledWith(
+    expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
+    expect(openExternalLinkSpy).toHaveBeenCalledWith(
       props.notification.repository.html_url,
     );
   });

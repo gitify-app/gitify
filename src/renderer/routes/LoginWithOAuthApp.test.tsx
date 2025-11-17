@@ -4,7 +4,12 @@ import userEvent from '@testing-library/user-event';
 import { renderWithAppContext } from '../__helpers__/test-utils';
 import type { ClientID, ClientSecret, Hostname } from '../types';
 import * as comms from '../utils/comms';
-import { LoginWithOAuthAppRoute, validateForm } from './LoginWithOAuthApp';
+import * as logger from '../utils/logger';
+import {
+  type IFormData,
+  LoginWithOAuthAppRoute,
+  validateForm,
+} from './LoginWithOAuthApp';
 
 const mockNavigate = jest.fn();
 jest.mock('react-router-dom', () => ({
@@ -15,7 +20,7 @@ jest.mock('react-router-dom', () => ({
 describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
   const mockLoginWithOAuthApp = jest.fn();
 
-  const mockOpenExternalLink = jest
+  const openExternalLinkSpy = jest
     .spyOn(comms, 'openExternalLink')
     .mockImplementation();
 
@@ -34,34 +39,38 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
 
     await userEvent.click(screen.getByTestId('header-nav-back'));
 
-    expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
+    expect(mockNavigate).toHaveBeenCalledTimes(1);
+    expect(mockNavigate).toHaveBeenCalledWith(-1);
   });
 
-  it('should validate the form values', () => {
-    const emptyValues = {
-      hostname: null,
-      clientId: null,
-      clientSecret: null,
-    };
+  describe('form validation', () => {
+    it('should validate the form values are not empty', () => {
+      const values: IFormData = {
+        hostname: null,
+        clientId: null,
+        clientSecret: null,
+      };
 
-    let values = {
-      ...emptyValues,
-    };
-    expect(validateForm(values).hostname).toBe('Hostname is required');
-    expect(validateForm(values).clientId).toBe('Client ID is required');
-    expect(validateForm(values).clientSecret).toBe('Client Secret is required');
+      expect(validateForm(values).hostname).toBe('Hostname is required');
+      expect(validateForm(values).clientId).toBe('Client ID is required');
+      expect(validateForm(values).clientSecret).toBe(
+        'Client Secret is required',
+      );
+    });
 
-    values = {
-      ...emptyValues,
-      hostname: 'hello' as Hostname,
-      clientId: '!@£INVALID-.1' as ClientID,
-      clientSecret: '!@£INVALID-.1' as ClientSecret,
-    };
-    expect(validateForm(values).hostname).toBe('Hostname format is invalid');
-    expect(validateForm(values).clientId).toBe('Client ID format is invalid');
-    expect(validateForm(values).clientSecret).toBe(
-      'Client Secret format is invalid',
-    );
+    it('should validate the form values are correct format', () => {
+      const values: IFormData = {
+        hostname: 'hello' as Hostname,
+        clientId: '!@£INVALID-.1' as ClientID,
+        clientSecret: '!@£INVALID-.1' as ClientSecret,
+      };
+
+      expect(validateForm(values).hostname).toBe('Hostname format is invalid');
+      expect(validateForm(values).clientId).toBe('Client ID format is invalid');
+      expect(validateForm(values).clientSecret).toBe(
+        'Client Secret format is invalid',
+      );
+    });
   });
 
   describe("'Create new OAuth App' button", () => {
@@ -72,7 +81,7 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
 
       await userEvent.click(screen.getByTestId('login-create-oauth-app'));
 
-      expect(mockOpenExternalLink).toHaveBeenCalledTimes(0);
+      expect(openExternalLinkSpy).toHaveBeenCalledTimes(0);
     });
 
     it('should open in browser if hostname configured', async () => {
@@ -84,7 +93,7 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
 
       await userEvent.click(screen.getByTestId('login-create-oauth-app'));
 
-      expect(mockOpenExternalLink).toHaveBeenCalledTimes(1);
+      expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -112,7 +121,39 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
     await userEvent.click(screen.getByTestId('login-submit'));
 
     expect(mockLoginWithOAuthApp).toHaveBeenCalledTimes(1);
-    expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
+    expect(mockNavigate).toHaveBeenCalledTimes(1);
+    expect(mockNavigate).toHaveBeenCalledWith(-1);
+  });
+
+  it('should login using a token - failure', async () => {
+    const rendererLogErrorSpy = jest
+      .spyOn(logger, 'rendererLogError')
+      .mockImplementation();
+    mockLoginWithOAuthApp.mockRejectedValueOnce(null);
+
+    renderWithAppContext(<LoginWithOAuthAppRoute />, {
+      loginWithOAuthApp: mockLoginWithOAuthApp,
+    });
+
+    const hostname = screen.getByTestId('login-hostname');
+    await userEvent.clear(hostname);
+    await userEvent.type(hostname, 'github.com');
+
+    await userEvent.type(
+      screen.getByTestId('login-clientId'),
+      '1234567890_ASDFGHJKL',
+    );
+
+    await userEvent.type(
+      screen.getByTestId('login-clientSecret'),
+      '1234567890_asdfghjklPOIUYTREWQ0987654321',
+    );
+
+    await userEvent.click(screen.getByTestId('login-submit'));
+
+    expect(mockLoginWithOAuthApp).toHaveBeenCalledTimes(1);
+    expect(mockNavigate).toHaveBeenCalledTimes(0);
+    expect(rendererLogErrorSpy).toHaveBeenCalledTimes(1);
   });
 
   it('should render the form with errors', async () => {
@@ -140,6 +181,6 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
 
     await userEvent.click(screen.getByTestId('login-docs'));
 
-    expect(mockOpenExternalLink).toHaveBeenCalledTimes(1);
+    expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
   });
 });
