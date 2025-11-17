@@ -22,6 +22,7 @@ export default class AppUpdater {
   private readonly menubar: Menubar;
   private readonly menuBuilder: MenuBuilder;
   private started = false;
+  private noUpdateMessageTimeout?: NodeJS.Timeout;
 
   constructor(menubar: Menubar, menuBuilder: MenuBuilder) {
     this.menubar = menubar;
@@ -56,6 +57,9 @@ export default class AppUpdater {
       logInfo('auto updater', 'Checking for update');
       this.menuBuilder.setCheckForUpdatesMenuEnabled(false);
       this.menuBuilder.setNoUpdateAvailableMenuVisibility(false);
+
+      // Clear any existing timeout when starting a new check
+      this.clearNoUpdateTimeout();
     });
 
     autoUpdater.on('update-available', () => {
@@ -84,6 +88,12 @@ export default class AppUpdater {
       this.menuBuilder.setNoUpdateAvailableMenuVisibility(true);
       this.menuBuilder.setUpdateAvailableMenuVisibility(false);
       this.menuBuilder.setUpdateReadyForInstallMenuVisibility(false);
+
+      // Auto-hide the "no updates available" message
+      this.clearNoUpdateTimeout();
+      this.noUpdateMessageTimeout = setTimeout(() => {
+        this.menuBuilder.setNoUpdateAvailableMenuVisibility(false);
+      }, APPLICATION.UPDATE_NOT_AVAILABLE_DISPLAY_MS);
     });
 
     autoUpdater.on('update-cancelled', () => {
@@ -121,12 +131,22 @@ export default class AppUpdater {
     this.menubar.tray.setToolTip(`${APPLICATION.NAME}\n${status}`);
   }
 
+  private clearNoUpdateTimeout() {
+    if (this.noUpdateMessageTimeout) {
+      clearTimeout(this.noUpdateMessageTimeout);
+      this.noUpdateMessageTimeout = undefined;
+    }
+  }
+
   private resetState() {
     this.menubar.tray.setToolTip(APPLICATION.NAME);
     this.menuBuilder.setCheckForUpdatesMenuEnabled(true);
     this.menuBuilder.setNoUpdateAvailableMenuVisibility(false);
     this.menuBuilder.setUpdateAvailableMenuVisibility(false);
     this.menuBuilder.setUpdateReadyForInstallMenuVisibility(false);
+
+    // Clear any pending timeout
+    this.clearNoUpdateTimeout();
   }
 
   private showUpdateReadyDialog(releaseName: string) {
