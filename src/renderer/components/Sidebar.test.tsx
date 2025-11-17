@@ -4,6 +4,7 @@ import { MemoryRouter } from 'react-router-dom';
 
 import { renderWithAppContext } from '../__helpers__/test-utils';
 import { mockAccountNotifications } from '../__mocks__/notifications-mocks';
+import { mockSettings } from '../__mocks__/state-mocks';
 import * as comms from '../utils/comms';
 import { Sidebar } from './Sidebar';
 
@@ -49,14 +50,11 @@ describe('renderer/components/Sidebar.tsx', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('should navigate home when clicking the gitify logo', async () => {
+  it('should navigate home when clicking logo', async () => {
     renderWithAppContext(
       <MemoryRouter>
         <Sidebar />
       </MemoryRouter>,
-      {
-        isLoggedIn: false,
-      },
     );
 
     await userEvent.click(screen.getByTestId('sidebar-home'));
@@ -71,9 +69,6 @@ describe('renderer/components/Sidebar.tsx', () => {
         <MemoryRouter>
           <Sidebar />
         </MemoryRouter>,
-        {
-          isLoggedIn: true,
-        },
       );
 
       await userEvent.click(screen.getByTestId('sidebar-notifications'));
@@ -90,7 +85,6 @@ describe('renderer/components/Sidebar.tsx', () => {
           <Sidebar />
         </MemoryRouter>,
         {
-          isLoggedIn: true,
           notifications: [],
         },
       );
@@ -104,7 +98,6 @@ describe('renderer/components/Sidebar.tsx', () => {
           <Sidebar />
         </MemoryRouter>,
         {
-          isLoggedIn: true,
           notifications: mockAccountNotifications,
         },
       );
@@ -119,9 +112,6 @@ describe('renderer/components/Sidebar.tsx', () => {
         <MemoryRouter>
           <Sidebar />
         </MemoryRouter>,
-        {
-          isLoggedIn: true,
-        },
       );
 
       await userEvent.click(screen.getByTestId('sidebar-filter-notifications'));
@@ -135,15 +125,30 @@ describe('renderer/components/Sidebar.tsx', () => {
         <MemoryRouter initialEntries={['/filters']}>
           <Sidebar />
         </MemoryRouter>,
-        {
-          isLoggedIn: true,
-        },
       );
 
       await userEvent.click(screen.getByTestId('sidebar-filter-notifications'));
 
       expect(mockNavigate).toHaveBeenCalledTimes(1);
       expect(mockNavigate).toHaveBeenCalledWith('/', { replace: true });
+    });
+
+    it('highlight filters sidebar if any are saved', () => {
+      renderWithAppContext(
+        <MemoryRouter>
+          <Sidebar />
+        </MemoryRouter>,
+        {
+          settings: {
+            ...mockSettings,
+            filterReasons: ['assign'],
+          },
+        },
+      );
+
+      expect(
+        screen.getByTestId('sidebar-filter-notifications'),
+      ).toMatchSnapshot();
     });
   });
 
@@ -154,7 +159,6 @@ describe('renderer/components/Sidebar.tsx', () => {
           <Sidebar />
         </MemoryRouter>,
         {
-          isLoggedIn: true,
           notifications: mockAccountNotifications,
         },
       );
@@ -173,7 +177,6 @@ describe('renderer/components/Sidebar.tsx', () => {
           <Sidebar />
         </MemoryRouter>,
         {
-          isLoggedIn: true,
           notifications: mockAccountNotifications,
         },
       );
@@ -194,8 +197,6 @@ describe('renderer/components/Sidebar.tsx', () => {
           <Sidebar />
         </MemoryRouter>,
         {
-          isLoggedIn: true,
-          notifications: [],
           fetchNotifications: mockFetchNotifications,
           status: 'success',
         },
@@ -212,8 +213,6 @@ describe('renderer/components/Sidebar.tsx', () => {
           <Sidebar />
         </MemoryRouter>,
         {
-          isLoggedIn: true,
-          notifications: [],
           fetchNotifications: mockFetchNotifications,
           status: 'loading',
         },
@@ -231,9 +230,6 @@ describe('renderer/components/Sidebar.tsx', () => {
         <MemoryRouter>
           <Sidebar />
         </MemoryRouter>,
-        {
-          isLoggedIn: true,
-        },
       );
 
       await userEvent.click(screen.getByTestId('sidebar-settings'));
@@ -248,7 +244,6 @@ describe('renderer/components/Sidebar.tsx', () => {
           <Sidebar />
         </MemoryRouter>,
         {
-          isLoggedIn: true,
           fetchNotifications: mockFetchNotifications,
         },
       );

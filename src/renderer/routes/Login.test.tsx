@@ -40,6 +40,7 @@ describe('renderer/routes/Login.tsx', () => {
     const mockLoginWithGitHubApp = jest.fn();
 
     renderWithAppContext(<LoginRoute />, {
+      isLoggedIn: false,
       loginWithGitHubApp: mockLoginWithGitHubApp,
     });
 
@@ -49,7 +50,7 @@ describe('renderer/routes/Login.tsx', () => {
   });
 
   it('should navigate to login with personal access token', async () => {
-    renderWithAppContext(<LoginRoute />);
+    renderWithAppContext(<LoginRoute />, { isLoggedIn: false });
 
     await userEvent.click(screen.getByTestId('login-pat'));
 
@@ -58,7 +59,7 @@ describe('renderer/routes/Login.tsx', () => {
   });
 
   it('should navigate to login with oauth app', async () => {
-    renderWithAppContext(<LoginRoute />);
+    renderWithAppContext(<LoginRoute />, { isLoggedIn: false });
 
     await userEvent.click(screen.getByTestId('login-oauth-app'));
 

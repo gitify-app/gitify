@@ -8,7 +8,6 @@ import { useNotifications } from '../hooks/useNotifications';
 import type { AuthState, Hostname, SettingsState, Token } from '../types';
 import { mockSingleNotification } from '../utils/api/__mocks__/response-mocks';
 import * as apiRequests from '../utils/api/request';
-import * as comms from '../utils/comms';
 import * as notifications from '../utils/notifications/notifications';
 import * as storage from '../utils/storage';
 import * as tray from '../utils/tray';
@@ -51,8 +50,23 @@ const renderContextButton = (
 };
 
 describe('renderer/context/App.tsx', () => {
+  const mockFetchNotifications = jest.fn();
+  const mockMarkNotificationsAsRead = jest.fn();
+  const mockMarkNotificationsAsDone = jest.fn();
+  const mockUnsubscribeNotification = jest.fn();
+
+  const saveStateSpy = jest
+    .spyOn(storage, 'saveState')
+    .mockImplementation(jest.fn());
+
   beforeEach(() => {
     jest.useFakeTimers();
+    (useNotifications as jest.Mock).mockReturnValue({
+      fetchNotifications: mockFetchNotifications,
+      markNotificationsAsRead: mockMarkNotificationsAsRead,
+      markNotificationsAsDone: mockMarkNotificationsAsDone,
+      unsubscribeNotification: mockUnsubscribeNotification,
+    });
   });
 
   afterEach(() => {
@@ -73,30 +87,12 @@ describe('renderer/context/App.tsx', () => {
       .spyOn(notifications, 'getUnreadNotificationCount')
       .mockImplementation(jest.fn());
 
-    const mockFetchNotifications = jest.fn();
-    const mockMarkNotificationsAsRead = jest.fn();
-    const mockMarkNotificationsAsDone = jest.fn();
-    const mockUnsubscribeNotification = jest.fn();
-
     const mockDefaultState = {
       auth: { accounts: [] },
       settings: mockSettings,
     };
 
-    beforeEach(() => {
-      (useNotifications as jest.Mock).mockReturnValue({
-        fetchNotifications: mockFetchNotifications,
-        markNotificationsAsRead: mockMarkNotificationsAsRead,
-        markNotificationsAsDone: mockMarkNotificationsAsDone,
-        unsubscribeNotification: mockUnsubscribeNotification,
-      });
-    });
-
-    afterEach(() => {
-      jest.clearAllMocks();
-    });
-
-    it('fetch notifications every minute', async () => {
+    it('fetch notifications each interval', async () => {
       renderWithAppContext(<AppProvider>{null}</AppProvider>);
 
       await waitFor(() =>
@@ -184,16 +180,25 @@ describe('renderer/context/App.tsx', () => {
 
   describe('authentication methods', () => {
     const apiRequestAuthSpy = jest.spyOn(apiRequests, 'apiRequestAuth');
-    const mockFetchNotifications = jest.fn();
 
-    beforeEach(() => {
-      (useNotifications as jest.Mock).mockReturnValue({
-        fetchNotifications: mockFetchNotifications,
-      });
+    it('should call loginWithGitHubApp', async () => {
+      const { button } = renderContextButton('loginWithGitHubApp');
+
+      fireEvent.click(button);
+
+      await waitFor(() =>
+        expect(mockFetchNotifications).toHaveBeenCalledTimes(1),
+      );
     });
 
-    afterEach(() => {
-      jest.clearAllMocks();
+    it('should call loginWithOAuthApp', async () => {
+      const { button } = renderContextButton('loginWithOAuthApp');
+
+      fireEvent.click(button);
+
+      await waitFor(() =>
+        expect(mockFetchNotifications).toHaveBeenCalledTimes(1),
+      );
     });
 
     it('should call loginWithPersonalAccessToken', async () => {
@@ -220,30 +225,20 @@ describe('renderer/context/App.tsx', () => {
   });
 
   describe('settings methods', () => {
-    const mockFetchNotifications = jest.fn();
-
-    beforeEach(() => {
-      (useNotifications as jest.Mock).mockReturnValue({
-        fetchNotifications: mockFetchNotifications,
-      });
-    });
+    const saveStateSpy = jest
+      .spyOn(storage, 'saveState')
+      .mockImplementation(jest.fn());
 
     it('should call updateSetting', async () => {
-      const mockSaveState = jest
-        .spyOn(storage, 'saveState')
-        .mockImplementation(jest.fn());
-
       const { button } = renderContextButton(
         'updateSetting',
         'participating',
         true,
       );
 
-      act(() => {
-        fireEvent.click(button);
-      });
+      fireEvent.click(button);
 
-      expect(mockSaveState).toHaveBeenCalledWith({
+      expect(saveStateSpy).toHaveBeenCalledWith({
         auth: {
           accounts: [],
         } as AuthState,
@@ -254,23 +249,30 @@ describe('renderer/context/App.tsx', () => {
       });
     });
 
-    it('should call updateSetting and set auto launch(openAtStartup)', async () => {
-      const setAutoLaunchSpy = jest.spyOn(comms, 'setAutoLaunch');
-      const saveStateSpy = jest
-        .spyOn(storage, 'saveState')
-        .mockImplementation(jest.fn());
+    it('should call resetSettings', async () => {
+      const { button } = renderContextButton('resetSettings');
 
+      fireEvent.click(button);
+
+      expect(saveStateSpy).toHaveBeenCalledWith({
+        auth: {
+          accounts: [],
+        } as AuthState,
+        settings: defaultSettings,
+      });
+    });
+  });
+
+  describe('filter methods', () => {
+    it('should call updateFilter - checked', async () => {
       const { button } = renderContextButton(
-        'updateSetting',
-        'openAtStartup',
+        'updateFilter',
+        'filterReasons',
+        'assign',
         true,
       );
 
-      act(() => {
-        fireEvent.click(button);
-      });
-
-      expect(setAutoLaunchSpy).toHaveBeenCalledWith(true);
+      fireEvent.click(button);
 
       expect(saveStateSpy).toHaveBeenCalledWith({
         auth: {
@@ -278,21 +280,36 @@ describe('renderer/context/App.tsx', () => {
         } as AuthState,
         settings: {
           ...defaultSettings,
-          openAtStartup: true,
+          filterReasons: ['assign'],
+        } as SettingsState,
+      });
+    });
+
+    it('should call updateFilter - unchecked', async () => {
+      const { button } = renderContextButton(
+        'updateFilter',
+        'filterReasons',
+        'assign',
+        false,
+      );
+
+      fireEvent.click(button);
+
+      expect(saveStateSpy).toHaveBeenCalledWith({
+        auth: {
+          accounts: [],
+        } as AuthState,
+        settings: {
+          ...defaultSettings,
+          filterReasons: [],
         } as SettingsState,
       });
     });
 
     it('should clear filters back to default', async () => {
-      const saveStateSpy = jest
-        .spyOn(storage, 'saveState')
-        .mockImplementation(jest.fn());
-
       const { button } = renderContextButton('clearFilters');
 
-      act(() => {
-        fireEvent.click(button);
-      });
+      fireEvent.click(button);
 
       expect(saveStateSpy).toHaveBeenCalledWith({
         auth: {
@@ -307,25 +324,6 @@ describe('renderer/context/App.tsx', () => {
           filterStates: defaultSettings.filterStates,
           filterReasons: defaultSettings.filterReasons,
         },
-      });
-    });
-
-    it('should call resetSettings', async () => {
-      const saveStateSpy = jest
-        .spyOn(storage, 'saveState')
-        .mockImplementation(jest.fn());
-
-      const { button } = renderContextButton('resetSettings');
-
-      act(() => {
-        fireEvent.click(button);
-      });
-
-      expect(saveStateSpy).toHaveBeenCalledWith({
-        auth: {
-          accounts: [],
-        } as AuthState,
-        settings: defaultSettings,
       });
     });
   });

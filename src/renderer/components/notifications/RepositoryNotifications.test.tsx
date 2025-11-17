@@ -28,10 +28,7 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
   });
 
   it('should render itself & its children', () => {
-    const tree = renderWithAppContext(
-      <RepositoryNotifications {...props} />,
-      {},
-    );
+    const tree = renderWithAppContext(<RepositoryNotifications {...props} />);
 
     expect(tree).toMatchSnapshot();
   });
@@ -41,10 +38,7 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
       n.unread = false;
     }
 
-    const tree = renderWithAppContext(
-      <RepositoryNotifications {...props} />,
-      {},
-    );
+    const tree = renderWithAppContext(<RepositoryNotifications {...props} />);
 
     expect(tree).toMatchSnapshot();
   });
@@ -93,10 +87,7 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
   it('should use default repository icon when avatar is not available', () => {
     props.repoNotifications[0].repository.owner.avatar_url = '' as Link;
 
-    const tree = renderWithAppContext(
-      <RepositoryNotifications {...props} />,
-      {},
-    );
+    const tree = renderWithAppContext(<RepositoryNotifications {...props} />);
 
     expect(tree).toMatchSnapshot();
   });
