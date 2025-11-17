@@ -43,15 +43,15 @@ import { APPLICATION } from '../shared/constants';
 
 import { onFirstRunMaybe } from './first-run';
 
+function configPath() {
+  return path.join('/User/Data', 'FirstRun', APPLICATION.FIRST_RUN_FOLDER);
+}
+
 describe('main/first-run', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     mac = true;
   });
-
-  function configPath() {
-    return path.join('/User/Data', 'FirstRun', APPLICATION.FIRST_RUN_FOLDER);
-  }
 
   it('creates first-run marker when not existing and returns true', async () => {
     existsSync.mockReturnValueOnce(false); // marker absent

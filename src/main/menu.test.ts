@@ -62,9 +62,9 @@ describe('main/menu.ts', () => {
   /** Helper: build menu & return template (first arg passed to buildFromTemplate) */
   const buildAndGetTemplate = () => {
     menuBuilder.buildMenu();
-    return (Menu.buildFromTemplate as jest.Mock).mock.calls.slice(
+    return (Menu.buildFromTemplate as jest.Mock).mock.calls.at(
       -1,
-    )[0][0] as TemplateItem[];
+    )[0] as TemplateItem[];
   };
 
   beforeEach(() => {
@@ -179,9 +179,7 @@ describe('main/menu.ts', () => {
 
     it('developer submenu click actions execute expected functions', () => {
       const template = buildAndGetTemplate();
-      const devEntry = template.find(
-        (item) => item?.label === 'Developer',
-      ) as TemplateItem;
+      const devEntry = template.find((item) => item?.label === 'Developer');
       expect(devEntry).toBeDefined();
       const submenu = devEntry.submenu;
       const clickByLabel = (label: string) =>
@@ -218,9 +216,7 @@ describe('main/menu.ts', () => {
 
     it('developer submenu includes expected static accelerators', () => {
       const template = buildAndGetTemplate();
-      const devEntry = template.find(
-        (item) => item?.label === 'Developer',
-      ) as TemplateItem;
+      const devEntry = template.find((item) => item?.label === 'Developer');
       const reloadItem = devEntry.submenu.find((i) => i.role === 'reload');
       expect(reloadItem?.accelerator).toBe('CommandOrControl+R');
     });
@@ -239,16 +235,14 @@ describe('main/menu.ts', () => {
         mb.buildMenu();
       });
       // Return the newest template captured
-      return (Menu.buildFromTemplate as jest.Mock).mock.calls.slice(
+      return (Menu.buildFromTemplate as jest.Mock).mock.calls.at(
         -1,
-      )[0][0] as TemplateItem[];
+      )[0] as TemplateItem[];
     };
 
     it('uses mac accelerator for toggleDevTools when on macOS', () => {
       const template = buildTemplateWithPlatform(true);
-      const devEntry = template.find(
-        (i) => i?.label === 'Developer',
-      ) as TemplateItem;
+      const devEntry = template.find((item) => item?.label === 'Developer');
       const toggleItem = devEntry.submenu.find(
         (i) => i.role === 'toggleDevTools',
       );
@@ -257,9 +251,7 @@ describe('main/menu.ts', () => {
 
     it('uses non-mac accelerator for toggleDevTools otherwise', () => {
       const template = buildTemplateWithPlatform(false);
-      const devEntry = template.find(
-        (i) => i?.label === 'Developer',
-      ) as TemplateItem;
+      const devEntry = template.find((item) => item?.label === 'Developer');
       const toggleItem = devEntry.submenu.find(
         (i) => i.role === 'toggleDevTools',
       );

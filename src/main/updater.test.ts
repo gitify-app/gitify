@@ -46,9 +46,9 @@ jest.mock('electron', () => {
 
 // Utility to emit mocked autoUpdater events
 const emit = (event: string, arg?: ListenerArgs) => {
-  (listeners[event] || []).forEach((cb) => {
+  for (const cb of listeners[event] || []) {
     cb(arg);
-  });
+  }
 };
 
 // Re-import autoUpdater after mocking
