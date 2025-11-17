@@ -64,6 +64,24 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
       expect(mockUpdateSetting).toHaveBeenCalledWith('playSound', false);
     });
 
+    it('volume controls should not be shown if playSound checkbox is false', async () => {
+      renderWithAppContext(<SystemSettings />, {
+        updateSetting: mockUpdateSetting,
+        settings: { ...mockSettings, playSound: false },
+      });
+
+      expect(screen.getByTestId('settings-volume-group')).not.toBeVisible();
+    });
+
+    it('volume controls should be shown if playSound checkbox is true', async () => {
+      renderWithAppContext(<SystemSettings />, {
+        updateSetting: mockUpdateSetting,
+        settings: { ...mockSettings, playSound: true },
+      });
+
+      expect(screen.getByTestId('settings-volume-group')).toBeVisible();
+    });
+
     it('should increase notification volume', async () => {
       renderWithAppContext(<SystemSettings />, {
         updateSetting: mockUpdateSetting,
