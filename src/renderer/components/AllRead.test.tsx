@@ -19,6 +19,12 @@ describe('renderer/components/AllRead.tsx', () => {
       tree = renderWithAppContext(<AllRead />, {
         settings: {
           ...mockSettings,
+          filterReasons: [],
+          filterStates: [],
+          filterSubjectTypes: [],
+          filterUserTypes: [],
+          filterIncludeSearchTokens: [],
+          filterExcludeSearchTokens: [],
         },
       });
     });
