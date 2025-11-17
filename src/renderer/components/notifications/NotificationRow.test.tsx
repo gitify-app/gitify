@@ -95,7 +95,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
     });
 
     it('should open a notification in the browser - delay notification setting enabled', async () => {
-      const markNotificationsAsRead = jest.fn();
+      const mockMarkNotificationsAsRead = jest.fn();
 
       const props = {
         notification: mockSingleNotification,
@@ -108,13 +108,13 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
           markAsDoneOnOpen: false,
           delayNotificationState: true,
         },
-        markNotificationsAsRead,
+        markNotificationsAsRead: mockMarkNotificationsAsRead,
       });
 
       await userEvent.click(screen.getByTestId('notification-row'));
 
       expect(links.openNotification).toHaveBeenCalledTimes(1);
-      expect(markNotificationsAsRead).toHaveBeenCalledTimes(1);
+      expect(mockMarkNotificationsAsRead).toHaveBeenCalledTimes(1);
     });
 
     it('should open a notification in browser & mark it as done', async () => {
