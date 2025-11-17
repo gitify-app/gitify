@@ -208,7 +208,7 @@ describe('renderer/context/App.tsx', () => {
   });
 
   describe('authentication methods', () => {
-    const mockApiRequestAuth = jest.spyOn(apiRequests, 'apiRequestAuth');
+    const apiRequestAuthSpy = jest.spyOn(apiRequests, 'apiRequestAuth');
     const mockFetchNotifications = jest.fn();
 
     beforeEach(() => {
@@ -222,7 +222,7 @@ describe('renderer/context/App.tsx', () => {
     });
 
     it('should call loginWithPersonalAccessToken', async () => {
-      mockApiRequestAuth.mockResolvedValueOnce(null);
+      apiRequestAuthSpy.mockResolvedValueOnce(null);
 
       const TestComponent = () => {
         const { loginWithPersonalAccessToken } = useContext(AppContext);
@@ -254,8 +254,8 @@ describe('renderer/context/App.tsx', () => {
         expect(mockFetchNotifications).toHaveBeenCalledTimes(1),
       );
 
-      expect(mockApiRequestAuth).toHaveBeenCalledTimes(1);
-      expect(mockApiRequestAuth).toHaveBeenCalledWith(
+      expect(apiRequestAuthSpy).toHaveBeenCalledTimes(1);
+      expect(apiRequestAuthSpy).toHaveBeenCalledWith(
         'https://api.github.com/notifications',
         'HEAD',
         'encrypted',
@@ -312,7 +312,7 @@ describe('renderer/context/App.tsx', () => {
     });
 
     it('should call updateSetting and set auto launch(openAtStartup)', async () => {
-      const mockSetAutoLaunch = jest.spyOn(comms, 'setAutoLaunch');
+      const setAutoLaunchSpy = jest.spyOn(comms, 'setAutoLaunch');
       const mockSaveState = jest
         .spyOn(storage, 'saveState')
         .mockImplementation(jest.fn());
@@ -340,7 +340,7 @@ describe('renderer/context/App.tsx', () => {
         fireEvent.click(getByText('Test Case'));
       });
 
-      expect(mockSetAutoLaunch).toHaveBeenCalledWith(true);
+      expect(setAutoLaunchSpy).toHaveBeenCalledWith(true);
 
       expect(mockSaveState).toHaveBeenCalledWith({
         auth: {

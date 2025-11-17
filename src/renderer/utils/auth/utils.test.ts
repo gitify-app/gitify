@@ -1,4 +1,4 @@
-import type { AxiosPromise, AxiosResponse } from 'axios';
+import type { AxiosResponse } from 'axios';
 import axios from 'axios';
 import nock from 'nock';
 
@@ -115,11 +115,11 @@ describe('renderer/utils/auth/utils.ts', () => {
     const apiRequestSpy = jest.spyOn(apiRequests, 'apiRequest');
 
     it('should get a token', async () => {
-      const requestPromise = new Promise((resolve) =>
-        resolve({ data: { access_token: 'this-is-a-token' } } as AxiosResponse),
-      ) as AxiosPromise;
-
-      apiRequestSpy.mockResolvedValueOnce(requestPromise);
+      apiRequestSpy.mockResolvedValueOnce(
+        Promise.resolve({
+          data: { access_token: 'this-is-a-token' },
+        } as AxiosResponse),
+      );
 
       const res = await authUtils.getToken(authCode);
 

@@ -4,7 +4,7 @@ import {
   ChevronRightIcon,
 } from '@primer/octicons-react';
 
-import type { AxiosPromise, AxiosResponse } from 'axios';
+import type { AxiosResponse } from 'axios';
 
 import { mockPersonalAccessTokenAccount } from '../__mocks__/account-mocks';
 import type { Hostname, Link } from '../types';
@@ -74,7 +74,7 @@ describe('renderer/utils/helpers.ts', () => {
       'https://github.com/gitify-app/notifications-test/issues/785';
     const mockNotificationReferrer =
       'notification_referrer_id=MDE4Ok5vdGlmaWNhdGlvblRocmVhZDEzODY2MTA5NjoxMjM0NTY3ODk%3D';
-    const mockApiRequestAuth = jest.spyOn(apiRequests, 'apiRequestAuth');
+    const apiRequestAuthSpy = jest.spyOn(apiRequests, 'apiRequestAuth');
 
     afterEach(() => {
       jest.clearAllMocks();
@@ -89,23 +89,19 @@ describe('renderer/utils/helpers.ts', () => {
         type: 'Issue' as SubjectType,
       };
 
-      const requestPromise = new Promise((resolve) =>
-        resolve({
-          data: {
-            html_url: mockHtmlUrl,
-          },
-        } as AxiosResponse),
-      ) as AxiosPromise;
-
-      mockApiRequestAuth.mockResolvedValue(requestPromise);
+      apiRequestAuthSpy.mockResolvedValue({
+        data: {
+          html_url: mockHtmlUrl,
+        },
+      } as AxiosResponse);
 
       const result = await generateGitHubWebUrl({
         ...mockSingleNotification,
         subject: subject,
       });
 
-      expect(mockApiRequestAuth).toHaveBeenCalledTimes(1);
-      expect(mockApiRequestAuth).toHaveBeenCalledWith(
+      expect(apiRequestAuthSpy).toHaveBeenCalledTimes(1);
+      expect(apiRequestAuthSpy).toHaveBeenCalledWith(
         subject.latest_comment_url,
         'GET',
         mockPersonalAccessTokenAccount.token,
@@ -121,23 +117,19 @@ describe('renderer/utils/helpers.ts', () => {
         type: 'Issue' as SubjectType,
       };
 
-      const requestPromise = new Promise((resolve) =>
-        resolve({
-          data: {
-            html_url: mockHtmlUrl,
-          },
-        } as AxiosResponse),
-      ) as AxiosPromise;
-
-      mockApiRequestAuth.mockResolvedValue(requestPromise);
+      apiRequestAuthSpy.mockResolvedValue({
+        data: {
+          html_url: mockHtmlUrl,
+        },
+      } as AxiosResponse);
 
       const result = await generateGitHubWebUrl({
         ...mockSingleNotification,
         subject: subject,
       });
 
-      expect(mockApiRequestAuth).toHaveBeenCalledTimes(1);
-      expect(mockApiRequestAuth).toHaveBeenCalledWith(
+      expect(apiRequestAuthSpy).toHaveBeenCalledTimes(1);
+      expect(apiRequestAuthSpy).toHaveBeenCalledWith(
         subject.url,
         'GET',
         mockPersonalAccessTokenAccount.token,
@@ -159,7 +151,7 @@ describe('renderer/utils/helpers.ts', () => {
           subject: subject,
         });
 
-        expect(mockApiRequestAuth).toHaveBeenCalledTimes(0);
+        expect(apiRequestAuthSpy).toHaveBeenCalledTimes(0);
         expect(result).toBe(
           `https://github.com/gitify-app/notifications-test/actions?query=workflow%3A%22Demo%22+is%3Asuccess+branch%3Amain&${mockNotificationReferrer}`,
         );
@@ -178,7 +170,7 @@ describe('renderer/utils/helpers.ts', () => {
           subject: subject,
         });
 
-        expect(mockApiRequestAuth).toHaveBeenCalledTimes(0);
+        expect(apiRequestAuthSpy).toHaveBeenCalledTimes(0);
         expect(result).toBe(
           `https://github.com/gitify-app/notifications-test/actions?query=workflow%3A%22Demo%22+is%3Afailure+branch%3Amain&${mockNotificationReferrer}`,
         );
@@ -197,7 +189,7 @@ describe('renderer/utils/helpers.ts', () => {
           subject: subject,
         });
 
-        expect(mockApiRequestAuth).toHaveBeenCalledTimes(0);
+        expect(apiRequestAuthSpy).toHaveBeenCalledTimes(0);
         expect(result).toBe(
           `https://github.com/gitify-app/notifications-test/actions?query=workflow%3A%22Demo%22+is%3Afailure+branch%3Amain&${mockNotificationReferrer}`,
         );
@@ -216,7 +208,7 @@ describe('renderer/utils/helpers.ts', () => {
           subject: subject,
         });
 
-        expect(mockApiRequestAuth).toHaveBeenCalledTimes(0);
+        expect(apiRequestAuthSpy).toHaveBeenCalledTimes(0);
         expect(result).toBe(
           `https://github.com/gitify-app/notifications-test/actions?query=workflow%3A%22Demo%22+is%3Askipped+branch%3Amain&${mockNotificationReferrer}`,
         );
@@ -235,7 +227,7 @@ describe('renderer/utils/helpers.ts', () => {
           subject: subject,
         });
 
-        expect(mockApiRequestAuth).toHaveBeenCalledTimes(0);
+        expect(apiRequestAuthSpy).toHaveBeenCalledTimes(0);
         expect(result).toBe(
           `https://github.com/gitify-app/notifications-test/actions?${mockNotificationReferrer}`,
         );
@@ -254,7 +246,7 @@ describe('renderer/utils/helpers.ts', () => {
           subject: subject,
         });
 
-        expect(mockApiRequestAuth).toHaveBeenCalledTimes(0);
+        expect(apiRequestAuthSpy).toHaveBeenCalledTimes(0);
         expect(result).toBe(
           `https://github.com/gitify-app/notifications-test/actions?query=workflow%3A%22Demo%22+branch%3Amain&${mockNotificationReferrer}`,
         );
@@ -273,7 +265,7 @@ describe('renderer/utils/helpers.ts', () => {
           subject: subject,
         });
 
-        expect(mockApiRequestAuth).toHaveBeenCalledTimes(0);
+        expect(apiRequestAuthSpy).toHaveBeenCalledTimes(0);
         expect(result).toBe(
           `https://github.com/gitify-app/notifications-test/actions?${mockNotificationReferrer}`,
         );
@@ -289,20 +281,16 @@ describe('renderer/utils/helpers.ts', () => {
           type: 'Discussion' as SubjectType,
         };
 
-        const requestPromise = new Promise((resolve) =>
-          resolve({
-            data: { data: { search: { nodes: [] } } },
-          } as AxiosResponse),
-        ) as AxiosPromise;
-
-        mockApiRequestAuth.mockResolvedValue(requestPromise);
+        apiRequestAuthSpy.mockResolvedValue({
+          data: { data: { search: { nodes: [] } } },
+        } as AxiosResponse);
 
         const result = await generateGitHubWebUrl({
           ...mockSingleNotification,
           subject: subject,
         });
 
-        expect(mockApiRequestAuth).toHaveBeenCalledTimes(1);
+        expect(apiRequestAuthSpy).toHaveBeenCalledTimes(1);
         expect(result).toBe(
           `${mockSingleNotification.repository.html_url}/discussions?${mockNotificationReferrer}`,
         );
@@ -316,22 +304,18 @@ describe('renderer/utils/helpers.ts', () => {
           type: 'Discussion' as SubjectType,
         };
 
-        const requestPromise = new Promise((resolve) =>
-          resolve({
-            data: {
-              ...mockGraphQLResponse,
-            },
-          } as AxiosResponse),
-        ) as AxiosPromise;
-
-        mockApiRequestAuth.mockResolvedValue(requestPromise);
+        apiRequestAuthSpy.mockResolvedValue({
+          data: {
+            ...mockGraphQLResponse,
+          },
+        } as AxiosResponse);
 
         const result = await generateGitHubWebUrl({
           ...mockSingleNotification,
           subject: subject,
         });
 
-        expect(mockApiRequestAuth).toHaveBeenCalledTimes(1);
+        expect(apiRequestAuthSpy).toHaveBeenCalledTimes(1);
         expect(result).toBe(
           `https://github.com/gitify-app/notifications-test/discussions/612?${mockNotificationReferrer}#discussioncomment-2300902`,
         );
@@ -349,18 +333,14 @@ describe('renderer/utils/helpers.ts', () => {
           type: 'Discussion' as SubjectType,
         };
 
-        const requestPromise = new Promise((resolve) =>
-          resolve(null as AxiosResponse),
-        ) as AxiosPromise;
-
-        mockApiRequestAuth.mockResolvedValue(requestPromise);
+        apiRequestAuthSpy.mockResolvedValue(null as AxiosResponse);
 
         const result = await generateGitHubWebUrl({
           ...mockSingleNotification,
           subject: subject,
         });
 
-        expect(mockApiRequestAuth).toHaveBeenCalledTimes(1);
+        expect(apiRequestAuthSpy).toHaveBeenCalledTimes(1);
         expect(result).toBe(
           `https://github.com/gitify-app/notifications-test/discussions?${mockNotificationReferrer}`,
         );
@@ -382,7 +362,7 @@ describe('renderer/utils/helpers.ts', () => {
         subject: subject,
       });
 
-      expect(mockApiRequestAuth).toHaveBeenCalledTimes(0);
+      expect(apiRequestAuthSpy).toHaveBeenCalledTimes(0);
       expect(result).toBe(
         `https://github.com/gitify-app/notifications-test/invitations?${mockNotificationReferrer}`,
       );
@@ -401,7 +381,7 @@ describe('renderer/utils/helpers.ts', () => {
         subject: subject,
       });
 
-      expect(mockApiRequestAuth).toHaveBeenCalledTimes(0);
+      expect(apiRequestAuthSpy).toHaveBeenCalledTimes(0);
       expect(result).toBe(
         `https://github.com/gitify-app/notifications-test/security/dependabot?${mockNotificationReferrer}`,
       );
@@ -421,7 +401,7 @@ describe('renderer/utils/helpers.ts', () => {
           subject: subject,
         });
 
-        expect(mockApiRequestAuth).toHaveBeenCalledTimes(0);
+        expect(apiRequestAuthSpy).toHaveBeenCalledTimes(0);
         expect(result).toBe(
           `https://github.com/gitify-app/notifications-test/actions?query=is%3Awaiting&${mockNotificationReferrer}`,
         );
@@ -441,7 +421,7 @@ describe('renderer/utils/helpers.ts', () => {
           subject: subject,
         });
 
-        expect(mockApiRequestAuth).toHaveBeenCalledTimes(0);
+        expect(apiRequestAuthSpy).toHaveBeenCalledTimes(0);
         expect(result).toBe(
           `https://github.com/gitify-app/notifications-test/actions?${mockNotificationReferrer}`,
         );
@@ -460,7 +440,7 @@ describe('renderer/utils/helpers.ts', () => {
           subject: subject,
         });
 
-        expect(mockApiRequestAuth).toHaveBeenCalledTimes(0);
+        expect(apiRequestAuthSpy).toHaveBeenCalledTimes(0);
         expect(result).toBe(
           `https://github.com/gitify-app/notifications-test/actions?${mockNotificationReferrer}`,
         );
@@ -481,7 +461,7 @@ describe('renderer/utils/helpers.ts', () => {
           subject: subject,
         });
 
-        expect(mockApiRequestAuth).toHaveBeenCalledTimes(0);
+        expect(apiRequestAuthSpy).toHaveBeenCalledTimes(0);
         expect(result).toBe(
           `${mockSingleNotification.repository.html_url}?${mockNotificationReferrer}`,
         );
@@ -502,15 +482,15 @@ describe('renderer/utils/helpers.ts', () => {
 
         const mockError = new Error('Test error');
 
-        mockApiRequestAuth.mockRejectedValue(mockError);
+        apiRequestAuthSpy.mockRejectedValue(mockError);
 
         const result = await generateGitHubWebUrl({
           ...mockSingleNotification,
           subject: subject,
         });
 
-        expect(mockApiRequestAuth).toHaveBeenCalledTimes(1);
-        expect(mockApiRequestAuth).toHaveBeenCalledWith(
+        expect(apiRequestAuthSpy).toHaveBeenCalledTimes(1);
+        expect(apiRequestAuthSpy).toHaveBeenCalledWith(
           subject.latest_comment_url,
           'GET',
           mockPersonalAccessTokenAccount.token,
