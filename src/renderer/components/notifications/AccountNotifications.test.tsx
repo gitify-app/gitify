@@ -13,7 +13,7 @@ import * as links from '../../utils/links';
 import { AccountNotifications } from './AccountNotifications';
 
 jest.mock('./RepositoryNotifications', () => ({
-  RepositoryNotifications: () => <div>Repository Notifications</div>,
+  RepositoryNotifications: () => <div>RepositoryNotifications</div>,
 }));
 
 describe('renderer/components/notifications/AccountNotifications.tsx', () => {
