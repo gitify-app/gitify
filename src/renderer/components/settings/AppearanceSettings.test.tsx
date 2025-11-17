@@ -80,7 +80,11 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
       await zoomTimeout();
 
       expect(mockUpdateSetting).toHaveBeenCalledTimes(1);
-      expect(mockUpdateSetting).toHaveBeenCalledWith('zoomPercentage', 90);
+      expect(mockUpdateSetting).toHaveBeenNthCalledWith(
+        1,
+        'zoomPercentage',
+        90,
+      );
     });
 
     await act(async () => {

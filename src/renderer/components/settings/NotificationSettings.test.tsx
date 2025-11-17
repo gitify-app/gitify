@@ -55,7 +55,11 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
         );
 
         expect(mockUpdateSetting).toHaveBeenCalledTimes(1);
-        expect(mockUpdateSetting).toHaveBeenCalledWith('fetchInterval', 120000);
+        expect(mockUpdateSetting).toHaveBeenNthCalledWith(
+          1,
+          'fetchInterval',
+          120000,
+        );
       });
 
       await act(async () => {
@@ -119,11 +123,7 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
         );
 
         expect(mockUpdateSetting).toHaveBeenCalledTimes(1);
-        expect(mockUpdateSetting).toHaveBeenNthCalledWith(
-          1,
-          'fetchInterval',
-          60000,
-        );
+        expect(mockUpdateSetting).toHaveBeenCalledWith('fetchInterval', 60000);
       });
 
       // Attempt to go below the minimum interval, update settings should not be called
@@ -155,8 +155,7 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
         );
 
         expect(mockUpdateSetting).toHaveBeenCalledTimes(1);
-        expect(mockUpdateSetting).toHaveBeenNthCalledWith(
-          1,
+        expect(mockUpdateSetting).toHaveBeenCalledWith(
           'fetchInterval',
           3600000,
         );
