@@ -12,10 +12,43 @@ import * as comms from '../utils/comms';
 import * as notifications from '../utils/notifications/notifications';
 import * as storage from '../utils/storage';
 import * as tray from '../utils/tray';
-import { AppContext, AppProvider } from './App';
+import { AppContext, type AppContextState, AppProvider } from './App';
 import { defaultSettings } from './defaults';
 
 jest.mock('../hooks/useNotifications');
+
+// Helper to render a button that calls a context method when clicked
+const renderContextButton = (
+  contextMethodName: keyof AppContextState,
+  ...args: unknown[]
+) => {
+  const TestComponent = () => {
+    const context = useContext(AppContext);
+    const method = context[contextMethodName];
+    return (
+      <button
+        data-testid="context-method-button"
+        onClick={() => {
+          if (typeof method === 'function') {
+            (method as (...args: unknown[]) => void)(...args);
+          }
+        }}
+        type="button"
+      >
+        {String(contextMethodName)}
+      </button>
+    );
+  };
+
+  const result = renderWithAppContext(
+    <AppProvider>
+      <TestComponent />
+    </AppProvider>,
+  );
+
+  const button = result.getByTestId('context-method-button');
+  return { ...result, button };
+};
 
 describe('renderer/context/App.tsx', () => {
   beforeEach(() => {
@@ -28,7 +61,7 @@ describe('renderer/context/App.tsx', () => {
   });
 
   describe('notification methods', () => {
-    const mockSetTrayIconColorAndTitle = jest
+    const setTrayIconColorAndTitleSpy = jest
       .spyOn(tray, 'setTrayIconColorAndTitle')
       .mockImplementation(jest.fn());
 
@@ -93,117 +126,59 @@ describe('renderer/context/App.tsx', () => {
     });
 
     it('should call fetchNotifications', async () => {
-      const TestComponent = () => {
-        const { fetchNotifications } = useContext(AppContext);
-
-        return (
-          <button onClick={fetchNotifications} type="button">
-            Test Case
-          </button>
-        );
-      };
-
-      const { getByText } = renderWithAppContext(
-        <AppProvider>
-          <TestComponent />
-        </AppProvider>,
-      );
+      const { button } = renderContextButton('fetchNotifications');
 
       mockFetchNotifications.mockReset();
 
-      fireEvent.click(getByText('Test Case'));
+      fireEvent.click(button);
 
       expect(mockFetchNotifications).toHaveBeenCalledTimes(1);
     });
 
     it('should call markNotificationsAsRead', async () => {
-      const TestComponent = () => {
-        const { markNotificationsAsRead } = useContext(AppContext);
+      const { button } = renderContextButton('markNotificationsAsRead', [
+        mockSingleNotification,
+      ]);
 
-        return (
-          <button
-            onClick={() => markNotificationsAsRead([mockSingleNotification])}
-            type="button"
-          >
-            Test Case
-          </button>
-        );
-      };
-
-      const { getByText } = renderWithAppContext(
-        <AppProvider>
-          <TestComponent />
-        </AppProvider>,
-      );
-
-      fireEvent.click(getByText('Test Case'));
+      fireEvent.click(button);
 
       expect(mockMarkNotificationsAsRead).toHaveBeenCalledTimes(1);
       expect(mockMarkNotificationsAsRead).toHaveBeenCalledWith(
         mockDefaultState,
         [mockSingleNotification],
       );
-      expect(mockSetTrayIconColorAndTitle).toHaveBeenCalledTimes(1);
+      expect(setTrayIconColorAndTitleSpy).toHaveBeenCalledTimes(1);
     });
 
     it('should call markNotificationsAsDone', async () => {
-      const TestComponent = () => {
-        const { markNotificationsAsDone } = useContext(AppContext);
+      const { button } = renderContextButton('markNotificationsAsDone', [
+        mockSingleNotification,
+      ]);
 
-        return (
-          <button
-            onClick={() => markNotificationsAsDone([mockSingleNotification])}
-            type="button"
-          >
-            Test Case
-          </button>
-        );
-      };
-
-      const { getByText } = renderWithAppContext(
-        <AppProvider>
-          <TestComponent />
-        </AppProvider>,
-      );
-
-      fireEvent.click(getByText('Test Case'));
+      fireEvent.click(button);
 
       expect(mockMarkNotificationsAsDone).toHaveBeenCalledTimes(1);
       expect(mockMarkNotificationsAsDone).toHaveBeenCalledWith(
         mockDefaultState,
         [mockSingleNotification],
       );
-      expect(mockSetTrayIconColorAndTitle).toHaveBeenCalledTimes(1);
+      expect(setTrayIconColorAndTitleSpy).toHaveBeenCalledTimes(1);
     });
 
     it('should call unsubscribeNotification', async () => {
-      const TestComponent = () => {
-        const { unsubscribeNotification } = useContext(AppContext);
-
-        return (
-          <button
-            onClick={() => unsubscribeNotification(mockSingleNotification)}
-            type="button"
-          >
-            Test Case
-          </button>
-        );
-      };
-
-      const { getByText } = renderWithAppContext(
-        <AppProvider>
-          <TestComponent />
-        </AppProvider>,
+      const { button } = renderContextButton(
+        'unsubscribeNotification',
+        mockSingleNotification,
       );
 
-      fireEvent.click(getByText('Test Case'));
+      fireEvent.click(button);
 
       expect(mockUnsubscribeNotification).toHaveBeenCalledTimes(1);
       expect(mockUnsubscribeNotification).toHaveBeenCalledWith(
         mockDefaultState,
         mockSingleNotification,
       );
-      expect(mockSetTrayIconColorAndTitle).toHaveBeenCalledTimes(1);
+      expect(setTrayIconColorAndTitleSpy).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -224,31 +199,12 @@ describe('renderer/context/App.tsx', () => {
     it('should call loginWithPersonalAccessToken', async () => {
       apiRequestAuthSpy.mockResolvedValueOnce(null);
 
-      const TestComponent = () => {
-        const { loginWithPersonalAccessToken } = useContext(AppContext);
+      const { button } = renderContextButton('loginWithPersonalAccessToken', {
+        hostname: 'github.com' as Hostname,
+        token: '123-456' as Token,
+      });
 
-        return (
-          <button
-            onClick={() =>
-              loginWithPersonalAccessToken({
-                hostname: 'github.com' as Hostname,
-                token: '123-456' as Token,
-              })
-            }
-            type="button"
-          >
-            Test Case
-          </button>
-        );
-      };
-
-      const { getByText } = renderWithAppContext(
-        <AppProvider>
-          <TestComponent />
-        </AppProvider>,
-      );
-
-      fireEvent.click(getByText('Test Case'));
+      fireEvent.click(button);
 
       await waitFor(() =>
         expect(mockFetchNotifications).toHaveBeenCalledTimes(1),
@@ -277,27 +233,14 @@ describe('renderer/context/App.tsx', () => {
         .spyOn(storage, 'saveState')
         .mockImplementation(jest.fn());
 
-      const TestComponent = () => {
-        const { updateSetting } = useContext(AppContext);
-
-        return (
-          <button
-            onClick={() => updateSetting('participating', true)}
-            type="button"
-          >
-            Test Case
-          </button>
-        );
-      };
-
-      const { getByText } = renderWithAppContext(
-        <AppProvider>
-          <TestComponent />
-        </AppProvider>,
+      const { button } = renderContextButton(
+        'updateSetting',
+        'participating',
+        true,
       );
 
       act(() => {
-        fireEvent.click(getByText('Test Case'));
+        fireEvent.click(button);
       });
 
       expect(mockSaveState).toHaveBeenCalledWith({
@@ -313,36 +256,23 @@ describe('renderer/context/App.tsx', () => {
 
     it('should call updateSetting and set auto launch(openAtStartup)', async () => {
       const setAutoLaunchSpy = jest.spyOn(comms, 'setAutoLaunch');
-      const mockSaveState = jest
+      const saveStateSpy = jest
         .spyOn(storage, 'saveState')
         .mockImplementation(jest.fn());
 
-      const TestComponent = () => {
-        const { updateSetting } = useContext(AppContext);
-
-        return (
-          <button
-            onClick={() => updateSetting('openAtStartup', true)}
-            type="button"
-          >
-            Test Case
-          </button>
-        );
-      };
-
-      const { getByText } = renderWithAppContext(
-        <AppProvider>
-          <TestComponent />
-        </AppProvider>,
+      const { button } = renderContextButton(
+        'updateSetting',
+        'openAtStartup',
+        true,
       );
 
       act(() => {
-        fireEvent.click(getByText('Test Case'));
+        fireEvent.click(button);
       });
 
       expect(setAutoLaunchSpy).toHaveBeenCalledWith(true);
 
-      expect(mockSaveState).toHaveBeenCalledWith({
+      expect(saveStateSpy).toHaveBeenCalledWith({
         auth: {
           accounts: [],
         } as AuthState,
@@ -354,31 +284,17 @@ describe('renderer/context/App.tsx', () => {
     });
 
     it('should clear filters back to default', async () => {
-      const mockSaveState = jest
+      const saveStateSpy = jest
         .spyOn(storage, 'saveState')
         .mockImplementation(jest.fn());
 
-      const TestComponent = () => {
-        const { clearFilters } = useContext(AppContext);
-
-        return (
-          <button onClick={() => clearFilters()} type="button">
-            Test Case
-          </button>
-        );
-      };
-
-      const { getByText } = renderWithAppContext(
-        <AppProvider>
-          <TestComponent />
-        </AppProvider>,
-      );
+      const { button } = renderContextButton('clearFilters');
 
       act(() => {
-        fireEvent.click(getByText('Test Case'));
+        fireEvent.click(button);
       });
 
-      expect(mockSaveState).toHaveBeenCalledWith({
+      expect(saveStateSpy).toHaveBeenCalledWith({
         auth: {
           accounts: [],
         } as AuthState,
@@ -395,31 +311,17 @@ describe('renderer/context/App.tsx', () => {
     });
 
     it('should call resetSettings', async () => {
-      const mockSaveState = jest
+      const saveStateSpy = jest
         .spyOn(storage, 'saveState')
         .mockImplementation(jest.fn());
 
-      const TestComponent = () => {
-        const { resetSettings } = useContext(AppContext);
-
-        return (
-          <button onClick={() => resetSettings()} type="button">
-            Test Case
-          </button>
-        );
-      };
-
-      const { getByText } = renderWithAppContext(
-        <AppProvider>
-          <TestComponent />
-        </AppProvider>,
-      );
+      const { button } = renderContextButton('resetSettings');
 
       act(() => {
-        fireEvent.click(getByText('Test Case'));
+        fireEvent.click(button);
       });
 
-      expect(mockSaveState).toHaveBeenCalledWith({
+      expect(saveStateSpy).toHaveBeenCalledWith({
         auth: {
           accounts: [],
         } as AuthState,
