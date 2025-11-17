@@ -57,11 +57,9 @@ export function renderWithAppContext(
   ui: ReactElement,
   context: Partial<AppContextState> = {},
 ) {
-  const value: Partial<AppContextState> = { ...context };
-
   return render(ui, {
     wrapper: ({ children }) => (
-      <AppContextProvider value={value}>{children}</AppContextProvider>
+      <AppContextProvider value={context}>{children}</AppContextProvider>
     ),
   });
 }
@@ -70,5 +68,5 @@ export function renderWithAppContext(
  * Ensure stable snapshots for our randomized emoji use-cases
  */
 export function ensureStableEmojis() {
-  global.Math.random = jest.fn(() => 0.1);
+  globalThis.Math.random = jest.fn(() => 0.1);
 }
