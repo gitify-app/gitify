@@ -10,7 +10,7 @@ import * as comms from '../../utils/comms';
 import { RepositoryNotifications } from './RepositoryNotifications';
 
 jest.mock('./NotificationRow', () => ({
-  NotificationRow: () => <div>NotificationRow</div>,
+  NotificationRow: () => <div>Notification Row</div>,
 }));
 
 describe('renderer/components/notifications/RepositoryNotifications.tsx', () => {
