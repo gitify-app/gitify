@@ -1,12 +1,10 @@
 import { render } from '@testing-library/react';
-import type { ReactElement, ReactNode } from 'react';
-import { useMemo } from 'react';
+import { type ReactElement, type ReactNode, useMemo } from 'react';
 
 import { BaseStyles, ThemeProvider } from '@primer/react';
 
 import { mockAuth, mockSettings } from '../__mocks__/state-mocks';
-import type { AppContextState } from '../context/App';
-import { AppContext } from '../context/App';
+import { AppContext, type AppContextState } from '../context/App';
 
 /**
  * Props for the AppContextProvider wrapper

@@ -54,7 +54,9 @@ export const mockGitHubAppAccount: Account = {
   hasRequiredScopes: true,
 };
 
-export function mockAccountWithError(error: GitifyError): AccountNotifications {
+export function createMockAccountWithError(
+  error: GitifyError,
+): AccountNotifications {
   return {
     account: mockGitHubCloudAccount,
     notifications: [],

@@ -19,6 +19,27 @@ import {
 import { mockToken } from './state-mocks';
 import { mockGitifyUser } from './user-mocks';
 
+export const mockAccountNotifications: AccountNotifications[] = [
+  {
+    account: mockGitHubCloudAccount,
+    notifications: mockGitHubNotifications,
+    error: null,
+  },
+  {
+    account: mockGitHubEnterpriseServerAccount,
+    notifications: mockEnterpriseNotifications,
+    error: null,
+  },
+];
+
+export const mockSingleAccountNotifications: AccountNotifications[] = [
+  {
+    account: mockGitHubCloudAccount,
+    notifications: [mockSingleNotification],
+    error: null,
+  },
+];
+
 export function createMockSubject(mocks: {
   title?: string;
   type?: SubjectType;
@@ -63,24 +84,3 @@ export function createMockNotificationForRepoName(
     account: mockGitHubCloudAccount,
   } as Notification;
 }
-
-export const mockAccountNotifications: AccountNotifications[] = [
-  {
-    account: mockGitHubCloudAccount,
-    notifications: mockGitHubNotifications,
-    error: null,
-  },
-  {
-    account: mockGitHubEnterpriseServerAccount,
-    notifications: mockEnterpriseNotifications,
-    error: null,
-  },
-];
-
-export const mockSingleAccountNotifications: AccountNotifications[] = [
-  {
-    account: mockGitHubCloudAccount,
-    notifications: [mockSingleNotification],
-    error: null,
-  },
-];

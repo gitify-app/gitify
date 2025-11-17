@@ -1,4 +1,4 @@
-import { mockAccountWithError } from '../__mocks__/account-mocks';
+import { createMockAccountWithError } from '../__mocks__/account-mocks';
 import type { AccountNotifications } from '../types';
 import {
   areAllAccountErrorsSame,
@@ -14,8 +14,8 @@ describe('renderer/utils/errors.ts', () => {
 
     it('returns false when some accounts have no error', () => {
       const items: AccountNotifications[] = [
-        mockAccountWithError(Errors.NETWORK),
-        mockAccountWithError(null),
+        createMockAccountWithError(Errors.NETWORK),
+        createMockAccountWithError(null),
       ];
 
       expect(doesAllAccountsHaveErrors(items)).toBe(false);
@@ -23,8 +23,8 @@ describe('renderer/utils/errors.ts', () => {
 
     it('returns true when every account has an error', () => {
       const items: AccountNotifications[] = [
-        mockAccountWithError(Errors.NETWORK),
-        mockAccountWithError(Errors.RATE_LIMITED),
+        createMockAccountWithError(Errors.NETWORK),
+        createMockAccountWithError(Errors.RATE_LIMITED),
       ];
 
       expect(doesAllAccountsHaveErrors(items)).toBe(true);
@@ -39,8 +39,8 @@ describe('renderer/utils/errors.ts', () => {
     it('returns true when all errors are identical object reference', () => {
       const err = Errors.NETWORK;
       const items: AccountNotifications[] = [
-        mockAccountWithError(err),
-        mockAccountWithError(err),
+        createMockAccountWithError(err),
+        createMockAccountWithError(err),
       ];
 
       expect(areAllAccountErrorsSame(items)).toBe(true);
@@ -48,8 +48,8 @@ describe('renderer/utils/errors.ts', () => {
 
     it('returns false when errors differ', () => {
       const items: AccountNotifications[] = [
-        mockAccountWithError(Errors.NETWORK),
-        mockAccountWithError(Errors.RATE_LIMITED),
+        createMockAccountWithError(Errors.NETWORK),
+        createMockAccountWithError(Errors.RATE_LIMITED),
       ];
 
       expect(areAllAccountErrorsSame(items)).toBe(false);
@@ -57,8 +57,8 @@ describe('renderer/utils/errors.ts', () => {
 
     it('returns false when one account has null error', () => {
       const items: AccountNotifications[] = [
-        mockAccountWithError(Errors.NETWORK),
-        mockAccountWithError(null),
+        createMockAccountWithError(Errors.NETWORK),
+        createMockAccountWithError(null),
       ];
 
       expect(areAllAccountErrorsSame(items)).toBe(false);
