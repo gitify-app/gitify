@@ -5,6 +5,7 @@ import nock from 'nock';
 import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
 import { mockAuth } from '../../__mocks__/state-mocks';
 import { mockGitifyUser } from '../../__mocks__/user-mocks';
+import { Constants } from '../../constants';
 import type {
   Account,
   AuthCode,
@@ -153,7 +154,11 @@ describe('renderer/utils/auth/utils.ts', () => {
       beforeEach(() => {
         nock('https://api.github.com')
           .get('/user')
-          .reply(200, { ...mockGitifyUser, avatar_url: mockGitifyUser.avatar });
+          .reply(
+            200,
+            { ...mockGitifyUser, avatar_url: mockGitifyUser.avatar },
+            { 'x-oauth-scopes': Constants.OAUTH_SCOPES.RECOMMENDED },
+          );
       });
 
       it('should add personal access token account', async () => {
@@ -166,6 +171,7 @@ describe('renderer/utils/auth/utils.ts', () => {
 
         expect(result.accounts).toEqual([
           {
+            hasRequiredScopes: true,
             hostname: 'github.com' as Hostname,
             method: 'Personal Access Token',
             platform: 'GitHub Cloud',
@@ -186,6 +192,7 @@ describe('renderer/utils/auth/utils.ts', () => {
 
         expect(result.accounts).toEqual([
           {
+            hasRequiredScopes: true,
             hostname: 'github.com' as Hostname,
             method: 'OAuth App',
             platform: 'GitHub Cloud',
@@ -204,7 +211,10 @@ describe('renderer/utils/auth/utils.ts', () => {
           .reply(
             200,
             { ...mockGitifyUser, avatar_url: mockGitifyUser.avatar },
-            { 'x-github-enterprise-version': '3.0.0' },
+            {
+              'x-github-enterprise-version': '3.0.0',
+              'x-oauth-scopes': Constants.OAUTH_SCOPES.RECOMMENDED,
+            },
           );
       });
 
@@ -218,6 +228,7 @@ describe('renderer/utils/auth/utils.ts', () => {
 
         expect(result.accounts).toEqual([
           {
+            hasRequiredScopes: true,
             hostname: 'github.gitify.io' as Hostname,
             method: 'Personal Access Token',
             platform: 'GitHub Enterprise Server',
@@ -238,6 +249,7 @@ describe('renderer/utils/auth/utils.ts', () => {
 
         expect(result.accounts).toEqual([
           {
+            hasRequiredScopes: true,
             hostname: 'github.gitify.io' as Hostname,
             method: 'OAuth App',
             platform: 'GitHub Enterprise Server',

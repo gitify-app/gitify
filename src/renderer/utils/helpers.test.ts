@@ -338,6 +338,10 @@ describe('renderer/utils/helpers.ts', () => {
       });
 
       it('default to base discussions url when graphql query fails', async () => {
+        const rendererLogErrorSpy = jest
+          .spyOn(logger, 'rendererLogError')
+          .mockImplementation();
+
         const subject = {
           title: '1.16.0',
           url: null,
@@ -360,6 +364,7 @@ describe('renderer/utils/helpers.ts', () => {
         expect(result).toBe(
           `https://github.com/gitify-app/notifications-test/discussions?${mockNotificationReferrer}`,
         );
+        expect(rendererLogErrorSpy).toHaveBeenCalledTimes(1);
       });
     });
 
