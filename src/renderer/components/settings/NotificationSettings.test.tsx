@@ -8,7 +8,7 @@ import * as comms from '../../utils/comms';
 import { NotificationSettings } from './NotificationSettings';
 
 describe('renderer/components/settings/NotificationSettings.tsx', () => {
-  const mockUpdateSetting = jest.fn();
+  const updateSettingMock = jest.fn();
 
   afterEach(() => {
     jest.clearAllMocks();
@@ -17,34 +17,34 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
   it('should change the groupBy radio group', async () => {
     await act(async () => {
       renderWithAppContext(<NotificationSettings />, {
-        updateSetting: mockUpdateSetting,
+        updateSetting: updateSettingMock,
       });
     });
 
     await userEvent.click(screen.getByTestId('radio-groupBy-date'));
 
-    expect(mockUpdateSetting).toHaveBeenCalledTimes(1);
-    expect(mockUpdateSetting).toHaveBeenCalledWith('groupBy', 'DATE');
+    expect(updateSettingMock).toHaveBeenCalledTimes(1);
+    expect(updateSettingMock).toHaveBeenCalledWith('groupBy', 'DATE');
   });
 
   it('should change the fetchType radio group', async () => {
     await act(async () => {
       renderWithAppContext(<NotificationSettings />, {
-        updateSetting: mockUpdateSetting,
+        updateSetting: updateSettingMock,
       });
     });
 
     await userEvent.click(screen.getByTestId('radio-fetchType-inactivity'));
 
-    expect(mockUpdateSetting).toHaveBeenCalledTimes(1);
-    expect(mockUpdateSetting).toHaveBeenCalledWith('fetchType', 'INACTIVITY');
+    expect(updateSettingMock).toHaveBeenCalledTimes(1);
+    expect(updateSettingMock).toHaveBeenCalledWith('fetchType', 'INACTIVITY');
   });
 
   describe('fetch interval settings', () => {
     it('should update the fetch interval values when using the buttons', async () => {
       await act(async () => {
         renderWithAppContext(<NotificationSettings />, {
-          updateSetting: mockUpdateSetting,
+          updateSetting: updateSettingMock,
         });
       });
 
@@ -54,8 +54,8 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
           screen.getByTestId('settings-fetch-interval-increase'),
         );
 
-        expect(mockUpdateSetting).toHaveBeenCalledTimes(1);
-        expect(mockUpdateSetting).toHaveBeenNthCalledWith(
+        expect(updateSettingMock).toHaveBeenCalledTimes(1);
+        expect(updateSettingMock).toHaveBeenNthCalledWith(
           1,
           'fetchInterval',
           120000,
@@ -67,8 +67,8 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
           screen.getByTestId('settings-fetch-interval-increase'),
         );
 
-        expect(mockUpdateSetting).toHaveBeenCalledTimes(2);
-        expect(mockUpdateSetting).toHaveBeenNthCalledWith(
+        expect(updateSettingMock).toHaveBeenCalledTimes(2);
+        expect(updateSettingMock).toHaveBeenNthCalledWith(
           2,
           'fetchInterval',
           180000,
@@ -81,8 +81,8 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
           screen.getByTestId('settings-fetch-interval-decrease'),
         );
 
-        expect(mockUpdateSetting).toHaveBeenCalledTimes(3);
-        expect(mockUpdateSetting).toHaveBeenNthCalledWith(
+        expect(updateSettingMock).toHaveBeenCalledTimes(3);
+        expect(updateSettingMock).toHaveBeenNthCalledWith(
           3,
           'fetchInterval',
           120000,
@@ -95,8 +95,8 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
           screen.getByTestId('settings-fetch-interval-reset'),
         );
 
-        expect(mockUpdateSetting).toHaveBeenCalledTimes(4);
-        expect(mockUpdateSetting).toHaveBeenNthCalledWith(
+        expect(updateSettingMock).toHaveBeenCalledTimes(4);
+        expect(updateSettingMock).toHaveBeenNthCalledWith(
           4,
           'fetchInterval',
           60000,
@@ -113,7 +113,7 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
               Constants.MIN_FETCH_NOTIFICATIONS_INTERVAL_MS +
               Constants.FETCH_NOTIFICATIONS_INTERVAL_STEP_MS,
           },
-          updateSetting: mockUpdateSetting,
+          updateSetting: updateSettingMock,
         });
       });
 
@@ -122,8 +122,8 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
           screen.getByTestId('settings-fetch-interval-decrease'),
         );
 
-        expect(mockUpdateSetting).toHaveBeenCalledTimes(1);
-        expect(mockUpdateSetting).toHaveBeenCalledWith('fetchInterval', 60000);
+        expect(updateSettingMock).toHaveBeenCalledTimes(1);
+        expect(updateSettingMock).toHaveBeenCalledWith('fetchInterval', 60000);
       });
 
       // Attempt to go below the minimum interval, update settings should not be called
@@ -132,7 +132,7 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
           screen.getByTestId('settings-fetch-interval-decrease'),
         );
 
-        expect(mockUpdateSetting).toHaveBeenCalledTimes(1);
+        expect(updateSettingMock).toHaveBeenCalledTimes(1);
       });
     });
 
@@ -145,7 +145,7 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
               Constants.MAX_FETCH_NOTIFICATIONS_INTERVAL_MS -
               Constants.FETCH_NOTIFICATIONS_INTERVAL_STEP_MS,
           },
-          updateSetting: mockUpdateSetting,
+          updateSetting: updateSettingMock,
         });
       });
 
@@ -154,8 +154,8 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
           screen.getByTestId('settings-fetch-interval-increase'),
         );
 
-        expect(mockUpdateSetting).toHaveBeenCalledTimes(1);
-        expect(mockUpdateSetting).toHaveBeenCalledWith(
+        expect(updateSettingMock).toHaveBeenCalledTimes(1);
+        expect(updateSettingMock).toHaveBeenCalledWith(
           'fetchInterval',
           3600000,
         );
@@ -167,7 +167,7 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
           screen.getByTestId('settings-fetch-interval-increase'),
         );
 
-        expect(mockUpdateSetting).toHaveBeenCalledTimes(1);
+        expect(updateSettingMock).toHaveBeenCalledTimes(1);
       });
     });
   });
@@ -175,14 +175,14 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
   it('should toggle the fetchAllNotifications checkbox', async () => {
     await act(async () => {
       renderWithAppContext(<NotificationSettings />, {
-        updateSetting: mockUpdateSetting,
+        updateSetting: updateSettingMock,
       });
     });
 
     await userEvent.click(screen.getByTestId('checkbox-fetchAllNotifications'));
 
-    expect(mockUpdateSetting).toHaveBeenCalledTimes(1);
-    expect(mockUpdateSetting).toHaveBeenCalledWith(
+    expect(updateSettingMock).toHaveBeenCalledTimes(1);
+    expect(updateSettingMock).toHaveBeenCalledWith(
       'fetchAllNotifications',
       false,
     );
@@ -191,14 +191,14 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
   it('should toggle detailed notifications checkbox', async () => {
     await act(async () => {
       renderWithAppContext(<NotificationSettings />, {
-        updateSetting: mockUpdateSetting,
+        updateSetting: updateSettingMock,
       });
     });
 
     await userEvent.click(screen.getByTestId('checkbox-detailedNotifications'));
 
-    expect(mockUpdateSetting).toHaveBeenCalledTimes(1);
-    expect(mockUpdateSetting).toHaveBeenCalledWith(
+    expect(updateSettingMock).toHaveBeenCalledTimes(1);
+    expect(updateSettingMock).toHaveBeenCalledWith(
       'detailedNotifications',
       false,
     );
@@ -207,40 +207,40 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
   it('should toggle metric pills checkbox', async () => {
     await act(async () => {
       renderWithAppContext(<NotificationSettings />, {
-        updateSetting: mockUpdateSetting,
+        updateSetting: updateSettingMock,
       });
     });
 
     await userEvent.click(screen.getByTestId('checkbox-showPills'));
 
-    expect(mockUpdateSetting).toHaveBeenCalledTimes(1);
-    expect(mockUpdateSetting).toHaveBeenCalledWith('showPills', false);
+    expect(updateSettingMock).toHaveBeenCalledTimes(1);
+    expect(updateSettingMock).toHaveBeenCalledWith('showPills', false);
   });
 
   it('should toggle show number checkbox', async () => {
     await act(async () => {
       renderWithAppContext(<NotificationSettings />, {
-        updateSetting: mockUpdateSetting,
+        updateSetting: updateSettingMock,
       });
     });
 
     await userEvent.click(screen.getByTestId('checkbox-showNumber'));
 
-    expect(mockUpdateSetting).toHaveBeenCalledTimes(1);
-    expect(mockUpdateSetting).toHaveBeenCalledWith('showNumber', false);
+    expect(updateSettingMock).toHaveBeenCalledTimes(1);
+    expect(updateSettingMock).toHaveBeenCalledWith('showNumber', false);
   });
 
   it('should toggle the showOnlyParticipating checkbox', async () => {
     await act(async () => {
       renderWithAppContext(<NotificationSettings />, {
-        updateSetting: mockUpdateSetting,
+        updateSetting: updateSettingMock,
       });
     });
 
     await userEvent.click(screen.getByTestId('checkbox-showOnlyParticipating'));
 
-    expect(mockUpdateSetting).toHaveBeenCalledTimes(1);
-    expect(mockUpdateSetting).toHaveBeenCalledWith('participating', true);
+    expect(updateSettingMock).toHaveBeenCalledTimes(1);
+    expect(updateSettingMock).toHaveBeenCalledWith('participating', true);
   });
 
   it('should open official docs for showOnlyParticipating tooltip', async () => {
@@ -250,7 +250,7 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
 
     await act(async () => {
       renderWithAppContext(<NotificationSettings />, {
-        updateSetting: mockUpdateSetting,
+        updateSetting: updateSettingMock,
       });
     });
 
@@ -274,20 +274,20 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
   it('should toggle the markAsDoneOnOpen checkbox', async () => {
     await act(async () => {
       renderWithAppContext(<NotificationSettings />, {
-        updateSetting: mockUpdateSetting,
+        updateSetting: updateSettingMock,
       });
     });
 
     await userEvent.click(screen.getByTestId('checkbox-markAsDoneOnOpen'));
 
-    expect(mockUpdateSetting).toHaveBeenCalledTimes(1);
-    expect(mockUpdateSetting).toHaveBeenCalledWith('markAsDoneOnOpen', true);
+    expect(updateSettingMock).toHaveBeenCalledTimes(1);
+    expect(updateSettingMock).toHaveBeenCalledWith('markAsDoneOnOpen', true);
   });
 
   it('should toggle the markAsDoneOnUnsubscribe checkbox', async () => {
     await act(async () => {
       renderWithAppContext(<NotificationSettings />, {
-        updateSetting: mockUpdateSetting,
+        updateSetting: updateSettingMock,
       });
     });
 
@@ -295,8 +295,8 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
       screen.getByTestId('checkbox-markAsDoneOnUnsubscribe'),
     );
 
-    expect(mockUpdateSetting).toHaveBeenCalledTimes(1);
-    expect(mockUpdateSetting).toHaveBeenCalledWith(
+    expect(updateSettingMock).toHaveBeenCalledTimes(1);
+    expect(updateSettingMock).toHaveBeenCalledWith(
       'markAsDoneOnUnsubscribe',
       true,
     );
@@ -305,7 +305,7 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
   it('should toggle the delayNotificationState checkbox', async () => {
     await act(async () => {
       renderWithAppContext(<NotificationSettings />, {
-        updateSetting: mockUpdateSetting,
+        updateSetting: updateSettingMock,
       });
     });
 
@@ -313,8 +313,8 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
       screen.getByTestId('checkbox-delayNotificationState'),
     );
 
-    expect(mockUpdateSetting).toHaveBeenCalledTimes(1);
-    expect(mockUpdateSetting).toHaveBeenCalledWith(
+    expect(updateSettingMock).toHaveBeenCalledTimes(1);
+    expect(updateSettingMock).toHaveBeenCalledWith(
       'delayNotificationState',
       true,
     );

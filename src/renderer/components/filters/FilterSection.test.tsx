@@ -10,7 +10,7 @@ import { stateFilter } from '../../utils/notifications/filters';
 import { FilterSection } from './FilterSection';
 
 describe('renderer/components/filters/FilterSection.tsx', () => {
-  const mockUpdateFilter = jest.fn();
+  const updateFilterMock = jest.fn();
 
   const mockFilter = stateFilter;
   const mockFilterSetting = 'filterStates';
@@ -80,14 +80,14 @@ describe('renderer/components/filters/FilterSection.tsx', () => {
             ...mockSettings,
             filterStates: [],
           },
-          updateFilter: mockUpdateFilter,
+          updateFilter: updateFilterMock,
         },
       );
     });
 
     await userEvent.click(screen.getByLabelText('Open'));
 
-    expect(mockUpdateFilter).toHaveBeenCalledWith(
+    expect(updateFilterMock).toHaveBeenCalledWith(
       mockFilterSetting,
       'open',
       true,
@@ -113,14 +113,14 @@ describe('renderer/components/filters/FilterSection.tsx', () => {
             ...mockSettings,
             filterStates: ['open'],
           },
-          updateFilter: mockUpdateFilter,
+          updateFilter: updateFilterMock,
         },
       );
     });
 
     await userEvent.click(screen.getByLabelText('Closed'));
 
-    expect(mockUpdateFilter).toHaveBeenCalledWith(
+    expect(updateFilterMock).toHaveBeenCalledWith(
       mockFilterSetting,
       'closed',
       true,

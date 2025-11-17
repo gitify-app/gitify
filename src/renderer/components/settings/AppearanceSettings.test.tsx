@@ -6,7 +6,7 @@ import { mockGitHubAppAccount } from '../../__mocks__/account-mocks';
 import { AppearanceSettings } from './AppearanceSettings';
 
 describe('renderer/components/settings/AppearanceSettings.tsx', () => {
-  const mockUpdateSetting = jest.fn();
+  const updateSettingMock = jest.fn();
   const zoomTimeout = () => new Promise((r) => setTimeout(r, 300));
 
   afterEach(() => {
@@ -16,7 +16,7 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
   it('should change the theme mode dropdown', async () => {
     await act(async () => {
       renderWithAppContext(<AppearanceSettings />, {
-        updateSetting: mockUpdateSetting,
+        updateSetting: updateSettingMock,
       });
     });
 
@@ -25,8 +25,8 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
       'LIGHT',
     );
 
-    expect(mockUpdateSetting).toHaveBeenCalledTimes(1);
-    expect(mockUpdateSetting).toHaveBeenCalledWith('theme', 'LIGHT');
+    expect(updateSettingMock).toHaveBeenCalledTimes(1);
+    expect(updateSettingMock).toHaveBeenCalledWith('theme', 'LIGHT');
   });
 
   it('should toggle increase contrast checkbox', async () => {
@@ -35,14 +35,14 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
         auth: {
           accounts: [mockGitHubAppAccount],
         },
-        updateSetting: mockUpdateSetting,
+        updateSetting: updateSettingMock,
       });
     });
 
     await userEvent.click(screen.getByTestId('checkbox-increaseContrast'));
 
-    expect(mockUpdateSetting).toHaveBeenCalledTimes(1);
-    expect(mockUpdateSetting).toHaveBeenCalledWith('increaseContrast', true);
+    expect(updateSettingMock).toHaveBeenCalledTimes(1);
+    expect(updateSettingMock).toHaveBeenCalledWith('increaseContrast', true);
   });
 
   it('should update the zoom value when using CMD + and CMD -', async () => {
@@ -50,15 +50,15 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
 
     await act(async () => {
       renderWithAppContext(<AppearanceSettings />, {
-        updateSetting: mockUpdateSetting,
+        updateSetting: updateSettingMock,
       });
     });
 
     fireEvent(window, new Event('resize'));
     await zoomTimeout();
 
-    expect(mockUpdateSetting).toHaveBeenCalledTimes(1);
-    expect(mockUpdateSetting).toHaveBeenCalledWith('zoomPercentage', 50);
+    expect(updateSettingMock).toHaveBeenCalledTimes(1);
+    expect(updateSettingMock).toHaveBeenCalledWith('zoomPercentage', 50);
   });
 
   it('should update the zoom values when using the zoom buttons', async () => {
@@ -70,7 +70,7 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
 
     await act(async () => {
       renderWithAppContext(<AppearanceSettings />, {
-        updateSetting: mockUpdateSetting,
+        updateSetting: updateSettingMock,
       });
     });
 
@@ -79,8 +79,8 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
       await userEvent.click(screen.getByTestId('settings-zoom-out'));
       await zoomTimeout();
 
-      expect(mockUpdateSetting).toHaveBeenCalledTimes(1);
-      expect(mockUpdateSetting).toHaveBeenNthCalledWith(
+      expect(updateSettingMock).toHaveBeenCalledTimes(1);
+      expect(updateSettingMock).toHaveBeenNthCalledWith(
         1,
         'zoomPercentage',
         90,
@@ -91,8 +91,8 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
       await userEvent.click(screen.getByTestId('settings-zoom-out'));
       await zoomTimeout();
 
-      expect(mockUpdateSetting).toHaveBeenCalledTimes(2);
-      expect(mockUpdateSetting).toHaveBeenNthCalledWith(
+      expect(updateSettingMock).toHaveBeenCalledTimes(2);
+      expect(updateSettingMock).toHaveBeenNthCalledWith(
         2,
         'zoomPercentage',
         80,
@@ -104,8 +104,8 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
       await userEvent.click(screen.getByTestId('settings-zoom-in'));
       await zoomTimeout();
 
-      expect(mockUpdateSetting).toHaveBeenCalledTimes(3);
-      expect(mockUpdateSetting).toHaveBeenNthCalledWith(
+      expect(updateSettingMock).toHaveBeenCalledTimes(3);
+      expect(updateSettingMock).toHaveBeenNthCalledWith(
         3,
         'zoomPercentage',
         90,
@@ -117,8 +117,8 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
       await userEvent.click(screen.getByTestId('settings-zoom-reset'));
       await zoomTimeout();
 
-      expect(mockUpdateSetting).toHaveBeenCalledTimes(4);
-      expect(mockUpdateSetting).toHaveBeenNthCalledWith(
+      expect(updateSettingMock).toHaveBeenCalledTimes(4);
+      expect(updateSettingMock).toHaveBeenNthCalledWith(
         4,
         'zoomPercentage',
         100,
@@ -132,14 +132,14 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
         auth: {
           accounts: [mockGitHubAppAccount],
         },
-        updateSetting: mockUpdateSetting,
+        updateSetting: updateSettingMock,
       });
     });
 
     await userEvent.click(screen.getByTestId('checkbox-showAccountHeader'));
 
-    expect(mockUpdateSetting).toHaveBeenCalledTimes(1);
-    expect(mockUpdateSetting).toHaveBeenCalledWith('showAccountHeader', true);
+    expect(updateSettingMock).toHaveBeenCalledTimes(1);
+    expect(updateSettingMock).toHaveBeenCalledWith('showAccountHeader', true);
   });
 
   it('should toggle wrap notification title checkbox', async () => {
@@ -148,14 +148,14 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
         auth: {
           accounts: [mockGitHubAppAccount],
         },
-        updateSetting: mockUpdateSetting,
+        updateSetting: updateSettingMock,
       });
     });
 
     await userEvent.click(screen.getByTestId('checkbox-wrapNotificationTitle'));
 
-    expect(mockUpdateSetting).toHaveBeenCalledTimes(1);
-    expect(mockUpdateSetting).toHaveBeenCalledWith(
+    expect(updateSettingMock).toHaveBeenCalledTimes(1);
+    expect(updateSettingMock).toHaveBeenCalledWith(
       'wrapNotificationTitle',
       true,
     );

@@ -1,34 +1,34 @@
 import { EVENTS } from '../shared/events';
 
 // Mocks shared modules used inside preload
-const sendMainEvent = jest.fn();
-const invokeMainEvent = jest.fn();
-const onRendererEvent = jest.fn();
-const logError = jest.fn();
+const sendMainEventMock = jest.fn();
+const invokeMainEventMock = jest.fn();
+const onRendererEventMock = jest.fn();
+const logErrorMock = jest.fn();
 
 jest.mock('./utils', () => ({
-  sendMainEvent: (...args: unknown[]) => sendMainEvent(...args),
-  invokeMainEvent: (...args: unknown[]) => invokeMainEvent(...args),
-  onRendererEvent: (...args: unknown[]) => onRendererEvent(...args),
+  sendMainEvent: (...args: unknown[]) => sendMainEventMock(...args),
+  invokeMainEvent: (...args: unknown[]) => invokeMainEventMock(...args),
+  onRendererEvent: (...args: unknown[]) => onRendererEventMock(...args),
 }));
 
 jest.mock('../shared/logger', () => ({
-  logError: (...args: unknown[]) => logError(...args),
+  logError: (...args: unknown[]) => logErrorMock(...args),
 }));
 
 // We'll reconfigure the electron mock per context isolation scenario.
-const exposeInMainWorld = jest.fn();
-const getZoomLevel = jest.fn(() => 1);
-const setZoomLevel = jest.fn((_level: number) => undefined);
+const exposeInMainWorldMock = jest.fn();
+const getZoomLevelMock = jest.fn(() => 1);
+const setZoomLevelMock = jest.fn((_level: number) => undefined);
 
 jest.mock('electron', () => ({
   contextBridge: {
     exposeInMainWorld: (key: string, value: unknown) =>
-      exposeInMainWorld(key, value),
+      exposeInMainWorldMock(key, value),
   },
   webFrame: {
-    getZoomLevel: () => getZoomLevel(),
-    setZoomLevel: (level: number) => setZoomLevel(level),
+    getZoomLevel: () => getZoomLevelMock(),
+    setZoomLevel: (level: number) => setZoomLevelMock(level),
   },
 }));
 
@@ -79,7 +79,7 @@ describe('preload/index', () => {
     const w = window as unknown as { gitify: Record<string, unknown> };
 
     expect(w.gitify).toBeDefined();
-    expect(exposeInMainWorld).not.toHaveBeenCalled();
+    expect(exposeInMainWorldMock).not.toHaveBeenCalled();
   });
 
   it('exposes api via contextBridge when context isolation enabled', async () => {
@@ -87,9 +87,9 @@ describe('preload/index', () => {
       true;
     await importPreload();
 
-    expect(exposeInMainWorld).toHaveBeenCalledTimes(1);
+    expect(exposeInMainWorldMock).toHaveBeenCalledTimes(1);
 
-    const [key, api] = exposeInMainWorld.mock.calls[0];
+    const [key, api] = exposeInMainWorldMock.mock.calls[0];
     expect(key).toBe('gitify');
     expect(api).toHaveProperty('openExternalLink');
   });
@@ -100,7 +100,7 @@ describe('preload/index', () => {
     const api = (window as unknown as { gitify: TestApi }).gitify; // casting only in test boundary
     api.tray.updateColor(-1);
 
-    expect(sendMainEvent).toHaveBeenNthCalledWith(
+    expect(sendMainEventMock).toHaveBeenNthCalledWith(
       1,
       EVENTS.UPDATE_ICON_COLOR,
       -1,
@@ -113,7 +113,7 @@ describe('preload/index', () => {
     const api = (window as unknown as { gitify: TestApi }).gitify;
     api.openExternalLink('https://example.com', true);
 
-    expect(sendMainEvent).toHaveBeenCalledWith(EVENTS.OPEN_EXTERNAL, {
+    expect(sendMainEventMock).toHaveBeenCalledWith(EVENTS.OPEN_EXTERNAL, {
       url: 'https://example.com',
       activate: true,
     });
@@ -135,7 +135,7 @@ describe('preload/index', () => {
     const originalEnv = process.env.NODE_ENV;
     process.env.NODE_ENV = 'production';
 
-    invokeMainEvent.mockResolvedValueOnce('1.2.3');
+    invokeMainEventMock.mockResolvedValueOnce('1.2.3');
 
     await importPreload();
 
@@ -149,19 +149,19 @@ describe('preload/index', () => {
     await importPreload();
 
     const api = (window as unknown as { gitify: TestApi }).gitify;
-    const callback = jest.fn();
-    api.onSystemThemeUpdate(callback);
+    const callbackMock = jest.fn();
+    api.onSystemThemeUpdate(callbackMock);
 
-    expect(onRendererEvent).toHaveBeenCalledWith(
+    expect(onRendererEventMock).toHaveBeenCalledWith(
       EVENTS.UPDATE_THEME,
       expect.any(Function),
     );
 
     // Simulate event
-    const listener = onRendererEvent.mock.calls[0][1];
+    const listener = onRendererEventMock.mock.calls[0][1];
     listener({}, 'dark');
 
-    expect(callback).toHaveBeenCalledWith('dark');
+    expect(callbackMock).toHaveBeenCalledWith('dark');
   });
 
   it('raiseNativeNotification without url calls app.show', async () => {

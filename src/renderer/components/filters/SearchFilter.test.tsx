@@ -4,7 +4,7 @@ import { renderWithAppContext } from '../../__helpers__/test-utils';
 import { SearchFilter } from './SearchFilter';
 
 describe('renderer/components/filters/SearchFilter.tsx', () => {
-  const mockUpdateFilter = jest.fn();
+  const updateFilterMock = jest.fn();
 
   afterEach(() => {
     jest.clearAllMocks();
@@ -13,14 +13,14 @@ describe('renderer/components/filters/SearchFilter.tsx', () => {
   describe('Include Search Tokens', () => {
     it('adds include actor token with prefix', () => {
       renderWithAppContext(<SearchFilter />, {
-        updateFilter: mockUpdateFilter,
+        updateFilter: updateFilterMock,
       });
 
       const includeInput = screen.getByTitle('Include searches');
       fireEvent.change(includeInput, { target: { value: 'author:octocat' } });
       fireEvent.keyDown(includeInput, { key: 'Enter' });
 
-      expect(mockUpdateFilter).toHaveBeenCalledWith(
+      expect(updateFilterMock).toHaveBeenCalledWith(
         'filterIncludeSearchTokens',
         'author:octocat',
         true,
@@ -29,14 +29,14 @@ describe('renderer/components/filters/SearchFilter.tsx', () => {
 
     it('adds include org token with prefix', () => {
       renderWithAppContext(<SearchFilter />, {
-        updateFilter: mockUpdateFilter,
+        updateFilter: updateFilterMock,
       });
 
       const includeInput = screen.getByTitle('Include searches');
       fireEvent.change(includeInput, { target: { value: 'org:gitify-app' } });
       fireEvent.keyDown(includeInput, { key: 'Enter' });
 
-      expect(mockUpdateFilter).toHaveBeenCalledWith(
+      expect(updateFilterMock).toHaveBeenCalledWith(
         'filterIncludeSearchTokens',
         'org:gitify-app',
         true,
@@ -45,7 +45,7 @@ describe('renderer/components/filters/SearchFilter.tsx', () => {
 
     it('adds include repo token with prefix', () => {
       renderWithAppContext(<SearchFilter />, {
-        updateFilter: mockUpdateFilter,
+        updateFilter: updateFilterMock,
       });
 
       const includeInput = screen.getByTitle('Include searches');
@@ -54,7 +54,7 @@ describe('renderer/components/filters/SearchFilter.tsx', () => {
       });
       fireEvent.keyDown(includeInput, { key: 'Enter' });
 
-      expect(mockUpdateFilter).toHaveBeenCalledWith(
+      expect(updateFilterMock).toHaveBeenCalledWith(
         'filterIncludeSearchTokens',
         'repo:gitify-app/gitify',
         true,
@@ -63,7 +63,7 @@ describe('renderer/components/filters/SearchFilter.tsx', () => {
 
     it('prevent unrecognized include prefixes', () => {
       renderWithAppContext(<SearchFilter />, {
-        updateFilter: mockUpdateFilter,
+        updateFilter: updateFilterMock,
       });
 
       const includeInput = screen.getByTitle('Include searches');
@@ -72,21 +72,21 @@ describe('renderer/components/filters/SearchFilter.tsx', () => {
       });
       fireEvent.keyDown(includeInput, { key: 'Enter' });
 
-      expect(mockUpdateFilter).not.toHaveBeenCalledWith();
+      expect(updateFilterMock).not.toHaveBeenCalledWith();
     });
   });
 
   describe('Exclude Search Tokens', () => {
     it('adds exclude actor token with prefix', () => {
       renderWithAppContext(<SearchFilter />, {
-        updateFilter: mockUpdateFilter,
+        updateFilter: updateFilterMock,
       });
 
       const includeInput = screen.getByTitle('Exclude searches');
       fireEvent.change(includeInput, { target: { value: 'author:octocat' } });
       fireEvent.keyDown(includeInput, { key: 'Enter' });
 
-      expect(mockUpdateFilter).toHaveBeenCalledWith(
+      expect(updateFilterMock).toHaveBeenCalledWith(
         'filterExcludeSearchTokens',
         'author:octocat',
         true,
@@ -95,14 +95,14 @@ describe('renderer/components/filters/SearchFilter.tsx', () => {
 
     it('adds exclude org token with prefix', () => {
       renderWithAppContext(<SearchFilter />, {
-        updateFilter: mockUpdateFilter,
+        updateFilter: updateFilterMock,
       });
 
       const excludeInput = screen.getByTitle('Exclude searches');
       fireEvent.change(excludeInput, { target: { value: 'org:gitify-app' } });
       fireEvent.keyDown(excludeInput, { key: 'Enter' });
 
-      expect(mockUpdateFilter).toHaveBeenCalledWith(
+      expect(updateFilterMock).toHaveBeenCalledWith(
         'filterExcludeSearchTokens',
         'org:gitify-app',
         true,
@@ -111,7 +111,7 @@ describe('renderer/components/filters/SearchFilter.tsx', () => {
 
     it('adds exclude repo token with prefix', () => {
       renderWithAppContext(<SearchFilter />, {
-        updateFilter: mockUpdateFilter,
+        updateFilter: updateFilterMock,
       });
 
       const excludeInput = screen.getByTitle('Exclude searches');
@@ -120,7 +120,7 @@ describe('renderer/components/filters/SearchFilter.tsx', () => {
       });
       fireEvent.keyDown(excludeInput, { key: 'Enter' });
 
-      expect(mockUpdateFilter).toHaveBeenCalledWith(
+      expect(updateFilterMock).toHaveBeenCalledWith(
         'filterExcludeSearchTokens',
         'repo:gitify-app/gitify',
         true,
@@ -129,7 +129,7 @@ describe('renderer/components/filters/SearchFilter.tsx', () => {
 
     it('prevent unrecognized exclude prefixes', () => {
       renderWithAppContext(<SearchFilter />, {
-        updateFilter: mockUpdateFilter,
+        updateFilter: updateFilterMock,
       });
 
       const excludeInput = screen.getByTitle('Exclude searches');
@@ -138,7 +138,7 @@ describe('renderer/components/filters/SearchFilter.tsx', () => {
       });
       fireEvent.keyDown(excludeInput, { key: 'Enter' });
 
-      expect(mockUpdateFilter).not.toHaveBeenCalledWith();
+      expect(updateFilterMock).not.toHaveBeenCalledWith();
     });
   });
 });

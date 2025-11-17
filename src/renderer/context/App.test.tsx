@@ -51,9 +51,9 @@ const renderContextButton = (
 
 describe('renderer/context/App.tsx', () => {
   const mockFetchNotifications = jest.fn();
-  const mockMarkNotificationsAsRead = jest.fn();
-  const mockMarkNotificationsAsDone = jest.fn();
-  const mockUnsubscribeNotification = jest.fn();
+  const markNotificationsAsReadMock = jest.fn();
+  const markNotificationsAsDoneMock = jest.fn();
+  const unsubscribeNotificationMock = jest.fn();
 
   const saveStateSpy = jest
     .spyOn(storage, 'saveState')
@@ -63,9 +63,9 @@ describe('renderer/context/App.tsx', () => {
     jest.useFakeTimers();
     (useNotifications as jest.Mock).mockReturnValue({
       fetchNotifications: mockFetchNotifications,
-      markNotificationsAsRead: mockMarkNotificationsAsRead,
-      markNotificationsAsDone: mockMarkNotificationsAsDone,
-      unsubscribeNotification: mockUnsubscribeNotification,
+      markNotificationsAsRead: markNotificationsAsReadMock,
+      markNotificationsAsDone: markNotificationsAsDoneMock,
+      unsubscribeNotification: unsubscribeNotificationMock,
     });
   });
 
@@ -138,8 +138,8 @@ describe('renderer/context/App.tsx', () => {
 
       fireEvent.click(button);
 
-      expect(mockMarkNotificationsAsRead).toHaveBeenCalledTimes(1);
-      expect(mockMarkNotificationsAsRead).toHaveBeenCalledWith(
+      expect(markNotificationsAsReadMock).toHaveBeenCalledTimes(1);
+      expect(markNotificationsAsReadMock).toHaveBeenCalledWith(
         mockDefaultState,
         [mockSingleNotification],
       );
@@ -153,8 +153,8 @@ describe('renderer/context/App.tsx', () => {
 
       fireEvent.click(button);
 
-      expect(mockMarkNotificationsAsDone).toHaveBeenCalledTimes(1);
-      expect(mockMarkNotificationsAsDone).toHaveBeenCalledWith(
+      expect(markNotificationsAsDoneMock).toHaveBeenCalledTimes(1);
+      expect(markNotificationsAsDoneMock).toHaveBeenCalledWith(
         mockDefaultState,
         [mockSingleNotification],
       );
@@ -169,8 +169,8 @@ describe('renderer/context/App.tsx', () => {
 
       fireEvent.click(button);
 
-      expect(mockUnsubscribeNotification).toHaveBeenCalledTimes(1);
-      expect(mockUnsubscribeNotification).toHaveBeenCalledWith(
+      expect(unsubscribeNotificationMock).toHaveBeenCalledTimes(1);
+      expect(unsubscribeNotificationMock).toHaveBeenCalledWith(
         mockDefaultState,
         mockSingleNotification,
       );

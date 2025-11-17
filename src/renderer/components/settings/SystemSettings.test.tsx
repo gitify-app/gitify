@@ -7,7 +7,7 @@ import type { Percentage } from '../../types';
 import { SystemSettings } from './SystemSettings';
 
 describe('renderer/components/settings/SystemSettings.tsx', () => {
-  const mockUpdateSetting = jest.fn();
+  const updateSettingMock = jest.fn();
 
   afterEach(() => {
     jest.clearAllMocks();
@@ -16,57 +16,57 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
   it('should change the open links radio group', async () => {
     await act(async () => {
       renderWithAppContext(<SystemSettings />, {
-        updateSetting: mockUpdateSetting,
+        updateSetting: updateSettingMock,
       });
     });
 
     await userEvent.click(screen.getByTestId('radio-openLinks-background'));
 
-    expect(mockUpdateSetting).toHaveBeenCalledTimes(1);
-    expect(mockUpdateSetting).toHaveBeenCalledWith('openLinks', 'BACKGROUND');
+    expect(updateSettingMock).toHaveBeenCalledTimes(1);
+    expect(updateSettingMock).toHaveBeenCalledWith('openLinks', 'BACKGROUND');
   });
 
   it('should toggle the keyboardShortcut checkbox', async () => {
     await act(async () => {
       renderWithAppContext(<SystemSettings />, {
-        updateSetting: mockUpdateSetting,
+        updateSetting: updateSettingMock,
       });
     });
 
     await userEvent.click(screen.getByTestId('checkbox-keyboardShortcut'));
 
-    expect(mockUpdateSetting).toHaveBeenCalledTimes(1);
-    expect(mockUpdateSetting).toHaveBeenCalledWith('keyboardShortcut', false);
+    expect(updateSettingMock).toHaveBeenCalledTimes(1);
+    expect(updateSettingMock).toHaveBeenCalledWith('keyboardShortcut', false);
   });
 
   it('should toggle the showNotifications checkbox', async () => {
     await act(async () => {
       renderWithAppContext(<SystemSettings />, {
-        updateSetting: mockUpdateSetting,
+        updateSetting: updateSettingMock,
       });
     });
 
     await userEvent.click(screen.getByTestId('checkbox-showNotifications'));
 
-    expect(mockUpdateSetting).toHaveBeenCalledTimes(1);
-    expect(mockUpdateSetting).toHaveBeenCalledWith('showNotifications', false);
+    expect(updateSettingMock).toHaveBeenCalledTimes(1);
+    expect(updateSettingMock).toHaveBeenCalledWith('showNotifications', false);
   });
 
   describe('playSound', () => {
     it('should toggle the playSound checkbox', async () => {
       renderWithAppContext(<SystemSettings />, {
-        updateSetting: mockUpdateSetting,
+        updateSetting: updateSettingMock,
       });
 
       await userEvent.click(screen.getByTestId('checkbox-playSound'));
 
-      expect(mockUpdateSetting).toHaveBeenCalledTimes(1);
-      expect(mockUpdateSetting).toHaveBeenCalledWith('playSound', false);
+      expect(updateSettingMock).toHaveBeenCalledTimes(1);
+      expect(updateSettingMock).toHaveBeenCalledWith('playSound', false);
     });
 
     it('volume controls should not be shown if playSound checkbox is false', async () => {
       renderWithAppContext(<SystemSettings />, {
-        updateSetting: mockUpdateSetting,
+        updateSetting: updateSettingMock,
         settings: { ...mockSettings, playSound: false },
       });
 
@@ -75,7 +75,7 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
 
     it('volume controls should be shown if playSound checkbox is true', async () => {
       renderWithAppContext(<SystemSettings />, {
-        updateSetting: mockUpdateSetting,
+        updateSetting: updateSettingMock,
         settings: { ...mockSettings, playSound: true },
       });
 
@@ -84,49 +84,49 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
 
     it('should increase notification volume', async () => {
       renderWithAppContext(<SystemSettings />, {
-        updateSetting: mockUpdateSetting,
+        updateSetting: updateSettingMock,
       });
 
       await userEvent.click(screen.getByTestId('settings-volume-up'));
 
-      expect(mockUpdateSetting).toHaveBeenCalledTimes(1);
-      expect(mockUpdateSetting).toHaveBeenCalledWith('notificationVolume', 30);
+      expect(updateSettingMock).toHaveBeenCalledTimes(1);
+      expect(updateSettingMock).toHaveBeenCalledWith('notificationVolume', 30);
     });
 
     it('should decrease notification volume', async () => {
       renderWithAppContext(<SystemSettings />, {
-        updateSetting: mockUpdateSetting,
+        updateSetting: updateSettingMock,
       });
 
       await userEvent.click(screen.getByTestId('settings-volume-down'));
 
-      expect(mockUpdateSetting).toHaveBeenCalledTimes(1);
-      expect(mockUpdateSetting).toHaveBeenCalledWith('notificationVolume', 10);
+      expect(updateSettingMock).toHaveBeenCalledTimes(1);
+      expect(updateSettingMock).toHaveBeenCalledWith('notificationVolume', 10);
     });
 
     it('should reset notification volume', async () => {
       renderWithAppContext(<SystemSettings />, {
         settings: { ...mockSettings, notificationVolume: 30 as Percentage },
-        updateSetting: mockUpdateSetting,
+        updateSetting: updateSettingMock,
       });
 
       await userEvent.click(screen.getByTestId('settings-volume-reset'));
 
-      expect(mockUpdateSetting).toHaveBeenCalledTimes(1);
-      expect(mockUpdateSetting).toHaveBeenCalledWith('notificationVolume', 20);
+      expect(updateSettingMock).toHaveBeenCalledTimes(1);
+      expect(updateSettingMock).toHaveBeenCalledWith('notificationVolume', 20);
     });
   });
 
   it('should toggle the openAtStartup checkbox', async () => {
     await act(async () => {
       renderWithAppContext(<SystemSettings />, {
-        updateSetting: mockUpdateSetting,
+        updateSetting: updateSettingMock,
       });
     });
 
     await userEvent.click(screen.getByTestId('checkbox-openAtStartup'));
 
-    expect(mockUpdateSetting).toHaveBeenCalledTimes(1);
-    expect(mockUpdateSetting).toHaveBeenCalledWith('openAtStartup', true);
+    expect(updateSettingMock).toHaveBeenCalledTimes(1);
+    expect(updateSettingMock).toHaveBeenCalledWith('openAtStartup', true);
   });
 });

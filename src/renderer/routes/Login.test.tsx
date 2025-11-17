@@ -5,10 +5,10 @@ import { renderWithAppContext } from '../__helpers__/test-utils';
 import * as comms from '../utils/comms';
 import { LoginRoute } from './Login';
 
-const mockNavigate = jest.fn();
+const navigateMock = jest.fn();
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
-  useNavigate: () => mockNavigate,
+  useNavigate: () => navigateMock,
 }));
 
 describe('renderer/routes/Login.tsx', () => {
@@ -21,7 +21,7 @@ describe('renderer/routes/Login.tsx', () => {
 
     expect(tree).toMatchSnapshot();
 
-    expect(mockNavigate).toHaveBeenCalledTimes(0);
+    expect(navigateMock).toHaveBeenCalledTimes(0);
   });
 
   it('should redirect to notifications once logged in', () => {
@@ -32,21 +32,21 @@ describe('renderer/routes/Login.tsx', () => {
     });
 
     expect(showWindowSpy).toHaveBeenCalledTimes(1);
-    expect(mockNavigate).toHaveBeenCalledTimes(1);
-    expect(mockNavigate).toHaveBeenCalledWith('/', { replace: true });
+    expect(navigateMock).toHaveBeenCalledTimes(1);
+    expect(navigateMock).toHaveBeenCalledWith('/', { replace: true });
   });
 
   it('should login with github', async () => {
-    const mockLoginWithGitHubApp = jest.fn();
+    const loginWithGitHubAppMock = jest.fn();
 
     renderWithAppContext(<LoginRoute />, {
       isLoggedIn: false,
-      loginWithGitHubApp: mockLoginWithGitHubApp,
+      loginWithGitHubApp: loginWithGitHubAppMock,
     });
 
     await userEvent.click(screen.getByTestId('login-github'));
 
-    expect(mockLoginWithGitHubApp).toHaveBeenCalled();
+    expect(loginWithGitHubAppMock).toHaveBeenCalled();
   });
 
   it('should navigate to login with personal access token', async () => {
@@ -54,8 +54,8 @@ describe('renderer/routes/Login.tsx', () => {
 
     await userEvent.click(screen.getByTestId('login-pat'));
 
-    expect(mockNavigate).toHaveBeenCalledTimes(1);
-    expect(mockNavigate).toHaveBeenCalledWith('/login-personal-access-token');
+    expect(navigateMock).toHaveBeenCalledTimes(1);
+    expect(navigateMock).toHaveBeenCalledWith('/login-personal-access-token');
   });
 
   it('should navigate to login with oauth app', async () => {
@@ -63,7 +63,7 @@ describe('renderer/routes/Login.tsx', () => {
 
     await userEvent.click(screen.getByTestId('login-oauth-app'));
 
-    expect(mockNavigate).toHaveBeenCalledTimes(1);
-    expect(mockNavigate).toHaveBeenCalledWith('/login-oauth-app');
+    expect(navigateMock).toHaveBeenCalledTimes(1);
+    expect(navigateMock).toHaveBeenCalledWith('/login-oauth-app');
   });
 });

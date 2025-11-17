@@ -5,11 +5,11 @@ import { HoverButton } from './HoverButton';
 
 describe('renderer/components/primitives/HoverButton.tsx', () => {
   it('should render', () => {
-    const mockAction = jest.fn();
+    const actionMock = jest.fn();
 
     const tree = renderWithAppContext(
       <HoverButton
-        action={mockAction}
+        action={actionMock}
         icon={MarkGithubIcon}
         label="Hover Button"
         testid="hover-button"
@@ -19,11 +19,11 @@ describe('renderer/components/primitives/HoverButton.tsx', () => {
   });
 
   it('should render - disabled', () => {
-    const mockAction = jest.fn();
+    const actionMock = jest.fn();
 
     const tree = renderWithAppContext(
       <HoverButton
-        action={mockAction}
+        action={actionMock}
         enabled={false}
         icon={MarkGithubIcon}
         label="Hover Button"

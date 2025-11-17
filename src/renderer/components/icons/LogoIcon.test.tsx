@@ -19,12 +19,12 @@ describe('renderer/components/icons/LogoIcon.tsx', () => {
   });
 
   it('should click on the logo', async () => {
-    const onClick = jest.fn();
-    renderWithAppContext(<LogoIcon onClick={onClick} size={Size.SMALL} />);
+    const onClickMock = jest.fn();
+    renderWithAppContext(<LogoIcon onClick={onClickMock} size={Size.SMALL} />);
 
     await userEvent.click(screen.getByLabelText('Gitify Logo'));
 
-    expect(onClick).toHaveBeenCalledTimes(1);
+    expect(onClickMock).toHaveBeenCalledTimes(1);
   });
 
   it('should render small size', () => {

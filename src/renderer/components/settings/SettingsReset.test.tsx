@@ -6,7 +6,7 @@ import * as logger from '../../utils/logger';
 import { SettingsReset } from './SettingsReset';
 
 describe('renderer/components/settings/SettingsReset.tsx', () => {
-  const mockResetSettings = jest.fn();
+  const resetSettingsMock = jest.fn();
 
   afterEach(() => {
     jest.clearAllMocks();
@@ -21,14 +21,14 @@ describe('renderer/components/settings/SettingsReset.tsx', () => {
 
     await act(async () => {
       renderWithAppContext(<SettingsReset />, {
-        resetSettings: mockResetSettings,
+        resetSettings: resetSettingsMock,
       });
     });
 
     await userEvent.click(screen.getByTestId('settings-reset'));
     await userEvent.click(screen.getByText('Reset'));
 
-    expect(mockResetSettings).toHaveBeenCalled();
+    expect(resetSettingsMock).toHaveBeenCalled();
     expect(rendererLogInfoSpy).toHaveBeenCalled();
   });
 
@@ -37,13 +37,13 @@ describe('renderer/components/settings/SettingsReset.tsx', () => {
 
     await act(async () => {
       renderWithAppContext(<SettingsReset />, {
-        resetSettings: mockResetSettings,
+        resetSettings: resetSettingsMock,
       });
     });
 
     await userEvent.click(screen.getByTestId('settings-reset'));
     await userEvent.click(screen.getByText('Cancel'));
 
-    expect(mockResetSettings).not.toHaveBeenCalled();
+    expect(resetSettingsMock).not.toHaveBeenCalled();
   });
 });

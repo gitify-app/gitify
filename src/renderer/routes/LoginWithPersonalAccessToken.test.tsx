@@ -11,14 +11,14 @@ import {
   validateForm,
 } from './LoginWithPersonalAccessToken';
 
-const mockNavigate = jest.fn();
+const navigateMock = jest.fn();
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
-  useNavigate: () => mockNavigate,
+  useNavigate: () => navigateMock,
 }));
 
 describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
-  const mockLoginWithPersonalAccessToken = jest.fn();
+  const loginWithPersonalAccessTokenMock = jest.fn();
   const openExternalLinkSpy = jest
     .spyOn(comms, 'openExternalLink')
     .mockImplementation();
@@ -38,8 +38,8 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
 
     await userEvent.click(screen.getByTestId('header-nav-back'));
 
-    expect(mockNavigate).toHaveBeenCalledTimes(1);
-    expect(mockNavigate).toHaveBeenCalledWith(-1);
+    expect(navigateMock).toHaveBeenCalledTimes(1);
+    expect(navigateMock).toHaveBeenCalledWith(-1);
   });
 
   describe('form validation', () => {
@@ -66,7 +66,7 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
   describe("'Generate a PAT' button", () => {
     it('should be disabled if no hostname configured', async () => {
       renderWithAppContext(<LoginWithPersonalAccessTokenRoute />, {
-        loginWithPersonalAccessToken: mockLoginWithPersonalAccessToken,
+        loginWithPersonalAccessToken: loginWithPersonalAccessTokenMock,
       });
 
       await userEvent.clear(screen.getByTestId('login-hostname'));
@@ -78,7 +78,7 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
 
     it('should open in browser if hostname configured', async () => {
       renderWithAppContext(<LoginWithPersonalAccessTokenRoute />, {
-        loginWithPersonalAccessToken: mockLoginWithPersonalAccessToken,
+        loginWithPersonalAccessToken: loginWithPersonalAccessTokenMock,
       });
 
       await userEvent.click(screen.getByTestId('login-create-token'));
@@ -88,10 +88,10 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
   });
 
   it('should login using a token - success', async () => {
-    mockLoginWithPersonalAccessToken.mockResolvedValueOnce(null);
+    loginWithPersonalAccessTokenMock.mockResolvedValueOnce(null);
 
     renderWithAppContext(<LoginWithPersonalAccessTokenRoute />, {
-      loginWithPersonalAccessToken: mockLoginWithPersonalAccessToken,
+      loginWithPersonalAccessToken: loginWithPersonalAccessTokenMock,
     });
 
     const hostname = screen.getByTestId('login-hostname');
@@ -105,19 +105,19 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
 
     await userEvent.click(screen.getByTestId('login-submit'));
 
-    expect(mockLoginWithPersonalAccessToken).toHaveBeenCalledTimes(1);
-    expect(mockNavigate).toHaveBeenCalledTimes(1);
-    expect(mockNavigate).toHaveBeenCalledWith(-1);
+    expect(loginWithPersonalAccessTokenMock).toHaveBeenCalledTimes(1);
+    expect(navigateMock).toHaveBeenCalledTimes(1);
+    expect(navigateMock).toHaveBeenCalledWith(-1);
   });
 
   it('should login using a token - failure', async () => {
     const rendererLogErrorSpy = jest
       .spyOn(logger, 'rendererLogError')
       .mockImplementation();
-    mockLoginWithPersonalAccessToken.mockRejectedValueOnce(null);
+    loginWithPersonalAccessTokenMock.mockRejectedValueOnce(null);
 
     renderWithAppContext(<LoginWithPersonalAccessTokenRoute />, {
-      loginWithPersonalAccessToken: mockLoginWithPersonalAccessToken,
+      loginWithPersonalAccessToken: loginWithPersonalAccessTokenMock,
     });
 
     const hostname = screen.getByTestId('login-hostname');
@@ -131,8 +131,8 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
 
     await userEvent.click(screen.getByTestId('login-submit'));
 
-    expect(mockLoginWithPersonalAccessToken).toHaveBeenCalledTimes(1);
-    expect(mockNavigate).toHaveBeenCalledTimes(0);
+    expect(loginWithPersonalAccessTokenMock).toHaveBeenCalledTimes(1);
+    expect(navigateMock).toHaveBeenCalledTimes(0);
     expect(rendererLogErrorSpy).toHaveBeenCalledTimes(1);
   });
 
@@ -153,7 +153,7 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
 
   it('should open help docs in the browser', async () => {
     renderWithAppContext(<LoginWithPersonalAccessTokenRoute />, {
-      loginWithPersonalAccessToken: mockLoginWithPersonalAccessToken,
+      loginWithPersonalAccessToken: loginWithPersonalAccessTokenMock,
     });
 
     await userEvent.click(screen.getByTestId('login-docs'));
