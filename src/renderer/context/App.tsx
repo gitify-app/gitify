@@ -106,6 +106,8 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   const { setColorMode, setDayScheme, setNightScheme } = useTheme();
   const [auth, setAuth] = useState<AuthState>(defaultAuth);
   const [settings, setSettings] = useState<SettingsState>(defaultSettings);
+  const [needsAccountRefresh, setNeedsAccountRefresh] = useState(false);
+
   const {
     removeAccountNotifications,
     fetchNotifications,
@@ -133,6 +135,34 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     restoreSettings();
   }, []);
+
+  // Refresh account details on startup or restore
+  useEffect(() => {
+    if (!needsAccountRefresh || auth.accounts.length === 0) {
+      return;
+    }
+
+    (async () => {
+      for (const account of auth.accounts) {
+        await refreshAccount(account);
+      }
+
+      setNeedsAccountRefresh(false);
+    })();
+  }, [needsAccountRefresh, auth.accounts]);
+
+  useIntervalTimer(() => {
+    for (const account of auth.accounts) {
+      refreshAccount(account);
+    }
+  }, Constants.REFRESH_ACCOUNTS_INTERVAL_MS);
+
+  // Apply zoom level when settings change
+  useEffect(() => {
+    globalThis.gitify.zoom.setLevel(
+      zoomPercentageToLevel(settings.zoomPercentage),
+    );
+  }, [settings.zoomPercentage]);
 
   useEffect(() => {
     const colorMode = mapThemeModeToColorMode(settings.theme);
@@ -179,12 +209,6 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     settings.fetchType === FetchType.INACTIVITY ? settings.fetchInterval : null,
   );
 
-  useIntervalTimer(() => {
-    for (const account of auth.accounts) {
-      refreshAccount(account);
-    }
-  }, Constants.REFRESH_ACCOUNTS_INTERVAL_MS);
-
   // biome-ignore lint/correctness/useExhaustiveDependencies: We want to update the tray on setting or notification changes
   useEffect(() => {
     setUseUnreadActiveIcon(settings.useUnreadActiveIcon);
@@ -208,7 +232,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   }, [settings.openAtStartup]);
 
   useEffect(() => {
-    window.gitify.onResetApp(() => {
+    globalThis.gitify.onResetApp(() => {
       clearState();
       setAuth(defaultAuth);
       setSettings(defaultSettings);
@@ -309,33 +333,13 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
     // Restore settings before accounts to ensure filters are available before fetching notifications
     if (existing.settings) {
-      setUseUnreadActiveIcon(existing.settings.useUnreadActiveIcon);
-      setUseAlternateIdleIcon(existing.settings.useAlternateIdleIcon);
-      setKeyboardShortcut(existing.settings.keyboardShortcut);
       setSettings({ ...defaultSettings, ...existing.settings });
-      window.gitify.zoom.setLevel(
-        zoomPercentageToLevel(existing.settings.zoomPercentage),
-      );
     }
 
     if (existing.auth) {
       setAuth({ ...defaultAuth, ...existing.auth });
-
-      // Refresh account data on app start
-      for (const account of existing.auth.accounts) {
-        /**
-         * Check if the account is using an encrypted token.
-         * If not encrypt it and save it.
-         */
-        try {
-          await decryptValue(account.token);
-        } catch (_err) {
-          const encryptedToken = await encryptValue(account.token);
-          account.token = encryptedToken as Token;
-        }
-
-        await refreshAccount(account);
-      }
+      // Trigger the effect to refresh accounts and handle token encryption
+      setNeedsAccountRefresh(true);
     }
   }, []);
 
