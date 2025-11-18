@@ -278,7 +278,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     [updateSetting, settings],
   );
 
-  // Global window resize listener to sync zoom percentage
+  // Global window zoom handler / listener
   // biome-ignore lint/correctness/useExhaustiveDependencies: We want to update on settings.zoomPercentage changes
   useEffect(() => {
     // Set the zoom level when settings.zoomPercentage changes
