@@ -41,7 +41,6 @@ import {
   removeAccount,
 } from '../utils/auth/utils';
 import {
-  decryptValue,
   encryptValue,
   setAutoLaunch,
   setKeyboardShortcut,
@@ -131,10 +130,25 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     [unreadNotificationCount],
   );
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: restoreSettings is stable and should run only once
+  const restoreSettings = useCallback(async () => {
+    const existing = loadState();
+
+    // Restore settings before accounts to ensure filters are available before fetching notifications
+    if (existing.settings) {
+      setSettings({ ...defaultSettings, ...existing.settings });
+    }
+
+    if (existing.auth) {
+      setAuth({ ...defaultAuth, ...existing.auth });
+
+      // Trigger the effect to refresh accounts and handle token encryption
+      setNeedsAccountRefresh(true);
+    }
+  }, []);
+
   useEffect(() => {
     restoreSettings();
-  }, []);
+  }, [restoreSettings]);
 
   // Refresh account details on startup or restore
   useEffect(() => {
@@ -151,6 +165,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     })();
   }, [needsAccountRefresh, auth.accounts]);
 
+  // Refresh account details on interval
   useIntervalTimer(() => {
     for (const account of auth.accounts) {
       refreshAccount(account);
@@ -327,21 +342,6 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     },
     [auth, settings, removeAccountNotifications],
   );
-
-  const restoreSettings = useCallback(async () => {
-    const existing = loadState();
-
-    // Restore settings before accounts to ensure filters are available before fetching notifications
-    if (existing.settings) {
-      setSettings({ ...defaultSettings, ...existing.settings });
-    }
-
-    if (existing.auth) {
-      setAuth({ ...defaultAuth, ...existing.auth });
-      // Trigger the effect to refresh accounts and handle token encryption
-      setNeedsAccountRefresh(true);
-    }
-  }, []);
 
   const fetchNotificationsWithAccounts = useCallback(
     async () => await fetchNotifications({ auth, settings }),
