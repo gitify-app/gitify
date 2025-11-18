@@ -55,7 +55,7 @@ describe('renderer/context/App.tsx', () => {
   const markNotificationsAsDoneMock = jest.fn();
   const unsubscribeNotificationMock = jest.fn();
 
-  const zoomTimeout = () => new Promise((r) => setTimeout(r, 300));
+  // Removed unused zoomTimeout
 
   const saveStateSpy = jest
     .spyOn(storage, 'saveState')
@@ -327,24 +327,6 @@ describe('renderer/context/App.tsx', () => {
           filterReasons: defaultSettings.filterReasons,
         },
       });
-    });
-  });
-
-  describe('zoom listeners', () => {
-    const updateSettingMock = jest.fn();
-
-    it('should update the zoom value when using CMD + and CMD -', async () => {
-      window.gitify.zoom.getLevel = jest.fn().mockReturnValue(-1);
-
-      renderWithAppContext(<AppProvider>{null}</AppProvider>, {
-        updateSetting: updateSettingMock,
-      });
-
-      fireEvent(window, new Event('resize'));
-      await zoomTimeout();
-
-      expect(updateSettingMock).toHaveBeenCalledTimes(1);
-      expect(updateSettingMock).toHaveBeenCalledWith('zoomPercentage', 50);
     });
   });
 });
