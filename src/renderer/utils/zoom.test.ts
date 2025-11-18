@@ -2,11 +2,20 @@ import type { Percentage } from '../types';
 import {
   canDecreaseZoom,
   canIncreaseZoom,
+  decreaseZoom,
+  increaseZoom,
+  resetZoomLevel,
   zoomLevelToPercentage,
   zoomPercentageToLevel,
 } from './zoom';
 
 describe('renderer/utils/zoom.ts', () => {
+  window.gitify.zoom.setLevel = jest.fn();
+
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   it('should convert percentage to zoom level', () => {
     expect(zoomPercentageToLevel(100 as Percentage)).toBe(0);
     expect(zoomPercentageToLevel(50 as Percentage)).toBe(-1);
@@ -36,5 +45,39 @@ describe('renderer/utils/zoom.ts', () => {
     expect(canIncreaseZoom(110 as Percentage)).toBe(true);
     expect(canIncreaseZoom(120 as Percentage)).toBe(false);
     expect(canIncreaseZoom(150 as Percentage)).toBe(false);
+  });
+
+  describe('decrease zoom', () => {
+    it('can decrease zoom within allowed range', () => {
+      decreaseZoom(100 as Percentage);
+
+      expect(window.gitify.zoom.setLevel).toHaveBeenCalledWith(-0.2);
+    });
+
+    it('cannot decrease zoom outside of allowed range', () => {
+      decreaseZoom(0 as Percentage);
+
+      expect(window.gitify.zoom.setLevel).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('increase zoom', () => {
+    it('can increase zoom within allowed range', () => {
+      increaseZoom(100 as Percentage);
+
+      expect(window.gitify.zoom.setLevel).toHaveBeenCalledWith(0.2);
+    });
+
+    it('cannot increase zoom outside of allowed range', () => {
+      increaseZoom(120 as Percentage);
+
+      expect(window.gitify.zoom.setLevel).not.toHaveBeenCalled();
+    });
+  });
+
+  it('can reset zoom level', () => {
+    resetZoomLevel();
+
+    expect(window.gitify.zoom.setLevel).toHaveBeenCalledWith(0);
   });
 });

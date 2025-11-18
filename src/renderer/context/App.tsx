@@ -59,7 +59,7 @@ import {
   mapThemeModeToColorScheme,
 } from '../utils/theme';
 import { setTrayIconColorAndTitle } from '../utils/tray';
-import { zoomPercentageToLevel } from '../utils/zoom';
+import { zoomLevelToPercentage, zoomPercentageToLevel } from '../utils/zoom';
 import { defaultAuth, defaultFilters, defaultSettings } from './defaults';
 
 export interface AppContextState {
@@ -172,13 +172,6 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     }
   }, Constants.REFRESH_ACCOUNTS_INTERVAL_MS);
 
-  // Apply zoom level when settings change
-  useEffect(() => {
-    globalThis.gitify.zoom.setLevel(
-      zoomPercentageToLevel(settings.zoomPercentage),
-    );
-  }, [settings.zoomPercentage]);
-
   useEffect(() => {
     const colorMode = mapThemeModeToColorMode(settings.theme);
     const colorScheme = mapThemeModeToColorScheme(
@@ -284,6 +277,37 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     },
     [updateSetting, settings],
   );
+
+  // Global window resize listener to sync zoom percentage
+  // biome-ignore lint/correctness/useExhaustiveDependencies: We want to update on settings.zoomPercentage changes
+  useEffect(() => {
+    // Set the zoom level when settings.zoomPercentage changes
+    globalThis.gitify.zoom.setLevel(
+      zoomPercentageToLevel(settings.zoomPercentage),
+    );
+
+    // Sync zoom percentage in settings when window is resized
+    let timeout: NodeJS.Timeout;
+    const DELAY = 200;
+
+    const handleResize = () => {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        const zoomPercentage = zoomLevelToPercentage(
+          globalThis.gitify.zoom.getLevel(),
+        );
+
+        updateSetting('zoomPercentage', zoomPercentage);
+      }, DELAY);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      clearTimeout(timeout);
+    };
+  }, [settings.zoomPercentage]);
 
   const isLoggedIn = useMemo(() => {
     return hasAccounts(auth);
