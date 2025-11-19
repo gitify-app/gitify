@@ -52,8 +52,8 @@ importers:
         specifier: 11.3.1
         version: 11.3.1
       '@primer/react':
-        specifier: 38.1.0
-        version: 38.1.0(@types/react-dom@19.2.3(@types/react@19.2.6))(@types/react-is@18.3.0)(@types/react@19.2.6)(react-dom@19.2.0(react@19.2.0))(react-is@18.3.1)(react@19.2.0)
+        specifier: 38.2.0
+        version: 38.2.0(@types/react-dom@19.2.3(@types/react@19.2.6))(@types/react-is@18.3.0)(@types/react@19.2.6)(react-dom@19.2.0(react@19.2.0))(react-is@18.3.1)(react@19.2.0)
       '@tailwindcss/postcss':
         specifier: 4.1.17
         version: 4.1.17
@@ -959,8 +959,8 @@ packages:
   '@github/mini-throttle@2.1.1':
     resolution: {integrity: sha512-KtOPaB+FiKJ6jcKm9UKyaM5fPURHGf+xcp+b4Mzoi81hOc6M1sIGpMZMAVbNzfa2lW5+RPGKq888Px0j76OZ/A==}
 
-  '@github/relative-time-element@4.4.8':
-    resolution: {integrity: sha512-FSLYm6F3TSQnqHE1EMQUVVgi2XjbCvsESwwXfugHFpBnhyF1uhJOtu0Psp/BB/qqazfdkk7f5fVcu7WuXl3t8Q==}
+  '@github/relative-time-element@4.5.0':
+    resolution: {integrity: sha512-zKC/tUHeDDdbODBuZh3CkT5pCy41M8mGuUplzhtBMuiEQ5+qY/l/iu0X1IBY/6QhNeP/xdQIVkLYKh2O5En4dg==}
 
   '@github/tab-container-element@4.8.2':
     resolution: {integrity: sha512-WkaM4mfs8x7dXRWEaDb5deC0OhH6sGQ5cw8i/sVw25gikl4f8C7mHj0kihL5k3eKIIqmGT1Fdswdoi+9ZLDpRA==}
@@ -1199,8 +1199,8 @@ packages:
   '@primer/primitives@11.3.1':
     resolution: {integrity: sha512-f5FXeUHQ0iyxt1UF6MqeajQ9jRV/7uOGLECU5KuFWhMioCZOho09jS6alZA9tiwksHr2LYXfo7AdFczpEz3Npw==}
 
-  '@primer/react@38.1.0':
-    resolution: {integrity: sha512-942b59FzsHyKDSyfCnXGjot3c0O68sa0sjto7S0ZhLUj4wnrnPK9nopt3xmcQZa+z5ShwCOgfwKHrnQwjvn+Zg==}
+  '@primer/react@38.2.0':
+    resolution: {integrity: sha512-Jf46hs8TKsc5KQGx+TSpbVlKFGUbzCW5mGGrnuzpmUR3N0kqGPZv1x4L2uEkbm4km5xKejYopNuVQzJIk1gboQ==}
     engines: {node: '>=12', npm: '>=7'}
     peerDependencies:
       '@types/react': 18.x || 19.x
@@ -5861,7 +5861,7 @@ snapshots:
 
   '@github/mini-throttle@2.1.1': {}
 
-  '@github/relative-time-element@4.4.8': {}
+  '@github/relative-time-element@4.5.0': {}
 
   '@github/tab-container-element@4.8.2': {}
 
@@ -6217,10 +6217,10 @@ snapshots:
 
   '@primer/primitives@11.3.1': {}
 
-  '@primer/react@38.1.0(@types/react-dom@19.2.3(@types/react@19.2.6))(@types/react-is@18.3.0)(@types/react@19.2.6)(react-dom@19.2.0(react@19.2.0))(react-is@18.3.1)(react@19.2.0)':
+  '@primer/react@38.2.0(@types/react-dom@19.2.3(@types/react@19.2.6))(@types/react-is@18.3.0)(@types/react@19.2.6)(react-dom@19.2.0(react@19.2.0))(react-is@18.3.1)(react@19.2.0)':
     dependencies:
       '@github/mini-throttle': 2.1.1
-      '@github/relative-time-element': 4.4.8
+      '@github/relative-time-element': 4.5.0
       '@github/tab-container-element': 4.8.2
       '@lit-labs/react': 1.2.1
       '@oddbird/popover-polyfill': 0.5.2

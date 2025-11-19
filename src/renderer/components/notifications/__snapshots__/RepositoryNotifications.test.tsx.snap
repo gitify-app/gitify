@@ -80,7 +80,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
                     aria-hidden="true"
                     class="prc-Button-CounterLabel-f5-4u prc-CounterLabel-CounterLabel-ZwXPe"
                     data-component="ButtonCounter"
-                    data-scheme="secondary"
+                    data-variant="secondary"
                   >
                     2
                   </span>
@@ -281,7 +281,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
                   aria-hidden="true"
                   class="prc-Button-CounterLabel-f5-4u prc-CounterLabel-CounterLabel-ZwXPe"
                   data-component="ButtonCounter"
-                  data-scheme="secondary"
+                  data-variant="secondary"
                 >
                   2
                 </span>
@@ -539,7 +539,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
                     aria-hidden="true"
                     class="prc-Button-CounterLabel-f5-4u prc-CounterLabel-CounterLabel-ZwXPe"
                     data-component="ButtonCounter"
-                    data-scheme="secondary"
+                    data-variant="secondary"
                   >
                     2
                   </span>
@@ -740,7 +740,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
                   aria-hidden="true"
                   class="prc-Button-CounterLabel-f5-4u prc-CounterLabel-CounterLabel-ZwXPe"
                   data-component="ButtonCounter"
-                  data-scheme="secondary"
+                  data-variant="secondary"
                 >
                   2
                 </span>
@@ -1005,7 +1005,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
                     aria-hidden="true"
                     class="prc-Button-CounterLabel-f5-4u prc-CounterLabel-CounterLabel-ZwXPe"
                     data-component="ButtonCounter"
-                    data-scheme="secondary"
+                    data-variant="secondary"
                   >
                     2
                   </span>
@@ -1206,7 +1206,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
                     aria-hidden="true"
                     class="prc-Button-CounterLabel-f5-4u prc-CounterLabel-CounterLabel-ZwXPe"
                     data-component="ButtonCounter"
-                    data-scheme="secondary"
+                    data-variant="secondary"
                   >
                     2
                   </span>
@@ -1414,7 +1414,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
                   aria-hidden="true"
                   class="prc-Button-CounterLabel-f5-4u prc-CounterLabel-CounterLabel-ZwXPe"
                   data-component="ButtonCounter"
-                  data-scheme="secondary"
+                  data-variant="secondary"
                 >
                   2
                 </span>
@@ -1679,7 +1679,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
                     aria-hidden="true"
                     class="prc-Button-CounterLabel-f5-4u prc-CounterLabel-CounterLabel-ZwXPe"
                     data-component="ButtonCounter"
-                    data-scheme="secondary"
+                    data-variant="secondary"
                   >
                     2
                   </span>
@@ -1887,7 +1887,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
                   aria-hidden="true"
                   class="prc-Button-CounterLabel-f5-4u prc-CounterLabel-CounterLabel-ZwXPe"
                   data-component="ButtonCounter"
-                  data-scheme="secondary"
+                  data-variant="secondary"
                 >
                   2
                 </span>
