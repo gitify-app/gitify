@@ -130,7 +130,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     [unreadNotificationCount],
   );
 
-  const restoreSettings = useCallback(async () => {
+  const restorePersistedState = useCallback(async () => {
     const existing = loadState();
 
     // Restore settings before accounts to ensure filters are available before fetching notifications
@@ -141,35 +141,29 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     if (existing.auth) {
       setAuth({ ...defaultAuth, ...existing.auth });
 
-      // Trigger the effect to refresh accounts and handle token encryption
+      // Trigger the effect to refresh accounts
       setNeedsAccountRefresh(true);
     }
   }, []);
 
   useEffect(() => {
-    restoreSettings();
-  }, [restoreSettings]);
+    restorePersistedState();
+  }, [restorePersistedState]);
 
-  // Refresh account details on startup or restore
+  // Refresh account details on startup
   useEffect(() => {
-    if (!needsAccountRefresh || auth.accounts.length === 0) {
+    if (!needsAccountRefresh) {
       return;
     }
 
-    (async () => {
-      for (const account of auth.accounts) {
-        await refreshAccount(account);
-      }
-
+    Promise.all(auth.accounts.map(refreshAccount)).finally(() => {
       setNeedsAccountRefresh(false);
-    })();
+    });
   }, [needsAccountRefresh, auth.accounts]);
 
   // Refresh account details on interval
   useIntervalTimer(() => {
-    for (const account of auth.accounts) {
-      refreshAccount(account);
-    }
+    Promise.all(auth.accounts.map(refreshAccount));
   }, Constants.REFRESH_ACCOUNTS_INTERVAL_MS);
 
   useEffect(() => {
