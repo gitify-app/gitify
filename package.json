@@ -82,7 +82,7 @@
     "@primer/css": "22.0.2",
     "@primer/octicons-react": "19.21.0",
     "@primer/primitives": "11.3.0",
-    "@primer/react": "38.1.0",
+    "@primer/react": "38.2.0",
     "@tailwindcss/postcss": "4.1.17",
     "@testing-library/jest-dom": "6.9.1",
     "@testing-library/react": "16.3.0",
