@@ -10,7 +10,7 @@ import '@primer/react/test-helpers';
 /**
  * Gitify context bridge API
  */
-globalThis.gitify = {
+window.gitify = {
   app: {
     version: jest.fn().mockResolvedValue('v0.0.1'),
     hide: jest.fn(),

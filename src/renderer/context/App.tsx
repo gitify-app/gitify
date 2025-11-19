@@ -108,11 +108,11 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   const [needsAccountRefresh, setNeedsAccountRefresh] = useState(false);
 
   const {
-    removeAccountNotifications,
-    fetchNotifications,
     notifications,
-    globalError,
+    fetchNotifications,
+    removeAccountNotifications,
     status,
+    globalError,
     markNotificationsAsRead,
     markNotificationsAsDone,
     unsubscribeNotification,
@@ -234,7 +234,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   }, [settings.openAtStartup]);
 
   useEffect(() => {
-    globalThis.gitify.onResetApp(() => {
+    window.gitify.onResetApp(() => {
       clearState();
       setAuth(defaultAuth);
       setSettings(defaultSettings);
@@ -276,9 +276,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   // biome-ignore lint/correctness/useExhaustiveDependencies: We want to update on settings.zoomPercentage changes
   useEffect(() => {
     // Set the zoom level when settings.zoomPercentage changes
-    globalThis.gitify.zoom.setLevel(
-      zoomPercentageToLevel(settings.zoomPercentage),
-    );
+    window.gitify.zoom.setLevel(zoomPercentageToLevel(settings.zoomPercentage));
 
     // Sync zoom percentage in settings when window is resized
     let timeout: NodeJS.Timeout;
@@ -288,7 +286,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       clearTimeout(timeout);
       timeout = setTimeout(() => {
         const zoomPercentage = zoomLevelToPercentage(
-          globalThis.gitify.zoom.getLevel(),
+          window.gitify.zoom.getLevel(),
         );
 
         updateSetting('zoomPercentage', zoomPercentage);
