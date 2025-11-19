@@ -41,7 +41,6 @@ import {
   removeAccount,
 } from '../utils/auth/utils';
 import {
-  decryptValue,
   encryptValue,
   setAutoLaunch,
   setKeyboardShortcut,
@@ -60,7 +59,7 @@ import {
   mapThemeModeToColorScheme,
 } from '../utils/theme';
 import { setTrayIconColorAndTitle } from '../utils/tray';
-import { zoomPercentageToLevel } from '../utils/zoom';
+import { zoomLevelToPercentage, zoomPercentageToLevel } from '../utils/zoom';
 import { defaultAuth, defaultFilters, defaultSettings } from './defaults';
 
 export interface AppContextState {
@@ -106,6 +105,8 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   const { setColorMode, setDayScheme, setNightScheme } = useTheme();
   const [auth, setAuth] = useState<AuthState>(defaultAuth);
   const [settings, setSettings] = useState<SettingsState>(defaultSettings);
+  const [needsAccountRefresh, setNeedsAccountRefresh] = useState(false);
+
   const {
     removeAccountNotifications,
     fetchNotifications,
@@ -129,10 +130,41 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     [unreadNotificationCount],
   );
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: restoreSettings is stable and should run only once
-  useEffect(() => {
-    restoreSettings();
+  const restorePersistedState = useCallback(async () => {
+    const existing = loadState();
+
+    // Restore settings before accounts to ensure filters are available before fetching notifications
+    if (existing.settings) {
+      setSettings({ ...defaultSettings, ...existing.settings });
+    }
+
+    if (existing.auth) {
+      setAuth({ ...defaultAuth, ...existing.auth });
+
+      // Trigger the effect to refresh accounts
+      setNeedsAccountRefresh(true);
+    }
   }, []);
+
+  useEffect(() => {
+    restorePersistedState();
+  }, [restorePersistedState]);
+
+  // Refresh account details on startup
+  useEffect(() => {
+    if (!needsAccountRefresh) {
+      return;
+    }
+
+    Promise.all(auth.accounts.map(refreshAccount)).finally(() => {
+      setNeedsAccountRefresh(false);
+    });
+  }, [needsAccountRefresh, auth.accounts]);
+
+  // Refresh account details on interval
+  useIntervalTimer(() => {
+    Promise.all(auth.accounts.map(refreshAccount));
+  }, Constants.REFRESH_ACCOUNTS_INTERVAL_MS);
 
   useEffect(() => {
     const colorMode = mapThemeModeToColorMode(settings.theme);
@@ -179,12 +211,6 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     settings.fetchType === FetchType.INACTIVITY ? settings.fetchInterval : null,
   );
 
-  useIntervalTimer(() => {
-    for (const account of auth.accounts) {
-      refreshAccount(account);
-    }
-  }, Constants.REFRESH_ACCOUNTS_INTERVAL_MS);
-
   // biome-ignore lint/correctness/useExhaustiveDependencies: We want to update the tray on setting or notification changes
   useEffect(() => {
     setUseUnreadActiveIcon(settings.useUnreadActiveIcon);
@@ -208,7 +234,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   }, [settings.openAtStartup]);
 
   useEffect(() => {
-    window.gitify.onResetApp(() => {
+    globalThis.gitify.onResetApp(() => {
       clearState();
       setAuth(defaultAuth);
       setSettings(defaultSettings);
@@ -245,6 +271,37 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     },
     [updateSetting, settings],
   );
+
+  // Global window zoom handler / listener
+  // biome-ignore lint/correctness/useExhaustiveDependencies: We want to update on settings.zoomPercentage changes
+  useEffect(() => {
+    // Set the zoom level when settings.zoomPercentage changes
+    globalThis.gitify.zoom.setLevel(
+      zoomPercentageToLevel(settings.zoomPercentage),
+    );
+
+    // Sync zoom percentage in settings when window is resized
+    let timeout: NodeJS.Timeout;
+    const DELAY = 200;
+
+    const handleResize = () => {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        const zoomPercentage = zoomLevelToPercentage(
+          globalThis.gitify.zoom.getLevel(),
+        );
+
+        updateSetting('zoomPercentage', zoomPercentage);
+      }, DELAY);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      clearTimeout(timeout);
+    };
+  }, [settings.zoomPercentage]);
 
   const isLoggedIn = useMemo(() => {
     return hasAccounts(auth);
@@ -303,41 +360,6 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     },
     [auth, settings, removeAccountNotifications],
   );
-
-  const restoreSettings = useCallback(async () => {
-    const existing = loadState();
-
-    // Restore settings before accounts to ensure filters are available before fetching notifications
-    if (existing.settings) {
-      setUseUnreadActiveIcon(existing.settings.useUnreadActiveIcon);
-      setUseAlternateIdleIcon(existing.settings.useAlternateIdleIcon);
-      setKeyboardShortcut(existing.settings.keyboardShortcut);
-      setSettings({ ...defaultSettings, ...existing.settings });
-      window.gitify.zoom.setLevel(
-        zoomPercentageToLevel(existing.settings.zoomPercentage),
-      );
-    }
-
-    if (existing.auth) {
-      setAuth({ ...defaultAuth, ...existing.auth });
-
-      // Refresh account data on app start
-      for (const account of existing.auth.accounts) {
-        /**
-         * Check if the account is using an encrypted token.
-         * If not encrypt it and save it.
-         */
-        try {
-          await decryptValue(account.token);
-        } catch (_err) {
-          const encryptedToken = await encryptValue(account.token);
-          account.token = encryptedToken as Token;
-        }
-
-        await refreshAccount(account);
-      }
-    }
-  }, []);
 
   const fetchNotificationsWithAccounts = useCallback(
     async () => await fetchNotifications({ auth, settings }),

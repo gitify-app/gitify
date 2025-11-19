@@ -55,6 +55,8 @@ describe('renderer/context/App.tsx', () => {
   const markNotificationsAsDoneMock = jest.fn();
   const unsubscribeNotificationMock = jest.fn();
 
+  // Removed unused zoomTimeout
+
   const saveStateSpy = jest
     .spyOn(storage, 'saveState')
     .mockImplementation(jest.fn());

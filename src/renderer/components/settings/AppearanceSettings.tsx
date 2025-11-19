@@ -1,4 +1,4 @@
-import { type FC, useContext, useState } from 'react';
+import { type FC, useContext } from 'react';
 
 import {
   PaintbrushIcon,
@@ -23,33 +23,16 @@ import {
   canIncreaseZoom,
   decreaseZoom,
   increaseZoom,
+  resetZoomLevel,
   zoomLevelToPercentage,
 } from '../../utils/zoom';
 import { Checkbox } from '../fields/Checkbox';
 import { FieldLabel } from '../fields/FieldLabel';
 import { Title } from '../primitives/Title';
 
-let timeout: NodeJS.Timeout;
-const DELAY = 200;
-
 export const AppearanceSettings: FC = () => {
   const { auth, settings, updateSetting } = useContext(AppContext);
-  const [zoomPercentage, setZoomPercentage] = useState(
-    zoomLevelToPercentage(window.gitify.zoom.getLevel()),
-  );
-
-  window.addEventListener('resize', () => {
-    // clear the timeout
-    clearTimeout(timeout);
-    // start timing for event "completion"
-    timeout = setTimeout(() => {
-      const zoomPercentage = zoomLevelToPercentage(
-        window.gitify.zoom.getLevel(),
-      );
-      setZoomPercentage(zoomPercentage);
-      updateSetting('zoomPercentage', zoomPercentage);
-    }, DELAY);
-  });
+  const zoomPercentage = zoomLevelToPercentage(window.gitify.zoom.getLevel());
 
   return (
     <fieldset>
@@ -148,7 +131,7 @@ export const AppearanceSettings: FC = () => {
               aria-label="Reset zoom"
               data-testid="settings-zoom-reset"
               icon={SyncIcon}
-              onClick={() => window.gitify.zoom.setLevel(0)}
+              onClick={() => resetZoomLevel()}
               size="small"
               unsafeDisableTooltip={true}
               variant="danger"
