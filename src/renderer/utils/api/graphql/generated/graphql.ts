@@ -800,6 +800,31 @@ export type AddedToProjectEvent = Node & {
   projectColumnName: Scalars['String']['output'];
 };
 
+/** Represents a 'added_to_project_v2' event on a given issue or pull request. */
+export type AddedToProjectV2Event = Node & ProjectV2Event & {
+  __typename?: 'AddedToProjectV2Event';
+  /** Identifies the actor who performed the event. */
+  actor?: Maybe<Actor>;
+  /** Identifies the date and time when the object was created. */
+  createdAt: Scalars['DateTime']['output'];
+  /** The Node ID of the AddedToProjectV2Event object */
+  id: Scalars['ID']['output'];
+  /** Project referenced by event. */
+  project?: Maybe<ProjectV2>;
+  /** Did this event result from workflow automation? */
+  wasAutomated: Scalars['Boolean']['output'];
+};
+
+/** Copilot Agentic fields in context of the current viewer. */
+export type Agentic = {
+  /** Channel value for subscribing to live updates for session creations. */
+  viewerCopilotAgentCreatesChannel?: Maybe<Scalars['String']['output']>;
+  /** Channel value for subscribing to live updates for session log updates. */
+  viewerCopilotAgentLogUpdatesChannel?: Maybe<Scalars['String']['output']>;
+  /** Channel value for subscribing to live updates for session updates. */
+  viewerCopilotAgentUpdatesChannel?: Maybe<Scalars['String']['output']>;
+};
+
 /** An announcement banner for an enterprise or organization. */
 export type AnnouncementBanner = {
   __typename?: 'AnnouncementBanner';
@@ -3004,6 +3029,8 @@ export type CommitComment = Comment & Deletable & Minimizable & Node & Reactable
   viewerCanMinimize: Scalars['Boolean']['output'];
   /** Can user react to this subject */
   viewerCanReact: Scalars['Boolean']['output'];
+  /** Check if the current viewer can unminimize this object. */
+  viewerCanUnminimize: Scalars['Boolean']['output'];
   /** Check if the current viewer can update this object. */
   viewerCanUpdate: Scalars['Boolean']['output'];
   /** Reasons why the current viewer can not update this comment. */
@@ -3772,6 +3799,21 @@ export type ConvertToDraftEvent = Node & UniformResourceLocatable & {
   url: Scalars['URI']['output'];
 };
 
+/** Represents a 'converted_from_draft' event on a given issue or pull request. */
+export type ConvertedFromDraftEvent = Node & ProjectV2Event & {
+  __typename?: 'ConvertedFromDraftEvent';
+  /** Identifies the actor who performed the event. */
+  actor?: Maybe<Actor>;
+  /** Identifies the date and time when the object was created. */
+  createdAt: Scalars['DateTime']['output'];
+  /** The Node ID of the ConvertedFromDraftEvent object */
+  id: Scalars['ID']['output'];
+  /** Project referenced by event. */
+  project?: Maybe<ProjectV2>;
+  /** Did this event result from workflow automation? */
+  wasAutomated: Scalars['Boolean']['output'];
+};
+
 /** Represents a 'converted_note_to_issue' event on a given issue or pull request. */
 export type ConvertedNoteToIssueEvent = Node & {
   __typename?: 'ConvertedNoteToIssueEvent';
@@ -3808,6 +3850,23 @@ export type ConvertedToDiscussionEvent = Node & {
   discussion?: Maybe<Discussion>;
   /** The Node ID of the ConvertedToDiscussionEvent object */
   id: Scalars['ID']['output'];
+};
+
+/** Request Copilot code review for new pull requests automatically if the author has access to Copilot code review. */
+export type CopilotCodeReviewParameters = {
+  __typename?: 'CopilotCodeReviewParameters';
+  /** Copilot automatically reviews draft pull requests before they are marked as ready for review. */
+  reviewDraftPullRequests: Scalars['Boolean']['output'];
+  /** Copilot automatically reviews each new push to the pull request. */
+  reviewOnPush: Scalars['Boolean']['output'];
+};
+
+/** Request Copilot code review for new pull requests automatically if the author has access to Copilot code review. */
+export type CopilotCodeReviewParametersInput = {
+  /** Copilot automatically reviews draft pull requests before they are marked as ready for review. */
+  reviewDraftPullRequests?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Copilot automatically reviews each new push to the pull request. */
+  reviewOnPush?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 /** Copilot endpoint information */
@@ -4211,6 +4270,8 @@ export type CreateIssueInput = {
   parentIssueId?: InputMaybe<Scalars['ID']['input']>;
   /** An array of Node IDs for projects associated with this issue. */
   projectIds?: InputMaybe<Array<Scalars['ID']['input']>>;
+  /** An array of Node IDs for Projects V2 associated with this issue. */
+  projectV2Ids?: InputMaybe<Array<Scalars['ID']['input']>>;
   /** The Node ID of the repository. */
   repositoryId: Scalars['ID']['input'];
   /** The title for the issue. */
@@ -6326,7 +6387,7 @@ export type Discussion = Closable & Comment & Deletable & Labelable & Lockable &
   answerChosenAt?: Maybe<Scalars['DateTime']['output']>;
   /** The user who chose this discussion's answer, if answered. */
   answerChosenBy?: Maybe<Actor>;
-  /** The actor who authored the comment. */
+  /** The actor who authored the discussion. */
   author?: Maybe<Actor>;
   /** Author's association with the subject of the comment. */
   authorAssociation: CommentAuthorAssociation;
@@ -6581,6 +6642,8 @@ export type DiscussionComment = Comment & Deletable & Minimizable & Node & React
   viewerCanReact: Scalars['Boolean']['output'];
   /** Can the current user unmark this comment as an answer? */
   viewerCanUnmarkAsAnswer: Scalars['Boolean']['output'];
+  /** Check if the current viewer can unminimize this object. */
+  viewerCanUnminimize: Scalars['Boolean']['output'];
   /** Check if the current viewer can update this object. */
   viewerCanUpdate: Scalars['Boolean']['output'];
   /** Whether or not the current user can add or remove an upvote on this subject. */
@@ -9103,6 +9166,8 @@ export type GistComment = Comment & Deletable & Minimizable & Node & Updatable &
   viewerCanDelete: Scalars['Boolean']['output'];
   /** Check if the current viewer can minimize this object. */
   viewerCanMinimize: Scalars['Boolean']['output'];
+  /** Check if the current viewer can unminimize this object. */
+  viewerCanUnminimize: Scalars['Boolean']['output'];
   /** Check if the current viewer can update this object. */
   viewerCanUpdate: Scalars['Boolean']['output'];
   /** Reasons why the current viewer can not update this comment. */
@@ -10112,6 +10177,8 @@ export type IssueComment = Comment & Deletable & Minimizable & Node & Reactable 
   viewerCanMinimize: Scalars['Boolean']['output'];
   /** Can user react to this subject */
   viewerCanReact: Scalars['Boolean']['output'];
+  /** Check if the current viewer can unminimize this object. */
+  viewerCanUnminimize: Scalars['Boolean']['output'];
   /** Check if the current viewer can update this object. */
   viewerCanUpdate: Scalars['Boolean']['output'];
   /** Reasons why the current viewer can not update this comment. */
@@ -10215,6 +10282,10 @@ export type IssueDependenciesSummary = {
   blockedBy: Scalars['Int']['output'];
   /** Count of issues this issue is blocking */
   blocking: Scalars['Int']['output'];
+  /** Total count of issues this issue is blocked by (open and closed) */
+  totalBlockedBy: Scalars['Int']['output'];
+  /** Total count of issues this issue is blocking (open and closed) */
+  totalBlocking: Scalars['Int']['output'];
 };
 
 /** Ordering options issue dependencies */
@@ -10384,7 +10455,7 @@ export type IssueTimelineItemEdge = {
 };
 
 /** An item in an issue timeline */
-export type IssueTimelineItems = AddedToProjectEvent | AssignedEvent | BlockedByAddedEvent | BlockedByRemovedEvent | BlockingAddedEvent | BlockingRemovedEvent | ClosedEvent | CommentDeletedEvent | ConnectedEvent | ConvertedNoteToIssueEvent | ConvertedToDiscussionEvent | CrossReferencedEvent | DemilestonedEvent | DisconnectedEvent | IssueComment | IssueTypeAddedEvent | IssueTypeChangedEvent | IssueTypeRemovedEvent | LabeledEvent | LockedEvent | MarkedAsDuplicateEvent | MentionedEvent | MilestonedEvent | MovedColumnsInProjectEvent | ParentIssueAddedEvent | ParentIssueRemovedEvent | PinnedEvent | ReferencedEvent | RemovedFromProjectEvent | RenamedTitleEvent | ReopenedEvent | SubIssueAddedEvent | SubIssueRemovedEvent | SubscribedEvent | TransferredEvent | UnassignedEvent | UnlabeledEvent | UnlockedEvent | UnmarkedAsDuplicateEvent | UnpinnedEvent | UnsubscribedEvent | UserBlockedEvent;
+export type IssueTimelineItems = AddedToProjectEvent | AddedToProjectV2Event | AssignedEvent | BlockedByAddedEvent | BlockedByRemovedEvent | BlockingAddedEvent | BlockingRemovedEvent | ClosedEvent | CommentDeletedEvent | ConnectedEvent | ConvertedFromDraftEvent | ConvertedNoteToIssueEvent | ConvertedToDiscussionEvent | CrossReferencedEvent | DemilestonedEvent | DisconnectedEvent | IssueComment | IssueTypeAddedEvent | IssueTypeChangedEvent | IssueTypeRemovedEvent | LabeledEvent | LockedEvent | MarkedAsDuplicateEvent | MentionedEvent | MilestonedEvent | MovedColumnsInProjectEvent | ParentIssueAddedEvent | ParentIssueRemovedEvent | PinnedEvent | ProjectV2ItemStatusChangedEvent | ReferencedEvent | RemovedFromProjectEvent | RemovedFromProjectV2Event | RenamedTitleEvent | ReopenedEvent | SubIssueAddedEvent | SubIssueRemovedEvent | SubscribedEvent | TransferredEvent | UnassignedEvent | UnlabeledEvent | UnlockedEvent | UnmarkedAsDuplicateEvent | UnpinnedEvent | UnsubscribedEvent | UserBlockedEvent;
 
 /** The connection type for IssueTimelineItems. */
 export type IssueTimelineItemsConnection = {
@@ -10418,6 +10489,8 @@ export type IssueTimelineItemsEdge = {
 export enum IssueTimelineItemsItemType {
   /** Represents a 'added_to_project' event on a given issue or pull request. */
   AddedToProjectEvent = 'ADDED_TO_PROJECT_EVENT',
+  /** Represents a 'added_to_project_v2' event on a given issue or pull request. */
+  AddedToProjectV2Event = 'ADDED_TO_PROJECT_V2_EVENT',
   /** Represents an 'assigned' event on any assignable object. */
   AssignedEvent = 'ASSIGNED_EVENT',
   /** Represents a 'blocked_by_added' event on a given issue. */
@@ -10434,6 +10507,8 @@ export enum IssueTimelineItemsItemType {
   CommentDeletedEvent = 'COMMENT_DELETED_EVENT',
   /** Represents a 'connected' event on a given issue or pull request. */
   ConnectedEvent = 'CONNECTED_EVENT',
+  /** Represents a 'converted_from_draft' event on a given issue or pull request. */
+  ConvertedFromDraftEvent = 'CONVERTED_FROM_DRAFT_EVENT',
   /** Represents a 'converted_note_to_issue' event on a given issue or pull request. */
   ConvertedNoteToIssueEvent = 'CONVERTED_NOTE_TO_ISSUE_EVENT',
   /** Represents a 'converted_to_discussion' event on a given issue. */
@@ -10470,10 +10545,14 @@ export enum IssueTimelineItemsItemType {
   ParentIssueRemovedEvent = 'PARENT_ISSUE_REMOVED_EVENT',
   /** Represents a 'pinned' event on a given issue or pull request. */
   PinnedEvent = 'PINNED_EVENT',
+  /** Represents a 'project_v2_item_status_changed' event on a given issue or pull request. */
+  ProjectV2ItemStatusChangedEvent = 'PROJECT_V2_ITEM_STATUS_CHANGED_EVENT',
   /** Represents a 'referenced' event on a given `ReferencedSubject`. */
   ReferencedEvent = 'REFERENCED_EVENT',
   /** Represents a 'removed_from_project' event on a given issue or pull request. */
   RemovedFromProjectEvent = 'REMOVED_FROM_PROJECT_EVENT',
+  /** Represents a 'removed_from_project_v2' event on a given issue or pull request. */
+  RemovedFromProjectV2Event = 'REMOVED_FROM_PROJECT_V2_EVENT',
   /** Represents a 'renamed' event on a given issue or pull request */
   RenamedTitleEvent = 'RENAMED_TITLE_EVENT',
   /** Represents a 'reopened' event on any `Closable`. */
@@ -12298,6 +12377,8 @@ export type Minimizable = {
   minimizedReason?: Maybe<Scalars['String']['output']>;
   /** Check if the current viewer can minimize this object. */
   viewerCanMinimize: Scalars['Boolean']['output'];
+  /** Check if the current viewer can unminimize this object. */
+  viewerCanUnminimize: Scalars['Boolean']['output'];
 };
 
 /** Autogenerated input type of MinimizeComment */
@@ -18739,6 +18820,40 @@ export enum OrganizationOrderField {
   Login = 'LOGIN'
 }
 
+/** Parameters to be used for the organization_property condition */
+export type OrganizationPropertyConditionTarget = {
+  __typename?: 'OrganizationPropertyConditionTarget';
+  /** Array of organization properties that must not match. */
+  exclude: Array<OrganizationPropertyTargetDefinition>;
+  /** Array of organization properties that must match */
+  include: Array<OrganizationPropertyTargetDefinition>;
+};
+
+/** Parameters to be used for the organization_property condition */
+export type OrganizationPropertyConditionTargetInput = {
+  /** Array of organization properties that must not match. */
+  exclude: Array<OrganizationPropertyTargetDefinitionInput>;
+  /** Array of organization properties that must match */
+  include: Array<OrganizationPropertyTargetDefinitionInput>;
+};
+
+/** A property that must match */
+export type OrganizationPropertyTargetDefinition = {
+  __typename?: 'OrganizationPropertyTargetDefinition';
+  /** The name of the property */
+  name: Scalars['String']['output'];
+  /** The values to match for */
+  propertyValues: Array<Scalars['String']['output']>;
+};
+
+/** A property that must match */
+export type OrganizationPropertyTargetDefinitionInput = {
+  /** The name of the property */
+  name: Scalars['String']['input'];
+  /** The values to match for */
+  propertyValues: Array<Scalars['String']['input']>;
+};
+
 /** An organization teams hovercard context */
 export type OrganizationTeamsHovercardContext = HovercardContext & {
   __typename?: 'OrganizationTeamsHovercardContext';
@@ -20298,6 +20413,7 @@ export type ProjectV2ItemsArgs = {
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<ProjectV2ItemOrder>;
+  query?: InputMaybe<Scalars['String']['input']>;
 };
 
 
@@ -20431,6 +20547,14 @@ export type ProjectV2Edge = {
   cursor: Scalars['String']['output'];
   /** The item at the end of the edge. */
   node?: Maybe<ProjectV2>;
+};
+
+/** Represents an event related to a project on the timeline of an issue or pull request. */
+export type ProjectV2Event = {
+  /** Project referenced by event. */
+  project?: Maybe<ProjectV2>;
+  /** Did this event result from workflow automation? */
+  wasAutomated: Scalars['Boolean']['output'];
 };
 
 /** A field inside a project. */
@@ -20950,6 +21074,25 @@ export enum ProjectV2ItemOrderField {
   /** Order project v2 items by the their position in the project */
   Position = 'POSITION'
 }
+
+/** Represents a 'project_v2_item_status_changed' event on a given issue or pull request. */
+export type ProjectV2ItemStatusChangedEvent = Node & ProjectV2Event & {
+  __typename?: 'ProjectV2ItemStatusChangedEvent';
+  /** Identifies the actor who performed the event. */
+  actor?: Maybe<Actor>;
+  /** Identifies the date and time when the object was created. */
+  createdAt: Scalars['DateTime']['output'];
+  /** The Node ID of the ProjectV2ItemStatusChangedEvent object */
+  id: Scalars['ID']['output'];
+  /** The previous status of the project item. */
+  previousStatus: Scalars['String']['output'];
+  /** Project referenced by event. */
+  project?: Maybe<ProjectV2>;
+  /** The new status of the project item. */
+  status: Scalars['String']['output'];
+  /** Did this event result from workflow automation? */
+  wasAutomated: Scalars['Boolean']['output'];
+};
 
 /** The type of a project item. */
 export enum ProjectV2ItemType {
@@ -22360,6 +22503,12 @@ export type PullRequestParameters = {
   requiredApprovingReviewCount: Scalars['Int']['output'];
   /** All conversations on code must be resolved before a pull request can be merged. */
   requiredReviewThreadResolution: Scalars['Boolean']['output'];
+  /**
+   * This field is in beta and subject to change. A collection of reviewers and
+   * associated file patterns. Each reviewer has a list of file patterns which
+   * determine the files that reviewer is required to review.
+   */
+  requiredReviewers?: Maybe<Array<RequiredReviewerConfiguration>>;
 };
 
 /** Require all commits be made to a non-target branch and submitted via a pull request before they can be merged. */
@@ -22381,6 +22530,12 @@ export type PullRequestParametersInput = {
   requiredApprovingReviewCount: Scalars['Int']['input'];
   /** All conversations on code must be resolved before a pull request can be merged. */
   requiredReviewThreadResolution: Scalars['Boolean']['input'];
+  /**
+   * This argument is in beta and subject to change. A collection of reviewers and
+   * associated file patterns. Each reviewer has a list of file patterns which
+   * determine the files that reviewer is required to review.
+   */
+  requiredReviewers?: InputMaybe<Array<RequiredReviewerConfigurationInput>>;
 };
 
 /** A review object for a given pull request. */
@@ -22459,6 +22614,8 @@ export type PullRequestReview = Comment & Deletable & Minimizable & Node & React
   viewerCanMinimize: Scalars['Boolean']['output'];
   /** Can user react to this subject */
   viewerCanReact: Scalars['Boolean']['output'];
+  /** Check if the current viewer can unminimize this object. */
+  viewerCanUnminimize: Scalars['Boolean']['output'];
   /** Check if the current viewer can update this object. */
   viewerCanUpdate: Scalars['Boolean']['output'];
   /** Reasons why the current viewer can not update this comment. */
@@ -22607,6 +22764,8 @@ export type PullRequestReviewComment = Comment & Deletable & Minimizable & Node 
   viewerCanMinimize: Scalars['Boolean']['output'];
   /** Can user react to this subject */
   viewerCanReact: Scalars['Boolean']['output'];
+  /** Check if the current viewer can unminimize this object. */
+  viewerCanUnminimize: Scalars['Boolean']['output'];
   /** Check if the current viewer can update this object. */
   viewerCanUpdate: Scalars['Boolean']['output'];
   /** Reasons why the current viewer can not update this comment. */
@@ -22932,7 +23091,7 @@ export type PullRequestTimelineItemEdge = {
 };
 
 /** An item in a pull request timeline */
-export type PullRequestTimelineItems = AddedToMergeQueueEvent | AddedToProjectEvent | AssignedEvent | AutoMergeDisabledEvent | AutoMergeEnabledEvent | AutoRebaseEnabledEvent | AutoSquashEnabledEvent | AutomaticBaseChangeFailedEvent | AutomaticBaseChangeSucceededEvent | BaseRefChangedEvent | BaseRefDeletedEvent | BaseRefForcePushedEvent | BlockedByAddedEvent | BlockedByRemovedEvent | BlockingAddedEvent | BlockingRemovedEvent | ClosedEvent | CommentDeletedEvent | ConnectedEvent | ConvertToDraftEvent | ConvertedNoteToIssueEvent | ConvertedToDiscussionEvent | CrossReferencedEvent | DemilestonedEvent | DeployedEvent | DeploymentEnvironmentChangedEvent | DisconnectedEvent | HeadRefDeletedEvent | HeadRefForcePushedEvent | HeadRefRestoredEvent | IssueComment | IssueTypeAddedEvent | IssueTypeChangedEvent | IssueTypeRemovedEvent | LabeledEvent | LockedEvent | MarkedAsDuplicateEvent | MentionedEvent | MergedEvent | MilestonedEvent | MovedColumnsInProjectEvent | ParentIssueAddedEvent | ParentIssueRemovedEvent | PinnedEvent | PullRequestCommit | PullRequestCommitCommentThread | PullRequestReview | PullRequestReviewThread | PullRequestRevisionMarker | ReadyForReviewEvent | ReferencedEvent | RemovedFromMergeQueueEvent | RemovedFromProjectEvent | RenamedTitleEvent | ReopenedEvent | ReviewDismissedEvent | ReviewRequestRemovedEvent | ReviewRequestedEvent | SubIssueAddedEvent | SubIssueRemovedEvent | SubscribedEvent | TransferredEvent | UnassignedEvent | UnlabeledEvent | UnlockedEvent | UnmarkedAsDuplicateEvent | UnpinnedEvent | UnsubscribedEvent | UserBlockedEvent;
+export type PullRequestTimelineItems = AddedToMergeQueueEvent | AddedToProjectEvent | AddedToProjectV2Event | AssignedEvent | AutoMergeDisabledEvent | AutoMergeEnabledEvent | AutoRebaseEnabledEvent | AutoSquashEnabledEvent | AutomaticBaseChangeFailedEvent | AutomaticBaseChangeSucceededEvent | BaseRefChangedEvent | BaseRefDeletedEvent | BaseRefForcePushedEvent | BlockedByAddedEvent | BlockedByRemovedEvent | BlockingAddedEvent | BlockingRemovedEvent | ClosedEvent | CommentDeletedEvent | ConnectedEvent | ConvertToDraftEvent | ConvertedFromDraftEvent | ConvertedNoteToIssueEvent | ConvertedToDiscussionEvent | CrossReferencedEvent | DemilestonedEvent | DeployedEvent | DeploymentEnvironmentChangedEvent | DisconnectedEvent | HeadRefDeletedEvent | HeadRefForcePushedEvent | HeadRefRestoredEvent | IssueComment | IssueTypeAddedEvent | IssueTypeChangedEvent | IssueTypeRemovedEvent | LabeledEvent | LockedEvent | MarkedAsDuplicateEvent | MentionedEvent | MergedEvent | MilestonedEvent | MovedColumnsInProjectEvent | ParentIssueAddedEvent | ParentIssueRemovedEvent | PinnedEvent | ProjectV2ItemStatusChangedEvent | PullRequestCommit | PullRequestCommitCommentThread | PullRequestReview | PullRequestReviewThread | PullRequestRevisionMarker | ReadyForReviewEvent | ReferencedEvent | RemovedFromMergeQueueEvent | RemovedFromProjectEvent | RemovedFromProjectV2Event | RenamedTitleEvent | ReopenedEvent | ReviewDismissedEvent | ReviewRequestRemovedEvent | ReviewRequestedEvent | SubIssueAddedEvent | SubIssueRemovedEvent | SubscribedEvent | TransferredEvent | UnassignedEvent | UnlabeledEvent | UnlockedEvent | UnmarkedAsDuplicateEvent | UnpinnedEvent | UnsubscribedEvent | UserBlockedEvent;
 
 /** The connection type for PullRequestTimelineItems. */
 export type PullRequestTimelineItemsConnection = {
@@ -22968,6 +23127,8 @@ export enum PullRequestTimelineItemsItemType {
   AddedToMergeQueueEvent = 'ADDED_TO_MERGE_QUEUE_EVENT',
   /** Represents a 'added_to_project' event on a given issue or pull request. */
   AddedToProjectEvent = 'ADDED_TO_PROJECT_EVENT',
+  /** Represents a 'added_to_project_v2' event on a given issue or pull request. */
+  AddedToProjectV2Event = 'ADDED_TO_PROJECT_V2_EVENT',
   /** Represents an 'assigned' event on any assignable object. */
   AssignedEvent = 'ASSIGNED_EVENT',
   /** Represents a 'automatic_base_change_failed' event on a given pull request. */
@@ -23002,6 +23163,8 @@ export enum PullRequestTimelineItemsItemType {
   CommentDeletedEvent = 'COMMENT_DELETED_EVENT',
   /** Represents a 'connected' event on a given issue or pull request. */
   ConnectedEvent = 'CONNECTED_EVENT',
+  /** Represents a 'converted_from_draft' event on a given issue or pull request. */
+  ConvertedFromDraftEvent = 'CONVERTED_FROM_DRAFT_EVENT',
   /** Represents a 'converted_note_to_issue' event on a given issue or pull request. */
   ConvertedNoteToIssueEvent = 'CONVERTED_NOTE_TO_ISSUE_EVENT',
   /** Represents a 'converted_to_discussion' event on a given issue. */
@@ -23052,6 +23215,8 @@ export enum PullRequestTimelineItemsItemType {
   ParentIssueRemovedEvent = 'PARENT_ISSUE_REMOVED_EVENT',
   /** Represents a 'pinned' event on a given issue or pull request. */
   PinnedEvent = 'PINNED_EVENT',
+  /** Represents a 'project_v2_item_status_changed' event on a given issue or pull request. */
+  ProjectV2ItemStatusChangedEvent = 'PROJECT_V2_ITEM_STATUS_CHANGED_EVENT',
   /** Represents a Git commit part of a pull request. */
   PullRequestCommit = 'PULL_REQUEST_COMMIT',
   /** Represents a commit comment thread part of a pull request. */
@@ -23070,6 +23235,8 @@ export enum PullRequestTimelineItemsItemType {
   RemovedFromMergeQueueEvent = 'REMOVED_FROM_MERGE_QUEUE_EVENT',
   /** Represents a 'removed_from_project' event on a given issue or pull request. */
   RemovedFromProjectEvent = 'REMOVED_FROM_PROJECT_EVENT',
+  /** Represents a 'removed_from_project_v2' event on a given issue or pull request. */
+  RemovedFromProjectV2Event = 'REMOVED_FROM_PROJECT_V2_EVENT',
   /** Represents a 'renamed' event on a given issue or pull request */
   RenamedTitleEvent = 'RENAMED_TITLE_EVENT',
   /** Represents a 'reopened' event on any `Closable`. */
@@ -24385,6 +24552,21 @@ export type RemovedFromProjectEvent = Node & {
    * @deprecated Projects (classic) is being deprecated in favor of the new Projects experience, see: https://github.blog/changelog/2024-05-23-sunset-notice-projects-classic/. Removal on 2025-04-01 UTC.
    */
   projectColumnName: Scalars['String']['output'];
+};
+
+/** Represents a 'removed_from_project_v2' event on a given issue or pull request. */
+export type RemovedFromProjectV2Event = Node & ProjectV2Event & {
+  __typename?: 'RemovedFromProjectV2Event';
+  /** Identifies the actor who performed the event. */
+  actor?: Maybe<Actor>;
+  /** Identifies the date and time when the object was created. */
+  createdAt: Scalars['DateTime']['output'];
+  /** The Node ID of the RemovedFromProjectV2Event object */
+  id: Scalars['ID']['output'];
+  /** Project referenced by event. */
+  project?: Maybe<ProjectV2>;
+  /** Did this event result from workflow automation? */
+  wasAutomated: Scalars['Boolean']['output'];
 };
 
 /** Represents a 'renamed' event on a given issue or pull request */
@@ -27957,6 +28139,8 @@ export type RepositoryRule = Node & {
 /** Set of conditions that determine if a ruleset will evaluate */
 export type RepositoryRuleConditions = {
   __typename?: 'RepositoryRuleConditions';
+  /** Configuration for the organization_property condition */
+  organizationProperty?: Maybe<OrganizationPropertyConditionTarget>;
   /** Configuration for the ref_name condition */
   refName?: Maybe<RefNameConditionTarget>;
   /** Configuration for the repository_id condition */
@@ -27969,6 +28153,8 @@ export type RepositoryRuleConditions = {
 
 /** Specifies the conditions required for a ruleset to evaluate */
 export type RepositoryRuleConditionsInput = {
+  /** Configuration for the organization_property condition */
+  organizationProperty?: InputMaybe<OrganizationPropertyConditionTargetInput>;
   /** Configuration for the ref_name condition */
   refName?: InputMaybe<RefNameConditionTargetInput>;
   /** Configuration for the repository_id condition */
@@ -28047,6 +28233,8 @@ export enum RepositoryRuleType {
   CommitAuthorEmailPattern = 'COMMIT_AUTHOR_EMAIL_PATTERN',
   /** Commit message pattern */
   CommitMessagePattern = 'COMMIT_MESSAGE_PATTERN',
+  /** Request Copilot code review for new pull requests automatically if the author has access to Copilot code review. */
+  CopilotCodeReview = 'COPILOT_CODE_REVIEW',
   /** Only allow users with bypass permission to create matching refs. */
   Creation = 'CREATION',
   /** Only allow users with bypass permissions to delete matching refs. */
@@ -28182,6 +28370,8 @@ export type RepositoryRulesetBypassActor = Node & {
 export enum RepositoryRulesetBypassActorBypassMode {
   /** The actor can always bypass rules */
   Always = 'ALWAYS',
+  /** The actor is exempt from rules without generating a pass / fail result */
+  Exempt = 'EXEMPT',
   /** The actor can only bypass rules via a pull request */
   PullRequest = 'PULL_REQUEST'
 }
@@ -28571,6 +28761,8 @@ export type RepositoryVulnerabilityAlertConnection = {
 export enum RepositoryVulnerabilityAlertDependencyRelationship {
   /** A direct dependency of your project */
   Direct = 'DIRECT',
+  /** The relationship could not be determined */
+  Inconclusive = 'INCONCLUSIVE',
   /** A transitive dependency of your project */
   Transitive = 'TRANSITIVE',
   /** The relationship is unknown */
@@ -28721,6 +28913,39 @@ export type RequiredDeploymentsParameters = {
 export type RequiredDeploymentsParametersInput = {
   /** The environments that must be successfully deployed to before branches can be merged. */
   requiredDeploymentEnvironments: Array<Scalars['String']['input']>;
+};
+
+/** A reviewing team, and file patterns describing which files they must approve changes to. */
+export type RequiredReviewerConfiguration = {
+  __typename?: 'RequiredReviewerConfiguration';
+  /**
+   * Array of file patterns. Pull requests which change matching files must be
+   * approved by the specified team. File patterns use fnmatch syntax.
+   */
+  filePatterns: Array<Scalars['String']['output']>;
+  /**
+   * Minimum number of approvals required from the specified team. If set to zero,
+   * the team will be added to the pull request but approval is optional.
+   */
+  minimumApprovals: Scalars['Int']['output'];
+  /** Node ID of the team which must review changes to matching files. */
+  reviewerId: Scalars['ID']['output'];
+};
+
+/** A reviewing team, and file patterns describing which files they must approve changes to. */
+export type RequiredReviewerConfigurationInput = {
+  /**
+   * Array of file patterns. Pull requests which change matching files must be
+   * approved by the specified team. File patterns use fnmatch syntax.
+   */
+  filePatterns: Array<Scalars['String']['input']>;
+  /**
+   * Minimum number of approvals required from the specified team. If set to zero,
+   * the team will be added to the pull request but approval is optional.
+   */
+  minimumApprovals: Scalars['Int']['input'];
+  /** Node ID of the team which must review changes to matching files. */
+  reviewerId: Scalars['ID']['input'];
 };
 
 /** Represents a required status check for a protected branch, but not any specific run of that check. */
@@ -29095,7 +29320,7 @@ export enum RuleEnforcement {
 }
 
 /** Types which can be parameters for `RepositoryRule` objects. */
-export type RuleParameters = BranchNamePatternParameters | CodeScanningParameters | CommitAuthorEmailPatternParameters | CommitMessagePatternParameters | CommitterEmailPatternParameters | FileExtensionRestrictionParameters | FilePathRestrictionParameters | MaxFilePathLengthParameters | MaxFileSizeParameters | MergeQueueParameters | PullRequestParameters | RequiredDeploymentsParameters | RequiredStatusChecksParameters | TagNamePatternParameters | UpdateParameters | WorkflowsParameters;
+export type RuleParameters = BranchNamePatternParameters | CodeScanningParameters | CommitAuthorEmailPatternParameters | CommitMessagePatternParameters | CommitterEmailPatternParameters | CopilotCodeReviewParameters | FileExtensionRestrictionParameters | FilePathRestrictionParameters | MaxFilePathLengthParameters | MaxFileSizeParameters | MergeQueueParameters | PullRequestParameters | RequiredDeploymentsParameters | RequiredStatusChecksParameters | TagNamePatternParameters | UpdateParameters | WorkflowsParameters;
 
 /** Specifies the parameters for a `RepositoryRule` object. Only one of the fields should be specified. */
 export type RuleParametersInput = {
@@ -29109,6 +29334,8 @@ export type RuleParametersInput = {
   commitMessagePattern?: InputMaybe<CommitMessagePatternParametersInput>;
   /** Parameters used for the `committer_email_pattern` rule type */
   committerEmailPattern?: InputMaybe<CommitterEmailPatternParametersInput>;
+  /** Parameters used for the `copilot_code_review` rule type */
+  copilotCodeReview?: InputMaybe<CopilotCodeReviewParametersInput>;
   /** Parameters used for the `file_extension_restriction` rule type */
   fileExtensionRestriction?: InputMaybe<FileExtensionRestrictionParametersInput>;
   /** Parameters used for the `file_path_restriction` rule type */
@@ -29282,10 +29509,7 @@ export enum SearchType {
   Discussion = 'DISCUSSION',
   /** Returns results matching issues in repositories. */
   Issue = 'ISSUE',
-  /**
-   * Returns results matching issues in repositories.
-   * @deprecated Search for issues and pull requests will be overridden by advanced search on November 4, 2025. You can read more about this change on https://github.blog/changelog/2025-03-06-github-issues-projects-api-support-for-issues-advanced-search-and-more/. Removal on 2025-11-04 UTC.
-   */
+  /** Returns results matching issues in repositories. */
   IssueAdvanced = 'ISSUE_ADVANCED',
   /** Returns results matching repositories. */
   Repository = 'REPOSITORY',
@@ -34603,14 +34827,18 @@ export type UpdateProjectV2FieldInput = {
   clientMutationId?: InputMaybe<Scalars['String']['input']>;
   /** The ID of the field to update. */
   fieldId: Scalars['ID']['input'];
-  /** Configuration for an iteration field. */
+  /**
+   * Configuration for a field of type ITERATION. Empty input is ignored, provided
+   * values overwrite the existing configuration, and existing configuration should
+   * be fetched for partial updates.
+   */
   iterationConfiguration?: InputMaybe<ProjectV2IterationFieldConfigurationInput>;
   /** The name to update. */
   name?: InputMaybe<Scalars['String']['input']>;
   /**
-   * Options for a field of type SINGLE_SELECT. If empty, no changes will be made
-   * to the options. If values are present, they will overwrite the existing
-   * options for the field.
+   * Options for a field of type SINGLE_SELECT. Empty input is ignored, provided
+   * values overwrite existing options, and existing options should be fetched for
+   * partial updates.
    */
   singleSelectOptions?: InputMaybe<Array<ProjectV2SingleSelectFieldOptionInput>>;
 };
@@ -35184,7 +35412,7 @@ export type UpdateUserListsForItemPayload = {
 };
 
 /** A user is an individual's account on GitHub that owns repositories and can make new content. */
-export type User = Actor & Node & PackageOwner & ProfileOwner & ProjectOwner & ProjectV2Owner & ProjectV2Recent & RepositoryDiscussionAuthor & RepositoryDiscussionCommentAuthor & RepositoryOwner & Sponsorable & UniformResourceLocatable & {
+export type User = Actor & Agentic & Node & PackageOwner & ProfileOwner & ProjectOwner & ProjectV2Owner & ProjectV2Recent & RepositoryDiscussionAuthor & RepositoryDiscussionCommentAuthor & RepositoryOwner & Sponsorable & UniformResourceLocatable & {
   __typename?: 'User';
   /** Determine if this repository owner has any items that can be pinned to their profile. */
   anyPinnableItems: Scalars['Boolean']['output'];
@@ -35387,6 +35615,12 @@ export type User = Actor & Node & PackageOwner & ProfileOwner & ProjectOwner & P
   viewerCanFollow: Scalars['Boolean']['output'];
   /** Whether or not the viewer is able to sponsor this user/organization. */
   viewerCanSponsor: Scalars['Boolean']['output'];
+  /** Channel value for subscribing to live updates for session creations. */
+  viewerCopilotAgentCreatesChannel?: Maybe<Scalars['String']['output']>;
+  /** Channel value for subscribing to live updates for session log updates. */
+  viewerCopilotAgentLogUpdatesChannel?: Maybe<Scalars['String']['output']>;
+  /** Channel value for subscribing to live updates for session updates. */
+  viewerCopilotAgentUpdatesChannel?: Maybe<Scalars['String']['output']>;
   /** Whether or not this user is followed by the viewer. Inverse of isFollowingViewer. */
   viewerIsFollowing: Scalars['Boolean']['output'];
   /** True if the viewer is sponsoring this user/organization. */
