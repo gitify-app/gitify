@@ -13,7 +13,7 @@ export default class MenuBuilder {
   private readonly updateAvailableMenuItem: MenuItem;
   private readonly updateReadyForInstallMenuItem: MenuItem;
 
-  menubar: Menubar;
+  private readonly menubar: Menubar;
 
   constructor(menubar: Menubar) {
     this.menubar = menubar;
