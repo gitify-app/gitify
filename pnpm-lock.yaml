@@ -44,13 +44,13 @@ importers:
         version: 3.1.1
       '@primer/css':
         specifier: 22.0.2
-        version: 22.0.2(@primer/primitives@11.3.0)
+        version: 22.0.2(@primer/primitives@11.3.1)
       '@primer/octicons-react':
         specifier: 19.21.0
         version: 19.21.0(react@19.2.0)
       '@primer/primitives':
-        specifier: 11.3.0
-        version: 11.3.0
+        specifier: 11.3.1
+        version: 11.3.1
       '@primer/react':
         specifier: 38.1.0
         version: 38.1.0(@types/react-dom@19.2.3(@types/react@19.2.6))(@types/react-is@18.3.0)(@types/react@19.2.6)(react-dom@19.2.0(react@19.2.0))(react-is@18.3.1)(react@19.2.0)
@@ -1196,8 +1196,8 @@ packages:
     peerDependencies:
       react: '>=16.3'
 
-  '@primer/primitives@11.3.0':
-    resolution: {integrity: sha512-eQkAaODy7/T1LwX38YLdQUKNTcLdiIY5DN8u2Ylov0Y1MOGpMCW4yF6/oH8slS3WDnQVbtNOAqqyuGYM8Un41g==}
+  '@primer/primitives@11.3.1':
+    resolution: {integrity: sha512-f5FXeUHQ0iyxt1UF6MqeajQ9jRV/7uOGLECU5KuFWhMioCZOho09jS6alZA9tiwksHr2LYXfo7AdFczpEz3Npw==}
 
   '@primer/react@38.1.0':
     resolution: {integrity: sha512-942b59FzsHyKDSyfCnXGjot3c0O68sa0sjto7S0ZhLUj4wnrnPK9nopt3xmcQZa+z5ShwCOgfwKHrnQwjvn+Zg==}
@@ -6215,9 +6215,9 @@ snapshots:
 
   '@primer/behaviors@1.8.3': {}
 
-  '@primer/css@22.0.2(@primer/primitives@11.3.0)':
+  '@primer/css@22.0.2(@primer/primitives@11.3.1)':
     dependencies:
-      '@primer/primitives': 11.3.0
+      '@primer/primitives': 11.3.1
 
   '@primer/live-region-element@0.7.1':
     dependencies:
@@ -6227,7 +6227,7 @@ snapshots:
     dependencies:
       react: 19.2.0
 
-  '@primer/primitives@11.3.0': {}
+  '@primer/primitives@11.3.1': {}
 
   '@primer/react@38.1.0(@types/react-dom@19.2.3(@types/react@19.2.6))(@types/react-is@18.3.0)(@types/react@19.2.6)(react-dom@19.2.0(react@19.2.0))(react-is@18.3.1)(react@19.2.0)':
     dependencies:
@@ -6239,7 +6239,7 @@ snapshots:
       '@primer/behaviors': 1.8.3
       '@primer/live-region-element': 0.7.1
       '@primer/octicons-react': 19.21.0(react@19.2.0)
-      '@primer/primitives': 11.3.0
+      '@primer/primitives': 11.3.1
       clsx: 2.1.1
       color2k: 2.0.3
       deepmerge: 4.3.1
