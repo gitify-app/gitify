@@ -148,10 +148,10 @@ export enum FetchType {
   INACTIVITY = 'INACTIVITY',
 }
 
-export type RadioGroupItem = {
+export interface RadioGroupItem {
   label: string;
   value: string;
-};
+}
 
 export interface AccountNotifications {
   account: Account;
@@ -199,11 +199,11 @@ export enum Opacity {
   HIGH = 'opacity-90',
 }
 
-export type PullRequestApprovalIcon = {
+export interface PullRequestApprovalIcon {
   type: FC<OcticonProps>;
   color: IconColor;
   description: string;
-};
+}
 
 export enum Size {
   XSMALL = 12,
@@ -213,9 +213,9 @@ export enum Size {
   XLARGE = 20,
 }
 
-export type Chevron = {
+export interface Chevron {
   icon: FC<OcticonProps>;
   label: string;
-};
+}
 
 export type FilterStateType = 'open' | 'closed' | 'merged' | 'draft' | 'other';
