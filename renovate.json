@@ -1,15 +1,13 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:recommended",
-    ":separateMultipleMajorReleases",
+    "config:best-practices",
     ":enableVulnerabilityAlerts",
-    "schedule:weekly",
+    ":separateMultipleMajorReleases",
     "customManagers:biomeVersions",
-    "helpers:pinGitHubActionDigests"
+    "schedule:weekly"
   ],
   "labels": ["dependency"],
-  "prConcurrentLimit": 5,
   "rangeStrategy": "pin",
   "minimumReleaseAge": "3 days",
   "packageRules": [
