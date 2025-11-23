@@ -4,6 +4,7 @@ import {
   app,
   type BrowserWindowConstructorOptions,
   globalShortcut,
+  net,
   safeStorage,
   shell,
 } from 'electron';
@@ -146,6 +147,11 @@ app.whenReady().then(async () => {
 
   onMainEvent(EVENTS.UPDATE_ICON_COLOR, (_, notificationsCount: number) => {
     if (!mb.tray.isDestroyed()) {
+      if (!net.isOnline()) {
+        setOfflineIcon();
+        return;
+      }
+
       if (notificationsCount < 0) {
         setErrorIcon();
         return;
@@ -227,27 +233,15 @@ const handleURL = (url: string) => {
 
 function setIdleIcon() {
   if (shouldUseAlternateIdleIcon) {
-    mb.tray.setImage(
-      menuBuilder.isUpdateAvailable()
-        ? TrayIcons.idleAlternateWithUpdate
-        : TrayIcons.idleAlternate,
-    );
+    mb.tray.setImage(TrayIcons.idleAlternate);
   } else {
-    mb.tray.setImage(
-      menuBuilder.isUpdateAvailable()
-        ? TrayIcons.idleWithUpdate
-        : TrayIcons.idle,
-    );
+    mb.tray.setImage(TrayIcons.idle);
   }
 }
 
 function setActiveIcon() {
   if (shouldUseUnreadActiveIcon) {
-    mb.tray.setImage(
-      menuBuilder.isUpdateAvailable()
-        ? TrayIcons.activeWithUpdate
-        : TrayIcons.active,
-    );
+    mb.tray.setImage(TrayIcons.active);
   } else {
     setIdleIcon();
   }
@@ -255,6 +249,10 @@ function setActiveIcon() {
 
 function setErrorIcon() {
   mb.tray.setImage(TrayIcons.error);
+}
+
+function setOfflineIcon() {
+  mb.tray.setImage(TrayIcons.offline);
 }
 
 /**
