@@ -14,10 +14,6 @@ declare const __brand: unique symbol;
 
 type Brand<B> = { [__brand]: B };
 
-export interface AuthState {
-  accounts: Account[];
-}
-
 export type Branded<T, B> = T & Brand<B>;
 
 export type AuthCode = Branded<string, 'AuthCode'>;
@@ -48,29 +44,49 @@ export interface Account {
   hasRequiredScopes?: boolean;
 }
 
-export type SettingsValue =
+/**
+ * All allowed Config and Filter Settings values to be stored in the application.
+ */
+export type SettingsValue = ConfigSettingsValue | FilterSettingsValue[];
+
+/**
+ * All Config Settings values to be stored in the application.
+ */
+export type ConfigSettingsValue =
   | boolean
   | number
   | FetchType
-  | FilterValue[]
   | GroupBy
   | OpenPreference
   | Percentage
   | Theme;
 
-export type FilterValue =
+/**
+ * All Filter Settings values to be stored in the application.
+ */
+export type FilterSettingsValue =
   | FilterStateType
   | Reason
   | SearchToken
   | SubjectType
   | UserType;
 
-export type SettingsState = AppearanceSettingsState &
+/**
+ * All allowed Config and Filter Settings keys to be stored in the application.
+ */
+export type SettingsState = ConfigSettingsState & FilterSettingsState;
+
+/**
+ * All Config Settings keys to be stored in the application.
+ */
+export type ConfigSettingsState = AppearanceSettingsState &
   NotificationSettingsState &
   TraySettingsState &
-  SystemSettingsState &
-  FilterSettingsState;
+  SystemSettingsState;
 
+/**
+ * Settings related to the appearance of the application.
+ */
 export interface AppearanceSettingsState {
   theme: Theme;
   increaseContrast: boolean;
@@ -79,6 +95,9 @@ export interface AppearanceSettingsState {
   wrapNotificationTitle: boolean;
 }
 
+/**
+ * Settings related to the notifications within the application.
+ */
 export interface NotificationSettingsState {
   groupBy: GroupBy;
   fetchType: FetchType;
@@ -93,12 +112,18 @@ export interface NotificationSettingsState {
   delayNotificationState: boolean;
 }
 
+/**
+ * Settings related to the tray / menu bar behavior.
+ */
 export interface TraySettingsState {
   showNotificationsCountInTray: boolean;
   useUnreadActiveIcon: boolean;
   useAlternateIdleIcon: boolean;
 }
 
+/**
+ * Settings related to the system behavior of the application.
+ */
 export interface SystemSettingsState {
   openLinks: OpenPreference;
   keyboardShortcut: boolean;
@@ -108,6 +133,9 @@ export interface SystemSettingsState {
   openAtStartup: boolean;
 }
 
+/**
+ * Settings related to the filtering of notifications within the application.
+ */
 export interface FilterSettingsState {
   filterIncludeSearchTokens: SearchToken[];
   filterExcludeSearchTokens: SearchToken[];
@@ -115,6 +143,10 @@ export interface FilterSettingsState {
   filterSubjectTypes: SubjectType[];
   filterStates: FilterStateType[];
   filterReasons: Reason[];
+}
+
+export interface AuthState {
+  accounts: Account[];
 }
 
 export interface GitifyState {

@@ -4,13 +4,13 @@ import type { Icon } from '@primer/octicons-react';
 import { Stack, Text } from '@primer/react';
 
 import { AppContext } from '../../context/App';
-import type { FilterSettingsState, FilterValue } from '../../types';
+import type { FilterSettingsState, FilterSettingsValue } from '../../types';
 import type { Filter } from '../../utils/notifications/filters';
 import { Checkbox } from '../fields/Checkbox';
 import { Title } from '../primitives/Title';
 import { RequiresDetailedNotificationWarning } from './RequiresDetailedNotificationsWarning';
 
-export interface FilterSectionProps<T extends FilterValue> {
+export interface FilterSectionProps<T extends FilterSettingsValue> {
   id: string;
   title: string;
   icon: Icon;
@@ -20,7 +20,7 @@ export interface FilterSectionProps<T extends FilterValue> {
   layout?: 'horizontal' | 'vertical';
 }
 
-export const FilterSection = <T extends FilterValue>({
+export const FilterSection = <T extends FilterSettingsValue>({
   id,
   title,
   icon,
