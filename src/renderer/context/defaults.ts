@@ -2,6 +2,7 @@ import { Constants } from '../constants';
 import {
   type AppearanceSettingsState,
   type AuthState,
+  type ConfigSettingsState,
   FetchType,
   type FilterSettingsState,
   GroupBy,
@@ -55,7 +56,7 @@ const defaultSystemSettings: SystemSettingsState = {
   openAtStartup: false,
 };
 
-export const defaultFilters: FilterSettingsState = {
+export const defaultFilterSettings: FilterSettingsState = {
   filterUserTypes: [],
   filterIncludeSearchTokens: [],
   filterExcludeSearchTokens: [],
@@ -64,10 +65,14 @@ export const defaultFilters: FilterSettingsState = {
   filterReasons: [],
 };
 
-export const defaultSettings: SettingsState = {
+export const defaultConfigSettings: ConfigSettingsState = {
   ...defaultAppearanceSettings,
   ...defaultNotificationSettings,
   ...defaultTraySettings,
   ...defaultSystemSettings,
-  ...defaultFilters,
+};
+
+export const defaultSettings: SettingsState = {
+  ...defaultConfigSettings,
+  ...defaultFilterSettings,
 };
