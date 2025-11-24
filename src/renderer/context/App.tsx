@@ -37,6 +37,7 @@ import type {
 import {
   addAccount,
   authGitHub,
+  getAccountUUID,
   getToken,
   hasAccounts,
   refreshAccount,
@@ -142,6 +143,14 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     unsubscribeNotification,
   } = useNotifications();
 
+  const persistAuth = useCallback(
+    (nextAuth: AuthState) => {
+      setAuth(nextAuth);
+      saveState({ auth: nextAuth, settings });
+    },
+    [settings],
+  );
+
   const refreshAllAccounts = useCallback(async () => {
     if (!auth.accounts.length) {
       return;
@@ -155,9 +164,8 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       accounts: refreshedAccounts,
     };
 
-    setAuth(updatedAuth);
-    saveState({ auth: updatedAuth, settings });
-  }, [auth, settings]);
+    persistAuth(updatedAuth);
+  }, [auth, persistAuth]);
 
   // TODO - Remove migration logic in future release
   const migrateAuthTokens = useCallback(async () => {
@@ -173,9 +181,18 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       }),
     );
 
-    const tokensMigrated = migratedAccounts.some(
-      (account, index) => account.token !== auth.accounts[index]?.token,
-    );
+    const tokensMigrated = migratedAccounts.some((migratedAccount) => {
+      const originalAccount = auth.accounts.find(
+        (account) =>
+          getAccountUUID(account) === getAccountUUID(migratedAccount),
+      );
+
+      if (!originalAccount) {
+        return true;
+      }
+
+      return migratedAccount.token !== originalAccount.token;
+    });
 
     if (!tokensMigrated) {
       return;
@@ -185,9 +202,8 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       accounts: migratedAccounts,
     };
 
-    setAuth(updatedAuth);
-    saveState({ auth: updatedAuth, settings });
-  }, [auth, settings]);
+    persistAuth(updatedAuth);
+  }, [auth, persistAuth]);
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: Fetch new notifications when account count or filters change
   useEffect(() => {
@@ -364,9 +380,8 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
     const updatedAuth = await addAccount(auth, 'GitHub App', token, hostname);
 
-    setAuth(updatedAuth);
-    saveState({ auth: updatedAuth, settings });
-  }, [auth, settings]);
+    persistAuth(updatedAuth);
+  }, [auth, persistAuth]);
 
   const loginWithOAuthApp = useCallback(
     async (data: LoginOAuthAppOptions) => {
@@ -375,10 +390,9 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
       const updatedAuth = await addAccount(auth, 'OAuth App', token, hostname);
 
-      setAuth(updatedAuth);
-      saveState({ auth: updatedAuth, settings });
+      persistAuth(updatedAuth);
     },
-    [auth, settings],
+    [auth, persistAuth],
   );
 
   const loginWithPersonalAccessToken = useCallback(
@@ -393,10 +407,9 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         hostname,
       );
 
-      setAuth(updatedAuth);
-      saveState({ auth: updatedAuth, settings });
+      persistAuth(updatedAuth);
     },
-    [auth, settings],
+    [auth, persistAuth],
   );
 
   const logoutFromAccount = useCallback(
@@ -405,10 +418,9 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
       const updatedAuth = removeAccount(auth, account);
 
-      setAuth(updatedAuth);
-      saveState({ auth: updatedAuth, settings });
+      persistAuth(updatedAuth);
     },
-    [auth, settings, removeAccountNotifications],
+    [auth, removeAccountNotifications, persistAuth],
   );
 
   const fetchNotificationsWithAccounts = useCallback(
