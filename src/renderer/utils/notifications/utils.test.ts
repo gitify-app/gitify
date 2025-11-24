@@ -21,7 +21,7 @@ describe('renderer/utils/notifications/utils.ts', () => {
         },
       ];
 
-      const result = getNewNotifications([], newNotifications);
+      const result = getNewNotifications([], newAccountNotifications);
 
       expect(result).toHaveLength(3);
       expect(result.map((n) => n.id)).toEqual(['1', '2', '3']);

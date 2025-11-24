@@ -47,10 +47,6 @@ import {
   setUseAlternateIdleIcon,
   setUseUnreadActiveIcon,
 } from '../utils/comms';
-import {
-  getNotificationCount,
-  getUnreadNotificationCount,
-} from '../utils/notifications/notifications';
 import { clearState, loadState, saveState } from '../utils/storage';
 import {
   DEFAULT_DAY_COLOR_SCHEME,
