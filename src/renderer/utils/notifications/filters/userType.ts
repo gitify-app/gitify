@@ -37,10 +37,10 @@ export const userTypeFilter: Filter<UserType> = {
   },
 
   getFilterCount(
-    notifications: AccountNotifications[],
+    accountNotifications: AccountNotifications[],
     userType: UserType,
   ): number {
-    return notifications.reduce(
+    return accountNotifications.reduce(
       (sum, account) =>
         sum +
         account.notifications.filter((n) =>

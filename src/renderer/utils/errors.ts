@@ -35,22 +35,24 @@ export const Errors: Record<ErrorType, GitifyError> = {
  * Check if all accounts have errors
  */
 export function doesAllAccountsHaveErrors(
-  notifications: AccountNotifications[],
+  accountNotifications: AccountNotifications[],
 ) {
   return (
-    notifications.length > 0 &&
-    notifications.every((account) => account.error !== null)
+    accountNotifications.length > 0 &&
+    accountNotifications.every((account) => account.error !== null)
   );
 }
 
 /**
  * Check if all account errors are the same
  */
-export function areAllAccountErrorsSame(notifications: AccountNotifications[]) {
-  if (notifications.length === 0) {
+export function areAllAccountErrorsSame(
+  accountNotifications: AccountNotifications[],
+) {
+  if (accountNotifications.length === 0) {
     return true;
   }
 
-  const firstError = notifications[0].error;
-  return notifications.every((account) => account.error === firstError);
+  const firstError = accountNotifications[0].error;
+  return accountNotifications.every((account) => account.error === firstError);
 }

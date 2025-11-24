@@ -6,11 +6,11 @@ import { getAccountUUID } from '../auth/utils';
  * Find notifications that exist in newNotifications but not in previousNotifications
  */
 export function getNewNotifications(
-  previousNotifications: AccountNotifications[],
-  newNotifications: AccountNotifications[],
+  previousAccountNotifications: AccountNotifications[],
+  newAccountNotifications: AccountNotifications[],
 ): Notification[] {
-  return newNotifications.flatMap((accountNotifications) => {
-    const accountPreviousNotifications = previousNotifications.find(
+  return newAccountNotifications.flatMap((accountNotifications) => {
+    const accountPreviousNotifications = previousAccountNotifications.find(
       (item) =>
         getAccountUUID(item.account) ===
         getAccountUUID(accountNotifications.account),

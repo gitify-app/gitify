@@ -25,10 +25,10 @@ export const reasonFilter: Filter<Reason> = {
   },
 
   getFilterCount(
-    notifications: AccountNotifications[],
+    accountNotifications: AccountNotifications[],
     reason: Reason,
   ): number {
-    return notifications.reduce(
+    return accountNotifications.reduce(
       (sum, account) =>
         sum +
         account.notifications.filter((n) => this.filterNotification(n, reason))

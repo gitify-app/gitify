@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 import type {
   Account,
@@ -20,7 +20,11 @@ import {
 import { isMarkAsDoneFeatureSupported } from '../utils/features';
 import { rendererLogError } from '../utils/logger';
 import { raiseNativeNotification } from '../utils/notifications/native';
-import { getAllNotifications } from '../utils/notifications/notifications';
+import {
+  getAllNotifications,
+  getNotificationCount,
+  getUnreadNotificationCount,
+} from '../utils/notifications/notifications';
 import { removeNotificationsForAccount } from '../utils/notifications/remove';
 import { raiseSoundNotification } from '../utils/notifications/sound';
 import { getNewNotifications } from '../utils/notifications/utils';
@@ -30,6 +34,10 @@ interface NotificationsState {
   globalError: GitifyError;
 
   notifications: AccountNotifications[];
+  notificationCount: number;
+  unreadNotificationCount: number;
+  hasNotifications: boolean;
+  hasUnreadNotifications: boolean;
 
   fetchNotifications: (state: GitifyState) => Promise<void>;
   removeAccountNotifications: (account: Account) => Promise<void>;
@@ -54,6 +62,20 @@ export const useNotifications = (): NotificationsState => {
 
   const [notifications, setNotifications] = useState<AccountNotifications[]>(
     [],
+  );
+
+  const notificationCount = getNotificationCount(notifications);
+
+  const unreadNotificationCount = getUnreadNotificationCount(notifications);
+
+  const hasNotifications = useMemo(
+    () => notificationCount > 0,
+    [notificationCount],
+  );
+
+  const hasUnreadNotifications = useMemo(
+    () => unreadNotificationCount > 0,
+    [unreadNotificationCount],
   );
 
   const removeAccountNotifications = useCallback(
@@ -224,6 +246,10 @@ export const useNotifications = (): NotificationsState => {
     globalError,
 
     notifications,
+    notificationCount,
+    unreadNotificationCount,
+    hasNotifications,
+    hasUnreadNotifications,
 
     fetchNotifications,
     removeAccountNotifications,
