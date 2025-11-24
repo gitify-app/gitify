@@ -161,6 +161,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     );
 
     const updatedAuth: AuthState = {
+      ...auth,
       accounts: refreshedAccounts,
     };
 
@@ -199,6 +200,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     }
 
     const updatedAuth: AuthState = {
+      ...auth,
       accounts: migratedAccounts,
     };
 
