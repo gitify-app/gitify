@@ -43,6 +43,7 @@ import {
   removeAccount,
 } from '../utils/auth/utils';
 import {
+  decryptValue,
   encryptValue,
   setAutoLaunch,
   setKeyboardShortcut,
@@ -149,6 +150,30 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     return Promise.all(auth.accounts.map(refreshAccount));
   }, [auth.accounts]);
 
+  const migrateAuthTokens = useCallback(async () => {
+    let tokensMigrated = false;
+
+    for (const account of auth.accounts) {
+      /**
+       * Check if the account is using an encrypted token.
+       * If not encrypt it and save it.
+       */
+      try {
+        await decryptValue(account.token);
+      } catch (_err) {
+        const encryptedToken = await encryptValue(account.token);
+        account.token = encryptedToken as Token;
+
+        tokensMigrated = true;
+      }
+    }
+
+    if (tokensMigrated) {
+      setAuth(auth);
+      saveState({ auth, settings });
+    }
+  }, [auth, settings]);
+
   // biome-ignore lint/correctness/useExhaustiveDependencies: Fetch new notifications when account count or filters change
   useEffect(() => {
     fetchNotifications({ auth, settings });
@@ -178,6 +203,8 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: Refresh account details on startup
   useEffect(() => {
+    migrateAuthTokens();
+
     refreshAllAccounts();
   }, []);
 
