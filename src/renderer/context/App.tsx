@@ -216,7 +216,10 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     settings.fetchType === FetchType.INACTIVITY ? settings.fetchInterval : null,
   );
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: Refresh account details on startup
+  /**
+   * On startup, check if auth tokens need encrypting and refresh all account details
+   */
+  // biome-ignore lint/correctness/useExhaustiveDependencies: Run once on startup
   useEffect(() => {
     void (async () => {
       await migrateAuthTokens();
