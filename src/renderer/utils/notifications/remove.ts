@@ -11,17 +11,17 @@ export function removeNotificationsForAccount(
   account: Account,
   settings: SettingsState,
   notificationsToRemove: Notification[],
-  allNotifications: AccountNotifications[],
+  accountNotifications: AccountNotifications[],
 ): AccountNotifications[] {
   if (notificationsToRemove.length === 0) {
-    return allNotifications;
+    return accountNotifications;
   }
 
   const notificationIDsToRemove = new Set(
-    notificationsToRemove.map((n) => n.id),
+    notificationsToRemove.map((notification) => notification.id),
   );
 
-  return allNotifications.map((accountNotifications) =>
+  return accountNotifications.map((accountNotifications) =>
     getAccountUUID(account) === getAccountUUID(accountNotifications.account)
       ? {
           ...accountNotifications,

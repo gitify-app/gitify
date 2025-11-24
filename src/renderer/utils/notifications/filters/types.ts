@@ -16,7 +16,7 @@ export interface Filter<T extends string> {
 
   isFilterSet(settings: SettingsState, type: T): boolean;
 
-  getFilterCount(notifications: AccountNotifications[], type: T): number;
+  getFilterCount(accountNotifications: AccountNotifications[], type: T): number;
 
   filterNotification(notification: Notification, type: T): boolean;
 }

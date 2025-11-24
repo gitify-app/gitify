@@ -57,10 +57,10 @@ export const subjectTypeFilter: Filter<SubjectType> = {
   },
 
   getFilterCount(
-    notifications: AccountNotifications[],
+    accountNotifications: AccountNotifications[],
     subjectType: SubjectType,
   ): number {
-    return notifications.reduce(
+    return accountNotifications.reduce(
       (sum, account) =>
         sum +
         account.notifications.filter((n) =>

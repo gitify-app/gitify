@@ -49,10 +49,6 @@ import {
   setUseAlternateIdleIcon,
   setUseUnreadActiveIcon,
 } from '../utils/comms';
-import {
-  getNotificationCount,
-  getUnreadNotificationCount,
-} from '../utils/notifications/notifications';
 import { clearState, loadState, saveState } from '../utils/storage';
 import {
   DEFAULT_DAY_COLOR_SCHEME,
@@ -128,29 +124,22 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   const { setColorMode, setDayScheme, setNightScheme } = useTheme();
 
   const {
-    notifications,
-    fetchNotifications,
-    removeAccountNotifications,
     status,
     globalError,
+
+    notifications,
+    notificationCount,
+    unreadNotificationCount,
+    hasNotifications,
+    hasUnreadNotifications,
+
+    fetchNotifications,
+    removeAccountNotifications,
+
     markNotificationsAsRead,
     markNotificationsAsDone,
     unsubscribeNotification,
   } = useNotifications();
-
-  const notificationCount = getNotificationCount(notifications);
-
-  const unreadNotificationCount = getUnreadNotificationCount(notifications);
-
-  const hasNotifications = useMemo(
-    () => notificationCount > 0,
-    [notificationCount],
-  );
-
-  const hasUnreadNotifications = useMemo(
-    () => unreadNotificationCount > 0,
-    [unreadNotificationCount],
-  );
 
   const refreshAllAccounts = useCallback(() => {
     if (!auth.accounts.length) {

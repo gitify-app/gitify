@@ -46,10 +46,10 @@ export const stateFilter: Filter<FilterStateType> = {
   },
 
   getFilterCount(
-    notifications: AccountNotifications[],
+    accountNotifications: AccountNotifications[],
     stateType: FilterStateType,
   ): number {
-    return notifications.reduce(
+    return accountNotifications.reduce(
       (sum, account) =>
         sum +
         account.notifications.filter((n) =>

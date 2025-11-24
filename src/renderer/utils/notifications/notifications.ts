@@ -17,11 +17,13 @@ import { createNotificationHandler } from './handlers';
 /**
  * Get the count of notifications across all accounts.
  *
- * @param notifications - The account notifications to check.
+ * @param accountNotifications - The account notifications to check.
  * @returns The count of all notifications.
  */
-export function getNotificationCount(notifications: AccountNotifications[]) {
-  return notifications.reduce(
+export function getNotificationCount(
+  accountNotifications: AccountNotifications[],
+) {
+  return accountNotifications.reduce(
     (sum, account) => sum + account.notifications.length,
     0,
   );
@@ -30,13 +32,13 @@ export function getNotificationCount(notifications: AccountNotifications[]) {
 /**
  * Get the count of notifications across all accounts.
  *
- * @param notifications - The account notifications to check.
+ * @param accountNotifications - The account notifications to check.
  * @returns The count of unread notifications.
  */
 export function getUnreadNotificationCount(
-  notifications: AccountNotifications[],
+  accountNotifications: AccountNotifications[],
 ) {
-  return notifications.reduce(
+  return accountNotifications.reduce(
     (sum, account) =>
       sum + account.notifications.filter((n) => n.unread === true).length,
     0,
@@ -64,7 +66,7 @@ function getNotifications(state: GitifyState) {
 export async function getAllNotifications(
   state: GitifyState,
 ): Promise<AccountNotifications[]> {
-  const notifications: AccountNotifications[] = await Promise.all(
+  const accountNotifications: AccountNotifications[] = await Promise.all(
     getNotifications(state)
       .filter((response) => !!response)
       .map(async (accountNotifications) => {
@@ -113,9 +115,9 @@ export async function getAllNotifications(
   );
 
   // Set the order property for the notifications
-  stabilizeNotificationsOrder(notifications, state.settings);
+  stabilizeNotificationsOrder(accountNotifications, state.settings);
 
-  return notifications;
+  return accountNotifications;
 }
 
 export async function enrichNotifications(
@@ -178,23 +180,23 @@ export async function enrichNotification(
  * Assign an order property to each notification to stabilize how they are displayed
  * during notification interaction events (mark as read, mark as done, etc.)
  *
- * @param notifications
+ * @param accountNotifications
  * @param settings
  */
 export function stabilizeNotificationsOrder(
-  notifications: AccountNotifications[],
+  accountNotifications: AccountNotifications[],
   settings: SettingsState,
 ) {
   let orderIndex = 0;
 
-  for (const account of notifications) {
+  for (const account of accountNotifications) {
     const flattenedNotifications = getFlattenedNotificationsByRepo(
       account.notifications,
       settings,
     );
 
-    for (const n of flattenedNotifications) {
-      n.order = orderIndex++;
+    for (const notification of flattenedNotifications) {
+      notification.order = orderIndex++;
     }
   }
 }
