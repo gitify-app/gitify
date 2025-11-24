@@ -142,13 +142,22 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     unsubscribeNotification,
   } = useNotifications();
 
-  const refreshAllAccounts = useCallback(() => {
+  const refreshAllAccounts = useCallback(async () => {
     if (!auth.accounts.length) {
       return;
     }
 
-    return Promise.all(auth.accounts.map(refreshAccount));
-  }, [auth.accounts]);
+    const refreshedAccounts = await Promise.all(
+      auth.accounts.map((account) => refreshAccount(account)),
+    );
+
+    const updatedAuth: AuthState = {
+      accounts: refreshedAccounts,
+    };
+
+    setAuth(updatedAuth);
+    saveState({ auth: updatedAuth, settings });
+  }, [auth, settings]);
 
   // TODO - Remove migration logic in future release
   const migrateAuthTokens = useCallback(async () => {
@@ -209,9 +218,10 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: Refresh account details on startup
   useEffect(() => {
-    migrateAuthTokens();
-
-    refreshAllAccounts();
+    void (async () => {
+      await migrateAuthTokens();
+      await refreshAllAccounts();
+    })();
   }, []);
 
   // Refresh account details on interval
