@@ -150,28 +150,34 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     return Promise.all(auth.accounts.map(refreshAccount));
   }, [auth.accounts]);
 
+  // TODO - Remove migration logic in future release
   const migrateAuthTokens = useCallback(async () => {
-    let tokensMigrated = false;
+    const migratedAccounts = await Promise.all(
+      auth.accounts.map(async (account) => {
+        try {
+          await decryptValue(account.token);
+          return account;
+        } catch {
+          const encryptedToken = (await encryptValue(account.token)) as Token;
+          return { ...account, token: encryptedToken };
+        }
+      }),
+    );
 
-    for (const account of auth.accounts) {
-      /**
-       * Check if the account is using an encrypted token.
-       * If not encrypt it and save it.
-       */
-      try {
-        await decryptValue(account.token);
-      } catch (_err) {
-        const encryptedToken = await encryptValue(account.token);
-        account.token = encryptedToken as Token;
+    const tokensMigrated = migratedAccounts.some(
+      (account, index) => account.token !== auth.accounts[index]?.token,
+    );
 
-        tokensMigrated = true;
-      }
+    if (!tokensMigrated) {
+      return;
     }
 
-    if (tokensMigrated) {
-      setAuth(auth);
-      saveState({ auth, settings });
-    }
+    const updatedAuth: AuthState = {
+      accounts: migratedAccounts,
+    };
+
+    setAuth(updatedAuth);
+    saveState({ auth: updatedAuth, settings });
   }, [auth, settings]);
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: Fetch new notifications when account count or filters change
