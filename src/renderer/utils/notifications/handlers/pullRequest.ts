@@ -46,11 +46,11 @@ class PullRequestHandler extends DefaultHandler {
       prState = 'merged';
     } else if (pr.draft) {
       prState = 'draft';
-    } else {
+    } else if (prState === 'open') {
       const mergeQueue = await isPRInMergeQueue(notification, pr.number);
 
       if (mergeQueue) {
-        pr.state = 'queued';
+        prState = 'queued';
       }
     }
 
