@@ -12,6 +12,7 @@ import type {
   Commit,
   CommitComment,
   Discussion,
+  GraphQLMergeQueue,
   GraphQLSearch,
   Issue,
   IssueOrPullRequestComment,
@@ -25,6 +26,7 @@ import type {
 import { isAnsweredDiscussionFeatureSupported } from '../features';
 import { rendererLogError } from '../logger';
 import { QUERY_SEARCH_DISCUSSIONS } from './graphql/discussions';
+import { QUERY_CHECK_MERGE_QUEUE_FOR_PR } from './graphql/pullRequests';
 import { formatAsGitHubSearchSyntax } from './graphql/utils';
 import { apiRequestAuth } from './request';
 import { getGitHubAPIBaseUrl, getGitHubGraphQLUrl } from './utils';
@@ -284,4 +286,28 @@ export async function getLatestDiscussion(
       notification,
     );
   }
+}
+
+/**
+ * Check if PR is in merge queue.
+ */
+export async function queryMergeQueueForPr(
+  notification: Notification,
+  prNumber: number,
+): AxiosPromise<GraphQLMergeQueue> {
+  const url = getGitHubGraphQLUrl(notification.account.hostname);
+
+  return apiRequestAuth(
+    url.toString() as Link,
+    'POST',
+    notification.account.token,
+    {
+      query: print(QUERY_CHECK_MERGE_QUEUE_FOR_PR),
+      variables: {
+        owner: notification.repository.owner.login,
+        repository: notification.repository.name,
+        prNumber: prNumber,
+      },
+    },
+  );
 }

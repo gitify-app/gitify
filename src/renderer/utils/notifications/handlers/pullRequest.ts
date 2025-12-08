@@ -3,6 +3,7 @@ import type { FC } from 'react';
 import type { OcticonProps } from '@primer/octicons-react';
 import {
   GitMergeIcon,
+  GitMergeQueueIcon,
   GitPullRequestClosedIcon,
   GitPullRequestDraftIcon,
   GitPullRequestIcon,
@@ -23,6 +24,7 @@ import {
   getIssueOrPullRequestComment,
   getPullRequest,
   getPullRequestReviews,
+  queryMergeQueueForPr,
 } from '../../api/client';
 import { isStateFilteredOut, isUserFilteredOut } from '../filters/filter';
 import { DefaultHandler } from './default';
@@ -44,6 +46,12 @@ class PullRequestHandler extends DefaultHandler {
       prState = 'merged';
     } else if (pr.draft) {
       prState = 'draft';
+    } else {
+      const mergeQueue = await isPRInMergeQueue(notification, pr.number);
+
+      if (mergeQueue) {
+        pr.state = 'queued';
+      }
     }
 
     // Return early if this notification would be hidden by state filters
@@ -95,6 +103,8 @@ class PullRequestHandler extends DefaultHandler {
         return GitPullRequestClosedIcon;
       case 'merged':
         return GitMergeIcon;
+      case 'queued':
+        return GitMergeQueueIcon;
       default:
         return GitPullRequestIcon;
     }
@@ -172,4 +182,16 @@ export function parseLinkedIssuesFromPr(pr: PullRequest): string[] {
   }
 
   return linkedIssues;
+}
+
+export async function isPRInMergeQueue(
+  notification: Notification,
+  prNumber: number,
+): Promise<boolean> {
+  const mergeQueueResponse = await queryMergeQueueForPr(notification, prNumber);
+
+  const mergeQueueEntry =
+    mergeQueueResponse.data.data.repository.pullRequest.mergeQueueEntry;
+
+  return mergeQueueEntry !== null;
 }

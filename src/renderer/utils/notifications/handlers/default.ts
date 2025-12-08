@@ -42,6 +42,8 @@ export class DefaultHandler implements NotificationTypeHandler {
       case 'RESOLVED':
       case 'merged':
         return IconColor.PURPLE;
+      case 'queued':
+        return IconColor.YELLOW;
       default:
         return IconColor.GRAY;
     }

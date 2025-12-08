@@ -50,10 +50,16 @@ export type UserType =
   | 'User';
 
 /**
- * Note: draft and merged are not official states in the GitHub API.
- * These are derived from the pull request's `merged` and `draft` properties.
+ * Note: draft, merged and queued are not official states in the GitHub API.
+ * These are derived from the pull request's `merged` and `draft` properties, or
+ * by checking the PR merge queue state.
  */
-export type PullRequestStateType = 'closed' | 'draft' | 'merged' | 'open';
+export type PullRequestStateType =
+  | 'closed'
+  | 'draft'
+  | 'merged'
+  | 'open'
+  | 'queued';
 
 export type StateType =
   | CheckSuiteStatus
@@ -493,6 +499,19 @@ export interface GraphQLSearch<T> {
   data: {
     search: {
       nodes: T[];
+    };
+  };
+}
+
+export interface GraphQLMergeQueue {
+  data: {
+    repository: {
+      pullRequest: {
+        mergeQueueEntry: {
+          state: string;
+          position: number;
+        } | null;
+      };
     };
   };
 }
