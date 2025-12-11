@@ -1,5 +1,4 @@
 import type { AxiosPromise } from 'axios';
-import { print } from 'graphql/language/printer';
 
 import type {
   Account,
@@ -11,8 +10,6 @@ import type {
 import type {
   Commit,
   CommitComment,
-  Discussion,
-  GraphQLSearch,
   Issue,
   IssueOrPullRequestComment,
   Notification,
@@ -24,9 +21,16 @@ import type {
 } from '../../typesGitHub';
 import { isAnsweredDiscussionFeatureSupported } from '../features';
 import { rendererLogError } from '../logger';
-import { QUERY_SEARCH_DISCUSSIONS } from './graphql/discussions';
+import { graphql } from './graphql/generated';
+import {
+  type DiscussionFieldsFragment,
+  FetchDiscussionsDocument,
+  type FetchDiscussionsQuery,
+  type MeQuery,
+} from './graphql/generated/graphql';
 import { formatAsGitHubSearchSyntax } from './graphql/utils';
-import { apiRequestAuth } from './request';
+import { apiRequestAuth, performRequestForAccount } from './request';
+import type { GitHubGraphQLResponse } from './types';
 import { getGitHubAPIBaseUrl, getGitHubGraphQLUrl } from './utils';
 
 /**
@@ -237,44 +241,66 @@ export async function getHtmlUrl(url: Link, token: Token): Promise<string> {
  */
 export async function searchDiscussions(
   notification: Notification,
-): AxiosPromise<GraphQLSearch<Discussion>> {
+): Promise<GitHubGraphQLResponse<FetchDiscussionsQuery>> {
   const url = getGitHubGraphQLUrl(notification.account.hostname);
 
-  return apiRequestAuth(
+  return performRequestForAccount(
     url.toString() as Link,
-    'POST',
     notification.account.token,
+    FetchDiscussionsDocument,
     {
-      query: print(QUERY_SEARCH_DISCUSSIONS),
-      variables: {
-        queryStatement: formatAsGitHubSearchSyntax(
-          notification.repository.full_name,
-          notification.subject.title,
-        ),
-        firstDiscussions: 1,
-        lastComments: 100,
-        lastReplies: 100,
-        firstLabels: 100,
-        includeIsAnswered: isAnsweredDiscussionFeatureSupported(
-          notification.account,
-        ),
-      },
+      queryStatement: formatAsGitHubSearchSyntax(
+        notification.repository.full_name,
+        notification.subject.title,
+      ),
+      firstDiscussions: 1,
+      lastComments: 100,
+      lastReplies: 100,
+      firstLabels: 100,
+      includeIsAnswered: isAnsweredDiscussionFeatureSupported(
+        notification.account,
+      ),
     },
+  );
+}
+
+/**
+ * Search for Discussions that match notification title and repository.
+ *
+ * Returns the latest discussion and their latest comments / replies
+ *
+ */
+export async function searchDiscussionsv2(
+  notification: Notification,
+): Promise<GitHubGraphQLResponse<MeQuery>> {
+  const url = getGitHubGraphQLUrl(notification.account.hostname);
+
+  const Me = graphql(`
+    query me {
+      viewer {
+        name
+      }
+    }
+  `);
+
+  return performRequestForAccount(
+    url.toString() as Link,
+    notification.account.token,
+    Me,
   );
 }
 
 /**
  * Return the latest discussion that matches the notification title and repository.
  */
-export async function getLatestDiscussion(
-  notification: Notification,
-): Promise<Discussion | null> {
+export async function getLatestDiscussion(notification: Notification) {
   try {
     const response = await searchDiscussions(notification);
     return (
-      response.data?.data.search.nodes.find(
-        (discussion) => discussion.title === notification.subject.title,
-      ) ?? null
+      (response.data.search.nodes.find(
+        (discussion: DiscussionFieldsFragment) =>
+          discussion.title === notification.subject.title,
+      ) as DiscussionFieldsFragment) ?? null
     );
   } catch (err) {
     rendererLogError(

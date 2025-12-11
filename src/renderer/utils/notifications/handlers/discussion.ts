@@ -12,7 +12,6 @@ import { differenceInMilliseconds } from 'date-fns';
 
 import type { SettingsState } from '../../../types';
 import type {
-  DiscussionComment,
   DiscussionStateType,
   GitifySubject,
   Notification,
@@ -20,6 +19,11 @@ import type {
   SubjectUser,
 } from '../../../typesGitHub';
 import { getLatestDiscussion } from '../../api/client';
+import type {
+  AuthorFieldsFragment,
+  CommentFieldsFragment,
+  DiscussionCommentFieldsFragment,
+} from '../../api/graphql/generated/graphql';
 import { isStateFilteredOut } from '../filters/filter';
 import { DefaultHandler } from './default';
 
@@ -50,14 +54,16 @@ class DiscussionHandler extends DefaultHandler {
 
     const latestDiscussionComment = getClosestDiscussionCommentOrReply(
       notification,
-      discussion.comments.nodes,
+      discussion.comments.nodes as DiscussionCommentFieldsFragment[],
     );
 
+    const discussionAuthor = discussion.author as AuthorFieldsFragment;
+
     let discussionUser: SubjectUser = {
-      login: discussion.author.login,
-      html_url: discussion.author.url,
-      avatar_url: discussion.author.avatar_url,
-      type: discussion.author.type,
+      login: discussionAuthor.login,
+      html_url: discussionAuthor.url,
+      avatar_url: discussionAuthor.avatar_url,
+      type: discussionAuthor.type,
     };
     if (latestDiscussionComment) {
       discussionUser = {
@@ -95,8 +101,8 @@ export const discussionHandler = new DiscussionHandler();
 
 export function getClosestDiscussionCommentOrReply(
   notification: Notification,
-  comments: DiscussionComment[],
-): DiscussionComment | null {
+  comments: DiscussionCommentFieldsFragment[],
+): DiscussionCommentFieldsFragment | null {
   if (!comments || comments.length === 0) {
     return null;
   }
@@ -109,15 +115,18 @@ export function getClosestDiscussionCommentOrReply(
   ]);
 
   // Find the closest match using the target timestamp
-  const closestComment = allCommentsAndReplies.reduce((prev, curr) => {
-    const prevDiff = Math.abs(
-      differenceInMilliseconds(prev.createdAt, targetTimestamp),
-    );
-    const currDiff = Math.abs(
-      differenceInMilliseconds(curr.createdAt, targetTimestamp),
-    );
-    return currDiff < prevDiff ? curr : prev;
-  }, allCommentsAndReplies[0]);
+  const closestComment = allCommentsAndReplies.reduce(
+    (prev: CommentFieldsFragment, curr: CommentFieldsFragment) => {
+      const prevDiff = Math.abs(
+        differenceInMilliseconds(prev.createdAt, targetTimestamp),
+      );
+      const currDiff = Math.abs(
+        differenceInMilliseconds(curr.createdAt, targetTimestamp),
+      );
+      return currDiff < prevDiff ? curr : prev;
+    },
+    allCommentsAndReplies[0],
+  );
 
   return closestComment;
 }

@@ -1,15 +1,15 @@
-import gql from 'graphql-tag';
+import { graphql } from './generated/gql';
 
-const FRAGMENT_AUTHOR = gql`
+export const AuthorFieldsFragment = graphql(`
   fragment AuthorFields on Actor {
     login
     url
     avatar_url: avatarUrl
     type: __typename
   }
-`;
+`);
 
-const FRAGMENT_COMMENTS = gql`
+export const CommentFieldsFragment = graphql(`
   fragment CommentFields on DiscussionComment {
     databaseId
     createdAt
@@ -17,11 +17,43 @@ const FRAGMENT_COMMENTS = gql`
       ...AuthorFields
     }
   }
+`);
 
-  ${FRAGMENT_AUTHOR}
-`;
+export const DiscussionCommentFragment = graphql(`
+  fragment DiscussionCommentFields on DiscussionComment {
+    ...CommentFields
+    replies(last: $lastReplies) {
+      nodes {
+        ...CommentFields
+      }
+    }
+  }`);
 
-export const QUERY_SEARCH_DISCUSSIONS = gql`
+export const DiscussionFieldsFragment = graphql(`
+  fragment DiscussionFields on Discussion {
+    number
+    title
+    stateReason
+    isAnswered @include(if: $includeIsAnswered)
+    url
+    author {
+      ...AuthorFields
+    }
+    comments(last: $lastComments) {
+      totalCount
+      nodes {
+        ...DiscussionCommentFields
+      }
+    }
+    labels(first: $firstLabels) {
+      nodes {
+        name
+      }
+    }
+  }
+`);
+
+export const FetchDiscussions = graphql(`
   query fetchDiscussions(
     $queryStatement: String!
     $firstDiscussions: Int
@@ -33,35 +65,9 @@ export const QUERY_SEARCH_DISCUSSIONS = gql`
     search(query: $queryStatement, type: DISCUSSION, first: $firstDiscussions) {
       nodes {
         ... on Discussion {
-          number
-          title
-          stateReason
-          isAnswered @include(if: $includeIsAnswered)
-          url
-          author {
-            ...AuthorFields
-          }
-          comments(last: $lastComments) {
-            totalCount
-            nodes {
-              ...CommentFields
-              replies(last: $lastReplies) {
-                nodes {
-                  ...CommentFields
-                }
-              }
-            }
-          }
-          labels(first: $firstLabels) {
-            nodes {
-              name
-            }
-          }
+          ...DiscussionFields
         }
       }
     }
   }
-
-  ${FRAGMENT_AUTHOR}
-  ${FRAGMENT_COMMENTS}
-`;
+`);
