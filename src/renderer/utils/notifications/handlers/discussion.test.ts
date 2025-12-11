@@ -7,15 +7,15 @@ import {
 } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
 import type { Link } from '../../../types';
-import type {
-  Discussion,
-  DiscussionAuthor,
-  DiscussionStateType,
-  Repository,
-} from '../../../typesGitHub';
+import type { Repository } from '../../../typesGitHub';
+import {
+  type AuthorFieldsFragment,
+  type DiscussionFieldsFragment,
+  DiscussionStateReason,
+} from '../../api/graphql/generated/graphql';
 import { discussionHandler } from './discussion';
 
-const mockDiscussionAuthor: DiscussionAuthor = {
+const mockDiscussionAuthor: AuthorFieldsFragment = {
   login: 'discussion-author',
   url: 'https://github.com/discussion-author' as Link,
   avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4' as Link,
@@ -79,7 +79,9 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         .reply(200, {
           data: {
             search: {
-              nodes: [mockDiscussionNode('DUPLICATE', false)],
+              nodes: [
+                mockDiscussionNode(DiscussionStateReason.Duplicate, false),
+              ],
             },
           },
         });
@@ -139,7 +141,9 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         .reply(200, {
           data: {
             search: {
-              nodes: [mockDiscussionNode('OUTDATED', false)],
+              nodes: [
+                mockDiscussionNode(DiscussionStateReason.Outdated, false),
+              ],
             },
           },
         });
@@ -169,7 +173,9 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         .reply(200, {
           data: {
             search: {
-              nodes: [mockDiscussionNode('REOPENED', false)],
+              nodes: [
+                mockDiscussionNode(DiscussionStateReason.Reopened, false),
+              ],
             },
           },
         });
@@ -199,7 +205,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         .reply(200, {
           data: {
             search: {
-              nodes: [mockDiscussionNode('RESOLVED', true)],
+              nodes: [mockDiscussionNode(DiscussionStateReason.Resolved, true)],
             },
           },
         });
@@ -308,9 +314,9 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
 });
 
 function mockDiscussionNode(
-  state: DiscussionStateType,
+  state: DiscussionStateReason,
   isAnswered: boolean,
-): Discussion {
+): DiscussionFieldsFragment {
   return {
     number: 123,
     title: 'This is a mock discussion',

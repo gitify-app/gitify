@@ -4,15 +4,13 @@ import {
 } from '../../../__mocks__/account-mocks';
 import type { Link } from '../../../types';
 import type {
-  Discussion,
   DiscussionAuthor,
-  DiscussionComments,
-  DiscussionLabels,
-  GraphQLSearch,
   Notification,
   Repository,
   User,
 } from '../../../typesGitHub';
+import type { FetchDiscussionsQuery } from '../graphql/generated/graphql';
+import type { GitHubGraphQLResponse } from '../types';
 
 export const mockNotificationUser: User = {
   login: 'octocat',
@@ -418,29 +416,30 @@ export const mockDiscussionLabels: DiscussionLabels = {
   ],
 };
 
-export const mockGraphQLResponse: GraphQLSearch<Discussion> = {
-  data: {
-    search: {
-      nodes: [
-        {
-          number: 123,
-          title: '1.16.0',
-          isAnswered: false,
-          stateReason: 'OPEN',
-          url: 'https://github.com/gitify-app/notifications-test/discussions/612' as Link,
-          author: {
-            login: 'discussion-creator',
-            url: 'https://github.com/discussion-creator' as Link,
-            avatar_url:
-              'https://avatars.githubusercontent.com/u/123456789?v=4' as Link,
-            type: 'User',
+export const mockGraphQLResponse: GitHubGraphQLResponse<FetchDiscussionsQuery> =
+  {
+    data: {
+      search: {
+        nodes: [
+          {
+            number: 123,
+            title: '1.16.0',
+            isAnswered: false,
+            stateReason: 'OPEN',
+            url: 'https://github.com/gitify-app/notifications-test/discussions/612' as Link,
+            author: {
+              login: 'discussion-creator',
+              url: 'https://github.com/discussion-creator' as Link,
+              avatar_url:
+                'https://avatars.githubusercontent.com/u/123456789?v=4' as Link,
+              type: 'User',
+            },
+            comments: mockDiscussionComments,
+            labels: mockDiscussionLabels,
           },
-          comments: mockDiscussionComments,
-          labels: mockDiscussionLabels,
-        },
-      ],
+        ],
+      },
     },
-  },
-};
+  };
 
 export const mockSingleNotification: Notification = mockGitHubNotifications[0];

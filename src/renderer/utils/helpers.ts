@@ -8,6 +8,8 @@ import { Constants } from '../constants';
 import type { Chevron, Hostname, Link } from '../types';
 import type { Notification } from '../typesGitHub';
 import { getHtmlUrl, getLatestDiscussion } from './api/client';
+import { useFragment as getFragmentData } from './api/graphql/generated/fragment-masking';
+import { DiscussionCommentFieldsFragmentDoc } from './api/graphql/generated/graphql';
 import type { PlatformType } from './auth/types';
 import { rendererLogError } from './logger';
 import { getCheckSuiteAttributes } from './notifications/handlers/checkSuite';
@@ -89,9 +91,16 @@ async function getDiscussionUrl(notification: Notification): Promise<Link> {
   if (discussion) {
     url.href = discussion.url;
 
+    // Unwrap discussion comments from fragment-masked types
+    const discussionComments =
+      getFragmentData(
+        DiscussionCommentFieldsFragmentDoc,
+        discussion.comments.nodes,
+      ) || [];
+
     const closestComment = getClosestDiscussionCommentOrReply(
       notification,
-      discussion.comments.nodes,
+      discussionComments,
     );
     if (closestComment) {
       url.hash = `#discussioncomment-${closestComment.databaseId}`;

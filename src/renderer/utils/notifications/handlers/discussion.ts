@@ -19,10 +19,15 @@ import type {
   SubjectUser,
 } from '../../../typesGitHub';
 import { getLatestDiscussion } from '../../api/client';
+import { useFragment as getFragmentData } from '../../api/graphql/generated/fragment-masking';
 import type {
-  AuthorFieldsFragment,
   CommentFieldsFragment,
   DiscussionCommentFieldsFragment,
+} from '../../api/graphql/generated/graphql';
+import {
+  AuthorFieldsFragmentDoc,
+  CommentFieldsFragmentDoc,
+  DiscussionCommentFieldsFragmentDoc,
 } from '../../api/graphql/generated/graphql';
 import { isStateFilteredOut } from '../filters/filter';
 import { DefaultHandler } from './default';
@@ -52,25 +57,50 @@ class DiscussionHandler extends DefaultHandler {
       return null;
     }
 
+    // Unwrap discussion comments from fragment-masked types
+    const discussionComments =
+      getFragmentData(
+        DiscussionCommentFieldsFragmentDoc,
+        discussion.comments.nodes,
+      ) || [];
+
     const latestDiscussionComment = getClosestDiscussionCommentOrReply(
       notification,
-      discussion.comments.nodes as DiscussionCommentFieldsFragment[],
+      discussionComments,
     );
 
-    const discussionAuthor = discussion.author as AuthorFieldsFragment;
+    // Unwrap author from fragment-masked type
+    const discussionAuthor = getFragmentData(
+      AuthorFieldsFragmentDoc,
+      discussion.author,
+    );
 
-    let discussionUser: SubjectUser = {
-      login: discussionAuthor.login,
-      html_url: discussionAuthor.url,
-      avatar_url: discussionAuthor.avatar_url,
-      type: discussionAuthor.type,
-    };
+    let discussionUser: SubjectUser;
+
     if (latestDiscussionComment) {
+      // Unwrap author from the latest comment
+      const commentAuthor = getFragmentData(
+        AuthorFieldsFragmentDoc,
+        latestDiscussionComment.author,
+      );
+
+      if (commentAuthor) {
+        discussionUser = {
+          login: commentAuthor.login,
+          html_url: commentAuthor.url,
+          avatar_url: commentAuthor.avatar_url,
+          type: commentAuthor.type,
+        };
+      }
+    }
+
+    // Fall back to discussion author if no comment author found
+    if (!discussionUser && discussionAuthor) {
       discussionUser = {
-        login: latestDiscussionComment.author.login,
-        html_url: latestDiscussionComment.author.url,
-        avatar_url: latestDiscussionComment.author.avatar_url,
-        type: latestDiscussionComment.author.type,
+        login: discussionAuthor.login,
+        html_url: discussionAuthor.url,
+        avatar_url: discussionAuthor.avatar_url,
+        type: discussionAuthor.type,
       };
     }
 
@@ -102,17 +132,25 @@ export const discussionHandler = new DiscussionHandler();
 export function getClosestDiscussionCommentOrReply(
   notification: Notification,
   comments: DiscussionCommentFieldsFragment[],
-): DiscussionCommentFieldsFragment | null {
+): CommentFieldsFragment | null {
   if (!comments || comments.length === 0) {
     return null;
   }
 
   const targetTimestamp = notification.updated_at;
 
-  const allCommentsAndReplies = comments.flatMap((comment) => [
-    comment,
-    ...comment.replies.nodes,
-  ]);
+  // Unwrap all comments and their replies from fragment-masked types
+  const allCommentsAndReplies: CommentFieldsFragment[] = comments.flatMap(
+    (comment) => {
+      const unwrappedComment = getFragmentData(
+        CommentFieldsFragmentDoc,
+        comment,
+      );
+      const unwrappedReplies =
+        getFragmentData(CommentFieldsFragmentDoc, comment.replies.nodes) || [];
+      return [unwrappedComment, ...unwrappedReplies];
+    },
+  );
 
   // Find the closest match using the target timestamp
   const closestComment = allCommentsAndReplies.reduce(
