@@ -29,7 +29,7 @@ import {
   type MeQuery,
 } from './graphql/generated/graphql';
 import { formatAsGitHubSearchSyntax } from './graphql/utils';
-import { apiRequestAuth, performRequestForAccount } from './request';
+import { apiRequestAuth, performGraphQLRequest } from './request';
 import type { GitHubGraphQLResponse } from './types';
 import { getGitHubAPIBaseUrl, getGitHubGraphQLUrl } from './utils';
 
@@ -244,7 +244,7 @@ export async function searchDiscussions(
 ): Promise<GitHubGraphQLResponse<FetchDiscussionsQuery>> {
   const url = getGitHubGraphQLUrl(notification.account.hostname);
 
-  return performRequestForAccount(
+  return performGraphQLRequest(
     url.toString() as Link,
     notification.account.token,
     FetchDiscussionsDocument,
@@ -283,7 +283,7 @@ export async function searchDiscussionsv2(
     }
   `);
 
-  return performRequestForAccount(
+  return performGraphQLRequest(
     url.toString() as Link,
     notification.account.token,
     Me,

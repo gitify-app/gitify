@@ -90,7 +90,7 @@ export async function apiRequestAuth(
  * @param variables
  * @returns
  */
-export async function performRequestForAccount<TResult, TVariables>(
+export async function performGraphQLRequest<TResult, TVariables>(
   url: Link,
   token: Token,
   query: TypedDocumentString<TResult, TVariables>,

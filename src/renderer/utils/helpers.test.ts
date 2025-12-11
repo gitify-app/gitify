@@ -273,6 +273,11 @@ describe('renderer/utils/helpers.ts', () => {
     });
 
     describe('Discussions URLs', () => {
+      const performGraphQLRequestSpy = jest.spyOn(
+        apiRequests,
+        'performGraphQLRequest',
+      );
+
       it('when no subject urls and no discussions found via query, default to linking to repository discussions', async () => {
         const subject = {
           title: 'generate github web url unit tests',
@@ -281,7 +286,7 @@ describe('renderer/utils/helpers.ts', () => {
           type: 'Discussion' as SubjectType,
         };
 
-        apiRequestAuthSpy.mockResolvedValue({
+        performGraphQLRequestSpy.mockResolvedValue({
           data: { data: { search: { nodes: [] } } },
         } as AxiosResponse);
 
@@ -290,7 +295,7 @@ describe('renderer/utils/helpers.ts', () => {
           subject: subject,
         });
 
-        expect(apiRequestAuthSpy).toHaveBeenCalledTimes(1);
+        expect(performGraphQLRequestSpy).toHaveBeenCalledTimes(1);
         expect(result).toBe(
           `${mockSingleNotification.repository.html_url}/discussions?${mockNotificationReferrer}`,
         );
@@ -304,7 +309,7 @@ describe('renderer/utils/helpers.ts', () => {
           type: 'Discussion' as SubjectType,
         };
 
-        apiRequestAuthSpy.mockResolvedValue({
+        performGraphQLRequestSpy.mockResolvedValue({
           data: {
             ...mockGraphQLResponse,
           },
@@ -315,7 +320,7 @@ describe('renderer/utils/helpers.ts', () => {
           subject: subject,
         });
 
-        expect(apiRequestAuthSpy).toHaveBeenCalledTimes(1);
+        expect(performGraphQLRequestSpy).toHaveBeenCalledTimes(1);
         expect(result).toBe(
           `https://github.com/gitify-app/notifications-test/discussions/612?${mockNotificationReferrer}#discussioncomment-2300902`,
         );
@@ -333,14 +338,14 @@ describe('renderer/utils/helpers.ts', () => {
           type: 'Discussion' as SubjectType,
         };
 
-        apiRequestAuthSpy.mockResolvedValue(null as AxiosResponse);
+        performGraphQLRequestSpy.mockResolvedValue(null as AxiosResponse);
 
         const result = await generateGitHubWebUrl({
           ...mockSingleNotification,
           subject: subject,
         });
 
-        expect(apiRequestAuthSpy).toHaveBeenCalledTimes(1);
+        expect(performGraphQLRequestSpy).toHaveBeenCalledTimes(1);
         expect(result).toBe(
           `https://github.com/gitify-app/notifications-test/discussions?${mockNotificationReferrer}`,
         );

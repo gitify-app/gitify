@@ -3,14 +3,14 @@ import {
   mockGitHubEnterpriseServerAccount,
 } from '../../../__mocks__/account-mocks';
 import type { Link } from '../../../types';
-import type {
-  DiscussionAuthor,
-  Notification,
-  Repository,
-  User,
-} from '../../../typesGitHub';
+import type { Notification, Repository, User } from '../../../typesGitHub';
+import { makeFragmentData } from '../graphql/generated/fragment-masking';
 import type { FetchDiscussionsQuery } from '../graphql/generated/graphql';
-import type { GitHubGraphQLResponse } from '../types';
+import {
+  CommentFieldsFragmentDoc,
+  DiscussionCommentFieldsFragmentDoc,
+  DiscussionFieldsFragmentDoc,
+} from '../graphql/generated/graphql';
 
 export const mockNotificationUser: User = {
   login: 'octocat',
@@ -374,72 +374,105 @@ export const mockEnterpriseNotifications: Notification[] = [
   },
 ];
 
-const mockDiscussionAuthor: DiscussionAuthor = {
-  login: 'comment-user',
-  url: 'https://github.com/comment-user' as Link,
-  avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4' as Link,
-  type: 'User',
-};
-
-const mockDiscussionReplier: DiscussionAuthor = {
-  login: 'reply-user',
-  url: 'https://github.com/reply-user' as Link,
-  avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4' as Link,
-  type: 'User',
-};
-
-export const mockDiscussionComments: DiscussionComments = {
-  nodes: [
-    {
-      databaseId: 2258799,
-      createdAt: '2017-02-20T17:51:57Z',
-      author: mockDiscussionAuthor,
-      replies: {
-        nodes: [
-          {
-            databaseId: 2300902,
-            createdAt: '2017-05-20T17:51:57Z',
-            author: mockDiscussionReplier,
-          },
-        ],
-      },
+const mockDiscussionAuthor = {
+  __typename: 'User' as const,
+  ' $fragmentRefs': {
+    AuthorFields_User_Fragment: {
+      __typename: 'User' as const,
+      login: 'comment-user',
+      url: 'https://github.com/comment-user' as Link,
+      avatar_url:
+        'https://avatars.githubusercontent.com/u/123456789?v=4' as Link,
+      type: 'User' as const,
     },
+  },
+};
+
+const mockDiscussionReplier = {
+  __typename: 'User' as const,
+  ' $fragmentRefs': {
+    AuthorFields_User_Fragment: {
+      __typename: 'User' as const,
+      login: 'reply-user',
+      url: 'https://github.com/reply-user' as Link,
+      avatar_url:
+        'https://avatars.githubusercontent.com/u/123456789?v=4' as Link,
+      type: 'User' as const,
+    },
+  },
+};
+
+const mockDiscussionComments = {
+  nodes: [
+    makeFragmentData(
+      {
+        __typename: 'DiscussionComment' as const,
+        databaseId: 2258799,
+        createdAt: '2017-02-20T17:51:57Z',
+        author: mockDiscussionAuthor,
+        replies: {
+          __typename: 'DiscussionCommentConnection' as const,
+          nodes: [
+            makeFragmentData(
+              {
+                __typename: 'DiscussionComment' as const,
+                databaseId: 2300902,
+                createdAt: '2017-05-20T17:51:57Z',
+                author: mockDiscussionReplier,
+              },
+              CommentFieldsFragmentDoc,
+            ),
+          ],
+        },
+      },
+      DiscussionCommentFieldsFragmentDoc,
+    ),
   ],
   totalCount: 2,
 };
 
-export const mockDiscussionLabels: DiscussionLabels = {
+const mockDiscussionLabels = {
+  __typename: 'LabelConnection' as const,
   nodes: [
     {
+      __typename: 'Label' as const,
       name: 'enhancement',
     },
   ],
 };
 
-export const mockGraphQLResponse: GitHubGraphQLResponse<FetchDiscussionsQuery> =
-  {
-    data: {
-      search: {
-        nodes: [
-          {
-            number: 123,
-            title: '1.16.0',
-            isAnswered: false,
-            stateReason: 'OPEN',
-            url: 'https://github.com/gitify-app/notifications-test/discussions/612' as Link,
-            author: {
-              login: 'discussion-creator',
-              url: 'https://github.com/discussion-creator' as Link,
-              avatar_url:
-                'https://avatars.githubusercontent.com/u/123456789?v=4' as Link,
-              type: 'User',
+export const mockGraphQLResponse: FetchDiscussionsQuery = {
+  search: {
+    __typename: 'SearchResultItemConnection',
+    nodes: [
+      makeFragmentData(
+        {
+          __typename: 'Discussion' as const,
+          number: 123,
+          title: '1.16.0',
+          isAnswered: false,
+          stateReason: null,
+          url: 'https://github.com/gitify-app/notifications-test/discussions/612' as Link,
+          author: {
+            __typename: 'User' as const,
+            ' $fragmentRefs': {
+              AuthorFields_User_Fragment: {
+                __typename: 'User' as const,
+                login: 'discussion-creator',
+                url: 'https://github.com/discussion-creator' as Link,
+                avatar_url:
+                  'https://avatars.githubusercontent.com/u/123456789?v=4' as Link,
+                type: 'User' as const,
+              },
             },
-            comments: mockDiscussionComments,
-            labels: mockDiscussionLabels,
           },
-        ],
-      },
-    },
-  };
+          comments: mockDiscussionComments,
+          labels: mockDiscussionLabels,
+        },
+        DiscussionFieldsFragmentDoc,
+      ),
+    ],
+  },
+};
 
 export const mockSingleNotification: Notification = mockGitHubNotifications[0];
