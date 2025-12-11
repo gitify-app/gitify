@@ -18,17 +18,15 @@ import type {
   PullRequestReview,
   PullRequestStateType,
   Subject,
-  User,
 } from '../../../typesGitHub';
 import {
-  getIssueOrPullRequestComment,
-  getPullRequest,
+  fetchIssueOrPullRequest,
   getPullRequestReviews,
   queryMergeQueueForPr,
 } from '../../api/client';
-import { isStateFilteredOut, isUserFilteredOut } from '../filters/filter';
+import { isStateFilteredOut } from '../filters/filter';
 import { DefaultHandler } from './default';
-import { getSubjectUser } from './utils';
+import { extractNumber } from './utils';
 
 class PullRequestHandler extends DefaultHandler {
   readonly type = 'PullRequest' as const;
@@ -37,21 +35,28 @@ class PullRequestHandler extends DefaultHandler {
     notification: Notification,
     settings: SettingsState,
   ): Promise<GitifySubject> {
-    const pr = (
-      await getPullRequest(notification.subject.url, notification.account.token)
-    ).data;
+    const prNo = extractNumber(notification.subject.url);
+
+    console.log('ADAM PR NO ', prNo);
+
+    const p = (await fetchIssueOrPullRequest(notification, prNo)).data.data;
+
+    console.log('ADAM PR JSON', JSON.stringify(p, null, 2));
+
+    const pr = (await fetchIssueOrPullRequest(notification, prNo)).data.data
+      .repository.issueOrPullRequest;
+
+    // const pr = (
+    //   await getPullRequest(notification.subject.url, notification.account.token)
+    // ).data;
 
     let prState: PullRequestStateType = pr.state;
     if (pr.merged) {
       prState = 'merged';
-    } else if (pr.draft) {
+    } else if (pr.isDraft) {
       prState = 'draft';
-    } else if (prState === 'open') {
-      const mergeQueue = await isPRInMergeQueue(notification, pr.number);
-
-      if (mergeQueue) {
-        prState = 'queued';
-      }
+    } else if (pr.isInMergeQueue) {
+      prState = 'queued';
     }
 
     // Return early if this notification would be hidden by state filters
@@ -59,39 +64,39 @@ class PullRequestHandler extends DefaultHandler {
       return null;
     }
 
-    let prCommentUser: User;
-    if (
-      notification.subject.latest_comment_url &&
-      notification.subject.latest_comment_url !== notification.subject.url
-    ) {
-      const prComment = (
-        await getIssueOrPullRequestComment(
-          notification.subject.latest_comment_url,
-          notification.account.token,
-        )
-      ).data;
-      prCommentUser = prComment.user;
-    }
+    // const prCommentUser: User = pr.comments.nodes[0].author;
+    // if (
+    //   notification.subject.latest_comment_url &&
+    //   notification.subject.latest_comment_url !== notification.subject.url
+    // ) {
+    //   const prComment = (
+    //     await getIssueOrPullRequestComment(
+    //       notification.subject.latest_comment_url,
+    //       notification.account.token,
+    //     )
+    //   ).data;
+    //   prCommentUser = prComment.user;
+    // }
 
-    const prUser = getSubjectUser([prCommentUser, pr.user]);
+    // const prUser = getSubjectUser([prCommentUser, pr.author]);
 
     // Return early if this notification would be hidden by user filters
-    if (isUserFilteredOut(prUser, settings)) {
-      return null;
-    }
+    // if (isUserFilteredOut(prUser, settings)) {
+    //   return null;
+    // }
 
-    const reviews = await getLatestReviewForReviewers(notification);
-    const linkedIssues = parseLinkedIssuesFromPr(pr);
+    // const reviews = await getLatestReviewForReviewers(notification);
+    // const linkedIssues = parseLinkedIssuesFromPr(pr);
 
     return {
       number: pr.number,
       state: prState,
-      user: prUser,
-      reviews: reviews,
-      comments: pr.comments,
-      labels: pr.labels?.map((label) => label.name) ?? [],
-      linkedIssues: linkedIssues,
-      milestone: pr.milestone,
+      user: null, // prUser,
+      reviews: null, //reviews,
+      comments: null, //pr.comments,
+      labels: pr.labels?.nodes.map((label) => label.name) ?? [],
+      linkedIssues: null, // linkedIssues,
+      milestone: null, //pr.milestone,
     };
   }
 

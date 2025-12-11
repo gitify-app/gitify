@@ -14,12 +14,11 @@ import type {
   GitifySubject,
   Notification,
   Subject,
-  User,
 } from '../../../typesGitHub';
-import { getIssue, getIssueOrPullRequestComment } from '../../api/client';
+import { fetchIssueOrPullRequest } from '../../api/client';
 import { isStateFilteredOut } from '../filters/filter';
 import { DefaultHandler } from './default';
-import { getSubjectUser } from './utils';
+import { extractNumber } from './utils';
 
 class IssueHandler extends DefaultHandler {
   readonly type = 'Issue';
@@ -28,36 +27,33 @@ class IssueHandler extends DefaultHandler {
     notification: Notification,
     settings: SettingsState,
   ): Promise<GitifySubject> {
-    const issue = (
-      await getIssue(notification.subject.url, notification.account.token)
-    ).data;
+    const issueNo = extractNumber(notification.subject.url);
 
-    const issueState = issue.state_reason ?? issue.state;
+    const i = (await fetchIssueOrPullRequest(notification, issueNo)).data.data;
+
+    console.log('ADAM ISSUE JSON', JSON.stringify(i, null, 2));
+
+    const issue = (await fetchIssueOrPullRequest(notification, issueNo)).data
+      .data.repository.issueOrPullRequest;
+    // .(await getIssue(notification.subject.url, notification.account.token))
+    // .data;
+
+    const issueState = issue.stateReason ?? issue.state;
 
     // Return early if this notification would be hidden by filters
     if (isStateFilteredOut(issueState, settings)) {
       return null;
     }
 
-    let issueCommentUser: User;
-
-    if (notification.subject.latest_comment_url) {
-      const issueComment = (
-        await getIssueOrPullRequestComment(
-          notification.subject.latest_comment_url,
-          notification.account.token,
-        )
-      ).data;
-      issueCommentUser = issueComment.user;
-    }
+    // const issueCommentUser: User = issue.comments.nodes[0].author;
 
     return {
       number: issue.number,
-      state: issue.state_reason ?? issue.state,
-      user: getSubjectUser([issueCommentUser, issue.user]),
-      comments: issue.comments,
-      labels: issue.labels?.map((label) => label.name) ?? [],
-      milestone: issue.milestone,
+      state: issueState,
+      user: null, //getSubjectUser([issueCommentUser, issue.author]),
+      comments: null, //issue.comments,
+      labels: issue.labels?.nodes.map((label) => label.name) ?? [],
+      milestone: null, //issue.milestone,
     };
   }
 

@@ -12,6 +12,7 @@ import type {
   Commit,
   CommitComment,
   Discussion,
+  GraphQLIssueOrPullRequest,
   GraphQLMergeQueue,
   GraphQLSearch,
   Issue,
@@ -26,7 +27,10 @@ import type {
 import { isAnsweredDiscussionFeatureSupported } from '../features';
 import { rendererLogError } from '../logger';
 import { QUERY_SEARCH_DISCUSSIONS } from './graphql/discussions';
-import { QUERY_CHECK_MERGE_QUEUE_FOR_PR } from './graphql/pullRequests';
+import {
+  QUERY_CHECK_MERGE_QUEUE_FOR_PR,
+  QUERY_ISSUE_OR_PULL_REQUEST,
+} from './graphql/pullRequests';
 import { formatAsGitHubSearchSyntax } from './graphql/utils';
 import { apiRequestAuth } from './request';
 import { getGitHubAPIBaseUrl, getGitHubGraphQLUrl } from './utils';
@@ -307,6 +311,35 @@ export async function queryMergeQueueForPr(
         owner: notification.repository.owner.login,
         repository: notification.repository.name,
         prNumber: prNumber,
+      },
+    },
+  );
+}
+
+/**
+ * Check if PR is in merge queue.
+ */
+export async function fetchIssueOrPullRequest(
+  notification: Notification,
+  issueOrPrNumber: number,
+): AxiosPromise<GraphQLIssueOrPullRequest> {
+  const url = getGitHubGraphQLUrl(notification.account.hostname);
+
+  console.log('ADAM HERE WITH:');
+  console.log('\tOWNER ', notification.repository.owner.login);
+  console.log('\tREPOSITORY ', notification.repository.name);
+  console.log('\tNUMBER:', issueOrPrNumber);
+
+  return apiRequestAuth(
+    url.toString() as Link,
+    'POST',
+    notification.account.token,
+    {
+      query: print(QUERY_ISSUE_OR_PULL_REQUEST),
+      variables: {
+        owner: notification.repository.owner.login,
+        name: notification.repository.name,
+        number: issueOrPrNumber,
       },
     },
   );

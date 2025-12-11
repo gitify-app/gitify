@@ -516,6 +516,52 @@ export interface GraphQLMergeQueue {
   };
 }
 
+export interface GraphQLIssueOrPullRequest {
+  data: {
+    repository: {
+      issueOrPullRequest: {
+        number: number;
+        title: string;
+        url: Link;
+        milestone: {
+          description: string;
+        } | null;
+        labels: {
+          nodes: {
+            name: string;
+          }[];
+        } | null;
+        state: PullRequestStateType;
+        stateReason?: StateType;
+        author: {
+          login: string;
+        };
+        comments: {
+          totalCount: number;
+          nodes: {
+            createdAt: string;
+            author: {
+              login: string;
+            };
+          }[];
+        } | null;
+        reviews: {
+          totalCount: number;
+          nodes: {
+            createdAt: string;
+            author: {
+              login: string;
+            };
+          }[];
+        } | null;
+        merged: boolean;
+        isDraft: boolean;
+        isInMergeQueue: boolean;
+      };
+    };
+  };
+}
+
 export interface Discussion {
   number: number;
   title: string;

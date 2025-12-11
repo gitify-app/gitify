@@ -39,3 +39,7 @@ export function formatForDisplay(text: string[]): string {
     })
     .trim();
 }
+
+export function extractNumber(text: string): number {
+  return Number.parseInt(text.split('/').pop(), 10);
+}
