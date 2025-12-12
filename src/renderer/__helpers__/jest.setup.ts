@@ -45,10 +45,6 @@ window.gitify = {
   raiseNativeNotification: jest.fn(),
 };
 
-// Mock OAuth client ID and secret
-process.env.OAUTH_CLIENT_ID = 'FAKE_CLIENT_ID_123';
-process.env.OAUTH_CLIENT_SECRET = 'FAKE_CLIENT_SECRET_123';
-
 globalThis.HTMLMediaElement.prototype.play = jest.fn();
 
 globalThis.matchMedia = (query: string): MediaQueryList => ({
