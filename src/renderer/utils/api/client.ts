@@ -1,4 +1,5 @@
 import type { AxiosPromise } from 'axios';
+import type { ExecutionResult } from 'graphql';
 
 import type {
   Account,
@@ -26,7 +27,6 @@ import {
   type FetchDiscussionByNumberQuery,
 } from './graphql/generated/graphql';
 import { apiRequestAuth, performGraphQLRequest } from './request';
-import type { GitHubGraphQLResponse } from './types';
 import {
   getGitHubAPIBaseUrl,
   getGitHubGraphQLUrl,
@@ -241,7 +241,7 @@ export async function getHtmlUrl(url: Link, token: Token): Promise<string> {
  */
 export async function fetchDiscussionByNumber(
   notification: Notification,
-): Promise<GitHubGraphQLResponse<FetchDiscussionByNumberQuery>> {
+): Promise<ExecutionResult<FetchDiscussionByNumberQuery>> {
   const url = getGitHubGraphQLUrl(notification.account.hostname);
   const number = getNumberFromUrl(notification.subject.url);
 

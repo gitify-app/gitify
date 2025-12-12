@@ -5,6 +5,7 @@ import {
 } from '@primer/octicons-react';
 
 import type { AxiosResponse } from 'axios';
+import type { ExecutionResult } from 'graphql';
 
 import { mockPersonalAccessTokenAccount } from '../__mocks__/account-mocks';
 import type { Hostname, Link } from '../types';
@@ -17,7 +18,6 @@ import {
 import * as apiClient from './api/client';
 import type { FetchDiscussionByNumberQuery } from './api/graphql/generated/graphql';
 import * as apiRequests from './api/request';
-import type { GitHubGraphQLResponse } from './api/types';
 import {
   generateGitHubWebUrl,
   generateNotificationReferrerId,
@@ -323,7 +323,7 @@ describe('renderer/utils/helpers.ts', () => {
               message: 'Something failed',
             },
           ],
-        } as GitHubGraphQLResponse<FetchDiscussionByNumberQuery>);
+        } as unknown as ExecutionResult<FetchDiscussionByNumberQuery>);
 
         const result = await generateGitHubWebUrl({
           ...mockSingleNotification,
@@ -347,7 +347,7 @@ describe('renderer/utils/helpers.ts', () => {
 
         fetchDiscussionByNumberSpy.mockResolvedValue({
           data: mockDiscussionByNumberGraphQLResponse,
-        } as GitHubGraphQLResponse<FetchDiscussionByNumberQuery>);
+        } as ExecutionResult<FetchDiscussionByNumberQuery>);
 
         const result = await generateGitHubWebUrl({
           ...mockSingleNotification,
