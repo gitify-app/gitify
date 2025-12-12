@@ -16,13 +16,6 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "skipLibCheck": true,
-
-    "plugins": [
-      {
-        "name": "@0no-co/graphqlsp",
-        "schema": "./src/renderer/utils/api/graphql/generated/schema.graphql"
-      }
-    ]
+    "skipLibCheck": true
   }
 }

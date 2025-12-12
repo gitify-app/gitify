@@ -13,16 +13,13 @@ const config: CodegenConfig = {
       },
     },
   },
-  documents: [
-    'src/renderer/utils/api/**/*.ts',
-    '!src/renderer/utils/api/graphql/generated/**',
-    '!src/renderer/utils/api/**/*.test.ts',
-  ],
+  documents: ['src/renderer/utils/api/**/*.graphql'],
   generates: {
     'src/renderer/utils/api/graphql/generated/': {
       preset: 'client',
       config: {
         documentMode: 'string',
+        useTypeImports: true,
       },
     },
     'src/renderer/utils/api/graphql/generated/schema.graphql': {

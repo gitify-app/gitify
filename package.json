@@ -19,7 +19,7 @@
     "package:win": "electron-builder --win --config ./config/electron-builder.js",
     "lint:check": "biome check",
     "lint": "biome check --fix",
-    "test": "TZ=UTC jest",
+    "test": "jest",
     "start": "electron . --enable-logging",
     "prepare": "husky",
     "codegen": "graphql-codegen --config codegen.ts"
@@ -76,7 +76,6 @@
     "react-router-dom": "7.10.1"
   },
   "devDependencies": {
-    "@0no-co/graphqlsp": "1.15.2",
     "@babel/core": "7.28.5",
     "@babel/preset-env": "7.28.5",
     "@biomejs/biome": "2.3.8",
