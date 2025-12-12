@@ -7,9 +7,7 @@ import {
 import { Constants } from '../constants';
 import type { Chevron, Hostname, Link } from '../types';
 import type { Notification } from '../typesGitHub';
-import { getHtmlUrl, getLatestDiscussion } from './api/client';
-import { useFragment as getFragmentData } from './api/graphql/generated/fragment-masking';
-import { DiscussionCommentFieldsFragmentDoc } from './api/graphql/generated/graphql';
+import { fetchDiscussionByNumber, getHtmlUrl } from './api/client';
 import type { PlatformType } from './auth/types';
 import { rendererLogError } from './logger';
 import { getCheckSuiteAttributes } from './notifications/handlers/checkSuite';
@@ -86,17 +84,14 @@ async function getDiscussionUrl(notification: Notification): Promise<Link> {
   const url = new URL(notification.repository.html_url);
   url.pathname += '/discussions';
 
-  const discussion = await getLatestDiscussion(notification);
+  const response = await fetchDiscussionByNumber(notification);
+  const discussion = response.data.repository.discussion;
 
   if (discussion) {
     url.href = discussion.url;
 
-    // Unwrap discussion comments from fragment-masked types
-    const discussionComments =
-      getFragmentData(
-        DiscussionCommentFieldsFragmentDoc,
-        discussion.comments.nodes,
-      ) || [];
+    // Discussion comments come directly from the query result
+    const discussionComments = discussion.comments.nodes || [];
 
     const closestComment = getClosestDiscussionCommentOrReply(
       notification,

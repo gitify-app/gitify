@@ -19,53 +19,42 @@ export const CommentFieldsFragment = graphql(`
   }
 `);
 
-export const DiscussionCommentFragment = graphql(`
-  fragment DiscussionCommentFields on DiscussionComment {
-    ...CommentFields
-    replies(last: $lastReplies) {
-      nodes {
-        ...CommentFields
-      }
-    }
-  }`);
-
-export const DiscussionFieldsFragment = graphql(`
-  fragment DiscussionFields on Discussion {
-    number
-    title
-    stateReason
-    isAnswered @include(if: $includeIsAnswered)
-    url
-    author {
-      ...AuthorFields
-    }
-    comments(last: $lastComments) {
-      totalCount
-      nodes {
-        ...DiscussionCommentFields
-      }
-    }
-    labels(first: $firstLabels) {
-      nodes {
-        name
-      }
-    }
-  }
-`);
-
-export const FetchDiscussions = graphql(`
-  query fetchDiscussions(
-    $queryStatement: String!
-    $firstDiscussions: Int
+export const FetchDiscussion = graphql(`
+  query fetchDiscussionByNumber(
+    $owner: String!
+    $name: String!
+    $number: Int!
     $lastComments: Int
     $lastReplies: Int
     $firstLabels: Int
     $includeIsAnswered: Boolean!
   ) {
-    search(query: $queryStatement, type: DISCUSSION, first: $firstDiscussions) {
-      nodes {
-        ... on Discussion {
-          ...DiscussionFields
+    repository(owner: $owner, name: $name) {
+      discussion(number: $number) {
+        __typename
+        number
+        title
+        stateReason
+        isAnswered @include(if: $includeIsAnswered)
+        url
+        author {
+          ...AuthorFields
+        }
+        comments(last: $lastComments) {
+          totalCount
+          nodes {
+            ...CommentFields
+            replies(last: $lastReplies) {
+              nodes {
+                ...CommentFields
+              }
+            }
+          }
+        }
+        labels(first: $firstLabels) {
+          nodes {
+            name
+          }
         }
       }
     }

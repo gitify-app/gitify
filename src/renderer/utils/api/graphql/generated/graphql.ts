@@ -36413,11 +36413,6 @@ export type WorkflowsParametersInput = {
 
 export type _Entity = Issue;
 
-export type MeQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type MeQuery = { __typename?: 'Query', viewer: { __typename?: 'User', name?: string | null } };
-
 type AuthorFields_Bot_Fragment = { __typename?: 'Bot', login: string, url: any, avatar_url: any, type: 'Bot' } & { ' $fragmentName'?: 'AuthorFields_Bot_Fragment' };
 
 type AuthorFields_EnterpriseUserAccount_Fragment = { __typename?: 'EnterpriseUserAccount', login: string, url: any, avatar_url: any, type: 'EnterpriseUserAccount' } & { ' $fragmentName'?: 'AuthorFields_EnterpriseUserAccount_Fragment' };
@@ -36459,43 +36454,10 @@ export type CommentFieldsFragment = { __typename?: 'DiscussionComment', database
     )
    | null } & { ' $fragmentName'?: 'CommentFieldsFragment' };
 
-export type DiscussionCommentFieldsFragment = (
-  { __typename?: 'DiscussionComment', replies: { __typename?: 'DiscussionCommentConnection', nodes?: Array<(
-      { __typename?: 'DiscussionComment' }
-      & { ' $fragmentRefs'?: { 'CommentFieldsFragment': CommentFieldsFragment } }
-    ) | null> | null } }
-  & { ' $fragmentRefs'?: { 'CommentFieldsFragment': CommentFieldsFragment } }
-) & { ' $fragmentName'?: 'DiscussionCommentFieldsFragment' };
-
-export type DiscussionFieldsFragment = { __typename?: 'Discussion', number: number, title: string, stateReason?: DiscussionStateReason | null, isAnswered?: boolean | null, url: any, author?:
-    | (
-      { __typename?: 'Bot' }
-      & { ' $fragmentRefs'?: { 'AuthorFields_Bot_Fragment': AuthorFields_Bot_Fragment } }
-    )
-    | (
-      { __typename?: 'EnterpriseUserAccount' }
-      & { ' $fragmentRefs'?: { 'AuthorFields_EnterpriseUserAccount_Fragment': AuthorFields_EnterpriseUserAccount_Fragment } }
-    )
-    | (
-      { __typename?: 'Mannequin' }
-      & { ' $fragmentRefs'?: { 'AuthorFields_Mannequin_Fragment': AuthorFields_Mannequin_Fragment } }
-    )
-    | (
-      { __typename?: 'Organization' }
-      & { ' $fragmentRefs'?: { 'AuthorFields_Organization_Fragment': AuthorFields_Organization_Fragment } }
-    )
-    | (
-      { __typename?: 'User' }
-      & { ' $fragmentRefs'?: { 'AuthorFields_User_Fragment': AuthorFields_User_Fragment } }
-    )
-   | null, comments: { __typename?: 'DiscussionCommentConnection', totalCount: number, nodes?: Array<(
-      { __typename?: 'DiscussionComment' }
-      & { ' $fragmentRefs'?: { 'DiscussionCommentFieldsFragment': DiscussionCommentFieldsFragment } }
-    ) | null> | null }, labels?: { __typename?: 'LabelConnection', nodes?: Array<{ __typename?: 'Label', name: string } | null> | null } | null } & { ' $fragmentName'?: 'DiscussionFieldsFragment' };
-
-export type FetchDiscussionsQueryVariables = Exact<{
-  queryStatement: Scalars['String']['input'];
-  firstDiscussions?: InputMaybe<Scalars['Int']['input']>;
+export type FetchDiscussionByNumberQueryVariables = Exact<{
+  owner: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  number: Scalars['Int']['input'];
   lastComments?: InputMaybe<Scalars['Int']['input']>;
   lastReplies?: InputMaybe<Scalars['Int']['input']>;
   firstLabels?: InputMaybe<Scalars['Int']['input']>;
@@ -36503,19 +36465,34 @@ export type FetchDiscussionsQueryVariables = Exact<{
 }>;
 
 
-export type FetchDiscussionsQuery = { __typename?: 'Query', search: { __typename?: 'SearchResultItemConnection', nodes?: Array<
-      | { __typename?: 'App' }
-      | (
-        { __typename?: 'Discussion' }
-        & { ' $fragmentRefs'?: { 'DiscussionFieldsFragment': DiscussionFieldsFragment } }
-      )
-      | { __typename?: 'Issue' }
-      | { __typename?: 'MarketplaceListing' }
-      | { __typename?: 'Organization' }
-      | { __typename?: 'PullRequest' }
-      | { __typename?: 'Repository' }
-      | { __typename?: 'User' }
-     | null> | null } };
+export type FetchDiscussionByNumberQuery = { __typename?: 'Query', repository?: { __typename?: 'Repository', discussion?: { __typename: 'Discussion', number: number, title: string, stateReason?: DiscussionStateReason | null, isAnswered?: boolean | null, url: any, author?:
+        | (
+          { __typename?: 'Bot' }
+          & { ' $fragmentRefs'?: { 'AuthorFields_Bot_Fragment': AuthorFields_Bot_Fragment } }
+        )
+        | (
+          { __typename?: 'EnterpriseUserAccount' }
+          & { ' $fragmentRefs'?: { 'AuthorFields_EnterpriseUserAccount_Fragment': AuthorFields_EnterpriseUserAccount_Fragment } }
+        )
+        | (
+          { __typename?: 'Mannequin' }
+          & { ' $fragmentRefs'?: { 'AuthorFields_Mannequin_Fragment': AuthorFields_Mannequin_Fragment } }
+        )
+        | (
+          { __typename?: 'Organization' }
+          & { ' $fragmentRefs'?: { 'AuthorFields_Organization_Fragment': AuthorFields_Organization_Fragment } }
+        )
+        | (
+          { __typename?: 'User' }
+          & { ' $fragmentRefs'?: { 'AuthorFields_User_Fragment': AuthorFields_User_Fragment } }
+        )
+       | null, comments: { __typename?: 'DiscussionCommentConnection', totalCount: number, nodes?: Array<(
+          { __typename?: 'DiscussionComment', replies: { __typename?: 'DiscussionCommentConnection', nodes?: Array<(
+              { __typename?: 'DiscussionComment' }
+              & { ' $fragmentRefs'?: { 'CommentFieldsFragment': CommentFieldsFragment } }
+            ) | null> | null } }
+          & { ' $fragmentRefs'?: { 'CommentFieldsFragment': CommentFieldsFragment } }
+        ) | null> | null }, labels?: { __typename?: 'LabelConnection', nodes?: Array<{ __typename?: 'Label', name: string } | null> | null } | null } | null } | null };
 
 export class TypedDocumentString<TResult, TVariables>
   extends String
@@ -36557,84 +36534,34 @@ export const CommentFieldsFragmentDoc = new TypedDocumentString(`
   avatar_url: avatarUrl
   type: __typename
 }`, {"fragmentName":"CommentFields"}) as unknown as TypedDocumentString<CommentFieldsFragment, unknown>;
-export const DiscussionCommentFieldsFragmentDoc = new TypedDocumentString(`
-    fragment DiscussionCommentFields on DiscussionComment {
-  ...CommentFields
-  replies(last: $lastReplies) {
-    nodes {
-      ...CommentFields
-    }
-  }
-}
-    fragment AuthorFields on Actor {
-  login
-  url
-  avatar_url: avatarUrl
-  type: __typename
-}
-fragment CommentFields on DiscussionComment {
-  databaseId
-  createdAt
-  author {
-    ...AuthorFields
-  }
-}`, {"fragmentName":"DiscussionCommentFields"}) as unknown as TypedDocumentString<DiscussionCommentFieldsFragment, unknown>;
-export const DiscussionFieldsFragmentDoc = new TypedDocumentString(`
-    fragment DiscussionFields on Discussion {
-  number
-  title
-  stateReason
-  isAnswered @include(if: $includeIsAnswered)
-  url
-  author {
-    ...AuthorFields
-  }
-  comments(last: $lastComments) {
-    totalCount
-    nodes {
-      ...DiscussionCommentFields
-    }
-  }
-  labels(first: $firstLabels) {
-    nodes {
-      name
-    }
-  }
-}
-    fragment AuthorFields on Actor {
-  login
-  url
-  avatar_url: avatarUrl
-  type: __typename
-}
-fragment CommentFields on DiscussionComment {
-  databaseId
-  createdAt
-  author {
-    ...AuthorFields
-  }
-}
-fragment DiscussionCommentFields on DiscussionComment {
-  ...CommentFields
-  replies(last: $lastReplies) {
-    nodes {
-      ...CommentFields
-    }
-  }
-}`, {"fragmentName":"DiscussionFields"}) as unknown as TypedDocumentString<DiscussionFieldsFragment, unknown>;
-export const MeDocument = new TypedDocumentString(`
-    query me {
-  viewer {
-    name
-  }
-}
-    `) as unknown as TypedDocumentString<MeQuery, MeQueryVariables>;
-export const FetchDiscussionsDocument = new TypedDocumentString(`
-    query fetchDiscussions($queryStatement: String!, $firstDiscussions: Int, $lastComments: Int, $lastReplies: Int, $firstLabels: Int, $includeIsAnswered: Boolean!) {
-  search(query: $queryStatement, type: DISCUSSION, first: $firstDiscussions) {
-    nodes {
-      ... on Discussion {
-        ...DiscussionFields
+export const FetchDiscussionByNumberDocument = new TypedDocumentString(`
+    query fetchDiscussionByNumber($owner: String!, $name: String!, $number: Int!, $lastComments: Int, $lastReplies: Int, $firstLabels: Int, $includeIsAnswered: Boolean!) {
+  repository(owner: $owner, name: $name) {
+    discussion(number: $number) {
+      __typename
+      number
+      title
+      stateReason
+      isAnswered @include(if: $includeIsAnswered)
+      url
+      author {
+        ...AuthorFields
+      }
+      comments(last: $lastComments) {
+        totalCount
+        nodes {
+          ...CommentFields
+          replies(last: $lastReplies) {
+            nodes {
+              ...CommentFields
+            }
+          }
+        }
+      }
+      labels(first: $firstLabels) {
+        nodes {
+          name
+        }
       }
     }
   }
@@ -36651,33 +36578,4 @@ fragment CommentFields on DiscussionComment {
   author {
     ...AuthorFields
   }
-}
-fragment DiscussionCommentFields on DiscussionComment {
-  ...CommentFields
-  replies(last: $lastReplies) {
-    nodes {
-      ...CommentFields
-    }
-  }
-}
-fragment DiscussionFields on Discussion {
-  number
-  title
-  stateReason
-  isAnswered @include(if: $includeIsAnswered)
-  url
-  author {
-    ...AuthorFields
-  }
-  comments(last: $lastComments) {
-    totalCount
-    nodes {
-      ...DiscussionCommentFields
-    }
-  }
-  labels(first: $firstLabels) {
-    nodes {
-      name
-    }
-  }
-}`) as unknown as TypedDocumentString<FetchDiscussionsQuery, FetchDiscussionsQueryVariables>;
+}`) as unknown as TypedDocumentString<FetchDiscussionByNumberQuery, FetchDiscussionByNumberQueryVariables>;

@@ -21,17 +21,17 @@ import type {
 } from '../../typesGitHub';
 import { isAnsweredDiscussionFeatureSupported } from '../features';
 import { rendererLogError } from '../logger';
-import { graphql } from './graphql/generated';
 import {
-  type DiscussionFieldsFragment,
-  FetchDiscussionsDocument,
-  type FetchDiscussionsQuery,
-  type MeQuery,
+  FetchDiscussionByNumberDocument,
+  type FetchDiscussionByNumberQuery,
 } from './graphql/generated/graphql';
-import { formatAsGitHubSearchSyntax } from './graphql/utils';
 import { apiRequestAuth, performGraphQLRequest } from './request';
 import type { GitHubGraphQLResponse } from './types';
-import { getGitHubAPIBaseUrl, getGitHubGraphQLUrl } from './utils';
+import {
+  getGitHubAPIBaseUrl,
+  getGitHubGraphQLUrl,
+  getNumberFromUrl,
+} from './utils';
 
 /**
  * Get the authenticated user
@@ -239,21 +239,20 @@ export async function getHtmlUrl(url: Link, token: Token): Promise<string> {
  * Returns the latest discussion and their latest comments / replies
  *
  */
-export async function searchDiscussions(
+export async function fetchDiscussionByNumber(
   notification: Notification,
-): Promise<GitHubGraphQLResponse<FetchDiscussionsQuery>> {
+): Promise<GitHubGraphQLResponse<FetchDiscussionByNumberQuery>> {
   const url = getGitHubGraphQLUrl(notification.account.hostname);
+  const number = getNumberFromUrl(notification.subject.url);
 
   return performGraphQLRequest(
     url.toString() as Link,
     notification.account.token,
-    FetchDiscussionsDocument,
+    FetchDiscussionByNumberDocument,
     {
-      queryStatement: formatAsGitHubSearchSyntax(
-        notification.repository.full_name,
-        notification.subject.title,
-      ),
-      firstDiscussions: 1,
+      owner: notification.repository.owner.login,
+      name: notification.repository.name,
+      number: number,
       lastComments: 100,
       lastReplies: 100,
       firstLabels: 100,
@@ -262,52 +261,4 @@ export async function searchDiscussions(
       ),
     },
   );
-}
-
-/**
- * Search for Discussions that match notification title and repository.
- *
- * Returns the latest discussion and their latest comments / replies
- *
- */
-export async function searchDiscussionsv2(
-  notification: Notification,
-): Promise<GitHubGraphQLResponse<MeQuery>> {
-  const url = getGitHubGraphQLUrl(notification.account.hostname);
-
-  const Me = graphql(`
-    query me {
-      viewer {
-        name
-      }
-    }
-  `);
-
-  return performGraphQLRequest(
-    url.toString() as Link,
-    notification.account.token,
-    Me,
-  );
-}
-
-/**
- * Return the latest discussion that matches the notification title and repository.
- */
-export async function getLatestDiscussion(notification: Notification) {
-  try {
-    const response = await searchDiscussions(notification);
-    return (
-      (response.data.search.nodes.find(
-        (discussion: DiscussionFieldsFragment) =>
-          discussion.title === notification.subject.title,
-      ) as DiscussionFieldsFragment) ?? null
-    );
-  } catch (err) {
-    rendererLogError(
-      'getLatestDiscussion',
-      'failed to fetch latest discussion for notification',
-      err,
-      notification,
-    );
-  }
 }

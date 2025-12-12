@@ -10,7 +10,7 @@ import type { Link } from '../../../types';
 import type { Repository } from '../../../typesGitHub';
 import {
   type AuthorFieldsFragment,
-  type DiscussionFieldsFragment,
+  type Discussion,
   DiscussionStateReason,
 } from '../../api/graphql/generated/graphql';
 import { discussionHandler } from './discussion';
@@ -234,10 +234,11 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
       mockDiscussion.labels = {
         nodes: [
           {
+            id: 'MDU6TGFiZWwxMQ==',
             name: 'enhancement',
           },
         ],
-      };
+      } as unknown as typeof mockDiscussion.labels;
       nock('https://api.github.com')
         .post('/graphql')
         .reply(200, {
@@ -314,20 +315,30 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
 });
 
 function mockDiscussionNode(
-  state: DiscussionStateReason,
+  state: DiscussionStateReason | null,
   isAnswered: boolean,
-): DiscussionFieldsFragment {
+): Partial<Discussion> {
   return {
     number: 123,
     title: 'This is a mock discussion',
     url: 'https://github.com/gitify-app/notifications-test/discussions/1' as Link,
-    stateReason: state,
+    stateReason: state || undefined,
     isAnswered: isAnswered,
-    author: mockDiscussionAuthor,
+    author: {
+      login: mockDiscussionAuthor.login,
+      url: mockDiscussionAuthor.url,
+      avatarUrl: mockDiscussionAuthor.avatar_url,
+    } as Partial<Discussion>['author'],
     comments: {
       nodes: [],
       totalCount: 0,
-    },
-    labels: null,
-  };
+      pageInfo: {
+        hasNextPage: false,
+        hasPreviousPage: false,
+        startCursor: null,
+        endCursor: null,
+      },
+    } as Partial<Discussion>['comments'],
+    labels: null as Partial<Discussion>['labels'],
+  } as Partial<Discussion>;
 }

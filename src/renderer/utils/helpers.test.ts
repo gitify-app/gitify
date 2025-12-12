@@ -11,7 +11,7 @@ import type { Hostname, Link } from '../types';
 import type { SubjectType } from '../typesGitHub';
 import * as logger from '../utils/logger';
 import {
-  mockGraphQLResponse,
+  mockDiscussionByNumberGraphQLResponse,
   mockSingleNotification,
 } from './api/__mocks__/response-mocks';
 import * as apiRequests from './api/request';
@@ -311,7 +311,7 @@ describe('renderer/utils/helpers.ts', () => {
 
         performGraphQLRequestSpy.mockResolvedValue({
           data: {
-            ...mockGraphQLResponse,
+            ...mockDiscussionByNumberGraphQLResponse,
           },
         } as AxiosResponse);
 

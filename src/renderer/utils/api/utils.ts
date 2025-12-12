@@ -32,3 +32,7 @@ export function getNextURLFromLinkHeader(
   const matches = linkHeader?.match(/<([^<>]+)>;\s*rel="next"/);
   return matches ? matches[1] : null;
 }
+
+export function getNumberFromUrl(url: string): number {
+  return Number.parseInt(url.split('/').pop(), 10);
+}

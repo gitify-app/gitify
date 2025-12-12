@@ -18,17 +18,31 @@ import type {
   Subject,
   SubjectUser,
 } from '../../../typesGitHub';
-import { getLatestDiscussion } from '../../api/client';
+import { fetchDiscussionByNumber } from '../../api/client';
 import { useFragment as getFragmentData } from '../../api/graphql/generated/fragment-masking';
 import type {
   CommentFieldsFragment,
-  DiscussionCommentFieldsFragment,
+  FetchDiscussionByNumberQuery,
 } from '../../api/graphql/generated/graphql';
 import {
   AuthorFieldsFragmentDoc,
   CommentFieldsFragmentDoc,
-  DiscussionCommentFieldsFragmentDoc,
 } from '../../api/graphql/generated/graphql';
+
+// Type for discussion comment nodes from the FetchDiscussionByNumberQuery
+type DiscussionComment = NonNullable<
+  NonNullable<
+    NonNullable<
+      NonNullable<
+        Extract<
+          NonNullable<FetchDiscussionByNumberQuery['repository']>,
+          { __typename?: 'Repository' }
+        >['discussion']
+      >
+    >['comments']['nodes']
+  >[number]
+>;
+
 import { isStateFilteredOut } from '../filters/filter';
 import { DefaultHandler } from './default';
 
@@ -39,17 +53,21 @@ class DiscussionHandler extends DefaultHandler {
     notification: Notification,
     settings: SettingsState,
   ): Promise<GitifySubject> {
-    const discussion = await getLatestDiscussion(notification);
+    const response = await fetchDiscussionByNumber(notification);
+    const discussion = response.data.repository?.discussion;
+
+    if (!discussion) {
+      return null;
+    }
+
     let discussionState: DiscussionStateType = 'OPEN';
 
-    if (discussion) {
-      if (discussion.isAnswered) {
-        discussionState = 'ANSWERED';
-      }
+    if (discussion.isAnswered) {
+      discussionState = 'ANSWERED';
+    }
 
-      if (discussion.stateReason) {
-        discussionState = discussion.stateReason;
-      }
+    if (discussion.stateReason) {
+      discussionState = discussion.stateReason;
     }
 
     // Return early if this notification would be hidden by filters
@@ -57,12 +75,8 @@ class DiscussionHandler extends DefaultHandler {
       return null;
     }
 
-    // Unwrap discussion comments from fragment-masked types
-    const discussionComments =
-      getFragmentData(
-        DiscussionCommentFieldsFragmentDoc,
-        discussion.comments.nodes,
-      ) || [];
+    // Discussion comments come directly from the query result
+    const discussionComments = discussion.comments.nodes;
 
     const latestDiscussionComment = getClosestDiscussionCommentOrReply(
       notification,
@@ -131,7 +145,7 @@ export const discussionHandler = new DiscussionHandler();
 
 export function getClosestDiscussionCommentOrReply(
   notification: Notification,
-  comments: DiscussionCommentFieldsFragment[],
+  comments: DiscussionComment[],
 ): CommentFieldsFragment | null {
   if (!comments || comments.length === 0) {
     return null;
@@ -147,7 +161,12 @@ export function getClosestDiscussionCommentOrReply(
         comment,
       );
       const unwrappedReplies =
-        getFragmentData(CommentFieldsFragmentDoc, comment.replies.nodes) || [];
+        getFragmentData(CommentFieldsFragmentDoc, comment.replies?.nodes) || [];
+
+      // Ensure unwrappedComment is defined before spreading
+      if (!unwrappedComment) {
+        return unwrappedReplies;
+      }
       return [unwrappedComment, ...unwrappedReplies];
     },
   );

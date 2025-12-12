@@ -15,26 +15,16 @@ import * as types from './graphql';
  * Learn more about it here: https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#reducing-bundle-size
  */
 type Documents = {
-    "\n    query me {\n      viewer {\n        name\n      }\n    }\n  ": typeof types.MeDocument,
     "\n  fragment AuthorFields on Actor {\n    login\n    url\n    avatar_url: avatarUrl\n    type: __typename\n  }\n": typeof types.AuthorFieldsFragmentDoc,
     "\n  fragment CommentFields on DiscussionComment {\n    databaseId\n    createdAt\n    author {\n      ...AuthorFields\n    }\n  }\n": typeof types.CommentFieldsFragmentDoc,
-    "\n  fragment DiscussionCommentFields on DiscussionComment {\n    ...CommentFields\n    replies(last: $lastReplies) {\n      nodes {\n        ...CommentFields\n      }\n    }\n  }": typeof types.DiscussionCommentFieldsFragmentDoc,
-    "\n  fragment DiscussionFields on Discussion {\n    number\n    title\n    stateReason\n    isAnswered @include(if: $includeIsAnswered)\n    url\n    author {\n      ...AuthorFields\n    }\n    comments(last: $lastComments) {\n      totalCount\n      nodes {\n        ...DiscussionCommentFields\n      }\n    }\n    labels(first: $firstLabels) {\n      nodes {\n        name\n      }\n    }\n  }\n": typeof types.DiscussionFieldsFragmentDoc,
-    "\n  query fetchDiscussions(\n    $queryStatement: String!\n    $firstDiscussions: Int\n    $lastComments: Int\n    $lastReplies: Int\n    $firstLabels: Int\n    $includeIsAnswered: Boolean!\n  ) {\n    search(query: $queryStatement, type: DISCUSSION, first: $firstDiscussions) {\n      nodes {\n        ... on Discussion {\n          ...DiscussionFields\n        }\n      }\n    }\n  }\n": typeof types.FetchDiscussionsDocument,
+    "\n  query fetchDiscussionByNumber(\n    $owner: String!\n    $name: String!\n    $number: Int!\n    $lastComments: Int\n    $lastReplies: Int\n    $firstLabels: Int\n    $includeIsAnswered: Boolean!\n  ) {\n    repository(owner: $owner, name: $name) {\n      discussion(number: $number) {\n        __typename\n        number\n        title\n        stateReason\n        isAnswered @include(if: $includeIsAnswered)\n        url\n        author {\n          ...AuthorFields\n        }\n        comments(last: $lastComments) {\n          totalCount\n          nodes {\n            ...CommentFields\n            replies(last: $lastReplies) {\n              nodes {\n                ...CommentFields\n              }\n            }\n          }\n        }\n        labels(first: $firstLabels) {\n          nodes {\n            name\n          }\n        }\n      }\n    }\n  }\n": typeof types.FetchDiscussionByNumberDocument,
 };
 const documents: Documents = {
-    "\n    query me {\n      viewer {\n        name\n      }\n    }\n  ": types.MeDocument,
     "\n  fragment AuthorFields on Actor {\n    login\n    url\n    avatar_url: avatarUrl\n    type: __typename\n  }\n": types.AuthorFieldsFragmentDoc,
     "\n  fragment CommentFields on DiscussionComment {\n    databaseId\n    createdAt\n    author {\n      ...AuthorFields\n    }\n  }\n": types.CommentFieldsFragmentDoc,
-    "\n  fragment DiscussionCommentFields on DiscussionComment {\n    ...CommentFields\n    replies(last: $lastReplies) {\n      nodes {\n        ...CommentFields\n      }\n    }\n  }": types.DiscussionCommentFieldsFragmentDoc,
-    "\n  fragment DiscussionFields on Discussion {\n    number\n    title\n    stateReason\n    isAnswered @include(if: $includeIsAnswered)\n    url\n    author {\n      ...AuthorFields\n    }\n    comments(last: $lastComments) {\n      totalCount\n      nodes {\n        ...DiscussionCommentFields\n      }\n    }\n    labels(first: $firstLabels) {\n      nodes {\n        name\n      }\n    }\n  }\n": types.DiscussionFieldsFragmentDoc,
-    "\n  query fetchDiscussions(\n    $queryStatement: String!\n    $firstDiscussions: Int\n    $lastComments: Int\n    $lastReplies: Int\n    $firstLabels: Int\n    $includeIsAnswered: Boolean!\n  ) {\n    search(query: $queryStatement, type: DISCUSSION, first: $firstDiscussions) {\n      nodes {\n        ... on Discussion {\n          ...DiscussionFields\n        }\n      }\n    }\n  }\n": types.FetchDiscussionsDocument,
+    "\n  query fetchDiscussionByNumber(\n    $owner: String!\n    $name: String!\n    $number: Int!\n    $lastComments: Int\n    $lastReplies: Int\n    $firstLabels: Int\n    $includeIsAnswered: Boolean!\n  ) {\n    repository(owner: $owner, name: $name) {\n      discussion(number: $number) {\n        __typename\n        number\n        title\n        stateReason\n        isAnswered @include(if: $includeIsAnswered)\n        url\n        author {\n          ...AuthorFields\n        }\n        comments(last: $lastComments) {\n          totalCount\n          nodes {\n            ...CommentFields\n            replies(last: $lastReplies) {\n              nodes {\n                ...CommentFields\n              }\n            }\n          }\n        }\n        labels(first: $firstLabels) {\n          nodes {\n            name\n          }\n        }\n      }\n    }\n  }\n": types.FetchDiscussionByNumberDocument,
 };
 
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function graphql(source: "\n    query me {\n      viewer {\n        name\n      }\n    }\n  "): typeof import('./graphql').MeDocument;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -46,15 +36,7 @@ export function graphql(source: "\n  fragment CommentFields on DiscussionComment
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  fragment DiscussionCommentFields on DiscussionComment {\n    ...CommentFields\n    replies(last: $lastReplies) {\n      nodes {\n        ...CommentFields\n      }\n    }\n  }"): typeof import('./graphql').DiscussionCommentFieldsFragmentDoc;
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function graphql(source: "\n  fragment DiscussionFields on Discussion {\n    number\n    title\n    stateReason\n    isAnswered @include(if: $includeIsAnswered)\n    url\n    author {\n      ...AuthorFields\n    }\n    comments(last: $lastComments) {\n      totalCount\n      nodes {\n        ...DiscussionCommentFields\n      }\n    }\n    labels(first: $firstLabels) {\n      nodes {\n        name\n      }\n    }\n  }\n"): typeof import('./graphql').DiscussionFieldsFragmentDoc;
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function graphql(source: "\n  query fetchDiscussions(\n    $queryStatement: String!\n    $firstDiscussions: Int\n    $lastComments: Int\n    $lastReplies: Int\n    $firstLabels: Int\n    $includeIsAnswered: Boolean!\n  ) {\n    search(query: $queryStatement, type: DISCUSSION, first: $firstDiscussions) {\n      nodes {\n        ... on Discussion {\n          ...DiscussionFields\n        }\n      }\n    }\n  }\n"): typeof import('./graphql').FetchDiscussionsDocument;
+export function graphql(source: "\n  query fetchDiscussionByNumber(\n    $owner: String!\n    $name: String!\n    $number: Int!\n    $lastComments: Int\n    $lastReplies: Int\n    $firstLabels: Int\n    $includeIsAnswered: Boolean!\n  ) {\n    repository(owner: $owner, name: $name) {\n      discussion(number: $number) {\n        __typename\n        number\n        title\n        stateReason\n        isAnswered @include(if: $includeIsAnswered)\n        url\n        author {\n          ...AuthorFields\n        }\n        comments(last: $lastComments) {\n          totalCount\n          nodes {\n            ...CommentFields\n            replies(last: $lastReplies) {\n              nodes {\n                ...CommentFields\n              }\n            }\n          }\n        }\n        labels(first: $firstLabels) {\n          nodes {\n            name\n          }\n        }\n      }\n    }\n  }\n"): typeof import('./graphql').FetchDiscussionByNumberDocument;
 
 
 export function graphql(source: string) {
