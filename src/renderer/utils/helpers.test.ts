@@ -281,7 +281,7 @@ describe('renderer/utils/helpers.ts', () => {
         'fetchDiscussionByNumber',
       );
 
-      it('when no subject urls and no discussions found via query, default to linking to repository discussions', async () => {
+      it('when no discussion found via graphql api, default to base repository discussion url', async () => {
         const subject = {
           title: 'generate github web url unit tests',
           url: null,
@@ -304,7 +304,40 @@ describe('renderer/utils/helpers.ts', () => {
         );
       });
 
-      it('link to matching discussion and comment hash', async () => {
+      it('when error fetching discussion via graphql api, default to base repository discussion url', async () => {
+        const rendererLogErrorSpy = jest
+          .spyOn(logger, 'rendererLogError')
+          .mockImplementation();
+
+        const subject = {
+          title: '1.16.0',
+          url: null,
+          latest_comment_url: null,
+          type: 'Discussion' as SubjectType,
+        };
+
+        fetchDiscussionByNumberSpy.mockResolvedValue({
+          data: null,
+          errors: [
+            {
+              message: 'Something failed',
+            },
+          ],
+        } as GitHubGraphQLResponse<FetchDiscussionByNumberQuery>);
+
+        const result = await generateGitHubWebUrl({
+          ...mockSingleNotification,
+          subject: subject,
+        });
+
+        expect(fetchDiscussionByNumberSpy).toHaveBeenCalledTimes(1);
+        expect(result).toBe(
+          `https://github.com/gitify-app/notifications-test/discussions?${mockNotificationReferrer}`,
+        );
+        expect(rendererLogErrorSpy).toHaveBeenCalledTimes(1);
+      });
+
+      it('when discussion found via graphql api, link to matching discussion and comment hash', async () => {
         const subject = {
           title: '1.16.0',
           url: null,
@@ -327,7 +360,7 @@ describe('renderer/utils/helpers.ts', () => {
         );
       });
 
-      it('default to base discussions url when graphql query fails', async () => {
+      it('when api throws error, default to base repository discussion url', async () => {
         const rendererLogErrorSpy = jest
           .spyOn(logger, 'rendererLogError')
           .mockImplementation();
@@ -339,13 +372,9 @@ describe('renderer/utils/helpers.ts', () => {
           type: 'Discussion' as SubjectType,
         };
 
-        fetchDiscussionByNumberSpy.mockResolvedValue({
-          errors: [
-            {
-              message: 'Something failed',
-            },
-          ],
-        } as GitHubGraphQLResponse<FetchDiscussionByNumberQuery>);
+        fetchDiscussionByNumberSpy.mockRejectedValue(
+          new Error('Something failed'),
+        );
 
         const result = await generateGitHubWebUrl({
           ...mockSingleNotification,
