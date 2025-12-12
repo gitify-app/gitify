@@ -418,7 +418,7 @@ export const mockDiscussionLabels: DiscussionLabels = {
   ],
 };
 
-export const mockGraphQLResponse: GraphQLSearch<Discussion> = {
+export const mockSearchDiscussionsGraphQLResponse: GraphQLSearch<Discussion> = {
   data: {
     search: {
       nodes: [
