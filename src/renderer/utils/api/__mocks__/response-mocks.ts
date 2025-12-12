@@ -3,16 +3,8 @@ import {
   mockGitHubEnterpriseServerAccount,
 } from '../../../__mocks__/account-mocks';
 import type { Link } from '../../../types';
-import type {
-  Discussion,
-  DiscussionAuthor,
-  DiscussionComments,
-  DiscussionLabels,
-  GraphQLSearch,
-  Notification,
-  Repository,
-  User,
-} from '../../../typesGitHub';
+import type { Notification, Repository, User } from '../../../typesGitHub';
+import type { FetchDiscussionByNumberQuery } from '../graphql/generated/graphql';
 
 export const mockNotificationUser: User = {
   login: 'octocat',
@@ -376,41 +368,62 @@ export const mockEnterpriseNotifications: Notification[] = [
   },
 ];
 
-const mockDiscussionAuthor: DiscussionAuthor = {
-  login: 'comment-user',
-  url: 'https://github.com/comment-user' as Link,
-  avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4' as Link,
-  type: 'User',
+const mockDiscussionAuthor = {
+  __typename: 'User' as const,
+  ' $fragmentRefs': {
+    AuthorFields_User_Fragment: {
+      __typename: 'User' as const,
+      login: 'comment-user',
+      url: 'https://github.com/comment-user' as Link,
+      avatar_url:
+        'https://avatars.githubusercontent.com/u/123456789?v=4' as Link,
+      type: 'User' as const,
+    },
+  },
 };
 
-const mockDiscussionReplier: DiscussionAuthor = {
-  login: 'reply-user',
-  url: 'https://github.com/reply-user' as Link,
-  avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4' as Link,
-  type: 'User',
+const mockDiscussionReplier = {
+  __typename: 'User' as const,
+  ' $fragmentRefs': {
+    AuthorFields_User_Fragment: {
+      __typename: 'User' as const,
+      login: 'reply-user',
+      url: 'https://github.com/reply-user' as Link,
+      avatar_url:
+        'https://avatars.githubusercontent.com/u/123456789?v=4' as Link,
+      type: 'User' as const,
+    },
+  },
 };
 
-export const mockDiscussionComments: DiscussionComments = {
+const mockDiscussionComments = {
+  totalCount: 2,
   nodes: [
     {
+      __typename: 'DiscussionComment' as const,
       databaseId: 2258799,
       createdAt: '2017-02-20T17:51:57Z',
       author: mockDiscussionAuthor,
       replies: {
+        __typename: 'DiscussionCommentConnection' as const,
         nodes: [
           {
+            __typename: 'DiscussionComment' as const,
             databaseId: 2300902,
             createdAt: '2017-05-20T17:51:57Z',
             author: mockDiscussionReplier,
+            replies: {
+              __typename: 'DiscussionCommentConnection' as const,
+              nodes: [],
+            },
           },
         ],
       },
     },
   ],
-  totalCount: 2,
 };
 
-export const mockDiscussionLabels: DiscussionLabels = {
+const mockDiscussionLabels = {
   nodes: [
     {
       name: 'enhancement',
@@ -418,29 +431,22 @@ export const mockDiscussionLabels: DiscussionLabels = {
   ],
 };
 
-export const mockGraphQLResponse: GraphQLSearch<Discussion> = {
-  data: {
-    search: {
-      nodes: [
-        {
-          number: 123,
-          title: '1.16.0',
-          isAnswered: false,
-          stateReason: 'OPEN',
-          url: 'https://github.com/gitify-app/notifications-test/discussions/612' as Link,
-          author: {
-            login: 'discussion-creator',
-            url: 'https://github.com/discussion-creator' as Link,
-            avatar_url:
-              'https://avatars.githubusercontent.com/u/123456789?v=4' as Link,
-            type: 'User',
-          },
-          comments: mockDiscussionComments,
-          labels: mockDiscussionLabels,
-        },
-      ],
+export const mockDiscussionByNumberGraphQLResponse: FetchDiscussionByNumberQuery =
+  {
+    repository: {
+      __typename: 'Repository',
+      discussion: {
+        __typename: 'Discussion' as const,
+        number: 123,
+        title: '1.16.0',
+        isAnswered: false,
+        stateReason: null,
+        url: 'https://github.com/gitify-app/notifications-test/discussions/612' as Link,
+        author: mockDiscussionAuthor,
+        comments: mockDiscussionComments,
+        labels: mockDiscussionLabels,
+      },
     },
-  },
-};
+  };
 
 export const mockSingleNotification: Notification = mockGitHubNotifications[0];

@@ -1,4 +1,6 @@
 {
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "include": ["src/**/*.js", "src/**/*.ts", "src/**/*.tsx"],
   "compilerOptions": {
     "incremental": true,
     "target": "ES2024",
@@ -15,6 +17,5 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "skipLibCheck": true
-  },
-  "include": ["src/**/*.js", "src/**/*.ts", "src/**/*.tsx"]
+  }
 }

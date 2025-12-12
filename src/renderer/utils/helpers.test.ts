@@ -5,15 +5,18 @@ import {
 } from '@primer/octicons-react';
 
 import type { AxiosResponse } from 'axios';
+import type { ExecutionResult } from 'graphql';
 
 import { mockPersonalAccessTokenAccount } from '../__mocks__/account-mocks';
 import type { Hostname, Link } from '../types';
 import type { SubjectType } from '../typesGitHub';
 import * as logger from '../utils/logger';
 import {
-  mockGraphQLResponse,
+  mockDiscussionByNumberGraphQLResponse,
   mockSingleNotification,
 } from './api/__mocks__/response-mocks';
+import * as apiClient from './api/client';
+import type { FetchDiscussionByNumberQuery } from './api/graphql/generated/graphql';
 import * as apiRequests from './api/request';
 import {
   generateGitHubWebUrl,
@@ -273,7 +276,12 @@ describe('renderer/utils/helpers.ts', () => {
     });
 
     describe('Discussions URLs', () => {
-      it('when no subject urls and no discussions found via query, default to linking to repository discussions', async () => {
+      const fetchDiscussionByNumberSpy = jest.spyOn(
+        apiClient,
+        'fetchDiscussionByNumber',
+      );
+
+      it('when no discussion found via graphql api, default to base repository discussion url', async () => {
         const subject = {
           title: 'generate github web url unit tests',
           url: null,
@@ -281,47 +289,22 @@ describe('renderer/utils/helpers.ts', () => {
           type: 'Discussion' as SubjectType,
         };
 
-        apiRequestAuthSpy.mockResolvedValue({
-          data: { data: { search: { nodes: [] } } },
-        } as AxiosResponse);
+        fetchDiscussionByNumberSpy.mockResolvedValue({
+          data: { repository: { discussion: null } },
+        } as any);
 
         const result = await generateGitHubWebUrl({
           ...mockSingleNotification,
           subject: subject,
         });
 
-        expect(apiRequestAuthSpy).toHaveBeenCalledTimes(1);
+        expect(fetchDiscussionByNumberSpy).toHaveBeenCalledTimes(1);
         expect(result).toBe(
           `${mockSingleNotification.repository.html_url}/discussions?${mockNotificationReferrer}`,
         );
       });
 
-      it('link to matching discussion and comment hash', async () => {
-        const subject = {
-          title: '1.16.0',
-          url: null,
-          latest_comment_url: null,
-          type: 'Discussion' as SubjectType,
-        };
-
-        apiRequestAuthSpy.mockResolvedValue({
-          data: {
-            ...mockGraphQLResponse,
-          },
-        } as AxiosResponse);
-
-        const result = await generateGitHubWebUrl({
-          ...mockSingleNotification,
-          subject: subject,
-        });
-
-        expect(apiRequestAuthSpy).toHaveBeenCalledTimes(1);
-        expect(result).toBe(
-          `https://github.com/gitify-app/notifications-test/discussions/612?${mockNotificationReferrer}#discussioncomment-2300902`,
-        );
-      });
-
-      it('default to base discussions url when graphql query fails', async () => {
+      it('when error fetching discussion via graphql api, default to base repository discussion url', async () => {
         const rendererLogErrorSpy = jest
           .spyOn(logger, 'rendererLogError')
           .mockImplementation();
@@ -333,14 +316,72 @@ describe('renderer/utils/helpers.ts', () => {
           type: 'Discussion' as SubjectType,
         };
 
-        apiRequestAuthSpy.mockResolvedValue(null as AxiosResponse);
+        fetchDiscussionByNumberSpy.mockResolvedValue({
+          data: null,
+          errors: [
+            {
+              message: 'Something failed',
+            },
+          ],
+        } as unknown as ExecutionResult<FetchDiscussionByNumberQuery>);
 
         const result = await generateGitHubWebUrl({
           ...mockSingleNotification,
           subject: subject,
         });
 
-        expect(apiRequestAuthSpy).toHaveBeenCalledTimes(1);
+        expect(fetchDiscussionByNumberSpy).toHaveBeenCalledTimes(1);
+        expect(result).toBe(
+          `https://github.com/gitify-app/notifications-test/discussions?${mockNotificationReferrer}`,
+        );
+        expect(rendererLogErrorSpy).toHaveBeenCalledTimes(1);
+      });
+
+      it('when discussion found via graphql api, link to matching discussion and comment hash', async () => {
+        const subject = {
+          title: '1.16.0',
+          url: null,
+          latest_comment_url: null,
+          type: 'Discussion' as SubjectType,
+        };
+
+        fetchDiscussionByNumberSpy.mockResolvedValue({
+          data: mockDiscussionByNumberGraphQLResponse,
+        } as ExecutionResult<FetchDiscussionByNumberQuery>);
+
+        const result = await generateGitHubWebUrl({
+          ...mockSingleNotification,
+          subject: subject,
+        });
+
+        expect(fetchDiscussionByNumberSpy).toHaveBeenCalledTimes(1);
+        expect(result).toBe(
+          `https://github.com/gitify-app/notifications-test/discussions/612?${mockNotificationReferrer}#discussioncomment-2300902`,
+        );
+      });
+
+      it('when api throws error, default to base repository discussion url', async () => {
+        const rendererLogErrorSpy = jest
+          .spyOn(logger, 'rendererLogError')
+          .mockImplementation();
+
+        const subject = {
+          title: '1.16.0',
+          url: null,
+          latest_comment_url: null,
+          type: 'Discussion' as SubjectType,
+        };
+
+        fetchDiscussionByNumberSpy.mockRejectedValue(
+          new Error('Something failed'),
+        );
+
+        const result = await generateGitHubWebUrl({
+          ...mockSingleNotification,
+          subject: subject,
+        });
+
+        expect(fetchDiscussionByNumberSpy).toHaveBeenCalledTimes(1);
         expect(result).toBe(
           `https://github.com/gitify-app/notifications-test/discussions?${mockNotificationReferrer}`,
         );
@@ -447,8 +488,8 @@ describe('renderer/utils/helpers.ts', () => {
       });
     });
 
-    describe('defaults to repository url', () => {
-      it('defaults when no urls present in notification', async () => {
+    describe('defaults web urls', () => {
+      it('issues - defaults when no urls present in notification', async () => {
         const subject = {
           title: 'generate github web url unit tests',
           url: null,
@@ -463,7 +504,64 @@ describe('renderer/utils/helpers.ts', () => {
 
         expect(apiRequestAuthSpy).toHaveBeenCalledTimes(0);
         expect(result).toBe(
-          `${mockSingleNotification.repository.html_url}?${mockNotificationReferrer}`,
+          `https://github.com/gitify-app/notifications-test/issues?${mockNotificationReferrer}`,
+        );
+      });
+
+      it('discussion - defaults when no urls present in notification', async () => {
+        const subject = {
+          title: 'generate github web url unit tests',
+          url: null,
+          latest_comment_url: null,
+          type: 'Discussion' as SubjectType,
+        };
+
+        const result = await generateGitHubWebUrl({
+          ...mockSingleNotification,
+          subject: subject,
+        });
+
+        expect(apiRequestAuthSpy).toHaveBeenCalledTimes(0);
+        expect(result).toBe(
+          `https://github.com/gitify-app/notifications-test/discussions?${mockNotificationReferrer}`,
+        );
+      });
+
+      it('issues - defaults when no urls present in notification', async () => {
+        const subject = {
+          title: 'generate github web url unit tests',
+          url: null,
+          latest_comment_url: null,
+          type: 'PullRequest' as SubjectType,
+        };
+
+        const result = await generateGitHubWebUrl({
+          ...mockSingleNotification,
+          subject: subject,
+        });
+
+        expect(apiRequestAuthSpy).toHaveBeenCalledTimes(0);
+        expect(result).toBe(
+          `https://github.com/gitify-app/notifications-test/pulls?${mockNotificationReferrer}`,
+        );
+      });
+
+      it('other - defaults when no urls present in notification', async () => {
+        const subject = {
+          title: 'generate github web url unit tests',
+          url: null,
+          latest_comment_url: null,
+          type: 'Commit' as SubjectType,
+        };
+
+        const result = await generateGitHubWebUrl({
+          ...mockSingleNotification,
+          subject: subject,
+        });
+
+        expect(apiRequestAuthSpy).toHaveBeenCalledTimes(0);
+        expect(result).toBe(
+          `https://github.com/gitify-app/notifications-test?${mockNotificationReferrer}`,
         );
       });
 
@@ -480,9 +578,7 @@ describe('renderer/utils/helpers.ts', () => {
           type: 'Issue' as SubjectType,
         };
 
-        const mockError = new Error('Test error');
-
-        apiRequestAuthSpy.mockRejectedValue(mockError);
+        apiRequestAuthSpy.mockRejectedValue(new Error('Test error'));
 
         const result = await generateGitHubWebUrl({
           ...mockSingleNotification,
@@ -496,7 +592,7 @@ describe('renderer/utils/helpers.ts', () => {
           mockPersonalAccessTokenAccount.token,
         );
         expect(result).toBe(
-          `https://github.com/gitify-app/notifications-test?${mockNotificationReferrer}`,
+          `https://github.com/gitify-app/notifications-test/issues?${mockNotificationReferrer}`,
         );
         expect(rendererLogErrorSpy).toHaveBeenCalledTimes(2);
       });

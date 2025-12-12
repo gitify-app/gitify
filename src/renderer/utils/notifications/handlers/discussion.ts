@@ -12,14 +12,37 @@ import { differenceInMilliseconds } from 'date-fns';
 
 import type { SettingsState } from '../../../types';
 import type {
-  DiscussionComment,
   DiscussionStateType,
   GitifySubject,
   Notification,
   Subject,
   SubjectUser,
 } from '../../../typesGitHub';
-import { getLatestDiscussion } from '../../api/client';
+import { fetchDiscussionByNumber } from '../../api/client';
+import { useFragment as getFragmentData } from '../../api/graphql/generated/fragment-masking';
+import type {
+  CommentFieldsFragment,
+  FetchDiscussionByNumberQuery,
+} from '../../api/graphql/generated/graphql';
+import {
+  AuthorFieldsFragmentDoc,
+  CommentFieldsFragmentDoc,
+} from '../../api/graphql/generated/graphql';
+
+// Type for discussion comment nodes from the FetchDiscussionByNumberQuery
+type DiscussionComment = NonNullable<
+  NonNullable<
+    NonNullable<
+      NonNullable<
+        Extract<
+          NonNullable<FetchDiscussionByNumberQuery['repository']>,
+          { __typename?: 'Repository' }
+        >['discussion']
+      >
+    >['comments']['nodes']
+  >[number]
+>;
+
 import { isStateFilteredOut } from '../filters/filter';
 import { DefaultHandler } from './default';
 
@@ -30,17 +53,21 @@ class DiscussionHandler extends DefaultHandler {
     notification: Notification,
     settings: SettingsState,
   ): Promise<GitifySubject> {
-    const discussion = await getLatestDiscussion(notification);
+    const response = await fetchDiscussionByNumber(notification);
+    const discussion = response.data.repository?.discussion;
+
+    if (!discussion) {
+      return null;
+    }
+
     let discussionState: DiscussionStateType = 'OPEN';
 
-    if (discussion) {
-      if (discussion.isAnswered) {
-        discussionState = 'ANSWERED';
-      }
+    if (discussion.isAnswered) {
+      discussionState = 'ANSWERED';
+    }
 
-      if (discussion.stateReason) {
-        discussionState = discussion.stateReason;
-      }
+    if (discussion.stateReason) {
+      discussionState = discussion.stateReason;
     }
 
     // Return early if this notification would be hidden by filters
@@ -48,23 +75,46 @@ class DiscussionHandler extends DefaultHandler {
       return null;
     }
 
+    // Discussion comments come directly from the query result
+    const discussionComments = discussion.comments.nodes;
+
     const latestDiscussionComment = getClosestDiscussionCommentOrReply(
       notification,
-      discussion.comments.nodes,
+      discussionComments,
     );
 
-    let discussionUser: SubjectUser = {
-      login: discussion.author.login,
-      html_url: discussion.author.url,
-      avatar_url: discussion.author.avatar_url,
-      type: discussion.author.type,
-    };
+    // Unwrap author from fragment-masked type
+    const discussionAuthor = getFragmentData(
+      AuthorFieldsFragmentDoc,
+      discussion.author,
+    );
+
+    let discussionUser: SubjectUser;
+
     if (latestDiscussionComment) {
+      // Unwrap author from the latest comment
+      const commentAuthor = getFragmentData(
+        AuthorFieldsFragmentDoc,
+        latestDiscussionComment.author,
+      );
+
+      if (commentAuthor) {
+        discussionUser = {
+          login: commentAuthor.login,
+          html_url: commentAuthor.url,
+          avatar_url: commentAuthor.avatar_url,
+          type: commentAuthor.type,
+        };
+      }
+    }
+
+    // Fall back to discussion author if no comment author found
+    if (!discussionUser && discussionAuthor) {
       discussionUser = {
-        login: latestDiscussionComment.author.login,
-        html_url: latestDiscussionComment.author.url,
-        avatar_url: latestDiscussionComment.author.avatar_url,
-        type: latestDiscussionComment.author.type,
+        login: discussionAuthor.login,
+        html_url: discussionAuthor.url,
+        avatar_url: discussionAuthor.avatar_url,
+        type: discussionAuthor.type,
       };
     }
 
@@ -96,28 +146,44 @@ export const discussionHandler = new DiscussionHandler();
 export function getClosestDiscussionCommentOrReply(
   notification: Notification,
   comments: DiscussionComment[],
-): DiscussionComment | null {
+): CommentFieldsFragment | null {
   if (!comments || comments.length === 0) {
     return null;
   }
 
   const targetTimestamp = notification.updated_at;
 
-  const allCommentsAndReplies = comments.flatMap((comment) => [
-    comment,
-    ...comment.replies.nodes,
-  ]);
+  // Unwrap all comments and their replies from fragment-masked types
+  const allCommentsAndReplies: CommentFieldsFragment[] = comments.flatMap(
+    (comment) => {
+      const unwrappedComment = getFragmentData(
+        CommentFieldsFragmentDoc,
+        comment,
+      );
+      const unwrappedReplies =
+        getFragmentData(CommentFieldsFragmentDoc, comment.replies?.nodes) || [];
+
+      // Ensure unwrappedComment is defined before spreading
+      if (!unwrappedComment) {
+        return unwrappedReplies;
+      }
+      return [unwrappedComment, ...unwrappedReplies];
+    },
+  );
 
   // Find the closest match using the target timestamp
-  const closestComment = allCommentsAndReplies.reduce((prev, curr) => {
-    const prevDiff = Math.abs(
-      differenceInMilliseconds(prev.createdAt, targetTimestamp),
-    );
-    const currDiff = Math.abs(
-      differenceInMilliseconds(curr.createdAt, targetTimestamp),
-    );
-    return currDiff < prevDiff ? curr : prev;
-  }, allCommentsAndReplies[0]);
+  const closestComment = allCommentsAndReplies.reduce(
+    (prev: CommentFieldsFragment, curr: CommentFieldsFragment) => {
+      const prevDiff = Math.abs(
+        differenceInMilliseconds(prev.createdAt, targetTimestamp),
+      );
+      const currDiff = Math.abs(
+        differenceInMilliseconds(curr.createdAt, targetTimestamp),
+      );
+      return currDiff < prevDiff ? curr : prev;
+    },
+    allCommentsAndReplies[0],
+  );
 
   return closestComment;
 }

@@ -6,8 +6,8 @@ import {
 
 import { Constants } from '../constants';
 import type { Chevron, Hostname, Link } from '../types';
-import type { Notification } from '../typesGitHub';
-import { getHtmlUrl, getLatestDiscussion } from './api/client';
+import type { Notification, SubjectType } from '../typesGitHub';
+import { fetchDiscussionByNumber, getHtmlUrl } from './api/client';
 import type { PlatformType } from './auth/types';
 import { rendererLogError } from './logger';
 import { getCheckSuiteAttributes } from './notifications/handlers/checkSuite';
@@ -84,14 +84,18 @@ async function getDiscussionUrl(notification: Notification): Promise<Link> {
   const url = new URL(notification.repository.html_url);
   url.pathname += '/discussions';
 
-  const discussion = await getLatestDiscussion(notification);
+  const response = await fetchDiscussionByNumber(notification);
+  const discussion = response.data.repository.discussion;
 
   if (discussion) {
     url.href = discussion.url;
 
+    // Discussion comments come directly from the query result
+    const discussionComments = discussion.comments.nodes || [];
+
     const closestComment = getClosestDiscussionCommentOrReply(
       notification,
-      discussion.comments.nodes,
+      discussionComments,
     );
     if (closestComment) {
       url.hash = `#discussioncomment-${closestComment.databaseId}`;
@@ -106,48 +110,37 @@ export async function generateGitHubWebUrl(
 ): Promise<Link> {
   const url = new URL(notification.repository.html_url);
 
-  /**
-   * Discussions - override generic response values for subject and comment urls,
-   * as we will fetch more specific html urls ourselves below
-   * See issue #1583:
-   */
-  if (notification.subject.type === 'Discussion') {
-    notification.subject.url = null;
-    notification.subject.latest_comment_url = null;
-  }
-
   try {
-    if (notification.subject.latest_comment_url) {
-      url.href = await getHtmlUrl(
-        notification.subject.latest_comment_url,
-        notification.account.token,
-      );
-    } else if (notification.subject.url) {
-      url.href = await getHtmlUrl(
-        notification.subject.url,
-        notification.account.token,
-      );
-    } else {
-      // Perform any specific notification type handling (only required for a few special notification scenarios)
-      switch (notification.subject.type) {
-        case 'CheckSuite':
-          url.href = getCheckSuiteUrl(notification);
-          break;
-        case 'Discussion':
-          url.href = await getDiscussionUrl(notification);
-          break;
-        case 'RepositoryInvitation':
-          url.pathname += '/invitations';
-          break;
-        case 'RepositoryDependabotAlertsThread':
-          url.pathname += '/security/dependabot';
-          break;
-        case 'WorkflowRun':
-          url.href = getWorkflowRunUrl(notification);
-          break;
-        default:
-          break;
-      }
+    switch (notification.subject.type) {
+      case 'CheckSuite':
+        url.href = getCheckSuiteUrl(notification);
+        break;
+      case 'Discussion':
+        url.href = await getDiscussionUrl(notification);
+        break;
+      case 'RepositoryInvitation':
+        url.pathname += '/invitations';
+        break;
+      case 'RepositoryDependabotAlertsThread':
+        url.pathname += '/security/dependabot';
+        break;
+      case 'WorkflowRun':
+        url.href = getWorkflowRunUrl(notification);
+        break;
+      default:
+        if (notification.subject.latest_comment_url) {
+          url.href = await getHtmlUrl(
+            notification.subject.latest_comment_url,
+            notification.account.token,
+          );
+        } else if (notification.subject.url) {
+          url.href = await getHtmlUrl(
+            notification.subject.url,
+            notification.account.token,
+          );
+        } else {
+          url.href = defaultGitHubWebUrl(url, notification.subject.type);
+        }
     }
   } catch (err) {
     rendererLogError(
@@ -156,6 +149,8 @@ export async function generateGitHubWebUrl(
       err,
       notification,
     );
+
+    url.href = defaultGitHubWebUrl(url, notification.subject.type);
   }
 
   url.searchParams.set(
@@ -164,6 +159,25 @@ export async function generateGitHubWebUrl(
   );
 
   return url.toString() as Link;
+}
+
+export function defaultGitHubWebUrl(url: URL, type: SubjectType) {
+  // Error state fallback urls
+  switch (type) {
+    case 'Issue':
+      url.pathname += '/issues';
+      break;
+    case 'Discussion':
+      url.pathname += '/discussions';
+      break;
+    case 'PullRequest':
+      url.pathname += '/pulls';
+      break;
+    default:
+      break;
+  }
+
+  return url.href;
 }
 
 export function getChevronDetails(

@@ -7,15 +7,15 @@ import {
 } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
 import type { Link } from '../../../types';
-import type {
-  Discussion,
-  DiscussionAuthor,
-  DiscussionStateType,
-  Repository,
-} from '../../../typesGitHub';
+import type { Repository } from '../../../typesGitHub';
+import {
+  type AuthorFieldsFragment,
+  type Discussion,
+  DiscussionStateReason,
+} from '../../api/graphql/generated/graphql';
 import { discussionHandler } from './discussion';
 
-const mockDiscussionAuthor: DiscussionAuthor = {
+const mockDiscussionAuthor: AuthorFieldsFragment = {
   login: 'discussion-author',
   url: 'https://github.com/discussion-author' as Link,
   avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4' as Link,
@@ -26,11 +26,15 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
   describe('enrich', () => {
     const partialRepository: Partial<Repository> = {
       full_name: 'gitify-app/notifications-test',
+      owner: {
+        login: 'gitify-app',
+      } as any,
     };
 
     const mockNotification = createPartialMockNotification({
       title: 'This is a mock discussion',
       type: 'Discussion',
+      url: 'https://api.github.com/repos/gitify-app/notifications-test/discussions/123' as Link,
     });
     mockNotification.updated_at = '2024-01-01T00:00:00Z';
     mockNotification.repository = {
@@ -48,8 +52,8 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         .post('/graphql')
         .reply(200, {
           data: {
-            search: {
-              nodes: [mockDiscussionNode(null, true)],
+            repository: {
+              discussion: mockDiscussionNode(null, true),
             },
           },
         });
@@ -78,8 +82,11 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         .post('/graphql')
         .reply(200, {
           data: {
-            search: {
-              nodes: [mockDiscussionNode('DUPLICATE', false)],
+            repository: {
+              discussion: mockDiscussionNode(
+                DiscussionStateReason.Duplicate,
+                false,
+              ),
             },
           },
         });
@@ -108,8 +115,8 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         .post('/graphql')
         .reply(200, {
           data: {
-            search: {
-              nodes: [mockDiscussionNode(null, false)],
+            repository: {
+              discussion: mockDiscussionNode(null, false),
             },
           },
         });
@@ -138,8 +145,11 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         .post('/graphql')
         .reply(200, {
           data: {
-            search: {
-              nodes: [mockDiscussionNode('OUTDATED', false)],
+            repository: {
+              discussion: mockDiscussionNode(
+                DiscussionStateReason.Outdated,
+                false,
+              ),
             },
           },
         });
@@ -168,8 +178,11 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         .post('/graphql')
         .reply(200, {
           data: {
-            search: {
-              nodes: [mockDiscussionNode('REOPENED', false)],
+            repository: {
+              discussion: mockDiscussionNode(
+                DiscussionStateReason.Reopened,
+                false,
+              ),
             },
           },
         });
@@ -198,8 +211,11 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         .post('/graphql')
         .reply(200, {
           data: {
-            search: {
-              nodes: [mockDiscussionNode('RESOLVED', true)],
+            repository: {
+              discussion: mockDiscussionNode(
+                DiscussionStateReason.Resolved,
+                true,
+              ),
             },
           },
         });
@@ -228,16 +244,17 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
       mockDiscussion.labels = {
         nodes: [
           {
+            id: 'MDU6TGFiZWwxMQ==',
             name: 'enhancement',
           },
         ],
-      };
+      } as unknown as typeof mockDiscussion.labels;
       nock('https://api.github.com')
         .post('/graphql')
         .reply(200, {
           data: {
-            search: {
-              nodes: [mockDiscussion],
+            repository: {
+              discussion: mockDiscussion,
             },
           },
         });
@@ -266,8 +283,8 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         .post('/graphql')
         .reply(200, {
           data: {
-            search: {
-              nodes: [mockDiscussionNode(null, false)],
+            repository: {
+              discussion: mockDiscussionNode(null, false),
             },
           },
         });
@@ -308,20 +325,26 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
 });
 
 function mockDiscussionNode(
-  state: DiscussionStateType,
+  state: DiscussionStateReason | null,
   isAnswered: boolean,
-): Discussion {
+): Partial<Discussion> {
   return {
     number: 123,
     title: 'This is a mock discussion',
     url: 'https://github.com/gitify-app/notifications-test/discussions/1' as Link,
-    stateReason: state,
+    stateReason: state || undefined,
     isAnswered: isAnswered,
     author: mockDiscussionAuthor,
     comments: {
       nodes: [],
       totalCount: 0,
-    },
-    labels: null,
-  };
+      pageInfo: {
+        hasNextPage: false,
+        hasPreviousPage: false,
+        startCursor: null,
+        endCursor: null,
+      },
+    } as unknown as Partial<Discussion>['comments'],
+    labels: null as Partial<Discussion>['labels'],
+  } as unknown as Partial<Discussion>;
 }
