@@ -5,7 +5,6 @@ dotenv.config();
 
 const config: CodegenConfig = {
   overwrite: true,
-  // Point the schema field to the GitHub GraphQL API endpoint
   schema: {
     'https://api.github.com/graphql': {
       // Add a custom header for authorization using your PAT
@@ -15,8 +14,6 @@ const config: CodegenConfig = {
       },
     },
   },
-  // Define where your application's GraphQL queries/mutations are located
-  // documents: 'src/**/*.graphql',
   documents: [
     'src/renderer/utils/api/**/*.ts',
     '!src/renderer/utils/api/graphql/generated/**',
@@ -25,19 +22,10 @@ const config: CodegenConfig = {
   // Configure generated outputs and plugins
   generates: {
     'src/renderer/utils/api/graphql/generated/': {
-      preset: 'client', // Or use specific plugins like 'typescript', 'typescript-operations'
+      preset: 'client',
       plugins: [],
       config: {
         documentMode: 'string',
-
-        // Additional plugin configuration, e.g. for scalars
-        // scalars: {
-        //   DateTime: 'string',
-        //   URI: 'string',
-        //   GitTimestamp: 'string',
-        //   Html: 'string',
-        //   X509Certificate: 'string',
-        // },
       },
     },
     'src/renderer/utils/api/graphql/generated/schema.graphql': {

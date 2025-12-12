@@ -3,6 +3,7 @@ import axios, {
   type AxiosResponse,
   type Method,
 } from 'axios';
+import type { ExecutionResult } from 'graphql';
 
 import type { Link, Token } from '../../types';
 import { decryptValue } from '../comms';
@@ -108,7 +109,7 @@ export async function performGraphQLRequest<TResult, TVariables>(
     headers: headers,
   }).then((response) => {
     return response.data;
-  }) as Promise<GitHubGraphQLResponse<TResult>>;
+  }) as Promise<ExecutionResult<TResult>>;
 }
 
 /**
