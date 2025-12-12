@@ -12,7 +12,6 @@ import {
   mockSingleNotification,
 } from './api/__mocks__/response-mocks';
 import * as apiClient from './api/client';
-import * as apiRequest from './api/request';
 import {
   generateGitHubWebUrl,
   generateNotificationReferrerId,
@@ -73,7 +72,6 @@ describe('renderer/utils/helpers.ts', () => {
     const mockNotificationReferrer =
       'notification_referrer_id=MDE4Ok5vdGlmaWNhdGlvblRocmVhZDEzODY2MTA5NjoxMjM0NTY3ODk%3D';
 
-    const apiRequestAuthSpy = jest.spyOn(apiRequest, 'apiRequestAuth');
     const getHtmlUrlSpy = jest.spyOn(apiClient, 'getHtmlUrl');
     const getLatestDiscussionSpy = jest.spyOn(apiClient, 'getLatestDiscussion');
 
@@ -465,21 +463,21 @@ describe('renderer/utils/helpers.ts', () => {
 
         const subject = {
           title: 'generate github web url unit tests',
-          url: 'https://api.github.com/repos/gitify-app/notifications-test/discussion/1' as Link,
+          url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1' as Link,
           latest_comment_url: null as Link,
-          type: 'Discussion' as SubjectType,
+          type: 'Issue' as SubjectType,
         };
 
-        apiRequestAuthSpy.mockRejectedValue(new Error('Test error'));
+        getHtmlUrlSpy.mockRejectedValue(new Error('Test error'));
 
         const result = await generateGitHubWebUrl({
           ...mockSingleNotification,
           subject: subject,
         });
 
-        expect(apiRequestAuthSpy).toHaveBeenCalledTimes(1);
+        expect(getHtmlUrlSpy).toHaveBeenCalledTimes(0);
         expect(result).toBe(
-          `https://github.com/gitify-app/notifications-test/discussions?${mockNotificationReferrer}`,
+          `https://github.com/gitify-app/notifications-test/issues?${mockNotificationReferrer}`,
         );
         expect(rendererLogErrorSpy).toHaveBeenCalledTimes(1);
       });
