@@ -10,7 +10,6 @@ const config: CodegenConfig = {
       // Add a custom header for authorization using your PAT
       headers: {
         Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
-        'User-Agent': 'GraphQL-Codegen-GitHub-Integration', // GitHub recommends a User-Agent header
       },
     },
   },
@@ -19,11 +18,9 @@ const config: CodegenConfig = {
     '!src/renderer/utils/api/graphql/generated/**',
     '!src/renderer/utils/api/**/*.test.ts',
   ],
-  // Configure generated outputs and plugins
   generates: {
     'src/renderer/utils/api/graphql/generated/': {
       preset: 'client',
-      plugins: [],
       config: {
         documentMode: 'string',
       },
