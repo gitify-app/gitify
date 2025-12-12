@@ -284,4 +284,6 @@ export async function getLatestDiscussion(
       notification,
     );
   }
+
+  return null;
 }

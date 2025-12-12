@@ -418,27 +418,26 @@ export const mockDiscussionLabels: DiscussionLabels = {
   ],
 };
 
-export const mockGraphQLResponse: GraphQLSearch<Discussion> = {
+export const mockDiscussion: Discussion = {
+  number: 123,
+  title: '1.16.0',
+  isAnswered: false,
+  stateReason: 'OPEN',
+  url: 'https://github.com/gitify-app/notifications-test/discussions/612' as Link,
+  author: {
+    login: 'discussion-creator',
+    url: 'https://github.com/discussion-creator' as Link,
+    avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4' as Link,
+    type: 'User',
+  },
+  comments: mockDiscussionComments,
+  labels: mockDiscussionLabels,
+};
+
+export const mockSearchDiscussionsGraphQLResponse: GraphQLSearch<Discussion> = {
   data: {
     search: {
-      nodes: [
-        {
-          number: 123,
-          title: '1.16.0',
-          isAnswered: false,
-          stateReason: 'OPEN',
-          url: 'https://github.com/gitify-app/notifications-test/discussions/612' as Link,
-          author: {
-            login: 'discussion-creator',
-            url: 'https://github.com/discussion-creator' as Link,
-            avatar_url:
-              'https://avatars.githubusercontent.com/u/123456789?v=4' as Link,
-            type: 'User',
-          },
-          comments: mockDiscussionComments,
-          labels: mockDiscussionLabels,
-        },
-      ],
+      nodes: [mockDiscussion],
     },
   },
 };
