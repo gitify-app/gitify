@@ -19,7 +19,7 @@
     "package:win": "electron-builder --win --config ./config/electron-builder.js",
     "lint:check": "biome check",
     "lint": "biome check --fix",
-    "test": "jest",
+    "test": "TZ=UTC jest",
     "start": "electron . --enable-logging",
     "prepare": "husky",
     "codegen": "graphql-codegen --config codegen.ts"

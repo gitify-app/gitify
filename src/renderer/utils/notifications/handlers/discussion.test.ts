@@ -26,11 +26,15 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
   describe('enrich', () => {
     const partialRepository: Partial<Repository> = {
       full_name: 'gitify-app/notifications-test',
+      owner: {
+        login: 'gitify-app',
+      } as any,
     };
 
     const mockNotification = createPartialMockNotification({
       title: 'This is a mock discussion',
       type: 'Discussion',
+      url: 'https://api.github.com/repos/gitify-app/notifications-test/discussions/123' as Link,
     });
     mockNotification.updated_at = '2024-01-01T00:00:00Z';
     mockNotification.repository = {
@@ -48,8 +52,8 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         .post('/graphql')
         .reply(200, {
           data: {
-            search: {
-              nodes: [mockDiscussionNode(null, true)],
+            repository: {
+              discussion: mockDiscussionNode(null, true),
             },
           },
         });
@@ -78,10 +82,11 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         .post('/graphql')
         .reply(200, {
           data: {
-            search: {
-              nodes: [
-                mockDiscussionNode(DiscussionStateReason.Duplicate, false),
-              ],
+            repository: {
+              discussion: mockDiscussionNode(
+                DiscussionStateReason.Duplicate,
+                false,
+              ),
             },
           },
         });
@@ -110,8 +115,8 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         .post('/graphql')
         .reply(200, {
           data: {
-            search: {
-              nodes: [mockDiscussionNode(null, false)],
+            repository: {
+              discussion: mockDiscussionNode(null, false),
             },
           },
         });
@@ -140,10 +145,11 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         .post('/graphql')
         .reply(200, {
           data: {
-            search: {
-              nodes: [
-                mockDiscussionNode(DiscussionStateReason.Outdated, false),
-              ],
+            repository: {
+              discussion: mockDiscussionNode(
+                DiscussionStateReason.Outdated,
+                false,
+              ),
             },
           },
         });
@@ -172,10 +178,11 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         .post('/graphql')
         .reply(200, {
           data: {
-            search: {
-              nodes: [
-                mockDiscussionNode(DiscussionStateReason.Reopened, false),
-              ],
+            repository: {
+              discussion: mockDiscussionNode(
+                DiscussionStateReason.Reopened,
+                false,
+              ),
             },
           },
         });
@@ -204,8 +211,11 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         .post('/graphql')
         .reply(200, {
           data: {
-            search: {
-              nodes: [mockDiscussionNode(DiscussionStateReason.Resolved, true)],
+            repository: {
+              discussion: mockDiscussionNode(
+                DiscussionStateReason.Resolved,
+                true,
+              ),
             },
           },
         });
@@ -243,8 +253,8 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         .post('/graphql')
         .reply(200, {
           data: {
-            search: {
-              nodes: [mockDiscussion],
+            repository: {
+              discussion: mockDiscussion,
             },
           },
         });
@@ -273,8 +283,8 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         .post('/graphql')
         .reply(200, {
           data: {
-            search: {
-              nodes: [mockDiscussionNode(null, false)],
+            repository: {
+              discussion: mockDiscussionNode(null, false),
             },
           },
         });
@@ -324,11 +334,7 @@ function mockDiscussionNode(
     url: 'https://github.com/gitify-app/notifications-test/discussions/1' as Link,
     stateReason: state || undefined,
     isAnswered: isAnswered,
-    author: {
-      login: mockDiscussionAuthor.login,
-      url: mockDiscussionAuthor.url,
-      avatarUrl: mockDiscussionAuthor.avatar_url,
-    } as Partial<Discussion>['author'],
+    author: mockDiscussionAuthor,
     comments: {
       nodes: [],
       totalCount: 0,
@@ -338,7 +344,7 @@ function mockDiscussionNode(
         startCursor: null,
         endCursor: null,
       },
-    } as Partial<Discussion>['comments'],
+    } as unknown as Partial<Discussion>['comments'],
     labels: null as Partial<Discussion>['labels'],
-  } as Partial<Discussion>;
+  } as unknown as Partial<Discussion>;
 }

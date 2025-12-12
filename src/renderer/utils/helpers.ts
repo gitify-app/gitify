@@ -160,6 +160,10 @@ export async function generateGitHubWebUrl(
       err,
       notification,
     );
+
+    if (notification.subject.type === 'Discussion') {
+      url.pathname += '/discussions';
+    }
   }
 
   url.searchParams.set(

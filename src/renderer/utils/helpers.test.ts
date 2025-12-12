@@ -14,7 +14,10 @@ import {
   mockDiscussionByNumberGraphQLResponse,
   mockSingleNotification,
 } from './api/__mocks__/response-mocks';
+import * as apiClient from './api/client';
+import type { FetchDiscussionByNumberQuery } from './api/graphql/generated/graphql';
 import * as apiRequests from './api/request';
+import type { GitHubGraphQLResponse } from './api/types';
 import {
   generateGitHubWebUrl,
   generateNotificationReferrerId,
@@ -273,9 +276,9 @@ describe('renderer/utils/helpers.ts', () => {
     });
 
     describe('Discussions URLs', () => {
-      const performGraphQLRequestSpy = jest.spyOn(
-        apiRequests,
-        'performGraphQLRequest',
+      const fetchDiscussionByNumberSpy = jest.spyOn(
+        apiClient,
+        'fetchDiscussionByNumber',
       );
 
       it('when no subject urls and no discussions found via query, default to linking to repository discussions', async () => {
@@ -286,16 +289,16 @@ describe('renderer/utils/helpers.ts', () => {
           type: 'Discussion' as SubjectType,
         };
 
-        performGraphQLRequestSpy.mockResolvedValue({
-          data: { data: { search: { nodes: [] } } },
-        } as AxiosResponse);
+        fetchDiscussionByNumberSpy.mockResolvedValue({
+          data: { repository: { discussion: null } },
+        } as any);
 
         const result = await generateGitHubWebUrl({
           ...mockSingleNotification,
           subject: subject,
         });
 
-        expect(performGraphQLRequestSpy).toHaveBeenCalledTimes(1);
+        expect(fetchDiscussionByNumberSpy).toHaveBeenCalledTimes(1);
         expect(result).toBe(
           `${mockSingleNotification.repository.html_url}/discussions?${mockNotificationReferrer}`,
         );
@@ -309,18 +312,16 @@ describe('renderer/utils/helpers.ts', () => {
           type: 'Discussion' as SubjectType,
         };
 
-        performGraphQLRequestSpy.mockResolvedValue({
-          data: {
-            ...mockDiscussionByNumberGraphQLResponse,
-          },
-        } as AxiosResponse);
+        fetchDiscussionByNumberSpy.mockResolvedValue({
+          data: mockDiscussionByNumberGraphQLResponse,
+        } as GitHubGraphQLResponse<FetchDiscussionByNumberQuery>);
 
         const result = await generateGitHubWebUrl({
           ...mockSingleNotification,
           subject: subject,
         });
 
-        expect(performGraphQLRequestSpy).toHaveBeenCalledTimes(1);
+        expect(fetchDiscussionByNumberSpy).toHaveBeenCalledTimes(1);
         expect(result).toBe(
           `https://github.com/gitify-app/notifications-test/discussions/612?${mockNotificationReferrer}#discussioncomment-2300902`,
         );
@@ -338,14 +339,20 @@ describe('renderer/utils/helpers.ts', () => {
           type: 'Discussion' as SubjectType,
         };
 
-        performGraphQLRequestSpy.mockResolvedValue(null as AxiosResponse);
+        fetchDiscussionByNumberSpy.mockResolvedValue({
+          errors: [
+            {
+              message: 'Something failed',
+            },
+          ],
+        } as GitHubGraphQLResponse<FetchDiscussionByNumberQuery>);
 
         const result = await generateGitHubWebUrl({
           ...mockSingleNotification,
           subject: subject,
         });
 
-        expect(performGraphQLRequestSpy).toHaveBeenCalledTimes(1);
+        expect(fetchDiscussionByNumberSpy).toHaveBeenCalledTimes(1);
         expect(result).toBe(
           `https://github.com/gitify-app/notifications-test/discussions?${mockNotificationReferrer}`,
         );
