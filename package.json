@@ -139,9 +139,9 @@
   "pnpm": {
     "onlyBuiltDependencies": [
       "@biomejs/biome",
+      "@parcel/watcher",
       "@tailwindcss/oxide",
-      "electron",
-      "esbuild"
+      "electron"
     ]
   },
   "lint-staged": {
