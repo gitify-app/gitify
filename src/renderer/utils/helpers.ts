@@ -6,7 +6,7 @@ import {
 
 import { Constants } from '../constants';
 import type { Chevron, Hostname, Link } from '../types';
-import type { Notification } from '../typesGitHub';
+import type { Notification, SubjectType } from '../typesGitHub';
 import { fetchDiscussionByNumber, getHtmlUrl } from './api/client';
 import type { PlatformType } from './auth/types';
 import { rendererLogError } from './logger';
@@ -138,8 +138,9 @@ export async function generateGitHubWebUrl(
             notification.subject.url,
             notification.account.token,
           );
+        } else {
+          url.href = defaultGitHubWebUrl(url, notification.subject.type);
         }
-        break;
     }
   } catch (err) {
     rendererLogError(
@@ -149,20 +150,7 @@ export async function generateGitHubWebUrl(
       notification,
     );
 
-    // Error state fallback urls
-    switch (notification.subject.type) {
-      case 'Issue':
-        url.pathname += '/issues';
-        break;
-      case 'Discussion':
-        url.pathname += '/discussions';
-        break;
-      case 'PullRequest':
-        url.pathname += '/pulls';
-        break;
-      default:
-        break;
-    }
+    url.href = defaultGitHubWebUrl(url, notification.subject.type);
   }
 
   url.searchParams.set(
@@ -171,6 +159,25 @@ export async function generateGitHubWebUrl(
   );
 
   return url.toString() as Link;
+}
+
+export function defaultGitHubWebUrl(url: URL, type: SubjectType) {
+  // Error state fallback urls
+  switch (type) {
+    case 'Issue':
+      url.pathname += '/issues';
+      break;
+    case 'Discussion':
+      url.pathname += '/discussions';
+      break;
+    case 'PullRequest':
+      url.pathname += '/pulls';
+      break;
+    default:
+      break;
+  }
+
+  return url.href;
 }
 
 export function getChevronDetails(
