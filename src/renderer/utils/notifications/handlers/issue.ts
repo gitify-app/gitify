@@ -53,7 +53,7 @@ class IssueHandler extends DefaultHandler {
 
     return {
       number: issue.number,
-      state: issue.state_reason ?? issue.state,
+      state: issueState,
       user: getSubjectUser([issueCommentUser, issue.user]),
       comments: issue.comments,
       labels: issue.labels?.map((label) => label.name) ?? [],
