@@ -18,6 +18,11 @@ pnpm install
 > OAUTH_CLIENT_ID="123" OAUTH_CLIENT_SECRET="456789" pnpm build
 > ```
 
+Copy the `.env.template` to `.env` and add update `GITHUB_TOKEN` with a GitHub Personal Access Token.  This is used for fetching the latest GitHub GraphQL API schema for `graphql-codegen`.
+```shell
+GITHUB_TOKEN=<some personal access token>
+```  
+
 To watch for changes (`webpack`) in the `src` directory:
 
 ```shell
