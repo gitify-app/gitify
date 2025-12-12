@@ -136,7 +136,7 @@ export async function generateGitHubWebUrl(
             notification.account.token,
           );
         } else {
-          url.href = defaultGitHubWebUrl(url, notification.subject.type);
+          url.href = getDefaultURLForType(url, notification.subject.type);
         }
     }
   } catch (err) {
@@ -147,7 +147,7 @@ export async function generateGitHubWebUrl(
       notification,
     );
 
-    url.href = defaultGitHubWebUrl(url, notification.subject.type);
+    url.href = getDefaultURLForType(url, notification.subject.type);
   }
 
   url.searchParams.set(
@@ -158,13 +158,13 @@ export async function generateGitHubWebUrl(
   return url.toString() as Link;
 }
 
-export function defaultGitHubWebUrl(url: URL, type: SubjectType) {
+export function getDefaultURLForType(url: URL, type: SubjectType) {
   switch (type) {
-    case 'Issue':
-      url.pathname += '/issues';
-      break;
     case 'Discussion':
       url.pathname += '/discussions';
+      break;
+    case 'Issue':
+      url.pathname += '/issues';
       break;
     case 'PullRequest':
       url.pathname += '/pulls';

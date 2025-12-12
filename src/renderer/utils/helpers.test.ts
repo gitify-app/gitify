@@ -16,6 +16,7 @@ import {
   generateGitHubWebUrl,
   generateNotificationReferrerId,
   getChevronDetails,
+  getDefaultURLForType,
   getPlatformFromHostname,
   isEnterpriseServerHost,
 } from './helpers';
@@ -416,7 +417,7 @@ describe('renderer/utils/helpers.ts', () => {
         );
       });
 
-      it('issues - defaults when no urls present in notification', async () => {
+      it('pull requests - defaults when no urls present in notification', async () => {
         const subject = {
           title: 'generate github web url unit tests',
           url: null,
@@ -479,6 +480,38 @@ describe('renderer/utils/helpers.ts', () => {
         );
         expect(rendererLogErrorSpy).toHaveBeenCalledTimes(1);
       });
+    });
+  });
+
+  describe('getDefaultURLForType', () => {
+    let mockUrl: URL;
+
+    beforeEach(() => {
+      mockUrl = new URL('https://github.com/gitify-app/notifications-test');
+    });
+
+    it('discussions', () => {
+      expect(getDefaultURLForType(mockUrl, 'Discussion')).toEqual(
+        'https://github.com/gitify-app/notifications-test/discussions',
+      );
+    });
+
+    it('issues', () => {
+      expect(getDefaultURLForType(mockUrl, 'Issue')).toEqual(
+        'https://github.com/gitify-app/notifications-test/issues',
+      );
+    });
+
+    it('pull requests', () => {
+      expect(getDefaultURLForType(mockUrl, 'PullRequest')).toEqual(
+        'https://github.com/gitify-app/notifications-test/pulls',
+      );
+    });
+
+    it('default', () => {
+      expect(getDefaultURLForType(mockUrl, 'RepositoryInvitation')).toEqual(
+        'https://github.com/gitify-app/notifications-test',
+      );
     });
   });
 
