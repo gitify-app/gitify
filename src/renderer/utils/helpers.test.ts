@@ -8,7 +8,7 @@ import type { Hostname, Link } from '../types';
 import type { SubjectType } from '../typesGitHub';
 import * as logger from '../utils/logger';
 import {
-  mockSearchDiscussionsGraphQLResponse,
+  mockDiscussion,
   mockSingleNotification,
 } from './api/__mocks__/response-mocks';
 import * as apiClient from './api/client';
@@ -283,9 +283,7 @@ describe('renderer/utils/helpers.ts', () => {
           type: 'Discussion' as SubjectType,
         };
 
-        getLatestDiscussionSpy.mockResolvedValue(
-          mockSearchDiscussionsGraphQLResponse[0],
-        );
+        getLatestDiscussionSpy.mockResolvedValue(mockDiscussion);
 
         const result = await generateGitHubWebUrl({
           ...mockSingleNotification,
@@ -475,7 +473,7 @@ describe('renderer/utils/helpers.ts', () => {
           subject: subject,
         });
 
-        expect(getHtmlUrlSpy).toHaveBeenCalledTimes(0);
+        expect(getHtmlUrlSpy).toHaveBeenCalledTimes(1);
         expect(result).toBe(
           `https://github.com/gitify-app/notifications-test/issues?${mockNotificationReferrer}`,
         );
