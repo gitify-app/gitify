@@ -52,8 +52,8 @@ importers:
         specifier: 11.3.1
         version: 11.3.1
       '@primer/react':
-        specifier: 38.4.0
-        version: 38.4.0(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react-is@18.3.0)(@types/react@19.2.7)(react-dom@19.2.1(react@19.2.1))(react-is@18.3.1)(react@19.2.1)
+        specifier: 38.5.0
+        version: 38.5.0(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react-is@18.3.0)(@types/react@19.2.7)(react-dom@19.2.1(react@19.2.1))(react-is@18.3.1)(react@19.2.1)
       '@tailwindcss/postcss':
         specifier: 4.1.17
         version: 4.1.17
@@ -1164,8 +1164,8 @@ packages:
     resolution: {integrity: sha512-YLT9Zo3oNPJoBjBc4q8G2mjU4tqIbf5CEOORbUUr48dCD9q3umJ3IPlVqOqDakPfd2HuwccBaqlGhN4Gmr5OWg==}
     engines: {node: ^12.20.0 || ^14.18.0 || >=16.0.0}
 
-  '@primer/behaviors@1.8.3':
-    resolution: {integrity: sha512-Cot5Jg5McTT4zg41omctzY60DygZ6qlhrBtD4rpDBM6vNi6CrCAs/2QSPAgYTW7Kz+jFp4BXJFhNcVqfqTgaxA==}
+  '@primer/behaviors@1.9.0':
+    resolution: {integrity: sha512-MIVSZlQGJzas44DZDwo4Dqiev289K918oDl/AcA+zTpQAjp+PrJ0LUxEnrSOapyivLYpRpmSCeF0XPh7NgXpCA==}
 
   '@primer/css@22.0.2':
     resolution: {integrity: sha512-FfXd1ga05oewKjDRi9cPmy7BSnb/6QOjTIxAtDj94Hoyk+qJxHhgvhbcnZwBfL3WKP6HeUT3PnsT9k+43Bmg3Q==}
@@ -1185,8 +1185,8 @@ packages:
   '@primer/primitives@11.3.1':
     resolution: {integrity: sha512-f5FXeUHQ0iyxt1UF6MqeajQ9jRV/7uOGLECU5KuFWhMioCZOho09jS6alZA9tiwksHr2LYXfo7AdFczpEz3Npw==}
 
-  '@primer/react@38.4.0':
-    resolution: {integrity: sha512-zx8d2l7906jJIZgHZLhWpX0FgoXKXIihMrTbNd0uT+Ok+SsC9vhIKaWsRhxvBGjNTElrr0glC39KQaIQxmPMUQ==}
+  '@primer/react@38.5.0':
+    resolution: {integrity: sha512-sHGs0OL/oJMU4YbP91yXAqXpNKp3PK/UIJmVtO9SrtRk4R8a55s0nU+fL4HSqVDRdzfBP3Ukza6zebIUDeV81g==}
     engines: {node: '>=12', npm: '>=7'}
     peerDependencies:
       '@types/react': 18.x || 19.x
@@ -6144,7 +6144,7 @@ snapshots:
 
   '@pkgr/core@0.2.7': {}
 
-  '@primer/behaviors@1.8.3': {}
+  '@primer/behaviors@1.9.0': {}
 
   '@primer/css@22.0.2(@primer/primitives@11.3.1)':
     dependencies:
@@ -6160,14 +6160,14 @@ snapshots:
 
   '@primer/primitives@11.3.1': {}
 
-  '@primer/react@38.4.0(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react-is@18.3.0)(@types/react@19.2.7)(react-dom@19.2.1(react@19.2.1))(react-is@18.3.1)(react@19.2.1)':
+  '@primer/react@38.5.0(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react-is@18.3.0)(@types/react@19.2.7)(react-dom@19.2.1(react@19.2.1))(react-is@18.3.1)(react@19.2.1)':
     dependencies:
       '@github/mini-throttle': 2.1.1
       '@github/relative-time-element': 4.5.0
       '@github/tab-container-element': 4.8.2
       '@lit-labs/react': 1.2.1
       '@oddbird/popover-polyfill': 0.5.2
-      '@primer/behaviors': 1.8.3
+      '@primer/behaviors': 1.9.0
       '@primer/live-region-element': 0.7.1
       '@primer/octicons-react': 19.21.1(react@19.2.1)
       '@primer/primitives': 11.3.1
