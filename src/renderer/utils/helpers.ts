@@ -90,7 +90,6 @@ async function getDiscussionUrl(notification: Notification): Promise<Link> {
   if (discussion) {
     url.href = discussion.url;
 
-    // Discussion comments come directly from the query result
     const discussionComments = discussion.comments.nodes || [];
 
     const closestComment = getClosestDiscussionCommentOrReply(
