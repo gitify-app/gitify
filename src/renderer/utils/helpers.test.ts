@@ -4,10 +4,9 @@ import {
   ChevronRightIcon,
 } from '@primer/octicons-react';
 
-import type { AxiosResponse } from 'axios';
 import type { ExecutionResult } from 'graphql';
 
-import { mockPersonalAccessTokenAccount } from '../__mocks__/account-mocks';
+import { createPartialMockNotification } from '../__mocks__/notifications-mocks';
 import type { Hostname, Link } from '../types';
 import type { SubjectType } from '../typesGitHub';
 import * as logger from '../utils/logger';
@@ -17,11 +16,11 @@ import {
 } from './api/__mocks__/response-mocks';
 import * as apiClient from './api/client';
 import type { FetchDiscussionByNumberQuery } from './api/graphql/generated/graphql';
-import * as apiRequests from './api/request';
 import {
   generateGitHubWebUrl,
   generateNotificationReferrerId,
   getChevronDetails,
+  getDefaultURLForType,
   getPlatformFromHostname,
   isEnterpriseServerHost,
 } from './helpers';
@@ -77,7 +76,8 @@ describe('renderer/utils/helpers.ts', () => {
       'https://github.com/gitify-app/notifications-test/issues/785';
     const mockNotificationReferrer =
       'notification_referrer_id=MDE4Ok5vdGlmaWNhdGlvblRocmVhZDEzODY2MTA5NjoxMjM0NTY3ODk%3D';
-    const apiRequestAuthSpy = jest.spyOn(apiRequests, 'apiRequestAuth');
+
+    const getHtmlUrlSpy = jest.spyOn(apiClient, 'getHtmlUrl');
 
     afterEach(() => {
       jest.clearAllMocks();
@@ -92,23 +92,14 @@ describe('renderer/utils/helpers.ts', () => {
         type: 'Issue' as SubjectType,
       };
 
-      apiRequestAuthSpy.mockResolvedValue({
-        data: {
-          html_url: mockHtmlUrl,
-        },
-      } as AxiosResponse);
+      getHtmlUrlSpy.mockResolvedValue(mockHtmlUrl);
 
       const result = await generateGitHubWebUrl({
         ...mockSingleNotification,
         subject: subject,
       });
 
-      expect(apiRequestAuthSpy).toHaveBeenCalledTimes(1);
-      expect(apiRequestAuthSpy).toHaveBeenCalledWith(
-        subject.latest_comment_url,
-        'GET',
-        mockPersonalAccessTokenAccount.token,
-      );
+      expect(getHtmlUrlSpy).toHaveBeenCalledTimes(1);
       expect(result).toBe(`${mockHtmlUrl}?${mockNotificationReferrer}`);
     });
 
@@ -120,23 +111,14 @@ describe('renderer/utils/helpers.ts', () => {
         type: 'Issue' as SubjectType,
       };
 
-      apiRequestAuthSpy.mockResolvedValue({
-        data: {
-          html_url: mockHtmlUrl,
-        },
-      } as AxiosResponse);
+      getHtmlUrlSpy.mockResolvedValue(mockHtmlUrl);
 
       const result = await generateGitHubWebUrl({
         ...mockSingleNotification,
         subject: subject,
       });
 
-      expect(apiRequestAuthSpy).toHaveBeenCalledTimes(1);
-      expect(apiRequestAuthSpy).toHaveBeenCalledWith(
-        subject.url,
-        'GET',
-        mockPersonalAccessTokenAccount.token,
-      );
+      expect(getHtmlUrlSpy).toHaveBeenCalledTimes(1);
       expect(result).toBe(`${mockHtmlUrl}?${mockNotificationReferrer}`);
     });
 
@@ -154,7 +136,7 @@ describe('renderer/utils/helpers.ts', () => {
           subject: subject,
         });
 
-        expect(apiRequestAuthSpy).toHaveBeenCalledTimes(0);
+        expect(getHtmlUrlSpy).toHaveBeenCalledTimes(0);
         expect(result).toBe(
           `https://github.com/gitify-app/notifications-test/actions?query=workflow%3A%22Demo%22+is%3Asuccess+branch%3Amain&${mockNotificationReferrer}`,
         );
@@ -173,7 +155,7 @@ describe('renderer/utils/helpers.ts', () => {
           subject: subject,
         });
 
-        expect(apiRequestAuthSpy).toHaveBeenCalledTimes(0);
+        expect(getHtmlUrlSpy).toHaveBeenCalledTimes(0);
         expect(result).toBe(
           `https://github.com/gitify-app/notifications-test/actions?query=workflow%3A%22Demo%22+is%3Afailure+branch%3Amain&${mockNotificationReferrer}`,
         );
@@ -192,7 +174,7 @@ describe('renderer/utils/helpers.ts', () => {
           subject: subject,
         });
 
-        expect(apiRequestAuthSpy).toHaveBeenCalledTimes(0);
+        expect(getHtmlUrlSpy).toHaveBeenCalledTimes(0);
         expect(result).toBe(
           `https://github.com/gitify-app/notifications-test/actions?query=workflow%3A%22Demo%22+is%3Afailure+branch%3Amain&${mockNotificationReferrer}`,
         );
@@ -211,7 +193,7 @@ describe('renderer/utils/helpers.ts', () => {
           subject: subject,
         });
 
-        expect(apiRequestAuthSpy).toHaveBeenCalledTimes(0);
+        expect(getHtmlUrlSpy).toHaveBeenCalledTimes(0);
         expect(result).toBe(
           `https://github.com/gitify-app/notifications-test/actions?query=workflow%3A%22Demo%22+is%3Askipped+branch%3Amain&${mockNotificationReferrer}`,
         );
@@ -230,7 +212,7 @@ describe('renderer/utils/helpers.ts', () => {
           subject: subject,
         });
 
-        expect(apiRequestAuthSpy).toHaveBeenCalledTimes(0);
+        expect(getHtmlUrlSpy).toHaveBeenCalledTimes(0);
         expect(result).toBe(
           `https://github.com/gitify-app/notifications-test/actions?${mockNotificationReferrer}`,
         );
@@ -249,7 +231,7 @@ describe('renderer/utils/helpers.ts', () => {
           subject: subject,
         });
 
-        expect(apiRequestAuthSpy).toHaveBeenCalledTimes(0);
+        expect(getHtmlUrlSpy).toHaveBeenCalledTimes(0);
         expect(result).toBe(
           `https://github.com/gitify-app/notifications-test/actions?query=workflow%3A%22Demo%22+branch%3Amain&${mockNotificationReferrer}`,
         );
@@ -268,7 +250,7 @@ describe('renderer/utils/helpers.ts', () => {
           subject: subject,
         });
 
-        expect(apiRequestAuthSpy).toHaveBeenCalledTimes(0);
+        expect(getHtmlUrlSpy).toHaveBeenCalledTimes(0);
         expect(result).toBe(
           `https://github.com/gitify-app/notifications-test/actions?${mockNotificationReferrer}`,
         );
@@ -403,7 +385,7 @@ describe('renderer/utils/helpers.ts', () => {
         subject: subject,
       });
 
-      expect(apiRequestAuthSpy).toHaveBeenCalledTimes(0);
+      expect(getHtmlUrlSpy).toHaveBeenCalledTimes(0);
       expect(result).toBe(
         `https://github.com/gitify-app/notifications-test/invitations?${mockNotificationReferrer}`,
       );
@@ -422,7 +404,7 @@ describe('renderer/utils/helpers.ts', () => {
         subject: subject,
       });
 
-      expect(apiRequestAuthSpy).toHaveBeenCalledTimes(0);
+      expect(getHtmlUrlSpy).toHaveBeenCalledTimes(0);
       expect(result).toBe(
         `https://github.com/gitify-app/notifications-test/security/dependabot?${mockNotificationReferrer}`,
       );
@@ -442,7 +424,7 @@ describe('renderer/utils/helpers.ts', () => {
           subject: subject,
         });
 
-        expect(apiRequestAuthSpy).toHaveBeenCalledTimes(0);
+        expect(getHtmlUrlSpy).toHaveBeenCalledTimes(0);
         expect(result).toBe(
           `https://github.com/gitify-app/notifications-test/actions?query=is%3Awaiting&${mockNotificationReferrer}`,
         );
@@ -462,7 +444,7 @@ describe('renderer/utils/helpers.ts', () => {
           subject: subject,
         });
 
-        expect(apiRequestAuthSpy).toHaveBeenCalledTimes(0);
+        expect(getHtmlUrlSpy).toHaveBeenCalledTimes(0);
         expect(result).toBe(
           `https://github.com/gitify-app/notifications-test/actions?${mockNotificationReferrer}`,
         );
@@ -481,7 +463,7 @@ describe('renderer/utils/helpers.ts', () => {
           subject: subject,
         });
 
-        expect(apiRequestAuthSpy).toHaveBeenCalledTimes(0);
+        expect(getHtmlUrlSpy).toHaveBeenCalledTimes(0);
         expect(result).toBe(
           `https://github.com/gitify-app/notifications-test/actions?${mockNotificationReferrer}`,
         );
@@ -502,32 +484,13 @@ describe('renderer/utils/helpers.ts', () => {
           subject: subject,
         });
 
-        expect(apiRequestAuthSpy).toHaveBeenCalledTimes(0);
+        expect(getHtmlUrlSpy).toHaveBeenCalledTimes(0);
         expect(result).toBe(
           `https://github.com/gitify-app/notifications-test/issues?${mockNotificationReferrer}`,
         );
       });
 
-      it('discussion - defaults when no urls present in notification', async () => {
-        const subject = {
-          title: 'generate github web url unit tests',
-          url: null,
-          latest_comment_url: null,
-          type: 'Discussion' as SubjectType,
-        };
-
-        const result = await generateGitHubWebUrl({
-          ...mockSingleNotification,
-          subject: subject,
-        });
-
-        expect(apiRequestAuthSpy).toHaveBeenCalledTimes(0);
-        expect(result).toBe(
-          `https://github.com/gitify-app/notifications-test/discussions?${mockNotificationReferrer}`,
-        );
-      });
-
-      it('issues - defaults when no urls present in notification', async () => {
+      it('pull requests - defaults when no urls present in notification', async () => {
         const subject = {
           title: 'generate github web url unit tests',
           url: null,
@@ -540,7 +503,7 @@ describe('renderer/utils/helpers.ts', () => {
           subject: subject,
         });
 
-        expect(apiRequestAuthSpy).toHaveBeenCalledTimes(0);
+        expect(getHtmlUrlSpy).toHaveBeenCalledTimes(0);
         expect(result).toBe(
           `https://github.com/gitify-app/notifications-test/pulls?${mockNotificationReferrer}`,
         );
@@ -559,7 +522,7 @@ describe('renderer/utils/helpers.ts', () => {
           subject: subject,
         });
 
-        expect(apiRequestAuthSpy).toHaveBeenCalledTimes(0);
+        expect(getHtmlUrlSpy).toHaveBeenCalledTimes(0);
         expect(result).toBe(
           `https://github.com/gitify-app/notifications-test?${mockNotificationReferrer}`,
         );
@@ -573,29 +536,93 @@ describe('renderer/utils/helpers.ts', () => {
         const subject = {
           title: 'generate github web url unit tests',
           url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1' as Link,
-          latest_comment_url:
-            'https://api.github.com/repos/gitify-app/notifications-test/issues/comments/302888448' as Link,
+          latest_comment_url: null as Link,
           type: 'Issue' as SubjectType,
         };
 
-        apiRequestAuthSpy.mockRejectedValue(new Error('Test error'));
+        getHtmlUrlSpy.mockRejectedValue(new Error('Test error'));
 
         const result = await generateGitHubWebUrl({
           ...mockSingleNotification,
           subject: subject,
         });
 
-        expect(apiRequestAuthSpy).toHaveBeenCalledTimes(1);
-        expect(apiRequestAuthSpy).toHaveBeenCalledWith(
-          subject.latest_comment_url,
-          'GET',
-          mockPersonalAccessTokenAccount.token,
-        );
+        expect(getHtmlUrlSpy).toHaveBeenCalledTimes(1);
         expect(result).toBe(
           `https://github.com/gitify-app/notifications-test/issues?${mockNotificationReferrer}`,
         );
-        expect(rendererLogErrorSpy).toHaveBeenCalledTimes(2);
+        expect(rendererLogErrorSpy).toHaveBeenCalledTimes(1);
       });
+    });
+  });
+
+  describe('getDefaultURLForType', () => {
+    const mockUrl = 'https://github.com/gitify-app/notifications-test' as Link;
+
+    it('discussions', () => {
+      const mockNotification = createPartialMockNotification(
+        { type: 'Discussion' },
+        { html_url: mockUrl },
+      );
+
+      expect(getDefaultURLForType(mockNotification)).toEqual(
+        'https://github.com/gitify-app/notifications-test/discussions',
+      );
+    });
+
+    it('issues', () => {
+      const mockNotification = createPartialMockNotification(
+        { type: 'Issue' },
+        { html_url: mockUrl },
+      );
+
+      expect(getDefaultURLForType(mockNotification)).toEqual(
+        'https://github.com/gitify-app/notifications-test/issues',
+      );
+    });
+
+    it('pull requests', () => {
+      const mockNotification = createPartialMockNotification(
+        { type: 'PullRequest' },
+        { html_url: mockUrl },
+      );
+
+      expect(getDefaultURLForType(mockNotification)).toEqual(
+        'https://github.com/gitify-app/notifications-test/pulls',
+      );
+    });
+
+    it('repository invitation', () => {
+      const mockNotification = createPartialMockNotification(
+        { type: 'RepositoryInvitation' },
+        { html_url: mockUrl },
+      );
+
+      expect(getDefaultURLForType(mockNotification)).toEqual(
+        'https://github.com/gitify-app/notifications-test/invitations',
+      );
+    });
+
+    it('repository dependabot alert thread', () => {
+      const mockNotification = createPartialMockNotification(
+        { type: 'RepositoryDependabotAlertsThread' },
+        { html_url: mockUrl },
+      );
+
+      expect(getDefaultURLForType(mockNotification)).toEqual(
+        'https://github.com/gitify-app/notifications-test/security/dependabot',
+      );
+    });
+
+    it('default web urls', () => {
+      const mockNotification = createPartialMockNotification(
+        { type: 'Commit' },
+        { html_url: mockUrl },
+      );
+
+      expect(getDefaultURLForType(mockNotification)).toEqual(
+        'https://github.com/gitify-app/notifications-test',
+      );
     });
   });
 
