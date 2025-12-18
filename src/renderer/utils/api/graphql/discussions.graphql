@@ -1,19 +1,4 @@
-fragment AuthorFields on Actor {
-  login
-  url
-  avatar_url: avatarUrl
-  type: __typename
-}
-
-fragment CommentFields on DiscussionComment {
-  databaseId
-  createdAt
-  author {
-    ...AuthorFields
-  }
-}
-
-query fetchDiscussionByNumber(
+query FetchDiscussionByNumber(
   $owner: String!
   $name: String!
   $number: Int!
@@ -50,5 +35,20 @@ query fetchDiscussionByNumber(
         }
       }
     }
+  }
+}
+
+fragment AuthorFields on Actor {
+  login
+  url
+  avatar_url: avatarUrl
+  type: __typename
+}
+
+fragment CommentFields on DiscussionComment {
+  databaseId
+  createdAt
+  author {
+    ...AuthorFields
   }
 }

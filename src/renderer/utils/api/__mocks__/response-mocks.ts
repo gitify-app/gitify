@@ -368,83 +368,54 @@ export const mockEnterpriseNotifications: Notification[] = [
   },
 ];
 
-const mockDiscussionAuthor = {
-  __typename: 'User' as const,
-  ' $fragmentRefs': {
-    AuthorFields_User_Fragment: {
-      __typename: 'User' as const,
-      login: 'comment-user',
-      url: 'https://github.com/comment-user' as Link,
-      avatar_url:
-        'https://avatars.githubusercontent.com/u/123456789?v=4' as Link,
-      type: 'User' as const,
-    },
-  },
-};
-
-const mockDiscussionReplier = {
-  __typename: 'User' as const,
-  ' $fragmentRefs': {
-    AuthorFields_User_Fragment: {
-      __typename: 'User' as const,
-      login: 'reply-user',
-      url: 'https://github.com/reply-user' as Link,
-      avatar_url:
-        'https://avatars.githubusercontent.com/u/123456789?v=4' as Link,
-      type: 'User' as const,
-    },
-  },
-};
-
-const mockDiscussionComments = {
-  totalCount: 2,
-  nodes: [
-    {
-      __typename: 'DiscussionComment' as const,
-      databaseId: 2258799,
-      createdAt: '2017-02-20T17:51:57Z',
-      author: mockDiscussionAuthor,
-      replies: {
-        __typename: 'DiscussionCommentConnection' as const,
-        nodes: [
-          {
-            __typename: 'DiscussionComment' as const,
-            databaseId: 2300902,
-            createdAt: '2017-05-20T17:51:57Z',
-            author: mockDiscussionReplier,
-            replies: {
-              __typename: 'DiscussionCommentConnection' as const,
-              nodes: [],
-            },
-          },
-        ],
-      },
-    },
-  ],
-};
-
-const mockDiscussionLabels = {
-  nodes: [
-    {
-      name: 'enhancement',
-    },
-  ],
-};
-
 export const mockDiscussionByNumberGraphQLResponse: FetchDiscussionByNumberQuery =
   {
     repository: {
-      __typename: 'Repository',
       discussion: {
-        __typename: 'Discussion' as const,
+        __typename: 'Discussion',
         number: 123,
         title: '1.16.0',
         isAnswered: false,
         stateReason: null,
         url: 'https://github.com/gitify-app/notifications-test/discussions/612' as Link,
-        author: mockDiscussionAuthor,
-        comments: mockDiscussionComments,
-        labels: mockDiscussionLabels,
+        author: {
+          login: 'comment-user',
+          url: 'https://github.com/comment-user' as Link,
+          avatar_url:
+            'https://avatars.githubusercontent.com/u/123456789?v=4' as Link,
+          type: 'User',
+        },
+        comments: {
+          totalCount: 2,
+          nodes: [
+            {
+              databaseId: 2258799,
+              createdAt: '2017-02-20T17:51:57Z',
+              author: {
+                login: 'comment-user',
+                url: 'https://github.com/comment-user' as Link,
+                avatar_url:
+                  'https://avatars.githubusercontent.com/u/123456789?v=4' as Link,
+                type: 'User',
+              },
+              replies: {
+                nodes: [
+                  {
+                    databaseId: 2300902,
+                    createdAt: '2017-05-20T17:51:57Z',
+                    author: {
+                      login: 'reply-user',
+                      url: 'https://github.com/reply-user' as Link,
+                      avatar_url:
+                        'https://avatars.githubusercontent.com/u/123456789?v=4' as Link,
+                      type: 'User',
+                    },
+                  },
+                ],
+              },
+            },
+          ],
+        },
       },
     },
   };

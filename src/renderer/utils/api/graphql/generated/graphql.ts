@@ -36413,47 +36413,6 @@ export type WorkflowsParametersInput = {
 
 export type _Entity = Issue;
 
-type AuthorFields_Bot_Fragment = { __typename?: 'Bot', login: string, url: any, avatar_url: any, type: 'Bot' } & { ' $fragmentName'?: 'AuthorFields_Bot_Fragment' };
-
-type AuthorFields_EnterpriseUserAccount_Fragment = { __typename?: 'EnterpriseUserAccount', login: string, url: any, avatar_url: any, type: 'EnterpriseUserAccount' } & { ' $fragmentName'?: 'AuthorFields_EnterpriseUserAccount_Fragment' };
-
-type AuthorFields_Mannequin_Fragment = { __typename?: 'Mannequin', login: string, url: any, avatar_url: any, type: 'Mannequin' } & { ' $fragmentName'?: 'AuthorFields_Mannequin_Fragment' };
-
-type AuthorFields_Organization_Fragment = { __typename?: 'Organization', login: string, url: any, avatar_url: any, type: 'Organization' } & { ' $fragmentName'?: 'AuthorFields_Organization_Fragment' };
-
-type AuthorFields_User_Fragment = { __typename?: 'User', login: string, url: any, avatar_url: any, type: 'User' } & { ' $fragmentName'?: 'AuthorFields_User_Fragment' };
-
-export type AuthorFieldsFragment =
-  | AuthorFields_Bot_Fragment
-  | AuthorFields_EnterpriseUserAccount_Fragment
-  | AuthorFields_Mannequin_Fragment
-  | AuthorFields_Organization_Fragment
-  | AuthorFields_User_Fragment
-;
-
-export type CommentFieldsFragment = { __typename?: 'DiscussionComment', databaseId?: number | null, createdAt: any, author?:
-    | (
-      { __typename?: 'Bot' }
-      & { ' $fragmentRefs'?: { 'AuthorFields_Bot_Fragment': AuthorFields_Bot_Fragment } }
-    )
-    | (
-      { __typename?: 'EnterpriseUserAccount' }
-      & { ' $fragmentRefs'?: { 'AuthorFields_EnterpriseUserAccount_Fragment': AuthorFields_EnterpriseUserAccount_Fragment } }
-    )
-    | (
-      { __typename?: 'Mannequin' }
-      & { ' $fragmentRefs'?: { 'AuthorFields_Mannequin_Fragment': AuthorFields_Mannequin_Fragment } }
-    )
-    | (
-      { __typename?: 'Organization' }
-      & { ' $fragmentRefs'?: { 'AuthorFields_Organization_Fragment': AuthorFields_Organization_Fragment } }
-    )
-    | (
-      { __typename?: 'User' }
-      & { ' $fragmentRefs'?: { 'AuthorFields_User_Fragment': AuthorFields_User_Fragment } }
-    )
-   | null } & { ' $fragmentName'?: 'CommentFieldsFragment' };
-
 export type FetchDiscussionByNumberQueryVariables = Exact<{
   owner: Scalars['String']['input'];
   name: Scalars['String']['input'];
@@ -36466,33 +36425,50 @@ export type FetchDiscussionByNumberQueryVariables = Exact<{
 
 
 export type FetchDiscussionByNumberQuery = { __typename?: 'Query', repository?: { __typename?: 'Repository', discussion?: { __typename: 'Discussion', number: number, title: string, stateReason?: DiscussionStateReason | null, isAnswered?: boolean | null, url: any, author?:
-        | (
-          { __typename?: 'Bot' }
-          & { ' $fragmentRefs'?: { 'AuthorFields_Bot_Fragment': AuthorFields_Bot_Fragment } }
-        )
-        | (
-          { __typename?: 'EnterpriseUserAccount' }
-          & { ' $fragmentRefs'?: { 'AuthorFields_EnterpriseUserAccount_Fragment': AuthorFields_EnterpriseUserAccount_Fragment } }
-        )
-        | (
-          { __typename?: 'Mannequin' }
-          & { ' $fragmentRefs'?: { 'AuthorFields_Mannequin_Fragment': AuthorFields_Mannequin_Fragment } }
-        )
-        | (
-          { __typename?: 'Organization' }
-          & { ' $fragmentRefs'?: { 'AuthorFields_Organization_Fragment': AuthorFields_Organization_Fragment } }
-        )
-        | (
-          { __typename?: 'User' }
-          & { ' $fragmentRefs'?: { 'AuthorFields_User_Fragment': AuthorFields_User_Fragment } }
-        )
-       | null, comments: { __typename?: 'DiscussionCommentConnection', totalCount: number, nodes?: Array<(
-          { __typename?: 'DiscussionComment', replies: { __typename?: 'DiscussionCommentConnection', nodes?: Array<(
-              { __typename?: 'DiscussionComment' }
-              & { ' $fragmentRefs'?: { 'CommentFieldsFragment': CommentFieldsFragment } }
-            ) | null> | null } }
-          & { ' $fragmentRefs'?: { 'CommentFieldsFragment': CommentFieldsFragment } }
-        ) | null> | null }, labels?: { __typename?: 'LabelConnection', nodes?: Array<{ __typename?: 'Label', name: string } | null> | null } | null } | null } | null };
+        | { __typename?: 'Bot', login: string, url: any, avatar_url: any, type: 'Bot' }
+        | { __typename?: 'EnterpriseUserAccount', login: string, url: any, avatar_url: any, type: 'EnterpriseUserAccount' }
+        | { __typename?: 'Mannequin', login: string, url: any, avatar_url: any, type: 'Mannequin' }
+        | { __typename?: 'Organization', login: string, url: any, avatar_url: any, type: 'Organization' }
+        | { __typename?: 'User', login: string, url: any, avatar_url: any, type: 'User' }
+       | null, comments: { __typename?: 'DiscussionCommentConnection', totalCount: number, nodes?: Array<{ __typename?: 'DiscussionComment', databaseId?: number | null, createdAt: any, replies: { __typename?: 'DiscussionCommentConnection', nodes?: Array<{ __typename?: 'DiscussionComment', databaseId?: number | null, createdAt: any, author?:
+                | { __typename?: 'Bot', login: string, url: any, avatar_url: any, type: 'Bot' }
+                | { __typename?: 'EnterpriseUserAccount', login: string, url: any, avatar_url: any, type: 'EnterpriseUserAccount' }
+                | { __typename?: 'Mannequin', login: string, url: any, avatar_url: any, type: 'Mannequin' }
+                | { __typename?: 'Organization', login: string, url: any, avatar_url: any, type: 'Organization' }
+                | { __typename?: 'User', login: string, url: any, avatar_url: any, type: 'User' }
+               | null } | null> | null }, author?:
+            | { __typename?: 'Bot', login: string, url: any, avatar_url: any, type: 'Bot' }
+            | { __typename?: 'EnterpriseUserAccount', login: string, url: any, avatar_url: any, type: 'EnterpriseUserAccount' }
+            | { __typename?: 'Mannequin', login: string, url: any, avatar_url: any, type: 'Mannequin' }
+            | { __typename?: 'Organization', login: string, url: any, avatar_url: any, type: 'Organization' }
+            | { __typename?: 'User', login: string, url: any, avatar_url: any, type: 'User' }
+           | null } | null> | null }, labels?: { __typename?: 'LabelConnection', nodes?: Array<{ __typename?: 'Label', name: string } | null> | null } | null } | null } | null };
+
+type AuthorFields_Bot_Fragment = { __typename?: 'Bot', login: string, url: any, avatar_url: any, type: 'Bot' };
+
+type AuthorFields_EnterpriseUserAccount_Fragment = { __typename?: 'EnterpriseUserAccount', login: string, url: any, avatar_url: any, type: 'EnterpriseUserAccount' };
+
+type AuthorFields_Mannequin_Fragment = { __typename?: 'Mannequin', login: string, url: any, avatar_url: any, type: 'Mannequin' };
+
+type AuthorFields_Organization_Fragment = { __typename?: 'Organization', login: string, url: any, avatar_url: any, type: 'Organization' };
+
+type AuthorFields_User_Fragment = { __typename?: 'User', login: string, url: any, avatar_url: any, type: 'User' };
+
+export type AuthorFieldsFragment =
+  | AuthorFields_Bot_Fragment
+  | AuthorFields_EnterpriseUserAccount_Fragment
+  | AuthorFields_Mannequin_Fragment
+  | AuthorFields_Organization_Fragment
+  | AuthorFields_User_Fragment
+;
+
+export type CommentFieldsFragment = { __typename?: 'DiscussionComment', databaseId?: number | null, createdAt: any, author?:
+    | { __typename?: 'Bot', login: string, url: any, avatar_url: any, type: 'Bot' }
+    | { __typename?: 'EnterpriseUserAccount', login: string, url: any, avatar_url: any, type: 'EnterpriseUserAccount' }
+    | { __typename?: 'Mannequin', login: string, url: any, avatar_url: any, type: 'Mannequin' }
+    | { __typename?: 'Organization', login: string, url: any, avatar_url: any, type: 'Organization' }
+    | { __typename?: 'User', login: string, url: any, avatar_url: any, type: 'User' }
+   | null };
 
 export class TypedDocumentString<TResult, TVariables>
   extends String
@@ -36535,7 +36511,7 @@ export const CommentFieldsFragmentDoc = new TypedDocumentString(`
   type: __typename
 }`, {"fragmentName":"CommentFields"}) as unknown as TypedDocumentString<CommentFieldsFragment, unknown>;
 export const FetchDiscussionByNumberDocument = new TypedDocumentString(`
-    query fetchDiscussionByNumber($owner: String!, $name: String!, $number: Int!, $lastComments: Int, $lastReplies: Int, $firstLabels: Int, $includeIsAnswered: Boolean!) {
+    query FetchDiscussionByNumber($owner: String!, $name: String!, $number: Int!, $lastComments: Int, $lastReplies: Int, $firstLabels: Int, $includeIsAnswered: Boolean!) {
   repository(owner: $owner, name: $name) {
     discussion(number: $number) {
       __typename

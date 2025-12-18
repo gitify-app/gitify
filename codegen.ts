@@ -17,6 +17,9 @@ const config: CodegenConfig = {
   generates: {
     'src/renderer/utils/api/graphql/generated/': {
       preset: 'client',
+      presetConfig: {
+        fragmentMasking: false, // Disables masking
+      },
       config: {
         documentMode: 'string',
         useTypeImports: true,
