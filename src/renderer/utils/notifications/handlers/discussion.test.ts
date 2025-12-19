@@ -7,7 +7,7 @@ import {
 } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
 import type { Link } from '../../../types';
-import type { Repository } from '../../../typesGitHub';
+import type { Owner, Repository } from '../../../typesGitHub';
 import {
   type AuthorFieldsFragment,
   type Discussion,
@@ -24,11 +24,13 @@ const mockDiscussionAuthor: AuthorFieldsFragment = {
 
 describe('renderer/utils/notifications/handlers/discussion.ts', () => {
   describe('enrich', () => {
+    const partialOwner: Partial<Owner> = {
+      login: 'gitify-app',
+    };
+
     const partialRepository: Partial<Repository> = {
       full_name: 'gitify-app/notifications-test',
-      owner: {
-        login: 'gitify-app',
-      } as any,
+      owner: partialOwner as Owner,
     };
 
     const mockNotification = createPartialMockNotification({
@@ -244,17 +246,18 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
       mockDiscussion.labels = {
         nodes: [
           {
-            id: 'MDU6TGFiZWwxMQ==',
             name: 'enhancement',
           },
         ],
-      } as unknown as typeof mockDiscussion.labels;
+      } as Partial<Discussion>['labels'];
       nock('https://api.github.com')
         .post('/graphql')
         .reply(200, {
           data: {
             repository: {
-              discussion: mockDiscussion,
+              discussion: {
+                ...mockDiscussion,
+              },
             },
           },
         });
@@ -325,26 +328,20 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
 });
 
 function mockDiscussionNode(
-  state: DiscussionStateReason | null,
+  state: DiscussionStateReason,
   isAnswered: boolean,
 ): Partial<Discussion> {
   return {
     number: 123,
     title: 'This is a mock discussion',
     url: 'https://github.com/gitify-app/notifications-test/discussions/1' as Link,
-    stateReason: state || undefined,
+    stateReason: state,
     isAnswered: isAnswered,
     author: mockDiscussionAuthor,
     comments: {
       nodes: [],
       totalCount: 0,
-      pageInfo: {
-        hasNextPage: false,
-        hasPreviousPage: false,
-        startCursor: null,
-        endCursor: null,
-      },
-    } as unknown as Partial<Discussion>['comments'],
-    labels: null as Partial<Discussion>['labels'],
+    },
+    labels: null,
   } as unknown as Partial<Discussion>;
 }

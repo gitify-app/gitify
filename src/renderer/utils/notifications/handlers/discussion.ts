@@ -124,32 +124,23 @@ export function getClosestDiscussionCommentOrReply(
     return null;
   }
 
-  const targetDate = notification.updated_at;
+  const targetTimestamp = notification.updated_at;
 
   const allCommentsAndReplies = comments.flatMap((comment) => [
     comment,
     ...comment.replies.nodes,
   ]);
 
-  // Consider only comments with a databaseId so we can anchor the URL
-  const commentsWithIds = allCommentsAndReplies.filter(
-    (item) => item?.databaseId != null,
-  );
-
-  if (commentsWithIds.length === 0) {
-    return null;
-  }
-
   // Find the closest match using the target timestamp
-  const closestComment = commentsWithIds.reduce((prev, curr) => {
+  const closestComment = allCommentsAndReplies.reduce((prev, curr) => {
     const prevDiff = Math.abs(
-      differenceInMilliseconds(prev.createdAt, targetDate),
+      differenceInMilliseconds(prev.createdAt, targetTimestamp),
     );
     const currDiff = Math.abs(
-      differenceInMilliseconds(curr.createdAt, targetDate),
+      differenceInMilliseconds(curr.createdAt, targetTimestamp),
     );
     return currDiff < prevDiff ? curr : prev;
-  }, commentsWithIds[0]);
+  }, allCommentsAndReplies[0]);
 
   return closestComment;
 }
