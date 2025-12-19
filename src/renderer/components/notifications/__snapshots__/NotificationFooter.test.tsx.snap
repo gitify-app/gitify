@@ -11,11 +11,11 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
         data-light-theme="light"
       >
         <div
-          class="prc-src-BaseStyles-dl-St"
+          class="prc-src-BaseStyles-aopSS"
           data-portal-root="true"
         >
           <div
-            class="text-xs opacity-80 prc-Stack-Stack-WJVsK"
+            class="text-xs opacity-80 prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -29,7 +29,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
               type="button"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -40,7 +40,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
               >
                 <img
                   alt="gitify-app"
-                  class="prc-Avatar-Avatar-ZRS-m"
+                  class="prc-Avatar-Avatar-0xaUi"
                   data-component="Avatar"
                   height="14"
                   src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
@@ -50,7 +50,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
               </div>
             </button>
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="stretch"
               data-direction="horizontal"
               data-gap="none"
@@ -59,7 +59,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
               data-wrap="nowrap"
             >
               <span
-                class="pr-1 prc-Text-Text-0ima0"
+                class="pr-1 prc-Text-Text-9mHv3"
                 title="You're watching the repository."
               >
                 Updated
@@ -74,13 +74,13 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
               class="flex gap-1"
             >
               <span
-                class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+                class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
                 data-size="small"
                 data-variant="secondary"
                 title="octocat approved these changes"
               >
                 <div
-                  class="prc-Stack-Stack-WJVsK"
+                  class="prc-Stack-Stack-UQ9k6"
                   data-align="center"
                   data-direction="horizontal"
                   data-gap="none"
@@ -105,20 +105,20 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
                     />
                   </svg>
                   <span
-                    class="text-xxs px-1 prc-Text-Text-0ima0"
+                    class="text-xxs px-1 prc-Text-Text-9mHv3"
                   >
                     1
                   </span>
                 </div>
               </span>
               <span
-                class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+                class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
                 data-size="small"
                 data-variant="secondary"
                 title="gitify-app requested changes"
               >
                 <div
-                  class="prc-Stack-Stack-WJVsK"
+                  class="prc-Stack-Stack-UQ9k6"
                   data-align="center"
                   data-direction="horizontal"
                   data-gap="none"
@@ -143,7 +143,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
                     />
                   </svg>
                   <span
-                    class="text-xxs px-1 prc-Text-Text-0ima0"
+                    class="text-xxs px-1 prc-Text-Text-9mHv3"
                   >
                     1
                   </span>
@@ -162,11 +162,11 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
       data-light-theme="light"
     >
       <div
-        class="prc-src-BaseStyles-dl-St"
+        class="prc-src-BaseStyles-aopSS"
         data-portal-root="true"
       >
         <div
-          class="text-xs opacity-80 prc-Stack-Stack-WJVsK"
+          class="text-xs opacity-80 prc-Stack-Stack-UQ9k6"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -180,7 +180,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
             type="button"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -191,7 +191,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
             >
               <img
                 alt="gitify-app"
-                class="prc-Avatar-Avatar-ZRS-m"
+                class="prc-Avatar-Avatar-0xaUi"
                 data-component="Avatar"
                 height="14"
                 src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
@@ -201,7 +201,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
             </div>
           </button>
           <div
-            class="prc-Stack-Stack-WJVsK"
+            class="prc-Stack-Stack-UQ9k6"
             data-align="stretch"
             data-direction="horizontal"
             data-gap="none"
@@ -210,7 +210,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
             data-wrap="nowrap"
           >
             <span
-              class="pr-1 prc-Text-Text-0ima0"
+              class="pr-1 prc-Text-Text-9mHv3"
               title="You're watching the repository."
             >
               Updated
@@ -225,13 +225,13 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
             class="flex gap-1"
           >
             <span
-              class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+              class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
               data-size="small"
               data-variant="secondary"
               title="octocat approved these changes"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="none"
@@ -256,20 +256,20 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
                   />
                 </svg>
                 <span
-                  class="text-xxs px-1 prc-Text-Text-0ima0"
+                  class="text-xxs px-1 prc-Text-Text-9mHv3"
                 >
                   1
                 </span>
               </div>
             </span>
             <span
-              class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+              class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
               data-size="small"
               data-variant="secondary"
               title="gitify-app requested changes"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="none"
@@ -294,7 +294,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
                   />
                 </svg>
                 <span
-                  class="text-xxs px-1 prc-Text-Text-0ima0"
+                  class="text-xxs px-1 prc-Text-Text-9mHv3"
                 >
                   1
                 </span>
@@ -370,11 +370,11 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
         data-light-theme="light"
       >
         <div
-          class="prc-src-BaseStyles-dl-St"
+          class="prc-src-BaseStyles-aopSS"
           data-portal-root="true"
         >
           <div
-            class="text-xs opacity-80 prc-Stack-Stack-WJVsK"
+            class="text-xs opacity-80 prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -388,7 +388,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
               type="button"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -399,7 +399,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
               >
                 <img
                   alt="gitify-app"
-                  class="prc-Avatar-Avatar-ZRS-m"
+                  class="prc-Avatar-Avatar-0xaUi"
                   data-component="Avatar"
                   height="14"
                   src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
@@ -409,7 +409,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
               </div>
             </button>
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="stretch"
               data-direction="horizontal"
               data-gap="none"
@@ -418,7 +418,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
               data-wrap="nowrap"
             >
               <span
-                class="pr-1 prc-Text-Text-0ima0"
+                class="pr-1 prc-Text-Text-9mHv3"
                 title="You're watching the repository."
               >
                 Updated
@@ -433,13 +433,13 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
               class="flex gap-1"
             >
               <span
-                class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+                class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
                 data-size="small"
                 data-variant="secondary"
                 title="octocat approved these changes"
               >
                 <div
-                  class="prc-Stack-Stack-WJVsK"
+                  class="prc-Stack-Stack-UQ9k6"
                   data-align="center"
                   data-direction="horizontal"
                   data-gap="none"
@@ -464,20 +464,20 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
                     />
                   </svg>
                   <span
-                    class="text-xxs px-1 prc-Text-Text-0ima0"
+                    class="text-xxs px-1 prc-Text-Text-9mHv3"
                   >
                     1
                   </span>
                 </div>
               </span>
               <span
-                class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+                class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
                 data-size="small"
                 data-variant="secondary"
                 title="gitify-app requested changes"
               >
                 <div
-                  class="prc-Stack-Stack-WJVsK"
+                  class="prc-Stack-Stack-UQ9k6"
                   data-align="center"
                   data-direction="horizontal"
                   data-gap="none"
@@ -502,7 +502,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
                     />
                   </svg>
                   <span
-                    class="text-xxs px-1 prc-Text-Text-0ima0"
+                    class="text-xxs px-1 prc-Text-Text-9mHv3"
                   >
                     1
                   </span>
@@ -521,11 +521,11 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
       data-light-theme="light"
     >
       <div
-        class="prc-src-BaseStyles-dl-St"
+        class="prc-src-BaseStyles-aopSS"
         data-portal-root="true"
       >
         <div
-          class="text-xs opacity-80 prc-Stack-Stack-WJVsK"
+          class="text-xs opacity-80 prc-Stack-Stack-UQ9k6"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -539,7 +539,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
             type="button"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -550,7 +550,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
             >
               <img
                 alt="gitify-app"
-                class="prc-Avatar-Avatar-ZRS-m"
+                class="prc-Avatar-Avatar-0xaUi"
                 data-component="Avatar"
                 height="14"
                 src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
@@ -560,7 +560,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
             </div>
           </button>
           <div
-            class="prc-Stack-Stack-WJVsK"
+            class="prc-Stack-Stack-UQ9k6"
             data-align="stretch"
             data-direction="horizontal"
             data-gap="none"
@@ -569,7 +569,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
             data-wrap="nowrap"
           >
             <span
-              class="pr-1 prc-Text-Text-0ima0"
+              class="pr-1 prc-Text-Text-9mHv3"
               title="You're watching the repository."
             >
               Updated
@@ -584,13 +584,13 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
             class="flex gap-1"
           >
             <span
-              class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+              class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
               data-size="small"
               data-variant="secondary"
               title="octocat approved these changes"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="none"
@@ -615,20 +615,20 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
                   />
                 </svg>
                 <span
-                  class="text-xxs px-1 prc-Text-Text-0ima0"
+                  class="text-xxs px-1 prc-Text-Text-9mHv3"
                 >
                   1
                 </span>
               </div>
             </span>
             <span
-              class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+              class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
               data-size="small"
               data-variant="secondary"
               title="gitify-app requested changes"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="none"
@@ -653,7 +653,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
                   />
                 </svg>
                 <span
-                  class="text-xxs px-1 prc-Text-Text-0ima0"
+                  class="text-xxs px-1 prc-Text-Text-9mHv3"
                 >
                   1
                 </span>
@@ -729,11 +729,11 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
         data-light-theme="light"
       >
         <div
-          class="prc-src-BaseStyles-dl-St"
+          class="prc-src-BaseStyles-aopSS"
           data-portal-root="true"
         >
           <div
-            class="text-xs opacity-80 prc-Stack-Stack-WJVsK"
+            class="text-xs opacity-80 prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -742,7 +742,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
             data-wrap="wrap"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -769,7 +769,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
               </svg>
             </div>
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="stretch"
               data-direction="horizontal"
               data-gap="none"
@@ -778,7 +778,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
               data-wrap="nowrap"
             >
               <span
-                class="pr-1 prc-Text-Text-0ima0"
+                class="pr-1 prc-Text-Text-9mHv3"
                 title="You're watching the repository."
               >
                 Updated
@@ -793,13 +793,13 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
               class="flex gap-1"
             >
               <span
-                class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+                class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
                 data-size="small"
                 data-variant="secondary"
                 title="octocat approved these changes"
               >
                 <div
-                  class="prc-Stack-Stack-WJVsK"
+                  class="prc-Stack-Stack-UQ9k6"
                   data-align="center"
                   data-direction="horizontal"
                   data-gap="none"
@@ -824,20 +824,20 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
                     />
                   </svg>
                   <span
-                    class="text-xxs px-1 prc-Text-Text-0ima0"
+                    class="text-xxs px-1 prc-Text-Text-9mHv3"
                   >
                     1
                   </span>
                 </div>
               </span>
               <span
-                class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+                class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
                 data-size="small"
                 data-variant="secondary"
                 title="gitify-app requested changes"
               >
                 <div
-                  class="prc-Stack-Stack-WJVsK"
+                  class="prc-Stack-Stack-UQ9k6"
                   data-align="center"
                   data-direction="horizontal"
                   data-gap="none"
@@ -862,7 +862,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
                     />
                   </svg>
                   <span
-                    class="text-xxs px-1 prc-Text-Text-0ima0"
+                    class="text-xxs px-1 prc-Text-Text-9mHv3"
                   >
                     1
                   </span>
@@ -881,11 +881,11 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
       data-light-theme="light"
     >
       <div
-        class="prc-src-BaseStyles-dl-St"
+        class="prc-src-BaseStyles-aopSS"
         data-portal-root="true"
       >
         <div
-          class="text-xs opacity-80 prc-Stack-Stack-WJVsK"
+          class="text-xs opacity-80 prc-Stack-Stack-UQ9k6"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -894,7 +894,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
           data-wrap="wrap"
         >
           <div
-            class="prc-Stack-Stack-WJVsK"
+            class="prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -921,7 +921,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
             </svg>
           </div>
           <div
-            class="prc-Stack-Stack-WJVsK"
+            class="prc-Stack-Stack-UQ9k6"
             data-align="stretch"
             data-direction="horizontal"
             data-gap="none"
@@ -930,7 +930,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
             data-wrap="nowrap"
           >
             <span
-              class="pr-1 prc-Text-Text-0ima0"
+              class="pr-1 prc-Text-Text-9mHv3"
               title="You're watching the repository."
             >
               Updated
@@ -945,13 +945,13 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
             class="flex gap-1"
           >
             <span
-              class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+              class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
               data-size="small"
               data-variant="secondary"
               title="octocat approved these changes"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="none"
@@ -976,20 +976,20 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
                   />
                 </svg>
                 <span
-                  class="text-xxs px-1 prc-Text-Text-0ima0"
+                  class="text-xxs px-1 prc-Text-Text-9mHv3"
                 >
                   1
                 </span>
               </div>
             </span>
             <span
-              class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+              class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
               data-size="small"
               data-variant="secondary"
               title="gitify-app requested changes"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="none"
@@ -1014,7 +1014,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
                   />
                 </svg>
                 <span
-                  class="text-xxs px-1 prc-Text-Text-0ima0"
+                  class="text-xxs px-1 prc-Text-Text-9mHv3"
                 >
                   1
                 </span>
@@ -1090,11 +1090,11 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
         data-light-theme="light"
       >
         <div
-          class="prc-src-BaseStyles-dl-St"
+          class="prc-src-BaseStyles-aopSS"
           data-portal-root="true"
         >
           <div
-            class="text-xs opacity-80 prc-Stack-Stack-WJVsK"
+            class="text-xs opacity-80 prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1108,7 +1108,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
               type="button"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -1119,7 +1119,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
               >
                 <img
                   alt="gitify-app"
-                  class="prc-Avatar-Avatar-ZRS-m"
+                  class="prc-Avatar-Avatar-0xaUi"
                   data-component="Avatar"
                   height="14"
                   src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
@@ -1129,7 +1129,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
               </div>
             </button>
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="stretch"
               data-direction="horizontal"
               data-gap="none"
@@ -1138,7 +1138,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
               data-wrap="nowrap"
             >
               <span
-                class="pr-1 prc-Text-Text-0ima0"
+                class="pr-1 prc-Text-Text-9mHv3"
                 title="You're watching the repository."
               >
                 Updated
@@ -1153,13 +1153,13 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
               class="flex gap-1"
             >
               <span
-                class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+                class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
                 data-size="small"
                 data-variant="secondary"
                 title="octocat approved these changes"
               >
                 <div
-                  class="prc-Stack-Stack-WJVsK"
+                  class="prc-Stack-Stack-UQ9k6"
                   data-align="center"
                   data-direction="horizontal"
                   data-gap="none"
@@ -1184,20 +1184,20 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
                     />
                   </svg>
                   <span
-                    class="text-xxs px-1 prc-Text-Text-0ima0"
+                    class="text-xxs px-1 prc-Text-Text-9mHv3"
                   >
                     1
                   </span>
                 </div>
               </span>
               <span
-                class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+                class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
                 data-size="small"
                 data-variant="secondary"
                 title="gitify-app requested changes"
               >
                 <div
-                  class="prc-Stack-Stack-WJVsK"
+                  class="prc-Stack-Stack-UQ9k6"
                   data-align="center"
                   data-direction="horizontal"
                   data-gap="none"
@@ -1222,7 +1222,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
                     />
                   </svg>
                   <span
-                    class="text-xxs px-1 prc-Text-Text-0ima0"
+                    class="text-xxs px-1 prc-Text-Text-9mHv3"
                   >
                     1
                   </span>
@@ -1241,11 +1241,11 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
       data-light-theme="light"
     >
       <div
-        class="prc-src-BaseStyles-dl-St"
+        class="prc-src-BaseStyles-aopSS"
         data-portal-root="true"
       >
         <div
-          class="text-xs opacity-80 prc-Stack-Stack-WJVsK"
+          class="text-xs opacity-80 prc-Stack-Stack-UQ9k6"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -1259,7 +1259,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
             type="button"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -1270,7 +1270,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
             >
               <img
                 alt="gitify-app"
-                class="prc-Avatar-Avatar-ZRS-m"
+                class="prc-Avatar-Avatar-0xaUi"
                 data-component="Avatar"
                 height="14"
                 src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
@@ -1280,7 +1280,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
             </div>
           </button>
           <div
-            class="prc-Stack-Stack-WJVsK"
+            class="prc-Stack-Stack-UQ9k6"
             data-align="stretch"
             data-direction="horizontal"
             data-gap="none"
@@ -1289,7 +1289,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
             data-wrap="nowrap"
           >
             <span
-              class="pr-1 prc-Text-Text-0ima0"
+              class="pr-1 prc-Text-Text-9mHv3"
               title="You're watching the repository."
             >
               Updated
@@ -1304,13 +1304,13 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
             class="flex gap-1"
           >
             <span
-              class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+              class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
               data-size="small"
               data-variant="secondary"
               title="octocat approved these changes"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="none"
@@ -1335,20 +1335,20 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
                   />
                 </svg>
                 <span
-                  class="text-xxs px-1 prc-Text-Text-0ima0"
+                  class="text-xxs px-1 prc-Text-Text-9mHv3"
                 >
                   1
                 </span>
               </div>
             </span>
             <span
-              class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+              class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
               data-size="small"
               data-variant="secondary"
               title="gitify-app requested changes"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="none"
@@ -1373,7 +1373,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
                   />
                 </svg>
                 <span
-                  class="text-xxs px-1 prc-Text-Text-0ima0"
+                  class="text-xxs px-1 prc-Text-Text-9mHv3"
                 >
                   1
                 </span>
@@ -1449,11 +1449,11 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
         data-light-theme="light"
       >
         <div
-          class="prc-src-BaseStyles-dl-St"
+          class="prc-src-BaseStyles-aopSS"
           data-portal-root="true"
         >
           <div
-            class="text-xs opacity-80 prc-Stack-Stack-WJVsK"
+            class="text-xs opacity-80 prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1467,7 +1467,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
               type="button"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -1478,7 +1478,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
               >
                 <img
                   alt="gitify-app"
-                  class="prc-Avatar-Avatar-ZRS-m"
+                  class="prc-Avatar-Avatar-0xaUi"
                   data-component="Avatar"
                   height="14"
                   src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
@@ -1488,7 +1488,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
               </div>
             </button>
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="stretch"
               data-direction="horizontal"
               data-gap="none"
@@ -1497,7 +1497,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
               data-wrap="nowrap"
             >
               <span
-                class="pr-1 prc-Text-Text-0ima0"
+                class="pr-1 prc-Text-Text-9mHv3"
                 title="You're watching the repository."
               >
                 Updated
@@ -1512,13 +1512,13 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
               class="flex gap-1"
             >
               <span
-                class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+                class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
                 data-size="small"
                 data-variant="secondary"
                 title="octocat approved these changes"
               >
                 <div
-                  class="prc-Stack-Stack-WJVsK"
+                  class="prc-Stack-Stack-UQ9k6"
                   data-align="center"
                   data-direction="horizontal"
                   data-gap="none"
@@ -1543,20 +1543,20 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
                     />
                   </svg>
                   <span
-                    class="text-xxs px-1 prc-Text-Text-0ima0"
+                    class="text-xxs px-1 prc-Text-Text-9mHv3"
                   >
                     1
                   </span>
                 </div>
               </span>
               <span
-                class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+                class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
                 data-size="small"
                 data-variant="secondary"
                 title="gitify-app requested changes"
               >
                 <div
-                  class="prc-Stack-Stack-WJVsK"
+                  class="prc-Stack-Stack-UQ9k6"
                   data-align="center"
                   data-direction="horizontal"
                   data-gap="none"
@@ -1581,7 +1581,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
                     />
                   </svg>
                   <span
-                    class="text-xxs px-1 prc-Text-Text-0ima0"
+                    class="text-xxs px-1 prc-Text-Text-9mHv3"
                   >
                     1
                   </span>
@@ -1600,11 +1600,11 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
       data-light-theme="light"
     >
       <div
-        class="prc-src-BaseStyles-dl-St"
+        class="prc-src-BaseStyles-aopSS"
         data-portal-root="true"
       >
         <div
-          class="text-xs opacity-80 prc-Stack-Stack-WJVsK"
+          class="text-xs opacity-80 prc-Stack-Stack-UQ9k6"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -1618,7 +1618,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
             type="button"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -1629,7 +1629,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
             >
               <img
                 alt="gitify-app"
-                class="prc-Avatar-Avatar-ZRS-m"
+                class="prc-Avatar-Avatar-0xaUi"
                 data-component="Avatar"
                 height="14"
                 src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
@@ -1639,7 +1639,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
             </div>
           </button>
           <div
-            class="prc-Stack-Stack-WJVsK"
+            class="prc-Stack-Stack-UQ9k6"
             data-align="stretch"
             data-direction="horizontal"
             data-gap="none"
@@ -1648,7 +1648,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
             data-wrap="nowrap"
           >
             <span
-              class="pr-1 prc-Text-Text-0ima0"
+              class="pr-1 prc-Text-Text-9mHv3"
               title="You're watching the repository."
             >
               Updated
@@ -1663,13 +1663,13 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
             class="flex gap-1"
           >
             <span
-              class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+              class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
               data-size="small"
               data-variant="secondary"
               title="octocat approved these changes"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="none"
@@ -1694,20 +1694,20 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
                   />
                 </svg>
                 <span
-                  class="text-xxs px-1 prc-Text-Text-0ima0"
+                  class="text-xxs px-1 prc-Text-Text-9mHv3"
                 >
                   1
                 </span>
               </div>
             </span>
             <span
-              class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+              class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
               data-size="small"
               data-variant="secondary"
               title="gitify-app requested changes"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="none"
@@ -1732,7 +1732,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
                   />
                 </svg>
                 <span
-                  class="text-xxs px-1 prc-Text-Text-0ima0"
+                  class="text-xxs px-1 prc-Text-Text-9mHv3"
                 >
                   1
                 </span>

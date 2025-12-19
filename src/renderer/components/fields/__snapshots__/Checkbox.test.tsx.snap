@@ -11,11 +11,11 @@ exports[`renderer/components/fields/Checkbox.tsx should render - disabled 1`] = 
         data-light-theme="light"
       >
         <div
-          class="prc-src-BaseStyles-dl-St"
+          class="prc-src-BaseStyles-aopSS"
           data-portal-root="true"
         >
           <div
-            class="text-sm prc-Stack-Stack-WJVsK"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -49,11 +49,11 @@ exports[`renderer/components/fields/Checkbox.tsx should render - disabled 1`] = 
       data-light-theme="light"
     >
       <div
-        class="prc-src-BaseStyles-dl-St"
+        class="prc-src-BaseStyles-aopSS"
         data-portal-root="true"
       >
         <div
-          class="text-sm prc-Stack-Stack-WJVsK"
+          class="text-sm prc-Stack-Stack-UQ9k6"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -144,7 +144,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - not visible 1`]
         data-light-theme="light"
       >
         <div
-          class="prc-src-BaseStyles-dl-St"
+          class="prc-src-BaseStyles-aopSS"
           data-portal-root="true"
         />
       </div>
@@ -157,7 +157,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - not visible 1`]
       data-light-theme="light"
     >
       <div
-        class="prc-src-BaseStyles-dl-St"
+        class="prc-src-BaseStyles-aopSS"
         data-portal-root="true"
       />
     </div>
@@ -227,11 +227,11 @@ exports[`renderer/components/fields/Checkbox.tsx should render - positive counte
         data-light-theme="light"
       >
         <div
-          class="prc-src-BaseStyles-dl-St"
+          class="prc-src-BaseStyles-aopSS"
           data-portal-root="true"
         >
           <div
-            class="text-sm prc-Stack-Stack-WJVsK"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -253,7 +253,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - positive counte
               Appearance
             </label>
             <span
-              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-primary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-primary prc-Text-Text-9mHv3"
             >
               5
             </span>
@@ -269,11 +269,11 @@ exports[`renderer/components/fields/Checkbox.tsx should render - positive counte
       data-light-theme="light"
     >
       <div
-        class="prc-src-BaseStyles-dl-St"
+        class="prc-src-BaseStyles-aopSS"
         data-portal-root="true"
       >
         <div
-          class="text-sm prc-Stack-Stack-WJVsK"
+          class="text-sm prc-Stack-Stack-UQ9k6"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -295,7 +295,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - positive counte
             Appearance
           </label>
           <span
-            class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-primary prc-Text-Text-0ima0"
+            class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-primary prc-Text-Text-9mHv3"
           >
             5
           </span>
@@ -368,11 +368,11 @@ exports[`renderer/components/fields/Checkbox.tsx should render - positive counte
         data-light-theme="light"
       >
         <div
-          class="prc-src-BaseStyles-dl-St"
+          class="prc-src-BaseStyles-aopSS"
           data-portal-root="true"
         >
           <div
-            class="text-sm prc-Stack-Stack-WJVsK"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -393,7 +393,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - positive counte
               Appearance
             </label>
             <span
-              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
             >
               5
             </span>
@@ -409,11 +409,11 @@ exports[`renderer/components/fields/Checkbox.tsx should render - positive counte
       data-light-theme="light"
     >
       <div
-        class="prc-src-BaseStyles-dl-St"
+        class="prc-src-BaseStyles-aopSS"
         data-portal-root="true"
       >
         <div
-          class="text-sm prc-Stack-Stack-WJVsK"
+          class="text-sm prc-Stack-Stack-UQ9k6"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -434,7 +434,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - positive counte
             Appearance
           </label>
           <span
-            class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+            class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
           >
             5
           </span>
@@ -507,11 +507,11 @@ exports[`renderer/components/fields/Checkbox.tsx should render - tooltip 1`] = `
         data-light-theme="light"
       >
         <div
-          class="prc-src-BaseStyles-dl-St"
+          class="prc-src-BaseStyles-aopSS"
           data-portal-root="true"
         >
           <div
-            class="text-sm prc-Stack-Stack-WJVsK"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -570,11 +570,11 @@ exports[`renderer/components/fields/Checkbox.tsx should render - tooltip 1`] = `
       data-light-theme="light"
     >
       <div
-        class="prc-src-BaseStyles-dl-St"
+        class="prc-src-BaseStyles-aopSS"
         data-portal-root="true"
       >
         <div
-          class="text-sm prc-Stack-Stack-WJVsK"
+          class="text-sm prc-Stack-Stack-UQ9k6"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -690,11 +690,11 @@ exports[`renderer/components/fields/Checkbox.tsx should render - visible 1`] = `
         data-light-theme="light"
       >
         <div
-          class="prc-src-BaseStyles-dl-St"
+          class="prc-src-BaseStyles-aopSS"
           data-portal-root="true"
         >
           <div
-            class="text-sm prc-Stack-Stack-WJVsK"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -727,11 +727,11 @@ exports[`renderer/components/fields/Checkbox.tsx should render - visible 1`] = `
       data-light-theme="light"
     >
       <div
-        class="prc-src-BaseStyles-dl-St"
+        class="prc-src-BaseStyles-aopSS"
         data-portal-root="true"
       >
         <div
-          class="text-sm prc-Stack-Stack-WJVsK"
+          class="text-sm prc-Stack-Stack-UQ9k6"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -821,11 +821,11 @@ exports[`renderer/components/fields/Checkbox.tsx should render - zero counter 1`
         data-light-theme="light"
       >
         <div
-          class="prc-src-BaseStyles-dl-St"
+          class="prc-src-BaseStyles-aopSS"
           data-portal-root="true"
         >
           <div
-            class="text-sm prc-Stack-Stack-WJVsK"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -847,7 +847,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - zero counter 1`
               Appearance
             </label>
             <span
-              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-primary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-primary prc-Text-Text-9mHv3"
             >
               0
             </span>
@@ -863,11 +863,11 @@ exports[`renderer/components/fields/Checkbox.tsx should render - zero counter 1`
       data-light-theme="light"
     >
       <div
-        class="prc-src-BaseStyles-dl-St"
+        class="prc-src-BaseStyles-aopSS"
         data-portal-root="true"
       >
         <div
-          class="text-sm prc-Stack-Stack-WJVsK"
+          class="text-sm prc-Stack-Stack-UQ9k6"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -889,7 +889,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - zero counter 1`
             Appearance
           </label>
           <span
-            class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-primary prc-Text-Text-0ima0"
+            class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-primary prc-Text-Text-9mHv3"
           >
             0
           </span>

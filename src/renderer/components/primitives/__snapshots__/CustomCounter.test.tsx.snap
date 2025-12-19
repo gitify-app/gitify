@@ -11,11 +11,11 @@ exports[`renderer/components/primitives/CustomCounter.tsx should render itself &
         data-light-theme="light"
       >
         <div
-          class="prc-src-BaseStyles-dl-St"
+          class="prc-src-BaseStyles-aopSS"
           data-portal-root="true"
         >
           <span
-            class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+            class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
           >
             100
           </span>
@@ -30,11 +30,11 @@ exports[`renderer/components/primitives/CustomCounter.tsx should render itself &
       data-light-theme="light"
     >
       <div
-        class="prc-src-BaseStyles-dl-St"
+        class="prc-src-BaseStyles-aopSS"
         data-portal-root="true"
       >
         <span
-          class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+          class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
         >
           100
         </span>

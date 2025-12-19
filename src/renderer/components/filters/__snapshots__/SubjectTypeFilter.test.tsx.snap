@@ -11,7 +11,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
         data-light-theme="light"
       >
         <div
-          class="prc-src-BaseStyles-dl-St"
+          class="prc-src-BaseStyles-aopSS"
           data-portal-root="true"
         >
           <fieldset
@@ -22,7 +22,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
                 class="mb-2"
               >
                 <div
-                  class="prc-Stack-Stack-WJVsK"
+                  class="prc-Stack-Stack-UQ9k6"
                   data-align="center"
                   data-direction="horizontal"
                   data-gap="condensed"
@@ -48,7 +48,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
                     />
                   </svg>
                   <h4
-                    class="prc-Heading-Heading-6CmGO"
+                    class="prc-Heading-Heading-MtWFE"
                   >
                     Type
                   </h4>
@@ -82,7 +82,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
               </div>
             </legend>
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="stretch"
               data-direction="vertical"
               data-gap="condensed"
@@ -91,7 +91,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
               data-wrap="nowrap"
             >
               <div
-                class="text-sm prc-Stack-Stack-WJVsK"
+                class="text-sm prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -112,13 +112,13 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
                   Check Suite
                 </label>
                 <span
-                  class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+                  class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
                 >
                   0
                 </span>
               </div>
               <div
-                class="text-sm prc-Stack-Stack-WJVsK"
+                class="text-sm prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -139,13 +139,13 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
                   Commit
                 </label>
                 <span
-                  class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+                  class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
                 >
                   0
                 </span>
               </div>
               <div
-                class="text-sm prc-Stack-Stack-WJVsK"
+                class="text-sm prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -166,13 +166,13 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
                   Dependabot Alert
                 </label>
                 <span
-                  class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+                  class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
                 >
                   0
                 </span>
               </div>
               <div
-                class="text-sm prc-Stack-Stack-WJVsK"
+                class="text-sm prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -193,13 +193,13 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
                   Discussion
                 </label>
                 <span
-                  class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+                  class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
                 >
                   0
                 </span>
               </div>
               <div
-                class="text-sm prc-Stack-Stack-WJVsK"
+                class="text-sm prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -220,13 +220,13 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
                   Invitation
                 </label>
                 <span
-                  class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+                  class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
                 >
                   0
                 </span>
               </div>
               <div
-                class="text-sm prc-Stack-Stack-WJVsK"
+                class="text-sm prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -247,13 +247,13 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
                   Issue
                 </label>
                 <span
-                  class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+                  class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
                 >
                   2
                 </span>
               </div>
               <div
-                class="text-sm prc-Stack-Stack-WJVsK"
+                class="text-sm prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -274,13 +274,13 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
                   Pull Request
                 </label>
                 <span
-                  class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+                  class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
                 >
                   1
                 </span>
               </div>
               <div
-                class="text-sm prc-Stack-Stack-WJVsK"
+                class="text-sm prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -301,13 +301,13 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
                   Release
                 </label>
                 <span
-                  class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+                  class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
                 >
                   1
                 </span>
               </div>
               <div
-                class="text-sm prc-Stack-Stack-WJVsK"
+                class="text-sm prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -328,13 +328,13 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
                   Vulnerability Alert
                 </label>
                 <span
-                  class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+                  class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
                 >
                   0
                 </span>
               </div>
               <div
-                class="text-sm prc-Stack-Stack-WJVsK"
+                class="text-sm prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -355,7 +355,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
                   Workflow Run
                 </label>
                 <span
-                  class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+                  class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
                 >
                   0
                 </span>
@@ -373,7 +373,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
       data-light-theme="light"
     >
       <div
-        class="prc-src-BaseStyles-dl-St"
+        class="prc-src-BaseStyles-aopSS"
         data-portal-root="true"
       >
         <fieldset
@@ -384,7 +384,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
               class="mb-2"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -410,7 +410,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
                   />
                 </svg>
                 <h4
-                  class="prc-Heading-Heading-6CmGO"
+                  class="prc-Heading-Heading-MtWFE"
                 >
                   Type
                 </h4>
@@ -444,7 +444,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
             </div>
           </legend>
           <div
-            class="prc-Stack-Stack-WJVsK"
+            class="prc-Stack-Stack-UQ9k6"
             data-align="stretch"
             data-direction="vertical"
             data-gap="condensed"
@@ -453,7 +453,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
             data-wrap="nowrap"
           >
             <div
-              class="text-sm prc-Stack-Stack-WJVsK"
+              class="text-sm prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -474,13 +474,13 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
                 Check Suite
               </label>
               <span
-                class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+                class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
               >
                 0
               </span>
             </div>
             <div
-              class="text-sm prc-Stack-Stack-WJVsK"
+              class="text-sm prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -501,13 +501,13 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
                 Commit
               </label>
               <span
-                class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+                class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
               >
                 0
               </span>
             </div>
             <div
-              class="text-sm prc-Stack-Stack-WJVsK"
+              class="text-sm prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -528,13 +528,13 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
                 Dependabot Alert
               </label>
               <span
-                class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+                class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
               >
                 0
               </span>
             </div>
             <div
-              class="text-sm prc-Stack-Stack-WJVsK"
+              class="text-sm prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -555,13 +555,13 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
                 Discussion
               </label>
               <span
-                class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+                class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
               >
                 0
               </span>
             </div>
             <div
-              class="text-sm prc-Stack-Stack-WJVsK"
+              class="text-sm prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -582,13 +582,13 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
                 Invitation
               </label>
               <span
-                class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+                class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
               >
                 0
               </span>
             </div>
             <div
-              class="text-sm prc-Stack-Stack-WJVsK"
+              class="text-sm prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -609,13 +609,13 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
                 Issue
               </label>
               <span
-                class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+                class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
               >
                 2
               </span>
             </div>
             <div
-              class="text-sm prc-Stack-Stack-WJVsK"
+              class="text-sm prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -636,13 +636,13 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
                 Pull Request
               </label>
               <span
-                class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+                class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
               >
                 1
               </span>
             </div>
             <div
-              class="text-sm prc-Stack-Stack-WJVsK"
+              class="text-sm prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -663,13 +663,13 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
                 Release
               </label>
               <span
-                class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+                class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
               >
                 1
               </span>
             </div>
             <div
-              class="text-sm prc-Stack-Stack-WJVsK"
+              class="text-sm prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -690,13 +690,13 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
                 Vulnerability Alert
               </label>
               <span
-                class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+                class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
               >
                 0
               </span>
             </div>
             <div
-              class="text-sm prc-Stack-Stack-WJVsK"
+              class="text-sm prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -717,7 +717,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself 
                 Workflow Run
               </label>
               <span
-                class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+                class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
               >
                 0
               </span>

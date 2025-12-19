@@ -11,15 +11,15 @@ exports[`renderer/components/filters/RequiresDetailedNotificationsWarning.tsx sh
         data-light-theme="light"
       >
         <div
-          class="prc-src-BaseStyles-dl-St"
+          class="prc-src-BaseStyles-aopSS"
           data-portal-root="true"
         >
           <span
-            class="text-gitify-caution prc-Text-Text-0ima0"
+            class="text-gitify-caution prc-Text-Text-9mHv3"
           >
             ⚠️ This filter requires the 
             <strong
-              class="prc-Text-Text-0ima0"
+              class="prc-Text-Text-9mHv3"
             >
               Detailed Notifications
             </strong>
@@ -37,15 +37,15 @@ exports[`renderer/components/filters/RequiresDetailedNotificationsWarning.tsx sh
       data-light-theme="light"
     >
       <div
-        class="prc-src-BaseStyles-dl-St"
+        class="prc-src-BaseStyles-aopSS"
         data-portal-root="true"
       >
         <span
-          class="text-gitify-caution prc-Text-Text-0ima0"
+          class="text-gitify-caution prc-Text-Text-9mHv3"
         >
           ⚠️ This filter requires the 
           <strong
-            class="prc-Text-Text-0ima0"
+            class="prc-Text-Text-9mHv3"
           >
             Detailed Notifications
           </strong>

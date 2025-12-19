@@ -11,7 +11,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
         data-light-theme="light"
       >
         <div
-          class="prc-src-BaseStyles-dl-St"
+          class="prc-src-BaseStyles-aopSS"
           data-portal-root="true"
         >
           <div
@@ -22,7 +22,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
               class="pl-4 pr-5 pt-3 pb-1"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="stretch"
                 data-direction="horizontal"
                 data-justify="space-between"
@@ -32,7 +32,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                 <button
                   aria-describedby="_r_1_-loading-announcement"
                   aria-labelledby="Go Back"
-                  class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
+                  class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                   data-component="IconButton"
                   data-loading="false"
                   data-no-visuals="true"
@@ -63,7 +63,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                     class="mb-2"
                   >
                     <div
-                      class="prc-Stack-Stack-WJVsK"
+                      class="prc-Stack-Stack-UQ9k6"
                       data-align="center"
                       data-direction="horizontal"
                       data-gap="condensed"
@@ -89,7 +89,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                         />
                       </svg>
                       <h4
-                        class="prc-Heading-Heading-6CmGO"
+                        class="prc-Heading-Heading-MtWFE"
                       >
                         Login with OAuth App
                       </h4>
@@ -102,7 +102,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
               class="grow overflow-x-hidden overflow-y-auto px-5"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="stretch"
                 data-direction="vertical"
                 data-gap="normal"
@@ -111,15 +111,15 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                 data-wrap="nowrap"
               >
                 <div
-                  class="prc-FormControl-ControlVerticalLayout-wOp8f"
+                  class="prc-FormControl-ControlVerticalLayout-8YotI"
                   data-has-label=""
                 >
                   <label
-                    class="prc-components-Label-bE-kK"
+                    class="prc-components-Label-2mrqP"
                     for="_r_2_"
                   >
                     <span
-                      class="prc-components-RequiredText-ztJvt"
+                      class="prc-components-RequiredText-7UsHS"
                     >
                       <span>
                         Hostname
@@ -131,14 +131,14 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                   </label>
                   <span
                     aria-busy="false"
-                    class="border-gitify-textInput-default TextInput-wrapper prc-components-TextInputWrapper-i1ofR prc-components-TextInputBaseWrapper-ueK9q"
+                    class="border-gitify-textInput-default TextInput-wrapper prc-components-TextInputWrapper-Hpdqi prc-components-TextInputBaseWrapper-wY-n0"
                     data-block="true"
                   >
                     <input
                       aria-describedby="_r_2_-caption"
                       aria-invalid="false"
                       aria-required="true"
-                      class="prc-components-Input-Ic-y8"
+                      class="prc-components-Input-IwWrt"
                       data-component="input"
                       data-testid="login-hostname"
                       id="_r_2_"
@@ -149,18 +149,18 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                     />
                   </span>
                   <span
-                    class="prc-FormControl-Caption-tfuKU prc-Text-Text-0ima0"
+                    class="prc-FormControl-Caption-GNJPU prc-Text-Text-9mHv3"
                     id="_r_2_-caption"
                   >
                     <i
-                      class="prc-Text-Text-0ima0"
+                      class="prc-Text-Text-9mHv3"
                     >
                       Change only if you are using GitHub Enterprise Server
                     </i>
                   </span>
                 </div>
                 <div
-                  class="prc-Stack-Stack-WJVsK"
+                  class="prc-Stack-Stack-UQ9k6"
                   data-align="center"
                   data-direction="horizontal"
                   data-gap="condensed"
@@ -170,7 +170,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                 >
                   <button
                     aria-describedby="_r_6_-loading-announcement"
-                    class="prc-Button-ButtonBase-c50BI"
+                    class="prc-Button-ButtonBase-9n-Xk"
                     data-loading="false"
                     data-size="small"
                     data-testid="login-create-oauth-app"
@@ -178,12 +178,12 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                     type="button"
                   >
                     <span
-                      class="prc-Button-ButtonContent-HKbr-"
+                      class="prc-Button-ButtonContent-Iohp5"
                       data-align="center"
                       data-component="buttonContent"
                     >
                       <span
-                        class="prc-Button-Visual-2epfX prc-Button-VisualWrap-Db-eB"
+                        class="prc-Button-Visual-YNt2F prc-Button-VisualWrap-E4cnq"
                         data-component="leadingVisual"
                       >
                         <svg
@@ -204,7 +204,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                         </svg>
                       </span>
                       <span
-                        class="prc-Button-Label-pTQ3x"
+                        class="prc-Button-Label-FWkx3"
                         data-component="text"
                       >
                         Create new OAuth App
@@ -212,11 +212,11 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                     </span>
                   </button>
                   <span
-                    class="text-xs prc-Text-Text-0ima0"
+                    class="text-xs prc-Text-Text-9mHv3"
                   >
                     and use your 
                     <i
-                      class="prc-Text-Text-0ima0"
+                      class="prc-Text-Text-9mHv3"
                     >
                       client id & secret
                     </i>
@@ -224,15 +224,15 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                   </span>
                 </div>
                 <div
-                  class="prc-FormControl-ControlVerticalLayout-wOp8f"
+                  class="prc-FormControl-ControlVerticalLayout-8YotI"
                   data-has-label=""
                 >
                   <label
-                    class="prc-components-Label-bE-kK"
+                    class="prc-components-Label-2mrqP"
                     for="_r_7_"
                   >
                     <span
-                      class="prc-components-RequiredText-ztJvt"
+                      class="prc-components-RequiredText-7UsHS"
                     >
                       <span>
                         Client ID
@@ -244,13 +244,13 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                   </label>
                   <span
                     aria-busy="false"
-                    class="TextInput-wrapper prc-components-TextInputWrapper-i1ofR prc-components-TextInputBaseWrapper-ueK9q"
+                    class="TextInput-wrapper prc-components-TextInputWrapper-Hpdqi prc-components-TextInputBaseWrapper-wY-n0"
                     data-block="true"
                   >
                     <input
                       aria-invalid="false"
                       aria-required="true"
-                      class="prc-components-Input-Ic-y8"
+                      class="prc-components-Input-IwWrt"
                       data-component="input"
                       data-testid="login-clientId"
                       id="_r_7_"
@@ -262,15 +262,15 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                   </span>
                 </div>
                 <div
-                  class="prc-FormControl-ControlVerticalLayout-wOp8f"
+                  class="prc-FormControl-ControlVerticalLayout-8YotI"
                   data-has-label=""
                 >
                   <label
-                    class="prc-components-Label-bE-kK"
+                    class="prc-components-Label-2mrqP"
                     for="_r_b_"
                   >
                     <span
-                      class="prc-components-RequiredText-ztJvt"
+                      class="prc-components-RequiredText-7UsHS"
                     >
                       <span>
                         Client Secret
@@ -282,14 +282,14 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                   </label>
                   <span
                     aria-busy="false"
-                    class="TextInput-wrapper prc-components-TextInputWrapper-i1ofR prc-components-TextInputBaseWrapper-ueK9q"
+                    class="TextInput-wrapper prc-components-TextInputWrapper-Hpdqi prc-components-TextInputBaseWrapper-wY-n0"
                     data-block="true"
                     data-trailing-action="true"
                   >
                     <input
                       aria-invalid="false"
                       aria-required="true"
-                      class="prc-components-Input-Ic-y8"
+                      class="prc-components-Input-IwWrt"
                       data-component="input"
                       data-testid="login-clientSecret"
                       id="_r_b_"
@@ -299,12 +299,12 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                       value=""
                     />
                     <span
-                      class="TextInput-action prc-components-TextInputAction-YT3YI"
+                      class="TextInput-action prc-components-TextInputAction-CjGDX"
                     >
                       <button
                         aria-describedby="_r_g_-loading-announcement"
                         aria-labelledby="_r_f_"
-                        class="prc-Button-ButtonBase-c50BI prc-components-Invisible-uIWry prc-Button-IconButton-szpyj"
+                        class="prc-Button-ButtonBase-9n-Xk prc-components-Invisible-bKOcl prc-Button-IconButton-fyge7"
                         data-component="IconButton"
                         data-loading="false"
                         data-no-visuals="true"
@@ -331,7 +331,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                       </button>
                       <span
                         aria-hidden="true"
-                        class="prc-TooltipV2-Tooltip-cYMVY"
+                        class="prc-TooltipV2-Tooltip-tLeuB"
                         data-direction="s"
                         id="_r_f_"
                         popover="auto"
@@ -347,7 +347,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
               class="left-sidebar bg-gitify-footer"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="stretch"
                 data-direction="horizontal"
                 data-justify="space-between"
@@ -356,7 +356,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
               >
                 <button
                   aria-describedby="_r_i_-loading-announcement _r_h_"
-                  class="prc-Button-ButtonBase-c50BI"
+                  class="prc-Button-ButtonBase-9n-Xk"
                   data-loading="false"
                   data-size="small"
                   data-testid="login-docs"
@@ -364,12 +364,12 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                   type="button"
                 >
                   <span
-                    class="prc-Button-ButtonContent-HKbr-"
+                    class="prc-Button-ButtonContent-Iohp5"
                     data-align="center"
                     data-component="buttonContent"
                   >
                     <span
-                      class="prc-Button-Visual-2epfX prc-Button-VisualWrap-Db-eB"
+                      class="prc-Button-Visual-YNt2F prc-Button-VisualWrap-E4cnq"
                       data-component="leadingVisual"
                     >
                       <svg
@@ -390,7 +390,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                       </svg>
                     </span>
                     <span
-                      class="prc-Button-Label-pTQ3x"
+                      class="prc-Button-Label-FWkx3"
                       data-component="text"
                     >
                       Docs
@@ -399,7 +399,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                 </button>
                 <span
                   aria-hidden="true"
-                  class="prc-TooltipV2-Tooltip-cYMVY"
+                  class="prc-TooltipV2-Tooltip-tLeuB"
                   data-direction="s"
                   id="_r_h_"
                   popover="auto"
@@ -412,7 +412,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                 >
                   <button
                     aria-describedby="_r_j_-loading-announcement"
-                    class="prc-Button-ButtonBase-c50BI"
+                    class="prc-Button-ButtonBase-9n-Xk"
                     data-loading="false"
                     data-size="medium"
                     data-testid="login-submit"
@@ -420,12 +420,12 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                     type="button"
                   >
                     <span
-                      class="prc-Button-ButtonContent-HKbr-"
+                      class="prc-Button-ButtonContent-Iohp5"
                       data-align="center"
                       data-component="buttonContent"
                     >
                       <span
-                        class="prc-Button-Visual-2epfX prc-Button-VisualWrap-Db-eB"
+                        class="prc-Button-Visual-YNt2F prc-Button-VisualWrap-E4cnq"
                         data-component="leadingVisual"
                       >
                         <svg
@@ -446,7 +446,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                         </svg>
                       </span>
                       <span
-                        class="prc-Button-Label-pTQ3x"
+                        class="prc-Button-Label-FWkx3"
                         data-component="text"
                       >
                         Login
@@ -468,7 +468,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
       data-light-theme="light"
     >
       <div
-        class="prc-src-BaseStyles-dl-St"
+        class="prc-src-BaseStyles-aopSS"
         data-portal-root="true"
       >
         <div
@@ -479,7 +479,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
             class="pl-4 pr-5 pt-3 pb-1"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="stretch"
               data-direction="horizontal"
               data-justify="space-between"
@@ -489,7 +489,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
               <button
                 aria-describedby="_r_1_-loading-announcement"
                 aria-labelledby="Go Back"
-                class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
+                class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
                 data-loading="false"
                 data-no-visuals="true"
@@ -520,7 +520,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                   class="mb-2"
                 >
                   <div
-                    class="prc-Stack-Stack-WJVsK"
+                    class="prc-Stack-Stack-UQ9k6"
                     data-align="center"
                     data-direction="horizontal"
                     data-gap="condensed"
@@ -546,7 +546,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                       />
                     </svg>
                     <h4
-                      class="prc-Heading-Heading-6CmGO"
+                      class="prc-Heading-Heading-MtWFE"
                     >
                       Login with OAuth App
                     </h4>
@@ -559,7 +559,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
             class="grow overflow-x-hidden overflow-y-auto px-5"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="stretch"
               data-direction="vertical"
               data-gap="normal"
@@ -568,15 +568,15 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
               data-wrap="nowrap"
             >
               <div
-                class="prc-FormControl-ControlVerticalLayout-wOp8f"
+                class="prc-FormControl-ControlVerticalLayout-8YotI"
                 data-has-label=""
               >
                 <label
-                  class="prc-components-Label-bE-kK"
+                  class="prc-components-Label-2mrqP"
                   for="_r_2_"
                 >
                   <span
-                    class="prc-components-RequiredText-ztJvt"
+                    class="prc-components-RequiredText-7UsHS"
                   >
                     <span>
                       Hostname
@@ -588,14 +588,14 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                 </label>
                 <span
                   aria-busy="false"
-                  class="border-gitify-textInput-default TextInput-wrapper prc-components-TextInputWrapper-i1ofR prc-components-TextInputBaseWrapper-ueK9q"
+                  class="border-gitify-textInput-default TextInput-wrapper prc-components-TextInputWrapper-Hpdqi prc-components-TextInputBaseWrapper-wY-n0"
                   data-block="true"
                 >
                   <input
                     aria-describedby="_r_2_-caption"
                     aria-invalid="false"
                     aria-required="true"
-                    class="prc-components-Input-Ic-y8"
+                    class="prc-components-Input-IwWrt"
                     data-component="input"
                     data-testid="login-hostname"
                     id="_r_2_"
@@ -606,18 +606,18 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                   />
                 </span>
                 <span
-                  class="prc-FormControl-Caption-tfuKU prc-Text-Text-0ima0"
+                  class="prc-FormControl-Caption-GNJPU prc-Text-Text-9mHv3"
                   id="_r_2_-caption"
                 >
                   <i
-                    class="prc-Text-Text-0ima0"
+                    class="prc-Text-Text-9mHv3"
                   >
                     Change only if you are using GitHub Enterprise Server
                   </i>
                 </span>
               </div>
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -627,7 +627,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
               >
                 <button
                   aria-describedby="_r_6_-loading-announcement"
-                  class="prc-Button-ButtonBase-c50BI"
+                  class="prc-Button-ButtonBase-9n-Xk"
                   data-loading="false"
                   data-size="small"
                   data-testid="login-create-oauth-app"
@@ -635,12 +635,12 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                   type="button"
                 >
                   <span
-                    class="prc-Button-ButtonContent-HKbr-"
+                    class="prc-Button-ButtonContent-Iohp5"
                     data-align="center"
                     data-component="buttonContent"
                   >
                     <span
-                      class="prc-Button-Visual-2epfX prc-Button-VisualWrap-Db-eB"
+                      class="prc-Button-Visual-YNt2F prc-Button-VisualWrap-E4cnq"
                       data-component="leadingVisual"
                     >
                       <svg
@@ -661,7 +661,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                       </svg>
                     </span>
                     <span
-                      class="prc-Button-Label-pTQ3x"
+                      class="prc-Button-Label-FWkx3"
                       data-component="text"
                     >
                       Create new OAuth App
@@ -669,11 +669,11 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                   </span>
                 </button>
                 <span
-                  class="text-xs prc-Text-Text-0ima0"
+                  class="text-xs prc-Text-Text-9mHv3"
                 >
                   and use your 
                   <i
-                    class="prc-Text-Text-0ima0"
+                    class="prc-Text-Text-9mHv3"
                   >
                     client id & secret
                   </i>
@@ -681,15 +681,15 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                 </span>
               </div>
               <div
-                class="prc-FormControl-ControlVerticalLayout-wOp8f"
+                class="prc-FormControl-ControlVerticalLayout-8YotI"
                 data-has-label=""
               >
                 <label
-                  class="prc-components-Label-bE-kK"
+                  class="prc-components-Label-2mrqP"
                   for="_r_7_"
                 >
                   <span
-                    class="prc-components-RequiredText-ztJvt"
+                    class="prc-components-RequiredText-7UsHS"
                   >
                     <span>
                       Client ID
@@ -701,13 +701,13 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                 </label>
                 <span
                   aria-busy="false"
-                  class="TextInput-wrapper prc-components-TextInputWrapper-i1ofR prc-components-TextInputBaseWrapper-ueK9q"
+                  class="TextInput-wrapper prc-components-TextInputWrapper-Hpdqi prc-components-TextInputBaseWrapper-wY-n0"
                   data-block="true"
                 >
                   <input
                     aria-invalid="false"
                     aria-required="true"
-                    class="prc-components-Input-Ic-y8"
+                    class="prc-components-Input-IwWrt"
                     data-component="input"
                     data-testid="login-clientId"
                     id="_r_7_"
@@ -719,15 +719,15 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                 </span>
               </div>
               <div
-                class="prc-FormControl-ControlVerticalLayout-wOp8f"
+                class="prc-FormControl-ControlVerticalLayout-8YotI"
                 data-has-label=""
               >
                 <label
-                  class="prc-components-Label-bE-kK"
+                  class="prc-components-Label-2mrqP"
                   for="_r_b_"
                 >
                   <span
-                    class="prc-components-RequiredText-ztJvt"
+                    class="prc-components-RequiredText-7UsHS"
                   >
                     <span>
                       Client Secret
@@ -739,14 +739,14 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                 </label>
                 <span
                   aria-busy="false"
-                  class="TextInput-wrapper prc-components-TextInputWrapper-i1ofR prc-components-TextInputBaseWrapper-ueK9q"
+                  class="TextInput-wrapper prc-components-TextInputWrapper-Hpdqi prc-components-TextInputBaseWrapper-wY-n0"
                   data-block="true"
                   data-trailing-action="true"
                 >
                   <input
                     aria-invalid="false"
                     aria-required="true"
-                    class="prc-components-Input-Ic-y8"
+                    class="prc-components-Input-IwWrt"
                     data-component="input"
                     data-testid="login-clientSecret"
                     id="_r_b_"
@@ -756,12 +756,12 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                     value=""
                   />
                   <span
-                    class="TextInput-action prc-components-TextInputAction-YT3YI"
+                    class="TextInput-action prc-components-TextInputAction-CjGDX"
                   >
                     <button
                       aria-describedby="_r_g_-loading-announcement"
                       aria-labelledby="_r_f_"
-                      class="prc-Button-ButtonBase-c50BI prc-components-Invisible-uIWry prc-Button-IconButton-szpyj"
+                      class="prc-Button-ButtonBase-9n-Xk prc-components-Invisible-bKOcl prc-Button-IconButton-fyge7"
                       data-component="IconButton"
                       data-loading="false"
                       data-no-visuals="true"
@@ -788,7 +788,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                     </button>
                     <span
                       aria-hidden="true"
-                      class="prc-TooltipV2-Tooltip-cYMVY"
+                      class="prc-TooltipV2-Tooltip-tLeuB"
                       data-direction="s"
                       id="_r_f_"
                       popover="auto"
@@ -804,7 +804,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
             class="left-sidebar bg-gitify-footer"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="stretch"
               data-direction="horizontal"
               data-justify="space-between"
@@ -813,7 +813,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
             >
               <button
                 aria-describedby="_r_i_-loading-announcement _r_h_"
-                class="prc-Button-ButtonBase-c50BI"
+                class="prc-Button-ButtonBase-9n-Xk"
                 data-loading="false"
                 data-size="small"
                 data-testid="login-docs"
@@ -821,12 +821,12 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                 type="button"
               >
                 <span
-                  class="prc-Button-ButtonContent-HKbr-"
+                  class="prc-Button-ButtonContent-Iohp5"
                   data-align="center"
                   data-component="buttonContent"
                 >
                   <span
-                    class="prc-Button-Visual-2epfX prc-Button-VisualWrap-Db-eB"
+                    class="prc-Button-Visual-YNt2F prc-Button-VisualWrap-E4cnq"
                     data-component="leadingVisual"
                   >
                     <svg
@@ -847,7 +847,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                     </svg>
                   </span>
                   <span
-                    class="prc-Button-Label-pTQ3x"
+                    class="prc-Button-Label-FWkx3"
                     data-component="text"
                   >
                     Docs
@@ -856,7 +856,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
               </button>
               <span
                 aria-hidden="true"
-                class="prc-TooltipV2-Tooltip-cYMVY"
+                class="prc-TooltipV2-Tooltip-tLeuB"
                 data-direction="s"
                 id="_r_h_"
                 popover="auto"
@@ -869,7 +869,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
               >
                 <button
                   aria-describedby="_r_j_-loading-announcement"
-                  class="prc-Button-ButtonBase-c50BI"
+                  class="prc-Button-ButtonBase-9n-Xk"
                   data-loading="false"
                   data-size="medium"
                   data-testid="login-submit"
@@ -877,12 +877,12 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                   type="button"
                 >
                   <span
-                    class="prc-Button-ButtonContent-HKbr-"
+                    class="prc-Button-ButtonContent-Iohp5"
                     data-align="center"
                     data-component="buttonContent"
                   >
                     <span
-                      class="prc-Button-Visual-2epfX prc-Button-VisualWrap-Db-eB"
+                      class="prc-Button-Visual-YNt2F prc-Button-VisualWrap-E4cnq"
                       data-component="leadingVisual"
                     >
                       <svg
@@ -903,7 +903,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                       </svg>
                     </span>
                     <span
-                      class="prc-Button-Label-pTQ3x"
+                      class="prc-Button-Label-FWkx3"
                       data-component="text"
                     >
                       Login

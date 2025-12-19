@@ -11,14 +11,14 @@ exports[`renderer/components/primitives/Footer.tsx should render itself & its ch
         data-light-theme="light"
       >
         <div
-          class="prc-src-BaseStyles-dl-St"
+          class="prc-src-BaseStyles-aopSS"
           data-portal-root="true"
         >
           <div
             class="left-sidebar bg-gitify-footer"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="stretch"
               data-direction="horizontal"
               data-justify="end"
@@ -39,14 +39,14 @@ exports[`renderer/components/primitives/Footer.tsx should render itself & its ch
       data-light-theme="light"
     >
       <div
-        class="prc-src-BaseStyles-dl-St"
+        class="prc-src-BaseStyles-aopSS"
         data-portal-root="true"
       >
         <div
           class="left-sidebar bg-gitify-footer"
         >
           <div
-            class="prc-Stack-Stack-WJVsK"
+            class="prc-Stack-Stack-UQ9k6"
             data-align="stretch"
             data-direction="horizontal"
             data-justify="end"
@@ -124,14 +124,14 @@ exports[`renderer/components/primitives/Footer.tsx should render itself & its ch
         data-light-theme="light"
       >
         <div
-          class="prc-src-BaseStyles-dl-St"
+          class="prc-src-BaseStyles-aopSS"
           data-portal-root="true"
         >
           <div
             class="left-sidebar bg-gitify-footer"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="stretch"
               data-direction="horizontal"
               data-justify="space-between"
@@ -152,14 +152,14 @@ exports[`renderer/components/primitives/Footer.tsx should render itself & its ch
       data-light-theme="light"
     >
       <div
-        class="prc-src-BaseStyles-dl-St"
+        class="prc-src-BaseStyles-aopSS"
         data-portal-root="true"
       >
         <div
           class="left-sidebar bg-gitify-footer"
         >
           <div
-            class="prc-Stack-Stack-WJVsK"
+            class="prc-Stack-Stack-UQ9k6"
             data-align="stretch"
             data-direction="horizontal"
             data-justify="space-between"

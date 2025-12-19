@@ -11,7 +11,7 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
         data-light-theme="light"
       >
         <div
-          class="prc-src-BaseStyles-dl-St"
+          class="prc-src-BaseStyles-aopSS"
           data-portal-root="true"
         />
       </div>
@@ -24,7 +24,7 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
       data-light-theme="light"
     >
       <div
-        class="prc-src-BaseStyles-dl-St"
+        class="prc-src-BaseStyles-aopSS"
         data-portal-root="true"
       />
     </div>
@@ -94,21 +94,21 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
         data-light-theme="light"
       >
         <div
-          class="prc-src-BaseStyles-dl-St"
+          class="prc-src-BaseStyles-aopSS"
           data-portal-root="true"
         >
           <div
-            class="prc-Popover-Popover-v1ShS"
+            class="prc-Popover-Popover-7QIH8"
             data-caret="top-left"
             data-open=""
           >
             <div
-              class="p-2 mt-2 prc-Popover-PopoverContent-nMzFS"
+              class="p-2 mt-2 prc-Popover-PopoverContent-2x-Aj"
               data-height="auto"
               data-width="auto"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="stretch"
                 data-direction="vertical"
                 data-gap="condensed"
@@ -118,7 +118,7 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
               >
                 <div>
                   <span
-                    class="text-xs opacity-90 prc-Text-Text-0ima0"
+                    class="text-xs opacity-90 prc-Text-Text-9mHv3"
                   >
                     Please use one of the supported filters [
                     org, repo
@@ -139,21 +139,21 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
       data-light-theme="light"
     >
       <div
-        class="prc-src-BaseStyles-dl-St"
+        class="prc-src-BaseStyles-aopSS"
         data-portal-root="true"
       >
         <div
-          class="prc-Popover-Popover-v1ShS"
+          class="prc-Popover-Popover-7QIH8"
           data-caret="top-left"
           data-open=""
         >
           <div
-            class="p-2 mt-2 prc-Popover-PopoverContent-nMzFS"
+            class="p-2 mt-2 prc-Popover-PopoverContent-2x-Aj"
             data-height="auto"
             data-width="auto"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="stretch"
               data-direction="vertical"
               data-gap="condensed"
@@ -163,7 +163,7 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
             >
               <div>
                 <span
-                  class="text-xs opacity-90 prc-Text-Text-0ima0"
+                  class="text-xs opacity-90 prc-Text-Text-9mHv3"
                 >
                   Please use one of the supported filters [
                   org, repo
@@ -241,21 +241,21 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
         data-light-theme="light"
       >
         <div
-          class="prc-src-BaseStyles-dl-St"
+          class="prc-src-BaseStyles-aopSS"
           data-portal-root="true"
         >
           <div
-            class="prc-Popover-Popover-v1ShS"
+            class="prc-Popover-Popover-7QIH8"
             data-caret="top-left"
             data-open=""
           >
             <div
-              class="p-2 mt-2 prc-Popover-PopoverContent-nMzFS"
+              class="p-2 mt-2 prc-Popover-PopoverContent-2x-Aj"
               data-height="auto"
               data-width="auto"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="stretch"
                 data-direction="vertical"
                 data-gap="condensed"
@@ -265,7 +265,7 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
               >
                 <div>
                   <div
-                    class="prc-Stack-Stack-WJVsK"
+                    class="prc-Stack-Stack-UQ9k6"
                     data-align="stretch"
                     data-direction="vertical"
                     data-gap="none"
@@ -274,12 +274,12 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
                     data-wrap="nowrap"
                   >
                     <span
-                      class="text-xs font-semibold prc-Text-Text-0ima0"
+                      class="text-xs font-semibold prc-Text-Text-9mHv3"
                     >
                       repo:
                     </span>
                     <span
-                      class="text-xs opacity-90 prc-Text-Text-0ima0"
+                      class="text-xs opacity-90 prc-Text-Text-9mHv3"
                     >
                       filter by repository full name
                     </span>
@@ -299,21 +299,21 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
       data-light-theme="light"
     >
       <div
-        class="prc-src-BaseStyles-dl-St"
+        class="prc-src-BaseStyles-aopSS"
         data-portal-root="true"
       >
         <div
-          class="prc-Popover-Popover-v1ShS"
+          class="prc-Popover-Popover-7QIH8"
           data-caret="top-left"
           data-open=""
         >
           <div
-            class="p-2 mt-2 prc-Popover-PopoverContent-nMzFS"
+            class="p-2 mt-2 prc-Popover-PopoverContent-2x-Aj"
             data-height="auto"
             data-width="auto"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="stretch"
               data-direction="vertical"
               data-gap="condensed"
@@ -323,7 +323,7 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
             >
               <div>
                 <div
-                  class="prc-Stack-Stack-WJVsK"
+                  class="prc-Stack-Stack-UQ9k6"
                   data-align="stretch"
                   data-direction="vertical"
                   data-gap="none"
@@ -332,12 +332,12 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
                   data-wrap="nowrap"
                 >
                   <span
-                    class="text-xs font-semibold prc-Text-Text-0ima0"
+                    class="text-xs font-semibold prc-Text-Text-9mHv3"
                   >
                     repo:
                   </span>
                   <span
-                    class="text-xs opacity-90 prc-Text-Text-0ima0"
+                    class="text-xs opacity-90 prc-Text-Text-9mHv3"
                   >
                     filter by repository full name
                   </span>
@@ -414,21 +414,21 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
         data-light-theme="light"
       >
         <div
-          class="prc-src-BaseStyles-dl-St"
+          class="prc-src-BaseStyles-aopSS"
           data-portal-root="true"
         >
           <div
-            class="prc-Popover-Popover-v1ShS"
+            class="prc-Popover-Popover-7QIH8"
             data-caret="top-left"
             data-open=""
           >
             <div
-              class="p-2 mt-2 prc-Popover-PopoverContent-nMzFS"
+              class="p-2 mt-2 prc-Popover-PopoverContent-2x-Aj"
               data-height="auto"
               data-width="auto"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="stretch"
                 data-direction="vertical"
                 data-gap="condensed"
@@ -438,7 +438,7 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
               >
                 <div>
                   <div
-                    class="prc-Stack-Stack-WJVsK"
+                    class="prc-Stack-Stack-UQ9k6"
                     data-align="stretch"
                     data-direction="vertical"
                     data-gap="none"
@@ -447,12 +447,12 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
                     data-wrap="nowrap"
                   >
                     <span
-                      class="text-xs font-semibold prc-Text-Text-0ima0"
+                      class="text-xs font-semibold prc-Text-Text-9mHv3"
                     >
                       author:
                     </span>
                     <span
-                      class="text-xs opacity-90 prc-Text-Text-0ima0"
+                      class="text-xs opacity-90 prc-Text-Text-9mHv3"
                     >
                       filter by notification author
                     </span>
@@ -460,7 +460,7 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
                 </div>
                 <div>
                   <div
-                    class="prc-Stack-Stack-WJVsK"
+                    class="prc-Stack-Stack-UQ9k6"
                     data-align="stretch"
                     data-direction="vertical"
                     data-gap="none"
@@ -469,12 +469,12 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
                     data-wrap="nowrap"
                   >
                     <span
-                      class="text-xs font-semibold prc-Text-Text-0ima0"
+                      class="text-xs font-semibold prc-Text-Text-9mHv3"
                     >
                       org:
                     </span>
                     <span
-                      class="text-xs opacity-90 prc-Text-Text-0ima0"
+                      class="text-xs opacity-90 prc-Text-Text-9mHv3"
                     >
                       filter by organization owner
                     </span>
@@ -482,7 +482,7 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
                 </div>
                 <div>
                   <div
-                    class="prc-Stack-Stack-WJVsK"
+                    class="prc-Stack-Stack-UQ9k6"
                     data-align="stretch"
                     data-direction="vertical"
                     data-gap="none"
@@ -491,12 +491,12 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
                     data-wrap="nowrap"
                   >
                     <span
-                      class="text-xs font-semibold prc-Text-Text-0ima0"
+                      class="text-xs font-semibold prc-Text-Text-9mHv3"
                     >
                       repo:
                     </span>
                     <span
-                      class="text-xs opacity-90 prc-Text-Text-0ima0"
+                      class="text-xs opacity-90 prc-Text-Text-9mHv3"
                     >
                       filter by repository full name
                     </span>
@@ -516,21 +516,21 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
       data-light-theme="light"
     >
       <div
-        class="prc-src-BaseStyles-dl-St"
+        class="prc-src-BaseStyles-aopSS"
         data-portal-root="true"
       >
         <div
-          class="prc-Popover-Popover-v1ShS"
+          class="prc-Popover-Popover-7QIH8"
           data-caret="top-left"
           data-open=""
         >
           <div
-            class="p-2 mt-2 prc-Popover-PopoverContent-nMzFS"
+            class="p-2 mt-2 prc-Popover-PopoverContent-2x-Aj"
             data-height="auto"
             data-width="auto"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="stretch"
               data-direction="vertical"
               data-gap="condensed"
@@ -540,7 +540,7 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
             >
               <div>
                 <div
-                  class="prc-Stack-Stack-WJVsK"
+                  class="prc-Stack-Stack-UQ9k6"
                   data-align="stretch"
                   data-direction="vertical"
                   data-gap="none"
@@ -549,12 +549,12 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
                   data-wrap="nowrap"
                 >
                   <span
-                    class="text-xs font-semibold prc-Text-Text-0ima0"
+                    class="text-xs font-semibold prc-Text-Text-9mHv3"
                   >
                     author:
                   </span>
                   <span
-                    class="text-xs opacity-90 prc-Text-Text-0ima0"
+                    class="text-xs opacity-90 prc-Text-Text-9mHv3"
                   >
                     filter by notification author
                   </span>
@@ -562,7 +562,7 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
               </div>
               <div>
                 <div
-                  class="prc-Stack-Stack-WJVsK"
+                  class="prc-Stack-Stack-UQ9k6"
                   data-align="stretch"
                   data-direction="vertical"
                   data-gap="none"
@@ -571,12 +571,12 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
                   data-wrap="nowrap"
                 >
                   <span
-                    class="text-xs font-semibold prc-Text-Text-0ima0"
+                    class="text-xs font-semibold prc-Text-Text-9mHv3"
                   >
                     org:
                   </span>
                   <span
-                    class="text-xs opacity-90 prc-Text-Text-0ima0"
+                    class="text-xs opacity-90 prc-Text-Text-9mHv3"
                   >
                     filter by organization owner
                   </span>
@@ -584,7 +584,7 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
               </div>
               <div>
                 <div
-                  class="prc-Stack-Stack-WJVsK"
+                  class="prc-Stack-Stack-UQ9k6"
                   data-align="stretch"
                   data-direction="vertical"
                   data-gap="none"
@@ -593,12 +593,12 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
                   data-wrap="nowrap"
                 >
                   <span
-                    class="text-xs font-semibold prc-Text-Text-0ima0"
+                    class="text-xs font-semibold prc-Text-Text-9mHv3"
                   >
                     repo:
                   </span>
                   <span
-                    class="text-xs opacity-90 prc-Text-Text-0ima0"
+                    class="text-xs opacity-90 prc-Text-Text-9mHv3"
                   >
                     filter by repository full name
                   </span>
@@ -675,21 +675,21 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
         data-light-theme="light"
       >
         <div
-          class="prc-src-BaseStyles-dl-St"
+          class="prc-src-BaseStyles-aopSS"
           data-portal-root="true"
         >
           <div
-            class="prc-Popover-Popover-v1ShS"
+            class="prc-Popover-Popover-7QIH8"
             data-caret="top-left"
             data-open=""
           >
             <div
-              class="p-2 mt-2 prc-Popover-PopoverContent-nMzFS"
+              class="p-2 mt-2 prc-Popover-PopoverContent-2x-Aj"
               data-height="auto"
               data-width="auto"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="stretch"
                 data-direction="vertical"
                 data-gap="condensed"
@@ -699,7 +699,7 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
               >
                 <div>
                   <div
-                    class="prc-Stack-Stack-WJVsK"
+                    class="prc-Stack-Stack-UQ9k6"
                     data-align="stretch"
                     data-direction="vertical"
                     data-gap="none"
@@ -708,12 +708,12 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
                     data-wrap="nowrap"
                   >
                     <span
-                      class="text-xs font-semibold prc-Text-Text-0ima0"
+                      class="text-xs font-semibold prc-Text-Text-9mHv3"
                     >
                       org:
                     </span>
                     <span
-                      class="text-xs opacity-90 prc-Text-Text-0ima0"
+                      class="text-xs opacity-90 prc-Text-Text-9mHv3"
                     >
                       filter by organization owner
                     </span>
@@ -721,7 +721,7 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
                 </div>
                 <div>
                   <div
-                    class="prc-Stack-Stack-WJVsK"
+                    class="prc-Stack-Stack-UQ9k6"
                     data-align="stretch"
                     data-direction="vertical"
                     data-gap="none"
@@ -730,12 +730,12 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
                     data-wrap="nowrap"
                   >
                     <span
-                      class="text-xs font-semibold prc-Text-Text-0ima0"
+                      class="text-xs font-semibold prc-Text-Text-9mHv3"
                     >
                       repo:
                     </span>
                     <span
-                      class="text-xs opacity-90 prc-Text-Text-0ima0"
+                      class="text-xs opacity-90 prc-Text-Text-9mHv3"
                     >
                       filter by repository full name
                     </span>
@@ -755,21 +755,21 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
       data-light-theme="light"
     >
       <div
-        class="prc-src-BaseStyles-dl-St"
+        class="prc-src-BaseStyles-aopSS"
         data-portal-root="true"
       >
         <div
-          class="prc-Popover-Popover-v1ShS"
+          class="prc-Popover-Popover-7QIH8"
           data-caret="top-left"
           data-open=""
         >
           <div
-            class="p-2 mt-2 prc-Popover-PopoverContent-nMzFS"
+            class="p-2 mt-2 prc-Popover-PopoverContent-2x-Aj"
             data-height="auto"
             data-width="auto"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="stretch"
               data-direction="vertical"
               data-gap="condensed"
@@ -779,7 +779,7 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
             >
               <div>
                 <div
-                  class="prc-Stack-Stack-WJVsK"
+                  class="prc-Stack-Stack-UQ9k6"
                   data-align="stretch"
                   data-direction="vertical"
                   data-gap="none"
@@ -788,12 +788,12 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
                   data-wrap="nowrap"
                 >
                   <span
-                    class="text-xs font-semibold prc-Text-Text-0ima0"
+                    class="text-xs font-semibold prc-Text-Text-9mHv3"
                   >
                     org:
                   </span>
                   <span
-                    class="text-xs opacity-90 prc-Text-Text-0ima0"
+                    class="text-xs opacity-90 prc-Text-Text-9mHv3"
                   >
                     filter by organization owner
                   </span>
@@ -801,7 +801,7 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
               </div>
               <div>
                 <div
-                  class="prc-Stack-Stack-WJVsK"
+                  class="prc-Stack-Stack-UQ9k6"
                   data-align="stretch"
                   data-direction="vertical"
                   data-gap="none"
@@ -810,12 +810,12 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
                   data-wrap="nowrap"
                 >
                   <span
-                    class="text-xs font-semibold prc-Text-Text-0ima0"
+                    class="text-xs font-semibold prc-Text-Text-9mHv3"
                   >
                     repo:
                   </span>
                   <span
-                    class="text-xs opacity-90 prc-Text-Text-0ima0"
+                    class="text-xs opacity-90 prc-Text-Text-9mHv3"
                   >
                     filter by repository full name
                   </span>

@@ -11,17 +11,17 @@ exports[`renderer/components/metrics/MetricPill.tsx should render with metric 1`
         data-light-theme="light"
       >
         <div
-          class="prc-src-BaseStyles-dl-St"
+          class="prc-src-BaseStyles-aopSS"
           data-portal-root="true"
         >
           <span
-            class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+            class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
             data-size="small"
             data-variant="secondary"
             title="Mock Pill"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="none"
@@ -46,7 +46,7 @@ exports[`renderer/components/metrics/MetricPill.tsx should render with metric 1`
                 />
               </svg>
               <span
-                class="text-xxs px-1 prc-Text-Text-0ima0"
+                class="text-xxs px-1 prc-Text-Text-9mHv3"
               >
                 1
               </span>
@@ -63,17 +63,17 @@ exports[`renderer/components/metrics/MetricPill.tsx should render with metric 1`
       data-light-theme="light"
     >
       <div
-        class="prc-src-BaseStyles-dl-St"
+        class="prc-src-BaseStyles-aopSS"
         data-portal-root="true"
       >
         <span
-          class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+          class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
           data-size="small"
           data-variant="secondary"
           title="Mock Pill"
         >
           <div
-            class="prc-Stack-Stack-WJVsK"
+            class="prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="none"
@@ -98,7 +98,7 @@ exports[`renderer/components/metrics/MetricPill.tsx should render with metric 1`
               />
             </svg>
             <span
-              class="text-xxs px-1 prc-Text-Text-0ima0"
+              class="text-xxs px-1 prc-Text-Text-9mHv3"
             >
               1
             </span>
@@ -172,17 +172,17 @@ exports[`renderer/components/metrics/MetricPill.tsx should render without metric
         data-light-theme="light"
       >
         <div
-          class="prc-src-BaseStyles-dl-St"
+          class="prc-src-BaseStyles-aopSS"
           data-portal-root="true"
         >
           <span
-            class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+            class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
             data-size="small"
             data-variant="secondary"
             title="Mock Pill"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="none"
@@ -219,17 +219,17 @@ exports[`renderer/components/metrics/MetricPill.tsx should render without metric
       data-light-theme="light"
     >
       <div
-        class="prc-src-BaseStyles-dl-St"
+        class="prc-src-BaseStyles-aopSS"
         data-portal-root="true"
       >
         <span
-          class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+          class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
           data-size="small"
           data-variant="secondary"
           title="Mock Pill"
         >
           <div
-            class="prc-Stack-Stack-WJVsK"
+            class="prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="none"

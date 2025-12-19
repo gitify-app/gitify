@@ -11,14 +11,14 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
         data-light-theme="light"
       >
         <div
-          class="prc-src-BaseStyles-dl-St"
+          class="prc-src-BaseStyles-aopSS"
           data-portal-root="true"
         >
           <div
             class="py-0.5"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -33,7 +33,7 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
                 type="button"
               >
                 <div
-                  class="prc-Stack-Stack-WJVsK"
+                  class="prc-Stack-Stack-UQ9k6"
                   data-align="center"
                   data-direction="horizontal"
                   data-gap="condensed"
@@ -44,7 +44,7 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
                 >
                   <img
                     alt="gitify-app/notifications-test"
-                    class="prc-Avatar-Avatar-ZRS-m"
+                    class="prc-Avatar-Avatar-0xaUi"
                     data-component="Avatar"
                     height="14"
                     src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
@@ -52,7 +52,7 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
                     width="14"
                   />
                   <div
-                    class="prc-Truncate-Truncate-A9Wn6"
+                    class="prc-Truncate-Truncate-2G1eo"
                     data-inline="true"
                     style="--truncate-max-width: 280px;"
                     title="gitify-app/notifications-test"
@@ -77,14 +77,14 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
       data-light-theme="light"
     >
       <div
-        class="prc-src-BaseStyles-dl-St"
+        class="prc-src-BaseStyles-aopSS"
         data-portal-root="true"
       >
         <div
           class="py-0.5"
         >
           <div
-            class="prc-Stack-Stack-WJVsK"
+            class="prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -99,7 +99,7 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
               type="button"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -110,7 +110,7 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
               >
                 <img
                   alt="gitify-app/notifications-test"
-                  class="prc-Avatar-Avatar-ZRS-m"
+                  class="prc-Avatar-Avatar-0xaUi"
                   data-component="Avatar"
                   height="14"
                   src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
@@ -118,7 +118,7 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
                   width="14"
                 />
                 <div
-                  class="prc-Truncate-Truncate-A9Wn6"
+                  class="prc-Truncate-Truncate-2G1eo"
                   data-inline="true"
                   style="--truncate-max-width: 280px;"
                   title="gitify-app/notifications-test"
@@ -200,14 +200,14 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
         data-light-theme="light"
       >
         <div
-          class="prc-src-BaseStyles-dl-St"
+          class="prc-src-BaseStyles-aopSS"
           data-portal-root="true"
         >
           <div
             class="py-0.5"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -222,7 +222,7 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
                 type="button"
               >
                 <div
-                  class="prc-Stack-Stack-WJVsK"
+                  class="prc-Stack-Stack-UQ9k6"
                   data-align="center"
                   data-direction="horizontal"
                   data-gap="condensed"
@@ -233,7 +233,7 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
                 >
                   <img
                     alt="gitify-app/notifications-test"
-                    class="prc-Avatar-Avatar-ZRS-m"
+                    class="prc-Avatar-Avatar-0xaUi"
                     data-component="Avatar"
                     height="14"
                     src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
@@ -241,7 +241,7 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
                     width="14"
                   />
                   <div
-                    class="prc-Truncate-Truncate-A9Wn6"
+                    class="prc-Truncate-Truncate-2G1eo"
                     data-inline="true"
                     style="--truncate-max-width: 280px;"
                     title="gitify-app/notifications-test"
@@ -266,14 +266,14 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
       data-light-theme="light"
     >
       <div
-        class="prc-src-BaseStyles-dl-St"
+        class="prc-src-BaseStyles-aopSS"
         data-portal-root="true"
       >
         <div
           class="py-0.5"
         >
           <div
-            class="prc-Stack-Stack-WJVsK"
+            class="prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -288,7 +288,7 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
               type="button"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -299,7 +299,7 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
               >
                 <img
                   alt="gitify-app/notifications-test"
-                  class="prc-Avatar-Avatar-ZRS-m"
+                  class="prc-Avatar-Avatar-0xaUi"
                   data-component="Avatar"
                   height="14"
                   src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
@@ -307,7 +307,7 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
                   width="14"
                 />
                 <div
-                  class="prc-Truncate-Truncate-A9Wn6"
+                  class="prc-Truncate-Truncate-2G1eo"
                   data-inline="true"
                   style="--truncate-max-width: 280px;"
                   title="gitify-app/notifications-test"
@@ -389,14 +389,14 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
         data-light-theme="light"
       >
         <div
-          class="prc-src-BaseStyles-dl-St"
+          class="prc-src-BaseStyles-aopSS"
           data-portal-root="true"
         >
           <div
             class="py-0.5"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -411,7 +411,7 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
                 type="button"
               >
                 <div
-                  class="prc-Stack-Stack-WJVsK"
+                  class="prc-Stack-Stack-UQ9k6"
                   data-align="center"
                   data-direction="horizontal"
                   data-gap="condensed"
@@ -422,7 +422,7 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
                 >
                   <img
                     alt="gitify-app/notifications-test"
-                    class="prc-Avatar-Avatar-ZRS-m"
+                    class="prc-Avatar-Avatar-0xaUi"
                     data-component="Avatar"
                     height="14"
                     src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
@@ -430,7 +430,7 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
                     width="14"
                   />
                   <div
-                    class="prc-Truncate-Truncate-A9Wn6"
+                    class="prc-Truncate-Truncate-2G1eo"
                     data-inline="true"
                     style="--truncate-max-width: 280px;"
                     title="gitify-app/notifications-test"
@@ -455,14 +455,14 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
       data-light-theme="light"
     >
       <div
-        class="prc-src-BaseStyles-dl-St"
+        class="prc-src-BaseStyles-aopSS"
         data-portal-root="true"
       >
         <div
           class="py-0.5"
         >
           <div
-            class="prc-Stack-Stack-WJVsK"
+            class="prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -477,7 +477,7 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
               type="button"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -488,7 +488,7 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
               >
                 <img
                   alt="gitify-app/notifications-test"
-                  class="prc-Avatar-Avatar-ZRS-m"
+                  class="prc-Avatar-Avatar-0xaUi"
                   data-component="Avatar"
                   height="14"
                   src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
@@ -496,7 +496,7 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
                   width="14"
                 />
                 <div
-                  class="prc-Truncate-Truncate-A9Wn6"
+                  class="prc-Truncate-Truncate-2G1eo"
                   data-inline="true"
                   style="--truncate-max-width: 280px;"
                   title="gitify-app/notifications-test"
@@ -578,7 +578,7 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
         data-light-theme="light"
       >
         <div
-          class="prc-src-BaseStyles-dl-St"
+          class="prc-src-BaseStyles-aopSS"
           data-portal-root="true"
         />
       </div>
@@ -591,7 +591,7 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
       data-light-theme="light"
     >
       <div
-        class="prc-src-BaseStyles-dl-St"
+        class="prc-src-BaseStyles-aopSS"
         data-portal-root="true"
       />
     </div>

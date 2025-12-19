@@ -9,7 +9,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
     class="pl-4 pr-5 pt-3 pb-1"
   >
     <div
-      class="prc-Stack-Stack-WJVsK"
+      class="prc-Stack-Stack-UQ9k6"
       data-align="stretch"
       data-direction="horizontal"
       data-justify="space-between"
@@ -19,7 +19,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
       <button
         aria-describedby="_r_1_-loading-announcement"
         aria-labelledby="Go Back"
-        class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
+        class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
         data-component="IconButton"
         data-loading="false"
         data-no-visuals="true"
@@ -50,7 +50,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           class="mb-2"
         >
           <div
-            class="prc-Stack-Stack-WJVsK"
+            class="prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -76,7 +76,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               />
             </svg>
             <h4
-              class="prc-Heading-Heading-6CmGO"
+              class="prc-Heading-Heading-MtWFE"
             >
               Filters
             </h4>
@@ -89,7 +89,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
     class="grow overflow-x-hidden overflow-y-auto px-5 pb-2"
   >
     <div
-      class="prc-Stack-Stack-WJVsK"
+      class="prc-Stack-Stack-UQ9k6"
       data-align="stretch"
       data-direction="vertical"
       data-gap="spacious"
@@ -103,7 +103,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             class="mb-2"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -129,7 +129,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                 />
               </svg>
               <h4
-                class="prc-Heading-Heading-6CmGO"
+                class="prc-Heading-Heading-MtWFE"
               >
                 Search
               </h4>
@@ -163,7 +163,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           </div>
         </legend>
         <div
-          class="prc-Stack-Stack-WJVsK"
+          class="prc-Stack-Stack-UQ9k6"
           data-align="stretch"
           data-direction="vertical"
           data-gap="condensed"
@@ -172,7 +172,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           data-wrap="nowrap"
         >
           <div
-            class="text-sm prc-Stack-Stack-WJVsK"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -184,7 +184,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               class="font-medium text-gitify-font w-20"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -209,7 +209,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                   />
                 </svg>
                 <span
-                  class="prc-Text-Text-0ima0"
+                  class="prc-Text-Text-9mHv3"
                 >
                   Include
                   :
@@ -220,20 +220,20 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               class="relative grow"
             >
               <span
-                class="prc-TextInputWithTokens-TextInputWrapper-kj1cB prc-components-TextInputWrapper-i1ofR prc-components-TextInputBaseWrapper-ueK9q"
+                class="prc-TextInputWithTokens-TextInputWrapper-HAIfc prc-components-TextInputWrapper-Hpdqi prc-components-TextInputBaseWrapper-wY-n0"
                 data-block="true"
                 data-size="small"
               >
                 <div
-                  class="prc-TextInputWithTokens-Container-mBzq-"
+                  class="prc-TextInputWithTokens-Container-dPCL7"
                   data-prevent-token-wrapping="false"
                 >
                   <div
-                    class="prc-TextInputWithTokens-InputWrapper-wloGg"
+                    class="prc-TextInputWithTokens-InputWrapper-1lXK5"
                   >
                     <input
                       aria-invalid="false"
-                      class="prc-TextInputWithTokens-UnstyledTextInput-F582M prc-components-Input-Ic-y8"
+                      class="prc-TextInputWithTokens-UnstyledTextInput-XwhBc prc-components-Input-IwWrt"
                       tabindex="0"
                       title="Include searches"
                       type="text"
@@ -244,7 +244,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             </div>
           </div>
           <div
-            class="text-sm prc-Stack-Stack-WJVsK"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -256,7 +256,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               class="font-medium text-gitify-font w-20"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -281,7 +281,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                   />
                 </svg>
                 <span
-                  class="prc-Text-Text-0ima0"
+                  class="prc-Text-Text-9mHv3"
                 >
                   Exclude
                   :
@@ -292,20 +292,20 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               class="relative grow"
             >
               <span
-                class="prc-TextInputWithTokens-TextInputWrapper-kj1cB prc-components-TextInputWrapper-i1ofR prc-components-TextInputBaseWrapper-ueK9q"
+                class="prc-TextInputWithTokens-TextInputWrapper-HAIfc prc-components-TextInputWrapper-Hpdqi prc-components-TextInputBaseWrapper-wY-n0"
                 data-block="true"
                 data-size="small"
               >
                 <div
-                  class="prc-TextInputWithTokens-Container-mBzq-"
+                  class="prc-TextInputWithTokens-Container-dPCL7"
                   data-prevent-token-wrapping="false"
                 >
                   <div
-                    class="prc-TextInputWithTokens-InputWrapper-wloGg"
+                    class="prc-TextInputWithTokens-InputWrapper-1lXK5"
                   >
                     <input
                       aria-invalid="false"
-                      class="prc-TextInputWithTokens-UnstyledTextInput-F582M prc-components-Input-Ic-y8"
+                      class="prc-TextInputWithTokens-UnstyledTextInput-XwhBc prc-components-Input-IwWrt"
                       tabindex="0"
                       title="Exclude searches"
                       type="text"
@@ -325,7 +325,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             class="mb-2"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -351,7 +351,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                 />
               </svg>
               <h4
-                class="prc-Heading-Heading-6CmGO"
+                class="prc-Heading-Heading-MtWFE"
               >
                 User Type
               </h4>
@@ -385,7 +385,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           </div>
         </legend>
         <div
-          class="prc-Stack-Stack-WJVsK"
+          class="prc-Stack-Stack-UQ9k6"
           data-align="stretch"
           data-direction="horizontal"
           data-gap="normal"
@@ -394,7 +394,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           data-wrap="nowrap"
         >
           <div
-            class="text-sm prc-Stack-Stack-WJVsK"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -441,13 +441,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               </svg>
             </button>
             <span
-              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
             >
               0
             </span>
           </div>
           <div
-            class="text-sm prc-Stack-Stack-WJVsK"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -468,13 +468,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Organization
             </label>
             <span
-              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
             >
               0
             </span>
           </div>
           <div
-            class="text-sm prc-Stack-Stack-WJVsK"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -495,7 +495,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               User
             </label>
             <span
-              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
             >
               0
             </span>
@@ -510,7 +510,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             class="mb-2"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -536,7 +536,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                 />
               </svg>
               <h4
-                class="prc-Heading-Heading-6CmGO"
+                class="prc-Heading-Heading-MtWFE"
               >
                 Type
               </h4>
@@ -570,7 +570,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           </div>
         </legend>
         <div
-          class="prc-Stack-Stack-WJVsK"
+          class="prc-Stack-Stack-UQ9k6"
           data-align="stretch"
           data-direction="vertical"
           data-gap="condensed"
@@ -579,7 +579,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           data-wrap="nowrap"
         >
           <div
-            class="text-sm prc-Stack-Stack-WJVsK"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -600,13 +600,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Check Suite
             </label>
             <span
-              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
             >
               0
             </span>
           </div>
           <div
-            class="text-sm prc-Stack-Stack-WJVsK"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -627,13 +627,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Commit
             </label>
             <span
-              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
             >
               0
             </span>
           </div>
           <div
-            class="text-sm prc-Stack-Stack-WJVsK"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -654,13 +654,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Dependabot Alert
             </label>
             <span
-              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
             >
               0
             </span>
           </div>
           <div
-            class="text-sm prc-Stack-Stack-WJVsK"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -681,13 +681,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Discussion
             </label>
             <span
-              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
             >
               0
             </span>
           </div>
           <div
-            class="text-sm prc-Stack-Stack-WJVsK"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -708,13 +708,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Invitation
             </label>
             <span
-              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
             >
               0
             </span>
           </div>
           <div
-            class="text-sm prc-Stack-Stack-WJVsK"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -735,13 +735,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Issue
             </label>
             <span
-              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
             >
               0
             </span>
           </div>
           <div
-            class="text-sm prc-Stack-Stack-WJVsK"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -762,13 +762,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Pull Request
             </label>
             <span
-              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
             >
               0
             </span>
           </div>
           <div
-            class="text-sm prc-Stack-Stack-WJVsK"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -789,13 +789,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Release
             </label>
             <span
-              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
             >
               0
             </span>
           </div>
           <div
-            class="text-sm prc-Stack-Stack-WJVsK"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -816,13 +816,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Vulnerability Alert
             </label>
             <span
-              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
             >
               0
             </span>
           </div>
           <div
-            class="text-sm prc-Stack-Stack-WJVsK"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -843,7 +843,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Workflow Run
             </label>
             <span
-              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
             >
               0
             </span>
@@ -858,7 +858,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             class="mb-2"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -887,7 +887,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                 />
               </svg>
               <h4
-                class="prc-Heading-Heading-6CmGO"
+                class="prc-Heading-Heading-MtWFE"
               >
                 State
               </h4>
@@ -921,7 +921,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           </div>
         </legend>
         <div
-          class="prc-Stack-Stack-WJVsK"
+          class="prc-Stack-Stack-UQ9k6"
           data-align="stretch"
           data-direction="vertical"
           data-gap="condensed"
@@ -930,7 +930,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           data-wrap="nowrap"
         >
           <div
-            class="text-sm prc-Stack-Stack-WJVsK"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -977,13 +977,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               </svg>
             </button>
             <span
-              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
             >
               0
             </span>
           </div>
           <div
-            class="text-sm prc-Stack-Stack-WJVsK"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1004,13 +1004,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Draft
             </label>
             <span
-              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
             >
               0
             </span>
           </div>
           <div
-            class="text-sm prc-Stack-Stack-WJVsK"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1031,13 +1031,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Merged
             </label>
             <span
-              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
             >
               0
             </span>
           </div>
           <div
-            class="text-sm prc-Stack-Stack-WJVsK"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1084,13 +1084,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               </svg>
             </button>
             <span
-              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
             >
               0
             </span>
           </div>
           <div
-            class="text-sm prc-Stack-Stack-WJVsK"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1137,7 +1137,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               </svg>
             </button>
             <span
-              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
             >
               0
             </span>
@@ -1152,7 +1152,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             class="mb-2"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -1178,7 +1178,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                 />
               </svg>
               <h4
-                class="prc-Heading-Heading-6CmGO"
+                class="prc-Heading-Heading-MtWFE"
               >
                 Reason
               </h4>
@@ -1212,7 +1212,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           </div>
         </legend>
         <div
-          class="prc-Stack-Stack-WJVsK"
+          class="prc-Stack-Stack-UQ9k6"
           data-align="stretch"
           data-direction="vertical"
           data-gap="condensed"
@@ -1221,7 +1221,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           data-wrap="nowrap"
         >
           <div
-            class="text-sm prc-Stack-Stack-WJVsK"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1268,13 +1268,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               </svg>
             </button>
             <span
-              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
             >
               0
             </span>
           </div>
           <div
-            class="text-sm prc-Stack-Stack-WJVsK"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1321,13 +1321,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               </svg>
             </button>
             <span
-              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
             >
               0
             </span>
           </div>
           <div
-            class="text-sm prc-Stack-Stack-WJVsK"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1374,13 +1374,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               </svg>
             </button>
             <span
-              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
             >
               0
             </span>
           </div>
           <div
-            class="text-sm prc-Stack-Stack-WJVsK"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1427,13 +1427,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               </svg>
             </button>
             <span
-              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
             >
               0
             </span>
           </div>
           <div
-            class="text-sm prc-Stack-Stack-WJVsK"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1480,13 +1480,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               </svg>
             </button>
             <span
-              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
             >
               0
             </span>
           </div>
           <div
-            class="text-sm prc-Stack-Stack-WJVsK"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1533,13 +1533,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               </svg>
             </button>
             <span
-              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
             >
               0
             </span>
           </div>
           <div
-            class="text-sm prc-Stack-Stack-WJVsK"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1586,13 +1586,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               </svg>
             </button>
             <span
-              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
             >
               0
             </span>
           </div>
           <div
-            class="text-sm prc-Stack-Stack-WJVsK"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1639,13 +1639,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               </svg>
             </button>
             <span
-              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
             >
               0
             </span>
           </div>
           <div
-            class="text-sm prc-Stack-Stack-WJVsK"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1692,13 +1692,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               </svg>
             </button>
             <span
-              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
             >
               0
             </span>
           </div>
           <div
-            class="text-sm prc-Stack-Stack-WJVsK"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1745,13 +1745,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               </svg>
             </button>
             <span
-              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
             >
               0
             </span>
           </div>
           <div
-            class="text-sm prc-Stack-Stack-WJVsK"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1798,13 +1798,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               </svg>
             </button>
             <span
-              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
             >
               0
             </span>
           </div>
           <div
-            class="text-sm prc-Stack-Stack-WJVsK"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1851,13 +1851,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               </svg>
             </button>
             <span
-              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
             >
               0
             </span>
           </div>
           <div
-            class="text-sm prc-Stack-Stack-WJVsK"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1904,13 +1904,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               </svg>
             </button>
             <span
-              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
             >
               0
             </span>
           </div>
           <div
-            class="text-sm prc-Stack-Stack-WJVsK"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1957,13 +1957,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               </svg>
             </button>
             <span
-              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
             >
               0
             </span>
           </div>
           <div
-            class="text-sm prc-Stack-Stack-WJVsK"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -2010,7 +2010,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               </svg>
             </button>
             <span
-              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
             >
               0
             </span>
@@ -2023,7 +2023,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
     class="left-sidebar bg-gitify-footer"
   >
     <div
-      class="prc-Stack-Stack-WJVsK"
+      class="prc-Stack-Stack-UQ9k6"
       data-align="stretch"
       data-direction="horizontal"
       data-justify="end"
@@ -2032,7 +2032,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
     >
       <button
         aria-describedby="_r_r_-loading-announcement _r_q_"
-        class="prc-Button-ButtonBase-c50BI"
+        class="prc-Button-ButtonBase-9n-Xk"
         data-loading="false"
         data-size="medium"
         data-testid="filters-clear"
@@ -2040,12 +2040,12 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
         type="button"
       >
         <span
-          class="prc-Button-ButtonContent-HKbr-"
+          class="prc-Button-ButtonContent-Iohp5"
           data-align="center"
           data-component="buttonContent"
         >
           <span
-            class="prc-Button-Visual-2epfX prc-Button-VisualWrap-Db-eB"
+            class="prc-Button-Visual-YNt2F prc-Button-VisualWrap-E4cnq"
             data-component="leadingVisual"
           >
             <svg
@@ -2066,7 +2066,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             </svg>
           </span>
           <span
-            class="prc-Button-Label-pTQ3x"
+            class="prc-Button-Label-FWkx3"
             data-component="text"
           >
             Clear filters
@@ -2075,7 +2075,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
       </button>
       <span
         aria-hidden="true"
-        class="prc-TooltipV2-Tooltip-cYMVY"
+        class="prc-TooltipV2-Tooltip-tLeuB"
         data-direction="n"
         id="_r_q_"
         popover="auto"

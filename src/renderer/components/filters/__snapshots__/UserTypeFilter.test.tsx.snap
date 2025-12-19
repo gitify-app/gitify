@@ -11,7 +11,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
         data-light-theme="light"
       >
         <div
-          class="prc-src-BaseStyles-dl-St"
+          class="prc-src-BaseStyles-aopSS"
           data-portal-root="true"
         >
           <fieldset
@@ -22,7 +22,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
                 class="mb-2"
               >
                 <div
-                  class="prc-Stack-Stack-WJVsK"
+                  class="prc-Stack-Stack-UQ9k6"
                   data-align="center"
                   data-direction="horizontal"
                   data-gap="condensed"
@@ -48,7 +48,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
                     />
                   </svg>
                   <h4
-                    class="prc-Heading-Heading-6CmGO"
+                    class="prc-Heading-Heading-MtWFE"
                   >
                     User Type
                   </h4>
@@ -82,7 +82,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
               </div>
             </legend>
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="stretch"
               data-direction="horizontal"
               data-gap="normal"
@@ -91,7 +91,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
               data-wrap="nowrap"
             >
               <div
-                class="text-sm prc-Stack-Stack-WJVsK"
+                class="text-sm prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -138,13 +138,13 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
                   </svg>
                 </button>
                 <span
-                  class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+                  class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
                 >
                   0
                 </span>
               </div>
               <div
-                class="text-sm prc-Stack-Stack-WJVsK"
+                class="text-sm prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -165,13 +165,13 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
                   Organization
                 </label>
                 <span
-                  class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+                  class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
                 >
                   0
                 </span>
               </div>
               <div
-                class="text-sm prc-Stack-Stack-WJVsK"
+                class="text-sm prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -192,7 +192,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
                   User
                 </label>
                 <span
-                  class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+                  class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
                 >
                   1
                 </span>
@@ -210,7 +210,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
       data-light-theme="light"
     >
       <div
-        class="prc-src-BaseStyles-dl-St"
+        class="prc-src-BaseStyles-aopSS"
         data-portal-root="true"
       >
         <fieldset
@@ -221,7 +221,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
               class="mb-2"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -247,7 +247,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
                   />
                 </svg>
                 <h4
-                  class="prc-Heading-Heading-6CmGO"
+                  class="prc-Heading-Heading-MtWFE"
                 >
                   User Type
                 </h4>
@@ -281,7 +281,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
             </div>
           </legend>
           <div
-            class="prc-Stack-Stack-WJVsK"
+            class="prc-Stack-Stack-UQ9k6"
             data-align="stretch"
             data-direction="horizontal"
             data-gap="normal"
@@ -290,7 +290,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
             data-wrap="nowrap"
           >
             <div
-              class="text-sm prc-Stack-Stack-WJVsK"
+              class="text-sm prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -337,13 +337,13 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
                 </svg>
               </button>
               <span
-                class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+                class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
               >
                 0
               </span>
             </div>
             <div
-              class="text-sm prc-Stack-Stack-WJVsK"
+              class="text-sm prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -364,13 +364,13 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
                 Organization
               </label>
               <span
-                class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+                class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
               >
                 0
               </span>
             </div>
             <div
-              class="text-sm prc-Stack-Stack-WJVsK"
+              class="text-sm prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -391,7 +391,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx should render itself & i
                 User
               </label>
               <span
-                class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-0ima0"
+                class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
               >
                 1
               </span>

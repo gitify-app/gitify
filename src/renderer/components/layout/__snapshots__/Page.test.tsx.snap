@@ -11,7 +11,7 @@ exports[`renderer/components/layout/Page.tsx should render itself & its children
         data-light-theme="light"
       >
         <div
-          class="prc-src-BaseStyles-dl-St"
+          class="prc-src-BaseStyles-aopSS"
           data-portal-root="true"
         >
           <div
@@ -31,7 +31,7 @@ exports[`renderer/components/layout/Page.tsx should render itself & its children
       data-light-theme="light"
     >
       <div
-        class="prc-src-BaseStyles-dl-St"
+        class="prc-src-BaseStyles-aopSS"
         data-portal-root="true"
       >
         <div

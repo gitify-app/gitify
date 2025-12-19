@@ -11,11 +11,11 @@ exports[`renderer/components/fields/RadioGroup.tsx should render 1`] = `
         data-light-theme="light"
       >
         <div
-          class="prc-src-BaseStyles-dl-St"
+          class="prc-src-BaseStyles-aopSS"
           data-portal-root="true"
         >
           <div
-            class="text-sm prc-Stack-Stack-WJVsK"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -30,7 +30,7 @@ exports[`renderer/components/fields/RadioGroup.tsx should render 1`] = `
               Appearance
             </label>
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -54,7 +54,7 @@ exports[`renderer/components/fields/RadioGroup.tsx should render 1`] = `
               </label>
             </div>
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -90,11 +90,11 @@ exports[`renderer/components/fields/RadioGroup.tsx should render 1`] = `
       data-light-theme="light"
     >
       <div
-        class="prc-src-BaseStyles-dl-St"
+        class="prc-src-BaseStyles-aopSS"
         data-portal-root="true"
       >
         <div
-          class="text-sm prc-Stack-Stack-WJVsK"
+          class="text-sm prc-Stack-Stack-UQ9k6"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -109,7 +109,7 @@ exports[`renderer/components/fields/RadioGroup.tsx should render 1`] = `
             Appearance
           </label>
           <div
-            class="prc-Stack-Stack-WJVsK"
+            class="prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -133,7 +133,7 @@ exports[`renderer/components/fields/RadioGroup.tsx should render 1`] = `
             </label>
           </div>
           <div
-            class="prc-Stack-Stack-WJVsK"
+            class="prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -226,11 +226,11 @@ exports[`renderer/components/fields/RadioGroup.tsx should render as disabled 1`]
         data-light-theme="light"
       >
         <div
-          class="prc-src-BaseStyles-dl-St"
+          class="prc-src-BaseStyles-aopSS"
           data-portal-root="true"
         >
           <div
-            class="text-sm prc-Stack-Stack-WJVsK"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -245,7 +245,7 @@ exports[`renderer/components/fields/RadioGroup.tsx should render as disabled 1`]
               Appearance
             </label>
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -269,7 +269,7 @@ exports[`renderer/components/fields/RadioGroup.tsx should render as disabled 1`]
               </label>
             </div>
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -305,11 +305,11 @@ exports[`renderer/components/fields/RadioGroup.tsx should render as disabled 1`]
       data-light-theme="light"
     >
       <div
-        class="prc-src-BaseStyles-dl-St"
+        class="prc-src-BaseStyles-aopSS"
         data-portal-root="true"
       >
         <div
-          class="text-sm prc-Stack-Stack-WJVsK"
+          class="text-sm prc-Stack-Stack-UQ9k6"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -324,7 +324,7 @@ exports[`renderer/components/fields/RadioGroup.tsx should render as disabled 1`]
             Appearance
           </label>
           <div
-            class="prc-Stack-Stack-WJVsK"
+            class="prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -348,7 +348,7 @@ exports[`renderer/components/fields/RadioGroup.tsx should render as disabled 1`]
             </label>
           </div>
           <div
-            class="prc-Stack-Stack-WJVsK"
+            class="prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"

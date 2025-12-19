@@ -11,11 +11,11 @@ exports[`renderer/components/AllRead.tsx should render itself & its children - n
         data-light-theme="light"
       >
         <div
-          class="prc-src-BaseStyles-dl-St"
+          class="prc-src-BaseStyles-aopSS"
           data-portal-root="true"
         >
           <div
-            class="h-screen prc-Stack-Stack-WJVsK"
+            class="h-screen prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="vertical"
             data-justify="center"
@@ -23,7 +23,7 @@ exports[`renderer/components/AllRead.tsx should render itself & its children - n
             data-wrap="nowrap"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="vertical"
               data-gap="condensed"
@@ -32,7 +32,7 @@ exports[`renderer/components/AllRead.tsx should render itself & its children - n
               data-wrap="nowrap"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="vertical"
                 data-gap="spacious"
@@ -69,11 +69,11 @@ exports[`renderer/components/AllRead.tsx should render itself & its children - n
       data-light-theme="light"
     >
       <div
-        class="prc-src-BaseStyles-dl-St"
+        class="prc-src-BaseStyles-aopSS"
         data-portal-root="true"
       >
         <div
-          class="h-screen prc-Stack-Stack-WJVsK"
+          class="h-screen prc-Stack-Stack-UQ9k6"
           data-align="center"
           data-direction="vertical"
           data-justify="center"
@@ -81,7 +81,7 @@ exports[`renderer/components/AllRead.tsx should render itself & its children - n
           data-wrap="nowrap"
         >
           <div
-            class="prc-Stack-Stack-WJVsK"
+            class="prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="vertical"
             data-gap="condensed"
@@ -90,7 +90,7 @@ exports[`renderer/components/AllRead.tsx should render itself & its children - n
             data-wrap="nowrap"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="vertical"
               data-gap="spacious"
@@ -184,11 +184,11 @@ exports[`renderer/components/AllRead.tsx should render itself & its children - w
         data-light-theme="light"
       >
         <div
-          class="prc-src-BaseStyles-dl-St"
+          class="prc-src-BaseStyles-aopSS"
           data-portal-root="true"
         >
           <div
-            class="h-screen prc-Stack-Stack-WJVsK"
+            class="h-screen prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="vertical"
             data-justify="center"
@@ -196,7 +196,7 @@ exports[`renderer/components/AllRead.tsx should render itself & its children - w
             data-wrap="nowrap"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="vertical"
               data-gap="condensed"
@@ -205,7 +205,7 @@ exports[`renderer/components/AllRead.tsx should render itself & its children - w
               data-wrap="nowrap"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="vertical"
                 data-gap="spacious"
@@ -242,11 +242,11 @@ exports[`renderer/components/AllRead.tsx should render itself & its children - w
       data-light-theme="light"
     >
       <div
-        class="prc-src-BaseStyles-dl-St"
+        class="prc-src-BaseStyles-aopSS"
         data-portal-root="true"
       >
         <div
-          class="h-screen prc-Stack-Stack-WJVsK"
+          class="h-screen prc-Stack-Stack-UQ9k6"
           data-align="center"
           data-direction="vertical"
           data-justify="center"
@@ -254,7 +254,7 @@ exports[`renderer/components/AllRead.tsx should render itself & its children - w
           data-wrap="nowrap"
         >
           <div
-            class="prc-Stack-Stack-WJVsK"
+            class="prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="vertical"
             data-gap="condensed"
@@ -263,7 +263,7 @@ exports[`renderer/components/AllRead.tsx should render itself & its children - w
             data-wrap="nowrap"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="vertical"
               data-gap="spacious"
