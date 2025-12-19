@@ -11,11 +11,11 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx renders the fallback
         data-light-theme="light"
       >
         <div
-          class="prc-src-BaseStyles-dl-St"
+          class="prc-src-BaseStyles-aopSS"
           data-portal-root="true"
         >
           <div
-            class="prc-Stack-Stack-WJVsK"
+            class="prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -41,7 +41,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx renders the fallback
               />
             </svg>
             <div
-              class="prc-Truncate-Truncate-A9Wn6"
+              class="prc-Truncate-Truncate-2G1eo"
               data-inline="true"
               style="--truncate-max-width: 280px;"
               title="@gitify-app"
@@ -60,11 +60,11 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx renders the fallback
       data-light-theme="light"
     >
       <div
-        class="prc-src-BaseStyles-dl-St"
+        class="prc-src-BaseStyles-aopSS"
         data-portal-root="true"
       >
         <div
-          class="prc-Stack-Stack-WJVsK"
+          class="prc-Stack-Stack-UQ9k6"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -90,7 +90,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx renders the fallback
             />
           </svg>
           <div
-            class="prc-Truncate-Truncate-A9Wn6"
+            class="prc-Truncate-Truncate-2G1eo"
             data-inline="true"
             style="--truncate-max-width: 280px;"
             title="@gitify-app"
@@ -166,11 +166,11 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx renders the fallback
         data-light-theme="light"
       >
         <div
-          class="prc-src-BaseStyles-dl-St"
+          class="prc-src-BaseStyles-aopSS"
           data-portal-root="true"
         >
           <div
-            class="prc-Stack-Stack-WJVsK"
+            class="prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -196,7 +196,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx renders the fallback
               />
             </svg>
             <div
-              class="prc-Truncate-Truncate-A9Wn6"
+              class="prc-Truncate-Truncate-2G1eo"
               data-inline="true"
               style="--truncate-max-width: 280px;"
               title="@gitify-app"
@@ -215,11 +215,11 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx renders the fallback
       data-light-theme="light"
     >
       <div
-        class="prc-src-BaseStyles-dl-St"
+        class="prc-src-BaseStyles-aopSS"
         data-portal-root="true"
       >
         <div
-          class="prc-Stack-Stack-WJVsK"
+          class="prc-Stack-Stack-UQ9k6"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -245,7 +245,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx renders the fallback
             />
           </svg>
           <div
-            class="prc-Truncate-Truncate-A9Wn6"
+            class="prc-Truncate-Truncate-2G1eo"
             data-inline="true"
             style="--truncate-max-width: 280px;"
             title="@gitify-app"
@@ -312,7 +312,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx renders the fallback
 
 exports[`renderer/components/avatars/AvatarWithFallback.tsx renders the fallback icon when the image fails to load (isBroken = true) - human user 1`] = `
 <div
-  class="prc-Stack-Stack-WJVsK"
+  class="prc-Stack-Stack-UQ9k6"
   data-align="center"
   data-direction="horizontal"
   data-gap="condensed"
@@ -338,7 +338,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx renders the fallback
     />
   </svg>
   <div
-    class="prc-Truncate-Truncate-A9Wn6"
+    class="prc-Truncate-Truncate-2G1eo"
     data-inline="true"
     style="--truncate-max-width: 280px;"
     title="@gitify-app"
@@ -350,7 +350,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx renders the fallback
 
 exports[`renderer/components/avatars/AvatarWithFallback.tsx renders the fallback icon when the image fails to load (isBroken = true) - non human user 1`] = `
 <div
-  class="prc-Stack-Stack-WJVsK"
+  class="prc-Stack-Stack-UQ9k6"
   data-align="center"
   data-direction="horizontal"
   data-gap="condensed"
@@ -376,7 +376,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx renders the fallback
     />
   </svg>
   <div
-    class="prc-Truncate-Truncate-A9Wn6"
+    class="prc-Truncate-Truncate-2G1eo"
     data-inline="true"
     style="--truncate-max-width: 280px;"
     title="@gitify-app"
@@ -397,11 +397,11 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx should render avatar
         data-light-theme="light"
       >
         <div
-          class="prc-src-BaseStyles-dl-St"
+          class="prc-src-BaseStyles-aopSS"
           data-portal-root="true"
         >
           <div
-            class="prc-Stack-Stack-WJVsK"
+            class="prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -412,7 +412,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx should render avatar
           >
             <img
               alt="gitify-app"
-              class="prc-Avatar-Avatar-ZRS-m"
+              class="prc-Avatar-Avatar-0xaUi"
               data-component="Avatar"
               height="16"
               src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
@@ -420,7 +420,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx should render avatar
               width="16"
             />
             <div
-              class="prc-Truncate-Truncate-A9Wn6"
+              class="prc-Truncate-Truncate-2G1eo"
               data-inline="true"
               style="--truncate-max-width: 280px;"
               title="@gitify-app"
@@ -439,11 +439,11 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx should render avatar
       data-light-theme="light"
     >
       <div
-        class="prc-src-BaseStyles-dl-St"
+        class="prc-src-BaseStyles-aopSS"
         data-portal-root="true"
       >
         <div
-          class="prc-Stack-Stack-WJVsK"
+          class="prc-Stack-Stack-UQ9k6"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -454,7 +454,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx should render avatar
         >
           <img
             alt="gitify-app"
-            class="prc-Avatar-Avatar-ZRS-m"
+            class="prc-Avatar-Avatar-0xaUi"
             data-component="Avatar"
             height="16"
             src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
@@ -462,7 +462,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx should render avatar
             width="16"
           />
           <div
-            class="prc-Truncate-Truncate-A9Wn6"
+            class="prc-Truncate-Truncate-2G1eo"
             data-inline="true"
             style="--truncate-max-width: 280px;"
             title="@gitify-app"
@@ -538,11 +538,11 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx should render avatar
         data-light-theme="light"
       >
         <div
-          class="prc-src-BaseStyles-dl-St"
+          class="prc-src-BaseStyles-aopSS"
           data-portal-root="true"
         >
           <div
-            class="prc-Stack-Stack-WJVsK"
+            class="prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -553,7 +553,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx should render avatar
           >
             <img
               alt="gitify-app"
-              class="prc-Avatar-Avatar-ZRS-m"
+              class="prc-Avatar-Avatar-0xaUi"
               data-component="Avatar"
               data-square=""
               height="16"
@@ -562,7 +562,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx should render avatar
               width="16"
             />
             <div
-              class="prc-Truncate-Truncate-A9Wn6"
+              class="prc-Truncate-Truncate-2G1eo"
               data-inline="true"
               style="--truncate-max-width: 280px;"
               title="@gitify-app"
@@ -581,11 +581,11 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx should render avatar
       data-light-theme="light"
     >
       <div
-        class="prc-src-BaseStyles-dl-St"
+        class="prc-src-BaseStyles-aopSS"
         data-portal-root="true"
       >
         <div
-          class="prc-Stack-Stack-WJVsK"
+          class="prc-Stack-Stack-UQ9k6"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
@@ -596,7 +596,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx should render avatar
         >
           <img
             alt="gitify-app"
-            class="prc-Avatar-Avatar-ZRS-m"
+            class="prc-Avatar-Avatar-0xaUi"
             data-component="Avatar"
             data-square=""
             height="16"
@@ -605,7 +605,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx should render avatar
             width="16"
           />
           <div
-            class="prc-Truncate-Truncate-A9Wn6"
+            class="prc-Truncate-Truncate-2G1eo"
             data-inline="true"
             style="--truncate-max-width: 280px;"
             title="@gitify-app"

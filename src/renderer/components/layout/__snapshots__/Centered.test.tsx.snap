@@ -11,11 +11,11 @@ exports[`renderer/components/layout/Centered.tsx should render itself & its chil
         data-light-theme="light"
       >
         <div
-          class="prc-src-BaseStyles-dl-St"
+          class="prc-src-BaseStyles-aopSS"
           data-portal-root="true"
         >
           <div
-            class="prc-Stack-Stack-WJVsK"
+            class="prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="vertical"
             data-justify="center"
@@ -35,11 +35,11 @@ exports[`renderer/components/layout/Centered.tsx should render itself & its chil
       data-light-theme="light"
     >
       <div
-        class="prc-src-BaseStyles-dl-St"
+        class="prc-src-BaseStyles-aopSS"
         data-portal-root="true"
       >
         <div
-          class="prc-Stack-Stack-WJVsK"
+          class="prc-Stack-Stack-UQ9k6"
           data-align="center"
           data-direction="vertical"
           data-justify="center"
@@ -116,11 +116,11 @@ exports[`renderer/components/layout/Centered.tsx should render itself & its chil
         data-light-theme="light"
       >
         <div
-          class="prc-src-BaseStyles-dl-St"
+          class="prc-src-BaseStyles-aopSS"
           data-portal-root="true"
         >
           <div
-            class="h-screen prc-Stack-Stack-WJVsK"
+            class="h-screen prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="vertical"
             data-justify="center"
@@ -140,11 +140,11 @@ exports[`renderer/components/layout/Centered.tsx should render itself & its chil
       data-light-theme="light"
     >
       <div
-        class="prc-src-BaseStyles-dl-St"
+        class="prc-src-BaseStyles-aopSS"
         data-portal-root="true"
       >
         <div
-          class="h-screen prc-Stack-Stack-WJVsK"
+          class="h-screen prc-Stack-Stack-UQ9k6"
           data-align="center"
           data-direction="vertical"
           data-justify="center"

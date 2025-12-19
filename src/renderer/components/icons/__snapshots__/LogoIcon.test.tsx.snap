@@ -11,7 +11,7 @@ exports[`renderer/components/icons/LogoIcon.tsx renders correctly (dark) 1`] = `
         data-light-theme="light"
       >
         <div
-          class="prc-src-BaseStyles-dl-St"
+          class="prc-src-BaseStyles-aopSS"
           data-portal-root="true"
         >
           <svg
@@ -69,7 +69,7 @@ exports[`renderer/components/icons/LogoIcon.tsx renders correctly (dark) 1`] = `
       data-light-theme="light"
     >
       <div
-        class="prc-src-BaseStyles-dl-St"
+        class="prc-src-BaseStyles-aopSS"
         data-portal-root="true"
       >
         <svg
@@ -184,7 +184,7 @@ exports[`renderer/components/icons/LogoIcon.tsx renders correctly (light) 1`] = 
         data-light-theme="light"
       >
         <div
-          class="prc-src-BaseStyles-dl-St"
+          class="prc-src-BaseStyles-aopSS"
           data-portal-root="true"
         >
           <svg
@@ -242,7 +242,7 @@ exports[`renderer/components/icons/LogoIcon.tsx renders correctly (light) 1`] = 
       data-light-theme="light"
     >
       <div
-        class="prc-src-BaseStyles-dl-St"
+        class="prc-src-BaseStyles-aopSS"
         data-portal-root="true"
       >
         <svg
@@ -357,7 +357,7 @@ exports[`renderer/components/icons/LogoIcon.tsx should render large size 1`] = `
         data-light-theme="light"
       >
         <div
-          class="prc-src-BaseStyles-dl-St"
+          class="prc-src-BaseStyles-aopSS"
           data-portal-root="true"
         >
           <svg
@@ -415,7 +415,7 @@ exports[`renderer/components/icons/LogoIcon.tsx should render large size 1`] = `
       data-light-theme="light"
     >
       <div
-        class="prc-src-BaseStyles-dl-St"
+        class="prc-src-BaseStyles-aopSS"
         data-portal-root="true"
       >
         <svg
@@ -530,7 +530,7 @@ exports[`renderer/components/icons/LogoIcon.tsx should render medium size 1`] = 
         data-light-theme="light"
       >
         <div
-          class="prc-src-BaseStyles-dl-St"
+          class="prc-src-BaseStyles-aopSS"
           data-portal-root="true"
         >
           <svg
@@ -588,7 +588,7 @@ exports[`renderer/components/icons/LogoIcon.tsx should render medium size 1`] = 
       data-light-theme="light"
     >
       <div
-        class="prc-src-BaseStyles-dl-St"
+        class="prc-src-BaseStyles-aopSS"
         data-portal-root="true"
       >
         <svg
@@ -703,7 +703,7 @@ exports[`renderer/components/icons/LogoIcon.tsx should render small size 1`] = `
         data-light-theme="light"
       >
         <div
-          class="prc-src-BaseStyles-dl-St"
+          class="prc-src-BaseStyles-aopSS"
           data-portal-root="true"
         >
           <svg
@@ -761,7 +761,7 @@ exports[`renderer/components/icons/LogoIcon.tsx should render small size 1`] = `
       data-light-theme="light"
     >
       <div
-        class="prc-src-BaseStyles-dl-St"
+        class="prc-src-BaseStyles-aopSS"
         data-portal-root="true"
       >
         <svg

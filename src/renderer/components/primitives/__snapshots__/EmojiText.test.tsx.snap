@@ -11,7 +11,7 @@ exports[`renderer/components/primitives/EmojiText.tsx should render 1`] = `
         data-light-theme="light"
       >
         <div
-          class="prc-src-BaseStyles-dl-St"
+          class="prc-src-BaseStyles-aopSS"
           data-portal-root="true"
         >
           <div
@@ -35,7 +35,7 @@ exports[`renderer/components/primitives/EmojiText.tsx should render 1`] = `
       data-light-theme="light"
     >
       <div
-        class="prc-src-BaseStyles-dl-St"
+        class="prc-src-BaseStyles-aopSS"
         data-portal-root="true"
       >
         <div

@@ -11,7 +11,7 @@ exports[`renderer/components/fields/FieldLabel.tsx should render 1`] = `
         data-light-theme="light"
       >
         <div
-          class="prc-src-BaseStyles-dl-St"
+          class="prc-src-BaseStyles-aopSS"
           data-portal-root="true"
         >
           <label
@@ -31,7 +31,7 @@ exports[`renderer/components/fields/FieldLabel.tsx should render 1`] = `
       data-light-theme="light"
     >
       <div
-        class="prc-src-BaseStyles-dl-St"
+        class="prc-src-BaseStyles-aopSS"
         data-portal-root="true"
       >
         <label

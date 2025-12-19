@@ -11,20 +11,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
         data-light-theme="light"
       >
         <div
-          class="prc-src-BaseStyles-dl-St"
+          class="prc-src-BaseStyles-aopSS"
           data-portal-root="true"
         >
           <div
             class="flex gap-1"
           >
             <span
-              class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+              class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
               data-size="small"
               data-variant="secondary"
               title="Linked to issues #1, #2"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="none"
@@ -52,20 +52,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
                   />
                 </svg>
                 <span
-                  class="text-xxs px-1 prc-Text-Text-0ima0"
+                  class="text-xxs px-1 prc-Text-Text-9mHv3"
                 >
                   2
                 </span>
               </div>
             </span>
             <span
-              class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+              class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
               data-size="small"
               data-variant="secondary"
               title="octocat approved these changes"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="none"
@@ -90,20 +90,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
                   />
                 </svg>
                 <span
-                  class="text-xxs px-1 prc-Text-Text-0ima0"
+                  class="text-xxs px-1 prc-Text-Text-9mHv3"
                 >
                   1
                 </span>
               </div>
             </span>
             <span
-              class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+              class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
               data-size="small"
               data-variant="secondary"
               title="gitify-app requested changes"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="none"
@@ -128,20 +128,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
                   />
                 </svg>
                 <span
-                  class="text-xxs px-1 prc-Text-Text-0ima0"
+                  class="text-xxs px-1 prc-Text-Text-9mHv3"
                 >
                   1
                 </span>
               </div>
             </span>
             <span
-              class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+              class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
               data-size="small"
               data-variant="secondary"
               title="1 comment"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="none"
@@ -166,7 +166,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
                   />
                 </svg>
                 <span
-                  class="text-xxs px-1 prc-Text-Text-0ima0"
+                  class="text-xxs px-1 prc-Text-Text-9mHv3"
                 >
                   1
                 </span>
@@ -184,20 +184,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
       data-light-theme="light"
     >
       <div
-        class="prc-src-BaseStyles-dl-St"
+        class="prc-src-BaseStyles-aopSS"
         data-portal-root="true"
       >
         <div
           class="flex gap-1"
         >
           <span
-            class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+            class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
             data-size="small"
             data-variant="secondary"
             title="Linked to issues #1, #2"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="none"
@@ -225,20 +225,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
                 />
               </svg>
               <span
-                class="text-xxs px-1 prc-Text-Text-0ima0"
+                class="text-xxs px-1 prc-Text-Text-9mHv3"
               >
                 2
               </span>
             </div>
           </span>
           <span
-            class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+            class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
             data-size="small"
             data-variant="secondary"
             title="octocat approved these changes"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="none"
@@ -263,20 +263,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
                 />
               </svg>
               <span
-                class="text-xxs px-1 prc-Text-Text-0ima0"
+                class="text-xxs px-1 prc-Text-Text-9mHv3"
               >
                 1
               </span>
             </div>
           </span>
           <span
-            class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+            class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
             data-size="small"
             data-variant="secondary"
             title="gitify-app requested changes"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="none"
@@ -301,20 +301,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
                 />
               </svg>
               <span
-                class="text-xxs px-1 prc-Text-Text-0ima0"
+                class="text-xxs px-1 prc-Text-Text-9mHv3"
               >
                 1
               </span>
             </div>
           </span>
           <span
-            class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+            class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
             data-size="small"
             data-variant="secondary"
             title="1 comment"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="none"
@@ -339,7 +339,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
                 />
               </svg>
               <span
-                class="text-xxs px-1 prc-Text-Text-0ima0"
+                class="text-xxs px-1 prc-Text-Text-9mHv3"
               >
                 1
               </span>
@@ -414,20 +414,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
         data-light-theme="light"
       >
         <div
-          class="prc-src-BaseStyles-dl-St"
+          class="prc-src-BaseStyles-aopSS"
           data-portal-root="true"
         >
           <div
             class="flex gap-1"
           >
             <span
-              class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+              class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
               data-size="small"
               data-variant="secondary"
               title="Linked to issues #1, #2"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="none"
@@ -455,20 +455,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
                   />
                 </svg>
                 <span
-                  class="text-xxs px-1 prc-Text-Text-0ima0"
+                  class="text-xxs px-1 prc-Text-Text-9mHv3"
                 >
                   2
                 </span>
               </div>
             </span>
             <span
-              class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+              class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
               data-size="small"
               data-variant="secondary"
               title="octocat approved these changes"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="none"
@@ -493,20 +493,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
                   />
                 </svg>
                 <span
-                  class="text-xxs px-1 prc-Text-Text-0ima0"
+                  class="text-xxs px-1 prc-Text-Text-9mHv3"
                 >
                   1
                 </span>
               </div>
             </span>
             <span
-              class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+              class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
               data-size="small"
               data-variant="secondary"
               title="gitify-app requested changes"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="none"
@@ -531,20 +531,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
                   />
                 </svg>
                 <span
-                  class="text-xxs px-1 prc-Text-Text-0ima0"
+                  class="text-xxs px-1 prc-Text-Text-9mHv3"
                 >
                   1
                 </span>
               </div>
             </span>
             <span
-              class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+              class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
               data-size="small"
               data-variant="secondary"
               title="2 comments"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="none"
@@ -569,7 +569,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
                   />
                 </svg>
                 <span
-                  class="text-xxs px-1 prc-Text-Text-0ima0"
+                  class="text-xxs px-1 prc-Text-Text-9mHv3"
                 >
                   2
                 </span>
@@ -587,20 +587,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
       data-light-theme="light"
     >
       <div
-        class="prc-src-BaseStyles-dl-St"
+        class="prc-src-BaseStyles-aopSS"
         data-portal-root="true"
       >
         <div
           class="flex gap-1"
         >
           <span
-            class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+            class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
             data-size="small"
             data-variant="secondary"
             title="Linked to issues #1, #2"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="none"
@@ -628,20 +628,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
                 />
               </svg>
               <span
-                class="text-xxs px-1 prc-Text-Text-0ima0"
+                class="text-xxs px-1 prc-Text-Text-9mHv3"
               >
                 2
               </span>
             </div>
           </span>
           <span
-            class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+            class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
             data-size="small"
             data-variant="secondary"
             title="octocat approved these changes"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="none"
@@ -666,20 +666,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
                 />
               </svg>
               <span
-                class="text-xxs px-1 prc-Text-Text-0ima0"
+                class="text-xxs px-1 prc-Text-Text-9mHv3"
               >
                 1
               </span>
             </div>
           </span>
           <span
-            class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+            class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
             data-size="small"
             data-variant="secondary"
             title="gitify-app requested changes"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="none"
@@ -704,20 +704,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
                 />
               </svg>
               <span
-                class="text-xxs px-1 prc-Text-Text-0ima0"
+                class="text-xxs px-1 prc-Text-Text-9mHv3"
               >
                 1
               </span>
             </div>
           </span>
           <span
-            class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+            class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
             data-size="small"
             data-variant="secondary"
             title="2 comments"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="none"
@@ -742,7 +742,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
                 />
               </svg>
               <span
-                class="text-xxs px-1 prc-Text-Text-0ima0"
+                class="text-xxs px-1 prc-Text-Text-9mHv3"
               >
                 2
               </span>
@@ -817,20 +817,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
         data-light-theme="light"
       >
         <div
-          class="prc-src-BaseStyles-dl-St"
+          class="prc-src-BaseStyles-aopSS"
           data-portal-root="true"
         >
           <div
             class="flex gap-1"
           >
             <span
-              class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+              class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
               data-size="small"
               data-variant="secondary"
               title="Linked to issues #1, #2"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="none"
@@ -858,20 +858,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
                   />
                 </svg>
                 <span
-                  class="text-xxs px-1 prc-Text-Text-0ima0"
+                  class="text-xxs px-1 prc-Text-Text-9mHv3"
                 >
                   2
                 </span>
               </div>
             </span>
             <span
-              class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+              class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
               data-size="small"
               data-variant="secondary"
               title="octocat approved these changes"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="none"
@@ -896,20 +896,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
                   />
                 </svg>
                 <span
-                  class="text-xxs px-1 prc-Text-Text-0ima0"
+                  class="text-xxs px-1 prc-Text-Text-9mHv3"
                 >
                   1
                 </span>
               </div>
             </span>
             <span
-              class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+              class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
               data-size="small"
               data-variant="secondary"
               title="gitify-app requested changes"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="none"
@@ -934,7 +934,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
                   />
                 </svg>
                 <span
-                  class="text-xxs px-1 prc-Text-Text-0ima0"
+                  class="text-xxs px-1 prc-Text-Text-9mHv3"
                 >
                   1
                 </span>
@@ -952,20 +952,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
       data-light-theme="light"
     >
       <div
-        class="prc-src-BaseStyles-dl-St"
+        class="prc-src-BaseStyles-aopSS"
         data-portal-root="true"
       >
         <div
           class="flex gap-1"
         >
           <span
-            class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+            class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
             data-size="small"
             data-variant="secondary"
             title="Linked to issues #1, #2"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="none"
@@ -993,20 +993,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
                 />
               </svg>
               <span
-                class="text-xxs px-1 prc-Text-Text-0ima0"
+                class="text-xxs px-1 prc-Text-Text-9mHv3"
               >
                 2
               </span>
             </div>
           </span>
           <span
-            class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+            class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
             data-size="small"
             data-variant="secondary"
             title="octocat approved these changes"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="none"
@@ -1031,20 +1031,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
                 />
               </svg>
               <span
-                class="text-xxs px-1 prc-Text-Text-0ima0"
+                class="text-xxs px-1 prc-Text-Text-9mHv3"
               >
                 1
               </span>
             </div>
           </span>
           <span
-            class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+            class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
             data-size="small"
             data-variant="secondary"
             title="gitify-app requested changes"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="none"
@@ -1069,7 +1069,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
                 />
               </svg>
               <span
-                class="text-xxs px-1 prc-Text-Text-0ima0"
+                class="text-xxs px-1 prc-Text-Text-9mHv3"
               >
                 1
               </span>
@@ -1144,20 +1144,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx label pills should render l
         data-light-theme="light"
       >
         <div
-          class="prc-src-BaseStyles-dl-St"
+          class="prc-src-BaseStyles-aopSS"
           data-portal-root="true"
         >
           <div
             class="flex gap-1"
           >
             <span
-              class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+              class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
               data-size="small"
               data-variant="secondary"
               title="Linked to issues #1, #2"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="none"
@@ -1185,20 +1185,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx label pills should render l
                   />
                 </svg>
                 <span
-                  class="text-xxs px-1 prc-Text-Text-0ima0"
+                  class="text-xxs px-1 prc-Text-Text-9mHv3"
                 >
                   2
                 </span>
               </div>
             </span>
             <span
-              class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+              class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
               data-size="small"
               data-variant="secondary"
               title="octocat approved these changes"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="none"
@@ -1223,20 +1223,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx label pills should render l
                   />
                 </svg>
                 <span
-                  class="text-xxs px-1 prc-Text-Text-0ima0"
+                  class="text-xxs px-1 prc-Text-Text-9mHv3"
                 >
                   1
                 </span>
               </div>
             </span>
             <span
-              class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+              class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
               data-size="small"
               data-variant="secondary"
               title="gitify-app requested changes"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="none"
@@ -1261,20 +1261,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx label pills should render l
                   />
                 </svg>
                 <span
-                  class="text-xxs px-1 prc-Text-Text-0ima0"
+                  class="text-xxs px-1 prc-Text-Text-9mHv3"
                 >
                   1
                 </span>
               </div>
             </span>
             <span
-              class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+              class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
               data-size="small"
               data-variant="secondary"
               title="2 comments"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="none"
@@ -1299,21 +1299,21 @@ exports[`renderer/components/metrics/MetricGroup.tsx label pills should render l
                   />
                 </svg>
                 <span
-                  class="text-xxs px-1 prc-Text-Text-0ima0"
+                  class="text-xxs px-1 prc-Text-Text-9mHv3"
                 >
                   2
                 </span>
               </div>
             </span>
             <span
-              class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+              class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
               data-size="small"
               data-variant="secondary"
               title="🏷️ enhancement
 🏷️ good-first-issue"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="none"
@@ -1338,7 +1338,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx label pills should render l
                   />
                 </svg>
                 <span
-                  class="text-xxs px-1 prc-Text-Text-0ima0"
+                  class="text-xxs px-1 prc-Text-Text-9mHv3"
                 >
                   2
                 </span>
@@ -1356,20 +1356,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx label pills should render l
       data-light-theme="light"
     >
       <div
-        class="prc-src-BaseStyles-dl-St"
+        class="prc-src-BaseStyles-aopSS"
         data-portal-root="true"
       >
         <div
           class="flex gap-1"
         >
           <span
-            class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+            class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
             data-size="small"
             data-variant="secondary"
             title="Linked to issues #1, #2"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="none"
@@ -1397,20 +1397,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx label pills should render l
                 />
               </svg>
               <span
-                class="text-xxs px-1 prc-Text-Text-0ima0"
+                class="text-xxs px-1 prc-Text-Text-9mHv3"
               >
                 2
               </span>
             </div>
           </span>
           <span
-            class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+            class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
             data-size="small"
             data-variant="secondary"
             title="octocat approved these changes"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="none"
@@ -1435,20 +1435,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx label pills should render l
                 />
               </svg>
               <span
-                class="text-xxs px-1 prc-Text-Text-0ima0"
+                class="text-xxs px-1 prc-Text-Text-9mHv3"
               >
                 1
               </span>
             </div>
           </span>
           <span
-            class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+            class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
             data-size="small"
             data-variant="secondary"
             title="gitify-app requested changes"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="none"
@@ -1473,20 +1473,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx label pills should render l
                 />
               </svg>
               <span
-                class="text-xxs px-1 prc-Text-Text-0ima0"
+                class="text-xxs px-1 prc-Text-Text-9mHv3"
               >
                 1
               </span>
             </div>
           </span>
           <span
-            class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+            class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
             data-size="small"
             data-variant="secondary"
             title="2 comments"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="none"
@@ -1511,21 +1511,21 @@ exports[`renderer/components/metrics/MetricGroup.tsx label pills should render l
                 />
               </svg>
               <span
-                class="text-xxs px-1 prc-Text-Text-0ima0"
+                class="text-xxs px-1 prc-Text-Text-9mHv3"
               >
                 2
               </span>
             </div>
           </span>
           <span
-            class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+            class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
             data-size="small"
             data-variant="secondary"
             title="🏷️ enhancement
 🏷️ good-first-issue"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="none"
@@ -1550,7 +1550,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx label pills should render l
                 />
               </svg>
               <span
-                class="text-xxs px-1 prc-Text-Text-0ima0"
+                class="text-xxs px-1 prc-Text-Text-9mHv3"
               >
                 2
               </span>
@@ -1625,20 +1625,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx linked issue pills should r
         data-light-theme="light"
       >
         <div
-          class="prc-src-BaseStyles-dl-St"
+          class="prc-src-BaseStyles-aopSS"
           data-portal-root="true"
         >
           <div
             class="flex gap-1"
           >
             <span
-              class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+              class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
               data-size="small"
               data-variant="secondary"
               title="Linked to issues #1, #2"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="none"
@@ -1666,20 +1666,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx linked issue pills should r
                   />
                 </svg>
                 <span
-                  class="text-xxs px-1 prc-Text-Text-0ima0"
+                  class="text-xxs px-1 prc-Text-Text-9mHv3"
                 >
                   2
                 </span>
               </div>
             </span>
             <span
-              class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+              class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
               data-size="small"
               data-variant="secondary"
               title="octocat approved these changes"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="none"
@@ -1704,20 +1704,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx linked issue pills should r
                   />
                 </svg>
                 <span
-                  class="text-xxs px-1 prc-Text-Text-0ima0"
+                  class="text-xxs px-1 prc-Text-Text-9mHv3"
                 >
                   1
                 </span>
               </div>
             </span>
             <span
-              class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+              class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
               data-size="small"
               data-variant="secondary"
               title="gitify-app requested changes"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="none"
@@ -1742,7 +1742,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx linked issue pills should r
                   />
                 </svg>
                 <span
-                  class="text-xxs px-1 prc-Text-Text-0ima0"
+                  class="text-xxs px-1 prc-Text-Text-9mHv3"
                 >
                   1
                 </span>
@@ -1760,20 +1760,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx linked issue pills should r
       data-light-theme="light"
     >
       <div
-        class="prc-src-BaseStyles-dl-St"
+        class="prc-src-BaseStyles-aopSS"
         data-portal-root="true"
       >
         <div
           class="flex gap-1"
         >
           <span
-            class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+            class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
             data-size="small"
             data-variant="secondary"
             title="Linked to issues #1, #2"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="none"
@@ -1801,20 +1801,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx linked issue pills should r
                 />
               </svg>
               <span
-                class="text-xxs px-1 prc-Text-Text-0ima0"
+                class="text-xxs px-1 prc-Text-Text-9mHv3"
               >
                 2
               </span>
             </div>
           </span>
           <span
-            class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+            class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
             data-size="small"
             data-variant="secondary"
             title="octocat approved these changes"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="none"
@@ -1839,20 +1839,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx linked issue pills should r
                 />
               </svg>
               <span
-                class="text-xxs px-1 prc-Text-Text-0ima0"
+                class="text-xxs px-1 prc-Text-Text-9mHv3"
               >
                 1
               </span>
             </div>
           </span>
           <span
-            class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+            class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
             data-size="small"
             data-variant="secondary"
             title="gitify-app requested changes"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="none"
@@ -1877,7 +1877,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx linked issue pills should r
                 />
               </svg>
               <span
-                class="text-xxs px-1 prc-Text-Text-0ima0"
+                class="text-xxs px-1 prc-Text-Text-9mHv3"
               >
                 1
               </span>
@@ -1952,20 +1952,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx linked issue pills should r
         data-light-theme="light"
       >
         <div
-          class="prc-src-BaseStyles-dl-St"
+          class="prc-src-BaseStyles-aopSS"
           data-portal-root="true"
         >
           <div
             class="flex gap-1"
           >
             <span
-              class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+              class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
               data-size="small"
               data-variant="secondary"
               title="Linked to issue #1"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="none"
@@ -1993,20 +1993,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx linked issue pills should r
                   />
                 </svg>
                 <span
-                  class="text-xxs px-1 prc-Text-Text-0ima0"
+                  class="text-xxs px-1 prc-Text-Text-9mHv3"
                 >
                   1
                 </span>
               </div>
             </span>
             <span
-              class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+              class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
               data-size="small"
               data-variant="secondary"
               title="octocat approved these changes"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="none"
@@ -2031,20 +2031,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx linked issue pills should r
                   />
                 </svg>
                 <span
-                  class="text-xxs px-1 prc-Text-Text-0ima0"
+                  class="text-xxs px-1 prc-Text-Text-9mHv3"
                 >
                   1
                 </span>
               </div>
             </span>
             <span
-              class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+              class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
               data-size="small"
               data-variant="secondary"
               title="gitify-app requested changes"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="none"
@@ -2069,7 +2069,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx linked issue pills should r
                   />
                 </svg>
                 <span
-                  class="text-xxs px-1 prc-Text-Text-0ima0"
+                  class="text-xxs px-1 prc-Text-Text-9mHv3"
                 >
                   1
                 </span>
@@ -2087,20 +2087,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx linked issue pills should r
       data-light-theme="light"
     >
       <div
-        class="prc-src-BaseStyles-dl-St"
+        class="prc-src-BaseStyles-aopSS"
         data-portal-root="true"
       >
         <div
           class="flex gap-1"
         >
           <span
-            class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+            class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
             data-size="small"
             data-variant="secondary"
             title="Linked to issue #1"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="none"
@@ -2128,20 +2128,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx linked issue pills should r
                 />
               </svg>
               <span
-                class="text-xxs px-1 prc-Text-Text-0ima0"
+                class="text-xxs px-1 prc-Text-Text-9mHv3"
               >
                 1
               </span>
             </div>
           </span>
           <span
-            class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+            class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
             data-size="small"
             data-variant="secondary"
             title="octocat approved these changes"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="none"
@@ -2166,20 +2166,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx linked issue pills should r
                 />
               </svg>
               <span
-                class="text-xxs px-1 prc-Text-Text-0ima0"
+                class="text-xxs px-1 prc-Text-Text-9mHv3"
               >
                 1
               </span>
             </div>
           </span>
           <span
-            class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+            class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
             data-size="small"
             data-variant="secondary"
             title="gitify-app requested changes"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="none"
@@ -2204,7 +2204,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx linked issue pills should r
                 />
               </svg>
               <span
-                class="text-xxs px-1 prc-Text-Text-0ima0"
+                class="text-xxs px-1 prc-Text-Text-9mHv3"
               >
                 1
               </span>
@@ -2279,20 +2279,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
         data-light-theme="light"
       >
         <div
-          class="prc-src-BaseStyles-dl-St"
+          class="prc-src-BaseStyles-aopSS"
           data-portal-root="true"
         >
           <div
             class="flex gap-1"
           >
             <span
-              class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+              class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
               data-size="small"
               data-variant="secondary"
               title="Linked to issues #1, #2"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="none"
@@ -2320,20 +2320,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
                   />
                 </svg>
                 <span
-                  class="text-xxs px-1 prc-Text-Text-0ima0"
+                  class="text-xxs px-1 prc-Text-Text-9mHv3"
                 >
                   2
                 </span>
               </div>
             </span>
             <span
-              class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+              class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
               data-size="small"
               data-variant="secondary"
               title="octocat approved these changes"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="none"
@@ -2358,20 +2358,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
                   />
                 </svg>
                 <span
-                  class="text-xxs px-1 prc-Text-Text-0ima0"
+                  class="text-xxs px-1 prc-Text-Text-9mHv3"
                 >
                   1
                 </span>
               </div>
             </span>
             <span
-              class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+              class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
               data-size="small"
               data-variant="secondary"
               title="gitify-app requested changes"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="none"
@@ -2396,20 +2396,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
                   />
                 </svg>
                 <span
-                  class="text-xxs px-1 prc-Text-Text-0ima0"
+                  class="text-xxs px-1 prc-Text-Text-9mHv3"
                 >
                   1
                 </span>
               </div>
             </span>
             <span
-              class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+              class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
               data-size="small"
               data-variant="secondary"
               title="2 comments"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="none"
@@ -2434,21 +2434,21 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
                   />
                 </svg>
                 <span
-                  class="text-xxs px-1 prc-Text-Text-0ima0"
+                  class="text-xxs px-1 prc-Text-Text-9mHv3"
                 >
                   2
                 </span>
               </div>
             </span>
             <span
-              class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+              class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
               data-size="small"
               data-variant="secondary"
               title="🏷️ enhancement
 🏷️ good-first-issue"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="none"
@@ -2473,20 +2473,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
                   />
                 </svg>
                 <span
-                  class="text-xxs px-1 prc-Text-Text-0ima0"
+                  class="text-xxs px-1 prc-Text-Text-9mHv3"
                 >
                   2
                 </span>
               </div>
             </span>
             <span
-              class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+              class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
               data-size="small"
               data-variant="secondary"
               title="Milestone 1"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="none"
@@ -2524,20 +2524,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
       data-light-theme="light"
     >
       <div
-        class="prc-src-BaseStyles-dl-St"
+        class="prc-src-BaseStyles-aopSS"
         data-portal-root="true"
       >
         <div
           class="flex gap-1"
         >
           <span
-            class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+            class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
             data-size="small"
             data-variant="secondary"
             title="Linked to issues #1, #2"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="none"
@@ -2565,20 +2565,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
                 />
               </svg>
               <span
-                class="text-xxs px-1 prc-Text-Text-0ima0"
+                class="text-xxs px-1 prc-Text-Text-9mHv3"
               >
                 2
               </span>
             </div>
           </span>
           <span
-            class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+            class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
             data-size="small"
             data-variant="secondary"
             title="octocat approved these changes"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="none"
@@ -2603,20 +2603,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
                 />
               </svg>
               <span
-                class="text-xxs px-1 prc-Text-Text-0ima0"
+                class="text-xxs px-1 prc-Text-Text-9mHv3"
               >
                 1
               </span>
             </div>
           </span>
           <span
-            class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+            class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
             data-size="small"
             data-variant="secondary"
             title="gitify-app requested changes"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="none"
@@ -2641,20 +2641,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
                 />
               </svg>
               <span
-                class="text-xxs px-1 prc-Text-Text-0ima0"
+                class="text-xxs px-1 prc-Text-Text-9mHv3"
               >
                 1
               </span>
             </div>
           </span>
           <span
-            class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+            class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
             data-size="small"
             data-variant="secondary"
             title="2 comments"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="none"
@@ -2679,21 +2679,21 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
                 />
               </svg>
               <span
-                class="text-xxs px-1 prc-Text-Text-0ima0"
+                class="text-xxs px-1 prc-Text-Text-9mHv3"
               >
                 2
               </span>
             </div>
           </span>
           <span
-            class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+            class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
             data-size="small"
             data-variant="secondary"
             title="🏷️ enhancement
 🏷️ good-first-issue"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="none"
@@ -2718,20 +2718,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
                 />
               </svg>
               <span
-                class="text-xxs px-1 prc-Text-Text-0ima0"
+                class="text-xxs px-1 prc-Text-Text-9mHv3"
               >
                 2
               </span>
             </div>
           </span>
           <span
-            class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+            class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
             data-size="small"
             data-variant="secondary"
             title="Milestone 1"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="none"
@@ -2826,20 +2826,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
         data-light-theme="light"
       >
         <div
-          class="prc-src-BaseStyles-dl-St"
+          class="prc-src-BaseStyles-aopSS"
           data-portal-root="true"
         >
           <div
             class="flex gap-1"
           >
             <span
-              class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+              class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
               data-size="small"
               data-variant="secondary"
               title="Linked to issues #1, #2"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="none"
@@ -2867,20 +2867,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
                   />
                 </svg>
                 <span
-                  class="text-xxs px-1 prc-Text-Text-0ima0"
+                  class="text-xxs px-1 prc-Text-Text-9mHv3"
                 >
                   2
                 </span>
               </div>
             </span>
             <span
-              class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+              class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
               data-size="small"
               data-variant="secondary"
               title="octocat approved these changes"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="none"
@@ -2905,20 +2905,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
                   />
                 </svg>
                 <span
-                  class="text-xxs px-1 prc-Text-Text-0ima0"
+                  class="text-xxs px-1 prc-Text-Text-9mHv3"
                 >
                   1
                 </span>
               </div>
             </span>
             <span
-              class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+              class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
               data-size="small"
               data-variant="secondary"
               title="gitify-app requested changes"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="none"
@@ -2943,20 +2943,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
                   />
                 </svg>
                 <span
-                  class="text-xxs px-1 prc-Text-Text-0ima0"
+                  class="text-xxs px-1 prc-Text-Text-9mHv3"
                 >
                   1
                 </span>
               </div>
             </span>
             <span
-              class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+              class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
               data-size="small"
               data-variant="secondary"
               title="2 comments"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="none"
@@ -2981,21 +2981,21 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
                   />
                 </svg>
                 <span
-                  class="text-xxs px-1 prc-Text-Text-0ima0"
+                  class="text-xxs px-1 prc-Text-Text-9mHv3"
                 >
                   2
                 </span>
               </div>
             </span>
             <span
-              class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+              class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
               data-size="small"
               data-variant="secondary"
               title="🏷️ enhancement
 🏷️ good-first-issue"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="none"
@@ -3020,20 +3020,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
                   />
                 </svg>
                 <span
-                  class="text-xxs px-1 prc-Text-Text-0ima0"
+                  class="text-xxs px-1 prc-Text-Text-9mHv3"
                 >
                   2
                 </span>
               </div>
             </span>
             <span
-              class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+              class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
               data-size="small"
               data-variant="secondary"
               title="Milestone 1"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="none"
@@ -3071,20 +3071,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
       data-light-theme="light"
     >
       <div
-        class="prc-src-BaseStyles-dl-St"
+        class="prc-src-BaseStyles-aopSS"
         data-portal-root="true"
       >
         <div
           class="flex gap-1"
         >
           <span
-            class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+            class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
             data-size="small"
             data-variant="secondary"
             title="Linked to issues #1, #2"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="none"
@@ -3112,20 +3112,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
                 />
               </svg>
               <span
-                class="text-xxs px-1 prc-Text-Text-0ima0"
+                class="text-xxs px-1 prc-Text-Text-9mHv3"
               >
                 2
               </span>
             </div>
           </span>
           <span
-            class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+            class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
             data-size="small"
             data-variant="secondary"
             title="octocat approved these changes"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="none"
@@ -3150,20 +3150,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
                 />
               </svg>
               <span
-                class="text-xxs px-1 prc-Text-Text-0ima0"
+                class="text-xxs px-1 prc-Text-Text-9mHv3"
               >
                 1
               </span>
             </div>
           </span>
           <span
-            class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+            class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
             data-size="small"
             data-variant="secondary"
             title="gitify-app requested changes"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="none"
@@ -3188,20 +3188,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
                 />
               </svg>
               <span
-                class="text-xxs px-1 prc-Text-Text-0ima0"
+                class="text-xxs px-1 prc-Text-Text-9mHv3"
               >
                 1
               </span>
             </div>
           </span>
           <span
-            class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+            class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
             data-size="small"
             data-variant="secondary"
             title="2 comments"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="none"
@@ -3226,21 +3226,21 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
                 />
               </svg>
               <span
-                class="text-xxs px-1 prc-Text-Text-0ima0"
+                class="text-xxs px-1 prc-Text-Text-9mHv3"
               >
                 2
               </span>
             </div>
           </span>
           <span
-            class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+            class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
             data-size="small"
             data-variant="secondary"
             title="🏷️ enhancement
 🏷️ good-first-issue"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="none"
@@ -3265,20 +3265,20 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
                 />
               </svg>
               <span
-                class="text-xxs px-1 prc-Text-Text-0ima0"
+                class="text-xxs px-1 prc-Text-Text-9mHv3"
               >
                 2
               </span>
             </div>
           </span>
           <span
-            class="hover:bg-gitify-notification-pill-hover prc-Label-Label--LG6X"
+            class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
             data-size="small"
             data-variant="secondary"
             title="Milestone 1"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="none"
@@ -3373,7 +3373,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx showPills disabled should n
         data-light-theme="light"
       >
         <div
-          class="prc-src-BaseStyles-dl-St"
+          class="prc-src-BaseStyles-aopSS"
           data-portal-root="true"
         />
       </div>
@@ -3386,7 +3386,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx showPills disabled should n
       data-light-theme="light"
     >
       <div
-        class="prc-src-BaseStyles-dl-St"
+        class="prc-src-BaseStyles-aopSS"
         data-portal-root="true"
       />
     </div>

@@ -11,7 +11,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
         data-light-theme="light"
       >
         <div
-          class="prc-src-BaseStyles-dl-St"
+          class="prc-src-BaseStyles-aopSS"
           data-portal-root="true"
         >
           <div
@@ -25,7 +25,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
               type="button"
             />
             <div
-              class="fixed w-sidebar h-full bg-gitify-sidebar [&_svg]:text-white prc-Stack-Stack-WJVsK"
+              class="fixed w-sidebar h-full bg-gitify-sidebar [&_svg]:text-white prc-Stack-Stack-UQ9k6"
               data-align="stretch"
               data-direction="vertical"
               data-justify="space-between"
@@ -33,7 +33,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
               data-wrap="nowrap"
             >
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="vertical"
                 data-gap="condensed"
@@ -44,7 +44,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
                 <button
                   aria-describedby="_r_2_-loading-announcement _r_1_"
                   aria-label="Gitify"
-                  class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
+                  class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                   data-component="IconButton"
                   data-loading="false"
                   data-no-visuals="true"
@@ -100,7 +100,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
                 </button>
                 <span
                   aria-hidden="true"
-                  class="prc-TooltipV2-Tooltip-cYMVY"
+                  class="prc-TooltipV2-Tooltip-tLeuB"
                   data-direction="e"
                   id="_r_1_"
                   popover="auto"
@@ -111,7 +111,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
                 <button
                   aria-describedby="_r_4_-loading-announcement _r_3_"
                   aria-label="Notifications"
-                  class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
+                  class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                   data-component="IconButton"
                   data-loading="false"
                   data-no-visuals="true"
@@ -139,7 +139,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
                 </button>
                 <span
                   aria-hidden="true"
-                  class="prc-TooltipV2-Tooltip-cYMVY"
+                  class="prc-TooltipV2-Tooltip-tLeuB"
                   data-direction="e"
                   id="_r_3_"
                   popover="auto"
@@ -150,7 +150,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
                 <button
                   aria-describedby="_r_6_-loading-announcement _r_5_"
                   aria-label="Filters"
-                  class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
+                  class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                   data-component="IconButton"
                   data-loading="false"
                   data-no-visuals="true"
@@ -178,7 +178,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
                 </button>
                 <span
                   aria-hidden="true"
-                  class="prc-TooltipV2-Tooltip-cYMVY"
+                  class="prc-TooltipV2-Tooltip-tLeuB"
                   data-direction="e"
                   id="_r_5_"
                   popover="auto"
@@ -189,7 +189,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
                 <button
                   aria-describedby="_r_8_-loading-announcement"
                   aria-labelledby="_r_7_"
-                  class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
+                  class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                   data-component="IconButton"
                   data-loading="false"
                   data-no-visuals="true"
@@ -220,7 +220,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
                 </button>
                 <span
                   aria-hidden="true"
-                  class="prc-TooltipV2-Tooltip-cYMVY"
+                  class="prc-TooltipV2-Tooltip-tLeuB"
                   data-direction="e"
                   id="_r_7_"
                   popover="auto"
@@ -230,7 +230,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
                 <button
                   aria-describedby="_r_a_-loading-announcement"
                   aria-labelledby="_r_9_"
-                  class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
+                  class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                   data-component="IconButton"
                   data-loading="false"
                   data-no-visuals="true"
@@ -258,7 +258,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
                 </button>
                 <span
                   aria-hidden="true"
-                  class="prc-TooltipV2-Tooltip-cYMVY"
+                  class="prc-TooltipV2-Tooltip-tLeuB"
                   data-direction="e"
                   id="_r_9_"
                   popover="auto"
@@ -267,7 +267,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
                 </span>
               </div>
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="vertical"
                 data-gap="condensed"
@@ -281,7 +281,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
                   <button
                     aria-describedby="_r_c_-loading-announcement _r_b_"
                     aria-label="Refresh"
-                    class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
+                    class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                     data-component="IconButton"
                     data-loading="false"
                     data-no-visuals="true"
@@ -310,7 +310,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
                 </div>
                 <span
                   aria-hidden="true"
-                  class="prc-TooltipV2-Tooltip-cYMVY"
+                  class="prc-TooltipV2-Tooltip-tLeuB"
                   data-direction="e"
                   id="_r_b_"
                   popover="auto"
@@ -321,7 +321,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
                 <button
                   aria-describedby="_r_e_-loading-announcement"
                   aria-labelledby="_r_d_"
-                  class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
+                  class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                   data-component="IconButton"
                   data-loading="false"
                   data-no-visuals="true"
@@ -349,7 +349,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
                 </button>
                 <span
                   aria-hidden="true"
-                  class="prc-TooltipV2-Tooltip-cYMVY"
+                  class="prc-TooltipV2-Tooltip-tLeuB"
                   data-direction="e"
                   id="_r_d_"
                   popover="auto"
@@ -375,7 +375,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
       data-light-theme="light"
     >
       <div
-        class="prc-src-BaseStyles-dl-St"
+        class="prc-src-BaseStyles-aopSS"
         data-portal-root="true"
       >
         <div
@@ -389,7 +389,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
             type="button"
           />
           <div
-            class="fixed w-sidebar h-full bg-gitify-sidebar [&_svg]:text-white prc-Stack-Stack-WJVsK"
+            class="fixed w-sidebar h-full bg-gitify-sidebar [&_svg]:text-white prc-Stack-Stack-UQ9k6"
             data-align="stretch"
             data-direction="vertical"
             data-justify="space-between"
@@ -397,7 +397,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
             data-wrap="nowrap"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="vertical"
               data-gap="condensed"
@@ -408,7 +408,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
               <button
                 aria-describedby="_r_2_-loading-announcement _r_1_"
                 aria-label="Gitify"
-                class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
+                class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
                 data-loading="false"
                 data-no-visuals="true"
@@ -464,7 +464,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
               </button>
               <span
                 aria-hidden="true"
-                class="prc-TooltipV2-Tooltip-cYMVY"
+                class="prc-TooltipV2-Tooltip-tLeuB"
                 data-direction="e"
                 id="_r_1_"
                 popover="auto"
@@ -475,7 +475,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
               <button
                 aria-describedby="_r_4_-loading-announcement _r_3_"
                 aria-label="Notifications"
-                class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
+                class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
                 data-loading="false"
                 data-no-visuals="true"
@@ -503,7 +503,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
               </button>
               <span
                 aria-hidden="true"
-                class="prc-TooltipV2-Tooltip-cYMVY"
+                class="prc-TooltipV2-Tooltip-tLeuB"
                 data-direction="e"
                 id="_r_3_"
                 popover="auto"
@@ -514,7 +514,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
               <button
                 aria-describedby="_r_6_-loading-announcement _r_5_"
                 aria-label="Filters"
-                class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
+                class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
                 data-loading="false"
                 data-no-visuals="true"
@@ -542,7 +542,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
               </button>
               <span
                 aria-hidden="true"
-                class="prc-TooltipV2-Tooltip-cYMVY"
+                class="prc-TooltipV2-Tooltip-tLeuB"
                 data-direction="e"
                 id="_r_5_"
                 popover="auto"
@@ -553,7 +553,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
               <button
                 aria-describedby="_r_8_-loading-announcement"
                 aria-labelledby="_r_7_"
-                class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
+                class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
                 data-loading="false"
                 data-no-visuals="true"
@@ -584,7 +584,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
               </button>
               <span
                 aria-hidden="true"
-                class="prc-TooltipV2-Tooltip-cYMVY"
+                class="prc-TooltipV2-Tooltip-tLeuB"
                 data-direction="e"
                 id="_r_7_"
                 popover="auto"
@@ -594,7 +594,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
               <button
                 aria-describedby="_r_a_-loading-announcement"
                 aria-labelledby="_r_9_"
-                class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
+                class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
                 data-loading="false"
                 data-no-visuals="true"
@@ -622,7 +622,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
               </button>
               <span
                 aria-hidden="true"
-                class="prc-TooltipV2-Tooltip-cYMVY"
+                class="prc-TooltipV2-Tooltip-tLeuB"
                 data-direction="e"
                 id="_r_9_"
                 popover="auto"
@@ -631,7 +631,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
               </span>
             </div>
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="vertical"
               data-gap="condensed"
@@ -645,7 +645,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
                 <button
                   aria-describedby="_r_c_-loading-announcement _r_b_"
                   aria-label="Refresh"
-                  class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
+                  class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                   data-component="IconButton"
                   data-loading="false"
                   data-no-visuals="true"
@@ -674,7 +674,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
               </div>
               <span
                 aria-hidden="true"
-                class="prc-TooltipV2-Tooltip-cYMVY"
+                class="prc-TooltipV2-Tooltip-tLeuB"
                 data-direction="e"
                 id="_r_b_"
                 popover="auto"
@@ -685,7 +685,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
               <button
                 aria-describedby="_r_e_-loading-announcement"
                 aria-labelledby="_r_d_"
-                class="prc-Button-ButtonBase-c50BI prc-Button-IconButton-szpyj"
+                class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
                 data-loading="false"
                 data-no-visuals="true"
@@ -713,7 +713,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
               </button>
               <span
                 aria-hidden="true"
-                class="prc-TooltipV2-Tooltip-cYMVY"
+                class="prc-TooltipV2-Tooltip-tLeuB"
                 data-direction="e"
                 id="_r_d_"
                 popover="auto"

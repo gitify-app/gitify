@@ -1,7 +1,10 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.3.8/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.3.10/schema.json",
   "files": {
-    "includes": ["**", "!**/generated/**/*"]
+    "includes": [
+      "**",
+      "!**/generated/**/*"
+    ]
   },
   "assist": {
     "actions": {
@@ -12,9 +15,15 @@
             "groups": [
               ":NODE:",
               ":BLANK_LINE:",
-              ["react*", "@testing-library/**"],
+              [
+                "react*",
+                "@testing-library/**"
+              ],
               ":BLANK_LINE:",
-              ["*electron*", "menubar"],
+              [
+                "*electron*",
+                "menubar"
+              ],
               ":BLANK_LINE:",
               "@primer/**",
               ":BLANK_LINE:",

@@ -11,11 +11,11 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
         data-light-theme="light"
       >
         <div
-          class="prc-src-BaseStyles-dl-St"
+          class="prc-src-BaseStyles-aopSS"
           data-portal-root="true"
         >
           <div
-            class="h-screen prc-Stack-Stack-WJVsK"
+            class="h-screen prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="vertical"
             data-justify="center"
@@ -23,7 +23,7 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
             data-wrap="nowrap"
           >
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="vertical"
               data-justify="start"
@@ -75,7 +75,7 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
                 </g>
               </svg>
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="vertical"
                 data-gap="none"
@@ -84,18 +84,18 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
                 data-wrap="nowrap"
               >
                 <h2
-                  class="prc-Heading-Heading-6CmGO"
+                  class="prc-Heading-Heading-MtWFE"
                 >
                   GitHub Notifications
                 </h2>
                 <h3
-                  class="prc-Heading-Heading-6CmGO"
+                  class="prc-Heading-Heading-MtWFE"
                 >
                   on your menu bar
                 </h3>
               </div>
               <div
-                class="prc-Stack-Stack-WJVsK"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="vertical"
                 data-gap="condensed"
@@ -104,13 +104,13 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
                 data-wrap="nowrap"
               >
                 <span
-                  class="prc-Text-Text-0ima0"
+                  class="prc-Text-Text-9mHv3"
                 >
                   Login with
                 </span>
                 <button
                   aria-describedby="_r_1_-loading-announcement"
-                  class="prc-Button-ButtonBase-c50BI"
+                  class="prc-Button-ButtonBase-9n-Xk"
                   data-loading="false"
                   data-size="medium"
                   data-testid="login-github"
@@ -118,12 +118,12 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
                   type="button"
                 >
                   <span
-                    class="prc-Button-ButtonContent-HKbr-"
+                    class="prc-Button-ButtonContent-Iohp5"
                     data-align="center"
                     data-component="buttonContent"
                   >
                     <span
-                      class="prc-Button-Visual-2epfX prc-Button-VisualWrap-Db-eB"
+                      class="prc-Button-Visual-YNt2F prc-Button-VisualWrap-E4cnq"
                       data-component="leadingVisual"
                     >
                       <svg
@@ -144,7 +144,7 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
                       </svg>
                     </span>
                     <span
-                      class="prc-Button-Label-pTQ3x"
+                      class="prc-Button-Label-FWkx3"
                       data-component="text"
                     >
                       GitHub
@@ -153,7 +153,7 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
                 </button>
                 <button
                   aria-describedby="_r_2_-loading-announcement"
-                  class="prc-Button-ButtonBase-c50BI"
+                  class="prc-Button-ButtonBase-9n-Xk"
                   data-loading="false"
                   data-size="medium"
                   data-testid="login-pat"
@@ -161,12 +161,12 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
                   type="button"
                 >
                   <span
-                    class="prc-Button-ButtonContent-HKbr-"
+                    class="prc-Button-ButtonContent-Iohp5"
                     data-align="center"
                     data-component="buttonContent"
                   >
                     <span
-                      class="prc-Button-Visual-2epfX prc-Button-VisualWrap-Db-eB"
+                      class="prc-Button-Visual-YNt2F prc-Button-VisualWrap-E4cnq"
                       data-component="leadingVisual"
                     >
                       <svg
@@ -187,7 +187,7 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
                       </svg>
                     </span>
                     <span
-                      class="prc-Button-Label-pTQ3x"
+                      class="prc-Button-Label-FWkx3"
                       data-component="text"
                     >
                       Personal Access Token
@@ -196,7 +196,7 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
                 </button>
                 <button
                   aria-describedby="_r_3_-loading-announcement"
-                  class="prc-Button-ButtonBase-c50BI"
+                  class="prc-Button-ButtonBase-9n-Xk"
                   data-loading="false"
                   data-size="medium"
                   data-testid="login-oauth-app"
@@ -204,12 +204,12 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
                   type="button"
                 >
                   <span
-                    class="prc-Button-ButtonContent-HKbr-"
+                    class="prc-Button-ButtonContent-Iohp5"
                     data-align="center"
                     data-component="buttonContent"
                   >
                     <span
-                      class="prc-Button-Visual-2epfX prc-Button-VisualWrap-Db-eB"
+                      class="prc-Button-Visual-YNt2F prc-Button-VisualWrap-E4cnq"
                       data-component="leadingVisual"
                     >
                       <svg
@@ -230,7 +230,7 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
                       </svg>
                     </span>
                     <span
-                      class="prc-Button-Label-pTQ3x"
+                      class="prc-Button-Label-FWkx3"
                       data-component="text"
                     >
                       OAuth App
@@ -251,11 +251,11 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
       data-light-theme="light"
     >
       <div
-        class="prc-src-BaseStyles-dl-St"
+        class="prc-src-BaseStyles-aopSS"
         data-portal-root="true"
       >
         <div
-          class="h-screen prc-Stack-Stack-WJVsK"
+          class="h-screen prc-Stack-Stack-UQ9k6"
           data-align="center"
           data-direction="vertical"
           data-justify="center"
@@ -263,7 +263,7 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
           data-wrap="nowrap"
         >
           <div
-            class="prc-Stack-Stack-WJVsK"
+            class="prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="vertical"
             data-justify="start"
@@ -315,7 +315,7 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
               </g>
             </svg>
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="vertical"
               data-gap="none"
@@ -324,18 +324,18 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
               data-wrap="nowrap"
             >
               <h2
-                class="prc-Heading-Heading-6CmGO"
+                class="prc-Heading-Heading-MtWFE"
               >
                 GitHub Notifications
               </h2>
               <h3
-                class="prc-Heading-Heading-6CmGO"
+                class="prc-Heading-Heading-MtWFE"
               >
                 on your menu bar
               </h3>
             </div>
             <div
-              class="prc-Stack-Stack-WJVsK"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="vertical"
               data-gap="condensed"
@@ -344,13 +344,13 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
               data-wrap="nowrap"
             >
               <span
-                class="prc-Text-Text-0ima0"
+                class="prc-Text-Text-9mHv3"
               >
                 Login with
               </span>
               <button
                 aria-describedby="_r_1_-loading-announcement"
-                class="prc-Button-ButtonBase-c50BI"
+                class="prc-Button-ButtonBase-9n-Xk"
                 data-loading="false"
                 data-size="medium"
                 data-testid="login-github"
@@ -358,12 +358,12 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
                 type="button"
               >
                 <span
-                  class="prc-Button-ButtonContent-HKbr-"
+                  class="prc-Button-ButtonContent-Iohp5"
                   data-align="center"
                   data-component="buttonContent"
                 >
                   <span
-                    class="prc-Button-Visual-2epfX prc-Button-VisualWrap-Db-eB"
+                    class="prc-Button-Visual-YNt2F prc-Button-VisualWrap-E4cnq"
                     data-component="leadingVisual"
                   >
                     <svg
@@ -384,7 +384,7 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
                     </svg>
                   </span>
                   <span
-                    class="prc-Button-Label-pTQ3x"
+                    class="prc-Button-Label-FWkx3"
                     data-component="text"
                   >
                     GitHub
@@ -393,7 +393,7 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
               </button>
               <button
                 aria-describedby="_r_2_-loading-announcement"
-                class="prc-Button-ButtonBase-c50BI"
+                class="prc-Button-ButtonBase-9n-Xk"
                 data-loading="false"
                 data-size="medium"
                 data-testid="login-pat"
@@ -401,12 +401,12 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
                 type="button"
               >
                 <span
-                  class="prc-Button-ButtonContent-HKbr-"
+                  class="prc-Button-ButtonContent-Iohp5"
                   data-align="center"
                   data-component="buttonContent"
                 >
                   <span
-                    class="prc-Button-Visual-2epfX prc-Button-VisualWrap-Db-eB"
+                    class="prc-Button-Visual-YNt2F prc-Button-VisualWrap-E4cnq"
                     data-component="leadingVisual"
                   >
                     <svg
@@ -427,7 +427,7 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
                     </svg>
                   </span>
                   <span
-                    class="prc-Button-Label-pTQ3x"
+                    class="prc-Button-Label-FWkx3"
                     data-component="text"
                   >
                     Personal Access Token
@@ -436,7 +436,7 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
               </button>
               <button
                 aria-describedby="_r_3_-loading-announcement"
-                class="prc-Button-ButtonBase-c50BI"
+                class="prc-Button-ButtonBase-9n-Xk"
                 data-loading="false"
                 data-size="medium"
                 data-testid="login-oauth-app"
@@ -444,12 +444,12 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
                 type="button"
               >
                 <span
-                  class="prc-Button-ButtonContent-HKbr-"
+                  class="prc-Button-ButtonContent-Iohp5"
                   data-align="center"
                   data-component="buttonContent"
                 >
                   <span
-                    class="prc-Button-Visual-2epfX prc-Button-VisualWrap-Db-eB"
+                    class="prc-Button-Visual-YNt2F prc-Button-VisualWrap-E4cnq"
                     data-component="leadingVisual"
                   >
                     <svg
@@ -470,7 +470,7 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
                     </svg>
                   </span>
                   <span
-                    class="prc-Button-Label-pTQ3x"
+                    class="prc-Button-Label-FWkx3"
                     data-component="text"
                   >
                     OAuth App

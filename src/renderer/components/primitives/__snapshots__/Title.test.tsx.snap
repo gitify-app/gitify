@@ -8,7 +8,7 @@ exports[`renderer/routes/components/primitives/Title.tsx should render the title
     data-light-theme="light"
   >
     <div
-      class="prc-src-BaseStyles-dl-St"
+      class="prc-src-BaseStyles-aopSS"
       data-portal-root="true"
     >
       <legend>
@@ -16,7 +16,7 @@ exports[`renderer/routes/components/primitives/Title.tsx should render the title
           class="mb-2"
         >
           <div
-            class="prc-Stack-Stack-WJVsK"
+            class="prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -42,7 +42,7 @@ exports[`renderer/routes/components/primitives/Title.tsx should render the title
               />
             </svg>
             <h4
-              class="prc-Heading-Heading-6CmGO"
+              class="prc-Heading-Heading-MtWFE"
             >
               Legend
             </h4>
@@ -62,7 +62,7 @@ exports[`renderer/routes/components/primitives/Title.tsx should render the title
     data-light-theme="light"
   >
     <div
-      class="prc-src-BaseStyles-dl-St"
+      class="prc-src-BaseStyles-aopSS"
       data-portal-root="true"
     >
       <legend>
@@ -70,7 +70,7 @@ exports[`renderer/routes/components/primitives/Title.tsx should render the title
           class="mb-2"
         >
           <div
-            class="prc-Stack-Stack-WJVsK"
+            class="prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -96,7 +96,7 @@ exports[`renderer/routes/components/primitives/Title.tsx should render the title
               />
             </svg>
             <h4
-              class="prc-Heading-Heading-6CmGO"
+              class="prc-Heading-Heading-MtWFE"
             >
               Legend
             </h4>
