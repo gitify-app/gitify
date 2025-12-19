@@ -124,15 +124,12 @@ export function getClosestDiscussionCommentOrReply(
     return null;
   }
 
-  // Unwrap fragment-masked comments and replies to concrete shapes
   const targetDate = notification.updated_at;
 
   const allCommentsAndReplies = comments.flatMap((comment) => [
     comment,
     ...comment.replies.nodes,
   ]);
-
-  console.log('ADAM COMMENTS ', JSON.stringify(allCommentsAndReplies, null, 2));
 
   // Consider only comments with a databaseId so we can anchor the URL
   const commentsWithIds = allCommentsAndReplies.filter(
