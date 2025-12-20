@@ -11,6 +11,7 @@ import {
 import { differenceInMilliseconds } from 'date-fns';
 
 import type { SettingsState } from '../../../types';
+import { IconColor } from '../../../types';
 import type {
   DiscussionStateType,
   GitifySubject,
@@ -24,7 +25,7 @@ import type {
   FetchDiscussionByNumberQuery,
 } from '../../api/graphql/generated/graphql';
 import { isStateFilteredOut } from '../filters/filter';
-import { DefaultHandler } from './default';
+import { DefaultHandler, defaultHandler } from './default';
 
 type DiscussionComment = NonNullable<
   NonNullable<
@@ -108,6 +109,17 @@ class DiscussionHandler extends DefaultHandler {
         return DiscussionClosedIcon;
       default:
         return CommentDiscussionIcon;
+    }
+  }
+
+  iconColor(subject: Subject): IconColor {
+    switch (subject.state) {
+      case 'ANSWERED':
+        return IconColor.GREEN;
+      case 'RESOLVED':
+        return IconColor.PURPLE;
+      default:
+        return defaultHandler.iconColor(subject);
     }
   }
 }

@@ -7,7 +7,7 @@ import {
 } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
 import { createPartialMockUser } from '../../../__mocks__/user-mocks';
-import type { Link } from '../../../types';
+import { IconColor, type Link } from '../../../types';
 import type { Notification } from '../../../typesGitHub';
 import { issueHandler } from './issue';
 
@@ -340,5 +340,43 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         }),
       ).displayName,
     ).toBe('IssueReopenedIcon');
+  });
+
+  it('iconColor', () => {
+    expect(
+      issueHandler.iconColor(
+        createMockSubject({ type: 'Issue', state: 'open' }),
+      ),
+    ).toBe(IconColor.GREEN);
+
+    expect(
+      issueHandler.iconColor(
+        createMockSubject({ type: 'Issue', state: 'reopened' }),
+      ),
+    ).toBe(IconColor.GREEN);
+
+    expect(
+      issueHandler.iconColor(
+        createMockSubject({ type: 'Issue', state: 'closed' }),
+      ),
+    ).toBe(IconColor.RED);
+
+    expect(
+      issueHandler.iconColor(
+        createMockSubject({ type: 'Issue', state: 'completed' }),
+      ),
+    ).toBe(IconColor.PURPLE);
+
+    expect(
+      issueHandler.iconColor(
+        createMockSubject({ type: 'Issue', state: 'draft' }),
+      ),
+    ).toBe(IconColor.GRAY);
+
+    expect(
+      issueHandler.iconColor(
+        createMockSubject({ type: 'Issue', state: 'not_planned' }),
+      ),
+    ).toBe(IconColor.GRAY);
   });
 });
