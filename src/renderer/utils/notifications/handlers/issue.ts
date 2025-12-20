@@ -10,6 +10,7 @@ import {
 } from '@primer/octicons-react';
 
 import type { SettingsState } from '../../../types';
+import { IconColor } from '../../../types';
 import type {
   GitifySubject,
   Notification,
@@ -18,7 +19,7 @@ import type {
 } from '../../../typesGitHub';
 import { getIssue, getIssueOrPullRequestComment } from '../../api/client';
 import { isStateFilteredOut } from '../filters/filter';
-import { DefaultHandler } from './default';
+import { DefaultHandler, defaultHandler } from './default';
 import { getSubjectUser } from './utils';
 
 class IssueHandler extends DefaultHandler {
@@ -74,6 +75,20 @@ class IssueHandler extends DefaultHandler {
         return IssueReopenedIcon;
       default:
         return IssueOpenedIcon;
+    }
+  }
+
+  iconColor(subject: Subject): IconColor {
+    switch (subject.state) {
+      case 'open':
+      case 'reopened':
+        return IconColor.GREEN;
+      case 'closed':
+        return IconColor.RED;
+      case 'completed':
+        return IconColor.PURPLE;
+      default:
+        return defaultHandler.iconColor(subject);
     }
   }
 }

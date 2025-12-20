@@ -32,28 +32,17 @@ describe('renderer/utils/notifications/handlers/default.ts', () => {
   });
 
   describe('iconColor', () => {
-    const cases: Array<[StateType | null, IconColor]> = [
-      ['open' as StateType, IconColor.GREEN],
-      ['reopened' as StateType, IconColor.GREEN],
-      ['ANSWERED' as StateType, IconColor.GREEN],
-      ['success' as StateType, IconColor.GREEN],
-      ['closed' as StateType, IconColor.RED],
-      ['failure' as StateType, IconColor.RED],
-      ['completed' as StateType, IconColor.PURPLE],
-      ['RESOLVED' as StateType, IconColor.PURPLE],
-      ['merged' as StateType, IconColor.PURPLE],
-      ['not_planned' as StateType, IconColor.GRAY],
-      ['draft' as StateType, IconColor.GRAY],
-      ['skipped' as StateType, IconColor.GRAY],
-      ['cancelled' as StateType, IconColor.GRAY],
-      ['unknown' as StateType, IconColor.GRAY],
-      [null, IconColor.GRAY],
-      [undefined, IconColor.GRAY],
-    ];
+    it('returns GRAY for any state (fallback behavior)', () => {
+      const states: Array<StateType | null | undefined> = [
+        'unknown' as StateType,
+        null,
+        undefined,
+      ];
 
-    it.each(cases)('returns correct color for state %s', (state, expected) => {
-      const subject = createMockSubject({ state });
-      expect(defaultHandler.iconColor(subject)).toBe(expected);
+      states.forEach((state) => {
+        const subject = createMockSubject({ state });
+        expect(defaultHandler.iconColor(subject)).toBe(IconColor.GRAY);
+      });
     });
   });
 

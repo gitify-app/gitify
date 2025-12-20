@@ -10,6 +10,7 @@ import {
 } from '@primer/octicons-react';
 
 import type { SettingsState } from '../../../types';
+import { IconColor } from '../../../types';
 import type {
   CheckSuiteAttributes,
   CheckSuiteStatus,
@@ -17,7 +18,7 @@ import type {
   Notification,
   Subject,
 } from '../../../typesGitHub';
-import { DefaultHandler } from './default';
+import { DefaultHandler, defaultHandler } from './default';
 
 class CheckSuiteHandler extends DefaultHandler {
   readonly type = 'CheckSuite';
@@ -50,6 +51,17 @@ class CheckSuiteHandler extends DefaultHandler {
         return CheckIcon;
       default:
         return RocketIcon;
+    }
+  }
+
+  iconColor(subject: Subject): IconColor {
+    switch (subject.state) {
+      case 'success':
+        return IconColor.GREEN;
+      case 'failure':
+        return IconColor.RED;
+      default:
+        return defaultHandler.iconColor(subject);
     }
   }
 }

@@ -7,7 +7,7 @@ import {
 } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
 import { createPartialMockUser } from '../../../__mocks__/user-mocks';
-import type { Link } from '../../../types';
+import { IconColor, type Link } from '../../../types';
 import type { Notification, PullRequest } from '../../../typesGitHub';
 import {
   getLatestReviewForReviewers,
@@ -470,6 +470,38 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         }),
       ).displayName,
     ).toBe('GitMergeIcon');
+  });
+
+  it('iconColor', () => {
+    expect(
+      pullRequestHandler.iconColor(
+        createMockSubject({ type: 'PullRequest', state: 'open' }),
+      ),
+    ).toBe(IconColor.GREEN);
+
+    expect(
+      pullRequestHandler.iconColor(
+        createMockSubject({ type: 'PullRequest', state: 'reopened' }),
+      ),
+    ).toBe(IconColor.GREEN);
+
+    expect(
+      pullRequestHandler.iconColor(
+        createMockSubject({ type: 'PullRequest', state: 'closed' }),
+      ),
+    ).toBe(IconColor.RED);
+
+    expect(
+      pullRequestHandler.iconColor(
+        createMockSubject({ type: 'PullRequest', state: 'merged' }),
+      ),
+    ).toBe(IconColor.PURPLE);
+
+    expect(
+      pullRequestHandler.iconColor(
+        createMockSubject({ type: 'PullRequest', state: 'draft' }),
+      ),
+    ).toBe(IconColor.GRAY);
   });
 
   describe('Pull Request Reviews - Latest Reviews By Reviewer', () => {

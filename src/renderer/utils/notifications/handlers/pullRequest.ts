@@ -9,6 +9,7 @@ import {
 } from '@primer/octicons-react';
 
 import type { Link, SettingsState } from '../../../types';
+import { IconColor } from '../../../types';
 import type {
   GitifyPullRequestReview,
   GitifySubject,
@@ -25,7 +26,7 @@ import {
   getPullRequestReviews,
 } from '../../api/client';
 import { isStateFilteredOut, isUserFilteredOut } from '../filters/filter';
-import { DefaultHandler } from './default';
+import { DefaultHandler, defaultHandler } from './default';
 import { getSubjectUser } from './utils';
 
 class PullRequestHandler extends DefaultHandler {
@@ -97,6 +98,20 @@ class PullRequestHandler extends DefaultHandler {
         return GitMergeIcon;
       default:
         return GitPullRequestIcon;
+    }
+  }
+
+  iconColor(subject: Subject): IconColor {
+    switch (subject.state) {
+      case 'open':
+      case 'reopened':
+        return IconColor.GREEN;
+      case 'closed':
+        return IconColor.RED;
+      case 'merged':
+        return IconColor.PURPLE;
+      default:
+        return defaultHandler.iconColor(subject);
     }
   }
 }

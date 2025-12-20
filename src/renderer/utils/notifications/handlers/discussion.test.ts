@@ -6,7 +6,7 @@ import {
   createPartialMockNotification,
 } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
-import type { Link } from '../../../types';
+import { IconColor, type Link } from '../../../types';
 import type { Owner, Repository } from '../../../typesGitHub';
 import {
   type AuthorFieldsFragment,
@@ -324,6 +324,38 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         createMockSubject({ type: 'Discussion', state: 'RESOLVED' }),
       ).displayName,
     ).toBe('DiscussionClosedIcon');
+  });
+
+  it('iconColor', () => {
+    expect(
+      discussionHandler.iconColor(
+        createMockSubject({ type: 'Discussion', state: 'ANSWERED' }),
+      ),
+    ).toBe(IconColor.GREEN);
+
+    expect(
+      discussionHandler.iconColor(
+        createMockSubject({ type: 'Discussion', state: 'RESOLVED' }),
+      ),
+    ).toBe(IconColor.PURPLE);
+
+    expect(
+      discussionHandler.iconColor(
+        createMockSubject({ type: 'Discussion', state: 'DUPLICATE' }),
+      ),
+    ).toBe(IconColor.GRAY);
+
+    expect(
+      discussionHandler.iconColor(
+        createMockSubject({ type: 'Discussion', state: 'OUTDATED' }),
+      ),
+    ).toBe(IconColor.GRAY);
+
+    expect(
+      discussionHandler.iconColor(
+        createMockSubject({ type: 'Discussion', state: 'OPEN' }),
+      ),
+    ).toBe(IconColor.GRAY);
   });
 });
 
