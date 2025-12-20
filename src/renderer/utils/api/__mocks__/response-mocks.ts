@@ -3,16 +3,8 @@ import {
   mockGitHubEnterpriseServerAccount,
 } from '../../../__mocks__/account-mocks';
 import type { Link } from '../../../types';
-import type {
-  Discussion,
-  DiscussionAuthor,
-  DiscussionComments,
-  DiscussionLabels,
-  GraphQLSearch,
-  Notification,
-  Repository,
-  User,
-} from '../../../typesGitHub';
+import type { Notification, Repository, User } from '../../../typesGitHub';
+import type { FetchDiscussionByNumberQuery } from '../graphql/generated/graphql';
 
 export const mockNotificationUser: User = {
   login: 'octocat',
@@ -376,70 +368,56 @@ export const mockEnterpriseNotifications: Notification[] = [
   },
 ];
 
-const mockDiscussionAuthor: DiscussionAuthor = {
-  login: 'comment-user',
-  url: 'https://github.com/comment-user' as Link,
-  avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4' as Link,
-  type: 'User',
-};
-
-const mockDiscussionReplier: DiscussionAuthor = {
-  login: 'reply-user',
-  url: 'https://github.com/reply-user' as Link,
-  avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4' as Link,
-  type: 'User',
-};
-
-export const mockDiscussionComments: DiscussionComments = {
-  nodes: [
-    {
-      databaseId: 2258799,
-      createdAt: '2017-02-20T17:51:57Z',
-      author: mockDiscussionAuthor,
-      replies: {
-        nodes: [
-          {
-            databaseId: 2300902,
-            createdAt: '2017-05-20T17:51:57Z',
-            author: mockDiscussionReplier,
-          },
-        ],
+export const mockDiscussionByNumberGraphQLResponse: FetchDiscussionByNumberQuery =
+  {
+    repository: {
+      discussion: {
+        __typename: 'Discussion',
+        number: 123,
+        title: '1.16.0',
+        isAnswered: false,
+        stateReason: null,
+        url: 'https://github.com/gitify-app/notifications-test/discussions/612' as Link,
+        author: {
+          login: 'comment-user',
+          url: 'https://github.com/comment-user' as Link,
+          avatar_url:
+            'https://avatars.githubusercontent.com/u/123456789?v=4' as Link,
+          type: 'User',
+        },
+        comments: {
+          totalCount: 2,
+          nodes: [
+            {
+              databaseId: 2258799,
+              createdAt: '2017-02-20T17:51:57Z',
+              author: {
+                login: 'comment-user',
+                url: 'https://github.com/comment-user' as Link,
+                avatar_url:
+                  'https://avatars.githubusercontent.com/u/123456789?v=4' as Link,
+                type: 'User',
+              },
+              replies: {
+                nodes: [
+                  {
+                    databaseId: 2300902,
+                    createdAt: '2017-05-20T17:51:57Z',
+                    author: {
+                      login: 'reply-user',
+                      url: 'https://github.com/reply-user' as Link,
+                      avatar_url:
+                        'https://avatars.githubusercontent.com/u/123456789?v=4' as Link,
+                      type: 'User',
+                    },
+                  },
+                ],
+              },
+            },
+          ],
+        },
       },
     },
-  ],
-  totalCount: 2,
-};
-
-export const mockDiscussionLabels: DiscussionLabels = {
-  nodes: [
-    {
-      name: 'enhancement',
-    },
-  ],
-};
-
-export const mockDiscussion: Discussion = {
-  number: 123,
-  title: '1.16.0',
-  isAnswered: false,
-  stateReason: 'OPEN',
-  url: 'https://github.com/gitify-app/notifications-test/discussions/612' as Link,
-  author: {
-    login: 'discussion-creator',
-    url: 'https://github.com/discussion-creator' as Link,
-    avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4' as Link,
-    type: 'User',
-  },
-  comments: mockDiscussionComments,
-  labels: mockDiscussionLabels,
-};
-
-export const mockSearchDiscussionsGraphQLResponse: GraphQLSearch<Discussion> = {
-  data: {
-    search: {
-      nodes: [mockDiscussion],
-    },
-  },
-};
+  };
 
 export const mockSingleNotification: Notification = mockGitHubNotifications[0];

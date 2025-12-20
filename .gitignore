@@ -5,24 +5,15 @@ build/
 # Dependency directories
 node_modules/
 
+# Generated GraphQL Files
+schema.graphql
+
 # Coverage directory used by tools like istanbul
 coverage
 *.lcov
 
-# Logs
-logs
-*.log
-npm-debug.log*
-
-# Environment configuration
+# Environment properties
 .env
-
-# Optional npm cache directory
-.npm
-
-# Temporary folders
-tmp/
-temp/
 
 # Mac Files
 .DS_Store

@@ -1,0 +1,54 @@
+query FetchDiscussionByNumber(
+  $owner: String!
+  $name: String!
+  $number: Int!
+  $lastComments: Int
+  $lastReplies: Int
+  $firstLabels: Int
+  $includeIsAnswered: Boolean!
+) {
+  repository(owner: $owner, name: $name) {
+    discussion(number: $number) {
+      __typename
+      number
+      title
+      stateReason
+      isAnswered @include(if: $includeIsAnswered)
+      url
+      author {
+        ...AuthorFields
+      }
+      comments(last: $lastComments) {
+        totalCount
+        nodes {
+          ...CommentFields
+          replies(last: $lastReplies) {
+            nodes {
+              ...CommentFields
+            }
+          }
+        }
+      }
+      labels(first: $firstLabels) {
+        nodes {
+          name
+        }
+      }
+    }
+  }
+}
+
+fragment AuthorFields on Actor {
+  login
+  url
+  avatar_url: avatarUrl
+  type: __typename
+}
+
+fragment CommentFields on DiscussionComment {
+  databaseId
+  createdAt
+  author {
+    ...AuthorFields
+  }
+}

@@ -176,13 +176,6 @@ export interface SubjectUser {
   type: UserType;
 }
 
-export interface DiscussionAuthor {
-  login: string;
-  url: Link;
-  avatar_url: Link;
-  type: UserType;
-}
-
 export interface Repository {
   id: number;
   node_id: string;
@@ -487,47 +480,6 @@ export interface Release {
   prerelease: boolean;
   created_at: string;
   published_at: string | null;
-}
-
-export interface GraphQLSearch<T> {
-  data: {
-    search: {
-      nodes: T[];
-    };
-  };
-}
-
-export interface Discussion {
-  number: number;
-  title: string;
-  stateReason: DiscussionStateType;
-  isAnswered: boolean | null;
-  url: Link;
-  author: DiscussionAuthor;
-  comments: DiscussionComments;
-  labels: DiscussionLabels | null;
-}
-
-export interface DiscussionLabels {
-  nodes: DiscussionLabel[];
-}
-
-export interface DiscussionLabel {
-  name: string;
-}
-
-export interface DiscussionComments {
-  nodes: DiscussionComment[];
-  totalCount: number;
-}
-
-export interface DiscussionComment {
-  databaseId: string | number;
-  createdAt: string;
-  author: DiscussionAuthor;
-  replies?: {
-    nodes: DiscussionComment[];
-  };
 }
 
 export interface CheckSuiteAttributes {

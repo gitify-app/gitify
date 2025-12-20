@@ -9,7 +9,8 @@
     "build:main": "webpack --config ./config/webpack.config.main.prod.ts",
     "build:preload": "webpack --config ./config/webpack.config.preload.prod.ts",
     "build:renderer": "webpack --config ./config/webpack.config.renderer.prod.ts",
-    "watch": "concurrently --names \"main,preload,renderer\" --prefix-colors \"blue,magenta,green\" \"pnpm watch:main\" \"pnpm watch:preload\" \"pnpm watch:renderer\"",
+    "watch": "concurrently --names \"main,preload,renderer,codegen\" --prefix-colors \"blue,magenta,green,cyan\" \"pnpm watch:main\" \"pnpm watch:preload\" \"pnpm watch:renderer\" \"pnpm watch:codegen\"",
+    "watch:codegen": "pnpm codegen --watch",
     "watch:main": "webpack --watch --config ./config/webpack.config.main.base.ts",
     "watch:preload": "webpack --watch --config ./config/webpack.config.preload.base.ts",
     "watch:renderer": "webpack --watch --config ./config/webpack.config.renderer.base.ts",
@@ -20,7 +21,8 @@
     "lint": "biome check --fix",
     "test": "jest",
     "start": "electron . --enable-logging",
-    "prepare": "husky"
+    "prepare": "husky",
+    "codegen": "graphql-codegen --config codegen.ts"
   },
   "engines": {
     "node": ">=24"
@@ -79,6 +81,9 @@
     "@biomejs/biome": "2.3.10",
     "@discordapp/twemoji": "16.0.1",
     "@electron/notarize": "3.1.1",
+    "@graphql-codegen/cli": "6.1.0",
+    "@graphql-codegen/schema-ast": "5.0.0",
+    "@parcel/watcher": "2.5.1",
     "@primer/css": "22.0.2",
     "@primer/octicons-react": "19.21.1",
     "@primer/primitives": "11.3.2",
@@ -101,10 +106,11 @@
     "css-loader": "7.1.2",
     "css-minimizer-webpack-plugin": "7.0.4",
     "date-fns": "4.1.0",
+    "dotenv": "17.2.3",
     "electron": "39.2.7",
     "electron-builder": "26.0.12",
     "final-form": "5.0.0",
-    "graphql-tag": "2.12.6",
+    "graphql": "16.12.0",
     "html-webpack-plugin": "5.6.5",
     "husky": "9.1.7",
     "identity-obj-proxy": "3.0.0",
@@ -132,9 +138,9 @@
   "pnpm": {
     "onlyBuiltDependencies": [
       "@biomejs/biome",
+      "@parcel/watcher",
       "@tailwindcss/oxide",
-      "electron",
-      "esbuild"
+      "electron"
     ]
   },
   "lint-staged": {

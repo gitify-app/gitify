@@ -6,8 +6,8 @@ import {
 
 import { Constants } from '../constants';
 import type { Chevron, Hostname, Link } from '../types';
-import type { Notification, SubjectType } from '../typesGitHub';
-import { getHtmlUrl, getLatestDiscussion } from './api/client';
+import type { Notification } from '../typesGitHub';
+import { fetchDiscussionByNumber, getHtmlUrl } from './api/client';
 import type { PlatformType } from './auth/types';
 import { rendererLogError } from './logger';
 import { getCheckSuiteAttributes } from './notifications/handlers/checkSuite';
@@ -84,7 +84,8 @@ async function getDiscussionUrl(notification: Notification): Promise<Link> {
   const url = new URL(notification.repository.html_url);
   url.pathname += '/discussions';
 
-  const discussion = await getLatestDiscussion(notification);
+  const response = await fetchDiscussionByNumber(notification);
+  const discussion = response.data.repository.discussion;
 
   if (discussion) {
     url.href = discussion.url;
@@ -104,22 +105,15 @@ async function getDiscussionUrl(notification: Notification): Promise<Link> {
 export async function generateGitHubWebUrl(
   notification: Notification,
 ): Promise<Link> {
-  const url = new URL(notification.repository.html_url);
+  const url = new URL(getDefaultURLForType(notification));
 
   try {
-    // Perform any specific notification type handling (only required for a few special notification scenarios)
     switch (notification.subject.type) {
       case 'CheckSuite':
         url.href = getCheckSuiteUrl(notification);
         break;
       case 'Discussion':
         url.href = await getDiscussionUrl(notification);
-        break;
-      case 'RepositoryInvitation':
-        url.pathname += '/invitations';
-        break;
-      case 'RepositoryDependabotAlertsThread':
-        url.pathname += '/security/dependabot';
         break;
       case 'WorkflowRun':
         url.href = getWorkflowRunUrl(notification);
@@ -135,8 +129,6 @@ export async function generateGitHubWebUrl(
             notification.subject.url,
             notification.account.token,
           );
-        } else {
-          url.href = getDefaultURLForType(url, notification.subject.type);
         }
     }
   } catch (err) {
@@ -146,8 +138,6 @@ export async function generateGitHubWebUrl(
       err,
       notification,
     );
-
-    url.href = getDefaultURLForType(url, notification.subject.type);
   }
 
   url.searchParams.set(
@@ -158,8 +148,10 @@ export async function generateGitHubWebUrl(
   return url.toString() as Link;
 }
 
-export function getDefaultURLForType(url: URL, type: SubjectType) {
-  switch (type) {
+export function getDefaultURLForType(notification: Notification) {
+  const url = new URL(notification.repository.html_url);
+
+  switch (notification.subject.type) {
     case 'Discussion':
       url.pathname += '/discussions';
       break;
@@ -168,6 +160,12 @@ export function getDefaultURLForType(url: URL, type: SubjectType) {
       break;
     case 'PullRequest':
       url.pathname += '/pulls';
+      break;
+    case 'RepositoryInvitation':
+      url.pathname += '/invitations';
+      break;
+    case 'RepositoryDependabotAlertsThread':
+      url.pathname += '/security/dependabot';
       break;
     default:
       break;

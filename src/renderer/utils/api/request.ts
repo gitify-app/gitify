@@ -3,10 +3,12 @@ import axios, {
   type AxiosResponse,
   type Method,
 } from 'axios';
+import type { ExecutionResult } from 'graphql';
 
 import type { Link, Token } from '../../types';
 import { decryptValue } from '../comms';
 import { rendererLogError } from '../logger';
+import type { TypedDocumentString } from './graphql/generated/graphql';
 import { getNextURLFromLinkHeader } from './utils';
 
 /**
@@ -78,6 +80,35 @@ export async function apiRequestAuth(
     ...response,
     data: combinedData,
   } as AxiosResponse;
+}
+
+/**
+ * Perform a GraphQL API request for account
+ *
+ * @param account
+ * @param query
+ * @param variables
+ * @returns
+ */
+export async function performGraphQLRequest<TResult, TVariables>(
+  url: Link,
+  token: Token,
+  query: TypedDocumentString<TResult, TVariables>,
+  ...[variables]: TVariables extends Record<string, never> ? [] : [TVariables]
+) {
+  const headers = await getHeaders(url, token);
+
+  return axios({
+    method: 'POST',
+    url,
+    data: {
+      query,
+      variables,
+    },
+    headers: headers,
+  }).then((response) => {
+    return response.data;
+  }) as Promise<ExecutionResult<TResult>>;
 }
 
 /**

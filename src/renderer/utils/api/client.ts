@@ -1,5 +1,5 @@
 import type { AxiosPromise } from 'axios';
-import { print } from 'graphql/language/printer';
+import type { ExecutionResult } from 'graphql';
 
 import type {
   Account,
@@ -11,8 +11,6 @@ import type {
 import type {
   Commit,
   CommitComment,
-  Discussion,
-  GraphQLSearch,
   Issue,
   IssueOrPullRequestComment,
   Notification,
@@ -24,10 +22,16 @@ import type {
 } from '../../typesGitHub';
 import { isAnsweredDiscussionFeatureSupported } from '../features';
 import { rendererLogError } from '../logger';
-import { QUERY_SEARCH_DISCUSSIONS } from './graphql/discussions';
-import { formatAsGitHubSearchSyntax } from './graphql/utils';
-import { apiRequestAuth } from './request';
-import { getGitHubAPIBaseUrl, getGitHubGraphQLUrl } from './utils';
+import {
+  FetchDiscussionByNumberDocument,
+  type FetchDiscussionByNumberQuery,
+} from './graphql/generated/graphql';
+import { apiRequestAuth, performGraphQLRequest } from './request';
+import {
+  getGitHubAPIBaseUrl,
+  getGitHubGraphQLUrl,
+  getNumberFromUrl,
+} from './utils';
 
 /**
  * Get the authenticated user
@@ -235,55 +239,26 @@ export async function getHtmlUrl(url: Link, token: Token): Promise<string> {
  * Returns the latest discussion and their latest comments / replies
  *
  */
-export async function searchDiscussions(
+export async function fetchDiscussionByNumber(
   notification: Notification,
-): AxiosPromise<GraphQLSearch<Discussion>> {
+): Promise<ExecutionResult<FetchDiscussionByNumberQuery>> {
   const url = getGitHubGraphQLUrl(notification.account.hostname);
+  const number = getNumberFromUrl(notification.subject.url);
 
-  return apiRequestAuth(
+  return performGraphQLRequest(
     url.toString() as Link,
-    'POST',
     notification.account.token,
+    FetchDiscussionByNumberDocument,
     {
-      query: print(QUERY_SEARCH_DISCUSSIONS),
-      variables: {
-        queryStatement: formatAsGitHubSearchSyntax(
-          notification.repository.full_name,
-          notification.subject.title,
-        ),
-        firstDiscussions: 1,
-        lastComments: 100,
-        lastReplies: 100,
-        firstLabels: 100,
-        includeIsAnswered: isAnsweredDiscussionFeatureSupported(
-          notification.account,
-        ),
-      },
+      owner: notification.repository.owner.login,
+      name: notification.repository.name,
+      number: number,
+      lastComments: 10,
+      lastReplies: 10,
+      firstLabels: 100,
+      includeIsAnswered: isAnsweredDiscussionFeatureSupported(
+        notification.account,
+      ),
     },
   );
-}
-
-/**
- * Return the latest discussion that matches the notification title and repository.
- */
-export async function getLatestDiscussion(
-  notification: Notification,
-): Promise<Discussion | null> {
-  try {
-    const response = await searchDiscussions(notification);
-    return (
-      response.data?.data.search.nodes.find(
-        (discussion) => discussion.title === notification.subject.title,
-      ) ?? null
-    );
-  } catch (err) {
-    rendererLogError(
-      'getLatestDiscussion',
-      'failed to fetch latest discussion for notification',
-      err,
-      notification,
-    );
-  }
-
-  return null;
 }

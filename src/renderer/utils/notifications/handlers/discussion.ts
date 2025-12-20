@@ -12,16 +12,32 @@ import { differenceInMilliseconds } from 'date-fns';
 
 import type { SettingsState } from '../../../types';
 import type {
-  DiscussionComment,
   DiscussionStateType,
   GitifySubject,
   Notification,
   Subject,
   SubjectUser,
 } from '../../../typesGitHub';
-import { getLatestDiscussion } from '../../api/client';
+import { fetchDiscussionByNumber } from '../../api/client';
+import type {
+  CommentFieldsFragment,
+  FetchDiscussionByNumberQuery,
+} from '../../api/graphql/generated/graphql';
 import { isStateFilteredOut } from '../filters/filter';
 import { DefaultHandler } from './default';
+
+type DiscussionComment = NonNullable<
+  NonNullable<
+    NonNullable<
+      NonNullable<
+        Extract<
+          NonNullable<FetchDiscussionByNumberQuery['repository']>,
+          { __typename?: 'Repository' }
+        >['discussion']
+      >
+    >['comments']['nodes']
+  >[number]
+>;
 
 class DiscussionHandler extends DefaultHandler {
   readonly type = 'Discussion';
@@ -30,17 +46,21 @@ class DiscussionHandler extends DefaultHandler {
     notification: Notification,
     settings: SettingsState,
   ): Promise<GitifySubject> {
-    const discussion = await getLatestDiscussion(notification);
+    const response = await fetchDiscussionByNumber(notification);
+    const discussion = response.data.repository?.discussion;
+
+    if (!discussion) {
+      return null;
+    }
+
     let discussionState: DiscussionStateType = 'OPEN';
 
-    if (discussion) {
-      if (discussion.isAnswered) {
-        discussionState = 'ANSWERED';
-      }
+    if (discussion.isAnswered) {
+      discussionState = 'ANSWERED';
+    }
 
-      if (discussion.stateReason) {
-        discussionState = discussion.stateReason;
-      }
+    if (discussion.stateReason) {
+      discussionState = discussion.stateReason;
     }
 
     // Return early if this notification would be hidden by filters
@@ -59,6 +79,7 @@ class DiscussionHandler extends DefaultHandler {
       avatar_url: discussion.author.avatar_url,
       type: discussion.author.type,
     };
+
     if (latestDiscussionComment) {
       discussionUser = {
         login: latestDiscussionComment.author.login,
@@ -96,7 +117,7 @@ export const discussionHandler = new DiscussionHandler();
 export function getClosestDiscussionCommentOrReply(
   notification: Notification,
   comments: DiscussionComment[],
-): DiscussionComment | null {
+): CommentFieldsFragment | null {
   if (!comments || comments.length === 0) {
     return null;
   }
