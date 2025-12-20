@@ -90,11 +90,9 @@ async function getDiscussionUrl(notification: Notification): Promise<Link> {
   if (discussion) {
     url.href = discussion.url;
 
-    const discussionComments = discussion.comments.nodes:
-
     const closestComment = getClosestDiscussionCommentOrReply(
       notification,
-      discussionComments,
+      discussion.comments.nodes,
     );
     if (closestComment) {
       url.hash = `#discussioncomment-${closestComment.databaseId}`;
