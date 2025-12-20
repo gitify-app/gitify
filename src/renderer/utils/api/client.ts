@@ -253,8 +253,8 @@ export async function fetchDiscussionByNumber(
       owner: notification.repository.owner.login,
       name: notification.repository.name,
       number: number,
-      lastComments: 100,
-      lastReplies: 100,
+      lastComments: 10,
+      lastReplies: 10,
       firstLabels: 100,
       includeIsAnswered: isAnsweredDiscussionFeatureSupported(
         notification.account,
