@@ -23,8 +23,9 @@ import type {
   CommentFieldsFragment,
   FetchDiscussionByNumberQuery,
 } from '../../api/graphql/generated/graphql';
+import { isStateFilteredOut } from '../filters/filter';
+import { DefaultHandler } from './default';
 
-// Type for discussion comment nodes from the FetchDiscussionByNumberQuery
 type DiscussionComment = NonNullable<
   NonNullable<
     NonNullable<
@@ -37,9 +38,6 @@ type DiscussionComment = NonNullable<
     >['comments']['nodes']
   >[number]
 >;
-
-import { isStateFilteredOut } from '../filters/filter';
-import { DefaultHandler } from './default';
 
 class DiscussionHandler extends DefaultHandler {
   readonly type = 'Discussion';
