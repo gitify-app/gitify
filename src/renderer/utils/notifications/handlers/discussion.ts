@@ -75,7 +75,7 @@ class DiscussionHandler extends DefaultHandler {
 
     let discussionUser: SubjectUser = {
       login: discussion.author.login,
-      html_url: discussion.author.url,
+      html_url: discussion.author.html_url,
       avatar_url: discussion.author.avatar_url,
       type: discussion.author.type,
     };
@@ -83,7 +83,7 @@ class DiscussionHandler extends DefaultHandler {
     if (latestDiscussionComment) {
       discussionUser = {
         login: latestDiscussionComment.author.login,
-        html_url: latestDiscussionComment.author.url,
+        html_url: latestDiscussionComment.author.html_url,
         avatar_url: latestDiscussionComment.author.avatar_url,
         type: latestDiscussionComment.author.type,
       };

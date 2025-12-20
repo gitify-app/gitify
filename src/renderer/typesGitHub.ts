@@ -1,4 +1,11 @@
 import type { Account, Link } from './types';
+import type {
+  AuthorFieldsFragment,
+  IssueState,
+  IssueStateReason,
+  MilestoneFieldsFragment,
+  PullRequestState,
+} from './utils/api/graphql/generated/graphql';
 
 export type Reason =
   | 'approval_requested'
@@ -60,7 +67,10 @@ export type StateType =
   | DiscussionStateType
   | IssueStateType
   | IssueStateReasonType
-  | PullRequestStateType;
+  | PullRequestStateType
+  | IssueState
+  | IssueStateReason
+  | PullRequestState;
 
 export type CheckSuiteStatus =
   | 'action_required'
@@ -169,12 +179,7 @@ export interface User {
   site_admin: boolean;
 }
 
-export interface SubjectUser {
-  login: string;
-  html_url: Link;
-  avatar_url: Link;
-  type: UserType;
-}
+export type SubjectUser = AuthorFieldsFragment;
 
 export interface Repository {
   id: number;
@@ -264,7 +269,7 @@ export interface GitifySubject {
   linkedIssues?: string[];
   comments?: number;
   labels?: string[];
-  milestone?: Milestone;
+  milestone?: MilestoneFieldsFragment;
 }
 
 export interface PullRequest {

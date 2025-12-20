@@ -1,0 +1,57 @@
+query FetchPullByNumber(
+  $owner: String!
+  $name: String!
+  $number: Int!
+  $firstLabels: Int
+) {
+  repository(owner: $owner, name: $name) {
+    pullRequest(number: $number) {
+      __typename
+      number
+      title
+      url
+      state
+      merged
+      isDraft
+      isInMergeQueue
+      milestone {
+        ...MilestoneFields
+      }
+      author {
+        ...AuthorFields
+      }
+      comments(last: 1) {
+        totalCount
+        nodes {
+          author {
+            ...AuthorFields
+          }
+        }
+      }
+      reviews(last: 1) {
+        totalCount
+        nodes {
+          createdAt
+          author {
+            login
+          }
+        }
+      }
+      labels(first: $firstLabels) {
+        nodes {
+          name
+        }
+      }
+      closingIssuesReferences(first: 50) {
+        nodes {
+          number
+        }
+      }
+    }
+  }
+}
+
+fragment MilestoneFields on Milestone {
+  state
+  title
+}

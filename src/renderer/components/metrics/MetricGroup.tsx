@@ -10,6 +10,7 @@ import {
 import { AppContext } from '../../context/App';
 import { IconColor } from '../../types';
 import type { Notification } from '../../typesGitHub';
+import { MilestoneState } from '../../utils/api/graphql/generated/graphql';
 import { getPullRequestReviewIcon } from '../../utils/icons';
 import { MetricPill } from './MetricPill';
 
@@ -84,7 +85,7 @@ export const MetricGroup: FC<MetricGroupProps> = ({
         {notification.subject.milestone && (
           <MetricPill
             color={
-              notification.subject.milestone.state === 'open'
+              notification.subject.milestone.state === MilestoneState.Open
                 ? IconColor.GREEN
                 : IconColor.RED
             }

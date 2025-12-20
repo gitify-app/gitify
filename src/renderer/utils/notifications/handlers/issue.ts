@@ -14,49 +14,36 @@ import type {
   GitifySubject,
   Notification,
   Subject,
-  User,
 } from '../../../typesGitHub';
-import { getIssue, getIssueOrPullRequestComment } from '../../api/client';
-import { isStateFilteredOut } from '../filters/filter';
+import { fetchIssueByNumber } from '../../api/client';
 import { DefaultHandler } from './default';
-import { getSubjectUser } from './utils';
 
 class IssueHandler extends DefaultHandler {
   readonly type = 'Issue';
 
   async enrich(
     notification: Notification,
-    settings: SettingsState,
+    _settings: SettingsState,
   ): Promise<GitifySubject> {
-    const issue = (
-      await getIssue(notification.subject.url, notification.account.token)
-    ).data;
+    const response = await fetchIssueByNumber(notification);
+    const issue = response.data.repository?.issue;
 
-    const issueState = issue.state_reason ?? issue.state;
+    // const issueState = issue.stateReason ?? issue.state;
 
     // Return early if this notification would be hidden by filters
-    if (isStateFilteredOut(issueState, settings)) {
-      return null;
-    }
+    // if (isStateFilteredOut(issueState, settings)) {
+    // return null;
+    // }
 
-    let issueCommentUser: User;
-
-    if (notification.subject.latest_comment_url) {
-      const issueComment = (
-        await getIssueOrPullRequestComment(
-          notification.subject.latest_comment_url,
-          notification.account.token,
-        )
-      ).data;
-      issueCommentUser = issueComment.user;
-    }
+    // const issueCommentUser = issue.comments.nodes[0]?.author;
 
     return {
       number: issue.number,
-      state: issueState,
-      user: getSubjectUser([issueCommentUser, issue.user]),
-      comments: issue.comments,
-      labels: issue.labels?.map((label) => label.name) ?? [],
+      // state: issueState
+      state: null,
+      user: null, //getSubjectUser([issueCommentUser, issue.author]),
+      comments: issue.comments.totalCount,
+      labels: issue.labels.nodes?.map((label) => label.name) ?? [],
       milestone: issue.milestone,
     };
   }

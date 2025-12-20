@@ -380,7 +380,7 @@ export const mockDiscussionByNumberGraphQLResponse: FetchDiscussionByNumberQuery
         url: 'https://github.com/gitify-app/notifications-test/discussions/612' as Link,
         author: {
           login: 'comment-user',
-          url: 'https://github.com/comment-user' as Link,
+          html_url: 'https://github.com/comment-user' as Link,
           avatar_url:
             'https://avatars.githubusercontent.com/u/123456789?v=4' as Link,
           type: 'User',
@@ -393,7 +393,7 @@ export const mockDiscussionByNumberGraphQLResponse: FetchDiscussionByNumberQuery
               createdAt: '2017-02-20T17:51:57Z',
               author: {
                 login: 'comment-user',
-                url: 'https://github.com/comment-user' as Link,
+                html_url: 'https://github.com/comment-user' as Link,
                 avatar_url:
                   'https://avatars.githubusercontent.com/u/123456789?v=4' as Link,
                 type: 'User',
@@ -405,7 +405,7 @@ export const mockDiscussionByNumberGraphQLResponse: FetchDiscussionByNumberQuery
                     createdAt: '2017-05-20T17:51:57Z',
                     author: {
                       login: 'reply-user',
-                      url: 'https://github.com/reply-user' as Link,
+                      html_url: 'https://github.com/reply-user' as Link,
                       avatar_url:
                         'https://avatars.githubusercontent.com/u/123456789?v=4' as Link,
                       type: 'User',

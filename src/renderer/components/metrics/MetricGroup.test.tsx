@@ -1,7 +1,10 @@
 import { renderWithAppContext } from '../../__helpers__/test-utils';
 import { mockSettings } from '../../__mocks__/state-mocks';
-import type { Milestone } from '../../typesGitHub';
 import { mockSingleNotification } from '../../utils/api/__mocks__/response-mocks';
+import {
+  type MilestoneFieldsFragment,
+  MilestoneState,
+} from '../../utils/api/graphql/generated/graphql';
 import { MetricGroup } from './MetricGroup';
 
 describe('renderer/components/metrics/MetricGroup.tsx', () => {
@@ -103,8 +106,8 @@ describe('renderer/components/metrics/MetricGroup.tsx', () => {
       const mockNotification = mockSingleNotification;
       mockNotification.subject.milestone = {
         title: 'Milestone 1',
-        state: 'open',
-      } as Milestone;
+        state: MilestoneState.Open,
+      } as MilestoneFieldsFragment;
 
       const props = {
         notification: mockNotification,
@@ -118,8 +121,8 @@ describe('renderer/components/metrics/MetricGroup.tsx', () => {
       const mockNotification = mockSingleNotification;
       mockNotification.subject.milestone = {
         title: 'Milestone 1',
-        state: 'closed',
-      } as Milestone;
+        state: MilestoneState.Closed,
+      } as MilestoneFieldsFragment;
 
       const props = {
         notification: mockNotification,

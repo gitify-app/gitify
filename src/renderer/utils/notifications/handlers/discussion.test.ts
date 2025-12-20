@@ -17,7 +17,7 @@ import { discussionHandler } from './discussion';
 
 const mockDiscussionAuthor: AuthorFieldsFragment = {
   login: 'discussion-author',
-  url: 'https://github.com/discussion-author' as Link,
+  html_url: 'https://github.com/discussion-author' as Link,
   avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4' as Link,
   type: 'User',
 };
@@ -70,7 +70,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         state: 'ANSWERED',
         user: {
           login: mockDiscussionAuthor.login,
-          html_url: mockDiscussionAuthor.url,
+          html_url: mockDiscussionAuthor.html_url,
           avatar_url: mockDiscussionAuthor.avatar_url,
           type: mockDiscussionAuthor.type,
         },
@@ -103,7 +103,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         state: 'DUPLICATE',
         user: {
           login: mockDiscussionAuthor.login,
-          html_url: mockDiscussionAuthor.url,
+          html_url: mockDiscussionAuthor.html_url,
           avatar_url: mockDiscussionAuthor.avatar_url,
           type: mockDiscussionAuthor.type,
         },
@@ -133,7 +133,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         state: 'OPEN',
         user: {
           login: mockDiscussionAuthor.login,
-          html_url: mockDiscussionAuthor.url,
+          html_url: mockDiscussionAuthor.html_url,
           avatar_url: mockDiscussionAuthor.avatar_url,
           type: mockDiscussionAuthor.type,
         },
@@ -166,7 +166,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         state: 'OUTDATED',
         user: {
           login: mockDiscussionAuthor.login,
-          html_url: mockDiscussionAuthor.url,
+          html_url: mockDiscussionAuthor.html_url,
           avatar_url: mockDiscussionAuthor.avatar_url,
           type: mockDiscussionAuthor.type,
         },
@@ -199,7 +199,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         state: 'REOPENED',
         user: {
           login: mockDiscussionAuthor.login,
-          html_url: mockDiscussionAuthor.url,
+          html_url: mockDiscussionAuthor.html_url,
           avatar_url: mockDiscussionAuthor.avatar_url,
           type: mockDiscussionAuthor.type,
         },
@@ -232,7 +232,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         state: 'RESOLVED',
         user: {
           login: mockDiscussionAuthor.login,
-          html_url: mockDiscussionAuthor.url,
+          html_url: mockDiscussionAuthor.html_url,
           avatar_url: mockDiscussionAuthor.avatar_url,
           type: mockDiscussionAuthor.type,
         },
@@ -272,7 +272,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         state: 'ANSWERED',
         user: {
           login: mockDiscussionAuthor.login,
-          html_url: mockDiscussionAuthor.url,
+          html_url: mockDiscussionAuthor.html_url,
           avatar_url: mockDiscussionAuthor.avatar_url,
           type: mockDiscussionAuthor.type,
         },

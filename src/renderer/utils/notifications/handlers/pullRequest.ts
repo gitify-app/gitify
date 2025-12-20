@@ -8,7 +8,7 @@ import {
   GitPullRequestIcon,
 } from '@primer/octicons-react';
 
-import type { Link, SettingsState } from '../../../types';
+import type { SettingsState } from '../../../types';
 import type {
   GitifyPullRequestReview,
   GitifySubject,
@@ -17,16 +17,12 @@ import type {
   PullRequestReview,
   PullRequestStateType,
   Subject,
-  User,
 } from '../../../typesGitHub';
-import {
-  getIssueOrPullRequestComment,
-  getPullRequest,
-  getPullRequestReviews,
-} from '../../api/client';
+import { fetchPullByNumber } from '../../api/client';
+import type { PullRequestState } from '../../api/graphql/generated/graphql';
 import { isStateFilteredOut, isUserFilteredOut } from '../filters/filter';
 import { DefaultHandler } from './default';
-import { getSubjectUser } from './utils';
+import { getSubjectAuthor } from './utils';
 
 class PullRequestHandler extends DefaultHandler {
   readonly type = 'PullRequest' as const;
@@ -35,14 +31,11 @@ class PullRequestHandler extends DefaultHandler {
     notification: Notification,
     settings: SettingsState,
   ): Promise<GitifySubject> {
-    const pr = (
-      await getPullRequest(notification.subject.url, notification.account.token)
-    ).data;
+    const response = await fetchPullByNumber(notification);
+    const pr = response.data.repository.pullRequest;
 
-    let prState: PullRequestStateType = pr.state;
-    if (pr.merged) {
-      prState = 'merged';
-    } else if (pr.draft) {
+    let prState: PullRequestStateType | PullRequestState = pr.state;
+    if (pr.isDraft) {
       prState = 'draft';
     }
 
@@ -51,39 +44,28 @@ class PullRequestHandler extends DefaultHandler {
       return null;
     }
 
-    let prCommentUser: User;
-    if (
-      notification.subject.latest_comment_url &&
-      notification.subject.latest_comment_url !== notification.subject.url
-    ) {
-      const prComment = (
-        await getIssueOrPullRequestComment(
-          notification.subject.latest_comment_url,
-          notification.account.token,
-        )
-      ).data;
-      prCommentUser = prComment.user;
-    }
+    const prCommentUser = pr.comments.nodes[0]?.author;
 
-    const prUser = getSubjectUser([prCommentUser, pr.user]);
+    const prUser = getSubjectAuthor([prCommentUser, pr.author]);
 
     // Return early if this notification would be hidden by user filters
     if (isUserFilteredOut(prUser, settings)) {
       return null;
     }
 
-    const reviews = await getLatestReviewForReviewers(notification);
-    const linkedIssues = parseLinkedIssuesFromPr(pr);
+    const reviews = null; // await getLatestReviewForReviewers(notification);
 
     return {
       number: pr.number,
       state: prState,
       user: prUser,
       reviews: reviews,
-      comments: pr.comments,
-      labels: pr.labels?.map((label) => label.name) ?? [],
-      linkedIssues: linkedIssues,
-      milestone: pr.milestone,
+      comments: pr.comments.totalCount,
+      labels: pr.labels.nodes?.map((label) => label.name) ?? [],
+      linkedIssues: pr.closingIssuesReferences.nodes.map(
+        (issue) => `#${issue.number}`,
+      ),
+      milestone: null, //pr.milestone,
     };
   }
 
@@ -110,10 +92,7 @@ export async function getLatestReviewForReviewers(
     return null;
   }
 
-  const prReviews = await getPullRequestReviews(
-    `${notification.subject.url}/reviews` as Link,
-    notification.account.token,
-  );
+  const prReviews = null;
 
   if (!prReviews.data.length) {
     return null;
