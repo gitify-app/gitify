@@ -9,7 +9,7 @@ import {
   SkipIcon,
 } from '@primer/octicons-react';
 
-import type { SettingsState } from '../../../types';
+import type { Link, SettingsState } from '../../../types';
 import type {
   GitifySubject,
   Notification,
@@ -63,6 +63,12 @@ class IssueHandler extends DefaultHandler {
       default:
         return IssueOpenedIcon;
     }
+  }
+
+  defaultUrl(notification: Notification): Link {
+    const url = new URL(notification.repository.html_url);
+    url.pathname += '/issues';
+    return url.href as Link;
   }
 }
 

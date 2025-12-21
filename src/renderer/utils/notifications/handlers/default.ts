@@ -3,7 +3,7 @@ import type { FC } from 'react';
 import type { OcticonProps } from '@primer/octicons-react';
 import { QuestionIcon } from '@primer/octicons-react';
 
-import type { SettingsState } from '../../../types';
+import type { Link, SettingsState } from '../../../types';
 import { IconColor } from '../../../types';
 import type {
   GitifySubject,
@@ -79,6 +79,10 @@ export class DefaultHandler implements NotificationTypeHandler {
       title = `${title} [${this.formattedNotificationNumber(notification)}]`;
     }
     return title;
+  }
+
+  defaultUrl(notification: Notification): Link {
+    return notification.repository.html_url as Link;
   }
 }
 

@@ -37,6 +37,12 @@ class WorkflowRunHandler extends DefaultHandler {
   iconType(_subject: Subject): FC<OcticonProps> | null {
     return RocketIcon;
   }
+
+  defaultUrl(notification: Notification): Link {
+    const url = new URL(notification.repository.html_url);
+    url.pathname += '/actions';
+    return url.href as Link;
+  }
 }
 
 export const workflowRunHandler = new WorkflowRunHandler();

@@ -8,7 +8,7 @@ import {
   GitPullRequestIcon,
 } from '@primer/octicons-react';
 
-import type { SettingsState } from '../../../types';
+import type { Link, SettingsState } from '../../../types';
 import type {
   GitifyPullRequestReview,
   GitifySubject,
@@ -80,6 +80,12 @@ class PullRequestHandler extends DefaultHandler {
       default:
         return GitPullRequestIcon;
     }
+  }
+
+  defaultUrl(notification: Notification): Link {
+    const url = new URL(notification.repository.html_url);
+    url.pathname += '/pulls';
+    return url.href as Link;
   }
 }
 

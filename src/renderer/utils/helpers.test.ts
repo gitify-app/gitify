@@ -6,7 +6,6 @@ import {
 
 import type { ExecutionResult } from 'graphql';
 
-import { createPartialMockNotification } from '../__mocks__/notifications-mocks';
 import type { Hostname, Link } from '../types';
 import type { SubjectType } from '../typesGitHub';
 import * as logger from '../utils/logger';
@@ -20,7 +19,6 @@ import {
   generateGitHubWebUrl,
   generateNotificationReferrerId,
   getChevronDetails,
-  getDefaultURLForType,
   getPlatformFromHostname,
   isEnterpriseServerHost,
 } from './helpers';
@@ -553,76 +551,6 @@ describe('renderer/utils/helpers.ts', () => {
         );
         expect(rendererLogErrorSpy).toHaveBeenCalledTimes(1);
       });
-    });
-  });
-
-  describe('getDefaultURLForType', () => {
-    const mockUrl = 'https://github.com/gitify-app/notifications-test' as Link;
-
-    it('discussions', () => {
-      const mockNotification = createPartialMockNotification(
-        { type: 'Discussion' },
-        { html_url: mockUrl },
-      );
-
-      expect(getDefaultURLForType(mockNotification)).toEqual(
-        'https://github.com/gitify-app/notifications-test/discussions',
-      );
-    });
-
-    it('issues', () => {
-      const mockNotification = createPartialMockNotification(
-        { type: 'Issue' },
-        { html_url: mockUrl },
-      );
-
-      expect(getDefaultURLForType(mockNotification)).toEqual(
-        'https://github.com/gitify-app/notifications-test/issues',
-      );
-    });
-
-    it('pull requests', () => {
-      const mockNotification = createPartialMockNotification(
-        { type: 'PullRequest' },
-        { html_url: mockUrl },
-      );
-
-      expect(getDefaultURLForType(mockNotification)).toEqual(
-        'https://github.com/gitify-app/notifications-test/pulls',
-      );
-    });
-
-    it('repository invitation', () => {
-      const mockNotification = createPartialMockNotification(
-        { type: 'RepositoryInvitation' },
-        { html_url: mockUrl },
-      );
-
-      expect(getDefaultURLForType(mockNotification)).toEqual(
-        'https://github.com/gitify-app/notifications-test/invitations',
-      );
-    });
-
-    it('repository dependabot alert thread', () => {
-      const mockNotification = createPartialMockNotification(
-        { type: 'RepositoryDependabotAlertsThread' },
-        { html_url: mockUrl },
-      );
-
-      expect(getDefaultURLForType(mockNotification)).toEqual(
-        'https://github.com/gitify-app/notifications-test/security/dependabot',
-      );
-    });
-
-    it('default web urls', () => {
-      const mockNotification = createPartialMockNotification(
-        { type: 'Commit' },
-        { html_url: mockUrl },
-      );
-
-      expect(getDefaultURLForType(mockNotification)).toEqual(
-        'https://github.com/gitify-app/notifications-test',
-      );
     });
   });
 

@@ -10,7 +10,7 @@ import {
 
 import { differenceInMilliseconds } from 'date-fns';
 
-import type { SettingsState } from '../../../types';
+import type { Link, SettingsState } from '../../../types';
 import type {
   DiscussionStateType,
   GitifySubject,
@@ -110,6 +110,12 @@ class DiscussionHandler extends DefaultHandler {
       default:
         return CommentDiscussionIcon;
     }
+  }
+
+  defaultUrl(notification: Notification): Link {
+    const url = new URL(notification.repository.html_url);
+    url.pathname += '/discussions';
+    return url.href as Link;
   }
 }
 

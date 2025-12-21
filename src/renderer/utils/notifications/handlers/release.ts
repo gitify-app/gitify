@@ -3,7 +3,7 @@ import type { FC } from 'react';
 import type { OcticonProps } from '@primer/octicons-react';
 import { TagIcon } from '@primer/octicons-react';
 
-import type { SettingsState } from '../../../types';
+import type { Link, SettingsState } from '../../../types';
 import type {
   GitifySubject,
   Notification,
@@ -41,6 +41,12 @@ class ReleaseHandler extends DefaultHandler {
 
   iconType(_subject: Subject): FC<OcticonProps> | null {
     return TagIcon;
+  }
+
+  defaultUrl(notification: Notification): Link {
+    const url = new URL(notification.repository.html_url);
+    url.pathname += '/releases';
+    return url.href as Link;
   }
 }
 

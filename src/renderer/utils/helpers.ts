@@ -10,6 +10,7 @@ import type { Notification } from '../typesGitHub';
 import { getHtmlUrl } from './api/client';
 import type { PlatformType } from './auth/types';
 import { rendererLogError } from './logger';
+import { createNotificationHandler } from './notifications/handlers';
 
 export function getPlatformFromHostname(hostname: string): PlatformType {
   return hostname.endsWith(Constants.DEFAULT_AUTH_OPTIONS.hostname)
@@ -46,10 +47,12 @@ export function actionsURL(repositoryURL: string, filters: string[]): Link {
 export async function generateGitHubWebUrl(
   notification: Notification,
 ): Promise<Link> {
-  const url = new URL(getDefaultURLForType(notification));
+  const url = new URL(notification.repository.html_url);
 
   try {
-    if (notification.subject.latest_comment_url) {
+    if (notification.subject.htmlUrl) {
+      url.href = notification.subject.htmlUrl;
+    } else if (notification.subject.latest_comment_url) {
       url.href = await getHtmlUrl(
         notification.subject.latest_comment_url,
         notification.account.token,
@@ -59,6 +62,9 @@ export async function generateGitHubWebUrl(
         notification.subject.url,
         notification.account.token,
       );
+    } else {
+      const handler = createNotificationHandler(notification);
+      handler.defaultUrl(notification);
     }
   } catch (err) {
     rendererLogError(
@@ -75,41 +81,6 @@ export async function generateGitHubWebUrl(
   );
 
   return url.toString() as Link;
-}
-
-export function getDefaultURLForType(notification: Notification) {
-  const url = new URL(notification.repository.html_url);
-
-  switch (notification.subject.type) {
-    case 'CheckSuite':
-      url.pathname += '/actions';
-      break;
-    case 'Discussion':
-      url.pathname += '/discussions';
-      break;
-    case 'Issue':
-      url.pathname += '/issues';
-      break;
-    case 'PullRequest':
-      url.pathname += '/pulls';
-      break;
-    case 'Release':
-      url.pathname += '/releases';
-      break;
-    case 'RepositoryInvitation':
-      url.pathname += '/invitations';
-      break;
-    case 'RepositoryDependabotAlertsThread':
-      url.pathname += '/security/dependabot';
-      break;
-    case 'WorkflowRun':
-      url.pathname += '/actions';
-      break;
-    default:
-      break;
-  }
-
-  return url.href;
 }
 
 export function getChevronDetails(

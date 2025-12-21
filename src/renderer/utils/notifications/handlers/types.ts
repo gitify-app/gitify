@@ -2,7 +2,7 @@ import type { FC } from 'react';
 
 import type { OcticonProps } from '@primer/octicons-react';
 
-import type { SettingsState } from '../../../types';
+import type { Link, SettingsState } from '../../../types';
 import type {
   GitifySubject,
   Notification,
@@ -45,4 +45,9 @@ export interface NotificationTypeHandler {
    * Return the formatted notification title for this notification.
    */
   formattedNotificationTitle(notification: Notification): string;
+
+  /**
+   * Default url for notification type.
+   */
+  defaultUrl(notification: Notification): Link;
 }

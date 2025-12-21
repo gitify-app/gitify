@@ -54,6 +54,12 @@ class CheckSuiteHandler extends DefaultHandler {
         return RocketIcon;
     }
   }
+
+  defaultUrl(notification: Notification): Link {
+    const url = new URL(notification.repository.html_url);
+    url.pathname += '/actions';
+    return url.href as Link;
+  }
 }
 
 export const checkSuiteHandler = new CheckSuiteHandler();
