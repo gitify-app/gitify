@@ -17,8 +17,8 @@ import type {
   Subject,
 } from '../../../typesGitHub';
 import { fetchPullByNumber } from '../../api/client';
-import type {
-  FetchPullByNumberQuery,
+import {
+  type FetchPullByNumberQuery,
   PullRequestState,
 } from '../../api/graphql/generated/graphql';
 import { isStateFilteredOut, isUserFilteredOut } from '../filters/filter';
@@ -72,11 +72,15 @@ class PullRequestHandler extends DefaultHandler {
   }
 
   iconType(subject: Subject): FC<OcticonProps> | null {
-    switch (subject.state) {
+    const state = subject.state as PullRequestStateType | PullRequestState;
+
+    switch (state) {
       case 'draft':
         return GitPullRequestDraftIcon;
+      case PullRequestState.Closed:
       case 'closed':
         return GitPullRequestClosedIcon;
+      case PullRequestState.Merged:
       case 'merged':
         return GitMergeIcon;
       default:

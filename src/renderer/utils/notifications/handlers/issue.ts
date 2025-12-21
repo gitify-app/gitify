@@ -3,7 +3,6 @@ import type { FC } from 'react';
 import type { OcticonProps } from '@primer/octicons-react';
 import {
   IssueClosedIcon,
-  IssueDraftIcon,
   IssueOpenedIcon,
   IssueReopenedIcon,
   SkipIcon,
@@ -16,6 +15,10 @@ import type {
   Subject,
 } from '../../../typesGitHub';
 import { fetchIssueByNumber } from '../../api/client';
+import {
+  IssueState,
+  IssueStateReason,
+} from '../../api/graphql/generated/graphql';
 import { isStateFilteredOut, isUserFilteredOut } from '../filters/filter';
 import { DefaultHandler } from './default';
 import { getSubjectAuthor } from './utils';
@@ -58,15 +61,16 @@ class IssueHandler extends DefaultHandler {
   }
 
   iconType(subject: Subject): FC<OcticonProps> | null {
-    switch (subject.state) {
-      case 'draft':
-        return IssueDraftIcon;
-      case 'closed':
-      case 'completed':
+    const state = subject.state as IssueState | IssueStateReason;
+
+    switch (state) {
+      case IssueState.Closed:
+      case IssueStateReason.Completed:
         return IssueClosedIcon;
-      case 'not_planned':
+      case IssueStateReason.Duplicate:
+      case IssueStateReason.NotPlanned:
         return SkipIcon;
-      case 'reopened':
+      case IssueStateReason.Reopened:
         return IssueReopenedIcon;
       default:
         return IssueOpenedIcon;
