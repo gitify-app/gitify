@@ -81,6 +81,9 @@ export function getDefaultURLForType(notification: Notification) {
   const url = new URL(notification.repository.html_url);
 
   switch (notification.subject.type) {
+    case 'CheckSuite':
+      url.pathname += '/actions';
+      break;
     case 'Discussion':
       url.pathname += '/discussions';
       break;
@@ -90,11 +93,17 @@ export function getDefaultURLForType(notification: Notification) {
     case 'PullRequest':
       url.pathname += '/pulls';
       break;
+    case 'Release':
+      url.pathname += '/releases';
+      break;
     case 'RepositoryInvitation':
       url.pathname += '/invitations';
       break;
     case 'RepositoryDependabotAlertsThread':
       url.pathname += '/security/dependabot';
+      break;
+    case 'WorkflowRun':
+      url.pathname += '/actions';
       break;
     default:
       break;
