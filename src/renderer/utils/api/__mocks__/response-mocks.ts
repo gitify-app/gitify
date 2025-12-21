@@ -4,7 +4,10 @@ import {
 } from '../../../__mocks__/account-mocks';
 import type { Link } from '../../../types';
 import type { Notification, Repository, User } from '../../../typesGitHub';
-import type { FetchDiscussionByNumberQuery } from '../graphql/generated/graphql';
+import {
+  type FetchDiscussionByNumberQuery,
+  PullRequestReviewState,
+} from '../graphql/generated/graphql';
 
 export const mockNotificationUser: User = {
   login: 'octocat',
@@ -59,15 +62,15 @@ export const mockGitHubNotifications: Notification[] = [
       },
       reviews: [
         {
-          state: 'APPROVED',
+          state: PullRequestReviewState.Approved,
           users: ['octocat'],
         },
         {
-          state: 'CHANGES_REQUESTED',
+          state: PullRequestReviewState.ChangesRequested,
           users: ['gitify-app'],
         },
         {
-          state: 'PENDING',
+          state: PullRequestReviewState.Pending,
           users: ['gitify-user'],
         },
       ],

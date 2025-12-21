@@ -29,11 +29,10 @@ query FetchPullByNumber(
           }
         }
       }
-      reviews(last: 1) {
+      reviews(last: 100) {
         totalCount
         nodes {
-          url
-          createdAt
+          state
           author {
             login
           }

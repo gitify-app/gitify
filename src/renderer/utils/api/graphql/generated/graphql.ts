@@ -36269,7 +36269,7 @@ export type FetchPullByNumberQuery = { __typename?: 'Query', repository?: { __ty
             | { __typename?: 'Mannequin', login: string, html_url: any, avatar_url: any, type: 'Mannequin' }
             | { __typename?: 'Organization', login: string, html_url: any, avatar_url: any, type: 'Organization' }
             | { __typename?: 'User', login: string, html_url: any, avatar_url: any, type: 'User' }
-           | null } | null> | null }, reviews?: { __typename?: 'PullRequestReviewConnection', totalCount: number, nodes?: Array<{ __typename?: 'PullRequestReview', url: any, createdAt: any, author?:
+           | null } | null> | null }, reviews?: { __typename?: 'PullRequestReviewConnection', totalCount: number, nodes?: Array<{ __typename?: 'PullRequestReview', state: PullRequestReviewState, author?:
             | { __typename?: 'Bot', login: string }
             | { __typename?: 'EnterpriseUserAccount', login: string }
             | { __typename?: 'Mannequin', login: string }
@@ -36440,11 +36440,10 @@ export const FetchPullByNumberDocument = new TypedDocumentString(`
           }
         }
       }
-      reviews(last: 1) {
+      reviews(last: 100) {
         totalCount
         nodes {
-          url
-          createdAt
+          state
           author {
             login
           }

@@ -5,10 +5,7 @@ import type { Account, Hostname, Link } from '../types';
 import type { Notification, Repository, SubjectUser } from '../typesGitHub';
 import { getDeveloperSettingsURL } from './auth/utils';
 import { openExternalLink } from './comms';
-import {
-  generateGitHubWebUrl,
-  generateNotificationReferrerId,
-} from './helpers';
+import { generateGitHubWebUrl } from './helpers';
 
 export function openGitifyReleaseNotes(version: string) {
   openExternalLink(
@@ -58,14 +55,8 @@ export function openRepository(repository: Repository) {
 }
 
 export async function openNotification(notification: Notification) {
-  const url = new URL(await generateGitHubWebUrl(notification));
-
-  url.searchParams.set(
-    'notification_referrer_id',
-    generateNotificationReferrerId(notification),
-  );
-
-  openExternalLink(url.toString() as Link);
+  const url = await generateGitHubWebUrl(notification);
+  openExternalLink(url);
 }
 
 export function openGitHubParticipatingDocs() {

@@ -16,32 +16,40 @@ import type {
   Subject,
 } from '../../../typesGitHub';
 import { fetchIssueByNumber } from '../../api/client';
+import { isStateFilteredOut, isUserFilteredOut } from '../filters/filter';
 import { DefaultHandler } from './default';
+import { getSubjectAuthor } from './utils';
 
 class IssueHandler extends DefaultHandler {
   readonly type = 'Issue';
 
   async enrich(
     notification: Notification,
-    _settings: SettingsState,
+    settings: SettingsState,
   ): Promise<GitifySubject> {
     const response = await fetchIssueByNumber(notification);
     const issue = response.data.repository?.issue;
 
-    // const issueState = issue.stateReason ?? issue.state;
+    const issueState = issue.stateReason ?? issue.state;
 
     // Return early if this notification would be hidden by filters
-    // if (isStateFilteredOut(issueState, settings)) {
-    // return null;
-    // }
+    if (isStateFilteredOut(issueState, settings)) {
+      return null;
+    }
 
-    // const issueCommentUser = issue.comments.nodes[0]?.author;
+    const issueCommentUser = issue.comments.nodes[0].author;
+
+    const issueUser = getSubjectAuthor([issueCommentUser, issue.author]);
+
+    // Return early if this notification would be hidden by user filters
+    if (isUserFilteredOut(issueUser, settings)) {
+      return null;
+    }
 
     return {
       number: issue.number,
-      // state: issueState
-      state: null,
-      user: null, //getSubjectUser([issueCommentUser, issue.author]),
+      state: issueState,
+      user: issueUser,
       comments: issue.comments.totalCount,
       labels: issue.labels.nodes?.map((label) => label.name) ?? [],
       milestone: issue.milestone,

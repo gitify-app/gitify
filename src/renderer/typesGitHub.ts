@@ -4,6 +4,7 @@ import type {
   IssueState,
   IssueStateReason,
   MilestoneFieldsFragment,
+  PullRequestReviewState,
   PullRequestState,
 } from './utils/api/graphql/generated/graphql';
 
@@ -86,13 +87,6 @@ export type CheckSuiteStatus =
   | 'success'
   | 'timed_out'
   | 'waiting';
-
-export type PullRequestReviewState =
-  | 'APPROVED'
-  | 'CHANGES_REQUESTED'
-  | 'COMMENTED'
-  | 'DISMISSED'
-  | 'PENDING';
 
 export type PullRequestReviewAuthorAssociation =
   | 'COLLABORATOR'
@@ -276,19 +270,6 @@ export interface GitifySubject {
 export interface GitifyPullRequestReview {
   state: PullRequestReviewState;
   users: string[];
-}
-
-export interface PullRequestReview {
-  id: number;
-  node_id: string;
-  user: User;
-  body: string;
-  state: PullRequestReviewState;
-  html_url: Link;
-  pull_request_url: Link;
-  author_association: PullRequestReviewAuthorAssociation;
-  submitted_at: string;
-  commit_id: string;
 }
 
 export interface Commit {

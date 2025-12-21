@@ -9,6 +9,7 @@ import {
 
 import { IconColor } from '../types';
 import type { GitifyPullRequestReview } from '../typesGitHub';
+import { PullRequestReviewState } from './api/graphql/generated/graphql';
 import {
   getAuthMethodIcon,
   getDefaultUserIcon,
@@ -23,18 +24,18 @@ describe('renderer/utils/icons.ts', () => {
 
     beforeEach(() => {
       mockReviewSingleReviewer = {
-        state: 'APPROVED',
+        state: PullRequestReviewState.Approved,
         users: ['user1'],
       };
       mockReviewMultipleReviewer = {
-        state: 'APPROVED',
+        state: PullRequestReviewState.Approved,
         users: ['user1', 'user2'],
       };
     });
 
     it('approved', () => {
-      mockReviewSingleReviewer.state = 'APPROVED';
-      mockReviewMultipleReviewer.state = 'APPROVED';
+      mockReviewSingleReviewer.state = PullRequestReviewState.Approved;
+      mockReviewMultipleReviewer.state = PullRequestReviewState.Approved;
 
       expect(getPullRequestReviewIcon(mockReviewSingleReviewer)).toEqual({
         type: CheckIcon,
@@ -50,8 +51,9 @@ describe('renderer/utils/icons.ts', () => {
     });
 
     it('changes requested', () => {
-      mockReviewSingleReviewer.state = 'CHANGES_REQUESTED';
-      mockReviewMultipleReviewer.state = 'CHANGES_REQUESTED';
+      mockReviewSingleReviewer.state = PullRequestReviewState.ChangesRequested;
+      mockReviewMultipleReviewer.state =
+        PullRequestReviewState.ChangesRequested;
 
       expect(getPullRequestReviewIcon(mockReviewSingleReviewer)).toEqual({
         type: FileDiffIcon,
@@ -67,8 +69,8 @@ describe('renderer/utils/icons.ts', () => {
     });
 
     it('commented', () => {
-      mockReviewSingleReviewer.state = 'COMMENTED';
-      mockReviewMultipleReviewer.state = 'COMMENTED';
+      mockReviewSingleReviewer.state = PullRequestReviewState.Commented;
+      mockReviewMultipleReviewer.state = PullRequestReviewState.Commented;
 
       expect(getPullRequestReviewIcon(mockReviewSingleReviewer)).toEqual({
         type: CommentIcon,
@@ -84,8 +86,8 @@ describe('renderer/utils/icons.ts', () => {
     });
 
     it('dismissed', () => {
-      mockReviewSingleReviewer.state = 'DISMISSED';
-      mockReviewMultipleReviewer.state = 'DISMISSED';
+      mockReviewSingleReviewer.state = PullRequestReviewState.Dismissed;
+      mockReviewMultipleReviewer.state = PullRequestReviewState.Dismissed;
 
       expect(getPullRequestReviewIcon(mockReviewSingleReviewer)).toEqual({
         type: CommentIcon,
@@ -101,8 +103,8 @@ describe('renderer/utils/icons.ts', () => {
     });
 
     it('pending', () => {
-      mockReviewSingleReviewer.state = 'PENDING';
-      mockReviewMultipleReviewer.state = 'PENDING';
+      mockReviewSingleReviewer.state = PullRequestReviewState.Pending;
+      mockReviewMultipleReviewer.state = PullRequestReviewState.Pending;
 
       expect(getPullRequestReviewIcon(mockReviewSingleReviewer)).toBeNull();
 

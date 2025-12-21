@@ -13,12 +13,14 @@ import type {
   GitifyPullRequestReview,
   GitifySubject,
   Notification,
-  PullRequestReview,
   PullRequestStateType,
   Subject,
 } from '../../../typesGitHub';
 import { fetchPullByNumber } from '../../api/client';
-import type { PullRequestState } from '../../api/graphql/generated/graphql';
+import type {
+  FetchPullByNumberQuery,
+  PullRequestState,
+} from '../../api/graphql/generated/graphql';
 import { isStateFilteredOut, isUserFilteredOut } from '../filters/filter';
 import { DefaultHandler } from './default';
 import { getSubjectAuthor } from './utils';
@@ -52,7 +54,7 @@ class PullRequestHandler extends DefaultHandler {
       return null;
     }
 
-    const reviews = null; // await getLatestReviewForReviewers(notification);
+    const reviews = getLatestReviewForReviewers(pr.reviews.nodes);
 
     return {
       number: pr.number,
@@ -91,25 +93,20 @@ class PullRequestHandler extends DefaultHandler {
 
 export const pullRequestHandler = new PullRequestHandler();
 
-export async function getLatestReviewForReviewers(
-  notification: Notification,
-): Promise<GitifyPullRequestReview[]> | null {
-  if (notification.subject.type !== 'PullRequest') {
-    return null;
-  }
-
-  const prReviews = null;
-
-  if (!prReviews.data.length) {
+export function getLatestReviewForReviewers(
+  reviews: FetchPullByNumberQuery['repository']['pullRequest']['reviews']['nodes'],
+): GitifyPullRequestReview[] {
+  if (!reviews.length) {
     return null;
   }
 
   // Find the most recent review for each reviewer
-  const latestReviews: PullRequestReview[] = [];
-  const sortedReviews = prReviews.data.slice().reverse();
+  const latestReviews = [];
+  const sortedReviews = reviews.reverse();
   for (const prReview of sortedReviews) {
     const reviewerFound = latestReviews.find(
-      (review) => review.user.login === prReview.user.login,
+      (review) => review.author.login === prReview.author.login,
+      prReview.state,
     );
 
     if (!reviewerFound) {
@@ -125,11 +122,11 @@ export async function getLatestReviewForReviewers(
     );
 
     if (reviewerFound) {
-      reviewerFound.users.push(prReview.user.login);
+      reviewerFound.users.push(prReview.author.login);
     } else {
       reviewers.push({
         state: prReview.state,
-        users: [prReview.user.login],
+        users: [prReview.author.login],
       });
     }
   }

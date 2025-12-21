@@ -16,7 +16,6 @@ import type {
   GitifySubject,
   Notification,
   Subject,
-  SubjectUser,
 } from '../../../typesGitHub';
 import { fetchDiscussionByNumber } from '../../api/client';
 import type {
@@ -25,6 +24,7 @@ import type {
 } from '../../api/graphql/generated/graphql';
 import { isStateFilteredOut } from '../filters/filter';
 import { DefaultHandler } from './default';
+import { getSubjectAuthor } from './utils';
 
 type DiscussionComment = NonNullable<
   NonNullable<
@@ -57,9 +57,7 @@ class DiscussionHandler extends DefaultHandler {
 
     if (discussion.isAnswered) {
       discussionState = 'ANSWERED';
-    }
-
-    if (discussion.stateReason) {
+    } else if (discussion.stateReason) {
       discussionState = discussion.stateReason;
     }
 
@@ -73,26 +71,13 @@ class DiscussionHandler extends DefaultHandler {
       discussion.comments.nodes,
     );
 
-    let discussionUser: SubjectUser = {
-      login: discussion.author.login,
-      html_url: discussion.author.html_url,
-      avatar_url: discussion.author.avatar_url,
-      type: discussion.author.type,
-    };
-
-    if (latestDiscussionComment) {
-      discussionUser = {
-        login: latestDiscussionComment.author.login,
-        html_url: latestDiscussionComment.author.html_url,
-        avatar_url: latestDiscussionComment.author.avatar_url,
-        type: latestDiscussionComment.author.type,
-      };
-    }
-
     return {
       number: discussion.number,
       state: discussionState,
-      user: discussionUser,
+      user: getSubjectAuthor([
+        latestDiscussionComment.author,
+        discussion.author,
+      ]),
       comments: discussion.comments.totalCount,
       labels: discussion.labels?.nodes.map((label) => label.name) ?? [],
       htmlUrl: latestDiscussionComment.url ?? discussion.url,

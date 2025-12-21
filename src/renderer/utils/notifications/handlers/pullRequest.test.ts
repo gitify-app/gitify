@@ -9,6 +9,7 @@ import { mockSettings } from '../../../__mocks__/state-mocks';
 import { createPartialMockUser } from '../../../__mocks__/user-mocks';
 import type { Link } from '../../../types';
 import type { Notification } from '../../../typesGitHub';
+import { PullRequestReviewState } from '../../api/graphql/generated/graphql';
 import { getLatestReviewForReviewers, pullRequestHandler } from './pullRequest';
 
 describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
@@ -434,36 +435,34 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
 
   describe('Pull Request Reviews - Latest Reviews By Reviewer', () => {
     it('returns latest review state per reviewer', async () => {
-      nock('https://api.github.com')
-        .get('/repos/gitify-app/notifications-test/pulls/1/reviews')
-        .reply(200, [
-          {
-            user: {
-              login: 'reviewer-1',
-            },
-            state: 'REQUESTED_CHANGES',
+      const mockReviews = [
+        {
+          author: {
+            login: 'reviewer-1',
           },
-          {
-            user: {
-              login: 'reviewer-2',
-            },
-            state: 'COMMENTED',
+          state: PullRequestReviewState.ChangesRequested,
+        },
+        {
+          author: {
+            login: 'reviewer-2',
           },
-          {
-            user: {
-              login: 'reviewer-1',
-            },
-            state: 'APPROVED',
+          state: PullRequestReviewState.Commented,
+        },
+        {
+          author: {
+            login: 'reviewer-1',
           },
-          {
-            user: {
-              login: 'reviewer-3',
-            },
-            state: 'APPROVED',
+          state: PullRequestReviewState.Approved,
+        },
+        {
+          author: {
+            login: 'reviewer-3',
           },
-        ]);
+          state: PullRequestReviewState.Approved,
+        },
+      ];
 
-      const result = await getLatestReviewForReviewers(mockNotification);
+      const result = getLatestReviewForReviewers(mockReviews);
 
       expect(result).toEqual([
         { state: 'APPROVED', users: ['reviewer-3', 'reviewer-1'] },
@@ -472,19 +471,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
     });
 
     it('handles no PR reviews yet', async () => {
-      nock('https://api.github.com')
-        .get('/repos/gitify-app/notifications-test/pulls/1/reviews')
-        .reply(200, []);
-
-      const result = await getLatestReviewForReviewers(mockNotification);
-
-      expect(result).toBeNull();
-    });
-
-    it('returns null when not a PR notification', async () => {
-      mockNotification.subject.type = 'Issue';
-
-      const result = await getLatestReviewForReviewers(mockNotification);
+      const result = getLatestReviewForReviewers([]);
 
       expect(result).toBeNull();
     });
