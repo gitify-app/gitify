@@ -21,6 +21,7 @@ query FetchIssueByNumber(
       comments(last: 1) {
         totalCount
         nodes {
+          url
           author {
             ...AuthorFields
           }

@@ -65,11 +65,13 @@ export class DefaultHandler implements NotificationTypeHandler {
       notification.subject.type,
     ]);
   }
+
   formattedNotificationNumber(notification: Notification): string {
     return notification.subject?.number
       ? `#${notification.subject.number}`
       : '';
   }
+
   formattedNotificationTitle(notification: Notification): string {
     let title = notification.subject.title;
 

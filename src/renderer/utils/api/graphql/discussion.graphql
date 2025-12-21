@@ -44,4 +44,5 @@ fragment CommentFields on DiscussionComment {
   author {
     ...AuthorFields
   }
+  url
 }

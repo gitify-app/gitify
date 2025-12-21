@@ -398,6 +398,7 @@ export const mockDiscussionByNumberGraphQLResponse: FetchDiscussionByNumberQuery
                   'https://avatars.githubusercontent.com/u/123456789?v=4' as Link,
                 type: 'User',
               },
+              url: 'https://github.com/gitify-app/notifications-test/discussions/612#discussioncomment-67890',
               replies: {
                 nodes: [
                   {
@@ -410,6 +411,7 @@ export const mockDiscussionByNumberGraphQLResponse: FetchDiscussionByNumberQuery
                         'https://avatars.githubusercontent.com/u/123456789?v=4' as Link,
                       type: 'User',
                     },
+                    url: 'https://github.com/gitify-app/notifications-test/discussions/612#discussioncomment-12345',
                   },
                 ],
               },

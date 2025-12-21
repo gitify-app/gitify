@@ -8,12 +8,8 @@ import {
 import { mockSettings } from '../../../__mocks__/state-mocks';
 import { createPartialMockUser } from '../../../__mocks__/user-mocks';
 import type { Link } from '../../../types';
-import type { Notification, PullRequest } from '../../../typesGitHub';
-import {
-  getLatestReviewForReviewers,
-  parseLinkedIssuesFromPr,
-  pullRequestHandler,
-} from './pullRequest';
+import type { Notification } from '../../../typesGitHub';
+import { getLatestReviewForReviewers, pullRequestHandler } from './pullRequest';
 
 describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
   let mockNotification: Notification;
@@ -354,42 +350,6 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
           labels: [],
           linkedIssues: [],
         });
-      });
-    });
-
-    describe('Pull Request With Linked Issues', () => {
-      it('returns empty if no pr body', () => {
-        const mockPr = {
-          user: {
-            type: 'User',
-          },
-          body: null,
-        } as PullRequest;
-
-        const result = parseLinkedIssuesFromPr(mockPr);
-        expect(result).toEqual([]);
-      });
-
-      it('returns empty if pr from non-user', () => {
-        const mockPr = {
-          user: {
-            type: 'Bot',
-          },
-          body: 'This PR is linked to #1, #2, and #3',
-        } as PullRequest;
-        const result = parseLinkedIssuesFromPr(mockPr);
-        expect(result).toEqual([]);
-      });
-
-      it('returns linked issues', () => {
-        const mockPr = {
-          user: {
-            type: 'User',
-          },
-          body: 'This PR is linked to #1, #2, and #3',
-        } as PullRequest;
-        const result = parseLinkedIssuesFromPr(mockPr);
-        expect(result).toEqual(['#1', '#2', '#3']);
       });
     });
 

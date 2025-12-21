@@ -23,6 +23,7 @@ query FetchPullByNumber(
       comments(last: 1) {
         totalCount
         nodes {
+          url
           author {
             ...AuthorFields
           }
@@ -31,6 +32,7 @@ query FetchPullByNumber(
       reviews(last: 1) {
         totalCount
         nodes {
+          url
           createdAt
           author {
             login

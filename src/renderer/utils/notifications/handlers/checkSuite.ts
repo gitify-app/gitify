@@ -9,7 +9,7 @@ import {
   XIcon,
 } from '@primer/octicons-react';
 
-import type { SettingsState } from '../../../types';
+import type { Link, SettingsState } from '../../../types';
 import type {
   CheckSuiteAttributes,
   CheckSuiteStatus,
@@ -17,6 +17,7 @@ import type {
   Notification,
   Subject,
 } from '../../../typesGitHub';
+import { actionsURL } from '../../helpers';
 import { DefaultHandler } from './default';
 
 class CheckSuiteHandler extends DefaultHandler {
@@ -32,6 +33,7 @@ class CheckSuiteHandler extends DefaultHandler {
       return {
         state: state,
         user: null,
+        htmlUrl: getCheckSuiteUrl(notification),
       };
     }
 
@@ -98,4 +100,26 @@ function getCheckSuiteStatus(statusDisplayName: string): CheckSuiteStatus {
     default:
       return null;
   }
+}
+
+export function getCheckSuiteUrl(notification: Notification): Link {
+  const filters = [];
+
+  const checkSuiteAttributes = getCheckSuiteAttributes(notification);
+
+  if (checkSuiteAttributes?.workflowName) {
+    filters.push(
+      `workflow:"${checkSuiteAttributes.workflowName.replaceAll(' ', '+')}"`,
+    );
+  }
+
+  if (checkSuiteAttributes?.status) {
+    filters.push(`is:${checkSuiteAttributes.status}`);
+  }
+
+  if (checkSuiteAttributes?.branchName) {
+    filters.push(`branch:${checkSuiteAttributes.branchName}`);
+  }
+
+  return actionsURL(notification.repository.html_url, filters);
 }

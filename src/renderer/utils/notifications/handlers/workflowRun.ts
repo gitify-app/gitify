@@ -3,7 +3,7 @@ import type { FC } from 'react';
 import type { OcticonProps } from '@primer/octicons-react';
 import { RocketIcon } from '@primer/octicons-react';
 
-import type { SettingsState } from '../../../types';
+import type { Link, SettingsState } from '../../../types';
 import type {
   CheckSuiteStatus,
   GitifySubject,
@@ -11,6 +11,7 @@ import type {
   Subject,
   WorkflowRunAttributes,
 } from '../../../typesGitHub';
+import { actionsURL } from '../../helpers';
 import { DefaultHandler } from './default';
 
 class WorkflowRunHandler extends DefaultHandler {
@@ -26,6 +27,7 @@ class WorkflowRunHandler extends DefaultHandler {
       return {
         state: state,
         user: null,
+        htmlUrl: getWorkflowRunUrl(notification),
       };
     }
 
@@ -71,4 +73,16 @@ function getWorkflowRunStatus(statusDisplayName: string): CheckSuiteStatus {
     default:
       return null;
   }
+}
+
+export function getWorkflowRunUrl(notification: Notification): Link {
+  const filters = [];
+
+  const workflowRunAttributes = getWorkflowRunAttributes(notification);
+
+  if (workflowRunAttributes?.status) {
+    filters.push(`is:${workflowRunAttributes.status}`);
+  }
+
+  return actionsURL(notification.repository.html_url, filters);
 }

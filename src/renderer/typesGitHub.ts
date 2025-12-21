@@ -270,61 +270,12 @@ export interface GitifySubject {
   comments?: number;
   labels?: string[];
   milestone?: MilestoneFieldsFragment;
-}
-
-export interface PullRequest {
-  url: Link;
-  id: number;
-  node_id: string;
-  html_url: Link;
-  diff_url: Link;
-  patch_url: Link;
-  issue_url: Link;
-  number: number;
-  state: PullRequestStateType;
-  locked: boolean;
-  title: string;
-  user: User;
-  body: string;
-  created_at: string;
-  updated_at: string;
-  closed_at: string | null;
-  merged_at: string | null;
-  merge_commit_sha: string | null;
-  labels: Labels[];
-  milestone: Milestone | null;
-  draft: boolean;
-  commits_url: Link;
-  review_comments_url: Link;
-  review_comment_url: Link;
-  comments_url: Link;
-  statuses_url: Link;
-  author_association: string;
-  merged: boolean;
-  mergeable: boolean;
-  rebaseable: boolean;
-  comments: number;
-  review_comments: number;
-  maintainer_can_modify: boolean;
-  commits: number;
-  additions: number;
-  deletions: number;
-  changed_files: number;
+  htmlUrl?: Link;
 }
 
 export interface GitifyPullRequestReview {
   state: PullRequestReviewState;
   users: string[];
-}
-
-export interface Labels {
-  id: number;
-  node_id: string;
-  url: Link;
-  name: string;
-  color: string;
-  default: boolean;
-  description: string;
 }
 
 export interface PullRequestReview {
@@ -410,64 +361,6 @@ export interface CommitComment {
   updated_at: string;
   body: string;
 }
-
-export interface Issue {
-  url: Link;
-  repository_url: Link;
-  labels_url: Link;
-  comments_url: Link;
-  events_url: Link;
-  html_url: Link;
-  id: number;
-  node_id: string;
-  number: number;
-  title: string;
-  user: User;
-  state: IssueStateType;
-  locked: boolean;
-  labels: Labels[];
-  milestone: Milestone | null;
-  comments: number;
-  created_at: string;
-  updated_at: string;
-  closed_at: string | null;
-  author_association: string;
-  body: string;
-  state_reason: IssueStateReasonType | null;
-}
-
-export interface IssueOrPullRequestComment {
-  url: Link;
-  html_url: Link;
-  issue_url: Link;
-  id: number;
-  node_id: string;
-  user: User;
-  created_at: string;
-  updated_at: string;
-  body: string;
-}
-
-export interface Milestone {
-  url: Link;
-  html_url: Link;
-  labels_url: Link;
-  id: number;
-  node_id: string;
-  number: number;
-  title: string;
-  description: string;
-  creator: User;
-  open_issues: number;
-  closed_issues: number;
-  state: MilestoneStateType;
-  created_at: string;
-  updated_at: string;
-  due_on: string | null;
-  closed_at: string | null;
-}
-
-type MilestoneStateType = 'open' | 'closed';
 
 export interface Release {
   url: Link;

@@ -13,7 +13,6 @@ import type {
   GitifyPullRequestReview,
   GitifySubject,
   Notification,
-  PullRequest,
   PullRequestReview,
   PullRequestStateType,
   Subject,
@@ -66,6 +65,7 @@ class PullRequestHandler extends DefaultHandler {
         (issue) => `#${issue.number}`,
       ),
       milestone: null, //pr.milestone,
+      htmlUrl: pr.comments.nodes[0]?.url ?? pr.url,
     };
   }
 
@@ -132,23 +132,4 @@ export async function getLatestReviewForReviewers(
   return reviewers.sort((a, b) => {
     return a.state.localeCompare(b.state);
   });
-}
-
-export function parseLinkedIssuesFromPr(pr: PullRequest): string[] {
-  const linkedIssues: string[] = [];
-
-  if (!pr.body || pr.user.type !== 'User') {
-    return linkedIssues;
-  }
-
-  const regexPattern = /\s?#(\d+)\s?/gi;
-  const matches = pr.body.matchAll(regexPattern);
-
-  for (const match of matches) {
-    if (match[0]) {
-      linkedIssues.push(match[0].trim());
-    }
-  }
-
-  return linkedIssues;
 }

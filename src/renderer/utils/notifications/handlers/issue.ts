@@ -45,6 +45,7 @@ class IssueHandler extends DefaultHandler {
       comments: issue.comments.totalCount,
       labels: issue.labels.nodes?.map((label) => label.name) ?? [],
       milestone: issue.milestone,
+      htmlUrl: issue.comments.nodes[0]?.url ?? issue.url,
     };
   }
 

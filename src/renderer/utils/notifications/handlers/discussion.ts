@@ -95,6 +95,7 @@ class DiscussionHandler extends DefaultHandler {
       user: discussionUser,
       comments: discussion.comments.totalCount,
       labels: discussion.labels?.nodes.map((label) => label.name) ?? [],
+      htmlUrl: latestDiscussionComment.url ?? discussion.url,
     };
   }
 
