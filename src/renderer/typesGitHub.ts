@@ -46,10 +46,6 @@ export type SubjectType =
   | 'RepositoryVulnerabilityAlert'
   | 'WorkflowRun';
 
-export type IssueStateType = 'closed' | 'open';
-
-export type IssueStateReasonType = 'completed' | 'not_planned' | 'reopened';
-
 export type UserType =
   | 'Bot'
   | 'EnterpriseUserAccount'
@@ -66,8 +62,6 @@ export type PullRequestStateType = 'closed' | 'draft' | 'merged' | 'open';
 export type StateType =
   | CheckSuiteStatus
   | DiscussionStateType
-  | IssueStateType
-  | IssueStateReasonType
   | PullRequestStateType
   | IssueState
   | IssueStateReason
@@ -87,16 +81,6 @@ export type CheckSuiteStatus =
   | 'success'
   | 'timed_out'
   | 'waiting';
-
-export type PullRequestReviewAuthorAssociation =
-  | 'COLLABORATOR'
-  | 'CONTRIBUTOR'
-  | 'FIRST_TIMER'
-  | 'FIRST_TIME_CONTRIBUTOR'
-  | 'MANNEQUIN'
-  | 'MEMBER'
-  | 'NONE'
-  | 'OWNER';
 
 // TODO: #828 Add explicit types for GitHub API response vs Gitify Notifications object
 export type Notification = GitHubNotification & GitifyNotification;

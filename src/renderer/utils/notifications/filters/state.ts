@@ -5,6 +5,13 @@ import type {
   TypeDetails,
 } from '../../../types';
 import type { Notification } from '../../../typesGitHub';
+import {
+  DiscussionCloseReason,
+  DiscussionState,
+  IssueState,
+  IssueStateReason,
+  PullRequestState,
+} from '../../api/graphql/generated/graphql';
 import type { Filter } from './types';
 
 const STATE_TYPE_DETAILS: Record<FilterStateType, TypeDetails> = {
@@ -63,9 +70,25 @@ export const stateFilter: Filter<FilterStateType> = {
     notification: Notification,
     stateType: FilterStateType,
   ): boolean {
-    const allOpenStates = ['open', 'reopened'];
-    const allClosedStates = ['closed', 'completed', 'not_planned'];
-    const allMergedStates = ['merged'];
+    const allOpenStates = [
+      DiscussionState.Open,
+      IssueState.Open,
+      IssueStateReason.Reopened,
+      PullRequestState.Open,
+      'open',
+      'reopened',
+    ];
+    const allClosedStates = [
+      DiscussionState.Closed,
+      IssueState.Closed,
+      IssueStateReason.NotPlanned,
+      PullRequestState.Closed,
+
+      'closed',
+      'completed',
+      'not_planned',
+    ];
+    const allMergedStates = [PullRequestState.Merged, 'merged'];
     const allDraftStates = ['draft'];
     const allFilterableStates = [
       ...allOpenStates,
