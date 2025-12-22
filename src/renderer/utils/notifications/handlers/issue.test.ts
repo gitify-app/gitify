@@ -125,7 +125,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
                 title: 'PR Title',
                 state: 'CLOSED',
                 stateReason: 'COMPLETED',
-                url: 'https://github.com/gitify-app/noticiation-test/issues/123',
+                url: 'https://github.com/gitify-app/notifications-test/issues/123',
                 author: mockAuthor,
                 labels: { nodes: [] },
                 comments: { totalCount: 0, nodes: [] },
@@ -147,7 +147,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
           type: mockAuthor.type,
         },
         comments: 0,
-        htmlUrl: 'https://github.com/gitify-app/noticiation-test/issues/123',
+        htmlUrl: 'https://github.com/gitify-app/notifications-test/issues/123',
         labels: [],
         milestone: null,
       } as GitifySubject);
@@ -165,7 +165,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
                 title: 'PR Title',
                 state: 'CLOSED',
                 stateReason: 'NOT_PLANNED',
-                url: 'https://github.com/gitify-app/noticiation-test/issues/123',
+                url: 'https://github.com/gitify-app/notifications-test/issues/123',
                 author: mockAuthor,
                 labels: { nodes: [] },
                 comments: { totalCount: 0, nodes: [] },
@@ -187,7 +187,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
           type: mockAuthor.type,
         },
         comments: 0,
-        htmlUrl: 'https://github.com/gitify-app/noticiation-test/issues/123',
+        htmlUrl: 'https://github.com/gitify-app/notifications-test/issues/123',
         labels: [],
         milestone: null,
       } as GitifySubject);
@@ -205,7 +205,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
                 title: 'PR Title',
                 state: 'OPEN',
                 stateReason: 'REOPENED',
-                url: 'https://github.com/gitify-app/noticiation-test/issues/123',
+                url: 'https://github.com/gitify-app/notifications-test/issues/123',
                 author: mockAuthor,
                 labels: { nodes: [] },
                 comments: { totalCount: 0, nodes: [] },
@@ -227,7 +227,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
           type: mockAuthor.type,
         },
         comments: 0,
-        htmlUrl: 'https://github.com/gitify-app/noticiation-test/issues/123',
+        htmlUrl: 'https://github.com/gitify-app/notifications-test/issues/123',
         labels: [],
         milestone: null,
       } as GitifySubject);
@@ -244,7 +244,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
                 number: 123,
                 title: 'PR Title',
                 state: 'OPEN',
-                url: 'https://github.com/gitify-app/noticiation-test/issues/123',
+                url: 'https://github.com/gitify-app/notifications-test/issues/123',
                 author: mockAuthor,
                 labels: {
                   nodes: [],
@@ -254,7 +254,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
                   nodes: [
                     {
                       author: mockCommenter,
-                      url: 'https://github.com/gitify-app/noticiation-test/issues/123#issuecomment-1234',
+                      url: 'https://github.com/gitify-app/notifications-test/issues/123#issuecomment-1234',
                     },
                   ],
                 },
@@ -277,7 +277,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         },
         comments: 1,
         htmlUrl:
-          'https://github.com/gitify-app/noticiation-test/issues/123#issuecomment-1234',
+          'https://github.com/gitify-app/notifications-test/issues/123#issuecomment-1234',
         labels: [],
         milestone: null,
       } as GitifySubject);
@@ -294,7 +294,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
                 number: 123,
                 title: 'PR Title',
                 state: 'OPEN',
-                url: 'https://github.com/gitify-app/noticiation-test/issues/123',
+                url: 'https://github.com/gitify-app/notifications-test/issues/123',
                 author: mockAuthor,
                 labels: {
                   nodes: [
@@ -322,7 +322,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
           type: mockAuthor.type,
         },
         comments: 0,
-        htmlUrl: 'https://github.com/gitify-app/noticiation-test/issues/123',
+        htmlUrl: 'https://github.com/gitify-app/notifications-test/issues/123',
         labels: ['enhancement'],
         milestone: null,
       } as GitifySubject);
@@ -339,7 +339,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
                 number: 123,
                 title: 'PR Title',
                 state: 'OPEN',
-                url: 'https://github.com/gitify-app/noticiation-test/issues/123',
+                url: 'https://github.com/gitify-app/notifications-test/issues/123',
                 author: mockAuthor,
                 labels: {
                   nodes: [],
@@ -366,7 +366,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
           type: mockAuthor.type,
         },
         comments: 0,
-        htmlUrl: 'https://github.com/gitify-app/noticiation-test/issues/123',
+        htmlUrl: 'https://github.com/gitify-app/notifications-test/issues/123',
         labels: [],
         milestone: {
           state: 'OPEN',
