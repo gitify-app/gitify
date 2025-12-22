@@ -50,7 +50,7 @@ export class DefaultHandler implements NotificationTypeHandler {
   }
 
   defaultUrl(notification: Notification): Link {
-    return notification.repository.html_url as Link;
+    return notification.repository.html_url;
   }
 }
 
