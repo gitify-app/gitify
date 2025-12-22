@@ -67,7 +67,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
 
       expect(result).toEqual({
         number: 123,
-        state: 'OPEN',
+        state: 'CLOSED',
         user: {
           login: mockAuthor.login,
           html_url: mockAuthor.html_url,
