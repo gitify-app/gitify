@@ -9,12 +9,12 @@ import {
   XIcon,
 } from '@primer/octicons-react';
 
-import type {
-  GitifyCheckSuiteStatus,
-  GitifySubject,
+import {
+  type GitifyCheckSuiteStatus,
+  type GitifySubject,
   IconColor,
-  Link,
-  SettingsState,
+  type Link,
+  type SettingsState,
 } from '../../../types';
 import type { Notification, Subject } from '../../../typesGitHub';
 import { actionsURL } from '../../helpers';
