@@ -14,8 +14,12 @@ import {
   ServerIcon,
 } from '@primer/octicons-react';
 
-import { IconColor, type PullRequestApprovalIcon } from '../types';
-import type { GitifyPullRequestReview, UserType } from '../typesGitHub';
+import {
+  type GitifyPullRequestReview,
+  IconColor,
+  type PullRequestApprovalIcon,
+} from '../types';
+import type { UserType } from '../typesGitHub';
 import type { AuthMethod, PlatformType } from './auth/types';
 
 export function getPullRequestReviewIcon(

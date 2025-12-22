@@ -1,0 +1,43 @@
+query FetchIssueByNumber(
+  $owner: String!
+  $name: String!
+  $number: Int!
+  $lastComments: Int
+  $firstLabels: Int
+) {
+  repository(owner: $owner, name: $name) {
+    issue(number: $number) {
+      __typename
+      number
+      title
+      url
+      state
+      stateReason
+      milestone {
+        ...MilestoneFields
+      }
+      author {
+        ...AuthorFields
+      }
+      comments(last: $lastComments) {
+        totalCount
+        nodes {
+          url
+          author {
+            ...AuthorFields
+          }
+        }
+      }
+      labels(first: $firstLabels) {
+        nodes {
+          name
+        }
+      }
+    }
+  }
+}
+
+fragment MilestoneFields on Milestone {
+  state
+  title
+}

@@ -3,14 +3,9 @@ import type { FC } from 'react';
 import type { OcticonProps } from '@primer/octicons-react';
 import { QuestionIcon } from '@primer/octicons-react';
 
-import type { SettingsState } from '../../../types';
+import type { GitifySubject, Link, SettingsState } from '../../../types';
 import { IconColor } from '../../../types';
-import type {
-  GitifySubject,
-  Notification,
-  Subject,
-  SubjectType,
-} from '../../../typesGitHub';
+import type { Notification, Subject, SubjectType } from '../../../typesGitHub';
 import type { NotificationTypeHandler } from './types';
 import { formatForDisplay } from './utils';
 
@@ -38,11 +33,13 @@ export class DefaultHandler implements NotificationTypeHandler {
       notification.subject.type,
     ]);
   }
+
   formattedNotificationNumber(notification: Notification): string {
     return notification.subject?.number
       ? `#${notification.subject.number}`
       : '';
   }
+
   formattedNotificationTitle(notification: Notification): string {
     let title = notification.subject.title;
 
@@ -50,6 +47,10 @@ export class DefaultHandler implements NotificationTypeHandler {
       title = `${title} [${this.formattedNotificationNumber(notification)}]`;
     }
     return title;
+  }
+
+  defaultUrl(notification: Notification): Link {
+    return notification.repository.html_url;
   }
 }
 

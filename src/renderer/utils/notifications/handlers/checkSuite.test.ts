@@ -3,7 +3,12 @@ import {
   createPartialMockNotification,
 } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
-import { IconColor } from '../../../types';
+import {
+  type GitifyCheckSuiteStatus,
+  IconColor,
+  type Link,
+} from '../../../types';
+import type { Notification } from '../../../typesGitHub';
 import { checkSuiteHandler, getCheckSuiteAttributes } from './checkSuite';
 
 describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
@@ -20,8 +25,10 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
       );
 
       expect(result).toEqual({
-        state: 'cancelled',
+        state: 'CANCELLED',
         user: null,
+        htmlUrl:
+          'https://github.com/gitify-app/notifications-test/actions?query=workflow%3A%22Demo%22+is%3ACANCELLED+branch%3Amain',
       });
     });
 
@@ -37,8 +44,10 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
       );
 
       expect(result).toEqual({
-        state: 'failure',
+        state: 'FAILURE',
         user: null,
+        htmlUrl:
+          'https://github.com/gitify-app/notifications-test/actions?query=workflow%3A%22Demo%22+is%3AFAILURE+branch%3Amain',
       });
     });
 
@@ -54,8 +63,10 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
       );
 
       expect(result).toEqual({
-        state: 'failure',
+        state: 'FAILURE',
         user: null,
+        htmlUrl:
+          'https://github.com/gitify-app/notifications-test/actions?query=workflow%3A%22Demo%22+is%3AFAILURE+branch%3Amain',
       });
     });
 
@@ -71,8 +82,10 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
       );
 
       expect(result).toEqual({
-        state: 'failure',
+        state: 'FAILURE',
         user: null,
+        htmlUrl:
+          'https://github.com/gitify-app/notifications-test/actions?query=workflow%3A%22Demo%22+is%3AFAILURE+branch%3Amain',
       });
     });
 
@@ -88,8 +101,10 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
       );
 
       expect(result).toEqual({
-        state: 'skipped',
+        state: 'SKIPPED',
         user: null,
+        htmlUrl:
+          'https://github.com/gitify-app/notifications-test/actions?query=workflow%3A%22Demo%22+is%3ASKIPPED+branch%3Amain',
       });
     });
 
@@ -105,8 +120,10 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
       );
 
       expect(result).toEqual({
-        state: 'success',
+        state: 'SUCCESS',
         user: null,
+        htmlUrl:
+          'https://github.com/gitify-app/notifications-test/actions?query=workflow%3A%22Demo%22+is%3ASUCCESS+branch%3Amain',
       });
     });
 
@@ -139,80 +156,76 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
     });
   });
 
-  it('iconType', () => {
-    expect(
-      checkSuiteHandler.iconType(
-        createMockSubject({ type: 'CheckSuite', state: null }),
-      ).displayName,
-    ).toBe('RocketIcon');
+  describe('iconType', () => {
+    const cases = {
+      ACTION_REQUIRED: 'RocketIcon',
+      CANCELLED: 'StopIcon',
+      COMPLETED: 'RocketIcon',
+      FAILURE: 'XIcon',
+      IN_PROGRESS: 'RocketIcon',
+      PENDING: 'RocketIcon',
+      QUEUED: 'RocketIcon',
+      REQUESTED: 'RocketIcon',
+      SKIPPED: 'SkipIcon',
+      STALE: 'RocketIcon',
+      SUCCESS: 'CheckIcon',
+      TIMED_OUT: 'RocketIcon',
+      WAITING: 'RocketIcon',
+    } satisfies Record<GitifyCheckSuiteStatus, string>;
 
-    expect(
-      checkSuiteHandler.iconType(
-        createMockSubject({
-          type: 'CheckSuite',
-          state: 'cancelled',
-        }),
-      ).displayName,
-    ).toBe('StopIcon');
-
-    expect(
-      checkSuiteHandler.iconType(
-        createMockSubject({
-          type: 'CheckSuite',
-          state: 'failure',
-        }),
-      ).displayName,
-    ).toBe('XIcon');
-
-    expect(
-      checkSuiteHandler.iconType(
-        createMockSubject({
-          type: 'CheckSuite',
-          state: 'skipped',
-        }),
-      ).displayName,
-    ).toBe('SkipIcon');
-
-    expect(
-      checkSuiteHandler.iconType(
-        createMockSubject({
-          type: 'CheckSuite',
-          state: 'success',
-        }),
-      ).displayName,
-    ).toBe('CheckIcon');
+    it.each(
+      Object.entries(cases) as Array<[GitifyCheckSuiteStatus, IconColor]>,
+    )('iconType for check suite with status %s', (checkSuiteStatus, checkSuiteIconType) => {
+      expect(
+        checkSuiteHandler.iconType(
+          createMockSubject({ type: 'CheckSuite', state: checkSuiteStatus }),
+        ).displayName,
+      ).toBe(checkSuiteIconType);
+    });
   });
 
-  it('iconColor', () => {
-    expect(
-      checkSuiteHandler.iconColor(
-        createMockSubject({ type: 'CheckSuite', state: 'success' }),
-      ),
-    ).toBe(IconColor.GREEN);
+  describe('iconColor', () => {
+    const cases = {
+      ACTION_REQUIRED: IconColor.GRAY,
+      CANCELLED: IconColor.GRAY,
+      COMPLETED: IconColor.GRAY,
+      FAILURE: IconColor.RED,
+      IN_PROGRESS: IconColor.GRAY,
+      PENDING: IconColor.GRAY,
+      QUEUED: IconColor.GRAY,
+      REQUESTED: IconColor.GRAY,
+      SKIPPED: IconColor.GRAY,
+      STALE: IconColor.GRAY,
+      SUCCESS: IconColor.GREEN,
+      TIMED_OUT: IconColor.GRAY,
+      WAITING: IconColor.GRAY,
+    } satisfies Record<GitifyCheckSuiteStatus, IconColor>;
+
+    it.each(
+      Object.entries(cases) as Array<[GitifyCheckSuiteStatus, IconColor]>,
+    )('iconColor for check suite with status %s', (checkSuiteStatus, checkSuiteIconColor) => {
+      expect(
+        checkSuiteHandler.iconColor(
+          createMockSubject({ type: 'CheckSuite', state: checkSuiteStatus }),
+        ),
+      ).toBe(checkSuiteIconColor);
+    });
+  });
+
+  it('defaultUrl', () => {
+    const mockHtmlUrl =
+      'https://github.com/gitify-app/notifications-test' as Link;
 
     expect(
-      checkSuiteHandler.iconColor(
-        createMockSubject({ type: 'CheckSuite', state: 'failure' }),
-      ),
-    ).toBe(IconColor.RED);
-
-    expect(
-      checkSuiteHandler.iconColor(
-        createMockSubject({ type: 'CheckSuite', state: 'cancelled' }),
-      ),
-    ).toBe(IconColor.GRAY);
-
-    expect(
-      checkSuiteHandler.iconColor(
-        createMockSubject({ type: 'CheckSuite', state: 'skipped' }),
-      ),
-    ).toBe(IconColor.GRAY);
-
-    expect(
-      checkSuiteHandler.iconColor(
-        createMockSubject({ type: 'CheckSuite', state: null }),
-      ),
-    ).toBe(IconColor.GRAY);
+      checkSuiteHandler.defaultUrl({
+        subject: {
+          title: 'Some notification',
+        },
+        repository: {
+          html_url: mockHtmlUrl,
+        },
+      } as Notification),
+    ).toEqual(`${mockHtmlUrl}/actions`);
   });
 
   describe('getCheckSuiteState', () => {
@@ -227,7 +240,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
       expect(result).toEqual({
         workflowName: 'Demo',
         attemptNumber: null,
-        status: 'cancelled',
+        status: 'CANCELLED',
         statusDisplayName: 'cancelled',
         branchName: 'feature/foo',
       });
@@ -244,7 +257,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
       expect(result).toEqual({
         workflowName: 'Demo',
         attemptNumber: null,
-        status: 'failure',
+        status: 'FAILURE',
         statusDisplayName: 'failed',
         branchName: 'main',
       });
@@ -261,7 +274,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
       expect(result).toEqual({
         workflowName: 'Demo',
         attemptNumber: 3,
-        status: 'failure',
+        status: 'FAILURE',
         statusDisplayName: 'failed',
         branchName: 'main',
       });
@@ -278,7 +291,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
       expect(result).toEqual({
         workflowName: 'Demo',
         attemptNumber: null,
-        status: 'skipped',
+        status: 'SKIPPED',
         statusDisplayName: 'skipped',
         branchName: 'main',
       });
@@ -295,7 +308,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
       expect(result).toEqual({
         workflowName: 'Demo',
         attemptNumber: null,
-        status: 'success',
+        status: 'SUCCESS',
         statusDisplayName: 'succeeded',
         branchName: 'main',
       });

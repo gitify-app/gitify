@@ -3,8 +3,12 @@ import {
   createPartialMockNotification,
 } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
-import { IconColor } from '../../../types';
-import type { StateType } from '../../../typesGitHub';
+import {
+  type GitifyNotificationState,
+  IconColor,
+  type Link,
+} from '../../../types';
+import type { Notification } from '../../../typesGitHub';
 import { defaultHandler } from './default';
 
 describe('renderer/utils/notifications/handlers/default.ts', () => {
@@ -33,8 +37,8 @@ describe('renderer/utils/notifications/handlers/default.ts', () => {
 
   describe('iconColor', () => {
     it('returns GRAY for any state (fallback behavior)', () => {
-      const states: Array<StateType | null | undefined> = [
-        'unknown' as StateType,
+      const states: Array<GitifyNotificationState | null | undefined> = [
+        'unknown' as GitifyNotificationState,
         null,
         undefined,
       ];
@@ -51,7 +55,7 @@ describe('renderer/utils/notifications/handlers/default.ts', () => {
       const notification = createPartialMockNotification({
         title: 'Sample',
         type: 'PullRequest',
-        state: 'open',
+        state: 'OPEN',
       });
 
       expect(defaultHandler.formattedNotificationType(notification)).toBe(
@@ -77,7 +81,7 @@ describe('renderer/utils/notifications/handlers/default.ts', () => {
       const notification = createPartialMockNotification({
         title: 'Sample',
         type: 'Issue',
-        state: 'open',
+        state: 'OPEN',
       });
       notification.subject.number = 42;
       expect(defaultHandler.formattedNotificationNumber(notification)).toBe(
@@ -89,7 +93,7 @@ describe('renderer/utils/notifications/handlers/default.ts', () => {
       const notification = createPartialMockNotification({
         title: 'Sample',
         type: 'Issue',
-        state: 'open',
+        state: 'OPEN',
       });
       expect(defaultHandler.formattedNotificationNumber(notification)).toBe('');
     });
@@ -100,7 +104,7 @@ describe('renderer/utils/notifications/handlers/default.ts', () => {
       const notification = createPartialMockNotification({
         title: 'Fix bug',
         type: 'Issue',
-        state: 'open',
+        state: 'OPEN',
       });
       notification.subject.number = 101;
       expect(defaultHandler.formattedNotificationTitle(notification)).toBe(
@@ -112,11 +116,24 @@ describe('renderer/utils/notifications/handlers/default.ts', () => {
       const notification = createPartialMockNotification({
         title: 'Improve docs',
         type: 'Issue',
-        state: 'open',
+        state: 'OPEN',
       });
       expect(defaultHandler.formattedNotificationTitle(notification)).toBe(
         'Improve docs',
       );
     });
+  });
+
+  it('defaultUrl', () => {
+    const mockHtmlUrl =
+      'https://github.com/gitify-app/notifications-test' as Link;
+
+    expect(
+      defaultHandler.defaultUrl({
+        repository: {
+          html_url: mockHtmlUrl,
+        },
+      } as Notification),
+    ).toEqual(mockHtmlUrl);
   });
 });

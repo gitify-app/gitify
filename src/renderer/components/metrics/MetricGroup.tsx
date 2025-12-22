@@ -84,7 +84,7 @@ export const MetricGroup: FC<MetricGroupProps> = ({
         {notification.subject.milestone && (
           <MetricPill
             color={
-              notification.subject.milestone.state === 'open'
+              notification.subject.milestone.state === 'OPEN'
                 ? IconColor.GREEN
                 : IconColor.RED
             }

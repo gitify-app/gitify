@@ -64,13 +64,15 @@ describe('renderer/utils/notifications/notifications.ts', () => {
       url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1' as Link,
     });
     const mockRepository = {
+      name: 'notifications-test',
       full_name: 'gitify-app/notifications-test',
+      owner: {
+        login: 'gitify-app',
+      },
     } as Repository;
     mockNotification.repository = mockRepository;
 
-    nock('https://api.github.com')
-      .get('/repos/gitify-app/notifications-test/issues/1')
-      .replyWithError(mockError);
+    nock('https://api.github.com').post('/graphql').replyWithError(mockError);
 
     await enrichNotification(mockNotification, mockSettings);
 

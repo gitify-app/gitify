@@ -1,3 +1,4 @@
+import type { FilterStateType, GitifyNotificationState } from '../../../types';
 import type { Notification } from '../../../typesGitHub';
 import { stateFilter } from './state';
 
@@ -6,56 +7,52 @@ describe('renderer/utils/notifications/filters/state.ts', () => {
     jest.clearAllMocks();
   });
 
-  it('can filter by notification states', () => {
-    const mockPartialNotification = {
-      subject: {
-        state: 'open',
-      },
+  describe('can filter by notification states', () => {
+    const mockNotification = {
+      subject: { state: 'OPEN' },
     } as Partial<Notification> as Notification;
 
-    // Open states
-    mockPartialNotification.subject.state = 'open';
-    expect(
-      stateFilter.filterNotification(mockPartialNotification, 'open'),
-    ).toBe(true);
+    const cases = {
+      OPEN: 'open',
+      REOPENED: 'open',
 
-    mockPartialNotification.subject.state = 'reopened';
-    expect(
-      stateFilter.filterNotification(mockPartialNotification, 'open'),
-    ).toBe(true);
+      CLOSED: 'closed',
+      COMPLETED: 'closed',
+      DUPLICATE: 'closed',
+      NOT_PLANNED: 'closed',
+      RESOLVED: 'closed',
 
-    // Closed states
-    mockPartialNotification.subject.state = 'closed';
-    expect(
-      stateFilter.filterNotification(mockPartialNotification, 'closed'),
-    ).toBe(true);
+      MERGED: 'merged',
+      DRAFT: 'draft',
 
-    mockPartialNotification.subject.state = 'completed';
-    expect(
-      stateFilter.filterNotification(mockPartialNotification, 'closed'),
-    ).toBe(true);
+      // Discussion-specific
+      ANSWERED: 'other',
+      OUTDATED: 'other',
 
-    mockPartialNotification.subject.state = 'not_planned';
-    expect(
-      stateFilter.filterNotification(mockPartialNotification, 'closed'),
-    ).toBe(true);
+      // Check suite / workflow states
+      ACTION_REQUIRED: 'other',
+      CANCELLED: 'other',
+      FAILURE: 'other',
+      IN_PROGRESS: 'other',
+      PENDING: 'other',
+      QUEUED: 'other',
+      REQUESTED: 'other',
+      SKIPPED: 'other',
+      STALE: 'other',
+      SUCCESS: 'other',
+      TIMED_OUT: 'other',
+      WAITING: 'other',
+    } satisfies Record<GitifyNotificationState, FilterStateType>;
 
-    // Merged states
-    mockPartialNotification.subject.state = 'merged';
-    expect(
-      stateFilter.filterNotification(mockPartialNotification, 'merged'),
-    ).toBe(true);
-
-    // Draft states
-    mockPartialNotification.subject.state = 'draft';
-    expect(
-      stateFilter.filterNotification(mockPartialNotification, 'draft'),
-    ).toBe(true);
-
-    // Other states
-    mockPartialNotification.subject.state = 'OUTDATED';
-    expect(
-      stateFilter.filterNotification(mockPartialNotification, 'other'),
-    ).toBe(true);
+    it.each(
+      Object.entries(cases) as Array<
+        [GitifyNotificationState, FilterStateType]
+      >,
+    )('filter notification with state %s as %s', (notificationState, expectedFilter) => {
+      mockNotification.subject.state = notificationState;
+      expect(
+        stateFilter.filterNotification(mockNotification, expectedFilter),
+      ).toBe(true);
+    });
   });
 });

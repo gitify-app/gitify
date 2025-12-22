@@ -9,16 +9,24 @@ import {
   XIcon,
 } from '@primer/octicons-react';
 
-import type { SettingsState } from '../../../types';
-import { IconColor } from '../../../types';
-import type {
-  CheckSuiteAttributes,
-  CheckSuiteStatus,
-  GitifySubject,
-  Notification,
-  Subject,
-} from '../../../typesGitHub';
+import {
+  type GitifyCheckSuiteStatus,
+  type GitifySubject,
+  IconColor,
+  type Link,
+  type SettingsState,
+} from '../../../types';
+import type { Notification, Subject } from '../../../typesGitHub';
+import { actionsURL } from '../../helpers';
 import { DefaultHandler, defaultHandler } from './default';
+
+export interface CheckSuiteAttributes {
+  workflowName: string;
+  attemptNumber?: number;
+  statusDisplayName: string;
+  status: GitifyCheckSuiteStatus | null;
+  branchName: string;
+}
 
 class CheckSuiteHandler extends DefaultHandler {
   readonly type = 'CheckSuite';
@@ -33,6 +41,7 @@ class CheckSuiteHandler extends DefaultHandler {
       return {
         state: state,
         user: null,
+        htmlUrl: getCheckSuiteUrl(notification),
       };
     }
 
@@ -40,14 +49,14 @@ class CheckSuiteHandler extends DefaultHandler {
   }
 
   iconType(subject: Subject): FC<OcticonProps> | null {
-    switch (subject.state) {
-      case 'cancelled':
+    switch (subject.state as GitifyCheckSuiteStatus) {
+      case 'CANCELLED':
         return StopIcon;
-      case 'failure':
+      case 'FAILURE':
         return XIcon;
-      case 'skipped':
+      case 'SKIPPED':
         return SkipIcon;
-      case 'success':
+      case 'SUCCESS':
         return CheckIcon;
       default:
         return RocketIcon;
@@ -55,14 +64,18 @@ class CheckSuiteHandler extends DefaultHandler {
   }
 
   iconColor(subject: Subject): IconColor {
-    switch (subject.state) {
-      case 'success':
+    switch (subject.state as GitifyCheckSuiteStatus) {
+      case 'SUCCESS':
         return IconColor.GREEN;
-      case 'failure':
+      case 'FAILURE':
         return IconColor.RED;
       default:
         return defaultHandler.iconColor(subject);
     }
+  }
+
+  defaultUrl(notification: Notification): Link {
+    return getCheckSuiteUrl(notification);
   }
 }
 
@@ -96,18 +109,42 @@ export function getCheckSuiteAttributes(
   };
 }
 
-function getCheckSuiteStatus(statusDisplayName: string): CheckSuiteStatus {
+function getCheckSuiteStatus(
+  statusDisplayName: string,
+): GitifyCheckSuiteStatus {
   switch (statusDisplayName) {
     case 'cancelled':
-      return 'cancelled';
+      return 'CANCELLED';
     case 'failed':
     case 'failed at startup':
-      return 'failure';
+      return 'FAILURE';
     case 'skipped':
-      return 'skipped';
+      return 'SKIPPED';
     case 'succeeded':
-      return 'success';
+      return 'SUCCESS';
     default:
       return null;
   }
+}
+
+export function getCheckSuiteUrl(notification: Notification): Link {
+  const filters = [];
+
+  const checkSuiteAttributes = getCheckSuiteAttributes(notification);
+
+  if (checkSuiteAttributes?.workflowName) {
+    filters.push(
+      `workflow:"${checkSuiteAttributes.workflowName.replaceAll(' ', '+')}"`,
+    );
+  }
+
+  if (checkSuiteAttributes?.status) {
+    filters.push(`is:${checkSuiteAttributes.status}`);
+  }
+
+  if (checkSuiteAttributes?.branchName) {
+    filters.push(`branch:${checkSuiteAttributes.branchName}`);
+  }
+
+  return actionsURL(notification.repository.html_url, filters);
 }

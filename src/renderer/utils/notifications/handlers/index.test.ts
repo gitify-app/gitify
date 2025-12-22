@@ -11,28 +11,26 @@ import { releaseHandler } from './release';
 import { repositoryDependabotAlertsThreadHandler } from './repositoryDependabotAlertsThread';
 import { repositoryInvitationHandler } from './repositoryInvitation';
 import { repositoryVulnerabilityAlertHandler } from './repositoryVulnerabilityAlert';
+import type { NotificationTypeHandler } from './types';
 import { workflowRunHandler } from './workflowRun';
 
 describe('renderer/utils/notifications/handlers/index.ts', () => {
   describe('createNotificationHandler', () => {
-    const cases: Array<[SubjectType, object]> = [
-      ['CheckSuite', checkSuiteHandler],
-      ['Commit', commitHandler],
-      ['Discussion', discussionHandler],
-      ['Issue', issueHandler],
-      ['PullRequest', pullRequestHandler],
-      ['Release', releaseHandler],
-      [
-        'RepositoryDependabotAlertsThread',
-        repositoryDependabotAlertsThreadHandler,
-      ],
-      ['RepositoryInvitation', repositoryInvitationHandler],
-      ['RepositoryVulnerabilityAlert', repositoryVulnerabilityAlertHandler],
-      ['WorkflowRun', workflowRunHandler],
-    ];
+    const cases = {
+      CheckSuite: checkSuiteHandler,
+      Commit: commitHandler,
+      Discussion: discussionHandler,
+      Issue: issueHandler,
+      PullRequest: pullRequestHandler,
+      Release: releaseHandler,
+      RepositoryDependabotAlertsThread: repositoryDependabotAlertsThreadHandler,
+      RepositoryInvitation: repositoryInvitationHandler,
+      RepositoryVulnerabilityAlert: repositoryVulnerabilityAlertHandler,
+      WorkflowRun: workflowRunHandler,
+    } satisfies Record<SubjectType, NotificationTypeHandler>;
 
     it.each(
-      cases,
+      Object.entries(cases) as Array<[SubjectType, NotificationTypeHandler]>,
     )('returns expected handler instance for %s', (type, expected) => {
       const notification = createPartialMockNotification({ type });
       const handler = createNotificationHandler(notification);

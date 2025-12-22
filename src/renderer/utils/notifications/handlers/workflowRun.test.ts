@@ -3,6 +3,8 @@ import {
   createPartialMockNotification,
 } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
+import type { Link } from '../../../types';
+import type { Notification } from '../../../typesGitHub';
 import { getWorkflowRunAttributes, workflowRunHandler } from './workflowRun';
 
 describe('renderer/utils/notifications/handlers/workflowRun.ts', () => {
@@ -19,8 +21,10 @@ describe('renderer/utils/notifications/handlers/workflowRun.ts', () => {
       );
 
       expect(result).toEqual({
-        state: 'waiting',
+        state: 'WAITING',
         user: null,
+        htmlUrl:
+          'https://github.com/gitify-app/notifications-test/actions?query=is%3AWAITING',
       });
     });
 
@@ -64,6 +68,22 @@ describe('renderer/utils/notifications/handlers/workflowRun.ts', () => {
     ).toBe('RocketIcon');
   });
 
+  it('defaultUrl', () => {
+    const mockHtmlUrl =
+      'https://github.com/gitify-app/notifications-test' as Link;
+
+    expect(
+      workflowRunHandler.defaultUrl({
+        subject: {
+          title: 'Some notification',
+        },
+        repository: {
+          html_url: mockHtmlUrl,
+        },
+      } as Notification),
+    ).toEqual(`${mockHtmlUrl}/actions`);
+  });
+
   describe('getWorkflowRunAttributes', () => {
     it('deploy review workflow run state', async () => {
       const mockNotification = createPartialMockNotification({
@@ -74,7 +94,7 @@ describe('renderer/utils/notifications/handlers/workflowRun.ts', () => {
       const result = getWorkflowRunAttributes(mockNotification);
 
       expect(result).toEqual({
-        status: 'waiting',
+        status: 'WAITING',
         statusDisplayName: 'review',
         user: 'some-user',
       });

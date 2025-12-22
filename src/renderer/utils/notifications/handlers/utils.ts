@@ -1,12 +1,14 @@
-import type { SubjectUser, User } from '../../../typesGitHub';
+import type { GitifyNotificationUser } from '../../../types';
 
 /**
  * Construct the notification subject user based on an order prioritized list of users
  * @param users array of users in order or priority
  * @returns the subject user
  */
-export function getSubjectUser(users: User[]): SubjectUser {
-  let subjectUser: SubjectUser = null;
+export function getNotificationAuthor(
+  users: GitifyNotificationUser[],
+): GitifyNotificationUser {
+  let subjectUser: GitifyNotificationUser = null;
 
   for (const user of users) {
     if (user) {

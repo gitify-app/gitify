@@ -8,6 +8,7 @@ import {
 import { mockSettings } from '../../../__mocks__/state-mocks';
 import { createPartialMockUser } from '../../../__mocks__/user-mocks';
 import type { Link } from '../../../types';
+import type { Notification } from '../../../typesGitHub';
 import { commitHandler } from './commit';
 
 describe('renderer/utils/notifications/handlers/commit.ts', () => {
@@ -101,5 +102,18 @@ describe('renderer/utils/notifications/handlers/commit.ts', () => {
     expect(
       commitHandler.iconType(createMockSubject({ type: 'Commit' })).displayName,
     ).toBe('GitCommitIcon');
+  });
+
+  it('defaultUrl', () => {
+    const mockHtmlUrl =
+      'https://github.com/gitify-app/notifications-test' as Link;
+
+    expect(
+      commitHandler.defaultUrl({
+        repository: {
+          html_url: mockHtmlUrl,
+        },
+      } as Notification),
+    ).toEqual(mockHtmlUrl);
   });
 });

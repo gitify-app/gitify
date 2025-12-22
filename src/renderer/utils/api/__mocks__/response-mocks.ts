@@ -4,7 +4,6 @@ import {
 } from '../../../__mocks__/account-mocks';
 import type { Link } from '../../../types';
 import type { Notification, Repository, User } from '../../../typesGitHub';
-import type { FetchDiscussionByNumberQuery } from '../graphql/generated/graphql';
 
 export const mockNotificationUser: User = {
   login: 'octocat',
@@ -49,7 +48,7 @@ export const mockGitHubNotifications: Notification[] = [
       latest_comment_url:
         'https://api.github.com/repos/gitify-app/notifications-test/issues/comments/302888448' as Link,
       type: 'Issue',
-      state: 'open',
+      state: 'OPEN',
       user: {
         login: 'gitify-app',
         html_url: 'https://github.com/gitify-app' as Link,
@@ -367,57 +366,5 @@ export const mockEnterpriseNotifications: Notification[] = [
       'https://github.gitify.io/api/v3/notifications/threads/3/subscription' as Link,
   },
 ];
-
-export const mockDiscussionByNumberGraphQLResponse: FetchDiscussionByNumberQuery =
-  {
-    repository: {
-      discussion: {
-        __typename: 'Discussion',
-        number: 123,
-        title: '1.16.0',
-        isAnswered: false,
-        stateReason: null,
-        url: 'https://github.com/gitify-app/notifications-test/discussions/612' as Link,
-        author: {
-          login: 'comment-user',
-          url: 'https://github.com/comment-user' as Link,
-          avatar_url:
-            'https://avatars.githubusercontent.com/u/123456789?v=4' as Link,
-          type: 'User',
-        },
-        comments: {
-          totalCount: 2,
-          nodes: [
-            {
-              databaseId: 2258799,
-              createdAt: '2017-02-20T17:51:57Z',
-              author: {
-                login: 'comment-user',
-                url: 'https://github.com/comment-user' as Link,
-                avatar_url:
-                  'https://avatars.githubusercontent.com/u/123456789?v=4' as Link,
-                type: 'User',
-              },
-              replies: {
-                nodes: [
-                  {
-                    databaseId: 2300902,
-                    createdAt: '2017-05-20T17:51:57Z',
-                    author: {
-                      login: 'reply-user',
-                      url: 'https://github.com/reply-user' as Link,
-                      avatar_url:
-                        'https://avatars.githubusercontent.com/u/123456789?v=4' as Link,
-                      type: 'User',
-                    },
-                  },
-                ],
-              },
-            },
-          ],
-        },
-      },
-    },
-  };
 
 export const mockSingleNotification: Notification = mockGitHubNotifications[0];

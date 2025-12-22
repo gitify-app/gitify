@@ -1,8 +1,8 @@
 import { APPLICATION } from '../../shared/constants';
 
 import { Constants } from '../constants';
-import type { Account, Hostname, Link } from '../types';
-import type { Notification, Repository, SubjectUser } from '../typesGitHub';
+import type { Account, GitifyNotificationUser, Hostname, Link } from '../types';
+import type { Notification, Repository } from '../typesGitHub';
 import { getDeveloperSettingsURL } from './auth/utils';
 import { openExternalLink } from './comms';
 import { generateGitHubWebUrl } from './helpers';
@@ -37,7 +37,7 @@ export function openAccountProfile(account: Account) {
   openExternalLink(url.toString() as Link);
 }
 
-export function openUserProfile(user: SubjectUser) {
+export function openUserProfile(user: GitifyNotificationUser) {
   openExternalLink(user.html_url);
 }
 

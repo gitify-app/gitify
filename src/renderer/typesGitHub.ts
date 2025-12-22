@@ -1,4 +1,14 @@
-import type { Account, Link } from './types';
+import type { GitifyNotification, GitifySubject, Link } from './types';
+
+// TODO: #828 Add explicit types for GitHub API response vs Gitify Notifications object
+export type Notification = GitHubNotification & GitifyNotification;
+export type Subject = GitHubSubject & GitifySubject;
+
+/**
+ *
+ * GitHub REST API Response Types
+ *
+ **/
 
 export type Reason =
   | 'approval_requested'
@@ -17,15 +27,6 @@ export type Reason =
   | 'subscribed'
   | 'team_mention';
 
-// Note: ANSWERED and OPEN are not an official discussion state type in the GitHub API
-export type DiscussionStateType =
-  | 'ANSWERED'
-  | 'DUPLICATE'
-  | 'OPEN'
-  | 'OUTDATED'
-  | 'REOPENED'
-  | 'RESOLVED';
-
 export type SubjectType =
   | 'CheckSuite'
   | 'Commit'
@@ -38,64 +39,12 @@ export type SubjectType =
   | 'RepositoryVulnerabilityAlert'
   | 'WorkflowRun';
 
-export type IssueStateType = 'closed' | 'open';
-
-export type IssueStateReasonType = 'completed' | 'not_planned' | 'reopened';
-
 export type UserType =
   | 'Bot'
   | 'EnterpriseUserAccount'
   | 'Mannequin'
   | 'Organization'
   | 'User';
-
-/**
- * Note: draft and merged are not official states in the GitHub API.
- * These are derived from the pull request's `merged` and `draft` properties.
- */
-export type PullRequestStateType = 'closed' | 'draft' | 'merged' | 'open';
-
-export type StateType =
-  | CheckSuiteStatus
-  | DiscussionStateType
-  | IssueStateType
-  | IssueStateReasonType
-  | PullRequestStateType;
-
-export type CheckSuiteStatus =
-  | 'action_required'
-  | 'cancelled'
-  | 'completed'
-  | 'failure'
-  | 'in_progress'
-  | 'pending'
-  | 'queued'
-  | 'requested'
-  | 'skipped'
-  | 'stale'
-  | 'success'
-  | 'timed_out'
-  | 'waiting';
-
-export type PullRequestReviewState =
-  | 'APPROVED'
-  | 'CHANGES_REQUESTED'
-  | 'COMMENTED'
-  | 'DISMISSED'
-  | 'PENDING';
-
-export type PullRequestReviewAuthorAssociation =
-  | 'COLLABORATOR'
-  | 'CONTRIBUTOR'
-  | 'FIRST_TIMER'
-  | 'FIRST_TIME_CONTRIBUTOR'
-  | 'MANNEQUIN'
-  | 'MEMBER'
-  | 'NONE'
-  | 'OWNER';
-
-// TODO: #828 Add explicit types for GitHub API response vs Gitify Notifications object
-export type Notification = GitHubNotification & GitifyNotification;
 
 export interface GitHubNotification {
   id: string;
@@ -109,10 +58,11 @@ export interface GitHubNotification {
   subscription_url: Link;
 }
 
-// Note: This is not in the official GitHub API. We add this to make notification interactions easier.
-export interface GitifyNotification {
-  account: Account;
-  order: number;
+interface GitHubSubject {
+  title: string;
+  url: Link | null;
+  latest_comment_url: Link | null;
+  type: SubjectType;
 }
 
 export type UserDetails = User & UserProfile;
@@ -167,13 +117,6 @@ export interface User {
   received_events_url: Link;
   type: UserType;
   site_admin: boolean;
-}
-
-export interface SubjectUser {
-  login: string;
-  html_url: Link;
-  avatar_url: Link;
-  type: UserType;
 }
 
 export interface Repository {
@@ -244,95 +187,6 @@ export interface Owner {
   received_events_url: Link;
   type: UserType;
   site_admin: boolean;
-}
-
-export type Subject = GitHubSubject & GitifySubject;
-
-interface GitHubSubject {
-  title: string;
-  url: Link | null;
-  latest_comment_url: Link | null;
-  type: SubjectType;
-}
-
-// This is not in the GitHub API, but we add it to the type to make it easier to work with
-export interface GitifySubject {
-  number?: number;
-  state?: StateType;
-  user?: SubjectUser;
-  reviews?: GitifyPullRequestReview[];
-  linkedIssues?: string[];
-  comments?: number;
-  labels?: string[];
-  milestone?: Milestone;
-}
-
-export interface PullRequest {
-  url: Link;
-  id: number;
-  node_id: string;
-  html_url: Link;
-  diff_url: Link;
-  patch_url: Link;
-  issue_url: Link;
-  number: number;
-  state: PullRequestStateType;
-  locked: boolean;
-  title: string;
-  user: User;
-  body: string;
-  created_at: string;
-  updated_at: string;
-  closed_at: string | null;
-  merged_at: string | null;
-  merge_commit_sha: string | null;
-  labels: Labels[];
-  milestone: Milestone | null;
-  draft: boolean;
-  commits_url: Link;
-  review_comments_url: Link;
-  review_comment_url: Link;
-  comments_url: Link;
-  statuses_url: Link;
-  author_association: string;
-  merged: boolean;
-  mergeable: boolean;
-  rebaseable: boolean;
-  comments: number;
-  review_comments: number;
-  maintainer_can_modify: boolean;
-  commits: number;
-  additions: number;
-  deletions: number;
-  changed_files: number;
-}
-
-export interface GitifyPullRequestReview {
-  state: PullRequestReviewState;
-  users: string[];
-}
-
-export interface Labels {
-  id: number;
-  node_id: string;
-  url: Link;
-  name: string;
-  color: string;
-  default: boolean;
-  description: string;
-}
-
-export interface PullRequestReview {
-  id: number;
-  node_id: string;
-  user: User;
-  body: string;
-  state: PullRequestReviewState;
-  html_url: Link;
-  pull_request_url: Link;
-  author_association: PullRequestReviewAuthorAssociation;
-  submitted_at: string;
-  commit_id: string;
 }
 
 export interface Commit {
@@ -406,64 +260,6 @@ export interface CommitComment {
   body: string;
 }
 
-export interface Issue {
-  url: Link;
-  repository_url: Link;
-  labels_url: Link;
-  comments_url: Link;
-  events_url: Link;
-  html_url: Link;
-  id: number;
-  node_id: string;
-  number: number;
-  title: string;
-  user: User;
-  state: IssueStateType;
-  locked: boolean;
-  labels: Labels[];
-  milestone: Milestone | null;
-  comments: number;
-  created_at: string;
-  updated_at: string;
-  closed_at: string | null;
-  author_association: string;
-  body: string;
-  state_reason: IssueStateReasonType | null;
-}
-
-export interface IssueOrPullRequestComment {
-  url: Link;
-  html_url: Link;
-  issue_url: Link;
-  id: number;
-  node_id: string;
-  user: User;
-  created_at: string;
-  updated_at: string;
-  body: string;
-}
-
-export interface Milestone {
-  url: Link;
-  html_url: Link;
-  labels_url: Link;
-  id: number;
-  node_id: string;
-  number: number;
-  title: string;
-  description: string;
-  creator: User;
-  open_issues: number;
-  closed_issues: number;
-  state: MilestoneStateType;
-  created_at: string;
-  updated_at: string;
-  due_on: string | null;
-  closed_at: string | null;
-}
-
-type MilestoneStateType = 'open' | 'closed';
-
 export interface Release {
   url: Link;
   assets_url: Link;
@@ -480,20 +276,6 @@ export interface Release {
   prerelease: boolean;
   created_at: string;
   published_at: string | null;
-}
-
-export interface CheckSuiteAttributes {
-  workflowName: string;
-  attemptNumber?: number;
-  statusDisplayName: string;
-  status: CheckSuiteStatus | null;
-  branchName: string;
-}
-
-export interface WorkflowRunAttributes {
-  user: string;
-  statusDisplayName: string;
-  status: CheckSuiteStatus | null;
 }
 
 export interface GitHubRESTError {

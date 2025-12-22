@@ -10,22 +10,21 @@ import {
 
 import { differenceInMilliseconds } from 'date-fns';
 
-import type { SettingsState } from '../../../types';
-import { IconColor } from '../../../types';
-import type {
-  DiscussionStateType,
-  GitifySubject,
-  Notification,
-  Subject,
-  SubjectUser,
-} from '../../../typesGitHub';
+import {
+  type GitifyDiscussionState,
+  type GitifySubject,
+  IconColor,
+  type Link,
+  type SettingsState,
+} from '../../../types';
+import type { Notification, Subject } from '../../../typesGitHub';
 import { fetchDiscussionByNumber } from '../../api/client';
 import type {
   CommentFieldsFragment,
   FetchDiscussionByNumberQuery,
 } from '../../api/graphql/generated/graphql';
-import { isStateFilteredOut } from '../filters/filter';
 import { DefaultHandler, defaultHandler } from './default';
+import { getNotificationAuthor } from './utils';
 
 type DiscussionComment = NonNullable<
   NonNullable<
@@ -45,16 +44,12 @@ class DiscussionHandler extends DefaultHandler {
 
   async enrich(
     notification: Notification,
-    settings: SettingsState,
+    _settings: SettingsState,
   ): Promise<GitifySubject> {
     const response = await fetchDiscussionByNumber(notification);
     const discussion = response.data.repository?.discussion;
 
-    if (!discussion) {
-      return null;
-    }
-
-    let discussionState: DiscussionStateType = 'OPEN';
+    let discussionState: GitifyDiscussionState = 'OPEN';
 
     if (discussion.isAnswered) {
       discussionState = 'ANSWERED';
@@ -64,43 +59,26 @@ class DiscussionHandler extends DefaultHandler {
       discussionState = discussion.stateReason;
     }
 
-    // Return early if this notification would be hidden by filters
-    if (isStateFilteredOut(discussionState, settings)) {
-      return null;
-    }
-
     const latestDiscussionComment = getClosestDiscussionCommentOrReply(
       notification,
       discussion.comments.nodes,
     );
 
-    let discussionUser: SubjectUser = {
-      login: discussion.author.login,
-      html_url: discussion.author.url,
-      avatar_url: discussion.author.avatar_url,
-      type: discussion.author.type,
-    };
-
-    if (latestDiscussionComment) {
-      discussionUser = {
-        login: latestDiscussionComment.author.login,
-        html_url: latestDiscussionComment.author.url,
-        avatar_url: latestDiscussionComment.author.avatar_url,
-        type: latestDiscussionComment.author.type,
-      };
-    }
-
     return {
       number: discussion.number,
       state: discussionState,
-      user: discussionUser,
+      user: getNotificationAuthor([
+        latestDiscussionComment?.author,
+        discussion.author,
+      ]),
       comments: discussion.comments.totalCount,
       labels: discussion.labels?.nodes.map((label) => label.name) ?? [],
+      htmlUrl: latestDiscussionComment?.url ?? discussion.url,
     };
   }
 
   iconType(subject: Subject): FC<OcticonProps> | null {
-    switch (subject.state) {
+    switch (subject.state as GitifyDiscussionState) {
       case 'DUPLICATE':
         return DiscussionDuplicateIcon;
       case 'OUTDATED':
@@ -122,6 +100,12 @@ class DiscussionHandler extends DefaultHandler {
         return defaultHandler.iconColor(subject);
     }
   }
+
+  defaultUrl(notification: Notification): Link {
+    const url = new URL(notification.repository.html_url);
+    url.pathname += '/discussions';
+    return url.href as Link;
+  }
 }
 
 export const discussionHandler = new DiscussionHandler();
@@ -137,8 +121,8 @@ export function getClosestDiscussionCommentOrReply(
   const targetTimestamp = notification.updated_at;
 
   const allCommentsAndReplies = comments.flatMap((comment) => [
-    comment,
     ...comment.replies.nodes,
+    comment,
   ]);
 
   // Find the closest match using the target timestamp

@@ -3,17 +3,17 @@ import type { FC } from 'react';
 import type { OcticonProps } from '@primer/octicons-react';
 import { TagIcon } from '@primer/octicons-react';
 
-import type { SettingsState } from '../../../types';
 import type {
+  GitifyNotificationState,
   GitifySubject,
-  Notification,
-  StateType,
-  Subject,
-} from '../../../typesGitHub';
+  Link,
+  SettingsState,
+} from '../../../types';
+import type { Notification, Subject } from '../../../typesGitHub';
 import { getRelease } from '../../api/client';
 import { isStateFilteredOut } from '../filters/filter';
 import { DefaultHandler } from './default';
-import { getSubjectUser } from './utils';
+import { getNotificationAuthor } from './utils';
 
 class ReleaseHandler extends DefaultHandler {
   readonly type = 'Release';
@@ -22,7 +22,7 @@ class ReleaseHandler extends DefaultHandler {
     notification: Notification,
     settings: SettingsState,
   ): Promise<GitifySubject> {
-    const releaseState: StateType = null; // Release notifications are stateless
+    const releaseState: GitifyNotificationState = null; // Release notifications are stateless
 
     // Return early if this notification would be hidden by filters
     if (isStateFilteredOut(releaseState, settings)) {
@@ -35,12 +35,18 @@ class ReleaseHandler extends DefaultHandler {
 
     return {
       state: releaseState,
-      user: getSubjectUser([release.author]),
+      user: getNotificationAuthor([release.author]),
     };
   }
 
   iconType(_subject: Subject): FC<OcticonProps> | null {
     return TagIcon;
+  }
+
+  defaultUrl(notification: Notification): Link {
+    const url = new URL(notification.repository.html_url);
+    url.pathname += '/releases';
+    return url.href as Link;
   }
 }
 

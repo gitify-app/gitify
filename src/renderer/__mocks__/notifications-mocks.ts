@@ -1,9 +1,12 @@
 import { Constants } from '../constants';
-import type { AccountNotifications, Hostname } from '../types';
+import type {
+  AccountNotifications,
+  GitifyNotificationState,
+  Hostname,
+} from '../types';
 import type {
   Notification,
   Repository,
-  StateType,
   Subject,
   SubjectType,
 } from '../typesGitHub';
@@ -43,12 +46,12 @@ export const mockSingleAccountNotifications: AccountNotifications[] = [
 export function createMockSubject(mocks: {
   title?: string;
   type?: SubjectType;
-  state?: StateType;
+  state?: GitifyNotificationState;
 }): Subject {
   return {
     title: mocks.title ?? 'Mock Subject',
     type: mocks.type ?? ('Unknown' as SubjectType),
-    state: mocks.state ?? ('Unknown' as StateType),
+    state: mocks.state ?? ('Unknown' as GitifyNotificationState),
     url: null,
     latest_comment_url: null,
   };
@@ -68,7 +71,15 @@ export function createPartialMockNotification(
       hasRequiredScopes: true,
     },
     subject: subject as Subject,
-    repository: repository as Repository,
+    repository: {
+      name: 'notifications-test',
+      full_name: 'gitify-app/notifications-test',
+      html_url: 'https://github.com/gitify-app/notifications-test',
+      owner: {
+        login: 'gitify-app',
+      },
+      ...repository,
+    } as Repository,
   };
 
   return mockNotification as Notification;

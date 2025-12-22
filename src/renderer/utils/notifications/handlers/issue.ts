@@ -3,75 +3,62 @@ import type { FC } from 'react';
 import type { OcticonProps } from '@primer/octicons-react';
 import {
   IssueClosedIcon,
-  IssueDraftIcon,
   IssueOpenedIcon,
   IssueReopenedIcon,
   SkipIcon,
 } from '@primer/octicons-react';
 
-import type { SettingsState } from '../../../types';
-import { IconColor } from '../../../types';
 import type {
+  GitifyIssueState,
   GitifySubject,
-  Notification,
-  Subject,
-  User,
-} from '../../../typesGitHub';
-import { getIssue, getIssueOrPullRequestComment } from '../../api/client';
-import { isStateFilteredOut } from '../filters/filter';
+  Link,
+  SettingsState,
+} from '../../../types';
+import { IconColor } from '../../../types';
+import type { Notification, Subject } from '../../../typesGitHub';
+import { fetchIssueByNumber } from '../../api/client';
 import { DefaultHandler, defaultHandler } from './default';
-import { getSubjectUser } from './utils';
+import { getNotificationAuthor } from './utils';
 
 class IssueHandler extends DefaultHandler {
   readonly type = 'Issue';
 
   async enrich(
     notification: Notification,
-    settings: SettingsState,
+    _settings: SettingsState,
   ): Promise<GitifySubject> {
-    const issue = (
-      await getIssue(notification.subject.url, notification.account.token)
-    ).data;
+    const response = await fetchIssueByNumber(notification);
+    const issue = response.data.repository?.issue;
 
-    const issueState = issue.state_reason ?? issue.state;
+    const issueState = issue.stateReason ?? issue.state;
 
-    // Return early if this notification would be hidden by filters
-    if (isStateFilteredOut(issueState, settings)) {
-      return null;
-    }
+    const issueComment = issue.comments.nodes[0];
 
-    let issueCommentUser: User;
-
-    if (notification.subject.latest_comment_url) {
-      const issueComment = (
-        await getIssueOrPullRequestComment(
-          notification.subject.latest_comment_url,
-          notification.account.token,
-        )
-      ).data;
-      issueCommentUser = issueComment.user;
-    }
+    const issueUser = getNotificationAuthor([
+      issueComment?.author,
+      issue.author,
+    ]);
 
     return {
       number: issue.number,
       state: issueState,
-      user: getSubjectUser([issueCommentUser, issue.user]),
-      comments: issue.comments,
-      labels: issue.labels?.map((label) => label.name) ?? [],
+      user: issueUser,
+      comments: issue.comments.totalCount,
+      labels: issue.labels?.nodes.map((label) => label.name),
       milestone: issue.milestone,
+      htmlUrl: issueComment?.url ?? issue.url,
     };
   }
 
   iconType(subject: Subject): FC<OcticonProps> | null {
-    switch (subject.state) {
-      case 'draft':
-        return IssueDraftIcon;
-      case 'closed':
-      case 'completed':
+    switch (subject.state as GitifyIssueState) {
+      case 'CLOSED':
+      case 'COMPLETED':
         return IssueClosedIcon;
-      case 'not_planned':
+      case 'DUPLICATE':
+      case 'NOT_PLANNED':
         return SkipIcon;
-      case 'reopened':
+      case 'REOPENED':
         return IssueReopenedIcon;
       default:
         return IssueOpenedIcon;
@@ -79,17 +66,23 @@ class IssueHandler extends DefaultHandler {
   }
 
   iconColor(subject: Subject): IconColor {
-    switch (subject.state) {
-      case 'open':
-      case 'reopened':
+    switch (subject.state as GitifyIssueState) {
+      case 'OPEN':
+      case 'REOPENED':
         return IconColor.GREEN;
-      case 'closed':
+      case 'CLOSED':
         return IconColor.RED;
-      case 'completed':
+      case 'COMPLETED':
         return IconColor.PURPLE;
       default:
         return defaultHandler.iconColor(subject);
     }
+  }
+
+  defaultUrl(notification: Notification): Link {
+    const url = new URL(notification.repository.html_url);
+    url.pathname += '/issues';
+    return url.href as Link;
   }
 }
 

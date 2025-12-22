@@ -8,93 +8,63 @@ import {
   GitPullRequestIcon,
 } from '@primer/octicons-react';
 
-import type { Link, SettingsState } from '../../../types';
-import { IconColor } from '../../../types';
-import type {
-  GitifyPullRequestReview,
-  GitifySubject,
-  Notification,
-  PullRequest,
-  PullRequestReview,
-  PullRequestStateType,
-  Subject,
-  User,
-} from '../../../typesGitHub';
 import {
-  getIssueOrPullRequestComment,
-  getPullRequest,
-  getPullRequestReviews,
-} from '../../api/client';
-import { isStateFilteredOut, isUserFilteredOut } from '../filters/filter';
+  type GitifyPullRequestReview,
+  type GitifyPullRequestState,
+  type GitifySubject,
+  IconColor,
+  type Link,
+  type SettingsState,
+} from '../../../types';
+import type { Notification, Subject } from '../../../typesGitHub';
+import { fetchPullByNumber } from '../../api/client';
+import type { FetchPullRequestByNumberQuery } from '../../api/graphql/generated/graphql';
 import { DefaultHandler, defaultHandler } from './default';
-import { getSubjectUser } from './utils';
+import { getNotificationAuthor } from './utils';
 
 class PullRequestHandler extends DefaultHandler {
   readonly type = 'PullRequest' as const;
 
   async enrich(
     notification: Notification,
-    settings: SettingsState,
+    _settings: SettingsState,
   ): Promise<GitifySubject> {
-    const pr = (
-      await getPullRequest(notification.subject.url, notification.account.token)
-    ).data;
+    const response = await fetchPullByNumber(notification);
+    const pr = response.data.repository.pullRequest;
 
-    let prState: PullRequestStateType = pr.state;
-    if (pr.merged) {
-      prState = 'merged';
-    } else if (pr.draft) {
-      prState = 'draft';
+    let prState: GitifyPullRequestState = pr.state;
+    if (pr.isDraft) {
+      prState = 'DRAFT';
     }
 
-    // Return early if this notification would be hidden by state filters
-    if (isStateFilteredOut(prState, settings)) {
-      return null;
-    }
+    const prComment = pr.comments?.nodes[0];
 
-    let prCommentUser: User;
-    if (
-      notification.subject.latest_comment_url &&
-      notification.subject.latest_comment_url !== notification.subject.url
-    ) {
-      const prComment = (
-        await getIssueOrPullRequestComment(
-          notification.subject.latest_comment_url,
-          notification.account.token,
-        )
-      ).data;
-      prCommentUser = prComment.user;
-    }
+    const prUser = getNotificationAuthor([prComment?.author, pr.author]);
 
-    const prUser = getSubjectUser([prCommentUser, pr.user]);
-
-    // Return early if this notification would be hidden by user filters
-    if (isUserFilteredOut(prUser, settings)) {
-      return null;
-    }
-
-    const reviews = await getLatestReviewForReviewers(notification);
-    const linkedIssues = parseLinkedIssuesFromPr(pr);
+    const reviews = getLatestReviewForReviewers(pr.reviews.nodes);
 
     return {
       number: pr.number,
       state: prState,
       user: prUser,
       reviews: reviews,
-      comments: pr.comments,
-      labels: pr.labels?.map((label) => label.name) ?? [],
-      linkedIssues: linkedIssues,
+      comments: pr.comments.totalCount,
+      labels: pr.labels?.nodes.map((label) => label.name),
+      linkedIssues: pr.closingIssuesReferences?.nodes.map(
+        (issue) => `#${issue.number}`,
+      ),
       milestone: pr.milestone,
+      htmlUrl: prComment?.url ?? pr.url,
     };
   }
 
   iconType(subject: Subject): FC<OcticonProps> | null {
-    switch (subject.state) {
-      case 'draft':
+    switch (subject.state as GitifyPullRequestState) {
+      case 'DRAFT':
         return GitPullRequestDraftIcon;
-      case 'closed':
+      case 'CLOSED':
         return GitPullRequestClosedIcon;
-      case 'merged':
+      case 'MERGED':
         return GitMergeIcon;
       default:
         return GitPullRequestIcon;
@@ -102,44 +72,40 @@ class PullRequestHandler extends DefaultHandler {
   }
 
   iconColor(subject: Subject): IconColor {
-    switch (subject.state) {
-      case 'open':
-      case 'reopened':
+    switch (subject.state as GitifyPullRequestState) {
+      case 'OPEN':
         return IconColor.GREEN;
-      case 'closed':
+      case 'CLOSED':
         return IconColor.RED;
-      case 'merged':
+      case 'MERGED':
         return IconColor.PURPLE;
       default:
         return defaultHandler.iconColor(subject);
     }
   }
+
+  defaultUrl(notification: Notification): Link {
+    const url = new URL(notification.repository.html_url);
+    url.pathname += '/pulls';
+    return url.href as Link;
+  }
 }
 
 export const pullRequestHandler = new PullRequestHandler();
 
-export async function getLatestReviewForReviewers(
-  notification: Notification,
-): Promise<GitifyPullRequestReview[]> | null {
-  if (notification.subject.type !== 'PullRequest') {
-    return null;
-  }
-
-  const prReviews = await getPullRequestReviews(
-    `${notification.subject.url}/reviews` as Link,
-    notification.account.token,
-  );
-
-  if (!prReviews.data.length) {
+export function getLatestReviewForReviewers(
+  reviews: FetchPullRequestByNumberQuery['repository']['pullRequest']['reviews']['nodes'],
+): GitifyPullRequestReview[] {
+  if (!reviews.length) {
     return null;
   }
 
   // Find the most recent review for each reviewer
-  const latestReviews: PullRequestReview[] = [];
-  const sortedReviews = prReviews.data.slice().reverse();
+  const latestReviews = [];
+  const sortedReviews = reviews.toReversed();
   for (const prReview of sortedReviews) {
     const reviewerFound = latestReviews.find(
-      (review) => review.user.login === prReview.user.login,
+      (review) => review.author.login === prReview.author.login,
     );
 
     if (!reviewerFound) {
@@ -155,11 +121,11 @@ export async function getLatestReviewForReviewers(
     );
 
     if (reviewerFound) {
-      reviewerFound.users.push(prReview.user.login);
+      reviewerFound.users.push(prReview.author.login);
     } else {
       reviewers.push({
         state: prReview.state,
-        users: [prReview.user.login],
+        users: [prReview.author.login],
       });
     }
   }
@@ -168,23 +134,4 @@ export async function getLatestReviewForReviewers(
   return reviewers.sort((a, b) => {
     return a.state.localeCompare(b.state);
   });
-}
-
-export function parseLinkedIssuesFromPr(pr: PullRequest): string[] {
-  const linkedIssues: string[] = [];
-
-  if (!pr.body || pr.user.type !== 'User') {
-    return linkedIssues;
-  }
-
-  const regexPattern = /\s?#(\d+)\s?/gi;
-  const matches = pr.body.matchAll(regexPattern);
-
-  for (const match of matches) {
-    if (match[0]) {
-      linkedIssues.push(match[0].trim());
-    }
-  }
-
-  return linkedIssues;
 }

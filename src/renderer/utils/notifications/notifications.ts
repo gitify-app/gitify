@@ -1,9 +1,10 @@
 import type {
   AccountNotifications,
   GitifyState,
+  GitifySubject,
   SettingsState,
 } from '../../types';
-import type { GitifySubject, Notification } from '../../typesGitHub';
+import type { Notification } from '../../typesGitHub';
 import { listNotificationsForAuthenticatedUser } from '../api/client';
 import { determineFailureType } from '../api/errors';
 import { rendererLogError, rendererLogWarn } from '../logger';

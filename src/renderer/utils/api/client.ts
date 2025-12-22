@@ -11,12 +11,8 @@ import type {
 import type {
   Commit,
   CommitComment,
-  Issue,
-  IssueOrPullRequestComment,
   Notification,
   NotificationThreadSubscription,
-  PullRequest,
-  PullRequestReview,
   Release,
   UserDetails,
 } from '../../typesGitHub';
@@ -25,6 +21,10 @@ import { rendererLogError } from '../logger';
 import {
   FetchDiscussionByNumberDocument,
   type FetchDiscussionByNumberQuery,
+  FetchIssueByNumberDocument,
+  type FetchIssueByNumberQuery,
+  FetchPullRequestByNumberDocument,
+  type FetchPullRequestByNumberQuery,
 } from './graphql/generated/graphql';
 import { apiRequestAuth, performGraphQLRequest } from './request';
 import {
@@ -162,52 +162,6 @@ export function getCommitComment(
 }
 
 /**
- * Get details of an issue.
- *
- * Endpoint documentation: https://docs.github.com/en/rest/issues/issues#get-an-issue
- */
-export function getIssue(url: Link, token: Token): AxiosPromise<Issue> {
-  return apiRequestAuth(url, 'GET', token);
-}
-
-/**
- * Get comments on issues and pull requests.
- * Every pull request is an issue, but not every issue is a pull request.
- *
- * Endpoint documentation: https://docs.github.com/en/rest/issues/comments#get-an-issue-comment
- */
-export function getIssueOrPullRequestComment(
-  url: Link,
-  token: Token,
-): AxiosPromise<IssueOrPullRequestComment> {
-  return apiRequestAuth(url, 'GET', token);
-}
-
-/**
- * Get details of a pull request.
- *
- * Endpoint documentation: https://docs.github.com/en/rest/pulls/pulls#get-a-pull-request
- */
-export function getPullRequest(
-  url: Link,
-  token: Token,
-): AxiosPromise<PullRequest> {
-  return apiRequestAuth(url, 'GET', token);
-}
-
-/**
- * Lists all reviews for a specified pull request. The list of reviews returns in chronological order.
- *
- * Endpoint documentation: https://docs.github.com/en/rest/pulls/reviews#list-reviews-for-a-pull-request
- */
-export function getPullRequestReviews(
-  url: Link,
-  token: Token,
-): AxiosPromise<PullRequestReview[]> {
-  return apiRequestAuth(url, 'GET', token);
-}
-
-/**
  * Gets a public release with the specified release ID.
  *
  * Endpoint documentation: https://docs.github.com/en/rest/releases/releases#get-a-release
@@ -234,10 +188,55 @@ export async function getHtmlUrl(url: Link, token: Token): Promise<string> {
 }
 
 /**
- * Search for Discussions that match notification title and repository.
- *
- * Returns the latest discussion and their latest comments / replies
- *
+ * Fetch GitHub Issue by Issue Number.
+ */
+export async function fetchIssueByNumber(
+  notification: Notification,
+): Promise<ExecutionResult<FetchIssueByNumberQuery>> {
+  const url = getGitHubGraphQLUrl(notification.account.hostname);
+  const number = getNumberFromUrl(notification.subject.url);
+
+  return performGraphQLRequest(
+    url.toString() as Link,
+    notification.account.token,
+    FetchIssueByNumberDocument,
+    {
+      owner: notification.repository.owner.login,
+      name: notification.repository.name,
+      number: number,
+      firstLabels: 100,
+      lastComments: 1,
+    },
+  );
+}
+
+/**
+ * Fetch GitHub Pull Request by PR Number.
+ */
+export async function fetchPullByNumber(
+  notification: Notification,
+): Promise<ExecutionResult<FetchPullRequestByNumberQuery>> {
+  const url = getGitHubGraphQLUrl(notification.account.hostname);
+  const number = getNumberFromUrl(notification.subject.url);
+
+  return performGraphQLRequest(
+    url.toString() as Link,
+    notification.account.token,
+    FetchPullRequestByNumberDocument,
+    {
+      owner: notification.repository.owner.login,
+      name: notification.repository.name,
+      number: number,
+      firstLabels: 100,
+      firstClosingIssues: 100,
+      lastComments: 1,
+      lastReviews: 100,
+    },
+  );
+}
+
+/**
+ * Fetch GitHub Discussion by Discussion Number.
  */
 export async function fetchDiscussionByNumber(
   notification: Notification,

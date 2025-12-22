@@ -1,18 +1,18 @@
 import { createPartialMockUser } from '../../../__mocks__/user-mocks';
-import { formatForDisplay, getSubjectUser } from './utils';
+import { formatForDisplay, getNotificationAuthor } from './utils';
 
 describe('renderer/utils/notifications/handlers/utils.ts', () => {
-  describe('getSubjectUser', () => {
+  describe('getNotificationAuthor', () => {
     const mockAuthor = createPartialMockUser('some-author');
 
     it('returns null when all users are null', () => {
-      const result = getSubjectUser([null, null]);
+      const result = getNotificationAuthor([null, null]);
 
       expect(result).toBeNull();
     });
 
     it('returns first user', () => {
-      const result = getSubjectUser([mockAuthor, null]);
+      const result = getNotificationAuthor([mockAuthor, null]);
 
       expect(result).toEqual({
         login: mockAuthor.login,
@@ -23,7 +23,7 @@ describe('renderer/utils/notifications/handlers/utils.ts', () => {
     });
 
     it('returns second user if first is null', () => {
-      const result = getSubjectUser([null, mockAuthor]);
+      const result = getNotificationAuthor([null, mockAuthor]);
 
       expect(result).toEqual({
         login: mockAuthor.login,

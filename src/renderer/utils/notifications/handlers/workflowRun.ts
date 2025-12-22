@@ -3,15 +3,21 @@ import type { FC } from 'react';
 import type { OcticonProps } from '@primer/octicons-react';
 import { RocketIcon } from '@primer/octicons-react';
 
-import type { SettingsState } from '../../../types';
 import type {
-  CheckSuiteStatus,
+  GitifyCheckSuiteStatus,
   GitifySubject,
-  Notification,
-  Subject,
-  WorkflowRunAttributes,
-} from '../../../typesGitHub';
+  Link,
+  SettingsState,
+} from '../../../types';
+import type { Notification, Subject } from '../../../typesGitHub';
+import { actionsURL } from '../../helpers';
 import { DefaultHandler } from './default';
+
+export interface WorkflowRunAttributes {
+  user: string;
+  statusDisplayName: string;
+  status: GitifyCheckSuiteStatus | null;
+}
 
 class WorkflowRunHandler extends DefaultHandler {
   readonly type = 'WorkflowRun';
@@ -26,6 +32,7 @@ class WorkflowRunHandler extends DefaultHandler {
       return {
         state: state,
         user: null,
+        htmlUrl: getWorkflowRunUrl(notification),
       };
     }
 
@@ -34,6 +41,10 @@ class WorkflowRunHandler extends DefaultHandler {
 
   iconType(_subject: Subject): FC<OcticonProps> | null {
     return RocketIcon;
+  }
+
+  defaultUrl(notification: Notification): Link {
+    return getWorkflowRunUrl(notification);
   }
 }
 
@@ -64,11 +75,25 @@ export function getWorkflowRunAttributes(
   };
 }
 
-function getWorkflowRunStatus(statusDisplayName: string): CheckSuiteStatus {
+function getWorkflowRunStatus(
+  statusDisplayName: string,
+): GitifyCheckSuiteStatus {
   switch (statusDisplayName) {
     case 'review':
-      return 'waiting';
+      return 'WAITING';
     default:
       return null;
   }
+}
+
+export function getWorkflowRunUrl(notification: Notification): Link {
+  const filters = [];
+
+  const workflowRunAttributes = getWorkflowRunAttributes(notification);
+
+  if (workflowRunAttributes?.status) {
+    filters.push(`is:${workflowRunAttributes.status}`);
+  }
+
+  return actionsURL(notification.repository.html_url, filters);
 }
