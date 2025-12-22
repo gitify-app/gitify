@@ -35955,6 +35955,7 @@ export type FetchIssueByNumberQueryVariables = Exact<{
   owner: Scalars['String']['input'];
   name: Scalars['String']['input'];
   number: Scalars['Int']['input'];
+  lastComments?: InputMaybe<Scalars['Int']['input']>;
   firstLabels?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
@@ -35975,15 +35976,18 @@ export type FetchIssueByNumberQuery = { __typename?: 'Query', repository?: { __t
 
 export type MilestoneFieldsFragment = { __typename?: 'Milestone', state: MilestoneState, title: string };
 
-export type FetchPullByNumberQueryVariables = Exact<{
+export type FetchPullRequestByNumberQueryVariables = Exact<{
   owner: Scalars['String']['input'];
   name: Scalars['String']['input'];
   number: Scalars['Int']['input'];
   firstLabels?: InputMaybe<Scalars['Int']['input']>;
+  lastComments?: InputMaybe<Scalars['Int']['input']>;
+  lastReviews?: InputMaybe<Scalars['Int']['input']>;
+  firstClosingIssues?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 
-export type FetchPullByNumberQuery = { __typename?: 'Query', repository?: { __typename?: 'Repository', pullRequest?: { __typename: 'PullRequest', number: number, title: string, url: any, state: PullRequestState, merged: boolean, isDraft: boolean, isInMergeQueue: boolean, milestone?: { __typename?: 'Milestone', state: MilestoneState, title: string } | null, author?:
+export type FetchPullRequestByNumberQuery = { __typename?: 'Query', repository?: { __typename?: 'Repository', pullRequest?: { __typename: 'PullRequest', number: number, title: string, url: any, state: PullRequestState, merged: boolean, isDraft: boolean, isInMergeQueue: boolean, milestone?: { __typename?: 'Milestone', state: MilestoneState, title: string } | null, author?:
         | { __typename?: 'Bot', login: string, html_url: any, avatar_url: any, type: 'Bot' }
         | { __typename?: 'EnterpriseUserAccount', login: string, html_url: any, avatar_url: any, type: 'EnterpriseUserAccount' }
         | { __typename?: 'Mannequin', login: string, html_url: any, avatar_url: any, type: 'Mannequin' }
@@ -36097,7 +36101,7 @@ fragment CommentFields on DiscussionComment {
   url
 }`) as unknown as TypedDocumentString<FetchDiscussionByNumberQuery, FetchDiscussionByNumberQueryVariables>;
 export const FetchIssueByNumberDocument = new TypedDocumentString(`
-    query FetchIssueByNumber($owner: String!, $name: String!, $number: Int!, $firstLabels: Int) {
+    query FetchIssueByNumber($owner: String!, $name: String!, $number: Int!, $lastComments: Int, $firstLabels: Int) {
   repository(owner: $owner, name: $name) {
     issue(number: $number) {
       __typename
@@ -36112,7 +36116,7 @@ export const FetchIssueByNumberDocument = new TypedDocumentString(`
       author {
         ...AuthorFields
       }
-      comments(last: 1) {
+      comments(last: $lastComments) {
         totalCount
         nodes {
           url
@@ -36139,8 +36143,8 @@ fragment MilestoneFields on Milestone {
   state
   title
 }`) as unknown as TypedDocumentString<FetchIssueByNumberQuery, FetchIssueByNumberQueryVariables>;
-export const FetchPullByNumberDocument = new TypedDocumentString(`
-    query FetchPullByNumber($owner: String!, $name: String!, $number: Int!, $firstLabels: Int) {
+export const FetchPullRequestByNumberDocument = new TypedDocumentString(`
+    query FetchPullRequestByNumber($owner: String!, $name: String!, $number: Int!, $firstLabels: Int, $lastComments: Int, $lastReviews: Int, $firstClosingIssues: Int) {
   repository(owner: $owner, name: $name) {
     pullRequest(number: $number) {
       __typename
@@ -36157,7 +36161,7 @@ export const FetchPullByNumberDocument = new TypedDocumentString(`
       author {
         ...AuthorFields
       }
-      comments(last: 1) {
+      comments(last: $lastComments) {
         totalCount
         nodes {
           url
@@ -36166,7 +36170,7 @@ export const FetchPullByNumberDocument = new TypedDocumentString(`
           }
         }
       }
-      reviews(last: 100) {
+      reviews(last: $lastReviews) {
         totalCount
         nodes {
           state
@@ -36180,7 +36184,7 @@ export const FetchPullByNumberDocument = new TypedDocumentString(`
           name
         }
       }
-      closingIssuesReferences(first: 50) {
+      closingIssuesReferences(first: $firstClosingIssues) {
         nodes {
           number
         }
@@ -36197,4 +36201,4 @@ export const FetchPullByNumberDocument = new TypedDocumentString(`
 fragment MilestoneFields on Milestone {
   state
   title
-}`) as unknown as TypedDocumentString<FetchPullByNumberQuery, FetchPullByNumberQueryVariables>;
+}`) as unknown as TypedDocumentString<FetchPullRequestByNumberQuery, FetchPullRequestByNumberQueryVariables>;

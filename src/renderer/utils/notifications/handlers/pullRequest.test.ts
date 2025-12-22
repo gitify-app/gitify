@@ -7,13 +7,16 @@ import {
 } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
 import { createPartialMockUser } from '../../../__mocks__/user-mocks';
-import type { Link } from '../../../types';
+import type { GitifySubject, Link } from '../../../types';
 import type { Notification } from '../../../typesGitHub';
 import type {
-  FetchPullByNumberQuery,
+  FetchPullRequestByNumberQuery,
   PullRequestReviewState,
 } from '../../api/graphql/generated/graphql';
 import { getLatestReviewForReviewers, pullRequestHandler } from './pullRequest';
+
+type PullRequestResponse =
+  FetchPullRequestByNumberQuery['repository']['pullRequest'];
 
 describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
   let mockNotification: Notification;
@@ -63,7 +66,11 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
                   totalCount: 0,
                   nodes: [],
                 },
-              } as FetchPullByNumberQuery['repository']['pullRequest'],
+                milestone: null,
+                closingIssuesReferences: {
+                  nodes: [],
+                },
+              } as PullRequestResponse,
             },
           },
         });
@@ -88,7 +95,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         comments: 0,
         milestone: null,
         htmlUrl: 'https://github.com/gitify-app/noticiation-test/pulls/123',
-      });
+      } as GitifySubject);
     });
 
     it('closed pull request state', async () => {
@@ -116,7 +123,11 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
                   totalCount: 0,
                   nodes: [],
                 },
-              } as FetchPullByNumberQuery['repository']['pullRequest'],
+                milestone: null,
+                closingIssuesReferences: {
+                  nodes: [],
+                },
+              } as PullRequestResponse,
             },
           },
         });
@@ -141,7 +152,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         comments: 0,
         milestone: null,
         htmlUrl: 'https://github.com/gitify-app/noticiation-test/pulls/123',
-      });
+      } as GitifySubject);
     });
 
     it('draft pull request state', async () => {
@@ -169,7 +180,11 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
                   totalCount: 0,
                   nodes: [],
                 },
-              } as FetchPullByNumberQuery['repository']['pullRequest'],
+                milestone: null,
+                closingIssuesReferences: {
+                  nodes: [],
+                },
+              } as PullRequestResponse,
             },
           },
         });
@@ -194,7 +209,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         comments: 0,
         milestone: null,
         htmlUrl: 'https://github.com/gitify-app/noticiation-test/pulls/123',
-      });
+      } as GitifySubject);
     });
 
     it('merged pull request state', async () => {
@@ -222,7 +237,11 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
                   totalCount: 0,
                   nodes: [],
                 },
-              } as FetchPullByNumberQuery['repository']['pullRequest'],
+                milestone: null,
+                closingIssuesReferences: {
+                  nodes: [],
+                },
+              } as PullRequestResponse,
             },
           },
         });
@@ -247,7 +266,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         comments: 0,
         milestone: null,
         htmlUrl: 'https://github.com/gitify-app/noticiation-test/pulls/123',
-      });
+      } as GitifySubject);
     });
 
     it('with comments', async () => {
@@ -282,7 +301,11 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
                   totalCount: 0,
                   nodes: [],
                 },
-              } as FetchPullByNumberQuery['repository']['pullRequest'],
+                milestone: null,
+                closingIssuesReferences: {
+                  nodes: [],
+                },
+              } as PullRequestResponse,
             },
           },
         });
@@ -308,7 +331,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         milestone: null,
         htmlUrl:
           'https://github.com/gitify-app/noticiation-test/pulls/123#issuecomment-1234',
-      });
+      } as GitifySubject);
     });
 
     it('with labels', async () => {
@@ -338,7 +361,11 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
                   totalCount: 0,
                   nodes: [],
                 },
-              } as FetchPullByNumberQuery['repository']['pullRequest'],
+                milestone: null,
+                closingIssuesReferences: {
+                  nodes: [],
+                },
+              } as PullRequestResponse,
             },
           },
         });
@@ -363,7 +390,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         comments: 0,
         milestone: null,
         htmlUrl: 'https://github.com/gitify-app/noticiation-test/pulls/123',
-      });
+      } as GitifySubject);
     });
 
     it('with linked issues', async () => {
@@ -391,6 +418,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
                   totalCount: 0,
                   nodes: [],
                 },
+                milestone: null,
                 closingIssuesReferences: {
                   nodes: [
                     {
@@ -398,7 +426,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
                     },
                   ],
                 },
-              } as FetchPullByNumberQuery['repository']['pullRequest'],
+              } as PullRequestResponse,
             },
           },
         });
@@ -423,7 +451,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         comments: 0,
         milestone: null,
         htmlUrl: 'https://github.com/gitify-app/noticiation-test/pulls/123',
-      });
+      } as GitifySubject);
     });
 
     it('with milestone', async () => {
@@ -457,7 +485,10 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
                   state: 'OPEN',
                   title: 'Open Milestone',
                 },
-              } as FetchPullByNumberQuery['repository']['pullRequest'],
+                closingIssuesReferences: {
+                  nodes: [],
+                },
+              } as PullRequestResponse,
             },
           },
         });
@@ -480,9 +511,12 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         labels: [],
         linkedIssues: [],
         comments: 0,
-        milestone: null,
+        milestone: {
+          state: 'OPEN',
+          title: 'Open Milestone',
+        },
         htmlUrl: 'https://github.com/gitify-app/noticiation-test/pulls/123',
-      });
+      } as GitifySubject);
     });
   });
 

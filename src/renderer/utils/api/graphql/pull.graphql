@@ -1,8 +1,11 @@
-query FetchPullByNumber(
+query FetchPullRequestByNumber(
   $owner: String!
   $name: String!
   $number: Int!
   $firstLabels: Int
+  $lastComments: Int
+  $lastReviews: Int
+  $firstClosingIssues: Int
 ) {
   repository(owner: $owner, name: $name) {
     pullRequest(number: $number) {
@@ -20,7 +23,7 @@ query FetchPullByNumber(
       author {
         ...AuthorFields
       }
-      comments(last: 1) {
+      comments(last: $lastComments) {
         totalCount
         nodes {
           url
@@ -29,7 +32,7 @@ query FetchPullByNumber(
           }
         }
       }
-      reviews(last: 100) {
+      reviews(last: $lastReviews) {
         totalCount
         nodes {
           state
@@ -43,7 +46,7 @@ query FetchPullByNumber(
           name
         }
       }
-      closingIssuesReferences(first: 50) {
+      closingIssuesReferences(first: $firstClosingIssues) {
         nodes {
           number
         }

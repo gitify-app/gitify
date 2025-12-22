@@ -2,6 +2,7 @@ query FetchIssueByNumber(
   $owner: String!
   $name: String!
   $number: Int!
+  $lastComments: Int
   $firstLabels: Int
 ) {
   repository(owner: $owner, name: $name) {
@@ -18,7 +19,7 @@ query FetchIssueByNumber(
       author {
         ...AuthorFields
       }
-      comments(last: 1) {
+      comments(last: $lastComments) {
         totalCount
         nodes {
           url

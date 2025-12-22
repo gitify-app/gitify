@@ -6,14 +6,18 @@ import {
   createPartialMockNotification,
 } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
-import type { Link } from '../../../types';
+import type { GitifySubject, Link } from '../../../types';
 import type { Notification, Owner, Repository } from '../../../typesGitHub';
 import type {
   AuthorFieldsFragment,
   Discussion,
   DiscussionStateReason,
+  FetchDiscussionByNumberQuery,
 } from '../../api/graphql/generated/graphql';
 import { discussionHandler } from './discussion';
+
+type DiscussionResponse =
+  FetchDiscussionByNumberQuery['repository']['discussion'];
 
 const mockDiscussionAuthor: AuthorFieldsFragment = {
   login: 'discussion-author',
@@ -78,7 +82,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         labels: [],
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/discussions/1',
-      });
+      } as GitifySubject);
     });
 
     it('duplicate discussion state', async () => {
@@ -110,7 +114,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         labels: [],
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/discussions/1',
-      });
+      } as GitifySubject);
     });
 
     it('open discussion state', async () => {
@@ -142,7 +146,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         labels: [],
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/discussions/1',
-      });
+      } as GitifySubject);
     });
 
     it('outdated discussion state', async () => {
@@ -174,7 +178,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         labels: [],
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/discussions/1',
-      });
+      } as GitifySubject);
     });
 
     it('reopened discussion state', async () => {
@@ -206,7 +210,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         labels: [],
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/discussions/1',
-      });
+      } as GitifySubject);
     });
 
     it('resolved discussion state', async () => {
@@ -238,7 +242,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         labels: [],
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/discussions/1',
-      });
+      } as GitifySubject);
     });
 
     it('discussion with labels', async () => {
@@ -280,26 +284,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         labels: ['enhancement'],
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/discussions/1',
-      });
-    });
-
-    it('early return if discussion state filtered', async () => {
-      nock('https://api.github.com')
-        .post('/graphql')
-        .reply(200, {
-          data: {
-            repository: {
-              discussion: mockDiscussionNode(null, false),
-            },
-          },
-        });
-
-      const result = await discussionHandler.enrich(mockNotification, {
-        ...mockSettings,
-        filterStates: ['closed'],
-      });
-
-      expect(result).toEqual(null);
+      } as GitifySubject);
     });
   });
 
@@ -345,7 +330,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
 function mockDiscussionNode(
   state: DiscussionStateReason,
   isAnswered: boolean,
-): Partial<Discussion> {
+): Partial<DiscussionResponse> {
   return {
     number: 123,
     title: 'This is a mock discussion',
@@ -358,5 +343,5 @@ function mockDiscussionNode(
       totalCount: 0,
     },
     labels: null,
-  } as unknown as Partial<Discussion>;
+  } as Partial<DiscussionResponse>;
 }

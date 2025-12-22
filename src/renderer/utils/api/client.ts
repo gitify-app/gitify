@@ -23,8 +23,8 @@ import {
   type FetchDiscussionByNumberQuery,
   FetchIssueByNumberDocument,
   type FetchIssueByNumberQuery,
-  FetchPullByNumberDocument,
-  type FetchPullByNumberQuery,
+  FetchPullRequestByNumberDocument,
+  type FetchPullRequestByNumberQuery,
 } from './graphql/generated/graphql';
 import { apiRequestAuth, performGraphQLRequest } from './request';
 import {
@@ -205,6 +205,7 @@ export async function fetchIssueByNumber(
       name: notification.repository.name,
       number: number,
       firstLabels: 100,
+      lastComments: 1,
     },
   );
 }
@@ -214,19 +215,22 @@ export async function fetchIssueByNumber(
  */
 export async function fetchPullByNumber(
   notification: Notification,
-): Promise<ExecutionResult<FetchPullByNumberQuery>> {
+): Promise<ExecutionResult<FetchPullRequestByNumberQuery>> {
   const url = getGitHubGraphQLUrl(notification.account.hostname);
   const number = getNumberFromUrl(notification.subject.url);
 
   return performGraphQLRequest(
     url.toString() as Link,
     notification.account.token,
-    FetchPullByNumberDocument,
+    FetchPullRequestByNumberDocument,
     {
       owner: notification.repository.owner.login,
       name: notification.repository.name,
       number: number,
       firstLabels: 100,
+      firstClosingIssues: 100,
+      lastComments: 1,
+      lastReviews: 100,
     },
   );
 }

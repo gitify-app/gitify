@@ -17,7 +17,7 @@ import type {
 } from '../../../types';
 import type { Notification, Subject } from '../../../typesGitHub';
 import { fetchPullByNumber } from '../../api/client';
-import type { FetchPullByNumberQuery } from '../../api/graphql/generated/graphql';
+import type { FetchPullRequestByNumberQuery } from '../../api/graphql/generated/graphql';
 import { DefaultHandler } from './default';
 import { getNotificationAuthor } from './utils';
 
@@ -54,7 +54,7 @@ class PullRequestHandler extends DefaultHandler {
       linkedIssues:
         pr.closingIssuesReferences?.nodes.map((issue) => `#${issue.number}`) ??
         [],
-      milestone: null, //pr.milestone,
+      milestone: pr.milestone,
       htmlUrl: prComment?.url ?? pr.url,
     };
   }
@@ -82,7 +82,7 @@ class PullRequestHandler extends DefaultHandler {
 export const pullRequestHandler = new PullRequestHandler();
 
 export function getLatestReviewForReviewers(
-  reviews: FetchPullByNumberQuery['repository']['pullRequest']['reviews']['nodes'],
+  reviews: FetchPullRequestByNumberQuery['repository']['pullRequest']['reviews']['nodes'],
 ): GitifyPullRequestReview[] {
   if (!reviews.length) {
     return null;
