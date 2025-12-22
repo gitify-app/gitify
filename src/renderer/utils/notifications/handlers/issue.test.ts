@@ -9,6 +9,7 @@ import { mockSettings } from '../../../__mocks__/state-mocks';
 import { createPartialMockUser } from '../../../__mocks__/user-mocks';
 import type { Link } from '../../../types';
 import type { Notification } from '../../../typesGitHub';
+import type { FetchIssueByNumberQuery } from '../../api/graphql/generated/graphql';
 import { issueHandler } from './issue';
 
 describe('renderer/utils/notifications/handlers/issue.ts', () => {
@@ -34,58 +35,74 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
 
     it('open issue state', async () => {
       nock('https://api.github.com')
-        .get('/repos/gitify-app/notifications-test/issues/1')
+        .post('/graphql')
         .reply(200, {
-          number: 123,
-          state: 'open',
-          user: mockAuthor,
-          labels: [],
+          data: {
+            repository: {
+              issue: {
+                __typename: 'Issue',
+                number: 123,
+                title: 'PR Title',
+                state: 'OPEN',
+                url: 'https://github.com/gitify-app/noticiation-test/issues/123',
+                author: mockAuthor,
+                labels: { nodes: [] },
+                comments: { totalCount: 0, nodes: [] },
+              } as FetchIssueByNumberQuery['repository']['issue'],
+            },
+          },
         });
-
-      nock('https://api.github.com')
-        .get('/repos/gitify-app/notifications-test/issues/comments/302888448')
-        .reply(200, { user: mockCommenter });
 
       const result = await issueHandler.enrich(mockNotification, mockSettings);
 
       expect(result).toEqual({
         number: 123,
-        state: 'open',
+        state: 'OPEN',
         user: {
-          login: mockCommenter.login,
-          html_url: mockCommenter.html_url,
-          avatar_url: mockCommenter.avatar_url,
-          type: mockCommenter.type,
+          login: mockAuthor.login,
+          html_url: mockAuthor.html_url,
+          avatar_url: mockAuthor.avatar_url,
+          type: mockAuthor.type,
         },
+        comments: 0,
+        htmlUrl: 'https://github.com/gitify-app/noticiation-test/issues/123',
         labels: [],
       });
     });
 
     it('closed issue state', async () => {
       nock('https://api.github.com')
-        .get('/repos/gitify-app/notifications-test/issues/1')
+        .post('/graphql')
         .reply(200, {
-          number: 123,
-          state: 'closed',
-          user: mockAuthor,
-          labels: [],
+          data: {
+            repository: {
+              issue: {
+                __typename: 'Issue',
+                number: 123,
+                title: 'PR Title',
+                state: 'CLOSED',
+                url: 'https://github.com/gitify-app/noticiation-test/issues/123',
+                author: mockAuthor,
+                labels: { nodes: [] },
+                comments: { totalCount: 0, nodes: [] },
+              } as FetchIssueByNumberQuery['repository']['issue'],
+            },
+          },
         });
-
-      nock('https://api.github.com')
-        .get('/repos/gitify-app/notifications-test/issues/comments/302888448')
-        .reply(200, { user: mockCommenter });
 
       const result = await issueHandler.enrich(mockNotification, mockSettings);
 
       expect(result).toEqual({
         number: 123,
-        state: 'closed',
+        state: 'CLOSED',
         user: {
-          login: mockCommenter.login,
-          html_url: mockCommenter.html_url,
-          avatar_url: mockCommenter.avatar_url,
-          type: mockCommenter.type,
+          login: mockAuthor.login,
+          html_url: mockAuthor.html_url,
+          avatar_url: mockAuthor.avatar_url,
+          type: mockAuthor.type,
         },
+        comments: 0,
+        htmlUrl: 'https://github.com/gitify-app/noticiation-test/issues/123',
         labels: [],
       });
     });
