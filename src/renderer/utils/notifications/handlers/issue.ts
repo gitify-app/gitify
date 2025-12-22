@@ -66,13 +66,13 @@ class IssueHandler extends DefaultHandler {
   }
 
   iconColor(subject: Subject): IconColor {
-    switch (subject.state) {
-      case 'open':
-      case 'reopened':
+    switch (subject.state as GitifyIssueState) {
+      case 'OPEN':
+      case 'REOPENED':
         return IconColor.GREEN;
-      case 'closed':
+      case 'CLOSED':
         return IconColor.RED;
-      case 'completed':
+      case 'COMPLETED':
         return IconColor.PURPLE;
       default:
         return defaultHandler.iconColor(subject);

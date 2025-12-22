@@ -199,25 +199,25 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
   it('iconColor', () => {
     expect(
       checkSuiteHandler.iconColor(
-        createMockSubject({ type: 'CheckSuite', state: 'success' }),
+        createMockSubject({ type: 'CheckSuite', state: 'SUCCESS' }),
       ),
     ).toBe(IconColor.GREEN);
 
     expect(
       checkSuiteHandler.iconColor(
-        createMockSubject({ type: 'CheckSuite', state: 'failure' }),
+        createMockSubject({ type: 'CheckSuite', state: 'FAILURE' }),
       ),
     ).toBe(IconColor.RED);
 
     expect(
       checkSuiteHandler.iconColor(
-        createMockSubject({ type: 'CheckSuite', state: 'cancelled' }),
+        createMockSubject({ type: 'CheckSuite', state: 'CANCELLED' }),
       ),
     ).toBe(IconColor.GRAY);
 
     expect(
       checkSuiteHandler.iconColor(
-        createMockSubject({ type: 'CheckSuite', state: 'skipped' }),
+        createMockSubject({ type: 'CheckSuite', state: 'SKIPPED' }),
       ),
     ).toBe(IconColor.GRAY);
 

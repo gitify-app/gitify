@@ -37,8 +37,8 @@ describe('renderer/utils/notifications/handlers/default.ts', () => {
 
   describe('iconColor', () => {
     it('returns GRAY for any state (fallback behavior)', () => {
-      const states: Array<StateType | null | undefined> = [
-        'unknown' as StateType,
+      const states: Array<GitifyNotificationState | null | undefined> = [
+        'unknown' as GitifyNotificationState,
         null,
         undefined,
       ];
