@@ -3,7 +3,12 @@ import {
   createPartialMockNotification,
 } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
-import { type GitifyNotificationState, IconColor } from '../../../types';
+import {
+  type GitifyNotificationState,
+  IconColor,
+  type Link,
+} from '../../../types';
+import type { Notification } from '../../../typesGitHub';
 import { defaultHandler } from './default';
 
 describe('renderer/utils/notifications/handlers/default.ts', () => {
@@ -128,5 +133,18 @@ describe('renderer/utils/notifications/handlers/default.ts', () => {
         'Improve docs',
       );
     });
+  });
+
+  it('defaultUrl', () => {
+    const mockHtmlUrl =
+      'https://github.com/gitify-app/notifications-test' as Link;
+
+    expect(
+      defaultHandler.defaultUrl({
+        repository: {
+          html_url: mockHtmlUrl,
+        },
+      } as Notification),
+    ).toEqual(mockHtmlUrl);
   });
 });

@@ -7,7 +7,7 @@ import {
 } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
 import type { Link } from '../../../types';
-import type { Owner, Repository } from '../../../typesGitHub';
+import type { Notification, Owner, Repository } from '../../../typesGitHub';
 import type {
   AuthorFieldsFragment,
   Discussion,
@@ -76,6 +76,8 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         },
         comments: 0,
         labels: [],
+        htmlUrl:
+          'https://github.com/gitify-app/notifications-test/discussions/1',
       });
     });
 
@@ -106,6 +108,8 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         },
         comments: 0,
         labels: [],
+        htmlUrl:
+          'https://github.com/gitify-app/notifications-test/discussions/1',
       });
     });
 
@@ -136,6 +140,8 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         },
         comments: 0,
         labels: [],
+        htmlUrl:
+          'https://github.com/gitify-app/notifications-test/discussions/1',
       });
     });
 
@@ -166,6 +172,8 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         },
         comments: 0,
         labels: [],
+        htmlUrl:
+          'https://github.com/gitify-app/notifications-test/discussions/1',
       });
     });
 
@@ -196,6 +204,8 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         },
         comments: 0,
         labels: [],
+        htmlUrl:
+          'https://github.com/gitify-app/notifications-test/discussions/1',
       });
     });
 
@@ -226,6 +236,8 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         },
         comments: 0,
         labels: [],
+        htmlUrl:
+          'https://github.com/gitify-app/notifications-test/discussions/1',
       });
     });
 
@@ -266,6 +278,8 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         },
         comments: 0,
         labels: ['enhancement'],
+        htmlUrl:
+          'https://github.com/gitify-app/notifications-test/discussions/1',
       });
     });
 
@@ -312,6 +326,19 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         createMockSubject({ type: 'Discussion', state: 'RESOLVED' }),
       ).displayName,
     ).toBe('DiscussionClosedIcon');
+  });
+
+  it('defaultUrl', () => {
+    const mockHtmlUrl =
+      'https://github.com/gitify-app/notifications-test' as Link;
+
+    expect(
+      discussionHandler.defaultUrl({
+        repository: {
+          html_url: mockHtmlUrl,
+        },
+      } as Notification),
+    ).toEqual(`${mockHtmlUrl}/discussions`);
   });
 });
 

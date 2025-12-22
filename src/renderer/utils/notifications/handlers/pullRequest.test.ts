@@ -9,7 +9,10 @@ import { mockSettings } from '../../../__mocks__/state-mocks';
 import { createPartialMockUser } from '../../../__mocks__/user-mocks';
 import type { Link } from '../../../types';
 import type { Notification } from '../../../typesGitHub';
-import type { PullRequestReviewState } from '../../api/graphql/generated/graphql';
+import type {
+  FetchPullByNumberQuery,
+  PullRequestReviewState,
+} from '../../api/graphql/generated/graphql';
 import { getLatestReviewForReviewers, pullRequestHandler } from './pullRequest';
 
 describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
@@ -37,23 +40,35 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
 
     it('closed pull request state', async () => {
       nock('https://api.github.com')
-        .get('/repos/gitify-app/notifications-test/pulls/1')
+        .post('/graphql')
         .reply(200, {
-          number: 123,
-          state: 'closed',
-          draft: false,
-          merged: false,
-          user: mockAuthor,
-          labels: [],
+          data: {
+            repository: {
+              pullRequest: {
+                __typename: 'PullRequest',
+                number: 123,
+                title: 'Test PR',
+                state: 'CLOSED',
+                isDraft: false,
+                merged: false,
+                isInMergeQueue: false,
+                url: 'https://github.com/gitify-app/noticiation-test/pulls/1',
+                user: mockAuthor,
+                labels: null,
+                comments: {
+                  totalCount: 1,
+                  nodes: [
+                    {
+                      author: mockCommenter,
+                      url: 'https://github.com/gitify-app/noticiation-test/pulls/1#issuecomment-1234',
+                    },
+                  ],
+                },
+                reviews: null,
+              } as FetchPullByNumberQuery['repository']['pullRequest'],
+            },
+          },
         });
-
-      nock('https://api.github.com')
-        .get('/repos/gitify-app/notifications-test/issues/comments/302888448')
-        .reply(200, { user: mockCommenter });
-
-      nock('https://api.github.com')
-        .get('/repos/gitify-app/notifications-test/pulls/1/reviews')
-        .reply(200, []);
 
       const result = await pullRequestHandler.enrich(
         mockNotification,
@@ -62,7 +77,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
 
       expect(result).toEqual({
         number: 123,
-        state: 'closed',
+        state: 'CLOSED',
         user: {
           login: mockCommenter.login,
           html_url: mockCommenter.html_url,
@@ -72,28 +87,44 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         reviews: null,
         labels: [],
         linkedIssues: [],
+        comments: 1,
+        milestone: null,
+        htmlUrl:
+          'https://github.com/gitify-app/noticiation-test/pulls/1#issuecomment-1234',
       });
     });
 
     it('draft pull request state', async () => {
       nock('https://api.github.com')
-        .get('/repos/gitify-app/notifications-test/pulls/1')
+        .post('/graphql')
         .reply(200, {
-          number: 123,
-          state: 'open',
-          draft: true,
-          merged: false,
-          user: mockAuthor,
-          labels: [],
+          data: {
+            repository: {
+              pullRequest: {
+                __typename: 'PullRequest',
+                number: 123,
+                title: 'Test PR',
+                state: 'OPEN',
+                isDraft: true,
+                merged: false,
+                isInMergeQueue: false,
+                url: 'https://github.com/gitify-app/noticiation-test/pulls/1',
+                user: mockAuthor,
+                labels: null,
+                comments: {
+                  totalCount: 1,
+                  nodes: [
+                    {
+                      author: mockCommenter,
+                      url: 'https://github.com/gitify-app/noticiation-test/pulls/1#issuecomment-1234',
+                    },
+                  ],
+                },
+                reviews: null,
+              } as FetchPullByNumberQuery['repository']['pullRequest'],
+            },
+          },
         });
-
-      nock('https://api.github.com')
-        .get('/repos/gitify-app/notifications-test/issues/comments/302888448')
-        .reply(200, { user: mockCommenter });
-
-      nock('https://api.github.com')
-        .get('/repos/gitify-app/notifications-test/pulls/1/reviews')
-        .reply(200, []);
 
       const result = await pullRequestHandler.enrich(
         mockNotification,
@@ -102,7 +133,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
 
       expect(result).toEqual({
         number: 123,
-        state: 'draft',
+        state: 'DRAFT',
         user: {
           login: mockCommenter.login,
           html_url: mockCommenter.html_url,
@@ -112,28 +143,44 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         reviews: null,
         labels: [],
         linkedIssues: [],
+        comments: 1,
+        milestone: null,
+        htmlUrl:
+          'https://github.com/gitify-app/noticiation-test/pulls/1#issuecomment-1234',
       });
     });
 
     it('merged pull request state', async () => {
       nock('https://api.github.com')
-        .get('/repos/gitify-app/notifications-test/pulls/1')
+        .post('/graphql')
         .reply(200, {
-          number: 123,
-          state: 'open',
-          draft: false,
-          merged: true,
-          user: mockAuthor,
-          labels: [],
+          data: {
+            repository: {
+              pullRequest: {
+                __typename: 'PullRequest',
+                number: 123,
+                title: 'Test PR',
+                state: 'MERGED',
+                isDraft: false,
+                merged: true,
+                isInMergeQueue: false,
+                url: 'https://github.com/gitify-app/noticiation-test/pulls/1',
+                user: mockAuthor,
+                labels: null,
+                comments: {
+                  totalCount: 1,
+                  nodes: [
+                    {
+                      author: mockCommenter,
+                      url: 'https://github.com/gitify-app/noticiation-test/pulls/1#issuecomment-1234',
+                    },
+                  ],
+                },
+                reviews: null,
+              } as FetchPullByNumberQuery['repository']['pullRequest'],
+            },
+          },
         });
-
-      nock('https://api.github.com')
-        .get('/repos/gitify-app/notifications-test/issues/comments/302888448')
-        .reply(200, { user: mockCommenter });
-
-      nock('https://api.github.com')
-        .get('/repos/gitify-app/notifications-test/pulls/1/reviews')
-        .reply(200, []);
 
       const result = await pullRequestHandler.enrich(
         mockNotification,
@@ -142,7 +189,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
 
       expect(result).toEqual({
         number: 123,
-        state: 'merged',
+        state: 'MERGED',
         user: {
           login: mockCommenter.login,
           html_url: mockCommenter.html_url,
@@ -152,28 +199,44 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         reviews: null,
         labels: [],
         linkedIssues: [],
+        comments: 1,
+        milestone: null,
+        htmlUrl:
+          'https://github.com/gitify-app/noticiation-test/pulls/1#issuecomment-1234',
       });
     });
 
     it('open pull request state', async () => {
       nock('https://api.github.com')
-        .get('/repos/gitify-app/notifications-test/pulls/1')
+        .post('/graphql')
         .reply(200, {
-          number: 123,
-          state: 'open',
-          draft: false,
-          merged: false,
-          user: mockAuthor,
-          labels: [],
+          data: {
+            repository: {
+              pullRequest: {
+                __typename: 'PullRequest',
+                number: 123,
+                title: 'Test PR',
+                state: 'OPEN',
+                isDraft: false,
+                merged: false,
+                isInMergeQueue: false,
+                url: 'https://github.com/gitify-app/noticiation-test/pulls/1',
+                user: mockAuthor,
+                labels: null,
+                comments: {
+                  totalCount: 1,
+                  nodes: [
+                    {
+                      author: mockCommenter,
+                      url: 'https://github.com/gitify-app/noticiation-test/pulls/1#issuecomment-1234',
+                    },
+                  ],
+                },
+                reviews: null,
+              } as FetchPullByNumberQuery['repository']['pullRequest'],
+            },
+          },
         });
-
-      nock('https://api.github.com')
-        .get('/repos/gitify-app/notifications-test/issues/comments/302888448')
-        .reply(200, { user: mockCommenter });
-
-      nock('https://api.github.com')
-        .get('/repos/gitify-app/notifications-test/pulls/1/reviews')
-        .reply(200, []);
 
       const result = await pullRequestHandler.enrich(
         mockNotification,
@@ -182,7 +245,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
 
       expect(result).toEqual({
         number: 123,
-        state: 'open',
+        state: 'OPEN',
         user: {
           login: mockCommenter.login,
           html_url: mockCommenter.html_url,
@@ -192,27 +255,46 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         reviews: null,
         labels: [],
         linkedIssues: [],
+        comments: 1,
+        milestone: null,
+        htmlUrl:
+          'https://github.com/gitify-app/noticiation-test/pulls/1#issuecomment-1234',
       });
     });
 
-    it('avoid fetching comments if latest_comment_url and url are the same', async () => {
-      mockNotification.subject.latest_comment_url =
-        mockNotification.subject.url;
-
+    it('with labels', async () => {
       nock('https://api.github.com')
-        .get('/repos/gitify-app/notifications-test/pulls/1')
+        .post('/graphql')
         .reply(200, {
-          number: 123,
-          state: 'open',
-          draft: false,
-          merged: false,
-          user: mockAuthor,
-          labels: [],
+          data: {
+            repository: {
+              pullRequest: {
+                __typename: 'PullRequest',
+                number: 123,
+                title: 'Test PR',
+                state: 'OPEN',
+                isDraft: false,
+                merged: false,
+                isInMergeQueue: false,
+                url: 'https://github.com/gitify-app/noticiation-test/pulls/1',
+                user: mockAuthor,
+                labels: {
+                  nodes: [{ name: 'enhancement' }],
+                },
+                comments: {
+                  totalCount: 1,
+                  nodes: [
+                    {
+                      author: mockCommenter,
+                      url: 'https://github.com/gitify-app/noticiation-test/pulls/1#issuecomment-1234',
+                    },
+                  ],
+                },
+                reviews: null,
+              } as FetchPullByNumberQuery['repository']['pullRequest'],
+            },
+          },
         });
-
-      nock('https://api.github.com')
-        .get('/repos/gitify-app/notifications-test/pulls/1/reviews')
-        .reply(200, []);
 
       const result = await pullRequestHandler.enrich(
         mockNotification,
@@ -221,181 +303,21 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
 
       expect(result).toEqual({
         number: 123,
-        state: 'open',
+        state: 'OPEN',
         user: {
-          login: mockAuthor.login,
-          html_url: mockAuthor.html_url,
-          avatar_url: mockAuthor.avatar_url,
-          type: mockAuthor.type,
+          login: mockCommenter.login,
+          html_url: mockCommenter.html_url,
+          avatar_url: mockCommenter.avatar_url,
+          type: mockCommenter.type,
         },
         reviews: null,
-        labels: [],
+        labels: ['enhancement'],
         linkedIssues: [],
+        comments: 1,
+        milestone: null,
+        htmlUrl:
+          'https://github.com/gitify-app/noticiation-test/pulls/1#issuecomment-1234',
       });
-    });
-
-    it('handle pull request without latest_comment_url', async () => {
-      mockNotification.subject.latest_comment_url = null;
-
-      nock('https://api.github.com')
-        .get('/repos/gitify-app/notifications-test/pulls/1')
-        .reply(200, {
-          number: 123,
-          state: 'open',
-          draft: false,
-          merged: false,
-          user: mockAuthor,
-          labels: [],
-        });
-
-      nock('https://api.github.com')
-        .get('/repos/gitify-app/notifications-test/pulls/1/reviews')
-        .reply(200, []);
-
-      const result = await pullRequestHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
-
-      expect(result).toEqual({
-        number: 123,
-        state: 'open',
-        user: {
-          login: mockAuthor.login,
-          html_url: mockAuthor.html_url,
-          avatar_url: mockAuthor.avatar_url,
-          type: mockAuthor.type,
-        },
-        reviews: null,
-        labels: [],
-        linkedIssues: [],
-      });
-    });
-
-    describe('Pull Requests With Labels', () => {
-      it('with labels', async () => {
-        nock('https://api.github.com')
-          .get('/repos/gitify-app/notifications-test/pulls/1')
-          .reply(200, {
-            number: 123,
-            state: 'open',
-            draft: false,
-            merged: false,
-            user: mockAuthor,
-            labels: [{ name: 'enhancement' }],
-          });
-
-        nock('https://api.github.com')
-          .get('/repos/gitify-app/notifications-test/issues/comments/302888448')
-          .reply(200, { user: mockCommenter });
-
-        nock('https://api.github.com')
-          .get('/repos/gitify-app/notifications-test/pulls/1/reviews')
-          .reply(200, []);
-
-        const result = await pullRequestHandler.enrich(
-          mockNotification,
-          mockSettings,
-        );
-
-        expect(result).toEqual({
-          number: 123,
-          state: 'open',
-          user: {
-            login: mockCommenter.login,
-            html_url: mockCommenter.html_url,
-            avatar_url: mockCommenter.avatar_url,
-            type: mockCommenter.type,
-          },
-          reviews: null,
-          labels: ['enhancement'],
-          linkedIssues: [],
-        });
-      });
-
-      it('handle null labels', async () => {
-        nock('https://api.github.com')
-          .get('/repos/gitify-app/notifications-test/pulls/1')
-          .reply(200, {
-            number: 123,
-            state: 'open',
-            draft: false,
-            merged: false,
-            user: mockAuthor,
-            labels: null,
-          });
-
-        nock('https://api.github.com')
-          .get('/repos/gitify-app/notifications-test/issues/comments/302888448')
-          .reply(200, { user: mockCommenter });
-
-        nock('https://api.github.com')
-          .get('/repos/gitify-app/notifications-test/pulls/1/reviews')
-          .reply(200, []);
-
-        const result = await pullRequestHandler.enrich(
-          mockNotification,
-          mockSettings,
-        );
-
-        expect(result).toEqual({
-          number: 123,
-          state: 'open',
-          user: {
-            login: mockCommenter.login,
-            html_url: mockCommenter.html_url,
-            avatar_url: mockCommenter.avatar_url,
-            type: mockCommenter.type,
-          },
-          reviews: null,
-          labels: [],
-          linkedIssues: [],
-        });
-      });
-    });
-
-    it('early return if pull request state filtered', async () => {
-      nock('https://api.github.com')
-        .get('/repos/gitify-app/notifications-test/pulls/1')
-        .reply(200, {
-          number: 123,
-          state: 'open',
-          draft: false,
-          merged: false,
-          user: mockAuthor,
-          labels: [],
-        });
-
-      const result = await pullRequestHandler.enrich(mockNotification, {
-        ...mockSettings,
-        filterStates: ['closed'],
-      });
-
-      expect(result).toEqual(null);
-    });
-
-    it('early return if pull request user filtered', async () => {
-      nock('https://api.github.com')
-        .get('/repos/gitify-app/notifications-test/pulls/1')
-        .reply(200, {
-          number: 123,
-          state: 'open',
-          draft: false,
-          merged: false,
-          user: mockAuthor,
-          labels: [],
-        });
-
-      nock('https://api.github.com')
-        .get('/repos/gitify-app/notifications-test/issues/comments/302888448')
-        .reply(200, { user: mockCommenter });
-
-      const result = await pullRequestHandler.enrich(mockNotification, {
-        ...mockSettings,
-        filterUserTypes: ['Bot'],
-      });
-
-      expect(result).toEqual(null);
     });
   });
 
@@ -431,6 +353,19 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         }),
       ).displayName,
     ).toBe('GitMergeIcon');
+  });
+
+  it('defaultUrl', () => {
+    const mockHtmlUrl =
+      'https://github.com/gitify-app/notifications-test' as Link;
+
+    expect(
+      pullRequestHandler.defaultUrl({
+        repository: {
+          html_url: mockHtmlUrl,
+        },
+      } as Notification),
+    ).toEqual(`${mockHtmlUrl}/pulls`);
   });
 
   describe('Pull Request Reviews - Latest Reviews By Reviewer', () => {

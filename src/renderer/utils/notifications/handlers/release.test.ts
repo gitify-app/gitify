@@ -8,6 +8,7 @@ import {
 import { mockSettings } from '../../../__mocks__/state-mocks';
 import { createPartialMockUser } from '../../../__mocks__/user-mocks';
 import type { Link } from '../../../types';
+import type { Notification } from '../../../typesGitHub';
 import { releaseHandler } from './release';
 
 describe('renderer/utils/notifications/handlers/release.ts', () => {
@@ -75,5 +76,18 @@ describe('renderer/utils/notifications/handlers/release.ts', () => {
         }),
       ).displayName,
     ).toBe('TagIcon');
+  });
+
+  it('defaultUrl', () => {
+    const mockHtmlUrl =
+      'https://github.com/gitify-app/notifications-test' as Link;
+
+    expect(
+      releaseHandler.defaultUrl({
+        repository: {
+          html_url: mockHtmlUrl,
+        },
+      } as Notification),
+    ).toEqual(`${mockHtmlUrl}/releases`);
   });
 });

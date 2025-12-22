@@ -18,7 +18,6 @@ import type {
 import type { Notification, Subject } from '../../../typesGitHub';
 import { fetchPullByNumber } from '../../api/client';
 import type { FetchPullByNumberQuery } from '../../api/graphql/generated/graphql';
-import { isStateFilteredOut, isUserFilteredOut } from '../filters/filter';
 import { DefaultHandler } from './default';
 import { getNotificationAuthor } from './utils';
 
@@ -27,7 +26,7 @@ class PullRequestHandler extends DefaultHandler {
 
   async enrich(
     notification: Notification,
-    settings: SettingsState,
+    _settings: SettingsState,
   ): Promise<GitifySubject> {
     const response = await fetchPullByNumber(notification);
     const pr = response.data.repository.pullRequest;
@@ -37,21 +36,13 @@ class PullRequestHandler extends DefaultHandler {
       prState = 'DRAFT';
     }
 
-    // Return early if this notification would be hidden by state filters
-    if (isStateFilteredOut(prState, settings)) {
-      return null;
-    }
+    const prComment = pr.comments?.nodes[0];
 
-    const prCommentUser = pr.comments.nodes[0]?.author;
+    const prUser = getNotificationAuthor([prComment?.author, pr.author]);
 
-    const prUser = getNotificationAuthor([prCommentUser, pr.author]);
-
-    // Return early if this notification would be hidden by user filters
-    if (isUserFilteredOut(prUser, settings)) {
-      return null;
-    }
-
-    const reviews = getLatestReviewForReviewers(pr.reviews.nodes);
+    const reviews = pr.reviews
+      ? getLatestReviewForReviewers(pr.reviews.nodes)
+      : null;
 
     return {
       number: pr.number,
@@ -59,12 +50,12 @@ class PullRequestHandler extends DefaultHandler {
       user: prUser,
       reviews: reviews,
       comments: pr.comments.totalCount,
-      labels: pr.labels.nodes?.map((label) => label.name) ?? [],
-      linkedIssues: pr.closingIssuesReferences.nodes.map(
-        (issue) => `#${issue.number}`,
-      ),
+      labels: pr.labels?.nodes.map((label) => label.name) ?? [],
+      linkedIssues:
+        pr.closingIssuesReferences?.nodes.map((issue) => `#${issue.number}`) ??
+        [],
       milestone: null, //pr.milestone,
-      htmlUrl: pr.comments.nodes[0]?.url ?? pr.url,
+      htmlUrl: prComment?.url ?? pr.url,
     };
   }
 

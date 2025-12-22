@@ -71,7 +71,15 @@ export function createPartialMockNotification(
       hasRequiredScopes: true,
     },
     subject: subject as Subject,
-    repository: repository as Repository,
+    repository: {
+      name: 'notifications-test',
+      full_name: 'gitify-app/notifications-test',
+      html_url: 'https://github.com/gitify-app/notifications-test',
+      owner: {
+        login: 'gitify-app',
+      },
+      ...repository,
+    } as Repository,
   };
 
   return mockNotification as Notification;

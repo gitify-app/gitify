@@ -7,7 +7,7 @@ import {
 import type { ExecutionResult } from 'graphql';
 
 import type { Hostname, Link } from '../types';
-import type { SubjectType } from '../typesGitHub';
+import type { Subject, SubjectType } from '../typesGitHub';
 import * as logger from '../utils/logger';
 import {
   mockDiscussionByNumberGraphQLResponse,
@@ -81,6 +81,27 @@ describe('renderer/utils/helpers.ts', () => {
       jest.clearAllMocks();
     });
 
+    it('Subject HTML URL: prefer if available from enrichment stage', async () => {
+      const mockHtmlUrl = 'https://gitify.io/' as Link;
+
+      const subject = {
+        title: 'generate github web url unit tests',
+        url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1' as Link,
+        latest_comment_url:
+          'https://api.github.com/repos/gitify-app/notifications-test/issues/comments/302888448' as Link,
+        type: 'Issue' as SubjectType,
+        htmlUrl: mockHtmlUrl,
+      } as Subject;
+
+      const result = await generateGitHubWebUrl({
+        ...mockSingleNotification,
+        subject: subject,
+      });
+
+      expect(getHtmlUrlSpy).toHaveBeenCalledTimes(0);
+      expect(result).toBe(`${mockHtmlUrl}?${mockNotificationReferrer}`);
+    });
+
     it('Subject Latest Comment Url: when not null, fetch latest comment html url', async () => {
       const subject = {
         title: 'generate github web url unit tests',
@@ -88,7 +109,7 @@ describe('renderer/utils/helpers.ts', () => {
         latest_comment_url:
           'https://api.github.com/repos/gitify-app/notifications-test/issues/comments/302888448' as Link,
         type: 'Issue' as SubjectType,
-      };
+      } as Subject;
 
       getHtmlUrlSpy.mockResolvedValue(mockHtmlUrl);
 
@@ -107,7 +128,7 @@ describe('renderer/utils/helpers.ts', () => {
         url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1' as Link,
         latest_comment_url: null,
         type: 'Issue' as SubjectType,
-      };
+      } as Subject;
 
       getHtmlUrlSpy.mockResolvedValue(mockHtmlUrl);
 
@@ -127,7 +148,7 @@ describe('renderer/utils/helpers.ts', () => {
           url: null,
           latest_comment_url: null,
           type: 'CheckSuite' as SubjectType,
-        };
+        } as Subject;
 
         const result = await generateGitHubWebUrl({
           ...mockSingleNotification,
@@ -136,7 +157,7 @@ describe('renderer/utils/helpers.ts', () => {
 
         expect(getHtmlUrlSpy).toHaveBeenCalledTimes(0);
         expect(result).toBe(
-          `https://github.com/gitify-app/notifications-test/actions?query=workflow%3A%22Demo%22+is%3Asuccess+branch%3Amain&${mockNotificationReferrer}`,
+          `https://github.com/gitify-app/notifications-test/actions?query=workflow%3A%22Demo%22+is%3ASUCCESS+branch%3Amain&${mockNotificationReferrer}`,
         );
       });
 
@@ -146,7 +167,7 @@ describe('renderer/utils/helpers.ts', () => {
           url: null,
           latest_comment_url: null,
           type: 'CheckSuite' as SubjectType,
-        };
+        } as Subject;
 
         const result = await generateGitHubWebUrl({
           ...mockSingleNotification,
@@ -155,7 +176,7 @@ describe('renderer/utils/helpers.ts', () => {
 
         expect(getHtmlUrlSpy).toHaveBeenCalledTimes(0);
         expect(result).toBe(
-          `https://github.com/gitify-app/notifications-test/actions?query=workflow%3A%22Demo%22+is%3Afailure+branch%3Amain&${mockNotificationReferrer}`,
+          `https://github.com/gitify-app/notifications-test/actions?query=workflow%3A%22Demo%22+is%3AFAILURE+branch%3Amain&${mockNotificationReferrer}`,
         );
       });
 
@@ -165,7 +186,7 @@ describe('renderer/utils/helpers.ts', () => {
           url: null,
           latest_comment_url: null,
           type: 'CheckSuite' as SubjectType,
-        };
+        } as Subject;
 
         const result = await generateGitHubWebUrl({
           ...mockSingleNotification,
@@ -174,7 +195,7 @@ describe('renderer/utils/helpers.ts', () => {
 
         expect(getHtmlUrlSpy).toHaveBeenCalledTimes(0);
         expect(result).toBe(
-          `https://github.com/gitify-app/notifications-test/actions?query=workflow%3A%22Demo%22+is%3Afailure+branch%3Amain&${mockNotificationReferrer}`,
+          `https://github.com/gitify-app/notifications-test/actions?query=workflow%3A%22Demo%22+is%3AFAILURE+branch%3Amain&${mockNotificationReferrer}`,
         );
       });
 
@@ -184,7 +205,7 @@ describe('renderer/utils/helpers.ts', () => {
           url: null,
           latest_comment_url: null,
           type: 'CheckSuite' as SubjectType,
-        };
+        } as Subject;
 
         const result = await generateGitHubWebUrl({
           ...mockSingleNotification,
@@ -193,7 +214,7 @@ describe('renderer/utils/helpers.ts', () => {
 
         expect(getHtmlUrlSpy).toHaveBeenCalledTimes(0);
         expect(result).toBe(
-          `https://github.com/gitify-app/notifications-test/actions?query=workflow%3A%22Demo%22+is%3Askipped+branch%3Amain&${mockNotificationReferrer}`,
+          `https://github.com/gitify-app/notifications-test/actions?query=workflow%3A%22Demo%22+is%3ASKIPPED+branch%3Amain&${mockNotificationReferrer}`,
         );
       });
 
@@ -203,7 +224,7 @@ describe('renderer/utils/helpers.ts', () => {
           url: null,
           latest_comment_url: null,
           type: 'CheckSuite' as SubjectType,
-        };
+        } as Subject;
 
         const result = await generateGitHubWebUrl({
           ...mockSingleNotification,
@@ -222,7 +243,7 @@ describe('renderer/utils/helpers.ts', () => {
           url: null,
           latest_comment_url: null,
           type: 'CheckSuite' as SubjectType,
-        };
+        } as Subject;
 
         const result = await generateGitHubWebUrl({
           ...mockSingleNotification,
@@ -241,7 +262,7 @@ describe('renderer/utils/helpers.ts', () => {
           url: null,
           latest_comment_url: null,
           type: 'CheckSuite' as SubjectType,
-        };
+        } as Subject;
 
         const result = await generateGitHubWebUrl({
           ...mockSingleNotification,
@@ -267,7 +288,7 @@ describe('renderer/utils/helpers.ts', () => {
           url: null,
           latest_comment_url: null,
           type: 'Discussion' as SubjectType,
-        };
+        } as Subject;
 
         fetchDiscussionByNumberSpy.mockResolvedValue({
           data: { repository: { discussion: null } },
@@ -294,7 +315,7 @@ describe('renderer/utils/helpers.ts', () => {
           url: null,
           latest_comment_url: null,
           type: 'Discussion' as SubjectType,
-        };
+        } as Subject;
 
         fetchDiscussionByNumberSpy.mockResolvedValue({
           data: null,
@@ -323,7 +344,7 @@ describe('renderer/utils/helpers.ts', () => {
           url: null,
           latest_comment_url: null,
           type: 'Discussion' as SubjectType,
-        };
+        } as Subject;
 
         fetchDiscussionByNumberSpy.mockResolvedValue({
           data: mockDiscussionByNumberGraphQLResponse,
@@ -350,7 +371,7 @@ describe('renderer/utils/helpers.ts', () => {
           url: null,
           latest_comment_url: null,
           type: 'Discussion' as SubjectType,
-        };
+        } as Subject;
 
         fetchDiscussionByNumberSpy.mockRejectedValue(
           new Error('Something failed'),
@@ -376,7 +397,7 @@ describe('renderer/utils/helpers.ts', () => {
         url: null,
         latest_comment_url: null,
         type: 'RepositoryInvitation' as SubjectType,
-      };
+      } as Subject;
 
       const result = await generateGitHubWebUrl({
         ...mockSingleNotification,
@@ -415,7 +436,7 @@ describe('renderer/utils/helpers.ts', () => {
           url: null,
           latest_comment_url: null,
           type: 'WorkflowRun' as SubjectType,
-        };
+        } as Subject;
 
         const result = await generateGitHubWebUrl({
           ...mockSingleNotification,
@@ -424,7 +445,7 @@ describe('renderer/utils/helpers.ts', () => {
 
         expect(getHtmlUrlSpy).toHaveBeenCalledTimes(0);
         expect(result).toBe(
-          `https://github.com/gitify-app/notifications-test/actions?query=is%3Awaiting&${mockNotificationReferrer}`,
+          `https://github.com/gitify-app/notifications-test/actions?query=is%3AWAITING&${mockNotificationReferrer}`,
         );
       });
 
@@ -435,7 +456,7 @@ describe('renderer/utils/helpers.ts', () => {
           url: null,
           latest_comment_url: null,
           type: 'WorkflowRun' as SubjectType,
-        };
+        } as Subject;
 
         const result = await generateGitHubWebUrl({
           ...mockSingleNotification,
@@ -454,7 +475,7 @@ describe('renderer/utils/helpers.ts', () => {
           url: null,
           latest_comment_url: null,
           type: 'WorkflowRun' as SubjectType,
-        };
+        } as Subject;
 
         const result = await generateGitHubWebUrl({
           ...mockSingleNotification,
@@ -475,7 +496,7 @@ describe('renderer/utils/helpers.ts', () => {
           url: null,
           latest_comment_url: null,
           type: 'Issue' as SubjectType,
-        };
+        } as Subject;
 
         const result = await generateGitHubWebUrl({
           ...mockSingleNotification,
@@ -494,7 +515,7 @@ describe('renderer/utils/helpers.ts', () => {
           url: null,
           latest_comment_url: null,
           type: 'PullRequest' as SubjectType,
-        };
+        } as Subject;
 
         const result = await generateGitHubWebUrl({
           ...mockSingleNotification,
@@ -513,7 +534,7 @@ describe('renderer/utils/helpers.ts', () => {
           url: null,
           latest_comment_url: null,
           type: 'Commit' as SubjectType,
-        };
+        } as Subject;
 
         const result = await generateGitHubWebUrl({
           ...mockSingleNotification,
@@ -536,7 +557,7 @@ describe('renderer/utils/helpers.ts', () => {
           url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1' as Link,
           latest_comment_url: null as Link,
           type: 'Issue' as SubjectType,
-        };
+        } as Subject;
 
         getHtmlUrlSpy.mockRejectedValue(new Error('Test error'));
 

@@ -44,9 +44,7 @@ class WorkflowRunHandler extends DefaultHandler {
   }
 
   defaultUrl(notification: Notification): Link {
-    const url = new URL(notification.repository.html_url);
-    url.pathname += '/actions';
-    return url.href as Link;
+    return getWorkflowRunUrl(notification);
   }
 }
 

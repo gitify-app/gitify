@@ -22,7 +22,6 @@ import type {
   CommentFieldsFragment,
   FetchDiscussionByNumberQuery,
 } from '../../api/graphql/generated/graphql';
-import { isStateFilteredOut } from '../filters/filter';
 import { DefaultHandler } from './default';
 import { getNotificationAuthor } from './utils';
 
@@ -44,7 +43,7 @@ class DiscussionHandler extends DefaultHandler {
 
   async enrich(
     notification: Notification,
-    settings: SettingsState,
+    _settings: SettingsState,
   ): Promise<GitifySubject> {
     const response = await fetchDiscussionByNumber(notification);
     const discussion = response.data.repository?.discussion;
@@ -57,13 +56,10 @@ class DiscussionHandler extends DefaultHandler {
 
     if (discussion.isAnswered) {
       discussionState = 'ANSWERED';
-    } else if (discussion.stateReason) {
-      discussionState = discussion.stateReason;
     }
 
-    // Return early if this notification would be hidden by filters
-    if (isStateFilteredOut(discussionState, settings)) {
-      return null;
+    if (discussion.stateReason) {
+      discussionState = discussion.stateReason;
     }
 
     const latestDiscussionComment = getClosestDiscussionCommentOrReply(
@@ -75,12 +71,12 @@ class DiscussionHandler extends DefaultHandler {
       number: discussion.number,
       state: discussionState,
       user: getNotificationAuthor([
-        latestDiscussionComment.author,
+        latestDiscussionComment?.author,
         discussion.author,
       ]),
       comments: discussion.comments.totalCount,
       labels: discussion.labels?.nodes.map((label) => label.name) ?? [],
-      htmlUrl: latestDiscussionComment.url ?? discussion.url,
+      htmlUrl: latestDiscussionComment?.url ?? discussion.url,
     };
   }
 

@@ -300,10 +300,9 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
     ).toBe('IssueOpenedIcon');
 
     expect(
-      issueHandler.iconType(
-        createMockSubject({ type: 'Issue', state: 'DRAFT' }),
-      ).displayName,
-    ).toBe('IssueDraftIcon');
+      issueHandler.iconType(createMockSubject({ type: 'Issue', state: 'OPEN' }))
+        .displayName,
+    ).toBe('IssueOpenedIcon');
 
     expect(
       issueHandler.iconType(
@@ -340,5 +339,18 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         }),
       ).displayName,
     ).toBe('IssueReopenedIcon');
+  });
+
+  it('defaultUrl', () => {
+    const mockHtmlUrl =
+      'https://github.com/gitify-app/notifications-test' as Link;
+
+    expect(
+      issueHandler.defaultUrl({
+        repository: {
+          html_url: mockHtmlUrl,
+        },
+      } as Notification),
+    ).toEqual(`${mockHtmlUrl}/issues`);
   });
 });

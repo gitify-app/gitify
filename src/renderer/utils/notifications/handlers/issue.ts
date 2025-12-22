@@ -16,7 +16,6 @@ import type {
 } from '../../../types';
 import type { Notification, Subject } from '../../../typesGitHub';
 import { fetchIssueByNumber } from '../../api/client';
-import { isStateFilteredOut, isUserFilteredOut } from '../filters/filter';
 import { DefaultHandler } from './default';
 import { getNotificationAuthor } from './utils';
 
@@ -25,35 +24,28 @@ class IssueHandler extends DefaultHandler {
 
   async enrich(
     notification: Notification,
-    settings: SettingsState,
+    _settings: SettingsState,
   ): Promise<GitifySubject> {
     const response = await fetchIssueByNumber(notification);
     const issue = response.data.repository?.issue;
 
     const issueState = issue.stateReason ?? issue.state;
 
-    // Return early if this notification would be hidden by filters
-    if (isStateFilteredOut(issueState, settings)) {
-      return null;
-    }
+    const issueComment = issue.comments.nodes[0];
 
-    const issueCommentUser = issue.comments.nodes[0].author;
-
-    const issueUser = getNotificationAuthor([issueCommentUser, issue.author]);
-
-    // Return early if this notification would be hidden by user filters
-    if (isUserFilteredOut(issueUser, settings)) {
-      return null;
-    }
+    const issueUser = getNotificationAuthor([
+      issueComment?.author,
+      issue.author,
+    ]);
 
     return {
       number: issue.number,
       state: issueState,
       user: issueUser,
       comments: issue.comments.totalCount,
-      labels: issue.labels.nodes?.map((label) => label.name) ?? [],
+      labels: issue.labels?.nodes.map((label) => label.name) ?? [],
       milestone: issue.milestone,
-      htmlUrl: issue.comments.nodes[0]?.url ?? issue.url,
+      htmlUrl: issueComment?.url ?? issue.url,
     };
   }
 

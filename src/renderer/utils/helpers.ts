@@ -47,32 +47,32 @@ export function actionsURL(repositoryURL: string, filters: string[]): Link {
 export async function generateGitHubWebUrl(
   notification: Notification,
 ): Promise<Link> {
-  const url = new URL(notification.repository.html_url);
+  const handler = createNotificationHandler(notification);
+  const url = new URL(handler.defaultUrl(notification));
 
-  try {
-    if (notification.subject.htmlUrl) {
-      url.href = notification.subject.htmlUrl;
-    } else if (notification.subject.latest_comment_url) {
-      url.href = await getHtmlUrl(
-        notification.subject.latest_comment_url,
-        notification.account.token,
+  if (notification.subject.htmlUrl) {
+    url.href = notification.subject.htmlUrl;
+  } else {
+    try {
+      if (notification.subject.latest_comment_url) {
+        url.href = await getHtmlUrl(
+          notification.subject.latest_comment_url,
+          notification.account.token,
+        );
+      } else if (notification.subject.url) {
+        url.href = await getHtmlUrl(
+          notification.subject.url,
+          notification.account.token,
+        );
+      }
+    } catch (err) {
+      rendererLogError(
+        'generateGitHubWebUrl',
+        'Failed to resolve specific notification html url for',
+        err,
+        notification,
       );
-    } else if (notification.subject.url) {
-      url.href = await getHtmlUrl(
-        notification.subject.url,
-        notification.account.token,
-      );
-    } else {
-      const handler = createNotificationHandler(notification);
-      handler.defaultUrl(notification);
     }
-  } catch (err) {
-    rendererLogError(
-      'generateGitHubWebUrl',
-      'Failed to resolve specific notification html url for',
-      err,
-      notification,
-    );
   }
 
   url.searchParams.set(

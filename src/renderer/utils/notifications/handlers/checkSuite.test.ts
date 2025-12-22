@@ -3,6 +3,8 @@ import {
   createPartialMockNotification,
 } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
+import type { Link } from '../../../types';
+import type { Notification } from '../../../typesGitHub';
 import { checkSuiteHandler, getCheckSuiteAttributes } from './checkSuite';
 
 describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
@@ -19,8 +21,10 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
       );
 
       expect(result).toEqual({
-        state: 'cancelled',
+        state: 'CANCELLED',
         user: null,
+        htmlUrl:
+          'https://github.com/gitify-app/notifications-test/actions?query=workflow%3A%22Demo%22+is%3ACANCELLED+branch%3Amain',
       });
     });
 
@@ -36,8 +40,10 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
       );
 
       expect(result).toEqual({
-        state: 'failure',
+        state: 'FAILURE',
         user: null,
+        htmlUrl:
+          'https://github.com/gitify-app/notifications-test/actions?query=workflow%3A%22Demo%22+is%3AFAILURE+branch%3Amain',
       });
     });
 
@@ -53,8 +59,10 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
       );
 
       expect(result).toEqual({
-        state: 'failure',
+        state: 'FAILURE',
         user: null,
+        htmlUrl:
+          'https://github.com/gitify-app/notifications-test/actions?query=workflow%3A%22Demo%22+is%3AFAILURE+branch%3Amain',
       });
     });
 
@@ -70,8 +78,10 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
       );
 
       expect(result).toEqual({
-        state: 'failure',
+        state: 'FAILURE',
         user: null,
+        htmlUrl:
+          'https://github.com/gitify-app/notifications-test/actions?query=workflow%3A%22Demo%22+is%3AFAILURE+branch%3Amain',
       });
     });
 
@@ -87,8 +97,10 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
       );
 
       expect(result).toEqual({
-        state: 'skipped',
+        state: 'SKIPPED',
         user: null,
+        htmlUrl:
+          'https://github.com/gitify-app/notifications-test/actions?query=workflow%3A%22Demo%22+is%3ASKIPPED+branch%3Amain',
       });
     });
 
@@ -104,8 +116,10 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
       );
 
       expect(result).toEqual({
-        state: 'success',
+        state: 'SUCCESS',
         user: null,
+        htmlUrl:
+          'https://github.com/gitify-app/notifications-test/actions?query=workflow%3A%22Demo%22+is%3ASUCCESS+branch%3Amain',
       });
     });
 
@@ -182,6 +196,22 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
     ).toBe('CheckIcon');
   });
 
+  it('defaultUrl', () => {
+    const mockHtmlUrl =
+      'https://github.com/gitify-app/notifications-test' as Link;
+
+    expect(
+      checkSuiteHandler.defaultUrl({
+        subject: {
+          title: 'Some notification',
+        },
+        repository: {
+          html_url: mockHtmlUrl,
+        },
+      } as Notification),
+    ).toEqual(`${mockHtmlUrl}/actions`);
+  });
+
   describe('getCheckSuiteState', () => {
     it('cancelled check suite state', async () => {
       const mockNotification = createPartialMockNotification({
@@ -194,7 +224,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
       expect(result).toEqual({
         workflowName: 'Demo',
         attemptNumber: null,
-        status: 'cancelled',
+        status: 'CANCELLED',
         statusDisplayName: 'cancelled',
         branchName: 'feature/foo',
       });
@@ -211,7 +241,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
       expect(result).toEqual({
         workflowName: 'Demo',
         attemptNumber: null,
-        status: 'failure',
+        status: 'FAILURE',
         statusDisplayName: 'failed',
         branchName: 'main',
       });
@@ -228,7 +258,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
       expect(result).toEqual({
         workflowName: 'Demo',
         attemptNumber: 3,
-        status: 'failure',
+        status: 'FAILURE',
         statusDisplayName: 'failed',
         branchName: 'main',
       });
@@ -245,7 +275,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
       expect(result).toEqual({
         workflowName: 'Demo',
         attemptNumber: null,
-        status: 'skipped',
+        status: 'SKIPPED',
         statusDisplayName: 'skipped',
         branchName: 'main',
       });
@@ -262,7 +292,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
       expect(result).toEqual({
         workflowName: 'Demo',
         attemptNumber: null,
-        status: 'success',
+        status: 'SUCCESS',
         statusDisplayName: 'succeeded',
         branchName: 'main',
       });
