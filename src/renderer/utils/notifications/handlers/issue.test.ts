@@ -417,6 +417,15 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
       issueHandler.iconType(
         createMockSubject({
           type: 'Issue',
+          state: 'DUPLICATE',
+        }),
+      ).displayName,
+    ).toBe('SkipIcon');
+
+    expect(
+      issueHandler.iconType(
+        createMockSubject({
+          type: 'Issue',
           state: 'REOPENED',
         }),
       ).displayName,
@@ -447,12 +456,6 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         createMockSubject({ type: 'Issue', state: 'COMPLETED' }),
       ),
     ).toBe(IconColor.PURPLE);
-
-    expect(
-      issueHandler.iconColor(
-        createMockSubject({ type: 'Issue', state: 'DRAFT' }),
-      ),
-    ).toBe(IconColor.GRAY);
 
     expect(
       issueHandler.iconColor(
