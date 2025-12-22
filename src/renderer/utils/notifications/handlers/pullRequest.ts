@@ -104,7 +104,7 @@ export function getLatestReviewForReviewers(
 
   // Find the most recent review for each reviewer
   const latestReviews = [];
-  const sortedReviews = reviews.reverse();
+  const sortedReviews = reviews.toReversed();
   for (const prReview of sortedReviews) {
     const reviewerFound = latestReviews.find(
       (review) => review.author.login === prReview.author.login,
