@@ -49,10 +49,6 @@ class DiscussionHandler extends DefaultHandler {
     const response = await fetchDiscussionByNumber(notification);
     const discussion = response.data.repository?.discussion;
 
-    if (!discussion) {
-      return null;
-    }
-
     let discussionState: GitifyDiscussionState = 'OPEN';
 
     if (discussion.isAnswered) {

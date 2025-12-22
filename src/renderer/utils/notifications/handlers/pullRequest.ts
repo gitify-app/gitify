@@ -41,9 +41,7 @@ class PullRequestHandler extends DefaultHandler {
 
     const prUser = getNotificationAuthor([prComment?.author, pr.author]);
 
-    const reviews = pr.reviews
-      ? getLatestReviewForReviewers(pr.reviews.nodes)
-      : null;
+    const reviews = getLatestReviewForReviewers(pr.reviews.nodes);
 
     return {
       number: pr.number,
@@ -51,10 +49,10 @@ class PullRequestHandler extends DefaultHandler {
       user: prUser,
       reviews: reviews,
       comments: pr.comments.totalCount,
-      labels: pr.labels?.nodes.map((label) => label.name) ?? [],
-      linkedIssues:
-        pr.closingIssuesReferences?.nodes.map((issue) => `#${issue.number}`) ??
-        [],
+      labels: pr.labels?.nodes.map((label) => label.name),
+      linkedIssues: pr.closingIssuesReferences?.nodes.map(
+        (issue) => `#${issue.number}`,
+      ),
       milestone: pr.milestone,
       htmlUrl: prComment?.url ?? pr.url,
     };

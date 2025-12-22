@@ -30,10 +30,6 @@ class IssueHandler extends DefaultHandler {
     const response = await fetchIssueByNumber(notification);
     const issue = response.data.repository?.issue;
 
-    if (!issue) {
-      return null;
-    }
-
     const issueState = issue.stateReason ?? issue.state;
 
     const issueComment = issue.comments.nodes[0];
@@ -48,7 +44,7 @@ class IssueHandler extends DefaultHandler {
       state: issueState,
       user: issueUser,
       comments: issue.comments.totalCount,
-      labels: issue.labels?.nodes.map((label) => label.name) ?? [],
+      labels: issue.labels?.nodes.map((label) => label.name),
       milestone: issue.milestone,
       htmlUrl: issueComment?.url ?? issue.url,
     };
