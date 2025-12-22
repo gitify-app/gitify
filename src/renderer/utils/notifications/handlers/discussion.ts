@@ -10,11 +10,12 @@ import {
 
 import { differenceInMilliseconds } from 'date-fns';
 
-import type {
-  GitifyDiscussionState,
-  GitifySubject,
-  Link,
-  SettingsState,
+import {
+  type GitifyDiscussionState,
+  type GitifySubject,
+  IconColor,
+  type Link,
+  type SettingsState,
 } from '../../../types';
 import type { Notification, Subject } from '../../../typesGitHub';
 import { fetchDiscussionByNumber } from '../../api/client';
@@ -22,7 +23,7 @@ import type {
   CommentFieldsFragment,
   FetchDiscussionByNumberQuery,
 } from '../../api/graphql/generated/graphql';
-import { DefaultHandler } from './default';
+import { DefaultHandler, defaultHandler } from './default';
 import { getNotificationAuthor } from './utils';
 
 type DiscussionComment = NonNullable<
@@ -81,7 +82,7 @@ class DiscussionHandler extends DefaultHandler {
   }
 
   iconType(subject: Subject): FC<OcticonProps> | null {
-    switch (subject.state) {
+    switch (subject.state as GitifyDiscussionState) {
       case 'DUPLICATE':
         return DiscussionDuplicateIcon;
       case 'OUTDATED':
@@ -90,6 +91,17 @@ class DiscussionHandler extends DefaultHandler {
         return DiscussionClosedIcon;
       default:
         return CommentDiscussionIcon;
+    }
+  }
+
+  iconColor(subject: Subject): IconColor {
+    switch (subject.state as GitifyDiscussionState) {
+      case 'ANSWERED':
+        return IconColor.GREEN;
+      case 'RESOLVED':
+        return IconColor.PURPLE;
+      default:
+        return defaultHandler.iconColor(subject);
     }
   }
 

@@ -12,12 +12,13 @@ import {
 import type {
   GitifyCheckSuiteStatus,
   GitifySubject,
+  IconColor,
   Link,
   SettingsState,
 } from '../../../types';
 import type { Notification, Subject } from '../../../typesGitHub';
 import { actionsURL } from '../../helpers';
-import { DefaultHandler } from './default';
+import { DefaultHandler, defaultHandler } from './default';
 
 export interface CheckSuiteAttributes {
   workflowName: string;
@@ -59,6 +60,17 @@ class CheckSuiteHandler extends DefaultHandler {
         return CheckIcon;
       default:
         return RocketIcon;
+    }
+  }
+
+  iconColor(subject: Subject): IconColor {
+    switch (subject.state as GitifyCheckSuiteStatus) {
+      case 'SUCCESS':
+        return IconColor.GREEN;
+      case 'FAILURE':
+        return IconColor.RED;
+      default:
+        return defaultHandler.iconColor(subject);
     }
   }
 

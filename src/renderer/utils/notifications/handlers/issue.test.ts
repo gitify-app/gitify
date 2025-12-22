@@ -7,7 +7,7 @@ import {
 } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
 import { createPartialMockUser } from '../../../__mocks__/user-mocks';
-import type { GitifySubject, Link } from '../../../types';
+import { type GitifySubject, IconColor, type Link } from '../../../types';
 import type { Notification } from '../../../typesGitHub';
 import type { FetchIssueByNumberQuery } from '../../api/graphql/generated/graphql';
 import { issueHandler } from './issue';
@@ -421,6 +421,44 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         }),
       ).displayName,
     ).toBe('IssueReopenedIcon');
+  });
+
+  it('iconColor', () => {
+    expect(
+      issueHandler.iconColor(
+        createMockSubject({ type: 'Issue', state: 'OPEN' }),
+      ),
+    ).toBe(IconColor.GREEN);
+
+    expect(
+      issueHandler.iconColor(
+        createMockSubject({ type: 'Issue', state: 'REOPENED' }),
+      ),
+    ).toBe(IconColor.GREEN);
+
+    expect(
+      issueHandler.iconColor(
+        createMockSubject({ type: 'Issue', state: 'CLOSED' }),
+      ),
+    ).toBe(IconColor.RED);
+
+    expect(
+      issueHandler.iconColor(
+        createMockSubject({ type: 'Issue', state: 'COMPLETED' }),
+      ),
+    ).toBe(IconColor.PURPLE);
+
+    expect(
+      issueHandler.iconColor(
+        createMockSubject({ type: 'Issue', state: 'DRAFT' }),
+      ),
+    ).toBe(IconColor.GRAY);
+
+    expect(
+      issueHandler.iconColor(
+        createMockSubject({ type: 'Issue', state: 'NOT_PLANNED' }),
+      ),
+    ).toBe(IconColor.GRAY);
   });
 
   it('defaultUrl', () => {

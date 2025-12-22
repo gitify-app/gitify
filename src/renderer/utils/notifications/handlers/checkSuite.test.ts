@@ -3,7 +3,7 @@ import {
   createPartialMockNotification,
 } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
-import type { Link } from '../../../types';
+import { IconColor, type Link } from '../../../types';
 import type { Notification } from '../../../typesGitHub';
 import { checkSuiteHandler, getCheckSuiteAttributes } from './checkSuite';
 
@@ -194,6 +194,38 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
         }),
       ).displayName,
     ).toBe('CheckIcon');
+  });
+
+  it('iconColor', () => {
+    expect(
+      checkSuiteHandler.iconColor(
+        createMockSubject({ type: 'CheckSuite', state: 'success' }),
+      ),
+    ).toBe(IconColor.GREEN);
+
+    expect(
+      checkSuiteHandler.iconColor(
+        createMockSubject({ type: 'CheckSuite', state: 'failure' }),
+      ),
+    ).toBe(IconColor.RED);
+
+    expect(
+      checkSuiteHandler.iconColor(
+        createMockSubject({ type: 'CheckSuite', state: 'cancelled' }),
+      ),
+    ).toBe(IconColor.GRAY);
+
+    expect(
+      checkSuiteHandler.iconColor(
+        createMockSubject({ type: 'CheckSuite', state: 'skipped' }),
+      ),
+    ).toBe(IconColor.GRAY);
+
+    expect(
+      checkSuiteHandler.iconColor(
+        createMockSubject({ type: 'CheckSuite', state: null }),
+      ),
+    ).toBe(IconColor.GRAY);
   });
 
   it('defaultUrl', () => {

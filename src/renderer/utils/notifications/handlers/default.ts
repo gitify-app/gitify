@@ -23,23 +23,8 @@ export class DefaultHandler implements NotificationTypeHandler {
     return QuestionIcon;
   }
 
-  iconColor(subject: Subject): IconColor {
-    switch (subject.state) {
-      case 'OPEN':
-      case 'REOPENED':
-      case 'ANSWERED':
-      case 'SUCCESS':
-        return IconColor.GREEN;
-      case 'CLOSED':
-      case 'FAILURE':
-        return IconColor.RED;
-      case 'COMPLETED':
-      case 'RESOLVED':
-      case 'MERGED':
-        return IconColor.PURPLE;
-      default:
-        return IconColor.GRAY;
-    }
+  iconColor(_subject: Subject): IconColor {
+    return IconColor.GRAY;
   }
 
   formattedNotificationType(notification: Notification): string {

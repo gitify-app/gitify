@@ -7,7 +7,7 @@ import {
 } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
 import { createPartialMockUser } from '../../../__mocks__/user-mocks';
-import type { GitifySubject, Link } from '../../../types';
+import { type GitifySubject, IconColor, type Link } from '../../../types';
 import type { Notification } from '../../../typesGitHub';
 import type {
   FetchPullRequestByNumberQuery,
@@ -552,6 +552,32 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         }),
       ).displayName,
     ).toBe('GitMergeIcon');
+  });
+
+  it('iconColor', () => {
+    expect(
+      pullRequestHandler.iconColor(
+        createMockSubject({ type: 'PullRequest', state: 'OPEN' }),
+      ),
+    ).toBe(IconColor.GREEN);
+
+    expect(
+      pullRequestHandler.iconColor(
+        createMockSubject({ type: 'PullRequest', state: 'CLOSED' }),
+      ),
+    ).toBe(IconColor.RED);
+
+    expect(
+      pullRequestHandler.iconColor(
+        createMockSubject({ type: 'PullRequest', state: 'MERGED' }),
+      ),
+    ).toBe(IconColor.PURPLE);
+
+    expect(
+      pullRequestHandler.iconColor(
+        createMockSubject({ type: 'PullRequest', state: 'DRAFT' }),
+      ),
+    ).toBe(IconColor.GRAY);
   });
 
   it('defaultUrl', () => {

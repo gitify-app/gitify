@@ -36,28 +36,17 @@ describe('renderer/utils/notifications/handlers/default.ts', () => {
   });
 
   describe('iconColor', () => {
-    const cases: Array<[GitifyNotificationState | null, IconColor]> = [
-      ['OPEN' as GitifyNotificationState, IconColor.GREEN],
-      ['REOPENED' as GitifyNotificationState, IconColor.GREEN],
-      ['ANSWERED' as GitifyNotificationState, IconColor.GREEN],
-      ['SUCCESS' as GitifyNotificationState, IconColor.GREEN],
-      ['CLOSED' as GitifyNotificationState, IconColor.RED],
-      ['FAILURE' as GitifyNotificationState, IconColor.RED],
-      ['COMPLETED' as GitifyNotificationState, IconColor.PURPLE],
-      ['RESOLVED' as GitifyNotificationState, IconColor.PURPLE],
-      ['MERGED' as GitifyNotificationState, IconColor.PURPLE],
-      ['NOT_PLANNED' as GitifyNotificationState, IconColor.GRAY],
-      ['DRAFT' as GitifyNotificationState, IconColor.GRAY],
-      ['SKIPPED' as GitifyNotificationState, IconColor.GRAY],
-      ['CANCELLED' as GitifyNotificationState, IconColor.GRAY],
-      ['unknown' as GitifyNotificationState, IconColor.GRAY],
-      [null, IconColor.GRAY],
-      [undefined, IconColor.GRAY],
-    ];
+    it('returns GRAY for any state (fallback behavior)', () => {
+      const states: Array<StateType | null | undefined> = [
+        'unknown' as StateType,
+        null,
+        undefined,
+      ];
 
-    it.each(cases)('returns correct color for state %s', (state, expected) => {
-      const subject = createMockSubject({ state });
-      expect(defaultHandler.iconColor(subject)).toBe(expected);
+      states.forEach((state) => {
+        const subject = createMockSubject({ state });
+        expect(defaultHandler.iconColor(subject)).toBe(IconColor.GRAY);
+      });
     });
   });
 

@@ -8,17 +8,18 @@ import {
   GitPullRequestIcon,
 } from '@primer/octicons-react';
 
-import type {
-  GitifyPullRequestReview,
-  GitifyPullRequestState,
-  GitifySubject,
-  Link,
-  SettingsState,
+import {
+  type GitifyPullRequestReview,
+  type GitifyPullRequestState,
+  type GitifySubject,
+  IconColor,
+  type Link,
+  type SettingsState,
 } from '../../../types';
 import type { Notification, Subject } from '../../../typesGitHub';
 import { fetchPullByNumber } from '../../api/client';
 import type { FetchPullRequestByNumberQuery } from '../../api/graphql/generated/graphql';
-import { DefaultHandler } from './default';
+import { DefaultHandler, defaultHandler } from './default';
 import { getNotificationAuthor } from './utils';
 
 class PullRequestHandler extends DefaultHandler {
@@ -69,6 +70,19 @@ class PullRequestHandler extends DefaultHandler {
         return GitMergeIcon;
       default:
         return GitPullRequestIcon;
+    }
+  }
+
+  iconColor(subject: Subject): IconColor {
+    switch (subject.state as GitifyPullRequestState) {
+      case 'OPEN':
+        return IconColor.GREEN;
+      case 'CLOSED':
+        return IconColor.RED;
+      case 'MERGED':
+        return IconColor.PURPLE;
+      default:
+        return defaultHandler.iconColor(subject);
     }
   }
 
