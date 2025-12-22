@@ -21,7 +21,7 @@ const STATE_TYPE_DETAILS: Record<FilterStateType, TypeDetails> = {
   },
   closed: {
     title: 'Closed',
-    description: 'Closed, completed or not planned',
+    description: 'Closed, completed, duplicate, resolved or not planned',
   },
   other: {
     title: 'Other',
@@ -64,32 +64,29 @@ export const stateFilter: Filter<FilterStateType> = {
     notification: Notification,
     stateType: FilterStateType,
   ): boolean {
-    const allOpenStates: GitifyNotificationState[] = ['OPEN', 'REOPENED'];
-    const allClosedStates: GitifyNotificationState[] = [
-      'CLOSED',
-      'COMPLETED',
-      'NOT_PLANNED',
-    ];
-    const allMergedStates: GitifyNotificationState[] = ['MERGED'];
-    const allDraftStates: GitifyNotificationState[] = ['DRAFT'];
-    const allFilterableStates = [
-      ...allOpenStates,
-      ...allClosedStates,
-      ...allMergedStates,
-      ...allDraftStates,
-    ];
-
-    switch (stateType) {
-      case 'open':
-        return allOpenStates.includes(notification.subject?.state);
-      case 'closed':
-        return allClosedStates.includes(notification.subject?.state);
-      case 'merged':
-        return allMergedStates.includes(notification.subject?.state);
-      case 'draft':
-        return allDraftStates.includes(notification.subject?.state);
-      default:
-        return !allFilterableStates.includes(notification.subject?.state);
-    }
+    const mapped = mapStateToFilter(notification.subject?.state);
+    return stateType === mapped;
   },
 };
+
+function mapStateToFilter(
+  state: GitifyNotificationState | null | undefined,
+): FilterStateType {
+  switch (state) {
+    case 'OPEN':
+    case 'REOPENED':
+      return 'open';
+    case 'CLOSED':
+    case 'COMPLETED':
+    case 'DUPLICATE':
+    case 'NOT_PLANNED':
+    case 'RESOLVED':
+      return 'closed';
+    case 'MERGED':
+      return 'merged';
+    case 'DRAFT':
+      return 'draft';
+    default:
+      return 'other';
+  }
+}
