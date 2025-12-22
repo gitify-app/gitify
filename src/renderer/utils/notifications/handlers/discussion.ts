@@ -95,7 +95,7 @@ class DiscussionHandler extends DefaultHandler {
   }
 
   iconColor(subject: Subject): IconColor {
-    switch (subject.state as GitifyDiscussionState) {
+    switch (subject.state) {
       case 'ANSWERED':
         return IconColor.GREEN;
       case 'RESOLVED':
@@ -125,8 +125,8 @@ export function getClosestDiscussionCommentOrReply(
   const targetTimestamp = notification.updated_at;
 
   const allCommentsAndReplies = comments.flatMap((comment) => [
-    comment,
     ...comment.replies.nodes,
+    comment,
   ]);
 
   // Find the closest match using the target timestamp

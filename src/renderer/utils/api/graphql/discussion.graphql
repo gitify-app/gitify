@@ -23,6 +23,7 @@ query FetchDiscussionByNumber(
         nodes {
           ...CommentFields
           replies(last: $lastReplies) {
+            totalCount
             nodes {
               ...CommentFields
             }

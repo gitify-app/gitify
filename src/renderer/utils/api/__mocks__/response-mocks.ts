@@ -4,7 +4,6 @@ import {
 } from '../../../__mocks__/account-mocks';
 import type { Link } from '../../../types';
 import type { Notification, Repository, User } from '../../../typesGitHub';
-import type { FetchDiscussionByNumberQuery } from '../graphql/generated/graphql';
 
 export const mockNotificationUser: User = {
   login: 'octocat',
@@ -367,59 +366,5 @@ export const mockEnterpriseNotifications: Notification[] = [
       'https://github.gitify.io/api/v3/notifications/threads/3/subscription' as Link,
   },
 ];
-
-export const mockDiscussionByNumberGraphQLResponse: FetchDiscussionByNumberQuery =
-  {
-    repository: {
-      discussion: {
-        __typename: 'Discussion',
-        number: 123,
-        title: '1.16.0',
-        isAnswered: false,
-        stateReason: null,
-        url: 'https://github.com/gitify-app/notifications-test/discussions/612' as Link,
-        author: {
-          login: 'comment-user',
-          html_url: 'https://github.com/comment-user' as Link,
-          avatar_url:
-            'https://avatars.githubusercontent.com/u/123456789?v=4' as Link,
-          type: 'User',
-        },
-        comments: {
-          totalCount: 2,
-          nodes: [
-            {
-              databaseId: 2258799,
-              createdAt: '2017-02-20T17:51:57Z',
-              author: {
-                login: 'comment-user',
-                html_url: 'https://github.com/comment-user' as Link,
-                avatar_url:
-                  'https://avatars.githubusercontent.com/u/123456789?v=4' as Link,
-                type: 'User',
-              },
-              url: 'https://github.com/gitify-app/notifications-test/discussions/612#discussioncomment-67890',
-              replies: {
-                nodes: [
-                  {
-                    databaseId: 2300902,
-                    createdAt: '2017-05-20T17:51:57Z',
-                    author: {
-                      login: 'reply-user',
-                      html_url: 'https://github.com/reply-user' as Link,
-                      avatar_url:
-                        'https://avatars.githubusercontent.com/u/123456789?v=4' as Link,
-                      type: 'User',
-                    },
-                    url: 'https://github.com/gitify-app/notifications-test/discussions/612#discussioncomment-12345',
-                  },
-                ],
-              },
-            },
-          ],
-        },
-      },
-    },
-  };
 
 export const mockSingleNotification: Notification = mockGitHubNotifications[0];

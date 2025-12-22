@@ -3,7 +3,11 @@ import {
   createPartialMockNotification,
 } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
-import { IconColor, type Link } from '../../../types';
+import {
+  type GitifyCheckSuiteStatus,
+  IconColor,
+  type Link,
+} from '../../../types';
 import type { Notification } from '../../../typesGitHub';
 import { checkSuiteHandler, getCheckSuiteAttributes } from './checkSuite';
 
@@ -152,80 +156,60 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
     });
   });
 
-  it('iconType', () => {
-    expect(
-      checkSuiteHandler.iconType(
-        createMockSubject({ type: 'CheckSuite', state: null }),
-      ).displayName,
-    ).toBe('RocketIcon');
+  describe('iconType', () => {
+    const cases = {
+      ACTION_REQUIRED: 'RocketIcon',
+      CANCELLED: 'StopIcon',
+      COMPLETED: 'RocketIcon',
+      FAILURE: 'XIcon',
+      IN_PROGRESS: 'RocketIcon',
+      PENDING: 'RocketIcon',
+      QUEUED: 'RocketIcon',
+      REQUESTED: 'RocketIcon',
+      SKIPPED: 'SkipIcon',
+      STALE: 'RocketIcon',
+      SUCCESS: 'CheckIcon',
+      TIMED_OUT: 'RocketIcon',
+      WAITING: 'RocketIcon',
+    } satisfies Record<GitifyCheckSuiteStatus, string>;
 
-    expect(
-      checkSuiteHandler.iconType(
-        createMockSubject({
-          type: 'CheckSuite',
-          state: 'CANCELLED',
-        }),
-      ).displayName,
-    ).toBe('StopIcon');
-
-    expect(
-      checkSuiteHandler.iconType(
-        createMockSubject({
-          type: 'CheckSuite',
-          state: 'FAILURE',
-        }),
-      ).displayName,
-    ).toBe('XIcon');
-
-    expect(
-      checkSuiteHandler.iconType(
-        createMockSubject({
-          type: 'CheckSuite',
-          state: 'SKIPPED',
-        }),
-      ).displayName,
-    ).toBe('SkipIcon');
-
-    expect(
-      checkSuiteHandler.iconType(
-        createMockSubject({
-          type: 'CheckSuite',
-          state: 'SUCCESS',
-        }),
-      ).displayName,
-    ).toBe('CheckIcon');
+    it.each(
+      Object.entries(cases) as Array<[GitifyCheckSuiteStatus, IconColor]>,
+    )('iconType for check suite with status %s', (checkSuiteStatus, checkSuiteIconType) => {
+      expect(
+        checkSuiteHandler.iconType(
+          createMockSubject({ type: 'CheckSuite', state: checkSuiteStatus }),
+        ).displayName,
+      ).toBe(checkSuiteIconType);
+    });
   });
 
-  it('iconColor', () => {
-    expect(
-      checkSuiteHandler.iconColor(
-        createMockSubject({ type: 'CheckSuite', state: 'SUCCESS' }),
-      ),
-    ).toBe(IconColor.GREEN);
+  describe('iconColor', () => {
+    const cases = {
+      ACTION_REQUIRED: IconColor.GRAY,
+      CANCELLED: IconColor.GRAY,
+      COMPLETED: IconColor.GRAY,
+      FAILURE: IconColor.RED,
+      IN_PROGRESS: IconColor.GRAY,
+      PENDING: IconColor.GRAY,
+      QUEUED: IconColor.GRAY,
+      REQUESTED: IconColor.GRAY,
+      SKIPPED: IconColor.GRAY,
+      STALE: IconColor.GRAY,
+      SUCCESS: IconColor.GREEN,
+      TIMED_OUT: IconColor.GRAY,
+      WAITING: IconColor.GRAY,
+    } satisfies Record<GitifyCheckSuiteStatus, IconColor>;
 
-    expect(
-      checkSuiteHandler.iconColor(
-        createMockSubject({ type: 'CheckSuite', state: 'FAILURE' }),
-      ),
-    ).toBe(IconColor.RED);
-
-    expect(
-      checkSuiteHandler.iconColor(
-        createMockSubject({ type: 'CheckSuite', state: 'CANCELLED' }),
-      ),
-    ).toBe(IconColor.GRAY);
-
-    expect(
-      checkSuiteHandler.iconColor(
-        createMockSubject({ type: 'CheckSuite', state: 'SKIPPED' }),
-      ),
-    ).toBe(IconColor.GRAY);
-
-    expect(
-      checkSuiteHandler.iconColor(
-        createMockSubject({ type: 'CheckSuite', state: null }),
-      ),
-    ).toBe(IconColor.GRAY);
+    it.each(
+      Object.entries(cases) as Array<[GitifyCheckSuiteStatus, IconColor]>,
+    )('iconColor for check suite with status %s', (checkSuiteStatus, checkSuiteIconColor) => {
+      expect(
+        checkSuiteHandler.iconColor(
+          createMockSubject({ type: 'CheckSuite', state: checkSuiteStatus }),
+        ),
+      ).toBe(checkSuiteIconColor);
+    });
   });
 
   it('defaultUrl', () => {

@@ -30,6 +30,10 @@ class IssueHandler extends DefaultHandler {
     const response = await fetchIssueByNumber(notification);
     const issue = response.data.repository?.issue;
 
+    if (!issue) {
+      return null;
+    }
+
     const issueState = issue.stateReason ?? issue.state;
 
     const issueComment = issue.comments.nodes[0];

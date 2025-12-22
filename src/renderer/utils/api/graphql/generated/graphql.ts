@@ -35929,7 +35929,7 @@ export type FetchDiscussionByNumberQuery = { __typename?: 'Query', repository?: 
         | { __typename?: 'Mannequin', login: string, html_url: any, avatar_url: any, type: 'Mannequin' }
         | { __typename?: 'Organization', login: string, html_url: any, avatar_url: any, type: 'Organization' }
         | { __typename?: 'User', login: string, html_url: any, avatar_url: any, type: 'User' }
-       | null, comments: { __typename?: 'DiscussionCommentConnection', totalCount: number, nodes?: Array<{ __typename?: 'DiscussionComment', databaseId?: number | null, createdAt: any, url: any, replies: { __typename?: 'DiscussionCommentConnection', nodes?: Array<{ __typename?: 'DiscussionComment', databaseId?: number | null, createdAt: any, url: any, author?:
+       | null, comments: { __typename?: 'DiscussionCommentConnection', totalCount: number, nodes?: Array<{ __typename?: 'DiscussionComment', databaseId?: number | null, createdAt: any, url: any, replies: { __typename?: 'DiscussionCommentConnection', totalCount: number, nodes?: Array<{ __typename?: 'DiscussionComment', databaseId?: number | null, createdAt: any, url: any, author?:
                 | { __typename?: 'Bot', login: string, html_url: any, avatar_url: any, type: 'Bot' }
                 | { __typename?: 'EnterpriseUserAccount', login: string, html_url: any, avatar_url: any, type: 'EnterpriseUserAccount' }
                 | { __typename?: 'Mannequin', login: string, html_url: any, avatar_url: any, type: 'Mannequin' }
@@ -36072,6 +36072,7 @@ export const FetchDiscussionByNumberDocument = new TypedDocumentString(`
         nodes {
           ...CommentFields
           replies(last: $lastReplies) {
+            totalCount
             nodes {
               ...CommentFields
             }

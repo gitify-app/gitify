@@ -7,18 +7,27 @@ import {
 } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
 import { createPartialMockUser } from '../../../__mocks__/user-mocks';
-import { type GitifySubject, IconColor, type Link } from '../../../types';
+import {
+  type GitifyIssueState,
+  type GitifySubject,
+  IconColor,
+  type Link,
+} from '../../../types';
 import type { Notification } from '../../../typesGitHub';
-import type { FetchIssueByNumberQuery } from '../../api/graphql/generated/graphql';
+import type {
+  FetchIssueByNumberQuery,
+  IssueState,
+  IssueStateReason,
+} from '../../api/graphql/generated/graphql';
 import { issueHandler } from './issue';
 
 type IssueResponse = FetchIssueByNumberQuery['repository']['issue'];
 
+const mockAuthor = createPartialMockUser('issue-author');
+const mockCommenter = createPartialMockUser('issue-commenter');
+
 describe('renderer/utils/notifications/handlers/issue.ts', () => {
   describe('enrich', () => {
-    const mockAuthor = createPartialMockUser('some-author');
-    const mockCommenter = createPartialMockUser('some-commenter');
-
     let mockNotification: Notification;
 
     beforeEach(() => {
@@ -35,23 +44,17 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
       axios.defaults.adapter = 'http';
     });
 
-    it('open issue state', async () => {
+    it('issue with only state', async () => {
+      const mockIssue = mockIssueResponseNode({
+        state: 'OPEN',
+      });
+
       nock('https://api.github.com')
         .post('/graphql')
         .reply(200, {
           data: {
             repository: {
-              issue: {
-                __typename: 'Issue',
-                number: 123,
-                title: 'PR Title',
-                state: 'OPEN',
-                url: 'https://github.com/gitify-app/notifications-test/issues/123',
-                author: mockAuthor,
-                labels: { nodes: [] },
-                comments: { totalCount: 0, nodes: [] },
-                milestone: null,
-              } as IssueResponse,
+              issue: mockIssue,
             },
           },
         });
@@ -74,63 +77,18 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
       } as GitifySubject);
     });
 
-    it('closed issue state', async () => {
-      nock('https://api.github.com')
-        .post('/graphql')
-        .reply(200, {
-          data: {
-            repository: {
-              issue: {
-                __typename: 'Issue',
-                number: 123,
-                title: 'PR Title',
-                state: 'CLOSED',
-                url: 'https://github.com/gitify-app/notifications-test/issues/123',
-                author: mockAuthor,
-                labels: { nodes: [] },
-                comments: { totalCount: 0, nodes: [] },
-                milestone: null,
-              } as IssueResponse,
-            },
-          },
-        });
-
-      const result = await issueHandler.enrich(mockNotification, mockSettings);
-
-      expect(result).toEqual({
-        number: 123,
+    it('issue with stateReason - prefer stateReason over state when available', async () => {
+      const mockIssue = mockIssueResponseNode({
         state: 'CLOSED',
-        user: {
-          login: mockAuthor.login,
-          html_url: mockAuthor.html_url,
-          avatar_url: mockAuthor.avatar_url,
-          type: mockAuthor.type,
-        },
-        comments: 0,
-        htmlUrl: 'https://github.com/gitify-app/notifications-test/issues/123',
-        labels: [],
-        milestone: null,
-      } as GitifySubject);
-    });
+        stateReason: 'COMPLETED',
+      });
 
-    it('completed issue state', async () => {
       nock('https://api.github.com')
         .post('/graphql')
         .reply(200, {
           data: {
             repository: {
-              issue: {
-                __typename: 'Issue',
-                number: 123,
-                title: 'PR Title',
-                state: 'CLOSED',
-                stateReason: 'COMPLETED',
-                url: 'https://github.com/gitify-app/notifications-test/issues/123',
-                author: mockAuthor,
-                labels: { nodes: [] },
-                comments: { totalCount: 0, nodes: [] },
-                milestone: null,
-              } as IssueResponse,
+              issue: mockIssue,
             },
           },
         });
@@ -153,113 +111,26 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
       } as GitifySubject);
     });
 
-    it('not_planned issue state', async () => {
-      nock('https://api.github.com')
-        .post('/graphql')
-        .reply(200, {
-          data: {
-            repository: {
-              issue: {
-                __typename: 'Issue',
-                number: 123,
-                title: 'PR Title',
-                state: 'CLOSED',
-                stateReason: 'NOT_PLANNED',
-                url: 'https://github.com/gitify-app/notifications-test/issues/123',
-                author: mockAuthor,
-                labels: { nodes: [] },
-                comments: { totalCount: 0, nodes: [] },
-                milestone: null,
-              } as IssueResponse,
-            },
+    it('issue with comments', async () => {
+      const mockIssue = mockIssueResponseNode({
+        state: 'OPEN',
+      });
+      mockIssue.comments = {
+        totalCount: 1,
+        nodes: [
+          {
+            author: mockCommenter,
+            url: 'https://github.com/gitify-app/notifications-test/issues/123#issuecomment-1234',
           },
-        });
+        ],
+      };
 
-      const result = await issueHandler.enrich(mockNotification, mockSettings);
-
-      expect(result).toEqual({
-        number: 123,
-        state: 'NOT_PLANNED',
-        user: {
-          login: mockAuthor.login,
-          html_url: mockAuthor.html_url,
-          avatar_url: mockAuthor.avatar_url,
-          type: mockAuthor.type,
-        },
-        comments: 0,
-        htmlUrl: 'https://github.com/gitify-app/notifications-test/issues/123',
-        labels: [],
-        milestone: null,
-      } as GitifySubject);
-    });
-
-    it('reopened issue state', async () => {
       nock('https://api.github.com')
         .post('/graphql')
         .reply(200, {
           data: {
             repository: {
-              issue: {
-                __typename: 'Issue',
-                number: 123,
-                title: 'PR Title',
-                state: 'OPEN',
-                stateReason: 'REOPENED',
-                url: 'https://github.com/gitify-app/notifications-test/issues/123',
-                author: mockAuthor,
-                labels: { nodes: [] },
-                comments: { totalCount: 0, nodes: [] },
-                milestone: null,
-              } as IssueResponse,
-            },
-          },
-        });
-
-      const result = await issueHandler.enrich(mockNotification, mockSettings);
-
-      expect(result).toEqual({
-        number: 123,
-        state: 'REOPENED',
-        user: {
-          login: mockAuthor.login,
-          html_url: mockAuthor.html_url,
-          avatar_url: mockAuthor.avatar_url,
-          type: mockAuthor.type,
-        },
-        comments: 0,
-        htmlUrl: 'https://github.com/gitify-app/notifications-test/issues/123',
-        labels: [],
-        milestone: null,
-      } as GitifySubject);
-    });
-
-    it('with comments', async () => {
-      nock('https://api.github.com')
-        .post('/graphql')
-        .reply(200, {
-          data: {
-            repository: {
-              issue: {
-                __typename: 'Issue',
-                number: 123,
-                title: 'PR Title',
-                state: 'OPEN',
-                url: 'https://github.com/gitify-app/notifications-test/issues/123',
-                author: mockAuthor,
-                labels: {
-                  nodes: [],
-                },
-                comments: {
-                  totalCount: 1,
-                  nodes: [
-                    {
-                      author: mockCommenter,
-                      url: 'https://github.com/gitify-app/notifications-test/issues/123#issuecomment-1234',
-                    },
-                  ],
-                },
-                milestone: null,
-              } as IssueResponse,
+              issue: mockIssue,
             },
           },
         });
@@ -284,28 +155,19 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
     });
 
     it('with labels', async () => {
+      const mockIssue = mockIssueResponseNode({
+        state: 'OPEN',
+      });
+      mockIssue.labels = {
+        nodes: [{ name: 'enhancement' }],
+      };
+
       nock('https://api.github.com')
         .post('/graphql')
         .reply(200, {
           data: {
             repository: {
-              issue: {
-                __typename: 'Issue',
-                number: 123,
-                title: 'PR Title',
-                state: 'OPEN',
-                url: 'https://github.com/gitify-app/notifications-test/issues/123',
-                author: mockAuthor,
-                labels: {
-                  nodes: [
-                    {
-                      name: 'enhancement',
-                    },
-                  ],
-                },
-                comments: { totalCount: 0, nodes: [] },
-                milestone: null,
-              } as IssueResponse,
+              issue: mockIssue,
             },
           },
         });
@@ -329,27 +191,20 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
     });
 
     it('with milestone', async () => {
+      const mockIssue = mockIssueResponseNode({
+        state: 'OPEN',
+      });
+      mockIssue.milestone = {
+        state: 'OPEN',
+        title: 'Open Milestone',
+      };
+
       nock('https://api.github.com')
         .post('/graphql')
         .reply(200, {
           data: {
             repository: {
-              issue: {
-                __typename: 'Issue',
-                number: 123,
-                title: 'PR Title',
-                state: 'OPEN',
-                url: 'https://github.com/gitify-app/notifications-test/issues/123',
-                author: mockAuthor,
-                labels: {
-                  nodes: [],
-                },
-                comments: { totalCount: 0, nodes: [] },
-                milestone: {
-                  state: 'OPEN',
-                  title: 'Open Milestone',
-                },
-              } as IssueResponse,
+              issue: mockIssue,
             },
           },
         });
@@ -376,92 +231,46 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
     });
   });
 
-  it('iconType', () => {
-    expect(
-      issueHandler.iconType(createMockSubject({ type: 'Issue' })).displayName,
-    ).toBe('IssueOpenedIcon');
+  describe('iconType', () => {
+    const cases = {
+      CLOSED: 'IssueClosedIcon',
+      COMPLETED: 'IssueClosedIcon',
+      DUPLICATE: 'SkipIcon',
+      NOT_PLANNED: 'SkipIcon',
+      OPEN: 'IssueOpenedIcon',
+      REOPENED: 'IssueReopenedIcon',
+    } satisfies Record<GitifyIssueState, string>;
 
-    expect(
-      issueHandler.iconType(createMockSubject({ type: 'Issue', state: 'OPEN' }))
-        .displayName,
-    ).toBe('IssueOpenedIcon');
-
-    expect(
-      issueHandler.iconType(
-        createMockSubject({
-          type: 'Issue',
-          state: 'CLOSED',
-        }),
-      ).displayName,
-    ).toBe('IssueClosedIcon');
-
-    expect(
-      issueHandler.iconType(
-        createMockSubject({
-          type: 'Issue',
-          state: 'COMPLETED',
-        }),
-      ).displayName,
-    ).toBe('IssueClosedIcon');
-
-    expect(
-      issueHandler.iconType(
-        createMockSubject({
-          type: 'Issue',
-          state: 'NOT_PLANNED',
-        }),
-      ).displayName,
-    ).toBe('SkipIcon');
-
-    expect(
-      issueHandler.iconType(
-        createMockSubject({
-          type: 'Issue',
-          state: 'DUPLICATE',
-        }),
-      ).displayName,
-    ).toBe('SkipIcon');
-
-    expect(
-      issueHandler.iconType(
-        createMockSubject({
-          type: 'Issue',
-          state: 'REOPENED',
-        }),
-      ).displayName,
-    ).toBe('IssueReopenedIcon');
+    it.each(
+      Object.entries(cases) as Array<[GitifyIssueState, IconColor]>,
+    )('iconType for issue with state %s', (issueState, issueIconType) => {
+      expect(
+        issueHandler.iconType(
+          createMockSubject({ type: 'Issue', state: issueState }),
+        ).displayName,
+      ).toBe(issueIconType);
+    });
   });
 
-  it('iconColor', () => {
-    expect(
-      issueHandler.iconColor(
-        createMockSubject({ type: 'Issue', state: 'OPEN' }),
-      ),
-    ).toBe(IconColor.GREEN);
+  describe('iconColor', () => {
+    const cases = {
+      CLOSED: IconColor.RED,
+      COMPLETED: IconColor.PURPLE,
+      DUPLICATE: IconColor.GRAY,
+      NOT_PLANNED: IconColor.GRAY,
+      OPEN: IconColor.GREEN,
+      REOPENED: IconColor.GREEN,
+    } satisfies Record<GitifyIssueState, IconColor>;
 
-    expect(
-      issueHandler.iconColor(
-        createMockSubject({ type: 'Issue', state: 'REOPENED' }),
-      ),
-    ).toBe(IconColor.GREEN);
-
-    expect(
-      issueHandler.iconColor(
-        createMockSubject({ type: 'Issue', state: 'CLOSED' }),
-      ),
-    ).toBe(IconColor.RED);
-
-    expect(
-      issueHandler.iconColor(
-        createMockSubject({ type: 'Issue', state: 'COMPLETED' }),
-      ),
-    ).toBe(IconColor.PURPLE);
-
-    expect(
-      issueHandler.iconColor(
-        createMockSubject({ type: 'Issue', state: 'NOT_PLANNED' }),
-      ),
-    ).toBe(IconColor.GRAY);
+    it.each(
+      Object.entries(cases) as Array<[GitifyIssueState, IconColor]>,
+    )('iconColor for issue with state %s', (issueState, issueIconColor) => {
+      expect(
+        issueHandler.iconColor(
+          createMockSubject({ type: 'Issue', state: issueState }),
+        ),
+      ).toBe(issueIconColor);
+    });
   });
 
   it('defaultUrl', () => {
@@ -477,3 +286,21 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
     ).toEqual(`${mockHtmlUrl}/issues`);
   });
 });
+
+function mockIssueResponseNode(mocks: {
+  state: IssueState;
+  stateReason?: IssueStateReason;
+}): IssueResponse {
+  return {
+    __typename: 'Issue',
+    number: 123,
+    title: 'PR Title',
+    state: mocks.state,
+    stateReason: mocks.stateReason,
+    url: 'https://github.com/gitify-app/notifications-test/issues/123',
+    author: mockAuthor,
+    labels: { nodes: [] },
+    comments: { totalCount: 0, nodes: [] },
+    milestone: null,
+  };
+}
