@@ -3,14 +3,9 @@ import type { FC } from 'react';
 import type { OcticonProps } from '@primer/octicons-react';
 import { QuestionIcon } from '@primer/octicons-react';
 
-import type { Link, SettingsState } from '../../../types';
+import type { GitifySubject, Link, SettingsState } from '../../../types';
 import { IconColor } from '../../../types';
-import type {
-  GitifySubject,
-  Notification,
-  Subject,
-  SubjectType,
-} from '../../../typesGitHub';
+import type { Notification, Subject, SubjectType } from '../../../typesGitHub';
 import type { NotificationTypeHandler } from './types';
 import { formatForDisplay } from './utils';
 

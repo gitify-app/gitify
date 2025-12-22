@@ -8,17 +8,17 @@ import {
   SkipIcon,
 } from '@primer/octicons-react';
 
-import type { Link, SettingsState } from '../../../types';
 import type {
   GitifyIssueState,
   GitifySubject,
-  Notification,
-  Subject,
-} from '../../../typesGitHub';
+  Link,
+  SettingsState,
+} from '../../../types';
+import type { Notification, Subject } from '../../../typesGitHub';
 import { fetchIssueByNumber } from '../../api/client';
 import { isStateFilteredOut, isUserFilteredOut } from '../filters/filter';
 import { DefaultHandler } from './default';
-import { getSubjectAuthor } from './utils';
+import { getNotificationAuthor } from './utils';
 
 class IssueHandler extends DefaultHandler {
   readonly type = 'Issue';
@@ -39,7 +39,7 @@ class IssueHandler extends DefaultHandler {
 
     const issueCommentUser = issue.comments.nodes[0].author;
 
-    const issueUser = getSubjectAuthor([issueCommentUser, issue.author]);
+    const issueUser = getNotificationAuthor([issueCommentUser, issue.author]);
 
     // Return early if this notification would be hidden by user filters
     if (isUserFilteredOut(issueUser, settings)) {

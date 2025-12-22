@@ -3,13 +3,13 @@ import type { FC } from 'react';
 import type { OcticonProps } from '@primer/octicons-react';
 import { RocketIcon } from '@primer/octicons-react';
 
-import type { Link, SettingsState } from '../../../types';
 import type {
   GitifyCheckSuiteStatus,
   GitifySubject,
-  Notification,
-  Subject,
-} from '../../../typesGitHub';
+  Link,
+  SettingsState,
+} from '../../../types';
+import type { Notification, Subject } from '../../../typesGitHub';
 import { actionsURL } from '../../helpers';
 import { DefaultHandler } from './default';
 

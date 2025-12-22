@@ -1,13 +1,14 @@
-import type { Account, Link } from './types';
-import type {
-  AuthorFieldsFragment,
-  DiscussionStateReason,
-  IssueState,
-  IssueStateReason,
-  MilestoneFieldsFragment,
-  PullRequestReviewState,
-  PullRequestState,
-} from './utils/api/graphql/generated/graphql';
+import type { GitifyNotification, GitifySubject, Link } from './types';
+
+// TODO: #828 Add explicit types for GitHub API response vs Gitify Notifications object
+export type Notification = GitHubNotification & GitifyNotification;
+export type Subject = GitHubSubject & GitifySubject;
+
+/**
+ *
+ * GitHub REST API Response Types
+ *
+ **/
 
 export type Reason =
   | 'approval_requested'
@@ -25,9 +26,6 @@ export type Reason =
   | 'state_change'
   | 'subscribed'
   | 'team_mention';
-
-// Note: ANSWERED and OPEN are not an official discussion state type in the GitHub API
-export type GitifyDiscussionState = DiscussionStateReason | 'OPEN' | 'ANSWERED';
 
 export type SubjectType =
   | 'CheckSuite'
@@ -48,38 +46,6 @@ export type UserType =
   | 'Organization'
   | 'User';
 
-/**
- * Note: draft and merged are not official states in the GitHub API.
- * These are derived from the pull request's `merged` and `draft` properties.
- */
-export type GitifyPullRequestState = PullRequestState | 'DRAFT';
-
-export type GitifyIssueState = IssueState | IssueStateReason;
-
-export type StateType =
-  | GitifyCheckSuiteStatus
-  | GitifyDiscussionState
-  | GitifyIssueState
-  | GitifyPullRequestState;
-
-export type GitifyCheckSuiteStatus =
-  | 'ACTION_REQUIRED'
-  | 'CANCELLED'
-  | 'COMPLETED'
-  | 'FAILURE'
-  | 'IN_PROGRESS'
-  | 'PENDING'
-  | 'QUEUED'
-  | 'REQUESTED'
-  | 'SKIPPED'
-  | 'STALE'
-  | 'SUCCESS'
-  | 'TIMED_OUT'
-  | 'WAITING';
-
-// TODO: #828 Add explicit types for GitHub API response vs Gitify Notifications object
-export type Notification = GitHubNotification & GitifyNotification;
-
 export interface GitHubNotification {
   id: string;
   unread: boolean;
@@ -92,10 +58,11 @@ export interface GitHubNotification {
   subscription_url: Link;
 }
 
-// Note: This is not in the official GitHub API. We add this to make notification interactions easier.
-export interface GitifyNotification {
-  account: Account;
-  order: number;
+interface GitHubSubject {
+  title: string;
+  url: Link | null;
+  latest_comment_url: Link | null;
+  type: SubjectType;
 }
 
 export type UserDetails = User & UserProfile;
@@ -151,8 +118,6 @@ export interface User {
   type: UserType;
   site_admin: boolean;
 }
-
-export type SubjectUser = AuthorFieldsFragment;
 
 export interface Repository {
   id: number;
@@ -222,33 +187,6 @@ export interface Owner {
   received_events_url: Link;
   type: UserType;
   site_admin: boolean;
-}
-
-export type Subject = GitHubSubject & GitifySubject;
-
-interface GitHubSubject {
-  title: string;
-  url: Link | null;
-  latest_comment_url: Link | null;
-  type: SubjectType;
-}
-
-// This is not in the GitHub API, but we add it to the type to make it easier to work with
-export interface GitifySubject {
-  number?: number;
-  state?: StateType;
-  user?: SubjectUser;
-  reviews?: GitifyPullRequestReview[];
-  linkedIssues?: string[];
-  comments?: number;
-  labels?: string[];
-  milestone?: MilestoneFieldsFragment;
-  htmlUrl?: Link;
-}
-
-export interface GitifyPullRequestReview {
-  state: PullRequestReviewState;
-  users: string[];
 }
 
 export interface Commit {

@@ -3,18 +3,16 @@ import type { FC } from 'react';
 import type { OcticonProps } from '@primer/octicons-react';
 import { GitCommitIcon } from '@primer/octicons-react';
 
-import type { SettingsState } from '../../../types';
 import type {
+  GitifyNotificationState,
   GitifySubject,
-  Notification,
-  StateType,
-  Subject,
-  User,
-} from '../../../typesGitHub';
+  SettingsState,
+} from '../../../types';
+import type { Notification, Subject, User } from '../../../typesGitHub';
 import { getCommit, getCommitComment } from '../../api/client';
 import { isStateFilteredOut } from '../filters/filter';
 import { DefaultHandler } from './default';
-import { getSubjectUser } from './utils';
+import { getNotificationAuthor } from './utils';
 
 class CommitHandler extends DefaultHandler {
   readonly type = 'Commit';
@@ -23,7 +21,7 @@ class CommitHandler extends DefaultHandler {
     notification: Notification,
     settings: SettingsState,
   ): Promise<GitifySubject> {
-    const commitState: StateType = null; // Commit notifications are stateless
+    const commitState: GitifyNotificationState = null; // Commit notifications are stateless
 
     // Return early if this notification would be hidden by filters
     if (isStateFilteredOut(commitState, settings)) {
@@ -51,7 +49,7 @@ class CommitHandler extends DefaultHandler {
 
     return {
       state: commitState,
-      user: getSubjectUser([user]),
+      user: getNotificationAuthor([user]),
     };
   }
 

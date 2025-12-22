@@ -1,9 +1,9 @@
-import type { SettingsState } from '../../../types';
 import type {
-  Notification,
-  StateType,
-  SubjectUser,
-} from '../../../typesGitHub';
+  GitifyNotificationState,
+  GitifyNotificationUser,
+  SettingsState,
+} from '../../../types';
+import type { Notification } from '../../../typesGitHub';
 import {
   BASE_SEARCH_QUALIFIERS,
   DETAILED_ONLY_SEARCH_QUALIFIERS,
@@ -167,7 +167,7 @@ function passesStateFilter(
 }
 
 export function isStateFilteredOut(
-  state: StateType,
+  state: GitifyNotificationState,
   settings: SettingsState,
 ): boolean {
   const notification = { subject: { state: state } } as Notification;
@@ -176,7 +176,7 @@ export function isStateFilteredOut(
 }
 
 export function isUserFilteredOut(
-  user: SubjectUser,
+  user: GitifyNotificationUser,
   settings: SettingsState,
 ): boolean {
   const notification = { subject: { user: user } } as Notification;

@@ -8,6 +8,15 @@ import type {
   SubjectType,
   UserType,
 } from './typesGitHub';
+import type {
+  AuthorFieldsFragment,
+  DiscussionStateReason,
+  IssueState,
+  IssueStateReason,
+  MilestoneFieldsFragment,
+  PullRequestReviewState,
+  PullRequestState,
+} from './utils/api/graphql/generated/graphql';
 import type { AuthMethod, PlatformType } from './utils/auth/types';
 
 declare const __brand: unique symbol;
@@ -251,3 +260,60 @@ export interface Chevron {
 }
 
 export type FilterStateType = 'open' | 'closed' | 'merged' | 'draft' | 'other';
+
+/**
+ *
+ * Gitify Notification Types
+ *
+ **/
+
+export interface GitifyNotification {
+  account: Account;
+  order: number;
+}
+
+export interface GitifySubject {
+  number?: number;
+  state?: GitifyNotificationState;
+  user?: GitifyNotificationUser;
+  reviews?: GitifyPullRequestReview[];
+  linkedIssues?: string[];
+  comments?: number;
+  labels?: string[];
+  milestone?: MilestoneFieldsFragment;
+  htmlUrl?: Link;
+}
+
+export type GitifyNotificationUser = AuthorFieldsFragment;
+
+export interface GitifyPullRequestReview {
+  state: PullRequestReviewState;
+  users: string[];
+}
+
+export type GitifyDiscussionState = DiscussionStateReason | 'OPEN' | 'ANSWERED';
+
+export type GitifyPullRequestState = PullRequestState | 'DRAFT';
+
+export type GitifyIssueState = IssueState | IssueStateReason;
+
+export type GitifyNotificationState =
+  | GitifyCheckSuiteStatus
+  | GitifyDiscussionState
+  | GitifyIssueState
+  | GitifyPullRequestState;
+
+export type GitifyCheckSuiteStatus =
+  | 'ACTION_REQUIRED'
+  | 'CANCELLED'
+  | 'COMPLETED'
+  | 'FAILURE'
+  | 'IN_PROGRESS'
+  | 'PENDING'
+  | 'QUEUED'
+  | 'REQUESTED'
+  | 'SKIPPED'
+  | 'STALE'
+  | 'SUCCESS'
+  | 'TIMED_OUT'
+  | 'WAITING';

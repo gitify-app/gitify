@@ -10,13 +10,13 @@ import {
 
 import { differenceInMilliseconds } from 'date-fns';
 
-import type { Link, SettingsState } from '../../../types';
 import type {
   GitifyDiscussionState,
   GitifySubject,
-  Notification,
-  Subject,
-} from '../../../typesGitHub';
+  Link,
+  SettingsState,
+} from '../../../types';
+import type { Notification, Subject } from '../../../typesGitHub';
 import { fetchDiscussionByNumber } from '../../api/client';
 import type {
   CommentFieldsFragment,
@@ -24,7 +24,7 @@ import type {
 } from '../../api/graphql/generated/graphql';
 import { isStateFilteredOut } from '../filters/filter';
 import { DefaultHandler } from './default';
-import { getSubjectAuthor } from './utils';
+import { getNotificationAuthor } from './utils';
 
 type DiscussionComment = NonNullable<
   NonNullable<
@@ -74,7 +74,7 @@ class DiscussionHandler extends DefaultHandler {
     return {
       number: discussion.number,
       state: discussionState,
-      user: getSubjectAuthor([
+      user: getNotificationAuthor([
         latestDiscussionComment.author,
         discussion.author,
       ]),

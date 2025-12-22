@@ -3,8 +3,7 @@ import {
   createPartialMockNotification,
 } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
-import { IconColor } from '../../../types';
-import type { StateType } from '../../../typesGitHub';
+import { type GitifyNotificationState, IconColor } from '../../../types';
 import { defaultHandler } from './default';
 
 describe('renderer/utils/notifications/handlers/default.ts', () => {
@@ -32,21 +31,21 @@ describe('renderer/utils/notifications/handlers/default.ts', () => {
   });
 
   describe('iconColor', () => {
-    const cases: Array<[StateType | null, IconColor]> = [
-      ['open' as StateType, IconColor.GREEN],
-      ['reopened' as StateType, IconColor.GREEN],
-      ['ANSWERED' as StateType, IconColor.GREEN],
-      ['success' as StateType, IconColor.GREEN],
-      ['closed' as StateType, IconColor.RED],
-      ['failure' as StateType, IconColor.RED],
-      ['completed' as StateType, IconColor.PURPLE],
-      ['RESOLVED' as StateType, IconColor.PURPLE],
-      ['merged' as StateType, IconColor.PURPLE],
-      ['not_planned' as StateType, IconColor.GRAY],
-      ['draft' as StateType, IconColor.GRAY],
-      ['skipped' as StateType, IconColor.GRAY],
-      ['cancelled' as StateType, IconColor.GRAY],
-      ['unknown' as StateType, IconColor.GRAY],
+    const cases: Array<[GitifyNotificationState | null, IconColor]> = [
+      ['OPEN' as GitifyNotificationState, IconColor.GREEN],
+      ['REOPENED' as GitifyNotificationState, IconColor.GREEN],
+      ['ANSWERED' as GitifyNotificationState, IconColor.GREEN],
+      ['SUCCESS' as GitifyNotificationState, IconColor.GREEN],
+      ['CLOSED' as GitifyNotificationState, IconColor.RED],
+      ['FAILURE' as GitifyNotificationState, IconColor.RED],
+      ['COMPLETED' as GitifyNotificationState, IconColor.PURPLE],
+      ['RESOLVED' as GitifyNotificationState, IconColor.PURPLE],
+      ['MERGED' as GitifyNotificationState, IconColor.PURPLE],
+      ['NOT_PLANNED' as GitifyNotificationState, IconColor.GRAY],
+      ['DRAFT' as GitifyNotificationState, IconColor.GRAY],
+      ['SKIPPED' as GitifyNotificationState, IconColor.GRAY],
+      ['CANCELLED' as GitifyNotificationState, IconColor.GRAY],
+      ['unknown' as GitifyNotificationState, IconColor.GRAY],
       [null, IconColor.GRAY],
       [undefined, IconColor.GRAY],
     ];

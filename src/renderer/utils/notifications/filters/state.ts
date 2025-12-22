@@ -1,10 +1,11 @@
 import type {
   AccountNotifications,
   FilterStateType,
+  GitifyNotificationState,
   SettingsState,
   TypeDetails,
 } from '../../../types';
-import type { Notification, StateType } from '../../../typesGitHub';
+import type { Notification } from '../../../typesGitHub';
 import type { Filter } from './types';
 
 const STATE_TYPE_DETAILS: Record<FilterStateType, TypeDetails> = {
@@ -63,10 +64,14 @@ export const stateFilter: Filter<FilterStateType> = {
     notification: Notification,
     stateType: FilterStateType,
   ): boolean {
-    const allOpenStates: StateType[] = ['OPEN', 'REOPENED'];
-    const allClosedStates: StateType[] = ['CLOSED', 'COMPLETED', 'NOT_PLANNED'];
-    const allMergedStates: StateType[] = ['MERGED'];
-    const allDraftStates: StateType[] = ['DRAFT'];
+    const allOpenStates: GitifyNotificationState[] = ['OPEN', 'REOPENED'];
+    const allClosedStates: GitifyNotificationState[] = [
+      'CLOSED',
+      'COMPLETED',
+      'NOT_PLANNED',
+    ];
+    const allMergedStates: GitifyNotificationState[] = ['MERGED'];
+    const allDraftStates: GitifyNotificationState[] = ['DRAFT'];
     const allFilterableStates = [
       ...allOpenStates,
       ...allClosedStates,

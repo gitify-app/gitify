@@ -8,19 +8,19 @@ import {
   GitPullRequestIcon,
 } from '@primer/octicons-react';
 
-import type { Link, SettingsState } from '../../../types';
 import type {
   GitifyPullRequestReview,
   GitifyPullRequestState,
   GitifySubject,
-  Notification,
-  Subject,
-} from '../../../typesGitHub';
+  Link,
+  SettingsState,
+} from '../../../types';
+import type { Notification, Subject } from '../../../typesGitHub';
 import { fetchPullByNumber } from '../../api/client';
 import type { FetchPullByNumberQuery } from '../../api/graphql/generated/graphql';
 import { isStateFilteredOut, isUserFilteredOut } from '../filters/filter';
 import { DefaultHandler } from './default';
-import { getSubjectAuthor } from './utils';
+import { getNotificationAuthor } from './utils';
 
 class PullRequestHandler extends DefaultHandler {
   readonly type = 'PullRequest' as const;
@@ -44,7 +44,7 @@ class PullRequestHandler extends DefaultHandler {
 
     const prCommentUser = pr.comments.nodes[0]?.author;
 
-    const prUser = getSubjectAuthor([prCommentUser, pr.author]);
+    const prUser = getNotificationAuthor([prCommentUser, pr.author]);
 
     // Return early if this notification would be hidden by user filters
     if (isUserFilteredOut(prUser, settings)) {
