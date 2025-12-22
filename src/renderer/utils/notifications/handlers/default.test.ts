@@ -62,7 +62,7 @@ describe('renderer/utils/notifications/handlers/default.ts', () => {
       const notification = createPartialMockNotification({
         title: 'Sample',
         type: 'PullRequest',
-        state: 'open',
+        state: 'OPEN',
       });
 
       expect(defaultHandler.formattedNotificationType(notification)).toBe(
@@ -88,7 +88,7 @@ describe('renderer/utils/notifications/handlers/default.ts', () => {
       const notification = createPartialMockNotification({
         title: 'Sample',
         type: 'Issue',
-        state: 'open',
+        state: 'OPEN',
       });
       notification.subject.number = 42;
       expect(defaultHandler.formattedNotificationNumber(notification)).toBe(
@@ -100,7 +100,7 @@ describe('renderer/utils/notifications/handlers/default.ts', () => {
       const notification = createPartialMockNotification({
         title: 'Sample',
         type: 'Issue',
-        state: 'open',
+        state: 'OPEN',
       });
       expect(defaultHandler.formattedNotificationNumber(notification)).toBe('');
     });
@@ -111,7 +111,7 @@ describe('renderer/utils/notifications/handlers/default.ts', () => {
       const notification = createPartialMockNotification({
         title: 'Fix bug',
         type: 'Issue',
-        state: 'open',
+        state: 'OPEN',
       });
       notification.subject.number = 101;
       expect(defaultHandler.formattedNotificationTitle(notification)).toBe(
@@ -123,7 +123,7 @@ describe('renderer/utils/notifications/handlers/default.ts', () => {
       const notification = createPartialMockNotification({
         title: 'Improve docs',
         type: 'Issue',
-        state: 'open',
+        state: 'OPEN',
       });
       expect(defaultHandler.formattedNotificationTitle(notification)).toBe(
         'Improve docs',

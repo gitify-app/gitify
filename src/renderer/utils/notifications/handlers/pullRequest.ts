@@ -11,16 +11,13 @@ import {
 import type { Link, SettingsState } from '../../../types';
 import type {
   GitifyPullRequestReview,
+  GitifyPullRequestState,
   GitifySubject,
   Notification,
-  PullRequestStateType,
   Subject,
 } from '../../../typesGitHub';
 import { fetchPullByNumber } from '../../api/client';
-import {
-  type FetchPullByNumberQuery,
-  PullRequestState,
-} from '../../api/graphql/generated/graphql';
+import type { FetchPullByNumberQuery } from '../../api/graphql/generated/graphql';
 import { isStateFilteredOut, isUserFilteredOut } from '../filters/filter';
 import { DefaultHandler } from './default';
 import { getSubjectAuthor } from './utils';
@@ -35,9 +32,9 @@ class PullRequestHandler extends DefaultHandler {
     const response = await fetchPullByNumber(notification);
     const pr = response.data.repository.pullRequest;
 
-    let prState: PullRequestStateType | PullRequestState = pr.state;
+    let prState: GitifyPullRequestState = pr.state;
     if (pr.isDraft) {
-      prState = 'draft';
+      prState = 'DRAFT';
     }
 
     // Return early if this notification would be hidden by state filters
@@ -72,16 +69,12 @@ class PullRequestHandler extends DefaultHandler {
   }
 
   iconType(subject: Subject): FC<OcticonProps> | null {
-    const state = subject.state as PullRequestStateType | PullRequestState;
-
-    switch (state) {
-      case 'draft':
+    switch (subject.state as GitifyPullRequestState) {
+      case 'DRAFT':
         return GitPullRequestDraftIcon;
-      case PullRequestState.Closed:
-      case 'closed':
+      case 'CLOSED':
         return GitPullRequestClosedIcon;
-      case PullRequestState.Merged:
-      case 'merged':
+      case 'MERGED':
         return GitMergeIcon;
       default:
         return GitPullRequestIcon;

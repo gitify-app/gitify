@@ -149,7 +149,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
       checkSuiteHandler.iconType(
         createMockSubject({
           type: 'CheckSuite',
-          state: 'cancelled',
+          state: 'CANCELLED',
         }),
       ).displayName,
     ).toBe('StopIcon');
@@ -158,7 +158,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
       checkSuiteHandler.iconType(
         createMockSubject({
           type: 'CheckSuite',
-          state: 'failure',
+          state: 'FAILURE',
         }),
       ).displayName,
     ).toBe('XIcon');
@@ -167,7 +167,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
       checkSuiteHandler.iconType(
         createMockSubject({
           type: 'CheckSuite',
-          state: 'skipped',
+          state: 'SKIPPED',
         }),
       ).displayName,
     ).toBe('SkipIcon');
@@ -176,7 +176,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
       checkSuiteHandler.iconType(
         createMockSubject({
           type: 'CheckSuite',
-          state: 'success',
+          state: 'SUCCESS',
         }),
       ).displayName,
     ).toBe('CheckIcon');

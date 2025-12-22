@@ -9,7 +9,7 @@ import { mockSettings } from '../../../__mocks__/state-mocks';
 import { createPartialMockUser } from '../../../__mocks__/user-mocks';
 import type { Link } from '../../../types';
 import type { Notification } from '../../../typesGitHub';
-import { PullRequestReviewState } from '../../api/graphql/generated/graphql';
+import type { PullRequestReviewState } from '../../api/graphql/generated/graphql';
 import { getLatestReviewForReviewers, pullRequestHandler } from './pullRequest';
 
 describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
@@ -409,7 +409,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
       pullRequestHandler.iconType(
         createMockSubject({
           type: 'PullRequest',
-          state: 'draft',
+          state: 'DRAFT',
         }),
       ).displayName,
     ).toBe('GitPullRequestDraftIcon');
@@ -418,7 +418,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
       pullRequestHandler.iconType(
         createMockSubject({
           type: 'PullRequest',
-          state: 'closed',
+          state: 'CLOSED',
         }),
       ).displayName,
     ).toBe('GitPullRequestClosedIcon');
@@ -427,7 +427,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
       pullRequestHandler.iconType(
         createMockSubject({
           type: 'PullRequest',
-          state: 'merged',
+          state: 'MERGED',
         }),
       ).displayName,
     ).toBe('GitMergeIcon');
@@ -440,25 +440,25 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
           author: {
             login: 'reviewer-1',
           },
-          state: PullRequestReviewState.ChangesRequested,
+          state: 'CHANGES_REQUESTED' as PullRequestReviewState,
         },
         {
           author: {
             login: 'reviewer-2',
           },
-          state: PullRequestReviewState.Commented,
+          state: 'COMMENTED' as PullRequestReviewState,
         },
         {
           author: {
             login: 'reviewer-1',
           },
-          state: PullRequestReviewState.Approved,
+          state: 'APPROVED' as PullRequestReviewState,
         },
         {
           author: {
             login: 'reviewer-3',
           },
-          state: PullRequestReviewState.Approved,
+          state: 'APPROVED' as PullRequestReviewState,
         },
       ];
 

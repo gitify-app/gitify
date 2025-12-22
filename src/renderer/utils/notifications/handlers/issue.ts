@@ -10,15 +10,12 @@ import {
 
 import type { Link, SettingsState } from '../../../types';
 import type {
+  GitifyIssueState,
   GitifySubject,
   Notification,
   Subject,
 } from '../../../typesGitHub';
 import { fetchIssueByNumber } from '../../api/client';
-import {
-  IssueState,
-  IssueStateReason,
-} from '../../api/graphql/generated/graphql';
 import { isStateFilteredOut, isUserFilteredOut } from '../filters/filter';
 import { DefaultHandler } from './default';
 import { getSubjectAuthor } from './utils';
@@ -61,16 +58,14 @@ class IssueHandler extends DefaultHandler {
   }
 
   iconType(subject: Subject): FC<OcticonProps> | null {
-    const state = subject.state as IssueState | IssueStateReason;
-
-    switch (state) {
-      case IssueState.Closed:
-      case IssueStateReason.Completed:
+    switch (subject.state as GitifyIssueState) {
+      case 'CLOSED':
+      case 'COMPLETED':
         return IssueClosedIcon;
-      case IssueStateReason.Duplicate:
-      case IssueStateReason.NotPlanned:
+      case 'DUPLICATE':
+      case 'NOT_PLANNED':
         return SkipIcon;
-      case IssueStateReason.Reopened:
+      case 'REOPENED':
         return IssueReopenedIcon;
       default:
         return IssueOpenedIcon;

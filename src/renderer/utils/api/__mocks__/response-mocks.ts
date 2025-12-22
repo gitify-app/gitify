@@ -4,10 +4,7 @@ import {
 } from '../../../__mocks__/account-mocks';
 import type { Link } from '../../../types';
 import type { Notification, Repository, User } from '../../../typesGitHub';
-import {
-  type FetchDiscussionByNumberQuery,
-  PullRequestReviewState,
-} from '../graphql/generated/graphql';
+import type { FetchDiscussionByNumberQuery } from '../graphql/generated/graphql';
 
 export const mockNotificationUser: User = {
   login: 'octocat',
@@ -52,7 +49,7 @@ export const mockGitHubNotifications: Notification[] = [
       latest_comment_url:
         'https://api.github.com/repos/gitify-app/notifications-test/issues/comments/302888448' as Link,
       type: 'Issue',
-      state: 'open',
+      state: 'OPEN',
       user: {
         login: 'gitify-app',
         html_url: 'https://github.com/gitify-app' as Link,
@@ -62,15 +59,15 @@ export const mockGitHubNotifications: Notification[] = [
       },
       reviews: [
         {
-          state: PullRequestReviewState.Approved,
+          state: 'APPROVED',
           users: ['octocat'],
         },
         {
-          state: PullRequestReviewState.ChangesRequested,
+          state: 'CHANGES_REQUESTED',
           users: ['gitify-app'],
         },
         {
-          state: PullRequestReviewState.Pending,
+          state: 'PENDING',
           users: ['gitify-user'],
         },
       ],

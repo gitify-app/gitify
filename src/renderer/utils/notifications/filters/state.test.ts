@@ -9,45 +9,45 @@ describe('renderer/utils/notifications/filters/state.ts', () => {
   it('can filter by notification states', () => {
     const mockPartialNotification = {
       subject: {
-        state: 'open',
+        state: 'OPEN',
       },
     } as Partial<Notification> as Notification;
 
     // Open states
-    mockPartialNotification.subject.state = 'open';
+    mockPartialNotification.subject.state = 'OPEN';
     expect(
       stateFilter.filterNotification(mockPartialNotification, 'open'),
     ).toBe(true);
 
-    mockPartialNotification.subject.state = 'reopened';
+    mockPartialNotification.subject.state = 'REOPENED';
     expect(
       stateFilter.filterNotification(mockPartialNotification, 'open'),
     ).toBe(true);
 
     // Closed states
-    mockPartialNotification.subject.state = 'closed';
+    mockPartialNotification.subject.state = 'CLOSED';
     expect(
       stateFilter.filterNotification(mockPartialNotification, 'closed'),
     ).toBe(true);
 
-    mockPartialNotification.subject.state = 'completed';
+    mockPartialNotification.subject.state = 'COMPLETED';
     expect(
       stateFilter.filterNotification(mockPartialNotification, 'closed'),
     ).toBe(true);
 
-    mockPartialNotification.subject.state = 'not_planned';
+    mockPartialNotification.subject.state = 'NOT_PLANNED';
     expect(
       stateFilter.filterNotification(mockPartialNotification, 'closed'),
     ).toBe(true);
 
     // Merged states
-    mockPartialNotification.subject.state = 'merged';
+    mockPartialNotification.subject.state = 'MERGED';
     expect(
       stateFilter.filterNotification(mockPartialNotification, 'merged'),
     ).toBe(true);
 
     // Draft states
-    mockPartialNotification.subject.state = 'draft';
+    mockPartialNotification.subject.state = 'DRAFT';
     expect(
       stateFilter.filterNotification(mockPartialNotification, 'draft'),
     ).toBe(true);

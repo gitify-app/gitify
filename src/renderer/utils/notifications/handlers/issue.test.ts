@@ -301,7 +301,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
 
     expect(
       issueHandler.iconType(
-        createMockSubject({ type: 'Issue', state: 'draft' }),
+        createMockSubject({ type: 'Issue', state: 'DRAFT' }),
       ).displayName,
     ).toBe('IssueDraftIcon');
 
@@ -309,7 +309,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
       issueHandler.iconType(
         createMockSubject({
           type: 'Issue',
-          state: 'closed',
+          state: 'CLOSED',
         }),
       ).displayName,
     ).toBe('IssueClosedIcon');
@@ -318,7 +318,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
       issueHandler.iconType(
         createMockSubject({
           type: 'Issue',
-          state: 'completed',
+          state: 'COMPLETED',
         }),
       ).displayName,
     ).toBe('IssueClosedIcon');
@@ -327,7 +327,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
       issueHandler.iconType(
         createMockSubject({
           type: 'Issue',
-          state: 'not_planned',
+          state: 'NOT_PLANNED',
         }),
       ).displayName,
     ).toBe('SkipIcon');
@@ -336,7 +336,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
       issueHandler.iconType(
         createMockSubject({
           type: 'Issue',
-          state: 'reopened',
+          state: 'REOPENED',
         }),
       ).displayName,
     ).toBe('IssueReopenedIcon');

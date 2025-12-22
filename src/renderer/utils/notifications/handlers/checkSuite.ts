@@ -11,14 +11,21 @@ import {
 
 import type { Link, SettingsState } from '../../../types';
 import type {
-  CheckSuiteAttributes,
-  CheckSuiteStatus,
+  GitifyCheckSuiteStatus,
   GitifySubject,
   Notification,
   Subject,
 } from '../../../typesGitHub';
 import { actionsURL } from '../../helpers';
 import { DefaultHandler } from './default';
+
+export interface CheckSuiteAttributes {
+  workflowName: string;
+  attemptNumber?: number;
+  statusDisplayName: string;
+  status: GitifyCheckSuiteStatus | null;
+  branchName: string;
+}
 
 class CheckSuiteHandler extends DefaultHandler {
   readonly type = 'CheckSuite';
@@ -41,14 +48,14 @@ class CheckSuiteHandler extends DefaultHandler {
   }
 
   iconType(subject: Subject): FC<OcticonProps> | null {
-    switch (subject.state) {
-      case 'cancelled':
+    switch (subject.state as GitifyCheckSuiteStatus) {
+      case 'CANCELLED':
         return StopIcon;
-      case 'failure':
+      case 'FAILURE':
         return XIcon;
-      case 'skipped':
+      case 'SKIPPED':
         return SkipIcon;
-      case 'success':
+      case 'SUCCESS':
         return CheckIcon;
       default:
         return RocketIcon;
@@ -92,17 +99,19 @@ export function getCheckSuiteAttributes(
   };
 }
 
-function getCheckSuiteStatus(statusDisplayName: string): CheckSuiteStatus {
+function getCheckSuiteStatus(
+  statusDisplayName: string,
+): GitifyCheckSuiteStatus {
   switch (statusDisplayName) {
     case 'cancelled':
-      return 'cancelled';
+      return 'CANCELLED';
     case 'failed':
     case 'failed at startup':
-      return 'failure';
+      return 'FAILURE';
     case 'skipped':
-      return 'skipped';
+      return 'SKIPPED';
     case 'succeeded':
-      return 'success';
+      return 'SUCCESS';
     default:
       return null;
   }

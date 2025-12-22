@@ -22,6 +22,7 @@ const config: CodegenConfig = {
       },
       config: {
         documentMode: 'string',
+        enumsAsTypes: true,
         useTypeImports: true,
       },
     },

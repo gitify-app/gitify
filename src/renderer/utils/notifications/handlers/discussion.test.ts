@@ -8,9 +8,9 @@ import {
 import { mockSettings } from '../../../__mocks__/state-mocks';
 import type { Link } from '../../../types';
 import type { Owner, Repository } from '../../../typesGitHub';
-import {
-  type AuthorFieldsFragment,
-  type Discussion,
+import type {
+  AuthorFieldsFragment,
+  Discussion,
   DiscussionStateReason,
 } from '../../api/graphql/generated/graphql';
 import { discussionHandler } from './discussion';
@@ -85,10 +85,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         .reply(200, {
           data: {
             repository: {
-              discussion: mockDiscussionNode(
-                DiscussionStateReason.Duplicate,
-                false,
-              ),
+              discussion: mockDiscussionNode('DUPLICATE', false),
             },
           },
         });
@@ -148,10 +145,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         .reply(200, {
           data: {
             repository: {
-              discussion: mockDiscussionNode(
-                DiscussionStateReason.Outdated,
-                false,
-              ),
+              discussion: mockDiscussionNode('OUTDATED', false),
             },
           },
         });
@@ -181,10 +175,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         .reply(200, {
           data: {
             repository: {
-              discussion: mockDiscussionNode(
-                DiscussionStateReason.Reopened,
-                false,
-              ),
+              discussion: mockDiscussionNode('REOPENED', false),
             },
           },
         });
@@ -214,10 +205,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         .reply(200, {
           data: {
             repository: {
-              discussion: mockDiscussionNode(
-                DiscussionStateReason.Resolved,
-                true,
-              ),
+              discussion: mockDiscussionNode('RESOLVED', true),
             },
           },
         });

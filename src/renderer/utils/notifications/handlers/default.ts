@@ -11,11 +11,6 @@ import type {
   Subject,
   SubjectType,
 } from '../../../typesGitHub';
-import {
-  IssueState,
-  IssueStateReason,
-  PullRequestState,
-} from '../../api/graphql/generated/graphql';
 import type { NotificationTypeHandler } from './types';
 import { formatForDisplay } from './utils';
 
@@ -35,24 +30,17 @@ export class DefaultHandler implements NotificationTypeHandler {
 
   iconColor(subject: Subject): IconColor {
     switch (subject.state) {
-      case 'open':
-      case 'reopened':
+      case 'OPEN':
+      case 'REOPENED':
       case 'ANSWERED':
-      case 'success':
-      case IssueState.Open:
-      case IssueStateReason.Reopened:
-      case PullRequestState.Open:
+      case 'SUCCESS':
         return IconColor.GREEN;
-      case 'closed':
-      case 'failure':
-      case IssueState.Closed:
-      case PullRequestState.Closed:
+      case 'CLOSED':
+      case 'FAILURE':
         return IconColor.RED;
-      case 'completed':
+      case 'COMPLETED':
       case 'RESOLVED':
-      case 'merged':
-      case IssueStateReason.Completed:
-      case PullRequestState.Merged:
+      case 'MERGED':
         return IconColor.PURPLE;
       default:
         return IconColor.GRAY;

@@ -12,7 +12,7 @@ import { differenceInMilliseconds } from 'date-fns';
 
 import type { Link, SettingsState } from '../../../types';
 import type {
-  DiscussionStateType,
+  GitifyDiscussionState,
   GitifySubject,
   Notification,
   Subject,
@@ -53,7 +53,7 @@ class DiscussionHandler extends DefaultHandler {
       return null;
     }
 
-    let discussionState: DiscussionStateType = 'OPEN';
+    let discussionState: GitifyDiscussionState = 'OPEN';
 
     if (discussion.isAnswered) {
       discussionState = 'ANSWERED';

@@ -5,14 +5,19 @@ import { RocketIcon } from '@primer/octicons-react';
 
 import type { Link, SettingsState } from '../../../types';
 import type {
-  CheckSuiteStatus,
+  GitifyCheckSuiteStatus,
   GitifySubject,
   Notification,
   Subject,
-  WorkflowRunAttributes,
 } from '../../../typesGitHub';
 import { actionsURL } from '../../helpers';
 import { DefaultHandler } from './default';
+
+export interface WorkflowRunAttributes {
+  user: string;
+  statusDisplayName: string;
+  status: GitifyCheckSuiteStatus | null;
+}
 
 class WorkflowRunHandler extends DefaultHandler {
   readonly type = 'WorkflowRun';
@@ -72,10 +77,12 @@ export function getWorkflowRunAttributes(
   };
 }
 
-function getWorkflowRunStatus(statusDisplayName: string): CheckSuiteStatus {
+function getWorkflowRunStatus(
+  statusDisplayName: string,
+): GitifyCheckSuiteStatus {
   switch (statusDisplayName) {
     case 'review':
-      return 'waiting';
+      return 'WAITING';
     default:
       return null;
   }

@@ -169,8 +169,8 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
       });
 
       it('should filter notifications by state when provided', async () => {
-        mockNotifications[0].subject.state = 'open';
-        mockNotifications[1].subject.state = 'closed';
+        mockNotifications[0].subject.state = 'OPEN';
+        mockNotifications[1].subject.state = 'CLOSED';
         const result = filterDetailedNotifications(mockNotifications, {
           ...mockSettings,
           filterStates: ['closed'],

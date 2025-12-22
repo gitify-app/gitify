@@ -1,6 +1,7 @@
 import type { Account, Link } from './types';
 import type {
   AuthorFieldsFragment,
+  DiscussionStateReason,
   IssueState,
   IssueStateReason,
   MilestoneFieldsFragment,
@@ -26,13 +27,7 @@ export type Reason =
   | 'team_mention';
 
 // Note: ANSWERED and OPEN are not an official discussion state type in the GitHub API
-export type DiscussionStateType =
-  | 'ANSWERED'
-  | 'DUPLICATE'
-  | 'OPEN'
-  | 'OUTDATED'
-  | 'REOPENED'
-  | 'RESOLVED';
+export type GitifyDiscussionState = DiscussionStateReason | 'OPEN' | 'ANSWERED';
 
 export type SubjectType =
   | 'CheckSuite'
@@ -57,30 +52,30 @@ export type UserType =
  * Note: draft and merged are not official states in the GitHub API.
  * These are derived from the pull request's `merged` and `draft` properties.
  */
-export type PullRequestStateType = 'closed' | 'draft' | 'merged' | 'open';
+export type GitifyPullRequestState = PullRequestState | 'DRAFT';
+
+export type GitifyIssueState = IssueState | IssueStateReason;
 
 export type StateType =
-  | CheckSuiteStatus
-  | DiscussionStateType
-  | PullRequestStateType
-  | IssueState
-  | IssueStateReason
-  | PullRequestState;
+  | GitifyCheckSuiteStatus
+  | GitifyDiscussionState
+  | GitifyIssueState
+  | GitifyPullRequestState;
 
-export type CheckSuiteStatus =
-  | 'action_required'
-  | 'cancelled'
-  | 'completed'
-  | 'failure'
-  | 'in_progress'
-  | 'pending'
-  | 'queued'
-  | 'requested'
-  | 'skipped'
-  | 'stale'
-  | 'success'
-  | 'timed_out'
-  | 'waiting';
+export type GitifyCheckSuiteStatus =
+  | 'ACTION_REQUIRED'
+  | 'CANCELLED'
+  | 'COMPLETED'
+  | 'FAILURE'
+  | 'IN_PROGRESS'
+  | 'PENDING'
+  | 'QUEUED'
+  | 'REQUESTED'
+  | 'SKIPPED'
+  | 'STALE'
+  | 'SUCCESS'
+  | 'TIMED_OUT'
+  | 'WAITING';
 
 // TODO: #828 Add explicit types for GitHub API response vs Gitify Notifications object
 export type Notification = GitHubNotification & GitifyNotification;
@@ -343,20 +338,6 @@ export interface Release {
   prerelease: boolean;
   created_at: string;
   published_at: string | null;
-}
-
-export interface CheckSuiteAttributes {
-  workflowName: string;
-  attemptNumber?: number;
-  statusDisplayName: string;
-  status: CheckSuiteStatus | null;
-  branchName: string;
-}
-
-export interface WorkflowRunAttributes {
-  user: string;
-  statusDisplayName: string;
-  status: CheckSuiteStatus | null;
 }
 
 export interface GitHubRESTError {
