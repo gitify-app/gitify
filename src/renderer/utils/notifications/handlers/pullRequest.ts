@@ -94,7 +94,6 @@ export function getLatestReviewForReviewers(
   for (const prReview of sortedReviews) {
     const reviewerFound = latestReviews.find(
       (review) => review.author.login === prReview.author.login,
-      prReview.state,
     );
 
     if (!reviewerFound) {
