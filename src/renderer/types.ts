@@ -293,7 +293,7 @@ export interface GitifyPullRequestReview {
 
 export type GitifyDiscussionState = DiscussionStateReason | 'OPEN' | 'ANSWERED';
 
-export type GitifyPullRequestState = PullRequestState | 'DRAFT';
+export type GitifyPullRequestState = PullRequestState | 'DRAFT' | 'MERGE_QUEUE';
 
 export type GitifyIssueState = IssueState | IssueStateReason;
 

@@ -349,6 +349,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
     const cases = {
       CLOSED: 'GitPullRequestClosedIcon',
       DRAFT: 'GitPullRequestDraftIcon',
+      MERGE_QUEUE: 'GitMergeQueueIcon',
       MERGED: 'GitMergeIcon',
       OPEN: 'GitPullRequestIcon',
     } satisfies Record<GitifyPullRequestState, string>;
@@ -368,6 +369,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
     const cases = {
       CLOSED: IconColor.RED,
       DRAFT: IconColor.GRAY,
+      MERGE_QUEUE: IconColor.YELLOW,
       MERGED: IconColor.PURPLE,
       OPEN: IconColor.GREEN,
     } satisfies Record<GitifyPullRequestState, IconColor>;

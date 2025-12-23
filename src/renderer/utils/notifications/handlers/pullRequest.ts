@@ -3,6 +3,7 @@ import type { FC } from 'react';
 import type { OcticonProps } from '@primer/octicons-react';
 import {
   GitMergeIcon,
+  GitMergeQueueIcon,
   GitPullRequestClosedIcon,
   GitPullRequestDraftIcon,
   GitPullRequestIcon,
@@ -22,6 +23,9 @@ import type { FetchPullRequestByNumberQuery } from '../../api/graphql/generated/
 import { DefaultHandler, defaultHandler } from './default';
 import { getNotificationAuthor } from './utils';
 
+type PullRequestReviews =
+  FetchPullRequestByNumberQuery['repository']['pullRequest']['reviews']['nodes'];
+
 class PullRequestHandler extends DefaultHandler {
   readonly type = 'PullRequest' as const;
 
@@ -35,6 +39,8 @@ class PullRequestHandler extends DefaultHandler {
     let prState: GitifyPullRequestState = pr.state;
     if (pr.isDraft) {
       prState = 'DRAFT';
+    } else if (pr.isInMergeQueue) {
+      prState = 'MERGE_QUEUE';
     }
 
     const prComment = pr.comments?.nodes[0];
@@ -64,6 +70,8 @@ class PullRequestHandler extends DefaultHandler {
         return GitPullRequestDraftIcon;
       case 'CLOSED':
         return GitPullRequestClosedIcon;
+      case 'MERGE_QUEUE':
+        return GitMergeQueueIcon;
       case 'MERGED':
         return GitMergeIcon;
       default:
@@ -77,6 +85,8 @@ class PullRequestHandler extends DefaultHandler {
         return IconColor.GREEN;
       case 'CLOSED':
         return IconColor.RED;
+      case 'MERGE_QUEUE':
+        return IconColor.YELLOW;
       case 'MERGED':
         return IconColor.PURPLE;
       default:
@@ -94,7 +104,7 @@ class PullRequestHandler extends DefaultHandler {
 export const pullRequestHandler = new PullRequestHandler();
 
 export function getLatestReviewForReviewers(
-  reviews: FetchPullRequestByNumberQuery['repository']['pullRequest']['reviews']['nodes'],
+  reviews: PullRequestReviews,
 ): GitifyPullRequestReview[] {
   if (!reviews.length) {
     return null;
