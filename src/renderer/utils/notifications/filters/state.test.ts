@@ -22,6 +22,7 @@ describe('renderer/utils/notifications/filters/state.ts', () => {
       NOT_PLANNED: 'closed',
       RESOLVED: 'closed',
 
+      MERGE_QUEUE: 'merged',
       MERGED: 'merged',
       DRAFT: 'draft',
 
