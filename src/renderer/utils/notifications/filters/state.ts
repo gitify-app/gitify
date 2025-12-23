@@ -82,6 +82,7 @@ function mapStateToFilter(
     case 'NOT_PLANNED':
     case 'RESOLVED':
       return 'closed';
+    case 'MERGE_QUEUE':
     case 'MERGED':
       return 'merged';
     case 'DRAFT':

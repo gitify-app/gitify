@@ -3,6 +3,7 @@ import type { FC } from 'react';
 import type { OcticonProps } from '@primer/octicons-react';
 import {
   GitMergeIcon,
+  GitMergeQueueIcon,
   GitPullRequestClosedIcon,
   GitPullRequestDraftIcon,
   GitPullRequestIcon,
@@ -35,6 +36,8 @@ class PullRequestHandler extends DefaultHandler {
     let prState: GitifyPullRequestState = pr.state;
     if (pr.isDraft) {
       prState = 'DRAFT';
+    } else if (pr.isInMergeQueue) {
+      prState = 'MERGE_QUEUE';
     }
 
     const prComment = pr.comments?.nodes[0];
@@ -64,6 +67,8 @@ class PullRequestHandler extends DefaultHandler {
         return GitPullRequestDraftIcon;
       case 'CLOSED':
         return GitPullRequestClosedIcon;
+      case 'MERGE_QUEUE':
+        return GitMergeQueueIcon;
       case 'MERGED':
         return GitMergeIcon;
       default:
@@ -77,6 +82,8 @@ class PullRequestHandler extends DefaultHandler {
         return IconColor.GREEN;
       case 'CLOSED':
         return IconColor.RED;
+      case 'MERGE_QUEUE':
+        return IconColor.YELLOW;
       case 'MERGED':
         return IconColor.PURPLE;
       default:
