@@ -178,7 +178,7 @@ export async function getHtmlUrl(url: Link, token: Token): Promise<string> {
 }
 
 /**
- * Fetch GitHub Authenticated User.
+ * Fetch details of the currently authenticated GitHub user.
  */
 export async function fetchAuthenticatedUserDetails(
   hostname: Hostname,
