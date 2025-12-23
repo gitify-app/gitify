@@ -21,13 +21,7 @@ query FetchDiscussionByNumber(
       comments(last: $lastComments) {
         totalCount
         nodes {
-          ...CommentFields
-          replies(last: $lastReplies) {
-            totalCount
-            nodes {
-              ...CommentFields
-            }
-          }
+          ...DiscussionCommentFields
         }
       }
       labels(first: $firstLabels) {
@@ -46,4 +40,14 @@ fragment CommentFields on DiscussionComment {
     ...AuthorFields
   }
   url
+}
+
+fragment DiscussionCommentFields on DiscussionComment {
+  ...CommentFields
+  replies(last: $lastReplies) {
+    totalCount
+    nodes {
+      ...CommentFields
+    }
+  }
 }

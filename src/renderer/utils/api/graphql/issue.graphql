@@ -36,8 +36,3 @@ query FetchIssueByNumber(
     }
   }
 }
-
-fragment MilestoneFields on Milestone {
-  state
-  title
-}

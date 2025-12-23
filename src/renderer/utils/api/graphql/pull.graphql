@@ -35,10 +35,7 @@ query FetchPullRequestByNumber(
       reviews(last: $lastReviews) {
         totalCount
         nodes {
-          state
-          author {
-            login
-          }
+          ...PullRequestReviewFields
         }
       }
       labels(first: $firstLabels) {
@@ -55,7 +52,9 @@ query FetchPullRequestByNumber(
   }
 }
 
-fragment MilestoneFields on Milestone {
+fragment PullRequestReviewFields on PullRequestReview {
   state
-  title
+  author {
+    login
+  }
 }

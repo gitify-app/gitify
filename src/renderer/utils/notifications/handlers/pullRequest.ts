@@ -19,12 +19,9 @@ import {
 } from '../../../types';
 import type { Notification, Subject } from '../../../typesGitHub';
 import { fetchPullByNumber } from '../../api/client';
-import type { FetchPullRequestByNumberQuery } from '../../api/graphql/generated/graphql';
+import type { PullRequestReviewFieldsFragment } from '../../api/graphql/generated/graphql';
 import { DefaultHandler, defaultHandler } from './default';
 import { getNotificationAuthor } from './utils';
-
-type PullRequestReviews =
-  FetchPullRequestByNumberQuery['repository']['pullRequest']['reviews']['nodes'];
 
 class PullRequestHandler extends DefaultHandler {
   readonly type = 'PullRequest' as const;
@@ -104,7 +101,7 @@ class PullRequestHandler extends DefaultHandler {
 export const pullRequestHandler = new PullRequestHandler();
 
 export function getLatestReviewForReviewers(
-  reviews: PullRequestReviews,
+  reviews: PullRequestReviewFieldsFragment[],
 ): GitifyPullRequestReview[] {
   if (!reviews.length) {
     return null;

@@ -35912,6 +35912,8 @@ export type AuthorFieldsFragment =
   | AuthorFields_User_Fragment
 ;
 
+export type MilestoneFieldsFragment = { __typename?: 'Milestone', state: MilestoneState, title: string };
+
 export type FetchDiscussionByNumberQueryVariables = Exact<{
   owner: Scalars['String']['input'];
   name: Scalars['String']['input'];
@@ -35951,6 +35953,20 @@ export type CommentFieldsFragment = { __typename?: 'DiscussionComment', database
     | { __typename?: 'User', login: string, html_url: any, avatar_url: any, type: 'User' }
    | null };
 
+export type DiscussionCommentFieldsFragment = { __typename?: 'DiscussionComment', databaseId?: number | null, createdAt: any, url: any, replies: { __typename?: 'DiscussionCommentConnection', totalCount: number, nodes?: Array<{ __typename?: 'DiscussionComment', databaseId?: number | null, createdAt: any, url: any, author?:
+        | { __typename?: 'Bot', login: string, html_url: any, avatar_url: any, type: 'Bot' }
+        | { __typename?: 'EnterpriseUserAccount', login: string, html_url: any, avatar_url: any, type: 'EnterpriseUserAccount' }
+        | { __typename?: 'Mannequin', login: string, html_url: any, avatar_url: any, type: 'Mannequin' }
+        | { __typename?: 'Organization', login: string, html_url: any, avatar_url: any, type: 'Organization' }
+        | { __typename?: 'User', login: string, html_url: any, avatar_url: any, type: 'User' }
+       | null } | null> | null }, author?:
+    | { __typename?: 'Bot', login: string, html_url: any, avatar_url: any, type: 'Bot' }
+    | { __typename?: 'EnterpriseUserAccount', login: string, html_url: any, avatar_url: any, type: 'EnterpriseUserAccount' }
+    | { __typename?: 'Mannequin', login: string, html_url: any, avatar_url: any, type: 'Mannequin' }
+    | { __typename?: 'Organization', login: string, html_url: any, avatar_url: any, type: 'Organization' }
+    | { __typename?: 'User', login: string, html_url: any, avatar_url: any, type: 'User' }
+   | null };
+
 export type FetchIssueByNumberQueryVariables = Exact<{
   owner: Scalars['String']['input'];
   name: Scalars['String']['input'];
@@ -35973,8 +35989,6 @@ export type FetchIssueByNumberQuery = { __typename?: 'Query', repository?: { __t
             | { __typename?: 'Organization', login: string, html_url: any, avatar_url: any, type: 'Organization' }
             | { __typename?: 'User', login: string, html_url: any, avatar_url: any, type: 'User' }
            | null } | null> | null }, labels?: { __typename?: 'LabelConnection', nodes?: Array<{ __typename?: 'Label', name: string } | null> | null } | null } | null } | null };
-
-export type MilestoneFieldsFragment = { __typename?: 'Milestone', state: MilestoneState, title: string };
 
 export type FetchPullRequestByNumberQueryVariables = Exact<{
   owner: Scalars['String']['input'];
@@ -36007,6 +36021,14 @@ export type FetchPullRequestByNumberQuery = { __typename?: 'Query', repository?:
             | { __typename?: 'User', login: string }
            | null } | null> | null } | null, labels?: { __typename?: 'LabelConnection', nodes?: Array<{ __typename?: 'Label', name: string } | null> | null } | null, closingIssuesReferences?: { __typename?: 'IssueConnection', nodes?: Array<{ __typename?: 'Issue', number: number } | null> | null } | null } | null } | null };
 
+export type PullRequestReviewFieldsFragment = { __typename?: 'PullRequestReview', state: PullRequestReviewState, author?:
+    | { __typename?: 'Bot', login: string }
+    | { __typename?: 'EnterpriseUserAccount', login: string }
+    | { __typename?: 'Mannequin', login: string }
+    | { __typename?: 'Organization', login: string }
+    | { __typename?: 'User', login: string }
+   | null };
+
 export class TypedDocumentString<TResult, TVariables>
   extends String
   implements DocumentTypeDecoration<TResult, TVariables>
@@ -36025,6 +36047,12 @@ export class TypedDocumentString<TResult, TVariables>
     return this.value;
   }
 }
+export const MilestoneFieldsFragmentDoc = new TypedDocumentString(`
+    fragment MilestoneFields on Milestone {
+  state
+  title
+}
+    `, {"fragmentName":"MilestoneFields"}) as unknown as TypedDocumentString<MilestoneFieldsFragment, unknown>;
 export const AuthorFieldsFragmentDoc = new TypedDocumentString(`
     fragment AuthorFields on Actor {
   login
@@ -36048,12 +36076,38 @@ export const CommentFieldsFragmentDoc = new TypedDocumentString(`
   avatar_url: avatarUrl
   type: __typename
 }`, {"fragmentName":"CommentFields"}) as unknown as TypedDocumentString<CommentFieldsFragment, unknown>;
-export const MilestoneFieldsFragmentDoc = new TypedDocumentString(`
-    fragment MilestoneFields on Milestone {
-  state
-  title
+export const DiscussionCommentFieldsFragmentDoc = new TypedDocumentString(`
+    fragment DiscussionCommentFields on DiscussionComment {
+  ...CommentFields
+  replies(last: $lastReplies) {
+    totalCount
+    nodes {
+      ...CommentFields
+    }
+  }
 }
-    `, {"fragmentName":"MilestoneFields"}) as unknown as TypedDocumentString<MilestoneFieldsFragment, unknown>;
+    fragment AuthorFields on Actor {
+  login
+  html_url: url
+  avatar_url: avatarUrl
+  type: __typename
+}
+fragment CommentFields on DiscussionComment {
+  databaseId
+  createdAt
+  author {
+    ...AuthorFields
+  }
+  url
+}`, {"fragmentName":"DiscussionCommentFields"}) as unknown as TypedDocumentString<DiscussionCommentFieldsFragment, unknown>;
+export const PullRequestReviewFieldsFragmentDoc = new TypedDocumentString(`
+    fragment PullRequestReviewFields on PullRequestReview {
+  state
+  author {
+    login
+  }
+}
+    `, {"fragmentName":"PullRequestReviewFields"}) as unknown as TypedDocumentString<PullRequestReviewFieldsFragment, unknown>;
 export const FetchDiscussionByNumberDocument = new TypedDocumentString(`
     query FetchDiscussionByNumber($owner: String!, $name: String!, $number: Int!, $lastComments: Int, $lastReplies: Int, $firstLabels: Int, $includeIsAnswered: Boolean!) {
   repository(owner: $owner, name: $name) {
@@ -36070,13 +36124,7 @@ export const FetchDiscussionByNumberDocument = new TypedDocumentString(`
       comments(last: $lastComments) {
         totalCount
         nodes {
-          ...CommentFields
-          replies(last: $lastReplies) {
-            totalCount
-            nodes {
-              ...CommentFields
-            }
-          }
+          ...DiscussionCommentFields
         }
       }
       labels(first: $firstLabels) {
@@ -36100,6 +36148,15 @@ fragment CommentFields on DiscussionComment {
     ...AuthorFields
   }
   url
+}
+fragment DiscussionCommentFields on DiscussionComment {
+  ...CommentFields
+  replies(last: $lastReplies) {
+    totalCount
+    nodes {
+      ...CommentFields
+    }
+  }
 }`) as unknown as TypedDocumentString<FetchDiscussionByNumberQuery, FetchDiscussionByNumberQueryVariables>;
 export const FetchIssueByNumberDocument = new TypedDocumentString(`
     query FetchIssueByNumber($owner: String!, $name: String!, $number: Int!, $lastComments: Int, $firstLabels: Int) {
@@ -36174,10 +36231,7 @@ export const FetchPullRequestByNumberDocument = new TypedDocumentString(`
       reviews(last: $lastReviews) {
         totalCount
         nodes {
-          state
-          author {
-            login
-          }
+          ...PullRequestReviewFields
         }
       }
       labels(first: $firstLabels) {
@@ -36202,4 +36256,10 @@ export const FetchPullRequestByNumberDocument = new TypedDocumentString(`
 fragment MilestoneFields on Milestone {
   state
   title
+}
+fragment PullRequestReviewFields on PullRequestReview {
+  state
+  author {
+    login
+  }
 }`) as unknown as TypedDocumentString<FetchPullRequestByNumberQuery, FetchPullRequestByNumberQueryVariables>;

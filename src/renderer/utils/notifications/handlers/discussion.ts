@@ -21,23 +21,10 @@ import type { Notification, Subject } from '../../../typesGitHub';
 import { fetchDiscussionByNumber } from '../../api/client';
 import type {
   CommentFieldsFragment,
-  FetchDiscussionByNumberQuery,
+  DiscussionCommentFieldsFragment,
 } from '../../api/graphql/generated/graphql';
 import { DefaultHandler, defaultHandler } from './default';
 import { getNotificationAuthor } from './utils';
-
-type DiscussionComment = NonNullable<
-  NonNullable<
-    NonNullable<
-      NonNullable<
-        Extract<
-          NonNullable<FetchDiscussionByNumberQuery['repository']>,
-          { __typename?: 'Repository' }
-        >['discussion']
-      >
-    >['comments']['nodes']
-  >[number]
->;
 
 class DiscussionHandler extends DefaultHandler {
   readonly type = 'Discussion';
@@ -112,7 +99,7 @@ export const discussionHandler = new DiscussionHandler();
 
 export function getClosestDiscussionCommentOrReply(
   notification: Notification,
-  comments: DiscussionComment[],
+  comments: DiscussionCommentFieldsFragment[],
 ): CommentFieldsFragment | null {
   if (!comments || comments.length === 0) {
     return null;
