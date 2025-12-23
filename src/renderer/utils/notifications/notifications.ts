@@ -1,3 +1,6 @@
+import { parse } from 'graphql';
+import combineQuery from 'graphql-combine-query';
+
 import type {
   AccountNotifications,
   GitifyState,
@@ -128,6 +131,22 @@ export async function enrichNotifications(
   if (!settings.detailedNotifications) {
     return notifications;
   }
+
+  // Build combined query for pull requests (builder is immutable)
+  const buildQuery = combineQuery('PullRequestBatch');
+
+  for (const notification of notifications) {
+    if (notification.subject.type === 'PullRequest') {
+      const handler = createNotificationHandler(notification);
+      const queryData = handler.query(notification);
+
+      if (queryData?.query && queryData?.variables) {
+        buildQuery.addN(parse(queryData.query), queryData.variables);
+      }
+    }
+  }
+
+  // console.log('ADAM COMBINED QUERY: ', JSON.stringify(buildQuery, null, 2));
 
   const enrichedNotifications = await Promise.all(
     notifications.map(async (notification: Notification) => {

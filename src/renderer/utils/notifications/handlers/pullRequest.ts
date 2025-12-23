@@ -19,12 +19,33 @@ import {
 } from '../../../types';
 import type { Notification, Subject } from '../../../typesGitHub';
 import { fetchPullByNumber } from '../../api/client';
-import type { PullRequestReviewFieldsFragment } from '../../api/graphql/generated/graphql';
+import {
+  FetchPullRequestByNumberDocument,
+  type PullRequestReviewFieldsFragment,
+} from '../../api/graphql/generated/graphql';
+import { getNumberFromUrl } from '../../api/utils';
 import { DefaultHandler, defaultHandler } from './default';
 import { getNotificationAuthor } from './utils';
 
 class PullRequestHandler extends DefaultHandler {
   readonly type = 'PullRequest' as const;
+
+  query(notification: Notification) {
+    const number = getNumberFromUrl(notification.subject.url);
+
+    return {
+      query: FetchPullRequestByNumberDocument,
+      variables: {
+        owner: notification.repository.owner.login,
+        name: notification.repository.name,
+        number: number,
+        firstLabels: 100,
+        firstClosingIssues: 100,
+        lastComments: 1,
+        lastReviews: 100,
+      },
+    };
+  }
 
   async enrich(
     notification: Notification,

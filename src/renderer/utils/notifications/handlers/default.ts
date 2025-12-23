@@ -12,6 +12,10 @@ import { formatForDisplay } from './utils';
 export class DefaultHandler implements NotificationTypeHandler {
   type?: SubjectType;
 
+  query(_notification: Notification) {
+    return null;
+  }
+
   async enrich(
     _notification: Notification,
     _settings: SettingsState,

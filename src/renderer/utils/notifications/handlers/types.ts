@@ -8,6 +8,8 @@ import type { Notification, Subject, SubjectType } from '../../../typesGitHub';
 export interface NotificationTypeHandler {
   readonly type?: SubjectType;
 
+  query(notification: Notification): { query; variables } | null;
+
   /**
    * Enrich a notification. Settings may be unused for some handlers.
    */
