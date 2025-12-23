@@ -122,6 +122,45 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
       } as GitifySubject);
     });
 
+    it('merge queue pull request state', async () => {
+      const mockPullRequest = mockPullRequestResponseNode({
+        state: 'OPEN',
+        isInMergeQueue: true,
+      });
+
+      nock('https://api.github.com')
+        .post('/graphql')
+        .reply(200, {
+          data: {
+            repository: {
+              pullRequest: mockPullRequest,
+            },
+          },
+        });
+
+      const result = await pullRequestHandler.enrich(
+        mockNotification,
+        mockSettings,
+      );
+
+      expect(result).toEqual({
+        number: 123,
+        state: 'MERGE_QUEUE',
+        user: {
+          login: mockAuthor.login,
+          html_url: mockAuthor.html_url,
+          avatar_url: mockAuthor.avatar_url,
+          type: mockAuthor.type,
+        },
+        reviews: null,
+        labels: [],
+        linkedIssues: [],
+        comments: 0,
+        milestone: null,
+        htmlUrl: 'https://github.com/gitify-app/notifications-test/pulls/123',
+      } as GitifySubject);
+    });
+
     it('merged pull request state', async () => {
       const mockPullRequest = mockPullRequestResponseNode({
         state: 'MERGED',
@@ -349,6 +388,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
     const cases = {
       CLOSED: 'GitPullRequestClosedIcon',
       DRAFT: 'GitPullRequestDraftIcon',
+      MERGE_QUEUE: 'GitMergeQueueIcon',
       MERGED: 'GitMergeIcon',
       OPEN: 'GitPullRequestIcon',
     } satisfies Record<GitifyPullRequestState, string>;
@@ -368,6 +408,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
     const cases = {
       CLOSED: IconColor.RED,
       DRAFT: IconColor.GRAY,
+      MERGE_QUEUE: IconColor.YELLOW,
       MERGED: IconColor.PURPLE,
       OPEN: IconColor.GREEN,
     } satisfies Record<GitifyPullRequestState, IconColor>;
@@ -445,6 +486,7 @@ function mockPullRequestResponseNode(mocks: {
   state: PullRequestState;
   isDraft?: boolean;
   merged?: boolean;
+  isInMergeQueue?: boolean;
 }): PullRequestResponse {
   return {
     __typename: 'PullRequest',
@@ -453,7 +495,7 @@ function mockPullRequestResponseNode(mocks: {
     state: mocks.state,
     isDraft: mocks.isDraft ?? false,
     merged: mocks.merged ?? false,
-    isInMergeQueue: false,
+    isInMergeQueue: mocks.isInMergeQueue ?? false,
     url: 'https://github.com/gitify-app/notifications-test/pulls/123',
     author: mockAuthor,
     labels: { nodes: [] },
