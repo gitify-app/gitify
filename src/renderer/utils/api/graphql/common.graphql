@@ -4,3 +4,8 @@ fragment AuthorFields on Actor {
   avatar_url: avatarUrl
   type: __typename
 }
+
+fragment MilestoneFields on Milestone {
+  state
+  title
+}
