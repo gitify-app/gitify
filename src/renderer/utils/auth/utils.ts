@@ -9,7 +9,6 @@ import type {
   AuthCode,
   AuthState,
   ClientID,
-  GitifyUser,
   Hostname,
   Link,
   Token,
@@ -70,21 +69,6 @@ export function authGitHub(
       handleCallback(callbackUrl);
     });
   });
-}
-
-export async function getUserData(
-  token: Token,
-  hostname: Hostname,
-): Promise<GitifyUser> {
-  const response = await fetchAuthenticatedUserDetails(hostname, token);
-  const user = response.data.viewer;
-
-  return {
-    id: user.id,
-    login: user.login,
-    name: user.name,
-    avatar: user.avatarUrl,
-  };
 }
 
 export async function getToken(
