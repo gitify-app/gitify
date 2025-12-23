@@ -65,39 +65,6 @@ interface GitHubSubject {
   type: SubjectType;
 }
 
-export type UserDetails = User & UserProfile;
-
-export interface UserProfile {
-  name: string;
-  company: string;
-  blog: string;
-  location: string;
-  email: string;
-  hireable: string;
-  bio: string;
-  twitter_username: string;
-  public_repos: number;
-  public_gists: number;
-  followers: number;
-  following: number;
-  created_at: string;
-  updated_at: string;
-  private_gists: number;
-  total_private_repos: number;
-  owned_private_repos: number;
-  disk_usage: number;
-  collaborators: number;
-  two_factor_authentication: boolean;
-  plan: Plan;
-}
-
-export interface Plan {
-  name: string;
-  space: number;
-  private_repos: number;
-  collaborators: number;
-}
-
 export interface User {
   login: string;
   id: number;
