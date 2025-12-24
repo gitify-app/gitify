@@ -28,7 +28,7 @@ export const MetricGroup: FC<MetricGroupProps> = ({
 
   const labelsPillDescription = notification.subject.labels
     ?.map((label) => `🏷️ ${label}`)
-    .join('\n');
+    .join(', ');
 
   const linkedIssuesPillDescription = `Linked to ${
     notification.subject.linkedIssues?.length > 1 ? 'issues' : 'issue'

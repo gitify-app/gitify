@@ -51,6 +51,9 @@ importers:
       '@graphql-codegen/schema-ast':
         specifier: 5.0.0
         version: 5.0.0(graphql@16.12.0)
+      '@octokit/openapi-types':
+        specifier: 27.0.0
+        version: 27.0.0
       '@parcel/watcher':
         specifier: 2.5.1
         version: 2.5.1
@@ -64,8 +67,8 @@ importers:
         specifier: 11.3.2
         version: 11.3.2
       '@primer/react':
-        specifier: 38.6.1
-        version: 38.6.1(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react-is@18.3.0)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react-is@18.3.1)(react@19.2.3)
+        specifier: 38.6.2
+        version: 38.6.2(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react-is@18.3.0)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react-is@18.3.1)(react@19.2.3)
       '@tailwindcss/postcss':
         specifier: 4.1.18
         version: 4.1.18
@@ -1623,6 +1626,9 @@ packages:
     engines: {node: ^12.13.0 || ^14.15.0 || >=16.0.0}
     deprecated: This functionality has been moved to @npmcli/fs
 
+  '@octokit/openapi-types@27.0.0':
+    resolution: {integrity: sha512-whrdktVs1h6gtR+09+QsNk2+FO+49j6ga1c55YZudfEG+oKJVvJLQi3zkOm5JjiUXAagWK2tI2kTGKJ2Ys7MGA==}
+
   '@oddbird/popover-polyfill@0.5.2':
     resolution: {integrity: sha512-iFrvar5SOMtKFOSjYvs4z9UlLqDdJbMx0mgISLcPedv+g0ac5sgeETLGtipHCVIae6HJPclNEH5aCyD1RZaEHw==}
 
@@ -1737,8 +1743,8 @@ packages:
   '@primer/primitives@11.3.2':
     resolution: {integrity: sha512-/8EDh3MmF9cbmrLETFmIuNFIdvpSCkvBlx6zzD8AZ4dZ5UYExQzFj8QAtIrRtCFJ2ZmW5QrtrPR3+JVb8KEDpg==}
 
-  '@primer/react@38.6.1':
-    resolution: {integrity: sha512-WISje8LgRwRtd1A3Ff2Oy0+si9X+ond3LYLSCo5WCPnl+T3qFXCB7+qL9dzk+dZV1KYhw4KzOWelurhIDN1C9A==}
+  '@primer/react@38.6.2':
+    resolution: {integrity: sha512-m0GZwm5Bg9CyEIM4I/Cq7yN/JGBWkBEW+Xtsa6Og/2OBmyK/23MELMfi/k5uDHIY3zl2oFsNoOlPWCICJWwHGw==}
     engines: {node: '>=12', npm: '>=7'}
     peerDependencies:
       '@types/react': 18.x || 19.x
@@ -7910,6 +7916,8 @@ snapshots:
       mkdirp: 1.0.4
       rimraf: 3.0.2
 
+  '@octokit/openapi-types@27.0.0': {}
+
   '@oddbird/popover-polyfill@0.5.2': {}
 
   '@parcel/watcher-android-arm64@2.5.1':
@@ -7993,7 +8001,7 @@ snapshots:
 
   '@primer/primitives@11.3.2': {}
 
-  '@primer/react@38.6.1(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react-is@18.3.0)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react-is@18.3.1)(react@19.2.3)':
+  '@primer/react@38.6.2(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react-is@18.3.0)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react-is@18.3.1)(react@19.2.3)':
     dependencies:
       '@github/mini-throttle': 2.1.1
       '@github/relative-time-element': 4.5.0
@@ -10097,7 +10105,7 @@ snapshots:
 
   history@5.3.0:
     dependencies:
-      '@babel/runtime': 7.24.1
+      '@babel/runtime': 7.28.4
 
   hosted-git-info@4.1.0:
     dependencies:

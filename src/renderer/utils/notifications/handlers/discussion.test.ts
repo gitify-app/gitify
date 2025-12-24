@@ -15,13 +15,10 @@ import {
 } from '../../../types';
 import type { Notification } from '../../../typesGitHub';
 import type {
+  DiscussionDetailsFragment,
   DiscussionStateReason,
-  FetchDiscussionByNumberQuery,
 } from '../../api/graphql/generated/graphql';
 import { discussionHandler } from './discussion';
-
-type DiscussionResponse =
-  FetchDiscussionByNumberQuery['repository']['discussion'];
 
 const mockAuthor = createPartialMockUser('discussion-author');
 const mockCommenter = createPartialMockUser('discussion-commenter');
@@ -351,7 +348,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
 function mockDiscussionResponseNode(mocks: {
   stateReason?: DiscussionStateReason;
   isAnswered: boolean;
-}): DiscussionResponse {
+}): DiscussionDetailsFragment {
   return {
     __typename: 'Discussion',
     number: 123,

@@ -30,7 +30,6 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                 data-wrap="nowrap"
               >
                 <button
-                  aria-describedby="_r_1_-loading-announcement"
                   aria-labelledby="Go Back"
                   class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                   data-component="IconButton"
@@ -169,7 +168,6 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                   data-wrap="nowrap"
                 >
                   <button
-                    aria-describedby="_r_6_-loading-announcement"
                     class="prc-Button-ButtonBase-9n-Xk"
                     data-loading="false"
                     data-size="small"
@@ -302,7 +300,6 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                       class="TextInput-action prc-components-TextInputAction-CjGDX"
                     >
                       <button
-                        aria-describedby="_r_g_-loading-announcement"
                         aria-labelledby="_r_f_"
                         class="prc-Button-ButtonBase-9n-Xk prc-components-Invisible-bKOcl prc-Button-IconButton-fyge7"
                         data-component="IconButton"
@@ -355,7 +352,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                 data-wrap="nowrap"
               >
                 <button
-                  aria-describedby="_r_i_-loading-announcement _r_h_"
+                  aria-describedby="_r_h_"
                   class="prc-Button-ButtonBase-9n-Xk"
                   data-loading="false"
                   data-size="small"
@@ -411,7 +408,6 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                   data-loading-wrapper="true"
                 >
                   <button
-                    aria-describedby="_r_j_-loading-announcement"
                     class="prc-Button-ButtonBase-9n-Xk"
                     data-loading="false"
                     data-size="medium"
@@ -487,7 +483,6 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
               data-wrap="nowrap"
             >
               <button
-                aria-describedby="_r_1_-loading-announcement"
                 aria-labelledby="Go Back"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
@@ -626,7 +621,6 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                 data-wrap="nowrap"
               >
                 <button
-                  aria-describedby="_r_6_-loading-announcement"
                   class="prc-Button-ButtonBase-9n-Xk"
                   data-loading="false"
                   data-size="small"
@@ -759,7 +753,6 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                     class="TextInput-action prc-components-TextInputAction-CjGDX"
                   >
                     <button
-                      aria-describedby="_r_g_-loading-announcement"
                       aria-labelledby="_r_f_"
                       class="prc-Button-ButtonBase-9n-Xk prc-components-Invisible-bKOcl prc-Button-IconButton-fyge7"
                       data-component="IconButton"
@@ -812,7 +805,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
               data-wrap="nowrap"
             >
               <button
-                aria-describedby="_r_i_-loading-announcement _r_h_"
+                aria-describedby="_r_h_"
                 class="prc-Button-ButtonBase-9n-Xk"
                 data-loading="false"
                 data-size="small"
@@ -868,7 +861,6 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                 data-loading-wrapper="true"
               >
                 <button
-                  aria-describedby="_r_j_-loading-announcement"
                   class="prc-Button-ButtonBase-9n-Xk"
                   data-loading="false"
                   data-size="medium"

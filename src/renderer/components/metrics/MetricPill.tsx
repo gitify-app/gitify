@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 
 import type { Icon } from '@primer/octicons-react';
-import { Label, Stack, Text } from '@primer/react';
+import { Label, Stack, Text, Tooltip } from '@primer/react';
 
 import { type IconColor, Size } from '../../types';
 
@@ -16,18 +16,22 @@ export const MetricPill: FC<MetricPillProps> = (props: MetricPillProps) => {
   const Icon = props.icon;
 
   return (
-    <Label
-      className="hover:bg-gitify-notification-pill-hover"
-      size="small"
-      title={props.title}
-      variant="secondary"
-    >
-      <Stack align="center" direction="horizontal" gap="none">
-        <Icon className={props.color} size={Size.XSMALL} />
-        {props.metric ? (
-          <Text className="text-xxs px-1">{props.metric}</Text>
-        ) : null}
-      </Stack>
-    </Label>
+    <Tooltip direction="s" text={props.title}>
+      <button type="button">
+        <Label
+          className="hover:bg-gitify-notification-pill-hover"
+          size="small"
+          tabIndex={0}
+          variant="secondary"
+        >
+          <Stack align="center" direction="horizontal" gap="none">
+            <Icon className={props.color} size={Size.XSMALL} />
+            {props.metric ? (
+              <Text className="text-xxs px-1">{props.metric}</Text>
+            ) : null}
+          </Stack>
+        </Label>
+      </button>
+    </Tooltip>
   );
 };

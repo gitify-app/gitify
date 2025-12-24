@@ -17,7 +17,6 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
       data-wrap="nowrap"
     >
       <button
-        aria-describedby="_r_1_-loading-announcement"
         aria-labelledby="Go Back"
         class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
         data-component="IconButton"
@@ -2031,7 +2030,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
       data-wrap="nowrap"
     >
       <button
-        aria-describedby="_r_r_-loading-announcement _r_q_"
+        aria-describedby="_r_q_"
         class="prc-Button-ButtonBase-9n-Xk"
         data-loading="false"
         data-size="medium"

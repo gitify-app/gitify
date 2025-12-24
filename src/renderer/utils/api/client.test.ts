@@ -9,7 +9,6 @@ import {
   mockNonCachedAuthHeaders,
 } from './__mocks__/request-mocks';
 import {
-  getAuthenticatedUser,
   getHtmlUrl,
   headNotifications,
   ignoreNotificationThreadSubscription,
@@ -27,17 +26,6 @@ const mockThreadId = '1234';
 describe('renderer/utils/api/client.ts', () => {
   afterEach(() => {
     jest.clearAllMocks();
-  });
-
-  it('getAuthenticatedUser - should fetch authenticated user', async () => {
-    await getAuthenticatedUser(mockGitHubHostname, mockToken);
-
-    expect(axios).toHaveBeenCalledWith({
-      url: 'https://api.github.com/user',
-      headers: mockAuthHeaders,
-      method: 'GET',
-      data: {},
-    });
   });
 
   it('headNotifications - should fetch notifications head', async () => {

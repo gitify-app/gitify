@@ -12,6 +12,13 @@ import type { TypedDocumentString } from './graphql/generated/graphql';
 import { getNextURLFromLinkHeader } from './utils';
 
 /**
+ * ExecutionResult with HTTP response headers
+ */
+export type ExecutionResultWithHeaders<T> = ExecutionResult<T> & {
+  headers: Record<string, string>;
+};
+
+/**
  * Perform an unauthenticated API request
  *
  * @param url
@@ -107,8 +114,11 @@ export async function performGraphQLRequest<TResult, TVariables>(
     },
     headers: headers,
   }).then((response) => {
-    return response.data;
-  }) as Promise<ExecutionResult<TResult>>;
+    return {
+      ...response.data,
+      headers: response.headers,
+    };
+  }) as Promise<ExecutionResultWithHeaders<TResult>>;
 }
 
 /**

@@ -1,6 +1,5 @@
 import type { AxiosResponse } from 'axios';
 import axios from 'axios';
-import nock from 'nock';
 
 import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
 import { mockAuth } from '../../__mocks__/state-mocks';
@@ -16,11 +15,15 @@ import type {
   Token,
 } from '../../types';
 import * as comms from '../../utils/comms';
+import * as apiClient from '../api/client';
+import type { FetchAuthenticatedUserDetailsQuery } from '../api/graphql/generated/graphql';
 import * as apiRequests from '../api/request';
 import * as logger from '../logger';
 import type { AuthMethod } from './types';
 import * as authUtils from './utils';
 import { getNewOAuthAppURL, getNewTokenURL } from './utils';
+
+type UserDetailsResponse = FetchAuthenticatedUserDetailsQuery['viewer'];
 
 describe('renderer/utils/auth/utils.ts', () => {
   describe('authGitHub', () => {
@@ -139,6 +142,10 @@ describe('renderer/utils/auth/utils.ts', () => {
 
   describe('addAccount', () => {
     let mockAuthState: AuthState;
+    const fetchAuthenticatedUserDetailsSpy = jest.spyOn(
+      apiClient,
+      'fetchAuthenticatedUserDetails',
+    );
 
     beforeEach(() => {
       mockAuthState = {
@@ -152,13 +159,17 @@ describe('renderer/utils/auth/utils.ts', () => {
 
     describe('should add GitHub Cloud account', () => {
       beforeEach(() => {
-        nock('https://api.github.com')
-          .get('/user')
-          .reply(
-            200,
-            { ...mockGitifyUser, avatar_url: mockGitifyUser.avatar },
-            { 'x-oauth-scopes': Constants.OAUTH_SCOPES.RECOMMENDED },
-          );
+        fetchAuthenticatedUserDetailsSpy.mockResolvedValue({
+          data: {
+            viewer: {
+              ...mockGitifyUser,
+              avatarUrl: mockGitifyUser.avatar,
+            } as UserDetailsResponse,
+          },
+          headers: {
+            'x-oauth-scopes': Constants.OAUTH_SCOPES.RECOMMENDED.join(', '),
+          },
+        });
       });
 
       it('should add personal access token account', async () => {
@@ -206,16 +217,18 @@ describe('renderer/utils/auth/utils.ts', () => {
 
     describe('should add GitHub Enterprise Server account', () => {
       beforeEach(() => {
-        nock('https://github.gitify.io/api/v3')
-          .get('/user')
-          .reply(
-            200,
-            { ...mockGitifyUser, avatar_url: mockGitifyUser.avatar },
-            {
-              'x-github-enterprise-version': '3.0.0',
-              'x-oauth-scopes': Constants.OAUTH_SCOPES.RECOMMENDED,
-            },
-          );
+        fetchAuthenticatedUserDetailsSpy.mockResolvedValue({
+          data: {
+            viewer: {
+              ...mockGitifyUser,
+              avatarUrl: mockGitifyUser.avatar,
+            } as UserDetailsResponse,
+          },
+          headers: {
+            'x-github-enterprise-version': '3.0.0',
+            'x-oauth-scopes': Constants.OAUTH_SCOPES.RECOMMENDED.join(', '),
+          },
+        });
       });
 
       it('should add personal access token account', async () => {

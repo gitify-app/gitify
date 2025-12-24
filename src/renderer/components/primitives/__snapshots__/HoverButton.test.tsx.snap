@@ -98,7 +98,6 @@ exports[`renderer/components/primitives/HoverButton.tsx should render 1`] = `
           data-portal-root="true"
         >
           <button
-            aria-describedby="_r_1_-loading-announcement"
             aria-label="Hover Button"
             class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
             data-component="IconButton"
@@ -142,7 +141,6 @@ exports[`renderer/components/primitives/HoverButton.tsx should render 1`] = `
         data-portal-root="true"
       >
         <button
-          aria-describedby="_r_1_-loading-announcement"
           aria-label="Hover Button"
           class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
           data-component="IconButton"

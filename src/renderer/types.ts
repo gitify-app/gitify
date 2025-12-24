@@ -204,7 +204,7 @@ export interface GitifyUser {
   login: string;
   name: string | null;
   avatar: Link | null;
-  id: number;
+  id: string;
 }
 
 export interface GitifyError {

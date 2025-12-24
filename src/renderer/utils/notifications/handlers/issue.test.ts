@@ -15,13 +15,11 @@ import {
 } from '../../../types';
 import type { Notification } from '../../../typesGitHub';
 import type {
-  FetchIssueByNumberQuery,
+  IssueDetailsFragment,
   IssueState,
   IssueStateReason,
 } from '../../api/graphql/generated/graphql';
 import { issueHandler } from './issue';
-
-type IssueResponse = FetchIssueByNumberQuery['repository']['issue'];
 
 const mockAuthor = createPartialMockUser('issue-author');
 const mockCommenter = createPartialMockUser('issue-commenter');
@@ -290,7 +288,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
 function mockIssueResponseNode(mocks: {
   state: IssueState;
   stateReason?: IssueStateReason;
-}): IssueResponse {
+}): IssueDetailsFragment {
   return {
     __typename: 'Issue',
     number: 123,

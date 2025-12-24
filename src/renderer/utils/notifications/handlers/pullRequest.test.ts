@@ -15,14 +15,11 @@ import {
 } from '../../../types';
 import type { Notification } from '../../../typesGitHub';
 import type {
-  FetchPullRequestByNumberQuery,
+  PullRequestDetailsFragment,
   PullRequestReviewState,
   PullRequestState,
 } from '../../api/graphql/generated/graphql';
 import { getLatestReviewForReviewers, pullRequestHandler } from './pullRequest';
-
-type PullRequestResponse =
-  FetchPullRequestByNumberQuery['repository']['pullRequest'];
 
 const mockAuthor = createPartialMockUser('some-author');
 const mockCommenter = createPartialMockUser('some-commenter');
@@ -487,7 +484,7 @@ function mockPullRequestResponseNode(mocks: {
   isDraft?: boolean;
   merged?: boolean;
   isInMergeQueue?: boolean;
-}): PullRequestResponse {
+}): PullRequestDetailsFragment {
   return {
     __typename: 'PullRequest',
     number: 123,
