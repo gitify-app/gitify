@@ -4,6 +4,11 @@ import type { GitifyNotification, GitifySubject, Link } from './types';
 
 // TODO: #828 Add explicit types for GitHub API response vs Gitify Notifications object
 
+export interface GitHubRESTError {
+  message: string;
+  documentation_url: Link;
+}
+
 // Stronger typings for string literal attributes
 export type Reason =
   | 'approval_requested'
@@ -92,7 +97,6 @@ export type Owner = Omit<
   avatar_url: Link;
 };
 
-// Strengthen commit-related types
 export type Commit = Omit<BaseCommit, 'author'> & {
   author: BaseCommit['author'] extends null
     ? null
@@ -110,8 +114,3 @@ export type Release = Omit<BaseRelease, 'author'> & {
     ? null
     : NonNullable<BaseRelease['author']> & { type: UserType };
 };
-
-export interface GitHubRESTError {
-  message: string;
-  documentation_url: Link;
-}

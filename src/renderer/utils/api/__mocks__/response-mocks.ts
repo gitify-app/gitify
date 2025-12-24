@@ -22,7 +22,7 @@ export const mockNotificationUser = {
 // 2 Notifications
 // Hostname : 'github.com'
 // Repository : 'gitify-app/notifications-test'
-const mockGitHubOwner: Owner = {
+const mockGitHubOwner = {
   id: 6333409,
   login: 'gitify-app',
   avatar_url:
@@ -30,7 +30,15 @@ const mockGitHubOwner: Owner = {
   url: 'https://api.github.com/users/gitify-app' as Link,
   html_url: 'https://github.com/gitify-app' as Link,
   type: 'User',
-} as unknown as Owner;
+} satisfies Partial<Owner>;
+
+const mockGitHubRepository = {
+  id: 57216596,
+  name: 'notifications-test',
+  full_name: 'gitify-app/notifications-test',
+  owner: mockGitHubOwner as unknown as Owner,
+  html_url: 'https://github.com/gitify-app/notifications-test' as Link,
+} satisfies Partial<Repository>;
 
 export const mockGitHubNotifications: Notification[] = [
   {
@@ -70,14 +78,7 @@ export const mockGitHubNotifications: Notification[] = [
         },
       ],
     },
-    repository: {
-      id: 57216596,
-      name: 'notifications-test',
-      full_name: 'gitify-app/notifications-test',
-      url: 'https://api.github.com/gitify-app/notifications-test' as Link,
-      owner: mockGitHubOwner,
-      html_url: 'https://github.com/gitify-app/notifications-test' as Link,
-    } as unknown as Repository,
+    repository: mockGitHubRepository as unknown as Repository,
     url: 'https://api.github.com/notifications/threads/138661096' as Link,
     subscription_url:
       'https://api.github.com/notifications/threads/138661096/subscription' as Link,
@@ -98,13 +99,7 @@ export const mockGitHubNotifications: Notification[] = [
       type: 'Issue',
       reviews: null,
     },
-    repository: {
-      id: 57216596,
-      name: 'notifications-test',
-      full_name: 'gitify-app/notifications-test',
-      owner: mockGitHubOwner,
-      html_url: 'https://github.com/gitify-app/notifications-test' as Link,
-    } as unknown as Repository,
+    repository: mockGitHubRepository as unknown as Repository,
     url: 'https://api.github.com/notifications/threads/148827438' as Link,
     subscription_url:
       'https://api.github.com/notifications/threads/148827438/subscription' as Link,
@@ -121,7 +116,15 @@ const mockEnterpriseOwner = {
   url: 'https://github.gitify.io/api/v3/users/myorg',
   html_url: 'https://github.gitify.io/myorg' as Link,
   type: 'Organization',
-} as unknown as Owner;
+} satisfies Partial<Owner>;
+
+const mockEnterpriseRepository = {
+  id: 1,
+  name: 'notifications-test',
+  full_name: 'myorg/notifications-test',
+  owner: mockEnterpriseOwner as unknown as Owner,
+  html_url: 'https://github.gitify.io/myorg/notifications-test' as Link,
+} satisfies Partial<Repository>;
 
 export const mockEnterpriseNotifications: Notification[] = [
   {
@@ -140,13 +143,7 @@ export const mockEnterpriseNotifications: Notification[] = [
       type: 'Release',
       reviews: null,
     },
-    repository: {
-      id: 1,
-      name: 'notifications-test',
-      full_name: 'myorg/notifications-test',
-      owner: mockEnterpriseOwner,
-      html_url: 'https://github.gitify.io/myorg/notifications-test' as Link,
-    } as unknown as Repository,
+    repository: mockEnterpriseRepository as unknown as Repository,
     url: 'https://github.gitify.io/api/v3/notifications/threads/4' as Link,
     subscription_url:
       'https://github.gitify.io/api/v3/notifications/threads/4/subscription' as Link,
@@ -167,13 +164,7 @@ export const mockEnterpriseNotifications: Notification[] = [
       type: 'PullRequest',
       reviews: null,
     },
-    repository: {
-      id: 1,
-      name: 'notifications-test',
-      full_name: 'myorg/notifications-test',
-      owner: mockEnterpriseOwner,
-      html_url: 'https://github.gitify.io/myorg/notifications-test' as Link,
-    } as unknown as Repository,
+    repository: mockEnterpriseRepository as unknown as Repository,
     url: 'https://github.gitify.io/api/v3/notifications/threads/3' as Link,
     subscription_url:
       'https://github.gitify.io/api/v3/notifications/threads/3/subscription' as Link,
