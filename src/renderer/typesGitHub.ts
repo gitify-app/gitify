@@ -4,7 +4,7 @@ import type { GitifyNotification, GitifySubject, Link } from './types';
 
 // TODO: #828 Add explicit types for GitHub API response vs Gitify Notifications object
 
-// Stronger typings for Reason string attribute
+// Stronger typings for string literal attributes
 export type Reason =
   | 'approval_requested'
   | 'assign'
@@ -22,7 +22,6 @@ export type Reason =
   | 'subscribed'
   | 'team_mention';
 
-// Stronger typings for Subject Type string attribute
 export type SubjectType =
   | 'CheckSuite'
   | 'Commit'
@@ -35,7 +34,6 @@ export type SubjectType =
   | 'RepositoryVulnerabilityAlert'
   | 'WorkflowRun';
 
-// Stronger typings for Reason User Type attribute
 export type UserType =
   | 'Bot'
   | 'EnterpriseUserAccount'
@@ -43,60 +41,75 @@ export type UserType =
   | 'Organization'
   | 'User';
 
-export type Notification = GitHubNotification &
-  GitifyNotification & {
-    reason: Reason;
-    subject: Subject;
-    repository: Repository;
-  };
-export type Subject = GitHubSubject & {
+// Base types from Octokit
+export type NotificationThreadSubscription =
+  components['schemas']['thread-subscription'];
+
+type BaseNotification = components['schemas']['thread'];
+type BaseUser = components['schemas']['simple-user'];
+type BaseRepository = components['schemas']['repository'];
+type BaseCommit = components['schemas']['commit'];
+type BaseCommitComment = components['schemas']['commit-comment'];
+type BaseRelease = components['schemas']['release'];
+type BaseSubject = components['schemas']['thread']['subject'];
+
+// Strengthen user-related types with explicit property overrides
+type GitHubNotification = Omit<
+  BaseNotification,
+  'reason' | 'subject' | 'repository'
+> & {
+  reason: Reason;
+  subject: Subject;
+  repository: Repository;
+};
+
+type GitHubSubject = Omit<
+  BaseSubject,
+  'url' | 'latest_comment_url' | 'type'
+> & {
   url: Link;
   latest_comment_url: Link;
   type: SubjectType;
-} & GitifySubject;
+};
 
-export type User = components['schemas']['simple-user'] & { type: UserType };
+// Exported strengthened types
+export type Notification = GitHubNotification & GitifyNotification;
 
-export type GitHubNotification = components['schemas']['thread'];
-export type GitHubSubject = components['schemas']['thread']['subject'];
+export type Subject = GitHubSubject & GitifySubject;
 
-export type Repository = components['schemas']['repository'] & {
+export type Repository = Omit<BaseRepository, 'html_url' | 'owner'> & {
   html_url: Link;
   owner: Owner;
 };
 
-export type Owner = NonNullable<BaseRepository['owner']> & {
+export type User = Omit<BaseUser, 'type'> & { type: UserType };
+
+export type Owner = Omit<
+  NonNullable<BaseRepository['owner']>,
+  'type' | 'avatar_url'
+> & {
   type: UserType;
   avatar_url: Link;
 };
-type BaseRepository = components['schemas']['repository'];
 
+// Strengthen commit-related types
 export type Commit = Omit<BaseCommit, 'author'> & {
-  author: BaseCommit['author'] extends null ? null : StrongCommitAuthor;
-};
-type BaseCommit = components['schemas']['commit'];
-type StrongCommitAuthor = NonNullable<BaseCommit['author']> & {
-  type: UserType;
+  author: BaseCommit['author'] extends null
+    ? null
+    : NonNullable<BaseCommit['author']> & { type: UserType };
 };
 
 export type CommitComment = Omit<BaseCommitComment, 'user'> & {
-  user: BaseCommitComment['user'] extends null ? null : StrongCommitCommentUser;
-};
-type BaseCommitComment = components['schemas']['commit-comment'];
-type StrongCommitCommentUser = NonNullable<BaseCommitComment['user']> & {
-  type: UserType;
+  user: BaseCommitComment['user'] extends null
+    ? null
+    : NonNullable<BaseCommitComment['user']> & { type: UserType };
 };
 
 export type Release = Omit<BaseRelease, 'author'> & {
-  author: BaseRelease['author'] extends null ? null : StrongReleaseAuthor;
+  author: BaseRelease['author'] extends null
+    ? null
+    : NonNullable<BaseRelease['author']> & { type: UserType };
 };
-type BaseRelease = components['schemas']['release'];
-type StrongReleaseAuthor = NonNullable<BaseRelease['author']> & {
-  type: UserType;
-};
-
-export type NotificationThreadSubscription =
-  components['schemas']['thread-subscription'];
 
 export interface GitHubRESTError {
   message: string;
