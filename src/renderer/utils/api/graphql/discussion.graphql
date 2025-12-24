@@ -9,26 +9,30 @@ query FetchDiscussionByNumber(
 ) {
   repository(owner: $owner, name: $name) {
     discussion(number: $number) {
-      __typename
-      number
-      title
-      stateReason
-      isAnswered @include(if: $includeIsAnswered)
-      url
-      author {
-        ...AuthorFields
-      }
-      comments(last: $lastComments) {
-        totalCount
-        nodes {
-          ...DiscussionCommentFields
-        }
-      }
-      labels(first: $firstLabels) {
-        nodes {
-          name
-        }
-      }
+      ...DiscussionDetails
+    }
+  }
+}
+
+fragment DiscussionDetails on Discussion {
+  __typename
+  number
+  title
+  stateReason
+  isAnswered @include(if: $includeIsAnswered)
+  url
+  author {
+    ...AuthorFields
+  }
+  comments(last: $lastComments) {
+    totalCount
+    nodes {
+      ...DiscussionCommentFields
+    }
+  }
+  labels(first: $firstLabels) {
+    nodes {
+      name
     }
   }
 }
