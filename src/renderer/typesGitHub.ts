@@ -77,6 +77,10 @@ type GitHubSubject = Omit<
   type: SubjectType;
 };
 
+type StrengthenNullable<T, K extends keyof T, Extra> = Omit<T, K> & {
+  [P in K]: T[P] extends null ? null : NonNullable<T[P]> & Extra;
+};
+
 // Exported strengthened types
 export type Notification = GitHubNotification & GitifyNotification;
 
@@ -97,20 +101,18 @@ export type Owner = Omit<
   avatar_url: Link;
 };
 
-export type Commit = Omit<BaseCommit, 'author'> & {
-  author: BaseCommit['author'] extends null
-    ? null
-    : NonNullable<BaseCommit['author']> & { type: UserType };
-};
-
-export type CommitComment = Omit<BaseCommitComment, 'user'> & {
-  user: BaseCommitComment['user'] extends null
-    ? null
-    : NonNullable<BaseCommitComment['user']> & { type: UserType };
-};
-
-export type Release = Omit<BaseRelease, 'author'> & {
-  author: BaseRelease['author'] extends null
-    ? null
-    : NonNullable<BaseRelease['author']> & { type: UserType };
-};
+export type Commit = StrengthenNullable<
+  BaseCommit,
+  'author',
+  { type: UserType }
+>;
+export type CommitComment = StrengthenNullable<
+  BaseCommitComment,
+  'user',
+  { type: UserType }
+>;
+export type Release = StrengthenNullable<
+  BaseRelease,
+  'author',
+  { type: UserType }
+>;
