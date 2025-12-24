@@ -49,7 +49,7 @@ importers:
         specifier: 5.0.0
         version: 5.0.0(graphql@16.12.0)
       '@octokit/openapi-types':
-        specifier: ^27.0.0
+        specifier: 27.0.0
         version: 27.0.0
       '@parcel/watcher':
         specifier: 2.5.1
