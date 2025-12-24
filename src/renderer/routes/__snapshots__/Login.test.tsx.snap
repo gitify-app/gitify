@@ -109,7 +109,6 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
                   Login with
                 </span>
                 <button
-                  aria-describedby="_r_1_-loading-announcement"
                   class="prc-Button-ButtonBase-9n-Xk"
                   data-loading="false"
                   data-size="medium"
@@ -152,7 +151,6 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
                   </span>
                 </button>
                 <button
-                  aria-describedby="_r_2_-loading-announcement"
                   class="prc-Button-ButtonBase-9n-Xk"
                   data-loading="false"
                   data-size="medium"
@@ -195,7 +193,6 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
                   </span>
                 </button>
                 <button
-                  aria-describedby="_r_3_-loading-announcement"
                   class="prc-Button-ButtonBase-9n-Xk"
                   data-loading="false"
                   data-size="medium"
@@ -349,7 +346,6 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
                 Login with
               </span>
               <button
-                aria-describedby="_r_1_-loading-announcement"
                 class="prc-Button-ButtonBase-9n-Xk"
                 data-loading="false"
                 data-size="medium"
@@ -392,7 +388,6 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
                 </span>
               </button>
               <button
-                aria-describedby="_r_2_-loading-announcement"
                 class="prc-Button-ButtonBase-9n-Xk"
                 data-loading="false"
                 data-size="medium"
@@ -435,7 +430,6 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
                 </span>
               </button>
               <button
-                aria-describedby="_r_3_-loading-announcement"
                 class="prc-Button-ButtonBase-9n-Xk"
                 data-loading="false"
                 data-size="medium"

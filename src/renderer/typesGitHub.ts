@@ -1,15 +1,15 @@
+import type { components } from '@octokit/openapi-types';
+
 import type { GitifyNotification, GitifySubject, Link } from './types';
 
 // TODO: #828 Add explicit types for GitHub API response vs Gitify Notifications object
-export type Notification = GitHubNotification & GitifyNotification;
-export type Subject = GitHubSubject & GitifySubject;
 
-/**
- *
- * GitHub REST API Response Types
- *
- **/
+export interface GitHubRESTError {
+  message: string;
+  documentation_url: Link;
+}
 
+// Stronger typings for string literal attributes
 export type Reason =
   | 'approval_requested'
   | 'assign'
@@ -46,215 +46,73 @@ export type UserType =
   | 'Organization'
   | 'User';
 
-export interface GitHubNotification {
-  id: string;
-  unread: boolean;
+// Base types from Octokit
+export type NotificationThreadSubscription =
+  components['schemas']['thread-subscription'];
+
+type BaseNotification = components['schemas']['thread'];
+type BaseUser = components['schemas']['simple-user'];
+type BaseRepository = components['schemas']['repository'];
+type BaseCommit = components['schemas']['commit'];
+type BaseCommitComment = components['schemas']['commit-comment'];
+type BaseRelease = components['schemas']['release'];
+type BaseSubject = components['schemas']['thread']['subject'];
+
+// Strengthen user-related types with explicit property overrides
+type GitHubNotification = Omit<
+  BaseNotification,
+  'reason' | 'subject' | 'repository'
+> & {
   reason: Reason;
-  updated_at: string;
-  last_read_at: string | null;
   subject: Subject;
   repository: Repository;
-  url: Link;
-  subscription_url: Link;
-}
+};
 
-interface GitHubSubject {
-  title: string;
+type GitHubSubject = Omit<
+  BaseSubject,
+  'url' | 'latest_comment_url' | 'type'
+> & {
   url: Link | null;
   latest_comment_url: Link | null;
   type: SubjectType;
-}
+};
 
-export interface User {
-  login: string;
-  id: number;
-  node_id: string;
-  avatar_url: Link;
-  gravatar_url: Link;
-  url: Link;
+type StrengthenNullable<T, K extends keyof T, Extra> = Omit<T, K> & {
+  [P in K]: T[P] extends null ? null : NonNullable<T[P]> & Extra;
+};
+
+// Exported strengthened types
+export type Notification = GitHubNotification & GitifyNotification;
+
+export type Subject = GitHubSubject & GitifySubject;
+
+export type Repository = Omit<BaseRepository, 'html_url' | 'owner'> & {
   html_url: Link;
-  followers_url: Link;
-  following_url: Link;
-  gists_url: Link;
-  starred_url: Link;
-  subscriptions_url: Link;
-  organizations_url: Link;
-  repos_url: Link;
-  events_url: Link;
-  received_events_url: Link;
-  type: UserType;
-  site_admin: boolean;
-}
-
-export interface Repository {
-  id: number;
-  node_id: string;
-  name: string;
-  full_name: string;
-  private: boolean;
   owner: Owner;
-  html_url: Link;
-  description: string;
-  fork: boolean;
-  url: Link;
-  forks_url: Link;
-  keys_url: Link;
-  collaborators_url: Link;
-  teams_url: Link;
-  hooks_url: Link;
-  issue_events_url: Link;
-  events_url: Link;
-  assignees_url: Link;
-  branches_url: Link;
-  tags_url: Link;
-  blobs_url: Link;
-  git_tags_url: Link;
-  git_refs_url: Link;
-  trees_url: Link;
-  statuses_url: Link;
-  languages_url: Link;
-  stargazers_url: Link;
-  contributors_url: Link;
-  subscribers_url: Link;
-  subscription_url: Link;
-  commits_url: Link;
-  git_commits_url: Link;
-  comments_url: Link;
-  issue_comment_url: Link;
-  contents_url: Link;
-  compare_url: Link;
-  merges_url: Link;
-  archive_url: Link;
-  downloads_url: Link;
-  issues_url: Link;
-  pulls_url: Link;
-  milestones_url: Link;
-  notifications_url: Link;
-  labels_url: Link;
-  releases_url: Link;
-  deployments_url: Link;
-}
+};
 
-export interface Owner {
-  login: string;
-  id: number;
-  node_id: string;
-  avatar_url: Link;
-  gravatar_id: string;
-  url: Link;
-  html_url: Link;
-  followers_url: Link;
-  following_url: Link;
-  gists_url: Link;
-  starred_url: Link;
-  subscriptions_url: Link;
-  organizations_url: Link;
-  repos_url: Link;
-  events_url: Link;
-  received_events_url: Link;
+export type User = Omit<BaseUser, 'type'> & { type: UserType };
+
+export type Owner = Omit<
+  NonNullable<BaseRepository['owner']>,
+  'type' | 'avatar_url'
+> & {
   type: UserType;
-  site_admin: boolean;
-}
+  avatar_url: Link;
+};
 
-export interface Commit {
-  sha: string;
-  node_id: string;
-  commit: {
-    author: CommitUser;
-    committer: CommitUser;
-    message: string;
-    tree: {
-      sha: string;
-      url: Link;
-    };
-    url: Link;
-    comment_count: number;
-    verification: {
-      verified: boolean;
-      reason: string;
-      signature: string | null;
-      payload: string | null;
-    };
-  };
-  url: Link;
-  html_url: Link;
-  comments_url: Link;
-  author: User;
-  committer: User;
-  parents: CommitParent[];
-  stats: {
-    total: number;
-    additions: number;
-    deletions: number;
-  };
-  files: CommitFiles[];
-}
-
-interface CommitUser {
-  name: string;
-  email: string;
-  date: string;
-}
-
-interface CommitParent {
-  sha: string;
-  url: Link;
-  html_url: Link;
-}
-
-interface CommitFiles {
-  sha: string;
-  filename: string;
-  status: string;
-  additions: number;
-  deletions: number;
-  changes: number;
-  blob_url: Link;
-  raw_url: Link;
-  contents_url: Link;
-  patch: string;
-}
-
-export interface CommitComment {
-  url: Link;
-  html_url: Link;
-  issue_url: Link;
-  id: number;
-  node_id: string;
-  user: User;
-  created_at: string;
-  updated_at: string;
-  body: string;
-}
-
-export interface Release {
-  url: Link;
-  assets_url: Link;
-  upload_url: Link;
-  html_url: Link;
-  id: number;
-  author: User;
-  node_id: string;
-  tag_name: string;
-  target_commitish: string;
-  name: string | null;
-  body: string | null;
-  draft: boolean;
-  prerelease: boolean;
-  created_at: string;
-  published_at: string | null;
-}
-
-export interface GitHubRESTError {
-  message: string;
-  documentation_url: Link;
-}
-
-export interface NotificationThreadSubscription {
-  subscribed: boolean;
-  ignored: boolean;
-  reason: string | null;
-  created_at: string;
-  url: Link;
-  thread_url: Link;
-}
+export type Commit = StrengthenNullable<
+  BaseCommit,
+  'author',
+  { type: UserType }
+>;
+export type CommitComment = StrengthenNullable<
+  BaseCommitComment,
+  'user',
+  { type: UserType }
+>;
+export type Release = StrengthenNullable<
+  BaseRelease,
+  'author',
+  { type: UserType }
+>;

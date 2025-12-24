@@ -26,7 +26,6 @@ exports[`renderer/components/primitives/Header.tsx should render itself & its ch
               data-wrap="nowrap"
             >
               <button
-                aria-describedby="_r_1_-loading-announcement"
                 aria-labelledby="Go Back"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
@@ -120,7 +119,6 @@ exports[`renderer/components/primitives/Header.tsx should render itself & its ch
             data-wrap="nowrap"
           >
             <button
-              aria-describedby="_r_1_-loading-announcement"
               aria-labelledby="Go Back"
               class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
               data-component="IconButton"

@@ -5,10 +5,11 @@ import { GitCommitIcon } from '@primer/octicons-react';
 
 import type {
   GitifyNotificationState,
+  GitifyNotificationUser,
   GitifySubject,
   SettingsState,
 } from '../../../types';
-import type { Notification, Subject, User } from '../../../typesGitHub';
+import type { Notification, Subject } from '../../../typesGitHub';
 import { getCommit, getCommitComment } from '../../api/client';
 import { isStateFilteredOut } from '../filters/filter';
 import { DefaultHandler } from './default';
@@ -28,7 +29,7 @@ class CommitHandler extends DefaultHandler {
       return null;
     }
 
-    let user: User;
+    let user: GitifyNotificationUser;
 
     if (notification.subject.latest_comment_url) {
       const commitComment = (
@@ -44,7 +45,12 @@ class CommitHandler extends DefaultHandler {
         await getCommit(notification.subject.url, notification.account.token)
       ).data;
 
-      user = commit.author;
+      user = {
+        login: commit.author.login,
+        avatar_url: commit.author.avatar_url,
+        html_url: commit.author.html_url,
+        type: commit.author.type,
+      };
     }
 
     return {

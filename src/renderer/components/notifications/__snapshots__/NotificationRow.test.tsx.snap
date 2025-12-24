@@ -292,7 +292,6 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               data-wrap="nowrap"
             >
               <button
-                aria-describedby="_r_2_-loading-announcement"
                 aria-label="Mark as done"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
@@ -322,7 +321,6 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 </svg>
               </button>
               <button
-                aria-describedby="_r_3_-loading-announcement"
                 aria-label="Mark as read"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
@@ -352,7 +350,6 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 </svg>
               </button>
               <button
-                aria-describedby="_r_4_-loading-announcement"
                 aria-label="Unsubscribe from thread"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
@@ -675,7 +672,6 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             data-wrap="nowrap"
           >
             <button
-              aria-describedby="_r_2_-loading-announcement"
               aria-label="Mark as done"
               class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
               data-component="IconButton"
@@ -705,7 +701,6 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               </svg>
             </button>
             <button
-              aria-describedby="_r_3_-loading-announcement"
               aria-label="Mark as read"
               class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
               data-component="IconButton"
@@ -735,7 +730,6 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               </svg>
             </button>
             <button
-              aria-describedby="_r_4_-loading-announcement"
               aria-label="Unsubscribe from thread"
               class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
               data-component="IconButton"
@@ -1063,7 +1057,6 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               data-wrap="nowrap"
             >
               <button
-                aria-describedby="_r_7_-loading-announcement"
                 aria-label="Mark as done"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
@@ -1093,7 +1086,6 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 </svg>
               </button>
               <button
-                aria-describedby="_r_8_-loading-announcement"
                 aria-label="Mark as read"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
@@ -1123,7 +1115,6 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 </svg>
               </button>
               <button
-                aria-describedby="_r_9_-loading-announcement"
                 aria-label="Unsubscribe from thread"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
@@ -1394,7 +1385,6 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             data-wrap="nowrap"
           >
             <button
-              aria-describedby="_r_7_-loading-announcement"
               aria-label="Mark as done"
               class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
               data-component="IconButton"
@@ -1424,7 +1414,6 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               </svg>
             </button>
             <button
-              aria-describedby="_r_8_-loading-announcement"
               aria-label="Mark as read"
               class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
               data-component="IconButton"
@@ -1454,7 +1443,6 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               </svg>
             </button>
             <button
-              aria-describedby="_r_9_-loading-announcement"
               aria-label="Unsubscribe from thread"
               class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
               data-component="IconButton"
@@ -1782,7 +1770,6 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               data-wrap="nowrap"
             >
               <button
-                aria-describedby="_r_c_-loading-announcement"
                 aria-label="Mark as done"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
@@ -1812,7 +1799,6 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 </svg>
               </button>
               <button
-                aria-describedby="_r_d_-loading-announcement"
                 aria-label="Mark as read"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
@@ -1842,7 +1828,6 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 </svg>
               </button>
               <button
-                aria-describedby="_r_e_-loading-announcement"
                 aria-label="Unsubscribe from thread"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
@@ -2113,7 +2098,6 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             data-wrap="nowrap"
           >
             <button
-              aria-describedby="_r_c_-loading-announcement"
               aria-label="Mark as done"
               class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
               data-component="IconButton"
@@ -2143,7 +2127,6 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               </svg>
             </button>
             <button
-              aria-describedby="_r_d_-loading-announcement"
               aria-label="Mark as read"
               class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
               data-component="IconButton"
@@ -2173,7 +2156,6 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               </svg>
             </button>
             <button
-              aria-describedby="_r_e_-loading-announcement"
               aria-label="Unsubscribe from thread"
               class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
               data-component="IconButton"
@@ -2501,7 +2483,6 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               data-wrap="nowrap"
             >
               <button
-                aria-describedby="_r_h_-loading-announcement"
                 aria-label="Mark as done"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
@@ -2531,7 +2512,6 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 </svg>
               </button>
               <button
-                aria-describedby="_r_i_-loading-announcement"
                 aria-label="Mark as read"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
@@ -2561,7 +2541,6 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 </svg>
               </button>
               <button
-                aria-describedby="_r_j_-loading-announcement"
                 aria-label="Unsubscribe from thread"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
@@ -2832,7 +2811,6 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             data-wrap="nowrap"
           >
             <button
-              aria-describedby="_r_h_-loading-announcement"
               aria-label="Mark as done"
               class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
               data-component="IconButton"
@@ -2862,7 +2840,6 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               </svg>
             </button>
             <button
-              aria-describedby="_r_i_-loading-announcement"
               aria-label="Mark as read"
               class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
               data-component="IconButton"
@@ -2892,7 +2869,6 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               </svg>
             </button>
             <button
-              aria-describedby="_r_j_-loading-announcement"
               aria-label="Unsubscribe from thread"
               class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
               data-component="IconButton"

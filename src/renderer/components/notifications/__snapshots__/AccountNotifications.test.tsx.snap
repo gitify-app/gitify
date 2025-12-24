@@ -23,7 +23,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-wrap="nowrap"
           >
             <button
-              aria-describedby="_r_t_-loading-announcement"
               class="prc-Button-ButtonBase-9n-Xk"
               data-has-count="true"
               data-loading="false"
@@ -104,7 +103,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               data-wrap="nowrap"
             >
               <button
-                aria-describedby="_r_u_-loading-announcement"
                 aria-label="My issues ↗"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
@@ -137,7 +135,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 </svg>
               </button>
               <button
-                aria-describedby="_r_v_-loading-announcement"
                 aria-label="My pull requests ↗"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
@@ -167,7 +164,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 </svg>
               </button>
               <button
-                aria-describedby="_r_10_-loading-announcement"
                 aria-label="No notifications for account"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
@@ -270,7 +266,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           data-wrap="nowrap"
         >
           <button
-            aria-describedby="_r_t_-loading-announcement"
             class="prc-Button-ButtonBase-9n-Xk"
             data-has-count="true"
             data-loading="false"
@@ -351,7 +346,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-wrap="nowrap"
           >
             <button
-              aria-describedby="_r_u_-loading-announcement"
               aria-label="My issues ↗"
               class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
               data-component="IconButton"
@@ -384,7 +378,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               </svg>
             </button>
             <button
-              aria-describedby="_r_v_-loading-announcement"
               aria-label="My pull requests ↗"
               class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
               data-component="IconButton"
@@ -414,7 +407,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               </svg>
             </button>
             <button
-              aria-describedby="_r_10_-loading-announcement"
               aria-label="No notifications for account"
               class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
               data-component="IconButton"
@@ -574,7 +566,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-wrap="nowrap"
           >
             <button
-              aria-describedby="_r_o_-loading-announcement"
               class="prc-Button-ButtonBase-9n-Xk"
               data-has-count="true"
               data-loading="false"
@@ -655,7 +646,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               data-wrap="nowrap"
             >
               <button
-                aria-describedby="_r_p_-loading-announcement"
                 aria-label="My issues ↗"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
@@ -688,7 +678,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 </svg>
               </button>
               <button
-                aria-describedby="_r_q_-loading-announcement"
                 aria-label="My pull requests ↗"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
@@ -718,7 +707,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 </svg>
               </button>
               <button
-                aria-describedby="_r_r_-loading-announcement"
                 aria-label="No notifications for account"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
@@ -821,7 +809,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           data-wrap="nowrap"
         >
           <button
-            aria-describedby="_r_o_-loading-announcement"
             class="prc-Button-ButtonBase-9n-Xk"
             data-has-count="true"
             data-loading="false"
@@ -902,7 +889,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-wrap="nowrap"
           >
             <button
-              aria-describedby="_r_p_-loading-announcement"
               aria-label="My issues ↗"
               class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
               data-component="IconButton"
@@ -935,7 +921,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               </svg>
             </button>
             <button
-              aria-describedby="_r_q_-loading-announcement"
               aria-label="My pull requests ↗"
               class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
               data-component="IconButton"
@@ -965,7 +950,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               </svg>
             </button>
             <button
-              aria-describedby="_r_r_-loading-announcement"
               aria-label="No notifications for account"
               class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
               data-component="IconButton"
@@ -1125,7 +1109,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-wrap="nowrap"
           >
             <button
-              aria-describedby="_r_6_-loading-announcement"
               class="prc-Button-ButtonBase-9n-Xk"
               data-has-count="true"
               data-loading="false"
@@ -1206,7 +1189,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               data-wrap="nowrap"
             >
               <button
-                aria-describedby="_r_7_-loading-announcement"
                 aria-label="My issues ↗"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
@@ -1239,7 +1221,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 </svg>
               </button>
               <button
-                aria-describedby="_r_8_-loading-announcement"
                 aria-label="My pull requests ↗"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
@@ -1269,7 +1250,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 </svg>
               </button>
               <button
-                aria-describedby="_r_9_-loading-announcement"
                 aria-label="Hide account notifications"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
@@ -1578,7 +1558,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               data-wrap="nowrap"
             >
               <button
-                aria-describedby="_r_b_-loading-announcement"
                 aria-label="Mark as done"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
@@ -1608,7 +1587,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 </svg>
               </button>
               <button
-                aria-describedby="_r_c_-loading-announcement"
                 aria-label="Mark as read"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
@@ -1638,7 +1616,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 </svg>
               </button>
               <button
-                aria-describedby="_r_d_-loading-announcement"
                 aria-label="Unsubscribe from thread"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
@@ -1871,7 +1848,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               data-wrap="nowrap"
             >
               <button
-                aria-describedby="_r_f_-loading-announcement"
                 aria-label="Mark as done"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
@@ -1901,7 +1877,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 </svg>
               </button>
               <button
-                aria-describedby="_r_g_-loading-announcement"
                 aria-label="Mark as read"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
@@ -1931,7 +1906,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 </svg>
               </button>
               <button
-                aria-describedby="_r_h_-loading-announcement"
                 aria-label="Unsubscribe from thread"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
@@ -1985,7 +1959,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           data-wrap="nowrap"
         >
           <button
-            aria-describedby="_r_6_-loading-announcement"
             class="prc-Button-ButtonBase-9n-Xk"
             data-has-count="true"
             data-loading="false"
@@ -2066,7 +2039,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-wrap="nowrap"
           >
             <button
-              aria-describedby="_r_7_-loading-announcement"
               aria-label="My issues ↗"
               class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
               data-component="IconButton"
@@ -2099,7 +2071,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               </svg>
             </button>
             <button
-              aria-describedby="_r_8_-loading-announcement"
               aria-label="My pull requests ↗"
               class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
               data-component="IconButton"
@@ -2129,7 +2100,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               </svg>
             </button>
             <button
-              aria-describedby="_r_9_-loading-announcement"
               aria-label="Hide account notifications"
               class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
               data-component="IconButton"
@@ -2438,7 +2408,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-wrap="nowrap"
           >
             <button
-              aria-describedby="_r_b_-loading-announcement"
               aria-label="Mark as done"
               class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
               data-component="IconButton"
@@ -2468,7 +2437,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               </svg>
             </button>
             <button
-              aria-describedby="_r_c_-loading-announcement"
               aria-label="Mark as read"
               class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
               data-component="IconButton"
@@ -2498,7 +2466,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               </svg>
             </button>
             <button
-              aria-describedby="_r_d_-loading-announcement"
               aria-label="Unsubscribe from thread"
               class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
               data-component="IconButton"
@@ -2731,7 +2698,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-wrap="nowrap"
           >
             <button
-              aria-describedby="_r_f_-loading-announcement"
               aria-label="Mark as done"
               class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
               data-component="IconButton"
@@ -2761,7 +2727,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               </svg>
             </button>
             <button
-              aria-describedby="_r_g_-loading-announcement"
               aria-label="Mark as read"
               class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
               data-component="IconButton"
@@ -2791,7 +2756,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               </svg>
             </button>
             <button
-              aria-describedby="_r_h_-loading-announcement"
               aria-label="Unsubscribe from thread"
               class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
               data-component="IconButton"
@@ -2902,7 +2866,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-wrap="nowrap"
           >
             <button
-              aria-describedby="_r_1_-loading-announcement"
               class="prc-Button-ButtonBase-9n-Xk"
               data-has-count="true"
               data-loading="false"
@@ -2983,7 +2946,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               data-wrap="nowrap"
             >
               <button
-                aria-describedby="_r_2_-loading-announcement"
                 aria-label="My issues ↗"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
@@ -3016,7 +2978,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 </svg>
               </button>
               <button
-                aria-describedby="_r_3_-loading-announcement"
                 aria-label="My pull requests ↗"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
@@ -3046,7 +3007,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 </svg>
               </button>
               <button
-                aria-describedby="_r_4_-loading-announcement"
                 aria-label="Hide account notifications"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
@@ -3103,7 +3063,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           data-wrap="nowrap"
         >
           <button
-            aria-describedby="_r_1_-loading-announcement"
             class="prc-Button-ButtonBase-9n-Xk"
             data-has-count="true"
             data-loading="false"
@@ -3184,7 +3143,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-wrap="nowrap"
           >
             <button
-              aria-describedby="_r_2_-loading-announcement"
               aria-label="My issues ↗"
               class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
               data-component="IconButton"
@@ -3217,7 +3175,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               </svg>
             </button>
             <button
-              aria-describedby="_r_3_-loading-announcement"
               aria-label="My pull requests ↗"
               class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
               data-component="IconButton"
@@ -3247,7 +3204,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               </svg>
             </button>
             <button
-              aria-describedby="_r_4_-loading-announcement"
               aria-label="Hide account notifications"
               class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
               data-component="IconButton"
@@ -3361,7 +3317,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-wrap="nowrap"
           >
             <button
-              aria-describedby="_r_j_-loading-announcement"
               class="prc-Button-ButtonBase-9n-Xk"
               data-has-count="true"
               data-loading="false"
@@ -3442,7 +3397,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               data-wrap="nowrap"
             >
               <button
-                aria-describedby="_r_k_-loading-announcement"
                 aria-label="My issues ↗"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
@@ -3475,7 +3429,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 </svg>
               </button>
               <button
-                aria-describedby="_r_l_-loading-announcement"
                 aria-label="My pull requests ↗"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
@@ -3505,7 +3458,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 </svg>
               </button>
               <button
-                aria-describedby="_r_m_-loading-announcement"
                 aria-label="No notifications for account"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
@@ -3603,7 +3555,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           data-wrap="nowrap"
         >
           <button
-            aria-describedby="_r_j_-loading-announcement"
             class="prc-Button-ButtonBase-9n-Xk"
             data-has-count="true"
             data-loading="false"
@@ -3684,7 +3635,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-wrap="nowrap"
           >
             <button
-              aria-describedby="_r_k_-loading-announcement"
               aria-label="My issues ↗"
               class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
               data-component="IconButton"
@@ -3717,7 +3667,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               </svg>
             </button>
             <button
-              aria-describedby="_r_l_-loading-announcement"
               aria-label="My pull requests ↗"
               class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
               data-component="IconButton"
@@ -3747,7 +3696,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               </svg>
             </button>
             <button
-              aria-describedby="_r_m_-loading-announcement"
               aria-label="No notifications for account"
               class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
               data-component="IconButton"
@@ -3902,7 +3850,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
             data-wrap="nowrap"
           >
             <button
-              aria-describedby="_r_1h_-loading-announcement"
               class="prc-Button-ButtonBase-9n-Xk"
               data-has-count="true"
               data-loading="false"
@@ -3983,7 +3930,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
               data-wrap="nowrap"
             >
               <button
-                aria-describedby="_r_1i_-loading-announcement"
                 aria-label="My issues ↗"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
@@ -4016,7 +3962,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
                 </svg>
               </button>
               <button
-                aria-describedby="_r_1j_-loading-announcement"
                 aria-label="My pull requests ↗"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
@@ -4046,7 +3991,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
                 </svg>
               </button>
               <button
-                aria-describedby="_r_1k_-loading-announcement"
                 aria-label="Show account notifications"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
@@ -4099,7 +4043,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
             data-wrap="nowrap"
           >
             <button
-              aria-describedby="_r_1m_-loading-announcement"
               class="prc-Button-ButtonBase-9n-Xk"
               data-has-count="true"
               data-loading="false"
@@ -4180,7 +4123,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
               data-wrap="nowrap"
             >
               <button
-                aria-describedby="_r_1n_-loading-announcement"
                 aria-label="My issues ↗"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
@@ -4213,7 +4155,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
                 </svg>
               </button>
               <button
-                aria-describedby="_r_1o_-loading-announcement"
                 aria-label="My pull requests ↗"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
@@ -4243,7 +4184,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
                 </svg>
               </button>
               <button
-                aria-describedby="_r_1p_-loading-announcement"
                 aria-label="Hide account notifications"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
@@ -4300,7 +4240,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
           data-wrap="nowrap"
         >
           <button
-            aria-describedby="_r_1m_-loading-announcement"
             class="prc-Button-ButtonBase-9n-Xk"
             data-has-count="true"
             data-loading="false"
@@ -4381,7 +4320,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
             data-wrap="nowrap"
           >
             <button
-              aria-describedby="_r_1n_-loading-announcement"
               aria-label="My issues ↗"
               class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
               data-component="IconButton"
@@ -4414,7 +4352,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
               </svg>
             </button>
             <button
-              aria-describedby="_r_1o_-loading-announcement"
               aria-label="My pull requests ↗"
               class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
               data-component="IconButton"
@@ -4444,7 +4381,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
               </svg>
             </button>
             <button
-              aria-describedby="_r_1p_-loading-announcement"
               aria-label="Hide account notifications"
               class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
               data-component="IconButton"
