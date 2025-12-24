@@ -4,6 +4,27 @@ import type { GitifyNotification, GitifySubject, Link } from './types';
 
 // TODO: #828 Add explicit types for GitHub API response vs Gitify Notifications object
 
+export interface User {
+  login: string;
+  id: number;
+  node_id: string;
+  avatar_url: Link;
+  gravatar_url: Link;
+  url: Link;
+  html_url: Link;
+  followers_url: Link;
+  following_url: Link;
+  gists_url: Link;
+  starred_url: Link;
+  subscriptions_url: Link;
+  organizations_url: Link;
+  repos_url: Link;
+  events_url: Link;
+  received_events_url: Link;
+  type: UserType;
+  site_admin: boolean;
+}
+
 export type Notification = GitHubNotification &
   GitifyNotification & {
     reason: Reason;

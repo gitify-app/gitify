@@ -88,7 +88,7 @@
     "@primer/css": "22.0.2",
     "@primer/octicons-react": "19.21.1",
     "@primer/primitives": "11.3.2",
-    "@primer/react": "38.6.1",
+    "@primer/react": "38.6.2",
     "@tailwindcss/postcss": "4.1.18",
     "@testing-library/jest-dom": "6.9.1",
     "@testing-library/react": "16.3.1",
@@ -135,7 +135,7 @@
     "webpack-cli": "6.0.1",
     "webpack-merge": "6.0.1"
   },
-  "packageManager": "pnpm@10.26.1",
+  "packageManager": "pnpm@10.26.2",
   "pnpm": {
     "onlyBuiltDependencies": [
       "@biomejs/biome",
