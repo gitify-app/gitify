@@ -5,6 +5,7 @@ import { TagIcon } from '@primer/octicons-react';
 
 import type {
   GitifyNotificationState,
+  GitifyNotificationUser,
   GitifySubject,
   Link,
   SettingsState,
@@ -33,16 +34,18 @@ class ReleaseHandler extends DefaultHandler {
       await getRelease(notification.subject.url, notification.account.token)
     ).data;
 
-    return {
-      state: releaseState,
-      user: getNotificationAuthor([
-        {
+    const releaseAuthor: GitifyNotificationUser = release.author
+      ? {
           login: release.author.login,
           html_url: release.author.html_url,
           avatar_url: release.author.avatar_url,
           type: release.author.type,
-        },
-      ]),
+        }
+      : null;
+
+    return {
+      state: releaseState,
+      user: getNotificationAuthor([releaseAuthor]),
     };
   }
 

@@ -39,23 +39,27 @@ class CommitHandler extends DefaultHandler {
         )
       ).data;
 
-      user = {
-        login: commitComment.user.login,
-        html_url: commitComment.user.html_url,
-        avatar_url: commitComment.user.avatar_url,
-        type: commitComment.user.type,
-      };
+      user = commitComment.user
+        ? {
+            login: commitComment.user.login,
+            html_url: commitComment.user.html_url,
+            avatar_url: commitComment.user.avatar_url,
+            type: commitComment.user.type,
+          }
+        : null;
     } else {
       const commit = (
         await getCommit(notification.subject.url, notification.account.token)
       ).data;
 
-      user = {
-        login: commit.author.login,
-        html_url: commit.author.html_url,
-        avatar_url: commit.author.avatar_url,
-        type: commit.author.type,
-      };
+      user = commit.author
+        ? {
+            login: commit.author.login,
+            html_url: commit.author.html_url,
+            avatar_url: commit.author.avatar_url,
+            type: commit.author.type,
+          }
+        : null;
     }
 
     return {
