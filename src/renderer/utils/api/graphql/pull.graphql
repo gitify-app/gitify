@@ -9,45 +9,49 @@ query FetchPullRequestByNumber(
 ) {
   repository(owner: $owner, name: $name) {
     pullRequest(number: $number) {
-      __typename
-      number
-      title
+      ...PullRequestDetails
+    }
+  }
+}
+
+fragment PullRequestDetails on PullRequest {
+  __typename
+  number
+  title
+  url
+  state
+  merged
+  isDraft
+  isInMergeQueue
+  milestone {
+    ...MilestoneFields
+  }
+  author {
+    ...AuthorFields
+  }
+  comments(last: $lastComments) {
+    totalCount
+    nodes {
       url
-      state
-      merged
-      isDraft
-      isInMergeQueue
-      milestone {
-        ...MilestoneFields
-      }
       author {
         ...AuthorFields
       }
-      comments(last: $lastComments) {
-        totalCount
-        nodes {
-          url
-          author {
-            ...AuthorFields
-          }
-        }
-      }
-      reviews(last: $lastReviews) {
-        totalCount
-        nodes {
-          ...PullRequestReviewFields
-        }
-      }
-      labels(first: $firstLabels) {
-        nodes {
-          name
-        }
-      }
-      closingIssuesReferences(first: $firstClosingIssues) {
-        nodes {
-          number
-        }
-      }
+    }
+  }
+  reviews(last: $lastReviews) {
+    totalCount
+    nodes {
+      ...PullRequestReviewFields
+    }
+  }
+  labels(first: $firstLabels) {
+    nodes {
+      name
+    }
+  }
+  closingIssuesReferences(first: $firstClosingIssues) {
+    nodes {
+      number
     }
   }
 }
