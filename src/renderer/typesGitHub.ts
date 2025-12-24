@@ -4,39 +4,7 @@ import type { GitifyNotification, GitifySubject, Link } from './types';
 
 // TODO: #828 Add explicit types for GitHub API response vs Gitify Notifications object
 
-export interface User {
-  login: string;
-  id: number;
-  node_id: string;
-  avatar_url: Link;
-  gravatar_url: Link;
-  url: Link;
-  html_url: Link;
-  followers_url: Link;
-  following_url: Link;
-  gists_url: Link;
-  starred_url: Link;
-  subscriptions_url: Link;
-  organizations_url: Link;
-  repos_url: Link;
-  events_url: Link;
-  received_events_url: Link;
-  type: UserType;
-  site_admin: boolean;
-}
-
-export type Notification = GitHubNotification &
-  GitifyNotification & {
-    reason: Reason;
-    subject: Subject;
-    repository: Repository;
-  };
-export type Subject = GitHubSubject & {
-  url: Link;
-  latest_comment_url: Link;
-  type: SubjectType;
-} & GitifySubject;
-
+// Stronger typings for Reason string attribute
 export type Reason =
   | 'approval_requested'
   | 'assign'
@@ -54,6 +22,7 @@ export type Reason =
   | 'subscribed'
   | 'team_mention';
 
+// Stronger typings for Subject Type string attribute
 export type SubjectType =
   | 'CheckSuite'
   | 'Commit'
@@ -66,12 +35,27 @@ export type SubjectType =
   | 'RepositoryVulnerabilityAlert'
   | 'WorkflowRun';
 
+// Stronger typings for Reason User Type attribute
 export type UserType =
   | 'Bot'
   | 'EnterpriseUserAccount'
   | 'Mannequin'
   | 'Organization'
   | 'User';
+
+export type Notification = GitHubNotification &
+  GitifyNotification & {
+    reason: Reason;
+    subject: Subject;
+    repository: Repository;
+  };
+export type Subject = GitHubSubject & {
+  url: Link;
+  latest_comment_url: Link;
+  type: SubjectType;
+} & GitifySubject;
+
+export type User = components['schemas']['simple-user'] & { type: UserType };
 
 export type GitHubNotification = components['schemas']['thread'];
 export type GitHubSubject = components['schemas']['thread']['subject'];
