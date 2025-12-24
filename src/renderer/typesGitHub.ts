@@ -72,8 +72,8 @@ type GitHubSubject = Omit<
   BaseSubject,
   'url' | 'latest_comment_url' | 'type'
 > & {
-  url: Link;
-  latest_comment_url: Link;
+  url: Link | null;
+  latest_comment_url: Link | null;
   type: SubjectType;
 };
 
