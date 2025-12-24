@@ -3,6 +3,7 @@ import type { components } from '@octokit/openapi-types';
 import type { GitifyNotification, GitifySubject, Link } from './types';
 
 // TODO: #828 Add explicit types for GitHub API response vs Gitify Notifications object
+
 export type Notification = GitHubNotification &
   GitifyNotification & {
     reason: Reason;
@@ -14,10 +15,6 @@ export type Subject = GitHubSubject & {
   latest_comment_url: Link;
   type: SubjectType;
 } & GitifySubject;
-
-/**
- * GitHub REST API Response Types
- **/
 
 export type Reason =
   | 'approval_requested'
