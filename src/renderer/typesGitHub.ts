@@ -1,3 +1,5 @@
+// import type { components } from '@octokit/openapi-types';
+
 import type { GitifyNotification, GitifySubject, Link } from './types';
 
 // TODO: #828 Add explicit types for GitHub API response vs Gitify Notifications object
@@ -46,6 +48,7 @@ export type UserType =
   | 'Organization'
   | 'User';
 
+// export type Notification = components['schemas']['thread'];
 export interface GitHubNotification {
   id: string;
   unread: boolean;
@@ -119,6 +122,7 @@ export interface User {
   site_admin: boolean;
 }
 
+// export type Repository = components['schemas']['repository'];
 export interface Repository {
   id: number;
   node_id: string;
@@ -189,6 +193,7 @@ export interface Owner {
   site_admin: boolean;
 }
 
+// export type Commit = components['schemas']['commit'];
 export interface Commit {
   sha: string;
   node_id: string;
@@ -260,6 +265,7 @@ export interface CommitComment {
   body: string;
 }
 
+// export type Release = components['schemas']['release'];
 export interface Release {
   url: Link;
   assets_url: Link;
@@ -283,6 +289,8 @@ export interface GitHubRESTError {
   documentation_url: Link;
 }
 
+// export type NotificationThreadSubscription =
+//   components['schemas']['thread-subscription'];
 export interface NotificationThreadSubscription {
   subscribed: boolean;
   ignored: boolean;
