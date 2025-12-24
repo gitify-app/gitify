@@ -42,7 +42,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
                 data-wrap="nowrap"
               >
                 <button
-                  aria-describedby="_r_2_-loading-announcement _r_1_"
+                  aria-describedby="_r_1_"
                   aria-label="Gitify"
                   class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                   data-component="IconButton"
@@ -109,7 +109,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
                   Home
                 </span>
                 <button
-                  aria-describedby="_r_4_-loading-announcement _r_3_"
+                  aria-describedby="_r_3_"
                   aria-label="Notifications"
                   class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                   data-component="IconButton"
@@ -148,7 +148,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
                   undefined unread notifications ↗
                 </span>
                 <button
-                  aria-describedby="_r_6_-loading-announcement _r_5_"
+                  aria-describedby="_r_5_"
                   aria-label="Filters"
                   class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                   data-component="IconButton"
@@ -187,7 +187,6 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
                   Filter notifications
                 </span>
                 <button
-                  aria-describedby="_r_8_-loading-announcement"
                   aria-labelledby="_r_7_"
                   class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                   data-component="IconButton"
@@ -228,7 +227,6 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
                   My issues ↗
                 </span>
                 <button
-                  aria-describedby="_r_a_-loading-announcement"
                   aria-labelledby="_r_9_"
                   class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                   data-component="IconButton"
@@ -279,7 +277,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
                   data-loading-wrapper="true"
                 >
                   <button
-                    aria-describedby="_r_c_-loading-announcement _r_b_"
+                    aria-describedby="_r_b_"
                     aria-label="Refresh"
                     class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                     data-component="IconButton"
@@ -319,7 +317,6 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
                   Refresh notifications
                 </span>
                 <button
-                  aria-describedby="_r_e_-loading-announcement"
                   aria-labelledby="_r_d_"
                   class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                   data-component="IconButton"
@@ -406,7 +403,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
               data-wrap="nowrap"
             >
               <button
-                aria-describedby="_r_2_-loading-announcement _r_1_"
+                aria-describedby="_r_1_"
                 aria-label="Gitify"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
@@ -473,7 +470,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
                 Home
               </span>
               <button
-                aria-describedby="_r_4_-loading-announcement _r_3_"
+                aria-describedby="_r_3_"
                 aria-label="Notifications"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
@@ -512,7 +509,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
                 undefined unread notifications ↗
               </span>
               <button
-                aria-describedby="_r_6_-loading-announcement _r_5_"
+                aria-describedby="_r_5_"
                 aria-label="Filters"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
@@ -551,7 +548,6 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
                 Filter notifications
               </span>
               <button
-                aria-describedby="_r_8_-loading-announcement"
                 aria-labelledby="_r_7_"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
@@ -592,7 +588,6 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
                 My issues ↗
               </span>
               <button
-                aria-describedby="_r_a_-loading-announcement"
                 aria-labelledby="_r_9_"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
@@ -643,7 +638,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
                 data-loading-wrapper="true"
               >
                 <button
-                  aria-describedby="_r_c_-loading-announcement _r_b_"
+                  aria-describedby="_r_b_"
                   aria-label="Refresh"
                   class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                   data-component="IconButton"
@@ -683,7 +678,6 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
                 Refresh notifications
               </span>
               <button
-                aria-describedby="_r_e_-loading-announcement"
                 aria-labelledby="_r_d_"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
