@@ -35,7 +35,14 @@ class ReleaseHandler extends DefaultHandler {
 
     return {
       state: releaseState,
-      user: getNotificationAuthor([release.author]),
+      user: getNotificationAuthor([
+        {
+          login: release.author.login,
+          html_url: release.author.html_url,
+          avatar_url: release.author.avatar_url,
+          type: release.author.type,
+        },
+      ]),
     };
   }
 

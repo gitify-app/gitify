@@ -1,15 +1,22 @@
-// import type { components } from '@octokit/openapi-types';
+import type { components } from '@octokit/openapi-types';
 
 import type { GitifyNotification, GitifySubject, Link } from './types';
 
 // TODO: #828 Add explicit types for GitHub API response vs Gitify Notifications object
-export type Notification = GitHubNotification & GitifyNotification;
-export type Subject = GitHubSubject & GitifySubject;
+export type Notification = GitHubNotification &
+  GitifyNotification & {
+    reason: Reason;
+    subject: Subject;
+    repository: Repository;
+  };
+export type Subject = GitHubSubject & {
+  url: Link;
+  latest_comment_url: Link;
+  type: SubjectType;
+} & GitifySubject;
 
 /**
- *
  * GitHub REST API Response Types
- *
  **/
 
 export type Reason =
@@ -48,254 +55,48 @@ export type UserType =
   | 'Organization'
   | 'User';
 
-// export type Notification = components['schemas']['thread'];
-export interface GitHubNotification {
-  id: string;
-  unread: boolean;
-  reason: Reason;
-  updated_at: string;
-  last_read_at: string | null;
-  subject: Subject;
-  repository: Repository;
-  url: Link;
-  subscription_url: Link;
-}
+export type GitHubNotification = components['schemas']['thread'];
+export type GitHubSubject = components['schemas']['thread']['subject'];
 
-interface GitHubSubject {
-  title: string;
-  url: Link | null;
-  latest_comment_url: Link | null;
-  type: SubjectType;
-}
-
-export type UserDetails = User & UserProfile;
-
-export interface UserProfile {
-  name: string;
-  company: string;
-  blog: string;
-  location: string;
-  email: string;
-  hireable: string;
-  bio: string;
-  twitter_username: string;
-  public_repos: number;
-  public_gists: number;
-  followers: number;
-  following: number;
-  created_at: string;
-  updated_at: string;
-  private_gists: number;
-  total_private_repos: number;
-  owned_private_repos: number;
-  disk_usage: number;
-  collaborators: number;
-  two_factor_authentication: boolean;
-  plan: Plan;
-}
-
-export interface Plan {
-  name: string;
-  space: number;
-  private_repos: number;
-  collaborators: number;
-}
-
-export interface User {
-  login: string;
-  id: number;
-  node_id: string;
-  avatar_url: Link;
-  gravatar_url: Link;
-  url: Link;
+export type Repository = components['schemas']['repository'] & {
   html_url: Link;
-  followers_url: Link;
-  following_url: Link;
-  gists_url: Link;
-  starred_url: Link;
-  subscriptions_url: Link;
-  organizations_url: Link;
-  repos_url: Link;
-  events_url: Link;
-  received_events_url: Link;
-  type: UserType;
-  site_admin: boolean;
-}
-
-// export type Repository = components['schemas']['repository'];
-export interface Repository {
-  id: number;
-  node_id: string;
-  name: string;
-  full_name: string;
-  private: boolean;
   owner: Owner;
-  html_url: Link;
-  description: string;
-  fork: boolean;
-  url: Link;
-  forks_url: Link;
-  keys_url: Link;
-  collaborators_url: Link;
-  teams_url: Link;
-  hooks_url: Link;
-  issue_events_url: Link;
-  events_url: Link;
-  assignees_url: Link;
-  branches_url: Link;
-  tags_url: Link;
-  blobs_url: Link;
-  git_tags_url: Link;
-  git_refs_url: Link;
-  trees_url: Link;
-  statuses_url: Link;
-  languages_url: Link;
-  stargazers_url: Link;
-  contributors_url: Link;
-  subscribers_url: Link;
-  subscription_url: Link;
-  commits_url: Link;
-  git_commits_url: Link;
-  comments_url: Link;
-  issue_comment_url: Link;
-  contents_url: Link;
-  compare_url: Link;
-  merges_url: Link;
-  archive_url: Link;
-  downloads_url: Link;
-  issues_url: Link;
-  pulls_url: Link;
-  milestones_url: Link;
-  notifications_url: Link;
-  labels_url: Link;
-  releases_url: Link;
-  deployments_url: Link;
-}
+};
 
-export interface Owner {
-  login: string;
-  id: number;
-  node_id: string;
-  avatar_url: Link;
-  gravatar_id: string;
-  url: Link;
-  html_url: Link;
-  followers_url: Link;
-  following_url: Link;
-  gists_url: Link;
-  starred_url: Link;
-  subscriptions_url: Link;
-  organizations_url: Link;
-  repos_url: Link;
-  events_url: Link;
-  received_events_url: Link;
+export type Owner = NonNullable<BaseRepository['owner']> & {
   type: UserType;
-  site_admin: boolean;
-}
+  avatar_url: Link;
+};
+type BaseRepository = components['schemas']['repository'];
 
-// export type Commit = components['schemas']['commit'];
-export interface Commit {
-  sha: string;
-  node_id: string;
-  commit: {
-    author: CommitUser;
-    committer: CommitUser;
-    message: string;
-    tree: {
-      sha: string;
-      url: Link;
-    };
-    url: Link;
-    comment_count: number;
-    verification: {
-      verified: boolean;
-      reason: string;
-      signature: string | null;
-      payload: string | null;
-    };
-  };
-  url: Link;
-  html_url: Link;
-  comments_url: Link;
-  author: User;
-  committer: User;
-  parents: CommitParent[];
-  stats: {
-    total: number;
-    additions: number;
-    deletions: number;
-  };
-  files: CommitFiles[];
-}
+export type Commit = Omit<BaseCommit, 'author'> & {
+  author: BaseCommit['author'] extends null ? null : StrongCommitAuthor;
+};
+type BaseCommit = components['schemas']['commit'];
+type StrongCommitAuthor = NonNullable<BaseCommit['author']> & {
+  type: UserType;
+};
 
-interface CommitUser {
-  name: string;
-  email: string;
-  date: string;
-}
+export type CommitComment = Omit<BaseCommitComment, 'user'> & {
+  user: BaseCommitComment['user'] extends null ? null : StrongCommitCommentUser;
+};
+type BaseCommitComment = components['schemas']['commit-comment'];
+type StrongCommitCommentUser = NonNullable<BaseCommitComment['user']> & {
+  type: UserType;
+};
 
-interface CommitParent {
-  sha: string;
-  url: Link;
-  html_url: Link;
-}
+export type Release = Omit<BaseRelease, 'author'> & {
+  author: BaseRelease['author'] extends null ? null : StrongReleaseAuthor;
+};
+type BaseRelease = components['schemas']['release'];
+type StrongReleaseAuthor = NonNullable<BaseRelease['author']> & {
+  type: UserType;
+};
 
-interface CommitFiles {
-  sha: string;
-  filename: string;
-  status: string;
-  additions: number;
-  deletions: number;
-  changes: number;
-  blob_url: Link;
-  raw_url: Link;
-  contents_url: Link;
-  patch: string;
-}
-
-export interface CommitComment {
-  url: Link;
-  html_url: Link;
-  issue_url: Link;
-  id: number;
-  node_id: string;
-  user: User;
-  created_at: string;
-  updated_at: string;
-  body: string;
-}
-
-// export type Release = components['schemas']['release'];
-export interface Release {
-  url: Link;
-  assets_url: Link;
-  upload_url: Link;
-  html_url: Link;
-  id: number;
-  author: User;
-  node_id: string;
-  tag_name: string;
-  target_commitish: string;
-  name: string | null;
-  body: string | null;
-  draft: boolean;
-  prerelease: boolean;
-  created_at: string;
-  published_at: string | null;
-}
+export type NotificationThreadSubscription =
+  components['schemas']['thread-subscription'];
 
 export interface GitHubRESTError {
   message: string;
   documentation_url: Link;
-}
-
-// export type NotificationThreadSubscription =
-//   components['schemas']['thread-subscription'];
-export interface NotificationThreadSubscription {
-  subscribed: boolean;
-  ignored: boolean;
-  reason: string | null;
-  created_at: string;
-  url: Link;
-  thread_url: Link;
 }
