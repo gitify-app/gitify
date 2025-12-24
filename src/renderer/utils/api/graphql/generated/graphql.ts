@@ -36083,6 +36083,11 @@ export type PullRequestReviewFieldsFragment = { __typename?: 'PullRequestReview'
     | { __typename?: 'User', login: string }
    | null };
 
+export type FetchAuthenticatedUserDetailsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type FetchAuthenticatedUserDetailsQuery = { __typename?: 'Query', viewer: { __typename?: 'User', id: string, name?: string | null, login: string, avatarUrl: any } };
+
 export class TypedDocumentString<TResult, TVariables>
   extends String
   implements DocumentTypeDecoration<TResult, TVariables>
@@ -36469,3 +36474,13 @@ fragment PullRequestReviewFields on PullRequestReview {
     login
   }
 }`) as unknown as TypedDocumentString<FetchPullRequestByNumberQuery, FetchPullRequestByNumberQueryVariables>;
+export const FetchAuthenticatedUserDetailsDocument = new TypedDocumentString(`
+    query FetchAuthenticatedUserDetails {
+  viewer {
+    id
+    name
+    login
+    avatarUrl
+  }
+}
+    `) as unknown as TypedDocumentString<FetchAuthenticatedUserDetailsQuery, FetchAuthenticatedUserDetailsQueryVariables>;

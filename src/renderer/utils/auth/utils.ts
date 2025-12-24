@@ -9,13 +9,11 @@ import type {
   AuthCode,
   AuthState,
   ClientID,
-  GitifyUser,
   Hostname,
   Link,
   Token,
 } from '../../types';
-import type { UserDetails } from '../../typesGitHub';
-import { getAuthenticatedUser } from '../api/client';
+import { fetchAuthenticatedUserDetails } from '../api/client';
 import { apiRequest } from '../api/request';
 import { encryptValue, openExternalLink } from '../comms';
 import { getPlatformFromHostname } from '../helpers';
@@ -71,21 +69,6 @@ export function authGitHub(
       handleCallback(callbackUrl);
     });
   });
-}
-
-export async function getUserData(
-  token: Token,
-  hostname: Hostname,
-): Promise<GitifyUser> {
-  const response: UserDetails = (await getAuthenticatedUser(hostname, token))
-    .data;
-
-  return {
-    id: response.id,
-    login: response.login,
-    name: response.name,
-    avatar: response.avatar_url,
-  };
 }
 
 export async function getToken(
@@ -156,21 +139,25 @@ export function removeAccount(auth: AuthState, account: Account): AuthState {
 
 export async function refreshAccount(account: Account): Promise<Account> {
   try {
-    const res = await getAuthenticatedUser(account.hostname, account.token);
+    const response = await fetchAuthenticatedUserDetails(
+      account.hostname,
+      account.token,
+    );
+    const user = response.data.viewer;
 
     // Refresh user data
     account.user = {
-      id: res.data.id,
-      login: res.data.login,
-      name: res.data.name,
-      avatar: res.data.avatar_url,
+      id: user.id,
+      login: user.login,
+      name: user.name,
+      avatar: user.avatarUrl,
     };
 
     account.version = extractHostVersion(
-      res.headers['x-github-enterprise-version'],
+      response.headers['x-github-enterprise-version'],
     );
 
-    const accountScopes = res.headers['x-oauth-scopes']
+    const accountScopes = response.headers['x-oauth-scopes']
       ?.split(',')
       .map((scope: string) => scope.trim());
 

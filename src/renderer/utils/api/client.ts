@@ -14,11 +14,12 @@ import type {
   Notification,
   NotificationThreadSubscription,
   Release,
-  UserDetails,
 } from '../../typesGitHub';
 import { isAnsweredDiscussionFeatureSupported } from '../features';
 import { rendererLogError } from '../logger';
 import {
+  FetchAuthenticatedUserDetailsDocument,
+  type FetchAuthenticatedUserDetailsQuery,
   FetchDiscussionByNumberDocument,
   type FetchDiscussionByNumberQuery,
   FetchIssueByNumberDocument,
@@ -26,27 +27,16 @@ import {
   FetchPullRequestByNumberDocument,
   type FetchPullRequestByNumberQuery,
 } from './graphql/generated/graphql';
-import { apiRequestAuth, performGraphQLRequest } from './request';
+import {
+  apiRequestAuth,
+  type ExecutionResultWithHeaders,
+  performGraphQLRequest,
+} from './request';
 import {
   getGitHubAPIBaseUrl,
   getGitHubGraphQLUrl,
   getNumberFromUrl,
 } from './utils';
-
-/**
- * Get the authenticated user
- *
- * Endpoint documentation: https://docs.github.com/en/rest/users/users#get-the-authenticated-user
- */
-export function getAuthenticatedUser(
-  hostname: Hostname,
-  token: Token,
-): AxiosPromise<UserDetails> {
-  const url = getGitHubAPIBaseUrl(hostname);
-  url.pathname += 'user';
-
-  return apiRequestAuth(url.toString() as Link, 'GET', token);
-}
 
 /**
  * Perform a HEAD operation, used to validate that connectivity is established.
@@ -185,6 +175,22 @@ export async function getHtmlUrl(url: Link, token: Token): Promise<string> {
       err,
     );
   }
+}
+
+/**
+ * Fetch details of the currently authenticated GitHub user.
+ */
+export async function fetchAuthenticatedUserDetails(
+  hostname: Hostname,
+  token: Token,
+): Promise<ExecutionResultWithHeaders<FetchAuthenticatedUserDetailsQuery>> {
+  const url = getGitHubGraphQLUrl(hostname);
+
+  return performGraphQLRequest(
+    url.toString() as Link,
+    token,
+    FetchAuthenticatedUserDetailsDocument,
+  );
 }
 
 /**
