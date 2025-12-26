@@ -16,7 +16,6 @@ import type {
 } from '../../../types';
 import { IconColor } from '../../../types';
 import type { Notification, Subject } from '../../../typesGitHub';
-import { fetchIssueByNumber } from '../../api/client';
 import type { IssueDetailsFragment } from '../../api/graphql/generated/graphql';
 import { DefaultHandler, defaultHandler } from './default';
 import { getNotificationAuthor } from './utils';
@@ -25,7 +24,7 @@ class IssueHandler extends DefaultHandler {
   readonly type = 'Issue';
 
   async enrich(
-    notification: Notification,
+    _notification: Notification,
     _settings: SettingsState,
     fetchedData?: IssueDetailsFragment,
   ): Promise<GitifySubject> {

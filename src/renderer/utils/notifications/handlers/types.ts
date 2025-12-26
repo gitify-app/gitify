@@ -11,20 +11,20 @@ export interface NotificationTypeHandler<TFragment = unknown> {
   query(notification: Notification): { query; variables } | null;
 
   /**
-   * Enrich a notification. Settings may be unused for some handlers.
-   */
-  enrich(
-    notification: Notification,
-    settings: SettingsState,
-    fetchedData?: TFragment,
-  ): Promise<GitifySubject>;
-
-  /**
    * Fetch remote data (if needed) and enrich a notification.
    */
   fetchAndEnrich(
     notification: Notification,
     settings: SettingsState,
+  ): Promise<GitifySubject>;
+
+  /**
+   * Enrich a notification. Settings may be unused for some handlers.
+   */
+  enrich(
+    notification: Notification,
+    settings?: SettingsState,
+    fetchedData?: TFragment,
   ): Promise<GitifySubject>;
 
   /**
