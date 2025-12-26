@@ -1,15 +1,17 @@
-import { parse } from 'graphql';
-import combineQuery from 'graphql-combine-query';
+import axios from 'axios';
 
 import type {
   AccountNotifications,
   GitifyState,
   GitifySubject,
+  Link,
   SettingsState,
 } from '../../types';
 import type { Notification } from '../../typesGitHub';
 import { listNotificationsForAuthenticatedUser } from '../api/client';
 import { determineFailureType } from '../api/errors';
+import { getHeaders } from '../api/request';
+import { getGitHubGraphQLUrl, getNumberFromUrl } from '../api/utils';
 import { rendererLogError, rendererLogWarn } from '../logger';
 import {
   filterBaseNotifications,
@@ -133,20 +135,93 @@ export async function enrichNotifications(
   }
 
   // Build combined query for pull requests (builder is immutable)
-  const buildQuery = combineQuery('PullRequestBatch');
+  let mergedQuery = '';
+  let i = 0;
+  const args = [];
 
   for (const notification of notifications) {
     if (notification.subject.type === 'PullRequest') {
-      const handler = createNotificationHandler(notification);
-      const queryData = handler.query(notification);
+      const org = notification.repository.owner.login;
+      const repo = notification.repository.name;
+      const number = getNumberFromUrl(notification.subject.url);
 
-      if (queryData?.query && queryData?.variables) {
-        buildQuery.addN(parse(queryData.query), queryData.variables);
-      }
+      args.push({
+        org: org,
+        repo: repo,
+        number: number,
+      });
+
+      mergedQuery += `repo${i}: repository(owner: $owner${i}, name: $name${i}) {
+          pullRequest(number: $number${i}) {
+            title
+          }
+        }\n`;
+
+      i += 1;
+
+      // const handler = createNotificationHandler(notification);
+      // const queryData = handler.query(notification);
     }
   }
 
-  // console.log('ADAM COMBINED QUERY: ', JSON.stringify(buildQuery, null, 2));
+  let queryArgs = '';
+  let queryArgsVariables = {};
+
+  for (let idx = 0; idx < args.length; idx++) {
+    const arg = args[idx];
+    if (idx > 0) {
+      queryArgs += ', ';
+    }
+    queryArgs += `$owner${idx}: String!, $name${idx}: String!, $number${idx}: Int!`;
+    queryArgsVariables = {
+      ...queryArgsVariables,
+      [`owner${idx}`]: arg.org,
+      [`name${idx}`]: arg.repo,
+      [`number${idx}`]: arg.number,
+    };
+  }
+
+  mergedQuery = `query JumboQuery(${queryArgs}) {\n${mergedQuery}}\n`;
+
+  console.log('ADAM COMBINED QUERY ', JSON.stringify(mergedQuery, null, 2));
+  console.log(
+    'ADAM COMBINED ARGS ',
+    JSON.stringify(queryArgsVariables, null, 2),
+  );
+
+  try {
+    const url = getGitHubGraphQLUrl(
+      notifications[0].account.hostname,
+    ).toString();
+    const token = notifications[0].account.token;
+
+    const headers = await getHeaders(url as Link, token);
+
+    axios({
+      method: 'POST',
+      url,
+      data: {
+        query: mergedQuery,
+        variables: queryArgsVariables,
+      },
+      headers: headers,
+    }).then((response) => {
+      console.log('ADAM RESPONSE ', JSON.stringify(response, null, 2));
+    });
+  } catch (err) {
+    console.error('oops');
+  }
+
+  //   const headers = await getHeaders(url.toString() as Link, token);
+
+  //   await axios.post(url.toString(), combined, { headers });
+  // } catch (err) {
+  //   rendererLogError(
+  //     'enrichNotifications',
+  //     'failed to fetch batch pull request details',
+  //     err,
+  //   );
+  // }
 
   const enrichedNotifications = await Promise.all(
     notifications.map(async (notification: Notification) => {
