@@ -18,7 +18,7 @@ import { getNotificationAuthor } from './utils';
 class ReleaseHandler extends DefaultHandler {
   readonly type = 'Release';
 
-  async enrich(
+  async fetchAndEnrich(
     notification: Notification,
     settings: SettingsState,
   ): Promise<GitifySubject> {

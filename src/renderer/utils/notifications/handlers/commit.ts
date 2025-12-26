@@ -18,7 +18,7 @@ import { getNotificationAuthor } from './utils';
 class CommitHandler extends DefaultHandler {
   readonly type = 'Commit';
 
-  async enrich(
+  async fetchAndEnrich(
     notification: Notification,
     settings: SettingsState,
     _fetchedData?: unknown,
