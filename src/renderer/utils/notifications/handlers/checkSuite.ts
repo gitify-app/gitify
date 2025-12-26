@@ -34,6 +34,7 @@ class CheckSuiteHandler extends DefaultHandler {
   async enrich(
     notification: Notification,
     _settings: SettingsState,
+    _fetchedData?: unknown,
   ): Promise<GitifySubject> {
     const state = getCheckSuiteAttributes(notification)?.status;
 

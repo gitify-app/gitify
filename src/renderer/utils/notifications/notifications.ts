@@ -209,6 +209,11 @@ export async function enrichNotifications(
   const extraVariableDefinitions = new Map<string, string>();
   const extraVariableValues: Record<string, number | boolean> = {};
   const fragments = new Map<string, string>();
+  const targets: Array<{
+    alias: string;
+    kind: NotificationKind;
+    notification: Notification;
+  }> = [];
 
   const collectFragments = (doc: string) => {
     const fragmentRegex =
@@ -242,6 +247,8 @@ export async function enrichNotifications(
     const repo = notification.repository.name;
     const number = getNumberFromUrl(notification.subject.url);
 
+    const alias = `${config.aliasPrefix}${index}`;
+
     selections.push(config.selection(index));
     variableDefinitions.push(
       `$owner${index}: String!, $name${index}: String!, $number${index}: Int!`,
@@ -249,6 +256,7 @@ export async function enrichNotifications(
     variableValues[`owner${index}`] = org;
     variableValues[`name${index}`] = repo;
     variableValues[`number${index}`] = number;
+    targets.push({ alias, kind, notification });
 
     for (const extra of config.extras) {
       if (!extraVariableDefinitions.has(extra.name)) {
@@ -289,8 +297,7 @@ ${Array.from(fragments.values()).join('\n')}`;
     ...extraVariableValues,
   };
 
-  console.log('MERGED QUERY ', JSON.stringify(mergedQuery, null, 2));
-  console.log('MERGED ARGS ', JSON.stringify(queryVariables, null, 2));
+  let mergedData: Record<string, unknown> | null = null;
 
   try {
     const url = getGitHubGraphQLUrl(
@@ -300,7 +307,7 @@ ${Array.from(fragments.values()).join('\n')}`;
 
     const headers = await getHeaders(url as Link, token);
 
-    axios({
+    const response = await axios({
       method: 'POST',
       url,
       data: {
@@ -308,16 +315,65 @@ ${Array.from(fragments.values()).join('\n')}`;
         variables: queryVariables,
       },
       headers: headers,
-    }).then((response) => {
-      console.log('MERGED RESPONSE ', JSON.stringify(response, null, 2));
     });
+
+    mergedData =
+      (response.data as { data?: Record<string, unknown> })?.data ?? null;
   } catch (err) {
-    console.error('Failed to fetch merged notification details', err);
+    rendererLogError(
+      'enrichNotifications',
+      'Failed to fetch merged notification details',
+      err,
+    );
   }
 
   const enrichedNotifications = await Promise.all(
     notifications.map(async (notification: Notification) => {
-      return enrichNotification(notification, settings);
+      const handler = createNotificationHandler(notification);
+
+      const target = targets.find((item) => item.notification === notification);
+
+      if (mergedData && target) {
+        const repoData = mergedData[target.alias] as
+          | { pullRequest?: unknown; issue?: unknown; discussion?: unknown }
+          | undefined;
+
+        let fragment: unknown;
+        if (target.kind === 'PullRequest') {
+          fragment = repoData?.pullRequest;
+        } else if (target.kind === 'Issue') {
+          fragment = repoData?.issue;
+        } else if (target.kind === 'Discussion') {
+          fragment = repoData?.discussion;
+        }
+
+        if (fragment) {
+          const details = await handler.enrich(
+            notification,
+            settings,
+            fragment,
+          );
+          return {
+            ...notification,
+            subject: {
+              ...notification.subject,
+              ...details,
+            },
+          };
+        }
+      }
+
+      const fetchedDetails = await handler.fetchAndEnrich(
+        notification,
+        settings,
+      );
+      return {
+        ...notification,
+        subject: {
+          ...notification.subject,
+          ...fetchedDetails,
+        },
+      };
     }),
   );
 
@@ -339,7 +395,10 @@ export async function enrichNotification(
 
   try {
     const handler = createNotificationHandler(notification);
-    additionalSubjectDetails = await handler.enrich(notification, settings);
+    additionalSubjectDetails = await handler.fetchAndEnrich(
+      notification,
+      settings,
+    );
   } catch (err) {
     rendererLogError(
       'enrichNotification',

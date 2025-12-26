@@ -17,6 +17,7 @@ import type {
 import { IconColor } from '../../../types';
 import type { Notification, Subject } from '../../../typesGitHub';
 import { fetchIssueByNumber } from '../../api/client';
+import type { IssueDetailsFragment } from '../../api/graphql/generated/graphql';
 import { DefaultHandler, defaultHandler } from './default';
 import { getNotificationAuthor } from './utils';
 
@@ -26,9 +27,9 @@ class IssueHandler extends DefaultHandler {
   async enrich(
     notification: Notification,
     _settings: SettingsState,
+    fetchedData?: IssueDetailsFragment,
   ): Promise<GitifySubject> {
-    const response = await fetchIssueByNumber(notification);
-    const issue = response.data.repository?.issue;
+    const issue = fetchedData;
 
     const issueState = issue.stateReason ?? issue.state;
 

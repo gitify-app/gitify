@@ -21,6 +21,7 @@ class CommitHandler extends DefaultHandler {
   async enrich(
     notification: Notification,
     settings: SettingsState,
+    _fetchedData?: unknown,
   ): Promise<GitifySubject> {
     const commitState: GitifyNotificationState = null; // Commit notifications are stateless
 

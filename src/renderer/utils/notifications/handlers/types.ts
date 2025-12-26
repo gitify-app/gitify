@@ -5,7 +5,7 @@ import type { OcticonProps } from '@primer/octicons-react';
 import type { GitifySubject, Link, SettingsState } from '../../../types';
 import type { Notification, Subject, SubjectType } from '../../../typesGitHub';
 
-export interface NotificationTypeHandler {
+export interface NotificationTypeHandler<TFragment = unknown> {
   readonly type?: SubjectType;
 
   query(notification: Notification): { query; variables } | null;
@@ -14,6 +14,15 @@ export interface NotificationTypeHandler {
    * Enrich a notification. Settings may be unused for some handlers.
    */
   enrich(
+    notification: Notification,
+    settings: SettingsState,
+    fetchedData?: TFragment,
+  ): Promise<GitifySubject>;
+
+  /**
+   * Fetch remote data (if needed) and enrich a notification.
+   */
+  fetchAndEnrich(
     notification: Notification,
     settings: SettingsState,
   ): Promise<GitifySubject>;

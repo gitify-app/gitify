@@ -19,7 +19,10 @@ import {
 } from '../../../types';
 import type { Notification, Subject } from '../../../typesGitHub';
 import { fetchPullByNumber } from '../../api/client';
-import type { PullRequestReviewFieldsFragment } from '../../api/graphql/generated/graphql';
+import type {
+  PullRequestDetailsFragment,
+  PullRequestReviewFieldsFragment,
+} from '../../api/graphql/generated/graphql';
 import { DefaultHandler, defaultHandler } from './default';
 import { getNotificationAuthor } from './utils';
 
@@ -29,9 +32,11 @@ class PullRequestHandler extends DefaultHandler {
   async enrich(
     notification: Notification,
     _settings: SettingsState,
+    fetchedData?: PullRequestDetailsFragment,
   ): Promise<GitifySubject> {
-    const response = await fetchPullByNumber(notification);
-    const pr = response.data.repository.pullRequest;
+    const pr =
+      fetchedData ??
+      (await fetchPullByNumber(notification)).data.repository.pullRequest;
 
     let prState: GitifyPullRequestState = pr.state;
     if (pr.isDraft) {

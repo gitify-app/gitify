@@ -16,11 +16,15 @@ export class DefaultHandler implements NotificationTypeHandler {
     return null;
   }
 
-  async enrich(
-    _notification: Notification,
-    _settings: SettingsState,
-  ): Promise<GitifySubject> {
+  async enrich(_fetchedData?: unknown): Promise<GitifySubject> {
     return null;
+  }
+
+  async fetchAndEnrich(
+    notification: Notification,
+    settings: SettingsState,
+  ): Promise<GitifySubject> {
+    return this.enrich(notification, settings, undefined);
   }
 
   iconType(_subject: Subject): FC<OcticonProps> | null {
