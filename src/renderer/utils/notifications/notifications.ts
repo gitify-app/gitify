@@ -10,6 +10,7 @@ import type {
 import type { Notification } from '../../typesGitHub';
 import { listNotificationsForAuthenticatedUser } from '../api/client';
 import { determineFailureType } from '../api/errors';
+import { PullRequestDetailsFragmentDoc } from '../api/graphql/generated/graphql';
 import { getHeaders } from '../api/request';
 import { getGitHubGraphQLUrl, getNumberFromUrl } from '../api/utils';
 import { rendererLogError, rendererLogWarn } from '../logger';
@@ -134,10 +135,10 @@ export async function enrichNotifications(
     return notifications;
   }
 
-  // Build combined query for pull requests (builder is immutable)
+  // Build combined query for pull requests
   let mergedQuery = '';
   let i = 0;
-  const args = [];
+  const args: Array<{ org: string; repo: string; number: number }> = [];
 
   for (const notification of notifications) {
     if (notification.subject.type === 'PullRequest') {
@@ -146,26 +147,33 @@ export async function enrichNotifications(
       const number = getNumberFromUrl(notification.subject.url);
 
       args.push({
-        org: org,
-        repo: repo,
-        number: number,
+        org,
+        repo,
+        number,
       });
 
-      mergedQuery += `repo${i}: repository(owner: $owner${i}, name: $name${i}) {
+      mergedQuery += `pr${i}: repository(owner: $owner${i}, name: $name${i}) {
           pullRequest(number: $number${i}) {
-            title
+            ...PullRequestDetails
           }
         }\n`;
 
       i += 1;
-
-      // const handler = createNotificationHandler(notification);
-      // const queryData = handler.query(notification);
     }
   }
 
+  // If no pull requests, return early
+  if (args.length === 0) {
+    const enrichedNotifications = await Promise.all(
+      notifications.map(async (notification: Notification) => {
+        return enrichNotification(notification, settings);
+      }),
+    );
+    return enrichedNotifications;
+  }
+
   let queryArgs = '';
-  let queryArgsVariables = {};
+  const queryArgsVariables: Record<string, string | number> = {};
 
   for (let idx = 0; idx < args.length; idx++) {
     const arg = args[idx];
@@ -173,21 +181,24 @@ export async function enrichNotifications(
       queryArgs += ', ';
     }
     queryArgs += `$owner${idx}: String!, $name${idx}: String!, $number${idx}: Int!`;
-    queryArgsVariables = {
-      ...queryArgsVariables,
-      [`owner${idx}`]: arg.org,
-      [`name${idx}`]: arg.repo,
-      [`number${idx}`]: arg.number,
-    };
+    queryArgsVariables[`owner${idx}`] = arg.org;
+    queryArgsVariables[`name${idx}`] = arg.repo;
+    queryArgsVariables[`number${idx}`] = arg.number;
   }
 
-  mergedQuery = `query JumboQuery(${queryArgs}) {\n${mergedQuery}}\n`;
+  // Add variables from PullRequestDetailsFragment
+  queryArgs +=
+    ', $firstLabels: Int, $lastComments: Int, $lastReviews: Int, $firstClosingIssues: Int';
+  queryArgsVariables['firstLabels'] = 100;
+  queryArgsVariables['lastComments'] = 100;
+  queryArgsVariables['lastReviews'] = 100;
+  queryArgsVariables['firstClosingIssues'] = 100;
 
-  console.log('ADAM COMBINED QUERY ', JSON.stringify(mergedQuery, null, 2));
-  console.log(
-    'ADAM COMBINED ARGS ',
-    JSON.stringify(queryArgsVariables, null, 2),
-  );
+  const fragmentQuery = PullRequestDetailsFragmentDoc.toString();
+  mergedQuery = `query FetchMergedPullRequests(${queryArgs}) {\n${mergedQuery}}\n\n${fragmentQuery}`;
+
+  console.log('MERGED QUERY ', JSON.stringify(mergedQuery, null, 2));
+  console.log('MERGED ARGS ', JSON.stringify(queryArgsVariables, null, 2));
 
   try {
     const url = getGitHubGraphQLUrl(
@@ -206,22 +217,11 @@ export async function enrichNotifications(
       },
       headers: headers,
     }).then((response) => {
-      console.log('ADAM RESPONSE ', JSON.stringify(response, null, 2));
+      console.log('MERGED RESPONSE ', JSON.stringify(response, null, 2));
     });
   } catch (err) {
-    console.error('oops');
+    console.error('Failed to fetch merged pull request details', err);
   }
-
-  //   const headers = await getHeaders(url.toString() as Link, token);
-
-  //   await axios.post(url.toString(), combined, { headers });
-  // } catch (err) {
-  //   rendererLogError(
-  //     'enrichNotifications',
-  //     'failed to fetch batch pull request details',
-  //     err,
-  //   );
-  // }
 
   const enrichedNotifications = await Promise.all(
     notifications.map(async (notification: Notification) => {
