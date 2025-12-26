@@ -10,7 +10,11 @@ import type {
 import type { Notification } from '../../typesGitHub';
 import { listNotificationsForAuthenticatedUser } from '../api/client';
 import { determineFailureType } from '../api/errors';
-import { PullRequestDetailsFragmentDoc } from '../api/graphql/generated/graphql';
+import {
+  DiscussionDetailsFragmentDoc,
+  IssueDetailsFragmentDoc,
+  PullRequestDetailsFragmentDoc,
+} from '../api/graphql/generated/graphql';
 import { getHeaders } from '../api/request';
 import { getGitHubGraphQLUrl, getNumberFromUrl } from '../api/utils';
 import { rendererLogError, rendererLogWarn } from '../logger';
@@ -134,36 +138,131 @@ export async function enrichNotifications(
   if (!settings.detailedNotifications) {
     return notifications;
   }
+  type NotificationKind = 'PullRequest' | 'Issue' | 'Discussion';
 
-  // Build combined query for pull requests
-  let mergedQuery = '';
-  let i = 0;
-  const args: Array<{ org: string; repo: string; number: number }> = [];
+  type QueryConfig = {
+    aliasPrefix: string;
+    fragment: string;
+    extras: Array<{
+      name: string;
+      type: string;
+      defaultValue: number | boolean;
+    }>;
+    selection: (index: number) => string;
+  };
 
-  for (const notification of notifications) {
-    if (notification.subject.type === 'PullRequest') {
-      const org = notification.repository.owner.login;
-      const repo = notification.repository.name;
-      const number = getNumberFromUrl(notification.subject.url);
-
-      args.push({
-        org,
-        repo,
-        number,
-      });
-
-      mergedQuery += `pr${i}: repository(owner: $owner${i}, name: $name${i}) {
-          pullRequest(number: $number${i}) {
+  const queryConfigs: Record<NotificationKind, QueryConfig> = {
+    PullRequest: {
+      aliasPrefix: 'pr',
+      fragment: PullRequestDetailsFragmentDoc.toString(),
+      extras: [
+        { name: 'firstLabels', type: 'Int', defaultValue: 100 },
+        { name: 'lastComments', type: 'Int', defaultValue: 100 },
+        { name: 'lastReviews', type: 'Int', defaultValue: 100 },
+        { name: 'firstClosingIssues', type: 'Int', defaultValue: 100 },
+      ],
+      selection: (
+        index: number,
+      ) => `pr${index}: repository(owner: $owner${index}, name: $name${index}) {
+          pullRequest(number: $number${index}) {
             ...PullRequestDetails
           }
-        }\n`;
+        }`,
+    },
+    Issue: {
+      aliasPrefix: 'issue',
+      fragment: IssueDetailsFragmentDoc.toString(),
+      extras: [
+        { name: 'lastComments', type: 'Int', defaultValue: 100 },
+        { name: 'firstLabels', type: 'Int', defaultValue: 100 },
+      ],
+      selection: (
+        index: number,
+      ) => `issue${index}: repository(owner: $owner${index}, name: $name${index}) {
+          issue(number: $number${index}) {
+            ...IssueDetails
+          }
+        }`,
+    },
+    Discussion: {
+      aliasPrefix: 'discussion',
+      fragment: DiscussionDetailsFragmentDoc.toString(),
+      extras: [
+        { name: 'lastComments', type: 'Int', defaultValue: 100 },
+        { name: 'lastReplies', type: 'Int', defaultValue: 100 },
+        { name: 'firstLabels', type: 'Int', defaultValue: 100 },
+        { name: 'includeIsAnswered', type: 'Boolean!', defaultValue: true },
+      ],
+      selection: (
+        index: number,
+      ) => `discussion${index}: repository(owner: $owner${index}, name: $name${index}) {
+          discussion(number: $number${index}) {
+            ...DiscussionDetails
+          }
+        }`,
+    },
+  };
 
-      i += 1;
+  const selections: string[] = [];
+  const variableDefinitions: string[] = [];
+  const variableValues: Record<string, string | number | boolean> = {};
+  const extraVariableDefinitions = new Map<string, string>();
+  const extraVariableValues: Record<string, number | boolean> = {};
+  const fragments = new Map<string, string>();
+
+  const collectFragments = (doc: string) => {
+    const fragmentRegex =
+      /fragment\s+[A-Za-z0-9_]+\s+on[\s\S]*?(?=(?:fragment\s+[A-Za-z0-9_]+\s+on)|$)/g;
+    const nameRegex = /fragment\s+([A-Za-z0-9_]+)\s+on/;
+
+    const matches = doc.match(fragmentRegex) ?? [];
+    for (const match of matches) {
+      const nameMatch = match.match(nameRegex);
+      if (!nameMatch) {
+        continue;
+      }
+      const name = nameMatch[1];
+      if (!fragments.has(name)) {
+        fragments.set(name, match.trim());
+      }
     }
+  };
+
+  let index = 0;
+
+  for (const notification of notifications) {
+    const kind = notification.subject.type as NotificationKind;
+    const config = queryConfigs[kind];
+
+    if (!config) {
+      continue;
+    }
+
+    const org = notification.repository.owner.login;
+    const repo = notification.repository.name;
+    const number = getNumberFromUrl(notification.subject.url);
+
+    selections.push(config.selection(index));
+    variableDefinitions.push(
+      `$owner${index}: String!, $name${index}: String!, $number${index}: Int!`,
+    );
+    variableValues[`owner${index}`] = org;
+    variableValues[`name${index}`] = repo;
+    variableValues[`number${index}`] = number;
+
+    for (const extra of config.extras) {
+      if (!extraVariableDefinitions.has(extra.name)) {
+        extraVariableDefinitions.set(extra.name, extra.type);
+        extraVariableValues[extra.name] = extra.defaultValue;
+      }
+    }
+
+    collectFragments(config.fragment);
+
+    index += 1;
   }
 
-  // If no pull requests, return early
-  if (args.length === 0) {
+  if (selections.length === 0) {
     const enrichedNotifications = await Promise.all(
       notifications.map(async (notification: Notification) => {
         return enrichNotification(notification, settings);
@@ -172,33 +271,26 @@ export async function enrichNotifications(
     return enrichedNotifications;
   }
 
-  let queryArgs = '';
-  const queryArgsVariables: Record<string, string | number> = {};
+  const combinedVariableDefinitions = [
+    ...variableDefinitions,
+    ...Array.from(extraVariableDefinitions.entries()).map(
+      ([name, type]) => `$${name}: ${type}`,
+    ),
+  ].join(', ');
 
-  for (let idx = 0; idx < args.length; idx++) {
-    const arg = args[idx];
-    if (idx > 0) {
-      queryArgs += ', ';
-    }
-    queryArgs += `$owner${idx}: String!, $name${idx}: String!, $number${idx}: Int!`;
-    queryArgsVariables[`owner${idx}`] = arg.org;
-    queryArgsVariables[`name${idx}`] = arg.repo;
-    queryArgsVariables[`number${idx}`] = arg.number;
-  }
+  const mergedQuery = `query FetchMergedNotifications(${combinedVariableDefinitions}) {
+${selections.join('\n')}
+}
 
-  // Add variables from PullRequestDetailsFragment
-  queryArgs +=
-    ', $firstLabels: Int, $lastComments: Int, $lastReviews: Int, $firstClosingIssues: Int';
-  queryArgsVariables['firstLabels'] = 100;
-  queryArgsVariables['lastComments'] = 100;
-  queryArgsVariables['lastReviews'] = 100;
-  queryArgsVariables['firstClosingIssues'] = 100;
+${Array.from(fragments.values()).join('\n')}`;
 
-  const fragmentQuery = PullRequestDetailsFragmentDoc.toString();
-  mergedQuery = `query FetchMergedPullRequests(${queryArgs}) {\n${mergedQuery}}\n\n${fragmentQuery}`;
+  const queryVariables = {
+    ...variableValues,
+    ...extraVariableValues,
+  };
 
   console.log('MERGED QUERY ', JSON.stringify(mergedQuery, null, 2));
-  console.log('MERGED ARGS ', JSON.stringify(queryArgsVariables, null, 2));
+  console.log('MERGED ARGS ', JSON.stringify(queryVariables, null, 2));
 
   try {
     const url = getGitHubGraphQLUrl(
@@ -213,14 +305,14 @@ export async function enrichNotifications(
       url,
       data: {
         query: mergedQuery,
-        variables: queryArgsVariables,
+        variables: queryVariables,
       },
       headers: headers,
     }).then((response) => {
       console.log('MERGED RESPONSE ', JSON.stringify(response, null, 2));
     });
   } catch (err) {
-    console.error('Failed to fetch merged pull request details', err);
+    console.error('Failed to fetch merged notification details', err);
   }
 
   const enrichedNotifications = await Promise.all(
