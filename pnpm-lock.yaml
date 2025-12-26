@@ -14,9 +14,6 @@ importers:
       electron-updater:
         specifier: 6.6.2
         version: 6.6.2
-      graphql-combine-query:
-        specifier: ^1.2.4
-        version: 1.2.4(graphql@16.12.0)
       menubar:
         specifier: 9.5.2
         version: 9.5.2(electron@39.2.7)
@@ -3509,11 +3506,6 @@ packages:
 
   graceful-fs@4.2.11:
     resolution: {integrity: sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==}
-
-  graphql-combine-query@1.2.4:
-    resolution: {integrity: sha512-Os0d5cS8nH1cRnejGyACda0lraPzMJJjtd21KrfjKi1NWgEgzXzP8s29cpLlne+Y+51/2mS4j/3aTaIlCYMexg==}
-    peerDependencies:
-      graphql: ^15.1.0 || ^16.0.0
 
   graphql-config@5.1.5:
     resolution: {integrity: sha512-mG2LL1HccpU8qg5ajLROgdsBzx/o2M6kgI3uAmoaXiSH9PCUbtIyLomLqUtCFaAeG2YCFsl0M5cfQ9rKmDoMVA==}
@@ -10026,10 +10018,6 @@ snapshots:
       responselike: 2.0.1
 
   graceful-fs@4.2.11: {}
-
-  graphql-combine-query@1.2.4(graphql@16.12.0):
-    dependencies:
-      graphql: 16.12.0
 
   graphql-config@5.1.5(@types/node@24.10.4)(graphql@16.12.0)(typescript@5.9.3):
     dependencies:
