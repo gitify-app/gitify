@@ -60,7 +60,11 @@ import {
   mapThemeModeToColorScheme,
 } from '../utils/theme';
 import { setTrayIconColorAndTitle } from '../utils/tray';
-import { zoomLevelToPercentage, zoomPercentageToLevel } from '../utils/zoom';
+import {
+  getCurrentZoomLevel,
+  zoomLevelToPercentage,
+  zoomPercentageToLevel,
+} from '../utils/zoom';
 import {
   defaultAuth,
   defaultFilterSettings,
@@ -309,11 +313,13 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   }, [settings.openAtStartup]);
 
   useEffect(() => {
-    window.gitify.onResetApp(() => {
-      clearState();
-      setAuth(defaultAuth);
-      setSettings(defaultSettings);
-    });
+    if (typeof window !== 'undefined' && window.gitify !== undefined) {
+      window.gitify.onResetApp(() => {
+        clearState();
+        setAuth(defaultAuth);
+        setSettings(defaultSettings);
+      });
+    }
   }, []);
 
   const clearFilters = useCallback(() => {
@@ -360,8 +366,19 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   // Global window zoom handler / listener
   // biome-ignore lint/correctness/useExhaustiveDependencies: We want to update on settings.zoomPercentage changes
   useEffect(() => {
-    // Set the zoom level when settings.zoomPercentage changes
-    window.gitify.zoom.setLevel(zoomPercentageToLevel(settings.zoomPercentage));
+    // Apply zoom level from settings - works in both Tauri and browser
+    const zoomLevel = zoomPercentageToLevel(settings.zoomPercentage);
+    if (typeof window !== 'undefined' && window.gitify !== undefined) {
+      window.gitify.zoom.setLevel(zoomLevel);
+    } else {
+      // Browser fallback using CSS zoom
+      localStorage.setItem('zoomLevel', zoomLevel.toString());
+      const zoomFactor = 1.2 ** zoomLevel;
+      const rootElement = document.getElementById('root');
+      if (rootElement) {
+        rootElement.style.zoom = zoomFactor.toString();
+      }
+    }
 
     // Sync zoom percentage in settings when window is resized
     let timeout: NodeJS.Timeout;
@@ -370,12 +387,9 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     const handleResize = () => {
       clearTimeout(timeout);
       timeout = setTimeout(() => {
-        const zoomPercentage = zoomLevelToPercentage(
-          window.gitify.zoom.getLevel(),
-        );
-
-        if (zoomPercentage !== settings.zoomPercentage) {
-          updateSetting('zoomPercentage', zoomPercentage);
+        const currentZoom = zoomLevelToPercentage(getCurrentZoomLevel());
+        if (currentZoom !== settings.zoomPercentage) {
+          updateSetting('zoomPercentage', currentZoom);
         }
       }, DELAY);
     };

@@ -1,5 +1,6 @@
 import { defaultSettings } from '../context/defaults';
 import { type Link, OpenPreference } from '../types';
+import { isTauriEnvironment } from './environment';
 import { loadState } from './storage';
 
 export function openExternalLink(url: Link): void {
@@ -10,51 +11,83 @@ export function openExternalLink(url: Link): void {
     : defaultSettings.openLinks;
 
   if (url.toLowerCase().startsWith('https://')) {
-    window.gitify.openExternalLink(
-      url,
-      openPreference === OpenPreference.FOREGROUND,
-    );
+    if (isTauriEnvironment()) {
+      window.gitify.openExternalLink(
+        url,
+        openPreference === OpenPreference.FOREGROUND,
+      );
+    } else {
+      // Browser fallback - open in new tab
+      window.open(url, '_blank');
+    }
   }
 }
 
 export async function getAppVersion(): Promise<string> {
-  return await window.gitify.app.version();
+  if (isTauriEnvironment()) {
+    return await window.gitify.app.version();
+  }
+  return 'dev';
 }
 
 export async function encryptValue(value: string): Promise<string> {
-  return await window.gitify.encryptValue(value);
+  if (isTauriEnvironment()) {
+    return await window.gitify.encryptValue(value);
+  }
+  // Browser fallback - no encryption (dev mode only)
+  return value;
 }
 
 export async function decryptValue(value: string): Promise<string> {
-  return await window.gitify.decryptValue(value);
+  if (isTauriEnvironment()) {
+    return await window.gitify.decryptValue(value);
+  }
+  // Browser fallback - no decryption (dev mode only)
+  return value;
 }
 
 export function quitApp(): void {
-  window.gitify.app.quit();
+  if (isTauriEnvironment()) {
+    window.gitify.app.quit();
+  }
 }
 
 export function showWindow(): void {
-  window.gitify.app.show();
+  if (isTauriEnvironment()) {
+    window.gitify.app.show();
+  }
 }
 
 export function hideWindow(): void {
-  window.gitify.app.hide();
+  if (isTauriEnvironment()) {
+    window.gitify.app.hide();
+  }
 }
 
 export function setAutoLaunch(value: boolean): void {
-  window.gitify.setAutoLaunch(value);
+  if (isTauriEnvironment()) {
+    window.gitify.setAutoLaunch(value);
+  }
 }
 
 export function setUseAlternateIdleIcon(value: boolean): void {
-  window.gitify.tray.useAlternateIdleIcon(value);
+  if (isTauriEnvironment()) {
+    // biome-ignore lint/correctness/useHookAtTopLevel: This is a Tauri tray method, not a React hook
+    window.gitify.tray.useAlternateIdleIcon(value);
+  }
 }
 
 export function setUseUnreadActiveIcon(value: boolean): void {
-  window.gitify.tray.useUnreadActiveIcon(value);
+  if (isTauriEnvironment()) {
+    // biome-ignore lint/correctness/useHookAtTopLevel: This is a Tauri tray method, not a React hook
+    window.gitify.tray.useUnreadActiveIcon(value);
+  }
 }
 
 export function setKeyboardShortcut(keyboardShortcut: boolean): void {
-  window.gitify.setKeyboardShortcut(keyboardShortcut);
+  if (isTauriEnvironment()) {
+    window.gitify.setKeyboardShortcut(keyboardShortcut);
+  }
 }
 
 /**
@@ -65,7 +98,9 @@ export function setKeyboardShortcut(keyboardShortcut: boolean): void {
  * @param notificationsLength The number of unread notifications
  */
 export function updateTrayColor(notificationsLength: number): void {
-  window.gitify.tray.updateColor(notificationsLength);
+  if (isTauriEnvironment()) {
+    window.gitify.tray.updateColor(notificationsLength);
+  }
 }
 
 /**
@@ -74,5 +109,7 @@ export function updateTrayColor(notificationsLength: number): void {
  * @param title The title to set on the tray icon
  */
 export function updateTrayTitle(title: string): void {
-  window.gitify.tray.updateTitle(title);
+  if (isTauriEnvironment()) {
+    window.gitify.tray.updateTitle(title);
+  }
 }
