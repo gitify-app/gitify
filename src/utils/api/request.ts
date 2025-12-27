@@ -3,9 +3,67 @@ import type { ExecutionResult } from 'graphql';
 
 import type { Link, Token } from '../../types';
 import { decryptValue } from '../comms';
+import { isTauriEnvironment } from '../environment';
 import { rendererLogError } from '../logger';
 import type { TypedDocumentString } from './graphql/generated/graphql';
 import { getNextURLFromLinkHeader } from './utils';
+
+/**
+ * Tauri HTTP client wrapper
+ * Uses Tauri's HTTP plugin which bypasses WebView CORS restrictions
+ */
+async function tauriFetch(
+  url: string,
+  method: string,
+  headers: Record<string, string>,
+  data?: unknown,
+): Promise<AxiosResponse> {
+  // Dynamically import to avoid issues in browser mode
+  const { fetch: tauriFetch } = await import('@tauri-apps/plugin-http');
+
+  // HEAD and GET requests cannot have a body
+  const canHaveBody = !['HEAD', 'GET'].includes(method.toUpperCase());
+
+  const response = await tauriFetch(url, {
+    method: method as 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' | 'HEAD',
+    headers,
+    body: canHaveBody && data ? JSON.stringify(data) : undefined,
+  });
+
+  // Parse response body based on content type
+  let responseData: unknown;
+  const contentType = response.headers.get('content-type') || '';
+  if (contentType.includes('application/json')) {
+    try {
+      responseData = await response.json();
+    } catch {
+      responseData = null;
+    }
+  } else {
+    responseData = await response.text();
+  }
+
+  // Convert Tauri response to axios-like response
+  const headersObj: Record<string, string> = {};
+  response.headers.forEach((value, key) => {
+    headersObj[key] = value;
+  });
+
+  // Extract link header for pagination
+  const linkHeader = response.headers.get('link');
+  if (linkHeader) {
+    headersObj.link = linkHeader;
+  }
+
+  return {
+    data: responseData,
+    status: response.status,
+    statusText: response.statusText,
+    headers: headersObj,
+    config: {} as AxiosResponse['config'],
+    request: {},
+  };
+}
 
 /**
  * ExecutionResult with HTTP response headers
@@ -29,6 +87,11 @@ export async function apiRequest(
 ): Promise<AxiosResponse> {
   const headers = await getHeaders(url);
 
+  // Use Tauri HTTP plugin in Tauri mode to bypass CORS
+  if (isTauriEnvironment()) {
+    return tauriFetch(url, method, headers, data);
+  }
+
   return axios({ method, url, data, headers });
 }
 
@@ -50,9 +113,18 @@ export async function apiRequestAuth(
   fetchAllRecords = false,
 ): Promise<AxiosResponse> {
   const headers = await getHeaders(url, token);
+  const useTauri = isTauriEnvironment();
+
+  // Helper function to make a single request
+  const makeRequest = async (requestUrl: string): Promise<AxiosResponse> => {
+    if (useTauri) {
+      return tauriFetch(requestUrl, method, headers, data);
+    }
+    return axios({ method, url: requestUrl, data, headers });
+  };
 
   if (!fetchAllRecords) {
-    return axios({ method, url, data, headers });
+    return makeRequest(url);
   }
 
   let response: AxiosResponse | null = null;
@@ -62,7 +134,7 @@ export async function apiRequestAuth(
     let nextUrl: string | null = url;
 
     while (nextUrl) {
-      response = await axios({ method, url: nextUrl, data, headers });
+      response = await makeRequest(nextUrl);
 
       // If no data is returned, break the loop
       if (!response?.data) {
@@ -100,14 +172,21 @@ export async function performGraphQLRequest<TResult, TVariables>(
   ...[variables]: TVariables extends Record<string, never> ? [] : [TVariables]
 ) {
   const headers = await getHeaders(url, token);
+  const requestData = { query, variables };
+
+  // Use Tauri HTTP plugin in Tauri mode to bypass CORS
+  if (isTauriEnvironment()) {
+    const response = await tauriFetch(url, 'POST', headers, requestData);
+    return {
+      ...response.data,
+      headers: response.headers,
+    } as ExecutionResultWithHeaders<TResult>;
+  }
 
   return axios({
     method: 'POST',
     url,
-    data: {
-      query,
-      variables,
-    },
+    data: requestData,
     headers: headers,
   }).then((response) => {
     return {
