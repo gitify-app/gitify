@@ -12,6 +12,10 @@ import { formatForDisplay } from './utils';
 export class DefaultHandler implements NotificationTypeHandler {
   type?: SubjectType;
 
+  mergeQueryConfig() {
+    return undefined;
+  }
+
   query(_notification: Notification) {
     return null;
   }

@@ -10,11 +10,6 @@ import type {
 import type { Notification } from '../../typesGitHub';
 import { listNotificationsForAuthenticatedUser } from '../api/client';
 import { determineFailureType } from '../api/errors';
-import {
-  DiscussionDetailsFragmentDoc,
-  IssueDetailsFragmentDoc,
-  PullRequestDetailsFragmentDoc,
-} from '../api/graphql/generated/graphql';
 import { getHeaders } from '../api/request';
 import { getGitHubGraphQLUrl, getNumberFromUrl } from '../api/utils';
 import { rendererLogError, rendererLogWarn } from '../logger';
@@ -140,69 +135,6 @@ export async function enrichNotifications(
   }
   type NotificationKind = 'PullRequest' | 'Issue' | 'Discussion';
 
-  type QueryConfig = {
-    aliasPrefix: string;
-    fragment: string;
-    extras: Array<{
-      name: string;
-      type: string;
-      defaultValue: number | boolean;
-    }>;
-    selection: (index: number) => string;
-  };
-
-  const queryConfigs: Record<NotificationKind, QueryConfig> = {
-    PullRequest: {
-      aliasPrefix: 'pr',
-      fragment: PullRequestDetailsFragmentDoc.toString(),
-      extras: [
-        { name: 'firstLabels', type: 'Int', defaultValue: 100 },
-        { name: 'lastComments', type: 'Int', defaultValue: 100 },
-        { name: 'lastReviews', type: 'Int', defaultValue: 100 },
-        { name: 'firstClosingIssues', type: 'Int', defaultValue: 100 },
-      ],
-      selection: (
-        index: number,
-      ) => `pr${index}: repository(owner: $owner${index}, name: $name${index}) {
-          pullRequest(number: $number${index}) {
-            ...PullRequestDetails
-          }
-        }`,
-    },
-    Issue: {
-      aliasPrefix: 'issue',
-      fragment: IssueDetailsFragmentDoc.toString(),
-      extras: [
-        { name: 'lastComments', type: 'Int', defaultValue: 100 },
-        { name: 'firstLabels', type: 'Int', defaultValue: 100 },
-      ],
-      selection: (
-        index: number,
-      ) => `issue${index}: repository(owner: $owner${index}, name: $name${index}) {
-          issue(number: $number${index}) {
-            ...IssueDetails
-          }
-        }`,
-    },
-    Discussion: {
-      aliasPrefix: 'discussion',
-      fragment: DiscussionDetailsFragmentDoc.toString(),
-      extras: [
-        { name: 'lastComments', type: 'Int', defaultValue: 100 },
-        { name: 'lastReplies', type: 'Int', defaultValue: 100 },
-        { name: 'firstLabels', type: 'Int', defaultValue: 100 },
-        { name: 'includeIsAnswered', type: 'Boolean!', defaultValue: true },
-      ],
-      selection: (
-        index: number,
-      ) => `discussion${index}: repository(owner: $owner${index}, name: $name${index}) {
-          discussion(number: $number${index}) {
-            ...DiscussionDetails
-          }
-        }`,
-    },
-  };
-
   const selections: string[] = [];
   const variableDefinitions: string[] = [];
   const variableValues: Record<string, string | number | boolean> = {};
@@ -236,8 +168,9 @@ export async function enrichNotifications(
   let index = 0;
 
   for (const notification of notifications) {
+    const handler = createNotificationHandler(notification);
     const kind = notification.subject.type as NotificationKind;
-    const config = queryConfigs[kind];
+    const config = handler.mergeQueryConfig();
 
     if (!config) {
       continue;
@@ -247,9 +180,13 @@ export async function enrichNotifications(
     const repo = notification.repository.name;
     const number = getNumberFromUrl(notification.subject.url);
 
-    const alias = `${config.aliasPrefix}${index}`;
+    const alias = `node${index}`;
+    const queryFragment = config.queryFragment.replaceAll(
+      'INDEX',
+      index.toString(),
+    );
 
-    selections.push(config.selection(index));
+    selections.push(queryFragment);
     variableDefinitions.push(
       `$owner${index}: String!, $name${index}: String!, $number${index}: Int!`,
     );
@@ -265,7 +202,7 @@ export async function enrichNotifications(
       }
     }
 
-    collectFragments(config.fragment);
+    collectFragments(config.responseFragment);
 
     index += 1;
   }
@@ -287,10 +224,11 @@ export async function enrichNotifications(
   ].join(', ');
 
   const mergedQuery = `query FetchMergedNotifications(${combinedVariableDefinitions}) {
-${selections.join('\n')}
-}
+      ${selections.join('\n')}
+    }
 
-${Array.from(fragments.values()).join('\n')}`;
+    ${Array.from(fragments.values()).join('\n')}
+  `;
 
   const queryVariables = {
     ...variableValues,

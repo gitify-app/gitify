@@ -16,12 +16,39 @@ import type {
 } from '../../../types';
 import { IconColor } from '../../../types';
 import type { Notification, Subject } from '../../../typesGitHub';
-import type { IssueDetailsFragment } from '../../api/graphql/generated/graphql';
+import {
+  type IssueDetailsFragment,
+  IssueDetailsFragmentDoc,
+  IssueMergeQueryFragmentDoc,
+} from '../../api/graphql/generated/graphql';
+import { getQueryFragmentBody } from '../../api/graphql/utils';
 import { DefaultHandler, defaultHandler } from './default';
+import type { GraphQLMergedQueryConfig } from './types';
 import { getNotificationAuthor } from './utils';
 
 class IssueHandler extends DefaultHandler {
   readonly type = 'Issue';
+
+  mergeQueryConfig() {
+    return {
+      queryFragment: getQueryFragmentBody(
+        IssueMergeQueryFragmentDoc.toString(),
+      ),
+
+      responseFragment: IssueDetailsFragmentDoc.toString(),
+      extras: [
+        { name: 'lastComments', type: 'Int', defaultValue: 100 },
+        { name: 'firstLabels', type: 'Int', defaultValue: 100 },
+      ],
+      selection: (
+        index: number,
+      ) => `node${index}: repository(owner: $owner${index}, name: $name${index}) {
+          issue(number: $number${index}) {
+            ...IssueDetails
+          }
+        }`,
+    } as GraphQLMergedQueryConfig;
+  }
 
   async enrich(
     _notification: Notification,

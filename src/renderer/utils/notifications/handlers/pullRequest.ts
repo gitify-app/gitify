@@ -19,15 +19,34 @@ import {
 } from '../../../types';
 import type { Notification, Subject } from '../../../typesGitHub';
 import { fetchPullByNumber } from '../../api/client';
-import type {
-  PullRequestDetailsFragment,
-  PullRequestReviewFieldsFragment,
+import {
+  type PullRequestDetailsFragment,
+  PullRequestDetailsFragmentDoc,
+  PullRequestMergeQueryFragmentDoc,
+  type PullRequestReviewFieldsFragment,
 } from '../../api/graphql/generated/graphql';
+import { getQueryFragmentBody } from '../../api/graphql/utils';
 import { DefaultHandler, defaultHandler } from './default';
+import type { GraphQLMergedQueryConfig } from './types';
 import { getNotificationAuthor } from './utils';
 
 class PullRequestHandler extends DefaultHandler {
   readonly type = 'PullRequest' as const;
+
+  mergeQueryConfig() {
+    return {
+      queryFragment: getQueryFragmentBody(
+        PullRequestMergeQueryFragmentDoc.toString(),
+      ),
+      responseFragment: PullRequestDetailsFragmentDoc.toString(),
+      extras: [
+        { name: 'firstLabels', type: 'Int', defaultValue: 100 },
+        { name: 'lastComments', type: 'Int', defaultValue: 100 },
+        { name: 'lastReviews', type: 'Int', defaultValue: 100 },
+        { name: 'firstClosingIssues', type: 'Int', defaultValue: 100 },
+      ],
+    } as GraphQLMergedQueryConfig;
+  }
 
   async enrich(
     notification: Notification,
@@ -36,7 +55,7 @@ class PullRequestHandler extends DefaultHandler {
   ): Promise<GitifySubject> {
     const pr =
       fetchedData ??
-      (await fetchPullByNumber(notification)).data.repository.pullRequest;
+      (await fetchPullByNumber(notification)).data.nodeINDEX.pullRequest;
 
     let prState: GitifyPullRequestState = pr.state;
     if (pr.isDraft) {
