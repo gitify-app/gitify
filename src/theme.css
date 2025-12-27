@@ -1,0 +1,20 @@
+/** Gitify Theme Variables */
+[data-color-mode="light"] {
+  --gitify-background: var(--bgColor-default, #ffffff);
+  --gitify-scrollbar-track: #f1f5f9;
+  --gitify-scrollbar-thumb: #d1d5db;
+  --gitify-scrollbar-thumb-hover: #9ca3af;
+  --gitify-counter-primary: #93c5fd;
+  --gitify-counter-secondary: #e5e7eb;
+  --gitify-counter-text: #1f2937;
+}
+
+[data-color-mode="dark"] {
+  --gitify-background: var(--bgColor-muted, #0d1117);
+  --gitify-scrollbar-track: #111827;
+  --gitify-scrollbar-thumb: #374151;
+  --gitify-scrollbar-thumb-hover: #4b5563;
+  --gitify-counter-primary: #60a5fa;
+  --gitify-counter-secondary: #4b5563;
+  --gitify-counter-text: #f3f4f6;
+}

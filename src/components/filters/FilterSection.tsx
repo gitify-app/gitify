@@ -1,0 +1,95 @@
+import type { ReactNode } from 'react';
+
+import type { Icon } from '@primer/octicons-react';
+import { Stack, Text } from '@primer/react';
+
+import { useAppContext } from '../../context/App';
+import type { FilterSettingsState, FilterSettingsValue } from '../../types';
+import type { Filter } from '../../utils/notifications/filters';
+import { Checkbox } from '../fields/Checkbox';
+import { Title } from '../primitives/Title';
+import { RequiresDetailedNotificationWarning } from './RequiresDetailedNotificationsWarning';
+
+export interface FilterSectionProps<T extends FilterSettingsValue> {
+  id: string;
+  title: string;
+  icon: Icon;
+  filter: Filter<T>;
+  filterSetting: keyof FilterSettingsState;
+  tooltip?: ReactNode;
+  layout?: 'horizontal' | 'vertical';
+}
+
+export const FilterSection = <T extends FilterSettingsValue>({
+  id,
+  title,
+  icon,
+  filter,
+  filterSetting,
+  tooltip,
+  layout = 'vertical',
+}: FilterSectionProps<T>) => {
+  const { updateFilter, settings, notifications } = useAppContext();
+
+  return (
+    <fieldset id={id}>
+      <Title
+        icon={icon}
+        tooltip={
+          tooltip && (
+            <>
+              {tooltip}
+              {filter.requiresDetailsNotifications && (
+                <RequiresDetailedNotificationWarning />
+              )}
+            </>
+          )
+        }
+      >
+        {title}
+      </Title>
+
+      <Stack
+        direction={layout}
+        gap={layout === 'horizontal' ? 'normal' : 'condensed'}
+      >
+        {(Object.keys(filter.FILTER_TYPES) as T[])
+          .sort((a, b) =>
+            filter
+              .getTypeDetails(a)
+              .title.toLocaleLowerCase()
+              .localeCompare(
+                filter.getTypeDetails(b).title.toLocaleLowerCase(),
+              ),
+          )
+          .map((type) => {
+            const typeDetails = filter.getTypeDetails(type);
+            const typeTitle = typeDetails.title;
+            const typeDescription = typeDetails.description;
+            const isChecked = filter.isFilterSet(settings, type);
+            const count = filter.getFilterCount(notifications, type);
+
+            return (
+              <Checkbox
+                checked={isChecked}
+                counter={count}
+                disabled={
+                  filter.requiresDetailsNotifications &&
+                  !settings.detailedNotifications
+                }
+                key={type as string}
+                label={typeTitle}
+                name={typeTitle}
+                onChange={(evt) =>
+                  updateFilter(filterSetting, type, evt.target.checked)
+                }
+                tooltip={
+                  typeDescription ? <Text>{typeDescription}</Text> : null
+                }
+              />
+            );
+          })}
+      </Stack>
+    </fieldset>
+  );
+};
