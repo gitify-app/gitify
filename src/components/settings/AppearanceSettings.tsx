@@ -1,4 +1,4 @@
-import type { FC } from 'react';
+import { type FC, useCallback, useState } from 'react';
 
 import {
   PaintbrushIcon,
@@ -16,12 +16,14 @@ import {
 } from '@primer/react';
 
 import { useAppContext } from '../../context/App';
+import type { Percentage } from '../../types';
 import { Theme } from '../../types';
 import { hasMultipleAccounts } from '../../utils/auth/utils';
 import {
   canDecreaseZoom,
   canIncreaseZoom,
   decreaseZoom,
+  getCurrentZoomLevel,
   increaseZoom,
   resetZoomLevel,
   zoomLevelToPercentage,
@@ -32,7 +34,24 @@ import { Title } from '../primitives/Title';
 
 export const AppearanceSettings: FC = () => {
   const { auth, settings, updateSetting } = useAppContext();
-  const zoomPercentage = zoomLevelToPercentage(window.gitify.zoom.getLevel());
+  const [zoomPercentage, setZoomPercentage] = useState<Percentage>(
+    zoomLevelToPercentage(getCurrentZoomLevel()),
+  );
+
+  const handleZoomOut = useCallback(() => {
+    decreaseZoom(zoomPercentage);
+    setZoomPercentage(zoomLevelToPercentage(getCurrentZoomLevel()));
+  }, [zoomPercentage]);
+
+  const handleZoomIn = useCallback(() => {
+    increaseZoom(zoomPercentage);
+    setZoomPercentage(zoomLevelToPercentage(getCurrentZoomLevel()));
+  }, [zoomPercentage]);
+
+  const handleZoomReset = useCallback(() => {
+    resetZoomLevel();
+    setZoomPercentage(zoomLevelToPercentage(getCurrentZoomLevel()));
+  }, []);
 
   return (
     <fieldset>
@@ -108,7 +127,7 @@ export const AppearanceSettings: FC = () => {
               data-testid="settings-zoom-out"
               disabled={!canDecreaseZoom(zoomPercentage)}
               icon={ZoomOutIcon}
-              onClick={() => decreaseZoom(zoomPercentage)}
+              onClick={handleZoomOut}
               size="small"
               unsafeDisableTooltip={true}
             />
@@ -122,7 +141,7 @@ export const AppearanceSettings: FC = () => {
               data-testid="settings-zoom-in"
               disabled={!canIncreaseZoom(zoomPercentage)}
               icon={ZoomInIcon}
-              onClick={() => increaseZoom(zoomPercentage)}
+              onClick={handleZoomIn}
               size="small"
               unsafeDisableTooltip={true}
             />
@@ -131,7 +150,7 @@ export const AppearanceSettings: FC = () => {
               aria-label="Reset zoom"
               data-testid="settings-zoom-reset"
               icon={SyncIcon}
-              onClick={() => resetZoomLevel()}
+              onClick={handleZoomReset}
               size="small"
               unsafeDisableTooltip={true}
               variant="danger"

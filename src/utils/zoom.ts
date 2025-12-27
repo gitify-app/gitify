@@ -1,11 +1,43 @@
 import { defaultSettings } from '../context/defaults';
 import type { Percentage } from '../types';
+import { isTauriEnvironment } from './environment';
 
 const MINIMUM_ZOOM_PERCENTAGE = 0 as Percentage;
 const MAXIMUM_ZOOM_PERCENTAGE = 120 as Percentage;
 const RECOMMENDED_ZOOM_PERCENTAGE = defaultSettings.zoomPercentage;
 const MULTIPLIER = 2;
 const ZOOM_STEP = 10 as Percentage;
+
+/**
+ * Browser fallback for zoom using CSS zoom and localStorage
+ */
+const browserZoom = {
+  getLevel: (): number => {
+    if (typeof window === 'undefined') {
+      return 0;
+    }
+    const zoomLevel = localStorage.getItem('zoomLevel');
+    return zoomLevel ? Number.parseFloat(zoomLevel) : 0;
+  },
+  setLevel: (zoomLevel: number) => {
+    if (typeof window === 'undefined') {
+      return;
+    }
+    localStorage.setItem('zoomLevel', zoomLevel.toString());
+    const zoomFactor = 1.2 ** zoomLevel;
+    const rootElement = document.getElementById('root');
+    if (rootElement) {
+      rootElement.style.zoom = zoomFactor.toString();
+    }
+  },
+};
+
+/**
+ * Get zoom API - uses Tauri if available, otherwise browser fallback
+ */
+function getZoomApi() {
+  return isTauriEnvironment() ? window.gitify.zoom : browserZoom;
+}
 
 /**
  * Zoom percentage to level. 100% is the recommended zoom level (0).
@@ -55,7 +87,7 @@ export function canIncreaseZoom(zoomPercentage: Percentage) {
  */
 export function decreaseZoom(zoomPercentage: Percentage) {
   if (canDecreaseZoom(zoomPercentage)) {
-    window.gitify.zoom.setLevel(
+    getZoomApi().setLevel(
       zoomPercentageToLevel((zoomPercentage - ZOOM_STEP) as Percentage),
     );
   }
@@ -66,7 +98,7 @@ export function decreaseZoom(zoomPercentage: Percentage) {
  */
 export function increaseZoom(zoomPercentage: Percentage) {
   if (canIncreaseZoom(zoomPercentage)) {
-    window.gitify.zoom.setLevel(
+    getZoomApi().setLevel(
       zoomPercentageToLevel((zoomPercentage + ZOOM_STEP) as Percentage),
     );
   }
@@ -76,7 +108,12 @@ export function increaseZoom(zoomPercentage: Percentage) {
  * Reset zoom level
  */
 export function resetZoomLevel() {
-  window.gitify.zoom.setLevel(
-    zoomPercentageToLevel(RECOMMENDED_ZOOM_PERCENTAGE),
-  );
+  getZoomApi().setLevel(zoomPercentageToLevel(RECOMMENDED_ZOOM_PERCENTAGE));
+}
+
+/**
+ * Get current zoom level (browser-compatible)
+ */
+export function getCurrentZoomLevel(): number {
+  return getZoomApi().getLevel();
 }
