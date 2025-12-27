@@ -6,22 +6,16 @@ exports[`renderer/components/notifications/NotificationHeader.tsx > should rende
   "baseElement": <body>
     <div>
       <div
-        class="py-0.5"
+        data-color-mode="light"
+        data-dark-theme="dark"
+        data-light-theme="light"
       >
         <div
-          class="prc-Stack-Stack-UQ9k6"
-          data-align="center"
-          data-direction="horizontal"
-          data-gap="condensed"
-          data-justify="start"
-          data-padding="none"
-          data-wrap="nowrap"
+          class="prc-src-BaseStyles-aopSS"
+          data-portal-root="true"
         >
-          <button
-            class="text-xs font-medium"
-            data-testid="view-repository"
-            title="Open repository ↗"
-            type="button"
+          <div
+            class="py-0.5"
           >
             <div
               class="prc-Stack-Stack-UQ9k6"
@@ -30,53 +24,64 @@ exports[`renderer/components/notifications/NotificationHeader.tsx > should rende
               data-gap="condensed"
               data-justify="start"
               data-padding="none"
-              data-testid="avatar"
               data-wrap="nowrap"
             >
-              <img
-                alt="gitify-app/notifications-test"
-                class="prc-Avatar-Avatar-0xaUi"
-                data-component="Avatar"
-                height="14"
-                src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-                style="--avatarSize-regular: 14px;"
-                width="14"
-              />
-              <div
-                class="prc-Truncate-Truncate-2G1eo"
-                data-inline="true"
-                style="--truncate-max-width: 280px;"
-                title="gitify-app/notifications-test"
+              <button
+                class="text-xs font-medium"
+                data-testid="view-repository"
+                title="Open repository ↗"
+                type="button"
               >
-                gitify-app/notifications-test
-              </div>
+                <div
+                  class="prc-Stack-Stack-UQ9k6"
+                  data-align="center"
+                  data-direction="horizontal"
+                  data-gap="condensed"
+                  data-justify="start"
+                  data-padding="none"
+                  data-testid="avatar"
+                  data-wrap="nowrap"
+                >
+                  <img
+                    alt="gitify-app/notifications-test"
+                    class="prc-Avatar-Avatar-0xaUi"
+                    data-component="Avatar"
+                    height="14"
+                    src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+                    style="--avatarSize-regular: 14px;"
+                    width="14"
+                  />
+                  <div
+                    class="prc-Truncate-Truncate-2G1eo"
+                    data-inline="true"
+                    style="--truncate-max-width: 280px;"
+                    title="gitify-app/notifications-test"
+                  >
+                    gitify-app/notifications-test
+                  </div>
+                </div>
+              </button>
+              <div
+                class="text-xxs opacity-50"
+              />
             </div>
-          </button>
-          <div
-            class="text-xxs opacity-50"
-          />
+          </div>
         </div>
       </div>
     </div>
   </body>,
   "container": <div>
     <div
-      class="py-0.5"
+      data-color-mode="light"
+      data-dark-theme="dark"
+      data-light-theme="light"
     >
       <div
-        class="prc-Stack-Stack-UQ9k6"
-        data-align="center"
-        data-direction="horizontal"
-        data-gap="condensed"
-        data-justify="start"
-        data-padding="none"
-        data-wrap="nowrap"
+        class="prc-src-BaseStyles-aopSS"
+        data-portal-root="true"
       >
-        <button
-          class="text-xs font-medium"
-          data-testid="view-repository"
-          title="Open repository ↗"
-          type="button"
+        <div
+          class="py-0.5"
         >
           <div
             class="prc-Stack-Stack-UQ9k6"
@@ -85,31 +90,48 @@ exports[`renderer/components/notifications/NotificationHeader.tsx > should rende
             data-gap="condensed"
             data-justify="start"
             data-padding="none"
-            data-testid="avatar"
             data-wrap="nowrap"
           >
-            <img
-              alt="gitify-app/notifications-test"
-              class="prc-Avatar-Avatar-0xaUi"
-              data-component="Avatar"
-              height="14"
-              src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-              style="--avatarSize-regular: 14px;"
-              width="14"
-            />
-            <div
-              class="prc-Truncate-Truncate-2G1eo"
-              data-inline="true"
-              style="--truncate-max-width: 280px;"
-              title="gitify-app/notifications-test"
+            <button
+              class="text-xs font-medium"
+              data-testid="view-repository"
+              title="Open repository ↗"
+              type="button"
             >
-              gitify-app/notifications-test
-            </div>
+              <div
+                class="prc-Stack-Stack-UQ9k6"
+                data-align="center"
+                data-direction="horizontal"
+                data-gap="condensed"
+                data-justify="start"
+                data-padding="none"
+                data-testid="avatar"
+                data-wrap="nowrap"
+              >
+                <img
+                  alt="gitify-app/notifications-test"
+                  class="prc-Avatar-Avatar-0xaUi"
+                  data-component="Avatar"
+                  height="14"
+                  src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+                  style="--avatarSize-regular: 14px;"
+                  width="14"
+                />
+                <div
+                  class="prc-Truncate-Truncate-2G1eo"
+                  data-inline="true"
+                  style="--truncate-max-width: 280px;"
+                  title="gitify-app/notifications-test"
+                >
+                  gitify-app/notifications-test
+                </div>
+              </div>
+            </button>
+            <div
+              class="text-xxs opacity-50"
+            />
           </div>
-        </button>
-        <div
-          class="text-xxs opacity-50"
-        />
+        </div>
       </div>
     </div>
   </div>,
@@ -173,22 +195,16 @@ exports[`renderer/components/notifications/NotificationHeader.tsx > should rende
   "baseElement": <body>
     <div>
       <div
-        class="py-0.5"
+        data-color-mode="light"
+        data-dark-theme="dark"
+        data-light-theme="light"
       >
         <div
-          class="prc-Stack-Stack-UQ9k6"
-          data-align="center"
-          data-direction="horizontal"
-          data-gap="condensed"
-          data-justify="start"
-          data-padding="none"
-          data-wrap="nowrap"
+          class="prc-src-BaseStyles-aopSS"
+          data-portal-root="true"
         >
-          <button
-            class="text-xs font-medium"
-            data-testid="view-repository"
-            title="Open repository ↗"
-            type="button"
+          <div
+            class="py-0.5"
           >
             <div
               class="prc-Stack-Stack-UQ9k6"
@@ -197,53 +213,64 @@ exports[`renderer/components/notifications/NotificationHeader.tsx > should rende
               data-gap="condensed"
               data-justify="start"
               data-padding="none"
-              data-testid="avatar"
               data-wrap="nowrap"
             >
-              <img
-                alt="gitify-app/notifications-test"
-                class="prc-Avatar-Avatar-0xaUi"
-                data-component="Avatar"
-                height="14"
-                src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-                style="--avatarSize-regular: 14px;"
-                width="14"
-              />
-              <div
-                class="prc-Truncate-Truncate-2G1eo"
-                data-inline="true"
-                style="--truncate-max-width: 280px;"
-                title="gitify-app/notifications-test"
+              <button
+                class="text-xs font-medium"
+                data-testid="view-repository"
+                title="Open repository ↗"
+                type="button"
               >
-                gitify-app/notifications-test
-              </div>
+                <div
+                  class="prc-Stack-Stack-UQ9k6"
+                  data-align="center"
+                  data-direction="horizontal"
+                  data-gap="condensed"
+                  data-justify="start"
+                  data-padding="none"
+                  data-testid="avatar"
+                  data-wrap="nowrap"
+                >
+                  <img
+                    alt="gitify-app/notifications-test"
+                    class="prc-Avatar-Avatar-0xaUi"
+                    data-component="Avatar"
+                    height="14"
+                    src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+                    style="--avatarSize-regular: 14px;"
+                    width="14"
+                  />
+                  <div
+                    class="prc-Truncate-Truncate-2G1eo"
+                    data-inline="true"
+                    style="--truncate-max-width: 280px;"
+                    title="gitify-app/notifications-test"
+                  >
+                    gitify-app/notifications-test
+                  </div>
+                </div>
+              </button>
+              <div
+                class="text-xxs opacity-50 hidden"
+              />
             </div>
-          </button>
-          <div
-            class="text-xxs opacity-50 hidden"
-          />
+          </div>
         </div>
       </div>
     </div>
   </body>,
   "container": <div>
     <div
-      class="py-0.5"
+      data-color-mode="light"
+      data-dark-theme="dark"
+      data-light-theme="light"
     >
       <div
-        class="prc-Stack-Stack-UQ9k6"
-        data-align="center"
-        data-direction="horizontal"
-        data-gap="condensed"
-        data-justify="start"
-        data-padding="none"
-        data-wrap="nowrap"
+        class="prc-src-BaseStyles-aopSS"
+        data-portal-root="true"
       >
-        <button
-          class="text-xs font-medium"
-          data-testid="view-repository"
-          title="Open repository ↗"
-          type="button"
+        <div
+          class="py-0.5"
         >
           <div
             class="prc-Stack-Stack-UQ9k6"
@@ -252,31 +279,48 @@ exports[`renderer/components/notifications/NotificationHeader.tsx > should rende
             data-gap="condensed"
             data-justify="start"
             data-padding="none"
-            data-testid="avatar"
             data-wrap="nowrap"
           >
-            <img
-              alt="gitify-app/notifications-test"
-              class="prc-Avatar-Avatar-0xaUi"
-              data-component="Avatar"
-              height="14"
-              src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-              style="--avatarSize-regular: 14px;"
-              width="14"
-            />
-            <div
-              class="prc-Truncate-Truncate-2G1eo"
-              data-inline="true"
-              style="--truncate-max-width: 280px;"
-              title="gitify-app/notifications-test"
+            <button
+              class="text-xs font-medium"
+              data-testid="view-repository"
+              title="Open repository ↗"
+              type="button"
             >
-              gitify-app/notifications-test
-            </div>
+              <div
+                class="prc-Stack-Stack-UQ9k6"
+                data-align="center"
+                data-direction="horizontal"
+                data-gap="condensed"
+                data-justify="start"
+                data-padding="none"
+                data-testid="avatar"
+                data-wrap="nowrap"
+              >
+                <img
+                  alt="gitify-app/notifications-test"
+                  class="prc-Avatar-Avatar-0xaUi"
+                  data-component="Avatar"
+                  height="14"
+                  src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+                  style="--avatarSize-regular: 14px;"
+                  width="14"
+                />
+                <div
+                  class="prc-Truncate-Truncate-2G1eo"
+                  data-inline="true"
+                  style="--truncate-max-width: 280px;"
+                  title="gitify-app/notifications-test"
+                >
+                  gitify-app/notifications-test
+                </div>
+              </div>
+            </button>
+            <div
+              class="text-xxs opacity-50 hidden"
+            />
           </div>
-        </button>
-        <div
-          class="text-xxs opacity-50 hidden"
-        />
+        </div>
       </div>
     </div>
   </div>,
@@ -340,22 +384,16 @@ exports[`renderer/components/notifications/NotificationHeader.tsx > should rende
   "baseElement": <body>
     <div>
       <div
-        class="py-0.5"
+        data-color-mode="light"
+        data-dark-theme="dark"
+        data-light-theme="light"
       >
         <div
-          class="prc-Stack-Stack-UQ9k6"
-          data-align="center"
-          data-direction="horizontal"
-          data-gap="condensed"
-          data-justify="start"
-          data-padding="none"
-          data-wrap="nowrap"
+          class="prc-src-BaseStyles-aopSS"
+          data-portal-root="true"
         >
-          <button
-            class="text-xs font-medium"
-            data-testid="view-repository"
-            title="Open repository ↗"
-            type="button"
+          <div
+            class="py-0.5"
           >
             <div
               class="prc-Stack-Stack-UQ9k6"
@@ -364,53 +402,64 @@ exports[`renderer/components/notifications/NotificationHeader.tsx > should rende
               data-gap="condensed"
               data-justify="start"
               data-padding="none"
-              data-testid="avatar"
               data-wrap="nowrap"
             >
-              <img
-                alt="gitify-app/notifications-test"
-                class="prc-Avatar-Avatar-0xaUi"
-                data-component="Avatar"
-                height="14"
-                src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-                style="--avatarSize-regular: 14px;"
-                width="14"
-              />
-              <div
-                class="prc-Truncate-Truncate-2G1eo"
-                data-inline="true"
-                style="--truncate-max-width: 280px;"
-                title="gitify-app/notifications-test"
+              <button
+                class="text-xs font-medium"
+                data-testid="view-repository"
+                title="Open repository ↗"
+                type="button"
               >
-                gitify-app/notifications-test
-              </div>
+                <div
+                  class="prc-Stack-Stack-UQ9k6"
+                  data-align="center"
+                  data-direction="horizontal"
+                  data-gap="condensed"
+                  data-justify="start"
+                  data-padding="none"
+                  data-testid="avatar"
+                  data-wrap="nowrap"
+                >
+                  <img
+                    alt="gitify-app/notifications-test"
+                    class="prc-Avatar-Avatar-0xaUi"
+                    data-component="Avatar"
+                    height="14"
+                    src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+                    style="--avatarSize-regular: 14px;"
+                    width="14"
+                  />
+                  <div
+                    class="prc-Truncate-Truncate-2G1eo"
+                    data-inline="true"
+                    style="--truncate-max-width: 280px;"
+                    title="gitify-app/notifications-test"
+                  >
+                    gitify-app/notifications-test
+                  </div>
+                </div>
+              </button>
+              <div
+                class="text-xxs opacity-50"
+              />
             </div>
-          </button>
-          <div
-            class="text-xxs opacity-50"
-          />
+          </div>
         </div>
       </div>
     </div>
   </body>,
   "container": <div>
     <div
-      class="py-0.5"
+      data-color-mode="light"
+      data-dark-theme="dark"
+      data-light-theme="light"
     >
       <div
-        class="prc-Stack-Stack-UQ9k6"
-        data-align="center"
-        data-direction="horizontal"
-        data-gap="condensed"
-        data-justify="start"
-        data-padding="none"
-        data-wrap="nowrap"
+        class="prc-src-BaseStyles-aopSS"
+        data-portal-root="true"
       >
-        <button
-          class="text-xs font-medium"
-          data-testid="view-repository"
-          title="Open repository ↗"
-          type="button"
+        <div
+          class="py-0.5"
         >
           <div
             class="prc-Stack-Stack-UQ9k6"
@@ -419,31 +468,48 @@ exports[`renderer/components/notifications/NotificationHeader.tsx > should rende
             data-gap="condensed"
             data-justify="start"
             data-padding="none"
-            data-testid="avatar"
             data-wrap="nowrap"
           >
-            <img
-              alt="gitify-app/notifications-test"
-              class="prc-Avatar-Avatar-0xaUi"
-              data-component="Avatar"
-              height="14"
-              src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-              style="--avatarSize-regular: 14px;"
-              width="14"
-            />
-            <div
-              class="prc-Truncate-Truncate-2G1eo"
-              data-inline="true"
-              style="--truncate-max-width: 280px;"
-              title="gitify-app/notifications-test"
+            <button
+              class="text-xs font-medium"
+              data-testid="view-repository"
+              title="Open repository ↗"
+              type="button"
             >
-              gitify-app/notifications-test
-            </div>
+              <div
+                class="prc-Stack-Stack-UQ9k6"
+                data-align="center"
+                data-direction="horizontal"
+                data-gap="condensed"
+                data-justify="start"
+                data-padding="none"
+                data-testid="avatar"
+                data-wrap="nowrap"
+              >
+                <img
+                  alt="gitify-app/notifications-test"
+                  class="prc-Avatar-Avatar-0xaUi"
+                  data-component="Avatar"
+                  height="14"
+                  src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+                  style="--avatarSize-regular: 14px;"
+                  width="14"
+                />
+                <div
+                  class="prc-Truncate-Truncate-2G1eo"
+                  data-inline="true"
+                  style="--truncate-max-width: 280px;"
+                  title="gitify-app/notifications-test"
+                >
+                  gitify-app/notifications-test
+                </div>
+              </div>
+            </button>
+            <div
+              class="text-xxs opacity-50"
+            />
           </div>
-        </button>
-        <div
-          class="text-xxs opacity-50"
-        />
+        </div>
       </div>
     </div>
   </div>,
@@ -505,9 +571,31 @@ exports[`renderer/components/notifications/NotificationHeader.tsx > should rende
 {
   "asFragment": [Function],
   "baseElement": <body>
-    <div />
+    <div>
+      <div
+        data-color-mode="light"
+        data-dark-theme="dark"
+        data-light-theme="light"
+      >
+        <div
+          class="prc-src-BaseStyles-aopSS"
+          data-portal-root="true"
+        />
+      </div>
+    </div>
   </body>,
-  "container": <div />,
+  "container": <div>
+    <div
+      data-color-mode="light"
+      data-dark-theme="dark"
+      data-light-theme="light"
+    >
+      <div
+        class="prc-src-BaseStyles-aopSS"
+        data-portal-root="true"
+      />
+    </div>
+  </div>,
   "debug": [Function],
   "findAllByAltText": [Function],
   "findAllByDisplayValue": [Function],

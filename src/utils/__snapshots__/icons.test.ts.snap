@@ -21,27 +21,6 @@ exports[`renderer/utils/icons.ts > getAuthMethodIcon > Personal Access Token 1`]
 }
 `;
 
-exports[`renderer/utils/icons.ts > getAuthMethodIcon > should return icon for GitHub App 1`] = `
-{
-  "$$typeof": Symbol(react.forward_ref),
-  "render": [Function],
-}
-`;
-
-exports[`renderer/utils/icons.ts > getAuthMethodIcon > should return icon for OAuth App 1`] = `
-{
-  "$$typeof": Symbol(react.forward_ref),
-  "render": [Function],
-}
-`;
-
-exports[`renderer/utils/icons.ts > getAuthMethodIcon > should return icon for Personal Access Token 1`] = `
-{
-  "$$typeof": Symbol(react.forward_ref),
-  "render": [Function],
-}
-`;
-
 exports[`renderer/utils/icons.ts > getPlatformIcon > GitHub Cloud 1`] = `
 {
   "$$typeof": Symbol(react.forward_ref),
@@ -50,20 +29,6 @@ exports[`renderer/utils/icons.ts > getPlatformIcon > GitHub Cloud 1`] = `
 `;
 
 exports[`renderer/utils/icons.ts > getPlatformIcon > GitHub Enterprise Server 1`] = `
-{
-  "$$typeof": Symbol(react.forward_ref),
-  "render": [Function],
-}
-`;
-
-exports[`renderer/utils/icons.ts > getPlatformIcon > should return icon for GitHub Cloud 1`] = `
-{
-  "$$typeof": Symbol(react.forward_ref),
-  "render": [Function],
-}
-`;
-
-exports[`renderer/utils/icons.ts > getPlatformIcon > should return icon for GitHub Enterprise Server 1`] = `
 {
   "$$typeof": Symbol(react.forward_ref),
   "render": [Function],

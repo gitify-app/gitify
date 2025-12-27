@@ -6,51 +6,62 @@ exports[`renderer/components/layout/EmojiSplash.tsx > should render itself & its
   "baseElement": <body>
     <div>
       <div
-        class="h-screen prc-Stack-Stack-UQ9k6"
-        data-align="center"
-        data-direction="vertical"
-        data-justify="center"
-        data-padding="spacious"
-        data-wrap="nowrap"
+        data-color-mode="light"
+        data-dark-theme="dark"
+        data-light-theme="light"
       >
         <div
-          class="prc-Stack-Stack-UQ9k6"
-          data-align="center"
-          data-direction="vertical"
-          data-gap="condensed"
-          data-justify="center"
-          data-padding="none"
-          data-wrap="nowrap"
+          class="prc-src-BaseStyles-aopSS"
+          data-portal-root="true"
         >
           <div
-            class="prc-Stack-Stack-UQ9k6"
+            class="h-screen prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="vertical"
-            data-gap="spacious"
-            data-justify="start"
-            data-padding="none"
+            data-justify="center"
+            data-padding="spacious"
             data-wrap="nowrap"
           >
             <div
-              class="text-7xl"
+              class="prc-Stack-Stack-UQ9k6"
+              data-align="center"
+              data-direction="vertical"
+              data-gap="condensed"
+              data-justify="center"
+              data-padding="none"
+              data-wrap="nowrap"
             >
-              <img
-                alt="🍺"
-                class="emoji"
-                draggable="false"
-                src="asset://localhost//mock/images/assets/1f37a.svg"
-              />
+              <div
+                class="prc-Stack-Stack-UQ9k6"
+                data-align="center"
+                data-direction="vertical"
+                data-gap="spacious"
+                data-justify="start"
+                data-padding="none"
+                data-wrap="nowrap"
+              >
+                <div
+                  class="text-7xl"
+                >
+                  <img
+                    alt="🍺"
+                    class="emoji"
+                    draggable="false"
+                    src="/mock/images/assets/1f37a.svg"
+                  />
+                </div>
+                <div
+                  class="text-xl font-semibold"
+                >
+                  Test Heading
+                </div>
+              </div>
+              <div
+                class="text-center"
+              >
+                Test Sub-Heading
+              </div>
             </div>
-            <div
-              class="text-xl font-semibold"
-            >
-              Test Heading
-            </div>
-          </div>
-          <div
-            class="text-center"
-          >
-            Test Sub-Heading
           </div>
         </div>
       </div>
@@ -58,51 +69,62 @@ exports[`renderer/components/layout/EmojiSplash.tsx > should render itself & its
   </body>,
   "container": <div>
     <div
-      class="h-screen prc-Stack-Stack-UQ9k6"
-      data-align="center"
-      data-direction="vertical"
-      data-justify="center"
-      data-padding="spacious"
-      data-wrap="nowrap"
+      data-color-mode="light"
+      data-dark-theme="dark"
+      data-light-theme="light"
     >
       <div
-        class="prc-Stack-Stack-UQ9k6"
-        data-align="center"
-        data-direction="vertical"
-        data-gap="condensed"
-        data-justify="center"
-        data-padding="none"
-        data-wrap="nowrap"
+        class="prc-src-BaseStyles-aopSS"
+        data-portal-root="true"
       >
         <div
-          class="prc-Stack-Stack-UQ9k6"
+          class="h-screen prc-Stack-Stack-UQ9k6"
           data-align="center"
           data-direction="vertical"
-          data-gap="spacious"
-          data-justify="start"
-          data-padding="none"
+          data-justify="center"
+          data-padding="spacious"
           data-wrap="nowrap"
         >
           <div
-            class="text-7xl"
+            class="prc-Stack-Stack-UQ9k6"
+            data-align="center"
+            data-direction="vertical"
+            data-gap="condensed"
+            data-justify="center"
+            data-padding="none"
+            data-wrap="nowrap"
           >
-            <img
-              alt="🍺"
-              class="emoji"
-              draggable="false"
-              src="asset://localhost//mock/images/assets/1f37a.svg"
-            />
+            <div
+              class="prc-Stack-Stack-UQ9k6"
+              data-align="center"
+              data-direction="vertical"
+              data-gap="spacious"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+            >
+              <div
+                class="text-7xl"
+              >
+                <img
+                  alt="🍺"
+                  class="emoji"
+                  draggable="false"
+                  src="/mock/images/assets/1f37a.svg"
+                />
+              </div>
+              <div
+                class="text-xl font-semibold"
+              >
+                Test Heading
+              </div>
+            </div>
+            <div
+              class="text-center"
+            >
+              Test Sub-Heading
+            </div>
           </div>
-          <div
-            class="text-xl font-semibold"
-          >
-            Test Heading
-          </div>
-        </div>
-        <div
-          class="text-center"
-        >
-          Test Sub-Heading
         </div>
       </div>
     </div>
@@ -167,45 +189,56 @@ exports[`renderer/components/layout/EmojiSplash.tsx > should render itself & its
   "baseElement": <body>
     <div>
       <div
-        class="h-screen prc-Stack-Stack-UQ9k6"
-        data-align="center"
-        data-direction="vertical"
-        data-justify="center"
-        data-padding="spacious"
-        data-wrap="nowrap"
+        data-color-mode="light"
+        data-dark-theme="dark"
+        data-light-theme="light"
       >
         <div
-          class="prc-Stack-Stack-UQ9k6"
-          data-align="center"
-          data-direction="vertical"
-          data-gap="condensed"
-          data-justify="center"
-          data-padding="none"
-          data-wrap="nowrap"
+          class="prc-src-BaseStyles-aopSS"
+          data-portal-root="true"
         >
           <div
-            class="prc-Stack-Stack-UQ9k6"
+            class="h-screen prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="vertical"
-            data-gap="spacious"
-            data-justify="start"
-            data-padding="none"
+            data-justify="center"
+            data-padding="spacious"
             data-wrap="nowrap"
           >
             <div
-              class="text-7xl"
+              class="prc-Stack-Stack-UQ9k6"
+              data-align="center"
+              data-direction="vertical"
+              data-gap="condensed"
+              data-justify="center"
+              data-padding="none"
+              data-wrap="nowrap"
             >
-              <img
-                alt="🍺"
-                class="emoji"
-                draggable="false"
-                src="asset://localhost//mock/images/assets/1f37a.svg"
-              />
-            </div>
-            <div
-              class="text-xl font-semibold"
-            >
-              Test Heading
+              <div
+                class="prc-Stack-Stack-UQ9k6"
+                data-align="center"
+                data-direction="vertical"
+                data-gap="spacious"
+                data-justify="start"
+                data-padding="none"
+                data-wrap="nowrap"
+              >
+                <div
+                  class="text-7xl"
+                >
+                  <img
+                    alt="🍺"
+                    class="emoji"
+                    draggable="false"
+                    src="/mock/images/assets/1f37a.svg"
+                  />
+                </div>
+                <div
+                  class="text-xl font-semibold"
+                >
+                  Test Heading
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -214,45 +247,56 @@ exports[`renderer/components/layout/EmojiSplash.tsx > should render itself & its
   </body>,
   "container": <div>
     <div
-      class="h-screen prc-Stack-Stack-UQ9k6"
-      data-align="center"
-      data-direction="vertical"
-      data-justify="center"
-      data-padding="spacious"
-      data-wrap="nowrap"
+      data-color-mode="light"
+      data-dark-theme="dark"
+      data-light-theme="light"
     >
       <div
-        class="prc-Stack-Stack-UQ9k6"
-        data-align="center"
-        data-direction="vertical"
-        data-gap="condensed"
-        data-justify="center"
-        data-padding="none"
-        data-wrap="nowrap"
+        class="prc-src-BaseStyles-aopSS"
+        data-portal-root="true"
       >
         <div
-          class="prc-Stack-Stack-UQ9k6"
+          class="h-screen prc-Stack-Stack-UQ9k6"
           data-align="center"
           data-direction="vertical"
-          data-gap="spacious"
-          data-justify="start"
-          data-padding="none"
+          data-justify="center"
+          data-padding="spacious"
           data-wrap="nowrap"
         >
           <div
-            class="text-7xl"
+            class="prc-Stack-Stack-UQ9k6"
+            data-align="center"
+            data-direction="vertical"
+            data-gap="condensed"
+            data-justify="center"
+            data-padding="none"
+            data-wrap="nowrap"
           >
-            <img
-              alt="🍺"
-              class="emoji"
-              draggable="false"
-              src="asset://localhost//mock/images/assets/1f37a.svg"
-            />
-          </div>
-          <div
-            class="text-xl font-semibold"
-          >
-            Test Heading
+            <div
+              class="prc-Stack-Stack-UQ9k6"
+              data-align="center"
+              data-direction="vertical"
+              data-gap="spacious"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+            >
+              <div
+                class="text-7xl"
+              >
+                <img
+                  alt="🍺"
+                  class="emoji"
+                  draggable="false"
+                  src="/mock/images/assets/1f37a.svg"
+                />
+              </div>
+              <div
+                class="text-xl font-semibold"
+              >
+                Test Heading
+              </div>
+            </div>
           </div>
         </div>
       </div>
