@@ -166,7 +166,11 @@ export const SystemSettings: FC = () => {
           tooltip={
             <Text>Launch {APPLICATION.NAME} automatically at startup.</Text>
           }
-          visible={!window.gitify.platform.isLinux()}
+          visible={
+            typeof window !== 'undefined' && window.gitify !== undefined
+              ? !window.gitify.platform.isLinux()
+              : true
+          }
         />
       </Stack>
     </fieldset>
