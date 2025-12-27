@@ -12,9 +12,25 @@ import { formatForDisplay } from './utils';
 export class DefaultHandler implements NotificationTypeHandler {
   type?: SubjectType;
 
+  mergeQueryConfig() {
+    return undefined;
+  }
+
+  query(_notification: Notification) {
+    return null;
+  }
+
+  async fetchAndEnrich(
+    _notification: Notification,
+    _settings: SettingsState,
+  ): Promise<GitifySubject> {
+    return null;
+  }
+
   async enrich(
     _notification: Notification,
     _settings: SettingsState,
+    _fetchedData?: unknown,
   ): Promise<GitifySubject> {
     return null;
   }

@@ -19,22 +19,51 @@ import {
 } from '../../../types';
 import type { Notification, Subject } from '../../../typesGitHub';
 import { fetchDiscussionByNumber } from '../../api/client';
-import type {
-  CommentFieldsFragment,
-  DiscussionCommentFieldsFragment,
+import {
+  type CommentFieldsFragment,
+  type DiscussionCommentFieldsFragment,
+  type DiscussionDetailsFragment,
+  DiscussionDetailsFragmentDoc,
+  DiscussionMergeQueryFragmentDoc,
 } from '../../api/graphql/generated/graphql';
+import { getQueryFragmentBody } from '../../api/graphql/utils';
 import { DefaultHandler, defaultHandler } from './default';
+import type { GraphQLMergedQueryConfig } from './types';
 import { getNotificationAuthor } from './utils';
 
 class DiscussionHandler extends DefaultHandler {
   readonly type = 'Discussion';
 
+  mergeQueryConfig() {
+    return {
+      queryFragment: getQueryFragmentBody(
+        DiscussionMergeQueryFragmentDoc.toString(),
+      ),
+      responseFragment: DiscussionDetailsFragmentDoc.toString(),
+      extras: [
+        { name: 'lastComments', type: 'Int', defaultValue: 100 },
+        { name: 'lastReplies', type: 'Int', defaultValue: 100 },
+        { name: 'firstLabels', type: 'Int', defaultValue: 100 },
+        { name: 'includeIsAnswered', type: 'Boolean!', defaultValue: true },
+      ],
+      selection: (
+        index: number,
+      ) => `node${index}: repository(owner: $owner${index}, name: $name${index}) {
+          discussion(number: $number${index}) {
+            ...DiscussionDetails
+          }
+        }`,
+    } as GraphQLMergedQueryConfig;
+  }
+
   async enrich(
     notification: Notification,
     _settings: SettingsState,
+    fetchedData?: DiscussionDetailsFragment,
   ): Promise<GitifySubject> {
-    const response = await fetchDiscussionByNumber(notification);
-    const discussion = response.data.repository?.discussion;
+    const discussion =
+      fetchedData ??
+      (await fetchDiscussionByNumber(notification)).data.nodeINDEX?.discussion;
 
     let discussionState: GitifyDiscussionState = 'OPEN';
 

@@ -1,12 +1,17 @@
+import axios from 'axios';
+
 import type {
   AccountNotifications,
   GitifyState,
   GitifySubject,
+  Link,
   SettingsState,
 } from '../../types';
 import type { Notification } from '../../typesGitHub';
 import { listNotificationsForAuthenticatedUser } from '../api/client';
 import { determineFailureType } from '../api/errors';
+import { getHeaders } from '../api/request';
+import { getGitHubGraphQLUrl, getNumberFromUrl } from '../api/utils';
 import { rendererLogError, rendererLogWarn } from '../logger';
 import {
   filterBaseNotifications,
@@ -128,10 +133,185 @@ export async function enrichNotifications(
   if (!settings.detailedNotifications) {
     return notifications;
   }
+  type NotificationKind = 'PullRequest' | 'Issue' | 'Discussion';
+
+  const selections: string[] = [];
+  const variableDefinitions: string[] = [];
+  const variableValues: Record<string, string | number | boolean> = {};
+  const extraVariableDefinitions = new Map<string, string>();
+  const extraVariableValues: Record<string, number | boolean> = {};
+  const fragments = new Map<string, string>();
+  const targets: Array<{
+    alias: string;
+    kind: NotificationKind;
+    notification: Notification;
+  }> = [];
+
+  const collectFragments = (doc: string) => {
+    const fragmentRegex =
+      /fragment\s+[A-Za-z0-9_]+\s+on[\s\S]*?(?=(?:fragment\s+[A-Za-z0-9_]+\s+on)|$)/g;
+    const nameRegex = /fragment\s+([A-Za-z0-9_]+)\s+on/;
+
+    const matches = doc.match(fragmentRegex) ?? [];
+    for (const match of matches) {
+      const nameMatch = match.match(nameRegex);
+      if (!nameMatch) {
+        continue;
+      }
+      const name = nameMatch[1];
+      if (!fragments.has(name)) {
+        fragments.set(name, match.trim());
+      }
+    }
+  };
+
+  let index = 0;
+
+  for (const notification of notifications) {
+    const handler = createNotificationHandler(notification);
+    const kind = notification.subject.type as NotificationKind;
+    const config = handler.mergeQueryConfig();
+
+    if (!config) {
+      continue;
+    }
+
+    const org = notification.repository.owner.login;
+    const repo = notification.repository.name;
+    const number = getNumberFromUrl(notification.subject.url);
+
+    const alias = `node${index}`;
+    const queryFragment = config.queryFragment.replaceAll(
+      'INDEX',
+      index.toString(),
+    );
+
+    selections.push(queryFragment);
+    variableDefinitions.push(
+      `$owner${index}: String!, $name${index}: String!, $number${index}: Int!`,
+    );
+    variableValues[`owner${index}`] = org;
+    variableValues[`name${index}`] = repo;
+    variableValues[`number${index}`] = number;
+    targets.push({ alias, kind, notification });
+
+    for (const extra of config.extras) {
+      if (!extraVariableDefinitions.has(extra.name)) {
+        extraVariableDefinitions.set(extra.name, extra.type);
+        extraVariableValues[extra.name] = extra.defaultValue;
+      }
+    }
+
+    collectFragments(config.responseFragment);
+
+    index += 1;
+  }
+
+  if (selections.length === 0) {
+    const enrichedNotifications = await Promise.all(
+      notifications.map(async (notification: Notification) => {
+        return enrichNotification(notification, settings);
+      }),
+    );
+    return enrichedNotifications;
+  }
+
+  const combinedVariableDefinitions = [
+    ...variableDefinitions,
+    ...Array.from(extraVariableDefinitions.entries()).map(
+      ([name, type]) => `$${name}: ${type}`,
+    ),
+  ].join(', ');
+
+  const mergedQuery = `query FetchMergedNotifications(${combinedVariableDefinitions}) {
+      ${selections.join('\n')}
+    }
+
+    ${Array.from(fragments.values()).join('\n')}
+  `;
+
+  const queryVariables = {
+    ...variableValues,
+    ...extraVariableValues,
+  };
+
+  let mergedData: Record<string, unknown> | null = null;
+
+  try {
+    const url = getGitHubGraphQLUrl(
+      notifications[0].account.hostname,
+    ).toString();
+    const token = notifications[0].account.token;
+
+    const headers = await getHeaders(url as Link, token);
+
+    const response = await axios({
+      method: 'POST',
+      url,
+      data: {
+        query: mergedQuery,
+        variables: queryVariables,
+      },
+      headers: headers,
+    });
+
+    mergedData =
+      (response.data as { data?: Record<string, unknown> })?.data ?? null;
+  } catch (err) {
+    rendererLogError(
+      'enrichNotifications',
+      'Failed to fetch merged notification details',
+      err,
+    );
+  }
 
   const enrichedNotifications = await Promise.all(
     notifications.map(async (notification: Notification) => {
-      return enrichNotification(notification, settings);
+      const handler = createNotificationHandler(notification);
+
+      const target = targets.find((item) => item.notification === notification);
+
+      if (mergedData && target) {
+        const repoData = mergedData[target.alias] as
+          | { pullRequest?: unknown; issue?: unknown; discussion?: unknown }
+          | undefined;
+
+        let fragment: unknown;
+        if (target.kind === 'PullRequest') {
+          fragment = repoData?.pullRequest;
+        } else if (target.kind === 'Issue') {
+          fragment = repoData?.issue;
+        } else if (target.kind === 'Discussion') {
+          fragment = repoData?.discussion;
+        }
+
+        if (fragment) {
+          const details = await handler.enrich(
+            notification,
+            settings,
+            fragment,
+          );
+          return {
+            ...notification,
+            subject: {
+              ...notification.subject,
+              ...details,
+            },
+          };
+        }
+      }
+
+      const fetchedDetails = await handler.fetchAndEnrich(
+        notification,
+        settings,
+      );
+      return {
+        ...notification,
+        subject: {
+          ...notification.subject,
+          ...fetchedDetails,
+        },
+      };
     }),
   );
 
@@ -153,7 +333,10 @@ export async function enrichNotification(
 
   try {
     const handler = createNotificationHandler(notification);
-    additionalSubjectDetails = await handler.enrich(notification, settings);
+    additionalSubjectDetails = await handler.fetchAndEnrich(
+      notification,
+      settings,
+    );
   } catch (err) {
     rendererLogError(
       'enrichNotification',
