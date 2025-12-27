@@ -7,7 +7,6 @@
 /** Tailwind CSS Configuration */
 @config "../tailwind.config.ts";
 
-
 html,
 body,
 #root {

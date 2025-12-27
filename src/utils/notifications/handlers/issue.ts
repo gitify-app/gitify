@@ -10,12 +10,12 @@ import {
 
 import type {
   GitifyIssueState,
-  GitifyNotification,
   GitifySubject,
   Link,
   SettingsState,
 } from '../../../types';
 import { IconColor } from '../../../types';
+import type { Notification, Subject } from '../../../typesGitHub';
 import { fetchIssueByNumber } from '../../api/client';
 import { DefaultHandler, defaultHandler } from './default';
 import { getNotificationAuthor } from './utils';
@@ -24,14 +24,14 @@ class IssueHandler extends DefaultHandler {
   readonly type = 'Issue';
 
   async enrich(
-    notification: GitifyNotification,
+    notification: Notification,
     _settings: SettingsState,
-  ): Promise<Partial<GitifySubject>> {
+  ): Promise<GitifySubject | null> {
     const response = await fetchIssueByNumber(notification);
     const issue = response.data?.repository?.issue;
 
     if (!issue) {
-      return {};
+      return null;
     }
 
     const issueState = issue.stateReason ?? issue.state;
@@ -56,7 +56,7 @@ class IssueHandler extends DefaultHandler {
     };
   }
 
-  iconType(subject: GitifySubject): FC<OcticonProps> | null {
+  iconType(subject: Subject): FC<OcticonProps> | null {
     switch (subject.state as GitifyIssueState) {
       case 'CLOSED':
       case 'COMPLETED':
@@ -71,7 +71,7 @@ class IssueHandler extends DefaultHandler {
     }
   }
 
-  iconColor(subject: GitifySubject): IconColor {
+  iconColor(subject: Subject): IconColor {
     switch (subject.state as GitifyIssueState) {
       case 'OPEN':
       case 'REOPENED':
@@ -85,8 +85,8 @@ class IssueHandler extends DefaultHandler {
     }
   }
 
-  defaultUrl(notification: GitifyNotification): Link {
-    const url = new URL(notification.repository.htmlUrl);
+  defaultUrl(notification: Notification): Link {
+    const url = new URL(notification.repository.html_url);
     url.pathname += '/issues';
     return url.href as Link;
   }

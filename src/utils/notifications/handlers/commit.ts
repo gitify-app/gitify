@@ -21,13 +21,13 @@ class CommitHandler extends DefaultHandler {
   async enrich(
     notification: Notification,
     settings: SettingsState,
-  ): Promise<GitifySubject> {
+  ): Promise<GitifySubject | null> {
     // Commit notifications are stateless
     const commitState: GitifyNotificationState | undefined = undefined;
 
     // Return early if this notification would be hidden by filters
     if (isStateFilteredOut(commitState, settings)) {
-      return {};
+      return null;
     }
 
     let user: GitifyNotificationUser | undefined;

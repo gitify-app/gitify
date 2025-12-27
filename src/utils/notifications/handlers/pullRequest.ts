@@ -10,7 +10,6 @@ import {
 } from '@primer/octicons-react';
 
 import {
-  type GitifyNotification,
   type GitifyPullRequestReview,
   type GitifyPullRequestState,
   type GitifySubject,
@@ -18,6 +17,7 @@ import {
   type Link,
   type SettingsState,
 } from '../../../types';
+import type { Notification, Subject } from '../../../typesGitHub';
 import { fetchPullByNumber } from '../../api/client';
 import type { PullRequestReviewFieldsFragment } from '../../api/graphql/generated/graphql';
 import { DefaultHandler, defaultHandler } from './default';
@@ -27,14 +27,14 @@ class PullRequestHandler extends DefaultHandler {
   readonly type = 'PullRequest' as const;
 
   async enrich(
-    notification: GitifyNotification,
+    notification: Notification,
     _settings: SettingsState,
-  ): Promise<Partial<GitifySubject>> {
+  ): Promise<GitifySubject | null> {
     const response = await fetchPullByNumber(notification);
     const pr = response.data?.repository?.pullRequest;
 
     if (!pr) {
-      return {};
+      return null;
     }
 
     let prState: GitifyPullRequestState = pr.state;
@@ -75,7 +75,7 @@ class PullRequestHandler extends DefaultHandler {
     };
   }
 
-  iconType(subject: GitifySubject): FC<OcticonProps> | null {
+  iconType(subject: Subject): FC<OcticonProps> | null {
     switch (subject.state as GitifyPullRequestState) {
       case 'DRAFT':
         return GitPullRequestDraftIcon;
@@ -90,7 +90,7 @@ class PullRequestHandler extends DefaultHandler {
     }
   }
 
-  iconColor(subject: GitifySubject): IconColor {
+  iconColor(subject: Subject): IconColor {
     switch (subject.state as GitifyPullRequestState) {
       case 'OPEN':
         return IconColor.GREEN;
@@ -105,8 +105,8 @@ class PullRequestHandler extends DefaultHandler {
     }
   }
 
-  defaultUrl(notification: GitifyNotification): Link {
-    const url = new URL(notification.repository.htmlUrl);
+  defaultUrl(notification: Notification): Link {
+    const url = new URL(notification.repository.html_url);
     url.pathname += '/pulls';
     return url.href as Link;
   }

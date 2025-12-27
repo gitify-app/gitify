@@ -49,7 +49,7 @@ describe('renderer/utils/notifications/handlers/release.ts', () => {
       );
 
       expect(result).toEqual({
-        state: null,
+        state: undefined,
         user: {
           login: mockAuthor.login,
           htmlUrl: mockAuthor.html_url,

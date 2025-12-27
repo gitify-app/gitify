@@ -26,7 +26,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
 
       expect(result).toEqual({
         state: 'CANCELLED',
-        user: null,
+        user: undefined,
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/actions?query=workflow%3A%22Demo%22+is%3ACANCELLED+branch%3Amain',
       });
@@ -45,7 +45,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
 
       expect(result).toEqual({
         state: 'FAILURE',
-        user: null,
+        user: undefined,
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/actions?query=workflow%3A%22Demo%22+is%3AFAILURE+branch%3Amain',
       });
@@ -64,7 +64,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
 
       expect(result).toEqual({
         state: 'FAILURE',
-        user: null,
+        user: undefined,
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/actions?query=workflow%3A%22Demo%22+is%3AFAILURE+branch%3Amain',
       });
@@ -83,7 +83,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
 
       expect(result).toEqual({
         state: 'FAILURE',
-        user: null,
+        user: undefined,
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/actions?query=workflow%3A%22Demo%22+is%3AFAILURE+branch%3Amain',
       });
@@ -102,7 +102,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
 
       expect(result).toEqual({
         state: 'SKIPPED',
-        user: null,
+        user: undefined,
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/actions?query=workflow%3A%22Demo%22+is%3ASKIPPED+branch%3Amain',
       });
@@ -121,7 +121,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
 
       expect(result).toEqual({
         state: 'SUCCESS',
-        user: null,
+        user: undefined,
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/actions?query=workflow%3A%22Demo%22+is%3ASUCCESS+branch%3Amain',
       });

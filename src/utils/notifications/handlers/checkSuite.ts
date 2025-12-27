@@ -11,18 +11,18 @@ import {
 
 import {
   type GitifyCheckSuiteStatus,
-  type GitifyNotification,
   type GitifySubject,
   IconColor,
   type Link,
   type SettingsState,
 } from '../../../types';
+import type { Notification, Subject } from '../../../typesGitHub';
 import { actionsURL } from '../../helpers';
 import { DefaultHandler, defaultHandler } from './default';
 
 export interface CheckSuiteAttributes {
   workflowName: string;
-  attemptNumber?: number;
+  attemptNumber: number | null;
   statusDisplayName: string;
   status: GitifyCheckSuiteStatus | null;
   branchName: string;
@@ -32,9 +32,9 @@ class CheckSuiteHandler extends DefaultHandler {
   readonly type = 'CheckSuite';
 
   async enrich(
-    notification: GitifyNotification,
+    notification: Notification,
     _settings: SettingsState,
-  ): Promise<Partial<GitifySubject>> {
+  ): Promise<GitifySubject | null> {
     const state = getCheckSuiteAttributes(notification)?.status;
 
     if (state) {
@@ -45,10 +45,10 @@ class CheckSuiteHandler extends DefaultHandler {
       };
     }
 
-    return {};
+    return null;
   }
 
-  iconType(subject: GitifySubject): FC<OcticonProps> | null {
+  iconType(subject: Subject): FC<OcticonProps> | null {
     switch (subject.state as GitifyCheckSuiteStatus) {
       case 'CANCELLED':
         return StopIcon;
@@ -63,7 +63,7 @@ class CheckSuiteHandler extends DefaultHandler {
     }
   }
 
-  iconColor(subject: GitifySubject): IconColor {
+  iconColor(subject: Subject): IconColor {
     switch (subject.state as GitifyCheckSuiteStatus) {
       case 'SUCCESS':
         return IconColor.GREEN;
@@ -74,7 +74,7 @@ class CheckSuiteHandler extends DefaultHandler {
     }
   }
 
-  defaultUrl(notification: GitifyNotification): Link {
+  defaultUrl(notification: Notification): Link {
     return getCheckSuiteUrl(notification);
   }
 }
@@ -86,7 +86,7 @@ export const checkSuiteHandler = new CheckSuiteHandler();
  * but there isn't an obvious/clean way to do this currently.
  */
 export function getCheckSuiteAttributes(
-  notification: GitifyNotification,
+  notification: Notification,
 ): CheckSuiteAttributes | null {
   const regex =
     /^(?<workflowName>.*?) workflow run(, Attempt #(?<attemptNumber>\d+))? (?<statusDisplayName>.*?) for (?<branchName>.*?) branch$/;
@@ -102,9 +102,7 @@ export function getCheckSuiteAttributes(
 
   return {
     workflowName,
-    attemptNumber: attemptNumber
-      ? Number.parseInt(attemptNumber, 10)
-      : undefined,
+    attemptNumber: attemptNumber ? Number.parseInt(attemptNumber, 10) : null,
     status: getCheckSuiteStatus(statusDisplayName),
     statusDisplayName,
     branchName,
@@ -129,7 +127,7 @@ function getCheckSuiteStatus(
   }
 }
 
-export function getCheckSuiteUrl(notification: GitifyNotification): Link {
+export function getCheckSuiteUrl(notification: Notification): Link {
   const filters = [];
 
   const checkSuiteAttributes = getCheckSuiteAttributes(notification);
@@ -148,5 +146,5 @@ export function getCheckSuiteUrl(notification: GitifyNotification): Link {
     filters.push(`branch:${checkSuiteAttributes.branchName}`);
   }
 
-  return actionsURL(notification.repository.htmlUrl, filters);
+  return actionsURL(notification.repository.html_url, filters);
 }
