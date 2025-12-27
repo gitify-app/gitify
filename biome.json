@@ -1,8 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.3.10/schema.json",
-  "files": {
-    "includes": ["**", "!**/generated/**/*"]
-  },
+  "$schema": "https://biomejs.dev/schemas/2.3.5/schema.json",
   "assist": {
     "actions": {
       "source": {

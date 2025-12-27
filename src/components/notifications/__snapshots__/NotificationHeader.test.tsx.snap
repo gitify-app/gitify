@@ -1,0 +1,563 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`renderer/components/notifications/NotificationHeader.tsx > should render itself & its children - group by date > with notification number 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="py-0.5"
+      >
+        <div
+          class="prc-Stack-Stack-UQ9k6"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
+        >
+          <button
+            class="text-xs font-medium"
+            data-testid="view-repository"
+            title="Open repository ↗"
+            type="button"
+          >
+            <div
+              class="prc-Stack-Stack-UQ9k6"
+              data-align="center"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-testid="avatar"
+              data-wrap="nowrap"
+            >
+              <img
+                alt="gitify-app/notifications-test"
+                class="prc-Avatar-Avatar-0xaUi"
+                data-component="Avatar"
+                height="14"
+                src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+                style="--avatarSize-regular: 14px;"
+                width="14"
+              />
+              <div
+                class="prc-Truncate-Truncate-2G1eo"
+                data-inline="true"
+                style="--truncate-max-width: 280px;"
+                title="gitify-app/notifications-test"
+              >
+                gitify-app/notifications-test
+              </div>
+            </div>
+          </button>
+          <div
+            class="text-xxs opacity-50"
+          />
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="py-0.5"
+    >
+      <div
+        class="prc-Stack-Stack-UQ9k6"
+        data-align="center"
+        data-direction="horizontal"
+        data-gap="condensed"
+        data-justify="start"
+        data-padding="none"
+        data-wrap="nowrap"
+      >
+        <button
+          class="text-xs font-medium"
+          data-testid="view-repository"
+          title="Open repository ↗"
+          type="button"
+        >
+          <div
+            class="prc-Stack-Stack-UQ9k6"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-testid="avatar"
+            data-wrap="nowrap"
+          >
+            <img
+              alt="gitify-app/notifications-test"
+              class="prc-Avatar-Avatar-0xaUi"
+              data-component="Avatar"
+              height="14"
+              src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+              style="--avatarSize-regular: 14px;"
+              width="14"
+            />
+            <div
+              class="prc-Truncate-Truncate-2G1eo"
+              data-inline="true"
+              style="--truncate-max-width: 280px;"
+              title="gitify-app/notifications-test"
+            >
+              gitify-app/notifications-test
+            </div>
+          </div>
+        </button>
+        <div
+          class="text-xxs opacity-50"
+        />
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`renderer/components/notifications/NotificationHeader.tsx > should render itself & its children - group by date > with showNumber setting disabled 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="py-0.5"
+      >
+        <div
+          class="prc-Stack-Stack-UQ9k6"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
+        >
+          <button
+            class="text-xs font-medium"
+            data-testid="view-repository"
+            title="Open repository ↗"
+            type="button"
+          >
+            <div
+              class="prc-Stack-Stack-UQ9k6"
+              data-align="center"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-testid="avatar"
+              data-wrap="nowrap"
+            >
+              <img
+                alt="gitify-app/notifications-test"
+                class="prc-Avatar-Avatar-0xaUi"
+                data-component="Avatar"
+                height="14"
+                src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+                style="--avatarSize-regular: 14px;"
+                width="14"
+              />
+              <div
+                class="prc-Truncate-Truncate-2G1eo"
+                data-inline="true"
+                style="--truncate-max-width: 280px;"
+                title="gitify-app/notifications-test"
+              >
+                gitify-app/notifications-test
+              </div>
+            </div>
+          </button>
+          <div
+            class="text-xxs opacity-50 hidden"
+          />
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="py-0.5"
+    >
+      <div
+        class="prc-Stack-Stack-UQ9k6"
+        data-align="center"
+        data-direction="horizontal"
+        data-gap="condensed"
+        data-justify="start"
+        data-padding="none"
+        data-wrap="nowrap"
+      >
+        <button
+          class="text-xs font-medium"
+          data-testid="view-repository"
+          title="Open repository ↗"
+          type="button"
+        >
+          <div
+            class="prc-Stack-Stack-UQ9k6"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-testid="avatar"
+            data-wrap="nowrap"
+          >
+            <img
+              alt="gitify-app/notifications-test"
+              class="prc-Avatar-Avatar-0xaUi"
+              data-component="Avatar"
+              height="14"
+              src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+              style="--avatarSize-regular: 14px;"
+              width="14"
+            />
+            <div
+              class="prc-Truncate-Truncate-2G1eo"
+              data-inline="true"
+              style="--truncate-max-width: 280px;"
+              title="gitify-app/notifications-test"
+            >
+              gitify-app/notifications-test
+            </div>
+          </div>
+        </button>
+        <div
+          class="text-xxs opacity-50 hidden"
+        />
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`renderer/components/notifications/NotificationHeader.tsx > should render itself & its children - group by date > without notification number 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="py-0.5"
+      >
+        <div
+          class="prc-Stack-Stack-UQ9k6"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
+        >
+          <button
+            class="text-xs font-medium"
+            data-testid="view-repository"
+            title="Open repository ↗"
+            type="button"
+          >
+            <div
+              class="prc-Stack-Stack-UQ9k6"
+              data-align="center"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-testid="avatar"
+              data-wrap="nowrap"
+            >
+              <img
+                alt="gitify-app/notifications-test"
+                class="prc-Avatar-Avatar-0xaUi"
+                data-component="Avatar"
+                height="14"
+                src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+                style="--avatarSize-regular: 14px;"
+                width="14"
+              />
+              <div
+                class="prc-Truncate-Truncate-2G1eo"
+                data-inline="true"
+                style="--truncate-max-width: 280px;"
+                title="gitify-app/notifications-test"
+              >
+                gitify-app/notifications-test
+              </div>
+            </div>
+          </button>
+          <div
+            class="text-xxs opacity-50"
+          />
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="py-0.5"
+    >
+      <div
+        class="prc-Stack-Stack-UQ9k6"
+        data-align="center"
+        data-direction="horizontal"
+        data-gap="condensed"
+        data-justify="start"
+        data-padding="none"
+        data-wrap="nowrap"
+      >
+        <button
+          class="text-xs font-medium"
+          data-testid="view-repository"
+          title="Open repository ↗"
+          type="button"
+        >
+          <div
+            class="prc-Stack-Stack-UQ9k6"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-testid="avatar"
+            data-wrap="nowrap"
+          >
+            <img
+              alt="gitify-app/notifications-test"
+              class="prc-Avatar-Avatar-0xaUi"
+              data-component="Avatar"
+              height="14"
+              src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+              style="--avatarSize-regular: 14px;"
+              width="14"
+            />
+            <div
+              class="prc-Truncate-Truncate-2G1eo"
+              data-inline="true"
+              style="--truncate-max-width: 280px;"
+              title="gitify-app/notifications-test"
+            >
+              gitify-app/notifications-test
+            </div>
+          </div>
+        </button>
+        <div
+          class="text-xxs opacity-50"
+        />
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`renderer/components/notifications/NotificationHeader.tsx > should render itself & its children - group by repositories 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div />
+  </body>,
+  "container": <div />,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
