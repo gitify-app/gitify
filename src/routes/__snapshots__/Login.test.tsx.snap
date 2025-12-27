@@ -40,7 +40,7 @@ exports[`renderer/routes/Login.tsx > should render itself & its children 1`] = `
               >
                 <defs>
                   <lineargradient
-                    id="linearGradient-dark"
+                    id="_r_1_"
                     x1="90.8779989%"
                     x2="-1.30249747%"
                     y1="80.0676288%"
@@ -63,9 +63,8 @@ exports[`renderer/routes/Login.tsx > should render itself & its children 1`] = `
                   stroke-width="1"
                 >
                   <g
-                    fill="url(#linearGradient-dark)"
+                    fill="url(#_r_1_)"
                     fill-rule="nonzero"
-                    id="Logo"
                     transform="translate(6.000000, 6.000000)"
                   >
                     <path
@@ -277,7 +276,7 @@ exports[`renderer/routes/Login.tsx > should render itself & its children 1`] = `
             >
               <defs>
                 <lineargradient
-                  id="linearGradient-dark"
+                  id="_r_1_"
                   x1="90.8779989%"
                   x2="-1.30249747%"
                   y1="80.0676288%"
@@ -300,9 +299,8 @@ exports[`renderer/routes/Login.tsx > should render itself & its children 1`] = `
                 stroke-width="1"
               >
                 <g
-                  fill="url(#linearGradient-dark)"
+                  fill="url(#_r_1_)"
                   fill-rule="nonzero"
-                  id="Logo"
                   transform="translate(6.000000, 6.000000)"
                 >
                   <path

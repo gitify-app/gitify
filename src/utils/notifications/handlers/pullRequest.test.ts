@@ -413,7 +413,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
       expect(
         pullRequestHandler.iconType(
           createMockSubject({ type: 'PullRequest', state: pullRequestState }),
-        )!.displayName,
+        )?.displayName,
       ).toBe(pullRequestIconType);
     });
   });

@@ -15,7 +15,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
           data-portal-root="true"
         >
           <fieldset
-            id="filter-reasons"
+            id="_r_1_"
           >
             <legend>
               <div
@@ -902,7 +902,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
         data-portal-root="true"
       >
         <fieldset
-          id="filter-reasons"
+          id="_r_1_"
         >
           <legend>
             <div

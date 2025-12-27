@@ -315,7 +315,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
       expect(
         discussionHandler.iconType(
           createMockSubject({ type: 'Discussion', state: discussionState }),
-        )!.displayName,
+        )?.displayName,
       ).toBe(discussionIconType);
     });
   });

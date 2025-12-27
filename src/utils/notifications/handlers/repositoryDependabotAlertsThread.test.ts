@@ -9,7 +9,7 @@ describe('renderer/utils/notifications/handlers/repositoryDependabotAlertsThread
         createMockSubject({
           type: 'RepositoryDependabotAlertsThread',
         }),
-      )!.displayName,
+      )?.displayName,
     ).toBe('AlertIcon');
   });
 

@@ -1,4 +1,4 @@
-import type { GitifyNotification } from '../../../types';
+import type { Notification } from '../../../typesGitHub';
 import { isNonHumanUser, userTypeFilter } from './userType';
 
 describe('renderer/utils/notifications/filters/userType.ts', () => {
@@ -15,33 +15,33 @@ describe('renderer/utils/notifications/filters/userType.ts', () => {
   });
 
   it('can filter by user types', () => {
-    const mockPartialNotification = {
-      subject: {
-        user: {
-          type: 'User',
+    const createMockNotification = (userType: string) =>
+      ({
+        subject: {
+          user: {
+            type: userType,
+          },
         },
-      },
-    } as Partial<GitifyNotification> as GitifyNotification;
+      }) as Partial<Notification> as Notification;
 
-    mockPartialNotification.subject.user!.type = 'User';
     expect(
-      userTypeFilter.filterNotification(mockPartialNotification, 'User'),
+      userTypeFilter.filterNotification(createMockNotification('User'), 'User'),
     ).toBe(true);
 
-    mockPartialNotification.subject.user!.type = 'EnterpriseUserAccount';
-    expect(
-      userTypeFilter.filterNotification(mockPartialNotification, 'User'),
-    ).toBe(true);
-
-    mockPartialNotification.subject.user!.type = 'Bot';
-    expect(
-      userTypeFilter.filterNotification(mockPartialNotification, 'Bot'),
-    ).toBe(true);
-
-    mockPartialNotification.subject.user!.type = 'Organization';
     expect(
       userTypeFilter.filterNotification(
-        mockPartialNotification,
+        createMockNotification('EnterpriseUserAccount'),
+        'User',
+      ),
+    ).toBe(true);
+
+    expect(
+      userTypeFilter.filterNotification(createMockNotification('Bot'), 'Bot'),
+    ).toBe(true);
+
+    expect(
+      userTypeFilter.filterNotification(
+        createMockNotification('Organization'),
         'Organization',
       ),
     ).toBe(true);

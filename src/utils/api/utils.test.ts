@@ -43,7 +43,7 @@ describe('renderer/utils/api/utils.ts', () => {
       const result = getNextURLFromLinkHeader(
         mockResponse as unknown as AxiosResponse,
       );
-      expect(result!.toString()).toBe(
+      expect(result?.toString()).toBe(
         'https://api.github.com/notifications?participating=false&page=2',
       );
     });

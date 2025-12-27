@@ -1,4 +1,4 @@
-import type { FC } from 'react';
+import { type FC, useId } from 'react';
 
 import {
   DependabotIcon,
@@ -13,12 +13,14 @@ import { userTypeFilter } from '../../utils/notifications/filters';
 import { FilterSection } from './FilterSection';
 
 export const UserTypeFilter: FC = () => {
+  const id = useId();
+
   return (
     <FilterSection
       filter={userTypeFilter}
       filterSetting="filterUserTypes"
       icon={FeedPersonIcon}
-      id="filter-user-types"
+      id={id}
       layout="horizontal"
       title="User Type"
       tooltip={

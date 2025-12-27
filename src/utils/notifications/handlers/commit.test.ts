@@ -110,8 +110,8 @@ describe('renderer/utils/notifications/handlers/commit.ts', () => {
 
   it('iconType', () => {
     expect(
-      commitHandler.iconType(createMockSubject({ type: 'Commit' }))!
-        .displayName,
+      commitHandler.iconType(createMockSubject({ type: 'Commit' }))
+        ?.displayName,
     ).toBe('GitCommitIcon');
   });
 

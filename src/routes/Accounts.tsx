@@ -60,11 +60,14 @@ export const AccountsRoute: FC = () => {
     [logoutFromAccount],
   );
 
-  const setAsPrimaryAccount = useCallback((account: Account) => {
-    auth.accounts = [account, ...auth.accounts.filter((a) => a !== account)];
-    saveState({ auth, settings });
-    navigate('/accounts', { replace: true });
-  }, []);
+  const setAsPrimaryAccount = useCallback(
+    (account: Account) => {
+      auth.accounts = [account, ...auth.accounts.filter((a) => a !== account)];
+      saveState({ auth, settings });
+      navigate('/accounts', { replace: true });
+    },
+    [auth, settings],
+  );
 
   const handleRefresh = useCallback(async (account: Account) => {
     const accountUUID = getAccountUUID(account);
@@ -99,7 +102,7 @@ export const AccountsRoute: FC = () => {
         err as Error,
       );
     }
-  }, []);
+  }, [loginWithGitHubApp]);
 
   const loginWithPersonalAccessToken = useCallback(() => {
     return navigate('/login-personal-access-token', { replace: true });
