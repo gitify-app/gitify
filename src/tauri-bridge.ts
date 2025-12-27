@@ -1,0 +1,525 @@
+/**
+ * Tauri Bridge API
+ * Replaces Electron's window.gitify API with Tauri equivalents
+ */
+
+import { invoke } from '@tauri-apps/api/core';
+import type { UnlistenFn } from '@tauri-apps/api/event';
+import { listen } from '@tauri-apps/api/event';
+import { disable, enable } from '@tauri-apps/plugin-autostart';
+import {
+  isRegistered,
+  register,
+  unregister,
+} from '@tauri-apps/plugin-global-shortcut';
+
+// Types for updater events
+interface UpdateAvailablePayload {
+  version: string;
+  current_version: string;
+  body: string | null;
+}
+
+interface DownloadProgressPayload {
+  percent: number;
+  downloaded: number;
+  total: number | null;
+}
+
+interface UpdateStatus {
+  checking: boolean;
+  update_available: boolean;
+  update_downloaded: boolean;
+}
+
+// Platform detection
+const isLinux = () => navigator.platform.toLowerCase().includes('linux');
+const isMacOS = () => navigator.platform.toLowerCase().includes('mac');
+const isWindows = () => navigator.platform.toLowerCase().includes('win');
+
+export const api = {
+  /**
+   * Open external link in browser
+   */
+  openExternalLink: async (url: string, _openInForeground: boolean) => {
+    await invoke('open_external_link', { url });
+  },
+
+  /**
+   * Encrypt value using OS keyring
+   * Returns a unique identifier for this token
+   */
+  encryptValue: async (value: string): Promise<string> => {
+    // Generate a unique identifier for this token (timestamp + random)
+    const identifier = `token_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    await invoke('encrypt_token', { token: value, identifier });
+    // Return the identifier as the "encrypted" value
+    return identifier;
+  },
+
+  /**
+   * Decrypt value from OS keyring
+   * The 'value' parameter is the identifier returned from encryptValue
+   */
+  decryptValue: async (value: string): Promise<string> => {
+    // Use the value as the identifier to retrieve from keyring
+    return await invoke<string>('decrypt_token', { identifier: value });
+  },
+
+  /**
+   * Set auto-launch on system startup
+   */
+  setAutoLaunch: async (value: boolean) => {
+    if (value) {
+      await enable();
+    } else {
+      await disable();
+    }
+  },
+
+  /**
+   * Set global keyboard shortcut
+   */
+  setKeyboardShortcut: async (keyboardShortcut: boolean) => {
+    const shortcut = 'CommandOrControl+Shift+G'; // Default from Electron version
+
+    if (keyboardShortcut) {
+      const registered = await isRegistered(shortcut);
+      if (!registered) {
+        await register(shortcut, async () => {
+          await invoke('toggle_window');
+        });
+      }
+    } else {
+      await unregister(shortcut);
+    }
+  },
+
+  /**
+   * Tray icon controls
+   */
+  tray: {
+    /**
+     * Update tray icon color based on notification count
+     * Passing a negative number will set the error state color
+     * Checks navigator.onLine to show offline icon when disconnected
+     */
+    updateColor: async (notificationsCount = 0) => {
+      let state: string;
+
+      // Check if offline first (matches Electron behavior with net.isOnline())
+      if (!navigator.onLine) {
+        state = 'offline';
+      } else if (notificationsCount < 0) {
+        state = 'error';
+      } else if (notificationsCount > 0) {
+        state = 'active';
+      } else {
+        state = 'idle';
+      }
+      await invoke('update_tray_icon', { state });
+    },
+
+    /**
+     * Update tray title (macOS notification badge)
+     */
+    updateTitle: async (title = '') => {
+      await invoke('update_tray_title', { title });
+    },
+
+    /**
+     * Use alternate idle icon
+     */
+    useAlternateIdleIcon: async (value: boolean) => {
+      await invoke('set_alternate_idle_icon', { enabled: value });
+    },
+
+    /**
+     * Use unread active icon
+     */
+    useUnreadActiveIcon: async (value: boolean) => {
+      await invoke('set_unread_active_icon', { enabled: value });
+    },
+  },
+
+  /**
+   * Get notification sound path
+   */
+  notificationSoundPath: async (): Promise<string> => {
+    return await invoke<string>('get_notification_sound_path');
+  },
+
+  /**
+   * Get Twemoji directory path
+   */
+  twemojiDirectory: async (): Promise<string> => {
+    return await invoke<string>('get_twemoji_directory');
+  },
+
+  /**
+   * Platform detection utilities
+   */
+  platform: {
+    isLinux,
+    isMacOS,
+    isWindows,
+  },
+
+  /**
+   * App controls
+   */
+  app: {
+    /**
+     * Hide the app window
+     */
+    hide: async () => {
+      await invoke('hide_window');
+    },
+
+    /**
+     * Show the app window
+     */
+    show: async () => {
+      await invoke('show_window');
+    },
+
+    /**
+     * Quit the application
+     */
+    quit: async () => {
+      await invoke('quit_app');
+    },
+
+    /**
+     * Get app version
+     */
+    version: async (): Promise<string> => {
+      if (import.meta.env.DEV) {
+        return 'dev';
+      }
+
+      const version = await invoke<string>('get_app_version');
+      return `v${version}`;
+    },
+  },
+
+  /**
+   * Zoom controls
+   * Note: In Tauri, we use CSS zoom property instead of webFrame
+   * CSS zoom is now well-supported in all modern browsers including Firefox 126+
+   */
+  zoom: {
+    /**
+     * Get current zoom level
+     * Returns a zoom level like Electron's webFrame.getZoomLevel()
+     * 0 = 100%, positive = zoomed in, negative = zoomed out
+     */
+    getLevel: (): number => {
+      const zoomLevel = localStorage.getItem('zoomLevel');
+      return zoomLevel ? Number.parseFloat(zoomLevel) : 0;
+    },
+
+    /**
+     * Set zoom level
+     * Uses CSS zoom property for clean scaling without layout issues
+     * @param zoomLevel - zoom level where 0 = 100%, each unit is ~20% change
+     */
+    setLevel: (zoomLevel: number) => {
+      localStorage.setItem('zoomLevel', zoomLevel.toString());
+
+      // Calculate zoom factor: 1.2^zoomLevel gives ~20% per level
+      // This matches Electron's webFrame behavior
+      const zoomFactor = 1.2 ** zoomLevel;
+
+      // Apply zoom using CSS zoom property on the root app container
+      // This scales content without affecting viewport/scrolling behavior
+      const rootElement = document.getElementById('root');
+      if (rootElement) {
+        rootElement.style.zoom = zoomFactor.toString();
+      }
+    },
+  },
+
+  /**
+   * Listen for reset app event
+   */
+  onResetApp: async (callback: () => void) => {
+    await listen('reset-app', () => callback());
+  },
+
+  /**
+   * Listen for OAuth callback
+   */
+  onAuthCallback: async (callback: (url: string) => void) => {
+    await listen<string>('auth-callback', (event) => {
+      callback(event.payload);
+    });
+  },
+
+  /**
+   * Listen for system theme updates
+   */
+  onSystemThemeUpdate: async (callback: (theme: string) => void) => {
+    // Tauri uses native theme detection
+    // We can listen to system theme changes via matchMedia
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const handler = (e: MediaQueryListEvent) => {
+      callback(e.matches ? 'dark' : 'light');
+    };
+    mediaQuery.addEventListener('change', handler);
+
+    // Also listen for any explicit theme update events from Rust
+    await listen<string>('system-theme-update', (event) => {
+      callback(event.payload);
+    });
+
+    // Call immediately with current theme
+    callback(mediaQuery.matches ? 'dark' : 'light');
+  },
+
+  /**
+   * Request notification permission
+   * Returns true if permission is granted, false otherwise
+   */
+  requestNotificationPermission: async (): Promise<boolean> => {
+    // Check if the Notification API is available
+    if (!('Notification' in window)) {
+      // biome-ignore lint/suspicious/noConsole: Runtime warning for unsupported environment
+      console.warn('Notifications not supported in this environment');
+      return false;
+    }
+
+    // Check current permission status
+    if (Notification.permission === 'granted') {
+      return true;
+    }
+
+    if (Notification.permission === 'denied') {
+      // biome-ignore lint/suspicious/noConsole: Runtime warning for denied permission
+      console.warn('Notification permission was previously denied');
+      return false;
+    }
+
+    // Request permission
+    try {
+      const permission = await Notification.requestPermission();
+      return permission === 'granted';
+    } catch (error) {
+      // biome-ignore lint/suspicious/noConsole: Runtime error logging
+      console.error('Failed to request notification permission:', error);
+      return false;
+    }
+  },
+
+  /**
+   * Check if notifications are supported and permitted
+   */
+  isNotificationSupported: (): boolean => {
+    return 'Notification' in window && Notification.permission === 'granted';
+  },
+
+  /**
+   * Raise native notification
+   * Uses the Web Notification API which supports click handlers.
+   * The Tauri notification plugin doesn't support click handlers on desktop,
+   * so we use the browser's built-in Notification API instead.
+   *
+   * @param title - Notification title
+   * @param body - Notification body text
+   * @param url - Optional URL to open when clicked
+   * @returns The Notification object, or null if notifications are not supported
+   */
+  raiseNativeNotification: (
+    title: string,
+    body: string,
+    url?: string | null,
+  ): Notification | null => {
+    // Check if notifications are supported
+    if (!('Notification' in window)) {
+      // biome-ignore lint/suspicious/noConsole: Runtime warning for unsupported environment
+      console.warn('Notifications not supported in this environment');
+      return null;
+    }
+
+    // Check permission
+    if (Notification.permission !== 'granted') {
+      // biome-ignore lint/suspicious/noConsole: Runtime warning for permission state
+      console.warn(
+        'Notification permission not granted:',
+        Notification.permission,
+      );
+      // Try to request permission asynchronously for next time
+      api.requestNotificationPermission();
+      return null;
+    }
+
+    try {
+      // Create the notification using the Web Notification API
+      // We use silent: true because we play our own sound
+      const notification = new Notification(title, { body, silent: true });
+
+      // Handle notification click
+      notification.onclick = async (event) => {
+        // Prevent the browser from focusing the webview by default
+        event.preventDefault();
+
+        try {
+          if (url) {
+            // If a URL is provided, open it in the default browser
+            // Hide the app window first so the browser takes focus
+            await api.app.hide();
+            await api.openExternalLink(url, true);
+          } else {
+            // If no URL, just show and focus the app window
+            await api.app.show();
+          }
+        } catch (error) {
+          // biome-ignore lint/suspicious/noConsole: Runtime error logging
+          console.error('Error handling notification click:', error);
+        }
+      };
+
+      // Handle notification error
+      notification.onerror = (error) => {
+        // biome-ignore lint/suspicious/noConsole: Runtime error logging
+        console.error('Notification error:', error);
+      };
+
+      return notification;
+    } catch (error) {
+      // biome-ignore lint/suspicious/noConsole: Runtime error logging
+      console.error('Failed to create notification:', error);
+      return null;
+    }
+  },
+
+  /**
+   * Auto-updater controls
+   */
+  updater: {
+    /**
+     * Manually check for updates
+     */
+    checkForUpdates: async (): Promise<void> => {
+      await invoke('check_for_updates');
+    },
+
+    /**
+     * Install a downloaded update and restart the app
+     */
+    installUpdate: async (): Promise<void> => {
+      await invoke('install_update');
+    },
+
+    /**
+     * Get current update status
+     */
+    getStatus: async (): Promise<UpdateStatus> => {
+      return await invoke<UpdateStatus>('get_update_status');
+    },
+
+    /**
+     * Listen for updater checking event
+     */
+    onChecking: async (callback: () => void): Promise<UnlistenFn> => {
+      return await listen('updater:checking', () => callback());
+    },
+
+    /**
+     * Listen for update available event
+     */
+    onUpdateAvailable: async (
+      callback: (payload: UpdateAvailablePayload) => void,
+    ): Promise<UnlistenFn> => {
+      return await listen<UpdateAvailablePayload>(
+        'updater:available',
+        (event) => callback(event.payload),
+      );
+    },
+
+    /**
+     * Listen for no update available event
+     */
+    onNoUpdateAvailable: async (callback: () => void): Promise<UnlistenFn> => {
+      return await listen('updater:not-available', () => callback());
+    },
+
+    /**
+     * Listen for download progress event
+     */
+    onDownloadProgress: async (
+      callback: (payload: DownloadProgressPayload) => void,
+    ): Promise<UnlistenFn> => {
+      return await listen<DownloadProgressPayload>(
+        'updater:downloading',
+        (event) => callback(event.payload),
+      );
+    },
+
+    /**
+     * Listen for update downloaded event
+     */
+    onUpdateDownloaded: async (
+      callback: (version: string) => void,
+    ): Promise<UnlistenFn> => {
+      return await listen<string>('updater:downloaded', (event) =>
+        callback(event.payload),
+      );
+    },
+
+    /**
+     * Listen for updater error event
+     */
+    onError: async (callback: (error: string) => void): Promise<UnlistenFn> => {
+      return await listen<string>('updater:error', (event) =>
+        callback(event.payload),
+      );
+    },
+
+    /**
+     * Listen for restart dialog request
+     * Emitted when an update is downloaded and ready to install
+     */
+    onShowRestartDialog: async (
+      callback: (version: string) => void,
+    ): Promise<UnlistenFn> => {
+      return await listen<string>('updater:show-restart-dialog', (event) =>
+        callback(event.payload),
+      );
+    },
+
+    /**
+     * Listen for tooltip update events
+     */
+    onTooltipUpdate: async (
+      callback: (tooltip: string) => void,
+    ): Promise<UnlistenFn> => {
+      return await listen<string>('updater:tooltip', (event) =>
+        callback(event.payload),
+      );
+    },
+
+    /**
+     * Listen for menu state changes
+     * States: 'idle', 'checking', 'available', 'no-update', 'ready'
+     */
+    onMenuStateChange: async (
+      callback: (state: string) => void,
+    ): Promise<UnlistenFn> => {
+      return await listen<string>('updater:menu-state', (event) =>
+        callback(event.payload),
+      );
+    },
+  },
+};
+
+// Expose API globally for compatibility with Electron code
+declare global {
+  interface Window {
+    gitify: typeof api;
+  }
+}
+
+window.gitify = api;
+
+export default api;

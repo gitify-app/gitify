@@ -4,7 +4,7 @@ import colors from 'tailwindcss/colors';
 const sidebarWidth = '2.5rem'; // 40px
 
 const config: Config = {
-  content: ['./src/**/*.js', './src/**/*.ts', './src/**/*.tsx'],
+  content: ['./src/**/*.js', './src/**/*.ts', './src/**/*.tsx', './index.html'],
   darkMode: ['class', '[data-color-mode="dark"]'], // GitHub Primer Theme Provider color mode custom selector
   theme: {
     extend: {
