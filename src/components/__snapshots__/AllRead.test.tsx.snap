@@ -42,14 +42,7 @@ exports[`renderer/components/AllRead.tsx > should render itself & its children -
               >
                 <div
                   class="text-7xl"
-                >
-                  <img
-                    alt="🎊"
-                    class="emoji"
-                    draggable="false"
-                    src="/mock/images/assets/1f38a.svg"
-                  />
-                </div>
+                />
                 <div
                   class="text-xl font-semibold"
                 >
@@ -100,14 +93,7 @@ exports[`renderer/components/AllRead.tsx > should render itself & its children -
             >
               <div
                 class="text-7xl"
-              >
-                <img
-                  alt="🎊"
-                  class="emoji"
-                  draggable="false"
-                  src="/mock/images/assets/1f38a.svg"
-                />
-              </div>
+              />
               <div
                 class="text-xl font-semibold"
               >
@@ -220,7 +206,7 @@ exports[`renderer/components/AllRead.tsx > should render itself & its children -
                     alt="🎊"
                     class="emoji"
                     draggable="false"
-                    src="/mock/images/assets/1f38a.svg"
+                    src="asset://localhost//mock/images/assets/1f38a.svg"
                   />
                 </div>
                 <div
@@ -278,7 +264,7 @@ exports[`renderer/components/AllRead.tsx > should render itself & its children -
                   alt="🎊"
                   class="emoji"
                   draggable="false"
-                  src="/mock/images/assets/1f38a.svg"
+                  src="asset://localhost//mock/images/assets/1f38a.svg"
                 />
               </div>
               <div

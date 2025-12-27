@@ -227,7 +227,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
                     alt="🔥"
                     class="emoji"
                     draggable="false"
-                    src="/mock/images/assets/1f525.svg"
+                    src="asset://localhost//mock/images/assets/1f525.svg"
                   />
                 </div>
                 <div
@@ -470,7 +470,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
                   alt="🔥"
                   class="emoji"
                   draggable="false"
-                  src="/mock/images/assets/1f525.svg"
+                  src="asset://localhost//mock/images/assets/1f525.svg"
                 />
               </div>
               <div
@@ -770,7 +770,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
                     alt="🔥"
                     class="emoji"
                     draggable="false"
-                    src="/mock/images/assets/1f525.svg"
+                    src="asset://localhost//mock/images/assets/1f525.svg"
                   />
                 </div>
                 <div
@@ -1013,7 +1013,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
                   alt="🔥"
                   class="emoji"
                   draggable="false"
-                  src="/mock/images/assets/1f525.svg"
+                  src="asset://localhost//mock/images/assets/1f525.svg"
                 />
               </div>
               <div
@@ -3580,14 +3580,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
               >
                 <div
                   class="text-7xl"
-                >
-                  <img
-                    alt="🎊"
-                    class="emoji"
-                    draggable="false"
-                    src="/mock/images/assets/1f38a.svg"
-                  />
-                </div>
+                />
                 <div
                   class="text-xl font-semibold"
                 >
@@ -3818,14 +3811,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
             >
               <div
                 class="text-7xl"
-              >
-                <img
-                  alt="🎊"
-                  class="emoji"
-                  draggable="false"
-                  src="/mock/images/assets/1f38a.svg"
-                />
-              </div>
+              />
               <div
                 class="text-xl font-semibold"
               >

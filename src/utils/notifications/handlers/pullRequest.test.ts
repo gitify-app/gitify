@@ -21,6 +21,16 @@ import type {
 } from '../../api/graphql/generated/graphql';
 import { getLatestReviewForReviewers, pullRequestHandler } from './pullRequest';
 
+// Mock isTauriEnvironment to return false so axios is used instead of Tauri fetch
+vi.mock('../../environment', () => ({
+  isTauriEnvironment: () => false,
+}));
+
+// Mock decryptValue since isTauriEnvironment is false
+vi.mock('../../comms', () => ({
+  decryptValue: vi.fn().mockResolvedValue('decrypted'),
+}));
+
 const mockAuthor = createPartialMockUser('some-author');
 const mockCommenter = createPartialMockUser('some-commenter');
 

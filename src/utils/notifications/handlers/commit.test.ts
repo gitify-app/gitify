@@ -11,6 +11,16 @@ import type { Link } from '../../../types';
 import type { Notification } from '../../../typesGitHub';
 import { commitHandler } from './commit';
 
+// Mock isTauriEnvironment to return false so axios is used instead of Tauri fetch
+vi.mock('../../environment', () => ({
+  isTauriEnvironment: () => false,
+}));
+
+// Mock decryptValue since isTauriEnvironment is false
+vi.mock('../../comms', () => ({
+  decryptValue: vi.fn().mockResolvedValue('decrypted'),
+}));
+
 describe('renderer/utils/notifications/handlers/commit.ts', () => {
   describe('enrich', () => {
     const mockAuthor = createPartialMockUser('some-author');
