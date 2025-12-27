@@ -4,6 +4,10 @@
 /** GitHub Primer Design System */
 @import "@primer/css/dist/primer.css";
 
+/** Tailwind CSS Configuration */
+@config "../tailwind.config.ts";
+
+
 html,
 body,
 #root {
