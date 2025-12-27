@@ -29,12 +29,12 @@ class PullRequestHandler extends DefaultHandler {
   async enrich(
     notification: Notification,
     _settings: SettingsState,
-  ): Promise<GitifySubject> {
+  ): Promise<GitifySubject | null> {
     const response = await fetchPullByNumber(notification);
     const pr = response.data?.repository?.pullRequest;
 
     if (!pr) {
-      return {};
+      return null;
     }
 
     let prState: GitifyPullRequestState = pr.state;

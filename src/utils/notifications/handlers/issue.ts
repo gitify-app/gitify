@@ -26,12 +26,12 @@ class IssueHandler extends DefaultHandler {
   async enrich(
     notification: Notification,
     _settings: SettingsState,
-  ): Promise<GitifySubject> {
+  ): Promise<GitifySubject | null> {
     const response = await fetchIssueByNumber(notification);
     const issue = response.data?.repository?.issue;
 
     if (!issue) {
-      return {};
+      return null;
     }
 
     const issueState = issue.stateReason ?? issue.state;

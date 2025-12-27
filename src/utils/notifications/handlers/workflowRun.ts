@@ -25,7 +25,7 @@ class WorkflowRunHandler extends DefaultHandler {
   async enrich(
     notification: Notification,
     _settings: SettingsState,
-  ): Promise<GitifySubject> {
+  ): Promise<GitifySubject | null> {
     const state = getWorkflowRunAttributes(notification)?.status;
 
     if (state) {
@@ -36,7 +36,7 @@ class WorkflowRunHandler extends DefaultHandler {
       };
     }
 
-    return {};
+    return null;
   }
 
   iconType(_subject: Subject): FC<OcticonProps> | null {

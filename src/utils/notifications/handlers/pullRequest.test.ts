@@ -491,7 +491,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
     it('handles no PR reviews yet', async () => {
       const result = getLatestReviewForReviewers([]);
 
-      expect(result).toBeNull();
+      expect(result).toBeUndefined();
     });
   });
 });

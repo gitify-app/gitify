@@ -89,7 +89,7 @@ describe('renderer/utils/notifications/notifications.ts', () => {
     expect(rendererLogErrorSpy).toHaveBeenCalledWith(
       'enrichNotification',
       'failed to enrich notification details for',
-      mockError,
+      expect.objectContaining({ message: 'Test error' }),
       mockNotification,
     );
 

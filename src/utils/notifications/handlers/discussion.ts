@@ -32,12 +32,12 @@ class DiscussionHandler extends DefaultHandler {
   async enrich(
     notification: Notification,
     _settings: SettingsState,
-  ): Promise<GitifySubject> {
+  ): Promise<GitifySubject | null> {
     const response = await fetchDiscussionByNumber(notification);
     const discussion = response.data?.repository?.discussion;
 
     if (!discussion) {
-      return {};
+      return null;
     }
 
     let discussionState: GitifyDiscussionState = 'OPEN';

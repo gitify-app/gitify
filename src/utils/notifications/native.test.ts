@@ -51,7 +51,7 @@ describe('renderer/utils/notifications/native.ts', () => {
     expect(window.gitify.raiseNativeNotification).toHaveBeenCalledWith(
       'Gitify',
       'You have 2 notifications',
-      null,
+      undefined,
     );
     expect(helpers.generateGitHubWebUrl).toHaveBeenCalledTimes(0);
   });

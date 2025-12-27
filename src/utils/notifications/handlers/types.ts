@@ -10,11 +10,12 @@ export interface NotificationTypeHandler {
 
   /**
    * Enrich a notification. Settings may be unused for some handlers.
+   * Returns null if the notification should not be enriched.
    */
   enrich(
     notification: Notification,
     settings: SettingsState,
-  ): Promise<GitifySubject>;
+  ): Promise<GitifySubject | null>;
 
   /**
    * Return the icon component for this notification type.

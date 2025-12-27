@@ -1,4 +1,4 @@
-import { act, screen } from '@testing-library/react';
+import { act, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import {
@@ -88,6 +88,11 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
       });
     });
 
+    // Wait for async emoji loading to complete
+    await waitFor(() => {
+      expect(tree!.container.querySelector('.emoji')).toBeInTheDocument();
+    });
+
     expect(tree).toMatchSnapshot();
   });
 
@@ -107,6 +112,11 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
 
     await act(async () => {
       tree = renderWithAppContext(<AccountNotifications {...props} />);
+    });
+
+    // Wait for async emoji loading to complete
+    await waitFor(() => {
+      expect(tree!.container.querySelector('.emoji')).toBeInTheDocument();
     });
 
     expect(tree).toMatchSnapshot();

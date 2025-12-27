@@ -22,7 +22,7 @@ import { DefaultHandler, defaultHandler } from './default';
 
 export interface CheckSuiteAttributes {
   workflowName: string;
-  attemptNumber?: number;
+  attemptNumber: number | null;
   statusDisplayName: string;
   status: GitifyCheckSuiteStatus | null;
   branchName: string;
@@ -34,7 +34,7 @@ class CheckSuiteHandler extends DefaultHandler {
   async enrich(
     notification: Notification,
     _settings: SettingsState,
-  ): Promise<GitifySubject> {
+  ): Promise<GitifySubject | null> {
     const state = getCheckSuiteAttributes(notification)?.status;
 
     if (state) {
@@ -45,7 +45,7 @@ class CheckSuiteHandler extends DefaultHandler {
       };
     }
 
-    return {};
+    return null;
   }
 
   iconType(subject: Subject): FC<OcticonProps> | null {
@@ -102,9 +102,7 @@ export function getCheckSuiteAttributes(
 
   return {
     workflowName,
-    attemptNumber: attemptNumber
-      ? Number.parseInt(attemptNumber, 10)
-      : undefined,
+    attemptNumber: attemptNumber ? Number.parseInt(attemptNumber, 10) : null,
     status: getCheckSuiteStatus(statusDisplayName),
     statusDisplayName,
     branchName,
