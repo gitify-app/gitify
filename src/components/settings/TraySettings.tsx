@@ -30,7 +30,11 @@ export const TraySettings: FC = () => {
               for a quick glance at unread activity.
             </Text>
           }
-          visible={window.gitify.platform.isMacOS()}
+          visible={
+            typeof window !== 'undefined' && window.gitify !== undefined
+              ? window.gitify.platform.isMacOS()
+              : true
+          }
         />
 
         <Checkbox
