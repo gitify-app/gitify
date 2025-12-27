@@ -17,6 +17,21 @@ import * as tray from '../utils/tray';
 import { AppContext, type AppContextState, AppProvider } from './App';
 import { defaultSettings } from './defaults';
 
+// Mock isTauriEnvironment to return false so axios is used instead of Tauri fetch
+vi.mock('../utils/environment', () => ({
+  isTauriEnvironment: () => false,
+}));
+
+// Mock decryptValue since isTauriEnvironment is false
+vi.mock('../utils/comms', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('../utils/comms')>();
+  return {
+    ...actual,
+    decryptValue: vi.fn().mockResolvedValue('decrypted'),
+    encryptValue: vi.fn().mockResolvedValue('encrypted'),
+  };
+});
+
 vi.mock('../hooks/useNotifications');
 
 // Helper to render a button that calls a context method when clicked

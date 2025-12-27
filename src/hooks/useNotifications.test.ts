@@ -14,6 +14,20 @@ import { Errors } from '../utils/errors';
 import * as logger from '../utils/logger';
 import { useNotifications } from './useNotifications';
 
+// Mock isTauriEnvironment to return false so axios is used instead of Tauri fetch
+vi.mock('../utils/environment', () => ({
+  isTauriEnvironment: () => false,
+}));
+
+// Mock decryptValue since isTauriEnvironment is false, it would return unchanged value
+vi.mock('../utils/comms', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('../utils/comms')>();
+  return {
+    ...actual,
+    decryptValue: vi.fn().mockResolvedValue('decrypted'),
+  };
+});
+
 describe('renderer/hooks/useNotifications.ts', () => {
   const rendererLogErrorSpy = vi
     .spyOn(logger, 'rendererLogError')

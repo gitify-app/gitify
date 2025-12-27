@@ -35,9 +35,16 @@ class MockIntersectionObserver {
   MockIntersectionObserver;
 
 /**
+ * Mock Tauri internals to make isTauriEnvironment() return true in tests
+ */
+(window as Record<string, unknown>).__TAURI_INTERNALS__ = {
+  invoke: vi.fn(),
+};
+
+/**
  * Gitify context bridge API
  */
-(globalThis as Record<string, unknown>).gitify = {
+(window as Record<string, unknown>).gitify = {
   app: {
     version: vi.fn().mockResolvedValue('v0.0.1'),
     hide: vi.fn(),

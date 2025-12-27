@@ -47,7 +47,7 @@ exports[`renderer/components/Oops.tsx > should render itself & its children - fa
                     alt="🤔"
                     class="emoji"
                     draggable="false"
-                    src="/mock/images/assets/1f914.svg"
+                    src="asset://localhost//mock/images/assets/1f914.svg"
                   />
                 </div>
                 <div
@@ -110,7 +110,7 @@ exports[`renderer/components/Oops.tsx > should render itself & its children - fa
                   alt="🤔"
                   class="emoji"
                   draggable="false"
-                  src="/mock/images/assets/1f914.svg"
+                  src="asset://localhost//mock/images/assets/1f914.svg"
                 />
               </div>
               <div
@@ -225,14 +225,7 @@ exports[`renderer/components/Oops.tsx > should render itself & its children - sp
               >
                 <div
                   class="text-7xl"
-                >
-                  <img
-                    alt="🔥"
-                    class="emoji"
-                    draggable="false"
-                    src="/mock/images/assets/1f525.svg"
-                  />
-                </div>
+                />
                 <div
                   class="text-xl font-semibold"
                 >
@@ -288,14 +281,7 @@ exports[`renderer/components/Oops.tsx > should render itself & its children - sp
             >
               <div
                 class="text-7xl"
-              >
-                <img
-                  alt="🔥"
-                  class="emoji"
-                  draggable="false"
-                  src="/mock/images/assets/1f525.svg"
-                />
-              </div>
+              />
               <div
                 class="text-xl font-semibold"
               >

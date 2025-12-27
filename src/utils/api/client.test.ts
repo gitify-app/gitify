@@ -20,6 +20,16 @@ import * as apiRequests from './request';
 
 vi.mock('axios');
 
+// Mock isTauriEnvironment to return false so axios is used instead of Tauri fetch
+vi.mock('../environment', () => ({
+  isTauriEnvironment: () => false,
+}));
+
+// Mock decryptValue since isTauriEnvironment is false, it would return unchanged value
+vi.mock('../comms', () => ({
+  decryptValue: vi.fn().mockResolvedValue('decrypted'),
+}));
+
 const mockGitHubHostname = 'github.com' as Hostname;
 const mockThreadId = '1234';
 

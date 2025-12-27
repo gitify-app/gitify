@@ -15,6 +15,16 @@ import {
 
 vi.mock('axios');
 
+// Mock isTauriEnvironment to return false so axios is used instead of Tauri fetch
+vi.mock('../environment', () => ({
+  isTauriEnvironment: () => false,
+}));
+
+// Mock decryptValue since isTauriEnvironment is false, it would return unchanged value
+vi.mock('../comms', () => ({
+  decryptValue: vi.fn().mockResolvedValue('decrypted'),
+}));
+
 const url = 'https://example.com' as Link;
 const method = 'get';
 
