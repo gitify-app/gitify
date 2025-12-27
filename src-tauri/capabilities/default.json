@@ -26,6 +26,14 @@
     "global-shortcut:allow-is-registered",
     "global-shortcut:allow-register",
     "global-shortcut:allow-unregister",
-    "deep-link:default"
+    "deep-link:default",
+    {
+      "identifier": "http:default",
+      "allow": [
+        { "url": "https://api.github.com/**" },
+        { "url": "https://*.github.com/**" },
+        { "url": "https://github.com/**" }
+      ]
+    }
   ]
 }
