@@ -61,13 +61,26 @@ export function authGitHub(
       }
     };
 
-    window.gitify.onAuthCallback((callbackUrl: string) => {
-      rendererLogInfo(
-        'renderer:auth-callback',
-        `received authentication callback URL ${callbackUrl}`,
+    // Check if auth callback is available (Tauri mode or test environment with mocks)
+    if (
+      typeof window !== 'undefined' &&
+      window.gitify?.onAuthCallback !== undefined
+    ) {
+      window.gitify.onAuthCallback((callbackUrl: string) => {
+        rendererLogInfo(
+          'renderer:auth-callback',
+          `received authentication callback URL ${callbackUrl}`,
+        );
+        handleCallback(callbackUrl);
+      });
+    } else {
+      // Browser fallback - OAuth won't work without Tauri
+      reject(
+        new Error(
+          'OAuth authentication is not available in browser mode. Please run the app with Tauri.',
+        ),
       );
-      handleCallback(callbackUrl);
-    });
+    }
   });
 }
 
