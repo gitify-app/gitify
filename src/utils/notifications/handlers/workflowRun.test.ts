@@ -64,7 +64,7 @@ describe('renderer/utils/notifications/handlers/workflowRun.ts', () => {
         createMockSubject({
           type: 'WorkflowRun',
         }),
-      )!.displayName,
+      )?.displayName,
     ).toBe('RocketIcon');
   });
 

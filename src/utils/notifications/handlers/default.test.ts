@@ -30,7 +30,7 @@ describe('renderer/utils/notifications/handlers/default.ts', () => {
   });
 
   it('iconType', () => {
-    expect(defaultHandler.iconType(createMockSubject({}))!.displayName).toBe(
+    expect(defaultHandler.iconType(createMockSubject({}))?.displayName).toBe(
       'QuestionIcon',
     );
   });

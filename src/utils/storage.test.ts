@@ -23,7 +23,7 @@ describe('renderer/utils/storage.ts', () => {
     );
     const result = loadState();
 
-    expect(result.auth!.accounts).toEqual([
+    expect(result.auth?.accounts).toEqual([
       {
         hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
         platform: 'GitHub Cloud',
@@ -32,7 +32,7 @@ describe('renderer/utils/storage.ts', () => {
         user: null,
       },
     ]);
-    expect(result.settings!.theme).toBe('DARK_DEFAULT');
+    expect(result.settings?.theme).toBe('DARK_DEFAULT');
   });
 
   it('should load the state from localstorage - empty', () => {

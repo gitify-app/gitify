@@ -84,7 +84,7 @@ describe('renderer/utils/notifications/handlers/release.ts', () => {
         createMockSubject({
           type: 'Release',
         }),
-      )!.displayName,
+      )?.displayName,
     ).toBe('TagIcon');
   });
 

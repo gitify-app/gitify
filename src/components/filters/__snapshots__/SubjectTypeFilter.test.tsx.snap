@@ -15,7 +15,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx > should render itsel
           data-portal-root="true"
         >
           <fieldset
-            id="filter-subject-type"
+            id="_r_1_"
           >
             <legend>
               <div
@@ -377,7 +377,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx > should render itsel
         data-portal-root="true"
       >
         <fieldset
-          id="filter-subject-type"
+          id="_r_1_"
         >
           <legend>
             <div

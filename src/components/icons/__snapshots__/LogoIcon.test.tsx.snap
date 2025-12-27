@@ -24,7 +24,7 @@ exports[`renderer/components/icons/LogoIcon.tsx > renders correctly (dark) 1`] =
           >
             <defs>
               <lineargradient
-                id="linearGradient-dark"
+                id="_r_3_"
                 x1="90.8779989%"
                 x2="-1.30249747%"
                 y1="80.0676288%"
@@ -47,9 +47,8 @@ exports[`renderer/components/icons/LogoIcon.tsx > renders correctly (dark) 1`] =
               stroke-width="1"
             >
               <g
-                fill="url(#linearGradient-dark)"
+                fill="url(#_r_3_)"
                 fill-rule="nonzero"
-                id="Logo"
                 transform="translate(6.000000, 6.000000)"
               >
                 <path
@@ -82,7 +81,7 @@ exports[`renderer/components/icons/LogoIcon.tsx > renders correctly (dark) 1`] =
         >
           <defs>
             <lineargradient
-              id="linearGradient-dark"
+              id="_r_3_"
               x1="90.8779989%"
               x2="-1.30249747%"
               y1="80.0676288%"
@@ -105,9 +104,8 @@ exports[`renderer/components/icons/LogoIcon.tsx > renders correctly (dark) 1`] =
             stroke-width="1"
           >
             <g
-              fill="url(#linearGradient-dark)"
+              fill="url(#_r_3_)"
               fill-rule="nonzero"
-              id="Logo"
               transform="translate(6.000000, 6.000000)"
             >
               <path
@@ -197,7 +195,7 @@ exports[`renderer/components/icons/LogoIcon.tsx > renders correctly (light) 1`] 
           >
             <defs>
               <lineargradient
-                id="linearGradient-light"
+                id="_r_1_"
                 x1="90.8779989%"
                 x2="-1.30249747%"
                 y1="80.0676288%"
@@ -220,9 +218,8 @@ exports[`renderer/components/icons/LogoIcon.tsx > renders correctly (light) 1`] 
               stroke-width="1"
             >
               <g
-                fill="url(#linearGradient-light)"
+                fill="url(#_r_1_)"
                 fill-rule="nonzero"
-                id="Logo"
                 transform="translate(6.000000, 6.000000)"
               >
                 <path
@@ -255,7 +252,7 @@ exports[`renderer/components/icons/LogoIcon.tsx > renders correctly (light) 1`] 
         >
           <defs>
             <lineargradient
-              id="linearGradient-light"
+              id="_r_1_"
               x1="90.8779989%"
               x2="-1.30249747%"
               y1="80.0676288%"
@@ -278,9 +275,8 @@ exports[`renderer/components/icons/LogoIcon.tsx > renders correctly (light) 1`] 
             stroke-width="1"
           >
             <g
-              fill="url(#linearGradient-light)"
+              fill="url(#_r_1_)"
               fill-rule="nonzero"
-              id="Logo"
               transform="translate(6.000000, 6.000000)"
             >
               <path
@@ -370,7 +366,7 @@ exports[`renderer/components/icons/LogoIcon.tsx > should render large size 1`] =
           >
             <defs>
               <lineargradient
-                id="linearGradient-light"
+                id="_r_b_"
                 x1="90.8779989%"
                 x2="-1.30249747%"
                 y1="80.0676288%"
@@ -393,9 +389,8 @@ exports[`renderer/components/icons/LogoIcon.tsx > should render large size 1`] =
               stroke-width="1"
             >
               <g
-                fill="url(#linearGradient-light)"
+                fill="url(#_r_b_)"
                 fill-rule="nonzero"
-                id="Logo"
                 transform="translate(6.000000, 6.000000)"
               >
                 <path
@@ -428,7 +423,7 @@ exports[`renderer/components/icons/LogoIcon.tsx > should render large size 1`] =
         >
           <defs>
             <lineargradient
-              id="linearGradient-light"
+              id="_r_b_"
               x1="90.8779989%"
               x2="-1.30249747%"
               y1="80.0676288%"
@@ -451,9 +446,8 @@ exports[`renderer/components/icons/LogoIcon.tsx > should render large size 1`] =
             stroke-width="1"
           >
             <g
-              fill="url(#linearGradient-light)"
+              fill="url(#_r_b_)"
               fill-rule="nonzero"
-              id="Logo"
               transform="translate(6.000000, 6.000000)"
             >
               <path
@@ -543,7 +537,7 @@ exports[`renderer/components/icons/LogoIcon.tsx > should render medium size 1`] 
           >
             <defs>
               <lineargradient
-                id="linearGradient-light"
+                id="_r_9_"
                 x1="90.8779989%"
                 x2="-1.30249747%"
                 y1="80.0676288%"
@@ -566,9 +560,8 @@ exports[`renderer/components/icons/LogoIcon.tsx > should render medium size 1`] 
               stroke-width="1"
             >
               <g
-                fill="url(#linearGradient-light)"
+                fill="url(#_r_9_)"
                 fill-rule="nonzero"
-                id="Logo"
                 transform="translate(6.000000, 6.000000)"
               >
                 <path
@@ -601,7 +594,7 @@ exports[`renderer/components/icons/LogoIcon.tsx > should render medium size 1`] 
         >
           <defs>
             <lineargradient
-              id="linearGradient-light"
+              id="_r_9_"
               x1="90.8779989%"
               x2="-1.30249747%"
               y1="80.0676288%"
@@ -624,9 +617,8 @@ exports[`renderer/components/icons/LogoIcon.tsx > should render medium size 1`] 
             stroke-width="1"
           >
             <g
-              fill="url(#linearGradient-light)"
+              fill="url(#_r_9_)"
               fill-rule="nonzero"
-              id="Logo"
               transform="translate(6.000000, 6.000000)"
             >
               <path
@@ -716,7 +708,7 @@ exports[`renderer/components/icons/LogoIcon.tsx > should render small size 1`] =
           >
             <defs>
               <lineargradient
-                id="linearGradient-light"
+                id="_r_7_"
                 x1="90.8779989%"
                 x2="-1.30249747%"
                 y1="80.0676288%"
@@ -739,9 +731,8 @@ exports[`renderer/components/icons/LogoIcon.tsx > should render small size 1`] =
               stroke-width="1"
             >
               <g
-                fill="url(#linearGradient-light)"
+                fill="url(#_r_7_)"
                 fill-rule="nonzero"
-                id="Logo"
                 transform="translate(6.000000, 6.000000)"
               >
                 <path
@@ -774,7 +765,7 @@ exports[`renderer/components/icons/LogoIcon.tsx > should render small size 1`] =
         >
           <defs>
             <lineargradient
-              id="linearGradient-light"
+              id="_r_7_"
               x1="90.8779989%"
               x2="-1.30249747%"
               y1="80.0676288%"
@@ -797,9 +788,8 @@ exports[`renderer/components/icons/LogoIcon.tsx > should render small size 1`] =
             stroke-width="1"
           >
             <g
-              fill="url(#linearGradient-light)"
+              fill="url(#_r_7_)"
               fill-rule="nonzero"
-              id="Logo"
               transform="translate(6.000000, 6.000000)"
             >
               <path

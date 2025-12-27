@@ -15,7 +15,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx > should render itself &
           data-portal-root="true"
         >
           <fieldset
-            id="filter-user-types"
+            id="_r_1_"
           >
             <legend>
               <div
@@ -214,7 +214,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx > should render itself &
         data-portal-root="true"
       >
         <fieldset
-          id="filter-user-types"
+          id="_r_1_"
         >
           <legend>
             <div

@@ -179,7 +179,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
       expect(
         checkSuiteHandler.iconType(
           createMockSubject({ type: 'CheckSuite', state: checkSuiteStatus }),
-        )!.displayName,
+        )?.displayName,
       ).toBe(checkSuiteIconType);
     });
   });

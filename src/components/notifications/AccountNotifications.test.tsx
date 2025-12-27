@@ -90,7 +90,7 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
 
     // Wait for async emoji loading to complete
     await waitFor(() => {
-      expect(tree!.container.querySelector('.emoji')).toBeInTheDocument();
+      expect(tree?.container.querySelector('.emoji')).toBeInTheDocument();
     });
 
     expect(tree).toMatchSnapshot();
@@ -116,7 +116,7 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
 
     // Wait for async emoji loading to complete
     await waitFor(() => {
-      expect(tree!.container.querySelector('.emoji')).toBeInTheDocument();
+      expect(tree?.container.querySelector('.emoji')).toBeInTheDocument();
     });
 
     expect(tree).toMatchSnapshot();

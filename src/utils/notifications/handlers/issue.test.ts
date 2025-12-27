@@ -259,7 +259,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
       expect(
         issueHandler.iconType(
           createMockSubject({ type: 'Issue', state: issueState }),
-        )!.displayName,
+        )?.displayName,
       ).toBe(issueIconType);
     });
   });

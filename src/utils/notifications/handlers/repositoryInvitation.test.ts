@@ -10,7 +10,7 @@ describe('renderer/utils/notifications/handlers/repositoryInvitation.ts', () => 
         createMockSubject({
           type: 'RepositoryInvitation',
         }),
-      )!.displayName,
+      )?.displayName,
     ).toBe('MailIcon');
   });
 
