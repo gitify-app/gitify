@@ -1,6 +1,6 @@
 name: Publish
 
-on: 
+on:
   workflow_call:
   workflow_dispatch: # For manually running release process to verify code-signing of artifacts
 
@@ -8,9 +8,26 @@ permissions:
   contents: write
 
 jobs:
-  release-macos:
-    name: Publish macOS (electron-builder)
-    runs-on: macos-latest
+  publish-tauri:
+    name: Publish Tauri App
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: macos-latest
+            args: --target aarch64-apple-darwin
+            artifact-name: Gitify-release-mac-arm64
+          - platform: macos-latest
+            args: --target x86_64-apple-darwin
+            artifact-name: Gitify-release-mac-x64
+          - platform: ubuntu-22.04
+            args: ''
+            artifact-name: Gitify-release-linux
+          - platform: windows-latest
+            args: ''
+            artifact-name: Gitify-release-win
+
+    runs-on: ${{ matrix.platform }}
 
     steps:
       - name: Checkout
@@ -18,97 +35,51 @@ jobs:
 
       - name: Setup pnpm
         uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4.2.0
-      
+
       - name: Setup Node
         uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f # v6.1.0
         with:
           node-version-file: '.nvmrc'
           cache: 'pnpm'
-      
+
+      - name: Install Rust stable
+        uses: dtolnay/rust-action@e645b0cf126e4de3e4307c0dc05270e8edd02507 # stable
+        with:
+          toolchain: stable
+          targets: ${{ matrix.platform == 'macos-latest' && 'aarch64-apple-darwin,x86_64-apple-darwin' || '' }}
+
+      - name: Install dependencies (ubuntu only)
+        if: matrix.platform == 'ubuntu-22.04'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
+
       - run: pnpm install
-      - run: pnpm build
+
+      - name: Build and publish Tauri app
+        uses: tauri-apps/tauri-action@42bc3e23e6c7bdd4e28d7fb02e9bc03bd3aef95e # v0.5.23
+        with:
+          tagName: v__VERSION__
+          releaseName: 'Gitify v__VERSION__'
+          releaseBody: 'See the assets to download this version and install.'
+          releaseDraft: true
+          prerelease: false
+          args: ${{ matrix.args }}
         env:
-          OAUTH_CLIENT_ID: ${{ secrets.OAUTH_CLIENT_ID }}
-          OAUTH_CLIENT_SECRET: ${{ secrets.OAUTH_CLIENT_SECRET }}
-      - run: pnpm package:macos --publish onTagOrDraft
-        env:
-          APPLE_ID_USERNAME: ${{ secrets.APPLE_ID_USERNAME }}
-          APPLE_ID_PASSWORD: ${{ secrets.APPLE_ID_PASSWORD }}
-          APPLE_ID_TEAM_ID: ${{ secrets.APPLE_ID_TEAM_ID }}
-          CSC_LINK: ${{ secrets.CSC_LINK }}
-          CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NOTARIZE: true
-      
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # macOS code signing
+          APPLE_CERTIFICATE: ${{ secrets.APPLE_CERTIFICATE }}
+          APPLE_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
+          APPLE_SIGNING_IDENTITY: ${{ secrets.APPLE_SIGNING_IDENTITY }}
+          APPLE_ID: ${{ secrets.APPLE_ID_USERNAME }}
+          APPLE_PASSWORD: ${{ secrets.APPLE_ID_PASSWORD }}
+          APPLE_TEAM_ID: ${{ secrets.APPLE_ID_TEAM_ID }}
+          # OAuth for the app
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+
       - name: Upload artifacts
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
         with:
-          name: Gitify-release-mac
-          path: dist/
-          overwrite: true
-
-  release-windows:
-    name: Publish Windows (electron-builder)
-    runs-on: windows-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4.2.0
-      
-      - name: Setup Node
-        uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f # v6.1.0
-        with:
-          node-version-file: '.nvmrc'
-          cache: 'pnpm'
-      
-      - run: pnpm install
-      - run: pnpm build
-        env:
-          OAUTH_CLIENT_ID: ${{ secrets.OAUTH_CLIENT_ID }}
-          OAUTH_CLIENT_SECRET: ${{ secrets.OAUTH_CLIENT_SECRET }}
-      - run: pnpm package:win --publish onTagOrDraft
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      
-      - name: Upload artifacts
-        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
-        with:
-          name: Gitify-release-win
-          path: dist/
-          overwrite: true
-
-  release-linux:
-    name: Publish Linux (electron-builder)
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4.2.0
-      
-      - name: Setup Node
-        uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f # v6.1.0
-        with:
-          node-version-file: '.nvmrc'
-          cache: 'pnpm'
-      
-      - run: pnpm install
-      - run: pnpm build
-        env:
-          OAUTH_CLIENT_ID: ${{ secrets.OAUTH_CLIENT_ID }}
-          OAUTH_CLIENT_SECRET: ${{ secrets.OAUTH_CLIENT_SECRET }}
-      - run: pnpm package:linux --publish onTagOrDraft
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      
-      - name: Upload artifacts
-        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
-        with:
-          name: Gitify-release-linux
-          path: dist/
+          name: ${{ matrix.artifact-name }}
+          path: src-tauri/target/**/bundle/**
           overwrite: true
