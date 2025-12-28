@@ -1,4 +1,4 @@
-import { type FC, useContext, useEffect, useState } from 'react';
+import { type FC, useEffect, useState } from 'react';
 
 import {
   CheckCircleFillIcon,
@@ -10,7 +10,7 @@ import {
 } from '@primer/octicons-react';
 import { Stack, Text } from '@primer/react';
 
-import { AppContext } from '../../context/App';
+import { useAppContext } from '../../context/App';
 import { IconColor, type SearchToken, Size } from '../../types';
 import { cn } from '../../utils/cn';
 import {
@@ -22,7 +22,7 @@ import { RequiresDetailedNotificationWarning } from './RequiresDetailedNotificat
 import { TokenSearchInput } from './TokenSearchInput';
 
 export const SearchFilter: FC = () => {
-  const { updateFilter, settings } = useContext(AppContext);
+  const { updateFilter, settings } = useAppContext();
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: only run on search filter changes
   useEffect(() => {

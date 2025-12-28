@@ -1,11 +1,11 @@
-import { type FC, useContext } from 'react';
+import type { FC } from 'react';
 
 import { DeviceDesktopIcon, SyncIcon } from '@primer/octicons-react';
 import { Button, ButtonGroup, IconButton, Stack, Text } from '@primer/react';
 
 import { APPLICATION } from '../../../shared/constants';
 
-import { AppContext } from '../../context/App';
+import { useAppContext } from '../../context/App';
 import { defaultSettings } from '../../context/defaults';
 import { OpenPreference } from '../../types';
 import {
@@ -21,7 +21,7 @@ import { VolumeUpIcon } from '../icons/VolumeUpIcon';
 import { Title } from '../primitives/Title';
 
 export const SystemSettings: FC = () => {
-  const { settings, updateSetting } = useContext(AppContext);
+  const { settings, updateSetting } = useAppContext();
 
   return (
     <fieldset>

@@ -1,4 +1,4 @@
-import { type FC, useContext } from 'react';
+import type { FC } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import {
@@ -15,7 +15,7 @@ import { IconButton, Stack } from '@primer/react';
 import { APPLICATION } from '../../shared/constants';
 
 import { Constants } from '../constants';
-import { AppContext } from '../context/App';
+import { useAppContext } from '../context/App';
 import { quitApp } from '../utils/comms';
 import {
   openGitHubIssues,
@@ -37,7 +37,7 @@ export const Sidebar: FC = () => {
     auth,
     unreadNotificationCount,
     hasUnreadNotifications,
-  } = useContext(AppContext);
+  } = useAppContext();
 
   // We naively assume that the first account is the primary account for the purposes of our sidebar quick links
   const primaryAccountHostname =

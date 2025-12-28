@@ -1,4 +1,4 @@
-import { type FC, useCallback, useContext, useState } from 'react';
+import { type FC, useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import {
@@ -26,7 +26,7 @@ import { Contents } from '../components/layout/Contents';
 import { Page } from '../components/layout/Page';
 import { Footer } from '../components/primitives/Footer';
 import { Header } from '../components/primitives/Header';
-import { AppContext } from '../context/App';
+import { useAppContext } from '../context/App';
 import { type Account, Size } from '../types';
 import {
   formatAlternateOAuthScopes,
@@ -45,7 +45,7 @@ import { saveState } from '../utils/storage';
 
 export const AccountsRoute: FC = () => {
   const { auth, settings, loginWithGitHubApp, logoutFromAccount } =
-    useContext(AppContext);
+    useAppContext();
   const navigate = useNavigate();
 
   const [loadingStates, setLoadingStates] = useState<Record<string, boolean>>(

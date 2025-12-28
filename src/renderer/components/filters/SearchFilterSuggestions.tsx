@@ -1,8 +1,8 @@
-import { type FC, useContext } from 'react';
+import type { FC } from 'react';
 
 import { Popover, Stack, Text } from '@primer/react';
 
-import { AppContext } from '../../context/App';
+import { useAppContext } from '../../context/App';
 import { Opacity } from '../../types';
 import { cn } from '../../utils/cn';
 import {
@@ -20,7 +20,7 @@ export const SearchFilterSuggestions: FC<SearchFilterSuggestionsProps> = ({
   open,
   inputValue,
 }) => {
-  const { settings } = useContext(AppContext);
+  const { settings } = useAppContext();
 
   if (!open) {
     return null;

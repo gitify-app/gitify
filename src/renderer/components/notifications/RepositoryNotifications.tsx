@@ -1,9 +1,9 @@
-import { type FC, type MouseEvent, useContext, useState } from 'react';
+import { type FC, type MouseEvent, useState } from 'react';
 
 import { CheckIcon, ReadIcon } from '@primer/octicons-react';
 import { Button, Stack } from '@primer/react';
 
-import { AppContext } from '../../context/App';
+import { useAppContext } from '../../context/App';
 import { Opacity, Size } from '../../types';
 import type { Notification } from '../../typesGitHub';
 import { cn } from '../../utils/cn';
@@ -25,7 +25,7 @@ export const RepositoryNotifications: FC<RepositoryNotificationsProps> = ({
   repoNotifications,
 }) => {
   const { settings, markNotificationsAsRead, markNotificationsAsDone } =
-    useContext(AppContext);
+    useAppContext();
   const [animateExit, setAnimateExit] = useState(false);
   const [showRepositoryNotifications, setShowRepositoryNotifications] =
     useState(true);

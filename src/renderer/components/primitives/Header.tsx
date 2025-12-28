@@ -1,10 +1,10 @@
-import { type FC, useContext } from 'react';
+import type { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { ArrowLeftIcon, type Icon } from '@primer/octicons-react';
 import { IconButton, Stack } from '@primer/react';
 
-import { AppContext } from '../../context/App';
+import { useAppContext } from '../../context/App';
 import { Title } from './Title';
 
 interface HeaderProps {
@@ -16,7 +16,7 @@ interface HeaderProps {
 export const Header: FC<HeaderProps> = (props: HeaderProps) => {
   const navigate = useNavigate();
 
-  const { fetchNotifications } = useContext(AppContext);
+  const { fetchNotifications } = useAppContext();
 
   return (
     <div className="pl-4 pr-5 pt-3 pb-1">

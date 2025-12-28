@@ -1,4 +1,4 @@
-import { type FC, useCallback, useContext, useEffect } from 'react';
+import { type FC, useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { KeyIcon, MarkGithubIcon, PersonIcon } from '@primer/octicons-react';
@@ -6,14 +6,14 @@ import { Button, Heading, Stack, Text } from '@primer/react';
 
 import { LogoIcon } from '../components/icons/LogoIcon';
 import { Centered } from '../components/layout/Centered';
-import { AppContext } from '../context/App';
+import { useAppContext } from '../context/App';
 import { Size } from '../types';
 import { showWindow } from '../utils/comms';
 import { rendererLogError } from '../utils/logger';
 
 export const LoginRoute: FC = () => {
   const navigate = useNavigate();
-  const { loginWithGitHubApp, isLoggedIn } = useContext(AppContext);
+  const { loginWithGitHubApp, isLoggedIn } = useAppContext();
 
   useEffect(() => {
     if (isLoggedIn) {

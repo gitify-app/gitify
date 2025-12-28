@@ -1,9 +1,9 @@
-import { type FC, type MouseEvent, useContext, useMemo, useState } from 'react';
+import { type FC, type MouseEvent, useMemo, useState } from 'react';
 
 import { GitPullRequestIcon, IssueOpenedIcon } from '@primer/octicons-react';
 import { Button, Stack } from '@primer/react';
 
-import { AppContext } from '../../context/App';
+import { useAppContext } from '../../context/App';
 import { type Account, type GitifyError, Size } from '../../types';
 import type { Notification } from '../../typesGitHub';
 import { hasMultipleAccounts } from '../../utils/auth/utils';
@@ -38,7 +38,7 @@ export const AccountNotifications: FC<AccountNotificationsProps> = (
 ) => {
   const { account, showAccountHeader, notifications } = props;
 
-  const { auth, settings } = useContext(AppContext);
+  const { auth, settings } = useAppContext();
 
   const [showAccountNotifications, setShowAccountNotifications] =
     useState(true);
