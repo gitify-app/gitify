@@ -38,11 +38,11 @@ export const MetricGroup: FC<MetricGroupProps> = ({
   return (
     settings.showPills && (
       <div className="flex gap-1">
-        {(notification.subject?.linkedIssues?.length ?? 0) > 0 && (
+        {linkedIssuesLength > 0 && (
           <MetricPill
             color={IconColor.GRAY}
             icon={IssueOpenedIcon}
-            metric={notification.subject.linkedIssues?.length ?? 0}
+            metric={linkedIssuesLength}
             title={linkedIssuesPillDescription}
           />
         )}

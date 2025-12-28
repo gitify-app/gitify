@@ -2,6 +2,7 @@
   "name": "gitify-tauri",
   "private": true,
   "version": "0.1.0",
+  "packageManager": "pnpm@10.26.2",
   "type": "module",
   "scripts": {
     "dev": "vite",
