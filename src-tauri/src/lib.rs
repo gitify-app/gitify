@@ -173,20 +173,20 @@ fn setup_tray(app: &mut App) -> Result<(), Box<dyn std::error::Error>> {
                         };
 
                         if !should_process {
-                            println!("Click ignored (debounce)");
+                            log::debug!("Click ignored (debounce)");
                             return;
                         }
 
                         // Left-click: Toggle window visibility
                         if let Some(window) = app.get_webview_window("main") {
                             let is_visible = window.is_visible().unwrap_or(false);
-                            println!("Window visible: {}", is_visible);
+                            log::debug!("Window visible: {}", is_visible);
 
                             if is_visible {
-                                println!("Hiding window");
+                                log::debug!("Hiding window");
                                 let _ = window.hide();
                             } else {
-                                println!("Showing window");
+                                log::debug!("Showing window");
 
                                 // Position window - use absolute positioning for reliability
                                 use tauri::PhysicalPosition;
@@ -204,11 +204,11 @@ fn setup_tray(app: &mut App) -> Result<(), Box<dyn std::error::Error>> {
                                             let pos_x = (size.width as i32 - window_size.width as i32 - 20).max(0);
                                             let pos_y = 40; // Below menubar
 
-                                            println!("Screen size: {}x{}, Window size: {}x{}", size.width, size.height, window_size.width, window_size.height);
-                                            println!("Positioning window at x={}, y={}", pos_x, pos_y);
+                                            log::debug!("Screen size: {}x{}, Window size: {}x{}", size.width, size.height, window_size.width, window_size.height);
+                                            log::debug!("Positioning window at x={}, y={}", pos_x, pos_y);
                                             (pos_x, pos_y)
                                         } else {
-                                            println!("Could not get monitor, using default position");
+                                            log::debug!("Could not get monitor, using default position");
                                             (1200, 40) // Fallback position
                                         }
                                     }
@@ -221,20 +221,20 @@ fn setup_tray(app: &mut App) -> Result<(), Box<dyn std::error::Error>> {
                                 let _ = window.set_position(PhysicalPosition::new(x, y));
 
                                 // Show window
-                                println!("Calling show()");
+                                log::debug!("Calling show()");
                                 if let Err(e) = window.show() {
-                                    println!("Error showing window: {}", e);
+                                    log::error!("Error showing window: {}", e);
                                 }
 
-                                println!("Calling set_focus()");
+                                log::debug!("Calling set_focus()");
                                 let _ = window.set_focus();
 
                                 if window.is_minimized().unwrap_or(false) {
-                                    println!("Unminimizing window");
+                                    log::debug!("Unminimizing window");
                                     let _ = window.unminimize();
                                 }
 
-                                println!("Window should be visible now");
+                                log::debug!("Window should be visible now");
                             }
                         }
                     }
@@ -281,7 +281,7 @@ pub fn run() {
             // Check if any arg is a deep link (OAuth callback)
             for arg in &args {
                 if arg.starts_with("gitify://oauth") || arg.starts_with("gitify://callback") {
-                    println!("OAuth callback from args: {}", arg);
+                    log::debug!("OAuth callback from args: {}", arg);
                     let _ = app.emit("auth-callback", arg.clone());
                     return;
                 }
@@ -416,25 +416,25 @@ pub fn run() {
                 #[cfg(any(target_os = "linux", target_os = "windows"))]
                 {
                     if let Err(e) = app.deep_link().register("gitify") {
-                        eprintln!("Failed to register deep link protocol: {}", e);
+                        log::error!("Failed to register deep link protocol: {}", e);
                     }
                 }
 
                 // Check for startup deep links (app launched via deep link)
                 if let Ok(Some(urls)) = app.deep_link().get_current() {
-                    println!("Startup deep links: {:?}", urls);
+                    log::debug!("Startup deep links: {:?}", urls);
                     let app_handle = app.handle().clone();
                     for url in urls {
                         let url_str = url.to_string();
                         if url_str.starts_with("gitify://oauth") || url_str.starts_with("gitify://callback") {
-                            println!("Startup OAuth callback: {}", url_str);
+                            log::debug!("Startup OAuth callback: {}", url_str);
                             // Delay emit slightly to ensure frontend is ready
                             let handle = app_handle.clone();
                             let url_clone = url_str.clone();
                             std::thread::spawn(move || {
                                 std::thread::sleep(std::time::Duration::from_millis(500));
                                 if let Err(e) = handle.emit("auth-callback", url_clone) {
-                                    eprintln!("Failed to emit startup auth-callback: {}", e);
+                                    log::error!("Failed to emit startup auth-callback: {}", e);
                                 }
                             });
                         }
@@ -447,16 +447,16 @@ pub fn run() {
                 // Listen for deep link events (OAuth callbacks)
                 app.deep_link().on_open_url(move |event| {
                     let urls = event.urls();
-                    println!("Deep link received: {:?}", urls);
+                    log::debug!("Deep link received: {:?}", urls);
 
                     for url in urls {
                         let url_str = url.to_string();
                         // Check if this is an OAuth callback
                         if url_str.starts_with("gitify://oauth") || url_str.starts_with("gitify://callback") {
-                            println!("OAuth callback detected: {}", url_str);
+                            log::debug!("OAuth callback detected: {}", url_str);
                             // Emit auth-callback event to frontend
                             if let Err(e) = app_handle.emit("auth-callback", url_str.clone()) {
-                                eprintln!("Failed to emit auth-callback event: {}", e);
+                                log::error!("Failed to emit auth-callback event: {}", e);
                             }
 
                             // Show and focus the window
