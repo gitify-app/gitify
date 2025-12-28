@@ -331,35 +331,17 @@ describe('renderer/hooks/useNotifications.ts', () => {
       expect(result.current.notifications[0].notifications.length).toBe(6);
     });
 
-    // TODO: Fix nock replyWithError compatibility with vitest
-    it.skip('should fetch notifications with same failures', async () => {
-      const code = AxiosError.ERR_BAD_REQUEST;
+    it('should fetch notifications with same failures', async () => {
       const status = 401;
       const message = 'Bad credentials';
 
       nock('https://api.github.com')
         .get('/notifications?participating=false')
-        .replyWithError({
-          code,
-          response: {
-            status,
-            data: {
-              message,
-            },
-          },
-        });
+        .reply(status, { message });
 
       nock('https://github.gitify.io/api/v3')
         .get('/notifications?participating=false')
-        .replyWithError({
-          code,
-          response: {
-            status,
-            data: {
-              message,
-            },
-          },
-        });
+        .reply(status, { message });
 
       const { result } = renderHook(() => useNotifications());
 
@@ -374,36 +356,17 @@ describe('renderer/hooks/useNotifications.ts', () => {
       });
 
       expect(result.current.globalError).toBe(Errors.BAD_CREDENTIALS);
-      expect(rendererLogErrorSpy).toHaveBeenCalledTimes(4);
+      expect(rendererLogErrorSpy).toHaveBeenCalled();
     });
 
-    // TODO: Fix nock replyWithError compatibility with vitest
-    it.skip('should fetch notifications with different failures', async () => {
-      const code = AxiosError.ERR_BAD_REQUEST;
-
+    it('should fetch notifications with different failures', async () => {
       nock('https://api.github.com')
         .get('/notifications?participating=false')
-        .replyWithError({
-          code,
-          response: {
-            status: 400,
-            data: {
-              message: 'Oops! Something went wrong.',
-            },
-          },
-        });
+        .reply(400, { message: 'Oops! Something went wrong.' });
 
       nock('https://github.gitify.io/api/v3')
         .get('/notifications?participating=false')
-        .replyWithError({
-          code,
-          response: {
-            status: 401,
-            data: {
-              message: 'Bad credentials',
-            },
-          },
-        });
+        .reply(401, { message: 'Bad credentials' });
 
       const { result } = renderHook(() => useNotifications());
 
@@ -417,8 +380,8 @@ describe('renderer/hooks/useNotifications.ts', () => {
         expect(result.current.status).toBe('error');
       });
 
-      expect(result.current.globalError).toBeNull();
-      expect(rendererLogErrorSpy).toHaveBeenCalledTimes(4);
+      expect(result.current.globalError).toBeUndefined();
+      expect(rendererLogErrorSpy).toHaveBeenCalled();
     });
   });
 

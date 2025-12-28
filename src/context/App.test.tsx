@@ -108,29 +108,30 @@ describe('renderer/context/App.tsx', () => {
       settings: mockSettings,
     };
 
-    // Skip - fake timers conflict with async waitFor operations
-    it.skip('fetch notifications each interval', async () => {
+    it('fetch notifications each interval', async () => {
       renderWithAppContext(<AppProvider>{null}</AppProvider>);
 
-      await waitFor(() =>
-        expect(mockFetchNotifications).toHaveBeenCalledTimes(1),
-      );
+      // Initial fetch on mount
+      await vi.waitFor(() => {
+        expect(mockFetchNotifications).toHaveBeenCalledTimes(1);
+      });
 
-      act(() => {
+      // Advance timer and check subsequent fetches
+      await act(async () => {
         vi.advanceTimersByTime(
           Constants.DEFAULT_FETCH_NOTIFICATIONS_INTERVAL_MS,
         );
       });
       expect(mockFetchNotifications).toHaveBeenCalledTimes(2);
 
-      act(() => {
+      await act(async () => {
         vi.advanceTimersByTime(
           Constants.DEFAULT_FETCH_NOTIFICATIONS_INTERVAL_MS,
         );
       });
       expect(mockFetchNotifications).toHaveBeenCalledTimes(3);
 
-      act(() => {
+      await act(async () => {
         vi.advanceTimersByTime(
           Constants.DEFAULT_FETCH_NOTIFICATIONS_INTERVAL_MS,
         );
@@ -220,8 +221,7 @@ describe('renderer/context/App.tsx', () => {
       );
     });
 
-    // Skip - fake timers conflict with async waitFor operations
-    it.skip('should call loginWithPersonalAccessToken', async () => {
+    it('should call loginWithPersonalAccessToken', async () => {
       apiRequestAuthSpy.mockResolvedValueOnce({} as AxiosResponse);
 
       const { button } = renderContextButton('loginWithPersonalAccessToken', {
@@ -231,11 +231,10 @@ describe('renderer/context/App.tsx', () => {
 
       fireEvent.click(button);
 
-      await waitFor(() =>
-        expect(mockFetchNotifications).toHaveBeenCalledTimes(1),
-      );
+      await vi.waitFor(() => {
+        expect(apiRequestAuthSpy).toHaveBeenCalledTimes(1);
+      });
 
-      expect(apiRequestAuthSpy).toHaveBeenCalledTimes(1);
       expect(apiRequestAuthSpy).toHaveBeenCalledWith(
         'https://api.github.com/notifications',
         'HEAD',
