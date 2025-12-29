@@ -15,7 +15,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
           data-portal-root="true"
         >
           <fieldset
-            id="filter-state"
+            id="_r_1_"
           >
             <legend>
               <div
@@ -323,7 +323,7 @@ exports[`renderer/components/filters/StateFilter.tsx should render itself & its 
         data-portal-root="true"
       >
         <fieldset
-          id="filter-state"
+          id="_r_1_"
         >
           <legend>
             <div

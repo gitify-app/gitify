@@ -317,7 +317,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
         </div>
       </fieldset>
       <fieldset
-        id="filter-user-types"
+        id="_r_3_"
       >
         <legend>
           <div
@@ -502,7 +502,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
         </div>
       </fieldset>
       <fieldset
-        id="filter-subject-type"
+        id="_r_6_"
       >
         <legend>
           <div
@@ -850,7 +850,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
         </div>
       </fieldset>
       <fieldset
-        id="filter-state"
+        id="_r_8_"
       >
         <legend>
           <div
@@ -1144,7 +1144,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
         </div>
       </fieldset>
       <fieldset
-        id="filter-reasons"
+        id="_r_d_"
       >
         <legend>
           <div
@@ -2030,7 +2030,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
       data-wrap="nowrap"
     >
       <button
-        aria-describedby="_r_q_"
+        aria-describedby="_r_u_"
         class="prc-Button-ButtonBase-9n-Xk"
         data-loading="false"
         data-size="medium"
@@ -2076,7 +2076,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
         aria-hidden="true"
         class="prc-TooltipV2-Tooltip-tLeuB"
         data-direction="n"
-        id="_r_q_"
+        id="_r_u_"
         popover="auto"
         role="tooltip"
       >
