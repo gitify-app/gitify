@@ -2,8 +2,7 @@ import type { FC, MouseEvent } from 'react';
 
 import { RelativeTime, Stack, Text } from '@primer/react';
 
-import { Opacity, Size } from '../../types';
-import type { Notification } from '../../typesGitHub';
+import { type GitifyNotification, Opacity, Size } from '../../types';
 import { cn } from '../../utils/cn';
 import { openUserProfile } from '../../utils/links';
 import { getReasonDetails } from '../../utils/reason';
@@ -11,7 +10,7 @@ import { AvatarWithFallback } from '../avatars/AvatarWithFallback';
 import { MetricGroup } from '../metrics/MetricGroup';
 
 interface NotificationFooterProps {
-  notification: Notification;
+  notification: GitifyNotification;
 }
 
 export const NotificationFooter: FC<NotificationFooterProps> = ({
@@ -41,7 +40,7 @@ export const NotificationFooter: FC<NotificationFooterProps> = ({
           <AvatarWithFallback
             alt={notification.subject.user.login}
             size={Size.SMALL}
-            src={notification.subject.user.avatar_url}
+            src={notification.subject.user.avatarUrl}
             userType={notification.subject.user.type}
           />
         </button>
@@ -61,7 +60,7 @@ export const NotificationFooter: FC<NotificationFooterProps> = ({
         <Text className="pr-1" title={reason.description}>
           {reason.title}
         </Text>
-        <RelativeTime datetime={notification.updated_at} />
+        <RelativeTime datetime={notification.updatedAt} />
       </Stack>
 
       <MetricGroup notification={notification} />

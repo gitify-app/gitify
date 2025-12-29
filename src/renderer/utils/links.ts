@@ -1,8 +1,14 @@
 import { APPLICATION } from '../../shared/constants';
 
 import { Constants } from '../constants';
-import type { Account, GitifyNotificationUser, Hostname, Link } from '../types';
-import type { Notification, Repository } from '../typesGitHub';
+import type {
+  Account,
+  GitifyNotification,
+  GitifyNotificationUser,
+  GitifyRepository,
+  Hostname,
+  Link,
+} from '../types';
 import { getDeveloperSettingsURL } from './auth/utils';
 import { openExternalLink } from './comms';
 import { generateGitHubWebUrl } from './helpers';
@@ -38,7 +44,7 @@ export function openAccountProfile(account: Account) {
 }
 
 export function openUserProfile(user: GitifyNotificationUser) {
-  openExternalLink(user.html_url);
+  openExternalLink(user.htmlUrl);
 }
 
 export function openHost(hostname: Hostname) {
@@ -50,11 +56,11 @@ export function openDeveloperSettings(account: Account) {
   openExternalLink(url);
 }
 
-export function openRepository(repository: Repository) {
-  openExternalLink(repository.html_url);
+export function openRepository(repository: GitifyRepository) {
+  openExternalLink(repository.htmlUrl);
 }
 
-export async function openNotification(notification: Notification) {
+export async function openNotification(notification: GitifyNotification) {
   const url = await generateGitHubWebUrl(notification);
   openExternalLink(url);
 }

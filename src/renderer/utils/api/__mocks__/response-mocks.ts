@@ -2,13 +2,14 @@ import {
   mockGitHubCloudAccount,
   mockGitHubEnterpriseServerAccount,
 } from '../../../__mocks__/account-mocks';
-import type { Link } from '../../../types';
 import type {
-  Notification,
-  Owner,
-  Repository,
-  User,
-} from '../../../typesGitHub';
+  GitifyNotification,
+  GitifyNotificationUser,
+  GitifyOwner,
+  GitifyRepository,
+  Link,
+} from '../../../types';
+import type { User } from '../../../typesGitHub';
 
 export const mockNotificationUser = {
   id: 123456789,
@@ -22,47 +23,44 @@ export const mockNotificationUser = {
 // 2 Notifications
 // Hostname : 'github.com'
 // Repository : 'gitify-app/notifications-test'
-const mockGitHubOwner = {
-  id: 6333409,
+const mockGitHubOwner: GitifyOwner = {
   login: 'gitify-app',
-  avatar_url:
+  avatarUrl:
     'https://avatars.githubusercontent.com/u/133795385?s=200&v=4' as Link,
-  url: 'https://api.github.com/users/gitify-app' as Link,
-  html_url: 'https://github.com/gitify-app' as Link,
   type: 'User',
-} satisfies Partial<Owner>;
+};
 
-const mockGitHubRepository = {
-  id: 57216596,
+const mockGitHubRepository: GitifyRepository = {
   name: 'notifications-test',
-  full_name: 'gitify-app/notifications-test',
-  owner: mockGitHubOwner as unknown as Owner,
-  html_url: 'https://github.com/gitify-app/notifications-test' as Link,
-} satisfies Partial<Repository>;
+  fullName: 'gitify-app/notifications-test',
+  owner: mockGitHubOwner,
+  htmlUrl: 'https://github.com/gitify-app/notifications-test' as Link,
+};
 
-export const mockGitHubNotifications: Notification[] = [
+const mockSubjectUser: GitifyNotificationUser = {
+  login: 'gitify-app',
+  htmlUrl: 'https://github.com/gitify-app' as Link,
+  avatarUrl:
+    'https://avatars.githubusercontent.com/u/133795385?s=200&v=4' as Link,
+  type: 'User',
+};
+
+export const mockGitHubNotifications: GitifyNotification[] = [
   {
     account: mockGitHubCloudAccount,
     order: 0,
     id: '138661096',
     unread: true,
     reason: 'subscribed',
-    updated_at: '2017-05-20T17:51:57Z',
-    last_read_at: '2017-05-20T17:06:51Z',
+    updatedAt: '2017-05-20T17:51:57Z',
     subject: {
       title: 'I am a robot and this is a test!',
       url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1' as Link,
-      latest_comment_url:
+      latestCommentUrl:
         'https://api.github.com/repos/gitify-app/notifications-test/issues/comments/302888448' as Link,
       type: 'Issue',
       state: 'OPEN',
-      user: {
-        login: 'gitify-app',
-        html_url: 'https://github.com/gitify-app' as Link,
-        avatar_url:
-          'https://avatars.githubusercontent.com/u/133795385?s=200&v=4' as Link,
-        type: 'User',
-      },
+      user: mockSubjectUser,
       reviews: [
         {
           state: 'APPROVED',
@@ -78,10 +76,7 @@ export const mockGitHubNotifications: Notification[] = [
         },
       ],
     },
-    repository: mockGitHubRepository as unknown as Repository,
-    url: 'https://api.github.com/notifications/threads/138661096' as Link,
-    subscription_url:
-      'https://api.github.com/notifications/threads/138661096/subscription' as Link,
+    repository: mockGitHubRepository,
   },
   {
     account: mockGitHubCloudAccount,
@@ -89,64 +84,52 @@ export const mockGitHubNotifications: Notification[] = [
     id: '148827438',
     unread: true,
     reason: 'author',
-    updated_at: '2017-05-20T17:06:34Z',
-    last_read_at: '2017-05-20T16:59:03Z',
+    updatedAt: '2017-05-20T17:06:34Z',
     subject: {
       title: 'Improve the UI',
       url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/4' as Link,
-      latest_comment_url:
+      latestCommentUrl:
         'https://api.github.com/repos/gitify-app/notifications-test/issues/comments/302885965' as Link,
       type: 'Issue',
       reviews: null,
     },
-    repository: mockGitHubRepository as unknown as Repository,
-    url: 'https://api.github.com/notifications/threads/148827438' as Link,
-    subscription_url:
-      'https://api.github.com/notifications/threads/148827438/subscription' as Link,
+    repository: mockGitHubRepository,
   },
 ];
 
 // 2 Notifications
 // Hostname : 'github.gitify.io'
 // Repository : 'myorg/notifications-test'
-const mockEnterpriseOwner = {
+const mockEnterpriseOwner: GitifyOwner = {
   login: 'myorg',
-  id: 4,
-  avatar_url: 'https://github.gitify.io/avatars/u/4?' as Link,
-  url: 'https://github.gitify.io/api/v3/users/myorg',
-  html_url: 'https://github.gitify.io/myorg' as Link,
+  avatarUrl: 'https://github.gitify.io/avatars/u/4?' as Link,
   type: 'Organization',
-} satisfies Partial<Owner>;
+};
 
-const mockEnterpriseRepository = {
-  id: 1,
+const mockEnterpriseRepository: GitifyRepository = {
   name: 'notifications-test',
-  full_name: 'myorg/notifications-test',
-  owner: mockEnterpriseOwner as unknown as Owner,
-  html_url: 'https://github.gitify.io/myorg/notifications-test' as Link,
-} satisfies Partial<Repository>;
+  fullName: 'myorg/notifications-test',
+  owner: mockEnterpriseOwner,
+  htmlUrl: 'https://github.gitify.io/myorg/notifications-test' as Link,
+};
 
-export const mockEnterpriseNotifications: Notification[] = [
+export const mockEnterpriseNotifications: GitifyNotification[] = [
   {
     account: mockGitHubEnterpriseServerAccount,
     order: 0,
     id: '3',
     unread: true,
     reason: 'subscribed',
-    updated_at: '2017-05-20T13:02:48Z',
-    last_read_at: null,
+    updatedAt: '2017-05-20T13:02:48Z',
     subject: {
       title: 'Release 0.0.1',
       url: 'https://github.gitify.io/api/v3/repos/myorg/notifications-test/releases/3' as Link,
-      latest_comment_url:
+      latestCommentUrl:
         'https://github.gitify.io/api/v3/repos/myorg/notifications-test/releases/3' as Link,
       type: 'Release',
       reviews: null,
     },
-    repository: mockEnterpriseRepository as unknown as Repository,
-    url: 'https://github.gitify.io/api/v3/notifications/threads/4' as Link,
-    subscription_url:
-      'https://github.gitify.io/api/v3/notifications/threads/4/subscription' as Link,
+    repository: mockEnterpriseRepository,
   },
   {
     account: mockGitHubEnterpriseServerAccount,
@@ -154,21 +137,18 @@ export const mockEnterpriseNotifications: Notification[] = [
     id: '4',
     unread: true,
     reason: 'subscribed',
-    updated_at: '2017-05-20T15:52:20Z',
-    last_read_at: '2017-05-20T14:20:55Z',
+    updatedAt: '2017-05-20T15:52:20Z',
     subject: {
       title: 'Bump Version',
       url: 'https://github.gitify.io/api/v3/repos/myorg/notifications-test/pulls/4' as Link,
-      latest_comment_url:
+      latestCommentUrl:
         'https://github.gitify.io/api/v3/repos/myorg/notifications-test/issues/comments/21' as Link,
       type: 'PullRequest',
       reviews: null,
     },
-    repository: mockEnterpriseRepository as unknown as Repository,
-    url: 'https://github.gitify.io/api/v3/notifications/threads/3' as Link,
-    subscription_url:
-      'https://github.gitify.io/api/v3/notifications/threads/3/subscription' as Link,
+    repository: mockEnterpriseRepository,
   },
 ];
 
-export const mockSingleNotification: Notification = mockGitHubNotifications[0];
+export const mockSingleNotification: GitifyNotification =
+  mockGitHubNotifications[0];

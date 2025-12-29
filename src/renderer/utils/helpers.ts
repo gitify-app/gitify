@@ -5,8 +5,7 @@ import {
 } from '@primer/octicons-react';
 
 import { Constants } from '../constants';
-import type { Chevron, Hostname, Link } from '../types';
-import type { Notification } from '../typesGitHub';
+import type { Chevron, GitifyNotification, Hostname, Link } from '../types';
 import { getHtmlUrl } from './api/client';
 import type { PlatformType } from './auth/types';
 import { rendererLogError } from './logger';
@@ -23,7 +22,7 @@ export function isEnterpriseServerHost(hostname: Hostname): boolean {
 }
 
 export function generateNotificationReferrerId(
-  notification: Notification,
+  notification: GitifyNotification,
 ): string {
   const raw = `018:NotificationThread${notification.id}:${notification.account.user.id}`;
   return btoa(raw);
@@ -45,7 +44,7 @@ export function actionsURL(repositoryURL: string, filters: string[]): Link {
 }
 
 export async function generateGitHubWebUrl(
-  notification: Notification,
+  notification: GitifyNotification,
 ): Promise<Link> {
   const handler = createNotificationHandler(notification);
   const url = new URL(handler.defaultUrl(notification));
@@ -54,9 +53,9 @@ export async function generateGitHubWebUrl(
     url.href = notification.subject.htmlUrl;
   } else {
     try {
-      if (notification.subject.latest_comment_url) {
+      if (notification.subject.latestCommentUrl) {
         url.href = await getHtmlUrl(
-          notification.subject.latest_comment_url,
+          notification.subject.latestCommentUrl,
           notification.account.token,
         );
       } else if (notification.subject.url) {

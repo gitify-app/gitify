@@ -9,7 +9,7 @@ import * as native from './native';
 
 describe('renderer/utils/notifications/native.ts', () => {
   const mockHtmlUrl =
-    mockSingleAccountNotifications[0].notifications[0].repository.html_url;
+    mockSingleAccountNotifications[0].notifications[0].repository.htmlUrl;
 
   jest
     .spyOn(helpers, 'generateGitHubWebUrl')
@@ -31,7 +31,7 @@ describe('renderer/utils/notifications/native.ts', () => {
 
     expect(window.gitify.raiseNativeNotification).toHaveBeenCalledWith(
       expect.stringContaining(
-        mockSingleAccountNotifications[0].notifications[0].repository.full_name,
+        mockSingleAccountNotifications[0].notifications[0].repository.fullName,
       ),
       expect.stringContaining(
         mockSingleAccountNotifications[0].notifications[0].subject.title,

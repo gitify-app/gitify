@@ -1,5 +1,9 @@
-import type { Account, AccountNotifications, SettingsState } from '../../types';
-import type { Notification } from '../../typesGitHub';
+import type {
+  Account,
+  AccountNotifications,
+  GitifyNotification,
+  SettingsState,
+} from '../../types';
 import { getAccountUUID } from '../auth/utils';
 
 /**
@@ -10,7 +14,7 @@ import { getAccountUUID } from '../auth/utils';
 export function removeNotificationsForAccount(
   account: Account,
   settings: SettingsState,
-  notificationsToRemove: Notification[],
+  notificationsToRemove: GitifyNotification[],
   accountNotifications: AccountNotifications[],
 ): AccountNotifications[] {
   if (notificationsToRemove.length === 0) {

@@ -1,9 +1,9 @@
 import type {
   AccountNotifications,
+  GitifyNotification,
   SettingsState,
   TypeDetails,
 } from '../../../types';
-import type { Notification } from '../../../typesGitHub';
 
 export interface Filter<T extends string> {
   FILTER_TYPES: Record<T, TypeDetails>;
@@ -18,5 +18,5 @@ export interface Filter<T extends string> {
 
   getFilterCount(accountNotifications: AccountNotifications[], type: T): number;
 
-  filterNotification(notification: Notification, type: T): boolean;
+  filterNotification(notification: GitifyNotification, type: T): boolean;
 }

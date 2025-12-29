@@ -1,15 +1,14 @@
 import { Constants } from '../constants';
 import type {
   AccountNotifications,
+  GitifyNotification,
   GitifyNotificationState,
+  GitifyRepository,
+  GitifySubject,
   Hostname,
+  Link,
 } from '../types';
-import type {
-  Notification,
-  Repository,
-  Subject,
-  SubjectType,
-} from '../typesGitHub';
+import type { SubjectType } from '../typesGitHub';
 import {
   mockEnterpriseNotifications,
   mockGitHubNotifications,
@@ -47,21 +46,21 @@ export function createMockSubject(mocks: {
   title?: string;
   type?: SubjectType;
   state?: GitifyNotificationState;
-}): Subject {
+}): GitifySubject {
   return {
     title: mocks.title ?? 'Mock Subject',
     type: mocks.type ?? ('Unknown' as SubjectType),
     state: mocks.state ?? ('Unknown' as GitifyNotificationState),
     url: null,
-    latest_comment_url: null,
+    latestCommentUrl: null,
   };
 }
 
 export function createPartialMockNotification(
-  subject: Partial<Subject>,
-  repository?: Partial<Repository>,
-): Notification {
-  const mockNotification: Partial<Notification> = {
+  subject: Partial<GitifySubject>,
+  repository?: Partial<GitifyRepository>,
+): GitifyNotification {
+  const mockNotification: Partial<GitifyNotification> = {
     account: {
       method: 'Personal Access Token',
       platform: 'GitHub Cloud',
@@ -70,28 +69,30 @@ export function createPartialMockNotification(
       user: mockGitifyUser,
       hasRequiredScopes: true,
     },
-    subject: subject as Subject,
+    subject: subject as GitifySubject,
     repository: {
       name: 'notifications-test',
-      full_name: 'gitify-app/notifications-test',
-      html_url: 'https://github.com/gitify-app/notifications-test',
+      fullName: 'gitify-app/notifications-test',
+      htmlUrl: 'https://github.com/gitify-app/notifications-test' as Link,
       owner: {
         login: 'gitify-app',
+        avatarUrl: 'https://avatars.githubusercontent.com/u/1' as Link,
+        type: 'Organization',
       },
       ...repository,
-    } as Repository,
+    } as GitifyRepository,
   };
 
-  return mockNotification as Notification;
+  return mockNotification as GitifyNotification;
 }
 
 export function createMockNotificationForRepoName(
   id: string,
   repoFullName: string | null,
-): Notification {
+): GitifyNotification {
   return {
     id,
-    repository: repoFullName ? { full_name: repoFullName } : null,
+    repository: repoFullName ? { fullName: repoFullName } : null,
     account: mockGitHubCloudAccount,
-  } as Notification;
+  } as GitifyNotification;
 }

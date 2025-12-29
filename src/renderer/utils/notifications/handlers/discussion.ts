@@ -12,12 +12,12 @@ import { differenceInMilliseconds } from 'date-fns';
 
 import {
   type GitifyDiscussionState,
+  type GitifyNotification,
   type GitifySubject,
   IconColor,
   type Link,
   type SettingsState,
 } from '../../../types';
-import type { Notification, Subject } from '../../../typesGitHub';
 import { fetchDiscussionByNumber } from '../../api/client';
 import type {
   CommentFieldsFragment,
@@ -30,9 +30,9 @@ class DiscussionHandler extends DefaultHandler {
   readonly type = 'Discussion';
 
   async enrich(
-    notification: Notification,
+    notification: GitifyNotification,
     _settings: SettingsState,
-  ): Promise<GitifySubject> {
+  ): Promise<Partial<GitifySubject>> {
     const response = await fetchDiscussionByNumber(notification);
     const discussion = response.data.repository?.discussion;
 
@@ -64,7 +64,7 @@ class DiscussionHandler extends DefaultHandler {
     };
   }
 
-  iconType(subject: Subject): FC<OcticonProps> | null {
+  iconType(subject: GitifySubject): FC<OcticonProps> | null {
     switch (subject.state as GitifyDiscussionState) {
       case 'DUPLICATE':
         return DiscussionDuplicateIcon;
@@ -77,7 +77,7 @@ class DiscussionHandler extends DefaultHandler {
     }
   }
 
-  iconColor(subject: Subject): IconColor {
+  iconColor(subject: GitifySubject): IconColor {
     switch (subject.state) {
       case 'ANSWERED':
         return IconColor.GREEN;
@@ -88,8 +88,8 @@ class DiscussionHandler extends DefaultHandler {
     }
   }
 
-  defaultUrl(notification: Notification): Link {
-    const url = new URL(notification.repository.html_url);
+  defaultUrl(notification: GitifyNotification): Link {
+    const url = new URL(notification.repository.htmlUrl);
     url.pathname += '/discussions';
     return url.href as Link;
   }
@@ -98,14 +98,14 @@ class DiscussionHandler extends DefaultHandler {
 export const discussionHandler = new DiscussionHandler();
 
 export function getClosestDiscussionCommentOrReply(
-  notification: Notification,
+  notification: GitifyNotification,
   comments: DiscussionCommentFieldsFragment[],
 ): CommentFieldsFragment | null {
   if (!comments || comments.length === 0) {
     return null;
   }
 
-  const targetTimestamp = notification.updated_at;
+  const targetTimestamp = notification.updatedAt;
 
   const allCommentsAndReplies = comments.flatMap((comment) => [
     ...comment.replies.nodes,

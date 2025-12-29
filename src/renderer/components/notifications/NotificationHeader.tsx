@@ -3,14 +3,13 @@ import type { FC, MouseEvent } from 'react';
 import { Stack } from '@primer/react';
 
 import { useAppContext } from '../../context/App';
-import { GroupBy, Opacity, Size } from '../../types';
-import type { Notification } from '../../typesGitHub';
+import { type GitifyNotification, GroupBy, Opacity, Size } from '../../types';
 import { cn } from '../../utils/cn';
 import { openRepository } from '../../utils/links';
 import { AvatarWithFallback } from '../avatars/AvatarWithFallback';
 
 interface NotificationHeaderProps {
-  notification: Notification;
+  notification: GitifyNotification;
 }
 
 export const NotificationHeader: FC<NotificationHeaderProps> = ({
@@ -18,7 +17,7 @@ export const NotificationHeader: FC<NotificationHeaderProps> = ({
 }: NotificationHeaderProps) => {
   const { settings } = useAppContext();
 
-  const repoSlug = notification.repository.full_name;
+  const repoSlug = notification.repository.fullName;
 
   const notificationNumber = notification.subject?.number
     ? `#${notification.subject.number}`
@@ -45,7 +44,7 @@ export const NotificationHeader: FC<NotificationHeaderProps> = ({
               alt={repoSlug}
               name={repoSlug}
               size={Size.SMALL}
-              src={notification.repository.owner.avatar_url}
+              src={notification.repository.owner.avatarUrl}
               userType={notification.repository.owner.type}
             />
           </button>

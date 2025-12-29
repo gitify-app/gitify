@@ -1,17 +1,21 @@
+import type { components } from '@octokit/openapi-types';
 import type { AxiosPromise } from 'axios';
 import type { ExecutionResult } from 'graphql';
 
 import type {
   Account,
+  GitifyNotification,
   Hostname,
   Link,
   SettingsState,
   Token,
 } from '../../types';
+
+type RawGitHubNotification = components['schemas']['thread'];
+
 import type {
   Commit,
   CommitComment,
-  Notification,
   NotificationThreadSubscription,
   Release,
 } from '../../typesGitHub';
@@ -61,7 +65,7 @@ export function headNotifications(
 export function listNotificationsForAuthenticatedUser(
   account: Account,
   settings: SettingsState,
-): AxiosPromise<Notification[]> {
+): AxiosPromise<RawGitHubNotification[]> {
   const url = getGitHubAPIBaseUrl(account.hostname);
   url.pathname += 'notifications';
   url.searchParams.append('participating', String(settings.participating));
@@ -197,7 +201,7 @@ export async function fetchAuthenticatedUserDetails(
  * Fetch GitHub Issue by Issue Number.
  */
 export async function fetchIssueByNumber(
-  notification: Notification,
+  notification: GitifyNotification,
 ): Promise<ExecutionResult<FetchIssueByNumberQuery>> {
   const url = getGitHubGraphQLUrl(notification.account.hostname);
   const number = getNumberFromUrl(notification.subject.url);
@@ -220,7 +224,7 @@ export async function fetchIssueByNumber(
  * Fetch GitHub Pull Request by PR Number.
  */
 export async function fetchPullByNumber(
-  notification: Notification,
+  notification: GitifyNotification,
 ): Promise<ExecutionResult<FetchPullRequestByNumberQuery>> {
   const url = getGitHubGraphQLUrl(notification.account.hostname);
   const number = getNumberFromUrl(notification.subject.url);
@@ -245,7 +249,7 @@ export async function fetchPullByNumber(
  * Fetch GitHub Discussion by Discussion Number.
  */
 export async function fetchDiscussionByNumber(
-  notification: Notification,
+  notification: GitifyNotification,
 ): Promise<ExecutionResult<FetchDiscussionByNumberQuery>> {
   const url = getGitHubGraphQLUrl(notification.account.hostname);
   const number = getNumberFromUrl(notification.subject.url);

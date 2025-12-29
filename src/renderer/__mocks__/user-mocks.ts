@@ -1,5 +1,6 @@
 import type { GitifyUser, Link } from '../types';
 import type { User } from '../typesGitHub';
+import type { AuthorFieldsFragment } from '../utils/api/graphql/generated/graphql';
 
 export const mockGitifyUser: GitifyUser = {
   login: 'octocat',
@@ -17,4 +18,14 @@ export function createPartialMockUser(login: string): User {
   };
 
   return mockUser as User;
+}
+
+export function createMockAuthorFragment(login: string): AuthorFieldsFragment {
+  return {
+    __typename: 'User',
+    login: login,
+    htmlUrl: `https://github.com/${login}`,
+    avatarUrl: 'https://avatars.githubusercontent.com/u/583231?v=4',
+    type: 'User',
+  };
 }

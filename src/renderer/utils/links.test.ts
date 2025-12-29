@@ -1,8 +1,12 @@
 import { mockGitHubCloudAccount } from '../__mocks__/account-mocks';
-import { createPartialMockUser } from '../__mocks__/user-mocks';
+import { createMockAuthorFragment } from '../__mocks__/user-mocks';
 import { Constants } from '../constants';
-import type { Hostname, Link } from '../types';
-import type { Repository } from '../typesGitHub';
+import type {
+  GitifyNotificationUser,
+  GitifyRepository,
+  Hostname,
+  Link,
+} from '../types';
 import { mockSingleNotification } from './api/__mocks__/response-mocks';
 import * as authUtils from './auth/utils';
 import * as comms from './comms';
@@ -71,7 +75,9 @@ describe('renderer/utils/links.ts', () => {
   });
 
   it('openUserProfile', () => {
-    const mockUser = createPartialMockUser('mock-user');
+    const mockUser = createMockAuthorFragment(
+      'mock-user',
+    ) as GitifyNotificationUser;
 
     openUserProfile(mockUser);
 
@@ -100,8 +106,8 @@ describe('renderer/utils/links.ts', () => {
   it('openRepository', () => {
     const mockHtmlUrl = 'https://github.com/gitify-app/gitify';
     const repo = {
-      html_url: mockHtmlUrl,
-    } as Repository;
+      htmlUrl: mockHtmlUrl,
+    } as GitifyRepository;
 
     openRepository(repo);
 
@@ -109,7 +115,7 @@ describe('renderer/utils/links.ts', () => {
   });
 
   it('openNotification', async () => {
-    const mockNotificationUrl = mockSingleNotification.repository.html_url;
+    const mockNotificationUrl = mockSingleNotification.repository.htmlUrl;
     jest
       .spyOn(helpers, 'generateGitHubWebUrl')
       .mockResolvedValue(mockNotificationUrl);

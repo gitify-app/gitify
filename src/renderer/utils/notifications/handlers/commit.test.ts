@@ -7,8 +7,7 @@ import {
 } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
 import { createPartialMockUser } from '../../../__mocks__/user-mocks';
-import type { Link } from '../../../types';
-import type { Notification } from '../../../typesGitHub';
+import type { GitifyNotification, Link } from '../../../types';
 import { commitHandler } from './commit';
 
 describe('renderer/utils/notifications/handlers/commit.ts', () => {
@@ -27,7 +26,7 @@ describe('renderer/utils/notifications/handlers/commit.ts', () => {
         title: 'This is a commit with comments',
         type: 'Commit',
         url: 'https://api.github.com/repos/gitify-app/notifications-test/commits/d2a86d80e3d24ea9510d5de6c147e53c30f313a8' as Link,
-        latest_comment_url:
+        latestCommentUrl:
           'https://api.github.com/repos/gitify-app/notifications-test/comments/141012658' as Link,
       });
 
@@ -47,8 +46,8 @@ describe('renderer/utils/notifications/handlers/commit.ts', () => {
         state: null,
         user: {
           login: mockCommenter.login,
-          html_url: mockCommenter.html_url,
-          avatar_url: mockCommenter.avatar_url,
+          htmlUrl: mockCommenter.html_url,
+          avatarUrl: mockCommenter.avatar_url,
           type: mockCommenter.type,
         },
       });
@@ -59,7 +58,7 @@ describe('renderer/utils/notifications/handlers/commit.ts', () => {
         title: 'This is a commit with comments',
         type: 'Commit',
         url: 'https://api.github.com/repos/gitify-app/notifications-test/commits/d2a86d80e3d24ea9510d5de6c147e53c30f313a8' as Link,
-        latest_comment_url: null,
+        latestCommentUrl: null,
       });
 
       nock('https://api.github.com')
@@ -74,8 +73,8 @@ describe('renderer/utils/notifications/handlers/commit.ts', () => {
         state: null,
         user: {
           login: mockAuthor.login,
-          html_url: mockAuthor.html_url,
-          avatar_url: mockAuthor.avatar_url,
+          htmlUrl: mockAuthor.html_url,
+          avatarUrl: mockAuthor.avatar_url,
           type: mockAuthor.type,
         },
       });
@@ -86,7 +85,7 @@ describe('renderer/utils/notifications/handlers/commit.ts', () => {
         title: 'This is a commit with comments',
         type: 'Commit',
         url: 'https://api.github.com/repos/gitify-app/notifications-test/commits/d2a86d80e3d24ea9510d5de6c147e53c30f313a8' as Link,
-        latest_comment_url: null,
+        latestCommentUrl: null,
       });
 
       const result = await commitHandler.enrich(mockNotification, {
@@ -94,7 +93,8 @@ describe('renderer/utils/notifications/handlers/commit.ts', () => {
         filterStates: ['closed'],
       });
 
-      expect(result).toEqual(null);
+      // Returns empty object when filtered (no API call made)
+      expect(result).toEqual({});
     });
   });
 
@@ -111,9 +111,9 @@ describe('renderer/utils/notifications/handlers/commit.ts', () => {
     expect(
       commitHandler.defaultUrl({
         repository: {
-          html_url: mockHtmlUrl,
+          htmlUrl: mockHtmlUrl,
         },
-      } as Notification),
+      } as GitifyNotification),
     ).toEqual(mockHtmlUrl);
   });
 });

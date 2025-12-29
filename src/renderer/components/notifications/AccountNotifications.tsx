@@ -4,8 +4,12 @@ import { GitPullRequestIcon, IssueOpenedIcon } from '@primer/octicons-react';
 import { Button, Stack } from '@primer/react';
 
 import { useAppContext } from '../../context/App';
-import { type Account, type GitifyError, Size } from '../../types';
-import type { Notification } from '../../typesGitHub';
+import {
+  type Account,
+  type GitifyError,
+  type GitifyNotification,
+  Size,
+} from '../../types';
 import { hasMultipleAccounts } from '../../utils/auth/utils';
 import { cn } from '../../utils/cn';
 import { getChevronDetails } from '../../utils/helpers';
@@ -28,7 +32,7 @@ import { RepositoryNotifications } from './RepositoryNotifications';
 
 interface AccountNotificationsProps {
   account: Account;
-  notifications: Notification[];
+  notifications: GitifyNotification[];
   error: GitifyError | null;
   showAccountHeader: boolean;
 }

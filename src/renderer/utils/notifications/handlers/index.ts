@@ -1,4 +1,4 @@
-import type { Notification } from '../../../typesGitHub';
+import type { GitifyNotification } from '../../../types';
 import { checkSuiteHandler } from './checkSuite';
 import { commitHandler } from './commit';
 import { defaultHandler } from './default';
@@ -13,7 +13,7 @@ import type { NotificationTypeHandler } from './types';
 import { workflowRunHandler } from './workflowRun';
 
 export function createNotificationHandler(
-  notification: Notification,
+  notification: GitifyNotification,
 ): NotificationTypeHandler {
   switch (notification.subject.type) {
     case 'CheckSuite':

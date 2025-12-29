@@ -85,7 +85,7 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
   });
 
   it('should use default repository icon when avatar is not available', () => {
-    props.repoNotifications[0].repository.owner.avatar_url = '' as Link;
+    props.repoNotifications[0].repository.owner.avatarUrl = '' as Link;
 
     const tree = renderWithAppContext(<RepositoryNotifications {...props} />);
 

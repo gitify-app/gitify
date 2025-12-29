@@ -23,13 +23,13 @@ import type {
   FilterSettingsState,
   FilterSettingsValue,
   GitifyError,
+  GitifyNotification,
   SettingsState,
   SettingsValue,
   Status,
   Token,
 } from '../types';
 import { FetchType } from '../types';
-import type { Notification } from '../typesGitHub';
 import { headNotifications } from '../utils/api/client';
 import type {
   LoginOAuthAppOptions,
@@ -89,9 +89,13 @@ export interface AppContextState {
   fetchNotifications: () => Promise<void>;
   removeAccountNotifications: (account: Account) => Promise<void>;
 
-  markNotificationsAsRead: (notifications: Notification[]) => Promise<void>;
-  markNotificationsAsDone: (notifications: Notification[]) => Promise<void>;
-  unsubscribeNotification: (notification: Notification) => Promise<void>;
+  markNotificationsAsRead: (
+    notifications: GitifyNotification[],
+  ) => Promise<void>;
+  markNotificationsAsDone: (
+    notifications: GitifyNotification[],
+  ) => Promise<void>;
+  unsubscribeNotification: (notification: GitifyNotification) => Promise<void>;
 
   settings: SettingsState;
   clearFilters: () => void;
@@ -444,19 +448,19 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   );
 
   const markNotificationsAsReadWithAccounts = useCallback(
-    async (notifications: Notification[]) =>
+    async (notifications: GitifyNotification[]) =>
       await markNotificationsAsRead({ auth, settings }, notifications),
     [auth, settings, markNotificationsAsRead],
   );
 
   const markNotificationsAsDoneWithAccounts = useCallback(
-    async (notifications: Notification[]) =>
+    async (notifications: GitifyNotification[]) =>
       await markNotificationsAsDone({ auth, settings }, notifications),
     [auth, settings, markNotificationsAsDone],
   );
 
   const unsubscribeNotificationWithAccounts = useCallback(
-    async (notification: Notification) =>
+    async (notification: GitifyNotification) =>
       await unsubscribeNotification({ auth, settings }, notification),
     [auth, settings, unsubscribeNotification],
   );

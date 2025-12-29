@@ -28,19 +28,6 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('should render itself & its children when last_read_at is null', async () => {
-    const mockNotification = mockSingleNotification;
-    mockNotification.last_read_at = null;
-
-    const props = {
-      notification: mockNotification,
-    };
-
-    const tree = renderWithAppContext(<NotificationFooter {...props} />);
-
-    expect(tree).toMatchSnapshot();
-  });
-
   describe('security alerts should use github icon for avatar', () => {
     it('Repository Dependabot Alerts Thread', async () => {
       const mockNotification = mockSingleNotification;
@@ -94,8 +81,8 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
           ...mockSingleNotification.subject,
           user: {
             login: 'some-user',
-            html_url: 'https://github.com/some-user' as Link,
-            avatar_url:
+            htmlUrl: 'https://github.com/some-user' as Link,
+            avatarUrl:
               'https://avatars.githubusercontent.com/u/123456789?v=4' as Link,
             type: 'User' as UserType,
           },
@@ -111,7 +98,7 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
 
     expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
     expect(openExternalLinkSpy).toHaveBeenCalledWith(
-      props.notification.subject.user.html_url,
+      props.notification.subject.user.htmlUrl,
     );
   });
 });

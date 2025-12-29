@@ -1,5 +1,4 @@
-import type { AccountNotifications } from '../../types';
-import type { Notification } from '../../typesGitHub';
+import type { AccountNotifications, GitifyNotification } from '../../types';
 import { getAccountUUID } from '../auth/utils';
 
 /**
@@ -8,7 +7,7 @@ import { getAccountUUID } from '../auth/utils';
 export function getNewNotifications(
   previousAccountNotifications: AccountNotifications[],
   newAccountNotifications: AccountNotifications[],
-): Notification[] {
+): GitifyNotification[] {
   return newAccountNotifications.flatMap((accountNotifications) => {
     const accountPreviousNotifications = previousAccountNotifications.find(
       (item) =>

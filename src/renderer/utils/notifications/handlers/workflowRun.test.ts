@@ -3,8 +3,7 @@ import {
   createPartialMockNotification,
 } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
-import type { Link } from '../../../types';
-import type { Notification } from '../../../typesGitHub';
+import type { GitifyNotification, Link } from '../../../types';
 import { getWorkflowRunAttributes, workflowRunHandler } from './workflowRun';
 
 describe('renderer/utils/notifications/handlers/workflowRun.ts', () => {
@@ -40,7 +39,8 @@ describe('renderer/utils/notifications/handlers/workflowRun.ts', () => {
         mockSettings,
       );
 
-      expect(result).toBeNull();
+      // Returns empty object when state cannot be determined
+      expect(result).toEqual({});
     });
 
     it('unhandled workflow run title', async () => {
@@ -54,7 +54,8 @@ describe('renderer/utils/notifications/handlers/workflowRun.ts', () => {
         mockSettings,
       );
 
-      expect(result).toBeNull();
+      // Returns empty object when title cannot be parsed
+      expect(result).toEqual({});
     });
   });
 
@@ -78,9 +79,9 @@ describe('renderer/utils/notifications/handlers/workflowRun.ts', () => {
           title: 'Some notification',
         },
         repository: {
-          html_url: mockHtmlUrl,
+          htmlUrl: mockHtmlUrl,
         },
-      } as Notification),
+      } as GitifyNotification),
     ).toEqual(`${mockHtmlUrl}/actions`);
   });
 

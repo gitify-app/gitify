@@ -1,9 +1,11 @@
 import { APPLICATION } from '../../../shared/constants';
 
-import type { Notification } from '../../typesGitHub';
+import type { GitifyNotification } from '../../types';
 import { generateGitHubWebUrl } from '../helpers';
 
-export async function raiseNativeNotification(notifications: Notification[]) {
+export async function raiseNativeNotification(
+  notifications: GitifyNotification[],
+) {
   let title: string;
   let body: string;
   let url: string = null;
@@ -12,7 +14,7 @@ export async function raiseNativeNotification(notifications: Notification[]) {
     const notification = notifications[0];
     title = window.gitify.platform.isWindows()
       ? ''
-      : notification.repository.full_name;
+      : notification.repository.fullName;
     body = notification.subject.title;
     url = await generateGitHubWebUrl(notification);
   } else {

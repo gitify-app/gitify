@@ -1,8 +1,12 @@
 import { createPartialMockNotification } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
 import { defaultSettings } from '../../../context/defaults';
-import type { Link, SearchToken, SettingsState } from '../../../types';
-import type { Owner } from '../../../typesGitHub';
+import type {
+  GitifyOwner,
+  Link,
+  SearchToken,
+  SettingsState,
+} from '../../../types';
 import {
   filterBaseNotifications,
   filterDetailedNotifications,
@@ -21,8 +25,8 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
           title: 'User authored notification',
           user: {
             login: 'github-user',
-            html_url: 'https://github.com/user' as Link,
-            avatar_url:
+            htmlUrl: 'https://github.com/user' as Link,
+            avatarUrl:
               'https://avatars.githubusercontent.com/u/133795385?s=200&v=4' as Link,
             type: 'User',
           },
@@ -30,8 +34,10 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
         {
           owner: {
             login: 'gitify-app',
-          } as Owner,
-          full_name: 'gitify-app/gitify',
+            avatarUrl: 'https://avatars.githubusercontent.com/u/1' as Link,
+            type: 'Organization',
+          } as GitifyOwner,
+          fullName: 'gitify-app/gitify',
         },
       ),
       createPartialMockNotification(
@@ -39,8 +45,8 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
           title: 'Bot authored notification',
           user: {
             login: 'github-bot',
-            html_url: 'https://github.com/bot' as Link,
-            avatar_url:
+            htmlUrl: 'https://github.com/bot' as Link,
+            avatarUrl:
               'https://avatars.githubusercontent.com/u/133795385?s=200&v=4' as Link,
             type: 'Bot',
           },
@@ -48,8 +54,10 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
         {
           owner: {
             login: 'github',
-          } as Owner,
-          full_name: 'github/github',
+            avatarUrl: 'https://avatars.githubusercontent.com/u/2' as Link,
+            type: 'Organization',
+          } as GitifyOwner,
+          fullName: 'github/github',
         },
       ),
     ];

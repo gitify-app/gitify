@@ -1,8 +1,6 @@
 import type { components } from '@octokit/openapi-types';
 
-import type { GitifyNotification, GitifySubject, Link } from './types';
-
-// TODO: #828 Add explicit types for GitHub API response vs Gitify Notifications object
+import type { Link } from './types';
 
 export interface GitHubRESTError {
   message: string;
@@ -50,41 +48,18 @@ export type UserType =
 export type NotificationThreadSubscription =
   components['schemas']['thread-subscription'];
 
-type BaseNotification = components['schemas']['thread'];
 type BaseUser = components['schemas']['simple-user'];
 type BaseRepository = components['schemas']['repository'];
 type BaseCommit = components['schemas']['commit'];
 type BaseCommitComment = components['schemas']['commit-comment'];
 type BaseRelease = components['schemas']['release'];
-type BaseSubject = components['schemas']['thread']['subject'];
-
-// Strengthen user-related types with explicit property overrides
-type GitHubNotification = Omit<
-  BaseNotification,
-  'reason' | 'subject' | 'repository'
-> & {
-  reason: Reason;
-  subject: Subject;
-  repository: Repository;
-};
-
-type GitHubSubject = Omit<
-  BaseSubject,
-  'url' | 'latest_comment_url' | 'type'
-> & {
-  url: Link | null;
-  latest_comment_url: Link | null;
-  type: SubjectType;
-};
 
 type StrengthenNullable<T, K extends keyof T, Extra> = Omit<T, K> & {
   [P in K]: T[P] extends null ? null : NonNullable<T[P]> & Extra;
 };
 
-// Exported strengthened types
-export type Notification = GitHubNotification & GitifyNotification;
-
-export type Subject = GitHubSubject & GitifySubject;
+// Exported strengthened types for REST API responses
+// These are used only at the API boundary before transforming to GitifyNotification
 
 export type Repository = Omit<BaseRepository, 'html_url' | 'owner'> & {
   html_url: Link;

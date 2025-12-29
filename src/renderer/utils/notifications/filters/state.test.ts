@@ -1,5 +1,8 @@
-import type { FilterStateType, GitifyNotificationState } from '../../../types';
-import type { Notification } from '../../../typesGitHub';
+import type {
+  FilterStateType,
+  GitifyNotification,
+  GitifyNotificationState,
+} from '../../../types';
 import { stateFilter } from './state';
 
 describe('renderer/utils/notifications/filters/state.ts', () => {
@@ -10,7 +13,7 @@ describe('renderer/utils/notifications/filters/state.ts', () => {
   describe('can filter by notification states', () => {
     const mockNotification = {
       subject: { state: 'OPEN' },
-    } as Partial<Notification> as Notification;
+    } as Partial<GitifyNotification> as GitifyNotification;
 
     const cases = {
       OPEN: 'open',

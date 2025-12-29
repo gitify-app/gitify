@@ -1,9 +1,10 @@
 import type {
   AccountNotifications,
+  GitifyNotification,
   SettingsState,
   TypeDetails,
 } from '../../../types';
-import type { Notification, UserType } from '../../../typesGitHub';
+import type { UserType } from '../../../typesGitHub';
 import type { Filter } from './types';
 
 const USER_TYPE_DETAILS: Record<UserType, TypeDetails> = {
@@ -50,7 +51,10 @@ export const userTypeFilter: Filter<UserType> = {
     );
   },
 
-  filterNotification(notification: Notification, userType: UserType): boolean {
+  filterNotification(
+    notification: GitifyNotification,
+    userType: UserType,
+  ): boolean {
     const allUserTypes = ['User', 'EnterpriseUserAccount'];
 
     if (userType === 'User') {

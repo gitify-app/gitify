@@ -8,13 +8,12 @@ import {
 } from '@primer/octicons-react';
 
 import { useAppContext } from '../../context/App';
-import { IconColor } from '../../types';
-import type { Notification } from '../../typesGitHub';
+import { type GitifyNotification, IconColor } from '../../types';
 import { getPullRequestReviewIcon } from '../../utils/icons';
 import { MetricPill } from './MetricPill';
 
 interface MetricGroupProps {
-  notification: Notification;
+  notification: GitifyNotification;
 }
 
 export const MetricGroup: FC<MetricGroupProps> = ({

@@ -1,11 +1,11 @@
 import type {
   AccountNotifications,
   FilterStateType,
+  GitifyNotification,
   GitifyNotificationState,
   SettingsState,
   TypeDetails,
 } from '../../../types';
-import type { Notification } from '../../../typesGitHub';
 import type { Filter } from './types';
 
 const STATE_TYPE_DETAILS: Record<FilterStateType, TypeDetails> = {
@@ -61,7 +61,7 @@ export const stateFilter: Filter<FilterStateType> = {
   },
 
   filterNotification(
-    notification: Notification,
+    notification: GitifyNotification,
     stateType: FilterStateType,
   ): boolean {
     const mapped = mapStateToFilter(notification.subject?.state);
