@@ -13,11 +13,11 @@ import {
 import { mockSettings } from '../../__mocks__/state-mocks';
 import {
   type AccountNotifications,
+  type GitifyRepository,
   GroupBy,
   type Link,
   type SettingsState,
 } from '../../types';
-import type { Repository } from '../../typesGitHub';
 import * as logger from '../../utils/logger';
 import {
   enrichNotification,
@@ -63,13 +63,16 @@ describe('renderer/utils/notifications/notifications.ts', () => {
       type: 'Issue',
       url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1' as Link,
     });
-    const mockRepository = {
+    const mockRepository: GitifyRepository = {
       name: 'notifications-test',
-      full_name: 'gitify-app/notifications-test',
+      fullName: 'gitify-app/notifications-test',
+      htmlUrl: 'https://github.com/gitify-app/notifications-test' as Link,
       owner: {
         login: 'gitify-app',
+        avatarUrl: 'https://avatars.githubusercontent.com/u/1' as Link,
+        type: 'Organization',
       },
-    } as Repository;
+    };
     mockNotification.repository = mockRepository;
 
     nock('https://api.github.com').post('/graphql').replyWithError(mockError);

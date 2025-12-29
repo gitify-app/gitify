@@ -6,23 +6,23 @@ import {
   createPartialMockNotification,
 } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
-import { createPartialMockUser } from '../../../__mocks__/user-mocks';
+import { createMockNotificationUser } from '../../../__mocks__/user-mocks';
+import type { GitifyNotification } from '../../../types';
 import {
   type GitifyDiscussionState,
   type GitifySubject,
   IconColor,
   type Link,
 } from '../../../types';
-import type { Notification } from '../../../typesGitHub';
 import type {
   DiscussionDetailsFragment,
   DiscussionStateReason,
 } from '../../api/graphql/generated/graphql';
 import { discussionHandler } from './discussion';
 
-const mockAuthor = createPartialMockUser('discussion-author');
-const mockCommenter = createPartialMockUser('discussion-commenter');
-const mockReplier = createPartialMockUser('discussion-replier');
+const mockAuthor = createMockNotificationUser('discussion-author');
+const mockCommenter = createMockNotificationUser('discussion-commenter');
+const mockReplier = createMockNotificationUser('discussion-replier');
 
 describe('renderer/utils/notifications/handlers/discussion.ts', () => {
   describe('enrich', () => {
@@ -30,9 +30,9 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
       title: 'This is a mock discussion',
       type: 'Discussion',
       url: 'https://api.github.com/repos/gitify-app/notifications-test/discussions/123' as Link,
-      latest_comment_url: null,
+      latestCommentUrl: null,
     });
-    mockNotification.updated_at = '2024-01-01T00:00:00Z';
+    mockNotification.updatedAt = '2024-01-01T00:00:00Z';
 
     beforeEach(() => {
       // axios will default to using the XHR adapter which can't be intercepted
@@ -63,15 +63,15 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         state: 'ANSWERED',
         user: {
           login: mockAuthor.login,
-          html_url: mockAuthor.html_url,
-          avatar_url: mockAuthor.avatar_url,
+          htmlUrl: mockAuthor.htmlUrl,
+          avatarUrl: mockAuthor.avatarUrl,
           type: mockAuthor.type,
         },
         comments: 0,
         labels: [],
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/discussions/123',
-      } as GitifySubject);
+      } as Partial<GitifySubject>);
     });
 
     it('open / unanswered discussion - no stateReason', async () => {
@@ -97,15 +97,15 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         state: 'OPEN',
         user: {
           login: mockAuthor.login,
-          html_url: mockAuthor.html_url,
-          avatar_url: mockAuthor.avatar_url,
+          htmlUrl: mockAuthor.htmlUrl,
+          avatarUrl: mockAuthor.avatarUrl,
           type: mockAuthor.type,
         },
         comments: 0,
         labels: [],
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/discussions/123',
-      } as GitifySubject);
+      } as Partial<GitifySubject>);
     });
 
     it('discussion with stateReason - stateReason always takes precedence', async () => {
@@ -134,15 +134,15 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         state: 'DUPLICATE',
         user: {
           login: mockAuthor.login,
-          html_url: mockAuthor.html_url,
-          avatar_url: mockAuthor.avatar_url,
+          htmlUrl: mockAuthor.htmlUrl,
+          avatarUrl: mockAuthor.avatarUrl,
           type: mockAuthor.type,
         },
         comments: 0,
         labels: [],
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/discussions/123',
-      } as GitifySubject);
+      } as Partial<GitifySubject>);
     });
 
     it('discussion with labels', async () => {
@@ -175,15 +175,15 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         state: 'ANSWERED',
         user: {
           login: mockAuthor.login,
-          html_url: mockAuthor.html_url,
-          avatar_url: mockAuthor.avatar_url,
+          htmlUrl: mockAuthor.htmlUrl,
+          avatarUrl: mockAuthor.avatarUrl,
           type: mockAuthor.type,
         },
         comments: 0,
         labels: ['enhancement'],
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/discussions/123',
-      } as GitifySubject);
+      } as Partial<GitifySubject>);
     });
 
     it('discussion with comments', async () => {
@@ -223,15 +223,15 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         state: 'ANSWERED',
         user: {
           login: mockCommenter.login,
-          html_url: mockCommenter.html_url,
-          avatar_url: mockCommenter.avatar_url,
+          htmlUrl: mockCommenter.htmlUrl,
+          avatarUrl: mockCommenter.avatarUrl,
           type: mockCommenter.type,
         },
         comments: 1,
         labels: [],
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/discussions/123#discussioncomment-1234',
-      } as GitifySubject);
+      } as Partial<GitifySubject>);
     });
 
     it('discussion with comments and replies', async () => {
@@ -277,15 +277,15 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         state: 'ANSWERED',
         user: {
           login: mockReplier.login,
-          html_url: mockReplier.html_url,
-          avatar_url: mockReplier.avatar_url,
+          htmlUrl: mockReplier.htmlUrl,
+          avatarUrl: mockReplier.avatarUrl,
           type: mockReplier.type,
         },
         comments: 1,
         labels: [],
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/discussions/123#discussioncomment-6789',
-      } as GitifySubject);
+      } as Partial<GitifySubject>);
     });
   });
 
@@ -338,9 +338,9 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
     expect(
       discussionHandler.defaultUrl({
         repository: {
-          html_url: mockHtmlUrl,
+          htmlUrl: mockHtmlUrl,
         },
-      } as Notification),
+      } as GitifyNotification),
     ).toEqual(`${mockHtmlUrl}/discussions`);
   });
 });

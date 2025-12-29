@@ -3,12 +3,12 @@ import {
   createPartialMockNotification,
 } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
+import type { GitifyNotification } from '../../../types';
 import {
   type GitifyCheckSuiteStatus,
   IconColor,
   type Link,
 } from '../../../types';
-import type { Notification } from '../../../typesGitHub';
 import { checkSuiteHandler, getCheckSuiteAttributes } from './checkSuite';
 
 describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
@@ -138,7 +138,8 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
         mockSettings,
       );
 
-      expect(result).toBeNull();
+      // Returns empty object when state cannot be determined
+      expect(result).toEqual({});
     });
 
     it('unhandled check suite title', async () => {
@@ -152,7 +153,8 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
         mockSettings,
       );
 
-      expect(result).toBeNull();
+      // Returns empty object when title cannot be parsed
+      expect(result).toEqual({});
     });
   });
 
@@ -222,9 +224,9 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
           title: 'Some notification',
         },
         repository: {
-          html_url: mockHtmlUrl,
+          htmlUrl: mockHtmlUrl,
         },
-      } as Notification),
+      } as GitifyNotification),
     ).toEqual(`${mockHtmlUrl}/actions`);
   });
 

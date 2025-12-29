@@ -1,6 +1,5 @@
 import { createMockSubject } from '../../../__mocks__/notifications-mocks';
-import type { Link } from '../../../types';
-import type { Notification } from '../../../typesGitHub';
+import type { GitifyNotification, Link } from '../../../types';
 import { repositoryDependabotAlertsThreadHandler } from './repositoryDependabotAlertsThread';
 
 describe('renderer/utils/notifications/handlers/repositoryDependabotAlertsThread.ts', () => {
@@ -21,9 +20,9 @@ describe('renderer/utils/notifications/handlers/repositoryDependabotAlertsThread
     expect(
       repositoryDependabotAlertsThreadHandler.defaultUrl({
         repository: {
-          html_url: mockHtmlUrl,
+          htmlUrl: mockHtmlUrl,
         },
-      } as Notification),
+      } as GitifyNotification),
     ).toEqual(`${mockHtmlUrl}/security/dependabot`);
   });
 });

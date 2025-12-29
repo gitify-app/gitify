@@ -3,8 +3,7 @@ import userEvent from '@testing-library/user-event';
 
 import { renderWithAppContext } from '../../__helpers__/test-utils';
 import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
-import type { Link } from '../../types';
-import type { UserType } from '../../typesGitHub';
+import type { GitifyNotificationUser, Link } from '../../types';
 import { mockSingleNotification } from '../../utils/api/__mocks__/response-mocks';
 import * as comms from '../../utils/comms';
 import { NotificationFooter } from './NotificationFooter';
@@ -21,19 +20,6 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
   it('should render itself & its children', async () => {
     const props = {
       notification: mockSingleNotification,
-    };
-
-    const tree = renderWithAppContext(<NotificationFooter {...props} />);
-
-    expect(tree).toMatchSnapshot();
-  });
-
-  it('should render itself & its children when last_read_at is null', async () => {
-    const mockNotification = mockSingleNotification;
-    mockNotification.last_read_at = null;
-
-    const props = {
-      notification: mockNotification,
     };
 
     const tree = renderWithAppContext(<NotificationFooter {...props} />);
@@ -94,10 +80,10 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
           ...mockSingleNotification.subject,
           user: {
             login: 'some-user',
-            html_url: 'https://github.com/some-user' as Link,
-            avatar_url:
+            htmlUrl: 'https://github.com/some-user' as Link,
+            avatarUrl:
               'https://avatars.githubusercontent.com/u/123456789?v=4' as Link,
-            type: 'User' as UserType,
+            type: 'User' as GitifyNotificationUser['type'],
           },
           reviews: null,
         },
@@ -111,7 +97,7 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
 
     expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
     expect(openExternalLinkSpy).toHaveBeenCalledWith(
-      props.notification.subject.user.html_url,
+      props.notification.subject.user.htmlUrl,
     );
   });
 });

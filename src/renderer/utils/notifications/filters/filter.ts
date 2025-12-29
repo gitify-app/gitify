@@ -1,9 +1,9 @@
 import type {
+  GitifyNotification,
   GitifyNotificationState,
   GitifyNotificationUser,
   SettingsState,
 } from '../../../types';
-import type { Notification } from '../../../typesGitHub';
 import {
   BASE_SEARCH_QUALIFIERS,
   DETAILED_ONLY_SEARCH_QUALIFIERS,
@@ -18,9 +18,9 @@ import {
 } from '.';
 
 export function filterBaseNotifications(
-  notifications: Notification[],
+  notifications: GitifyNotification[],
   settings: SettingsState,
-): Notification[] {
+): GitifyNotification[] {
   return notifications.filter((notification) => {
     let passesFilters = true;
 
@@ -56,9 +56,9 @@ export function filterBaseNotifications(
 }
 
 export function filterDetailedNotifications(
-  notifications: Notification[],
+  notifications: GitifyNotification[],
   settings: SettingsState,
-): Notification[] {
+): GitifyNotification[] {
   return notifications.filter((notification) => {
     let passesFilters = true;
 
@@ -89,7 +89,7 @@ export function hasActiveFilters(settings: SettingsState): boolean {
  * Apply include/exclude search token logic for a specific search qualifier prefix.
  */
 function passesSearchTokenFiltersForQualifier(
-  notification: Notification,
+  notification: GitifyNotification,
   settings: SettingsState,
   qualifier: SearchQualifier,
 ): boolean {
@@ -126,7 +126,7 @@ function passesSearchTokenFiltersForQualifier(
 }
 
 function passesUserFilters(
-  notification: Notification,
+  notification: GitifyNotification,
   settings: SettingsState,
 ): boolean {
   let passesFilters = true;
@@ -154,7 +154,7 @@ function passesUserFilters(
 }
 
 function passesStateFilter(
-  notification: Notification,
+  notification: GitifyNotification,
   settings: SettingsState,
 ): boolean {
   if (stateFilter.hasFilters(settings)) {
@@ -170,7 +170,7 @@ export function isStateFilteredOut(
   state: GitifyNotificationState,
   settings: SettingsState,
 ): boolean {
-  const notification = { subject: { state: state } } as Notification;
+  const notification = { subject: { state: state } } as GitifyNotification;
 
   return !passesStateFilter(notification, settings);
 }
@@ -179,7 +179,7 @@ export function isUserFilteredOut(
   user: GitifyNotificationUser,
   settings: SettingsState,
 ): boolean {
-  const notification = { subject: { user: user } } as Notification;
+  const notification = { subject: { user: user } } as GitifyNotification;
 
   return !passesUserFilters(notification, settings);
 }

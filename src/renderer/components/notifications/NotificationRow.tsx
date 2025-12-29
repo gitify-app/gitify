@@ -4,8 +4,7 @@ import { BellSlashIcon, CheckIcon, ReadIcon } from '@primer/octicons-react';
 import { Stack, Text, Tooltip } from '@primer/react';
 
 import { useAppContext } from '../../context/App';
-import { GroupBy, Opacity, Size } from '../../types';
-import type { Notification } from '../../typesGitHub';
+import { type GitifyNotification, GroupBy, Opacity, Size } from '../../types';
 import { cn } from '../../utils/cn';
 import { isMarkAsDoneFeatureSupported } from '../../utils/features';
 import { openNotification } from '../../utils/links';
@@ -16,7 +15,7 @@ import { NotificationFooter } from './NotificationFooter';
 import { NotificationHeader } from './NotificationHeader';
 
 interface NotificationRowProps {
-  notification: Notification;
+  notification: GitifyNotification;
   isAnimated?: boolean;
 }
 

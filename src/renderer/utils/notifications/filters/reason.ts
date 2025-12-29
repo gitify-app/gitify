@@ -1,9 +1,10 @@
 import type {
   AccountNotifications,
+  GitifyNotification,
+  Reason,
   SettingsState,
   TypeDetails,
 } from '../../../types';
-import type { Notification, Reason } from '../../../typesGitHub';
 import { REASON_TYPE_DETAILS } from '../../reason';
 import type { Filter } from './types';
 
@@ -37,7 +38,10 @@ export const reasonFilter: Filter<Reason> = {
     );
   },
 
-  filterNotification(notification: Notification, reason: Reason): boolean {
+  filterNotification(
+    notification: GitifyNotification,
+    reason: Reason,
+  ): boolean {
     return notification.reason === reason;
   },
 };

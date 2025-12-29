@@ -1,9 +1,9 @@
-import { createPartialMockUser } from '../../../__mocks__/user-mocks';
+import { createMockNotificationUser } from '../../../__mocks__/user-mocks';
 import { formatForDisplay, getNotificationAuthor } from './utils';
 
 describe('renderer/utils/notifications/handlers/utils.ts', () => {
   describe('getNotificationAuthor', () => {
-    const mockAuthor = createPartialMockUser('some-author');
+    const mockAuthor = createMockNotificationUser('some-author');
 
     it('returns null when all users are null', () => {
       const result = getNotificationAuthor([null, null]);
@@ -16,8 +16,8 @@ describe('renderer/utils/notifications/handlers/utils.ts', () => {
 
       expect(result).toEqual({
         login: mockAuthor.login,
-        html_url: mockAuthor.html_url,
-        avatar_url: mockAuthor.avatar_url,
+        htmlUrl: mockAuthor.htmlUrl,
+        avatarUrl: mockAuthor.avatarUrl,
         type: mockAuthor.type,
       });
     });
@@ -27,8 +27,8 @@ describe('renderer/utils/notifications/handlers/utils.ts', () => {
 
       expect(result).toEqual({
         login: mockAuthor.login,
-        html_url: mockAuthor.html_url,
-        avatar_url: mockAuthor.avatar_url,
+        htmlUrl: mockAuthor.htmlUrl,
+        avatarUrl: mockAuthor.avatarUrl,
         type: mockAuthor.type,
       });
     });

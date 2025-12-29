@@ -2,8 +2,13 @@ import type { FC } from 'react';
 
 import type { OcticonProps } from '@primer/octicons-react';
 
-import type { GitifySubject, Link, SettingsState } from '../../../types';
-import type { Notification, Subject, SubjectType } from '../../../typesGitHub';
+import type {
+  GitifyNotification,
+  GitifySubject,
+  Link,
+  SettingsState,
+  SubjectType,
+} from '../../../types';
 
 export interface NotificationTypeHandler {
   readonly type?: SubjectType;
@@ -12,37 +17,37 @@ export interface NotificationTypeHandler {
    * Enrich a notification. Settings may be unused for some handlers.
    */
   enrich(
-    notification: Notification,
+    notification: GitifyNotification,
     settings: SettingsState,
-  ): Promise<GitifySubject>;
+  ): Promise<Partial<GitifySubject>>;
 
   /**
    * Return the icon component for this notification type.
    */
-  iconType(subject: Subject): FC<OcticonProps> | null;
+  iconType(subject: GitifySubject): FC<OcticonProps> | null;
 
   /**
    * Return the icon color for this notification type.
    */
-  iconColor(subject: Subject): string | undefined;
+  iconColor(subject: GitifySubject): string | undefined;
 
   /**
    * Return the formatted notification type for this notification.
    */
-  formattedNotificationType(notification: Notification): string;
+  formattedNotificationType(notification: GitifyNotification): string;
 
   /**
    * Return the formatted notification number for this notification.
    */
-  formattedNotificationNumber(notification: Notification): string;
+  formattedNotificationNumber(notification: GitifyNotification): string;
 
   /**
    * Return the formatted notification title for this notification.
    */
-  formattedNotificationTitle(notification: Notification): string;
+  formattedNotificationTitle(notification: GitifyNotification): string;
 
   /**
    * Default url for notification type.
    */
-  defaultUrl(notification: Notification): Link;
+  defaultUrl(notification: GitifyNotification): Link;
 }

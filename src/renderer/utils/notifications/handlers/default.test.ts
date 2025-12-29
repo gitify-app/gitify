@@ -3,12 +3,12 @@ import {
   createPartialMockNotification,
 } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
+import type { GitifyNotification } from '../../../types';
 import {
   type GitifyNotificationState,
   IconColor,
   type Link,
 } from '../../../types';
-import type { Notification } from '../../../typesGitHub';
 import { defaultHandler } from './default';
 
 describe('renderer/utils/notifications/handlers/default.ts', () => {
@@ -25,7 +25,8 @@ describe('renderer/utils/notifications/handlers/default.ts', () => {
         mockSettings,
       );
 
-      expect(result).toBeNull();
+      // Default handler returns empty object (no enrichment)
+      expect(result).toEqual({});
     });
   });
 
@@ -131,9 +132,9 @@ describe('renderer/utils/notifications/handlers/default.ts', () => {
     expect(
       defaultHandler.defaultUrl({
         repository: {
-          html_url: mockHtmlUrl,
+          htmlUrl: mockHtmlUrl,
         },
-      } as Notification),
+      } as GitifyNotification),
     ).toEqual(mockHtmlUrl);
   });
 });

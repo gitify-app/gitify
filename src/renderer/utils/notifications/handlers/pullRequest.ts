@@ -10,6 +10,7 @@ import {
 } from '@primer/octicons-react';
 
 import {
+  type GitifyNotification,
   type GitifyPullRequestReview,
   type GitifyPullRequestState,
   type GitifySubject,
@@ -17,7 +18,6 @@ import {
   type Link,
   type SettingsState,
 } from '../../../types';
-import type { Notification, Subject } from '../../../typesGitHub';
 import { fetchPullByNumber } from '../../api/client';
 import type { PullRequestReviewFieldsFragment } from '../../api/graphql/generated/graphql';
 import { DefaultHandler, defaultHandler } from './default';
@@ -27,9 +27,9 @@ class PullRequestHandler extends DefaultHandler {
   readonly type = 'PullRequest' as const;
 
   async enrich(
-    notification: Notification,
+    notification: GitifyNotification,
     _settings: SettingsState,
-  ): Promise<GitifySubject> {
+  ): Promise<Partial<GitifySubject>> {
     const response = await fetchPullByNumber(notification);
     const pr = response.data.repository.pullRequest;
 
@@ -61,7 +61,7 @@ class PullRequestHandler extends DefaultHandler {
     };
   }
 
-  iconType(subject: Subject): FC<OcticonProps> | null {
+  iconType(subject: GitifySubject): FC<OcticonProps> | null {
     switch (subject.state as GitifyPullRequestState) {
       case 'DRAFT':
         return GitPullRequestDraftIcon;
@@ -76,7 +76,7 @@ class PullRequestHandler extends DefaultHandler {
     }
   }
 
-  iconColor(subject: Subject): IconColor {
+  iconColor(subject: GitifySubject): IconColor {
     switch (subject.state as GitifyPullRequestState) {
       case 'OPEN':
         return IconColor.GREEN;
@@ -91,8 +91,8 @@ class PullRequestHandler extends DefaultHandler {
     }
   }
 
-  defaultUrl(notification: Notification): Link {
-    const url = new URL(notification.repository.html_url);
+  defaultUrl(notification: GitifyNotification): Link {
+    const url = new URL(notification.repository.htmlUrl);
     url.pathname += '/pulls';
     return url.href as Link;
   }

@@ -11,12 +11,12 @@ import {
 
 import {
   type GitifyCheckSuiteStatus,
+  type GitifyNotification,
   type GitifySubject,
   IconColor,
   type Link,
   type SettingsState,
 } from '../../../types';
-import type { Notification, Subject } from '../../../typesGitHub';
 import { actionsURL } from '../../helpers';
 import { DefaultHandler, defaultHandler } from './default';
 
@@ -32,9 +32,9 @@ class CheckSuiteHandler extends DefaultHandler {
   readonly type = 'CheckSuite';
 
   async enrich(
-    notification: Notification,
+    notification: GitifyNotification,
     _settings: SettingsState,
-  ): Promise<GitifySubject> {
+  ): Promise<Partial<GitifySubject>> {
     const state = getCheckSuiteAttributes(notification)?.status;
 
     if (state) {
@@ -45,10 +45,10 @@ class CheckSuiteHandler extends DefaultHandler {
       };
     }
 
-    return null;
+    return {};
   }
 
-  iconType(subject: Subject): FC<OcticonProps> | null {
+  iconType(subject: GitifySubject): FC<OcticonProps> | null {
     switch (subject.state as GitifyCheckSuiteStatus) {
       case 'CANCELLED':
         return StopIcon;
@@ -63,7 +63,7 @@ class CheckSuiteHandler extends DefaultHandler {
     }
   }
 
-  iconColor(subject: Subject): IconColor {
+  iconColor(subject: GitifySubject): IconColor {
     switch (subject.state as GitifyCheckSuiteStatus) {
       case 'SUCCESS':
         return IconColor.GREEN;
@@ -74,7 +74,7 @@ class CheckSuiteHandler extends DefaultHandler {
     }
   }
 
-  defaultUrl(notification: Notification): Link {
+  defaultUrl(notification: GitifyNotification): Link {
     return getCheckSuiteUrl(notification);
   }
 }
@@ -86,7 +86,7 @@ export const checkSuiteHandler = new CheckSuiteHandler();
  * but there isn't an obvious/clean way to do this currently.
  */
 export function getCheckSuiteAttributes(
-  notification: Notification,
+  notification: GitifyNotification,
 ): CheckSuiteAttributes | null {
   const regex =
     /^(?<workflowName>.*?) workflow run(, Attempt #(?<attemptNumber>\d+))? (?<statusDisplayName>.*?) for (?<branchName>.*?) branch$/;
@@ -127,7 +127,7 @@ function getCheckSuiteStatus(
   }
 }
 
-export function getCheckSuiteUrl(notification: Notification): Link {
+export function getCheckSuiteUrl(notification: GitifyNotification): Link {
   const filters = [];
 
   const checkSuiteAttributes = getCheckSuiteAttributes(notification);
@@ -146,5 +146,5 @@ export function getCheckSuiteUrl(notification: Notification): Link {
     filters.push(`branch:${checkSuiteAttributes.branchName}`);
   }
 
-  return actionsURL(notification.repository.html_url, filters);
+  return actionsURL(notification.repository.htmlUrl, filters);
 }

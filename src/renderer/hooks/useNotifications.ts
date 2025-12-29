@@ -4,10 +4,10 @@ import type {
   Account,
   AccountNotifications,
   GitifyError,
+  GitifyNotification,
   GitifyState,
   Status,
 } from '../types';
-import type { Notification } from '../typesGitHub';
 import {
   ignoreNotificationThreadSubscription,
   markNotificationThreadAsDone,
@@ -44,15 +44,15 @@ interface NotificationsState {
 
   markNotificationsAsRead: (
     state: GitifyState,
-    notifications: Notification[],
+    notifications: GitifyNotification[],
   ) => Promise<void>;
   markNotificationsAsDone: (
     state: GitifyState,
-    notifications: Notification[],
+    notifications: GitifyNotification[],
   ) => Promise<void>;
   unsubscribeNotification: (
     state: GitifyState,
-    notification: Notification,
+    notification: GitifyNotification,
   ) => Promise<void>;
 }
 
@@ -136,7 +136,7 @@ export const useNotifications = (): NotificationsState => {
   );
 
   const markNotificationsAsRead = useCallback(
-    async (state: GitifyState, readNotifications: Notification[]) => {
+    async (state: GitifyState, readNotifications: GitifyNotification[]) => {
       setStatus('loading');
 
       try {
@@ -172,7 +172,7 @@ export const useNotifications = (): NotificationsState => {
   );
 
   const markNotificationsAsDone = useCallback(
-    async (state: GitifyState, doneNotifications: Notification[]) => {
+    async (state: GitifyState, doneNotifications: GitifyNotification[]) => {
       if (!isMarkAsDoneFeatureSupported(doneNotifications[0].account)) {
         return;
       }
@@ -212,7 +212,7 @@ export const useNotifications = (): NotificationsState => {
   );
 
   const unsubscribeNotification = useCallback(
-    async (state: GitifyState, notification: Notification) => {
+    async (state: GitifyState, notification: GitifyNotification) => {
       setStatus('loading');
 
       try {

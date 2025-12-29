@@ -4,8 +4,7 @@ import { CheckIcon, ReadIcon } from '@primer/octicons-react';
 import { Button, Stack } from '@primer/react';
 
 import { useAppContext } from '../../context/App';
-import { Opacity, Size } from '../../types';
-import type { Notification } from '../../typesGitHub';
+import { type GitifyNotification, Opacity, Size } from '../../types';
 import { cn } from '../../utils/cn';
 import { isMarkAsDoneFeatureSupported } from '../../utils/features';
 import { getChevronDetails } from '../../utils/helpers';
@@ -16,7 +15,7 @@ import { HoverGroup } from '../primitives/HoverGroup';
 import { NotificationRow } from './NotificationRow';
 
 interface RepositoryNotificationsProps {
-  repoNotifications: Notification[];
+  repoNotifications: GitifyNotification[];
   repoName: string;
 }
 
@@ -30,7 +29,7 @@ export const RepositoryNotifications: FC<RepositoryNotificationsProps> = ({
   const [showRepositoryNotifications, setShowRepositoryNotifications] =
     useState(true);
 
-  const avatarUrl = repoNotifications[0].repository.owner.avatar_url;
+  const avatarUrl = repoNotifications[0].repository.owner.avatarUrl;
 
   const actionMarkAsDone = () => {
     setAnimateExit(!settings.delayNotificationState);

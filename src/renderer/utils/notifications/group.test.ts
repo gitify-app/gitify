@@ -1,7 +1,7 @@
 import { createMockNotificationForRepoName } from '../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../__mocks__/state-mocks';
+import type { GitifyNotification } from '../../types';
 import { GroupBy } from '../../types';
-import type { Notification } from '../../typesGitHub';
 import {
   getFlattenedNotificationsByRepo,
   groupNotificationsByRepository,
@@ -22,8 +22,8 @@ describe('renderer/utils/notifications/group.ts', () => {
   });
 
   describe('groupNotificationsByRepository', () => {
-    it('groups notifications by repository full_name', () => {
-      const notifications: Notification[] = [
+    it('groups notifications by repository fullName', () => {
+      const notifications: GitifyNotification[] = [
         createMockNotificationForRepoName('1', 'owner/repo-a'),
         createMockNotificationForRepoName('2', 'owner/repo-b'),
         createMockNotificationForRepoName('3', 'owner/repo-a'),
@@ -37,7 +37,7 @@ describe('renderer/utils/notifications/group.ts', () => {
     });
 
     it('preserves first-seen repository order', () => {
-      const notifications: Notification[] = [
+      const notifications: GitifyNotification[] = [
         createMockNotificationForRepoName('1', 'owner/repo-c'),
         createMockNotificationForRepoName('2', 'owner/repo-a'),
         createMockNotificationForRepoName('3', 'owner/repo-b'),
@@ -51,7 +51,7 @@ describe('renderer/utils/notifications/group.ts', () => {
     });
 
     it('skips notifications without repository data', () => {
-      const notifications: Notification[] = [
+      const notifications: GitifyNotification[] = [
         createMockNotificationForRepoName('1', 'owner/repo-a'),
         createMockNotificationForRepoName('2', null),
         createMockNotificationForRepoName('3', 'owner/repo-a'),
@@ -64,7 +64,7 @@ describe('renderer/utils/notifications/group.ts', () => {
     });
 
     it('returns empty map when no notifications', () => {
-      const notifications: Notification[] = [];
+      const notifications: GitifyNotification[] = [];
 
       const result = groupNotificationsByRepository(notifications);
 
@@ -72,7 +72,7 @@ describe('renderer/utils/notifications/group.ts', () => {
     });
 
     it('returns empty map when all notifications lack repository data', () => {
-      const notifications: Notification[] = [
+      const notifications: GitifyNotification[] = [
         createMockNotificationForRepoName('1', null),
         createMockNotificationForRepoName('2', null),
       ];
@@ -86,7 +86,7 @@ describe('renderer/utils/notifications/group.ts', () => {
   describe('getFlattenedNotificationsByRepo', () => {
     it('returns repository-grouped order when groupBy is REPOSITORY', () => {
       const settings = { ...mockSettings, groupBy: GroupBy.REPOSITORY };
-      const notifications: Notification[] = [
+      const notifications: GitifyNotification[] = [
         createMockNotificationForRepoName('1', 'owner/repo-b'),
         createMockNotificationForRepoName('2', 'owner/repo-a'),
         createMockNotificationForRepoName('3', 'owner/repo-b'),
@@ -101,7 +101,7 @@ describe('renderer/utils/notifications/group.ts', () => {
 
     it('returns natural account order when groupBy is DATE', () => {
       const settings = { ...mockSettings, groupBy: GroupBy.DATE };
-      const notifications: Notification[] = [
+      const notifications: GitifyNotification[] = [
         createMockNotificationForRepoName('1', 'owner/repo-b'),
         createMockNotificationForRepoName('2', 'owner/repo-a'),
         createMockNotificationForRepoName('3', 'owner/repo-b'),
@@ -115,7 +115,7 @@ describe('renderer/utils/notifications/group.ts', () => {
 
     it('returns empty array when no notifications', () => {
       const settings = { ...mockSettings, groupBy: GroupBy.REPOSITORY };
-      const notifications: Notification[] = [];
+      const notifications: GitifyNotification[] = [];
 
       const result = getFlattenedNotificationsByRepo(notifications, settings);
 
@@ -124,7 +124,7 @@ describe('renderer/utils/notifications/group.ts', () => {
 
     it('handles notifications without repository data when grouped', () => {
       const settings = { ...mockSettings, groupBy: GroupBy.REPOSITORY };
-      const notifications: Notification[] = [
+      const notifications: GitifyNotification[] = [
         createMockNotificationForRepoName('1', 'owner/repo-a'),
         createMockNotificationForRepoName('2', null),
         createMockNotificationForRepoName('3', 'owner/repo-a'),
@@ -138,7 +138,7 @@ describe('renderer/utils/notifications/group.ts', () => {
 
     it('preserves notifications without repository data when not grouped', () => {
       const settings = { ...mockSettings, groupBy: GroupBy.DATE };
-      const notifications: Notification[] = [
+      const notifications: GitifyNotification[] = [
         createMockNotificationForRepoName('1', 'owner/repo-a'),
         createMockNotificationForRepoName('2', null),
         createMockNotificationForRepoName('3', 'owner/repo-a'),

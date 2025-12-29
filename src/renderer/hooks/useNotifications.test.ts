@@ -41,8 +41,50 @@ describe('renderer/hooks/useNotifications.ts', () => {
       };
 
       const notifications = [
-        { id: 1, title: 'This is a notification.' },
-        { id: 2, title: 'This is another one.' },
+        {
+          id: '1',
+          unread: true,
+          updated_at: '2024-01-01T00:00:00Z',
+          reason: 'subscribed',
+          subject: {
+            title: 'This is a notification.',
+            type: 'Issue',
+            url: null,
+            latest_comment_url: null,
+          },
+          repository: {
+            name: 'test-repo',
+            full_name: 'org/test-repo',
+            html_url: 'https://github.com/org/test-repo',
+            owner: {
+              login: 'org',
+              avatar_url: 'https://avatar.url',
+              type: 'Organization',
+            },
+          },
+        },
+        {
+          id: '2',
+          unread: true,
+          updated_at: '2024-01-01T00:00:00Z',
+          reason: 'subscribed',
+          subject: {
+            title: 'This is another one.',
+            type: 'Issue',
+            url: null,
+            latest_comment_url: null,
+          },
+          repository: {
+            name: 'test-repo',
+            full_name: 'org/test-repo',
+            html_url: 'https://github.com/org/test-repo',
+            owner: {
+              login: 'org',
+              avatar_url: 'https://avatar.url',
+              type: 'Organization',
+            },
+          },
+        },
       ];
 
       nock('https://api.github.com')
@@ -77,34 +119,49 @@ describe('renderer/hooks/useNotifications.ts', () => {
     });
 
     it('should fetch detailed notifications with success', async () => {
+      const mockRepository = {
+        name: 'notifications-test',
+        full_name: 'gitify-app/notifications-test',
+        html_url: 'https://github.com/gitify-app/notifications-test',
+        owner: {
+          login: 'gitify-app',
+          avatar_url: 'https://avatar.url',
+          type: 'Organization',
+        },
+      };
+
       const mockNotifications = [
         {
-          id: 1,
+          id: '1',
+          unread: true,
+          updated_at: '2024-01-01T00:00:00Z',
+          reason: 'subscribed',
           subject: {
             title: 'This is a check suite workflow.',
             type: 'CheckSuite',
             url: null,
             latest_comment_url: null,
           },
-          repository: {
-            full_name: 'gitify-app/notifications-test',
-          },
+          repository: mockRepository,
         },
         {
-          id: 2,
+          id: '2',
+          unread: true,
+          updated_at: '2024-02-26T00:00:00Z',
+          reason: 'subscribed',
           subject: {
             title: 'This is a Discussion.',
             type: 'Discussion',
             url: null,
             latest_comment_url: null,
           },
-          repository: {
-            full_name: 'gitify-app/notifications-test',
-          },
-          updated_at: '2024-02-26T00:00:00Z',
+          repository: mockRepository,
         },
         {
-          id: 3,
+          id: '3',
+          unread: true,
+          updated_at: '2024-01-01T00:00:00Z',
+          reason: 'subscribed',
           subject: {
             title: 'This is an Issue.',
             type: 'Issue',
@@ -112,12 +169,13 @@ describe('renderer/hooks/useNotifications.ts', () => {
             latest_comment_url:
               'https://api.github.com/repos/gitify-app/notifications-test/issues/3/comments',
           },
-          repository: {
-            full_name: 'gitify-app/notifications-test',
-          },
+          repository: mockRepository,
         },
         {
-          id: 4,
+          id: '4',
+          unread: true,
+          updated_at: '2024-01-01T00:00:00Z',
+          reason: 'subscribed',
           subject: {
             title: 'This is a Pull Request.',
             type: 'PullRequest',
@@ -125,33 +183,33 @@ describe('renderer/hooks/useNotifications.ts', () => {
             latest_comment_url:
               'https://api.github.com/repos/gitify-app/notifications-test/issues/4/comments',
           },
-          repository: {
-            full_name: 'gitify-app/notifications-test',
-          },
+          repository: mockRepository,
         },
         {
-          id: 5,
+          id: '5',
+          unread: true,
+          updated_at: '2024-01-01T00:00:00Z',
+          reason: 'subscribed',
           subject: {
             title: 'This is an invitation.',
             type: 'RepositoryInvitation',
             url: null,
             latest_comment_url: null,
           },
-          repository: {
-            full_name: 'gitify-app/notifications-test',
-          },
+          repository: mockRepository,
         },
         {
-          id: 6,
+          id: '6',
+          unread: true,
+          updated_at: '2024-01-01T00:00:00Z',
+          reason: 'subscribed',
           subject: {
             title: 'This is a workflow run.',
             type: 'WorkflowRun',
             url: null,
             latest_comment_url: null,
           },
-          repository: {
-            full_name: 'gitify-app/notifications-test',
-          },
+          repository: mockRepository,
         },
       ];
 

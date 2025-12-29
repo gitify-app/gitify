@@ -1,5 +1,4 @@
-import type { SettingsState } from '../../types';
-import type { Notification } from '../../typesGitHub';
+import type { GitifyNotification, SettingsState } from '../../types';
 
 /**
  * Returns true when settings say to group by repository.
@@ -9,17 +8,17 @@ export function isGroupByRepository(settings: SettingsState) {
 }
 
 /**
- * Group notifications by repository.full_name preserving first-seen repository order.
- * Returns a Map where keys are repo full_names and values are arrays of notifications.
+ * Group notifications by repository.fullName preserving first-seen repository order.
+ * Returns a Map where keys are repo fullNames and values are arrays of notifications.
  * Skips notifications without valid repository data.
  */
 export function groupNotificationsByRepository(
-  notifications: Notification[],
-): Map<string, Notification[]> {
-  const repoGroups = new Map<string, Notification[]>();
+  notifications: GitifyNotification[],
+): Map<string, GitifyNotification[]> {
+  const repoGroups = new Map<string, GitifyNotification[]>();
 
   for (const notification of notifications) {
-    const repo = notification.repository?.full_name;
+    const repo = notification.repository?.fullName;
 
     // Skip notifications without valid repository data
     if (!repo) {
@@ -42,9 +41,9 @@ export function groupNotificationsByRepository(
  *   - natural notifications order otherwise
  */
 export function getFlattenedNotificationsByRepo(
-  notifications: Notification[],
+  notifications: GitifyNotification[],
   settings: SettingsState,
-): Notification[] {
+): GitifyNotification[] {
   if (isGroupByRepository(settings)) {
     const groupedNotifications = groupNotificationsByRepository(notifications);
 

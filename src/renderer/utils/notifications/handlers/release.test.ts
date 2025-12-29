@@ -7,8 +7,7 @@ import {
 } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
 import { createPartialMockUser } from '../../../__mocks__/user-mocks';
-import type { Link } from '../../../types';
-import type { Notification } from '../../../typesGitHub';
+import type { GitifyNotification, Link } from '../../../types';
 import { releaseHandler } from './release';
 
 describe('renderer/utils/notifications/handlers/release.ts', () => {
@@ -26,7 +25,7 @@ describe('renderer/utils/notifications/handlers/release.ts', () => {
         title: 'This is a mock release',
         type: 'Release',
         url: 'https://api.github.com/repos/gitify-app/notifications-test/releases/1' as Link,
-        latest_comment_url:
+        latestCommentUrl:
           'https://api.github.com/repos/gitify-app/notifications-test/releases/1' as Link,
       });
 
@@ -43,8 +42,8 @@ describe('renderer/utils/notifications/handlers/release.ts', () => {
         state: null,
         user: {
           login: mockAuthor.login,
-          html_url: mockAuthor.html_url,
-          avatar_url: mockAuthor.avatar_url,
+          htmlUrl: mockAuthor.html_url,
+          avatarUrl: mockAuthor.avatar_url,
           type: mockAuthor.type,
         },
       });
@@ -55,7 +54,7 @@ describe('renderer/utils/notifications/handlers/release.ts', () => {
         title: 'This is a mock release',
         type: 'Release',
         url: 'https://api.github.com/repos/gitify-app/notifications-test/releases/1' as Link,
-        latest_comment_url:
+        latestCommentUrl:
           'https://api.github.com/repos/gitify-app/notifications-test/releases/1' as Link,
       });
 
@@ -64,7 +63,8 @@ describe('renderer/utils/notifications/handlers/release.ts', () => {
         filterStates: ['closed'],
       });
 
-      expect(result).toEqual(null);
+      // Returns empty object when filtered (no API call made)
+      expect(result).toEqual({});
     });
   });
 
@@ -85,9 +85,9 @@ describe('renderer/utils/notifications/handlers/release.ts', () => {
     expect(
       releaseHandler.defaultUrl({
         repository: {
-          html_url: mockHtmlUrl,
+          htmlUrl: mockHtmlUrl,
         },
-      } as Notification),
+      } as GitifyNotification),
     ).toEqual(`${mockHtmlUrl}/releases`);
   });
 });

@@ -1,12 +1,12 @@
 import { logError, logInfo, logWarn } from '../../shared/logger';
 
-import type { Notification } from '../typesGitHub';
+import type { GitifyNotification } from '../types';
 
 // Renderer logger augments log entries with notification context formatting.
 export function rendererLogInfo(
   type: string,
   message: string,
-  notification?: Notification,
+  notification?: GitifyNotification,
 ) {
   logInfo(type, message, buildContexts(notification));
 }
@@ -14,7 +14,7 @@ export function rendererLogInfo(
 export function rendererLogWarn(
   type: string,
   message: string,
-  notification?: Notification,
+  notification?: GitifyNotification,
 ) {
   logWarn(type, message, buildContexts(notification));
 }
@@ -23,19 +23,19 @@ export function rendererLogError(
   type: string,
   message: string,
   err: Error,
-  notification?: Notification,
+  notification?: GitifyNotification,
 ) {
   logError(type, message, err, buildContexts(notification));
 }
 
-function buildContexts(notification?: Notification): string[] {
+function buildContexts(notification?: GitifyNotification): string[] {
   if (!notification) {
     return [];
   }
 
   return [
     notification.subject.type,
-    notification.repository.full_name,
+    notification.repository.fullName,
     notification.subject.title,
   ];
 }

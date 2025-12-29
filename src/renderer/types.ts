@@ -3,13 +3,6 @@ import type { FC } from 'react';
 import type { OcticonProps } from '@primer/octicons-react';
 
 import type {
-  Notification,
-  Reason,
-  SubjectType,
-  UserType,
-} from './typesGitHub';
-import type {
-  AuthorFieldsFragment,
   DiscussionStateReason,
   IssueState,
   IssueStateReason,
@@ -196,7 +189,7 @@ export interface RadioGroupItem {
 
 export interface AccountNotifications {
   account: Account;
-  notifications: Notification[];
+  notifications: GitifyNotification[];
   error: GitifyError | null;
 }
 
@@ -265,26 +258,111 @@ export type FilterStateType = 'open' | 'closed' | 'merged' | 'draft' | 'other';
  *
  * Gitify Notification Types
  *
+ * These types represent the clean, UI-focused notification structure
+ * used throughout the application.
+ *
+ * Raw GitHub API responses are transformed into these types at the API boundary.
+ *
  **/
 
+/**
+ * Complete notification type for UI consumption.
+ * Contains only fields actually used by components.
+ */
 export interface GitifyNotification {
+  /** Unique notification ID from GitHub */
+  id: string;
+  /** Whether the notification is unread */
+  unread: boolean;
+  /** When the notification was last updated */
+  updatedAt: string;
+  /** Reason for receiving the notification */
+  reason: Reason;
+  /** Subject details (what the notification is about) */
+  subject: GitifySubject;
+  /** Repository context */
+  repository: GitifyRepository;
+  /** Account context (for API operations) */
   account: Account;
+  /** UI ordering index */
   order: number;
 }
 
+/**
+ * Subject information combining REST and GraphQL enriched data.
+ */
 export interface GitifySubject {
+  /** Subject title */
+  title: string;
+  /** Subject type (Issue, PullRequest, etc.) */
+  type: SubjectType;
+  /** API URL for the subject */
+  url: Link | null;
+  /** API URL for the latest comment */
+  latestCommentUrl: Link | null;
+
+  // Enriched fields (from additional GraphQL or REST API calls)
+  /** Issue/PR/Discussion number */
   number?: number;
+  /** Parsed state */
   state?: GitifyNotificationState;
+  /** Latest comment/PR author */
   user?: GitifyNotificationUser;
+  /** PR review states & reviewers */
   reviews?: GitifyPullRequestReview[];
+  /** PRs closing issues */
   linkedIssues?: string[];
+  /** Total comment count */
   comments?: number;
+  /** Label names */
   labels?: string[];
-  milestone?: MilestoneFieldsFragment;
+  /** Milestone state/title */
+  milestone?: GitifyMilestone;
+  /** Deep link to latest comment */
   htmlUrl?: Link;
 }
 
-export type GitifyNotificationUser = AuthorFieldsFragment;
+/**
+ * Minimal repository information needed for UI.
+ */
+export interface GitifyRepository {
+  /** Repository name */
+  name: string;
+  /** Full repository name (owner/repo) */
+  fullName: string;
+  /** Repository web URL */
+  htmlUrl: Link;
+  /** Repository owner */
+  owner: GitifyOwner;
+}
+
+/**
+ * Minimal owner information for avatar and navigation.
+ */
+export interface GitifyOwner {
+  /** Owner login name */
+  login: string;
+  /** Owner avatar URL */
+  avatarUrl: Link;
+  /** Owner type (User, Organization, Bot, etc.) */
+  type: UserType;
+}
+
+/**
+ * Minimal notification user information.
+ */
+export interface GitifyNotificationUser {
+  /** Notification user login name */
+  login: string;
+  /**  Notification user avatar URL */
+  avatarUrl: Link;
+  /**  Notification user html URL */
+  htmlUrl: Link;
+  /** Notification user type (User, Organization, Bot, etc.) */
+  type: UserType;
+}
+
+export type GitifyMilestone = MilestoneFieldsFragment;
 
 export interface GitifyPullRequestReview {
   state: PullRequestReviewState;
@@ -317,3 +395,50 @@ export type GitifyCheckSuiteStatus =
   | 'SUCCESS'
   | 'TIMED_OUT'
   | 'WAITING';
+
+/**
+ *
+ * Gitify Type Enhancements
+ *
+ * These types represent the clean, UI-focused notification structure
+ * used throughout the application. Raw GitHub API responses are
+ * transformed into these types at the API boundary.
+ *
+ **/
+
+// Stronger typings for string literal attributes
+export type Reason =
+  | 'approval_requested'
+  | 'assign'
+  | 'author'
+  | 'ci_activity'
+  | 'comment'
+  | 'invitation'
+  | 'manual'
+  | 'member_feature_requested'
+  | 'mention'
+  | 'review_requested'
+  | 'security_advisory_credit'
+  | 'security_alert'
+  | 'state_change'
+  | 'subscribed'
+  | 'team_mention';
+
+export type SubjectType =
+  | 'CheckSuite'
+  | 'Commit'
+  | 'Discussion'
+  | 'Issue'
+  | 'PullRequest'
+  | 'Release'
+  | 'RepositoryDependabotAlertsThread'
+  | 'RepositoryInvitation'
+  | 'RepositoryVulnerabilityAlert'
+  | 'WorkflowRun';
+
+export type UserType =
+  | 'Bot'
+  | 'EnterpriseUserAccount'
+  | 'Mannequin'
+  | 'Organization'
+  | 'User';

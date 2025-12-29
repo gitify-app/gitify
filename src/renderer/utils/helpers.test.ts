@@ -5,8 +5,7 @@ import {
 } from '@primer/octicons-react';
 
 import { mockToken } from '../__mocks__/state-mocks';
-import type { Hostname, Link } from '../types';
-import type { Subject, SubjectType } from '../typesGitHub';
+import type { GitifySubject, Hostname, Link, SubjectType } from '../types';
 import { mockSingleNotification } from './api/__mocks__/response-mocks';
 import * as apiClient from './api/client';
 import {
@@ -85,10 +84,10 @@ describe('renderer/utils/helpers.ts', () => {
       const subject = {
         title: 'generate github web url unit tests',
         url: mockSubjectUrl,
-        latest_comment_url: mockLatestCommentUrl,
+        latestCommentUrl: mockLatestCommentUrl,
         type: 'Issue' as SubjectType,
         htmlUrl: mockSubjectHtmlUrl,
-      } as Subject;
+      } as GitifySubject;
 
       const result = await generateGitHubWebUrl({
         ...mockSingleNotification,
@@ -109,10 +108,10 @@ describe('renderer/utils/helpers.ts', () => {
       const subject = {
         title: 'generate github web url unit tests',
         url: mockSubjectUrl,
-        latest_comment_url: mockLatestCommentUrl,
+        latestCommentUrl: mockLatestCommentUrl,
         type: 'Issue' as SubjectType,
         htmlUrl: mockSubjectHtmlUrl,
-      } as Subject;
+      } as GitifySubject;
 
       getHtmlUrlSpy.mockResolvedValue(mockHtmlUrl);
 
@@ -138,10 +137,10 @@ describe('renderer/utils/helpers.ts', () => {
       const subject = {
         title: 'generate github web url unit tests',
         url: mockSubjectUrl,
-        latest_comment_url: mockLatestCommentUrl,
+        latestCommentUrl: mockLatestCommentUrl,
         type: 'Issue' as SubjectType,
         htmlUrl: mockSubjectHtmlUrl,
-      } as Subject;
+      } as GitifySubject;
 
       getHtmlUrlSpy.mockResolvedValue(mockHtmlUrl);
 

@@ -1,7 +1,7 @@
 import { renderWithAppContext } from '../../__helpers__/test-utils';
 import { mockSettings } from '../../__mocks__/state-mocks';
+import type { GitifyMilestone } from '../../types';
 import { mockSingleNotification } from '../../utils/api/__mocks__/response-mocks';
-import type { MilestoneFieldsFragment } from '../../utils/api/graphql/generated/graphql';
 import { MetricGroup } from './MetricGroup';
 
 describe('renderer/components/metrics/MetricGroup.tsx', () => {
@@ -104,7 +104,7 @@ describe('renderer/components/metrics/MetricGroup.tsx', () => {
       mockNotification.subject.milestone = {
         title: 'Milestone 1',
         state: 'OPEN',
-      } as MilestoneFieldsFragment;
+      } as GitifyMilestone;
 
       const props = {
         notification: mockNotification,
@@ -119,7 +119,7 @@ describe('renderer/components/metrics/MetricGroup.tsx', () => {
       mockNotification.subject.milestone = {
         title: 'Milestone 1',
         state: 'CLOSED',
-      } as MilestoneFieldsFragment;
+      } as GitifyMilestone;
 
       const props = {
         notification: mockNotification,

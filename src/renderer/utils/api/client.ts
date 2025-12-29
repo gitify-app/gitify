@@ -3,18 +3,12 @@ import type { ExecutionResult } from 'graphql';
 
 import type {
   Account,
+  GitifyNotification,
   Hostname,
   Link,
   SettingsState,
   Token,
 } from '../../types';
-import type {
-  Commit,
-  CommitComment,
-  Notification,
-  NotificationThreadSubscription,
-  Release,
-} from '../../typesGitHub';
 import { isAnsweredDiscussionFeatureSupported } from '../features';
 import { rendererLogError } from '../logger';
 import {
@@ -32,6 +26,13 @@ import {
   type ExecutionResultWithHeaders,
   performGraphQLRequest,
 } from './request';
+import type {
+  NotificationThreadSubscription,
+  RawCommit,
+  RawCommitComment,
+  RawGitHubNotification,
+  RawRelease,
+} from './types';
 import {
   getGitHubAPIBaseUrl,
   getGitHubGraphQLUrl,
@@ -61,7 +62,7 @@ export function headNotifications(
 export function listNotificationsForAuthenticatedUser(
   account: Account,
   settings: SettingsState,
-): AxiosPromise<Notification[]> {
+): AxiosPromise<RawGitHubNotification[]> {
   const url = getGitHubAPIBaseUrl(account.hostname);
   url.pathname += 'notifications';
   url.searchParams.append('participating', String(settings.participating));
@@ -134,7 +135,7 @@ export function ignoreNotificationThreadSubscription(
  *
  * Endpoint documentation: https://docs.github.com/en/rest/commits/commits#get-a-commit
  */
-export function getCommit(url: Link, token: Token): AxiosPromise<Commit> {
+export function getCommit(url: Link, token: Token): AxiosPromise<RawCommit> {
   return apiRequestAuth(url, 'GET', token);
 }
 
@@ -147,7 +148,7 @@ export function getCommit(url: Link, token: Token): AxiosPromise<Commit> {
 export function getCommitComment(
   url: Link,
   token: Token,
-): AxiosPromise<CommitComment> {
+): AxiosPromise<RawCommitComment> {
   return apiRequestAuth(url, 'GET', token);
 }
 
@@ -156,7 +157,7 @@ export function getCommitComment(
  *
  * Endpoint documentation: https://docs.github.com/en/rest/releases/releases#get-a-release
  */
-export function getRelease(url: Link, token: Token): AxiosPromise<Release> {
+export function getRelease(url: Link, token: Token): AxiosPromise<RawRelease> {
   return apiRequestAuth(url, 'GET', token);
 }
 
@@ -197,7 +198,7 @@ export async function fetchAuthenticatedUserDetails(
  * Fetch GitHub Issue by Issue Number.
  */
 export async function fetchIssueByNumber(
-  notification: Notification,
+  notification: GitifyNotification,
 ): Promise<ExecutionResult<FetchIssueByNumberQuery>> {
   const url = getGitHubGraphQLUrl(notification.account.hostname);
   const number = getNumberFromUrl(notification.subject.url);
@@ -220,7 +221,7 @@ export async function fetchIssueByNumber(
  * Fetch GitHub Pull Request by PR Number.
  */
 export async function fetchPullByNumber(
-  notification: Notification,
+  notification: GitifyNotification,
 ): Promise<ExecutionResult<FetchPullRequestByNumberQuery>> {
   const url = getGitHubGraphQLUrl(notification.account.hostname);
   const number = getNumberFromUrl(notification.subject.url);
@@ -245,7 +246,7 @@ export async function fetchPullByNumber(
  * Fetch GitHub Discussion by Discussion Number.
  */
 export async function fetchDiscussionByNumber(
-  notification: Notification,
+  notification: GitifyNotification,
 ): Promise<ExecutionResult<FetchDiscussionByNumberQuery>> {
   const url = getGitHubGraphQLUrl(notification.account.hostname);
   const number = getNumberFromUrl(notification.subject.url);

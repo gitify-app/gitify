@@ -1,9 +1,10 @@
 import type {
   AccountNotifications,
+  GitifyNotification,
   SettingsState,
+  SubjectType,
   TypeDetails,
 } from '../../../types';
-import type { Notification, SubjectType } from '../../../typesGitHub';
 import type { Filter } from './types';
 
 const SUBJECT_TYPE_DETAILS: Record<SubjectType, TypeDetails> = {
@@ -71,7 +72,7 @@ export const subjectTypeFilter: Filter<SubjectType> = {
   },
 
   filterNotification(
-    notification: Notification,
+    notification: GitifyNotification,
     subjectType: SubjectType,
   ): boolean {
     return notification.subject.type === subjectType;

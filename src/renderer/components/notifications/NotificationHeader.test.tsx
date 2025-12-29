@@ -87,7 +87,7 @@ describe('renderer/components/notifications/NotificationHeader.tsx', () => {
 
     expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
     expect(openExternalLinkSpy).toHaveBeenCalledWith(
-      props.notification.repository.html_url,
+      props.notification.repository.htmlUrl,
     );
   });
 });

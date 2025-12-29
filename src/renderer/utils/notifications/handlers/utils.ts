@@ -14,8 +14,8 @@ export function getNotificationAuthor(
     if (user) {
       subjectUser = {
         login: user.login,
-        html_url: user.html_url,
-        avatar_url: user.avatar_url,
+        htmlUrl: user.htmlUrl,
+        avatarUrl: user.avatarUrl,
         type: user.type,
       };
 

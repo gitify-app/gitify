@@ -1,12 +1,13 @@
 import type {
   AccountNotifications,
+  GitifyNotification,
   GitifyState,
   GitifySubject,
   SettingsState,
 } from '../../types';
-import type { Notification } from '../../typesGitHub';
 import { listNotificationsForAuthenticatedUser } from '../api/client';
 import { determineFailureType } from '../api/errors';
+import { transformNotification } from '../api/transform';
 import { rendererLogError, rendererLogWarn } from '../logger';
 import {
   filterBaseNotifications,
@@ -72,12 +73,11 @@ export async function getAllNotifications(
       .filter((response) => !!response)
       .map(async (accountNotifications) => {
         try {
-          let notifications = (
-            await accountNotifications.notifications
-          ).data.map((notification: Notification) => ({
-            ...notification,
-            account: accountNotifications.account,
-          }));
+          const rawNotifications = (await accountNotifications.notifications)
+            .data;
+          let notifications = rawNotifications.map((raw) =>
+            transformNotification(raw, accountNotifications.account),
+          );
 
           notifications = filterBaseNotifications(
             notifications,
@@ -122,15 +122,15 @@ export async function getAllNotifications(
 }
 
 export async function enrichNotifications(
-  notifications: Notification[],
+  notifications: GitifyNotification[],
   settings: SettingsState,
-): Promise<Notification[]> {
+): Promise<GitifyNotification[]> {
   if (!settings.detailedNotifications) {
     return notifications;
   }
 
   const enrichedNotifications = await Promise.all(
-    notifications.map(async (notification: Notification) => {
+    notifications.map(async (notification: GitifyNotification) => {
       return enrichNotification(notification, settings);
     }),
   );
@@ -146,10 +146,10 @@ export async function enrichNotifications(
  * @returns The enriched notification.
  */
 export async function enrichNotification(
-  notification: Notification,
+  notification: GitifyNotification,
   settings: SettingsState,
-) {
-  let additionalSubjectDetails: GitifySubject = {};
+): Promise<GitifyNotification> {
+  let additionalSubjectDetails: Partial<GitifySubject> = {};
 
   try {
     const handler = createNotificationHandler(notification);
