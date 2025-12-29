@@ -42,7 +42,7 @@ jobs:
           cache: 'pnpm'
 
       - name: Install Rust stable
-        uses: dtolnay/rust-action@e645b0cf126e4de3e4307c0dc05270e8edd02507 # stable
+        uses: dtolnay/rust-toolchain@4be9e76fd7c4901c61fb841f559994984270fce7 # stable
         with:
           toolchain: stable
           targets: ${{ matrix.platform == 'macos-latest' && 'aarch64-apple-darwin,x86_64-apple-darwin' || '' }}
