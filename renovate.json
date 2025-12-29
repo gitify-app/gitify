@@ -34,12 +34,6 @@
       "labels": ["dependency", "github-actions"]
     },
     {
-      "description": "Group non-major npm updates",
-      "matchDatasources": ["npm"],
-      "matchUpdateTypes": ["minor", "patch"],
-      "groupName": "npm-non-major"
-    },
-    {
       "description": "Group Electron ecosystem packages",
       "matchPackageNames": ["electron", "electron-builder", "electron-log", "electron-updater", "@electron/**"],
       "groupName": "electron"
@@ -78,6 +72,22 @@
       "description": "Group GraphQL packages",
       "matchPackageNames": ["graphql", "@graphql-codegen/**"],
       "groupName": "graphql"
+    },
+    {
+      "description": "Group remaining non-major npm updates not covered by specific groups",
+      "matchDatasources": ["npm"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "excludePackageNames": [
+        "electron", "electron-builder", "electron-log", "electron-updater", "@electron/**",
+        "react", "react-dom", "react-router-dom", "@types/react", "@types/react-dom", "@types/react-router-dom",
+        "jest", "jest-*", "@types/jest", "ts-jest", "@testing-library/**", "nock", "babel-jest",
+        "@primer/**",
+        "webpack", "webpack-*", "ts-loader", "css-loader", "postcss-loader", "html-webpack-plugin", "copy-webpack-plugin", "mini-css-extract-plugin", "css-minimizer-webpack-plugin", "terser-webpack-plugin",
+        "tailwindcss", "@tailwindcss/**", "tailwind-merge",
+        "@babel/**",
+        "graphql", "@graphql-codegen/**"
+      ],
+      "groupName": "npm-non-major"
     }
   ],
   "customManagers": [
