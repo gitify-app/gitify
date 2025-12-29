@@ -124,6 +124,7 @@ pub fn is_dev_mode() -> bool {
 }
 
 /// Check if the app is running in development mode (sync version for internal use).
+#[cfg(target_os = "macos")]
 fn is_dev_mode_internal() -> bool {
     // Check if running from a development path
     if let Ok(exe_path) = std::env::current_exe() {
@@ -305,6 +306,7 @@ pub async fn move_to_applications_folder() -> Result<bool, String> {
 /// - `Err(...)` if an error occurred
 #[tauri::command]
 pub async fn prompt_move_to_applications(app: AppHandle) -> Result<bool, String> {
+    #[cfg(target_os = "macos")]
     use tauri_plugin_dialog::{DialogExt, MessageDialogButtons, MessageDialogKind};
 
     // Only relevant on macOS
