@@ -35,7 +35,7 @@ export default defineConfig({
     exclude: ['node_modules', 'src-tauri'],
     coverage: {
       provider: 'v8',
-      reporter: ['text', 'json', 'html'],
+      reporter: ['text', 'json', 'html', 'lcov'],
       exclude: [
         'node_modules',
         'src-tauri',
