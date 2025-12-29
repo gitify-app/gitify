@@ -9,9 +9,6 @@
   ],
   "labels": ["dependency"],
   "rangeStrategy": "pin",
-  "prConcurrentLimit": 3,
-  "prHourlyLimit": 2,
-  "minimumReleaseAge": "3 days",
   "packageRules": [
     {
       "matchDepTypes": ["engines"],
@@ -26,68 +23,6 @@
       "description": "Fetch changelog details for twemoji packages",
       "matchPackageNames": ["@discordapp/twemoji"],
       "changelogUrl": "https://github.com/jdjdecked/twemoji"
-    },
-    {
-      "description": "Group all GitHub Actions updates",
-      "matchManagers": ["github-actions"],
-      "groupName": "github-actions",
-      "labels": ["dependency", "github-actions"]
-    },
-    {
-      "description": "Group Electron ecosystem packages",
-      "matchPackageNames": ["electron", "electron-builder", "electron-log", "electron-updater", "@electron/**"],
-      "groupName": "electron"
-    },
-    {
-      "description": "Group React ecosystem packages",
-      "matchPackageNames": ["react", "react-dom", "react-router-dom", "@types/react", "@types/react-dom", "@types/react-router-dom"],
-      "groupName": "react"
-    },
-    {
-      "description": "Group testing packages",
-      "matchPackageNames": ["jest", "jest-*", "@types/jest", "ts-jest", "@testing-library/**", "nock", "babel-jest"],
-      "groupName": "testing"
-    },
-    {
-      "description": "Group Primer design system packages",
-      "matchPackageNames": ["@primer/**"],
-      "groupName": "primer"
-    },
-    {
-      "description": "Group webpack and build tools",
-      "matchPackageNames": ["webpack", "webpack-*", "ts-loader", "css-loader", "postcss-loader", "html-webpack-plugin", "copy-webpack-plugin", "mini-css-extract-plugin", "css-minimizer-webpack-plugin", "terser-webpack-plugin"],
-      "groupName": "webpack"
-    },
-    {
-      "description": "Group Tailwind CSS packages",
-      "matchPackageNames": ["tailwindcss", "@tailwindcss/**", "tailwind-merge"],
-      "groupName": "tailwind"
-    },
-    {
-      "description": "Group Babel packages",
-      "matchPackageNames": ["@babel/**"],
-      "groupName": "babel"
-    },
-    {
-      "description": "Group GraphQL packages",
-      "matchPackageNames": ["graphql", "@graphql-codegen/**"],
-      "groupName": "graphql"
-    },
-    {
-      "description": "Group remaining non-major npm updates not covered by specific groups",
-      "matchDatasources": ["npm"],
-      "matchUpdateTypes": ["minor", "patch"],
-      "excludePackageNames": [
-        "electron", "electron-builder", "electron-log", "electron-updater", "@electron/**",
-        "react", "react-dom", "react-router-dom", "@types/react", "@types/react-dom", "@types/react-router-dom",
-        "jest", "jest-*", "@types/jest", "ts-jest", "@testing-library/**", "nock", "babel-jest",
-        "@primer/**",
-        "webpack", "webpack-*", "ts-loader", "css-loader", "postcss-loader", "html-webpack-plugin", "copy-webpack-plugin", "mini-css-extract-plugin", "css-minimizer-webpack-plugin", "terser-webpack-plugin",
-        "tailwindcss", "@tailwindcss/**", "tailwind-merge",
-        "@babel/**",
-        "graphql", "@graphql-codegen/**"
-      ],
-      "groupName": "npm-non-major"
     }
   ],
   "customManagers": [
