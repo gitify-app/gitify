@@ -56,7 +56,7 @@ jobs:
       - run: pnpm install
 
       - name: Build Tauri app
-        uses: tauri-apps/tauri-action@42bc3e23e6c7bdd4e28d7fb02e9bc03bd3aef95e # v0.5.23
+        uses: tauri-apps/tauri-action@e834788a94591d81e3ae0bd9ec06366f5afb8994 # v0.5.23
         with:
           args: ${{ matrix.args }}
         env:
