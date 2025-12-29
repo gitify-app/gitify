@@ -2,7 +2,6 @@ import type { FC } from 'react';
 
 import type { OcticonProps } from '@primer/octicons-react';
 
-import type { Reason, SubjectType, UserType } from './typesGitHub';
 import type {
   AuthorFieldsFragment,
   DiscussionStateReason,
@@ -261,8 +260,9 @@ export type FilterStateType = 'open' | 'closed' | 'merged' | 'draft' | 'other';
  * Gitify Notification Types
  *
  * These types represent the clean, UI-focused notification structure
- * used throughout the application. Raw GitHub API responses are
- * transformed into these types at the API boundary.
+ * used throughout the application.
+ *
+ * Raw GitHub API responses are transformed into these types at the API boundary.
  *
  **/
 
@@ -297,12 +297,12 @@ export interface GitifySubject {
   title: string;
   /** Subject type (Issue, PullRequest, etc.) */
   type: SubjectType;
-  /** API URL for the subject (used for GraphQL fetching) */
+  /** API URL for the subject */
   url: Link | null;
   /** API URL for the latest comment */
   latestCommentUrl: Link | null;
 
-  // Enriched fields (from GraphQL - all optional)
+  // Enriched fields (from additional GraphQL or REST API calls)
   /** Issue/PR/Discussion number */
   number?: number;
   /** Parsed state from GraphQL */
@@ -318,7 +318,7 @@ export interface GitifySubject {
   /** Label names */
   labels?: string[];
   /** Milestone state/title */
-  milestone?: MilestoneFieldsFragment;
+  milestone?: GitifyMilestone;
   /** Deep link to latest comment */
   htmlUrl?: Link;
 }
@@ -351,6 +351,8 @@ export interface GitifyOwner {
 
 export type GitifyNotificationUser = AuthorFieldsFragment;
 
+export type GitifyMilestone = MilestoneFieldsFragment;
+
 export interface GitifyPullRequestReview {
   state: PullRequestReviewState;
   users: string[];
@@ -382,3 +384,50 @@ export type GitifyCheckSuiteStatus =
   | 'SUCCESS'
   | 'TIMED_OUT'
   | 'WAITING';
+
+/**
+ *
+ * Gitify Type Enhancements
+ *
+ * These types represent the clean, UI-focused notification structure
+ * used throughout the application. Raw GitHub API responses are
+ * transformed into these types at the API boundary.
+ *
+ **/
+
+// Stronger typings for string literal attributes
+export type Reason =
+  | 'approval_requested'
+  | 'assign'
+  | 'author'
+  | 'ci_activity'
+  | 'comment'
+  | 'invitation'
+  | 'manual'
+  | 'member_feature_requested'
+  | 'mention'
+  | 'review_requested'
+  | 'security_advisory_credit'
+  | 'security_alert'
+  | 'state_change'
+  | 'subscribed'
+  | 'team_mention';
+
+export type SubjectType =
+  | 'CheckSuite'
+  | 'Commit'
+  | 'Discussion'
+  | 'Issue'
+  | 'PullRequest'
+  | 'Release'
+  | 'RepositoryDependabotAlertsThread'
+  | 'RepositoryInvitation'
+  | 'RepositoryVulnerabilityAlert'
+  | 'WorkflowRun';
+
+export type UserType =
+  | 'Bot'
+  | 'EnterpriseUserAccount'
+  | 'Mannequin'
+  | 'Organization'
+  | 'User';

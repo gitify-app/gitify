@@ -1,5 +1,5 @@
 import { createPartialMockNotification } from '../../../__mocks__/notifications-mocks';
-import type { SubjectType } from '../../../typesGitHub';
+import type { SubjectType } from '../../../types';
 import { checkSuiteHandler } from './checkSuite';
 import { commitHandler } from './commit';
 import { defaultHandler } from './default';

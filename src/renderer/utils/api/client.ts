@@ -1,4 +1,3 @@
-import type { components } from '@octokit/openapi-types';
 import type { AxiosPromise } from 'axios';
 import type { ExecutionResult } from 'graphql';
 
@@ -10,15 +9,6 @@ import type {
   SettingsState,
   Token,
 } from '../../types';
-
-type RawGitHubNotification = components['schemas']['thread'];
-
-import type {
-  Commit,
-  CommitComment,
-  NotificationThreadSubscription,
-  Release,
-} from '../../typesGitHub';
 import { isAnsweredDiscussionFeatureSupported } from '../features';
 import { rendererLogError } from '../logger';
 import {
@@ -36,6 +26,13 @@ import {
   type ExecutionResultWithHeaders,
   performGraphQLRequest,
 } from './request';
+import type {
+  NotificationThreadSubscription,
+  RawCommit,
+  RawCommitComment,
+  RawGitHubNotification,
+  RawRelease,
+} from './types';
 import {
   getGitHubAPIBaseUrl,
   getGitHubGraphQLUrl,
@@ -138,7 +135,7 @@ export function ignoreNotificationThreadSubscription(
  *
  * Endpoint documentation: https://docs.github.com/en/rest/commits/commits#get-a-commit
  */
-export function getCommit(url: Link, token: Token): AxiosPromise<Commit> {
+export function getCommit(url: Link, token: Token): AxiosPromise<RawCommit> {
   return apiRequestAuth(url, 'GET', token);
 }
 
@@ -151,7 +148,7 @@ export function getCommit(url: Link, token: Token): AxiosPromise<Commit> {
 export function getCommitComment(
   url: Link,
   token: Token,
-): AxiosPromise<CommitComment> {
+): AxiosPromise<RawCommitComment> {
   return apiRequestAuth(url, 'GET', token);
 }
 
@@ -160,7 +157,7 @@ export function getCommitComment(
  *
  * Endpoint documentation: https://docs.github.com/en/rest/releases/releases#get-a-release
  */
-export function getRelease(url: Link, token: Token): AxiosPromise<Release> {
+export function getRelease(url: Link, token: Token): AxiosPromise<RawRelease> {
   return apiRequestAuth(url, 'GET', token);
 }
 

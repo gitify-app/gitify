@@ -2,9 +2,9 @@ import type {
   AccountNotifications,
   GitifyNotification,
   SettingsState,
+  SubjectType,
   TypeDetails,
 } from '../../../types';
-import type { SubjectType } from '../../../typesGitHub';
 import type { Filter } from './types';
 
 const SUBJECT_TYPE_DETAILS: Record<SubjectType, TypeDetails> = {

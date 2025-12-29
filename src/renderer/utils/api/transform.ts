@@ -1,5 +1,3 @@
-import type { components } from '@octokit/openapi-types';
-
 import type {
   Account,
   GitifyNotification,
@@ -7,10 +5,11 @@ import type {
   GitifyRepository,
   GitifySubject,
   Link,
+  Reason,
+  SubjectType,
+  UserType,
 } from '../../types';
-import type { Reason, SubjectType, UserType } from '../../typesGitHub';
-
-type RawGitHubNotification = components['schemas']['thread'];
+import type { RawGitHubNotification } from './types';
 
 /**
  * Transform a raw GitHub notification to GitifyNotification.

@@ -3,8 +3,8 @@ import type {
   GitifyNotification,
   SettingsState,
   TypeDetails,
+  UserType,
 } from '../../../types';
-import type { UserType } from '../../../typesGitHub';
 import type { Filter } from './types';
 
 const USER_TYPE_DETAILS: Record<UserType, TypeDetails> = {

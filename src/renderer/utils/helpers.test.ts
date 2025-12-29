@@ -5,8 +5,7 @@ import {
 } from '@primer/octicons-react';
 
 import { mockToken } from '../__mocks__/state-mocks';
-import type { GitifySubject, Hostname, Link } from '../types';
-import type { SubjectType } from '../typesGitHub';
+import type { GitifySubject, Hostname, Link, SubjectType } from '../types';
 import { mockSingleNotification } from './api/__mocks__/response-mocks';
 import * as apiClient from './api/client';
 import {

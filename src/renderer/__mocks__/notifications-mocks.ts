@@ -7,8 +7,8 @@ import type {
   GitifySubject,
   Hostname,
   Link,
+  SubjectType,
 } from '../types';
-import type { SubjectType } from '../typesGitHub';
 import {
   mockEnterpriseNotifications,
   mockGitHubNotifications,

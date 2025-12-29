@@ -3,8 +3,7 @@ import userEvent from '@testing-library/user-event';
 
 import { renderWithAppContext } from '../../__helpers__/test-utils';
 import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
-import type { Link } from '../../types';
-import type { UserType } from '../../typesGitHub';
+import type { Link, UserType } from '../../types';
 import { mockSingleNotification } from '../../utils/api/__mocks__/response-mocks';
 import * as comms from '../../utils/comms';
 import { NotificationFooter } from './NotificationFooter';

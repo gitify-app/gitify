@@ -9,7 +9,7 @@ import type {
   GitifyRepository,
   Link,
 } from '../../../types';
-import type { User } from '../../../typesGitHub';
+import type { RawUser } from '../types';
 
 export const mockNotificationUser = {
   id: 123456789,
@@ -18,7 +18,7 @@ export const mockNotificationUser = {
   url: 'https://api.github.com/users/octocat' as Link,
   html_url: 'https://github.com/octocat' as Link,
   type: 'User',
-} satisfies Partial<User>;
+} satisfies Partial<RawUser>;
 
 // 2 Notifications
 // Hostname : 'github.com'

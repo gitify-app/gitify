@@ -3,9 +3,9 @@ import { AxiosError, type AxiosResponse } from 'axios';
 import { EVENTS } from '../../../shared/events';
 
 import type { Link } from '../../types';
-import type { GitHubRESTError } from '../../typesGitHub';
 import { Errors } from '../errors';
 import { determineFailureType } from './errors';
+import type { GitHubRESTError } from './types';
 
 describe('renderer/utils/api/errors.ts', () => {
   it('network error', async () => {

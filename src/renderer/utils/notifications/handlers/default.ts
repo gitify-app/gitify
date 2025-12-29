@@ -9,8 +9,7 @@ import type {
   Link,
   SettingsState,
 } from '../../../types';
-import { IconColor } from '../../../types';
-import type { SubjectType } from '../../../typesGitHub';
+import { IconColor, type SubjectType } from '../../../types';
 import type { NotificationTypeHandler } from './types';
 import { formatForDisplay } from './utils';
 

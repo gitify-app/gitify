@@ -7,8 +7,8 @@ import type {
   GitifySubject,
   Link,
   SettingsState,
+  SubjectType,
 } from '../../../types';
-import type { SubjectType } from '../../../typesGitHub';
 
 export interface NotificationTypeHandler {
   readonly type?: SubjectType;

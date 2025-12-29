@@ -1,10 +1,10 @@
 import type {
   AccountNotifications,
   GitifyNotification,
+  Reason,
   SettingsState,
   TypeDetails,
 } from '../../../types';
-import type { Reason } from '../../../typesGitHub';
 import { REASON_TYPE_DETAILS } from '../../reason';
 import type { Filter } from './types';
 
