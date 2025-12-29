@@ -37,8 +37,8 @@ class ReleaseHandler extends DefaultHandler {
     const user: GitifyNotificationUser = release.author
       ? {
           login: release.author.login,
-          avatarUrl: release.author.avatar_url,
-          htmlUrl: release.author.html_url,
+          avatarUrl: release.author.avatar_url as Link,
+          htmlUrl: release.author.html_url as Link,
           type: release.author.type as GitifyNotificationUser['type'],
         }
       : null;

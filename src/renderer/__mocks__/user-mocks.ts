@@ -19,14 +19,13 @@ export function createPartialMockUser(login: string): RawUser {
   return mockUser as RawUser;
 }
 
-export function createMockAuthorFragment(
+export function createMockNotificationUser(
   login: string,
 ): GitifyNotificationUser {
   return {
-    __typename: 'User',
     login: login,
-    htmlUrl: `https://github.com/${login}`,
-    avatarUrl: 'https://avatars.githubusercontent.com/u/583231?v=4',
+    htmlUrl: `https://github.com/${login}` as Link,
+    avatarUrl: 'https://avatars.githubusercontent.com/u/583231?v=4' as Link,
     type: 'User',
   };
 }

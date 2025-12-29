@@ -6,7 +6,7 @@ import {
   createPartialMockNotification,
 } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
-import { createMockAuthorFragment } from '../../../__mocks__/user-mocks';
+import { createMockNotificationUser } from '../../../__mocks__/user-mocks';
 import type { GitifyNotification } from '../../../types';
 import {
   type GitifyDiscussionState,
@@ -20,9 +20,9 @@ import type {
 } from '../../api/graphql/generated/graphql';
 import { discussionHandler } from './discussion';
 
-const mockAuthor = createMockAuthorFragment('discussion-author');
-const mockCommenter = createMockAuthorFragment('discussion-commenter');
-const mockReplier = createMockAuthorFragment('discussion-replier');
+const mockAuthor = createMockNotificationUser('discussion-author');
+const mockCommenter = createMockNotificationUser('discussion-commenter');
+const mockReplier = createMockNotificationUser('discussion-replier');
 
 describe('renderer/utils/notifications/handlers/discussion.ts', () => {
   describe('enrich', () => {

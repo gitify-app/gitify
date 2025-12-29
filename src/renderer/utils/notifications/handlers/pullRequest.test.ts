@@ -6,7 +6,7 @@ import {
   createPartialMockNotification,
 } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
-import { createMockAuthorFragment } from '../../../__mocks__/user-mocks';
+import { createMockNotificationUser } from '../../../__mocks__/user-mocks';
 import type { GitifyNotification } from '../../../types';
 import {
   type GitifyPullRequestState,
@@ -21,8 +21,8 @@ import type {
 } from '../../api/graphql/generated/graphql';
 import { getLatestReviewForReviewers, pullRequestHandler } from './pullRequest';
 
-const mockAuthor = createMockAuthorFragment('some-author');
-const mockCommenter = createMockAuthorFragment('some-commenter');
+const mockAuthor = createMockNotificationUser('some-author');
+const mockCommenter = createMockNotificationUser('some-commenter');
 
 describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
   let mockNotification: GitifyNotification;

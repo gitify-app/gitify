@@ -8,6 +8,7 @@ import type {
   GitifyNotificationState,
   GitifyNotificationUser,
   GitifySubject,
+  Link,
   SettingsState,
 } from '../../../types';
 import { getCommit, getCommitComment } from '../../api/client';
@@ -41,8 +42,8 @@ class CommitHandler extends DefaultHandler {
 
       user = {
         login: commitComment.user.login,
-        avatarUrl: commitComment.user.avatar_url,
-        htmlUrl: commitComment.user.html_url,
+        avatarUrl: commitComment.user.avatar_url as Link,
+        htmlUrl: commitComment.user.html_url as Link,
         type: commitComment.user.type as GitifyNotificationUser['type'],
       };
     } else {
@@ -52,8 +53,8 @@ class CommitHandler extends DefaultHandler {
 
       user = {
         login: commit.author.login,
-        avatarUrl: commit.author.avatar_url,
-        htmlUrl: commit.author.html_url,
+        avatarUrl: commit.author.avatar_url as Link,
+        htmlUrl: commit.author.html_url as Link,
         type: commit.author.type as GitifyNotificationUser['type'],
       };
     }

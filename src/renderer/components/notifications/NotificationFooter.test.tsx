@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 
 import { renderWithAppContext } from '../../__helpers__/test-utils';
 import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
-import type { Link, UserType } from '../../types';
+import type { GitifyNotificationUser, Link } from '../../types';
 import { mockSingleNotification } from '../../utils/api/__mocks__/response-mocks';
 import * as comms from '../../utils/comms';
 import { NotificationFooter } from './NotificationFooter';
@@ -83,7 +83,7 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
             htmlUrl: 'https://github.com/some-user' as Link,
             avatarUrl:
               'https://avatars.githubusercontent.com/u/123456789?v=4' as Link,
-            type: 'User' as UserType,
+            type: 'User' as GitifyNotificationUser['type'],
           },
           reviews: null,
         },

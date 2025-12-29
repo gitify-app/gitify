@@ -6,7 +6,7 @@ import {
   createPartialMockNotification,
 } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
-import { createMockAuthorFragment } from '../../../__mocks__/user-mocks';
+import { createMockNotificationUser } from '../../../__mocks__/user-mocks';
 import type { GitifyNotification } from '../../../types';
 import {
   type GitifyIssueState,
@@ -21,8 +21,8 @@ import type {
 } from '../../api/graphql/generated/graphql';
 import { issueHandler } from './issue';
 
-const mockAuthor = createMockAuthorFragment('issue-author');
-const mockCommenter = createMockAuthorFragment('issue-commenter');
+const mockAuthor = createMockNotificationUser('issue-author');
+const mockCommenter = createMockNotificationUser('issue-commenter');
 
 describe('renderer/utils/notifications/handlers/issue.ts', () => {
   describe('enrich', () => {

@@ -1,9 +1,9 @@
-import { createMockAuthorFragment } from '../../../__mocks__/user-mocks';
+import { createMockNotificationUser } from '../../../__mocks__/user-mocks';
 import { formatForDisplay, getNotificationAuthor } from './utils';
 
 describe('renderer/utils/notifications/handlers/utils.ts', () => {
   describe('getNotificationAuthor', () => {
-    const mockAuthor = createMockAuthorFragment('some-author');
+    const mockAuthor = createMockNotificationUser('some-author');
 
     it('returns null when all users are null', () => {
       const result = getNotificationAuthor([null, null]);

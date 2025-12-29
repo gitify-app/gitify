@@ -1,5 +1,5 @@
 import { mockGitHubCloudAccount } from '../__mocks__/account-mocks';
-import { createMockAuthorFragment } from '../__mocks__/user-mocks';
+import { createMockNotificationUser } from '../__mocks__/user-mocks';
 import { Constants } from '../constants';
 import type {
   GitifyNotificationUser,
@@ -75,7 +75,7 @@ describe('renderer/utils/links.ts', () => {
   });
 
   it('openUserProfile', () => {
-    const mockUser = createMockAuthorFragment(
+    const mockUser = createMockNotificationUser(
       'mock-user',
     ) as GitifyNotificationUser;
 

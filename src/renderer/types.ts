@@ -3,7 +3,6 @@ import type { FC } from 'react';
 import type { OcticonProps } from '@primer/octicons-react';
 
 import type {
-  AuthorFieldsFragment,
   DiscussionStateReason,
   IssueState,
   IssueStateReason,
@@ -349,7 +348,19 @@ export interface GitifyOwner {
   type: UserType;
 }
 
-export type GitifyNotificationUser = AuthorFieldsFragment;
+/**
+ * Minimal notification user information.
+ */
+export interface GitifyNotificationUser {
+  /** Notification user login name */
+  login: string;
+  /**  Notification user avatar URL */
+  avatarUrl: Link;
+  /**  Notification user html URL */
+  htmlUrl: Link;
+  /** Notification user type (User, Organization, Bot, etc.) */
+  type: UserType;
+}
 
 export type GitifyMilestone = MilestoneFieldsFragment;
 
