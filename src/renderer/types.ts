@@ -305,7 +305,7 @@ export interface GitifySubject {
   // Enriched fields (from additional GraphQL or REST API calls)
   /** Issue/PR/Discussion number */
   number?: number;
-  /** Parsed state from GraphQL */
+  /** Parsed state */
   state?: GitifyNotificationState;
   /** Latest comment/PR author */
   user?: GitifyNotificationUser;
