@@ -55,7 +55,7 @@
             ]
           }
         },
-        "useUniqueElementIds": "warn"
+        "useUniqueElementIds": "off"
       },
       "style": {
         "useDefaultSwitchClause": "error",
