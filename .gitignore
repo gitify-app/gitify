@@ -17,3 +17,6 @@ coverage
 
 # Mac Files
 .DS_Store
+
+# Generated twemoji assets (copied from node_modules at build time)
+src-tauri/assets/twemoji/
