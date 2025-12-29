@@ -1,12 +1,12 @@
-import { type FC, useContext } from 'react';
+import type { FC } from 'react';
 
 import { Button, Stack, useConfirm } from '@primer/react';
 
-import { AppContext } from '../../context/App';
+import { useAppContext } from '../../context/App';
 import { rendererLogInfo } from '../../utils/logger';
 
 export const SettingsReset: FC = () => {
-  const { resetSettings } = useContext(AppContext);
+  const { resetSettings } = useAppContext();
 
   const confirm = useConfirm();
 

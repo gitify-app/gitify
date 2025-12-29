@@ -1,4 +1,4 @@
-import { type FC, useContext } from 'react';
+import type { FC } from 'react';
 
 import { FilterIcon, FilterRemoveIcon } from '@primer/octicons-react';
 import { Button, Stack, Tooltip } from '@primer/react';
@@ -12,10 +12,10 @@ import { Contents } from '../components/layout/Contents';
 import { Page } from '../components/layout/Page';
 import { Footer } from '../components/primitives/Footer';
 import { Header } from '../components/primitives/Header';
-import { AppContext } from '../context/App';
+import { useAppContext } from '../context/App';
 
 export const FiltersRoute: FC = () => {
-  const { clearFilters } = useContext(AppContext);
+  const { clearFilters } = useAppContext();
 
   return (
     <Page testId="filters">

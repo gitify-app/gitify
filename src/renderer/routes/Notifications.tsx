@@ -1,16 +1,16 @@
-import { type FC, useContext, useMemo } from 'react';
+import { type FC, useMemo } from 'react';
 
 import { AllRead } from '../components/AllRead';
 import { Contents } from '../components/layout/Contents';
 import { Page } from '../components/layout/Page';
 import { AccountNotifications } from '../components/notifications/AccountNotifications';
 import { Oops } from '../components/Oops';
-import { AppContext } from '../context/App';
+import { useAppContext } from '../context/App';
 import { getAccountUUID } from '../utils/auth/utils';
 
 export const NotificationsRoute: FC = () => {
   const { notifications, status, globalError, settings, hasNotifications } =
-    useContext(AppContext);
+    useAppContext();
 
   const hasMultipleAccounts = useMemo(
     () => notifications.length > 1,

@@ -1,4 +1,4 @@
-import { type FC, useCallback, useContext, useState } from 'react';
+import { type FC, useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import {
@@ -23,7 +23,7 @@ import { Page } from '../components/layout/Page';
 import { Footer } from '../components/primitives/Footer';
 import { Header } from '../components/primitives/Header';
 import { Constants } from '../constants';
-import { AppContext } from '../context/App';
+import { useAppContext } from '../context/App';
 import type { ClientID, ClientSecret, Hostname, Token } from '../types';
 import type { LoginOAuthAppOptions } from '../utils/auth/types';
 import {
@@ -75,7 +75,7 @@ export const validateForm = (values: IFormData): IFormErrors => {
 export const LoginWithOAuthAppRoute: FC = () => {
   const navigate = useNavigate();
 
-  const { loginWithOAuthApp } = useContext(AppContext);
+  const { loginWithOAuthApp } = useAppContext();
 
   const [maskToken, setMaskToken] = useState(true);
   const [isVerifyingCredentials, setIsVerifyingCredentials] = useState(false);

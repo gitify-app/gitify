@@ -1,4 +1,4 @@
-import { type FC, useContext } from 'react';
+import type { FC } from 'react';
 
 import {
   PaintbrushIcon,
@@ -15,7 +15,7 @@ import {
   Text,
 } from '@primer/react';
 
-import { AppContext } from '../../context/App';
+import { useAppContext } from '../../context/App';
 import { Theme } from '../../types';
 import { hasMultipleAccounts } from '../../utils/auth/utils';
 import {
@@ -31,7 +31,7 @@ import { FieldLabel } from '../fields/FieldLabel';
 import { Title } from '../primitives/Title';
 
 export const AppearanceSettings: FC = () => {
-  const { auth, settings, updateSetting } = useContext(AppContext);
+  const { auth, settings, updateSetting } = useAppContext();
   const zoomPercentage = zoomLevelToPercentage(window.gitify.zoom.getLevel());
 
   return (

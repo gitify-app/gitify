@@ -1,4 +1,3 @@
-import { useContext } from 'react';
 import {
   Navigate,
   Route,
@@ -10,7 +9,7 @@ import {
 import { BaseStyles, ThemeProvider } from '@primer/react';
 
 import { AppLayout } from './components/layout/AppLayout';
-import { AppContext, AppProvider } from './context/App';
+import { AppProvider, useAppContext } from './context/App';
 import { AccountsRoute } from './routes/Accounts';
 import { FiltersRoute } from './routes/Filters';
 import { LoginRoute } from './routes/Login';
@@ -22,7 +21,7 @@ import { SettingsRoute } from './routes/Settings';
 import './App.css';
 
 function RequireAuth({ children }) {
-  const { isLoggedIn } = useContext(AppContext);
+  const { isLoggedIn } = useAppContext();
   const location = useLocation();
 
   return isLoggedIn ? (

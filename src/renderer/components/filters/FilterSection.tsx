@@ -1,9 +1,9 @@
-import { type ReactNode, useContext } from 'react';
+import type { ReactNode } from 'react';
 
 import type { Icon } from '@primer/octicons-react';
 import { Stack, Text } from '@primer/react';
 
-import { AppContext } from '../../context/App';
+import { useAppContext } from '../../context/App';
 import type { FilterSettingsState, FilterSettingsValue } from '../../types';
 import type { Filter } from '../../utils/notifications/filters';
 import { Checkbox } from '../fields/Checkbox';
@@ -29,7 +29,7 @@ export const FilterSection = <T extends FilterSettingsValue>({
   tooltip,
   layout = 'vertical',
 }: FilterSectionProps<T>) => {
-  const { updateFilter, settings, notifications } = useContext(AppContext);
+  const { updateFilter, settings, notifications } = useAppContext();
 
   return (
     <fieldset id={id}>

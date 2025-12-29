@@ -1,4 +1,4 @@
-import { type FC, useContext } from 'react';
+import type { FC } from 'react';
 
 import {
   CommentIcon,
@@ -7,7 +7,7 @@ import {
   TagIcon,
 } from '@primer/octicons-react';
 
-import { AppContext } from '../../context/App';
+import { useAppContext } from '../../context/App';
 import { IconColor } from '../../types';
 import type { Notification } from '../../typesGitHub';
 import { getPullRequestReviewIcon } from '../../utils/icons';
@@ -20,7 +20,7 @@ interface MetricGroupProps {
 export const MetricGroup: FC<MetricGroupProps> = ({
   notification,
 }: MetricGroupProps) => {
-  const { settings } = useContext(AppContext);
+  const { settings } = useAppContext();
 
   const commentsPillDescription = `${notification.subject.comments} ${
     notification.subject.comments > 1 ? 'comments' : 'comment'

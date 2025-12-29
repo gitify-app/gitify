@@ -1,9 +1,9 @@
-import { type FC, useCallback, useContext, useState } from 'react';
+import { type FC, useCallback, useState } from 'react';
 
 import { BellSlashIcon, CheckIcon, ReadIcon } from '@primer/octicons-react';
 import { Stack, Text, Tooltip } from '@primer/react';
 
-import { AppContext } from '../../context/App';
+import { useAppContext } from '../../context/App';
 import { GroupBy, Opacity, Size } from '../../types';
 import type { Notification } from '../../typesGitHub';
 import { cn } from '../../utils/cn';
@@ -29,7 +29,7 @@ export const NotificationRow: FC<NotificationRowProps> = ({
     markNotificationsAsRead,
     markNotificationsAsDone,
     unsubscribeNotification,
-  } = useContext(AppContext);
+  } = useAppContext();
   const [animateExit, setAnimateExit] = useState(false);
 
   const handleNotification = useCallback(() => {

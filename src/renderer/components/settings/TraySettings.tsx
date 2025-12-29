@@ -1,16 +1,16 @@
-import { type FC, useContext } from 'react';
+import type { FC } from 'react';
 
 import { DevicesIcon } from '@primer/octicons-react';
 import { Stack, Text } from '@primer/react';
 
 import { APPLICATION } from '../../../shared/constants';
 
-import { AppContext } from '../../context/App';
+import { useAppContext } from '../../context/App';
 import { Checkbox } from '../fields/Checkbox';
 import { Title } from '../primitives/Title';
 
 export const TraySettings: FC = () => {
-  const { settings, updateSetting } = useContext(AppContext);
+  const { settings, updateSetting } = useAppContext();
 
   return (
     <fieldset>
