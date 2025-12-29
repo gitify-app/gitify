@@ -2,12 +2,12 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:best-practices",
+    ":dependencyDashboardApproval",
     ":enableVulnerabilityAlerts",
     ":separateMultipleMajorReleases",
     "customManagers:biomeVersions",
     "schedule:weekly"
   ],
-  "dependencyDashboardApproval": true,
   "assignees": ["setchy"],
   "labels": ["dependency"],
   "rangeStrategy": "pin",
