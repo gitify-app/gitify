@@ -7,6 +7,8 @@
     "customManagers:biomeVersions",
     "schedule:weekly"
   ],
+  "dependencyDashboardApproval": true,
+  "assignees": ["setchy"],
   "labels": ["dependency"],
   "rangeStrategy": "pin",
   "packageRules": [
@@ -22,7 +24,7 @@
     {
       "description": "Fetch changelog details for twemoji packages",
       "matchPackageNames": ["@discordapp/twemoji"],
-      "sourceUrl": "https://github.com/jdjdecked/twemoji"
+      "changelogUrl": "https://github.com/jdjdecked/twemoji"
     }
   ],
   "customManagers": [
