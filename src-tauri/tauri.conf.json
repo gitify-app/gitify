@@ -63,9 +63,7 @@
       "timestampUrl": ""
     },
     "linux": {
-      "deb": {
-        "desktopTemplate": ""
-      },
+      "deb": {},
       "appimage": {}
     },
     "createUpdaterArtifacts": "v1Compatible",
@@ -75,8 +73,7 @@
     "updater": {
       "endpoints": [
         "https://github.com/gitify-app/gitify/releases/latest/download/latest.json"
-      ],
-      "pubkey": ""
+      ]
     },
     "deep-link": {
       "desktop": {
