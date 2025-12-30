@@ -3,14 +3,10 @@ use serde::{Deserialize, Serialize};
 
 const SERVICE_NAME: &str = "io.gitify.app";
 
-// Store for managing token encryption
-pub struct TokenStore;
+/// Helper for managing token encryption via the OS keyring.
+struct TokenStore;
 
 impl TokenStore {
-    pub fn new() -> Self {
-        Self
-    }
-
     fn get_entry(identifier: &str) -> Result<Entry, String> {
         Entry::new(SERVICE_NAME, identifier)
             .map_err(|e| format!("Failed to create keyring entry: {}", e))
@@ -77,6 +73,15 @@ async fn do_exchange_oauth_code(
     client_secret: &str,
     code: &str,
 ) -> Result<String, String> {
+    // Validate hostname format - prevent path injection
+    if hostname.contains('/')
+        || hostname.contains('\\')
+        || hostname.contains('@')
+        || hostname.contains(':')
+    {
+        return Err("Invalid hostname format".to_string());
+    }
+
     let url = format!("https://{}/login/oauth/access_token", hostname);
 
     // Build the request body

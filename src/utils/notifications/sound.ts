@@ -15,7 +15,16 @@ export async function raiseSoundNotification(volume: Percentage) {
 
   const audio = new Audio(path);
   audio.volume = volumePercentageToLevel(volume);
-  audio.play();
+
+  // Clean up audio element after playback completes
+  audio.onended = () => {
+    audio.remove();
+  };
+
+  audio.play().catch(() => {
+    // Clean up on playback failure as well
+    audio.remove();
+  });
 }
 
 /**

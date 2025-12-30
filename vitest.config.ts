@@ -25,6 +25,14 @@ export default defineConfig({
         __dirname,
         './src/__mocks__/@tauri-apps/plugin-log.ts',
       ),
+      '@tauri-apps/plugin-autostart': path.resolve(
+        __dirname,
+        './src/__mocks__/@tauri-apps/plugin-autostart.ts',
+      ),
+      '@tauri-apps/plugin-global-shortcut': path.resolve(
+        __dirname,
+        './src/__mocks__/@tauri-apps/plugin-global-shortcut.ts',
+      ),
     },
   },
   test: {

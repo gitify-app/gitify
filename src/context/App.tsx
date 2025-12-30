@@ -313,13 +313,23 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   }, [settings.openAtStartup]);
 
   useEffect(() => {
+    let cleanup: (() => void) | undefined;
+
     if (typeof window !== 'undefined' && window.gitify !== undefined) {
-      window.gitify.onResetApp(() => {
-        clearState();
-        setAuth(defaultAuth);
-        setSettings(defaultSettings);
-      });
+      window.gitify
+        .onResetApp(() => {
+          clearState();
+          setAuth(defaultAuth);
+          setSettings(defaultSettings);
+        })
+        .then((fn) => {
+          cleanup = fn;
+        });
     }
+
+    return () => {
+      cleanup?.();
+    };
   }, []);
 
   const clearFilters = useCallback(() => {

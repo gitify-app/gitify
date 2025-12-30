@@ -30,6 +30,9 @@ import type {
   LoginOAuthAppOptions,
 } from './types';
 
+// OAuth authentication timeout (5 minutes)
+const OAUTH_TIMEOUT_MS = 300000;
+
 /**
  * Initiate GitHub OAuth authentication flow.
  *
@@ -54,6 +57,14 @@ export async function authGitHub(
     : authOptions.hostname;
 
   return new Promise((resolve, reject) => {
+    let cleanupFn: (() => void) | undefined;
+
+    // Set up timeout to prevent hanging OAuth flows
+    const timeoutId = setTimeout(() => {
+      cleanupFn?.();
+      reject(new Error('OAuth authentication timed out. Please try again.'));
+    }, OAUTH_TIMEOUT_MS);
+
     const authUrl = new URL(`https://${hostname}`);
     authUrl.pathname = '/login/oauth/authorize';
     authUrl.searchParams.append('client_id', clientId);
@@ -65,6 +76,9 @@ export async function authGitHub(
     openExternalLink(authUrl.toString() as Link);
 
     const handleCallback = (callbackUrl: string) => {
+      clearTimeout(timeoutId);
+      cleanupFn?.();
+
       const url = new URL(callbackUrl);
 
       const type = url.hostname;
@@ -100,15 +114,20 @@ export async function authGitHub(
       typeof window !== 'undefined' &&
       window.gitify?.onAuthCallback !== undefined
     ) {
-      window.gitify.onAuthCallback((callbackUrl: string) => {
-        rendererLogInfo(
-          'renderer:auth-callback',
-          `received authentication callback URL ${callbackUrl}`,
-        );
-        handleCallback(callbackUrl);
-      });
+      window.gitify
+        .onAuthCallback((callbackUrl: string) => {
+          rendererLogInfo(
+            'renderer:auth-callback',
+            `received authentication callback URL ${callbackUrl}`,
+          );
+          handleCallback(callbackUrl);
+        })
+        .then((unlisten) => {
+          cleanupFn = unlisten;
+        });
     } else {
       // Browser fallback - OAuth won't work without Tauri
+      clearTimeout(timeoutId);
       reject(
         new Error(
           'OAuth authentication is not available in browser mode. Please run the app with Tauri.',

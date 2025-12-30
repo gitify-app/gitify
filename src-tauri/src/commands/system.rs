@@ -1,8 +1,26 @@
 use tauri::{AppHandle, Manager};
+use url::Url;
 
-/// Open external URL in default browser
+/// Open external URL in default browser.
+///
+/// Only allows http and https URL schemes to prevent security issues
+/// with arbitrary protocol handlers (e.g., file://, javascript://).
 #[tauri::command]
 pub async fn open_external_link(url: String) -> Result<(), String> {
+    // Validate URL scheme - only allow http/https
+    let parsed =
+        Url::parse(&url).map_err(|e| format!("Invalid URL: {}", e))?;
+
+    match parsed.scheme() {
+        "http" | "https" => {}
+        scheme => {
+            return Err(format!(
+                "Unsupported URL scheme: {}. Only http and https are allowed.",
+                scheme
+            ))
+        }
+    }
+
     tauri_plugin_opener::open_url(&url, None::<&str>)
         .map_err(|e| format!("Failed to open URL: {}", e))?;
     Ok(())

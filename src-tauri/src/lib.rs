@@ -1,6 +1,6 @@
 mod commands;
 
-use commands::{auth::TokenStore, tray::TrayConfig, updater::UpdaterState};
+use commands::{tray::TrayConfig, updater::UpdaterState};
 use std::sync::Mutex;
 use std::time::{Duration, Instant};
 use tauri::menu::{MenuBuilder, MenuItemBuilder, SubmenuBuilder};
@@ -84,16 +84,20 @@ fn setup_tray(app: &mut App) -> Result<(), Box<dyn std::error::Error>> {
                     app.exit(0);
                 }
                 "website" => {
-                    let _ = tauri_plugin_opener::open_url(
+                    if let Err(e) = tauri_plugin_opener::open_url(
                         "https://www.gitify.io/",
                         None::<&str>,
-                    );
+                    ) {
+                        log::error!("Failed to open website: {}", e);
+                    }
                 }
                 "repository" => {
-                    let _ = tauri_plugin_opener::open_url(
+                    if let Err(e) = tauri_plugin_opener::open_url(
                         "https://github.com/gitify-app/gitify",
                         None::<&str>,
-                    );
+                    ) {
+                        log::error!("Failed to open repository: {}", e);
+                    }
                 }
                 "check-updates" => {
                     // Trigger update check via command
@@ -116,30 +120,38 @@ fn setup_tray(app: &mut App) -> Result<(), Box<dyn std::error::Error>> {
                 "reload" => {
                     // Reload the webview
                     if let Some(window) = app.get_webview_window("main") {
-                        let _ = window.eval("window.location.reload()");
+                        if let Err(e) = window.eval("window.location.reload()") {
+                            log::error!("Failed to reload window: {}", e);
+                        }
                     }
                 }
                 "devtools" => {
                     // Toggle DevTools
                     if let Some(window) = app.get_webview_window("main") {
                         if window.is_devtools_open() {
-                            let _ = window.close_devtools();
+                            window.close_devtools();
                         } else {
-                            let _ = window.open_devtools();
+                            window.open_devtools();
                         }
                     }
                 }
                 "screenshot" => {
                     // Emit event to frontend to take screenshot
-                    let _ = app.emit("take-screenshot", ());
+                    if let Err(e) = app.emit("take-screenshot", ()) {
+                        log::error!("Failed to emit take-screenshot event: {}", e);
+                    }
                 }
                 "logs" => {
                     // Emit event to frontend to open logs
-                    let _ = app.emit("view-logs", ());
+                    if let Err(e) = app.emit("view-logs", ()) {
+                        log::error!("Failed to emit view-logs event: {}", e);
+                    }
                 }
                 "reset" => {
                     // Emit event to frontend to reset app
-                    let _ = app.emit("reset-app", ());
+                    if let Err(e) = app.emit("reset-app", ()) {
+                        log::error!("Failed to emit reset-app event: {}", e);
+                    }
                 }
                 _ => {}
             }
@@ -184,7 +196,9 @@ fn setup_tray(app: &mut App) -> Result<(), Box<dyn std::error::Error>> {
 
                             if is_visible {
                                 log::debug!("Hiding window");
-                                let _ = window.hide();
+                                if let Err(e) = window.hide() {
+                                    log::error!("Failed to hide window: {}", e);
+                                }
                             } else {
                                 log::debug!("Showing window");
 
@@ -218,7 +232,9 @@ fn setup_tray(app: &mut App) -> Result<(), Box<dyn std::error::Error>> {
                                     }
                                 };
 
-                                let _ = window.set_position(PhysicalPosition::new(x, y));
+                                if let Err(e) = window.set_position(PhysicalPosition::new(x, y)) {
+                                    log::error!("Failed to set window position: {}", e);
+                                }
 
                                 // Show window
                                 log::debug!("Calling show()");
@@ -227,11 +243,15 @@ fn setup_tray(app: &mut App) -> Result<(), Box<dyn std::error::Error>> {
                                 }
 
                                 log::debug!("Calling set_focus()");
-                                let _ = window.set_focus();
+                                if let Err(e) = window.set_focus() {
+                                    log::error!("Failed to set window focus: {}", e);
+                                }
 
                                 if window.is_minimized().unwrap_or(false) {
                                     log::debug!("Unminimizing window");
-                                    let _ = window.unminimize();
+                                    if let Err(e) = window.unminimize() {
+                                        log::error!("Failed to unminimize window: {}", e);
+                                    }
                                 }
 
                                 log::debug!("Window should be visible now");
@@ -273,27 +293,36 @@ pub fn run() {
         .plugin(tauri_plugin_single_instance::init(|app, args, _cwd| {
             // When a second instance is detected, focus the existing window
             if let Some(window) = app.get_webview_window("main") {
-                let _ = window.show();
-                let _ = window.set_focus();
-                let _ = window.unminimize();
+                if let Err(e) = window.show() {
+                    log::error!("Failed to show window on second instance: {}", e);
+                }
+                if let Err(e) = window.set_focus() {
+                    log::error!("Failed to focus window on second instance: {}", e);
+                }
+                if let Err(e) = window.unminimize() {
+                    log::error!("Failed to unminimize window on second instance: {}", e);
+                }
             }
 
             // Check if any arg is a deep link (OAuth callback)
             for arg in &args {
                 if arg.starts_with("gitify://oauth") || arg.starts_with("gitify://callback") {
                     log::debug!("OAuth callback from args: {}", arg);
-                    let _ = app.emit("auth-callback", arg.clone());
+                    if let Err(e) = app.emit("auth-callback", arg.clone()) {
+                        log::error!("Failed to emit auth-callback from args: {}", e);
+                    }
                     return;
                 }
             }
 
             // Emit event with args for other cases
             if !args.is_empty() {
-                let _ = app.emit("second-instance", args);
+                if let Err(e) = app.emit("second-instance", args) {
+                    log::error!("Failed to emit second-instance event: {}", e);
+                }
             }
         }))
         // Initialize state
-        .manage(TokenStore::new())
         .manage(TrayConfig::new())
         .manage(UpdaterState::new())
         .manage(ClickDebounce {
@@ -410,7 +439,9 @@ pub fn run() {
                     if let tauri::WindowEvent::Focused(false) = event {
                         // Only hide if window is actually visible
                         if window_clone.is_visible().unwrap_or(false) {
-                            let _ = window_clone.hide();
+                            if let Err(e) = window_clone.hide() {
+                                log::error!("Failed to hide window on focus loss: {}", e);
+                            }
                         }
                     }
                 });
@@ -471,8 +502,12 @@ pub fn run() {
 
                             // Show and focus the window
                             if let Some(window) = app_handle.get_webview_window("main") {
-                                let _ = window.show();
-                                let _ = window.set_focus();
+                                if let Err(e) = window.show() {
+                                    log::error!("Failed to show window on deep link: {}", e);
+                                }
+                                if let Err(e) = window.set_focus() {
+                                    log::error!("Failed to focus window on deep link: {}", e);
+                                }
                             }
                         }
                     }

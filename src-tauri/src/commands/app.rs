@@ -59,11 +59,7 @@ pub async fn quit_app(app: AppHandle) -> Result<(), String> {
 /// Get application version
 #[tauri::command]
 pub fn get_app_version(app: AppHandle) -> Result<String, String> {
-    app.package_info()
-        .version
-        .to_string()
-        .parse()
-        .map_err(|e: std::convert::Infallible| e.to_string())
+    Ok(app.package_info().version.to_string())
 }
 
 /// Center the window on screen

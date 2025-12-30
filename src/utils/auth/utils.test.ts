@@ -1,4 +1,3 @@
-import type { AxiosResponse } from 'axios';
 import axios from 'axios';
 
 import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
@@ -14,22 +13,9 @@ import type {
   Hostname,
   Token,
 } from '../../types';
-
-// Tell TypeScript about the mocked window.gitify properties
-declare global {
-  interface Window {
-    gitify: {
-      exchangeGitHubAppCode: ReturnType<typeof vi.fn>;
-      exchangeOAuthCode: ReturnType<typeof vi.fn>;
-      onAuthCallback: ReturnType<typeof vi.fn>;
-      [key: string]: unknown;
-    };
-  }
-}
 import * as comms from '../../utils/comms';
 import * as apiClient from '../api/client';
 import type { FetchAuthenticatedUserDetailsQuery } from '../api/graphql/generated/graphql';
-import * as apiRequests from '../api/request';
 import * as logger from '../logger';
 import type { AuthMethod } from './types';
 import * as authUtils from './utils';
@@ -51,6 +37,7 @@ describe('renderer/utils/auth/utils.ts', () => {
     it('should call authGitHub - success auth flow', async () => {
       window.gitify.onAuthCallback = vi.fn().mockImplementation((callback) => {
         callback('gitify://auth?code=123-456');
+        return Promise.resolve(() => {});
       });
 
       const res = await authUtils.authGitHub();
@@ -72,6 +59,7 @@ describe('renderer/utils/auth/utils.ts', () => {
     it('should call authGitHub - success oauth flow', async () => {
       window.gitify.onAuthCallback = vi.fn().mockImplementation((callback) => {
         callback('gitify://oauth?code=123-456');
+        return Promise.resolve(() => {});
       });
 
       const res = await authUtils.authGitHub({
@@ -99,6 +87,7 @@ describe('renderer/utils/auth/utils.ts', () => {
         callback(
           'gitify://auth?error=invalid_request&error_description=The+redirect_uri+is+missing+or+invalid.&error_uri=https://docs.github.com/en/developers/apps/troubleshooting-oauth-errors',
         );
+        return Promise.resolve(() => {});
       });
 
       await expect(async () => await authUtils.authGitHub()).rejects.toEqual(
@@ -126,7 +115,9 @@ describe('renderer/utils/auth/utils.ts', () => {
       // The mock in vitest.setup.ts returns 'mock-github-app-token'
       const res = await authUtils.getToken(authCode);
 
-      expect(window.gitify.exchangeGitHubAppCode).toHaveBeenCalledWith(authCode);
+      expect(window.gitify.exchangeGitHubAppCode).toHaveBeenCalledWith(
+        authCode,
+      );
       expect(res.token).toBe('mock-github-app-token');
       expect(res.hostname).toBe('github.com' as Hostname);
     });

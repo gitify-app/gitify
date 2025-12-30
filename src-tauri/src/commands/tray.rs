@@ -4,15 +4,12 @@ use tauri::image::Image;
 
 /// Tray icon state
 #[derive(Debug, Clone)]
-#[allow(dead_code)]
 pub enum TrayState {
     Idle,
     Active,
     Error,
     Update,
     Offline,
-    IdleAlternate,
-    ActiveAlternate,
 }
 
 /// Tray configuration state
@@ -82,7 +79,6 @@ pub async fn update_tray_icon(
         TrayState::Error => "error.png",
         TrayState::Update => "update.png",
         TrayState::Offline => "offline.png",
-        _ => "idle.png",
     };
 
     // Get icon path

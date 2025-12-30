@@ -74,9 +74,9 @@ class MockIntersectionObserver {
     useUnreadActiveIcon: vi.fn(),
   },
   notificationSoundPath: vi.fn(),
-  onAuthCallback: vi.fn(),
-  onResetApp: vi.fn(),
-  onSystemThemeUpdate: vi.fn(),
+  onAuthCallback: vi.fn().mockResolvedValue(() => {}),
+  onResetApp: vi.fn().mockResolvedValue(() => {}),
+  onSystemThemeUpdate: vi.fn().mockResolvedValue(() => {}),
   setAutoLaunch: vi.fn(),
   setKeyboardShortcut: vi.fn(),
   raiseNativeNotification: vi.fn(),
@@ -84,18 +84,6 @@ class MockIntersectionObserver {
 
 // Mock HTMLMediaElement.play
 globalThis.HTMLMediaElement.prototype.play = vi.fn();
-
-// Mock matchMedia
-globalThis.matchMedia = (query: string): MediaQueryList => ({
-  matches: false,
-  media: query,
-  onchange: null,
-  addListener: () => {}, // deprecated
-  removeListener: () => {}, // deprecated
-  addEventListener: () => {},
-  removeEventListener: () => {},
-  dispatchEvent: () => false,
-});
 
 // Mock ResizeObserver as a class (must be a constructor)
 class MockResizeObserver {

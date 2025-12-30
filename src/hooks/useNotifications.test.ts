@@ -420,7 +420,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
       });
 
       await waitFor(() => {
-        expect(result.current.status).toBe('success');
+        expect(result.current.status).toBe('error');
       });
 
       expect(result.current.notifications.length).toBe(0);
@@ -463,7 +463,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
       });
 
       await waitFor(() => {
-        expect(result.current.status).toBe('success');
+        expect(result.current.status).toBe('error');
       });
 
       expect(result.current.notifications.length).toBe(0);
@@ -472,8 +472,6 @@ describe('renderer/hooks/useNotifications.ts', () => {
   });
 
   describe('unsubscribeNotification', () => {
-    const id = 'notification-123';
-
     it('should unsubscribe from a notification with success - markAsDoneOnUnsubscribe = false', async () => {
       // The unsubscribe endpoint call.
       nock('https://api.github.com/')
@@ -555,7 +553,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
       });
 
       await waitFor(() => {
-        expect(result.current.status).toBe('success');
+        expect(result.current.status).toBe('error');
       });
 
       expect(result.current.notifications.length).toBe(0);

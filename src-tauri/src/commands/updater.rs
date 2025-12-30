@@ -158,26 +158,22 @@ pub fn start_updater<R: Runtime>(app: &AppHandle<R>) {
 
         // Perform initial check after a short delay to let the app fully initialize
         let app_handle = app.clone();
-        std::thread::spawn(move || {
-            std::thread::sleep(Duration::from_secs(5));
-            tauri::async_runtime::block_on(async {
-                if let Err(e) = check_for_updates_internal(&app_handle, false).await {
-                    log::error!("Initial update check failed: {}", e);
-                }
-            });
+        tauri::async_runtime::spawn(async move {
+            tokio::time::sleep(Duration::from_secs(5)).await;
+            if let Err(e) = check_for_updates_internal(&app_handle, false).await {
+                log::error!("Initial update check failed: {}", e);
+            }
         });
 
         // Schedule periodic checks
         let app_handle = app.clone();
-        std::thread::spawn(move || {
+        tauri::async_runtime::spawn(async move {
             loop {
-                std::thread::sleep(Duration::from_secs(UPDATE_CHECK_INTERVAL_SECS));
+                tokio::time::sleep(Duration::from_secs(UPDATE_CHECK_INTERVAL_SECS)).await;
                 log::info!("Running scheduled update check");
-                tauri::async_runtime::block_on(async {
-                    if let Err(e) = check_for_updates_internal(&app_handle, false).await {
-                        log::error!("Scheduled update check failed: {}", e);
-                    }
-                });
+                if let Err(e) = check_for_updates_internal(&app_handle, false).await {
+                    log::error!("Scheduled update check failed: {}", e);
+                }
             }
         });
     }

@@ -7,6 +7,18 @@ use std::fs;
 use std::path::PathBuf;
 use tauri::{AppHandle, Manager};
 
+/// Validate that an app name contains only safe characters for AppleScript.
+///
+/// This prevents injection attacks through maliciously crafted app bundle names.
+/// Only allows alphanumeric characters, spaces, hyphens, underscores, and periods.
+#[cfg(target_os = "macos")]
+fn is_safe_app_name(name: &str) -> bool {
+    !name.is_empty()
+        && name
+            .chars()
+            .all(|c| c.is_alphanumeric() || c == ' ' || c == '-' || c == '_' || c == '.')
+}
+
 /// The folder name used to store first-run state.
 const FIRST_RUN_FOLDER: &str = "gitify-first-run";
 
@@ -198,6 +210,11 @@ pub async fn move_to_applications_folder() -> Result<bool, String> {
 
         let source_path = app_bundle.to_string_lossy();
         let dest_path = format!("/Applications/{}", app_name);
+
+        // Validate app name to prevent AppleScript injection attacks
+        if !is_safe_app_name(app_name) {
+            return Err("Invalid app name: contains unsafe characters".to_string());
+        }
 
         // Check if destination already exists
         if PathBuf::from(&dest_path).exists() {

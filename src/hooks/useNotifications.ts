@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 
 import type {
   Account,
@@ -64,6 +64,9 @@ export const useNotifications = (): NotificationsState => {
     [],
   );
 
+  // Use ref to track previous notifications without causing re-renders
+  const notificationsRef = useRef<AccountNotifications[]>([]);
+
   const notificationCount = getNotificationCount(notifications);
 
   const unreadNotificationCount = getUnreadNotificationCount(notifications);
@@ -93,58 +96,58 @@ export const useNotifications = (): NotificationsState => {
     [notifications],
   );
 
-  const fetchNotifications = useCallback(
-    async (state: GitifyState) => {
-      setStatus('loading');
-      setGlobalError(undefined);
+  const fetchNotifications = useCallback(async (state: GitifyState) => {
+    setStatus('loading');
+    setGlobalError(undefined);
 
-      if (!state.settings) {
-        setStatus('error');
-        return;
-      }
+    if (!state.settings) {
+      setStatus('error');
+      return;
+    }
 
-      const previousNotifications = notifications;
-      const fetchedNotifications = await getAllNotifications(state);
-      setNotifications(fetchedNotifications);
+    const previousNotifications = notificationsRef.current;
+    const fetchedNotifications = await getAllNotifications(state);
 
-      // Set Global Error if all accounts have the same error
-      const allAccountsHaveErrors =
-        doesAllAccountsHaveErrors(fetchedNotifications);
-      const allAccountErrorsAreSame =
-        areAllAccountErrorsSame(fetchedNotifications);
+    // Update ref before setting state
+    notificationsRef.current = fetchedNotifications;
+    setNotifications(fetchedNotifications);
 
-      if (allAccountsHaveErrors) {
-        const accountError = fetchedNotifications[0].error;
-        setStatus('error');
-        setGlobalError(
-          allAccountErrorsAreSame ? (accountError ?? undefined) : undefined,
-        );
-        return;
-      }
+    // Set Global Error if all accounts have the same error
+    const allAccountsHaveErrors =
+      doesAllAccountsHaveErrors(fetchedNotifications);
+    const allAccountErrorsAreSame =
+      areAllAccountErrorsSame(fetchedNotifications);
 
-      const diffNotifications = getNewNotifications(
-        previousNotifications,
-        fetchedNotifications,
+    if (allAccountsHaveErrors) {
+      const accountError = fetchedNotifications[0].error;
+      setStatus('error');
+      setGlobalError(
+        allAccountErrorsAreSame ? (accountError ?? undefined) : undefined,
       );
+      return;
+    }
 
-      if (diffNotifications.length > 0) {
-        if (state.settings.playSound) {
-          raiseSoundNotification(state.settings.notificationVolume);
-        }
+    const diffNotifications = getNewNotifications(
+      previousNotifications,
+      fetchedNotifications,
+    );
 
-        if (state.settings.showNotifications) {
-          raiseNativeNotification(diffNotifications);
-        }
+    if (diffNotifications.length > 0) {
+      if (state.settings.playSound) {
+        raiseSoundNotification(state.settings.notificationVolume);
       }
 
-      setStatus('success');
-    },
-    [notifications],
-  );
+      if (state.settings.showNotifications) {
+        raiseNativeNotification(diffNotifications);
+      }
+    }
+
+    setStatus('success');
+  }, []);
 
   const markNotificationsAsRead = useCallback(
     async (state: GitifyState, readNotifications: GitifyNotification[]) => {
-      if (!state.settings) {
+      if (!readNotifications.length || !state.settings) {
         return;
       }
 
@@ -169,21 +172,25 @@ export const useNotifications = (): NotificationsState => {
         );
 
         setNotifications(updatedNotifications);
+        setStatus('success');
       } catch (err) {
         rendererLogError(
           'markNotificationsAsRead',
           'Error occurred while marking notifications as read',
           err as Error,
         );
+        setStatus('error');
       }
-
-      setStatus('success');
     },
     [notifications],
   );
 
   const markNotificationsAsDone = useCallback(
     async (state: GitifyState, doneNotifications: GitifyNotification[]) => {
+      if (!doneNotifications.length) {
+        return;
+      }
+
       if (!isMarkAsDoneFeatureSupported(doneNotifications[0].account)) {
         return;
       }
@@ -213,15 +220,15 @@ export const useNotifications = (): NotificationsState => {
         );
 
         setNotifications(updatedNotifications);
+        setStatus('success');
       } catch (err) {
         rendererLogError(
           'markNotificationsAsDone',
           'Error occurred while marking notifications as done',
           err as Error,
         );
+        setStatus('error');
       }
-
-      setStatus('success');
     },
     [notifications],
   );
@@ -246,6 +253,7 @@ export const useNotifications = (): NotificationsState => {
         } else {
           await markNotificationsAsRead(state, [notification]);
         }
+        // Note: status is set by markNotificationsAsDone/markNotificationsAsRead
       } catch (err) {
         rendererLogError(
           'unsubscribeNotification',
@@ -253,9 +261,8 @@ export const useNotifications = (): NotificationsState => {
           err as Error,
           notification,
         );
+        setStatus('error');
       }
-
-      setStatus('success');
     },
     [markNotificationsAsRead, markNotificationsAsDone],
   );

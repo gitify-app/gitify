@@ -2,9 +2,13 @@ import { Constants } from '../constants';
 import type { GitifyState } from '../types';
 
 export function loadState(): GitifyState {
-  const existing = localStorage.getItem(Constants.STORAGE_KEY);
-  const { auth, settings } = (existing && JSON.parse(existing)) || {};
-  return { auth, settings };
+  try {
+    const existing = localStorage.getItem(Constants.STORAGE_KEY);
+    const { auth, settings } = (existing && JSON.parse(existing)) || {};
+    return { auth, settings };
+  } catch {
+    return { auth: undefined, settings: undefined };
+  }
 }
 
 export function saveState(gitifyState: GitifyState) {

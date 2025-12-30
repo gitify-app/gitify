@@ -50,8 +50,8 @@ export const api = {
    * Returns a unique identifier for this token
    */
   encryptValue: async (value: string): Promise<string> => {
-    // Generate a unique identifier for this token (timestamp + random)
-    const identifier = `token_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    // Generate a unique identifier for this token using crypto-safe random UUID
+    const identifier = `token_${crypto.randomUUID()}`;
     await invoke('encrypt_token', { token: value, identifier });
     // Return the identifier as the "encrypted" value
     return identifier;
@@ -276,24 +276,31 @@ export const api = {
 
   /**
    * Listen for reset app event
+   * Returns cleanup function to remove the listener
    */
-  onResetApp: async (callback: () => void) => {
-    await listen('reset-app', () => callback());
+  onResetApp: async (callback: () => void): Promise<UnlistenFn> => {
+    return await listen('reset-app', () => callback());
   },
 
   /**
    * Listen for OAuth callback
+   * Returns cleanup function to remove the listener
    */
-  onAuthCallback: async (callback: (url: string) => void) => {
-    await listen<string>('auth-callback', (event) => {
+  onAuthCallback: async (
+    callback: (url: string) => void,
+  ): Promise<UnlistenFn> => {
+    return await listen<string>('auth-callback', (event) => {
       callback(event.payload);
     });
   },
 
   /**
    * Listen for system theme updates
+   * Returns cleanup function to remove both the mediaQuery listener and Tauri event listener
    */
-  onSystemThemeUpdate: async (callback: (theme: string) => void) => {
+  onSystemThemeUpdate: async (
+    callback: (theme: string) => void,
+  ): Promise<() => void> => {
     // Tauri uses native theme detection
     // We can listen to system theme changes via matchMedia
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
@@ -303,12 +310,18 @@ export const api = {
     mediaQuery.addEventListener('change', handler);
 
     // Also listen for any explicit theme update events from Rust
-    await listen<string>('system-theme-update', (event) => {
+    const unlisten = await listen<string>('system-theme-update', (event) => {
       callback(event.payload);
     });
 
     // Call immediately with current theme
     callback(mediaQuery.matches ? 'dark' : 'light');
+
+    // Return cleanup function that removes both listeners
+    return () => {
+      mediaQuery.removeEventListener('change', handler);
+      unlisten();
+    };
   },
 
   /**

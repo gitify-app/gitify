@@ -34,6 +34,7 @@ tauri-plugin-deep-link = "2"
 tauri-plugin-http = { version = "2", features = ["rustls-tls"] }
 reqwest = { version = "0.12", features = ["json", "rustls-tls"], default-features = false }
 tokio = { version = "1", features = ["time"] }
+url = "2"
 
 [target.'cfg(not(any(target_os = "android", target_os = "ios")))'.dependencies]
 tauri-plugin-autostart = "2"
