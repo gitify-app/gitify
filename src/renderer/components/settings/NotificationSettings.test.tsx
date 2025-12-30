@@ -283,7 +283,7 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
     expect(updateSettingMock).toHaveBeenCalledTimes(1);
     expect(updateSettingMock).toHaveBeenCalledWith(
       'showReadNotifications',
-      false,
+      true,
     );
   });
 

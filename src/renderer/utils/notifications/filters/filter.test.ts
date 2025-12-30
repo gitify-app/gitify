@@ -98,6 +98,7 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
         mockNotifications[1].subject.type = 'PullRequest';
         const result = filterBaseNotifications(mockNotifications, {
           ...mockSettings,
+          showReadNotifications: true,
           filterSubjectTypes: ['Issue'],
         });
 
@@ -110,6 +111,7 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
         mockNotifications[1].reason.code = 'manual';
         const result = filterBaseNotifications(mockNotifications, {
           ...mockSettings,
+          showReadNotifications: true,
           filterReasons: ['manual'],
         });
 
@@ -120,6 +122,7 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
       it('should filter notifications that match include organization', async () => {
         const result = filterBaseNotifications(mockNotifications, {
           ...mockSettings,
+          showReadNotifications: true,
           filterIncludeSearchTokens: ['org:gitify-app' as SearchToken],
         });
 
@@ -130,6 +133,7 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
       it('should filter notifications that match exclude organization', async () => {
         const result = filterBaseNotifications(mockNotifications, {
           ...mockSettings,
+          showReadNotifications: true,
           filterExcludeSearchTokens: ['org:github' as SearchToken],
         });
 
@@ -140,6 +144,7 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
       it('should filter notifications that match include repository', async () => {
         const result = filterBaseNotifications(mockNotifications, {
           ...mockSettings,
+          showReadNotifications: true,
           filterIncludeSearchTokens: ['repo:gitify-app/gitify' as SearchToken],
         });
 
@@ -150,6 +155,7 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
       it('should filter notifications that match exclude repository', async () => {
         const result = filterBaseNotifications(mockNotifications, {
           ...mockSettings,
+          showReadNotifications: true,
           filterExcludeSearchTokens: ['repo:github/github' as SearchToken],
         });
 
