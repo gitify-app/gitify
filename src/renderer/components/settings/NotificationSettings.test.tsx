@@ -271,6 +271,22 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
     );
   });
 
+  it('should toggle the showReadNotifications checkbox', async () => {
+    await act(async () => {
+      renderWithAppContext(<NotificationSettings />, {
+        updateSetting: updateSettingMock,
+      });
+    });
+
+    await userEvent.click(screen.getByTestId('checkbox-showReadNotifications'));
+
+    expect(updateSettingMock).toHaveBeenCalledTimes(1);
+    expect(updateSettingMock).toHaveBeenCalledWith(
+      'showReadNotifications',
+      false,
+    );
+  });
+
   it('should toggle the markAsDoneOnOpen checkbox', async () => {
     await act(async () => {
       renderWithAppContext(<NotificationSettings />, {

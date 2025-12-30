@@ -65,6 +65,34 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
     ];
 
     describe('filterBaseNotifications', () => {
+      it('should show all notifications when showReadNotifications is enabled', () => {
+        const notifications = [
+          { ...mockNotifications[0], unread: true },
+          { ...mockNotifications[1], unread: false },
+        ];
+        const result = filterBaseNotifications(notifications, {
+          ...mockSettings,
+          showReadNotifications: true,
+        });
+
+        expect(result.length).toBe(2);
+        expect(result).toEqual(notifications);
+      });
+
+      it('should filter out read notifications when showReadNotifications is disabled', () => {
+        const notifications = [
+          { ...mockNotifications[0], unread: true },
+          { ...mockNotifications[1], unread: false },
+        ];
+        const result = filterBaseNotifications(notifications, {
+          ...mockSettings,
+          showReadNotifications: false,
+        });
+
+        expect(result.length).toBe(1);
+        expect(result[0].unread).toBe(true);
+      });
+
       it('should filter notifications by subject type when provided', async () => {
         mockNotifications[0].subject.type = 'Issue';
         mockNotifications[1].subject.type = 'PullRequest';

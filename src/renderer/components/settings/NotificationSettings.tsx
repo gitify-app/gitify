@@ -329,6 +329,27 @@ export const NotificationSettings: FC = () => {
         />
 
         <Checkbox
+          checked={settings.showReadNotifications}
+          label="Show read notifications"
+          name="showReadNotifications"
+          onChange={(evt) =>
+            updateSetting('showReadNotifications', evt.target.checked)
+          }
+          tooltip={
+            <Stack direction="vertical" gap="condensed">
+              <Text>
+                When <Text as="u">checked</Text>, {APPLICATION.NAME} will
+                display both read and unread notifications.
+              </Text>
+              <Text>
+                When <Text as="u">unchecked</Text>, {APPLICATION.NAME} will only
+                display unread notifications.
+              </Text>
+            </Stack>
+          }
+        />
+
+        <Checkbox
           checked={settings.markAsDoneOnOpen}
           label="Mark as done on open"
           name="markAsDoneOnOpen"
