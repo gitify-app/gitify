@@ -6,7 +6,7 @@ import {
   createPartialMockNotification,
 } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
-import { createMockNotificationUser } from '../../../__mocks__/user-mocks';
+import { createMockGraphQLAuthor } from '../../../__mocks__/user-mocks';
 import type { GitifyNotification } from '../../../types';
 import {
   type GitifyDiscussionState,
@@ -20,9 +20,9 @@ import type {
 } from '../../api/graphql/generated/graphql';
 import { discussionHandler } from './discussion';
 
-const mockAuthor = createMockNotificationUser('discussion-author');
-const mockCommenter = createMockNotificationUser('discussion-commenter');
-const mockReplier = createMockNotificationUser('discussion-replier');
+const mockAuthor = createMockGraphQLAuthor('discussion-author');
+const mockCommenter = createMockGraphQLAuthor('discussion-commenter');
+const mockReplier = createMockGraphQLAuthor('discussion-replier');
 
 describe('renderer/utils/notifications/handlers/discussion.ts', () => {
   describe('enrich', () => {
@@ -47,7 +47,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         .post('/graphql')
         .reply(200, {
           data: {
-            repository: {
+            nodeINDEX: {
               discussion: mockDiscussion,
             },
           },
@@ -63,8 +63,8 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         state: 'ANSWERED',
         user: {
           login: mockAuthor.login,
-          htmlUrl: mockAuthor.htmlUrl,
-          avatarUrl: mockAuthor.avatarUrl,
+          htmlUrl: mockAuthor.html_url,
+          avatarUrl: mockAuthor.avatar_url,
           type: mockAuthor.type,
         },
         comments: 0,
@@ -81,7 +81,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         .post('/graphql')
         .reply(200, {
           data: {
-            repository: {
+            nodeINDEX: {
               discussion: mockDiscussion,
             },
           },
@@ -97,8 +97,8 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         state: 'OPEN',
         user: {
           login: mockAuthor.login,
-          htmlUrl: mockAuthor.htmlUrl,
-          avatarUrl: mockAuthor.avatarUrl,
+          htmlUrl: mockAuthor.html_url,
+          avatarUrl: mockAuthor.avatar_url,
           type: mockAuthor.type,
         },
         comments: 0,
@@ -118,7 +118,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         .post('/graphql')
         .reply(200, {
           data: {
-            repository: {
+            nodeINDEX: {
               discussion: mockDiscussion,
             },
           },
@@ -134,8 +134,8 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         state: 'DUPLICATE',
         user: {
           login: mockAuthor.login,
-          htmlUrl: mockAuthor.htmlUrl,
-          avatarUrl: mockAuthor.avatarUrl,
+          htmlUrl: mockAuthor.html_url,
+          avatarUrl: mockAuthor.avatar_url,
           type: mockAuthor.type,
         },
         comments: 0,
@@ -159,7 +159,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         .post('/graphql')
         .reply(200, {
           data: {
-            repository: {
+            nodeINDEX: {
               discussion: mockDiscussion,
             },
           },
@@ -175,8 +175,8 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         state: 'ANSWERED',
         user: {
           login: mockAuthor.login,
-          htmlUrl: mockAuthor.htmlUrl,
-          avatarUrl: mockAuthor.avatarUrl,
+          htmlUrl: mockAuthor.html_url,
+          avatarUrl: mockAuthor.avatar_url,
           type: mockAuthor.type,
         },
         comments: 0,
@@ -207,7 +207,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         .post('/graphql')
         .reply(200, {
           data: {
-            repository: {
+            nodeINDEX: {
               discussion: mockDiscussion,
             },
           },
@@ -223,8 +223,8 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         state: 'ANSWERED',
         user: {
           login: mockCommenter.login,
-          htmlUrl: mockCommenter.htmlUrl,
-          avatarUrl: mockCommenter.avatarUrl,
+          htmlUrl: mockCommenter.html_url,
+          avatarUrl: mockCommenter.avatar_url,
           type: mockCommenter.type,
         },
         comments: 1,
@@ -261,7 +261,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         .post('/graphql')
         .reply(200, {
           data: {
-            repository: {
+            nodeINDEX: {
               discussion: mockDiscussion,
             },
           },
@@ -277,8 +277,8 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         state: 'ANSWERED',
         user: {
           login: mockReplier.login,
-          htmlUrl: mockReplier.htmlUrl,
-          avatarUrl: mockReplier.avatarUrl,
+          htmlUrl: mockReplier.html_url,
+          avatarUrl: mockReplier.avatar_url,
           type: mockReplier.type,
         },
         comments: 1,

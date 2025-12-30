@@ -1,0 +1,37 @@
+query FetchBatch(
+  $ownerINDEX: String!
+  $nameINDEX: String!
+  $numberINDEX: Int!
+  $isDiscussionNotificationINDEX: Boolean!
+  $isIssueNotificationINDEX: Boolean!
+  $isPullRequestNotificationINDEX: Boolean!
+  $lastComments: Int
+  $lastThreadedComments: Int
+  $lastReplies: Int
+  $lastReviews: Int
+  $firstLabels: Int
+  $firstClosingIssues: Int
+  $includeIsAnswered: Boolean!
+) {
+  ...BatchMergedDetailsQuery
+}
+
+fragment BatchMergedDetailsQuery on Query {
+  repository(owner: $ownerINDEX, name: $nameINDEX) {
+    discussion(number: $numberINDEX)
+      @include(if: $isDiscussionNotificationINDEX)
+    {
+      ...DiscussionDetails
+    }
+
+    issue(number: $numberINDEX) @include(if: $isIssueNotificationINDEX) {
+      ...IssueDetails
+    }
+
+    pullRequest(number: $numberINDEX)
+      @include(if: $isPullRequestNotificationINDEX)
+    {
+      ...PullRequestDetails
+    }
+  }
+}

@@ -1,7 +1,7 @@
 fragment AuthorFields on Actor {
   login
-  htmlUrl: url
-  avatarUrl
+  html_url: url
+  avatar_url: avatarUrl
   type: __typename
 }
 

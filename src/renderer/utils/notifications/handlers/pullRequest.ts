@@ -19,19 +19,40 @@ import {
   type SettingsState,
 } from '../../../types';
 import { fetchPullByNumber } from '../../api/client';
-import type { PullRequestReviewFieldsFragment } from '../../api/graphql/generated/graphql';
+import {
+  type PullRequestDetailsFragment,
+  PullRequestDetailsFragmentDoc,
+  PullRequestMergeQueryFragmentDoc,
+  type PullRequestReviewFieldsFragment,
+} from '../../api/graphql/generated/graphql';
 import { DefaultHandler, defaultHandler } from './default';
+import type { GraphQLMergedQueryConfig } from './types';
 import { getNotificationAuthor } from './utils';
 
 class PullRequestHandler extends DefaultHandler {
   readonly type = 'PullRequest' as const;
 
+  mergeQueryConfig() {
+    return {
+      queryFragment: PullRequestMergeQueryFragmentDoc,
+      responseFragment: PullRequestDetailsFragmentDoc,
+      extras: [
+        { name: 'firstLabels', type: 'Int', defaultValue: 100 },
+        { name: 'lastComments', type: 'Int', defaultValue: 100 },
+        { name: 'lastReviews', type: 'Int', defaultValue: 100 },
+        { name: 'firstClosingIssues', type: 'Int', defaultValue: 100 },
+      ],
+    } as GraphQLMergedQueryConfig;
+  }
+
   async enrich(
     notification: GitifyNotification,
     _settings: SettingsState,
+    fetchedData?: PullRequestDetailsFragment,
   ): Promise<Partial<GitifySubject>> {
-    const response = await fetchPullByNumber(notification);
-    const pr = response.data.repository.pullRequest;
+    const pr =
+      fetchedData ??
+      (await fetchPullByNumber(notification)).data.nodeINDEX?.pullRequest;
 
     let prState: GitifyPullRequestState = pr.state;
     if (pr.isDraft) {
@@ -108,7 +129,7 @@ export function getLatestReviewForReviewers(
   }
 
   // Find the most recent review for each reviewer
-  const latestReviews = [];
+  const latestReviews: PullRequestReviewFieldsFragment[] = [];
   const sortedReviews = reviews.toReversed();
   for (const prReview of sortedReviews) {
     const reviewerFound = latestReviews.find(

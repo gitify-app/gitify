@@ -17,22 +17,42 @@ import type {
 } from '../../../types';
 import { IconColor } from '../../../types';
 import { fetchIssueByNumber } from '../../api/client';
+import {
+  type IssueDetailsFragment,
+  IssueDetailsFragmentDoc,
+  IssueMergeQueryFragmentDoc,
+} from '../../api/graphql/generated/graphql';
 import { DefaultHandler, defaultHandler } from './default';
+import type { GraphQLMergedQueryConfig } from './types';
 import { getNotificationAuthor } from './utils';
 
 class IssueHandler extends DefaultHandler {
   readonly type = 'Issue';
 
+  mergeQueryConfig() {
+    return {
+      queryFragment: IssueMergeQueryFragmentDoc,
+
+      responseFragment: IssueDetailsFragmentDoc,
+      extras: [
+        { name: 'lastComments', type: 'Int', defaultValue: 100 },
+        { name: 'firstLabels', type: 'Int', defaultValue: 100 },
+      ],
+    } as GraphQLMergedQueryConfig;
+  }
+
   async enrich(
     notification: GitifyNotification,
     _settings: SettingsState,
+    fetchedData?: IssueDetailsFragment,
   ): Promise<Partial<GitifySubject>> {
-    const response = await fetchIssueByNumber(notification);
-    const issue = response.data.repository?.issue;
+    const issue =
+      fetchedData ??
+      (await fetchIssueByNumber(notification)).data.nodeINDEX?.issue;
 
     const issueState = issue.stateReason ?? issue.state;
 
-    const issueComment = issue.comments.nodes[0];
+    const issueComment = issue.comments?.nodes?.[0];
 
     const issueUser = getNotificationAuthor([
       issueComment?.author,
@@ -43,9 +63,11 @@ class IssueHandler extends DefaultHandler {
       number: issue.number,
       state: issueState,
       user: issueUser,
-      comments: issue.comments.totalCount,
-      labels: issue.labels?.nodes.map((label) => label.name),
-      milestone: issue.milestone,
+      comments: issue.comments?.totalCount ?? 0,
+      labels:
+        issue.labels?.nodes?.flatMap((label) => (label ? [label.name] : [])) ??
+        undefined,
+      milestone: issue.milestone ?? undefined,
       htmlUrl: issueComment?.url ?? issue.url,
     };
   }

@@ -9,16 +9,34 @@ import type {
   SettingsState,
   SubjectType,
 } from '../../../types';
+import type { TypedDocumentString } from '../../api/graphql/generated/graphql';
 
-export interface NotificationTypeHandler {
+export type GraphQLMergedQueryConfig = {
+  queryFragment: TypedDocumentString<unknown, unknown>;
+  responseFragment: TypedDocumentString<unknown, unknown>;
+  extras: Array<{
+    name: string;
+    type: string;
+    defaultValue: number | boolean;
+  }>;
+};
+
+export interface NotificationTypeHandler<TFragment = unknown> {
   readonly type?: SubjectType;
 
+  mergeQueryConfig(): GraphQLMergedQueryConfig;
+
   /**
-   * Enrich a notification. Settings may be unused for some handlers.
+   * Enriches a base notification with additional information (state, author, metrics, etc).
+   *
+   * @param notification The base notification being enriched
+   * @param settings The app settings, which for some handlers may not be used during enrichment.
+   * @param fetchedData Previously fetched enrichment data (upstream).  If present, then enrich will skip fetching detailed data inline.
    */
   enrich(
     notification: GitifyNotification,
     settings: SettingsState,
+    fetchedData?: TFragment,
   ): Promise<Partial<GitifySubject>>;
 
   /**

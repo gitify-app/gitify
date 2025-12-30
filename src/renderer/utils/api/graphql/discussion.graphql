@@ -1,14 +1,20 @@
+#import './common.graphql'
+
 query FetchDiscussionByNumber(
-  $owner: String!
-  $name: String!
-  $number: Int!
+  $ownerINDEX: String!
+  $nameINDEX: String!
+  $numberINDEX: Int!
   $lastComments: Int
   $lastReplies: Int
   $firstLabels: Int
   $includeIsAnswered: Boolean!
 ) {
-  repository(owner: $owner, name: $name) {
-    discussion(number: $number) {
+  ...DiscussionMergeQuery
+}
+
+fragment DiscussionMergeQuery on Query {
+  nodeINDEX: repository(owner: $ownerINDEX, name: $nameINDEX) {
+    discussion(number: $numberINDEX) {
       ...DiscussionDetails
     }
   }

@@ -25,6 +25,7 @@ import {
   apiRequestAuth,
   type ExecutionResultWithHeaders,
   performGraphQLRequest,
+  performGraphQLRequestString,
 } from './request';
 import type {
   NotificationThreadSubscription,
@@ -195,6 +196,33 @@ export async function fetchAuthenticatedUserDetails(
 }
 
 /**
+ * Fetch GitHub Discussion by Discussion Number.
+ */
+export async function fetchDiscussionByNumber(
+  notification: GitifyNotification,
+): Promise<ExecutionResult<FetchDiscussionByNumberQuery>> {
+  const url = getGitHubGraphQLUrl(notification.account.hostname);
+  const number = getNumberFromUrl(notification.subject.url);
+
+  return performGraphQLRequest(
+    url.toString() as Link,
+    notification.account.token,
+    FetchDiscussionByNumberDocument,
+    {
+      ownerINDEX: notification.repository.owner.login,
+      nameINDEX: notification.repository.name,
+      numberINDEX: number,
+      firstLabels: 100,
+      lastComments: 10,
+      lastReplies: 10,
+      includeIsAnswered: isAnsweredDiscussionFeatureSupported(
+        notification.account,
+      ),
+    },
+  );
+}
+
+/**
  * Fetch GitHub Issue by Issue Number.
  */
 export async function fetchIssueByNumber(
@@ -208,9 +236,9 @@ export async function fetchIssueByNumber(
     notification.account.token,
     FetchIssueByNumberDocument,
     {
-      owner: notification.repository.owner.login,
-      name: notification.repository.name,
-      number: number,
+      ownerINDEX: notification.repository.owner.login,
+      nameINDEX: notification.repository.name,
+      numberINDEX: number,
       firstLabels: 100,
       lastComments: 1,
     },
@@ -231,11 +259,11 @@ export async function fetchPullByNumber(
     notification.account.token,
     FetchPullRequestByNumberDocument,
     {
-      owner: notification.repository.owner.login,
-      name: notification.repository.name,
-      number: number,
-      firstLabels: 100,
+      ownerINDEX: notification.repository.owner.login,
+      nameINDEX: notification.repository.name,
+      numberINDEX: number,
       firstClosingIssues: 100,
+      firstLabels: 100,
       lastComments: 1,
       lastReviews: 100,
     },
@@ -243,28 +271,19 @@ export async function fetchPullByNumber(
 }
 
 /**
- * Fetch GitHub Discussion by Discussion Number.
+ * Fetch Batched Details for Discussions, Issues and Pull Requests.
  */
-export async function fetchDiscussionByNumber(
+export async function fetchMergedQueryDetails(
   notification: GitifyNotification,
-): Promise<ExecutionResult<FetchDiscussionByNumberQuery>> {
+  mergedQuery: string,
+  mergedVariables: Record<string, string | number | boolean>,
+): Promise<ExecutionResult<Record<string, unknown>>> {
   const url = getGitHubGraphQLUrl(notification.account.hostname);
-  const number = getNumberFromUrl(notification.subject.url);
 
-  return performGraphQLRequest(
+  return performGraphQLRequestString(
     url.toString() as Link,
     notification.account.token,
-    FetchDiscussionByNumberDocument,
-    {
-      owner: notification.repository.owner.login,
-      name: notification.repository.name,
-      number: number,
-      lastComments: 10,
-      lastReplies: 10,
-      firstLabels: 100,
-      includeIsAnswered: isAnsweredDiscussionFeatureSupported(
-        notification.account,
-      ),
-    },
+    mergedQuery,
+    mergedVariables,
   );
 }

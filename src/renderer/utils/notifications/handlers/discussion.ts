@@ -19,22 +19,46 @@ import {
   type SettingsState,
 } from '../../../types';
 import { fetchDiscussionByNumber } from '../../api/client';
-import type {
-  CommentFieldsFragment,
-  DiscussionCommentFieldsFragment,
+import {
+  type CommentFieldsFragment,
+  type DiscussionCommentFieldsFragment,
+  type DiscussionDetailsFragment,
+  DiscussionDetailsFragmentDoc,
+  DiscussionMergeQueryFragmentDoc,
 } from '../../api/graphql/generated/graphql';
 import { DefaultHandler, defaultHandler } from './default';
+import type { GraphQLMergedQueryConfig } from './types';
 import { getNotificationAuthor } from './utils';
 
 class DiscussionHandler extends DefaultHandler {
   readonly type = 'Discussion';
 
+  mergeQueryConfig() {
+    return {
+      queryFragment: DiscussionMergeQueryFragmentDoc,
+      responseFragment: DiscussionDetailsFragmentDoc,
+      extras: [
+        { name: 'lastComments', type: 'Int', defaultValue: 100 },
+        { name: 'lastReplies', type: 'Int', defaultValue: 100 },
+        { name: 'firstLabels', type: 'Int', defaultValue: 100 },
+        { name: 'includeIsAnswered', type: 'Boolean!', defaultValue: true },
+      ],
+    } as GraphQLMergedQueryConfig;
+  }
+
   async enrich(
     notification: GitifyNotification,
     _settings: SettingsState,
+    fetchedData?: DiscussionDetailsFragment,
   ): Promise<Partial<GitifySubject>> {
-    const response = await fetchDiscussionByNumber(notification);
-    const discussion = response.data.repository?.discussion;
+    // If no fetched data and no URL, we can't enrich - return empty
+    if (!fetchedData && !notification.subject.url) {
+      return {};
+    }
+
+    const discussion =
+      fetchedData ??
+      (await fetchDiscussionByNumber(notification)).data.nodeINDEX?.discussion;
 
     let discussionState: GitifyDiscussionState = 'OPEN';
 
@@ -59,7 +83,10 @@ class DiscussionHandler extends DefaultHandler {
         discussion.author,
       ]),
       comments: discussion.comments.totalCount,
-      labels: discussion.labels?.nodes.map((label) => label.name) ?? [],
+      labels:
+        discussion.labels?.nodes?.flatMap((label) =>
+          label ? [label.name] : [],
+        ) ?? [],
       htmlUrl: latestDiscussionComment?.url ?? discussion.url,
     };
   }

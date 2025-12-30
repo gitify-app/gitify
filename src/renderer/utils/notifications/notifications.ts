@@ -5,9 +5,23 @@ import type {
   GitifySubject,
   SettingsState,
 } from '../../types';
-import { listNotificationsForAuthenticatedUser } from '../api/client';
+import {
+  fetchMergedQueryDetails,
+  listNotificationsForAuthenticatedUser,
+} from '../api/client';
 import { determineFailureType } from '../api/errors';
+import {
+  BatchMergedDetailsQueryFragmentDoc,
+  type TypedDocumentString,
+} from '../api/graphql/generated/graphql';
+import {
+  aliasRootAndKeyVariables,
+  composeMergedQuery,
+  extractFragments,
+  getQueryFragmentBody,
+} from '../api/graphql/utils';
 import { transformNotification } from '../api/transform';
+import { getNumberFromUrl } from '../api/utils';
 import { rendererLogError, rendererLogWarn } from '../logger';
 import {
   filterBaseNotifications,
@@ -129,12 +143,166 @@ export async function enrichNotifications(
     return notifications;
   }
 
-  const enrichedNotifications = await Promise.all(
-    notifications.map(async (notification: GitifyNotification) => {
-      return enrichNotification(notification, settings);
-    }),
+  const selections: string[] = [];
+  const variableDefinitions: string[] = [];
+  const variableValues: Record<string, string | number | boolean> = {};
+  const fragments = new Map<string, string>();
+  const targets: Array<{
+    alias: string;
+    notification: GitifyNotification;
+    handler: ReturnType<typeof createNotificationHandler>;
+  }> = [];
+
+  const collectFragments = (doc: TypedDocumentString<unknown, unknown>) => {
+    const found = extractFragments(doc);
+    for (const [name, frag] of found.entries()) {
+      if (!fragments.has(name)) {
+        fragments.set(name, frag);
+      }
+    }
+  };
+
+  let index = 0;
+  for (const notification of notifications) {
+    const handler = createNotificationHandler(notification);
+    const config = handler.mergeQueryConfig();
+
+    if (!config) {
+      continue;
+    }
+
+    // Skip notifications without a URL (can't extract number)
+    if (!notification.subject.url) {
+      continue;
+    }
+
+    const org = notification.repository.owner.login;
+    const repo = notification.repository.name;
+    const number = getNumberFromUrl(notification.subject.url);
+    const isNotificationDiscussion = notification.subject.type === 'Discussion';
+    const isNotificationIssue = notification.subject.type === 'Issue';
+    const isNotificationPullRequest =
+      notification.subject.type === 'PullRequest';
+
+    const alias = `node${index}`;
+    // const queryFragmentBody = getQueryFragmentBody(config.queryFragment) ?? '';
+    const queryFragmentBody = getQueryFragmentBody(
+      BatchMergedDetailsQueryFragmentDoc,
+    );
+    const queryFragment = aliasRootAndKeyVariables(queryFragmentBody, index);
+    if (!queryFragment || queryFragment.trim().length === 0) {
+      continue;
+    }
+    selections.push(queryFragment);
+    variableDefinitions.push(
+      `$owner${index}: String!, $name${index}: String!, $number${index}: Int!, $isDiscussionNotification${index}: Boolean!, $isIssueNotification${index}: Boolean!, $isPullRequestNotification${index}: Boolean!`,
+    );
+    variableValues[`owner${index}`] = org;
+    variableValues[`name${index}`] = repo;
+    variableValues[`number${index}`] = number;
+    variableValues[`isDiscussionNotification${index}`] =
+      isNotificationDiscussion;
+    variableValues[`isIssueNotification${index}`] = isNotificationIssue;
+    variableValues[`isPullRequestNotification${index}`] =
+      isNotificationPullRequest;
+
+    targets.push({ alias, notification, handler });
+
+    collectFragments(config.responseFragment);
+    index += 1;
+  }
+
+  if (selections.length === 0) {
+    // No handlers with mergeQueryConfig, just enrich individually
+    return Promise.all(
+      notifications.map(async (notification) => {
+        const handler = createNotificationHandler(notification);
+        const details = await handler.enrich(notification, settings);
+        return {
+          ...notification,
+          subject: {
+            ...notification.subject,
+            ...details,
+          },
+        };
+      }),
+    );
+  }
+
+  variableDefinitions.push(
+    '$lastComments: Int, $lastThreadedComments: Int, $lastReplies: Int, $lastReviews: Int, $firstLabels: Int, $firstClosingIssues: Int, $includeIsAnswered: Boolean!',
   );
 
+  const mergedQuery = composeMergedQuery(
+    selections,
+    fragments,
+    variableDefinitions,
+  );
+
+  const queryVariables = {
+    ...variableValues,
+    firstLabels: 100,
+    lastComments: 1,
+    lastThreadedComments: 10,
+    lastReplies: 10,
+    includeIsAnswered: true,
+    firstClosingIssues: 100,
+    lastReviews: 100,
+    // FIXME includeIsAnswered: isAnsweredDiscussionFeatureSupported(
+    //   notification.account,
+    // ),
+  };
+
+  let mergedData: Record<string, unknown> | null = null;
+
+  try {
+    const response = await fetchMergedQueryDetails(
+      notifications[0],
+      mergedQuery,
+      queryVariables,
+    );
+
+    mergedData =
+      (response.data as { data?: Record<string, unknown> })?.data ?? null;
+  } catch (err) {
+    rendererLogError(
+      'enrichNotifications',
+      'Failed to fetch merged notification details',
+      err,
+    );
+  }
+
+  const enrichedNotifications = await Promise.all(
+    notifications.map(async (notification: GitifyNotification) => {
+      const target = targets.find((item) => item.notification === notification);
+      const handler =
+        target?.handler ?? createNotificationHandler(notification);
+
+      let fragment: unknown;
+      if (mergedData && target) {
+        const repoData = mergedData[target.alias] as
+          | Record<string, unknown>
+          | undefined;
+        if (repoData) {
+          for (const value of Object.values(repoData)) {
+            if (value !== undefined) {
+              fragment = value;
+              break;
+            }
+          }
+        }
+      }
+
+      const details = await handler.enrich(notification, settings, fragment);
+      return {
+        ...notification,
+        subject: {
+          ...notification.subject,
+          ...details,
+        },
+      };
+    }),
+  );
   return enrichedNotifications;
 }
 

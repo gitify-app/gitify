@@ -1,12 +1,17 @@
+#import './common.graphql'
+
 query FetchIssueByNumber(
-  $owner: String!
-  $name: String!
-  $number: Int!
+  $ownerINDEX: String!
+  $nameINDEX: String!
+  $numberINDEX: Int!
   $lastComments: Int
   $firstLabels: Int
 ) {
-  repository(owner: $owner, name: $name) {
-    issue(number: $number) {
+  ...IssueMergeQuery
+}
+fragment IssueMergeQuery on Query {
+  nodeINDEX: repository(owner: $ownerINDEX, name: $nameINDEX) {
+    issue(number: $numberINDEX) {
       ...IssueDetails
     }
   }
