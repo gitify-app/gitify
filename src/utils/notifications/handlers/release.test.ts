@@ -73,8 +73,8 @@ describe('renderer/utils/notifications/handlers/release.ts', () => {
         filterStates: ['closed'],
       });
 
-      // Returns empty object when filtered (no API call made)
-      expect(result).toEqual({});
+      // Returns null when filtered (no API call made)
+      expect(result).toBeNull();
     });
   });
 

@@ -4,12 +4,14 @@ import type { OcticonProps } from '@primer/octicons-react';
 import { GitCommitIcon } from '@primer/octicons-react';
 
 import type {
+  GitifyNotification,
   GitifyNotificationState,
   GitifyNotificationUser,
   GitifySubject,
+  Link,
   SettingsState,
+  UserType,
 } from '../../../types';
-import type { Notification, Subject } from '../../../typesGitHub';
 import { getCommit, getCommitComment } from '../../api/client';
 import { isStateFilteredOut } from '../filters/filter';
 import { DefaultHandler } from './default';
@@ -19,9 +21,9 @@ class CommitHandler extends DefaultHandler {
   readonly type = 'Commit';
 
   async enrich(
-    notification: Notification,
+    notification: GitifyNotification,
     settings: SettingsState,
-  ): Promise<GitifySubject | null> {
+  ): Promise<Partial<GitifySubject> | null> {
     // Commit notifications are stateless
     const commitState: GitifyNotificationState | undefined = undefined;
 
@@ -32,26 +34,35 @@ class CommitHandler extends DefaultHandler {
 
     let user: GitifyNotificationUser | undefined;
 
-    if (notification.subject.latest_comment_url) {
+    if (notification.subject.latestCommentUrl) {
       const commitComment = (
         await getCommitComment(
-          notification.subject.latest_comment_url,
+          notification.subject.latestCommentUrl,
           notification.account.token,
         )
       ).data;
 
-      user = commitComment.user ?? undefined;
+      if (commitComment.user) {
+        user = {
+          login: commitComment.user.login,
+          avatarUrl: commitComment.user.avatar_url as Link,
+          htmlUrl: commitComment.user.html_url as Link,
+          type: commitComment.user.type as UserType,
+        };
+      }
     } else if (notification.subject.url) {
       const commit = (
         await getCommit(notification.subject.url, notification.account.token)
       ).data;
 
-      user = {
-        login: commit.author.login,
-        avatar_url: commit.author.avatar_url,
-        html_url: commit.author.html_url,
-        type: commit.author.type,
-      };
+      if (commit.author) {
+        user = {
+          login: commit.author.login,
+          avatarUrl: commit.author.avatar_url as Link,
+          htmlUrl: commit.author.html_url as Link,
+          type: commit.author.type as UserType,
+        };
+      }
     }
 
     return {
@@ -60,7 +71,7 @@ class CommitHandler extends DefaultHandler {
     };
   }
 
-  iconType(_subject: Subject): FC<OcticonProps> | null {
+  iconType(_subject: GitifySubject): FC<OcticonProps> | null {
     return GitCommitIcon;
   }
 }

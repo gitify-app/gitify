@@ -6,9 +6,11 @@ import {
   createPartialMockNotification,
 } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
-import { createPartialMockUser } from '../../../__mocks__/user-mocks';
-import type { Link } from '../../../types';
-import type { Notification } from '../../../typesGitHub';
+import {
+  createMockNotificationUser,
+  createPartialMockUser,
+} from '../../../__mocks__/user-mocks';
+import type { GitifyNotification, Link } from '../../../types';
 import { commitHandler } from './commit';
 
 // Mock isTauriEnvironment to return false so axios is used instead of Tauri fetch
@@ -25,6 +27,8 @@ describe('renderer/utils/notifications/handlers/commit.ts', () => {
   describe('enrich', () => {
     const mockAuthor = createPartialMockUser('some-author');
     const mockCommenter = createPartialMockUser('some-commenter');
+    const mockAuthorGitify = createMockNotificationUser('some-author');
+    const mockCommenterGitify = createMockNotificationUser('some-commenter');
 
     beforeEach(() => {
       // axios will default to using the XHR adapter which can't be intercepted
@@ -37,7 +41,7 @@ describe('renderer/utils/notifications/handlers/commit.ts', () => {
         title: 'This is a commit with comments',
         type: 'Commit',
         url: 'https://api.github.com/repos/gitify-app/notifications-test/commits/d2a86d80e3d24ea9510d5de6c147e53c30f313a8' as Link,
-        latest_comment_url:
+        latestCommentUrl:
           'https://api.github.com/repos/gitify-app/notifications-test/comments/141012658' as Link,
       });
 
@@ -56,10 +60,10 @@ describe('renderer/utils/notifications/handlers/commit.ts', () => {
       expect(result).toEqual({
         state: undefined,
         user: {
-          login: mockCommenter.login,
-          html_url: mockCommenter.html_url,
-          avatar_url: mockCommenter.avatar_url,
-          type: mockCommenter.type,
+          login: mockCommenterGitify.login,
+          htmlUrl: mockCommenterGitify.htmlUrl,
+          avatarUrl: mockCommenterGitify.avatarUrl,
+          type: mockCommenterGitify.type,
         },
       });
     });
@@ -69,7 +73,7 @@ describe('renderer/utils/notifications/handlers/commit.ts', () => {
         title: 'This is a commit with comments',
         type: 'Commit',
         url: 'https://api.github.com/repos/gitify-app/notifications-test/commits/d2a86d80e3d24ea9510d5de6c147e53c30f313a8' as Link,
-        latest_comment_url: undefined,
+        latestCommentUrl: undefined,
       });
 
       nock('https://api.github.com')
@@ -83,10 +87,10 @@ describe('renderer/utils/notifications/handlers/commit.ts', () => {
       expect(result).toEqual({
         state: undefined,
         user: {
-          login: mockAuthor.login,
-          html_url: mockAuthor.html_url,
-          avatar_url: mockAuthor.avatar_url,
-          type: mockAuthor.type,
+          login: mockAuthorGitify.login,
+          htmlUrl: mockAuthorGitify.htmlUrl,
+          avatarUrl: mockAuthorGitify.avatarUrl,
+          type: mockAuthorGitify.type,
         },
       });
     });
@@ -96,7 +100,7 @@ describe('renderer/utils/notifications/handlers/commit.ts', () => {
         title: 'This is a commit with comments',
         type: 'Commit',
         url: 'https://api.github.com/repos/gitify-app/notifications-test/commits/d2a86d80e3d24ea9510d5de6c147e53c30f313a8' as Link,
-        latest_comment_url: undefined,
+        latestCommentUrl: undefined,
       });
 
       const result = await commitHandler.enrich(mockNotification, {
@@ -122,9 +126,9 @@ describe('renderer/utils/notifications/handlers/commit.ts', () => {
     expect(
       commitHandler.defaultUrl({
         repository: {
-          html_url: mockHtmlUrl,
+          htmlUrl: mockHtmlUrl,
         },
-      } as Notification),
+      } as GitifyNotification),
     ).toEqual(mockHtmlUrl);
   });
 });

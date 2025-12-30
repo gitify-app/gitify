@@ -6,14 +6,13 @@ import {
   createPartialMockNotification,
 } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
-import { createPartialMockUser } from '../../../__mocks__/user-mocks';
 import {
   type GitifyIssueState,
+  type GitifyNotification,
   type GitifySubject,
   IconColor,
   type Link,
 } from '../../../types';
-import type { Notification } from '../../../typesGitHub';
 import type {
   IssueDetailsFragment,
   IssueState,
@@ -31,19 +30,28 @@ vi.mock('../../comms', () => ({
   decryptValue: vi.fn().mockResolvedValue('decrypted'),
 }));
 
-const mockAuthor = createPartialMockUser('issue-author');
-const mockCommenter = createPartialMockUser('issue-commenter');
+// GraphQL-compatible user objects (camelCase)
+const createGraphQLUser = (login: string) => ({
+  __typename: 'User' as const,
+  login,
+  avatarUrl: 'https://avatars.githubusercontent.com/u/583231?v=4' as Link,
+  htmlUrl: `https://github.com/${login}` as Link,
+  type: 'User' as const,
+});
+
+const mockAuthorGQL = createGraphQLUser('issue-author');
+const mockCommenterGQL = createGraphQLUser('issue-commenter');
 
 describe('renderer/utils/notifications/handlers/issue.ts', () => {
   describe('enrich', () => {
-    let mockNotification: Notification;
+    let mockNotification: GitifyNotification;
 
     beforeEach(() => {
       mockNotification = createPartialMockNotification({
         title: 'This is a mock issue',
         type: 'Issue',
         url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1' as Link,
-        latest_comment_url:
+        latestCommentUrl:
           'https://api.github.com/repos/gitify-app/notifications-test/issues/comments/302888448' as Link,
       });
 
@@ -73,10 +81,10 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         number: 123,
         state: 'OPEN',
         user: {
-          login: mockAuthor.login,
-          html_url: mockAuthor.html_url,
-          avatar_url: mockAuthor.avatar_url,
-          type: mockAuthor.type,
+          login: mockAuthorGQL.login,
+          htmlUrl: mockAuthorGQL.htmlUrl,
+          avatarUrl: mockAuthorGQL.avatarUrl,
+          type: mockAuthorGQL.type,
         },
         comments: 0,
         htmlUrl:
@@ -108,10 +116,10 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         number: 123,
         state: 'COMPLETED',
         user: {
-          login: mockAuthor.login,
-          html_url: mockAuthor.html_url,
-          avatar_url: mockAuthor.avatar_url,
-          type: mockAuthor.type,
+          login: mockAuthorGQL.login,
+          htmlUrl: mockAuthorGQL.htmlUrl,
+          avatarUrl: mockAuthorGQL.avatarUrl,
+          type: mockAuthorGQL.type,
         },
         comments: 0,
         htmlUrl:
@@ -129,7 +137,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         totalCount: 1,
         nodes: [
           {
-            author: mockCommenter,
+            author: mockCommenterGQL,
             url: 'https://github.com/gitify-app/notifications-test/issues/123#issuecomment-1234',
           },
         ],
@@ -151,10 +159,10 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         number: 123,
         state: 'OPEN',
         user: {
-          login: mockCommenter.login,
-          html_url: mockCommenter.html_url,
-          avatar_url: mockCommenter.avatar_url,
-          type: mockCommenter.type,
+          login: mockCommenterGQL.login,
+          htmlUrl: mockCommenterGQL.htmlUrl,
+          avatarUrl: mockCommenterGQL.avatarUrl,
+          type: mockCommenterGQL.type,
         },
         comments: 1,
         htmlUrl:
@@ -188,10 +196,10 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         number: 123,
         state: 'OPEN',
         user: {
-          login: mockAuthor.login,
-          html_url: mockAuthor.html_url,
-          avatar_url: mockAuthor.avatar_url,
-          type: mockAuthor.type,
+          login: mockAuthorGQL.login,
+          htmlUrl: mockAuthorGQL.htmlUrl,
+          avatarUrl: mockAuthorGQL.avatarUrl,
+          type: mockAuthorGQL.type,
         },
         comments: 0,
         htmlUrl:
@@ -226,10 +234,10 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         number: 123,
         state: 'OPEN',
         user: {
-          login: mockAuthor.login,
-          html_url: mockAuthor.html_url,
-          avatar_url: mockAuthor.avatar_url,
-          type: mockAuthor.type,
+          login: mockAuthorGQL.login,
+          htmlUrl: mockAuthorGQL.htmlUrl,
+          avatarUrl: mockAuthorGQL.avatarUrl,
+          type: mockAuthorGQL.type,
         },
         comments: 0,
         htmlUrl:
@@ -292,9 +300,9 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
     expect(
       issueHandler.defaultUrl({
         repository: {
-          html_url: mockHtmlUrl,
+          htmlUrl: mockHtmlUrl,
         },
-      } as Notification),
+      } as GitifyNotification),
     ).toEqual(`${mockHtmlUrl}/issues`);
   });
 });
@@ -310,7 +318,7 @@ function mockIssueResponseNode(mocks: {
     state: mocks.state,
     stateReason: mocks.stateReason,
     url: 'https://github.com/gitify-app/notifications-test/issues/123',
-    author: mockAuthor,
+    author: mockAuthorGQL,
     labels: { nodes: [] },
     comments: { totalCount: 0, nodes: [] },
     milestone: undefined,

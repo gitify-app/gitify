@@ -1,14 +1,21 @@
 import { Constants } from '../constants';
-import type { Hostname, Link } from '../types';
-import type { Notification, Repository, Subject, User } from '../typesGitHub';
+import type {
+  GitifyNotification,
+  GitifyNotificationUser,
+  GitifyRepository,
+  GitifySubject,
+  Hostname,
+  Link,
+} from '../types';
+import type { User } from '../typesGitHub';
 import { mockToken } from './state-mocks';
 import { mockGitifyUser } from './user-mocks';
 
 export function partialMockNotification(
-  subject: Partial<Subject>,
-  repository?: Partial<Repository>,
-): Notification {
-  const mockNotification: Partial<Notification> = {
+  subject: Partial<GitifySubject>,
+  repository?: Partial<GitifyRepository>,
+): GitifyNotification {
+  const mockNotification: Partial<GitifyNotification> = {
     account: {
       method: 'Personal Access Token',
       platform: 'GitHub Cloud',
@@ -17,14 +24,25 @@ export function partialMockNotification(
       user: mockGitifyUser,
       hasRequiredScopes: true,
     },
-    subject: subject as Subject,
-    repository: repository as Repository,
+    subject: subject as GitifySubject,
+    repository: repository as GitifyRepository,
   };
 
-  return mockNotification as Notification;
+  return mockNotification as GitifyNotification;
 }
 
-export function partialMockUser(login: string): User {
+export function partialMockUser(login: string): GitifyNotificationUser {
+  const mockUser: Partial<GitifyNotificationUser> = {
+    login: login,
+    htmlUrl: `https://github.com/${login}` as Link,
+    avatarUrl: 'https://avatars.githubusercontent.com/u/583231?v=4' as Link,
+    type: 'User',
+  };
+
+  return mockUser as GitifyNotificationUser;
+}
+
+export function partialMockRawUser(login: string): User {
   const mockUser: Partial<User> = {
     login: login,
     html_url: `https://github.com/${login}` as Link,

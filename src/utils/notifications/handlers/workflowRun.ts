@@ -5,11 +5,11 @@ import { RocketIcon } from '@primer/octicons-react';
 
 import type {
   GitifyCheckSuiteStatus,
+  GitifyNotification,
   GitifySubject,
   Link,
   SettingsState,
 } from '../../../types';
-import type { Notification, Subject } from '../../../typesGitHub';
 import { actionsURL } from '../../helpers';
 import { DefaultHandler } from './default';
 
@@ -23,9 +23,9 @@ class WorkflowRunHandler extends DefaultHandler {
   readonly type = 'WorkflowRun';
 
   async enrich(
-    notification: Notification,
+    notification: GitifyNotification,
     _settings: SettingsState,
-  ): Promise<GitifySubject | null> {
+  ): Promise<Partial<GitifySubject> | null> {
     const state = getWorkflowRunAttributes(notification)?.status;
 
     if (state) {
@@ -39,11 +39,11 @@ class WorkflowRunHandler extends DefaultHandler {
     return null;
   }
 
-  iconType(_subject: Subject): FC<OcticonProps> | null {
+  iconType(_subject: GitifySubject): FC<OcticonProps> | null {
     return RocketIcon;
   }
 
-  defaultUrl(notification: Notification): Link {
+  defaultUrl(notification: GitifyNotification): Link {
     return getWorkflowRunUrl(notification);
   }
 }
@@ -55,7 +55,7 @@ export const workflowRunHandler = new WorkflowRunHandler();
  * but there isn't an obvious/clean way to do this currently.
  */
 export function getWorkflowRunAttributes(
-  notification: Notification,
+  notification: GitifyNotification,
 ): WorkflowRunAttributes | null {
   const regex =
     /^(?<user>.*?) requested your (?<statusDisplayName>.*?) to deploy to an environment$/;
@@ -86,7 +86,7 @@ function getWorkflowRunStatus(
   }
 }
 
-export function getWorkflowRunUrl(notification: Notification): Link {
+export function getWorkflowRunUrl(notification: GitifyNotification): Link {
   const filters = [];
 
   const workflowRunAttributes = getWorkflowRunAttributes(notification);
@@ -95,5 +95,5 @@ export function getWorkflowRunUrl(notification: Notification): Link {
     filters.push(`is:${workflowRunAttributes.status}`);
   }
 
-  return actionsURL(notification.repository.html_url, filters);
+  return actionsURL(notification.repository.htmlUrl, filters);
 }

@@ -4,12 +4,14 @@ import type { OcticonProps } from '@primer/octicons-react';
 import { TagIcon } from '@primer/octicons-react';
 
 import type {
+  GitifyNotification,
   GitifyNotificationState,
+  GitifyNotificationUser,
   GitifySubject,
   Link,
   SettingsState,
+  UserType,
 } from '../../../types';
-import type { Notification, Subject } from '../../../typesGitHub';
 import { getRelease } from '../../api/client';
 import { isStateFilteredOut } from '../filters/filter';
 import { DefaultHandler } from './default';
@@ -19,9 +21,9 @@ class ReleaseHandler extends DefaultHandler {
   readonly type = 'Release';
 
   async enrich(
-    notification: Notification,
+    notification: GitifyNotification,
     settings: SettingsState,
-  ): Promise<GitifySubject | null> {
+  ): Promise<Partial<GitifySubject> | null> {
     // Release notifications are stateless
     const releaseState: GitifyNotificationState | undefined = undefined;
 
@@ -38,18 +40,29 @@ class ReleaseHandler extends DefaultHandler {
       await getRelease(notification.subject.url, notification.account.token)
     ).data;
 
+    // Transform raw API author to GitifyNotificationUser
+    let author: GitifyNotificationUser | undefined;
+    if (release.author) {
+      author = {
+        login: release.author.login,
+        avatarUrl: release.author.avatar_url as Link,
+        htmlUrl: release.author.html_url as Link,
+        type: release.author.type as UserType,
+      };
+    }
+
     return {
       state: releaseState,
-      user: getNotificationAuthor([release.author]),
+      user: getNotificationAuthor([author]),
     };
   }
 
-  iconType(_subject: Subject): FC<OcticonProps> | null {
+  iconType(_subject: GitifySubject): FC<OcticonProps> | null {
     return TagIcon;
   }
 
-  defaultUrl(notification: Notification): Link {
-    const url = new URL(notification.repository.html_url);
+  defaultUrl(notification: GitifyNotification): Link {
+    const url = new URL(notification.repository.htmlUrl);
     url.pathname += '/releases';
     return url.href as Link;
   }

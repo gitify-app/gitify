@@ -138,8 +138,8 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
         mockSettings,
       );
 
-      // Returns empty object when state cannot be determined
-      expect(result).toEqual({});
+      // Returns null when state cannot be determined
+      expect(result).toBeNull();
     });
 
     it('unhandled check suite title', async () => {
@@ -153,8 +153,8 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
         mockSettings,
       );
 
-      // Returns empty object when title cannot be parsed
-      expect(result).toEqual({});
+      // Returns null when title cannot be parsed
+      expect(result).toBeNull();
     });
   });
 

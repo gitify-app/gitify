@@ -1,50 +1,20 @@
 import type { components } from '@octokit/openapi-types';
 
-import type { GitifyNotification, GitifySubject, Link } from './types';
+import type { Link, Reason, SubjectType, UserType } from './types';
 
-// TODO: #828 Add explicit types for GitHub API response vs Gitify Notifications object
+// Re-export types that are used by external modules
+export type { Reason, SubjectType, UserType } from './types';
+
+/**
+ * Raw GitHub API types (snake_case) - used at API boundary
+ * These are transformed into GitifyNotification/GitifySubject (camelCase)
+ * for use throughout the app
+ */
 
 export interface GitHubRESTError {
   message: string;
   documentation_url: Link;
 }
-
-// Stronger typings for string literal attributes
-export type Reason =
-  | 'approval_requested'
-  | 'assign'
-  | 'author'
-  | 'ci_activity'
-  | 'comment'
-  | 'invitation'
-  | 'manual'
-  | 'member_feature_requested'
-  | 'mention'
-  | 'review_requested'
-  | 'security_advisory_credit'
-  | 'security_alert'
-  | 'state_change'
-  | 'subscribed'
-  | 'team_mention';
-
-export type SubjectType =
-  | 'CheckSuite'
-  | 'Commit'
-  | 'Discussion'
-  | 'Issue'
-  | 'PullRequest'
-  | 'Release'
-  | 'RepositoryDependabotAlertsThread'
-  | 'RepositoryInvitation'
-  | 'RepositoryVulnerabilityAlert'
-  | 'WorkflowRun';
-
-export type UserType =
-  | 'Bot'
-  | 'EnterpriseUserAccount'
-  | 'Mannequin'
-  | 'Organization'
-  | 'User';
 
 // Base types from Octokit
 export type NotificationThreadSubscription =
@@ -81,10 +51,10 @@ type StrengthenNullable<T, K extends keyof T, Extra> = Omit<T, K> & {
   [P in K]: T[P] extends null ? null : NonNullable<T[P]> & Extra;
 };
 
-// Exported strengthened types
-export type Notification = GitHubNotification & GitifyNotification;
+// Exported strengthened types (raw GitHub API format with snake_case)
+export type Notification = GitHubNotification;
 
-export type Subject = GitHubSubject & GitifySubject;
+export type Subject = GitHubSubject;
 
 export type Repository = Omit<BaseRepository, 'html_url' | 'owner'> & {
   html_url: Link;

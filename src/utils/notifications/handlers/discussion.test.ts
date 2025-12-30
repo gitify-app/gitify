@@ -6,14 +6,13 @@ import {
   createPartialMockNotification,
 } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
-import { createPartialMockUser } from '../../../__mocks__/user-mocks';
 import {
   type GitifyDiscussionState,
+  type GitifyNotification,
   type GitifySubject,
   IconColor,
   type Link,
 } from '../../../types';
-import type { Notification } from '../../../typesGitHub';
 import type {
   DiscussionDetailsFragment,
   DiscussionStateReason,
@@ -30,9 +29,18 @@ vi.mock('../../comms', () => ({
   decryptValue: vi.fn().mockResolvedValue('decrypted'),
 }));
 
-const mockAuthor = createPartialMockUser('discussion-author');
-const mockCommenter = createPartialMockUser('discussion-commenter');
-const mockReplier = createPartialMockUser('discussion-replier');
+// GraphQL-compatible user objects (camelCase)
+const createGraphQLUser = (login: string) => ({
+  __typename: 'User' as const,
+  login,
+  avatarUrl: 'https://avatars.githubusercontent.com/u/583231?v=4' as Link,
+  htmlUrl: `https://github.com/${login}` as Link,
+  type: 'User' as const,
+});
+
+const mockAuthorGQL = createGraphQLUser('discussion-author');
+const mockCommenterGQL = createGraphQLUser('discussion-commenter');
+const mockReplierGQL = createGraphQLUser('discussion-replier');
 
 describe('renderer/utils/notifications/handlers/discussion.ts', () => {
   describe('enrich', () => {
@@ -40,9 +48,9 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
       title: 'This is a mock discussion',
       type: 'Discussion',
       url: 'https://api.github.com/repos/gitify-app/notifications-test/discussions/123' as Link,
-      latest_comment_url: undefined,
+      latestCommentUrl: undefined,
     });
-    mockNotification.updated_at = '2024-01-01T00:00:00Z';
+    mockNotification.updatedAt = '2024-01-01T00:00:00Z';
 
     beforeEach(() => {
       // axios will default to using the XHR adapter which can't be intercepted
@@ -72,10 +80,10 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         number: 123,
         state: 'ANSWERED',
         user: {
-          login: mockAuthor.login,
-          html_url: mockAuthor.html_url,
-          avatar_url: mockAuthor.avatar_url,
-          type: mockAuthor.type,
+          login: mockAuthorGQL.login,
+          htmlUrl: mockAuthorGQL.htmlUrl,
+          avatarUrl: mockAuthorGQL.avatarUrl,
+          type: mockAuthorGQL.type,
         },
         comments: 0,
         labels: [],
@@ -106,10 +114,10 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         number: 123,
         state: 'OPEN',
         user: {
-          login: mockAuthor.login,
-          html_url: mockAuthor.html_url,
-          avatar_url: mockAuthor.avatar_url,
-          type: mockAuthor.type,
+          login: mockAuthorGQL.login,
+          htmlUrl: mockAuthorGQL.htmlUrl,
+          avatarUrl: mockAuthorGQL.avatarUrl,
+          type: mockAuthorGQL.type,
         },
         comments: 0,
         labels: [],
@@ -143,10 +151,10 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         number: 123,
         state: 'DUPLICATE',
         user: {
-          login: mockAuthor.login,
-          html_url: mockAuthor.html_url,
-          avatar_url: mockAuthor.avatar_url,
-          type: mockAuthor.type,
+          login: mockAuthorGQL.login,
+          htmlUrl: mockAuthorGQL.htmlUrl,
+          avatarUrl: mockAuthorGQL.avatarUrl,
+          type: mockAuthorGQL.type,
         },
         comments: 0,
         labels: [],
@@ -184,10 +192,10 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         number: 123,
         state: 'ANSWERED',
         user: {
-          login: mockAuthor.login,
-          html_url: mockAuthor.html_url,
-          avatar_url: mockAuthor.avatar_url,
-          type: mockAuthor.type,
+          login: mockAuthorGQL.login,
+          htmlUrl: mockAuthorGQL.htmlUrl,
+          avatarUrl: mockAuthorGQL.avatarUrl,
+          type: mockAuthorGQL.type,
         },
         comments: 0,
         labels: ['enhancement'],
@@ -202,7 +210,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         totalCount: 1,
         nodes: [
           {
-            author: mockCommenter,
+            author: mockCommenterGQL,
             createdAt: '2024-02-01T00:00:00Z',
             url: 'https://github.com/gitify-app/notifications-test/discussions/123#discussioncomment-1234',
             replies: {
@@ -232,10 +240,10 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         number: 123,
         state: 'ANSWERED',
         user: {
-          login: mockCommenter.login,
-          html_url: mockCommenter.html_url,
-          avatar_url: mockCommenter.avatar_url,
-          type: mockCommenter.type,
+          login: mockCommenterGQL.login,
+          htmlUrl: mockCommenterGQL.htmlUrl,
+          avatarUrl: mockCommenterGQL.avatarUrl,
+          type: mockCommenterGQL.type,
         },
         comments: 1,
         labels: [],
@@ -250,14 +258,14 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         totalCount: 1,
         nodes: [
           {
-            author: mockCommenter,
+            author: mockCommenterGQL,
             createdAt: '2024-01-01T00:00:00Z',
             url: 'https://github.com/gitify-app/notifications-test/discussions/123#discussioncomment-1234',
             replies: {
               totalCount: 1,
               nodes: [
                 {
-                  author: mockReplier,
+                  author: mockReplierGQL,
                   createdAt: '2024-01-01T00:00:00Z',
                   url: 'https://github.com/gitify-app/notifications-test/discussions/123#discussioncomment-6789',
                 },
@@ -286,10 +294,10 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         number: 123,
         state: 'ANSWERED',
         user: {
-          login: mockReplier.login,
-          html_url: mockReplier.html_url,
-          avatar_url: mockReplier.avatar_url,
-          type: mockReplier.type,
+          login: mockReplierGQL.login,
+          htmlUrl: mockReplierGQL.htmlUrl,
+          avatarUrl: mockReplierGQL.avatarUrl,
+          type: mockReplierGQL.type,
         },
         comments: 1,
         labels: [],
@@ -348,9 +356,9 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
     expect(
       discussionHandler.defaultUrl({
         repository: {
-          html_url: mockHtmlUrl,
+          htmlUrl: mockHtmlUrl,
         },
-      } as Notification),
+      } as GitifyNotification),
     ).toEqual(`${mockHtmlUrl}/discussions`);
   });
 });
@@ -366,7 +374,7 @@ function mockDiscussionResponseNode(mocks: {
     url: 'https://github.com/gitify-app/notifications-test/discussions/123' as Link,
     stateReason: mocks.stateReason,
     isAnswered: mocks.isAnswered,
-    author: mockAuthor,
+    author: mockAuthorGQL,
     comments: {
       nodes: [],
       totalCount: 0,

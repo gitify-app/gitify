@@ -25,8 +25,8 @@ describe('renderer/utils/notifications/handlers/default.ts', () => {
         mockSettings,
       );
 
-      // Default handler returns empty object (no enrichment)
-      expect(result).toEqual({});
+      // Default handler returns null (no enrichment)
+      expect(result).toBeNull();
     });
   });
 

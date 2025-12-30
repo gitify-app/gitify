@@ -1,4 +1,4 @@
-import type { Notification } from '../../../typesGitHub';
+import type { GitifyNotification } from '../../../types';
 import { isNonHumanUser, userTypeFilter } from './userType';
 
 describe('renderer/utils/notifications/filters/userType.ts', () => {
@@ -22,7 +22,7 @@ describe('renderer/utils/notifications/filters/userType.ts', () => {
             type: userType,
           },
         },
-      }) as Partial<Notification> as Notification;
+      }) as Partial<GitifyNotification> as GitifyNotification;
 
     expect(
       userTypeFilter.filterNotification(createMockNotification('User'), 'User'),

@@ -6,14 +6,13 @@ import {
   createPartialMockNotification,
 } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
-import { createPartialMockUser } from '../../../__mocks__/user-mocks';
 import {
+  type GitifyNotification,
   type GitifyPullRequestState,
   type GitifySubject,
   IconColor,
   type Link,
 } from '../../../types';
-import type { Notification } from '../../../typesGitHub';
 import type {
   PullRequestDetailsFragment,
   PullRequestReviewState,
@@ -31,18 +30,27 @@ vi.mock('../../comms', () => ({
   decryptValue: vi.fn().mockResolvedValue('decrypted'),
 }));
 
-const mockAuthor = createPartialMockUser('some-author');
-const mockCommenter = createPartialMockUser('some-commenter');
+// GraphQL-compatible user objects (camelCase)
+const createGraphQLUser = (login: string) => ({
+  __typename: 'User' as const,
+  login,
+  avatarUrl: 'https://avatars.githubusercontent.com/u/583231?v=4' as Link,
+  htmlUrl: `https://github.com/${login}` as Link,
+  type: 'User' as const,
+});
+
+const mockAuthorGQL = createGraphQLUser('some-author');
+const mockCommenterGQL = createGraphQLUser('some-commenter');
 
 describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
-  let mockNotification: Notification;
+  let mockNotification: GitifyNotification;
 
   beforeEach(() => {
     mockNotification = createPartialMockNotification({
       title: 'This is a mock pull request',
       type: 'PullRequest',
       url: 'https://api.github.com/repos/gitify-app/notifications-test/pulls/1' as Link,
-      latest_comment_url:
+      latestCommentUrl:
         'https://api.github.com/repos/gitify-app/notifications-test/issues/comments/302888448' as Link,
     });
   });
@@ -76,10 +84,10 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         number: 123,
         state: 'CLOSED',
         user: {
-          login: mockAuthor.login,
-          html_url: mockAuthor.html_url,
-          avatar_url: mockAuthor.avatar_url,
-          type: mockAuthor.type,
+          login: mockAuthorGQL.login,
+          htmlUrl: mockAuthorGQL.htmlUrl,
+          avatarUrl: mockAuthorGQL.avatarUrl,
+          type: mockAuthorGQL.type,
         },
         reviews: undefined,
         labels: [],
@@ -116,10 +124,10 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         number: 123,
         state: 'DRAFT',
         user: {
-          login: mockAuthor.login,
-          html_url: mockAuthor.html_url,
-          avatar_url: mockAuthor.avatar_url,
-          type: mockAuthor.type,
+          login: mockAuthorGQL.login,
+          htmlUrl: mockAuthorGQL.htmlUrl,
+          avatarUrl: mockAuthorGQL.avatarUrl,
+          type: mockAuthorGQL.type,
         },
         reviews: undefined,
         labels: [],
@@ -156,10 +164,10 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         number: 123,
         state: 'MERGE_QUEUE',
         user: {
-          login: mockAuthor.login,
-          html_url: mockAuthor.html_url,
-          avatar_url: mockAuthor.avatar_url,
-          type: mockAuthor.type,
+          login: mockAuthorGQL.login,
+          htmlUrl: mockAuthorGQL.htmlUrl,
+          avatarUrl: mockAuthorGQL.avatarUrl,
+          type: mockAuthorGQL.type,
         },
         reviews: undefined,
         labels: [],
@@ -196,10 +204,10 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         number: 123,
         state: 'MERGED',
         user: {
-          login: mockAuthor.login,
-          html_url: mockAuthor.html_url,
-          avatar_url: mockAuthor.avatar_url,
-          type: mockAuthor.type,
+          login: mockAuthorGQL.login,
+          htmlUrl: mockAuthorGQL.htmlUrl,
+          avatarUrl: mockAuthorGQL.avatarUrl,
+          type: mockAuthorGQL.type,
         },
         reviews: undefined,
         labels: [],
@@ -219,7 +227,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         totalCount: 1,
         nodes: [
           {
-            author: mockCommenter,
+            author: mockCommenterGQL,
             url: 'https://github.com/gitify-app/notifications-test/pulls/123#issuecomment-1234',
           },
         ],
@@ -244,10 +252,10 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         number: 123,
         state: 'OPEN',
         user: {
-          login: mockCommenter.login,
-          html_url: mockCommenter.html_url,
-          avatar_url: mockCommenter.avatar_url,
-          type: mockCommenter.type,
+          login: mockCommenterGQL.login,
+          htmlUrl: mockCommenterGQL.htmlUrl,
+          avatarUrl: mockCommenterGQL.avatarUrl,
+          type: mockCommenterGQL.type,
         },
         reviews: undefined,
         labels: [],
@@ -290,10 +298,10 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         number: 123,
         state: 'OPEN',
         user: {
-          login: mockAuthor.login,
-          html_url: mockAuthor.html_url,
-          avatar_url: mockAuthor.avatar_url,
-          type: mockAuthor.type,
+          login: mockAuthorGQL.login,
+          htmlUrl: mockAuthorGQL.htmlUrl,
+          avatarUrl: mockAuthorGQL.avatarUrl,
+          type: mockAuthorGQL.type,
         },
         reviews: undefined,
         labels: ['enhancement'],
@@ -336,10 +344,10 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         number: 123,
         state: 'OPEN',
         user: {
-          login: mockAuthor.login,
-          html_url: mockAuthor.html_url,
-          avatar_url: mockAuthor.avatar_url,
-          type: mockAuthor.type,
+          login: mockAuthorGQL.login,
+          htmlUrl: mockAuthorGQL.htmlUrl,
+          avatarUrl: mockAuthorGQL.avatarUrl,
+          type: mockAuthorGQL.type,
         },
         reviews: undefined,
         labels: [],
@@ -379,10 +387,10 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         number: 123,
         state: 'OPEN',
         user: {
-          login: mockAuthor.login,
-          html_url: mockAuthor.html_url,
-          avatar_url: mockAuthor.avatar_url,
-          type: mockAuthor.type,
+          login: mockAuthorGQL.login,
+          htmlUrl: mockAuthorGQL.htmlUrl,
+          avatarUrl: mockAuthorGQL.avatarUrl,
+          type: mockAuthorGQL.type,
         },
         reviews: undefined,
         labels: [],
@@ -445,9 +453,9 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
     expect(
       pullRequestHandler.defaultUrl({
         repository: {
-          html_url: mockHtmlUrl,
+          htmlUrl: mockHtmlUrl,
         },
-      } as Notification),
+      } as GitifyNotification),
     ).toEqual(`${mockHtmlUrl}/pulls`);
   });
 
@@ -511,7 +519,7 @@ function mockPullRequestResponseNode(mocks: {
     merged: mocks.merged ?? false,
     isInMergeQueue: mocks.isInMergeQueue ?? false,
     url: 'https://github.com/gitify-app/notifications-test/pulls/123',
-    author: mockAuthor,
+    author: mockAuthorGQL,
     labels: { nodes: [] },
     comments: {
       totalCount: 0,

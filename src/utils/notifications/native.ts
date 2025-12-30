@@ -1,16 +1,18 @@
 import { APPLICATION } from '../../shared/constants';
 
-import type { Notification } from '../../typesGitHub';
+import type { GitifyNotification } from '../../types';
 import { isTauriEnvironment } from '../environment';
 import { generateGitHubWebUrl } from '../helpers';
 
-export async function raiseNativeNotification(notifications: Notification[]) {
+export async function raiseNativeNotification(
+  notifications: GitifyNotification[],
+) {
   if (!isTauriEnvironment()) {
     // Browser fallback - use browser notifications
     if ('Notification' in window && Notification.permission === 'granted') {
       if (notifications.length === 1) {
         const notification = notifications[0];
-        new Notification(notification.repository.full_name, {
+        new Notification(notification.repository.fullName, {
           body: notification.subject.title,
         });
       } else {
@@ -30,7 +32,7 @@ export async function raiseNativeNotification(notifications: Notification[]) {
     const notification = notifications[0];
     title = window.gitify.platform.isWindows()
       ? ''
-      : notification.repository.full_name;
+      : notification.repository.fullName;
     body = notification.subject.title;
     url = await generateGitHubWebUrl(notification);
   } else {
