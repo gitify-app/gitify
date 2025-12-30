@@ -36,7 +36,7 @@ const defaultNotificationSettings: NotificationSettingsState = {
   showPills: true,
   showNumber: true,
   participating: false,
-  showReadNotifications: true,
+  showReadNotifications: false,
   markAsDoneOnOpen: false,
   markAsDoneOnUnsubscribe: false,
   delayNotificationState: false,

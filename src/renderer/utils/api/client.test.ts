@@ -96,6 +96,44 @@ describe('renderer/utils/api/client.ts', () => {
         data: {},
       });
     });
+
+    it('should include all=true when showReadNotifications is enabled', async () => {
+      const mockSettings: Partial<SettingsState> = {
+        participating: false,
+        showReadNotifications: true,
+      };
+
+      await listNotificationsForAuthenticatedUser(
+        mockGitHubCloudAccount,
+        mockSettings as SettingsState,
+      );
+
+      expect(axios).toHaveBeenCalledWith({
+        url: 'https://api.github.com/notifications?participating=false&all=true',
+        headers: mockNonCachedAuthHeaders,
+        method: 'GET',
+        data: {},
+      });
+    });
+
+    it('should not include all parameter when showReadNotifications is disabled', async () => {
+      const mockSettings: Partial<SettingsState> = {
+        participating: false,
+        showReadNotifications: false,
+      };
+
+      await listNotificationsForAuthenticatedUser(
+        mockGitHubCloudAccount,
+        mockSettings as SettingsState,
+      );
+
+      expect(axios).toHaveBeenCalledWith({
+        url: 'https://api.github.com/notifications?participating=false',
+        headers: mockNonCachedAuthHeaders,
+        method: 'GET',
+        data: {},
+      });
+    });
   });
 
   it('markNotificationThreadAsRead - should mark notification thread as read', async () => {

@@ -72,6 +72,10 @@ export function listNotificationsForAuthenticatedUser(
   url.pathname += 'notifications';
   url.searchParams.append('participating', String(settings.participating));
 
+  if (settings.showReadNotifications) {
+    url.searchParams.append('all', 'true');
+  }
+
   return apiRequestAuth(
     url.toString() as Link,
     'GET',
