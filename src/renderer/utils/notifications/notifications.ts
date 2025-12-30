@@ -261,8 +261,7 @@ export async function enrichNotifications(
       queryVariables,
     );
 
-    mergedData =
-      (response.data as { data?: Record<string, unknown> })?.data ?? null;
+    mergedData = response.data;
   } catch (err) {
     rendererLogError(
       'enrichNotifications',
@@ -274,14 +273,13 @@ export async function enrichNotifications(
   const enrichedNotifications = await Promise.all(
     notifications.map(async (notification: GitifyNotification) => {
       const target = targets.find((item) => item.notification === notification);
-      const handler =
-        target?.handler ?? createNotificationHandler(notification);
 
       let fragment: unknown;
       if (mergedData && target) {
-        const repoData = mergedData[target.rootAlias] as
-          | Record<string, unknown>
-          | undefined;
+        const repoData = mergedData[target.rootAlias] as Record<
+          string,
+          unknown
+        >;
         if (repoData) {
           for (const value of Object.values(repoData)) {
             if (value !== undefined) {
@@ -292,14 +290,7 @@ export async function enrichNotifications(
         }
       }
 
-      const details = await handler.enrich(notification, settings, fragment);
-      return {
-        ...notification,
-        subject: {
-          ...notification.subject,
-          ...details,
-        },
-      };
+      return enrichNotification(notification, settings, fragment);
     }),
   );
   return enrichedNotifications;
@@ -315,12 +306,17 @@ export async function enrichNotifications(
 export async function enrichNotification(
   notification: GitifyNotification,
   settings: SettingsState,
+  fetchedData?: unknown,
 ): Promise<GitifyNotification> {
   let additionalSubjectDetails: Partial<GitifySubject> = {};
 
   try {
     const handler = createNotificationHandler(notification);
-    additionalSubjectDetails = await handler.enrich(notification, settings);
+    additionalSubjectDetails = await handler.enrich(
+      notification,
+      settings,
+      fetchedData,
+    );
   } catch (err) {
     rendererLogError(
       'enrichNotification',
