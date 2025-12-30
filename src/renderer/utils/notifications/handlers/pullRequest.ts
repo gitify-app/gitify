@@ -22,22 +22,15 @@ import { fetchPullByNumber } from '../../api/client';
 import {
   type PullRequestDetailsFragment,
   PullRequestDetailsFragmentDoc,
-  PullRequestMergeQueryFragmentDoc,
   type PullRequestReviewFieldsFragment,
 } from '../../api/graphql/generated/graphql';
 import { DefaultHandler, defaultHandler } from './default';
-import type { GraphQLMergedQueryConfig } from './types';
 import { getNotificationAuthor } from './utils';
 
 class PullRequestHandler extends DefaultHandler {
   readonly type = 'PullRequest' as const;
 
-  mergeQueryConfig() {
-    return {
-      queryFragment: PullRequestMergeQueryFragmentDoc,
-      responseFragment: PullRequestDetailsFragmentDoc,
-    } as GraphQLMergedQueryConfig;
-  }
+  readonly mergeQueryNodeResponseType = PullRequestDetailsFragmentDoc;
 
   async enrich(
     notification: GitifyNotification,
@@ -46,7 +39,7 @@ class PullRequestHandler extends DefaultHandler {
   ): Promise<Partial<GitifySubject>> {
     const pr =
       fetchedData ??
-      (await fetchPullByNumber(notification)).data.nodeINDEX?.pullRequest;
+      (await fetchPullByNumber(notification)).data.repository?.pullRequest;
 
     let prState: GitifyPullRequestState = pr.state;
     if (pr.isDraft) {

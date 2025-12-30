@@ -17,7 +17,6 @@ import {
 import {
   type DiscussionDetailsFragment,
   DiscussionDetailsFragmentDoc,
-  DiscussionMergeQueryFragmentDoc,
   type DiscussionStateReason,
 } from '../../api/graphql/generated/graphql';
 import { discussionHandler } from './discussion';
@@ -28,12 +27,11 @@ const mockReplier = createMockGraphQLAuthor('discussion-replier');
 
 describe('renderer/utils/notifications/handlers/discussion.ts', () => {
   describe('mergeQueryConfig', () => {
-    it('should return the correct query and response fragments', () => {
-      const config = discussionHandler.mergeQueryConfig();
+    it('should return the correct query merge type response fragments', () => {
+      const mergeType = discussionHandler.mergeQueryNodeResponseType;
 
-      expect(config).toBeDefined();
-      expect(config.queryFragment).toBe(DiscussionMergeQueryFragmentDoc);
-      expect(config.responseFragment).toBe(DiscussionDetailsFragmentDoc);
+      expect(mergeType).toBeDefined();
+      expect(mergeType).toBe(DiscussionDetailsFragmentDoc);
     });
   });
 
@@ -59,7 +57,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         .post('/graphql')
         .reply(200, {
           data: {
-            nodeINDEX: {
+            repository: {
               discussion: mockDiscussion,
             },
           },
@@ -93,7 +91,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         .post('/graphql')
         .reply(200, {
           data: {
-            nodeINDEX: {
+            repository: {
               discussion: mockDiscussion,
             },
           },
@@ -130,7 +128,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         .post('/graphql')
         .reply(200, {
           data: {
-            nodeINDEX: {
+            repository: {
               discussion: mockDiscussion,
             },
           },
@@ -171,7 +169,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         .post('/graphql')
         .reply(200, {
           data: {
-            nodeINDEX: {
+            repository: {
               discussion: mockDiscussion,
             },
           },
@@ -219,7 +217,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         .post('/graphql')
         .reply(200, {
           data: {
-            nodeINDEX: {
+            repository: {
               discussion: mockDiscussion,
             },
           },
@@ -273,7 +271,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         .post('/graphql')
         .reply(200, {
           data: {
-            nodeINDEX: {
+            repository: {
               discussion: mockDiscussion,
             },
           },

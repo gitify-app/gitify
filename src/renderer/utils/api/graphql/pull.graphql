@@ -1,20 +1,16 @@
 #import './common.graphql'
 
 query FetchPullRequestByNumber(
-  $ownerINDEX: String!
-  $nameINDEX: String!
-  $numberINDEX: Int!
+  $owner: String!
+  $name: String!
+  $number: Int!
   $firstLabels: Int
   $lastComments: Int
   $lastReviews: Int
   $firstClosingIssues: Int
 ) {
-  ...PullRequestMergeQuery
-}
-
-fragment PullRequestMergeQuery on Query {
-  nodeINDEX: repository(owner: $ownerINDEX, name: $nameINDEX) {
-    pullRequest(number: $numberINDEX) {
+  repository(owner: $owner, name: $name) {
+    pullRequest(number: $number) {
       ...PullRequestDetails
     }
   }

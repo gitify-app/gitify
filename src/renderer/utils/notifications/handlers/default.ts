@@ -11,15 +11,14 @@ import {
   type SettingsState,
   type SubjectType,
 } from '../../../types';
+import type { TypedDocumentString } from '../../api/graphql/generated/graphql';
 import type { NotificationTypeHandler } from './types';
 import { formatForDisplay } from './utils';
 
 export class DefaultHandler implements NotificationTypeHandler {
   type?: SubjectType;
 
-  mergeQueryConfig() {
-    return undefined;
-  }
+  mergeQueryNodeResponseType?: TypedDocumentString<unknown, unknown>;
 
   async enrich(
     _notification: GitifyNotification,

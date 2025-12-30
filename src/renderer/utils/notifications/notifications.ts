@@ -10,14 +10,10 @@ import {
   listNotificationsForAuthenticatedUser,
 } from '../api/client';
 import { determineFailureType } from '../api/errors';
-import {
-  BatchMergedDetailsQueryFragmentDoc,
-  type TypedDocumentString,
-} from '../api/graphql/generated/graphql';
+import { BatchMergedDetailsQueryFragmentDoc } from '../api/graphql/generated/graphql';
 import {
   aliasRootAndKeyVariables,
   composeMergedQuery,
-  extractFragments,
   getQueryFragmentBody,
 } from '../api/graphql/utils';
 import { transformNotification } from '../api/transform';
@@ -154,19 +150,10 @@ export async function enrichNotifications(
     handler: ReturnType<typeof createNotificationHandler>;
   }> = [];
 
-  const collectFragments = (doc: TypedDocumentString<unknown, unknown>) => {
-    const found = extractFragments(doc);
-    for (const [name, frag] of found.entries()) {
-      if (!fragments.has(name)) {
-        fragments.set(name, frag);
-      }
-    }
-  };
-
   let index = 0;
   for (const notification of notifications) {
     const handler = createNotificationHandler(notification);
-    const config = handler.mergeQueryConfig();
+    const config = handler.mergeQueryNodeResponseType;
 
     if (!config) {
       continue;
@@ -208,7 +195,6 @@ export async function enrichNotifications(
 
     targets.push({ alias, notification, handler });
 
-    collectFragments(config.responseFragment);
     index += 1;
   }
 

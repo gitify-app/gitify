@@ -24,21 +24,14 @@ import {
   type DiscussionCommentFieldsFragment,
   type DiscussionDetailsFragment,
   DiscussionDetailsFragmentDoc,
-  DiscussionMergeQueryFragmentDoc,
 } from '../../api/graphql/generated/graphql';
 import { DefaultHandler, defaultHandler } from './default';
-import type { GraphQLMergedQueryConfig } from './types';
 import { getNotificationAuthor } from './utils';
 
 class DiscussionHandler extends DefaultHandler {
   readonly type = 'Discussion';
 
-  mergeQueryConfig() {
-    return {
-      queryFragment: DiscussionMergeQueryFragmentDoc,
-      responseFragment: DiscussionDetailsFragmentDoc,
-    } as GraphQLMergedQueryConfig;
-  }
+  readonly mergeQueryNodeResponseType = DiscussionDetailsFragmentDoc;
 
   async enrich(
     notification: GitifyNotification,
@@ -52,7 +45,7 @@ class DiscussionHandler extends DefaultHandler {
 
     const discussion =
       fetchedData ??
-      (await fetchDiscussionByNumber(notification)).data.nodeINDEX?.discussion;
+      (await fetchDiscussionByNumber(notification)).data.repository?.discussion;
 
     let discussionState: GitifyDiscussionState = 'OPEN';
 

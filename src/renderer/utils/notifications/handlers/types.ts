@@ -11,15 +11,10 @@ import type {
 } from '../../../types';
 import type { TypedDocumentString } from '../../api/graphql/generated/graphql';
 
-export type GraphQLMergedQueryConfig = {
-  queryFragment: TypedDocumentString<unknown, unknown>;
-  responseFragment: TypedDocumentString<unknown, unknown>;
-};
-
 export interface NotificationTypeHandler<TFragment = unknown> {
   readonly type?: SubjectType;
 
-  mergeQueryConfig(): GraphQLMergedQueryConfig;
+  readonly mergeQueryNodeResponseType?: TypedDocumentString<unknown, unknown>;
 
   /**
    * Enriches a base notification with additional information (state, author, metrics, etc).

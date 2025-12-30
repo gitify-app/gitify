@@ -17,7 +17,6 @@ import {
 import {
   type IssueDetailsFragment,
   IssueDetailsFragmentDoc,
-  IssueMergeQueryFragmentDoc,
   type IssueState,
   type IssueStateReason,
 } from '../../api/graphql/generated/graphql';
@@ -29,11 +28,10 @@ const mockCommenter = createMockGraphQLAuthor('issue-commenter');
 describe('renderer/utils/notifications/handlers/issue.ts', () => {
   describe('mergeQueryConfig', () => {
     it('should return the correct query and response fragments', () => {
-      const config = issueHandler.mergeQueryConfig();
+      const mergeType = issueHandler.mergeQueryNodeResponseType;
 
-      expect(config).toBeDefined();
-      expect(config.queryFragment).toBe(IssueMergeQueryFragmentDoc);
-      expect(config.responseFragment).toBe(IssueDetailsFragmentDoc);
+      expect(mergeType).toBeDefined();
+      expect(mergeType).toBe(IssueDetailsFragmentDoc);
     });
   });
 
@@ -63,7 +61,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         .post('/graphql')
         .reply(200, {
           data: {
-            nodeINDEX: {
+            repository: {
               issue: mockIssue,
             },
           },
@@ -97,7 +95,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         .post('/graphql')
         .reply(200, {
           data: {
-            nodeINDEX: {
+            repository: {
               issue: mockIssue,
             },
           },
@@ -139,7 +137,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         .post('/graphql')
         .reply(200, {
           data: {
-            nodeINDEX: {
+            repository: {
               issue: mockIssue,
             },
           },
@@ -176,7 +174,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         .post('/graphql')
         .reply(200, {
           data: {
-            nodeINDEX: {
+            repository: {
               issue: mockIssue,
             },
           },
@@ -213,7 +211,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         .post('/graphql')
         .reply(200, {
           data: {
-            nodeINDEX: {
+            repository: {
               issue: mockIssue,
             },
           },

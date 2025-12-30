@@ -20,21 +20,14 @@ import { fetchIssueByNumber } from '../../api/client';
 import {
   type IssueDetailsFragment,
   IssueDetailsFragmentDoc,
-  IssueMergeQueryFragmentDoc,
 } from '../../api/graphql/generated/graphql';
 import { DefaultHandler, defaultHandler } from './default';
-import type { GraphQLMergedQueryConfig } from './types';
 import { getNotificationAuthor } from './utils';
 
 class IssueHandler extends DefaultHandler {
   readonly type = 'Issue';
 
-  mergeQueryConfig() {
-    return {
-      queryFragment: IssueMergeQueryFragmentDoc,
-      responseFragment: IssueDetailsFragmentDoc,
-    } as GraphQLMergedQueryConfig;
-  }
+  readonly mergeQueryNodeResponseType = IssueDetailsFragmentDoc;
 
   async enrich(
     notification: GitifyNotification,
@@ -43,7 +36,7 @@ class IssueHandler extends DefaultHandler {
   ): Promise<Partial<GitifySubject>> {
     const issue =
       fetchedData ??
-      (await fetchIssueByNumber(notification)).data.nodeINDEX?.issue;
+      (await fetchIssueByNumber(notification)).data.repository?.issue;
 
     const issueState = issue.stateReason ?? issue.state;
 

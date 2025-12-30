@@ -1,10 +1,12 @@
 query FetchBatch(
+  # Arguments that will be per notification item
   $ownerINDEX: String!
   $nameINDEX: String!
   $numberINDEX: Int!
   $isDiscussionNotificationINDEX: Boolean!
   $isIssueNotificationINDEX: Boolean!
   $isPullRequestNotificationINDEX: Boolean!
+  # Stable arguments for the merged query as a whole
   $lastComments: Int
   $lastThreadedComments: Int
   $lastReplies: Int

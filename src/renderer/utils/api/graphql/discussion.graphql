@@ -9,11 +9,7 @@ query FetchDiscussionByNumber(
   $firstLabels: Int
   $includeIsAnswered: Boolean!
 ) {
-  ...DiscussionMergeQuery
-}
-
-fragment DiscussionMergeQuery on Query {
-  nodeINDEX: repository(owner: $owner, name: $name) {
+  repository(owner: $owner, name: $name) {
     discussion(number: $number) {
       ...DiscussionDetails
     }

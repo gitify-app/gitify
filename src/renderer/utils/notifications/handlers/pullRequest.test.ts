@@ -17,7 +17,6 @@ import {
 import {
   type PullRequestDetailsFragment,
   PullRequestDetailsFragmentDoc,
-  PullRequestMergeQueryFragmentDoc,
   type PullRequestReviewState,
   type PullRequestState,
 } from '../../api/graphql/generated/graphql';
@@ -41,11 +40,10 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
 
   describe('mergeQueryConfig', () => {
     it('should return the correct query and response fragments', () => {
-      const config = pullRequestHandler.mergeQueryConfig();
+      const mergeType = pullRequestHandler.mergeQueryNodeResponseType;
 
-      expect(config).toBeDefined();
-      expect(config.queryFragment).toBe(PullRequestMergeQueryFragmentDoc);
-      expect(config.responseFragment).toBe(PullRequestDetailsFragmentDoc);
+      expect(mergeType).toBeDefined();
+      expect(mergeType).toBe(PullRequestDetailsFragmentDoc);
     });
   });
 
@@ -63,7 +61,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         .post('/graphql')
         .reply(200, {
           data: {
-            nodeINDEX: {
+            repository: {
               pullRequest: mockPullRequest,
             },
           },
@@ -102,7 +100,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         .post('/graphql')
         .reply(200, {
           data: {
-            nodeINDEX: {
+            repository: {
               pullRequest: mockPullRequest,
             },
           },
@@ -141,7 +139,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         .post('/graphql')
         .reply(200, {
           data: {
-            nodeINDEX: {
+            repository: {
               pullRequest: mockPullRequest,
             },
           },
@@ -180,7 +178,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         .post('/graphql')
         .reply(200, {
           data: {
-            nodeINDEX: {
+            repository: {
               pullRequest: mockPullRequest,
             },
           },
@@ -227,7 +225,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         .post('/graphql')
         .reply(200, {
           data: {
-            nodeINDEX: {
+            repository: {
               pullRequest: mockPullRequest,
             },
           },
@@ -273,7 +271,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         .post('/graphql')
         .reply(200, {
           data: {
-            nodeINDEX: {
+            repository: {
               pullRequest: mockPullRequest,
             },
           },
@@ -318,7 +316,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         .post('/graphql')
         .reply(200, {
           data: {
-            nodeINDEX: {
+            repository: {
               pullRequest: mockPullRequest,
             },
           },
@@ -360,7 +358,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         .post('/graphql')
         .reply(200, {
           data: {
-            nodeINDEX: {
+            repository: {
               pullRequest: mockPullRequest,
             },
           },
