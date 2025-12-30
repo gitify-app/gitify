@@ -135,7 +135,10 @@ export function ignoreNotificationThreadSubscription(
  *
  * Endpoint documentation: https://docs.github.com/en/rest/commits/commits#get-a-commit
  */
-export function getCommit(url: Link, token: Token): Promise<AxiosResponse<RawCommit>> {
+export function getCommit(
+  url: Link,
+  token: Token,
+): Promise<AxiosResponse<RawCommit>> {
   return apiRequestAuth(url, 'GET', token);
 }
 
@@ -157,7 +160,10 @@ export function getCommitComment(
  *
  * Endpoint documentation: https://docs.github.com/en/rest/releases/releases#get-a-release
  */
-export function getRelease(url: Link, token: Token): Promise<AxiosResponse<RawRelease>> {
+export function getRelease(
+  url: Link,
+  token: Token,
+): Promise<AxiosResponse<RawRelease>> {
   return apiRequestAuth(url, 'GET', token);
 }
 
