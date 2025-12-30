@@ -1,4 +1,4 @@
-import type { ClientID, ClientSecret, Hostname, Link } from './types';
+import type { Hostname, Link } from './types';
 
 export const Constants = {
   STORAGE_KEY: 'gitify-storage',
@@ -9,11 +9,10 @@ export const Constants = {
     ALTERNATE: ['read:user', 'notifications', 'public_repo'],
   },
 
-  DEFAULT_AUTH_OPTIONS: {
-    hostname: 'github.com' as Hostname,
-    clientId: process.env.OAUTH_CLIENT_ID as ClientID,
-    clientSecret: process.env.OAUTH_CLIENT_SECRET as ClientSecret,
-  },
+  // Default hostname for GitHub.com
+  // Note: OAuth credentials are passed at runtime via LoginWithOAuthApp
+  // and securely exchanged via the Rust backend
+  DEFAULT_HOSTNAME: 'github.com' as Hostname,
 
   GITHUB_API_BASE_URL: 'https://api.github.com',
   GITHUB_API_GRAPHQL_URL: 'https://api.github.com/graphql',

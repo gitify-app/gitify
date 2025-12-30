@@ -408,8 +408,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
   const loginWithGitHubApp = useCallback(async () => {
     const { authCode } = await authGitHub();
-    const { token } = await getToken(authCode);
-    const hostname = Constants.DEFAULT_AUTH_OPTIONS.hostname;
+    const { token, hostname } = await getToken(authCode);
 
     const updatedAuth = await addAccount(auth, 'GitHub App', token, hostname);
 

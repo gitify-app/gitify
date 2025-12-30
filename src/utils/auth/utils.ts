@@ -14,19 +14,49 @@ import type {
   Token,
 } from '../../types';
 import { fetchAuthenticatedUserDetails } from '../api/client';
-import { apiRequest } from '../api/request';
-import { encryptValue, openExternalLink } from '../comms';
+import {
+  encryptValue,
+  exchangeGitHubAppCode,
+  exchangeOAuthCode,
+  getGitHubAppClientId,
+  openExternalLink,
+} from '../comms';
 import { getPlatformFromHostname } from '../helpers';
 import { rendererLogError, rendererLogInfo, rendererLogWarn } from '../logger';
-import type { AuthMethod, AuthResponse, AuthTokenResponse } from './types';
+import type {
+  AuthMethod,
+  AuthResponse,
+  AuthTokenResponse,
+  LoginOAuthAppOptions,
+} from './types';
 
-export function authGitHub(
-  authOptions = Constants.DEFAULT_AUTH_OPTIONS,
+/**
+ * Initiate GitHub OAuth authentication flow.
+ *
+ * For GitHub App (default): Uses credentials embedded in the Rust backend.
+ * For OAuth App: Uses user-provided credentials.
+ *
+ * @param authOptions - Optional OAuth app options for custom OAuth apps
+ */
+export async function authGitHub(
+  authOptions?: LoginOAuthAppOptions,
 ): Promise<AuthResponse> {
+  // Determine if using default GitHub App or custom OAuth App
+  const isGitHubApp = !authOptions;
+
+  // Get the client ID for the authorization URL
+  const clientId = isGitHubApp
+    ? await getGitHubAppClientId()
+    : authOptions.clientId;
+
+  const hostname = isGitHubApp
+    ? Constants.DEFAULT_HOSTNAME
+    : authOptions.hostname;
+
   return new Promise((resolve, reject) => {
-    const authUrl = new URL(`https://${authOptions.hostname}`);
+    const authUrl = new URL(`https://${hostname}`);
     authUrl.pathname = '/login/oauth/authorize';
-    authUrl.searchParams.append('client_id', authOptions.clientId);
+    authUrl.searchParams.append('client_id', clientId);
     authUrl.searchParams.append(
       'scope',
       Constants.OAUTH_SCOPES.RECOMMENDED.toString(),
@@ -50,7 +80,11 @@ export function authGitHub(
         resolve({
           authMethod: authMethod,
           authCode: code as AuthCode,
-          authOptions: authOptions,
+          authOptions: authOptions ?? {
+            hostname: Constants.DEFAULT_HOSTNAME,
+            clientId: clientId as ClientID,
+            clientSecret: '' as never, // Not needed for GitHub App flow
+          },
         });
       } else if (error) {
         reject(
@@ -84,22 +118,42 @@ export function authGitHub(
   });
 }
 
+/**
+ * Exchange an authorization code for an access token.
+ *
+ * For GitHub App: Uses the secure backend exchange with embedded credentials.
+ * For OAuth App: Uses user-provided credentials via secure backend exchange.
+ *
+ * @param authCode - The authorization code from the OAuth callback
+ * @param authOptions - Optional OAuth app options for custom OAuth apps
+ */
 export async function getToken(
   authCode: AuthCode,
-  authOptions = Constants.DEFAULT_AUTH_OPTIONS,
+  authOptions?: LoginOAuthAppOptions,
 ): Promise<AuthTokenResponse> {
-  const url =
-    `https://${authOptions.hostname}/login/oauth/access_token` as Link;
-  const data = {
-    client_id: authOptions.clientId,
-    client_secret: authOptions.clientSecret,
-    code: authCode,
-  };
+  // Determine if using default GitHub App or custom OAuth App
+  const isGitHubApp = !authOptions || !authOptions.clientSecret;
 
-  const response = await apiRequest(url, 'POST', data);
+  let token: string;
+
+  if (isGitHubApp) {
+    // Use the GitHub App flow with embedded credentials
+    token = await exchangeGitHubAppCode(authCode);
+  } else {
+    // Use the OAuth App flow with user-provided credentials
+    token = await exchangeOAuthCode(
+      authOptions.hostname,
+      authOptions.clientId,
+      authOptions.clientSecret,
+      authCode,
+    );
+  }
+
+  const hostname = authOptions?.hostname ?? Constants.DEFAULT_HOSTNAME;
+
   return {
-    hostname: authOptions.hostname,
-    token: response?.data?.access_token,
+    hostname,
+    token: token as Token,
   };
 }
 

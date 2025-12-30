@@ -28,6 +28,16 @@ const UPDATE_CHECK_INTERVAL_SECS: u64 = 24 * 60 * 60;
 /// Duration to display "no updates available" message: 60 seconds
 const NO_UPDATE_DISPLAY_SECS: u64 = 60;
 
+/// Downloaded update data including bytes and metadata
+pub(crate) struct DownloadedUpdate {
+    /// The downloaded update bytes
+    pub(crate) bytes: Vec<u8>,
+    /// The version of the downloaded update
+    pub(crate) version: String,
+    /// The current version before update
+    pub(crate) current_version: String,
+}
+
 /// State for the updater
 pub struct UpdaterState {
     /// Whether the updater has been started
@@ -38,8 +48,8 @@ pub struct UpdaterState {
     update_downloaded: AtomicBool,
     /// Whether we're currently checking for updates
     checking: AtomicBool,
-    /// Cached update bytes for installation
-    update_bytes: Mutex<Option<Vec<u8>>>,
+    /// Cached downloaded update for installation
+    downloaded_update: Mutex<Option<DownloadedUpdate>>,
 }
 
 impl UpdaterState {
@@ -49,7 +59,7 @@ impl UpdaterState {
             update_available: AtomicBool::new(false),
             update_downloaded: AtomicBool::new(false),
             checking: AtomicBool::new(false),
-            update_bytes: Mutex::new(None),
+            downloaded_update: Mutex::new(None),
         }
     }
 
@@ -86,13 +96,17 @@ impl UpdaterState {
         self.checking.store(value, Ordering::SeqCst);
     }
 
-    pub fn store_update_bytes(&self, bytes: Vec<u8>) {
-        let mut guard = self.update_bytes.lock().unwrap();
-        *guard = Some(bytes);
+    pub fn store_downloaded_update(&self, bytes: Vec<u8>, version: String, current_version: String) {
+        let mut guard = self.downloaded_update.lock().unwrap_or_else(|e| e.into_inner());
+        *guard = Some(DownloadedUpdate {
+            bytes,
+            version,
+            current_version,
+        });
     }
 
-    pub fn take_update_bytes(&self) -> Option<Vec<u8>> {
-        let mut guard = self.update_bytes.lock().unwrap();
+    pub fn take_downloaded_update(&self) -> Option<DownloadedUpdate> {
+        let mut guard = self.downloaded_update.lock().unwrap_or_else(|e| e.into_inner());
         guard.take()
     }
 }
@@ -260,8 +274,8 @@ async fn do_update_check<R: Runtime>(app: &AppHandle<R>, manual: bool) -> Result
             if manual {
                 let app_handle = app.clone();
                 tauri::async_runtime::spawn(async move {
-                    // Use a simple sleep with futures-timer or std::thread
-                    std::thread::sleep(Duration::from_secs(NO_UPDATE_DISPLAY_SECS));
+                    // Use tokio sleep to avoid blocking the async runtime
+                    tokio::time::sleep(Duration::from_secs(NO_UPDATE_DISPLAY_SECS)).await;
                     let _ = app_handle.emit("updater:menu-state", "idle");
                 });
             } else {
@@ -283,6 +297,7 @@ async fn download_update<R: Runtime>(
     let state = app.state::<UpdaterState>();
     let app_for_progress = app.clone();
     let version = update.version.clone();
+    let current_version = update.current_version.clone();
 
     // Download with progress reporting
     let bytes = update
@@ -312,8 +327,9 @@ async fn download_update<R: Runtime>(
 
     log::info!("Update downloaded ({} bytes), ready to install", bytes.len());
 
-    // Store the bytes for later installation
-    state.store_update_bytes(bytes);
+    // Store the bytes and version info for later installation
+    // This avoids the race condition of re-checking for updates during install
+    state.store_downloaded_update(bytes, version.clone(), current_version);
     state.set_update_downloaded(true);
 
     // Emit downloaded event
@@ -349,22 +365,40 @@ pub async fn install_update<R: Runtime>(app: AppHandle<R>) -> Result<(), String>
         return Err("No update has been downloaded".to_string());
     }
 
-    // Get the stored update bytes
-    let bytes = state.take_update_bytes()
-        .ok_or_else(|| "Update bytes not found".to_string())?;
+    // Get the stored downloaded update (includes bytes and version info)
+    let downloaded = state.take_downloaded_update()
+        .ok_or_else(|| "Downloaded update not found".to_string())?;
 
-    // Get the updater and check for the update again to get the Update object
+    log::info!(
+        "Installing update {} (current: {})",
+        downloaded.version,
+        downloaded.current_version
+    );
+
+    // Get the updater to access the install method
+    // We need to check again to get the Update object, but we use the stored bytes
+    // to avoid race conditions where a newer version could be released between
+    // download and install
     let updater = app.updater().map_err(|e| format!("Failed to get updater: {}", e))?;
 
     let update = updater
         .check()
         .await
-        .map_err(|e| format!("Failed to check for updates: {}", e))?
-        .ok_or_else(|| "No update available".to_string())?;
+        .map_err(|e| format!("Failed to get updater for install: {}", e))?
+        .ok_or_else(|| "No update available for installation".to_string())?;
 
-    // Install the update using the stored bytes
+    // Verify the update version matches what we downloaded
+    if update.version != downloaded.version {
+        log::warn!(
+            "Update version mismatch: downloaded {} but found {}. Proceeding with downloaded version.",
+            downloaded.version,
+            update.version
+        );
+    }
+
+    // Install the update using the stored bytes (not re-downloading)
     update
-        .install(&bytes)
+        .install(&downloaded.bytes)
         .map_err(|e| format!("Failed to install update: {}", e))?;
 
     // The install() call will restart the app, but if it doesn't, restart manually

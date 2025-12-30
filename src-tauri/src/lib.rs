@@ -157,7 +157,7 @@ fn setup_tray(app: &mut App) -> Result<(), Box<dyn std::error::Error>> {
                         // Debounce clicks - ignore if less than 200ms since last click
                         let debounce = app.state::<ClickDebounce>();
                         let should_process = {
-                            let mut last = debounce.last_click.lock().unwrap();
+                            let mut last = debounce.last_click.lock().unwrap_or_else(|e| e.into_inner());
                             let now = Instant::now();
 
                             let should_process = match *last {
@@ -306,6 +306,9 @@ pub fn run() {
             commands::auth::decrypt_token,
             commands::auth::delete_token,
             commands::auth::handle_auth_callback,
+            commands::auth::exchange_oauth_code,
+            commands::auth::exchange_github_app_code,
+            commands::auth::get_github_app_client_id,
             // App commands
             commands::app::show_window,
             commands::app::hide_window,
@@ -362,33 +365,40 @@ pub fn run() {
             if let Some(window) = app.get_webview_window("main") {
                 use objc2_app_kit::{NSColor, NSWindow, NSWindowStyleMask};
 
+                // SAFETY: We verify the pointer is non-null before dereferencing.
+                // The ns_window() method returns a valid NSWindow pointer when the
+                // window exists (which we've verified via get_webview_window).
                 unsafe {
-                    let ns_window: *mut NSWindow = window.ns_window().unwrap() as _;
+                    let ns_window_ptr = window.ns_window();
+                    if let Ok(ptr) = ns_window_ptr {
+                        let ns_window = ptr as *mut NSWindow;
+                        if !ns_window.is_null() {
+                            // Make window background transparent
+                            (*ns_window).setOpaque(false);
+                            (*ns_window).setBackgroundColor(Some(&NSColor::clearColor()));
 
-                    // Make window background transparent
-                    (*ns_window).setOpaque(false);
-                    (*ns_window).setBackgroundColor(Some(&NSColor::clearColor()));
+                            // Set style mask to support rounded corners
+                            let mut style_mask = (*ns_window).styleMask();
+                            style_mask |= NSWindowStyleMask::FullSizeContentView;
+                            style_mask |= NSWindowStyleMask::UnifiedTitleAndToolbar;
+                            (*ns_window).setStyleMask(style_mask);
 
-                    // Set style mask to support rounded corners
-                    let mut style_mask = (*ns_window).styleMask();
-                    style_mask |= NSWindowStyleMask::FullSizeContentView;
-                    style_mask |= NSWindowStyleMask::UnifiedTitleAndToolbar;
-                    (*ns_window).setStyleMask(style_mask);
+                            // Make titlebar transparent
+                            (*ns_window).setTitlebarAppearsTransparent(true);
 
-                    // Make titlebar transparent
-                    (*ns_window).setTitlebarAppearsTransparent(true);
+                            // Set corner radius on content view layer
+                            if let Some(content_view) = (*ns_window).contentView() {
+                                content_view.setWantsLayer(true);
+                                if let Some(layer) = content_view.layer() {
+                                    layer.setCornerRadius(12.0);
+                                    layer.setMasksToBounds(true);
+                                }
+                            }
 
-                    // Set corner radius on content view layer
-                    if let Some(content_view) = (*ns_window).contentView() {
-                        content_view.setWantsLayer(true);
-                        if let Some(layer) = content_view.layer() {
-                            layer.setCornerRadius(12.0);
-                            layer.setMasksToBounds(true);
+                            // Enable shadow
+                            (*ns_window).setHasShadow(true);
                         }
                     }
-
-                    // Enable shadow
-                    (*ns_window).setHasShadow(true);
                 }
             }
 

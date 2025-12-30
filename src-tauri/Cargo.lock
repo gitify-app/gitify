@@ -2026,6 +2026,7 @@ dependencies = [
  "objc2-app-kit",
  "objc2-foundation",
  "objc2-quartz-core",
+ "reqwest",
  "serde",
  "serde_json",
  "tauri",
@@ -2042,6 +2043,7 @@ dependencies = [
  "tauri-plugin-single-instance",
  "tauri-plugin-store",
  "tauri-plugin-updater",
+ "tokio",
 ]
 
 [[package]]

@@ -67,6 +67,40 @@ export const api = {
   },
 
   /**
+   * Exchange OAuth authorization code for access token using user-provided credentials
+   * This is performed server-side in Rust to keep the client secret secure
+   */
+  exchangeOAuthCode: async (
+    hostname: string,
+    clientId: string,
+    clientSecret: string,
+    code: string,
+  ): Promise<string> => {
+    return await invoke<string>('exchange_oauth_code', {
+      hostname,
+      clientId,
+      clientSecret,
+      code,
+    });
+  },
+
+  /**
+   * Exchange OAuth authorization code for access token using the default GitHub App credentials
+   * The credentials are embedded in the Rust backend at build time
+   */
+  exchangeGitHubAppCode: async (code: string): Promise<string> => {
+    return await invoke<string>('exchange_github_app_code', { code });
+  },
+
+  /**
+   * Get the GitHub App client ID for constructing the authorization URL
+   * Only the client ID (which is public) is exposed - the secret remains in the backend
+   */
+  getGitHubAppClientId: async (): Promise<string> => {
+    return await invoke<string>('get_github_app_client_id');
+  },
+
+  /**
    * Set auto-launch on system startup
    */
   setAutoLaunch: async (value: boolean) => {

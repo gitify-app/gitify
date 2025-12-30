@@ -30,13 +30,6 @@ export default defineConfig(async () => ({
       ignored: ['**/src-tauri/**'],
     },
   },
-  // Define environment variables
-  define: {
-    'process.env.OAUTH_CLIENT_ID': JSON.stringify(
-      process.env.OAUTH_CLIENT_ID || '',
-    ),
-    'process.env.OAUTH_CLIENT_SECRET': JSON.stringify(
-      process.env.OAUTH_CLIENT_SECRET || '',
-    ),
-  },
+  // Note: OAuth client secrets are handled by the Rust backend
+  // to prevent exposure in the frontend bundle
 }));

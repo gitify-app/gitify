@@ -41,7 +41,7 @@ export const Sidebar: FC = () => {
 
   // We naively assume that the first account is the primary account for the purposes of our sidebar quick links
   const primaryAccountHostname =
-    auth.accounts[0]?.hostname ?? Constants.DEFAULT_AUTH_OPTIONS.hostname;
+    auth.accounts[0]?.hostname ?? Constants.DEFAULT_HOSTNAME;
 
   const toggleFilters = () => {
     if (location.pathname.startsWith('/filters')) {

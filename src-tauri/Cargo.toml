@@ -32,6 +32,8 @@ tauri-plugin-notification = "2"
 tauri-plugin-store = "2"
 tauri-plugin-deep-link = "2"
 tauri-plugin-http = { version = "2", features = ["rustls-tls"] }
+reqwest = { version = "0.12", features = ["json", "rustls-tls"], default-features = false }
+tokio = { version = "1", features = ["time"] }
 
 [target.'cfg(not(any(target_os = "android", target_os = "ios")))'.dependencies]
 tauri-plugin-autostart = "2"
@@ -40,13 +42,7 @@ tauri-plugin-positioner = { version = "2", features = ["tray-icon"] }
 tauri-plugin-single-instance = "2"
 tauri-plugin-updater = "2"
 
-[target.x86_64-apple-darwin.dependencies]
-cocoa = "0.26.1"
-objc2-app-kit = "0.3.2"
-objc2-foundation = "0.3.2"
-objc2-quartz-core = "0.3.2"
-
-[target.aarch64-apple-darwin.dependencies]
+[target.'cfg(target_os = "macos")'.dependencies]
 cocoa = "0.26.1"
 objc2-app-kit = "0.3.2"
 objc2-foundation = "0.3.2"

@@ -46,6 +46,56 @@ export async function decryptValue(value: string): Promise<string> {
   return value;
 }
 
+/**
+ * Exchange OAuth authorization code for access token using user-provided credentials.
+ * In Tauri mode, this is performed server-side to keep the client secret secure.
+ * In browser mode, falls back with an error.
+ */
+export async function exchangeOAuthCode(
+  hostname: string,
+  clientId: string,
+  clientSecret: string,
+  code: string,
+): Promise<string> {
+  if (isTauriEnvironment()) {
+    return await window.gitify.exchangeOAuthCode(
+      hostname,
+      clientId,
+      clientSecret,
+      code,
+    );
+  }
+  throw new Error(
+    'OAuth token exchange is not available in browser mode. Please run the app with Tauri.',
+  );
+}
+
+/**
+ * Exchange OAuth authorization code for access token using default GitHub App credentials.
+ * The credentials are embedded in the Rust backend at build time.
+ */
+export async function exchangeGitHubAppCode(code: string): Promise<string> {
+  if (isTauriEnvironment()) {
+    return await window.gitify.exchangeGitHubAppCode(code);
+  }
+  throw new Error(
+    'GitHub App token exchange is not available in browser mode. Please run the app with Tauri.',
+  );
+}
+
+/**
+ * Get the GitHub App client ID for constructing the authorization URL.
+ * Only the client ID (which is public) is exposed.
+ */
+export async function getGitHubAppClientId(): Promise<string> {
+  if (isTauriEnvironment()) {
+    return await window.gitify.getGitHubAppClientId();
+  }
+  throw new Error(
+    'GitHub App client ID is not available in browser mode. Please run the app with Tauri.',
+  );
+}
+
 export function quitApp(): void {
   if (isTauriEnvironment()) {
     window.gitify.app.quit();

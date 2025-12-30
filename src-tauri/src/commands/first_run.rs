@@ -345,6 +345,8 @@ pub async fn prompt_move_to_applications(app: AppHandle) -> Result<bool, String>
             .blocking_show();
 
         // Mark first run complete regardless of user choice
+        // Clone app handle before consuming it so we can use it for exit
+        let app_for_exit = app.clone();
         mark_first_run_complete(app)?;
 
         if confirmed {
@@ -352,7 +354,9 @@ pub async fn prompt_move_to_applications(app: AppHandle) -> Result<bool, String>
                 Ok(true) => {
                     // App was moved, we should quit this instance
                     // The new instance will be launched by the move function
-                    std::process::exit(0);
+                    // Use Tauri's exit method for proper cleanup instead of std::process::exit
+                    app_for_exit.exit(0);
+                    Ok(true) // This line won't be reached but satisfies the return type
                 }
                 Ok(false) => Ok(false),
                 Err(e) => {

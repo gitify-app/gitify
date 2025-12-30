@@ -55,6 +55,9 @@ class MockIntersectionObserver {
   openExternalLink: vi.fn(),
   decryptValue: vi.fn().mockResolvedValue('decrypted'),
   encryptValue: vi.fn().mockResolvedValue('encrypted'),
+  exchangeOAuthCode: vi.fn().mockResolvedValue('mock-access-token'),
+  exchangeGitHubAppCode: vi.fn().mockResolvedValue('mock-github-app-token'),
+  getGitHubAppClientId: vi.fn().mockResolvedValue('FAKE_CLIENT_ID_123'),
   platform: {
     isLinux: vi.fn().mockReturnValue(false),
     isMacOS: vi.fn().mockReturnValue(true),
@@ -78,10 +81,6 @@ class MockIntersectionObserver {
   setKeyboardShortcut: vi.fn(),
   raiseNativeNotification: vi.fn(),
 };
-
-// Mock OAuth client ID and secret
-process.env.OAUTH_CLIENT_ID = 'FAKE_CLIENT_ID_123';
-process.env.OAUTH_CLIENT_SECRET = 'FAKE_CLIENT_SECRET_123';
 
 // Mock HTMLMediaElement.play
 globalThis.HTMLMediaElement.prototype.play = vi.fn();

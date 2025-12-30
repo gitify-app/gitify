@@ -14,6 +14,18 @@ import type {
   Hostname,
   Token,
 } from '../../types';
+
+// Tell TypeScript about the mocked window.gitify properties
+declare global {
+  interface Window {
+    gitify: {
+      exchangeGitHubAppCode: ReturnType<typeof vi.fn>;
+      exchangeOAuthCode: ReturnType<typeof vi.fn>;
+      onAuthCallback: ReturnType<typeof vi.fn>;
+      [key: string]: unknown;
+    };
+  }
+}
 import * as comms from '../../utils/comms';
 import * as apiClient from '../api/client';
 import type { FetchAuthenticatedUserDetailsQuery } from '../api/graphql/generated/graphql';
@@ -109,26 +121,33 @@ describe('renderer/utils/auth/utils.ts', () => {
 
   describe('getToken', () => {
     const authCode = '123-456' as AuthCode;
-    const apiRequestSpy = vi.spyOn(apiRequests, 'apiRequest');
 
-    it('should get a token', async () => {
-      apiRequestSpy.mockResolvedValueOnce({
-        data: { access_token: 'this-is-a-token' },
-      } as AxiosResponse);
-
+    it('should get a token using GitHub App flow', async () => {
+      // The mock in vitest.setup.ts returns 'mock-github-app-token'
       const res = await authUtils.getToken(authCode);
 
-      expect(apiRequests.apiRequest).toHaveBeenCalledWith(
-        'https://github.com/login/oauth/access_token',
-        'POST',
-        {
-          client_id: 'FAKE_CLIENT_ID_123',
-          client_secret: 'FAKE_CLIENT_SECRET_123',
-          code: '123-456',
-        },
-      );
-      expect(res.token).toBe('this-is-a-token');
+      expect(window.gitify.exchangeGitHubAppCode).toHaveBeenCalledWith(authCode);
+      expect(res.token).toBe('mock-github-app-token');
       expect(res.hostname).toBe('github.com' as Hostname);
+    });
+
+    it('should get a token using OAuth App flow with custom credentials', async () => {
+      const authOptions = {
+        hostname: 'github.gitify.io' as Hostname,
+        clientId: 'custom-client-id' as ClientID,
+        clientSecret: 'custom-client-secret' as ClientSecret,
+      };
+
+      const res = await authUtils.getToken(authCode, authOptions);
+
+      expect(window.gitify.exchangeOAuthCode).toHaveBeenCalledWith(
+        authOptions.hostname,
+        authOptions.clientId,
+        authOptions.clientSecret,
+        authCode,
+      );
+      expect(res.token).toBe('mock-access-token');
+      expect(res.hostname).toBe('github.gitify.io' as Hostname);
     });
   });
 
