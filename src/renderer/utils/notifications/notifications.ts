@@ -14,7 +14,8 @@ import { BatchMergedDetailsQueryFragmentDoc } from '../api/graphql/generated/gra
 import {
   aliasRootAndKeyVariables,
   composeMergedQuery,
-  getQueryFragmentBody,
+  extractNonQueryFragments,
+  extractQueryFragments,
 } from '../api/graphql/utils';
 import { transformNotification } from '../api/transform';
 import { getNumberFromUrl } from '../api/utils';
@@ -143,9 +144,8 @@ export async function enrichNotifications(
   const selections: string[] = [];
   const variableDefinitions: string[] = [];
   const variableValues: Record<string, string | number | boolean> = {};
-  const fragments = new Map<string, string>();
   const targets: Array<{
-    alias: string;
+    rootAlias: string;
     notification: GitifyNotification;
     handler: ReturnType<typeof createNotificationHandler>;
   }> = [];
@@ -153,16 +153,22 @@ export async function enrichNotifications(
   let index = 0;
   for (const notification of notifications) {
     const handler = createNotificationHandler(notification);
-    const config = handler.mergeQueryNodeResponseType;
+    const mergeType = handler.mergeQueryNodeResponseType;
 
-    if (!config) {
+    // Skip notification types that aren't suitable for batch merged  enrichment
+    if (!mergeType) {
       continue;
     }
 
-    // Skip notifications without a URL (can't extract number)
-    if (!notification.subject.url) {
-      continue;
-    }
+    /**
+     * To construct the graphql query, we need to
+     * 1 - extract the indexed arguments and rename them
+     * 2 - initialize the indexed argument values
+     * 3 - extract the global arguments
+     * 4 - initialize the global argument values
+     * 5 - construct the merged query using the utility helper
+     * 6 - map the response to the correct handler mergeType before parsing into handler enrich
+     **/
 
     const org = notification.repository.owner.login;
     const repo = notification.repository.name;
@@ -172,15 +178,19 @@ export async function enrichNotifications(
     const isNotificationPullRequest =
       notification.subject.type === 'PullRequest';
 
-    const alias = `node${index}`;
-    const queryFragmentBody = getQueryFragmentBody(
+    const rootAlias = `node${index}`;
+
+    const queryFragmentBody = extractQueryFragments(
       BatchMergedDetailsQueryFragmentDoc,
+    )[0].inner;
+
+    const queryFragment = aliasRootAndKeyVariables(
+      rootAlias,
+      index,
+      queryFragmentBody,
     );
-    const queryFragment = aliasRootAndKeyVariables(queryFragmentBody, index);
-    if (!queryFragment || queryFragment.trim().length === 0) {
-      continue;
-    }
     selections.push(queryFragment);
+
     variableDefinitions.push(
       `$owner${index}: String!, $name${index}: String!, $number${index}: Int!, $isDiscussionNotification${index}: Boolean!, $isIssueNotification${index}: Boolean!, $isPullRequestNotification${index}: Boolean!`,
     );
@@ -193,7 +203,7 @@ export async function enrichNotifications(
     variableValues[`isPullRequestNotification${index}`] =
       isNotificationPullRequest;
 
-    targets.push({ alias, notification, handler });
+    targets.push({ rootAlias, notification, handler });
 
     index += 1;
   }
@@ -215,13 +225,17 @@ export async function enrichNotifications(
     );
   }
 
+  const nonQueryFragments = extractNonQueryFragments(
+    BatchMergedDetailsQueryFragmentDoc,
+  );
+
   variableDefinitions.push(
     '$lastComments: Int, $lastThreadedComments: Int, $lastReplies: Int, $lastReviews: Int, $firstLabels: Int, $firstClosingIssues: Int, $includeIsAnswered: Boolean!',
   );
 
   const mergedQuery = composeMergedQuery(
     selections,
-    fragments,
+    nonQueryFragments,
     variableDefinitions,
   );
 
@@ -265,7 +279,7 @@ export async function enrichNotifications(
 
       let fragment: unknown;
       if (mergedData && target) {
-        const repoData = mergedData[target.alias] as
+        const repoData = mergedData[target.rootAlias] as
           | Record<string, unknown>
           | undefined;
         if (repoData) {

@@ -10,76 +10,68 @@ function toDocumentNode(
   return parse(doc.toString());
 }
 
-export function getQueryFragmentBody(
+export type FragmentInfo = {
+  name: string;
+  typeCondition: string;
+  printed: string;
+  inner: string;
+};
+
+/**
+ * Extract all fragments from a GraphQL document with metadata.
+ */
+export function extractAllFragments(
   doc: TypedDocumentString<unknown, unknown>,
-): string | null {
+): FragmentInfo[] {
   const ast: DocumentNode = toDocumentNode(doc);
+  const fragments: FragmentInfo[] = [];
 
   for (const def of ast.definitions) {
-    if (
-      def.kind === 'FragmentDefinition' &&
-      def.typeCondition.name.value === 'Query'
-    ) {
-      // Print just the fragment selection set body (without outer braces)
+    if (def.kind === 'FragmentDefinition') {
       const printed = print(def);
       const open = printed.indexOf('{');
       const close = printed.lastIndexOf('}');
 
-      if (open !== -1 && close !== -1 && close > open) {
-        return printed.slice(open + 1, close).trim();
-      }
+      fragments.push({
+        name: def.name.value,
+        typeCondition: def.typeCondition.name.value,
+        printed: printed,
+        inner: printed.slice(open + 1, close).trim(),
+      });
     }
   }
-  return null;
+
+  return fragments;
 }
 
-export function extractFragments(
+/**
+ * Return only `Query` fragments from a GraphQL document.
+ */
+export function extractQueryFragments(
   doc: TypedDocumentString<unknown, unknown>,
-): Map<string, string> {
-  const ast: DocumentNode = toDocumentNode(doc);
-
-  const map = new Map<string, string>();
-
-  for (const def of ast.definitions) {
-    if (def.kind === 'FragmentDefinition') {
-      const name = def.name.value;
-
-      if (!map.has(name)) {
-        map.set(name, print(def));
-      }
-    }
-  }
-
-  return map;
+): FragmentInfo[] {
+  return extractAllFragments(doc).filter((f) => f.typeCondition === 'Query');
 }
 
-export function extractFragmentsAll(
-  docs: Array<TypedDocumentString<unknown, unknown>>,
-): Map<string, string> {
-  const out = new Map<string, string>();
-
-  for (const doc of docs) {
-    const m = extractFragments(doc);
-
-    for (const [k, v] of m) {
-      if (!out.has(k)) {
-        out.set(k, v);
-      }
-    }
-  }
-
-  return out;
+/**
+ * Return all non-`Query` fragments from a GraphQL document.
+ */
+export function extractNonQueryFragments(
+  doc: TypedDocumentString<unknown, unknown>,
+): FragmentInfo[] {
+  return extractAllFragments(doc).filter((f) => f.typeCondition !== 'Query');
 }
 
 // Helper to compose a merged query given selections, fragments and variable defs
 export function composeMergedQuery(
   selections: string[],
-  fragmentMap: Map<string, string>,
+  fragments: FragmentInfo[],
   variableDefinitions: string[],
 ): string {
   const vars = variableDefinitions.join(', ');
-  const frags = Array.from(fragmentMap.values()).join('\n');
-  return `query FetchMergedNotifications(${vars}) {\n${selections.join('\n')}\n}\n\n${frags}\n`;
+  const selects = selections.join('\n');
+  const frags = fragments.map((f) => f.printed).join('\n');
+  return `query FetchMergedNotifications(${vars}) {\n${selects}\n}\n\n${frags}\n`;
 }
 
 /**
@@ -91,31 +83,54 @@ export function composeMergedQuery(
  *   nodeINDEX: repository(owner: $ownerINDEX, name: $nameINDEX) { issue(number: $numberINDEX) { ...IssueDetails } }
  */
 export function aliasRootAndKeyVariables(
+  rootAlias: string,
+  index: number,
   selectionBody: string,
-  index: number | string,
 ): string {
   const idx = String(index);
-  const alias = `node${idx}`;
 
   // Add alias to the first root field name
   const withAlias = selectionBody.replace(
     /^\s*([_A-Za-z][_A-Za-z0-9]*)/,
-    (_m, name: string) => `${alias}: ${name}`,
-  );
-
-  // First, convert key variables to INDEX placeholders so we can alias them.
-  // Keys: owner, name, number, isDiscussionNotification, isIssueNotification, isPullRequestNotification
-  const withIndexPlaceholders = withAlias.replace(
-    /\$(owner|name|number|isDiscussionNotification|isIssueNotification|isPullRequestNotification)\b/g,
-    (_m, v: string) => `$${v}INDEX`,
+    (_m, name: string) => `${rootAlias}: ${name}`,
   );
 
   // Only alias variables that explicitly end with `INDEX`.
   // Example: $ownerINDEX -> $owner0, $nameINDEX -> $name0
-  const withIndexedVars = withIndexPlaceholders.replace(
+  const withIndexedVars = withAlias.replace(
     /\$([_A-Za-z][_A-Za-z0-9]*)INDEX\b/g,
     (_m, v: string) => `$${v}${idx}`,
   );
 
   return withIndexedVars;
+}
+
+export function extractArgumentNames(selectionBody: string): Set<string> {
+  const names = new Set<string>();
+  const regex = /\$([_A-Za-z][_A-Za-z0-9]*)\b/g;
+  let match: RegExpExecArray | null = regex.exec(selectionBody);
+
+  while (match !== null) {
+    names.add(match[1]);
+    match = regex.exec(selectionBody);
+  }
+
+  return names;
+}
+
+export function filterArgumentsByIndexSuffix(
+  args: Iterable<string>,
+  indexed: boolean,
+): string[] {
+  return Array.from(args).filter((name) => name.endsWith('INDEX') === indexed);
+}
+
+export function extractIndexedArguments(selectionBody: string): string[] {
+  const all = extractArgumentNames(selectionBody);
+  return filterArgumentsByIndexSuffix(all, true);
+}
+
+export function extractNonIndexedArguments(selectionBody: string): string[] {
+  const all = extractArgumentNames(selectionBody);
+  return filterArgumentsByIndexSuffix(all, false);
 }

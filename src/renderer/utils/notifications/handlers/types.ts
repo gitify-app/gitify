@@ -11,9 +11,12 @@ import type {
 } from '../../../types';
 import type { TypedDocumentString } from '../../api/graphql/generated/graphql';
 
-export interface NotificationTypeHandler<TFragment = unknown> {
+export interface NotificationTypeHandler {
   readonly type?: SubjectType;
 
+  /**
+   * The merge query response type to expect.
+   */
   readonly mergeQueryNodeResponseType?: TypedDocumentString<unknown, unknown>;
 
   /**
@@ -26,7 +29,7 @@ export interface NotificationTypeHandler<TFragment = unknown> {
   enrich(
     notification: GitifyNotification,
     settings: SettingsState,
-    fetchedData?: TFragment,
+    fetchedData?: unknown,
   ): Promise<Partial<GitifySubject>>;
 
   /**
