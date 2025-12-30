@@ -36091,7 +36091,7 @@ export type FetchBatchQuery = { __typename?: 'Query', repository?: { __typename?
             | { __typename?: 'User', login: string }
            | null } | null> | null } | null, labels?: { __typename?: 'LabelConnection', nodes?: Array<{ __typename?: 'Label', name: string } | null> | null } | null, closingIssuesReferences?: { __typename?: 'IssueConnection', nodes?: Array<{ __typename?: 'Issue', number: number } | null> | null } | null } | null } | null };
 
-export type BatchMergedDetailsQueryFragment = { __typename?: 'Query', repository?: { __typename?: 'Repository', discussion?: { __typename: 'Discussion', number: number, title: string, stateReason?: DiscussionStateReason | null, isAnswered?: boolean | null, url: any, author?:
+export type BatchMergedDetailsQueryTemplateFragment = { __typename?: 'Query', repository?: { __typename?: 'Repository', discussion?: { __typename: 'Discussion', number: number, title: string, stateReason?: DiscussionStateReason | null, isAnswered?: boolean | null, url: any, author?:
         | { __typename?: 'Bot', login: string, htmlUrl: any, avatarUrl: any, type: 'Bot' }
         | { __typename?: 'EnterpriseUserAccount', login: string, htmlUrl: any, avatarUrl: any, type: 'EnterpriseUserAccount' }
         | { __typename?: 'Mannequin', login: string, htmlUrl: any, avatarUrl: any, type: 'Mannequin' }
@@ -36427,8 +36427,8 @@ fragment PullRequestReviewFields on PullRequestReview {
     login
   }
 }`, {"fragmentName":"PullRequestDetails"}) as unknown as TypedDocumentString<PullRequestDetailsFragment, unknown>;
-export const BatchMergedDetailsQueryFragmentDoc = new TypedDocumentString(`
-    fragment BatchMergedDetailsQuery on Query {
+export const BatchMergedDetailsQueryTemplateFragmentDoc = new TypedDocumentString(`
+    fragment BatchMergedDetailsQueryTemplate on Query {
   repository(owner: $ownerINDEX, name: $nameINDEX) {
     discussion(number: $numberINDEX) @include(if: $isDiscussionNotificationINDEX) {
       ...DiscussionDetails
@@ -36564,7 +36564,7 @@ fragment PullRequestReviewFields on PullRequestReview {
   author {
     login
   }
-}`, {"fragmentName":"BatchMergedDetailsQuery"}) as unknown as TypedDocumentString<BatchMergedDetailsQueryFragment, unknown>;
+}`, {"fragmentName":"BatchMergedDetailsQueryTemplate"}) as unknown as TypedDocumentString<BatchMergedDetailsQueryTemplateFragment, unknown>;
 export const FetchDiscussionByNumberDocument = new TypedDocumentString(`
     query FetchDiscussionByNumber($owner: String!, $name: String!, $number: Int!, $lastThreadedComments: Int, $lastReplies: Int, $firstLabels: Int, $includeIsAnswered: Boolean!) {
   repository(owner: $owner, name: $name) {
@@ -36666,7 +36666,7 @@ fragment IssueDetails on Issue {
 }`) as unknown as TypedDocumentString<FetchIssueByNumberQuery, FetchIssueByNumberQueryVariables>;
 export const FetchBatchDocument = new TypedDocumentString(`
     query FetchBatch($ownerINDEX: String!, $nameINDEX: String!, $numberINDEX: Int!, $isDiscussionNotificationINDEX: Boolean!, $isIssueNotificationINDEX: Boolean!, $isPullRequestNotificationINDEX: Boolean!, $lastComments: Int, $lastThreadedComments: Int, $lastReplies: Int, $lastReviews: Int, $firstLabels: Int, $firstClosingIssues: Int, $includeIsAnswered: Boolean!) {
-  ...BatchMergedDetailsQuery
+  ...BatchMergedDetailsQueryTemplate
 }
     fragment AuthorFields on Actor {
   login
@@ -36745,7 +36745,7 @@ fragment IssueDetails on Issue {
     }
   }
 }
-fragment BatchMergedDetailsQuery on Query {
+fragment BatchMergedDetailsQueryTemplate on Query {
   repository(owner: $ownerINDEX, name: $nameINDEX) {
     discussion(number: $numberINDEX) @include(if: $isDiscussionNotificationINDEX) {
       ...DiscussionDetails

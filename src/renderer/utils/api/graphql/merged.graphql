@@ -15,10 +15,10 @@ query FetchBatch(
   $firstClosingIssues: Int
   $includeIsAnswered: Boolean!
 ) {
-  ...BatchMergedDetailsQuery
+  ...BatchMergedDetailsQueryTemplate
 }
 
-fragment BatchMergedDetailsQuery on Query {
+fragment BatchMergedDetailsQueryTemplate on Query {
   repository(owner: $ownerINDEX, name: $nameINDEX) {
     discussion(number: $numberINDEX)
       @include(if: $isDiscussionNotificationINDEX)

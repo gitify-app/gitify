@@ -10,10 +10,10 @@ import {
   listNotificationsForAuthenticatedUser,
 } from '../api/client';
 import { determineFailureType } from '../api/errors';
-import { BatchMergedDetailsQueryFragmentDoc } from '../api/graphql/generated/graphql';
+import { BatchMergedDetailsQueryTemplateFragmentDoc } from '../api/graphql/generated/graphql';
+import { MergeQueryBuilder } from '../api/graphql/MergeQueryBuilder';
 import {
   aliasRootAndKeyVariables,
-  composeMergedQuery,
   extractNonQueryFragments,
   extractQueryFragments,
 } from '../api/graphql/utils';
@@ -141,9 +141,7 @@ export async function enrichNotifications(
     return notifications;
   }
 
-  const selections: string[] = [];
-  const variableDefinitions: string[] = [];
-  const variableValues: Record<string, string | number | boolean> = {};
+  const builder = new MergeQueryBuilder();
   const targets: Array<{
     rootAlias: string;
     notification: GitifyNotification;
@@ -181,7 +179,7 @@ export async function enrichNotifications(
     const rootAlias = `node${index}`;
 
     const queryFragmentBody = extractQueryFragments(
-      BatchMergedDetailsQueryFragmentDoc,
+      BatchMergedDetailsQueryTemplateFragmentDoc,
     )[0].inner;
 
     const queryFragment = aliasRootAndKeyVariables(
@@ -189,68 +187,50 @@ export async function enrichNotifications(
       index,
       queryFragmentBody,
     );
-    selections.push(queryFragment);
+    builder.addSelection(queryFragment);
 
-    variableDefinitions.push(
+    // TODO - Extract this from the BatchMergedDetailsQueryTemplateFragmentDoc
+    builder.addVariableDefs(
       `$owner${index}: String!, $name${index}: String!, $number${index}: Int!, $isDiscussionNotification${index}: Boolean!, $isIssueNotification${index}: Boolean!, $isPullRequestNotification${index}: Boolean!`,
     );
-    variableValues[`owner${index}`] = org;
-    variableValues[`name${index}`] = repo;
-    variableValues[`number${index}`] = number;
-    variableValues[`isDiscussionNotification${index}`] =
-      isNotificationDiscussion;
-    variableValues[`isIssueNotification${index}`] = isNotificationIssue;
-    variableValues[`isPullRequestNotification${index}`] =
-      isNotificationPullRequest;
+    builder
+      .setVar(`owner${index}`, org)
+      .setVar(`name${index}`, repo)
+      .setVar(`number${index}`, number)
+      .setVar(`isDiscussionNotification${index}`, isNotificationDiscussion)
+      .setVar(`isIssueNotification${index}`, isNotificationIssue)
+      .setVar(`isPullRequestNotification${index}`, isNotificationPullRequest);
 
     targets.push({ rootAlias, notification, handler });
 
     index += 1;
   }
 
-  if (selections.length === 0) {
-    // No handlers with mergeQueryConfig, just enrich individually
-    return Promise.all(
-      notifications.map(async (notification) => {
-        const handler = createNotificationHandler(notification);
-        const details = await handler.enrich(notification, settings);
-        return {
-          ...notification,
-          subject: {
-            ...notification.subject,
-            ...details,
-          },
-        };
-      }),
-    );
-  }
-
   const nonQueryFragments = extractNonQueryFragments(
-    BatchMergedDetailsQueryFragmentDoc,
+    BatchMergedDetailsQueryTemplateFragmentDoc,
   );
+  builder.addFragments(nonQueryFragments);
 
-  variableDefinitions.push(
+  // TODO - Extract this from the BatchMergedDetailsQueryTemplateFragmentDoc
+  builder.addVariableDefs(
     '$lastComments: Int, $lastThreadedComments: Int, $lastReplies: Int, $lastReviews: Int, $firstLabels: Int, $firstClosingIssues: Int, $includeIsAnswered: Boolean!',
   );
 
-  const mergedQuery = composeMergedQuery(
-    selections,
-    nonQueryFragments,
-    variableDefinitions,
-  );
+  const mergedQuery = builder.buildQuery();
 
-  const queryVariables = {
-    ...variableValues,
-    firstLabels: 100,
-    lastComments: 1,
-    lastThreadedComments: 10,
-    lastReplies: 10,
-    includeIsAnswered: isAnsweredDiscussionFeatureSupported(
-      notifications[0].account,
-    ),
-    firstClosingIssues: 100,
-    lastReviews: 100,
-  };
+  // TODO - consolidate static args into constants, refactor below and other graphql query variables in api/clients to be consistent
+  builder
+    .setVar('firstLabels', 100)
+    .setVar('lastComments', 1)
+    .setVar('lastThreadedComments', 10)
+    .setVar('lastReplies', 10)
+    .setVar(
+      'includeIsAnswered',
+      isAnsweredDiscussionFeatureSupported(notifications[0].account),
+    )
+    .setVar('firstClosingIssues', 100)
+    .setVar('lastReviews', 100);
+  const queryVariables = builder.getVariables();
 
   let mergedData: Record<string, unknown> | null = null;
 
@@ -274,6 +254,7 @@ export async function enrichNotifications(
     notifications.map(async (notification: GitifyNotification) => {
       const target = targets.find((item) => item.notification === notification);
 
+      // TODO - simplify the below where possible
       let fragment: unknown;
       if (mergedData && target) {
         const repoData = mergedData[target.rootAlias] as Record<
