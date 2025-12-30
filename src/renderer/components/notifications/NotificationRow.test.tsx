@@ -154,6 +154,24 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       expect(markNotificationsAsReadMock).toHaveBeenCalledTimes(1);
     });
 
+    it('should hide mark as read button when notification is already read', async () => {
+      const readNotification = {
+        ...mockSingleNotification,
+        unread: false,
+      };
+
+      const props = {
+        notification: readNotification,
+        account: mockGitHubCloudAccount,
+      };
+
+      renderWithAppContext(<NotificationRow {...props} />);
+
+      expect(
+        screen.queryByTestId('notification-mark-as-read'),
+      ).not.toBeInTheDocument();
+    });
+
     it('should mark notifications as done', async () => {
       const markNotificationsAsDoneMock = jest.fn();
 

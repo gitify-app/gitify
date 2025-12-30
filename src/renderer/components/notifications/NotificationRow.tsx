@@ -147,6 +147,7 @@ export const NotificationRow: FC<NotificationRowProps> = ({
 
           <HoverButton
             action={actionMarkAsRead}
+            enabled={!isNotificationRead}
             icon={ReadIcon}
             label="Mark as read"
             testid="notification-mark-as-read"
