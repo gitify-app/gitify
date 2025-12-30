@@ -338,12 +338,16 @@ export const NotificationSettings: FC = () => {
           tooltip={
             <Stack direction="vertical" gap="condensed">
               <Text>
-                When <Text as="u">checked</Text>, {APPLICATION.NAME} will
-                display both read and unread notifications.
+                When <Text as="u">checked</Text>, {APPLICATION.NAME} will fetch
+                and display both read and unread notifications.
               </Text>
               <Text>
                 When <Text as="u">unchecked</Text>, {APPLICATION.NAME} will only
-                display unread notifications.
+                fetch and display unread notifications.
+              </Text>
+              <Text className="text-gitify-caution">
+                ⚠️ Enabling this setting will increase API usage and may cause
+                rate limiting for users with many notifications.
               </Text>
             </Stack>
           }
