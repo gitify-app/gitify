@@ -35918,7 +35918,7 @@ export type FetchDiscussionByNumberQueryVariables = Exact<{
   owner: Scalars['String']['input'];
   name: Scalars['String']['input'];
   number: Scalars['Int']['input'];
-  lastComments?: InputMaybe<Scalars['Int']['input']>;
+  lastThreadedComments?: InputMaybe<Scalars['Int']['input']>;
   lastReplies?: InputMaybe<Scalars['Int']['input']>;
   firstLabels?: InputMaybe<Scalars['Int']['input']>;
   includeIsAnswered: Scalars['Boolean']['input'];
@@ -36335,7 +36335,7 @@ export const DiscussionDetailsFragmentDoc = new TypedDocumentString(`
   author {
     ...AuthorFields
   }
-  comments(last: $lastComments) {
+  comments(last: $lastThreadedComments) {
     totalCount
     nodes {
       ...DiscussionCommentFields
@@ -36394,7 +36394,7 @@ fragment DiscussionDetails on Discussion {
   author {
     ...AuthorFields
   }
-  comments(last: $lastComments) {
+  comments(last: $lastThreadedComments) {
     totalCount
     nodes {
       ...DiscussionCommentFields
@@ -36614,7 +36614,7 @@ fragment DiscussionDetails on Discussion {
   author {
     ...AuthorFields
   }
-  comments(last: $lastComments) {
+  comments(last: $lastThreadedComments) {
     totalCount
     nodes {
       ...DiscussionCommentFields
@@ -36784,7 +36784,7 @@ fragment PullRequestReviewFields on PullRequestReview {
   }
 }`, {"fragmentName":"PullRequestMergeQuery"}) as unknown as TypedDocumentString<PullRequestMergeQueryFragment, unknown>;
 export const FetchDiscussionByNumberDocument = new TypedDocumentString(`
-    query FetchDiscussionByNumber($owner: String!, $name: String!, $number: Int!, $lastComments: Int, $lastReplies: Int, $firstLabels: Int, $includeIsAnswered: Boolean!) {
+    query FetchDiscussionByNumber($owner: String!, $name: String!, $number: Int!, $lastThreadedComments: Int, $lastReplies: Int, $firstLabels: Int, $includeIsAnswered: Boolean!) {
   ...DiscussionMergeQuery
 }
     fragment AuthorFields on Actor {
@@ -36810,7 +36810,7 @@ fragment DiscussionDetails on Discussion {
   author {
     ...AuthorFields
   }
-  comments(last: $lastComments) {
+  comments(last: $lastThreadedComments) {
     totalCount
     nodes {
       ...DiscussionCommentFields
@@ -36912,7 +36912,7 @@ fragment DiscussionDetails on Discussion {
   author {
     ...AuthorFields
   }
-  comments(last: $lastComments) {
+  comments(last: $lastThreadedComments) {
     totalCount
     nodes {
       ...DiscussionCommentFields
