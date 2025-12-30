@@ -1,4 +1,4 @@
-import type { GitifyNotificationUser, Link, UserType } from '../../../types';
+import type { GitifyNotificationUser, UserType } from '../../../types';
 import type { AuthorFieldsFragment } from '../../api/graphql/generated/graphql';
 
 // Author type from GraphQL or manually constructed
@@ -20,16 +20,10 @@ export function getNotificationAuthor(
 
   for (const user of users) {
     if (user) {
-      // Handle both GraphQL AuthorFieldsFragment (snake_case) and GitifyNotificationUser (camelCase)
-      const htmlUrl =
-        'html_url' in user ? (user.html_url as Link) : user.htmlUrl;
-      const avatarUrl =
-        'avatar_url' in user ? (user.avatar_url as Link) : user.avatarUrl;
-
       subjectUser = {
         login: user.login,
-        htmlUrl: htmlUrl,
-        avatarUrl: avatarUrl,
+        avatarUrl: user.avatarUrl,
+        htmlUrl: user.htmlUrl,
         type: user.type as UserType,
       };
 

@@ -20,7 +20,7 @@ export function createPartialMockUser(login: string): RawUser {
   return mockUser as RawUser;
 }
 
-export function createMockNotificationUser(
+export function createMockGitifyNotificationUser(
   login: string,
 ): GitifyNotificationUser {
   return {
@@ -33,14 +33,10 @@ export function createMockNotificationUser(
 
 /**
  * Creates a mock author for use in GraphQL response mocks.
- * Uses snake_case properties to match the generated GraphQL types.
  */
 export function createMockGraphQLAuthor(login: string): AuthorFieldsFragment {
   return {
+    ...createMockGitifyNotificationUser(login),
     __typename: 'User',
-    login: login,
-    html_url: `https://github.com/${login}`,
-    avatar_url: 'https://avatars.githubusercontent.com/u/583231?v=4',
-    type: 'User',
-  };
+  } as AuthorFieldsFragment;
 }

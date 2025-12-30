@@ -209,9 +209,9 @@ export async function fetchDiscussionByNumber(
     notification.account.token,
     FetchDiscussionByNumberDocument,
     {
-      ownerINDEX: notification.repository.owner.login,
-      nameINDEX: notification.repository.name,
-      numberINDEX: number,
+      owner: notification.repository.owner.login,
+      name: notification.repository.name,
+      number: number,
       firstLabels: 100,
       lastComments: 10,
       lastReplies: 10,

@@ -1,10 +1,10 @@
 #import './common.graphql'
 
 query FetchDiscussionByNumber(
-  $ownerINDEX: String!
-  $nameINDEX: String!
-  $numberINDEX: Int!
-  $lastComments: Int
+  $owner: String!
+  $name: String!
+  $number: Int!
+  $lastThreadedComments: Int
   $lastReplies: Int
   $firstLabels: Int
   $includeIsAnswered: Boolean!
@@ -13,8 +13,8 @@ query FetchDiscussionByNumber(
 }
 
 fragment DiscussionMergeQuery on Query {
-  nodeINDEX: repository(owner: $ownerINDEX, name: $nameINDEX) {
-    discussion(number: $numberINDEX) {
+  nodeINDEX: repository(owner: $owner, name: $name) {
+    discussion(number: $number) {
       ...DiscussionDetails
     }
   }
@@ -30,7 +30,7 @@ fragment DiscussionDetails on Discussion {
   author {
     ...AuthorFields
   }
-  comments(last: $lastComments) {
+  comments(last: $lastThreadedComments) {
     totalCount
     nodes {
       ...DiscussionCommentFields

@@ -16,8 +16,8 @@ describe('renderer/utils/notifications/handlers/utils.ts', () => {
 
       expect(result).toEqual({
         login: mockAuthor.login,
-        htmlUrl: mockAuthor.html_url,
-        avatarUrl: mockAuthor.avatar_url,
+        avatarUrl: mockAuthor.avatarUrl,
+        htmlUrl: mockAuthor.htmlUrl,
         type: mockAuthor.type,
       });
     });
@@ -27,8 +27,8 @@ describe('renderer/utils/notifications/handlers/utils.ts', () => {
 
       expect(result).toEqual({
         login: mockAuthor.login,
-        htmlUrl: mockAuthor.html_url,
-        avatarUrl: mockAuthor.avatar_url,
+        avatarUrl: mockAuthor.avatarUrl,
+        htmlUrl: mockAuthor.htmlUrl,
         type: mockAuthor.type,
       });
     });
