@@ -36,12 +36,6 @@ class PullRequestHandler extends DefaultHandler {
     return {
       queryFragment: PullRequestMergeQueryFragmentDoc,
       responseFragment: PullRequestDetailsFragmentDoc,
-      extras: [
-        { name: 'firstLabels', type: 'Int', defaultValue: 100 },
-        { name: 'lastComments', type: 'Int', defaultValue: 100 },
-        { name: 'lastReviews', type: 'Int', defaultValue: 100 },
-        { name: 'firstClosingIssues', type: 'Int', defaultValue: 100 },
-      ],
     } as GraphQLMergedQueryConfig;
   }
 

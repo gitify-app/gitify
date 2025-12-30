@@ -14,10 +14,12 @@ import {
   IconColor,
   type Link,
 } from '../../../types';
-import type {
-  PullRequestDetailsFragment,
-  PullRequestReviewState,
-  PullRequestState,
+import {
+  type PullRequestDetailsFragment,
+  PullRequestDetailsFragmentDoc,
+  PullRequestMergeQueryFragmentDoc,
+  type PullRequestReviewState,
+  type PullRequestState,
 } from '../../api/graphql/generated/graphql';
 import { getLatestReviewForReviewers, pullRequestHandler } from './pullRequest';
 
@@ -34,6 +36,16 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
       url: 'https://api.github.com/repos/gitify-app/notifications-test/pulls/1' as Link,
       latestCommentUrl:
         'https://api.github.com/repos/gitify-app/notifications-test/issues/comments/302888448' as Link,
+    });
+  });
+
+  describe('mergeQueryConfig', () => {
+    it('should return the correct query and response fragments', () => {
+      const config = pullRequestHandler.mergeQueryConfig();
+
+      expect(config).toBeDefined();
+      expect(config.queryFragment).toBe(PullRequestMergeQueryFragmentDoc);
+      expect(config.responseFragment).toBe(PullRequestDetailsFragmentDoc);
     });
   });
 

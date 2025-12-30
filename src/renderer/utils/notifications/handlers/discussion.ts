@@ -37,12 +37,6 @@ class DiscussionHandler extends DefaultHandler {
     return {
       queryFragment: DiscussionMergeQueryFragmentDoc,
       responseFragment: DiscussionDetailsFragmentDoc,
-      extras: [
-        { name: 'lastComments', type: 'Int', defaultValue: 100 },
-        { name: 'lastReplies', type: 'Int', defaultValue: 100 },
-        { name: 'firstLabels', type: 'Int', defaultValue: 100 },
-        { name: 'includeIsAnswered', type: 'Boolean!', defaultValue: true },
-      ],
     } as GraphQLMergedQueryConfig;
   }
 

@@ -14,11 +14,6 @@ import type { TypedDocumentString } from '../../api/graphql/generated/graphql';
 export type GraphQLMergedQueryConfig = {
   queryFragment: TypedDocumentString<unknown, unknown>;
   responseFragment: TypedDocumentString<unknown, unknown>;
-  extras: Array<{
-    name: string;
-    type: string;
-    defaultValue: number | boolean;
-  }>;
 };
 
 export interface NotificationTypeHandler<TFragment = unknown> {

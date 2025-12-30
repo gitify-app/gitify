@@ -32,12 +32,7 @@ class IssueHandler extends DefaultHandler {
   mergeQueryConfig() {
     return {
       queryFragment: IssueMergeQueryFragmentDoc,
-
       responseFragment: IssueDetailsFragmentDoc,
-      extras: [
-        { name: 'lastComments', type: 'Int', defaultValue: 100 },
-        { name: 'firstLabels', type: 'Int', defaultValue: 100 },
-      ],
     } as GraphQLMergedQueryConfig;
   }
 

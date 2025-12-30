@@ -22,6 +22,7 @@ import {
 } from '../api/graphql/utils';
 import { transformNotification } from '../api/transform';
 import { getNumberFromUrl } from '../api/utils';
+import { isAnsweredDiscussionFeatureSupported } from '../features';
 import { rendererLogError, rendererLogWarn } from '../logger';
 import {
   filterBaseNotifications,
@@ -185,7 +186,6 @@ export async function enrichNotifications(
       notification.subject.type === 'PullRequest';
 
     const alias = `node${index}`;
-    // const queryFragmentBody = getQueryFragmentBody(config.queryFragment) ?? '';
     const queryFragmentBody = getQueryFragmentBody(
       BatchMergedDetailsQueryFragmentDoc,
     );
@@ -245,12 +245,11 @@ export async function enrichNotifications(
     lastComments: 1,
     lastThreadedComments: 10,
     lastReplies: 10,
-    includeIsAnswered: true,
+    includeIsAnswered: isAnsweredDiscussionFeatureSupported(
+      notifications[0].account,
+    ),
     firstClosingIssues: 100,
     lastReviews: 100,
-    // FIXME includeIsAnswered: isAnsweredDiscussionFeatureSupported(
-    //   notification.account,
-    // ),
   };
 
   let mergedData: Record<string, unknown> | null = null;

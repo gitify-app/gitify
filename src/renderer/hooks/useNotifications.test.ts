@@ -115,6 +115,9 @@ describe('renderer/hooks/useNotifications.ts', () => {
       expect(result.current.notifications[1].notifications.length).toBe(2);
     });
 
+    // Note: This integration test is skipped because the query merging functionality
+    // requires complex mocking of multiple endpoints. The merging functionality is
+    // tested via unit tests in notifications.test.ts and individual handler tests.
     it.skip('should fetch detailed notifications with success', async () => {
       const mockRepository = {
         name: 'notifications-test',

@@ -14,9 +14,11 @@ import {
   IconColor,
   type Link,
 } from '../../../types';
-import type {
-  DiscussionDetailsFragment,
-  DiscussionStateReason,
+import {
+  type DiscussionDetailsFragment,
+  DiscussionDetailsFragmentDoc,
+  DiscussionMergeQueryFragmentDoc,
+  type DiscussionStateReason,
 } from '../../api/graphql/generated/graphql';
 import { discussionHandler } from './discussion';
 
@@ -25,6 +27,16 @@ const mockCommenter = createMockGraphQLAuthor('discussion-commenter');
 const mockReplier = createMockGraphQLAuthor('discussion-replier');
 
 describe('renderer/utils/notifications/handlers/discussion.ts', () => {
+  describe('mergeQueryConfig', () => {
+    it('should return the correct query and response fragments', () => {
+      const config = discussionHandler.mergeQueryConfig();
+
+      expect(config).toBeDefined();
+      expect(config.queryFragment).toBe(DiscussionMergeQueryFragmentDoc);
+      expect(config.responseFragment).toBe(DiscussionDetailsFragmentDoc);
+    });
+  });
+
   describe('enrich', () => {
     const mockNotification = createPartialMockNotification({
       title: 'This is a mock discussion',
