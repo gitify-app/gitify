@@ -24,10 +24,44 @@ impl TokenStore {
 /// 1. The hostname can be parsed as part of a valid HTTPS URL
 /// 2. The hostname doesn't contain unsafe characters (null bytes, CRLF)
 /// 3. The hostname matches expected patterns (github.com or enterprise servers)
+/// 4. The hostname is not a private/internal network address (SSRF protection)
 fn validate_oauth_hostname(hostname: &str) -> Result<(), String> {
     // Check for null bytes and CRLF injection
     if hostname.contains('\0') || hostname.contains('\r') || hostname.contains('\n') {
         return Err("Invalid hostname: contains control characters".to_string());
+    }
+
+    // Block internal/private network addresses (SSRF protection)
+    let lower = hostname.to_lowercase();
+    if lower == "localhost"
+        || lower.starts_with("127.")
+        || lower.starts_with("10.")
+        || lower.starts_with("192.168.")
+        || lower.starts_with("172.16.")
+        || lower.starts_with("172.17.")
+        || lower.starts_with("172.18.")
+        || lower.starts_with("172.19.")
+        || lower.starts_with("172.20.")
+        || lower.starts_with("172.21.")
+        || lower.starts_with("172.22.")
+        || lower.starts_with("172.23.")
+        || lower.starts_with("172.24.")
+        || lower.starts_with("172.25.")
+        || lower.starts_with("172.26.")
+        || lower.starts_with("172.27.")
+        || lower.starts_with("172.28.")
+        || lower.starts_with("172.29.")
+        || lower.starts_with("172.30.")
+        || lower.starts_with("172.31.")
+        || lower.starts_with("169.254.")
+        || lower.starts_with("0.")
+        || lower.contains("metadata.google")
+        || lower.contains("metadata.aws")
+        || lower == "metadata"
+        || lower.ends_with(".internal")
+        || lower.ends_with(".local")
+    {
+        return Err("Invalid hostname: internal addresses not allowed".to_string());
     }
 
     // Try to parse as a URL to validate the hostname format
@@ -150,8 +184,11 @@ async fn do_exchange_oauth_code(
         ("code", code),
     ];
 
-    // Create HTTP client
-    let client = reqwest::Client::new();
+    // Create HTTP client with timeout to prevent hanging connections
+    let client = reqwest::Client::builder()
+        .timeout(std::time::Duration::from_secs(30))
+        .build()
+        .map_err(|e| format!("Failed to create HTTP client: {}", e))?;
 
     // Make the POST request to exchange the code for a token
     let response = client
