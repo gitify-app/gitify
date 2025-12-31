@@ -27,6 +27,16 @@ export const Constants = {
 
   REFRESH_ACCOUNTS_INTERVAL_MS: 60 * 60 * 1000, // 1 hour
 
+  // GraphQL Argument Defaults
+  GRAPHQL_ARGS: {
+    FIRST_LABELS: 100,
+    FIRST_CLOSING_ISSUES: 100,
+    LAST_COMMENTS: 1,
+    LAST_THREADED_COMMENTS: 10,
+    LAST_REPLIES: 10,
+    LAST_REVIEWS: 100,
+  },
+
   // GitHub Docs
   GITHUB_DOCS: {
     OAUTH_URL:

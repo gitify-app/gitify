@@ -1,3 +1,4 @@
+import { Constants } from '../../constants';
 import type {
   AccountNotifications,
   GitifyNotification,
@@ -12,11 +13,6 @@ import {
 import { determineFailureType } from '../api/errors';
 import { BatchMergedDetailsQueryTemplateFragmentDoc } from '../api/graphql/generated/graphql';
 import { MergeQueryBuilder } from '../api/graphql/MergeQueryBuilder';
-import {
-  aliasRootAndKeyVariables,
-  extractNonQueryFragments,
-  extractQueryFragments,
-} from '../api/graphql/utils';
 import { transformNotification } from '../api/transform';
 import { getNumberFromUrl } from '../api/utils';
 import { isAnsweredDiscussionFeatureSupported } from '../features';
@@ -141,12 +137,11 @@ export async function enrichNotifications(
     return notifications;
   }
 
-  const builder = new MergeQueryBuilder();
-  const targets: Array<{
-    rootAlias: string;
-    notification: GitifyNotification;
-    handler: ReturnType<typeof createNotificationHandler>;
-  }> = [];
+  const builder = new MergeQueryBuilder(
+    BatchMergedDetailsQueryTemplateFragmentDoc,
+  );
+
+  const notificationResponseNodeAlias = new Map<GitifyNotification, string>();
 
   let index = 0;
   for (const notification of notifications) {
@@ -157,58 +152,23 @@ export async function enrichNotifications(
       continue;
     }
 
-    /**
-     * To construct the graphql query, we need to
-     * 1 - extract the indexed arguments and rename them
-     * 2 - initialize the indexed argument values
-     * 3 - extract the global arguments
-     * 4 - initialize the global argument values
-     * 5 - construct the merged query using the utility helper
-     * 6 - map the response to the correct handler mergeType before parsing into handler enrich
-     **/
+    const responseNodeAlias = `node${index}`;
 
-    const org = notification.repository.owner.login;
-    const repo = notification.repository.name;
-    const number = getNumberFromUrl(notification.subject.url);
-    const isNotificationDiscussion = notification.subject.type === 'Discussion';
-    const isNotificationIssue = notification.subject.type === 'Issue';
-    const isNotificationPullRequest =
-      notification.subject.type === 'PullRequest';
+    builder.addQueryNode('node', index, {
+      owner: notification.repository.owner.login,
+      name: notification.repository.name,
+      number: getNumberFromUrl(notification.subject.url),
+      isDiscussionNotification: notification.subject.type === 'Discussion',
+      isIssueNotification: notification.subject.type === 'Issue',
+      isPullRequestNotification: notification.subject.type === 'PullRequest',
+    });
 
-    const rootAlias = `node${index}`;
-
-    const queryFragmentBody = extractQueryFragments(
-      BatchMergedDetailsQueryTemplateFragmentDoc,
-    )[0].inner;
-
-    const queryFragment = aliasRootAndKeyVariables(
-      rootAlias,
-      index,
-      queryFragmentBody,
-    );
-    builder.addSelection(queryFragment);
-
-    // TODO - Extract this from the BatchMergedDetailsQueryTemplateFragmentDoc
-    builder.addVariableDefs(
-      `$owner${index}: String!, $name${index}: String!, $number${index}: Int!, $isDiscussionNotification${index}: Boolean!, $isIssueNotification${index}: Boolean!, $isPullRequestNotification${index}: Boolean!`,
-    );
-    builder
-      .setVar(`owner${index}`, org)
-      .setVar(`name${index}`, repo)
-      .setVar(`number${index}`, number)
-      .setVar(`isDiscussionNotification${index}`, isNotificationDiscussion)
-      .setVar(`isIssueNotification${index}`, isNotificationIssue)
-      .setVar(`isPullRequestNotification${index}`, isNotificationPullRequest);
-
-    targets.push({ rootAlias, notification, handler });
+    notificationResponseNodeAlias.set(notification, responseNodeAlias);
 
     index += 1;
   }
 
-  const nonQueryFragments = extractNonQueryFragments(
-    BatchMergedDetailsQueryTemplateFragmentDoc,
-  );
-  builder.addFragments(nonQueryFragments);
+  // Non-Query fragments were auto-added by the builder constructor
 
   // TODO - Extract this from the BatchMergedDetailsQueryTemplateFragmentDoc
   builder.addVariableDefs(
@@ -217,18 +177,20 @@ export async function enrichNotifications(
 
   const mergedQuery = builder.buildQuery();
 
-  // TODO - consolidate static args into constants, refactor below and other graphql query variables in api/clients to be consistent
   builder
-    .setVar('firstLabels', 100)
-    .setVar('lastComments', 1)
-    .setVar('lastThreadedComments', 10)
-    .setVar('lastReplies', 10)
+    .setVar('firstLabels', Constants.GRAPHQL_ARGS.FIRST_LABELS)
+    .setVar('lastComments', Constants.GRAPHQL_ARGS.LAST_COMMENTS)
+    .setVar(
+      'lastThreadedComments',
+      Constants.GRAPHQL_ARGS.LAST_THREADED_COMMENTS,
+    )
+    .setVar('lastReplies', Constants.GRAPHQL_ARGS.LAST_REPLIES)
     .setVar(
       'includeIsAnswered',
       isAnsweredDiscussionFeatureSupported(notifications[0].account),
     )
-    .setVar('firstClosingIssues', 100)
-    .setVar('lastReviews', 100);
+    .setVar('firstClosingIssues', Constants.GRAPHQL_ARGS.FIRST_CLOSING_ISSUES)
+    .setVar('lastReviews', Constants.GRAPHQL_ARGS.LAST_REVIEWS);
   const queryVariables = builder.getVariables();
 
   let mergedData: Record<string, unknown> | null = null;
@@ -251,15 +213,12 @@ export async function enrichNotifications(
 
   const enrichedNotifications = await Promise.all(
     notifications.map(async (notification: GitifyNotification) => {
-      const target = targets.find((item) => item.notification === notification);
+      let targetRootAlias: string | undefined;
+      targetRootAlias = notificationResponseNodeAlias.get(notification);
 
-      // TODO - simplify the below where possible
       let fragment: unknown;
-      if (mergedData && target) {
-        const repoData = mergedData[target.rootAlias] as Record<
-          string,
-          unknown
-        >;
+      if (mergedData && targetRootAlias) {
+        const repoData = mergedData[targetRootAlias] as Record<string, unknown>;
         if (repoData) {
           for (const value of Object.values(repoData)) {
             if (value !== undefined) {

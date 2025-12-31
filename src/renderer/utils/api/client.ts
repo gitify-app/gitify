@@ -1,6 +1,7 @@
 import type { AxiosPromise } from 'axios';
 import type { ExecutionResult } from 'graphql';
 
+import { Constants } from '../../constants';
 import type {
   Account,
   GitifyNotification,
@@ -212,9 +213,9 @@ export async function fetchDiscussionByNumber(
       owner: notification.repository.owner.login,
       name: notification.repository.name,
       number: number,
-      firstLabels: 100,
-      lastThreadedComments: 10,
-      lastReplies: 10,
+      firstLabels: Constants.GRAPHQL_ARGS.FIRST_LABELS,
+      lastThreadedComments: Constants.GRAPHQL_ARGS.LAST_THREADED_COMMENTS,
+      lastReplies: Constants.GRAPHQL_ARGS.LAST_REPLIES,
       includeIsAnswered: isAnsweredDiscussionFeatureSupported(
         notification.account,
       ),
@@ -239,8 +240,8 @@ export async function fetchIssueByNumber(
       owner: notification.repository.owner.login,
       name: notification.repository.name,
       number: number,
-      firstLabels: 100,
-      lastComments: 1,
+      firstLabels: Constants.GRAPHQL_ARGS.FIRST_LABELS,
+      lastComments: Constants.GRAPHQL_ARGS.LAST_COMMENTS,
     },
   );
 }
@@ -262,10 +263,10 @@ export async function fetchPullByNumber(
       owner: notification.repository.owner.login,
       name: notification.repository.name,
       number: number,
-      firstClosingIssues: 100,
-      firstLabels: 100,
-      lastComments: 1,
-      lastReviews: 100,
+      firstClosingIssues: Constants.GRAPHQL_ARGS.FIRST_CLOSING_ISSUES,
+      firstLabels: Constants.GRAPHQL_ARGS.FIRST_LABELS,
+      lastComments: Constants.GRAPHQL_ARGS.LAST_COMMENTS,
+      lastReviews: Constants.GRAPHQL_ARGS.LAST_REVIEWS,
     },
   );
 }
