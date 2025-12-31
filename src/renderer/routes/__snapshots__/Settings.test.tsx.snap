@@ -1108,7 +1108,6 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             data-wrap="nowrap"
           >
             <input
-              checked=""
               class="size-4 rounded-sm cursor-pointer"
               data-testid="checkbox-showReadNotifications"
               id="showReadNotifications"
