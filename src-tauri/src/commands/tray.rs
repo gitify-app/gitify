@@ -1,6 +1,6 @@
 use std::sync::Mutex;
-use tauri::{AppHandle, Manager};
 use tauri::image::Image;
+use tauri::{AppHandle, Manager};
 
 /// Tray icon state
 #[derive(Debug, Clone)]
@@ -82,7 +82,6 @@ pub async fn update_tray_icon(
     };
 
     // Get icon path
-    
 
     let resource_dir = app
         .path()

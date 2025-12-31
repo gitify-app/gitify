@@ -96,8 +96,16 @@ impl UpdaterState {
         self.checking.store(value, Ordering::SeqCst);
     }
 
-    pub fn store_downloaded_update(&self, bytes: Vec<u8>, version: String, current_version: String) {
-        let mut guard = self.downloaded_update.lock().unwrap_or_else(|e| e.into_inner());
+    pub fn store_downloaded_update(
+        &self,
+        bytes: Vec<u8>,
+        version: String,
+        current_version: String,
+    ) {
+        let mut guard = self
+            .downloaded_update
+            .lock()
+            .unwrap_or_else(|e| e.into_inner());
         *guard = Some(DownloadedUpdate {
             bytes,
             version,
@@ -106,7 +114,10 @@ impl UpdaterState {
     }
 
     pub fn take_downloaded_update(&self) -> Option<DownloadedUpdate> {
-        let mut guard = self.downloaded_update.lock().unwrap_or_else(|e| e.into_inner());
+        let mut guard = self
+            .downloaded_update
+            .lock()
+            .unwrap_or_else(|e| e.into_inner());
         guard.take()
     }
 }
@@ -222,7 +233,9 @@ async fn do_update_check<R: Runtime>(app: &AppHandle<R>, manual: bool) -> Result
     let state = app.state::<UpdaterState>();
 
     // Get the updater
-    let updater = app.updater().map_err(|e| format!("Failed to get updater: {}", e))?;
+    let updater = app
+        .updater()
+        .map_err(|e| format!("Failed to get updater: {}", e))?;
 
     // Check for updates
     let update = updater
@@ -250,7 +263,10 @@ async fn do_update_check<R: Runtime>(app: &AppHandle<R>, manual: bool) -> Result
             let _ = app.emit("updater:menu-state", "available");
 
             // Update tooltip
-            let _ = app.emit("updater:tooltip", format!("Update {} available", update.version));
+            let _ = app.emit(
+                "updater:tooltip",
+                format!("Update {} available", update.version),
+            );
 
             // Start downloading the update
             download_update(app, &update).await?;
@@ -299,7 +315,9 @@ async fn download_update<R: Runtime>(
     let bytes = update
         .download(
             move |downloaded, total| {
-                let percent = total.map(|t| (downloaded as f64 / t as f64) * 100.0).unwrap_or(0.0);
+                let percent = total
+                    .map(|t| (downloaded as f64 / t as f64) * 100.0)
+                    .unwrap_or(0.0);
 
                 let payload = DownloadProgressPayload {
                     percent,
@@ -321,7 +339,10 @@ async fn download_update<R: Runtime>(
         .await
         .map_err(|e| format!("Failed to download update: {}", e))?;
 
-    log::info!("Update downloaded ({} bytes), ready to install", bytes.len());
+    log::info!(
+        "Update downloaded ({} bytes), ready to install",
+        bytes.len()
+    );
 
     // Store the bytes and version info for later installation
     // This avoids the race condition of re-checking for updates during install
@@ -362,7 +383,8 @@ pub async fn install_update<R: Runtime>(app: AppHandle<R>) -> Result<(), String>
     }
 
     // Get the stored downloaded update (includes bytes and version info)
-    let downloaded = state.take_downloaded_update()
+    let downloaded = state
+        .take_downloaded_update()
         .ok_or_else(|| "Downloaded update not found".to_string())?;
 
     log::info!(
@@ -375,7 +397,9 @@ pub async fn install_update<R: Runtime>(app: AppHandle<R>) -> Result<(), String>
     // We need to check again to get the Update object, but we use the stored bytes
     // to avoid race conditions where a newer version could be released between
     // download and install
-    let updater = app.updater().map_err(|e| format!("Failed to get updater: {}", e))?;
+    let updater = app
+        .updater()
+        .map_err(|e| format!("Failed to get updater: {}", e))?;
 
     let update = updater
         .check()

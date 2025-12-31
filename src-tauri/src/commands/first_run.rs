@@ -57,8 +57,7 @@ pub fn mark_first_run_complete(app: AppHandle) -> Result<(), String> {
     }
 
     // Write an empty marker file
-    fs::write(&marker_path, "")
-        .map_err(|e| format!("Failed to write first-run marker: {}", e))?;
+    fs::write(&marker_path, "").map_err(|e| format!("Failed to write first-run marker: {}", e))?;
 
     log::info!("First run marked as complete");
     Ok(())
@@ -187,8 +186,8 @@ pub async fn move_to_applications_folder() -> Result<bool, String> {
         use std::process::Command;
 
         // Get the current executable path to find the app bundle
-        let exe_path = std::env::current_exe()
-            .map_err(|e| format!("Failed to get executable path: {}", e))?;
+        let exe_path =
+            std::env::current_exe().map_err(|e| format!("Failed to get executable path: {}", e))?;
 
         // Navigate up to find the .app bundle
         // Path is typically: /path/to/App.app/Contents/MacOS/executable

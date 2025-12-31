@@ -8,8 +8,7 @@ use url::Url;
 #[tauri::command]
 pub async fn open_external_link(url: String) -> Result<(), String> {
     // Validate URL scheme - only allow http/https
-    let parsed =
-        Url::parse(&url).map_err(|e| format!("Invalid URL: {}", e))?;
+    let parsed = Url::parse(&url).map_err(|e| format!("Invalid URL: {}", e))?;
 
     match parsed.scheme() {
         "http" | "https" => {}
@@ -29,8 +28,6 @@ pub async fn open_external_link(url: String) -> Result<(), String> {
 /// Get notification sound path
 #[tauri::command]
 pub fn get_notification_sound_path(app: AppHandle) -> Result<String, String> {
-    
-
     let resource_path = app
         .path()
         .resource_dir()
@@ -86,8 +83,6 @@ pub fn get_platform() -> String {
 /// Get app data directory
 #[tauri::command]
 pub fn get_app_data_dir(app: AppHandle) -> Result<String, String> {
-    
-
     let app_data = app
         .path()
         .app_data_dir()
@@ -102,8 +97,6 @@ pub fn get_app_data_dir(app: AppHandle) -> Result<String, String> {
 /// Get app log directory
 #[tauri::command]
 pub fn get_app_log_dir(app: AppHandle) -> Result<String, String> {
-    
-
     let log_dir = app
         .path()
         .app_log_dir()

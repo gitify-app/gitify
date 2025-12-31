@@ -1,7 +1,12 @@
 use keyring::Entry;
 use serde::{Deserialize, Serialize};
+use url::Url;
 
 const SERVICE_NAME: &str = "io.gitify.app";
+
+/// Allowed GitHub hostnames for OAuth.
+/// Includes GitHub.com and common GitHub Enterprise patterns.
+const ALLOWED_GITHUB_HOSTNAMES: &[&str] = &["github.com", "api.github.com"];
 
 /// Helper for managing token encryption via the OS keyring.
 struct TokenStore;
@@ -11,6 +16,66 @@ impl TokenStore {
         Entry::new(SERVICE_NAME, identifier)
             .map_err(|e| format!("Failed to create keyring entry: {}", e))
     }
+}
+
+/// Validate that a hostname is safe for OAuth requests.
+///
+/// This validates that:
+/// 1. The hostname can be parsed as part of a valid HTTPS URL
+/// 2. The hostname doesn't contain unsafe characters (null bytes, CRLF)
+/// 3. The hostname matches expected patterns (github.com or enterprise servers)
+fn validate_oauth_hostname(hostname: &str) -> Result<(), String> {
+    // Check for null bytes and CRLF injection
+    if hostname.contains('\0') || hostname.contains('\r') || hostname.contains('\n') {
+        return Err("Invalid hostname: contains control characters".to_string());
+    }
+
+    // Try to parse as a URL to validate the hostname format
+    let test_url = format!("https://{}/login/oauth/access_token", hostname);
+    let parsed = Url::parse(&test_url).map_err(|e| format!("Invalid hostname format: {}", e))?;
+
+    // Verify the parsed hostname matches what we expect
+    let parsed_host = parsed
+        .host_str()
+        .ok_or_else(|| "Invalid hostname: no host in parsed URL".to_string())?;
+
+    if parsed_host != hostname {
+        return Err("Invalid hostname: parsed hostname doesn't match input".to_string());
+    }
+
+    // Verify the path wasn't manipulated
+    if parsed.path() != "/login/oauth/access_token" {
+        return Err("Invalid hostname: path injection detected".to_string());
+    }
+
+    // For security, we accept:
+    // 1. github.com (the standard GitHub)
+    // 2. Any hostname ending with a valid TLD (for GitHub Enterprise)
+    // We don't restrict to specific domains to support self-hosted GHE instances
+    if !ALLOWED_GITHUB_HOSTNAMES.contains(&hostname) {
+        // For enterprise servers, ensure it looks like a valid domain
+        // Must have at least one dot and valid characters
+        if !hostname.contains('.') {
+            return Err("Invalid hostname: must be a fully qualified domain".to_string());
+        }
+
+        // Check for valid domain characters only (alphanumeric, hyphens, dots)
+        if !hostname
+            .chars()
+            .all(|c| c.is_ascii_alphanumeric() || c == '-' || c == '.')
+        {
+            return Err("Invalid hostname: contains invalid characters".to_string());
+        }
+
+        // Hostname segments must not start or end with hyphens
+        for segment in hostname.split('.') {
+            if segment.is_empty() || segment.starts_with('-') || segment.ends_with('-') {
+                return Err("Invalid hostname: invalid domain segment".to_string());
+            }
+        }
+    }
+
+    Ok(())
 }
 
 /// Response from GitHub OAuth token exchange
@@ -73,14 +138,8 @@ async fn do_exchange_oauth_code(
     client_secret: &str,
     code: &str,
 ) -> Result<String, String> {
-    // Validate hostname format - prevent path injection
-    if hostname.contains('/')
-        || hostname.contains('\\')
-        || hostname.contains('@')
-        || hostname.contains(':')
-    {
-        return Err("Invalid hostname format".to_string());
-    }
+    // Validate hostname using comprehensive security checks
+    validate_oauth_hostname(hostname)?;
 
     let url = format!("https://{}/login/oauth/access_token", hostname);
 

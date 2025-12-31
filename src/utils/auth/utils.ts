@@ -34,6 +34,18 @@ import type {
 const OAUTH_TIMEOUT_MS = 300000;
 
 /**
+ * Generate a cryptographically secure random state parameter for OAuth CSRF protection.
+ * Uses Web Crypto API for secure random generation.
+ */
+function generateOAuthState(): string {
+  const array = new Uint8Array(32);
+  crypto.getRandomValues(array);
+  return Array.from(array, (byte) => byte.toString(16).padStart(2, '0')).join(
+    '',
+  );
+}
+
+/**
  * Initiate GitHub OAuth authentication flow.
  *
  * For GitHub App (default): Uses credentials embedded in the Rust backend.
@@ -56,6 +68,9 @@ export async function authGitHub(
     ? Constants.DEFAULT_HOSTNAME
     : authOptions.hostname;
 
+  // Generate state parameter for CSRF protection
+  const oauthState = generateOAuthState();
+
   return new Promise((resolve, reject) => {
     let cleanupFn: (() => void) | undefined;
 
@@ -72,6 +87,7 @@ export async function authGitHub(
       'scope',
       Constants.OAUTH_SCOPES.RECOMMENDED.toString(),
     );
+    authUrl.searchParams.append('state', oauthState);
 
     openExternalLink(authUrl.toString() as Link);
 
@@ -83,9 +99,20 @@ export async function authGitHub(
 
       const type = url.hostname;
       const code = url.searchParams.get('code');
+      const returnedState = url.searchParams.get('state');
       const error = url.searchParams.get('error');
       const errorDescription = url.searchParams.get('error_description');
       const errorUri = url.searchParams.get('error_uri');
+
+      // Verify state parameter to prevent CSRF attacks
+      if (returnedState !== oauthState) {
+        reject(
+          new Error(
+            'OAuth state mismatch. This could indicate a CSRF attack. Please try again.',
+          ),
+        );
+        return;
+      }
 
       if (code && (type === 'auth' || type === 'oauth')) {
         const authMethod: AuthMethod =

@@ -26,12 +26,13 @@ fn setup_tray(app: &mut App) -> Result<(), Box<dyn std::error::Error>> {
         .build()?;
 
     // Build update menu items (some hidden by default)
-    let check_updates_item = MenuItemBuilder::with_id("check-updates", "Check for Updates")
-        .build(app)?;
+    let check_updates_item =
+        MenuItemBuilder::with_id("check-updates", "Check for Updates").build(app)?;
 
-    let checking_updates_item = MenuItemBuilder::with_id("checking-updates", "Checking for Updates...")
-        .enabled(false)
-        .build(app)?;
+    let checking_updates_item =
+        MenuItemBuilder::with_id("checking-updates", "Checking for Updates...")
+            .enabled(false)
+            .build(app)?;
 
     let update_available_item = MenuItemBuilder::with_id("update-available", "Update Available")
         .enabled(false)
@@ -41,8 +42,8 @@ fn setup_tray(app: &mut App) -> Result<(), Box<dyn std::error::Error>> {
         .enabled(false)
         .build(app)?;
 
-    let restart_to_update_item = MenuItemBuilder::with_id("restart-to-update", "Restart to Update")
-        .build(app)?;
+    let restart_to_update_item =
+        MenuItemBuilder::with_id("restart-to-update", "Restart to Update").build(app)?;
 
     // Build main tray menu
     let menu = MenuBuilder::new(app)
@@ -60,7 +61,9 @@ fn setup_tray(app: &mut App) -> Result<(), Box<dyn std::error::Error>> {
 
     // Create tray icon with menu
     // Load the idle tray icon
-    let resource_dir = app.path().resource_dir()
+    let resource_dir = app
+        .path()
+        .resource_dir()
         .map_err(|e| format!("Failed to get resource directory: {}", e))?;
 
     // Use 32x32 icons (correct size for macOS retina menubar)
@@ -84,10 +87,9 @@ fn setup_tray(app: &mut App) -> Result<(), Box<dyn std::error::Error>> {
                     app.exit(0);
                 }
                 "website" => {
-                    if let Err(e) = tauri_plugin_opener::open_url(
-                        "https://www.gitify.io/",
-                        None::<&str>,
-                    ) {
+                    if let Err(e) =
+                        tauri_plugin_opener::open_url("https://www.gitify.io/", None::<&str>)
+                    {
                         log::error!("Failed to open website: {}", e);
                     }
                 }
@@ -169,11 +171,16 @@ fn setup_tray(app: &mut App) -> Result<(), Box<dyn std::error::Error>> {
                         // Debounce clicks - ignore if less than 200ms since last click
                         let debounce = app.state::<ClickDebounce>();
                         let should_process = {
-                            let mut last = debounce.last_click.lock().unwrap_or_else(|e| e.into_inner());
+                            let mut last = debounce
+                                .last_click
+                                .lock()
+                                .unwrap_or_else(|e| e.into_inner());
                             let now = Instant::now();
 
                             let should_process = match *last {
-                                Some(last_time) => now.duration_since(last_time) > Duration::from_millis(200),
+                                Some(last_time) => {
+                                    now.duration_since(last_time) > Duration::from_millis(200)
+                                }
                                 None => true,
                             };
 
@@ -213,16 +220,32 @@ fn setup_tray(app: &mut App) -> Result<(), Box<dyn std::error::Error>> {
                                         // Try to get screen dimensions, fallback to reasonable defaults
                                         if let Ok(Some(monitor)) = window.current_monitor() {
                                             let size = monitor.size();
-                                            let window_size = window.outer_size().unwrap_or(tauri::PhysicalSize::new(500, 600));
+                                            let window_size = window
+                                                .outer_size()
+                                                .unwrap_or(tauri::PhysicalSize::new(500, 600));
 
-                                            let pos_x = (size.width as i32 - window_size.width as i32 - 20).max(0);
+                                            let pos_x =
+                                                (size.width as i32 - window_size.width as i32 - 20)
+                                                    .max(0);
                                             let pos_y = 40; // Below menubar
 
-                                            log::debug!("Screen size: {}x{}, Window size: {}x{}", size.width, size.height, window_size.width, window_size.height);
-                                            log::debug!("Positioning window at x={}, y={}", pos_x, pos_y);
+                                            log::debug!(
+                                                "Screen size: {}x{}, Window size: {}x{}",
+                                                size.width,
+                                                size.height,
+                                                window_size.width,
+                                                window_size.height
+                                            );
+                                            log::debug!(
+                                                "Positioning window at x={}, y={}",
+                                                pos_x,
+                                                pos_y
+                                            );
                                             (pos_x, pos_y)
                                         } else {
-                                            log::debug!("Could not get monitor, using default position");
+                                            log::debug!(
+                                                "Could not get monitor, using default position"
+                                            );
                                             (1200, 40) // Fallback position
                                         }
                                     }
@@ -467,7 +490,9 @@ pub fn run() {
                     let app_handle = app.handle().clone();
                     for url in urls {
                         let url_str = url.to_string();
-                        if url_str.starts_with("gitify://oauth") || url_str.starts_with("gitify://callback") {
+                        if url_str.starts_with("gitify://oauth")
+                            || url_str.starts_with("gitify://callback")
+                        {
                             log::debug!("Startup OAuth callback: {}", url_str);
                             // Delay emit slightly to ensure frontend is ready
                             let handle = app_handle.clone();
@@ -493,7 +518,9 @@ pub fn run() {
                     for url in urls {
                         let url_str = url.to_string();
                         // Check if this is an OAuth callback
-                        if url_str.starts_with("gitify://oauth") || url_str.starts_with("gitify://callback") {
+                        if url_str.starts_with("gitify://oauth")
+                            || url_str.starts_with("gitify://callback")
+                        {
                             log::debug!("OAuth callback detected: {}", url_str);
                             // Emit auth-callback event to frontend
                             if let Err(e) = app_handle.emit("auth-callback", url_str.clone()) {

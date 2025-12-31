@@ -1,5 +1,5 @@
 export const APPLICATION = {
-  ID: 'com.electron.gitify',
+  ID: 'io.gitify.app',
 
   NAME: 'Gitify',
 

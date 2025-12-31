@@ -26,17 +26,39 @@ type UserDetailsResponse = FetchAuthenticatedUserDetailsQuery['viewer'];
 describe('renderer/utils/auth/utils.ts', () => {
   describe('authGitHub', () => {
     vi.spyOn(logger, 'rendererLogInfo').mockImplementation(() => {});
+    let capturedAuthUrl: string | null = null;
     const openExternalLinkSpy = vi
       .spyOn(comms, 'openExternalLink')
-      .mockImplementation(() => {});
+      .mockImplementation((url) => {
+        capturedAuthUrl = url;
+      });
 
     afterEach(() => {
       vi.clearAllMocks();
+      capturedAuthUrl = null;
     });
+
+    /**
+     * Helper to extract the state parameter from a captured OAuth URL.
+     * This simulates GitHub returning the same state in the callback.
+     */
+    function getStateFromCapturedUrl(): string {
+      if (!capturedAuthUrl) {
+        throw new Error('No auth URL captured');
+      }
+      const url = new URL(capturedAuthUrl);
+      const state = url.searchParams.get('state');
+      if (!state) {
+        throw new Error('No state parameter in auth URL');
+      }
+      return state;
+    }
 
     it('should call authGitHub - success auth flow', async () => {
       window.gitify.onAuthCallback = vi.fn().mockImplementation((callback) => {
-        callback('gitify://auth?code=123-456');
+        // Simulate GitHub returning the state parameter in the callback
+        const state = getStateFromCapturedUrl();
+        callback(`gitify://auth?code=123-456&state=${state}`);
         return Promise.resolve(() => {});
       });
 
@@ -44,7 +66,9 @@ describe('renderer/utils/auth/utils.ts', () => {
 
       expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
       expect(openExternalLinkSpy).toHaveBeenCalledWith(
-        'https://github.com/login/oauth/authorize?client_id=FAKE_CLIENT_ID_123&scope=read%3Auser%2Cnotifications%2Crepo',
+        expect.stringMatching(
+          /^https:\/\/github\.com\/login\/oauth\/authorize\?client_id=FAKE_CLIENT_ID_123&scope=read%3Auser%2Cnotifications%2Crepo&state=[a-f0-9]{64}$/,
+        ),
       );
 
       expect(window.gitify.onAuthCallback).toHaveBeenCalledTimes(1);
@@ -58,7 +82,9 @@ describe('renderer/utils/auth/utils.ts', () => {
 
     it('should call authGitHub - success oauth flow', async () => {
       window.gitify.onAuthCallback = vi.fn().mockImplementation((callback) => {
-        callback('gitify://oauth?code=123-456');
+        // Simulate GitHub returning the state parameter in the callback
+        const state = getStateFromCapturedUrl();
+        callback(`gitify://oauth?code=123-456&state=${state}`);
         return Promise.resolve(() => {});
       });
 
@@ -70,7 +96,9 @@ describe('renderer/utils/auth/utils.ts', () => {
 
       expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
       expect(openExternalLinkSpy).toHaveBeenCalledWith(
-        'https://my.git.com/login/oauth/authorize?client_id=BYO_CLIENT_ID&scope=read%3Auser%2Cnotifications%2Crepo',
+        expect.stringMatching(
+          /^https:\/\/my\.git\.com\/login\/oauth\/authorize\?client_id=BYO_CLIENT_ID&scope=read%3Auser%2Cnotifications%2Crepo&state=[a-f0-9]{64}$/,
+        ),
       );
 
       expect(window.gitify.onAuthCallback).toHaveBeenCalledTimes(1);
@@ -82,10 +110,12 @@ describe('renderer/utils/auth/utils.ts', () => {
       expect(res.authCode).toBe('123-456');
     });
 
-    it('should call authGitHub - failure', async () => {
+    it('should call authGitHub - failure from GitHub error', async () => {
       window.gitify.onAuthCallback = vi.fn().mockImplementation((callback) => {
+        // Simulate GitHub returning the state parameter with an error
+        const state = getStateFromCapturedUrl();
         callback(
-          'gitify://auth?error=invalid_request&error_description=The+redirect_uri+is+missing+or+invalid.&error_uri=https://docs.github.com/en/developers/apps/troubleshooting-oauth-errors',
+          `gitify://auth?error=invalid_request&error_description=The+redirect_uri+is+missing+or+invalid.&error_uri=https://docs.github.com/en/developers/apps/troubleshooting-oauth-errors&state=${state}`,
         );
         return Promise.resolve(() => {});
       });
@@ -98,13 +128,32 @@ describe('renderer/utils/auth/utils.ts', () => {
 
       expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
       expect(openExternalLinkSpy).toHaveBeenCalledWith(
-        'https://github.com/login/oauth/authorize?client_id=FAKE_CLIENT_ID_123&scope=read%3Auser%2Cnotifications%2Crepo',
+        expect.stringMatching(
+          /^https:\/\/github\.com\/login\/oauth\/authorize\?client_id=FAKE_CLIENT_ID_123&scope=read%3Auser%2Cnotifications%2Crepo&state=[a-f0-9]{64}$/,
+        ),
       );
 
       expect(window.gitify.onAuthCallback).toHaveBeenCalledTimes(1);
       expect(window.gitify.onAuthCallback).toHaveBeenCalledWith(
         expect.any(Function),
       );
+    });
+
+    it('should call authGitHub - failure from state mismatch (CSRF protection)', async () => {
+      window.gitify.onAuthCallback = vi.fn().mockImplementation((callback) => {
+        // Simulate an attacker providing a different state parameter
+        callback('gitify://auth?code=123-456&state=malicious-state-value');
+        return Promise.resolve(() => {});
+      });
+
+      await expect(async () => await authUtils.authGitHub()).rejects.toEqual(
+        new Error(
+          'OAuth state mismatch. This could indicate a CSRF attack. Please try again.',
+        ),
+      );
+
+      expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
+      expect(window.gitify.onAuthCallback).toHaveBeenCalledTimes(1);
     });
   });
 

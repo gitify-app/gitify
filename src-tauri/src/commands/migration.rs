@@ -99,7 +99,6 @@ pub async fn migrate_electron_data(app: AppHandle) -> Result<ElectronSettings, S
     }
 
     // Store migration completion flag
-    
 
     let tauri_data_dir = app
         .path()
@@ -119,8 +118,6 @@ pub async fn migrate_electron_data(app: AppHandle) -> Result<ElectronSettings, S
 /// Check if migration has been completed
 #[tauri::command]
 pub fn is_migration_complete(app: AppHandle) -> Result<bool, String> {
-    
-
     let tauri_data_dir = app
         .path()
         .app_data_dir()
@@ -133,8 +130,6 @@ pub fn is_migration_complete(app: AppHandle) -> Result<bool, String> {
 /// Mark migration as complete (for manual migration)
 #[tauri::command]
 pub fn mark_migration_complete(app: AppHandle) -> Result<(), String> {
-    
-
     let tauri_data_dir = app
         .path()
         .app_data_dir()
