@@ -1,0 +1,39 @@
+{
+  "$schema": "https://schema.tauri.app/config/2/capability",
+  "identifier": "gitify-capabilities",
+  "description": "Gitify default capabilities",
+  "windows": ["main"],
+  "permissions": [
+    "core:default",
+    "core:window:allow-show",
+    "core:window:allow-hide",
+    "core:window:allow-close",
+    "core:window:allow-set-focus",
+    "core:window:allow-set-size",
+    "core:window:allow-center",
+    "core:window:allow-set-always-on-top",
+    "core:window:allow-unminimize",
+    "core:window:allow-is-visible",
+    "core:window:allow-is-minimized",
+    "core:event:allow-emit",
+    "core:event:allow-listen",
+    "opener:allow-open-url",
+    "log:default",
+    "dialog:default",
+    "notification:default",
+    "store:default",
+    "global-shortcut:default",
+    "global-shortcut:allow-is-registered",
+    "global-shortcut:allow-register",
+    "global-shortcut:allow-unregister",
+    "deep-link:default",
+    {
+      "identifier": "http:default",
+      "allow": [
+        { "url": "https://api.github.com/**" },
+        { "url": "https://*.github.com/**" },
+        { "url": "https://github.com/**" }
+      ]
+    }
+  ]
+}

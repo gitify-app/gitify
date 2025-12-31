@@ -1,13 +1,14 @@
-import log from 'electron-log';
+import { error, info, warn } from '@tauri-apps/plugin-log';
 
-type AllowedLogFunction = typeof log.info | typeof log.warn | typeof log.error;
+type LogFunction = (message: string) => Promise<void>;
+type AllowedLogFunction = LogFunction;
 
 export function logInfo(
   type: string,
   message: string,
   contexts: string[] = [],
 ) {
-  logMessage(log.info, type, message, undefined, contexts);
+  logMessage(info, type, message, undefined, contexts);
 }
 
 export function logWarn(
@@ -15,7 +16,7 @@ export function logWarn(
   message: string,
   contexts: string[] = [],
 ) {
-  logMessage(log.warn, type, message, undefined, contexts);
+  logMessage(warn, type, message, undefined, contexts);
 }
 
 export function logError(
@@ -24,7 +25,7 @@ export function logError(
   err: Error,
   contexts: string[] = [],
 ) {
-  logMessage(log.error, type, message, err, contexts);
+  logMessage(error, type, message, err, contexts);
 }
 
 function logMessage(
@@ -34,16 +35,20 @@ function logMessage(
   err?: Error,
   contexts: string[] = [],
 ) {
-  const args: (string | Error)[] = [`[${type}]`, message];
+  const parts: string[] = [`[${type}]`, message];
 
   if (contexts.length) {
     const combined = contexts.join(' >> ');
-    args.push(`[${combined}]`);
+    parts.push(`[${combined}]`);
   }
 
   if (err) {
-    args.push(err);
+    parts.push(err.toString());
   }
 
-  logFunction(...args);
+  const fullMessage = parts.join(' ');
+
+  // Call Tauri log function (returns a promise, but we don't await it)
+  // biome-ignore lint/suspicious/noConsole: Fallback error handler for when logging fails
+  logFunction(fullMessage).catch(console.error);
 }

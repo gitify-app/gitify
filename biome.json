@@ -1,7 +1,7 @@
 {
   "$schema": "https://biomejs.dev/schemas/2.3.10/schema.json",
   "files": {
-    "includes": ["**", "!**/generated/**/*"]
+    "includes": ["**", "!**/src/utils/api/graphql/generated"]
   },
   "assist": {
     "actions": {

@@ -5,4 +5,4 @@
 *.snap linguist-generated=true
 
 # GraphQL Codegen outputs
-+ src/renderer/utils/api/graphql/generated/**/*.ts linguist-generated=true
+src/utils/api/graphql/generated/**/*.ts linguist-generated=true
