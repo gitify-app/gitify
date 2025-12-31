@@ -17,17 +17,14 @@ import type {
 } from '../../../types';
 import { IconColor } from '../../../types';
 import { fetchIssueByNumber } from '../../api/client';
-import {
-  type IssueDetailsFragment,
-  IssueDetailsFragmentDoc,
-} from '../../api/graphql/generated/graphql';
+import type { IssueDetailsFragment } from '../../api/graphql/generated/graphql';
 import { DefaultHandler, defaultHandler } from './default';
 import { getNotificationAuthor } from './utils';
 
 class IssueHandler extends DefaultHandler {
   readonly type = 'Issue';
 
-  readonly mergeQueryNodeResponseType = IssueDetailsFragmentDoc;
+  readonly supportsMergedQueryEnrichment = true;
 
   async enrich(
     notification: GitifyNotification,

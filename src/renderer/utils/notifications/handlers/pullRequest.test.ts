@@ -14,11 +14,10 @@ import {
   IconColor,
   type Link,
 } from '../../../types';
-import {
-  type PullRequestDetailsFragment,
-  PullRequestDetailsFragmentDoc,
-  type PullRequestReviewState,
-  type PullRequestState,
+import type {
+  PullRequestDetailsFragment,
+  PullRequestReviewState,
+  PullRequestState,
 } from '../../api/graphql/generated/graphql';
 import { getLatestReviewForReviewers, pullRequestHandler } from './pullRequest';
 
@@ -39,11 +38,10 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
   });
 
   describe('mergeQueryConfig', () => {
-    it('should return the correct query and response fragments', () => {
-      const mergeType = pullRequestHandler.mergeQueryNodeResponseType;
-
-      expect(mergeType).toBeDefined();
-      expect(mergeType).toBe(PullRequestDetailsFragmentDoc);
+    describe('supportsMergedQueryEnrichment', () => {
+      it('should support merge query', () => {
+        expect(pullRequestHandler.supportsMergedQueryEnrichment).toBeTruthy();
+      });
     });
   });
 

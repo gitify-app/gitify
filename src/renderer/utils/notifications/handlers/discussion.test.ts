@@ -14,10 +14,9 @@ import {
   IconColor,
   type Link,
 } from '../../../types';
-import {
-  type DiscussionDetailsFragment,
-  DiscussionDetailsFragmentDoc,
-  type DiscussionStateReason,
+import type {
+  DiscussionDetailsFragment,
+  DiscussionStateReason,
 } from '../../api/graphql/generated/graphql';
 import { discussionHandler } from './discussion';
 
@@ -26,12 +25,9 @@ const mockCommenter = createMockGraphQLAuthor('discussion-commenter');
 const mockReplier = createMockGraphQLAuthor('discussion-replier');
 
 describe('renderer/utils/notifications/handlers/discussion.ts', () => {
-  describe('mergeQueryConfig', () => {
-    it('should return the correct query merge type response fragments', () => {
-      const mergeType = discussionHandler.mergeQueryNodeResponseType;
-
-      expect(mergeType).toBeDefined();
-      expect(mergeType).toBe(DiscussionDetailsFragmentDoc);
+  describe('supportsMergedQueryEnrichment', () => {
+    it('should support merge query', () => {
+      expect(discussionHandler.supportsMergedQueryEnrichment).toBeTruthy();
     });
   });
 

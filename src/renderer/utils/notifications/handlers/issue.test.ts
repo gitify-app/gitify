@@ -14,11 +14,10 @@ import {
   IconColor,
   type Link,
 } from '../../../types';
-import {
-  type IssueDetailsFragment,
-  IssueDetailsFragmentDoc,
-  type IssueState,
-  type IssueStateReason,
+import type {
+  IssueDetailsFragment,
+  IssueState,
+  IssueStateReason,
 } from '../../api/graphql/generated/graphql';
 import { issueHandler } from './issue';
 
@@ -26,12 +25,9 @@ const mockAuthor = createMockGraphQLAuthor('issue-author');
 const mockCommenter = createMockGraphQLAuthor('issue-commenter');
 
 describe('renderer/utils/notifications/handlers/issue.ts', () => {
-  describe('mergeQueryConfig', () => {
-    it('should return the correct query and response fragments', () => {
-      const mergeType = issueHandler.mergeQueryNodeResponseType;
-
-      expect(mergeType).toBeDefined();
-      expect(mergeType).toBe(IssueDetailsFragmentDoc);
+  describe('supportsMergedQueryEnrichment', () => {
+    it('should support merge query', () => {
+      expect(issueHandler.supportsMergedQueryEnrichment).toBeTruthy();
     });
   });
 

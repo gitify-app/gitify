@@ -12,10 +12,9 @@ import {
 import { defaultHandler } from './default';
 
 describe('renderer/utils/notifications/handlers/default.ts', () => {
-  describe('mergeQueryConfig', () => {
-    it('should return undefined (no merge query support)', () => {
-      const mergeType = defaultHandler.mergeQueryNodeResponseType;
-      expect(mergeType).toBeUndefined();
+  describe('supportsMergedQueryEnrichment', () => {
+    it('should not support merge query', () => {
+      expect(defaultHandler.supportsMergedQueryEnrichment).toBeFalsy();
     });
   });
 

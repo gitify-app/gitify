@@ -19,10 +19,9 @@ import {
   type SettingsState,
 } from '../../../types';
 import { fetchPullByNumber } from '../../api/client';
-import {
-  type PullRequestDetailsFragment,
-  PullRequestDetailsFragmentDoc,
-  type PullRequestReviewFieldsFragment,
+import type {
+  PullRequestDetailsFragment,
+  PullRequestReviewFieldsFragment,
 } from '../../api/graphql/generated/graphql';
 import { DefaultHandler, defaultHandler } from './default';
 import { getNotificationAuthor } from './utils';
@@ -30,7 +29,7 @@ import { getNotificationAuthor } from './utils';
 class PullRequestHandler extends DefaultHandler {
   readonly type = 'PullRequest' as const;
 
-  readonly mergeQueryNodeResponseType = PullRequestDetailsFragmentDoc;
+  readonly supportsMergedQueryEnrichment = true;
 
   async enrich(
     notification: GitifyNotification,

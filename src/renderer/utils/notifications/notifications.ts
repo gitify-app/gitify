@@ -151,10 +151,9 @@ export async function enrichNotifications(
   let index = 0;
   for (const notification of notifications) {
     const handler = createNotificationHandler(notification);
-    const mergeType = handler.mergeQueryNodeResponseType;
 
-    // Skip notification types that aren't suitable for batch merged  enrichment
-    if (!mergeType) {
+    // Skip notifications that aren't suitable for batch merged enrichment
+    if (!handler.supportsMergedQueryEnrichment) {
       continue;
     }
 

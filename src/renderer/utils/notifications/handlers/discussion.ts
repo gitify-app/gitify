@@ -19,11 +19,10 @@ import {
   type SettingsState,
 } from '../../../types';
 import { fetchDiscussionByNumber } from '../../api/client';
-import {
-  type CommentFieldsFragment,
-  type DiscussionCommentFieldsFragment,
-  type DiscussionDetailsFragment,
-  DiscussionDetailsFragmentDoc,
+import type {
+  CommentFieldsFragment,
+  DiscussionCommentFieldsFragment,
+  DiscussionDetailsFragment,
 } from '../../api/graphql/generated/graphql';
 import { DefaultHandler, defaultHandler } from './default';
 import { getNotificationAuthor } from './utils';
@@ -31,7 +30,7 @@ import { getNotificationAuthor } from './utils';
 class DiscussionHandler extends DefaultHandler {
   readonly type = 'Discussion';
 
-  readonly mergeQueryNodeResponseType = DiscussionDetailsFragmentDoc;
+  readonly supportsMergedQueryEnrichment = true;
 
   async enrich(
     notification: GitifyNotification,

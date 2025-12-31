@@ -9,15 +9,14 @@ import type {
   SettingsState,
   SubjectType,
 } from '../../../types';
-import type { TypedDocumentString } from '../../api/graphql/generated/graphql';
 
 export interface NotificationTypeHandler {
   readonly type?: SubjectType;
 
   /**
-   * The merge query response type to expect.
+   * Whether the notification handler supports enrichment via merged GraphQL query.
    */
-  readonly mergeQueryNodeResponseType?: TypedDocumentString<unknown, unknown>;
+  readonly supportsMergedQueryEnrichment?: boolean;
 
   /**
    * Enriches a base notification with additional information (state, author, metrics, etc).
