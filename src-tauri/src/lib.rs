@@ -6,6 +6,7 @@ use std::time::{Duration, Instant};
 use tauri::menu::{MenuBuilder, MenuItemBuilder, SubmenuBuilder};
 use tauri::tray::{MouseButton, MouseButtonState, TrayIconBuilder, TrayIconEvent};
 use tauri::{App, Emitter, Manager};
+use tauri_plugin_positioner::{Position, WindowExt};
 
 /// Debounce state for tray icon clicks
 struct ClickDebounce {
@@ -159,6 +160,9 @@ fn setup_tray(app: &mut App) -> Result<(), Box<dyn std::error::Error>> {
             }
         })
         .on_tray_icon_event(|tray, event| {
+            // Track tray icon position for window positioning
+            tauri_plugin_positioner::on_tray_event(tray.app_handle(), &event);
+
             let app = tray.app_handle();
 
             match event {
@@ -209,69 +213,23 @@ fn setup_tray(app: &mut App) -> Result<(), Box<dyn std::error::Error>> {
                             } else {
                                 log::debug!("Showing window");
 
-                                // Position window - use absolute positioning for reliability
-                                use tauri::PhysicalPosition;
-
-                                // Always position at top-right, regardless of platform
-                                // Default to a safe position if we can't get screen info
-                                let (x, y) = {
-                                    #[cfg(target_os = "macos")]
-                                    {
-                                        // Try to get screen dimensions, fallback to reasonable defaults
-                                        if let Ok(Some(monitor)) = window.current_monitor() {
-                                            let size = monitor.size();
-                                            let window_size = window
-                                                .outer_size()
-                                                .unwrap_or(tauri::PhysicalSize::new(500, 600));
-
-                                            let pos_x =
-                                                (size.width as i32 - window_size.width as i32 - 20)
-                                                    .max(0);
-                                            let pos_y = 40; // Below menubar
-
-                                            log::debug!(
-                                                "Screen size: {}x{}, Window size: {}x{}",
-                                                size.width,
-                                                size.height,
-                                                window_size.width,
-                                                window_size.height
-                                            );
-                                            log::debug!(
-                                                "Positioning window at x={}, y={}",
-                                                pos_x,
-                                                pos_y
-                                            );
-                                            (pos_x, pos_y)
-                                        } else {
-                                            log::debug!(
-                                                "Could not get monitor, using default position"
-                                            );
-                                            (1200, 40) // Fallback position
-                                        }
-                                    }
-                                    #[cfg(not(target_os = "macos"))]
-                                    {
-                                        (1200, 40) // Default for other platforms
-                                    }
-                                };
-
-                                if let Err(e) = window.set_position(PhysicalPosition::new(x, y)) {
-                                    log::error!("Failed to set window position: {}", e);
+                                // Position window near tray icon
+                                if let Err(e) =
+                                    window.as_ref().window().move_window(Position::TrayBottomCenter)
+                                {
+                                    log::error!("Failed to position window near tray: {}", e);
                                 }
 
                                 // Show window
-                                log::debug!("Calling show()");
                                 if let Err(e) = window.show() {
                                     log::error!("Error showing window: {}", e);
                                 }
 
-                                log::debug!("Calling set_focus()");
                                 if let Err(e) = window.set_focus() {
                                     log::error!("Failed to set window focus: {}", e);
                                 }
 
                                 if window.is_minimized().unwrap_or(false) {
-                                    log::debug!("Unminimizing window");
                                     if let Err(e) = window.unminimize() {
                                         log::error!("Failed to unminimize window: {}", e);
                                     }
