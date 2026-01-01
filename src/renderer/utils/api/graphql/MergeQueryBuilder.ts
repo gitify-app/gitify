@@ -120,16 +120,12 @@ export class MergeQueryBuilder {
 
   /**
    * Add a new selection set (ie: node) to the query.
-   * @param aliasPrefix The alias prefix to be used for the new selection set node.
    * @param values The values for the selection set variables/arguments.
    * @returns the computed node alias name
    */
-  addNode(
-    aliasPrefix: string,
-    values: Exact<FetchBatchMergedTemplateIndexedBaseVariables>,
-  ): string {
+  addNode(values: Exact<FetchBatchMergedTemplateIndexedBaseVariables>): string {
     const index = this.selections.length;
-    const aliasWithIndex = `${aliasPrefix}${index}`;
+    const aliasWithIndex = `node${index}`;
     this.addQueryNode(aliasWithIndex, index, values);
     return aliasWithIndex;
   }

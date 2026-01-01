@@ -111,9 +111,9 @@ describe('renderer/utils/api/graphql/utils.ts', () => {
       const input =
         'repository(owner: $ownerINDEX, name: $name) { issue(number: $number) @include(if: $isIssueNotificationINDEX) { title } }';
 
-      const result = aliasFieldAndSubstituteIndexedVars('node', 0, input);
+      const result = aliasFieldAndSubstituteIndexedVars('someAlias', 0, input);
 
-      expect(result).toContain('node0: repository');
+      expect(result).toContain('someAlias: repository');
       expect(result).toContain('$owner0');
       expect(result).not.toContain('$ownerINDEX');
       expect(result).toContain('$name');

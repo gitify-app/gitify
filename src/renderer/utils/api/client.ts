@@ -302,7 +302,7 @@ export async function fetchNotificationDetailsForList(
       continue;
     }
 
-    const alias = builder.addNode('node', {
+    const alias = builder.addNode({
       owner: notification.repository.owner.login,
       name: notification.repository.name,
       number: getNumberFromUrl(notification.subject.url),
