@@ -11,6 +11,7 @@ import {
   listNotificationsForAuthenticatedUser,
 } from '../api/client';
 import { determineFailureType } from '../api/errors';
+import type { FetchBatchMergedTemplateQuery } from '../api/graphql/generated/graphql';
 import { MergeQueryBuilder } from '../api/graphql/MergeQueryBuilder';
 import { transformNotification } from '../api/transform';
 import { getNumberFromUrl } from '../api/utils';
@@ -165,13 +166,6 @@ export async function enrichNotifications(
     index += 1;
   }
 
-  // Non-Query fragments were auto-added by the builder constructor
-
-  // TODO - Extract this from the BatchMergedDetailsQueryTemplateFragmentDoc
-  builder.addVariableDefs(
-    '$lastComments: Int, $lastThreadedComments: Int, $lastReplies: Int, $lastReviews: Int, $firstLabels: Int, $firstClosingIssues: Int, $includeIsAnswered: Boolean!',
-  );
-
   const mergedQuery = builder.buildQuery();
 
   builder.setNonIndexedVars({
@@ -210,7 +204,7 @@ export async function enrichNotifications(
       let responseNodeAlias: string | undefined;
       responseNodeAlias = notificationResponseNodeAlias.get(notification);
 
-      let fragment: unknown;
+      let fragment: FetchBatchMergedTemplateQuery['repository'];
       if (mergedData && responseNodeAlias) {
         const repoData = mergedData[responseNodeAlias] as Record<
           string,

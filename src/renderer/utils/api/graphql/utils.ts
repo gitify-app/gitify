@@ -1,4 +1,4 @@
-import { type DocumentNode, parse, print } from 'graphql';
+import { type DocumentNode, parse, print, type TypeNode } from 'graphql';
 
 import type { TypedDocumentString } from './generated/graphql';
 
@@ -62,18 +62,6 @@ export function extractNonQueryFragments(
   return extractAllFragments(doc).filter((f) => f.typeCondition !== 'Query');
 }
 
-// Helper to compose a merged query given selections, fragments and variable defs
-export function composeMergedQuery(
-  selections: string[],
-  fragments: FragmentInfo[],
-  variableDefinitions: string[],
-): string {
-  const vars = variableDefinitions.join(', ');
-  const selects = selections.join('\n');
-  const frags = fragments.map((f) => f.printed).join('\n');
-  return `query FetchMergedNotifications(${vars}) {\n${selects}\n}\n\n${frags}\n`;
-}
-
 /**
  * Alias the root field and suffix key variables with the provided index.
  *
@@ -133,4 +121,42 @@ export function extractIndexedArguments(selectionBody: string): string[] {
 export function extractNonIndexedArguments(selectionBody: string): string[] {
   const all = extractArgumentNames(selectionBody);
   return filterArgumentsByIndexSuffix(all, false);
+}
+
+// Format a GraphQL TypeNode to a string (e.g., Int, Boolean!, [String!])
+function formatType(type: TypeNode): string {
+  switch (type.kind) {
+    case 'NamedType':
+      return type.name.value;
+    case 'NonNullType':
+      return `${formatType(type.type)}!`;
+    case 'ListType':
+      return `[${formatType(type.type)}]`;
+    default:
+      return '';
+  }
+}
+
+/**
+ * Extract non-indexed variable definitions from a GraphQL document's operations.
+ * Returns strings like `$var: Type` suitable for insertion into a query definition.
+ */
+export function extractNonIndexedVariableDefinitions(
+  doc: TypedDocumentString<unknown, unknown>,
+): string[] {
+  const ast = toDocumentNode(doc);
+  const defs: string[] = [];
+
+  for (const def of ast.definitions) {
+    if (def.kind === 'OperationDefinition' && def.variableDefinitions) {
+      for (const v of def.variableDefinitions) {
+        const name = v.variable.name.value;
+        if (!name.endsWith('INDEX')) {
+          defs.push(`$${name}: ${formatType(v.type)}`);
+        }
+      }
+    }
+  }
+
+  return defs;
 }

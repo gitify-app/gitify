@@ -7,6 +7,7 @@ import type { FragmentInfo } from './utils';
 import {
   aliasRootAndKeyVariables,
   extractIndexedArguments,
+  extractNonIndexedVariableDefinitions,
   extractNonQueryFragments,
   extractQueryFragments,
 } from './utils';
@@ -66,6 +67,13 @@ export class MergeQueryBuilder {
 
     const queryFrags = extractQueryFragments(TemplateDocument);
     this.queryFragmentInner = queryFrags.length ? queryFrags[0].inner : null;
+
+    // Auto-add non-indexed variable definitions from the template document
+    const nonIndexedDefs =
+      extractNonIndexedVariableDefinitions(TemplateDocument).join(', ');
+    if (nonIndexedDefs.length > 0) {
+      this.addVariableDefs(nonIndexedDefs);
+    }
   }
 
   addSelection(selection: string): this {
