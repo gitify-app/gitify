@@ -1,10 +1,10 @@
 import {
-  BatchMergedDetailsQueryTemplateFragmentDoc,
-  FetchBatchMergedTemplateDocument,
+  FetchMergedDetailsTemplateDocument,
   IssueDetailsFragmentDoc,
+  MergedDetailsQueryTemplateFragmentDoc,
 } from './generated/graphql';
 import {
-  aliasNodeAndRenameQueryVariables,
+  aliasFieldAndSubstituteIndexedVars,
   extractIndexedVariableDefinitions,
   extractNonIndexedVariableDefinitions,
   extractNonQueryFragments,
@@ -14,7 +14,9 @@ import {
 describe('renderer/utils/api/graphql/utils.ts', () => {
   describe('getQueryFragmentBody', () => {
     it('should extract query fragments from operation document', () => {
-      const fragments = extractQueryFragments(FetchBatchMergedTemplateDocument);
+      const fragments = extractQueryFragments(
+        FetchMergedDetailsTemplateDocument,
+      );
 
       expect(fragments).not.toBeNull();
       expect(fragments.length).toBe(1);
@@ -26,7 +28,7 @@ describe('renderer/utils/api/graphql/utils.ts', () => {
 
     it('should extract query fragments from fragment document', () => {
       const fragments = extractQueryFragments(
-        BatchMergedDetailsQueryTemplateFragmentDoc,
+        MergedDetailsQueryTemplateFragmentDoc,
       );
 
       expect(fragments).not.toBeNull();
@@ -47,7 +49,7 @@ describe('renderer/utils/api/graphql/utils.ts', () => {
   describe('extractNonQueryFragments', () => {
     it('should extract non-query fragments from FetchBatchMergedTemplateDocument', () => {
       const fragments = extractNonQueryFragments(
-        FetchBatchMergedTemplateDocument,
+        FetchMergedDetailsTemplateDocument,
       );
 
       expect(fragments).not.toBeNull();
@@ -68,7 +70,7 @@ describe('renderer/utils/api/graphql/utils.ts', () => {
   describe('extractIndexedVariableDefinitions', () => {
     it('should extract indexed variable definitions from BatchMergedDetailsQueryTemplateFragmentDoc', () => {
       const varDefs = extractIndexedVariableDefinitions(
-        FetchBatchMergedTemplateDocument,
+        FetchMergedDetailsTemplateDocument,
       );
 
       expect(varDefs).not.toBeNull();
@@ -87,7 +89,7 @@ describe('renderer/utils/api/graphql/utils.ts', () => {
   describe('extractNonIndexedVariableDefinitions', () => {
     it('should extract non-indexed variable definitions from extractNonIndexedVariableDefinitions', () => {
       const varDefs = extractNonIndexedVariableDefinitions(
-        FetchBatchMergedTemplateDocument,
+        FetchMergedDetailsTemplateDocument,
       );
 
       expect(varDefs).not.toBeNull();
@@ -109,7 +111,7 @@ describe('renderer/utils/api/graphql/utils.ts', () => {
       const input =
         'repository(owner: $ownerINDEX, name: $name) { issue(number: $number) @include(if: $isIssueNotificationINDEX) { title } }';
 
-      const result = aliasNodeAndRenameQueryVariables('node', 0, input);
+      const result = aliasFieldAndSubstituteIndexedVars('node', 0, input);
 
       expect(result).toContain('node0: repository');
       expect(result).toContain('$owner0');
