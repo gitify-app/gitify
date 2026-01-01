@@ -37,11 +37,6 @@ class DiscussionHandler extends DefaultHandler {
     _settings: SettingsState,
     fetchedData?: DiscussionDetailsFragment,
   ): Promise<Partial<GitifySubject>> {
-    // If no fetched data and no URL, we can't enrich - return empty
-    if (!fetchedData && !notification.subject.url) {
-      return {};
-    }
-
     const discussion =
       fetchedData ??
       (await fetchDiscussionByNumber(notification)).data.repository?.discussion;
@@ -69,10 +64,7 @@ class DiscussionHandler extends DefaultHandler {
         discussion.author,
       ]),
       comments: discussion.comments.totalCount,
-      labels:
-        discussion.labels?.nodes?.flatMap((label) =>
-          label ? [label.name] : [],
-        ) ?? [],
+      labels: discussion.labels?.nodes.map((label) => label.name) ?? [],
       htmlUrl: latestDiscussionComment?.url ?? discussion.url,
     };
   }

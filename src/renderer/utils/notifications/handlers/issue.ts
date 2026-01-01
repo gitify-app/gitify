@@ -48,10 +48,8 @@ class IssueHandler extends DefaultHandler {
       number: issue.number,
       state: issueState,
       user: issueUser,
-      comments: issue.comments?.totalCount ?? 0,
-      labels:
-        issue.labels?.nodes?.flatMap((label) => (label ? [label.name] : [])) ??
-        undefined,
+      comments: issue.comments.totalCount,
+      labels: issue.labels?.nodes.map((label) => label.name) ?? [],
       milestone: issue.milestone ?? undefined,
       htmlUrl: issueComment?.url ?? issue.url,
     };
