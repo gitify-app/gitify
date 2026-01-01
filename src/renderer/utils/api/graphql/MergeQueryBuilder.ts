@@ -42,12 +42,13 @@ export type FetchBatchMergedTemplateNonIndexedVariables = Pick<
 >;
 
 export class MergeQueryBuilder {
-  private selections: string[] = [];
-  private variableDefinitions: VariableDef[] = [];
-  private variableValues: Record<string, VarValue> = {};
-  private fragments: FragmentInfo[] = [];
+  private readonly selections: string[] = [];
+  private readonly variableDefinitions: VariableDef[] = [];
+  private readonly variableValues: Record<string, VarValue> = {};
+  private readonly fragments: FragmentInfo[] = [];
 
-  private queryFragmentInner: string | null = null;
+  private readonly queryFragmentInner: string | null = null;
+  private readonly indexedTemplateVarDefs: VariableDef[];
 
   constructor() {
     this.fragments.push(...extractNonQueryFragments(TemplateDocument));
@@ -61,6 +62,11 @@ export class MergeQueryBuilder {
     if (nonIndexedDefs.length > 0) {
       this.addVariableDefs(nonIndexedDefs);
     }
+
+    // Precompute indexed variable definitions to avoid repeated AST parsing per node
+    this.indexedTemplateVarDefs = extractIndexedVariableDefinitions(
+      TemplateDocument,
+    );
   }
 
   addSelection(selection: string): this {
@@ -125,8 +131,7 @@ export class MergeQueryBuilder {
     );
     this.addSelection(selection);
 
-    const indexedVarDefs = extractIndexedVariableDefinitions(TemplateDocument);
-    const renamedIndexVarDefs: VariableDef[] = indexedVarDefs.map((varDef) => {
+    const renamedIndexVarDefs: VariableDef[] = this.indexedTemplateVarDefs.map((varDef) => {
       return {
         name: varDef.name.replace('INDEX', `${index}`),
         type: varDef.type,
