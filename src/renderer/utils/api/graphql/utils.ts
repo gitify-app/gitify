@@ -1,6 +1,7 @@
 import { type DocumentNode, parse, print, type TypeNode } from 'graphql';
 
 import type { TypedDocumentString } from './generated/graphql';
+import type { FragmentInfo, VariableDef } from './types';
 
 const INDEXED_SUFFIX = 'INDEX';
 
@@ -17,13 +18,6 @@ function toDocumentNode(
  *
  * Extract fragments from GraphQL operation document.
  */
-
-export type FragmentInfo = {
-  name: string;
-  typeCondition: string;
-  printed: string;
-  inner: string;
-};
 
 /**
  * Return only `Query` fragments from a GraphQL document.
@@ -55,14 +49,19 @@ function extractAllFragments(
   for (const def of ast.definitions) {
     if (def.kind === 'FragmentDefinition') {
       const printed = print(def);
-      const open = printed.indexOf('{');
-      const close = printed.lastIndexOf('}');
+      // Use AST to print just the selection set and strip braces for `inner`
+      const printedSel = def.selectionSet ? print(def.selectionSet) : '';
+      const open = printedSel.indexOf('{');
+      const close = printedSel.lastIndexOf('}');
 
       fragments.push({
         name: def.name.value,
         typeCondition: def.typeCondition.name.value,
         printed: printed,
-        inner: printed.slice(open + 1, close).trim(),
+        inner:
+          open >= 0 && close >= 0
+            ? printedSel.slice(open + 1, close).trim()
+            : '',
       });
     }
   }
@@ -102,63 +101,22 @@ export function aliasNodeAndRenameQueryVariables(
 }
 
 /**
- * GraphQL Argument Utilities
- *
- * Extract field arguments from a GraphQL document selection.
- */
-export function extractIndexedArguments(selectionBody: string): string[] {
-  const all = extractArgumentNames(selectionBody);
-  return filterArgumentsByIndexSuffix(all, true);
-}
-
-export function extractNonIndexedArguments(selectionBody: string): string[] {
-  const all = extractArgumentNames(selectionBody);
-  return filterArgumentsByIndexSuffix(all, false);
-}
-
-function filterArgumentsByIndexSuffix(
-  args: Iterable<string>,
-  indexed: boolean,
-): string[] {
-  return Array.from(args).filter(
-    (name) => name.endsWith(INDEXED_SUFFIX) === indexed,
-  );
-}
-
-function extractArgumentNames(selectionBody: string): Set<string> {
-  const names = new Set<string>();
-  const regex = /\$([_A-Za-z][_A-Za-z0-9]*)\b/g;
-  let match: RegExpExecArray | null = regex.exec(selectionBody);
-
-  while (match !== null) {
-    names.add(match[1]);
-    match = regex.exec(selectionBody);
-  }
-
-  return names;
-}
-
-/**
  * GraphQL Variable Definition Utilities
  *
  * Extract variable definitions from a GraphQL document's operations.
  * Returns strings like `$var: Type` suitable for insertion into a query definition.
  */
-type VariableDef = {
-  name: string;
-  type: string;
-};
 
 export function extractIndexedVariableDefinitions(
   doc: TypedDocumentString<unknown, unknown>,
-): string[] {
+): VariableDef[] {
   const all = extractVariableDefinitions(doc);
   return filterVariableDefinitionsByIndexSuffix(all, true);
 }
 
 export function extractNonIndexedVariableDefinitions(
   doc: TypedDocumentString<unknown, unknown>,
-): string[] {
+): VariableDef[] {
   const all = extractVariableDefinitions(doc);
   return filterVariableDefinitionsByIndexSuffix(all, false);
 }
@@ -166,10 +124,10 @@ export function extractNonIndexedVariableDefinitions(
 function filterVariableDefinitionsByIndexSuffix(
   variableDefs: VariableDef[],
   indexed: boolean,
-): string[] {
-  return variableDefs
-    .filter((varDef) => varDef.name.endsWith(INDEXED_SUFFIX) === indexed)
-    .map((varDef) => `$${varDef.name}: ${varDef.type}`);
+): VariableDef[] {
+  return variableDefs.filter(
+    (varDef) => varDef.name.endsWith(INDEXED_SUFFIX) === indexed,
+  );
 }
 
 function extractVariableDefinitions(

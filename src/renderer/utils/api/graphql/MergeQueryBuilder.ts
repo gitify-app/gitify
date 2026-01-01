@@ -3,10 +3,10 @@ import {
   FetchBatchMergedTemplateDocument,
   type FetchBatchMergedTemplateQueryVariables,
 } from './generated/graphql';
-import type { FragmentInfo } from './utils';
+import type { FragmentInfo, VariableDef } from './types';
 import {
   aliasNodeAndRenameQueryVariables,
-  extractIndexedArguments,
+  extractIndexedVariableDefinitions,
   extractNonIndexedVariableDefinitions,
   extractNonQueryFragments,
   extractQueryFragments,
@@ -18,7 +18,6 @@ type TemplateVariables = FetchBatchMergedTemplateQueryVariables;
 
 // Preserve exact Scalar-based variable value types via the generated QueryVariables
 type VarValue = TemplateVariables[keyof TemplateVariables];
-type TypeMap = Record<string, string>;
 
 // Split variables by the `INDEX` suffix using the generated QueryVariables type
 type IndexedKeys = Extract<keyof TemplateVariables, `${string}INDEX`>;
@@ -44,19 +43,11 @@ export type FetchBatchMergedTemplateNonIndexedVariables = Pick<
 
 export class MergeQueryBuilder {
   private selections: string[] = [];
-  private variableDefinitions: string[] = [];
+  private variableDefinitions: VariableDef[] = [];
   private variableValues: Record<string, VarValue> = {};
   private fragments: FragmentInfo[] = [];
 
   private queryFragmentInner: string | null = null;
-  private typeMap: TypeMap = {
-    owner: 'String!',
-    name: 'String!',
-    number: 'Int!',
-    isDiscussionNotification: 'Boolean!',
-    isIssueNotification: 'Boolean!',
-    isPullRequestNotification: 'Boolean!',
-  };
 
   constructor() {
     this.fragments.push(...extractNonQueryFragments(TemplateDocument));
@@ -66,7 +57,7 @@ export class MergeQueryBuilder {
 
     // Auto-add non-indexed variable definitions from the template document
     const nonIndexedDefs =
-      extractNonIndexedVariableDefinitions(TemplateDocument).join(', ');
+      extractNonIndexedVariableDefinitions(TemplateDocument);
     if (nonIndexedDefs.length > 0) {
       this.addVariableDefs(nonIndexedDefs);
     }
@@ -79,9 +70,9 @@ export class MergeQueryBuilder {
     return this;
   }
 
-  addVariableDefs(defs: string): this {
+  addVariableDefs(defs: VariableDef[]): this {
     if (defs) {
-      this.variableDefinitions.push(defs);
+      this.variableDefinitions.push(...defs);
     }
     return this;
   }
@@ -135,17 +126,15 @@ export class MergeQueryBuilder {
     );
     this.addSelection(selection);
 
-    const indexedArgs = extractIndexedArguments(this.queryFragmentInner);
-    const defs = indexedArgs
-      .map((arg) => {
-        const base = arg.replace(/INDEX$/, '');
-        const type = this.typeMap[base] ?? 'String';
-        return `$${base}${index}: ${type}`;
-      })
-      .join(', ');
-    if (defs.length > 0) {
-      this.addVariableDefs(defs);
-    }
+    const indexedVarDefs = extractIndexedVariableDefinitions(TemplateDocument);
+    const renamedIndexVarDefs: VariableDef[] = indexedVarDefs.map((varDef) => {
+      return {
+        name: varDef.name.replace('INDEX', `${index}`),
+        type: varDef.type,
+      };
+    });
+
+    this.addVariableDefs(renamedIndexVarDefs);
 
     for (const [base, val] of Object.entries(values)) {
       this.setVar(`${base}${index}`, val);
@@ -155,7 +144,9 @@ export class MergeQueryBuilder {
   }
 
   buildQuery(docName = 'FetchMergedNotifications'): string {
-    const vars = this.variableDefinitions.join(', ');
+    const vars = this.variableDefinitions
+      .map((varDef) => `$${varDef.name}: ${varDef.type}`)
+      .join(', ');
     const frags = this.fragments.map((f) => f.printed).join('\n');
     return `query ${docName}(${vars}) {\n${this.selections.join('\n')}\n}\n\n${frags}\n`;
   }
