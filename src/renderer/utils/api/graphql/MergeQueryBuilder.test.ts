@@ -25,7 +25,7 @@ describe('renderer/utils/api/graphql/MergeQueryBuilder.ts', () => {
   };
 
   const nodeVarsB: FetchBatchMergedTemplateIndexedBaseVariables = {
-    owner: 'github',
+    owner: 'gitify-app',
     name: 'gitify',
     number: 456,
     isDiscussionNotification: true,
@@ -123,7 +123,7 @@ describe('renderer/utils/api/graphql/MergeQueryBuilder.ts', () => {
       isDiscussionNotification0: false,
       isIssueNotification0: true,
       isPullRequestNotification0: false,
-      owner1: 'github',
+      owner1: 'gitify-app',
       name1: 'gitify',
       number1: 456,
       isDiscussionNotification1: true,
