@@ -5,7 +5,7 @@ import {
 } from './generated/graphql';
 import type { FragmentInfo } from './utils';
 import {
-  aliasRootAndKeyVariables,
+  aliasNodeAndRenameQueryVariables,
   extractIndexedArguments,
   extractNonIndexedVariableDefinitions,
   extractNonQueryFragments,
@@ -58,11 +58,7 @@ export class MergeQueryBuilder {
     isPullRequestNotification: 'Boolean!',
   };
 
-  constructor(options?: { typeMap?: TypeMap }) {
-    if (options?.typeMap) {
-      this.typeMap = { ...this.typeMap, ...options.typeMap };
-    }
-
+  constructor() {
     this.fragments.push(...extractNonQueryFragments(TemplateDocument));
 
     const queryFrags = extractQueryFragments(TemplateDocument);
@@ -112,6 +108,16 @@ export class MergeQueryBuilder {
     return this;
   }
 
+  // Convenience: add a node and return its computed response alias
+  addNode(
+    alias: string,
+    index: number,
+    values: Exact<FetchBatchMergedTemplateIndexedBaseVariables>,
+  ): string {
+    this.addQueryNode(alias, index, values);
+    return `${alias}${index}`;
+  }
+
   addQueryNode(
     alias: string,
     index: number,
@@ -121,9 +127,9 @@ export class MergeQueryBuilder {
       return this;
     }
 
-    const rootAlias = `${alias}${index}`;
-    const selection = aliasRootAndKeyVariables(
-      rootAlias,
+    const nodeAlias = `${alias}${index}`;
+    const selection = aliasNodeAndRenameQueryVariables(
+      nodeAlias,
       index,
       this.queryFragmentInner,
     );
@@ -146,16 +152,6 @@ export class MergeQueryBuilder {
     }
 
     return this;
-  }
-
-  // Convenience: add a node and return its computed response alias
-  addNode(
-    alias: string,
-    index: number,
-    values: Exact<FetchBatchMergedTemplateIndexedBaseVariables>,
-  ): string {
-    this.addQueryNode(alias, index, values);
-    return `${alias}${index}`;
   }
 
   buildQuery(docName = 'FetchMergedNotifications'): string {
