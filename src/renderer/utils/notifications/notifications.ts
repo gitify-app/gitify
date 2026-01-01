@@ -6,7 +6,7 @@ import type {
   SettingsState,
 } from '../../types';
 import {
-  fetchNotificationDetails,
+  fetchNotificationDetailsForList,
   listNotificationsForAuthenticatedUser,
 } from '../api/client';
 import { determineFailureType } from '../api/errors';
@@ -139,7 +139,7 @@ export async function enrichNotifications(
     FetchMergedDetailsTemplateQuery['repository']
   > = new Map();
   try {
-    mergedResults = await fetchNotificationDetails(notifications);
+    mergedResults = await fetchNotificationDetailsForList(notifications);
   } catch (err) {
     rendererLogError(
       'enrichNotifications',

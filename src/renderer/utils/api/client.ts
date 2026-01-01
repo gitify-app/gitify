@@ -278,7 +278,7 @@ export async function fetchPullByNumber(
  * This significantly reduces the amount of API calls by performing a building a merged GraphQL query,
  * making the most efficient use of the available GitHub API quota limits.
  */
-export async function fetchNotificationDetails(
+export async function fetchNotificationDetailsForList(
   notifications: GitifyNotification[],
 ): Promise<
   Map<GitifyNotification, FetchMergedDetailsTemplateQuery['repository']>
