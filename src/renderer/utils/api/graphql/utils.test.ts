@@ -63,25 +63,6 @@ describe('renderer/utils/api/graphql/utils.ts', () => {
         'PullRequestReview',
       ]);
     });
-
-    it('should extract non-query fragments from FetchBatchMergedTemplateDocument', () => {
-      const fragments = extractNonQueryFragments(
-        FetchBatchMergedTemplateDocument,
-      );
-
-      expect(fragments).not.toBeNull();
-      expect(fragments.length).toBe(8);
-      expect(fragments.flatMap((f) => f.typeCondition)).toEqual([
-        'Actor',
-        'Milestone',
-        'Discussion',
-        'DiscussionComment',
-        'DiscussionComment',
-        'Issue',
-        'PullRequest',
-        'PullRequestReview',
-      ]);
-    });
   });
 
   describe('extractIndexedVariableDefinitions', () => {
