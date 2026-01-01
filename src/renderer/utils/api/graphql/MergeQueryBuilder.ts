@@ -97,16 +97,6 @@ export class MergeQueryBuilder {
   }
 
   /**
-   * Add graphql fragments
-   */
-  addFragments(fragments: FragmentInfo[] | undefined): this {
-    if (fragments?.length) {
-      this.fragments.push(...fragments);
-    }
-    return this;
-  }
-
-  /**
    * Set shared (non-indexed) variables
    */
   setSharedVariables(
