@@ -139,18 +139,18 @@ export const NotificationRow: FC<NotificationRowProps> = ({
           />
 
           <HoverButton
-            action={actionUnsubscribeFromThread}
-            icon={BellSlashIcon}
-            label="Unsubscribe from thread"
-            testid="notification-unsubscribe-from-thread"
-          />
-
-          <HoverButton
             action={actionMarkAsDone}
             enabled={isMarkAsDoneFeatureSupported(notification.account)}
             icon={CheckIcon}
             label="Mark as done"
             testid="notification-mark-as-done"
+          />
+
+          <HoverButton
+            action={actionUnsubscribeFromThread}
+            icon={BellSlashIcon}
+            label="Unsubscribe from thread"
+            testid="notification-unsubscribe-from-thread"
           />
         </HoverGroup>
       )}
