@@ -296,14 +296,13 @@ export async function fetchNotificationDetailsForList(
   const builder = new MergeQueryBuilder();
   const aliasToNotification = new Map<string, GitifyNotification>();
 
-  let index = 0;
   for (const notification of notifications) {
     const handler = createNotificationHandler(notification);
     if (!handler.supportsMergedQueryEnrichment) {
       continue;
     }
 
-    const alias = builder.addNode('node', index, {
+    const alias = builder.addNode('node', {
       owner: notification.repository.owner.login,
       name: notification.repository.name,
       number: getNumberFromUrl(notification.subject.url),
@@ -313,10 +312,7 @@ export async function fetchNotificationDetailsForList(
     });
 
     aliasToNotification.set(alias, notification);
-    index += 1;
   }
-
-  const mergedQuery = builder.buildQuery();
 
   builder.setSharedVariables({
     includeIsAnswered: isAnsweredDiscussionFeatureSupported(
@@ -329,13 +325,15 @@ export async function fetchNotificationDetailsForList(
     lastReplies: Constants.GRAPHQL_ARGS.LAST_REPLIES,
     lastReviews: Constants.GRAPHQL_ARGS.LAST_REVIEWS,
   });
-  const variables = builder.getVariables();
+
+  const query = builder.getGraphQLQuery();
+  const variables = builder.getGraphQLVariables();
 
   const url = getGitHubGraphQLUrl(notifications[0].account.hostname);
   const response = await performGraphQLRequestString(
     url.toString() as Link,
     notifications[0].account.token,
-    mergedQuery,
+    query,
     variables,
   );
 

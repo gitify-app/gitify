@@ -17,7 +17,7 @@ const TemplateDocument = FetchMergedDetailsTemplateDocument;
 type TemplateVariables = FetchMergedDetailsTemplateQueryVariables;
 
 // Preserve exact Scalar-based variable value types via the generated QueryVariables
-type VarValue = TemplateVariables[keyof TemplateVariables];
+type VariableValue = TemplateVariables[keyof TemplateVariables];
 
 // Split variables by the `INDEX` suffix using the generated QueryVariables type
 type IndexedKeys = Extract<keyof TemplateVariables, `${string}INDEX`>;
@@ -45,30 +45,32 @@ export type FetchBatchMergedTemplateNonIndexedVariables = Pick<
 export class MergeQueryBuilder {
   private readonly selections: string[] = [];
   private readonly variableDefinitions: VariableDef[] = [];
-  private readonly variableValues: Record<string, VarValue> = {};
+  private readonly variableValues: Record<string, VariableValue> = {};
   private readonly fragments: FragmentInfo[] = [];
 
-  private readonly queryFragmentInner: string | null = null;
-  private readonly indexedTemplateVarDefs: VariableDef[];
+  // Precomputed, invariant template-derived data (computed once per module load)
+  private static readonly TEMPLATE_FRAGMENTS =
+    extractNonQueryFragments(TemplateDocument);
+  private static readonly TEMPLATE_QUERY_INNER = (() => {
+    const queryFrags = extractQueryFragments(TemplateDocument);
+    return queryFrags.length ? queryFrags[0].inner : null;
+  })();
+  private static readonly TEMPLATE_NON_INDEXED_DEFS =
+    extractNonIndexedVariableDefinitions(TemplateDocument);
+  private static readonly TEMPLATE_INDEXED_VAR_DEFS =
+    extractIndexedVariableDefinitions(TemplateDocument);
 
   constructor() {
-    this.fragments.push(...extractNonQueryFragments(TemplateDocument));
+    // Add precomputed static fragments
+    this.fragments.push(...MergeQueryBuilder.TEMPLATE_FRAGMENTS);
 
-    const queryFrags = extractQueryFragments(TemplateDocument);
-    this.queryFragmentInner = queryFrags.length ? queryFrags[0].inner : null;
-
-    // Auto-add non-indexed variable definitions from the template document
-    const nonIndexedDefs =
-      extractNonIndexedVariableDefinitions(TemplateDocument);
-    if (nonIndexedDefs.length > 0) {
-      this.addVariableDefs(nonIndexedDefs);
-    }
-
-    // Precompute indexed variable definitions to avoid repeated AST parsing per node
-    this.indexedTemplateVarDefs =
-      extractIndexedVariableDefinitions(TemplateDocument);
+    // Add common/shared (non-indexed) variable definitions from the template document
+    this.addVariableDefinitions(MergeQueryBuilder.TEMPLATE_NON_INDEXED_DEFS);
   }
 
+  /**
+   * Add selection set.
+   */
   addSelection(selection: string): this {
     if (selection) {
       this.selections.push(selection);
@@ -76,18 +78,27 @@ export class MergeQueryBuilder {
     return this;
   }
 
-  addVariableDefs(defs: VariableDef[]): this {
+  /**
+   * Add GraphQL variable definition
+   */
+  addVariableDefinitions(defs: VariableDef[]): this {
     if (defs) {
       this.variableDefinitions.push(...defs);
     }
     return this;
   }
 
-  setVar(name: string, value: VarValue): this {
+  /**
+   * Add GraphQL variable with value
+   */
+  setVariableValue(name: string, value: VariableValue): this {
     this.variableValues[name] = value;
     return this;
   }
 
+  /**
+   * Add graphql fragments
+   */
   addFragments(fragments: FragmentInfo[] | undefined): this {
     if (fragments?.length) {
       this.fragments.push(...fragments);
@@ -95,70 +106,85 @@ export class MergeQueryBuilder {
     return this;
   }
 
-  // Set shared (non-indexed) variables
+  /**
+   * Set shared (non-indexed) variables
+   */
   setSharedVariables(
     values: Exact<FetchBatchMergedTemplateNonIndexedVariables>,
   ): this {
     for (const [name, value] of Object.entries(values)) {
-      this.setVar(name, value as VarValue);
+      this.setVariableValue(name, value as VariableValue);
     }
     return this;
   }
 
-  // Convenience: add a node and return its computed response alias
+  /**
+   * Add a new selection set (ie: node) to the query.
+   * @param aliasPrefix The alias prefix to be used for the new selection set node.
+   * @param values The values for the selection set variables/arguments.
+   * @returns the computed node alias name
+   */
   addNode(
-    alias: string,
-    index: number,
+    aliasPrefix: string,
     values: Exact<FetchBatchMergedTemplateIndexedBaseVariables>,
   ): string {
-    const aliasWithIndex = `${alias}${index}`;
+    const index = this.selections.length;
+    const aliasWithIndex = `${aliasPrefix}${index}`;
     this.addQueryNode(aliasWithIndex, index, values);
     return aliasWithIndex;
   }
 
-  addQueryNode(
+  /**
+   * Add a new selection set (ie: node) to the query.
+   */
+  private addQueryNode(
     alias: string,
     index: number,
     values: Exact<FetchBatchMergedTemplateIndexedBaseVariables>,
   ): this {
-    if (!this.queryFragmentInner) {
-      return this;
-    }
-
     const selection = aliasFieldAndSubstituteIndexedVars(
       alias,
       index,
-      this.queryFragmentInner,
+      MergeQueryBuilder.TEMPLATE_QUERY_INNER,
     );
     this.addSelection(selection);
 
-    const renamedIndexVarDefs: VariableDef[] = this.indexedTemplateVarDefs.map(
-      (varDef) => {
+    const renamedIndexVarDefs: VariableDef[] =
+      MergeQueryBuilder.TEMPLATE_INDEXED_VAR_DEFS.map((varDef) => {
         return {
           name: varDef.name.replace('INDEX', `${index}`),
           type: varDef.type,
         };
-      },
-    );
+      });
 
-    this.addVariableDefs(renamedIndexVarDefs);
+    this.addVariableDefinitions(renamedIndexVarDefs);
 
     for (const [base, val] of Object.entries(values)) {
-      this.setVar(`${base}${index}`, val);
+      this.setVariableValue(`${base}${index}`, val);
     }
 
     return this;
   }
 
-  buildQuery(docName = 'FetchMergedNotifications'): string {
-    const vars = this.variableDefinitions
+  /**
+   * Returns a formatted GraphQL Query operation document/statement.
+   */
+  getGraphQLQuery(docName = 'FetchMergedNotifications'): string {
+    const variablesDefinitions = this.variableDefinitions
       .map((varDef) => `$${varDef.name}: ${varDef.type}`)
       .join(', ');
-    const frags = this.fragments.map((f) => f.printed).join('\n');
-    return `query ${docName}(${vars}) {\n${this.selections.join('\n')}\n}\n\n${frags}\n`;
+
+    const selections = this.selections.join('\n');
+
+    const fragments = this.fragments.map((f) => f.printed).join('\n');
+
+    return `query ${docName}(${variablesDefinitions}) {\n${selections}\n}\n\n${fragments}\n`;
   }
 
-  getVariables(): Record<string, VarValue> {
+  /**
+   * Return the GraphQL Query Variables.
+   */
+  getGraphQLVariables(): Record<string, VariableValue> {
     return this.variableValues;
   }
 }
