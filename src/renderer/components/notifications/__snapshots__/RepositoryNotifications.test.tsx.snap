@@ -103,35 +103,6 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
               data-wrap="nowrap"
             >
               <button
-                aria-label="Hide repository notifications"
-                class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
-                data-component="IconButton"
-                data-loading="false"
-                data-no-visuals="true"
-                data-size="small"
-                data-testid="repository-toggle"
-                data-variant="invisible"
-                title="Hide repository notifications"
-                type="button"
-              >
-                <svg
-                  aria-hidden="true"
-                  class="octicon octicon-chevron-down"
-                  display="inline-block"
-                  fill="currentColor"
-                  focusable="false"
-                  height="16"
-                  overflow="visible"
-                  style="vertical-align: text-bottom;"
-                  viewBox="0 0 16 16"
-                  width="16"
-                >
-                  <path
-                    d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"
-                  />
-                </svg>
-              </button>
-              <button
                 aria-label="Mark repository as done"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
@@ -157,6 +128,35 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
                 >
                   <path
                     d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
+                  />
+                </svg>
+              </button>
+              <button
+                aria-label="Hide repository notifications"
+                class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
+                data-component="IconButton"
+                data-loading="false"
+                data-no-visuals="true"
+                data-size="small"
+                data-testid="repository-toggle"
+                data-variant="invisible"
+                title="Hide repository notifications"
+                type="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="octicon octicon-chevron-down"
+                  display="inline-block"
+                  fill="currentColor"
+                  focusable="false"
+                  height="16"
+                  overflow="visible"
+                  style="vertical-align: text-bottom;"
+                  viewBox="0 0 16 16"
+                  width="16"
+                >
+                  <path
+                    d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"
                   />
                 </svg>
               </button>
@@ -271,35 +271,6 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
             data-wrap="nowrap"
           >
             <button
-              aria-label="Hide repository notifications"
-              class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
-              data-component="IconButton"
-              data-loading="false"
-              data-no-visuals="true"
-              data-size="small"
-              data-testid="repository-toggle"
-              data-variant="invisible"
-              title="Hide repository notifications"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-chevron-down"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"
-                />
-              </svg>
-            </button>
-            <button
               aria-label="Mark repository as done"
               class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
               data-component="IconButton"
@@ -325,6 +296,35 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
               >
                 <path
                   d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
+                />
+              </svg>
+            </button>
+            <button
+              aria-label="Hide repository notifications"
+              class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
+              data-component="IconButton"
+              data-loading="false"
+              data-no-visuals="true"
+              data-size="small"
+              data-testid="repository-toggle"
+              data-variant="invisible"
+              title="Hide repository notifications"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-chevron-down"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"
                 />
               </svg>
             </button>
@@ -525,35 +525,6 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
                 </svg>
               </button>
               <button
-                aria-label="Hide repository notifications"
-                class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
-                data-component="IconButton"
-                data-loading="false"
-                data-no-visuals="true"
-                data-size="small"
-                data-testid="repository-toggle"
-                data-variant="invisible"
-                title="Hide repository notifications"
-                type="button"
-              >
-                <svg
-                  aria-hidden="true"
-                  class="octicon octicon-chevron-down"
-                  display="inline-block"
-                  fill="currentColor"
-                  focusable="false"
-                  height="16"
-                  overflow="visible"
-                  style="vertical-align: text-bottom;"
-                  viewBox="0 0 16 16"
-                  width="16"
-                >
-                  <path
-                    d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"
-                  />
-                </svg>
-              </button>
-              <button
                 aria-label="Mark repository as done"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
@@ -579,6 +550,35 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
                 >
                   <path
                     d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
+                  />
+                </svg>
+              </button>
+              <button
+                aria-label="Hide repository notifications"
+                class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
+                data-component="IconButton"
+                data-loading="false"
+                data-no-visuals="true"
+                data-size="small"
+                data-testid="repository-toggle"
+                data-variant="invisible"
+                title="Hide repository notifications"
+                type="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="octicon octicon-chevron-down"
+                  display="inline-block"
+                  fill="currentColor"
+                  focusable="false"
+                  height="16"
+                  overflow="visible"
+                  style="vertical-align: text-bottom;"
+                  viewBox="0 0 16 16"
+                  width="16"
+                >
+                  <path
+                    d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"
                   />
                 </svg>
               </button>
@@ -722,35 +722,6 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
               </svg>
             </button>
             <button
-              aria-label="Hide repository notifications"
-              class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
-              data-component="IconButton"
-              data-loading="false"
-              data-no-visuals="true"
-              data-size="small"
-              data-testid="repository-toggle"
-              data-variant="invisible"
-              title="Hide repository notifications"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-chevron-down"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"
-                />
-              </svg>
-            </button>
-            <button
               aria-label="Mark repository as done"
               class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
               data-component="IconButton"
@@ -776,6 +747,35 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
               >
                 <path
                   d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
+                />
+              </svg>
+            </button>
+            <button
+              aria-label="Hide repository notifications"
+              class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
+              data-component="IconButton"
+              data-loading="false"
+              data-no-visuals="true"
+              data-size="small"
+              data-testid="repository-toggle"
+              data-variant="invisible"
+              title="Hide repository notifications"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-chevron-down"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"
                 />
               </svg>
             </button>
@@ -983,35 +983,6 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
                 </svg>
               </button>
               <button
-                aria-label="Show repository notifications"
-                class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
-                data-component="IconButton"
-                data-loading="false"
-                data-no-visuals="true"
-                data-size="small"
-                data-testid="repository-toggle"
-                data-variant="invisible"
-                title="Show repository notifications"
-                type="button"
-              >
-                <svg
-                  aria-hidden="true"
-                  class="octicon octicon-chevron-right"
-                  display="inline-block"
-                  fill="currentColor"
-                  focusable="false"
-                  height="16"
-                  overflow="visible"
-                  style="vertical-align: text-bottom;"
-                  viewBox="0 0 16 16"
-                  width="16"
-                >
-                  <path
-                    d="M6.22 3.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042L9.94 8 6.22 4.28a.75.75 0 0 1 0-1.06Z"
-                  />
-                </svg>
-              </button>
-              <button
                 aria-label="Mark repository as done"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
@@ -1037,6 +1008,35 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
                 >
                   <path
                     d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
+                  />
+                </svg>
+              </button>
+              <button
+                aria-label="Show repository notifications"
+                class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
+                data-component="IconButton"
+                data-loading="false"
+                data-no-visuals="true"
+                data-size="small"
+                data-testid="repository-toggle"
+                data-variant="invisible"
+                title="Show repository notifications"
+                type="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="octicon octicon-chevron-right"
+                  display="inline-block"
+                  fill="currentColor"
+                  focusable="false"
+                  height="16"
+                  overflow="visible"
+                  style="vertical-align: text-bottom;"
+                  viewBox="0 0 16 16"
+                  width="16"
+                >
+                  <path
+                    d="M6.22 3.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042L9.94 8 6.22 4.28a.75.75 0 0 1 0-1.06Z"
                   />
                 </svg>
               </button>
@@ -1180,35 +1180,6 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
                 </svg>
               </button>
               <button
-                aria-label="Hide repository notifications"
-                class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
-                data-component="IconButton"
-                data-loading="false"
-                data-no-visuals="true"
-                data-size="small"
-                data-testid="repository-toggle"
-                data-variant="invisible"
-                title="Hide repository notifications"
-                type="button"
-              >
-                <svg
-                  aria-hidden="true"
-                  class="octicon octicon-chevron-down"
-                  display="inline-block"
-                  fill="currentColor"
-                  focusable="false"
-                  height="16"
-                  overflow="visible"
-                  style="vertical-align: text-bottom;"
-                  viewBox="0 0 16 16"
-                  width="16"
-                >
-                  <path
-                    d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"
-                  />
-                </svg>
-              </button>
-              <button
                 aria-label="Mark repository as done"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
@@ -1234,6 +1205,35 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
                 >
                   <path
                     d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
+                  />
+                </svg>
+              </button>
+              <button
+                aria-label="Hide repository notifications"
+                class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
+                data-component="IconButton"
+                data-loading="false"
+                data-no-visuals="true"
+                data-size="small"
+                data-testid="repository-toggle"
+                data-variant="invisible"
+                title="Hide repository notifications"
+                type="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="octicon octicon-chevron-down"
+                  display="inline-block"
+                  fill="currentColor"
+                  focusable="false"
+                  height="16"
+                  overflow="visible"
+                  style="vertical-align: text-bottom;"
+                  viewBox="0 0 16 16"
+                  width="16"
+                >
+                  <path
+                    d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"
                   />
                 </svg>
               </button>
@@ -1384,35 +1384,6 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
               </svg>
             </button>
             <button
-              aria-label="Hide repository notifications"
-              class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
-              data-component="IconButton"
-              data-loading="false"
-              data-no-visuals="true"
-              data-size="small"
-              data-testid="repository-toggle"
-              data-variant="invisible"
-              title="Hide repository notifications"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-chevron-down"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"
-                />
-              </svg>
-            </button>
-            <button
               aria-label="Mark repository as done"
               class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
               data-component="IconButton"
@@ -1438,6 +1409,35 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
               >
                 <path
                   d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
+                />
+              </svg>
+            </button>
+            <button
+              aria-label="Hide repository notifications"
+              class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
+              data-component="IconButton"
+              data-loading="false"
+              data-no-visuals="true"
+              data-size="small"
+              data-testid="repository-toggle"
+              data-variant="invisible"
+              title="Hide repository notifications"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-chevron-down"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"
                 />
               </svg>
             </button>
@@ -1645,35 +1645,6 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
                 </svg>
               </button>
               <button
-                aria-label="Hide repository notifications"
-                class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
-                data-component="IconButton"
-                data-loading="false"
-                data-no-visuals="true"
-                data-size="small"
-                data-testid="repository-toggle"
-                data-variant="invisible"
-                title="Hide repository notifications"
-                type="button"
-              >
-                <svg
-                  aria-hidden="true"
-                  class="octicon octicon-chevron-down"
-                  display="inline-block"
-                  fill="currentColor"
-                  focusable="false"
-                  height="16"
-                  overflow="visible"
-                  style="vertical-align: text-bottom;"
-                  viewBox="0 0 16 16"
-                  width="16"
-                >
-                  <path
-                    d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"
-                  />
-                </svg>
-              </button>
-              <button
                 aria-label="Mark repository as done"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
@@ -1699,6 +1670,35 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
                 >
                   <path
                     d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
+                  />
+                </svg>
+              </button>
+              <button
+                aria-label="Hide repository notifications"
+                class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
+                data-component="IconButton"
+                data-loading="false"
+                data-no-visuals="true"
+                data-size="small"
+                data-testid="repository-toggle"
+                data-variant="invisible"
+                title="Hide repository notifications"
+                type="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="octicon octicon-chevron-down"
+                  display="inline-block"
+                  fill="currentColor"
+                  focusable="false"
+                  height="16"
+                  overflow="visible"
+                  style="vertical-align: text-bottom;"
+                  viewBox="0 0 16 16"
+                  width="16"
+                >
+                  <path
+                    d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"
                   />
                 </svg>
               </button>
@@ -1849,35 +1849,6 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
               </svg>
             </button>
             <button
-              aria-label="Hide repository notifications"
-              class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
-              data-component="IconButton"
-              data-loading="false"
-              data-no-visuals="true"
-              data-size="small"
-              data-testid="repository-toggle"
-              data-variant="invisible"
-              title="Hide repository notifications"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-chevron-down"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"
-                />
-              </svg>
-            </button>
-            <button
               aria-label="Mark repository as done"
               class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
               data-component="IconButton"
@@ -1903,6 +1874,35 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
               >
                 <path
                   d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
+                />
+              </svg>
+            </button>
+            <button
+              aria-label="Hide repository notifications"
+              class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
+              data-component="IconButton"
+              data-loading="false"
+              data-no-visuals="true"
+              data-size="small"
+              data-testid="repository-toggle"
+              data-variant="invisible"
+              title="Hide repository notifications"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-chevron-down"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"
                 />
               </svg>
             </button>
