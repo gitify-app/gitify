@@ -24,11 +24,6 @@ export function filterBaseNotifications(
   return notifications.filter((notification) => {
     let passesFilters = true;
 
-    // Filter out read notifications if showReadNotifications is disabled
-    if (!settings.showReadNotifications && !notification.unread) {
-      return false;
-    }
-
     // Apply base qualifier include/exclude filters (org, repo, etc.)
     for (const qualifier of BASE_SEARCH_QUALIFIERS) {
       if (!passesFilters) {

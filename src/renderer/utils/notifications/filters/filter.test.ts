@@ -65,40 +65,11 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
     ];
 
     describe('filterBaseNotifications', () => {
-      it('should show all notifications when showReadNotifications is enabled', () => {
-        const notifications = [
-          { ...mockNotifications[0], unread: true },
-          { ...mockNotifications[1], unread: false },
-        ];
-        const result = filterBaseNotifications(notifications, {
-          ...mockSettings,
-          showReadNotifications: true,
-        });
-
-        expect(result.length).toBe(2);
-        expect(result).toEqual(notifications);
-      });
-
-      it('should filter out read notifications when showReadNotifications is disabled', () => {
-        const notifications = [
-          { ...mockNotifications[0], unread: true },
-          { ...mockNotifications[1], unread: false },
-        ];
-        const result = filterBaseNotifications(notifications, {
-          ...mockSettings,
-          showReadNotifications: false,
-        });
-
-        expect(result.length).toBe(1);
-        expect(result[0].unread).toBe(true);
-      });
-
-      it('should filter notifications by subject type when provided', async () => {
+      it('should filter notifications by subject type when provided', () => {
         mockNotifications[0].subject.type = 'Issue';
         mockNotifications[1].subject.type = 'PullRequest';
         const result = filterBaseNotifications(mockNotifications, {
           ...mockSettings,
-          showReadNotifications: true,
           filterSubjectTypes: ['Issue'],
         });
 
@@ -111,7 +82,6 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
         mockNotifications[1].reason.code = 'manual';
         const result = filterBaseNotifications(mockNotifications, {
           ...mockSettings,
-          showReadNotifications: true,
           filterReasons: ['manual'],
         });
 
@@ -119,10 +89,9 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
         expect(result).toEqual([mockNotifications[1]]);
       });
 
-      it('should filter notifications that match include organization', async () => {
+      it('should filter notifications that match include organization', () => {
         const result = filterBaseNotifications(mockNotifications, {
           ...mockSettings,
-          showReadNotifications: true,
           filterIncludeSearchTokens: ['org:gitify-app' as SearchToken],
         });
 
@@ -130,10 +99,9 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
         expect(result).toEqual([mockNotifications[0]]);
       });
 
-      it('should filter notifications that match exclude organization', async () => {
+      it('should filter notifications that match exclude organization', () => {
         const result = filterBaseNotifications(mockNotifications, {
           ...mockSettings,
-          showReadNotifications: true,
           filterExcludeSearchTokens: ['org:github' as SearchToken],
         });
 
@@ -141,10 +109,9 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
         expect(result).toEqual([mockNotifications[0]]);
       });
 
-      it('should filter notifications that match include repository', async () => {
+      it('should filter notifications that match include repository', () => {
         const result = filterBaseNotifications(mockNotifications, {
           ...mockSettings,
-          showReadNotifications: true,
           filterIncludeSearchTokens: ['repo:gitify-app/gitify' as SearchToken],
         });
 
@@ -152,10 +119,9 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
         expect(result).toEqual([mockNotifications[0]]);
       });
 
-      it('should filter notifications that match exclude repository', async () => {
+      it('should filter notifications that match exclude repository', () => {
         const result = filterBaseNotifications(mockNotifications, {
           ...mockSettings,
-          showReadNotifications: true,
           filterExcludeSearchTokens: ['repo:github/github' as SearchToken],
         });
 
