@@ -126,14 +126,14 @@ export class MergeQueryBuilder {
   addNode(values: Exact<FetchBatchMergedTemplateIndexedBaseVariables>): string {
     const index = this.selections.length;
     const aliasWithIndex = `node${index}`;
-    this.addQueryNode(aliasWithIndex, index, values);
+    this.addSelectionNodeFromQueryTemplate(aliasWithIndex, index, values);
     return aliasWithIndex;
   }
 
   /**
    * Add a new selection set (ie: node) to the query.
    */
-  private addQueryNode(
+  private addSelectionNodeFromQueryTemplate(
     alias: string,
     index: number,
     values: Exact<FetchBatchMergedTemplateIndexedBaseVariables>,
