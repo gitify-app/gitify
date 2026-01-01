@@ -329,11 +329,11 @@ export const NotificationSettings: FC = () => {
         />
 
         <Checkbox
-          checked={settings.showReadNotifications}
+          checked={settings.fetchReadNotifications}
           label="Fetch read notifications"
-          name="showReadNotifications"
+          name="fetchReadNotifications"
           onChange={(evt) =>
-            updateSetting('showReadNotifications', evt.target.checked)
+            updateSetting('fetchReadNotifications', evt.target.checked)
           }
           tooltip={
             <Stack direction="vertical" gap="condensed">

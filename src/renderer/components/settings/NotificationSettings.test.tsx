@@ -271,18 +271,18 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
     );
   });
 
-  it('should toggle the showReadNotifications checkbox', async () => {
+  it('should toggle the fetchReadNotifications checkbox', async () => {
     await act(async () => {
       renderWithAppContext(<NotificationSettings />, {
         updateSetting: updateSettingMock,
       });
     });
 
-    await userEvent.click(screen.getByTestId('checkbox-showReadNotifications'));
+    await userEvent.click(screen.getByTestId('checkbox-fetchReadNotifications'));
 
     expect(updateSettingMock).toHaveBeenCalledTimes(1);
     expect(updateSettingMock).toHaveBeenCalledWith(
-      'showReadNotifications',
+      'fetchReadNotifications',
       true,
     );
   });
