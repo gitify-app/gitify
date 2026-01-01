@@ -88,11 +88,11 @@ describe('renderer/hooks/useNotifications.ts', () => {
       ];
 
       nock('https://api.github.com')
-        .get('/notifications?participating=false')
+        .get('/notifications?participating=false&all=false')
         .reply(200, notifications);
 
       nock('https://github.gitify.io/api/v3')
-        .get('/notifications?participating=false')
+        .get('/notifications?participating=false&all=false')
         .reply(200, notifications);
 
       const { result } = renderHook(() => useNotifications());
@@ -214,7 +214,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
       ];
 
       nock('https://api.github.com')
-        .get('/notifications?participating=false')
+        .get('/notifications?participating=false&all=false')
         .reply(200, mockNotifications);
 
       nock('https://api.github.com')
@@ -322,7 +322,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
       const message = 'Bad credentials';
 
       nock('https://api.github.com/')
-        .get('/notifications?participating=false')
+        .get('/notifications?participating=false&all=false')
         .replyWithError({
           code,
           response: {
@@ -334,7 +334,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
         });
 
       nock('https://github.gitify.io/api/v3/')
-        .get('/notifications?participating=false')
+        .get('/notifications?participating=false&all=false')
         .replyWithError({
           code,
           response: {
@@ -365,7 +365,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
       const code = AxiosError.ERR_BAD_REQUEST;
 
       nock('https://api.github.com/')
-        .get('/notifications?participating=false')
+        .get('/notifications?participating=false&all=false')
         .replyWithError({
           code,
           response: {
@@ -377,7 +377,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
         });
 
       nock('https://github.gitify.io/api/v3/')
-        .get('/notifications?participating=false')
+        .get('/notifications?participating=false&all=false')
         .replyWithError({
           code,
           response: {

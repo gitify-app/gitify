@@ -92,6 +92,14 @@ export const RepositoryNotifications: FC<RepositoryNotificationsProps> = ({
         {!animateExit && (
           <HoverGroup bgColor="group-hover:bg-gitify-repository">
             <HoverButton
+              action={actionMarkAsRead}
+              enabled={!areAllRepoNotificationsRead}
+              icon={ReadIcon}
+              label="Mark repository as read"
+              testid="repository-mark-as-read"
+            />
+
+            <HoverButton
               action={actionMarkAsDone}
               enabled={isMarkAsDoneFeatureSupported(
                 repoNotifications[0].account,
@@ -99,13 +107,6 @@ export const RepositoryNotifications: FC<RepositoryNotificationsProps> = ({
               icon={CheckIcon}
               label="Mark repository as done"
               testid="repository-mark-as-done"
-            />
-
-            <HoverButton
-              action={actionMarkAsRead}
-              icon={ReadIcon}
-              label="Mark repository as read"
-              testid="repository-mark-as-read"
             />
 
             <HoverButton

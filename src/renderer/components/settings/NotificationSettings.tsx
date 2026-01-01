@@ -329,6 +329,31 @@ export const NotificationSettings: FC = () => {
         />
 
         <Checkbox
+          checked={settings.fetchReadNotifications}
+          label="Fetch read notifications"
+          name="fetchReadNotifications"
+          onChange={(evt) =>
+            updateSetting('fetchReadNotifications', evt.target.checked)
+          }
+          tooltip={
+            <Stack direction="vertical" gap="condensed">
+              <Text>
+                When <Text as="u">checked</Text>, {APPLICATION.NAME} will fetch
+                and display both read and unread notifications.
+              </Text>
+              <Text>
+                When <Text as="u">unchecked</Text>, {APPLICATION.NAME} will only
+                fetch and display unread notifications.
+              </Text>
+              <Text className="text-gitify-caution">
+                ⚠️ Enabling this setting will increase API usage and may cause
+                rate limiting for users with many notifications.
+              </Text>
+            </Stack>
+          }
+        />
+
+        <Checkbox
           checked={settings.markAsDoneOnOpen}
           label="Mark as done on open"
           name="markAsDoneOnOpen"

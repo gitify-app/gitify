@@ -109,6 +109,7 @@ export interface NotificationSettingsState {
   showPills: boolean;
   showNumber: boolean;
   participating: boolean;
+  fetchReadNotifications: boolean;
   markAsDoneOnOpen: boolean;
   markAsDoneOnUnsubscribe: boolean;
   delayNotificationState: boolean;

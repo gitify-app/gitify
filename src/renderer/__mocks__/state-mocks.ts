@@ -43,6 +43,7 @@ const mockNotificationSettings: NotificationSettingsState = {
   showPills: true,
   showNumber: true,
   participating: false,
+  fetchReadNotifications: false,
   markAsDoneOnOpen: false,
   markAsDoneOnUnsubscribe: false,
   delayNotificationState: false,
