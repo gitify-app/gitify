@@ -6,11 +6,11 @@ import type {
   SettingsState,
 } from '../../types';
 import {
-  fetchMergedQueryDetails,
+  fetchNotificationDetails,
   listNotificationsForAuthenticatedUser,
 } from '../api/client';
 import { determineFailureType } from '../api/errors';
-import type { FetchBatchMergedTemplateQuery } from '../api/graphql/generated/graphql';
+import type { FetchMergedDetailsTemplateQuery } from '../api/graphql/generated/graphql';
 import { transformNotification } from '../api/transform';
 import { rendererLogError, rendererLogWarn } from '../logger';
 import {
@@ -136,10 +136,10 @@ export async function enrichNotifications(
   // Build and fetch merged details via client; returns per-notification results
   let mergedResults: Map<
     GitifyNotification,
-    FetchBatchMergedTemplateQuery['repository']
+    FetchMergedDetailsTemplateQuery['repository']
   > = new Map();
   try {
-    mergedResults = await fetchMergedQueryDetails(notifications);
+    mergedResults = await fetchNotificationDetails(notifications);
   } catch (err) {
     rendererLogError(
       'enrichNotifications',

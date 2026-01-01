@@ -70,14 +70,14 @@ function extractAllFragments(
 }
 
 /**
- * Alias the root field and suffix key variables with the provided index.
+ * Alias the root selection field and suffix key variables with the provided index.
  *
  * Example:
  *   repository(owner: $owner, name: $name) { issue(number: $number) { ...IssueDetails } }
  * becomes:
  *   nodeINDEX: repository(owner: $ownerINDEX, name: $nameINDEX) { issue(number: $numberINDEX) { ...IssueDetails } }
  */
-export function aliasNodeAndRenameQueryVariables(
+export function aliasFieldAndSubstituteIndexedVars(
   alias: string,
   index: number,
   selectionBody: string,
@@ -87,7 +87,7 @@ export function aliasNodeAndRenameQueryVariables(
   // Add alias to the first root field name
   const withAlias = selectionBody.replace(
     /^\s*([A-Za-z_]\w*)/,
-    (_m, name: string) => `${alias}${idx}: ${name}`,
+    (_m, name: string) => `${alias}: ${name}`,
   );
 
   // Only alias variables that explicitly end with `INDEX`.

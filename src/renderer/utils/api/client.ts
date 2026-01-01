@@ -16,11 +16,11 @@ import { createNotificationHandler } from '../notifications/handlers';
 import {
   FetchAuthenticatedUserDetailsDocument,
   type FetchAuthenticatedUserDetailsQuery,
-  type FetchBatchMergedTemplateQuery,
   FetchDiscussionByNumberDocument,
   type FetchDiscussionByNumberQuery,
   FetchIssueByNumberDocument,
   type FetchIssueByNumberQuery,
+  type FetchMergedDetailsTemplateQuery,
   FetchPullRequestByNumberDocument,
   type FetchPullRequestByNumberQuery,
 } from './graphql/generated/graphql';
@@ -273,17 +273,19 @@ export async function fetchPullByNumber(
     },
   );
 } /**
- * Fetch Batched Details for supported notification types (ie: Discussions, Issues and Pull Requests).
- * This significantly reduces the amount of API calls and thus uses the GitHub API Rate Limits more efficiently.
+ * Fetch notification details for supported types (ie: Discussions, Issues and Pull Requests).
+
+ * This significantly reduces the amount of API calls by performing a building a merged GraphQL query,
+ * making the most efficient use of the available GitHub API quota limits.
  */
-export async function fetchMergedQueryDetails(
+export async function fetchNotificationDetails(
   notifications: GitifyNotification[],
 ): Promise<
-  Map<GitifyNotification, FetchBatchMergedTemplateQuery['repository']>
+  Map<GitifyNotification, FetchMergedDetailsTemplateQuery['repository']>
 > {
   const results = new Map<
     GitifyNotification,
-    FetchBatchMergedTemplateQuery['repository']
+    FetchMergedDetailsTemplateQuery['repository']
   >();
 
   if (!notifications.length) {
@@ -316,7 +318,7 @@ export async function fetchMergedQueryDetails(
 
   const mergedQuery = builder.buildQuery();
 
-  builder.setNonIndexedVars({
+  builder.setSharedVariables({
     includeIsAnswered: isAnsweredDiscussionFeatureSupported(
       notifications[0].account,
     ),
@@ -344,7 +346,7 @@ export async function fetchMergedQueryDetails(
       if (repoData) {
         const fragment = Object.values(
           repoData,
-        )[0] as FetchBatchMergedTemplateQuery['repository'];
+        )[0] as FetchMergedDetailsTemplateQuery['repository'];
         results.set(notification, fragment);
       }
     }

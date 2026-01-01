@@ -1,4 +1,4 @@
-query FetchBatchMergedTemplate(
+query FetchMergedDetailsTemplate(
   # Arguments that will be duplicated per notification.  Identified by the suffix `INDEX`
   $ownerINDEX: String!
   $nameINDEX: String!
@@ -6,7 +6,7 @@ query FetchBatchMergedTemplate(
   $isDiscussionNotificationINDEX: Boolean!
   $isIssueNotificationINDEX: Boolean!
   $isPullRequestNotificationINDEX: Boolean!
-  # Arguments that are for the complete operation document
+  # Arguments that are shared/common for the query
   $lastComments: Int
   $lastThreadedComments: Int
   $lastReplies: Int
@@ -15,10 +15,10 @@ query FetchBatchMergedTemplate(
   $firstClosingIssues: Int
   $includeIsAnswered: Boolean!
 ) {
-  ...BatchMergedDetailsQueryTemplate
+  ...MergedDetailsQueryTemplate
 }
 
-fragment BatchMergedDetailsQueryTemplate on Query {
+fragment MergedDetailsQueryTemplate on Query {
   repository(owner: $ownerINDEX, name: $nameINDEX) {
     discussion(number: $numberINDEX)
       @include(if: $isDiscussionNotificationINDEX)

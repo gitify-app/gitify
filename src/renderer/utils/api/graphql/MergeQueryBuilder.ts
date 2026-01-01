@@ -1,11 +1,11 @@
 import {
   type Exact,
-  FetchBatchMergedTemplateDocument,
-  type FetchBatchMergedTemplateQueryVariables,
+  FetchMergedDetailsTemplateDocument,
+  type FetchMergedDetailsTemplateQueryVariables,
 } from './generated/graphql';
 import type { FragmentInfo, VariableDef } from './types';
 import {
-  aliasNodeAndRenameQueryVariables,
+  aliasFieldAndSubstituteIndexedVars,
   extractIndexedVariableDefinitions,
   extractNonIndexedVariableDefinitions,
   extractNonQueryFragments,
@@ -13,8 +13,8 @@ import {
 } from './utils';
 
 // From merged.graphql template operation
-const TemplateDocument = FetchBatchMergedTemplateDocument;
-type TemplateVariables = FetchBatchMergedTemplateQueryVariables;
+const TemplateDocument = FetchMergedDetailsTemplateDocument;
+type TemplateVariables = FetchMergedDetailsTemplateQueryVariables;
 
 // Preserve exact Scalar-based variable value types via the generated QueryVariables
 type VarValue = TemplateVariables[keyof TemplateVariables];
@@ -22,6 +22,7 @@ type VarValue = TemplateVariables[keyof TemplateVariables];
 // Split variables by the `INDEX` suffix using the generated QueryVariables type
 type IndexedKeys = Extract<keyof TemplateVariables, `${string}INDEX`>;
 type NonIndexedKeys = Exclude<keyof TemplateVariables, IndexedKeys>;
+
 // Transform `${Base}INDEX` keys to just `Base` while preserving value types
 type DeindexKeys<T> = {
   [K in keyof T as K extends `${infer B}INDEX` ? B : never]: T[K];
@@ -94,8 +95,8 @@ export class MergeQueryBuilder {
     return this;
   }
 
-  // Set global (non-indexed) variables using the exact generated types
-  setNonIndexedVars(
+  // Set shared (non-indexed) variables
+  setSharedVariables(
     values: Exact<FetchBatchMergedTemplateNonIndexedVariables>,
   ): this {
     for (const [name, value] of Object.entries(values)) {
@@ -110,8 +111,9 @@ export class MergeQueryBuilder {
     index: number,
     values: Exact<FetchBatchMergedTemplateIndexedBaseVariables>,
   ): string {
-    this.addQueryNode(alias, index, values);
-    return `${alias}${index}`;
+    const aliasWithIndex = `${alias}${index}`;
+    this.addQueryNode(aliasWithIndex, index, values);
+    return aliasWithIndex;
   }
 
   addQueryNode(
@@ -123,7 +125,7 @@ export class MergeQueryBuilder {
       return this;
     }
 
-    const selection = aliasNodeAndRenameQueryVariables(
+    const selection = aliasFieldAndSubstituteIndexedVars(
       alias,
       index,
       this.queryFragmentInner,

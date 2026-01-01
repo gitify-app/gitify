@@ -36024,7 +36024,7 @@ export type IssueDetailsFragment = { __typename: 'Issue', number: number, title:
         | { __typename?: 'User', login: string, htmlUrl: any, avatarUrl: any, type: 'User' }
        | null } | null> | null }, labels?: { __typename?: 'LabelConnection', nodes?: Array<{ __typename?: 'Label', name: string } | null> | null } | null };
 
-export type FetchBatchMergedTemplateQueryVariables = Exact<{
+export type FetchMergedDetailsTemplateQueryVariables = Exact<{
   ownerINDEX: Scalars['String']['input'];
   nameINDEX: Scalars['String']['input'];
   numberINDEX: Scalars['Int']['input'];
@@ -36041,7 +36041,7 @@ export type FetchBatchMergedTemplateQueryVariables = Exact<{
 }>;
 
 
-export type FetchBatchMergedTemplateQuery = { __typename?: 'Query', repository?: { __typename?: 'Repository', discussion?: { __typename: 'Discussion', number: number, title: string, stateReason?: DiscussionStateReason | null, isAnswered?: boolean | null, url: any, author?:
+export type FetchMergedDetailsTemplateQuery = { __typename?: 'Query', repository?: { __typename?: 'Repository', discussion?: { __typename: 'Discussion', number: number, title: string, stateReason?: DiscussionStateReason | null, isAnswered?: boolean | null, url: any, author?:
         | { __typename?: 'Bot', login: string, htmlUrl: any, avatarUrl: any, type: 'Bot' }
         | { __typename?: 'EnterpriseUserAccount', login: string, htmlUrl: any, avatarUrl: any, type: 'EnterpriseUserAccount' }
         | { __typename?: 'Mannequin', login: string, htmlUrl: any, avatarUrl: any, type: 'Mannequin' }
@@ -36091,7 +36091,7 @@ export type FetchBatchMergedTemplateQuery = { __typename?: 'Query', repository?:
             | { __typename?: 'User', login: string }
            | null } | null> | null } | null, labels?: { __typename?: 'LabelConnection', nodes?: Array<{ __typename?: 'Label', name: string } | null> | null } | null, closingIssuesReferences?: { __typename?: 'IssueConnection', nodes?: Array<{ __typename?: 'Issue', number: number } | null> | null } | null } | null } | null };
 
-export type BatchMergedDetailsQueryTemplateFragment = { __typename?: 'Query', repository?: { __typename?: 'Repository', discussion?: { __typename: 'Discussion', number: number, title: string, stateReason?: DiscussionStateReason | null, isAnswered?: boolean | null, url: any, author?:
+export type MergedDetailsQueryTemplateFragment = { __typename?: 'Query', repository?: { __typename?: 'Repository', discussion?: { __typename: 'Discussion', number: number, title: string, stateReason?: DiscussionStateReason | null, isAnswered?: boolean | null, url: any, author?:
         | { __typename?: 'Bot', login: string, htmlUrl: any, avatarUrl: any, type: 'Bot' }
         | { __typename?: 'EnterpriseUserAccount', login: string, htmlUrl: any, avatarUrl: any, type: 'EnterpriseUserAccount' }
         | { __typename?: 'Mannequin', login: string, htmlUrl: any, avatarUrl: any, type: 'Mannequin' }
@@ -36427,8 +36427,8 @@ fragment PullRequestReviewFields on PullRequestReview {
     login
   }
 }`, {"fragmentName":"PullRequestDetails"}) as unknown as TypedDocumentString<PullRequestDetailsFragment, unknown>;
-export const BatchMergedDetailsQueryTemplateFragmentDoc = new TypedDocumentString(`
-    fragment BatchMergedDetailsQueryTemplate on Query {
+export const MergedDetailsQueryTemplateFragmentDoc = new TypedDocumentString(`
+    fragment MergedDetailsQueryTemplate on Query {
   repository(owner: $ownerINDEX, name: $nameINDEX) {
     discussion(number: $numberINDEX) @include(if: $isDiscussionNotificationINDEX) {
       ...DiscussionDetails
@@ -36564,7 +36564,7 @@ fragment PullRequestReviewFields on PullRequestReview {
   author {
     login
   }
-}`, {"fragmentName":"BatchMergedDetailsQueryTemplate"}) as unknown as TypedDocumentString<BatchMergedDetailsQueryTemplateFragment, unknown>;
+}`, {"fragmentName":"MergedDetailsQueryTemplate"}) as unknown as TypedDocumentString<MergedDetailsQueryTemplateFragment, unknown>;
 export const FetchDiscussionByNumberDocument = new TypedDocumentString(`
     query FetchDiscussionByNumber($owner: String!, $name: String!, $number: Int!, $lastThreadedComments: Int, $lastReplies: Int, $firstLabels: Int, $includeIsAnswered: Boolean!) {
   repository(owner: $owner, name: $name) {
@@ -36664,9 +36664,9 @@ fragment IssueDetails on Issue {
     }
   }
 }`) as unknown as TypedDocumentString<FetchIssueByNumberQuery, FetchIssueByNumberQueryVariables>;
-export const FetchBatchMergedTemplateDocument = new TypedDocumentString(`
-    query FetchBatchMergedTemplate($ownerINDEX: String!, $nameINDEX: String!, $numberINDEX: Int!, $isDiscussionNotificationINDEX: Boolean!, $isIssueNotificationINDEX: Boolean!, $isPullRequestNotificationINDEX: Boolean!, $lastComments: Int, $lastThreadedComments: Int, $lastReplies: Int, $lastReviews: Int, $firstLabels: Int, $firstClosingIssues: Int, $includeIsAnswered: Boolean!) {
-  ...BatchMergedDetailsQueryTemplate
+export const FetchMergedDetailsTemplateDocument = new TypedDocumentString(`
+    query FetchMergedDetailsTemplate($ownerINDEX: String!, $nameINDEX: String!, $numberINDEX: Int!, $isDiscussionNotificationINDEX: Boolean!, $isIssueNotificationINDEX: Boolean!, $isPullRequestNotificationINDEX: Boolean!, $lastComments: Int, $lastThreadedComments: Int, $lastReplies: Int, $lastReviews: Int, $firstLabels: Int, $firstClosingIssues: Int, $includeIsAnswered: Boolean!) {
+  ...MergedDetailsQueryTemplate
 }
     fragment AuthorFields on Actor {
   login
@@ -36745,7 +36745,7 @@ fragment IssueDetails on Issue {
     }
   }
 }
-fragment BatchMergedDetailsQueryTemplate on Query {
+fragment MergedDetailsQueryTemplate on Query {
   repository(owner: $ownerINDEX, name: $nameINDEX) {
     discussion(number: $numberINDEX) @include(if: $isDiscussionNotificationINDEX) {
       ...DiscussionDetails
@@ -36804,7 +36804,7 @@ fragment PullRequestReviewFields on PullRequestReview {
   author {
     login
   }
-}`) as unknown as TypedDocumentString<FetchBatchMergedTemplateQuery, FetchBatchMergedTemplateQueryVariables>;
+}`) as unknown as TypedDocumentString<FetchMergedDetailsTemplateQuery, FetchMergedDetailsTemplateQueryVariables>;
 export const FetchPullRequestByNumberDocument = new TypedDocumentString(`
     query FetchPullRequestByNumber($owner: String!, $name: String!, $number: Int!, $firstLabels: Int, $lastComments: Int, $lastReviews: Int, $firstClosingIssues: Int) {
   repository(owner: $owner, name: $name) {
