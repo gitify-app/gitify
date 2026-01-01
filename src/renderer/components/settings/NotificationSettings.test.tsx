@@ -278,7 +278,9 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
       });
     });
 
-    await userEvent.click(screen.getByTestId('checkbox-fetchReadNotifications'));
+    await userEvent.click(
+      screen.getByTestId('checkbox-fetchReadNotifications'),
+    );
 
     expect(updateSettingMock).toHaveBeenCalledTimes(1);
     expect(updateSettingMock).toHaveBeenCalledWith(
