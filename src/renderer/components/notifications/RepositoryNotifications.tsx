@@ -100,13 +100,6 @@ export const RepositoryNotifications: FC<RepositoryNotificationsProps> = ({
             />
 
             <HoverButton
-              action={actionToggleRepositoryNotifications}
-              icon={Chevron.icon}
-              label={Chevron.label}
-              testid="repository-toggle"
-            />
-
-            <HoverButton
               action={actionMarkAsDone}
               enabled={isMarkAsDoneFeatureSupported(
                 repoNotifications[0].account,
@@ -114,6 +107,13 @@ export const RepositoryNotifications: FC<RepositoryNotificationsProps> = ({
               icon={CheckIcon}
               label="Mark repository as done"
               testid="repository-mark-as-done"
+            />
+
+            <HoverButton
+              action={actionToggleRepositoryNotifications}
+              icon={Chevron.icon}
+              label={Chevron.label}
+              testid="repository-toggle"
             />
           </HoverGroup>
         )}
