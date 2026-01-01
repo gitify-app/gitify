@@ -11,7 +11,6 @@ import {
   listNotificationsForAuthenticatedUser,
 } from '../api/client';
 import { determineFailureType } from '../api/errors';
-import { BatchMergedDetailsQueryTemplateFragmentDoc } from '../api/graphql/generated/graphql';
 import { MergeQueryBuilder } from '../api/graphql/MergeQueryBuilder';
 import { transformNotification } from '../api/transform';
 import { getNumberFromUrl } from '../api/utils';
@@ -137,9 +136,7 @@ export async function enrichNotifications(
     return notifications;
   }
 
-  const builder = new MergeQueryBuilder(
-    BatchMergedDetailsQueryTemplateFragmentDoc,
-  );
+  const builder = new MergeQueryBuilder();
 
   const notificationResponseNodeAlias = new Map<GitifyNotification, string>();
 
@@ -177,20 +174,17 @@ export async function enrichNotifications(
 
   const mergedQuery = builder.buildQuery();
 
-  builder
-    .setVar('firstLabels', Constants.GRAPHQL_ARGS.FIRST_LABELS)
-    .setVar('lastComments', Constants.GRAPHQL_ARGS.LAST_COMMENTS)
-    .setVar(
-      'lastThreadedComments',
-      Constants.GRAPHQL_ARGS.LAST_THREADED_COMMENTS,
-    )
-    .setVar('lastReplies', Constants.GRAPHQL_ARGS.LAST_REPLIES)
-    .setVar(
-      'includeIsAnswered',
-      isAnsweredDiscussionFeatureSupported(notifications[0].account),
-    )
-    .setVar('firstClosingIssues', Constants.GRAPHQL_ARGS.FIRST_CLOSING_ISSUES)
-    .setVar('lastReviews', Constants.GRAPHQL_ARGS.LAST_REVIEWS);
+  builder.setNonIndexedVars({
+    includeIsAnswered: isAnsweredDiscussionFeatureSupported(
+      notifications[0].account,
+    ),
+    firstClosingIssues: Constants.GRAPHQL_ARGS.FIRST_CLOSING_ISSUES,
+    firstLabels: Constants.GRAPHQL_ARGS.FIRST_LABELS,
+    lastComments: Constants.GRAPHQL_ARGS.LAST_COMMENTS,
+    lastThreadedComments: Constants.GRAPHQL_ARGS.LAST_THREADED_COMMENTS,
+    lastReplies: Constants.GRAPHQL_ARGS.LAST_REPLIES,
+    lastReviews: Constants.GRAPHQL_ARGS.LAST_REVIEWS,
+  });
   const queryVariables = builder.getVariables();
 
   let mergedData: Record<string, unknown> | null = null;
@@ -213,19 +207,18 @@ export async function enrichNotifications(
 
   const enrichedNotifications = await Promise.all(
     notifications.map(async (notification: GitifyNotification) => {
-      let targetRootAlias: string | undefined;
-      targetRootAlias = notificationResponseNodeAlias.get(notification);
+      let responseNodeAlias: string | undefined;
+      responseNodeAlias = notificationResponseNodeAlias.get(notification);
 
       let fragment: unknown;
-      if (mergedData && targetRootAlias) {
-        const repoData = mergedData[targetRootAlias] as Record<string, unknown>;
+      if (mergedData && responseNodeAlias) {
+        const repoData = mergedData[responseNodeAlias] as Record<
+          string,
+          unknown
+        >;
         if (repoData) {
-          for (const value of Object.values(repoData)) {
-            if (value !== undefined) {
-              fragment = value;
-              break;
-            }
-          }
+          // We should only ever have a single node under repository per node
+          fragment = Object.values(repoData)[0];
         }
       }
 

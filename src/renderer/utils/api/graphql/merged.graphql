@@ -1,12 +1,12 @@
-query FetchBatch(
-  # Arguments that will be per notification item
+query FetchBatchMergedTemplate(
+  # Arguments that will be duplicated per notification.  Identified by the suffix `INDEX`
   $ownerINDEX: String!
   $nameINDEX: String!
   $numberINDEX: Int!
   $isDiscussionNotificationINDEX: Boolean!
   $isIssueNotificationINDEX: Boolean!
   $isPullRequestNotificationINDEX: Boolean!
-  # Stable arguments for the merged query as a whole
+  # Arguments that are for the complete operation document
   $lastComments: Int
   $lastThreadedComments: Int
   $lastReplies: Int

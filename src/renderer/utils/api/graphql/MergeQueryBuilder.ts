@@ -1,4 +1,8 @@
-import type { TypedDocumentString } from './generated/graphql';
+import {
+  type Exact,
+  FetchBatchMergedTemplateDocument,
+  type FetchBatchMergedTemplateQueryVariables,
+} from './generated/graphql';
 import type { FragmentInfo } from './utils';
 import {
   aliasRootAndKeyVariables,
@@ -7,8 +11,35 @@ import {
   extractQueryFragments,
 } from './utils';
 
-type VarValue = string | number | boolean;
+// From merged.graphql template operation
+const TemplateDocument = FetchBatchMergedTemplateDocument;
+type TemplateVariables = FetchBatchMergedTemplateQueryVariables;
+
+// Preserve exact Scalar-based variable value types via the generated QueryVariables
+type VarValue = TemplateVariables[keyof TemplateVariables];
 type TypeMap = Record<string, string>;
+
+// Split variables by the `INDEX` suffix using the generated QueryVariables type
+type IndexedKeys = Extract<keyof TemplateVariables, `${string}INDEX`>;
+type NonIndexedKeys = Exclude<keyof TemplateVariables, IndexedKeys>;
+// Transform `${Base}INDEX` keys to just `Base` while preserving value types
+type DeindexKeys<T> = {
+  [K in keyof T as K extends `${infer B}INDEX` ? B : never]: T[K];
+};
+
+type FetchBatchMergedTemplateIndexedVariables = Pick<
+  TemplateVariables,
+  IndexedKeys
+>;
+
+// Base-key form (e.g., `owner`, `name`, `number`, ...) without `INDEX` suffix
+export type FetchBatchMergedTemplateIndexedBaseVariables =
+  DeindexKeys<FetchBatchMergedTemplateIndexedVariables>;
+
+export type FetchBatchMergedTemplateNonIndexedVariables = Pick<
+  TemplateVariables,
+  NonIndexedKeys
+>;
 
 export class MergeQueryBuilder {
   private selections: string[] = [];
@@ -26,20 +57,15 @@ export class MergeQueryBuilder {
     isPullRequestNotification: 'Boolean!',
   };
 
-  constructor(
-    templateDoc?: TypedDocumentString<unknown, unknown>,
-    options?: { typeMap?: TypeMap },
-  ) {
+  constructor(options?: { typeMap?: TypeMap }) {
     if (options?.typeMap) {
       this.typeMap = { ...this.typeMap, ...options.typeMap };
     }
 
-    if (templateDoc) {
-      this.fragments.push(...extractNonQueryFragments(templateDoc));
+    this.fragments.push(...extractNonQueryFragments(TemplateDocument));
 
-      const queryFrags = extractQueryFragments(templateDoc);
-      this.queryFragmentInner = queryFrags.length ? queryFrags[0].inner : null;
-    }
+    const queryFrags = extractQueryFragments(TemplateDocument);
+    this.queryFragmentInner = queryFrags.length ? queryFrags[0].inner : null;
   }
 
   addSelection(selection: string): this {
@@ -68,10 +94,20 @@ export class MergeQueryBuilder {
     return this;
   }
 
+  // Set global (non-indexed) variables using the exact generated types
+  setNonIndexedVars(
+    values: Exact<FetchBatchMergedTemplateNonIndexedVariables>,
+  ): this {
+    for (const [name, value] of Object.entries(values)) {
+      this.setVar(name, value as VarValue);
+    }
+    return this;
+  }
+
   addQueryNode(
     alias: string,
     index: number,
-    values: Record<string, VarValue>,
+    values: Exact<FetchBatchMergedTemplateIndexedBaseVariables>,
   ): this {
     if (!this.queryFragmentInner) {
       return this;
