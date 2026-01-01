@@ -1,4 +1,3 @@
-import { Constants } from '../../constants';
 import type {
   AccountNotifications,
   GitifyNotification,
@@ -12,10 +11,7 @@ import {
 } from '../api/client';
 import { determineFailureType } from '../api/errors';
 import type { FetchBatchMergedTemplateQuery } from '../api/graphql/generated/graphql';
-import { MergeQueryBuilder } from '../api/graphql/MergeQueryBuilder';
 import { transformNotification } from '../api/transform';
-import { getNumberFromUrl } from '../api/utils';
-import { isAnsweredDiscussionFeatureSupported } from '../features';
 import { rendererLogError, rendererLogWarn } from '../logger';
 import {
   filterBaseNotifications,
@@ -137,60 +133,13 @@ export async function enrichNotifications(
     return notifications;
   }
 
-  const builder = new MergeQueryBuilder();
-
-  const notificationResponseNodeAlias = new Map<GitifyNotification, string>();
-
-  let index = 0;
-  for (const notification of notifications) {
-    const handler = createNotificationHandler(notification);
-
-    // Skip notifications that aren't suitable for batch merged enrichment
-    if (!handler.supportsMergedQueryEnrichment) {
-      continue;
-    }
-
-    const responseNodeAlias = `node${index}`;
-
-    builder.addQueryNode('node', index, {
-      owner: notification.repository.owner.login,
-      name: notification.repository.name,
-      number: getNumberFromUrl(notification.subject.url),
-      isDiscussionNotification: notification.subject.type === 'Discussion',
-      isIssueNotification: notification.subject.type === 'Issue',
-      isPullRequestNotification: notification.subject.type === 'PullRequest',
-    });
-
-    notificationResponseNodeAlias.set(notification, responseNodeAlias);
-
-    index += 1;
-  }
-
-  const mergedQuery = builder.buildQuery();
-
-  builder.setNonIndexedVars({
-    includeIsAnswered: isAnsweredDiscussionFeatureSupported(
-      notifications[0].account,
-    ),
-    firstClosingIssues: Constants.GRAPHQL_ARGS.FIRST_CLOSING_ISSUES,
-    firstLabels: Constants.GRAPHQL_ARGS.FIRST_LABELS,
-    lastComments: Constants.GRAPHQL_ARGS.LAST_COMMENTS,
-    lastThreadedComments: Constants.GRAPHQL_ARGS.LAST_THREADED_COMMENTS,
-    lastReplies: Constants.GRAPHQL_ARGS.LAST_REPLIES,
-    lastReviews: Constants.GRAPHQL_ARGS.LAST_REVIEWS,
-  });
-  const queryVariables = builder.getVariables();
-
-  let mergedData: Record<string, unknown> | null = null;
-
+  // Build and fetch merged details via client; returns per-notification results
+  let mergedResults: Map<
+    GitifyNotification,
+    FetchBatchMergedTemplateQuery['repository']
+  > = new Map();
   try {
-    const response = await fetchMergedQueryDetails(
-      notifications[0],
-      mergedQuery,
-      queryVariables,
-    );
-
-    mergedData = response.data;
+    mergedResults = await fetchMergedQueryDetails(notifications);
   } catch (err) {
     rendererLogError(
       'enrichNotifications',
@@ -201,20 +150,7 @@ export async function enrichNotifications(
 
   const enrichedNotifications = await Promise.all(
     notifications.map(async (notification: GitifyNotification) => {
-      let responseNodeAlias: string | undefined;
-      responseNodeAlias = notificationResponseNodeAlias.get(notification);
-
-      let fragment: FetchBatchMergedTemplateQuery['repository'];
-      if (mergedData && responseNodeAlias) {
-        const repoData = mergedData[responseNodeAlias] as Record<
-          string,
-          unknown
-        >;
-        if (repoData) {
-          // We should only ever have a single node under repository per node
-          fragment = Object.values(repoData)[0];
-        }
-      }
+      const fragment = mergedResults.get(notification);
 
       return enrichNotification(notification, settings, fragment);
     }),

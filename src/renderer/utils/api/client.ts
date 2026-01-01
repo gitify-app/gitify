@@ -12,9 +12,11 @@ import type {
 } from '../../types';
 import { isAnsweredDiscussionFeatureSupported } from '../features';
 import { rendererLogError } from '../logger';
+import { createNotificationHandler } from '../notifications/handlers';
 import {
   FetchAuthenticatedUserDetailsDocument,
   type FetchAuthenticatedUserDetailsQuery,
+  type FetchBatchMergedTemplateQuery,
   FetchDiscussionByNumberDocument,
   type FetchDiscussionByNumberQuery,
   FetchIssueByNumberDocument,
@@ -22,6 +24,7 @@ import {
   FetchPullRequestByNumberDocument,
   type FetchPullRequestByNumberQuery,
 } from './graphql/generated/graphql';
+import { MergeQueryBuilder } from './graphql/MergeQueryBuilder';
 import {
   apiRequestAuth,
   type ExecutionResultWithHeaders,
@@ -269,22 +272,83 @@ export async function fetchPullByNumber(
       lastReviews: Constants.GRAPHQL_ARGS.LAST_REVIEWS,
     },
   );
-}
-
-/**
- * Fetch Batched Details for Discussions, Issues and Pull Requests.
+} /**
+ * Fetch Batched Details for supported notification types (ie: Discussions, Issues and Pull Requests).
+ * This significantly reduces the amount of API calls and thus uses the GitHub API Rate Limits more efficiently.
  */
 export async function fetchMergedQueryDetails(
-  notification: GitifyNotification,
-  mergedQuery: string,
-  mergedVariables: Record<string, string | number | boolean>,
-): Promise<ExecutionResult<Record<string, unknown>>> {
-  const url = getGitHubGraphQLUrl(notification.account.hostname);
+  notifications: GitifyNotification[],
+): Promise<
+  Map<GitifyNotification, FetchBatchMergedTemplateQuery['repository']>
+> {
+  const results = new Map<
+    GitifyNotification,
+    FetchBatchMergedTemplateQuery['repository']
+  >();
 
-  return performGraphQLRequestString(
+  if (!notifications.length) {
+    return results;
+  }
+
+  // Build merged query using the builder
+  const builder = new MergeQueryBuilder();
+  const aliasToNotification = new Map<string, GitifyNotification>();
+
+  let index = 0;
+  for (const notification of notifications) {
+    const handler = createNotificationHandler(notification);
+    if (!handler.supportsMergedQueryEnrichment) {
+      continue;
+    }
+
+    const alias = builder.addNode('node', index, {
+      owner: notification.repository.owner.login,
+      name: notification.repository.name,
+      number: getNumberFromUrl(notification.subject.url),
+      isDiscussionNotification: notification.subject.type === 'Discussion',
+      isIssueNotification: notification.subject.type === 'Issue',
+      isPullRequestNotification: notification.subject.type === 'PullRequest',
+    });
+
+    aliasToNotification.set(alias, notification);
+    index += 1;
+  }
+
+  const mergedQuery = builder.buildQuery();
+
+  builder.setNonIndexedVars({
+    includeIsAnswered: isAnsweredDiscussionFeatureSupported(
+      notifications[0].account,
+    ),
+    firstClosingIssues: Constants.GRAPHQL_ARGS.FIRST_CLOSING_ISSUES,
+    firstLabels: Constants.GRAPHQL_ARGS.FIRST_LABELS,
+    lastComments: Constants.GRAPHQL_ARGS.LAST_COMMENTS,
+    lastThreadedComments: Constants.GRAPHQL_ARGS.LAST_THREADED_COMMENTS,
+    lastReplies: Constants.GRAPHQL_ARGS.LAST_REPLIES,
+    lastReviews: Constants.GRAPHQL_ARGS.LAST_REVIEWS,
+  });
+  const variables = builder.getVariables();
+
+  const url = getGitHubGraphQLUrl(notifications[0].account.hostname);
+  const response = await performGraphQLRequestString(
     url.toString() as Link,
-    notification.account.token,
+    notifications[0].account.token,
     mergedQuery,
-    mergedVariables,
+    variables,
   );
+
+  const data = response.data as Record<string, unknown> | undefined;
+  if (data) {
+    for (const [alias, notification] of aliasToNotification) {
+      const repoData = data[alias] as Record<string, unknown> | undefined;
+      if (repoData) {
+        const fragment = Object.values(
+          repoData,
+        )[0] as FetchBatchMergedTemplateQuery['repository'];
+        results.set(notification, fragment);
+      }
+    }
+  }
+
+  return results;
 }

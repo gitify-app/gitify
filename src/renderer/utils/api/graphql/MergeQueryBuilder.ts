@@ -148,6 +148,16 @@ export class MergeQueryBuilder {
     return this;
   }
 
+  // Convenience: add a node and return its computed response alias
+  addNode(
+    alias: string,
+    index: number,
+    values: Exact<FetchBatchMergedTemplateIndexedBaseVariables>,
+  ): string {
+    this.addQueryNode(alias, index, values);
+    return `${alias}${index}`;
+  }
+
   buildQuery(docName = 'FetchMergedNotifications'): string {
     const vars = this.variableDefinitions.join(', ');
     const frags = this.fragments.map((f) => f.printed).join('\n');
