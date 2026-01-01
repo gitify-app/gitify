@@ -131,19 +131,19 @@ export const NotificationRow: FC<NotificationRowProps> = ({
       {!animateExit && (
         <HoverGroup bgColor="group-hover:bg-gitify-notification-hover">
           <HoverButton
-            action={actionMarkAsDone}
-            enabled={isMarkAsDoneFeatureSupported(notification.account)}
-            icon={CheckIcon}
-            label="Mark as done"
-            testid="notification-mark-as-done"
-          />
-
-          <HoverButton
             action={actionMarkAsRead}
             enabled={!isNotificationRead}
             icon={ReadIcon}
             label="Mark as read"
             testid="notification-mark-as-read"
+          />
+
+          <HoverButton
+            action={actionMarkAsDone}
+            enabled={isMarkAsDoneFeatureSupported(notification.account)}
+            icon={CheckIcon}
+            label="Mark as done"
+            testid="notification-mark-as-done"
           />
 
           <HoverButton

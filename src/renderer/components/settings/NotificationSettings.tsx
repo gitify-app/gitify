@@ -330,7 +330,7 @@ export const NotificationSettings: FC = () => {
 
         <Checkbox
           checked={settings.showReadNotifications}
-          label="Show read notifications"
+          label="Fetch read notifications"
           name="showReadNotifications"
           onChange={(evt) =>
             updateSetting('showReadNotifications', evt.target.checked)
