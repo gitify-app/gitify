@@ -87,7 +87,7 @@ export function aliasNodeAndRenameQueryVariables(
   // Add alias to the first root field name
   const withAlias = selectionBody.replace(
     /^\s*([_A-Za-z][_A-Za-z0-9]*)/,
-    (_m, name: string) => `${alias}: ${name}`,
+    (_m, name: string) => `${alias}${idx}: ${name}`,
   );
 
   // Only alias variables that explicitly end with `INDEX`.

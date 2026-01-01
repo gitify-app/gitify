@@ -118,9 +118,8 @@ export class MergeQueryBuilder {
       return this;
     }
 
-    const nodeAlias = `${alias}${index}`;
     const selection = aliasNodeAndRenameQueryVariables(
-      nodeAlias,
+      alias,
       index,
       this.queryFragmentInner,
     );
