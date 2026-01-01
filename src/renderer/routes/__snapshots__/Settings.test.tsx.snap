@@ -1109,22 +1109,22 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           >
             <input
               class="size-4 rounded-sm cursor-pointer"
-              data-testid="checkbox-showReadNotifications"
-              id="showReadNotifications"
+              data-testid="checkbox-fetchReadNotifications"
+              id="fetchReadNotifications"
               type="checkbox"
             />
             <label
               class="font-medium text-gitify-font cursor-pointer"
-              for="showReadNotifications"
+              for="fetchReadNotifications"
             >
               Fetch read notifications
             </label>
             <button
               aria-expanded="false"
               aria-haspopup="true"
-              aria-label="tooltip-showReadNotifications"
-              data-testid="tooltip-tooltip-showReadNotifications"
-              id="tooltip-showReadNotifications"
+              aria-label="tooltip-fetchReadNotifications"
+              data-testid="tooltip-tooltip-fetchReadNotifications"
+              id="tooltip-fetchReadNotifications"
               tabindex="0"
               type="button"
             >
