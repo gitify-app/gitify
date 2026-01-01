@@ -91,7 +91,7 @@ export const Sidebar: FC = () => {
         <IconButton
           aria-label="Notifications"
           data-testid="sidebar-notifications"
-          description={`${unreadNotificationCount} unread notifications ↗`}
+          description={`${unreadNotificationCount} ${settings.showReadNotifications ? 'notifications' : 'unread notifications'} ↗`}
           icon={BellIcon}
           onClick={() => openGitHubNotifications(primaryAccountHostname)}
           size="small"
