@@ -1,4 +1,4 @@
-import type { GitifyNotificationUser, UserType } from '../../../types';
+import type { GitifyNotificationUser } from '../../../types';
 import type { AuthorFieldsFragment } from '../../api/graphql/generated/graphql';
 
 // Author type from GraphQL or manually constructed
@@ -24,7 +24,7 @@ export function getNotificationAuthor(
         login: user.login,
         avatarUrl: user.avatarUrl,
         htmlUrl: user.htmlUrl,
-        type: user.type as UserType,
+        type: user.type,
       };
 
       return subjectUser;

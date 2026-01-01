@@ -92,7 +92,7 @@ export function aliasNodeAndRenameQueryVariables(
 
   // Only alias variables that explicitly end with `INDEX`.
   // Example: $ownerINDEX -> $owner0, $nameINDEX -> $name0
-  const withIndexedVars = withAlias.replace(
+  const withIndexedVars = withAlias.replaceAll(
     /\$([A-Za-z_]\w*)INDEX\b/g,
     (_m, v: string) => `$${v}${idx}`,
   );

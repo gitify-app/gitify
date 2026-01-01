@@ -64,9 +64,8 @@ export class MergeQueryBuilder {
     }
 
     // Precompute indexed variable definitions to avoid repeated AST parsing per node
-    this.indexedTemplateVarDefs = extractIndexedVariableDefinitions(
-      TemplateDocument,
-    );
+    this.indexedTemplateVarDefs =
+      extractIndexedVariableDefinitions(TemplateDocument);
   }
 
   addSelection(selection: string): this {
@@ -131,12 +130,14 @@ export class MergeQueryBuilder {
     );
     this.addSelection(selection);
 
-    const renamedIndexVarDefs: VariableDef[] = this.indexedTemplateVarDefs.map((varDef) => {
-      return {
-        name: varDef.name.replace('INDEX', `${index}`),
-        type: varDef.type,
-      };
-    });
+    const renamedIndexVarDefs: VariableDef[] = this.indexedTemplateVarDefs.map(
+      (varDef) => {
+        return {
+          name: varDef.name.replace('INDEX', `${index}`),
+          type: varDef.type,
+        };
+      },
+    );
 
     this.addVariableDefs(renamedIndexVarDefs);
 
