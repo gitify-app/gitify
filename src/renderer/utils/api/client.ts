@@ -288,7 +288,7 @@ export async function fetchNotificationDetailsForList(
     FetchMergedDetailsTemplateQuery['repository']
   >();
 
-  if (!notifications.length || notifications.some) {
+  if (!notifications.length) {
     return results;
   }
 
