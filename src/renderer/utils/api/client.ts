@@ -288,19 +288,22 @@ export async function fetchNotificationDetailsForList(
     FetchMergedDetailsTemplateQuery['repository']
   >();
 
-  if (!notifications.length) {
+  if (!notifications.length || notifications.some) {
     return results;
   }
 
   // Build merged query using the builder
   const builder = new MergeQueryBuilder();
   const aliasToNotification = new Map<string, GitifyNotification>();
+  let hasSupportedNotification = false;
 
   for (const notification of notifications) {
     const handler = createNotificationHandler(notification);
     if (!handler.supportsMergedQueryEnrichment) {
       continue;
     }
+
+    hasSupportedNotification = true;
 
     const alias = builder.addNode({
       owner: notification.repository.owner.login,
@@ -312,6 +315,10 @@ export async function fetchNotificationDetailsForList(
     });
 
     aliasToNotification.set(alias, notification);
+  }
+
+  if (!hasSupportedNotification) {
+    return results;
   }
 
   builder.setSharedVariables({
