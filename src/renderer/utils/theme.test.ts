@@ -1,5 +1,12 @@
 import { Theme } from '../types';
-import { mapThemeModeToColorMode, mapThemeModeToColorScheme } from './theme';
+import {
+  DEFAULT_DAY_COLOR_SCHEME,
+  DEFAULT_DAY_HIGH_CONTRAST_COLOR_SCHEME,
+  DEFAULT_NIGHT_COLOR_SCHEME,
+  DEFAULT_NIGHT_HIGH_CONTRAST_COLOR_SCHEME,
+  mapThemeModeToColorMode,
+  mapThemeModeToColorScheme,
+} from './theme';
 
 describe('renderer/utils/theme.ts', () => {
   it('should map theme mode to github primer color mode', () => {
@@ -53,5 +60,16 @@ describe('renderer/utils/theme.ts', () => {
       'dark_dimmed_high_contrast',
     );
     expect(mapThemeModeToColorScheme(Theme.SYSTEM, false)).toBe(null);
+    expect(mapThemeModeToColorScheme(Theme.SYSTEM, true)).toBe(null);
+  });
+
+  it('should export high contrast color scheme constants', () => {
+    expect(DEFAULT_DAY_HIGH_CONTRAST_COLOR_SCHEME).toBe('light_high_contrast');
+    expect(DEFAULT_NIGHT_HIGH_CONTRAST_COLOR_SCHEME).toBe('dark_high_contrast');
+  });
+
+  it('should export default color scheme constants', () => {
+    expect(DEFAULT_DAY_COLOR_SCHEME).toBe('light');
+    expect(DEFAULT_NIGHT_COLOR_SCHEME).toBe('dark');
   });
 });

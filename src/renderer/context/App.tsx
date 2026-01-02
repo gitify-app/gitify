@@ -55,7 +55,9 @@ import {
 import { clearState, loadState, saveState } from '../utils/storage';
 import {
   DEFAULT_DAY_COLOR_SCHEME,
+  DEFAULT_DAY_HIGH_CONTRAST_COLOR_SCHEME,
   DEFAULT_NIGHT_COLOR_SCHEME,
+  DEFAULT_NIGHT_HIGH_CONTRAST_COLOR_SCHEME,
   mapThemeModeToColorMode,
   mapThemeModeToColorScheme,
 } from '../utils/theme';
@@ -276,8 +278,18 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     );
 
     setColorMode(colorMode);
-    setDayScheme(colorScheme ?? DEFAULT_DAY_COLOR_SCHEME);
-    setNightScheme(colorScheme ?? DEFAULT_NIGHT_COLOR_SCHEME);
+
+    // When colorScheme is null (System theme), use appropriate fallbacks
+    // based on whether high contrast is enabled
+    const dayFallback = settings.increaseContrast
+      ? DEFAULT_DAY_HIGH_CONTRAST_COLOR_SCHEME
+      : DEFAULT_DAY_COLOR_SCHEME;
+    const nightFallback = settings.increaseContrast
+      ? DEFAULT_NIGHT_HIGH_CONTRAST_COLOR_SCHEME
+      : DEFAULT_NIGHT_COLOR_SCHEME;
+
+    setDayScheme(colorScheme ?? dayFallback);
+    setNightScheme(colorScheme ?? nightFallback);
   }, [
     settings.theme,
     settings.increaseContrast,
