@@ -143,11 +143,12 @@ export const Sidebar: FC = () => {
           <>
             <IconButton
               aria-label="Refresh"
+              className={status === 'loading' ? '[&_svg]:animate-spin' : ''}
               data-testid="sidebar-refresh"
               description="Refresh notifications"
               disabled={status === 'loading'}
               icon={SyncIcon}
-              loading={status === 'loading'}
+              // loading={status === 'loading'}
               onClick={() => refreshNotifications()}
               size="small"
               tooltipDirection="e"
