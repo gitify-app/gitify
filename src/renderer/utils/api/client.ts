@@ -337,6 +337,7 @@ export async function fetchNotificationDetailsForList(
   const variables = builder.getGraphQLVariables();
 
   const url = getGitHubGraphQLUrl(notifications[0].account.hostname);
+
   const response = await performGraphQLRequestString(
     url.toString() as Link,
     notifications[0].account.token,
