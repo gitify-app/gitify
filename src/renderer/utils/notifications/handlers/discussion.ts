@@ -22,6 +22,7 @@ import { fetchDiscussionByNumber } from '../../api/client';
 import type {
   CommentFieldsFragment,
   DiscussionCommentFieldsFragment,
+  DiscussionDetailsFragment,
 } from '../../api/graphql/generated/graphql';
 import { DefaultHandler, defaultHandler } from './default';
 import { getNotificationAuthor } from './utils';
@@ -29,12 +30,16 @@ import { getNotificationAuthor } from './utils';
 class DiscussionHandler extends DefaultHandler {
   readonly type = 'Discussion';
 
+  readonly supportsMergedQueryEnrichment = true;
+
   async enrich(
     notification: GitifyNotification,
     _settings: SettingsState,
+    fetchedData?: DiscussionDetailsFragment,
   ): Promise<Partial<GitifySubject>> {
-    const response = await fetchDiscussionByNumber(notification);
-    const discussion = response.data.repository?.discussion;
+    const discussion =
+      fetchedData ??
+      (await fetchDiscussionByNumber(notification)).data.repository?.discussion;
 
     let discussionState: GitifyDiscussionState = 'OPEN';
 

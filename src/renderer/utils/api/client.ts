@@ -1,6 +1,7 @@
 import type { AxiosPromise } from 'axios';
 import type { ExecutionResult } from 'graphql';
 
+import { Constants } from '../../constants';
 import type {
   Account,
   GitifyNotification,
@@ -11,6 +12,7 @@ import type {
 } from '../../types';
 import { isAnsweredDiscussionFeatureSupported } from '../features';
 import { rendererLogError } from '../logger';
+import { createNotificationHandler } from '../notifications/handlers';
 import {
   FetchAuthenticatedUserDetailsDocument,
   type FetchAuthenticatedUserDetailsQuery,
@@ -18,13 +20,16 @@ import {
   type FetchDiscussionByNumberQuery,
   FetchIssueByNumberDocument,
   type FetchIssueByNumberQuery,
+  type FetchMergedDetailsTemplateQuery,
   FetchPullRequestByNumberDocument,
   type FetchPullRequestByNumberQuery,
 } from './graphql/generated/graphql';
+import { MergeQueryBuilder } from './graphql/MergeQueryBuilder';
 import {
   apiRequestAuth,
   type ExecutionResultWithHeaders,
   performGraphQLRequest,
+  performGraphQLRequestString,
 } from './request';
 import type {
   NotificationThreadSubscription,
@@ -195,6 +200,33 @@ export async function fetchAuthenticatedUserDetails(
 }
 
 /**
+ * Fetch GitHub Discussion by Discussion Number.
+ */
+export async function fetchDiscussionByNumber(
+  notification: GitifyNotification,
+): Promise<ExecutionResult<FetchDiscussionByNumberQuery>> {
+  const url = getGitHubGraphQLUrl(notification.account.hostname);
+  const number = getNumberFromUrl(notification.subject.url);
+
+  return performGraphQLRequest(
+    url.toString() as Link,
+    notification.account.token,
+    FetchDiscussionByNumberDocument,
+    {
+      owner: notification.repository.owner.login,
+      name: notification.repository.name,
+      number: number,
+      firstLabels: Constants.GRAPHQL_ARGS.FIRST_LABELS,
+      lastThreadedComments: Constants.GRAPHQL_ARGS.LAST_THREADED_COMMENTS,
+      lastReplies: Constants.GRAPHQL_ARGS.LAST_REPLIES,
+      includeIsAnswered: isAnsweredDiscussionFeatureSupported(
+        notification.account,
+      ),
+    },
+  );
+}
+
+/**
  * Fetch GitHub Issue by Issue Number.
  */
 export async function fetchIssueByNumber(
@@ -211,8 +243,8 @@ export async function fetchIssueByNumber(
       owner: notification.repository.owner.login,
       name: notification.repository.name,
       number: number,
-      firstLabels: 100,
-      lastComments: 1,
+      firstLabels: Constants.GRAPHQL_ARGS.FIRST_LABELS,
+      lastComments: Constants.GRAPHQL_ARGS.LAST_COMMENTS,
     },
   );
 }
@@ -234,37 +266,97 @@ export async function fetchPullByNumber(
       owner: notification.repository.owner.login,
       name: notification.repository.name,
       number: number,
-      firstLabels: 100,
-      firstClosingIssues: 100,
-      lastComments: 1,
-      lastReviews: 100,
+      firstClosingIssues: Constants.GRAPHQL_ARGS.FIRST_CLOSING_ISSUES,
+      firstLabels: Constants.GRAPHQL_ARGS.FIRST_LABELS,
+      lastComments: Constants.GRAPHQL_ARGS.LAST_COMMENTS,
+      lastReviews: Constants.GRAPHQL_ARGS.LAST_REVIEWS,
     },
   );
-}
+} /**
+ * Fetch notification details for supported types (ie: Discussions, Issues and Pull Requests).
 
-/**
- * Fetch GitHub Discussion by Discussion Number.
+ * This significantly reduces the amount of API calls by performing a building a merged GraphQL query,
+ * making the most efficient use of the available GitHub API quota limits.
  */
-export async function fetchDiscussionByNumber(
-  notification: GitifyNotification,
-): Promise<ExecutionResult<FetchDiscussionByNumberQuery>> {
-  const url = getGitHubGraphQLUrl(notification.account.hostname);
-  const number = getNumberFromUrl(notification.subject.url);
+export async function fetchNotificationDetailsForList(
+  notifications: GitifyNotification[],
+): Promise<
+  Map<GitifyNotification, FetchMergedDetailsTemplateQuery['repository']>
+> {
+  const results = new Map<
+    GitifyNotification,
+    FetchMergedDetailsTemplateQuery['repository']
+  >();
 
-  return performGraphQLRequest(
-    url.toString() as Link,
-    notification.account.token,
-    FetchDiscussionByNumberDocument,
-    {
+  if (!notifications.length) {
+    return results;
+  }
+
+  // Build merged query using the builder
+  const builder = new MergeQueryBuilder();
+  const aliasToNotification = new Map<string, GitifyNotification>();
+  let hasSupportedNotification = false;
+
+  for (const notification of notifications) {
+    const handler = createNotificationHandler(notification);
+    if (!handler.supportsMergedQueryEnrichment) {
+      continue;
+    }
+
+    hasSupportedNotification = true;
+
+    const alias = builder.addNode({
       owner: notification.repository.owner.login,
       name: notification.repository.name,
-      number: number,
-      lastComments: 10,
-      lastReplies: 10,
-      firstLabels: 100,
-      includeIsAnswered: isAnsweredDiscussionFeatureSupported(
-        notification.account,
-      ),
-    },
+      number: getNumberFromUrl(notification.subject.url),
+      isDiscussionNotification: notification.subject.type === 'Discussion',
+      isIssueNotification: notification.subject.type === 'Issue',
+      isPullRequestNotification: notification.subject.type === 'PullRequest',
+    });
+
+    aliasToNotification.set(alias, notification);
+  }
+
+  if (!hasSupportedNotification) {
+    return results;
+  }
+
+  builder.setSharedVariables({
+    includeIsAnswered: isAnsweredDiscussionFeatureSupported(
+      notifications[0].account,
+    ),
+    firstClosingIssues: Constants.GRAPHQL_ARGS.FIRST_CLOSING_ISSUES,
+    firstLabels: Constants.GRAPHQL_ARGS.FIRST_LABELS,
+    lastComments: Constants.GRAPHQL_ARGS.LAST_COMMENTS,
+    lastThreadedComments: Constants.GRAPHQL_ARGS.LAST_THREADED_COMMENTS,
+    lastReplies: Constants.GRAPHQL_ARGS.LAST_REPLIES,
+    lastReviews: Constants.GRAPHQL_ARGS.LAST_REVIEWS,
+  });
+
+  const query = builder.getGraphQLQuery();
+  const variables = builder.getGraphQLVariables();
+
+  const url = getGitHubGraphQLUrl(notifications[0].account.hostname);
+
+  const response = await performGraphQLRequestString(
+    url.toString() as Link,
+    notifications[0].account.token,
+    query,
+    variables,
   );
+
+  const data = response.data as Record<string, unknown> | undefined;
+  if (data) {
+    for (const [alias, notification] of aliasToNotification) {
+      const repoData = data[alias] as Record<string, unknown> | undefined;
+      if (repoData) {
+        const fragment = Object.values(
+          repoData,
+        )[0] as FetchMergedDetailsTemplateQuery['repository'];
+        results.set(notification, fragment);
+      }
+    }
+  }
+
+  return results;
 }

@@ -1,12 +1,7 @@
 import { mockGitHubCloudAccount } from '../__mocks__/account-mocks';
-import { createMockNotificationUser } from '../__mocks__/user-mocks';
+import { createMockGitifyNotificationUser } from '../__mocks__/user-mocks';
 import { Constants } from '../constants';
-import type {
-  GitifyNotificationUser,
-  GitifyRepository,
-  Hostname,
-  Link,
-} from '../types';
+import type { GitifyRepository, Hostname, Link } from '../types';
 import { mockSingleNotification } from './api/__mocks__/response-mocks';
 import * as authUtils from './auth/utils';
 import * as comms from './comms';
@@ -75,9 +70,7 @@ describe('renderer/utils/links.ts', () => {
   });
 
   it('openUserProfile', () => {
-    const mockUser = createMockNotificationUser(
-      'mock-user',
-    ) as GitifyNotificationUser;
+    const mockUser = createMockGitifyNotificationUser('mock-user');
 
     openUserProfile(mockUser);
 

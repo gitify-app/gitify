@@ -35894,15 +35894,15 @@ export type WorkflowsParametersInput = {
 
 export type _Entity = Issue;
 
-type AuthorFields_Bot_Fragment = { __typename?: 'Bot', login: string, avatarUrl: any, htmlUrl: any, type: 'Bot' };
+type AuthorFields_Bot_Fragment = { __typename?: 'Bot', login: string, htmlUrl: any, avatarUrl: any, type: 'Bot' };
 
-type AuthorFields_EnterpriseUserAccount_Fragment = { __typename?: 'EnterpriseUserAccount', login: string, avatarUrl: any, htmlUrl: any, type: 'EnterpriseUserAccount' };
+type AuthorFields_EnterpriseUserAccount_Fragment = { __typename?: 'EnterpriseUserAccount', login: string, htmlUrl: any, avatarUrl: any, type: 'EnterpriseUserAccount' };
 
-type AuthorFields_Mannequin_Fragment = { __typename?: 'Mannequin', login: string, avatarUrl: any, htmlUrl: any, type: 'Mannequin' };
+type AuthorFields_Mannequin_Fragment = { __typename?: 'Mannequin', login: string, htmlUrl: any, avatarUrl: any, type: 'Mannequin' };
 
-type AuthorFields_Organization_Fragment = { __typename?: 'Organization', login: string, avatarUrl: any, htmlUrl: any, type: 'Organization' };
+type AuthorFields_Organization_Fragment = { __typename?: 'Organization', login: string, htmlUrl: any, avatarUrl: any, type: 'Organization' };
 
-type AuthorFields_User_Fragment = { __typename?: 'User', login: string, avatarUrl: any, htmlUrl: any, type: 'User' };
+type AuthorFields_User_Fragment = { __typename?: 'User', login: string, htmlUrl: any, avatarUrl: any, type: 'User' };
 
 export type AuthorFieldsFragment =
   | AuthorFields_Bot_Fragment
@@ -35918,7 +35918,7 @@ export type FetchDiscussionByNumberQueryVariables = Exact<{
   owner: Scalars['String']['input'];
   name: Scalars['String']['input'];
   number: Scalars['Int']['input'];
-  lastComments?: InputMaybe<Scalars['Int']['input']>;
+  lastThreadedComments?: InputMaybe<Scalars['Int']['input']>;
   lastReplies?: InputMaybe<Scalars['Int']['input']>;
   firstLabels?: InputMaybe<Scalars['Int']['input']>;
   includeIsAnswered: Scalars['Boolean']['input'];
@@ -35926,65 +35926,65 @@ export type FetchDiscussionByNumberQueryVariables = Exact<{
 
 
 export type FetchDiscussionByNumberQuery = { __typename?: 'Query', repository?: { __typename?: 'Repository', discussion?: { __typename: 'Discussion', number: number, title: string, stateReason?: DiscussionStateReason | null, isAnswered?: boolean | null, url: any, author?:
-        | { __typename?: 'Bot', login: string, avatarUrl: any, htmlUrl: any, type: 'Bot' }
-        | { __typename?: 'EnterpriseUserAccount', login: string, avatarUrl: any, htmlUrl: any, type: 'EnterpriseUserAccount' }
-        | { __typename?: 'Mannequin', login: string, avatarUrl: any, htmlUrl: any, type: 'Mannequin' }
-        | { __typename?: 'Organization', login: string, avatarUrl: any, htmlUrl: any, type: 'Organization' }
-        | { __typename?: 'User', login: string, avatarUrl: any, htmlUrl: any, type: 'User' }
+        | { __typename?: 'Bot', login: string, htmlUrl: any, avatarUrl: any, type: 'Bot' }
+        | { __typename?: 'EnterpriseUserAccount', login: string, htmlUrl: any, avatarUrl: any, type: 'EnterpriseUserAccount' }
+        | { __typename?: 'Mannequin', login: string, htmlUrl: any, avatarUrl: any, type: 'Mannequin' }
+        | { __typename?: 'Organization', login: string, htmlUrl: any, avatarUrl: any, type: 'Organization' }
+        | { __typename?: 'User', login: string, htmlUrl: any, avatarUrl: any, type: 'User' }
        | null, comments: { __typename?: 'DiscussionCommentConnection', totalCount: number, nodes?: Array<{ __typename?: 'DiscussionComment', databaseId?: number | null, createdAt: any, url: any, replies: { __typename?: 'DiscussionCommentConnection', totalCount: number, nodes?: Array<{ __typename?: 'DiscussionComment', databaseId?: number | null, createdAt: any, url: any, author?:
-                | { __typename?: 'Bot', login: string, avatarUrl: any, htmlUrl: any, type: 'Bot' }
-                | { __typename?: 'EnterpriseUserAccount', login: string, avatarUrl: any, htmlUrl: any, type: 'EnterpriseUserAccount' }
-                | { __typename?: 'Mannequin', login: string, avatarUrl: any, htmlUrl: any, type: 'Mannequin' }
-                | { __typename?: 'Organization', login: string, avatarUrl: any, htmlUrl: any, type: 'Organization' }
-                | { __typename?: 'User', login: string, avatarUrl: any, htmlUrl: any, type: 'User' }
+                | { __typename?: 'Bot', login: string, htmlUrl: any, avatarUrl: any, type: 'Bot' }
+                | { __typename?: 'EnterpriseUserAccount', login: string, htmlUrl: any, avatarUrl: any, type: 'EnterpriseUserAccount' }
+                | { __typename?: 'Mannequin', login: string, htmlUrl: any, avatarUrl: any, type: 'Mannequin' }
+                | { __typename?: 'Organization', login: string, htmlUrl: any, avatarUrl: any, type: 'Organization' }
+                | { __typename?: 'User', login: string, htmlUrl: any, avatarUrl: any, type: 'User' }
                | null } | null> | null }, author?:
-            | { __typename?: 'Bot', login: string, avatarUrl: any, htmlUrl: any, type: 'Bot' }
-            | { __typename?: 'EnterpriseUserAccount', login: string, avatarUrl: any, htmlUrl: any, type: 'EnterpriseUserAccount' }
-            | { __typename?: 'Mannequin', login: string, avatarUrl: any, htmlUrl: any, type: 'Mannequin' }
-            | { __typename?: 'Organization', login: string, avatarUrl: any, htmlUrl: any, type: 'Organization' }
-            | { __typename?: 'User', login: string, avatarUrl: any, htmlUrl: any, type: 'User' }
+            | { __typename?: 'Bot', login: string, htmlUrl: any, avatarUrl: any, type: 'Bot' }
+            | { __typename?: 'EnterpriseUserAccount', login: string, htmlUrl: any, avatarUrl: any, type: 'EnterpriseUserAccount' }
+            | { __typename?: 'Mannequin', login: string, htmlUrl: any, avatarUrl: any, type: 'Mannequin' }
+            | { __typename?: 'Organization', login: string, htmlUrl: any, avatarUrl: any, type: 'Organization' }
+            | { __typename?: 'User', login: string, htmlUrl: any, avatarUrl: any, type: 'User' }
            | null } | null> | null }, labels?: { __typename?: 'LabelConnection', nodes?: Array<{ __typename?: 'Label', name: string } | null> | null } | null } | null } | null };
 
 export type DiscussionDetailsFragment = { __typename: 'Discussion', number: number, title: string, stateReason?: DiscussionStateReason | null, isAnswered?: boolean | null, url: any, author?:
-    | { __typename?: 'Bot', login: string, avatarUrl: any, htmlUrl: any, type: 'Bot' }
-    | { __typename?: 'EnterpriseUserAccount', login: string, avatarUrl: any, htmlUrl: any, type: 'EnterpriseUserAccount' }
-    | { __typename?: 'Mannequin', login: string, avatarUrl: any, htmlUrl: any, type: 'Mannequin' }
-    | { __typename?: 'Organization', login: string, avatarUrl: any, htmlUrl: any, type: 'Organization' }
-    | { __typename?: 'User', login: string, avatarUrl: any, htmlUrl: any, type: 'User' }
+    | { __typename?: 'Bot', login: string, htmlUrl: any, avatarUrl: any, type: 'Bot' }
+    | { __typename?: 'EnterpriseUserAccount', login: string, htmlUrl: any, avatarUrl: any, type: 'EnterpriseUserAccount' }
+    | { __typename?: 'Mannequin', login: string, htmlUrl: any, avatarUrl: any, type: 'Mannequin' }
+    | { __typename?: 'Organization', login: string, htmlUrl: any, avatarUrl: any, type: 'Organization' }
+    | { __typename?: 'User', login: string, htmlUrl: any, avatarUrl: any, type: 'User' }
    | null, comments: { __typename?: 'DiscussionCommentConnection', totalCount: number, nodes?: Array<{ __typename?: 'DiscussionComment', databaseId?: number | null, createdAt: any, url: any, replies: { __typename?: 'DiscussionCommentConnection', totalCount: number, nodes?: Array<{ __typename?: 'DiscussionComment', databaseId?: number | null, createdAt: any, url: any, author?:
-            | { __typename?: 'Bot', login: string, avatarUrl: any, htmlUrl: any, type: 'Bot' }
-            | { __typename?: 'EnterpriseUserAccount', login: string, avatarUrl: any, htmlUrl: any, type: 'EnterpriseUserAccount' }
-            | { __typename?: 'Mannequin', login: string, avatarUrl: any, htmlUrl: any, type: 'Mannequin' }
-            | { __typename?: 'Organization', login: string, avatarUrl: any, htmlUrl: any, type: 'Organization' }
-            | { __typename?: 'User', login: string, avatarUrl: any, htmlUrl: any, type: 'User' }
+            | { __typename?: 'Bot', login: string, htmlUrl: any, avatarUrl: any, type: 'Bot' }
+            | { __typename?: 'EnterpriseUserAccount', login: string, htmlUrl: any, avatarUrl: any, type: 'EnterpriseUserAccount' }
+            | { __typename?: 'Mannequin', login: string, htmlUrl: any, avatarUrl: any, type: 'Mannequin' }
+            | { __typename?: 'Organization', login: string, htmlUrl: any, avatarUrl: any, type: 'Organization' }
+            | { __typename?: 'User', login: string, htmlUrl: any, avatarUrl: any, type: 'User' }
            | null } | null> | null }, author?:
-        | { __typename?: 'Bot', login: string, avatarUrl: any, htmlUrl: any, type: 'Bot' }
-        | { __typename?: 'EnterpriseUserAccount', login: string, avatarUrl: any, htmlUrl: any, type: 'EnterpriseUserAccount' }
-        | { __typename?: 'Mannequin', login: string, avatarUrl: any, htmlUrl: any, type: 'Mannequin' }
-        | { __typename?: 'Organization', login: string, avatarUrl: any, htmlUrl: any, type: 'Organization' }
-        | { __typename?: 'User', login: string, avatarUrl: any, htmlUrl: any, type: 'User' }
+        | { __typename?: 'Bot', login: string, htmlUrl: any, avatarUrl: any, type: 'Bot' }
+        | { __typename?: 'EnterpriseUserAccount', login: string, htmlUrl: any, avatarUrl: any, type: 'EnterpriseUserAccount' }
+        | { __typename?: 'Mannequin', login: string, htmlUrl: any, avatarUrl: any, type: 'Mannequin' }
+        | { __typename?: 'Organization', login: string, htmlUrl: any, avatarUrl: any, type: 'Organization' }
+        | { __typename?: 'User', login: string, htmlUrl: any, avatarUrl: any, type: 'User' }
        | null } | null> | null }, labels?: { __typename?: 'LabelConnection', nodes?: Array<{ __typename?: 'Label', name: string } | null> | null } | null };
 
 export type CommentFieldsFragment = { __typename?: 'DiscussionComment', databaseId?: number | null, createdAt: any, url: any, author?:
-    | { __typename?: 'Bot', login: string, avatarUrl: any, htmlUrl: any, type: 'Bot' }
-    | { __typename?: 'EnterpriseUserAccount', login: string, avatarUrl: any, htmlUrl: any, type: 'EnterpriseUserAccount' }
-    | { __typename?: 'Mannequin', login: string, avatarUrl: any, htmlUrl: any, type: 'Mannequin' }
-    | { __typename?: 'Organization', login: string, avatarUrl: any, htmlUrl: any, type: 'Organization' }
-    | { __typename?: 'User', login: string, avatarUrl: any, htmlUrl: any, type: 'User' }
+    | { __typename?: 'Bot', login: string, htmlUrl: any, avatarUrl: any, type: 'Bot' }
+    | { __typename?: 'EnterpriseUserAccount', login: string, htmlUrl: any, avatarUrl: any, type: 'EnterpriseUserAccount' }
+    | { __typename?: 'Mannequin', login: string, htmlUrl: any, avatarUrl: any, type: 'Mannequin' }
+    | { __typename?: 'Organization', login: string, htmlUrl: any, avatarUrl: any, type: 'Organization' }
+    | { __typename?: 'User', login: string, htmlUrl: any, avatarUrl: any, type: 'User' }
    | null };
 
 export type DiscussionCommentFieldsFragment = { __typename?: 'DiscussionComment', databaseId?: number | null, createdAt: any, url: any, replies: { __typename?: 'DiscussionCommentConnection', totalCount: number, nodes?: Array<{ __typename?: 'DiscussionComment', databaseId?: number | null, createdAt: any, url: any, author?:
-        | { __typename?: 'Bot', login: string, avatarUrl: any, htmlUrl: any, type: 'Bot' }
-        | { __typename?: 'EnterpriseUserAccount', login: string, avatarUrl: any, htmlUrl: any, type: 'EnterpriseUserAccount' }
-        | { __typename?: 'Mannequin', login: string, avatarUrl: any, htmlUrl: any, type: 'Mannequin' }
-        | { __typename?: 'Organization', login: string, avatarUrl: any, htmlUrl: any, type: 'Organization' }
-        | { __typename?: 'User', login: string, avatarUrl: any, htmlUrl: any, type: 'User' }
+        | { __typename?: 'Bot', login: string, htmlUrl: any, avatarUrl: any, type: 'Bot' }
+        | { __typename?: 'EnterpriseUserAccount', login: string, htmlUrl: any, avatarUrl: any, type: 'EnterpriseUserAccount' }
+        | { __typename?: 'Mannequin', login: string, htmlUrl: any, avatarUrl: any, type: 'Mannequin' }
+        | { __typename?: 'Organization', login: string, htmlUrl: any, avatarUrl: any, type: 'Organization' }
+        | { __typename?: 'User', login: string, htmlUrl: any, avatarUrl: any, type: 'User' }
        | null } | null> | null }, author?:
-    | { __typename?: 'Bot', login: string, avatarUrl: any, htmlUrl: any, type: 'Bot' }
-    | { __typename?: 'EnterpriseUserAccount', login: string, avatarUrl: any, htmlUrl: any, type: 'EnterpriseUserAccount' }
-    | { __typename?: 'Mannequin', login: string, avatarUrl: any, htmlUrl: any, type: 'Mannequin' }
-    | { __typename?: 'Organization', login: string, avatarUrl: any, htmlUrl: any, type: 'Organization' }
-    | { __typename?: 'User', login: string, avatarUrl: any, htmlUrl: any, type: 'User' }
+    | { __typename?: 'Bot', login: string, htmlUrl: any, avatarUrl: any, type: 'Bot' }
+    | { __typename?: 'EnterpriseUserAccount', login: string, htmlUrl: any, avatarUrl: any, type: 'EnterpriseUserAccount' }
+    | { __typename?: 'Mannequin', login: string, htmlUrl: any, avatarUrl: any, type: 'Mannequin' }
+    | { __typename?: 'Organization', login: string, htmlUrl: any, avatarUrl: any, type: 'Organization' }
+    | { __typename?: 'User', login: string, htmlUrl: any, avatarUrl: any, type: 'User' }
    | null };
 
 export type FetchIssueByNumberQueryVariables = Exact<{
@@ -35997,32 +35997,149 @@ export type FetchIssueByNumberQueryVariables = Exact<{
 
 
 export type FetchIssueByNumberQuery = { __typename?: 'Query', repository?: { __typename?: 'Repository', issue?: { __typename: 'Issue', number: number, title: string, url: any, state: IssueState, stateReason?: IssueStateReason | null, milestone?: { __typename?: 'Milestone', state: MilestoneState, title: string } | null, author?:
-        | { __typename?: 'Bot', login: string, avatarUrl: any, htmlUrl: any, type: 'Bot' }
-        | { __typename?: 'EnterpriseUserAccount', login: string, avatarUrl: any, htmlUrl: any, type: 'EnterpriseUserAccount' }
-        | { __typename?: 'Mannequin', login: string, avatarUrl: any, htmlUrl: any, type: 'Mannequin' }
-        | { __typename?: 'Organization', login: string, avatarUrl: any, htmlUrl: any, type: 'Organization' }
-        | { __typename?: 'User', login: string, avatarUrl: any, htmlUrl: any, type: 'User' }
+        | { __typename?: 'Bot', login: string, htmlUrl: any, avatarUrl: any, type: 'Bot' }
+        | { __typename?: 'EnterpriseUserAccount', login: string, htmlUrl: any, avatarUrl: any, type: 'EnterpriseUserAccount' }
+        | { __typename?: 'Mannequin', login: string, htmlUrl: any, avatarUrl: any, type: 'Mannequin' }
+        | { __typename?: 'Organization', login: string, htmlUrl: any, avatarUrl: any, type: 'Organization' }
+        | { __typename?: 'User', login: string, htmlUrl: any, avatarUrl: any, type: 'User' }
        | null, comments: { __typename?: 'IssueCommentConnection', totalCount: number, nodes?: Array<{ __typename?: 'IssueComment', url: any, author?:
-            | { __typename?: 'Bot', login: string, avatarUrl: any, htmlUrl: any, type: 'Bot' }
-            | { __typename?: 'EnterpriseUserAccount', login: string, avatarUrl: any, htmlUrl: any, type: 'EnterpriseUserAccount' }
-            | { __typename?: 'Mannequin', login: string, avatarUrl: any, htmlUrl: any, type: 'Mannequin' }
-            | { __typename?: 'Organization', login: string, avatarUrl: any, htmlUrl: any, type: 'Organization' }
-            | { __typename?: 'User', login: string, avatarUrl: any, htmlUrl: any, type: 'User' }
+            | { __typename?: 'Bot', login: string, htmlUrl: any, avatarUrl: any, type: 'Bot' }
+            | { __typename?: 'EnterpriseUserAccount', login: string, htmlUrl: any, avatarUrl: any, type: 'EnterpriseUserAccount' }
+            | { __typename?: 'Mannequin', login: string, htmlUrl: any, avatarUrl: any, type: 'Mannequin' }
+            | { __typename?: 'Organization', login: string, htmlUrl: any, avatarUrl: any, type: 'Organization' }
+            | { __typename?: 'User', login: string, htmlUrl: any, avatarUrl: any, type: 'User' }
            | null } | null> | null }, labels?: { __typename?: 'LabelConnection', nodes?: Array<{ __typename?: 'Label', name: string } | null> | null } | null } | null } | null };
 
 export type IssueDetailsFragment = { __typename: 'Issue', number: number, title: string, url: any, state: IssueState, stateReason?: IssueStateReason | null, milestone?: { __typename?: 'Milestone', state: MilestoneState, title: string } | null, author?:
-    | { __typename?: 'Bot', login: string, avatarUrl: any, htmlUrl: any, type: 'Bot' }
-    | { __typename?: 'EnterpriseUserAccount', login: string, avatarUrl: any, htmlUrl: any, type: 'EnterpriseUserAccount' }
-    | { __typename?: 'Mannequin', login: string, avatarUrl: any, htmlUrl: any, type: 'Mannequin' }
-    | { __typename?: 'Organization', login: string, avatarUrl: any, htmlUrl: any, type: 'Organization' }
-    | { __typename?: 'User', login: string, avatarUrl: any, htmlUrl: any, type: 'User' }
+    | { __typename?: 'Bot', login: string, htmlUrl: any, avatarUrl: any, type: 'Bot' }
+    | { __typename?: 'EnterpriseUserAccount', login: string, htmlUrl: any, avatarUrl: any, type: 'EnterpriseUserAccount' }
+    | { __typename?: 'Mannequin', login: string, htmlUrl: any, avatarUrl: any, type: 'Mannequin' }
+    | { __typename?: 'Organization', login: string, htmlUrl: any, avatarUrl: any, type: 'Organization' }
+    | { __typename?: 'User', login: string, htmlUrl: any, avatarUrl: any, type: 'User' }
    | null, comments: { __typename?: 'IssueCommentConnection', totalCount: number, nodes?: Array<{ __typename?: 'IssueComment', url: any, author?:
-        | { __typename?: 'Bot', login: string, avatarUrl: any, htmlUrl: any, type: 'Bot' }
-        | { __typename?: 'EnterpriseUserAccount', login: string, avatarUrl: any, htmlUrl: any, type: 'EnterpriseUserAccount' }
-        | { __typename?: 'Mannequin', login: string, avatarUrl: any, htmlUrl: any, type: 'Mannequin' }
-        | { __typename?: 'Organization', login: string, avatarUrl: any, htmlUrl: any, type: 'Organization' }
-        | { __typename?: 'User', login: string, avatarUrl: any, htmlUrl: any, type: 'User' }
+        | { __typename?: 'Bot', login: string, htmlUrl: any, avatarUrl: any, type: 'Bot' }
+        | { __typename?: 'EnterpriseUserAccount', login: string, htmlUrl: any, avatarUrl: any, type: 'EnterpriseUserAccount' }
+        | { __typename?: 'Mannequin', login: string, htmlUrl: any, avatarUrl: any, type: 'Mannequin' }
+        | { __typename?: 'Organization', login: string, htmlUrl: any, avatarUrl: any, type: 'Organization' }
+        | { __typename?: 'User', login: string, htmlUrl: any, avatarUrl: any, type: 'User' }
        | null } | null> | null }, labels?: { __typename?: 'LabelConnection', nodes?: Array<{ __typename?: 'Label', name: string } | null> | null } | null };
+
+export type FetchMergedDetailsTemplateQueryVariables = Exact<{
+  ownerINDEX: Scalars['String']['input'];
+  nameINDEX: Scalars['String']['input'];
+  numberINDEX: Scalars['Int']['input'];
+  isDiscussionNotificationINDEX: Scalars['Boolean']['input'];
+  isIssueNotificationINDEX: Scalars['Boolean']['input'];
+  isPullRequestNotificationINDEX: Scalars['Boolean']['input'];
+  lastComments?: InputMaybe<Scalars['Int']['input']>;
+  lastThreadedComments?: InputMaybe<Scalars['Int']['input']>;
+  lastReplies?: InputMaybe<Scalars['Int']['input']>;
+  lastReviews?: InputMaybe<Scalars['Int']['input']>;
+  firstLabels?: InputMaybe<Scalars['Int']['input']>;
+  firstClosingIssues?: InputMaybe<Scalars['Int']['input']>;
+  includeIsAnswered: Scalars['Boolean']['input'];
+}>;
+
+
+export type FetchMergedDetailsTemplateQuery = { __typename?: 'Query', repository?: { __typename?: 'Repository', discussion?: { __typename: 'Discussion', number: number, title: string, stateReason?: DiscussionStateReason | null, isAnswered?: boolean | null, url: any, author?:
+        | { __typename?: 'Bot', login: string, htmlUrl: any, avatarUrl: any, type: 'Bot' }
+        | { __typename?: 'EnterpriseUserAccount', login: string, htmlUrl: any, avatarUrl: any, type: 'EnterpriseUserAccount' }
+        | { __typename?: 'Mannequin', login: string, htmlUrl: any, avatarUrl: any, type: 'Mannequin' }
+        | { __typename?: 'Organization', login: string, htmlUrl: any, avatarUrl: any, type: 'Organization' }
+        | { __typename?: 'User', login: string, htmlUrl: any, avatarUrl: any, type: 'User' }
+       | null, comments: { __typename?: 'DiscussionCommentConnection', totalCount: number, nodes?: Array<{ __typename?: 'DiscussionComment', databaseId?: number | null, createdAt: any, url: any, replies: { __typename?: 'DiscussionCommentConnection', totalCount: number, nodes?: Array<{ __typename?: 'DiscussionComment', databaseId?: number | null, createdAt: any, url: any, author?:
+                | { __typename?: 'Bot', login: string, htmlUrl: any, avatarUrl: any, type: 'Bot' }
+                | { __typename?: 'EnterpriseUserAccount', login: string, htmlUrl: any, avatarUrl: any, type: 'EnterpriseUserAccount' }
+                | { __typename?: 'Mannequin', login: string, htmlUrl: any, avatarUrl: any, type: 'Mannequin' }
+                | { __typename?: 'Organization', login: string, htmlUrl: any, avatarUrl: any, type: 'Organization' }
+                | { __typename?: 'User', login: string, htmlUrl: any, avatarUrl: any, type: 'User' }
+               | null } | null> | null }, author?:
+            | { __typename?: 'Bot', login: string, htmlUrl: any, avatarUrl: any, type: 'Bot' }
+            | { __typename?: 'EnterpriseUserAccount', login: string, htmlUrl: any, avatarUrl: any, type: 'EnterpriseUserAccount' }
+            | { __typename?: 'Mannequin', login: string, htmlUrl: any, avatarUrl: any, type: 'Mannequin' }
+            | { __typename?: 'Organization', login: string, htmlUrl: any, avatarUrl: any, type: 'Organization' }
+            | { __typename?: 'User', login: string, htmlUrl: any, avatarUrl: any, type: 'User' }
+           | null } | null> | null }, labels?: { __typename?: 'LabelConnection', nodes?: Array<{ __typename?: 'Label', name: string } | null> | null } | null } | null, issue?: { __typename: 'Issue', number: number, title: string, url: any, state: IssueState, stateReason?: IssueStateReason | null, milestone?: { __typename?: 'Milestone', state: MilestoneState, title: string } | null, author?:
+        | { __typename?: 'Bot', login: string, htmlUrl: any, avatarUrl: any, type: 'Bot' }
+        | { __typename?: 'EnterpriseUserAccount', login: string, htmlUrl: any, avatarUrl: any, type: 'EnterpriseUserAccount' }
+        | { __typename?: 'Mannequin', login: string, htmlUrl: any, avatarUrl: any, type: 'Mannequin' }
+        | { __typename?: 'Organization', login: string, htmlUrl: any, avatarUrl: any, type: 'Organization' }
+        | { __typename?: 'User', login: string, htmlUrl: any, avatarUrl: any, type: 'User' }
+       | null, comments: { __typename?: 'IssueCommentConnection', totalCount: number, nodes?: Array<{ __typename?: 'IssueComment', url: any, author?:
+            | { __typename?: 'Bot', login: string, htmlUrl: any, avatarUrl: any, type: 'Bot' }
+            | { __typename?: 'EnterpriseUserAccount', login: string, htmlUrl: any, avatarUrl: any, type: 'EnterpriseUserAccount' }
+            | { __typename?: 'Mannequin', login: string, htmlUrl: any, avatarUrl: any, type: 'Mannequin' }
+            | { __typename?: 'Organization', login: string, htmlUrl: any, avatarUrl: any, type: 'Organization' }
+            | { __typename?: 'User', login: string, htmlUrl: any, avatarUrl: any, type: 'User' }
+           | null } | null> | null }, labels?: { __typename?: 'LabelConnection', nodes?: Array<{ __typename?: 'Label', name: string } | null> | null } | null } | null, pullRequest?: { __typename: 'PullRequest', number: number, title: string, url: any, state: PullRequestState, merged: boolean, isDraft: boolean, isInMergeQueue: boolean, milestone?: { __typename?: 'Milestone', state: MilestoneState, title: string } | null, author?:
+        | { __typename?: 'Bot', login: string, htmlUrl: any, avatarUrl: any, type: 'Bot' }
+        | { __typename?: 'EnterpriseUserAccount', login: string, htmlUrl: any, avatarUrl: any, type: 'EnterpriseUserAccount' }
+        | { __typename?: 'Mannequin', login: string, htmlUrl: any, avatarUrl: any, type: 'Mannequin' }
+        | { __typename?: 'Organization', login: string, htmlUrl: any, avatarUrl: any, type: 'Organization' }
+        | { __typename?: 'User', login: string, htmlUrl: any, avatarUrl: any, type: 'User' }
+       | null, comments: { __typename?: 'IssueCommentConnection', totalCount: number, nodes?: Array<{ __typename?: 'IssueComment', url: any, author?:
+            | { __typename?: 'Bot', login: string, htmlUrl: any, avatarUrl: any, type: 'Bot' }
+            | { __typename?: 'EnterpriseUserAccount', login: string, htmlUrl: any, avatarUrl: any, type: 'EnterpriseUserAccount' }
+            | { __typename?: 'Mannequin', login: string, htmlUrl: any, avatarUrl: any, type: 'Mannequin' }
+            | { __typename?: 'Organization', login: string, htmlUrl: any, avatarUrl: any, type: 'Organization' }
+            | { __typename?: 'User', login: string, htmlUrl: any, avatarUrl: any, type: 'User' }
+           | null } | null> | null }, reviews?: { __typename?: 'PullRequestReviewConnection', totalCount: number, nodes?: Array<{ __typename?: 'PullRequestReview', state: PullRequestReviewState, author?:
+            | { __typename?: 'Bot', login: string }
+            | { __typename?: 'EnterpriseUserAccount', login: string }
+            | { __typename?: 'Mannequin', login: string }
+            | { __typename?: 'Organization', login: string }
+            | { __typename?: 'User', login: string }
+           | null } | null> | null } | null, labels?: { __typename?: 'LabelConnection', nodes?: Array<{ __typename?: 'Label', name: string } | null> | null } | null, closingIssuesReferences?: { __typename?: 'IssueConnection', nodes?: Array<{ __typename?: 'Issue', number: number } | null> | null } | null } | null } | null };
+
+export type MergedDetailsQueryTemplateFragment = { __typename?: 'Query', repository?: { __typename?: 'Repository', discussion?: { __typename: 'Discussion', number: number, title: string, stateReason?: DiscussionStateReason | null, isAnswered?: boolean | null, url: any, author?:
+        | { __typename?: 'Bot', login: string, htmlUrl: any, avatarUrl: any, type: 'Bot' }
+        | { __typename?: 'EnterpriseUserAccount', login: string, htmlUrl: any, avatarUrl: any, type: 'EnterpriseUserAccount' }
+        | { __typename?: 'Mannequin', login: string, htmlUrl: any, avatarUrl: any, type: 'Mannequin' }
+        | { __typename?: 'Organization', login: string, htmlUrl: any, avatarUrl: any, type: 'Organization' }
+        | { __typename?: 'User', login: string, htmlUrl: any, avatarUrl: any, type: 'User' }
+       | null, comments: { __typename?: 'DiscussionCommentConnection', totalCount: number, nodes?: Array<{ __typename?: 'DiscussionComment', databaseId?: number | null, createdAt: any, url: any, replies: { __typename?: 'DiscussionCommentConnection', totalCount: number, nodes?: Array<{ __typename?: 'DiscussionComment', databaseId?: number | null, createdAt: any, url: any, author?:
+                | { __typename?: 'Bot', login: string, htmlUrl: any, avatarUrl: any, type: 'Bot' }
+                | { __typename?: 'EnterpriseUserAccount', login: string, htmlUrl: any, avatarUrl: any, type: 'EnterpriseUserAccount' }
+                | { __typename?: 'Mannequin', login: string, htmlUrl: any, avatarUrl: any, type: 'Mannequin' }
+                | { __typename?: 'Organization', login: string, htmlUrl: any, avatarUrl: any, type: 'Organization' }
+                | { __typename?: 'User', login: string, htmlUrl: any, avatarUrl: any, type: 'User' }
+               | null } | null> | null }, author?:
+            | { __typename?: 'Bot', login: string, htmlUrl: any, avatarUrl: any, type: 'Bot' }
+            | { __typename?: 'EnterpriseUserAccount', login: string, htmlUrl: any, avatarUrl: any, type: 'EnterpriseUserAccount' }
+            | { __typename?: 'Mannequin', login: string, htmlUrl: any, avatarUrl: any, type: 'Mannequin' }
+            | { __typename?: 'Organization', login: string, htmlUrl: any, avatarUrl: any, type: 'Organization' }
+            | { __typename?: 'User', login: string, htmlUrl: any, avatarUrl: any, type: 'User' }
+           | null } | null> | null }, labels?: { __typename?: 'LabelConnection', nodes?: Array<{ __typename?: 'Label', name: string } | null> | null } | null } | null, issue?: { __typename: 'Issue', number: number, title: string, url: any, state: IssueState, stateReason?: IssueStateReason | null, milestone?: { __typename?: 'Milestone', state: MilestoneState, title: string } | null, author?:
+        | { __typename?: 'Bot', login: string, htmlUrl: any, avatarUrl: any, type: 'Bot' }
+        | { __typename?: 'EnterpriseUserAccount', login: string, htmlUrl: any, avatarUrl: any, type: 'EnterpriseUserAccount' }
+        | { __typename?: 'Mannequin', login: string, htmlUrl: any, avatarUrl: any, type: 'Mannequin' }
+        | { __typename?: 'Organization', login: string, htmlUrl: any, avatarUrl: any, type: 'Organization' }
+        | { __typename?: 'User', login: string, htmlUrl: any, avatarUrl: any, type: 'User' }
+       | null, comments: { __typename?: 'IssueCommentConnection', totalCount: number, nodes?: Array<{ __typename?: 'IssueComment', url: any, author?:
+            | { __typename?: 'Bot', login: string, htmlUrl: any, avatarUrl: any, type: 'Bot' }
+            | { __typename?: 'EnterpriseUserAccount', login: string, htmlUrl: any, avatarUrl: any, type: 'EnterpriseUserAccount' }
+            | { __typename?: 'Mannequin', login: string, htmlUrl: any, avatarUrl: any, type: 'Mannequin' }
+            | { __typename?: 'Organization', login: string, htmlUrl: any, avatarUrl: any, type: 'Organization' }
+            | { __typename?: 'User', login: string, htmlUrl: any, avatarUrl: any, type: 'User' }
+           | null } | null> | null }, labels?: { __typename?: 'LabelConnection', nodes?: Array<{ __typename?: 'Label', name: string } | null> | null } | null } | null, pullRequest?: { __typename: 'PullRequest', number: number, title: string, url: any, state: PullRequestState, merged: boolean, isDraft: boolean, isInMergeQueue: boolean, milestone?: { __typename?: 'Milestone', state: MilestoneState, title: string } | null, author?:
+        | { __typename?: 'Bot', login: string, htmlUrl: any, avatarUrl: any, type: 'Bot' }
+        | { __typename?: 'EnterpriseUserAccount', login: string, htmlUrl: any, avatarUrl: any, type: 'EnterpriseUserAccount' }
+        | { __typename?: 'Mannequin', login: string, htmlUrl: any, avatarUrl: any, type: 'Mannequin' }
+        | { __typename?: 'Organization', login: string, htmlUrl: any, avatarUrl: any, type: 'Organization' }
+        | { __typename?: 'User', login: string, htmlUrl: any, avatarUrl: any, type: 'User' }
+       | null, comments: { __typename?: 'IssueCommentConnection', totalCount: number, nodes?: Array<{ __typename?: 'IssueComment', url: any, author?:
+            | { __typename?: 'Bot', login: string, htmlUrl: any, avatarUrl: any, type: 'Bot' }
+            | { __typename?: 'EnterpriseUserAccount', login: string, htmlUrl: any, avatarUrl: any, type: 'EnterpriseUserAccount' }
+            | { __typename?: 'Mannequin', login: string, htmlUrl: any, avatarUrl: any, type: 'Mannequin' }
+            | { __typename?: 'Organization', login: string, htmlUrl: any, avatarUrl: any, type: 'Organization' }
+            | { __typename?: 'User', login: string, htmlUrl: any, avatarUrl: any, type: 'User' }
+           | null } | null> | null }, reviews?: { __typename?: 'PullRequestReviewConnection', totalCount: number, nodes?: Array<{ __typename?: 'PullRequestReview', state: PullRequestReviewState, author?:
+            | { __typename?: 'Bot', login: string }
+            | { __typename?: 'EnterpriseUserAccount', login: string }
+            | { __typename?: 'Mannequin', login: string }
+            | { __typename?: 'Organization', login: string }
+            | { __typename?: 'User', login: string }
+           | null } | null> | null } | null, labels?: { __typename?: 'LabelConnection', nodes?: Array<{ __typename?: 'Label', name: string } | null> | null } | null, closingIssuesReferences?: { __typename?: 'IssueConnection', nodes?: Array<{ __typename?: 'Issue', number: number } | null> | null } | null } | null } | null };
 
 export type FetchPullRequestByNumberQueryVariables = Exact<{
   owner: Scalars['String']['input'];
@@ -36036,17 +36153,17 @@ export type FetchPullRequestByNumberQueryVariables = Exact<{
 
 
 export type FetchPullRequestByNumberQuery = { __typename?: 'Query', repository?: { __typename?: 'Repository', pullRequest?: { __typename: 'PullRequest', number: number, title: string, url: any, state: PullRequestState, merged: boolean, isDraft: boolean, isInMergeQueue: boolean, milestone?: { __typename?: 'Milestone', state: MilestoneState, title: string } | null, author?:
-        | { __typename?: 'Bot', login: string, avatarUrl: any, htmlUrl: any, type: 'Bot' }
-        | { __typename?: 'EnterpriseUserAccount', login: string, avatarUrl: any, htmlUrl: any, type: 'EnterpriseUserAccount' }
-        | { __typename?: 'Mannequin', login: string, avatarUrl: any, htmlUrl: any, type: 'Mannequin' }
-        | { __typename?: 'Organization', login: string, avatarUrl: any, htmlUrl: any, type: 'Organization' }
-        | { __typename?: 'User', login: string, avatarUrl: any, htmlUrl: any, type: 'User' }
+        | { __typename?: 'Bot', login: string, htmlUrl: any, avatarUrl: any, type: 'Bot' }
+        | { __typename?: 'EnterpriseUserAccount', login: string, htmlUrl: any, avatarUrl: any, type: 'EnterpriseUserAccount' }
+        | { __typename?: 'Mannequin', login: string, htmlUrl: any, avatarUrl: any, type: 'Mannequin' }
+        | { __typename?: 'Organization', login: string, htmlUrl: any, avatarUrl: any, type: 'Organization' }
+        | { __typename?: 'User', login: string, htmlUrl: any, avatarUrl: any, type: 'User' }
        | null, comments: { __typename?: 'IssueCommentConnection', totalCount: number, nodes?: Array<{ __typename?: 'IssueComment', url: any, author?:
-            | { __typename?: 'Bot', login: string, avatarUrl: any, htmlUrl: any, type: 'Bot' }
-            | { __typename?: 'EnterpriseUserAccount', login: string, avatarUrl: any, htmlUrl: any, type: 'EnterpriseUserAccount' }
-            | { __typename?: 'Mannequin', login: string, avatarUrl: any, htmlUrl: any, type: 'Mannequin' }
-            | { __typename?: 'Organization', login: string, avatarUrl: any, htmlUrl: any, type: 'Organization' }
-            | { __typename?: 'User', login: string, avatarUrl: any, htmlUrl: any, type: 'User' }
+            | { __typename?: 'Bot', login: string, htmlUrl: any, avatarUrl: any, type: 'Bot' }
+            | { __typename?: 'EnterpriseUserAccount', login: string, htmlUrl: any, avatarUrl: any, type: 'EnterpriseUserAccount' }
+            | { __typename?: 'Mannequin', login: string, htmlUrl: any, avatarUrl: any, type: 'Mannequin' }
+            | { __typename?: 'Organization', login: string, htmlUrl: any, avatarUrl: any, type: 'Organization' }
+            | { __typename?: 'User', login: string, htmlUrl: any, avatarUrl: any, type: 'User' }
            | null } | null> | null }, reviews?: { __typename?: 'PullRequestReviewConnection', totalCount: number, nodes?: Array<{ __typename?: 'PullRequestReview', state: PullRequestReviewState, author?:
             | { __typename?: 'Bot', login: string }
             | { __typename?: 'EnterpriseUserAccount', login: string }
@@ -36056,17 +36173,17 @@ export type FetchPullRequestByNumberQuery = { __typename?: 'Query', repository?:
            | null } | null> | null } | null, labels?: { __typename?: 'LabelConnection', nodes?: Array<{ __typename?: 'Label', name: string } | null> | null } | null, closingIssuesReferences?: { __typename?: 'IssueConnection', nodes?: Array<{ __typename?: 'Issue', number: number } | null> | null } | null } | null } | null };
 
 export type PullRequestDetailsFragment = { __typename: 'PullRequest', number: number, title: string, url: any, state: PullRequestState, merged: boolean, isDraft: boolean, isInMergeQueue: boolean, milestone?: { __typename?: 'Milestone', state: MilestoneState, title: string } | null, author?:
-    | { __typename?: 'Bot', login: string, avatarUrl: any, htmlUrl: any, type: 'Bot' }
-    | { __typename?: 'EnterpriseUserAccount', login: string, avatarUrl: any, htmlUrl: any, type: 'EnterpriseUserAccount' }
-    | { __typename?: 'Mannequin', login: string, avatarUrl: any, htmlUrl: any, type: 'Mannequin' }
-    | { __typename?: 'Organization', login: string, avatarUrl: any, htmlUrl: any, type: 'Organization' }
-    | { __typename?: 'User', login: string, avatarUrl: any, htmlUrl: any, type: 'User' }
+    | { __typename?: 'Bot', login: string, htmlUrl: any, avatarUrl: any, type: 'Bot' }
+    | { __typename?: 'EnterpriseUserAccount', login: string, htmlUrl: any, avatarUrl: any, type: 'EnterpriseUserAccount' }
+    | { __typename?: 'Mannequin', login: string, htmlUrl: any, avatarUrl: any, type: 'Mannequin' }
+    | { __typename?: 'Organization', login: string, htmlUrl: any, avatarUrl: any, type: 'Organization' }
+    | { __typename?: 'User', login: string, htmlUrl: any, avatarUrl: any, type: 'User' }
    | null, comments: { __typename?: 'IssueCommentConnection', totalCount: number, nodes?: Array<{ __typename?: 'IssueComment', url: any, author?:
-        | { __typename?: 'Bot', login: string, avatarUrl: any, htmlUrl: any, type: 'Bot' }
-        | { __typename?: 'EnterpriseUserAccount', login: string, avatarUrl: any, htmlUrl: any, type: 'EnterpriseUserAccount' }
-        | { __typename?: 'Mannequin', login: string, avatarUrl: any, htmlUrl: any, type: 'Mannequin' }
-        | { __typename?: 'Organization', login: string, avatarUrl: any, htmlUrl: any, type: 'Organization' }
-        | { __typename?: 'User', login: string, avatarUrl: any, htmlUrl: any, type: 'User' }
+        | { __typename?: 'Bot', login: string, htmlUrl: any, avatarUrl: any, type: 'Bot' }
+        | { __typename?: 'EnterpriseUserAccount', login: string, htmlUrl: any, avatarUrl: any, type: 'EnterpriseUserAccount' }
+        | { __typename?: 'Mannequin', login: string, htmlUrl: any, avatarUrl: any, type: 'Mannequin' }
+        | { __typename?: 'Organization', login: string, htmlUrl: any, avatarUrl: any, type: 'Organization' }
+        | { __typename?: 'User', login: string, htmlUrl: any, avatarUrl: any, type: 'User' }
        | null } | null> | null }, reviews?: { __typename?: 'PullRequestReviewConnection', totalCount: number, nodes?: Array<{ __typename?: 'PullRequestReview', state: PullRequestReviewState, author?:
         | { __typename?: 'Bot', login: string }
         | { __typename?: 'EnterpriseUserAccount', login: string }
@@ -36110,7 +36227,7 @@ export const AuthorFieldsFragmentDoc = new TypedDocumentString(`
     fragment AuthorFields on Actor {
   login
   htmlUrl: url
-  avatarUrl
+  avatarUrl: avatarUrl
   type: __typename
 }
     `, {"fragmentName":"AuthorFields"}) as unknown as TypedDocumentString<AuthorFieldsFragment, unknown>;
@@ -36126,7 +36243,7 @@ export const CommentFieldsFragmentDoc = new TypedDocumentString(`
     fragment AuthorFields on Actor {
   login
   htmlUrl: url
-  avatarUrl
+  avatarUrl: avatarUrl
   type: __typename
 }`, {"fragmentName":"CommentFields"}) as unknown as TypedDocumentString<CommentFieldsFragment, unknown>;
 export const DiscussionCommentFieldsFragmentDoc = new TypedDocumentString(`
@@ -36142,7 +36259,7 @@ export const DiscussionCommentFieldsFragmentDoc = new TypedDocumentString(`
     fragment AuthorFields on Actor {
   login
   htmlUrl: url
-  avatarUrl
+  avatarUrl: avatarUrl
   type: __typename
 }
 fragment CommentFields on DiscussionComment {
@@ -36164,7 +36281,7 @@ export const DiscussionDetailsFragmentDoc = new TypedDocumentString(`
   author {
     ...AuthorFields
   }
-  comments(last: $lastComments) {
+  comments(last: $lastThreadedComments) {
     totalCount
     nodes {
       ...DiscussionCommentFields
@@ -36179,7 +36296,7 @@ export const DiscussionDetailsFragmentDoc = new TypedDocumentString(`
     fragment AuthorFields on Actor {
   login
   htmlUrl: url
-  avatarUrl
+  avatarUrl: avatarUrl
   type: __typename
 }
 fragment CommentFields on DiscussionComment {
@@ -36237,7 +36354,7 @@ export const IssueDetailsFragmentDoc = new TypedDocumentString(`
     fragment AuthorFields on Actor {
   login
   htmlUrl: url
-  avatarUrl
+  avatarUrl: avatarUrl
   type: __typename
 }
 fragment MilestoneFields on Milestone {
@@ -36297,7 +36414,7 @@ export const PullRequestDetailsFragmentDoc = new TypedDocumentString(`
     fragment AuthorFields on Actor {
   login
   htmlUrl: url
-  avatarUrl
+  avatarUrl: avatarUrl
   type: __typename
 }
 fragment MilestoneFields on Milestone {
@@ -36310,8 +36427,146 @@ fragment PullRequestReviewFields on PullRequestReview {
     login
   }
 }`, {"fragmentName":"PullRequestDetails"}) as unknown as TypedDocumentString<PullRequestDetailsFragment, unknown>;
+export const MergedDetailsQueryTemplateFragmentDoc = new TypedDocumentString(`
+    fragment MergedDetailsQueryTemplate on Query {
+  repository(owner: $ownerINDEX, name: $nameINDEX) {
+    discussion(number: $numberINDEX) @include(if: $isDiscussionNotificationINDEX) {
+      ...DiscussionDetails
+    }
+    issue(number: $numberINDEX) @include(if: $isIssueNotificationINDEX) {
+      ...IssueDetails
+    }
+    pullRequest(number: $numberINDEX) @include(if: $isPullRequestNotificationINDEX) {
+      ...PullRequestDetails
+    }
+  }
+}
+    fragment AuthorFields on Actor {
+  login
+  htmlUrl: url
+  avatarUrl: avatarUrl
+  type: __typename
+}
+fragment MilestoneFields on Milestone {
+  state
+  title
+}
+fragment DiscussionDetails on Discussion {
+  __typename
+  number
+  title
+  stateReason
+  isAnswered @include(if: $includeIsAnswered)
+  url
+  author {
+    ...AuthorFields
+  }
+  comments(last: $lastThreadedComments) {
+    totalCount
+    nodes {
+      ...DiscussionCommentFields
+    }
+  }
+  labels(first: $firstLabels) {
+    nodes {
+      name
+    }
+  }
+}
+fragment CommentFields on DiscussionComment {
+  databaseId
+  createdAt
+  author {
+    ...AuthorFields
+  }
+  url
+}
+fragment DiscussionCommentFields on DiscussionComment {
+  ...CommentFields
+  replies(last: $lastReplies) {
+    totalCount
+    nodes {
+      ...CommentFields
+    }
+  }
+}
+fragment IssueDetails on Issue {
+  __typename
+  number
+  title
+  url
+  state
+  stateReason
+  milestone {
+    ...MilestoneFields
+  }
+  author {
+    ...AuthorFields
+  }
+  comments(last: $lastComments) {
+    totalCount
+    nodes {
+      url
+      author {
+        ...AuthorFields
+      }
+    }
+  }
+  labels(first: $firstLabels) {
+    nodes {
+      name
+    }
+  }
+}
+fragment PullRequestDetails on PullRequest {
+  __typename
+  number
+  title
+  url
+  state
+  merged
+  isDraft
+  isInMergeQueue
+  milestone {
+    ...MilestoneFields
+  }
+  author {
+    ...AuthorFields
+  }
+  comments(last: $lastComments) {
+    totalCount
+    nodes {
+      url
+      author {
+        ...AuthorFields
+      }
+    }
+  }
+  reviews(last: $lastReviews) {
+    totalCount
+    nodes {
+      ...PullRequestReviewFields
+    }
+  }
+  labels(first: $firstLabels) {
+    nodes {
+      name
+    }
+  }
+  closingIssuesReferences(first: $firstClosingIssues) {
+    nodes {
+      number
+    }
+  }
+}
+fragment PullRequestReviewFields on PullRequestReview {
+  state
+  author {
+    login
+  }
+}`, {"fragmentName":"MergedDetailsQueryTemplate"}) as unknown as TypedDocumentString<MergedDetailsQueryTemplateFragment, unknown>;
 export const FetchDiscussionByNumberDocument = new TypedDocumentString(`
-    query FetchDiscussionByNumber($owner: String!, $name: String!, $number: Int!, $lastComments: Int, $lastReplies: Int, $firstLabels: Int, $includeIsAnswered: Boolean!) {
+    query FetchDiscussionByNumber($owner: String!, $name: String!, $number: Int!, $lastThreadedComments: Int, $lastReplies: Int, $firstLabels: Int, $includeIsAnswered: Boolean!) {
   repository(owner: $owner, name: $name) {
     discussion(number: $number) {
       ...DiscussionDetails
@@ -36321,7 +36576,7 @@ export const FetchDiscussionByNumberDocument = new TypedDocumentString(`
     fragment AuthorFields on Actor {
   login
   htmlUrl: url
-  avatarUrl
+  avatarUrl: avatarUrl
   type: __typename
 }
 fragment DiscussionDetails on Discussion {
@@ -36334,7 +36589,7 @@ fragment DiscussionDetails on Discussion {
   author {
     ...AuthorFields
   }
-  comments(last: $lastComments) {
+  comments(last: $lastThreadedComments) {
     totalCount
     nodes {
       ...DiscussionCommentFields
@@ -36374,7 +36629,7 @@ export const FetchIssueByNumberDocument = new TypedDocumentString(`
     fragment AuthorFields on Actor {
   login
   htmlUrl: url
-  avatarUrl
+  avatarUrl: avatarUrl
   type: __typename
 }
 fragment MilestoneFields on Milestone {
@@ -36409,6 +36664,147 @@ fragment IssueDetails on Issue {
     }
   }
 }`) as unknown as TypedDocumentString<FetchIssueByNumberQuery, FetchIssueByNumberQueryVariables>;
+export const FetchMergedDetailsTemplateDocument = new TypedDocumentString(`
+    query FetchMergedDetailsTemplate($ownerINDEX: String!, $nameINDEX: String!, $numberINDEX: Int!, $isDiscussionNotificationINDEX: Boolean!, $isIssueNotificationINDEX: Boolean!, $isPullRequestNotificationINDEX: Boolean!, $lastComments: Int, $lastThreadedComments: Int, $lastReplies: Int, $lastReviews: Int, $firstLabels: Int, $firstClosingIssues: Int, $includeIsAnswered: Boolean!) {
+  ...MergedDetailsQueryTemplate
+}
+    fragment AuthorFields on Actor {
+  login
+  htmlUrl: url
+  avatarUrl: avatarUrl
+  type: __typename
+}
+fragment MilestoneFields on Milestone {
+  state
+  title
+}
+fragment DiscussionDetails on Discussion {
+  __typename
+  number
+  title
+  stateReason
+  isAnswered @include(if: $includeIsAnswered)
+  url
+  author {
+    ...AuthorFields
+  }
+  comments(last: $lastThreadedComments) {
+    totalCount
+    nodes {
+      ...DiscussionCommentFields
+    }
+  }
+  labels(first: $firstLabels) {
+    nodes {
+      name
+    }
+  }
+}
+fragment CommentFields on DiscussionComment {
+  databaseId
+  createdAt
+  author {
+    ...AuthorFields
+  }
+  url
+}
+fragment DiscussionCommentFields on DiscussionComment {
+  ...CommentFields
+  replies(last: $lastReplies) {
+    totalCount
+    nodes {
+      ...CommentFields
+    }
+  }
+}
+fragment IssueDetails on Issue {
+  __typename
+  number
+  title
+  url
+  state
+  stateReason
+  milestone {
+    ...MilestoneFields
+  }
+  author {
+    ...AuthorFields
+  }
+  comments(last: $lastComments) {
+    totalCount
+    nodes {
+      url
+      author {
+        ...AuthorFields
+      }
+    }
+  }
+  labels(first: $firstLabels) {
+    nodes {
+      name
+    }
+  }
+}
+fragment MergedDetailsQueryTemplate on Query {
+  repository(owner: $ownerINDEX, name: $nameINDEX) {
+    discussion(number: $numberINDEX) @include(if: $isDiscussionNotificationINDEX) {
+      ...DiscussionDetails
+    }
+    issue(number: $numberINDEX) @include(if: $isIssueNotificationINDEX) {
+      ...IssueDetails
+    }
+    pullRequest(number: $numberINDEX) @include(if: $isPullRequestNotificationINDEX) {
+      ...PullRequestDetails
+    }
+  }
+}
+fragment PullRequestDetails on PullRequest {
+  __typename
+  number
+  title
+  url
+  state
+  merged
+  isDraft
+  isInMergeQueue
+  milestone {
+    ...MilestoneFields
+  }
+  author {
+    ...AuthorFields
+  }
+  comments(last: $lastComments) {
+    totalCount
+    nodes {
+      url
+      author {
+        ...AuthorFields
+      }
+    }
+  }
+  reviews(last: $lastReviews) {
+    totalCount
+    nodes {
+      ...PullRequestReviewFields
+    }
+  }
+  labels(first: $firstLabels) {
+    nodes {
+      name
+    }
+  }
+  closingIssuesReferences(first: $firstClosingIssues) {
+    nodes {
+      number
+    }
+  }
+}
+fragment PullRequestReviewFields on PullRequestReview {
+  state
+  author {
+    login
+  }
+}`) as unknown as TypedDocumentString<FetchMergedDetailsTemplateQuery, FetchMergedDetailsTemplateQueryVariables>;
 export const FetchPullRequestByNumberDocument = new TypedDocumentString(`
     query FetchPullRequestByNumber($owner: String!, $name: String!, $number: Int!, $firstLabels: Int, $lastComments: Int, $lastReviews: Int, $firstClosingIssues: Int) {
   repository(owner: $owner, name: $name) {
@@ -36420,7 +36816,7 @@ export const FetchPullRequestByNumberDocument = new TypedDocumentString(`
     fragment AuthorFields on Actor {
   login
   htmlUrl: url
-  avatarUrl
+  avatarUrl: avatarUrl
   type: __typename
 }
 fragment MilestoneFields on Milestone {

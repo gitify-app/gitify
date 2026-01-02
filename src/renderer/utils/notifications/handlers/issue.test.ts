@@ -6,7 +6,7 @@ import {
   createPartialMockNotification,
 } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
-import { createMockNotificationUser } from '../../../__mocks__/user-mocks';
+import { createMockGraphQLAuthor } from '../../../__mocks__/user-mocks';
 import type { GitifyNotification } from '../../../types';
 import {
   type GitifyIssueState,
@@ -21,10 +21,16 @@ import type {
 } from '../../api/graphql/generated/graphql';
 import { issueHandler } from './issue';
 
-const mockAuthor = createMockNotificationUser('issue-author');
-const mockCommenter = createMockNotificationUser('issue-commenter');
+const mockAuthor = createMockGraphQLAuthor('issue-author');
+const mockCommenter = createMockGraphQLAuthor('issue-commenter');
 
 describe('renderer/utils/notifications/handlers/issue.ts', () => {
+  describe('supportsMergedQueryEnrichment', () => {
+    it('should support merge query', () => {
+      expect(issueHandler.supportsMergedQueryEnrichment).toBeTruthy();
+    });
+  });
+
   describe('enrich', () => {
     let mockNotification: GitifyNotification;
 
@@ -64,14 +70,14 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         state: 'OPEN',
         user: {
           login: mockAuthor.login,
-          htmlUrl: mockAuthor.htmlUrl,
           avatarUrl: mockAuthor.avatarUrl,
+          htmlUrl: mockAuthor.htmlUrl,
           type: mockAuthor.type,
         },
         comments: 0,
         htmlUrl: 'https://github.com/gitify-app/notifications-test/issues/123',
         labels: [],
-        milestone: null,
+        milestone: undefined,
       } as Partial<GitifySubject>);
     });
 
@@ -98,14 +104,14 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         state: 'COMPLETED',
         user: {
           login: mockAuthor.login,
+          avatarUrl: mockCommenter.avatarUrl,
           htmlUrl: mockAuthor.htmlUrl,
-          avatarUrl: mockAuthor.avatarUrl,
           type: mockAuthor.type,
         },
         comments: 0,
         htmlUrl: 'https://github.com/gitify-app/notifications-test/issues/123',
         labels: [],
-        milestone: null,
+        milestone: undefined,
       } as Partial<GitifySubject>);
     });
 
@@ -140,15 +146,15 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         state: 'OPEN',
         user: {
           login: mockCommenter.login,
-          htmlUrl: mockCommenter.htmlUrl,
           avatarUrl: mockCommenter.avatarUrl,
+          htmlUrl: mockCommenter.htmlUrl,
           type: mockCommenter.type,
         },
         comments: 1,
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/issues/123#issuecomment-1234',
         labels: [],
-        milestone: null,
+        milestone: undefined,
       } as Partial<GitifySubject>);
     });
 
@@ -177,14 +183,14 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         state: 'OPEN',
         user: {
           login: mockAuthor.login,
-          htmlUrl: mockAuthor.htmlUrl,
           avatarUrl: mockAuthor.avatarUrl,
+          htmlUrl: mockAuthor.htmlUrl,
           type: mockAuthor.type,
         },
         comments: 0,
         htmlUrl: 'https://github.com/gitify-app/notifications-test/issues/123',
         labels: ['enhancement'],
-        milestone: null,
+        milestone: undefined,
       } as Partial<GitifySubject>);
     });
 
@@ -214,8 +220,8 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         state: 'OPEN',
         user: {
           login: mockAuthor.login,
-          htmlUrl: mockAuthor.htmlUrl,
           avatarUrl: mockAuthor.avatarUrl,
+          htmlUrl: mockAuthor.htmlUrl,
           type: mockAuthor.type,
         },
         comments: 0,

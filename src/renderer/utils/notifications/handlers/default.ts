@@ -17,6 +17,8 @@ import { formatForDisplay } from './utils';
 export class DefaultHandler implements NotificationTypeHandler {
   type?: SubjectType;
 
+  supportsMergedQueryEnrichment?: boolean = false;
+
   async enrich(
     _notification: GitifyNotification,
     _settings: SettingsState,

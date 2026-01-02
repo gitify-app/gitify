@@ -12,6 +12,12 @@ import {
 import { defaultHandler } from './default';
 
 describe('renderer/utils/notifications/handlers/default.ts', () => {
+  describe('supportsMergedQueryEnrichment', () => {
+    it('should not support merge query', () => {
+      expect(defaultHandler.supportsMergedQueryEnrichment).toBeFalsy();
+    });
+  });
+
   describe('enrich', () => {
     it('unhandled subject details', async () => {
       const mockNotification = createPartialMockNotification({

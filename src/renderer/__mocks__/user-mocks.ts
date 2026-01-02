@@ -1,4 +1,5 @@
 import type { GitifyNotificationUser, GitifyUser, Link } from '../types';
+import type { AuthorFieldsFragment } from '../utils/api/graphql/generated/graphql';
 import type { RawUser } from '../utils/api/types';
 
 export const mockGitifyUser: GitifyUser = {
@@ -19,7 +20,7 @@ export function createPartialMockUser(login: string): RawUser {
   return mockUser as RawUser;
 }
 
-export function createMockNotificationUser(
+export function createMockGitifyNotificationUser(
   login: string,
 ): GitifyNotificationUser {
   return {
@@ -28,4 +29,14 @@ export function createMockNotificationUser(
     avatarUrl: 'https://avatars.githubusercontent.com/u/583231?v=4' as Link,
     type: 'User',
   };
+}
+
+/**
+ * Creates a mock author for use in GraphQL response mocks.
+ */
+export function createMockGraphQLAuthor(login: string): AuthorFieldsFragment {
+  return {
+    ...createMockGitifyNotificationUser(login),
+    __typename: 'User',
+  } as AuthorFieldsFragment;
 }

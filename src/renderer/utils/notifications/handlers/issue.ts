@@ -17,22 +17,27 @@ import type {
 } from '../../../types';
 import { IconColor } from '../../../types';
 import { fetchIssueByNumber } from '../../api/client';
+import type { IssueDetailsFragment } from '../../api/graphql/generated/graphql';
 import { DefaultHandler, defaultHandler } from './default';
 import { getNotificationAuthor } from './utils';
 
 class IssueHandler extends DefaultHandler {
   readonly type = 'Issue';
 
+  readonly supportsMergedQueryEnrichment = true;
+
   async enrich(
     notification: GitifyNotification,
     _settings: SettingsState,
+    fetchedData?: IssueDetailsFragment,
   ): Promise<Partial<GitifySubject>> {
-    const response = await fetchIssueByNumber(notification);
-    const issue = response.data.repository?.issue;
+    const issue =
+      fetchedData ??
+      (await fetchIssueByNumber(notification)).data.repository?.issue;
 
     const issueState = issue.stateReason ?? issue.state;
 
-    const issueComment = issue.comments.nodes[0];
+    const issueComment = issue.comments?.nodes?.[0];
 
     const issueUser = getNotificationAuthor([
       issueComment?.author,
@@ -44,8 +49,8 @@ class IssueHandler extends DefaultHandler {
       state: issueState,
       user: issueUser,
       comments: issue.comments.totalCount,
-      labels: issue.labels?.nodes.map((label) => label.name),
-      milestone: issue.milestone,
+      labels: issue.labels?.nodes.map((label) => label.name) ?? [],
+      milestone: issue.milestone ?? undefined,
       htmlUrl: issueComment?.url ?? issue.url,
     };
   }

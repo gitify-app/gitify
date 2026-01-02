@@ -14,11 +14,21 @@ export interface NotificationTypeHandler {
   readonly type?: SubjectType;
 
   /**
-   * Enrich a notification. Settings may be unused for some handlers.
+   * Whether the notification handler supports enrichment via merged GraphQL query.
+   */
+  readonly supportsMergedQueryEnrichment?: boolean;
+
+  /**
+   * Enriches a base notification with additional information (state, author, metrics, etc).
+   *
+   * @param notification The base notification being enriched
+   * @param settings The app settings, which for some handlers may not be used during enrichment.
+   * @param fetchedData Previously fetched enrichment data (upstream).  If present, then enrich will skip fetching detailed data inline.
    */
   enrich(
     notification: GitifyNotification,
     settings: SettingsState,
+    fetchedData?: unknown,
   ): Promise<Partial<GitifySubject>>;
 
   /**

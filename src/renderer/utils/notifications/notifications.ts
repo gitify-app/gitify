@@ -5,8 +5,12 @@ import type {
   GitifySubject,
   SettingsState,
 } from '../../types';
-import { listNotificationsForAuthenticatedUser } from '../api/client';
+import {
+  fetchNotificationDetailsForList,
+  listNotificationsForAuthenticatedUser,
+} from '../api/client';
 import { determineFailureType } from '../api/errors';
+import type { FetchMergedDetailsTemplateQuery } from '../api/graphql/generated/graphql';
 import { transformNotification } from '../api/transform';
 import { rendererLogError, rendererLogWarn } from '../logger';
 import {
@@ -129,12 +133,28 @@ export async function enrichNotifications(
     return notifications;
   }
 
+  // Build and fetch merged details via client; returns per-notification results
+  let mergedResults: Map<
+    GitifyNotification,
+    FetchMergedDetailsTemplateQuery['repository']
+  > = new Map();
+  try {
+    mergedResults = await fetchNotificationDetailsForList(notifications);
+  } catch (err) {
+    rendererLogError(
+      'enrichNotifications',
+      'Failed to fetch merged notification details',
+      err,
+    );
+  }
+
   const enrichedNotifications = await Promise.all(
     notifications.map(async (notification: GitifyNotification) => {
-      return enrichNotification(notification, settings);
+      const fragment = mergedResults.get(notification);
+
+      return enrichNotification(notification, settings, fragment);
     }),
   );
-
   return enrichedNotifications;
 }
 
@@ -148,12 +168,17 @@ export async function enrichNotifications(
 export async function enrichNotification(
   notification: GitifyNotification,
   settings: SettingsState,
+  fetchedData?: unknown,
 ): Promise<GitifyNotification> {
   let additionalSubjectDetails: Partial<GitifySubject> = {};
 
   try {
     const handler = createNotificationHandler(notification);
-    additionalSubjectDetails = await handler.enrich(notification, settings);
+    additionalSubjectDetails = await handler.enrich(
+      notification,
+      settings,
+      fetchedData,
+    );
   } catch (err) {
     rendererLogError(
       'enrichNotification',

@@ -1,9 +1,9 @@
-import { createMockNotificationUser } from '../../../__mocks__/user-mocks';
+import { createMockGraphQLAuthor } from '../../../__mocks__/user-mocks';
 import { formatForDisplay, getNotificationAuthor } from './utils';
 
 describe('renderer/utils/notifications/handlers/utils.ts', () => {
   describe('getNotificationAuthor', () => {
-    const mockAuthor = createMockNotificationUser('some-author');
+    const mockAuthor = createMockGraphQLAuthor('some-author');
 
     it('returns null when all users are null', () => {
       const result = getNotificationAuthor([null, null]);
@@ -16,8 +16,8 @@ describe('renderer/utils/notifications/handlers/utils.ts', () => {
 
       expect(result).toEqual({
         login: mockAuthor.login,
-        htmlUrl: mockAuthor.htmlUrl,
         avatarUrl: mockAuthor.avatarUrl,
+        htmlUrl: mockAuthor.htmlUrl,
         type: mockAuthor.type,
       });
     });
@@ -27,8 +27,8 @@ describe('renderer/utils/notifications/handlers/utils.ts', () => {
 
       expect(result).toEqual({
         login: mockAuthor.login,
-        htmlUrl: mockAuthor.htmlUrl,
         avatarUrl: mockAuthor.avatarUrl,
+        htmlUrl: mockAuthor.htmlUrl,
         type: mockAuthor.type,
       });
     });

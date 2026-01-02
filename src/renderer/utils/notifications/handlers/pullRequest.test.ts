@@ -6,7 +6,7 @@ import {
   createPartialMockNotification,
 } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
-import { createMockNotificationUser } from '../../../__mocks__/user-mocks';
+import { createMockGraphQLAuthor } from '../../../__mocks__/user-mocks';
 import type { GitifyNotification } from '../../../types';
 import {
   type GitifyPullRequestState,
@@ -21,8 +21,8 @@ import type {
 } from '../../api/graphql/generated/graphql';
 import { getLatestReviewForReviewers, pullRequestHandler } from './pullRequest';
 
-const mockAuthor = createMockNotificationUser('some-author');
-const mockCommenter = createMockNotificationUser('some-commenter');
+const mockAuthor = createMockGraphQLAuthor('some-author');
+const mockCommenter = createMockGraphQLAuthor('some-commenter');
 
 describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
   let mockNotification: GitifyNotification;
@@ -34,6 +34,14 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
       url: 'https://api.github.com/repos/gitify-app/notifications-test/pulls/1' as Link,
       latestCommentUrl:
         'https://api.github.com/repos/gitify-app/notifications-test/issues/comments/302888448' as Link,
+    });
+  });
+
+  describe('mergeQueryConfig', () => {
+    describe('supportsMergedQueryEnrichment', () => {
+      it('should support merge query', () => {
+        expect(pullRequestHandler.supportsMergedQueryEnrichment).toBeTruthy();
+      });
     });
   });
 
@@ -67,8 +75,8 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         state: 'CLOSED',
         user: {
           login: mockAuthor.login,
-          htmlUrl: mockAuthor.htmlUrl,
           avatarUrl: mockAuthor.avatarUrl,
+          htmlUrl: mockAuthor.htmlUrl,
           type: mockAuthor.type,
         },
         reviews: null,
@@ -106,8 +114,8 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         state: 'DRAFT',
         user: {
           login: mockAuthor.login,
-          htmlUrl: mockAuthor.htmlUrl,
           avatarUrl: mockAuthor.avatarUrl,
+          htmlUrl: mockAuthor.htmlUrl,
           type: mockAuthor.type,
         },
         reviews: null,
@@ -145,8 +153,8 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         state: 'MERGE_QUEUE',
         user: {
           login: mockAuthor.login,
-          htmlUrl: mockAuthor.htmlUrl,
           avatarUrl: mockAuthor.avatarUrl,
+          htmlUrl: mockAuthor.htmlUrl,
           type: mockAuthor.type,
         },
         reviews: null,
@@ -184,8 +192,8 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         state: 'MERGED',
         user: {
           login: mockAuthor.login,
-          htmlUrl: mockAuthor.htmlUrl,
           avatarUrl: mockAuthor.avatarUrl,
+          htmlUrl: mockAuthor.htmlUrl,
           type: mockAuthor.type,
         },
         reviews: null,
@@ -231,8 +239,8 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         state: 'OPEN',
         user: {
           login: mockCommenter.login,
-          htmlUrl: mockCommenter.htmlUrl,
           avatarUrl: mockCommenter.avatarUrl,
+          htmlUrl: mockCommenter.htmlUrl,
           type: mockCommenter.type,
         },
         reviews: null,
@@ -277,8 +285,8 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         state: 'OPEN',
         user: {
           login: mockAuthor.login,
-          htmlUrl: mockAuthor.htmlUrl,
           avatarUrl: mockAuthor.avatarUrl,
+          htmlUrl: mockAuthor.htmlUrl,
           type: mockAuthor.type,
         },
         reviews: null,
@@ -322,8 +330,8 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         state: 'OPEN',
         user: {
           login: mockAuthor.login,
-          htmlUrl: mockAuthor.htmlUrl,
           avatarUrl: mockAuthor.avatarUrl,
+          htmlUrl: mockAuthor.htmlUrl,
           type: mockAuthor.type,
         },
         reviews: null,
@@ -364,8 +372,8 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         state: 'OPEN',
         user: {
           login: mockAuthor.login,
-          htmlUrl: mockAuthor.htmlUrl,
           avatarUrl: mockAuthor.avatarUrl,
+          htmlUrl: mockAuthor.htmlUrl,
           type: mockAuthor.type,
         },
         reviews: null,

@@ -1,8 +1,10 @@
+#import './common.graphql'
+
 query FetchDiscussionByNumber(
   $owner: String!
   $name: String!
   $number: Int!
-  $lastComments: Int
+  $lastThreadedComments: Int
   $lastReplies: Int
   $firstLabels: Int
   $includeIsAnswered: Boolean!
@@ -24,7 +26,7 @@ fragment DiscussionDetails on Discussion {
   author {
     ...AuthorFields
   }
-  comments(last: $lastComments) {
+  comments(last: $lastThreadedComments) {
     totalCount
     nodes {
       ...DiscussionCommentFields
