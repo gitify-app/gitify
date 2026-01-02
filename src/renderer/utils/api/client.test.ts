@@ -313,6 +313,28 @@ describe('renderer/utils/api/client.ts', () => {
         'performGraphQLRequestString',
       );
 
+      const mockNotification = createPartialMockNotification({
+        title: 'Some commit',
+        url: 'https://api.github.com/repos/gitify-app/gitify/commit/123' as Link,
+        type: 'Commit',
+      });
+
+      performGraphQLRequestStringSpy.mockResolvedValue({
+        data: {},
+        headers: {},
+      } as ExecutionResultWithHeaders<unknown>);
+
+      await fetchNotificationDetailsForList([mockNotification]);
+
+      expect(performGraphQLRequestStringSpy).not.toHaveBeenCalled();
+    });
+
+    it('fetchNotificationDetailsForList returns empty map if no supported notifications', async () => {
+      const performGraphQLRequestStringSpy = jest.spyOn(
+        apiRequests,
+        'performGraphQLRequestString',
+      );
+
       performGraphQLRequestStringSpy.mockResolvedValue({
         data: {},
         headers: {},
