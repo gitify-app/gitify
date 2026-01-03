@@ -1,10 +1,7 @@
 import axios from 'axios';
 import nock from 'nock';
 
-import {
-  createMockSubject,
-  createPartialMockNotification,
-} from '../../../__mocks__/notifications-mocks';
+import { createPartialMockNotification } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
 import { createMockGraphQLAuthor } from '../../../__mocks__/user-mocks';
 import type { GitifyNotification } from '../../../types';
@@ -401,11 +398,14 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
     it.each(
       Object.entries(cases) as Array<[GitifyPullRequestState, IconColor]>,
     )('iconType for pull request with state %s', (pullRequestState, pullRequestIconType) => {
-      expect(
-        pullRequestHandler.iconType(
-          createMockSubject({ type: 'PullRequest', state: pullRequestState }),
-        ).displayName,
-      ).toBe(pullRequestIconType);
+      const mockNotification = createPartialMockNotification({
+        type: 'PullRequest',
+        state: pullRequestState,
+      });
+
+      expect(pullRequestHandler.iconType(mockNotification).displayName).toBe(
+        pullRequestIconType,
+      );
     });
   });
 
@@ -421,11 +421,14 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
     it.each(
       Object.entries(cases) as Array<[GitifyPullRequestState, IconColor]>,
     )('iconType for pull request with state %s', (pullRequestState, pullRequestIconColor) => {
-      expect(
-        pullRequestHandler.iconColor(
-          createMockSubject({ type: 'PullRequest', state: pullRequestState }),
-        ),
-      ).toBe(pullRequestIconColor);
+      const mockNotification = createPartialMockNotification({
+        type: 'PullRequest',
+        state: pullRequestState,
+      });
+
+      expect(pullRequestHandler.iconColor(mockNotification)).toBe(
+        pullRequestIconColor,
+      );
     });
   });
 

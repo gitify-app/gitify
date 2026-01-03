@@ -1,10 +1,7 @@
 import axios from 'axios';
 import nock from 'nock';
 
-import {
-  createMockSubject,
-  createPartialMockNotification,
-} from '../../../__mocks__/notifications-mocks';
+import { createPartialMockNotification } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
 import { createPartialMockUser } from '../../../__mocks__/user-mocks';
 import type { GitifyNotification, Link } from '../../../types';
@@ -69,13 +66,13 @@ describe('renderer/utils/notifications/handlers/release.ts', () => {
   });
 
   it('iconType', () => {
-    expect(
-      releaseHandler.iconType(
-        createMockSubject({
-          type: 'Release',
-        }),
-      ).displayName,
-    ).toBe('TagIcon');
+    const mockNotification = createPartialMockNotification({
+      type: 'Release',
+    });
+
+    expect(releaseHandler.iconType(mockNotification).displayName).toBe(
+      'TagIcon',
+    );
   });
 
   it('defaultUrl', () => {

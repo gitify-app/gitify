@@ -26,11 +26,11 @@ export class DefaultHandler implements NotificationTypeHandler {
     return {};
   }
 
-  iconType(_subject: GitifySubject): FC<OcticonProps> | null {
+  iconType(_notification: GitifyNotification): FC<OcticonProps> {
     return QuestionIcon;
   }
 
-  iconColor(_subject: GitifySubject): IconColor {
+  iconColor(_notification: GitifyNotification): IconColor {
     return IconColor.GRAY;
   }
 

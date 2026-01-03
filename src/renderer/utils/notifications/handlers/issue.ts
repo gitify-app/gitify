@@ -55,8 +55,8 @@ class IssueHandler extends DefaultHandler {
     };
   }
 
-  iconType(subject: GitifySubject): FC<OcticonProps> | null {
-    switch (subject.state as GitifyIssueState) {
+  iconType(notification: GitifyNotification): FC<OcticonProps> {
+    switch (notification.subject.state as GitifyIssueState) {
       case 'CLOSED':
       case 'COMPLETED':
         return IssueClosedIcon;
@@ -70,8 +70,8 @@ class IssueHandler extends DefaultHandler {
     }
   }
 
-  iconColor(subject: GitifySubject): IconColor {
-    switch (subject.state as GitifyIssueState) {
+  iconColor(notification: GitifyNotification): IconColor {
+    switch (notification.subject.state as GitifyIssueState) {
       case 'OPEN':
       case 'REOPENED':
         return IconColor.GREEN;
@@ -80,7 +80,7 @@ class IssueHandler extends DefaultHandler {
       case 'COMPLETED':
         return IconColor.PURPLE;
       default:
-        return defaultHandler.iconColor(subject);
+        return defaultHandler.iconColor(notification);
     }
   }
 

@@ -68,8 +68,8 @@ class PullRequestHandler extends DefaultHandler {
     };
   }
 
-  iconType(subject: GitifySubject): FC<OcticonProps> | null {
-    switch (subject.state as GitifyPullRequestState) {
+  iconType(notification: GitifyNotification): FC<OcticonProps> {
+    switch (notification.subject.state as GitifyPullRequestState) {
       case 'DRAFT':
         return GitPullRequestDraftIcon;
       case 'CLOSED':
@@ -83,8 +83,8 @@ class PullRequestHandler extends DefaultHandler {
     }
   }
 
-  iconColor(subject: GitifySubject): IconColor {
-    switch (subject.state as GitifyPullRequestState) {
+  iconColor(notification: GitifyNotification): IconColor {
+    switch (notification.subject.state as GitifyPullRequestState) {
       case 'OPEN':
         return IconColor.GREEN;
       case 'CLOSED':
@@ -94,7 +94,7 @@ class PullRequestHandler extends DefaultHandler {
       case 'MERGED':
         return IconColor.PURPLE;
       default:
-        return defaultHandler.iconColor(subject);
+        return defaultHandler.iconColor(notification);
     }
   }
 

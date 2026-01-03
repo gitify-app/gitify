@@ -1,10 +1,7 @@
 import axios from 'axios';
 import nock from 'nock';
 
-import {
-  createMockSubject,
-  createPartialMockNotification,
-} from '../../../__mocks__/notifications-mocks';
+import { createPartialMockNotification } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
 import { createPartialMockUser } from '../../../__mocks__/user-mocks';
 import type { GitifyNotification, Link } from '../../../types';
@@ -99,9 +96,13 @@ describe('renderer/utils/notifications/handlers/commit.ts', () => {
   });
 
   it('iconType', () => {
-    expect(
-      commitHandler.iconType(createMockSubject({ type: 'Commit' })).displayName,
-    ).toBe('GitCommitIcon');
+    const mockNotification = createPartialMockNotification({
+      type: 'Commit',
+    });
+
+    expect(commitHandler.iconType(mockNotification).displayName).toBe(
+      'GitCommitIcon',
+    );
   });
 
   it('defaultUrl', () => {

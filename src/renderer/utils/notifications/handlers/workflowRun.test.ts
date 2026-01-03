@@ -1,7 +1,4 @@
-import {
-  createMockSubject,
-  createPartialMockNotification,
-} from '../../../__mocks__/notifications-mocks';
+import { createPartialMockNotification } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
 import type { GitifyNotification, Link } from '../../../types';
 import { getWorkflowRunAttributes, workflowRunHandler } from './workflowRun';
@@ -60,13 +57,13 @@ describe('renderer/utils/notifications/handlers/workflowRun.ts', () => {
   });
 
   it('iconType', () => {
-    expect(
-      workflowRunHandler.iconType(
-        createMockSubject({
-          type: 'WorkflowRun',
-        }),
-      ).displayName,
-    ).toBe('RocketIcon');
+    const mockNotification = createPartialMockNotification({
+      type: 'WorkflowRun',
+    });
+
+    expect(workflowRunHandler.iconType(mockNotification).displayName).toBe(
+      'RocketIcon',
+    );
   });
 
   it('defaultUrl', () => {
