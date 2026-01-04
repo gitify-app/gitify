@@ -1,7 +1,4 @@
-import {
-  createMockSubject,
-  createPartialMockNotification,
-} from '../../../__mocks__/notifications-mocks';
+import { createPartialMockNotification } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
 import type { GitifyNotification } from '../../../types';
 import {
@@ -37,13 +34,15 @@ describe('renderer/utils/notifications/handlers/default.ts', () => {
   });
 
   it('iconType', () => {
-    expect(defaultHandler.iconType(createMockSubject({})).displayName).toBe(
+    const mockNotification = createPartialMockNotification({});
+
+    expect(defaultHandler.iconType(mockNotification).displayName).toBe(
       'QuestionIcon',
     );
   });
 
   describe('iconColor', () => {
-    it('returns GRAY for any state (fallback behavior)', () => {
+    it('returns GRAY for any unrecognized state (fallback behavior)', () => {
       const states: Array<GitifyNotificationState | null | undefined> = [
         'unknown' as GitifyNotificationState,
         null,
@@ -51,8 +50,11 @@ describe('renderer/utils/notifications/handlers/default.ts', () => {
       ];
 
       states.forEach((state) => {
-        const subject = createMockSubject({ state });
-        expect(defaultHandler.iconColor(subject)).toBe(IconColor.GRAY);
+        const mockNotification = createPartialMockNotification({
+          state: state,
+        });
+
+        expect(defaultHandler.iconColor(mockNotification)).toBe(IconColor.GRAY);
       });
     });
   });

@@ -2,13 +2,13 @@ import type { FC } from 'react';
 
 import { MailIcon, type OcticonProps } from '@primer/octicons-react';
 
-import type { GitifyNotification, GitifySubject, Link } from '../../../types';
+import type { GitifyNotification, Link } from '../../../types';
 import { DefaultHandler, defaultHandler } from './default';
 
 class RepositoryInvitationHandler extends DefaultHandler {
   readonly type = 'RepositoryInvitation';
 
-  iconType(_subject: GitifySubject): FC<OcticonProps> | null {
+  iconType(_notification: GitifyNotification): FC<OcticonProps> {
     return MailIcon;
   }
 

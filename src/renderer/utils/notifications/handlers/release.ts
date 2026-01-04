@@ -49,7 +49,7 @@ class ReleaseHandler extends DefaultHandler {
     };
   }
 
-  iconType(_subject: GitifySubject): FC<OcticonProps> | null {
+  iconType(_notification: GitifyNotification): FC<OcticonProps> {
     return TagIcon;
   }
 

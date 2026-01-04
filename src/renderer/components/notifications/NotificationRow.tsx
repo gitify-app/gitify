@@ -62,8 +62,8 @@ export const NotificationRow: FC<NotificationRowProps> = ({
   };
 
   const handler = createNotificationHandler(notification);
-  const NotificationIcon = handler.iconType(notification.subject);
-  const iconColor = handler.iconColor(notification.subject);
+  const NotificationIcon = handler.iconType(notification);
+  const iconColor = handler.iconColor(notification);
   const notificationType = handler.formattedNotificationType(notification);
   const notificationNumber = handler.formattedNotificationNumber(notification);
   const notificationTitle = handler.formattedNotificationTitle(notification);

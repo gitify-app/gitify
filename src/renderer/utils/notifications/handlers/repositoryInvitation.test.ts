@@ -1,15 +1,15 @@
-import { createMockSubject } from '../../../__mocks__/notifications-mocks';
+import { createPartialMockNotification } from '../../../__mocks__/notifications-mocks';
 import type { GitifyNotification, Link } from '../../../types';
 import { repositoryInvitationHandler } from './repositoryInvitation';
 
 describe('renderer/utils/notifications/handlers/repositoryInvitation.ts', () => {
   it('iconType', () => {
+    const mockNotification = createPartialMockNotification({
+      type: 'RepositoryInvitation',
+    });
+
     expect(
-      repositoryInvitationHandler.iconType(
-        createMockSubject({
-          type: 'RepositoryInvitation',
-        }),
-      ).displayName,
+      repositoryInvitationHandler.iconType(mockNotification).displayName,
     ).toBe('MailIcon');
   });
 

@@ -1,10 +1,7 @@
 import axios from 'axios';
 import nock from 'nock';
 
-import {
-  createMockSubject,
-  createPartialMockNotification,
-} from '../../../__mocks__/notifications-mocks';
+import { createPartialMockNotification } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
 import { createMockGraphQLAuthor } from '../../../__mocks__/user-mocks';
 import type { GitifyNotification } from '../../../types';
@@ -248,11 +245,14 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
     it.each(
       Object.entries(cases) as Array<[GitifyIssueState, IconColor]>,
     )('iconType for issue with state %s', (issueState, issueIconType) => {
-      expect(
-        issueHandler.iconType(
-          createMockSubject({ type: 'Issue', state: issueState }),
-        ).displayName,
-      ).toBe(issueIconType);
+      const mockNotification = createPartialMockNotification({
+        type: 'Issue',
+        state: issueState,
+      });
+
+      expect(issueHandler.iconType(mockNotification).displayName).toBe(
+        issueIconType,
+      );
     });
   });
 
@@ -269,11 +269,12 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
     it.each(
       Object.entries(cases) as Array<[GitifyIssueState, IconColor]>,
     )('iconColor for issue with state %s', (issueState, issueIconColor) => {
-      expect(
-        issueHandler.iconColor(
-          createMockSubject({ type: 'Issue', state: issueState }),
-        ),
-      ).toBe(issueIconColor);
+      const mockNotification = createPartialMockNotification({
+        type: 'Issue',
+        state: issueState,
+      });
+
+      expect(issueHandler.iconColor(mockNotification)).toBe(issueIconColor);
     });
   });
 

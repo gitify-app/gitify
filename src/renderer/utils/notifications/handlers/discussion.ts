@@ -69,8 +69,8 @@ class DiscussionHandler extends DefaultHandler {
     };
   }
 
-  iconType(subject: GitifySubject): FC<OcticonProps> | null {
-    switch (subject.state as GitifyDiscussionState) {
+  iconType(notification: GitifyNotification): FC<OcticonProps> {
+    switch (notification.subject.state as GitifyDiscussionState) {
       case 'DUPLICATE':
         return DiscussionDuplicateIcon;
       case 'OUTDATED':
@@ -82,14 +82,14 @@ class DiscussionHandler extends DefaultHandler {
     }
   }
 
-  iconColor(subject: GitifySubject): IconColor {
-    switch (subject.state) {
+  iconColor(notification: GitifyNotification): IconColor {
+    switch (notification.subject.state) {
       case 'ANSWERED':
         return IconColor.GREEN;
       case 'RESOLVED':
         return IconColor.PURPLE;
       default:
-        return defaultHandler.iconColor(subject);
+        return defaultHandler.iconColor(notification);
     }
   }
 

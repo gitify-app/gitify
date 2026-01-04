@@ -1,7 +1,4 @@
-import {
-  createMockSubject,
-  createPartialMockNotification,
-} from '../../../__mocks__/notifications-mocks';
+import { createPartialMockNotification } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
 import type { GitifyNotification } from '../../../types';
 import {
@@ -178,11 +175,14 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
     it.each(
       Object.entries(cases) as Array<[GitifyCheckSuiteStatus, IconColor]>,
     )('iconType for check suite with status %s', (checkSuiteStatus, checkSuiteIconType) => {
-      expect(
-        checkSuiteHandler.iconType(
-          createMockSubject({ type: 'CheckSuite', state: checkSuiteStatus }),
-        ).displayName,
-      ).toBe(checkSuiteIconType);
+      const mockNotification = createPartialMockNotification({
+        type: 'CheckSuite',
+        state: checkSuiteStatus,
+      });
+
+      expect(checkSuiteHandler.iconType(mockNotification).displayName).toBe(
+        checkSuiteIconType,
+      );
     });
   });
 
@@ -206,11 +206,14 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
     it.each(
       Object.entries(cases) as Array<[GitifyCheckSuiteStatus, IconColor]>,
     )('iconColor for check suite with status %s', (checkSuiteStatus, checkSuiteIconColor) => {
-      expect(
-        checkSuiteHandler.iconColor(
-          createMockSubject({ type: 'CheckSuite', state: checkSuiteStatus }),
-        ),
-      ).toBe(checkSuiteIconColor);
+      const mockNotification = createPartialMockNotification({
+        type: 'CheckSuite',
+        state: checkSuiteStatus,
+      });
+
+      expect(checkSuiteHandler.iconColor(mockNotification)).toBe(
+        checkSuiteIconColor,
+      );
     });
   });
 

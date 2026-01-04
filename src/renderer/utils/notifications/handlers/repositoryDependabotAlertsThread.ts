@@ -3,13 +3,13 @@ import type { FC } from 'react';
 import type { OcticonProps } from '@primer/octicons-react';
 import { AlertIcon } from '@primer/octicons-react';
 
-import type { GitifyNotification, GitifySubject, Link } from '../../../types';
+import type { GitifyNotification, Link } from '../../../types';
 import { DefaultHandler, defaultHandler } from './default';
 
 class RepositoryDependabotAlertsThreadHandler extends DefaultHandler {
   readonly type = 'RepositoryDependabotAlertsThread';
 
-  iconType(_subject: GitifySubject): FC<OcticonProps> | null {
+  iconType(_notification: GitifyNotification): FC<OcticonProps> {
     return AlertIcon;
   }
 

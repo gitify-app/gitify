@@ -2,12 +2,10 @@ import { Constants } from '../constants';
 import type {
   AccountNotifications,
   GitifyNotification,
-  GitifyNotificationState,
   GitifyRepository,
   GitifySubject,
   Hostname,
   Link,
-  SubjectType,
 } from '../types';
 import {
   mockEnterpriseNotifications,
@@ -41,20 +39,6 @@ export const mockSingleAccountNotifications: AccountNotifications[] = [
     error: null,
   },
 ];
-
-export function createMockSubject(mocks: {
-  title?: string;
-  type?: SubjectType;
-  state?: GitifyNotificationState;
-}): GitifySubject {
-  return {
-    title: mocks.title ?? 'Mock Subject',
-    type: mocks.type ?? ('Unknown' as SubjectType),
-    state: mocks.state ?? ('Unknown' as GitifyNotificationState),
-    url: null,
-    latestCommentUrl: null,
-  };
-}
 
 export function createPartialMockNotification(
   subject: Partial<GitifySubject>,

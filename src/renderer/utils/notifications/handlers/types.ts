@@ -34,12 +34,12 @@ export interface NotificationTypeHandler {
   /**
    * Return the icon component for this notification type.
    */
-  iconType(subject: GitifySubject): FC<OcticonProps> | null;
+  iconType(notification: GitifyNotification): FC<OcticonProps>;
 
   /**
    * Return the icon color for this notification type.
    */
-  iconColor(subject: GitifySubject): string | undefined;
+  iconColor(notification: GitifyNotification): string;
 
   /**
    * Return the formatted notification type for this notification.
