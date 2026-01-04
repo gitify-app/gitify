@@ -85,7 +85,7 @@ class IssueHandler extends DefaultHandler {
   }
 
   defaultUrl(notification: GitifyNotification): Link {
-    const url = new URL(notification.repository.htmlUrl);
+    const url = new URL(defaultHandler.defaultUrl(notification));
     url.pathname += '/issues';
     return url.href as Link;
   }

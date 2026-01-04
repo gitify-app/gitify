@@ -99,7 +99,7 @@ class PullRequestHandler extends DefaultHandler {
   }
 
   defaultUrl(notification: GitifyNotification): Link {
-    const url = new URL(notification.repository.htmlUrl);
+    const url = new URL(defaultHandler.defaultUrl(notification));
     url.pathname += '/pulls';
     return url.href as Link;
   }
