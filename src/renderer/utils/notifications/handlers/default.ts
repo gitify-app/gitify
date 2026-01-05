@@ -49,10 +49,12 @@ export class DefaultHandler implements NotificationTypeHandler {
 
   formattedNotificationTitle(notification: GitifyNotification): string {
     let title = notification.subject.title;
+    const number = this.formattedNotificationNumber(notification);
 
-    if (notification.subject?.number) {
-      title = `${title} [${this.formattedNotificationNumber(notification)}]`;
+    if (number.length > 0) {
+      title = `${title} [${number}]`;
     }
+
     return title;
   }
 

@@ -7,6 +7,7 @@ import { type GitifyNotification, Opacity, Size } from '../../types';
 import { cn } from '../../utils/cn';
 import { openRepository } from '../../utils/links';
 import { isGroupByDate } from '../../utils/notifications/group';
+import { createNotificationHandler } from '../../utils/notifications/handlers';
 import { AvatarWithFallback } from '../avatars/AvatarWithFallback';
 
 interface NotificationHeaderProps {
@@ -20,9 +21,8 @@ export const NotificationHeader: FC<NotificationHeaderProps> = ({
 
   const repoSlug = notification.repository.fullName;
 
-  const notificationNumber = notification.subject?.number
-    ? `#${notification.subject.number}`
-    : '';
+  const handler = createNotificationHandler(notification);
+  const notificationNumber = handler.formattedNotificationNumber(notification);
 
   return (
     isGroupByDate(settings) && (
