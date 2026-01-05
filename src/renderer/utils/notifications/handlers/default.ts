@@ -10,6 +10,7 @@ import {
   type Link,
   type SettingsState,
   type SubjectType,
+  type UserType,
 } from '../../../types';
 import type { NotificationTypeHandler } from './types';
 import { formatForDisplay } from './utils';
@@ -60,6 +61,10 @@ export class DefaultHandler implements NotificationTypeHandler {
 
   defaultUrl(notification: GitifyNotification): Link {
     return notification.repository.htmlUrl;
+  }
+
+  defaultUserType(): UserType {
+    return 'User';
   }
 }
 
