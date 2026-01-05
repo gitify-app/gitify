@@ -26,4 +26,10 @@ describe('renderer/utils/notifications/handlers/repositoryDependabotAlertsThread
       } as GitifyNotification),
     ).toEqual(`${mockHtmlUrl}/security/dependabot`);
   });
+
+  it('defaultUserType', () => {
+    expect(repositoryDependabotAlertsThreadHandler.defaultUserType()).toEqual(
+      'Bot',
+    );
+  });
 });

@@ -145,4 +145,8 @@ describe('renderer/utils/notifications/handlers/default.ts', () => {
       } as GitifyNotification),
     ).toEqual(mockHtmlUrl);
   });
+
+  it('defaultUserType', () => {
+    expect(defaultHandler.defaultUserType()).toEqual('User');
+  });
 });
