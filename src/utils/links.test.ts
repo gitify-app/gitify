@@ -1,4 +1,5 @@
 import { vi } from 'vitest';
+
 import { mockGitHubCloudAccount } from '../__mocks__/account-mocks';
 import { createMockGitifyNotificationUser } from '../__mocks__/user-mocks';
 import { Constants } from '../constants';

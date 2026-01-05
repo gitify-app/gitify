@@ -74,6 +74,9 @@
       "suspicious": {
         "noConsole": "error",
         "noUnknownAtRules": "warn"
+      },
+      "complexity": {
+        "noImportantStyles": "warn"
       }
     }
   },

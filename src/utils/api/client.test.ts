@@ -1,5 +1,5 @@
-import { vi } from 'vitest';
 import axios, { type AxiosResponse } from 'axios';
+import { vi } from 'vitest';
 
 import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
 import { createPartialMockNotification } from '../../__mocks__/notifications-mocks';
