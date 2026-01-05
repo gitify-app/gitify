@@ -360,6 +360,7 @@ exports[`renderer/components/layout/AppLayout.tsx > should render itself & its c
               data-testid="resize-grip"
             >
               <svg
+                aria-hidden="true"
                 class="w-full h-full text-gray-400"
                 fill="currentColor"
                 viewBox="0 0 16 16"
@@ -730,6 +731,7 @@ exports[`renderer/components/layout/AppLayout.tsx > should render itself & its c
             data-testid="resize-grip"
           >
             <svg
+              aria-hidden="true"
               class="w-full h-full text-gray-400"
               fill="currentColor"
               viewBox="0 0 16 16"

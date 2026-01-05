@@ -2,6 +2,7 @@ import type {
   Account,
   GitifyNotification,
   GitifyOwner,
+  GitifyReason,
   GitifyRepository,
   GitifySubject,
   Link,
@@ -9,6 +10,7 @@ import type {
   SubjectType,
   UserType,
 } from '../../types';
+import { getReasonDetails } from '../reason';
 import type { RawGitHubNotification } from './types';
 
 /**
@@ -27,11 +29,21 @@ export function transformNotification(
     id: raw.id,
     unread: raw.unread,
     updatedAt: raw.updated_at,
-    reason: raw.reason as Reason,
+    reason: transformReason(raw.reason),
     subject: transformSubject(raw.subject),
     repository: transformRepository(raw.repository),
     account,
     order,
+  };
+}
+
+function transformReason(raw: RawGitHubNotification['reason']): GitifyReason {
+  const reasonDetails = getReasonDetails(raw as Reason);
+
+  return {
+    code: raw as Reason,
+    title: reasonDetails.title,
+    description: reasonDetails.description,
   };
 }
 

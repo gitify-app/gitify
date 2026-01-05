@@ -27,12 +27,14 @@ export const ResizeGrip: FC = () => {
   }
 
   return (
+    // biome-ignore lint/a11y/noStaticElementInteractions: Resize grip is a native window control
     <div
       className="fixed bottom-0 right-0 w-4 h-4 cursor-se-resize z-50 opacity-30 hover:opacity-60 transition-opacity"
       data-testid="resize-grip"
       onMouseDown={handleMouseDown}
     >
       <svg
+        aria-hidden="true"
         className="w-full h-full text-gray-400"
         fill="currentColor"
         viewBox="0 0 16 16"

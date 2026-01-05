@@ -76,8 +76,8 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
       });
 
       it('should filter notifications by reasons when provided', async () => {
-        mockNotifications[0].reason = 'subscribed';
-        mockNotifications[1].reason = 'manual';
+        mockNotifications[0].reason.code = 'subscribed';
+        mockNotifications[1].reason.code = 'manual';
         const result = filterBaseNotifications(mockNotifications, {
           ...mockSettings,
           filterReasons: ['manual'],

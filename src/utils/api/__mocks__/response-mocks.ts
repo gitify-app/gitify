@@ -51,7 +51,11 @@ export const mockGitHubNotifications: GitifyNotification[] = [
     order: 0,
     id: '138661096',
     unread: true,
-    reason: 'subscribed',
+    reason: {
+      code: 'subscribed',
+      title: 'Updated',
+      description: "You're watching the repository.",
+    },
     updatedAt: '2017-05-20T17:51:57Z',
     subject: {
       title: 'I am a robot and this is a test!',
@@ -83,7 +87,11 @@ export const mockGitHubNotifications: GitifyNotification[] = [
     order: 1,
     id: '148827438',
     unread: true,
-    reason: 'author',
+    reason: {
+      code: 'author',
+      title: 'Authored',
+      description: 'You created the thread.',
+    },
     updatedAt: '2017-05-20T17:06:34Z',
     subject: {
       title: 'Improve the UI',
@@ -119,7 +127,11 @@ export const mockEnterpriseNotifications: GitifyNotification[] = [
     order: 0,
     id: '3',
     unread: true,
-    reason: 'subscribed',
+    reason: {
+      code: 'subscribed',
+      title: 'Updated',
+      description: "You're watching the repository.",
+    },
     updatedAt: '2017-05-20T13:02:48Z',
     subject: {
       title: 'Release 0.0.1',
@@ -136,7 +148,11 @@ export const mockEnterpriseNotifications: GitifyNotification[] = [
     order: 1,
     id: '4',
     unread: true,
-    reason: 'subscribed',
+    reason: {
+      code: 'subscribed',
+      title: 'Updated',
+      description: "You're watching the repository.",
+    },
     updatedAt: '2017-05-20T15:52:20Z',
     subject: {
       title: 'Bump Version',
