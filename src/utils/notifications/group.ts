@@ -1,6 +1,13 @@
 import type { GitifyNotification, SettingsState } from '../../types';
 
 /**
+ * Returns true when settings say to group by date.
+ */
+export function isGroupByDate(settings: SettingsState) {
+  return settings.groupBy === 'DATE';
+}
+
+/**
  * Returns true when settings say to group by repository.
  */
 export function isGroupByRepository(settings: SettingsState) {

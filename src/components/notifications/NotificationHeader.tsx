@@ -3,9 +3,11 @@ import type { FC, MouseEvent } from 'react';
 import { Stack } from '@primer/react';
 
 import { useAppContext } from '../../context/App';
-import { type GitifyNotification, GroupBy, Opacity, Size } from '../../types';
+import { type GitifyNotification, Opacity, Size } from '../../types';
 import { cn } from '../../utils/cn';
 import { openRepository } from '../../utils/links';
+import { isGroupByDate } from '../../utils/notifications/group';
+import { createNotificationHandler } from '../../utils/notifications/handlers';
 import { AvatarWithFallback } from '../avatars/AvatarWithFallback';
 
 interface NotificationHeaderProps {
@@ -19,14 +21,11 @@ export const NotificationHeader: FC<NotificationHeaderProps> = ({
 
   const repoSlug = notification.repository.fullName;
 
-  const notificationNumber = notification.subject?.number
-    ? `#${notification.subject.number}`
-    : '';
-
-  const groupByDate = settings.groupBy === GroupBy.DATE;
+  const handler = createNotificationHandler(notification);
+  const notificationNumber = handler.formattedNotificationNumber(notification);
 
   return (
-    groupByDate && (
+    isGroupByDate(settings) && (
       <div className="py-0.5">
         <Stack align="center" direction="horizontal" gap="condensed">
           <button

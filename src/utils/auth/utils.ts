@@ -386,6 +386,13 @@ export function getAccountUUID(account: Account): string {
   );
 }
 
+/**
+ *  Return the primary (first) account hostname
+ */
+export function getPrimaryAccountHostname(auth: AuthState) {
+  return auth.accounts[0]?.hostname ?? Constants.DEFAULT_HOSTNAME;
+}
+
 export function hasAccounts(auth: AuthState) {
   return auth.accounts.length > 0;
 }

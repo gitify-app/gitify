@@ -4,10 +4,11 @@ import { BellSlashIcon, CheckIcon, ReadIcon } from '@primer/octicons-react';
 import { Stack, Text, Tooltip } from '@primer/react';
 
 import { useAppContext } from '../../context/App';
-import { type GitifyNotification, GroupBy, Opacity, Size } from '../../types';
+import { type GitifyNotification, Opacity, Size } from '../../types';
 import { cn } from '../../utils/cn';
 import { isMarkAsDoneFeatureSupported } from '../../utils/features';
 import { openNotification } from '../../utils/links';
+import { isGroupByDate } from '../../utils/notifications/group';
 import { createNotificationHandler } from '../../utils/notifications/handlers';
 import { HoverButton } from '../primitives/HoverButton';
 import { HoverGroup } from '../primitives/HoverGroup';
@@ -67,8 +68,6 @@ export const NotificationRow: FC<NotificationRowProps> = ({
   const notificationType = handler.formattedNotificationType(notification);
   const notificationNumber = handler.formattedNotificationNumber(notification);
   const notificationTitle = handler.formattedNotificationTitle(notification);
-
-  const groupByDate = settings.groupBy === GroupBy.DATE;
 
   const isNotificationRead = !notification.unread;
 
@@ -131,7 +130,7 @@ export const NotificationRow: FC<NotificationRowProps> = ({
               className={cn(
                 'text-xxs ml-auto mr-2',
                 Opacity.READ,
-                (groupByDate || !settings.showNumber) && 'hidden',
+                (isGroupByDate(settings) || !settings.showNumber) && 'hidden',
               )}
             >
               {notificationNumber}
