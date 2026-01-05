@@ -6,7 +6,6 @@ import { type GitifyNotification, Opacity, Size } from '../../types';
 import { cn } from '../../utils/cn';
 import { openUserProfile } from '../../utils/links';
 import { createNotificationHandler } from '../../utils/notifications/handlers';
-import { getReasonDetails } from '../../utils/reason';
 import { AvatarWithFallback } from '../avatars/AvatarWithFallback';
 import { MetricGroup } from '../metrics/MetricGroup';
 
@@ -17,8 +16,6 @@ interface NotificationFooterProps {
 export const NotificationFooter: FC<NotificationFooterProps> = ({
   notification,
 }: NotificationFooterProps) => {
-  const reason = getReasonDetails(notification.reason);
-
   const handler = createNotificationHandler(notification);
 
   return (
@@ -55,8 +52,8 @@ export const NotificationFooter: FC<NotificationFooterProps> = ({
       )}
 
       <Stack direction="horizontal" gap="none">
-        <Text className="pr-1" title={reason.description}>
-          {reason.title}
+        <Text className="pr-1" title={notification.reason.description}>
+          {notification.reason.title}
         </Text>
         <RelativeTime datetime={notification.updatedAt} />
       </Stack>

@@ -2,6 +2,7 @@ import { Constants } from '../constants';
 import type {
   AccountNotifications,
   GitifyNotification,
+  GitifyReason,
   GitifyRepository,
   GitifySubject,
   Hostname,
@@ -53,6 +54,11 @@ export function createPartialMockNotification(
       user: mockGitifyUser,
       hasRequiredScopes: true,
     },
+    reason: {
+      code: 'subscribed',
+      title: 'Updated',
+      description: "You're watching the repository.",
+    } as GitifyReason,
     subject: subject as GitifySubject,
     repository: {
       name: 'notifications-test',

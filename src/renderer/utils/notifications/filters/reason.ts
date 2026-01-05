@@ -42,6 +42,6 @@ export const reasonFilter: Filter<Reason> = {
     notification: GitifyNotification,
     reason: Reason,
   ): boolean {
-    return notification.reason === reason;
+    return notification.reason.code === reason;
   },
 };

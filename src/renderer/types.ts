@@ -277,7 +277,7 @@ export interface GitifyNotification {
   /** When the notification was last updated */
   updatedAt: string;
   /** Reason for receiving the notification */
-  reason: Reason;
+  reason: GitifyReason;
   /** Subject details (what the notification is about) */
   subject: GitifySubject;
   /** Repository context */
@@ -286,6 +286,18 @@ export interface GitifyNotification {
   account: Account;
   /** UI ordering index */
   order: number;
+}
+
+/**
+ * Notification reason details
+ */
+export interface GitifyReason {
+  /** Reason code */
+  code: Reason;
+  /** Reason title */
+  title: string;
+  /** Reason description */
+  description: string;
 }
 
 /**
