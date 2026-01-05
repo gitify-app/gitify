@@ -8,6 +8,7 @@ import {
 
 import { BaseStyles, ThemeProvider } from '@primer/react';
 
+import { ErrorBoundary } from './components/ErrorBoundary';
 import { AppLayout } from './components/layout/AppLayout';
 import { AppProvider, useAppContext } from './context/App';
 import { AccountsRoute } from './routes/Accounts';
@@ -35,55 +36,57 @@ export const App = () => {
   return (
     <ThemeProvider>
       <BaseStyles>
-        <AppProvider>
-          <Router>
-            <AppLayout>
-              <Routes>
-                <Route
-                  element={
-                    <RequireAuth>
-                      <NotificationsRoute />
-                    </RequireAuth>
-                  }
-                  path="/"
-                />
-                <Route
-                  element={
-                    <RequireAuth>
-                      <FiltersRoute />
-                    </RequireAuth>
-                  }
-                  path="/filters"
-                />
-                <Route
-                  element={
-                    <RequireAuth>
-                      <SettingsRoute />
-                    </RequireAuth>
-                  }
-                  path="/settings"
-                />
-                <Route
-                  element={
-                    <RequireAuth>
-                      <AccountsRoute />
-                    </RequireAuth>
-                  }
-                  path="/accounts"
-                />
-                <Route element={<LoginRoute />} path="/login" />
-                <Route
-                  element={<LoginWithPersonalAccessTokenRoute />}
-                  path="/login-personal-access-token"
-                />
-                <Route
-                  element={<LoginWithOAuthAppRoute />}
-                  path="/login-oauth-app"
-                />
-              </Routes>
-            </AppLayout>
-          </Router>
-        </AppProvider>
+        <ErrorBoundary>
+          <AppProvider>
+            <Router>
+              <AppLayout>
+                <Routes>
+                  <Route
+                    element={
+                      <RequireAuth>
+                        <NotificationsRoute />
+                      </RequireAuth>
+                    }
+                    path="/"
+                  />
+                  <Route
+                    element={
+                      <RequireAuth>
+                        <FiltersRoute />
+                      </RequireAuth>
+                    }
+                    path="/filters"
+                  />
+                  <Route
+                    element={
+                      <RequireAuth>
+                        <SettingsRoute />
+                      </RequireAuth>
+                    }
+                    path="/settings"
+                  />
+                  <Route
+                    element={
+                      <RequireAuth>
+                        <AccountsRoute />
+                      </RequireAuth>
+                    }
+                    path="/accounts"
+                  />
+                  <Route element={<LoginRoute />} path="/login" />
+                  <Route
+                    element={<LoginWithPersonalAccessTokenRoute />}
+                    path="/login-personal-access-token"
+                  />
+                  <Route
+                    element={<LoginWithOAuthAppRoute />}
+                    path="/login-oauth-app"
+                  />
+                </Routes>
+              </AppLayout>
+            </Router>
+          </AppProvider>
+        </ErrorBoundary>
       </BaseStyles>
     </ThemeProvider>
   );
