@@ -14,8 +14,8 @@ import { IconButton, Stack } from '@primer/react';
 
 import { APPLICATION } from '../../shared/constants';
 
-import { Constants } from '../constants';
 import { useAppContext } from '../context/App';
+import { getPrimaryAccountHostname } from '../utils/auth/utils';
 import { quitApp } from '../utils/comms';
 import {
   openGitHubIssues,
@@ -39,9 +39,7 @@ export const Sidebar: FC = () => {
     hasUnreadNotifications,
   } = useAppContext();
 
-  // We naively assume that the first account is the primary account for the purposes of our sidebar quick links
-  const primaryAccountHostname =
-    auth.accounts[0]?.hostname ?? Constants.DEFAULT_AUTH_OPTIONS.hostname;
+  const primaryAccountHostname = getPrimaryAccountHostname(auth);
 
   const toggleFilters = () => {
     if (location.pathname.startsWith('/filters')) {

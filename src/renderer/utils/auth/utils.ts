@@ -267,6 +267,13 @@ export function getAccountUUID(account: Account): string {
   return btoa(`${account.hostname}-${account.user.id}-${account.method}`);
 }
 
+/**
+ *  Return the primary (first) account hostname
+ */
+export function getPrimaryAccountHostname(auth: AuthState) {
+  return auth.accounts[0]?.hostname ?? Constants.DEFAULT_AUTH_OPTIONS.hostname;
+}
+
 export function hasAccounts(auth: AuthState) {
   return auth.accounts.length > 0;
 }

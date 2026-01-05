@@ -449,6 +449,28 @@ describe('renderer/utils/auth/utils.ts', () => {
     });
   });
 
+  describe('getAccountUUID', () => {
+    it('should validate account uuid', () => {
+      expect(authUtils.getAccountUUID(mockGitHubCloudAccount)).toBe(
+        'Z2l0aHViLmNvbS0xMjM0NTY3ODktUGVyc29uYWwgQWNjZXNzIFRva2Vu',
+      );
+    });
+  });
+
+  describe('getPrimaryAccountHostname', () => {
+    it('should return first (primary) account hostname when multiple', () => {
+      expect(authUtils.getPrimaryAccountHostname(mockAuth)).toBe(
+        mockGitHubCloudAccount.hostname,
+      );
+    });
+
+    it('should use default hostname if no accounts', () => {
+      expect(authUtils.getPrimaryAccountHostname({ accounts: [] })).toBe(
+        Constants.DEFAULT_AUTH_OPTIONS.hostname,
+      );
+    });
+  });
+
   describe('hasAccounts', () => {
     it('should return true', () => {
       expect(authUtils.hasAccounts(mockAuth)).toBeTruthy();
