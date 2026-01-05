@@ -143,7 +143,7 @@ export const Sidebar: FC = () => {
           <>
             <IconButton
               aria-label="Refresh"
-              className={status === 'loading' ? '[&_svg]:animate-spin' : ''}
+              className={status === 'loading' ? 'animate-spin' : ''}
               data-testid="sidebar-refresh"
               description="Refresh notifications"
               disabled={status === 'loading'}
