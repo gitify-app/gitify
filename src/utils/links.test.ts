@@ -1,5 +1,6 @@
+import { vi } from 'vitest';
 import { mockGitHubCloudAccount } from '../__mocks__/account-mocks';
-import { createMockNotificationUser } from '../__mocks__/user-mocks';
+import { createMockGitifyNotificationUser } from '../__mocks__/user-mocks';
 import { Constants } from '../constants';
 import type { GitifyRepository, Hostname, Link } from '../types';
 import { mockSingleNotification } from './api/__mocks__/response-mocks';
@@ -23,7 +24,7 @@ import {
 describe('renderer/utils/links.ts', () => {
   const openExternalLinkSpy = vi
     .spyOn(comms, 'openExternalLink')
-    .mockImplementation(() => {});
+    .mockImplementation();
 
   afterEach(() => {
     vi.clearAllMocks();
@@ -70,7 +71,7 @@ describe('renderer/utils/links.ts', () => {
   });
 
   it('openUserProfile', () => {
-    const mockUser = createMockNotificationUser('mock-user');
+    const mockUser = createMockGitifyNotificationUser('mock-user');
 
     openUserProfile(mockUser);
 
@@ -97,7 +98,7 @@ describe('renderer/utils/links.ts', () => {
   });
 
   it('openRepository', () => {
-    const mockHtmlUrl = 'https://github.com/gitify-app/gitify' as Link;
+    const mockHtmlUrl = 'https://github.com/gitify-app/gitify';
     const repo = {
       htmlUrl: mockHtmlUrl,
     } as GitifyRepository;

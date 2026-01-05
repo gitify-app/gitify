@@ -1,29 +1,33 @@
+import { vi } from 'vitest';
+
+// Mock to use axios instead of Tauri HTTP plugin
+vi.mock('../environment', () => ({ isTauriEnvironment: () => false }));
+
+// Mock decryptValue to return 'decrypted' for consistent test expectations
+vi.mock('../comms', () => ({
+  decryptValue: vi.fn().mockResolvedValue('decrypted'),
+}));
+
 import axios from 'axios';
 
-import type { Link, Token } from '../../types';
+import { mockToken } from '../../__mocks__/state-mocks';
+import type { Link } from '../../types';
 import {
   mockAuthHeaders,
   mockNoAuthHeaders,
   mockNonCachedAuthHeaders,
 } from './__mocks__/request-mocks';
+import { FetchAuthenticatedUserDetailsDocument } from './graphql/generated/graphql';
 import {
   apiRequest,
   apiRequestAuth,
   getHeaders,
+  performGraphQLRequest,
+  performGraphQLRequestString,
   shouldRequestWithNoCache,
 } from './request';
 
 vi.mock('axios');
-
-// Mock isTauriEnvironment to return false so axios is used instead of Tauri fetch
-vi.mock('../environment', () => ({
-  isTauriEnvironment: () => false,
-}));
-
-// Mock decryptValue since isTauriEnvironment is false, it would return unchanged value
-vi.mock('../comms', () => ({
-  decryptValue: vi.fn().mockResolvedValue('decrypted'),
-}));
 
 const url = 'https://example.com' as Link;
 const method = 'get';
@@ -33,93 +37,148 @@ describe('renderer/utils/api/request.ts', () => {
     vi.clearAllMocks();
   });
 
-  it('should make a request with the correct parameters', async () => {
-    const data = { key: 'value' };
+  describe('apiRequest', () => {
+    it('should make a request with the correct parameters', async () => {
+      const data = { key: 'value' };
 
-    await apiRequest(url, method, data);
+      await apiRequest(url, method, data);
 
-    expect(axios).toHaveBeenCalledWith({
-      method,
-      url,
-      data,
-      headers: mockNoAuthHeaders,
+      expect(axios).toHaveBeenCalledWith({
+        method,
+        url,
+        data,
+        headers: mockNoAuthHeaders,
+      });
+    });
+
+    it('should make a request with the correct parameters and default data', async () => {
+      const data = {};
+      await apiRequest(url, method);
+
+      expect(axios).toHaveBeenCalledWith({
+        method,
+        url,
+        data,
+        headers: mockNoAuthHeaders,
+      });
     });
   });
 
-  it('should make a request with the correct parameters and default data', async () => {
-    const data = {};
-    await apiRequest(url, method);
-
-    expect(axios).toHaveBeenCalledWith({
-      method,
-      url,
-      data,
-      headers: mockNoAuthHeaders,
+  describe('apiRequestAuth', () => {
+    afterEach(() => {
+      vi.clearAllMocks();
     });
-  });
-});
 
-describe('apiRequestAuth', () => {
-  const token = 'yourAuthToken' as Token;
+    it('should make an authenticated request with the correct parameters', async () => {
+      const data = { key: 'value' };
 
-  afterEach(() => {
-    vi.clearAllMocks();
-  });
+      await apiRequestAuth(url, method, mockToken, data);
 
-  it('should make an authenticated request with the correct parameters', async () => {
-    const data = { key: 'value' };
-
-    await apiRequestAuth(url, method, token, data);
-
-    expect(axios).toHaveBeenCalledWith({
-      method,
-      url,
-      data,
-      headers: mockAuthHeaders,
+      expect(axios).toHaveBeenCalledWith({
+        method,
+        url,
+        data,
+        headers: mockAuthHeaders,
+      });
     });
-  });
 
-  it('should make an authenticated request with the correct parameters and default data', async () => {
-    const data = {};
+    it('should make an authenticated request with the correct parameters and default data', async () => {
+      const data = {};
 
-    await apiRequestAuth(url, method, token);
+      await apiRequestAuth(url, method, mockToken);
 
-    expect(axios).toHaveBeenCalledWith({
-      method,
-      url,
-      data,
-      headers: mockAuthHeaders,
+      expect(axios).toHaveBeenCalledWith({
+        method,
+        url,
+        data,
+        headers: mockAuthHeaders,
+      });
     });
   });
 
-  it('shouldRequestWithNoCache', () => {
-    expect(
-      shouldRequestWithNoCache('https://example.com/api/v3/notifications'),
-    ).toBe(true);
+  describe('performGraphQLRequest', () => {
+    it('should performGraphQLRequest with the correct parameters and default data', async () => {
+      (axios as unknown as vi.Mock).mockResolvedValue({
+        data: { data: {}, errors: [] },
+        headers: {},
+      });
+      const expectedData = {
+        query: FetchAuthenticatedUserDetailsDocument,
+        variables: undefined,
+      };
 
-    expect(
-      shouldRequestWithNoCache('https://example.com/login/oauth/access_token'),
-    ).toBe(true);
+      await performGraphQLRequest(
+        url,
+        mockToken,
+        FetchAuthenticatedUserDetailsDocument,
+      );
 
-    expect(shouldRequestWithNoCache('https://example.com/notifications')).toBe(
-      true,
-    );
-
-    expect(
-      shouldRequestWithNoCache('https://example.com/some/other/endpoint'),
-    ).toBe(false);
+      expect(axios).toHaveBeenCalledWith({
+        method: 'POST',
+        url,
+        data: expectedData,
+        headers: mockAuthHeaders,
+      });
+    });
   });
 
-  it('should get headers correctly', async () => {
-    expect(await getHeaders(url)).toEqual(mockNoAuthHeaders);
+  describe('performGraphQLRequestString', () => {
+    it('should performGraphQLRequestString with the correct parameters and default data', async () => {
+      (axios as unknown as vi.Mock).mockResolvedValue({
+        data: { data: {}, errors: [] },
+        headers: {},
+      });
+      const queryString = 'query Foo { repository { issue { title } } }';
+      const expectedData = {
+        query: queryString,
+        variables: undefined,
+      };
 
-    expect(await getHeaders(url, token)).toEqual(mockAuthHeaders);
+      await performGraphQLRequestString(url, mockToken, queryString);
 
-    expect(
-      await getHeaders(
-        'https://example.com/api/v3/notifications' as Link,
-        token,
-      ),
-    ).toEqual(mockNonCachedAuthHeaders);
+      expect(axios).toHaveBeenCalledWith({
+        method: 'POST',
+        url,
+        data: expectedData,
+        headers: mockAuthHeaders,
+      });
+    });
+  });
+
+  describe('shouldRequestWithNoCache', () => {
+    it('shouldRequestWithNoCache', () => {
+      expect(
+        shouldRequestWithNoCache('https://example.com/api/v3/notifications'),
+      ).toBe(true);
+
+      expect(
+        shouldRequestWithNoCache(
+          'https://example.com/login/oauth/access_token',
+        ),
+      ).toBe(true);
+
+      expect(
+        shouldRequestWithNoCache('https://example.com/notifications'),
+      ).toBe(true);
+
+      expect(
+        shouldRequestWithNoCache('https://example.com/some/other/endpoint'),
+      ).toBe(false);
+    });
+  });
+
+  describe('getHeaders', () => {
+    it('should get headers correctly', async () => {
+      expect(await getHeaders(url)).toEqual(mockNoAuthHeaders);
+
+      expect(await getHeaders(url, mockToken)).toEqual(mockAuthHeaders);
+
+      expect(
+        await getHeaders(
+          'https://example.com/api/v3/notifications' as Link,
+          mockToken,
+        ),
+      ).toEqual(mockNonCachedAuthHeaders);
+    });
   });
 });

@@ -1,24 +1,16 @@
+import { vi } from 'vitest';
+
+// Mock to use axios instead of Tauri HTTP plugin
+vi.mock('../../environment', () => ({ isTauriEnvironment: () => false }));
+
 import axios from 'axios';
 import nock from 'nock';
 
-import {
-  createMockSubject,
-  createPartialMockNotification,
-} from '../../../__mocks__/notifications-mocks';
+import { createPartialMockNotification } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
 import { createPartialMockUser } from '../../../__mocks__/user-mocks';
 import type { GitifyNotification, Link } from '../../../types';
 import { releaseHandler } from './release';
-
-// Mock isTauriEnvironment to return false so axios is used instead of Tauri fetch
-vi.mock('../../environment', () => ({
-  isTauriEnvironment: () => false,
-}));
-
-// Mock decryptValue since isTauriEnvironment is false
-vi.mock('../../comms', () => ({
-  decryptValue: vi.fn().mockResolvedValue('decrypted'),
-}));
 
 describe('renderer/utils/notifications/handlers/release.ts', () => {
   describe('enrich', () => {
@@ -73,19 +65,19 @@ describe('renderer/utils/notifications/handlers/release.ts', () => {
         filterStates: ['closed'],
       });
 
-      // Returns null when filtered (no API call made)
+      // Returns empty object when filtered (no API call made)
       expect(result).toBeNull();
     });
   });
 
   it('iconType', () => {
-    expect(
-      releaseHandler.iconType(
-        createMockSubject({
-          type: 'Release',
-        }),
-      )?.displayName,
-    ).toBe('TagIcon');
+    const mockNotification = createPartialMockNotification({
+      type: 'Release',
+    });
+
+    expect(releaseHandler.iconType(mockNotification).displayName).toBe(
+      'TagIcon',
+    );
   });
 
   it('defaultUrl', () => {

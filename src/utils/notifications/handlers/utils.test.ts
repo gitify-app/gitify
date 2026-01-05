@@ -1,14 +1,19 @@
-import { createMockNotificationUser } from '../../../__mocks__/user-mocks';
+import { vi } from 'vitest';
+
+// Mock to use axios instead of Tauri HTTP plugin
+vi.mock('../../environment', () => ({ isTauriEnvironment: () => false }));
+
+import { createMockGraphQLAuthor } from '../../../__mocks__/user-mocks';
 import { formatForDisplay, getNotificationAuthor } from './utils';
 
 describe('renderer/utils/notifications/handlers/utils.ts', () => {
   describe('getNotificationAuthor', () => {
-    const mockAuthor = createMockNotificationUser('some-author');
+    const mockAuthor = createMockGraphQLAuthor('some-author');
 
     it('returns undefined when all users are undefined', () => {
       const result = getNotificationAuthor([undefined, undefined]);
 
-      expect(result).toBeUndefined();
+      expect(result).toBeNull();
     });
 
     it('returns first user', () => {
@@ -16,8 +21,8 @@ describe('renderer/utils/notifications/handlers/utils.ts', () => {
 
       expect(result).toEqual({
         login: mockAuthor.login,
-        htmlUrl: mockAuthor.htmlUrl,
         avatarUrl: mockAuthor.avatarUrl,
+        htmlUrl: mockAuthor.htmlUrl,
         type: mockAuthor.type,
       });
     });
@@ -27,8 +32,8 @@ describe('renderer/utils/notifications/handlers/utils.ts', () => {
 
       expect(result).toEqual({
         login: mockAuthor.login,
-        htmlUrl: mockAuthor.htmlUrl,
         avatarUrl: mockAuthor.avatarUrl,
+        htmlUrl: mockAuthor.htmlUrl,
         type: mockAuthor.type,
       });
     });

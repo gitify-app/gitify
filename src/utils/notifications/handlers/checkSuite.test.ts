@@ -1,7 +1,9 @@
-import {
-  createMockSubject,
-  createPartialMockNotification,
-} from '../../../__mocks__/notifications-mocks';
+import { vi } from 'vitest';
+
+// Mock to use axios instead of Tauri HTTP plugin
+vi.mock('../../environment', () => ({ isTauriEnvironment: () => false }));
+
+import { createPartialMockNotification } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
 import type { GitifyNotification } from '../../../types';
 import {
@@ -138,7 +140,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
         mockSettings,
       );
 
-      // Returns null when state cannot be determined
+      // Returns empty object when state cannot be determined
       expect(result).toBeNull();
     });
 
@@ -153,7 +155,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
         mockSettings,
       );
 
-      // Returns null when title cannot be parsed
+      // Returns empty object when title cannot be parsed
       expect(result).toBeNull();
     });
   });
@@ -178,11 +180,14 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
     it.each(
       Object.entries(cases) as Array<[GitifyCheckSuiteStatus, IconColor]>,
     )('iconType for check suite with status %s', (checkSuiteStatus, checkSuiteIconType) => {
-      expect(
-        checkSuiteHandler.iconType(
-          createMockSubject({ type: 'CheckSuite', state: checkSuiteStatus }),
-        )?.displayName,
-      ).toBe(checkSuiteIconType);
+      const mockNotification = createPartialMockNotification({
+        type: 'CheckSuite',
+        state: checkSuiteStatus,
+      });
+
+      expect(checkSuiteHandler.iconType(mockNotification).displayName).toBe(
+        checkSuiteIconType,
+      );
     });
   });
 
@@ -206,11 +211,14 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
     it.each(
       Object.entries(cases) as Array<[GitifyCheckSuiteStatus, IconColor]>,
     )('iconColor for check suite with status %s', (checkSuiteStatus, checkSuiteIconColor) => {
-      expect(
-        checkSuiteHandler.iconColor(
-          createMockSubject({ type: 'CheckSuite', state: checkSuiteStatus }),
-        ),
-      ).toBe(checkSuiteIconColor);
+      const mockNotification = createPartialMockNotification({
+        type: 'CheckSuite',
+        state: checkSuiteStatus,
+      });
+
+      expect(checkSuiteHandler.iconColor(mockNotification)).toBe(
+        checkSuiteIconColor,
+      );
     });
   });
 

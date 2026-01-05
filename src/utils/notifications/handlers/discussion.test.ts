@@ -1,14 +1,17 @@
+import { vi } from 'vitest';
+
+// Mock to use axios instead of Tauri HTTP plugin
+vi.mock('../../environment', () => ({ isTauriEnvironment: () => false }));
+
 import axios from 'axios';
 import nock from 'nock';
 
-import {
-  createMockSubject,
-  createPartialMockNotification,
-} from '../../../__mocks__/notifications-mocks';
+import { createPartialMockNotification } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
+import { createMockGraphQLAuthor } from '../../../__mocks__/user-mocks';
+import type { GitifyNotification } from '../../../types';
 import {
   type GitifyDiscussionState,
-  type GitifyNotification,
   type GitifySubject,
   IconColor,
   type Link,
@@ -19,36 +22,23 @@ import type {
 } from '../../api/graphql/generated/graphql';
 import { discussionHandler } from './discussion';
 
-// Mock isTauriEnvironment to return false so axios is used instead of Tauri fetch
-vi.mock('../../environment', () => ({
-  isTauriEnvironment: () => false,
-}));
-
-// Mock decryptValue since isTauriEnvironment is false
-vi.mock('../../comms', () => ({
-  decryptValue: vi.fn().mockResolvedValue('decrypted'),
-}));
-
-// GraphQL-compatible user objects (camelCase)
-const createGraphQLUser = (login: string) => ({
-  __typename: 'User' as const,
-  login,
-  avatarUrl: 'https://avatars.githubusercontent.com/u/583231?v=4' as Link,
-  htmlUrl: `https://github.com/${login}` as Link,
-  type: 'User' as const,
-});
-
-const mockAuthorGQL = createGraphQLUser('discussion-author');
-const mockCommenterGQL = createGraphQLUser('discussion-commenter');
-const mockReplierGQL = createGraphQLUser('discussion-replier');
+const mockAuthor = createMockGraphQLAuthor('discussion-author');
+const mockCommenter = createMockGraphQLAuthor('discussion-commenter');
+const mockReplier = createMockGraphQLAuthor('discussion-replier');
 
 describe('renderer/utils/notifications/handlers/discussion.ts', () => {
+  describe('supportsMergedQueryEnrichment', () => {
+    it('should support merge query', () => {
+      expect(discussionHandler.supportsMergedQueryEnrichment).toBeTruthy();
+    });
+  });
+
   describe('enrich', () => {
     const mockNotification = createPartialMockNotification({
       title: 'This is a mock discussion',
       type: 'Discussion',
       url: 'https://api.github.com/repos/gitify-app/notifications-test/discussions/123' as Link,
-      latestCommentUrl: undefined,
+      latestCommentUrl: null,
     });
     mockNotification.updatedAt = '2024-01-01T00:00:00Z';
 
@@ -80,16 +70,16 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         number: 123,
         state: 'ANSWERED',
         user: {
-          login: mockAuthorGQL.login,
-          htmlUrl: mockAuthorGQL.htmlUrl,
-          avatarUrl: mockAuthorGQL.avatarUrl,
-          type: mockAuthorGQL.type,
+          login: mockAuthor.login,
+          avatarUrl: mockAuthor.avatarUrl,
+          htmlUrl: mockAuthor.htmlUrl,
+          type: mockAuthor.type,
         },
         comments: 0,
         labels: [],
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/discussions/123',
-      } as unknown as GitifySubject);
+      } as Partial<GitifySubject>);
     });
 
     it('open / unanswered discussion - no stateReason', async () => {
@@ -114,16 +104,16 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         number: 123,
         state: 'OPEN',
         user: {
-          login: mockAuthorGQL.login,
-          htmlUrl: mockAuthorGQL.htmlUrl,
-          avatarUrl: mockAuthorGQL.avatarUrl,
-          type: mockAuthorGQL.type,
+          login: mockAuthor.login,
+          avatarUrl: mockAuthor.avatarUrl,
+          htmlUrl: mockAuthor.htmlUrl,
+          type: mockAuthor.type,
         },
         comments: 0,
         labels: [],
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/discussions/123',
-      } as unknown as GitifySubject);
+      } as Partial<GitifySubject>);
     });
 
     it('discussion with stateReason - stateReason always takes precedence', async () => {
@@ -151,16 +141,16 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         number: 123,
         state: 'DUPLICATE',
         user: {
-          login: mockAuthorGQL.login,
-          htmlUrl: mockAuthorGQL.htmlUrl,
-          avatarUrl: mockAuthorGQL.avatarUrl,
-          type: mockAuthorGQL.type,
+          login: mockAuthor.login,
+          avatarUrl: mockAuthor.avatarUrl,
+          htmlUrl: mockAuthor.htmlUrl,
+          type: mockAuthor.type,
         },
         comments: 0,
         labels: [],
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/discussions/123',
-      } as unknown as GitifySubject);
+      } as Partial<GitifySubject>);
     });
 
     it('discussion with labels', async () => {
@@ -192,16 +182,16 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         number: 123,
         state: 'ANSWERED',
         user: {
-          login: mockAuthorGQL.login,
-          htmlUrl: mockAuthorGQL.htmlUrl,
-          avatarUrl: mockAuthorGQL.avatarUrl,
-          type: mockAuthorGQL.type,
+          login: mockAuthor.login,
+          avatarUrl: mockAuthor.avatarUrl,
+          htmlUrl: mockAuthor.htmlUrl,
+          type: mockAuthor.type,
         },
         comments: 0,
         labels: ['enhancement'],
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/discussions/123',
-      } as unknown as GitifySubject);
+      } as Partial<GitifySubject>);
     });
 
     it('discussion with comments', async () => {
@@ -210,7 +200,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         totalCount: 1,
         nodes: [
           {
-            author: mockCommenterGQL,
+            author: mockCommenter,
             createdAt: '2024-02-01T00:00:00Z',
             url: 'https://github.com/gitify-app/notifications-test/discussions/123#discussioncomment-1234',
             replies: {
@@ -240,16 +230,16 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         number: 123,
         state: 'ANSWERED',
         user: {
-          login: mockCommenterGQL.login,
-          htmlUrl: mockCommenterGQL.htmlUrl,
-          avatarUrl: mockCommenterGQL.avatarUrl,
-          type: mockCommenterGQL.type,
+          login: mockCommenter.login,
+          avatarUrl: mockCommenter.avatarUrl,
+          htmlUrl: mockCommenter.htmlUrl,
+          type: mockCommenter.type,
         },
         comments: 1,
         labels: [],
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/discussions/123#discussioncomment-1234',
-      } as unknown as GitifySubject);
+      } as Partial<GitifySubject>);
     });
 
     it('discussion with comments and replies', async () => {
@@ -258,14 +248,14 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         totalCount: 1,
         nodes: [
           {
-            author: mockCommenterGQL,
+            author: mockCommenter,
             createdAt: '2024-01-01T00:00:00Z',
             url: 'https://github.com/gitify-app/notifications-test/discussions/123#discussioncomment-1234',
             replies: {
               totalCount: 1,
               nodes: [
                 {
-                  author: mockReplierGQL,
+                  author: mockReplier,
                   createdAt: '2024-01-01T00:00:00Z',
                   url: 'https://github.com/gitify-app/notifications-test/discussions/123#discussioncomment-6789',
                 },
@@ -294,16 +284,16 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         number: 123,
         state: 'ANSWERED',
         user: {
-          login: mockReplierGQL.login,
-          htmlUrl: mockReplierGQL.htmlUrl,
-          avatarUrl: mockReplierGQL.avatarUrl,
-          type: mockReplierGQL.type,
+          login: mockReplier.login,
+          avatarUrl: mockReplier.avatarUrl,
+          htmlUrl: mockReplier.htmlUrl,
+          type: mockReplier.type,
         },
         comments: 1,
         labels: [],
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/discussions/123#discussioncomment-6789',
-      } as unknown as GitifySubject);
+      } as Partial<GitifySubject>);
     });
   });
 
@@ -320,11 +310,14 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
     it.each(
       Object.entries(cases) as Array<[GitifyDiscussionState, IconColor]>,
     )('iconType for discussion with state %s', (discussionState, discussionIconType) => {
-      expect(
-        discussionHandler.iconType(
-          createMockSubject({ type: 'Discussion', state: discussionState }),
-        )?.displayName,
-      ).toBe(discussionIconType);
+      const mockNotification = createPartialMockNotification({
+        type: 'Discussion',
+        state: discussionState,
+      });
+
+      expect(discussionHandler.iconType(mockNotification).displayName).toBe(
+        discussionIconType,
+      );
     });
   });
 
@@ -341,11 +334,14 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
     it.each(
       Object.entries(cases) as Array<[GitifyDiscussionState, IconColor]>,
     )('iconColor for discussion with state %s', (discussionState, discussionIconColor) => {
-      expect(
-        discussionHandler.iconColor(
-          createMockSubject({ type: 'Discussion', state: discussionState }),
-        ),
-      ).toBe(discussionIconColor);
+      const mockNotification = createPartialMockNotification({
+        type: 'Discussion',
+        state: discussionState,
+      });
+
+      expect(discussionHandler.iconColor(mockNotification)).toBe(
+        discussionIconColor,
+      );
     });
   });
 
@@ -374,7 +370,7 @@ function mockDiscussionResponseNode(mocks: {
     url: 'https://github.com/gitify-app/notifications-test/discussions/123' as Link,
     stateReason: mocks.stateReason,
     isAnswered: mocks.isAnswered,
-    author: mockAuthorGQL,
+    author: mockAuthor,
     comments: {
       nodes: [],
       totalCount: 0,

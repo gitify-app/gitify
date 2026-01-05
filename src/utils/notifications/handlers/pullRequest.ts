@@ -19,23 +19,26 @@ import {
   type SettingsState,
 } from '../../../types';
 import { fetchPullByNumber } from '../../api/client';
-import type { PullRequestReviewFieldsFragment } from '../../api/graphql/generated/graphql';
+import type {
+  PullRequestDetailsFragment,
+  PullRequestReviewFieldsFragment,
+} from '../../api/graphql/generated/graphql';
 import { DefaultHandler, defaultHandler } from './default';
 import { getNotificationAuthor } from './utils';
 
 class PullRequestHandler extends DefaultHandler {
   readonly type = 'PullRequest' as const;
 
+  readonly supportsMergedQueryEnrichment = true;
+
   async enrich(
     notification: GitifyNotification,
     _settings: SettingsState,
-  ): Promise<Partial<GitifySubject> | null> {
-    const response = await fetchPullByNumber(notification);
-    const pr = response.data?.repository?.pullRequest;
-
-    if (!pr) {
-      return null;
-    }
+    fetchedData?: PullRequestDetailsFragment,
+  ): Promise<Partial<GitifySubject>> {
+    const pr =
+      fetchedData ??
+      (await fetchPullByNumber(notification)).data.repository?.pullRequest;
 
     let prState: GitifyPullRequestState = pr.state;
     if (pr.isDraft) {
@@ -44,39 +47,29 @@ class PullRequestHandler extends DefaultHandler {
       prState = 'MERGE_QUEUE';
     }
 
-    const prComment = pr.comments?.nodes?.[0];
+    const prComment = pr.comments?.nodes[0];
 
-    const prUser = getNotificationAuthor([
-      prComment?.author ?? undefined,
-      pr.author ?? undefined,
-    ]);
+    const prUser = getNotificationAuthor([prComment?.author, pr.author]);
 
-    const reviewNodes = pr.reviews?.nodes?.filter(
-      (r): r is NonNullable<typeof r> => r != null,
-    );
-    const reviews = reviewNodes
-      ? getLatestReviewForReviewers(reviewNodes)
-      : undefined;
+    const reviews = getLatestReviewForReviewers(pr.reviews.nodes);
 
     return {
       number: pr.number,
       state: prState,
       user: prUser,
       reviews: reviews,
-      comments: pr.comments?.totalCount ?? 0,
-      labels: pr.labels?.nodes
-        ?.filter((label): label is NonNullable<typeof label> => label != null)
-        .map((label) => label.name),
-      linkedIssues: pr.closingIssuesReferences?.nodes
-        ?.filter((issue): issue is NonNullable<typeof issue> => issue != null)
-        .map((issue) => `#${issue.number}`),
-      milestone: pr.milestone ?? undefined,
-      htmlUrl: (prComment?.url ?? pr.url) as Link,
+      comments: pr.comments.totalCount,
+      labels: pr.labels?.nodes.map((label) => label.name) ?? [],
+      linkedIssues: pr.closingIssuesReferences?.nodes.map(
+        (issue) => `#${issue.number}`,
+      ),
+      milestone: pr.milestone,
+      htmlUrl: prComment?.url ?? pr.url,
     };
   }
 
-  iconType(subject: GitifySubject): FC<OcticonProps> | null {
-    switch (subject.state as GitifyPullRequestState) {
+  iconType(notification: GitifyNotification): FC<OcticonProps> {
+    switch (notification.subject.state as GitifyPullRequestState) {
       case 'DRAFT':
         return GitPullRequestDraftIcon;
       case 'CLOSED':
@@ -90,8 +83,8 @@ class PullRequestHandler extends DefaultHandler {
     }
   }
 
-  iconColor(subject: GitifySubject): IconColor {
-    switch (subject.state as GitifyPullRequestState) {
+  iconColor(notification: GitifyNotification): IconColor {
+    switch (notification.subject.state as GitifyPullRequestState) {
       case 'OPEN':
         return IconColor.GREEN;
       case 'CLOSED':
@@ -101,12 +94,12 @@ class PullRequestHandler extends DefaultHandler {
       case 'MERGED':
         return IconColor.PURPLE;
       default:
-        return defaultHandler.iconColor(subject);
+        return defaultHandler.iconColor(notification);
     }
   }
 
   defaultUrl(notification: GitifyNotification): Link {
-    const url = new URL(notification.repository.htmlUrl);
+    const url = new URL(defaultHandler.defaultUrl(notification));
     url.pathname += '/pulls';
     return url.href as Link;
   }
@@ -114,25 +107,16 @@ class PullRequestHandler extends DefaultHandler {
 
 export const pullRequestHandler = new PullRequestHandler();
 
-type ReviewWithAuthor = PullRequestReviewFieldsFragment & {
-  author: NonNullable<PullRequestReviewFieldsFragment['author']>;
-};
-
 export function getLatestReviewForReviewers(
   reviews: PullRequestReviewFieldsFragment[],
-): GitifyPullRequestReview[] | undefined {
-  // Filter reviews that have an author
-  const validReviews = reviews.filter(
-    (r): r is ReviewWithAuthor => r.author != null,
-  );
-
-  if (!validReviews.length) {
-    return undefined;
+): GitifyPullRequestReview[] {
+  if (!reviews.length) {
+    return null;
   }
 
   // Find the most recent review for each reviewer
-  const latestReviews: ReviewWithAuthor[] = [];
-  const sortedReviews = validReviews.toReversed();
+  const latestReviews: PullRequestReviewFieldsFragment[] = [];
+  const sortedReviews = reviews.toReversed();
   for (const prReview of sortedReviews) {
     const reviewerFound = latestReviews.find(
       (review) => review.author.login === prReview.author.login,

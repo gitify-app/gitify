@@ -1,0 +1,39 @@
+query FetchMergedDetailsTemplate(
+  # Arguments that will be duplicated per notification.  Identified by the suffix `INDEX`
+  $ownerINDEX: String!
+  $nameINDEX: String!
+  $numberINDEX: Int!
+  $isDiscussionNotificationINDEX: Boolean!
+  $isIssueNotificationINDEX: Boolean!
+  $isPullRequestNotificationINDEX: Boolean!
+  # Arguments that are shared/common for the query
+  $lastComments: Int
+  $lastThreadedComments: Int
+  $lastReplies: Int
+  $lastReviews: Int
+  $firstLabels: Int
+  $firstClosingIssues: Int
+  $includeIsAnswered: Boolean!
+) {
+  ...MergedDetailsQueryTemplate
+}
+
+fragment MergedDetailsQueryTemplate on Query {
+  repository(owner: $ownerINDEX, name: $nameINDEX) {
+    discussion(number: $numberINDEX)
+      @include(if: $isDiscussionNotificationINDEX)
+    {
+      ...DiscussionDetails
+    }
+
+    issue(number: $numberINDEX) @include(if: $isIssueNotificationINDEX) {
+      ...IssueDetails
+    }
+
+    pullRequest(number: $numberINDEX)
+      @include(if: $isPullRequestNotificationINDEX)
+    {
+      ...PullRequestDetails
+    }
+  }
+}

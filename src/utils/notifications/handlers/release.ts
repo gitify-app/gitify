@@ -14,7 +14,7 @@ import type {
 } from '../../../types';
 import { getRelease } from '../../api/client';
 import { isStateFilteredOut } from '../filters/filter';
-import { DefaultHandler } from './default';
+import { DefaultHandler, defaultHandler } from './default';
 import { getNotificationAuthor } from './utils';
 
 class ReleaseHandler extends DefaultHandler {
@@ -57,12 +57,12 @@ class ReleaseHandler extends DefaultHandler {
     };
   }
 
-  iconType(_subject: GitifySubject): FC<OcticonProps> | null {
+  iconType(_notification: GitifyNotification): FC<OcticonProps> {
     return TagIcon;
   }
 
   defaultUrl(notification: GitifyNotification): Link {
-    const url = new URL(notification.repository.htmlUrl);
+    const url = new URL(defaultHandler.defaultUrl(notification));
     url.pathname += '/releases';
     return url.href as Link;
   }

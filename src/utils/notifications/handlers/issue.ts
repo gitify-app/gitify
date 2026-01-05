@@ -17,30 +17,31 @@ import type {
 } from '../../../types';
 import { IconColor } from '../../../types';
 import { fetchIssueByNumber } from '../../api/client';
+import type { IssueDetailsFragment } from '../../api/graphql/generated/graphql';
 import { DefaultHandler, defaultHandler } from './default';
 import { getNotificationAuthor } from './utils';
 
 class IssueHandler extends DefaultHandler {
   readonly type = 'Issue';
 
+  readonly supportsMergedQueryEnrichment = true;
+
   async enrich(
     notification: GitifyNotification,
     _settings: SettingsState,
-  ): Promise<Partial<GitifySubject> | null> {
-    const response = await fetchIssueByNumber(notification);
-    const issue = response.data?.repository?.issue;
-
-    if (!issue) {
-      return null;
-    }
+    fetchedData?: IssueDetailsFragment,
+  ): Promise<Partial<GitifySubject>> {
+    const issue =
+      fetchedData ??
+      (await fetchIssueByNumber(notification)).data.repository?.issue;
 
     const issueState = issue.stateReason ?? issue.state;
 
     const issueComment = issue.comments?.nodes?.[0];
 
     const issueUser = getNotificationAuthor([
-      issueComment?.author ?? undefined,
-      issue.author ?? undefined,
+      issueComment?.author,
+      issue.author,
     ]);
 
     return {
@@ -48,16 +49,14 @@ class IssueHandler extends DefaultHandler {
       state: issueState,
       user: issueUser,
       comments: issue.comments.totalCount,
-      labels: issue.labels?.nodes
-        ?.filter((label): label is NonNullable<typeof label> => label != null)
-        .map((label) => label.name),
+      labels: issue.labels?.nodes.map((label) => label.name) ?? [],
       milestone: issue.milestone ?? undefined,
-      htmlUrl: (issueComment?.url ?? issue.url) as Link,
+      htmlUrl: issueComment?.url ?? issue.url,
     };
   }
 
-  iconType(subject: GitifySubject): FC<OcticonProps> | null {
-    switch (subject.state as GitifyIssueState) {
+  iconType(notification: GitifyNotification): FC<OcticonProps> {
+    switch (notification.subject.state as GitifyIssueState) {
       case 'CLOSED':
       case 'COMPLETED':
         return IssueClosedIcon;
@@ -71,8 +70,8 @@ class IssueHandler extends DefaultHandler {
     }
   }
 
-  iconColor(subject: GitifySubject): IconColor {
-    switch (subject.state as GitifyIssueState) {
+  iconColor(notification: GitifyNotification): IconColor {
+    switch (notification.subject.state as GitifyIssueState) {
       case 'OPEN':
       case 'REOPENED':
         return IconColor.GREEN;
@@ -81,12 +80,12 @@ class IssueHandler extends DefaultHandler {
       case 'COMPLETED':
         return IconColor.PURPLE;
       default:
-        return defaultHandler.iconColor(subject);
+        return defaultHandler.iconColor(notification);
     }
   }
 
   defaultUrl(notification: GitifyNotification): Link {
-    const url = new URL(notification.repository.htmlUrl);
+    const url = new URL(defaultHandler.defaultUrl(notification));
     url.pathname += '/issues';
     return url.href as Link;
   }

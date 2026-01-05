@@ -33,6 +33,10 @@ export default defineConfig({
         __dirname,
         './src/__mocks__/@tauri-apps/plugin-global-shortcut.ts',
       ),
+      '@tauri-apps/plugin-http': path.resolve(
+        __dirname,
+        './src/__mocks__/@tauri-apps/plugin-http.ts',
+      ),
     },
   },
   test: {

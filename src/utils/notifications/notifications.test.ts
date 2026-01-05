@@ -1,3 +1,15 @@
+import { vi } from 'vitest';
+
+// Mock isTauriEnvironment to return false so axios is used instead of Tauri fetch
+vi.mock('../environment', () => ({
+  isTauriEnvironment: () => false,
+}));
+
+// Mock decryptValue since isTauriEnvironment is false
+vi.mock('../comms', () => ({
+  decryptValue: vi.fn().mockResolvedValue('decrypted'),
+}));
+
 import axios from 'axios';
 import nock from 'nock';
 
@@ -13,6 +25,7 @@ import {
 import { mockSettings } from '../../__mocks__/state-mocks';
 import {
   type AccountNotifications,
+  type GitifyNotification,
   type GitifyRepository,
   GroupBy,
   type Link,
@@ -21,20 +34,11 @@ import {
 import * as logger from '../../utils/logger';
 import {
   enrichNotification,
+  enrichNotifications,
   getNotificationCount,
   getUnreadNotificationCount,
   stabilizeNotificationsOrder,
 } from './notifications';
-
-// Mock isTauriEnvironment to return false so axios is used instead of Tauri fetch
-vi.mock('../environment', () => ({
-  isTauriEnvironment: () => false,
-}));
-
-// Mock decryptValue since isTauriEnvironment is false
-vi.mock('../comms', () => ({
-  decryptValue: vi.fn().mockResolvedValue('decrypted'),
-}));
 
 describe('renderer/utils/notifications/notifications.ts', () => {
   beforeEach(() => {
@@ -149,6 +153,53 @@ describe('renderer/utils/notifications/notifications.ts', () => {
       expect(
         mockAccounts.flatMap((acc) => acc.notifications).map((n) => n.order),
       ).toEqual([0, 2, 1, 3, 5, 4]);
+    });
+  });
+
+  describe('enrichNotifications', () => {
+    it('should skip enrichment when detailedNotifications is false', async () => {
+      const notification = createPartialMockNotification({
+        title: 'Issue #1',
+        type: 'Issue',
+        url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1' as Link,
+      }) as GitifyNotification;
+      const settings: SettingsState = {
+        ...mockSettings,
+        detailedNotifications: false,
+      };
+
+      const result = await enrichNotifications([notification], settings);
+
+      expect(result).toEqual([notification]);
+    });
+
+    it('should return notifications when all types do not support merge query', async () => {
+      // CheckSuite types don't support merge query and have no URL
+      const notification = createPartialMockNotification({
+        title: 'CI workflow run',
+        type: 'CheckSuite',
+        url: null,
+      }) as GitifyNotification;
+      const settings: SettingsState = {
+        ...mockSettings,
+        detailedNotifications: true,
+      };
+
+      const result = await enrichNotifications([notification], settings);
+
+      expect(result).toHaveLength(1);
+      expect(result[0].subject.title).toBe('CI workflow run');
+    });
+
+    it('should handle empty notifications array', async () => {
+      const settings: SettingsState = {
+        ...mockSettings,
+        detailedNotifications: true,
+      };
+
+      const result = await enrichNotifications([], settings);
+
+      expect(result).toEqual([]);
     });
   });
 });

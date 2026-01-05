@@ -22,6 +22,7 @@ import { fetchDiscussionByNumber } from '../../api/client';
 import type {
   CommentFieldsFragment,
   DiscussionCommentFieldsFragment,
+  DiscussionDetailsFragment,
 } from '../../api/graphql/generated/graphql';
 import { DefaultHandler, defaultHandler } from './default';
 import { getNotificationAuthor } from './utils';
@@ -29,16 +30,16 @@ import { getNotificationAuthor } from './utils';
 class DiscussionHandler extends DefaultHandler {
   readonly type = 'Discussion';
 
+  readonly supportsMergedQueryEnrichment = true;
+
   async enrich(
     notification: GitifyNotification,
     _settings: SettingsState,
-  ): Promise<Partial<GitifySubject> | null> {
-    const response = await fetchDiscussionByNumber(notification);
-    const discussion = response.data?.repository?.discussion;
-
-    if (!discussion) {
-      return null;
-    }
+    fetchedData?: DiscussionDetailsFragment,
+  ): Promise<Partial<GitifySubject>> {
+    const discussion =
+      fetchedData ??
+      (await fetchDiscussionByNumber(notification)).data.repository?.discussion;
 
     let discussionState: GitifyDiscussionState = 'OPEN';
 
@@ -50,33 +51,26 @@ class DiscussionHandler extends DefaultHandler {
       discussionState = discussion.stateReason;
     }
 
-    const commentNodes = discussion.comments?.nodes?.filter(
-      (node): node is NonNullable<typeof node> => node != null,
-    );
-
     const latestDiscussionComment = getClosestDiscussionCommentOrReply(
       notification,
-      commentNodes ?? [],
+      discussion.comments.nodes,
     );
 
     return {
       number: discussion.number,
       state: discussionState,
       user: getNotificationAuthor([
-        latestDiscussionComment?.author ?? undefined,
-        discussion.author ?? undefined,
+        latestDiscussionComment?.author,
+        discussion.author,
       ]),
       comments: discussion.comments.totalCount,
-      labels:
-        discussion.labels?.nodes
-          ?.filter((label): label is NonNullable<typeof label> => label != null)
-          .map((label) => label.name) ?? [],
-      htmlUrl: (latestDiscussionComment?.url ?? discussion.url) as Link,
+      labels: discussion.labels?.nodes.map((label) => label.name) ?? [],
+      htmlUrl: latestDiscussionComment?.url ?? discussion.url,
     };
   }
 
-  iconType(subject: GitifySubject): FC<OcticonProps> | null {
-    switch (subject.state as GitifyDiscussionState) {
+  iconType(notification: GitifyNotification): FC<OcticonProps> {
+    switch (notification.subject.state as GitifyDiscussionState) {
       case 'DUPLICATE':
         return DiscussionDuplicateIcon;
       case 'OUTDATED':
@@ -88,19 +82,19 @@ class DiscussionHandler extends DefaultHandler {
     }
   }
 
-  iconColor(subject: GitifySubject): IconColor {
-    switch (subject.state) {
+  iconColor(notification: GitifyNotification): IconColor {
+    switch (notification.subject.state) {
       case 'ANSWERED':
         return IconColor.GREEN;
       case 'RESOLVED':
         return IconColor.PURPLE;
       default:
-        return defaultHandler.iconColor(subject);
+        return defaultHandler.iconColor(notification);
     }
   }
 
   defaultUrl(notification: GitifyNotification): Link {
-    const url = new URL(notification.repository.htmlUrl);
+    const url = new URL(defaultHandler.defaultUrl(notification));
     url.pathname += '/discussions';
     return url.href as Link;
   }
@@ -118,17 +112,10 @@ export function getClosestDiscussionCommentOrReply(
 
   const targetTimestamp = notification.updatedAt;
 
-  const allCommentsAndReplies = comments.flatMap((comment) => {
-    const replyNodes =
-      comment.replies?.nodes?.filter(
-        (node): node is NonNullable<typeof node> => node != null,
-      ) ?? [];
-    return [...replyNodes, comment];
-  });
-
-  if (allCommentsAndReplies.length === 0) {
-    return null;
-  }
+  const allCommentsAndReplies = comments.flatMap((comment) => [
+    ...comment.replies.nodes,
+    comment,
+  ]);
 
   // Find the closest match using the target timestamp
   const closestComment = allCommentsAndReplies.reduce((prev, curr) => {

@@ -39,7 +39,7 @@ class WorkflowRunHandler extends DefaultHandler {
     return null;
   }
 
-  iconType(_subject: GitifySubject): FC<OcticonProps> | null {
+  iconType(_notification: GitifyNotification): FC<OcticonProps> {
     return RocketIcon;
   }
 

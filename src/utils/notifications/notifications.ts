@@ -5,8 +5,12 @@ import type {
   GitifySubject,
   SettingsState,
 } from '../../types';
-import { listNotificationsForAuthenticatedUser } from '../api/client';
+import {
+  fetchNotificationDetailsForList,
+  listNotificationsForAuthenticatedUser,
+} from '../api/client';
 import { determineFailureType } from '../api/errors';
+import type { FetchMergedDetailsTemplateQuery } from '../api/graphql/generated/graphql';
 import { transformNotification } from '../api/transform';
 import { rendererLogError, rendererLogWarn } from '../logger';
 import {
@@ -48,16 +52,12 @@ export function getUnreadNotificationCount(
 }
 
 function getNotifications(state: GitifyState) {
-  if (!state.auth || !state.settings) {
-    return [];
-  }
-
   return state.auth.accounts.map((account) => {
     return {
       account,
       notifications: listNotificationsForAuthenticatedUser(
         account,
-        state.settings as NonNullable<typeof state.settings>,
+        state.settings,
       ),
     };
   });
@@ -72,12 +72,6 @@ function getNotifications(state: GitifyState) {
 export async function getAllNotifications(
   state: GitifyState,
 ): Promise<AccountNotifications[]> {
-  if (!state.settings) {
-    return [];
-  }
-
-  const settings = state.settings;
-
   const accountNotifications: AccountNotifications[] = await Promise.all(
     getNotifications(state)
       .filter((response) => !!response)
@@ -89,11 +83,20 @@ export async function getAllNotifications(
             transformNotification(raw, accountNotifications.account),
           );
 
-          notifications = filterBaseNotifications(notifications, settings);
+          notifications = filterBaseNotifications(
+            notifications,
+            state.settings,
+          );
 
-          notifications = await enrichNotifications(notifications, settings);
+          notifications = await enrichNotifications(
+            notifications,
+            state.settings,
+          );
 
-          notifications = filterDetailedNotifications(notifications, settings);
+          notifications = filterDetailedNotifications(
+            notifications,
+            state.settings,
+          );
 
           return {
             account: accountNotifications.account,
@@ -104,24 +107,20 @@ export async function getAllNotifications(
           rendererLogError(
             'getAllNotifications',
             'error occurred while fetching account notifications',
-            err as Error,
+            err,
           );
 
           return {
             account: accountNotifications.account,
             notifications: [],
-            error: determineFailureType(
-              err as import('axios').AxiosError<
-                import('../../typesGitHub').GitHubRESTError
-              >,
-            ),
+            error: determineFailureType(err),
           };
         }
       }),
   );
 
   // Set the order property for the notifications
-  stabilizeNotificationsOrder(accountNotifications, settings);
+  stabilizeNotificationsOrder(accountNotifications, state.settings);
 
   return accountNotifications;
 }
@@ -134,12 +133,28 @@ export async function enrichNotifications(
     return notifications;
   }
 
+  // Build and fetch merged details via client; returns per-notification results
+  let mergedResults: Map<
+    GitifyNotification,
+    FetchMergedDetailsTemplateQuery['repository']
+  > = new Map();
+  try {
+    mergedResults = await fetchNotificationDetailsForList(notifications);
+  } catch (err) {
+    rendererLogError(
+      'enrichNotifications',
+      'Failed to fetch merged notification details',
+      err,
+    );
+  }
+
   const enrichedNotifications = await Promise.all(
     notifications.map(async (notification: GitifyNotification) => {
-      return enrichNotification(notification, settings);
+      const fragment = mergedResults.get(notification);
+
+      return enrichNotification(notification, settings, fragment);
     }),
   );
-
   return enrichedNotifications;
 }
 
@@ -153,20 +168,22 @@ export async function enrichNotifications(
 export async function enrichNotification(
   notification: GitifyNotification,
   settings: SettingsState,
+  fetchedData?: unknown,
 ): Promise<GitifyNotification> {
   let additionalSubjectDetails: Partial<GitifySubject> = {};
 
   try {
     const handler = createNotificationHandler(notification);
-    const enriched = await handler.enrich(notification, settings);
-    if (enriched) {
-      additionalSubjectDetails = enriched;
-    }
+    additionalSubjectDetails = await handler.enrich(
+      notification,
+      settings,
+      fetchedData,
+    );
   } catch (err) {
     rendererLogError(
       'enrichNotification',
       'failed to enrich notification details for',
-      err as Error,
+      err,
       notification,
     );
 

@@ -12,8 +12,8 @@ importers:
         specifier: ^3.2.0
         version: 3.2.0(graphql@16.12.0)
       '@primer/css':
-        specifier: 22.0.2
-        version: 22.0.2(@primer/primitives@11.3.2)
+        specifier: 22.1.0
+        version: 22.1.0(@primer/primitives@11.3.2)
       '@primer/octicons-react':
         specifier: 19.21.1
         version: 19.21.1(react@19.2.3)
@@ -1130,8 +1130,8 @@ packages:
   '@primer/behaviors@1.9.0':
     resolution: {integrity: sha512-MIVSZlQGJzas44DZDwo4Dqiev289K918oDl/AcA+zTpQAjp+PrJ0LUxEnrSOapyivLYpRpmSCeF0XPh7NgXpCA==}
 
-  '@primer/css@22.0.2':
-    resolution: {integrity: sha512-FfXd1ga05oewKjDRi9cPmy7BSnb/6QOjTIxAtDj94Hoyk+qJxHhgvhbcnZwBfL3WKP6HeUT3PnsT9k+43Bmg3Q==}
+  '@primer/css@22.1.0':
+    resolution: {integrity: sha512-Nwg9QaRiBeu0BU6h+Su0X07daihX1obiuqGRG8y+SexOnvWhN2J5n4OFAvGfQsit07Y7Q6gGoK+yVU5tb8CtDA==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
       '@primer/primitives': 10.x || 11.x
@@ -3101,6 +3101,7 @@ packages:
   whatwg-encoding@3.1.1:
     resolution: {integrity: sha512-6qN4hJdMwfYBtE3YBTTHhoeuUrDBPZmbQaxWAqSALV/MeEnR5z1xd8UKud2RAkFoPkmB+hli1TZSnyi84xz1vQ==}
     engines: {node: '>=18'}
+    deprecated: Use @exodus/bytes instead for a more spec-conformant and faster implementation
 
   whatwg-mimetype@4.0.0:
     resolution: {integrity: sha512-QaKxh0eNIi2mE9p2vEdzfagOKHCcj1pJ56EEHGQOVxp8r9/iszLUUV7v89x9O1p/T+NlTM5W7jW6+cz4Fq1YVg==}
@@ -4274,7 +4275,7 @@ snapshots:
 
   '@primer/behaviors@1.9.0': {}
 
-  '@primer/css@22.0.2(@primer/primitives@11.3.2)':
+  '@primer/css@22.1.0(@primer/primitives@11.3.2)':
     dependencies:
       '@primer/primitives': 11.3.2
 

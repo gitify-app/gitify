@@ -197,6 +197,35 @@ export async function performGraphQLRequest<TResult, TVariables>(
 }
 
 /**
+ * Perform a GraphQL API request using a raw query string instead of a TypedDocumentString.
+ *
+ * Useful for dynamically composed queries (e.g., merged queries built at runtime).
+ */
+export async function performGraphQLRequestString<TResult>(
+  url: Link,
+  token: Token,
+  query: string,
+  variables?: Record<string, unknown>,
+): Promise<ExecutionResultWithHeaders<TResult>> {
+  const headers = await getHeaders(url, token);
+
+  return axios({
+    method: 'POST',
+    url,
+    data: {
+      query,
+      variables,
+    },
+    headers: headers,
+  }).then((response) => {
+    return {
+      ...response.data,
+      headers: response.headers,
+    } as ExecutionResultWithHeaders<TResult>;
+  });
+}
+
+/**
  * Return true if the request should be made with no-cache
  *
  * @param url

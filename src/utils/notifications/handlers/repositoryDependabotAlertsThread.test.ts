@@ -1,15 +1,16 @@
-import { createMockSubject } from '../../../__mocks__/notifications-mocks';
+import { createPartialMockNotification } from '../../../__mocks__/notifications-mocks';
 import type { GitifyNotification, Link } from '../../../types';
 import { repositoryDependabotAlertsThreadHandler } from './repositoryDependabotAlertsThread';
 
 describe('renderer/utils/notifications/handlers/repositoryDependabotAlertsThread.ts', () => {
   it('iconType', () => {
+    const mockNotification = createPartialMockNotification({
+      type: 'RepositoryDependabotAlertsThread',
+    });
+
     expect(
-      repositoryDependabotAlertsThreadHandler.iconType(
-        createMockSubject({
-          type: 'RepositoryDependabotAlertsThread',
-        }),
-      )?.displayName,
+      repositoryDependabotAlertsThreadHandler.iconType(mockNotification)
+        .displayName,
     ).toBe('AlertIcon');
   });
 

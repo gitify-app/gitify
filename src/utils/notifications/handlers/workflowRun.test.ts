@@ -1,7 +1,9 @@
-import {
-  createMockSubject,
-  createPartialMockNotification,
-} from '../../../__mocks__/notifications-mocks';
+import { vi } from 'vitest';
+
+// Mock to use axios instead of Tauri HTTP plugin
+vi.mock('../../environment', () => ({ isTauriEnvironment: () => false }));
+
+import { createPartialMockNotification } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
 import type { GitifyNotification, Link } from '../../../types';
 import { getWorkflowRunAttributes, workflowRunHandler } from './workflowRun';
@@ -39,7 +41,7 @@ describe('renderer/utils/notifications/handlers/workflowRun.ts', () => {
         mockSettings,
       );
 
-      // Returns null when state cannot be determined
+      // Returns empty object when state cannot be determined
       expect(result).toBeNull();
     });
 
@@ -54,19 +56,19 @@ describe('renderer/utils/notifications/handlers/workflowRun.ts', () => {
         mockSettings,
       );
 
-      // Returns null when title cannot be parsed
+      // Returns empty object when title cannot be parsed
       expect(result).toBeNull();
     });
   });
 
   it('iconType', () => {
-    expect(
-      workflowRunHandler.iconType(
-        createMockSubject({
-          type: 'WorkflowRun',
-        }),
-      )?.displayName,
-    ).toBe('RocketIcon');
+    const mockNotification = createPartialMockNotification({
+      type: 'WorkflowRun',
+    });
+
+    expect(workflowRunHandler.iconType(mockNotification).displayName).toBe(
+      'RocketIcon',
+    );
   });
 
   it('defaultUrl', () => {

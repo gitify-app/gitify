@@ -2,7 +2,7 @@
   "name": "gitify-tauri",
   "private": true,
   "version": "0.1.0",
-  "packageManager": "pnpm@10.26.2",
+  "packageManager": "pnpm@10.27.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "@graphql-typed-document-node/core": "^3.2.0",
-    "@primer/css": "22.0.2",
+    "@primer/css": "22.1.0",
     "@primer/octicons-react": "19.21.1",
     "@primer/primitives": "11.3.2",
     "@primer/react": "38.6.2",
@@ -80,6 +80,13 @@
     "typescript": "~5.8.3",
     "vite": "^7.0.4",
     "vitest": "^4.0.15"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@biomejs/biome",
+      "@parcel/watcher",
+      "@tailwindcss/oxide"
+    ]
   },
   "lint-staged": {
     "*.{ts,tsx,json,md}": "biome check --write --no-errors-on-unmatched"

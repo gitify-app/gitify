@@ -1,18 +1,9 @@
 import { vi } from 'vitest';
 
-// Mock the Tauri HTTP plugin fetch function
-export const fetch = vi
-  .fn()
-  .mockImplementation(async (_url: string, _options?: RequestInit) => {
-    // Return a mock Response object
-    return {
-      ok: true,
-      status: 200,
-      statusText: 'OK',
-      headers: new Headers({
-        'content-type': 'application/json',
-      }),
-      json: vi.fn().mockResolvedValue({}),
-      text: vi.fn().mockResolvedValue(''),
-    };
-  });
+// Mock fetch that throws an error to indicate it shouldn't be called in tests
+// Tests should mock axios instead since the code checks isTauriEnvironment()
+export const fetch = vi.fn().mockRejectedValue(
+  new Error(
+    'Tauri HTTP plugin should not be called in tests - mock axios instead',
+  ),
+);

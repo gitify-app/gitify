@@ -48,8 +48,8 @@ class CheckSuiteHandler extends DefaultHandler {
     return null;
   }
 
-  iconType(subject: GitifySubject): FC<OcticonProps> | null {
-    switch (subject.state as GitifyCheckSuiteStatus) {
+  iconType(notification: GitifyNotification): FC<OcticonProps> {
+    switch (notification.subject.state as GitifyCheckSuiteStatus) {
       case 'CANCELLED':
         return StopIcon;
       case 'FAILURE':
@@ -63,14 +63,14 @@ class CheckSuiteHandler extends DefaultHandler {
     }
   }
 
-  iconColor(subject: GitifySubject): IconColor {
-    switch (subject.state as GitifyCheckSuiteStatus) {
+  iconColor(notification: GitifyNotification): IconColor {
+    switch (notification.subject.state as GitifyCheckSuiteStatus) {
       case 'SUCCESS':
         return IconColor.GREEN;
       case 'FAILURE':
         return IconColor.RED;
       default:
-        return defaultHandler.iconColor(subject);
+        return defaultHandler.iconColor(notification);
     }
   }
 

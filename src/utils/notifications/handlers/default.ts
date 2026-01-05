@@ -17,6 +17,8 @@ import { formatForDisplay } from './utils';
 export class DefaultHandler implements NotificationTypeHandler {
   type?: SubjectType;
 
+  supportsMergedQueryEnrichment?: boolean = false;
+
   async enrich(
     _notification: GitifyNotification,
     _settings: SettingsState,
@@ -24,11 +26,11 @@ export class DefaultHandler implements NotificationTypeHandler {
     return null;
   }
 
-  iconType(_subject: GitifySubject): FC<OcticonProps> | null {
+  iconType(_notification: GitifyNotification): FC<OcticonProps> {
     return QuestionIcon;
   }
 
-  iconColor(_subject: GitifySubject): IconColor {
+  iconColor(_notification: GitifyNotification): IconColor {
     return IconColor.GRAY;
   }
 

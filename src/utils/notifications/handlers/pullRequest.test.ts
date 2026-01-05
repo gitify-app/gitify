@@ -1,13 +1,16 @@
+import { vi } from 'vitest';
+
+// Mock to use axios instead of Tauri HTTP plugin
+vi.mock('../../environment', () => ({ isTauriEnvironment: () => false }));
+
 import axios from 'axios';
 import nock from 'nock';
 
-import {
-  createMockSubject,
-  createPartialMockNotification,
-} from '../../../__mocks__/notifications-mocks';
+import { createPartialMockNotification } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
+import { createMockGraphQLAuthor } from '../../../__mocks__/user-mocks';
+import type { GitifyNotification } from '../../../types';
 import {
-  type GitifyNotification,
   type GitifyPullRequestState,
   type GitifySubject,
   IconColor,
@@ -20,27 +23,8 @@ import type {
 } from '../../api/graphql/generated/graphql';
 import { getLatestReviewForReviewers, pullRequestHandler } from './pullRequest';
 
-// Mock isTauriEnvironment to return false so axios is used instead of Tauri fetch
-vi.mock('../../environment', () => ({
-  isTauriEnvironment: () => false,
-}));
-
-// Mock decryptValue since isTauriEnvironment is false
-vi.mock('../../comms', () => ({
-  decryptValue: vi.fn().mockResolvedValue('decrypted'),
-}));
-
-// GraphQL-compatible user objects (camelCase)
-const createGraphQLUser = (login: string) => ({
-  __typename: 'User' as const,
-  login,
-  avatarUrl: 'https://avatars.githubusercontent.com/u/583231?v=4' as Link,
-  htmlUrl: `https://github.com/${login}` as Link,
-  type: 'User' as const,
-});
-
-const mockAuthorGQL = createGraphQLUser('some-author');
-const mockCommenterGQL = createGraphQLUser('some-commenter');
+const mockAuthor = createMockGraphQLAuthor('some-author');
+const mockCommenter = createMockGraphQLAuthor('some-commenter');
 
 describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
   let mockNotification: GitifyNotification;
@@ -52,6 +36,14 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
       url: 'https://api.github.com/repos/gitify-app/notifications-test/pulls/1' as Link,
       latestCommentUrl:
         'https://api.github.com/repos/gitify-app/notifications-test/issues/comments/302888448' as Link,
+    });
+  });
+
+  describe('mergeQueryConfig', () => {
+    describe('supportsMergedQueryEnrichment', () => {
+      it('should support merge query', () => {
+        expect(pullRequestHandler.supportsMergedQueryEnrichment).toBeTruthy();
+      });
     });
   });
 
@@ -84,19 +76,18 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         number: 123,
         state: 'CLOSED',
         user: {
-          login: mockAuthorGQL.login,
-          htmlUrl: mockAuthorGQL.htmlUrl,
-          avatarUrl: mockAuthorGQL.avatarUrl,
-          type: mockAuthorGQL.type,
+          login: mockAuthor.login,
+          avatarUrl: mockAuthor.avatarUrl,
+          htmlUrl: mockAuthor.htmlUrl,
+          type: mockAuthor.type,
         },
-        reviews: undefined,
+        reviews: null,
         labels: [],
         linkedIssues: [],
         comments: 0,
-        milestone: undefined,
-        htmlUrl:
-          'https://github.com/gitify-app/notifications-test/pulls/123' as Link,
-      } as unknown as GitifySubject);
+        milestone: null,
+        htmlUrl: 'https://github.com/gitify-app/notifications-test/pulls/123',
+      } as Partial<GitifySubject>);
     });
 
     it('draft pull request state', async () => {
@@ -124,19 +115,18 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         number: 123,
         state: 'DRAFT',
         user: {
-          login: mockAuthorGQL.login,
-          htmlUrl: mockAuthorGQL.htmlUrl,
-          avatarUrl: mockAuthorGQL.avatarUrl,
-          type: mockAuthorGQL.type,
+          login: mockAuthor.login,
+          avatarUrl: mockAuthor.avatarUrl,
+          htmlUrl: mockAuthor.htmlUrl,
+          type: mockAuthor.type,
         },
-        reviews: undefined,
+        reviews: null,
         labels: [],
         linkedIssues: [],
         comments: 0,
-        milestone: undefined,
-        htmlUrl:
-          'https://github.com/gitify-app/notifications-test/pulls/123' as Link,
-      } as unknown as GitifySubject);
+        milestone: null,
+        htmlUrl: 'https://github.com/gitify-app/notifications-test/pulls/123',
+      } as Partial<GitifySubject>);
     });
 
     it('merge queue pull request state', async () => {
@@ -164,19 +154,18 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         number: 123,
         state: 'MERGE_QUEUE',
         user: {
-          login: mockAuthorGQL.login,
-          htmlUrl: mockAuthorGQL.htmlUrl,
-          avatarUrl: mockAuthorGQL.avatarUrl,
-          type: mockAuthorGQL.type,
+          login: mockAuthor.login,
+          avatarUrl: mockAuthor.avatarUrl,
+          htmlUrl: mockAuthor.htmlUrl,
+          type: mockAuthor.type,
         },
-        reviews: undefined,
+        reviews: null,
         labels: [],
         linkedIssues: [],
         comments: 0,
-        milestone: undefined,
-        htmlUrl:
-          'https://github.com/gitify-app/notifications-test/pulls/123' as Link,
-      } as unknown as GitifySubject);
+        milestone: null,
+        htmlUrl: 'https://github.com/gitify-app/notifications-test/pulls/123',
+      } as Partial<GitifySubject>);
     });
 
     it('merged pull request state', async () => {
@@ -204,19 +193,18 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         number: 123,
         state: 'MERGED',
         user: {
-          login: mockAuthorGQL.login,
-          htmlUrl: mockAuthorGQL.htmlUrl,
-          avatarUrl: mockAuthorGQL.avatarUrl,
-          type: mockAuthorGQL.type,
+          login: mockAuthor.login,
+          avatarUrl: mockAuthor.avatarUrl,
+          htmlUrl: mockAuthor.htmlUrl,
+          type: mockAuthor.type,
         },
-        reviews: undefined,
+        reviews: null,
         labels: [],
         linkedIssues: [],
         comments: 0,
-        milestone: undefined,
-        htmlUrl:
-          'https://github.com/gitify-app/notifications-test/pulls/123' as Link,
-      } as unknown as GitifySubject);
+        milestone: null,
+        htmlUrl: 'https://github.com/gitify-app/notifications-test/pulls/123',
+      } as Partial<GitifySubject>);
     });
 
     it('with comments', async () => {
@@ -227,7 +215,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         totalCount: 1,
         nodes: [
           {
-            author: mockCommenterGQL,
+            author: mockCommenter,
             url: 'https://github.com/gitify-app/notifications-test/pulls/123#issuecomment-1234',
           },
         ],
@@ -252,19 +240,19 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         number: 123,
         state: 'OPEN',
         user: {
-          login: mockCommenterGQL.login,
-          htmlUrl: mockCommenterGQL.htmlUrl,
-          avatarUrl: mockCommenterGQL.avatarUrl,
-          type: mockCommenterGQL.type,
+          login: mockCommenter.login,
+          avatarUrl: mockCommenter.avatarUrl,
+          htmlUrl: mockCommenter.htmlUrl,
+          type: mockCommenter.type,
         },
-        reviews: undefined,
+        reviews: null,
         labels: [],
         linkedIssues: [],
         comments: 1,
-        milestone: undefined,
+        milestone: null,
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/pulls/123#issuecomment-1234',
-      } as unknown as GitifySubject);
+      } as Partial<GitifySubject>);
     });
 
     it('with labels', async () => {
@@ -298,19 +286,18 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         number: 123,
         state: 'OPEN',
         user: {
-          login: mockAuthorGQL.login,
-          htmlUrl: mockAuthorGQL.htmlUrl,
-          avatarUrl: mockAuthorGQL.avatarUrl,
-          type: mockAuthorGQL.type,
+          login: mockAuthor.login,
+          avatarUrl: mockAuthor.avatarUrl,
+          htmlUrl: mockAuthor.htmlUrl,
+          type: mockAuthor.type,
         },
-        reviews: undefined,
+        reviews: null,
         labels: ['enhancement'],
         linkedIssues: [],
         comments: 0,
-        milestone: undefined,
-        htmlUrl:
-          'https://github.com/gitify-app/notifications-test/pulls/123' as Link,
-      } as unknown as GitifySubject);
+        milestone: null,
+        htmlUrl: 'https://github.com/gitify-app/notifications-test/pulls/123',
+      } as Partial<GitifySubject>);
     });
 
     it('with linked issues', async () => {
@@ -344,19 +331,18 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         number: 123,
         state: 'OPEN',
         user: {
-          login: mockAuthorGQL.login,
-          htmlUrl: mockAuthorGQL.htmlUrl,
-          avatarUrl: mockAuthorGQL.avatarUrl,
-          type: mockAuthorGQL.type,
+          login: mockAuthor.login,
+          avatarUrl: mockAuthor.avatarUrl,
+          htmlUrl: mockAuthor.htmlUrl,
+          type: mockAuthor.type,
         },
-        reviews: undefined,
+        reviews: null,
         labels: [],
         linkedIssues: ['#789'],
         comments: 0,
-        milestone: undefined,
-        htmlUrl:
-          'https://github.com/gitify-app/notifications-test/pulls/123' as Link,
-      } as unknown as GitifySubject);
+        milestone: null,
+        htmlUrl: 'https://github.com/gitify-app/notifications-test/pulls/123',
+      } as Partial<GitifySubject>);
     });
 
     it('with milestone', async () => {
@@ -387,12 +373,12 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         number: 123,
         state: 'OPEN',
         user: {
-          login: mockAuthorGQL.login,
-          htmlUrl: mockAuthorGQL.htmlUrl,
-          avatarUrl: mockAuthorGQL.avatarUrl,
-          type: mockAuthorGQL.type,
+          login: mockAuthor.login,
+          avatarUrl: mockAuthor.avatarUrl,
+          htmlUrl: mockAuthor.htmlUrl,
+          type: mockAuthor.type,
         },
-        reviews: undefined,
+        reviews: null,
         labels: [],
         linkedIssues: [],
         comments: 0,
@@ -400,9 +386,8 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
           state: 'OPEN',
           title: 'Open Milestone',
         },
-        htmlUrl:
-          'https://github.com/gitify-app/notifications-test/pulls/123' as Link,
-      } as unknown as GitifySubject);
+        htmlUrl: 'https://github.com/gitify-app/notifications-test/pulls/123',
+      } as Partial<GitifySubject>);
     });
   });
 
@@ -418,11 +403,14 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
     it.each(
       Object.entries(cases) as Array<[GitifyPullRequestState, IconColor]>,
     )('iconType for pull request with state %s', (pullRequestState, pullRequestIconType) => {
-      expect(
-        pullRequestHandler.iconType(
-          createMockSubject({ type: 'PullRequest', state: pullRequestState }),
-        )?.displayName,
-      ).toBe(pullRequestIconType);
+      const mockNotification = createPartialMockNotification({
+        type: 'PullRequest',
+        state: pullRequestState,
+      });
+
+      expect(pullRequestHandler.iconType(mockNotification).displayName).toBe(
+        pullRequestIconType,
+      );
     });
   });
 
@@ -438,11 +426,14 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
     it.each(
       Object.entries(cases) as Array<[GitifyPullRequestState, IconColor]>,
     )('iconType for pull request with state %s', (pullRequestState, pullRequestIconColor) => {
-      expect(
-        pullRequestHandler.iconColor(
-          createMockSubject({ type: 'PullRequest', state: pullRequestState }),
-        ),
-      ).toBe(pullRequestIconColor);
+      const mockNotification = createPartialMockNotification({
+        type: 'PullRequest',
+        state: pullRequestState,
+      });
+
+      expect(pullRequestHandler.iconColor(mockNotification)).toBe(
+        pullRequestIconColor,
+      );
     });
   });
 
@@ -499,7 +490,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
     it('handles no PR reviews yet', async () => {
       const result = getLatestReviewForReviewers([]);
 
-      expect(result).toBeUndefined();
+      expect(result).toBeNull();
     });
   });
 });
@@ -519,7 +510,7 @@ function mockPullRequestResponseNode(mocks: {
     merged: mocks.merged ?? false,
     isInMergeQueue: mocks.isInMergeQueue ?? false,
     url: 'https://github.com/gitify-app/notifications-test/pulls/123',
-    author: mockAuthorGQL,
+    author: mockAuthor,
     labels: { nodes: [] },
     comments: {
       totalCount: 0,
@@ -529,7 +520,7 @@ function mockPullRequestResponseNode(mocks: {
       totalCount: 0,
       nodes: [],
     },
-    milestone: undefined,
+    milestone: null,
     closingIssuesReferences: {
       nodes: [],
     },

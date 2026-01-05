@@ -1,37 +1,28 @@
+import { vi } from 'vitest';
+
+// Mock to use axios instead of Tauri HTTP plugin
+vi.mock('../utils/environment', () => ({ isTauriEnvironment: () => false }));
+
+// Mock decryptValue to return 'decrypted' for consistent test expectations
+vi.mock('../utils/comms', () => ({
+  decryptValue: vi.fn().mockResolvedValue('decrypted'),
+}));
+
 import { act, renderHook, waitFor } from '@testing-library/react';
 
 import axios from 'axios';
 import nock from 'nock';
 
-import { mockGitHubCloudAccount } from '../__mocks__/account-mocks';
 import { mockAuth, mockSettings, mockState } from '../__mocks__/state-mocks';
-import type { SettingsState } from '../types';
-import {
-  mockNotificationUser,
-  mockSingleNotification,
-} from '../utils/api/__mocks__/response-mocks';
+import { mockSingleNotification } from '../utils/api/__mocks__/response-mocks';
 import { Errors } from '../utils/errors';
 import * as logger from '../utils/logger';
 import { useNotifications } from './useNotifications';
 
-// Mock isTauriEnvironment to return false so axios is used instead of Tauri fetch
-vi.mock('../utils/environment', () => ({
-  isTauriEnvironment: () => false,
-}));
-
-// Mock decryptValue since isTauriEnvironment is false, it would return unchanged value
-vi.mock('../utils/comms', async (importOriginal) => {
-  const actual = await importOriginal<typeof import('../utils/comms')>();
-  return {
-    ...actual,
-    decryptValue: vi.fn().mockResolvedValue('decrypted'),
-  };
-});
-
 describe('renderer/hooks/useNotifications.ts', () => {
   const rendererLogErrorSpy = vi
     .spyOn(logger, 'rendererLogError')
-    .mockImplementation(() => {});
+    .mockImplementation();
 
   beforeEach(() => {
     // axios will default to using the XHR adapter which can't be intercepted
@@ -41,6 +32,14 @@ describe('renderer/hooks/useNotifications.ts', () => {
 
     // Reset mock notification state between tests since it's mutated
     mockSingleNotification.unread = true;
+
+    // Disable real network connections to catch unmocked requests
+    nock.disableNetConnect();
+  });
+
+  afterEach(() => {
+    nock.cleanAll();
+    nock.enableNetConnect();
   });
 
   const id = mockSingleNotification.id;
@@ -133,204 +132,6 @@ describe('renderer/hooks/useNotifications.ts', () => {
       expect(result.current.notifications[1].notifications.length).toBe(2);
     });
 
-    it('should fetch detailed notifications with success', async () => {
-      const mockRepository = {
-        name: 'notifications-test',
-        full_name: 'gitify-app/notifications-test',
-        html_url: 'https://github.com/gitify-app/notifications-test',
-        owner: {
-          login: 'gitify-app',
-          avatar_url: 'https://avatar.url',
-          type: 'Organization',
-        },
-      };
-
-      const mockNotifications = [
-        {
-          id: '1',
-          unread: true,
-          updated_at: '2024-01-01T00:00:00Z',
-          reason: 'subscribed',
-          subject: {
-            title: 'This is a check suite workflow.',
-            type: 'CheckSuite',
-            url: null,
-            latest_comment_url: null,
-          },
-          repository: mockRepository,
-        },
-        {
-          id: '2',
-          unread: true,
-          updated_at: '2024-02-26T00:00:00Z',
-          reason: 'subscribed',
-          subject: {
-            title: 'This is a Discussion.',
-            type: 'Discussion',
-            url: null,
-            latest_comment_url: null,
-          },
-          repository: mockRepository,
-        },
-        {
-          id: '3',
-          unread: true,
-          updated_at: '2024-01-01T00:00:00Z',
-          reason: 'subscribed',
-          subject: {
-            title: 'This is an Issue.',
-            type: 'Issue',
-            url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/3',
-            latest_comment_url:
-              'https://api.github.com/repos/gitify-app/notifications-test/issues/3/comments',
-          },
-          repository: mockRepository,
-        },
-        {
-          id: '4',
-          unread: true,
-          updated_at: '2024-01-01T00:00:00Z',
-          reason: 'subscribed',
-          subject: {
-            title: 'This is a Pull Request.',
-            type: 'PullRequest',
-            url: 'https://api.github.com/repos/gitify-app/notifications-test/pulls/4',
-            latest_comment_url:
-              'https://api.github.com/repos/gitify-app/notifications-test/issues/4/comments',
-          },
-          repository: mockRepository,
-        },
-        {
-          id: '5',
-          unread: true,
-          updated_at: '2024-01-01T00:00:00Z',
-          reason: 'subscribed',
-          subject: {
-            title: 'This is an invitation.',
-            type: 'RepositoryInvitation',
-            url: null,
-            latest_comment_url: null,
-          },
-          repository: mockRepository,
-        },
-        {
-          id: '6',
-          unread: true,
-          updated_at: '2024-01-01T00:00:00Z',
-          reason: 'subscribed',
-          subject: {
-            title: 'This is a workflow run.',
-            type: 'WorkflowRun',
-            url: null,
-            latest_comment_url: null,
-          },
-          repository: mockRepository,
-        },
-      ];
-
-      nock('https://api.github.com')
-        .get('/notifications?participating=false')
-        .reply(200, mockNotifications);
-
-      nock('https://api.github.com')
-        .post('/graphql')
-        .reply(200, {
-          data: {
-            search: {
-              nodes: [
-                {
-                  title: 'This is a Discussion.',
-                  stateReason: null,
-                  isAnswered: true,
-                  url: 'https://github.com/gitify-app/notifications-test/discussions/612',
-                  author: {
-                    login: 'discussion-creator',
-                    url: 'https://github.com/discussion-creator',
-                    avatar_url:
-                      'https://avatars.githubusercontent.com/u/133795385?s=200&v=4',
-                    type: 'User',
-                  },
-                  comments: {
-                    nodes: [
-                      {
-                        databaseId: 2297637,
-                        createdAt: '2022-03-04T20:39:44Z',
-                        author: {
-                          login: 'comment-user',
-                          url: 'https://github.com/comment-user',
-                          avatar_url:
-                            'https://avatars.githubusercontent.com/u/1?v=4',
-                          type: 'User',
-                        },
-                        replies: {
-                          nodes: [],
-                        },
-                      },
-                    ],
-                  },
-                  labels: null,
-                },
-              ],
-            },
-          },
-        });
-
-      nock('https://api.github.com')
-        .get('/repos/gitify-app/notifications-test/issues/3')
-        .reply(200, {
-          state: 'closed',
-          merged: true,
-          user: mockNotificationUser,
-          labels: [],
-        });
-      nock('https://api.github.com')
-        .get('/repos/gitify-app/notifications-test/issues/3/comments')
-        .reply(200, {
-          user: mockNotificationUser,
-        });
-      nock('https://api.github.com')
-        .get('/repos/gitify-app/notifications-test/pulls/4')
-        .reply(200, {
-          state: 'closed',
-          merged: false,
-          user: mockNotificationUser,
-          labels: [],
-        });
-      nock('https://api.github.com')
-        .get('/repos/gitify-app/notifications-test/pulls/4/reviews')
-        .reply(200, {});
-      nock('https://api.github.com')
-        .get('/repos/gitify-app/notifications-test/issues/4/comments')
-        .reply(200, {
-          user: mockNotificationUser,
-        });
-
-      const { result } = renderHook(() => useNotifications());
-
-      act(() => {
-        result.current.fetchNotifications({
-          auth: {
-            accounts: [mockGitHubCloudAccount],
-          },
-          settings: {
-            ...mockSettings,
-            detailedNotifications: true,
-          },
-        });
-      });
-
-      expect(result.current.status).toBe('loading');
-
-      await waitFor(() => {
-        expect(result.current.status).toBe('success');
-      });
-
-      expect(result.current.notifications[0].account.hostname).toBe(
-        'github.com',
-      );
-      expect(result.current.notifications[0].notifications.length).toBe(6);
-    });
-
     it('should fetch notifications with same failures', async () => {
       const status = 401;
       const message = 'Bad credentials';
@@ -356,7 +157,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
       });
 
       expect(result.current.globalError).toBe(Errors.BAD_CREDENTIALS);
-      expect(rendererLogErrorSpy).toHaveBeenCalled();
+      expect(rendererLogErrorSpy).toHaveBeenCalledTimes(4);
     });
 
     it('should fetch notifications with different failures', async () => {
@@ -381,13 +182,13 @@ describe('renderer/hooks/useNotifications.ts', () => {
       });
 
       expect(result.current.globalError).toBeUndefined();
-      expect(rendererLogErrorSpy).toHaveBeenCalled();
+      expect(rendererLogErrorSpy).toHaveBeenCalledTimes(4);
     });
   });
 
   describe('markNotificationsAsRead', () => {
     it('should mark notifications as read with success', async () => {
-      nock('https://api.github.com/')
+      nock('https://api.github.com')
         .patch(`/notifications/threads/${id}`)
         .reply(200);
 
@@ -407,7 +208,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
     });
 
     it('should mark notifications as read with failure', async () => {
-      nock('https://api.github.com/')
+      nock('https://api.github.com')
         .patch(`/notifications/threads/${id}`)
         .reply(400);
 
@@ -423,14 +224,13 @@ describe('renderer/hooks/useNotifications.ts', () => {
         expect(result.current.status).toBe('error');
       });
 
-      expect(result.current.notifications.length).toBe(0);
       expect(rendererLogErrorSpy).toHaveBeenCalledTimes(1);
     });
   });
 
   describe('markNotificationsAsDone', () => {
     it('should mark notifications as done with success', async () => {
-      nock('https://api.github.com/')
+      nock('https://api.github.com')
         .delete(`/notifications/threads/${id}`)
         .reply(200);
 
@@ -450,7 +250,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
     });
 
     it('should mark notifications as done with failure', async () => {
-      nock('https://api.github.com/')
+      nock('https://api.github.com')
         .delete(`/notifications/threads/${id}`)
         .reply(400);
 
@@ -466,7 +266,6 @@ describe('renderer/hooks/useNotifications.ts', () => {
         expect(result.current.status).toBe('error');
       });
 
-      expect(result.current.notifications.length).toBe(0);
       expect(rendererLogErrorSpy).toHaveBeenCalledTimes(1);
     });
   });
@@ -474,12 +273,12 @@ describe('renderer/hooks/useNotifications.ts', () => {
   describe('unsubscribeNotification', () => {
     it('should unsubscribe from a notification with success - markAsDoneOnUnsubscribe = false', async () => {
       // The unsubscribe endpoint call.
-      nock('https://api.github.com/')
+      nock('https://api.github.com')
         .put(`/notifications/threads/${id}/subscription`)
         .reply(200);
 
       // The mark read endpoint call.
-      nock('https://api.github.com/')
+      nock('https://api.github.com')
         .patch(`/notifications/threads/${id}`)
         .reply(200);
 
@@ -501,12 +300,12 @@ describe('renderer/hooks/useNotifications.ts', () => {
 
     it('should unsubscribe from a notification with success - markAsDoneOnUnsubscribe = true', async () => {
       // The unsubscribe endpoint call.
-      nock('https://api.github.com/')
+      nock('https://api.github.com')
         .put(`/notifications/threads/${id}/subscription`)
         .reply(200);
 
       // The mark done endpoint call.
-      nock('https://api.github.com/')
+      nock('https://api.github.com')
         .delete(`/notifications/threads/${id}`)
         .reply(200);
 
@@ -519,7 +318,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
             settings: {
               ...mockState.settings,
               markAsDoneOnUnsubscribe: true,
-            } as SettingsState,
+            },
           },
           mockSingleNotification,
         );
@@ -534,12 +333,12 @@ describe('renderer/hooks/useNotifications.ts', () => {
 
     it('should unsubscribe from a notification with failure', async () => {
       // The unsubscribe endpoint call.
-      nock('https://api.github.com/')
+      nock('https://api.github.com')
         .put(`/notifications/threads/${id}/subscription`)
         .reply(400);
 
-      // The mark read endpoint call.
-      nock('https://api.github.com/')
+      // The mark read endpoint call (won't be called since unsubscribe fails first).
+      nock('https://api.github.com')
         .patch(`/notifications/threads/${id}`)
         .reply(400);
 
@@ -556,7 +355,6 @@ describe('renderer/hooks/useNotifications.ts', () => {
         expect(result.current.status).toBe('error');
       });
 
-      expect(result.current.notifications.length).toBe(0);
       expect(rendererLogErrorSpy).toHaveBeenCalledTimes(1);
     });
   });

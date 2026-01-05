@@ -1,34 +1,21 @@
+import { vi } from 'vitest';
+
+// Mock to use axios instead of Tauri HTTP plugin
+vi.mock('../../environment', () => ({ isTauriEnvironment: () => false }));
+
 import axios from 'axios';
 import nock from 'nock';
 
-import {
-  createMockSubject,
-  createPartialMockNotification,
-} from '../../../__mocks__/notifications-mocks';
+import { createPartialMockNotification } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
-import {
-  createMockNotificationUser,
-  createPartialMockUser,
-} from '../../../__mocks__/user-mocks';
+import { createPartialMockUser } from '../../../__mocks__/user-mocks';
 import type { GitifyNotification, Link } from '../../../types';
 import { commitHandler } from './commit';
-
-// Mock isTauriEnvironment to return false so axios is used instead of Tauri fetch
-vi.mock('../../environment', () => ({
-  isTauriEnvironment: () => false,
-}));
-
-// Mock decryptValue since isTauriEnvironment is false
-vi.mock('../../comms', () => ({
-  decryptValue: vi.fn().mockResolvedValue('decrypted'),
-}));
 
 describe('renderer/utils/notifications/handlers/commit.ts', () => {
   describe('enrich', () => {
     const mockAuthor = createPartialMockUser('some-author');
     const mockCommenter = createPartialMockUser('some-commenter');
-    const mockAuthorGitify = createMockNotificationUser('some-author');
-    const mockCommenterGitify = createMockNotificationUser('some-commenter');
 
     beforeEach(() => {
       // axios will default to using the XHR adapter which can't be intercepted
@@ -60,10 +47,10 @@ describe('renderer/utils/notifications/handlers/commit.ts', () => {
       expect(result).toEqual({
         state: undefined,
         user: {
-          login: mockCommenterGitify.login,
-          htmlUrl: mockCommenterGitify.htmlUrl,
-          avatarUrl: mockCommenterGitify.avatarUrl,
-          type: mockCommenterGitify.type,
+          login: mockCommenter.login,
+          htmlUrl: mockCommenter.html_url,
+          avatarUrl: mockCommenter.avatar_url,
+          type: mockCommenter.type,
         },
       });
     });
@@ -73,7 +60,7 @@ describe('renderer/utils/notifications/handlers/commit.ts', () => {
         title: 'This is a commit with comments',
         type: 'Commit',
         url: 'https://api.github.com/repos/gitify-app/notifications-test/commits/d2a86d80e3d24ea9510d5de6c147e53c30f313a8' as Link,
-        latestCommentUrl: undefined,
+        latestCommentUrl: null,
       });
 
       nock('https://api.github.com')
@@ -87,10 +74,10 @@ describe('renderer/utils/notifications/handlers/commit.ts', () => {
       expect(result).toEqual({
         state: undefined,
         user: {
-          login: mockAuthorGitify.login,
-          htmlUrl: mockAuthorGitify.htmlUrl,
-          avatarUrl: mockAuthorGitify.avatarUrl,
-          type: mockAuthorGitify.type,
+          login: mockAuthor.login,
+          htmlUrl: mockAuthor.html_url,
+          avatarUrl: mockAuthor.avatar_url,
+          type: mockAuthor.type,
         },
       });
     });
@@ -100,7 +87,7 @@ describe('renderer/utils/notifications/handlers/commit.ts', () => {
         title: 'This is a commit with comments',
         type: 'Commit',
         url: 'https://api.github.com/repos/gitify-app/notifications-test/commits/d2a86d80e3d24ea9510d5de6c147e53c30f313a8' as Link,
-        latestCommentUrl: undefined,
+        latestCommentUrl: null,
       });
 
       const result = await commitHandler.enrich(mockNotification, {
@@ -108,15 +95,19 @@ describe('renderer/utils/notifications/handlers/commit.ts', () => {
         filterStates: ['closed'],
       });
 
-      expect(result).toEqual(null);
+      // Returns empty object when filtered (no API call made)
+      expect(result).toBeNull();
     });
   });
 
   it('iconType', () => {
-    expect(
-      commitHandler.iconType(createMockSubject({ type: 'Commit' }))
-        ?.displayName,
-    ).toBe('GitCommitIcon');
+    const mockNotification = createPartialMockNotification({
+      type: 'Commit',
+    });
+
+    expect(commitHandler.iconType(mockNotification).displayName).toBe(
+      'GitCommitIcon',
+    );
   });
 
   it('defaultUrl', () => {

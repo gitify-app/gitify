@@ -35,11 +35,11 @@ class MockIntersectionObserver {
   MockIntersectionObserver;
 
 /**
- * Mock Tauri internals to make isTauriEnvironment() return true in tests
+ * Mock Tauri internals - set to empty object so window.gitify works
+ * but isTauriEnvironment() checks pass.
+ * HTTP tests mock isTauriEnvironment directly to return false for axios/nock.
  */
-(window as unknown as Record<string, unknown>).__TAURI_INTERNALS__ = {
-  invoke: vi.fn(),
-};
+(window as unknown as Record<string, unknown>).__TAURI_INTERNALS__ = {};
 
 /**
  * Gitify context bridge API
