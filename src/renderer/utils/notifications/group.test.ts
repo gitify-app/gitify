@@ -5,10 +5,23 @@ import { GroupBy } from '../../types';
 import {
   getFlattenedNotificationsByRepo,
   groupNotificationsByRepository,
+  isGroupByDate,
   isGroupByRepository,
 } from './group';
 
 describe('renderer/utils/notifications/group.ts', () => {
+  describe('isGroupByDate', () => {
+    it('returns true when groupBy is DATE', () => {
+      const settings = { ...mockSettings, groupBy: GroupBy.DATE };
+      expect(isGroupByDate(settings)).toBe(true);
+    });
+
+    it('returns false when groupBy is REPOSITORY', () => {
+      const settings = { ...mockSettings, groupBy: GroupBy.REPOSITORY };
+      expect(isGroupByDate(settings)).toBe(false);
+    });
+  });
+
   describe('isGroupByRepository', () => {
     it('returns true when groupBy is REPOSITORY', () => {
       const settings = { ...mockSettings, groupBy: GroupBy.REPOSITORY };
