@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 
-import type { OcticonProps } from '@primer/octicons-react';
+import type { Icon, OcticonProps } from '@primer/octicons-react';
 
 import type {
   DiscussionStateReason,
@@ -286,6 +286,17 @@ export interface GitifyNotification {
   account: Account;
   /** UI ordering index */
   order: number;
+
+  display: {
+    title: string;
+    type: string;
+    number: string;
+    icon: {
+      type: Icon;
+      color: IconColor;
+    };
+    defaultUserType: UserType;
+  };
 }
 
 /**

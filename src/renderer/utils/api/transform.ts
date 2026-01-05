@@ -34,6 +34,8 @@ export function transformNotification(
     repository: transformRepository(raw.repository),
     account,
     order,
+    // Display fields start as undefined, populated later post-enrichment
+    display: undefined,
   };
 }
 

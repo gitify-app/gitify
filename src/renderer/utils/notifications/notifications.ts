@@ -79,9 +79,10 @@ export async function getAllNotifications(
         try {
           const rawNotifications = (await accountNotifications.notifications)
             .data;
-          let notifications = rawNotifications.map((raw) =>
-            transformNotification(raw, accountNotifications.account),
-          );
+
+          let notifications = rawNotifications.map((raw) => {
+            return transformNotification(raw, accountNotifications.account);
+          });
 
           notifications = filterBaseNotifications(
             notifications,
@@ -97,6 +98,23 @@ export async function getAllNotifications(
             notifications,
             state.settings,
           );
+
+          notifications = notifications.map((notification) => {
+            const handler = createNotificationHandler(notification);
+            return {
+              ...notification,
+              display: {
+                title: handler.formattedNotificationTitle(notification),
+                type: handler.formattedNotificationType(notification),
+                number: handler.formattedNotificationNumber(notification),
+                icon: {
+                  type: handler.iconType(notification),
+                  color: handler.iconColor(notification),
+                },
+                defaultUserType: handler.defaultUserType(),
+              },
+            };
+          });
 
           return {
             account: accountNotifications.account,
