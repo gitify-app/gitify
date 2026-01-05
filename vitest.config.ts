@@ -17,10 +17,6 @@ export default defineConfig({
         __dirname,
         './src/__mocks__/@tauri-apps/api.ts',
       ),
-      '@tauri-apps/api/window': path.resolve(
-        __dirname,
-        './src/__mocks__/@tauri-apps/api/window.ts',
-      ),
       '@tauri-apps/api': path.resolve(
         __dirname,
         './src/__mocks__/@tauri-apps/api.ts',

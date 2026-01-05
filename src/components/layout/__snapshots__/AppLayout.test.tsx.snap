@@ -355,21 +355,6 @@ exports[`renderer/components/layout/AppLayout.tsx > should render itself & its c
             >
               Test
             </div>
-            <div
-              class="fixed bottom-0 right-0 w-4 h-4 cursor-se-resize z-50 opacity-30 hover:opacity-60 transition-opacity"
-              data-testid="resize-grip"
-            >
-              <svg
-                aria-hidden="true"
-                class="w-full h-full text-gray-400"
-                fill="currentColor"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="M14 14v-2h2v2h-2zm0-4v-2h2v2h-2zm-4 4v-2h2v2h-2zm0-4v-2h2v2h-2zm-4 4v-2h2v2h-2z"
-                />
-              </svg>
-            </div>
           </div>
         </div>
       </div>
@@ -725,21 +710,6 @@ exports[`renderer/components/layout/AppLayout.tsx > should render itself & its c
             class="flex-1 pl-sidebar"
           >
             Test
-          </div>
-          <div
-            class="fixed bottom-0 right-0 w-4 h-4 cursor-se-resize z-50 opacity-30 hover:opacity-60 transition-opacity"
-            data-testid="resize-grip"
-          >
-            <svg
-              aria-hidden="true"
-              class="w-full h-full text-gray-400"
-              fill="currentColor"
-              viewBox="0 0 16 16"
-            >
-              <path
-                d="M14 14v-2h2v2h-2zm0-4v-2h2v2h-2zm-4 4v-2h2v2h-2zm0-4v-2h2v2h-2zm-4 4v-2h2v2h-2z"
-              />
-            </svg>
           </div>
         </div>
       </div>
