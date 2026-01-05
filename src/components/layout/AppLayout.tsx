@@ -1,5 +1,6 @@
 import type { FC, ReactNode } from 'react';
 
+import { ResizeGrip } from '../ResizeGrip';
 import { Sidebar } from '../Sidebar';
 
 interface AppLayoutProps {
@@ -31,6 +32,8 @@ export const AppLayout: FC<AppLayoutProps> = ({ children }) => {
       <Sidebar />
 
       <div className="flex-1 pl-sidebar">{children}</div>
+
+      <ResizeGrip />
     </div>
   );
 };
