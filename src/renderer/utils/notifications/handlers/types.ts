@@ -8,6 +8,7 @@ import type {
   Link,
   SettingsState,
   SubjectType,
+  UserType,
 } from '../../../types';
 
 export interface NotificationTypeHandler {
@@ -60,4 +61,9 @@ export interface NotificationTypeHandler {
    * Default url for notification type.
    */
   defaultUrl(notification: GitifyNotification): Link;
+
+  /**
+   * Default user type for notification type.
+   */
+  defaultUserType(): UserType;
 }

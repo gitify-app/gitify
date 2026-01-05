@@ -5,6 +5,7 @@ import { RelativeTime, Stack, Text } from '@primer/react';
 import { type GitifyNotification, Opacity, Size } from '../../types';
 import { cn } from '../../utils/cn';
 import { openUserProfile } from '../../utils/links';
+import { createNotificationHandler } from '../../utils/notifications/handlers';
 import { getReasonDetails } from '../../utils/reason';
 import { AvatarWithFallback } from '../avatars/AvatarWithFallback';
 import { MetricGroup } from '../metrics/MetricGroup';
@@ -17,6 +18,8 @@ export const NotificationFooter: FC<NotificationFooterProps> = ({
   notification,
 }: NotificationFooterProps) => {
   const reason = getReasonDetails(notification.reason);
+
+  const handler = createNotificationHandler(notification);
 
   return (
     <Stack
@@ -47,12 +50,7 @@ export const NotificationFooter: FC<NotificationFooterProps> = ({
       ) : (
         <AvatarWithFallback
           size={Size.SMALL}
-          userType={
-            notification.subject.type === 'RepositoryDependabotAlertsThread' ||
-            notification.subject.type === 'RepositoryVulnerabilityAlert'
-              ? 'Bot'
-              : 'User'
-          }
+          userType={handler.defaultUserType()}
         />
       )}
 
