@@ -4,7 +4,7 @@ import { AlertIcon, SyncIcon } from '@primer/octicons-react';
 import { Button, Stack, Text } from '@primer/react';
 
 import { APPLICATION } from '../shared/constants';
-import { log } from '../shared/logger';
+import { logError } from '../shared/logger';
 
 interface Props {
   children: ReactNode;
@@ -30,7 +30,9 @@ export class ErrorBoundary extends Component<Props, State> {
   }
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo): void {
-    log.error('ErrorBoundary caught an error', error, errorInfo.componentStack);
+    logError('ErrorBoundary', 'Caught an error', error, [
+      errorInfo.componentStack ?? '',
+    ]);
   }
 
   handleRetry = (): void => {
