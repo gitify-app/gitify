@@ -67,6 +67,15 @@ function getNotifications(state: GitifyState) {
 /**
  * Get all notifications for all accounts.
  *
+ * Notifications follow these stages:
+ *  - Fetch / retrieval
+ *  - Transform
+ *  - Base filtering
+ *  - Enrichment
+ *  - Detailed filtering
+ *  - Formatting
+ *  - Ordering
+ *
  * @param state - The Gitify state.
  * @returns A promise that resolves to an array of account notifications.
  */

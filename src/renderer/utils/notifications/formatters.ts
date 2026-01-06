@@ -50,12 +50,21 @@ export function formatNotificationType(
 }
 
 /**
+ * Return the formatted (issue, pull request, discussion) number for this notification.
+ */
+export function formatGitHubNumber(num: number): string {
+  return `#${num}`;
+}
+
+/**
  * Return the formatted notification number for this notification.
  */
 export function formatNotificationNumber(
   notification: GitifyNotification,
 ): string {
-  return notification.subject?.number ? `#${notification.subject.number}` : '';
+  return notification.subject?.number
+    ? formatGitHubNumber(notification.subject.number)
+    : '';
 }
 
 /**
