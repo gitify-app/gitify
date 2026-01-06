@@ -1,11 +1,11 @@
 import { renderWithAppContext } from '../../__helpers__/test-utils';
-import { mockAccountNotifications } from '../../__mocks__/notifications-mocks';
+import { mockMultipleAccountNotifications } from '../../__mocks__/notifications-mocks';
 import { ReasonFilter } from './ReasonFilter';
 
 describe('renderer/components/filters/ReasonFilter.tsx', () => {
   it('should render itself & its children', () => {
     const tree = renderWithAppContext(<ReasonFilter />, {
-      notifications: mockAccountNotifications,
+      notifications: mockMultipleAccountNotifications,
     });
 
     expect(tree).toMatchSnapshot();

@@ -1,8 +1,8 @@
 import { mockGitHubCloudAccount } from '../__mocks__/account-mocks';
-import { createMockGitifyNotificationUser } from '../__mocks__/user-mocks';
+import { mockGitifyNotification } from '../__mocks__/notifications-mocks';
+import { mockGitifyNotificationUser } from '../__mocks__/user-mocks';
 import { Constants } from '../constants';
 import type { GitifyRepository, Hostname, Link } from '../types';
-import { mockSingleNotification } from './api/__mocks__/response-mocks';
 import * as authUtils from './auth/utils';
 import * as comms from './comms';
 import * as helpers from './helpers';
@@ -70,7 +70,7 @@ describe('renderer/utils/links.ts', () => {
   });
 
   it('openUserProfile', () => {
-    const mockUser = createMockGitifyNotificationUser('mock-user');
+    const mockUser = mockGitifyNotificationUser('mock-user');
 
     openUserProfile(mockUser);
 
@@ -108,12 +108,12 @@ describe('renderer/utils/links.ts', () => {
   });
 
   it('openNotification', async () => {
-    const mockNotificationUrl = mockSingleNotification.repository.htmlUrl;
+    const mockNotificationUrl = mockGitifyNotification.repository.htmlUrl;
     jest
       .spyOn(helpers, 'generateGitHubWebUrl')
       .mockResolvedValue(mockNotificationUrl);
 
-    await openNotification(mockSingleNotification);
+    await openNotification(mockGitifyNotification);
 
     expect(openExternalLinkSpy).toHaveBeenCalledWith(mockNotificationUrl);
   });

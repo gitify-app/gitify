@@ -1,170 +1,122 @@
-import {
-  mockGitHubCloudAccount,
-  mockGitHubEnterpriseServerAccount,
-} from '../../../__mocks__/account-mocks';
+import type { Link } from '../../../types';
 import type {
-  GitifyNotification,
-  GitifyNotificationUser,
-  GitifyOwner,
-  GitifyRepository,
-  Link,
-} from '../../../types';
+  AuthorFieldsFragment,
+  DiscussionDetailsFragment,
+  DiscussionStateReason,
+  IssueDetailsFragment,
+  IssueState,
+  IssueStateReason,
+  PullRequestDetailsFragment,
+  PullRequestState,
+} from '../graphql/generated/graphql';
 import type { RawUser } from '../types';
 
-export const mockNotificationUser = {
-  id: 123456789,
-  login: 'octocat',
-  avatar_url: 'https://avatars.githubusercontent.com/u/583231?v=4' as Link,
-  url: 'https://api.github.com/users/octocat' as Link,
-  html_url: 'https://github.com/octocat' as Link,
-  type: 'User',
-} satisfies Partial<RawUser>;
+/**
+ * Creates a mock raw user [REST API]
+ */
+export function mockRawUser(login: string): RawUser {
+  const mockUser: Partial<RawUser> = {
+    login: login,
+    html_url: `https://github.com/${login}` as Link,
+    avatar_url: 'https://avatars.githubusercontent.com/u/583231?v=4' as Link,
+    type: 'User',
+  };
 
-// 2 Notifications
-// Hostname : 'github.com'
-// Repository : 'gitify-app/notifications-test'
-const mockGitHubOwner: GitifyOwner = {
-  login: 'gitify-app',
-  avatarUrl:
-    'https://avatars.githubusercontent.com/u/133795385?s=200&v=4' as Link,
-  type: 'User',
-};
+  return mockUser as RawUser;
+}
 
-const mockGitHubRepository: GitifyRepository = {
-  name: 'notifications-test',
-  fullName: 'gitify-app/notifications-test',
-  owner: mockGitHubOwner,
-  htmlUrl: 'https://github.com/gitify-app/notifications-test' as Link,
-};
+/**
+ * Creates a mock author fragment [GraphQL API]
+ */
+export const mockAuthor = mockAuthorResponseNode('notification-author');
+export const mockCommenter = mockAuthorResponseNode('notification-commenter');
+export const mockReplier = mockAuthorResponseNode('notification-replier');
 
-const mockSubjectUser: GitifyNotificationUser = {
-  login: 'gitify-app',
-  htmlUrl: 'https://github.com/gitify-app' as Link,
-  avatarUrl:
-    'https://avatars.githubusercontent.com/u/133795385?s=200&v=4' as Link,
-  type: 'User',
-};
+export function mockAuthorResponseNode(login: string): AuthorFieldsFragment {
+  return {
+    login: login,
+    htmlUrl: `https://github.com/${login}` as Link,
+    avatarUrl: 'https://avatars.githubusercontent.com/u/583231?v=4' as Link,
+    type: 'User',
+    __typename: 'User',
+  } as AuthorFieldsFragment;
+}
 
-export const mockGitHubNotifications: GitifyNotification[] = [
-  {
-    account: mockGitHubCloudAccount,
-    order: 0,
-    id: '138661096',
-    unread: true,
-    reason: {
-      code: 'subscribed',
-      title: 'Updated',
-      description: "You're watching the repository.",
+/**
+ * Creates a mock discussion fragment [GraphQL API]
+ */
+export function mockDiscussionResponseNode(mocks: {
+  stateReason?: DiscussionStateReason;
+  isAnswered: boolean;
+}): DiscussionDetailsFragment {
+  return {
+    __typename: 'Discussion',
+    number: 123,
+    title: 'This is a mock discussion',
+    url: 'https://github.com/gitify-app/notifications-test/discussions/123' as Link,
+    stateReason: mocks.stateReason,
+    isAnswered: mocks.isAnswered,
+    author: mockAuthor,
+    comments: {
+      nodes: [],
+      totalCount: 0,
     },
-    updatedAt: '2017-05-20T17:51:57Z',
-    subject: {
-      title: 'I am a robot and this is a test!',
-      url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1' as Link,
-      latestCommentUrl:
-        'https://api.github.com/repos/gitify-app/notifications-test/issues/comments/302888448' as Link,
-      type: 'Issue',
-      state: 'OPEN',
-      user: mockSubjectUser,
-      reviews: [
-        {
-          state: 'APPROVED',
-          users: ['octocat'],
-        },
-        {
-          state: 'CHANGES_REQUESTED',
-          users: ['gitify-app'],
-        },
-        {
-          state: 'PENDING',
-          users: ['gitify-user'],
-        },
-      ],
-    },
-    repository: mockGitHubRepository,
-  },
-  {
-    account: mockGitHubCloudAccount,
-    order: 1,
-    id: '148827438',
-    unread: true,
-    reason: {
-      code: 'author',
-      title: 'Authored',
-      description: 'You created the thread.',
-    },
-    updatedAt: '2017-05-20T17:06:34Z',
-    subject: {
-      title: 'Improve the UI',
-      url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/4' as Link,
-      latestCommentUrl:
-        'https://api.github.com/repos/gitify-app/notifications-test/issues/comments/302885965' as Link,
-      type: 'Issue',
-      reviews: null,
-    },
-    repository: mockGitHubRepository,
-  },
-];
+    labels: null,
+  };
+}
 
-// 2 Notifications
-// Hostname : 'github.gitify.io'
-// Repository : 'myorg/notifications-test'
-const mockEnterpriseOwner: GitifyOwner = {
-  login: 'myorg',
-  avatarUrl: 'https://github.gitify.io/avatars/u/4?' as Link,
-  type: 'Organization',
-};
+/**
+ * Creates a mock issue fragment [GraphQL API]
+ */
+export function mockIssueResponseNode(mocks: {
+  state: IssueState;
+  stateReason?: IssueStateReason;
+}): IssueDetailsFragment {
+  return {
+    __typename: 'Issue',
+    number: 123,
+    title: 'PR Title',
+    state: mocks.state,
+    stateReason: mocks.stateReason,
+    url: 'https://github.com/gitify-app/notifications-test/issues/123',
+    author: mockAuthor,
+    labels: { nodes: [] },
+    comments: { totalCount: 0, nodes: [] },
+    milestone: null,
+  };
+}
 
-const mockEnterpriseRepository: GitifyRepository = {
-  name: 'notifications-test',
-  fullName: 'myorg/notifications-test',
-  owner: mockEnterpriseOwner,
-  htmlUrl: 'https://github.gitify.io/myorg/notifications-test' as Link,
-};
-
-export const mockEnterpriseNotifications: GitifyNotification[] = [
-  {
-    account: mockGitHubEnterpriseServerAccount,
-    order: 0,
-    id: '3',
-    unread: true,
-    reason: {
-      code: 'subscribed',
-      title: 'Updated',
-      description: "You're watching the repository.",
+/**
+ * Creates a mock pull request fragment [GraphQL API]
+ */
+export function mockPullRequestResponseNode(mocks: {
+  state: PullRequestState;
+  isDraft?: boolean;
+  merged?: boolean;
+  isInMergeQueue?: boolean;
+}): PullRequestDetailsFragment {
+  return {
+    __typename: 'PullRequest',
+    number: 123,
+    title: 'Test PR',
+    state: mocks.state,
+    isDraft: mocks.isDraft ?? false,
+    merged: mocks.merged ?? false,
+    isInMergeQueue: mocks.isInMergeQueue ?? false,
+    url: 'https://github.com/gitify-app/notifications-test/pulls/123',
+    author: mockAuthor,
+    labels: { nodes: [] },
+    comments: {
+      totalCount: 0,
+      nodes: [],
     },
-    updatedAt: '2017-05-20T13:02:48Z',
-    subject: {
-      title: 'Release 0.0.1',
-      url: 'https://github.gitify.io/api/v3/repos/myorg/notifications-test/releases/3' as Link,
-      latestCommentUrl:
-        'https://github.gitify.io/api/v3/repos/myorg/notifications-test/releases/3' as Link,
-      type: 'Release',
-      reviews: null,
+    reviews: {
+      totalCount: 0,
+      nodes: [],
     },
-    repository: mockEnterpriseRepository,
-  },
-  {
-    account: mockGitHubEnterpriseServerAccount,
-    order: 1,
-    id: '4',
-    unread: true,
-    reason: {
-      code: 'subscribed',
-      title: 'Updated',
-      description: "You're watching the repository.",
+    milestone: null,
+    closingIssuesReferences: {
+      nodes: [],
     },
-    updatedAt: '2017-05-20T15:52:20Z',
-    subject: {
-      title: 'Bump Version',
-      url: 'https://github.gitify.io/api/v3/repos/myorg/notifications-test/pulls/4' as Link,
-      latestCommentUrl:
-        'https://github.gitify.io/api/v3/repos/myorg/notifications-test/issues/comments/21' as Link,
-      type: 'PullRequest',
-      reviews: null,
-    },
-    repository: mockEnterpriseRepository,
-  },
-];
-
-export const mockSingleNotification: GitifyNotification =
-  mockGitHubNotifications[0];
+  };
+}

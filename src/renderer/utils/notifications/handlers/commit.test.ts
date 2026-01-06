@@ -1,16 +1,16 @@
 import axios from 'axios';
 import nock from 'nock';
 
-import { createPartialMockNotification } from '../../../__mocks__/notifications-mocks';
+import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
-import { createPartialMockUser } from '../../../__mocks__/user-mocks';
 import type { GitifyNotification, Link } from '../../../types';
+import { mockRawUser } from '../../api/__mocks__/response-mocks';
 import { commitHandler } from './commit';
 
 describe('renderer/utils/notifications/handlers/commit.ts', () => {
   describe('enrich', () => {
-    const mockAuthor = createPartialMockUser('some-author');
-    const mockCommenter = createPartialMockUser('some-commenter');
+    const mockAuthor = mockRawUser('some-author');
+    const mockCommenter = mockRawUser('some-commenter');
 
     beforeEach(() => {
       // axios will default to using the XHR adapter which can't be intercepted
@@ -19,7 +19,7 @@ describe('renderer/utils/notifications/handlers/commit.ts', () => {
     });
 
     it('get commit commenter', async () => {
-      const mockNotification = createPartialMockNotification({
+      const mockNotification = mockPartialGitifyNotification({
         title: 'This is a commit with comments',
         type: 'Commit',
         url: 'https://api.github.com/repos/gitify-app/notifications-test/commits/d2a86d80e3d24ea9510d5de6c147e53c30f313a8' as Link,
@@ -51,7 +51,7 @@ describe('renderer/utils/notifications/handlers/commit.ts', () => {
     });
 
     it('get commit without commenter', async () => {
-      const mockNotification = createPartialMockNotification({
+      const mockNotification = mockPartialGitifyNotification({
         title: 'This is a commit with comments',
         type: 'Commit',
         url: 'https://api.github.com/repos/gitify-app/notifications-test/commits/d2a86d80e3d24ea9510d5de6c147e53c30f313a8' as Link,
@@ -78,7 +78,7 @@ describe('renderer/utils/notifications/handlers/commit.ts', () => {
     });
 
     it('return early if commit state filtered', async () => {
-      const mockNotification = createPartialMockNotification({
+      const mockNotification = mockPartialGitifyNotification({
         title: 'This is a commit with comments',
         type: 'Commit',
         url: 'https://api.github.com/repos/gitify-app/notifications-test/commits/d2a86d80e3d24ea9510d5de6c147e53c30f313a8' as Link,
@@ -96,7 +96,7 @@ describe('renderer/utils/notifications/handlers/commit.ts', () => {
   });
 
   it('iconType', () => {
-    const mockNotification = createPartialMockNotification({
+    const mockNotification = mockPartialGitifyNotification({
       type: 'Commit',
     });
 

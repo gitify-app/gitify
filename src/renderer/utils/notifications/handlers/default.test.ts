@@ -1,4 +1,4 @@
-import { createPartialMockNotification } from '../../../__mocks__/notifications-mocks';
+import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
 import type { GitifyNotification } from '../../../types';
 import {
@@ -17,7 +17,7 @@ describe('renderer/utils/notifications/handlers/default.ts', () => {
 
   describe('enrich', () => {
     it('unhandled subject details', async () => {
-      const mockNotification = createPartialMockNotification({
+      const mockNotification = mockPartialGitifyNotification({
         title:
           'There is no special subject handling for this notification type',
         type: 'RepositoryInvitation',
@@ -34,7 +34,7 @@ describe('renderer/utils/notifications/handlers/default.ts', () => {
   });
 
   it('iconType', () => {
-    const mockNotification = createPartialMockNotification({});
+    const mockNotification = mockPartialGitifyNotification({});
 
     expect(defaultHandler.iconType(mockNotification).displayName).toBe(
       'QuestionIcon',
@@ -50,7 +50,7 @@ describe('renderer/utils/notifications/handlers/default.ts', () => {
       ];
 
       states.forEach((state) => {
-        const mockNotification = createPartialMockNotification({
+        const mockNotification = mockPartialGitifyNotification({
           state: state,
         });
 
@@ -61,7 +61,7 @@ describe('renderer/utils/notifications/handlers/default.ts', () => {
 
   describe('formattedNotificationType', () => {
     it('formats state and type with proper casing and spacing', () => {
-      const notification = createPartialMockNotification({
+      const notification = mockPartialGitifyNotification({
         title: 'Sample',
         type: 'PullRequest',
         state: 'OPEN',
@@ -73,7 +73,7 @@ describe('renderer/utils/notifications/handlers/default.ts', () => {
     });
 
     it('handles missing state (null) gracefully', () => {
-      const notification = createPartialMockNotification({
+      const notification = mockPartialGitifyNotification({
         title: 'Sample',
         type: 'Issue',
         state: null,
@@ -87,7 +87,7 @@ describe('renderer/utils/notifications/handlers/default.ts', () => {
 
   describe('formattedNotificationNumber', () => {
     it('returns formatted number when present', () => {
-      const notification = createPartialMockNotification({
+      const notification = mockPartialGitifyNotification({
         title: 'Sample',
         type: 'Issue',
         state: 'OPEN',
@@ -99,7 +99,7 @@ describe('renderer/utils/notifications/handlers/default.ts', () => {
     });
 
     it('returns empty string when number absent', () => {
-      const notification = createPartialMockNotification({
+      const notification = mockPartialGitifyNotification({
         title: 'Sample',
         type: 'Issue',
         state: 'OPEN',
@@ -110,7 +110,7 @@ describe('renderer/utils/notifications/handlers/default.ts', () => {
 
   describe('formattedNotificationTitle', () => {
     it('appends number in brackets when present', () => {
-      const notification = createPartialMockNotification({
+      const notification = mockPartialGitifyNotification({
         title: 'Fix bug',
         type: 'Issue',
         state: 'OPEN',
@@ -122,7 +122,7 @@ describe('renderer/utils/notifications/handlers/default.ts', () => {
     });
 
     it('returns title unchanged when number missing', () => {
-      const notification = createPartialMockNotification({
+      const notification = mockPartialGitifyNotification({
         title: 'Improve docs',
         type: 'Issue',
         state: 'OPEN',

@@ -2,11 +2,11 @@ import { act, fireEvent, waitFor } from '@testing-library/react';
 import { useContext } from 'react';
 
 import { renderWithAppContext } from '../__helpers__/test-utils';
+import { mockGitifyNotification } from '../__mocks__/notifications-mocks';
 import { mockSettings } from '../__mocks__/state-mocks';
 import { Constants } from '../constants';
 import { useNotifications } from '../hooks/useNotifications';
 import type { AuthState, Hostname, SettingsState, Token } from '../types';
-import { mockSingleNotification } from '../utils/api/__mocks__/response-mocks';
 import * as apiRequests from '../utils/api/request';
 import * as notifications from '../utils/notifications/notifications';
 import * as storage from '../utils/storage';
@@ -133,7 +133,7 @@ describe('renderer/context/App.tsx', () => {
 
     it('should call markNotificationsAsRead', async () => {
       const { button } = renderContextButton('markNotificationsAsRead', [
-        mockSingleNotification,
+        mockGitifyNotification,
       ]);
 
       fireEvent.click(button);
@@ -141,14 +141,14 @@ describe('renderer/context/App.tsx', () => {
       expect(markNotificationsAsReadMock).toHaveBeenCalledTimes(1);
       expect(markNotificationsAsReadMock).toHaveBeenCalledWith(
         mockDefaultState,
-        [mockSingleNotification],
+        [mockGitifyNotification],
       );
       expect(setTrayIconColorAndTitleSpy).toHaveBeenCalledTimes(1);
     });
 
     it('should call markNotificationsAsDone', async () => {
       const { button } = renderContextButton('markNotificationsAsDone', [
-        mockSingleNotification,
+        mockGitifyNotification,
       ]);
 
       fireEvent.click(button);
@@ -156,7 +156,7 @@ describe('renderer/context/App.tsx', () => {
       expect(markNotificationsAsDoneMock).toHaveBeenCalledTimes(1);
       expect(markNotificationsAsDoneMock).toHaveBeenCalledWith(
         mockDefaultState,
-        [mockSingleNotification],
+        [mockGitifyNotification],
       );
       expect(setTrayIconColorAndTitleSpy).toHaveBeenCalledTimes(1);
     });
@@ -164,7 +164,7 @@ describe('renderer/context/App.tsx', () => {
     it('should call unsubscribeNotification', async () => {
       const { button } = renderContextButton(
         'unsubscribeNotification',
-        mockSingleNotification,
+        mockGitifyNotification,
       );
 
       fireEvent.click(button);
@@ -172,7 +172,7 @@ describe('renderer/context/App.tsx', () => {
       expect(unsubscribeNotificationMock).toHaveBeenCalledTimes(1);
       expect(unsubscribeNotificationMock).toHaveBeenCalledWith(
         mockDefaultState,
-        mockSingleNotification,
+        mockGitifyNotification,
       );
       expect(setTrayIconColorAndTitleSpy).toHaveBeenCalledTimes(1);
     });

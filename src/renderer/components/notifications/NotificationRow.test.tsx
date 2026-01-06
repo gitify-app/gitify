@@ -3,9 +3,9 @@ import userEvent from '@testing-library/user-event';
 
 import { renderWithAppContext } from '../../__helpers__/test-utils';
 import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
+import { mockGitifyNotification } from '../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../__mocks__/state-mocks';
 import { GroupBy } from '../../types';
-import { mockSingleNotification } from '../../utils/api/__mocks__/response-mocks';
 import * as comms from '../../utils/comms';
 import * as links from '../../utils/links';
 import { NotificationRow } from './NotificationRow';
@@ -23,7 +23,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
 
   it('should render itself & its children - group by date', async () => {
     const props = {
-      notification: mockSingleNotification,
+      notification: mockGitifyNotification,
       account: mockGitHubCloudAccount,
     };
 
@@ -36,7 +36,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
 
   it('should render itself & its children - group by repositories', async () => {
     const props = {
-      notification: mockSingleNotification,
+      notification: mockGitifyNotification,
       account: mockGitHubCloudAccount,
     };
 
@@ -49,7 +49,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
 
   it('should render itself & its children - hide numbers', async () => {
     const props = {
-      notification: mockSingleNotification,
+      notification: mockGitifyNotification,
       account: mockGitHubCloudAccount,
     };
 
@@ -63,7 +63,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
   it('should render itself & its children - notification is read', async () => {
     const props = {
       notification: {
-        ...mockSingleNotification,
+        ...mockGitifyNotification,
         unread: false,
       },
       account: mockGitHubCloudAccount,
@@ -79,7 +79,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       const markNotificationsAsReadMock = jest.fn();
 
       const props = {
-        notification: mockSingleNotification,
+        notification: mockGitifyNotification,
         account: mockGitHubCloudAccount,
       };
 
@@ -98,7 +98,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       const markNotificationsAsReadMock = jest.fn();
 
       const props = {
-        notification: mockSingleNotification,
+        notification: mockGitifyNotification,
         account: mockGitHubCloudAccount,
       };
 
@@ -121,7 +121,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       const markNotificationsAsDoneMock = jest.fn();
 
       const props = {
-        notification: mockSingleNotification,
+        notification: mockGitifyNotification,
         account: mockGitHubCloudAccount,
       };
 
@@ -140,7 +140,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       const markNotificationsAsReadMock = jest.fn();
 
       const props = {
-        notification: mockSingleNotification,
+        notification: mockGitifyNotification,
         account: mockGitHubCloudAccount,
       };
 
@@ -158,7 +158,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       const markNotificationsAsDoneMock = jest.fn();
 
       const props = {
-        notification: mockSingleNotification,
+        notification: mockGitifyNotification,
         account: mockGitHubCloudAccount,
       };
 
@@ -176,7 +176,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       const unsubscribeNotificationMock = jest.fn();
 
       const props = {
-        notification: mockSingleNotification,
+        notification: mockGitifyNotification,
         account: mockGitHubCloudAccount,
       };
 
