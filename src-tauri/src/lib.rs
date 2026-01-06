@@ -67,7 +67,7 @@ fn setup_tray(app: &mut App) -> Result<(), Box<dyn std::error::Error>> {
         .resource_dir()
         .map_err(|e| format!("Failed to get resource directory: {}", e))?;
 
-    // Use 32x32 icons (correct size for macOS retina menubar)
+    // Use 48x48 icons (24pt @2x for macOS Retina menubar)
     let icon_path = resource_dir.join("icons/tray/idle.png");
 
     let img = image::open(&icon_path)

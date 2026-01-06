@@ -24,7 +24,6 @@
         "decorations": false,
         "alwaysOnTop": true,
         "skipTaskbar": true,
-        "transparent": true,
         "hiddenTitle": true,
         "focus": false,
         "tabbingIdentifier": "gitify"

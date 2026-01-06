@@ -57,7 +57,7 @@ pub async fn update_tray_icon(
         .map_err(|e| e.to_string())?;
     let use_unread_active = *config.use_unread_active.lock().map_err(|e| e.to_string())?;
 
-    // Use 32x32 icons (correct size for macOS retina menubar)
+    // Use 48x48 icons (24pt @2x for macOS Retina menubar)
     let icon_name = match tray_state {
         TrayState::Idle => {
             if use_alternate_idle {
