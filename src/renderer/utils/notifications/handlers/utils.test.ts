@@ -1,5 +1,5 @@
 import { createMockGraphQLAuthor } from '../../../__mocks__/user-mocks';
-import { formatForDisplay, getNotificationAuthor } from './utils';
+import { getNotificationAuthor } from './utils';
 
 describe('renderer/utils/notifications/handlers/utils.ts', () => {
   describe('getNotificationAuthor', () => {
@@ -32,17 +32,5 @@ describe('renderer/utils/notifications/handlers/utils.ts', () => {
         type: mockAuthor.type,
       });
     });
-  });
-
-  it('formatForDisplay', () => {
-    expect(formatForDisplay(null)).toBe('');
-    expect(formatForDisplay([])).toBe('');
-    expect(formatForDisplay(['open', 'PullRequest'])).toBe('Open Pull Request');
-    expect(formatForDisplay(['OUTDATED', 'Discussion'])).toBe(
-      'Outdated Discussion',
-    );
-    expect(formatForDisplay(['not_planned', 'Issue'])).toBe(
-      'Not Planned Issue',
-    );
   });
 });

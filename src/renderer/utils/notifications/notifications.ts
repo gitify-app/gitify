@@ -17,6 +17,7 @@ import {
   filterBaseNotifications,
   filterDetailedNotifications,
 } from './filters/filter';
+import { formatNotification } from './formatters';
 import { getFlattenedNotificationsByRepo } from './group';
 import { createNotificationHandler } from './handlers';
 
@@ -100,20 +101,7 @@ export async function getAllNotifications(
           );
 
           notifications = notifications.map((notification) => {
-            const handler = createNotificationHandler(notification);
-            return {
-              ...notification,
-              display: {
-                title: handler.formattedNotificationTitle(notification),
-                type: handler.formattedNotificationType(notification),
-                number: handler.formattedNotificationNumber(notification),
-                icon: {
-                  type: handler.iconType(notification),
-                  color: handler.iconColor(notification),
-                },
-                defaultUserType: handler.defaultUserType(),
-              },
-            };
+            return formatNotification(notification);
           });
 
           return {

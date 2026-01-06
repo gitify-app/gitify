@@ -58,7 +58,7 @@ class PullRequestHandler extends DefaultHandler {
       state: prState,
       user: prUser,
       reviews: reviews,
-      comments: pr.comments.totalCount,
+      commentCount: pr.comments.totalCount,
       labels: pr.labels?.nodes.map((label) => label.name) ?? [],
       linkedIssues: pr.closingIssuesReferences?.nodes.map(
         (issue) => `#${issue.number}`,

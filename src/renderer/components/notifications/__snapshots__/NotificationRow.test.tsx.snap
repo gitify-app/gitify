@@ -120,7 +120,9 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                     </button>
                     <div
                       class="text-xxs opacity-50"
-                    />
+                    >
+                      123
+                    </div>
                   </div>
                 </div>
                 <div
@@ -132,7 +134,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                   data-padding="none"
                   data-testid="notification-row"
                   data-wrap="nowrap"
-                  title="I am a robot and this is a test!"
+                  title="I am a robot and this is a test! [#123]"
                 >
                   <span
                     class="truncate prc-Text-Text-9mHv3"
@@ -141,7 +143,9 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                   </span>
                   <span
                     class="text-xxs ml-auto mr-2 opacity-50 hidden prc-Text-Text-9mHv3"
-                  />
+                  >
+                    123
+                  </span>
                 </div>
                 <div
                   class="text-xs opacity-80 prc-Stack-Stack-UQ9k6"
@@ -530,7 +534,9 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                   </button>
                   <div
                     class="text-xxs opacity-50"
-                  />
+                  >
+                    123
+                  </div>
                 </div>
               </div>
               <div
@@ -542,7 +548,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 data-padding="none"
                 data-testid="notification-row"
                 data-wrap="nowrap"
-                title="I am a robot and this is a test!"
+                title="I am a robot and this is a test! [#123]"
               >
                 <span
                   class="truncate prc-Text-Text-9mHv3"
@@ -551,7 +557,9 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 </span>
                 <span
                   class="text-xxs ml-auto mr-2 opacity-50 hidden prc-Text-Text-9mHv3"
-                />
+                >
+                  123
+                </span>
               </div>
               <div
                 class="text-xs opacity-80 prc-Stack-Stack-UQ9k6"
@@ -957,7 +965,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                   data-padding="none"
                   data-testid="notification-row"
                   data-wrap="nowrap"
-                  title="I am a robot and this is a test!"
+                  title="I am a robot and this is a test! [#123]"
                 >
                   <span
                     class="truncate prc-Text-Text-9mHv3"
@@ -966,7 +974,9 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                   </span>
                   <span
                     class="text-xxs ml-auto mr-2 opacity-50 prc-Text-Text-9mHv3"
-                  />
+                  >
+                    123
+                  </span>
                 </div>
                 <div
                   class="text-xs opacity-80 prc-Stack-Stack-UQ9k6"
@@ -1315,7 +1325,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 data-padding="none"
                 data-testid="notification-row"
                 data-wrap="nowrap"
-                title="I am a robot and this is a test!"
+                title="I am a robot and this is a test! [#123]"
               >
                 <span
                   class="truncate prc-Text-Text-9mHv3"
@@ -1324,7 +1334,9 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 </span>
                 <span
                   class="text-xxs ml-auto mr-2 opacity-50 prc-Text-Text-9mHv3"
-                />
+                >
+                  123
+                </span>
               </div>
               <div
                 class="text-xs opacity-80 prc-Stack-Stack-UQ9k6"
@@ -1730,7 +1742,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                   data-padding="none"
                   data-testid="notification-row"
                   data-wrap="nowrap"
-                  title="I am a robot and this is a test!"
+                  title="I am a robot and this is a test! [#123]"
                 >
                   <span
                     class="truncate prc-Text-Text-9mHv3"
@@ -1739,7 +1751,9 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                   </span>
                   <span
                     class="text-xxs ml-auto mr-2 opacity-50 hidden prc-Text-Text-9mHv3"
-                  />
+                  >
+                    123
+                  </span>
                 </div>
                 <div
                   class="text-xs opacity-80 prc-Stack-Stack-UQ9k6"
@@ -2088,7 +2102,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 data-padding="none"
                 data-testid="notification-row"
                 data-wrap="nowrap"
-                title="I am a robot and this is a test!"
+                title="I am a robot and this is a test! [#123]"
               >
                 <span
                   class="truncate prc-Text-Text-9mHv3"
@@ -2097,7 +2111,9 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 </span>
                 <span
                   class="text-xxs ml-auto mr-2 opacity-50 hidden prc-Text-Text-9mHv3"
-                />
+                >
+                  123
+                </span>
               </div>
               <div
                 class="text-xs opacity-80 prc-Stack-Stack-UQ9k6"
@@ -2503,7 +2519,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                   data-padding="none"
                   data-testid="notification-row"
                   data-wrap="nowrap"
-                  title="I am a robot and this is a test!"
+                  title="I am a robot and this is a test! [#123]"
                 >
                   <span
                     class="truncate prc-Text-Text-9mHv3"
@@ -2512,7 +2528,9 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                   </span>
                   <span
                     class="text-xxs ml-auto mr-2 opacity-50 prc-Text-Text-9mHv3"
-                  />
+                  >
+                    123
+                  </span>
                 </div>
                 <div
                   class="text-xs opacity-80 prc-Stack-Stack-UQ9k6"
@@ -2861,7 +2879,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 data-padding="none"
                 data-testid="notification-row"
                 data-wrap="nowrap"
-                title="I am a robot and this is a test!"
+                title="I am a robot and this is a test! [#123]"
               >
                 <span
                   class="truncate prc-Text-Text-9mHv3"
@@ -2870,7 +2888,9 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 </span>
                 <span
                   class="text-xxs ml-auto mr-2 opacity-50 prc-Text-Text-9mHv3"
-                />
+                >
+                  123
+                </span>
               </div>
               <div
                 class="text-xs opacity-80 prc-Stack-Stack-UQ9k6"

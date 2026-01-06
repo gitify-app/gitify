@@ -1,13 +1,19 @@
 import {
+  FeedPullRequestOpenIcon,
+  IssueOpenedIcon,
+} from '@primer/octicons-react';
+
+import {
   mockGitHubCloudAccount,
   mockGitHubEnterpriseServerAccount,
 } from '../../../__mocks__/account-mocks';
-import type {
-  GitifyNotification,
-  GitifyNotificationUser,
-  GitifyOwner,
-  GitifyRepository,
-  Link,
+import {
+  type GitifyNotification,
+  type GitifyNotificationUser,
+  type GitifyOwner,
+  type GitifyRepository,
+  IconColor,
+  type Link,
 } from '../../../types';
 import type { RawUser } from '../types';
 
@@ -81,6 +87,16 @@ export const mockGitHubNotifications: GitifyNotification[] = [
       ],
     },
     repository: mockGitHubRepository,
+    display: {
+      number: '123',
+      title: 'I am a robot and this is a test! [#123]',
+      type: 'Open Issue',
+      icon: {
+        type: IssueOpenedIcon,
+        color: IconColor.GREEN,
+      },
+      defaultUserType: 'User',
+    },
   },
   {
     account: mockGitHubCloudAccount,
@@ -102,6 +118,16 @@ export const mockGitHubNotifications: GitifyNotification[] = [
       reviews: null,
     },
     repository: mockGitHubRepository,
+    display: {
+      number: '456',
+      title: 'Improve the UI [#456]',
+      type: 'Issue',
+      icon: {
+        type: IssueOpenedIcon,
+        color: IconColor.GREEN,
+      },
+      defaultUserType: 'User',
+    },
   },
 ];
 
@@ -142,6 +168,16 @@ export const mockEnterpriseNotifications: GitifyNotification[] = [
       reviews: null,
     },
     repository: mockEnterpriseRepository,
+    display: {
+      number: '',
+      title: 'Release 0.0.1',
+      type: 'Release',
+      icon: {
+        type: IssueOpenedIcon,
+        color: IconColor.GREEN,
+      },
+      defaultUserType: 'User',
+    },
   },
   {
     account: mockGitHubEnterpriseServerAccount,
@@ -163,6 +199,16 @@ export const mockEnterpriseNotifications: GitifyNotification[] = [
       reviews: null,
     },
     repository: mockEnterpriseRepository,
+    display: {
+      number: '123',
+      title: 'Bump Version [#123]',
+      type: 'Pull Request',
+      icon: {
+        type: FeedPullRequestOpenIcon,
+        color: IconColor.GREEN,
+      },
+      defaultUserType: 'User',
+    },
   },
 ];
 

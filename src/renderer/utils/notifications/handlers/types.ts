@@ -44,21 +44,6 @@ export interface NotificationTypeHandler {
   iconColor(notification: GitifyNotification): IconColor;
 
   /**
-   * Return the formatted notification type for this notification.
-   */
-  formattedNotificationType(notification: GitifyNotification): string;
-
-  /**
-   * Return the formatted notification number for this notification.
-   */
-  formattedNotificationNumber(notification: GitifyNotification): string;
-
-  /**
-   * Return the formatted notification title for this notification.
-   */
-  formattedNotificationTitle(notification: GitifyNotification): string;
-
-  /**
    * Default url for notification type.
    */
   defaultUrl(notification: GitifyNotification): Link;

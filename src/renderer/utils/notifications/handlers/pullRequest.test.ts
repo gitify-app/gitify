@@ -79,7 +79,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         reviews: null,
         labels: [],
         linkedIssues: [],
-        comments: 0,
+        commentCount: 0,
         milestone: null,
         htmlUrl: 'https://github.com/gitify-app/notifications-test/pulls/123',
       } as Partial<GitifySubject>);
@@ -118,7 +118,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         reviews: null,
         labels: [],
         linkedIssues: [],
-        comments: 0,
+        commentCount: 0,
         milestone: null,
         htmlUrl: 'https://github.com/gitify-app/notifications-test/pulls/123',
       } as Partial<GitifySubject>);
@@ -157,7 +157,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         reviews: null,
         labels: [],
         linkedIssues: [],
-        comments: 0,
+        commentCount: 0,
         milestone: null,
         htmlUrl: 'https://github.com/gitify-app/notifications-test/pulls/123',
       } as Partial<GitifySubject>);
@@ -196,7 +196,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         reviews: null,
         labels: [],
         linkedIssues: [],
-        comments: 0,
+        commentCount: 0,
         milestone: null,
         htmlUrl: 'https://github.com/gitify-app/notifications-test/pulls/123',
       } as Partial<GitifySubject>);
@@ -243,7 +243,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         reviews: null,
         labels: [],
         linkedIssues: [],
-        comments: 1,
+        commentCount: 1,
         milestone: null,
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/pulls/123#issuecomment-1234',
@@ -289,7 +289,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         reviews: null,
         labels: ['enhancement'],
         linkedIssues: [],
-        comments: 0,
+        commentCount: 0,
         milestone: null,
         htmlUrl: 'https://github.com/gitify-app/notifications-test/pulls/123',
       } as Partial<GitifySubject>);
@@ -334,7 +334,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         reviews: null,
         labels: [],
         linkedIssues: ['#789'],
-        comments: 0,
+        commentCount: 0,
         milestone: null,
         htmlUrl: 'https://github.com/gitify-app/notifications-test/pulls/123',
       } as Partial<GitifySubject>);
@@ -376,7 +376,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         reviews: null,
         labels: [],
         linkedIssues: [],
-        comments: 0,
+        commentCount: 0,
         milestone: {
           state: 'OPEN',
           title: 'Open Milestone',
