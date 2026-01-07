@@ -1,10 +1,10 @@
-import { createPartialMockNotification } from '../../../__mocks__/notifications-mocks';
+import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-mocks';
 import type { GitifyNotification, Link } from '../../../types';
 import { repositoryInvitationHandler } from './repositoryInvitation';
 
 describe('renderer/utils/notifications/handlers/repositoryInvitation.ts', () => {
   it('iconType', () => {
-    const mockNotification = createPartialMockNotification({
+    const mockNotification = mockPartialGitifyNotification({
       type: 'RepositoryInvitation',
     });
 

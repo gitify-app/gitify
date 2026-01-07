@@ -1,4 +1,4 @@
-import { createMockNotificationForRepoName } from '../../__mocks__/notifications-mocks';
+import { mockGitifyNotificationForRepoName } from '../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../__mocks__/state-mocks';
 import type { GitifyNotification } from '../../types';
 import { GroupBy } from '../../types';
@@ -37,9 +37,9 @@ describe('renderer/utils/notifications/group.ts', () => {
   describe('groupNotificationsByRepository', () => {
     it('groups notifications by repository fullName', () => {
       const notifications: GitifyNotification[] = [
-        createMockNotificationForRepoName('1', 'owner/repo-a'),
-        createMockNotificationForRepoName('2', 'owner/repo-b'),
-        createMockNotificationForRepoName('3', 'owner/repo-a'),
+        mockGitifyNotificationForRepoName('1', 'owner/repo-a'),
+        mockGitifyNotificationForRepoName('2', 'owner/repo-b'),
+        mockGitifyNotificationForRepoName('3', 'owner/repo-a'),
       ];
 
       const result = groupNotificationsByRepository(notifications);
@@ -51,10 +51,10 @@ describe('renderer/utils/notifications/group.ts', () => {
 
     it('preserves first-seen repository order', () => {
       const notifications: GitifyNotification[] = [
-        createMockNotificationForRepoName('1', 'owner/repo-c'),
-        createMockNotificationForRepoName('2', 'owner/repo-a'),
-        createMockNotificationForRepoName('3', 'owner/repo-b'),
-        createMockNotificationForRepoName('4', 'owner/repo-a'),
+        mockGitifyNotificationForRepoName('1', 'owner/repo-c'),
+        mockGitifyNotificationForRepoName('2', 'owner/repo-a'),
+        mockGitifyNotificationForRepoName('3', 'owner/repo-b'),
+        mockGitifyNotificationForRepoName('4', 'owner/repo-a'),
       ];
 
       const result = groupNotificationsByRepository(notifications);
@@ -65,9 +65,9 @@ describe('renderer/utils/notifications/group.ts', () => {
 
     it('skips notifications without repository data', () => {
       const notifications: GitifyNotification[] = [
-        createMockNotificationForRepoName('1', 'owner/repo-a'),
-        createMockNotificationForRepoName('2', null),
-        createMockNotificationForRepoName('3', 'owner/repo-a'),
+        mockGitifyNotificationForRepoName('1', 'owner/repo-a'),
+        mockGitifyNotificationForRepoName('2', null),
+        mockGitifyNotificationForRepoName('3', 'owner/repo-a'),
       ];
 
       const result = groupNotificationsByRepository(notifications);
@@ -86,8 +86,8 @@ describe('renderer/utils/notifications/group.ts', () => {
 
     it('returns empty map when all notifications lack repository data', () => {
       const notifications: GitifyNotification[] = [
-        createMockNotificationForRepoName('1', null),
-        createMockNotificationForRepoName('2', null),
+        mockGitifyNotificationForRepoName('1', null),
+        mockGitifyNotificationForRepoName('2', null),
       ];
 
       const result = groupNotificationsByRepository(notifications);
@@ -100,10 +100,10 @@ describe('renderer/utils/notifications/group.ts', () => {
     it('returns repository-grouped order when groupBy is REPOSITORY', () => {
       const settings = { ...mockSettings, groupBy: GroupBy.REPOSITORY };
       const notifications: GitifyNotification[] = [
-        createMockNotificationForRepoName('1', 'owner/repo-b'),
-        createMockNotificationForRepoName('2', 'owner/repo-a'),
-        createMockNotificationForRepoName('3', 'owner/repo-b'),
-        createMockNotificationForRepoName('4', 'owner/repo-a'),
+        mockGitifyNotificationForRepoName('1', 'owner/repo-b'),
+        mockGitifyNotificationForRepoName('2', 'owner/repo-a'),
+        mockGitifyNotificationForRepoName('3', 'owner/repo-b'),
+        mockGitifyNotificationForRepoName('4', 'owner/repo-a'),
       ];
 
       const result = getFlattenedNotificationsByRepo(notifications, settings);
@@ -115,9 +115,9 @@ describe('renderer/utils/notifications/group.ts', () => {
     it('returns natural account order when groupBy is DATE', () => {
       const settings = { ...mockSettings, groupBy: GroupBy.DATE };
       const notifications: GitifyNotification[] = [
-        createMockNotificationForRepoName('1', 'owner/repo-b'),
-        createMockNotificationForRepoName('2', 'owner/repo-a'),
-        createMockNotificationForRepoName('3', 'owner/repo-b'),
+        mockGitifyNotificationForRepoName('1', 'owner/repo-b'),
+        mockGitifyNotificationForRepoName('2', 'owner/repo-a'),
+        mockGitifyNotificationForRepoName('3', 'owner/repo-b'),
       ];
 
       const result = getFlattenedNotificationsByRepo(notifications, settings);
@@ -138,9 +138,9 @@ describe('renderer/utils/notifications/group.ts', () => {
     it('handles notifications without repository data when grouped', () => {
       const settings = { ...mockSettings, groupBy: GroupBy.REPOSITORY };
       const notifications: GitifyNotification[] = [
-        createMockNotificationForRepoName('1', 'owner/repo-a'),
-        createMockNotificationForRepoName('2', null),
-        createMockNotificationForRepoName('3', 'owner/repo-a'),
+        mockGitifyNotificationForRepoName('1', 'owner/repo-a'),
+        mockGitifyNotificationForRepoName('2', null),
+        mockGitifyNotificationForRepoName('3', 'owner/repo-a'),
       ];
 
       const result = getFlattenedNotificationsByRepo(notifications, settings);
@@ -152,9 +152,9 @@ describe('renderer/utils/notifications/group.ts', () => {
     it('preserves notifications without repository data when not grouped', () => {
       const settings = { ...mockSettings, groupBy: GroupBy.DATE };
       const notifications: GitifyNotification[] = [
-        createMockNotificationForRepoName('1', 'owner/repo-a'),
-        createMockNotificationForRepoName('2', null),
-        createMockNotificationForRepoName('3', 'owner/repo-a'),
+        mockGitifyNotificationForRepoName('1', 'owner/repo-a'),
+        mockGitifyNotificationForRepoName('2', null),
+        mockGitifyNotificationForRepoName('3', 'owner/repo-a'),
       ];
 
       const result = getFlattenedNotificationsByRepo(notifications, settings);

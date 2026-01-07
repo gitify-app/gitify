@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 
 import { renderWithAppContext } from '../__helpers__/test-utils';
-import { mockAccountNotifications } from '../__mocks__/notifications-mocks';
+import { mockMultipleAccountNotifications } from '../__mocks__/notifications-mocks';
 import { mockSettings } from '../__mocks__/state-mocks';
 import * as comms from '../utils/comms';
 import { Sidebar } from './Sidebar';
@@ -98,7 +98,7 @@ describe('renderer/components/Sidebar.tsx', () => {
           <Sidebar />
         </MemoryRouter>,
         {
-          notifications: mockAccountNotifications,
+          notifications: mockMultipleAccountNotifications,
         },
       );
 
@@ -159,7 +159,7 @@ describe('renderer/components/Sidebar.tsx', () => {
           <Sidebar />
         </MemoryRouter>,
         {
-          notifications: mockAccountNotifications,
+          notifications: mockMultipleAccountNotifications,
         },
       );
 
@@ -177,7 +177,7 @@ describe('renderer/components/Sidebar.tsx', () => {
           <Sidebar />
         </MemoryRouter>,
         {
-          notifications: mockAccountNotifications,
+          notifications: mockMultipleAccountNotifications,
         },
       );
 

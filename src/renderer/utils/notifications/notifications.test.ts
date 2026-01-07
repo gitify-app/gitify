@@ -6,8 +6,8 @@ import {
   mockGitHubEnterpriseServerAccount,
 } from '../../__mocks__/account-mocks';
 import {
-  createMockNotificationForRepoName,
-  createPartialMockNotification,
+  mockGitifyNotificationForRepoName,
+  mockPartialGitifyNotification,
   mockSingleAccountNotifications,
 } from '../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../__mocks__/state-mocks';
@@ -60,7 +60,7 @@ describe('renderer/utils/notifications/notifications.ts', () => {
       .mockImplementation();
 
     const mockError = new Error('Test error');
-    const mockNotification = createPartialMockNotification({
+    const mockNotification = mockPartialGitifyNotification({
       title: 'This issue will throw an error',
       type: 'Issue',
       url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1' as Link,
@@ -71,7 +71,8 @@ describe('renderer/utils/notifications/notifications.ts', () => {
       htmlUrl: 'https://github.com/gitify-app/notifications-test' as Link,
       owner: {
         login: 'gitify-app',
-        avatarUrl: 'https://avatars.githubusercontent.com/u/1' as Link,
+        avatarUrl:
+          'https://avatars.githubusercontent.com/u/133795385?s=200&v=4' as Link,
         type: 'Organization',
       },
     };
@@ -98,9 +99,9 @@ describe('renderer/utils/notifications/notifications.ts', () => {
     const acc1: AccountNotifications = {
       account: mockGitHubCloudAccount,
       notifications: [
-        createMockNotificationForRepoName('a1', 'owner/repo-1'),
-        createMockNotificationForRepoName('a2', 'owner/repo-2'),
-        createMockNotificationForRepoName('a3', 'owner/repo-1'),
+        mockGitifyNotificationForRepoName('a1', 'owner/repo-1'),
+        mockGitifyNotificationForRepoName('a2', 'owner/repo-2'),
+        mockGitifyNotificationForRepoName('a3', 'owner/repo-1'),
       ],
       error: null,
     };
@@ -108,9 +109,9 @@ describe('renderer/utils/notifications/notifications.ts', () => {
     const acc2: AccountNotifications = {
       account: mockGitHubEnterpriseServerAccount,
       notifications: [
-        createMockNotificationForRepoName('b1', 'owner/repo-3'),
-        createMockNotificationForRepoName('b2', 'owner/repo-4'),
-        createMockNotificationForRepoName('b3', 'owner/repo-3'),
+        mockGitifyNotificationForRepoName('b1', 'owner/repo-3'),
+        mockGitifyNotificationForRepoName('b2', 'owner/repo-4'),
+        mockGitifyNotificationForRepoName('b3', 'owner/repo-3'),
       ],
       error: null,
     };
@@ -146,7 +147,7 @@ describe('renderer/utils/notifications/notifications.ts', () => {
 
   describe('enrichNotifications', () => {
     it('should skip enrichment when detailedNotifications is false', async () => {
-      const notification = createPartialMockNotification({
+      const notification = mockPartialGitifyNotification({
         title: 'Issue #1',
         type: 'Issue',
         url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1' as Link,
@@ -163,7 +164,7 @@ describe('renderer/utils/notifications/notifications.ts', () => {
 
     it('should return notifications when all types do not support merge query', async () => {
       // CheckSuite types don't support merge query and have no URL
-      const notification = createPartialMockNotification({
+      const notification = mockPartialGitifyNotification({
         title: 'CI workflow run',
         type: 'CheckSuite',
         url: null,

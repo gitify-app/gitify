@@ -1,4 +1,4 @@
-import { createPartialMockNotification } from '../../../__mocks__/notifications-mocks';
+import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
 import type { GitifyNotification, Link } from '../../../types';
 import { getWorkflowRunAttributes, workflowRunHandler } from './workflowRun';
@@ -6,7 +6,7 @@ import { getWorkflowRunAttributes, workflowRunHandler } from './workflowRun';
 describe('renderer/utils/notifications/handlers/workflowRun.ts', () => {
   describe('enrich', () => {
     it('deploy review workflow run state', async () => {
-      const mockNotification = createPartialMockNotification({
+      const mockNotification = mockPartialGitifyNotification({
         title: 'some-user requested your review to deploy to an environment',
         type: 'WorkflowRun',
       });
@@ -25,7 +25,7 @@ describe('renderer/utils/notifications/handlers/workflowRun.ts', () => {
     });
 
     it('unknown workflow run state', async () => {
-      const mockNotification = createPartialMockNotification({
+      const mockNotification = mockPartialGitifyNotification({
         title:
           'some-user requested your unknown-state to deploy to an environment',
         type: 'WorkflowRun',
@@ -41,7 +41,7 @@ describe('renderer/utils/notifications/handlers/workflowRun.ts', () => {
     });
 
     it('unhandled workflow run title', async () => {
-      const mockNotification = createPartialMockNotification({
+      const mockNotification = mockPartialGitifyNotification({
         title: 'unhandled workflow run structure',
         type: 'WorkflowRun',
       });
@@ -57,7 +57,7 @@ describe('renderer/utils/notifications/handlers/workflowRun.ts', () => {
   });
 
   it('iconType', () => {
-    const mockNotification = createPartialMockNotification({
+    const mockNotification = mockPartialGitifyNotification({
       type: 'WorkflowRun',
     });
 
@@ -84,7 +84,7 @@ describe('renderer/utils/notifications/handlers/workflowRun.ts', () => {
 
   describe('getWorkflowRunAttributes', () => {
     it('deploy review workflow run state', async () => {
-      const mockNotification = createPartialMockNotification({
+      const mockNotification = mockPartialGitifyNotification({
         title: 'some-user requested your review to deploy to an environment',
         type: 'WorkflowRun',
       });
@@ -99,7 +99,7 @@ describe('renderer/utils/notifications/handlers/workflowRun.ts', () => {
     });
 
     it('unknown workflow run state', async () => {
-      const mockNotification = createPartialMockNotification({
+      const mockNotification = mockPartialGitifyNotification({
         title:
           'some-user requested your unknown-state to deploy to an environment',
         type: 'WorkflowRun',
@@ -115,7 +115,7 @@ describe('renderer/utils/notifications/handlers/workflowRun.ts', () => {
     });
 
     it('unhandled workflow run title', async () => {
-      const mockNotification = createPartialMockNotification({
+      const mockNotification = mockPartialGitifyNotification({
         title: 'unhandled workflow run structure',
         type: 'WorkflowRun',
       });

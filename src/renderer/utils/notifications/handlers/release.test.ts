@@ -1,15 +1,15 @@
 import axios from 'axios';
 import nock from 'nock';
 
-import { createPartialMockNotification } from '../../../__mocks__/notifications-mocks';
+import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
-import { createPartialMockUser } from '../../../__mocks__/user-mocks';
 import type { GitifyNotification, Link } from '../../../types';
+import { mockRawUser } from '../../api/__mocks__/response-mocks';
 import { releaseHandler } from './release';
 
 describe('renderer/utils/notifications/handlers/release.ts', () => {
   describe('enrich', () => {
-    const mockAuthor = createPartialMockUser('some-author');
+    const mockAuthor = mockRawUser('some-author');
 
     beforeEach(() => {
       // axios will default to using the XHR adapter which can't be intercepted
@@ -18,7 +18,7 @@ describe('renderer/utils/notifications/handlers/release.ts', () => {
     });
 
     it('release notification', async () => {
-      const mockNotification = createPartialMockNotification({
+      const mockNotification = mockPartialGitifyNotification({
         title: 'This is a mock release',
         type: 'Release',
         url: 'https://api.github.com/repos/gitify-app/notifications-test/releases/1' as Link,
@@ -47,7 +47,7 @@ describe('renderer/utils/notifications/handlers/release.ts', () => {
     });
 
     it('return early if release state filtered', async () => {
-      const mockNotification = createPartialMockNotification({
+      const mockNotification = mockPartialGitifyNotification({
         title: 'This is a mock release',
         type: 'Release',
         url: 'https://api.github.com/repos/gitify-app/notifications-test/releases/1' as Link,
@@ -66,7 +66,7 @@ describe('renderer/utils/notifications/handlers/release.ts', () => {
   });
 
   it('iconType', () => {
-    const mockNotification = createPartialMockNotification({
+    const mockNotification = mockPartialGitifyNotification({
       type: 'Release',
     });
 
