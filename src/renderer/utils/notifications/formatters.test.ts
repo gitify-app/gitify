@@ -1,4 +1,4 @@
-import { createPartialMockNotification } from '../../__mocks__/notifications-mocks';
+import { mockPartialGitifyNotification } from '../../__mocks__/notifications-mocks';
 import {
   formatForDisplay,
   formatNotificationNumber,
@@ -21,7 +21,7 @@ describe('renderer/utils/notifications/formatters.ts', () => {
 
   describe('formattedNotificationType', () => {
     it('formats state and type with proper casing and spacing', () => {
-      const notification = createPartialMockNotification({
+      const notification = mockPartialGitifyNotification({
         title: 'Sample',
         type: 'PullRequest',
         state: 'OPEN',
@@ -31,7 +31,7 @@ describe('renderer/utils/notifications/formatters.ts', () => {
     });
 
     it('handles missing state (null) gracefully', () => {
-      const notification = createPartialMockNotification({
+      const notification = mockPartialGitifyNotification({
         title: 'Sample',
         type: 'Issue',
         state: null,
@@ -43,7 +43,7 @@ describe('renderer/utils/notifications/formatters.ts', () => {
 
   describe('formattedNotificationNumber', () => {
     it('returns formatted number when present', () => {
-      const notification = createPartialMockNotification({
+      const notification = mockPartialGitifyNotification({
         title: 'Sample',
         type: 'Issue',
         state: 'OPEN',
@@ -54,7 +54,7 @@ describe('renderer/utils/notifications/formatters.ts', () => {
     });
 
     it('returns empty string when number absent', () => {
-      const notification = createPartialMockNotification({
+      const notification = mockPartialGitifyNotification({
         title: 'Sample',
         type: 'Issue',
         state: 'OPEN',
@@ -66,7 +66,7 @@ describe('renderer/utils/notifications/formatters.ts', () => {
 
   describe('formattedNotificationTitle', () => {
     it('appends number in brackets when present', () => {
-      const notification = createPartialMockNotification({
+      const notification = mockPartialGitifyNotification({
         title: 'Fix bug',
         type: 'Issue',
         state: 'OPEN',
@@ -77,7 +77,7 @@ describe('renderer/utils/notifications/formatters.ts', () => {
     });
 
     it('returns title unchanged when number missing', () => {
-      const notification = createPartialMockNotification({
+      const notification = mockPartialGitifyNotification({
         title: 'Improve docs',
         type: 'Issue',
         state: 'OPEN',

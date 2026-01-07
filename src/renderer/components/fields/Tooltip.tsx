@@ -21,10 +21,9 @@ export const Tooltip: FC<TooltipProps> = (props: TooltipProps) => {
         <button
           {...anchorProps}
           aria-label={props.name}
-          data-testid={`tooltip-${props.name}`}
+          data-testid={`tooltip-icon-${props.name}`}
           id={props.name}
-          onMouseEnter={() => setShowTooltip(true)}
-          onMouseLeave={() => setShowTooltip(false)}
+          onClick={() => setShowTooltip(!showTooltip)}
           type="button"
         >
           <QuestionIcon className="text-gitify-tooltip-icon" />
@@ -38,6 +37,9 @@ export const Tooltip: FC<TooltipProps> = (props: TooltipProps) => {
           'text-left text-xs text-gitify-font',
           'rounded-sm border border-gray-300 shadow-sm bg-gitify-tooltip-popout',
         )}
+        data-testid={`tooltip-content-${props.name}`}
+        onMouseLeave={() => setShowTooltip(false)}
+        role="tooltip"
       >
         {props.tooltip}
       </div>

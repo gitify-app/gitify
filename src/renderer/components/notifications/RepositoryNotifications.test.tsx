@@ -3,9 +3,9 @@ import userEvent from '@testing-library/user-event';
 
 import { renderWithAppContext } from '../../__helpers__/test-utils';
 import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
+import { mockGitHubCloudGitifyNotifications } from '../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../__mocks__/state-mocks';
 import type { Link } from '../../types';
-import { mockGitHubNotifications } from '../../utils/api/__mocks__/response-mocks';
 import * as comms from '../../utils/comms';
 import { RepositoryNotifications } from './RepositoryNotifications';
 
@@ -20,7 +20,7 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
   const props = {
     account: mockGitHubCloudAccount,
     repoName: 'gitify-app/notifications-test',
-    repoNotifications: mockGitHubNotifications,
+    repoNotifications: mockGitHubCloudGitifyNotifications,
   };
 
   afterEach(() => {
@@ -67,7 +67,7 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
     await userEvent.click(screen.getByTestId('repository-mark-as-read'));
 
     expect(markNotificationsAsReadMock).toHaveBeenCalledWith(
-      mockGitHubNotifications,
+      mockGitHubCloudGitifyNotifications,
     );
   });
 
@@ -80,7 +80,7 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
     await userEvent.click(screen.getByTestId('repository-mark-as-done'));
 
     expect(markNotificationsAsDoneMock).toHaveBeenCalledWith(
-      mockGitHubNotifications,
+      mockGitHubCloudGitifyNotifications,
     );
   });
 

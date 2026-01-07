@@ -1,10 +1,8 @@
-import { createMockGraphQLAuthor } from '../../../__mocks__/user-mocks';
+import { mockAuthor } from '../../api/__mocks__/response-mocks';
 import { getNotificationAuthor } from './utils';
 
 describe('renderer/utils/notifications/handlers/utils.ts', () => {
   describe('getNotificationAuthor', () => {
-    const mockAuthor = createMockGraphQLAuthor('some-author');
-
     it('returns null when all users are null', () => {
       const result = getNotificationAuthor([null, null]);
 

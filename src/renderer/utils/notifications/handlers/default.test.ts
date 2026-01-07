@@ -1,4 +1,4 @@
-import { createPartialMockNotification } from '../../../__mocks__/notifications-mocks';
+import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
 import type { GitifyNotification } from '../../../types';
 import {
@@ -17,7 +17,7 @@ describe('renderer/utils/notifications/handlers/default.ts', () => {
 
   describe('enrich', () => {
     it('unhandled subject details', async () => {
-      const mockNotification = createPartialMockNotification({
+      const mockNotification = mockPartialGitifyNotification({
         title:
           'There is no special subject handling for this notification type',
         type: 'RepositoryInvitation',
@@ -34,7 +34,7 @@ describe('renderer/utils/notifications/handlers/default.ts', () => {
   });
 
   it('iconType', () => {
-    const mockNotification = createPartialMockNotification({});
+    const mockNotification = mockPartialGitifyNotification({});
 
     expect(defaultHandler.iconType(mockNotification).displayName).toBe(
       'QuestionIcon',
@@ -50,7 +50,7 @@ describe('renderer/utils/notifications/handlers/default.ts', () => {
       ];
 
       states.forEach((state) => {
-        const mockNotification = createPartialMockNotification({
+        const mockNotification = mockPartialGitifyNotification({
           state: state,
         });
 

@@ -4,9 +4,9 @@ import {
   ChevronRightIcon,
 } from '@primer/octicons-react';
 
+import { mockGitifyNotification } from '../__mocks__/notifications-mocks';
 import { mockToken } from '../__mocks__/state-mocks';
 import type { GitifySubject, Hostname, Link, SubjectType } from '../types';
-import { mockSingleNotification } from './api/__mocks__/response-mocks';
 import * as apiClient from './api/client';
 import {
   generateGitHubWebUrl,
@@ -55,7 +55,7 @@ describe('renderer/utils/helpers.ts', () => {
 
   describe('generateNotificationReferrerId', () => {
     it('should generate the notification_referrer_id', () => {
-      const referrerId = generateNotificationReferrerId(mockSingleNotification);
+      const referrerId = generateNotificationReferrerId(mockGitifyNotification);
       expect(referrerId).toBe(
         'MDE4Ok5vdGlmaWNhdGlvblRocmVhZDEzODY2MTA5NjoxMjM0NTY3ODk=',
       );
@@ -90,7 +90,7 @@ describe('renderer/utils/helpers.ts', () => {
       } as GitifySubject;
 
       const result = await generateGitHubWebUrl({
-        ...mockSingleNotification,
+        ...mockGitifyNotification,
         subject: subject,
       });
 
@@ -116,7 +116,7 @@ describe('renderer/utils/helpers.ts', () => {
       getHtmlUrlSpy.mockResolvedValue(mockHtmlUrl);
 
       const result = await generateGitHubWebUrl({
-        ...mockSingleNotification,
+        ...mockGitifyNotification,
         subject: subject,
       });
 
@@ -145,7 +145,7 @@ describe('renderer/utils/helpers.ts', () => {
       getHtmlUrlSpy.mockResolvedValue(mockHtmlUrl);
 
       const result = await generateGitHubWebUrl({
-        ...mockSingleNotification,
+        ...mockGitifyNotification,
         subject: subject,
       });
 

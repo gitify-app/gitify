@@ -1,9 +1,8 @@
 import axios from 'axios';
 import nock from 'nock';
 
-import { createPartialMockNotification } from '../../../__mocks__/notifications-mocks';
+import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
-import { createMockGraphQLAuthor } from '../../../__mocks__/user-mocks';
 import type { GitifyNotification } from '../../../types';
 import {
   type GitifyIssueState,
@@ -11,15 +10,12 @@ import {
   IconColor,
   type Link,
 } from '../../../types';
-import type {
-  IssueDetailsFragment,
-  IssueState,
-  IssueStateReason,
-} from '../../api/graphql/generated/graphql';
+import {
+  mockAuthor,
+  mockCommenter,
+  mockIssueResponseNode,
+} from '../../api/__mocks__/response-mocks';
 import { issueHandler } from './issue';
-
-const mockAuthor = createMockGraphQLAuthor('issue-author');
-const mockCommenter = createMockGraphQLAuthor('issue-commenter');
 
 describe('renderer/utils/notifications/handlers/issue.ts', () => {
   describe('supportsMergedQueryEnrichment', () => {
@@ -32,7 +28,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
     let mockNotification: GitifyNotification;
 
     beforeEach(() => {
-      mockNotification = createPartialMockNotification({
+      mockNotification = mockPartialGitifyNotification({
         title: 'This is a mock issue',
         type: 'Issue',
         url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1' as Link,
@@ -101,7 +97,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         state: 'COMPLETED',
         user: {
           login: mockAuthor.login,
-          avatarUrl: mockCommenter.avatarUrl,
+          avatarUrl: mockAuthor.avatarUrl,
           htmlUrl: mockAuthor.htmlUrl,
           type: mockAuthor.type,
         },
@@ -245,7 +241,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
     it.each(
       Object.entries(cases) as Array<[GitifyIssueState, IconColor]>,
     )('iconType for issue with state %s', (issueState, issueIconType) => {
-      const mockNotification = createPartialMockNotification({
+      const mockNotification = mockPartialGitifyNotification({
         type: 'Issue',
         state: issueState,
       });
@@ -269,7 +265,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
     it.each(
       Object.entries(cases) as Array<[GitifyIssueState, IconColor]>,
     )('iconColor for issue with state %s', (issueState, issueIconColor) => {
-      const mockNotification = createPartialMockNotification({
+      const mockNotification = mockPartialGitifyNotification({
         type: 'Issue',
         state: issueState,
       });
@@ -291,21 +287,3 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
     ).toEqual(`${mockHtmlUrl}/issues`);
   });
 });
-
-function mockIssueResponseNode(mocks: {
-  state: IssueState;
-  stateReason?: IssueStateReason;
-}): IssueDetailsFragment {
-  return {
-    __typename: 'Issue',
-    number: 123,
-    title: 'PR Title',
-    state: mocks.state,
-    stateReason: mocks.stateReason,
-    url: 'https://github.com/gitify-app/notifications-test/issues/123',
-    author: mockAuthor,
-    labels: { nodes: [] },
-    comments: { totalCount: 0, nodes: [] },
-    milestone: null,
-  };
-}
