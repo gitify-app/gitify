@@ -17,6 +17,11 @@
       "rangeStrategy": "auto"
     },
     {
+      "description": "Remove word `dependency` from commit messages and PR titles",
+      "matchDatasources": ["npm"],
+      "commitMessageTopic": "{{depName}}"
+    },
+    {
       "description": "Fetch changelog details for twemoji packages",
       "matchPackageNames": ["@discordapp/twemoji"],
       "changelogUrl": "https://github.com/jdjdecked/twemoji"
