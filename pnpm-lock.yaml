@@ -169,8 +169,8 @@ importers:
         specifier: 7.7.3
         version: 7.7.3
       styled-components:
-        specifier: 6.1.19
-        version: 6.1.19(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+        specifier: 6.2.0
+        version: 6.2.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       tailwind-merge:
         specifier: 3.4.0
         version: 3.4.0
@@ -905,11 +905,6 @@ packages:
   '@discoveryjs/json-ext@0.6.3':
     resolution: {integrity: sha512-4B4OijXeVNOPZlYA2oEwWOTkzyltLao+xbotHQeqN++Rv27Y6s818+n2Qkp8q+Fxhn0t/5lA5X1Mxktud8eayQ==}
     engines: {node: '>=14.17.0'}
-
-  '@electron/asar@3.2.18':
-    resolution: {integrity: sha512-2XyvMe3N3Nrs8cV39IKELRHTYUWFKrmqqSY1U+GMlc0jvqjIVnoxhNd2H4JolWQncbJi1DCvb5TNxZuI2fEjWg==}
-    engines: {node: '>=10.12.0'}
-    hasBin: true
 
   '@electron/asar@3.4.1':
     resolution: {integrity: sha512-i4/rNPRS84t0vSRa2HorerGRXWyF4vThfHesw0dmcWHp+cspK743UanA0suA5Q5y8kzY2y6YKrvbIUn69BCAiA==}
@@ -2027,8 +2022,8 @@ packages:
   '@types/stack-utils@2.0.3':
     resolution: {integrity: sha512-9aEbYZ3TbYMznPdcdr3SmIrLXwC/AKZXQeCf9Pgao5CKb8CyHuEX5jzWPTkvregvhRJHcpRO6BFoGW9ycaOkYw==}
 
-  '@types/stylis@4.2.5':
-    resolution: {integrity: sha512-1Xve+NMN7FWjY14vLoY5tL3BVEQ/n42YLwaqJIPYhotZ9uBHt87VceMwWQpzmdEt2TNXIorIFG+YeCUUW7RInw==}
+  '@types/stylis@4.2.7':
+    resolution: {integrity: sha512-VgDNokpBoKF+wrdvhAAfS55OMQpL6QRglwTwNC3kIgBrzZxA4WsFj+2eLfEA/uMUDzBcEhYmjSbwQakn/i3ajA==}
 
   '@types/tough-cookie@4.0.5':
     resolution: {integrity: sha512-/Ad8+nIOV7Rl++6f1BdKxFSMgmoqEoYbHRpPcx3JEfv8VRsQe9Z4mCXeJBzxs7mbHY/XOZZuXlRNfhpVPbs6ZA==}
@@ -2514,10 +2509,6 @@ packages:
     resolution: {integrity: sha512-upp+biKpN/XZMLim7aguUyW8s0FUpDvOtK6sbanMFDAMBzpHDqdhgVYm6zc9HJ6nWo7u2Lxk60i2M6Jd3aiNrA==}
     engines: {node: '>=12.0.0'}
 
-  builder-util-runtime@9.3.1:
-    resolution: {integrity: sha512-2/egrNDDnRaxVwK3A+cJq6UOlqOdedGA7JPqCeJjN2Zjk1/QB/6QUi3b714ScIGS7HafFXTyzJEOr5b44I3kvQ==}
-    engines: {node: '>=12.0.0'}
-
   builder-util-runtime@9.5.1:
     resolution: {integrity: sha512-qt41tMfgHTllhResqM5DcnHyDIWNgzHvuY2jDcYP9iaGpkWxTUzV6GQjDeLnlR1/DtdlcsWQbA7sByMpmJFTLQ==}
     engines: {node: '>=12.0.0'}
@@ -2907,9 +2898,6 @@ packages:
   cssstyle@4.4.0:
     resolution: {integrity: sha512-W0Y2HOXlPkb2yaKrCVRjinYKciu/qSLEmK0K9mcfDei3zwlnHFEHAs/Du3cIRwPqY+J4JsiBzUjoHyc8RsJ03A==}
     engines: {node: '>=18'}
-
-  csstype@3.1.3:
-    resolution: {integrity: sha512-M1uQkMl8rQK/szD0LNhtqxIPLpimGm8sOBwU7lLnCpSbTyY3yeU1Vc7l4KT5zT4s/yOxHH5O7tIuuLOCnLADRw==}
 
   csstype@3.2.3:
     resolution: {integrity: sha512-z1HGKcYy2xA8AGQfwrn0PAy+PB7X/GSj3UVJW9qKyn43xWa+gl5nXmU4qqLMRzWVLFC8KusUX8T/0kCiOYpAIQ==}
@@ -5379,8 +5367,8 @@ packages:
     resolution: {integrity: sha512-6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig==}
     engines: {node: '>=8'}
 
-  styled-components@6.1.19:
-    resolution: {integrity: sha512-1v/e3Dl1BknC37cXMhwGomhO8AkYmN41CqyX9xhUDxry1ns3BFQy2lLDRQXJRdVVWB9OHemv/53xaStimvWyuA==}
+  styled-components@6.2.0:
+    resolution: {integrity: sha512-ryFCkETE++8jlrBmC+BoGPUN96ld1/Yp0s7t5bcXDobrs4XoXroY1tN+JbFi09hV6a5h3MzbcVi8/BGDP0eCgQ==}
     engines: {node: '>= 16'}
     peerDependencies:
       react: '>= 16.8.0'
@@ -5392,8 +5380,8 @@ packages:
     peerDependencies:
       postcss: ^8.4.31
 
-  stylis@4.3.2:
-    resolution: {integrity: sha512-bhtUjWd/z6ltJiQwg0dUfxEJ+W+jdqQd8TbWLWyeIJHlnsqmGLRFFd8e5mA0AZi/zx90smXRlN66YMTcaSFifg==}
+  stylis@4.3.6:
+    resolution: {integrity: sha512-yQ3rwFWRfwNUY7H5vpU0wfdkNSnvnJinhF9830Swlaxl03zsOjCfmX0ugac+3LtK0lYSgwL/KXc8oYL3mG4YFQ==}
 
   sumchecker@3.0.1:
     resolution: {integrity: sha512-MvjXzkz/BOfyVDkG0oFOtBxHX2u3gKbMHIF/dXblZsgD3BWOFLmHovIpZY7BykJdAjcqRCBi1WYBNdEC9yI7vg==}
@@ -6758,12 +6746,6 @@ snapshots:
 
   '@discoveryjs/json-ext@0.6.3': {}
 
-  '@electron/asar@3.2.18':
-    dependencies:
-      commander: 5.1.0
-      glob: 7.2.3
-      minimatch: 3.1.2
-
   '@electron/asar@3.4.1':
     dependencies:
       commander: 5.1.0
@@ -6856,7 +6838,7 @@ snapshots:
 
   '@electron/universal@1.5.1':
     dependencies:
-      '@electron/asar': 3.2.18
+      '@electron/asar': 3.4.1
       '@malept/cross-spawn-promise': 1.1.1
       debug: 4.4.3
       dir-compare: 3.3.0
@@ -6881,17 +6863,17 @@ snapshots:
   '@emnapi/core@1.4.3':
     dependencies:
       '@emnapi/wasi-threads': 1.0.2
-      tslib: 2.6.2
+      tslib: 2.8.1
     optional: true
 
   '@emnapi/runtime@1.4.3':
     dependencies:
-      tslib: 2.6.2
+      tslib: 2.8.1
     optional: true
 
   '@emnapi/wasi-threads@1.0.2':
     dependencies:
-      tslib: 2.6.2
+      tslib: 2.8.1
     optional: true
 
   '@emotion/is-prop-valid@1.2.2':
@@ -8157,7 +8139,7 @@ snapshots:
 
   '@tybys/wasm-util@0.9.0':
     dependencies:
-      tslib: 2.6.2
+      tslib: 2.8.1
     optional: true
 
   '@types/aria-query@5.0.4': {}
@@ -8291,7 +8273,7 @@ snapshots:
 
   '@types/stack-utils@2.0.3': {}
 
-  '@types/stylis@4.2.5': {}
+  '@types/stylis@4.2.7': {}
 
   '@types/tough-cookie@4.0.5': {}
 
@@ -8869,13 +8851,6 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  builder-util-runtime@9.3.1:
-    dependencies:
-      debug: 4.4.3
-      sax: 1.3.0
-    transitivePeerDependencies:
-      - supports-color
-
   builder-util-runtime@9.5.1:
     dependencies:
       debug: 4.4.3
@@ -8962,7 +8937,7 @@ snapshots:
   camel-case@4.1.2:
     dependencies:
       pascal-case: 3.1.2
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   camelcase@5.3.1: {}
 
@@ -9340,8 +9315,6 @@ snapshots:
       '@asamuzakjp/css-color': 3.2.0
       rrweb-cssom: 0.8.0
 
-  csstype@3.1.3: {}
-
   csstype@3.2.3: {}
 
   data-uri-to-buffer@4.0.1: {}
@@ -9502,7 +9475,7 @@ snapshots:
   dot-case@3.0.4:
     dependencies:
       no-case: 3.0.4
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   dotenv-expand@11.0.6:
     dependencies:
@@ -10013,7 +9986,7 @@ snapshots:
   graphql-tag@2.12.6(graphql@16.12.0):
     dependencies:
       graphql: 16.12.0
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   graphql-ws@6.0.6(graphql@16.12.0)(ws@8.18.3):
     dependencies:
@@ -10922,7 +10895,7 @@ snapshots:
 
   lower-case@2.0.2:
     dependencies:
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   lowercase-keys@2.0.0: {}
 
@@ -11105,7 +11078,7 @@ snapshots:
   no-case@3.0.4:
     dependencies:
       lower-case: 2.0.2
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   nock@13.5.6:
     dependencies:
@@ -11239,7 +11212,7 @@ snapshots:
   param-case@3.0.4:
     dependencies:
       dot-case: 3.0.4
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   parent-module@1.0.1:
     dependencies:
@@ -11265,7 +11238,7 @@ snapshots:
   pascal-case@3.1.2:
     dependencies:
       no-case: 3.0.4
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   path-case@3.0.4:
     dependencies:
@@ -11993,18 +11966,18 @@ snapshots:
 
   strip-json-comments@3.1.1: {}
 
-  styled-components@6.1.19(react-dom@19.2.3(react@19.2.3))(react@19.2.3):
+  styled-components@6.2.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3):
     dependencies:
       '@emotion/is-prop-valid': 1.2.2
       '@emotion/unitless': 0.8.1
-      '@types/stylis': 4.2.5
+      '@types/stylis': 4.2.7
       css-to-react-native: 3.2.0
-      csstype: 3.1.3
+      csstype: 3.2.3
       postcss: 8.4.49
       react: 19.2.3
       react-dom: 19.2.3(react@19.2.3)
       shallowequal: 1.1.0
-      stylis: 4.3.2
+      stylis: 4.3.6
       tslib: 2.6.2
 
   stylehacks@7.0.4(postcss@8.5.6):
@@ -12013,7 +11986,7 @@ snapshots:
       postcss: 8.5.6
       postcss-selector-parser: 6.1.2
 
-  stylis@4.3.2: {}
+  stylis@4.3.6: {}
 
   sumchecker@3.0.1:
     dependencies:
