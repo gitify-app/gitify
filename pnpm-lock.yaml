@@ -64,8 +64,8 @@ importers:
         specifier: 11.3.2
         version: 11.3.2
       '@primer/react':
-        specifier: 38.6.2
-        version: 38.6.2(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react-is@18.3.0)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react-is@18.3.1)(react@19.2.3)
+        specifier: 38.7.0
+        version: 38.7.0(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react-is@18.3.0)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react-is@18.3.1)(react@19.2.3)
       '@tailwindcss/postcss':
         specifier: 4.1.18
         version: 4.1.18
@@ -906,11 +906,6 @@ packages:
     resolution: {integrity: sha512-4B4OijXeVNOPZlYA2oEwWOTkzyltLao+xbotHQeqN++Rv27Y6s818+n2Qkp8q+Fxhn0t/5lA5X1Mxktud8eayQ==}
     engines: {node: '>=14.17.0'}
 
-  '@electron/asar@3.2.18':
-    resolution: {integrity: sha512-2XyvMe3N3Nrs8cV39IKELRHTYUWFKrmqqSY1U+GMlc0jvqjIVnoxhNd2H4JolWQncbJi1DCvb5TNxZuI2fEjWg==}
-    engines: {node: '>=10.12.0'}
-    hasBin: true
-
   '@electron/asar@3.4.1':
     resolution: {integrity: sha512-i4/rNPRS84t0vSRa2HorerGRXWyF4vThfHesw0dmcWHp+cspK743UanA0suA5Q5y8kzY2y6YKrvbIUn69BCAiA==}
     engines: {node: '>=10.12.0'}
@@ -1718,8 +1713,8 @@ packages:
     resolution: {integrity: sha512-YLT9Zo3oNPJoBjBc4q8G2mjU4tqIbf5CEOORbUUr48dCD9q3umJ3IPlVqOqDakPfd2HuwccBaqlGhN4Gmr5OWg==}
     engines: {node: ^12.20.0 || ^14.18.0 || >=16.0.0}
 
-  '@primer/behaviors@1.9.0':
-    resolution: {integrity: sha512-MIVSZlQGJzas44DZDwo4Dqiev289K918oDl/AcA+zTpQAjp+PrJ0LUxEnrSOapyivLYpRpmSCeF0XPh7NgXpCA==}
+  '@primer/behaviors@1.9.1':
+    resolution: {integrity: sha512-wssAE1ezYP3rZjt/dOPju3E7s3wsNkM08QoX33yA6hXUfuXTbGkEKsYnnbLT691/S/sNoZR2GMAkSkIyNDDyJA==}
 
   '@primer/css@22.1.0':
     resolution: {integrity: sha512-Nwg9QaRiBeu0BU6h+Su0X07daihX1obiuqGRG8y+SexOnvWhN2J5n4OFAvGfQsit07Y7Q6gGoK+yVU5tb8CtDA==}
@@ -1739,8 +1734,8 @@ packages:
   '@primer/primitives@11.3.2':
     resolution: {integrity: sha512-/8EDh3MmF9cbmrLETFmIuNFIdvpSCkvBlx6zzD8AZ4dZ5UYExQzFj8QAtIrRtCFJ2ZmW5QrtrPR3+JVb8KEDpg==}
 
-  '@primer/react@38.6.2':
-    resolution: {integrity: sha512-m0GZwm5Bg9CyEIM4I/Cq7yN/JGBWkBEW+Xtsa6Og/2OBmyK/23MELMfi/k5uDHIY3zl2oFsNoOlPWCICJWwHGw==}
+  '@primer/react@38.7.0':
+    resolution: {integrity: sha512-pB+RvaYeZQlooQBlfMwknszONtGLj0l2cxmom/M227HOJ9HS9QttI1dh8qxeUGryKpple2RQf6Z9zQX0cxllTA==}
     engines: {node: '>=12', npm: '>=7'}
     peerDependencies:
       '@types/react': 18.x || 19.x
@@ -2512,10 +2507,6 @@ packages:
 
   builder-util-runtime@9.2.4:
     resolution: {integrity: sha512-upp+biKpN/XZMLim7aguUyW8s0FUpDvOtK6sbanMFDAMBzpHDqdhgVYm6zc9HJ6nWo7u2Lxk60i2M6Jd3aiNrA==}
-    engines: {node: '>=12.0.0'}
-
-  builder-util-runtime@9.3.1:
-    resolution: {integrity: sha512-2/egrNDDnRaxVwK3A+cJq6UOlqOdedGA7JPqCeJjN2Zjk1/QB/6QUi3b714ScIGS7HafFXTyzJEOr5b44I3kvQ==}
     engines: {node: '>=12.0.0'}
 
   builder-util-runtime@9.5.1:
@@ -6758,12 +6749,6 @@ snapshots:
 
   '@discoveryjs/json-ext@0.6.3': {}
 
-  '@electron/asar@3.2.18':
-    dependencies:
-      commander: 5.1.0
-      glob: 7.2.3
-      minimatch: 3.1.2
-
   '@electron/asar@3.4.1':
     dependencies:
       commander: 5.1.0
@@ -6856,7 +6841,7 @@ snapshots:
 
   '@electron/universal@1.5.1':
     dependencies:
-      '@electron/asar': 3.2.18
+      '@electron/asar': 3.4.1
       '@malept/cross-spawn-promise': 1.1.1
       debug: 4.4.3
       dir-compare: 3.3.0
@@ -7965,7 +7950,7 @@ snapshots:
 
   '@pkgr/core@0.2.7': {}
 
-  '@primer/behaviors@1.9.0': {}
+  '@primer/behaviors@1.9.1': {}
 
   '@primer/css@22.1.0(@primer/primitives@11.3.2)':
     dependencies:
@@ -7981,14 +7966,14 @@ snapshots:
 
   '@primer/primitives@11.3.2': {}
 
-  '@primer/react@38.6.2(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react-is@18.3.0)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react-is@18.3.1)(react@19.2.3)':
+  '@primer/react@38.7.0(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react-is@18.3.0)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react-is@18.3.1)(react@19.2.3)':
     dependencies:
       '@github/mini-throttle': 2.1.1
       '@github/relative-time-element': 4.5.0
       '@github/tab-container-element': 4.8.2
       '@lit-labs/react': 1.2.1
       '@oddbird/popover-polyfill': 0.5.2
-      '@primer/behaviors': 1.9.0
+      '@primer/behaviors': 1.9.1
       '@primer/live-region-element': 0.7.1
       '@primer/octicons-react': 19.21.1(react@19.2.3)
       '@primer/primitives': 11.3.2
@@ -8863,13 +8848,6 @@ snapshots:
       ieee754: 1.2.1
 
   builder-util-runtime@9.2.4:
-    dependencies:
-      debug: 4.4.3
-      sax: 1.3.0
-    transitivePeerDependencies:
-      - supports-color
-
-  builder-util-runtime@9.3.1:
     dependencies:
       debug: 4.4.3
       sax: 1.3.0
