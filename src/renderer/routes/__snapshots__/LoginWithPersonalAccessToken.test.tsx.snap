@@ -230,7 +230,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
                     The
                      
                     <button
-                      aria-describedby="_r_7_"
+                      aria-describedby="_r_9_"
                       type="button"
                     >
                       <u
@@ -243,7 +243,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
                       aria-hidden="true"
                       class="prc-TooltipV2-Tooltip-tLeuB"
                       data-direction="se"
-                      id="_r_7_"
+                      id="_r_9_"
                       popover="auto"
                       role="tooltip"
                     >
@@ -259,7 +259,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
                 >
                   <label
                     class="prc-components-Label-2mrqP"
-                    for="_r_8_"
+                    for="_r_a_"
                   >
                     <span
                       class="prc-components-RequiredText-7UsHS"
@@ -284,7 +284,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
                       class="prc-components-Input-IwWrt"
                       data-component="input"
                       data-testid="login-token"
-                      id="_r_8_"
+                      id="_r_a_"
                       name="token"
                       placeholder="Your generated token (40 characters)"
                       type="password"
@@ -294,7 +294,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
                       class="TextInput-action prc-components-TextInputAction-CjGDX"
                     >
                       <button
-                        aria-labelledby="_r_c_"
+                        aria-labelledby="_r_g_"
                         class="prc-Button-ButtonBase-9n-Xk prc-components-Invisible-bKOcl prc-Button-IconButton-fyge7"
                         data-component="IconButton"
                         data-loading="false"
@@ -324,7 +324,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
                         aria-hidden="true"
                         class="prc-TooltipV2-Tooltip-tLeuB"
                         data-direction="s"
-                        id="_r_c_"
+                        id="_r_g_"
                         popover="auto"
                       >
                         Show token
@@ -346,7 +346,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
                 data-wrap="nowrap"
               >
                 <button
-                  aria-describedby="_r_e_"
+                  aria-describedby="_r_i_"
                   class="prc-Button-ButtonBase-9n-Xk"
                   data-loading="false"
                   data-size="small"
@@ -392,7 +392,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
                   aria-hidden="true"
                   class="prc-TooltipV2-Tooltip-tLeuB"
                   data-direction="ne"
-                  id="_r_e_"
+                  id="_r_i_"
                   popover="auto"
                   role="tooltip"
                 >
@@ -677,7 +677,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
                   The
                    
                   <button
-                    aria-describedby="_r_7_"
+                    aria-describedby="_r_9_"
                     type="button"
                   >
                     <u
@@ -690,7 +690,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
                     aria-hidden="true"
                     class="prc-TooltipV2-Tooltip-tLeuB"
                     data-direction="se"
-                    id="_r_7_"
+                    id="_r_9_"
                     popover="auto"
                     role="tooltip"
                   >
@@ -706,7 +706,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
               >
                 <label
                   class="prc-components-Label-2mrqP"
-                  for="_r_8_"
+                  for="_r_a_"
                 >
                   <span
                     class="prc-components-RequiredText-7UsHS"
@@ -731,7 +731,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
                     class="prc-components-Input-IwWrt"
                     data-component="input"
                     data-testid="login-token"
-                    id="_r_8_"
+                    id="_r_a_"
                     name="token"
                     placeholder="Your generated token (40 characters)"
                     type="password"
@@ -741,7 +741,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
                     class="TextInput-action prc-components-TextInputAction-CjGDX"
                   >
                     <button
-                      aria-labelledby="_r_c_"
+                      aria-labelledby="_r_g_"
                       class="prc-Button-ButtonBase-9n-Xk prc-components-Invisible-bKOcl prc-Button-IconButton-fyge7"
                       data-component="IconButton"
                       data-loading="false"
@@ -771,7 +771,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
                       aria-hidden="true"
                       class="prc-TooltipV2-Tooltip-tLeuB"
                       data-direction="s"
-                      id="_r_c_"
+                      id="_r_g_"
                       popover="auto"
                     >
                       Show token
@@ -793,7 +793,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
               data-wrap="nowrap"
             >
               <button
-                aria-describedby="_r_e_"
+                aria-describedby="_r_i_"
                 class="prc-Button-ButtonBase-9n-Xk"
                 data-loading="false"
                 data-size="small"
@@ -839,7 +839,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
                 aria-hidden="true"
                 class="prc-TooltipV2-Tooltip-tLeuB"
                 data-direction="ne"
-                id="_r_e_"
+                id="_r_i_"
                 popover="auto"
                 role="tooltip"
               >
