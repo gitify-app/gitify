@@ -32,10 +32,16 @@ export const NotificationRow: FC<NotificationRowProps> = ({
   const [animateExit, setAnimateExit] = useState(false);
 
   const handleNotification = useCallback(() => {
-    setAnimateExit(!settings.delayNotificationState);
+    // Don't animate exit when fetchReadNotifications is enabled
+    // as notifications will stay in the list with reduced opacity
+    const shouldAnimateExit =
+      !settings.delayNotificationState && !settings.fetchReadNotifications;
+    setAnimateExit(shouldAnimateExit);
     openNotification(notification);
 
-    if (settings.markAsDoneOnOpen) {
+    // Fall back to mark as read when fetchReadNotifications is enabled
+    // since marking as done won't work correctly (API limitation)
+    if (settings.markAsDoneOnOpen && !settings.fetchReadNotifications) {
       markNotificationsAsDone([notification]);
     } else {
       markNotificationsAsRead([notification]);
@@ -53,7 +59,11 @@ export const NotificationRow: FC<NotificationRowProps> = ({
   };
 
   const actionMarkAsRead = () => {
-    setAnimateExit(!settings.delayNotificationState);
+    // Don't animate exit when fetchReadNotifications is enabled
+    // as the notification will stay in the list with reduced opacity
+    if (!settings.fetchReadNotifications) {
+      setAnimateExit(!settings.delayNotificationState);
+    }
     markNotificationsAsRead([notification]);
   };
 
@@ -140,7 +150,10 @@ export const NotificationRow: FC<NotificationRowProps> = ({
 
           <HoverButton
             action={actionMarkAsDone}
-            enabled={isMarkAsDoneFeatureSupported(notification.account)}
+            enabled={
+              isMarkAsDoneFeatureSupported(notification.account) &&
+              !settings.fetchReadNotifications
+            }
             icon={CheckIcon}
             label="Mark as done"
             testid="notification-mark-as-done"

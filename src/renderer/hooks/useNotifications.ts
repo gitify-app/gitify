@@ -222,7 +222,12 @@ export const useNotifications = (): NotificationsState => {
           notification.account.token,
         );
 
-        if (state.settings.markAsDoneOnUnsubscribe) {
+        // Fall back to mark as read when fetchReadNotifications is enabled
+        // since marking as done won't work correctly (API limitation)
+        if (
+          state.settings.markAsDoneOnUnsubscribe &&
+          !state.settings.fetchReadNotifications
+        ) {
           await markNotificationsAsDone(state, [notification]);
         } else {
           await markNotificationsAsRead(state, [notification]);
