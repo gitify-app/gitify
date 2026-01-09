@@ -37,7 +37,11 @@ export const RepositoryNotifications: FC<RepositoryNotificationsProps> = ({
   };
 
   const actionMarkAsRead = () => {
-    setAnimateExit(!settings.delayNotificationState);
+    // Don't animate exit when fetchReadNotifications is enabled
+    // as the notifications will stay in the list with reduced opacity
+    if (!settings.fetchReadNotifications) {
+      setAnimateExit(!settings.delayNotificationState);
+    }
     markNotificationsAsRead(repoNotifications);
   };
 
@@ -101,9 +105,10 @@ export const RepositoryNotifications: FC<RepositoryNotificationsProps> = ({
 
             <HoverButton
               action={actionMarkAsDone}
-              enabled={isMarkAsDoneFeatureSupported(
-                repoNotifications[0].account,
-              )}
+              enabled={
+                isMarkAsDoneFeatureSupported(repoNotifications[0].account) &&
+                !settings.fetchReadNotifications
+              }
               icon={CheckIcon}
               label="Mark repository as done"
               testid="repository-mark-as-done"
