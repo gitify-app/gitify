@@ -1,8 +1,5 @@
 import { vi } from 'vitest';
 
-// Mock to use axios instead of Tauri HTTP plugin
-vi.mock('../environment', () => ({ isTauriEnvironment: () => false }));
-
 // Mock decryptValue to return 'decrypted' for consistent test expectations
 vi.mock('../comms', () => ({
   decryptValue: vi.fn().mockResolvedValue('decrypted'),

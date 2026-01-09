@@ -1,8 +1,3 @@
-import { vi } from 'vitest';
-
-// Mock to use axios instead of Tauri HTTP plugin
-vi.mock('../../environment', () => ({ isTauriEnvironment: () => false }));
-
 import { createPartialMockNotification } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
 import type { GitifyNotification, Link } from '../../../types';

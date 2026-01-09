@@ -1,8 +1,3 @@
-import { vi } from 'vitest';
-
-// Mock to use axios instead of Tauri HTTP plugin
-vi.mock('../../environment', () => ({ isTauriEnvironment: () => false }));
-
 import axios from 'axios';
 import nock from 'nock';
 
