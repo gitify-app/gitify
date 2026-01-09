@@ -1,9 +1,8 @@
-import axios, { type AxiosResponse, type Method } from 'axios';
+import type { AxiosResponse, Method } from 'axios';
 import type { ExecutionResult } from 'graphql';
 
 import type { Link, Token } from '../../types';
 import { decryptValue } from '../comms';
-import { isTauriEnvironment } from '../environment';
 import { rendererLogError } from '../logger';
 import type { TypedDocumentString } from './graphql/generated/graphql';
 import { getNextURLFromLinkHeader } from './utils';
@@ -18,7 +17,6 @@ async function tauriFetch(
   headers: Record<string, string>,
   data?: unknown,
 ): Promise<AxiosResponse> {
-  // Dynamically import to avoid issues in browser mode
   const { fetch: tauriFetch } = await import('@tauri-apps/plugin-http');
 
   // HEAD and GET requests cannot have a body
@@ -86,13 +84,7 @@ export async function apiRequest(
   data = {},
 ): Promise<AxiosResponse> {
   const headers = await getHeaders(url);
-
-  // Use Tauri HTTP plugin in Tauri mode to bypass CORS
-  if (isTauriEnvironment()) {
-    return tauriFetch(url, method, headers, data);
-  }
-
-  return axios({ method, url, data, headers });
+  return tauriFetch(url, method, headers, data);
 }
 
 /**
@@ -113,14 +105,10 @@ export async function apiRequestAuth(
   fetchAllRecords = false,
 ): Promise<AxiosResponse> {
   const headers = await getHeaders(url, token);
-  const useTauri = isTauriEnvironment();
 
   // Helper function to make a single request
   const makeRequest = async (requestUrl: string): Promise<AxiosResponse> => {
-    if (useTauri) {
-      return tauriFetch(requestUrl, method, headers, data);
-    }
-    return axios({ method, url: requestUrl, data, headers });
+    return tauriFetch(requestUrl, method, headers, data);
   };
 
   if (!fetchAllRecords) {
@@ -174,26 +162,11 @@ export async function performGraphQLRequest<TResult, TVariables>(
   const headers = await getHeaders(url, token);
   const requestData = { query, variables };
 
-  // Use Tauri HTTP plugin in Tauri mode to bypass CORS
-  if (isTauriEnvironment()) {
-    const response = await tauriFetch(url, 'POST', headers, requestData);
-    return {
-      ...response.data,
-      headers: response.headers,
-    } as ExecutionResultWithHeaders<TResult>;
-  }
-
-  return axios({
-    method: 'POST',
-    url,
-    data: requestData,
-    headers: headers,
-  }).then((response) => {
-    return {
-      ...response.data,
-      headers: response.headers,
-    };
-  }) as Promise<ExecutionResultWithHeaders<TResult>>;
+  const response = await tauriFetch(url, 'POST', headers, requestData);
+  return {
+    ...response.data,
+    headers: response.headers,
+  } as ExecutionResultWithHeaders<TResult>;
 }
 
 /**
@@ -209,20 +182,15 @@ export async function performGraphQLRequestString<TResult>(
 ): Promise<ExecutionResultWithHeaders<TResult>> {
   const headers = await getHeaders(url, token);
 
-  return axios({
-    method: 'POST',
-    url,
-    data: {
-      query,
-      variables,
-    },
-    headers: headers,
-  }).then((response) => {
-    return {
-      ...response.data,
-      headers: response.headers,
-    } as ExecutionResultWithHeaders<TResult>;
+  const response = await tauriFetch(url, 'POST', headers, {
+    query,
+    variables,
   });
+
+  return {
+    ...response.data,
+    headers: response.headers,
+  } as ExecutionResultWithHeaders<TResult>;
 }
 
 /**

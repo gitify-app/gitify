@@ -1,16 +1,10 @@
 import type { Percentage } from '../../types';
-import { isTauriEnvironment } from '../environment';
 
 const MINIMUM_VOLUME_PERCENTAGE = 0 as Percentage;
 const MAXIMUM_VOLUME_PERCENTAGE = 100 as Percentage;
 const VOLUME_STEP = 10 as Percentage;
 
 export async function raiseSoundNotification(volume: Percentage) {
-  if (!isTauriEnvironment()) {
-    // Browser fallback - no sound notification
-    return;
-  }
-
   const path = await window.gitify.notificationSoundPath();
 
   const audio = new Audio(path);

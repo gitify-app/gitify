@@ -1,5 +1,8 @@
 /**
  * Environment detection utilities
+ *
+ * Note: This is primarily used by tests for mocking purposes.
+ * The production app always runs in Tauri - browser fallbacks have been removed.
  */
 
 // Extend Window interface for Tauri internals check
@@ -10,9 +13,10 @@ declare global {
 }
 
 /**
- * Check if running in Tauri environment (vs browser dev mode)
- * Returns true when the app is running inside Tauri with the bridge loaded
- * In tests, this returns true when window.gitify and __TAURI_INTERNALS__ are mocked
+ * Check if running in Tauri environment
+ *
+ * In production, this always returns true.
+ * Tests mock this function to control HTTP client behavior.
  */
 export function isTauriEnvironment(): boolean {
   return (

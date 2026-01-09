@@ -32,10 +32,25 @@ interface UpdateStatus {
   update_downloaded: boolean;
 }
 
-// Platform detection
-const isLinux = () => navigator.platform.toLowerCase().includes('linux');
-const isMacOS = () => navigator.platform.toLowerCase().includes('mac');
-const isWindows = () => navigator.platform.toLowerCase().includes('win');
+// Platform detection - cached from backend
+let cachedPlatform: string | null = null;
+
+// Initialize platform from backend (called at module load)
+async function initializePlatform(): Promise<void> {
+  try {
+    cachedPlatform = await invoke<string>('get_platform');
+  } catch {
+    // Fallback if backend call fails during initialization
+    cachedPlatform = 'unknown';
+  }
+}
+
+// Start platform initialization immediately
+initializePlatform();
+
+const isLinux = () => cachedPlatform === 'linux';
+const isMacOS = () => cachedPlatform === 'macos';
+const isWindows = () => cachedPlatform === 'windows';
 
 export const api = {
   /**
@@ -136,15 +151,11 @@ export const api = {
     /**
      * Update tray icon color based on notification count
      * Passing a negative number will set the error state color
-     * Checks navigator.onLine to show offline icon when disconnected
      */
     updateColor: async (notificationsCount = 0) => {
       let state: string;
 
-      // Check if offline first (matches Electron behavior with net.isOnline())
-      if (!navigator.onLine) {
-        state = 'offline';
-      } else if (notificationsCount < 0) {
+      if (notificationsCount < 0) {
         state = 'error';
       } else if (notificationsCount > 0) {
         state = 'active';
@@ -329,21 +340,11 @@ export const api = {
    * Returns true if permission is granted, false otherwise
    */
   requestNotificationPermission: async (): Promise<boolean> => {
-    // Check if the Notification API is available
-    if (!('Notification' in window)) {
-      // biome-ignore lint/suspicious/noConsole: Runtime warning for unsupported environment
-      console.warn('Notifications not supported in this environment');
-      return false;
-    }
-
-    // Check current permission status
     if (Notification.permission === 'granted') {
       return true;
     }
 
     if (Notification.permission === 'denied') {
-      // biome-ignore lint/suspicious/noConsole: Runtime warning for denied permission
-      console.warn('Notification permission was previously denied');
       return false;
     }
 
@@ -351,18 +352,16 @@ export const api = {
     try {
       const permission = await Notification.requestPermission();
       return permission === 'granted';
-    } catch (error) {
-      // biome-ignore lint/suspicious/noConsole: Runtime error logging
-      console.error('Failed to request notification permission:', error);
+    } catch {
       return false;
     }
   },
 
   /**
-   * Check if notifications are supported and permitted
+   * Check if notifications are permitted
    */
   isNotificationSupported: (): boolean => {
-    return 'Notification' in window && Notification.permission === 'granted';
+    return Notification.permission === 'granted';
   },
 
   /**
@@ -374,70 +373,38 @@ export const api = {
    * @param title - Notification title
    * @param body - Notification body text
    * @param url - Optional URL to open when clicked
-   * @returns The Notification object, or null if notifications are not supported
+   * @returns The Notification object, or null if permission not granted
    */
   raiseNativeNotification: (
     title: string,
     body: string,
     url?: string | null,
   ): Notification | null => {
-    // Check if notifications are supported
-    if (!('Notification' in window)) {
-      // biome-ignore lint/suspicious/noConsole: Runtime warning for unsupported environment
-      console.warn('Notifications not supported in this environment');
-      return null;
-    }
-
-    // Check permission
     if (Notification.permission !== 'granted') {
-      // biome-ignore lint/suspicious/noConsole: Runtime warning for permission state
-      console.warn(
-        'Notification permission not granted:',
-        Notification.permission,
-      );
       // Try to request permission asynchronously for next time
       api.requestNotificationPermission();
       return null;
     }
 
-    try {
-      // Create the notification using the Web Notification API
-      // We use silent: true because we play our own sound
-      const notification = new Notification(title, { body, silent: true });
+    // Create the notification using the Web Notification API
+    // We use silent: true because we play our own sound
+    const notification = new Notification(title, { body, silent: true });
 
-      // Handle notification click
-      notification.onclick = async (event) => {
-        // Prevent the browser from focusing the webview by default
-        event.preventDefault();
+    // Handle notification click
+    notification.onclick = async (event) => {
+      event.preventDefault();
 
-        try {
-          if (url) {
-            // If a URL is provided, open it in the default browser
-            // Hide the app window first so the browser takes focus
-            await api.app.hide();
-            await api.openExternalLink(url, true);
-          } else {
-            // If no URL, just show and focus the app window
-            await api.app.show();
-          }
-        } catch (error) {
-          // biome-ignore lint/suspicious/noConsole: Runtime error logging
-          console.error('Error handling notification click:', error);
-        }
-      };
+      if (url) {
+        // If a URL is provided, open it in the default browser
+        await api.app.hide();
+        await api.openExternalLink(url, true);
+      } else {
+        // If no URL, just show and focus the app window
+        await api.app.show();
+      }
+    };
 
-      // Handle notification error
-      notification.onerror = (error) => {
-        // biome-ignore lint/suspicious/noConsole: Runtime error logging
-        console.error('Notification error:', error);
-      };
-
-      return notification;
-    } catch (error) {
-      // biome-ignore lint/suspicious/noConsole: Runtime error logging
-      console.error('Failed to create notification:', error);
-      return null;
-    }
+    return notification;
   },
 
   /**
