@@ -231,7 +231,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
                 popover="auto"
                 role="tooltip"
               >
-                undefined unread notifications ↗
+                0 unread notifications ↗
               </span>
               <button
                 aria-describedby="_r_5_"
@@ -572,7 +572,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
               popover="auto"
               role="tooltip"
             >
-              undefined unread notifications ↗
+              0 unread notifications ↗
             </span>
             <button
               aria-describedby="_r_5_"
@@ -970,7 +970,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
                 popover="auto"
                 role="tooltip"
               >
-                undefined unread notifications ↗
+                0 unread notifications ↗
               </span>
               <button
                 aria-labelledby="_r_k_"
@@ -1233,7 +1233,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
               popover="auto"
               role="tooltip"
             >
-              undefined unread notifications ↗
+              0 unread notifications ↗
             </span>
             <button
               aria-labelledby="_r_k_"

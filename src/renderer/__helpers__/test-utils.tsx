@@ -22,19 +22,41 @@ export function AppContextProvider({
   children,
   value = {},
 }: AppContextProviderProps) {
-  const defaultValue: Partial<AppContextState> = useMemo(() => {
+  const defaultValue: AppContextState = useMemo(() => {
     return {
       auth: mockAuth,
       settings: mockSettings,
       isLoggedIn: true,
 
       notifications: [],
+      notificationCount: 0,
+      unreadNotificationCount: 0,
+      hasNotifications: false,
+      hasUnreadNotifications: false,
 
       status: 'success',
       globalError: null,
 
+      // Default mock implementations for all required methods
+      loginWithGitHubApp: jest.fn(),
+      loginWithOAuthApp: jest.fn(),
+      loginWithPersonalAccessToken: jest.fn(),
+      logoutFromAccount: jest.fn(),
+
+      fetchNotifications: jest.fn(),
+      removeAccountNotifications: jest.fn(),
+
+      markNotificationsAsRead: jest.fn(),
+      markNotificationsAsDone: jest.fn(),
+      unsubscribeNotification: jest.fn(),
+
+      clearFilters: jest.fn(),
+      resetSettings: jest.fn(),
+      updateSetting: jest.fn(),
+      updateFilter: jest.fn(),
+
       ...value,
-    } as Partial<AppContextState>;
+    } as AppContextState;
   }, [value]);
 
   return (
