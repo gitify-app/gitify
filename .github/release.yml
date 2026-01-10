@@ -24,6 +24,9 @@ changelog:
     - title: 📦 Dependency Updates
       labels:
         - dependency
+    - title: 🧹 Chore
+      labels:
+        - chore
     - title: Other Changes
       labels:
         - "*"
