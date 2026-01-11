@@ -430,7 +430,7 @@ describe('renderer/components/Sidebar.tsx', () => {
         },
       );
 
-      // Note: userEvent.keyboard with modifier syntax like {Shift>h</Shift>} 
+      // Note: userEvent.keyboard with modifier syntax like {Shift>h</Shift>}
       // would require holding shift, but we test that metaKey/ctrlKey/altKey
       // prevent action through manual event dispatch
       const event = new KeyboardEvent('keydown', {
