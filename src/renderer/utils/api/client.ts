@@ -71,6 +71,7 @@ export function listNotificationsForAuthenticatedUser(
   const url = getGitHubAPIBaseUrl(account.hostname);
   url.pathname += 'notifications';
   url.searchParams.append('participating', String(settings.participating));
+  url.searchParams.append('all', String(settings.fetchReadNotifications));
 
   return apiRequestAuth(
     url.toString() as Link,

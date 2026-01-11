@@ -304,7 +304,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     setUseUnreadActiveIcon(settings.useUnreadActiveIcon);
     setUseAlternateIdleIcon(settings.useAlternateIdleIcon);
 
-    const trayCount = status === 'error' ? -1 : unreadNotificationCount;
+    const trayCount = status === 'error' ? -1 : notificationCount;
     setTrayIconColorAndTitle(trayCount, settings);
   }, [
     settings.showNotificationsCountInTray,

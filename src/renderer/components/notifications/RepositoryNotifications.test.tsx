@@ -23,6 +23,13 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
     repoNotifications: mockGitHubCloudGitifyNotifications,
   };
 
+  beforeEach(() => {
+    // Reset mock notification state between tests since it's mutated
+    for (const n of mockGitHubCloudGitifyNotifications) {
+      n.unread = true;
+    }
+  });
+
   afterEach(() => {
     jest.clearAllMocks();
   });

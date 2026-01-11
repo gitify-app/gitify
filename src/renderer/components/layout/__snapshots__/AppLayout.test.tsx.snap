@@ -145,7 +145,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
                   popover="auto"
                   role="tooltip"
                 >
-                  undefined unread notifications ↗
+                  0 unread notifications ↗
                 </span>
                 <button
                   aria-describedby="_r_5_"
@@ -541,7 +541,7 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
                 popover="auto"
                 role="tooltip"
               >
-                undefined unread notifications ↗
+                0 unread notifications ↗
               </span>
               <button
                 aria-describedby="_r_5_"
