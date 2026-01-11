@@ -227,7 +227,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                 >
                   <label
                     class="prc-components-Label-2mrqP"
-                    for="_r_9_"
+                    for="_r_7_"
                   >
                     <span
                       class="prc-components-RequiredText-7UsHS"
@@ -251,7 +251,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                       class="prc-components-Input-IwWrt"
                       data-component="input"
                       data-testid="login-clientId"
-                      id="_r_9_"
+                      id="_r_7_"
                       name="clientId"
                       placeholder="Your generated client id (20 characters)"
                       type="text"
@@ -265,7 +265,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                 >
                   <label
                     class="prc-components-Label-2mrqP"
-                    for="_r_f_"
+                    for="_r_b_"
                   >
                     <span
                       class="prc-components-RequiredText-7UsHS"
@@ -290,7 +290,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                       class="prc-components-Input-IwWrt"
                       data-component="input"
                       data-testid="login-clientSecret"
-                      id="_r_f_"
+                      id="_r_b_"
                       name="clientSecret"
                       placeholder="Your generated client secret (40 characters)"
                       type="password"
@@ -300,7 +300,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                       class="TextInput-action prc-components-TextInputAction-CjGDX"
                     >
                       <button
-                        aria-labelledby="_r_l_"
+                        aria-labelledby="_r_f_"
                         class="prc-Button-ButtonBase-9n-Xk prc-components-Invisible-bKOcl prc-Button-IconButton-fyge7"
                         data-component="IconButton"
                         data-loading="false"
@@ -330,7 +330,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                         aria-hidden="true"
                         class="prc-TooltipV2-Tooltip-tLeuB"
                         data-direction="s"
-                        id="_r_l_"
+                        id="_r_f_"
                         popover="auto"
                       >
                         Show token
@@ -352,7 +352,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                 data-wrap="nowrap"
               >
                 <button
-                  aria-describedby="_r_n_"
+                  aria-describedby="_r_h_"
                   class="prc-Button-ButtonBase-9n-Xk"
                   data-loading="false"
                   data-size="small"
@@ -398,7 +398,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                   aria-hidden="true"
                   class="prc-TooltipV2-Tooltip-tLeuB"
                   data-direction="s"
-                  id="_r_n_"
+                  id="_r_h_"
                   popover="auto"
                   role="tooltip"
                 >
@@ -680,7 +680,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
               >
                 <label
                   class="prc-components-Label-2mrqP"
-                  for="_r_9_"
+                  for="_r_7_"
                 >
                   <span
                     class="prc-components-RequiredText-7UsHS"
@@ -704,7 +704,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                     class="prc-components-Input-IwWrt"
                     data-component="input"
                     data-testid="login-clientId"
-                    id="_r_9_"
+                    id="_r_7_"
                     name="clientId"
                     placeholder="Your generated client id (20 characters)"
                     type="text"
@@ -718,7 +718,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
               >
                 <label
                   class="prc-components-Label-2mrqP"
-                  for="_r_f_"
+                  for="_r_b_"
                 >
                   <span
                     class="prc-components-RequiredText-7UsHS"
@@ -743,7 +743,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                     class="prc-components-Input-IwWrt"
                     data-component="input"
                     data-testid="login-clientSecret"
-                    id="_r_f_"
+                    id="_r_b_"
                     name="clientSecret"
                     placeholder="Your generated client secret (40 characters)"
                     type="password"
@@ -753,7 +753,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                     class="TextInput-action prc-components-TextInputAction-CjGDX"
                   >
                     <button
-                      aria-labelledby="_r_l_"
+                      aria-labelledby="_r_f_"
                       class="prc-Button-ButtonBase-9n-Xk prc-components-Invisible-bKOcl prc-Button-IconButton-fyge7"
                       data-component="IconButton"
                       data-loading="false"
@@ -783,7 +783,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                       aria-hidden="true"
                       class="prc-TooltipV2-Tooltip-tLeuB"
                       data-direction="s"
-                      id="_r_l_"
+                      id="_r_f_"
                       popover="auto"
                     >
                       Show token
@@ -805,7 +805,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
               data-wrap="nowrap"
             >
               <button
-                aria-describedby="_r_n_"
+                aria-describedby="_r_h_"
                 class="prc-Button-ButtonBase-9n-Xk"
                 data-loading="false"
                 data-size="small"
@@ -851,7 +851,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                 aria-hidden="true"
                 class="prc-TooltipV2-Tooltip-tLeuB"
                 data-direction="s"
-                id="_r_n_"
+                id="_r_h_"
                 popover="auto"
                 role="tooltip"
               >
