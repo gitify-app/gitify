@@ -5,7 +5,6 @@ import { RelativeTime, Stack, Text } from '@primer/react';
 import { type GitifyNotification, Opacity, Size } from '../../types';
 import { cn } from '../../utils/cn';
 import { openUserProfile } from '../../utils/links';
-import { createNotificationHandler } from '../../utils/notifications/handlers';
 import { AvatarWithFallback } from '../avatars/AvatarWithFallback';
 import { MetricGroup } from '../metrics/MetricGroup';
 
@@ -16,8 +15,6 @@ interface NotificationFooterProps {
 export const NotificationFooter: FC<NotificationFooterProps> = ({
   notification,
 }: NotificationFooterProps) => {
-  const handler = createNotificationHandler(notification);
-
   return (
     <Stack
       align="center"
@@ -47,7 +44,7 @@ export const NotificationFooter: FC<NotificationFooterProps> = ({
       ) : (
         <AvatarWithFallback
           size={Size.SMALL}
-          userType={handler.defaultUserType()}
+          userType={notification.display.defaultUserType}
         />
       )}
 

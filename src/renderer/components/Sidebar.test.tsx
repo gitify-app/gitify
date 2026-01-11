@@ -16,6 +16,7 @@ jest.mock('react-router-dom', () => ({
 
 describe('renderer/components/Sidebar.tsx', () => {
   const fetchNotificationsMock = jest.fn();
+  const updateSettingMock = jest.fn();
   const openExternalLinkSpy = jest
     .spyOn(comms, 'openExternalLink')
     .mockImplementation();
@@ -103,6 +104,55 @@ describe('renderer/components/Sidebar.tsx', () => {
       );
 
       expect(screen.getByTestId('sidebar-notifications')).toMatchSnapshot();
+    });
+  });
+
+  describe('Focused mode toggle', () => {
+    it('renders the focused mode is off', () => {
+      renderWithAppContext(
+        <MemoryRouter>
+          <Sidebar />
+        </MemoryRouter>,
+        {
+          isLoggedIn: true,
+          settings: { ...mockSettings, participating: false },
+        },
+      );
+
+      expect(screen.getByTestId('sidebar-focused-mode')).toBeInTheDocument();
+    });
+
+    it('renders the focused mode is on', () => {
+      renderWithAppContext(
+        <MemoryRouter>
+          <Sidebar />
+        </MemoryRouter>,
+        {
+          isLoggedIn: true,
+          settings: { ...mockSettings, participating: true },
+        },
+      );
+
+      expect(screen.getByTestId('sidebar-focused-mode')).toBeInTheDocument();
+    });
+
+    it('toggles participating when clicked', async () => {
+      renderWithAppContext(
+        <MemoryRouter>
+          <Sidebar />
+        </MemoryRouter>,
+        {
+          isLoggedIn: true,
+          settings: { ...mockSettings, participating: false },
+          updateSetting: updateSettingMock,
+          fetchNotifications: fetchNotificationsMock,
+        },
+      );
+
+      await userEvent.click(screen.getByTestId('sidebar-focused-mode'));
+
+      expect(updateSettingMock).toHaveBeenCalledTimes(1);
+      expect(updateSettingMock).toHaveBeenCalledWith('participating', true);
     });
   });
 

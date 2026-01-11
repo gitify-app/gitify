@@ -3,6 +3,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 import {
   BellIcon,
+  CrosshairsIcon,
+  EyeIcon,
   FilterIcon,
   GearIcon,
   GitPullRequestIcon,
@@ -37,6 +39,7 @@ export const Sidebar: FC = () => {
     auth,
     unreadNotificationCount,
     hasUnreadNotifications,
+    updateSetting,
   } = useAppContext();
 
   const primaryAccountHostname = getPrimaryAccountHostname(auth);
@@ -44,6 +47,10 @@ export const Sidebar: FC = () => {
   const goHome = useCallback(() => {
     navigate('/', { replace: true });
   }, []);
+
+  const toggleFocusMode = useCallback(() => {
+    updateSetting('participating', !settings.participating);
+  }, [settings.participating, updateSetting]);
 
   const toggleFilters = useCallback(() => {
     if (location.pathname.startsWith('/filters')) {
@@ -67,6 +74,52 @@ export const Sidebar: FC = () => {
     fetchNotifications();
   }, [goHome, fetchNotifications]);
 
+  type ShortcutConfig = {
+    hotkey: string;
+    action: () => void;
+    enabled?: boolean;
+  };
+
+  type ShortcutName =
+    | 'home'
+    | 'refresh'
+    | 'settings'
+    | 'filters'
+    | 'focusedMode';
+
+  const shortcuts: Record<ShortcutName, ShortcutConfig> = {
+    home: {
+      hotkey: 'h',
+      action: goHome,
+      enabled: true,
+    },
+    focusedMode: {
+      hotkey: 'w',
+      action: toggleFocusMode,
+      enabled: status !== 'loading',
+    },
+    filters: {
+      hotkey: 'f',
+      action: toggleFilters,
+      enabled: isLoggedIn,
+    },
+    refresh: {
+      hotkey: 'r',
+      action: refreshNotifications,
+      enabled: status !== 'loading',
+    },
+    settings: {
+      hotkey: 's',
+      action: toggleSettings,
+      enabled: isLoggedIn,
+    },
+  };
+
+  const getKeybindingHint = (handler: () => void): string | undefined => {
+    const shortcut = Object.values(shortcuts).find((s) => s.action === handler);
+    return shortcut ? shortcut.hotkey.toUpperCase() : undefined;
+  };
+
   useEffect(() => {
     const sidebarShortcutHandler = (event: KeyboardEvent) => {
       // Ignore if user is typing in an input, textarea, or with modifiers
@@ -81,33 +134,11 @@ export const Sidebar: FC = () => {
       }
 
       const key = event.key.toLowerCase();
+      const shortcut = Object.values(shortcuts).find((s) => s.hotkey === key);
 
-      switch (key) {
-        case 'h':
-          event.preventDefault();
-          goHome();
-          break;
-        case 'r':
-          if (status !== 'loading') {
-            event.preventDefault();
-            refreshNotifications();
-          }
-          break;
-        case 's':
-          if (isLoggedIn) {
-            event.preventDefault();
-            toggleSettings();
-          }
-          break;
-        case 'f':
-          if (isLoggedIn) {
-            event.preventDefault();
-            toggleFilters();
-          }
-          break;
-        default:
-          // No action for other keys
-          break;
+      if (shortcut && shortcut.enabled !== false) {
+        event.preventDefault();
+        shortcut.action();
       }
     };
 
@@ -116,14 +147,7 @@ export const Sidebar: FC = () => {
     return () => {
       document.removeEventListener('keydown', sidebarShortcutHandler);
     };
-  }, [
-    isLoggedIn,
-    status,
-    goHome,
-    toggleFilters,
-    toggleSettings,
-    refreshNotifications,
-  ]);
+  }, []);
 
   return (
     <Stack
@@ -142,8 +166,8 @@ export const Sidebar: FC = () => {
           data-testid="sidebar-home"
           description="Home"
           icon={LogoIcon}
-          keybindingHint="H"
-          onClick={() => goHome()}
+          keybindingHint={shortcuts.home.hotkey}
+          onClick={() => shortcuts.home.action()}
           size="small"
           tooltipDirection="e"
           variant="invisible"
@@ -161,17 +185,35 @@ export const Sidebar: FC = () => {
         />
 
         {isLoggedIn && (
-          <IconButton
-            aria-label="Filters"
-            data-testid="sidebar-filter-notifications"
-            description="Filter notifications"
-            icon={FilterIcon}
-            keybindingHint="F"
-            onClick={() => toggleFilters()}
-            size="small"
-            tooltipDirection="e"
-            variant={hasActiveFilters(settings) ? 'primary' : 'invisible'}
-          />
+          <>
+            <IconButton
+              aria-label="Toggle focused mode"
+              data-testid="sidebar-focused-mode"
+              description={
+                settings.participating
+                  ? 'Focused (participating only)'
+                  : 'Participating and watching'
+              }
+              icon={settings.participating ? CrosshairsIcon : EyeIcon}
+              keybindingHint={shortcuts.focusedMode.hotkey}
+              onClick={() => shortcuts.focusedMode.action()}
+              size="small"
+              tooltipDirection="e"
+              variant={settings.participating ? 'primary' : 'invisible'}
+            />
+
+            <IconButton
+              aria-label="Filters"
+              data-testid="sidebar-filter-notifications"
+              description="Filter notifications"
+              icon={FilterIcon}
+              keybindingHint={shortcuts.filters.hotkey}
+              onClick={() => shortcuts.filters.action()}
+              size="small"
+              tooltipDirection="e"
+              variant={hasActiveFilters(settings) ? 'primary' : 'invisible'}
+            />
+          </>
         )}
 
         <IconButton
@@ -210,9 +252,9 @@ export const Sidebar: FC = () => {
               description="Refresh notifications"
               disabled={status === 'loading'}
               icon={SyncIcon}
-              keybindingHint="R"
+              keybindingHint={shortcuts.refresh.hotkey}
               // loading={status === 'loading'}
-              onClick={() => refreshNotifications()}
+              onClick={() => shortcuts.refresh.action()}
               size="small"
               tooltipDirection="e"
               variant="invisible"
@@ -223,7 +265,7 @@ export const Sidebar: FC = () => {
               data-testid="sidebar-settings"
               description="Settings"
               icon={GearIcon}
-              keybindingHint="S"
+              keybindingHint={getKeybindingHint(toggleSettings)}
               onClick={() => toggleSettings()}
               size="small"
               tooltipDirection="e"

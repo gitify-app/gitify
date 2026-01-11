@@ -23,6 +23,7 @@ import type {
   PullRequestDetailsFragment,
   PullRequestReviewFieldsFragment,
 } from '../../api/graphql/generated/graphql';
+import { formatGitHubNumber } from '../formatters';
 import { DefaultHandler, defaultHandler } from './default';
 import { getNotificationAuthor } from './utils';
 
@@ -58,10 +59,10 @@ class PullRequestHandler extends DefaultHandler {
       state: prState,
       user: prUser,
       reviews: reviews,
-      comments: pr.comments.totalCount,
+      commentCount: pr.comments.totalCount,
       labels: pr.labels?.nodes.map((label) => label.name) ?? [],
-      linkedIssues: pr.closingIssuesReferences?.nodes.map(
-        (issue) => `#${issue.number}`,
+      linkedIssues: pr.closingIssuesReferences?.nodes.map((issue) =>
+        formatGitHubNumber(issue.number),
       ),
       milestone: pr.milestone,
       htmlUrl: prComment?.url ?? pr.url,

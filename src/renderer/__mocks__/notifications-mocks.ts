@@ -1,12 +1,18 @@
-import type {
-  AccountNotifications,
-  GitifyNotification,
-  GitifyNotificationUser,
-  GitifyOwner,
-  GitifyReason,
-  GitifyRepository,
-  GitifySubject,
-  Link,
+import {
+  FeedPullRequestOpenIcon,
+  IssueOpenedIcon,
+} from '@primer/octicons-react';
+
+import {
+  type AccountNotifications,
+  type GitifyNotification,
+  type GitifyNotificationUser,
+  type GitifyOwner,
+  type GitifyReason,
+  type GitifyRepository,
+  type GitifySubject,
+  IconColor,
+  type Link,
 } from '../types';
 import {
   mockGitHubAppAccount,
@@ -79,6 +85,16 @@ export const mockGitHubCloudGitifyNotifications: GitifyNotification[] = [
       ],
     },
     repository: mockGitHubRepository,
+    display: {
+      number: '123',
+      title: 'I am a robot and this is a test! [#123]',
+      type: 'Open Issue',
+      icon: {
+        type: IssueOpenedIcon,
+        color: IconColor.GREEN,
+      },
+      defaultUserType: 'User',
+    },
   },
   {
     account: mockGitHubCloudAccount,
@@ -100,6 +116,16 @@ export const mockGitHubCloudGitifyNotifications: GitifyNotification[] = [
       reviews: null,
     },
     repository: mockGitHubRepository,
+    display: {
+      number: '456',
+      title: 'Improve the UI [#456]',
+      type: 'Issue',
+      icon: {
+        type: IssueOpenedIcon,
+        color: IconColor.GREEN,
+      },
+      defaultUserType: 'User',
+    },
   },
 ];
 
@@ -144,6 +170,16 @@ export const mockGithubEnterpriseGitifyNotifications: GitifyNotification[] = [
       reviews: null,
     },
     repository: mockEnterpriseRepository,
+    display: {
+      number: '',
+      title: 'Release 0.0.1',
+      type: 'Release',
+      icon: {
+        type: IssueOpenedIcon,
+        color: IconColor.GREEN,
+      },
+      defaultUserType: 'User',
+    },
   },
   {
     account: mockGitHubEnterpriseServerAccount,
@@ -165,6 +201,16 @@ export const mockGithubEnterpriseGitifyNotifications: GitifyNotification[] = [
       reviews: null,
     },
     repository: mockEnterpriseRepository,
+    display: {
+      number: '123',
+      title: 'Bump Version [#123]',
+      type: 'Pull Request',
+      icon: {
+        type: FeedPullRequestOpenIcon,
+        color: IconColor.GREEN,
+      },
+      defaultUserType: 'User',
+    },
   },
 ];
 

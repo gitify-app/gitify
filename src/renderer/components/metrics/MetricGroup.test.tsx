@@ -49,7 +49,7 @@ describe('renderer/components/metrics/MetricGroup.tsx', () => {
   describe('comment pills', () => {
     it('should render when no comments', async () => {
       const mockNotification = mockGitifyNotification;
-      mockNotification.subject.comments = null;
+      mockNotification.subject.commentCount = null;
 
       const props = {
         notification: mockNotification,
@@ -61,7 +61,7 @@ describe('renderer/components/metrics/MetricGroup.tsx', () => {
 
     it('should render when 1 comment', async () => {
       const mockNotification = mockGitifyNotification;
-      mockNotification.subject.comments = 1;
+      mockNotification.subject.commentCount = 1;
 
       const props = {
         notification: mockNotification,
@@ -73,7 +73,7 @@ describe('renderer/components/metrics/MetricGroup.tsx', () => {
 
     it('should render when more than 1 comments', async () => {
       const mockNotification = mockGitifyNotification;
-      mockNotification.subject.comments = 2;
+      mockNotification.subject.commentCount = 2;
 
       const props = {
         notification: mockNotification,

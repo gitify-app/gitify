@@ -22,24 +22,26 @@ describe('renderer/components/fields/Tooltip.tsx', () => {
 
     const tooltipIconElement = screen.getByTestId('tooltip-icon-test');
 
+    // Open tooltip
     await userEvent.click(tooltipIconElement);
     expect(screen.queryByText(props.tooltip as string)).toBeInTheDocument();
 
+    // Close tooltip
     await userEvent.click(tooltipIconElement);
     expect(screen.queryByText(props.tooltip as string)).not.toBeInTheDocument();
   });
 
-  it('should hide tooltip contents on leave', async () => {
+  it('should hide tooltip when clicking outside', async () => {
     renderWithAppContext(<Tooltip {...props} />);
 
     const tooltipIconElement = screen.getByTestId('tooltip-icon-test');
 
+    // Open tooltip
     await userEvent.click(tooltipIconElement);
     expect(screen.queryByText(props.tooltip as string)).toBeInTheDocument();
 
-    const tooltipContentElement = screen.getByTestId('tooltip-content-test');
-
-    await userEvent.unhover(tooltipContentElement);
+    // Click outside to close
+    await userEvent.click(document.body);
     expect(screen.queryByText(props.tooltip as string)).not.toBeInTheDocument();
   });
 });
