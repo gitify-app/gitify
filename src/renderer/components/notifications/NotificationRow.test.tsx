@@ -136,6 +136,32 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       expect(markNotificationsAsDoneMock).toHaveBeenCalledTimes(1);
     });
 
+    it('should mark as read (not done) when markAsDoneOnOpen is true but fetchReadNotifications is enabled', async () => {
+      const markNotificationsAsReadMock = jest.fn();
+      const markNotificationsAsDoneMock = jest.fn();
+
+      const props = {
+        notification: mockGitifyNotification,
+        account: mockGitHubCloudAccount,
+      };
+
+      renderWithAppContext(<NotificationRow {...props} />, {
+        settings: {
+          ...mockSettings,
+          markAsDoneOnOpen: true,
+          fetchReadNotifications: true,
+        },
+        markNotificationsAsRead: markNotificationsAsReadMock,
+        markNotificationsAsDone: markNotificationsAsDoneMock,
+      });
+
+      await userEvent.click(screen.getByTestId('notification-row'));
+
+      expect(links.openNotification).toHaveBeenCalledTimes(1);
+      expect(markNotificationsAsReadMock).toHaveBeenCalledTimes(1);
+      expect(markNotificationsAsDoneMock).not.toHaveBeenCalled();
+    });
+
     it('should mark notifications as read', async () => {
       const markNotificationsAsReadMock = jest.fn();
 
@@ -188,6 +214,24 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       await userEvent.click(screen.getByTestId('notification-mark-as-done'));
 
       expect(markNotificationsAsDoneMock).toHaveBeenCalledTimes(1);
+    });
+
+    it('should hide mark as done button when fetchReadNotifications is enabled', async () => {
+      const props = {
+        notification: mockGitifyNotification,
+        account: mockGitHubCloudAccount,
+      };
+
+      renderWithAppContext(<NotificationRow {...props} />, {
+        settings: { ...mockSettings, fetchReadNotifications: true },
+      });
+
+      expect(
+        screen.queryByTestId('notification-mark-as-done'),
+      ).not.toBeInTheDocument();
+      expect(
+        screen.getByTestId('notification-mark-as-read'),
+      ).toBeInTheDocument();
     });
 
     it('should unsubscribe from a notification thread', async () => {

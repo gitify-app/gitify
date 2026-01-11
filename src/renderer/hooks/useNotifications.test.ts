@@ -585,5 +585,39 @@ describe('renderer/hooks/useNotifications.ts', () => {
       expect(result.current.notifications.length).toBe(0);
       expect(rendererLogErrorSpy).toHaveBeenCalledTimes(1);
     });
+
+    it('should mark as read (not done) when markAsDoneOnUnsubscribe is true but fetchReadNotifications is enabled', async () => {
+      // The unsubscribe endpoint call.
+      nock('https://api.github.com/')
+        .put(`/notifications/threads/${id}/subscription`)
+        .reply(200);
+
+      // The mark read endpoint call (NOT mark done).
+      nock('https://api.github.com/')
+        .patch(`/notifications/threads/${id}`)
+        .reply(200);
+
+      const { result } = renderHook(() => useNotifications());
+
+      act(() => {
+        result.current.unsubscribeNotification(
+          {
+            ...mockState,
+            settings: {
+              ...mockState.settings,
+              markAsDoneOnUnsubscribe: true,
+              fetchReadNotifications: true,
+            },
+          },
+          mockGitifyNotification,
+        );
+      });
+
+      await waitFor(() => {
+        expect(result.current.status).toBe('success');
+      });
+
+      expect(result.current.notifications.length).toBe(0);
+    });
   });
 });
