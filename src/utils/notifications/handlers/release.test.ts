@@ -1,6 +1,9 @@
-import axios from 'axios';
-import nock from 'nock';
+import { vi } from 'vitest';
 
+import {
+  createMockResponse,
+  fetch,
+} from '../../../__mocks__/@tauri-apps/plugin-http';
 import { createPartialMockNotification } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
 import { createPartialMockUser } from '../../../__mocks__/user-mocks';
@@ -12,9 +15,8 @@ describe('renderer/utils/notifications/handlers/release.ts', () => {
     const mockAuthor = createPartialMockUser('some-author');
 
     beforeEach(() => {
-      // axios will default to using the XHR adapter which can't be intercepted
-      // by nock. So, configure axios to use the node adapter.
-      axios.defaults.adapter = 'http';
+      vi.clearAllMocks();
+      fetch.mockResolvedValue(createMockResponse({}));
     });
 
     it('release notification', async () => {
@@ -26,9 +28,9 @@ describe('renderer/utils/notifications/handlers/release.ts', () => {
           'https://api.github.com/repos/gitify-app/notifications-test/releases/1' as Link,
       });
 
-      nock('https://api.github.com')
-        .get('/repos/gitify-app/notifications-test/releases/1')
-        .reply(200, { author: mockAuthor });
+      fetch.mockResolvedValueOnce(
+        createMockResponse({ author: mockAuthor }),
+      );
 
       const result = await releaseHandler.enrich(
         mockNotification,

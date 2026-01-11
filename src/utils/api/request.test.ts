@@ -5,8 +5,10 @@ vi.mock('../comms', () => ({
   decryptValue: vi.fn().mockResolvedValue('decrypted'),
 }));
 
-import axios from 'axios';
-
+import {
+  createMockResponse,
+  fetch,
+} from '../../__mocks__/@tauri-apps/plugin-http';
 import { mockToken } from '../../__mocks__/state-mocks';
 import type { Link } from '../../types';
 import {
@@ -24,81 +26,69 @@ import {
   shouldRequestWithNoCache,
 } from './request';
 
-vi.mock('axios');
-
 const url = 'https://example.com' as Link;
-const method = 'get';
+const method = 'GET';
 
 describe('renderer/utils/api/request.ts', () => {
-  afterEach(() => {
+  beforeEach(() => {
     vi.clearAllMocks();
+    fetch.mockResolvedValue(createMockResponse({}));
   });
 
   describe('apiRequest', () => {
-    it('should make a request with the correct parameters', async () => {
+    it('should make a POST request with body', async () => {
       const data = { key: 'value' };
 
-      await apiRequest(url, method, data);
+      await apiRequest(url, 'POST', data);
 
-      expect(axios).toHaveBeenCalledWith({
-        method,
-        url,
-        data,
+      expect(fetch).toHaveBeenCalledWith(url, {
+        method: 'POST',
         headers: mockNoAuthHeaders,
+        body: JSON.stringify(data),
       });
     });
 
-    it('should make a request with the correct parameters and default data', async () => {
-      const data = {};
+    it('should make a GET request without body (GET cannot have body)', async () => {
       await apiRequest(url, method);
 
-      expect(axios).toHaveBeenCalledWith({
+      expect(fetch).toHaveBeenCalledWith(url, {
         method,
-        url,
-        data,
         headers: mockNoAuthHeaders,
+        body: undefined,
       });
     });
   });
 
   describe('apiRequestAuth', () => {
-    afterEach(() => {
-      vi.clearAllMocks();
-    });
-
-    it('should make an authenticated request with the correct parameters', async () => {
+    it('should make an authenticated POST request with body', async () => {
       const data = { key: 'value' };
 
-      await apiRequestAuth(url, method, mockToken, data);
+      await apiRequestAuth(url, 'POST', mockToken, data);
 
-      expect(axios).toHaveBeenCalledWith({
-        method,
-        url,
-        data,
+      expect(fetch).toHaveBeenCalledWith(url, {
+        method: 'POST',
         headers: mockAuthHeaders,
+        body: JSON.stringify(data),
       });
     });
 
-    it('should make an authenticated request with the correct parameters and default data', async () => {
-      const data = {};
-
+    it('should make an authenticated GET request without body', async () => {
       await apiRequestAuth(url, method, mockToken);
 
-      expect(axios).toHaveBeenCalledWith({
+      expect(fetch).toHaveBeenCalledWith(url, {
         method,
-        url,
-        data,
         headers: mockAuthHeaders,
+        body: undefined,
       });
     });
   });
 
   describe('performGraphQLRequest', () => {
     it('should performGraphQLRequest with the correct parameters and default data', async () => {
-      (axios as unknown as vi.Mock).mockResolvedValue({
-        data: { data: {}, errors: [] },
-        headers: {},
-      });
+      fetch.mockResolvedValueOnce(
+        createMockResponse({ data: {}, errors: [] }),
+      );
+
       const expectedData = {
         query: FetchAuthenticatedUserDetailsDocument,
         variables: undefined,
@@ -110,21 +100,20 @@ describe('renderer/utils/api/request.ts', () => {
         FetchAuthenticatedUserDetailsDocument,
       );
 
-      expect(axios).toHaveBeenCalledWith({
+      expect(fetch).toHaveBeenCalledWith(url, {
         method: 'POST',
-        url,
-        data: expectedData,
         headers: mockAuthHeaders,
+        body: JSON.stringify(expectedData),
       });
     });
   });
 
   describe('performGraphQLRequestString', () => {
     it('should performGraphQLRequestString with the correct parameters and default data', async () => {
-      (axios as unknown as vi.Mock).mockResolvedValue({
-        data: { data: {}, errors: [] },
-        headers: {},
-      });
+      fetch.mockResolvedValueOnce(
+        createMockResponse({ data: {}, errors: [] }),
+      );
+
       const queryString = 'query Foo { repository { issue { title } } }';
       const expectedData = {
         query: queryString,
@@ -133,11 +122,10 @@ describe('renderer/utils/api/request.ts', () => {
 
       await performGraphQLRequestString(url, mockToken, queryString);
 
-      expect(axios).toHaveBeenCalledWith({
+      expect(fetch).toHaveBeenCalledWith(url, {
         method: 'POST',
-        url,
-        data: expectedData,
         headers: mockAuthHeaders,
+        body: JSON.stringify(expectedData),
       });
     });
   });

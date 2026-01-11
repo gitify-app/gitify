@@ -5,9 +5,10 @@ vi.mock('../comms', () => ({
   decryptValue: vi.fn().mockResolvedValue('decrypted'),
 }));
 
-import axios from 'axios';
-import nock from 'nock';
-
+import {
+  createMockResponse,
+  fetch,
+} from '../../__mocks__/@tauri-apps/plugin-http';
 import {
   mockGitHubCloudAccount,
   mockGitHubEnterpriseServerAccount,
@@ -37,9 +38,8 @@ import {
 
 describe('renderer/utils/notifications/notifications.ts', () => {
   beforeEach(() => {
-    // axios will default to using the XHR adapter which can't be intercepted
-    // by nock. So, configure axios to use the node adapter.
-    axios.defaults.adapter = 'http';
+    vi.clearAllMocks();
+    fetch.mockResolvedValue(createMockResponse({}));
   });
 
   afterEach(() => {
@@ -84,7 +84,8 @@ describe('renderer/utils/notifications/notifications.ts', () => {
     };
     mockNotification.repository = mockRepository;
 
-    nock('https://api.github.com').post('/graphql').replyWithError(mockError);
+    // Mock fetch to reject with an error
+    fetch.mockRejectedValueOnce(mockError);
 
     await enrichNotification(mockNotification, mockSettings);
 

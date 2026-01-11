@@ -7,9 +7,10 @@ vi.mock('../utils/comms', () => ({
 
 import { act, renderHook, waitFor } from '@testing-library/react';
 
-import axios from 'axios';
-import nock from 'nock';
-
+import {
+  createMockResponse,
+  fetch,
+} from '../__mocks__/@tauri-apps/plugin-http';
 import { mockAuth, mockSettings, mockState } from '../__mocks__/state-mocks';
 import { mockSingleNotification } from '../utils/api/__mocks__/response-mocks';
 import { Errors } from '../utils/errors';
@@ -22,28 +23,21 @@ describe('renderer/hooks/useNotifications.ts', () => {
     .mockImplementation();
 
   beforeEach(() => {
-    // axios will default to using the XHR adapter which can't be intercepted
-    // by nock. So, configure axios to use the node adapter.
-    axios.defaults.adapter = 'http';
+    vi.clearAllMocks();
     rendererLogErrorSpy.mockReset();
 
     // Reset mock notification state between tests since it's mutated
     mockSingleNotification.unread = true;
 
-    // Disable real network connections to catch unmocked requests
-    nock.disableNetConnect();
-  });
-
-  afterEach(() => {
-    nock.cleanAll();
-    nock.enableNetConnect();
+    // Default mock response
+    fetch.mockResolvedValue(createMockResponse({}));
   });
 
   const id = mockSingleNotification.id;
 
   describe('fetchNotifications', () => {
     it('should fetch non-detailed notifications with success', async () => {
-      const mockState = {
+      const mockStateLocal = {
         auth: mockAuth,
         settings: {
           ...mockSettings,
@@ -98,18 +92,15 @@ describe('renderer/hooks/useNotifications.ts', () => {
         },
       ];
 
-      nock('https://api.github.com')
-        .get('/notifications?participating=false')
-        .reply(200, notifications);
-
-      nock('https://github.gitify.io/api/v3')
-        .get('/notifications?participating=false')
-        .reply(200, notifications);
+      // Mock both account API calls - github.com and github.gitify.io
+      fetch
+        .mockResolvedValueOnce(createMockResponse(notifications))
+        .mockResolvedValueOnce(createMockResponse(notifications));
 
       const { result } = renderHook(() => useNotifications());
 
       act(() => {
-        result.current.fetchNotifications(mockState);
+        result.current.fetchNotifications(mockStateLocal);
       });
 
       expect(result.current.status).toBe('loading');
@@ -133,13 +124,14 @@ describe('renderer/hooks/useNotifications.ts', () => {
       const status = 401;
       const message = 'Bad credentials';
 
-      nock('https://api.github.com')
-        .get('/notifications?participating=false')
-        .reply(status, { message });
-
-      nock('https://github.gitify.io/api/v3')
-        .get('/notifications?participating=false')
-        .reply(status, { message });
+      // Mock both account API calls to fail
+      fetch
+        .mockResolvedValueOnce(
+          createMockResponse({ message }, { status, statusText: 'Unauthorized' }),
+        )
+        .mockResolvedValueOnce(
+          createMockResponse({ message }, { status, statusText: 'Unauthorized' }),
+        );
 
       const { result } = renderHook(() => useNotifications());
 
@@ -158,13 +150,20 @@ describe('renderer/hooks/useNotifications.ts', () => {
     });
 
     it('should fetch notifications with different failures', async () => {
-      nock('https://api.github.com')
-        .get('/notifications?participating=false')
-        .reply(400, { message: 'Oops! Something went wrong.' });
-
-      nock('https://github.gitify.io/api/v3')
-        .get('/notifications?participating=false')
-        .reply(401, { message: 'Bad credentials' });
+      // Mock API calls with different failure statuses
+      fetch
+        .mockResolvedValueOnce(
+          createMockResponse(
+            { message: 'Oops! Something went wrong.' },
+            { status: 400, statusText: 'Bad Request' },
+          ),
+        )
+        .mockResolvedValueOnce(
+          createMockResponse(
+            { message: 'Bad credentials' },
+            { status: 401, statusText: 'Unauthorized' },
+          ),
+        );
 
       const { result } = renderHook(() => useNotifications());
 
@@ -185,9 +184,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
 
   describe('markNotificationsAsRead', () => {
     it('should mark notifications as read with success', async () => {
-      nock('https://api.github.com')
-        .patch(`/notifications/threads/${id}`)
-        .reply(200);
+      fetch.mockResolvedValueOnce(createMockResponse({}));
 
       const { result } = renderHook(() => useNotifications());
 
@@ -205,9 +202,9 @@ describe('renderer/hooks/useNotifications.ts', () => {
     });
 
     it('should mark notifications as read with failure', async () => {
-      nock('https://api.github.com')
-        .patch(`/notifications/threads/${id}`)
-        .reply(400);
+      fetch.mockResolvedValueOnce(
+        createMockResponse({}, { status: 400, statusText: 'Bad Request' }),
+      );
 
       const { result } = renderHook(() => useNotifications());
 
@@ -227,9 +224,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
 
   describe('markNotificationsAsDone', () => {
     it('should mark notifications as done with success', async () => {
-      nock('https://api.github.com')
-        .delete(`/notifications/threads/${id}`)
-        .reply(200);
+      fetch.mockResolvedValueOnce(createMockResponse({}));
 
       const { result } = renderHook(() => useNotifications());
 
@@ -247,9 +242,9 @@ describe('renderer/hooks/useNotifications.ts', () => {
     });
 
     it('should mark notifications as done with failure', async () => {
-      nock('https://api.github.com')
-        .delete(`/notifications/threads/${id}`)
-        .reply(400);
+      fetch.mockResolvedValueOnce(
+        createMockResponse({}, { status: 400, statusText: 'Bad Request' }),
+      );
 
       const { result } = renderHook(() => useNotifications());
 
@@ -269,15 +264,10 @@ describe('renderer/hooks/useNotifications.ts', () => {
 
   describe('unsubscribeNotification', () => {
     it('should unsubscribe from a notification with success - markAsDoneOnUnsubscribe = false', async () => {
-      // The unsubscribe endpoint call.
-      nock('https://api.github.com')
-        .put(`/notifications/threads/${id}/subscription`)
-        .reply(200);
-
-      // The mark read endpoint call.
-      nock('https://api.github.com')
-        .patch(`/notifications/threads/${id}`)
-        .reply(200);
+      // The unsubscribe endpoint call, then mark read
+      fetch
+        .mockResolvedValueOnce(createMockResponse({}))
+        .mockResolvedValueOnce(createMockResponse({}));
 
       const { result } = renderHook(() => useNotifications());
 
@@ -296,15 +286,10 @@ describe('renderer/hooks/useNotifications.ts', () => {
     });
 
     it('should unsubscribe from a notification with success - markAsDoneOnUnsubscribe = true', async () => {
-      // The unsubscribe endpoint call.
-      nock('https://api.github.com')
-        .put(`/notifications/threads/${id}/subscription`)
-        .reply(200);
-
-      // The mark done endpoint call.
-      nock('https://api.github.com')
-        .delete(`/notifications/threads/${id}`)
-        .reply(200);
+      // The unsubscribe endpoint call, then mark done
+      fetch
+        .mockResolvedValueOnce(createMockResponse({}))
+        .mockResolvedValueOnce(createMockResponse({}));
 
       const { result } = renderHook(() => useNotifications());
 
@@ -329,15 +314,10 @@ describe('renderer/hooks/useNotifications.ts', () => {
     });
 
     it('should unsubscribe from a notification with failure', async () => {
-      // The unsubscribe endpoint call.
-      nock('https://api.github.com')
-        .put(`/notifications/threads/${id}/subscription`)
-        .reply(400);
-
-      // The mark read endpoint call (won't be called since unsubscribe fails first).
-      nock('https://api.github.com')
-        .patch(`/notifications/threads/${id}`)
-        .reply(400);
+      // The unsubscribe endpoint call fails
+      fetch.mockResolvedValueOnce(
+        createMockResponse({}, { status: 400, statusText: 'Bad Request' }),
+      );
 
       const { result } = renderHook(() => useNotifications());
 

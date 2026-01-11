@@ -1,6 +1,9 @@
-import axios from 'axios';
-import nock from 'nock';
+import { vi } from 'vitest';
 
+import {
+  createMockResponse,
+  fetch,
+} from '../../../__mocks__/@tauri-apps/plugin-http';
 import { createPartialMockNotification } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
 import { createMockGraphQLAuthor } from '../../../__mocks__/user-mocks';
@@ -38,23 +41,22 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
     mockNotification.updatedAt = '2024-01-01T00:00:00Z';
 
     beforeEach(() => {
-      // axios will default to using the XHR adapter which can't be intercepted
-      // by nock. So, configure axios to use the node adapter.
-      axios.defaults.adapter = 'http';
+      vi.clearAllMocks();
+      fetch.mockResolvedValue(createMockResponse({}));
     });
 
     it('answered discussion state - no stateReason', async () => {
       const mockDiscussion = mockDiscussionResponseNode({ isAnswered: true });
 
-      nock('https://api.github.com')
-        .post('/graphql')
-        .reply(200, {
+      fetch.mockResolvedValueOnce(
+        createMockResponse({
           data: {
             repository: {
               discussion: mockDiscussion,
             },
           },
-        });
+        }),
+      );
 
       const result = await discussionHandler.enrich(
         mockNotification,
@@ -80,15 +82,15 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
     it('open / unanswered discussion - no stateReason', async () => {
       const mockDiscussion = mockDiscussionResponseNode({ isAnswered: false });
 
-      nock('https://api.github.com')
-        .post('/graphql')
-        .reply(200, {
+      fetch.mockResolvedValueOnce(
+        createMockResponse({
           data: {
             repository: {
               discussion: mockDiscussion,
             },
           },
-        });
+        }),
+      );
 
       const result = await discussionHandler.enrich(
         mockNotification,
@@ -117,15 +119,15 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         stateReason: 'DUPLICATE',
       });
 
-      nock('https://api.github.com')
-        .post('/graphql')
-        .reply(200, {
+      fetch.mockResolvedValueOnce(
+        createMockResponse({
           data: {
             repository: {
               discussion: mockDiscussion,
             },
           },
-        });
+        }),
+      );
 
       const result = await discussionHandler.enrich(
         mockNotification,
@@ -158,15 +160,15 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         ],
       };
 
-      nock('https://api.github.com')
-        .post('/graphql')
-        .reply(200, {
+      fetch.mockResolvedValueOnce(
+        createMockResponse({
           data: {
             repository: {
               discussion: mockDiscussion,
             },
           },
-        });
+        }),
+      );
 
       const result = await discussionHandler.enrich(
         mockNotification,
@@ -206,15 +208,15 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         ],
       };
 
-      nock('https://api.github.com')
-        .post('/graphql')
-        .reply(200, {
+      fetch.mockResolvedValueOnce(
+        createMockResponse({
           data: {
             repository: {
               discussion: mockDiscussion,
             },
           },
-        });
+        }),
+      );
 
       const result = await discussionHandler.enrich(
         mockNotification,
@@ -260,15 +262,15 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         ],
       };
 
-      nock('https://api.github.com')
-        .post('/graphql')
-        .reply(200, {
+      fetch.mockResolvedValueOnce(
+        createMockResponse({
           data: {
             repository: {
               discussion: mockDiscussion,
             },
           },
-        });
+        }),
+      );
 
       const result = await discussionHandler.enrich(
         mockNotification,

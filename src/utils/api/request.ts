@@ -1,4 +1,4 @@
-import type { AxiosResponse, Method } from 'axios';
+import { AxiosError, type AxiosResponse, type Method } from 'axios';
 import type { ExecutionResult } from 'graphql';
 
 import type { Link, Token } from '../../types';
@@ -53,7 +53,7 @@ async function tauriFetch(
     headersObj.link = linkHeader;
   }
 
-  return {
+  const axiosResponse: AxiosResponse = {
     data: responseData,
     status: response.status,
     statusText: response.statusText,
@@ -61,6 +61,20 @@ async function tauriFetch(
     config: {} as AxiosResponse['config'],
     request: {},
   };
+
+  // Throw for non-2xx status codes to match axios behavior
+  if (!response.ok) {
+    const error = new AxiosError(
+      `Request failed with status ${response.status}: ${response.statusText}`,
+      AxiosError.ERR_BAD_REQUEST,
+      axiosResponse.config,
+      axiosResponse.request,
+      axiosResponse,
+    );
+    throw error;
+  }
+
+  return axiosResponse;
 }
 
 /**

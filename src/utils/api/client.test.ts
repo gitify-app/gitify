@@ -1,9 +1,13 @@
-import axios, { type AxiosResponse } from 'axios';
+import type { AxiosResponse } from 'axios';
 import { vi } from 'vitest';
 
 import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
 import { createPartialMockNotification } from '../../__mocks__/notifications-mocks';
 import { mockToken } from '../../__mocks__/state-mocks';
+import {
+  createMockResponse,
+  fetch,
+} from '../../__mocks__/@tauri-apps/plugin-http';
 import { Constants } from '../../constants';
 import type { Hostname, Link, SettingsState, Token } from '../../types';
 import * as logger from '../../utils/logger';
@@ -38,8 +42,6 @@ import {
 import type { ExecutionResultWithHeaders } from './request';
 import * as apiRequests from './request';
 
-vi.mock('axios');
-
 // Mock decryptValue for consistent test expectations
 vi.mock('../comms', () => ({
   decryptValue: vi.fn().mockResolvedValue('decrypted'),
@@ -49,19 +51,22 @@ const mockGitHubHostname = 'github.com' as Hostname;
 const mockThreadId = '1234';
 
 describe('renderer/utils/api/client.ts', () => {
-  afterEach(() => {
+  beforeEach(() => {
     vi.clearAllMocks();
+    fetch.mockResolvedValue(createMockResponse({}));
   });
 
   it('headNotifications - should fetch notifications head', async () => {
     await headNotifications(mockGitHubHostname, mockToken);
 
-    expect(axios).toHaveBeenCalledWith({
-      url: 'https://api.github.com/notifications',
-      headers: mockNonCachedAuthHeaders,
-      method: 'HEAD',
-      data: {},
-    });
+    expect(fetch).toHaveBeenCalledWith(
+      'https://api.github.com/notifications',
+      {
+        method: 'HEAD',
+        headers: mockNonCachedAuthHeaders,
+        body: undefined,
+      },
+    );
   });
 
   describe('listNotificationsForAuthenticatedUser', () => {
@@ -75,12 +80,14 @@ describe('renderer/utils/api/client.ts', () => {
         mockSettings as SettingsState,
       );
 
-      expect(axios).toHaveBeenCalledWith({
-        url: 'https://api.github.com/notifications?participating=true',
-        headers: mockNonCachedAuthHeaders,
-        method: 'GET',
-        data: {},
-      });
+      expect(fetch).toHaveBeenCalledWith(
+        'https://api.github.com/notifications?participating=true',
+        {
+          method: 'GET',
+          headers: mockNonCachedAuthHeaders,
+          body: undefined,
+        },
+      );
     });
 
     it('should list participating and watching notifications for user', async () => {
@@ -93,12 +100,14 @@ describe('renderer/utils/api/client.ts', () => {
         mockSettings as SettingsState,
       );
 
-      expect(axios).toHaveBeenCalledWith({
-        url: 'https://api.github.com/notifications?participating=false',
-        headers: mockNonCachedAuthHeaders,
-        method: 'GET',
-        data: {},
-      });
+      expect(fetch).toHaveBeenCalledWith(
+        'https://api.github.com/notifications?participating=false',
+        {
+          method: 'GET',
+          headers: mockNonCachedAuthHeaders,
+          body: undefined,
+        },
+      );
     });
   });
 
@@ -109,12 +118,14 @@ describe('renderer/utils/api/client.ts', () => {
       mockToken,
     );
 
-    expect(axios).toHaveBeenCalledWith({
-      url: `https://api.github.com/notifications/threads/${mockThreadId}`,
-      headers: mockAuthHeaders,
-      method: 'PATCH',
-      data: {},
-    });
+    expect(fetch).toHaveBeenCalledWith(
+      `https://api.github.com/notifications/threads/${mockThreadId}`,
+      {
+        method: 'PATCH',
+        headers: mockAuthHeaders,
+        body: '{}',
+      },
+    );
   });
 
   it('markNotificationThreadAsDone - should mark notification thread as done', async () => {
@@ -124,12 +135,14 @@ describe('renderer/utils/api/client.ts', () => {
       mockToken,
     );
 
-    expect(axios).toHaveBeenCalledWith({
-      url: `https://api.github.com/notifications/threads/${mockThreadId}`,
-      headers: mockAuthHeaders,
-      method: 'DELETE',
-      data: {},
-    });
+    expect(fetch).toHaveBeenCalledWith(
+      `https://api.github.com/notifications/threads/${mockThreadId}`,
+      {
+        method: 'DELETE',
+        headers: mockAuthHeaders,
+        body: '{}',
+      },
+    );
   });
 
   it('ignoreNotificationThreadSubscription - should ignore notification thread subscription', async () => {
@@ -139,12 +152,14 @@ describe('renderer/utils/api/client.ts', () => {
       mockToken,
     );
 
-    expect(axios).toHaveBeenCalledWith({
-      url: `https://api.github.com/notifications/threads/${mockThreadId}/subscription`,
-      headers: mockAuthHeaders,
-      method: 'PUT',
-      data: { ignored: true },
-    });
+    expect(fetch).toHaveBeenCalledWith(
+      `https://api.github.com/notifications/threads/${mockThreadId}/subscription`,
+      {
+        method: 'PUT',
+        headers: mockAuthHeaders,
+        body: JSON.stringify({ ignored: true }),
+      },
+    );
   });
 
   describe('getHtmlUrl', () => {

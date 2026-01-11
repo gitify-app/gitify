@@ -1,6 +1,9 @@
-import axios from 'axios';
-import nock from 'nock';
+import { vi } from 'vitest';
 
+import {
+  createMockResponse,
+  fetch,
+} from '../../../__mocks__/@tauri-apps/plugin-http';
 import { createPartialMockNotification } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
 import { createMockGraphQLAuthor } from '../../../__mocks__/user-mocks';
@@ -40,9 +43,8 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
           'https://api.github.com/repos/gitify-app/notifications-test/issues/comments/302888448' as Link,
       });
 
-      // axios will default to using the XHR adapter which can't be intercepted
-      // by nock. So, configure axios to use the node adapter.
-      axios.defaults.adapter = 'http';
+      vi.clearAllMocks();
+      fetch.mockResolvedValue(createMockResponse({}));
     });
 
     it('issue with only state', async () => {
@@ -50,15 +52,15 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         state: 'OPEN',
       });
 
-      nock('https://api.github.com')
-        .post('/graphql')
-        .reply(200, {
+      fetch.mockResolvedValueOnce(
+        createMockResponse({
           data: {
             repository: {
               issue: mockIssue,
             },
           },
-        });
+        }),
+      );
 
       const result = await issueHandler.enrich(mockNotification, mockSettings);
 
@@ -84,15 +86,15 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         stateReason: 'COMPLETED',
       });
 
-      nock('https://api.github.com')
-        .post('/graphql')
-        .reply(200, {
+      fetch.mockResolvedValueOnce(
+        createMockResponse({
           data: {
             repository: {
               issue: mockIssue,
             },
           },
-        });
+        }),
+      );
 
       const result = await issueHandler.enrich(mockNotification, mockSettings);
 
@@ -126,15 +128,15 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         ],
       };
 
-      nock('https://api.github.com')
-        .post('/graphql')
-        .reply(200, {
+      fetch.mockResolvedValueOnce(
+        createMockResponse({
           data: {
             repository: {
               issue: mockIssue,
             },
           },
-        });
+        }),
+      );
 
       const result = await issueHandler.enrich(mockNotification, mockSettings);
 
@@ -163,15 +165,15 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         nodes: [{ name: 'enhancement' }],
       };
 
-      nock('https://api.github.com')
-        .post('/graphql')
-        .reply(200, {
+      fetch.mockResolvedValueOnce(
+        createMockResponse({
           data: {
             repository: {
               issue: mockIssue,
             },
           },
-        });
+        }),
+      );
 
       const result = await issueHandler.enrich(mockNotification, mockSettings);
 
@@ -200,15 +202,15 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         title: 'Open Milestone',
       };
 
-      nock('https://api.github.com')
-        .post('/graphql')
-        .reply(200, {
+      fetch.mockResolvedValueOnce(
+        createMockResponse({
           data: {
             repository: {
               issue: mockIssue,
             },
           },
-        });
+        }),
+      );
 
       const result = await issueHandler.enrich(mockNotification, mockSettings);
 
