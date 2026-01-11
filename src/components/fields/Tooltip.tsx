@@ -1,4 +1,4 @@
-import { type FC, type ReactNode, useState } from 'react';
+import { type FC, type ReactNode, useEffect, useRef, useState } from 'react';
 
 import { QuestionIcon } from '@primer/octicons-react';
 import { AnchoredOverlay } from '@primer/react';
@@ -12,6 +12,62 @@ export interface TooltipProps {
 
 export const Tooltip: FC<TooltipProps> = (props: TooltipProps) => {
   const [showTooltip, setShowTooltip] = useState(false);
+  const scrollContainerRef = useRef<HTMLElement | null>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!showTooltip) {
+      return;
+    }
+
+    // Find the scrollable parent container
+    const findScrollContainer = (
+      element: HTMLElement | null,
+    ): HTMLElement | null => {
+      if (!element) {
+        return null;
+      }
+
+      const { overflow, overflowY } = window.getComputedStyle(element);
+      const isScrollable = /(auto|scroll)/.test(overflow + overflowY);
+
+      if (isScrollable && element.scrollHeight > element.clientHeight) {
+        return element;
+      }
+
+      return findScrollContainer(element.parentElement);
+    };
+
+    const tooltipButton = document.getElementById(props.name);
+    scrollContainerRef.current = findScrollContainer(tooltipButton);
+
+    const handleScroll = () => {
+      setShowTooltip(false);
+    };
+
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        overlayRef.current &&
+        !overlayRef.current.contains(event.target as Node) &&
+        !tooltipButton?.contains(event.target as Node)
+      ) {
+        setShowTooltip(false);
+      }
+    };
+
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.addEventListener('scroll', handleScroll);
+    }
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      if (scrollContainerRef.current) {
+        scrollContainerRef.current.removeEventListener('scroll', handleScroll);
+      }
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showTooltip, props.name]);
 
   return (
     <AnchoredOverlay
@@ -38,7 +94,7 @@ export const Tooltip: FC<TooltipProps> = (props: TooltipProps) => {
           'rounded-sm border border-gray-300 shadow-sm bg-gitify-tooltip-popout',
         )}
         data-testid={`tooltip-content-${props.name}`}
-        onMouseLeave={() => setShowTooltip(false)}
+        ref={overlayRef}
         role="tooltip"
       >
         {props.tooltip}

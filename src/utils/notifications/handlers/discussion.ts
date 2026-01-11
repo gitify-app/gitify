@@ -63,7 +63,7 @@ class DiscussionHandler extends DefaultHandler {
         latestDiscussionComment?.author,
         discussion.author,
       ]),
-      comments: discussion.comments.totalCount,
+      commentCount: discussion.comments.totalCount,
       labels: discussion.labels?.nodes.map((label) => label.name) ?? [],
       htmlUrl: latestDiscussionComment?.url ?? discussion.url,
     };

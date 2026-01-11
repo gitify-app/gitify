@@ -9,7 +9,6 @@ import { cn } from '../../utils/cn';
 import { isMarkAsDoneFeatureSupported } from '../../utils/features';
 import { openNotification } from '../../utils/links';
 import { isGroupByDate } from '../../utils/notifications/group';
-import { createNotificationHandler } from '../../utils/notifications/handlers';
 import { HoverButton } from '../primitives/HoverButton';
 import { HoverGroup } from '../primitives/HoverGroup';
 import { NotificationFooter } from './NotificationFooter';
@@ -62,13 +61,7 @@ export const NotificationRow: FC<NotificationRowProps> = ({
     unsubscribeNotification(notification);
   };
 
-  const handler = createNotificationHandler(notification);
-  const NotificationIcon = handler.iconType(notification);
-  const iconColor = handler.iconColor(notification);
-  const notificationType = handler.formattedNotificationType(notification);
-  const notificationNumber = handler.formattedNotificationNumber(notification);
-  const notificationTitle = handler.formattedNotificationTitle(notification);
-
+  const NotificationIcon = notification.display.icon.type;
   const isNotificationRead = !notification.unread;
 
   return (
@@ -84,15 +77,13 @@ export const NotificationRow: FC<NotificationRowProps> = ({
       id={notification.id}
     >
       <Stack align="center" direction="horizontal" gap="condensed">
-        <Tooltip direction="e" text={notificationType}>
+        <Tooltip direction="e" text={notification.display.type}>
           <button type="button">
-            {NotificationIcon && (
-              <NotificationIcon
-                aria-label={notificationType}
-                className={iconColor}
-                size={Size.LARGE}
-              />
-            )}
+            <NotificationIcon
+              aria-label={notification.display.type}
+              className={notification.display.icon.color}
+              size={Size.LARGE}
+            />
           </button>
         </Tooltip>
 
@@ -117,7 +108,7 @@ export const NotificationRow: FC<NotificationRowProps> = ({
             direction="horizontal"
             gap="condensed"
             justify="space-between"
-            title={notificationTitle}
+            title={notification.display.title}
           >
             <Text
               className={
@@ -133,7 +124,7 @@ export const NotificationRow: FC<NotificationRowProps> = ({
                 (isGroupByDate(settings) || !settings.showNumber) && 'hidden',
               )}
             >
-              {notificationNumber}
+              {notification.display.number}
             </Text>
           </Stack>
 

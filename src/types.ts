@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 
-import type { OcticonProps } from '@primer/octicons-react';
+import type { Icon, OcticonProps } from '@primer/octicons-react';
 
 import type {
   DiscussionStateReason,
@@ -286,6 +286,8 @@ export interface GitifyNotification {
   account: Account;
   /** UI ordering index */
   order: number;
+  /** Formatted information for display/presentation to user */
+  display: GitifyNotificationDisplay;
 }
 
 /**
@@ -325,12 +327,12 @@ export interface GitifySubject {
   /** PRs closing issues */
   linkedIssues?: string[];
   /** Total comment count */
-  comments?: number;
+  commentCount?: number;
   /** Label names */
   labels?: string[];
   /** Milestone state/title */
   milestone?: GitifyMilestone;
-  /** Deep link to latest comment */
+  /** Deep link to notification thread */
   htmlUrl?: Link;
 }
 
@@ -372,6 +374,25 @@ export interface GitifyNotificationUser {
   htmlUrl: Link;
   /** Notification user type (User, Organization, Bot, etc.) */
   type: UserType;
+}
+
+/**
+ * Formatted fields ready for display / presentation to the user.
+ */
+export interface GitifyNotificationDisplay {
+  /** Formatted notification title */
+  title: string;
+  /** Formatted notification type */
+  type: string;
+  /** Formatted notification number */
+  number: string;
+  /** Notification icon and color to display */
+  icon: {
+    type: Icon;
+    color: IconColor;
+  };
+  /** Notification default user type for fallback scenarios */
+  defaultUserType: UserType;
 }
 
 export type GitifyMilestone = MilestoneFieldsFragment;

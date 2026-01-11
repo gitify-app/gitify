@@ -235,6 +235,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     fetchNotifications({ auth, settings });
   }, [
     auth.accounts.length,
+    settings.participating,
     settings.filterIncludeSearchTokens,
     settings.filterExcludeSearchTokens,
     settings.filterUserTypes,

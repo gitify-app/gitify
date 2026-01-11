@@ -21,28 +21,38 @@ export const MetricGroup: FC<MetricGroupProps> = ({
 }: MetricGroupProps) => {
   const { settings } = useAppContext();
 
-  const comments = notification.subject.comments ?? 0;
-  const commentsPillDescription = `${comments} ${
-    comments > 1 ? 'comments' : 'comment'
-  }`;
+  const linkedIssues = notification.subject.linkedIssues ?? [];
+  const hasLinkedIssues = linkedIssues.length > 0;
+  const linkedIssuesPillDescription = hasLinkedIssues
+    ? `Linked to ${
+        linkedIssues.length > 1 ? 'issues' : 'issue'
+      } ${linkedIssues.join(', ')}`
+    : '';
 
-  const labelsPillDescription = notification.subject.labels
-    ?.map((label) => `🏷️ ${label}`)
-    .join(', ');
+  const commentCount = notification.subject.commentCount ?? 0;
+  const hasComments = commentCount > 0;
+  const commentsPillDescription = hasComments
+    ? `${notification.subject.commentCount} ${
+        notification.subject.commentCount > 1 ? 'comments' : 'comment'
+      }`
+    : '';
 
-  const linkedIssuesLength = notification.subject.linkedIssues?.length ?? 0;
-  const linkedIssuesPillDescription = `Linked to ${
-    linkedIssuesLength > 1 ? 'issues' : 'issue'
-  } ${notification.subject?.linkedIssues?.join(', ')}`;
+  const labels = notification.subject.labels ?? [];
+  const hasLabels = labels.length > 0;
+  const labelsPillDescription = hasLabels
+    ? labels.map((label) => `🏷️ ${label}`).join(', ')
+    : '';
+
+  const milestone = notification.subject.milestone;
 
   return (
     settings.showPills && (
       <div className="flex gap-1">
-        {linkedIssuesLength > 0 && (
+        {hasLinkedIssues && (
           <MetricPill
             color={IconColor.GRAY}
             icon={IssueOpenedIcon}
-            metric={linkedIssuesLength}
+            metric={linkedIssues.length}
             title={linkedIssuesPillDescription}
           />
         )}
@@ -64,33 +74,29 @@ export const MetricGroup: FC<MetricGroupProps> = ({
           );
         })}
 
-        {(notification.subject?.comments ?? 0) > 0 && (
+        {hasComments && (
           <MetricPill
             color={IconColor.GRAY}
             icon={CommentIcon}
-            metric={notification.subject.comments}
+            metric={commentCount}
             title={commentsPillDescription}
           />
         )}
 
-        {(notification.subject?.labels?.length ?? 0) > 0 && (
+        {hasLabels && (
           <MetricPill
             color={IconColor.GRAY}
             icon={TagIcon}
-            metric={notification.subject.labels?.length ?? 0}
-            title={labelsPillDescription ?? ''}
+            metric={labels.length}
+            title={labelsPillDescription}
           />
         )}
 
-        {notification.subject.milestone && (
+        {milestone && (
           <MetricPill
-            color={
-              notification.subject.milestone.state === 'OPEN'
-                ? IconColor.GREEN
-                : IconColor.RED
-            }
+            color={milestone.state === 'OPEN' ? IconColor.GREEN : IconColor.RED}
             icon={MilestoneIcon}
-            title={notification.subject.milestone.title}
+            title={milestone.title}
           />
         )}
       </div>

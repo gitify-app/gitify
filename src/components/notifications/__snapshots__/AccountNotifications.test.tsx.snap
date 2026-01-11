@@ -1386,7 +1386,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
                     </button>
                     <div
                       class="text-xxs opacity-50"
-                    />
+                    >
+                      123
+                    </div>
                   </div>
                 </div>
                 <div
@@ -1398,7 +1400,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
                   data-padding="none"
                   data-testid="notification-row"
                   data-wrap="nowrap"
-                  title="I am a robot and this is a test!"
+                  title="I am a robot and this is a test! [#123]"
                 >
                   <span
                     class="truncate prc-Text-Text-9mHv3"
@@ -1407,7 +1409,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
                   </span>
                   <span
                     class="text-xxs ml-auto mr-2 opacity-50 hidden prc-Text-Text-9mHv3"
-                  />
+                  >
+                    123
+                  </span>
                 </div>
                 <div
                   class="text-xs opacity-80 prc-Stack-Stack-UQ9k6"
@@ -1696,7 +1700,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
               >
                 <svg
                   aria-label="Issue"
-                  class="octicon octicon-issue-opened text-gitify-icon-muted"
+                  class="octicon octicon-issue-opened text-gitify-icon-open"
                   display="inline-block"
                   fill="currentColor"
                   focusable="false"
@@ -1783,7 +1787,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
                     </button>
                     <div
                       class="text-xxs opacity-50"
-                    />
+                    >
+                      456
+                    </div>
                   </div>
                 </div>
                 <div
@@ -1795,7 +1801,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
                   data-padding="none"
                   data-testid="notification-row"
                   data-wrap="nowrap"
-                  title="Improve the UI"
+                  title="Improve the UI [#456]"
                 >
                   <span
                     class="truncate prc-Text-Text-9mHv3"
@@ -1804,7 +1810,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
                   </span>
                   <span
                     class="text-xxs ml-auto mr-2 opacity-50 hidden prc-Text-Text-9mHv3"
-                  />
+                  >
+                    456
+                  </span>
                 </div>
                 <div
                   class="text-xs opacity-80 prc-Stack-Stack-UQ9k6"
@@ -2268,7 +2276,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
                   </button>
                   <div
                     class="text-xxs opacity-50"
-                  />
+                  >
+                    123
+                  </div>
                 </div>
               </div>
               <div
@@ -2280,7 +2290,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
                 data-padding="none"
                 data-testid="notification-row"
                 data-wrap="nowrap"
-                title="I am a robot and this is a test!"
+                title="I am a robot and this is a test! [#123]"
               >
                 <span
                   class="truncate prc-Text-Text-9mHv3"
@@ -2289,7 +2299,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
                 </span>
                 <span
                   class="text-xxs ml-auto mr-2 opacity-50 hidden prc-Text-Text-9mHv3"
-                />
+                >
+                  123
+                </span>
               </div>
               <div
                 class="text-xs opacity-80 prc-Stack-Stack-UQ9k6"
@@ -2578,7 +2590,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
             >
               <svg
                 aria-label="Issue"
-                class="octicon octicon-issue-opened text-gitify-icon-muted"
+                class="octicon octicon-issue-opened text-gitify-icon-open"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -2665,7 +2677,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
                   </button>
                   <div
                     class="text-xxs opacity-50"
-                  />
+                  >
+                    456
+                  </div>
                 </div>
               </div>
               <div
@@ -2677,7 +2691,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
                 data-padding="none"
                 data-testid="notification-row"
                 data-wrap="nowrap"
-                title="Improve the UI"
+                title="Improve the UI [#456]"
               >
                 <span
                   class="truncate prc-Text-Text-9mHv3"
@@ -2686,7 +2700,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
                 </span>
                 <span
                   class="text-xxs ml-auto mr-2 opacity-50 hidden prc-Text-Text-9mHv3"
-                />
+                >
+                  456
+                </span>
               </div>
               <div
                 class="text-xs opacity-80 prc-Stack-Stack-UQ9k6"

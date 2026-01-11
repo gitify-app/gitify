@@ -13,7 +13,6 @@ import {
   type UserType,
 } from '../../../types';
 import type { NotificationTypeHandler } from './types';
-import { formatForDisplay } from './utils';
 
 export class DefaultHandler implements NotificationTypeHandler {
   type?: SubjectType;
@@ -33,30 +32,6 @@ export class DefaultHandler implements NotificationTypeHandler {
 
   iconColor(_notification: GitifyNotification): IconColor {
     return IconColor.GRAY;
-  }
-
-  formattedNotificationType(notification: GitifyNotification): string {
-    return formatForDisplay([
-      notification.subject.state,
-      notification.subject.type,
-    ]);
-  }
-
-  formattedNotificationNumber(notification: GitifyNotification): string {
-    return notification.subject?.number
-      ? `#${notification.subject.number}`
-      : '';
-  }
-
-  formattedNotificationTitle(notification: GitifyNotification): string {
-    let title = notification.subject.title;
-    const number = this.formattedNotificationNumber(notification);
-
-    if (number.length > 0) {
-      title = `${title} [${number}]`;
-    }
-
-    return title;
   }
 
   defaultUrl(notification: GitifyNotification): Link {

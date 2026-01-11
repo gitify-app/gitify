@@ -34,6 +34,8 @@ export function transformNotification(
     repository: transformRepository(raw.repository),
     account,
     order,
+    // Display fields start as undefined, populated by formatNotification post-enrichment
+    display: undefined,
   };
 }
 
@@ -55,6 +57,7 @@ function transformSubject(
     type: raw.type as SubjectType,
     url: raw.url as Link | null,
     latestCommentUrl: raw.latest_comment_url as Link | null,
+
     // Enriched fields start as undefined, populated by handlers
   };
 }

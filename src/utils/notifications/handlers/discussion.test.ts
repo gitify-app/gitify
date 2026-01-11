@@ -69,7 +69,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
           htmlUrl: mockAuthor.htmlUrl,
           type: mockAuthor.type,
         },
-        comments: 0,
+        commentCount: 0,
         labels: [],
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/discussions/123',
@@ -103,7 +103,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
           htmlUrl: mockAuthor.htmlUrl,
           type: mockAuthor.type,
         },
-        comments: 0,
+        commentCount: 0,
         labels: [],
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/discussions/123',
@@ -140,7 +140,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
           htmlUrl: mockAuthor.htmlUrl,
           type: mockAuthor.type,
         },
-        comments: 0,
+        commentCount: 0,
         labels: [],
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/discussions/123',
@@ -181,7 +181,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
           htmlUrl: mockAuthor.htmlUrl,
           type: mockAuthor.type,
         },
-        comments: 0,
+        commentCount: 0,
         labels: ['enhancement'],
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/discussions/123',
@@ -229,7 +229,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
           htmlUrl: mockCommenter.htmlUrl,
           type: mockCommenter.type,
         },
-        comments: 1,
+        commentCount: 1,
         labels: [],
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/discussions/123#discussioncomment-1234',
@@ -283,7 +283,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
           htmlUrl: mockReplier.htmlUrl,
           type: mockReplier.type,
         },
-        comments: 1,
+        commentCount: 1,
         labels: [],
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/discussions/123#discussioncomment-6789',

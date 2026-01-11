@@ -63,7 +63,9 @@ exports[`renderer/components/notifications/NotificationHeader.tsx > should rende
               </button>
               <div
                 class="text-xxs opacity-50"
-              />
+              >
+                123
+              </div>
             </div>
           </div>
         </div>
@@ -129,7 +131,9 @@ exports[`renderer/components/notifications/NotificationHeader.tsx > should rende
             </button>
             <div
               class="text-xxs opacity-50"
-            />
+            >
+              123
+            </div>
           </div>
         </div>
       </div>
@@ -252,7 +256,9 @@ exports[`renderer/components/notifications/NotificationHeader.tsx > should rende
               </button>
               <div
                 class="text-xxs opacity-50 hidden"
-              />
+              >
+                123
+              </div>
             </div>
           </div>
         </div>
@@ -318,7 +324,9 @@ exports[`renderer/components/notifications/NotificationHeader.tsx > should rende
             </button>
             <div
               class="text-xxs opacity-50 hidden"
-            />
+            >
+              123
+            </div>
           </div>
         </div>
       </div>
@@ -441,7 +449,9 @@ exports[`renderer/components/notifications/NotificationHeader.tsx > should rende
               </button>
               <div
                 class="text-xxs opacity-50"
-              />
+              >
+                123
+              </div>
             </div>
           </div>
         </div>
@@ -507,7 +517,9 @@ exports[`renderer/components/notifications/NotificationHeader.tsx > should rende
             </button>
             <div
               class="text-xxs opacity-50"
-            />
+            >
+              123
+            </div>
           </div>
         </div>
       </div>
