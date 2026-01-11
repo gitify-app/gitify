@@ -3,6 +3,7 @@ import { act, renderHook, waitFor } from '@testing-library/react';
 import axios, { AxiosError } from 'axios';
 import nock from 'nock';
 
+import { mockGitHubCloudAccount } from '../__mocks__/account-mocks';
 import { mockGitifyNotification } from '../__mocks__/notifications-mocks';
 import { mockAuth, mockSettings, mockState } from '../__mocks__/state-mocks';
 import { Errors } from '../utils/errors';
@@ -115,6 +116,13 @@ describe('renderer/hooks/useNotifications.ts', () => {
     });
 
     it('should fetch detailed notifications with success', async () => {
+      const mockNotificationUser = {
+        login: 'test-user',
+        html_url: 'https://github.com/test-user',
+        avatar_url: 'https://avatars.githubusercontent.com/u/1?v=4',
+        type: 'User',
+      };
+
       const mockRepository = {
         name: 'notifications-test',
         full_name: 'gitify-app/notifications-test',

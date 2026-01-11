@@ -25,7 +25,7 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
 
   beforeEach(() => {
     // Reset mock notification state between tests since it's mutated
-    for (const n of mockGitHubNotifications) {
+    for (const n of mockGitHubCloudGitifyNotifications) {
       n.unread = true;
     }
   });
