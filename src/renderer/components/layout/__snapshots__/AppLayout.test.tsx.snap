@@ -102,11 +102,47 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
                   aria-hidden="true"
                   class="prc-TooltipV2-Tooltip-tLeuB"
                   data-direction="e"
-                  id="_r_1_"
                   popover="auto"
                   role="tooltip"
                 >
-                  Home
+                  <span
+                    id="_r_1_"
+                  >
+                    Home
+                    <span
+                      class="prc-src-InternalVisuallyHidden-2YaI6"
+                    >
+                      (
+                      h
+                      )
+                    </span>
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    class="prc-TooltipV2-KeybindingHintContainer-Ymj-3 prc-TooltipV2-HasTextBefore-fdOXj"
+                  >
+                    <kbd
+                      class="prc-KeybindingHint-KeybindingHint-qpYIs prc-Text-Text-9mHv3"
+                      data-testid="keybinding-hint"
+                    >
+                      <span
+                        class="prc-components-Chord-DdhWN prc-components-ChordOnEmphasis-O-4BS prc-components-ChordSmall-c-P-x prc-Text-Text-9mHv3"
+                        data-kbd-chord="true"
+                      >
+                         
+                        <span
+                          class="prc-src-InternalVisuallyHidden-2YaI6"
+                        >
+                          h
+                        </span>
+                        <span
+                          aria-hidden="true"
+                        >
+                          H
+                        </span>
+                      </span>
+                    </kbd>
+                  </span>
                 </span>
                 <button
                   aria-describedby="_r_3_"
@@ -180,11 +216,47 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
                   aria-hidden="true"
                   class="prc-TooltipV2-Tooltip-tLeuB"
                   data-direction="e"
-                  id="_r_5_"
                   popover="auto"
                   role="tooltip"
                 >
-                  Participating and watching
+                  <span
+                    id="_r_5_"
+                  >
+                    Participating and watching
+                    <span
+                      class="prc-src-InternalVisuallyHidden-2YaI6"
+                    >
+                      (
+                      w
+                      )
+                    </span>
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    class="prc-TooltipV2-KeybindingHintContainer-Ymj-3 prc-TooltipV2-HasTextBefore-fdOXj"
+                  >
+                    <kbd
+                      class="prc-KeybindingHint-KeybindingHint-qpYIs prc-Text-Text-9mHv3"
+                      data-testid="keybinding-hint"
+                    >
+                      <span
+                        class="prc-components-Chord-DdhWN prc-components-ChordOnEmphasis-O-4BS prc-components-ChordSmall-c-P-x prc-Text-Text-9mHv3"
+                        data-kbd-chord="true"
+                      >
+                         
+                        <span
+                          class="prc-src-InternalVisuallyHidden-2YaI6"
+                        >
+                          w
+                        </span>
+                        <span
+                          aria-hidden="true"
+                        >
+                          W
+                        </span>
+                      </span>
+                    </kbd>
+                  </span>
                 </span>
                 <button
                   aria-describedby="_r_7_"
@@ -219,11 +291,47 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
                   aria-hidden="true"
                   class="prc-TooltipV2-Tooltip-tLeuB"
                   data-direction="e"
-                  id="_r_7_"
                   popover="auto"
                   role="tooltip"
                 >
-                  Filter notifications
+                  <span
+                    id="_r_7_"
+                  >
+                    Filter notifications
+                    <span
+                      class="prc-src-InternalVisuallyHidden-2YaI6"
+                    >
+                      (
+                      f
+                      )
+                    </span>
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    class="prc-TooltipV2-KeybindingHintContainer-Ymj-3 prc-TooltipV2-HasTextBefore-fdOXj"
+                  >
+                    <kbd
+                      class="prc-KeybindingHint-KeybindingHint-qpYIs prc-Text-Text-9mHv3"
+                      data-testid="keybinding-hint"
+                    >
+                      <span
+                        class="prc-components-Chord-DdhWN prc-components-ChordOnEmphasis-O-4BS prc-components-ChordSmall-c-P-x prc-Text-Text-9mHv3"
+                        data-kbd-chord="true"
+                      >
+                         
+                        <span
+                          class="prc-src-InternalVisuallyHidden-2YaI6"
+                        >
+                          f
+                        </span>
+                        <span
+                          aria-hidden="true"
+                        >
+                          F
+                        </span>
+                      </span>
+                    </kbd>
+                  </span>
                 </span>
                 <button
                   aria-labelledby="_r_9_"
@@ -345,14 +453,51 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
                   aria-hidden="true"
                   class="prc-TooltipV2-Tooltip-tLeuB"
                   data-direction="e"
-                  id="_r_d_"
                   popover="auto"
                   role="tooltip"
                 >
-                  Refresh notifications
+                  <span
+                    id="_r_d_"
+                  >
+                    Refresh notifications
+                    <span
+                      class="prc-src-InternalVisuallyHidden-2YaI6"
+                    >
+                      (
+                      r
+                      )
+                    </span>
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    class="prc-TooltipV2-KeybindingHintContainer-Ymj-3 prc-TooltipV2-HasTextBefore-fdOXj"
+                  >
+                    <kbd
+                      class="prc-KeybindingHint-KeybindingHint-qpYIs prc-Text-Text-9mHv3"
+                      data-testid="keybinding-hint"
+                    >
+                      <span
+                        class="prc-components-Chord-DdhWN prc-components-ChordOnEmphasis-O-4BS prc-components-ChordSmall-c-P-x prc-Text-Text-9mHv3"
+                        data-kbd-chord="true"
+                      >
+                         
+                        <span
+                          class="prc-src-InternalVisuallyHidden-2YaI6"
+                        >
+                          r
+                        </span>
+                        <span
+                          aria-hidden="true"
+                        >
+                          R
+                        </span>
+                      </span>
+                    </kbd>
+                  </span>
                 </span>
                 <button
-                  aria-labelledby="_r_f_"
+                  aria-describedby="_r_f_"
+                  aria-label="Settings"
                   class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                   data-component="IconButton"
                   data-loading="false"
@@ -383,10 +528,47 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
                   aria-hidden="true"
                   class="prc-TooltipV2-Tooltip-tLeuB"
                   data-direction="e"
-                  id="_r_f_"
                   popover="auto"
+                  role="tooltip"
                 >
-                  Settings
+                  <span
+                    id="_r_f_"
+                  >
+                    Settings
+                    <span
+                      class="prc-src-InternalVisuallyHidden-2YaI6"
+                    >
+                      (
+                      s
+                      )
+                    </span>
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    class="prc-TooltipV2-KeybindingHintContainer-Ymj-3 prc-TooltipV2-HasTextBefore-fdOXj"
+                  >
+                    <kbd
+                      class="prc-KeybindingHint-KeybindingHint-qpYIs prc-Text-Text-9mHv3"
+                      data-testid="keybinding-hint"
+                    >
+                      <span
+                        class="prc-components-Chord-DdhWN prc-components-ChordOnEmphasis-O-4BS prc-components-ChordSmall-c-P-x prc-Text-Text-9mHv3"
+                        data-kbd-chord="true"
+                      >
+                         
+                        <span
+                          class="prc-src-InternalVisuallyHidden-2YaI6"
+                        >
+                          s
+                        </span>
+                        <span
+                          aria-hidden="true"
+                        >
+                          S
+                        </span>
+                      </span>
+                    </kbd>
+                  </span>
                 </span>
               </div>
             </div>
@@ -498,11 +680,47 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
                 aria-hidden="true"
                 class="prc-TooltipV2-Tooltip-tLeuB"
                 data-direction="e"
-                id="_r_1_"
                 popover="auto"
                 role="tooltip"
               >
-                Home
+                <span
+                  id="_r_1_"
+                >
+                  Home
+                  <span
+                    class="prc-src-InternalVisuallyHidden-2YaI6"
+                  >
+                    (
+                    h
+                    )
+                  </span>
+                </span>
+                <span
+                  aria-hidden="true"
+                  class="prc-TooltipV2-KeybindingHintContainer-Ymj-3 prc-TooltipV2-HasTextBefore-fdOXj"
+                >
+                  <kbd
+                    class="prc-KeybindingHint-KeybindingHint-qpYIs prc-Text-Text-9mHv3"
+                    data-testid="keybinding-hint"
+                  >
+                    <span
+                      class="prc-components-Chord-DdhWN prc-components-ChordOnEmphasis-O-4BS prc-components-ChordSmall-c-P-x prc-Text-Text-9mHv3"
+                      data-kbd-chord="true"
+                    >
+                       
+                      <span
+                        class="prc-src-InternalVisuallyHidden-2YaI6"
+                      >
+                        h
+                      </span>
+                      <span
+                        aria-hidden="true"
+                      >
+                        H
+                      </span>
+                    </span>
+                  </kbd>
+                </span>
               </span>
               <button
                 aria-describedby="_r_3_"
@@ -576,11 +794,47 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
                 aria-hidden="true"
                 class="prc-TooltipV2-Tooltip-tLeuB"
                 data-direction="e"
-                id="_r_5_"
                 popover="auto"
                 role="tooltip"
               >
-                Participating and watching
+                <span
+                  id="_r_5_"
+                >
+                  Participating and watching
+                  <span
+                    class="prc-src-InternalVisuallyHidden-2YaI6"
+                  >
+                    (
+                    w
+                    )
+                  </span>
+                </span>
+                <span
+                  aria-hidden="true"
+                  class="prc-TooltipV2-KeybindingHintContainer-Ymj-3 prc-TooltipV2-HasTextBefore-fdOXj"
+                >
+                  <kbd
+                    class="prc-KeybindingHint-KeybindingHint-qpYIs prc-Text-Text-9mHv3"
+                    data-testid="keybinding-hint"
+                  >
+                    <span
+                      class="prc-components-Chord-DdhWN prc-components-ChordOnEmphasis-O-4BS prc-components-ChordSmall-c-P-x prc-Text-Text-9mHv3"
+                      data-kbd-chord="true"
+                    >
+                       
+                      <span
+                        class="prc-src-InternalVisuallyHidden-2YaI6"
+                      >
+                        w
+                      </span>
+                      <span
+                        aria-hidden="true"
+                      >
+                        W
+                      </span>
+                    </span>
+                  </kbd>
+                </span>
               </span>
               <button
                 aria-describedby="_r_7_"
@@ -615,11 +869,47 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
                 aria-hidden="true"
                 class="prc-TooltipV2-Tooltip-tLeuB"
                 data-direction="e"
-                id="_r_7_"
                 popover="auto"
                 role="tooltip"
               >
-                Filter notifications
+                <span
+                  id="_r_7_"
+                >
+                  Filter notifications
+                  <span
+                    class="prc-src-InternalVisuallyHidden-2YaI6"
+                  >
+                    (
+                    f
+                    )
+                  </span>
+                </span>
+                <span
+                  aria-hidden="true"
+                  class="prc-TooltipV2-KeybindingHintContainer-Ymj-3 prc-TooltipV2-HasTextBefore-fdOXj"
+                >
+                  <kbd
+                    class="prc-KeybindingHint-KeybindingHint-qpYIs prc-Text-Text-9mHv3"
+                    data-testid="keybinding-hint"
+                  >
+                    <span
+                      class="prc-components-Chord-DdhWN prc-components-ChordOnEmphasis-O-4BS prc-components-ChordSmall-c-P-x prc-Text-Text-9mHv3"
+                      data-kbd-chord="true"
+                    >
+                       
+                      <span
+                        class="prc-src-InternalVisuallyHidden-2YaI6"
+                      >
+                        f
+                      </span>
+                      <span
+                        aria-hidden="true"
+                      >
+                        F
+                      </span>
+                    </span>
+                  </kbd>
+                </span>
               </span>
               <button
                 aria-labelledby="_r_9_"
@@ -741,14 +1031,51 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
                 aria-hidden="true"
                 class="prc-TooltipV2-Tooltip-tLeuB"
                 data-direction="e"
-                id="_r_d_"
                 popover="auto"
                 role="tooltip"
               >
-                Refresh notifications
+                <span
+                  id="_r_d_"
+                >
+                  Refresh notifications
+                  <span
+                    class="prc-src-InternalVisuallyHidden-2YaI6"
+                  >
+                    (
+                    r
+                    )
+                  </span>
+                </span>
+                <span
+                  aria-hidden="true"
+                  class="prc-TooltipV2-KeybindingHintContainer-Ymj-3 prc-TooltipV2-HasTextBefore-fdOXj"
+                >
+                  <kbd
+                    class="prc-KeybindingHint-KeybindingHint-qpYIs prc-Text-Text-9mHv3"
+                    data-testid="keybinding-hint"
+                  >
+                    <span
+                      class="prc-components-Chord-DdhWN prc-components-ChordOnEmphasis-O-4BS prc-components-ChordSmall-c-P-x prc-Text-Text-9mHv3"
+                      data-kbd-chord="true"
+                    >
+                       
+                      <span
+                        class="prc-src-InternalVisuallyHidden-2YaI6"
+                      >
+                        r
+                      </span>
+                      <span
+                        aria-hidden="true"
+                      >
+                        R
+                      </span>
+                    </span>
+                  </kbd>
+                </span>
               </span>
               <button
-                aria-labelledby="_r_f_"
+                aria-describedby="_r_f_"
+                aria-label="Settings"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
                 data-loading="false"
@@ -779,10 +1106,47 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
                 aria-hidden="true"
                 class="prc-TooltipV2-Tooltip-tLeuB"
                 data-direction="e"
-                id="_r_f_"
                 popover="auto"
+                role="tooltip"
               >
-                Settings
+                <span
+                  id="_r_f_"
+                >
+                  Settings
+                  <span
+                    class="prc-src-InternalVisuallyHidden-2YaI6"
+                  >
+                    (
+                    s
+                    )
+                  </span>
+                </span>
+                <span
+                  aria-hidden="true"
+                  class="prc-TooltipV2-KeybindingHintContainer-Ymj-3 prc-TooltipV2-HasTextBefore-fdOXj"
+                >
+                  <kbd
+                    class="prc-KeybindingHint-KeybindingHint-qpYIs prc-Text-Text-9mHv3"
+                    data-testid="keybinding-hint"
+                  >
+                    <span
+                      class="prc-components-Chord-DdhWN prc-components-ChordOnEmphasis-O-4BS prc-components-ChordSmall-c-P-x prc-Text-Text-9mHv3"
+                      data-kbd-chord="true"
+                    >
+                       
+                      <span
+                        class="prc-src-InternalVisuallyHidden-2YaI6"
+                      >
+                        s
+                      </span>
+                      <span
+                        aria-hidden="true"
+                      >
+                        S
+                      </span>
+                    </span>
+                  </kbd>
+                </span>
               </span>
             </div>
           </div>
