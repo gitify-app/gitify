@@ -1,4 +1,4 @@
-import { screen } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { renderWithAppContext } from '../../__helpers__/test-utils';
@@ -22,10 +22,26 @@ describe('renderer/components/fields/Tooltip.tsx', () => {
 
     const tooltipIconElement = screen.getByTestId('tooltip-icon-test');
 
+    // Open tooltip
     await userEvent.click(tooltipIconElement);
     expect(screen.queryByText(props.tooltip as string)).toBeInTheDocument();
 
+    // Close tooltip
     await userEvent.click(tooltipIconElement);
+    expect(screen.queryByText(props.tooltip as string)).not.toBeInTheDocument();
+  });
+
+  it('should hide tooltip when clicking outside', async () => {
+    renderWithAppContext(<Tooltip {...props} />);
+
+    const tooltipIconElement = screen.getByTestId('tooltip-icon-test');
+
+    // Open tooltip
+    await userEvent.click(tooltipIconElement);
+    expect(screen.queryByText(props.tooltip as string)).toBeInTheDocument();
+
+    // Click outside to close
+    await userEvent.click(document.body);
     expect(screen.queryByText(props.tooltip as string)).not.toBeInTheDocument();
   });
 });
