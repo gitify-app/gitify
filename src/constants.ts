@@ -1,0 +1,48 @@
+import type { Hostname, Link } from './types';
+
+export const Constants = {
+  STORAGE_KEY: 'gitify-storage',
+
+  // GitHub OAuth Scopes
+  OAUTH_SCOPES: {
+    RECOMMENDED: ['read:user', 'notifications', 'repo'],
+    ALTERNATE: ['read:user', 'notifications', 'public_repo'],
+  },
+
+  // Default hostname for GitHub.com
+  // Note: OAuth credentials are passed at runtime via LoginWithOAuthApp
+  // and securely exchanged via the Rust backend
+  DEFAULT_HOSTNAME: 'github.com' as Hostname,
+
+  GITHUB_API_BASE_URL: 'https://api.github.com',
+  GITHUB_API_GRAPHQL_URL: 'https://api.github.com/graphql',
+
+  ALL_READ_EMOJIS: ['🎉', '🎊', '🥳', '👏', '🙌', '😎', '🏖️', '🚀', '✨', '🏆'],
+
+  DEFAULT_FETCH_NOTIFICATIONS_INTERVAL_MS: 60 * 1000, // 1 minute
+  MIN_FETCH_NOTIFICATIONS_INTERVAL_MS: 60 * 1000, // 1 minute
+  MAX_FETCH_NOTIFICATIONS_INTERVAL_MS: 60 * 60 * 1000, // 1 hour
+  FETCH_NOTIFICATIONS_INTERVAL_STEP_MS: 60 * 1000, // 1 minute
+
+  REFRESH_ACCOUNTS_INTERVAL_MS: 60 * 60 * 1000, // 1 hour
+
+  // GraphQL Argument Defaults
+  GRAPHQL_ARGS: {
+    FIRST_LABELS: 100,
+    FIRST_CLOSING_ISSUES: 100,
+    LAST_COMMENTS: 1,
+    LAST_THREADED_COMMENTS: 10,
+    LAST_REPLIES: 10,
+    LAST_REVIEWS: 100,
+  },
+
+  // GitHub Docs
+  GITHUB_DOCS: {
+    OAUTH_URL:
+      'https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authenticating-to-the-rest-api-with-an-oauth-app' as Link,
+    PAT_URL:
+      'https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens' as Link,
+    PARTICIPATING_URL:
+      'https://docs.github.com/en/account-and-profile/managing-subscriptions-and-notifications-on-github/setting-up-notifications/configuring-notifications#about-participating-and-watching-notifications' as Link,
+  },
+};

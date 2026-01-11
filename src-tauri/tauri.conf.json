@@ -1,0 +1,84 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Gitify",
+  "version": "6.14.1",
+  "identifier": "io.gitify.app",
+  "build": {
+    "beforeDevCommand": "pnpm dev",
+    "devUrl": "http://localhost:1420",
+    "beforeBuildCommand": "pnpm build",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "label": "main",
+        "title": "Gitify",
+        "width": 500,
+        "height": 600,
+        "minWidth": 400,
+        "minHeight": 300,
+        "resizable": true,
+        "fullscreen": false,
+        "visible": false,
+        "decorations": false,
+        "alwaysOnTop": true,
+        "skipTaskbar": true,
+        "hiddenTitle": true,
+        "focus": false,
+        "tabbingIdentifier": "gitify"
+      }
+    ],
+    "security": {
+      "csp": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' asset: http://asset.localhost https://avatars.githubusercontent.com https://*.githubusercontent.com data:; font-src 'self' data:; connect-src 'self' https://api.github.com https://*.github.com https://github.com;",
+      "assetProtocol": {
+        "enable": true,
+        "scope": {
+          "requireLiteralLeadingDot": false,
+          "allow": ["$RESOURCE/**", "$APPDATA/**"]
+        }
+      }
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "resources": ["icons/tray/*.png", "assets/**/*"],
+    "macOS": {
+      "minimumSystemVersion": "10.15",
+      "exceptionDomain": "",
+      "frameworks": []
+    },
+    "windows": {
+      "certificateThumbprint": null,
+      "digestAlgorithm": "sha256",
+      "timestampUrl": ""
+    },
+    "linux": {
+      "deb": {},
+      "appimage": {}
+    },
+    "createUpdaterArtifacts": "v1Compatible",
+    "publisher": "Gitify"
+  },
+  "plugins": {
+    "updater": {
+      "endpoints": [
+        "https://github.com/gitify-app/gitify/releases/latest/download/latest.json"
+      ],
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEIxQTRFMUU0OTQ2MUZCOUEKUldTYSsyR1U1T0drc2UyTFpFaEQwOUoyaXhZQlpmUURhK1F3U2xtYzNHbENWcEwyT3JXWkYwZDAK"
+    },
+    "deep-link": {
+      "desktop": {
+        "schemes": ["gitify"]
+      }
+    }
+  }
+}

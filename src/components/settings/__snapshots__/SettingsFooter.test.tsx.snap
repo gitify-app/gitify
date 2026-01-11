@@ -1,0 +1,29 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`renderer/components/settings/SettingsFooter.tsx > should show app version 1`] = `
+<button
+  aria-describedby="_r_1_"
+  class="prc-Button-ButtonBase-9n-Xk"
+  data-loading="false"
+  data-no-visuals="true"
+  data-size="medium"
+  data-testid="settings-release-notes"
+  data-variant="default"
+  type="button"
+>
+  <span
+    class="prc-Button-ButtonContent-Iohp5"
+    data-align="center"
+    data-component="buttonContent"
+  >
+    <span
+      class="prc-Button-Label-FWkx3"
+      data-component="text"
+    >
+      Gitify
+       
+      v0.0.1
+    </span>
+  </span>
+</button>
+`;

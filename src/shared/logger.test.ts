@@ -1,86 +1,75 @@
-import log from 'electron-log';
+import * as tauriLog from '@tauri-apps/plugin-log';
+import { beforeEach, describe, expect, it, type Mock } from 'vitest';
 
 import { logError, logInfo, logWarn } from './logger';
 
 describe('shared/logger.ts', () => {
-  const logInfoSpy = jest.spyOn(log, 'info').mockImplementation();
-  const logWarnSpy = jest.spyOn(log, 'warn').mockImplementation();
-  const logErrorSpy = jest.spyOn(log, 'error').mockImplementation();
-
   const mockError = new Error('baz');
 
   beforeEach(() => {
-    logInfoSpy.mockReset();
-    logWarnSpy.mockReset();
-    logErrorSpy.mockReset();
+    (tauriLog.info as Mock).mockClear();
+    (tauriLog.warn as Mock).mockClear();
+    (tauriLog.error as Mock).mockClear();
   });
 
   describe('logInfo', () => {
     it('logs info without contexts', () => {
       logInfo('foo', 'bar');
-      expect(logInfoSpy).toHaveBeenCalledTimes(1);
-      expect(logInfoSpy).toHaveBeenCalledWith('[foo]', 'bar');
+      expect(tauriLog.info).toHaveBeenCalledTimes(1);
+      expect(tauriLog.info).toHaveBeenCalledWith('[foo] bar');
     });
 
     it('logs info with single context', () => {
       logInfo('foo', 'bar', ['ctx']);
-      expect(logInfoSpy).toHaveBeenCalledTimes(1);
-      expect(logInfoSpy).toHaveBeenCalledWith('[foo]', 'bar', '[ctx]');
+      expect(tauriLog.info).toHaveBeenCalledTimes(1);
+      expect(tauriLog.info).toHaveBeenCalledWith('[foo] bar [ctx]');
     });
 
     it('logs info with multiple contexts', () => {
       logInfo('foo', 'bar', ['ctx1', 'ctx2']);
-      expect(logInfoSpy).toHaveBeenCalledTimes(1);
-      expect(logInfoSpy).toHaveBeenCalledWith('[foo]', 'bar', '[ctx1 >> ctx2]');
+      expect(tauriLog.info).toHaveBeenCalledTimes(1);
+      expect(tauriLog.info).toHaveBeenCalledWith('[foo] bar [ctx1 >> ctx2]');
     });
   });
 
   describe('logWarn', () => {
     it('logs warn without contexts', () => {
       logWarn('foo', 'bar');
-      expect(logWarnSpy).toHaveBeenCalledTimes(1);
-      expect(logWarnSpy).toHaveBeenCalledWith('[foo]', 'bar');
+      expect(tauriLog.warn).toHaveBeenCalledTimes(1);
+      expect(tauriLog.warn).toHaveBeenCalledWith('[foo] bar');
     });
 
     it('logs warn with single context', () => {
       logWarn('foo', 'bar', ['ctx']);
-      expect(logWarnSpy).toHaveBeenCalledTimes(1);
-      expect(logWarnSpy).toHaveBeenCalledWith('[foo]', 'bar', '[ctx]');
+      expect(tauriLog.warn).toHaveBeenCalledTimes(1);
+      expect(tauriLog.warn).toHaveBeenCalledWith('[foo] bar [ctx]');
     });
 
     it('logs warn with multiple contexts', () => {
       logWarn('foo', 'bar', ['ctx1', 'ctx2']);
-      expect(logWarnSpy).toHaveBeenCalledTimes(1);
-      expect(logWarnSpy).toHaveBeenCalledWith('[foo]', 'bar', '[ctx1 >> ctx2]');
+      expect(tauriLog.warn).toHaveBeenCalledTimes(1);
+      expect(tauriLog.warn).toHaveBeenCalledWith('[foo] bar [ctx1 >> ctx2]');
     });
   });
 
   describe('logError', () => {
     it('logs error without contexts', () => {
       logError('foo', 'bar', mockError);
-      expect(logErrorSpy).toHaveBeenCalledTimes(1);
-      expect(logErrorSpy).toHaveBeenCalledWith('[foo]', 'bar', mockError);
+      expect(tauriLog.error).toHaveBeenCalledTimes(1);
+      expect(tauriLog.error).toHaveBeenCalledWith('[foo] bar Error: baz');
     });
 
     it('logs error with single context', () => {
       logError('foo', 'bar', mockError, ['ctx']);
-      expect(logErrorSpy).toHaveBeenCalledTimes(1);
-      expect(logErrorSpy).toHaveBeenCalledWith(
-        '[foo]',
-        'bar',
-        '[ctx]',
-        mockError,
-      );
+      expect(tauriLog.error).toHaveBeenCalledTimes(1);
+      expect(tauriLog.error).toHaveBeenCalledWith('[foo] bar [ctx] Error: baz');
     });
 
     it('logs error with multiple contexts', () => {
       logError('foo', 'bar', mockError, ['ctx1', 'ctx2']);
-      expect(logErrorSpy).toHaveBeenCalledTimes(1);
-      expect(logErrorSpy).toHaveBeenCalledWith(
-        '[foo]',
-        'bar',
-        '[ctx1 >> ctx2]',
-        mockError,
+      expect(tauriLog.error).toHaveBeenCalledTimes(1);
+      expect(tauriLog.error).toHaveBeenCalledWith(
+        '[foo] bar [ctx1 >> ctx2] Error: baz',
       );
     });
   });
