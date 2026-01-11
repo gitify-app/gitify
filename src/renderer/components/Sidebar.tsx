@@ -1,4 +1,4 @@
-import { type FC, useEffect } from 'react';
+import { type FC, useCallback, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import {
@@ -41,31 +41,31 @@ export const Sidebar: FC = () => {
 
   const primaryAccountHostname = getPrimaryAccountHostname(auth);
 
-  const goHome = () => {
+  const goHome = useCallback(() => {
     navigate('/', { replace: true });
-  };
+  }, []);
 
-  const toggleFilters = () => {
+  const toggleFilters = useCallback(() => {
     if (location.pathname.startsWith('/filters')) {
       navigate('/', { replace: true });
     } else {
       navigate('/filters');
     }
-  };
+  }, [location.pathname]);
 
-  const toggleSettings = () => {
+  const toggleSettings = useCallback(() => {
     if (location.pathname.startsWith('/settings')) {
       navigate('/', { replace: true });
       fetchNotifications();
     } else {
       navigate('/settings');
     }
-  };
+  }, [location.pathname, fetchNotifications]);
 
-  const refreshNotifications = () => {
+  const refreshNotifications = useCallback(() => {
     goHome();
     fetchNotifications();
-  };
+  }, [goHome, fetchNotifications]);
 
   useEffect(() => {
     const sidebarShortcutHandler = (event: KeyboardEvent) => {
@@ -116,7 +116,14 @@ export const Sidebar: FC = () => {
     return () => {
       document.removeEventListener('keydown', sidebarShortcutHandler);
     };
-  }, [isLoggedIn, status]);
+  }, [
+    isLoggedIn,
+    status,
+    goHome,
+    toggleFilters,
+    toggleSettings,
+    refreshNotifications,
+  ]);
 
   return (
     <Stack
