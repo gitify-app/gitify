@@ -156,7 +156,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
 
     it('should hide mark as read button when notification is already read', async () => {
       const readNotification = {
-        ...mockSingleNotification,
+        ...mockGitifyNotification,
         unread: false,
       };
 
