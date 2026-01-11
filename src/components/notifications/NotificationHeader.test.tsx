@@ -2,9 +2,9 @@ import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { renderWithAppContext } from '../../__helpers__/test-utils';
+import { mockGitifyNotification } from '../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../__mocks__/state-mocks';
 import { GroupBy } from '../../types';
-import { mockSingleNotification } from '../../utils/api/__mocks__/response-mocks';
 import * as comms from '../../utils/comms';
 import { NotificationHeader } from './NotificationHeader';
 
@@ -15,7 +15,7 @@ describe('renderer/components/notifications/NotificationHeader.tsx', () => {
 
   it('should render itself & its children - group by repositories', async () => {
     const props = {
-      notification: mockSingleNotification,
+      notification: mockGitifyNotification,
     };
 
     const tree = renderWithAppContext(<NotificationHeader {...props} />, {
@@ -28,7 +28,7 @@ describe('renderer/components/notifications/NotificationHeader.tsx', () => {
   describe('should render itself & its children - group by date', () => {
     it('with notification number', async () => {
       const props = {
-        notification: mockSingleNotification,
+        notification: mockGitifyNotification,
       };
 
       const tree = renderWithAppContext(<NotificationHeader {...props} />, {
@@ -40,7 +40,7 @@ describe('renderer/components/notifications/NotificationHeader.tsx', () => {
 
     it('with showNumber setting disabled', async () => {
       const props = {
-        notification: mockSingleNotification,
+        notification: mockGitifyNotification,
       };
 
       const tree = renderWithAppContext(<NotificationHeader {...props} />, {
@@ -57,8 +57,8 @@ describe('renderer/components/notifications/NotificationHeader.tsx', () => {
     it('without notification number', async () => {
       const props = {
         notification: {
-          ...mockSingleNotification,
-          subject: { ...mockSingleNotification.subject, number: undefined },
+          ...mockGitifyNotification,
+          subject: { ...mockGitifyNotification.subject, number: null },
         },
       };
 
@@ -76,7 +76,7 @@ describe('renderer/components/notifications/NotificationHeader.tsx', () => {
       .mockImplementation(() => {});
 
     const props = {
-      notification: mockSingleNotification,
+      notification: mockGitifyNotification,
     };
 
     renderWithAppContext(<NotificationHeader {...props} />, {

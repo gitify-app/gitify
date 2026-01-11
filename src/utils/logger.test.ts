@@ -1,6 +1,6 @@
 import * as logger from '../shared/logger';
 
-import { mockSingleNotification } from './api/__mocks__/response-mocks';
+import { mockGitifyNotification } from '../__mocks__/notifications-mocks';
 import { rendererLogError, rendererLogInfo, rendererLogWarn } from './logger';
 
 describe('renderer/utils/logger.ts', () => {
@@ -21,7 +21,7 @@ describe('renderer/utils/logger.ts', () => {
   });
 
   it('logs info with notification', () => {
-    rendererLogInfo('foo', 'bar', mockSingleNotification);
+    rendererLogInfo('foo', 'bar', mockGitifyNotification);
     expect(logInfoSpy).toHaveBeenCalledWith('foo', 'bar', [
       'Issue',
       'gitify-app/notifications-test',
@@ -30,7 +30,7 @@ describe('renderer/utils/logger.ts', () => {
   });
 
   it('logs warn with notification', () => {
-    rendererLogWarn('foo', 'bar', mockSingleNotification);
+    rendererLogWarn('foo', 'bar', mockGitifyNotification);
     expect(logWarnSpy).toHaveBeenCalledWith('foo', 'bar', [
       'Issue',
       'gitify-app/notifications-test',
@@ -39,7 +39,7 @@ describe('renderer/utils/logger.ts', () => {
   });
 
   it('logs error with notification', () => {
-    rendererLogError('foo', 'bar', mockError, mockSingleNotification);
+    rendererLogError('foo', 'bar', mockError, mockGitifyNotification);
     expect(logErrorSpy).toHaveBeenCalledWith('foo', 'bar', mockError, [
       'Issue',
       'gitify-app/notifications-test',

@@ -1,4 +1,4 @@
-import { createPartialMockNotification } from '../../../__mocks__/notifications-mocks';
+import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-mocks';
 import type { GitifyOwner, Link } from '../../../types';
 import {
   ALL_SEARCH_QUALIFIERS,
@@ -35,7 +35,7 @@ describe('renderer/utils/notifications/filters/search.ts', () => {
   });
 
   describe('filterNotificationBySearchTerm', () => {
-    const mockNotification = createPartialMockNotification(
+    const mockNotification = mockPartialGitifyNotification(
       {
         title: 'User authored notification',
         user: {
@@ -49,7 +49,8 @@ describe('renderer/utils/notifications/filters/search.ts', () => {
       {
         owner: {
           login: 'gitify-app',
-          avatarUrl: 'https://avatars.githubusercontent.com/u/1' as Link,
+          avatarUrl:
+            'https://avatars.githubusercontent.com/u/133795385?s=200&v=4' as Link,
           type: 'Organization',
         } as GitifyOwner,
         fullName: 'gitify-app/gitify',

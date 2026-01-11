@@ -1,7 +1,7 @@
 import { waitFor } from '@testing-library/react';
 
 import {
-  mockAccountNotifications,
+  mockMultipleAccountNotifications,
   mockSingleAccountNotifications,
 } from '../../__mocks__/notifications-mocks';
 import * as helpers from '../helpers';
@@ -42,7 +42,9 @@ describe('renderer/utils/notifications/native.ts', () => {
   });
 
   it('should raise a native notification for multiple new notifications', async () => {
-    native.raiseNativeNotification(mockAccountNotifications[0].notifications);
+    native.raiseNativeNotification(
+      mockMultipleAccountNotifications[0].notifications,
+    );
 
     await waitFor(() =>
       expect(window.gitify.raiseNativeNotification).toHaveBeenCalledTimes(1),

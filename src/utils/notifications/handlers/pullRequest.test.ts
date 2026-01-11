@@ -4,9 +4,8 @@ import {
   createMockResponse,
   fetch,
 } from '../../../__mocks__/@tauri-apps/plugin-http';
-import { createPartialMockNotification } from '../../../__mocks__/notifications-mocks';
+import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
-import { createMockGraphQLAuthor } from '../../../__mocks__/user-mocks';
 import type { GitifyNotification } from '../../../types';
 import {
   type GitifyPullRequestState,
@@ -14,21 +13,19 @@ import {
   IconColor,
   type Link,
 } from '../../../types';
-import type {
-  PullRequestDetailsFragment,
-  PullRequestReviewState,
-  PullRequestState,
-} from '../../api/graphql/generated/graphql';
+import {
+  mockAuthor,
+  mockCommenter,
+  mockPullRequestResponseNode,
+} from '../../api/__mocks__/response-mocks';
+import type { PullRequestReviewState } from '../../api/graphql/generated/graphql';
 import { getLatestReviewForReviewers, pullRequestHandler } from './pullRequest';
-
-const mockAuthor = createMockGraphQLAuthor('some-author');
-const mockCommenter = createMockGraphQLAuthor('some-commenter');
 
 describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
   let mockNotification: GitifyNotification;
 
   beforeEach(() => {
-    mockNotification = createPartialMockNotification({
+    mockNotification = mockPartialGitifyNotification({
       title: 'This is a mock pull request',
       type: 'PullRequest',
       url: 'https://api.github.com/repos/gitify-app/notifications-test/pulls/1' as Link,
@@ -398,7 +395,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
     it.each(
       Object.entries(cases) as Array<[GitifyPullRequestState, IconColor]>,
     )('iconType for pull request with state %s', (pullRequestState, pullRequestIconType) => {
-      const mockNotification = createPartialMockNotification({
+      const mockNotification = mockPartialGitifyNotification({
         type: 'PullRequest',
         state: pullRequestState,
       });
@@ -421,7 +418,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
     it.each(
       Object.entries(cases) as Array<[GitifyPullRequestState, IconColor]>,
     )('iconType for pull request with state %s', (pullRequestState, pullRequestIconColor) => {
-      const mockNotification = createPartialMockNotification({
+      const mockNotification = mockPartialGitifyNotification({
         type: 'PullRequest',
         state: pullRequestState,
       });
@@ -489,35 +486,3 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
     });
   });
 });
-
-function mockPullRequestResponseNode(mocks: {
-  state: PullRequestState;
-  isDraft?: boolean;
-  merged?: boolean;
-  isInMergeQueue?: boolean;
-}): PullRequestDetailsFragment {
-  return {
-    __typename: 'PullRequest',
-    number: 123,
-    title: 'Test PR',
-    state: mocks.state,
-    isDraft: mocks.isDraft ?? false,
-    merged: mocks.merged ?? false,
-    isInMergeQueue: mocks.isInMergeQueue ?? false,
-    url: 'https://github.com/gitify-app/notifications-test/pulls/123',
-    author: mockAuthor,
-    labels: { nodes: [] },
-    comments: {
-      totalCount: 0,
-      nodes: [],
-    },
-    reviews: {
-      totalCount: 0,
-      nodes: [],
-    },
-    milestone: null,
-    closingIssuesReferences: {
-      nodes: [],
-    },
-  };
-}

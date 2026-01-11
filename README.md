@@ -57,5 +57,5 @@ For more information, see [LICENSE](LICENSE).
 [license-badge]: https://img.shields.io/github/license/gitify-app/gitify?logo=github
 [github-release-badge]: https://img.shields.io/github/v/release/gitify-app/gitify?logo=github
 [homebrew-cask-badge]: https://img.shields.io/homebrew/cask/v/gitify?logo=homebrew&logoColor=white
-[renovate]: https://renovatebot.com/
+[renovate]: https://github.com/gitify-app/gitify/issues/576
 [renovate-badge]: https://img.shields.io/badge/renovate-enabled-brightgreen.svg?logo=renovate&logoColor=white

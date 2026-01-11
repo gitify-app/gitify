@@ -2,7 +2,10 @@ import type { AxiosResponse } from 'axios';
 import { vi } from 'vitest';
 
 import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
-import { createPartialMockNotification } from '../../__mocks__/notifications-mocks';
+import {
+  mockGitHubCloudGitifyNotifications,
+  mockPartialGitifyNotification,
+} from '../../__mocks__/notifications-mocks';
 import { mockToken } from '../../__mocks__/state-mocks';
 import {
   createMockResponse,
@@ -15,7 +18,6 @@ import {
   mockAuthHeaders,
   mockNonCachedAuthHeaders,
 } from './__mocks__/request-mocks';
-import { mockGitHubNotifications } from './__mocks__/response-mocks';
 import {
   fetchAuthenticatedUserDetails,
   fetchDiscussionByNumber,
@@ -228,7 +230,7 @@ describe('renderer/utils/api/client.ts', () => {
       'performGraphQLRequest',
     );
 
-    const mockNotification = createPartialMockNotification({
+    const mockNotification = mockPartialGitifyNotification({
       title: 'Some discussion',
       url: 'https://api.github.com/repos/gitify-app/gitify/discussion/123' as Link,
       type: 'Discussion',
@@ -243,7 +245,7 @@ describe('renderer/utils/api/client.ts', () => {
 
     expect(performGraphQLRequestSpy).toHaveBeenCalledWith(
       'https://api.github.com/graphql',
-      mockToken,
+      mockNotification.account.token,
       FetchDiscussionByNumberDocument,
       {
         owner: mockNotification.repository.owner.login,
@@ -263,7 +265,7 @@ describe('renderer/utils/api/client.ts', () => {
       'performGraphQLRequest',
     );
 
-    const mockNotification = createPartialMockNotification({
+    const mockNotification = mockPartialGitifyNotification({
       title: 'Some issue',
       url: 'https://api.github.com/repos/gitify-app/gitify/issues/123' as Link,
       type: 'Issue',
@@ -278,7 +280,7 @@ describe('renderer/utils/api/client.ts', () => {
 
     expect(performGraphQLRequestSpy).toHaveBeenCalledWith(
       'https://api.github.com/graphql',
-      mockToken,
+      mockNotification.account.token,
       FetchIssueByNumberDocument,
       {
         owner: mockNotification.repository.owner.login,
@@ -296,7 +298,7 @@ describe('renderer/utils/api/client.ts', () => {
       'performGraphQLRequest',
     );
 
-    const mockNotification = createPartialMockNotification({
+    const mockNotification = mockPartialGitifyNotification({
       title: 'Some pull request',
       url: 'https://api.github.com/repos/gitify-app/gitify/pulls/123' as Link,
       type: 'PullRequest',
@@ -311,7 +313,7 @@ describe('renderer/utils/api/client.ts', () => {
 
     expect(performGraphQLRequestSpy).toHaveBeenCalledWith(
       'https://api.github.com/graphql',
-      mockToken,
+      mockNotification.account.token,
       FetchPullRequestByNumberDocument,
       {
         owner: mockNotification.repository.owner.login,
@@ -332,7 +334,7 @@ describe('renderer/utils/api/client.ts', () => {
         'performGraphQLRequestString',
       );
 
-      const mockNotification = createPartialMockNotification({
+      const mockNotification = mockPartialGitifyNotification({
         title: 'Some commit',
         url: 'https://api.github.com/repos/gitify-app/gitify/commit/123' as Link,
         type: 'Commit',
@@ -375,7 +377,7 @@ describe('renderer/utils/api/client.ts', () => {
         headers: {},
       } as ExecutionResultWithHeaders<unknown>);
 
-      await fetchNotificationDetailsForList(mockGitHubNotifications);
+      await fetchNotificationDetailsForList(mockGitHubCloudGitifyNotifications);
 
       expect(performGraphQLRequestStringSpy).toHaveBeenCalledWith(
         'https://api.github.com/graphql',

@@ -11,8 +11,8 @@ import {
   createMockResponse,
   fetch,
 } from '../__mocks__/@tauri-apps/plugin-http';
+import { mockGitifyNotification } from '../__mocks__/notifications-mocks';
 import { mockAuth, mockSettings, mockState } from '../__mocks__/state-mocks';
-import { mockSingleNotification } from '../utils/api/__mocks__/response-mocks';
 import { Errors } from '../utils/errors';
 import * as logger from '../utils/logger';
 import { useNotifications } from './useNotifications';
@@ -27,13 +27,13 @@ describe('renderer/hooks/useNotifications.ts', () => {
     rendererLogErrorSpy.mockReset();
 
     // Reset mock notification state between tests since it's mutated
-    mockSingleNotification.unread = true;
+    mockGitifyNotification.unread = true;
 
     // Default mock response
     fetch.mockResolvedValue(createMockResponse({}));
   });
 
-  const id = mockSingleNotification.id;
+  const id = mockGitifyNotification.id;
 
   describe('fetchNotifications', () => {
     it('should fetch non-detailed notifications with success', async () => {
@@ -190,7 +190,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
 
       act(() => {
         result.current.markNotificationsAsRead(mockState, [
-          mockSingleNotification,
+          mockGitifyNotification,
         ]);
       });
 
@@ -210,7 +210,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
 
       act(() => {
         result.current.markNotificationsAsRead(mockState, [
-          mockSingleNotification,
+          mockGitifyNotification,
         ]);
       });
 
@@ -230,7 +230,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
 
       act(() => {
         result.current.markNotificationsAsDone(mockState, [
-          mockSingleNotification,
+          mockGitifyNotification,
         ]);
       });
 
@@ -250,7 +250,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
 
       act(() => {
         result.current.markNotificationsAsDone(mockState, [
-          mockSingleNotification,
+          mockGitifyNotification,
         ]);
       });
 
@@ -274,7 +274,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
       act(() => {
         result.current.unsubscribeNotification(
           mockState,
-          mockSingleNotification,
+          mockGitifyNotification,
         );
       });
 
@@ -302,7 +302,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
               markAsDoneOnUnsubscribe: true,
             },
           },
-          mockSingleNotification,
+          mockGitifyNotification,
         );
       });
 
@@ -324,7 +324,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
       act(() => {
         result.current.unsubscribeNotification(
           mockState,
-          mockSingleNotification,
+          mockGitifyNotification,
         );
       });
 

@@ -3,8 +3,8 @@ import userEvent from '@testing-library/user-event';
 
 import { renderWithAppContext } from '../../__helpers__/test-utils';
 import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
+import { mockGitifyNotification } from '../../__mocks__/notifications-mocks';
 import type { GitifyNotificationUser, Link } from '../../types';
-import { mockSingleNotification } from '../../utils/api/__mocks__/response-mocks';
 import * as comms from '../../utils/comms';
 import { NotificationFooter } from './NotificationFooter';
 
@@ -19,7 +19,7 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
 
   it('should render itself & its children', async () => {
     const props = {
-      notification: mockSingleNotification,
+      notification: mockGitifyNotification,
     };
 
     const tree = renderWithAppContext(<NotificationFooter {...props} />);
@@ -29,7 +29,7 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
 
   describe('security alerts should use github icon for avatar', () => {
     it('Repository Dependabot Alerts Thread', async () => {
-      const mockNotification = mockSingleNotification;
+      const mockNotification = mockGitifyNotification;
       mockNotification.subject.type = 'RepositoryDependabotAlertsThread';
 
       const props = {
@@ -42,7 +42,7 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
     });
 
     it('Repository Vulnerability Alert', async () => {
-      const mockNotification = mockSingleNotification;
+      const mockNotification = mockGitifyNotification;
       mockNotification.subject.type = 'RepositoryVulnerabilityAlert';
 
       const props = {
@@ -56,8 +56,8 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
   });
 
   it('should default to known avatar if no user found', async () => {
-    const mockNotification = mockSingleNotification;
-    mockNotification.subject.user = undefined;
+    const mockNotification = mockGitifyNotification;
+    mockNotification.subject.user = null;
 
     const props = {
       notification: mockNotification,
@@ -75,14 +75,14 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
 
     const props = {
       notification: {
-        ...mockSingleNotification,
+        ...mockGitifyNotification,
         subject: {
-          ...mockSingleNotification.subject,
+          ...mockGitifyNotification.subject,
           user: {
             login: 'some-user',
             htmlUrl: 'https://github.com/some-user' as Link,
             avatarUrl:
-              'https://avatars.githubusercontent.com/u/123456789?v=4' as Link,
+              'https://avatars.githubusercontent.com/u/583231?v=4' as Link,
             type: 'User' as GitifyNotificationUser['type'],
           },
           reviews: undefined,

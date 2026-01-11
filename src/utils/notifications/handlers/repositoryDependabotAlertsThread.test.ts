@@ -1,10 +1,10 @@
-import { createPartialMockNotification } from '../../../__mocks__/notifications-mocks';
+import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-mocks';
 import type { GitifyNotification, Link } from '../../../types';
 import { repositoryDependabotAlertsThreadHandler } from './repositoryDependabotAlertsThread';
 
 describe('renderer/utils/notifications/handlers/repositoryDependabotAlertsThread.ts', () => {
   it('iconType', () => {
-    const mockNotification = createPartialMockNotification({
+    const mockNotification = mockPartialGitifyNotification({
       type: 'RepositoryDependabotAlertsThread',
     });
 
@@ -25,5 +25,11 @@ describe('renderer/utils/notifications/handlers/repositoryDependabotAlertsThread
         },
       } as GitifyNotification),
     ).toEqual(`${mockHtmlUrl}/security/dependabot`);
+  });
+
+  it('defaultUserType', () => {
+    expect(repositoryDependabotAlertsThreadHandler.defaultUserType()).toEqual(
+      'Bot',
+    );
   });
 });

@@ -1,34 +1,185 @@
-import { Constants } from '../constants';
 import type {
   AccountNotifications,
   GitifyNotification,
+  GitifyNotificationUser,
+  GitifyOwner,
   GitifyReason,
   GitifyRepository,
   GitifySubject,
-  Hostname,
   Link,
 } from '../types';
 import {
-  mockEnterpriseNotifications,
-  mockGitHubNotifications,
-  mockSingleNotification,
-} from '../utils/api/__mocks__/response-mocks';
-import {
+  mockGitHubAppAccount,
   mockGitHubCloudAccount,
   mockGitHubEnterpriseServerAccount,
 } from './account-mocks';
-import { mockToken } from './state-mocks';
-import { mockGitifyUser } from './user-mocks';
 
-export const mockAccountNotifications: AccountNotifications[] = [
+const mockGitHubOwner: GitifyOwner = {
+  login: 'gitify-app',
+  avatarUrl:
+    'https://avatars.githubusercontent.com/u/133795385?s=200&v=4' as Link,
+  type: 'User',
+};
+
+const mockGitHubRepository: GitifyRepository = {
+  name: 'notifications-test',
+  fullName: 'gitify-app/notifications-test',
+  owner: mockGitHubOwner,
+  htmlUrl: 'https://github.com/gitify-app/notifications-test' as Link,
+};
+
+const mockSubjectUser: GitifyNotificationUser = {
+  login: 'gitify-app',
+  htmlUrl: 'https://github.com/gitify-app' as Link,
+  avatarUrl:
+    'https://avatars.githubusercontent.com/u/133795385?s=200&v=4' as Link,
+  type: 'User',
+};
+
+/**
+ * Mock Gitify Notifications for GitHub Cloud account
+ *
+ * 2 Notifications
+ * Hostname: 'github.com'
+ * Repository: 'gitify-app/notifications-test'
+ */
+export const mockGitHubCloudGitifyNotifications: GitifyNotification[] = [
   {
     account: mockGitHubCloudAccount,
-    notifications: mockGitHubNotifications,
+    order: 0,
+    id: '138661096',
+    unread: true,
+    reason: {
+      code: 'subscribed',
+      title: 'Updated',
+      description: "You're watching the repository.",
+    },
+    updatedAt: '2017-05-20T17:51:57Z',
+    subject: {
+      title: 'I am a robot and this is a test!',
+      url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1' as Link,
+      latestCommentUrl:
+        'https://api.github.com/repos/gitify-app/notifications-test/issues/comments/302888448' as Link,
+      type: 'Issue',
+      state: 'OPEN',
+      user: mockSubjectUser,
+      reviews: [
+        {
+          state: 'APPROVED',
+          users: ['octocat'],
+        },
+        {
+          state: 'CHANGES_REQUESTED',
+          users: ['gitify-app'],
+        },
+        {
+          state: 'PENDING',
+          users: ['gitify-user'],
+        },
+      ],
+    },
+    repository: mockGitHubRepository,
+  },
+  {
+    account: mockGitHubCloudAccount,
+    order: 1,
+    id: '148827438',
+    unread: true,
+    reason: {
+      code: 'author',
+      title: 'Authored',
+      description: 'You created the thread.',
+    },
+    updatedAt: '2017-05-20T17:06:34Z',
+    subject: {
+      title: 'Improve the UI',
+      url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/4' as Link,
+      latestCommentUrl:
+        'https://api.github.com/repos/gitify-app/notifications-test/issues/comments/302885965' as Link,
+      type: 'Issue',
+      reviews: null,
+    },
+    repository: mockGitHubRepository,
+  },
+];
+
+const mockEnterpriseOwner: GitifyOwner = {
+  login: 'myorg',
+  avatarUrl: 'https://github.gitify.io/avatars/u/4?' as Link,
+  type: 'Organization',
+};
+
+const mockEnterpriseRepository: GitifyRepository = {
+  name: 'notifications-test',
+  fullName: 'myorg/notifications-test',
+  owner: mockEnterpriseOwner,
+  htmlUrl: 'https://github.gitify.io/myorg/notifications-test' as Link,
+};
+
+/**
+ * Mock Gitify Notifications for GitHub Enterprise account
+ *
+ * 2 Notifications
+ * Hostname: 'github.gitify.io'
+ * Repository: 'myorg/notifications-test'
+ */
+export const mockGithubEnterpriseGitifyNotifications: GitifyNotification[] = [
+  {
+    account: mockGitHubEnterpriseServerAccount,
+    order: 0,
+    id: '3',
+    unread: true,
+    reason: {
+      code: 'subscribed',
+      title: 'Updated',
+      description: "You're watching the repository.",
+    },
+    updatedAt: '2017-05-20T13:02:48Z',
+    subject: {
+      title: 'Release 0.0.1',
+      url: 'https://github.gitify.io/api/v3/repos/myorg/notifications-test/releases/3' as Link,
+      latestCommentUrl:
+        'https://github.gitify.io/api/v3/repos/myorg/notifications-test/releases/3' as Link,
+      type: 'Release',
+      reviews: null,
+    },
+    repository: mockEnterpriseRepository,
+  },
+  {
+    account: mockGitHubEnterpriseServerAccount,
+    order: 1,
+    id: '4',
+    unread: true,
+    reason: {
+      code: 'subscribed',
+      title: 'Updated',
+      description: "You're watching the repository.",
+    },
+    updatedAt: '2017-05-20T15:52:20Z',
+    subject: {
+      title: 'Bump Version',
+      url: 'https://github.gitify.io/api/v3/repos/myorg/notifications-test/pulls/4' as Link,
+      latestCommentUrl:
+        'https://github.gitify.io/api/v3/repos/myorg/notifications-test/issues/comments/21' as Link,
+      type: 'PullRequest',
+      reviews: null,
+    },
+    repository: mockEnterpriseRepository,
+  },
+];
+
+export const mockGitifyNotification: GitifyNotification =
+  mockGitHubCloudGitifyNotifications[0];
+
+export const mockMultipleAccountNotifications: AccountNotifications[] = [
+  {
+    account: mockGitHubCloudAccount,
+    notifications: mockGitHubCloudGitifyNotifications,
     error: null,
   },
   {
     account: mockGitHubEnterpriseServerAccount,
-    notifications: mockEnterpriseNotifications,
+    notifications: mockGithubEnterpriseGitifyNotifications,
     error: null,
   },
 ];
@@ -36,29 +187,23 @@ export const mockAccountNotifications: AccountNotifications[] = [
 export const mockSingleAccountNotifications: AccountNotifications[] = [
   {
     account: mockGitHubCloudAccount,
-    notifications: [mockSingleNotification],
+    notifications: [mockGitifyNotification],
     error: null,
   },
 ];
 
-export function createPartialMockNotification(
+export function mockPartialGitifyNotification(
   subject: Partial<GitifySubject>,
   repository?: Partial<GitifyRepository>,
 ): GitifyNotification {
   const mockNotification: Partial<GitifyNotification> = {
-    account: {
-      method: 'Personal Access Token',
-      platform: 'GitHub Cloud',
-      hostname: Constants.GITHUB_API_BASE_URL as Hostname,
-      token: mockToken,
-      user: mockGitifyUser,
-      hasRequiredScopes: true,
-    },
+    account: mockGitHubAppAccount,
     reason: {
       code: 'subscribed',
       title: 'Updated',
       description: "You're watching the repository.",
     } as GitifyReason,
+    updatedAt: '2026-01-01T17:00:00Z',
     subject: subject as GitifySubject,
     repository: {
       name: 'notifications-test',
@@ -76,7 +221,7 @@ export function createPartialMockNotification(
   return mockNotification as GitifyNotification;
 }
 
-export function createMockNotificationForRepoName(
+export function mockGitifyNotificationForRepoName(
   id: string,
   repoFullName: string | null,
 ): GitifyNotification {

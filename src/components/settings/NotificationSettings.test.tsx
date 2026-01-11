@@ -258,7 +258,7 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
       'tooltip-showOnlyParticipating',
     );
 
-    await userEvent.hover(tooltipElement);
+    await userEvent.click(tooltipElement);
     await userEvent.click(
       screen.getByTitle(
         'Open GitHub documentation for participating and watching notifications',

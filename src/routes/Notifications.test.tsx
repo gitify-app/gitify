@@ -1,5 +1,5 @@
 import { renderWithAppContext } from '../__helpers__/test-utils';
-import { mockAccountNotifications } from '../__mocks__/notifications-mocks';
+import { mockMultipleAccountNotifications } from '../__mocks__/notifications-mocks';
 import { mockSettings } from '../__mocks__/state-mocks';
 import { Errors } from '../utils/errors';
 import { NotificationsRoute } from './Notifications';
@@ -19,7 +19,7 @@ vi.mock('../components/Oops', () => ({
 describe('renderer/routes/Notifications.tsx', () => {
   it('should render itself & its children (with notifications)', () => {
     const tree = renderWithAppContext(<NotificationsRoute />, {
-      notifications: mockAccountNotifications,
+      notifications: mockMultipleAccountNotifications,
     });
 
     expect(tree).toMatchSnapshot();
@@ -32,7 +32,7 @@ describe('renderer/routes/Notifications.tsx', () => {
 
   it('should render itself & its children (show account header)', () => {
     const tree = renderWithAppContext(<NotificationsRoute />, {
-      notifications: [mockAccountNotifications[0]],
+      notifications: [mockMultipleAccountNotifications[0]],
       settings: { ...mockSettings, showAccountHeader: true },
     });
     expect(tree).toMatchSnapshot();

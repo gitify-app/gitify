@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { MarkGithubIcon } from '@primer/octicons-react';
 
 import { renderWithAppContext } from '../../__helpers__/test-utils';
-import { mockAccountNotifications } from '../../__mocks__/notifications-mocks';
+import { mockMultipleAccountNotifications } from '../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../__mocks__/state-mocks';
 import { stateFilter } from '../../utils/notifications/filters';
 import { FilterSection } from './FilterSection';
@@ -33,7 +33,7 @@ describe('renderer/components/filters/FilterSection.tsx', () => {
             ...mockSettings,
             detailedNotifications: true,
           },
-          notifications: mockAccountNotifications,
+          notifications: mockMultipleAccountNotifications,
         },
       );
 
@@ -57,7 +57,7 @@ describe('renderer/components/filters/FilterSection.tsx', () => {
             ...mockSettings,
             detailedNotifications: false,
           },
-          notifications: mockAccountNotifications,
+          notifications: mockMultipleAccountNotifications,
         },
       );
 

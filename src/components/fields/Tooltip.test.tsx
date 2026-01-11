@@ -13,18 +13,33 @@ describe('renderer/components/fields/Tooltip.tsx', () => {
   it('should render', () => {
     renderWithAppContext(<Tooltip {...props} />);
 
-    expect(screen.getByTestId('tooltip-test')).toBeInTheDocument();
+    expect(screen.getByTestId('tooltip-icon-test')).toBeInTheDocument();
+    expect(screen.queryByText(props.tooltip as string)).not.toBeInTheDocument();
   });
 
-  it('should display on mouse enter / leave', async () => {
+  it('should toggle (show/hide) tooltip on clicking tooltip icon', async () => {
     renderWithAppContext(<Tooltip {...props} />);
 
-    const tooltipElement = screen.getByTestId('tooltip-test');
+    const tooltipIconElement = screen.getByTestId('tooltip-icon-test');
 
-    await userEvent.hover(tooltipElement);
+    await userEvent.click(tooltipIconElement);
     expect(screen.queryByText(props.tooltip as string)).toBeInTheDocument();
 
-    await userEvent.unhover(tooltipElement);
+    await userEvent.click(tooltipIconElement);
+    expect(screen.queryByText(props.tooltip as string)).not.toBeInTheDocument();
+  });
+
+  it('should hide tooltip contents on leave', async () => {
+    renderWithAppContext(<Tooltip {...props} />);
+
+    const tooltipIconElement = screen.getByTestId('tooltip-icon-test');
+
+    await userEvent.click(tooltipIconElement);
+    expect(screen.queryByText(props.tooltip as string)).toBeInTheDocument();
+
+    const tooltipContentElement = screen.getByTestId('tooltip-content-test');
+
+    await userEvent.unhover(tooltipContentElement);
     expect(screen.queryByText(props.tooltip as string)).not.toBeInTheDocument();
   });
 });

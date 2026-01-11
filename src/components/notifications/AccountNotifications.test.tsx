@@ -6,9 +6,9 @@ import {
   renderWithAppContext,
 } from '../../__helpers__/test-utils';
 import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
+import { mockGitHubCloudGitifyNotifications } from '../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../__mocks__/state-mocks';
 import { GroupBy } from '../../types';
-import { mockGitHubNotifications } from '../../utils/api/__mocks__/response-mocks';
 import * as links from '../../utils/links';
 import { AccountNotifications } from './AccountNotifications';
 
@@ -24,7 +24,7 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
   it('should render itself - group notifications by repositories', () => {
     const props = {
       account: mockGitHubCloudAccount,
-      notifications: mockGitHubNotifications,
+      notifications: mockGitHubCloudGitifyNotifications,
       showAccountHeader: true,
       error: null,
     };
@@ -39,7 +39,7 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
   it('should render itself - group notifications by date', () => {
     const props = {
       account: mockGitHubCloudAccount,
-      notifications: mockGitHubNotifications,
+      notifications: mockGitHubCloudGitifyNotifications,
       showAccountHeader: true,
       error: null,
     };
@@ -189,7 +189,7 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
   it('should toggle account notifications visibility', async () => {
     const props = {
       account: mockGitHubCloudAccount,
-      notifications: mockGitHubNotifications,
+      notifications: mockGitHubCloudGitifyNotifications,
       showAccountHeader: true,
       error: null,
     };

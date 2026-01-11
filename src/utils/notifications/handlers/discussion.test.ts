@@ -4,9 +4,8 @@ import {
   createMockResponse,
   fetch,
 } from '../../../__mocks__/@tauri-apps/plugin-http';
-import { createPartialMockNotification } from '../../../__mocks__/notifications-mocks';
+import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
-import { createMockGraphQLAuthor } from '../../../__mocks__/user-mocks';
 import type { GitifyNotification } from '../../../types';
 import {
   type GitifyDiscussionState,
@@ -14,15 +13,13 @@ import {
   IconColor,
   type Link,
 } from '../../../types';
-import type {
-  DiscussionDetailsFragment,
-  DiscussionStateReason,
-} from '../../api/graphql/generated/graphql';
+import {
+  mockAuthor,
+  mockCommenter,
+  mockDiscussionResponseNode,
+  mockReplier,
+} from '../../api/__mocks__/response-mocks';
 import { discussionHandler } from './discussion';
-
-const mockAuthor = createMockGraphQLAuthor('discussion-author');
-const mockCommenter = createMockGraphQLAuthor('discussion-commenter');
-const mockReplier = createMockGraphQLAuthor('discussion-replier');
 
 describe('renderer/utils/notifications/handlers/discussion.ts', () => {
   describe('supportsMergedQueryEnrichment', () => {
@@ -32,7 +29,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
   });
 
   describe('enrich', () => {
-    const mockNotification = createPartialMockNotification({
+    const mockNotification = mockPartialGitifyNotification({
       title: 'This is a mock discussion',
       type: 'Discussion',
       url: 'https://api.github.com/repos/gitify-app/notifications-test/discussions/123' as Link,
@@ -307,7 +304,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
     it.each(
       Object.entries(cases) as Array<[GitifyDiscussionState, IconColor]>,
     )('iconType for discussion with state %s', (discussionState, discussionIconType) => {
-      const mockNotification = createPartialMockNotification({
+      const mockNotification = mockPartialGitifyNotification({
         type: 'Discussion',
         state: discussionState,
       });
@@ -331,7 +328,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
     it.each(
       Object.entries(cases) as Array<[GitifyDiscussionState, IconColor]>,
     )('iconColor for discussion with state %s', (discussionState, discussionIconColor) => {
-      const mockNotification = createPartialMockNotification({
+      const mockNotification = mockPartialGitifyNotification({
         type: 'Discussion',
         state: discussionState,
       });
@@ -355,23 +352,3 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
     ).toEqual(`${mockHtmlUrl}/discussions`);
   });
 });
-
-function mockDiscussionResponseNode(mocks: {
-  stateReason?: DiscussionStateReason;
-  isAnswered: boolean;
-}): DiscussionDetailsFragment {
-  return {
-    __typename: 'Discussion',
-    number: 123,
-    title: 'This is a mock discussion',
-    url: 'https://github.com/gitify-app/notifications-test/discussions/123' as Link,
-    stateReason: mocks.stateReason,
-    isAnswered: mocks.isAnswered,
-    author: mockAuthor,
-    comments: {
-      nodes: [],
-      totalCount: 0,
-    },
-    labels: null,
-  };
-}
