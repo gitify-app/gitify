@@ -33,8 +33,6 @@ describe('renderer/hooks/useNotifications.ts', () => {
     fetch.mockResolvedValue(createMockResponse({}));
   });
 
-  const id = mockGitifyNotification.id;
-
   describe('fetchNotifications', () => {
     it('should fetch non-detailed notifications with success', async () => {
       const mockStateLocal = {
@@ -127,10 +125,16 @@ describe('renderer/hooks/useNotifications.ts', () => {
       // Mock both account API calls to fail
       fetch
         .mockResolvedValueOnce(
-          createMockResponse({ message }, { status, statusText: 'Unauthorized' }),
+          createMockResponse(
+            { message },
+            { status, statusText: 'Unauthorized' },
+          ),
         )
         .mockResolvedValueOnce(
-          createMockResponse({ message }, { status, statusText: 'Unauthorized' }),
+          createMockResponse(
+            { message },
+            { status, statusText: 'Unauthorized' },
+          ),
         );
 
       const { result } = renderHook(() => useNotifications());

@@ -76,7 +76,9 @@ export function increaseZoom(zoomPercentage: Percentage) {
  * Reset zoom level
  */
 export function resetZoomLevel() {
-  window.gitify.zoom.setLevel(zoomPercentageToLevel(RECOMMENDED_ZOOM_PERCENTAGE));
+  window.gitify.zoom.setLevel(
+    zoomPercentageToLevel(RECOMMENDED_ZOOM_PERCENTAGE),
+  );
 }
 
 /**

@@ -80,12 +80,10 @@ export function setAutoLaunch(value: boolean): void {
 }
 
 export function setUseAlternateIdleIcon(value: boolean): void {
-  // biome-ignore lint/correctness/useHookAtTopLevel: This is a Tauri tray method, not a React hook
   window.gitify.tray.useAlternateIdleIcon(value);
 }
 
 export function setUseUnreadActiveIcon(value: boolean): void {
-  // biome-ignore lint/correctness/useHookAtTopLevel: This is a Tauri tray method, not a React hook
   window.gitify.tray.useUnreadActiveIcon(value);
 }
 

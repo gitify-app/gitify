@@ -85,9 +85,7 @@ describe('renderer/utils/api/request.ts', () => {
 
   describe('performGraphQLRequest', () => {
     it('should performGraphQLRequest with the correct parameters and default data', async () => {
-      fetch.mockResolvedValueOnce(
-        createMockResponse({ data: {}, errors: [] }),
-      );
+      fetch.mockResolvedValueOnce(createMockResponse({ data: {}, errors: [] }));
 
       const expectedData = {
         query: FetchAuthenticatedUserDetailsDocument,
@@ -110,9 +108,7 @@ describe('renderer/utils/api/request.ts', () => {
 
   describe('performGraphQLRequestString', () => {
     it('should performGraphQLRequestString with the correct parameters and default data', async () => {
-      fetch.mockResolvedValueOnce(
-        createMockResponse({ data: {}, errors: [] }),
-      );
+      fetch.mockResolvedValueOnce(createMockResponse({ data: {}, errors: [] }));
 
       const queryString = 'query Foo { repository { issue { title } } }';
       const expectedData = {

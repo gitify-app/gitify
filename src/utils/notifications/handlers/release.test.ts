@@ -28,9 +28,7 @@ describe('renderer/utils/notifications/handlers/release.ts', () => {
           'https://api.github.com/repos/gitify-app/notifications-test/releases/1' as Link,
       });
 
-      fetch.mockResolvedValueOnce(
-        createMockResponse({ author: mockAuthor }),
-      );
+      fetch.mockResolvedValueOnce(createMockResponse({ author: mockAuthor }));
 
       const result = await releaseHandler.enrich(
         mockNotification,

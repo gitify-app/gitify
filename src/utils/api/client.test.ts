@@ -1,16 +1,16 @@
 import type { AxiosResponse } from 'axios';
 import { vi } from 'vitest';
 
+import {
+  createMockResponse,
+  fetch,
+} from '../../__mocks__/@tauri-apps/plugin-http';
 import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
 import {
   mockGitHubCloudGitifyNotifications,
   mockPartialGitifyNotification,
 } from '../../__mocks__/notifications-mocks';
 import { mockToken } from '../../__mocks__/state-mocks';
-import {
-  createMockResponse,
-  fetch,
-} from '../../__mocks__/@tauri-apps/plugin-http';
 import { Constants } from '../../constants';
 import type { Hostname, Link, SettingsState, Token } from '../../types';
 import * as logger from '../../utils/logger';
@@ -61,14 +61,11 @@ describe('renderer/utils/api/client.ts', () => {
   it('headNotifications - should fetch notifications head', async () => {
     await headNotifications(mockGitHubHostname, mockToken);
 
-    expect(fetch).toHaveBeenCalledWith(
-      'https://api.github.com/notifications',
-      {
-        method: 'HEAD',
-        headers: mockNonCachedAuthHeaders,
-        body: undefined,
-      },
-    );
+    expect(fetch).toHaveBeenCalledWith('https://api.github.com/notifications', {
+      method: 'HEAD',
+      headers: mockNonCachedAuthHeaders,
+      body: undefined,
+    });
   });
 
   describe('listNotificationsForAuthenticatedUser', () => {

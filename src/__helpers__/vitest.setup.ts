@@ -81,7 +81,9 @@ class MockIntersectionObserver {
 };
 
 // Mock HTMLMediaElement.play - must return a Promise
-globalThis.HTMLMediaElement.prototype.play = vi.fn().mockResolvedValue(undefined);
+globalThis.HTMLMediaElement.prototype.play = vi
+  .fn()
+  .mockResolvedValue(undefined);
 
 // Mock ResizeObserver as a class (must be a constructor)
 class MockResizeObserver {
