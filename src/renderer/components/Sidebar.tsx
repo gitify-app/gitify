@@ -1,4 +1,4 @@
-import type { FC } from 'react';
+import { type FC, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import {
@@ -41,6 +41,10 @@ export const Sidebar: FC = () => {
 
   const primaryAccountHostname = getPrimaryAccountHostname(auth);
 
+  const goHome = () => {
+    navigate('/', { replace: true });
+  };
+
   const toggleFilters = () => {
     if (location.pathname.startsWith('/filters')) {
       navigate('/', { replace: true });
@@ -59,9 +63,60 @@ export const Sidebar: FC = () => {
   };
 
   const refreshNotifications = () => {
-    navigate('/', { replace: true });
+    goHome();
     fetchNotifications();
   };
+
+  useEffect(() => {
+    const sidebarShortcutHandler = (event: KeyboardEvent) => {
+      // Ignore if user is typing in an input, textarea, or with modifiers
+      if (
+        event.target instanceof HTMLInputElement ||
+        event.target instanceof HTMLTextAreaElement ||
+        event.metaKey ||
+        event.ctrlKey ||
+        event.altKey
+      ) {
+        return;
+      }
+
+      const key = event.key.toLowerCase();
+
+      switch (key) {
+        case 'h':
+          event.preventDefault();
+          goHome();
+          break;
+        case 'r':
+          if (status !== 'loading') {
+            event.preventDefault();
+            refreshNotifications();
+          }
+          break;
+        case 's':
+          if (isLoggedIn) {
+            event.preventDefault();
+            toggleSettings();
+          }
+          break;
+        case 'f':
+          if (isLoggedIn) {
+            event.preventDefault();
+            toggleFilters();
+          }
+          break;
+        default:
+          // No action for other keys
+          break;
+      }
+    };
+
+    document.addEventListener('keydown', sidebarShortcutHandler);
+
+    return () => {
+      document.removeEventListener('keydown', sidebarShortcutHandler);
+    };
+  }, [isLoggedIn, status]);
 
   return (
     <Stack
@@ -80,7 +135,8 @@ export const Sidebar: FC = () => {
           data-testid="sidebar-home"
           description="Home"
           icon={LogoIcon}
-          onClick={() => navigate('/', { replace: true })}
+          keybindingHint="H"
+          onClick={() => goHome()}
           size="small"
           tooltipDirection="e"
           variant="invisible"
@@ -103,6 +159,7 @@ export const Sidebar: FC = () => {
             data-testid="sidebar-filter-notifications"
             description="Filter notifications"
             icon={FilterIcon}
+            keybindingHint="F"
             onClick={() => toggleFilters()}
             size="small"
             tooltipDirection="e"
@@ -146,6 +203,7 @@ export const Sidebar: FC = () => {
               description="Refresh notifications"
               disabled={status === 'loading'}
               icon={SyncIcon}
+              keybindingHint="R"
               // loading={status === 'loading'}
               onClick={() => refreshNotifications()}
               size="small"
@@ -156,7 +214,9 @@ export const Sidebar: FC = () => {
             <IconButton
               aria-label="Settings"
               data-testid="sidebar-settings"
+              description="Settings"
               icon={GearIcon}
+              keybindingHint="S"
               onClick={() => toggleSettings()}
               size="small"
               tooltipDirection="e"
