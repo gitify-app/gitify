@@ -1,6 +1,14 @@
 import type { GitifyNotification } from '../../types';
 import { createNotificationHandler } from './handlers';
 
+/**
+ * Populates the display property on a notification with formatted,
+ * UI-ready values. Must be called after enrichment has completed,
+ * as formatting depends on enriched subject data (state, number, etc.).
+ *
+ * @param notification - The enriched notification to format
+ * @returns The notification with populated display property
+ */
 export function formatNotification(
   notification: GitifyNotification,
 ): GitifyNotification {
