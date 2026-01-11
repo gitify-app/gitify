@@ -115,11 +115,6 @@ export const Sidebar: FC = () => {
     },
   };
 
-  const getKeybindingHint = (handler: () => void): string | undefined => {
-    const shortcut = Object.values(shortcuts).find((s) => s.action === handler);
-    return shortcut ? shortcut.hotkey.toUpperCase() : undefined;
-  };
-
   useEffect(() => {
     const sidebarShortcutHandler = (event: KeyboardEvent) => {
       // Ignore if user is typing in an input, textarea, or with modifiers
@@ -147,7 +142,15 @@ export const Sidebar: FC = () => {
     return () => {
       document.removeEventListener('keydown', sidebarShortcutHandler);
     };
-  }, []);
+  }, [
+    goHome,
+    toggleSettings,
+    toggleFilters,
+    refreshNotifications,
+    toggleFocusMode,
+    isLoggedIn,
+    status,
+  ]);
 
   return (
     <Stack
@@ -265,8 +268,8 @@ export const Sidebar: FC = () => {
               data-testid="sidebar-settings"
               description="Settings"
               icon={GearIcon}
-              keybindingHint={getKeybindingHint(toggleSettings)}
-              onClick={() => toggleSettings()}
+              keybindingHint={shortcuts.settings.hotkey}
+              onClick={() => shortcuts.settings.action()}
               size="small"
               tooltipDirection="e"
               variant="invisible"
