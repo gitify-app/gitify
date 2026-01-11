@@ -450,6 +450,89 @@ describe('renderer/hooks/useNotifications.ts', () => {
       expect(result.current.notifications.length).toBe(0);
       expect(rendererLogErrorSpy).toHaveBeenCalledTimes(1);
     });
+
+    it('should keep notifications in list when fetchReadNotifications is enabled', async () => {
+      const mockNotifications = [
+        {
+          id: mockGitifyNotification.id,
+          unread: true,
+          updated_at: '2024-01-01T00:00:00Z',
+          reason: 'subscribed',
+          subject: {
+            title: 'Test notification',
+            type: 'Issue',
+            url: null,
+            latest_comment_url: null,
+          },
+          repository: {
+            name: 'notifications-test',
+            full_name: 'gitify-app/notifications-test',
+            html_url: 'https://github.com/gitify-app/notifications-test',
+            owner: {
+              login: 'gitify-app',
+              avatar_url: 'https://avatar.url',
+              type: 'Organization',
+            },
+          },
+        },
+      ];
+
+      // First fetch notifications to populate the state
+      nock('https://api.github.com')
+        .get('/notifications?participating=false&all=true')
+        .reply(200, mockNotifications);
+
+      // Mock the mark as read endpoint
+      nock('https://api.github.com/')
+        .patch(`/notifications/threads/${id}`)
+        .reply(200);
+
+      const stateWithFetchRead = {
+        auth: {
+          accounts: [mockGitHubCloudAccount],
+        },
+        settings: {
+          ...mockSettings,
+          detailedNotifications: false,
+          fetchReadNotifications: true,
+        },
+      };
+
+      const { result } = renderHook(() => useNotifications());
+
+      // First fetch notifications to populate the state
+      act(() => {
+        result.current.fetchNotifications(stateWithFetchRead);
+      });
+
+      await waitFor(() => {
+        expect(result.current.status).toBe('success');
+      });
+
+      expect(result.current.notifications.length).toBe(1);
+      expect(result.current.notifications[0].notifications[0].unread).toBe(
+        true,
+      );
+
+      // Now mark as read with fetchReadNotifications enabled
+      act(() => {
+        result.current.markNotificationsAsRead(
+          stateWithFetchRead,
+          result.current.notifications[0].notifications,
+        );
+      });
+
+      await waitFor(() => {
+        expect(result.current.status).toBe('success');
+      });
+
+      // Notifications should still be in the list but marked as read
+      expect(result.current.notifications.length).toBe(1);
+      expect(result.current.notifications[0].notifications.length).toBe(1);
+      expect(result.current.notifications[0].notifications[0].unread).toBe(
+        false,
+      );
+    });
   });
 
   describe('markNotificationsAsDone', () => {
