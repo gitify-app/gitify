@@ -3,6 +3,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 import {
   BellIcon,
+  CrosshairsIcon,
+  EyeIcon,
   FilterIcon,
   GearIcon,
   GitPullRequestIcon,
@@ -37,6 +39,7 @@ export const Sidebar: FC = () => {
     auth,
     unreadNotificationCount,
     hasUnreadNotifications,
+    updateSetting,
   } = useAppContext();
 
   const primaryAccountHostname = getPrimaryAccountHostname(auth);
@@ -98,6 +101,23 @@ export const Sidebar: FC = () => {
         />
 
         {isLoggedIn && (
+          <IconButton
+            aria-label="Toggle focused mode"
+            data-testid="sidebar-focused-mode"
+            description={
+              settings.participating
+                ? 'Focused (participating only)'
+                : 'Participating and watching'
+            }
+            icon={settings.participating ? CrosshairsIcon : EyeIcon}
+            onClick={() => {
+              updateSetting('participating', !settings.participating);
+            }}
+            size="small"
+            tooltipDirection="e"
+            variant={settings.participating ? 'primary' : 'invisible'}
+          />
+        
           <IconButton
             aria-label="Filters"
             data-testid="sidebar-filter-notifications"
