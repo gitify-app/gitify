@@ -17,6 +17,7 @@ import {
   filterBaseNotifications,
   filterDetailedNotifications,
 } from './filters/filter';
+import { formatNotification } from './formatters';
 import { getFlattenedNotificationsByRepo } from './group';
 import { createNotificationHandler } from './handlers';
 
@@ -66,6 +67,15 @@ function getNotifications(state: GitifyState) {
 /**
  * Get all notifications for all accounts.
  *
+ * Notifications follow these stages:
+ *  - Fetch / retrieval
+ *  - Transform
+ *  - Base filtering
+ *  - Enrichment
+ *  - Detailed filtering
+ *  - Formatting
+ *  - Ordering
+ *
  * @param state - The Gitify state.
  * @returns A promise that resolves to an array of account notifications.
  */
@@ -79,9 +89,10 @@ export async function getAllNotifications(
         try {
           const rawNotifications = (await accountNotifications.notifications)
             .data;
-          let notifications = rawNotifications.map((raw) =>
-            transformNotification(raw, accountNotifications.account),
-          );
+
+          let notifications = rawNotifications.map((raw) => {
+            return transformNotification(raw, accountNotifications.account);
+          });
 
           notifications = filterBaseNotifications(
             notifications,
@@ -97,6 +108,10 @@ export async function getAllNotifications(
             notifications,
             state.settings,
           );
+
+          notifications = notifications.map((notification) => {
+            return formatNotification(notification);
+          });
 
           return {
             account: accountNotifications.account,

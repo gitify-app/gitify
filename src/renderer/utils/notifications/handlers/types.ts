@@ -5,6 +5,7 @@ import type { OcticonProps } from '@primer/octicons-react';
 import type {
   GitifyNotification,
   GitifySubject,
+  IconColor,
   Link,
   SettingsState,
   SubjectType,
@@ -40,22 +41,7 @@ export interface NotificationTypeHandler {
   /**
    * Return the icon color for this notification type.
    */
-  iconColor(notification: GitifyNotification): string;
-
-  /**
-   * Return the formatted notification type for this notification.
-   */
-  formattedNotificationType(notification: GitifyNotification): string;
-
-  /**
-   * Return the formatted notification number for this notification.
-   */
-  formattedNotificationNumber(notification: GitifyNotification): string;
-
-  /**
-   * Return the formatted notification title for this notification.
-   */
-  formattedNotificationTitle(notification: GitifyNotification): string;
+  iconColor(notification: GitifyNotification): IconColor;
 
   /**
    * Default url for notification type.
