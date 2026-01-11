@@ -108,7 +108,7 @@ describe('renderer/components/Sidebar.tsx', () => {
   });
 
   describe('Focused mode toggle', () => {
-    it('renders the focused mode button when logged in', () => {
+    it('renders the focused mode is off', () => {
       renderWithAppContext(
         <MemoryRouter>
           <Sidebar />
@@ -116,6 +116,20 @@ describe('renderer/components/Sidebar.tsx', () => {
         {
           isLoggedIn: true,
           settings: { ...mockSettings, participating: false },
+        },
+      );
+
+      expect(screen.getByTestId('sidebar-focused-mode')).toBeInTheDocument();
+    });
+
+    it('renders the focused mode is on', () => {
+      renderWithAppContext(
+        <MemoryRouter>
+          <Sidebar />
+        </MemoryRouter>,
+        {
+          isLoggedIn: true,
+          settings: { ...mockSettings, participating: true },
         },
       );
 
