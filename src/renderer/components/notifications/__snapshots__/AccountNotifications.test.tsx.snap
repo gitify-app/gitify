@@ -1294,7 +1294,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               data-wrap="nowrap"
             >
               <button
-                aria-describedby="_r_a_"
+                aria-describedby="_r_ID_"
                 type="button"
               >
                 <svg
@@ -1322,7 +1322,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 aria-hidden="true"
                 class="prc-TooltipV2-Tooltip-tLeuB"
                 data-direction="e"
-                id="_r_a_"
+                id="_r_ID_"
                 popover="auto"
                 role="tooltip"
               >
@@ -1473,7 +1473,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                     class="flex gap-1"
                   >
                     <button
-                      aria-describedby="_r_b_"
+                      aria-describedby="_r_ID_"
                       type="button"
                     >
                       <span
@@ -1519,14 +1519,14 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                       aria-hidden="true"
                       class="prc-TooltipV2-Tooltip-tLeuB"
                       data-direction="s"
-                      id="_r_b_"
+                      id="_r_ID_"
                       popover="auto"
                       role="tooltip"
                     >
                       octocat approved these changes
                     </span>
                     <button
-                      aria-describedby="_r_c_"
+                      aria-describedby="_r_ID_"
                       type="button"
                     >
                       <span
@@ -1572,7 +1572,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                       aria-hidden="true"
                       class="prc-TooltipV2-Tooltip-tLeuB"
                       data-direction="s"
-                      id="_r_c_"
+                      id="_r_ID_"
                       popover="auto"
                       role="tooltip"
                     >
@@ -1694,7 +1694,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               data-wrap="nowrap"
             >
               <button
-                aria-describedby="_r_g_"
+                aria-describedby="_r_ID_"
                 type="button"
               >
                 <svg
@@ -1722,7 +1722,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 aria-hidden="true"
                 class="prc-TooltipV2-Tooltip-tLeuB"
                 data-direction="e"
-                id="_r_g_"
+                id="_r_ID_"
                 popover="auto"
                 role="tooltip"
               >
@@ -2182,7 +2182,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-wrap="nowrap"
           >
             <button
-              aria-describedby="_r_a_"
+              aria-describedby="_r_ID_"
               type="button"
             >
               <svg
@@ -2210,7 +2210,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
               data-direction="e"
-              id="_r_a_"
+              id="_r_ID_"
               popover="auto"
               role="tooltip"
             >
@@ -2361,7 +2361,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                   class="flex gap-1"
                 >
                   <button
-                    aria-describedby="_r_b_"
+                    aria-describedby="_r_ID_"
                     type="button"
                   >
                     <span
@@ -2407,14 +2407,14 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                     aria-hidden="true"
                     class="prc-TooltipV2-Tooltip-tLeuB"
                     data-direction="s"
-                    id="_r_b_"
+                    id="_r_ID_"
                     popover="auto"
                     role="tooltip"
                   >
                     octocat approved these changes
                   </span>
                   <button
-                    aria-describedby="_r_c_"
+                    aria-describedby="_r_ID_"
                     type="button"
                   >
                     <span
@@ -2460,7 +2460,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                     aria-hidden="true"
                     class="prc-TooltipV2-Tooltip-tLeuB"
                     data-direction="s"
-                    id="_r_c_"
+                    id="_r_ID_"
                     popover="auto"
                     role="tooltip"
                   >
@@ -2582,7 +2582,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             data-wrap="nowrap"
           >
             <button
-              aria-describedby="_r_g_"
+              aria-describedby="_r_ID_"
               type="button"
             >
               <svg
@@ -2610,7 +2610,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
               data-direction="e"
-              id="_r_g_"
+              id="_r_ID_"
               popover="auto"
               role="tooltip"
             >

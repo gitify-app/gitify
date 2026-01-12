@@ -18,7 +18,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
             class="flex gap-1"
           >
             <button
-              aria-describedby="_r_e_"
+              aria-describedby="_r_ID_"
               type="button"
             >
               <span
@@ -67,14 +67,14 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
               data-direction="s"
-              id="_r_e_"
+              id="_r_ID_"
               popover="auto"
               role="tooltip"
             >
               Linked to issues #1, #2
             </span>
             <button
-              aria-describedby="_r_f_"
+              aria-describedby="_r_ID_"
               type="button"
             >
               <span
@@ -120,14 +120,14 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
               data-direction="s"
-              id="_r_f_"
+              id="_r_ID_"
               popover="auto"
               role="tooltip"
             >
               octocat approved these changes
             </span>
             <button
-              aria-describedby="_r_g_"
+              aria-describedby="_r_ID_"
               type="button"
             >
               <span
@@ -173,14 +173,14 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
               data-direction="s"
-              id="_r_g_"
+              id="_r_ID_"
               popover="auto"
               role="tooltip"
             >
               gitify-app requested changes
             </span>
             <button
-              aria-describedby="_r_h_"
+              aria-describedby="_r_ID_"
               type="button"
             >
               <span
@@ -226,7 +226,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
               data-direction="s"
-              id="_r_h_"
+              id="_r_ID_"
               popover="auto"
               role="tooltip"
             >
@@ -251,7 +251,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
           class="flex gap-1"
         >
           <button
-            aria-describedby="_r_e_"
+            aria-describedby="_r_ID_"
             type="button"
           >
             <span
@@ -300,14 +300,14 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
             aria-hidden="true"
             class="prc-TooltipV2-Tooltip-tLeuB"
             data-direction="s"
-            id="_r_e_"
+            id="_r_ID_"
             popover="auto"
             role="tooltip"
           >
             Linked to issues #1, #2
           </span>
           <button
-            aria-describedby="_r_f_"
+            aria-describedby="_r_ID_"
             type="button"
           >
             <span
@@ -353,14 +353,14 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
             aria-hidden="true"
             class="prc-TooltipV2-Tooltip-tLeuB"
             data-direction="s"
-            id="_r_f_"
+            id="_r_ID_"
             popover="auto"
             role="tooltip"
           >
             octocat approved these changes
           </span>
           <button
-            aria-describedby="_r_g_"
+            aria-describedby="_r_ID_"
             type="button"
           >
             <span
@@ -406,14 +406,14 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
             aria-hidden="true"
             class="prc-TooltipV2-Tooltip-tLeuB"
             data-direction="s"
-            id="_r_g_"
+            id="_r_ID_"
             popover="auto"
             role="tooltip"
           >
             gitify-app requested changes
           </span>
           <button
-            aria-describedby="_r_h_"
+            aria-describedby="_r_ID_"
             type="button"
           >
             <span
@@ -459,7 +459,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
             aria-hidden="true"
             class="prc-TooltipV2-Tooltip-tLeuB"
             data-direction="s"
-            id="_r_h_"
+            id="_r_ID_"
             popover="auto"
             role="tooltip"
           >
@@ -541,7 +541,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
             class="flex gap-1"
           >
             <button
-              aria-describedby="_r_j_"
+              aria-describedby="_r_ID_"
               type="button"
             >
               <span
@@ -590,14 +590,14 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
               data-direction="s"
-              id="_r_j_"
+              id="_r_ID_"
               popover="auto"
               role="tooltip"
             >
               Linked to issues #1, #2
             </span>
             <button
-              aria-describedby="_r_k_"
+              aria-describedby="_r_ID_"
               type="button"
             >
               <span
@@ -643,14 +643,14 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
               data-direction="s"
-              id="_r_k_"
+              id="_r_ID_"
               popover="auto"
               role="tooltip"
             >
               octocat approved these changes
             </span>
             <button
-              aria-describedby="_r_l_"
+              aria-describedby="_r_ID_"
               type="button"
             >
               <span
@@ -696,14 +696,14 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
               data-direction="s"
-              id="_r_l_"
+              id="_r_ID_"
               popover="auto"
               role="tooltip"
             >
               gitify-app requested changes
             </span>
             <button
-              aria-describedby="_r_m_"
+              aria-describedby="_r_ID_"
               type="button"
             >
               <span
@@ -749,7 +749,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
               data-direction="s"
-              id="_r_m_"
+              id="_r_ID_"
               popover="auto"
               role="tooltip"
             >
@@ -774,7 +774,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
           class="flex gap-1"
         >
           <button
-            aria-describedby="_r_j_"
+            aria-describedby="_r_ID_"
             type="button"
           >
             <span
@@ -823,14 +823,14 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
             aria-hidden="true"
             class="prc-TooltipV2-Tooltip-tLeuB"
             data-direction="s"
-            id="_r_j_"
+            id="_r_ID_"
             popover="auto"
             role="tooltip"
           >
             Linked to issues #1, #2
           </span>
           <button
-            aria-describedby="_r_k_"
+            aria-describedby="_r_ID_"
             type="button"
           >
             <span
@@ -876,14 +876,14 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
             aria-hidden="true"
             class="prc-TooltipV2-Tooltip-tLeuB"
             data-direction="s"
-            id="_r_k_"
+            id="_r_ID_"
             popover="auto"
             role="tooltip"
           >
             octocat approved these changes
           </span>
           <button
-            aria-describedby="_r_l_"
+            aria-describedby="_r_ID_"
             type="button"
           >
             <span
@@ -929,14 +929,14 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
             aria-hidden="true"
             class="prc-TooltipV2-Tooltip-tLeuB"
             data-direction="s"
-            id="_r_l_"
+            id="_r_ID_"
             popover="auto"
             role="tooltip"
           >
             gitify-app requested changes
           </span>
           <button
-            aria-describedby="_r_m_"
+            aria-describedby="_r_ID_"
             type="button"
           >
             <span
@@ -982,7 +982,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
             aria-hidden="true"
             class="prc-TooltipV2-Tooltip-tLeuB"
             data-direction="s"
-            id="_r_m_"
+            id="_r_ID_"
             popover="auto"
             role="tooltip"
           >
@@ -1064,7 +1064,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
             class="flex gap-1"
           >
             <button
-              aria-describedby="_r_a_"
+              aria-describedby="_r_ID_"
               type="button"
             >
               <span
@@ -1113,14 +1113,14 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
               data-direction="s"
-              id="_r_a_"
+              id="_r_ID_"
               popover="auto"
               role="tooltip"
             >
               Linked to issues #1, #2
             </span>
             <button
-              aria-describedby="_r_b_"
+              aria-describedby="_r_ID_"
               type="button"
             >
               <span
@@ -1166,14 +1166,14 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
               data-direction="s"
-              id="_r_b_"
+              id="_r_ID_"
               popover="auto"
               role="tooltip"
             >
               octocat approved these changes
             </span>
             <button
-              aria-describedby="_r_c_"
+              aria-describedby="_r_ID_"
               type="button"
             >
               <span
@@ -1219,7 +1219,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
               data-direction="s"
-              id="_r_c_"
+              id="_r_ID_"
               popover="auto"
               role="tooltip"
             >
@@ -1244,7 +1244,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
           class="flex gap-1"
         >
           <button
-            aria-describedby="_r_a_"
+            aria-describedby="_r_ID_"
             type="button"
           >
             <span
@@ -1293,14 +1293,14 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
             aria-hidden="true"
             class="prc-TooltipV2-Tooltip-tLeuB"
             data-direction="s"
-            id="_r_a_"
+            id="_r_ID_"
             popover="auto"
             role="tooltip"
           >
             Linked to issues #1, #2
           </span>
           <button
-            aria-describedby="_r_b_"
+            aria-describedby="_r_ID_"
             type="button"
           >
             <span
@@ -1346,14 +1346,14 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
             aria-hidden="true"
             class="prc-TooltipV2-Tooltip-tLeuB"
             data-direction="s"
-            id="_r_b_"
+            id="_r_ID_"
             popover="auto"
             role="tooltip"
           >
             octocat approved these changes
           </span>
           <button
-            aria-describedby="_r_c_"
+            aria-describedby="_r_ID_"
             type="button"
           >
             <span
@@ -1399,7 +1399,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
             aria-hidden="true"
             class="prc-TooltipV2-Tooltip-tLeuB"
             data-direction="s"
-            id="_r_c_"
+            id="_r_ID_"
             popover="auto"
             role="tooltip"
           >
@@ -1481,7 +1481,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx label pills should render l
             class="flex gap-1"
           >
             <button
-              aria-describedby="_r_o_"
+              aria-describedby="_r_ID_"
               type="button"
             >
               <span
@@ -1530,14 +1530,14 @@ exports[`renderer/components/metrics/MetricGroup.tsx label pills should render l
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
               data-direction="s"
-              id="_r_o_"
+              id="_r_ID_"
               popover="auto"
               role="tooltip"
             >
               Linked to issues #1, #2
             </span>
             <button
-              aria-describedby="_r_p_"
+              aria-describedby="_r_ID_"
               type="button"
             >
               <span
@@ -1583,14 +1583,14 @@ exports[`renderer/components/metrics/MetricGroup.tsx label pills should render l
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
               data-direction="s"
-              id="_r_p_"
+              id="_r_ID_"
               popover="auto"
               role="tooltip"
             >
               octocat approved these changes
             </span>
             <button
-              aria-describedby="_r_q_"
+              aria-describedby="_r_ID_"
               type="button"
             >
               <span
@@ -1636,14 +1636,14 @@ exports[`renderer/components/metrics/MetricGroup.tsx label pills should render l
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
               data-direction="s"
-              id="_r_q_"
+              id="_r_ID_"
               popover="auto"
               role="tooltip"
             >
               gitify-app requested changes
             </span>
             <button
-              aria-describedby="_r_r_"
+              aria-describedby="_r_ID_"
               type="button"
             >
               <span
@@ -1689,14 +1689,14 @@ exports[`renderer/components/metrics/MetricGroup.tsx label pills should render l
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
               data-direction="s"
-              id="_r_r_"
+              id="_r_ID_"
               popover="auto"
               role="tooltip"
             >
               2 comments
             </span>
             <button
-              aria-describedby="_r_s_"
+              aria-describedby="_r_ID_"
               type="button"
             >
               <span
@@ -1742,7 +1742,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx label pills should render l
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
               data-direction="s"
-              id="_r_s_"
+              id="_r_ID_"
               popover="auto"
               role="tooltip"
             >
@@ -1767,7 +1767,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx label pills should render l
           class="flex gap-1"
         >
           <button
-            aria-describedby="_r_o_"
+            aria-describedby="_r_ID_"
             type="button"
           >
             <span
@@ -1816,14 +1816,14 @@ exports[`renderer/components/metrics/MetricGroup.tsx label pills should render l
             aria-hidden="true"
             class="prc-TooltipV2-Tooltip-tLeuB"
             data-direction="s"
-            id="_r_o_"
+            id="_r_ID_"
             popover="auto"
             role="tooltip"
           >
             Linked to issues #1, #2
           </span>
           <button
-            aria-describedby="_r_p_"
+            aria-describedby="_r_ID_"
             type="button"
           >
             <span
@@ -1869,14 +1869,14 @@ exports[`renderer/components/metrics/MetricGroup.tsx label pills should render l
             aria-hidden="true"
             class="prc-TooltipV2-Tooltip-tLeuB"
             data-direction="s"
-            id="_r_p_"
+            id="_r_ID_"
             popover="auto"
             role="tooltip"
           >
             octocat approved these changes
           </span>
           <button
-            aria-describedby="_r_q_"
+            aria-describedby="_r_ID_"
             type="button"
           >
             <span
@@ -1922,14 +1922,14 @@ exports[`renderer/components/metrics/MetricGroup.tsx label pills should render l
             aria-hidden="true"
             class="prc-TooltipV2-Tooltip-tLeuB"
             data-direction="s"
-            id="_r_q_"
+            id="_r_ID_"
             popover="auto"
             role="tooltip"
           >
             gitify-app requested changes
           </span>
           <button
-            aria-describedby="_r_r_"
+            aria-describedby="_r_ID_"
             type="button"
           >
             <span
@@ -1975,14 +1975,14 @@ exports[`renderer/components/metrics/MetricGroup.tsx label pills should render l
             aria-hidden="true"
             class="prc-TooltipV2-Tooltip-tLeuB"
             data-direction="s"
-            id="_r_r_"
+            id="_r_ID_"
             popover="auto"
             role="tooltip"
           >
             2 comments
           </span>
           <button
-            aria-describedby="_r_s_"
+            aria-describedby="_r_ID_"
             type="button"
           >
             <span
@@ -2028,7 +2028,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx label pills should render l
             aria-hidden="true"
             class="prc-TooltipV2-Tooltip-tLeuB"
             data-direction="s"
-            id="_r_s_"
+            id="_r_ID_"
             popover="auto"
             role="tooltip"
           >
@@ -2110,7 +2110,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx linked issue pills should r
             class="flex gap-1"
           >
             <button
-              aria-describedby="_r_6_"
+              aria-describedby="_r_ID_"
               type="button"
             >
               <span
@@ -2159,14 +2159,14 @@ exports[`renderer/components/metrics/MetricGroup.tsx linked issue pills should r
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
               data-direction="s"
-              id="_r_6_"
+              id="_r_ID_"
               popover="auto"
               role="tooltip"
             >
               Linked to issues #1, #2
             </span>
             <button
-              aria-describedby="_r_7_"
+              aria-describedby="_r_ID_"
               type="button"
             >
               <span
@@ -2212,14 +2212,14 @@ exports[`renderer/components/metrics/MetricGroup.tsx linked issue pills should r
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
               data-direction="s"
-              id="_r_7_"
+              id="_r_ID_"
               popover="auto"
               role="tooltip"
             >
               octocat approved these changes
             </span>
             <button
-              aria-describedby="_r_8_"
+              aria-describedby="_r_ID_"
               type="button"
             >
               <span
@@ -2265,7 +2265,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx linked issue pills should r
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
               data-direction="s"
-              id="_r_8_"
+              id="_r_ID_"
               popover="auto"
               role="tooltip"
             >
@@ -2290,7 +2290,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx linked issue pills should r
           class="flex gap-1"
         >
           <button
-            aria-describedby="_r_6_"
+            aria-describedby="_r_ID_"
             type="button"
           >
             <span
@@ -2339,14 +2339,14 @@ exports[`renderer/components/metrics/MetricGroup.tsx linked issue pills should r
             aria-hidden="true"
             class="prc-TooltipV2-Tooltip-tLeuB"
             data-direction="s"
-            id="_r_6_"
+            id="_r_ID_"
             popover="auto"
             role="tooltip"
           >
             Linked to issues #1, #2
           </span>
           <button
-            aria-describedby="_r_7_"
+            aria-describedby="_r_ID_"
             type="button"
           >
             <span
@@ -2392,14 +2392,14 @@ exports[`renderer/components/metrics/MetricGroup.tsx linked issue pills should r
             aria-hidden="true"
             class="prc-TooltipV2-Tooltip-tLeuB"
             data-direction="s"
-            id="_r_7_"
+            id="_r_ID_"
             popover="auto"
             role="tooltip"
           >
             octocat approved these changes
           </span>
           <button
-            aria-describedby="_r_8_"
+            aria-describedby="_r_ID_"
             type="button"
           >
             <span
@@ -2445,7 +2445,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx linked issue pills should r
             aria-hidden="true"
             class="prc-TooltipV2-Tooltip-tLeuB"
             data-direction="s"
-            id="_r_8_"
+            id="_r_ID_"
             popover="auto"
             role="tooltip"
           >
@@ -2527,7 +2527,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx linked issue pills should r
             class="flex gap-1"
           >
             <button
-              aria-describedby="_r_2_"
+              aria-describedby="_r_ID_"
               type="button"
             >
               <span
@@ -2576,14 +2576,14 @@ exports[`renderer/components/metrics/MetricGroup.tsx linked issue pills should r
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
               data-direction="s"
-              id="_r_2_"
+              id="_r_ID_"
               popover="auto"
               role="tooltip"
             >
               Linked to issue #1
             </span>
             <button
-              aria-describedby="_r_3_"
+              aria-describedby="_r_ID_"
               type="button"
             >
               <span
@@ -2629,14 +2629,14 @@ exports[`renderer/components/metrics/MetricGroup.tsx linked issue pills should r
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
               data-direction="s"
-              id="_r_3_"
+              id="_r_ID_"
               popover="auto"
               role="tooltip"
             >
               octocat approved these changes
             </span>
             <button
-              aria-describedby="_r_4_"
+              aria-describedby="_r_ID_"
               type="button"
             >
               <span
@@ -2682,7 +2682,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx linked issue pills should r
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
               data-direction="s"
-              id="_r_4_"
+              id="_r_ID_"
               popover="auto"
               role="tooltip"
             >
@@ -2707,7 +2707,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx linked issue pills should r
           class="flex gap-1"
         >
           <button
-            aria-describedby="_r_2_"
+            aria-describedby="_r_ID_"
             type="button"
           >
             <span
@@ -2756,14 +2756,14 @@ exports[`renderer/components/metrics/MetricGroup.tsx linked issue pills should r
             aria-hidden="true"
             class="prc-TooltipV2-Tooltip-tLeuB"
             data-direction="s"
-            id="_r_2_"
+            id="_r_ID_"
             popover="auto"
             role="tooltip"
           >
             Linked to issue #1
           </span>
           <button
-            aria-describedby="_r_3_"
+            aria-describedby="_r_ID_"
             type="button"
           >
             <span
@@ -2809,14 +2809,14 @@ exports[`renderer/components/metrics/MetricGroup.tsx linked issue pills should r
             aria-hidden="true"
             class="prc-TooltipV2-Tooltip-tLeuB"
             data-direction="s"
-            id="_r_3_"
+            id="_r_ID_"
             popover="auto"
             role="tooltip"
           >
             octocat approved these changes
           </span>
           <button
-            aria-describedby="_r_4_"
+            aria-describedby="_r_ID_"
             type="button"
           >
             <span
@@ -2862,7 +2862,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx linked issue pills should r
             aria-hidden="true"
             class="prc-TooltipV2-Tooltip-tLeuB"
             data-direction="s"
-            id="_r_4_"
+            id="_r_ID_"
             popover="auto"
             role="tooltip"
           >
@@ -2944,7 +2944,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
             class="flex gap-1"
           >
             <button
-              aria-describedby="_r_15_"
+              aria-describedby="_r_ID_"
               type="button"
             >
               <span
@@ -2993,14 +2993,14 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
               data-direction="s"
-              id="_r_15_"
+              id="_r_ID_"
               popover="auto"
               role="tooltip"
             >
               Linked to issues #1, #2
             </span>
             <button
-              aria-describedby="_r_16_"
+              aria-describedby="_r_ID_"
               type="button"
             >
               <span
@@ -3046,14 +3046,14 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
               data-direction="s"
-              id="_r_16_"
+              id="_r_ID_"
               popover="auto"
               role="tooltip"
             >
               octocat approved these changes
             </span>
             <button
-              aria-describedby="_r_17_"
+              aria-describedby="_r_ID_"
               type="button"
             >
               <span
@@ -3099,14 +3099,14 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
               data-direction="s"
-              id="_r_17_"
+              id="_r_ID_"
               popover="auto"
               role="tooltip"
             >
               gitify-app requested changes
             </span>
             <button
-              aria-describedby="_r_18_"
+              aria-describedby="_r_ID_"
               type="button"
             >
               <span
@@ -3152,14 +3152,14 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
               data-direction="s"
-              id="_r_18_"
+              id="_r_ID_"
               popover="auto"
               role="tooltip"
             >
               2 comments
             </span>
             <button
-              aria-describedby="_r_19_"
+              aria-describedby="_r_ID_"
               type="button"
             >
               <span
@@ -3205,14 +3205,14 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
               data-direction="s"
-              id="_r_19_"
+              id="_r_ID_"
               popover="auto"
               role="tooltip"
             >
               🏷️ enhancement, 🏷️ good-first-issue
             </span>
             <button
-              aria-describedby="_r_1a_"
+              aria-describedby="_r_ID_"
               type="button"
             >
               <span
@@ -3253,7 +3253,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
               data-direction="s"
-              id="_r_1a_"
+              id="_r_ID_"
               popover="auto"
               role="tooltip"
             >
@@ -3278,7 +3278,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
           class="flex gap-1"
         >
           <button
-            aria-describedby="_r_15_"
+            aria-describedby="_r_ID_"
             type="button"
           >
             <span
@@ -3327,14 +3327,14 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
             aria-hidden="true"
             class="prc-TooltipV2-Tooltip-tLeuB"
             data-direction="s"
-            id="_r_15_"
+            id="_r_ID_"
             popover="auto"
             role="tooltip"
           >
             Linked to issues #1, #2
           </span>
           <button
-            aria-describedby="_r_16_"
+            aria-describedby="_r_ID_"
             type="button"
           >
             <span
@@ -3380,14 +3380,14 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
             aria-hidden="true"
             class="prc-TooltipV2-Tooltip-tLeuB"
             data-direction="s"
-            id="_r_16_"
+            id="_r_ID_"
             popover="auto"
             role="tooltip"
           >
             octocat approved these changes
           </span>
           <button
-            aria-describedby="_r_17_"
+            aria-describedby="_r_ID_"
             type="button"
           >
             <span
@@ -3433,14 +3433,14 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
             aria-hidden="true"
             class="prc-TooltipV2-Tooltip-tLeuB"
             data-direction="s"
-            id="_r_17_"
+            id="_r_ID_"
             popover="auto"
             role="tooltip"
           >
             gitify-app requested changes
           </span>
           <button
-            aria-describedby="_r_18_"
+            aria-describedby="_r_ID_"
             type="button"
           >
             <span
@@ -3486,14 +3486,14 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
             aria-hidden="true"
             class="prc-TooltipV2-Tooltip-tLeuB"
             data-direction="s"
-            id="_r_18_"
+            id="_r_ID_"
             popover="auto"
             role="tooltip"
           >
             2 comments
           </span>
           <button
-            aria-describedby="_r_19_"
+            aria-describedby="_r_ID_"
             type="button"
           >
             <span
@@ -3539,14 +3539,14 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
             aria-hidden="true"
             class="prc-TooltipV2-Tooltip-tLeuB"
             data-direction="s"
-            id="_r_19_"
+            id="_r_ID_"
             popover="auto"
             role="tooltip"
           >
             🏷️ enhancement, 🏷️ good-first-issue
           </span>
           <button
-            aria-describedby="_r_1a_"
+            aria-describedby="_r_ID_"
             type="button"
           >
             <span
@@ -3587,7 +3587,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
             aria-hidden="true"
             class="prc-TooltipV2-Tooltip-tLeuB"
             data-direction="s"
-            id="_r_1a_"
+            id="_r_ID_"
             popover="auto"
             role="tooltip"
           >
@@ -3669,7 +3669,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
             class="flex gap-1"
           >
             <button
-              aria-describedby="_r_u_"
+              aria-describedby="_r_ID_"
               type="button"
             >
               <span
@@ -3718,14 +3718,14 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
               data-direction="s"
-              id="_r_u_"
+              id="_r_ID_"
               popover="auto"
               role="tooltip"
             >
               Linked to issues #1, #2
             </span>
             <button
-              aria-describedby="_r_v_"
+              aria-describedby="_r_ID_"
               type="button"
             >
               <span
@@ -3771,14 +3771,14 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
               data-direction="s"
-              id="_r_v_"
+              id="_r_ID_"
               popover="auto"
               role="tooltip"
             >
               octocat approved these changes
             </span>
             <button
-              aria-describedby="_r_10_"
+              aria-describedby="_r_ID_"
               type="button"
             >
               <span
@@ -3824,14 +3824,14 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
               data-direction="s"
-              id="_r_10_"
+              id="_r_ID_"
               popover="auto"
               role="tooltip"
             >
               gitify-app requested changes
             </span>
             <button
-              aria-describedby="_r_11_"
+              aria-describedby="_r_ID_"
               type="button"
             >
               <span
@@ -3877,14 +3877,14 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
               data-direction="s"
-              id="_r_11_"
+              id="_r_ID_"
               popover="auto"
               role="tooltip"
             >
               2 comments
             </span>
             <button
-              aria-describedby="_r_12_"
+              aria-describedby="_r_ID_"
               type="button"
             >
               <span
@@ -3930,14 +3930,14 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
               data-direction="s"
-              id="_r_12_"
+              id="_r_ID_"
               popover="auto"
               role="tooltip"
             >
               🏷️ enhancement, 🏷️ good-first-issue
             </span>
             <button
-              aria-describedby="_r_13_"
+              aria-describedby="_r_ID_"
               type="button"
             >
               <span
@@ -3978,7 +3978,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
               data-direction="s"
-              id="_r_13_"
+              id="_r_ID_"
               popover="auto"
               role="tooltip"
             >
@@ -4003,7 +4003,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
           class="flex gap-1"
         >
           <button
-            aria-describedby="_r_u_"
+            aria-describedby="_r_ID_"
             type="button"
           >
             <span
@@ -4052,14 +4052,14 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
             aria-hidden="true"
             class="prc-TooltipV2-Tooltip-tLeuB"
             data-direction="s"
-            id="_r_u_"
+            id="_r_ID_"
             popover="auto"
             role="tooltip"
           >
             Linked to issues #1, #2
           </span>
           <button
-            aria-describedby="_r_v_"
+            aria-describedby="_r_ID_"
             type="button"
           >
             <span
@@ -4105,14 +4105,14 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
             aria-hidden="true"
             class="prc-TooltipV2-Tooltip-tLeuB"
             data-direction="s"
-            id="_r_v_"
+            id="_r_ID_"
             popover="auto"
             role="tooltip"
           >
             octocat approved these changes
           </span>
           <button
-            aria-describedby="_r_10_"
+            aria-describedby="_r_ID_"
             type="button"
           >
             <span
@@ -4158,14 +4158,14 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
             aria-hidden="true"
             class="prc-TooltipV2-Tooltip-tLeuB"
             data-direction="s"
-            id="_r_10_"
+            id="_r_ID_"
             popover="auto"
             role="tooltip"
           >
             gitify-app requested changes
           </span>
           <button
-            aria-describedby="_r_11_"
+            aria-describedby="_r_ID_"
             type="button"
           >
             <span
@@ -4211,14 +4211,14 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
             aria-hidden="true"
             class="prc-TooltipV2-Tooltip-tLeuB"
             data-direction="s"
-            id="_r_11_"
+            id="_r_ID_"
             popover="auto"
             role="tooltip"
           >
             2 comments
           </span>
           <button
-            aria-describedby="_r_12_"
+            aria-describedby="_r_ID_"
             type="button"
           >
             <span
@@ -4264,14 +4264,14 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
             aria-hidden="true"
             class="prc-TooltipV2-Tooltip-tLeuB"
             data-direction="s"
-            id="_r_12_"
+            id="_r_ID_"
             popover="auto"
             role="tooltip"
           >
             🏷️ enhancement, 🏷️ good-first-issue
           </span>
           <button
-            aria-describedby="_r_13_"
+            aria-describedby="_r_ID_"
             type="button"
           >
             <span
@@ -4312,7 +4312,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
             aria-hidden="true"
             class="prc-TooltipV2-Tooltip-tLeuB"
             data-direction="s"
-            id="_r_13_"
+            id="_r_ID_"
             popover="auto"
             role="tooltip"
           >

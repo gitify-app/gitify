@@ -8,6 +8,19 @@ import '@testing-library/jest-dom';
 import '@primer/react/test-helpers';
 
 /**
+ * Custom snapshot serializer to normalize React auto-generated IDs.
+ * This makes snapshots stable regardless of test execution order.
+ * React's useId() generates IDs like "_r_X_" where X changes based on
+ * how many components have rendered before.
+ */
+expect.addSnapshotSerializer({
+  test: (val) => typeof val === 'string' && /_r_[a-z0-9]+_/.test(val),
+  serialize: (val: string) => {
+    return `"${val.replace(/_r_[a-z0-9]+_/g, '_r_ID_')}"`;
+  },
+});
+
+/**
  * Gitify context bridge API
  */
 window.gitify = {
