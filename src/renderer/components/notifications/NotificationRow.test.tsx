@@ -136,7 +136,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       expect(markNotificationsAsDoneMock).toHaveBeenCalledTimes(1);
     });
 
-    it('should mark as read (not done) when markAsDoneOnOpen is true but fetchReadNotifications is enabled', async () => {
+    it('should mark as done when markAsDoneOnOpen is true even with fetchReadNotifications enabled', async () => {
       const markNotificationsAsReadMock = jest.fn();
       const markNotificationsAsDoneMock = jest.fn();
 
@@ -158,8 +158,8 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       await userEvent.click(screen.getByTestId('notification-row'));
 
       expect(links.openNotification).toHaveBeenCalledTimes(1);
-      expect(markNotificationsAsReadMock).toHaveBeenCalledTimes(1);
-      expect(markNotificationsAsDoneMock).not.toHaveBeenCalled();
+      expect(markNotificationsAsDoneMock).toHaveBeenCalledTimes(1);
+      expect(markNotificationsAsReadMock).not.toHaveBeenCalled();
     });
 
     it('should mark notifications as read', async () => {
@@ -216,7 +216,25 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       expect(markNotificationsAsDoneMock).toHaveBeenCalledTimes(1);
     });
 
-    it('should hide mark as done button when fetchReadNotifications is enabled', async () => {
+    it('should hide mark as done button when notification is already read', async () => {
+      const readNotification = {
+        ...mockGitifyNotification,
+        unread: false,
+      };
+
+      const props = {
+        notification: readNotification,
+        account: mockGitHubCloudAccount,
+      };
+
+      renderWithAppContext(<NotificationRow {...props} />);
+
+      expect(
+        screen.queryByTestId('notification-mark-as-done'),
+      ).not.toBeInTheDocument();
+    });
+
+    it('should show mark as done button when fetchReadNotifications is enabled and notification is unread', async () => {
       const props = {
         notification: mockGitifyNotification,
         account: mockGitHubCloudAccount,
@@ -227,8 +245,8 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       });
 
       expect(
-        screen.queryByTestId('notification-mark-as-done'),
-      ).not.toBeInTheDocument();
+        screen.getByTestId('notification-mark-as-done'),
+      ).toBeInTheDocument();
       expect(
         screen.getByTestId('notification-mark-as-read'),
       ).toBeInTheDocument();
