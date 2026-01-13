@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useAppContext } from '../context/App';
 import { quitApp } from '../utils/comms';
 
-export type ShortcutName =
+type ShortcutName =
   | 'home'
   | 'refresh'
   | 'settings'
@@ -13,19 +13,19 @@ export type ShortcutName =
   | 'quit'
   | 'accounts';
 
-type ShortcutActions = Record<ShortcutName, () => void>;
-type ShortcutEnabled = Record<ShortcutName, boolean>;
-type ShortcutHotkeys = Record<ShortcutName, string>;
+type ShortcutConfig = {
+  key: string;
+  enabled: boolean;
+  action: () => void;
+};
+
+type ShortcutConfigs = Record<ShortcutName, ShortcutConfig>;
 
 /**
  * Centralized shortcut actions + enabled state + hotkeys.
  * Used by both the global shortcuts component and UI buttons to avoid duplication.
  */
-export function useShortcutActions(): {
-  actions: ShortcutActions;
-  enabled: ShortcutEnabled;
-  hotkeys: ShortcutHotkeys;
-} {
+export function useShortcutActions(): { shortcuts: ShortcutConfigs } {
   const navigate = useNavigate();
   const location = useLocation();
   const { fetchNotifications, isLoggedIn, status, settings, updateSetting } =
@@ -35,66 +35,72 @@ export function useShortcutActions(): {
   const isOnSettingsRoute = location.pathname.startsWith('/settings');
   const isLoading = status === 'loading';
 
-  const actions: ShortcutActions = useMemo(() => {
+  const shortcuts: ShortcutConfigs = useMemo(() => {
     return {
-      home: () => navigate('/', { replace: true }),
-      focusedMode: () =>
-        updateSetting('participating', !settings.participating),
-      filters: () => {
-        if (isOnFiltersRoute) {
-          navigate('/', { replace: true });
-        } else {
-          navigate('/filters');
-        }
+      home: {
+        key: 'h',
+        enabled: true,
+        action: () => navigate('/', { replace: true }),
       },
-      refresh: () => {
-        if (isLoading) {
-          return;
-        }
-        navigate('/', { replace: true });
-        void fetchNotifications();
+      focusedMode: {
+        key: 'w',
+        enabled: isLoggedIn && !isLoading,
+        action: () => updateSetting('participating', !settings.participating),
       },
-      settings: () => {
-        if (isOnSettingsRoute) {
+      filters: {
+        key: 'f',
+        enabled: isLoggedIn,
+        action: () => {
+          if (isOnFiltersRoute) {
+            navigate('/', { replace: true });
+          } else {
+            navigate('/filters');
+          }
+        },
+      },
+      refresh: {
+        key: 'r',
+        enabled: !isLoading,
+        action: () => {
+          if (isLoading) {
+            return;
+          }
           navigate('/', { replace: true });
           void fetchNotifications();
-        } else {
-          navigate('/settings');
-        }
+        },
       },
-      accounts: () => navigate('/accounts'),
-      quit: () => quitApp(),
+      settings: {
+        key: 's',
+        enabled: isLoggedIn,
+        action: () => {
+          if (isOnSettingsRoute) {
+            navigate('/', { replace: true });
+            void fetchNotifications();
+          } else {
+            navigate('/settings');
+          }
+        },
+      },
+      accounts: {
+        key: 'a',
+        enabled: isLoggedIn && isOnSettingsRoute,
+        action: () => navigate('/accounts'),
+      },
+      quit: {
+        key: 'q',
+        enabled: !isLoggedIn || isOnSettingsRoute,
+        action: () => quitApp(),
+      },
     };
   }, [
     settings.participating,
+    isLoggedIn,
     isLoading,
-    isOnSettingsRoute,
     isOnFiltersRoute,
+    isOnSettingsRoute,
     fetchNotifications,
     updateSetting,
   ]);
 
-  const enabled: ShortcutEnabled = useMemo(() => {
-    return {
-      home: true,
-      focusedMode: isLoggedIn && !isLoading,
-      filters: isLoggedIn,
-      refresh: !isLoading,
-      settings: isLoggedIn,
-      accounts: isLoggedIn && isOnSettingsRoute,
-      quit: !isLoggedIn || isOnSettingsRoute,
-    };
-  }, [isLoggedIn, isOnSettingsRoute, isLoading]);
-
-  const hotkeys: ShortcutHotkeys = {
-    home: 'h',
-    focusedMode: 'w',
-    filters: 'f',
-    refresh: 'r',
-    settings: 's',
-    accounts: 'a',
-    quit: 'q',
-  };
-
-  return { actions, enabled, hotkeys };
+  return { shortcuts };
 }

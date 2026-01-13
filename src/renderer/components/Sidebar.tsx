@@ -18,7 +18,6 @@ import { APPLICATION } from '../../shared/constants';
 import { useAppContext } from '../context/App';
 import { useShortcutActions } from '../hooks/useShortcutActions';
 import { getPrimaryAccountHostname } from '../utils/auth/utils';
-import { quitApp } from '../utils/comms';
 import {
   openGitHubIssues,
   openGitHubNotifications,
@@ -39,7 +38,7 @@ export const Sidebar: FC = () => {
 
   const primaryAccountHostname = getPrimaryAccountHostname(auth);
 
-  const { actions, hotkeys, enabled } = useShortcutActions();
+  const { shortcuts } = useShortcutActions();
 
   return (
     <Stack
@@ -58,8 +57,8 @@ export const Sidebar: FC = () => {
           data-testid="sidebar-home"
           description="Home"
           icon={LogoIcon}
-          keybindingHint={hotkeys.home}
-          onClick={() => actions.home()}
+          keybindingHint={shortcuts.home.key}
+          onClick={() => shortcuts.home.action()}
           size="small"
           tooltipDirection="e"
           variant="invisible"
@@ -87,8 +86,8 @@ export const Sidebar: FC = () => {
                   : 'Participating and watching'
               }
               icon={settings.participating ? CrosshairsIcon : EyeIcon}
-              keybindingHint={hotkeys.focusedMode}
-              onClick={() => actions.focusedMode()}
+              keybindingHint={shortcuts.focusedMode.key}
+              onClick={() => shortcuts.focusedMode.action()}
               size="small"
               tooltipDirection="e"
               variant={settings.participating ? 'primary' : 'invisible'}
@@ -99,8 +98,8 @@ export const Sidebar: FC = () => {
               data-testid="sidebar-filter-notifications"
               description="Filter notifications"
               icon={FilterIcon}
-              keybindingHint={hotkeys.filters}
-              onClick={() => actions.filters()}
+              keybindingHint={shortcuts.filters.key}
+              onClick={() => shortcuts.filters.action()}
               size="small"
               tooltipDirection="e"
               variant={hasActiveFilters(settings) ? 'primary' : 'invisible'}
@@ -142,11 +141,11 @@ export const Sidebar: FC = () => {
               className={status === 'loading' ? 'animate-spin' : ''}
               data-testid="sidebar-refresh"
               description="Refresh notifications"
-              disabled={!enabled.refresh}
+              disabled={!shortcuts.refresh.enabled}
               icon={SyncIcon}
-              keybindingHint={hotkeys.refresh}
+              keybindingHint={shortcuts.refresh.key}
               // loading={status === 'loading'}
-              onClick={() => actions.refresh()}
+              onClick={() => shortcuts.refresh.action()}
               size="small"
               tooltipDirection="e"
               variant="invisible"
@@ -157,8 +156,8 @@ export const Sidebar: FC = () => {
               data-testid="sidebar-settings"
               description="Settings"
               icon={GearIcon}
-              keybindingHint={hotkeys.settings}
-              onClick={() => actions.settings()}
+              keybindingHint={shortcuts.settings.key}
+              onClick={() => shortcuts.settings.action()}
               size="small"
               tooltipDirection="e"
               variant="invisible"
@@ -171,8 +170,8 @@ export const Sidebar: FC = () => {
             aria-label={`Quit ${APPLICATION.NAME}`}
             data-testid="sidebar-quit"
             icon={XCircleIcon}
-            keybindingHint={hotkeys.quit}
-            onClick={() => quitApp()}
+            keybindingHint={shortcuts.quit.key}
+            onClick={() => shortcuts.quit.action()}
             size="small"
             tooltipDirection="e"
             variant="invisible"

@@ -7,15 +7,15 @@ import { useShortcutActions } from '../hooks/useShortcutActions';
  * Mount once inside App, within Router + AppProvider.
  */
 export const GlobalShortcuts: FC = () => {
-  const { actions, enabled, hotkeys } = useShortcutActions();
+  const { shortcuts } = useShortcutActions();
 
   useEffect(() => {
-    const keyToName = Object.entries(hotkeys).reduce<
-      Record<string, keyof typeof actions>
-    >((acc, [name, key]) => {
-      acc[key] = name as keyof typeof actions;
-      return acc;
-    }, {});
+    const keyToName = new Map<string, keyof typeof shortcuts>(
+      Object.entries(shortcuts).map(([name, cfg]) => [
+        cfg.key,
+        name as keyof typeof shortcuts,
+      ]),
+    );
 
     const handler = (event: KeyboardEvent) => {
       // Ignore if user is typing in an input, textarea, or with modifiers
@@ -30,14 +30,14 @@ export const GlobalShortcuts: FC = () => {
       }
 
       const key = event.key.toLowerCase();
-      const name = keyToName[key];
+      const name = keyToName.get(key);
       if (!name) {
         return;
       }
 
-      if (enabled[name]) {
+      if (shortcuts[name].enabled) {
         event.preventDefault();
-        actions[name]();
+        shortcuts[name].action();
       }
     };
 
@@ -45,7 +45,7 @@ export const GlobalShortcuts: FC = () => {
     return () => {
       document.removeEventListener('keydown', handler);
     };
-  }, [actions, enabled, hotkeys]);
+  }, [shortcuts]);
 
   return null;
 };

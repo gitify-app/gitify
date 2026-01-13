@@ -12,7 +12,7 @@ import { Footer } from '../primitives/Footer';
 
 export const SettingsFooter: FC = () => {
   const [appVersion, setAppVersion] = useState<string | null>(null);
-  const { actions, hotkeys } = useShortcutActions();
+  const { shortcuts } = useShortcutActions();
 
   useEffect(() => {
     (async () => {
@@ -39,9 +39,9 @@ export const SettingsFooter: FC = () => {
           data-testid="settings-accounts"
           description="Accounts"
           icon={PersonIcon}
-          keybindingHint={hotkeys.accounts}
+          keybindingHint={shortcuts.accounts.key}
           onClick={() => {
-            actions.accounts();
+            shortcuts.accounts.action();
           }}
           tooltipDirection="n"
         />
@@ -51,9 +51,9 @@ export const SettingsFooter: FC = () => {
           data-testid="settings-quit"
           description={`Quit ${APPLICATION.NAME}`}
           icon={XCircleIcon}
-          keybindingHint={hotkeys.quit}
+          keybindingHint={shortcuts.quit.key}
           onClick={() => {
-            actions.quit();
+            shortcuts.quit.action();
           }}
           tooltipDirection="nw"
           variant="danger"
