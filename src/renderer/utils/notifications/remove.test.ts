@@ -49,107 +49,107 @@ describe('renderer/utils/remove.ts', () => {
   });
 
   describe('removeNotificationsForAccount', () => {
-  it('should remove a notification if it exists', () => {
-    expect(mockSingleAccountNotifications[0].notifications.length).toBe(1);
+    it('should remove a notification if it exists', () => {
+      expect(mockSingleAccountNotifications[0].notifications.length).toBe(1);
 
-    const result = removeNotificationsForAccount(
-      mockSingleAccountNotifications[0].account,
-      { ...mockSettings, delayNotificationState: false },
-      [mockGitifyNotification],
-      mockSingleAccountNotifications,
-    );
+      const result = removeNotificationsForAccount(
+        mockSingleAccountNotifications[0].account,
+        { ...mockSettings, delayNotificationState: false },
+        [mockGitifyNotification],
+        mockSingleAccountNotifications,
+      );
 
-    expect(result[0].notifications.length).toBe(0);
-  });
+      expect(result[0].notifications.length).toBe(0);
+    });
 
-  it('should mark as read and skip notification removal if delay state enabled', () => {
-    expect(mockSingleAccountNotifications[0].notifications.length).toBe(1);
+    it('should mark as read and skip notification removal if delay state enabled', () => {
+      expect(mockSingleAccountNotifications[0].notifications.length).toBe(1);
 
-    const result = removeNotificationsForAccount(
-      mockSingleAccountNotifications[0].account,
-      { ...mockSettings, delayNotificationState: true },
-      [mockGitifyNotification],
-      mockSingleAccountNotifications,
-    );
+      const result = removeNotificationsForAccount(
+        mockSingleAccountNotifications[0].account,
+        { ...mockSettings, delayNotificationState: true },
+        [mockGitifyNotification],
+        mockSingleAccountNotifications,
+      );
 
-    expect(result[0].notifications.length).toBe(1);
-    expect(result[0].notifications[0].unread).toBe(false);
-  });
+      expect(result[0].notifications.length).toBe(1);
+      expect(result[0].notifications[0].unread).toBe(false);
+    });
 
-  it('should skip notification removal if delay state enabled and nothing to remove', () => {
-    expect(mockSingleAccountNotifications[0].notifications.length).toBe(1);
+    it('should skip notification removal if delay state enabled and nothing to remove', () => {
+      expect(mockSingleAccountNotifications[0].notifications.length).toBe(1);
 
-    const result = removeNotificationsForAccount(
-      mockSingleAccountNotifications[0].account,
-      { ...mockSettings, delayNotificationState: true },
-      [
-        {
-          ...mockGitifyNotification,
-          id: 'non-existent-id',
-        },
-      ],
-      mockSingleAccountNotifications,
-    );
+      const result = removeNotificationsForAccount(
+        mockSingleAccountNotifications[0].account,
+        { ...mockSettings, delayNotificationState: true },
+        [
+          {
+            ...mockGitifyNotification,
+            id: 'non-existent-id',
+          },
+        ],
+        mockSingleAccountNotifications,
+      );
 
-    expect(result[0].notifications.length).toBe(1);
-    expect(result[0].notifications[0].unread).toBe(true);
-  });
+      expect(result[0].notifications.length).toBe(1);
+      expect(result[0].notifications[0].unread).toBe(true);
+    });
 
-  it('should skip notification removal if nothing to remove', () => {
-    expect(mockSingleAccountNotifications[0].notifications.length).toBe(1);
+    it('should skip notification removal if nothing to remove', () => {
+      expect(mockSingleAccountNotifications[0].notifications.length).toBe(1);
 
-    const result = removeNotificationsForAccount(
-      mockSingleAccountNotifications[0].account,
-      { ...mockSettings, delayNotificationState: false },
-      [],
-      mockSingleAccountNotifications,
-    );
+      const result = removeNotificationsForAccount(
+        mockSingleAccountNotifications[0].account,
+        { ...mockSettings, delayNotificationState: false },
+        [],
+        mockSingleAccountNotifications,
+      );
 
-    expect(result[0].notifications.length).toBe(1);
-    expect(result[0].notifications[0]).toBe(
-      mockSingleAccountNotifications[0].notifications[0],
-    );
-  });
+      expect(result[0].notifications.length).toBe(1);
+      expect(result[0].notifications[0]).toBe(
+        mockSingleAccountNotifications[0].notifications[0],
+      );
+    });
 
-  it('should not modify notifications when account UUID does not match', () => {
-    const result = removeNotificationsForAccount(
-      mockGitHubEnterpriseServerAccount, // Different account
-      { ...mockSettings, delayNotificationState: false },
-      [mockGitifyNotification],
-      mockSingleAccountNotifications,
-    );
+    it('should not modify notifications when account UUID does not match', () => {
+      const result = removeNotificationsForAccount(
+        mockGitHubEnterpriseServerAccount, // Different account
+        { ...mockSettings, delayNotificationState: false },
+        [mockGitifyNotification],
+        mockSingleAccountNotifications,
+      );
 
-    expect(result[0].notifications.length).toBe(1);
-    expect(result[0].notifications[0]).toBe(
-      mockSingleAccountNotifications[0].notifications[0],
-    );
-  });
+      expect(result[0].notifications.length).toBe(1);
+      expect(result[0].notifications[0]).toBe(
+        mockSingleAccountNotifications[0].notifications[0],
+      );
+    });
 
-  it('should mark as read and skip removal when fetchReadNotifications is enabled', () => {
-    expect(mockSingleAccountNotifications[0].notifications.length).toBe(1);
+    it('should mark as read and skip removal when fetchReadNotifications is enabled', () => {
+      expect(mockSingleAccountNotifications[0].notifications.length).toBe(1);
 
-    const result = removeNotificationsForAccount(
-      mockSingleAccountNotifications[0].account,
-      { ...mockSettings, fetchReadNotifications: true },
-      [mockGitifyNotification],
-      mockSingleAccountNotifications,
-    );
+      const result = removeNotificationsForAccount(
+        mockSingleAccountNotifications[0].account,
+        { ...mockSettings, fetchReadNotifications: true },
+        [mockGitifyNotification],
+        mockSingleAccountNotifications,
+      );
 
-    expect(result[0].notifications.length).toBe(1);
-    expect(result[0].notifications[0].unread).toBe(false);
-  });
+      expect(result[0].notifications.length).toBe(1);
+      expect(result[0].notifications[0].unread).toBe(false);
+    });
 
-  it('should remove notifications when fetchReadNotifications is disabled', () => {
-    expect(mockSingleAccountNotifications[0].notifications.length).toBe(1);
+    it('should remove notifications when fetchReadNotifications is disabled', () => {
+      expect(mockSingleAccountNotifications[0].notifications.length).toBe(1);
 
-    const result = removeNotificationsForAccount(
-      mockSingleAccountNotifications[0].account,
-      { ...mockSettings, fetchReadNotifications: false },
-      [mockGitifyNotification],
-      mockSingleAccountNotifications,
-    );
+      const result = removeNotificationsForAccount(
+        mockSingleAccountNotifications[0].account,
+        { ...mockSettings, fetchReadNotifications: false },
+        [mockGitifyNotification],
+        mockSingleAccountNotifications,
+      );
 
-    expect(result[0].notifications.length).toBe(0);
-  });
+      expect(result[0].notifications.length).toBe(0);
+    });
   });
 });
