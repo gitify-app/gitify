@@ -1,15 +1,10 @@
 import { type FC, useEffect, useState } from 'react';
 
-// import { useLocation, useNavigate } from 'react-router-dom';
-
-// import { useLocation, useNavigate } from 'react-router-dom';
-
 import { PersonIcon, XCircleIcon } from '@primer/octicons-react';
 import { Button, IconButton, Stack, Tooltip } from '@primer/react';
 
 import { APPLICATION } from '../../../shared/constants';
 
-import { useAppContext } from '../../context/App';
 import { useShortcutActions } from '../../hooks/useShortcutActions';
 import { getAppVersion } from '../../utils/comms';
 import { openGitifyReleaseNotes } from '../../utils/links';
@@ -17,9 +12,6 @@ import { Footer } from '../primitives/Footer';
 
 export const SettingsFooter: FC = () => {
   const [appVersion, setAppVersion] = useState<string | null>(null);
-  // const navigate = useNavigate();
-  // const location = useLocation();
-  useAppContext();
   const { actions, hotkeys } = useShortcutActions();
 
   useEffect(() => {

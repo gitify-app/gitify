@@ -1,9 +1,5 @@
 import type { FC } from 'react';
 
-// import { useLocation, useNavigate } from 'react-router-dom';
-
-// import { useLocation, useNavigate } from 'react-router-dom';
-
 import {
   BellIcon,
   CrosshairsIcon,

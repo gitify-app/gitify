@@ -77,7 +77,7 @@ export function useShortcutActions(): {
   const enabled: ShortcutEnabled = useMemo(() => {
     return {
       home: true,
-      focusedMode: !isLoading,
+      focusedMode: isLoggedIn && !isLoading,
       filters: isLoggedIn,
       refresh: !isLoading,
       settings: isLoggedIn,
