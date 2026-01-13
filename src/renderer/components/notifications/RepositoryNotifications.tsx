@@ -9,6 +9,7 @@ import { cn } from '../../utils/cn';
 import { isMarkAsDoneFeatureSupported } from '../../utils/features';
 import { getChevronDetails } from '../../utils/helpers';
 import { openRepository } from '../../utils/links';
+import { shouldRemoveNotificationsFromState } from '../../utils/notifications/remove';
 import { AvatarWithFallback } from '../avatars/AvatarWithFallback';
 import { HoverButton } from '../primitives/HoverButton';
 import { HoverGroup } from '../primitives/HoverGroup';
@@ -30,14 +31,15 @@ export const RepositoryNotifications: FC<RepositoryNotificationsProps> = ({
     useState(true);
 
   const avatarUrl = repoNotifications[0].repository.owner.avatarUrl;
+  const shouldAnimateExit = shouldRemoveNotificationsFromState(settings);
 
   const actionMarkAsDone = () => {
-    setAnimateExit(!settings.delayNotificationState);
+    setAnimateExit(shouldAnimateExit);
     markNotificationsAsDone(repoNotifications);
   };
 
   const actionMarkAsRead = () => {
-    setAnimateExit(!settings.delayNotificationState);
+    setAnimateExit(shouldAnimateExit);
     markNotificationsAsRead(repoNotifications);
   };
 
@@ -92,20 +94,22 @@ export const RepositoryNotifications: FC<RepositoryNotificationsProps> = ({
         {!animateExit && (
           <HoverGroup bgColor="group-hover:bg-gitify-repository">
             <HoverButton
-              action={actionMarkAsDone}
-              enabled={isMarkAsDoneFeatureSupported(
-                repoNotifications[0].account,
-              )}
-              icon={CheckIcon}
-              label="Mark repository as done"
-              testid="repository-mark-as-done"
-            />
-
-            <HoverButton
               action={actionMarkAsRead}
+              enabled={!areAllRepoNotificationsRead}
               icon={ReadIcon}
               label="Mark repository as read"
               testid="repository-mark-as-read"
+            />
+
+            <HoverButton
+              action={actionMarkAsDone}
+              enabled={
+                isMarkAsDoneFeatureSupported(repoNotifications[0].account) &&
+                !areAllRepoNotificationsRead
+              }
+              icon={CheckIcon}
+              label="Mark repository as done"
+              testid="repository-mark-as-done"
             />
 
             <HoverButton

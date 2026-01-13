@@ -9,6 +9,7 @@ import { cn } from '../../utils/cn';
 import { isMarkAsDoneFeatureSupported } from '../../utils/features';
 import { openNotification } from '../../utils/links';
 import { isGroupByDate } from '../../utils/notifications/group';
+import { shouldRemoveNotificationsFromState } from '../../utils/notifications/remove';
 import { HoverButton } from '../primitives/HoverButton';
 import { HoverGroup } from '../primitives/HoverGroup';
 import { NotificationFooter } from './NotificationFooter';
@@ -31,8 +32,10 @@ export const NotificationRow: FC<NotificationRowProps> = ({
   } = useAppContext();
   const [animateExit, setAnimateExit] = useState(false);
 
+  const shouldAnimateExit = shouldRemoveNotificationsFromState(settings);
+
   const handleNotification = useCallback(() => {
-    setAnimateExit(!settings.delayNotificationState);
+    setAnimateExit(shouldAnimateExit);
     openNotification(notification);
 
     if (settings.markAsDoneOnOpen) {
@@ -45,15 +48,16 @@ export const NotificationRow: FC<NotificationRowProps> = ({
     markNotificationsAsRead,
     markNotificationsAsDone,
     settings,
+    shouldAnimateExit,
   ]);
 
   const actionMarkAsDone = () => {
-    setAnimateExit(!settings.delayNotificationState);
+    setAnimateExit(shouldAnimateExit);
     markNotificationsAsDone([notification]);
   };
 
   const actionMarkAsRead = () => {
-    setAnimateExit(!settings.delayNotificationState);
+    setAnimateExit(shouldAnimateExit);
     markNotificationsAsRead([notification]);
   };
 
@@ -131,18 +135,22 @@ export const NotificationRow: FC<NotificationRowProps> = ({
       {!animateExit && (
         <HoverGroup bgColor="group-hover:bg-gitify-notification-hover">
           <HoverButton
-            action={actionMarkAsDone}
-            enabled={isMarkAsDoneFeatureSupported(notification.account)}
-            icon={CheckIcon}
-            label="Mark as done"
-            testid="notification-mark-as-done"
-          />
-
-          <HoverButton
             action={actionMarkAsRead}
+            enabled={!isNotificationRead}
             icon={ReadIcon}
             label="Mark as read"
             testid="notification-mark-as-read"
+          />
+
+          <HoverButton
+            action={actionMarkAsDone}
+            enabled={
+              isMarkAsDoneFeatureSupported(notification.account) &&
+              notification.unread
+            }
+            icon={CheckIcon}
+            label="Mark as done"
+            testid="notification-mark-as-done"
           />
 
           <HoverButton

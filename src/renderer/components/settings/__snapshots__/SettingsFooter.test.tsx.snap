@@ -2,7 +2,7 @@
 
 exports[`renderer/components/settings/SettingsFooter.tsx should show app version 1`] = `
 <button
-  aria-describedby="_r_1_"
+  aria-describedby="_r_ID_"
   class="prc-Button-ButtonBase-9n-Xk"
   data-loading="false"
   data-no-visuals="true"

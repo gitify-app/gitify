@@ -329,6 +329,29 @@ export const NotificationSettings: FC = () => {
         />
 
         <Checkbox
+          checked={settings.fetchReadNotifications}
+          label="Fetch read & done notifications"
+          name="fetchReadNotifications"
+          onChange={(evt) =>
+            updateSetting('fetchReadNotifications', evt.target.checked)
+          }
+          tooltip={
+            <Stack direction="vertical" gap="condensed">
+              <Text>Fetch all notifications including read and done.</Text>
+              <Text className="text-gitify-caution">
+                ⚠️ GitHub's API does not distinguish between read and done
+                states, so 'Mark as done' actions will be unavailable when this
+                setting is enabled.
+              </Text>
+              <Text className="text-gitify-caution">
+                ⚠️ Enabling this setting will increase API usage and may cause
+                rate limiting for users with many notifications.
+              </Text>
+            </Stack>
+          }
+        />
+
+        <Checkbox
           checked={settings.markAsDoneOnOpen}
           label="Mark as done on open"
           name="markAsDoneOnOpen"

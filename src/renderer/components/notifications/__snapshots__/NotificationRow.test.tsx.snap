@@ -28,7 +28,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               data-wrap="nowrap"
             >
               <button
-                aria-describedby="_r_1_"
+                aria-describedby="_r_ID_"
                 type="button"
               >
                 <svg
@@ -56,7 +56,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 aria-hidden="true"
                 class="prc-TooltipV2-Tooltip-tLeuB"
                 data-direction="e"
-                id="_r_1_"
+                id="_r_ID_"
                 popover="auto"
                 role="tooltip"
               >
@@ -207,7 +207,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                     class="flex gap-1"
                   >
                     <button
-                      aria-describedby="_r_2_"
+                      aria-describedby="_r_ID_"
                       type="button"
                     >
                       <span
@@ -253,14 +253,14 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                       aria-hidden="true"
                       class="prc-TooltipV2-Tooltip-tLeuB"
                       data-direction="s"
-                      id="_r_2_"
+                      id="_r_ID_"
                       popover="auto"
                       role="tooltip"
                     >
                       octocat approved these changes
                     </span>
                     <button
-                      aria-describedby="_r_3_"
+                      aria-describedby="_r_ID_"
                       type="button"
                     >
                       <span
@@ -306,7 +306,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                       aria-hidden="true"
                       class="prc-TooltipV2-Tooltip-tLeuB"
                       data-direction="s"
-                      id="_r_3_"
+                      id="_r_ID_"
                       popover="auto"
                       role="tooltip"
                     >
@@ -325,35 +325,6 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               data-padding="none"
               data-wrap="nowrap"
             >
-              <button
-                aria-label="Mark as done"
-                class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
-                data-component="IconButton"
-                data-loading="false"
-                data-no-visuals="true"
-                data-size="small"
-                data-testid="notification-mark-as-done"
-                data-variant="invisible"
-                title="Mark as done"
-                type="button"
-              >
-                <svg
-                  aria-hidden="true"
-                  class="octicon octicon-check"
-                  display="inline-block"
-                  fill="currentColor"
-                  focusable="false"
-                  height="16"
-                  overflow="visible"
-                  style="vertical-align: text-bottom;"
-                  viewBox="0 0 16 16"
-                  width="16"
-                >
-                  <path
-                    d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
-                  />
-                </svg>
-              </button>
               <button
                 aria-label="Mark as read"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
@@ -380,6 +351,35 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 >
                   <path
                     d="M7.115.65a1.752 1.752 0 0 1 1.77 0l6.25 3.663c.536.314.865.889.865 1.51v6.427A1.75 1.75 0 0 1 14.25 14H1.75A1.75 1.75 0 0 1 0 12.25V5.823c0-.621.33-1.196.865-1.51Zm1.011 1.293a.252.252 0 0 0-.252 0l-5.72 3.353L6.468 7.76a2.748 2.748 0 0 1 3.066 0l4.312-2.464-5.719-3.353ZM13.15 12.5 8.772 9.06a1.25 1.25 0 0 0-1.544 0L2.85 12.5Zm1.35-5.85-3.687 2.106 3.687 2.897ZM5.187 8.756 1.5 6.65v5.003Z"
+                  />
+                </svg>
+              </button>
+              <button
+                aria-label="Mark as done"
+                class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
+                data-component="IconButton"
+                data-loading="false"
+                data-no-visuals="true"
+                data-size="small"
+                data-testid="notification-mark-as-done"
+                data-variant="invisible"
+                title="Mark as done"
+                type="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="octicon octicon-check"
+                  display="inline-block"
+                  fill="currentColor"
+                  focusable="false"
+                  height="16"
+                  overflow="visible"
+                  style="vertical-align: text-bottom;"
+                  viewBox="0 0 16 16"
+                  width="16"
+                >
+                  <path
+                    d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
                   />
                 </svg>
               </button>
@@ -442,7 +442,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             data-wrap="nowrap"
           >
             <button
-              aria-describedby="_r_1_"
+              aria-describedby="_r_ID_"
               type="button"
             >
               <svg
@@ -470,7 +470,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
               data-direction="e"
-              id="_r_1_"
+              id="_r_ID_"
               popover="auto"
               role="tooltip"
             >
@@ -621,7 +621,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                   class="flex gap-1"
                 >
                   <button
-                    aria-describedby="_r_2_"
+                    aria-describedby="_r_ID_"
                     type="button"
                   >
                     <span
@@ -667,14 +667,14 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                     aria-hidden="true"
                     class="prc-TooltipV2-Tooltip-tLeuB"
                     data-direction="s"
-                    id="_r_2_"
+                    id="_r_ID_"
                     popover="auto"
                     role="tooltip"
                   >
                     octocat approved these changes
                   </span>
                   <button
-                    aria-describedby="_r_3_"
+                    aria-describedby="_r_ID_"
                     type="button"
                   >
                     <span
@@ -720,7 +720,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                     aria-hidden="true"
                     class="prc-TooltipV2-Tooltip-tLeuB"
                     data-direction="s"
-                    id="_r_3_"
+                    id="_r_ID_"
                     popover="auto"
                     role="tooltip"
                   >
@@ -739,35 +739,6 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             data-padding="none"
             data-wrap="nowrap"
           >
-            <button
-              aria-label="Mark as done"
-              class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
-              data-component="IconButton"
-              data-loading="false"
-              data-no-visuals="true"
-              data-size="small"
-              data-testid="notification-mark-as-done"
-              data-variant="invisible"
-              title="Mark as done"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-check"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
-                />
-              </svg>
-            </button>
             <button
               aria-label="Mark as read"
               class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
@@ -794,6 +765,35 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               >
                 <path
                   d="M7.115.65a1.752 1.752 0 0 1 1.77 0l6.25 3.663c.536.314.865.889.865 1.51v6.427A1.75 1.75 0 0 1 14.25 14H1.75A1.75 1.75 0 0 1 0 12.25V5.823c0-.621.33-1.196.865-1.51Zm1.011 1.293a.252.252 0 0 0-.252 0l-5.72 3.353L6.468 7.76a2.748 2.748 0 0 1 3.066 0l4.312-2.464-5.719-3.353ZM13.15 12.5 8.772 9.06a1.25 1.25 0 0 0-1.544 0L2.85 12.5Zm1.35-5.85-3.687 2.106 3.687 2.897ZM5.187 8.756 1.5 6.65v5.003Z"
+                />
+              </svg>
+            </button>
+            <button
+              aria-label="Mark as done"
+              class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
+              data-component="IconButton"
+              data-loading="false"
+              data-no-visuals="true"
+              data-size="small"
+              data-testid="notification-mark-as-done"
+              data-variant="invisible"
+              title="Mark as done"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-check"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
                 />
               </svg>
             </button>
@@ -913,7 +913,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               data-wrap="nowrap"
             >
               <button
-                aria-describedby="_r_8_"
+                aria-describedby="_r_ID_"
                 type="button"
               >
                 <svg
@@ -941,7 +941,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 aria-hidden="true"
                 class="prc-TooltipV2-Tooltip-tLeuB"
                 data-direction="e"
-                id="_r_8_"
+                id="_r_ID_"
                 popover="auto"
                 role="tooltip"
               >
@@ -1038,7 +1038,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                     class="flex gap-1"
                   >
                     <button
-                      aria-describedby="_r_9_"
+                      aria-describedby="_r_ID_"
                       type="button"
                     >
                       <span
@@ -1084,14 +1084,14 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                       aria-hidden="true"
                       class="prc-TooltipV2-Tooltip-tLeuB"
                       data-direction="s"
-                      id="_r_9_"
+                      id="_r_ID_"
                       popover="auto"
                       role="tooltip"
                     >
                       octocat approved these changes
                     </span>
                     <button
-                      aria-describedby="_r_a_"
+                      aria-describedby="_r_ID_"
                       type="button"
                     >
                       <span
@@ -1137,7 +1137,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                       aria-hidden="true"
                       class="prc-TooltipV2-Tooltip-tLeuB"
                       data-direction="s"
-                      id="_r_a_"
+                      id="_r_ID_"
                       popover="auto"
                       role="tooltip"
                     >
@@ -1156,35 +1156,6 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               data-padding="none"
               data-wrap="nowrap"
             >
-              <button
-                aria-label="Mark as done"
-                class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
-                data-component="IconButton"
-                data-loading="false"
-                data-no-visuals="true"
-                data-size="small"
-                data-testid="notification-mark-as-done"
-                data-variant="invisible"
-                title="Mark as done"
-                type="button"
-              >
-                <svg
-                  aria-hidden="true"
-                  class="octicon octicon-check"
-                  display="inline-block"
-                  fill="currentColor"
-                  focusable="false"
-                  height="16"
-                  overflow="visible"
-                  style="vertical-align: text-bottom;"
-                  viewBox="0 0 16 16"
-                  width="16"
-                >
-                  <path
-                    d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
-                  />
-                </svg>
-              </button>
               <button
                 aria-label="Mark as read"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
@@ -1211,6 +1182,35 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 >
                   <path
                     d="M7.115.65a1.752 1.752 0 0 1 1.77 0l6.25 3.663c.536.314.865.889.865 1.51v6.427A1.75 1.75 0 0 1 14.25 14H1.75A1.75 1.75 0 0 1 0 12.25V5.823c0-.621.33-1.196.865-1.51Zm1.011 1.293a.252.252 0 0 0-.252 0l-5.72 3.353L6.468 7.76a2.748 2.748 0 0 1 3.066 0l4.312-2.464-5.719-3.353ZM13.15 12.5 8.772 9.06a1.25 1.25 0 0 0-1.544 0L2.85 12.5Zm1.35-5.85-3.687 2.106 3.687 2.897ZM5.187 8.756 1.5 6.65v5.003Z"
+                  />
+                </svg>
+              </button>
+              <button
+                aria-label="Mark as done"
+                class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
+                data-component="IconButton"
+                data-loading="false"
+                data-no-visuals="true"
+                data-size="small"
+                data-testid="notification-mark-as-done"
+                data-variant="invisible"
+                title="Mark as done"
+                type="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="octicon octicon-check"
+                  display="inline-block"
+                  fill="currentColor"
+                  focusable="false"
+                  height="16"
+                  overflow="visible"
+                  style="vertical-align: text-bottom;"
+                  viewBox="0 0 16 16"
+                  width="16"
+                >
+                  <path
+                    d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
                   />
                 </svg>
               </button>
@@ -1273,7 +1273,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             data-wrap="nowrap"
           >
             <button
-              aria-describedby="_r_8_"
+              aria-describedby="_r_ID_"
               type="button"
             >
               <svg
@@ -1301,7 +1301,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
               data-direction="e"
-              id="_r_8_"
+              id="_r_ID_"
               popover="auto"
               role="tooltip"
             >
@@ -1398,7 +1398,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                   class="flex gap-1"
                 >
                   <button
-                    aria-describedby="_r_9_"
+                    aria-describedby="_r_ID_"
                     type="button"
                   >
                     <span
@@ -1444,14 +1444,14 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                     aria-hidden="true"
                     class="prc-TooltipV2-Tooltip-tLeuB"
                     data-direction="s"
-                    id="_r_9_"
+                    id="_r_ID_"
                     popover="auto"
                     role="tooltip"
                   >
                     octocat approved these changes
                   </span>
                   <button
-                    aria-describedby="_r_a_"
+                    aria-describedby="_r_ID_"
                     type="button"
                   >
                     <span
@@ -1497,7 +1497,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                     aria-hidden="true"
                     class="prc-TooltipV2-Tooltip-tLeuB"
                     data-direction="s"
-                    id="_r_a_"
+                    id="_r_ID_"
                     popover="auto"
                     role="tooltip"
                   >
@@ -1516,35 +1516,6 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             data-padding="none"
             data-wrap="nowrap"
           >
-            <button
-              aria-label="Mark as done"
-              class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
-              data-component="IconButton"
-              data-loading="false"
-              data-no-visuals="true"
-              data-size="small"
-              data-testid="notification-mark-as-done"
-              data-variant="invisible"
-              title="Mark as done"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-check"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
-                />
-              </svg>
-            </button>
             <button
               aria-label="Mark as read"
               class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
@@ -1571,6 +1542,35 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               >
                 <path
                   d="M7.115.65a1.752 1.752 0 0 1 1.77 0l6.25 3.663c.536.314.865.889.865 1.51v6.427A1.75 1.75 0 0 1 14.25 14H1.75A1.75 1.75 0 0 1 0 12.25V5.823c0-.621.33-1.196.865-1.51Zm1.011 1.293a.252.252 0 0 0-.252 0l-5.72 3.353L6.468 7.76a2.748 2.748 0 0 1 3.066 0l4.312-2.464-5.719-3.353ZM13.15 12.5 8.772 9.06a1.25 1.25 0 0 0-1.544 0L2.85 12.5Zm1.35-5.85-3.687 2.106 3.687 2.897ZM5.187 8.756 1.5 6.65v5.003Z"
+                />
+              </svg>
+            </button>
+            <button
+              aria-label="Mark as done"
+              class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
+              data-component="IconButton"
+              data-loading="false"
+              data-no-visuals="true"
+              data-size="small"
+              data-testid="notification-mark-as-done"
+              data-variant="invisible"
+              title="Mark as done"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-check"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
                 />
               </svg>
             </button>
@@ -1690,7 +1690,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               data-wrap="nowrap"
             >
               <button
-                aria-describedby="_r_f_"
+                aria-describedby="_r_ID_"
                 type="button"
               >
                 <svg
@@ -1718,7 +1718,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 aria-hidden="true"
                 class="prc-TooltipV2-Tooltip-tLeuB"
                 data-direction="e"
-                id="_r_f_"
+                id="_r_ID_"
                 popover="auto"
                 role="tooltip"
               >
@@ -1815,7 +1815,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                     class="flex gap-1"
                   >
                     <button
-                      aria-describedby="_r_g_"
+                      aria-describedby="_r_ID_"
                       type="button"
                     >
                       <span
@@ -1861,14 +1861,14 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                       aria-hidden="true"
                       class="prc-TooltipV2-Tooltip-tLeuB"
                       data-direction="s"
-                      id="_r_g_"
+                      id="_r_ID_"
                       popover="auto"
                       role="tooltip"
                     >
                       octocat approved these changes
                     </span>
                     <button
-                      aria-describedby="_r_h_"
+                      aria-describedby="_r_ID_"
                       type="button"
                     >
                       <span
@@ -1914,7 +1914,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                       aria-hidden="true"
                       class="prc-TooltipV2-Tooltip-tLeuB"
                       data-direction="s"
-                      id="_r_h_"
+                      id="_r_ID_"
                       popover="auto"
                       role="tooltip"
                     >
@@ -1933,35 +1933,6 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               data-padding="none"
               data-wrap="nowrap"
             >
-              <button
-                aria-label="Mark as done"
-                class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
-                data-component="IconButton"
-                data-loading="false"
-                data-no-visuals="true"
-                data-size="small"
-                data-testid="notification-mark-as-done"
-                data-variant="invisible"
-                title="Mark as done"
-                type="button"
-              >
-                <svg
-                  aria-hidden="true"
-                  class="octicon octicon-check"
-                  display="inline-block"
-                  fill="currentColor"
-                  focusable="false"
-                  height="16"
-                  overflow="visible"
-                  style="vertical-align: text-bottom;"
-                  viewBox="0 0 16 16"
-                  width="16"
-                >
-                  <path
-                    d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
-                  />
-                </svg>
-              </button>
               <button
                 aria-label="Mark as read"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
@@ -1988,6 +1959,35 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 >
                   <path
                     d="M7.115.65a1.752 1.752 0 0 1 1.77 0l6.25 3.663c.536.314.865.889.865 1.51v6.427A1.75 1.75 0 0 1 14.25 14H1.75A1.75 1.75 0 0 1 0 12.25V5.823c0-.621.33-1.196.865-1.51Zm1.011 1.293a.252.252 0 0 0-.252 0l-5.72 3.353L6.468 7.76a2.748 2.748 0 0 1 3.066 0l4.312-2.464-5.719-3.353ZM13.15 12.5 8.772 9.06a1.25 1.25 0 0 0-1.544 0L2.85 12.5Zm1.35-5.85-3.687 2.106 3.687 2.897ZM5.187 8.756 1.5 6.65v5.003Z"
+                  />
+                </svg>
+              </button>
+              <button
+                aria-label="Mark as done"
+                class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
+                data-component="IconButton"
+                data-loading="false"
+                data-no-visuals="true"
+                data-size="small"
+                data-testid="notification-mark-as-done"
+                data-variant="invisible"
+                title="Mark as done"
+                type="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="octicon octicon-check"
+                  display="inline-block"
+                  fill="currentColor"
+                  focusable="false"
+                  height="16"
+                  overflow="visible"
+                  style="vertical-align: text-bottom;"
+                  viewBox="0 0 16 16"
+                  width="16"
+                >
+                  <path
+                    d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
                   />
                 </svg>
               </button>
@@ -2050,7 +2050,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             data-wrap="nowrap"
           >
             <button
-              aria-describedby="_r_f_"
+              aria-describedby="_r_ID_"
               type="button"
             >
               <svg
@@ -2078,7 +2078,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
               data-direction="e"
-              id="_r_f_"
+              id="_r_ID_"
               popover="auto"
               role="tooltip"
             >
@@ -2175,7 +2175,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                   class="flex gap-1"
                 >
                   <button
-                    aria-describedby="_r_g_"
+                    aria-describedby="_r_ID_"
                     type="button"
                   >
                     <span
@@ -2221,14 +2221,14 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                     aria-hidden="true"
                     class="prc-TooltipV2-Tooltip-tLeuB"
                     data-direction="s"
-                    id="_r_g_"
+                    id="_r_ID_"
                     popover="auto"
                     role="tooltip"
                   >
                     octocat approved these changes
                   </span>
                   <button
-                    aria-describedby="_r_h_"
+                    aria-describedby="_r_ID_"
                     type="button"
                   >
                     <span
@@ -2274,7 +2274,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                     aria-hidden="true"
                     class="prc-TooltipV2-Tooltip-tLeuB"
                     data-direction="s"
-                    id="_r_h_"
+                    id="_r_ID_"
                     popover="auto"
                     role="tooltip"
                   >
@@ -2293,35 +2293,6 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             data-padding="none"
             data-wrap="nowrap"
           >
-            <button
-              aria-label="Mark as done"
-              class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
-              data-component="IconButton"
-              data-loading="false"
-              data-no-visuals="true"
-              data-size="small"
-              data-testid="notification-mark-as-done"
-              data-variant="invisible"
-              title="Mark as done"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-check"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
-                />
-              </svg>
-            </button>
             <button
               aria-label="Mark as read"
               class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
@@ -2348,6 +2319,35 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               >
                 <path
                   d="M7.115.65a1.752 1.752 0 0 1 1.77 0l6.25 3.663c.536.314.865.889.865 1.51v6.427A1.75 1.75 0 0 1 14.25 14H1.75A1.75 1.75 0 0 1 0 12.25V5.823c0-.621.33-1.196.865-1.51Zm1.011 1.293a.252.252 0 0 0-.252 0l-5.72 3.353L6.468 7.76a2.748 2.748 0 0 1 3.066 0l4.312-2.464-5.719-3.353ZM13.15 12.5 8.772 9.06a1.25 1.25 0 0 0-1.544 0L2.85 12.5Zm1.35-5.85-3.687 2.106 3.687 2.897ZM5.187 8.756 1.5 6.65v5.003Z"
+                />
+              </svg>
+            </button>
+            <button
+              aria-label="Mark as done"
+              class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
+              data-component="IconButton"
+              data-loading="false"
+              data-no-visuals="true"
+              data-size="small"
+              data-testid="notification-mark-as-done"
+              data-variant="invisible"
+              title="Mark as done"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-check"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
                 />
               </svg>
             </button>
@@ -2467,7 +2467,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               data-wrap="nowrap"
             >
               <button
-                aria-describedby="_r_m_"
+                aria-describedby="_r_ID_"
                 type="button"
               >
                 <svg
@@ -2495,7 +2495,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 aria-hidden="true"
                 class="prc-TooltipV2-Tooltip-tLeuB"
                 data-direction="e"
-                id="_r_m_"
+                id="_r_ID_"
                 popover="auto"
                 role="tooltip"
               >
@@ -2592,7 +2592,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                     class="flex gap-1"
                   >
                     <button
-                      aria-describedby="_r_n_"
+                      aria-describedby="_r_ID_"
                       type="button"
                     >
                       <span
@@ -2638,14 +2638,14 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                       aria-hidden="true"
                       class="prc-TooltipV2-Tooltip-tLeuB"
                       data-direction="s"
-                      id="_r_n_"
+                      id="_r_ID_"
                       popover="auto"
                       role="tooltip"
                     >
                       octocat approved these changes
                     </span>
                     <button
-                      aria-describedby="_r_o_"
+                      aria-describedby="_r_ID_"
                       type="button"
                     >
                       <span
@@ -2691,7 +2691,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                       aria-hidden="true"
                       class="prc-TooltipV2-Tooltip-tLeuB"
                       data-direction="s"
-                      id="_r_o_"
+                      id="_r_ID_"
                       popover="auto"
                       role="tooltip"
                     >
@@ -2710,64 +2710,6 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               data-padding="none"
               data-wrap="nowrap"
             >
-              <button
-                aria-label="Mark as done"
-                class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
-                data-component="IconButton"
-                data-loading="false"
-                data-no-visuals="true"
-                data-size="small"
-                data-testid="notification-mark-as-done"
-                data-variant="invisible"
-                title="Mark as done"
-                type="button"
-              >
-                <svg
-                  aria-hidden="true"
-                  class="octicon octicon-check"
-                  display="inline-block"
-                  fill="currentColor"
-                  focusable="false"
-                  height="16"
-                  overflow="visible"
-                  style="vertical-align: text-bottom;"
-                  viewBox="0 0 16 16"
-                  width="16"
-                >
-                  <path
-                    d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
-                  />
-                </svg>
-              </button>
-              <button
-                aria-label="Mark as read"
-                class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
-                data-component="IconButton"
-                data-loading="false"
-                data-no-visuals="true"
-                data-size="small"
-                data-testid="notification-mark-as-read"
-                data-variant="invisible"
-                title="Mark as read"
-                type="button"
-              >
-                <svg
-                  aria-hidden="true"
-                  class="octicon octicon-read"
-                  display="inline-block"
-                  fill="currentColor"
-                  focusable="false"
-                  height="16"
-                  overflow="visible"
-                  style="vertical-align: text-bottom;"
-                  viewBox="0 0 16 16"
-                  width="16"
-                >
-                  <path
-                    d="M7.115.65a1.752 1.752 0 0 1 1.77 0l6.25 3.663c.536.314.865.889.865 1.51v6.427A1.75 1.75 0 0 1 14.25 14H1.75A1.75 1.75 0 0 1 0 12.25V5.823c0-.621.33-1.196.865-1.51Zm1.011 1.293a.252.252 0 0 0-.252 0l-5.72 3.353L6.468 7.76a2.748 2.748 0 0 1 3.066 0l4.312-2.464-5.719-3.353ZM13.15 12.5 8.772 9.06a1.25 1.25 0 0 0-1.544 0L2.85 12.5Zm1.35-5.85-3.687 2.106 3.687 2.897ZM5.187 8.756 1.5 6.65v5.003Z"
-                  />
-                </svg>
-              </button>
               <button
                 aria-label="Unsubscribe from thread"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
@@ -2827,7 +2769,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             data-wrap="nowrap"
           >
             <button
-              aria-describedby="_r_m_"
+              aria-describedby="_r_ID_"
               type="button"
             >
               <svg
@@ -2855,7 +2797,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
               data-direction="e"
-              id="_r_m_"
+              id="_r_ID_"
               popover="auto"
               role="tooltip"
             >
@@ -2952,7 +2894,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                   class="flex gap-1"
                 >
                   <button
-                    aria-describedby="_r_n_"
+                    aria-describedby="_r_ID_"
                     type="button"
                   >
                     <span
@@ -2998,14 +2940,14 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                     aria-hidden="true"
                     class="prc-TooltipV2-Tooltip-tLeuB"
                     data-direction="s"
-                    id="_r_n_"
+                    id="_r_ID_"
                     popover="auto"
                     role="tooltip"
                   >
                     octocat approved these changes
                   </span>
                   <button
-                    aria-describedby="_r_o_"
+                    aria-describedby="_r_ID_"
                     type="button"
                   >
                     <span
@@ -3051,7 +2993,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                     aria-hidden="true"
                     class="prc-TooltipV2-Tooltip-tLeuB"
                     data-direction="s"
-                    id="_r_o_"
+                    id="_r_ID_"
                     popover="auto"
                     role="tooltip"
                   >
@@ -3070,64 +3012,6 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
             data-padding="none"
             data-wrap="nowrap"
           >
-            <button
-              aria-label="Mark as done"
-              class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
-              data-component="IconButton"
-              data-loading="false"
-              data-no-visuals="true"
-              data-size="small"
-              data-testid="notification-mark-as-done"
-              data-variant="invisible"
-              title="Mark as done"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-check"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
-                />
-              </svg>
-            </button>
-            <button
-              aria-label="Mark as read"
-              class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
-              data-component="IconButton"
-              data-loading="false"
-              data-no-visuals="true"
-              data-size="small"
-              data-testid="notification-mark-as-read"
-              data-variant="invisible"
-              title="Mark as read"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-read"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M7.115.65a1.752 1.752 0 0 1 1.77 0l6.25 3.663c.536.314.865.889.865 1.51v6.427A1.75 1.75 0 0 1 14.25 14H1.75A1.75 1.75 0 0 1 0 12.25V5.823c0-.621.33-1.196.865-1.51Zm1.011 1.293a.252.252 0 0 0-.252 0l-5.72 3.353L6.468 7.76a2.748 2.748 0 0 1 3.066 0l4.312-2.464-5.719-3.353ZM13.15 12.5 8.772 9.06a1.25 1.25 0 0 0-1.544 0L2.85 12.5Zm1.35-5.85-3.687 2.106 3.687 2.897ZM5.187 8.756 1.5 6.65v5.003Z"
-                />
-              </svg>
-            </button>
             <button
               aria-label="Unsubscribe from thread"
               class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"

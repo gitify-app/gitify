@@ -64,6 +64,7 @@ describe('renderer/utils/api/client.ts', () => {
     it('should list only participating notifications for user', async () => {
       const mockSettings: Partial<SettingsState> = {
         participating: true,
+        fetchReadNotifications: false,
       };
 
       await listNotificationsForAuthenticatedUser(
@@ -72,7 +73,7 @@ describe('renderer/utils/api/client.ts', () => {
       );
 
       expect(axios).toHaveBeenCalledWith({
-        url: 'https://api.github.com/notifications?participating=true',
+        url: 'https://api.github.com/notifications?participating=true&all=false',
         headers: mockNonCachedAuthHeaders,
         method: 'GET',
         data: {},
@@ -82,6 +83,7 @@ describe('renderer/utils/api/client.ts', () => {
     it('should list participating and watching notifications for user', async () => {
       const mockSettings: Partial<SettingsState> = {
         participating: false,
+        fetchReadNotifications: false,
       };
 
       await listNotificationsForAuthenticatedUser(
@@ -90,7 +92,45 @@ describe('renderer/utils/api/client.ts', () => {
       );
 
       expect(axios).toHaveBeenCalledWith({
-        url: 'https://api.github.com/notifications?participating=false',
+        url: 'https://api.github.com/notifications?participating=false&all=false',
+        headers: mockNonCachedAuthHeaders,
+        method: 'GET',
+        data: {},
+      });
+    });
+
+    it('should include all=true when fetchReadNotifications is enabled', async () => {
+      const mockSettings: Partial<SettingsState> = {
+        participating: false,
+        fetchReadNotifications: true,
+      };
+
+      await listNotificationsForAuthenticatedUser(
+        mockGitHubCloudAccount,
+        mockSettings as SettingsState,
+      );
+
+      expect(axios).toHaveBeenCalledWith({
+        url: 'https://api.github.com/notifications?participating=false&all=true',
+        headers: mockNonCachedAuthHeaders,
+        method: 'GET',
+        data: {},
+      });
+    });
+
+    it('should include all=false when fetchReadNotifications is disabled', async () => {
+      const mockSettings: Partial<SettingsState> = {
+        participating: false,
+        fetchReadNotifications: false,
+      };
+
+      await listNotificationsForAuthenticatedUser(
+        mockGitHubCloudAccount,
+        mockSettings as SettingsState,
+      );
+
+      expect(axios).toHaveBeenCalledWith({
+        url: 'https://api.github.com/notifications?participating=false&all=false',
         headers: mockNonCachedAuthHeaders,
         method: 'GET',
         data: {},

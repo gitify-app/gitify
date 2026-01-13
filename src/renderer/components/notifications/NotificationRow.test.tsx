@@ -136,6 +136,32 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       expect(markNotificationsAsDoneMock).toHaveBeenCalledTimes(1);
     });
 
+    it('should mark as done when markAsDoneOnOpen is true even with fetchReadNotifications enabled', async () => {
+      const markNotificationsAsReadMock = jest.fn();
+      const markNotificationsAsDoneMock = jest.fn();
+
+      const props = {
+        notification: mockGitifyNotification,
+        account: mockGitHubCloudAccount,
+      };
+
+      renderWithAppContext(<NotificationRow {...props} />, {
+        settings: {
+          ...mockSettings,
+          markAsDoneOnOpen: true,
+          fetchReadNotifications: true,
+        },
+        markNotificationsAsRead: markNotificationsAsReadMock,
+        markNotificationsAsDone: markNotificationsAsDoneMock,
+      });
+
+      await userEvent.click(screen.getByTestId('notification-row'));
+
+      expect(links.openNotification).toHaveBeenCalledTimes(1);
+      expect(markNotificationsAsDoneMock).toHaveBeenCalledTimes(1);
+      expect(markNotificationsAsReadMock).not.toHaveBeenCalled();
+    });
+
     it('should mark notifications as read', async () => {
       const markNotificationsAsReadMock = jest.fn();
 
@@ -154,6 +180,24 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       expect(markNotificationsAsReadMock).toHaveBeenCalledTimes(1);
     });
 
+    it('should hide mark as read button when notification is already read', async () => {
+      const readNotification = {
+        ...mockGitifyNotification,
+        unread: false,
+      };
+
+      const props = {
+        notification: readNotification,
+        account: mockGitHubCloudAccount,
+      };
+
+      renderWithAppContext(<NotificationRow {...props} />);
+
+      expect(
+        screen.queryByTestId('notification-mark-as-read'),
+      ).not.toBeInTheDocument();
+    });
+
     it('should mark notifications as done', async () => {
       const markNotificationsAsDoneMock = jest.fn();
 
@@ -170,6 +214,42 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       await userEvent.click(screen.getByTestId('notification-mark-as-done'));
 
       expect(markNotificationsAsDoneMock).toHaveBeenCalledTimes(1);
+    });
+
+    it('should hide mark as done button when notification is already read', async () => {
+      const readNotification = {
+        ...mockGitifyNotification,
+        unread: false,
+      };
+
+      const props = {
+        notification: readNotification,
+        account: mockGitHubCloudAccount,
+      };
+
+      renderWithAppContext(<NotificationRow {...props} />);
+
+      expect(
+        screen.queryByTestId('notification-mark-as-done'),
+      ).not.toBeInTheDocument();
+    });
+
+    it('should show mark as done button when fetchReadNotifications is enabled and notification is unread', async () => {
+      const props = {
+        notification: mockGitifyNotification,
+        account: mockGitHubCloudAccount,
+      };
+
+      renderWithAppContext(<NotificationRow {...props} />, {
+        settings: { ...mockSettings, fetchReadNotifications: true },
+      });
+
+      expect(
+        screen.getByTestId('notification-mark-as-done'),
+      ).toBeInTheDocument();
+      expect(
+        screen.getByTestId('notification-mark-as-read'),
+      ).toBeInTheDocument();
     });
 
     it('should unsubscribe from a notification thread', async () => {

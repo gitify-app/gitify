@@ -15,7 +15,7 @@ exports[`renderer/components/metrics/MetricPill.tsx should render with metric 1`
           data-portal-root="true"
         >
           <button
-            aria-describedby="_r_1_"
+            aria-describedby="_r_ID_"
             type="button"
           >
             <span
@@ -61,7 +61,7 @@ exports[`renderer/components/metrics/MetricPill.tsx should render with metric 1`
             aria-hidden="true"
             class="prc-TooltipV2-Tooltip-tLeuB"
             data-direction="s"
-            id="_r_1_"
+            id="_r_ID_"
             popover="auto"
             role="tooltip"
           >
@@ -82,7 +82,7 @@ exports[`renderer/components/metrics/MetricPill.tsx should render with metric 1`
         data-portal-root="true"
       >
         <button
-          aria-describedby="_r_1_"
+          aria-describedby="_r_ID_"
           type="button"
         >
           <span
@@ -128,7 +128,7 @@ exports[`renderer/components/metrics/MetricPill.tsx should render with metric 1`
           aria-hidden="true"
           class="prc-TooltipV2-Tooltip-tLeuB"
           data-direction="s"
-          id="_r_1_"
+          id="_r_ID_"
           popover="auto"
           role="tooltip"
         >
@@ -206,7 +206,7 @@ exports[`renderer/components/metrics/MetricPill.tsx should render without metric
           data-portal-root="true"
         >
           <button
-            aria-describedby="_r_3_"
+            aria-describedby="_r_ID_"
             type="button"
           >
             <span
@@ -247,7 +247,7 @@ exports[`renderer/components/metrics/MetricPill.tsx should render without metric
             aria-hidden="true"
             class="prc-TooltipV2-Tooltip-tLeuB"
             data-direction="s"
-            id="_r_3_"
+            id="_r_ID_"
             popover="auto"
             role="tooltip"
           >
@@ -268,7 +268,7 @@ exports[`renderer/components/metrics/MetricPill.tsx should render without metric
         data-portal-root="true"
       >
         <button
-          aria-describedby="_r_3_"
+          aria-describedby="_r_ID_"
           type="button"
         >
           <span
@@ -309,7 +309,7 @@ exports[`renderer/components/metrics/MetricPill.tsx should render without metric
           aria-hidden="true"
           class="prc-TooltipV2-Tooltip-tLeuB"
           data-direction="s"
-          id="_r_3_"
+          id="_r_ID_"
           popover="auto"
           role="tooltip"
         >

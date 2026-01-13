@@ -2,7 +2,7 @@
 
 exports[`renderer/components/Sidebar.tsx Filter notifications highlight filters sidebar if any are saved 1`] = `
 <button
-  aria-describedby="_r_5s_"
+  aria-describedby="_r_ID_"
   aria-label="Filters"
   class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
   data-component="IconButton"
@@ -34,7 +34,7 @@ exports[`renderer/components/Sidebar.tsx Filter notifications highlight filters 
 
 exports[`renderer/components/Sidebar.tsx notifications icon renders correct icon when there are no notifications 1`] = `
 <button
-  aria-describedby="_r_21_"
+  aria-describedby="_r_ID_"
   aria-label="Notifications"
   class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
   data-component="IconButton"
@@ -66,7 +66,7 @@ exports[`renderer/components/Sidebar.tsx notifications icon renders correct icon
 
 exports[`renderer/components/Sidebar.tsx notifications icon renders correct icon when there are notifications 1`] = `
 <button
-  aria-describedby="_r_2i_"
+  aria-describedby="_r_ID_"
   aria-label="Notifications"
   class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
   data-component="IconButton"
@@ -128,7 +128,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
               data-wrap="nowrap"
             >
               <button
-                aria-describedby="_r_1_"
+                aria-describedby="_r_ID_"
                 aria-label="Gitify"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
@@ -192,7 +192,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
                 role="tooltip"
               >
                 <span
-                  id="_r_1_"
+                  id="_r_ID_"
                 >
                   Home
                   <span
@@ -231,7 +231,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
                 </span>
               </span>
               <button
-                aria-describedby="_r_3_"
+                aria-describedby="_r_ID_"
                 aria-label="Notifications"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
@@ -263,14 +263,14 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
                 aria-hidden="true"
                 class="prc-TooltipV2-Tooltip-tLeuB"
                 data-direction="e"
-                id="_r_3_"
+                id="_r_ID_"
                 popover="auto"
                 role="tooltip"
               >
-                undefined unread notifications ↗
+                0 unread notifications ↗
               </span>
               <button
-                aria-describedby="_r_5_"
+                aria-describedby="_r_ID_"
                 aria-label="Toggle focused mode"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
@@ -306,7 +306,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
                 role="tooltip"
               >
                 <span
-                  id="_r_5_"
+                  id="_r_ID_"
                 >
                   Participating and watching
                   <span
@@ -345,7 +345,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
                 </span>
               </span>
               <button
-                aria-describedby="_r_7_"
+                aria-describedby="_r_ID_"
                 aria-label="Filters"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
@@ -381,7 +381,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
                 role="tooltip"
               >
                 <span
-                  id="_r_7_"
+                  id="_r_ID_"
                 >
                   Filter notifications
                   <span
@@ -420,7 +420,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
                 </span>
               </span>
               <button
-                aria-labelledby="_r_9_"
+                aria-labelledby="_r_ID_"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
                 data-loading="false"
@@ -454,13 +454,13 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
                 aria-hidden="true"
                 class="prc-TooltipV2-Tooltip-tLeuB"
                 data-direction="e"
-                id="_r_9_"
+                id="_r_ID_"
                 popover="auto"
               >
                 My issues ↗
               </span>
               <button
-                aria-labelledby="_r_b_"
+                aria-labelledby="_r_ID_"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
                 data-loading="false"
@@ -491,7 +491,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
                 aria-hidden="true"
                 class="prc-TooltipV2-Tooltip-tLeuB"
                 data-direction="e"
-                id="_r_b_"
+                id="_r_ID_"
                 popover="auto"
               >
                 My pull requests ↗
@@ -507,7 +507,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
               data-wrap="nowrap"
             >
               <button
-                aria-describedby="_r_d_"
+                aria-describedby="_r_ID_"
                 aria-label="Refresh"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
@@ -543,7 +543,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
                 role="tooltip"
               >
                 <span
-                  id="_r_d_"
+                  id="_r_ID_"
                 >
                   Refresh notifications
                   <span
@@ -582,7 +582,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
                 </span>
               </span>
               <button
-                aria-describedby="_r_f_"
+                aria-describedby="_r_ID_"
                 aria-label="Settings"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
@@ -618,7 +618,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
                 role="tooltip"
               >
                 <span
-                  id="_r_f_"
+                  id="_r_ID_"
                 >
                   Settings
                   <span
@@ -690,7 +690,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
             data-wrap="nowrap"
           >
             <button
-              aria-describedby="_r_1_"
+              aria-describedby="_r_ID_"
               aria-label="Gitify"
               class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
               data-component="IconButton"
@@ -754,7 +754,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
               role="tooltip"
             >
               <span
-                id="_r_1_"
+                id="_r_ID_"
               >
                 Home
                 <span
@@ -793,7 +793,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
               </span>
             </span>
             <button
-              aria-describedby="_r_3_"
+              aria-describedby="_r_ID_"
               aria-label="Notifications"
               class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
               data-component="IconButton"
@@ -825,14 +825,14 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
               data-direction="e"
-              id="_r_3_"
+              id="_r_ID_"
               popover="auto"
               role="tooltip"
             >
-              undefined unread notifications ↗
+              0 unread notifications ↗
             </span>
             <button
-              aria-describedby="_r_5_"
+              aria-describedby="_r_ID_"
               aria-label="Toggle focused mode"
               class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
               data-component="IconButton"
@@ -868,7 +868,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
               role="tooltip"
             >
               <span
-                id="_r_5_"
+                id="_r_ID_"
               >
                 Participating and watching
                 <span
@@ -907,7 +907,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
               </span>
             </span>
             <button
-              aria-describedby="_r_7_"
+              aria-describedby="_r_ID_"
               aria-label="Filters"
               class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
               data-component="IconButton"
@@ -943,7 +943,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
               role="tooltip"
             >
               <span
-                id="_r_7_"
+                id="_r_ID_"
               >
                 Filter notifications
                 <span
@@ -982,7 +982,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
               </span>
             </span>
             <button
-              aria-labelledby="_r_9_"
+              aria-labelledby="_r_ID_"
               class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
               data-component="IconButton"
               data-loading="false"
@@ -1016,13 +1016,13 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
               data-direction="e"
-              id="_r_9_"
+              id="_r_ID_"
               popover="auto"
             >
               My issues ↗
             </span>
             <button
-              aria-labelledby="_r_b_"
+              aria-labelledby="_r_ID_"
               class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
               data-component="IconButton"
               data-loading="false"
@@ -1053,7 +1053,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
               data-direction="e"
-              id="_r_b_"
+              id="_r_ID_"
               popover="auto"
             >
               My pull requests ↗
@@ -1069,7 +1069,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
             data-wrap="nowrap"
           >
             <button
-              aria-describedby="_r_d_"
+              aria-describedby="_r_ID_"
               aria-label="Refresh"
               class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
               data-component="IconButton"
@@ -1105,7 +1105,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
               role="tooltip"
             >
               <span
-                id="_r_d_"
+                id="_r_ID_"
               >
                 Refresh notifications
                 <span
@@ -1144,7 +1144,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
               </span>
             </span>
             <button
-              aria-describedby="_r_f_"
+              aria-describedby="_r_ID_"
               aria-label="Settings"
               class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
               data-component="IconButton"
@@ -1180,7 +1180,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
               role="tooltip"
             >
               <span
-                id="_r_f_"
+                id="_r_ID_"
               >
                 Settings
                 <span
@@ -1309,7 +1309,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
               data-wrap="nowrap"
             >
               <button
-                aria-describedby="_r_i_"
+                aria-describedby="_r_ID_"
                 aria-label="Gitify"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
@@ -1373,7 +1373,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
                 role="tooltip"
               >
                 <span
-                  id="_r_i_"
+                  id="_r_ID_"
                 >
                   Home
                   <span
@@ -1412,7 +1412,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
                 </span>
               </span>
               <button
-                aria-describedby="_r_k_"
+                aria-describedby="_r_ID_"
                 aria-label="Notifications"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
@@ -1444,14 +1444,14 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
                 aria-hidden="true"
                 class="prc-TooltipV2-Tooltip-tLeuB"
                 data-direction="e"
-                id="_r_k_"
+                id="_r_ID_"
                 popover="auto"
                 role="tooltip"
               >
-                undefined unread notifications ↗
+                0 unread notifications ↗
               </span>
               <button
-                aria-labelledby="_r_m_"
+                aria-labelledby="_r_ID_"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
                 data-loading="false"
@@ -1485,13 +1485,13 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
                 aria-hidden="true"
                 class="prc-TooltipV2-Tooltip-tLeuB"
                 data-direction="e"
-                id="_r_m_"
+                id="_r_ID_"
                 popover="auto"
               >
                 My issues ↗
               </span>
               <button
-                aria-labelledby="_r_o_"
+                aria-labelledby="_r_ID_"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
                 data-loading="false"
@@ -1522,7 +1522,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
                 aria-hidden="true"
                 class="prc-TooltipV2-Tooltip-tLeuB"
                 data-direction="e"
-                id="_r_o_"
+                id="_r_ID_"
                 popover="auto"
               >
                 My pull requests ↗
@@ -1538,7 +1538,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
               data-wrap="nowrap"
             >
               <button
-                aria-labelledby="_r_q_"
+                aria-labelledby="_r_ID_"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
                 data-loading="false"
@@ -1569,7 +1569,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
                 aria-hidden="true"
                 class="prc-TooltipV2-Tooltip-tLeuB"
                 data-direction="e"
-                id="_r_q_"
+                id="_r_ID_"
                 popover="auto"
               >
                 Quit Gitify
@@ -1608,7 +1608,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
             data-wrap="nowrap"
           >
             <button
-              aria-describedby="_r_i_"
+              aria-describedby="_r_ID_"
               aria-label="Gitify"
               class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
               data-component="IconButton"
@@ -1672,7 +1672,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
               role="tooltip"
             >
               <span
-                id="_r_i_"
+                id="_r_ID_"
               >
                 Home
                 <span
@@ -1711,7 +1711,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
               </span>
             </span>
             <button
-              aria-describedby="_r_k_"
+              aria-describedby="_r_ID_"
               aria-label="Notifications"
               class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
               data-component="IconButton"
@@ -1743,14 +1743,14 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
               data-direction="e"
-              id="_r_k_"
+              id="_r_ID_"
               popover="auto"
               role="tooltip"
             >
-              undefined unread notifications ↗
+              0 unread notifications ↗
             </span>
             <button
-              aria-labelledby="_r_m_"
+              aria-labelledby="_r_ID_"
               class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
               data-component="IconButton"
               data-loading="false"
@@ -1784,13 +1784,13 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
               data-direction="e"
-              id="_r_m_"
+              id="_r_ID_"
               popover="auto"
             >
               My issues ↗
             </span>
             <button
-              aria-labelledby="_r_o_"
+              aria-labelledby="_r_ID_"
               class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
               data-component="IconButton"
               data-loading="false"
@@ -1821,7 +1821,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
               data-direction="e"
-              id="_r_o_"
+              id="_r_ID_"
               popover="auto"
             >
               My pull requests ↗
@@ -1837,7 +1837,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
             data-wrap="nowrap"
           >
             <button
-              aria-labelledby="_r_q_"
+              aria-labelledby="_r_ID_"
               class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
               data-component="IconButton"
               data-loading="false"
@@ -1868,7 +1868,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
               data-direction="e"
-              id="_r_q_"
+              id="_r_ID_"
               popover="auto"
             >
               Quit Gitify
