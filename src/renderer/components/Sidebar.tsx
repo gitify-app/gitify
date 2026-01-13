@@ -32,18 +32,13 @@ import { hasActiveFilters } from '../utils/notifications/filters/filter';
 import { LogoIcon } from './icons/LogoIcon';
 
 export const Sidebar: FC = () => {
-  // const navigate = useNavigate();
-  // const location = useLocation();
-
   const {
-    // fetchNotifications,
+    status,
     isLoggedIn,
-    isLoadingState,
     settings,
     auth,
     notificationCount,
     hasUnreadNotifications,
-    // updateSetting,
   } = useAppContext();
 
   const primaryAccountHostname = getPrimaryAccountHostname(auth);
@@ -148,13 +143,13 @@ export const Sidebar: FC = () => {
           <>
             <IconButton
               aria-label="Refresh"
-              className={isLoadingState ? 'animate-spin' : ''}
+              className={status === 'loading' ? 'animate-spin' : ''}
               data-testid="sidebar-refresh"
               description="Refresh notifications"
               disabled={!enabled.refresh}
               icon={SyncIcon}
               keybindingHint={hotkeys.refresh}
-              // loading={isLoadingState}
+              // loading={status === 'loading'}
               onClick={() => actions.refresh()}
               size="small"
               tooltipDirection="e"

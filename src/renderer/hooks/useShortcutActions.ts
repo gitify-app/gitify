@@ -28,16 +28,12 @@ export function useShortcutActions(): {
 } {
   const navigate = useNavigate();
   const location = useLocation();
-  const {
-    fetchNotifications,
-    isLoggedIn,
-    isLoadingState,
-    settings,
-    updateSetting,
-  } = useAppContext();
+  const { fetchNotifications, isLoggedIn, status, settings, updateSetting } =
+    useAppContext();
 
   const isOnFiltersRoute = location.pathname.startsWith('/filters');
   const isOnSettingsRoute = location.pathname.startsWith('/settings');
+  const isLoading = status === 'loading';
 
   const actions: ShortcutActions = useMemo(() => {
     return {
@@ -52,7 +48,7 @@ export function useShortcutActions(): {
         }
       },
       refresh: () => {
-        if (isLoadingState) {
+        if (isLoading) {
           return;
         }
         navigate('/', { replace: true });
@@ -71,7 +67,7 @@ export function useShortcutActions(): {
     };
   }, [
     settings.participating,
-    isLoadingState,
+    isLoading,
     isOnSettingsRoute,
     isOnFiltersRoute,
     fetchNotifications,
@@ -81,14 +77,14 @@ export function useShortcutActions(): {
   const enabled: ShortcutEnabled = useMemo(() => {
     return {
       home: true,
-      focusedMode: !isLoadingState,
+      focusedMode: !isLoading,
       filters: isLoggedIn,
-      refresh: !isLoadingState,
+      refresh: !isLoading,
       settings: isLoggedIn,
       accounts: isLoggedIn && isOnSettingsRoute,
       quit: !isLoggedIn || isOnSettingsRoute,
     };
-  }, [isLoggedIn, isOnSettingsRoute, isLoadingState]);
+  }, [isLoggedIn, isOnSettingsRoute, isLoading]);
 
   const hotkeys: ShortcutHotkeys = {
     home: 'h',
