@@ -31,6 +31,8 @@ import { getNewNotifications } from '../utils/notifications/utils';
 
 interface NotificationsState {
   status: Status;
+  isLoadingState: boolean;
+  isErrorState: boolean;
   globalError: GitifyError;
 
   notifications: AccountNotifications[];
@@ -59,6 +61,8 @@ interface NotificationsState {
 export const useNotifications = (): NotificationsState => {
   const [status, setStatus] = useState<Status>('success');
   const [globalError, setGlobalError] = useState<GitifyError>();
+  const isLoadingState = status === 'loading';
+  const isErrorState = status === 'error';
 
   const [notifications, setNotifications] = useState<AccountNotifications[]>(
     [],
@@ -243,6 +247,8 @@ export const useNotifications = (): NotificationsState => {
 
   return {
     status,
+    isLoadingState,
+    isErrorState,
     globalError,
 
     notifications,

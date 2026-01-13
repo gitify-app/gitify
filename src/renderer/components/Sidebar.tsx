@@ -1,5 +1,8 @@
-import { type FC, useCallback, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import type { FC } from 'react';
+
+// import { useLocation, useNavigate } from 'react-router-dom';
+
+// import { useLocation, useNavigate } from 'react-router-dom';
 
 import {
   BellIcon,
@@ -17,6 +20,7 @@ import { IconButton, Stack } from '@primer/react';
 import { APPLICATION } from '../../shared/constants';
 
 import { useAppContext } from '../context/App';
+import { useShortcutActions } from '../hooks/useShortcutActions';
 import { getPrimaryAccountHostname } from '../utils/auth/utils';
 import { quitApp } from '../utils/comms';
 import {
@@ -28,129 +32,23 @@ import { hasActiveFilters } from '../utils/notifications/filters/filter';
 import { LogoIcon } from './icons/LogoIcon';
 
 export const Sidebar: FC = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
+  // const navigate = useNavigate();
+  // const location = useLocation();
 
   const {
-    fetchNotifications,
+    // fetchNotifications,
     isLoggedIn,
-    status,
+    isLoadingState,
     settings,
     auth,
     notificationCount,
     hasUnreadNotifications,
-    updateSetting,
+    // updateSetting,
   } = useAppContext();
 
   const primaryAccountHostname = getPrimaryAccountHostname(auth);
 
-  const goHome = useCallback(() => {
-    navigate('/', { replace: true });
-  }, []);
-
-  const toggleFocusMode = useCallback(() => {
-    updateSetting('participating', !settings.participating);
-  }, [settings.participating, updateSetting]);
-
-  const toggleFilters = useCallback(() => {
-    if (location.pathname.startsWith('/filters')) {
-      navigate('/', { replace: true });
-    } else {
-      navigate('/filters');
-    }
-  }, [location.pathname]);
-
-  const toggleSettings = useCallback(() => {
-    if (location.pathname.startsWith('/settings')) {
-      navigate('/', { replace: true });
-      fetchNotifications();
-    } else {
-      navigate('/settings');
-    }
-  }, [location.pathname, fetchNotifications]);
-
-  const refreshNotifications = useCallback(() => {
-    goHome();
-    fetchNotifications();
-  }, [goHome, fetchNotifications]);
-
-  type ShortcutConfig = {
-    hotkey: string;
-    action: () => void;
-    enabled?: boolean;
-  };
-
-  type ShortcutName =
-    | 'home'
-    | 'refresh'
-    | 'settings'
-    | 'filters'
-    | 'focusedMode';
-
-  const shortcuts: Record<ShortcutName, ShortcutConfig> = {
-    home: {
-      hotkey: 'h',
-      action: goHome,
-      enabled: true,
-    },
-    focusedMode: {
-      hotkey: 'w',
-      action: toggleFocusMode,
-      enabled: status !== 'loading',
-    },
-    filters: {
-      hotkey: 'f',
-      action: toggleFilters,
-      enabled: isLoggedIn,
-    },
-    refresh: {
-      hotkey: 'r',
-      action: refreshNotifications,
-      enabled: status !== 'loading',
-    },
-    settings: {
-      hotkey: 's',
-      action: toggleSettings,
-      enabled: isLoggedIn,
-    },
-  };
-
-  useEffect(() => {
-    const sidebarShortcutHandler = (event: KeyboardEvent) => {
-      // Ignore if user is typing in an input, textarea, or with modifiers
-      if (
-        event.target instanceof HTMLInputElement ||
-        event.target instanceof HTMLTextAreaElement ||
-        event.metaKey ||
-        event.ctrlKey ||
-        event.altKey
-      ) {
-        return;
-      }
-
-      const key = event.key.toLowerCase();
-      const shortcut = Object.values(shortcuts).find((s) => s.hotkey === key);
-
-      if (shortcut && shortcut.enabled !== false) {
-        event.preventDefault();
-        shortcut.action();
-      }
-    };
-
-    document.addEventListener('keydown', sidebarShortcutHandler);
-
-    return () => {
-      document.removeEventListener('keydown', sidebarShortcutHandler);
-    };
-  }, [
-    goHome,
-    toggleSettings,
-    toggleFilters,
-    refreshNotifications,
-    toggleFocusMode,
-    isLoggedIn,
-    status,
-  ]);
+  const { actions, hotkeys, enabled } = useShortcutActions();
 
   return (
     <Stack
@@ -169,8 +67,8 @@ export const Sidebar: FC = () => {
           data-testid="sidebar-home"
           description="Home"
           icon={LogoIcon}
-          keybindingHint={shortcuts.home.hotkey}
-          onClick={() => shortcuts.home.action()}
+          keybindingHint={hotkeys.home}
+          onClick={() => actions.home()}
           size="small"
           tooltipDirection="e"
           variant="invisible"
@@ -198,8 +96,8 @@ export const Sidebar: FC = () => {
                   : 'Participating and watching'
               }
               icon={settings.participating ? CrosshairsIcon : EyeIcon}
-              keybindingHint={shortcuts.focusedMode.hotkey}
-              onClick={() => shortcuts.focusedMode.action()}
+              keybindingHint={hotkeys.focusedMode}
+              onClick={() => actions.focusedMode()}
               size="small"
               tooltipDirection="e"
               variant={settings.participating ? 'primary' : 'invisible'}
@@ -210,8 +108,8 @@ export const Sidebar: FC = () => {
               data-testid="sidebar-filter-notifications"
               description="Filter notifications"
               icon={FilterIcon}
-              keybindingHint={shortcuts.filters.hotkey}
-              onClick={() => shortcuts.filters.action()}
+              keybindingHint={hotkeys.filters}
+              onClick={() => actions.filters()}
               size="small"
               tooltipDirection="e"
               variant={hasActiveFilters(settings) ? 'primary' : 'invisible'}
@@ -250,14 +148,14 @@ export const Sidebar: FC = () => {
           <>
             <IconButton
               aria-label="Refresh"
-              className={status === 'loading' ? 'animate-spin' : ''}
+              className={isLoadingState ? 'animate-spin' : ''}
               data-testid="sidebar-refresh"
               description="Refresh notifications"
-              disabled={status === 'loading'}
+              disabled={!enabled.refresh}
               icon={SyncIcon}
-              keybindingHint={shortcuts.refresh.hotkey}
-              // loading={status === 'loading'}
-              onClick={() => shortcuts.refresh.action()}
+              keybindingHint={hotkeys.refresh}
+              // loading={isLoadingState}
+              onClick={() => actions.refresh()}
               size="small"
               tooltipDirection="e"
               variant="invisible"
@@ -268,8 +166,8 @@ export const Sidebar: FC = () => {
               data-testid="sidebar-settings"
               description="Settings"
               icon={GearIcon}
-              keybindingHint={shortcuts.settings.hotkey}
-              onClick={() => shortcuts.settings.action()}
+              keybindingHint={hotkeys.settings}
+              onClick={() => actions.settings()}
               size="small"
               tooltipDirection="e"
               variant="invisible"
@@ -282,6 +180,7 @@ export const Sidebar: FC = () => {
             aria-label={`Quit ${APPLICATION.NAME}`}
             data-testid="sidebar-quit"
             icon={XCircleIcon}
+            keybindingHint={hotkeys.quit}
             onClick={() => quitApp()}
             size="small"
             tooltipDirection="e"

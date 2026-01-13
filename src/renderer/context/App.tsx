@@ -80,6 +80,8 @@ export interface AppContextState {
   logoutFromAccount: (account: Account) => Promise<void>;
 
   status: Status;
+  isLoadingState: boolean;
+  isErrorState: boolean;
   globalError: GitifyError;
 
   notifications: AccountNotifications[];
@@ -146,6 +148,8 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
   const {
     status,
+    isLoadingState,
+    isErrorState,
     globalError,
 
     notifications,
@@ -304,7 +308,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     setUseUnreadActiveIcon(settings.useUnreadActiveIcon);
     setUseAlternateIdleIcon(settings.useAlternateIdleIcon);
 
-    const trayCount = status === 'error' ? -1 : notificationCount;
+    const trayCount = isErrorState ? -1 : notificationCount;
     setTrayIconColorAndTitle(trayCount, settings);
   }, [
     settings.showNotificationsCountInTray,
@@ -488,6 +492,8 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       logoutFromAccount,
 
       status,
+      isLoadingState,
+      isErrorState,
       globalError,
 
       notifications,

@@ -8,6 +8,7 @@ import {
 
 import { BaseStyles, ThemeProvider } from '@primer/react';
 
+import { GlobalShortcuts } from './components/GlobalShortcuts';
 import { AppLayout } from './components/layout/AppLayout';
 import { AppProvider, useAppContext } from './context/App';
 import { AccountsRoute } from './routes/Accounts';
@@ -37,6 +38,7 @@ export const App = () => {
       <BaseStyles>
         <AppProvider>
           <Router>
+            <GlobalShortcuts />
             <AppLayout>
               <Routes>
                 <Route

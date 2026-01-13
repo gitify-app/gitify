@@ -9,8 +9,13 @@ import { useAppContext } from '../context/App';
 import { getAccountUUID } from '../utils/auth/utils';
 
 export const NotificationsRoute: FC = () => {
-  const { notifications, status, globalError, settings, hasNotifications } =
-    useAppContext();
+  const {
+    notifications,
+    isErrorState,
+    globalError,
+    settings,
+    hasNotifications,
+  } = useAppContext();
 
   const hasMultipleAccounts = useMemo(
     () => notifications.length > 1,
@@ -22,7 +27,7 @@ export const NotificationsRoute: FC = () => {
     [notifications],
   );
 
-  if (status === 'error') {
+  if (isErrorState) {
     return <Oops error={globalError} />;
   }
 

@@ -1569,10 +1569,46 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
                 aria-hidden="true"
                 class="prc-TooltipV2-Tooltip-tLeuB"
                 data-direction="e"
-                id="_r_ID_"
                 popover="auto"
               >
-                Quit Gitify
+                <span
+                  id="_r_ID_"
+                >
+                  Quit Gitify
+                  <span
+                    class="prc-src-InternalVisuallyHidden-2YaI6"
+                  >
+                    (
+                    q
+                    )
+                  </span>
+                </span>
+                <span
+                  aria-hidden="true"
+                  class="prc-TooltipV2-KeybindingHintContainer-Ymj-3 prc-TooltipV2-HasTextBefore-fdOXj"
+                >
+                  <kbd
+                    class="prc-KeybindingHint-KeybindingHint-qpYIs prc-Text-Text-9mHv3"
+                    data-testid="keybinding-hint"
+                  >
+                    <span
+                      class="prc-components-Chord-DdhWN prc-components-ChordOnEmphasis-O-4BS prc-components-ChordSmall-c-P-x prc-Text-Text-9mHv3"
+                      data-kbd-chord="true"
+                    >
+                       
+                      <span
+                        class="prc-src-InternalVisuallyHidden-2YaI6"
+                      >
+                        q
+                      </span>
+                      <span
+                        aria-hidden="true"
+                      >
+                        Q
+                      </span>
+                    </span>
+                  </kbd>
+                </span>
               </span>
             </div>
           </div>
@@ -1868,10 +1904,46 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
               data-direction="e"
-              id="_r_ID_"
               popover="auto"
             >
-              Quit Gitify
+              <span
+                id="_r_ID_"
+              >
+                Quit Gitify
+                <span
+                  class="prc-src-InternalVisuallyHidden-2YaI6"
+                >
+                  (
+                  q
+                  )
+                </span>
+              </span>
+              <span
+                aria-hidden="true"
+                class="prc-TooltipV2-KeybindingHintContainer-Ymj-3 prc-TooltipV2-HasTextBefore-fdOXj"
+              >
+                <kbd
+                  class="prc-KeybindingHint-KeybindingHint-qpYIs prc-Text-Text-9mHv3"
+                  data-testid="keybinding-hint"
+                >
+                  <span
+                    class="prc-components-Chord-DdhWN prc-components-ChordOnEmphasis-O-4BS prc-components-ChordSmall-c-P-x prc-Text-Text-9mHv3"
+                    data-kbd-chord="true"
+                  >
+                     
+                    <span
+                      class="prc-src-InternalVisuallyHidden-2YaI6"
+                    >
+                      q
+                    </span>
+                    <span
+                      aria-hidden="true"
+                    >
+                      Q
+                    </span>
+                  </span>
+                </kbd>
+              </span>
             </span>
           </div>
         </div>

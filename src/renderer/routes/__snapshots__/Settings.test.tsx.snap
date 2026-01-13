@@ -2068,11 +2068,47 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           aria-hidden="true"
           class="prc-TooltipV2-Tooltip-tLeuB"
           data-direction="n"
-          id="_r_ID_"
           popover="auto"
           role="tooltip"
         >
-          Accounts
+          <span
+            id="_r_ID_"
+          >
+            Accounts
+            <span
+              class="prc-src-InternalVisuallyHidden-2YaI6"
+            >
+              (
+              a
+              )
+            </span>
+          </span>
+          <span
+            aria-hidden="true"
+            class="prc-TooltipV2-KeybindingHintContainer-Ymj-3 prc-TooltipV2-HasTextBefore-fdOXj"
+          >
+            <kbd
+              class="prc-KeybindingHint-KeybindingHint-qpYIs prc-Text-Text-9mHv3"
+              data-testid="keybinding-hint"
+            >
+              <span
+                class="prc-components-Chord-DdhWN prc-components-ChordOnEmphasis-O-4BS prc-components-ChordSmall-c-P-x prc-Text-Text-9mHv3"
+                data-kbd-chord="true"
+              >
+                 
+                <span
+                  class="prc-src-InternalVisuallyHidden-2YaI6"
+                >
+                  a
+                </span>
+                <span
+                  aria-hidden="true"
+                >
+                  A
+                </span>
+              </span>
+            </kbd>
+          </span>
         </span>
         <button
           aria-describedby="_r_ID_"
@@ -2107,11 +2143,47 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           aria-hidden="true"
           class="prc-TooltipV2-Tooltip-tLeuB"
           data-direction="nw"
-          id="_r_ID_"
           popover="auto"
           role="tooltip"
         >
-          Quit Gitify
+          <span
+            id="_r_ID_"
+          >
+            Quit Gitify
+            <span
+              class="prc-src-InternalVisuallyHidden-2YaI6"
+            >
+              (
+              q
+              )
+            </span>
+          </span>
+          <span
+            aria-hidden="true"
+            class="prc-TooltipV2-KeybindingHintContainer-Ymj-3 prc-TooltipV2-HasTextBefore-fdOXj"
+          >
+            <kbd
+              class="prc-KeybindingHint-KeybindingHint-qpYIs prc-Text-Text-9mHv3"
+              data-testid="keybinding-hint"
+            >
+              <span
+                class="prc-components-Chord-DdhWN prc-components-ChordOnEmphasis-O-4BS prc-components-ChordSmall-c-P-x prc-Text-Text-9mHv3"
+                data-kbd-chord="true"
+              >
+                 
+                <span
+                  class="prc-src-InternalVisuallyHidden-2YaI6"
+                >
+                  q
+                </span>
+                <span
+                  aria-hidden="true"
+                >
+                  Q
+                </span>
+              </span>
+            </kbd>
+          </span>
         </span>
       </div>
     </div>
