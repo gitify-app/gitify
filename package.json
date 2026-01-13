@@ -146,7 +146,7 @@
     ]
   },
   "lint-staged": {
-    "*": "biome check --fix --no-errors-on-unmatched",
+    "*": "biome check --no-errors-on-unmatched",
     "*.{js,ts,tsx}": "pnpm test --findRelatedTests --passWithNoTests --updateSnapshot"
   }
 }
