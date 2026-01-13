@@ -9,6 +9,7 @@ import { cn } from '../../utils/cn';
 import { isMarkAsDoneFeatureSupported } from '../../utils/features';
 import { getChevronDetails } from '../../utils/helpers';
 import { openRepository } from '../../utils/links';
+import { shouldRemoveNotificationsFromState } from '../../utils/notifications/remove';
 import { AvatarWithFallback } from '../avatars/AvatarWithFallback';
 import { HoverButton } from '../primitives/HoverButton';
 import { HoverGroup } from '../primitives/HoverGroup';
@@ -30,18 +31,15 @@ export const RepositoryNotifications: FC<RepositoryNotificationsProps> = ({
     useState(true);
 
   const avatarUrl = repoNotifications[0].repository.owner.avatarUrl;
+  const shouldAnimateExit = shouldRemoveNotificationsFromState(settings);
 
   const actionMarkAsDone = () => {
-    setAnimateExit(!settings.delayNotificationState);
+    setAnimateExit(shouldAnimateExit);
     markNotificationsAsDone(repoNotifications);
   };
 
   const actionMarkAsRead = () => {
-    // Don't animate exit when fetchReadNotifications is enabled
-    // as the notifications will stay in the list with reduced opacity
-    if (!settings.fetchReadNotifications) {
-      setAnimateExit(!settings.delayNotificationState);
-    }
+    setAnimateExit(shouldAnimateExit);
     markNotificationsAsRead(repoNotifications);
   };
 
@@ -107,7 +105,7 @@ export const RepositoryNotifications: FC<RepositoryNotificationsProps> = ({
               action={actionMarkAsDone}
               enabled={
                 isMarkAsDoneFeatureSupported(repoNotifications[0].account) &&
-                !settings.fetchReadNotifications
+                !areAllRepoNotificationsRead
               }
               icon={CheckIcon}
               label="Mark repository as done"

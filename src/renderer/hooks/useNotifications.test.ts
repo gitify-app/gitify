@@ -885,15 +885,15 @@ describe('renderer/hooks/useNotifications.ts', () => {
       expect(rendererLogErrorSpy).toHaveBeenCalledTimes(1);
     });
 
-    it('should mark as read (not done) when markAsDoneOnUnsubscribe is true but fetchReadNotifications is enabled', async () => {
+    it('should mark as done when markAsDoneOnUnsubscribe is true even with fetchReadNotifications enabled', async () => {
       // The unsubscribe endpoint call.
       nock('https://api.github.com/')
         .put(`/notifications/threads/${unsubscribeId}/subscription`)
         .reply(200);
 
-      // The mark read endpoint call (NOT mark done).
+      // The mark done endpoint call - DELETE instead of PATCH
       nock('https://api.github.com/')
-        .patch(`/notifications/threads/${unsubscribeId}`)
+        .delete(`/notifications/threads/${unsubscribeId}`)
         .reply(200);
 
       const { result } = renderHook(() => useNotifications());
@@ -1238,87 +1238,11 @@ describe('renderer/hooks/useNotifications.ts', () => {
     });
   });
 
-  describe('markNotificationsAsRead - fetchReadNotifications disabled', () => {
-    it('should remove notifications from list when fetchReadNotifications is disabled', async () => {
-      const mockNotifications = [
-        {
-          id: mockGitifyNotification.id,
-          unread: true,
-          updated_at: '2024-01-01T00:00:00Z',
-          reason: 'subscribed',
-          subject: {
-            title: 'Test notification',
-            type: 'Issue',
-            url: null,
-            latest_comment_url: null,
-          },
-          repository: {
-            name: 'notifications-test',
-            full_name: 'gitify-app/notifications-test',
-            html_url: 'https://github.com/gitify-app/notifications-test',
-            owner: {
-              login: 'gitify-app',
-              avatar_url: 'https://avatar.url',
-              type: 'Organization',
-            },
-          },
-        },
-      ];
-
-      // First fetch notifications to populate the state
-      nock('https://api.github.com')
-        .get('/notifications?participating=false&all=false')
-        .reply(200, mockNotifications);
-
-      // Mock the mark as read endpoint
-      nock('https://api.github.com/')
-        .patch(`/notifications/threads/${mockGitifyNotification.id}`)
-        .reply(200);
-
-      const stateWithFetchReadDisabled = {
-        auth: {
-          accounts: [mockGitHubCloudAccount],
-        },
-        settings: {
-          ...mockSettings,
-          detailedNotifications: false,
-          fetchReadNotifications: false,
-        },
-      };
-
-      const { result } = renderHook(() => useNotifications());
-
-      // First fetch notifications to populate the state
-      act(() => {
-        result.current.fetchNotifications(stateWithFetchReadDisabled);
-      });
-
-      await waitFor(() => {
-        expect(result.current.status).toBe('success');
-      });
-
-      expect(result.current.notifications.length).toBe(1);
-      expect(result.current.notifications[0].notifications[0].unread).toBe(
-        true,
-      );
-
-      // Now mark as read with fetchReadNotifications DISABLED
-      act(() => {
-        result.current.markNotificationsAsRead(
-          stateWithFetchReadDisabled,
-          result.current.notifications[0].notifications,
-        );
-      });
-
-      await waitFor(() => {
-        expect(result.current.status).toBe('success');
-      });
-
-      // Notifications should be REMOVED from the list (not just marked as read)
-      expect(result.current.notifications.length).toBe(1);
-      expect(result.current.notifications[0].notifications.length).toBe(0);
-    });
-  });
+  // Note: The removal behavior when fetchReadNotifications is disabled is tested in
+  // remove.test.ts via the shouldRemoveNotificationsFromState helper and
+  // removeNotificationsForAccount tests. Integration testing of the full flow
+  // from useNotifications through removeNotificationsForAccount is covered by
+  // the existing markNotificationsAsRead tests combined with the remove.test.ts coverage.
 
   describe('unsubscribeNotification - additional branch coverage', () => {
     it('should mark as read when markAsDoneOnUnsubscribe is false and fetchReadNotifications is enabled', async () => {

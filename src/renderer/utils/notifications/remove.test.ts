@@ -4,9 +4,51 @@ import {
   mockSingleAccountNotifications,
 } from '../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../__mocks__/state-mocks';
-import { removeNotificationsForAccount } from './remove';
+import {
+  removeNotificationsForAccount,
+  shouldRemoveNotificationsFromState,
+} from './remove';
 
 describe('renderer/utils/remove.ts', () => {
+  describe('shouldRemoveNotificationsFromState', () => {
+    it('should return true when both delayNotificationState and fetchReadNotifications are false', () => {
+      const settings = {
+        ...mockSettings,
+        delayNotificationState: false,
+        fetchReadNotifications: false,
+      };
+      expect(shouldRemoveNotificationsFromState(settings)).toBe(true);
+    });
+
+    it('should return false when delayNotificationState is true', () => {
+      const settings = {
+        ...mockSettings,
+        delayNotificationState: true,
+        fetchReadNotifications: false,
+      };
+      expect(shouldRemoveNotificationsFromState(settings)).toBe(false);
+    });
+
+    it('should return false when fetchReadNotifications is true', () => {
+      const settings = {
+        ...mockSettings,
+        delayNotificationState: false,
+        fetchReadNotifications: true,
+      };
+      expect(shouldRemoveNotificationsFromState(settings)).toBe(false);
+    });
+
+    it('should return false when both are true', () => {
+      const settings = {
+        ...mockSettings,
+        delayNotificationState: true,
+        fetchReadNotifications: true,
+      };
+      expect(shouldRemoveNotificationsFromState(settings)).toBe(false);
+    });
+  });
+
+  describe('removeNotificationsForAccount', () => {
   it('should remove a notification if it exists', () => {
     expect(mockSingleAccountNotifications[0].notifications.length).toBe(1);
 
@@ -81,5 +123,33 @@ describe('renderer/utils/remove.ts', () => {
     expect(result[0].notifications[0]).toBe(
       mockSingleAccountNotifications[0].notifications[0],
     );
+  });
+
+  it('should mark as read and skip removal when fetchReadNotifications is enabled', () => {
+    expect(mockSingleAccountNotifications[0].notifications.length).toBe(1);
+
+    const result = removeNotificationsForAccount(
+      mockSingleAccountNotifications[0].account,
+      { ...mockSettings, fetchReadNotifications: true },
+      [mockGitifyNotification],
+      mockSingleAccountNotifications,
+    );
+
+    expect(result[0].notifications.length).toBe(1);
+    expect(result[0].notifications[0].unread).toBe(false);
+  });
+
+  it('should remove notifications when fetchReadNotifications is disabled', () => {
+    expect(mockSingleAccountNotifications[0].notifications.length).toBe(1);
+
+    const result = removeNotificationsForAccount(
+      mockSingleAccountNotifications[0].account,
+      { ...mockSettings, fetchReadNotifications: false },
+      [mockGitifyNotification],
+      mockSingleAccountNotifications,
+    );
+
+    expect(result[0].notifications.length).toBe(0);
+  });
   });
 });

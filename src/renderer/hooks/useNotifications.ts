@@ -13,7 +13,6 @@ import {
   markNotificationThreadAsDone,
   markNotificationThreadAsRead,
 } from '../utils/api/client';
-import { getAccountUUID } from '../utils/auth/utils';
 import {
   areAllAccountErrorsSame,
   doesAllAccountsHaveErrors,
@@ -151,29 +150,12 @@ export const useNotifications = (): NotificationsState => {
           ),
         );
 
-        // When fetchReadNotifications is enabled, keep notifications in list
-        // but mark them as read locally (they'll show with reduced opacity)
-        const updatedNotifications = state.settings.fetchReadNotifications
-          ? notifications.map((accountNotifications) =>
-              getAccountUUID(accountNotifications.account) ===
-              getAccountUUID(readNotifications[0].account)
-                ? {
-                    ...accountNotifications,
-                    notifications: accountNotifications.notifications.map(
-                      (n) =>
-                        readNotifications.some((rn) => rn.id === n.id)
-                          ? { ...n, unread: false }
-                          : n,
-                    ),
-                  }
-                : accountNotifications,
-            )
-          : removeNotificationsForAccount(
-              readNotifications[0].account,
-              state.settings,
-              readNotifications,
-              notifications,
-            );
+        const updatedNotifications = removeNotificationsForAccount(
+          readNotifications[0].account,
+          state.settings,
+          readNotifications,
+          notifications,
+        );
 
         setNotifications(updatedNotifications);
       } catch (err) {
@@ -240,12 +222,7 @@ export const useNotifications = (): NotificationsState => {
           notification.account.token,
         );
 
-        // Fall back to mark as read when fetchReadNotifications is enabled
-        // since marking as done won't work correctly (API limitation)
-        if (
-          state.settings.markAsDoneOnUnsubscribe &&
-          !state.settings.fetchReadNotifications
-        ) {
+        if (state.settings.markAsDoneOnUnsubscribe) {
           await markNotificationsAsDone(state, [notification]);
         } else {
           await markNotificationsAsRead(state, [notification]);
