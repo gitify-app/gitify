@@ -74,7 +74,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
               class="flex gap-1"
             >
               <button
-                aria-describedby="_r_4_"
+                aria-describedby="_r_ID_"
                 type="button"
               >
                 <span
@@ -120,14 +120,14 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
                 aria-hidden="true"
                 class="prc-TooltipV2-Tooltip-tLeuB"
                 data-direction="s"
-                id="_r_4_"
+                id="_r_ID_"
                 popover="auto"
                 role="tooltip"
               >
                 octocat approved these changes
               </span>
               <button
-                aria-describedby="_r_5_"
+                aria-describedby="_r_ID_"
                 type="button"
               >
                 <span
@@ -173,7 +173,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
                 aria-hidden="true"
                 class="prc-TooltipV2-Tooltip-tLeuB"
                 data-direction="s"
-                id="_r_5_"
+                id="_r_ID_"
                 popover="auto"
                 role="tooltip"
               >
@@ -255,7 +255,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
             class="flex gap-1"
           >
             <button
-              aria-describedby="_r_4_"
+              aria-describedby="_r_ID_"
               type="button"
             >
               <span
@@ -301,14 +301,14 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
               data-direction="s"
-              id="_r_4_"
+              id="_r_ID_"
               popover="auto"
               role="tooltip"
             >
               octocat approved these changes
             </span>
             <button
-              aria-describedby="_r_5_"
+              aria-describedby="_r_ID_"
               type="button"
             >
               <span
@@ -354,7 +354,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
               data-direction="s"
-              id="_r_5_"
+              id="_r_ID_"
               popover="auto"
               role="tooltip"
             >
@@ -493,7 +493,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
               class="flex gap-1"
             >
               <button
-                aria-describedby="_r_7_"
+                aria-describedby="_r_ID_"
                 type="button"
               >
                 <span
@@ -539,14 +539,14 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
                 aria-hidden="true"
                 class="prc-TooltipV2-Tooltip-tLeuB"
                 data-direction="s"
-                id="_r_7_"
+                id="_r_ID_"
                 popover="auto"
                 role="tooltip"
               >
                 octocat approved these changes
               </span>
               <button
-                aria-describedby="_r_8_"
+                aria-describedby="_r_ID_"
                 type="button"
               >
                 <span
@@ -592,7 +592,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
                 aria-hidden="true"
                 class="prc-TooltipV2-Tooltip-tLeuB"
                 data-direction="s"
-                id="_r_8_"
+                id="_r_ID_"
                 popover="auto"
                 role="tooltip"
               >
@@ -674,7 +674,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
             class="flex gap-1"
           >
             <button
-              aria-describedby="_r_7_"
+              aria-describedby="_r_ID_"
               type="button"
             >
               <span
@@ -720,14 +720,14 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
               data-direction="s"
-              id="_r_7_"
+              id="_r_ID_"
               popover="auto"
               role="tooltip"
             >
               octocat approved these changes
             </span>
             <button
-              aria-describedby="_r_8_"
+              aria-describedby="_r_ID_"
               type="button"
             >
               <span
@@ -773,7 +773,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
               data-direction="s"
-              id="_r_8_"
+              id="_r_ID_"
               popover="auto"
               role="tooltip"
             >
@@ -913,7 +913,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
               class="flex gap-1"
             >
               <button
-                aria-describedby="_r_a_"
+                aria-describedby="_r_ID_"
                 type="button"
               >
                 <span
@@ -959,14 +959,14 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
                 aria-hidden="true"
                 class="prc-TooltipV2-Tooltip-tLeuB"
                 data-direction="s"
-                id="_r_a_"
+                id="_r_ID_"
                 popover="auto"
                 role="tooltip"
               >
                 octocat approved these changes
               </span>
               <button
-                aria-describedby="_r_b_"
+                aria-describedby="_r_ID_"
                 type="button"
               >
                 <span
@@ -1012,7 +1012,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
                 aria-hidden="true"
                 class="prc-TooltipV2-Tooltip-tLeuB"
                 data-direction="s"
-                id="_r_b_"
+                id="_r_ID_"
                 popover="auto"
                 role="tooltip"
               >
@@ -1095,7 +1095,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
             class="flex gap-1"
           >
             <button
-              aria-describedby="_r_a_"
+              aria-describedby="_r_ID_"
               type="button"
             >
               <span
@@ -1141,14 +1141,14 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
               data-direction="s"
-              id="_r_a_"
+              id="_r_ID_"
               popover="auto"
               role="tooltip"
             >
               octocat approved these changes
             </span>
             <button
-              aria-describedby="_r_b_"
+              aria-describedby="_r_ID_"
               type="button"
             >
               <span
@@ -1194,7 +1194,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
               data-direction="s"
-              id="_r_b_"
+              id="_r_ID_"
               popover="auto"
               role="tooltip"
             >
@@ -1333,7 +1333,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
               class="flex gap-1"
             >
               <button
-                aria-describedby="_r_1_"
+                aria-describedby="_r_ID_"
                 type="button"
               >
                 <span
@@ -1379,14 +1379,14 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
                 aria-hidden="true"
                 class="prc-TooltipV2-Tooltip-tLeuB"
                 data-direction="s"
-                id="_r_1_"
+                id="_r_ID_"
                 popover="auto"
                 role="tooltip"
               >
                 octocat approved these changes
               </span>
               <button
-                aria-describedby="_r_2_"
+                aria-describedby="_r_ID_"
                 type="button"
               >
                 <span
@@ -1432,7 +1432,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
                 aria-hidden="true"
                 class="prc-TooltipV2-Tooltip-tLeuB"
                 data-direction="s"
-                id="_r_2_"
+                id="_r_ID_"
                 popover="auto"
                 role="tooltip"
               >
@@ -1514,7 +1514,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
             class="flex gap-1"
           >
             <button
-              aria-describedby="_r_1_"
+              aria-describedby="_r_ID_"
               type="button"
             >
               <span
@@ -1560,14 +1560,14 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
               data-direction="s"
-              id="_r_1_"
+              id="_r_ID_"
               popover="auto"
               role="tooltip"
             >
               octocat approved these changes
             </span>
             <button
-              aria-describedby="_r_2_"
+              aria-describedby="_r_ID_"
               type="button"
             >
               <span
@@ -1613,7 +1613,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
               data-direction="s"
-              id="_r_2_"
+              id="_r_ID_"
               popover="auto"
               role="tooltip"
             >
