@@ -1,8 +1,10 @@
 import axios, { type AxiosResponse, type Method } from 'axios';
+import type { ExecutionResult } from 'graphql';
 
 import type { Link, Token } from '../../types';
 import { decryptValue } from '../comms';
 import { rendererLogError } from '../logger';
+import { assertNoGraphQLErrors } from './errors';
 import type { TypedDocumentString } from './graphql/generated/graphql';
 import type { GitHubGraphQLResponse } from './types';
 import { getNextURLFromLinkHeader } from './utils';
@@ -56,7 +58,7 @@ export async function performAuthenticatedRESTRequest<TResult>(
   }
 
   let response: AxiosResponse<TResult> | null = null;
-  let combinedData = [];
+  let combinedData: unknown[] = [];
 
   try {
     let nextUrl: string | null = url;
@@ -64,12 +66,24 @@ export async function performAuthenticatedRESTRequest<TResult>(
     while (nextUrl) {
       response = await axios({ method, url: nextUrl, data, headers });
 
+      // Ensure HTTP status indicates success
+      if (response.status < 200 || response.status >= 300) {
+        const err = new Error(`HTTP error ${response.status}`);
+        rendererLogError(
+          'performAuthenticatedRESTRequest',
+          `HTTP error ${response.status} for ${nextUrl}`,
+          err,
+        );
+        throw err;
+      }
+
       // If no data is returned, break the loop
       if (!response?.data) {
         break;
       }
 
-      combinedData = combinedData.concat(response.data); // Accumulate data
+      // Accumulate paginated array results
+      combinedData = combinedData.concat(response.data as unknown as unknown[]);
 
       nextUrl = getNextURLFromLinkHeader(response);
     }
@@ -83,11 +97,8 @@ export async function performAuthenticatedRESTRequest<TResult>(
     throw err;
   }
 
-  return combinedData;
-  return {
-    ...response,
-    data: combinedData,
-  } as AxiosResponse;
+  // Return the combined array of records as the result data
+  return combinedData as TResult;
 }
 
 /**
@@ -115,6 +126,12 @@ export async function performGraphQLRequest<TResult, TVariables>(
     },
     headers: headers,
   }).then((response) => {
+    // Check GraphQL errors
+    assertNoGraphQLErrors(
+      'performGraphQLRequest',
+      response.data as ExecutionResult<TResult>,
+    );
+
     return {
       ...response.data,
       headers: response.headers,
@@ -150,6 +167,12 @@ export async function performGraphQLRequestString<TResult>(
     },
     headers: headers,
   }).then((response) => {
+    // Check GraphQL errors
+    assertNoGraphQLErrors(
+      'performGraphQLRequestString',
+      response.data as ExecutionResult<TResult>,
+    );
+
     return {
       ...response.data,
       headers: response.headers,

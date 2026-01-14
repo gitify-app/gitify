@@ -1,10 +1,12 @@
 import { AxiosError, type AxiosResponse } from 'axios';
+import type { ExecutionResult } from 'graphql';
 
 import { EVENTS } from '../../../shared/events';
 
 import type { Link } from '../../types';
 import { Errors } from '../errors';
-import { determineFailureType } from './errors';
+import * as rendererLogger from '../logger';
+import { assertNoGraphQLErrors, determineFailureType } from './errors';
 import type { GitHubRESTError } from './types';
 
 describe('renderer/utils/api/errors.ts', () => {
@@ -117,6 +119,42 @@ describe('renderer/utils/api/errors.ts', () => {
     );
 
     expect(result).toBe(Errors.UNKNOWN);
+  });
+
+  describe('assertNoGraphQLErrors', () => {
+    it('throws and logs when GraphQL errors are present', () => {
+      const logSpy = jest
+        .spyOn(rendererLogger, 'rendererLogError')
+        .mockImplementation();
+
+      const payload = {
+        data: {},
+        errors: [{}],
+      } as unknown as ExecutionResult<unknown>;
+
+      expect(() => assertNoGraphQLErrors('test-context', payload)).toThrow(
+        'GraphQL request returned errors',
+      );
+
+      expect(logSpy).toHaveBeenCalled();
+    });
+
+    it('does not throw when errors array is empty or undefined', () => {
+      const payloadNoErrors: ExecutionResult<unknown> = {
+        data: {},
+      };
+      const payloadEmptyErrors: ExecutionResult<unknown> = {
+        data: {},
+        errors: [],
+      };
+
+      expect(() =>
+        assertNoGraphQLErrors('test-context', payloadNoErrors),
+      ).not.toThrow();
+      expect(() =>
+        assertNoGraphQLErrors('test-context', payloadEmptyErrors),
+      ).not.toThrow();
+    });
   });
 });
 

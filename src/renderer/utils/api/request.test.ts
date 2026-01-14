@@ -2,6 +2,7 @@ import axios from 'axios';
 
 import { mockToken } from '../../__mocks__/state-mocks';
 import type { Link } from '../../types';
+import * as rendererLogger from '../logger';
 import {
   mockAuthHeaders,
   mockNoAuthHeaders,
@@ -110,6 +111,50 @@ describe('renderer/utils/api/request.ts', () => {
         headers: mockAuthHeaders,
       });
     });
+
+    it('throws on non-2xx HTTP status', async () => {
+      const logSpy = jest
+        .spyOn(rendererLogger, 'rendererLogError')
+        .mockImplementation();
+
+      (axios as unknown as jest.Mock).mockResolvedValue({
+        status: 500,
+        data: { data: {}, errors: [] },
+        headers: {},
+      });
+
+      await expect(
+        performGraphQLRequest(
+          url,
+          mockToken,
+          FetchAuthenticatedUserDetailsDocument,
+        ),
+      ).rejects.toThrow('HTTP error 500');
+
+      expect(logSpy).toHaveBeenCalled();
+    });
+
+    it('throws when GraphQL errors are present', async () => {
+      const logSpy = jest
+        .spyOn(rendererLogger, 'rendererLogError')
+        .mockImplementation();
+
+      (axios as unknown as jest.Mock).mockResolvedValue({
+        status: 200,
+        data: { data: {}, errors: [{ message: 'boom' }] },
+        headers: {},
+      });
+
+      await expect(
+        performGraphQLRequest(
+          url,
+          mockToken,
+          FetchAuthenticatedUserDetailsDocument,
+        ),
+      ).rejects.toThrow('GraphQL request returned errors');
+
+      expect(logSpy).toHaveBeenCalled();
+    });
   });
 
   describe('performGraphQLRequestString', () => {
@@ -132,6 +177,112 @@ describe('renderer/utils/api/request.ts', () => {
         data: expectedData,
         headers: mockAuthHeaders,
       });
+    });
+
+    it('throws on non-2xx HTTP status', async () => {
+      const logSpy = jest
+        .spyOn(rendererLogger, 'rendererLogError')
+        .mockImplementation();
+
+      const queryString = 'query Foo { repository { issue { title } } }';
+
+      (axios as unknown as jest.Mock).mockResolvedValue({
+        status: 502,
+        data: { data: {}, errors: [] },
+        headers: {},
+      });
+
+      await expect(
+        performGraphQLRequestString(url, mockToken, queryString),
+      ).rejects.toThrow('HTTP error 502');
+
+      expect(logSpy).toHaveBeenCalled();
+    });
+
+    it('throws when GraphQL errors are present', async () => {
+      const logSpy = jest
+        .spyOn(rendererLogger, 'rendererLogError')
+        .mockImplementation();
+
+      const queryString = 'query Foo { repository { issue { title } } }';
+
+      (axios as unknown as jest.Mock).mockResolvedValue({
+        status: 200,
+        data: { data: {}, errors: [{ message: 'graphql-error' }] },
+        headers: {},
+      });
+
+      await expect(
+        performGraphQLRequestString(url, mockToken, queryString),
+      ).rejects.toThrow('GraphQL request returned errors');
+
+      expect(logSpy).toHaveBeenCalled();
+    });
+  });
+
+  describe('performAuthenticatedRESTRequest pagination', () => {
+    it('combines paginated results on success', async () => {
+      // First page -> next link
+      (axios as unknown as jest.Mock)
+        .mockResolvedValueOnce({
+          status: 200,
+          data: [1, 2],
+          headers: {
+            link: '<https://example.com?page=2>; rel="next"',
+          },
+        })
+        .mockResolvedValueOnce({
+          status: 200,
+          data: [3],
+          headers: {
+            link: undefined,
+          },
+        });
+
+      const result = await performAuthenticatedRESTRequest<number[]>(
+        url,
+        method,
+        mockToken,
+        {},
+        true,
+      );
+
+      expect(result).toEqual([1, 2, 3]);
+    });
+
+    it('throws on non-2xx status in pagination', async () => {
+      const logSpy = jest
+        .spyOn(rendererLogger, 'rendererLogError')
+        .mockImplementation();
+
+      // First page ok, second page error
+      (axios as unknown as jest.Mock)
+        .mockResolvedValueOnce({
+          status: 200,
+          data: [1],
+          headers: {
+            link: '<https://example.com?page=2>; rel="next"',
+          },
+        })
+        .mockResolvedValueOnce({
+          status: 500,
+          data: [],
+          headers: {
+            link: undefined,
+          },
+        });
+
+      await expect(
+        performAuthenticatedRESTRequest<number[]>(
+          url,
+          method,
+          mockToken,
+          {},
+          true,
+        ),
+      ).rejects.toThrow('HTTP error 500');
+
+      expect(logSpy).toHaveBeenCalled();
     });
   });
 

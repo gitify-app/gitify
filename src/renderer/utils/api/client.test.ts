@@ -1,4 +1,4 @@
-import axios, { type AxiosPromise, type AxiosResponse } from 'axios';
+import axios from 'axios';
 
 import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
 import {
@@ -7,13 +7,20 @@ import {
 } from '../../__mocks__/notifications-mocks';
 import { mockToken } from '../../__mocks__/state-mocks';
 import { Constants } from '../../constants';
-import type { Hostname, Link, SettingsState, Token } from '../../types';
+import type {
+  AuthCode,
+  Hostname,
+  Link,
+  SettingsState,
+  Token,
+} from '../../types';
 import * as logger from '../../utils/logger';
 import {
   mockAuthHeaders,
   mockNonCachedAuthHeaders,
 } from './__mocks__/request-mocks';
 import {
+  exchangeAuthCodeForAccessToken,
   fetchAuthenticatedUserDetails,
   fetchDiscussionByNumber,
   fetchIssueByNumber,
@@ -37,16 +44,60 @@ import {
   type FetchPullRequestByNumberQuery,
 } from './graphql/generated/graphql';
 import * as apiRequests from './request';
-import type { GitHubGraphQLResponse } from './types';
+import type {
+  GitHubGraphQLResponse,
+  GitHubHtmlUrlResponse,
+  LoginOAuthResponse,
+} from './types';
 
 jest.mock('axios');
 
 const mockGitHubHostname = 'github.com' as Hostname;
 const mockThreadId = '1234';
 
+const mockAuthCode = 'some-auth-code' as AuthCode;
+
 describe('renderer/utils/api/client.ts', () => {
   afterEach(() => {
     jest.clearAllMocks();
+  });
+
+  it('exchangeAuthCodeForAccessToken - should exchange code', async () => {
+    const performUnauthenticatedRESTRequestSpy = jest.spyOn(
+      apiRequests,
+      'performUnauthenticatedRESTRequest',
+    );
+
+    const requestPromise = Promise.resolve({
+      access_token: mockToken,
+    } as LoginOAuthResponse);
+
+    performUnauthenticatedRESTRequestSpy.mockResolvedValue(requestPromise);
+
+    const {
+      hostname: mockHostname,
+      clientId: mockClientId,
+      clientSecret: mockClientSecret,
+    } = Constants.DEFAULT_AUTH_OPTIONS;
+
+    const response = await exchangeAuthCodeForAccessToken(
+      mockHostname,
+      Constants.DEFAULT_AUTH_OPTIONS.clientId,
+      Constants.DEFAULT_AUTH_OPTIONS.clientSecret,
+      mockAuthCode,
+    );
+
+    expect(apiRequests.performUnauthenticatedRESTRequest).toHaveBeenCalledWith(
+      'https://github.com/login/oauth/access_token',
+      'POST',
+      {
+        client_id: mockClientId,
+        client_secret: mockClientSecret,
+        code: mockAuthCode,
+      },
+    );
+
+    expect(response.access_token).toBe(mockToken);
   });
 
   it('headNotifications - should fetch notifications head', async () => {
@@ -191,11 +242,8 @@ describe('renderer/utils/api/client.ts', () => {
       );
 
       const requestPromise = Promise.resolve({
-        data: {
-          html_url:
-            'https://github.com/gitify-app/notifications-test/issues/785',
-        },
-      } as AxiosResponse) as AxiosPromise;
+        html_url: 'https://github.com/gitify-app/notifications-test/issues/785',
+      } as GitHubHtmlUrlResponse);
 
       performAuthenticatedRESTRequestSpy.mockResolvedValue(requestPromise);
 

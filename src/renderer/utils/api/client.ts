@@ -3,6 +3,9 @@ import type { AxiosPromise } from 'axios';
 import { Constants } from '../../constants';
 import type {
   Account,
+  AuthCode,
+  ClientID,
+  ClientSecret,
   GitifyNotification,
   Hostname,
   Link,
@@ -28,9 +31,12 @@ import {
   performAuthenticatedRESTRequest,
   performGraphQLRequest,
   performGraphQLRequestString,
+  performUnauthenticatedRESTRequest,
 } from './request';
 import type {
   GitHubGraphQLResponse,
+  GitHubHtmlUrlResponse,
+  LoginOAuthResponse,
   NotificationThreadSubscription,
   RawCommit,
   RawCommitComment,
@@ -42,6 +48,29 @@ import {
   getGitHubGraphQLUrl,
   getNumberFromUrl,
 } from './utils';
+
+/**
+ * Exchange an OAuth Auth Code for an Access Token
+ */
+export function exchangeAuthCodeForAccessToken(
+  hostname: Hostname,
+  clientId: ClientID,
+  clientSecret: ClientSecret,
+  authCode: AuthCode,
+) {
+  const url = `https://${hostname}/login/oauth/access_token` as Link;
+  const data = {
+    client_id: clientId,
+    client_secret: clientSecret,
+    code: authCode,
+  };
+
+  return performUnauthenticatedRESTRequest<LoginOAuthResponse>(
+    url,
+    'POST',
+    data,
+  );
+}
 
 /**
  * Perform a HEAD operation, used to validate that connectivity is established.
@@ -181,8 +210,12 @@ export function getRelease(url: Link, token: Token): AxiosPromise<RawRelease> {
  */
 export async function getHtmlUrl(url: Link, token: Token): Promise<string> {
   try {
-    const response = (await performAuthenticatedRESTRequest(url, 'GET', token))
-      .data;
+    const response =
+      await performAuthenticatedRESTRequest<GitHubHtmlUrlResponse>(
+        url,
+        'GET',
+        token,
+      );
 
     return response.html_url;
   } catch (err) {
