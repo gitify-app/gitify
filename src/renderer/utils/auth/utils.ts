@@ -14,7 +14,7 @@ import type {
   Token,
 } from '../../types';
 import { fetchAuthenticatedUserDetails } from '../api/client';
-import { apiRequest } from '../api/request';
+import { performUnauthenticatedRESTRequest } from '../api/request';
 import { encryptValue, openExternalLink } from '../comms';
 import { getPlatformFromHostname } from '../helpers';
 import { rendererLogError, rendererLogInfo, rendererLogWarn } from '../logger';
@@ -83,10 +83,12 @@ export async function getToken(
     code: authCode,
   };
 
-  const response = await apiRequest(url, 'POST', data);
+  const response = await performUnauthenticatedRESTRequest<{
+    access_token: string;
+  }>(url, 'POST', data);
   return {
     hostname: authOptions.hostname,
-    token: response.data.access_token,
+    token: response.access_token as Token,
   };
 }
 

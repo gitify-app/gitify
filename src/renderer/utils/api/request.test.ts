@@ -9,11 +9,11 @@ import {
 } from './__mocks__/request-mocks';
 import { FetchAuthenticatedUserDetailsDocument } from './graphql/generated/graphql';
 import {
-  apiRequest,
-  apiRequestAuth,
   getHeaders,
+  performAuthenticatedRESTRequest,
   performGraphQLRequest,
   performGraphQLRequestString,
+  performUnauthenticatedRESTRequest,
   shouldRequestWithNoCache,
 } from './request';
 
@@ -31,7 +31,7 @@ describe('renderer/utils/api/request.ts', () => {
     it('should make a request with the correct parameters', async () => {
       const data = { key: 'value' };
 
-      await apiRequest(url, method, data);
+      await performUnauthenticatedRESTRequest(url, method, data);
 
       expect(axios).toHaveBeenCalledWith({
         method,
@@ -43,7 +43,7 @@ describe('renderer/utils/api/request.ts', () => {
 
     it('should make a request with the correct parameters and default data', async () => {
       const data = {};
-      await apiRequest(url, method);
+      await performUnauthenticatedRESTRequest(url, method);
 
       expect(axios).toHaveBeenCalledWith({
         method,
@@ -62,7 +62,7 @@ describe('renderer/utils/api/request.ts', () => {
     it('should make an authenticated request with the correct parameters', async () => {
       const data = { key: 'value' };
 
-      await apiRequestAuth(url, method, mockToken, data);
+      await performAuthenticatedRESTRequest(url, method, mockToken, data);
 
       expect(axios).toHaveBeenCalledWith({
         method,
@@ -75,7 +75,7 @@ describe('renderer/utils/api/request.ts', () => {
     it('should make an authenticated request with the correct parameters and default data', async () => {
       const data = {};
 
-      await apiRequestAuth(url, method, mockToken);
+      await performAuthenticatedRESTRequest(url, method, mockToken);
 
       expect(axios).toHaveBeenCalledWith({
         method,
@@ -138,21 +138,25 @@ describe('renderer/utils/api/request.ts', () => {
   describe('shouldRequestWithNoCache', () => {
     it('shouldRequestWithNoCache', () => {
       expect(
-        shouldRequestWithNoCache('https://example.com/api/v3/notifications'),
-      ).toBe(true);
-
-      expect(
         shouldRequestWithNoCache(
-          'https://example.com/login/oauth/access_token',
+          'https://example.com/api/v3/notifications' as Link,
         ),
       ).toBe(true);
 
       expect(
-        shouldRequestWithNoCache('https://example.com/notifications'),
+        shouldRequestWithNoCache(
+          'https://example.com/login/oauth/access_token' as Link,
+        ),
       ).toBe(true);
 
       expect(
-        shouldRequestWithNoCache('https://example.com/some/other/endpoint'),
+        shouldRequestWithNoCache('https://example.com/notifications' as Link),
+      ).toBe(true);
+
+      expect(
+        shouldRequestWithNoCache(
+          'https://example.com/some/other/endpoint' as Link,
+        ),
       ).toBe(false);
     });
   });

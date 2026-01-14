@@ -1,7 +1,18 @@
 import type { components } from '@octokit/openapi-types';
+import type { ExecutionResult } from 'graphql';
 
 import type { Link } from '../../types';
 
+/**
+ * GitHub GraphQL API response type with HTTP response headers
+ */
+export type GitHubGraphQLResponse<TResult> = ExecutionResult<TResult> & {
+  headers: Record<string, string>;
+};
+
+/**
+ * GitHub REST Error
+ */
 export interface GitHubRESTError {
   message: string;
   documentation_url: Link;

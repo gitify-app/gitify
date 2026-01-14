@@ -115,10 +115,13 @@ describe('renderer/utils/auth/utils.ts', () => {
 
   describe('getToken', () => {
     const authCode = '123-456' as AuthCode;
-    const apiRequestSpy = jest.spyOn(apiRequests, 'apiRequest');
+    const performUnauthenticatedRESTRequestSpy = jest.spyOn(
+      apiRequests,
+      'performUnauthenticatedRESTRequest',
+    );
 
     it('should get a token', async () => {
-      apiRequestSpy.mockResolvedValueOnce(
+      performUnauthenticatedRESTRequestSpy.mockResolvedValueOnce(
         Promise.resolve({
           data: { access_token: 'this-is-a-token' },
         } as AxiosResponse),
@@ -126,7 +129,9 @@ describe('renderer/utils/auth/utils.ts', () => {
 
       const res = await authUtils.getToken(authCode);
 
-      expect(apiRequests.apiRequest).toHaveBeenCalledWith(
+      expect(
+        apiRequests.performUnauthenticatedRESTRequest,
+      ).toHaveBeenCalledWith(
         'https://github.com/login/oauth/access_token',
         'POST',
         {

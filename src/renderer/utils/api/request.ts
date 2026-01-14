@@ -1,65 +1,61 @@
-import axios, {
-  type AxiosPromise,
-  type AxiosResponse,
-  type Method,
-} from 'axios';
-import type { ExecutionResult } from 'graphql';
+import axios, { type AxiosResponse, type Method } from 'axios';
 
 import type { Link, Token } from '../../types';
 import { decryptValue } from '../comms';
 import { rendererLogError } from '../logger';
 import type { TypedDocumentString } from './graphql/generated/graphql';
+import type { GitHubGraphQLResponse } from './types';
 import { getNextURLFromLinkHeader } from './utils';
 
 /**
- * ExecutionResult with HTTP response headers
- */
-export type ExecutionResultWithHeaders<T> = ExecutionResult<T> & {
-  headers: Record<string, string>;
-};
-
-/**
- * Perform an unauthenticated API request
+ * Perform an unauthenticated REST API request
  *
- * @param url
- * @param method
- * @param data
- * @returns
+ * @param url The API url
+ * @param method The REST http method
+ * @param data The API request body
+ * @returns Resolves to a GitHub REST response
  */
-export async function apiRequest(
+export async function performUnauthenticatedRESTRequest<TResult>(
   url: Link,
   method: Method,
   data = {},
-): Promise<AxiosPromise | null> {
+): Promise<TResult | null> {
   const headers = await getHeaders(url);
 
-  return axios({ method, url, data, headers });
+  return axios({
+    method,
+    url,
+    data,
+    headers,
+  }).then((response) => {
+    return response.data;
+  }) as Promise<TResult>;
 }
 
 /**
- * Perform an authenticated API request
+ * Perform an authenticated REST API request
  *
- * @param url
- * @param method
- * @param token
- * @param data
- * @param fetchAllRecords whether to fetch all records or just the first page
- * @returns
+ * @param url The API url
+ * @param method The REST http method
+ * @param token A GitHub token (decrypted)
+ * @param data The API request body
+ * @param fetchAllRecords Whether to fetch all records or just the first page
+ * @returns Resolves to a GitHub REST response
  */
-export async function apiRequestAuth(
+export async function performAuthenticatedRESTRequest<TResult>(
   url: Link,
   method: Method,
   token: Token,
   data = {},
   fetchAllRecords = false,
-): AxiosPromise | null {
+): Promise<TResult | null> {
   const headers = await getHeaders(url, token);
 
   if (!fetchAllRecords) {
     return axios({ method, url, data, headers });
   }
 
-  let response: AxiosResponse | null = null;
+  let response: AxiosResponse<TResult> | null = null;
   let combinedData = [];
 
   try {
@@ -78,11 +74,16 @@ export async function apiRequestAuth(
       nextUrl = getNextURLFromLinkHeader(response);
     }
   } catch (err) {
-    rendererLogError('apiRequestAuth', 'API request failed:', err);
+    rendererLogError(
+      'performAuthenticatedRESTRequest',
+      'API request failed:',
+      err,
+    );
 
     throw err;
   }
 
+  return combinedData;
   return {
     ...response,
     data: combinedData,
@@ -90,12 +91,12 @@ export async function apiRequestAuth(
 }
 
 /**
- * Perform a GraphQL API request for account
+ * Perform a GraphQL API request with typed operation document
  *
- * @param account
- * @param query
- * @param variables
- * @returns
+ * @param url The API url
+ * @param query The GraphQL operation/query statement TVariables
+ * @param variables The GraphQL operation variables
+ * @returns Resolves to a GitHub GraphQL response
  */
 export async function performGraphQLRequest<TResult, TVariables>(
   url: Link,
@@ -118,20 +119,26 @@ export async function performGraphQLRequest<TResult, TVariables>(
       ...response.data,
       headers: response.headers,
     };
-  }) as Promise<ExecutionResultWithHeaders<TResult>>;
+  }) as Promise<GitHubGraphQLResponse<TResult>>;
 }
 
 /**
  * Perform a GraphQL API request using a raw query string instead of a TypedDocumentString.
  *
- * Useful for dynamically composed queries (e.g., merged queries built at runtime).
+ * Useful for dynamically composed queries (e.g: merged queries built at runtime).
+ *
+ * @param url The API url
+ * @param token The GitHub token (decrypted)
+ * @param query The GraphQL operation/query statement
+ * @param variables The GraphQL operation variables
+ * @returns Resolves to a GitHub GraphQL response
  */
 export async function performGraphQLRequestString<TResult>(
   url: Link,
   token: Token,
   query: string,
   variables?: Record<string, unknown>,
-): Promise<ExecutionResultWithHeaders<TResult>> {
+): Promise<GitHubGraphQLResponse<TResult>> {
   const headers = await getHeaders(url, token);
 
   return axios({
@@ -146,17 +153,18 @@ export async function performGraphQLRequestString<TResult>(
     return {
       ...response.data,
       headers: response.headers,
-    } as ExecutionResultWithHeaders<TResult>;
+    } as GitHubGraphQLResponse<TResult>;
   });
 }
 
 /**
- * Return true if the request should be made with no-cache
+ * Determine if the API request should be made with no-cache header
+ * based on the API url path
  *
- * @param url
- * @returns boolean
+ * @param url The API url
+ * @returns Whether a cache heading should be set or not
  */
-export function shouldRequestWithNoCache(url: string) {
+export function shouldRequestWithNoCache(url: Link) {
   const parsedUrl = new URL(url);
 
   switch (parsedUrl.pathname) {
@@ -172,9 +180,9 @@ export function shouldRequestWithNoCache(url: string) {
 /**
  * Construct headers for API requests
  *
- * @param username
- * @param token
- * @returns
+ * @param username A GitHub account username
+ * @param token A GitHub token (decrypted)
+ * @returns A headers object to use with API requests
  */
 export async function getHeaders(url: Link, token?: Token) {
   const headers: Record<string, string> = {
