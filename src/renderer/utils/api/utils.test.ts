@@ -3,11 +3,24 @@ import type { AxiosResponse } from 'axios';
 import type { Hostname } from '../../types';
 import {
   getGitHubAPIBaseUrl,
+  getGitHubAuthBaseUrl,
   getGitHubGraphQLUrl,
   getNextURLFromLinkHeader,
 } from './utils';
 
 describe('renderer/utils/api/utils.ts', () => {
+  describe('getGitHubAuthBaseUrl', () => {
+    it('should generate a GitHub Auth url - non enterprise', () => {
+      const result = getGitHubAuthBaseUrl('github.com' as Hostname);
+      expect(result.toString()).toBe('https://github.com/');
+    });
+
+    it('should generate a GitHub Auth url - enterprise', () => {
+      const result = getGitHubAuthBaseUrl('github.gitify.io' as Hostname);
+      expect(result.toString()).toBe('https://github.gitify.io/api/v3/');
+    });
+  });
+
   describe('getGitHubAPIBaseUrl', () => {
     it('should generate a GitHub API url - non enterprise', () => {
       const result = getGitHubAPIBaseUrl('github.com' as Hostname);

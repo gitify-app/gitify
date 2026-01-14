@@ -1,4 +1,3 @@
-import type { AxiosResponse } from 'axios';
 import axios from 'axios';
 
 import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
@@ -17,13 +16,19 @@ import type {
 import * as comms from '../../utils/comms';
 import * as apiClient from '../api/client';
 import type { FetchAuthenticatedUserDetailsQuery } from '../api/graphql/generated/graphql';
-import * as apiRequests from '../api/request';
 import * as logger from '../logger';
 import type { AuthMethod } from './types';
 import * as authUtils from './utils';
 import { getNewOAuthAppURL, getNewTokenURL } from './utils';
 
+// FIXME remove type , mock correct client level?
 type UserDetailsResponse = FetchAuthenticatedUserDetailsQuery['viewer'];
+
+const exchangeWebFlowCodeMock = jest.fn();
+jest.mock('@octokit/oauth-methods', () => ({
+  ...jest.requireActual('@octokit/oauth-methods'),
+  exchangeWebFlowCode: () => exchangeWebFlowCodeMock,
+}));
 
 describe('renderer/utils/auth/utils.ts', () => {
   describe('authGitHub', () => {
@@ -36,18 +41,22 @@ describe('renderer/utils/auth/utils.ts', () => {
       jest.clearAllMocks();
     });
 
-    it('should call authGitHub - success auth flow', async () => {
+    it('should call performGitHubOAuth using gitify oauth app - success auth flow', async () => {
       window.gitify.onAuthCallback = jest
         .fn()
         .mockImplementation((callback) => {
           callback('gitify://auth?code=123-456');
         });
 
-      const res = await authUtils.authGitHub();
+      const res = await authUtils.performGitHubOAuth(
+        Constants.DEFAULT_AUTH_OPTIONS,
+      );
 
       expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
       expect(openExternalLinkSpy).toHaveBeenCalledWith(
-        'https://github.com/login/oauth/authorize?client_id=FAKE_CLIENT_ID_123&scope=read%3Auser%2Cnotifications%2Crepo',
+        expect.stringContaining(
+          'https://github.com/login/oauth/authorize?allow_signup=false&client_id=FAKE_CLIENT_ID_123&scope=read%3Auser%2Cnotifications%2Crepo',
+        ),
       );
 
       expect(window.gitify.onAuthCallback).toHaveBeenCalledTimes(1);
@@ -59,14 +68,14 @@ describe('renderer/utils/auth/utils.ts', () => {
       expect(res.authCode).toBe('123-456');
     });
 
-    it('should call authGitHub - success oauth flow', async () => {
+    it('should call performGitHubOAuth using custom oauth app - success oauth flow', async () => {
       window.gitify.onAuthCallback = jest
         .fn()
         .mockImplementation((callback) => {
           callback('gitify://oauth?code=123-456');
         });
 
-      const res = await authUtils.authGitHub({
+      const res = await authUtils.performGitHubOAuth({
         clientId: 'BYO_CLIENT_ID' as ClientID,
         clientSecret: 'BYO_CLIENT_SECRET' as ClientSecret,
         hostname: 'my.git.com' as Hostname,
@@ -74,7 +83,9 @@ describe('renderer/utils/auth/utils.ts', () => {
 
       expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
       expect(openExternalLinkSpy).toHaveBeenCalledWith(
-        'https://my.git.com/login/oauth/authorize?client_id=BYO_CLIENT_ID&scope=read%3Auser%2Cnotifications%2Crepo',
+        expect.stringContaining(
+          'https://my.git.com/login/oauth/authorize?allow_signup=false&client_id=BYO_CLIENT_ID&scope=read%3Auser%2Cnotifications%2Crepo',
+        ),
       );
 
       expect(window.gitify.onAuthCallback).toHaveBeenCalledTimes(1);
@@ -86,7 +97,7 @@ describe('renderer/utils/auth/utils.ts', () => {
       expect(res.authCode).toBe('123-456');
     });
 
-    it('should call authGitHub - failure', async () => {
+    it('should call performGitHubOAuth - failure', async () => {
       window.gitify.onAuthCallback = jest
         .fn()
         .mockImplementation((callback) => {
@@ -95,7 +106,10 @@ describe('renderer/utils/auth/utils.ts', () => {
           );
         });
 
-      await expect(async () => await authUtils.authGitHub()).rejects.toEqual(
+      await expect(
+        async () =>
+          await authUtils.performGitHubOAuth(Constants.DEFAULT_AUTH_OPTIONS),
+      ).rejects.toEqual(
         new Error(
           "Oops! Something went wrong and we couldn't log you in using GitHub. Please try again. Reason: The redirect_uri is missing or invalid. Docs: https://docs.github.com/en/developers/apps/troubleshooting-oauth-errors",
         ),
@@ -103,7 +117,9 @@ describe('renderer/utils/auth/utils.ts', () => {
 
       expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
       expect(openExternalLinkSpy).toHaveBeenCalledWith(
-        'https://github.com/login/oauth/authorize?client_id=FAKE_CLIENT_ID_123&scope=read%3Auser%2Cnotifications%2Crepo',
+        expect.stringContaining(
+          'https://github.com/login/oauth/authorize?client_id=FAKE_CLIENT_ID_123&scope=read%3Auser%2Cnotifications%2Crepo',
+        ),
       );
 
       expect(window.gitify.onAuthCallback).toHaveBeenCalledTimes(1);
@@ -113,20 +129,21 @@ describe('renderer/utils/auth/utils.ts', () => {
     });
   });
 
-  describe('getToken', () => {
+  describe('exchangeAuthCodeForAccessToken', () => {
     const authCode = '123-456' as AuthCode;
-    const apiRequestSpy = jest.spyOn(apiRequests, 'apiRequest');
 
     it('should get a token', async () => {
-      apiRequestSpy.mockResolvedValueOnce(
+      exchangeWebFlowCodeMock.mockResolvedValueOnce(
         Promise.resolve({
-          data: { access_token: 'this-is-a-token' },
-        } as AxiosResponse),
+          authentication: {
+            token: 'this-is-a-token',
+          },
+        }),
       );
 
-      const res = await authUtils.getToken(authCode);
+      const res = await authUtils.exchangeAuthCodeForAccessToken(authCode);
 
-      expect(apiRequests.apiRequest).toHaveBeenCalledWith(
+      expect(exchangeWebFlowCodeMock).toHaveBeenCalledWith(
         'https://github.com/login/oauth/access_token',
         'POST',
         {
@@ -135,8 +152,7 @@ describe('renderer/utils/auth/utils.ts', () => {
           code: '123-456',
         },
       );
-      expect(res.token).toBe('this-is-a-token');
-      expect(res.hostname).toBe('github.com' as Hostname);
+      expect(res).toBe('this-is-a-token');
     });
   });
 

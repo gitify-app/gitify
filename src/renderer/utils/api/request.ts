@@ -19,24 +19,6 @@ export type ExecutionResultWithHeaders<T> = ExecutionResult<T> & {
 };
 
 /**
- * Perform an unauthenticated API request
- *
- * @param url
- * @param method
- * @param data
- * @returns
- */
-export async function apiRequest(
-  url: Link,
-  method: Method,
-  data = {},
-): Promise<AxiosPromise | null> {
-  const headers = await getHeaders(url);
-
-  return axios({ method, url, data, headers });
-}
-
-/**
  * Perform an authenticated API request
  *
  * @param url

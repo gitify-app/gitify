@@ -37,10 +37,10 @@ import type {
 } from '../utils/auth/types';
 import {
   addAccount,
-  authGitHub,
+  exchangeAuthCodeForAccessToken,
   getAccountUUID,
-  getToken,
   hasAccounts,
+  performGitHubOAuth,
   refreshAccount,
   removeAccount,
 } from '../utils/auth/utils';
@@ -405,9 +405,15 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     return hasAccounts(auth);
   }, [auth]);
 
+  /**
+   * Note: although we call this "Login with GitHub App", this function actually
+   * authenticates via a predefined "Gitify" GitHub OAuth App.
+   */
   const loginWithGitHubApp = useCallback(async () => {
-    const { authCode } = await authGitHub();
-    const { token } = await getToken(authCode);
+    const { authCode } = await performGitHubOAuth(
+      Constants.DEFAULT_AUTH_OPTIONS,
+    );
+    const token = await exchangeAuthCodeForAccessToken(authCode);
     const hostname = Constants.DEFAULT_AUTH_OPTIONS.hostname;
 
     const updatedAuth = await addAccount(auth, 'GitHub App', token, hostname);
@@ -415,12 +421,20 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     persistAuth(updatedAuth);
   }, [auth, persistAuth]);
 
+  /**
+   * Login with custom GitHub OAuth App
+   */
   const loginWithOAuthApp = useCallback(
     async (data: LoginOAuthAppOptions) => {
-      const { authOptions, authCode } = await authGitHub(data);
-      const { token, hostname } = await getToken(authCode, authOptions);
+      const { authOptions, authCode } = await performGitHubOAuth(data);
+      const token = await exchangeAuthCodeForAccessToken(authCode, authOptions);
 
-      const updatedAuth = await addAccount(auth, 'OAuth App', token, hostname);
+      const updatedAuth = await addAccount(
+        auth,
+        'OAuth App',
+        token,
+        authOptions.hostname,
+      );
 
       persistAuth(updatedAuth);
     },
