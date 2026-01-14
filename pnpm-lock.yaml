@@ -55,7 +55,7 @@ importers:
         specifier: 27.0.0
         version: 27.0.0
       '@octokit/request':
-        specifier: ^10.0.7
+        specifier: 10.0.7
         version: 10.0.7
       '@parcel/watcher':
         specifier: 2.5.1
