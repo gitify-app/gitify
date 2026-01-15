@@ -1,5 +1,6 @@
 import nock from 'nock';
 
+import { configureAxiosHttpAdapterForNock } from '../../../__helpers__/test-utils';
 import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
 import type { GitifyNotification, Link } from '../../../types';
@@ -7,6 +8,10 @@ import { mockRawUser } from '../../api/__mocks__/response-mocks';
 import { commitHandler } from './commit';
 
 describe('renderer/utils/notifications/handlers/commit.ts', () => {
+  beforeEach(() => {
+    configureAxiosHttpAdapterForNock();
+  });
+
   describe('enrich', () => {
     const mockAuthor = mockRawUser('some-author');
     const mockCommenter = mockRawUser('some-commenter');

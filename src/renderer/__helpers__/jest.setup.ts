@@ -8,14 +8,6 @@ import '@testing-library/jest-dom';
 import '@primer/react/test-helpers';
 
 /**
- * Configure axios to use the http adapter instead of XHR
- * This allows nock to intercept HTTP requests in tests
- */
-import axios from 'axios';
-
-axios.defaults.adapter = 'http';
-
-/**
  * Custom snapshot serializer to normalize React auto-generated IDs.
  * This makes snapshots stable regardless of test execution order.
  * React's useId() generates IDs like "_r_X_" where X changes based on

@@ -1,5 +1,6 @@
 import nock from 'nock';
 
+import { configureAxiosHttpAdapterForNock } from '../../__helpers__/test-utils';
 import {
   mockGitHubCloudAccount,
   mockGitHubEnterpriseServerAccount,
@@ -28,6 +29,10 @@ import {
 } from './notifications';
 
 describe('renderer/utils/notifications/notifications.ts', () => {
+  beforeEach(() => {
+    configureAxiosHttpAdapterForNock();
+  });
+
   afterEach(() => {
     jest.clearAllMocks();
   });

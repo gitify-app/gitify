@@ -1,5 +1,6 @@
 import nock from 'nock';
 
+import { configureAxiosHttpAdapterForNock } from '../../../__helpers__/test-utils';
 import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
 import type { GitifyNotification } from '../../../types';
@@ -18,16 +19,8 @@ import type { PullRequestReviewState } from '../../api/graphql/generated/graphql
 import { getLatestReviewForReviewers, pullRequestHandler } from './pullRequest';
 
 describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
-  let mockNotification: GitifyNotification;
-
   beforeEach(() => {
-    mockNotification = mockPartialGitifyNotification({
-      title: 'This is a mock pull request',
-      type: 'PullRequest',
-      url: 'https://api.github.com/repos/gitify-app/notifications-test/pulls/1' as Link,
-      latestCommentUrl:
-        'https://api.github.com/repos/gitify-app/notifications-test/issues/comments/302888448' as Link,
-    });
+    configureAxiosHttpAdapterForNock();
   });
 
   describe('mergeQueryConfig', () => {
@@ -39,6 +32,14 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
   });
 
   describe('enrich', () => {
+    const mockNotification = mockPartialGitifyNotification({
+      title: 'This is a mock pull request',
+      type: 'PullRequest',
+      url: 'https://api.github.com/repos/gitify-app/notifications-test/pulls/1' as Link,
+      latestCommentUrl:
+        'https://api.github.com/repos/gitify-app/notifications-test/issues/comments/302888448' as Link,
+    });
+
     it('pull request with state', async () => {
       const mockPullRequest = mockPullRequestResponseNode({ state: 'CLOSED' });
 

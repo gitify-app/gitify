@@ -1,5 +1,6 @@
 import nock from 'nock';
 
+import { configureAxiosHttpAdapterForNock } from '../../../__helpers__/test-utils';
 import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
 import type { GitifyNotification } from '../../../types';
@@ -17,6 +18,10 @@ import {
 import { issueHandler } from './issue';
 
 describe('renderer/utils/notifications/handlers/issue.ts', () => {
+  beforeEach(() => {
+    configureAxiosHttpAdapterForNock();
+  });
+
   describe('supportsMergedQueryEnrichment', () => {
     it('should support merge query', () => {
       expect(issueHandler.supportsMergedQueryEnrichment).toBeTruthy();
@@ -24,16 +29,12 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
   });
 
   describe('enrich', () => {
-    let mockNotification: GitifyNotification;
-
-    beforeEach(() => {
-      mockNotification = mockPartialGitifyNotification({
-        title: 'This is a mock issue',
-        type: 'Issue',
-        url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1' as Link,
-        latestCommentUrl:
-          'https://api.github.com/repos/gitify-app/notifications-test/issues/comments/302888448' as Link,
-      });
+    const mockNotification = mockPartialGitifyNotification({
+      title: 'This is a mock issue',
+      type: 'Issue',
+      url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1' as Link,
+      latestCommentUrl:
+        'https://api.github.com/repos/gitify-app/notifications-test/issues/comments/302888448' as Link,
     });
 
     it('issue with only state', async () => {
