@@ -20,11 +20,16 @@ import type { AuthMethod } from './types';
 import * as authUtils from './utils';
 import { getNewOAuthAppURL, getNewTokenURL } from './utils';
 
-const exchangeWebFlowCodeMock = jest.fn();
 jest.mock('@octokit/oauth-methods', () => ({
   ...jest.requireActual('@octokit/oauth-methods'),
-  exchangeWebFlowCode: () => exchangeWebFlowCodeMock,
+  exchangeWebFlowCode: jest.fn(),
 }));
+
+import { exchangeWebFlowCode } from '@octokit/oauth-methods';
+
+const exchangeWebFlowCodeMock = exchangeWebFlowCode as jest.MockedFunction<
+  typeof exchangeWebFlowCode
+>;
 
 describe('renderer/utils/auth/utils.ts', () => {
   describe('authGitHub', () => {
@@ -44,9 +49,7 @@ describe('renderer/utils/auth/utils.ts', () => {
           callback('gitify://auth?code=123-456');
         });
 
-      const res = await authUtils.performGitHubOAuth(
-        Constants.DEFAULT_AUTH_OPTIONS,
-      );
+      const res = await authUtils.performGitHubOAuth();
 
       expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
       expect(openExternalLinkSpy).toHaveBeenCalledWith(
@@ -103,8 +106,7 @@ describe('renderer/utils/auth/utils.ts', () => {
         });
 
       await expect(
-        async () =>
-          await authUtils.performGitHubOAuth(Constants.DEFAULT_AUTH_OPTIONS),
+        async () => await authUtils.performGitHubOAuth(),
       ).rejects.toEqual(
         new Error(
           "Oops! Something went wrong and we couldn't log you in using GitHub. Please try again. Reason: The redirect_uri is missing or invalid. Docs: https://docs.github.com/en/developers/apps/troubleshooting-oauth-errors",
@@ -133,15 +135,19 @@ describe('renderer/utils/auth/utils.ts', () => {
         authentication: {
           token: 'this-is-a-token',
         },
-      });
+      } as any);
 
-      const res = await authUtils.exchangeAuthCodeForAccessToken(authCode);
+      const res = await authUtils.exchangeAuthCodeForAccessToken(
+        authCode,
+        Constants.DEFAULT_AUTH_OPTIONS,
+      );
 
       expect(exchangeWebFlowCodeMock).toHaveBeenCalledWith({
         clientType: 'oauth-app',
         clientId: 'FAKE_CLIENT_ID_123',
         clientSecret: 'FAKE_CLIENT_SECRET_123',
         code: '123-456',
+        request: expect.any(Function),
       });
       expect(res).toBe('this-is-a-token');
     });

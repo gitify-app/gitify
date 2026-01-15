@@ -410,9 +410,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
    * authenticates via a predefined "Gitify" GitHub OAuth App.
    */
   const loginWithGitHubApp = useCallback(async () => {
-    const { authCode } = await performGitHubOAuth(
-      Constants.DEFAULT_AUTH_OPTIONS,
-    );
+    const { authCode } = await performGitHubOAuth();
     const token = await exchangeAuthCodeForAccessToken(authCode);
     const hostname = Constants.DEFAULT_AUTH_OPTIONS.hostname;
 

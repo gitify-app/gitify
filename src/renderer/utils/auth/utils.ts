@@ -26,7 +26,7 @@ import { rendererLogError, rendererLogInfo, rendererLogWarn } from '../logger';
 import type { AuthMethod, AuthResponse, LoginOAuthAppOptions } from './types';
 
 export function performGitHubOAuth(
-  authOptions: LoginOAuthAppOptions,
+  authOptions: LoginOAuthAppOptions = Constants.DEFAULT_AUTH_OPTIONS,
 ): Promise<AuthResponse> {
   return new Promise((resolve, reject) => {
     const { url } = getWebFlowAuthorizationUrl({
@@ -80,7 +80,7 @@ export function performGitHubOAuth(
 
 export async function exchangeAuthCodeForAccessToken(
   authCode: AuthCode,
-  authOptions = Constants.DEFAULT_AUTH_OPTIONS,
+  authOptions: LoginOAuthAppOptions = Constants.DEFAULT_AUTH_OPTIONS,
 ): Promise<Token> {
   const { authentication } = await exchangeWebFlowCode({
     clientType: 'oauth-app',
