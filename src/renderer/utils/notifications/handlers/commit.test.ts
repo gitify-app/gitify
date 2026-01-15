@@ -1,4 +1,3 @@
-import axios from 'axios';
 import nock from 'nock';
 
 import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-mocks';
@@ -11,12 +10,6 @@ describe('renderer/utils/notifications/handlers/commit.ts', () => {
   describe('enrich', () => {
     const mockAuthor = mockRawUser('some-author');
     const mockCommenter = mockRawUser('some-commenter');
-
-    beforeEach(() => {
-      // axios will default to using the XHR adapter which can't be intercepted
-      // by nock. So, configure axios to use the node adapter.
-      axios.defaults.adapter = 'http';
-    });
 
     it('get commit commenter', async () => {
       const mockNotification = mockPartialGitifyNotification({

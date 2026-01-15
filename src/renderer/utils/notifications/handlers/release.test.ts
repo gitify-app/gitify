@@ -1,4 +1,3 @@
-import axios from 'axios';
 import nock from 'nock';
 
 import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-mocks';
@@ -10,12 +9,6 @@ import { releaseHandler } from './release';
 describe('renderer/utils/notifications/handlers/release.ts', () => {
   describe('enrich', () => {
     const mockAuthor = mockRawUser('some-author');
-
-    beforeEach(() => {
-      // axios will default to using the XHR adapter which can't be intercepted
-      // by nock. So, configure axios to use the node adapter.
-      axios.defaults.adapter = 'http';
-    });
 
     it('release notification', async () => {
       const mockNotification = mockPartialGitifyNotification({

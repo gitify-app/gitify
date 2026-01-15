@@ -1,4 +1,3 @@
-import axios from 'axios';
 import nock from 'nock';
 
 import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-mocks';
@@ -40,12 +39,6 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
   });
 
   describe('enrich', () => {
-    beforeEach(() => {
-      // axios will default to using the XHR adapter which can't be intercepted
-      // by nock. So, configure axios to use the node adapter.
-      axios.defaults.adapter = 'http';
-    });
-
     it('pull request with state', async () => {
       const mockPullRequest = mockPullRequestResponseNode({ state: 'CLOSED' });
 

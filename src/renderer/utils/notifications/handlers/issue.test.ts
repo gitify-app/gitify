@@ -1,4 +1,3 @@
-import axios from 'axios';
 import nock from 'nock';
 
 import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-mocks';
@@ -35,10 +34,6 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         latestCommentUrl:
           'https://api.github.com/repos/gitify-app/notifications-test/issues/comments/302888448' as Link,
       });
-
-      // axios will default to using the XHR adapter which can't be intercepted
-      // by nock. So, configure axios to use the node adapter.
-      axios.defaults.adapter = 'http';
     });
 
     it('issue with only state', async () => {

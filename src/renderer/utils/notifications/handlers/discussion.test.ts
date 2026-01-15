@@ -1,4 +1,3 @@
-import axios from 'axios';
 import nock from 'nock';
 
 import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-mocks';
@@ -33,12 +32,6 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
       latestCommentUrl: null,
     });
     mockNotification.updatedAt = '2024-01-01T00:00:00Z';
-
-    beforeEach(() => {
-      // axios will default to using the XHR adapter which can't be intercepted
-      // by nock. So, configure axios to use the node adapter.
-      axios.defaults.adapter = 'http';
-    });
 
     it('answered discussion state - no stateReason', async () => {
       const mockDiscussion = mockDiscussionResponseNode({ isAnswered: true });
