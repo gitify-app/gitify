@@ -32,11 +32,13 @@ import {
   performGraphQLRequestString,
 } from './request';
 import type {
-  NotificationThreadSubscription,
-  RawCommit,
-  RawCommitComment,
-  RawGitHubNotification,
-  RawRelease,
+  GetCommitCommentResponse,
+  GetCommitResponse,
+  GetReleaseResponse,
+  IgnoreNotificationThreadSubscriptionResponse,
+  ListNotificationsForAuthenticatedUserResponse,
+  MarkNotificationThreadAsDoneResponse,
+  MarkNotificationThreadAsReadResponse,
 } from './types';
 import {
   getGitHubAPIBaseUrl,
@@ -64,10 +66,11 @@ export function headNotifications(
  *
  * Endpoint documentation: https://docs.github.com/en/rest/activity/notifications#list-notifications-for-the-authenticated-user
  */
+
 export function listNotificationsForAuthenticatedUser(
   account: Account,
   settings: SettingsState,
-): AxiosPromise<RawGitHubNotification[]> {
+): AxiosPromise<ListNotificationsForAuthenticatedUserResponse> {
   const url = getGitHubAPIBaseUrl(account.hostname);
   url.pathname += 'notifications';
   url.searchParams.append('participating', String(settings.participating));
@@ -88,11 +91,12 @@ export function listNotificationsForAuthenticatedUser(
  *
  * Endpoint documentation: https://docs.github.com/en/rest/activity/notifications#mark-a-thread-as-read
  */
+
 export function markNotificationThreadAsRead(
   threadId: string,
   hostname: Hostname,
   token: Token,
-): AxiosPromise<void> {
+): AxiosPromise<MarkNotificationThreadAsReadResponse> {
   const url = getGitHubAPIBaseUrl(hostname);
   url.pathname += `notifications/threads/${threadId}`;
 
@@ -111,7 +115,7 @@ export function markNotificationThreadAsDone(
   threadId: string,
   hostname: Hostname,
   token: Token,
-): AxiosPromise<void> {
+): AxiosPromise<MarkNotificationThreadAsDoneResponse> {
   const url = getGitHubAPIBaseUrl(hostname);
   url.pathname += `notifications/threads/${threadId}`;
 
@@ -127,7 +131,7 @@ export function ignoreNotificationThreadSubscription(
   threadId: string,
   hostname: Hostname,
   token: Token,
-): AxiosPromise<NotificationThreadSubscription> {
+): AxiosPromise<IgnoreNotificationThreadSubscriptionResponse> {
   const url = getGitHubAPIBaseUrl(hostname);
   url.pathname += `notifications/threads/${threadId}/subscription`;
 
@@ -141,20 +145,22 @@ export function ignoreNotificationThreadSubscription(
  *
  * Endpoint documentation: https://docs.github.com/en/rest/commits/commits#get-a-commit
  */
-export function getCommit(url: Link, token: Token): AxiosPromise<RawCommit> {
+export function getCommit(
+  url: Link,
+  token: Token,
+): AxiosPromise<GetCommitResponse> {
   return apiRequestAuth(url, 'GET', token);
 }
 
 /**
  * Gets a specified commit comment.
- * 
+ *
  * Endpoint documentation: https://docs.github.com/en/rest/commits/comments#get-a-commit-comment
-
  */
 export function getCommitComment(
   url: Link,
   token: Token,
-): AxiosPromise<RawCommitComment> {
+): AxiosPromise<GetCommitCommentResponse> {
   return apiRequestAuth(url, 'GET', token);
 }
 
@@ -163,7 +169,10 @@ export function getCommitComment(
  *
  * Endpoint documentation: https://docs.github.com/en/rest/releases/releases#get-a-release
  */
-export function getRelease(url: Link, token: Token): AxiosPromise<RawRelease> {
+export function getRelease(
+  url: Link,
+  token: Token,
+): AxiosPromise<GetReleaseResponse> {
   return apiRequestAuth(url, 'GET', token);
 }
 
