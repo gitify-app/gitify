@@ -34,6 +34,9 @@ export function performGitHubOAuth(
       clientId: authOptions.clientId,
       scopes: Constants.OAUTH_SCOPES.RECOMMENDED,
       allowSignup: false,
+      request: request.defaults({
+        baseUrl: `https://${authOptions.hostname}`,
+      }),
     });
 
     openExternalLink(url as Link);
@@ -152,7 +155,7 @@ export async function refreshAccount(account: Account): Promise<Account> {
       id: user.id,
       login: user.login,
       name: user.name,
-      avatar: user.avatarUrl,
+      avatar: user.avatar,
     };
 
     account.version = extractHostVersion(

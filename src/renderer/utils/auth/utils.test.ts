@@ -15,14 +15,10 @@ import type {
 } from '../../types';
 import * as comms from '../../utils/comms';
 import * as apiClient from '../api/client';
-import type { FetchAuthenticatedUserDetailsQuery } from '../api/graphql/generated/graphql';
 import * as logger from '../logger';
 import type { AuthMethod } from './types';
 import * as authUtils from './utils';
 import { getNewOAuthAppURL, getNewTokenURL } from './utils';
-
-// FIXME remove type , mock correct client level?
-type UserDetailsResponse = FetchAuthenticatedUserDetailsQuery['viewer'];
 
 const exchangeWebFlowCodeMock = jest.fn();
 jest.mock('@octokit/oauth-methods', () => ({
@@ -118,7 +114,7 @@ describe('renderer/utils/auth/utils.ts', () => {
       expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
       expect(openExternalLinkSpy).toHaveBeenCalledWith(
         expect.stringContaining(
-          'https://github.com/login/oauth/authorize?client_id=FAKE_CLIENT_ID_123&scope=read%3Auser%2Cnotifications%2Crepo',
+          'https://github.com/login/oauth/authorize?allow_signup=false&client_id=FAKE_CLIENT_ID_123&scope=read%3Auser%2Cnotifications%2Crepo',
         ),
       );
 
@@ -132,26 +128,21 @@ describe('renderer/utils/auth/utils.ts', () => {
   describe('exchangeAuthCodeForAccessToken', () => {
     const authCode = '123-456' as AuthCode;
 
-    it('should get a token', async () => {
-      exchangeWebFlowCodeMock.mockResolvedValueOnce(
-        Promise.resolve({
-          authentication: {
-            token: 'this-is-a-token',
-          },
-        }),
-      );
+    it('should exchange auth code for access token', async () => {
+      exchangeWebFlowCodeMock.mockResolvedValueOnce({
+        authentication: {
+          token: 'this-is-a-token',
+        },
+      });
 
       const res = await authUtils.exchangeAuthCodeForAccessToken(authCode);
 
-      expect(exchangeWebFlowCodeMock).toHaveBeenCalledWith(
-        'https://github.com/login/oauth/access_token',
-        'POST',
-        {
-          client_id: 'FAKE_CLIENT_ID_123',
-          client_secret: 'FAKE_CLIENT_SECRET_123',
-          code: '123-456',
-        },
-      );
+      expect(exchangeWebFlowCodeMock).toHaveBeenCalledWith({
+        clientType: 'oauth-app',
+        clientId: 'FAKE_CLIENT_ID_123',
+        clientSecret: 'FAKE_CLIENT_SECRET_123',
+        code: '123-456',
+      });
       expect(res).toBe('this-is-a-token');
     });
   });
@@ -177,10 +168,7 @@ describe('renderer/utils/auth/utils.ts', () => {
       beforeEach(() => {
         fetchAuthenticatedUserDetailsSpy.mockResolvedValue({
           data: {
-            viewer: {
-              ...mockGitifyUser,
-              avatarUrl: mockGitifyUser.avatar,
-            } as UserDetailsResponse,
+            viewer: mockGitifyUser,
           },
           headers: {
             'x-oauth-scopes': Constants.OAUTH_SCOPES.RECOMMENDED.join(', '),
@@ -235,10 +223,7 @@ describe('renderer/utils/auth/utils.ts', () => {
       beforeEach(() => {
         fetchAuthenticatedUserDetailsSpy.mockResolvedValue({
           data: {
-            viewer: {
-              ...mockGitifyUser,
-              avatarUrl: mockGitifyUser.avatar,
-            } as UserDetailsResponse,
+            viewer: mockGitifyUser,
           },
           headers: {
             'x-github-enterprise-version': '3.0.0',
