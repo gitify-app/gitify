@@ -2,6 +2,7 @@ import axios from 'axios';
 
 import { mockToken } from '../../__mocks__/state-mocks';
 import type { Link } from '../../types';
+import * as rendererLogger from '../logger';
 import {
   mockAuthHeaders,
   mockNoAuthHeaders,
@@ -9,11 +10,11 @@ import {
 } from './__mocks__/request-mocks';
 import { FetchAuthenticatedUserDetailsDocument } from './graphql/generated/graphql';
 import {
-  apiRequest,
-  apiRequestAuth,
   getHeaders,
+  performAuthenticatedRESTRequest,
   performGraphQLRequest,
   performGraphQLRequestString,
+  performUnauthenticatedRESTRequest,
   shouldRequestWithNoCache,
 } from './request';
 
@@ -31,7 +32,7 @@ describe('renderer/utils/api/request.ts', () => {
     it('should make a request with the correct parameters', async () => {
       const data = { key: 'value' };
 
-      await apiRequest(url, method, data);
+      await performUnauthenticatedRESTRequest(method, url, data);
 
       expect(axios).toHaveBeenCalledWith({
         method,
@@ -43,7 +44,7 @@ describe('renderer/utils/api/request.ts', () => {
 
     it('should make a request with the correct parameters and default data', async () => {
       const data = {};
-      await apiRequest(url, method);
+      await performUnauthenticatedRESTRequest(method, url);
 
       expect(axios).toHaveBeenCalledWith({
         method,
@@ -62,7 +63,7 @@ describe('renderer/utils/api/request.ts', () => {
     it('should make an authenticated request with the correct parameters', async () => {
       const data = { key: 'value' };
 
-      await apiRequestAuth(url, method, mockToken, data);
+      await performAuthenticatedRESTRequest(method, url, mockToken, data);
 
       expect(axios).toHaveBeenCalledWith({
         method,
@@ -75,7 +76,7 @@ describe('renderer/utils/api/request.ts', () => {
     it('should make an authenticated request with the correct parameters and default data', async () => {
       const data = {};
 
-      await apiRequestAuth(url, method, mockToken);
+      await performAuthenticatedRESTRequest(method, url, mockToken);
 
       expect(axios).toHaveBeenCalledWith({
         method,
@@ -110,6 +111,50 @@ describe('renderer/utils/api/request.ts', () => {
         headers: mockAuthHeaders,
       });
     });
+
+    it('throws on non-2xx HTTP status', async () => {
+      const logSpy = jest
+        .spyOn(rendererLogger, 'rendererLogError')
+        .mockImplementation();
+
+      (axios as unknown as jest.Mock).mockResolvedValue({
+        status: 500,
+        data: { data: {}, errors: [] },
+        headers: {},
+      });
+
+      await expect(
+        performGraphQLRequest(
+          url,
+          mockToken,
+          FetchAuthenticatedUserDetailsDocument,
+        ),
+      ).rejects.toThrow('HTTP error 500');
+
+      expect(logSpy).toHaveBeenCalled();
+    });
+
+    it('throws when GraphQL errors are present', async () => {
+      const logSpy = jest
+        .spyOn(rendererLogger, 'rendererLogError')
+        .mockImplementation();
+
+      (axios as unknown as jest.Mock).mockResolvedValue({
+        status: 200,
+        data: { data: {}, errors: [{ message: 'boom' }] },
+        headers: {},
+      });
+
+      await expect(
+        performGraphQLRequest(
+          url,
+          mockToken,
+          FetchAuthenticatedUserDetailsDocument,
+        ),
+      ).rejects.toThrow('GraphQL request returned errors');
+
+      expect(logSpy).toHaveBeenCalled();
+    });
   });
 
   describe('performGraphQLRequestString', () => {
@@ -133,26 +178,136 @@ describe('renderer/utils/api/request.ts', () => {
         headers: mockAuthHeaders,
       });
     });
+
+    it('throws on non-2xx HTTP status', async () => {
+      const logSpy = jest
+        .spyOn(rendererLogger, 'rendererLogError')
+        .mockImplementation();
+
+      const queryString = 'query Foo { repository { issue { title } } }';
+
+      (axios as unknown as jest.Mock).mockResolvedValue({
+        status: 502,
+        data: { data: {}, errors: [] },
+        headers: {},
+      });
+
+      await expect(
+        performGraphQLRequestString(url, mockToken, queryString),
+      ).rejects.toThrow('HTTP error 502');
+
+      expect(logSpy).toHaveBeenCalled();
+    });
+
+    it('throws when GraphQL errors are present', async () => {
+      const logSpy = jest
+        .spyOn(rendererLogger, 'rendererLogError')
+        .mockImplementation();
+
+      const queryString = 'query Foo { repository { issue { title } } }';
+
+      (axios as unknown as jest.Mock).mockResolvedValue({
+        status: 200,
+        data: { data: {}, errors: [{ message: 'graphql-error' }] },
+        headers: {},
+      });
+
+      await expect(
+        performGraphQLRequestString(url, mockToken, queryString),
+      ).rejects.toThrow('GraphQL request returned errors');
+
+      expect(logSpy).toHaveBeenCalled();
+    });
+  });
+
+  describe('performAuthenticatedRESTRequest pagination', () => {
+    it('combines paginated results on success', async () => {
+      // First page -> next link
+      (axios as unknown as jest.Mock)
+        .mockResolvedValueOnce({
+          status: 200,
+          data: [1, 2],
+          headers: {
+            link: '<https://example.com?page=2>; rel="next"',
+          },
+        })
+        .mockResolvedValueOnce({
+          status: 200,
+          data: [3],
+          headers: {
+            link: undefined,
+          },
+        });
+
+      const result = await performAuthenticatedRESTRequest<number[]>(
+        method,
+        url,
+        mockToken,
+        {},
+        true,
+      );
+
+      expect(result).toEqual([1, 2, 3]);
+    });
+
+    it('throws on non-2xx status in pagination', async () => {
+      const logSpy = jest
+        .spyOn(rendererLogger, 'rendererLogError')
+        .mockImplementation();
+
+      // First page ok, second page error
+      (axios as unknown as jest.Mock)
+        .mockResolvedValueOnce({
+          status: 200,
+          data: [1],
+          headers: {
+            link: '<https://example.com?page=2>; rel="next"',
+          },
+        })
+        .mockResolvedValueOnce({
+          status: 500,
+          data: [],
+          headers: {
+            link: undefined,
+          },
+        });
+
+      await expect(
+        performAuthenticatedRESTRequest<number[]>(
+          method,
+          url,
+          mockToken,
+          {},
+          true,
+        ),
+      ).rejects.toThrow('HTTP error 500');
+
+      expect(logSpy).toHaveBeenCalled();
+    });
   });
 
   describe('shouldRequestWithNoCache', () => {
     it('shouldRequestWithNoCache', () => {
       expect(
-        shouldRequestWithNoCache('https://example.com/api/v3/notifications'),
-      ).toBe(true);
-
-      expect(
         shouldRequestWithNoCache(
-          'https://example.com/login/oauth/access_token',
+          'https://example.com/api/v3/notifications' as Link,
         ),
       ).toBe(true);
 
       expect(
-        shouldRequestWithNoCache('https://example.com/notifications'),
+        shouldRequestWithNoCache(
+          'https://example.com/login/oauth/access_token' as Link,
+        ),
       ).toBe(true);
 
       expect(
-        shouldRequestWithNoCache('https://example.com/some/other/endpoint'),
+        shouldRequestWithNoCache('https://example.com/notifications' as Link),
+      ).toBe(true);
+
+      expect(
+        shouldRequestWithNoCache(
+          'https://example.com/some/other/endpoint' as Link,
+        ),
       ).toBe(false);
     });
   });

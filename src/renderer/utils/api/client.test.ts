@@ -1,4 +1,4 @@
-import axios, { type AxiosPromise, type AxiosResponse } from 'axios';
+import axios from 'axios';
 
 import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
 import {
@@ -7,13 +7,20 @@ import {
 } from '../../__mocks__/notifications-mocks';
 import { mockToken } from '../../__mocks__/state-mocks';
 import { Constants } from '../../constants';
-import type { Hostname, Link, SettingsState, Token } from '../../types';
+import type {
+  AuthCode,
+  Hostname,
+  Link,
+  SettingsState,
+  Token,
+} from '../../types';
 import * as logger from '../../utils/logger';
 import {
   mockAuthHeaders,
   mockNonCachedAuthHeaders,
 } from './__mocks__/request-mocks';
 import {
+  exchangeAuthCodeForAccessToken,
   fetchAuthenticatedUserDetails,
   fetchDiscussionByNumber,
   fetchIssueByNumber,
@@ -36,17 +43,61 @@ import {
   FetchPullRequestByNumberDocument,
   type FetchPullRequestByNumberQuery,
 } from './graphql/generated/graphql';
-import type { ExecutionResultWithHeaders } from './request';
 import * as apiRequests from './request';
+import type {
+  GitHubGraphQLResponse,
+  GitHubHtmlUrlResponse,
+  LoginOAuthResponse,
+} from './types';
 
 jest.mock('axios');
 
 const mockGitHubHostname = 'github.com' as Hostname;
 const mockThreadId = '1234';
 
+const mockAuthCode = 'some-auth-code' as AuthCode;
+
 describe('renderer/utils/api/client.ts', () => {
   afterEach(() => {
     jest.clearAllMocks();
+  });
+
+  it('exchangeAuthCodeForAccessToken - should exchange code', async () => {
+    const performUnauthenticatedRESTRequestSpy = jest.spyOn(
+      apiRequests,
+      'performUnauthenticatedRESTRequest',
+    );
+
+    const requestPromise = Promise.resolve({
+      access_token: mockToken,
+    } as LoginOAuthResponse);
+
+    performUnauthenticatedRESTRequestSpy.mockResolvedValue(requestPromise);
+
+    const {
+      hostname: mockHostname,
+      clientId: mockClientId,
+      clientSecret: mockClientSecret,
+    } = Constants.DEFAULT_AUTH_OPTIONS;
+
+    const response = await exchangeAuthCodeForAccessToken(
+      mockHostname,
+      Constants.DEFAULT_AUTH_OPTIONS.clientId,
+      Constants.DEFAULT_AUTH_OPTIONS.clientSecret,
+      mockAuthCode,
+    );
+
+    expect(apiRequests.performUnauthenticatedRESTRequest).toHaveBeenCalledWith(
+      'https://github.com/login/oauth/access_token',
+      'POST',
+      {
+        client_id: mockClientId,
+        client_secret: mockClientSecret,
+        code: mockAuthCode,
+      },
+    );
+
+    expect(response.access_token).toBe(mockToken);
   });
 
   it('headNotifications - should fetch notifications head', async () => {
@@ -185,16 +236,16 @@ describe('renderer/utils/api/client.ts', () => {
 
   describe('getHtmlUrl', () => {
     it('should return the HTML URL', async () => {
-      const apiRequestAuthSpy = jest.spyOn(apiRequests, 'apiRequestAuth');
+      const performAuthenticatedRESTRequestSpy = jest.spyOn(
+        apiRequests,
+        'performAuthenticatedRESTRequest',
+      );
 
       const requestPromise = Promise.resolve({
-        data: {
-          html_url:
-            'https://github.com/gitify-app/notifications-test/issues/785',
-        },
-      } as AxiosResponse) as AxiosPromise;
+        html_url: 'https://github.com/gitify-app/notifications-test/issues/785',
+      } as GitHubHtmlUrlResponse);
 
-      apiRequestAuthSpy.mockResolvedValue(requestPromise);
+      performAuthenticatedRESTRequestSpy.mockResolvedValue(requestPromise);
 
       const result = await getHtmlUrl(
         'https://api.github.com/repos/gitify-app/notifications-test/issues/785' as Link,
@@ -210,11 +261,14 @@ describe('renderer/utils/api/client.ts', () => {
         .spyOn(logger, 'rendererLogError')
         .mockImplementation();
 
-      const apiRequestAuthSpy = jest.spyOn(apiRequests, 'apiRequestAuth');
+      const performAuthenticatedRESTRequestSpy = jest.spyOn(
+        apiRequests,
+        'performAuthenticatedRESTRequest',
+      );
 
       const mockError = new Error('Test error');
 
-      apiRequestAuthSpy.mockRejectedValue(mockError);
+      performAuthenticatedRESTRequestSpy.mockRejectedValue(mockError);
 
       await getHtmlUrl(
         'https://api.github.com/repos/gitify-app/gitify/issues/785' as Link,
@@ -234,7 +288,7 @@ describe('renderer/utils/api/client.ts', () => {
     performGraphQLRequestSpy.mockResolvedValue({
       data: {},
       headers: {},
-    } as ExecutionResultWithHeaders<FetchAuthenticatedUserDetailsQuery>);
+    } as GitHubGraphQLResponse<FetchAuthenticatedUserDetailsQuery>);
 
     await fetchAuthenticatedUserDetails(mockGitHubHostname, mockToken);
 
@@ -260,7 +314,7 @@ describe('renderer/utils/api/client.ts', () => {
     performGraphQLRequestSpy.mockResolvedValue({
       data: {},
       headers: {},
-    } as ExecutionResultWithHeaders<FetchDiscussionByNumberQuery>);
+    } as GitHubGraphQLResponse<FetchDiscussionByNumberQuery>);
 
     await fetchDiscussionByNumber(mockNotification);
 
@@ -295,7 +349,7 @@ describe('renderer/utils/api/client.ts', () => {
     performGraphQLRequestSpy.mockResolvedValue({
       data: {},
       headers: {},
-    } as ExecutionResultWithHeaders<FetchIssueByNumberQuery>);
+    } as GitHubGraphQLResponse<FetchIssueByNumberQuery>);
 
     await fetchIssueByNumber(mockNotification);
 
@@ -328,7 +382,7 @@ describe('renderer/utils/api/client.ts', () => {
     performGraphQLRequestSpy.mockResolvedValue({
       data: {},
       headers: {},
-    } as ExecutionResultWithHeaders<FetchPullRequestByNumberQuery>);
+    } as GitHubGraphQLResponse<FetchPullRequestByNumberQuery>);
 
     await fetchPullByNumber(mockNotification);
 
@@ -364,7 +418,7 @@ describe('renderer/utils/api/client.ts', () => {
       performGraphQLRequestStringSpy.mockResolvedValue({
         data: {},
         headers: {},
-      } as ExecutionResultWithHeaders<unknown>);
+      } as GitHubGraphQLResponse<unknown>);
 
       await fetchNotificationDetailsForList([mockNotification]);
 
@@ -380,7 +434,7 @@ describe('renderer/utils/api/client.ts', () => {
       performGraphQLRequestStringSpy.mockResolvedValue({
         data: {},
         headers: {},
-      } as ExecutionResultWithHeaders<unknown>);
+      } as GitHubGraphQLResponse<unknown>);
 
       await fetchNotificationDetailsForList([]);
 
@@ -396,7 +450,7 @@ describe('renderer/utils/api/client.ts', () => {
       performGraphQLRequestStringSpy.mockResolvedValue({
         data: {},
         headers: {},
-      } as ExecutionResultWithHeaders<unknown>);
+      } as GitHubGraphQLResponse<unknown>);
 
       await fetchNotificationDetailsForList(mockGitHubCloudGitifyNotifications);
 

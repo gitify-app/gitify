@@ -1,7 +1,9 @@
 import { AxiosError } from 'axios';
+import type { ExecutionResult } from 'graphql';
 
 import type { GitifyError } from '../../types';
 import { Errors } from '../errors';
+import { rendererLogError } from '../logger';
 import type { GitHubRESTError } from './types';
 
 export function determineFailureType(
@@ -42,4 +44,19 @@ export function determineFailureType(
   }
 
   return Errors.UNKNOWN;
+}
+
+/**
+ * Assert that a GraphQL response does not contain errors.
+ * Logs and throws if `errors` array is present and non-empty.
+ */
+export function assertNoGraphQLErrors(
+  context: string,
+  payload: ExecutionResult<unknown>,
+) {
+  if (Array.isArray(payload.errors) && payload.errors.length > 0) {
+    const err = new Error('GraphQL request returned errors');
+    rendererLogError(context, 'GraphQL errors present in response', err);
+    throw err;
+  }
 }

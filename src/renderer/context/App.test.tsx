@@ -179,7 +179,10 @@ describe('renderer/context/App.tsx', () => {
   });
 
   describe('authentication methods', () => {
-    const apiRequestAuthSpy = jest.spyOn(apiRequests, 'apiRequestAuth');
+    const performAuthenticatedRESTRequestSpy = jest.spyOn(
+      apiRequests,
+      'performAuthenticatedRESTRequest',
+    );
 
     it('should call loginWithGitHubApp', async () => {
       const { button } = renderContextButton('loginWithGitHubApp');
@@ -202,7 +205,7 @@ describe('renderer/context/App.tsx', () => {
     });
 
     it('should call loginWithPersonalAccessToken', async () => {
-      apiRequestAuthSpy.mockResolvedValueOnce(null);
+      performAuthenticatedRESTRequestSpy.mockResolvedValueOnce(null);
 
       const { button } = renderContextButton('loginWithPersonalAccessToken', {
         hostname: 'github.com' as Hostname,
@@ -215,8 +218,8 @@ describe('renderer/context/App.tsx', () => {
         expect(mockFetchNotifications).toHaveBeenCalledTimes(1),
       );
 
-      expect(apiRequestAuthSpy).toHaveBeenCalledTimes(1);
-      expect(apiRequestAuthSpy).toHaveBeenCalledWith(
+      expect(performAuthenticatedRESTRequestSpy).toHaveBeenCalledTimes(1);
+      expect(performAuthenticatedRESTRequestSpy).toHaveBeenCalledWith(
         'https://api.github.com/notifications',
         'HEAD',
         'encrypted',

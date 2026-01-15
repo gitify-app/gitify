@@ -13,8 +13,10 @@ import type {
   Link,
   Token,
 } from '../../types';
-import { fetchAuthenticatedUserDetails } from '../api/client';
-import { apiRequest } from '../api/request';
+import {
+  exchangeAuthCodeForAccessToken,
+  fetchAuthenticatedUserDetails,
+} from '../api/client';
 import { encryptValue, openExternalLink } from '../comms';
 import { getPlatformFromHostname } from '../helpers';
 import { rendererLogError, rendererLogInfo, rendererLogWarn } from '../logger';
@@ -75,18 +77,16 @@ export async function getToken(
   authCode: AuthCode,
   authOptions = Constants.DEFAULT_AUTH_OPTIONS,
 ): Promise<AuthTokenResponse> {
-  const url =
-    `https://${authOptions.hostname}/login/oauth/access_token` as Link;
-  const data = {
-    client_id: authOptions.clientId,
-    client_secret: authOptions.clientSecret,
-    code: authCode,
-  };
+  const response = await exchangeAuthCodeForAccessToken(
+    authOptions.hostname,
+    authOptions.clientId,
+    authOptions.clientSecret,
+    authCode,
+  );
 
-  const response = await apiRequest(url, 'POST', data);
   return {
     hostname: authOptions.hostname,
-    token: response.data.access_token,
+    token: response.access_token as Token,
   };
 }
 
