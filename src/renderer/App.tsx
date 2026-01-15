@@ -8,7 +8,6 @@ import {
 
 import { BaseStyles, ThemeProvider } from '@primer/react';
 
-import { AppLayout } from './components/layout/AppLayout';
 import { AppProvider, useAppContext } from './context/App';
 import { AccountsRoute } from './routes/Accounts';
 import { FiltersRoute } from './routes/Filters';
@@ -17,6 +16,8 @@ import { LoginWithOAuthAppRoute } from './routes/LoginWithOAuthApp';
 import { LoginWithPersonalAccessTokenRoute } from './routes/LoginWithPersonalAccessToken';
 import { NotificationsRoute } from './routes/Notifications';
 import { SettingsRoute } from './routes/Settings';
+
+import { AppLayout } from './components/layout/AppLayout';
 
 import './App.css';
 

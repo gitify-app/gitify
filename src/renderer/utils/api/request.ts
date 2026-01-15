@@ -6,6 +6,7 @@ import axios, {
 import type { ExecutionResult } from 'graphql';
 
 import type { Link, Token } from '../../types';
+
 import { decryptValue } from '../comms';
 import { rendererLogError } from '../logger';
 import type { TypedDocumentString } from './graphql/generated/graphql';

@@ -2,6 +2,8 @@ import type { FC } from 'react';
 
 import type { Icon, OcticonProps } from '@primer/octicons-react';
 
+import type { AuthMethod, PlatformType } from './utils/auth/types';
+
 import type {
   DiscussionStateReason,
   IssueState,
@@ -10,7 +12,6 @@ import type {
   PullRequestReviewState,
   PullRequestState,
 } from './utils/api/graphql/generated/graphql';
-import type { AuthMethod, PlatformType } from './utils/auth/types';
 
 declare const __brand: unique symbol;
 

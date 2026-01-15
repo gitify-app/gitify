@@ -1,4 +1,5 @@
 import { renderWithAppContext } from '../../__helpers__/test-utils';
+
 import { Centered } from './Centered';
 
 describe('renderer/components/layout/Centered.tsx', () => {

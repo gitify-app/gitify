@@ -5,6 +5,7 @@ import {
   renderWithAppContext,
 } from '../__helpers__/test-utils';
 import { mockSettings } from '../__mocks__/state-mocks';
+
 import { AllRead } from './AllRead';
 
 describe('renderer/components/AllRead.tsx', () => {

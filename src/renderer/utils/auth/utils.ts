@@ -4,6 +4,7 @@ import semver from 'semver';
 import { APPLICATION } from '../../../shared/constants';
 
 import { Constants } from '../../constants';
+
 import type {
   Account,
   AuthCode,
@@ -13,12 +14,13 @@ import type {
   Link,
   Token,
 } from '../../types';
+import type { AuthMethod, AuthResponse, AuthTokenResponse } from './types';
+
 import { fetchAuthenticatedUserDetails } from '../api/client';
 import { apiRequest } from '../api/request';
 import { encryptValue, openExternalLink } from '../comms';
 import { getPlatformFromHostname } from '../helpers';
 import { rendererLogError, rendererLogInfo, rendererLogWarn } from '../logger';
-import type { AuthMethod, AuthResponse, AuthTokenResponse } from './types';
 
 export function authGitHub(
   authOptions = Constants.DEFAULT_AUTH_OPTIONS,

@@ -11,6 +11,7 @@ import {
   mockSingleAccountNotifications,
 } from '../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../__mocks__/state-mocks';
+
 import {
   type AccountNotifications,
   type GitifyNotification,
@@ -19,6 +20,7 @@ import {
   type Link,
   type SettingsState,
 } from '../../types';
+
 import * as logger from '../../utils/logger';
 import {
   enrichNotification,

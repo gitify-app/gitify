@@ -3,6 +3,13 @@ import nock from 'nock';
 import { configureAxiosHttpAdapterForNock } from '../../../__helpers__/test-utils';
 import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
+import {
+  mockAuthor,
+  mockCommenter,
+  mockDiscussionResponseNode,
+  mockReplier,
+} from '../../api/__mocks__/response-mocks';
+
 import type { GitifyNotification } from '../../../types';
 import {
   type GitifyDiscussionState,
@@ -10,12 +17,7 @@ import {
   IconColor,
   type Link,
 } from '../../../types';
-import {
-  mockAuthor,
-  mockCommenter,
-  mockDiscussionResponseNode,
-  mockReplier,
-} from '../../api/__mocks__/response-mocks';
+
 import { discussionHandler } from './discussion';
 
 describe('renderer/utils/notifications/handlers/discussion.ts', () => {

@@ -17,6 +17,7 @@ import { IconButton, Stack } from '@primer/react';
 import { APPLICATION } from '../../shared/constants';
 
 import { useAppContext } from '../context/App';
+
 import { getPrimaryAccountHostname } from '../utils/auth/utils';
 import { quitApp } from '../utils/comms';
 import {

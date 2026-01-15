@@ -1,6 +1,7 @@
 import { MemoryRouter } from 'react-router-dom';
 
 import { renderWithAppContext } from '../../__helpers__/test-utils';
+
 import { AppLayout } from './AppLayout';
 
 describe('renderer/components/layout/AppLayout.tsx', () => {

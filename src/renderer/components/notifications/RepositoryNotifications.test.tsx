@@ -5,7 +5,9 @@ import { renderWithAppContext } from '../../__helpers__/test-utils';
 import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
 import { mockGitHubCloudGitifyNotifications } from '../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../__mocks__/state-mocks';
+
 import type { Link } from '../../types';
+
 import * as comms from '../../utils/comms';
 import { RepositoryNotifications } from './RepositoryNotifications';
 

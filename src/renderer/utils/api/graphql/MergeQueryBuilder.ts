@@ -1,9 +1,10 @@
+import type { FragmentInfo, VariableDef } from './types';
+
 import {
   type Exact,
   FetchMergedDetailsTemplateDocument,
   type FetchMergedDetailsTemplateQueryVariables,
 } from './generated/graphql';
-import type { FragmentInfo, VariableDef } from './types';
 import {
   aliasFieldAndSubstituteIndexedVars,
   extractIndexedVariableDefinitions,

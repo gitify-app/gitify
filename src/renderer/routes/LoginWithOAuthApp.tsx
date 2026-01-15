@@ -18,14 +18,18 @@ import {
   Tooltip,
 } from '@primer/react';
 
+import { Constants } from '../constants';
+
+import { useAppContext } from '../context/App';
+
 import { Contents } from '../components/layout/Contents';
 import { Page } from '../components/layout/Page';
 import { Footer } from '../components/primitives/Footer';
 import { Header } from '../components/primitives/Header';
-import { Constants } from '../constants';
-import { useAppContext } from '../context/App';
+
 import type { ClientID, ClientSecret, Hostname, Token } from '../types';
 import type { LoginOAuthAppOptions } from '../utils/auth/types';
+
 import {
   getNewOAuthAppURL,
   isValidClientId,

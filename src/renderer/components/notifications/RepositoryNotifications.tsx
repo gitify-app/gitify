@@ -4,15 +4,18 @@ import { CheckIcon, ReadIcon } from '@primer/octicons-react';
 import { Button, Stack } from '@primer/react';
 
 import { useAppContext } from '../../context/App';
+
+import { HoverButton } from '../primitives/HoverButton';
+import { HoverGroup } from '../primitives/HoverGroup';
+
 import { type GitifyNotification, Opacity, Size } from '../../types';
+
 import { cn } from '../../utils/cn';
 import { isMarkAsDoneFeatureSupported } from '../../utils/features';
 import { getChevronDetails } from '../../utils/helpers';
 import { openRepository } from '../../utils/links';
 import { shouldRemoveNotificationsFromState } from '../../utils/notifications/remove';
 import { AvatarWithFallback } from '../avatars/AvatarWithFallback';
-import { HoverButton } from '../primitives/HoverButton';
-import { HoverGroup } from '../primitives/HoverGroup';
 import { NotificationRow } from './NotificationRow';
 
 interface RepositoryNotificationsProps {

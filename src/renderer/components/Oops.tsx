@@ -1,8 +1,10 @@
 import { type FC, useMemo } from 'react';
 
-import type { GitifyError } from '../types';
-import { Errors } from '../utils/errors';
 import { EmojiSplash } from './layout/EmojiSplash';
+
+import type { GitifyError } from '../types';
+
+import { Errors } from '../utils/errors';
 
 interface OopsProps {
   error: GitifyError;

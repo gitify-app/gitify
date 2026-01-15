@@ -10,6 +10,7 @@ import type {
   Link,
   SettingsState,
 } from '../../../types';
+
 import { actionsURL } from '../../helpers';
 import { DefaultHandler } from './default';
 

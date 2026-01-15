@@ -1,4 +1,5 @@
 import type { AccountNotifications, GitifyNotification } from '../../types';
+
 import { getAccountUUID } from '../auth/utils';
 
 /**

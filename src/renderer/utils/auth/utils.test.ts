@@ -4,7 +4,9 @@ import { configureAxiosHttpAdapterForNock } from '../../__helpers__/test-utils';
 import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
 import { mockAuth } from '../../__mocks__/state-mocks';
 import { mockGitifyUser } from '../../__mocks__/user-mocks';
+
 import { Constants } from '../../constants';
+
 import type {
   Account,
   AuthCode,
@@ -14,12 +16,13 @@ import type {
   Hostname,
   Token,
 } from '../../types';
+import type { AuthMethod } from './types';
+
 import * as comms from '../../utils/comms';
 import * as apiClient from '../api/client';
 import type { FetchAuthenticatedUserDetailsQuery } from '../api/graphql/generated/graphql';
 import * as apiRequests from '../api/request';
 import * as logger from '../logger';
-import type { AuthMethod } from './types';
 import * as authUtils from './utils';
 import { getNewOAuthAppURL, getNewTokenURL } from './utils';
 

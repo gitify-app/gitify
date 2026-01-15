@@ -3,6 +3,12 @@ import nock from 'nock';
 import { configureAxiosHttpAdapterForNock } from '../../../__helpers__/test-utils';
 import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
+import {
+  mockAuthor,
+  mockCommenter,
+  mockPullRequestResponseNode,
+} from '../../api/__mocks__/response-mocks';
+
 import type { GitifyNotification } from '../../../types';
 import {
   type GitifyPullRequestState,
@@ -10,11 +16,7 @@ import {
   IconColor,
   type Link,
 } from '../../../types';
-import {
-  mockAuthor,
-  mockCommenter,
-  mockPullRequestResponseNode,
-} from '../../api/__mocks__/response-mocks';
+
 import type { PullRequestReviewState } from '../../api/graphql/generated/graphql';
 import { getLatestReviewForReviewers, pullRequestHandler } from './pullRequest';
 

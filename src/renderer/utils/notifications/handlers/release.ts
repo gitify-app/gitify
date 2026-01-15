@@ -11,6 +11,7 @@ import type {
   Link,
   SettingsState,
 } from '../../../types';
+
 import { getRelease } from '../../api/client';
 import { isStateFilteredOut } from '../filters/filter';
 import { DefaultHandler, defaultHandler } from './default';

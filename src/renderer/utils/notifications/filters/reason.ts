@@ -5,8 +5,9 @@ import type {
   SettingsState,
   TypeDetails,
 } from '../../../types';
-import { REASON_TYPE_DETAILS } from '../../reason';
 import type { Filter } from './types';
+
+import { REASON_TYPE_DETAILS } from '../../reason';
 
 export const reasonFilter: Filter<Reason> = {
   FILTER_TYPES: REASON_TYPE_DETAILS,

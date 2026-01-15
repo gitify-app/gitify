@@ -5,6 +5,7 @@ import { ArrowLeftIcon, type Icon } from '@primer/octicons-react';
 import { IconButton, Stack } from '@primer/react';
 
 import { useAppContext } from '../../context/App';
+
 import { Title } from './Title';
 
 interface HeaderProps {

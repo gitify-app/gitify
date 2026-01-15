@@ -3,7 +3,9 @@ import type { FC, MouseEvent } from 'react';
 import { Stack } from '@primer/react';
 
 import { useAppContext } from '../../context/App';
+
 import { type GitifyNotification, Opacity, Size } from '../../types';
+
 import { cn } from '../../utils/cn';
 import { openRepository } from '../../utils/links';
 import { isGroupByDate } from '../../utils/notifications/group';

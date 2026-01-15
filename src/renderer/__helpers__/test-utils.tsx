@@ -6,6 +6,7 @@ import { BaseStyles, ThemeProvider } from '@primer/react';
 import axios from 'axios';
 
 import { mockAuth, mockSettings } from '../__mocks__/state-mocks';
+
 import { AppContext, type AppContextState } from '../context/App';
 
 /**

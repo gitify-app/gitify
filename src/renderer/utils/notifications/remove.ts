@@ -4,6 +4,7 @@ import type {
   GitifyNotification,
   SettingsState,
 } from '../../types';
+
 import { getAccountUUID } from '../auth/utils';
 
 /**

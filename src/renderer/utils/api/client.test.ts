@@ -6,13 +6,16 @@ import {
   mockPartialGitifyNotification,
 } from '../../__mocks__/notifications-mocks';
 import { mockToken } from '../../__mocks__/state-mocks';
-import { Constants } from '../../constants';
-import type { Hostname, Link, SettingsState, Token } from '../../types';
-import * as logger from '../../utils/logger';
 import {
   mockAuthHeaders,
   mockNonCachedAuthHeaders,
 } from './__mocks__/request-mocks';
+
+import { Constants } from '../../constants';
+
+import type { Hostname, Link, SettingsState, Token } from '../../types';
+
+import * as logger from '../../utils/logger';
 import {
   fetchAuthenticatedUserDetails,
   fetchDiscussionByNumber,
