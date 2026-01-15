@@ -1,12 +1,15 @@
 import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
+
 import { defaultSettings } from '../../../context/defaults';
+
 import type {
   GitifyOwner,
   Link,
   SearchToken,
   SettingsState,
 } from '../../../types';
+
 import {
   filterBaseNotifications,
   filterDetailedNotifications,

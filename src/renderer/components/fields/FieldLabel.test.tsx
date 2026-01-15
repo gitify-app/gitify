@@ -1,4 +1,5 @@
 import { renderWithAppContext } from '../../__helpers__/test-utils';
+
 import { FieldLabel, type FieldLabelProps } from './FieldLabel';
 
 describe('renderer/components/fields/FieldLabel.tsx', () => {

@@ -1,9 +1,12 @@
 import { type FC, useMemo } from 'react';
 
 import { Constants } from '../constants';
+
 import { useAppContext } from '../hooks/useAppContext';
-import { hasActiveFilters } from '../utils/notifications/filters/filter';
+
 import { EmojiSplash } from './layout/EmojiSplash';
+
+import { hasActiveFilters } from '../utils/notifications/filters/filter';
 
 interface AllReadProps {
   fullHeight?: boolean;

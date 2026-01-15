@@ -1,4 +1,5 @@
 import type { GitifyNotification } from '../../../types';
+
 import { isNonHumanUser, userTypeFilter } from './userType';
 
 describe('renderer/utils/notifications/filters/userType.ts', () => {

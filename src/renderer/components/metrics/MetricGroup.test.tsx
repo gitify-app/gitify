@@ -1,7 +1,9 @@
 import { renderWithAppContext } from '../../__helpers__/test-utils';
 import { mockGitifyNotification } from '../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../__mocks__/state-mocks';
+
 import type { GitifyMilestone } from '../../types';
+
 import { MetricGroup } from './MetricGroup';
 
 describe('renderer/components/metrics/MetricGroup.tsx', () => {

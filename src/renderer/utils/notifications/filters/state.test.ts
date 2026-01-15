@@ -3,6 +3,7 @@ import type {
   GitifyNotification,
   GitifyNotificationState,
 } from '../../../types';
+
 import { stateFilter } from './state';
 
 describe('renderer/utils/notifications/filters/state.ts', () => {

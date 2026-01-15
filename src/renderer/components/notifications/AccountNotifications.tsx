@@ -4,12 +4,17 @@ import { GitPullRequestIcon, IssueOpenedIcon } from '@primer/octicons-react';
 import { Button, Stack } from '@primer/react';
 
 import { useAppContext } from '../../hooks/useAppContext';
+
+import { HoverButton } from '../primitives/HoverButton';
+import { HoverGroup } from '../primitives/HoverGroup';
+
 import {
   type Account,
   type GitifyError,
   type GitifyNotification,
   Size,
 } from '../../types';
+
 import { hasMultipleAccounts } from '../../utils/auth/utils';
 import { cn } from '../../utils/cn';
 import { getChevronDetails } from '../../utils/helpers';
@@ -25,8 +30,6 @@ import {
 import { AllRead } from '../AllRead';
 import { AvatarWithFallback } from '../avatars/AvatarWithFallback';
 import { Oops } from '../Oops';
-import { HoverButton } from '../primitives/HoverButton';
-import { HoverGroup } from '../primitives/HoverGroup';
 import { NotificationRow } from './NotificationRow';
 import { RepositoryNotifications } from './RepositoryNotifications';
 

@@ -7,18 +7,21 @@ import { APPLICATION } from '../../../shared/constants';
 
 import { defaultSettings } from '../../context/defaults';
 import { useAppContext } from '../../hooks/useAppContext';
+
+import { Checkbox } from '../fields/Checkbox';
+import { RadioGroup } from '../fields/RadioGroup';
+import { Title } from '../primitives/Title';
+
 import { OpenPreference } from '../../types';
+
 import {
   canDecreaseVolume,
   canIncreaseVolume,
   decreaseVolume,
   increaseVolume,
 } from '../../utils/notifications/sound';
-import { Checkbox } from '../fields/Checkbox';
-import { RadioGroup } from '../fields/RadioGroup';
 import { VolumeDownIcon } from '../icons/VolumeDownIcon';
 import { VolumeUpIcon } from '../icons/VolumeUpIcon';
-import { Title } from '../primitives/Title';
 
 export const SystemSettings: FC = () => {
   const { settings, updateSetting } = useAppContext();

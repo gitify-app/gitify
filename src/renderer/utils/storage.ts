@@ -1,4 +1,5 @@
 import { Constants } from '../constants';
+
 import type { GitifyState } from '../types';
 
 export function loadState(): GitifyState {

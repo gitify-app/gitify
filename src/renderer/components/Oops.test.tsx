@@ -4,6 +4,7 @@ import {
   ensureStableEmojis,
   renderWithAppContext,
 } from '../__helpers__/test-utils';
+
 import { Oops } from './Oops';
 
 describe('renderer/components/Oops.tsx', () => {

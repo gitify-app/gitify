@@ -4,10 +4,13 @@ import { useNavigate } from 'react-router-dom';
 import { KeyIcon, MarkGithubIcon, PersonIcon } from '@primer/octicons-react';
 import { Button, Heading, Stack, Text } from '@primer/react';
 
+import { useAppContext } from '../hooks/useAppContext';
+
 import { LogoIcon } from '../components/icons/LogoIcon';
 import { Centered } from '../components/layout/Centered';
-import { useAppContext } from '../hooks/useAppContext';
+
 import { Size } from '../types';
+
 import { showWindow } from '../utils/comms';
 import { rendererLogError } from '../utils/logger';
 

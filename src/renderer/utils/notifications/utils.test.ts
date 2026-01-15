@@ -3,7 +3,9 @@ import {
   mockGitHubEnterpriseServerAccount,
 } from '../../__mocks__/account-mocks';
 import { mockGitifyNotificationForRepoName } from '../../__mocks__/notifications-mocks';
+
 import type { AccountNotifications } from '../../types';
+
 import { getNewNotifications } from './utils';
 
 describe('renderer/utils/notifications/utils.ts', () => {

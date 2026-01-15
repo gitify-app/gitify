@@ -1,4 +1,5 @@
 import type { GitifyNotification } from '../../types';
+
 import { createNotificationHandler } from './handlers';
 
 /**

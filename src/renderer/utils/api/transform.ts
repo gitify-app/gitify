@@ -10,8 +10,9 @@ import type {
   SubjectType,
   UserType,
 } from '../../types';
-import { getReasonDetails } from '../reason';
 import type { RawGitHubNotification } from './types';
+
+import { getReasonDetails } from '../reason';
 
 /**
  * Transform a raw GitHub notification to GitifyNotification.

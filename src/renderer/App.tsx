@@ -8,8 +8,6 @@ import {
 
 import { BaseStyles, ThemeProvider } from '@primer/react';
 
-import { GlobalShortcuts } from './components/GlobalShortcuts';
-import { AppLayout } from './components/layout/AppLayout';
 import { AppProvider } from './context/App';
 import { AccountsRoute } from './routes/Accounts';
 import { FiltersRoute } from './routes/Filters';
@@ -18,6 +16,9 @@ import { LoginWithOAuthAppRoute } from './routes/LoginWithOAuthApp';
 import { LoginWithPersonalAccessTokenRoute } from './routes/LoginWithPersonalAccessToken';
 import { NotificationsRoute } from './routes/Notifications';
 import { SettingsRoute } from './routes/Settings';
+
+import { GlobalShortcuts } from './components/GlobalShortcuts';
+import { AppLayout } from './components/layout/AppLayout';
 
 import './App.css';
 
@@ -40,8 +41,8 @@ export const App = () => {
     <ThemeProvider>
       <BaseStyles>
         <AppProvider>
-          <GlobalShortcuts />
           <Router>
+            <GlobalShortcuts />
             <AppLayout>
               <Routes>
                 <Route

@@ -3,6 +3,7 @@ import type { FC } from 'react';
 import { Stack } from '@primer/react';
 
 import { EmojiText } from '../primitives/EmojiText';
+
 import { Centered } from './Centered';
 
 interface EmojiSplashProps {

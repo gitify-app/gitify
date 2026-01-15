@@ -4,6 +4,7 @@ import {
   mockMultipleAccountNotifications,
   mockSingleAccountNotifications,
 } from '../../__mocks__/notifications-mocks';
+
 import * as helpers from '../helpers';
 import * as native from './native';
 

@@ -8,7 +8,9 @@ import {
 import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
 import { mockGitHubCloudGitifyNotifications } from '../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../__mocks__/state-mocks';
+
 import { GroupBy } from '../../types';
+
 import * as links from '../../utils/links';
 import { AccountNotifications } from './AccountNotifications';
 

@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { MarkGithubIcon } from '@primer/octicons-react';
 
 import { renderWithAppContext } from '../../__helpers__/test-utils';
+
 import { Header } from './Header';
 
 const navigateMock = jest.fn();
@@ -16,7 +17,7 @@ describe('renderer/components/primitives/Header.tsx', () => {
   const fetchNotificationsMock = jest.fn();
 
   afterEach(() => {
-    jest.resetAllMocks();
+    jest.clearAllMocks();
   });
 
   it('should render itself & its children', () => {

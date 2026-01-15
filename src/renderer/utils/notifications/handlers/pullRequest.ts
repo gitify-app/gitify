@@ -18,6 +18,7 @@ import {
   type Link,
   type SettingsState,
 } from '../../../types';
+
 import { fetchPullByNumber } from '../../api/client';
 import type {
   PullRequestDetailsFragment,

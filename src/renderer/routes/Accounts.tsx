@@ -21,13 +21,16 @@ import {
   Text,
 } from '@primer/react';
 
+import { useAppContext } from '../hooks/useAppContext';
+
 import { AvatarWithFallback } from '../components/avatars/AvatarWithFallback';
 import { Contents } from '../components/layout/Contents';
 import { Page } from '../components/layout/Page';
 import { Footer } from '../components/primitives/Footer';
 import { Header } from '../components/primitives/Header';
-import { useAppContext } from '../hooks/useAppContext';
+
 import { type Account, Size } from '../types';
+
 import {
   formatAlternateOAuthScopes,
   formatRecommendedOAuthScopes,

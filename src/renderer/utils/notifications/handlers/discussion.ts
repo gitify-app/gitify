@@ -18,6 +18,7 @@ import {
   type Link,
   type SettingsState,
 } from '../../../types';
+
 import { fetchDiscussionByNumber } from '../../api/client';
 import type {
   CommentFieldsFragment,

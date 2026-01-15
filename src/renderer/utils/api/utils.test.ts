@@ -1,6 +1,7 @@
 import type { AxiosResponse } from 'axios';
 
 import type { Hostname } from '../../types';
+
 import {
   getGitHubAPIBaseUrl,
   getGitHubGraphQLUrl,

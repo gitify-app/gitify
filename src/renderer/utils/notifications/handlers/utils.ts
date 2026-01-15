@@ -1,4 +1,5 @@
 import type { GitifyNotificationUser } from '../../../types';
+
 import type { AuthorFieldsFragment } from '../../api/graphql/generated/graphql';
 
 // Author type from GraphQL or manually constructed

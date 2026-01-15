@@ -3,10 +3,14 @@ import { act, fireEvent, waitFor } from '@testing-library/react';
 import { renderWithAppContext } from '../__helpers__/test-utils';
 import { mockGitifyNotification } from '../__mocks__/notifications-mocks';
 import { mockSettings } from '../__mocks__/state-mocks';
+
 import { Constants } from '../constants';
+
 import { useAppContext } from '../hooks/useAppContext';
 import { useNotifications } from '../hooks/useNotifications';
+
 import type { AuthState, Hostname, SettingsState, Token } from '../types';
+
 import * as apiRequests from '../utils/api/request';
 import * as notifications from '../utils/notifications/notifications';
 import * as storage from '../utils/storage';

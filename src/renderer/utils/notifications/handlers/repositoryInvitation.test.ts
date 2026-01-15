@@ -1,5 +1,7 @@
 import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-mocks';
+
 import type { GitifyNotification, Link } from '../../../types';
+
 import { repositoryInvitationHandler } from './repositoryInvitation';
 
 describe('renderer/utils/notifications/handlers/repositoryInvitation.ts', () => {

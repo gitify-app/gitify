@@ -1,7 +1,8 @@
 import { type DocumentNode, parse, print, type TypeNode } from 'graphql';
 
-import type { TypedDocumentString } from './generated/graphql';
 import type { FragmentInfo, VariableDef } from './types';
+
+import type { TypedDocumentString } from './generated/graphql';
 
 const INDEXED_SUFFIX = 'INDEX';
 

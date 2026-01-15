@@ -10,9 +10,11 @@ import {
 import { useTheme } from '@primer/react';
 
 import { Constants } from '../constants';
+
 import { useInactivityTimer } from '../hooks/timers/useInactivityTimer';
 import { useIntervalTimer } from '../hooks/timers/useIntervalTimer';
 import { useNotifications } from '../hooks/useNotifications';
+
 import type {
   Account,
   AccountNotifications,
@@ -29,11 +31,12 @@ import type {
   Token,
 } from '../types';
 import { FetchType } from '../types';
-import { headNotifications } from '../utils/api/client';
 import type {
   LoginOAuthAppOptions,
   LoginPersonalAccessTokenOptions,
 } from '../utils/auth/types';
+
+import { headNotifications } from '../utils/api/client';
 import {
   addAccount,
   authGitHub,

@@ -1,14 +1,16 @@
 import { act, renderHook, waitFor } from '@testing-library/react';
 
-import axios, { AxiosError } from 'axios';
+import { AxiosError } from 'axios';
 import nock from 'nock';
 
+import { configureAxiosHttpAdapterForNock } from '../__helpers__/test-utils';
 import {
   mockGitHubCloudAccount,
   mockGitHubEnterpriseServerAccount,
 } from '../__mocks__/account-mocks';
 import { mockGitifyNotification } from '../__mocks__/notifications-mocks';
 import { mockAuth, mockSettings, mockState } from '../__mocks__/state-mocks';
+
 import { Errors } from '../utils/errors';
 import * as logger from '../utils/logger';
 import * as native from '../utils/notifications/native';
@@ -29,9 +31,8 @@ describe('renderer/hooks/useNotifications.ts', () => {
     .mockImplementation();
 
   beforeEach(() => {
-    // axios will default to using the XHR adapter which can't be intercepted
-    // by nock. So, configure axios to use the node adapter.
-    axios.defaults.adapter = 'http';
+    configureAxiosHttpAdapterForNock();
+
     rendererLogErrorSpy.mockReset();
     raiseSoundNotificationSpy.mockReset();
     raiseNativeNotificationSpy.mockReset();

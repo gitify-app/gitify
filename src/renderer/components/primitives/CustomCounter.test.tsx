@@ -1,4 +1,5 @@
 import { renderWithAppContext } from '../../__helpers__/test-utils';
+
 import { CustomCounter } from './CustomCounter';
 
 describe('renderer/components/primitives/CustomCounter.tsx', () => {

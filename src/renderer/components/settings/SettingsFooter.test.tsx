@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 
 import { renderWithAppContext } from '../../__helpers__/test-utils';
+
 import * as comms from '../../utils/comms';
 import { SettingsFooter } from './SettingsFooter';
 
