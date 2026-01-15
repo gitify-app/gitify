@@ -406,6 +406,8 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   }, [auth]);
 
   /**
+   * Login with GitHub App.
+   *
    * Note: although we call this "Login with GitHub App", this function actually
    * authenticates via a predefined "Gitify" GitHub OAuth App.
    */
@@ -420,7 +422,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   }, [auth, persistAuth]);
 
   /**
-   * Login with custom GitHub OAuth App
+   * Login with custom GitHub OAuth App.
    */
   const loginWithOAuthApp = useCallback(
     async (data: LoginOAuthAppOptions) => {
@@ -439,6 +441,9 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     [auth, persistAuth],
   );
 
+  /**
+   * Login with Personal Access Token (PAT).
+   */
   const loginWithPersonalAccessToken = useCallback(
     async ({ token, hostname }: LoginPersonalAccessTokenOptions) => {
       const encryptedToken = (await encryptValue(token)) as Token;
