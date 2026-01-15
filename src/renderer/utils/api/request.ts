@@ -20,7 +20,7 @@ import { getNextURLFromLinkHeader } from './utils';
 export async function performUnauthenticatedRESTRequest<TResult>(
   url: Link,
   method: Method,
-  data = {},
+  data: Record<string, unknown> = {},
 ): Promise<TResult | null> {
   const headers = await getHeaders(url);
 
@@ -48,7 +48,7 @@ export async function performAuthenticatedRESTRequest<TResult>(
   url: Link,
   method: Method,
   token: Token,
-  data = {},
+  data: Record<string, unknown> = {},
   fetchAllRecords = false,
 ): Promise<TResult | null> {
   const headers = await getHeaders(url, token);
@@ -105,7 +105,7 @@ export async function performAuthenticatedRESTRequest<TResult>(
  * Perform a GraphQL API request with typed operation document
  *
  * @param url The API url
- * @param query The GraphQL operation/query statement TVariables
+ * @param query The GraphQL operation/query statement
  * @param variables The GraphQL operation variables
  * @returns Resolves to a GitHub GraphQL response
  */
