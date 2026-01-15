@@ -144,7 +144,7 @@ export const Sidebar: FC = () => {
               className={status === 'loading' ? 'animate-spin' : ''}
               data-testid="sidebar-refresh"
               description="Refresh notifications"
-              disabled={!isLoading}
+              disabled={isLoading}
               icon={SyncIcon}
               keybindingHint={shortcuts.refresh.key}
               // loading={status === 'loading'}

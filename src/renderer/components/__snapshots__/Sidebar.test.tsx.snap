@@ -507,7 +507,6 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
               data-wrap="nowrap"
             >
               <button
-                aria-describedby="_r_ID_"
                 aria-label="Refresh"
                 class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
                 data-component="IconButton"
@@ -516,6 +515,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
                 data-size="small"
                 data-testid="sidebar-refresh"
                 data-variant="invisible"
+                disabled=""
                 type="button"
               >
                 <svg
@@ -535,52 +535,6 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
                   />
                 </svg>
               </button>
-              <span
-                aria-hidden="true"
-                class="prc-TooltipV2-Tooltip-tLeuB"
-                data-direction="e"
-                popover="auto"
-                role="tooltip"
-              >
-                <span
-                  id="_r_ID_"
-                >
-                  Refresh notifications
-                  <span
-                    class="prc-src-InternalVisuallyHidden-2YaI6"
-                  >
-                    (
-                    r
-                    )
-                  </span>
-                </span>
-                <span
-                  aria-hidden="true"
-                  class="prc-TooltipV2-KeybindingHintContainer-Ymj-3 prc-TooltipV2-HasTextBefore-fdOXj"
-                >
-                  <kbd
-                    class="prc-KeybindingHint-KeybindingHint-qpYIs prc-Text-Text-9mHv3"
-                    data-testid="keybinding-hint"
-                  >
-                    <span
-                      class="prc-components-Chord-DdhWN prc-components-ChordOnEmphasis-O-4BS prc-components-ChordSmall-c-P-x prc-Text-Text-9mHv3"
-                      data-kbd-chord="true"
-                    >
-                       
-                      <span
-                        class="prc-src-InternalVisuallyHidden-2YaI6"
-                      >
-                        r
-                      </span>
-                      <span
-                        aria-hidden="true"
-                      >
-                        R
-                      </span>
-                    </span>
-                  </kbd>
-                </span>
-              </span>
               <button
                 aria-describedby="_r_ID_"
                 aria-label="Settings"
@@ -1069,7 +1023,6 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
             data-wrap="nowrap"
           >
             <button
-              aria-describedby="_r_ID_"
               aria-label="Refresh"
               class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
               data-component="IconButton"
@@ -1078,6 +1031,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
               data-size="small"
               data-testid="sidebar-refresh"
               data-variant="invisible"
+              disabled=""
               type="button"
             >
               <svg
@@ -1097,52 +1051,6 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
                 />
               </svg>
             </button>
-            <span
-              aria-hidden="true"
-              class="prc-TooltipV2-Tooltip-tLeuB"
-              data-direction="e"
-              popover="auto"
-              role="tooltip"
-            >
-              <span
-                id="_r_ID_"
-              >
-                Refresh notifications
-                <span
-                  class="prc-src-InternalVisuallyHidden-2YaI6"
-                >
-                  (
-                  r
-                  )
-                </span>
-              </span>
-              <span
-                aria-hidden="true"
-                class="prc-TooltipV2-KeybindingHintContainer-Ymj-3 prc-TooltipV2-HasTextBefore-fdOXj"
-              >
-                <kbd
-                  class="prc-KeybindingHint-KeybindingHint-qpYIs prc-Text-Text-9mHv3"
-                  data-testid="keybinding-hint"
-                >
-                  <span
-                    class="prc-components-Chord-DdhWN prc-components-ChordOnEmphasis-O-4BS prc-components-ChordSmall-c-P-x prc-Text-Text-9mHv3"
-                    data-kbd-chord="true"
-                  >
-                     
-                    <span
-                      class="prc-src-InternalVisuallyHidden-2YaI6"
-                    >
-                      r
-                    </span>
-                    <span
-                      aria-hidden="true"
-                    >
-                      R
-                    </span>
-                  </span>
-                </kbd>
-              </span>
-            </span>
             <button
               aria-describedby="_r_ID_"
               aria-label="Settings"
