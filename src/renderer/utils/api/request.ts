@@ -12,14 +12,14 @@ import { getNextURLFromLinkHeader } from './utils';
 /**
  * Perform an unauthenticated REST API request
  *
- * @param url The API url
  * @param method The REST http method
+ * @param url The API url
  * @param data The API request body
  * @returns Resolves to a GitHub REST response
  */
 export async function performUnauthenticatedRESTRequest<TResult>(
-  url: Link,
   method: Method,
+  url: Link,
   data: Record<string, unknown> = {},
 ): Promise<TResult | null> {
   const headers = await getHeaders(url);
@@ -37,16 +37,16 @@ export async function performUnauthenticatedRESTRequest<TResult>(
 /**
  * Perform an authenticated REST API request
  *
- * @param url The API url
  * @param method The REST http method
+ * @param url The API url
  * @param token A GitHub token (decrypted)
  * @param data The API request body
  * @param fetchAllRecords Whether to fetch all records or just the first page
  * @returns Resolves to a GitHub REST response
  */
 export async function performAuthenticatedRESTRequest<TResult>(
-  url: Link,
   method: Method,
+  url: Link,
   token: Token,
   data: Record<string, unknown> = {},
   fetchAllRecords = false,

@@ -32,7 +32,7 @@ describe('renderer/utils/api/request.ts', () => {
     it('should make a request with the correct parameters', async () => {
       const data = { key: 'value' };
 
-      await performUnauthenticatedRESTRequest(url, method, data);
+      await performUnauthenticatedRESTRequest(method, url, data);
 
       expect(axios).toHaveBeenCalledWith({
         method,
@@ -44,7 +44,7 @@ describe('renderer/utils/api/request.ts', () => {
 
     it('should make a request with the correct parameters and default data', async () => {
       const data = {};
-      await performUnauthenticatedRESTRequest(url, method);
+      await performUnauthenticatedRESTRequest(method, url);
 
       expect(axios).toHaveBeenCalledWith({
         method,
@@ -63,7 +63,7 @@ describe('renderer/utils/api/request.ts', () => {
     it('should make an authenticated request with the correct parameters', async () => {
       const data = { key: 'value' };
 
-      await performAuthenticatedRESTRequest(url, method, mockToken, data);
+      await performAuthenticatedRESTRequest(method, url, mockToken, data);
 
       expect(axios).toHaveBeenCalledWith({
         method,
@@ -76,7 +76,7 @@ describe('renderer/utils/api/request.ts', () => {
     it('should make an authenticated request with the correct parameters and default data', async () => {
       const data = {};
 
-      await performAuthenticatedRESTRequest(url, method, mockToken);
+      await performAuthenticatedRESTRequest(method, url, mockToken);
 
       expect(axios).toHaveBeenCalledWith({
         method,
@@ -240,8 +240,8 @@ describe('renderer/utils/api/request.ts', () => {
         });
 
       const result = await performAuthenticatedRESTRequest<number[]>(
-        url,
         method,
+        url,
         mockToken,
         {},
         true,
@@ -274,8 +274,8 @@ describe('renderer/utils/api/request.ts', () => {
 
       await expect(
         performAuthenticatedRESTRequest<number[]>(
-          url,
           method,
+          url,
           mockToken,
           {},
           true,

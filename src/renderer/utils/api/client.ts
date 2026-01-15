@@ -66,8 +66,8 @@ export function exchangeAuthCodeForAccessToken(
   };
 
   return performUnauthenticatedRESTRequest<LoginOAuthResponse>(
-    url,
     'POST',
+    url,
     data,
   );
 }
@@ -84,7 +84,7 @@ export function headNotifications(
   const url = getGitHubAPIBaseUrl(hostname);
   url.pathname += 'notifications';
 
-  return performAuthenticatedRESTRequest(url.toString() as Link, 'HEAD', token);
+  return performAuthenticatedRESTRequest('HEAD', url.toString() as Link, token);
 }
 
 /**
@@ -102,8 +102,8 @@ export function listNotificationsForAuthenticatedUser(
   url.searchParams.append('all', String(settings.fetchReadNotifications));
 
   return performAuthenticatedRESTRequest(
-    url.toString() as Link,
     'GET',
+    url.toString() as Link,
     account.token,
     {},
     settings.fetchAllNotifications,
@@ -125,8 +125,8 @@ export function markNotificationThreadAsRead(
   url.pathname += `notifications/threads/${threadId}`;
 
   return performAuthenticatedRESTRequest(
-    url.toString() as Link,
     'PATCH',
+    url.toString() as Link,
     token,
     {},
   );
@@ -149,8 +149,8 @@ export function markNotificationThreadAsDone(
   url.pathname += `notifications/threads/${threadId}`;
 
   return performAuthenticatedRESTRequest(
-    url.toString() as Link,
     'DELETE',
+    url.toString() as Link,
     token,
     {},
   );
@@ -169,7 +169,7 @@ export function ignoreNotificationThreadSubscription(
   const url = getGitHubAPIBaseUrl(hostname);
   url.pathname += `notifications/threads/${threadId}/subscription`;
 
-  return performAuthenticatedRESTRequest(url.toString() as Link, 'PUT', token, {
+  return performAuthenticatedRESTRequest('PUT', url.toString() as Link, token, {
     ignored: true,
   });
 }
@@ -180,7 +180,7 @@ export function ignoreNotificationThreadSubscription(
  * Endpoint documentation: https://docs.github.com/en/rest/commits/commits#get-a-commit
  */
 export function getCommit(url: Link, token: Token): AxiosPromise<RawCommit> {
-  return performAuthenticatedRESTRequest(url, 'GET', token);
+  return performAuthenticatedRESTRequest('GET', url, token);
 }
 
 /**
@@ -193,7 +193,7 @@ export function getCommitComment(
   url: Link,
   token: Token,
 ): AxiosPromise<RawCommitComment> {
-  return performAuthenticatedRESTRequest(url, 'GET', token);
+  return performAuthenticatedRESTRequest('GET', url, token);
 }
 
 /**
@@ -202,7 +202,7 @@ export function getCommitComment(
  * Endpoint documentation: https://docs.github.com/en/rest/releases/releases#get-a-release
  */
 export function getRelease(url: Link, token: Token): AxiosPromise<RawRelease> {
-  return performAuthenticatedRESTRequest(url, 'GET', token);
+  return performAuthenticatedRESTRequest('GET', url, token);
 }
 
 /**
@@ -212,8 +212,8 @@ export async function getHtmlUrl(url: Link, token: Token): Promise<string> {
   try {
     const response =
       await performAuthenticatedRESTRequest<GitHubHtmlUrlResponse>(
-        url,
         'GET',
+        url,
         token,
       );
 
