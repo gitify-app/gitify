@@ -3,7 +3,7 @@ import { type FC, useCallback, useState } from 'react';
 import { BellSlashIcon, CheckIcon, ReadIcon } from '@primer/octicons-react';
 import { Stack, Text, Tooltip } from '@primer/react';
 
-import { useAppContext } from '../../context/App';
+import { useAppContext } from '../../hooks/useAppContext';
 import { type GitifyNotification, Opacity, Size } from '../../types';
 import { cn } from '../../utils/cn';
 import { isMarkAsDoneFeatureSupported } from '../../utils/features';
@@ -30,6 +30,7 @@ export const NotificationRow: FC<NotificationRowProps> = ({
     markNotificationsAsDone,
     unsubscribeNotification,
   } = useAppContext();
+
   const [animateExit, setAnimateExit] = useState(false);
 
   const shouldAnimateExit = shouldRemoveNotificationsFromState(settings);

@@ -15,7 +15,7 @@ import {
   Text,
 } from '@primer/react';
 
-import { useAppContext } from '../../context/App';
+import { useAppContext } from '../../hooks/useAppContext';
 import { Theme } from '../../types';
 import { hasMultipleAccounts } from '../../utils/auth/utils';
 import {
@@ -32,6 +32,7 @@ import { Title } from '../primitives/Title';
 
 export const AppearanceSettings: FC = () => {
   const { auth, settings, updateSetting } = useAppContext();
+
   const zoomPercentage = zoomLevelToPercentage(window.gitify.zoom.getLevel());
 
   return (

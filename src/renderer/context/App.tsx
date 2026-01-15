@@ -2,7 +2,6 @@ import {
   createContext,
   type ReactNode,
   useCallback,
-  useContext,
   useEffect,
   useMemo,
   useState,
@@ -114,18 +113,6 @@ export interface AppContextState {
 }
 
 export const AppContext = createContext<Partial<AppContextState>>({});
-
-/**
- * Custom hook that provides type-safe access to AppContext.
- * Throws if used outside of AppProvider.
- */
-export function useAppContext(): AppContextState {
-  const context = useContext(AppContext);
-  if (!context || Object.keys(context).length === 0) {
-    throw new Error('useAppContext must be used within an AppProvider');
-  }
-  return context as AppContextState;
-}
 
 export const AppProvider = ({ children }: { children: ReactNode }) => {
   const existingState = loadState();

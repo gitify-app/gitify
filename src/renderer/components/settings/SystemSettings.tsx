@@ -5,8 +5,8 @@ import { Button, ButtonGroup, IconButton, Stack, Text } from '@primer/react';
 
 import { APPLICATION } from '../../../shared/constants';
 
-import { useAppContext } from '../../context/App';
 import { defaultSettings } from '../../context/defaults';
+import { useAppContext } from '../../hooks/useAppContext';
 import { OpenPreference } from '../../types';
 import {
   canDecreaseVolume,

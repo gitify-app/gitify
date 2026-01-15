@@ -10,7 +10,7 @@ import {
 } from '@primer/octicons-react';
 import { Stack, Text } from '@primer/react';
 
-import { useAppContext } from '../../context/App';
+import { useAppContext } from '../../hooks/useAppContext';
 import { IconColor, type SearchToken, Size } from '../../types';
 import { cn } from '../../utils/cn';
 import {

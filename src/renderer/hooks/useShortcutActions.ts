@@ -1,8 +1,8 @@
 import { useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import { useAppContext } from '../context/App';
 import { quitApp } from '../utils/comms';
+import { useAppContext } from './useAppContext';
 
 type ShortcutName =
   | 'home'
@@ -14,8 +14,11 @@ type ShortcutName =
   | 'accounts';
 
 type ShortcutConfig = {
+  /** Shortcut key */
   key: string;
-  enabled: boolean;
+  /** If the shortcut key is enabled */
+  isAllowed: boolean;
+  /** Action the shortcut key should take */
   action: () => void;
 };
 
@@ -28,6 +31,7 @@ type ShortcutConfigs = Record<ShortcutName, ShortcutConfig>;
 export function useShortcutActions(): { shortcuts: ShortcutConfigs } {
   const navigate = useNavigate();
   const location = useLocation();
+
   const { fetchNotifications, isLoggedIn, status, settings, updateSetting } =
     useAppContext();
 
@@ -39,17 +43,17 @@ export function useShortcutActions(): { shortcuts: ShortcutConfigs } {
     return {
       home: {
         key: 'h',
-        enabled: true,
+        isAllowed: true,
         action: () => navigate('/', { replace: true }),
       },
       focusedMode: {
         key: 'w',
-        enabled: isLoggedIn && !isLoading,
+        isAllowed: isLoggedIn && !isLoading,
         action: () => updateSetting('participating', !settings.participating),
       },
       filters: {
         key: 'f',
-        enabled: isLoggedIn,
+        isAllowed: isLoggedIn,
         action: () => {
           if (isOnFiltersRoute) {
             navigate('/', { replace: true });
@@ -60,7 +64,7 @@ export function useShortcutActions(): { shortcuts: ShortcutConfigs } {
       },
       refresh: {
         key: 'r',
-        enabled: !isLoading,
+        isAllowed: !isLoading,
         action: () => {
           if (isLoading) {
             return;
@@ -71,7 +75,7 @@ export function useShortcutActions(): { shortcuts: ShortcutConfigs } {
       },
       settings: {
         key: 's',
-        enabled: isLoggedIn,
+        isAllowed: isLoggedIn,
         action: () => {
           if (isOnSettingsRoute) {
             navigate('/', { replace: true });
@@ -83,12 +87,12 @@ export function useShortcutActions(): { shortcuts: ShortcutConfigs } {
       },
       accounts: {
         key: 'a',
-        enabled: isLoggedIn && isOnSettingsRoute,
+        isAllowed: isLoggedIn && isOnSettingsRoute,
         action: () => navigate('/accounts'),
       },
       quit: {
         key: 'q',
-        enabled: !isLoggedIn || isOnSettingsRoute,
+        isAllowed: !isLoggedIn || isOnSettingsRoute,
         action: () => quitApp(),
       },
     };

@@ -12,7 +12,7 @@ import { Contents } from '../components/layout/Contents';
 import { Page } from '../components/layout/Page';
 import { Footer } from '../components/primitives/Footer';
 import { Header } from '../components/primitives/Header';
-import { useAppContext } from '../context/App';
+import { useAppContext } from '../hooks/useAppContext';
 
 export const FiltersRoute: FC = () => {
   const { clearFilters } = useAppContext();

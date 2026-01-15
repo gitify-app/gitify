@@ -10,7 +10,7 @@ import { BaseStyles, ThemeProvider } from '@primer/react';
 
 import { GlobalShortcuts } from './components/GlobalShortcuts';
 import { AppLayout } from './components/layout/AppLayout';
-import { AppProvider, useAppContext } from './context/App';
+import { AppProvider } from './context/App';
 import { AccountsRoute } from './routes/Accounts';
 import { FiltersRoute } from './routes/Filters';
 import { LoginRoute } from './routes/Login';
@@ -21,9 +21,12 @@ import { SettingsRoute } from './routes/Settings';
 
 import './App.css';
 
+import { useAppContext } from './hooks/useAppContext';
+
 function RequireAuth({ children }) {
-  const { isLoggedIn } = useAppContext();
   const location = useLocation();
+
+  const { isLoggedIn } = useAppContext();
 
   return isLoggedIn ? (
     children
@@ -37,8 +40,8 @@ export const App = () => {
     <ThemeProvider>
       <BaseStyles>
         <AppProvider>
+          <GlobalShortcuts />
           <Router>
-            <GlobalShortcuts />
             <AppLayout>
               <Routes>
                 <Route

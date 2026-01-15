@@ -1,7 +1,7 @@
 import { type FC, useMemo } from 'react';
 
 import { Constants } from '../constants';
-import { useAppContext } from '../context/App';
+import { useAppContext } from '../hooks/useAppContext';
 import { hasActiveFilters } from '../utils/notifications/filters/filter';
 import { EmojiSplash } from './layout/EmojiSplash';
 

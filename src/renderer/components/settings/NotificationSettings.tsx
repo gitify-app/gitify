@@ -19,7 +19,7 @@ import { formatDuration, millisecondsToMinutes } from 'date-fns';
 import { APPLICATION } from '../../../shared/constants';
 
 import { Constants } from '../../constants';
-import { useAppContext } from '../../context/App';
+import { useAppContext } from '../../hooks/useAppContext';
 import { FetchType, GroupBy, Size } from '../../types';
 import { openGitHubParticipatingDocs } from '../../utils/links';
 import { Checkbox } from '../fields/Checkbox';
@@ -29,6 +29,7 @@ import { Title } from '../primitives/Title';
 
 export const NotificationSettings: FC = () => {
   const { settings, updateSetting } = useAppContext();
+
   const [fetchInterval, setFetchInterval] = useState<number>(
     settings.fetchInterval,
   );

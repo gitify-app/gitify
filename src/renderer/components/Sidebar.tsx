@@ -15,7 +15,7 @@ import { IconButton, Stack } from '@primer/react';
 
 import { APPLICATION } from '../../shared/constants';
 
-import { useAppContext } from '../context/App';
+import { useAppContext } from '../hooks/useAppContext';
 import { useShortcutActions } from '../hooks/useShortcutActions';
 import { getPrimaryAccountHostname } from '../utils/auth/utils';
 import {
@@ -39,6 +39,8 @@ export const Sidebar: FC = () => {
   const primaryAccountHostname = getPrimaryAccountHostname(auth);
 
   const { shortcuts } = useShortcutActions();
+
+  const isLoading = status === 'loading';
 
   return (
     <Stack
@@ -141,7 +143,7 @@ export const Sidebar: FC = () => {
               className={status === 'loading' ? 'animate-spin' : ''}
               data-testid="sidebar-refresh"
               description="Refresh notifications"
-              disabled={!shortcuts.refresh.enabled}
+              disabled={!isLoading}
               icon={SyncIcon}
               keybindingHint={shortcuts.refresh.key}
               // loading={status === 'loading'}

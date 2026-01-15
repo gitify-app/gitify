@@ -35,7 +35,7 @@ export const GlobalShortcuts: FC = () => {
         return;
       }
 
-      if (shortcuts[name].enabled) {
+      if (shortcuts[name].isAllowed) {
         event.preventDefault();
         shortcuts[name].action();
       }

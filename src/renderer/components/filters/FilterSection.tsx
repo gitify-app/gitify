@@ -3,7 +3,7 @@ import type { ReactNode } from 'react';
 import type { Icon } from '@primer/octicons-react';
 import { Stack, Text } from '@primer/react';
 
-import { useAppContext } from '../../context/App';
+import { useAppContext } from '../../hooks/useAppContext';
 import type { FilterSettingsState, FilterSettingsValue } from '../../types';
 import type { Filter } from '../../utils/notifications/filters';
 import { Checkbox } from '../fields/Checkbox';

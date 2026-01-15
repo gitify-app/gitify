@@ -23,7 +23,7 @@ import { Page } from '../components/layout/Page';
 import { Footer } from '../components/primitives/Footer';
 import { Header } from '../components/primitives/Header';
 import { Constants } from '../constants';
-import { useAppContext } from '../context/App';
+import { useAppContext } from '../hooks/useAppContext';
 import type { Hostname, Token } from '../types';
 import type { LoginPersonalAccessTokenOptions } from '../utils/auth/types';
 import {
