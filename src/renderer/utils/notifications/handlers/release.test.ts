@@ -1,6 +1,6 @@
-import axios from 'axios';
 import nock from 'nock';
 
+import { configureAxiosHttpAdapterForNock } from '../../../__helpers__/test-utils';
 import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
 import type { GitifyNotification, Link } from '../../../types';
@@ -8,24 +8,22 @@ import { mockRawUser } from '../../api/__mocks__/response-mocks';
 import { releaseHandler } from './release';
 
 describe('renderer/utils/notifications/handlers/release.ts', () => {
+  const mockNotification = mockPartialGitifyNotification({
+    title: 'This is a mock release',
+    type: 'Release',
+    url: 'https://api.github.com/repos/gitify-app/notifications-test/releases/1' as Link,
+    latestCommentUrl:
+      'https://api.github.com/repos/gitify-app/notifications-test/releases/1' as Link,
+  });
+
+  beforeEach(() => {
+    configureAxiosHttpAdapterForNock();
+  });
+
   describe('enrich', () => {
     const mockAuthor = mockRawUser('some-author');
 
-    beforeEach(() => {
-      // axios will default to using the XHR adapter which can't be intercepted
-      // by nock. So, configure axios to use the node adapter.
-      axios.defaults.adapter = 'http';
-    });
-
     it('release notification', async () => {
-      const mockNotification = mockPartialGitifyNotification({
-        title: 'This is a mock release',
-        type: 'Release',
-        url: 'https://api.github.com/repos/gitify-app/notifications-test/releases/1' as Link,
-        latestCommentUrl:
-          'https://api.github.com/repos/gitify-app/notifications-test/releases/1' as Link,
-      });
-
       nock('https://api.github.com')
         .get('/repos/gitify-app/notifications-test/releases/1')
         .reply(200, { author: mockAuthor });
@@ -47,14 +45,6 @@ describe('renderer/utils/notifications/handlers/release.ts', () => {
     });
 
     it('return early if release state filtered', async () => {
-      const mockNotification = mockPartialGitifyNotification({
-        title: 'This is a mock release',
-        type: 'Release',
-        url: 'https://api.github.com/repos/gitify-app/notifications-test/releases/1' as Link,
-        latestCommentUrl:
-          'https://api.github.com/repos/gitify-app/notifications-test/releases/1' as Link,
-      });
-
       const result = await releaseHandler.enrich(mockNotification, {
         ...mockSettings,
         filterStates: ['closed'],
@@ -66,10 +56,6 @@ describe('renderer/utils/notifications/handlers/release.ts', () => {
   });
 
   it('iconType', () => {
-    const mockNotification = mockPartialGitifyNotification({
-      type: 'Release',
-    });
-
     expect(releaseHandler.iconType(mockNotification).displayName).toBe(
       'TagIcon',
     );

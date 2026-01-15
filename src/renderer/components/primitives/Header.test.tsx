@@ -16,7 +16,7 @@ describe('renderer/components/primitives/Header.tsx', () => {
   const fetchNotificationsMock = jest.fn();
 
   afterEach(() => {
-    jest.resetAllMocks();
+    jest.clearAllMocks();
   });
 
   it('should render itself & its children', () => {
