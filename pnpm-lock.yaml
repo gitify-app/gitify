@@ -11755,7 +11755,7 @@ snapshots:
 
   rxjs@7.8.2:
     dependencies:
-      tslib: 2.8.1
+      tslib: 2.6.2
 
   safe-buffer@5.1.2: {}
 
