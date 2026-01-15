@@ -1,4 +1,4 @@
-import type { components } from '@octokit/openapi-types';
+import type { Endpoints } from '@octokit/types';
 
 import type { Link } from '../../types';
 
@@ -7,15 +7,23 @@ export interface GitHubRESTError {
   documentation_url: Link;
 }
 
-export type NotificationThreadSubscription =
-  components['schemas']['thread-subscription'];
+export type ListNotificationsForAuthenticatedUserResponse =
+  Endpoints['GET /notifications']['response'];
 
-export type RawCommit = components['schemas']['commit'];
+export type MarkNotificationThreadAsReadResponse =
+  Endpoints['PATCH /notifications/threads/{thread_id}']['response'];
 
-export type RawCommitComment = components['schemas']['commit-comment'];
+export type MarkNotificationThreadAsDoneResponse =
+  Endpoints['DELETE /notifications/threads/{thread_id}']['response'];
 
-export type RawGitHubNotification = components['schemas']['thread'];
+export type IgnoreNotificationThreadSubscriptionResponse =
+  Endpoints['PUT /notifications/threads/{thread_id}/subscription']['response'];
 
-export type RawRelease = components['schemas']['release'];
+export type GetCommitResponse =
+  Endpoints['GET /repos/{owner}/{repo}/commits/{ref}']['response'];
 
-export type RawUser = components['schemas']['simple-user'];
+export type GetCommitCommentResponse =
+  Endpoints['GET /repos/{owner}/{repo}/comments/{comment_id}']['response'];
+
+export type GetReleaseResponse =
+  Endpoints['GET /repos/{owner}/{repo}/releases/{release_id}']['response'];
