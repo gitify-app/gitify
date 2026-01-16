@@ -28,7 +28,7 @@ describe('renderer/components/Sidebar.tsx', () => {
 
   it('should render itself & its children (logged in)', () => {
     const tree = renderWithAppContext(
-      <MemoryRouter>
+      <MemoryRouter initialEntries={['/']}>
         <Sidebar />
       </MemoryRouter>,
       {
@@ -41,7 +41,7 @@ describe('renderer/components/Sidebar.tsx', () => {
 
   it('should render itself & its children (logged out)', () => {
     const tree = renderWithAppContext(
-      <MemoryRouter>
+      <MemoryRouter initialEntries={['/landing']}>
         <Sidebar />
       </MemoryRouter>,
       {
@@ -323,4 +323,5 @@ describe('renderer/components/Sidebar.tsx', () => {
 
     expect(quitAppSpy).toHaveBeenCalledTimes(1);
   });
+  // Keyboard bindings moved to App.test.tsx
 });

@@ -2,7 +2,7 @@ import type { FC, MouseEvent } from 'react';
 
 import { Stack } from '@primer/react';
 
-import { useAppContext } from '../../context/App';
+import { useAppContext } from '../../hooks/useAppContext';
 
 import { type GitifyNotification, Opacity, Size } from '../../types';
 

@@ -20,7 +20,7 @@ import { APPLICATION } from '../../../shared/constants';
 
 import { Constants } from '../../constants';
 
-import { useAppContext } from '../../context/App';
+import { useAppContext } from '../../hooks/useAppContext';
 
 import { Checkbox } from '../fields/Checkbox';
 import { FieldLabel } from '../fields/FieldLabel';
@@ -33,6 +33,7 @@ import { openGitHubParticipatingDocs } from '../../utils/links';
 
 export const NotificationSettings: FC = () => {
   const { settings, updateSetting } = useAppContext();
+
   const [fetchInterval, setFetchInterval] = useState<number>(
     settings.fetchInterval,
   );

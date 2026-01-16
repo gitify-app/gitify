@@ -1,19 +1,20 @@
 import { type FC, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import { PersonIcon, XCircleIcon } from '@primer/octicons-react';
 import { Button, IconButton, Stack, Tooltip } from '@primer/react';
 
 import { APPLICATION } from '../../../shared/constants';
 
+import { useShortcutActions } from '../../hooks/useShortcutActions';
+
 import { Footer } from '../primitives/Footer';
 
-import { getAppVersion, quitApp } from '../../utils/comms';
+import { getAppVersion } from '../../utils/comms';
 import { openGitifyReleaseNotes } from '../../utils/links';
 
 export const SettingsFooter: FC = () => {
   const [appVersion, setAppVersion] = useState<string | null>(null);
-  const navigate = useNavigate();
+  const { shortcuts } = useShortcutActions();
 
   useEffect(() => {
     (async () => {
@@ -35,28 +36,30 @@ export const SettingsFooter: FC = () => {
         </Tooltip>
       </Stack>
       <Stack direction="horizontal" gap="normal">
-        <Tooltip direction="n" text="Accounts">
-          <IconButton
-            aria-label="Accounts"
-            data-testid="settings-accounts"
-            icon={PersonIcon}
-            onClick={() => {
-              navigate('/accounts');
-            }}
-          />
-        </Tooltip>
+        <IconButton
+          aria-label="Accounts"
+          data-testid="settings-accounts"
+          description="Accounts"
+          icon={PersonIcon}
+          keybindingHint={shortcuts.accounts.key}
+          onClick={() => {
+            shortcuts.accounts.action();
+          }}
+          tooltipDirection="n"
+        />
 
-        <Tooltip direction="nw" text={`Quit ${APPLICATION.NAME}`}>
-          <IconButton
-            aria-label={`Quit ${APPLICATION.NAME}`}
-            data-testid="settings-quit"
-            icon={XCircleIcon}
-            onClick={() => {
-              quitApp();
-            }}
-            variant="danger"
-          />
-        </Tooltip>
+        <IconButton
+          aria-label={`Quit ${APPLICATION.NAME}`}
+          data-testid="settings-quit"
+          description={`Quit ${APPLICATION.NAME}`}
+          icon={XCircleIcon}
+          keybindingHint={shortcuts.quit.key}
+          onClick={() => {
+            shortcuts.quit.action();
+          }}
+          tooltipDirection="nw"
+          variant="danger"
+        />
       </Stack>
     </Footer>
   );

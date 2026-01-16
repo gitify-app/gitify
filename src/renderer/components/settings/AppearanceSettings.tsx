@@ -15,7 +15,7 @@ import {
   Text,
 } from '@primer/react';
 
-import { useAppContext } from '../../context/App';
+import { useAppContext } from '../../hooks/useAppContext';
 
 import { Checkbox } from '../fields/Checkbox';
 import { FieldLabel } from '../fields/FieldLabel';
@@ -35,6 +35,7 @@ import {
 
 export const AppearanceSettings: FC = () => {
   const { auth, settings, updateSetting } = useAppContext();
+
   const zoomPercentage = zoomLevelToPercentage(window.gitify.zoom.getLevel());
 
   return (

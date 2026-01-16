@@ -21,7 +21,7 @@ import {
   Text,
 } from '@primer/react';
 
-import { useAppContext } from '../context/App';
+import { useAppContext } from '../hooks/useAppContext';
 
 import { AvatarWithFallback } from '../components/avatars/AvatarWithFallback';
 import { Contents } from '../components/layout/Contents';
@@ -47,9 +47,10 @@ import { rendererLogError } from '../utils/logger';
 import { saveState } from '../utils/storage';
 
 export const AccountsRoute: FC = () => {
+  const navigate = useNavigate();
+
   const { auth, settings, loginWithGitHubApp, logoutFromAccount } =
     useAppContext();
-  const navigate = useNavigate();
 
   const [loadingStates, setLoadingStates] = useState<Record<string, boolean>>(
     {},

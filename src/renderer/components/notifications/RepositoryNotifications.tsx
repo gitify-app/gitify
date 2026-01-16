@@ -3,7 +3,7 @@ import { type FC, type MouseEvent, useState } from 'react';
 import { CheckIcon, ReadIcon } from '@primer/octicons-react';
 import { Button, Stack } from '@primer/react';
 
-import { useAppContext } from '../../context/App';
+import { useAppContext } from '../../hooks/useAppContext';
 
 import { HoverButton } from '../primitives/HoverButton';
 import { HoverGroup } from '../primitives/HoverGroup';
@@ -29,6 +29,7 @@ export const RepositoryNotifications: FC<RepositoryNotificationsProps> = ({
 }) => {
   const { settings, markNotificationsAsRead, markNotificationsAsDone } =
     useAppContext();
+
   const [animateExit, setAnimateExit] = useState(false);
   const [showRepositoryNotifications, setShowRepositoryNotifications] =
     useState(true);

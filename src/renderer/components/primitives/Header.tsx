@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { ArrowLeftIcon, type Icon } from '@primer/octicons-react';
 import { IconButton, Stack } from '@primer/react';
 
-import { useAppContext } from '../../context/App';
+import { useAppContext } from '../../hooks/useAppContext';
 
 import { Title } from './Title';
 

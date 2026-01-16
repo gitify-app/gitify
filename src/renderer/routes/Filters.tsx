@@ -3,7 +3,7 @@ import type { FC } from 'react';
 import { FilterIcon, FilterRemoveIcon } from '@primer/octicons-react';
 import { Button, Stack, Tooltip } from '@primer/react';
 
-import { useAppContext } from '../context/App';
+import { useAppContext } from '../hooks/useAppContext';
 
 import { ReasonFilter } from '../components/filters/ReasonFilter';
 import { SearchFilter } from '../components/filters/SearchFilter';

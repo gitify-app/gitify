@@ -1,5 +1,4 @@
 import { act, fireEvent, waitFor } from '@testing-library/react';
-import { useContext } from 'react';
 
 import { renderWithAppContext } from '../__helpers__/test-utils';
 import { mockGitifyNotification } from '../__mocks__/notifications-mocks';
@@ -7,6 +6,7 @@ import { mockSettings } from '../__mocks__/state-mocks';
 
 import { Constants } from '../constants';
 
+import { useAppContext } from '../hooks/useAppContext';
 import { useNotifications } from '../hooks/useNotifications';
 
 import type { AuthState, Hostname, SettingsState, Token } from '../types';
@@ -15,7 +15,7 @@ import * as apiRequests from '../utils/api/request';
 import * as notifications from '../utils/notifications/notifications';
 import * as storage from '../utils/storage';
 import * as tray from '../utils/tray';
-import { AppContext, type AppContextState, AppProvider } from './App';
+import { type AppContextState, AppProvider } from './App';
 import { defaultSettings } from './defaults';
 
 jest.mock('../hooks/useNotifications');
@@ -26,7 +26,8 @@ const renderContextButton = (
   ...args: unknown[]
 ) => {
   const TestComponent = () => {
-    const context = useContext(AppContext);
+    const context = useAppContext();
+
     const method = context[contextMethodName];
     return (
       <button

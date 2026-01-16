@@ -1,6 +1,6 @@
 import { type FC, useMemo } from 'react';
 
-import { useAppContext } from '../context/App';
+import { useAppContext } from '../hooks/useAppContext';
 
 import { AllRead } from '../components/AllRead';
 import { Contents } from '../components/layout/Contents';

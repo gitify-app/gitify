@@ -20,7 +20,7 @@ import {
 
 import { Constants } from '../constants';
 
-import { useAppContext } from '../context/App';
+import { useAppContext } from '../hooks/useAppContext';
 
 import { Contents } from '../components/layout/Contents';
 import { Page } from '../components/layout/Page';
