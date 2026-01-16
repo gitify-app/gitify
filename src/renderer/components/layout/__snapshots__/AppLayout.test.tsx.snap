@@ -177,11 +177,47 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
                   aria-hidden="true"
                   class="prc-TooltipV2-Tooltip-tLeuB"
                   data-direction="e"
-                  id="_r_ID_"
                   popover="auto"
                   role="tooltip"
                 >
-                  0 unread notifications ↗
+                  <span
+                    id="_r_ID_"
+                  >
+                    0 unread notifications ↗
+                    <span
+                      class="prc-src-InternalVisuallyHidden-2YaI6"
+                    >
+                      (
+                      n
+                      )
+                    </span>
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    class="prc-TooltipV2-KeybindingHintContainer-Ymj-3 prc-TooltipV2-HasTextBefore-fdOXj"
+                  >
+                    <kbd
+                      class="prc-KeybindingHint-KeybindingHint-qpYIs prc-Text-Text-9mHv3"
+                      data-testid="keybinding-hint"
+                    >
+                      <span
+                        class="prc-components-Chord-DdhWN prc-components-ChordOnEmphasis-O-4BS prc-components-ChordSmall-c-P-x prc-Text-Text-9mHv3"
+                        data-kbd-chord="true"
+                      >
+                         
+                        <span
+                          class="prc-src-InternalVisuallyHidden-2YaI6"
+                        >
+                          n
+                        </span>
+                        <span
+                          aria-hidden="true"
+                        >
+                          N
+                        </span>
+                      </span>
+                    </kbd>
+                  </span>
                 </span>
                 <button
                   aria-describedby="_r_ID_"
@@ -368,10 +404,46 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
                   aria-hidden="true"
                   class="prc-TooltipV2-Tooltip-tLeuB"
                   data-direction="e"
-                  id="_r_ID_"
                   popover="auto"
                 >
-                  My issues ↗
+                  <span
+                    id="_r_ID_"
+                  >
+                    My issues ↗
+                    <span
+                      class="prc-src-InternalVisuallyHidden-2YaI6"
+                    >
+                      (
+                      i
+                      )
+                    </span>
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    class="prc-TooltipV2-KeybindingHintContainer-Ymj-3 prc-TooltipV2-HasTextBefore-fdOXj"
+                  >
+                    <kbd
+                      class="prc-KeybindingHint-KeybindingHint-qpYIs prc-Text-Text-9mHv3"
+                      data-testid="keybinding-hint"
+                    >
+                      <span
+                        class="prc-components-Chord-DdhWN prc-components-ChordOnEmphasis-O-4BS prc-components-ChordSmall-c-P-x prc-Text-Text-9mHv3"
+                        data-kbd-chord="true"
+                      >
+                         
+                        <span
+                          class="prc-src-InternalVisuallyHidden-2YaI6"
+                        >
+                          i
+                        </span>
+                        <span
+                          aria-hidden="true"
+                        >
+                          I
+                        </span>
+                      </span>
+                    </kbd>
+                  </span>
                 </span>
                 <button
                   aria-labelledby="_r_ID_"
@@ -405,10 +477,46 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
                   aria-hidden="true"
                   class="prc-TooltipV2-Tooltip-tLeuB"
                   data-direction="e"
-                  id="_r_ID_"
                   popover="auto"
                 >
-                  My pull requests ↗
+                  <span
+                    id="_r_ID_"
+                  >
+                    My pull requests ↗
+                    <span
+                      class="prc-src-InternalVisuallyHidden-2YaI6"
+                    >
+                      (
+                      p
+                      )
+                    </span>
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    class="prc-TooltipV2-KeybindingHintContainer-Ymj-3 prc-TooltipV2-HasTextBefore-fdOXj"
+                  >
+                    <kbd
+                      class="prc-KeybindingHint-KeybindingHint-qpYIs prc-Text-Text-9mHv3"
+                      data-testid="keybinding-hint"
+                    >
+                      <span
+                        class="prc-components-Chord-DdhWN prc-components-ChordOnEmphasis-O-4BS prc-components-ChordSmall-c-P-x prc-Text-Text-9mHv3"
+                        data-kbd-chord="true"
+                      >
+                         
+                        <span
+                          class="prc-src-InternalVisuallyHidden-2YaI6"
+                        >
+                          p
+                        </span>
+                        <span
+                          aria-hidden="true"
+                        >
+                          P
+                        </span>
+                      </span>
+                    </kbd>
+                  </span>
                 </span>
               </div>
               <div
@@ -755,11 +863,47 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
                 aria-hidden="true"
                 class="prc-TooltipV2-Tooltip-tLeuB"
                 data-direction="e"
-                id="_r_ID_"
                 popover="auto"
                 role="tooltip"
               >
-                0 unread notifications ↗
+                <span
+                  id="_r_ID_"
+                >
+                  0 unread notifications ↗
+                  <span
+                    class="prc-src-InternalVisuallyHidden-2YaI6"
+                  >
+                    (
+                    n
+                    )
+                  </span>
+                </span>
+                <span
+                  aria-hidden="true"
+                  class="prc-TooltipV2-KeybindingHintContainer-Ymj-3 prc-TooltipV2-HasTextBefore-fdOXj"
+                >
+                  <kbd
+                    class="prc-KeybindingHint-KeybindingHint-qpYIs prc-Text-Text-9mHv3"
+                    data-testid="keybinding-hint"
+                  >
+                    <span
+                      class="prc-components-Chord-DdhWN prc-components-ChordOnEmphasis-O-4BS prc-components-ChordSmall-c-P-x prc-Text-Text-9mHv3"
+                      data-kbd-chord="true"
+                    >
+                       
+                      <span
+                        class="prc-src-InternalVisuallyHidden-2YaI6"
+                      >
+                        n
+                      </span>
+                      <span
+                        aria-hidden="true"
+                      >
+                        N
+                      </span>
+                    </span>
+                  </kbd>
+                </span>
               </span>
               <button
                 aria-describedby="_r_ID_"
@@ -946,10 +1090,46 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
                 aria-hidden="true"
                 class="prc-TooltipV2-Tooltip-tLeuB"
                 data-direction="e"
-                id="_r_ID_"
                 popover="auto"
               >
-                My issues ↗
+                <span
+                  id="_r_ID_"
+                >
+                  My issues ↗
+                  <span
+                    class="prc-src-InternalVisuallyHidden-2YaI6"
+                  >
+                    (
+                    i
+                    )
+                  </span>
+                </span>
+                <span
+                  aria-hidden="true"
+                  class="prc-TooltipV2-KeybindingHintContainer-Ymj-3 prc-TooltipV2-HasTextBefore-fdOXj"
+                >
+                  <kbd
+                    class="prc-KeybindingHint-KeybindingHint-qpYIs prc-Text-Text-9mHv3"
+                    data-testid="keybinding-hint"
+                  >
+                    <span
+                      class="prc-components-Chord-DdhWN prc-components-ChordOnEmphasis-O-4BS prc-components-ChordSmall-c-P-x prc-Text-Text-9mHv3"
+                      data-kbd-chord="true"
+                    >
+                       
+                      <span
+                        class="prc-src-InternalVisuallyHidden-2YaI6"
+                      >
+                        i
+                      </span>
+                      <span
+                        aria-hidden="true"
+                      >
+                        I
+                      </span>
+                    </span>
+                  </kbd>
+                </span>
               </span>
               <button
                 aria-labelledby="_r_ID_"
@@ -983,10 +1163,46 @@ exports[`renderer/components/layout/AppLayout.tsx should render itself & its chi
                 aria-hidden="true"
                 class="prc-TooltipV2-Tooltip-tLeuB"
                 data-direction="e"
-                id="_r_ID_"
                 popover="auto"
               >
-                My pull requests ↗
+                <span
+                  id="_r_ID_"
+                >
+                  My pull requests ↗
+                  <span
+                    class="prc-src-InternalVisuallyHidden-2YaI6"
+                  >
+                    (
+                    p
+                    )
+                  </span>
+                </span>
+                <span
+                  aria-hidden="true"
+                  class="prc-TooltipV2-KeybindingHintContainer-Ymj-3 prc-TooltipV2-HasTextBefore-fdOXj"
+                >
+                  <kbd
+                    class="prc-KeybindingHint-KeybindingHint-qpYIs prc-Text-Text-9mHv3"
+                    data-testid="keybinding-hint"
+                  >
+                    <span
+                      class="prc-components-Chord-DdhWN prc-components-ChordOnEmphasis-O-4BS prc-components-ChordSmall-c-P-x prc-Text-Text-9mHv3"
+                      data-kbd-chord="true"
+                    >
+                       
+                      <span
+                        class="prc-src-InternalVisuallyHidden-2YaI6"
+                      >
+                        p
+                      </span>
+                      <span
+                        aria-hidden="true"
+                      >
+                        P
+                      </span>
+                    </span>
+                  </kbd>
+                </span>
               </span>
             </div>
             <div

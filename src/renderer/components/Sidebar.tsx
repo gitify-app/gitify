@@ -18,12 +18,6 @@ import { APPLICATION } from '../../shared/constants';
 import { useAppContext } from '../hooks/useAppContext';
 import { useShortcutActions } from '../hooks/useShortcutActions';
 
-import { getPrimaryAccountHostname } from '../utils/auth/utils';
-import {
-  openGitHubIssues,
-  openGitHubNotifications,
-  openGitHubPulls,
-} from '../utils/links';
 import { hasActiveFilters } from '../utils/notifications/filters/filter';
 import { LogoIcon } from './icons/LogoIcon';
 
@@ -32,12 +26,9 @@ export const Sidebar: FC = () => {
     status,
     isLoggedIn,
     settings,
-    auth,
     notificationCount,
     hasUnreadNotifications,
   } = useAppContext();
-
-  const primaryAccountHostname = getPrimaryAccountHostname(auth);
 
   const { shortcuts } = useShortcutActions();
 
@@ -72,7 +63,8 @@ export const Sidebar: FC = () => {
           data-testid="sidebar-notifications"
           description={`${notificationCount} ${settings.fetchReadNotifications ? 'notifications' : 'unread notifications'} ↗`}
           icon={BellIcon}
-          onClick={() => openGitHubNotifications(primaryAccountHostname)}
+          keybindingHint={shortcuts.myNotifications.key}
+          onClick={() => shortcuts.myNotifications.action()}
           size="small"
           tooltipDirection="e"
           variant={hasUnreadNotifications ? 'primary' : 'invisible'}
@@ -114,7 +106,8 @@ export const Sidebar: FC = () => {
           aria-label="My issues ↗"
           data-testid="sidebar-my-issues"
           icon={IssueOpenedIcon}
-          onClick={() => openGitHubIssues(primaryAccountHostname)}
+          keybindingHint={shortcuts.myIssues.key}
+          onClick={() => shortcuts.myIssues.action()}
           size="small"
           tooltipDirection="e"
           variant="invisible"
@@ -124,7 +117,8 @@ export const Sidebar: FC = () => {
           aria-label="My pull requests ↗"
           data-testid="sidebar-my-pull-requests"
           icon={GitPullRequestIcon}
-          onClick={() => openGitHubPulls(primaryAccountHostname)}
+          keybindingHint={shortcuts.myPullRequests.key}
+          onClick={() => shortcuts.myPullRequests.action()}
           size="small"
           tooltipDirection="e"
           variant="invisible"

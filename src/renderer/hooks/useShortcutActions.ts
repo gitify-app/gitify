@@ -1,13 +1,22 @@
 import { useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
+import { getPrimaryAccountHostname } from '../utils/auth/utils';
 import { quitApp } from '../utils/comms';
+import {
+  openGitHubIssues,
+  openGitHubNotifications,
+  openGitHubPulls,
+} from '../utils/links';
 import { useAppContext } from './useAppContext';
 
 type ShortcutName =
   | 'home'
+  | 'myNotifications'
   | 'focusedMode'
   | 'filters'
+  | 'myIssues'
+  | 'myPullRequests'
   | 'refresh'
   | 'settings'
   | 'quit'
@@ -32,12 +41,20 @@ export function useShortcutActions(): { shortcuts: ShortcutConfigs } {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const { fetchNotifications, isLoggedIn, status, settings, updateSetting } =
-    useAppContext();
+  const {
+    auth,
+    fetchNotifications,
+    isLoggedIn,
+    status,
+    settings,
+    updateSetting,
+  } = useAppContext();
 
   const isOnFiltersRoute = location.pathname.startsWith('/filters');
   const isOnSettingsRoute = location.pathname.startsWith('/settings');
   const isLoading = status === 'loading';
+
+  const primaryAccountHostname = getPrimaryAccountHostname(auth);
 
   const shortcuts: ShortcutConfigs = useMemo(() => {
     return {
@@ -45,6 +62,11 @@ export function useShortcutActions(): { shortcuts: ShortcutConfigs } {
         key: 'h',
         isAllowed: true,
         action: () => navigate('/', { replace: true }),
+      },
+      myNotifications: {
+        key: 'n',
+        isAllowed: isLoggedIn,
+        action: () => openGitHubNotifications(primaryAccountHostname),
       },
       focusedMode: {
         key: 'w',
@@ -61,6 +83,16 @@ export function useShortcutActions(): { shortcuts: ShortcutConfigs } {
             navigate('/filters');
           }
         },
+      },
+      myIssues: {
+        key: 'i',
+        isAllowed: isLoggedIn,
+        action: () => openGitHubIssues(primaryAccountHostname),
+      },
+      myPullRequests: {
+        key: 'p',
+        isAllowed: isLoggedIn,
+        action: () => openGitHubPulls(primaryAccountHostname),
       },
       refresh: {
         key: 'r',

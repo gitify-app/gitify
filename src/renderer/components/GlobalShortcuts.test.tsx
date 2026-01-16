@@ -4,6 +4,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { renderWithAppContext } from '../__helpers__/test-utils';
 
 import * as comms from '../utils/comms';
+import * as links from '../utils/links';
 import { GlobalShortcuts } from './GlobalShortcuts';
 
 const navigateMock = jest.fn();
@@ -22,6 +23,20 @@ describe('components/GlobalShortcuts.tsx', () => {
   });
 
   describe('key bindings', () => {
+    describe('ignores keys that are not valid', () => {
+      it('ignores B key', async () => {
+        renderWithAppContext(
+          <MemoryRouter>
+            <GlobalShortcuts />
+          </MemoryRouter>,
+        );
+
+        await userEvent.keyboard('b');
+
+        expect(navigateMock).not.toHaveBeenCalled();
+      });
+    });
+
     describe('home', () => {
       it('navigates home when pressing H key', async () => {
         renderWithAppContext(
@@ -33,6 +48,42 @@ describe('components/GlobalShortcuts.tsx', () => {
         await userEvent.keyboard('h');
 
         expect(navigateMock).toHaveBeenCalledWith('/', { replace: true });
+      });
+    });
+
+    describe('openGitHubNotifications', () => {
+      const openGitHubNotificationsSpy = jest
+        .spyOn(links, 'openGitHubNotifications')
+        .mockImplementation();
+
+      it('opens primary account GitHub notifications webpage when pressing N while logged in', async () => {
+        renderWithAppContext(
+          <MemoryRouter>
+            <GlobalShortcuts />
+          </MemoryRouter>,
+          {
+            isLoggedIn: true,
+          },
+        );
+
+        await userEvent.keyboard('n');
+
+        expect(openGitHubNotificationsSpy).toHaveBeenCalledTimes(1);
+      });
+
+      it('does not open primary account GitHub notifications webpage when logged out', async () => {
+        renderWithAppContext(
+          <MemoryRouter>
+            <GlobalShortcuts />
+          </MemoryRouter>,
+          {
+            isLoggedIn: false,
+          },
+        );
+
+        await userEvent.keyboard('n');
+
+        expect(openGitHubNotificationsSpy).not.toHaveBeenCalled();
       });
     });
 
@@ -116,6 +167,78 @@ describe('components/GlobalShortcuts.tsx', () => {
         await userEvent.keyboard('f');
 
         expect(navigateMock).not.toHaveBeenCalled();
+      });
+    });
+
+    describe('openGitHubIssues', () => {
+      const openGitHubIssuesSpy = jest
+        .spyOn(links, 'openGitHubIssues')
+        .mockImplementation();
+
+      it('opens primary account GitHub issues webpage when pressing I while logged in', async () => {
+        renderWithAppContext(
+          <MemoryRouter>
+            <GlobalShortcuts />
+          </MemoryRouter>,
+          {
+            isLoggedIn: true,
+          },
+        );
+
+        await userEvent.keyboard('i');
+
+        expect(openGitHubIssuesSpy).toHaveBeenCalledTimes(1);
+      });
+
+      it('does not open primary account GitHub issues webpage when logged out', async () => {
+        renderWithAppContext(
+          <MemoryRouter>
+            <GlobalShortcuts />
+          </MemoryRouter>,
+          {
+            isLoggedIn: false,
+          },
+        );
+
+        await userEvent.keyboard('n');
+
+        expect(openGitHubIssuesSpy).not.toHaveBeenCalled();
+      });
+    });
+
+    describe('openGitHubPulls', () => {
+      const openGitHubPullsSpy = jest
+        .spyOn(links, 'openGitHubPulls')
+        .mockImplementation();
+
+      it('opens primary account GitHub pull requests webpage when pressing N while logged in', async () => {
+        renderWithAppContext(
+          <MemoryRouter>
+            <GlobalShortcuts />
+          </MemoryRouter>,
+          {
+            isLoggedIn: true,
+          },
+        );
+
+        await userEvent.keyboard('p');
+
+        expect(openGitHubPullsSpy).toHaveBeenCalledTimes(1);
+      });
+
+      it('does not open primary account GitHub pull requests webpage when logged out', async () => {
+        renderWithAppContext(
+          <MemoryRouter>
+            <GlobalShortcuts />
+          </MemoryRouter>,
+          {
+            isLoggedIn: false,
+          },
+        );
+
+        await userEvent.keyboard('n');
+
+        expect(openGitHubPullsSpy).not.toHaveBeenCalled();
       });
     });
 

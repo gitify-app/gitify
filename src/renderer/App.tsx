@@ -41,8 +41,8 @@ export const App = () => {
     <ThemeProvider>
       <BaseStyles>
         <AppProvider>
-          <GlobalShortcuts />
           <Router>
+            <GlobalShortcuts />
             <AppLayout>
               <Routes>
                 <Route
