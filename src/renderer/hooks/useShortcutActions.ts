@@ -6,10 +6,10 @@ import { useAppContext } from './useAppContext';
 
 type ShortcutName =
   | 'home'
+  | 'focusedMode'
+  | 'filters'
   | 'refresh'
   | 'settings'
-  | 'filters'
-  | 'focusedMode'
   | 'quit'
   | 'accounts';
 
