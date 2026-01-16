@@ -142,7 +142,8 @@
       "@biomejs/biome",
       "@parcel/watcher",
       "@tailwindcss/oxide",
-      "electron"
+      "electron",
+      "unrs-resolver"
     ]
   },
   "lint-staged": {
