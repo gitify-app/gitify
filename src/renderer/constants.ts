@@ -16,7 +16,6 @@ export const Constants = {
     clientSecret: process.env.OAUTH_CLIENT_SECRET as ClientSecret,
   } satisfies LoginOAuthAppOptions,
 
-  GITHUB_BASE_URL: 'https://github.com',
   GITHUB_API_BASE_URL: 'https://api.github.com',
   GITHUB_API_GRAPHQL_URL: 'https://api.github.com/graphql',
 

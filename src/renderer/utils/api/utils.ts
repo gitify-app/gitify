@@ -1,5 +1,7 @@
 import type { AxiosResponse } from 'axios';
 
+import { APPLICATION } from '../../../shared/constants';
+
 import { Constants } from '../../constants';
 
 import type { Hostname } from '../../types';
@@ -17,7 +19,7 @@ export function getGitHubAPIBaseUrl(hostname: Hostname): URL {
 }
 
 export function getGitHubAuthBaseUrl(hostname: Hostname): URL {
-  const url = new URL(Constants.GITHUB_BASE_URL);
+  const url = new URL(APPLICATION.GITHUB_BASE_URL);
 
   if (isEnterpriseServerHost(hostname)) {
     url.hostname = hostname;
