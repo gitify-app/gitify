@@ -1,5 +1,4 @@
 import type { FC } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
 
 import {
   BellIcon,
@@ -16,55 +15,24 @@ import { IconButton, Stack } from '@primer/react';
 
 import { APPLICATION } from '../../shared/constants';
 
-import { useAppContext } from '../context/App';
-import { getPrimaryAccountHostname } from '../utils/auth/utils';
-import { quitApp } from '../utils/comms';
-import {
-  openGitHubIssues,
-  openGitHubNotifications,
-  openGitHubPulls,
-} from '../utils/links';
+import { useAppContext } from '../hooks/useAppContext';
+import { useShortcutActions } from '../hooks/useShortcutActions';
+
 import { hasActiveFilters } from '../utils/notifications/filters/filter';
 import { LogoIcon } from './icons/LogoIcon';
 
 export const Sidebar: FC = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
-
   const {
-    fetchNotifications,
-    isLoggedIn,
     status,
+    isLoggedIn,
     settings,
-    auth,
     notificationCount,
     hasUnreadNotifications,
-    updateSetting,
   } = useAppContext();
 
-  const primaryAccountHostname = getPrimaryAccountHostname(auth);
+  const { shortcuts } = useShortcutActions();
 
-  const toggleFilters = () => {
-    if (location.pathname.startsWith('/filters')) {
-      navigate('/', { replace: true });
-    } else {
-      navigate('/filters');
-    }
-  };
-
-  const toggleSettings = () => {
-    if (location.pathname.startsWith('/settings')) {
-      navigate('/', { replace: true });
-      fetchNotifications();
-    } else {
-      navigate('/settings');
-    }
-  };
-
-  const refreshNotifications = () => {
-    navigate('/', { replace: true });
-    fetchNotifications();
-  };
+  const isLoading = status === 'loading';
 
   return (
     <Stack
@@ -83,7 +51,8 @@ export const Sidebar: FC = () => {
           data-testid="sidebar-home"
           description="Home"
           icon={LogoIcon}
-          onClick={() => navigate('/', { replace: true })}
+          keybindingHint={shortcuts.home.key}
+          onClick={() => shortcuts.home.action()}
           size="small"
           tooltipDirection="e"
           variant="invisible"
@@ -94,7 +63,8 @@ export const Sidebar: FC = () => {
           data-testid="sidebar-notifications"
           description={`${notificationCount} ${settings.fetchReadNotifications ? 'notifications' : 'unread notifications'} ↗`}
           icon={BellIcon}
-          onClick={() => openGitHubNotifications(primaryAccountHostname)}
+          keybindingHint={shortcuts.myNotifications.key}
+          onClick={() => shortcuts.myNotifications.action()}
           size="small"
           tooltipDirection="e"
           variant={hasUnreadNotifications ? 'primary' : 'invisible'}
@@ -111,9 +81,8 @@ export const Sidebar: FC = () => {
                   : 'Participating and watching'
               }
               icon={settings.participating ? CrosshairsIcon : EyeIcon}
-              onClick={() => {
-                updateSetting('participating', !settings.participating);
-              }}
+              keybindingHint={shortcuts.focusedMode.key}
+              onClick={() => shortcuts.focusedMode.action()}
               size="small"
               tooltipDirection="e"
               variant={settings.participating ? 'primary' : 'invisible'}
@@ -124,7 +93,8 @@ export const Sidebar: FC = () => {
               data-testid="sidebar-filter-notifications"
               description="Filter notifications"
               icon={FilterIcon}
-              onClick={() => toggleFilters()}
+              keybindingHint={shortcuts.filters.key}
+              onClick={() => shortcuts.filters.action()}
               size="small"
               tooltipDirection="e"
               variant={hasActiveFilters(settings) ? 'primary' : 'invisible'}
@@ -136,7 +106,8 @@ export const Sidebar: FC = () => {
           aria-label="My issues ↗"
           data-testid="sidebar-my-issues"
           icon={IssueOpenedIcon}
-          onClick={() => openGitHubIssues(primaryAccountHostname)}
+          keybindingHint={shortcuts.myIssues.key}
+          onClick={() => shortcuts.myIssues.action()}
           size="small"
           tooltipDirection="e"
           variant="invisible"
@@ -146,7 +117,8 @@ export const Sidebar: FC = () => {
           aria-label="My pull requests ↗"
           data-testid="sidebar-my-pull-requests"
           icon={GitPullRequestIcon}
-          onClick={() => openGitHubPulls(primaryAccountHostname)}
+          keybindingHint={shortcuts.myPullRequests.key}
+          onClick={() => shortcuts.myPullRequests.action()}
           size="small"
           tooltipDirection="e"
           variant="invisible"
@@ -166,10 +138,11 @@ export const Sidebar: FC = () => {
               className={status === 'loading' ? 'animate-spin' : ''}
               data-testid="sidebar-refresh"
               description="Refresh notifications"
-              disabled={status === 'loading'}
+              disabled={isLoading}
               icon={SyncIcon}
+              keybindingHint={shortcuts.refresh.key}
               // loading={status === 'loading'}
-              onClick={() => refreshNotifications()}
+              onClick={() => shortcuts.refresh.action()}
               size="small"
               tooltipDirection="e"
               variant="invisible"
@@ -178,8 +151,10 @@ export const Sidebar: FC = () => {
             <IconButton
               aria-label="Settings"
               data-testid="sidebar-settings"
+              description="Settings"
               icon={GearIcon}
-              onClick={() => toggleSettings()}
+              keybindingHint={shortcuts.settings.key}
+              onClick={() => shortcuts.settings.action()}
               size="small"
               tooltipDirection="e"
               variant="invisible"
@@ -192,7 +167,8 @@ export const Sidebar: FC = () => {
             aria-label={`Quit ${APPLICATION.NAME}`}
             data-testid="sidebar-quit"
             icon={XCircleIcon}
-            onClick={() => quitApp()}
+            keybindingHint={shortcuts.quit.key}
+            onClick={() => shortcuts.quit.action()}
             size="small"
             tooltipDirection="e"
             variant="invisible"

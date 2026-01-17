@@ -1,7 +1,9 @@
 import { act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { MemoryRouter } from 'react-router-dom';
 
 import { renderWithAppContext } from '../../__helpers__/test-utils';
+
 import * as comms from '../../utils/comms';
 import { SettingsFooter } from './SettingsFooter';
 
@@ -15,7 +17,6 @@ describe('renderer/components/settings/SettingsFooter.tsx', () => {
   let originalEnv: NodeJS.ProcessEnv;
 
   beforeEach(() => {
-    // Save the original node env state
     originalEnv = process.env;
   });
 
@@ -26,7 +27,11 @@ describe('renderer/components/settings/SettingsFooter.tsx', () => {
 
   it('should show app version', async () => {
     await act(async () => {
-      renderWithAppContext(<SettingsFooter />);
+      renderWithAppContext(
+        <MemoryRouter initialEntries={['/settings']}>
+          <SettingsFooter />
+        </MemoryRouter>,
+      );
     });
 
     expect(screen.getByTestId('settings-release-notes')).toMatchSnapshot();
@@ -38,7 +43,11 @@ describe('renderer/components/settings/SettingsFooter.tsx', () => {
       .mockImplementation();
 
     await act(async () => {
-      renderWithAppContext(<SettingsFooter />);
+      renderWithAppContext(
+        <MemoryRouter initialEntries={['/settings']}>
+          <SettingsFooter />
+        </MemoryRouter>,
+      );
     });
 
     await userEvent.click(screen.getByTestId('settings-release-notes'));
@@ -51,7 +60,11 @@ describe('renderer/components/settings/SettingsFooter.tsx', () => {
 
   it('should open account management', async () => {
     await act(async () => {
-      renderWithAppContext(<SettingsFooter />);
+      renderWithAppContext(
+        <MemoryRouter initialEntries={['/settings']}>
+          <SettingsFooter />
+        </MemoryRouter>,
+      );
     });
 
     await userEvent.click(screen.getByTestId('settings-accounts'));
@@ -63,7 +76,11 @@ describe('renderer/components/settings/SettingsFooter.tsx', () => {
     const quitAppSpy = jest.spyOn(comms, 'quitApp').mockImplementation();
 
     await act(async () => {
-      renderWithAppContext(<SettingsFooter />);
+      renderWithAppContext(
+        <MemoryRouter initialEntries={['/settings']}>
+          <SettingsFooter />
+        </MemoryRouter>,
+      );
     });
 
     await userEvent.click(screen.getByTestId('settings-quit'));

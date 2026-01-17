@@ -1,8 +1,15 @@
-import axios from 'axios';
 import nock from 'nock';
 
+import { configureAxiosHttpAdapterForNock } from '../../../__helpers__/test-utils';
 import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
+import {
+  mockAuthor,
+  mockCommenter,
+  mockDiscussionResponseNode,
+  mockReplier,
+} from '../../api/__mocks__/response-mocks';
+
 import type { GitifyNotification } from '../../../types';
 import {
   type GitifyDiscussionState,
@@ -10,15 +17,14 @@ import {
   IconColor,
   type Link,
 } from '../../../types';
-import {
-  mockAuthor,
-  mockCommenter,
-  mockDiscussionResponseNode,
-  mockReplier,
-} from '../../api/__mocks__/response-mocks';
+
 import { discussionHandler } from './discussion';
 
 describe('renderer/utils/notifications/handlers/discussion.ts', () => {
+  beforeEach(() => {
+    configureAxiosHttpAdapterForNock();
+  });
+
   describe('supportsMergedQueryEnrichment', () => {
     it('should support merge query', () => {
       expect(discussionHandler.supportsMergedQueryEnrichment).toBeTruthy();
@@ -33,12 +39,6 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
       latestCommentUrl: null,
     });
     mockNotification.updatedAt = '2024-01-01T00:00:00Z';
-
-    beforeEach(() => {
-      // axios will default to using the XHR adapter which can't be intercepted
-      // by nock. So, configure axios to use the node adapter.
-      axios.defaults.adapter = 'http';
-    });
 
     it('answered discussion state - no stateReason', async () => {
       const mockDiscussion = mockDiscussionResponseNode({ isAnswered: true });

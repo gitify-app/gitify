@@ -8,6 +8,7 @@ import webpack from 'webpack';
 import { merge } from 'webpack-merge';
 
 import { Constants } from '../src/renderer/constants';
+
 import { Errors } from '../src/renderer/utils/errors';
 import baseConfig from './webpack.config.common';
 import webpackPaths from './webpack.paths';

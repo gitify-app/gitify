@@ -1,4 +1,5 @@
 import { Theme } from '../types';
+
 import {
   DEFAULT_DAY_COLOR_SCHEME,
   DEFAULT_DAY_HIGH_CONTRAST_COLOR_SCHEME,

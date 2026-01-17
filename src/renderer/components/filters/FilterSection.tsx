@@ -3,11 +3,14 @@ import type { ReactNode } from 'react';
 import type { Icon } from '@primer/octicons-react';
 import { Stack, Text } from '@primer/react';
 
-import { useAppContext } from '../../context/App';
-import type { FilterSettingsState, FilterSettingsValue } from '../../types';
-import type { Filter } from '../../utils/notifications/filters';
+import { useAppContext } from '../../hooks/useAppContext';
+
 import { Checkbox } from '../fields/Checkbox';
 import { Title } from '../primitives/Title';
+
+import type { FilterSettingsState, FilterSettingsValue } from '../../types';
+
+import type { Filter } from '../../utils/notifications/filters';
 import { RequiresDetailedNotificationWarning } from './RequiresDetailedNotificationsWarning';
 
 export interface FilterSectionProps<T extends FilterSettingsValue> {

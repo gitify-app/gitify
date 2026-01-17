@@ -7,8 +7,10 @@ import {
   TagIcon,
 } from '@primer/octicons-react';
 
-import { useAppContext } from '../../context/App';
+import { useAppContext } from '../../hooks/useAppContext';
+
 import { type GitifyNotification, IconColor } from '../../types';
+
 import { getPullRequestReviewIcon } from '../../utils/icons';
 import { MetricPill } from './MetricPill';
 

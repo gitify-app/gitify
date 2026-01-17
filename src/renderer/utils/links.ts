@@ -1,6 +1,7 @@
 import { APPLICATION } from '../../shared/constants';
 
 import { Constants } from '../constants';
+
 import type {
   Account,
   GitifyNotification,
@@ -9,6 +10,7 @@ import type {
   Hostname,
   Link,
 } from '../types';
+
 import { getDeveloperSettingsURL } from './auth/utils';
 import { openExternalLink } from './comms';
 import { generateGitHubWebUrl } from './helpers';

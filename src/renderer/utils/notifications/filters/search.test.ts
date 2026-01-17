@@ -1,5 +1,7 @@
 import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-mocks';
+
 import type { GitifyOwner, Link } from '../../../types';
+
 import {
   ALL_SEARCH_QUALIFIERS,
   filterNotificationBySearchTerm,

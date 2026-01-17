@@ -9,7 +9,7 @@ describe('shared/platform.ts', () => {
     });
   }
 
-  afterAll(() => {
+  afterEach(() => {
     mockPlatform(originalPlatform as NodeJS.Platform);
   });
 

@@ -4,6 +4,7 @@ import type { OcticonProps } from '@primer/octicons-react';
 import { AlertIcon } from '@primer/octicons-react';
 
 import type { GitifyNotification, Link, UserType } from '../../../types';
+
 import { DefaultHandler, defaultHandler } from './default';
 
 class RepositoryDependabotAlertsThreadHandler extends DefaultHandler {

@@ -1,4 +1,5 @@
 import type { Percentage } from '../../types';
+
 import {
   canDecreaseVolume,
   canIncreaseVolume,

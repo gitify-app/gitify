@@ -2,7 +2,6 @@ import {
   createContext,
   type ReactNode,
   useCallback,
-  useContext,
   useEffect,
   useMemo,
   useState,
@@ -11,9 +10,11 @@ import {
 import { useTheme } from '@primer/react';
 
 import { Constants } from '../constants';
+
 import { useInactivityTimer } from '../hooks/timers/useInactivityTimer';
 import { useIntervalTimer } from '../hooks/timers/useIntervalTimer';
 import { useNotifications } from '../hooks/useNotifications';
+
 import type {
   Account,
   AccountNotifications,
@@ -30,11 +31,12 @@ import type {
   Token,
 } from '../types';
 import { FetchType } from '../types';
-import { headNotifications } from '../utils/api/client';
 import type {
   LoginOAuthAppOptions,
   LoginPersonalAccessTokenOptions,
 } from '../utils/auth/types';
+
+import { headNotifications } from '../utils/api/client';
 import {
   addAccount,
   exchangeAuthCodeForAccessToken,
@@ -114,18 +116,6 @@ export interface AppContextState {
 }
 
 export const AppContext = createContext<Partial<AppContextState>>({});
-
-/**
- * Custom hook that provides type-safe access to AppContext.
- * Throws if used outside of AppProvider.
- */
-export function useAppContext(): AppContextState {
-  const context = useContext(AppContext);
-  if (!context || Object.keys(context).length === 0) {
-    throw new Error('useAppContext must be used within an AppProvider');
-  }
-  return context as AppContextState;
-}
 
 export const AppProvider = ({ children }: { children: ReactNode }) => {
   const existingState = loadState();

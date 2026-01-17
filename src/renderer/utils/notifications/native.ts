@@ -1,6 +1,7 @@
 import { APPLICATION } from '../../../shared/constants';
 
 import type { GitifyNotification } from '../../types';
+
 import { generateGitHubWebUrl } from '../helpers';
 
 export async function raiseNativeNotification(

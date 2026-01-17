@@ -1,4 +1,6 @@
 import type { GitifyNotification } from '../../../types';
+import type { NotificationTypeHandler } from './types';
+
 import { checkSuiteHandler } from './checkSuite';
 import { commitHandler } from './commit';
 import { defaultHandler } from './default';
@@ -9,7 +11,6 @@ import { releaseHandler } from './release';
 import { repositoryDependabotAlertsThreadHandler } from './repositoryDependabotAlertsThread';
 import { repositoryInvitationHandler } from './repositoryInvitation';
 import { repositoryVulnerabilityAlertHandler } from './repositoryVulnerabilityAlert';
-import type { NotificationTypeHandler } from './types';
 import { workflowRunHandler } from './workflowRun';
 
 export function createNotificationHandler(

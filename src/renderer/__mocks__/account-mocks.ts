@@ -1,4 +1,5 @@
 import { Constants } from '../constants';
+
 import type {
   Account,
   AccountNotifications,
@@ -6,6 +7,7 @@ import type {
   Hostname,
   Token,
 } from '../types';
+
 import { mockGitifyUser } from './user-mocks';
 
 export const mockGitHubAppAccount: Account = {

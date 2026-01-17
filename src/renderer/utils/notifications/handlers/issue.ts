@@ -16,6 +16,7 @@ import type {
   SettingsState,
 } from '../../../types';
 import { IconColor } from '../../../types';
+
 import { fetchIssueByNumber } from '../../api/client';
 import type { IssueDetailsFragment } from '../../api/graphql/generated/graphql';
 import { DefaultHandler, defaultHandler } from './default';

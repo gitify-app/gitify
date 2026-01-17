@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Avatar, Stack, Truncate } from '@primer/react';
 
 import { type Link, Size, type UserType } from '../../types';
+
 import { getDefaultUserIcon } from '../../utils/icons';
 import { isNonHumanUser } from '../../utils/notifications/filters/userType';
 

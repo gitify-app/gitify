@@ -1,4 +1,5 @@
 import { mockSettings } from '../__mocks__/state-mocks';
+
 import * as comms from './comms';
 import { setTrayIconColorAndTitle } from './tray';
 

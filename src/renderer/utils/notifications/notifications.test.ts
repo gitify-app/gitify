@@ -1,6 +1,6 @@
-import axios from 'axios';
 import nock from 'nock';
 
+import { configureAxiosHttpAdapterForNock } from '../../__helpers__/test-utils';
 import {
   mockGitHubCloudAccount,
   mockGitHubEnterpriseServerAccount,
@@ -11,6 +11,7 @@ import {
   mockSingleAccountNotifications,
 } from '../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../__mocks__/state-mocks';
+
 import {
   type AccountNotifications,
   type GitifyNotification,
@@ -19,6 +20,7 @@ import {
   type Link,
   type SettingsState,
 } from '../../types';
+
 import * as logger from '../../utils/logger';
 import {
   enrichNotification,
@@ -30,9 +32,7 @@ import {
 
 describe('renderer/utils/notifications/notifications.ts', () => {
   beforeEach(() => {
-    // axios will default to using the XHR adapter which can't be intercepted
-    // by nock. So, configure axios to use the node adapter.
-    axios.defaults.adapter = 'http';
+    configureAxiosHttpAdapterForNock();
   });
 
   afterEach(() => {

@@ -1,9 +1,10 @@
-import axios from 'axios';
-
+import { configureAxiosHttpAdapterForNock } from '../../__helpers__/test-utils';
 import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
 import { mockAuth } from '../../__mocks__/state-mocks';
 import { mockGitifyUser } from '../../__mocks__/user-mocks';
+
 import { Constants } from '../../constants';
+
 import type {
   Account,
   AuthCode,
@@ -13,10 +14,11 @@ import type {
   Hostname,
   Token,
 } from '../../types';
+import type { AuthMethod } from './types';
+
 import * as comms from '../../utils/comms';
 import * as apiClient from '../api/client';
 import * as logger from '../logger';
-import type { AuthMethod } from './types';
 import * as authUtils from './utils';
 import { getNewOAuthAppURL, getNewTokenURL } from './utils';
 
@@ -32,6 +34,10 @@ const exchangeWebFlowCodeMock = exchangeWebFlowCode as jest.MockedFunction<
 >;
 
 describe('renderer/utils/auth/utils.ts', () => {
+  beforeEach(() => {
+    configureAxiosHttpAdapterForNock();
+  });
+
   describe('authGitHub', () => {
     jest.spyOn(logger, 'rendererLogInfo').mockImplementation();
     const openExternalLinkSpy = jest
@@ -164,10 +170,6 @@ describe('renderer/utils/auth/utils.ts', () => {
       mockAuthState = {
         accounts: [],
       };
-
-      // axios will default to using the XHR adapter which can't be intercepted
-      // by nock. So, configure axios to use the node adapter.
-      axios.defaults.adapter = 'http';
     });
 
     describe('should add GitHub Cloud account', () => {

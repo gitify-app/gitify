@@ -19,16 +19,21 @@ import { formatDuration, millisecondsToMinutes } from 'date-fns';
 import { APPLICATION } from '../../../shared/constants';
 
 import { Constants } from '../../constants';
-import { useAppContext } from '../../context/App';
-import { FetchType, GroupBy, Size } from '../../types';
-import { openGitHubParticipatingDocs } from '../../utils/links';
+
+import { useAppContext } from '../../hooks/useAppContext';
+
 import { Checkbox } from '../fields/Checkbox';
 import { FieldLabel } from '../fields/FieldLabel';
 import { RadioGroup } from '../fields/RadioGroup';
 import { Title } from '../primitives/Title';
 
+import { FetchType, GroupBy, Size } from '../../types';
+
+import { openGitHubParticipatingDocs } from '../../utils/links';
+
 export const NotificationSettings: FC = () => {
   const { settings, updateSetting } = useAppContext();
+
   const [fetchInterval, setFetchInterval] = useState<number>(
     settings.fetchInterval,
   );

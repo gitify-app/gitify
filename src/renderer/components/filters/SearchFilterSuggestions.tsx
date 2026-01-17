@@ -2,8 +2,10 @@ import type { FC } from 'react';
 
 import { Popover, Stack, Text } from '@primer/react';
 
-import { useAppContext } from '../../context/App';
+import { useAppContext } from '../../hooks/useAppContext';
+
 import { Opacity } from '../../types';
+
 import { cn } from '../../utils/cn';
 import {
   ALL_SEARCH_QUALIFIERS,

@@ -2,6 +2,7 @@ import type { AxiosPromise } from 'axios';
 import type { ExecutionResult } from 'graphql';
 
 import { Constants } from '../../constants';
+
 import type {
   Account,
   GitifyNotification,
@@ -10,6 +11,14 @@ import type {
   SettingsState,
   Token,
 } from '../../types';
+import type {
+  NotificationThreadSubscription,
+  RawCommit,
+  RawCommitComment,
+  RawGitHubNotification,
+  RawRelease,
+} from './types';
+
 import { isAnsweredDiscussionFeatureSupported } from '../features';
 import { rendererLogError } from '../logger';
 import { createNotificationHandler } from '../notifications/handlers';
@@ -31,13 +40,6 @@ import {
   performGraphQLRequest,
   performGraphQLRequestString,
 } from './request';
-import type {
-  NotificationThreadSubscription,
-  RawCommit,
-  RawCommitComment,
-  RawGitHubNotification,
-  RawRelease,
-} from './types';
 import {
   getGitHubAPIBaseUrl,
   getGitHubGraphQLUrl,

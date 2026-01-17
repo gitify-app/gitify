@@ -2,7 +2,9 @@ import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { renderWithAppContext } from '../../__helpers__/test-utils';
+
 import { Size } from '../../types';
+
 import { LogoIcon } from './LogoIcon';
 
 describe('renderer/components/icons/LogoIcon.tsx', () => {

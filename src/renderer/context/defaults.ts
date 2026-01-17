@@ -1,4 +1,5 @@
 import { Constants } from '../constants';
+
 import {
   type AppearanceSettingsState,
   type AuthState,

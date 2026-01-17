@@ -3,6 +3,7 @@ import { type FC, useState } from 'react';
 import { Stack, Text, TextInputWithTokens } from '@primer/react';
 
 import type { SearchToken } from '../../types';
+
 import {
   parseSearchInput,
   SEARCH_DELIMITER,
