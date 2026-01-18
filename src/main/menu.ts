@@ -78,7 +78,9 @@ export default class MenuBuilder {
           {
             label: 'Visit Repository',
             click: () => {
-              shell.openExternal(`https://github.com/${APPLICATION.REPO_SLUG}`);
+              shell.openExternal(
+                `${APPLICATION.GITHUB_BASE_URL}/${APPLICATION.REPO_SLUG}`,
+              );
             },
           },
           {

@@ -11,7 +11,6 @@ import type { Link } from '../../types';
 
 import { FetchAuthenticatedUserDetailsDocument } from './graphql/generated/graphql';
 import {
-  apiRequest,
   apiRequestAuth,
   getHeaders,
   performGraphQLRequest,
@@ -27,33 +26,6 @@ const method = 'get';
 describe('renderer/utils/api/request.ts', () => {
   afterEach(() => {
     jest.clearAllMocks();
-  });
-
-  describe('apiRequest', () => {
-    it('should make a request with the correct parameters', async () => {
-      const data = { key: 'value' };
-
-      await apiRequest(url, method, data);
-
-      expect(axios).toHaveBeenCalledWith({
-        method,
-        url,
-        data,
-        headers: mockNoAuthHeaders,
-      });
-    });
-
-    it('should make a request with the correct parameters and default data', async () => {
-      const data = {};
-      await apiRequest(url, method);
-
-      expect(axios).toHaveBeenCalledWith({
-        method,
-        url,
-        data,
-        headers: mockNoAuthHeaders,
-      });
-    });
   });
 
   describe('apiRequestAuth', () => {

@@ -35855,7 +35855,7 @@ export type PullRequestReviewFieldsFragment = { __typename?: 'PullRequestReview'
 export type FetchAuthenticatedUserDetailsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type FetchAuthenticatedUserDetailsQuery = { __typename?: 'Query', viewer: { __typename?: 'User', id: string, name?: string | null, login: string, avatarUrl: any } };
+export type FetchAuthenticatedUserDetailsQuery = { __typename?: 'Query', viewer: { __typename?: 'User', id: string, name?: string | null, login: string, avatar: any } };
 
 export class TypedDocumentString<TResult, TVariables>
   extends String
@@ -36528,7 +36528,7 @@ export const FetchAuthenticatedUserDetailsDocument = new TypedDocumentString(`
     id
     name
     login
-    avatarUrl
+    avatar: avatarUrl
   }
 }
     `) as unknown as TypedDocumentString<FetchAuthenticatedUserDetailsQuery, FetchAuthenticatedUserDetailsQueryVariables>;

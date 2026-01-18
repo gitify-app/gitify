@@ -26,8 +26,3 @@ export interface AuthResponse {
   authCode: AuthCode;
   authOptions: LoginOAuthAppOptions;
 }
-
-export interface AuthTokenResponse {
-  hostname: Hostname;
-  token: Token;
-}

@@ -3,6 +3,6 @@ query FetchAuthenticatedUserDetails {
     id
     name
     login
-    avatarUrl
+    avatar: avatarUrl
   }
 }

@@ -1,3 +1,8 @@
+import {
+  exchangeWebFlowCode,
+  getWebFlowAuthorizationUrl,
+} from '@octokit/oauth-methods';
+import { request } from '@octokit/request';
 import { format } from 'date-fns';
 import semver from 'semver';
 
@@ -14,27 +19,29 @@ import type {
   Link,
   Token,
 } from '../../types';
-import type { AuthMethod, AuthResponse, AuthTokenResponse } from './types';
+import type { AuthMethod, AuthResponse, LoginOAuthAppOptions } from './types';
 
 import { fetchAuthenticatedUserDetails } from '../api/client';
-import { apiRequest } from '../api/request';
+import { getGitHubAuthBaseUrl } from '../api/utils';
 import { encryptValue, openExternalLink } from '../comms';
 import { getPlatformFromHostname } from '../helpers';
 import { rendererLogError, rendererLogInfo, rendererLogWarn } from '../logger';
 
-export function authGitHub(
-  authOptions = Constants.DEFAULT_AUTH_OPTIONS,
+export function performGitHubOAuth(
+  authOptions: LoginOAuthAppOptions = Constants.DEFAULT_AUTH_OPTIONS,
 ): Promise<AuthResponse> {
   return new Promise((resolve, reject) => {
-    const authUrl = new URL(`https://${authOptions.hostname}`);
-    authUrl.pathname = '/login/oauth/authorize';
-    authUrl.searchParams.append('client_id', authOptions.clientId);
-    authUrl.searchParams.append(
-      'scope',
-      Constants.OAUTH_SCOPES.RECOMMENDED.toString(),
-    );
+    const { url } = getWebFlowAuthorizationUrl({
+      clientType: 'oauth-app',
+      clientId: authOptions.clientId,
+      scopes: Constants.OAUTH_SCOPES.RECOMMENDED,
+      allowSignup: false,
+      request: request.defaults({
+        baseUrl: `https://${authOptions.hostname}`,
+      }),
+    });
 
-    openExternalLink(authUrl.toString() as Link);
+    openExternalLink(url as Link);
 
     const handleCallback = (callbackUrl: string) => {
       const url = new URL(callbackUrl);
@@ -73,23 +80,21 @@ export function authGitHub(
   });
 }
 
-export async function getToken(
+export async function exchangeAuthCodeForAccessToken(
   authCode: AuthCode,
-  authOptions = Constants.DEFAULT_AUTH_OPTIONS,
-): Promise<AuthTokenResponse> {
-  const url =
-    `https://${authOptions.hostname}/login/oauth/access_token` as Link;
-  const data = {
-    client_id: authOptions.clientId,
-    client_secret: authOptions.clientSecret,
+  authOptions: LoginOAuthAppOptions = Constants.DEFAULT_AUTH_OPTIONS,
+): Promise<Token> {
+  const { authentication } = await exchangeWebFlowCode({
+    clientType: 'oauth-app',
+    clientId: authOptions.clientId,
+    clientSecret: authOptions.clientSecret,
     code: authCode,
-  };
+    request: request.defaults({
+      baseUrl: getGitHubAuthBaseUrl(authOptions.hostname).toString(),
+    }),
+  });
 
-  const response = await apiRequest(url, 'POST', data);
-  return {
-    hostname: authOptions.hostname,
-    token: response.data.access_token,
-  };
+  return authentication.token as Token;
 }
 
 export async function addAccount(
@@ -152,7 +157,7 @@ export async function refreshAccount(account: Account): Promise<Account> {
       id: user.id,
       login: user.login,
       name: user.name,
-      avatar: user.avatarUrl,
+      avatar: user.avatar,
     };
 
     account.version = extractHostVersion(
