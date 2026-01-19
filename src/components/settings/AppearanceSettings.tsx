@@ -16,8 +16,14 @@ import {
 } from '@primer/react';
 
 import { useAppContext } from '../../context/App';
+
+import { Checkbox } from '../fields/Checkbox';
+import { FieldLabel } from '../fields/FieldLabel';
+import { Title } from '../primitives/Title';
+
 import type { Percentage } from '../../types';
 import { Theme } from '../../types';
+
 import { hasMultipleAccounts } from '../../utils/auth/utils';
 import {
   canDecreaseZoom,
@@ -28,9 +34,6 @@ import {
   resetZoomLevel,
   zoomLevelToPercentage,
 } from '../../utils/zoom';
-import { Checkbox } from '../fields/Checkbox';
-import { FieldLabel } from '../fields/FieldLabel';
-import { Title } from '../primitives/Title';
 
 export const AppearanceSettings: FC = () => {
   const { auth, settings, updateSetting } = useAppContext();

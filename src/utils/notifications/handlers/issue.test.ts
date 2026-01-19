@@ -6,6 +6,12 @@ import {
 } from '../../../__mocks__/@tauri-apps/plugin-http';
 import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
+import {
+  mockAuthor,
+  mockCommenter,
+  mockIssueResponseNode,
+} from '../../api/__mocks__/response-mocks';
+
 import type { GitifyNotification } from '../../../types';
 import {
   type GitifyIssueState,
@@ -13,11 +19,7 @@ import {
   IconColor,
   type Link,
 } from '../../../types';
-import {
-  mockAuthor,
-  mockCommenter,
-  mockIssueResponseNode,
-} from '../../api/__mocks__/response-mocks';
+
 import { issueHandler } from './issue';
 
 describe('renderer/utils/notifications/handlers/issue.ts', () => {

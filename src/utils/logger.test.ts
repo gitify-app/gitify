@@ -1,6 +1,7 @@
+import { mockGitifyNotification } from '../__mocks__/notifications-mocks';
+
 import * as logger from '../shared/logger';
 
-import { mockGitifyNotification } from '../__mocks__/notifications-mocks';
 import { rendererLogError, rendererLogInfo, rendererLogWarn } from './logger';
 
 describe('renderer/utils/logger.ts', () => {

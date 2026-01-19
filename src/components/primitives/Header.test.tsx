@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { MarkGithubIcon } from '@primer/octicons-react';
 
 import { renderWithAppContext } from '../../__helpers__/test-utils';
+
 import { Header } from './Header';
 
 const navigateMock = vi.fn();

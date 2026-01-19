@@ -13,6 +13,7 @@ import {
 } from '../__mocks__/@tauri-apps/plugin-http';
 import { mockGitifyNotification } from '../__mocks__/notifications-mocks';
 import { mockAuth, mockSettings, mockState } from '../__mocks__/state-mocks';
+
 import { Errors } from '../utils/errors';
 import * as logger from '../utils/logger';
 import { useNotifications } from './useNotifications';

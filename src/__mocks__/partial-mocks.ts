@@ -1,4 +1,5 @@
 import { Constants } from '../constants';
+
 import type {
   GitifyNotification,
   GitifyNotificationUser,
@@ -7,6 +8,7 @@ import type {
   Hostname,
   Link,
 } from '../types';
+
 import type { User } from '../typesGitHub';
 import { mockToken } from './state-mocks';
 import { mockGitifyUser } from './user-mocks';

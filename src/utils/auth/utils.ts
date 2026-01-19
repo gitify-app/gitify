@@ -4,6 +4,7 @@ import semver from 'semver';
 import { APPLICATION } from '../../shared/constants';
 
 import { Constants } from '../../constants';
+
 import type {
   Account,
   AuthCode,
@@ -13,6 +14,13 @@ import type {
   Link,
   Token,
 } from '../../types';
+import type {
+  AuthMethod,
+  AuthResponse,
+  AuthTokenResponse,
+  LoginOAuthAppOptions,
+} from './types';
+
 import { fetchAuthenticatedUserDetails } from '../api/client';
 import {
   encryptValue,
@@ -23,12 +31,6 @@ import {
 } from '../comms';
 import { getPlatformFromHostname } from '../helpers';
 import { rendererLogError, rendererLogInfo, rendererLogWarn } from '../logger';
-import type {
-  AuthMethod,
-  AuthResponse,
-  AuthTokenResponse,
-  LoginOAuthAppOptions,
-} from './types';
 
 // OAuth authentication timeout (5 minutes)
 const OAUTH_TIMEOUT_MS = 300000;
