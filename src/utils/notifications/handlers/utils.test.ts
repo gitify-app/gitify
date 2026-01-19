@@ -1,4 +1,5 @@
 import { mockAuthor } from '../../api/__mocks__/response-mocks';
+
 import { getNotificationAuthor } from './utils';
 
 describe('renderer/utils/notifications/handlers/utils.ts', () => {

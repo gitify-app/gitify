@@ -1,11 +1,13 @@
 import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
+
 import type { GitifyNotification } from '../../../types';
 import {
   type GitifyNotificationState,
   IconColor,
   type Link,
 } from '../../../types';
+
 import { defaultHandler } from './default';
 
 describe('renderer/utils/notifications/handlers/default.ts', () => {

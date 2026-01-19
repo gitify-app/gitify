@@ -6,7 +6,9 @@ import {
 
 import { mockGitifyNotification } from '../__mocks__/notifications-mocks';
 import { mockToken } from '../__mocks__/state-mocks';
+
 import type { GitifySubject, Hostname, Link, SubjectType } from '../types';
+
 import * as apiClient from './api/client';
 import {
   generateGitHubWebUrl,

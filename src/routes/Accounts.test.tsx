@@ -7,6 +7,7 @@ import {
   mockOAuthAccount,
   mockPersonalAccessTokenAccount,
 } from '../__mocks__/account-mocks';
+
 import * as authUtils from '../utils/auth/utils';
 import * as comms from '../utils/comms';
 import * as links from '../utils/links';

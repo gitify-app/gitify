@@ -8,6 +8,7 @@ import type {
   GitifyState,
   Status,
 } from '../types';
+
 import {
   ignoreNotificationThreadSubscription,
   markNotificationThreadAsDone,

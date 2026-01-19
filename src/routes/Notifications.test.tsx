@@ -1,6 +1,7 @@
 import { renderWithAppContext } from '../__helpers__/test-utils';
 import { mockMultipleAccountNotifications } from '../__mocks__/notifications-mocks';
 import { mockSettings } from '../__mocks__/state-mocks';
+
 import { Errors } from '../utils/errors';
 import { NotificationsRoute } from './Notifications';
 

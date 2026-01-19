@@ -1,4 +1,5 @@
 import { renderWithAppContext } from '../../__helpers__/test-utils';
+
 import { Checkbox, type CheckboxProps } from './Checkbox';
 
 describe('renderer/components/fields/Checkbox.tsx', () => {

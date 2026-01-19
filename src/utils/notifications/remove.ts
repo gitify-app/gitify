@@ -4,12 +4,26 @@ import type {
   GitifyNotification,
   SettingsState,
 } from '../../types';
+
 import { getAccountUUID } from '../auth/utils';
+
+/**
+ * Determine if notifications should be removed from state or marked as read in-place.
+ *
+ * When `delayNotificationState` or `fetchReadNotifications` is enabled,
+ * notifications stay in the list with reduced opacity instead of being removed.
+ */
+export function shouldRemoveNotificationsFromState(
+  settings: SettingsState,
+): boolean {
+  return !settings.delayNotificationState && !settings.fetchReadNotifications;
+}
 
 /**
  * Remove notifications from the account notifications list.
  *
- * If delayNotificationState is enabled in settings, mark notifications as read instead of removing them.
+ * When `delayNotificationState` or `fetchReadNotifications` is enabled,
+ * notifications are marked as read instead of being removed from the list.
  */
 export function removeNotificationsForAccount(
   account: Account,
@@ -25,18 +39,20 @@ export function removeNotificationsForAccount(
     notificationsToRemove.map((notification) => notification.id),
   );
 
+  const shouldRemove = shouldRemoveNotificationsFromState(settings);
+
   return accountNotifications.map((accountNotifications) =>
     getAccountUUID(account) === getAccountUUID(accountNotifications.account)
       ? {
           ...accountNotifications,
-          notifications: settings.delayNotificationState
-            ? accountNotifications.notifications.map((notification) =>
+          notifications: shouldRemove
+            ? accountNotifications.notifications.filter(
+                (notification) => !notificationIDsToRemove.has(notification.id),
+              )
+            : accountNotifications.notifications.map((notification) =>
                 notificationIDsToRemove.has(notification.id)
                   ? { ...notification, unread: false }
                   : notification,
-              )
-            : accountNotifications.notifications.filter(
-                (notification) => !notificationIDsToRemove.has(notification.id),
               ),
         }
       : accountNotifications,

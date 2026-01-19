@@ -4,7 +4,9 @@ import userEvent from '@testing-library/user-event';
 import { renderWithAppContext } from '../../__helpers__/test-utils';
 import { mockGitifyNotification } from '../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../__mocks__/state-mocks';
+
 import { GroupBy } from '../../types';
+
 import * as comms from '../../utils/comms';
 import { NotificationHeader } from './NotificationHeader';
 

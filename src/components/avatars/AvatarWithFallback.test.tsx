@@ -1,7 +1,9 @@
 import { fireEvent, screen } from '@testing-library/react';
 
 import { renderWithAppContext } from '../../__helpers__/test-utils';
+
 import { type Link, Size } from '../../types';
+
 import {
   AvatarWithFallback,
   type AvatarWithFallbackProps,

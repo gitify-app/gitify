@@ -5,9 +5,11 @@ import {
 } from '@primer/octicons-react';
 
 import { Constants } from '../constants';
+
 import type { Chevron, GitifyNotification, Hostname, Link } from '../types';
-import { getHtmlUrl } from './api/client';
 import type { PlatformType } from './auth/types';
+
+import { getHtmlUrl } from './api/client';
 import { rendererLogError } from './logger';
 import { createNotificationHandler } from './notifications/handlers';
 

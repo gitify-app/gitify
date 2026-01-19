@@ -19,16 +19,21 @@ import { formatDuration, millisecondsToMinutes } from 'date-fns';
 import { APPLICATION } from '../../shared/constants';
 
 import { Constants } from '../../constants';
-import { useAppContext } from '../../context/App';
-import { FetchType, GroupBy, Size } from '../../types';
-import { openGitHubParticipatingDocs } from '../../utils/links';
+
+import { useAppContext } from '../../hooks/useAppContext';
+
 import { Checkbox } from '../fields/Checkbox';
 import { FieldLabel } from '../fields/FieldLabel';
 import { RadioGroup } from '../fields/RadioGroup';
 import { Title } from '../primitives/Title';
 
+import { FetchType, GroupBy, Size } from '../../types';
+
+import { openGitHubParticipatingDocs } from '../../utils/links';
+
 export const NotificationSettings: FC = () => {
   const { settings, updateSetting } = useAppContext();
+
   const [fetchInterval, setFetchInterval] = useState<number>(
     settings.fetchInterval,
   );
@@ -323,6 +328,29 @@ export const NotificationSettings: FC = () => {
                   official docs
                 </button>{' '}
                 for more details.
+              </Text>
+            </Stack>
+          }
+        />
+
+        <Checkbox
+          checked={settings.fetchReadNotifications}
+          label="Fetch read & done notifications"
+          name="fetchReadNotifications"
+          onChange={(evt) =>
+            updateSetting('fetchReadNotifications', evt.target.checked)
+          }
+          tooltip={
+            <Stack direction="vertical" gap="condensed">
+              <Text>Fetch all notifications including read and done.</Text>
+              <Text className="text-gitify-caution">
+                ⚠️ GitHub's API does not distinguish between read and done
+                states, so 'Mark as done' actions will be unavailable when this
+                setting is enabled.
+              </Text>
+              <Text className="text-gitify-caution">
+                ⚠️ Enabling this setting will increase API usage and may cause
+                rate limiting for users with many notifications.
               </Text>
             </Stack>
           }

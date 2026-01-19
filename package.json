@@ -58,6 +58,7 @@
     "@discordapp/twemoji": "16.0.1",
     "@graphql-codegen/cli": "6.1.0",
     "@graphql-codegen/schema-ast": "5.0.0",
+    "@octokit/oauth-methods": "6.0.2",
     "@octokit/openapi-types": "27.0.0",
     "@parcel/watcher": "2.5.1",
     "@tailwindcss/vite": "^4.1.18",

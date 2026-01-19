@@ -5,7 +5,9 @@ import { renderWithAppContext } from '../../__helpers__/test-utils';
 import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
 import { mockGitHubCloudGitifyNotifications } from '../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../__mocks__/state-mocks';
+
 import type { Link } from '../../types';
+
 import * as comms from '../../utils/comms';
 import { RepositoryNotifications } from './RepositoryNotifications';
 
@@ -22,6 +24,13 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
     repoName: 'gitify-app/notifications-test',
     repoNotifications: mockGitHubCloudGitifyNotifications,
   };
+
+  beforeEach(() => {
+    // Reset mock notification state between tests since it's mutated
+    for (const n of mockGitHubCloudGitifyNotifications) {
+      n.unread = true;
+    }
+  });
 
   afterEach(() => {
     vi.clearAllMocks();

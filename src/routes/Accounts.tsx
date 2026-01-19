@@ -21,13 +21,16 @@ import {
   Text,
 } from '@primer/react';
 
+import { useAppContext } from '../hooks/useAppContext';
+
 import { AvatarWithFallback } from '../components/avatars/AvatarWithFallback';
 import { Contents } from '../components/layout/Contents';
 import { Page } from '../components/layout/Page';
 import { Footer } from '../components/primitives/Footer';
 import { Header } from '../components/primitives/Header';
-import { useAppContext } from '../context/App';
+
 import { type Account, Size } from '../types';
+
 import {
   formatAlternateOAuthScopes,
   formatRecommendedOAuthScopes,
@@ -44,9 +47,10 @@ import { rendererLogError } from '../utils/logger';
 import { saveState } from '../utils/storage';
 
 export const AccountsRoute: FC = () => {
+  const navigate = useNavigate();
+
   const { auth, settings, loginWithGitHubApp, logoutFromAccount } =
     useAppContext();
-  const navigate = useNavigate();
 
   const [loadingStates, setLoadingStates] = useState<Record<string, boolean>>(
     {},

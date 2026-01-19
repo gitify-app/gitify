@@ -4,6 +4,7 @@ import type {
   GitifyNotificationUser,
   SettingsState,
 } from '../../../types';
+
 import {
   BASE_SEARCH_QUALIFIERS,
   DETAILED_ONLY_SEARCH_QUALIFIERS,

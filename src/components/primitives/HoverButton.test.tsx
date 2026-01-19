@@ -1,6 +1,7 @@
 import { MarkGithubIcon } from '@primer/octicons-react';
 
 import { renderWithAppContext } from '../../__helpers__/test-utils';
+
 import { HoverButton } from './HoverButton';
 
 describe('renderer/components/primitives/HoverButton.tsx', () => {

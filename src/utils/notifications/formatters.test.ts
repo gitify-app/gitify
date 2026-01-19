@@ -1,4 +1,5 @@
 import { mockPartialGitifyNotification } from '../../__mocks__/notifications-mocks';
+
 import {
   formatForDisplay,
   formatNotificationNumber,

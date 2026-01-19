@@ -72,6 +72,7 @@ describe('renderer/utils/api/client.ts', () => {
     it('should list only participating notifications for user', async () => {
       const mockSettings: Partial<SettingsState> = {
         participating: true,
+        fetchReadNotifications: false,
       };
 
       await listNotificationsForAuthenticatedUser(
@@ -80,7 +81,7 @@ describe('renderer/utils/api/client.ts', () => {
       );
 
       expect(fetch).toHaveBeenCalledWith(
-        'https://api.github.com/notifications?participating=true',
+        'https://api.github.com/notifications?participating=true&all=false',
         {
           method: 'GET',
           headers: mockNonCachedAuthHeaders,
@@ -92,6 +93,7 @@ describe('renderer/utils/api/client.ts', () => {
     it('should list participating and watching notifications for user', async () => {
       const mockSettings: Partial<SettingsState> = {
         participating: false,
+        fetchReadNotifications: false,
       };
 
       await listNotificationsForAuthenticatedUser(
@@ -100,7 +102,7 @@ describe('renderer/utils/api/client.ts', () => {
       );
 
       expect(fetch).toHaveBeenCalledWith(
-        'https://api.github.com/notifications?participating=false',
+        'https://api.github.com/notifications?participating=false&all=false',
         {
           method: 'GET',
           headers: mockNonCachedAuthHeaders,

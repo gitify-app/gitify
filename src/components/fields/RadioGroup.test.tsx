@@ -1,4 +1,5 @@
 import { renderWithAppContext } from '../../__helpers__/test-utils';
+
 import { RadioGroup, type RadioGroupProps } from './RadioGroup';
 
 describe('renderer/components/fields/RadioGroup.tsx', () => {

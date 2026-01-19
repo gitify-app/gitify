@@ -3,6 +3,7 @@ import type { FC } from 'react';
 import { MailIcon, type OcticonProps } from '@primer/octicons-react';
 
 import type { GitifyNotification, Link } from '../../../types';
+
 import { DefaultHandler, defaultHandler } from './default';
 
 class RepositoryInvitationHandler extends DefaultHandler {

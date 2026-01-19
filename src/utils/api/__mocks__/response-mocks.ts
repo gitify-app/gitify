@@ -1,4 +1,6 @@
 import type { Link } from '../../../types';
+import type { RawUser } from '../types';
+
 import type {
   AuthorFieldsFragment,
   DiscussionDetailsFragment,
@@ -9,7 +11,6 @@ import type {
   PullRequestDetailsFragment,
   PullRequestState,
 } from '../graphql/generated/graphql';
-import type { RawUser } from '../types';
 
 /**
  * Creates a mock raw user [REST API]

@@ -3,6 +3,7 @@ import type { FC, MouseEvent } from 'react';
 import { RelativeTime, Stack, Text } from '@primer/react';
 
 import { type GitifyNotification, Opacity, Size } from '../../types';
+
 import { cn } from '../../utils/cn';
 import { openUserProfile } from '../../utils/links';
 import { AvatarWithFallback } from '../avatars/AvatarWithFallback';

@@ -1,6 +1,7 @@
 import { PersonFillIcon } from '@primer/octicons-react';
 
 import { renderWithAppContext } from '../../__helpers__/test-utils';
+
 import { Title } from './Title';
 
 describe('renderer/routes/components/primitives/Title.tsx', () => {

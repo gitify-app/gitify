@@ -9,6 +9,8 @@ export const APPLICATION = {
 
   WEBSITE: 'https://gitify.io',
 
+  GITHUB_BASE_URL: 'https://github.com',
+
   REPO_SLUG: 'gitify-app/gitify',
 
   DEFAULT_KEYBOARD_SHORTCUT: 'CommandOrControl+Shift+G',

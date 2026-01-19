@@ -1,6 +1,7 @@
 import { fireEvent, screen } from '@testing-library/react';
 
 import { renderWithAppContext } from '../../__helpers__/test-utils';
+
 import { SearchFilter } from './SearchFilter';
 
 describe('renderer/components/filters/SearchFilter.tsx', () => {

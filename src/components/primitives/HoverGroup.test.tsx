@@ -1,4 +1,5 @@
 import { renderWithAppContext } from '../../__helpers__/test-utils';
+
 import { HoverGroup } from './HoverGroup';
 
 describe('renderer/components/primitives/HoverGroup.tsx', () => {

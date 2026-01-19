@@ -1,5 +1,7 @@
 import { defaultSettings } from '../context/defaults';
+
 import { type Link, OpenPreference } from '../types';
+
 import { loadState } from './storage';
 
 export function openExternalLink(url: Link): void {

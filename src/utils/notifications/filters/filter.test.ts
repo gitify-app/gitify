@@ -1,12 +1,15 @@
 import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
+
 import { defaultSettings } from '../../../context/defaults';
+
 import type {
   GitifyOwner,
   Link,
   SearchToken,
   SettingsState,
 } from '../../../types';
+
 import {
   filterBaseNotifications,
   filterDetailedNotifications,
@@ -65,7 +68,7 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
     ];
 
     describe('filterBaseNotifications', () => {
-      it('should filter notifications by subject type when provided', async () => {
+      it('should filter notifications by subject type when provided', () => {
         mockNotifications[0].subject.type = 'Issue';
         mockNotifications[1].subject.type = 'PullRequest';
         const result = filterBaseNotifications(mockNotifications, {
@@ -89,7 +92,7 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
         expect(result).toEqual([mockNotifications[1]]);
       });
 
-      it('should filter notifications that match include organization', async () => {
+      it('should filter notifications that match include organization', () => {
         const result = filterBaseNotifications(mockNotifications, {
           ...mockSettings,
           filterIncludeSearchTokens: ['org:gitify-app' as SearchToken],
@@ -99,7 +102,7 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
         expect(result).toEqual([mockNotifications[0]]);
       });
 
-      it('should filter notifications that match exclude organization', async () => {
+      it('should filter notifications that match exclude organization', () => {
         const result = filterBaseNotifications(mockNotifications, {
           ...mockSettings,
           filterExcludeSearchTokens: ['org:github' as SearchToken],
@@ -109,7 +112,7 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
         expect(result).toEqual([mockNotifications[0]]);
       });
 
-      it('should filter notifications that match include repository', async () => {
+      it('should filter notifications that match include repository', () => {
         const result = filterBaseNotifications(mockNotifications, {
           ...mockSettings,
           filterIncludeSearchTokens: ['repo:gitify-app/gitify' as SearchToken],
@@ -119,7 +122,7 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
         expect(result).toEqual([mockNotifications[0]]);
       });
 
-      it('should filter notifications that match exclude repository', async () => {
+      it('should filter notifications that match exclude repository', () => {
         const result = filterBaseNotifications(mockNotifications, {
           ...mockSettings,
           filterExcludeSearchTokens: ['repo:github/github' as SearchToken],

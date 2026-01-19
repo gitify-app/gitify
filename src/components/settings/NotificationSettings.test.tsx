@@ -3,7 +3,9 @@ import userEvent from '@testing-library/user-event';
 
 import { renderWithAppContext } from '../../__helpers__/test-utils';
 import { mockSettings } from '../../__mocks__/state-mocks';
+
 import { Constants } from '../../constants';
+
 import * as comms from '../../utils/comms';
 import { NotificationSettings } from './NotificationSettings';
 
@@ -268,6 +270,24 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
     expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
     expect(openExternalLinkSpy).toHaveBeenCalledWith(
       'https://docs.github.com/en/account-and-profile/managing-subscriptions-and-notifications-on-github/setting-up-notifications/configuring-notifications#about-participating-and-watching-notifications',
+    );
+  });
+
+  it('should toggle the fetchReadNotifications checkbox', async () => {
+    await act(async () => {
+      renderWithAppContext(<NotificationSettings />, {
+        updateSetting: updateSettingMock,
+      });
+    });
+
+    await userEvent.click(
+      screen.getByTestId('checkbox-fetchReadNotifications'),
+    );
+
+    expect(updateSettingMock).toHaveBeenCalledTimes(1);
+    expect(updateSettingMock).toHaveBeenCalledWith(
+      'fetchReadNotifications',
+      true,
     );
   });
 

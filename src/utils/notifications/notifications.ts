@@ -5,6 +5,7 @@ import type {
   GitifySubject,
   SettingsState,
 } from '../../types';
+
 import {
   fetchNotificationDetailsForList,
   listNotificationsForAuthenticatedUser,

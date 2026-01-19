@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 
 import { renderWithAppContext } from '../../__helpers__/test-utils';
 import { mockGitHubAppAccount } from '../../__mocks__/account-mocks';
+
 import * as zoom from '../../utils/zoom';
 import { AppearanceSettings } from './AppearanceSettings';
 

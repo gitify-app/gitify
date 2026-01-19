@@ -2,6 +2,8 @@ import type { FC } from 'react';
 
 import type { Icon, OcticonProps } from '@primer/octicons-react';
 
+import type { AuthMethod, PlatformType } from './utils/auth/types';
+
 import type {
   DiscussionStateReason,
   IssueState,
@@ -10,7 +12,6 @@ import type {
   PullRequestReviewState,
   PullRequestState,
 } from './utils/api/graphql/generated/graphql';
-import type { AuthMethod, PlatformType } from './utils/auth/types';
 
 declare const __brand: unique symbol;
 
@@ -109,6 +110,7 @@ export interface NotificationSettingsState {
   showPills: boolean;
   showNumber: boolean;
   participating: boolean;
+  fetchReadNotifications: boolean;
   markAsDoneOnOpen: boolean;
   markAsDoneOnUnsubscribe: boolean;
   delayNotificationState: boolean;

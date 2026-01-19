@@ -8,6 +8,7 @@ import {
 } from '@primer/octicons-react';
 
 import { type GitifyPullRequestReview, IconColor } from '../types';
+
 import {
   getAuthMethodIcon,
   getDefaultUserIcon,
