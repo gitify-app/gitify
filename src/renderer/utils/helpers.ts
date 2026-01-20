@@ -119,45 +119,15 @@ export function getChevronDetails(
 export function parseInlineCode(
   text: string,
 ): Array<{ type: 'text' | 'code'; content: string }> {
-  const parts: Array<{ type: 'text' | 'code'; content: string }> = [];
-  const regex = /`([^`]+)`/g;
-  let lastIndex = 0;
+  const regex = /`(?<code>[^`]+)`|(?<text>[^`]+)/g;
+  const matches = Array.from(text.matchAll(regex));
 
-  let match = regex.exec(text);
-  while (match !== null) {
-    // Add text before the code block
-    if (match.index > lastIndex) {
-      parts.push({
-        type: 'text',
-        content: text.slice(lastIndex, match.index),
-      });
-    }
-
-    // Add the code block
-    parts.push({
-      type: 'code',
-      content: match[1],
-    });
-
-    lastIndex = regex.lastIndex;
-    match = regex.exec(text);
+  if (matches.length === 0) {
+    return [{ type: 'text', content: text }];
   }
 
-  // Add remaining text after the last code block
-  if (lastIndex < text.length) {
-    parts.push({
-      type: 'text',
-      content: text.slice(lastIndex),
-    });
-  }
-
-  // If no code blocks were found, return the original text as a single text part
-  if (parts.length === 0) {
-    parts.push({
-      type: 'text',
-      content: text,
-    });
-  }
-
-  return parts;
+  return matches.map((match) => ({
+    type: match.groups?.code ? 'code' : 'text',
+    content: match.groups?.code ?? match.groups?.text ?? '',
+  }));
 }
