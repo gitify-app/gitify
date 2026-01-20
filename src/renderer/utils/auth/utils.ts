@@ -21,7 +21,13 @@ import type {
   Link,
   Token,
 } from '../../types';
-import type { AuthMethod, AuthResponse, LoginOAuthWebOptions } from './types';
+import type {
+  AuthMethod,
+  AuthResponse,
+  DeviceFlowSession,
+  LoginOAuthDeviceOptions,
+  LoginOAuthWebOptions,
+} from './types';
 
 import { fetchAuthenticatedUserDetails } from '../api/client';
 import { getGitHubAuthBaseUrl } from '../api/utils';
@@ -82,33 +88,70 @@ export function performGitHubWebOAuth(
   });
 }
 
-export async function performGitHubDeviceOAuth(): Promise<Token> {
+export async function startGitHubDeviceFlow(
+  authOptions: LoginOAuthDeviceOptions = Constants.OAUTH_DEVICE_FLOW,
+): Promise<DeviceFlowSession> {
   const deviceCode = await createDeviceCode({
-    clientType: 'oauth-app',
-    clientId: Constants.OAUTH_DEVICE_FLOW.clientId,
+    clientType: 'oauth-app' as const,
+    clientId: authOptions.clientId,
     scopes: Constants.OAUTH_SCOPES.RECOMMENDED,
     request: request.defaults({
-      baseUrl: getGitHubAuthBaseUrl(
-        Constants.OAUTH_DEVICE_FLOW.hostname,
-      ).toString(),
+      baseUrl: getGitHubAuthBaseUrl(authOptions.hostname).toString(),
     }),
   });
 
-  openExternalLink(deviceCode.data.verification_uri as Link);
+  return {
+    hostname: authOptions.hostname,
+    clientId: authOptions.clientId,
+    deviceCode: deviceCode.data.device_code,
+    userCode: deviceCode.data.user_code,
+    verificationUri: deviceCode.data.verification_uri,
+    intervalSeconds: deviceCode.data.interval,
+    expiresAt: Date.now() + deviceCode.data.expires_in * 1000,
+  } as DeviceFlowSession;
+}
 
-  const { authentication } = await exchangeDeviceCode({
-    clientType: 'oauth-app',
-    clientId: Constants.OAUTH_DEVICE_FLOW.clientId,
-    code: deviceCode.data.device_code,
-    interval: deviceCode.data.interval,
-    request: request.defaults({
-      baseUrl: getGitHubAuthBaseUrl(
-        Constants.OAUTH_DEVICE_FLOW.hostname,
-      ).toString(),
-    }),
-  });
+export async function pollGitHubDeviceFlow(
+  session: DeviceFlowSession,
+): Promise<Token | null> {
+  try {
+    const { authentication } = await exchangeDeviceCode({
+      clientType: 'oauth-app' as const,
+      clientId: session.clientId,
+      code: session.deviceCode,
+      request: request.defaults({
+        baseUrl: getGitHubAuthBaseUrl(session.hostname).toString(),
+      }),
+    });
 
-  return authentication.token as Token;
+    return (authentication as { token: string }).token as Token;
+  } catch (err) {
+    const errorCode = (err as Record<string, unknown>)?.response?.data?.error;
+
+    if (errorCode === 'authorization_pending' || errorCode === 'slow_down') {
+      return null;
+    }
+
+    throw err;
+  }
+}
+
+export async function performGitHubDeviceOAuth(): Promise<Token> {
+  const session = await startGitHubDeviceFlow();
+
+  const intervalMs = Math.max(5000, session.intervalSeconds * 1000);
+
+  while (Date.now() < session.expiresAt) {
+    const token = await pollGitHubDeviceFlow(session);
+
+    if (token) {
+      return token;
+    }
+
+    await new Promise((resolve) => setTimeout(resolve, intervalMs));
+  }
+
+  throw new Error('Device code expired before authorization completed');
 }
 
 export async function exchangeAuthCodeForAccessToken(

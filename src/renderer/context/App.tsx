@@ -25,6 +25,7 @@ import type {
   FilterSettingsValue,
   GitifyError,
   GitifyNotification,
+  Hostname,
   SettingsState,
   SettingsValue,
   Status,
@@ -32,6 +33,7 @@ import type {
 } from '../types';
 import { FetchType } from '../types';
 import type {
+  DeviceFlowSession,
   LoginOAuthWebOptions,
   LoginPersonalAccessTokenOptions,
 } from '../utils/auth/types';
@@ -42,10 +44,11 @@ import {
   exchangeAuthCodeForAccessToken,
   getAccountUUID,
   hasAccounts,
-  performGitHubDeviceOAuth,
   performGitHubWebOAuth,
+  pollGitHubDeviceFlow,
   refreshAccount,
   removeAccount,
+  startGitHubDeviceFlow,
 } from '../utils/auth/utils';
 import {
   decryptValue,
@@ -76,6 +79,12 @@ export interface AppContextState {
   auth: AuthState;
   isLoggedIn: boolean;
   loginWithGitHubApp: () => Promise<void>;
+  startGitHubDeviceFlow: () => Promise<DeviceFlowSession>;
+  pollGitHubDeviceFlow: (session: DeviceFlowSession) => Promise<Token | null>;
+  completeGitHubDeviceLogin: (
+    token: Token,
+    hostname?: Hostname,
+  ) => Promise<void>;
   loginWithOAuthApp: (data: LoginOAuthWebOptions) => Promise<void>;
   loginWithPersonalAccessToken: (
     data: LoginPersonalAccessTokenOptions,
@@ -397,16 +406,60 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   }, [auth]);
 
   /**
+   * Start a GitHub device flow session.
+   */
+  const startGitHubDeviceFlowWithDefaults = useCallback(
+    async () => await startGitHubDeviceFlow(),
+    [],
+  );
+
+  /**
+   * Poll GitHub device flow session for completion.
+   */
+  const pollGitHubDeviceFlowWithSession = useCallback(
+    async (session: DeviceFlowSession) => await pollGitHubDeviceFlow(session),
+    [],
+  );
+
+  /**
+   * Persist GitHub app login after device flow completes.
+   */
+  const completeGitHubDeviceLogin = useCallback(
+    async (
+      token: Token,
+      hostname: Hostname = Constants.OAUTH_DEVICE_FLOW.hostname,
+    ) => {
+      const updatedAuth = await addAccount(auth, 'GitHub App', token, hostname);
+
+      persistAuth(updatedAuth);
+    },
+    [auth, persistAuth],
+  );
+
+  /**
    * Login with GitHub App using device flow so the client secret is never bundled or persisted.
    */
   const loginWithGitHubApp = useCallback(async () => {
-    const token = await performGitHubDeviceOAuth();
-    const hostname = Constants.OAUTH_DEVICE_FLOW.hostname;
+    const session = await startGitHubDeviceFlowWithDefaults();
+    const intervalMs = Math.max(5000, session.intervalSeconds * 1000);
 
-    const updatedAuth = await addAccount(auth, 'GitHub App', token, hostname);
+    while (Date.now() < session.expiresAt) {
+      const token = await pollGitHubDeviceFlowWithSession(session);
 
-    persistAuth(updatedAuth);
-  }, [auth, persistAuth]);
+      if (token) {
+        await completeGitHubDeviceLogin(token, session.hostname);
+        return;
+      }
+
+      await new Promise((resolve) => setTimeout(resolve, intervalMs));
+    }
+
+    throw new Error('Device code expired before authorization completed');
+  }, [
+    startGitHubDeviceFlowWithDefaults,
+    pollGitHubDeviceFlowWithSession,
+    completeGitHubDeviceLogin,
+  ]);
 
   /**
    * Login with custom GitHub OAuth App.
@@ -487,6 +540,9 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       auth,
       isLoggedIn,
       loginWithGitHubApp,
+      startGitHubDeviceFlow: startGitHubDeviceFlowWithDefaults,
+      pollGitHubDeviceFlow: pollGitHubDeviceFlowWithSession,
+      completeGitHubDeviceLogin,
       loginWithOAuthApp,
       loginWithPersonalAccessToken,
       logoutFromAccount,
@@ -517,6 +573,9 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       auth,
       isLoggedIn,
       loginWithGitHubApp,
+      startGitHubDeviceFlowWithDefaults,
+      pollGitHubDeviceFlowWithSession,
+      completeGitHubDeviceLogin,
       loginWithOAuthApp,
       loginWithPersonalAccessToken,
       logoutFromAccount,

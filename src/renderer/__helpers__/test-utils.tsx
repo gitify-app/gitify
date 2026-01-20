@@ -42,6 +42,9 @@ export function AppContextProvider({
 
       // Default mock implementations for all required methods
       loginWithGitHubApp: jest.fn(),
+      startGitHubDeviceFlow: jest.fn(),
+      pollGitHubDeviceFlow: jest.fn(),
+      completeGitHubDeviceLogin: jest.fn(),
       loginWithOAuthApp: jest.fn(),
       loginWithPersonalAccessToken: jest.fn(),
       logoutFromAccount: jest.fn(),

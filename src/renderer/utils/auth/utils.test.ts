@@ -14,7 +14,7 @@ import type {
   Hostname,
   Token,
 } from '../../types';
-import type { AuthMethod } from './types';
+import type { AuthMethod, LoginOAuthWebOptions } from './types';
 
 import * as comms from '../../utils/comms';
 import * as apiClient from '../api/client';
@@ -50,6 +50,12 @@ describe('renderer/utils/auth/utils.ts', () => {
     configureAxiosHttpAdapterForNock();
   });
 
+  const webAuthOptions: LoginOAuthWebOptions = {
+    hostname: 'github.com' as Hostname,
+    clientId: 'FAKE_CLIENT_ID_123' as ClientID,
+    clientSecret: 'FAKE_CLIENT_SECRET_123' as ClientSecret,
+  };
+
   describe('authGitHub', () => {
     jest.spyOn(logger, 'rendererLogInfo').mockImplementation();
     const openExternalLinkSpy = jest
@@ -62,20 +68,20 @@ describe('renderer/utils/auth/utils.ts', () => {
 
     it('should authenticate using device flow for GitHub app', async () => {
       createDeviceCodeMock.mockResolvedValueOnce({
-        device_code: 'device-code',
-        user_code: 'user-code',
-        verification_uri: 'https://github.com/login/device',
-        verification_uri_complete:
-          'https://github.com/login/device?user_code=user-code',
-        expires_in: 900,
-        interval: 5,
-      } as any);
+        data: {
+          device_code: 'device-code',
+          user_code: 'user-code',
+          verification_uri: 'https://github.com/login/device',
+          expires_in: 900,
+          interval: 5,
+        },
+      } as unknown as Awaited<ReturnType<typeof createDeviceCode>>);
 
       exchangeDeviceCodeMock.mockResolvedValueOnce({
         authentication: {
           token: 'device-token',
         },
-      } as any);
+      } as unknown as Awaited<ReturnType<typeof exchangeDeviceCode>>);
 
       const token = await authUtils.performGitHubDeviceOAuth();
 
@@ -101,14 +107,14 @@ describe('renderer/utils/auth/utils.ts', () => {
       expect(token).toBe('device-token');
     });
 
-    it('should call performGitHubOAuth using gitify oauth app - success auth flow', async () => {
+    it('should call performGitHubWebOAuth using gitify oauth app - success auth flow', async () => {
       window.gitify.onAuthCallback = jest
         .fn()
         .mockImplementation((callback) => {
           callback('gitify://auth?code=123-456');
         });
 
-      const res = await authUtils.performGitHubOAuth();
+      const res = await authUtils.performGitHubWebOAuth(webAuthOptions);
 
       expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
       expect(openExternalLinkSpy).toHaveBeenCalledWith(
@@ -126,14 +132,14 @@ describe('renderer/utils/auth/utils.ts', () => {
       expect(res.authCode).toBe('123-456');
     });
 
-    it('should call performGitHubOAuth using custom oauth app - success oauth flow', async () => {
+    it('should call performGitHubWebOAuth using custom oauth app - success oauth flow', async () => {
       window.gitify.onAuthCallback = jest
         .fn()
         .mockImplementation((callback) => {
           callback('gitify://oauth?code=123-456');
         });
 
-      const res = await authUtils.performGitHubOAuth({
+      const res = await authUtils.performGitHubWebOAuth({
         clientId: 'BYO_CLIENT_ID' as ClientID,
         clientSecret: 'BYO_CLIENT_SECRET' as ClientSecret,
         hostname: 'my.git.com' as Hostname,
@@ -155,7 +161,7 @@ describe('renderer/utils/auth/utils.ts', () => {
       expect(res.authCode).toBe('123-456');
     });
 
-    it('should call performGitHubOAuth - failure', async () => {
+    it('should call performGitHubWebOAuth - failure', async () => {
       window.gitify.onAuthCallback = jest
         .fn()
         .mockImplementation((callback) => {
@@ -165,7 +171,7 @@ describe('renderer/utils/auth/utils.ts', () => {
         });
 
       await expect(
-        async () => await authUtils.performGitHubOAuth(),
+        async () => await authUtils.performGitHubWebOAuth(webAuthOptions),
       ).rejects.toEqual(
         new Error(
           "Oops! Something went wrong and we couldn't log you in using GitHub. Please try again. Reason: The redirect_uri is missing or invalid. Docs: https://docs.github.com/en/developers/apps/troubleshooting-oauth-errors",
@@ -194,11 +200,10 @@ describe('renderer/utils/auth/utils.ts', () => {
         authentication: {
           token: 'this-is-a-token',
         },
-      } as any);
+      } as unknown as Awaited<ReturnType<typeof exchangeWebFlowCode>>);
 
       const res = await authUtils.exchangeAuthCodeForAccessToken(authCode, {
-        ...Constants.OAUTH_DEVICE_FLOW,
-        clientSecret: 'FAKE_CLIENT_SECRET_123' as ClientSecret,
+        ...webAuthOptions,
       });
 
       expect(exchangeWebFlowCodeMock).toHaveBeenCalledWith({
@@ -213,7 +218,11 @@ describe('renderer/utils/auth/utils.ts', () => {
 
     it('should throw when client secret is missing', async () => {
       await expect(
-        async () => await authUtils.exchangeAuthCodeForAccessToken(authCode),
+        async () =>
+          await authUtils.exchangeAuthCodeForAccessToken(authCode, {
+            ...webAuthOptions,
+            clientSecret: undefined as unknown as ClientSecret,
+          }),
       ).rejects.toThrow('clientSecret is required to exchange an auth code');
     });
   });

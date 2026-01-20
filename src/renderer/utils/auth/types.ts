@@ -21,6 +21,16 @@ export interface LoginOAuthWebOptions {
   clientSecret: ClientSecret;
 }
 
+export interface DeviceFlowSession {
+  hostname: Hostname;
+  clientId: ClientID;
+  deviceCode: string;
+  userCode: string;
+  verificationUri: string;
+  intervalSeconds: number;
+  expiresAt: number;
+}
+
 export interface LoginPersonalAccessTokenOptions {
   hostname: Hostname;
   token: Token;

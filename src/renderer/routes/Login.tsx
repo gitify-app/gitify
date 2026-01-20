@@ -1,4 +1,4 @@
-import { type FC, useCallback, useEffect } from 'react';
+import { type FC, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { KeyIcon, MarkGithubIcon, PersonIcon } from '@primer/octicons-react';
@@ -12,31 +12,18 @@ import { Centered } from '../components/layout/Centered';
 import { Size } from '../types';
 
 import { showWindow } from '../utils/comms';
-import { rendererLogError } from '../utils/logger';
 
 export const LoginRoute: FC = () => {
   const navigate = useNavigate();
 
-  const { loginWithGitHubApp, isLoggedIn } = useAppContext();
+  const { isLoggedIn } = useAppContext();
 
   useEffect(() => {
     if (isLoggedIn) {
       showWindow();
       navigate('/', { replace: true });
     }
-  }, [isLoggedIn]);
-
-  const loginUser = useCallback(async () => {
-    try {
-      await loginWithGitHubApp();
-    } catch (err) {
-      rendererLogError(
-        'loginWithGitHubApp',
-        'failed to login with GitHub',
-        err,
-      );
-    }
-  }, [loginWithGitHubApp]);
+  }, [isLoggedIn, navigate]);
 
   return (
     <Centered fullHeight={true}>
@@ -54,7 +41,7 @@ export const LoginRoute: FC = () => {
           <Button
             data-testid="login-github"
             leadingVisual={MarkGithubIcon}
-            onClick={() => loginUser()}
+            onClick={() => navigate('/login-device-flow', { replace: true })}
             variant="primary"
           >
             GitHub

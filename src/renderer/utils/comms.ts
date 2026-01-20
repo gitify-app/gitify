@@ -50,7 +50,9 @@ export function setAutoLaunch(value: boolean): void {
 export function setUseAlternateIdleIcon(value: boolean): void {
   window.gitify.tray.useAlternateIdleIcon(value);
 }
-
+export async function copyToClipboard(text: string): Promise<void> {
+  await navigator.clipboard.writeText(text);
+}
 export function setUseUnreadActiveIcon(value: boolean): void {
   window.gitify.tray.useUnreadActiveIcon(value);
 }
