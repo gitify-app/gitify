@@ -1,4 +1,6 @@
 import {
+  createDeviceCode,
+  exchangeDeviceCode,
   exchangeWebFlowCode,
   getWebFlowAuthorizationUrl,
 } from '@octokit/oauth-methods';
@@ -19,7 +21,7 @@ import type {
   Link,
   Token,
 } from '../../types';
-import type { AuthMethod, AuthResponse, LoginOAuthAppOptions } from './types';
+import type { AuthMethod, AuthResponse, LoginOAuthWebOptions } from './types';
 
 import { fetchAuthenticatedUserDetails } from '../api/client';
 import { getGitHubAuthBaseUrl } from '../api/utils';
@@ -27,8 +29,8 @@ import { encryptValue, openExternalLink } from '../comms';
 import { getPlatformFromHostname } from '../helpers';
 import { rendererLogError, rendererLogInfo, rendererLogWarn } from '../logger';
 
-export function performGitHubOAuth(
-  authOptions: LoginOAuthAppOptions = Constants.DEFAULT_AUTH_OPTIONS,
+export function performGitHubWebOAuth(
+  authOptions: LoginOAuthWebOptions,
 ): Promise<AuthResponse> {
   return new Promise((resolve, reject) => {
     const { url } = getWebFlowAuthorizationUrl({
@@ -80,10 +82,43 @@ export function performGitHubOAuth(
   });
 }
 
+export async function performGitHubDeviceOAuth(): Promise<Token> {
+  const deviceCode = await createDeviceCode({
+    clientType: 'oauth-app',
+    clientId: Constants.OAUTH_DEVICE_FLOW.clientId,
+    scopes: Constants.OAUTH_SCOPES.RECOMMENDED,
+    request: request.defaults({
+      baseUrl: getGitHubAuthBaseUrl(
+        Constants.OAUTH_DEVICE_FLOW.hostname,
+      ).toString(),
+    }),
+  });
+
+  openExternalLink(deviceCode.data.verification_uri as Link);
+
+  const { authentication } = await exchangeDeviceCode({
+    clientType: 'oauth-app',
+    clientId: Constants.OAUTH_DEVICE_FLOW.clientId,
+    code: deviceCode.data.device_code,
+    interval: deviceCode.data.interval,
+    request: request.defaults({
+      baseUrl: getGitHubAuthBaseUrl(
+        Constants.OAUTH_DEVICE_FLOW.hostname,
+      ).toString(),
+    }),
+  });
+
+  return authentication.token as Token;
+}
+
 export async function exchangeAuthCodeForAccessToken(
   authCode: AuthCode,
-  authOptions: LoginOAuthAppOptions = Constants.DEFAULT_AUTH_OPTIONS,
+  authOptions: LoginOAuthWebOptions,
 ): Promise<Token> {
+  if (!authOptions.clientSecret) {
+    throw new Error('clientSecret is required to exchange an auth code');
+  }
+
   const { authentication } = await exchangeWebFlowCode({
     clientType: 'oauth-app',
     clientId: authOptions.clientId,
@@ -278,7 +313,7 @@ export function getAccountUUID(account: Account): string {
  *  Return the primary (first) account hostname
  */
 export function getPrimaryAccountHostname(auth: AuthState) {
-  return auth.accounts[0]?.hostname ?? Constants.DEFAULT_AUTH_OPTIONS.hostname;
+  return auth.accounts[0]?.hostname ?? Constants.OAUTH_DEVICE_FLOW.hostname;
 }
 
 export function hasAccounts(auth: AuthState) {

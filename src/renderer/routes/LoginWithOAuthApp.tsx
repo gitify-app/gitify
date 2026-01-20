@@ -28,7 +28,7 @@ import { Footer } from '../components/primitives/Footer';
 import { Header } from '../components/primitives/Header';
 
 import type { ClientID, ClientSecret, Hostname, Token } from '../types';
-import type { LoginOAuthAppOptions } from '../utils/auth/types';
+import type { LoginOAuthWebOptions } from '../utils/auth/types';
 
 import {
   getNewOAuthAppURL,
@@ -116,7 +116,7 @@ export const LoginWithOAuthAppRoute: FC = () => {
   const verifyLoginCredentials = useCallback(
     async (data: IFormData) => {
       try {
-        await loginWithOAuthApp(data as LoginOAuthAppOptions);
+        await loginWithOAuthApp(data as LoginOAuthWebOptions);
         navigate(-1);
       } catch (err) {
         rendererLogError(

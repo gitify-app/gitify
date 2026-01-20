@@ -13,7 +13,7 @@ describe('renderer/utils/storage.ts', () => {
         auth: {
           accounts: [
             {
-              hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
+              hostname: Constants.OAUTH_DEVICE_FLOW.hostname,
               platform: 'GitHub Cloud',
               method: 'Personal Access Token',
               token: '123-456' as Token,
@@ -28,7 +28,7 @@ describe('renderer/utils/storage.ts', () => {
 
     expect(result.auth.accounts).toEqual([
       {
-        hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
+        hostname: Constants.OAUTH_DEVICE_FLOW.hostname,
         platform: 'GitHub Cloud',
         method: 'Personal Access Token',
         token: '123-456' as Token,
@@ -55,7 +55,7 @@ describe('renderer/utils/storage.ts', () => {
       auth: {
         accounts: [
           {
-            hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
+            hostname: Constants.OAUTH_DEVICE_FLOW.hostname,
             platform: 'GitHub Cloud',
             method: 'Personal Access Token',
             token: '123-456' as Token,

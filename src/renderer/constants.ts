@@ -1,5 +1,5 @@
-import type { ClientID, ClientSecret, Hostname, Link } from './types';
-import type { LoginOAuthAppOptions } from './utils/auth/types';
+import type { ClientID, Hostname, Link } from './types';
+import type { LoginOAuthDeviceOptions } from './utils/auth/types';
 
 export const Constants = {
   STORAGE_KEY: 'gitify-storage',
@@ -10,11 +10,10 @@ export const Constants = {
     ALTERNATE: ['read:user', 'notifications', 'public_repo'],
   },
 
-  DEFAULT_AUTH_OPTIONS: {
+  OAUTH_DEVICE_FLOW: {
     hostname: 'github.com' as Hostname,
     clientId: process.env.OAUTH_CLIENT_ID as ClientID,
-    clientSecret: process.env.OAUTH_CLIENT_SECRET as ClientSecret,
-  } satisfies LoginOAuthAppOptions,
+  } satisfies LoginOAuthDeviceOptions,
 
   GITHUB_API_BASE_URL: 'https://api.github.com',
   GITHUB_API_GRAPHQL_URL: 'https://api.github.com/graphql',

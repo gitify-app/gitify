@@ -14,13 +14,13 @@ import { rendererLogError } from './logger';
 import { createNotificationHandler } from './notifications/handlers';
 
 export function getPlatformFromHostname(hostname: string): PlatformType {
-  return hostname.endsWith(Constants.DEFAULT_AUTH_OPTIONS.hostname)
+  return hostname.endsWith(Constants.OAUTH_DEVICE_FLOW.hostname)
     ? 'GitHub Cloud'
     : 'GitHub Enterprise Server';
 }
 
 export function isEnterpriseServerHost(hostname: Hostname): boolean {
-  return !hostname.endsWith(Constants.DEFAULT_AUTH_OPTIONS.hostname);
+  return !hostname.endsWith(Constants.OAUTH_DEVICE_FLOW.hostname);
 }
 
 export function generateNotificationReferrerId(

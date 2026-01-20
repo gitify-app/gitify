@@ -32,7 +32,7 @@ import type {
 } from '../types';
 import { FetchType } from '../types';
 import type {
-  LoginOAuthAppOptions,
+  LoginOAuthWebOptions,
   LoginPersonalAccessTokenOptions,
 } from '../utils/auth/types';
 
@@ -42,7 +42,8 @@ import {
   exchangeAuthCodeForAccessToken,
   getAccountUUID,
   hasAccounts,
-  performGitHubOAuth,
+  performGitHubDeviceOAuth,
+  performGitHubWebOAuth,
   refreshAccount,
   removeAccount,
 } from '../utils/auth/utils';
@@ -75,7 +76,7 @@ export interface AppContextState {
   auth: AuthState;
   isLoggedIn: boolean;
   loginWithGitHubApp: () => Promise<void>;
-  loginWithOAuthApp: (data: LoginOAuthAppOptions) => Promise<void>;
+  loginWithOAuthApp: (data: LoginOAuthWebOptions) => Promise<void>;
   loginWithPersonalAccessToken: (
     data: LoginPersonalAccessTokenOptions,
   ) => Promise<void>;
@@ -396,15 +397,11 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   }, [auth]);
 
   /**
-   * Login with GitHub App.
-   *
-   * Note: although we call this "Login with GitHub App", this function actually
-   * authenticates via a predefined "Gitify" GitHub OAuth App.
+   * Login with GitHub App using device flow so the client secret is never bundled or persisted.
    */
   const loginWithGitHubApp = useCallback(async () => {
-    const { authCode } = await performGitHubOAuth();
-    const token = await exchangeAuthCodeForAccessToken(authCode);
-    const hostname = Constants.DEFAULT_AUTH_OPTIONS.hostname;
+    const token = await performGitHubDeviceOAuth();
+    const hostname = Constants.OAUTH_DEVICE_FLOW.hostname;
 
     const updatedAuth = await addAccount(auth, 'GitHub App', token, hostname);
 
@@ -415,8 +412,8 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
    * Login with custom GitHub OAuth App.
    */
   const loginWithOAuthApp = useCallback(
-    async (data: LoginOAuthAppOptions) => {
-      const { authOptions, authCode } = await performGitHubOAuth(data);
+    async (data: LoginOAuthWebOptions) => {
+      const { authOptions, authCode } = await performGitHubWebOAuth(data);
       const token = await exchangeAuthCodeForAccessToken(authCode, authOptions);
 
       const updatedAuth = await addAccount(
