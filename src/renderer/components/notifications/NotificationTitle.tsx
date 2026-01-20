@@ -18,14 +18,13 @@ export const NotificationTitle: FC<NotificationTitleProps> = ({
 
   return (
     <Text className={!wrapTitle && 'truncate'}>
-      {parts.map((part, index) => (
+      {parts.map((part) => (
         <Text
           className={cn(
             part.type === 'code' &&
               'px-1 py-0.5 rounded bg-gitify-notification-hover font-mono text-xs',
           )}
-          // biome-ignore lint/suspicious/noArrayIndexKey: parts are derived from static title
-          key={index}
+          key={part.id}
         >
           {part.content}
         </Text>
