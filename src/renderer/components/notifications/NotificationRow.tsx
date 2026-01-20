@@ -17,6 +17,7 @@ import { isGroupByDate } from '../../utils/notifications/group';
 import { shouldRemoveNotificationsFromState } from '../../utils/notifications/remove';
 import { NotificationFooter } from './NotificationFooter';
 import { NotificationHeader } from './NotificationHeader';
+import { NotificationTitle } from './NotificationTitle';
 
 interface NotificationRowProps {
   notification: GitifyNotification;
@@ -97,10 +98,7 @@ export const NotificationRow: FC<NotificationRowProps> = ({
         </Tooltip>
 
         <Stack
-          className={cn(
-            'cursor-pointer text-sm w-full',
-            !settings.wrapNotificationTitle && 'truncate',
-          )}
+          className="cursor-pointer text-sm w-full"
           direction="vertical"
           gap="none"
           onClick={() => handleNotification()}
@@ -109,19 +107,14 @@ export const NotificationRow: FC<NotificationRowProps> = ({
 
           <Stack
             align="start"
-            className={cn(
-              'mb-0.5',
-              !settings.wrapNotificationTitle && 'truncate',
-            )}
+            className="mb-0.5"
             data-testid="notification-row"
             direction="horizontal"
             gap="condensed"
             justify="space-between"
             title={notification.display.title}
           >
-            <Text className={!settings.wrapNotificationTitle && 'truncate'}>
-              {notification.subject.title}
-            </Text>
+            <NotificationTitle title={notification.subject.title} />
             <Text
               className={cn(
                 'text-xxs ml-auto mr-2',

@@ -63,7 +63,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 Open Issue
               </span>
               <div
-                class="cursor-pointer text-sm w-full truncate prc-Stack-Stack-UQ9k6"
+                class="cursor-pointer text-sm w-full prc-Stack-Stack-UQ9k6"
                 data-align="stretch"
                 data-direction="vertical"
                 data-gap="none"
@@ -126,7 +126,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                   </div>
                 </div>
                 <div
-                  class="mb-0.5 truncate prc-Stack-Stack-UQ9k6"
+                  class="mb-0.5 prc-Stack-Stack-UQ9k6"
                   data-align="start"
                   data-direction="horizontal"
                   data-gap="condensed"
@@ -139,7 +139,11 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                   <span
                     class="truncate prc-Text-Text-9mHv3"
                   >
-                    I am a robot and this is a test!
+                    <span
+                      class="prc-Text-Text-9mHv3"
+                    >
+                      I am a robot and this is a test!
+                    </span>
                   </span>
                   <span
                     class="text-xxs ml-auto mr-2 opacity-50 hidden prc-Text-Text-9mHv3"
@@ -477,7 +481,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               Open Issue
             </span>
             <div
-              class="cursor-pointer text-sm w-full truncate prc-Stack-Stack-UQ9k6"
+              class="cursor-pointer text-sm w-full prc-Stack-Stack-UQ9k6"
               data-align="stretch"
               data-direction="vertical"
               data-gap="none"
@@ -540,7 +544,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 </div>
               </div>
               <div
-                class="mb-0.5 truncate prc-Stack-Stack-UQ9k6"
+                class="mb-0.5 prc-Stack-Stack-UQ9k6"
                 data-align="start"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -553,7 +557,11 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 <span
                   class="truncate prc-Text-Text-9mHv3"
                 >
-                  I am a robot and this is a test!
+                  <span
+                    class="prc-Text-Text-9mHv3"
+                  >
+                    I am a robot and this is a test!
+                  </span>
                 </span>
                 <span
                   class="text-xxs ml-auto mr-2 opacity-50 hidden prc-Text-Text-9mHv3"
@@ -948,7 +956,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 Open Issue
               </span>
               <div
-                class="cursor-pointer text-sm w-full truncate prc-Stack-Stack-UQ9k6"
+                class="cursor-pointer text-sm w-full prc-Stack-Stack-UQ9k6"
                 data-align="stretch"
                 data-direction="vertical"
                 data-gap="none"
@@ -957,7 +965,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 data-wrap="nowrap"
               >
                 <div
-                  class="mb-0.5 truncate prc-Stack-Stack-UQ9k6"
+                  class="mb-0.5 prc-Stack-Stack-UQ9k6"
                   data-align="start"
                   data-direction="horizontal"
                   data-gap="condensed"
@@ -970,7 +978,11 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                   <span
                     class="truncate prc-Text-Text-9mHv3"
                   >
-                    I am a robot and this is a test!
+                    <span
+                      class="prc-Text-Text-9mHv3"
+                    >
+                      I am a robot and this is a test!
+                    </span>
                   </span>
                   <span
                     class="text-xxs ml-auto mr-2 opacity-50 prc-Text-Text-9mHv3"
@@ -1308,7 +1320,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               Open Issue
             </span>
             <div
-              class="cursor-pointer text-sm w-full truncate prc-Stack-Stack-UQ9k6"
+              class="cursor-pointer text-sm w-full prc-Stack-Stack-UQ9k6"
               data-align="stretch"
               data-direction="vertical"
               data-gap="none"
@@ -1317,7 +1329,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               data-wrap="nowrap"
             >
               <div
-                class="mb-0.5 truncate prc-Stack-Stack-UQ9k6"
+                class="mb-0.5 prc-Stack-Stack-UQ9k6"
                 data-align="start"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -1330,7 +1342,11 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 <span
                   class="truncate prc-Text-Text-9mHv3"
                 >
-                  I am a robot and this is a test!
+                  <span
+                    class="prc-Text-Text-9mHv3"
+                  >
+                    I am a robot and this is a test!
+                  </span>
                 </span>
                 <span
                   class="text-xxs ml-auto mr-2 opacity-50 prc-Text-Text-9mHv3"
@@ -1725,7 +1741,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 Open Issue
               </span>
               <div
-                class="cursor-pointer text-sm w-full truncate prc-Stack-Stack-UQ9k6"
+                class="cursor-pointer text-sm w-full prc-Stack-Stack-UQ9k6"
                 data-align="stretch"
                 data-direction="vertical"
                 data-gap="none"
@@ -1734,7 +1750,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 data-wrap="nowrap"
               >
                 <div
-                  class="mb-0.5 truncate prc-Stack-Stack-UQ9k6"
+                  class="mb-0.5 prc-Stack-Stack-UQ9k6"
                   data-align="start"
                   data-direction="horizontal"
                   data-gap="condensed"
@@ -1747,7 +1763,11 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                   <span
                     class="truncate prc-Text-Text-9mHv3"
                   >
-                    I am a robot and this is a test!
+                    <span
+                      class="prc-Text-Text-9mHv3"
+                    >
+                      I am a robot and this is a test!
+                    </span>
                   </span>
                   <span
                     class="text-xxs ml-auto mr-2 opacity-50 hidden prc-Text-Text-9mHv3"
@@ -2085,7 +2105,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               Open Issue
             </span>
             <div
-              class="cursor-pointer text-sm w-full truncate prc-Stack-Stack-UQ9k6"
+              class="cursor-pointer text-sm w-full prc-Stack-Stack-UQ9k6"
               data-align="stretch"
               data-direction="vertical"
               data-gap="none"
@@ -2094,7 +2114,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               data-wrap="nowrap"
             >
               <div
-                class="mb-0.5 truncate prc-Stack-Stack-UQ9k6"
+                class="mb-0.5 prc-Stack-Stack-UQ9k6"
                 data-align="start"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -2107,7 +2127,11 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 <span
                   class="truncate prc-Text-Text-9mHv3"
                 >
-                  I am a robot and this is a test!
+                  <span
+                    class="prc-Text-Text-9mHv3"
+                  >
+                    I am a robot and this is a test!
+                  </span>
                 </span>
                 <span
                   class="text-xxs ml-auto mr-2 opacity-50 hidden prc-Text-Text-9mHv3"
@@ -2502,7 +2526,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 Open Issue
               </span>
               <div
-                class="cursor-pointer text-sm w-full truncate prc-Stack-Stack-UQ9k6"
+                class="cursor-pointer text-sm w-full prc-Stack-Stack-UQ9k6"
                 data-align="stretch"
                 data-direction="vertical"
                 data-gap="none"
@@ -2511,7 +2535,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 data-wrap="nowrap"
               >
                 <div
-                  class="mb-0.5 truncate prc-Stack-Stack-UQ9k6"
+                  class="mb-0.5 prc-Stack-Stack-UQ9k6"
                   data-align="start"
                   data-direction="horizontal"
                   data-gap="condensed"
@@ -2524,7 +2548,11 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                   <span
                     class="truncate prc-Text-Text-9mHv3"
                   >
-                    I am a robot and this is a test!
+                    <span
+                      class="prc-Text-Text-9mHv3"
+                    >
+                      I am a robot and this is a test!
+                    </span>
                   </span>
                   <span
                     class="text-xxs ml-auto mr-2 opacity-50 prc-Text-Text-9mHv3"
@@ -2804,7 +2832,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               Open Issue
             </span>
             <div
-              class="cursor-pointer text-sm w-full truncate prc-Stack-Stack-UQ9k6"
+              class="cursor-pointer text-sm w-full prc-Stack-Stack-UQ9k6"
               data-align="stretch"
               data-direction="vertical"
               data-gap="none"
@@ -2813,7 +2841,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
               data-wrap="nowrap"
             >
               <div
-                class="mb-0.5 truncate prc-Stack-Stack-UQ9k6"
+                class="mb-0.5 prc-Stack-Stack-UQ9k6"
                 data-align="start"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -2826,7 +2854,11 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
                 <span
                   class="truncate prc-Text-Text-9mHv3"
                 >
-                  I am a robot and this is a test!
+                  <span
+                    class="prc-Text-Text-9mHv3"
+                  >
+                    I am a robot and this is a test!
+                  </span>
                 </span>
                 <span
                   class="text-xxs ml-auto mr-2 opacity-50 prc-Text-Text-9mHv3"
