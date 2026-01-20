@@ -19,11 +19,6 @@ import type {
   ListNotificationsForAuthenticatedUserResponse,
   MarkNotificationThreadAsDoneResponse,
   MarkNotificationThreadAsReadResponse,
-  NotificationThreadSubscription,
-  RawCommit,
-  RawCommitComment,
-  RawGitHubNotification,
-  RawRelease,
 } from './types';
 
 import { isAnsweredDiscussionFeatureSupported } from '../features';
@@ -185,9 +180,11 @@ export function getRelease(
 
 /**
  * Get the `html_url` from the GitHub response
+ *
  */
 export async function getHtmlUrl(url: Link, token: Token): Promise<string> {
   try {
+    // TODO - Add explicit type for response shape
     const response = (await apiRequestAuth(url, 'GET', token)).data;
 
     return response.html_url;
