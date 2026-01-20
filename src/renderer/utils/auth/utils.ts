@@ -124,7 +124,7 @@ export async function pollGitHubDeviceFlow(
       }),
     });
 
-    return (authentication as { token: string }).token as Token;
+    return authentication.token as Token;
   } catch (err) {
     const errorCode = (err as Record<string, unknown>)?.response?.data?.error;
 
