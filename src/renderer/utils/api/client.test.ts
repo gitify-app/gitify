@@ -125,6 +125,8 @@ describe('renderer/utils/api/client.ts', () => {
     });
 
     it('should unpaginate notifications list for user', async () => {
+      performAuthenticatedRESTRequestSpy.mockImplementation();
+
       const mockSettings: Partial<SettingsState> = {
         participating: false,
         fetchReadNotifications: false,
@@ -138,7 +140,7 @@ describe('renderer/utils/api/client.ts', () => {
 
       expect(performAuthenticatedRESTRequestSpy).toHaveBeenCalledWith(
         'GET',
-        'https://api.github.com/notifications?participating=false&all=false ',
+        'https://api.github.com/notifications?participating=false&all=false',
         mockGitHubCloudAccount.token,
         {},
         true,
