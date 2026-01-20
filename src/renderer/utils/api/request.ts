@@ -17,7 +17,7 @@ import { getNextURLFromLinkHeader } from './utils';
  * @param token A GitHub token (decrypted)
  * @param data The API request body
  * @param fetchAllRecords Whether to fetch all records or just the first page
- * @returns Resolves to a GitHub REST response
+ * @returns Resolves to a GitHub REST response with the specified type
  */
 export async function performAuthenticatedRESTRequest<TResult>(
   method: Method,
@@ -25,7 +25,7 @@ export async function performAuthenticatedRESTRequest<TResult>(
   token: Token,
   data: Record<string, unknown> = {},
   fetchAllRecords = false,
-): Promise<TResult | null> {
+): Promise<AxiosResponse<TResult>> {
   const headers = await getHeaders(url, token);
 
   if (!fetchAllRecords) {
@@ -33,7 +33,7 @@ export async function performAuthenticatedRESTRequest<TResult>(
   }
 
   let response: AxiosResponse<TResult> | null = null;
-  let combinedData = [];
+  let combinedData: unknown[] = [];
 
   try {
     let nextUrl: string | null = url;
@@ -47,7 +47,7 @@ export async function performAuthenticatedRESTRequest<TResult>(
       }
 
       // Accumulate paginated array results
-      combinedData = combinedData.concat(response.data); // Accumulate data
+      combinedData = combinedData.concat(response.data);
 
       nextUrl = getNextURLFromLinkHeader(response);
     }
@@ -61,8 +61,9 @@ export async function performAuthenticatedRESTRequest<TResult>(
     throw err;
   }
 
-  // Return the combined array of records as the result data
-  return combinedData as TResult;
+  // Return a response object with the combined array of records as data
+  response.data = combinedData as TResult;
+  return response;
 }
 
 /**

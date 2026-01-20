@@ -21,7 +21,6 @@ import type {
 } from './types';
 
 import { isAnsweredDiscussionFeatureSupported } from '../features';
-import { rendererLogError } from '../logger';
 import { createNotificationHandler } from '../notifications/handlers';
 import {
   FetchAuthenticatedUserDetailsDocument,
@@ -201,19 +200,11 @@ export async function getHtmlUrl(
   url: Link,
   token: Token,
 ): Promise<AxiosResponse<GitHubHtmlUrlResponse>> {
-  try {
-    const response = (
-      await performAuthenticatedRESTRequest
-    )<GitHubHtmlUrlResponse>('GET', url, token);
-
-    return response.html_url;
-  } catch (err) {
-    rendererLogError(
-      'getHtmlUrl',
-      `error occurred while fetching html url for ${url}`,
-      err,
-    );
-  }
+  return performAuthenticatedRESTRequest<GitHubHtmlUrlResponse>(
+    'GET',
+    url,
+    token,
+  );
 }
 
 /**
