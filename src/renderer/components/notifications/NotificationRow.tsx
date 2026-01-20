@@ -34,12 +34,13 @@ export const NotificationRow: FC<NotificationRowProps> = ({
     unsubscribeNotification,
   } = useAppContext();
 
-  const [animateExit, setAnimateExit] = useState(false);
+  const [shouldAnimateExitTransition, setShouldAnimateExitTransition] =
+    useState(false);
 
   const shouldAnimateExit = shouldRemoveNotificationsFromState(settings);
 
   const handleNotification = useCallback(() => {
-    setAnimateExit(shouldAnimateExit);
+    setShouldAnimateExitTransition(shouldAnimateExit);
     openNotification(notification);
 
     if (settings.markAsDoneOnOpen) {
@@ -56,12 +57,12 @@ export const NotificationRow: FC<NotificationRowProps> = ({
   ]);
 
   const actionMarkAsDone = () => {
-    setAnimateExit(shouldAnimateExit);
+    setShouldAnimateExitTransition(shouldAnimateExit);
     markNotificationsAsDone([notification]);
   };
 
   const actionMarkAsRead = () => {
-    setAnimateExit(shouldAnimateExit);
+    setShouldAnimateExitTransition(shouldAnimateExit);
     markNotificationsAsRead([notification]);
   };
 
@@ -78,7 +79,7 @@ export const NotificationRow: FC<NotificationRowProps> = ({
         'group relative border-b',
         'pl-2.75 pr-1 py-0.75',
         'text-gitify-font border-gitify-notification-border hover:bg-gitify-notification-hover',
-        (isAnimated || animateExit) &&
+        (isAnimated || shouldAnimateExitTransition) &&
           'translate-x-full opacity-0 transition duration-350 ease-in-out',
         isNotificationRead && Opacity.READ,
       )}
@@ -136,7 +137,7 @@ export const NotificationRow: FC<NotificationRowProps> = ({
         </Stack>
       </Stack>
 
-      {!animateExit && (
+      {!shouldAnimateExitTransition && (
         <HoverGroup bgColor="group-hover:bg-gitify-notification-hover">
           <HoverButton
             action={actionMarkAsRead}
