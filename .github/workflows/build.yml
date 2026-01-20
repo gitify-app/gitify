@@ -7,9 +7,26 @@ permissions:
   contents: read
 
 jobs:
-  build-macos:
-    name: Build macOS (electron-builder)
-    runs-on: macos-latest
+  build-tauri:
+    name: Build Tauri App
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: macos-latest
+            args: --target aarch64-apple-darwin
+            artifact-name: Gitify-dist-mac-arm64
+          - platform: macos-latest
+            args: --target x86_64-apple-darwin
+            artifact-name: Gitify-dist-mac-x64
+          - platform: ubuntu-22.04
+            args: ''
+            artifact-name: Gitify-dist-linux
+          - platform: windows-latest
+            args: ''
+            artifact-name: Gitify-dist-win
+
+    runs-on: ${{ matrix.platform }}
 
     steps:
       - name: Checkout
@@ -17,88 +34,39 @@ jobs:
 
       - name: Setup pnpm
         uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4.2.0
-      
+
       - name: Setup Node
-        uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
+        uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f # v6.1.0
         with:
           node-version-file: '.nvmrc'
           cache: 'pnpm'
-      
+
+      - name: Install Rust stable
+        uses: dtolnay/rust-toolchain@4be9e76fd7c4901c61fb841f559994984270fce7 # stable
+        with:
+          toolchain: stable
+          targets: ${{ matrix.platform == 'macos-latest' && 'aarch64-apple-darwin,x86_64-apple-darwin' || '' }}
+
+      - name: Install dependencies (ubuntu only)
+        if: matrix.platform == 'ubuntu-22.04'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
+
       - run: pnpm install
-      - run: pnpm build
-      - run: pnpm package:macos --publish=never -c.mac.identity=null
+
+      - name: Build Tauri app
+        uses: tauri-apps/tauri-action@e834788a94591d81e3ae0bd9ec06366f5afb8994 # v0.5.23
+        with:
+          args: ${{ matrix.args }}
         env:
-          CSC_LINK: ${{ secrets.CSC_LINK }}
-          CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
-      
-      - name: Clean up builds
-        run: rm -rfv dist/mac-universal
-      
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
+
       - name: Upload artifacts
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
         with:
-          name: Gitify-dist-mac
-          path: dist/
-          overwrite: true
-
-  build-windows:
-    name: Build Windows (electron-builder)
-    runs-on: windows-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4.2.0
-      
-      - name: Setup Node
-        uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
-        with:
-          node-version-file: '.nvmrc'
-          cache: 'pnpm'
-      
-      - run: pnpm install
-      - run: pnpm build
-      - run: pnpm package:win --publish=never
-      
-      - name: Clean up builds
-        run: Remove-Item dist/win-unpacked -Recurse
-      
-      - name: Upload artifacts
-        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
-        with:
-          name: Gitify-dist-win
-          path: dist
-          overwrite: true
-
-  build-linux:
-    name: Build Linux (electron-builder)
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4.2.0
-      
-      - name: Setup Node
-        uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
-        with:
-          node-version-file: '.nvmrc'
-          cache: 'pnpm'
-      
-      - run: pnpm install
-      - run: pnpm build
-      - run: pnpm package:linux --publish=never
-      
-      - name: Clean up builds
-        run: rm -rfv dist/linux-unpacked
-      
-      - name: Upload artifacts
-        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
-        with:
-          name: Gitify-dist-linux
-          path: dist
+          name: ${{ matrix.artifact-name }}
+          path: src-tauri/target/**/bundle/**
           overwrite: true

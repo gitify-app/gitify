@@ -1,5 +1,5 @@
 export const APPLICATION = {
-  ID: 'com.electron.gitify',
+  ID: 'io.gitify.app',
 
   NAME: 'Gitify',
 
@@ -18,6 +18,4 @@ export const APPLICATION = {
   NOTIFICATION_SOUND: 'clearly.mp3',
 
   UPDATE_CHECK_INTERVAL_MS: 24 * 60 * 60 * 1000, // 24 hours
-
-  UPDATE_NOT_AVAILABLE_DISPLAY_MS: 60 * 1000, // 60 seconds
 };
