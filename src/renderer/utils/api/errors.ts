@@ -1,10 +1,18 @@
 import { AxiosError } from 'axios';
 
 import type { GitifyError } from '../../types';
+import type { GitHubGraphQLResponse } from './graphql/types';
 import type { GitHubRESTError } from './types';
 
 import { Errors } from '../errors';
+import { rendererLogError } from '../logger';
 
+/**
+ * Determine the failure type based on an Axios error.
+ *
+ * @param err The Axios error
+ * @returns The Gitify error type
+ */
 export function determineFailureType(
   err: AxiosError<GitHubRESTError>,
 ): GitifyError {
@@ -43,4 +51,24 @@ export function determineFailureType(
   }
 
   return Errors.UNKNOWN;
+}
+
+/**
+ * Assert that a GraphQL response does not contain errors.
+ * Logs and throws if `errors` array is present and non-empty.
+ *
+ * @param context The context of the GraphQL request
+ * @param payload The GraphQL response payload
+ */
+export function assertNoGraphQLErrors(
+  context: string,
+  payload: GitHubGraphQLResponse<unknown>, // TODO should this be ExecutionResult?
+) {
+  if (Array.isArray(payload.errors) && payload.errors.length > 0) {
+    const err = new Error('GraphQL request returned errors');
+
+    rendererLogError(context, 'GraphQL errors present in response', err);
+
+    throw err;
+  }
 }

@@ -11,8 +11,8 @@ import type { Link } from '../../types';
 
 import { FetchAuthenticatedUserDetailsDocument } from './graphql/generated/graphql';
 import {
-  apiRequestAuth,
   getHeaders,
+  performAuthenticatedRESTRequest,
   performGraphQLRequest,
   performGraphQLRequestString,
   shouldRequestWithNoCache,
@@ -36,7 +36,7 @@ describe('renderer/utils/api/request.ts', () => {
     it('should make an authenticated request with the correct parameters', async () => {
       const data = { key: 'value' };
 
-      await apiRequestAuth(url, method, mockToken, data);
+      await performAuthenticatedRESTRequest(method, url, mockToken, data);
 
       expect(axios).toHaveBeenCalledWith({
         method,
@@ -49,7 +49,7 @@ describe('renderer/utils/api/request.ts', () => {
     it('should make an authenticated request with the correct parameters and default data', async () => {
       const data = {};
 
-      await apiRequestAuth(url, method, mockToken);
+      await performAuthenticatedRESTRequest(method, url, mockToken, data);
 
       expect(axios).toHaveBeenCalledWith({
         method,
@@ -112,21 +112,25 @@ describe('renderer/utils/api/request.ts', () => {
   describe('shouldRequestWithNoCache', () => {
     it('shouldRequestWithNoCache', () => {
       expect(
-        shouldRequestWithNoCache('https://example.com/api/v3/notifications'),
-      ).toBe(true);
-
-      expect(
         shouldRequestWithNoCache(
-          'https://example.com/login/oauth/access_token',
+          'https://example.com/api/v3/notifications' as Link,
         ),
       ).toBe(true);
 
       expect(
-        shouldRequestWithNoCache('https://example.com/notifications'),
+        shouldRequestWithNoCache(
+          'https://example.com/login/oauth/access_token' as Link,
+        ),
       ).toBe(true);
 
       expect(
-        shouldRequestWithNoCache('https://example.com/some/other/endpoint'),
+        shouldRequestWithNoCache('https://example.com/notifications' as Link),
+      ).toBe(true);
+
+      expect(
+        shouldRequestWithNoCache(
+          'https://example.com/some/other/endpoint' as Link,
+        ),
       ).toBe(false);
     });
   });
