@@ -113,10 +113,7 @@ export const NotificationRow: FC<NotificationRowProps> = ({
             justify="space-between"
             title={notification.display.title}
           >
-            <NotificationTitle
-              title={notification.subject.title}
-              wrapTitle={settings.wrapNotificationTitle}
-            />
+            <NotificationTitle title={notification.subject.title} />
             <Text
               className={cn(
                 'text-xxs ml-auto mr-2',

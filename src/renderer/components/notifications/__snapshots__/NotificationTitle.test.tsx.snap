@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`renderer/components/notifications/NotificationTitle.tsx should apply truncate className when wrapTitle is false 1`] = `
+exports[`renderer/components/notifications/NotificationTitle.tsx should apply truncate className when wrapNotificationTitle is false 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -113,7 +113,7 @@ exports[`renderer/components/notifications/NotificationTitle.tsx should apply tr
 }
 `;
 
-exports[`renderer/components/notifications/NotificationTitle.tsx should not apply truncate className when wrapTitle is true 1`] = `
+exports[`renderer/components/notifications/NotificationTitle.tsx should not apply truncate className when wrapNotificationTitle is true 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
