@@ -47,7 +47,7 @@ export const AccountNotifications: FC<AccountNotificationsProps> = (
 
   const { auth, settings } = useAppContext();
 
-  const [showAccountNotifications, setShowAccountNotifications] =
+  const [isAccountNotificationsVisible, setIsAccountNotificationsVisible] =
     useState(true);
 
   const sortedNotifications = useMemo(
@@ -67,12 +67,12 @@ export const AccountNotifications: FC<AccountNotificationsProps> = (
   );
 
   const actionToggleAccountNotifications = () => {
-    setShowAccountNotifications(!showAccountNotifications);
+    setIsAccountNotificationsVisible(!isAccountNotificationsVisible);
   };
 
   const Chevron = getChevronDetails(
     hasNotifications,
-    showAccountNotifications,
+    isAccountNotificationsVisible,
     'account',
   );
 
@@ -132,7 +132,7 @@ export const AccountNotifications: FC<AccountNotificationsProps> = (
         </Stack>
       )}
 
-      {showAccountNotifications && (
+      {isAccountNotificationsVisible && (
         <>
           {props.error && (
             <Oops error={props.error} fullHeight={!hasMultipleAccounts(auth)} />

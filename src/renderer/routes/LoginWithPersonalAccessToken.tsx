@@ -73,7 +73,8 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
 
   const { loginWithPersonalAccessToken } = useAppContext();
 
-  const [maskClientSecret, setMaskClientSecret] = useState(true);
+  const [shouldMaskPersonalAccessToken, setShouldMaskPersonalAccessToken] =
+    useState(true);
   const [isVerifyingCredentials, setIsVerifyingCredentials] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -214,12 +215,18 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
               placeholder="Your generated token (40 characters)"
               trailingAction={
                 <TextInput.Action
-                  aria-label={maskClientSecret ? 'Show token' : 'Hide token'}
-                  icon={maskClientSecret ? EyeIcon : EyeClosedIcon}
-                  onClick={() => setMaskClientSecret(!maskClientSecret)}
+                  aria-label={
+                    shouldMaskPersonalAccessToken ? 'Show token' : 'Hide token'
+                  }
+                  icon={shouldMaskPersonalAccessToken ? EyeIcon : EyeClosedIcon}
+                  onClick={() =>
+                    setShouldMaskPersonalAccessToken(
+                      !shouldMaskPersonalAccessToken,
+                    )
+                  }
                 />
               }
-              type={maskClientSecret ? 'password' : 'text'}
+              type={shouldMaskPersonalAccessToken ? 'password' : 'text'}
               value={formData.token}
             />
             {errors.token && (
