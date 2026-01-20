@@ -222,8 +222,8 @@ describe('renderer/context/App.tsx', () => {
 
       expect(performAuthenticatedRESTRequestSpy).toHaveBeenCalledTimes(1);
       expect(performAuthenticatedRESTRequestSpy).toHaveBeenCalledWith(
-        'https://api.github.com/notifications',
         'HEAD',
+        'https://api.github.com/notifications',
         'encrypted',
       );
     });
