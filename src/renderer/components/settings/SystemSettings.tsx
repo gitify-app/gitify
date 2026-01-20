@@ -5,20 +5,23 @@ import { Button, ButtonGroup, IconButton, Stack, Text } from '@primer/react';
 
 import { APPLICATION } from '../../../shared/constants';
 
-import { useAppContext } from '../../context/App';
 import { defaultSettings } from '../../context/defaults';
+import { useAppContext } from '../../hooks/useAppContext';
+
+import { Checkbox } from '../fields/Checkbox';
+import { RadioGroup } from '../fields/RadioGroup';
+import { Title } from '../primitives/Title';
+
 import { OpenPreference } from '../../types';
+
 import {
   canDecreaseVolume,
   canIncreaseVolume,
   decreaseVolume,
   increaseVolume,
 } from '../../utils/notifications/sound';
-import { Checkbox } from '../fields/Checkbox';
-import { RadioGroup } from '../fields/RadioGroup';
 import { VolumeDownIcon } from '../icons/VolumeDownIcon';
 import { VolumeUpIcon } from '../icons/VolumeUpIcon';
-import { Title } from '../primitives/Title';
 
 export const SystemSettings: FC = () => {
   const { settings, updateSetting } = useAppContext();
@@ -60,8 +63,8 @@ export const SystemSettings: FC = () => {
           checked={settings.keyboardShortcut}
           label="Enable keyboard shortcut"
           name="keyboardShortcut"
-          onChange={(evt) =>
-            updateSetting('keyboardShortcut', evt.target.checked)
+          onChange={() =>
+            updateSetting('keyboardShortcut', !settings.keyboardShortcut)
           }
           tooltip={
             <div>
@@ -78,8 +81,8 @@ export const SystemSettings: FC = () => {
           checked={settings.showNotifications}
           label="Show system notifications"
           name="showNotifications"
-          onChange={(evt) =>
-            updateSetting('showNotifications', evt.target.checked)
+          onChange={() =>
+            updateSetting('showNotifications', !settings.showNotifications)
           }
           tooltip={
             <Text>
@@ -99,7 +102,7 @@ export const SystemSettings: FC = () => {
             checked={settings.playSound}
             label="Play sound"
             name="playSound"
-            onChange={(evt) => updateSetting('playSound', evt.target.checked)}
+            onChange={() => updateSetting('playSound', !settings.playSound)}
           />
 
           <ButtonGroup
@@ -162,7 +165,9 @@ export const SystemSettings: FC = () => {
           checked={settings.openAtStartup}
           label="Open at startup"
           name="openAtStartup"
-          onChange={(evt) => updateSetting('openAtStartup', evt.target.checked)}
+          onChange={() =>
+            updateSetting('openAtStartup', !settings.openAtStartup)
+          }
           tooltip={
             <Text>Launch {APPLICATION.NAME} automatically at startup.</Text>
           }

@@ -18,14 +18,18 @@ import {
   Tooltip,
 } from '@primer/react';
 
+import { Constants } from '../constants';
+
+import { useAppContext } from '../hooks/useAppContext';
+
 import { Contents } from '../components/layout/Contents';
 import { Page } from '../components/layout/Page';
 import { Footer } from '../components/primitives/Footer';
 import { Header } from '../components/primitives/Header';
-import { Constants } from '../constants';
-import { useAppContext } from '../context/App';
+
 import type { ClientID, ClientSecret, Hostname, Token } from '../types';
 import type { LoginOAuthAppOptions } from '../utils/auth/types';
+
 import {
   getNewOAuthAppURL,
   isValidClientId,
@@ -77,7 +81,7 @@ export const LoginWithOAuthAppRoute: FC = () => {
 
   const { loginWithOAuthApp } = useAppContext();
 
-  const [maskToken, setMaskToken] = useState(true);
+  const [shouldMaskClientSecret, setShouldMaskClientSecret] = useState(true);
   const [isVerifyingCredentials, setIsVerifyingCredentials] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -220,12 +224,16 @@ export const LoginWithOAuthAppRoute: FC = () => {
               placeholder="Your generated client secret (40 characters)"
               trailingAction={
                 <TextInput.Action
-                  aria-label={maskToken ? 'Show token' : 'Hide token'}
-                  icon={maskToken ? EyeIcon : EyeClosedIcon}
-                  onClick={() => setMaskToken(!maskToken)}
+                  aria-label={
+                    shouldMaskClientSecret ? 'Show token' : 'Hide token'
+                  }
+                  icon={shouldMaskClientSecret ? EyeIcon : EyeClosedIcon}
+                  onClick={() =>
+                    setShouldMaskClientSecret(!shouldMaskClientSecret)
+                  }
                 />
               }
-              type={maskToken ? 'password' : 'text'}
+              type={shouldMaskClientSecret ? 'password' : 'text'}
               value={formData.clientSecret}
             />
             {errors.clientSecret && (

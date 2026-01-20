@@ -1,4 +1,5 @@
 import { Constants } from '../constants';
+
 import {
   type AppearanceSettingsState,
   type AuthState,
@@ -15,6 +16,7 @@ import {
   type Token,
   type TraySettingsState,
 } from '../types';
+
 import {
   mockGitHubCloudAccount,
   mockGitHubEnterpriseServerAccount,

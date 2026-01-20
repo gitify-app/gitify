@@ -3,6 +3,7 @@ import type { FC } from 'react';
 import { APPLICATION } from '../../../shared/constants';
 
 import { Size } from '../../types';
+
 import { cn } from '../../utils/cn';
 
 interface LogoIconProps {

@@ -17,6 +17,7 @@ import {
   type Link,
   type SettingsState,
 } from '../../../types';
+
 import { actionsURL } from '../../helpers';
 import { DefaultHandler, defaultHandler } from './default';
 

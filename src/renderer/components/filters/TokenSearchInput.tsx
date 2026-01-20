@@ -3,6 +3,7 @@ import { type FC, useState } from 'react';
 import { Stack, Text, TextInputWithTokens } from '@primer/react';
 
 import type { SearchToken } from '../../types';
+
 import {
   parseSearchInput,
   SEARCH_DELIMITER,
@@ -31,7 +32,8 @@ export const TokenSearchInput: FC<TokenSearchInputProps> = ({
   onRemove,
 }) => {
   const [inputValue, setInputValue] = useState('');
-  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [shouldShowFilterSuggestions, setShouldShowFilterSuggestions] =
+    useState(false);
 
   const tokenItems = tokens.map((text, id) => ({ id, text }));
 
@@ -53,9 +55,9 @@ export const TokenSearchInput: FC<TokenSearchInputProps> = ({
   function onKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
     if (INPUT_KEY_EVENTS.has(e.key)) {
       tryAddToken(e);
-      setShowSuggestions(false);
+      setShouldShowFilterSuggestions(false);
     } else if (e.key === 'ArrowDown') {
-      setShowSuggestions(true);
+      setShouldShowFilterSuggestions(true);
     }
   }
 
@@ -77,7 +79,7 @@ export const TokenSearchInput: FC<TokenSearchInputProps> = ({
           block
           onBlur={(e) => {
             tryAddToken(e);
-            setShowSuggestions(false);
+            setShouldShowFilterSuggestions(false);
           }}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setInputValue(e.target.value);
@@ -86,9 +88,9 @@ export const TokenSearchInput: FC<TokenSearchInputProps> = ({
               !val.includes(SEARCH_DELIMITER) ||
               val.endsWith(SEARCH_DELIMITER)
             ) {
-              setShowSuggestions(true);
+              setShouldShowFilterSuggestions(true);
             } else {
-              setShowSuggestions(false);
+              setShouldShowFilterSuggestions(false);
             }
           }}
           onFocus={(e) => {
@@ -96,7 +98,7 @@ export const TokenSearchInput: FC<TokenSearchInputProps> = ({
               showSuggestionsOnFocusIfEmpty &&
               (e.target as HTMLInputElement).value.trim() === ''
             ) {
-              setShowSuggestions(true);
+              setShouldShowFilterSuggestions(true);
             }
           }}
           onKeyDown={onKeyDown}
@@ -113,7 +115,7 @@ export const TokenSearchInput: FC<TokenSearchInputProps> = ({
         />
         <SearchFilterSuggestions
           inputValue={inputValue}
-          open={showSuggestions}
+          open={shouldShowFilterSuggestions}
         />
       </div>
     </Stack>

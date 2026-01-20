@@ -4,7 +4,9 @@ import userEvent from '@testing-library/user-event';
 import { renderWithAppContext } from '../../__helpers__/test-utils';
 import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
 import { mockGitifyNotification } from '../../__mocks__/notifications-mocks';
+
 import type { GitifyNotificationUser, Link } from '../../types';
+
 import * as comms from '../../utils/comms';
 import { NotificationFooter } from './NotificationFooter';
 

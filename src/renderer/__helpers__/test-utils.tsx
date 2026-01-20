@@ -3,7 +3,10 @@ import { type ReactElement, type ReactNode, useMemo } from 'react';
 
 import { BaseStyles, ThemeProvider } from '@primer/react';
 
+import axios from 'axios';
+
 import { mockAuth, mockSettings } from '../__mocks__/state-mocks';
+
 import { AppContext, type AppContextState } from '../context/App';
 
 /**
@@ -92,4 +95,14 @@ export function renderWithAppContext(
  */
 export function ensureStableEmojis() {
   globalThis.Math.random = jest.fn(() => 0.1);
+}
+
+/**
+ * Configure axios to use the http adapter instead of XHR.
+ * This allows nock to intercept HTTP requests in tests
+ *
+ * See: https://github.com/nock/nock?tab=readme-ov-file#axios
+ */
+export function configureAxiosHttpAdapterForNock() {
+  axios.defaults.adapter = 'http';
 }

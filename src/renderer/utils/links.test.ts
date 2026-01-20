@@ -1,8 +1,11 @@
 import { mockGitHubCloudAccount } from '../__mocks__/account-mocks';
 import { mockGitifyNotification } from '../__mocks__/notifications-mocks';
 import { mockGitifyNotificationUser } from '../__mocks__/user-mocks';
+
 import { Constants } from '../constants';
+
 import type { GitifyRepository, Hostname, Link } from '../types';
+
 import * as authUtils from './auth/utils';
 import * as comms from './comms';
 import * as helpers from './helpers';

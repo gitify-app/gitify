@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Avatar, Stack, Truncate } from '@primer/react';
 
 import { type Link, Size, type UserType } from '../../types';
+
 import { getDefaultUserIcon } from '../../utils/icons';
 import { isNonHumanUser } from '../../utils/notifications/filters/userType';
 
@@ -22,7 +23,7 @@ export const AvatarWithFallback: React.FC<AvatarWithFallbackProps> = ({
   size = Size.MEDIUM,
   userType = 'User',
 }) => {
-  const [isBroken, setIsBroken] = useState(false);
+  const [hasBrokenAvatarSource, setHasBrokenAvatarSource] = useState(false);
 
   const isNonHuman = isNonHumanUser(userType);
   const DefaultUserIcon = getDefaultUserIcon(userType);
@@ -35,12 +36,12 @@ export const AvatarWithFallback: React.FC<AvatarWithFallbackProps> = ({
       direction="horizontal"
       gap="condensed"
     >
-      {!src || isBroken ? (
+      {!src || hasBrokenAvatarSource ? (
         <DefaultUserIcon size={size} />
       ) : (
         <Avatar
           alt={alt}
-          onError={() => setIsBroken(true)}
+          onError={() => setHasBrokenAvatarSource(true)}
           size={size}
           square={isNonHuman}
           src={src}

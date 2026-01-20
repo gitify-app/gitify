@@ -3,17 +3,21 @@ import { type FC, useCallback, useState } from 'react';
 import { BellSlashIcon, CheckIcon, ReadIcon } from '@primer/octicons-react';
 import { Stack, Text, Tooltip } from '@primer/react';
 
-import { useAppContext } from '../../context/App';
+import { useAppContext } from '../../hooks/useAppContext';
+
+import { HoverButton } from '../primitives/HoverButton';
+import { HoverGroup } from '../primitives/HoverGroup';
+
 import { type GitifyNotification, Opacity, Size } from '../../types';
+
 import { cn } from '../../utils/cn';
 import { isMarkAsDoneFeatureSupported } from '../../utils/features';
 import { openNotification } from '../../utils/links';
 import { isGroupByDate } from '../../utils/notifications/group';
 import { shouldRemoveNotificationsFromState } from '../../utils/notifications/remove';
-import { HoverButton } from '../primitives/HoverButton';
-import { HoverGroup } from '../primitives/HoverGroup';
 import { NotificationFooter } from './NotificationFooter';
 import { NotificationHeader } from './NotificationHeader';
+import { NotificationTitle } from './NotificationTitle';
 
 interface NotificationRowProps {
   notification: GitifyNotification;
@@ -30,12 +34,14 @@ export const NotificationRow: FC<NotificationRowProps> = ({
     markNotificationsAsDone,
     unsubscribeNotification,
   } = useAppContext();
-  const [animateExit, setAnimateExit] = useState(false);
+
+  const [shouldAnimateExitTransition, setShouldAnimateExitTransition] =
+    useState(false);
 
   const shouldAnimateExit = shouldRemoveNotificationsFromState(settings);
 
   const handleNotification = useCallback(() => {
-    setAnimateExit(shouldAnimateExit);
+    setShouldAnimateExitTransition(shouldAnimateExit);
     openNotification(notification);
 
     if (settings.markAsDoneOnOpen) {
@@ -52,12 +58,12 @@ export const NotificationRow: FC<NotificationRowProps> = ({
   ]);
 
   const actionMarkAsDone = () => {
-    setAnimateExit(shouldAnimateExit);
+    setShouldAnimateExitTransition(shouldAnimateExit);
     markNotificationsAsDone([notification]);
   };
 
   const actionMarkAsRead = () => {
-    setAnimateExit(shouldAnimateExit);
+    setShouldAnimateExitTransition(shouldAnimateExit);
     markNotificationsAsRead([notification]);
   };
 
@@ -74,7 +80,7 @@ export const NotificationRow: FC<NotificationRowProps> = ({
         'group relative border-b',
         'pl-2.75 pr-1 py-0.75',
         'text-gitify-font border-gitify-notification-border hover:bg-gitify-notification-hover',
-        (isAnimated || animateExit) &&
+        (isAnimated || shouldAnimateExitTransition) &&
           'translate-x-full opacity-0 transition duration-350 ease-in-out',
         isNotificationRead && Opacity.READ,
       )}
@@ -92,10 +98,7 @@ export const NotificationRow: FC<NotificationRowProps> = ({
         </Tooltip>
 
         <Stack
-          className={cn(
-            'cursor-pointer text-sm w-full',
-            !settings.wrapNotificationTitle && 'truncate',
-          )}
+          className="cursor-pointer text-sm w-full"
           direction="vertical"
           gap="none"
           onClick={() => handleNotification()}
@@ -104,19 +107,14 @@ export const NotificationRow: FC<NotificationRowProps> = ({
 
           <Stack
             align="start"
-            className={cn(
-              'mb-0.5',
-              !settings.wrapNotificationTitle && 'truncate',
-            )}
+            className="mb-0.5"
             data-testid="notification-row"
             direction="horizontal"
             gap="condensed"
             justify="space-between"
             title={notification.display.title}
           >
-            <Text className={!settings.wrapNotificationTitle && 'truncate'}>
-              {notification.subject.title}
-            </Text>
+            <NotificationTitle title={notification.subject.title} />
             <Text
               className={cn(
                 'text-xxs ml-auto mr-2',
@@ -132,7 +130,7 @@ export const NotificationRow: FC<NotificationRowProps> = ({
         </Stack>
       </Stack>
 
-      {!animateExit && (
+      {!shouldAnimateExitTransition && (
         <HoverGroup bgColor="group-hover:bg-gitify-notification-hover">
           <HoverButton
             action={actionMarkAsRead}

@@ -1,4 +1,5 @@
 import { renderWithAppContext } from '../../__helpers__/test-utils';
+
 import { Contents } from './Contents';
 
 describe('renderer/components/layout/Contents.tsx', () => {

@@ -3,6 +3,8 @@ import type { FC } from 'react';
 import { FilterIcon, FilterRemoveIcon } from '@primer/octicons-react';
 import { Button, Stack, Tooltip } from '@primer/react';
 
+import { useAppContext } from '../hooks/useAppContext';
+
 import { ReasonFilter } from '../components/filters/ReasonFilter';
 import { SearchFilter } from '../components/filters/SearchFilter';
 import { StateFilter } from '../components/filters/StateFilter';
@@ -12,7 +14,6 @@ import { Contents } from '../components/layout/Contents';
 import { Page } from '../components/layout/Page';
 import { Footer } from '../components/primitives/Footer';
 import { Header } from '../components/primitives/Header';
-import { useAppContext } from '../context/App';
 
 export const FiltersRoute: FC = () => {
   const { clearFilters } = useAppContext();

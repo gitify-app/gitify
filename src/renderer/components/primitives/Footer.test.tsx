@@ -1,4 +1,5 @@
 import { renderWithAppContext } from '../../__helpers__/test-utils';
+
 import { Footer } from './Footer';
 
 describe('renderer/components/primitives/Footer.tsx', () => {

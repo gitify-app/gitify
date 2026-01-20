@@ -6,6 +6,7 @@ import axios, {
 import type { ExecutionResult } from 'graphql';
 
 import type { Link, Token } from '../../types';
+
 import { decryptValue } from '../comms';
 import { rendererLogError } from '../logger';
 import type { TypedDocumentString } from './graphql/generated/graphql';
@@ -17,24 +18,6 @@ import { getNextURLFromLinkHeader } from './utils';
 export type ExecutionResultWithHeaders<T> = ExecutionResult<T> & {
   headers: Record<string, string>;
 };
-
-/**
- * Perform an unauthenticated API request
- *
- * @param url
- * @param method
- * @param data
- * @returns
- */
-export async function apiRequest(
-  url: Link,
-  method: Method,
-  data = {},
-): Promise<AxiosPromise | null> {
-  const headers = await getHeaders(url);
-
-  return axios({ method, url, data, headers });
-}
 
 /**
  * Perform an authenticated API request

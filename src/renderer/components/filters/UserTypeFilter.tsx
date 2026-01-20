@@ -9,6 +9,7 @@ import {
 import { Stack, Text } from '@primer/react';
 
 import { Size } from '../../types';
+
 import { userTypeFilter } from '../../utils/notifications/filters';
 import { FilterSection } from './FilterSection';
 

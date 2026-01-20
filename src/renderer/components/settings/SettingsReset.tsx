@@ -2,7 +2,8 @@ import type { FC } from 'react';
 
 import { Button, Stack, useConfirm } from '@primer/react';
 
-import { useAppContext } from '../../context/App';
+import { useAppContext } from '../../hooks/useAppContext';
+
 import { rendererLogInfo } from '../../utils/logger';
 
 export const SettingsReset: FC = () => {

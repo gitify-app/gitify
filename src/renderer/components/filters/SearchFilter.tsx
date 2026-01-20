@@ -10,14 +10,17 @@ import {
 } from '@primer/octicons-react';
 import { Stack, Text } from '@primer/react';
 
-import { useAppContext } from '../../context/App';
+import { useAppContext } from '../../hooks/useAppContext';
+
+import { Title } from '../primitives/Title';
+
 import { IconColor, type SearchToken, Size } from '../../types';
+
 import { cn } from '../../utils/cn';
 import {
   hasExcludeSearchFilters,
   hasIncludeSearchFilters,
 } from '../../utils/notifications/filters/search';
-import { Title } from '../primitives/Title';
 import { RequiresDetailedNotificationWarning } from './RequiresDetailedNotificationsWarning';
 import { TokenSearchInput } from './TokenSearchInput';
 
