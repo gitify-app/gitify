@@ -22,8 +22,11 @@ export const TraySettings: FC = () => {
           checked={settings.showNotificationsCountInTray}
           label="Show notification count"
           name="showNotificationsCountInTray"
-          onChange={(evt) =>
-            updateSetting('showNotificationsCountInTray', evt.target.checked)
+          onChange={() =>
+            updateSetting(
+              'showNotificationsCountInTray',
+              !settings.showNotificationsCountInTray,
+            )
           }
           tooltip={
             <Text>
@@ -38,8 +41,8 @@ export const TraySettings: FC = () => {
           checked={settings.useUnreadActiveIcon}
           label="Highlight unread notifications"
           name="useUnreadActiveIcon"
-          onChange={(evt) =>
-            updateSetting('useUnreadActiveIcon', evt.target.checked)
+          onChange={() =>
+            updateSetting('useUnreadActiveIcon', !settings.useUnreadActiveIcon)
           }
           tooltip={
             <Stack direction="vertical" gap="condensed">
@@ -55,8 +58,11 @@ export const TraySettings: FC = () => {
           checked={settings.useAlternateIdleIcon}
           label="Use alternate idle icon"
           name="useAlternateIdleIcon"
-          onChange={(evt) =>
-            updateSetting('useAlternateIdleIcon', evt.target.checked)
+          onChange={() =>
+            updateSetting(
+              'useAlternateIdleIcon',
+              !settings.useAlternateIdleIcon,
+            )
           }
           tooltip={
             <Stack direction="vertical" gap="condensed">

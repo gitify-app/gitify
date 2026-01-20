@@ -86,8 +86,8 @@ export const AppearanceSettings: FC = () => {
           checked={settings.increaseContrast}
           label="Increase contrast"
           name="increaseContrast"
-          onChange={(evt) =>
-            updateSetting('increaseContrast', evt.target.checked)
+          onChange={() =>
+            updateSetting('increaseContrast', !settings.increaseContrast)
           }
           tooltip={
             <Text>
@@ -147,8 +147,8 @@ export const AppearanceSettings: FC = () => {
           checked={settings.showAccountHeader}
           label="Show account header"
           name="showAccountHeader"
-          onChange={(evt) =>
-            updateSetting('showAccountHeader', evt.target.checked)
+          onChange={() =>
+            updateSetting('showAccountHeader', !settings.showAccountHeader)
           }
           tooltip={
             <Text>
@@ -163,8 +163,11 @@ export const AppearanceSettings: FC = () => {
           checked={settings.wrapNotificationTitle}
           label="Show full notification title"
           name="wrapNotificationTitle"
-          onChange={(evt) =>
-            updateSetting('wrapNotificationTitle', evt.target.checked)
+          onChange={() =>
+            updateSetting(
+              'wrapNotificationTitle',
+              !settings.wrapNotificationTitle,
+            )
           }
           tooltip={
             <Text>
