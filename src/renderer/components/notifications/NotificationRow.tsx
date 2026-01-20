@@ -97,10 +97,7 @@ export const NotificationRow: FC<NotificationRowProps> = ({
         </Tooltip>
 
         <Stack
-          className={cn(
-            'cursor-pointer text-sm w-full',
-            !settings.wrapNotificationTitle && 'truncate',
-          )}
+          className="cursor-pointer text-sm w-full"
           direction="vertical"
           gap="none"
           onClick={() => handleNotification()}
@@ -109,10 +106,7 @@ export const NotificationRow: FC<NotificationRowProps> = ({
 
           <Stack
             align="start"
-            className={cn(
-              'mb-0.5',
-              !settings.wrapNotificationTitle && 'truncate',
-            )}
+            className="mb-0.5"
             data-testid="notification-row"
             direction="horizontal"
             gap="condensed"
@@ -120,8 +114,8 @@ export const NotificationRow: FC<NotificationRowProps> = ({
             title={notification.display.title}
           >
             <NotificationTitle
-              className={!settings.wrapNotificationTitle && 'truncate'}
               title={notification.subject.title}
+              wrapTitle={settings.wrapNotificationTitle}
             />
             <Text
               className={cn(
