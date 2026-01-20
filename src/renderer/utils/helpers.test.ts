@@ -16,6 +16,7 @@ import {
   getChevronDetails,
   getPlatformFromHostname,
   isEnterpriseServerHost,
+  parseInlineCode,
 } from './helpers';
 
 describe('renderer/utils/helpers.ts', () => {
@@ -173,6 +174,109 @@ describe('renderer/utils/helpers.ts', () => {
         icon: ChevronLeftIcon,
         label: 'No notifications for account',
       });
+    });
+  });
+
+  describe('parseInlineCode', () => {
+    it('should return plain text when no code blocks present', () => {
+      expect(parseInlineCode('Simple notification title')).toEqual([
+        {
+          type: 'text',
+          content: 'Simple notification title',
+        },
+      ]);
+    });
+
+    it('should parse single inline code block', () => {
+      expect(
+        parseInlineCode('refactor: migrate deprecated atlaskit `xcss`'),
+      ).toEqual([
+        {
+          type: 'text',
+          content: 'refactor: migrate deprecated atlaskit ',
+        },
+        {
+          type: 'code',
+          content: 'xcss',
+        },
+      ]);
+    });
+
+    it('should parse multiple inline code blocks', () => {
+      expect(parseInlineCode('Replace `foo` with `bar` in config')).toEqual([
+        {
+          type: 'text',
+          content: 'Replace ',
+        },
+        {
+          type: 'code',
+          content: 'foo',
+        },
+        {
+          type: 'text',
+          content: ' with ',
+        },
+        {
+          type: 'code',
+          content: 'bar',
+        },
+        {
+          type: 'text',
+          content: ' in config',
+        },
+      ]);
+    });
+
+    it('should parse code block at the start', () => {
+      expect(parseInlineCode('`useState` hook implementation')).toEqual([
+        {
+          type: 'code',
+          content: 'useState',
+        },
+        {
+          type: 'text',
+          content: ' hook implementation',
+        },
+      ]);
+    });
+
+    it('should parse code block at the end', () => {
+      expect(parseInlineCode('Fix issue with `render`')).toEqual([
+        {
+          type: 'text',
+          content: 'Fix issue with ',
+        },
+        {
+          type: 'code',
+          content: 'render',
+        },
+      ]);
+    });
+
+    it('should handle empty string', () => {
+      expect(parseInlineCode('')).toEqual([
+        {
+          type: 'text',
+          content: '',
+        },
+      ]);
+    });
+
+    it('should handle adjacent code blocks', () => {
+      expect(parseInlineCode('Compare `foo``bar`')).toEqual([
+        {
+          type: 'text',
+          content: 'Compare ',
+        },
+        {
+          type: 'code',
+          content: 'foo',
+        },
+        {
+          type: 'code',
+          content: 'bar',
+        },
+      ]);
     });
   });
 });

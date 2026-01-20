@@ -108,3 +108,56 @@ export function getChevronDetails(
     label: `Show ${type} notifications`,
   };
 }
+
+/**
+ * Parse inline code blocks (text wrapped in backticks) from a string.
+ * Returns an array of parts where each part is either plain text or code.
+ *
+ * @param text - The text to parse
+ * @returns Array of parts with type and content
+ */
+export function parseInlineCode(
+  text: string,
+): Array<{ type: 'text' | 'code'; content: string }> {
+  const parts: Array<{ type: 'text' | 'code'; content: string }> = [];
+  const regex = /`([^`]+)`/g;
+  let lastIndex = 0;
+
+  let match = regex.exec(text);
+  while (match !== null) {
+    // Add text before the code block
+    if (match.index > lastIndex) {
+      parts.push({
+        type: 'text',
+        content: text.slice(lastIndex, match.index),
+      });
+    }
+
+    // Add the code block
+    parts.push({
+      type: 'code',
+      content: match[1],
+    });
+
+    lastIndex = regex.lastIndex;
+    match = regex.exec(text);
+  }
+
+  // Add remaining text after the last code block
+  if (lastIndex < text.length) {
+    parts.push({
+      type: 'text',
+      content: text.slice(lastIndex),
+    });
+  }
+
+  // If no code blocks were found, return the original text as a single text part
+  if (parts.length === 0) {
+    parts.push({
+      type: 'text',
+      content: text,
+    });
+  }
+
+  return parts;
+}

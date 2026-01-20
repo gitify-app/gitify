@@ -17,6 +17,7 @@ import { isGroupByDate } from '../../utils/notifications/group';
 import { shouldRemoveNotificationsFromState } from '../../utils/notifications/remove';
 import { NotificationFooter } from './NotificationFooter';
 import { NotificationHeader } from './NotificationHeader';
+import { NotificationTitle } from './NotificationTitle';
 
 interface NotificationRowProps {
   notification: GitifyNotification;
@@ -118,9 +119,10 @@ export const NotificationRow: FC<NotificationRowProps> = ({
             justify="space-between"
             title={notification.display.title}
           >
-            <Text className={!settings.wrapNotificationTitle && 'truncate'}>
-              {notification.subject.title}
-            </Text>
+            <NotificationTitle
+              className={!settings.wrapNotificationTitle && 'truncate'}
+              title={notification.subject.title}
+            />
             <Text
               className={cn(
                 'text-xxs ml-auto mr-2',
