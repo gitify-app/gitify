@@ -14,7 +14,7 @@ import { type GitifyNotification, IconColor } from '../../types';
 import { getPullRequestReviewIcon } from '../../utils/icons';
 import { MetricPill } from './MetricPill';
 
-interface MetricGroupProps {
+export interface MetricGroupProps {
   notification: GitifyNotification;
 }
 

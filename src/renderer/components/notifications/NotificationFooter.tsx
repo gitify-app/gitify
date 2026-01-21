@@ -9,7 +9,7 @@ import { openUserProfile } from '../../utils/links';
 import { AvatarWithFallback } from '../avatars/AvatarWithFallback';
 import { MetricGroup } from '../metrics/MetricGroup';
 
-interface NotificationFooterProps {
+export interface NotificationFooterProps {
   notification: GitifyNotification;
 }
 

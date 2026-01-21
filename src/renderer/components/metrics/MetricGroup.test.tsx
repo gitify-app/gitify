@@ -4,14 +4,14 @@ import { mockSettings } from '../../__mocks__/state-mocks';
 
 import type { GitifyMilestone } from '../../types';
 
-import { MetricGroup } from './MetricGroup';
+import { MetricGroup, type MetricGroupProps } from './MetricGroup';
 
 describe('renderer/components/metrics/MetricGroup.tsx', () => {
   describe('showPills disabled', () => {
     it('should not render any pills when showPills is disabled', async () => {
       const mockNotification = mockGitifyNotification;
 
-      const props = {
+      const props: MetricGroupProps = {
         notification: mockNotification,
       };
 
@@ -27,7 +27,7 @@ describe('renderer/components/metrics/MetricGroup.tsx', () => {
       const mockNotification = mockGitifyNotification;
       mockNotification.subject.linkedIssues = ['#1'];
 
-      const props = {
+      const props: MetricGroupProps = {
         notification: mockNotification,
       };
 
@@ -39,7 +39,7 @@ describe('renderer/components/metrics/MetricGroup.tsx', () => {
       const mockNotification = mockGitifyNotification;
       mockNotification.subject.linkedIssues = ['#1', '#2'];
 
-      const props = {
+      const props: MetricGroupProps = {
         notification: mockNotification,
       };
 
@@ -53,7 +53,7 @@ describe('renderer/components/metrics/MetricGroup.tsx', () => {
       const mockNotification = mockGitifyNotification;
       mockNotification.subject.commentCount = null;
 
-      const props = {
+      const props: MetricGroupProps = {
         notification: mockNotification,
       };
 
@@ -65,7 +65,7 @@ describe('renderer/components/metrics/MetricGroup.tsx', () => {
       const mockNotification = mockGitifyNotification;
       mockNotification.subject.commentCount = 1;
 
-      const props = {
+      const props: MetricGroupProps = {
         notification: mockNotification,
       };
 
@@ -77,7 +77,7 @@ describe('renderer/components/metrics/MetricGroup.tsx', () => {
       const mockNotification = mockGitifyNotification;
       mockNotification.subject.commentCount = 2;
 
-      const props = {
+      const props: MetricGroupProps = {
         notification: mockNotification,
       };
 
@@ -91,7 +91,7 @@ describe('renderer/components/metrics/MetricGroup.tsx', () => {
       const mockNotification = mockGitifyNotification;
       mockNotification.subject.labels = ['enhancement', 'good-first-issue'];
 
-      const props = {
+      const props: MetricGroupProps = {
         notification: mockNotification,
       };
 
@@ -108,7 +108,7 @@ describe('renderer/components/metrics/MetricGroup.tsx', () => {
         state: 'OPEN',
       } as GitifyMilestone;
 
-      const props = {
+      const props: MetricGroupProps = {
         notification: mockNotification,
       };
 
@@ -123,7 +123,7 @@ describe('renderer/components/metrics/MetricGroup.tsx', () => {
         state: 'CLOSED',
       } as GitifyMilestone;
 
-      const props = {
+      const props: MetricGroupProps = {
         notification: mockNotification,
       };
 

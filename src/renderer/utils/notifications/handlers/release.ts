@@ -10,6 +10,7 @@ import type {
   GitifySubject,
   Link,
   SettingsState,
+  UserType,
 } from '../../../types';
 
 import { getRelease } from '../../api/client';
@@ -40,7 +41,7 @@ class ReleaseHandler extends DefaultHandler {
           login: release.author.login,
           avatarUrl: release.author.avatar_url as Link,
           htmlUrl: release.author.html_url as Link,
-          type: release.author.type as GitifyNotificationUser['type'],
+          type: release.author.type as UserType,
         }
       : null;
 

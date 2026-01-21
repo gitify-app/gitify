@@ -18,7 +18,7 @@ import { shouldRemoveNotificationsFromState } from '../../utils/notifications/re
 import { AvatarWithFallback } from '../avatars/AvatarWithFallback';
 import { NotificationRow } from './NotificationRow';
 
-interface RepositoryNotificationsProps {
+export interface RepositoryNotificationsProps {
   repoNotifications: GitifyNotification[];
   repoName: string;
 }
@@ -30,7 +30,7 @@ export const RepositoryNotifications: FC<RepositoryNotificationsProps> = ({
   const { settings, markNotificationsAsRead, markNotificationsAsDone } =
     useAppContext();
 
-  const [shouldAnimateExitTransition, setShouldAnimateExitTransition] =
+  const [shouldAnimateRepositoryExit, setShouldAnimateRepositoryExit] =
     useState(false);
   const [
     isRepositoryNotificationsVisible,
@@ -41,12 +41,12 @@ export const RepositoryNotifications: FC<RepositoryNotificationsProps> = ({
   const shouldAnimateExit = shouldRemoveNotificationsFromState(settings);
 
   const actionMarkAsDone = () => {
-    setShouldAnimateExitTransition(shouldAnimateExit);
+    setShouldAnimateRepositoryExit(shouldAnimateExit);
     markNotificationsAsDone(repoNotifications);
   };
 
   const actionMarkAsRead = () => {
-    setShouldAnimateExitTransition(shouldAnimateExit);
+    setShouldAnimateRepositoryExit(shouldAnimateExit);
     markNotificationsAsRead(repoNotifications);
   };
 
@@ -70,7 +70,7 @@ export const RepositoryNotifications: FC<RepositoryNotificationsProps> = ({
         className={cn(
           'group relative pr-1 py-0.5',
           'bg-gitify-repository',
-          shouldAnimateExitTransition &&
+          shouldAnimateRepositoryExit &&
             'translate-x-full opacity-0 transition duration-350 ease-in-out',
           areAllRepoNotificationsRead && Opacity.READ,
         )}
@@ -98,7 +98,7 @@ export const RepositoryNotifications: FC<RepositoryNotificationsProps> = ({
           />
         </Button>
 
-        {!shouldAnimateExitTransition && (
+        {!shouldAnimateRepositoryExit && (
           <HoverGroup bgColor="group-hover:bg-gitify-repository">
             <HoverButton
               action={actionMarkAsRead}
@@ -132,7 +132,7 @@ export const RepositoryNotifications: FC<RepositoryNotificationsProps> = ({
       {isRepositoryNotificationsVisible &&
         repoNotifications.map((notification) => (
           <NotificationRow
-            isAnimated={shouldAnimateExitTransition}
+            isRepositoryAnimatingExit={shouldAnimateRepositoryExit}
             key={notification.id}
             notification={notification}
           />
