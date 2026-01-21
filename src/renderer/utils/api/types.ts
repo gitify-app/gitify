@@ -29,15 +29,16 @@ export type RawGitHubNotification =
 export type RawUser = components['schemas']['simple-user'];
 
 /**
- * These API endpoints don't return a response body
+ * These API endpoints don't return a response body:
+ *  - HEAD /notifications
+ *  - Endpoints['PATCH /notifications/threads/{thread_id}']['response']['data']
+ *  - Endpoints['DELETE /notifications/threads/{thread_id}']['response']['data']
  */
-// HEAD request - no response body
-export type HeadNotificationsResponse = NoResponseBody;
+// biome-ignore lint/suspicious/noConfusingVoidType: This endpoint has no response body
+export type HeadNotificationsResponse = void;
 
-// Endpoints['PATCH /notifications/threads/{thread_id}']['response']['data'];
-export type MarkNotificationThreadAsReadResponse = NoResponseBody;
+// biome-ignore lint/suspicious/noConfusingVoidType: This endpoint has no response body
+export type MarkNotificationThreadAsReadResponse = void;
 
-// Endpoints['DELETE /notifications/threads/{thread_id}']['response']['data']
-export type MarkNotificationThreadAsDoneResponse = NoResponseBody;
-
-type NoResponseBody = void;
+// biome-ignore lint/suspicious/noConfusingVoidType: This endpoint has no response body
+export type MarkNotificationThreadAsDoneResponse = void;
