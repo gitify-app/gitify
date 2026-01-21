@@ -26,7 +26,7 @@ export interface NotificationRowProps {
 
 export const NotificationRow: FC<NotificationRowProps> = ({
   notification,
-  isRepositoryAnimatingExit = false,
+  isRepositoryAnimatingExit,
 }: NotificationRowProps) => {
   const {
     settings,

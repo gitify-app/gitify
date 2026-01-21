@@ -21,29 +21,29 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
   const markNotificationsAsReadMock = jest.fn();
   const markNotificationsAsDoneMock = jest.fn();
 
-  let props: RepositoryNotificationsProps;
-
-  beforeEach(() => {
-    props = {
-      repoName: 'gitify-app/notifications-test',
-      repoNotifications: mockGitHubCloudGitifyNotifications,
-    };
-  });
-
   afterEach(() => {
     jest.clearAllMocks();
   });
 
   it('should render itself & its children', () => {
+    const props: RepositoryNotificationsProps = {
+      repoName: 'gitify-app/notifications-test',
+      repoNotifications: mockGitHubCloudGitifyNotifications,
+    };
+
     const tree = renderWithAppContext(<RepositoryNotifications {...props} />);
 
     expect(tree).toMatchSnapshot();
   });
 
   it('should render itself & its children - all notifications are read', () => {
-    for (const n of props.repoNotifications) {
-      n.unread = false;
-    }
+    const props: RepositoryNotificationsProps = {
+      repoName: 'gitify-app/notifications-test',
+      repoNotifications: mockGitHubCloudGitifyNotifications.map((n) => ({
+        ...n,
+        unread: false,
+      })),
+    };
 
     const tree = renderWithAppContext(<RepositoryNotifications {...props} />);
 
@@ -51,6 +51,11 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
   });
 
   it('should open the browser when clicking on the repo name', async () => {
+    const props: RepositoryNotificationsProps = {
+      repoName: 'gitify-app/notifications-test',
+      repoNotifications: mockGitHubCloudGitifyNotifications,
+    };
+
     const openExternalLinkSpy = jest
       .spyOn(comms, 'openExternalLink')
       .mockImplementation();
@@ -66,6 +71,11 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
   });
 
   it('should mark a repo as read', async () => {
+    const props: RepositoryNotificationsProps = {
+      repoName: 'gitify-app/notifications-test',
+      repoNotifications: mockGitHubCloudGitifyNotifications,
+    };
+
     renderWithAppContext(<RepositoryNotifications {...props} />, {
       settings: { ...mockSettings },
       markNotificationsAsRead: markNotificationsAsReadMock,
@@ -79,6 +89,11 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
   });
 
   it('should mark a repo as done', async () => {
+    const props: RepositoryNotificationsProps = {
+      repoName: 'gitify-app/notifications-test',
+      repoNotifications: mockGitHubCloudGitifyNotifications,
+    };
+
     renderWithAppContext(<RepositoryNotifications {...props} />, {
       settings: { ...mockSettings },
       markNotificationsAsDone: markNotificationsAsDoneMock,
@@ -92,6 +107,11 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
   });
 
   it('should use default repository icon when avatar is not available', () => {
+    const props: RepositoryNotificationsProps = {
+      repoName: 'gitify-app/notifications-test',
+      repoNotifications: mockGitHubCloudGitifyNotifications,
+    };
+
     props.repoNotifications[0].repository.owner.avatarUrl = '' as Link;
 
     const tree = renderWithAppContext(<RepositoryNotifications {...props} />);
@@ -100,6 +120,11 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
   });
 
   it('should toggle repository notifications visibility', async () => {
+    const props: RepositoryNotificationsProps = {
+      repoName: 'gitify-app/notifications-test',
+      repoNotifications: mockGitHubCloudGitifyNotifications,
+    };
+
     await act(async () => {
       renderWithAppContext(<RepositoryNotifications {...props} />);
     });
