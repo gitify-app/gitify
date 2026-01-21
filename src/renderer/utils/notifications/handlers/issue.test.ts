@@ -17,6 +17,7 @@ import {
   type Link,
 } from '../../../types';
 
+import type { FetchIssueByNumberQuery } from '../../api/graphql/generated/graphql';
 import { issueHandler } from './issue';
 
 describe('renderer/utils/notifications/handlers/issue.ts', () => {
@@ -51,7 +52,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
             repository: {
               issue: mockIssue,
             },
-          },
+          } satisfies FetchIssueByNumberQuery,
         });
 
       const result = await issueHandler.enrich(mockNotification, mockSettings);
@@ -66,10 +67,11 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
           type: mockAuthor.type,
         },
         commentCount: 0,
-        htmlUrl: 'https://github.com/gitify-app/notifications-test/issues/123',
+        htmlUrl:
+          'https://github.com/gitify-app/notifications-test/issues/123' as Link,
         labels: [],
         milestone: undefined,
-      } as Partial<GitifySubject>);
+      } satisfies Partial<GitifySubject>);
     });
 
     it('issue with stateReason - prefer stateReason over state when available', async () => {
@@ -85,7 +87,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
             repository: {
               issue: mockIssue,
             },
-          },
+          } satisfies FetchIssueByNumberQuery,
         });
 
       const result = await issueHandler.enrich(mockNotification, mockSettings);
@@ -100,10 +102,11 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
           type: mockAuthor.type,
         },
         commentCount: 0,
-        htmlUrl: 'https://github.com/gitify-app/notifications-test/issues/123',
+        htmlUrl:
+          'https://github.com/gitify-app/notifications-test/issues/123' as Link,
         labels: [],
         milestone: undefined,
-      } as Partial<GitifySubject>);
+      } satisfies Partial<GitifySubject>);
     });
 
     it('issue with comments', async () => {
@@ -127,7 +130,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
             repository: {
               issue: mockIssue,
             },
-          },
+          } satisfies FetchIssueByNumberQuery,
         });
 
       const result = await issueHandler.enrich(mockNotification, mockSettings);
@@ -143,10 +146,10 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         },
         commentCount: 1,
         htmlUrl:
-          'https://github.com/gitify-app/notifications-test/issues/123#issuecomment-1234',
+          'https://github.com/gitify-app/notifications-test/issues/123#issuecomment-1234' as Link,
         labels: [],
         milestone: undefined,
-      } as Partial<GitifySubject>);
+      } satisfies Partial<GitifySubject>);
     });
 
     it('with labels', async () => {
@@ -164,7 +167,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
             repository: {
               issue: mockIssue,
             },
-          },
+          } satisfies FetchIssueByNumberQuery,
         });
 
       const result = await issueHandler.enrich(mockNotification, mockSettings);
@@ -179,10 +182,11 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
           type: mockAuthor.type,
         },
         commentCount: 0,
-        htmlUrl: 'https://github.com/gitify-app/notifications-test/issues/123',
+        htmlUrl:
+          'https://github.com/gitify-app/notifications-test/issues/123' as Link,
         labels: ['enhancement'],
         milestone: undefined,
-      } as Partial<GitifySubject>);
+      } satisfies Partial<GitifySubject>);
     });
 
     it('with milestone', async () => {
@@ -201,7 +205,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
             repository: {
               issue: mockIssue,
             },
-          },
+          } satisfies FetchIssueByNumberQuery,
         });
 
       const result = await issueHandler.enrich(mockNotification, mockSettings);
@@ -216,13 +220,14 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
           type: mockAuthor.type,
         },
         commentCount: 0,
-        htmlUrl: 'https://github.com/gitify-app/notifications-test/issues/123',
+        htmlUrl:
+          'https://github.com/gitify-app/notifications-test/issues/123' as Link,
         labels: [],
         milestone: {
           state: 'OPEN',
           title: 'Open Milestone',
         },
-      } as Partial<GitifySubject>);
+      } satisfies Partial<GitifySubject>);
     });
   });
 

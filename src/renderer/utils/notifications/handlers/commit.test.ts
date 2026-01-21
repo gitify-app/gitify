@@ -6,6 +6,10 @@ import { mockSettings } from '../../../__mocks__/state-mocks';
 import { mockRawUser } from '../../api/__mocks__/response-mocks';
 
 import type { GitifyNotification, Link } from '../../../types';
+import type {
+  GetCommitCommentResponse,
+  GetCommitResponse,
+} from '../../api/types';
 
 import { commitHandler } from './commit';
 
@@ -35,7 +39,9 @@ describe('renderer/utils/notifications/handlers/commit.ts', () => {
 
       nock('https://api.github.com')
         .get('/repos/gitify-app/notifications-test/comments/141012658')
-        .reply(200, { user: mockCommenter });
+        .reply(200, {
+          user: mockCommenter,
+        } satisfies Partial<GetCommitCommentResponse>);
 
       const result = await commitHandler.enrich(mockNotification, mockSettings);
 
@@ -62,7 +68,9 @@ describe('renderer/utils/notifications/handlers/commit.ts', () => {
         .get(
           '/repos/gitify-app/notifications-test/commits/d2a86d80e3d24ea9510d5de6c147e53c30f313a8',
         )
-        .reply(200, { author: mockAuthor });
+        .reply(200, {
+          author: mockAuthor,
+        } satisfies Partial<GetCommitResponse>);
 
       const result = await commitHandler.enrich(mockNotification, mockSettings);
 
