@@ -15,6 +15,7 @@ import type {
   GetCommitCommentResponse,
   GetCommitResponse,
   GetReleaseResponse,
+  HeadNotificationsResponse,
   IgnoreNotificationThreadSubscriptionResponse,
   ListNotificationsForAuthenticatedUserResponse,
   MarkNotificationThreadAsDoneResponse,
@@ -56,7 +57,7 @@ import {
 export function headNotifications(
   hostname: Hostname,
   token: Token,
-): AxiosPromise<void> {
+): AxiosPromise<HeadNotificationsResponse> {
   const url = getGitHubAPIBaseUrl(hostname);
   url.pathname += 'notifications';
 

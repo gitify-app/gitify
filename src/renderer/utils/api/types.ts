@@ -1,3 +1,4 @@
+import type { components } from '@octokit/openapi-types';
 import type { Endpoints } from '@octokit/types';
 
 import type { Link } from '../../types';
@@ -9,12 +10,6 @@ export interface GitHubRESTError {
 
 export type ListNotificationsForAuthenticatedUserResponse =
   Endpoints['GET /notifications']['response']['data'];
-
-export type MarkNotificationThreadAsReadResponse =
-  Endpoints['PATCH /notifications/threads/{thread_id}']['response']['data'];
-
-export type MarkNotificationThreadAsDoneResponse =
-  Endpoints['DELETE /notifications/threads/{thread_id}']['response']['data'];
 
 export type IgnoreNotificationThreadSubscriptionResponse =
   Endpoints['PUT /notifications/threads/{thread_id}/subscription']['response']['data'];
@@ -31,5 +26,18 @@ export type GetReleaseResponse =
 export type RawGitHubNotification =
   Endpoints['GET /notifications']['response']['data'][number];
 
-// FIXME - replace this if possible
-export type RawUser = Endpoints['GET /users/{username}']['response']['data'];
+export type RawUser = components['schemas']['simple-user'];
+
+/**
+ * These API endpoints don't return a response body
+ */
+// HEAD request - no response body
+export type HeadNotificationsResponse = NoResponseBody;
+
+// Endpoints['PATCH /notifications/threads/{thread_id}']['response']['data'];
+export type MarkNotificationThreadAsReadResponse = NoResponseBody;
+
+// Endpoints['DELETE /notifications/threads/{thread_id}']['response']['data']
+export type MarkNotificationThreadAsDoneResponse = NoResponseBody;
+
+type NoResponseBody = void;
