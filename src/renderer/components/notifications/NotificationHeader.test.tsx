@@ -8,7 +8,10 @@ import { mockSettings } from '../../__mocks__/state-mocks';
 import { GroupBy } from '../../types';
 
 import * as comms from '../../utils/comms';
-import { NotificationHeader } from './NotificationHeader';
+import {
+  NotificationHeader,
+  type NotificationHeaderProps,
+} from './NotificationHeader';
 
 describe('renderer/components/notifications/NotificationHeader.tsx', () => {
   afterEach(() => {
@@ -16,7 +19,7 @@ describe('renderer/components/notifications/NotificationHeader.tsx', () => {
   });
 
   it('should render itself & its children - group by repositories', async () => {
-    const props = {
+    const props: NotificationHeaderProps = {
       notification: mockGitifyNotification,
     };
 
@@ -29,7 +32,7 @@ describe('renderer/components/notifications/NotificationHeader.tsx', () => {
 
   describe('should render itself & its children - group by date', () => {
     it('with notification number', async () => {
-      const props = {
+      const props: NotificationHeaderProps = {
         notification: mockGitifyNotification,
       };
 
@@ -41,7 +44,7 @@ describe('renderer/components/notifications/NotificationHeader.tsx', () => {
     });
 
     it('with showNumber setting disabled', async () => {
-      const props = {
+      const props: NotificationHeaderProps = {
         notification: mockGitifyNotification,
       };
 
@@ -57,7 +60,7 @@ describe('renderer/components/notifications/NotificationHeader.tsx', () => {
     });
 
     it('without notification number', async () => {
-      const props = {
+      const props: NotificationHeaderProps = {
         notification: {
           ...mockGitifyNotification,
           subject: { ...mockGitifyNotification.subject, number: null },
@@ -77,7 +80,7 @@ describe('renderer/components/notifications/NotificationHeader.tsx', () => {
       .spyOn(comms, 'openExternalLink')
       .mockImplementation();
 
-    const props = {
+    const props: NotificationHeaderProps = {
       notification: mockGitifyNotification,
     };
 

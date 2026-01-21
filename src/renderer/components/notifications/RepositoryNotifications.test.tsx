@@ -2,14 +2,16 @@ import { act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { renderWithAppContext } from '../../__helpers__/test-utils';
-import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
 import { mockGitHubCloudGitifyNotifications } from '../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../__mocks__/state-mocks';
 
 import type { Link } from '../../types';
 
 import * as comms from '../../utils/comms';
-import { RepositoryNotifications } from './RepositoryNotifications';
+import {
+  RepositoryNotifications,
+  type RepositoryNotificationsProps,
+} from './RepositoryNotifications';
 
 jest.mock('./NotificationRow', () => ({
   NotificationRow: () => <div>NotificationRow</div>,
@@ -19,17 +21,13 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
   const markNotificationsAsReadMock = jest.fn();
   const markNotificationsAsDoneMock = jest.fn();
 
-  const props = {
-    account: mockGitHubCloudAccount,
-    repoName: 'gitify-app/notifications-test',
-    repoNotifications: mockGitHubCloudGitifyNotifications,
-  };
+  let props: RepositoryNotificationsProps;
 
   beforeEach(() => {
-    // Reset mock notification state between tests since it's mutated
-    for (const n of mockGitHubCloudGitifyNotifications) {
-      n.unread = true;
-    }
+    props = {
+      repoName: 'gitify-app/notifications-test',
+      repoNotifications: mockGitHubCloudGitifyNotifications,
+    };
   });
 
   afterEach(() => {

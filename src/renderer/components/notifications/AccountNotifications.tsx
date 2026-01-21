@@ -33,7 +33,7 @@ import { Oops } from '../Oops';
 import { NotificationRow } from './NotificationRow';
 import { RepositoryNotifications } from './RepositoryNotifications';
 
-interface AccountNotificationsProps {
+export interface AccountNotificationsProps {
   account: Account;
   notifications: GitifyNotification[];
   error: GitifyError | null;
@@ -150,6 +150,7 @@ export const AccountNotifications: FC<AccountNotificationsProps> = (
               ))
             : sortedNotifications.map((notification) => (
                 <NotificationRow
+                  isRepositoryAnimatingExit={false}
                   key={notification.id}
                   notification={notification}
                 />
