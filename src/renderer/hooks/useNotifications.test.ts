@@ -38,10 +38,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
   beforeEach(() => {
     configureAxiosHttpAdapterForNock();
 
-    rendererLogErrorSpy.mockReset();
-    raiseSoundNotificationSpy.mockReset();
-    raiseNativeNotificationSpy.mockReset();
-
+    jest.clearAllMocks();
     // Reset mock notification state between tests since it's mutated
     mockGitifyNotification.unread = true;
   });
