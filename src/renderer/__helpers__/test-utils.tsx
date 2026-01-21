@@ -9,6 +9,8 @@ import { mockAuth, mockSettings } from '../__mocks__/state-mocks';
 
 import { AppContext, type AppContextState } from '../context/App';
 
+export type DeepPartial<T> = { [K in keyof T]?: DeepPartial<T[K]> };
+
 /**
  * Props for the AppContextProvider wrapper
  */

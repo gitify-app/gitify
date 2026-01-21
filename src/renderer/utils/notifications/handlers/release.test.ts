@@ -6,6 +6,7 @@ import { mockSettings } from '../../../__mocks__/state-mocks';
 import { mockRawUser } from '../../api/__mocks__/response-mocks';
 
 import type { GitifyNotification, Link } from '../../../types';
+import type { GetReleaseResponse } from '../../api/types';
 
 import { releaseHandler } from './release';
 
@@ -28,7 +29,9 @@ describe('renderer/utils/notifications/handlers/release.ts', () => {
     it('release notification', async () => {
       nock('https://api.github.com')
         .get('/repos/gitify-app/notifications-test/releases/1')
-        .reply(200, { author: mockAuthor });
+        .reply(200, {
+          author: mockAuthor,
+        } satisfies Partial<GetReleaseResponse>);
 
       const result = await releaseHandler.enrich(
         mockNotification,
