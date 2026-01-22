@@ -1,5 +1,3 @@
-import type { AxiosResponse } from 'axios';
-
 import { Constants } from '../../constants';
 
 import type {
@@ -38,34 +36,23 @@ import {
 } from './graphql/generated/graphql';
 import { MergeQueryBuilder } from './graphql/MergeQueryBuilder';
 import { createOctokitClient } from './octokit';
-import {
-  performAuthenticatedRESTRequest,
-  performGraphQLRequest,
-  performGraphQLRequestString,
-} from './request';
-import {
-  getGitHubAPIBaseUrl,
-  getGitHubGraphQLUrl,
-  getNumberFromUrl,
-} from './utils';
+import { performGraphQLRequest, performGraphQLRequestString } from './request';
+import { getGitHubGraphQLUrl, getNumberFromUrl } from './utils';
 
 /**
  * Perform a HEAD operation, used to validate that connectivity is established.
  *
  * Endpoint documentation: https://docs.github.com/en/rest/activity/notifications
  */
-export function headNotifications(
+export async function headNotifications(
   hostname: Hostname,
   token: Token,
-): Promise<AxiosResponse<HeadNotificationsResponse>> {
-  const url = getGitHubAPIBaseUrl(hostname);
-  url.pathname += 'notifications';
+): Promise<HeadNotificationsResponse> {
+  const octokit = await createOctokitClient(hostname, token);
 
-  return performAuthenticatedRESTRequest<HeadNotificationsResponse>(
-    'HEAD',
-    url.toString() as Link,
-    token,
-  );
+  await octokit.rest.activity.listNotificationsForAuthenticatedUser({
+    per_page: 1,
+  });
 }
 
 /**
@@ -114,7 +101,6 @@ export async function listNotificationsForAuthenticatedUser(
  *
  * Endpoint documentation: https://docs.github.com/en/rest/activity/notifications#mark-a-thread-as-read
  */
-
 export async function markNotificationThreadAsRead(
   threadId: string,
   hostname: Hostname,
@@ -122,9 +108,11 @@ export async function markNotificationThreadAsRead(
 ): Promise<MarkNotificationThreadAsReadResponse> {
   const octokit = await createOctokitClient(hostname, token);
 
-  await octokit.rest.activity.markThreadAsRead({
+  const response = await octokit.rest.activity.markThreadAsRead({
     thread_id: Number(threadId),
   });
+
+  return response.data;
 }
 
 /**
@@ -142,9 +130,11 @@ export async function markNotificationThreadAsDone(
 ): Promise<MarkNotificationThreadAsDoneResponse> {
   const octokit = await createOctokitClient(hostname, token);
 
-  await octokit.rest.activity.markThreadAsRead({
+  const response = await octokit.rest.activity.markThreadAsDone({
     thread_id: Number(threadId),
   });
+
+  return response.data;
 }
 
 /**
@@ -173,16 +163,28 @@ export async function ignoreNotificationThreadSubscription(
  * Endpoint documentation: https://docs.github.com/en/rest/commits/commits#get-a-commit
  */
 export async function getCommit(
-  _url: Link,
+  url: Link,
   token: Token,
 ): Promise<GetCommitResponse> {
-  // TODO remove hard coded host and vars
-  const octokit = await createOctokitClient('github.com' as Hostname, token);
+  // Parse URL: /repos/{owner}/{repo}/commits/{ref}
+  const urlObj = new URL(url);
+  const match = urlObj.pathname.match(
+    /^\/repos\/(?<owner>[^/]+)\/(?<repo>[^/]+)\/commits\/(?<ref>.+)$/,
+  );
+
+  if (!match?.groups) {
+    throw new Error(`Invalid commit URL format: ${url}`);
+  }
+
+  const { owner, repo, ref } = match.groups;
+  const hostname = urlObj.hostname as Hostname;
+
+  const octokit = await createOctokitClient(hostname, token);
 
   const response = await octokit.rest.repos.getCommit({
-    owner: 'foo',
-    repo: 'bar',
-    ref: 'foo',
+    owner,
+    repo,
+    ref,
   });
 
   return response.data;
@@ -194,16 +196,28 @@ export async function getCommit(
  * Endpoint documentation: https://docs.github.com/en/rest/commits/comments#get-a-commit-comment
  */
 export async function getCommitComment(
-  _url: Link,
+  url: Link,
   token: Token,
 ): Promise<GetCommitCommentResponse> {
-  // TODO remove hard coded host and vars
-  const octokit = await createOctokitClient('github.com' as Hostname, token);
+  // Parse URL: /repos/{owner}/{repo}/comments/{comment_id}
+  const urlObj = new URL(url);
+  const match = urlObj.pathname.match(
+    /^\/repos\/(?<owner>[^/]+)\/(?<repo>[^/]+)\/comments\/(?<commentId>\d+)$/,
+  );
+
+  if (!match?.groups) {
+    throw new Error(`Invalid commit comment URL format: ${url}`);
+  }
+
+  const { owner, repo, commentId } = match.groups;
+  const hostname = urlObj.hostname as Hostname;
+
+  const octokit = await createOctokitClient(hostname, token);
 
   const response = await octokit.rest.repos.getCommitComment({
-    owner: 'foo', 
-    repo: 'bar',
-    comment_id: Number('123')
+    owner: owner,
+    repo: repo,
+    comment_id: Number(commentId),
   });
 
   return response.data;
@@ -218,21 +232,25 @@ export async function getRelease(
   url: Link,
   token: Token,
 ): Promise<GetReleaseResponse> {
-   // TODO remove hard coded host and vars
+  // Parse URL: /repos/{owner}/{repo}/releases/{release_id}
+  const urlObj = new URL(url);
+  const match = urlObj.pathname.match(
+    /^\/repos\/(?<owner>[^/]+)\/(?<repo>[^/]+)\/releases\/(?<releaseId>\d+)$/,
+  );
 
-  // Take the url and parse it based on this format
-  // /repos/{owner}/{repo}/releases/{release_id}
-  // into matched groups
+  if (!match?.groups) {
+    throw new Error(`Invalid release URL format: ${url}`);
+  }
 
-  
-  
-  
-  const octokit = await createOctokitClient('github.com' as Hostname, token);
+  const { owner, repo, releaseId } = match.groups;
+  const hostname = urlObj.hostname as Hostname;
+
+  const octokit = await createOctokitClient(hostname, token);
 
   const response = await octokit.rest.repos.getRelease({
-    owner: 'foo', 
-    repo: 'bar',
-    release_id: Number('123')
+    owner: owner,
+    repo: repo,
+    release_id: Number(releaseId),
   });
 
   return response.data;
@@ -240,17 +258,23 @@ export async function getRelease(
 
 /**
  * Get the `html_url` from the GitHub response
- *
  */
 export async function getHtmlUrl(
   url: Link,
   token: Token,
-): Promise<AxiosResponse<GitHubHtmlUrlResponse>> {
-  return performAuthenticatedRESTRequest<GitHubHtmlUrlResponse>(
-    'GET',
-    url,
-    token,
-  );
+): Promise<GitHubHtmlUrlResponse> {
+  // Extract hostname from URL to determine which Octokit client to use
+  const urlObj = new URL(url);
+  const hostname = urlObj.hostname as Hostname;
+
+  const octokit = await createOctokitClient(hostname, token);
+
+  // Perform a generic GET request using Octokit's request method
+  const response = await octokit.request('GET {+url}', {
+    url: url,
+  });
+
+  return response.data as GitHubHtmlUrlResponse;
 }
 
 /**
