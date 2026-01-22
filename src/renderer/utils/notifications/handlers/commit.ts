@@ -39,7 +39,7 @@ class CommitHandler extends DefaultHandler {
           notification.subject.latestCommentUrl,
           notification.account.token,
         )
-      ).data;
+      );
 
       user = {
         login: commitComment.user.login,
@@ -48,9 +48,10 @@ class CommitHandler extends DefaultHandler {
         type: commitComment.user.type as GitifyNotificationUser['type'],
       };
     } else {
-      const commit = (
-        await getCommit(notification.subject.url, notification.account.token)
-      ).data;
+      const commit = await getCommit(
+        notification.subject.url,
+        notification.account.token,
+      );
 
       user = {
         login: commit.author.login,

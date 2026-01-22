@@ -34,7 +34,7 @@ class ReleaseHandler extends DefaultHandler {
 
     const release = (
       await getRelease(notification.subject.url, notification.account.token)
-    ).data;
+    );
 
     const user: GitifyNotificationUser = release.author
       ? {

@@ -33,6 +33,7 @@ import {
   FetchPullRequestByNumberDocument,
   type FetchPullRequestByNumberQuery,
 } from './graphql/generated/graphql';
+import * as octokitModule from './octokit';
 import * as apiRequests from './request';
 
 const mockGitHubHostname = 'github.com' as Hostname;
@@ -42,6 +43,20 @@ describe('renderer/utils/api/client.ts', () => {
   const performAuthenticatedRESTRequestSpy = jest.spyOn(
     apiRequests,
     'performAuthenticatedRESTRequest',
+  );
+
+  const mockOctokit = {
+    rest: {
+      activity: {
+        listNotificationsForAuthenticatedUser: jest.fn(),
+      },
+    },
+    paginate: jest.fn(),
+  };
+
+  const createOctokitClientSpy = jest.spyOn(
+    octokitModule,
+    'createOctokitClient',
   );
 
   beforeEach(() => {
@@ -54,6 +69,21 @@ describe('renderer/utils/api/client.ts', () => {
       // biome-ignore lint/suspicious/noExplicitAny: AxiosResponse config type
       config: {} as any,
     });
+
+    // Mock createOctokitClient to return our mock
+    createOctokitClientSpy.mockResolvedValue(mockOctokit as any);
+
+    // Mock Octokit REST method
+    mockOctokit.rest.activity.listNotificationsForAuthenticatedUser.mockResolvedValue(
+      {
+        data: [],
+        status: 200,
+        headers: {},
+      },
+    );
+
+    // Mock paginate
+    mockOctokit.paginate.mockResolvedValue([]);
   });
 
   afterEach(() => {
@@ -83,13 +113,17 @@ describe('renderer/utils/api/client.ts', () => {
         mockSettings as SettingsState,
       );
 
-      expect(performAuthenticatedRESTRequestSpy).toHaveBeenCalledWith(
-        'GET',
-        'https://api.github.com/notifications?participating=true&all=false',
+      expect(createOctokitClientSpy).toHaveBeenCalledWith(
+        mockGitHubCloudAccount.hostname,
         mockGitHubCloudAccount.token,
-        {},
-        false,
       );
+      expect(
+        mockOctokit.rest.activity.listNotificationsForAuthenticatedUser,
+      ).toHaveBeenCalledWith({
+        participating: true,
+        all: false,
+        per_page: 100,
+      });
     });
 
     it('should list participating and watching notifications for user', async () => {
@@ -104,13 +138,13 @@ describe('renderer/utils/api/client.ts', () => {
         mockSettings as SettingsState,
       );
 
-      expect(performAuthenticatedRESTRequestSpy).toHaveBeenCalledWith(
-        'GET',
-        'https://api.github.com/notifications?participating=false&all=false',
-        mockGitHubCloudAccount.token,
-        {},
-        false,
-      );
+      expect(
+        mockOctokit.rest.activity.listNotificationsForAuthenticatedUser,
+      ).toHaveBeenCalledWith({
+        participating: false,
+        all: false,
+        per_page: 100,
+      });
     });
 
     it('should list read and done notifications for user', async () => {
@@ -125,18 +159,16 @@ describe('renderer/utils/api/client.ts', () => {
         mockSettings as SettingsState,
       );
 
-      expect(performAuthenticatedRESTRequestSpy).toHaveBeenCalledWith(
-        'GET',
-        'https://api.github.com/notifications?participating=false&all=true',
-        mockGitHubCloudAccount.token,
-        {},
-        false,
-      );
+      expect(
+        mockOctokit.rest.activity.listNotificationsForAuthenticatedUser,
+      ).toHaveBeenCalledWith({
+        participating: false,
+        all: true,
+        per_page: 100,
+      });
     });
 
     it('should unpaginate notifications list for user', async () => {
-      performAuthenticatedRESTRequestSpy.mockImplementation();
-
       const mockSettings: Partial<SettingsState> = {
         participating: false,
         fetchReadNotifications: false,
@@ -148,12 +180,13 @@ describe('renderer/utils/api/client.ts', () => {
         mockSettings as SettingsState,
       );
 
-      expect(performAuthenticatedRESTRequestSpy).toHaveBeenCalledWith(
-        'GET',
-        'https://api.github.com/notifications?participating=false&all=false',
-        mockGitHubCloudAccount.token,
-        {},
-        true,
+      expect(mockOctokit.paginate).toHaveBeenCalledWith(
+        mockOctokit.rest.activity.listNotificationsForAuthenticatedUser,
+        {
+          participating: false,
+          all: false,
+          per_page: 100,
+        },
       );
     });
   });

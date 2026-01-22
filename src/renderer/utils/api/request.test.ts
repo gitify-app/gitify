@@ -1,5 +1,3 @@
-import type { Octokit } from '@octokit/core';
-
 import { mockToken } from '../../__mocks__/state-mocks';
 import {
   mockAuthHeaders,
@@ -10,6 +8,7 @@ import {
 import type { Link } from '../../types';
 
 import { FetchAuthenticatedUserDetailsDocument } from './graphql/generated/graphql';
+import type { OctokitClient } from './octokit';
 import * as octokitModule from './octokit';
 import {
   getHeaders,
@@ -63,7 +62,7 @@ describe('renderer/utils/api/request.ts', () => {
 
     jest
       .spyOn(octokitModule, 'createOctokitClient')
-      .mockResolvedValue(mockOctokitInstance as unknown as Octokit);
+      .mockResolvedValue(mockOctokitInstance as unknown as OctokitClient);
   });
 
   afterEach(() => {

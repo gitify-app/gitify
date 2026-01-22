@@ -37,6 +37,7 @@ import {
   type FetchPullRequestByNumberQuery,
 } from './graphql/generated/graphql';
 import { MergeQueryBuilder } from './graphql/MergeQueryBuilder';
+import { createOctokitClient } from './octokit';
 import {
   performAuthenticatedRESTRequest,
   performGraphQLRequest,
@@ -72,23 +73,39 @@ export function headNotifications(
  *
  * Endpoint documentation: https://docs.github.com/en/rest/activity/notifications#list-notifications-for-the-authenticated-user
  */
-
-export function listNotificationsForAuthenticatedUser(
+export async function listNotificationsForAuthenticatedUser(
   account: Account,
   settings: SettingsState,
-): Promise<AxiosResponse<ListNotificationsForAuthenticatedUserResponse>> {
-  const url = getGitHubAPIBaseUrl(account.hostname);
-  url.pathname += 'notifications';
-  url.searchParams.append('participating', String(settings.participating));
-  url.searchParams.append('all', String(settings.fetchReadNotifications));
+): Promise<ListNotificationsForAuthenticatedUserResponse> {
+  const octokit = await createOctokitClient(account.hostname, account.token);
 
-  return performAuthenticatedRESTRequest<ListNotificationsForAuthenticatedUserResponse>(
-    'GET',
-    url.toString() as Link,
-    account.token,
-    {},
-    settings.fetchAllNotifications,
-  );
+  if (settings.fetchAllNotifications) {
+    // Fetch all pages using Octokit's pagination
+    return await octokit.paginate(
+      octokit.rest.activity.listNotificationsForAuthenticatedUser,
+      {
+        participating: settings.participating,
+        all: settings.fetchReadNotifications,
+        per_page: 100,
+        headers: {
+          'If-None-Match': '', // Prevent caching
+        },
+      },
+    );
+  }
+
+  // Single page request
+  const response =
+    await octokit.rest.activity.listNotificationsForAuthenticatedUser({
+      participating: settings.participating,
+      all: settings.fetchReadNotifications,
+      per_page: 100,
+      headers: {
+        'If-None-Match': '', // Prevent caching
+      },
+    });
+
+  return response.data;
 }
 
 /**
@@ -98,20 +115,16 @@ export function listNotificationsForAuthenticatedUser(
  * Endpoint documentation: https://docs.github.com/en/rest/activity/notifications#mark-a-thread-as-read
  */
 
-export function markNotificationThreadAsRead(
+export async function markNotificationThreadAsRead(
   threadId: string,
   hostname: Hostname,
   token: Token,
-): Promise<AxiosResponse<MarkNotificationThreadAsReadResponse>> {
-  const url = getGitHubAPIBaseUrl(hostname);
-  url.pathname += `notifications/threads/${threadId}`;
+): Promise<MarkNotificationThreadAsReadResponse> {
+  const octokit = await createOctokitClient(hostname, token);
 
-  return performAuthenticatedRESTRequest<MarkNotificationThreadAsReadResponse>(
-    'PATCH',
-    url.toString() as Link,
-    token,
-    {},
-  );
+  await octokit.rest.activity.markThreadAsRead({
+    thread_id: Number(threadId),
+  });
 }
 
 /**
@@ -122,20 +135,16 @@ export function markNotificationThreadAsRead(
  *
  * Endpoint documentation: https://docs.github.com/en/rest/activity/notifications#mark-a-thread-as-done
  */
-export function markNotificationThreadAsDone(
+export async function markNotificationThreadAsDone(
   threadId: string,
   hostname: Hostname,
   token: Token,
-): Promise<AxiosResponse<MarkNotificationThreadAsDoneResponse>> {
-  const url = getGitHubAPIBaseUrl(hostname);
-  url.pathname += `notifications/threads/${threadId}`;
+): Promise<MarkNotificationThreadAsDoneResponse> {
+  const octokit = await createOctokitClient(hostname, token);
 
-  return performAuthenticatedRESTRequest<MarkNotificationThreadAsDoneResponse>(
-    'DELETE',
-    url.toString() as Link,
-    token,
-    {},
-  );
+  await octokit.rest.activity.markThreadAsRead({
+    thread_id: Number(threadId),
+  });
 }
 
 /**
@@ -143,22 +152,19 @@ export function markNotificationThreadAsDone(
  *
  * Endpoint documentation: https://docs.github.com/en/rest/activity/notifications#delete-a-thread-subscription
  */
-export function ignoreNotificationThreadSubscription(
+export async function ignoreNotificationThreadSubscription(
   threadId: string,
   hostname: Hostname,
   token: Token,
-): Promise<AxiosResponse<IgnoreNotificationThreadSubscriptionResponse>> {
-  const url = getGitHubAPIBaseUrl(hostname);
-  url.pathname += `notifications/threads/${threadId}/subscription`;
+): Promise<IgnoreNotificationThreadSubscriptionResponse> {
+  const octokit = await createOctokitClient(hostname, token);
 
-  return performAuthenticatedRESTRequest<IgnoreNotificationThreadSubscriptionResponse>(
-    'PUT',
-    url.toString() as Link,
-    token,
-    {
-      ignored: true,
-    },
-  );
+  const response = await octokit.rest.activity.setThreadSubscription({
+    thread_id: Number(threadId),
+    ignored: true,
+  });
+
+  return response.data;
 }
 
 /**
@@ -166,11 +172,20 @@ export function ignoreNotificationThreadSubscription(
  *
  * Endpoint documentation: https://docs.github.com/en/rest/commits/commits#get-a-commit
  */
-export function getCommit(
-  url: Link,
+export async function getCommit(
+  _url: Link,
   token: Token,
-): Promise<AxiosResponse<GetCommitResponse>> {
-  return performAuthenticatedRESTRequest<GetCommitResponse>('GET', url, token);
+): Promise<GetCommitResponse> {
+  // TODO remove hard coded host and vars
+  const octokit = await createOctokitClient('github.com' as Hostname, token);
+
+  const response = await octokit.rest.repos.getCommit({
+    owner: 'foo',
+    repo: 'bar',
+    ref: 'foo',
+  });
+
+  return response.data;
 }
 
 /**
@@ -178,15 +193,20 @@ export function getCommit(
  *
  * Endpoint documentation: https://docs.github.com/en/rest/commits/comments#get-a-commit-comment
  */
-export function getCommitComment(
-  url: Link,
+export async function getCommitComment(
+  _url: Link,
   token: Token,
-): Promise<AxiosResponse<GetCommitCommentResponse>> {
-  return performAuthenticatedRESTRequest<GetCommitCommentResponse>(
-    'GET',
-    url,
-    token,
-  );
+): Promise<GetCommitCommentResponse> {
+  // TODO remove hard coded host and vars
+  const octokit = await createOctokitClient('github.com' as Hostname, token);
+
+  const response = await octokit.rest.repos.getCommitComment({
+    owner: 'foo', 
+    repo: 'bar',
+    comment_id: Number('123')
+  });
+
+  return response.data;
 }
 
 /**
@@ -194,11 +214,28 @@ export function getCommitComment(
  *
  * Endpoint documentation: https://docs.github.com/en/rest/releases/releases#get-a-release
  */
-export function getRelease(
+export async function getRelease(
   url: Link,
   token: Token,
-): Promise<AxiosResponse<GetReleaseResponse>> {
-  return performAuthenticatedRESTRequest<GetReleaseResponse>('GET', url, token);
+): Promise<GetReleaseResponse> {
+   // TODO remove hard coded host and vars
+
+  // Take the url and parse it based on this format
+  // /repos/{owner}/{repo}/releases/{release_id}
+  // into matched groups
+
+  
+  
+  
+  const octokit = await createOctokitClient('github.com' as Hostname, token);
+
+  const response = await octokit.rest.repos.getRelease({
+    owner: 'foo', 
+    repo: 'bar',
+    release_id: Number('123')
+  });
+
+  return response.data;
 }
 
 /**
