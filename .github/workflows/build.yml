@@ -7,98 +7,52 @@ permissions:
   contents: read
 
 jobs:
-  build-macos:
-    name: Build macOS (electron-builder)
-    runs-on: macos-latest
+  build:
+    name: Build ${{ matrix.platform }} (electron-builder)
+    strategy:
+      matrix:
+        include:
+          - os: macos-latest
+            platform: macOS
+            package-cmd: pnpm package:macos --publish=never -c.mac.identity=null
+            cleanup-path: dist/mac-universal
+            artifact-name: Gitify-dist-mac
+          - os: windows-latest
+            platform: Windows
+            package-cmd: pnpm package:win --publish=never
+            cleanup-path: dist/win-unpacked
+            artifact-name: Gitify-dist-win
+          - os: ubuntu-latest
+            platform: Linux
+            package-cmd: pnpm package:linux --publish=never
+            cleanup-path: dist/linux-unpacked
+            artifact-name: Gitify-dist-linux
+    runs-on: ${{ matrix.os }}
 
     steps:
       - name: Checkout
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4.2.0
-      
-      - name: Setup Node
-        uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
-        with:
-          node-version-file: '.nvmrc'
-          cache: 'pnpm'
-      
-      - run: pnpm install
-      - run: pnpm build
-      - run: pnpm package:macos --publish=never -c.mac.identity=null
+      - name: Setup Node.js
+        uses: ./.github/actions/setup-node
+
+      - name: Build application
+        run: pnpm build
+
+      - name: Package for ${{ matrix.platform }}
+        run: ${{ matrix.package-cmd }}
         env:
+          # For macOS
           CSC_LINK: ${{ secrets.CSC_LINK }}
           CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
-      
+
       - name: Clean up builds
-        run: rm -rfv dist/mac-universal
-      
+        shell: bash
+        run: rm -rfv ${{ matrix.cleanup-path }}
+
       - name: Upload artifacts
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
         with:
-          name: Gitify-dist-mac
+          name: ${{ matrix.artifact-name }}
           path: dist/
-          overwrite: true
-
-  build-windows:
-    name: Build Windows (electron-builder)
-    runs-on: windows-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4.2.0
-      
-      - name: Setup Node
-        uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
-        with:
-          node-version-file: '.nvmrc'
-          cache: 'pnpm'
-      
-      - run: pnpm install
-      - run: pnpm build
-      - run: pnpm package:win --publish=never
-      
-      - name: Clean up builds
-        run: Remove-Item dist/win-unpacked -Recurse
-      
-      - name: Upload artifacts
-        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
-        with:
-          name: Gitify-dist-win
-          path: dist
-          overwrite: true
-
-  build-linux:
-    name: Build Linux (electron-builder)
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4.2.0
-      
-      - name: Setup Node
-        uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
-        with:
-          node-version-file: '.nvmrc'
-          cache: 'pnpm'
-      
-      - run: pnpm install
-      - run: pnpm build
-      - run: pnpm package:linux --publish=never
-      
-      - name: Clean up builds
-        run: rm -rfv dist/linux-unpacked
-      
-      - name: Upload artifacts
-        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
-        with:
-          name: Gitify-dist-linux
-          path: dist
           overwrite: true

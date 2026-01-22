@@ -42,7 +42,7 @@ Gitify is a Node.js/Electron desktop application that displays GitHub notificati
   - NOTE: Some existing snapshot tests may fail but still return success - this is normal
   - Update snapshots after legitimate UI changes with `pnpm test -u`
 - **Run tests with coverage** (CI format):
-  - `pnpm test --coverage --runInBand --verbose`
+  - `pnpm test --verbose`
 
 ## Validation Scenarios
 
