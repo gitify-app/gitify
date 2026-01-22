@@ -11,7 +11,7 @@ import { openRepository } from '../../utils/links';
 import { isGroupByDate } from '../../utils/notifications/group';
 import { AvatarWithFallback } from '../avatars/AvatarWithFallback';
 
-interface NotificationHeaderProps {
+export interface NotificationHeaderProps {
   notification: GitifyNotification;
 }
 

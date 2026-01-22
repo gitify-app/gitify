@@ -2,13 +2,15 @@ import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { renderWithAppContext } from '../../__helpers__/test-utils';
-import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
 import { mockGitifyNotification } from '../../__mocks__/notifications-mocks';
 
 import type { GitifyNotificationUser, Link } from '../../types';
 
 import * as comms from '../../utils/comms';
-import { NotificationFooter } from './NotificationFooter';
+import {
+  NotificationFooter,
+  type NotificationFooterProps,
+} from './NotificationFooter';
 
 describe('renderer/components/notifications/NotificationFooter.tsx', () => {
   jest
@@ -20,7 +22,7 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
   });
 
   it('should render itself & its children', async () => {
-    const props = {
+    const props: NotificationFooterProps = {
       notification: mockGitifyNotification,
     };
 
@@ -34,7 +36,7 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
       const mockNotification = mockGitifyNotification;
       mockNotification.subject.type = 'RepositoryDependabotAlertsThread';
 
-      const props = {
+      const props: NotificationFooterProps = {
         notification: mockNotification,
       };
 
@@ -47,7 +49,7 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
       const mockNotification = mockGitifyNotification;
       mockNotification.subject.type = 'RepositoryVulnerabilityAlert';
 
-      const props = {
+      const props: NotificationFooterProps = {
         notification: mockNotification,
       };
 
@@ -61,7 +63,7 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
     const mockNotification = mockGitifyNotification;
     mockNotification.subject.user = null;
 
-    const props = {
+    const props: NotificationFooterProps = {
       notification: mockNotification,
     };
 
@@ -75,7 +77,7 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
       .spyOn(comms, 'openExternalLink')
       .mockImplementation();
 
-    const props = {
+    const props: NotificationFooterProps = {
       notification: {
         ...mockGitifyNotification,
         subject: {
@@ -90,7 +92,6 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
           reviews: null,
         },
       },
-      account: mockGitHubCloudAccount,
     };
 
     renderWithAppContext(<NotificationFooter {...props} />);

@@ -16,14 +16,31 @@ import type {
  * Creates a mock raw user [REST API]
  */
 export function mockRawUser(login: string): RawUser {
-  const mockUser: Partial<RawUser> = {
-    login: login,
+  return {
+    login,
+    id: 1,
+    node_id: 'MDQ6VXNlcjE=',
+    avatar_url: 'https://avatars.githubusercontent.com/u/1?v=4' as Link,
+    gravatar_id: '',
+    url: `https://api.github.com/users/${login}` as Link,
     html_url: `https://github.com/${login}` as Link,
-    avatar_url: 'https://avatars.githubusercontent.com/u/583231?v=4' as Link,
+    followers_url: `https://api.github.com/users/${login}/followers` as Link,
+    following_url:
+      `https://api.github.com/users/${login}/following{/other_user}` as Link,
+    gists_url: `https://api.github.com/users/${login}/gists{/gist_id}` as Link,
+    starred_url:
+      `https://api.github.com/users/${login}/starred{/owner}{/repo}` as Link,
+    subscriptions_url:
+      `https://api.github.com/users/${login}/subscriptions` as Link,
+    organizations_url: `https://api.github.com/users/${login}/orgs` as Link,
+    repos_url: `https://api.github.com/users/${login}/repos` as Link,
+    events_url:
+      `https://api.github.com/users/${login}/events{/privacy}` as Link,
+    received_events_url:
+      `https://api.github.com/users/${login}/received_events` as Link,
     type: 'User',
-  };
-
-  return mockUser as RawUser;
+    site_admin: false,
+  } satisfies RawUser;
 }
 
 /**
@@ -40,7 +57,7 @@ export function mockAuthorResponseNode(login: string): AuthorFieldsFragment {
     avatarUrl: 'https://avatars.githubusercontent.com/u/583231?v=4' as Link,
     type: 'User',
     __typename: 'User',
-  } as AuthorFieldsFragment;
+  } satisfies AuthorFieldsFragment;
 }
 
 /**
@@ -63,7 +80,7 @@ export function mockDiscussionResponseNode(mocks: {
       totalCount: 0,
     },
     labels: null,
-  };
+  } satisfies DiscussionDetailsFragment;
 }
 
 /**
@@ -84,7 +101,7 @@ export function mockIssueResponseNode(mocks: {
     labels: { nodes: [] },
     comments: { totalCount: 0, nodes: [] },
     milestone: null,
-  };
+  } satisfies IssueDetailsFragment;
 }
 
 /**
@@ -119,5 +136,5 @@ export function mockPullRequestResponseNode(mocks: {
     closingIssuesReferences: {
       nodes: [],
     },
-  };
+  } satisfies PullRequestDetailsFragment;
 }

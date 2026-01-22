@@ -17,7 +17,10 @@ import {
   type Link,
 } from '../../../types';
 
-import type { PullRequestReviewState } from '../../api/graphql/generated/graphql';
+import type {
+  FetchPullRequestByNumberQuery,
+  PullRequestReviewState,
+} from '../../api/graphql/generated/graphql';
 import { getLatestReviewForReviewers, pullRequestHandler } from './pullRequest';
 
 describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
@@ -52,7 +55,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
             repository: {
               pullRequest: mockPullRequest,
             },
-          },
+          } satisfies FetchPullRequestByNumberQuery,
         });
 
       const result = await pullRequestHandler.enrich(
@@ -74,8 +77,9 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         linkedIssues: [],
         commentCount: 0,
         milestone: null,
-        htmlUrl: 'https://github.com/gitify-app/notifications-test/pulls/123',
-      } as Partial<GitifySubject>);
+        htmlUrl:
+          'https://github.com/gitify-app/notifications-test/pulls/123' as Link,
+      } satisfies Partial<GitifySubject>);
     });
 
     it('draft pull request state', async () => {
@@ -91,7 +95,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
             repository: {
               pullRequest: mockPullRequest,
             },
-          },
+          } satisfies FetchPullRequestByNumberQuery,
         });
 
       const result = await pullRequestHandler.enrich(
@@ -113,8 +117,9 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         linkedIssues: [],
         commentCount: 0,
         milestone: null,
-        htmlUrl: 'https://github.com/gitify-app/notifications-test/pulls/123',
-      } as Partial<GitifySubject>);
+        htmlUrl:
+          'https://github.com/gitify-app/notifications-test/pulls/123' as Link,
+      } satisfies Partial<GitifySubject>);
     });
 
     it('merge queue pull request state', async () => {
@@ -130,7 +135,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
             repository: {
               pullRequest: mockPullRequest,
             },
-          },
+          } satisfies FetchPullRequestByNumberQuery,
         });
 
       const result = await pullRequestHandler.enrich(
@@ -152,8 +157,9 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         linkedIssues: [],
         commentCount: 0,
         milestone: null,
-        htmlUrl: 'https://github.com/gitify-app/notifications-test/pulls/123',
-      } as Partial<GitifySubject>);
+        htmlUrl:
+          'https://github.com/gitify-app/notifications-test/pulls/123' as Link,
+      } satisfies Partial<GitifySubject>);
     });
 
     it('merged pull request state', async () => {
@@ -169,7 +175,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
             repository: {
               pullRequest: mockPullRequest,
             },
-          },
+          } satisfies FetchPullRequestByNumberQuery,
         });
 
       const result = await pullRequestHandler.enrich(
@@ -191,8 +197,9 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         linkedIssues: [],
         commentCount: 0,
         milestone: null,
-        htmlUrl: 'https://github.com/gitify-app/notifications-test/pulls/123',
-      } as Partial<GitifySubject>);
+        htmlUrl:
+          'https://github.com/gitify-app/notifications-test/pulls/123' as Link,
+      } satisfies Partial<GitifySubject>);
     });
 
     it('with comments', async () => {
@@ -216,7 +223,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
             repository: {
               pullRequest: mockPullRequest,
             },
-          },
+          } satisfies FetchPullRequestByNumberQuery,
         });
 
       const result = await pullRequestHandler.enrich(
@@ -239,8 +246,8 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         commentCount: 1,
         milestone: null,
         htmlUrl:
-          'https://github.com/gitify-app/notifications-test/pulls/123#issuecomment-1234',
-      } as Partial<GitifySubject>);
+          'https://github.com/gitify-app/notifications-test/pulls/123#issuecomment-1234' as Link,
+      } satisfies Partial<GitifySubject>);
     });
 
     it('with labels', async () => {
@@ -262,7 +269,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
             repository: {
               pullRequest: mockPullRequest,
             },
-          },
+          } satisfies FetchPullRequestByNumberQuery,
         });
 
       const result = await pullRequestHandler.enrich(
@@ -284,8 +291,9 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         linkedIssues: [],
         commentCount: 0,
         milestone: null,
-        htmlUrl: 'https://github.com/gitify-app/notifications-test/pulls/123',
-      } as Partial<GitifySubject>);
+        htmlUrl:
+          'https://github.com/gitify-app/notifications-test/pulls/123' as Link,
+      } satisfies Partial<GitifySubject>);
     });
 
     it('with linked issues', async () => {
@@ -307,7 +315,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
             repository: {
               pullRequest: mockPullRequest,
             },
-          },
+          } satisfies FetchPullRequestByNumberQuery,
         });
 
       const result = await pullRequestHandler.enrich(
@@ -329,8 +337,9 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         linkedIssues: ['#789'],
         commentCount: 0,
         milestone: null,
-        htmlUrl: 'https://github.com/gitify-app/notifications-test/pulls/123',
-      } as Partial<GitifySubject>);
+        htmlUrl:
+          'https://github.com/gitify-app/notifications-test/pulls/123' as Link,
+      } satisfies Partial<GitifySubject>);
     });
 
     it('with milestone', async () => {
@@ -349,7 +358,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
             repository: {
               pullRequest: mockPullRequest,
             },
-          },
+          } satisfies FetchPullRequestByNumberQuery,
         });
 
       const result = await pullRequestHandler.enrich(
@@ -374,8 +383,9 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
           state: 'OPEN',
           title: 'Open Milestone',
         },
-        htmlUrl: 'https://github.com/gitify-app/notifications-test/pulls/123',
-      } as Partial<GitifySubject>);
+        htmlUrl:
+          'https://github.com/gitify-app/notifications-test/pulls/123' as Link,
+      } satisfies Partial<GitifySubject>);
     });
   });
 

@@ -83,9 +83,7 @@ export const FilterSection = <T extends FilterSettingsValue>({
                 key={type as string}
                 label={typeTitle}
                 name={typeTitle}
-                onChange={(evt) =>
-                  updateFilter(filterSetting, type, evt.target.checked)
-                }
+                onChange={() => updateFilter(filterSetting, type, !isChecked)}
                 tooltip={
                   typeDescription ? <Text>{typeDescription}</Text> : null
                 }

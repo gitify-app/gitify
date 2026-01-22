@@ -7,6 +7,8 @@ import type {
 } from '../../../types';
 import type { Filter } from './types';
 
+type FilterableUserType = Extract<UserType, 'User' | 'Bot' | 'Organization'>;
+
 const USER_TYPE_DETAILS: Record<UserType, TypeDetails> = {
   User: {
     title: 'User',
@@ -18,7 +20,10 @@ const USER_TYPE_DETAILS: Record<UserType, TypeDetails> = {
   Organization: {
     title: 'Organization',
   },
-} as Partial<Record<UserType, TypeDetails>> as Record<UserType, TypeDetails>;
+} satisfies Partial<Record<FilterableUserType, TypeDetails>> as Record<
+  UserType,
+  TypeDetails
+>;
 
 export const userTypeFilter: Filter<UserType> = {
   FILTER_TYPES: USER_TYPE_DETAILS,

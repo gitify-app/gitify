@@ -1,3 +1,5 @@
+import type { DeepPartial } from '../../../__helpers__/test-utils';
+
 import type {
   FilterStateType,
   GitifyNotification,
@@ -14,7 +16,7 @@ describe('renderer/utils/notifications/filters/state.ts', () => {
   describe('can filter by notification states', () => {
     const mockNotification = {
       subject: { state: 'OPEN' },
-    } as Partial<GitifyNotification> as GitifyNotification;
+    } satisfies DeepPartial<GitifyNotification> as GitifyNotification;
 
     const cases = {
       OPEN: 'open',

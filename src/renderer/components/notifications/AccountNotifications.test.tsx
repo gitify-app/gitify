@@ -12,7 +12,10 @@ import { mockSettings } from '../../__mocks__/state-mocks';
 import { GroupBy } from '../../types';
 
 import * as links from '../../utils/links';
-import { AccountNotifications } from './AccountNotifications';
+import {
+  AccountNotifications,
+  type AccountNotificationsProps,
+} from './AccountNotifications';
 
 jest.mock('./RepositoryNotifications', () => ({
   RepositoryNotifications: () => <div>RepositoryNotifications</div>,
@@ -24,7 +27,7 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
   });
 
   it('should render itself - group notifications by repositories', () => {
-    const props = {
+    const props: AccountNotificationsProps = {
       account: mockGitHubCloudAccount,
       notifications: mockGitHubCloudGitifyNotifications,
       showAccountHeader: true,
@@ -39,7 +42,7 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
   });
 
   it('should render itself - group notifications by date', () => {
-    const props = {
+    const props: AccountNotificationsProps = {
       account: mockGitHubCloudAccount,
       notifications: mockGitHubCloudGitifyNotifications,
       showAccountHeader: true,
@@ -54,7 +57,7 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
   });
 
   it('should render itself - no notifications', async () => {
-    const props = {
+    const props: AccountNotificationsProps = {
       account: mockGitHubCloudAccount,
       notifications: [],
       showAccountHeader: true,
@@ -71,7 +74,7 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
   });
 
   it('should render itself - account error for single account', async () => {
-    const props = {
+    const props: AccountNotificationsProps = {
       account: mockGitHubCloudAccount,
       notifications: [],
       error: {
@@ -94,7 +97,7 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
   });
 
   it('should render itself - account error for multiple accounts', async () => {
-    const props = {
+    const props: AccountNotificationsProps = {
       account: mockGitHubCloudAccount,
       notifications: [],
       error: {
@@ -119,7 +122,7 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
       .spyOn(links, 'openAccountProfile')
       .mockImplementation();
 
-    const props = {
+    const props: AccountNotificationsProps = {
       account: mockGitHubCloudAccount,
       notifications: [],
       showAccountHeader: true,
@@ -139,7 +142,7 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
       .spyOn(links, 'openGitHubIssues')
       .mockImplementation();
 
-    const props = {
+    const props: AccountNotificationsProps = {
       account: mockGitHubCloudAccount,
       notifications: [],
       showAccountHeader: true,
@@ -161,7 +164,7 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
       .spyOn(links, 'openGitHubPulls')
       .mockImplementation();
 
-    const props = {
+    const props: AccountNotificationsProps = {
       account: mockGitHubCloudAccount,
       notifications: [],
       showAccountHeader: true,
@@ -179,7 +182,7 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
   });
 
   it('should toggle account notifications visibility', async () => {
-    const props = {
+    const props: AccountNotificationsProps = {
       account: mockGitHubCloudAccount,
       notifications: mockGitHubCloudGitifyNotifications,
       showAccountHeader: true,

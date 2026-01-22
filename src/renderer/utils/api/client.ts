@@ -12,12 +12,15 @@ import type {
 } from '../../types';
 import type { GitHubGraphQLResponse } from './graphql/types';
 import type {
+  GetCommitCommentResponse,
+  GetCommitResponse,
+  GetReleaseResponse,
   GitHubHtmlUrlResponse,
-  NotificationThreadSubscription,
-  RawCommit,
-  RawCommitComment,
-  RawGitHubNotification,
-  RawRelease,
+  HeadNotificationsResponse,
+  IgnoreNotificationThreadSubscriptionResponse,
+  ListNotificationsForAuthenticatedUserResponse,
+  MarkNotificationThreadAsDoneResponse,
+  MarkNotificationThreadAsReadResponse,
 } from './types';
 
 import { isAnsweredDiscussionFeatureSupported } from '../features';
@@ -53,11 +56,11 @@ import {
 export function headNotifications(
   hostname: Hostname,
   token: Token,
-): Promise<AxiosResponse<void>> {
+): Promise<AxiosResponse<HeadNotificationsResponse>> {
   const url = getGitHubAPIBaseUrl(hostname);
   url.pathname += 'notifications';
 
-  return performAuthenticatedRESTRequest<void>(
+  return performAuthenticatedRESTRequest<HeadNotificationsResponse>(
     'HEAD',
     url.toString() as Link,
     token,
@@ -69,16 +72,17 @@ export function headNotifications(
  *
  * Endpoint documentation: https://docs.github.com/en/rest/activity/notifications#list-notifications-for-the-authenticated-user
  */
+
 export function listNotificationsForAuthenticatedUser(
   account: Account,
   settings: SettingsState,
-): Promise<AxiosResponse<RawGitHubNotification[]>> {
+): Promise<AxiosResponse<ListNotificationsForAuthenticatedUserResponse>> {
   const url = getGitHubAPIBaseUrl(account.hostname);
   url.pathname += 'notifications';
   url.searchParams.append('participating', String(settings.participating));
   url.searchParams.append('all', String(settings.fetchReadNotifications));
 
-  return performAuthenticatedRESTRequest<RawGitHubNotification[]>(
+  return performAuthenticatedRESTRequest<ListNotificationsForAuthenticatedUserResponse>(
     'GET',
     url.toString() as Link,
     account.token,
@@ -93,15 +97,16 @@ export function listNotificationsForAuthenticatedUser(
  *
  * Endpoint documentation: https://docs.github.com/en/rest/activity/notifications#mark-a-thread-as-read
  */
+
 export function markNotificationThreadAsRead(
   threadId: string,
   hostname: Hostname,
   token: Token,
-): Promise<AxiosResponse<void>> {
+): Promise<AxiosResponse<MarkNotificationThreadAsReadResponse>> {
   const url = getGitHubAPIBaseUrl(hostname);
   url.pathname += `notifications/threads/${threadId}`;
 
-  return performAuthenticatedRESTRequest<void>(
+  return performAuthenticatedRESTRequest<MarkNotificationThreadAsReadResponse>(
     'PATCH',
     url.toString() as Link,
     token,
@@ -121,11 +126,11 @@ export function markNotificationThreadAsDone(
   threadId: string,
   hostname: Hostname,
   token: Token,
-): Promise<AxiosResponse<void>> {
+): Promise<AxiosResponse<MarkNotificationThreadAsDoneResponse>> {
   const url = getGitHubAPIBaseUrl(hostname);
   url.pathname += `notifications/threads/${threadId}`;
 
-  return performAuthenticatedRESTRequest<void>(
+  return performAuthenticatedRESTRequest<MarkNotificationThreadAsDoneResponse>(
     'DELETE',
     url.toString() as Link,
     token,
@@ -142,11 +147,11 @@ export function ignoreNotificationThreadSubscription(
   threadId: string,
   hostname: Hostname,
   token: Token,
-): Promise<AxiosResponse<NotificationThreadSubscription>> {
+): Promise<AxiosResponse<IgnoreNotificationThreadSubscriptionResponse>> {
   const url = getGitHubAPIBaseUrl(hostname);
   url.pathname += `notifications/threads/${threadId}/subscription`;
 
-  return performAuthenticatedRESTRequest<NotificationThreadSubscription>(
+  return performAuthenticatedRESTRequest<IgnoreNotificationThreadSubscriptionResponse>(
     'PUT',
     url.toString() as Link,
     token,
@@ -164,21 +169,24 @@ export function ignoreNotificationThreadSubscription(
 export function getCommit(
   url: Link,
   token: Token,
-): Promise<AxiosResponse<RawCommit>> {
-  return performAuthenticatedRESTRequest<RawCommit>('GET', url, token);
+): Promise<AxiosResponse<GetCommitResponse>> {
+  return performAuthenticatedRESTRequest<GetCommitResponse>('GET', url, token);
 }
 
 /**
  * Gets a specified commit comment.
- * 
+ *
  * Endpoint documentation: https://docs.github.com/en/rest/commits/comments#get-a-commit-comment
-
  */
 export function getCommitComment(
   url: Link,
   token: Token,
-): Promise<AxiosResponse<RawCommitComment>> {
-  return performAuthenticatedRESTRequest<RawCommitComment>('GET', url, token);
+): Promise<AxiosResponse<GetCommitCommentResponse>> {
+  return performAuthenticatedRESTRequest<GetCommitCommentResponse>(
+    'GET',
+    url,
+    token,
+  );
 }
 
 /**
@@ -189,12 +197,13 @@ export function getCommitComment(
 export function getRelease(
   url: Link,
   token: Token,
-): Promise<AxiosResponse<RawRelease>> {
-  return performAuthenticatedRESTRequest<RawRelease>('GET', url, token);
+): Promise<AxiosResponse<GetReleaseResponse>> {
+  return performAuthenticatedRESTRequest<GetReleaseResponse>('GET', url, token);
 }
 
 /**
  * Get the `html_url` from the GitHub response
+ *
  */
 export async function getHtmlUrl(
   url: Link,

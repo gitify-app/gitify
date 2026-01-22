@@ -1,4 +1,5 @@
 import type { components } from '@octokit/openapi-types';
+import type { Endpoints } from '@octokit/types';
 
 import type { Link } from '../../types';
 
@@ -7,16 +8,23 @@ export interface GitHubRESTError {
   documentation_url: Link;
 }
 
-export type NotificationThreadSubscription =
-  components['schemas']['thread-subscription'];
+export type ListNotificationsForAuthenticatedUserResponse =
+  Endpoints['GET /notifications']['response']['data'];
 
-export type RawCommit = components['schemas']['commit'];
+export type IgnoreNotificationThreadSubscriptionResponse =
+  Endpoints['PUT /notifications/threads/{thread_id}/subscription']['response']['data'];
 
-export type RawCommitComment = components['schemas']['commit-comment'];
+export type GetCommitResponse =
+  Endpoints['GET /repos/{owner}/{repo}/commits/{ref}']['response']['data'];
 
-export type RawGitHubNotification = components['schemas']['thread'];
+export type GetCommitCommentResponse =
+  Endpoints['GET /repos/{owner}/{repo}/comments/{comment_id}']['response']['data'];
 
-export type RawRelease = components['schemas']['release'];
+export type GetReleaseResponse =
+  Endpoints['GET /repos/{owner}/{repo}/releases/{release_id}']['response']['data'];
+
+export type RawGitHubNotification =
+  Endpoints['GET /notifications']['response']['data'][number];
 
 export type RawUser = components['schemas']['simple-user'];
 
@@ -28,3 +36,18 @@ export type RawUser = components['schemas']['simple-user'];
 export type GitHubHtmlUrlResponse = {
   html_url: string;
 };
+
+/**
+ * These API endpoints don't return a response body:
+ *  - HEAD /notifications
+ *  - Endpoints['PATCH /notifications/threads/{thread_id}']['response']['data']
+ *  - Endpoints['DELETE /notifications/threads/{thread_id}']['response']['data']
+ */
+// biome-ignore lint/suspicious/noConfusingVoidType: This endpoint has no response body
+export type HeadNotificationsResponse = void;
+
+// biome-ignore lint/suspicious/noConfusingVoidType: This endpoint has no response body
+export type MarkNotificationThreadAsReadResponse = void;
+
+// biome-ignore lint/suspicious/noConfusingVoidType: This endpoint has no response body
+export type MarkNotificationThreadAsDoneResponse = void;

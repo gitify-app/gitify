@@ -11,12 +11,14 @@ export interface TooltipProps {
 }
 
 export const Tooltip: FC<TooltipProps> = (props: TooltipProps) => {
-  const [showTooltip, setShowTooltip] = useState(false);
+  const [shouldShowTooltipContents, setShouldShowTooltipContents] =
+    useState(false);
+
   const scrollContainerRef = useRef<HTMLElement | null>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!showTooltip) {
+    if (!shouldShowTooltipContents) {
       return;
     }
 
@@ -42,7 +44,7 @@ export const Tooltip: FC<TooltipProps> = (props: TooltipProps) => {
     scrollContainerRef.current = findScrollContainer(tooltipButton);
 
     const handleScroll = () => {
-      setShowTooltip(false);
+      setShouldShowTooltipContents(false);
     };
 
     const handleClickOutside = (event: MouseEvent) => {
@@ -51,7 +53,7 @@ export const Tooltip: FC<TooltipProps> = (props: TooltipProps) => {
         !overlayRef.current.contains(event.target as Node) &&
         !tooltipButton?.contains(event.target as Node)
       ) {
-        setShowTooltip(false);
+        setShouldShowTooltipContents(false);
       }
     };
 
@@ -67,19 +69,21 @@ export const Tooltip: FC<TooltipProps> = (props: TooltipProps) => {
       }
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [showTooltip, props.name]);
+  }, [shouldShowTooltipContents, props.name]);
 
   return (
     <AnchoredOverlay
       align="center"
-      open={showTooltip}
+      open={shouldShowTooltipContents}
       renderAnchor={(anchorProps) => (
         <button
           {...anchorProps}
           aria-label={props.name}
           data-testid={`tooltip-icon-${props.name}`}
           id={props.name}
-          onClick={() => setShowTooltip(!showTooltip)}
+          onClick={() =>
+            setShouldShowTooltipContents(!shouldShowTooltipContents)
+          }
           type="button"
         >
           <QuestionIcon className="text-gitify-tooltip-icon" />
