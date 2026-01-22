@@ -2,7 +2,7 @@ name: Website
 
 on:
   push:
-    tags: 
+    tags:
       - v*.*.*
   workflow_dispatch: # For manually verify website deployment
 
@@ -15,4 +15,3 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: curl -X POST -d {} ${{ secrets.NETLIFY_BUILD_HOOK_URL }}
-        
