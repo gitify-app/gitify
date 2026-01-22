@@ -18,6 +18,7 @@ export const Constants = {
 
   GITHUB_API_BASE_URL: 'https://api.github.com',
   GITHUB_API_GRAPHQL_URL: 'https://api.github.com/graphql',
+  GITHUB_API_MERGE_BATCH_SIZE: 100,
 
   ALL_READ_EMOJIS: ['🎉', '🎊', '🥳', '👏', '🙌', '😎', '🏖️', '🚀', '✨', '🏆'],
 
