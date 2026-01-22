@@ -40,6 +40,10 @@ export const RepositoryNotifications: FC<RepositoryNotificationsProps> = ({
   const avatarUrl = repoNotifications[0].repository.owner.avatarUrl;
   const shouldAnimateExit = shouldRemoveNotificationsFromState(settings);
 
+  const actionRepositoryInteraction = () => {
+    openRepository(repoNotifications[0].repository);
+  };
+
   const actionMarkAsDone = () => {
     setShouldAnimateRepositoryExit(shouldAnimateExit);
     markNotificationsAsDone(repoNotifications);
@@ -84,7 +88,7 @@ export const RepositoryNotifications: FC<RepositoryNotificationsProps> = ({
           onClick={(event: MouseEvent<HTMLElement>) => {
             // Don't trigger onClick of parent element.
             event.stopPropagation();
-            openRepository(repoNotifications[0].repository);
+            actionRepositoryInteraction();
           }}
           title="Open repository ↗"
           variant="invisible"
