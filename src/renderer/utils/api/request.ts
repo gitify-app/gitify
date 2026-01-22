@@ -1,7 +1,13 @@
-import type { AxiosPromise, Method } from 'axios';
+import axios, {
+  type AxiosPromise,
+  type AxiosResponse,
+  type Method,
+} from 'axios';
 
+import { logError, logWarn } from '../../../shared/logger';
 import type { Link, Token } from '../../types';
-import { octokitRequest, octokitRequestAuth } from './octokit-request';
+import { decryptValue } from '../comms';
+import { getNextURLFromLinkHeader } from './utils';
 
 /**
  * Perform an unauthenticated API request
@@ -15,9 +21,11 @@ export function apiRequest(
   url: Link,
   method: Method,
   data = {},
-): AxiosPromise<any> {
-  // Use Octokit for new requests
-  return octokitRequest(url, method as any, data) as any;
+): AxiosPromise | null {
+  axios.defaults.headers.common.Accept = 'application/json';
+  axios.defaults.headers.common['Content-Type'] = 'application/json';
+  axios.defaults.headers.common['Cache-Control'] = 'no-cache';
+  return axios({ method, url, data });
 }
 
 /**
@@ -36,7 +44,70 @@ export async function apiRequestAuth(
   token: Token,
   data = {},
   fetchAllRecords = false,
-): Promise<any> {
-  // Use Octokit for new requests
-  return octokitRequestAuth(url, method as any, token, data, fetchAllRecords) as any;
+): AxiosPromise | null {
+  let apiToken = token;
+  // TODO - Remove this try-catch block in a future release
+  try {
+    apiToken = (await decryptValue(token)) as Token;
+  } catch (err) {
+    logWarn('apiRequestAuth', 'Token is not yet encrypted');
+  }
+
+  axios.defaults.headers.common.Accept = 'application/json';
+  axios.defaults.headers.common.Authorization = `token ${apiToken}`;
+  axios.defaults.headers.common['Content-Type'] = 'application/json';
+  axios.defaults.headers.common['Cache-Control'] = shouldRequestWithNoCache(url)
+    ? 'no-cache'
+    : '';
+
+  if (!fetchAllRecords) {
+    return axios({ method, url, data });
+  }
+
+  let response: AxiosResponse | null = null;
+  let combinedData = [];
+
+  try {
+    let nextUrl: string | null = url;
+
+    while (nextUrl) {
+      response = await axios({ method, url: nextUrl, data });
+
+      // If no data is returned, break the loop
+      if (!response?.data) {
+        break;
+      }
+
+      combinedData = combinedData.concat(response.data); // Accumulate data
+
+      nextUrl = getNextURLFromLinkHeader(response);
+    }
+  } catch (err) {
+    logError('apiRequestAuth', 'API request failed:', err);
+
+    throw err;
+  }
+
+  return {
+    ...response,
+    data: combinedData,
+  } as AxiosResponse;
+}
+
+/**
+ * Return true if the request should be made with no-cache
+ *
+ * @param url
+ * @returns boolean
+ */
+function shouldRequestWithNoCache(url: string) {
+  const parsedUrl = new URL(url);
+
+  switch (parsedUrl.pathname) {
+    case '/notifications':
+    case '/api/v3/notifications':
+      return true;
+    default:
+      return false;
+  }
 }

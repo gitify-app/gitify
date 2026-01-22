@@ -32,21 +32,3 @@ export function getNextURLFromLinkHeader(
   const matches = linkHeader?.match(/<([^<>]+)>;\s*rel="next"/);
   return matches ? matches[1] : null;
 }
-
-/**
- * Return true if the request should be made with no-cache
- *
- * @param url
- * @returns boolean
- */
-export function shouldRequestWithNoCache(url: string): boolean {
-  const parsedUrl = new URL(url);
-
-  switch (parsedUrl.pathname) {
-    case '/notifications':
-    case '/api/v3/notifications':
-      return true;
-    default:
-      return false;
-  }
-}

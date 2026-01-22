@@ -13,6 +13,7 @@ import type {
   Commit,
   CommitComment,
   Discussion,
+  GraphQLSearch,
   Issue,
   IssueOrPullRequestComment,
   Notification,
@@ -25,9 +26,8 @@ import type {
 import { isAnsweredDiscussionFeatureSupported } from '../features';
 import { QUERY_SEARCH_DISCUSSIONS } from './graphql/discussions';
 import { formatAsGitHubSearchSyntax } from './graphql/utils';
-import { createOctokitClient } from './octokit';
 import { apiRequestAuth } from './request';
-import { getGitHubAPIBaseUrl } from './utils';
+import { getGitHubAPIBaseUrl, getGitHubGraphQLUrl } from './utils';
 
 /**
  * Get the authenticated user
@@ -64,45 +64,20 @@ export function headNotifications(
  *
  * Endpoint documentation: https://docs.github.com/en/rest/activity/notifications#list-notifications-for-the-authenticated-user
  */
-export async function listNotificationsForAuthenticatedUser(
+export function listNotificationsForAuthenticatedUser(
   account: Account,
   settings: SettingsState,
-): Promise<AxiosPromise<Notification[]>> {
-  const octokit = await createOctokitClient(account.hostname, account.token);
-
-  let response: any;
-
-  if (settings.fetchAllNotifications) {
-    response = await octokit.paginate.iterator(
-      octokit.rest.activity.listNotificationsForAuthenticatedUser,
-      {
-        participating: settings.participating,
-      },
-    );
-  }
-
-  response = await octokit.rest.activity.listNotificationsForAuthenticatedUser({
-    participating: settings.participating,
-  });
-
-  // Return axios-like response format
-  return {
-    data: response,
-    status: 200,
-    statusText: 'OK',
-    headers: {},
-  } as any;
-
-  // const url = getGitHubAPIBaseUrl(account.hostname);
-  // url.pathname += 'notifications';
-  // url.searchParams.append('participating', String(settings.participating));
-  // return apiRequestAuth(
-  //   url.toString() as Link,
-  //   'GET',
-  //   account.token,
-  //   {},
-  //   settings.fetchAllNotifications,
-  // );
+): AxiosPromise<Notification[]> {
+  const url = getGitHubAPIBaseUrl(account.hostname);
+  url.pathname += 'notifications';
+  url.searchParams.append('participating', String(settings.participating));
+  return apiRequestAuth(
+    url.toString() as Link,
+    'GET',
+    account.token,
+    {},
+    settings.fetchAllNotifications,
+  );
 }
 
 /**
@@ -259,33 +234,29 @@ export async function getHtmlUrl(url: Link, token: Token): Promise<string> {
  */
 export async function searchDiscussions(
   notification: Notification,
-): Promise<any> {
-  const octokit = await createOctokitClient(
-    notification.account.hostname,
+): AxiosPromise<GraphQLSearch<Discussion>> {
+  const url = getGitHubGraphQLUrl(notification.account.hostname);
+  return apiRequestAuth(
+    url.toString() as Link,
+    'POST',
     notification.account.token,
+    {
+      query: print(QUERY_SEARCH_DISCUSSIONS),
+      variables: {
+        queryStatement: formatAsGitHubSearchSyntax(
+          notification.repository.full_name,
+          notification.subject.title,
+        ),
+        firstDiscussions: 1,
+        lastComments: 1,
+        lastReplies: 1,
+        firstLabels: 100,
+        includeIsAnswered: isAnsweredDiscussionFeatureSupported(
+          notification.account,
+        ),
+      },
+    },
   );
-
-  const result = await octokit.graphql(print(QUERY_SEARCH_DISCUSSIONS), {
-    queryStatement: formatAsGitHubSearchSyntax(
-      notification.repository.full_name,
-      notification.subject.title,
-    ),
-    firstDiscussions: 1,
-    lastComments: 1,
-    lastReplies: 1,
-    firstLabels: 100,
-    includeIsAnswered: isAnsweredDiscussionFeatureSupported(
-      notification.account,
-    ),
-  });
-
-  // Return axios-like response format
-  return {
-    data: result,
-    status: 200,
-    statusText: 'OK',
-    headers: {},
-  } as any;
 }
 
 /**
@@ -297,7 +268,7 @@ export async function getLatestDiscussion(
   try {
     const response = await searchDiscussions(notification);
     return (
-      response?.data.data.search.nodes.filter(
+      response.data?.data.search.nodes.filter(
         (discussion) => discussion.title === notification.subject.title,
       )[0] ?? null
     );

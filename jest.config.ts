@@ -10,9 +10,6 @@ const config: Config = {
     // Force CommonJS build for http adapter to be available.
     // via https://github.com/axios/axios/issues/5101#issuecomment-1276572468
     '^axios$': require.resolve('axios'),
-    // Mock ES modules that cause issues with Jest
-    '^@octokit/core$': '<rootDir>/src/renderer/__helpers__/octokit.mock.ts',
-    '^@octokit/plugin-paginate-rest$': '<rootDir>/src/renderer/__helpers__/octokit.mock.ts',
   },
   modulePathIgnorePatterns: ['<rootDir>/build', '<rootDir>/node_modules'],
 };
