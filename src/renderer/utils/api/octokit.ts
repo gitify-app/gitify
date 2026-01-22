@@ -42,6 +42,6 @@ export async function createOctokitClient(
 
   return new OctokitWithPlugins({
     auth: decryptedToken,
-    baseUrl: baseUrl,
+    baseUrl,
   });
 }

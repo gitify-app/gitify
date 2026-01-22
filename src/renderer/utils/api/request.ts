@@ -27,7 +27,6 @@ export async function performAuthenticatedRESTRequest<TResult>(
   fetchAllRecords = false,
 ): Promise<AxiosResponse<TResult>> {
   const octokit = await createOctokitClient(url, token);
-  const headers = await getHeaders(url, token);
 
   try {
     if (!fetchAllRecords) {
@@ -37,7 +36,6 @@ export async function performAuthenticatedRESTRequest<TResult>(
         method: method.toUpperCase() as any,
         url,
         ...data,
-        headers,
       });
 
       // Return in AxiosResponse format for backward compatibility
@@ -58,7 +56,6 @@ export async function performAuthenticatedRESTRequest<TResult>(
       method: method.toUpperCase() as any,
       url,
       ...data,
-      headers,
     });
 
     let combinedData: unknown[] = [];
@@ -119,10 +116,7 @@ export async function performGraphQLRequest<TResult, TVariables>(
 
     assertNoGraphQLErrors<TResult>('performGraphQLRequest', graphqlResponse);
 
-    return {
-      ...graphqlResponse,
-      headers: {},
-    };
+    return graphqlResponse;
     // biome-ignore lint/suspicious/noExplicitAny: GraphQL error type
   } catch (error: any) {
     // Handle GraphQL errors from Octokit
@@ -133,10 +127,7 @@ export async function performGraphQLRequest<TResult, TVariables>(
         headers: {},
       };
       assertNoGraphQLErrors<TResult>('performGraphQLRequest', graphqlResponse);
-      return {
-        ...graphqlResponse,
-        headers: {},
-      };
+      return graphqlResponse;
     }
     throw error;
   }
@@ -175,10 +166,7 @@ export async function performGraphQLRequestString<TResult>(
       graphqlResponse,
     );
 
-    return {
-      ...graphqlResponse,
-      headers: {},
-    } as GitHubGraphQLResponse<TResult>;
+    return graphqlResponse;
     // biome-ignore lint/suspicious/noExplicitAny: GraphQL error type
   } catch (error: any) {
     // Handle GraphQL errors from Octokit
@@ -192,10 +180,7 @@ export async function performGraphQLRequestString<TResult>(
         'performGraphQLRequestString',
         graphqlResponse,
       );
-      return {
-        ...graphqlResponse,
-        headers: {},
-      };
+      return graphqlResponse;
     }
     throw error;
   }

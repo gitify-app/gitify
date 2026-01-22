@@ -89,7 +89,6 @@ describe('renderer/utils/api/request.ts', () => {
         method: method.toUpperCase(),
         url,
         ...data,
-        headers: mockAuthHeaders,
       });
     });
 
@@ -106,7 +105,6 @@ describe('renderer/utils/api/request.ts', () => {
       expect(mockOctokitInstance.request).toHaveBeenCalledWith({
         method: method.toUpperCase(),
         url,
-        headers: mockAuthHeaders,
       });
     });
   });
