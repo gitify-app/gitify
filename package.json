@@ -154,6 +154,6 @@
   },
   "lint-staged": {
     "*": "biome check --no-errors-on-unmatched",
-    "*.{js,ts,tsx}": "pnpm test --onlyChanged --passWithNoTests --updateSnapshot"
+    "*.{js,ts,tsx}": "pnpm test:changed --passWithNoTests --updateSnapshot"
   }
 }
