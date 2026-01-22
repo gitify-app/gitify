@@ -102,11 +102,10 @@ export async function listNotificationsForAuthenticatedUser(
  * Endpoint documentation: https://docs.github.com/en/rest/activity/notifications#mark-a-thread-as-read
  */
 export async function markNotificationThreadAsRead(
+  account: Account,
   threadId: string,
-  hostname: Hostname,
-  token: Token,
 ): Promise<MarkNotificationThreadAsReadResponse> {
-  const octokit = await createOctokitClient(hostname, token);
+  const octokit = await createOctokitClient(account.hostname, account.token);
 
   const response = await octokit.rest.activity.markThreadAsRead({
     thread_id: Number(threadId),
@@ -124,11 +123,10 @@ export async function markNotificationThreadAsRead(
  * Endpoint documentation: https://docs.github.com/en/rest/activity/notifications#mark-a-thread-as-done
  */
 export async function markNotificationThreadAsDone(
+  account: Account,
   threadId: string,
-  hostname: Hostname,
-  token: Token,
 ): Promise<MarkNotificationThreadAsDoneResponse> {
-  const octokit = await createOctokitClient(hostname, token);
+  const octokit = await createOctokitClient(account.hostname, account.token);
 
   const response = await octokit.rest.activity.markThreadAsDone({
     thread_id: Number(threadId),
@@ -143,11 +141,10 @@ export async function markNotificationThreadAsDone(
  * Endpoint documentation: https://docs.github.com/en/rest/activity/notifications#delete-a-thread-subscription
  */
 export async function ignoreNotificationThreadSubscription(
+  account: Account,
   threadId: string,
-  hostname: Hostname,
-  token: Token,
 ): Promise<IgnoreNotificationThreadSubscriptionResponse> {
-  const octokit = await createOctokitClient(hostname, token);
+  const octokit = await createOctokitClient(account.hostname, account.token);
 
   const response = await octokit.rest.activity.setThreadSubscription({
     thread_id: Number(threadId),
@@ -163,31 +160,17 @@ export async function ignoreNotificationThreadSubscription(
  * Endpoint documentation: https://docs.github.com/en/rest/commits/commits#get-a-commit
  */
 export async function getCommit(
+  account: Account,
   url: Link,
-  token: Token,
 ): Promise<GetCommitResponse> {
-  // Parse URL: /repos/{owner}/{repo}/commits/{ref}
-  const urlObj = new URL(url);
-  const match = urlObj.pathname.match(
-    /^\/repos\/(?<owner>[^/]+)\/(?<repo>[^/]+)\/commits\/(?<ref>.+)$/,
-  );
+      const octokit = await createOctokitClient(account.hostname, account.token);
 
-  if (!match?.groups) {
-    throw new Error(`Invalid commit URL format: ${url}`);
-  }
-
-  const { owner, repo, ref } = match.groups;
-  const hostname = urlObj.hostname as Hostname;
-
-  const octokit = await createOctokitClient(hostname, token);
-
-  const response = await octokit.rest.repos.getCommit({
-    owner,
-    repo,
-    ref,
+  // Perform a generic GET request using Octokit's request method
+  const response = await octokit.request('GET {+url}', {
+    url: url,
   });
 
-  return response.data;
+  return response.data as GetCommitResponse;
 }
 
 /**
@@ -196,31 +179,17 @@ export async function getCommit(
  * Endpoint documentation: https://docs.github.com/en/rest/commits/comments#get-a-commit-comment
  */
 export async function getCommitComment(
+  account: Account,
   url: Link,
-  token: Token,
 ): Promise<GetCommitCommentResponse> {
-  // Parse URL: /repos/{owner}/{repo}/comments/{comment_id}
-  const urlObj = new URL(url);
-  const match = urlObj.pathname.match(
-    /^\/repos\/(?<owner>[^/]+)\/(?<repo>[^/]+)\/comments\/(?<commentId>\d+)$/,
-  );
+    const octokit = await createOctokitClient(account.hostname, account.token);
 
-  if (!match?.groups) {
-    throw new Error(`Invalid commit comment URL format: ${url}`);
-  }
-
-  const { owner, repo, commentId } = match.groups;
-  const hostname = urlObj.hostname as Hostname;
-
-  const octokit = await createOctokitClient(hostname, token);
-
-  const response = await octokit.rest.repos.getCommitComment({
-    owner: owner,
-    repo: repo,
-    comment_id: Number(commentId),
+  // Perform a generic GET request using Octokit's request method
+  const response = await octokit.request('GET {+url}', {
+    url: url,
   });
 
-  return response.data;
+  return response.data as GetCommitCommentResponse;
 }
 
 /**
@@ -229,45 +198,27 @@ export async function getCommitComment(
  * Endpoint documentation: https://docs.github.com/en/rest/releases/releases#get-a-release
  */
 export async function getRelease(
+  account: Account,
   url: Link,
-  token: Token,
 ): Promise<GetReleaseResponse> {
-  // Parse URL: /repos/{owner}/{repo}/releases/{release_id}
-  const urlObj = new URL(url);
-  const match = urlObj.pathname.match(
-    /^\/repos\/(?<owner>[^/]+)\/(?<repo>[^/]+)\/releases\/(?<releaseId>\d+)$/,
-  );
+  const octokit = await createOctokitClient(account.hostname, account.token);
 
-  if (!match?.groups) {
-    throw new Error(`Invalid release URL format: ${url}`);
-  }
-
-  const { owner, repo, releaseId } = match.groups;
-  const hostname = urlObj.hostname as Hostname;
-
-  const octokit = await createOctokitClient(hostname, token);
-
-  const response = await octokit.rest.repos.getRelease({
-    owner: owner,
-    repo: repo,
-    release_id: Number(releaseId),
+  // Perform a generic GET request using Octokit's request method
+  const response = await octokit.request('GET {+url}', {
+    url: url,
   });
 
-  return response.data;
+  return response.data as GetReleaseResponse;
 }
 
 /**
  * Get the `html_url` from the GitHub response
  */
 export async function getHtmlUrl(
+  account: Account,
   url: Link,
-  token: Token,
 ): Promise<GitHubHtmlUrlResponse> {
-  // Extract hostname from URL to determine which Octokit client to use
-  const urlObj = new URL(url);
-  const hostname = urlObj.hostname as Hostname;
-
-  const octokit = await createOctokitClient(hostname, token);
+  const octokit = await createOctokitClient(account.hostname, account.token);
 
   // Perform a generic GET request using Octokit's request method
   const response = await octokit.request('GET {+url}', {
@@ -275,6 +226,24 @@ export async function getHtmlUrl(
   });
 
   return response.data as GitHubHtmlUrlResponse;
+}
+
+
+/**
+ * Follow GitHub Response URL
+ */
+export async function followUrl<TResult>(
+  account: Account,
+  url: Link,
+): Promise<TResult> {
+  const octokit = await createOctokitClient(account.hostname, account.token);
+
+  // Perform a generic GET request using Octokit's request method
+  const response = await octokit.request('GET {+url}', {
+    url: url,
+  });
+
+  return response.data as TResult;
 }
 
 /**

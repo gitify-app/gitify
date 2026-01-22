@@ -7,7 +7,7 @@ import { mockToken } from '../../__mocks__/state-mocks';
 
 import { Constants } from '../../constants';
 
-import type { Hostname, Link, SettingsState, Token } from '../../types';
+import type { Hostname, Link, SettingsState } from '../../types';
 import type { GitHubGraphQLResponse } from './graphql/types';
 
 import {
@@ -192,10 +192,9 @@ describe('renderer/utils/api/client.ts', () => {
   });
 
   it('markNotificationThreadAsRead - should mark notification thread as read', async () => {
-    await markNotificationThreadAsRead(
+    await markNotificationThreadAsRead(mockGitHubCloudAccount,
       mockThreadId,
-      mockGitHubHostname,
-      mockToken,
+
     );
 
     expect(performAuthenticatedRESTRequestSpy).toHaveBeenCalledWith(
@@ -207,10 +206,9 @@ describe('renderer/utils/api/client.ts', () => {
   });
 
   it('markNotificationThreadAsDone - should mark notification thread as done', async () => {
-    await markNotificationThreadAsDone(
+    await markNotificationThreadAsDone(mockGitHubCloudAccount,
       mockThreadId,
-      mockGitHubHostname,
-      mockToken,
+
     );
 
     expect(performAuthenticatedRESTRequestSpy).toHaveBeenCalledWith(
@@ -222,10 +220,9 @@ describe('renderer/utils/api/client.ts', () => {
   });
 
   it('ignoreNotificationThreadSubscription - should ignore notification thread subscription', async () => {
-    await ignoreNotificationThreadSubscription(
+    await ignoreNotificationThreadSubscription(mockGitHubCloudAccount,
       mockThreadId,
-      mockGitHubHostname,
-      mockToken,
+
     );
 
     expect(performAuthenticatedRESTRequestSpy).toHaveBeenCalledWith(
@@ -238,8 +235,9 @@ describe('renderer/utils/api/client.ts', () => {
 
   it('getHtmlUrl - should return the HTML URL', async () => {
     await getHtmlUrl(
+      mockGitHubCloudAccount,
       'https://api.github.com/repos/gitify-app/notifications-test/issues/785' as Link,
-      '123' as Token,
+
     );
 
     expect(performAuthenticatedRESTRequestSpy).toHaveBeenCalledWith(

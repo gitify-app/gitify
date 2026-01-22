@@ -12,10 +12,11 @@ import type {
   SettingsState,
 } from '../../../types';
 
-import { getCommit, getCommitComment } from '../../api/client';
+import { followUrl } from '../../api/client';
 import { isStateFilteredOut } from '../filters/filter';
 import { DefaultHandler } from './default';
 import { getNotificationAuthor } from './utils';
+import { GetCommitCommentResponse, GetCommitResponse } from '../../api/types';
 
 class CommitHandler extends DefaultHandler {
   readonly type = 'Commit';
@@ -35,9 +36,8 @@ class CommitHandler extends DefaultHandler {
 
     if (notification.subject.latestCommentUrl) {
       const commitComment = (
-        await getCommitComment(
+        await followUrl<GetCommitCommentResponse>(notification.account,
           notification.subject.latestCommentUrl,
-          notification.account.token,
         )
       );
 
@@ -48,10 +48,9 @@ class CommitHandler extends DefaultHandler {
         type: commitComment.user.type as GitifyNotificationUser['type'],
       };
     } else {
-      const commit = await getCommit(
-        notification.subject.url,
-        notification.account.token,
-      );
+            
+      
+      const commit = await followUrl<GetCommitResponse>(notification.account, notification.subject.url) 
 
       user = {
         login: commit.author.login,

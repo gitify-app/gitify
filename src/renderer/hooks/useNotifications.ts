@@ -143,10 +143,9 @@ export const useNotifications = (): NotificationsState => {
       try {
         await Promise.all(
           readNotifications.map((notification) =>
-            markNotificationThreadAsRead(
+            markNotificationThreadAsRead(notification.account,
               notification.id,
-              notification.account.hostname,
-              notification.account.token,
+
             ),
           ),
         );
@@ -183,10 +182,9 @@ export const useNotifications = (): NotificationsState => {
       try {
         await Promise.all(
           doneNotifications.map((notification) =>
-            markNotificationThreadAsDone(
+            markNotificationThreadAsDone(notification.account,
               notification.id,
-              notification.account.hostname,
-              notification.account.token,
+
             ),
           ),
         );
@@ -218,9 +216,9 @@ export const useNotifications = (): NotificationsState => {
 
       try {
         await ignoreNotificationThreadSubscription(
+          notification.account,
           notification.id,
-          notification.account.hostname,
-          notification.account.token,
+
         );
 
         if (state.settings.markAsDoneOnUnsubscribe) {
