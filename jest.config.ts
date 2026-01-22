@@ -17,7 +17,7 @@ const config: Config = {
   // @octokit/* libraries rely on universal-user-agent internally.
   // We also include GitHub web components that ship ESM-only builds.
   transformIgnorePatterns: [
-    'node_modules/(?!(?:@primer/react|@primer/primitives|@primer/octicons-react|@lit-labs/react|lit|@github/relative-time-element|@github/tab-container-element|@octokit/oauth-methods|@octokit/oauth-authorization-url|@octokit/request|@octokit/request-error|@octokit/endpoint|universal-user-agent)/)',
+    'node_modules/(?!(?:@primer/react|@primer/primitives|@primer/octicons-react|@lit-labs/react|lit|@github/relative-time-element|@github/tab-container-element|@octokit/oauth-methods|@octokit/oauth-authorization-url|@octokit/request|@octokit/request-error|@octokit/endpoint|@octokit/core|@octokit/plugin-paginate-rest|@octokit/plugin-rest-endpoint-methods|universal-user-agent)/)',
   ],
   moduleNameMapper: {
     // Force CommonJS build for http adapter to be available.

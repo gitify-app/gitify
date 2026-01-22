@@ -3,8 +3,6 @@ import { type ReactElement, type ReactNode, useMemo } from 'react';
 
 import { BaseStyles, ThemeProvider } from '@primer/react';
 
-import axios from 'axios';
-
 import { mockAuth, mockSettings } from '../__mocks__/state-mocks';
 
 import { AppContext, type AppContextState } from '../context/App';
@@ -100,11 +98,11 @@ export function ensureStableEmojis() {
 }
 
 /**
- * Configure axios to use the http adapter instead of XHR.
- * This allows nock to intercept HTTP requests in tests
+ * Configure HTTP mocking for tests that use nock.
  *
- * See: https://github.com/nock/nock?tab=readme-ov-file#axios
+ * Octokit uses @octokit/request which is compatible with nock's HTTP interception.
+ * No special configuration is needed.
  */
 export function configureAxiosHttpAdapterForNock() {
-  axios.defaults.adapter = 'http';
+  // No-op: Octokit's @octokit/request works with nock by default
 }

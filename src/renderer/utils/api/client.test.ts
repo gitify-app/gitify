@@ -35,8 +35,6 @@ import {
 } from './graphql/generated/graphql';
 import * as apiRequests from './request';
 
-jest.mock('axios');
-
 const mockGitHubHostname = 'github.com' as Hostname;
 const mockThreadId = '1234';
 
@@ -45,6 +43,18 @@ describe('renderer/utils/api/client.ts', () => {
     apiRequests,
     'performAuthenticatedRESTRequest',
   );
+
+  beforeEach(() => {
+    // Mock performAuthenticatedRESTRequest to return a valid response
+    performAuthenticatedRESTRequestSpy.mockResolvedValue({
+      data: {},
+      status: 200,
+      statusText: 'OK',
+      headers: {},
+      // biome-ignore lint/suspicious/noExplicitAny: AxiosResponse config type
+      config: {} as any,
+    });
+  });
 
   afterEach(() => {
     jest.clearAllMocks();

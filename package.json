@@ -69,6 +69,9 @@
   },
   "homepage": "https://gitify.io/",
   "dependencies": {
+    "@octokit/core": "^7.0.6",
+    "@octokit/plugin-paginate-rest": "^14.0.0",
+    "@octokit/plugin-rest-endpoint-methods": "^17.0.0",
     "electron-log": "5.4.3",
     "electron-updater": "6.7.3",
     "menubar": "9.5.2",

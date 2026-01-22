@@ -1,4 +1,4 @@
-import axios, { type AxiosResponse, type Method } from 'axios';
+import type { AxiosResponse } from 'axios';
 
 import type { Link, Token } from '../../types';
 import type { GitHubGraphQLResponse } from './graphql/types';
@@ -7,7 +7,7 @@ import { decryptValue } from '../comms';
 import { rendererLogError } from '../logger';
 import { assertNoGraphQLErrors } from './errors';
 import type { TypedDocumentString } from './graphql/generated/graphql';
-import { getNextURLFromLinkHeader } from './utils';
+import { createOctokitClient } from './octokit';
 
 /**
  * Perform an authenticated REST API request
@@ -20,37 +20,64 @@ import { getNextURLFromLinkHeader } from './utils';
  * @returns Resolves to a GitHub REST response with the specified type
  */
 export async function performAuthenticatedRESTRequest<TResult>(
-  method: Method,
+  method: string,
   url: Link,
   token: Token,
   data: Record<string, unknown> = {},
   fetchAllRecords = false,
 ): Promise<AxiosResponse<TResult>> {
+  const octokit = await createOctokitClient(url, token);
   const headers = await getHeaders(url, token);
 
-  if (!fetchAllRecords) {
-    return axios({ method, url, data, headers });
-  }
-
-  let response: AxiosResponse<TResult> | null = null;
-  let combinedData: unknown[] = [];
-
   try {
-    let nextUrl: string | null = url;
+    if (!fetchAllRecords) {
+      // Single request without pagination
+      const response = await octokit.request({
+        // biome-ignore lint/suspicious/noExplicitAny: Octokit method type
+        method: method.toUpperCase() as any,
+        url,
+        ...data,
+        headers,
+      });
 
-    while (nextUrl) {
-      response = await axios({ method, url: nextUrl, data, headers });
-
-      // If no data is returned, break the loop
-      if (!response?.data) {
-        break;
-      }
-
-      // Accumulate paginated array results
-      combinedData = combinedData.concat(response.data);
-
-      nextUrl = getNextURLFromLinkHeader(response);
+      // Return in AxiosResponse format for backward compatibility
+      return {
+        data: response.data as TResult,
+        status: response.status,
+        statusText: '',
+        headers: response.headers,
+        // biome-ignore lint/suspicious/noExplicitAny: AxiosResponse config type
+        config: {} as any,
+      } as AxiosResponse<TResult>;
     }
+
+    // Fetch all pages using Octokit's pagination
+    // biome-ignore lint/suspicious/noExplicitAny: Octokit paginate type
+    const iterator = (octokit as any).paginate.iterator({
+      // biome-ignore lint/suspicious/noExplicitAny: Octokit method type
+      method: method.toUpperCase() as any,
+      url,
+      ...data,
+      headers,
+    });
+
+    let combinedData: unknown[] = [];
+
+    for await (const response of iterator) {
+      if (response.data) {
+        combinedData = combinedData.concat(response.data);
+      }
+    }
+
+    // Return the last response with combined data
+    return {
+      data: combinedData as TResult,
+      status: 200,
+      statusText: '',
+      headers: {},
+      // biome-ignore lint/suspicious/noExplicitAny: AxiosResponse config type
+      config: {} as any,
+    } as AxiosResponse<TResult>;
   } catch (err) {
     rendererLogError(
       'performAuthenticatedRESTRequest',
@@ -60,10 +87,6 @@ export async function performAuthenticatedRESTRequest<TResult>(
 
     throw err;
   }
-
-  // Return a response object with the combined array of records as data
-  response.data = combinedData as TResult;
-  return response;
 }
 
 /**
@@ -80,24 +103,43 @@ export async function performGraphQLRequest<TResult, TVariables>(
   query: TypedDocumentString<TResult, TVariables>,
   ...[variables]: TVariables extends Record<string, never> ? [] : [TVariables]
 ): Promise<GitHubGraphQLResponse<TResult>> {
-  const headers = await getHeaders(url, token);
+  const octokit = await createOctokitClient(url, token);
 
-  return axios({
-    method: 'POST',
-    url,
-    data: {
-      query,
-      variables,
-    },
-    headers: headers,
-  }).then((response) => {
-    assertNoGraphQLErrors<TResult>('performGraphQLRequest', response.data);
+  try {
+    const response = await octokit.graphql<TResult>(
+      query.toString(),
+      variables || {},
+    );
+
+    const graphqlResponse = {
+      data: response,
+      errors: [],
+      headers: {},
+    };
+
+    assertNoGraphQLErrors<TResult>('performGraphQLRequest', graphqlResponse);
 
     return {
-      ...response.data,
-      headers: response.headers,
+      ...graphqlResponse,
+      headers: {},
     };
-  }) as Promise<GitHubGraphQLResponse<TResult>>;
+    // biome-ignore lint/suspicious/noExplicitAny: GraphQL error type
+  } catch (error: any) {
+    // Handle GraphQL errors from Octokit
+    if (error.errors) {
+      const graphqlResponse = {
+        data: error.data || ({} as TResult),
+        errors: error.errors,
+        headers: {},
+      };
+      assertNoGraphQLErrors<TResult>('performGraphQLRequest', graphqlResponse);
+      return {
+        ...graphqlResponse,
+        headers: {},
+      };
+    }
+    throw error;
+  }
 }
 
 /**
@@ -117,27 +159,46 @@ export async function performGraphQLRequestString<TResult>(
   query: string,
   variables?: Record<string, unknown>,
 ): Promise<GitHubGraphQLResponse<TResult>> {
-  const headers = await getHeaders(url, token);
+  const octokit = await createOctokitClient(url, token);
 
-  return axios({
-    method: 'POST',
-    url,
-    data: {
-      query,
-      variables,
-    },
-    headers: headers,
-  }).then((response) => {
+  try {
+    const response = await octokit.graphql<TResult>(query, variables || {});
+
+    const graphqlResponse = {
+      data: response,
+      errors: [],
+      headers: {},
+    };
+
     assertNoGraphQLErrors<TResult>(
       'performGraphQLRequestString',
-      response.data,
+      graphqlResponse,
     );
 
     return {
-      ...response.data,
-      headers: response.headers,
+      ...graphqlResponse,
+      headers: {},
     } as GitHubGraphQLResponse<TResult>;
-  });
+    // biome-ignore lint/suspicious/noExplicitAny: GraphQL error type
+  } catch (error: any) {
+    // Handle GraphQL errors from Octokit
+    if (error.errors) {
+      const graphqlResponse = {
+        data: error.data || ({} as TResult),
+        errors: error.errors,
+        headers: {},
+      };
+      assertNoGraphQLErrors<TResult>(
+        'performGraphQLRequestString',
+        graphqlResponse,
+      );
+      return {
+        ...graphqlResponse,
+        headers: {},
+      };
+    }
+    throw error;
+  }
 }
 
 /**
