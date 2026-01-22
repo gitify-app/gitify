@@ -5,6 +5,8 @@ import {
 } from '../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../__mocks__/state-mocks';
 
+import type { SettingsState } from '../../types';
+
 import {
   removeNotificationsForAccount,
   shouldRemoveNotificationsFromState,
@@ -13,7 +15,7 @@ import {
 describe('renderer/utils/remove.ts', () => {
   describe('shouldRemoveNotificationsFromState', () => {
     it('should return true when both delayNotificationState and fetchReadNotifications are false', () => {
-      const settings = {
+      const settings: SettingsState = {
         ...mockSettings,
         delayNotificationState: false,
         fetchReadNotifications: false,
@@ -22,7 +24,7 @@ describe('renderer/utils/remove.ts', () => {
     });
 
     it('should return false when delayNotificationState is true', () => {
-      const settings = {
+      const settings: SettingsState = {
         ...mockSettings,
         delayNotificationState: true,
         fetchReadNotifications: false,
@@ -31,7 +33,7 @@ describe('renderer/utils/remove.ts', () => {
     });
 
     it('should return false when fetchReadNotifications is true', () => {
-      const settings = {
+      const settings: SettingsState = {
         ...mockSettings,
         delayNotificationState: false,
         fetchReadNotifications: true,
@@ -40,7 +42,7 @@ describe('renderer/utils/remove.ts', () => {
     });
 
     it('should return false when both are true', () => {
-      const settings = {
+      const settings: SettingsState = {
         ...mockSettings,
         delayNotificationState: true,
         fetchReadNotifications: true,
