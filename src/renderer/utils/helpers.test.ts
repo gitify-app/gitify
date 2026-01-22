@@ -4,6 +4,8 @@ import {
   ChevronRightIcon,
 } from '@primer/octicons-react';
 
+import type { AxiosResponse } from 'axios';
+
 import { mockGitifyNotification } from '../__mocks__/notifications-mocks';
 import { mockToken } from '../__mocks__/state-mocks';
 
@@ -67,7 +69,7 @@ describe('renderer/utils/helpers.ts', () => {
 
   describe('generateGitHubWebUrl', () => {
     const mockHtmlUrl =
-      'https://github.com/gitify-app/notifications-test/issues/785';
+      'https://github.com/gitify-app/notifications-test/issues/785' as Link;
     const mockNotificationReferrer =
       'notification_referrer_id=MDE4Ok5vdGlmaWNhdGlvblRocmVhZDEzODY2MTA5NjoxMjM0NTY3ODk%3D';
 
@@ -116,7 +118,13 @@ describe('renderer/utils/helpers.ts', () => {
         htmlUrl: mockSubjectHtmlUrl,
       } as GitifySubject;
 
-      getHtmlUrlSpy.mockResolvedValue(mockHtmlUrl);
+      getHtmlUrlSpy.mockResolvedValue(
+        Promise.resolve({
+          data: {
+            html_url: mockHtmlUrl,
+          },
+        } as AxiosResponse),
+      );
 
       const result = await generateGitHubWebUrl({
         ...mockGitifyNotification,
@@ -145,7 +153,13 @@ describe('renderer/utils/helpers.ts', () => {
         htmlUrl: mockSubjectHtmlUrl,
       } as GitifySubject;
 
-      getHtmlUrlSpy.mockResolvedValue(mockHtmlUrl);
+      getHtmlUrlSpy.mockResolvedValue(
+        Promise.resolve({
+          data: {
+            html_url: mockHtmlUrl,
+          },
+        } as AxiosResponse),
+      );
 
       const result = await generateGitHubWebUrl({
         ...mockGitifyNotification,

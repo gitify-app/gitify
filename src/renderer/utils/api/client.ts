@@ -1,5 +1,4 @@
-import type { AxiosPromise } from 'axios';
-import type { ExecutionResult } from 'graphql';
+import type { AxiosResponse } from 'axios';
 
 import { Constants } from '../../constants';
 
@@ -11,10 +10,12 @@ import type {
   SettingsState,
   Token,
 } from '../../types';
+import type { GitHubGraphQLResponse } from './graphql/types';
 import type {
   GetCommitCommentResponse,
   GetCommitResponse,
   GetReleaseResponse,
+  GitHubHtmlUrlResponse,
   HeadNotificationsResponse,
   IgnoreNotificationThreadSubscriptionResponse,
   ListNotificationsForAuthenticatedUserResponse,
@@ -23,7 +24,6 @@ import type {
 } from './types';
 
 import { isAnsweredDiscussionFeatureSupported } from '../features';
-import { rendererLogError } from '../logger';
 import { createNotificationHandler } from '../notifications/handlers';
 import {
   FetchAuthenticatedUserDetailsDocument,
@@ -38,8 +38,7 @@ import {
 } from './graphql/generated/graphql';
 import { MergeQueryBuilder } from './graphql/MergeQueryBuilder';
 import {
-  apiRequestAuth,
-  type ExecutionResultWithHeaders,
+  performAuthenticatedRESTRequest,
   performGraphQLRequest,
   performGraphQLRequestString,
 } from './request';
@@ -57,11 +56,15 @@ import {
 export function headNotifications(
   hostname: Hostname,
   token: Token,
-): AxiosPromise<HeadNotificationsResponse> {
+): Promise<AxiosResponse<HeadNotificationsResponse>> {
   const url = getGitHubAPIBaseUrl(hostname);
   url.pathname += 'notifications';
 
-  return apiRequestAuth(url.toString() as Link, 'HEAD', token);
+  return performAuthenticatedRESTRequest<HeadNotificationsResponse>(
+    'HEAD',
+    url.toString() as Link,
+    token,
+  );
 }
 
 /**
@@ -73,15 +76,15 @@ export function headNotifications(
 export function listNotificationsForAuthenticatedUser(
   account: Account,
   settings: SettingsState,
-): AxiosPromise<ListNotificationsForAuthenticatedUserResponse> {
+): Promise<AxiosResponse<ListNotificationsForAuthenticatedUserResponse>> {
   const url = getGitHubAPIBaseUrl(account.hostname);
   url.pathname += 'notifications';
   url.searchParams.append('participating', String(settings.participating));
   url.searchParams.append('all', String(settings.fetchReadNotifications));
 
-  return apiRequestAuth(
-    url.toString() as Link,
+  return performAuthenticatedRESTRequest<ListNotificationsForAuthenticatedUserResponse>(
     'GET',
+    url.toString() as Link,
     account.token,
     {},
     settings.fetchAllNotifications,
@@ -99,11 +102,16 @@ export function markNotificationThreadAsRead(
   threadId: string,
   hostname: Hostname,
   token: Token,
-): AxiosPromise<MarkNotificationThreadAsReadResponse> {
+): Promise<AxiosResponse<MarkNotificationThreadAsReadResponse>> {
   const url = getGitHubAPIBaseUrl(hostname);
   url.pathname += `notifications/threads/${threadId}`;
 
-  return apiRequestAuth(url.toString() as Link, 'PATCH', token, {});
+  return performAuthenticatedRESTRequest<MarkNotificationThreadAsReadResponse>(
+    'PATCH',
+    url.toString() as Link,
+    token,
+    {},
+  );
 }
 
 /**
@@ -118,11 +126,16 @@ export function markNotificationThreadAsDone(
   threadId: string,
   hostname: Hostname,
   token: Token,
-): AxiosPromise<MarkNotificationThreadAsDoneResponse> {
+): Promise<AxiosResponse<MarkNotificationThreadAsDoneResponse>> {
   const url = getGitHubAPIBaseUrl(hostname);
   url.pathname += `notifications/threads/${threadId}`;
 
-  return apiRequestAuth(url.toString() as Link, 'DELETE', token, {});
+  return performAuthenticatedRESTRequest<MarkNotificationThreadAsDoneResponse>(
+    'DELETE',
+    url.toString() as Link,
+    token,
+    {},
+  );
 }
 
 /**
@@ -134,13 +147,18 @@ export function ignoreNotificationThreadSubscription(
   threadId: string,
   hostname: Hostname,
   token: Token,
-): AxiosPromise<IgnoreNotificationThreadSubscriptionResponse> {
+): Promise<AxiosResponse<IgnoreNotificationThreadSubscriptionResponse>> {
   const url = getGitHubAPIBaseUrl(hostname);
   url.pathname += `notifications/threads/${threadId}/subscription`;
 
-  return apiRequestAuth(url.toString() as Link, 'PUT', token, {
-    ignored: true,
-  });
+  return performAuthenticatedRESTRequest<IgnoreNotificationThreadSubscriptionResponse>(
+    'PUT',
+    url.toString() as Link,
+    token,
+    {
+      ignored: true,
+    },
+  );
 }
 
 /**
@@ -151,8 +169,8 @@ export function ignoreNotificationThreadSubscription(
 export function getCommit(
   url: Link,
   token: Token,
-): AxiosPromise<GetCommitResponse> {
-  return apiRequestAuth(url, 'GET', token);
+): Promise<AxiosResponse<GetCommitResponse>> {
+  return performAuthenticatedRESTRequest<GetCommitResponse>('GET', url, token);
 }
 
 /**
@@ -163,8 +181,12 @@ export function getCommit(
 export function getCommitComment(
   url: Link,
   token: Token,
-): AxiosPromise<GetCommitCommentResponse> {
-  return apiRequestAuth(url, 'GET', token);
+): Promise<AxiosResponse<GetCommitCommentResponse>> {
+  return performAuthenticatedRESTRequest<GetCommitCommentResponse>(
+    'GET',
+    url,
+    token,
+  );
 }
 
 /**
@@ -175,27 +197,23 @@ export function getCommitComment(
 export function getRelease(
   url: Link,
   token: Token,
-): AxiosPromise<GetReleaseResponse> {
-  return apiRequestAuth(url, 'GET', token);
+): Promise<AxiosResponse<GetReleaseResponse>> {
+  return performAuthenticatedRESTRequest<GetReleaseResponse>('GET', url, token);
 }
 
 /**
  * Get the `html_url` from the GitHub response
  *
  */
-export async function getHtmlUrl(url: Link, token: Token): Promise<string> {
-  try {
-    // TODO - Add explicit type for response shape
-    const response = (await apiRequestAuth(url, 'GET', token)).data;
-
-    return response.html_url;
-  } catch (err) {
-    rendererLogError(
-      'getHtmlUrl',
-      `error occurred while fetching html url for ${url}`,
-      err,
-    );
-  }
+export async function getHtmlUrl(
+  url: Link,
+  token: Token,
+): Promise<AxiosResponse<GitHubHtmlUrlResponse>> {
+  return performAuthenticatedRESTRequest<GitHubHtmlUrlResponse>(
+    'GET',
+    url,
+    token,
+  );
 }
 
 /**
@@ -204,7 +222,7 @@ export async function getHtmlUrl(url: Link, token: Token): Promise<string> {
 export async function fetchAuthenticatedUserDetails(
   hostname: Hostname,
   token: Token,
-): Promise<ExecutionResultWithHeaders<FetchAuthenticatedUserDetailsQuery>> {
+): Promise<GitHubGraphQLResponse<FetchAuthenticatedUserDetailsQuery>> {
   const url = getGitHubGraphQLUrl(hostname);
 
   return performGraphQLRequest(
@@ -219,7 +237,7 @@ export async function fetchAuthenticatedUserDetails(
  */
 export async function fetchDiscussionByNumber(
   notification: GitifyNotification,
-): Promise<ExecutionResult<FetchDiscussionByNumberQuery>> {
+): Promise<GitHubGraphQLResponse<FetchDiscussionByNumberQuery>> {
   const url = getGitHubGraphQLUrl(notification.account.hostname);
   const number = getNumberFromUrl(notification.subject.url);
 
@@ -246,7 +264,7 @@ export async function fetchDiscussionByNumber(
  */
 export async function fetchIssueByNumber(
   notification: GitifyNotification,
-): Promise<ExecutionResult<FetchIssueByNumberQuery>> {
+): Promise<GitHubGraphQLResponse<FetchIssueByNumberQuery>> {
   const url = getGitHubGraphQLUrl(notification.account.hostname);
   const number = getNumberFromUrl(notification.subject.url);
 
@@ -269,7 +287,7 @@ export async function fetchIssueByNumber(
  */
 export async function fetchPullByNumber(
   notification: GitifyNotification,
-): Promise<ExecutionResult<FetchPullRequestByNumberQuery>> {
+): Promise<GitHubGraphQLResponse<FetchPullRequestByNumberQuery>> {
   const url = getGitHubGraphQLUrl(notification.account.hostname);
   const number = getNumberFromUrl(notification.subject.url);
 

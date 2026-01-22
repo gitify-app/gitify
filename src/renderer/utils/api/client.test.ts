@@ -1,21 +1,15 @@
-import axios, { type AxiosPromise, type AxiosResponse } from 'axios';
-
 import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
 import {
   mockGitHubCloudGitifyNotifications,
   mockPartialGitifyNotification,
 } from '../../__mocks__/notifications-mocks';
 import { mockToken } from '../../__mocks__/state-mocks';
-import {
-  mockAuthHeaders,
-  mockNonCachedAuthHeaders,
-} from './__mocks__/request-mocks';
 
 import { Constants } from '../../constants';
 
 import type { Hostname, Link, SettingsState, Token } from '../../types';
+import type { GitHubGraphQLResponse } from './graphql/types';
 
-import * as logger from '../../utils/logger';
 import {
   fetchAuthenticatedUserDetails,
   fetchDiscussionByNumber,
@@ -39,7 +33,6 @@ import {
   FetchPullRequestByNumberDocument,
   type FetchPullRequestByNumberQuery,
 } from './graphql/generated/graphql';
-import type { ExecutionResultWithHeaders } from './request';
 import * as apiRequests from './request';
 
 jest.mock('axios');
@@ -48,6 +41,11 @@ const mockGitHubHostname = 'github.com' as Hostname;
 const mockThreadId = '1234';
 
 describe('renderer/utils/api/client.ts', () => {
+  const performAuthenticatedRESTRequestSpy = jest.spyOn(
+    apiRequests,
+    'performAuthenticatedRESTRequest',
+  );
+
   afterEach(() => {
     jest.clearAllMocks();
   });
@@ -55,12 +53,11 @@ describe('renderer/utils/api/client.ts', () => {
   it('headNotifications - should fetch notifications head', async () => {
     await headNotifications(mockGitHubHostname, mockToken);
 
-    expect(axios).toHaveBeenCalledWith({
-      url: 'https://api.github.com/notifications',
-      headers: mockNonCachedAuthHeaders,
-      method: 'HEAD',
-      data: {},
-    });
+    expect(performAuthenticatedRESTRequestSpy).toHaveBeenCalledWith(
+      'HEAD',
+      'https://api.github.com/notifications',
+      mockToken,
+    );
   });
 
   describe('listNotificationsForAuthenticatedUser', () => {
@@ -68,6 +65,7 @@ describe('renderer/utils/api/client.ts', () => {
       const mockSettings: Partial<SettingsState> = {
         participating: true,
         fetchReadNotifications: false,
+        fetchAllNotifications: false,
       };
 
       await listNotificationsForAuthenticatedUser(
@@ -75,18 +73,20 @@ describe('renderer/utils/api/client.ts', () => {
         mockSettings as SettingsState,
       );
 
-      expect(axios).toHaveBeenCalledWith({
-        url: 'https://api.github.com/notifications?participating=true&all=false',
-        headers: mockNonCachedAuthHeaders,
-        method: 'GET',
-        data: {},
-      });
+      expect(performAuthenticatedRESTRequestSpy).toHaveBeenCalledWith(
+        'GET',
+        'https://api.github.com/notifications?participating=true&all=false',
+        mockGitHubCloudAccount.token,
+        {},
+        false,
+      );
     });
 
     it('should list participating and watching notifications for user', async () => {
       const mockSettings: Partial<SettingsState> = {
         participating: false,
         fetchReadNotifications: false,
+        fetchAllNotifications: false,
       };
 
       await listNotificationsForAuthenticatedUser(
@@ -94,18 +94,20 @@ describe('renderer/utils/api/client.ts', () => {
         mockSettings as SettingsState,
       );
 
-      expect(axios).toHaveBeenCalledWith({
-        url: 'https://api.github.com/notifications?participating=false&all=false',
-        headers: mockNonCachedAuthHeaders,
-        method: 'GET',
-        data: {},
-      });
+      expect(performAuthenticatedRESTRequestSpy).toHaveBeenCalledWith(
+        'GET',
+        'https://api.github.com/notifications?participating=false&all=false',
+        mockGitHubCloudAccount.token,
+        {},
+        false,
+      );
     });
 
-    it('should include all=true when fetchReadNotifications is enabled', async () => {
+    it('should list read and done notifications for user', async () => {
       const mockSettings: Partial<SettingsState> = {
         participating: false,
         fetchReadNotifications: true,
+        fetchAllNotifications: false,
       };
 
       await listNotificationsForAuthenticatedUser(
@@ -113,18 +115,22 @@ describe('renderer/utils/api/client.ts', () => {
         mockSettings as SettingsState,
       );
 
-      expect(axios).toHaveBeenCalledWith({
-        url: 'https://api.github.com/notifications?participating=false&all=true',
-        headers: mockNonCachedAuthHeaders,
-        method: 'GET',
-        data: {},
-      });
+      expect(performAuthenticatedRESTRequestSpy).toHaveBeenCalledWith(
+        'GET',
+        'https://api.github.com/notifications?participating=false&all=true',
+        mockGitHubCloudAccount.token,
+        {},
+        false,
+      );
     });
 
-    it('should include all=false when fetchReadNotifications is disabled', async () => {
+    it('should unpaginate notifications list for user', async () => {
+      performAuthenticatedRESTRequestSpy.mockImplementation();
+
       const mockSettings: Partial<SettingsState> = {
         participating: false,
         fetchReadNotifications: false,
+        fetchAllNotifications: true,
       };
 
       await listNotificationsForAuthenticatedUser(
@@ -132,12 +138,13 @@ describe('renderer/utils/api/client.ts', () => {
         mockSettings as SettingsState,
       );
 
-      expect(axios).toHaveBeenCalledWith({
-        url: 'https://api.github.com/notifications?participating=false&all=false',
-        headers: mockNonCachedAuthHeaders,
-        method: 'GET',
-        data: {},
-      });
+      expect(performAuthenticatedRESTRequestSpy).toHaveBeenCalledWith(
+        'GET',
+        'https://api.github.com/notifications?participating=false&all=false',
+        mockGitHubCloudAccount.token,
+        {},
+        true,
+      );
     });
   });
 
@@ -148,12 +155,12 @@ describe('renderer/utils/api/client.ts', () => {
       mockToken,
     );
 
-    expect(axios).toHaveBeenCalledWith({
-      url: `https://api.github.com/notifications/threads/${mockThreadId}`,
-      headers: mockAuthHeaders,
-      method: 'PATCH',
-      data: {},
-    });
+    expect(performAuthenticatedRESTRequestSpy).toHaveBeenCalledWith(
+      'PATCH',
+      `https://api.github.com/notifications/threads/${mockThreadId}`,
+      mockToken,
+      {},
+    );
   });
 
   it('markNotificationThreadAsDone - should mark notification thread as done', async () => {
@@ -163,12 +170,12 @@ describe('renderer/utils/api/client.ts', () => {
       mockToken,
     );
 
-    expect(axios).toHaveBeenCalledWith({
-      url: `https://api.github.com/notifications/threads/${mockThreadId}`,
-      headers: mockAuthHeaders,
-      method: 'DELETE',
-      data: {},
-    });
+    expect(performAuthenticatedRESTRequestSpy).toHaveBeenCalledWith(
+      'DELETE',
+      `https://api.github.com/notifications/threads/${mockThreadId}`,
+      mockToken,
+      {},
+    );
   });
 
   it('ignoreNotificationThreadSubscription - should ignore notification thread subscription', async () => {
@@ -178,54 +185,25 @@ describe('renderer/utils/api/client.ts', () => {
       mockToken,
     );
 
-    expect(axios).toHaveBeenCalledWith({
-      url: `https://api.github.com/notifications/threads/${mockThreadId}/subscription`,
-      headers: mockAuthHeaders,
-      method: 'PUT',
-      data: { ignored: true },
-    });
+    expect(performAuthenticatedRESTRequestSpy).toHaveBeenCalledWith(
+      'PUT',
+      `https://api.github.com/notifications/threads/${mockThreadId}/subscription`,
+      mockToken,
+      { ignored: true },
+    );
   });
 
-  describe('getHtmlUrl', () => {
-    it('should return the HTML URL', async () => {
-      const apiRequestAuthSpy = jest.spyOn(apiRequests, 'apiRequestAuth');
+  it('getHtmlUrl - should return the HTML URL', async () => {
+    await getHtmlUrl(
+      'https://api.github.com/repos/gitify-app/notifications-test/issues/785' as Link,
+      '123' as Token,
+    );
 
-      const requestPromise = Promise.resolve({
-        data: {
-          html_url:
-            'https://github.com/gitify-app/notifications-test/issues/785',
-        },
-      } as AxiosResponse) as AxiosPromise;
-
-      apiRequestAuthSpy.mockResolvedValue(requestPromise);
-
-      const result = await getHtmlUrl(
-        'https://api.github.com/repos/gitify-app/notifications-test/issues/785' as Link,
-        '123' as Token,
-      );
-      expect(result).toBe(
-        'https://github.com/gitify-app/notifications-test/issues/785',
-      );
-    });
-
-    it('should handle error', async () => {
-      const rendererLogErrorSpy = jest
-        .spyOn(logger, 'rendererLogError')
-        .mockImplementation();
-
-      const apiRequestAuthSpy = jest.spyOn(apiRequests, 'apiRequestAuth');
-
-      const mockError = new Error('Test error');
-
-      apiRequestAuthSpy.mockRejectedValue(mockError);
-
-      await getHtmlUrl(
-        'https://api.github.com/repos/gitify-app/gitify/issues/785' as Link,
-        '123' as Token,
-      );
-
-      expect(rendererLogErrorSpy).toHaveBeenCalledTimes(1);
-    });
+    expect(performAuthenticatedRESTRequestSpy).toHaveBeenCalledWith(
+      'GET',
+      'https://api.github.com/repos/gitify-app/notifications-test/issues/785',
+      '123',
+    );
   });
 
   it('fetchAuthenticatedUserDetails calls performGraphQLRequest with correct args', async () => {
@@ -237,7 +215,7 @@ describe('renderer/utils/api/client.ts', () => {
     performGraphQLRequestSpy.mockResolvedValue({
       data: {},
       headers: {},
-    } as ExecutionResultWithHeaders<FetchAuthenticatedUserDetailsQuery>);
+    } as GitHubGraphQLResponse<FetchAuthenticatedUserDetailsQuery>);
 
     await fetchAuthenticatedUserDetails(mockGitHubHostname, mockToken);
 
@@ -263,7 +241,7 @@ describe('renderer/utils/api/client.ts', () => {
     performGraphQLRequestSpy.mockResolvedValue({
       data: {},
       headers: {},
-    } as ExecutionResultWithHeaders<FetchDiscussionByNumberQuery>);
+    } as GitHubGraphQLResponse<FetchDiscussionByNumberQuery>);
 
     await fetchDiscussionByNumber(mockNotification);
 
@@ -298,7 +276,7 @@ describe('renderer/utils/api/client.ts', () => {
     performGraphQLRequestSpy.mockResolvedValue({
       data: {},
       headers: {},
-    } as ExecutionResultWithHeaders<FetchIssueByNumberQuery>);
+    } as GitHubGraphQLResponse<FetchIssueByNumberQuery>);
 
     await fetchIssueByNumber(mockNotification);
 
@@ -331,7 +309,7 @@ describe('renderer/utils/api/client.ts', () => {
     performGraphQLRequestSpy.mockResolvedValue({
       data: {},
       headers: {},
-    } as ExecutionResultWithHeaders<FetchPullRequestByNumberQuery>);
+    } as GitHubGraphQLResponse<FetchPullRequestByNumberQuery>);
 
     await fetchPullByNumber(mockNotification);
 
@@ -367,7 +345,7 @@ describe('renderer/utils/api/client.ts', () => {
       performGraphQLRequestStringSpy.mockResolvedValue({
         data: {},
         headers: {},
-      } as ExecutionResultWithHeaders<unknown>);
+      } as GitHubGraphQLResponse<unknown>);
 
       await fetchNotificationDetailsForList([mockNotification]);
 
@@ -383,7 +361,7 @@ describe('renderer/utils/api/client.ts', () => {
       performGraphQLRequestStringSpy.mockResolvedValue({
         data: {},
         headers: {},
-      } as ExecutionResultWithHeaders<unknown>);
+      } as GitHubGraphQLResponse<unknown>);
 
       await fetchNotificationDetailsForList([]);
 
@@ -399,7 +377,7 @@ describe('renderer/utils/api/client.ts', () => {
       performGraphQLRequestStringSpy.mockResolvedValue({
         data: {},
         headers: {},
-      } as ExecutionResultWithHeaders<unknown>);
+      } as GitHubGraphQLResponse<unknown>);
 
       await fetchNotificationDetailsForList(mockGitHubCloudGitifyNotifications);
 
