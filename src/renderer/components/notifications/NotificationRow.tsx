@@ -1,4 +1,4 @@
-import { type FC, useCallback, useState } from 'react';
+import { type FC, useState } from 'react';
 
 import { BellSlashIcon, CheckIcon, ReadIcon } from '@primer/octicons-react';
 import { Stack, Text, Tooltip } from '@primer/react';
@@ -40,7 +40,7 @@ export const NotificationRow: FC<NotificationRowProps> = ({
 
   const shouldAnimateExit = shouldRemoveNotificationsFromState(settings);
 
-  const handleNotification = useCallback(() => {
+  const actionNotificationInteraction = () => {
     setShouldAnimateNotificationExit(shouldAnimateExit);
     openNotification(notification);
 
@@ -49,13 +49,7 @@ export const NotificationRow: FC<NotificationRowProps> = ({
     } else {
       markNotificationsAsRead([notification]);
     }
-  }, [
-    notification,
-    markNotificationsAsRead,
-    markNotificationsAsDone,
-    settings,
-    shouldAnimateExit,
-  ]);
+  };
 
   const actionMarkAsDone = () => {
     setShouldAnimateNotificationExit(shouldAnimateExit);
@@ -101,7 +95,7 @@ export const NotificationRow: FC<NotificationRowProps> = ({
           className="cursor-pointer text-sm w-full"
           direction="vertical"
           gap="none"
-          onClick={() => handleNotification()}
+          onClick={actionNotificationInteraction}
         >
           <NotificationHeader notification={notification} />
 
