@@ -24,9 +24,14 @@ jobs:
           node-version-file: .nvmrc
           cache: pnpm
 
-      - run: pnpm install
-      - run: pnpm tsc --noEmit
-      - run: pnpm test:coverage --verbose
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Check TypeScript
+        run: pnpm tsc --noEmit
+
+      - name: Run tests with coverage
+        run: pnpm test:coverage --verbose
 
       - name: Archive code coverage results
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0

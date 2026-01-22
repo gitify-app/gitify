@@ -32,7 +32,8 @@ jobs:
           node-version-file: .nvmrc
           cache: pnpm
 
-      - run: pnpm install --global renovate
+      - name: Install Renovate
+        run: pnpm install --global renovate
 
       - name: Validate Renovate config
         run: renovate-config-validator
