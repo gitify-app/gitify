@@ -25,12 +25,17 @@ jobs:
           node-version-file: .nvmrc
           cache: pnpm
 
-      - run: pnpm install
-      - run: pnpm build
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build application
+        run: pnpm build
         env:
           OAUTH_CLIENT_ID: ${{ secrets.OAUTH_CLIENT_ID }}
           OAUTH_CLIENT_SECRET: ${{ secrets.OAUTH_CLIENT_SECRET }}
-      - run: pnpm package:macos --publish onTagOrDraft
+
+      - name: Package and publish for macOS
+        run: pnpm package:macos --publish onTagOrDraft
         env:
           APPLE_ID_USERNAME: ${{ secrets.APPLE_ID_USERNAME }}
           APPLE_ID_PASSWORD: ${{ secrets.APPLE_ID_PASSWORD }}
@@ -64,12 +69,17 @@ jobs:
           node-version-file: .nvmrc
           cache: pnpm
 
-      - run: pnpm install
-      - run: pnpm build
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build application
+        run: pnpm build
         env:
           OAUTH_CLIENT_ID: ${{ secrets.OAUTH_CLIENT_ID }}
           OAUTH_CLIENT_SECRET: ${{ secrets.OAUTH_CLIENT_SECRET }}
-      - run: pnpm package:win --publish onTagOrDraft
+
+      - name: Package and publish for Windows
+        run: pnpm package:win --publish onTagOrDraft
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -97,12 +107,17 @@ jobs:
           node-version-file: .nvmrc
           cache: pnpm
 
-      - run: pnpm install
-      - run: pnpm build
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build application
+        run: pnpm build
         env:
           OAUTH_CLIENT_ID: ${{ secrets.OAUTH_CLIENT_ID }}
           OAUTH_CLIENT_SECRET: ${{ secrets.OAUTH_CLIENT_SECRET }}
-      - run: pnpm package:linux --publish onTagOrDraft
+
+      - name: Package and publish for Linux
+        run: pnpm package:linux --publish onTagOrDraft
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
