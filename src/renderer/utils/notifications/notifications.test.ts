@@ -12,6 +12,8 @@ import {
 } from '../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../__mocks__/state-mocks';
 
+import { Constants } from '../../constants';
+
 import {
   type AccountNotifications,
   type GitifyNotification,
@@ -22,6 +24,7 @@ import {
 } from '../../types';
 
 import * as logger from '../../utils/logger';
+import * as apiClient from '../api/client';
 import {
   enrichNotification,
   enrichNotifications,
@@ -189,6 +192,69 @@ describe('renderer/utils/notifications/notifications.ts', () => {
       const result = await enrichNotifications([], settings);
 
       expect(result).toEqual([]);
+    });
+
+    it('should batch notifications by GITHUB_API_MERGE_BATCH_SIZE', async () => {
+      const fetchNotificationDetailsForListSpy = jest
+        .spyOn(apiClient, 'fetchNotificationDetailsForList')
+        .mockResolvedValue(new Map());
+
+      const notificationCount = Constants.GITHUB_API_MERGE_BATCH_SIZE * 2.5;
+      const notifications = Array.from({ length: notificationCount }, (_, i) =>
+        mockPartialGitifyNotification({
+          title: `Notification ${i}`,
+          type: 'Issue',
+          url: `https://api.github.com/repos/gitify-app/notifications-test/issues/${i}` as Link,
+        }),
+      ) as GitifyNotification[];
+
+      const settings: SettingsState = {
+        ...mockSettings,
+        detailedNotifications: true,
+      };
+
+      await enrichNotifications(notifications, settings);
+
+      // Should be called 3 times: batches of 100, 100, 50
+      expect(fetchNotificationDetailsForListSpy).toHaveBeenCalledTimes(3);
+
+      // Verify batch sizes
+      expect(fetchNotificationDetailsForListSpy.mock.calls[0][0]).toHaveLength(
+        Constants.GITHUB_API_MERGE_BATCH_SIZE,
+      );
+      expect(fetchNotificationDetailsForListSpy.mock.calls[1][0]).toHaveLength(
+        Constants.GITHUB_API_MERGE_BATCH_SIZE,
+      );
+      expect(fetchNotificationDetailsForListSpy.mock.calls[2][0]).toHaveLength(
+        50,
+      );
+    });
+
+    it('should handle single batch of notifications', async () => {
+      const fetchNotificationDetailsForListSpy = jest
+        .spyOn(apiClient, 'fetchNotificationDetailsForList')
+        .mockResolvedValue(new Map());
+
+      const notifications = Array.from({ length: 50 }, (_, i) =>
+        mockPartialGitifyNotification({
+          title: `Notification ${i}`,
+          type: 'Issue',
+          url: `https://api.github.com/repos/gitify-app/notifications-test/issues/${i}` as Link,
+        }),
+      ) as GitifyNotification[];
+
+      const settings: SettingsState = {
+        ...mockSettings,
+        detailedNotifications: true,
+      };
+
+      await enrichNotifications(notifications, settings);
+
+      // Should be called once for single batch
+      expect(fetchNotificationDetailsForListSpy).toHaveBeenCalledTimes(1);
+      expect(fetchNotificationDetailsForListSpy.mock.calls[0][0]).toHaveLength(
+        50,
+      );
     });
   });
 });
