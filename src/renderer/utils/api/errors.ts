@@ -1,4 +1,5 @@
 import { AxiosError } from 'axios';
+import type { GraphQLError } from 'graphql';
 
 import type { GitifyError } from '../../types';
 import type { GitHubGraphQLResponse } from './graphql/types';
@@ -62,12 +63,11 @@ export function determineFailureType(
  */
 export function assertNoGraphQLErrors<TResult>(
   context: string,
-  payload: GitHubGraphQLResponse<TResult>, // TODO should this be ExecutionResult?
+  payload: GitHubGraphQLResponse<TResult>,
 ) {
   if (Array.isArray(payload.errors) && payload.errors.length > 0) {
     const errorMessages = payload.errors
-      .map((graphQLError) => graphQLError.message)
-      .filter((msg): msg is string => Boolean(msg))
+      .map((graphQLError: GraphQLError) => graphQLError.message)
       .join('; ');
 
     const err = new Error(
