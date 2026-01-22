@@ -60,12 +60,21 @@ export function determineFailureType(
  * @param context The context of the GraphQL request
  * @param payload The GraphQL response payload
  */
-export function assertNoGraphQLErrors(
+export function assertNoGraphQLErrors<TResult>(
   context: string,
-  payload: GitHubGraphQLResponse<unknown>, // TODO should this be ExecutionResult?
+  payload: GitHubGraphQLResponse<TResult>, // TODO should this be ExecutionResult?
 ) {
   if (Array.isArray(payload.errors) && payload.errors.length > 0) {
-    const err = new Error('GraphQL request returned errors');
+    const errorMessages = payload.errors
+      .map((graphQLError) => graphQLError.message)
+      .filter((msg): msg is string => Boolean(msg))
+      .join('; ');
+
+    const err = new Error(
+      errorMessages
+        ? `GraphQL request returned errors: ${errorMessages}`
+        : 'GraphQL request returned errors',
+    );
 
     rendererLogError(context, 'GraphQL errors present in response', err);
 

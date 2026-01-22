@@ -1,5 +1,7 @@
 import { AxiosError, type AxiosResponse } from 'axios';
 
+import type { DeepPartial } from '../../__helpers__/test-utils';
+
 import { EVENTS } from '../../../shared/events';
 
 import type { Link } from '../../types';
@@ -130,39 +132,46 @@ describe('renderer/utils/api/errors.ts', () => {
 
 describe('assertNoGraphQLErrors', () => {
   it('throws and logs when GraphQL errors are present', () => {
-    const logSpy = jest
+    const rendererLogErrorSpy = jest
       .spyOn(rendererLogger, 'rendererLogError')
       .mockImplementation();
 
-    const payload = {
+    const payload: GitHubGraphQLResponse<unknown> = {
       data: {},
-      errors: [{}],
-    } as unknown as GitHubGraphQLResponse<unknown>;
+      errors: [
+        {
+          message: 'Something went wrong',
+          locations: [{ line: 1, column: 1 }],
+        },
+      ],
+    } as DeepPartial<
+      GitHubGraphQLResponse<unknown>
+    > as GitHubGraphQLResponse<unknown>;
 
     expect(() => assertNoGraphQLErrors('test-context', payload)).toThrow(
       'GraphQL request returned errors',
     );
 
-    expect(logSpy).toHaveBeenCalled();
+    expect(rendererLogErrorSpy).toHaveBeenCalled();
   });
 
   it('does not throw when errors array is empty or undefined', () => {
-    const payloadNoErrors: GitHubGraphQLResponse<unknown> = {
-      data: {},
-      headers: {},
-    };
-    const payloadEmptyErrors: GitHubGraphQLResponse<unknown> = {
+    const payload: GitHubGraphQLResponse<unknown> = {
       data: {},
       errors: [],
       headers: {},
     };
 
-    expect(() =>
-      assertNoGraphQLErrors('test-context', payloadNoErrors),
-    ).not.toThrow();
-    expect(() =>
-      assertNoGraphQLErrors('test-context', payloadEmptyErrors),
-    ).not.toThrow();
+    expect(() => assertNoGraphQLErrors('test-context', payload)).not.toThrow();
+  });
+
+  it('does not throw when errors array is undefined', () => {
+    const payload: GitHubGraphQLResponse<unknown> = {
+      data: {},
+      headers: {},
+    };
+
+    expect(() => assertNoGraphQLErrors('test-context', payload)).not.toThrow();
   });
 });
 

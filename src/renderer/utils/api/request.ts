@@ -91,11 +91,7 @@ export async function performGraphQLRequest<TResult, TVariables>(
     },
     headers: headers,
   }).then((response) => {
-    // Check GraphQL errors
-    assertNoGraphQLErrors(
-      'performGraphQLRequest',
-      response.data as GitHubGraphQLResponse<TResult>,
-    );
+    assertNoGraphQLErrors<TResult>('performGraphQLRequest', response.data);
 
     return {
       ...response.data,
@@ -132,10 +128,9 @@ export async function performGraphQLRequestString<TResult>(
     },
     headers: headers,
   }).then((response) => {
-    // Check GraphQL errors
-    assertNoGraphQLErrors(
+    assertNoGraphQLErrors<TResult>(
       'performGraphQLRequestString',
-      response.data as GitHubGraphQLResponse<TResult>,
+      response.data,
     );
 
     return {
