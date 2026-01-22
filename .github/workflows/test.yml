@@ -9,7 +9,7 @@ permissions:
 jobs:
   run-unit-tests:
     name: Run Tests
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
