@@ -21,6 +21,9 @@
     "lint:check": "biome check",
     "lint": "biome check --fix",
     "test": "jest",
+    "test:watch": "jest --watch",
+    "test:changed": "jest --onlyChanged",
+    "test:coverage": "jest --coverage",
     "start": "electron . --enable-logging",
     "prepare": "husky",
     "codegen": "graphql-codegen --config codegen.ts"
@@ -151,6 +154,6 @@
   },
   "lint-staged": {
     "*": "biome check --no-errors-on-unmatched",
-    "*.{js,ts,tsx}": "pnpm test --findRelatedTests --passWithNoTests --updateSnapshot"
+    "*.{js,ts,tsx}": "pnpm test --onlyChanged --passWithNoTests --updateSnapshot"
   }
 }

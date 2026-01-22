@@ -5,7 +5,7 @@ const config: Config = {
   globalSetup: '<rootDir>/src/renderer/__helpers__/jest.setup.env.ts',
   setupFilesAfterEnv: ['<rootDir>/src/renderer/__helpers__/jest.setup.ts'],
   testEnvironment: 'jsdom',
-  collectCoverage: true,
+  collectCoverage: false,
   collectCoverageFrom: ['src/**/*', '!**/__snapshots__/**'],
   // Use ts-jest for TS/TSX and babel-jest only for plain JS/ESM (no JSX handled there)
   transform: {
