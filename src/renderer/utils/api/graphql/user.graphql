@@ -1,0 +1,8 @@
+query FetchAuthenticatedUserDetails {
+  viewer {
+    id
+    name
+    login
+    avatar: avatarUrl
+  }
+}

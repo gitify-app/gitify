@@ -1,19 +1,41 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`renderer/routes/Notifications.tsx should render itself & its children (all read notifications) 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <p>
-        AllRead
-      </p>
+      <div
+        data-color-mode="light"
+        data-dark-theme="dark"
+        data-light-theme="light"
+      >
+        <div
+          class="prc-src-BaseStyles-aopSS"
+          data-portal-root="true"
+        >
+          <p>
+            AllRead
+          </p>
+        </div>
+      </div>
     </div>
   </body>,
   "container": <div>
-    <p>
-      AllRead
-    </p>
+    <div
+      data-color-mode="light"
+      data-dark-theme="dark"
+      data-light-theme="light"
+    >
+      <div
+        class="prc-src-BaseStyles-aopSS"
+        data-portal-root="true"
+      >
+        <p>
+          AllRead
+        </p>
+      </div>
+    </div>
   </div>,
   "debug": [Function],
   "findAllByAltText": [Function],
@@ -74,15 +96,37 @@ exports[`renderer/routes/Notifications.tsx should render itself & its children (
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <p>
-        Oops
-      </p>
+      <div
+        data-color-mode="light"
+        data-dark-theme="dark"
+        data-light-theme="light"
+      >
+        <div
+          class="prc-src-BaseStyles-aopSS"
+          data-portal-root="true"
+        >
+          <p>
+            Oops
+          </p>
+        </div>
+      </div>
     </div>
   </body>,
   "container": <div>
-    <p>
-      Oops
-    </p>
+    <div
+      data-color-mode="light"
+      data-dark-theme="dark"
+      data-light-theme="light"
+    >
+      <div
+        class="prc-src-BaseStyles-aopSS"
+        data-portal-root="true"
+      >
+        <p>
+          Oops
+        </p>
+      </div>
+    </div>
   </div>,
   "debug": [Function],
   "findAllByAltText": [Function],
@@ -143,15 +187,37 @@ exports[`renderer/routes/Notifications.tsx should render itself & its children (
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <p>
-        Oops
-      </p>
+      <div
+        data-color-mode="light"
+        data-dark-theme="dark"
+        data-light-theme="light"
+      >
+        <div
+          class="prc-src-BaseStyles-aopSS"
+          data-portal-root="true"
+        >
+          <p>
+            Oops
+          </p>
+        </div>
+      </div>
     </div>
   </body>,
   "container": <div>
-    <p>
-      Oops
-    </p>
+    <div
+      data-color-mode="light"
+      data-dark-theme="dark"
+      data-light-theme="light"
+    >
+      <div
+        class="prc-src-BaseStyles-aopSS"
+        data-portal-root="true"
+      >
+        <p>
+          Oops
+        </p>
+      </div>
+    </div>
   </div>,
   "debug": [Function],
   "findAllByAltText": [Function],
@@ -212,15 +278,37 @@ exports[`renderer/routes/Notifications.tsx should render itself & its children (
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <p>
-        Oops
-      </p>
+      <div
+        data-color-mode="light"
+        data-dark-theme="dark"
+        data-light-theme="light"
+      >
+        <div
+          class="prc-src-BaseStyles-aopSS"
+          data-portal-root="true"
+        >
+          <p>
+            Oops
+          </p>
+        </div>
+      </div>
     </div>
   </body>,
   "container": <div>
-    <p>
-      Oops
-    </p>
+    <div
+      data-color-mode="light"
+      data-dark-theme="dark"
+      data-light-theme="light"
+    >
+      <div
+        class="prc-src-BaseStyles-aopSS"
+        data-portal-root="true"
+      >
+        <p>
+          Oops
+        </p>
+      </div>
+    </div>
   </div>,
   "debug": [Function],
   "findAllByAltText": [Function],
@@ -281,15 +369,37 @@ exports[`renderer/routes/Notifications.tsx should render itself & its children (
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <p>
-        Oops
-      </p>
+      <div
+        data-color-mode="light"
+        data-dark-theme="dark"
+        data-light-theme="light"
+      >
+        <div
+          class="prc-src-BaseStyles-aopSS"
+          data-portal-root="true"
+        >
+          <p>
+            Oops
+          </p>
+        </div>
+      </div>
     </div>
   </body>,
   "container": <div>
-    <p>
-      Oops
-    </p>
+    <div
+      data-color-mode="light"
+      data-dark-theme="dark"
+      data-light-theme="light"
+    >
+      <div
+        class="prc-src-BaseStyles-aopSS"
+        data-portal-root="true"
+      >
+        <p>
+          Oops
+        </p>
+      </div>
+    </div>
   </div>,
   "debug": [Function],
   "findAllByAltText": [Function],
@@ -350,15 +460,37 @@ exports[`renderer/routes/Notifications.tsx should render itself & its children (
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <p>
-        Oops
-      </p>
+      <div
+        data-color-mode="light"
+        data-dark-theme="dark"
+        data-light-theme="light"
+      >
+        <div
+          class="prc-src-BaseStyles-aopSS"
+          data-portal-root="true"
+        >
+          <p>
+            Oops
+          </p>
+        </div>
+      </div>
     </div>
   </body>,
   "container": <div>
-    <p>
-      Oops
-    </p>
+    <div
+      data-color-mode="light"
+      data-dark-theme="dark"
+      data-light-theme="light"
+    >
+      <div
+        class="prc-src-BaseStyles-aopSS"
+        data-portal-root="true"
+      >
+        <p>
+          Oops
+        </p>
+      </div>
+    </div>
   </div>,
   "debug": [Function],
   "findAllByAltText": [Function],
@@ -420,14 +552,16 @@ exports[`renderer/routes/Notifications.tsx should render itself & its children (
   "baseElement": <body>
     <div>
       <div
-        class="Box-sc-g0xbh4-0 flex flex-col h-screen"
-        data-testid="notifications"
+        data-color-mode="light"
+        data-dark-theme="dark"
+        data-light-theme="light"
       >
         <div
-          class="Box-sc-g0xbh4-0 grow overflow-x-hidden overflow-y-auto"
+          class="prc-src-BaseStyles-aopSS"
+          data-portal-root="true"
         >
           <p>
-            AccountNotifications
+            AllRead
           </p>
         </div>
       </div>
@@ -435,14 +569,16 @@ exports[`renderer/routes/Notifications.tsx should render itself & its children (
   </body>,
   "container": <div>
     <div
-      class="Box-sc-g0xbh4-0 flex flex-col h-screen"
-      data-testid="notifications"
+      data-color-mode="light"
+      data-dark-theme="dark"
+      data-light-theme="light"
     >
       <div
-        class="Box-sc-g0xbh4-0 grow overflow-x-hidden overflow-y-auto"
+        class="prc-src-BaseStyles-aopSS"
+        data-portal-root="true"
       >
         <p>
-          AccountNotifications
+          AllRead
         </p>
       </div>
     </div>
@@ -507,17 +643,16 @@ exports[`renderer/routes/Notifications.tsx should render itself & its children (
   "baseElement": <body>
     <div>
       <div
-        class="Box-sc-g0xbh4-0 flex flex-col h-screen"
-        data-testid="notifications"
+        data-color-mode="light"
+        data-dark-theme="dark"
+        data-light-theme="light"
       >
         <div
-          class="Box-sc-g0xbh4-0 grow overflow-x-hidden overflow-y-auto"
+          class="prc-src-BaseStyles-aopSS"
+          data-portal-root="true"
         >
           <p>
-            AccountNotifications
-          </p>
-          <p>
-            AccountNotifications
+            AllRead
           </p>
         </div>
       </div>
@@ -525,17 +660,16 @@ exports[`renderer/routes/Notifications.tsx should render itself & its children (
   </body>,
   "container": <div>
     <div
-      class="Box-sc-g0xbh4-0 flex flex-col h-screen"
-      data-testid="notifications"
+      data-color-mode="light"
+      data-dark-theme="dark"
+      data-light-theme="light"
     >
       <div
-        class="Box-sc-g0xbh4-0 grow overflow-x-hidden overflow-y-auto"
+        class="prc-src-BaseStyles-aopSS"
+        data-portal-root="true"
       >
         <p>
-          AccountNotifications
-        </p>
-        <p>
-          AccountNotifications
+          AllRead
         </p>
       </div>
     </div>

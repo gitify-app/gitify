@@ -1,15 +1,20 @@
 import { type FC, useMemo } from 'react';
 
-import type { GitifyError } from '../types';
-import { Errors } from '../utils/errors';
 import { EmojiSplash } from './layout/EmojiSplash';
 
-interface IOops {
+import type { GitifyError } from '../types';
+
+import { Errors } from '../utils/errors';
+
+interface OopsProps {
   error: GitifyError;
   fullHeight?: boolean;
 }
 
-export const Oops: FC<IOops> = ({ error, fullHeight = true }: IOops) => {
+export const Oops: FC<OopsProps> = ({
+  error,
+  fullHeight = true,
+}: OopsProps) => {
   const err = error ?? Errors.UNKNOWN;
 
   const emoji = useMemo(
@@ -20,9 +25,9 @@ export const Oops: FC<IOops> = ({ error, fullHeight = true }: IOops) => {
   return (
     <EmojiSplash
       emoji={emoji}
+      fullHeight={fullHeight}
       heading={err.title}
       subHeadings={err.descriptions}
-      fullHeight={fullHeight}
     />
   );
 };

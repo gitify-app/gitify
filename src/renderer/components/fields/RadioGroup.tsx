@@ -1,52 +1,59 @@
-import type { ChangeEvent, FC } from 'react';
+import type { ChangeEvent, FC, ReactNode } from 'react';
 
 import { Stack } from '@primer/react';
 
 import type { RadioGroupItem } from '../../types';
-import { FieldLabel } from './FieldLabel';
 
-export interface IRadioGroup {
+import { FieldLabel } from './FieldLabel';
+import { Tooltip } from './Tooltip';
+
+export interface RadioGroupProps {
   name: string;
   label: string;
   options: RadioGroupItem[];
   value: string;
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  tooltip?: ReactNode | string;
 }
 
-export const RadioGroup: FC<IRadioGroup> = (props: IRadioGroup) => {
+export const RadioGroup: FC<RadioGroupProps> = (props: RadioGroupProps) => {
   return (
     <Stack
-      direction="horizontal"
-      gap="condensed"
       align="center"
       className="text-sm"
+      direction="horizontal"
+      gap="condensed"
     >
-      <FieldLabel name={props.name} label={props.label} />
+      <FieldLabel label={props.label} name={props.name} />
 
       {props.options.map((item) => {
         const name = `radio-${props.name}-${item.value.toLowerCase()}`;
 
         return (
           <Stack
+            align="center"
             direction="horizontal"
             gap="condensed"
-            align="center"
             key={name}
           >
             <input
-              type="radio"
+              checked={item.value === props.value}
               className="size-4 cursor-pointer"
+              data-testid={name}
               id={name}
               name={props.name}
-              value={item.value}
               onChange={props.onChange}
-              checked={item.value === props.value}
-              data-testid={name}
+              type="radio"
+              value={item.value}
             />
-            <FieldLabel name={name} label={item.label} />
+            <FieldLabel label={item.label} name={name} />
           </Stack>
         );
       })}
+
+      {props.tooltip && (
+        <Tooltip name={`tooltip-${props.name}`} tooltip={props.tooltip} />
+      )}
     </Stack>
   );
 };

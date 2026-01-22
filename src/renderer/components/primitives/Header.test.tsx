@@ -1,54 +1,54 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { MarkGithubIcon } from '@primer/octicons-react';
 
-import { AppContext } from '../../context/App';
+import { renderWithAppContext } from '../../__helpers__/test-utils';
+
 import { Header } from './Header';
 
-const mockNavigate = jest.fn();
+const navigateMock = jest.fn();
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
-  useNavigate: () => mockNavigate,
+  useNavigate: () => navigateMock,
 }));
 
 describe('renderer/components/primitives/Header.tsx', () => {
-  const fetchNotifications = jest.fn();
+  const fetchNotificationsMock = jest.fn();
 
   afterEach(() => {
-    jest.resetAllMocks();
+    jest.clearAllMocks();
   });
 
   it('should render itself & its children', () => {
-    const tree = render(<Header icon={MarkGithubIcon}>Test Header</Header>);
+    const tree = renderWithAppContext(
+      <Header icon={MarkGithubIcon}>Test Header</Header>,
+    );
 
     expect(tree).toMatchSnapshot();
   });
 
   it('should navigate back', async () => {
-    render(<Header icon={MarkGithubIcon}>Test Header</Header>);
+    renderWithAppContext(<Header icon={MarkGithubIcon}>Test Header</Header>);
 
     await userEvent.click(screen.getByTestId('header-nav-back'));
 
-    expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
+    expect(navigateMock).toHaveBeenCalledTimes(1);
+    expect(navigateMock).toHaveBeenCalledWith(-1);
   });
 
   it('should navigate back and fetch notifications', async () => {
-    render(
-      <AppContext.Provider
-        value={{
-          fetchNotifications,
-        }}
-      >
-        <Header fetchOnBack icon={MarkGithubIcon}>
-          Test Header
-        </Header>
-      </AppContext.Provider>,
+    renderWithAppContext(
+      <Header fetchOnBack icon={MarkGithubIcon}>
+        Test Header
+      </Header>,
+      { fetchNotifications: fetchNotificationsMock },
     );
 
     await userEvent.click(screen.getByTestId('header-nav-back'));
 
-    expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
-    expect(fetchNotifications).toHaveBeenCalledTimes(1);
+    expect(fetchNotificationsMock).toHaveBeenCalledTimes(1);
+    expect(navigateMock).toHaveBeenCalledTimes(1);
+    expect(navigateMock).toHaveBeenCalledWith(-1);
   });
 });

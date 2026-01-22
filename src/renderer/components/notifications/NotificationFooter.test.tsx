@@ -1,166 +1,106 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import {
-  mockGitHubCloudAccount,
-  mockSettings,
-} from '../../__mocks__/state-mocks';
-import { AppContext } from '../../context/App';
-import { GroupBy, type Link } from '../../types';
-import type { UserType } from '../../typesGitHub';
-import { mockSingleNotification } from '../../utils/api/__mocks__/response-mocks';
+import { renderWithAppContext } from '../../__helpers__/test-utils';
+import { mockGitifyNotification } from '../../__mocks__/notifications-mocks';
+
+import type { GitifyNotificationUser, Link } from '../../types';
+
 import * as comms from '../../utils/comms';
-import { NotificationFooter } from './NotificationFooter';
+import {
+  NotificationFooter,
+  type NotificationFooterProps,
+} from './NotificationFooter';
 
 describe('renderer/components/notifications/NotificationFooter.tsx', () => {
+  jest
+    .spyOn(globalThis.Date, 'now')
+    .mockImplementation(() => new Date('2024').valueOf());
+
   afterEach(() => {
     jest.clearAllMocks();
   });
 
   it('should render itself & its children', async () => {
-    jest
-      .spyOn(global.Date, 'now')
-      .mockImplementation(() => new Date('2024').valueOf());
-
-    const props = {
-      notification: mockSingleNotification,
+    const props: NotificationFooterProps = {
+      notification: mockGitifyNotification,
     };
 
-    const tree = render(
-      <AppContext.Provider
-        value={{ settings: { ...mockSettings, groupBy: GroupBy.DATE } }}
-      >
-        <NotificationFooter {...props} />
-      </AppContext.Provider>,
-    );
-
-    expect(tree).toMatchSnapshot();
-  });
-
-  it('should render itself & its children when last_read_at is null', async () => {
-    jest
-      .spyOn(global.Date, 'now')
-      .mockImplementation(() => new Date('2024').valueOf());
-
-    const mockNotification = mockSingleNotification;
-    mockNotification.last_read_at = null;
-
-    const props = {
-      notification: mockNotification,
-    };
-
-    const tree = render(
-      <AppContext.Provider value={{ settings: mockSettings }}>
-        <NotificationFooter {...props} />
-      </AppContext.Provider>,
-    );
+    const tree = renderWithAppContext(<NotificationFooter {...props} />);
 
     expect(tree).toMatchSnapshot();
   });
 
   describe('security alerts should use github icon for avatar', () => {
     it('Repository Dependabot Alerts Thread', async () => {
-      jest
-        .spyOn(global.Date, 'now')
-        .mockImplementation(() => new Date('2024').valueOf());
-
-      const mockNotification = mockSingleNotification;
+      const mockNotification = mockGitifyNotification;
       mockNotification.subject.type = 'RepositoryDependabotAlertsThread';
 
-      const props = {
+      const props: NotificationFooterProps = {
         notification: mockNotification,
       };
 
-      const tree = render(
-        <AppContext.Provider value={{ settings: mockSettings }}>
-          <NotificationFooter {...props} />
-        </AppContext.Provider>,
-      );
+      const tree = renderWithAppContext(<NotificationFooter {...props} />);
 
       expect(tree).toMatchSnapshot();
     });
 
     it('Repository Vulnerability Alert', async () => {
-      jest
-        .spyOn(global.Date, 'now')
-        .mockImplementation(() => new Date('2024').valueOf());
-
-      const mockNotification = mockSingleNotification;
+      const mockNotification = mockGitifyNotification;
       mockNotification.subject.type = 'RepositoryVulnerabilityAlert';
 
-      const props = {
+      const props: NotificationFooterProps = {
         notification: mockNotification,
       };
 
-      const tree = render(
-        <AppContext.Provider value={{ settings: mockSettings }}>
-          <NotificationFooter {...props} />
-        </AppContext.Provider>,
-      );
+      const tree = renderWithAppContext(<NotificationFooter {...props} />);
 
       expect(tree).toMatchSnapshot();
     });
   });
 
   it('should default to known avatar if no user found', async () => {
-    jest
-      .spyOn(global.Date, 'now')
-      .mockImplementation(() => new Date('2024').valueOf());
-
-    const mockNotification = mockSingleNotification;
+    const mockNotification = mockGitifyNotification;
     mockNotification.subject.user = null;
 
-    const props = {
+    const props: NotificationFooterProps = {
       notification: mockNotification,
     };
 
-    const tree = render(
-      <AppContext.Provider value={{ settings: mockSettings }}>
-        <NotificationFooter {...props} />
-      </AppContext.Provider>,
-    );
+    const tree = renderWithAppContext(<NotificationFooter {...props} />);
 
     expect(tree).toMatchSnapshot();
   });
 
   it('should open notification user profile', async () => {
-    const openExternalLinkMock = jest
+    const openExternalLinkSpy = jest
       .spyOn(comms, 'openExternalLink')
       .mockImplementation();
 
-    const props = {
+    const props: NotificationFooterProps = {
       notification: {
-        ...mockSingleNotification,
+        ...mockGitifyNotification,
         subject: {
-          ...mockSingleNotification.subject,
+          ...mockGitifyNotification.subject,
           user: {
             login: 'some-user',
-            html_url: 'https://github.com/some-user' as Link,
-            avatar_url:
-              'https://avatars.githubusercontent.com/u/123456789?v=4' as Link,
-            type: 'User' as UserType,
+            htmlUrl: 'https://github.com/some-user' as Link,
+            avatarUrl:
+              'https://avatars.githubusercontent.com/u/583231?v=4' as Link,
+            type: 'User' as GitifyNotificationUser['type'],
           },
           reviews: null,
         },
       },
-      account: mockGitHubCloudAccount,
     };
 
-    render(
-      <AppContext.Provider
-        value={{
-          settings: { ...mockSettings },
-        }}
-      >
-        <NotificationFooter {...props} />
-      </AppContext.Provider>,
-    );
+    renderWithAppContext(<NotificationFooter {...props} />);
 
     await userEvent.click(screen.getByTestId('view-profile'));
 
-    expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
-    expect(openExternalLinkMock).toHaveBeenCalledWith(
-      props.notification.subject.user.html_url,
+    expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
+    expect(openExternalLinkSpy).toHaveBeenCalledWith(
+      props.notification.subject.user.htmlUrl,
     );
   });
 });

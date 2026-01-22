@@ -1,9 +1,9 @@
-import { render } from '@testing-library/react';
+import { renderWithAppContext } from '../../__helpers__/test-utils';
 
-import { Checkbox, type ICheckbox } from './Checkbox';
+import { Checkbox, type CheckboxProps } from './Checkbox';
 
 describe('renderer/components/fields/Checkbox.tsx', () => {
-  const props: ICheckbox = {
+  const props: CheckboxProps = {
     name: 'appearance',
     label: 'Appearance',
     checked: true,
@@ -11,39 +11,43 @@ describe('renderer/components/fields/Checkbox.tsx', () => {
   };
 
   it('should render - visible', () => {
-    const tree = render(<Checkbox {...props} />);
+    const tree = renderWithAppContext(<Checkbox {...props} />);
     expect(tree).toMatchSnapshot();
   });
 
   it('should render - not visible', () => {
-    const tree = render(<Checkbox visible={false} {...props} />);
+    const tree = renderWithAppContext(<Checkbox visible={false} {...props} />);
     expect(tree).toMatchSnapshot();
   });
 
   it('should render - disabled', () => {
-    const tree = render(<Checkbox disabled={true} {...props} />);
+    const tree = renderWithAppContext(<Checkbox disabled={true} {...props} />);
     expect(tree).toMatchSnapshot();
   });
 
   it('should render - tooltip', () => {
-    const tree = render(
+    const tree = renderWithAppContext(
       <Checkbox {...props} tooltip={<div>Hello world</div>} />,
     );
     expect(tree).toMatchSnapshot();
   });
 
   it('should render - positive counter unselected', () => {
-    const tree = render(<Checkbox {...props} counter={5} checked={false} />);
+    const tree = renderWithAppContext(
+      <Checkbox {...props} checked={false} counter={5} />,
+    );
     expect(tree).toMatchSnapshot();
   });
 
   it('should render - positive counter selected', () => {
-    const tree = render(<Checkbox {...props} counter={5} checked={true} />);
+    const tree = renderWithAppContext(
+      <Checkbox {...props} checked={true} counter={5} />,
+    );
     expect(tree).toMatchSnapshot();
   });
 
   it('should render - zero counter', () => {
-    const tree = render(<Checkbox {...props} counter={0} />);
+    const tree = renderWithAppContext(<Checkbox {...props} counter={0} />);
     expect(tree).toMatchSnapshot();
   });
 });

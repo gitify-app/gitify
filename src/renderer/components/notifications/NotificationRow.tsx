@@ -1,48 +1,47 @@
-import { type FC, useCallback, useContext, useState } from 'react';
+import { type FC, useCallback, useState } from 'react';
 
 import { BellSlashIcon, CheckIcon, ReadIcon } from '@primer/octicons-react';
-import { Box, Stack, Text, Tooltip } from '@primer/react';
+import { Stack, Text, Tooltip } from '@primer/react';
 
-import { AppContext } from '../../context/App';
-import { GroupBy, Opacity, Size } from '../../types';
-import type { Notification } from '../../typesGitHub';
-import { cn } from '../../utils/cn';
-import { isMarkAsDoneFeatureSupported } from '../../utils/features';
-import { formatForDisplay } from '../../utils/helpers';
-import {
-  getNotificationTypeIcon,
-  getNotificationTypeIconColor,
-} from '../../utils/icons';
-import { openNotification } from '../../utils/links';
+import { useAppContext } from '../../hooks/useAppContext';
+
 import { HoverButton } from '../primitives/HoverButton';
 import { HoverGroup } from '../primitives/HoverGroup';
+
+import { type GitifyNotification, Opacity, Size } from '../../types';
+
+import { cn } from '../../utils/cn';
+import { isMarkAsDoneFeatureSupported } from '../../utils/features';
+import { openNotification } from '../../utils/links';
+import { isGroupByDate } from '../../utils/notifications/group';
+import { shouldRemoveNotificationsFromState } from '../../utils/notifications/remove';
 import { NotificationFooter } from './NotificationFooter';
 import { NotificationHeader } from './NotificationHeader';
+import { NotificationTitle } from './NotificationTitle';
 
-interface INotificationRow {
-  notification: Notification;
-  isAnimated?: boolean;
-  isRead?: boolean;
+export interface NotificationRowProps {
+  notification: GitifyNotification;
+  isRepositoryAnimatingExit: boolean;
 }
 
-export const NotificationRow: FC<INotificationRow> = ({
+export const NotificationRow: FC<NotificationRowProps> = ({
   notification,
-  isAnimated = false,
-  isRead = false,
-}: INotificationRow) => {
+  isRepositoryAnimatingExit,
+}: NotificationRowProps) => {
   const {
     settings,
     markNotificationsAsRead,
     markNotificationsAsDone,
     unsubscribeNotification,
-  } = useContext(AppContext);
-  const [animateExit, setAnimateExit] = useState(false);
-  const [showAsRead, setShowAsRead] = useState(false);
+  } = useAppContext();
+
+  const [shouldAnimateNotificationExit, setShouldAnimateNotificationExit] =
+    useState(false);
+
+  const shouldAnimateExit = shouldRemoveNotificationsFromState(settings);
 
   const handleNotification = useCallback(() => {
-    setAnimateExit(!settings.delayNotificationState);
-    setShowAsRead(settings.delayNotificationState);
-
+    setShouldAnimateNotificationExit(shouldAnimateExit);
     openNotification(notification);
 
     if (settings.markAsDoneOnOpen) {
@@ -55,17 +54,16 @@ export const NotificationRow: FC<INotificationRow> = ({
     markNotificationsAsRead,
     markNotificationsAsDone,
     settings,
+    shouldAnimateExit,
   ]);
 
   const actionMarkAsDone = () => {
-    setAnimateExit(!settings.delayNotificationState);
-    setShowAsRead(settings.delayNotificationState);
+    setShouldAnimateNotificationExit(shouldAnimateExit);
     markNotificationsAsDone([notification]);
   };
 
   const actionMarkAsRead = () => {
-    setAnimateExit(!settings.delayNotificationState);
-    setShowAsRead(settings.delayNotificationState);
+    setShouldAnimateNotificationExit(shouldAnimateExit);
     markNotificationsAsRead([notification]);
   };
 
@@ -73,112 +71,94 @@ export const NotificationRow: FC<INotificationRow> = ({
     unsubscribeNotification(notification);
   };
 
-  const NotificationIcon = getNotificationTypeIcon(notification.subject);
-  const iconColor = getNotificationTypeIconColor(notification.subject);
-
-  const notificationType = formatForDisplay([
-    notification.subject.state,
-    notification.subject.type,
-  ]);
-
-  const notificationNumber = notification.subject?.number
-    ? `#${notification.subject.number}`
-    : '';
-
-  const notificationTitle = notificationNumber
-    ? `${notification.subject.title} [${notificationNumber}]`
-    : notification.subject.title;
-
-  const groupByDate = settings.groupBy === GroupBy.DATE;
+  const NotificationIcon = notification.display.icon.type;
+  const isNotificationRead = !notification.unread;
 
   return (
-    <Box
-      id={notification.id}
+    <div
       className={cn(
-        'group border-b',
-        'pl-3 pr-1 py-1.5',
+        'group relative border-b',
+        'pl-2.75 pr-1 py-0.75',
         'text-gitify-font border-gitify-notification-border hover:bg-gitify-notification-hover',
-        (isAnimated || animateExit) &&
-          'translate-x-full opacity-0 transition duration-[350ms] ease-in-out',
-        (isRead || showAsRead) && Opacity.READ,
+        (isRepositoryAnimatingExit || shouldAnimateNotificationExit) &&
+          'translate-x-full opacity-0 transition duration-350 ease-in-out',
+        isNotificationRead && Opacity.READ,
       )}
+      id={notification.id}
     >
-      <Stack
-        direction="horizontal"
-        align="center"
-        gap="condensed"
-        className="relative"
-      >
-        <Tooltip text={notificationType} direction="e">
-          <NotificationIcon size={Size.LARGE} className={iconColor} />
+      <Stack align="center" direction="horizontal" gap="condensed">
+        <Tooltip direction="e" text={notification.display.type}>
+          <button type="button">
+            <NotificationIcon
+              aria-label={notification.display.type}
+              className={notification.display.icon.color}
+              size={Size.LARGE}
+            />
+          </button>
         </Tooltip>
 
         <Stack
+          className="cursor-pointer text-sm w-full"
           direction="vertical"
           gap="none"
-          className={cn(
-            'cursor-pointer text-sm w-full',
-            !settings.wrapNotificationTitle && 'truncate',
-          )}
           onClick={() => handleNotification()}
         >
           <NotificationHeader notification={notification} />
 
           <Stack
-            direction="horizontal"
             align="start"
-            justify="space-between"
-            gap="condensed"
-            title={notificationTitle}
-            className={cn(
-              'mb-0.5',
-              !settings.wrapNotificationTitle && 'truncate',
-            )}
+            className="mb-0.5"
             data-testid="notification-row"
+            direction="horizontal"
+            gap="condensed"
+            justify="space-between"
+            title={notification.display.title}
           >
-            <Text className={!settings.wrapNotificationTitle && 'truncate'}>
-              {notification.subject.title}
-            </Text>
+            <NotificationTitle title={notification.subject.title} />
             <Text
               className={cn(
                 'text-xxs ml-auto mr-2',
                 Opacity.READ,
-                (groupByDate || !settings.showNumber) && 'hidden',
+                (isGroupByDate(settings) || !settings.showNumber) && 'hidden',
               )}
             >
-              {notificationNumber}
+              {notification.display.number}
             </Text>
           </Stack>
 
           <NotificationFooter notification={notification} />
         </Stack>
-
-        {!animateExit && (
-          <HoverGroup bgColor="group-hover:bg-gitify-notification-hover">
-            <HoverButton
-              label="Mark as done"
-              icon={CheckIcon}
-              enabled={isMarkAsDoneFeatureSupported(notification.account)}
-              testid="notification-mark-as-done"
-              action={actionMarkAsDone}
-            />
-
-            <HoverButton
-              label="Mark as read"
-              icon={ReadIcon}
-              testid="notification-mark-as-read"
-              action={actionMarkAsRead}
-            />
-
-            <HoverButton
-              label="Unsubscribe from thread"
-              icon={BellSlashIcon}
-              testid="notification-unsubscribe-from-thread"
-              action={actionUnsubscribeFromThread}
-            />
-          </HoverGroup>
-        )}
       </Stack>
-    </Box>
+
+      {!shouldAnimateNotificationExit && (
+        <HoverGroup bgColor="group-hover:bg-gitify-notification-hover">
+          <HoverButton
+            action={actionMarkAsRead}
+            enabled={!isNotificationRead}
+            icon={ReadIcon}
+            label="Mark as read"
+            testid="notification-mark-as-read"
+          />
+
+          <HoverButton
+            action={actionMarkAsDone}
+            enabled={
+              isMarkAsDoneFeatureSupported(notification.account) &&
+              notification.unread
+            }
+            icon={CheckIcon}
+            label="Mark as done"
+            testid="notification-mark-as-done"
+          />
+
+          <HoverButton
+            action={actionUnsubscribeFromThread}
+            icon={BellSlashIcon}
+            label="Unsubscribe from thread"
+            testid="notification-unsubscribe-from-thread"
+          />
+        </HoverGroup>
+      )}
+    </div>
   );
 };

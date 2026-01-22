@@ -18,6 +18,11 @@ pnpm install
 > OAUTH_CLIENT_ID="123" OAUTH_CLIENT_SECRET="456789" pnpm build
 > ```
 
+Copy the `.env.template` to `.env` and add update `GITHUB_TOKEN` with a GitHub Personal Access Token.  This is used for fetching the latest GitHub GraphQL API schema for `graphql-codegen`.
+```shell
+GITHUB_TOKEN=<some personal access token>
+```  
+
 To watch for changes (`webpack`) in the `src` directory:
 
 ```shell
@@ -85,7 +90,7 @@ This project is a tool for monitoring new notifications from GitHub. It's not me
 * Seeing past notifications. This is a tool for monitoring new notifications, not seeing old ones, which can be seen at https://github.com/notifications.
 * Specific UX/UI changes that add options and/or visual complexity for minor workflow improvements. e.g. https://github.com/gitify-app/gitify/issues/358, https://github.com/gitify-app/gitify/issues/411 and https://github.com/gitify-app/gitify/issues/979
 * UI for something that isn't core to Gitify, and/or can be trivially done another way. e.g. https://github.com/gitify-app/gitify/issues/476 and https://github.com/gitify-app/gitify/issues/221
-* Support anything other than GitHub. Doing so would be a major undertaking that we may consider in future, but it would be a ton of work and there's so much tied to GitHub right now that it's not something I'd want to maintain.
+* Support anything other than GitHub. Doing so would be a major undertaking that we may consider in future.
 
 <!-- LINK LABELS -->
 [biome-website]: https://biomejs.dev/

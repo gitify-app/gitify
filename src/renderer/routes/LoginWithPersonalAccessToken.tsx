@@ -1,4 +1,4 @@
-import { type FC, useCallback, useContext, useMemo, useState } from 'react';
+import { type FC, useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import {
@@ -9,6 +9,7 @@ import {
   SignInIcon,
 } from '@primer/octicons-react';
 import {
+  Banner,
   Button,
   FormControl,
   Stack,
@@ -16,16 +17,19 @@ import {
   TextInput,
   Tooltip,
 } from '@primer/react';
-import { Banner } from '@primer/react/experimental';
 
-import { logError } from '../../shared/logger';
+import { Constants } from '../constants';
+
+import { useAppContext } from '../hooks/useAppContext';
+
 import { Contents } from '../components/layout/Contents';
 import { Page } from '../components/layout/Page';
 import { Footer } from '../components/primitives/Footer';
 import { Header } from '../components/primitives/Header';
-import { AppContext } from '../context/App';
+
 import type { Hostname, Token } from '../types';
 import type { LoginPersonalAccessTokenOptions } from '../utils/auth/types';
+
 import {
   formatRecommendedOAuthScopes,
   getNewTokenURL,
@@ -33,11 +37,11 @@ import {
   isValidToken,
 } from '../utils/auth/utils';
 import { openExternalLink } from '../utils/comms';
-import { Constants } from '../utils/constants';
+import { rendererLogError } from '../utils/logger';
 
-interface IFormData {
-  token?: Token;
-  hostname?: Hostname;
+export interface IFormData {
+  token: Token;
+  hostname: Hostname;
 }
 
 interface IFormErrors {
@@ -67,9 +71,10 @@ export const validateForm = (values: IFormData): IFormErrors => {
 export const LoginWithPersonalAccessTokenRoute: FC = () => {
   const navigate = useNavigate();
 
-  const { loginWithPersonalAccessToken } = useContext(AppContext);
+  const { loginWithPersonalAccessToken } = useAppContext();
 
-  const [maskClientSecret, setMaskClientSecret] = useState(true);
+  const [shouldMaskPersonalAccessToken, setShouldMaskPersonalAccessToken] =
+    useState(true);
   const [isVerifyingCredentials, setIsVerifyingCredentials] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -78,10 +83,6 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
   } as IFormData);
 
   const [errors, setErrors] = useState({} as IFormErrors);
-
-  const hasErrors = useMemo(() => {
-    return Object.values(errors).some((error) => error !== '');
-  }, [errors]);
 
   const handleSubmit = async () => {
     setIsVerifyingCredentials(true);
@@ -111,7 +112,7 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
         );
         navigate(-1);
       } catch (err) {
-        logError(
+        rendererLogError(
           'loginWithPersonalAccessToken',
           'Failed to login with PAT',
           err,
@@ -125,27 +126,23 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
   );
 
   return (
-    <Page id="Login With Personal Access Token">
+    <Page testId="Login With Personal Access Token">
       <Header icon={KeyIcon}>Login with Personal Access Token</Header>
 
       <Contents>
-        {hasErrors && (
+        {errors.invalidCredentialsForHost && (
           <Banner
-            title="Form errors"
-            variant="critical"
-            hideTitle
+            data-testid="login-errors"
             description={
               <Text color="danger.fg">
                 <Stack direction="vertical" gap="condensed">
-                  {errors.hostname && <Text>{errors.hostname}</Text>}
-                  {errors.token && <Text>{errors.token}</Text>}
-                  {errors.invalidCredentialsForHost && (
-                    <Text>{errors.invalidCredentialsForHost}</Text>
-                  )}
+                  <Text>{errors.invalidCredentialsForHost}</Text>
                 </Stack>
               </Text>
             }
-            data-testid="login-errors"
+            hideTitle
+            title="Form errors"
+            variant="critical"
           />
         )}
         <Stack direction="vertical" gap="normal">
@@ -157,31 +154,31 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
               </Text>
             </FormControl.Caption>
             <TextInput
+              aria-invalid={errors.hostname ? 'true' : 'false'}
+              block
+              data-testid="login-hostname"
               name="hostname"
+              onChange={handleInputChange}
               placeholder="github.com"
               value={formData.hostname}
-              onChange={handleInputChange}
-              aria-invalid={errors.hostname ? 'true' : 'false'}
-              sx={{
-                borderColor: errors.hostname
-                  ? 'danger.emphasis'
-                  : 'border.default',
-              }}
-              data-testid="login-hostname"
-              block
             />
+            {errors.hostname && (
+              <FormControl.Validation variant="error">
+                {errors.hostname}
+              </FormControl.Validation>
+            )}
           </FormControl>
 
           <Stack direction="vertical" gap="condensed">
-            <Stack direction="horizontal" align="center" gap="condensed">
+            <Stack align="center" direction="horizontal" gap="condensed">
               <Button
-                size="small"
-                leadingVisual={KeyIcon}
+                data-testid="login-create-token"
                 disabled={!formData.hostname}
+                leadingVisual={KeyIcon}
                 onClick={() =>
                   openExternalLink(getNewTokenURL(formData.hostname))
                 }
-                data-testid="login-create-token"
+                size="small"
               >
                 Generate a PAT
               </Button>
@@ -192,8 +189,10 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
 
             <Text as="i" className="text-xs">
               The{' '}
-              <Tooltip text={formatRecommendedOAuthScopes()} direction="se">
-                <Text as="u">required scopes</Text>
+              <Tooltip direction="se" text={formatRecommendedOAuthScopes()}>
+                <button type="button">
+                  <Text as="u">required scopes</Text>
+                </button>
               </Tooltip>{' '}
               will be automatically selected for you.
             </Text>
@@ -202,49 +201,61 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
           <FormControl required>
             <FormControl.Label>Token</FormControl.Label>
             <TextInput
-              name="token"
-              type={maskClientSecret ? 'password' : 'text'}
-              placeholder="Your generated token (40 characters)"
-              value={formData.token}
-              onChange={handleInputChange}
               aria-invalid={errors.token ? 'true' : 'false'}
-              sx={{
-                borderColor: errors.token
-                  ? 'danger.emphasis'
-                  : 'border.default',
-              }}
+              block
+              // className={
+              //   errors.token
+              //     ? 'border-gitify-textInput-error'
+              //     : 'border-gitify-textInput-default'
+              // }
+              className="border-red-600"
+              data-testid="login-token"
+              name="token"
+              onChange={handleInputChange}
+              placeholder="Your generated token (40 characters)"
               trailingAction={
                 <TextInput.Action
-                  onClick={() => setMaskClientSecret(!maskClientSecret)}
-                  icon={maskClientSecret ? EyeIcon : EyeClosedIcon}
-                  aria-label={maskClientSecret ? 'Show token' : 'Hide token'}
+                  aria-label={
+                    shouldMaskPersonalAccessToken ? 'Show token' : 'Hide token'
+                  }
+                  icon={shouldMaskPersonalAccessToken ? EyeIcon : EyeClosedIcon}
+                  onClick={() =>
+                    setShouldMaskPersonalAccessToken(
+                      !shouldMaskPersonalAccessToken,
+                    )
+                  }
                 />
               }
-              data-testid="login-token"
-              block
+              type={shouldMaskPersonalAccessToken ? 'password' : 'text'}
+              value={formData.token}
             />
+            {errors.token && (
+              <FormControl.Validation variant="error">
+                {errors.token}
+              </FormControl.Validation>
+            )}
           </FormControl>
         </Stack>
       </Contents>
 
       <Footer justify="space-between">
-        <Tooltip text="GitHub documentation" direction="ne">
+        <Tooltip direction="ne" text="GitHub documentation">
           <Button
-            size="small"
+            data-testid="login-docs"
             leadingVisual={BookIcon}
             onClick={() => openExternalLink(Constants.GITHUB_DOCS.PAT_URL)}
-            data-testid="login-docs"
+            size="small"
           >
             Docs
           </Button>
         </Tooltip>
 
         <Button
-          variant="primary"
-          leadingVisual={SignInIcon}
-          onClick={handleSubmit}
-          loading={isVerifyingCredentials}
           data-testid="login-submit"
+          leadingVisual={SignInIcon}
+          loading={isVerifyingCredentials}
+          onClick={handleSubmit}
+          variant="primary"
         >
           Login
         </Button>

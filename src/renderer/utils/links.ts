@@ -1,13 +1,23 @@
-import type { Account, Hostname, Link } from '../types';
-import type { Notification, Repository, SubjectUser } from '../typesGitHub';
+import { APPLICATION } from '../../shared/constants';
+
+import { Constants } from '../constants';
+
+import type {
+  Account,
+  GitifyNotification,
+  GitifyNotificationUser,
+  GitifyRepository,
+  Hostname,
+  Link,
+} from '../types';
+
 import { getDeveloperSettingsURL } from './auth/utils';
 import { openExternalLink } from './comms';
-import { Constants } from './constants';
 import { generateGitHubWebUrl } from './helpers';
 
 export function openGitifyReleaseNotes(version: string) {
   openExternalLink(
-    `https://github.com/${Constants.REPO_SLUG}/releases/tag/${version}` as Link,
+    `${APPLICATION.GITHUB_BASE_URL}/${APPLICATION.REPO_SLUG}/releases/tag/${version}` as Link,
   );
 }
 
@@ -35,8 +45,8 @@ export function openAccountProfile(account: Account) {
   openExternalLink(url.toString() as Link);
 }
 
-export function openUserProfile(user: SubjectUser) {
-  openExternalLink(user.html_url);
+export function openUserProfile(user: GitifyNotificationUser) {
+  openExternalLink(user.htmlUrl);
 }
 
 export function openHost(hostname: Hostname) {
@@ -48,11 +58,11 @@ export function openDeveloperSettings(account: Account) {
   openExternalLink(url);
 }
 
-export function openRepository(repository: Repository) {
-  openExternalLink(repository.html_url);
+export function openRepository(repository: GitifyRepository) {
+  openExternalLink(repository.htmlUrl);
 }
 
-export async function openNotification(notification: Notification) {
+export async function openNotification(notification: GitifyNotification) {
   const url = await generateGitHubWebUrl(notification);
   openExternalLink(url);
 }

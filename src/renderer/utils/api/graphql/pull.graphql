@@ -1,0 +1,66 @@
+#import './common.graphql'
+
+query FetchPullRequestByNumber(
+  $owner: String!
+  $name: String!
+  $number: Int!
+  $firstLabels: Int
+  $lastComments: Int
+  $lastReviews: Int
+  $firstClosingIssues: Int
+) {
+  repository(owner: $owner, name: $name) {
+    pullRequest(number: $number) {
+      ...PullRequestDetails
+    }
+  }
+}
+
+fragment PullRequestDetails on PullRequest {
+  __typename
+  number
+  title
+  url
+  state
+  merged
+  isDraft
+  isInMergeQueue
+  milestone {
+    ...MilestoneFields
+  }
+  author {
+    ...AuthorFields
+  }
+  comments(last: $lastComments) {
+    totalCount
+    nodes {
+      url
+      author {
+        ...AuthorFields
+      }
+    }
+  }
+  reviews(last: $lastReviews) {
+    totalCount
+    nodes {
+      ...PullRequestReviewFields
+    }
+  }
+  labels(first: $firstLabels) {
+    nodes {
+      name
+    }
+  }
+  closingIssuesReferences(first: $firstClosingIssues) {
+    nodes {
+      number
+    }
+  }
+}
+
+fragment PullRequestReviewFields on PullRequestReview {
+  state
+  author {
+    login
+  }
+}

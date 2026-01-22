@@ -1,11 +1,13 @@
 import type {
   AccountNotifications,
+  GitifyNotification,
+  Reason,
   SettingsState,
   TypeDetails,
 } from '../../../types';
-import type { Notification, Reason } from '../../../typesGitHub';
-import { REASON_TYPE_DETAILS } from '../../reason';
 import type { Filter } from './types';
+
+import { REASON_TYPE_DETAILS } from '../../reason';
 
 export const reasonFilter: Filter<Reason> = {
   FILTER_TYPES: REASON_TYPE_DETAILS,
@@ -25,10 +27,10 @@ export const reasonFilter: Filter<Reason> = {
   },
 
   getFilterCount(
-    notifications: AccountNotifications[],
+    accountNotifications: AccountNotifications[],
     reason: Reason,
   ): number {
-    return notifications.reduce(
+    return accountNotifications.reduce(
       (sum, account) =>
         sum +
         account.notifications.filter((n) => this.filterNotification(n, reason))
@@ -37,7 +39,10 @@ export const reasonFilter: Filter<Reason> = {
     );
   },
 
-  filterNotification(notification: Notification, reason: Reason): boolean {
-    return notification.reason === reason;
+  filterNotification(
+    notification: GitifyNotification,
+    reason: Reason,
+  ): boolean {
+    return notification.reason.code === reason;
   },
 };

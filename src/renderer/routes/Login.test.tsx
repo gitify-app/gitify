@@ -1,15 +1,15 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { MemoryRouter } from 'react-router-dom';
 
-import { AppContext } from '../context/App';
+import { renderWithAppContext } from '../__helpers__/test-utils';
+
 import * as comms from '../utils/comms';
 import { LoginRoute } from './Login';
 
-const mockNavigate = jest.fn();
+const navigateMock = jest.fn();
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
-  useNavigate: () => mockNavigate,
+  useNavigate: () => navigateMock,
 }));
 
 describe('renderer/routes/Login.tsx', () => {
@@ -18,82 +18,53 @@ describe('renderer/routes/Login.tsx', () => {
   });
 
   it('should render itself & its children', () => {
-    const tree = render(
-      <MemoryRouter>
-        <LoginRoute />
-      </MemoryRouter>,
-    );
+    const tree = renderWithAppContext(<LoginRoute />, { isLoggedIn: false });
 
     expect(tree).toMatchSnapshot();
+
+    expect(navigateMock).toHaveBeenCalledTimes(0);
   });
 
   it('should redirect to notifications once logged in', () => {
-    const showWindowMock = jest.spyOn(comms, 'showWindow');
+    const showWindowSpy = jest.spyOn(comms, 'showWindow');
 
-    const { rerender } = render(
-      <AppContext.Provider value={{ isLoggedIn: false }}>
-        <MemoryRouter>
-          <LoginRoute />
-        </MemoryRouter>
-      </AppContext.Provider>,
-    );
+    renderWithAppContext(<LoginRoute />, {
+      isLoggedIn: true,
+    });
 
-    rerender(
-      <AppContext.Provider value={{ isLoggedIn: true }}>
-        <MemoryRouter>
-          <LoginRoute />
-        </MemoryRouter>
-      </AppContext.Provider>,
-    );
-
-    expect(showWindowMock).toHaveBeenCalledTimes(1);
-    expect(mockNavigate).toHaveBeenNthCalledWith(1, '/', { replace: true });
+    expect(showWindowSpy).toHaveBeenCalledTimes(1);
+    expect(navigateMock).toHaveBeenCalledTimes(1);
+    expect(navigateMock).toHaveBeenCalledWith('/', { replace: true });
   });
 
   it('should login with github', async () => {
-    const mockLoginWithGitHubApp = jest.fn();
-    render(
-      <AppContext.Provider
-        value={{
-          loginWithGitHubApp: mockLoginWithGitHubApp,
-        }}
-      >
-        <MemoryRouter>
-          <LoginRoute />
-        </MemoryRouter>
-        ,
-      </AppContext.Provider>,
-    );
+    const loginWithGitHubAppMock = jest.fn();
+
+    renderWithAppContext(<LoginRoute />, {
+      isLoggedIn: false,
+      loginWithGitHubApp: loginWithGitHubAppMock,
+    });
 
     await userEvent.click(screen.getByTestId('login-github'));
 
-    expect(mockLoginWithGitHubApp).toHaveBeenCalled();
+    expect(loginWithGitHubAppMock).toHaveBeenCalled();
   });
 
   it('should navigate to login with personal access token', async () => {
-    render(
-      <MemoryRouter>
-        <LoginRoute />
-      </MemoryRouter>,
-    );
+    renderWithAppContext(<LoginRoute />, { isLoggedIn: false });
 
     await userEvent.click(screen.getByTestId('login-pat'));
 
-    expect(mockNavigate).toHaveBeenNthCalledWith(
-      1,
-      '/login-personal-access-token',
-    );
+    expect(navigateMock).toHaveBeenCalledTimes(1);
+    expect(navigateMock).toHaveBeenCalledWith('/login-personal-access-token');
   });
 
   it('should navigate to login with oauth app', async () => {
-    render(
-      <MemoryRouter>
-        <LoginRoute />
-      </MemoryRouter>,
-    );
+    renderWithAppContext(<LoginRoute />, { isLoggedIn: false });
 
     await userEvent.click(screen.getByTestId('login-oauth-app'));
 
-    expect(mockNavigate).toHaveBeenNthCalledWith(1, '/login-oauth-app');
+    expect(navigateMock).toHaveBeenCalledTimes(1);
+    expect(navigateMock).toHaveBeenCalledWith('/login-oauth-app');
   });
 });

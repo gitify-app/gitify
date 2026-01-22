@@ -1,34 +1,34 @@
-import { render } from '@testing-library/react';
-
 import { MarkGithubIcon } from '@primer/octicons-react';
+
+import { renderWithAppContext } from '../../__helpers__/test-utils';
 
 import { HoverButton } from './HoverButton';
 
 describe('renderer/components/primitives/HoverButton.tsx', () => {
   it('should render', () => {
-    const mockAction = jest.fn();
+    const actionMock = jest.fn();
 
-    const tree = render(
+    const tree = renderWithAppContext(
       <HoverButton
-        label="Hover Button"
+        action={actionMock}
         icon={MarkGithubIcon}
+        label="Hover Button"
         testid="hover-button"
-        action={mockAction}
       />,
     );
     expect(tree).toMatchSnapshot();
   });
 
   it('should render - disabled', () => {
-    const mockAction = jest.fn();
+    const actionMock = jest.fn();
 
-    const tree = render(
+    const tree = renderWithAppContext(
       <HoverButton
-        label="Hover Button"
-        icon={MarkGithubIcon}
-        testid="hover-button"
+        action={actionMock}
         enabled={false}
-        action={mockAction}
+        icon={MarkGithubIcon}
+        label="Hover Button"
+        testid="hover-button"
       />,
     );
     expect(tree).toMatchSnapshot();

@@ -1,49 +1,61 @@
-import { type FC, useContext } from 'react';
+import type { FC } from 'react';
 
 import {
   CommentIcon,
-  IssueClosedIcon,
+  IssueOpenedIcon,
   MilestoneIcon,
   TagIcon,
 } from '@primer/octicons-react';
-import { Box } from '@primer/react';
 
-import { AppContext } from '../../context/App';
-import { IconColor } from '../../types';
-import type { Notification } from '../../typesGitHub';
+import { useAppContext } from '../../hooks/useAppContext';
+
+import { type GitifyNotification, IconColor } from '../../types';
+
 import { getPullRequestReviewIcon } from '../../utils/icons';
 import { MetricPill } from './MetricPill';
 
-interface IMetricGroup {
-  notification: Notification;
+export interface MetricGroupProps {
+  notification: GitifyNotification;
 }
 
-export const MetricGroup: FC<IMetricGroup> = ({
+export const MetricGroup: FC<MetricGroupProps> = ({
   notification,
-}: IMetricGroup) => {
-  const { settings } = useContext(AppContext);
+}: MetricGroupProps) => {
+  const { settings } = useAppContext();
 
-  const commentsPillDescription = `${notification.subject.comments} ${
-    notification.subject.comments > 1 ? 'comments' : 'comment'
-  }`;
+  const linkedIssues = notification.subject.linkedIssues ?? [];
+  const hasLinkedIssues = linkedIssues.length > 0;
+  const linkedIssuesPillDescription = hasLinkedIssues
+    ? `Linked to ${
+        linkedIssues.length > 1 ? 'issues' : 'issue'
+      } ${linkedIssues.join(', ')}`
+    : '';
 
-  const labelsPillDescription = notification.subject.labels
-    ?.map((label) => `🏷️ ${label}`)
-    .join('\n');
+  const commentCount = notification.subject.commentCount ?? 0;
+  const hasComments = commentCount > 0;
+  const commentsPillDescription = hasComments
+    ? `${notification.subject.commentCount} ${
+        notification.subject.commentCount > 1 ? 'comments' : 'comment'
+      }`
+    : '';
 
-  const linkedIssuesPillDescription = `Linked to ${
-    notification.subject.linkedIssues?.length > 1 ? 'issues' : 'issue'
-  } ${notification.subject?.linkedIssues?.join(', ')}`;
+  const labels = notification.subject.labels ?? [];
+  const hasLabels = labels.length > 0;
+  const labelsPillDescription = hasLabels
+    ? labels.map((label) => `🏷️ ${label}`).join(', ')
+    : '';
+
+  const milestone = notification.subject.milestone;
 
   return (
     settings.showPills && (
-      <Box className="flex gap-1">
-        {notification.subject?.linkedIssues?.length > 0 && (
+      <div className="flex gap-1">
+        {hasLinkedIssues && (
           <MetricPill
+            color={IconColor.GRAY}
+            icon={IssueOpenedIcon}
+            metric={linkedIssues.length}
             title={linkedIssuesPillDescription}
-            metric={notification.subject.linkedIssues.length}
-            icon={IssueClosedIcon}
-            color={IconColor.GREEN}
           />
         )}
 
@@ -55,42 +67,41 @@ export const MetricGroup: FC<IMetricGroup> = ({
 
           return (
             <MetricPill
-              key={review.state}
-              title={icon.description}
-              metric={review.users.length}
-              icon={icon.type}
               color={icon.color}
+              icon={icon.type}
+              key={review.state}
+              metric={review.users.length}
+              title={icon.description}
             />
           );
         })}
-        {notification.subject?.comments > 0 && (
+
+        {hasComments && (
           <MetricPill
-            title={commentsPillDescription}
-            metric={notification.subject.comments}
+            color={IconColor.GRAY}
             icon={CommentIcon}
-            color={IconColor.GRAY}
+            metric={commentCount}
+            title={commentsPillDescription}
           />
         )}
-        {notification.subject?.labels?.length > 0 && (
+
+        {hasLabels && (
           <MetricPill
-            title={labelsPillDescription}
-            metric={notification.subject.labels.length}
+            color={IconColor.GRAY}
             icon={TagIcon}
-            color={IconColor.GRAY}
+            metric={labels.length}
+            title={labelsPillDescription}
           />
         )}
-        {notification.subject.milestone && (
+
+        {milestone && (
           <MetricPill
-            title={notification.subject.milestone.title}
+            color={milestone.state === 'OPEN' ? IconColor.GREEN : IconColor.RED}
             icon={MilestoneIcon}
-            color={
-              notification.subject.milestone.state === 'open'
-                ? IconColor.GREEN
-                : IconColor.RED
-            }
+            title={milestone.title}
           />
         )}
-      </Box>
+      </div>
     )
   );
 };

@@ -1,12 +1,17 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+import { renderWithAppContext } from '../../__helpers__/test-utils';
+import { mockGitifyNotification } from '../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../__mocks__/state-mocks';
-import { AppContext } from '../../context/App';
+
 import { GroupBy } from '../../types';
-import { mockSingleNotification } from '../../utils/api/__mocks__/response-mocks';
+
 import * as comms from '../../utils/comms';
-import { NotificationHeader } from './NotificationHeader';
+import {
+  NotificationHeader,
+  type NotificationHeaderProps,
+} from './NotificationHeader';
 
 describe('renderer/components/notifications/NotificationHeader.tsx', () => {
   afterEach(() => {
@@ -14,102 +19,80 @@ describe('renderer/components/notifications/NotificationHeader.tsx', () => {
   });
 
   it('should render itself & its children - group by repositories', async () => {
-    const props = {
-      notification: mockSingleNotification,
+    const props: NotificationHeaderProps = {
+      notification: mockGitifyNotification,
     };
 
-    const tree = render(
-      <AppContext.Provider
-        value={{ settings: { ...mockSettings, groupBy: GroupBy.REPOSITORY } }}
-      >
-        <NotificationHeader {...props} />
-      </AppContext.Provider>,
-    );
+    const tree = renderWithAppContext(<NotificationHeader {...props} />, {
+      settings: { ...mockSettings, groupBy: GroupBy.REPOSITORY },
+    });
 
     expect(tree).toMatchSnapshot();
   });
 
   describe('should render itself & its children - group by date', () => {
     it('with notification number', async () => {
-      const props = {
-        notification: mockSingleNotification,
+      const props: NotificationHeaderProps = {
+        notification: mockGitifyNotification,
       };
 
-      const tree = render(
-        <AppContext.Provider
-          value={{ settings: { ...mockSettings, groupBy: GroupBy.DATE } }}
-        >
-          <NotificationHeader {...props} />
-        </AppContext.Provider>,
-      );
+      const tree = renderWithAppContext(<NotificationHeader {...props} />, {
+        settings: { ...mockSettings, groupBy: GroupBy.DATE },
+      });
 
       expect(tree).toMatchSnapshot();
     });
 
     it('with showNumber setting disabled', async () => {
-      const props = {
-        notification: mockSingleNotification,
+      const props: NotificationHeaderProps = {
+        notification: mockGitifyNotification,
       };
 
-      const tree = render(
-        <AppContext.Provider
-          value={{
-            settings: {
-              ...mockSettings,
-              showNumber: false,
-              groupBy: GroupBy.DATE,
-            },
-          }}
-        >
-          <NotificationHeader {...props} />
-        </AppContext.Provider>,
-      );
+      const tree = renderWithAppContext(<NotificationHeader {...props} />, {
+        settings: {
+          ...mockSettings,
+          showNumber: false,
+          groupBy: GroupBy.DATE,
+        },
+      });
 
       expect(tree).toMatchSnapshot();
     });
 
     it('without notification number', async () => {
-      const props = {
+      const props: NotificationHeaderProps = {
         notification: {
-          ...mockSingleNotification,
-          subject: { ...mockSingleNotification.subject, number: null },
+          ...mockGitifyNotification,
+          subject: { ...mockGitifyNotification.subject, number: null },
         },
       };
 
-      const tree = render(
-        <AppContext.Provider
-          value={{ settings: { ...mockSettings, groupBy: GroupBy.DATE } }}
-        >
-          <NotificationHeader {...props} />
-        </AppContext.Provider>,
-      );
+      const tree = renderWithAppContext(<NotificationHeader {...props} />, {
+        settings: { ...mockSettings, groupBy: GroupBy.DATE },
+      });
 
       expect(tree).toMatchSnapshot();
     });
   });
 
   it('should open notification user profile - group by date', async () => {
-    const openExternalLinkMock = jest
+    const openExternalLinkSpy = jest
       .spyOn(comms, 'openExternalLink')
       .mockImplementation();
 
-    const props = {
-      notification: mockSingleNotification,
+    const props: NotificationHeaderProps = {
+      notification: mockGitifyNotification,
     };
 
-    render(
-      <AppContext.Provider
-        value={{ settings: { ...mockSettings, groupBy: GroupBy.DATE } }}
-      >
-        <NotificationHeader {...props} />
-      </AppContext.Provider>,
-    );
+    renderWithAppContext(<NotificationHeader {...props} />, {
+      settings: { ...mockSettings, groupBy: GroupBy.DATE },
+    });
 
     await userEvent.click(screen.getByTestId('view-repository'));
 
-    expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
-    expect(openExternalLinkMock).toHaveBeenCalledWith(
-      props.notification.repository.html_url,
+    expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
+    expect(openExternalLinkSpy).toHaveBeenCalledWith(
+      props.notification.repository.htmlUrl,
     );
   });
 });

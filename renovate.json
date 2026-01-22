@@ -1,17 +1,16 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:recommended",
-    ":separateMultipleMajorReleases",
+    "config:best-practices",
+    ":dependencyDashboardApproval",
     ":enableVulnerabilityAlerts",
-    "schedule:weekly",
+    ":separateMultipleMajorReleases",
     "customManagers:biomeVersions",
-    "helpers:pinGitHubActionDigests"
+    "schedule:weekly"
   ],
+  "assignees": ["setchy"],
   "labels": ["dependency"],
-  "prConcurrentLimit": 5,
   "rangeStrategy": "pin",
-  "minimumReleaseAge": "3 days",
   "packageRules": [
     {
       "matchDepTypes": ["engines"],
@@ -25,7 +24,7 @@
     {
       "description": "Fetch changelog details for twemoji packages",
       "matchPackageNames": ["@discordapp/twemoji"],
-      "sourceUrl": "https://github.com/jdjdecked/twemoji"
+      "changelogUrl": "https://github.com/jdjdecked/twemoji"
     }
   ],
   "customManagers": [

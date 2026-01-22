@@ -1,5 +1,6 @@
 import type { Config } from 'tailwindcss';
 import colors from 'tailwindcss/colors';
+import plugin from 'tailwindcss/plugin';
 
 const sidebarWidth = '2.5rem'; // 40px
 
@@ -20,7 +21,6 @@ const config: Config = {
       colors: {
         gitify: {
           font: 'var(--fgColor-default)',
-          background: 'var(--bgColor-muted)',
           sidebar: '#24292e',
           footer: 'var(--bgColor-neutral-muted)',
 
@@ -72,10 +72,12 @@ const config: Config = {
     },
   },
   plugins: [
-    ({ addBase }) => {
+    plugin(({ addBase }) => {
       // TODO - ideally we would use GitHub Primer Design Tokens instead of TailwindCSS
       addBase({
         '[data-color-mode="light"]': {
+          '--gitify-background': 'var(--bgColor-default)',
+
           '--gitify-scrollbar-track': colors.gray[100],
           '--gitify-scrollbar-thumb': colors.gray[300],
           '--gitify-scrollbar-thumb-hover': colors.gray[400],
@@ -85,6 +87,8 @@ const config: Config = {
           '--gitify-counter-text': colors.gray[800],
         },
         '[data-color-mode="dark"]': {
+          '--gitify-background': 'var(--bgColor-muted)',
+
           '--gitify-scrollbar-track': colors.gray[900],
           '--gitify-scrollbar-thumb': colors.gray[700],
           '--gitify-scrollbar-thumb-hover': colors.gray[600],
@@ -94,7 +98,7 @@ const config: Config = {
           '--gitify-counter-text': colors.gray[100],
         },
       });
-    },
+    }),
   ],
 };
 

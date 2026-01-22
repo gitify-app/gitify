@@ -1,140 +1,61 @@
+import { waitFor } from '@testing-library/react';
+
 import {
-  mockAccountNotifications,
+  mockMultipleAccountNotifications,
   mockSingleAccountNotifications,
 } from '../../__mocks__/notifications-mocks';
-import { mockAuth } from '../../__mocks__/state-mocks';
-import { defaultSettings } from '../../context/App';
-import type { SettingsState } from '../../types';
-import { mockGitHubNotifications } from '../api/__mocks__/response-mocks';
-import * as comms from '../comms';
-import * as links from '../links';
+
+import * as helpers from '../helpers';
 import * as native from './native';
 
-const raiseNativeNotificationMock = jest.spyOn(
-  native,
-  'raiseNativeNotification',
-);
-const raiseSoundNotificationMock = jest.spyOn(native, 'raiseSoundNotification');
-
 describe('renderer/utils/notifications/native.ts', () => {
+  const mockHtmlUrl =
+    mockSingleAccountNotifications[0].notifications[0].repository.htmlUrl;
+
+  jest
+    .spyOn(helpers, 'generateGitHubWebUrl')
+    .mockImplementation(async () => mockHtmlUrl);
+
   afterEach(() => {
     jest.clearAllMocks();
   });
 
-  describe('triggerNativeNotifications', () => {
-    it('should raise a native notification and play sound for a single new notification', () => {
-      const settings: SettingsState = {
-        ...defaultSettings,
-        playSound: true,
-        showNotifications: true,
-      };
+  it('should raise a native notification for a single new notification', async () => {
+    native.raiseNativeNotification(
+      mockSingleAccountNotifications[0].notifications,
+    );
 
-      native.triggerNativeNotifications([], mockSingleAccountNotifications, {
-        auth: mockAuth,
-        settings,
-      });
+    // wait for async native handling (generateGitHubWebUrl) to complete
+    await waitFor(() =>
+      expect(window.gitify.raiseNativeNotification).toHaveBeenCalledTimes(1),
+    );
 
-      expect(raiseNativeNotificationMock).toHaveBeenCalledTimes(1);
-
-      expect(raiseSoundNotificationMock).toHaveBeenCalledTimes(1);
-      expect(raiseSoundNotificationMock).toHaveBeenCalledWith(0.2);
-    });
-
-    it('should raise a native notification and play sound for multiple new notifications', () => {
-      const settings: SettingsState = {
-        ...defaultSettings,
-        playSound: true,
-        showNotifications: true,
-      };
-
-      native.triggerNativeNotifications([], mockAccountNotifications, {
-        auth: mockAuth,
-        settings,
-      });
-
-      expect(raiseNativeNotificationMock).toHaveBeenCalledTimes(1);
-
-      expect(raiseSoundNotificationMock).toHaveBeenCalledTimes(1);
-      expect(raiseSoundNotificationMock).toHaveBeenCalledWith(0.2);
-    });
-
-    it('should not raise a native notification or play a sound when there are no new notifications', () => {
-      const settings: SettingsState = {
-        ...defaultSettings,
-        playSound: true,
-        showNotifications: true,
-      };
-
-      native.triggerNativeNotifications(
-        mockSingleAccountNotifications,
-        mockSingleAccountNotifications,
-        {
-          auth: mockAuth,
-          settings,
-        },
-      );
-
-      expect(raiseNativeNotificationMock).not.toHaveBeenCalled();
-      expect(raiseSoundNotificationMock).not.toHaveBeenCalled();
-    });
-
-    it('should not raise a native notification or play a sound when there are zero notifications', () => {
-      const settings: SettingsState = {
-        ...defaultSettings,
-        playSound: true,
-        showNotifications: true,
-      };
-
-      native.triggerNativeNotifications([], [], {
-        auth: mockAuth,
-        settings,
-      });
-
-      expect(raiseNativeNotificationMock).not.toHaveBeenCalled();
-      expect(raiseSoundNotificationMock).not.toHaveBeenCalled();
-    });
-
-    it('should not raise a native notification when setting disabled', () => {
-      const settings: SettingsState = {
-        ...defaultSettings,
-        showNotifications: false,
-      };
-
-      native.triggerNativeNotifications([], mockAccountNotifications, {
-        auth: mockAuth,
-        settings,
-      });
-
-      expect(raiseNativeNotificationMock).not.toHaveBeenCalled();
-    });
+    expect(window.gitify.raiseNativeNotification).toHaveBeenCalledWith(
+      expect.stringContaining(
+        mockSingleAccountNotifications[0].notifications[0].repository.fullName,
+      ),
+      expect.stringContaining(
+        mockSingleAccountNotifications[0].notifications[0].subject.title,
+      ),
+      expect.stringContaining(mockHtmlUrl),
+    );
+    expect(helpers.generateGitHubWebUrl).toHaveBeenCalledTimes(1);
   });
 
-  describe('raiseNativeNotification', () => {
-    it('should click on a native notification (with 1 notification)', () => {
-      const hideWindowMock = jest.spyOn(comms, 'hideWindow');
-      jest.spyOn(links, 'openNotification');
+  it('should raise a native notification for multiple new notifications', async () => {
+    native.raiseNativeNotification(
+      mockMultipleAccountNotifications[0].notifications,
+    );
 
-      const nativeNotification: Notification = native.raiseNativeNotification([
-        mockGitHubNotifications[0],
-      ]);
-      nativeNotification.onclick(null);
+    await waitFor(() =>
+      expect(window.gitify.raiseNativeNotification).toHaveBeenCalledTimes(1),
+    );
 
-      expect(links.openNotification).toHaveBeenCalledTimes(1);
-      expect(links.openNotification).toHaveBeenLastCalledWith(
-        mockGitHubNotifications[0],
-      );
-      expect(hideWindowMock).toHaveBeenCalledTimes(1);
-    });
-
-    it('should click on a native notification (with more than 1 notification)', () => {
-      const showWindowMock = jest.spyOn(comms, 'showWindow');
-
-      const nativeNotification = native.raiseNativeNotification(
-        mockGitHubNotifications,
-      );
-      nativeNotification.onclick(null);
-
-      expect(showWindowMock).toHaveBeenCalledTimes(1);
-    });
+    expect(window.gitify.raiseNativeNotification).toHaveBeenCalledWith(
+      'Gitify',
+      'You have 2 notifications',
+      null,
+    );
+    expect(helpers.generateGitHubWebUrl).toHaveBeenCalledTimes(0);
   });
 });

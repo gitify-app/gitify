@@ -1,23 +1,22 @@
-import { act, render, screen } from '@testing-library/react';
+import { act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 
-import { mockAuth, mockSettings } from '../../__mocks__/state-mocks';
-import { AppContext } from '../../context/App';
+import { renderWithAppContext } from '../../__helpers__/test-utils';
+
 import * as comms from '../../utils/comms';
 import { SettingsFooter } from './SettingsFooter';
 
-const mockNavigate = jest.fn();
+const navigateMock = jest.fn();
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
-  useNavigate: () => mockNavigate,
+  useNavigate: () => navigateMock,
 }));
 
 describe('renderer/components/settings/SettingsFooter.tsx', () => {
   let originalEnv: NodeJS.ProcessEnv;
 
   beforeEach(() => {
-    // Save the original node env state
     originalEnv = process.env;
   });
 
@@ -26,129 +25,66 @@ describe('renderer/components/settings/SettingsFooter.tsx', () => {
     process.env = originalEnv;
   });
 
-  describe('app version', () => {
-    it('should show production app version', async () => {
-      process.env = {
-        ...originalEnv,
-        NODE_ENV: 'production',
-      };
-
-      await act(async () => {
-        render(
-          <AppContext.Provider
-            value={{
-              auth: mockAuth,
-              settings: mockSettings,
-            }}
-          >
-            <MemoryRouter>
-              <SettingsFooter />
-            </MemoryRouter>
-          </AppContext.Provider>,
-        );
-      });
-
-      expect(screen.getByTestId('settings-release-notes')).toMatchSnapshot();
+  it('should show app version', async () => {
+    await act(async () => {
+      renderWithAppContext(
+        <MemoryRouter initialEntries={['/settings']}>
+          <SettingsFooter />
+        </MemoryRouter>,
+      );
     });
 
-    it('should show development app version', async () => {
-      process.env = {
-        ...originalEnv,
-        NODE_ENV: 'development',
-      };
-
-      await act(async () => {
-        render(
-          <AppContext.Provider
-            value={{
-              auth: mockAuth,
-              settings: mockSettings,
-            }}
-          >
-            <MemoryRouter>
-              <SettingsFooter />
-            </MemoryRouter>
-          </AppContext.Provider>,
-        );
-      });
-
-      expect(screen.getByTestId('settings-release-notes')).toMatchSnapshot();
-    });
+    expect(screen.getByTestId('settings-release-notes')).toMatchSnapshot();
   });
 
   it('should open release notes', async () => {
-    process.env = {
-      ...originalEnv,
-      NODE_ENV: 'production',
-    };
-    const openExternalLinkMock = jest
+    const openExternalLinkSpy = jest
       .spyOn(comms, 'openExternalLink')
       .mockImplementation();
 
     await act(async () => {
-      render(
-        <AppContext.Provider
-          value={{
-            auth: mockAuth,
-            settings: mockSettings,
-          }}
-        >
-          <MemoryRouter>
-            <SettingsFooter />
-          </MemoryRouter>
-        </AppContext.Provider>,
+      renderWithAppContext(
+        <MemoryRouter initialEntries={['/settings']}>
+          <SettingsFooter />
+        </MemoryRouter>,
       );
     });
 
     await userEvent.click(screen.getByTestId('settings-release-notes'));
 
-    expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
-    expect(openExternalLinkMock).toHaveBeenCalledWith(
+    expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
+    expect(openExternalLinkSpy).toHaveBeenCalledWith(
       'https://github.com/gitify-app/gitify/releases/tag/v0.0.1',
     );
   });
 
   it('should open account management', async () => {
     await act(async () => {
-      render(
-        <AppContext.Provider
-          value={{
-            auth: mockAuth,
-            settings: mockSettings,
-          }}
-        >
-          <MemoryRouter>
-            <SettingsFooter />
-          </MemoryRouter>
-        </AppContext.Provider>,
+      renderWithAppContext(
+        <MemoryRouter initialEntries={['/settings']}>
+          <SettingsFooter />
+        </MemoryRouter>,
       );
     });
 
     await userEvent.click(screen.getByTestId('settings-accounts'));
 
-    expect(mockNavigate).toHaveBeenCalledWith('/accounts');
+    expect(navigateMock).toHaveBeenCalledWith('/accounts');
   });
 
   it('should quit the app', async () => {
-    const quitAppMock = jest.spyOn(comms, 'quitApp');
+    const quitAppSpy = jest.spyOn(comms, 'quitApp').mockImplementation();
 
     await act(async () => {
-      render(
-        <AppContext.Provider
-          value={{
-            auth: mockAuth,
-            settings: mockSettings,
-          }}
-        >
-          <MemoryRouter>
-            <SettingsFooter />
-          </MemoryRouter>
-        </AppContext.Provider>,
+      renderWithAppContext(
+        <MemoryRouter initialEntries={['/settings']}>
+          <SettingsFooter />
+        </MemoryRouter>,
       );
     });
 
     await userEvent.click(screen.getByTestId('settings-quit'));
 
-    expect(quitAppMock).toHaveBeenCalledTimes(1);
+    expect(quitAppSpy).toHaveBeenCalledTimes(1);
   });
 });

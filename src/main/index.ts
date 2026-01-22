@@ -1,35 +1,64 @@
-import { app, globalShortcut, ipcMain as ipc, safeStorage } from 'electron';
+import path from 'node:path';
+
+import {
+  app,
+  type BrowserWindowConstructorOptions,
+  globalShortcut,
+  net,
+  safeStorage,
+  shell,
+} from 'electron';
 import log from 'electron-log';
 import { menubar } from 'menubar';
 
 import { APPLICATION } from '../shared/constants';
-import { namespacedEvent } from '../shared/events';
+import {
+  EVENTS,
+  type IAutoLaunch,
+  type IKeyboardShortcut,
+  type IOpenExternal,
+} from '../shared/events';
 import { logInfo, logWarn } from '../shared/logger';
-import { isLinux, isMacOS, isWindows } from '../shared/platform';
+
+import { handleMainEvent, onMainEvent, sendRendererEvent } from './events';
 import { onFirstRunMaybe } from './first-run';
 import { TrayIcons } from './icons';
 import MenuBuilder from './menu';
-import Updater from './updater';
+import AppUpdater from './updater';
 
 log.initialize();
 
-const browserWindowOpts = {
+/**
+ * File paths
+ */
+const preloadFilePath = path.join(__dirname, 'preload.js');
+const indexHtmlFilePath = `file://${__dirname}/index.html`;
+const notificationSoundFilePath = path.join(
+  __dirname,
+  '..',
+  'assets',
+  'sounds',
+  APPLICATION.NOTIFICATION_SOUND,
+);
+const twemojiDirPath = path.join(__dirname, 'images', 'twemoji');
+
+const browserWindowOpts: BrowserWindowConstructorOptions = {
   width: 500,
   height: 400,
   minWidth: 500,
   minHeight: 400,
   resizable: false,
   skipTaskbar: true, // Hide the app from the Windows taskbar
-  // TODO #700 refactor to use preload script with a context bridge
   webPreferences: {
-    nodeIntegration: true,
-    contextIsolation: false,
+    preload: preloadFilePath,
+    contextIsolation: true,
+    nodeIntegration: false,
   },
 };
 
 const mb = menubar({
   icon: TrayIcons.idle,
-  index: `file://${__dirname}/index.html`,
+  index: indexHtmlFilePath,
   browserWindow: browserWindowOpts,
   preloadWindow: true,
   showDockIcon: false, // Hide the app from the macOS dock
@@ -43,19 +72,17 @@ const protocol =
   process.env.NODE_ENV === 'development' ? 'gitify-dev' : 'gitify';
 app.setAsDefaultProtocolClient(protocol);
 
-if (isMacOS() || isWindows()) {
-  /**
-   * Electron Auto Updater only supports macOS and Windows
-   * https://github.com/electron/update-electron-app
-   */
-  const updater = new Updater(mb, menuBuilder);
-  updater.initialize();
-}
+const appUpdater = new AppUpdater(mb, menuBuilder);
 
 let shouldUseAlternateIdleIcon = false;
+let shouldUseUnreadActiveIcon = true;
 
 app.whenReady().then(async () => {
+  preventSecondInstance();
+
   await onFirstRunMaybe();
+
+  appUpdater.start();
 
   mb.on('ready', () => {
     mb.app.setAppUserModelId(APPLICATION.ID);
@@ -91,92 +118,63 @@ app.whenReady().then(async () => {
     });
   });
 
-  /** Prevent second instances */
-  if (isWindows() || isLinux()) {
-    const gotTheLock = app.requestSingleInstanceLock();
-
-    if (!gotTheLock) {
-      logWarn('main:gotTheLock', 'Second instance detected, quitting');
-      app.quit(); // Quit the second instance
-      return;
-    }
-
-    app.on('second-instance', (_event, commandLine, _workingDirectory) => {
-      logInfo(
-        'main:second-instance',
-        'Second instance was launched.  extracting command to forward',
-      );
-
-      // Get the URL from the command line arguments
-      const url = commandLine.find((arg) => arg.startsWith(`${protocol}://`));
-
-      if (url) {
-        handleURL(url);
-      }
-    });
-  }
-
   /**
-   * Gitify custom IPC events
+   * Gitify custom IPC events - no response expected
    */
-  ipc.handle(namespacedEvent('version'), () => app.getVersion());
+  onMainEvent(EVENTS.WINDOW_SHOW, () => mb.showWindow());
 
-  ipc.on(namespacedEvent('window-show'), () => mb.showWindow());
+  onMainEvent(EVENTS.WINDOW_HIDE, () => mb.hideWindow());
 
-  ipc.on(namespacedEvent('window-hide'), () => mb.hideWindow());
+  onMainEvent(EVENTS.QUIT, () => mb.app.quit());
 
-  ipc.on(namespacedEvent('quit'), () => mb.app.quit());
+  onMainEvent(EVENTS.OPEN_EXTERNAL, (_, { url, activate }: IOpenExternal) =>
+    shell.openExternal(url, { activate: activate }),
+  );
 
-  ipc.on(
-    namespacedEvent('use-alternate-idle-icon'),
-    (_, useAlternateIdleIcon) => {
+  onMainEvent(
+    EVENTS.USE_ALTERNATE_IDLE_ICON,
+    (_, useAlternateIdleIcon: boolean) => {
       shouldUseAlternateIdleIcon = useAlternateIdleIcon;
     },
   );
 
-  ipc.on(namespacedEvent('icon-error'), () => {
-    if (!mb.tray.isDestroyed()) {
-      mb.tray.setImage(TrayIcons.error);
-    }
-  });
+  onMainEvent(
+    EVENTS.USE_UNREAD_ACTIVE_ICON,
+    (_, useUnreadActiveIcon: boolean) => {
+      shouldUseUnreadActiveIcon = useUnreadActiveIcon;
+    },
+  );
 
-  ipc.on(namespacedEvent('icon-active'), () => {
+  onMainEvent(EVENTS.UPDATE_ICON_COLOR, (_, notificationsCount: number) => {
     if (!mb.tray.isDestroyed()) {
-      mb.tray.setImage(
-        menuBuilder.isUpdateAvailable()
-          ? TrayIcons.activeWithUpdate
-          : TrayIcons.active,
-      );
-    }
-  });
-
-  ipc.on(namespacedEvent('icon-idle'), () => {
-    if (!mb.tray.isDestroyed()) {
-      if (shouldUseAlternateIdleIcon) {
-        mb.tray.setImage(
-          menuBuilder.isUpdateAvailable()
-            ? TrayIcons.idleAlternateWithUpdate
-            : TrayIcons.idleAlternate,
-        );
-      } else {
-        mb.tray.setImage(
-          menuBuilder.isUpdateAvailable()
-            ? TrayIcons.idleWithUpdate
-            : TrayIcons.idle,
-        );
+      if (!net.isOnline()) {
+        setOfflineIcon();
+        return;
       }
+
+      if (notificationsCount < 0) {
+        setErrorIcon();
+        return;
+      }
+
+      if (notificationsCount > 0) {
+        setActiveIcon();
+        return;
+      }
+
+      setIdleIcon();
     }
   });
 
-  ipc.on(namespacedEvent('update-title'), (_, title) => {
+  onMainEvent(EVENTS.UPDATE_ICON_TITLE, (_, title: string) => {
     if (!mb.tray.isDestroyed()) {
       mb.tray.setTitle(title);
     }
   });
 
-  ipc.on(
-    namespacedEvent('update-keyboard-shortcut'),
-    (_, { enabled, keyboardShortcut }) => {
+  onMainEvent(
+    EVENTS.UPDATE_KEYBOARD_SHORTCUT,
+    (_, { enabled, keyboardShortcut }: IKeyboardShortcut) => {
       if (!enabled) {
         globalShortcut.unregister(keyboardShortcut);
         return;
@@ -192,18 +190,31 @@ app.whenReady().then(async () => {
     },
   );
 
-  ipc.on(namespacedEvent('update-auto-launch'), (_, settings) => {
+  onMainEvent(EVENTS.UPDATE_AUTO_LAUNCH, (_, settings: IAutoLaunch) => {
     app.setLoginItemSettings(settings);
   });
-});
 
-// Safe Storage
-ipc.handle(namespacedEvent('safe-storage-encrypt'), (_, settings) => {
-  return safeStorage.encryptString(settings).toString('base64');
-});
+  /**
+   * Gitify custom IPC events - response expected
+   */
 
-ipc.handle(namespacedEvent('safe-storage-decrypt'), (_, settings) => {
-  return safeStorage.decryptString(Buffer.from(settings, 'base64'));
+  handleMainEvent(EVENTS.VERSION, () => app.getVersion());
+
+  handleMainEvent(EVENTS.NOTIFICATION_SOUND_PATH, () => {
+    return notificationSoundFilePath;
+  });
+
+  handleMainEvent(EVENTS.TWEMOJI_DIRECTORY, () => {
+    return twemojiDirPath;
+  });
+
+  handleMainEvent(EVENTS.SAFE_STORAGE_ENCRYPT, (_, value: string) => {
+    return safeStorage.encryptString(value).toString('base64');
+  });
+
+  handleMainEvent(EVENTS.SAFE_STORAGE_DECRYPT, (_, value: string) => {
+    return safeStorage.decryptString(Buffer.from(value, 'base64'));
+  });
 });
 
 // Handle gitify:// custom protocol URL events for OAuth 2.0 callback
@@ -216,6 +227,57 @@ app.on('open-url', (event, url) => {
 const handleURL = (url: string) => {
   if (url.startsWith(`${protocol}://`)) {
     logInfo('main:handleUrl', `forwarding URL ${url} to renderer process`);
-    mb.window.webContents.send(namespacedEvent('auth-callback'), url);
+    sendRendererEvent(mb, EVENTS.AUTH_CALLBACK, url);
   }
 };
+
+function setIdleIcon() {
+  if (shouldUseAlternateIdleIcon) {
+    mb.tray.setImage(TrayIcons.idleAlternate);
+  } else {
+    mb.tray.setImage(TrayIcons.idle);
+  }
+}
+
+function setActiveIcon() {
+  if (shouldUseUnreadActiveIcon) {
+    mb.tray.setImage(TrayIcons.active);
+  } else {
+    setIdleIcon();
+  }
+}
+
+function setErrorIcon() {
+  mb.tray.setImage(TrayIcons.error);
+}
+
+function setOfflineIcon() {
+  mb.tray.setImage(TrayIcons.offline);
+}
+
+/**
+ * Prevent second instances
+ */
+function preventSecondInstance() {
+  const gotTheLock = app.requestSingleInstanceLock();
+
+  if (!gotTheLock) {
+    logWarn('main:gotTheLock', 'Second instance detected, quitting');
+    app.quit(); // Quit the second instance
+    return;
+  }
+
+  app.on('second-instance', (_event, commandLine, _workingDirectory) => {
+    logInfo(
+      'main:second-instance',
+      'Second instance was launched.  extracting command to forward',
+    );
+
+    // Get the URL from the command line arguments
+    const url = commandLine.find((arg) => arg.startsWith(`${protocol}://`));
+
+    if (url) {
+      handleURL(url);
+    }
+  });
+}

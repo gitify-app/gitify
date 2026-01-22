@@ -1,13 +1,13 @@
 import type { FC } from 'react';
 
-export interface IFieldLabel {
+export interface FieldLabelProps {
   name: string;
   label: string;
 }
 
-export const FieldLabel: FC<IFieldLabel> = (props: IFieldLabel) => {
+export const FieldLabel: FC<FieldLabelProps> = (props: FieldLabelProps) => {
   return (
-    <label htmlFor={props.name} className="mr-3 font-medium cursor-pointer">
+    <label className={'mr-1 font-medium cursor-pointer'} htmlFor={props.name}>
       {props.label}
     </label>
   );

@@ -6,7 +6,7 @@ import { cn } from '../../utils/cn';
 
 type CounterScheme = 'primary' | 'secondary' | 'empty';
 
-interface ICustomCounter {
+interface CustomCounterProps {
   value: string | number;
   scheme?: CounterScheme;
 }
@@ -19,12 +19,12 @@ interface ICustomCounter {
  * - would show screen vertical scrollbar which is undesirable.
  * - would not render '0' within a counter.
  */
-export const CustomCounter: FC<ICustomCounter> = ({
+export const CustomCounter: FC<CustomCounterProps> = ({
   value,
   scheme = 'secondary',
 }) => {
   const baseStyles =
-    'px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text';
+    'px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text';
 
   const schemeStyles = {
     primary: 'bg-gitify-counter-primary',

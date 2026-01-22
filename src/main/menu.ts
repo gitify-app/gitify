@@ -3,7 +3,8 @@ import { autoUpdater } from 'electron-updater';
 import type { Menubar } from 'menubar';
 
 import { APPLICATION } from '../shared/constants';
-import { isMacOS, isWindows } from '../shared/platform';
+import { isMacOS } from '../shared/platform';
+
 import { openLogsDirectory, resetApp, takeScreenshot } from './utils';
 
 export default class MenuBuilder {
@@ -12,7 +13,7 @@ export default class MenuBuilder {
   private readonly updateAvailableMenuItem: MenuItem;
   private readonly updateReadyForInstallMenuItem: MenuItem;
 
-  menubar: Menubar;
+  private readonly menubar: Menubar;
 
   constructor(menubar: Menubar) {
     this.menubar = menubar;
@@ -21,11 +22,7 @@ export default class MenuBuilder {
       label: 'Check for updates',
       enabled: true,
       click: () => {
-        if (isMacOS() || isWindows()) {
-          autoUpdater.checkForUpdatesAndNotify();
-        } else {
-          shell.openExternal(APPLICATION.WEBSITE);
-        }
+        autoUpdater.checkForUpdatesAndNotify();
       },
     });
 
@@ -79,6 +76,14 @@ export default class MenuBuilder {
             click: () => openLogsDirectory(),
           },
           {
+            label: 'Visit Repository',
+            click: () => {
+              shell.openExternal(
+                `${APPLICATION.GITHUB_BASE_URL}/${APPLICATION.REPO_SLUG}`,
+              );
+            },
+          },
+          {
             label: `Reset ${APPLICATION.NAME}`,
             click: () => {
               resetApp(this.menubar);
@@ -87,6 +92,12 @@ export default class MenuBuilder {
         ],
       },
       { type: 'separator' },
+      {
+        label: 'Visit Website',
+        click: () => {
+          shell.openExternal(APPLICATION.WEBSITE);
+        },
+      },
       {
         label: `Quit ${APPLICATION.NAME}`,
         accelerator: 'CommandOrControl+Q',

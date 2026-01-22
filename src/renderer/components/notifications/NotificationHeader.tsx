@@ -1,64 +1,59 @@
-import { type FC, type MouseEvent, useContext } from 'react';
+import type { FC, MouseEvent } from 'react';
 
-import { Box, Stack } from '@primer/react';
+import { Stack } from '@primer/react';
 
-import { AppContext } from '../../context/App';
-import { GroupBy, Opacity, Size } from '../../types';
-import type { Notification } from '../../typesGitHub';
+import { useAppContext } from '../../hooks/useAppContext';
+
+import { type GitifyNotification, Opacity, Size } from '../../types';
+
 import { cn } from '../../utils/cn';
 import { openRepository } from '../../utils/links';
+import { isGroupByDate } from '../../utils/notifications/group';
 import { AvatarWithFallback } from '../avatars/AvatarWithFallback';
 
-interface INotificationHeader {
-  notification: Notification;
+export interface NotificationHeaderProps {
+  notification: GitifyNotification;
 }
 
-export const NotificationHeader: FC<INotificationHeader> = ({
+export const NotificationHeader: FC<NotificationHeaderProps> = ({
   notification,
-}: INotificationHeader) => {
-  const { settings } = useContext(AppContext);
-
-  const repoSlug = notification.repository.full_name;
-
-  const notificationNumber = notification.subject?.number
-    ? `#${notification.subject.number}`
-    : '';
-
-  const groupByDate = settings.groupBy === GroupBy.DATE;
+}: NotificationHeaderProps) => {
+  const { settings } = useAppContext();
 
   return (
-    groupByDate && (
-      <Box className="py-0.5">
-        <Stack direction="horizontal" align="center" gap="condensed">
-          <Box
-            title="Open repository"
+    isGroupByDate(settings) && (
+      <div className="py-0.5">
+        <Stack align="center" direction="horizontal" gap="condensed">
+          <button
             className="text-xs font-medium"
+            data-testid="view-repository"
             onClick={(event: MouseEvent<HTMLElement>) => {
               // Don't trigger onClick of parent element.
               event.stopPropagation();
               openRepository(notification.repository);
             }}
-            data-testid="view-repository"
+            title="Open repository ↗"
+            type="button"
           >
             <AvatarWithFallback
-              src={notification.repository.owner.avatar_url}
-              alt={repoSlug}
-              name={repoSlug}
+              alt={notification.repository.fullName}
+              name={notification.repository.fullName}
               size={Size.SMALL}
+              src={notification.repository.owner.avatarUrl}
               userType={notification.repository.owner.type}
             />
-          </Box>
-          <Box
+          </button>
+          <div
             className={cn(
               'text-xxs',
               Opacity.READ,
               !settings.showNumber && 'hidden',
             )}
           >
-            {notificationNumber}
-          </Box>
+            {notification.display.number}
+          </div>
         </Stack>
-      </Box>
+      </div>
     )
   );
 };

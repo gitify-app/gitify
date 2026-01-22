@@ -1,4 +1,4 @@
-import type { ErrorType, GitifyError } from '../types';
+import type { AccountNotifications, ErrorType, GitifyError } from '../types';
 
 export const Errors: Record<ErrorType, GitifyError> = {
   BAD_CREDENTIALS: {
@@ -30,3 +30,29 @@ export const Errors: Record<ErrorType, GitifyError> = {
     emojis: ['🤔', '🥲', '😳', '🫠', '🙃', '🙈'],
   },
 };
+
+/**
+ * Check if all accounts have errors
+ */
+export function doesAllAccountsHaveErrors(
+  accountNotifications: AccountNotifications[],
+) {
+  return (
+    accountNotifications.length > 0 &&
+    accountNotifications.every((account) => account.error !== null)
+  );
+}
+
+/**
+ * Check if all account errors are the same
+ */
+export function areAllAccountErrorsSame(
+  accountNotifications: AccountNotifications[],
+) {
+  if (accountNotifications.length === 0) {
+    return true;
+  }
+
+  const firstError = accountNotifications[0].error;
+  return accountNotifications.every((account) => account.error === firstError);
+}

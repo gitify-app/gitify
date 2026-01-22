@@ -1,8 +1,9 @@
-import { type FC, useContext, useMemo } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import type { FC } from 'react';
 
 import {
   BellIcon,
+  CrosshairsIcon,
+  EyeIcon,
   FilterIcon,
   GearIcon,
   GitPullRequestIcon,
@@ -13,188 +14,164 @@ import {
 import { IconButton, Stack } from '@primer/react';
 
 import { APPLICATION } from '../../shared/constants';
-import { AppContext } from '../context/App';
-import { quitApp } from '../utils/comms';
-import { Constants } from '../utils/constants';
-import {
-  openGitHubIssues,
-  openGitHubNotifications,
-  openGitHubPulls,
-} from '../utils/links';
-import { hasAnyFiltersSet } from '../utils/notifications/filters/filter';
-import { getNotificationCount } from '../utils/notifications/notifications';
+
+import { useAppContext } from '../hooks/useAppContext';
+import { useShortcutActions } from '../hooks/useShortcutActions';
+
+import { hasActiveFilters } from '../utils/notifications/filters/filter';
 import { LogoIcon } from './icons/LogoIcon';
 
 export const Sidebar: FC = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
-
   const {
-    notifications,
-    fetchNotifications,
-    isLoggedIn,
     status,
+    isLoggedIn,
     settings,
-    auth,
-  } = useContext(AppContext);
+    notificationCount,
+    hasUnreadNotifications,
+  } = useAppContext();
 
-  // We naively assume that the first account is the primary account for the purposes of our sidebar quick links
-  const primaryAccountHostname =
-    auth.accounts[0]?.hostname ?? Constants.DEFAULT_AUTH_OPTIONS.hostname;
+  const { shortcuts } = useShortcutActions();
 
-  const toggleFilters = () => {
-    if (location.pathname.startsWith('/filters')) {
-      navigate('/', { replace: true });
-    } else {
-      navigate('/filters');
-    }
-  };
-
-  const toggleSettings = () => {
-    if (location.pathname.startsWith('/settings')) {
-      navigate('/', { replace: true });
-      fetchNotifications();
-    } else {
-      navigate('/settings');
-    }
-  };
-
-  const refreshNotifications = () => {
-    navigate('/', { replace: true });
-    fetchNotifications();
-  };
-
-  const notificationsCount = useMemo(() => {
-    return getNotificationCount(notifications);
-  }, [notifications]);
-
-  const sidebarButtonStyle = { color: 'white' };
+  const isLoading = status === 'loading';
 
   return (
     <Stack
+      className="fixed w-sidebar h-full bg-gitify-sidebar [&_svg]:text-white"
       direction="vertical"
       justify="space-between"
-      className="fixed left-sidebar -ml-sidebar w-sidebar h-full bg-gitify-sidebar text-white"
     >
       <Stack
-        direction="vertical"
         align="center"
+        direction="vertical"
         gap="condensed"
         padding="normal"
       >
         <IconButton
-          icon={LogoIcon}
           aria-label={APPLICATION.NAME}
-          description="Home"
-          unsafeDisableTooltip={false}
-          size="small"
-          variant="invisible"
-          tooltipDirection="e"
-          onClick={() => navigate('/', { replace: true })}
           data-testid="sidebar-home"
+          description="Home"
+          icon={LogoIcon}
+          keybindingHint={shortcuts.home.key}
+          onClick={() => shortcuts.home.action()}
+          size="small"
+          tooltipDirection="e"
+          variant="invisible"
         />
 
         <IconButton
-          icon={BellIcon}
           aria-label="Notifications"
-          description={`${notificationsCount} unread notifications`}
-          unsafeDisableTooltip={false}
-          size="small"
-          variant={notificationsCount > 0 ? 'primary' : 'invisible'}
-          tooltipDirection="e"
-          onClick={() => openGitHubNotifications(primaryAccountHostname)}
           data-testid="sidebar-notifications"
-          sx={sidebarButtonStyle}
+          description={`${notificationCount} ${settings.fetchReadNotifications ? 'notifications' : 'unread notifications'} ↗`}
+          icon={BellIcon}
+          keybindingHint={shortcuts.myNotifications.key}
+          onClick={() => shortcuts.myNotifications.action()}
+          size="small"
+          tooltipDirection="e"
+          variant={hasUnreadNotifications ? 'primary' : 'invisible'}
         />
 
         {isLoggedIn && (
-          <IconButton
-            icon={FilterIcon}
-            aria-label="Filters"
-            description="Filter notifications"
-            unsafeDisableTooltip={false}
-            size="small"
-            variant={hasAnyFiltersSet(settings) ? 'primary' : 'invisible'}
-            tooltipDirection="e"
-            onClick={() => toggleFilters()}
-            data-testid="sidebar-filter-notifications"
-            sx={sidebarButtonStyle}
-          />
+          <>
+            <IconButton
+              aria-label="Toggle focused mode"
+              data-testid="sidebar-focused-mode"
+              description={
+                settings.participating
+                  ? 'Focused (participating only)'
+                  : 'Participating and watching'
+              }
+              icon={settings.participating ? CrosshairsIcon : EyeIcon}
+              keybindingHint={shortcuts.focusedMode.key}
+              onClick={() => shortcuts.focusedMode.action()}
+              size="small"
+              tooltipDirection="e"
+              variant={settings.participating ? 'primary' : 'invisible'}
+            />
+
+            <IconButton
+              aria-label="Filters"
+              data-testid="sidebar-filter-notifications"
+              description="Filter notifications"
+              icon={FilterIcon}
+              keybindingHint={shortcuts.filters.key}
+              onClick={() => shortcuts.filters.action()}
+              size="small"
+              tooltipDirection="e"
+              variant={hasActiveFilters(settings) ? 'primary' : 'invisible'}
+            />
+          </>
         )}
 
         <IconButton
-          icon={IssueOpenedIcon}
-          aria-label="My issues"
-          unsafeDisableTooltip={false}
-          size="small"
-          variant="invisible"
-          tooltipDirection="e"
-          onClick={() => openGitHubIssues(primaryAccountHostname)}
+          aria-label="My issues ↗"
           data-testid="sidebar-my-issues"
-          sx={sidebarButtonStyle}
+          icon={IssueOpenedIcon}
+          keybindingHint={shortcuts.myIssues.key}
+          onClick={() => shortcuts.myIssues.action()}
+          size="small"
+          tooltipDirection="e"
+          variant="invisible"
         />
 
         <IconButton
-          icon={GitPullRequestIcon}
-          aria-label="My pull requests"
-          unsafeDisableTooltip={false}
-          size="small"
-          variant="invisible"
-          tooltipDirection="e"
-          onClick={() => openGitHubPulls(primaryAccountHostname)}
+          aria-label="My pull requests ↗"
           data-testid="sidebar-my-pull-requests"
-          sx={sidebarButtonStyle}
+          icon={GitPullRequestIcon}
+          keybindingHint={shortcuts.myPullRequests.key}
+          onClick={() => shortcuts.myPullRequests.action()}
+          size="small"
+          tooltipDirection="e"
+          variant="invisible"
         />
       </Stack>
 
       <Stack
-        direction="vertical"
         align="center"
+        direction="vertical"
         gap="condensed"
         padding="normal"
       >
         {isLoggedIn && (
           <>
             <IconButton
-              icon={SyncIcon}
               aria-label="Refresh"
-              description="Refresh notifications"
-              unsafeDisableTooltip={false}
-              size="small"
-              variant="invisible"
-              tooltipDirection="e"
-              loading={status === 'loading'}
-              disabled={status === 'loading'}
-              onClick={() => refreshNotifications()}
+              className={status === 'loading' ? 'animate-spin' : ''}
               data-testid="sidebar-refresh"
-              sx={sidebarButtonStyle}
+              description="Refresh notifications"
+              disabled={isLoading}
+              icon={SyncIcon}
+              keybindingHint={shortcuts.refresh.key}
+              // loading={status === 'loading'}
+              onClick={() => shortcuts.refresh.action()}
+              size="small"
+              tooltipDirection="e"
+              variant="invisible"
             />
 
             <IconButton
-              icon={GearIcon}
               aria-label="Settings"
-              unsafeDisableTooltip={false}
-              size="small"
-              variant="invisible"
-              tooltipDirection="e"
-              onClick={() => toggleSettings()}
               data-testid="sidebar-settings"
-              sx={sidebarButtonStyle}
+              description="Settings"
+              icon={GearIcon}
+              keybindingHint={shortcuts.settings.key}
+              onClick={() => shortcuts.settings.action()}
+              size="small"
+              tooltipDirection="e"
+              variant="invisible"
             />
           </>
         )}
 
         {!isLoggedIn && (
           <IconButton
-            icon={XCircleIcon}
             aria-label={`Quit ${APPLICATION.NAME}`}
-            unsafeDisableTooltip={false}
-            size="small"
-            variant="invisible"
-            tooltipDirection="e"
-            onClick={() => quitApp()}
             data-testid="sidebar-quit"
-            sx={sidebarButtonStyle}
+            icon={XCircleIcon}
+            keybindingHint={shortcuts.quit.key}
+            onClick={() => shortcuts.quit.action()}
+            size="small"
+            tooltipDirection="e"
+            variant="invisible"
           />
         )}
       </Stack>

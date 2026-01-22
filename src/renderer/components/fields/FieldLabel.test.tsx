@@ -1,15 +1,15 @@
-import { render } from '@testing-library/react';
+import { renderWithAppContext } from '../../__helpers__/test-utils';
 
-import { FieldLabel, type IFieldLabel } from './FieldLabel';
+import { FieldLabel, type FieldLabelProps } from './FieldLabel';
 
 describe('renderer/components/fields/FieldLabel.tsx', () => {
-  const props: IFieldLabel = {
+  const props: FieldLabelProps = {
     name: 'appearance',
     label: 'Appearance',
   };
 
   it('should render', () => {
-    const tree = render(<FieldLabel {...props} />);
+    const tree = renderWithAppContext(<FieldLabel {...props} />);
     expect(tree).toMatchSnapshot();
   });
 });

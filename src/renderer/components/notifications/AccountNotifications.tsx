@@ -1,11 +1,21 @@
-import { type FC, type MouseEvent, useContext, useMemo, useState } from 'react';
+import { type FC, type MouseEvent, useMemo, useState } from 'react';
 
 import { GitPullRequestIcon, IssueOpenedIcon } from '@primer/octicons-react';
-import { Box, Button, Stack } from '@primer/react';
+import { Button, Stack } from '@primer/react';
 
-import { AppContext } from '../../context/App';
-import { type Account, type GitifyError, Size } from '../../types';
-import type { Notification } from '../../typesGitHub';
+import { useAppContext } from '../../hooks/useAppContext';
+
+import { HoverButton } from '../primitives/HoverButton';
+import { HoverGroup } from '../primitives/HoverGroup';
+
+import {
+  type Account,
+  type GitifyError,
+  type GitifyNotification,
+  Size,
+} from '../../types';
+
+import { hasMultipleAccounts } from '../../utils/auth/utils';
 import { cn } from '../../utils/cn';
 import { getChevronDetails } from '../../utils/helpers';
 import {
@@ -13,42 +23,43 @@ import {
   openGitHubIssues,
   openGitHubPulls,
 } from '../../utils/links';
+import {
+  groupNotificationsByRepository,
+  isGroupByRepository,
+} from '../../utils/notifications/group';
 import { AllRead } from '../AllRead';
 import { AvatarWithFallback } from '../avatars/AvatarWithFallback';
 import { Oops } from '../Oops';
-import { HoverButton } from '../primitives/HoverButton';
-import { HoverGroup } from '../primitives/HoverGroup';
 import { NotificationRow } from './NotificationRow';
 import { RepositoryNotifications } from './RepositoryNotifications';
 
-interface IAccountNotifications {
+export interface AccountNotificationsProps {
   account: Account;
-  notifications: Notification[];
+  notifications: GitifyNotification[];
   error: GitifyError | null;
   showAccountHeader: boolean;
 }
 
-export const AccountNotifications: FC<IAccountNotifications> = (
-  props: IAccountNotifications,
+export const AccountNotifications: FC<AccountNotificationsProps> = (
+  props: AccountNotificationsProps,
 ) => {
   const { account, showAccountHeader, notifications } = props;
 
-  const { settings } = useContext(AppContext);
+  const { auth, settings } = useAppContext();
 
-  const [showAccountNotifications, setShowAccountNotifications] =
+  const [isAccountNotificationsVisible, setIsAccountNotificationsVisible] =
     useState(true);
 
-  const groupedNotifications = Object.values(
-    notifications.reduce(
-      (acc: { [key: string]: Notification[] }, notification) => {
-        const key = notification.repository.full_name;
-        if (!acc[key]) acc[key] = [];
-        acc[key].push(notification);
-        return acc;
-      },
-      {},
-    ),
+  const sortedNotifications = useMemo(
+    () => [...notifications].sort((a, b) => a.order - b.order),
+    [notifications],
   );
+
+  const groupedNotifications = useMemo(() => {
+    const map = groupNotificationsByRepository(sortedNotifications);
+
+    return Array.from(map.entries());
+  }, [sortedNotifications]);
 
   const hasNotifications = useMemo(
     () => notifications.length > 0,
@@ -56,97 +67,90 @@ export const AccountNotifications: FC<IAccountNotifications> = (
   );
 
   const actionToggleAccountNotifications = () => {
-    setShowAccountNotifications(!showAccountNotifications);
+    setIsAccountNotificationsVisible(!isAccountNotificationsVisible);
   };
 
   const Chevron = getChevronDetails(
     hasNotifications,
-    showAccountNotifications,
+    isAccountNotificationsVisible,
     'account',
   );
-
-  const isGroupByRepository = settings.groupBy === 'REPOSITORY';
 
   return (
     <>
       {showAccountHeader && (
-        <Box
+        <Stack
           className={cn(
-            'group pr-1 py-0.5',
+            'group relative pr-1 py-0.5',
             props.error ? 'bg-gitify-account-error' : 'bg-gitify-account-rest',
           )}
+          direction="horizontal"
           onClick={actionToggleAccountNotifications}
         >
-          <Stack
-            direction="horizontal"
-            align="center"
-            gap="condensed"
-            className="relative"
+          <Button
+            alignContent="center"
+            count={notifications.length}
+            data-testid="account-profile"
+            onClick={(event: MouseEvent<HTMLElement>) => {
+              // Don't trigger onClick of parent element.
+              event.stopPropagation();
+              openAccountProfile(account);
+            }}
+            title="Open account profile"
+            variant="invisible"
           >
-            <Button
-              title="Open account profile"
-              variant="invisible"
-              alignContent="center"
-              count={notifications.length}
-              onClick={(event: MouseEvent<HTMLElement>) => {
-                // Don't trigger onClick of parent element.
-                event.stopPropagation();
-                openAccountProfile(account);
-              }}
-              data-testid="account-profile"
-            >
-              <AvatarWithFallback
-                src={account.user.avatar}
-                alt={account.user.login}
-                name={`@${account.user.login}`}
-                size={Size.MEDIUM}
-              />
-            </Button>
+            <AvatarWithFallback
+              alt={account.user.login}
+              name={`@${account.user.login}`}
+              size={Size.MEDIUM}
+              src={account.user.avatar}
+            />
+          </Button>
 
-            <HoverGroup bgColor="group-hover:bg-gitify-account-rest">
-              <HoverButton
-                label="My Issues"
-                icon={IssueOpenedIcon}
-                testid="account-issues"
-                action={() => openGitHubIssues(account.hostname)}
-              />
+          <HoverGroup bgColor="group-hover:bg-gitify-account-rest">
+            <HoverButton
+              action={() => openGitHubIssues(account.hostname)}
+              icon={IssueOpenedIcon}
+              label="My issues ↗"
+              testid="account-issues"
+            />
 
-              <HoverButton
-                label="My Pull Requests"
-                icon={GitPullRequestIcon}
-                testid="account-pull-requests"
-                action={() => openGitHubPulls(account.hostname)}
-              />
+            <HoverButton
+              action={() => openGitHubPulls(account.hostname)}
+              icon={GitPullRequestIcon}
+              label="My pull requests ↗"
+              testid="account-pull-requests"
+            />
 
-              <HoverButton
-                label={Chevron.label}
-                icon={Chevron.icon}
-                testid="account-toggle"
-                action={actionToggleAccountNotifications}
-              />
-            </HoverGroup>
-          </Stack>
-        </Box>
+            <HoverButton
+              action={actionToggleAccountNotifications}
+              icon={Chevron.icon}
+              label={Chevron.label}
+              testid="account-toggle"
+            />
+          </HoverGroup>
+        </Stack>
       )}
 
-      {showAccountNotifications && (
+      {isAccountNotificationsVisible && (
         <>
-          {props.error && <Oops error={props.error} fullHeight={false} />}
-          {!hasNotifications && !props.error && <AllRead fullHeight={false} />}
-          {isGroupByRepository
-            ? Object.values(groupedNotifications).map((repoNotifications) => {
-                const repoSlug = repoNotifications[0].repository.full_name;
+          {props.error && (
+            <Oops error={props.error} fullHeight={!hasMultipleAccounts(auth)} />
+          )}
 
-                return (
-                  <RepositoryNotifications
-                    key={repoSlug}
-                    repoName={repoSlug}
-                    repoNotifications={repoNotifications}
-                  />
-                );
-              })
-            : notifications.map((notification) => (
+          {!hasNotifications && !props.error && <AllRead fullHeight={false} />}
+
+          {isGroupByRepository(settings)
+            ? groupedNotifications.map(([repoSlug, repoNotifications]) => (
+                <RepositoryNotifications
+                  key={repoSlug}
+                  repoName={repoSlug}
+                  repoNotifications={repoNotifications}
+                />
+              ))
+            : sortedNotifications.map((notification) => (
                 <NotificationRow
+                  isRepositoryAnimatingExit={false}
                   key={notification.id}
                   notification={notification}
                 />

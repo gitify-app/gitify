@@ -1,18 +1,21 @@
 {
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "include": ["src/**/*.js", "src/**/*.ts", "src/**/*.tsx"],
   "compilerOptions": {
     "incremental": true,
-    "target": "es2022",
+    "target": "ES2024",
     "module": "commonjs",
-    "lib": ["dom", "es2022"],
-    "jsx": "react-jsx",
     "sourceMap": true,
-    "moduleResolution": "node",
+    "lib": ["ES2024", "DOM", "DOM.Iterable"],
+    "jsx": "react-jsx",
+    "outDir": "./build/",
+
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "allowJs": true,
+    "forceConsistentCasingInFileNames": true,
     "noUnusedLocals": true,
-    "skipLibCheck": true,
-    "outDir": "./build/"
-  },
-  "include": ["src/**/*.js", "src/**/*.ts", "src/**/*.tsx"]
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": true
+  }
 }

@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`renderer/components/layout/Page.tsx should render itself & its children 1`] = `
 {
@@ -6,19 +6,41 @@ exports[`renderer/components/layout/Page.tsx should render itself & its children
   "baseElement": <body>
     <div>
       <div
-        class="Box-sc-g0xbh4-0 flex flex-col h-screen"
-        data-testid="test"
+        data-color-mode="light"
+        data-dark-theme="dark"
+        data-light-theme="light"
       >
-        Test
+        <div
+          class="prc-src-BaseStyles-aopSS"
+          data-portal-root="true"
+        >
+          <div
+            class="flex flex-col h-screen"
+            data-testid="test"
+          >
+            Test
+          </div>
+        </div>
       </div>
     </div>
   </body>,
   "container": <div>
     <div
-      class="Box-sc-g0xbh4-0 flex flex-col h-screen"
-      data-testid="test"
+      data-color-mode="light"
+      data-dark-theme="dark"
+      data-light-theme="light"
     >
-      Test
+      <div
+        class="prc-src-BaseStyles-aopSS"
+        data-portal-root="true"
+      >
+        <div
+          class="flex flex-col h-screen"
+          data-testid="test"
+        >
+          Test
+        </div>
+      </div>
     </div>
   </div>,
   "debug": [Function],

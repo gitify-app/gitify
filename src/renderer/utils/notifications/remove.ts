@@ -1,41 +1,60 @@
-import type { AccountNotifications, SettingsState } from '../../types';
-import type { Notification } from '../../typesGitHub';
+import type {
+  Account,
+  AccountNotifications,
+  GitifyNotification,
+  SettingsState,
+} from '../../types';
+
 import { getAccountUUID } from '../auth/utils';
 
-export function removeNotifications(
+/**
+ * Determine if notifications should be removed from state or marked as read in-place.
+ *
+ * When `delayNotificationState` or `fetchReadNotifications` is enabled,
+ * notifications stay in the list with reduced opacity instead of being removed.
+ */
+export function shouldRemoveNotificationsFromState(
   settings: SettingsState,
-  notificationsToRemove: Notification[],
-  allNotifications: AccountNotifications[],
+): boolean {
+  return !settings.delayNotificationState && !settings.fetchReadNotifications;
+}
+
+/**
+ * Remove notifications from the account notifications list.
+ *
+ * When `delayNotificationState` or `fetchReadNotifications` is enabled,
+ * notifications are marked as read instead of being removed from the list.
+ */
+export function removeNotificationsForAccount(
+  account: Account,
+  settings: SettingsState,
+  notificationsToRemove: GitifyNotification[],
+  accountNotifications: AccountNotifications[],
 ): AccountNotifications[] {
-  if (settings.delayNotificationState) {
-    return allNotifications;
-  }
-
   if (notificationsToRemove.length === 0) {
-    return allNotifications;
+    return accountNotifications;
   }
 
-  const removeNotificationAccount = notificationsToRemove[0].account;
-  const removeNotificationIDs = notificationsToRemove.map(
-    (notification) => notification.id,
+  const notificationIDsToRemove = new Set(
+    notificationsToRemove.map((notification) => notification.id),
   );
 
-  const accountIndex = allNotifications.findIndex(
-    (accountNotifications) =>
-      getAccountUUID(accountNotifications.account) ===
-      getAccountUUID(removeNotificationAccount),
+  const shouldRemove = shouldRemoveNotificationsFromState(settings);
+
+  return accountNotifications.map((accountNotifications) =>
+    getAccountUUID(account) === getAccountUUID(accountNotifications.account)
+      ? {
+          ...accountNotifications,
+          notifications: shouldRemove
+            ? accountNotifications.notifications.filter(
+                (notification) => !notificationIDsToRemove.has(notification.id),
+              )
+            : accountNotifications.notifications.map((notification) =>
+                notificationIDsToRemove.has(notification.id)
+                  ? { ...notification, unread: false }
+                  : notification,
+              ),
+        }
+      : accountNotifications,
   );
-
-  if (accountIndex !== -1) {
-    const updatedNotifications = [...allNotifications];
-    updatedNotifications[accountIndex] = {
-      ...updatedNotifications[accountIndex],
-      notifications: updatedNotifications[accountIndex].notifications.filter(
-        (notification) => !removeNotificationIDs.includes(notification.id),
-      ),
-    };
-    return updatedNotifications;
-  }
-
-  return allNotifications;
 }

@@ -1,36 +1,14 @@
-import path from 'node:path';
-
 import twemoji, { type TwemojiOptions } from '@discordapp/twemoji';
-
-import { Constants } from './constants';
-import { Errors } from './errors';
 
 const EMOJI_FORMAT = 'svg';
 
-const ALL_EMOJIS = [
-  ...Constants.ALL_READ_EMOJIS,
-  ...Errors.BAD_CREDENTIALS.emojis,
-  ...Errors.MISSING_SCOPES.emojis,
-  ...Errors.NETWORK.emojis,
-  ...Errors.RATE_LIMITED.emojis,
-  ...Errors.UNKNOWN.emojis,
-];
+export async function convertTextToEmojiImgHtml(text: string): Promise<string> {
+  const directory = await window.gitify.twemojiDirectory();
 
-export const ALL_EMOJI_SVG_FILENAMES = ALL_EMOJIS.map((emoji) => {
-  const imgHtml = convertTextToEmojiImgHtml(emoji);
-  return extractSvgFilename(imgHtml);
-});
-
-export function convertTextToEmojiImgHtml(text: string): string {
   return twemoji.parse(text, {
     folder: EMOJI_FORMAT,
     callback: (icon: string, _options: TwemojiOptions) => {
-      return path.join('images', 'twemoji', `${icon}.${EMOJI_FORMAT}`);
+      return `${directory}/${icon}.${EMOJI_FORMAT}`;
     },
   });
-}
-
-function extractSvgFilename(imgHtml: string): string {
-  const srcMatch = /src="(.*)"/.exec(imgHtml);
-  return path.basename(srcMatch[1]);
 }

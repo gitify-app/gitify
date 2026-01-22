@@ -1,30 +1,44 @@
 import path from 'node:path';
 
+import twemoji from '@discordapp/twemoji';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import webpack from 'webpack';
 import { merge } from 'webpack-merge';
 
-import { ALL_EMOJI_SVG_FILENAMES } from '../src/renderer/utils/emojis';
+import { Constants } from '../src/renderer/constants';
+
+import { Errors } from '../src/renderer/utils/errors';
 import baseConfig from './webpack.config.common';
 import webpackPaths from './webpack.paths';
+
+const ALL_EMOJIS = [
+  ...Constants.ALL_READ_EMOJIS,
+  ...Errors.BAD_CREDENTIALS.emojis,
+  ...Errors.MISSING_SCOPES.emojis,
+  ...Errors.NETWORK.emojis,
+  ...Errors.RATE_LIMITED.emojis,
+  ...Errors.UNKNOWN.emojis,
+];
+
+export const ALL_EMOJI_SVG_FILENAMES = ALL_EMOJIS.map((emoji) => {
+  const imgHtml = twemoji.parse(emoji, { folder: 'svg', ext: '.svg' });
+  return extractSvgFilename(imgHtml);
+});
 
 const configuration: webpack.Configuration = {
   devtool: 'inline-source-map',
 
   mode: 'development',
 
-  target: 'electron-renderer',
+  target: ['web', 'electron-renderer'],
 
   entry: [path.join(webpackPaths.srcRendererPath, 'index.tsx')],
 
   output: {
     path: webpackPaths.buildPath,
     filename: 'renderer.js',
-    library: {
-      type: 'umd',
-    },
   },
 
   module: {
@@ -61,7 +75,6 @@ const configuration: webpack.Configuration = {
         removeAttributeQuotes: true,
         removeComments: true,
       },
-      isBrowser: false,
     }),
 
     // Twemoji SVGs for Emoji parsing
@@ -86,5 +99,12 @@ const configuration: webpack.Configuration = {
     }),
   ],
 };
+
+function extractSvgFilename(imgHtml: string) {
+  const srcMatch = /src="(.*)"/.exec(imgHtml);
+  const src = srcMatch ? srcMatch[1] : '';
+  const filename = src.split('/').pop(); // Get the last part after splitting by "/"
+  return filename;
+}
 
 export default merge(baseConfig, configuration);

@@ -1,19 +1,24 @@
-import { render, screen } from '@testing-library/react';
+import { act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import {
-  mockGitHubCloudAccount,
-  mockSettings,
-} from '../../__mocks__/state-mocks';
-import { ensureStableEmojis } from '../../__mocks__/utils';
-import { AppContext } from '../../context/App';
+  ensureStableEmojis,
+  renderWithAppContext,
+} from '../../__helpers__/test-utils';
+import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
+import { mockGitHubCloudGitifyNotifications } from '../../__mocks__/notifications-mocks';
+import { mockSettings } from '../../__mocks__/state-mocks';
+
 import { GroupBy } from '../../types';
-import { mockGitHubNotifications } from '../../utils/api/__mocks__/response-mocks';
+
 import * as links from '../../utils/links';
-import { AccountNotifications } from './AccountNotifications';
+import {
+  AccountNotifications,
+  type AccountNotificationsProps,
+} from './AccountNotifications';
 
 jest.mock('./RepositoryNotifications', () => ({
-  RepositoryNotifications: () => <div>Repository Notifications</div>,
+  RepositoryNotifications: () => <div>RepositoryNotifications</div>,
 }));
 
 describe('renderer/components/notifications/AccountNotifications.tsx', () => {
@@ -22,62 +27,54 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
   });
 
   it('should render itself - group notifications by repositories', () => {
-    const props = {
+    const props: AccountNotificationsProps = {
       account: mockGitHubCloudAccount,
-      notifications: mockGitHubNotifications,
+      notifications: mockGitHubCloudGitifyNotifications,
       showAccountHeader: true,
       error: null,
     };
 
-    const tree = render(
-      <AppContext.Provider
-        value={{ settings: { ...mockSettings, groupBy: GroupBy.REPOSITORY } }}
-      >
-        <AccountNotifications {...props} />
-      </AppContext.Provider>,
-    );
+    const tree = renderWithAppContext(<AccountNotifications {...props} />, {
+      settings: { ...mockSettings, groupBy: GroupBy.REPOSITORY },
+    });
 
     expect(tree).toMatchSnapshot();
   });
 
   it('should render itself - group notifications by date', () => {
-    const props = {
+    const props: AccountNotificationsProps = {
       account: mockGitHubCloudAccount,
-      notifications: mockGitHubNotifications,
+      notifications: mockGitHubCloudGitifyNotifications,
       showAccountHeader: true,
       error: null,
     };
 
-    const tree = render(
-      <AppContext.Provider
-        value={{ settings: { ...mockSettings, groupBy: GroupBy.DATE } }}
-      >
-        <AccountNotifications {...props} />
-      </AppContext.Provider>,
-    );
+    const tree = renderWithAppContext(<AccountNotifications {...props} />, {
+      settings: { ...mockSettings, groupBy: GroupBy.DATE },
+    });
 
     expect(tree).toMatchSnapshot();
   });
 
-  it('should render itself - no notifications', () => {
-    const props = {
+  it('should render itself - no notifications', async () => {
+    const props: AccountNotificationsProps = {
       account: mockGitHubCloudAccount,
       notifications: [],
       showAccountHeader: true,
       error: null,
     };
 
-    const tree = render(
-      <AppContext.Provider value={{ settings: mockSettings }}>
-        <AccountNotifications {...props} />
-      </AppContext.Provider>,
-    );
+    let tree: ReturnType<typeof renderWithAppContext> | null = null;
+
+    await act(async () => {
+      tree = renderWithAppContext(<AccountNotifications {...props} />);
+    });
 
     expect(tree).toMatchSnapshot();
   });
 
-  it('should render itself - account error', () => {
-    const props = {
+  it('should render itself - account error for single account', async () => {
+    const props: AccountNotificationsProps = {
       account: mockGitHubCloudAccount,
       notifications: [],
       error: {
@@ -88,112 +85,116 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
       showAccountHeader: true,
     };
 
-    const tree = render(
-      <AppContext.Provider value={{ settings: mockSettings }}>
-        <AccountNotifications {...props} />
-      </AppContext.Provider>,
-    );
+    let tree: ReturnType<typeof renderWithAppContext> | null = null;
+
+    await act(async () => {
+      tree = renderWithAppContext(<AccountNotifications {...props} />, {
+        auth: { accounts: [mockGitHubCloudAccount] },
+      });
+    });
+
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('should render itself - account error for multiple accounts', async () => {
+    const props: AccountNotificationsProps = {
+      account: mockGitHubCloudAccount,
+      notifications: [],
+      error: {
+        title: 'Error title',
+        descriptions: ['Error description'],
+        emojis: ['🔥'],
+      },
+      showAccountHeader: true,
+    };
+
+    let tree: ReturnType<typeof renderWithAppContext> | null = null;
+
+    await act(async () => {
+      tree = renderWithAppContext(<AccountNotifications {...props} />);
+    });
 
     expect(tree).toMatchSnapshot();
   });
 
   it('should open profile when clicked', async () => {
-    const openAccountProfileMock = jest
+    const openAccountProfileSpy = jest
       .spyOn(links, 'openAccountProfile')
       .mockImplementation();
 
-    const props = {
+    const props: AccountNotificationsProps = {
       account: mockGitHubCloudAccount,
       notifications: [],
       showAccountHeader: true,
       error: null,
     };
 
-    render(
-      <AppContext.Provider value={{ settings: mockSettings }}>
-        <AccountNotifications {...props} />
-      </AppContext.Provider>,
-    );
+    renderWithAppContext(<AccountNotifications {...props} />);
 
     await userEvent.click(screen.getByTestId('account-profile'));
 
-    expect(openAccountProfileMock).toHaveBeenCalledTimes(1);
-    expect(openAccountProfileMock).toHaveBeenCalledWith(mockGitHubCloudAccount);
+    expect(openAccountProfileSpy).toHaveBeenCalledTimes(1);
+    expect(openAccountProfileSpy).toHaveBeenCalledWith(mockGitHubCloudAccount);
   });
 
   it('should open my issues when clicked', async () => {
-    const openMyIssuesMock = jest
+    const openGitHubIssuesSpy = jest
       .spyOn(links, 'openGitHubIssues')
       .mockImplementation();
 
-    const props = {
+    const props: AccountNotificationsProps = {
       account: mockGitHubCloudAccount,
       notifications: [],
       showAccountHeader: true,
       error: null,
     };
 
-    render(
-      <AppContext.Provider value={{ settings: mockSettings }}>
-        <AccountNotifications {...props} />
-      </AppContext.Provider>,
-    );
+    renderWithAppContext(<AccountNotifications {...props} />);
 
     await userEvent.click(screen.getByTestId('account-issues'));
 
-    expect(openMyIssuesMock).toHaveBeenCalledTimes(1);
-    expect(openMyIssuesMock).toHaveBeenCalledWith(
+    expect(openGitHubIssuesSpy).toHaveBeenCalledTimes(1);
+    expect(openGitHubIssuesSpy).toHaveBeenCalledWith(
       mockGitHubCloudAccount.hostname,
     );
   });
 
   it('should open my pull requests when clicked', async () => {
-    const openPullRequestsMock = jest
+    const openGitHubPullsSpy = jest
       .spyOn(links, 'openGitHubPulls')
       .mockImplementation();
 
-    const props = {
+    const props: AccountNotificationsProps = {
       account: mockGitHubCloudAccount,
       notifications: [],
       showAccountHeader: true,
       error: null,
     };
 
-    render(
-      <AppContext.Provider value={{ settings: mockSettings }}>
-        <AccountNotifications {...props} />
-      </AppContext.Provider>,
-    );
+    renderWithAppContext(<AccountNotifications {...props} />);
 
     await userEvent.click(screen.getByTestId('account-pull-requests'));
 
-    expect(openPullRequestsMock).toHaveBeenCalledTimes(1);
-    expect(openPullRequestsMock).toHaveBeenCalledWith(
+    expect(openGitHubPullsSpy).toHaveBeenCalledTimes(1);
+    expect(openGitHubPullsSpy).toHaveBeenCalledWith(
       mockGitHubCloudAccount.hostname,
     );
   });
 
   it('should toggle account notifications visibility', async () => {
-    const props = {
+    const props: AccountNotificationsProps = {
       account: mockGitHubCloudAccount,
-      notifications: mockGitHubNotifications,
+      notifications: mockGitHubCloudGitifyNotifications,
       showAccountHeader: true,
       error: null,
     };
 
-    render(
-      <AppContext.Provider value={{ settings: mockSettings }}>
-        <AccountNotifications {...props} />
-      </AppContext.Provider>,
-    );
+    renderWithAppContext(<AccountNotifications {...props} />);
 
     await userEvent.click(screen.getByTestId('account-toggle'));
 
-    const tree = render(
-      <AppContext.Provider value={{ settings: mockSettings }}>
-        <AccountNotifications {...props} />
-      </AppContext.Provider>,
-    );
+    const tree = renderWithAppContext(<AccountNotifications {...props} />);
+
     expect(tree).toMatchSnapshot();
   });
 });

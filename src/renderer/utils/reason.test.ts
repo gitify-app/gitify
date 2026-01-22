@@ -1,4 +1,5 @@
-import type { Reason } from '../typesGitHub';
+import type { Reason } from '../types';
+
 import { getReasonDetails } from './reason';
 
 describe('renderer/utils/reason.ts', () => {

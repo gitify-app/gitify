@@ -2,19 +2,19 @@ import type { FC, ReactNode } from 'react';
 
 import { Stack } from '@primer/react';
 
-interface ICentered {
+interface CenteredProps {
   children: ReactNode;
   fullHeight: boolean;
 }
 
-export const Centered: FC<ICentered> = (props: ICentered) => {
+export const Centered: FC<CenteredProps> = (props: CenteredProps) => {
   return (
     <Stack
-      direction="vertical"
       align="center"
+      className={props.fullHeight && 'h-screen'}
+      direction="vertical"
       justify="center"
       padding="spacious"
-      className={props.fullHeight && 'h-screen'}
     >
       {props.children}
     </Stack>

@@ -1,10 +1,10 @@
-import { render } from '@testing-library/react';
+import { renderWithAppContext } from '../../__helpers__/test-utils';
 
 import { Page } from './Page';
 
 describe('renderer/components/layout/Page.tsx', () => {
   it('should render itself & its children', () => {
-    const tree = render(<Page id="test">Test</Page>);
+    const tree = renderWithAppContext(<Page testId="test">Test</Page>);
 
     expect(tree).toMatchSnapshot();
   });

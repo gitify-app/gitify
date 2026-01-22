@@ -1,7 +1,22 @@
 import axios from 'axios';
 
-import type { Link, Token } from '../../types';
-import { apiRequest, apiRequestAuth } from './request';
+import { mockToken } from '../../__mocks__/state-mocks';
+import {
+  mockAuthHeaders,
+  mockNoAuthHeaders,
+  mockNonCachedAuthHeaders,
+} from './__mocks__/request-mocks';
+
+import type { Link } from '../../types';
+
+import { FetchAuthenticatedUserDetailsDocument } from './graphql/generated/graphql';
+import {
+  getHeaders,
+  performAuthenticatedRESTRequest,
+  performGraphQLRequest,
+  performGraphQLRequestString,
+  shouldRequestWithNoCache,
+} from './request';
 
 jest.mock('axios');
 
@@ -13,66 +28,125 @@ describe('renderer/utils/api/request.ts', () => {
     jest.clearAllMocks();
   });
 
-  it('should make a request with the correct parameters', async () => {
-    const data = { key: 'value' };
-
-    await apiRequest(url, method, data);
-
-    expect(axios).toHaveBeenCalledWith({
-      method,
-      url,
-      data,
+  describe('apiRequestAuth', () => {
+    afterEach(() => {
+      jest.clearAllMocks();
     });
 
-    expect(axios.defaults.headers.common).toMatchSnapshot();
-  });
+    it('should make an authenticated request with the correct parameters', async () => {
+      const data = { key: 'value' };
 
-  it('should make a request with the correct parameters and default data', async () => {
-    const data = {};
-    await apiRequest(url, method);
+      await performAuthenticatedRESTRequest(method, url, mockToken, data);
 
-    expect(axios).toHaveBeenCalledWith({
-      method,
-      url,
-      data,
+      expect(axios).toHaveBeenCalledWith({
+        method,
+        url,
+        data,
+        headers: mockAuthHeaders,
+      });
     });
 
-    expect(axios.defaults.headers.common).toMatchSnapshot();
-  });
-});
+    it('should make an authenticated request with the correct parameters and default data', async () => {
+      const data = {};
 
-describe('apiRequestAuth', () => {
-  const token = 'yourAuthToken' as Token;
+      await performAuthenticatedRESTRequest(method, url, mockToken, data);
 
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
-
-  it('should make an authenticated request with the correct parameters', async () => {
-    const data = { key: 'value' };
-
-    await apiRequestAuth(url, method, token, data);
-
-    expect(axios).toHaveBeenCalledWith({
-      method,
-      url,
-      data,
+      expect(axios).toHaveBeenCalledWith({
+        method,
+        url,
+        data,
+        headers: mockAuthHeaders,
+      });
     });
-
-    expect(axios.defaults.headers.common).toMatchSnapshot();
   });
 
-  it('should make an authenticated request with the correct parameters and default data', async () => {
-    const data = {};
+  describe('performGraphQLRequest', () => {
+    it('should performGraphQLRequest with the correct parameters and default data', async () => {
+      (axios as unknown as jest.Mock).mockResolvedValue({
+        data: { data: {}, errors: [] },
+        headers: {},
+      });
+      const expectedData = {
+        query: FetchAuthenticatedUserDetailsDocument,
+        variables: undefined,
+      };
 
-    await apiRequestAuth(url, method, token);
+      await performGraphQLRequest(
+        url,
+        mockToken,
+        FetchAuthenticatedUserDetailsDocument,
+      );
 
-    expect(axios).toHaveBeenCalledWith({
-      method,
-      url,
-      data,
+      expect(axios).toHaveBeenCalledWith({
+        method: 'POST',
+        url,
+        data: expectedData,
+        headers: mockAuthHeaders,
+      });
     });
+  });
 
-    expect(axios.defaults.headers.common).toMatchSnapshot();
+  describe('performGraphQLRequestString', () => {
+    it('should performGraphQLRequestString with the correct parameters and default data', async () => {
+      (axios as unknown as jest.Mock).mockResolvedValue({
+        data: { data: {}, errors: [] },
+        headers: {},
+      });
+      const queryString = 'query Foo { repository { issue { title } } }';
+      const expectedData = {
+        query: queryString,
+        variables: undefined,
+      };
+
+      await performGraphQLRequestString(url, mockToken, queryString);
+
+      expect(axios).toHaveBeenCalledWith({
+        method: 'POST',
+        url,
+        data: expectedData,
+        headers: mockAuthHeaders,
+      });
+    });
+  });
+
+  describe('shouldRequestWithNoCache', () => {
+    it('shouldRequestWithNoCache', () => {
+      expect(
+        shouldRequestWithNoCache(
+          'https://example.com/api/v3/notifications' as Link,
+        ),
+      ).toBe(true);
+
+      expect(
+        shouldRequestWithNoCache(
+          'https://example.com/login/oauth/access_token' as Link,
+        ),
+      ).toBe(true);
+
+      expect(
+        shouldRequestWithNoCache('https://example.com/notifications' as Link),
+      ).toBe(true);
+
+      expect(
+        shouldRequestWithNoCache(
+          'https://example.com/some/other/endpoint' as Link,
+        ),
+      ).toBe(false);
+    });
+  });
+
+  describe('getHeaders', () => {
+    it('should get headers correctly', async () => {
+      expect(await getHeaders(url)).toEqual(mockNoAuthHeaders);
+
+      expect(await getHeaders(url, mockToken)).toEqual(mockAuthHeaders);
+
+      expect(
+        await getHeaders(
+          'https://example.com/api/v3/notifications' as Link,
+          mockToken,
+        ),
+      ).toEqual(mockNonCachedAuthHeaders);
+    });
   });
 });

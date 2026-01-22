@@ -4,17 +4,20 @@ import {
   ChevronRightIcon,
 } from '@primer/octicons-react';
 
-import { logError, logWarn } from '../../shared/logger';
-import type { Chevron, Hostname, Link } from '../types';
-import type { Notification } from '../typesGitHub';
-import { getHtmlUrl, getLatestDiscussion } from './api/client';
+import { Constants } from '../constants';
+
+import type { Chevron, GitifyNotification, Hostname, Link } from '../types';
 import type { PlatformType } from './auth/types';
-import { Constants } from './constants';
-import {
-  getCheckSuiteAttributes,
-  getLatestDiscussionComment,
-  getWorkflowRunAttributes,
-} from './subject';
+
+import { getHtmlUrl } from './api/client';
+import { rendererLogError } from './logger';
+import { createNotificationHandler } from './notifications/handlers';
+
+export interface ParsedCodePart {
+  id: string;
+  type: 'text' | 'code';
+  content: string;
+}
 
 export function getPlatformFromHostname(hostname: string): PlatformType {
   return hostname.endsWith(Constants.DEFAULT_AUTH_OPTIONS.hostname)
@@ -27,46 +30,10 @@ export function isEnterpriseServerHost(hostname: Hostname): boolean {
 }
 
 export function generateNotificationReferrerId(
-  notification: Notification,
+  notification: GitifyNotification,
 ): string {
-  const buffer = Buffer.from(
-    `018:NotificationThread${notification.id}:${notification.account.user.id}`,
-  );
-  return buffer.toString('base64');
-}
-
-export function getCheckSuiteUrl(notification: Notification): Link {
-  const filters = [];
-
-  const checkSuiteAttributes = getCheckSuiteAttributes(notification);
-
-  if (checkSuiteAttributes?.workflowName) {
-    filters.push(
-      `workflow:"${checkSuiteAttributes.workflowName.replaceAll(' ', '+')}"`,
-    );
-  }
-
-  if (checkSuiteAttributes?.status) {
-    filters.push(`is:${checkSuiteAttributes.status}`);
-  }
-
-  if (checkSuiteAttributes?.branchName) {
-    filters.push(`branch:${checkSuiteAttributes.branchName}`);
-  }
-
-  return actionsURL(notification.repository.html_url, filters);
-}
-
-export function getWorkflowRunUrl(notification: Notification): Link {
-  const filters = [];
-
-  const workflowRunAttributes = getWorkflowRunAttributes(notification);
-
-  if (workflowRunAttributes?.status) {
-    filters.push(`is:${workflowRunAttributes.status}`);
-  }
-
-  return actionsURL(notification.repository.html_url, filters);
+  const raw = `018:NotificationThread${notification.id}:${notification.account.user.id}`;
+  return btoa(raw);
 }
 
 /**
@@ -81,86 +48,43 @@ export function actionsURL(repositoryURL: string, filters: string[]): Link {
   }
 
   // Note: the GitHub Actions UI cannot handle encoded '+' characters.
-  return url.toString().replace(/%2B/g, '+') as Link;
-}
-
-async function getDiscussionUrl(notification: Notification): Promise<Link> {
-  const url = new URL(notification.repository.html_url);
-  url.pathname += '/discussions';
-
-  const discussion = await getLatestDiscussion(notification);
-
-  if (discussion) {
-    url.href = discussion.url;
-
-    const latestComment = getLatestDiscussionComment(discussion.comments.nodes);
-
-    if (latestComment) {
-      url.hash = `#discussioncomment-${latestComment.databaseId}`;
-    }
-  }
-
-  return url.toString() as Link;
+  return url.toString().replaceAll('%2B', '+') as Link;
 }
 
 export async function generateGitHubWebUrl(
-  notification: Notification,
+  notification: GitifyNotification,
 ): Promise<Link> {
-  const url = new URL(notification.repository.html_url);
+  const handler = createNotificationHandler(notification);
+  const url = new URL(handler.defaultUrl(notification));
 
-  // FIXME see #1583
-  // Upstream GitHub API has started returning subject urls for Discussion notification types,
-  // however these URLs are broken.  Temporarily downgrading to use discussion lookup process.
-  if (notification.subject.type === 'Discussion') {
-    notification.subject.url = null;
-    notification.subject.latest_comment_url = null;
-  }
+  if (notification.subject.htmlUrl) {
+    url.href = notification.subject.htmlUrl;
+  } else {
+    try {
+      if (notification.subject.latestCommentUrl) {
+        const response = (
+          await getHtmlUrl(
+            notification.subject.latestCommentUrl,
+            notification.account.token,
+          )
+        ).data;
 
-  try {
-    if (notification.subject.latest_comment_url) {
-      url.href = await getHtmlUrl(
-        notification.subject.latest_comment_url,
-        notification.account.token,
-      );
-    } else if (notification.subject.url) {
-      url.href = await getHtmlUrl(
-        notification.subject.url,
-        notification.account.token,
-      );
-    } else {
-      // Perform any specific notification type handling (only required for a few special notification scenarios)
-      switch (notification.subject.type) {
-        case 'CheckSuite':
-          url.href = getCheckSuiteUrl(notification);
-          break;
-        case 'Discussion':
-          url.href = await getDiscussionUrl(notification);
-          break;
-        case 'RepositoryInvitation':
-          url.pathname += '/invitations';
-          break;
-        case 'RepositoryDependabotAlertsThread':
-          url.pathname += '/security/dependabot';
-          break;
-        case 'WorkflowRun':
-          url.href = getWorkflowRunUrl(notification);
-          break;
-        default:
-          break;
+        url.href = response.html_url;
+      } else if (notification.subject.url) {
+        const response = (
+          await getHtmlUrl(notification.subject.url, notification.account.token)
+        ).data;
+
+        url.href = response.html_url;
       }
+    } catch (err) {
+      rendererLogError(
+        'generateGitHubWebUrl',
+        'Failed to resolve specific notification html url for',
+        err,
+        notification,
+      );
     }
-  } catch (err) {
-    logError(
-      'generateGitHubWebUrl',
-      'Failed to resolve specific notification html url for',
-      err,
-      notification,
-    );
-
-    logWarn(
-      'generateGitHubWebUrl',
-      `Falling back to repository root url: ${notification.repository.full_name}`,
-    );
   }
 
   url.searchParams.set(
@@ -169,21 +93,6 @@ export async function generateGitHubWebUrl(
   );
 
   return url.toString() as Link;
-}
-
-export function formatForDisplay(text: string[]): string {
-  if (!text) {
-    return '';
-  }
-
-  return text
-    .join(' ')
-    .replace(/([a-z])([A-Z])/g, '$1 $2') // Add space between lowercase character followed by an uppercase character
-    .replace(/_/g, ' ') // Replace underscores with spaces
-    .replace(/\w+/g, (word) => {
-      // Convert to proper case (capitalize first letter of each word)
-      return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-    });
 }
 
 export function getChevronDetails(
@@ -209,4 +118,26 @@ export function getChevronDetails(
     icon: ChevronRightIcon,
     label: `Show ${type} notifications`,
   };
+}
+
+/**
+ * Parse inline code blocks (text wrapped in backticks) from a string.
+ * Returns an array of parts where each part is either plain text or code.
+ *
+ * @param text - The text to parse
+ * @returns Array of parts with type and content
+ */
+export function parseInlineCode(text: string): ParsedCodePart[] {
+  const regex = /`(?<code>[^`]+)`|(?<text>[^`]+)/g;
+  const matches = Array.from(text.matchAll(regex));
+
+  if (matches.length === 0) {
+    return [{ id: '0', type: 'text', content: text }];
+  }
+
+  return matches.map((match, index) => ({
+    id: String(index),
+    type: match.groups?.code ? 'code' : 'text',
+    content: match.groups?.code ?? match.groups?.text ?? '',
+  }));
 }

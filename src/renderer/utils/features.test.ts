@@ -1,7 +1,8 @@
 import {
   mockGitHubCloudAccount,
   mockGitHubEnterpriseServerAccount,
-} from '../__mocks__/state-mocks';
+} from '../__mocks__/account-mocks';
+
 import {
   isAnsweredDiscussionFeatureSupported,
   isMarkAsDoneFeatureSupported,
@@ -72,7 +73,7 @@ describe('renderer/utils/features.ts', () => {
         version: null,
       };
 
-      expect(isMarkAsDoneFeatureSupported(account)).toBe(false);
+      expect(isAnsweredDiscussionFeatureSupported(account)).toBe(false);
     });
   });
 });

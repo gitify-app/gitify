@@ -1,4 +1,7 @@
-import type { Notification } from '../../../typesGitHub';
+import type { DeepPartial } from '../../../__helpers__/test-utils';
+
+import type { GitifyNotification } from '../../../types';
+
 import { isNonHumanUser, userTypeFilter } from './userType';
 
 describe('renderer/utils/notifications/filters/userType.ts', () => {
@@ -21,7 +24,7 @@ describe('renderer/utils/notifications/filters/userType.ts', () => {
           type: 'User',
         },
       },
-    } as Partial<Notification> as Notification;
+    } satisfies DeepPartial<GitifyNotification> as GitifyNotification;
 
     mockPartialNotification.subject.user.type = 'User';
     expect(

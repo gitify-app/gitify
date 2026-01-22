@@ -3,12 +3,12 @@ import { useState } from 'react';
 
 import { Avatar, Stack, Truncate } from '@primer/react';
 
-import { type Link, Size } from '../../types';
-import type { UserType } from '../../typesGitHub';
+import { type Link, Size, type UserType } from '../../types';
+
 import { getDefaultUserIcon } from '../../utils/icons';
 import { isNonHumanUser } from '../../utils/notifications/filters/userType';
 
-export interface IAvatarWithFallback {
+export interface AvatarWithFallbackProps {
   src?: Link;
   alt?: string;
   name?: string;
@@ -16,14 +16,14 @@ export interface IAvatarWithFallback {
   userType?: UserType;
 }
 
-export const AvatarWithFallback: React.FC<IAvatarWithFallback> = ({
+export const AvatarWithFallback: React.FC<AvatarWithFallbackProps> = ({
   src,
   alt,
   name,
   size = Size.MEDIUM,
   userType = 'User',
 }) => {
-  const [isBroken, setIsBroken] = useState(false);
+  const [hasBrokenAvatarSource, setHasBrokenAvatarSource] = useState(false);
 
   const isNonHuman = isNonHumanUser(userType);
   const DefaultUserIcon = getDefaultUserIcon(userType);
@@ -31,24 +31,24 @@ export const AvatarWithFallback: React.FC<IAvatarWithFallback> = ({
   // TODO explore using AnchoredOverlay component (https://primer.style/components/anchored-overlay/react/alpha) to render Avatar Card on hover
   return (
     <Stack
-      direction="horizontal"
       align="center"
-      gap="condensed"
       data-testid="avatar"
+      direction="horizontal"
+      gap="condensed"
     >
-      {!src || isBroken ? (
+      {!src || hasBrokenAvatarSource ? (
         <DefaultUserIcon size={size} />
       ) : (
         <Avatar
-          src={src}
           alt={alt}
+          onError={() => setHasBrokenAvatarSource(true)}
           size={size}
           square={isNonHuman}
-          onError={() => setIsBroken(true)}
+          src={src}
         />
       )}
       {name && (
-        <Truncate title={name} inline maxWidth={280}>
+        <Truncate inline maxWidth={280} title={name}>
           {name}
         </Truncate>
       )}

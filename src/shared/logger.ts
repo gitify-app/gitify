@@ -1,46 +1,44 @@
 import log from 'electron-log';
 
-import type { Notification } from '../renderer/typesGitHub';
+type AllowedLogFunction = typeof log.info | typeof log.warn | typeof log.error;
 
 export function logInfo(
   type: string,
   message: string,
-  notification?: Notification,
+  contexts: string[] = [],
 ) {
-  logMessage(log.info, type, message, null, notification);
+  logMessage(log.info, type, message, undefined, contexts);
 }
 
 export function logWarn(
   type: string,
   message: string,
-  notification?: Notification,
+  contexts: string[] = [],
 ) {
-  logMessage(log.warn, type, message, null, notification);
+  logMessage(log.warn, type, message, undefined, contexts);
 }
 
 export function logError(
   type: string,
   message: string,
   err: Error,
-  notification?: Notification,
+  contexts: string[] = [],
 ) {
-  logMessage(log.error, type, message, err, notification);
+  logMessage(log.error, type, message, err, contexts);
 }
 
 function logMessage(
-  // biome-ignore lint/suspicious/noExplicitAny: Allow any for logging purposes
-  logFunction: (...params: any[]) => void,
+  logFunction: AllowedLogFunction,
   type: string,
   message: string,
   err?: Error,
-  notification?: Notification,
+  contexts: string[] = [],
 ) {
   const args: (string | Error)[] = [`[${type}]`, message];
 
-  if (notification) {
-    args.push(
-      `[${notification.subject.type} >> ${notification.repository.full_name} >> ${notification.subject.title}]`,
-    );
+  if (contexts.length) {
+    const combined = contexts.join(' >> ');
+    args.push(`[${combined}]`);
   }
 
   if (err) {

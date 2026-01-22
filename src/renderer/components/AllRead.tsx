@@ -1,18 +1,23 @@
-import { type FC, useContext, useMemo } from 'react';
+import { type FC, useMemo } from 'react';
 
-import { AppContext } from '../context/App';
-import { Constants } from '../utils/constants';
-import { hasAnyFiltersSet } from '../utils/notifications/filters/filter';
+import { Constants } from '../constants';
+
+import { useAppContext } from '../hooks/useAppContext';
+
 import { EmojiSplash } from './layout/EmojiSplash';
 
-interface IAllRead {
+import { hasActiveFilters } from '../utils/notifications/filters/filter';
+
+interface AllReadProps {
   fullHeight?: boolean;
 }
 
-export const AllRead: FC<IAllRead> = ({ fullHeight = true }: IAllRead) => {
-  const { settings } = useContext(AppContext);
+export const AllRead: FC<AllReadProps> = ({
+  fullHeight = true,
+}: AllReadProps) => {
+  const { settings } = useAppContext();
 
-  const hasFilters = hasAnyFiltersSet(settings);
+  const hasFilters = hasActiveFilters(settings);
 
   const emoji = useMemo(
     () =>
@@ -25,6 +30,6 @@ export const AllRead: FC<IAllRead> = ({ fullHeight = true }: IAllRead) => {
   const heading = `No new ${hasFilters ? 'filtered ' : ''} notifications`;
 
   return (
-    <EmojiSplash emoji={emoji} heading={heading} fullHeight={fullHeight} />
+    <EmojiSplash emoji={emoji} fullHeight={fullHeight} heading={heading} />
   );
 };

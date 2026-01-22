@@ -1,9 +1,11 @@
-import type { ColorModeWithAuto } from '@primer/react/lib/ThemeProvider';
+import type { ColorModeWithAuto } from '@primer/react/dist/ThemeProvider';
 
 import { Theme } from '../types';
 
 export const DEFAULT_DAY_COLOR_SCHEME = 'light';
 export const DEFAULT_NIGHT_COLOR_SCHEME = 'dark';
+export const DEFAULT_DAY_HIGH_CONTRAST_COLOR_SCHEME = 'light_high_contrast';
+export const DEFAULT_NIGHT_HIGH_CONTRAST_COLOR_SCHEME = 'dark_high_contrast';
 
 export function mapThemeModeToColorMode(themeMode: Theme): ColorModeWithAuto {
   switch (themeMode) {

@@ -2,14 +2,14 @@
 
 exports[`renderer/routes/Filters.tsx General should render itself & its children 1`] = `
 <div
-  class="Box-sc-g0xbh4-0 flex flex-col h-screen"
+  class="flex flex-col h-screen"
   data-testid="filters"
 >
   <div
-    class="Box-sc-g0xbh4-0 px-6 py-4"
+    class="pl-4 pr-5 pt-3 pb-1"
   >
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+      class="prc-Stack-Stack-UQ9k6"
       data-align="stretch"
       data-direction="horizontal"
       data-justify="space-between"
@@ -17,14 +17,14 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
       data-wrap="nowrap"
     >
       <button
-        aria-describedby="«r0»-loading-announcement"
         aria-labelledby="Go Back"
-        class="types__StyledButton-sc-ws60qy-0 yiNNF"
+        class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
         data-component="IconButton"
         data-loading="false"
         data-no-visuals="true"
+        data-size="medium"
         data-testid="header-nav-back"
-        sx="[object Object]"
+        data-variant="invisible"
         type="button"
       >
         <svg
@@ -46,17 +46,17 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
       </button>
       <legend>
         <div
-          class="Box-sc-g0xbh4-0 mb-2"
+          class="mb-2"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+            class="prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
             data-justify="start"
             data-padding="none"
             data-wrap="nowrap"
-            id="filters"
+            id="title-filters"
           >
             <svg
               aria-hidden="true"
@@ -74,22 +74,21 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                 d="M.75 3h14.5a.75.75 0 0 1 0 1.5H.75a.75.75 0 0 1 0-1.5ZM3 7.75A.75.75 0 0 1 3.75 7h8.5a.75.75 0 0 1 0 1.5h-8.5A.75.75 0 0 1 3 7.75Zm3 4a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z"
               />
             </svg>
-            <h2
-              class="Heading__StyledHeading-sc-1c1dgg0-0 hwOZFo"
-              sx="[object Object]"
+            <h4
+              class="prc-Heading-Heading-MtWFE"
             >
               Filters
-            </h2>
+            </h4>
           </div>
         </div>
       </legend>
     </div>
   </div>
   <div
-    class="Box-sc-g0xbh4-0 grow overflow-x-hidden overflow-y-auto px-8 pb-4"
+    class="grow overflow-x-hidden overflow-y-auto px-5 pb-2"
   >
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+      class="prc-Stack-Stack-UQ9k6"
       data-align="stretch"
       data-direction="vertical"
       data-gap="spacious"
@@ -97,147 +96,24 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
       data-padding="none"
       data-wrap="nowrap"
     >
-      <fieldset
-        id="filter-user-types"
-      >
-        <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
-          data-align="baseline"
-          data-direction="horizontal"
-          data-gap="condensed"
-          data-justify="start"
-          data-padding="none"
-          data-wrap="nowrap"
-        >
-          <legend>
+      <fieldset>
+        <legend>
+          <div
+            class="mb-2"
+          >
             <div
-              class="Box-sc-g0xbh4-0 mb-2"
-            >
-              <div
-                class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
-                data-align="center"
-                data-direction="horizontal"
-                data-gap="condensed"
-                data-justify="start"
-                data-padding="none"
-                data-wrap="nowrap"
-                id="user-type"
-              >
-                <svg
-                  aria-hidden="true"
-                  class="octicon octicon-feed-person"
-                  display="inline-block"
-                  fill="currentColor"
-                  focusable="false"
-                  height="16"
-                  overflow="visible"
-                  style="vertical-align: text-bottom;"
-                  viewBox="0 0 16 16"
-                  width="16"
-                >
-                  <path
-                    d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
-                  />
-                </svg>
-                <h2
-                  class="Heading__StyledHeading-sc-1c1dgg0-0 fokFLB"
-                  sx="[object Object]"
-                >
-                  User Type
-                </h2>
-              </div>
-            </div>
-          </legend>
-          <div
-            aria-label="tooltip-filter-user-types"
-            class="Box-sc-g0xbh4-0 relative"
-            data-testid="tooltip-tooltip-filter-user-types"
-            id="tooltip-filter-user-types"
-          >
-            <svg
-              aria-hidden="true"
-              class="octicon octicon-question text-gitify-tooltip-icon"
-              display="inline-block"
-              fill="currentColor"
-              focusable="false"
-              height="16"
-              overflow="visible"
-              style="vertical-align: text-bottom;"
-              viewBox="0 0 16 16"
-              width="16"
-            >
-              <path
-                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
-              />
-            </svg>
-          </div>
-        </div>
-        <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
-          data-align="stretch"
-          data-direction="horizontal"
-          data-gap="normal"
-          data-justify="start"
-          data-padding="none"
-          data-wrap="nowrap"
-        >
-          <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
-            data-align="center"
-            data-direction="horizontal"
-            data-gap="condensed"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
-          >
-            <input
-              class="size-4 rounded-sm cursor-pointer"
-              data-testid="checkbox-User"
-              id="User"
-              type="checkbox"
-            />
-            <label
-              class="font-medium text-gitify-font cursor-pointer"
-              for="User"
-            >
-              User
-            </label>
-            <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
-            >
-              0
-            </span>
-          </div>
-          <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
-            data-align="center"
-            data-direction="horizontal"
-            data-gap="condensed"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
-          >
-            <input
-              class="size-4 rounded-sm cursor-pointer"
-              data-testid="checkbox-Bot"
-              id="Bot"
-              type="checkbox"
-            />
-            <label
-              class="font-medium text-gitify-font cursor-pointer"
-              for="Bot"
-            >
-              Bot
-            </label>
-            <div
-              aria-label="tooltip-Bot"
-              class="Box-sc-g0xbh4-0 relative"
-              data-testid="tooltip-tooltip-Bot"
-              id="tooltip-Bot"
+              class="prc-Stack-Stack-UQ9k6"
+              data-align="center"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+              id="title-search"
             >
               <svg
                 aria-hidden="true"
-                class="octicon octicon-question text-gitify-tooltip-icon"
+                class="octicon octicon-search"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -248,74 +124,26 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                 width="16"
               >
                 <path
-                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                  d="M10.68 11.74a6 6 0 0 1-7.922-8.982 6 6 0 0 1 8.982 7.922l3.04 3.04a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215ZM11.5 7a4.499 4.499 0 1 0-8.997 0A4.499 4.499 0 0 0 11.5 7Z"
                 />
               </svg>
-            </div>
-            <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
-            >
-              0
-            </span>
-          </div>
-          <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
-            data-align="center"
-            data-direction="horizontal"
-            data-gap="condensed"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
-          >
-            <input
-              class="size-4 rounded-sm cursor-pointer"
-              data-testid="checkbox-Organization"
-              id="Organization"
-              type="checkbox"
-            />
-            <label
-              class="font-medium text-gitify-font cursor-pointer"
-              for="Organization"
-            >
-              Organization
-            </label>
-            <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
-            >
-              0
-            </span>
-          </div>
-        </div>
-      </fieldset>
-      <fieldset
-        id="filter-user-handles"
-      >
-        <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
-          data-align="baseline"
-          data-direction="horizontal"
-          data-gap="condensed"
-          data-justify="start"
-          data-padding="none"
-          data-wrap="nowrap"
-        >
-          <legend>
-            <div
-              class="Box-sc-g0xbh4-0 mb-2"
-            >
-              <div
-                class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
-                data-align="center"
-                data-direction="horizontal"
-                data-gap="condensed"
-                data-justify="start"
-                data-padding="none"
-                data-wrap="nowrap"
-                id="handles"
+              <h4
+                class="prc-Heading-Heading-MtWFE"
+              >
+                Search
+              </h4>
+              <button
+                aria-expanded="false"
+                aria-haspopup="true"
+                aria-label="tooltip-search"
+                data-testid="tooltip-icon-tooltip-search"
+                id="tooltip-search"
+                tabindex="0"
+                type="button"
               >
                 <svg
                   aria-hidden="true"
-                  class="octicon octicon-mention"
+                  class="octicon octicon-question text-gitify-tooltip-icon"
                   display="inline-block"
                   fill="currentColor"
                   focusable="false"
@@ -326,44 +154,15 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                   width="16"
                 >
                   <path
-                    d="M8 .5a7.499 7.499 0 0 1 7.499 7.462l.002.038v1.164a2.612 2.612 0 0 1-4.783 1.454A3.763 3.763 0 0 1 8 11.776 3.776 3.776 0 1 1 11.776 8v1.164a1.112 1.112 0 0 0 2.225 0L14 8a6 6 0 1 0-3.311 5.365.75.75 0 0 1 .673 1.341A7.5 7.5 0 1 1 8 .5Zm0 5.225a2.275 2.275 0 1 0 0 4.552 2.275 2.275 0 0 0 0-4.552Z"
+                    d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                   />
                 </svg>
-                <h2
-                  class="Heading__StyledHeading-sc-1c1dgg0-0 fokFLB"
-                  sx="[object Object]"
-                >
-                  Handles
-                </h2>
-              </div>
+              </button>
             </div>
-          </legend>
-          <div
-            aria-label="tooltip-filter-handles"
-            class="Box-sc-g0xbh4-0 relative"
-            data-testid="tooltip-tooltip-filter-handles"
-            id="tooltip-filter-handles"
-          >
-            <svg
-              aria-hidden="true"
-              class="octicon octicon-question text-gitify-tooltip-icon"
-              display="inline-block"
-              fill="currentColor"
-              focusable="false"
-              height="16"
-              overflow="visible"
-              style="vertical-align: text-bottom;"
-              viewBox="0 0 16 16"
-              width="16"
-            >
-              <path
-                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
-              />
-            </svg>
           </div>
-        </div>
+        </legend>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+          class="prc-Stack-Stack-UQ9k6"
           data-align="stretch"
           data-direction="vertical"
           data-gap="condensed"
@@ -372,7 +171,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           data-wrap="nowrap"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -381,10 +180,10 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             data-wrap="nowrap"
           >
             <div
-              class="Box-sc-g0xbh4-0 font-medium text-gitify-font w-28"
+              class="font-medium text-gitify-font w-20"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -409,39 +208,42 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                   />
                 </svg>
                 <span
-                  class="Text-sc-17v1xeu-0 ezOLpc"
+                  class="prc-Text-Text-9mHv3"
                 >
-                  Include:
+                  Include
+                  :
                 </span>
               </div>
             </div>
-            <span
-              class="TextInputWrapper__TextInputBaseWrapper-sc-1mqhpbi-0 TextInputWrapper-sc-1mqhpbi-1 khKVBN gesWdT"
-              sx="[object Object]"
+            <div
+              class="relative grow"
             >
-              <div
-                class="Box-sc-g0xbh4-0 gYTInF"
-                display="flex"
-                sx="[object Object]"
+              <span
+                class="prc-TextInputWithTokens-TextInputWrapper-HAIfc prc-components-TextInputWrapper-Hpdqi prc-components-TextInputBaseWrapper-wY-n0"
+                data-block="true"
+                data-size="small"
               >
                 <div
-                  class="Box-sc-g0xbh4-0 gffXDM"
-                  sx="[object Object]"
+                  class="prc-TextInputWithTokens-Container-dPCL7"
+                  data-prevent-token-wrapping="false"
                 >
-                  <input
-                    aria-invalid="false"
-                    class="UnstyledTextInput-sc-14ypya-0 iVOvhD"
-                    sx="[object Object]"
-                    tabindex="0"
-                    title="Include handles"
-                    type="text"
-                  />
+                  <div
+                    class="prc-TextInputWithTokens-InputWrapper-1lXK5"
+                  >
+                    <input
+                      aria-invalid="false"
+                      class="prc-TextInputWithTokens-UnstyledTextInput-XwhBc prc-components-Input-IwWrt"
+                      tabindex="0"
+                      title="Include searches"
+                      type="text"
+                    />
+                  </div>
                 </div>
-              </div>
-            </span>
+              </span>
+            </div>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -450,10 +252,10 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             data-wrap="nowrap"
           >
             <div
-              class="Box-sc-g0xbh4-0 font-medium text-gitify-font w-28"
+              class="font-medium text-gitify-font w-20"
             >
               <div
-                class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+                class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
                 data-direction="horizontal"
                 data-gap="condensed"
@@ -478,68 +280,92 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                   />
                 </svg>
                 <span
-                  class="Text-sc-17v1xeu-0 ezOLpc"
+                  class="prc-Text-Text-9mHv3"
                 >
-                  Exclude:
+                  Exclude
+                  :
                 </span>
               </div>
             </div>
-            <span
-              class="TextInputWrapper__TextInputBaseWrapper-sc-1mqhpbi-0 TextInputWrapper-sc-1mqhpbi-1 khKVBN gesWdT"
-              sx="[object Object]"
+            <div
+              class="relative grow"
             >
-              <div
-                class="Box-sc-g0xbh4-0 gYTInF"
-                display="flex"
-                sx="[object Object]"
+              <span
+                class="prc-TextInputWithTokens-TextInputWrapper-HAIfc prc-components-TextInputWrapper-Hpdqi prc-components-TextInputBaseWrapper-wY-n0"
+                data-block="true"
+                data-size="small"
               >
                 <div
-                  class="Box-sc-g0xbh4-0 gffXDM"
-                  sx="[object Object]"
+                  class="prc-TextInputWithTokens-Container-dPCL7"
+                  data-prevent-token-wrapping="false"
                 >
-                  <input
-                    aria-invalid="false"
-                    class="UnstyledTextInput-sc-14ypya-0 iVOvhD"
-                    sx="[object Object]"
-                    tabindex="0"
-                    title="Exclude handles"
-                    type="text"
-                  />
+                  <div
+                    class="prc-TextInputWithTokens-InputWrapper-1lXK5"
+                  >
+                    <input
+                      aria-invalid="false"
+                      class="prc-TextInputWithTokens-UnstyledTextInput-XwhBc prc-components-Input-IwWrt"
+                      tabindex="0"
+                      title="Exclude searches"
+                      type="text"
+                    />
+                  </div>
                 </div>
-              </div>
-            </span>
+              </span>
+            </div>
           </div>
         </div>
       </fieldset>
       <fieldset
-        id="filter-subject-type"
+        id="filter-user-types"
       >
-        <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
-          data-align="baseline"
-          data-direction="horizontal"
-          data-gap="condensed"
-          data-justify="start"
-          data-padding="none"
-          data-wrap="nowrap"
-        >
-          <legend>
+        <legend>
+          <div
+            class="mb-2"
+          >
             <div
-              class="Box-sc-g0xbh4-0 mb-2"
+              class="prc-Stack-Stack-UQ9k6"
+              data-align="center"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+              id="title-user-type"
             >
-              <div
-                class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
-                data-align="center"
-                data-direction="horizontal"
-                data-gap="condensed"
-                data-justify="start"
-                data-padding="none"
-                data-wrap="nowrap"
-                id="type"
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-feed-person"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
+                />
+              </svg>
+              <h4
+                class="prc-Heading-Heading-MtWFE"
+              >
+                User Type
+              </h4>
+              <button
+                aria-expanded="false"
+                aria-haspopup="true"
+                aria-label="tooltip-user-type"
+                data-testid="tooltip-icon-tooltip-user-type"
+                id="tooltip-user-type"
+                tabindex="0"
+                type="button"
               >
                 <svg
                   aria-hidden="true"
-                  class="octicon octicon-bell"
+                  class="octicon octicon-question text-gitify-tooltip-icon"
                   display="inline-block"
                   fill="currentColor"
                   focusable="false"
@@ -550,44 +376,200 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                   width="16"
                 >
                   <path
-                    d="M8 16a2 2 0 0 0 1.985-1.75c.017-.137-.097-.25-.235-.25h-3.5c-.138 0-.252.113-.235.25A2 2 0 0 0 8 16ZM3 5a5 5 0 0 1 10 0v2.947c0 .05.015.098.042.139l1.703 2.555A1.519 1.519 0 0 1 13.482 13H2.518a1.516 1.516 0 0 1-1.263-2.36l1.703-2.554A.255.255 0 0 0 3 7.947Zm5-3.5A3.5 3.5 0 0 0 4.5 5v2.947c0 .346-.102.683-.294.97l-1.703 2.556a.017.017 0 0 0-.003.01l.001.006c0 .002.002.004.004.006l.006.004.007.001h10.964l.007-.001.006-.004.004-.006.001-.007a.017.017 0 0 0-.003-.01l-1.703-2.554a1.745 1.745 0 0 1-.294-.97V5A3.5 3.5 0 0 0 8 1.5Z"
+                    d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                   />
                 </svg>
-                <h2
-                  class="Heading__StyledHeading-sc-1c1dgg0-0 fokFLB"
-                  sx="[object Object]"
-                >
-                  Type
-                </h2>
-              </div>
+              </button>
             </div>
-          </legend>
+          </div>
+        </legend>
+        <div
+          class="prc-Stack-Stack-UQ9k6"
+          data-align="stretch"
+          data-direction="horizontal"
+          data-gap="normal"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
+        >
           <div
-            aria-label="tooltip-filter-subject-type"
-            class="Box-sc-g0xbh4-0 relative"
-            data-testid="tooltip-tooltip-filter-subject-type"
-            id="tooltip-filter-subject-type"
+            class="text-sm prc-Stack-Stack-UQ9k6"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
           >
-            <svg
-              aria-hidden="true"
-              class="octicon octicon-question text-gitify-tooltip-icon"
-              display="inline-block"
-              fill="currentColor"
-              focusable="false"
-              height="16"
-              overflow="visible"
-              style="vertical-align: text-bottom;"
-              viewBox="0 0 16 16"
-              width="16"
+            <input
+              class="size-4 rounded-sm cursor-pointer"
+              data-testid="checkbox-Bot"
+              id="Bot"
+              type="checkbox"
+            />
+            <label
+              class="font-medium text-gitify-font cursor-pointer"
+              for="Bot"
             >
-              <path
-                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
-              />
-            </svg>
+              Bot
+            </label>
+            <button
+              aria-expanded="false"
+              aria-haspopup="true"
+              aria-label="tooltip-Bot"
+              data-testid="tooltip-icon-tooltip-Bot"
+              id="tooltip-Bot"
+              tabindex="0"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-question text-gitify-tooltip-icon"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                />
+              </svg>
+            </button>
+            <span
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
+            >
+              0
+            </span>
+          </div>
+          <div
+            class="text-sm prc-Stack-Stack-UQ9k6"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <input
+              class="size-4 rounded-sm cursor-pointer"
+              data-testid="checkbox-Organization"
+              id="Organization"
+              type="checkbox"
+            />
+            <label
+              class="font-medium text-gitify-font cursor-pointer"
+              for="Organization"
+            >
+              Organization
+            </label>
+            <span
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
+            >
+              0
+            </span>
+          </div>
+          <div
+            class="text-sm prc-Stack-Stack-UQ9k6"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <input
+              class="size-4 rounded-sm cursor-pointer"
+              data-testid="checkbox-User"
+              id="User"
+              type="checkbox"
+            />
+            <label
+              class="font-medium text-gitify-font cursor-pointer"
+              for="User"
+            >
+              User
+            </label>
+            <span
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
+            >
+              0
+            </span>
           </div>
         </div>
+      </fieldset>
+      <fieldset
+        id="filter-subject-type"
+      >
+        <legend>
+          <div
+            class="mb-2"
+          >
+            <div
+              class="prc-Stack-Stack-UQ9k6"
+              data-align="center"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+              id="title-type"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-bell"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M8 16a2 2 0 0 0 1.985-1.75c.017-.137-.097-.25-.235-.25h-3.5c-.138 0-.252.113-.235.25A2 2 0 0 0 8 16ZM3 5a5 5 0 0 1 10 0v2.947c0 .05.015.098.042.139l1.703 2.555A1.519 1.519 0 0 1 13.482 13H2.518a1.516 1.516 0 0 1-1.263-2.36l1.703-2.554A.255.255 0 0 0 3 7.947Zm5-3.5A3.5 3.5 0 0 0 4.5 5v2.947c0 .346-.102.683-.294.97l-1.703 2.556a.017.017 0 0 0-.003.01l.001.006c0 .002.002.004.004.006l.006.004.007.001h10.964l.007-.001.006-.004.004-.006.001-.007a.017.017 0 0 0-.003-.01l-1.703-2.554a1.745 1.745 0 0 1-.294-.97V5A3.5 3.5 0 0 0 8 1.5Z"
+                />
+              </svg>
+              <h4
+                class="prc-Heading-Heading-MtWFE"
+              >
+                Type
+              </h4>
+              <button
+                aria-expanded="false"
+                aria-haspopup="true"
+                aria-label="tooltip-type"
+                data-testid="tooltip-icon-tooltip-type"
+                id="tooltip-type"
+                tabindex="0"
+                type="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="octicon octicon-question text-gitify-tooltip-icon"
+                  display="inline-block"
+                  fill="currentColor"
+                  focusable="false"
+                  height="16"
+                  overflow="visible"
+                  style="vertical-align: text-bottom;"
+                  viewBox="0 0 16 16"
+                  width="16"
+                >
+                  <path
+                    d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </legend>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+          class="prc-Stack-Stack-UQ9k6"
           data-align="stretch"
           data-direction="vertical"
           data-gap="condensed"
@@ -596,7 +578,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           data-wrap="nowrap"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -617,13 +599,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Check Suite
             </label>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -644,121 +626,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Commit
             </label>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
-            data-align="center"
-            data-direction="horizontal"
-            data-gap="condensed"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
-          >
-            <input
-              class="size-4 rounded-sm cursor-pointer"
-              data-testid="checkbox-Discussion"
-              id="Discussion"
-              type="checkbox"
-            />
-            <label
-              class="font-medium text-gitify-font cursor-pointer"
-              for="Discussion"
-            >
-              Discussion
-            </label>
-            <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
-            >
-              0
-            </span>
-          </div>
-          <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
-            data-align="center"
-            data-direction="horizontal"
-            data-gap="condensed"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
-          >
-            <input
-              class="size-4 rounded-sm cursor-pointer"
-              data-testid="checkbox-Issue"
-              id="Issue"
-              type="checkbox"
-            />
-            <label
-              class="font-medium text-gitify-font cursor-pointer"
-              for="Issue"
-            >
-              Issue
-            </label>
-            <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
-            >
-              0
-            </span>
-          </div>
-          <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
-            data-align="center"
-            data-direction="horizontal"
-            data-gap="condensed"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
-          >
-            <input
-              class="size-4 rounded-sm cursor-pointer"
-              data-testid="checkbox-Pull Request"
-              id="Pull Request"
-              type="checkbox"
-            />
-            <label
-              class="font-medium text-gitify-font cursor-pointer"
-              for="Pull Request"
-            >
-              Pull Request
-            </label>
-            <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
-            >
-              0
-            </span>
-          </div>
-          <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
-            data-align="center"
-            data-direction="horizontal"
-            data-gap="condensed"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
-          >
-            <input
-              class="size-4 rounded-sm cursor-pointer"
-              data-testid="checkbox-Release"
-              id="Release"
-              type="checkbox"
-            />
-            <label
-              class="font-medium text-gitify-font cursor-pointer"
-              for="Release"
-            >
-              Release
-            </label>
-            <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
-            >
-              0
-            </span>
-          </div>
-          <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -779,13 +653,40 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Dependabot Alert
             </label>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-UQ9k6"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <input
+              class="size-4 rounded-sm cursor-pointer"
+              data-testid="checkbox-Discussion"
+              id="Discussion"
+              type="checkbox"
+            />
+            <label
+              class="font-medium text-gitify-font cursor-pointer"
+              for="Discussion"
+            >
+              Discussion
+            </label>
+            <span
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
+            >
+              0
+            </span>
+          </div>
+          <div
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -806,13 +707,94 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Invitation
             </label>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-UQ9k6"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <input
+              class="size-4 rounded-sm cursor-pointer"
+              data-testid="checkbox-Issue"
+              id="Issue"
+              type="checkbox"
+            />
+            <label
+              class="font-medium text-gitify-font cursor-pointer"
+              for="Issue"
+            >
+              Issue
+            </label>
+            <span
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
+            >
+              0
+            </span>
+          </div>
+          <div
+            class="text-sm prc-Stack-Stack-UQ9k6"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <input
+              class="size-4 rounded-sm cursor-pointer"
+              data-testid="checkbox-Pull Request"
+              id="Pull Request"
+              type="checkbox"
+            />
+            <label
+              class="font-medium text-gitify-font cursor-pointer"
+              for="Pull Request"
+            >
+              Pull Request
+            </label>
+            <span
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
+            >
+              0
+            </span>
+          </div>
+          <div
+            class="text-sm prc-Stack-Stack-UQ9k6"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <input
+              class="size-4 rounded-sm cursor-pointer"
+              data-testid="checkbox-Release"
+              id="Release"
+              type="checkbox"
+            />
+            <label
+              class="font-medium text-gitify-font cursor-pointer"
+              for="Release"
+            >
+              Release
+            </label>
+            <span
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
+            >
+              0
+            </span>
+          </div>
+          <div
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -833,13 +815,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Vulnerability Alert
             </label>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -860,7 +842,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Workflow Run
             </label>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
             >
               0
             </span>
@@ -870,32 +852,56 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
       <fieldset
         id="filter-state"
       >
-        <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
-          data-align="baseline"
-          data-direction="horizontal"
-          data-gap="condensed"
-          data-justify="start"
-          data-padding="none"
-          data-wrap="nowrap"
-        >
-          <legend>
+        <legend>
+          <div
+            class="mb-2"
+          >
             <div
-              class="Box-sc-g0xbh4-0 mb-2"
+              class="prc-Stack-Stack-UQ9k6"
+              data-align="center"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+              id="title-state"
             >
-              <div
-                class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
-                data-align="center"
-                data-direction="horizontal"
-                data-gap="condensed"
-                data-justify="start"
-                data-padding="none"
-                data-wrap="nowrap"
-                id="state"
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-issue-opened"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
+                />
+                <path
+                  d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"
+                />
+              </svg>
+              <h4
+                class="prc-Heading-Heading-MtWFE"
+              >
+                State
+              </h4>
+              <button
+                aria-expanded="false"
+                aria-haspopup="true"
+                aria-label="tooltip-state"
+                data-testid="tooltip-icon-tooltip-state"
+                id="tooltip-state"
+                tabindex="0"
+                type="button"
               >
                 <svg
                   aria-hidden="true"
-                  class="octicon octicon-issue-opened"
+                  class="octicon octicon-question text-gitify-tooltip-icon"
                   display="inline-block"
                   fill="currentColor"
                   focusable="false"
@@ -906,47 +912,15 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                   width="16"
                 >
                   <path
-                    d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
-                  />
-                  <path
-                    d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"
+                    d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                   />
                 </svg>
-                <h2
-                  class="Heading__StyledHeading-sc-1c1dgg0-0 fokFLB"
-                  sx="[object Object]"
-                >
-                  State
-                </h2>
-              </div>
+              </button>
             </div>
-          </legend>
-          <div
-            aria-label="tooltip-filter-state"
-            class="Box-sc-g0xbh4-0 relative"
-            data-testid="tooltip-tooltip-filter-state"
-            id="tooltip-filter-state"
-          >
-            <svg
-              aria-hidden="true"
-              class="octicon octicon-question text-gitify-tooltip-icon"
-              display="inline-block"
-              fill="currentColor"
-              focusable="false"
-              height="16"
-              overflow="visible"
-              style="vertical-align: text-bottom;"
-              viewBox="0 0 16 16"
-              width="16"
-            >
-              <path
-                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
-              />
-            </svg>
           </div>
-        </div>
+        </legend>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+          class="prc-Stack-Stack-UQ9k6"
           data-align="stretch"
           data-direction="vertical"
           data-gap="condensed"
@@ -955,7 +929,60 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           data-wrap="nowrap"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-UQ9k6"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <input
+              class="size-4 rounded-sm cursor-pointer"
+              data-testid="checkbox-Closed"
+              id="Closed"
+              type="checkbox"
+            />
+            <label
+              class="font-medium text-gitify-font cursor-pointer"
+              for="Closed"
+            >
+              Closed
+            </label>
+            <button
+              aria-expanded="false"
+              aria-haspopup="true"
+              aria-label="tooltip-Closed"
+              data-testid="tooltip-icon-tooltip-Closed"
+              id="tooltip-Closed"
+              tabindex="0"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-question text-gitify-tooltip-icon"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                />
+              </svg>
+            </button>
+            <span
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
+            >
+              0
+            </span>
+          </div>
+          <div
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -976,63 +1003,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Draft
             </label>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
-            data-align="center"
-            data-direction="horizontal"
-            data-gap="condensed"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
-          >
-            <input
-              class="size-4 rounded-sm cursor-pointer"
-              data-testid="checkbox-Open"
-              id="Open"
-              type="checkbox"
-            />
-            <label
-              class="font-medium text-gitify-font cursor-pointer"
-              for="Open"
-            >
-              Open
-            </label>
-            <div
-              aria-label="tooltip-Open"
-              class="Box-sc-g0xbh4-0 relative"
-              data-testid="tooltip-tooltip-Open"
-              id="tooltip-Open"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-question text-gitify-tooltip-icon"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
-                />
-              </svg>
-            </div>
-            <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
-            >
-              0
-            </span>
-          </div>
-          <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1053,13 +1030,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               Merged
             </label>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1069,21 +1046,24 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           >
             <input
               class="size-4 rounded-sm cursor-pointer"
-              data-testid="checkbox-Closed"
-              id="Closed"
+              data-testid="checkbox-Open"
+              id="Open"
               type="checkbox"
             />
             <label
               class="font-medium text-gitify-font cursor-pointer"
-              for="Closed"
+              for="Open"
             >
-              Closed
+              Open
             </label>
-            <div
-              aria-label="tooltip-Closed"
-              class="Box-sc-g0xbh4-0 relative"
-              data-testid="tooltip-tooltip-Closed"
-              id="tooltip-Closed"
+            <button
+              aria-expanded="false"
+              aria-haspopup="true"
+              aria-label="tooltip-Open"
+              data-testid="tooltip-icon-tooltip-Open"
+              id="tooltip-Open"
+              tabindex="0"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -1101,15 +1081,15 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                   d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                 />
               </svg>
-            </div>
+            </button>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1129,11 +1109,14 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             >
               Other
             </label>
-            <div
+            <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-Other"
-              class="Box-sc-g0xbh4-0 relative"
-              data-testid="tooltip-tooltip-Other"
+              data-testid="tooltip-icon-tooltip-Other"
               id="tooltip-Other"
+              tabindex="0"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -1151,9 +1134,9 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                   d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                 />
               </svg>
-            </div>
+            </button>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
             >
               0
             </span>
@@ -1163,32 +1146,53 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
       <fieldset
         id="filter-reasons"
       >
-        <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
-          data-align="baseline"
-          data-direction="horizontal"
-          data-gap="condensed"
-          data-justify="start"
-          data-padding="none"
-          data-wrap="nowrap"
-        >
-          <legend>
+        <legend>
+          <div
+            class="mb-2"
+          >
             <div
-              class="Box-sc-g0xbh4-0 mb-2"
+              class="prc-Stack-Stack-UQ9k6"
+              data-align="center"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+              id="title-reason"
             >
-              <div
-                class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
-                data-align="center"
-                data-direction="horizontal"
-                data-gap="condensed"
-                data-justify="start"
-                data-padding="none"
-                data-wrap="nowrap"
-                id="reason"
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-note"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 3.75C0 2.784.784 2 1.75 2h12.5c.966 0 1.75.784 1.75 1.75v8.5A1.75 1.75 0 0 1 14.25 14H1.75A1.75 1.75 0 0 1 0 12.25Zm1.75-.25a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25v-8.5a.25.25 0 0 0-.25-.25ZM3.5 6.25a.75.75 0 0 1 .75-.75h7a.75.75 0 0 1 0 1.5h-7a.75.75 0 0 1-.75-.75Zm.75 2.25h4a.75.75 0 0 1 0 1.5h-4a.75.75 0 0 1 0-1.5Z"
+                />
+              </svg>
+              <h4
+                class="prc-Heading-Heading-MtWFE"
+              >
+                Reason
+              </h4>
+              <button
+                aria-expanded="false"
+                aria-haspopup="true"
+                aria-label="tooltip-reason"
+                data-testid="tooltip-icon-tooltip-reason"
+                id="tooltip-reason"
+                tabindex="0"
+                type="button"
               >
                 <svg
                   aria-hidden="true"
-                  class="octicon octicon-note"
+                  class="octicon octicon-question text-gitify-tooltip-icon"
                   display="inline-block"
                   fill="currentColor"
                   focusable="false"
@@ -1199,44 +1203,15 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                   width="16"
                 >
                   <path
-                    d="M0 3.75C0 2.784.784 2 1.75 2h12.5c.966 0 1.75.784 1.75 1.75v8.5A1.75 1.75 0 0 1 14.25 14H1.75A1.75 1.75 0 0 1 0 12.25Zm1.75-.25a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25v-8.5a.25.25 0 0 0-.25-.25ZM3.5 6.25a.75.75 0 0 1 .75-.75h7a.75.75 0 0 1 0 1.5h-7a.75.75 0 0 1-.75-.75Zm.75 2.25h4a.75.75 0 0 1 0 1.5h-4a.75.75 0 0 1 0-1.5Z"
+                    d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                   />
                 </svg>
-                <h2
-                  class="Heading__StyledHeading-sc-1c1dgg0-0 fokFLB"
-                  sx="[object Object]"
-                >
-                  Reason
-                </h2>
-              </div>
+              </button>
             </div>
-          </legend>
-          <div
-            aria-label="tooltip-filter-reasons"
-            class="Box-sc-g0xbh4-0 relative"
-            data-testid="tooltip-tooltip-filter-reasons"
-            id="tooltip-filter-reasons"
-          >
-            <svg
-              aria-hidden="true"
-              class="octicon octicon-question text-gitify-tooltip-icon"
-              display="inline-block"
-              fill="currentColor"
-              focusable="false"
-              height="16"
-              overflow="visible"
-              style="vertical-align: text-bottom;"
-              viewBox="0 0 16 16"
-              width="16"
-            >
-              <path
-                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
-              />
-            </svg>
           </div>
-        </div>
+        </legend>
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+          class="prc-Stack-Stack-UQ9k6"
           data-align="stretch"
           data-direction="vertical"
           data-gap="condensed"
@@ -1245,7 +1220,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
           data-wrap="nowrap"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1265,11 +1240,14 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             >
               Approval Requested
             </label>
-            <div
+            <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-Approval Requested"
-              class="Box-sc-g0xbh4-0 relative"
-              data-testid="tooltip-tooltip-Approval Requested"
+              data-testid="tooltip-icon-tooltip-Approval Requested"
               id="tooltip-Approval Requested"
+              tabindex="0"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -1287,15 +1265,15 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                   d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                 />
               </svg>
-            </div>
+            </button>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1315,11 +1293,14 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             >
               Assigned
             </label>
-            <div
+            <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-Assigned"
-              class="Box-sc-g0xbh4-0 relative"
-              data-testid="tooltip-tooltip-Assigned"
+              data-testid="tooltip-icon-tooltip-Assigned"
               id="tooltip-Assigned"
+              tabindex="0"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -1337,15 +1318,15 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                   d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                 />
               </svg>
-            </div>
+            </button>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1365,11 +1346,14 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             >
               Authored
             </label>
-            <div
+            <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-Authored"
-              class="Box-sc-g0xbh4-0 relative"
-              data-testid="tooltip-tooltip-Authored"
+              data-testid="tooltip-icon-tooltip-Authored"
               id="tooltip-Authored"
+              tabindex="0"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -1387,65 +1371,15 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                   d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                 />
               </svg>
-            </div>
+            </button>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
-            data-align="center"
-            data-direction="horizontal"
-            data-gap="condensed"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
-          >
-            <input
-              class="size-4 rounded-sm cursor-pointer"
-              data-testid="checkbox-Workflow Run Completed"
-              id="Workflow Run Completed"
-              type="checkbox"
-            />
-            <label
-              class="font-medium text-gitify-font cursor-pointer"
-              for="Workflow Run Completed"
-            >
-              Workflow Run Completed
-            </label>
-            <div
-              aria-label="tooltip-Workflow Run Completed"
-              class="Box-sc-g0xbh4-0 relative"
-              data-testid="tooltip-tooltip-Workflow Run Completed"
-              id="tooltip-Workflow Run Completed"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-question text-gitify-tooltip-icon"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
-                />
-              </svg>
-            </div>
-            <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
-            >
-              0
-            </span>
-          </div>
-          <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1465,11 +1399,14 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             >
               Commented
             </label>
-            <div
+            <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-Commented"
-              class="Box-sc-g0xbh4-0 relative"
-              data-testid="tooltip-tooltip-Commented"
+              data-testid="tooltip-icon-tooltip-Commented"
               id="tooltip-Commented"
+              tabindex="0"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -1487,15 +1424,15 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                   d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                 />
               </svg>
-            </div>
+            </button>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1515,11 +1452,14 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             >
               Invitation Received
             </label>
-            <div
+            <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-Invitation Received"
-              class="Box-sc-g0xbh4-0 relative"
-              data-testid="tooltip-tooltip-Invitation Received"
+              data-testid="tooltip-icon-tooltip-Invitation Received"
               id="tooltip-Invitation Received"
+              tabindex="0"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -1537,65 +1477,15 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                   d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                 />
               </svg>
-            </div>
+            </button>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
-            data-align="center"
-            data-direction="horizontal"
-            data-gap="condensed"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
-          >
-            <input
-              class="size-4 rounded-sm cursor-pointer"
-              data-testid="checkbox-Updated"
-              id="Updated"
-              type="checkbox"
-            />
-            <label
-              class="font-medium text-gitify-font cursor-pointer"
-              for="Updated"
-            >
-              Updated
-            </label>
-            <div
-              aria-label="tooltip-Updated"
-              class="Box-sc-g0xbh4-0 relative"
-              data-testid="tooltip-tooltip-Updated"
-              id="tooltip-Updated"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-question text-gitify-tooltip-icon"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
-                />
-              </svg>
-            </div>
-            <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
-            >
-              0
-            </span>
-          </div>
-          <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1615,11 +1505,14 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             >
               Member Feature Requested
             </label>
-            <div
+            <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-Member Feature Requested"
-              class="Box-sc-g0xbh4-0 relative"
-              data-testid="tooltip-tooltip-Member Feature Requested"
+              data-testid="tooltip-icon-tooltip-Member Feature Requested"
               id="tooltip-Member Feature Requested"
+              tabindex="0"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -1637,15 +1530,15 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                   d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                 />
               </svg>
-            </div>
+            </button>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1665,11 +1558,14 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             >
               Mentioned
             </label>
-            <div
+            <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-Mentioned"
-              class="Box-sc-g0xbh4-0 relative"
-              data-testid="tooltip-tooltip-Mentioned"
+              data-testid="tooltip-icon-tooltip-Mentioned"
               id="tooltip-Mentioned"
+              tabindex="0"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -1687,15 +1583,15 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                   d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                 />
               </svg>
-            </div>
+            </button>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1715,11 +1611,14 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             >
               Review Requested
             </label>
-            <div
+            <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-Review Requested"
-              class="Box-sc-g0xbh4-0 relative"
-              data-testid="tooltip-tooltip-Review Requested"
+              data-testid="tooltip-icon-tooltip-Review Requested"
               id="tooltip-Review Requested"
+              tabindex="0"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -1737,15 +1636,15 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                   d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                 />
               </svg>
-            </div>
+            </button>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1765,11 +1664,14 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             >
               Security Advisory Credit Received
             </label>
-            <div
+            <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-Security Advisory Credit Received"
-              class="Box-sc-g0xbh4-0 relative"
-              data-testid="tooltip-tooltip-Security Advisory Credit Received"
+              data-testid="tooltip-icon-tooltip-Security Advisory Credit Received"
               id="tooltip-Security Advisory Credit Received"
+              tabindex="0"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -1787,15 +1689,15 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                   d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                 />
               </svg>
-            </div>
+            </button>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1815,11 +1717,14 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             >
               Security Alert Received
             </label>
-            <div
+            <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-Security Alert Received"
-              class="Box-sc-g0xbh4-0 relative"
-              data-testid="tooltip-tooltip-Security Alert Received"
+              data-testid="tooltip-icon-tooltip-Security Alert Received"
               id="tooltip-Security Alert Received"
+              tabindex="0"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -1837,15 +1742,15 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                   d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                 />
               </svg>
-            </div>
+            </button>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1865,11 +1770,14 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             >
               State Changed
             </label>
-            <div
+            <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-State Changed"
-              class="Box-sc-g0xbh4-0 relative"
-              data-testid="tooltip-tooltip-State Changed"
+              data-testid="tooltip-icon-tooltip-State Changed"
               id="tooltip-State Changed"
+              tabindex="0"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -1887,65 +1795,15 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                   d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                 />
               </svg>
-            </div>
+            </button>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
             >
               0
             </span>
           </div>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
-            data-align="center"
-            data-direction="horizontal"
-            data-gap="condensed"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
-          >
-            <input
-              class="size-4 rounded-sm cursor-pointer"
-              data-testid="checkbox-Updated"
-              id="Updated"
-              type="checkbox"
-            />
-            <label
-              class="font-medium text-gitify-font cursor-pointer"
-              for="Updated"
-            >
-              Updated
-            </label>
-            <div
-              aria-label="tooltip-Updated"
-              class="Box-sc-g0xbh4-0 relative"
-              data-testid="tooltip-tooltip-Updated"
-              id="tooltip-Updated"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-question text-gitify-tooltip-icon"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
-                />
-              </svg>
-            </div>
-            <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
-            >
-              0
-            </span>
-          </div>
-          <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-sm"
+            class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
@@ -1965,11 +1823,14 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             >
               Team Mentioned
             </label>
-            <div
+            <button
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="tooltip-Team Mentioned"
-              class="Box-sc-g0xbh4-0 relative"
-              data-testid="tooltip-tooltip-Team Mentioned"
+              data-testid="tooltip-icon-tooltip-Team Mentioned"
               id="tooltip-Team Mentioned"
+              tabindex="0"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -1987,55 +1848,46 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                   d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                 />
               </svg>
-            </div>
+            </button>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc px-1.5 py-0.75 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
             >
               0
             </span>
           </div>
-        </div>
-      </fieldset>
-    </div>
-  </div>
-  <div
-    class="Box-sc-g0xbh4-0 left-sidebar bg-gitify-footer"
-  >
-    <div
-      class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
-      data-align="stretch"
-      data-direction="horizontal"
-      data-justify="end"
-      data-padding="condensed"
-      data-wrap="nowrap"
-    >
-      <span
-        aria-label="Clear all filters"
-        class="Tooltip__TooltipBase-sc-17tf59c-0 ihgdlF tooltipped-n"
-        id="«r1»"
-        role="tooltip"
-      >
-        <button
-          aria-describedby="«r2»-loading-announcement"
-          class="types__StyledButton-sc-ws60qy-0 fnSTVi"
-          data-loading="false"
-          data-testid="filters-clear"
-          sx="[object Object]"
-          type="button"
-        >
-          <span
-            class="Box-sc-g0xbh4-0 iEfcEl"
-            data-component="buttonContent"
-            sx="[object Object]"
+          <div
+            class="text-sm prc-Stack-Stack-UQ9k6"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
           >
-            <span
-              class="Box-sc-g0xbh4-0 brHwkL"
-              data-component="leadingVisual"
-              sx="[object Object]"
+            <input
+              class="size-4 rounded-sm cursor-pointer"
+              data-testid="checkbox-Updated"
+              id="Updated"
+              type="checkbox"
+            />
+            <label
+              class="font-medium text-gitify-font cursor-pointer"
+              for="Updated"
+            >
+              Updated
+            </label>
+            <button
+              aria-expanded="false"
+              aria-haspopup="true"
+              aria-label="tooltip-Updated"
+              data-testid="tooltip-icon-tooltip-Updated"
+              id="tooltip-Updated"
+              tabindex="0"
+              type="button"
             >
               <svg
                 aria-hidden="true"
-                class="octicon octicon-filter-remove"
+                class="octicon octicon-question text-gitify-tooltip-icon"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -2046,17 +1898,189 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
                 width="16"
               >
                 <path
-                  d="M14.384 4.57a.752.752 0 0 0 1.061 0 .752.752 0 0 0 0-1.061l-.884-.884.883-.884A.75.75 0 0 0 14.384.68l-.884.884-.884-.884a.75.75 0 0 0-1.06 1.061l.883.884-.883.884a.75.75 0 0 0 1.06 1.061l.884-.884.884.884ZM.75 3a.75.75 0 0 0 0 1.5H9A.75.75 0 0 0 9 3H.75ZM3 7.75A.75.75 0 0 1 3.75 7h8.5a.75.75 0 0 1 0 1.5h-8.5A.75.75 0 0 1 3 7.75Zm3 4a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z"
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                 />
               </svg>
-            </span>
+            </button>
             <span
-              data-component="text"
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
             >
-              Clear filters
+              0
             </span>
+          </div>
+          <div
+            class="text-sm prc-Stack-Stack-UQ9k6"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <input
+              class="size-4 rounded-sm cursor-pointer"
+              data-testid="checkbox-Updated"
+              id="Updated"
+              type="checkbox"
+            />
+            <label
+              class="font-medium text-gitify-font cursor-pointer"
+              for="Updated"
+            >
+              Updated
+            </label>
+            <button
+              aria-expanded="false"
+              aria-haspopup="true"
+              aria-label="tooltip-Updated"
+              data-testid="tooltip-icon-tooltip-Updated"
+              id="tooltip-Updated"
+              tabindex="0"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-question text-gitify-tooltip-icon"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                />
+              </svg>
+            </button>
+            <span
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
+            >
+              0
+            </span>
+          </div>
+          <div
+            class="text-sm prc-Stack-Stack-UQ9k6"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <input
+              class="size-4 rounded-sm cursor-pointer"
+              data-testid="checkbox-Workflow Run Completed"
+              id="Workflow Run Completed"
+              type="checkbox"
+            />
+            <label
+              class="font-medium text-gitify-font cursor-pointer"
+              for="Workflow Run Completed"
+            >
+              Workflow Run Completed
+            </label>
+            <button
+              aria-expanded="false"
+              aria-haspopup="true"
+              aria-label="tooltip-Workflow Run Completed"
+              data-testid="tooltip-icon-tooltip-Workflow Run Completed"
+              id="tooltip-Workflow Run Completed"
+              tabindex="0"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-question text-gitify-tooltip-icon"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                />
+              </svg>
+            </button>
+            <span
+              class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
+            >
+              0
+            </span>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  </div>
+  <div
+    class="left-sidebar bg-gitify-footer"
+  >
+    <div
+      class="prc-Stack-Stack-UQ9k6"
+      data-align="stretch"
+      data-direction="horizontal"
+      data-justify="end"
+      data-padding="condensed"
+      data-wrap="nowrap"
+    >
+      <button
+        aria-describedby="_r_ID_"
+        class="prc-Button-ButtonBase-9n-Xk"
+        data-loading="false"
+        data-size="medium"
+        data-testid="filters-clear"
+        data-variant="default"
+        type="button"
+      >
+        <span
+          class="prc-Button-ButtonContent-Iohp5"
+          data-align="center"
+          data-component="buttonContent"
+        >
+          <span
+            class="prc-Button-Visual-YNt2F prc-Button-VisualWrap-E4cnq"
+            data-component="leadingVisual"
+          >
+            <svg
+              aria-hidden="true"
+              class="octicon octicon-filter-remove"
+              display="inline-block"
+              fill="currentColor"
+              focusable="false"
+              height="16"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
+              viewBox="0 0 16 16"
+              width="16"
+            >
+              <path
+                d="M14.384 4.57a.752.752 0 0 0 1.061 0 .752.752 0 0 0 0-1.061l-.884-.884.883-.884A.75.75 0 0 0 14.384.68l-.884.884-.884-.884a.75.75 0 0 0-1.06 1.061l.883.884-.883.884a.75.75 0 0 0 1.06 1.061l.884-.884.884.884ZM.75 3a.75.75 0 0 0 0 1.5H9A.75.75 0 0 0 9 3H.75ZM3 7.75A.75.75 0 0 1 3.75 7h8.5a.75.75 0 0 1 0 1.5h-8.5A.75.75 0 0 1 3 7.75Zm3 4a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z"
+              />
+            </svg>
           </span>
-        </button>
+          <span
+            class="prc-Button-Label-FWkx3"
+            data-component="text"
+          >
+            Clear filters
+          </span>
+        </span>
+      </button>
+      <span
+        aria-hidden="true"
+        class="prc-TooltipV2-Tooltip-tLeuB"
+        data-direction="n"
+        id="_r_ID_"
+        popover="auto"
+        role="tooltip"
+      >
+        Clear all filters
       </span>
     </div>
   </div>

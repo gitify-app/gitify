@@ -1,10 +1,8 @@
 import type { FC, ReactNode } from 'react';
 
-import { Box } from '@primer/react';
-
 import { Sidebar } from '../Sidebar';
 
-interface IAppLayout {
+interface AppLayoutProps {
   children: ReactNode;
 }
 
@@ -12,12 +10,27 @@ interface IAppLayout {
  * AppLayout is the main container for the application.
  * It handles the basic layout with sidebar and content area.
  */
-export const AppLayout: FC<IAppLayout> = ({ children }) => {
+export const AppLayout: FC<AppLayoutProps> = ({ children }) => {
+  const setFocusRef = (el: HTMLButtonElement | null) => {
+    if (el) {
+      el.focus();
+    }
+  };
+
   return (
-    <Box className="flex flex-col min-h-screen bg-gitify-background">
+    <div className="flex flex-col min-h-screen bg-gitify-background">
+      {/* Hidden focus sentinel; grabs initial focus via callback ref */}
+      <button
+        aria-label="initial focus"
+        className="sr-only"
+        data-testid="initial-focus-sentinel"
+        ref={setFocusRef}
+        type="button"
+      />
+
       <Sidebar />
-      {/* Content area with left padding to make space for the sidebar */}
-      <Box className="flex-1 pl-sidebar">{children}</Box>
-    </Box>
+
+      <div className="flex-1 pl-sidebar">{children}</div>
+    </div>
   );
 };

@@ -1,23 +1,27 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { MemoryRouter } from 'react-router-dom';
 
-import { AppContext } from '../context/App';
+import { renderWithAppContext } from '../__helpers__/test-utils';
+
+import type { Hostname, Token } from '../types';
+
 import * as comms from '../utils/comms';
+import * as logger from '../utils/logger';
 import {
+  type IFormData,
   LoginWithPersonalAccessTokenRoute,
   validateForm,
 } from './LoginWithPersonalAccessToken';
 
-const mockNavigate = jest.fn();
+const navigateMock = jest.fn();
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
-  useNavigate: () => mockNavigate,
+  useNavigate: () => navigateMock,
 }));
 
 describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
-  const mockLoginWithPersonalAccessToken = jest.fn();
-  const openExternalLinkMock = jest
+  const loginWithPersonalAccessTokenMock = jest.fn();
+  const openExternalLinkSpy = jest
     .spyOn(comms, 'openExternalLink')
     .mockImplementation();
 
@@ -26,102 +30,71 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
   });
 
   it('renders correctly', () => {
-    const tree = render(
-      <MemoryRouter>
-        <LoginWithPersonalAccessTokenRoute />
-      </MemoryRouter>,
-    );
+    const tree = renderWithAppContext(<LoginWithPersonalAccessTokenRoute />);
 
     expect(tree).toMatchSnapshot();
   });
 
   it('let us go back', async () => {
-    render(
-      <MemoryRouter>
-        <LoginWithPersonalAccessTokenRoute />
-      </MemoryRouter>,
-    );
+    renderWithAppContext(<LoginWithPersonalAccessTokenRoute />);
 
     await userEvent.click(screen.getByTestId('header-nav-back'));
 
-    expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
+    expect(navigateMock).toHaveBeenCalledTimes(1);
+    expect(navigateMock).toHaveBeenCalledWith(-1);
   });
 
-  it('should validate the form values', () => {
-    const emptyValues = {
-      hostname: null,
-      token: null,
-    };
+  describe('form validation', () => {
+    it('should validate the form values are not empty', () => {
+      const values: IFormData = {
+        hostname: null,
+        token: null,
+      };
+      expect(validateForm(values).hostname).toBe('Hostname is required');
+      expect(validateForm(values).token).toBe('Token is required');
+    });
 
-    let values = {
-      ...emptyValues,
-    };
-    expect(validateForm(values).hostname).toBe('Hostname is required');
-    expect(validateForm(values).token).toBe('Token is required');
+    it('should validate the form values are correct format', () => {
+      const values: IFormData = {
+        hostname: 'hello' as Hostname,
+        token: '!@£INVALID-.1' as Token,
+      };
 
-    values = {
-      ...emptyValues,
-      hostname: 'hello',
-      token: '!@£INVALID-.1',
-    };
-    expect(validateForm(values).hostname).toBe('Hostname format is invalid');
-    expect(validateForm(values).token).toBe('Token format is invalid');
+      expect(validateForm(values).hostname).toBe('Hostname format is invalid');
+      expect(validateForm(values).token).toBe('Token format is invalid');
+    });
   });
 
   describe("'Generate a PAT' button", () => {
     it('should be disabled if no hostname configured', async () => {
-      render(
-        <AppContext.Provider
-          value={{
-            loginWithPersonalAccessToken: mockLoginWithPersonalAccessToken,
-          }}
-        >
-          <MemoryRouter>
-            <LoginWithPersonalAccessTokenRoute />
-          </MemoryRouter>
-        </AppContext.Provider>,
-      );
+      renderWithAppContext(<LoginWithPersonalAccessTokenRoute />, {
+        loginWithPersonalAccessToken: loginWithPersonalAccessTokenMock,
+      });
 
       await userEvent.clear(screen.getByTestId('login-hostname'));
 
       await userEvent.click(screen.getByTestId('login-create-token'));
 
-      expect(openExternalLinkMock).toHaveBeenCalledTimes(0);
+      expect(openExternalLinkSpy).toHaveBeenCalledTimes(0);
     });
 
     it('should open in browser if hostname configured', async () => {
-      render(
-        <AppContext.Provider
-          value={{
-            loginWithPersonalAccessToken: mockLoginWithPersonalAccessToken,
-          }}
-        >
-          <MemoryRouter>
-            <LoginWithPersonalAccessTokenRoute />
-          </MemoryRouter>
-        </AppContext.Provider>,
-      );
+      renderWithAppContext(<LoginWithPersonalAccessTokenRoute />, {
+        loginWithPersonalAccessToken: loginWithPersonalAccessTokenMock,
+      });
 
       await userEvent.click(screen.getByTestId('login-create-token'));
 
-      expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
+      expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
     });
   });
 
   it('should login using a token - success', async () => {
-    mockLoginWithPersonalAccessToken.mockResolvedValueOnce(null);
+    loginWithPersonalAccessTokenMock.mockResolvedValueOnce(null);
 
-    render(
-      <AppContext.Provider
-        value={{
-          loginWithPersonalAccessToken: mockLoginWithPersonalAccessToken,
-        }}
-      >
-        <MemoryRouter>
-          <LoginWithPersonalAccessTokenRoute />
-        </MemoryRouter>
-      </AppContext.Provider>,
-    );
+    renderWithAppContext(<LoginWithPersonalAccessTokenRoute />, {
+      loginWithPersonalAccessToken: loginWithPersonalAccessTokenMock,
+    });
 
     const hostname = screen.getByTestId('login-hostname');
     await userEvent.clear(hostname);
@@ -134,28 +107,20 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
 
     await userEvent.click(screen.getByTestId('login-submit'));
 
-    await waitFor(() =>
-      expect(mockLoginWithPersonalAccessToken).toHaveBeenCalledTimes(1),
-    );
-
-    expect(mockLoginWithPersonalAccessToken).toHaveBeenCalledTimes(1);
-    expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
+    expect(loginWithPersonalAccessTokenMock).toHaveBeenCalledTimes(1);
+    expect(navigateMock).toHaveBeenCalledTimes(1);
+    expect(navigateMock).toHaveBeenCalledWith(-1);
   });
 
   it('should login using a token - failure', async () => {
-    mockLoginWithPersonalAccessToken.mockRejectedValueOnce(null);
+    const rendererLogErrorSpy = jest
+      .spyOn(logger, 'rendererLogError')
+      .mockImplementation();
+    loginWithPersonalAccessTokenMock.mockRejectedValueOnce(null);
 
-    render(
-      <AppContext.Provider
-        value={{
-          loginWithPersonalAccessToken: mockLoginWithPersonalAccessToken,
-        }}
-      >
-        <MemoryRouter>
-          <LoginWithPersonalAccessTokenRoute />
-        </MemoryRouter>
-      </AppContext.Provider>,
-    );
+    renderWithAppContext(<LoginWithPersonalAccessTokenRoute />, {
+      loginWithPersonalAccessToken: loginWithPersonalAccessTokenMock,
+    });
 
     const hostname = screen.getByTestId('login-hostname');
     await userEvent.clear(hostname);
@@ -168,20 +133,13 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
 
     await userEvent.click(screen.getByTestId('login-submit'));
 
-    await waitFor(() =>
-      expect(mockLoginWithPersonalAccessToken).toHaveBeenCalledTimes(1),
-    );
-
-    expect(mockLoginWithPersonalAccessToken).toHaveBeenCalledTimes(1);
-    expect(mockNavigate).toHaveBeenCalledTimes(0);
+    expect(loginWithPersonalAccessTokenMock).toHaveBeenCalledTimes(1);
+    expect(navigateMock).toHaveBeenCalledTimes(0);
+    expect(rendererLogErrorSpy).toHaveBeenCalledTimes(1);
   });
 
   it('should render the form with errors', async () => {
-    render(
-      <MemoryRouter>
-        <LoginWithPersonalAccessTokenRoute />
-      </MemoryRouter>,
-    );
+    renderWithAppContext(<LoginWithPersonalAccessTokenRoute />);
 
     const hostname = screen.getByTestId('login-hostname');
     await userEvent.clear(hostname);
@@ -191,26 +149,17 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
 
     await userEvent.click(screen.getByTestId('login-submit'));
 
-    expect(screen.getByTestId('login-errors')).toBeInTheDocument();
     expect(screen.getByText('Hostname format is invalid')).toBeInTheDocument();
     expect(screen.getByText('Token format is invalid')).toBeInTheDocument();
   });
 
   it('should open help docs in the browser', async () => {
-    render(
-      <AppContext.Provider
-        value={{
-          loginWithPersonalAccessToken: mockLoginWithPersonalAccessToken,
-        }}
-      >
-        <MemoryRouter>
-          <LoginWithPersonalAccessTokenRoute />
-        </MemoryRouter>
-      </AppContext.Provider>,
-    );
+    renderWithAppContext(<LoginWithPersonalAccessTokenRoute />, {
+      loginWithPersonalAccessToken: loginWithPersonalAccessTokenMock,
+    });
 
     await userEvent.click(screen.getByTestId('login-docs'));
 
-    expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
+    expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
   });
 });

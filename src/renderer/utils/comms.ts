@@ -1,88 +1,80 @@
-import { ipcRenderer, shell } from 'electron';
+import { defaultSettings } from '../context/defaults';
 
-import { namespacedEvent } from '../../shared/events';
-import { defaultSettings } from '../context/App';
 import { type Link, OpenPreference } from '../types';
-import { Constants } from './constants';
+
 import { loadState } from './storage';
 
 export function openExternalLink(url: Link): void {
+  // Load the state from local storage to avoid having to pass settings as a parameter
+  const { settings } = loadState();
+  const openPreference = settings
+    ? settings.openLinks
+    : defaultSettings.openLinks;
+
   if (url.toLowerCase().startsWith('https://')) {
-    // Load the state from local storage to avoid having to pass settings as a parameter
-    const { settings } = loadState();
-
-    const openPreference = settings
-      ? settings.openLinks
-      : defaultSettings.openLinks;
-
-    shell.openExternal(url, {
-      activate: openPreference === OpenPreference.FOREGROUND,
-    });
+    window.gitify.openExternalLink(
+      url,
+      openPreference === OpenPreference.FOREGROUND,
+    );
   }
 }
 
 export async function getAppVersion(): Promise<string> {
-  return await ipcRenderer.invoke(namespacedEvent('version'));
+  return await window.gitify.app.version();
 }
 
 export async function encryptValue(value: string): Promise<string> {
-  return await ipcRenderer.invoke(
-    namespacedEvent('safe-storage-encrypt'),
-    value,
-  );
+  return await window.gitify.encryptValue(value);
 }
 
 export async function decryptValue(value: string): Promise<string> {
-  return await ipcRenderer.invoke(
-    namespacedEvent('safe-storage-decrypt'),
-    value,
-  );
+  return await window.gitify.decryptValue(value);
 }
 
 export function quitApp(): void {
-  ipcRenderer.send(namespacedEvent('quit'));
+  window.gitify.app.quit();
 }
 
 export function showWindow(): void {
-  ipcRenderer.send(namespacedEvent('window-show'));
+  window.gitify.app.show();
 }
 
 export function hideWindow(): void {
-  ipcRenderer.send(namespacedEvent('window-hide'));
+  window.gitify.app.hide();
 }
 
 export function setAutoLaunch(value: boolean): void {
-  ipcRenderer.send(namespacedEvent('update-auto-launch'), {
-    openAtLogin: value,
-    openAsHidden: value,
-  });
+  window.gitify.setAutoLaunch(value);
 }
 
-export function setAlternateIdleIcon(value: boolean): void {
-  ipcRenderer.send(namespacedEvent('use-alternate-idle-icon'), value);
+export function setUseAlternateIdleIcon(value: boolean): void {
+  window.gitify.tray.useAlternateIdleIcon(value);
+}
+
+export function setUseUnreadActiveIcon(value: boolean): void {
+  window.gitify.tray.useUnreadActiveIcon(value);
 }
 
 export function setKeyboardShortcut(keyboardShortcut: boolean): void {
-  ipcRenderer.send(namespacedEvent('update-keyboard-shortcut'), {
-    enabled: keyboardShortcut,
-    keyboardShortcut: Constants.DEFAULT_KEYBOARD_SHORTCUT,
-  });
+  window.gitify.setKeyboardShortcut(keyboardShortcut);
 }
 
-export function updateTrayIcon(notificationsLength = 0): void {
-  if (notificationsLength < 0) {
-    ipcRenderer.send(namespacedEvent('icon-error'));
-    return;
-  }
-
-  if (notificationsLength > 0) {
-    ipcRenderer.send(namespacedEvent('icon-active'));
-    return;
-  }
-
-  ipcRenderer.send(namespacedEvent('icon-idle'));
+/**
+ * Updates the tray icon color based on the number of unread notifications.
+ *
+ * Passing a negative number will set the error state color.
+ *
+ * @param notificationsLength The number of unread notifications
+ */
+export function updateTrayColor(notificationsLength: number): void {
+  window.gitify.tray.updateColor(notificationsLength);
 }
 
-export function updateTrayTitle(title = ''): void {
-  ipcRenderer.send(namespacedEvent('update-title'), title);
+/**
+ * Updates the tray icon title.
+ *
+ * @param title The title to set on the tray icon
+ */
+export function updateTrayTitle(title: string): void {
+  window.gitify.tray.updateTitle(title);
 }

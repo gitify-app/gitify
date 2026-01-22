@@ -1,136 +1,140 @@
-import { type FC, type MouseEvent, useContext, useState } from 'react';
+import { type FC, type MouseEvent, useState } from 'react';
 
 import { CheckIcon, ReadIcon } from '@primer/octicons-react';
-import { Box, Button, Stack } from '@primer/react';
+import { Button, Stack } from '@primer/react';
 
-import { AppContext } from '../../context/App';
-import { Opacity, Size } from '../../types';
-import type { Notification } from '../../typesGitHub';
+import { useAppContext } from '../../hooks/useAppContext';
+
+import { HoverButton } from '../primitives/HoverButton';
+import { HoverGroup } from '../primitives/HoverGroup';
+
+import { type GitifyNotification, Opacity, Size } from '../../types';
+
 import { cn } from '../../utils/cn';
 import { isMarkAsDoneFeatureSupported } from '../../utils/features';
 import { getChevronDetails } from '../../utils/helpers';
 import { openRepository } from '../../utils/links';
+import { shouldRemoveNotificationsFromState } from '../../utils/notifications/remove';
 import { AvatarWithFallback } from '../avatars/AvatarWithFallback';
-import { HoverButton } from '../primitives/HoverButton';
-import { HoverGroup } from '../primitives/HoverGroup';
 import { NotificationRow } from './NotificationRow';
 
-interface IRepositoryNotifications {
-  repoNotifications: Notification[];
+export interface RepositoryNotificationsProps {
+  repoNotifications: GitifyNotification[];
   repoName: string;
 }
 
-export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
+export const RepositoryNotifications: FC<RepositoryNotificationsProps> = ({
   repoName,
   repoNotifications,
 }) => {
   const { settings, markNotificationsAsRead, markNotificationsAsDone } =
-    useContext(AppContext);
-  const [animateExit, setAnimateExit] = useState(false);
-  const [showAsRead, setShowAsRead] = useState(false);
-  const [showRepositoryNotifications, setShowRepositoryNotifications] =
-    useState(true);
+    useAppContext();
 
-  const avatarUrl = repoNotifications[0].repository.owner.avatar_url;
+  const [shouldAnimateRepositoryExit, setShouldAnimateRepositoryExit] =
+    useState(false);
+  const [
+    isRepositoryNotificationsVisible,
+    setIsRepositoryNotificationsVisible,
+  ] = useState(true);
+
+  const avatarUrl = repoNotifications[0].repository.owner.avatarUrl;
+  const shouldAnimateExit = shouldRemoveNotificationsFromState(settings);
 
   const actionMarkAsDone = () => {
-    setAnimateExit(!settings.delayNotificationState);
-    setShowAsRead(settings.delayNotificationState);
+    setShouldAnimateRepositoryExit(shouldAnimateExit);
     markNotificationsAsDone(repoNotifications);
   };
 
   const actionMarkAsRead = () => {
-    setAnimateExit(!settings.delayNotificationState);
-    setShowAsRead(settings.delayNotificationState);
+    setShouldAnimateRepositoryExit(shouldAnimateExit);
     markNotificationsAsRead(repoNotifications);
   };
 
   const actionToggleRepositoryNotifications = () => {
-    setShowRepositoryNotifications(!showRepositoryNotifications);
+    setIsRepositoryNotificationsVisible(!isRepositoryNotificationsVisible);
   };
+
+  const areAllRepoNotificationsRead = repoNotifications.every(
+    (notification) => !notification.unread,
+  );
 
   const Chevron = getChevronDetails(
     true,
-    showRepositoryNotifications,
+    isRepositoryNotificationsVisible,
     'repository',
   );
 
   return (
     <>
-      <Box
+      <Stack
         className={cn(
-          'group pr-1 py-0.5',
+          'group relative pr-1 py-0.5',
           'bg-gitify-repository',
-          animateExit &&
-            'translate-x-full opacity-0 transition duration-[350ms] ease-in-out',
-          showAsRead && Opacity.READ,
+          shouldAnimateRepositoryExit &&
+            'translate-x-full opacity-0 transition duration-350 ease-in-out',
+          areAllRepoNotificationsRead && Opacity.READ,
         )}
+        direction="horizontal"
         onClick={actionToggleRepositoryNotifications}
       >
-        <Stack
-          direction="horizontal"
-          align="center"
-          gap="condensed"
-          className="relative"
+        <Button
+          alignContent="center"
+          count={repoNotifications.length}
+          data-testid="open-repository"
+          onClick={(event: MouseEvent<HTMLElement>) => {
+            // Don't trigger onClick of parent element.
+            event.stopPropagation();
+            openRepository(repoNotifications[0].repository);
+          }}
+          title="Open repository ↗"
+          variant="invisible"
         >
-          <Button
-            title="Open repository"
-            variant="invisible"
-            alignContent="center"
-            count={repoNotifications.length}
-            onClick={(event: MouseEvent<HTMLElement>) => {
-              // Don't trigger onClick of parent element.
-              event.stopPropagation();
-              openRepository(repoNotifications[0].repository);
-            }}
-            data-testid="open-repository"
-          >
-            <AvatarWithFallback
-              src={avatarUrl}
-              alt={repoName}
-              name={repoName}
-              size={Size.LARGE}
-              userType={repoNotifications[0].repository.owner.type}
+          <AvatarWithFallback
+            alt={repoName}
+            name={repoName}
+            size={Size.LARGE}
+            src={avatarUrl}
+            userType={repoNotifications[0].repository.owner.type}
+          />
+        </Button>
+
+        {!shouldAnimateRepositoryExit && (
+          <HoverGroup bgColor="group-hover:bg-gitify-repository">
+            <HoverButton
+              action={actionMarkAsRead}
+              enabled={!areAllRepoNotificationsRead}
+              icon={ReadIcon}
+              label="Mark repository as read"
+              testid="repository-mark-as-read"
             />
-          </Button>
 
-          {!animateExit && (
-            <HoverGroup bgColor="group-hover:bg-gitify-repository">
-              <HoverButton
-                label="Mark repository as done"
-                icon={CheckIcon}
-                enabled={isMarkAsDoneFeatureSupported(
-                  repoNotifications[0].account,
-                )}
-                testid="repository-mark-as-done"
-                action={actionMarkAsDone}
-              />
+            <HoverButton
+              action={actionMarkAsDone}
+              enabled={
+                isMarkAsDoneFeatureSupported(repoNotifications[0].account) &&
+                !areAllRepoNotificationsRead
+              }
+              icon={CheckIcon}
+              label="Mark repository as done"
+              testid="repository-mark-as-done"
+            />
 
-              <HoverButton
-                label="Mark repository as read"
-                icon={ReadIcon}
-                testid="repository-mark-as-read"
-                action={actionMarkAsRead}
-              />
+            <HoverButton
+              action={actionToggleRepositoryNotifications}
+              icon={Chevron.icon}
+              label={Chevron.label}
+              testid="repository-toggle"
+            />
+          </HoverGroup>
+        )}
+      </Stack>
 
-              <HoverButton
-                label={Chevron.label}
-                icon={Chevron.icon}
-                testid="repository-toggle"
-                action={actionToggleRepositoryNotifications}
-              />
-            </HoverGroup>
-          )}
-        </Stack>
-      </Box>
-
-      {showRepositoryNotifications &&
+      {isRepositoryNotificationsVisible &&
         repoNotifications.map((notification) => (
           <NotificationRow
+            isRepositoryAnimatingExit={shouldAnimateRepositoryExit}
             key={notification.id}
             notification={notification}
-            isAnimated={animateExit}
-            isRead={showAsRead}
           />
         ))}
     </>

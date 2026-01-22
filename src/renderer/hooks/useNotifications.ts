@@ -1,46 +1,60 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
-import { logError } from '../../shared/logger';
 import type {
   Account,
   AccountNotifications,
   GitifyError,
+  GitifyNotification,
   GitifyState,
   Status,
 } from '../types';
-import type { Notification } from '../typesGitHub';
+
 import {
   ignoreNotificationThreadSubscription,
   markNotificationThreadAsDone,
   markNotificationThreadAsRead,
 } from '../utils/api/client';
-import { updateTrayIcon } from '../utils/comms';
+import {
+  areAllAccountErrorsSame,
+  doesAllAccountsHaveErrors,
+} from '../utils/errors';
 import { isMarkAsDoneFeatureSupported } from '../utils/features';
-import { triggerNativeNotifications } from '../utils/notifications/native';
+import { rendererLogError } from '../utils/logger';
+import { raiseNativeNotification } from '../utils/notifications/native';
 import {
   getAllNotifications,
-  setTrayIconColor,
+  getNotificationCount,
+  getUnreadNotificationCount,
 } from '../utils/notifications/notifications';
-import { removeNotifications } from '../utils/notifications/remove';
+import { removeNotificationsForAccount } from '../utils/notifications/remove';
+import { raiseSoundNotification } from '../utils/notifications/sound';
+import { getNewNotifications } from '../utils/notifications/utils';
 
 interface NotificationsState {
+  status: Status;
+  globalError: GitifyError;
+
   notifications: AccountNotifications[];
-  removeAccountNotifications: (account: Account) => Promise<void>;
+  notificationCount: number;
+  unreadNotificationCount: number;
+  hasNotifications: boolean;
+  hasUnreadNotifications: boolean;
+
   fetchNotifications: (state: GitifyState) => Promise<void>;
+  removeAccountNotifications: (account: Account) => Promise<void>;
+
   markNotificationsAsRead: (
     state: GitifyState,
-    notifications: Notification[],
+    notifications: GitifyNotification[],
   ) => Promise<void>;
   markNotificationsAsDone: (
     state: GitifyState,
-    notifications: Notification[],
+    notifications: GitifyNotification[],
   ) => Promise<void>;
   unsubscribeNotification: (
     state: GitifyState,
-    notification: Notification,
+    notification: GitifyNotification,
   ) => Promise<void>;
-  status: Status;
-  globalError: GitifyError;
 }
 
 export const useNotifications = (): NotificationsState => {
@@ -49,6 +63,20 @@ export const useNotifications = (): NotificationsState => {
 
   const [notifications, setNotifications] = useState<AccountNotifications[]>(
     [],
+  );
+
+  const notificationCount = getNotificationCount(notifications);
+
+  const unreadNotificationCount = getUnreadNotificationCount(notifications);
+
+  const hasNotifications = useMemo(
+    () => notificationCount > 0,
+    [notificationCount],
+  );
+
+  const hasUnreadNotifications = useMemo(
+    () => unreadNotificationCount > 0,
+    [unreadNotificationCount],
   );
 
   const removeAccountNotifications = useCallback(
@@ -60,7 +88,7 @@ export const useNotifications = (): NotificationsState => {
       );
 
       setNotifications(updatedNotifications);
-      setTrayIconColor(updatedNotifications);
+
       setStatus('success');
     },
     [notifications],
@@ -71,41 +99,45 @@ export const useNotifications = (): NotificationsState => {
       setStatus('loading');
       setGlobalError(null);
 
+      const previousNotifications = notifications;
       const fetchedNotifications = await getAllNotifications(state);
+      setNotifications(fetchedNotifications);
 
       // Set Global Error if all accounts have the same error
       const allAccountsHaveErrors =
-        fetchedNotifications.length > 0 &&
-        fetchedNotifications.every((account) => {
-          return account.error !== null;
-        });
-
-      let accountErrorsAreAllSame = true;
-      const accountError = fetchedNotifications[0]?.error;
-
-      for (const fetchedNotification of fetchedNotifications) {
-        if (accountError !== fetchedNotification.error) {
-          accountErrorsAreAllSame = false;
-          break;
-        }
-      }
+        doesAllAccountsHaveErrors(fetchedNotifications);
+      const allAccountErrorsAreSame =
+        areAllAccountErrorsSame(fetchedNotifications);
 
       if (allAccountsHaveErrors) {
+        const accountError = fetchedNotifications[0].error;
         setStatus('error');
-        setGlobalError(accountErrorsAreAllSame ? accountError : null);
-        updateTrayIcon(-1);
+        setGlobalError(allAccountErrorsAreSame ? accountError : null);
         return;
       }
 
-      setNotifications(fetchedNotifications);
-      triggerNativeNotifications(notifications, fetchedNotifications, state);
+      const diffNotifications = getNewNotifications(
+        previousNotifications,
+        fetchedNotifications,
+      );
+
+      if (diffNotifications.length > 0) {
+        if (state.settings.playSound) {
+          raiseSoundNotification(state.settings.notificationVolume);
+        }
+
+        if (state.settings.showNotifications) {
+          raiseNativeNotification(diffNotifications);
+        }
+      }
+
       setStatus('success');
     },
     [notifications],
   );
 
   const markNotificationsAsRead = useCallback(
-    async (state: GitifyState, readNotifications: Notification[]) => {
+    async (state: GitifyState, readNotifications: GitifyNotification[]) => {
       setStatus('loading');
 
       try {
@@ -119,16 +151,16 @@ export const useNotifications = (): NotificationsState => {
           ),
         );
 
-        const updatedNotifications = removeNotifications(
+        const updatedNotifications = removeNotificationsForAccount(
+          readNotifications[0].account,
           state.settings,
           readNotifications,
           notifications,
         );
 
         setNotifications(updatedNotifications);
-        setTrayIconColor(updatedNotifications);
       } catch (err) {
-        logError(
+        rendererLogError(
           'markNotificationsAsRead',
           'Error occurred while marking notifications as read',
           err,
@@ -141,32 +173,34 @@ export const useNotifications = (): NotificationsState => {
   );
 
   const markNotificationsAsDone = useCallback(
-    async (state: GitifyState, doneNotifications: Notification[]) => {
+    async (state: GitifyState, doneNotifications: GitifyNotification[]) => {
+      if (!isMarkAsDoneFeatureSupported(doneNotifications[0].account)) {
+        return;
+      }
+
       setStatus('loading');
 
       try {
-        if (isMarkAsDoneFeatureSupported(doneNotifications[0].account)) {
-          await Promise.all(
-            doneNotifications.map((notification) =>
-              markNotificationThreadAsDone(
-                notification.id,
-                notification.account.hostname,
-                notification.account.token,
-              ),
+        await Promise.all(
+          doneNotifications.map((notification) =>
+            markNotificationThreadAsDone(
+              notification.id,
+              notification.account.hostname,
+              notification.account.token,
             ),
-          );
-        }
+          ),
+        );
 
-        const updatedNotifications = removeNotifications(
+        const updatedNotifications = removeNotificationsForAccount(
+          doneNotifications[0].account,
           state.settings,
           doneNotifications,
           notifications,
         );
 
         setNotifications(updatedNotifications);
-        setTrayIconColor(updatedNotifications);
       } catch (err) {
-        logError(
+        rendererLogError(
           'markNotificationsAsDone',
           'Error occurred while marking notifications as done',
           err,
@@ -179,7 +213,7 @@ export const useNotifications = (): NotificationsState => {
   );
 
   const unsubscribeNotification = useCallback(
-    async (state: GitifyState, notification: Notification) => {
+    async (state: GitifyState, notification: GitifyNotification) => {
       setStatus('loading');
 
       try {
@@ -195,7 +229,7 @@ export const useNotifications = (): NotificationsState => {
           await markNotificationsAsRead(state, [notification]);
         }
       } catch (err) {
-        logError(
+        rendererLogError(
           'unsubscribeNotification',
           'Error occurred while unsubscribing from notification thread',
           err,
@@ -211,10 +245,16 @@ export const useNotifications = (): NotificationsState => {
   return {
     status,
     globalError,
-    notifications,
 
-    removeAccountNotifications,
+    notifications,
+    notificationCount,
+    unreadNotificationCount,
+    hasNotifications,
+    hasUnreadNotifications,
+
     fetchNotifications,
+    removeAccountNotifications,
+
     markNotificationsAsRead,
     markNotificationsAsDone,
     unsubscribeNotification,

@@ -1,28 +1,48 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { type ITooltip, Tooltip } from './Tooltip';
+import { renderWithAppContext } from '../../__helpers__/test-utils';
+
+import { Tooltip, type TooltipProps } from './Tooltip';
 
 describe('renderer/components/fields/Tooltip.tsx', () => {
-  const props: ITooltip = {
+  const props: TooltipProps = {
     name: 'test',
     tooltip: 'This is some tooltip text',
   };
 
   it('should render', () => {
-    const tree = render(<Tooltip {...props} />);
-    expect(tree).toMatchSnapshot();
+    renderWithAppContext(<Tooltip {...props} />);
+
+    expect(screen.getByTestId('tooltip-icon-test')).toBeInTheDocument();
+    expect(screen.queryByText(props.tooltip as string)).not.toBeInTheDocument();
   });
 
-  it('should display on mouse enter / leave', async () => {
-    render(<Tooltip {...props} />);
+  it('should toggle (show/hide) tooltip on clicking tooltip icon', async () => {
+    renderWithAppContext(<Tooltip {...props} />);
 
-    const tooltipElement = screen.getByTestId('tooltip-test');
+    const tooltipIconElement = screen.getByTestId('tooltip-icon-test');
 
-    await userEvent.hover(tooltipElement);
-    expect(tooltipElement).toMatchSnapshot();
+    // Open tooltip
+    await userEvent.click(tooltipIconElement);
+    expect(screen.queryByText(props.tooltip as string)).toBeInTheDocument();
 
-    await userEvent.unhover(tooltipElement);
-    expect(tooltipElement).toMatchSnapshot();
+    // Close tooltip
+    await userEvent.click(tooltipIconElement);
+    expect(screen.queryByText(props.tooltip as string)).not.toBeInTheDocument();
+  });
+
+  it('should hide tooltip when clicking outside', async () => {
+    renderWithAppContext(<Tooltip {...props} />);
+
+    const tooltipIconElement = screen.getByTestId('tooltip-icon-test');
+
+    // Open tooltip
+    await userEvent.click(tooltipIconElement);
+    expect(screen.queryByText(props.tooltip as string)).toBeInTheDocument();
+
+    // Click outside to close
+    await userEvent.click(document.body);
+    expect(screen.queryByText(props.tooltip as string)).not.toBeInTheDocument();
   });
 });

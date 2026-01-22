@@ -1,111 +1,93 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { MemoryRouter } from 'react-router-dom';
 
-import { AppContext } from '../context/App';
-import type { AuthState, ClientID, ClientSecret, Hostname } from '../types';
+import { renderWithAppContext } from '../__helpers__/test-utils';
+
+import type { ClientID, ClientSecret, Hostname } from '../types';
+
 import * as comms from '../utils/comms';
-import { LoginWithOAuthAppRoute, validateForm } from './LoginWithOAuthApp';
+import * as logger from '../utils/logger';
+import {
+  type IFormData,
+  LoginWithOAuthAppRoute,
+  validateForm,
+} from './LoginWithOAuthApp';
 
-const mockNavigate = jest.fn();
+const navigateMock = jest.fn();
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
-  useNavigate: () => mockNavigate,
+  useNavigate: () => navigateMock,
 }));
 
 describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
-  const mockLoginWithOAuthApp = jest.fn();
+  const loginWithOAuthAppMock = jest.fn();
 
-  const openExternalLinkMock = jest
+  const openExternalLinkSpy = jest
     .spyOn(comms, 'openExternalLink')
     .mockImplementation();
-
-  const mockAuth: AuthState = {
-    accounts: [],
-  };
 
   afterEach(() => {
     jest.clearAllMocks();
   });
 
   it('renders correctly', () => {
-    const tree = render(
-      <AppContext.Provider value={{ auth: mockAuth }}>
-        <MemoryRouter>
-          <LoginWithOAuthAppRoute />
-        </MemoryRouter>
-      </AppContext.Provider>,
-    );
+    const tree = renderWithAppContext(<LoginWithOAuthAppRoute />);
 
     expect(tree).toMatchSnapshot();
   });
 
   it('let us go back', async () => {
-    render(
-      <AppContext.Provider value={{ auth: mockAuth }}>
-        <MemoryRouter>
-          <LoginWithOAuthAppRoute />
-        </MemoryRouter>
-      </AppContext.Provider>,
-    );
+    renderWithAppContext(<LoginWithOAuthAppRoute />);
 
     await userEvent.click(screen.getByTestId('header-nav-back'));
 
-    expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
+    expect(navigateMock).toHaveBeenCalledTimes(1);
+    expect(navigateMock).toHaveBeenCalledWith(-1);
   });
 
-  it('should validate the form values', () => {
-    const emptyValues = {
-      hostname: null,
-      clientId: null,
-      clientSecret: null,
-    };
+  describe('form validation', () => {
+    it('should validate the form values are not empty', () => {
+      const values: IFormData = {
+        hostname: null,
+        clientId: null,
+        clientSecret: null,
+      };
 
-    let values = {
-      ...emptyValues,
-    };
-    expect(validateForm(values).hostname).toBe('Hostname is required');
-    expect(validateForm(values).clientId).toBe('Client ID is required');
-    expect(validateForm(values).clientSecret).toBe('Client Secret is required');
+      expect(validateForm(values).hostname).toBe('Hostname is required');
+      expect(validateForm(values).clientId).toBe('Client ID is required');
+      expect(validateForm(values).clientSecret).toBe(
+        'Client Secret is required',
+      );
+    });
 
-    values = {
-      ...emptyValues,
-      hostname: 'hello' as Hostname,
-      clientId: '!@£INVALID-.1' as ClientID,
-      clientSecret: '!@£INVALID-.1' as ClientSecret,
-    };
-    expect(validateForm(values).hostname).toBe('Hostname format is invalid');
-    expect(validateForm(values).clientId).toBe('Client ID format is invalid');
-    expect(validateForm(values).clientSecret).toBe(
-      'Client Secret format is invalid',
-    );
+    it('should validate the form values are correct format', () => {
+      const values: IFormData = {
+        hostname: 'hello' as Hostname,
+        clientId: '!@£INVALID-.1' as ClientID,
+        clientSecret: '!@£INVALID-.1' as ClientSecret,
+      };
+
+      expect(validateForm(values).hostname).toBe('Hostname format is invalid');
+      expect(validateForm(values).clientId).toBe('Client ID format is invalid');
+      expect(validateForm(values).clientSecret).toBe(
+        'Client Secret format is invalid',
+      );
+    });
   });
 
   describe("'Create new OAuth App' button", () => {
     it('should be disabled if no hostname configured', async () => {
-      render(
-        <AppContext.Provider value={{ auth: mockAuth }}>
-          <MemoryRouter>
-            <LoginWithOAuthAppRoute />
-          </MemoryRouter>
-        </AppContext.Provider>,
-      );
+      renderWithAppContext(<LoginWithOAuthAppRoute />);
 
       await userEvent.clear(screen.getByTestId('login-hostname'));
 
       await userEvent.click(screen.getByTestId('login-create-oauth-app'));
 
-      expect(openExternalLinkMock).toHaveBeenCalledTimes(0);
+      expect(openExternalLinkSpy).toHaveBeenCalledTimes(0);
     });
 
     it('should open in browser if hostname configured', async () => {
-      render(
-        <AppContext.Provider value={{ auth: mockAuth }}>
-          <MemoryRouter>
-            <LoginWithOAuthAppRoute />
-          </MemoryRouter>
-        </AppContext.Provider>,
-      );
+      renderWithAppContext(<LoginWithOAuthAppRoute />);
 
       const hostname = screen.getByTestId('login-hostname');
       await userEvent.clear(hostname);
@@ -113,24 +95,16 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
 
       await userEvent.click(screen.getByTestId('login-create-oauth-app'));
 
-      expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
+      expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
     });
   });
 
   it('should login using a token - success', async () => {
-    mockLoginWithOAuthApp.mockResolvedValueOnce(null);
+    loginWithOAuthAppMock.mockResolvedValueOnce(null);
 
-    render(
-      <AppContext.Provider
-        value={{
-          loginWithOAuthApp: mockLoginWithOAuthApp,
-        }}
-      >
-        <MemoryRouter>
-          <LoginWithOAuthAppRoute />
-        </MemoryRouter>
-      </AppContext.Provider>,
-    );
+    renderWithAppContext(<LoginWithOAuthAppRoute />, {
+      loginWithOAuthApp: loginWithOAuthAppMock,
+    });
 
     const hostname = screen.getByTestId('login-hostname');
     await userEvent.clear(hostname);
@@ -148,18 +122,44 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
 
     await userEvent.click(screen.getByTestId('login-submit'));
 
-    expect(mockLoginWithOAuthApp).toHaveBeenCalledTimes(1);
-    expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
+    expect(loginWithOAuthAppMock).toHaveBeenCalledTimes(1);
+    expect(navigateMock).toHaveBeenCalledTimes(1);
+    expect(navigateMock).toHaveBeenCalledWith(-1);
+  });
+
+  it('should login using a token - failure', async () => {
+    const rendererLogErrorSpy = jest
+      .spyOn(logger, 'rendererLogError')
+      .mockImplementation();
+    loginWithOAuthAppMock.mockRejectedValueOnce(null);
+
+    renderWithAppContext(<LoginWithOAuthAppRoute />, {
+      loginWithOAuthApp: loginWithOAuthAppMock,
+    });
+
+    const hostname = screen.getByTestId('login-hostname');
+    await userEvent.clear(hostname);
+    await userEvent.type(hostname, 'github.com');
+
+    await userEvent.type(
+      screen.getByTestId('login-clientId'),
+      '1234567890_ASDFGHJKL',
+    );
+
+    await userEvent.type(
+      screen.getByTestId('login-clientSecret'),
+      '1234567890_asdfghjklPOIUYTREWQ0987654321',
+    );
+
+    await userEvent.click(screen.getByTestId('login-submit'));
+
+    expect(loginWithOAuthAppMock).toHaveBeenCalledTimes(1);
+    expect(navigateMock).toHaveBeenCalledTimes(0);
+    expect(rendererLogErrorSpy).toHaveBeenCalledTimes(1);
   });
 
   it('should render the form with errors', async () => {
-    render(
-      <AppContext.Provider value={{ auth: mockAuth }}>
-        <MemoryRouter>
-          <LoginWithOAuthAppRoute />
-        </MemoryRouter>
-      </AppContext.Provider>,
-    );
+    renderWithAppContext(<LoginWithOAuthAppRoute />);
 
     const hostname = screen.getByTestId('login-hostname');
     await userEvent.clear(hostname);
@@ -171,7 +171,6 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
 
     await userEvent.click(screen.getByTestId('login-submit'));
 
-    expect(screen.getByTestId('login-errors')).toBeInTheDocument();
     expect(screen.getByText('Hostname format is invalid')).toBeInTheDocument();
     expect(screen.getByText('Client ID format is invalid')).toBeInTheDocument();
     expect(
@@ -180,16 +179,10 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
   });
 
   it('should open help docs in the browser', async () => {
-    render(
-      <AppContext.Provider value={{ auth: mockAuth }}>
-        <MemoryRouter>
-          <LoginWithOAuthAppRoute />
-        </MemoryRouter>
-      </AppContext.Provider>,
-    );
+    renderWithAppContext(<LoginWithOAuthAppRoute />);
 
     await userEvent.click(screen.getByTestId('login-docs'));
 
-    expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
+    expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
   });
 });

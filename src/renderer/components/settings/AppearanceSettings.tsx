@@ -1,6 +1,4 @@
-import { type FC, useContext, useState } from 'react';
-
-import { webFrame } from 'electron';
+import type { FC } from 'react';
 
 import {
   PaintbrushIcon,
@@ -17,33 +15,28 @@ import {
   Text,
 } from '@primer/react';
 
-import { AppContext } from '../../context/App';
-import { Theme } from '../../types';
-import { hasMultipleAccounts } from '../../utils/auth/utils';
-import { zoomLevelToPercentage, zoomPercentageToLevel } from '../../utils/zoom';
+import { useAppContext } from '../../hooks/useAppContext';
+
 import { Checkbox } from '../fields/Checkbox';
 import { FieldLabel } from '../fields/FieldLabel';
 import { Title } from '../primitives/Title';
 
-let timeout: NodeJS.Timeout;
-const DELAY = 200;
+import { Theme } from '../../types';
+
+import { hasMultipleAccounts } from '../../utils/auth/utils';
+import {
+  canDecreaseZoom,
+  canIncreaseZoom,
+  decreaseZoom,
+  increaseZoom,
+  resetZoomLevel,
+  zoomLevelToPercentage,
+} from '../../utils/zoom';
 
 export const AppearanceSettings: FC = () => {
-  const { auth, settings, updateSetting } = useContext(AppContext);
-  const [zoomPercentage, setZoomPercentage] = useState(
-    zoomLevelToPercentage(webFrame.getZoomLevel()),
-  );
+  const { auth, settings, updateSetting } = useAppContext();
 
-  window.addEventListener('resize', () => {
-    // clear the timeout
-    clearTimeout(timeout);
-    // start timing for event "completion"
-    timeout = setTimeout(() => {
-      const zoomPercentage = zoomLevelToPercentage(webFrame.getZoomLevel());
-      setZoomPercentage(zoomPercentage);
-      updateSetting('zoomPercentage', zoomPercentage);
-    }, DELAY);
-  });
+  const zoomPercentage = zoomLevelToPercentage(window.gitify.zoom.getLevel());
 
   return (
     <fieldset>
@@ -51,19 +44,18 @@ export const AppearanceSettings: FC = () => {
 
       <Stack direction="vertical" gap="condensed">
         <Stack
-          direction="horizontal"
-          gap="condensed"
           align="center"
           className="text-sm"
+          direction="horizontal"
+          gap="condensed"
         >
-          <FieldLabel name="theme" label="Theme:" />
+          <FieldLabel label="Theme:" name="theme" />
           <Select
-            id="theme"
-            value={settings.theme}
+            data-testid="settings-theme"
             onChange={(evt) =>
               updateSetting('theme', evt.target.value as Theme)
             }
-            data-testid="settings-theme"
+            value={settings.theme}
           >
             <Select.OptGroup label="System">
               <Select.Option value={Theme.SYSTEM}>System</Select.Option>
@@ -91,88 +83,97 @@ export const AppearanceSettings: FC = () => {
         </Stack>
 
         <Checkbox
-          name="increaseContrast"
-          label="Increase contrast"
           checked={settings.increaseContrast}
-          onChange={(evt) =>
-            updateSetting('increaseContrast', evt.target.checked)
+          label="Increase contrast"
+          name="increaseContrast"
+          onChange={() =>
+            updateSetting('increaseContrast', !settings.increaseContrast)
           }
-          tooltip={<Text>Enable high contrast.</Text>}
+          tooltip={
+            <Text>
+              Enable high contrast colors for improved legibility. This
+              increases color contrast across the UI and may affect some
+              color-specific themes.
+            </Text>
+          }
         />
 
         <Stack
-          direction="horizontal"
-          gap="condensed"
           align="center"
           className="text-sm"
+          direction="horizontal"
+          gap="condensed"
         >
-          <FieldLabel name="zoom" label="Zoom:" />
+          <FieldLabel label="Zoom:" name="zoom" />
 
           <ButtonGroup className="ml-2">
             <IconButton
               aria-label="Zoom out"
-              size="small"
-              icon={ZoomOutIcon}
-              unsafeDisableTooltip={true}
-              onClick={() =>
-                zoomPercentage > 0 &&
-                webFrame.setZoomLevel(
-                  zoomPercentageToLevel(zoomPercentage - 10),
-                )
-              }
               data-testid="settings-zoom-out"
+              disabled={!canDecreaseZoom(zoomPercentage)}
+              icon={ZoomOutIcon}
+              onClick={() => decreaseZoom(zoomPercentage)}
+              size="small"
+              unsafeDisableTooltip={true}
             />
 
-            <Button aria-label="Zoom percentage" size="small" disabled>
+            <Button aria-label="Zoom percentage" disabled size="small">
               {zoomPercentage.toFixed(0)}%
             </Button>
 
             <IconButton
               aria-label="Zoom in"
-              size="small"
-              icon={ZoomInIcon}
-              unsafeDisableTooltip={true}
-              onClick={() =>
-                zoomPercentage < 120 &&
-                webFrame.setZoomLevel(
-                  zoomPercentageToLevel(zoomPercentage + 10),
-                )
-              }
               data-testid="settings-zoom-in"
+              disabled={!canIncreaseZoom(zoomPercentage)}
+              icon={ZoomInIcon}
+              onClick={() => increaseZoom(zoomPercentage)}
+              size="small"
+              unsafeDisableTooltip={true}
             />
 
             <IconButton
               aria-label="Reset zoom"
-              size="small"
-              variant="danger"
-              icon={SyncIcon}
-              unsafeDisableTooltip={true}
-              onClick={() => webFrame.setZoomLevel(0)}
               data-testid="settings-zoom-reset"
+              icon={SyncIcon}
+              onClick={() => resetZoomLevel()}
+              size="small"
+              unsafeDisableTooltip={true}
+              variant="danger"
             />
           </ButtonGroup>
         </Stack>
 
         <Checkbox
-          name="showAccountHeader"
-          label="Show account header"
           checked={settings.showAccountHeader}
-          visible={!hasMultipleAccounts(auth)}
-          onChange={(evt) =>
-            updateSetting('showAccountHeader', evt.target.checked)
-          }
-        />
-
-        <Checkbox
-          name="wrapNotificationTitle"
-          label="Show full notification title"
-          checked={settings.wrapNotificationTitle}
-          onChange={(evt) =>
-            updateSetting('wrapNotificationTitle', evt.target.checked)
+          label="Show account header"
+          name="showAccountHeader"
+          onChange={() =>
+            updateSetting('showAccountHeader', !settings.showAccountHeader)
           }
           tooltip={
             <Text>
-              Wrap long notification titles instead of truncating them.
+              When enabled, displays an account header (avatar, username and
+              quick links) above the notifications list.
+            </Text>
+          }
+          visible={!hasMultipleAccounts(auth)}
+        />
+
+        <Checkbox
+          checked={settings.wrapNotificationTitle}
+          label="Show full notification title"
+          name="wrapNotificationTitle"
+          onChange={() =>
+            updateSetting(
+              'wrapNotificationTitle',
+              !settings.wrapNotificationTitle,
+            )
+          }
+          tooltip={
+            <Text>
+              Wrap long notification titles onto multiple lines instead of
+              truncating with an ellipsis. This shows the full title but may
+              increase the height of the notification list.
             </Text>
           }
         />

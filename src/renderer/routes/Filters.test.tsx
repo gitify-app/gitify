@@ -1,20 +1,19 @@
-import { act, render, screen } from '@testing-library/react';
+import { act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { MemoryRouter } from 'react-router-dom';
 
-import { mockAuth, mockSettings } from '../__mocks__/state-mocks';
-import { AppContext } from '../context/App';
+import { renderWithAppContext } from '../__helpers__/test-utils';
+
 import { FiltersRoute } from './Filters';
 
-const mockNavigate = jest.fn();
+const navigateMock = jest.fn();
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
-  useNavigate: () => mockNavigate,
+  useNavigate: () => navigateMock,
 }));
 
 describe('renderer/routes/Filters.tsx', () => {
-  const clearFilters = jest.fn();
-  const fetchNotifications = jest.fn();
+  const clearFiltersMock = jest.fn();
+  const fetchNotificationsMock = jest.fn();
 
   afterEach(() => {
     jest.clearAllMocks();
@@ -23,19 +22,7 @@ describe('renderer/routes/Filters.tsx', () => {
   describe('General', () => {
     it('should render itself & its children', async () => {
       await act(async () => {
-        render(
-          <AppContext.Provider
-            value={{
-              auth: mockAuth,
-              settings: mockSettings,
-              notifications: [],
-            }}
-          >
-            <MemoryRouter>
-              <FiltersRoute />
-            </MemoryRouter>
-          </AppContext.Provider>,
-        );
+        renderWithAppContext(<FiltersRoute />);
       });
 
       expect(screen.getByTestId('filters')).toMatchSnapshot();
@@ -43,51 +30,30 @@ describe('renderer/routes/Filters.tsx', () => {
 
     it('should go back by pressing the icon', async () => {
       await act(async () => {
-        render(
-          <AppContext.Provider
-            value={{
-              auth: mockAuth,
-              settings: mockSettings,
-              notifications: [],
-              fetchNotifications,
-            }}
-          >
-            <MemoryRouter>
-              <FiltersRoute />
-            </MemoryRouter>
-          </AppContext.Provider>,
-        );
+        renderWithAppContext(<FiltersRoute />, {
+          fetchNotifications: fetchNotificationsMock,
+        });
       });
 
       await userEvent.click(screen.getByTestId('header-nav-back'));
 
-      expect(fetchNotifications).toHaveBeenCalledTimes(1);
-      expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
+      expect(fetchNotificationsMock).toHaveBeenCalledTimes(1);
+      expect(navigateMock).toHaveBeenCalledTimes(1);
+      expect(navigateMock).toHaveBeenCalledWith(-1);
     });
   });
 
   describe('Footer section', () => {
     it('should clear filters', async () => {
       await act(async () => {
-        render(
-          <AppContext.Provider
-            value={{
-              auth: mockAuth,
-              settings: mockSettings,
-              notifications: [],
-              clearFilters,
-            }}
-          >
-            <MemoryRouter>
-              <FiltersRoute />
-            </MemoryRouter>
-          </AppContext.Provider>,
-        );
+        renderWithAppContext(<FiltersRoute />, {
+          clearFilters: clearFiltersMock,
+        });
       });
 
       await userEvent.click(screen.getByTestId('filters-clear'));
 
-      expect(clearFilters).toHaveBeenCalled();
+      expect(clearFiltersMock).toHaveBeenCalled();
     });
   });
 });

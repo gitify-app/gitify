@@ -1,4 +1,3 @@
-import { useContext } from 'react';
 import {
   Navigate,
   Route,
@@ -9,8 +8,7 @@ import {
 
 import { BaseStyles, ThemeProvider } from '@primer/react';
 
-import { AppLayout } from './components/layout/AppLayout';
-import { AppContext, AppProvider } from './context/App';
+import { AppProvider } from './context/App';
 import { AccountsRoute } from './routes/Accounts';
 import { FiltersRoute } from './routes/Filters';
 import { LoginRoute } from './routes/Login';
@@ -19,16 +17,22 @@ import { LoginWithPersonalAccessTokenRoute } from './routes/LoginWithPersonalAcc
 import { NotificationsRoute } from './routes/Notifications';
 import { SettingsRoute } from './routes/Settings';
 
+import { GlobalShortcuts } from './components/GlobalShortcuts';
+import { AppLayout } from './components/layout/AppLayout';
+
 import './App.css';
 
+import { useAppContext } from './hooks/useAppContext';
+
 function RequireAuth({ children }) {
-  const { isLoggedIn } = useContext(AppContext);
   const location = useLocation();
+
+  const { isLoggedIn } = useAppContext();
 
   return isLoggedIn ? (
     children
   ) : (
-    <Navigate to="/login" replace state={{ from: location }} />
+    <Navigate replace state={{ from: location }} to="/login" />
   );
 }
 
@@ -38,48 +42,49 @@ export const App = () => {
       <BaseStyles>
         <AppProvider>
           <Router>
+            <GlobalShortcuts />
             <AppLayout>
               <Routes>
                 <Route
-                  path="/"
                   element={
                     <RequireAuth>
                       <NotificationsRoute />
                     </RequireAuth>
                   }
+                  path="/"
                 />
                 <Route
-                  path="/filters"
                   element={
                     <RequireAuth>
                       <FiltersRoute />
                     </RequireAuth>
                   }
+                  path="/filters"
                 />
                 <Route
-                  path="/settings"
                   element={
                     <RequireAuth>
                       <SettingsRoute />
                     </RequireAuth>
                   }
+                  path="/settings"
                 />
                 <Route
-                  path="/accounts"
                   element={
                     <RequireAuth>
                       <AccountsRoute />
                     </RequireAuth>
                   }
+                  path="/accounts"
                 />
-                <Route path="/login" element={<LoginRoute />} />
+                <Route element={<LoginRoute />} path="/login" />
                 <Route
-                  path="/login-personal-access-token"
                   element={<LoginWithPersonalAccessTokenRoute />}
+                  path="/login-personal-access-token"
                 />
                 <Route
-                  path="/login-oauth-app"
                   element={<LoginWithOAuthAppRoute />}
+                  path="/login-oauth-app"
                 />
               </Routes>
             </AppLayout>

@@ -6,280 +6,362 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
   "baseElement": <body>
     <div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-xs opacity-80"
-        data-align="center"
-        data-direction="horizontal"
-        data-gap="condensed"
-        data-justify="start"
-        data-padding="none"
-        data-wrap="wrap"
+        data-color-mode="light"
+        data-dark-theme="dark"
+        data-light-theme="light"
       >
         <div
-          class="Box-sc-g0xbh4-0"
-          data-testid="view-profile"
-          title="gitify-app"
+          class="prc-src-BaseStyles-aopSS"
+          data-portal-root="true"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+            class="text-xs opacity-80 prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
             data-justify="start"
             data-padding="none"
-            data-testid="avatar"
-            data-wrap="nowrap"
+            data-wrap="wrap"
           >
-            <img
-              alt="gitify-app"
-              class="Avatar__StyledAvatar-sc-2lv0r8-0 fNmquh"
-              data-component="Avatar"
-              height="14"
-              size="14"
-              src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-              sx="[object Object]"
-              width="14"
-            />
+            <button
+              data-testid="view-profile"
+              title="gitify-app"
+              type="button"
+            >
+              <div
+                class="prc-Stack-Stack-UQ9k6"
+                data-align="center"
+                data-direction="horizontal"
+                data-gap="condensed"
+                data-justify="start"
+                data-padding="none"
+                data-testid="avatar"
+                data-wrap="nowrap"
+              >
+                <img
+                  alt="gitify-app"
+                  class="prc-Avatar-Avatar-0xaUi"
+                  data-component="Avatar"
+                  height="14"
+                  src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+                  style="--avatarSize-regular: 14px;"
+                  width="14"
+                />
+              </div>
+            </button>
+            <div
+              class="prc-Stack-Stack-UQ9k6"
+              data-align="stretch"
+              data-direction="horizontal"
+              data-gap="none"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+            >
+              <span
+                class="pr-1 prc-Text-Text-9mHv3"
+                title="You're watching the repository."
+              >
+                Updated
+              </span>
+              <relative-time
+                datetime="2017-05-20T17:51:57.000Z"
+              >
+                May 20, 2017
+              </relative-time>
+            </div>
+            <div
+              class="flex gap-1"
+            >
+              <button
+                aria-describedby="_r_ID_"
+                type="button"
+              >
+                <span
+                  class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
+                  data-size="small"
+                  data-variant="secondary"
+                  tabindex="0"
+                >
+                  <div
+                    class="prc-Stack-Stack-UQ9k6"
+                    data-align="center"
+                    data-direction="horizontal"
+                    data-gap="none"
+                    data-justify="start"
+                    data-padding="none"
+                    data-wrap="nowrap"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      class="octicon octicon-check text-gitify-icon-open"
+                      display="inline-block"
+                      fill="currentColor"
+                      focusable="false"
+                      height="12"
+                      overflow="visible"
+                      style="vertical-align: text-bottom;"
+                      viewBox="0 0 16 16"
+                      width="12"
+                    >
+                      <path
+                        d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
+                      />
+                    </svg>
+                    <span
+                      class="text-xxs px-1 prc-Text-Text-9mHv3"
+                    >
+                      1
+                    </span>
+                  </div>
+                </span>
+              </button>
+              <span
+                aria-hidden="true"
+                class="prc-TooltipV2-Tooltip-tLeuB"
+                data-direction="s"
+                id="_r_ID_"
+                popover="auto"
+                role="tooltip"
+              >
+                octocat approved these changes
+              </span>
+              <button
+                aria-describedby="_r_ID_"
+                type="button"
+              >
+                <span
+                  class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
+                  data-size="small"
+                  data-variant="secondary"
+                  tabindex="0"
+                >
+                  <div
+                    class="prc-Stack-Stack-UQ9k6"
+                    data-align="center"
+                    data-direction="horizontal"
+                    data-gap="none"
+                    data-justify="start"
+                    data-padding="none"
+                    data-wrap="nowrap"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      class="octicon octicon-file-diff text-gitify-icon-closed"
+                      display="inline-block"
+                      fill="currentColor"
+                      focusable="false"
+                      height="12"
+                      overflow="visible"
+                      style="vertical-align: text-bottom;"
+                      viewBox="0 0 16 16"
+                      width="12"
+                    >
+                      <path
+                        d="M1 1.75C1 .784 1.784 0 2.75 0h7.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16H2.75A1.75 1.75 0 0 1 1 14.25Zm1.75-.25a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25V4.664a.25.25 0 0 0-.073-.177l-2.914-2.914a.25.25 0 0 0-.177-.073ZM8 3.25a.75.75 0 0 1 .75.75v1.5h1.5a.75.75 0 0 1 0 1.5h-1.5v1.5a.75.75 0 0 1-1.5 0V7h-1.5a.75.75 0 0 1 0-1.5h1.5V4A.75.75 0 0 1 8 3.25Zm-3 8a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1-.75-.75Z"
+                      />
+                    </svg>
+                    <span
+                      class="text-xxs px-1 prc-Text-Text-9mHv3"
+                    >
+                      1
+                    </span>
+                  </div>
+                </span>
+              </button>
+              <span
+                aria-hidden="true"
+                class="prc-TooltipV2-Tooltip-tLeuB"
+                data-direction="s"
+                id="_r_ID_"
+                popover="auto"
+                role="tooltip"
+              >
+                gitify-app requested changes
+              </span>
+            </div>
           </div>
-        </div>
-        <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
-          data-align="stretch"
-          data-direction="horizontal"
-          data-gap="none"
-          data-justify="start"
-          data-padding="none"
-          data-wrap="nowrap"
-        >
-          <span
-            class="Text-sc-17v1xeu-0 ezOLpc pr-1"
-            title="You're watching the repository."
-          >
-            Updated
-          </span>
-          <relative-time
-            class="sc-bRKDuR"
-            datetime="2017-05-20T17:51:57.000Z"
-          >
-            May 20, 2017
-          </relative-time>
-        </div>
-        <div
-          class="Box-sc-g0xbh4-0 flex gap-1"
-        >
-          <span
-            class="Label__StyledLabel-sc-1dgcne-0 hTZfGu hover:bg-gitify-notification-pill-hover"
-            title="octocat approved these changes"
-            variant="secondary"
-          >
-            <div
-              class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
-              data-align="center"
-              data-direction="horizontal"
-              data-gap="none"
-              data-justify="start"
-              data-padding="none"
-              data-wrap="nowrap"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-check text-gitify-icon-open"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="12"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="12"
-              >
-                <path
-                  d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
-                />
-              </svg>
-              <span
-                class="Text-sc-17v1xeu-0 ezOLpc text-xxs px-1"
-              >
-                1
-              </span>
-            </div>
-          </span>
-          <span
-            class="Label__StyledLabel-sc-1dgcne-0 hTZfGu hover:bg-gitify-notification-pill-hover"
-            title="gitify-app requested changes"
-            variant="secondary"
-          >
-            <div
-              class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
-              data-align="center"
-              data-direction="horizontal"
-              data-gap="none"
-              data-justify="start"
-              data-padding="none"
-              data-wrap="nowrap"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-file-diff text-gitify-icon-closed"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="12"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="12"
-              >
-                <path
-                  d="M1 1.75C1 .784 1.784 0 2.75 0h7.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16H2.75A1.75 1.75 0 0 1 1 14.25Zm1.75-.25a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25V4.664a.25.25 0 0 0-.073-.177l-2.914-2.914a.25.25 0 0 0-.177-.073ZM8 3.25a.75.75 0 0 1 .75.75v1.5h1.5a.75.75 0 0 1 0 1.5h-1.5v1.5a.75.75 0 0 1-1.5 0V7h-1.5a.75.75 0 0 1 0-1.5h1.5V4A.75.75 0 0 1 8 3.25Zm-3 8a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1-.75-.75Z"
-                />
-              </svg>
-              <span
-                class="Text-sc-17v1xeu-0 ezOLpc text-xxs px-1"
-              >
-                1
-              </span>
-            </div>
-          </span>
         </div>
       </div>
     </div>
   </body>,
   "container": <div>
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-xs opacity-80"
-      data-align="center"
-      data-direction="horizontal"
-      data-gap="condensed"
-      data-justify="start"
-      data-padding="none"
-      data-wrap="wrap"
+      data-color-mode="light"
+      data-dark-theme="dark"
+      data-light-theme="light"
     >
       <div
-        class="Box-sc-g0xbh4-0"
-        data-testid="view-profile"
-        title="gitify-app"
+        class="prc-src-BaseStyles-aopSS"
+        data-portal-root="true"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+          class="text-xs opacity-80 prc-Stack-Stack-UQ9k6"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
           data-justify="start"
           data-padding="none"
-          data-testid="avatar"
-          data-wrap="nowrap"
+          data-wrap="wrap"
         >
-          <img
-            alt="gitify-app"
-            class="Avatar__StyledAvatar-sc-2lv0r8-0 fNmquh"
-            data-component="Avatar"
-            height="14"
-            size="14"
-            src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-            sx="[object Object]"
-            width="14"
-          />
+          <button
+            data-testid="view-profile"
+            title="gitify-app"
+            type="button"
+          >
+            <div
+              class="prc-Stack-Stack-UQ9k6"
+              data-align="center"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-testid="avatar"
+              data-wrap="nowrap"
+            >
+              <img
+                alt="gitify-app"
+                class="prc-Avatar-Avatar-0xaUi"
+                data-component="Avatar"
+                height="14"
+                src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+                style="--avatarSize-regular: 14px;"
+                width="14"
+              />
+            </div>
+          </button>
+          <div
+            class="prc-Stack-Stack-UQ9k6"
+            data-align="stretch"
+            data-direction="horizontal"
+            data-gap="none"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <span
+              class="pr-1 prc-Text-Text-9mHv3"
+              title="You're watching the repository."
+            >
+              Updated
+            </span>
+            <relative-time
+              datetime="2017-05-20T17:51:57.000Z"
+            >
+              May 20, 2017
+            </relative-time>
+          </div>
+          <div
+            class="flex gap-1"
+          >
+            <button
+              aria-describedby="_r_ID_"
+              type="button"
+            >
+              <span
+                class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
+                data-size="small"
+                data-variant="secondary"
+                tabindex="0"
+              >
+                <div
+                  class="prc-Stack-Stack-UQ9k6"
+                  data-align="center"
+                  data-direction="horizontal"
+                  data-gap="none"
+                  data-justify="start"
+                  data-padding="none"
+                  data-wrap="nowrap"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="octicon octicon-check text-gitify-icon-open"
+                    display="inline-block"
+                    fill="currentColor"
+                    focusable="false"
+                    height="12"
+                    overflow="visible"
+                    style="vertical-align: text-bottom;"
+                    viewBox="0 0 16 16"
+                    width="12"
+                  >
+                    <path
+                      d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
+                    />
+                  </svg>
+                  <span
+                    class="text-xxs px-1 prc-Text-Text-9mHv3"
+                  >
+                    1
+                  </span>
+                </div>
+              </span>
+            </button>
+            <span
+              aria-hidden="true"
+              class="prc-TooltipV2-Tooltip-tLeuB"
+              data-direction="s"
+              id="_r_ID_"
+              popover="auto"
+              role="tooltip"
+            >
+              octocat approved these changes
+            </span>
+            <button
+              aria-describedby="_r_ID_"
+              type="button"
+            >
+              <span
+                class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
+                data-size="small"
+                data-variant="secondary"
+                tabindex="0"
+              >
+                <div
+                  class="prc-Stack-Stack-UQ9k6"
+                  data-align="center"
+                  data-direction="horizontal"
+                  data-gap="none"
+                  data-justify="start"
+                  data-padding="none"
+                  data-wrap="nowrap"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="octicon octicon-file-diff text-gitify-icon-closed"
+                    display="inline-block"
+                    fill="currentColor"
+                    focusable="false"
+                    height="12"
+                    overflow="visible"
+                    style="vertical-align: text-bottom;"
+                    viewBox="0 0 16 16"
+                    width="12"
+                  >
+                    <path
+                      d="M1 1.75C1 .784 1.784 0 2.75 0h7.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16H2.75A1.75 1.75 0 0 1 1 14.25Zm1.75-.25a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25V4.664a.25.25 0 0 0-.073-.177l-2.914-2.914a.25.25 0 0 0-.177-.073ZM8 3.25a.75.75 0 0 1 .75.75v1.5h1.5a.75.75 0 0 1 0 1.5h-1.5v1.5a.75.75 0 0 1-1.5 0V7h-1.5a.75.75 0 0 1 0-1.5h1.5V4A.75.75 0 0 1 8 3.25Zm-3 8a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1-.75-.75Z"
+                    />
+                  </svg>
+                  <span
+                    class="text-xxs px-1 prc-Text-Text-9mHv3"
+                  >
+                    1
+                  </span>
+                </div>
+              </span>
+            </button>
+            <span
+              aria-hidden="true"
+              class="prc-TooltipV2-Tooltip-tLeuB"
+              data-direction="s"
+              id="_r_ID_"
+              popover="auto"
+              role="tooltip"
+            >
+              gitify-app requested changes
+            </span>
+          </div>
         </div>
-      </div>
-      <div
-        class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
-        data-align="stretch"
-        data-direction="horizontal"
-        data-gap="none"
-        data-justify="start"
-        data-padding="none"
-        data-wrap="nowrap"
-      >
-        <span
-          class="Text-sc-17v1xeu-0 ezOLpc pr-1"
-          title="You're watching the repository."
-        >
-          Updated
-        </span>
-        <relative-time
-          class="sc-bRKDuR"
-          datetime="2017-05-20T17:51:57.000Z"
-        >
-          May 20, 2017
-        </relative-time>
-      </div>
-      <div
-        class="Box-sc-g0xbh4-0 flex gap-1"
-      >
-        <span
-          class="Label__StyledLabel-sc-1dgcne-0 hTZfGu hover:bg-gitify-notification-pill-hover"
-          title="octocat approved these changes"
-          variant="secondary"
-        >
-          <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
-            data-align="center"
-            data-direction="horizontal"
-            data-gap="none"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
-          >
-            <svg
-              aria-hidden="true"
-              class="octicon octicon-check text-gitify-icon-open"
-              display="inline-block"
-              fill="currentColor"
-              focusable="false"
-              height="12"
-              overflow="visible"
-              style="vertical-align: text-bottom;"
-              viewBox="0 0 16 16"
-              width="12"
-            >
-              <path
-                d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
-              />
-            </svg>
-            <span
-              class="Text-sc-17v1xeu-0 ezOLpc text-xxs px-1"
-            >
-              1
-            </span>
-          </div>
-        </span>
-        <span
-          class="Label__StyledLabel-sc-1dgcne-0 hTZfGu hover:bg-gitify-notification-pill-hover"
-          title="gitify-app requested changes"
-          variant="secondary"
-        >
-          <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
-            data-align="center"
-            data-direction="horizontal"
-            data-gap="none"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
-          >
-            <svg
-              aria-hidden="true"
-              class="octicon octicon-file-diff text-gitify-icon-closed"
-              display="inline-block"
-              fill="currentColor"
-              focusable="false"
-              height="12"
-              overflow="visible"
-              style="vertical-align: text-bottom;"
-              viewBox="0 0 16 16"
-              width="12"
-            >
-              <path
-                d="M1 1.75C1 .784 1.784 0 2.75 0h7.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16H2.75A1.75 1.75 0 0 1 1 14.25Zm1.75-.25a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25V4.664a.25.25 0 0 0-.073-.177l-2.914-2.914a.25.25 0 0 0-.177-.073ZM8 3.25a.75.75 0 0 1 .75.75v1.5h1.5a.75.75 0 0 1 0 1.5h-1.5v1.5a.75.75 0 0 1-1.5 0V7h-1.5a.75.75 0 0 1 0-1.5h1.5V4A.75.75 0 0 1 8 3.25Zm-3 8a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1-.75-.75Z"
-              />
-            </svg>
-            <span
-              class="Text-sc-17v1xeu-0 ezOLpc text-xxs px-1"
-            >
-              1
-            </span>
-          </div>
-        </span>
       </div>
     </div>
   </div>,
@@ -343,280 +425,362 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
   "baseElement": <body>
     <div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-xs opacity-80"
-        data-align="center"
-        data-direction="horizontal"
-        data-gap="condensed"
-        data-justify="start"
-        data-padding="none"
-        data-wrap="wrap"
+        data-color-mode="light"
+        data-dark-theme="dark"
+        data-light-theme="light"
       >
         <div
-          class="Box-sc-g0xbh4-0"
-          data-testid="view-profile"
-          title="gitify-app"
+          class="prc-src-BaseStyles-aopSS"
+          data-portal-root="true"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+            class="text-xs opacity-80 prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
             data-justify="start"
             data-padding="none"
-            data-testid="avatar"
-            data-wrap="nowrap"
+            data-wrap="wrap"
           >
-            <img
-              alt="gitify-app"
-              class="Avatar__StyledAvatar-sc-2lv0r8-0 fNmquh"
-              data-component="Avatar"
-              height="14"
-              size="14"
-              src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-              sx="[object Object]"
-              width="14"
-            />
+            <button
+              data-testid="view-profile"
+              title="gitify-app"
+              type="button"
+            >
+              <div
+                class="prc-Stack-Stack-UQ9k6"
+                data-align="center"
+                data-direction="horizontal"
+                data-gap="condensed"
+                data-justify="start"
+                data-padding="none"
+                data-testid="avatar"
+                data-wrap="nowrap"
+              >
+                <img
+                  alt="gitify-app"
+                  class="prc-Avatar-Avatar-0xaUi"
+                  data-component="Avatar"
+                  height="14"
+                  src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+                  style="--avatarSize-regular: 14px;"
+                  width="14"
+                />
+              </div>
+            </button>
+            <div
+              class="prc-Stack-Stack-UQ9k6"
+              data-align="stretch"
+              data-direction="horizontal"
+              data-gap="none"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+            >
+              <span
+                class="pr-1 prc-Text-Text-9mHv3"
+                title="You're watching the repository."
+              >
+                Updated
+              </span>
+              <relative-time
+                datetime="2017-05-20T17:51:57.000Z"
+              >
+                May 20, 2017
+              </relative-time>
+            </div>
+            <div
+              class="flex gap-1"
+            >
+              <button
+                aria-describedby="_r_ID_"
+                type="button"
+              >
+                <span
+                  class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
+                  data-size="small"
+                  data-variant="secondary"
+                  tabindex="0"
+                >
+                  <div
+                    class="prc-Stack-Stack-UQ9k6"
+                    data-align="center"
+                    data-direction="horizontal"
+                    data-gap="none"
+                    data-justify="start"
+                    data-padding="none"
+                    data-wrap="nowrap"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      class="octicon octicon-check text-gitify-icon-open"
+                      display="inline-block"
+                      fill="currentColor"
+                      focusable="false"
+                      height="12"
+                      overflow="visible"
+                      style="vertical-align: text-bottom;"
+                      viewBox="0 0 16 16"
+                      width="12"
+                    >
+                      <path
+                        d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
+                      />
+                    </svg>
+                    <span
+                      class="text-xxs px-1 prc-Text-Text-9mHv3"
+                    >
+                      1
+                    </span>
+                  </div>
+                </span>
+              </button>
+              <span
+                aria-hidden="true"
+                class="prc-TooltipV2-Tooltip-tLeuB"
+                data-direction="s"
+                id="_r_ID_"
+                popover="auto"
+                role="tooltip"
+              >
+                octocat approved these changes
+              </span>
+              <button
+                aria-describedby="_r_ID_"
+                type="button"
+              >
+                <span
+                  class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
+                  data-size="small"
+                  data-variant="secondary"
+                  tabindex="0"
+                >
+                  <div
+                    class="prc-Stack-Stack-UQ9k6"
+                    data-align="center"
+                    data-direction="horizontal"
+                    data-gap="none"
+                    data-justify="start"
+                    data-padding="none"
+                    data-wrap="nowrap"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      class="octicon octicon-file-diff text-gitify-icon-closed"
+                      display="inline-block"
+                      fill="currentColor"
+                      focusable="false"
+                      height="12"
+                      overflow="visible"
+                      style="vertical-align: text-bottom;"
+                      viewBox="0 0 16 16"
+                      width="12"
+                    >
+                      <path
+                        d="M1 1.75C1 .784 1.784 0 2.75 0h7.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16H2.75A1.75 1.75 0 0 1 1 14.25Zm1.75-.25a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25V4.664a.25.25 0 0 0-.073-.177l-2.914-2.914a.25.25 0 0 0-.177-.073ZM8 3.25a.75.75 0 0 1 .75.75v1.5h1.5a.75.75 0 0 1 0 1.5h-1.5v1.5a.75.75 0 0 1-1.5 0V7h-1.5a.75.75 0 0 1 0-1.5h1.5V4A.75.75 0 0 1 8 3.25Zm-3 8a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1-.75-.75Z"
+                      />
+                    </svg>
+                    <span
+                      class="text-xxs px-1 prc-Text-Text-9mHv3"
+                    >
+                      1
+                    </span>
+                  </div>
+                </span>
+              </button>
+              <span
+                aria-hidden="true"
+                class="prc-TooltipV2-Tooltip-tLeuB"
+                data-direction="s"
+                id="_r_ID_"
+                popover="auto"
+                role="tooltip"
+              >
+                gitify-app requested changes
+              </span>
+            </div>
           </div>
-        </div>
-        <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
-          data-align="stretch"
-          data-direction="horizontal"
-          data-gap="none"
-          data-justify="start"
-          data-padding="none"
-          data-wrap="nowrap"
-        >
-          <span
-            class="Text-sc-17v1xeu-0 ezOLpc pr-1"
-            title="You're watching the repository."
-          >
-            Updated
-          </span>
-          <relative-time
-            class="sc-bRKDuR"
-            datetime="2017-05-20T17:51:57.000Z"
-          >
-            May 20, 2017
-          </relative-time>
-        </div>
-        <div
-          class="Box-sc-g0xbh4-0 flex gap-1"
-        >
-          <span
-            class="Label__StyledLabel-sc-1dgcne-0 hTZfGu hover:bg-gitify-notification-pill-hover"
-            title="octocat approved these changes"
-            variant="secondary"
-          >
-            <div
-              class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
-              data-align="center"
-              data-direction="horizontal"
-              data-gap="none"
-              data-justify="start"
-              data-padding="none"
-              data-wrap="nowrap"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-check text-gitify-icon-open"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="12"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="12"
-              >
-                <path
-                  d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
-                />
-              </svg>
-              <span
-                class="Text-sc-17v1xeu-0 ezOLpc text-xxs px-1"
-              >
-                1
-              </span>
-            </div>
-          </span>
-          <span
-            class="Label__StyledLabel-sc-1dgcne-0 hTZfGu hover:bg-gitify-notification-pill-hover"
-            title="gitify-app requested changes"
-            variant="secondary"
-          >
-            <div
-              class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
-              data-align="center"
-              data-direction="horizontal"
-              data-gap="none"
-              data-justify="start"
-              data-padding="none"
-              data-wrap="nowrap"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-file-diff text-gitify-icon-closed"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="12"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="12"
-              >
-                <path
-                  d="M1 1.75C1 .784 1.784 0 2.75 0h7.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16H2.75A1.75 1.75 0 0 1 1 14.25Zm1.75-.25a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25V4.664a.25.25 0 0 0-.073-.177l-2.914-2.914a.25.25 0 0 0-.177-.073ZM8 3.25a.75.75 0 0 1 .75.75v1.5h1.5a.75.75 0 0 1 0 1.5h-1.5v1.5a.75.75 0 0 1-1.5 0V7h-1.5a.75.75 0 0 1 0-1.5h1.5V4A.75.75 0 0 1 8 3.25Zm-3 8a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1-.75-.75Z"
-                />
-              </svg>
-              <span
-                class="Text-sc-17v1xeu-0 ezOLpc text-xxs px-1"
-              >
-                1
-              </span>
-            </div>
-          </span>
         </div>
       </div>
     </div>
   </body>,
   "container": <div>
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-xs opacity-80"
-      data-align="center"
-      data-direction="horizontal"
-      data-gap="condensed"
-      data-justify="start"
-      data-padding="none"
-      data-wrap="wrap"
+      data-color-mode="light"
+      data-dark-theme="dark"
+      data-light-theme="light"
     >
       <div
-        class="Box-sc-g0xbh4-0"
-        data-testid="view-profile"
-        title="gitify-app"
+        class="prc-src-BaseStyles-aopSS"
+        data-portal-root="true"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+          class="text-xs opacity-80 prc-Stack-Stack-UQ9k6"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
           data-justify="start"
           data-padding="none"
-          data-testid="avatar"
-          data-wrap="nowrap"
+          data-wrap="wrap"
         >
-          <img
-            alt="gitify-app"
-            class="Avatar__StyledAvatar-sc-2lv0r8-0 fNmquh"
-            data-component="Avatar"
-            height="14"
-            size="14"
-            src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-            sx="[object Object]"
-            width="14"
-          />
+          <button
+            data-testid="view-profile"
+            title="gitify-app"
+            type="button"
+          >
+            <div
+              class="prc-Stack-Stack-UQ9k6"
+              data-align="center"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-testid="avatar"
+              data-wrap="nowrap"
+            >
+              <img
+                alt="gitify-app"
+                class="prc-Avatar-Avatar-0xaUi"
+                data-component="Avatar"
+                height="14"
+                src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+                style="--avatarSize-regular: 14px;"
+                width="14"
+              />
+            </div>
+          </button>
+          <div
+            class="prc-Stack-Stack-UQ9k6"
+            data-align="stretch"
+            data-direction="horizontal"
+            data-gap="none"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <span
+              class="pr-1 prc-Text-Text-9mHv3"
+              title="You're watching the repository."
+            >
+              Updated
+            </span>
+            <relative-time
+              datetime="2017-05-20T17:51:57.000Z"
+            >
+              May 20, 2017
+            </relative-time>
+          </div>
+          <div
+            class="flex gap-1"
+          >
+            <button
+              aria-describedby="_r_ID_"
+              type="button"
+            >
+              <span
+                class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
+                data-size="small"
+                data-variant="secondary"
+                tabindex="0"
+              >
+                <div
+                  class="prc-Stack-Stack-UQ9k6"
+                  data-align="center"
+                  data-direction="horizontal"
+                  data-gap="none"
+                  data-justify="start"
+                  data-padding="none"
+                  data-wrap="nowrap"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="octicon octicon-check text-gitify-icon-open"
+                    display="inline-block"
+                    fill="currentColor"
+                    focusable="false"
+                    height="12"
+                    overflow="visible"
+                    style="vertical-align: text-bottom;"
+                    viewBox="0 0 16 16"
+                    width="12"
+                  >
+                    <path
+                      d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
+                    />
+                  </svg>
+                  <span
+                    class="text-xxs px-1 prc-Text-Text-9mHv3"
+                  >
+                    1
+                  </span>
+                </div>
+              </span>
+            </button>
+            <span
+              aria-hidden="true"
+              class="prc-TooltipV2-Tooltip-tLeuB"
+              data-direction="s"
+              id="_r_ID_"
+              popover="auto"
+              role="tooltip"
+            >
+              octocat approved these changes
+            </span>
+            <button
+              aria-describedby="_r_ID_"
+              type="button"
+            >
+              <span
+                class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
+                data-size="small"
+                data-variant="secondary"
+                tabindex="0"
+              >
+                <div
+                  class="prc-Stack-Stack-UQ9k6"
+                  data-align="center"
+                  data-direction="horizontal"
+                  data-gap="none"
+                  data-justify="start"
+                  data-padding="none"
+                  data-wrap="nowrap"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="octicon octicon-file-diff text-gitify-icon-closed"
+                    display="inline-block"
+                    fill="currentColor"
+                    focusable="false"
+                    height="12"
+                    overflow="visible"
+                    style="vertical-align: text-bottom;"
+                    viewBox="0 0 16 16"
+                    width="12"
+                  >
+                    <path
+                      d="M1 1.75C1 .784 1.784 0 2.75 0h7.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16H2.75A1.75 1.75 0 0 1 1 14.25Zm1.75-.25a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25V4.664a.25.25 0 0 0-.073-.177l-2.914-2.914a.25.25 0 0 0-.177-.073ZM8 3.25a.75.75 0 0 1 .75.75v1.5h1.5a.75.75 0 0 1 0 1.5h-1.5v1.5a.75.75 0 0 1-1.5 0V7h-1.5a.75.75 0 0 1 0-1.5h1.5V4A.75.75 0 0 1 8 3.25Zm-3 8a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1-.75-.75Z"
+                    />
+                  </svg>
+                  <span
+                    class="text-xxs px-1 prc-Text-Text-9mHv3"
+                  >
+                    1
+                  </span>
+                </div>
+              </span>
+            </button>
+            <span
+              aria-hidden="true"
+              class="prc-TooltipV2-Tooltip-tLeuB"
+              data-direction="s"
+              id="_r_ID_"
+              popover="auto"
+              role="tooltip"
+            >
+              gitify-app requested changes
+            </span>
+          </div>
         </div>
-      </div>
-      <div
-        class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
-        data-align="stretch"
-        data-direction="horizontal"
-        data-gap="none"
-        data-justify="start"
-        data-padding="none"
-        data-wrap="nowrap"
-      >
-        <span
-          class="Text-sc-17v1xeu-0 ezOLpc pr-1"
-          title="You're watching the repository."
-        >
-          Updated
-        </span>
-        <relative-time
-          class="sc-bRKDuR"
-          datetime="2017-05-20T17:51:57.000Z"
-        >
-          May 20, 2017
-        </relative-time>
-      </div>
-      <div
-        class="Box-sc-g0xbh4-0 flex gap-1"
-      >
-        <span
-          class="Label__StyledLabel-sc-1dgcne-0 hTZfGu hover:bg-gitify-notification-pill-hover"
-          title="octocat approved these changes"
-          variant="secondary"
-        >
-          <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
-            data-align="center"
-            data-direction="horizontal"
-            data-gap="none"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
-          >
-            <svg
-              aria-hidden="true"
-              class="octicon octicon-check text-gitify-icon-open"
-              display="inline-block"
-              fill="currentColor"
-              focusable="false"
-              height="12"
-              overflow="visible"
-              style="vertical-align: text-bottom;"
-              viewBox="0 0 16 16"
-              width="12"
-            >
-              <path
-                d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
-              />
-            </svg>
-            <span
-              class="Text-sc-17v1xeu-0 ezOLpc text-xxs px-1"
-            >
-              1
-            </span>
-          </div>
-        </span>
-        <span
-          class="Label__StyledLabel-sc-1dgcne-0 hTZfGu hover:bg-gitify-notification-pill-hover"
-          title="gitify-app requested changes"
-          variant="secondary"
-        >
-          <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
-            data-align="center"
-            data-direction="horizontal"
-            data-gap="none"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
-          >
-            <svg
-              aria-hidden="true"
-              class="octicon octicon-file-diff text-gitify-icon-closed"
-              display="inline-block"
-              fill="currentColor"
-              focusable="false"
-              height="12"
-              overflow="visible"
-              style="vertical-align: text-bottom;"
-              viewBox="0 0 16 16"
-              width="12"
-            >
-              <path
-                d="M1 1.75C1 .784 1.784 0 2.75 0h7.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16H2.75A1.75 1.75 0 0 1 1 14.25Zm1.75-.25a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25V4.664a.25.25 0 0 0-.073-.177l-2.914-2.914a.25.25 0 0 0-.177-.073ZM8 3.25a.75.75 0 0 1 .75.75v1.5h1.5a.75.75 0 0 1 0 1.5h-1.5v1.5a.75.75 0 0 1-1.5 0V7h-1.5a.75.75 0 0 1 0-1.5h1.5V4A.75.75 0 0 1 8 3.25Zm-3 8a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1-.75-.75Z"
-              />
-            </svg>
-            <span
-              class="Text-sc-17v1xeu-0 ezOLpc text-xxs px-1"
-            >
-              1
-            </span>
-          </div>
-        </span>
       </div>
     </div>
   </div>,
@@ -680,280 +844,364 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
   "baseElement": <body>
     <div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-xs opacity-80"
-        data-align="center"
-        data-direction="horizontal"
-        data-gap="condensed"
-        data-justify="start"
-        data-padding="none"
-        data-wrap="wrap"
+        data-color-mode="light"
+        data-dark-theme="dark"
+        data-light-theme="light"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
-          data-align="center"
-          data-direction="horizontal"
-          data-gap="condensed"
-          data-justify="start"
-          data-padding="none"
-          data-testid="avatar"
-          data-wrap="nowrap"
+          class="prc-src-BaseStyles-aopSS"
+          data-portal-root="true"
         >
-          <svg
-            aria-hidden="true"
-            class="octicon octicon-mark-github"
-            display="inline-block"
-            fill="currentColor"
-            focusable="false"
-            height="14"
-            overflow="visible"
-            style="vertical-align: text-bottom;"
-            viewBox="0 0 16 16"
-            width="14"
-          >
-            <path
-              d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"
-            />
-          </svg>
-        </div>
-        <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
-          data-align="stretch"
-          data-direction="horizontal"
-          data-gap="none"
-          data-justify="start"
-          data-padding="none"
-          data-wrap="nowrap"
-        >
-          <span
-            class="Text-sc-17v1xeu-0 ezOLpc pr-1"
-            title="You're watching the repository."
-          >
-            Updated
-          </span>
-          <relative-time
-            class="sc-bRKDuR"
-            datetime="2017-05-20T17:51:57.000Z"
-          >
-            May 20, 2017
-          </relative-time>
-        </div>
-        <div
-          class="Box-sc-g0xbh4-0 flex gap-1"
-        >
-          <span
-            class="Label__StyledLabel-sc-1dgcne-0 hTZfGu hover:bg-gitify-notification-pill-hover"
-            title="octocat approved these changes"
-            variant="secondary"
+          <div
+            class="text-xs opacity-80 prc-Stack-Stack-UQ9k6"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="wrap"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-testid="avatar"
+              data-wrap="nowrap"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-feed-person"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="14"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="14"
+              >
+                <path
+                  d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
+                />
+              </svg>
+            </div>
+            <div
+              class="prc-Stack-Stack-UQ9k6"
+              data-align="stretch"
               data-direction="horizontal"
               data-gap="none"
               data-justify="start"
               data-padding="none"
               data-wrap="nowrap"
             >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-check text-gitify-icon-open"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="12"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="12"
-              >
-                <path
-                  d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
-                />
-              </svg>
               <span
-                class="Text-sc-17v1xeu-0 ezOLpc text-xxs px-1"
+                class="pr-1 prc-Text-Text-9mHv3"
+                title="You're watching the repository."
               >
-                1
+                Updated
               </span>
+              <relative-time
+                datetime="2017-05-20T17:51:57.000Z"
+              >
+                May 20, 2017
+              </relative-time>
             </div>
-          </span>
-          <span
-            class="Label__StyledLabel-sc-1dgcne-0 hTZfGu hover:bg-gitify-notification-pill-hover"
-            title="gitify-app requested changes"
-            variant="secondary"
-          >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
-              data-align="center"
-              data-direction="horizontal"
-              data-gap="none"
-              data-justify="start"
-              data-padding="none"
-              data-wrap="nowrap"
+              class="flex gap-1"
             >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-file-diff text-gitify-icon-closed"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="12"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="12"
+              <button
+                aria-describedby="_r_ID_"
+                type="button"
               >
-                <path
-                  d="M1 1.75C1 .784 1.784 0 2.75 0h7.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16H2.75A1.75 1.75 0 0 1 1 14.25Zm1.75-.25a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25V4.664a.25.25 0 0 0-.073-.177l-2.914-2.914a.25.25 0 0 0-.177-.073ZM8 3.25a.75.75 0 0 1 .75.75v1.5h1.5a.75.75 0 0 1 0 1.5h-1.5v1.5a.75.75 0 0 1-1.5 0V7h-1.5a.75.75 0 0 1 0-1.5h1.5V4A.75.75 0 0 1 8 3.25Zm-3 8a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1-.75-.75Z"
-                />
-              </svg>
+                <span
+                  class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
+                  data-size="small"
+                  data-variant="secondary"
+                  tabindex="0"
+                >
+                  <div
+                    class="prc-Stack-Stack-UQ9k6"
+                    data-align="center"
+                    data-direction="horizontal"
+                    data-gap="none"
+                    data-justify="start"
+                    data-padding="none"
+                    data-wrap="nowrap"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      class="octicon octicon-check text-gitify-icon-open"
+                      display="inline-block"
+                      fill="currentColor"
+                      focusable="false"
+                      height="12"
+                      overflow="visible"
+                      style="vertical-align: text-bottom;"
+                      viewBox="0 0 16 16"
+                      width="12"
+                    >
+                      <path
+                        d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
+                      />
+                    </svg>
+                    <span
+                      class="text-xxs px-1 prc-Text-Text-9mHv3"
+                    >
+                      1
+                    </span>
+                  </div>
+                </span>
+              </button>
               <span
-                class="Text-sc-17v1xeu-0 ezOLpc text-xxs px-1"
+                aria-hidden="true"
+                class="prc-TooltipV2-Tooltip-tLeuB"
+                data-direction="s"
+                id="_r_ID_"
+                popover="auto"
+                role="tooltip"
               >
-                1
+                octocat approved these changes
+              </span>
+              <button
+                aria-describedby="_r_ID_"
+                type="button"
+              >
+                <span
+                  class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
+                  data-size="small"
+                  data-variant="secondary"
+                  tabindex="0"
+                >
+                  <div
+                    class="prc-Stack-Stack-UQ9k6"
+                    data-align="center"
+                    data-direction="horizontal"
+                    data-gap="none"
+                    data-justify="start"
+                    data-padding="none"
+                    data-wrap="nowrap"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      class="octicon octicon-file-diff text-gitify-icon-closed"
+                      display="inline-block"
+                      fill="currentColor"
+                      focusable="false"
+                      height="12"
+                      overflow="visible"
+                      style="vertical-align: text-bottom;"
+                      viewBox="0 0 16 16"
+                      width="12"
+                    >
+                      <path
+                        d="M1 1.75C1 .784 1.784 0 2.75 0h7.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16H2.75A1.75 1.75 0 0 1 1 14.25Zm1.75-.25a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25V4.664a.25.25 0 0 0-.073-.177l-2.914-2.914a.25.25 0 0 0-.177-.073ZM8 3.25a.75.75 0 0 1 .75.75v1.5h1.5a.75.75 0 0 1 0 1.5h-1.5v1.5a.75.75 0 0 1-1.5 0V7h-1.5a.75.75 0 0 1 0-1.5h1.5V4A.75.75 0 0 1 8 3.25Zm-3 8a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1-.75-.75Z"
+                      />
+                    </svg>
+                    <span
+                      class="text-xxs px-1 prc-Text-Text-9mHv3"
+                    >
+                      1
+                    </span>
+                  </div>
+                </span>
+              </button>
+              <span
+                aria-hidden="true"
+                class="prc-TooltipV2-Tooltip-tLeuB"
+                data-direction="s"
+                id="_r_ID_"
+                popover="auto"
+                role="tooltip"
+              >
+                gitify-app requested changes
               </span>
             </div>
-          </span>
+          </div>
         </div>
       </div>
     </div>
   </body>,
   "container": <div>
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-xs opacity-80"
-      data-align="center"
-      data-direction="horizontal"
-      data-gap="condensed"
-      data-justify="start"
-      data-padding="none"
-      data-wrap="wrap"
+      data-color-mode="light"
+      data-dark-theme="dark"
+      data-light-theme="light"
     >
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
-        data-align="center"
-        data-direction="horizontal"
-        data-gap="condensed"
-        data-justify="start"
-        data-padding="none"
-        data-testid="avatar"
-        data-wrap="nowrap"
+        class="prc-src-BaseStyles-aopSS"
+        data-portal-root="true"
       >
-        <svg
-          aria-hidden="true"
-          class="octicon octicon-mark-github"
-          display="inline-block"
-          fill="currentColor"
-          focusable="false"
-          height="14"
-          overflow="visible"
-          style="vertical-align: text-bottom;"
-          viewBox="0 0 16 16"
-          width="14"
-        >
-          <path
-            d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"
-          />
-        </svg>
-      </div>
-      <div
-        class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
-        data-align="stretch"
-        data-direction="horizontal"
-        data-gap="none"
-        data-justify="start"
-        data-padding="none"
-        data-wrap="nowrap"
-      >
-        <span
-          class="Text-sc-17v1xeu-0 ezOLpc pr-1"
-          title="You're watching the repository."
-        >
-          Updated
-        </span>
-        <relative-time
-          class="sc-bRKDuR"
-          datetime="2017-05-20T17:51:57.000Z"
-        >
-          May 20, 2017
-        </relative-time>
-      </div>
-      <div
-        class="Box-sc-g0xbh4-0 flex gap-1"
-      >
-        <span
-          class="Label__StyledLabel-sc-1dgcne-0 hTZfGu hover:bg-gitify-notification-pill-hover"
-          title="octocat approved these changes"
-          variant="secondary"
+        <div
+          class="text-xs opacity-80 prc-Stack-Stack-UQ9k6"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="wrap"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+            class="prc-Stack-Stack-UQ9k6"
             data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-testid="avatar"
+            data-wrap="nowrap"
+          >
+            <svg
+              aria-hidden="true"
+              class="octicon octicon-feed-person"
+              display="inline-block"
+              fill="currentColor"
+              focusable="false"
+              height="14"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
+              viewBox="0 0 16 16"
+              width="14"
+            >
+              <path
+                d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
+              />
+            </svg>
+          </div>
+          <div
+            class="prc-Stack-Stack-UQ9k6"
+            data-align="stretch"
             data-direction="horizontal"
             data-gap="none"
             data-justify="start"
             data-padding="none"
             data-wrap="nowrap"
           >
-            <svg
-              aria-hidden="true"
-              class="octicon octicon-check text-gitify-icon-open"
-              display="inline-block"
-              fill="currentColor"
-              focusable="false"
-              height="12"
-              overflow="visible"
-              style="vertical-align: text-bottom;"
-              viewBox="0 0 16 16"
-              width="12"
-            >
-              <path
-                d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
-              />
-            </svg>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc text-xxs px-1"
+              class="pr-1 prc-Text-Text-9mHv3"
+              title="You're watching the repository."
             >
-              1
+              Updated
             </span>
+            <relative-time
+              datetime="2017-05-20T17:51:57.000Z"
+            >
+              May 20, 2017
+            </relative-time>
           </div>
-        </span>
-        <span
-          class="Label__StyledLabel-sc-1dgcne-0 hTZfGu hover:bg-gitify-notification-pill-hover"
-          title="gitify-app requested changes"
-          variant="secondary"
-        >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
-            data-align="center"
-            data-direction="horizontal"
-            data-gap="none"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
+            class="flex gap-1"
           >
-            <svg
-              aria-hidden="true"
-              class="octicon octicon-file-diff text-gitify-icon-closed"
-              display="inline-block"
-              fill="currentColor"
-              focusable="false"
-              height="12"
-              overflow="visible"
-              style="vertical-align: text-bottom;"
-              viewBox="0 0 16 16"
-              width="12"
+            <button
+              aria-describedby="_r_ID_"
+              type="button"
             >
-              <path
-                d="M1 1.75C1 .784 1.784 0 2.75 0h7.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16H2.75A1.75 1.75 0 0 1 1 14.25Zm1.75-.25a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25V4.664a.25.25 0 0 0-.073-.177l-2.914-2.914a.25.25 0 0 0-.177-.073ZM8 3.25a.75.75 0 0 1 .75.75v1.5h1.5a.75.75 0 0 1 0 1.5h-1.5v1.5a.75.75 0 0 1-1.5 0V7h-1.5a.75.75 0 0 1 0-1.5h1.5V4A.75.75 0 0 1 8 3.25Zm-3 8a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1-.75-.75Z"
-              />
-            </svg>
+              <span
+                class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
+                data-size="small"
+                data-variant="secondary"
+                tabindex="0"
+              >
+                <div
+                  class="prc-Stack-Stack-UQ9k6"
+                  data-align="center"
+                  data-direction="horizontal"
+                  data-gap="none"
+                  data-justify="start"
+                  data-padding="none"
+                  data-wrap="nowrap"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="octicon octicon-check text-gitify-icon-open"
+                    display="inline-block"
+                    fill="currentColor"
+                    focusable="false"
+                    height="12"
+                    overflow="visible"
+                    style="vertical-align: text-bottom;"
+                    viewBox="0 0 16 16"
+                    width="12"
+                  >
+                    <path
+                      d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
+                    />
+                  </svg>
+                  <span
+                    class="text-xxs px-1 prc-Text-Text-9mHv3"
+                  >
+                    1
+                  </span>
+                </div>
+              </span>
+            </button>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc text-xxs px-1"
+              aria-hidden="true"
+              class="prc-TooltipV2-Tooltip-tLeuB"
+              data-direction="s"
+              id="_r_ID_"
+              popover="auto"
+              role="tooltip"
             >
-              1
+              octocat approved these changes
+            </span>
+            <button
+              aria-describedby="_r_ID_"
+              type="button"
+            >
+              <span
+                class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
+                data-size="small"
+                data-variant="secondary"
+                tabindex="0"
+              >
+                <div
+                  class="prc-Stack-Stack-UQ9k6"
+                  data-align="center"
+                  data-direction="horizontal"
+                  data-gap="none"
+                  data-justify="start"
+                  data-padding="none"
+                  data-wrap="nowrap"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="octicon octicon-file-diff text-gitify-icon-closed"
+                    display="inline-block"
+                    fill="currentColor"
+                    focusable="false"
+                    height="12"
+                    overflow="visible"
+                    style="vertical-align: text-bottom;"
+                    viewBox="0 0 16 16"
+                    width="12"
+                  >
+                    <path
+                      d="M1 1.75C1 .784 1.784 0 2.75 0h7.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16H2.75A1.75 1.75 0 0 1 1 14.25Zm1.75-.25a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25V4.664a.25.25 0 0 0-.073-.177l-2.914-2.914a.25.25 0 0 0-.177-.073ZM8 3.25a.75.75 0 0 1 .75.75v1.5h1.5a.75.75 0 0 1 0 1.5h-1.5v1.5a.75.75 0 0 1-1.5 0V7h-1.5a.75.75 0 0 1 0-1.5h1.5V4A.75.75 0 0 1 8 3.25Zm-3 8a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1-.75-.75Z"
+                    />
+                  </svg>
+                  <span
+                    class="text-xxs px-1 prc-Text-Text-9mHv3"
+                  >
+                    1
+                  </span>
+                </div>
+              </span>
+            </button>
+            <span
+              aria-hidden="true"
+              class="prc-TooltipV2-Tooltip-tLeuB"
+              data-direction="s"
+              id="_r_ID_"
+              popover="auto"
+              role="tooltip"
+            >
+              gitify-app requested changes
             </span>
           </div>
-        </span>
+        </div>
       </div>
     </div>
   </div>,
@@ -1017,617 +1265,362 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
   "baseElement": <body>
     <div>
       <div
-        class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-xs opacity-80"
-        data-align="center"
-        data-direction="horizontal"
-        data-gap="condensed"
-        data-justify="start"
-        data-padding="none"
-        data-wrap="wrap"
+        data-color-mode="light"
+        data-dark-theme="dark"
+        data-light-theme="light"
       >
         <div
-          class="Box-sc-g0xbh4-0"
-          data-testid="view-profile"
-          title="gitify-app"
+          class="prc-src-BaseStyles-aopSS"
+          data-portal-root="true"
         >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+            class="text-xs opacity-80 prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-direction="horizontal"
             data-gap="condensed"
             data-justify="start"
             data-padding="none"
-            data-testid="avatar"
-            data-wrap="nowrap"
+            data-wrap="wrap"
           >
-            <img
-              alt="gitify-app"
-              class="Avatar__StyledAvatar-sc-2lv0r8-0 fNmquh"
-              data-component="Avatar"
-              height="14"
-              size="14"
-              src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-              sx="[object Object]"
-              width="14"
-            />
+            <button
+              data-testid="view-profile"
+              title="gitify-app"
+              type="button"
+            >
+              <div
+                class="prc-Stack-Stack-UQ9k6"
+                data-align="center"
+                data-direction="horizontal"
+                data-gap="condensed"
+                data-justify="start"
+                data-padding="none"
+                data-testid="avatar"
+                data-wrap="nowrap"
+              >
+                <img
+                  alt="gitify-app"
+                  class="prc-Avatar-Avatar-0xaUi"
+                  data-component="Avatar"
+                  height="14"
+                  src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+                  style="--avatarSize-regular: 14px;"
+                  width="14"
+                />
+              </div>
+            </button>
+            <div
+              class="prc-Stack-Stack-UQ9k6"
+              data-align="stretch"
+              data-direction="horizontal"
+              data-gap="none"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+            >
+              <span
+                class="pr-1 prc-Text-Text-9mHv3"
+                title="You're watching the repository."
+              >
+                Updated
+              </span>
+              <relative-time
+                datetime="2017-05-20T17:51:57.000Z"
+              >
+                May 20, 2017
+              </relative-time>
+            </div>
+            <div
+              class="flex gap-1"
+            >
+              <button
+                aria-describedby="_r_ID_"
+                type="button"
+              >
+                <span
+                  class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
+                  data-size="small"
+                  data-variant="secondary"
+                  tabindex="0"
+                >
+                  <div
+                    class="prc-Stack-Stack-UQ9k6"
+                    data-align="center"
+                    data-direction="horizontal"
+                    data-gap="none"
+                    data-justify="start"
+                    data-padding="none"
+                    data-wrap="nowrap"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      class="octicon octicon-check text-gitify-icon-open"
+                      display="inline-block"
+                      fill="currentColor"
+                      focusable="false"
+                      height="12"
+                      overflow="visible"
+                      style="vertical-align: text-bottom;"
+                      viewBox="0 0 16 16"
+                      width="12"
+                    >
+                      <path
+                        d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
+                      />
+                    </svg>
+                    <span
+                      class="text-xxs px-1 prc-Text-Text-9mHv3"
+                    >
+                      1
+                    </span>
+                  </div>
+                </span>
+              </button>
+              <span
+                aria-hidden="true"
+                class="prc-TooltipV2-Tooltip-tLeuB"
+                data-direction="s"
+                id="_r_ID_"
+                popover="auto"
+                role="tooltip"
+              >
+                octocat approved these changes
+              </span>
+              <button
+                aria-describedby="_r_ID_"
+                type="button"
+              >
+                <span
+                  class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
+                  data-size="small"
+                  data-variant="secondary"
+                  tabindex="0"
+                >
+                  <div
+                    class="prc-Stack-Stack-UQ9k6"
+                    data-align="center"
+                    data-direction="horizontal"
+                    data-gap="none"
+                    data-justify="start"
+                    data-padding="none"
+                    data-wrap="nowrap"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      class="octicon octicon-file-diff text-gitify-icon-closed"
+                      display="inline-block"
+                      fill="currentColor"
+                      focusable="false"
+                      height="12"
+                      overflow="visible"
+                      style="vertical-align: text-bottom;"
+                      viewBox="0 0 16 16"
+                      width="12"
+                    >
+                      <path
+                        d="M1 1.75C1 .784 1.784 0 2.75 0h7.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16H2.75A1.75 1.75 0 0 1 1 14.25Zm1.75-.25a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25V4.664a.25.25 0 0 0-.073-.177l-2.914-2.914a.25.25 0 0 0-.177-.073ZM8 3.25a.75.75 0 0 1 .75.75v1.5h1.5a.75.75 0 0 1 0 1.5h-1.5v1.5a.75.75 0 0 1-1.5 0V7h-1.5a.75.75 0 0 1 0-1.5h1.5V4A.75.75 0 0 1 8 3.25Zm-3 8a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1-.75-.75Z"
+                      />
+                    </svg>
+                    <span
+                      class="text-xxs px-1 prc-Text-Text-9mHv3"
+                    >
+                      1
+                    </span>
+                  </div>
+                </span>
+              </button>
+              <span
+                aria-hidden="true"
+                class="prc-TooltipV2-Tooltip-tLeuB"
+                data-direction="s"
+                id="_r_ID_"
+                popover="auto"
+                role="tooltip"
+              >
+                gitify-app requested changes
+              </span>
+            </div>
           </div>
-        </div>
-        <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
-          data-align="stretch"
-          data-direction="horizontal"
-          data-gap="none"
-          data-justify="start"
-          data-padding="none"
-          data-wrap="nowrap"
-        >
-          <span
-            class="Text-sc-17v1xeu-0 ezOLpc pr-1"
-            title="You're watching the repository."
-          >
-            Updated
-          </span>
-          <relative-time
-            class="sc-bRKDuR"
-            datetime="2017-05-20T17:51:57.000Z"
-          >
-            May 20, 2017
-          </relative-time>
-        </div>
-        <div
-          class="Box-sc-g0xbh4-0 flex gap-1"
-        >
-          <span
-            class="Label__StyledLabel-sc-1dgcne-0 hTZfGu hover:bg-gitify-notification-pill-hover"
-            title="octocat approved these changes"
-            variant="secondary"
-          >
-            <div
-              class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
-              data-align="center"
-              data-direction="horizontal"
-              data-gap="none"
-              data-justify="start"
-              data-padding="none"
-              data-wrap="nowrap"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-check text-gitify-icon-open"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="12"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="12"
-              >
-                <path
-                  d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
-                />
-              </svg>
-              <span
-                class="Text-sc-17v1xeu-0 ezOLpc text-xxs px-1"
-              >
-                1
-              </span>
-            </div>
-          </span>
-          <span
-            class="Label__StyledLabel-sc-1dgcne-0 hTZfGu hover:bg-gitify-notification-pill-hover"
-            title="gitify-app requested changes"
-            variant="secondary"
-          >
-            <div
-              class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
-              data-align="center"
-              data-direction="horizontal"
-              data-gap="none"
-              data-justify="start"
-              data-padding="none"
-              data-wrap="nowrap"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-file-diff text-gitify-icon-closed"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="12"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="12"
-              >
-                <path
-                  d="M1 1.75C1 .784 1.784 0 2.75 0h7.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16H2.75A1.75 1.75 0 0 1 1 14.25Zm1.75-.25a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25V4.664a.25.25 0 0 0-.073-.177l-2.914-2.914a.25.25 0 0 0-.177-.073ZM8 3.25a.75.75 0 0 1 .75.75v1.5h1.5a.75.75 0 0 1 0 1.5h-1.5v1.5a.75.75 0 0 1-1.5 0V7h-1.5a.75.75 0 0 1 0-1.5h1.5V4A.75.75 0 0 1 8 3.25Zm-3 8a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1-.75-.75Z"
-                />
-              </svg>
-              <span
-                class="Text-sc-17v1xeu-0 ezOLpc text-xxs px-1"
-              >
-                1
-              </span>
-            </div>
-          </span>
         </div>
       </div>
     </div>
   </body>,
   "container": <div>
     <div
-      class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-xs opacity-80"
-      data-align="center"
-      data-direction="horizontal"
-      data-gap="condensed"
-      data-justify="start"
-      data-padding="none"
-      data-wrap="wrap"
+      data-color-mode="light"
+      data-dark-theme="dark"
+      data-light-theme="light"
     >
       <div
-        class="Box-sc-g0xbh4-0"
-        data-testid="view-profile"
-        title="gitify-app"
+        class="prc-src-BaseStyles-aopSS"
+        data-portal-root="true"
       >
         <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+          class="text-xs opacity-80 prc-Stack-Stack-UQ9k6"
           data-align="center"
           data-direction="horizontal"
           data-gap="condensed"
           data-justify="start"
           data-padding="none"
-          data-testid="avatar"
-          data-wrap="nowrap"
+          data-wrap="wrap"
         >
-          <img
-            alt="gitify-app"
-            class="Avatar__StyledAvatar-sc-2lv0r8-0 fNmquh"
-            data-component="Avatar"
-            height="14"
-            size="14"
-            src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-            sx="[object Object]"
-            width="14"
-          />
-        </div>
-      </div>
-      <div
-        class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
-        data-align="stretch"
-        data-direction="horizontal"
-        data-gap="none"
-        data-justify="start"
-        data-padding="none"
-        data-wrap="nowrap"
-      >
-        <span
-          class="Text-sc-17v1xeu-0 ezOLpc pr-1"
-          title="You're watching the repository."
-        >
-          Updated
-        </span>
-        <relative-time
-          class="sc-bRKDuR"
-          datetime="2017-05-20T17:51:57.000Z"
-        >
-          May 20, 2017
-        </relative-time>
-      </div>
-      <div
-        class="Box-sc-g0xbh4-0 flex gap-1"
-      >
-        <span
-          class="Label__StyledLabel-sc-1dgcne-0 hTZfGu hover:bg-gitify-notification-pill-hover"
-          title="octocat approved these changes"
-          variant="secondary"
-        >
-          <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
-            data-align="center"
-            data-direction="horizontal"
-            data-gap="none"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
-          >
-            <svg
-              aria-hidden="true"
-              class="octicon octicon-check text-gitify-icon-open"
-              display="inline-block"
-              fill="currentColor"
-              focusable="false"
-              height="12"
-              overflow="visible"
-              style="vertical-align: text-bottom;"
-              viewBox="0 0 16 16"
-              width="12"
-            >
-              <path
-                d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
-              />
-            </svg>
-            <span
-              class="Text-sc-17v1xeu-0 ezOLpc text-xxs px-1"
-            >
-              1
-            </span>
-          </div>
-        </span>
-        <span
-          class="Label__StyledLabel-sc-1dgcne-0 hTZfGu hover:bg-gitify-notification-pill-hover"
-          title="gitify-app requested changes"
-          variant="secondary"
-        >
-          <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
-            data-align="center"
-            data-direction="horizontal"
-            data-gap="none"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
-          >
-            <svg
-              aria-hidden="true"
-              class="octicon octicon-file-diff text-gitify-icon-closed"
-              display="inline-block"
-              fill="currentColor"
-              focusable="false"
-              height="12"
-              overflow="visible"
-              style="vertical-align: text-bottom;"
-              viewBox="0 0 16 16"
-              width="12"
-            >
-              <path
-                d="M1 1.75C1 .784 1.784 0 2.75 0h7.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16H2.75A1.75 1.75 0 0 1 1 14.25Zm1.75-.25a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25V4.664a.25.25 0 0 0-.073-.177l-2.914-2.914a.25.25 0 0 0-.177-.073ZM8 3.25a.75.75 0 0 1 .75.75v1.5h1.5a.75.75 0 0 1 0 1.5h-1.5v1.5a.75.75 0 0 1-1.5 0V7h-1.5a.75.75 0 0 1 0-1.5h1.5V4A.75.75 0 0 1 8 3.25Zm-3 8a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1-.75-.75Z"
-              />
-            </svg>
-            <span
-              class="Text-sc-17v1xeu-0 ezOLpc text-xxs px-1"
-            >
-              1
-            </span>
-          </div>
-        </span>
-      </div>
-    </div>
-  </div>,
-  "debug": [Function],
-  "findAllByAltText": [Function],
-  "findAllByDisplayValue": [Function],
-  "findAllByLabelText": [Function],
-  "findAllByPlaceholderText": [Function],
-  "findAllByRole": [Function],
-  "findAllByTestId": [Function],
-  "findAllByText": [Function],
-  "findAllByTitle": [Function],
-  "findByAltText": [Function],
-  "findByDisplayValue": [Function],
-  "findByLabelText": [Function],
-  "findByPlaceholderText": [Function],
-  "findByRole": [Function],
-  "findByTestId": [Function],
-  "findByText": [Function],
-  "findByTitle": [Function],
-  "getAllByAltText": [Function],
-  "getAllByDisplayValue": [Function],
-  "getAllByLabelText": [Function],
-  "getAllByPlaceholderText": [Function],
-  "getAllByRole": [Function],
-  "getAllByTestId": [Function],
-  "getAllByText": [Function],
-  "getAllByTitle": [Function],
-  "getByAltText": [Function],
-  "getByDisplayValue": [Function],
-  "getByLabelText": [Function],
-  "getByPlaceholderText": [Function],
-  "getByRole": [Function],
-  "getByTestId": [Function],
-  "getByText": [Function],
-  "getByTitle": [Function],
-  "queryAllByAltText": [Function],
-  "queryAllByDisplayValue": [Function],
-  "queryAllByLabelText": [Function],
-  "queryAllByPlaceholderText": [Function],
-  "queryAllByRole": [Function],
-  "queryAllByTestId": [Function],
-  "queryAllByText": [Function],
-  "queryAllByTitle": [Function],
-  "queryByAltText": [Function],
-  "queryByDisplayValue": [Function],
-  "queryByLabelText": [Function],
-  "queryByPlaceholderText": [Function],
-  "queryByRole": [Function],
-  "queryByTestId": [Function],
-  "queryByText": [Function],
-  "queryByTitle": [Function],
-  "rerender": [Function],
-  "unmount": [Function],
-}
-`;
-
-exports[`renderer/components/notifications/NotificationFooter.tsx should render itself & its children when last_read_at is null 1`] = `
-{
-  "asFragment": [Function],
-  "baseElement": <body>
-    <div>
-      <div
-        class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-xs opacity-80"
-        data-align="center"
-        data-direction="horizontal"
-        data-gap="condensed"
-        data-justify="start"
-        data-padding="none"
-        data-wrap="wrap"
-      >
-        <div
-          class="Box-sc-g0xbh4-0"
-          data-testid="view-profile"
-          title="gitify-app"
-        >
-          <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
-            data-align="center"
-            data-direction="horizontal"
-            data-gap="condensed"
-            data-justify="start"
-            data-padding="none"
-            data-testid="avatar"
-            data-wrap="nowrap"
-          >
-            <img
-              alt="gitify-app"
-              class="Avatar__StyledAvatar-sc-2lv0r8-0 fNmquh"
-              data-component="Avatar"
-              height="14"
-              size="14"
-              src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-              sx="[object Object]"
-              width="14"
-            />
-          </div>
-        </div>
-        <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
-          data-align="stretch"
-          data-direction="horizontal"
-          data-gap="none"
-          data-justify="start"
-          data-padding="none"
-          data-wrap="nowrap"
-        >
-          <span
-            class="Text-sc-17v1xeu-0 ezOLpc pr-1"
-            title="You're watching the repository."
-          >
-            Updated
-          </span>
-          <relative-time
-            class="sc-bRKDuR"
-            datetime="2017-05-20T17:51:57.000Z"
-          >
-            May 20, 2017
-          </relative-time>
-        </div>
-        <div
-          class="Box-sc-g0xbh4-0 flex gap-1"
-        >
-          <span
-            class="Label__StyledLabel-sc-1dgcne-0 hTZfGu hover:bg-gitify-notification-pill-hover"
-            title="octocat approved these changes"
-            variant="secondary"
+          <button
+            data-testid="view-profile"
+            title="gitify-app"
+            type="button"
           >
             <div
-              class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
+              class="prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
-              data-gap="none"
+              data-gap="condensed"
               data-justify="start"
               data-padding="none"
+              data-testid="avatar"
               data-wrap="nowrap"
             >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-check text-gitify-icon-open"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="12"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="12"
-              >
-                <path
-                  d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
-                />
-              </svg>
-              <span
-                class="Text-sc-17v1xeu-0 ezOLpc text-xxs px-1"
-              >
-                1
-              </span>
+              <img
+                alt="gitify-app"
+                class="prc-Avatar-Avatar-0xaUi"
+                data-component="Avatar"
+                height="14"
+                src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+                style="--avatarSize-regular: 14px;"
+                width="14"
+              />
             </div>
-          </span>
-          <span
-            class="Label__StyledLabel-sc-1dgcne-0 hTZfGu hover:bg-gitify-notification-pill-hover"
-            title="gitify-app requested changes"
-            variant="secondary"
-          >
-            <div
-              class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
-              data-align="center"
-              data-direction="horizontal"
-              data-gap="none"
-              data-justify="start"
-              data-padding="none"
-              data-wrap="nowrap"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-file-diff text-gitify-icon-closed"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="12"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="12"
-              >
-                <path
-                  d="M1 1.75C1 .784 1.784 0 2.75 0h7.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16H2.75A1.75 1.75 0 0 1 1 14.25Zm1.75-.25a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25V4.664a.25.25 0 0 0-.073-.177l-2.914-2.914a.25.25 0 0 0-.177-.073ZM8 3.25a.75.75 0 0 1 .75.75v1.5h1.5a.75.75 0 0 1 0 1.5h-1.5v1.5a.75.75 0 0 1-1.5 0V7h-1.5a.75.75 0 0 1 0-1.5h1.5V4A.75.75 0 0 1 8 3.25Zm-3 8a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1-.75-.75Z"
-                />
-              </svg>
-              <span
-                class="Text-sc-17v1xeu-0 ezOLpc text-xxs px-1"
-              >
-                1
-              </span>
-            </div>
-          </span>
-        </div>
-      </div>
-    </div>
-  </body>,
-  "container": <div>
-    <div
-      class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ text-xs opacity-80"
-      data-align="center"
-      data-direction="horizontal"
-      data-gap="condensed"
-      data-justify="start"
-      data-padding="none"
-      data-wrap="wrap"
-    >
-      <div
-        class="Box-sc-g0xbh4-0"
-        data-testid="view-profile"
-        title="gitify-app"
-      >
-        <div
-          class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
-          data-align="center"
-          data-direction="horizontal"
-          data-gap="condensed"
-          data-justify="start"
-          data-padding="none"
-          data-testid="avatar"
-          data-wrap="nowrap"
-        >
-          <img
-            alt="gitify-app"
-            class="Avatar__StyledAvatar-sc-2lv0r8-0 fNmquh"
-            data-component="Avatar"
-            height="14"
-            size="14"
-            src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-            sx="[object Object]"
-            width="14"
-          />
-        </div>
-      </div>
-      <div
-        class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
-        data-align="stretch"
-        data-direction="horizontal"
-        data-gap="none"
-        data-justify="start"
-        data-padding="none"
-        data-wrap="nowrap"
-      >
-        <span
-          class="Text-sc-17v1xeu-0 ezOLpc pr-1"
-          title="You're watching the repository."
-        >
-          Updated
-        </span>
-        <relative-time
-          class="sc-bRKDuR"
-          datetime="2017-05-20T17:51:57.000Z"
-        >
-          May 20, 2017
-        </relative-time>
-      </div>
-      <div
-        class="Box-sc-g0xbh4-0 flex gap-1"
-      >
-        <span
-          class="Label__StyledLabel-sc-1dgcne-0 hTZfGu hover:bg-gitify-notification-pill-hover"
-          title="octocat approved these changes"
-          variant="secondary"
-        >
+          </button>
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
-            data-align="center"
+            class="prc-Stack-Stack-UQ9k6"
+            data-align="stretch"
             data-direction="horizontal"
             data-gap="none"
             data-justify="start"
             data-padding="none"
             data-wrap="nowrap"
           >
-            <svg
-              aria-hidden="true"
-              class="octicon octicon-check text-gitify-icon-open"
-              display="inline-block"
-              fill="currentColor"
-              focusable="false"
-              height="12"
-              overflow="visible"
-              style="vertical-align: text-bottom;"
-              viewBox="0 0 16 16"
-              width="12"
-            >
-              <path
-                d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
-              />
-            </svg>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc text-xxs px-1"
+              class="pr-1 prc-Text-Text-9mHv3"
+              title="You're watching the repository."
             >
-              1
+              Updated
             </span>
+            <relative-time
+              datetime="2017-05-20T17:51:57.000Z"
+            >
+              May 20, 2017
+            </relative-time>
           </div>
-        </span>
-        <span
-          class="Label__StyledLabel-sc-1dgcne-0 hTZfGu hover:bg-gitify-notification-pill-hover"
-          title="gitify-app requested changes"
-          variant="secondary"
-        >
           <div
-            class="Stack__StyledStack-sc-x3xa2i-0 kzRZTJ"
-            data-align="center"
-            data-direction="horizontal"
-            data-gap="none"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
+            class="flex gap-1"
           >
-            <svg
-              aria-hidden="true"
-              class="octicon octicon-file-diff text-gitify-icon-closed"
-              display="inline-block"
-              fill="currentColor"
-              focusable="false"
-              height="12"
-              overflow="visible"
-              style="vertical-align: text-bottom;"
-              viewBox="0 0 16 16"
-              width="12"
+            <button
+              aria-describedby="_r_ID_"
+              type="button"
             >
-              <path
-                d="M1 1.75C1 .784 1.784 0 2.75 0h7.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16H2.75A1.75 1.75 0 0 1 1 14.25Zm1.75-.25a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25V4.664a.25.25 0 0 0-.073-.177l-2.914-2.914a.25.25 0 0 0-.177-.073ZM8 3.25a.75.75 0 0 1 .75.75v1.5h1.5a.75.75 0 0 1 0 1.5h-1.5v1.5a.75.75 0 0 1-1.5 0V7h-1.5a.75.75 0 0 1 0-1.5h1.5V4A.75.75 0 0 1 8 3.25Zm-3 8a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1-.75-.75Z"
-              />
-            </svg>
+              <span
+                class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
+                data-size="small"
+                data-variant="secondary"
+                tabindex="0"
+              >
+                <div
+                  class="prc-Stack-Stack-UQ9k6"
+                  data-align="center"
+                  data-direction="horizontal"
+                  data-gap="none"
+                  data-justify="start"
+                  data-padding="none"
+                  data-wrap="nowrap"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="octicon octicon-check text-gitify-icon-open"
+                    display="inline-block"
+                    fill="currentColor"
+                    focusable="false"
+                    height="12"
+                    overflow="visible"
+                    style="vertical-align: text-bottom;"
+                    viewBox="0 0 16 16"
+                    width="12"
+                  >
+                    <path
+                      d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
+                    />
+                  </svg>
+                  <span
+                    class="text-xxs px-1 prc-Text-Text-9mHv3"
+                  >
+                    1
+                  </span>
+                </div>
+              </span>
+            </button>
             <span
-              class="Text-sc-17v1xeu-0 ezOLpc text-xxs px-1"
+              aria-hidden="true"
+              class="prc-TooltipV2-Tooltip-tLeuB"
+              data-direction="s"
+              id="_r_ID_"
+              popover="auto"
+              role="tooltip"
             >
-              1
+              octocat approved these changes
+            </span>
+            <button
+              aria-describedby="_r_ID_"
+              type="button"
+            >
+              <span
+                class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
+                data-size="small"
+                data-variant="secondary"
+                tabindex="0"
+              >
+                <div
+                  class="prc-Stack-Stack-UQ9k6"
+                  data-align="center"
+                  data-direction="horizontal"
+                  data-gap="none"
+                  data-justify="start"
+                  data-padding="none"
+                  data-wrap="nowrap"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="octicon octicon-file-diff text-gitify-icon-closed"
+                    display="inline-block"
+                    fill="currentColor"
+                    focusable="false"
+                    height="12"
+                    overflow="visible"
+                    style="vertical-align: text-bottom;"
+                    viewBox="0 0 16 16"
+                    width="12"
+                  >
+                    <path
+                      d="M1 1.75C1 .784 1.784 0 2.75 0h7.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16H2.75A1.75 1.75 0 0 1 1 14.25Zm1.75-.25a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25V4.664a.25.25 0 0 0-.073-.177l-2.914-2.914a.25.25 0 0 0-.177-.073ZM8 3.25a.75.75 0 0 1 .75.75v1.5h1.5a.75.75 0 0 1 0 1.5h-1.5v1.5a.75.75 0 0 1-1.5 0V7h-1.5a.75.75 0 0 1 0-1.5h1.5V4A.75.75 0 0 1 8 3.25Zm-3 8a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1-.75-.75Z"
+                    />
+                  </svg>
+                  <span
+                    class="text-xxs px-1 prc-Text-Text-9mHv3"
+                  >
+                    1
+                  </span>
+                </div>
+              </span>
+            </button>
+            <span
+              aria-hidden="true"
+              class="prc-TooltipV2-Tooltip-tLeuB"
+              data-direction="s"
+              id="_r_ID_"
+              popover="auto"
+              role="tooltip"
+            >
+              gitify-app requested changes
             </span>
           </div>
-        </span>
+        </div>
       </div>
     </div>
   </div>,

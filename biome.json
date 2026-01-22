@@ -1,5 +1,8 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.2.0/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.3.11/schema.json",
+  "files": {
+    "includes": ["**", "!**/generated/**/*"]
+  },
   "assist": {
     "actions": {
       "source": {
@@ -17,10 +20,28 @@
               ":BLANK_LINE:",
               ":PACKAGE:",
               ":BLANK_LINE:",
+              ["**/__mocks__/**", "**/__helpers__/**"],
+              ":BLANK_LINE:",
+              "**/shared/**",
+              ":BLANK_LINE:",
+              ["**/constants", "**/constants/**"],
+              ":BLANK_LINE:",
+              ["**/context/**", "**/hooks/**", "**/routes/**"],
+              ":BLANK_LINE:",
+              [
+                "**/layout/**",
+                "**/components/**",
+                "**/fields/**",
+                "**/primitives/**"
+              ],
+              ":BLANK_LINE:",
+              "**/types",
+              ":BLANK_LINE:",
               "**"
             ]
           }
-        }
+        },
+        "useSortedAttributes": "on"
       }
     }
   },
@@ -41,15 +62,21 @@
         "useExhaustiveDependencies": {
           "level": "warn",
           "options": {
-            "hooks": [{ "name": "useNavigate", "stableResult": true }]
+            "hooks": [
+              {
+                "name": "useNavigate",
+                "stableResult": true
+              }
+            ]
           }
         },
-        "useUniqueElementIds": "warn"
+        "useUniqueElementIds": "off"
       },
       "style": {
         "useDefaultSwitchClause": "error",
         "noParameterAssign": "error",
         "useAsConstAssertion": "error",
+        "useBlockStatements": "error",
         "useDefaultParameterLast": "error",
         "useEnumInitializers": "error",
         "useSelfClosingElements": "error",
@@ -65,15 +92,18 @@
       }
     }
   },
-  "vcs": {
-    "enabled": true,
-    "clientKind": "git",
-    "useIgnoreFile": true
-  },
   "formatter": {
     "enabled": true,
     "indentStyle": "space",
     "indentWidth": 2
+  },
+  "css": {
+    "formatter": {
+      "enabled": true
+    },
+    "parser": {
+      "tailwindDirectives": true
+    }
   },
   "javascript": {
     "formatter": {
@@ -85,5 +115,10 @@
     "parser": {
       "allowComments": true
     }
+  },
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
   }
 }

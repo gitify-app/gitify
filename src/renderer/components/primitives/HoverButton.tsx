@@ -3,7 +3,7 @@ import type { FC } from 'react';
 import type { Icon } from '@primer/octicons-react';
 import { IconButton } from '@primer/react';
 
-interface IHoverButton {
+interface HoverButtonProps {
   label: string;
   icon: Icon;
   enabled?: boolean;
@@ -11,24 +11,24 @@ interface IHoverButton {
   action: () => void;
 }
 
-export const HoverButton: FC<IHoverButton> = ({
+export const HoverButton: FC<HoverButtonProps> = ({
   enabled = true,
   ...props
-}: IHoverButton) => {
+}: HoverButtonProps) => {
   return (
     enabled && (
       <IconButton
         aria-label={props.label}
-        unsafeDisableTooltip={true}
-        title={props.label}
+        data-testid={props.testid}
         icon={props.icon}
-        size="small"
-        variant="invisible"
         onClick={(event) => {
           event.stopPropagation();
           props.action();
         }}
-        data-testid={props.testid}
+        size="small"
+        title={props.label}
+        unsafeDisableTooltip={true}
+        variant="invisible"
       />
     )
   );

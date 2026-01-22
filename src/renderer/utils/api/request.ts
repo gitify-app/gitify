@@ -1,113 +1,187 @@
-import axios, {
-  type AxiosPromise,
-  type AxiosResponse,
-  type Method,
-} from 'axios';
+import axios, { type AxiosResponse, type Method } from 'axios';
 
-import { logError, logWarn } from '../../../shared/logger';
 import type { Link, Token } from '../../types';
+import type { GitHubGraphQLResponse } from './graphql/types';
+
 import { decryptValue } from '../comms';
+import { rendererLogError } from '../logger';
+import { assertNoGraphQLErrors } from './errors';
+import type { TypedDocumentString } from './graphql/generated/graphql';
 import { getNextURLFromLinkHeader } from './utils';
 
 /**
- * Perform an unauthenticated API request
+ * Perform an authenticated REST API request
  *
- * @param url
- * @param method
- * @param data
- * @returns
+ * @param method The REST http method
+ * @param url The API url
+ * @param token A GitHub token (decrypted)
+ * @param data The API request body
+ * @param fetchAllRecords Whether to fetch all records or just the first page
+ * @returns Resolves to a GitHub REST response with the specified type
  */
-export function apiRequest(
-  url: Link,
+export async function performAuthenticatedRESTRequest<TResult>(
   method: Method,
-  data = {},
-): AxiosPromise | null {
-  axios.defaults.headers.common.Accept = 'application/json';
-  axios.defaults.headers.common['Content-Type'] = 'application/json';
-  axios.defaults.headers.common['Cache-Control'] = 'no-cache';
-  return axios({ method, url, data });
-}
-
-/**
- * Perform an authenticated API request
- *
- * @param url
- * @param method
- * @param token
- * @param data
- * @param fetchAllRecords whether to fetch all records or just the first page
- * @returns
- */
-export async function apiRequestAuth(
   url: Link,
-  method: Method,
   token: Token,
-  data = {},
+  data: Record<string, unknown> = {},
   fetchAllRecords = false,
-): AxiosPromise | null {
-  let apiToken = token;
-  // TODO - Remove this try-catch block in a future release
-  try {
-    apiToken = (await decryptValue(token)) as Token;
-  } catch (err) {
-    logWarn('apiRequestAuth', 'Token is not yet encrypted');
-  }
-
-  axios.defaults.headers.common.Accept = 'application/json';
-  axios.defaults.headers.common.Authorization = `token ${apiToken}`;
-  axios.defaults.headers.common['Content-Type'] = 'application/json';
-  axios.defaults.headers.common['Cache-Control'] = shouldRequestWithNoCache(url)
-    ? 'no-cache'
-    : '';
+): Promise<AxiosResponse<TResult>> {
+  const headers = await getHeaders(url, token);
 
   if (!fetchAllRecords) {
-    return axios({ method, url, data });
+    return axios({ method, url, data, headers });
   }
 
-  let response: AxiosResponse | null = null;
-  let combinedData = [];
+  let response: AxiosResponse<TResult> | null = null;
+  let combinedData: unknown[] = [];
 
   try {
     let nextUrl: string | null = url;
 
     while (nextUrl) {
-      response = await axios({ method, url: nextUrl, data });
+      response = await axios({ method, url: nextUrl, data, headers });
 
       // If no data is returned, break the loop
       if (!response?.data) {
         break;
       }
 
-      combinedData = combinedData.concat(response.data); // Accumulate data
+      // Accumulate paginated array results
+      combinedData = combinedData.concat(response.data);
 
       nextUrl = getNextURLFromLinkHeader(response);
     }
   } catch (err) {
-    logError('apiRequestAuth', 'API request failed:', err);
+    rendererLogError(
+      'performAuthenticatedRESTRequest',
+      'API request failed:',
+      err,
+    );
 
     throw err;
   }
 
-  return {
-    ...response,
-    data: combinedData,
-  } as AxiosResponse;
+  // Return a response object with the combined array of records as data
+  response.data = combinedData as TResult;
+  return response;
 }
 
 /**
- * Return true if the request should be made with no-cache
+ * Perform a GraphQL API request with typed operation document
  *
- * @param url
- * @returns boolean
+ * @param url The API url
+ * @param query The GraphQL operation/query statement
+ * @param variables The GraphQL operation variables
+ * @returns Resolves to a GitHub GraphQL response
  */
-function shouldRequestWithNoCache(url: string) {
+export async function performGraphQLRequest<TResult, TVariables>(
+  url: Link,
+  token: Token,
+  query: TypedDocumentString<TResult, TVariables>,
+  ...[variables]: TVariables extends Record<string, never> ? [] : [TVariables]
+): Promise<GitHubGraphQLResponse<TResult>> {
+  const headers = await getHeaders(url, token);
+
+  return axios({
+    method: 'POST',
+    url,
+    data: {
+      query,
+      variables,
+    },
+    headers: headers,
+  }).then((response) => {
+    assertNoGraphQLErrors<TResult>('performGraphQLRequest', response.data);
+
+    return {
+      ...response.data,
+      headers: response.headers,
+    };
+  }) as Promise<GitHubGraphQLResponse<TResult>>;
+}
+
+/**
+ * Perform a GraphQL API request using a raw query string instead of a TypedDocumentString.
+ *
+ * Useful for dynamically composed queries (e.g: merged queries built at runtime).
+ *
+ * @param url The API url
+ * @param token The GitHub token (decrypted)
+ * @param query The GraphQL operation/query statement
+ * @param variables The GraphQL operation variables
+ * @returns Resolves to a GitHub GraphQL response
+ */
+export async function performGraphQLRequestString<TResult>(
+  url: Link,
+  token: Token,
+  query: string,
+  variables?: Record<string, unknown>,
+): Promise<GitHubGraphQLResponse<TResult>> {
+  const headers = await getHeaders(url, token);
+
+  return axios({
+    method: 'POST',
+    url,
+    data: {
+      query,
+      variables,
+    },
+    headers: headers,
+  }).then((response) => {
+    assertNoGraphQLErrors<TResult>(
+      'performGraphQLRequestString',
+      response.data,
+    );
+
+    return {
+      ...response.data,
+      headers: response.headers,
+    } as GitHubGraphQLResponse<TResult>;
+  });
+}
+
+/**
+ * Determine if the API request should be made with no-cache header
+ * based on the API url path
+ *
+ * @param url The API url
+ * @returns Whether a cache heading should be set or not
+ */
+export function shouldRequestWithNoCache(url: Link): boolean {
   const parsedUrl = new URL(url);
 
   switch (parsedUrl.pathname) {
-    case '/notifications':
     case '/api/v3/notifications':
+    case '/login/oauth/access_token':
+    case '/notifications':
       return true;
     default:
       return false;
   }
+}
+
+/**
+ * Construct headers for API requests
+ *
+ * @param username A GitHub account username
+ * @param token A GitHub token (decrypted)
+ * @returns A headers object to use with API requests
+ */
+export async function getHeaders(
+  url: Link,
+  token?: Token,
+): Promise<Record<string, string>> {
+  const headers: Record<string, string> = {
+    Accept: 'application/json',
+    'Cache-Control': shouldRequestWithNoCache(url) ? 'no-cache' : '',
+    'Content-Type': 'application/json',
+  };
+
+  if (token) {
+    const decryptedToken = (await decryptValue(token)) as Token;
+
+    headers.Authorization = `token ${decryptedToken}`;
+  }
+
+  return headers;
 }

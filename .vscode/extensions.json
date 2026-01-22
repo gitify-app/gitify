@@ -1,3 +1,9 @@
 {
-  "recommendations": ["biomejs.biome", "bradlc.vscode-tailwindcss"]
+  "recommendations": [
+    "biomejs.biome",
+    "bradlc.vscode-tailwindcss",
+    "GraphQL.vscode-graphql",
+    "GraphQL.vscode-graphql-syntax",
+    "SonarSource.sonarlint-vscode"
+  ]
 }

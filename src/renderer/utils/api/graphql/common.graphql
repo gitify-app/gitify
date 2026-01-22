@@ -1,0 +1,11 @@
+fragment AuthorFields on Actor {
+  login
+  htmlUrl: url
+  avatarUrl: avatarUrl
+  type: __typename
+}
+
+fragment MilestoneFields on Milestone {
+  state
+  title
+}

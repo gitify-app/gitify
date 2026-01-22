@@ -43,19 +43,19 @@ For more information, see [LICENSE](LICENSE).
 [brew]: https://brew.sh/
 [homebrew-cask]: https://formulae.brew.sh/cask/gitify
 
-[coverage-badge]: https://img.shields.io/sonar/coverage/gitify-app_gitify?server=https%3A%2F%2Fsonarcloud.io&logo=sonarcloud
+[coverage-badge]: https://img.shields.io/sonar/coverage/gitify-app_gitify?server=https%3A%2F%2Fsonarcloud.io&logo=sonarqubecloud
 [coverage]: https://sonarcloud.io/summary/new_code?id=gitify-app_gitify
-[quality-badge]: https://img.shields.io/sonar/quality_gate/gitify-app_gitify?server=https%3A%2F%2Fsonarcloud.io&logo=sonarcloud
+[quality-badge]: https://img.shields.io/sonar/quality_gate/gitify-app_gitify?server=https%3A%2F%2Fsonarcloud.io&logo=sonarqubecloud
 [quality]: https://sonarcloud.io/summary/new_code?id=gitify-app_gitify
 
-[ci-workflow-badge]: https://github.com/gitify-app/gitify/actions/workflows/ci.yml/badge.svg
-[release-workflow-badge]: https://github.com/gitify-app/gitify/actions/workflows/release.yml/badge.svg
+[ci-workflow-badge]: https://img.shields.io/github/actions/workflow/status/gitify-app/gitify/ci.yml?logo=github&label=CI
+[release-workflow-badge]: https://img.shields.io/github/actions/workflow/status/gitify-app/gitify/release.yml?logo=github&label=Release
 [downloads-total-badge]: https://img.shields.io/github/downloads/gitify-app/gitify/total?label=downloads@all&logo=github
 [downloads-latest-badge]: https://img.shields.io/github/downloads/gitify-app/gitify/latest/total?logo=github
 [contributors-badge]: https://img.shields.io/github/contributors/gitify-app/gitify?logo=github
 [license]: LICENSE
 [license-badge]: https://img.shields.io/github/license/gitify-app/gitify?logo=github
 [github-release-badge]: https://img.shields.io/github/v/release/gitify-app/gitify?logo=github
-[homebrew-cask-badge]: https://img.shields.io/homebrew/cask/v/gitify?logo=homebrew
-[renovate]: https://renovatebot.com/
-[renovate-badge]: https://img.shields.io/badge/renovate-enabled-brightgreen.svg?logo=renovate
+[homebrew-cask-badge]: https://img.shields.io/homebrew/cask/v/gitify?logo=homebrew&logoColor=white
+[renovate]: https://github.com/gitify-app/gitify/issues/576
+[renovate-badge]: https://img.shields.io/badge/renovate-enabled-brightgreen.svg?logo=renovate&logoColor=white
