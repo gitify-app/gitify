@@ -1,3 +1,5 @@
+import type { ExecutionResult } from 'graphql';
+
 import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
 import {
   mockGitHubCloudGitifyNotifications,
@@ -8,7 +10,6 @@ import { mockToken } from '../../__mocks__/state-mocks';
 import { Constants } from '../../constants';
 
 import type { Link, SettingsState } from '../../types';
-import type { GitHubGraphQLResponse } from './graphql/types';
 
 import {
   fetchDiscussionByNumber,
@@ -253,10 +254,9 @@ describe('renderer/utils/api/client.ts', () => {
       type: 'Discussion',
     });
 
-    performGraphQLRequestSpy.mockResolvedValue({
-      data: {},
-      headers: {},
-    } as GitHubGraphQLResponse<FetchDiscussionByNumberQuery>);
+    performGraphQLRequestSpy.mockResolvedValue(
+      {} as ExecutionResult<FetchDiscussionByNumberQuery>,
+    );
 
     await fetchDiscussionByNumber(mockNotification);
 
@@ -288,10 +288,9 @@ describe('renderer/utils/api/client.ts', () => {
       type: 'Issue',
     });
 
-    performGraphQLRequestSpy.mockResolvedValue({
-      data: {},
-      headers: {},
-    } as GitHubGraphQLResponse<FetchIssueByNumberQuery>);
+    performGraphQLRequestSpy.mockResolvedValue(
+      {} as ExecutionResult<FetchIssueByNumberQuery>,
+    );
 
     await fetchIssueByNumber(mockNotification);
 
@@ -321,10 +320,9 @@ describe('renderer/utils/api/client.ts', () => {
       type: 'PullRequest',
     });
 
-    performGraphQLRequestSpy.mockResolvedValue({
-      data: {},
-      headers: {},
-    } as GitHubGraphQLResponse<FetchPullRequestByNumberQuery>);
+    performGraphQLRequestSpy.mockResolvedValue(
+      {} as ExecutionResult<FetchPullRequestByNumberQuery>,
+    );
 
     await fetchPullByNumber(mockNotification);
 
@@ -357,10 +355,9 @@ describe('renderer/utils/api/client.ts', () => {
         type: 'Commit',
       });
 
-      performGraphQLRequestStringSpy.mockResolvedValue({
-        data: {},
-        headers: {},
-      } as GitHubGraphQLResponse<unknown>);
+      performGraphQLRequestStringSpy.mockResolvedValue(
+        {} as ExecutionResult<unknown>,
+      );
 
       await fetchNotificationDetailsForList([mockNotification]);
 
@@ -373,10 +370,9 @@ describe('renderer/utils/api/client.ts', () => {
         'performGraphQLRequestString',
       );
 
-      performGraphQLRequestStringSpy.mockResolvedValue({
-        data: {},
-        headers: {},
-      } as GitHubGraphQLResponse<unknown>);
+      performGraphQLRequestStringSpy.mockResolvedValue(
+        {} as ExecutionResult<unknown>,
+      );
 
       await fetchNotificationDetailsForList([]);
 
@@ -392,7 +388,7 @@ describe('renderer/utils/api/client.ts', () => {
       performGraphQLRequestStringSpy.mockResolvedValue({
         data: {},
         headers: {},
-      } as GitHubGraphQLResponse<unknown>);
+      } as ExecutionResult<unknown>);
 
       await fetchNotificationDetailsForList(mockGitHubCloudGitifyNotifications);
 

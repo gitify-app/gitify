@@ -1,4 +1,4 @@
-import type { OctokitResponse } from '@octokit/plugin-paginate-rest/dist-types/types';
+import type { ExecutionResult } from 'graphql';
 
 import { Constants } from '../../constants';
 
@@ -8,9 +8,7 @@ import type {
   Link,
   SettingsState,
 } from '../../types';
-import type { GitHubGraphQLResponse } from './graphql/types';
 import type {
-  GetAuthenticatedUserResponse,
   GetCommitCommentResponse,
   GetCommitResponse,
   GetReleaseResponse,
@@ -218,14 +216,11 @@ async function followUrl<TResult>(
 /**
  * Fetch details of the currently authenticated GitHub user.
  */
-export async function fetchAuthenticatedUserDetails(
-  account: Account,
-): Promise<OctokitResponse<GetAuthenticatedUserResponse>> {
+export async function fetchAuthenticatedUserDetails(account: Account) {
+  //: Promise<OctokitResponse<GetAuthenticatedUserResponse>> {
   const octokit = await createOctokitClient(account, 'rest');
 
-  const response = await octokit.rest.users.getAuthenticated();
-
-  return response;
+  return await octokit.rest.users.getAuthenticated();
 }
 
 /**
@@ -233,7 +228,7 @@ export async function fetchAuthenticatedUserDetails(
  */
 export async function fetchDiscussionByNumber(
   notification: GitifyNotification,
-): Promise<GitHubGraphQLResponse<FetchDiscussionByNumberQuery>> {
+): Promise<ExecutionResult<FetchDiscussionByNumberQuery>> {
   const number = getNumberFromUrl(notification.subject.url);
 
   return performGraphQLRequest(
@@ -258,7 +253,7 @@ export async function fetchDiscussionByNumber(
  */
 export async function fetchIssueByNumber(
   notification: GitifyNotification,
-): Promise<GitHubGraphQLResponse<FetchIssueByNumberQuery>> {
+): Promise<ExecutionResult<FetchIssueByNumberQuery>> {
   const number = getNumberFromUrl(notification.subject.url);
 
   return performGraphQLRequest(
@@ -279,7 +274,7 @@ export async function fetchIssueByNumber(
  */
 export async function fetchPullByNumber(
   notification: GitifyNotification,
-): Promise<GitHubGraphQLResponse<FetchPullRequestByNumberQuery>> {
+): Promise<ExecutionResult<FetchPullRequestByNumberQuery>> {
   const number = getNumberFromUrl(notification.subject.url);
 
   return performGraphQLRequest(

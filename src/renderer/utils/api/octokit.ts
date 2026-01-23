@@ -50,7 +50,9 @@ export async function createOctokitClient(
 
   const decryptedToken = await decryptValue(account.token);
 
-  const baseUrl = getGitHubAPIBaseUrl(account.hostname, type).toString();
+  const baseUrl = getGitHubAPIBaseUrl(account.hostname, type)
+    .toString()
+    .replace(/\/$/, '');
   const userAgent = getUserAgent();
 
   const client = new OctokitWithPlugins({

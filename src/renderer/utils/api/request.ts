@@ -1,7 +1,9 @@
-import type { Account } from '../../types';
-import type { GitHubGraphQLResponse } from './graphql/types';
+import { GraphqlResponseError } from '@octokit/graphql';
+import type { ExecutionResult } from 'graphql';
 
-import { assertNoGraphQLErrors } from './errors';
+import type { Account } from '../../types';
+
+import { handleGraphQLResponseError } from './errors';
 import type { TypedDocumentString } from './graphql/generated/graphql';
 import { createOctokitClient } from './octokit';
 
@@ -17,37 +19,17 @@ export async function performGraphQLRequest<TResult, TVariables>(
   account: Account,
   query: TypedDocumentString<TResult, TVariables>,
   ...[variables]: TVariables extends Record<string, never> ? [] : [TVariables]
-): Promise<GitHubGraphQLResponse<TResult>> {
+): Promise<ExecutionResult<TResult>> {
   const octokit = await createOctokitClient(account, 'graphql');
 
   try {
-    const response = await octokit.graphql<TResult>(
-      query.toString(),
-      variables || {},
-    );
-
-    const graphqlResponse = {
-      data: response,
-      errors: [],
-      headers: {},
-    };
-
-    assertNoGraphQLErrors<TResult>('performGraphQLRequest', graphqlResponse);
-
-    return graphqlResponse;
-    // biome-ignore lint/suspicious/noExplicitAny: GraphQL error type
-  } catch (error: any) {
-    // Handle GraphQL errors from Octokit
-    if (error.errors) {
-      const graphqlResponse = {
-        data: error.data || ({} as TResult),
-        errors: error.errors,
-        headers: {},
-      };
-      assertNoGraphQLErrors<TResult>('performGraphQLRequest', graphqlResponse);
-      return graphqlResponse;
+    return await octokit.graphql<TResult>(query.toString(), variables || {});
+  } catch (error) {
+    if (error instanceof GraphqlResponseError) {
+      handleGraphQLResponseError<TResult>('performGraphQLRequest', error);
+    } else {
+      throw error;
     }
-    throw error;
   }
 }
 
@@ -66,39 +48,16 @@ export async function performGraphQLRequestString<TResult>(
   account: Account,
   query: string,
   variables?: Record<string, unknown>,
-): Promise<GitHubGraphQLResponse<TResult>> {
+): Promise<ExecutionResult<TResult>> {
   const octokit = await createOctokitClient(account, 'graphql');
 
   try {
-    const response = await octokit.graphql<TResult>(query, variables || {});
-
-    const graphqlResponse = {
-      data: response,
-      errors: [],
-      headers: {},
-    };
-
-    assertNoGraphQLErrors<TResult>(
-      'performGraphQLRequestString',
-      graphqlResponse,
-    );
-
-    return graphqlResponse;
-    // biome-ignore lint/suspicious/noExplicitAny: GraphQL error type
-  } catch (error: any) {
-    // Handle GraphQL errors from Octokit
-    if (error.errors) {
-      const graphqlResponse = {
-        data: error.data || ({} as TResult),
-        errors: error.errors,
-        headers: {},
-      };
-      assertNoGraphQLErrors<TResult>(
-        'performGraphQLRequestString',
-        graphqlResponse,
-      );
-      return graphqlResponse;
+    return await octokit.graphql<TResult>(query, variables || {});
+  } catch (error) {
+    if (error instanceof GraphqlResponseError) {
+      handleGraphQLResponseError<TResult>('performGraphQLRequestString', error);
+    } else {
+      throw error;
     }
-    throw error;
   }
 }

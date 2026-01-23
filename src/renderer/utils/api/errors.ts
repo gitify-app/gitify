@@ -1,8 +1,7 @@
-import { RequestError } from '@octokit/request-error';
-import type { GraphQLError } from 'graphql';
+import type { GraphqlResponseError } from '@octokit/graphql';
+import { RequestError } from 'octokit';
 
 import type { GitifyError } from '../../types';
-import type { GitHubGraphQLResponse } from './graphql/types';
 
 import { Errors } from '../errors';
 import { rendererLogError } from '../logger';
@@ -46,29 +45,27 @@ export function determineFailureType(err: RequestError): GitifyError {
 }
 
 /**
- * Assert that a GraphQL response does not contain errors.
+ * Handle GraphQL response errors.
  * Logs and throws if `errors` array is present and non-empty.
  *
  * @param context The context of the GraphQL request
  * @param payload The GraphQL response payload
  */
-export function assertNoGraphQLErrors<TResult>(
+export function handleGraphQLResponseError<TResult>(
   context: string,
-  payload: GitHubGraphQLResponse<TResult>,
+  payload: GraphqlResponseError<TResult>,
 ) {
-  if (Array.isArray(payload.errors) && payload.errors.length > 0) {
-    const errorMessages = payload.errors
-      .map((graphQLError: GraphQLError) => graphQLError.message)
-      .join('; ');
+  const errorMessages = payload.errors
+    .map((graphQLError) => graphQLError.message)
+    .join('; ');
 
-    const err = new Error(
-      errorMessages
-        ? `GraphQL request returned errors: ${errorMessages}`
-        : 'GraphQL request returned errors',
-    );
+  const err = new Error(
+    errorMessages
+      ? `GraphQL request returned errors: ${errorMessages}`
+      : 'GraphQL request returned errors',
+  );
 
-    rendererLogError(context, 'GraphQL errors present in response', err);
+  rendererLogError(context, 'GraphQL errors present in response', err);
 
-    throw err;
-  }
+  throw err;
 }

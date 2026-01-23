@@ -1,15 +1,16 @@
 // import { RequestError } from '@octokit/request-error';
 
+import type { GraphqlResponseError } from '@octokit/graphql';
+
 import type { DeepPartial } from '../../__helpers__/test-utils';
 
 // import { EVENTS } from '../../../shared/events';
 
 // import type { Link } from '../../types';
-import type { GitHubGraphQLResponse } from './graphql/types';
 
 // import { Errors } from '../errors';
 import * as rendererLogger from '../logger';
-import { assertNoGraphQLErrors } from './errors';
+import { handleGraphQLResponseError } from './errors';
 
 describe('renderer/utils/api/errors.ts', () => {
   // describe('determineFailureType', () => {
@@ -106,13 +107,13 @@ describe('renderer/utils/api/errors.ts', () => {
   // });
 });
 
-describe('assertNoGraphQLErrors', () => {
+describe('handleGraphQLResponseError', () => {
   it('throws and logs when GraphQL errors are present', () => {
     const rendererLogErrorSpy = jest
       .spyOn(rendererLogger, 'rendererLogError')
       .mockImplementation();
 
-    const payload: GitHubGraphQLResponse<unknown> = {
+    const payload: GraphqlResponseError<unknown> = {
       data: {},
       errors: [
         {
@@ -121,33 +122,14 @@ describe('assertNoGraphQLErrors', () => {
         },
       ],
     } as DeepPartial<
-      GitHubGraphQLResponse<unknown>
-    > as GitHubGraphQLResponse<unknown>;
+      GraphqlResponseError<unknown>
+    > as GraphqlResponseError<unknown>;
 
-    expect(() => assertNoGraphQLErrors('test-context', payload)).toThrow(
+    expect(() => handleGraphQLResponseError('test-context', payload)).toThrow(
       'GraphQL request returned errors',
     );
 
     expect(rendererLogErrorSpy).toHaveBeenCalled();
-  });
-
-  it('does not throw when errors array is empty or undefined', () => {
-    const payload: GitHubGraphQLResponse<unknown> = {
-      data: {},
-      errors: [],
-      headers: {},
-    };
-
-    expect(() => assertNoGraphQLErrors('test-context', payload)).not.toThrow();
-  });
-
-  it('does not throw when errors array is undefined', () => {
-    const payload: GitHubGraphQLResponse<unknown> = {
-      data: {},
-      headers: {},
-    };
-
-    expect(() => assertNoGraphQLErrors('test-context', payload)).not.toThrow();
   });
 });
 
