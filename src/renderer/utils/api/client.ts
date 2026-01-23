@@ -10,6 +10,7 @@ import type {
 } from '../../types';
 import type { GitHubGraphQLResponse } from './graphql/types';
 import type {
+  GetAuthenticatedUserResponse,
   GetCommitCommentResponse,
   GetCommitResponse,
   GetReleaseResponse,
@@ -24,8 +25,6 @@ import type {
 import { isAnsweredDiscussionFeatureSupported } from '../features';
 import { createNotificationHandler } from '../notifications/handlers';
 import {
-  FetchAuthenticatedUserDetailsDocument,
-  type FetchAuthenticatedUserDetailsQuery,
   FetchDiscussionByNumberDocument,
   type FetchDiscussionByNumberQuery,
   FetchIssueByNumberDocument,
@@ -38,6 +37,7 @@ import { MergeQueryBuilder } from './graphql/MergeQueryBuilder';
 import { createOctokitClient } from './octokit';
 import { performGraphQLRequest, performGraphQLRequestString } from './request';
 import { getGitHubGraphQLUrl, getNumberFromUrl } from './utils';
+import { OctokitResponse } from '@octokit/plugin-paginate-rest/dist-types/types';
 
 /**
  * Perform a HEAD operation, used to validate that connectivity is established.
@@ -74,6 +74,7 @@ export async function listNotificationsForAuthenticatedUser(
         participating: settings.participating,
         all: settings.fetchReadNotifications,
         per_page: 100,
+        // TODO - is this the right way to do this
         headers: {
           'If-None-Match': '', // Prevent caching
         },
@@ -87,6 +88,7 @@ export async function listNotificationsForAuthenticatedUser(
       participating: settings.participating,
       all: settings.fetchReadNotifications,
       per_page: 100,
+      // TODO - is this the right way to do this
       headers: {
         'If-None-Match': '', // Prevent caching
       },
@@ -252,14 +254,12 @@ export async function followUrl<TResult>(
 export async function fetchAuthenticatedUserDetails(
   hostname: Hostname,
   token: Token,
-): Promise<GitHubGraphQLResponse<FetchAuthenticatedUserDetailsQuery>> {
-  const url = getGitHubGraphQLUrl(hostname);
+): Promise<OctokitResponse<GetAuthenticatedUserResponse>> {
+    const octokit = await createOctokitClient(hostname, token);
 
-  return performGraphQLRequest(
-    url.toString() as Link,
-    token,
-    FetchAuthenticatedUserDetailsDocument,
-  );
+  const response = await octokit.rest.users.getAuthenticated()
+
+  return response;
 }
 
 /**

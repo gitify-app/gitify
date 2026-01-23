@@ -150,19 +150,21 @@ export async function refreshAccount(account: Account): Promise<Account> {
       account.hostname,
       account.token,
     );
-    const user = response.data.viewer;
+    const user = response.data;
 
     // Refresh user data
     account.user = {
-      id: user.id,
+      id: String(user.id),
       login: user.login,
       name: user.name,
-      avatar: user.avatar,
+      avatar: user.avatar_url as Link,
     };
 
-    account.version = extractHostVersion(
-      response.headers['x-github-enterprise-version'],
-    );
+    account.version = 'latest'
+        // TODO - find correct header
+    // extractHostVersion(
+    //   response.headers['x-github-enterprise-version'],
+    // );
 
     const accountScopes = response.headers['x-oauth-scopes']
       ?.split(',')

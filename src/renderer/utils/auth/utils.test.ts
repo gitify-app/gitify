@@ -231,7 +231,7 @@ describe('renderer/utils/auth/utils.ts', () => {
       beforeEach(() => {
         fetchAuthenticatedUserDetailsSpy.mockResolvedValue({
           data: {
-            viewer: mockGitifyUser,
+            ...mockGitifyUser,
           },
           headers: {
             'x-github-enterprise-version': '3.0.0',
