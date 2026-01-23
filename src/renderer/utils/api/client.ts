@@ -72,9 +72,8 @@ export async function listNotificationsForAuthenticatedUser(
           participating: settings.participating,
           all: settings.fetchReadNotifications,
           per_page: 100,
-          // TODO - is this the right way to do this
           headers: {
-            'If-None-Match': '', // Prevent caching
+            'Cache-Control': 'no-cache', // Prevent caching
           },
         },
       );
@@ -86,9 +85,8 @@ export async function listNotificationsForAuthenticatedUser(
         participating: settings.participating,
         all: settings.fetchReadNotifications,
         per_page: 100,
-        // TODO - is this the right way to do this
         headers: {
-          'If-None-Match': '', // Prevent caching
+          'Cache-Control': 'no-cache', // Prevent caching
         },
       });
 

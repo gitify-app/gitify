@@ -1,5 +1,3 @@
-import type { AxiosResponse } from 'axios';
-
 import type { Hostname } from '../../types';
 
 import {
@@ -46,44 +44,5 @@ describe('renderer/utils/api/utils.ts', () => {
     });
   });
 
-  describe('getNextURLFromLinkHeader', () => {
-    it('should parse next url from link header', () => {
-      const mockResponse = {
-        headers: {
-          link: '<https://api.github.com/notifications?participating=false&page=2>; rel="next", <https://api.github.com/notifications?participating=false&page=2>; rel="last"',
-        },
-      };
-
-      const result = getNextURLFromLinkHeader(
-        mockResponse as unknown as AxiosResponse,
-      );
-      expect(result.toString()).toBe(
-        'https://api.github.com/notifications?participating=false&page=2',
-      );
-    });
-
-    it('should return null if no next url in link header', () => {
-      const mockResponse = {
-        headers: {
-          link: '<https://api.github.com/notifications?participating=false&page=2>; rel="last"',
-        },
-      };
-
-      const result = getNextURLFromLinkHeader(
-        mockResponse as unknown as AxiosResponse,
-      );
-      expect(result).toBeNull();
-    });
-
-    it('should return null if no link header exists', () => {
-      const mockResponse = {
-        headers: {},
-      };
-
-      const result = getNextURLFromLinkHeader(
-        mockResponse as unknown as AxiosResponse,
-      );
-      expect(result).toBeNull();
-    });
-  });
+  
 });

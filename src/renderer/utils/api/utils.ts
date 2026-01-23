@@ -1,5 +1,3 @@
-import type { AxiosResponse } from 'axios';
-
 import { APPLICATION } from '../../../shared/constants';
 
 import { Constants } from '../../constants';
@@ -37,14 +35,6 @@ export function getGitHubGraphQLUrl(hostname: Hostname): URL {
   }
 
   return url;
-}
-
-export function getNextURLFromLinkHeader(
-  response: AxiosResponse,
-): string | null {
-  const linkHeader = response.headers.link;
-  const matches = linkHeader?.match(/<([^<>]+)>;\s*rel="next"/);
-  return matches ? matches[1] : null;
 }
 
 export function getNumberFromUrl(url: string): number {

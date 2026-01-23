@@ -5,8 +5,9 @@ import { restEndpointMethods } from '@octokit/plugin-rest-endpoint-methods';
 import type { Account } from '../../types';
 
 import { getAccountUUID } from '../auth/utils';
-import { decryptValue } from '../comms';
+import { decryptValue, getAppVersion } from '../comms';
 import { getGitHubAPIBaseUrl } from './utils';
+import { APPLICATION } from '../../../shared/constants';
 
 // Create the Octokit type with plugins
 const OctokitWithPlugins = Octokit.plugin(paginateRest, restEndpointMethods);
@@ -14,6 +15,8 @@ export type OctokitClient = InstanceType<typeof OctokitWithPlugins>;
 
 // Cache Octokit clients per account UUID
 const octokitClientCache = new Map<string, OctokitClient>();
+
+const version = getAppVersion()
 
 /**
  * Clear the Octokit client cache
@@ -52,6 +55,7 @@ export async function createOctokitClient(
   const client = new OctokitWithPlugins({
     auth: decryptedToken,
     baseUrl,
+    userAgent: `${APPLICATION.NAME}/${version}`
   });
 
   // Cache the client
