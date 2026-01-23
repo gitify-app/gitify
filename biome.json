@@ -18,6 +18,8 @@
               ":BLANK_LINE:",
               "@primer/**",
               ":BLANK_LINE:",
+              "@octokit/**",
+              ":BLANK_LINE:",
               ":PACKAGE:",
               ":BLANK_LINE:",
               ["**/__mocks__/**", "**/__helpers__/**"],

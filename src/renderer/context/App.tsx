@@ -36,6 +36,7 @@ import type {
   LoginPersonalAccessTokenOptions,
 } from '../utils/auth/types';
 
+import { headNotifications } from '../utils/api/client';
 import { clearOctokitClientCache } from '../utils/api/octokit';
 import {
   addAccount,
@@ -436,8 +437,8 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
    */
   const loginWithPersonalAccessToken = useCallback(
     async ({ token, hostname }: LoginPersonalAccessTokenOptions) => {
-      // const encryptedToken = (await encryptValue(token)) as Token;
-      // await headNotifications(hostname, encryptedToken);
+      const encryptedToken = (await encryptValue(token)) as Token;
+      await headNotifications({ hostname, token: encryptedToken } as Account);
 
       const updatedAuth = await addAccount(
         auth,

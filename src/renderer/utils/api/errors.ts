@@ -1,5 +1,5 @@
 import type { GraphqlResponseError } from '@octokit/graphql';
-import { RequestError } from 'octokit';
+import { RequestError } from '@octokit/request-error';
 
 import type { GitifyError } from '../../types';
 

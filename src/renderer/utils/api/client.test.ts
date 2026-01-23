@@ -5,13 +5,13 @@ import {
   mockGitHubCloudGitifyNotifications,
   mockPartialGitifyNotification,
 } from '../../__mocks__/notifications-mocks';
-import { mockToken } from '../../__mocks__/state-mocks';
 
 import { Constants } from '../../constants';
 
 import type { Link, SettingsState } from '../../types';
 
 import {
+  fetchAuthenticatedUserDetails,
   fetchDiscussionByNumber,
   fetchIssueByNumber,
   fetchNotificationDetailsForList,
@@ -41,9 +41,16 @@ describe('renderer/utils/api/client.ts', () => {
     rest: {
       activity: {
         listNotificationsForAuthenticatedUser: jest.fn(),
+        markThreadAsRead: jest.fn(),
+        markThreadAsDone: jest.fn(),
+        setThreadSubscription: jest.fn(),
+      },
+      users: {
+        getAuthenticated: jest.fn(),
       },
     },
     paginate: jest.fn(),
+    request: jest.fn(),
   };
 
   const createOctokitClientSpy = jest.spyOn(
@@ -66,20 +73,62 @@ describe('renderer/utils/api/client.ts', () => {
 
     // Mock paginate
     mockOctokit.paginate.mockResolvedValue([]);
+
+    // Mock generic request used by followUrl/getHtmlUrl
+    mockOctokit.request.mockResolvedValue({
+      data: {},
+      status: 200,
+      headers: {},
+    });
+
+    mockOctokit.rest.users.getAuthenticated.mockResolvedValue({
+      data: {},
+      status: 200,
+      headers: {},
+    });
+
+    // Mock other activity endpoints used by client
+    mockOctokit.rest.activity.markThreadAsRead.mockResolvedValue({
+      data: {},
+      status: 200,
+      headers: {},
+    });
+    mockOctokit.rest.activity.markThreadAsDone.mockResolvedValue({
+      data: {},
+      status: 200,
+      headers: {},
+    });
+    mockOctokit.rest.activity.setThreadSubscription.mockResolvedValue({
+      data: {},
+      status: 200,
+      headers: {},
+    });
   });
 
   afterEach(() => {
     jest.clearAllMocks();
   });
 
+  it('fetchAuthenticatedUserDetails - should fetch authenticated user', async () => {
+    await fetchAuthenticatedUserDetails(mockGitHubCloudAccount);
+
+    expect(createOctokitClientSpy).toHaveBeenCalledWith(
+      mockGitHubCloudAccount,
+      'rest',
+    );
+    expect(mockOctokit.rest.users.getAuthenticated).toHaveBeenCalled();
+  });
+
   it('headNotifications - should fetch notifications head', async () => {
     await headNotifications(mockGitHubCloudAccount);
 
-    // expect(performAuthenticatedRESTRequestSpy).toHaveBeenCalledWith(
-    //   'HEAD',
-    //   'https://api.github.com/notifications',
-    //   mockToken,
-    // );
+    expect(createOctokitClientSpy).toHaveBeenCalledWith(
+      mockGitHubCloudAccount,
+      'rest',
+    );
+    expect(
+      mockOctokit.rest.activity.listNotificationsForAuthenticatedUser,
+    ).toHaveBeenCalledWith({ per_page: 1 });
   });
 
   describe('listNotificationsForAuthenticatedUser', () => {
@@ -96,8 +145,8 @@ describe('renderer/utils/api/client.ts', () => {
       );
 
       expect(createOctokitClientSpy).toHaveBeenCalledWith(
-        mockGitHubCloudAccount.hostname,
-        mockGitHubCloudAccount.token,
+        mockGitHubCloudAccount,
+        'rest',
       );
       expect(
         mockOctokit.rest.activity.listNotificationsForAuthenticatedUser,
@@ -105,6 +154,9 @@ describe('renderer/utils/api/client.ts', () => {
         participating: true,
         all: false,
         per_page: 100,
+        headers: {
+          'Cache-Control': 'no-cache',
+        },
       });
     });
 
@@ -120,12 +172,19 @@ describe('renderer/utils/api/client.ts', () => {
         mockSettings as SettingsState,
       );
 
+      expect(createOctokitClientSpy).toHaveBeenCalledWith(
+        mockGitHubCloudAccount,
+        'rest',
+      );
       expect(
         mockOctokit.rest.activity.listNotificationsForAuthenticatedUser,
       ).toHaveBeenCalledWith({
         participating: false,
         all: false,
         per_page: 100,
+        headers: {
+          'Cache-Control': 'no-cache',
+        },
       });
     });
 
@@ -141,12 +200,19 @@ describe('renderer/utils/api/client.ts', () => {
         mockSettings as SettingsState,
       );
 
+      expect(createOctokitClientSpy).toHaveBeenCalledWith(
+        mockGitHubCloudAccount,
+        'rest',
+      );
       expect(
         mockOctokit.rest.activity.listNotificationsForAuthenticatedUser,
       ).toHaveBeenCalledWith({
         participating: false,
         all: true,
         per_page: 100,
+        headers: {
+          'Cache-Control': 'no-cache',
+        },
       });
     });
 
@@ -162,12 +228,19 @@ describe('renderer/utils/api/client.ts', () => {
         mockSettings as SettingsState,
       );
 
+      expect(createOctokitClientSpy).toHaveBeenCalledWith(
+        mockGitHubCloudAccount,
+        'rest',
+      );
       expect(mockOctokit.paginate).toHaveBeenCalledWith(
         mockOctokit.rest.activity.listNotificationsForAuthenticatedUser,
         {
           participating: false,
           all: false,
           per_page: 100,
+          headers: {
+            'Cache-Control': 'no-cache',
+          },
         },
       );
     });
@@ -176,23 +249,25 @@ describe('renderer/utils/api/client.ts', () => {
   it('markNotificationThreadAsRead - should mark notification thread as read', async () => {
     await markNotificationThreadAsRead(mockGitHubCloudAccount, mockThreadId);
 
-    // expect(performAuthenticatedRESTRequestSpy).toHaveBeenCalledWith(
-    //   'PATCH',
-    //   `https://api.github.com/notifications/threads/${mockThreadId}`,
-    //   mockToken,
-    //   {},
-    // );
+    expect(createOctokitClientSpy).toHaveBeenCalledWith(
+      mockGitHubCloudAccount,
+      'rest',
+    );
+    expect(mockOctokit.rest.activity.markThreadAsRead).toHaveBeenCalledWith({
+      thread_id: Number(mockThreadId),
+    });
   });
 
   it('markNotificationThreadAsDone - should mark notification thread as done', async () => {
     await markNotificationThreadAsDone(mockGitHubCloudAccount, mockThreadId);
 
-    // expect(performAuthenticatedRESTRequestSpy).toHaveBeenCalledWith(
-    //   'DELETE',
-    //   `https://api.github.com/notifications/threads/${mockThreadId}`,
-    //   mockToken,
-    //   {},
-    // );
+    expect(createOctokitClientSpy).toHaveBeenCalledWith(
+      mockGitHubCloudAccount,
+      'rest',
+    );
+    expect(mockOctokit.rest.activity.markThreadAsDone).toHaveBeenCalledWith({
+      thread_id: Number(mockThreadId),
+    });
   });
 
   it('ignoreNotificationThreadSubscription - should ignore notification thread subscription', async () => {
@@ -201,12 +276,16 @@ describe('renderer/utils/api/client.ts', () => {
       mockThreadId,
     );
 
-    // expect(performAuthenticatedRESTRequestSpy).toHaveBeenCalledWith(
-    //   'PUT',
-    //   `https://api.github.com/notifications/threads/${mockThreadId}/subscription`,
-    //   mockToken,
-    //   { ignored: true },
-    // );
+    expect(createOctokitClientSpy).toHaveBeenCalledWith(
+      mockGitHubCloudAccount,
+      'rest',
+    );
+    expect(
+      mockOctokit.rest.activity.setThreadSubscription,
+    ).toHaveBeenCalledWith({
+      thread_id: Number(mockThreadId),
+      ignored: true,
+    });
   });
 
   it('getHtmlUrl - should return the HTML URL', async () => {
@@ -215,32 +294,14 @@ describe('renderer/utils/api/client.ts', () => {
       'https://api.github.com/repos/gitify-app/notifications-test/issues/785' as Link,
     );
 
-    // expect(performAuthenticatedRESTRequestSpy).toHaveBeenCalledWith(
-    //   'GET',
-    //   'https://api.github.com/repos/gitify-app/notifications-test/issues/785',
-    //   '123',
-    // );
+    expect(createOctokitClientSpy).toHaveBeenCalledWith(
+      mockGitHubCloudAccount,
+      'rest',
+    );
+    expect(mockOctokit.request).toHaveBeenCalledWith('GET {+url}', {
+      url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/785',
+    });
   });
-
-  // it('fetchAuthenticatedUserDetails calls performGraphQLRequest with correct args', async () => {
-  //   const performGraphQLRequestSpy = jest.spyOn(
-  //     apiRequests,
-  //     'performGraphQLRequest',
-  //   );
-
-  //   performGraphQLRequestSpy.mockResolvedValue({
-  //     data: {},
-  //     headers: {},
-  //   } as GitHubGraphQLResponse<FetchAuthenticatedUserDetailsQuery>);
-
-  //   await fetchAuthenticatedUserDetails(mockGitHubCloudAccount);
-
-  //   expect(performGraphQLRequestSpy).toHaveBeenCalledWith(
-  //     'https://api.github.com/graphql',
-  //     mockToken,
-  //     FetchAuthenticatedUserDetailsDocument,
-  //   );
-  // });
 
   it('fetchDiscussionByNumber calls performGraphQLRequest with correct args', async () => {
     const performGraphQLRequestSpy = jest.spyOn(
@@ -261,8 +322,7 @@ describe('renderer/utils/api/client.ts', () => {
     await fetchDiscussionByNumber(mockNotification);
 
     expect(performGraphQLRequestSpy).toHaveBeenCalledWith(
-      'https://api.github.com/graphql',
-      mockNotification.account.token,
+      mockNotification.account,
       FetchDiscussionByNumberDocument,
       {
         owner: mockNotification.repository.owner.login,
@@ -295,8 +355,7 @@ describe('renderer/utils/api/client.ts', () => {
     await fetchIssueByNumber(mockNotification);
 
     expect(performGraphQLRequestSpy).toHaveBeenCalledWith(
-      'https://api.github.com/graphql',
-      mockNotification.account.token,
+      mockNotification.account,
       FetchIssueByNumberDocument,
       {
         owner: mockNotification.repository.owner.login,
@@ -327,8 +386,7 @@ describe('renderer/utils/api/client.ts', () => {
     await fetchPullByNumber(mockNotification);
 
     expect(performGraphQLRequestSpy).toHaveBeenCalledWith(
-      'https://api.github.com/graphql',
-      mockNotification.account.token,
+      mockNotification.account,
       FetchPullRequestByNumberDocument,
       {
         owner: mockNotification.repository.owner.login,
@@ -393,8 +451,7 @@ describe('renderer/utils/api/client.ts', () => {
       await fetchNotificationDetailsForList(mockGitHubCloudGitifyNotifications);
 
       expect(performGraphQLRequestStringSpy).toHaveBeenCalledWith(
-        'https://api.github.com/graphql',
-        mockToken,
+        mockGitHubCloudGitifyNotifications[0].account,
         expect.stringMatching(/node0|node1/),
         {
           firstClosingIssues: 100,

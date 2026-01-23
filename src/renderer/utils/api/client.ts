@@ -35,6 +35,15 @@ import { performGraphQLRequest, performGraphQLRequestString } from './request';
 import { getNumberFromUrl } from './utils';
 
 /**
+ * Fetch details of the currently authenticated GitHub user.
+ */
+export async function fetchAuthenticatedUserDetails(account: Account) {
+  const octokit = await createOctokitClient(account, 'rest');
+
+  return await octokit.rest.users.getAuthenticated();
+}
+
+/**
  * Perform a HEAD operation, used to validate that connectivity is established.
  *
  * Endpoint documentation: https://docs.github.com/en/rest/activity/notifications
@@ -209,16 +218,6 @@ async function followUrl<TResult>(
   });
 
   return response.data as TResult;
-}
-
-/**
- * Fetch details of the currently authenticated GitHub user.
- */
-export async function fetchAuthenticatedUserDetails(account: Account) {
-  //: Promise<OctokitResponse<GetAuthenticatedUserResponse>> {
-  const octokit = await createOctokitClient(account, 'rest');
-
-  return await octokit.rest.users.getAuthenticated();
 }
 
 /**

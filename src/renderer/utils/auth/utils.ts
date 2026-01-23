@@ -3,6 +3,7 @@ import {
   getWebFlowAuthorizationUrl,
 } from '@octokit/oauth-methods';
 import { request } from '@octokit/request';
+
 import { format } from 'date-fns';
 import semver from 'semver';
 
