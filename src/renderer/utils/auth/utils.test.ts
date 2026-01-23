@@ -1,20 +1,23 @@
 import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
 import { mockAuth } from '../../__mocks__/state-mocks';
+import { mockRawUser } from '../api/__mocks__/response-mocks';
 
 import { Constants } from '../../constants';
 
 import type {
   Account,
   AuthCode,
+  AuthState,
   ClientID,
   ClientSecret,
   Hostname,
+  Link,
   Token,
 } from '../../types';
 import type { AuthMethod } from './types';
 
 import * as comms from '../../utils/comms';
-// import * as apiClient from '../api/client';
+import * as apiClient from '../api/client';
 import * as logger from '../logger';
 import * as authUtils from './utils';
 import {
@@ -29,6 +32,8 @@ jest.mock('@octokit/oauth-methods', () => ({
 }));
 
 import { exchangeWebFlowCode } from '@octokit/oauth-methods';
+
+import type { GetAuthenticatedUserResponse } from '../api/types';
 
 const exchangeWebFlowCodeMock = exchangeWebFlowCode as jest.MockedFunction<
   typeof exchangeWebFlowCode
@@ -156,130 +161,153 @@ describe('renderer/utils/auth/utils.ts', () => {
     });
   });
 
-  // describe('addAccount', () => {
-  // let mockAuthState: AuthState;
-  // const fetchAuthenticatedUserDetailsSpy = jest.spyOn(
-  //   apiClient,
-  //   'fetchAuthenticatedUserDetails',
-  // );
+  describe('addAccount', () => {
+    let mockAuthState: AuthState;
 
-  // beforeEach(() => {
-  //   mockAuthState = {
-  //     accounts: [],
-  //   };
-  // });
+    const mockAuthenticatedResponse = mockRawUser('authenticated-user');
 
-  // describe('should add GitHub Cloud account', () => {
-  //   beforeEach(() => {
-  //     fetchAuthenticatedUserDetailsSpy.mockResolvedValue({
-  //       data: {
-  //         viewer: mockGitifyUser,
-  //       },
-  //       headers: {
-  //         'x-oauth-scopes': Constants.OAUTH_SCOPES.RECOMMENDED.join(', '),
-  //       },
-  //     });
-  //   });
+    const fetchAuthenticatedUserDetailsSpy = jest.spyOn(
+      apiClient,
+      'fetchAuthenticatedUserDetails',
+    );
 
-  //   it('should add personal access token account', async () => {
-  //     const result = await authUtils.addAccount(
-  //       mockAuthState,
-  //       'Personal Access Token',
-  //       '123-456' as Token,
-  //       'github.com' as Hostname,
-  //     );
+    beforeEach(() => {
+      mockAuthState = {
+        accounts: [],
+      };
+    });
 
-  //     expect(result.accounts).toEqual([
-  //       {
-  //         hasRequiredScopes: true,
-  //         hostname: 'github.com' as Hostname,
-  //         method: 'Personal Access Token',
-  //         platform: 'GitHub Cloud',
-  //         token: 'encrypted' as Token,
-  //         user: mockGitifyUser,
-  //         version: 'latest',
-  //       },
-  //     ]);
-  //   });
+    describe('should add GitHub Cloud account', () => {
+      beforeEach(() => {
+        fetchAuthenticatedUserDetailsSpy.mockResolvedValue({
+          status: 200,
+          url: 'https://api.github.com/user',
+          data: mockAuthenticatedResponse as GetAuthenticatedUserResponse,
+          headers: {
+            'x-oauth-scopes': Constants.OAUTH_SCOPES.RECOMMENDED.join(', '),
+          },
+        });
+      });
 
-  //   it('should add oauth app account', async () => {
-  //     const result = await authUtils.addAccount(
-  //       mockAuthState,
-  //       'OAuth App',
-  //       '123-456' as Token,
-  //       'github.com' as Hostname,
-  //     );
+      it('should add personal access token account', async () => {
+        const result = await authUtils.addAccount(
+          mockAuthState,
+          'Personal Access Token',
+          '123-456' as Token,
+          'github.com' as Hostname,
+        );
 
-  //     expect(result.accounts).toEqual([
-  //       {
-  //         hasRequiredScopes: true,
-  //         hostname: 'github.com' as Hostname,
-  //         method: 'OAuth App',
-  //         platform: 'GitHub Cloud',
-  //         token: 'encrypted' as Token,
-  //         user: mockGitifyUser,
-  //         version: 'latest',
-  //       },
-  //     ]);
-  //   });
-  // });
+        expect(result.accounts).toEqual([
+          {
+            hasRequiredScopes: true,
+            hostname: 'github.com' as Hostname,
+            method: 'Personal Access Token',
+            platform: 'GitHub Cloud',
+            token: 'encrypted' as Token,
+            user: {
+              id: String(mockAuthenticatedResponse.id),
+              name: mockAuthenticatedResponse.name,
+              login: mockAuthenticatedResponse.login,
+              avatar: mockAuthenticatedResponse.avatar_url as Link,
+            },
+            version: 'latest',
+          } satisfies Account,
+        ]);
+      });
 
-  // describe('should add GitHub Enterprise Server account', () => {
-  //   beforeEach(() => {
-  //     fetchAuthenticatedUserDetailsSpy.mockResolvedValue({
-  //       data: {
-  //         ...mockGitifyUser,
-  //       },
-  //       headers: {
-  //         'x-github-enterprise-version': '3.0.0',
-  //         'x-oauth-scopes': Constants.OAUTH_SCOPES.RECOMMENDED.join(', '),
-  //       },
-  //     });
-  //   });
+      it('should add oauth app account', async () => {
+        const result = await authUtils.addAccount(
+          mockAuthState,
+          'OAuth App',
+          '123-456' as Token,
+          'github.com' as Hostname,
+        );
 
-  //   it('should add personal access token account', async () => {
-  //     const result = await authUtils.addAccount(
-  //       mockAuthState,
-  //       'Personal Access Token',
-  //       '123-456' as Token,
-  //       'github.gitify.io' as Hostname,
-  //     );
+        expect(result.accounts).toEqual([
+          {
+            hasRequiredScopes: true,
+            hostname: 'github.com' as Hostname,
+            method: 'OAuth App',
+            platform: 'GitHub Cloud',
+            token: 'encrypted' as Token,
+            user: {
+              id: String(mockAuthenticatedResponse.id),
+              name: mockAuthenticatedResponse.name,
+              login: mockAuthenticatedResponse.login,
+              avatar: mockAuthenticatedResponse.avatar_url as Link,
+            },
+            version: 'latest',
+          } satisfies Account,
+        ]);
+      });
+    });
 
-  //     expect(result.accounts).toEqual([
-  //       {
-  //         hasRequiredScopes: true,
-  //         hostname: 'github.gitify.io' as Hostname,
-  //         method: 'Personal Access Token',
-  //         platform: 'GitHub Enterprise Server',
-  //         token: 'encrypted' as Token,
-  //         user: mockGitifyUser,
-  //         version: '3.0.0',
-  //       },
-  //     ]);
-  //   });
+    describe('should add GitHub Enterprise Server account', () => {
+      beforeEach(() => {
+        fetchAuthenticatedUserDetailsSpy.mockResolvedValue({
+          status: 200,
+          url: 'https://github.gitify.io/api/v3/user',
+          data: mockAuthenticatedResponse as GetAuthenticatedUserResponse,
+          headers: {
+            'x-github-enterprise-version': '3.0.0',
+            'x-oauth-scopes': Constants.OAUTH_SCOPES.RECOMMENDED.join(', '),
+          },
+        });
+      });
 
-  //   it('should add oauth app account', async () => {
-  //     const result = await authUtils.addAccount(
-  //       mockAuthState,
-  //       'OAuth App',
-  //       '123-456' as Token,
-  //       'github.gitify.io' as Hostname,
-  //     );
+      it('should add personal access token account', async () => {
+        const result = await authUtils.addAccount(
+          mockAuthState,
+          'Personal Access Token',
+          '123-456' as Token,
+          'github.gitify.io' as Hostname,
+        );
 
-  //     expect(result.accounts).toEqual([
-  //       {
-  //         hasRequiredScopes: true,
-  //         hostname: 'github.gitify.io' as Hostname,
-  //         method: 'OAuth App',
-  //         platform: 'GitHub Enterprise Server',
-  //         token: 'encrypted' as Token,
-  //         user: mockGitifyUser,
-  //         version: '3.0.0',
-  //       },
-  //     ]);
-  //   });
-  // });
-  // });
+        expect(result.accounts).toEqual([
+          {
+            hasRequiredScopes: true,
+            hostname: 'github.gitify.io' as Hostname,
+            method: 'Personal Access Token',
+            platform: 'GitHub Enterprise Server',
+            token: 'encrypted' as Token,
+            user: {
+              id: String(mockAuthenticatedResponse.id),
+              name: mockAuthenticatedResponse.name,
+              login: mockAuthenticatedResponse.login,
+              avatar: mockAuthenticatedResponse.avatar_url as Link,
+            },
+            version: '3.0.0',
+          } satisfies Account,
+        ]);
+      });
+
+      it('should add oauth app account', async () => {
+        const result = await authUtils.addAccount(
+          mockAuthState,
+          'OAuth App',
+          '123-456' as Token,
+          'github.gitify.io' as Hostname,
+        );
+
+        expect(result.accounts).toEqual([
+          {
+            hasRequiredScopes: true,
+            hostname: 'github.gitify.io' as Hostname,
+            method: 'OAuth App',
+            platform: 'GitHub Enterprise Server',
+            token: 'encrypted' as Token,
+            user: {
+              id: String(mockAuthenticatedResponse.id),
+              name: mockAuthenticatedResponse.name,
+              login: mockAuthenticatedResponse.login,
+              avatar: mockAuthenticatedResponse.avatar_url as Link,
+            },
+            version: '3.0.0',
+          } satisfies Account,
+        ]);
+      });
+    });
+  });
 
   describe('removeAccount', () => {
     it('should remove account with matching token', async () => {

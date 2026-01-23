@@ -3,6 +3,9 @@ import type { Endpoints } from '@octokit/types';
 
 export type APIClientType = 'rest' | 'graphql';
 
+export type GetAuthenticatedUserResponse =
+  Endpoints['GET /user']['response']['data'];
+
 export type ListNotificationsForAuthenticatedUserResponse =
   Endpoints['GET /notifications']['response']['data'];
 
@@ -22,9 +25,6 @@ export type RawGitHubNotification =
   Endpoints['GET /notifications']['response']['data'][number];
 
 export type RawUser = components['schemas']['simple-user'];
-
-export type GetAuthenticatedUserResponse =
-  Endpoints['GET /user']['response']['data'];
 
 /**
  * Minimal response for endpoints where we're only interested in the `html_url`.
