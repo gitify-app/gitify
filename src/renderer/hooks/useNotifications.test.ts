@@ -1,6 +1,6 @@
 import { act, renderHook, waitFor } from '@testing-library/react';
 
-import nock from 'nock';
+import { RequestError } from '@octokit/request-error';
 
 import type { DeepPartial } from '../__helpers__/test-utils';
 import {
@@ -12,7 +12,8 @@ import { mockAuth, mockSettings, mockState } from '../__mocks__/state-mocks';
 
 import type { ListNotificationsForAuthenticatedUserResponse } from '../utils/api/types';
 
-// import { Errors } from '../utils/errors';
+import * as apiClient from '../utils/api/client';
+import { Errors } from '../utils/errors';
 import * as logger from '../utils/logger';
 import * as native from '../utils/notifications/native';
 import * as sound from '../utils/notifications/sound';
@@ -37,8 +38,6 @@ describe('renderer/hooks/useNotifications.ts', () => {
     // FIXME - isolate test data between tests
     mockGitifyNotification.unread = true;
   });
-
-  const id = mockGitifyNotification.id;
 
   describe('fetchNotifications', () => {
     const mockRepository = {
@@ -145,13 +144,9 @@ describe('renderer/hooks/useNotifications.ts', () => {
         },
       };
 
-      nock('https://api.github.com')
-        .get('/notifications?participating=false&all=false')
-        .reply(200, mockNotifications);
-
-      nock('https://github.gitify.io/api/v3')
-        .get('/notifications?participating=false&all=false')
-        .reply(200, mockNotifications);
+      jest
+        .spyOn(apiClient, 'listNotificationsForAuthenticatedUser')
+        .mockResolvedValue(mockNotifications as any);
 
       const { result } = renderHook(() => useNotifications());
 
@@ -177,53 +172,13 @@ describe('renderer/hooks/useNotifications.ts', () => {
     });
 
     it('should fetch detailed notifications with success', async () => {
-      nock('https://api.github.com')
-        .get('/notifications?participating=false&all=false')
-        .reply(200, mockNotifications);
+      jest
+        .spyOn(apiClient, 'listNotificationsForAuthenticatedUser')
+        .mockResolvedValue(mockNotifications as any);
 
-      // TODO - Improve this mock response to cover all notifications
-      nock('https://api.github.com')
-        .post('/graphql')
-        .reply(200, {
-          data: {
-            search: {
-              nodes: [
-                {
-                  title: 'This is a Discussion.',
-                  stateReason: null,
-                  isAnswered: true,
-                  url: 'https://github.com/gitify-app/notifications-test/discussions/612',
-                  author: {
-                    login: 'discussion-creator',
-                    url: 'https://github.com/discussion-creator',
-                    avatar_url:
-                      'https://avatars.githubusercontent.com/u/133795385?s=200&v=4',
-                    type: 'User',
-                  },
-                  comments: {
-                    nodes: [
-                      {
-                        databaseId: 2297637,
-                        createdAt: '2022-03-04T20:39:44Z',
-                        author: {
-                          login: 'comment-user',
-                          url: 'https://github.com/comment-user',
-                          avatar_url:
-                            'https://avatars.githubusercontent.com/u/1?v=4',
-                          type: 'User',
-                        },
-                        replies: {
-                          nodes: [],
-                        },
-                      },
-                    ],
-                  },
-                  labels: null,
-                },
-              ],
-            },
-          },
-        });
+      jest
+        .spyOn(apiClient, 'fetchNotificationDetailsForList')
+        .mockResolvedValue(new Map());
 
       const { result } = renderHook(() => useNotifications());
 
@@ -251,98 +206,108 @@ describe('renderer/hooks/useNotifications.ts', () => {
       expect(result.current.notifications[0].notifications.length).toBe(6);
     });
 
-    // it('should fetch notifications with same failures', async () => {
-    //   const code = AxiosError.ERR_BAD_REQUEST;
-    //   const status = 401;
-    //   const message = 'Bad credentials';
+    it('should fetch notifications with same failures', async () => {
+      const status = 401;
+      const message = 'Bad credentials';
 
-    //   nock('https://api.github.com/')
-    //     .get('/notifications?participating=false&all=false')
-    //     .replyWithError({
-    //       code,
-    //       response: {
-    //         status,
-    //         data: {
-    //           message,
-    //         },
-    //       },
-    //     });
+      // Mock listNotificationsForAuthenticatedUser to throw RequestError for both accounts
+      const listNotificationsSpy = jest
+        .spyOn(apiClient, 'listNotificationsForAuthenticatedUser')
+        .mockRejectedValue(
+          new RequestError(message, status, {
+            request: {
+              method: 'GET',
+              url: 'https://api.github.com/notifications',
+              headers: {},
+            },
+            response: {
+              status,
+              url: 'https://api.github.com/notifications',
+              headers: {},
+              data: { message },
+            },
+          }),
+        );
 
-    //   nock('https://github.gitify.io/api/v3/')
-    //     .get('/notifications?participating=false&all=false')
-    //     .replyWithError({
-    //       code,
-    //       response: {
-    //         status,
-    //         data: {
-    //           message,
-    //         },
-    //       },
-    //     });
+      const { result } = renderHook(() => useNotifications());
 
-    //   const { result } = renderHook(() => useNotifications());
+      act(() => {
+        result.current.fetchNotifications(mockState);
+      });
 
-    //   act(() => {
-    //     result.current.fetchNotifications(mockState);
-    //   });
+      expect(result.current.status).toBe('loading');
 
-    //   expect(result.current.status).toBe('loading');
+      await waitFor(() => {
+        expect(result.current.status).toBe('error');
+      });
 
-    //   await waitFor(() => {
-    //     expect(result.current.status).toBe('error');
-    //   });
+      expect(result.current.globalError).toBe(Errors.BAD_CREDENTIALS);
+      expect(rendererLogErrorSpy).toHaveBeenCalledTimes(2);
 
-    //   expect(result.current.globalError).toBe(Errors.BAD_CREDENTIALS);
-    //   expect(rendererLogErrorSpy).toHaveBeenCalledTimes(4);
-    // });
+      listNotificationsSpy.mockRestore();
+    });
 
-    // it('should fetch notifications with different failures', async () => {
-    //   const code = AxiosError.ERR_BAD_REQUEST;
+    it('should fetch notifications with different failures', async () => {
+      // Mock to throw different errors for each account
+      const listNotificationsSpy = jest.spyOn(
+        apiClient,
+        'listNotificationsForAuthenticatedUser',
+      );
 
-    //   nock('https://api.github.com/')
-    //     .get('/notifications?participating=false&all=false')
-    //     .replyWithError({
-    //       code,
-    //       response: {
-    //         status: 400,
-    //         data: {
-    //           message: 'Oops! Something went wrong.',
-    //         },
-    //       },
-    //     });
+      listNotificationsSpy
+        .mockRejectedValueOnce(
+          new RequestError('Oops! Something went wrong.', 400, {
+            request: {
+              method: 'GET',
+              url: 'https://api.github.com/notifications',
+              headers: {},
+            },
+            response: {
+              status: 400,
+              url: 'https://api.github.com/notifications',
+              headers: {},
+              data: { message: 'Oops! Something went wrong.' },
+            },
+          }),
+        )
+        .mockRejectedValueOnce(
+          new RequestError('Bad credentials', 401, {
+            request: {
+              method: 'GET',
+              url: 'https://github.gitify.io/api/v3/notifications',
+              headers: {},
+            },
+            response: {
+              status: 401,
+              url: 'https://github.gitify.io/api/v3/notifications',
+              headers: {},
+              data: { message: 'Bad credentials' },
+            },
+          }),
+        );
 
-    //   nock('https://github.gitify.io/api/v3/')
-    //     .get('/notifications?participating=false&all=false')
-    //     .replyWithError({
-    //       code,
-    //       response: {
-    //         status: 401,
-    //         data: {
-    //           message: 'Bad credentials',
-    //         },
-    //       },
-    //     });
+      const { result } = renderHook(() => useNotifications());
 
-    //   const { result } = renderHook(() => useNotifications());
+      act(() => {
+        result.current.fetchNotifications(mockState);
+      });
 
-    //   act(() => {
-    //     result.current.fetchNotifications(mockState);
-    //   });
+      expect(result.current.status).toBe('loading');
 
-    //   expect(result.current.status).toBe('loading');
+      await waitFor(() => {
+        expect(result.current.status).toBe('error');
+      });
 
-    //   await waitFor(() => {
-    //     expect(result.current.status).toBe('error');
-    //   });
+      expect(result.current.globalError).toBeNull();
+      expect(rendererLogErrorSpy).toHaveBeenCalledTimes(2);
 
-    //   expect(result.current.globalError).toBeNull();
-    //   expect(rendererLogErrorSpy).toHaveBeenCalledTimes(4);
-    // });
+      listNotificationsSpy.mockRestore();
+    });
 
     it('should play sound when new notifications arrive and playSound is enabled', async () => {
-      nock('https://api.github.com')
-        .get('/notifications?participating=false&all=false')
-        .reply(200, mockNotifications);
+      jest
+        .spyOn(apiClient, 'listNotificationsForAuthenticatedUser')
+        .mockResolvedValue(mockNotifications as any);
 
       const stateWithSound = {
         auth: {
@@ -371,9 +336,9 @@ describe('renderer/hooks/useNotifications.ts', () => {
     });
 
     it('should show native notification when new notifications arrive and showNotifications is enabled', async () => {
-      nock('https://api.github.com')
-        .get('/notifications?participating=false&all=false')
-        .reply(200, mockNotifications);
+      jest
+        .spyOn(apiClient, 'listNotificationsForAuthenticatedUser')
+        .mockResolvedValue(mockNotifications as any);
 
       const stateWithNotifications = {
         auth: {
@@ -402,9 +367,9 @@ describe('renderer/hooks/useNotifications.ts', () => {
     });
 
     it('should play sound and show notification when both are enabled', async () => {
-      nock('https://api.github.com')
-        .get('/notifications?participating=false&all=false')
-        .reply(200, mockNotifications);
+      jest
+        .spyOn(apiClient, 'listNotificationsForAuthenticatedUser')
+        .mockResolvedValue(mockNotifications as any);
 
       const stateWithBoth = {
         auth: {
@@ -434,11 +399,10 @@ describe('renderer/hooks/useNotifications.ts', () => {
 
     it('should not play sound or show notification when no new notifications', async () => {
       // Return empty notifications - no new notifications to trigger sound/native
-      nock('https://api.github.com')
-        .get('/notifications?participating=false&all=false')
-        .reply(
-          200,
-          [] satisfies Partial<ListNotificationsForAuthenticatedUserResponse>,
+      jest
+        .spyOn(apiClient, 'listNotificationsForAuthenticatedUser')
+        .mockResolvedValue(
+          [] satisfies Partial<ListNotificationsForAuthenticatedUserResponse> as any,
         );
 
       const stateWithBoth = {
@@ -470,9 +434,9 @@ describe('renderer/hooks/useNotifications.ts', () => {
 
   describe('markNotificationsAsRead', () => {
     it('should mark notifications as read with success', async () => {
-      nock('https://api.github.com/')
-        .patch(`/notifications/threads/${id}`)
-        .reply(205);
+      jest
+        .spyOn(apiClient, 'markNotificationThreadAsRead')
+        .mockResolvedValue({} as any);
 
       const { result } = renderHook(() => useNotifications());
 
@@ -490,9 +454,9 @@ describe('renderer/hooks/useNotifications.ts', () => {
     });
 
     it('should mark notifications as read with failure', async () => {
-      nock('https://api.github.com/')
-        .patch(`/notifications/threads/${id}`)
-        .reply(400);
+      jest
+        .spyOn(apiClient, 'markNotificationThreadAsRead')
+        .mockRejectedValue(new Error('Bad request'));
 
       const { result } = renderHook(() => useNotifications());
 
@@ -559,15 +523,13 @@ describe('renderer/hooks/useNotifications.ts', () => {
           },
         ];
 
-      // Fetch notifications
-      nock('https://api.github.com')
-        .get('/notifications?participating=false&all=true')
-        .reply(200, mockNotifications);
+      jest
+        .spyOn(apiClient, 'listNotificationsForAuthenticatedUser')
+        .mockResolvedValue(mockNotifications as any);
 
-      // The mark notification as read endpoint call, only the first notification.
-      nock('https://api.github.com/')
-        .patch('/notifications/threads/1')
-        .reply(205);
+      jest
+        .spyOn(apiClient, 'markNotificationThreadAsRead')
+        .mockResolvedValue({} as any);
 
       const stateWithFetchRead = {
         auth: {
@@ -673,19 +635,14 @@ describe('renderer/hooks/useNotifications.ts', () => {
           },
         ];
 
-      // Fetch notifications for both accounts
-      nock('https://api.github.com')
-        .get('/notifications?participating=false&all=true')
-        .reply(200, mockCloudNotifications);
+      jest
+        .spyOn(apiClient, 'listNotificationsForAuthenticatedUser')
+        .mockResolvedValueOnce(mockCloudNotifications as any)
+        .mockResolvedValueOnce(mockEnterpriseNotifications as any);
 
-      nock('https://github.gitify.io/api/v3')
-        .get('/notifications?participating=false&all=true')
-        .reply(200, mockEnterpriseNotifications);
-
-      // The mark notification as read endpoint call.
-      nock('https://api.github.com/')
-        .patch('/notifications/threads/1')
-        .reply(205);
+      jest
+        .spyOn(apiClient, 'markNotificationThreadAsRead')
+        .mockResolvedValue({} as any);
 
       const stateWithMultipleAccounts = {
         auth: mockAuth,
@@ -764,15 +721,13 @@ describe('renderer/hooks/useNotifications.ts', () => {
           },
         ];
 
-      // First fetch notifications to populate the state
-      nock('https://api.github.com')
-        .get('/notifications?participating=false&all=true')
-        .reply(200, mockNotifications);
+      jest
+        .spyOn(apiClient, 'listNotificationsForAuthenticatedUser')
+        .mockResolvedValue(mockNotifications as any);
 
-      // Mock the mark as read endpoint
-      nock('https://api.github.com/')
-        .patch(`/notifications/threads/${id}`)
-        .reply(205);
+      jest
+        .spyOn(apiClient, 'markNotificationThreadAsRead')
+        .mockResolvedValue({} as any);
 
       const stateWithFetchRead = {
         auth: {
@@ -824,9 +779,9 @@ describe('renderer/hooks/useNotifications.ts', () => {
 
   describe('markNotificationsAsDone', () => {
     it('should mark notifications as done with success', async () => {
-      nock('https://api.github.com/')
-        .delete(`/notifications/threads/${id}`)
-        .reply(204);
+      jest
+        .spyOn(apiClient, 'markNotificationThreadAsDone')
+        .mockResolvedValue({} as any);
 
       const { result } = renderHook(() => useNotifications());
 
@@ -865,9 +820,9 @@ describe('renderer/hooks/useNotifications.ts', () => {
     });
 
     it('should mark notifications as done with failure', async () => {
-      nock('https://api.github.com/')
-        .delete(`/notifications/threads/${id}`)
-        .reply(400);
+      jest
+        .spyOn(apiClient, 'markNotificationThreadAsDone')
+        .mockRejectedValue(new Error('Bad request'));
 
       const { result } = renderHook(() => useNotifications());
 
@@ -888,15 +843,13 @@ describe('renderer/hooks/useNotifications.ts', () => {
 
   describe('unsubscribeNotification', () => {
     it('should unsubscribe from a notification with success - markAsDoneOnUnsubscribe = false', async () => {
-      // The unsubscribe from notification thread endpoint call.
-      nock('https://api.github.com/')
-        .put(`/notifications/threads/${id}/subscription`)
-        .reply(200);
+      jest
+        .spyOn(apiClient, 'ignoreNotificationThreadSubscription')
+        .mockResolvedValue({} as any);
 
-      // The mark notification as read endpoint call.
-      nock('https://api.github.com/')
-        .patch(`/notifications/threads/${id}`)
-        .reply(205);
+      jest
+        .spyOn(apiClient, 'markNotificationThreadAsRead')
+        .mockResolvedValue({} as any);
 
       const { result } = renderHook(() => useNotifications());
 
@@ -915,15 +868,13 @@ describe('renderer/hooks/useNotifications.ts', () => {
     });
 
     it('should unsubscribe from a notification with success - markAsDoneOnUnsubscribe = true', async () => {
-      // The unsubscribe from notification thread endpoint call.
-      nock('https://api.github.com/')
-        .put(`/notifications/threads/${id}/subscription`)
-        .reply(200);
+      jest
+        .spyOn(apiClient, 'ignoreNotificationThreadSubscription')
+        .mockResolvedValue({} as any);
 
-      // The mark notification as done endpoint call.
-      nock('https://api.github.com/')
-        .delete(`/notifications/threads/${id}`)
-        .reply(204);
+      jest
+        .spyOn(apiClient, 'markNotificationThreadAsDone')
+        .mockResolvedValue({} as any);
 
       const { result } = renderHook(() => useNotifications());
 
@@ -948,15 +899,13 @@ describe('renderer/hooks/useNotifications.ts', () => {
     });
 
     it('should unsubscribe from a notification with failure', async () => {
-      // The unsubscribe from notification thread endpoint call.
-      nock('https://api.github.com/')
-        .put(`/notifications/threads/${id}/subscription`)
-        .reply(400);
+      jest
+        .spyOn(apiClient, 'ignoreNotificationThreadSubscription')
+        .mockRejectedValue(new Error('Bad request'));
 
-      // The mark notification as read endpoint call.
-      nock('https://api.github.com/')
-        .patch(`/notifications/threads/${id}`)
-        .reply(400);
+      jest
+        .spyOn(apiClient, 'markNotificationThreadAsRead')
+        .mockRejectedValue(new Error('Bad request'));
 
       const { result } = renderHook(() => useNotifications());
 
@@ -976,15 +925,13 @@ describe('renderer/hooks/useNotifications.ts', () => {
     });
 
     it('should mark as done when markAsDoneOnUnsubscribe is true even with fetchReadNotifications enabled', async () => {
-      // The unsubscribe from notification thread endpoint call.
-      nock('https://api.github.com/')
-        .put(`/notifications/threads/${id}/subscription`)
-        .reply(200);
+      jest
+        .spyOn(apiClient, 'ignoreNotificationThreadSubscription')
+        .mockResolvedValue({} as any);
 
-      // The mark notification as done endpoint call.
-      nock('https://api.github.com/')
-        .delete(`/notifications/threads/${id}`)
-        .reply(204);
+      jest
+        .spyOn(apiClient, 'markNotificationThreadAsDone')
+        .mockResolvedValue({} as any);
 
       const { result } = renderHook(() => useNotifications());
 
@@ -1010,15 +957,13 @@ describe('renderer/hooks/useNotifications.ts', () => {
     });
 
     it('should mark as read when markAsDoneOnUnsubscribe is false and fetchReadNotifications is enabled', async () => {
-      // The unsubscribe from notification thread endpoint call.
-      nock('https://api.github.com/')
-        .put(`/notifications/threads/${id}/subscription`)
-        .reply(200);
+      jest
+        .spyOn(apiClient, 'ignoreNotificationThreadSubscription')
+        .mockResolvedValue({} as any);
 
-      // The mark notification as read endpoint call.
-      nock('https://api.github.com/')
-        .patch(`/notifications/threads/${id}`)
-        .reply(205);
+      jest
+        .spyOn(apiClient, 'markNotificationThreadAsRead')
+        .mockResolvedValue({} as any);
 
       const { result } = renderHook(() => useNotifications());
 
@@ -1072,10 +1017,9 @@ describe('renderer/hooks/useNotifications.ts', () => {
           },
         ];
 
-      // First fetch notifications to populate the state
-      nock('https://api.github.com')
-        .get('/notifications?participating=false&all=false')
-        .reply(200, mockNotifications);
+      jest
+        .spyOn(apiClient, 'listNotificationsForAuthenticatedUser')
+        .mockResolvedValue(mockNotifications as any);
 
       const stateWithSingleAccount = {
         auth: {

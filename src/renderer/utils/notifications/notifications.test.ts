@@ -1,5 +1,3 @@
-import nock from 'nock';
-
 import {
   mockGitHubCloudAccount,
   mockGitHubEnterpriseServerAccount,
@@ -76,7 +74,7 @@ describe('renderer/utils/notifications/notifications.ts', () => {
     };
     mockNotification.repository = mockRepository;
 
-    nock('https://api.github.com').post('/graphql').replyWithError(mockError);
+    jest.spyOn(apiClient, 'fetchIssueByNumber').mockRejectedValue(mockError);
 
     await enrichNotification(mockNotification, mockSettings);
 
