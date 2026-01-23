@@ -1,6 +1,5 @@
 import nock from 'nock';
 
-import { configureAxiosHttpAdapterForNock } from '../../../__helpers__/test-utils';
 import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
 import {
@@ -24,10 +23,6 @@ import type {
 import { getLatestReviewForReviewers, pullRequestHandler } from './pullRequest';
 
 describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
-  beforeEach(() => {
-    configureAxiosHttpAdapterForNock();
-  });
-
   describe('mergeQueryConfig', () => {
     describe('supportsMergedQueryEnrichment', () => {
       it('should support merge query', () => {

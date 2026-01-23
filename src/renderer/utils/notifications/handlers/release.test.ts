@@ -1,6 +1,5 @@
 import nock from 'nock';
 
-import { configureAxiosHttpAdapterForNock } from '../../../__helpers__/test-utils';
 import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
 import { mockRawUser } from '../../api/__mocks__/response-mocks';
@@ -17,10 +16,6 @@ describe('renderer/utils/notifications/handlers/release.ts', () => {
     url: 'https://api.github.com/repos/gitify-app/notifications-test/releases/1' as Link,
     latestCommentUrl:
       'https://api.github.com/repos/gitify-app/notifications-test/releases/1' as Link,
-  });
-
-  beforeEach(() => {
-    configureAxiosHttpAdapterForNock();
   });
 
   describe('enrich', () => {

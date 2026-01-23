@@ -2,10 +2,7 @@ import { act, renderHook, waitFor } from '@testing-library/react';
 
 import nock from 'nock';
 
-import {
-  configureAxiosHttpAdapterForNock,
-  type DeepPartial,
-} from '../__helpers__/test-utils';
+import type { DeepPartial } from '../__helpers__/test-utils';
 import {
   mockGitHubCloudAccount,
   mockGitHubEnterpriseServerAccount,
@@ -35,10 +32,9 @@ describe('renderer/hooks/useNotifications.ts', () => {
     .mockImplementation();
 
   beforeEach(() => {
-    configureAxiosHttpAdapterForNock();
-
     jest.clearAllMocks();
     // Reset mock notification state between tests since it's mutated
+    // FIXME - isolate test data between tests
     mockGitifyNotification.unread = true;
   });
 

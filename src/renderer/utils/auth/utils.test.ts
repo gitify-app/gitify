@@ -1,4 +1,3 @@
-import { configureAxiosHttpAdapterForNock } from '../../__helpers__/test-utils';
 import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
 import { mockAuth } from '../../__mocks__/state-mocks';
 
@@ -32,10 +31,6 @@ const exchangeWebFlowCodeMock = exchangeWebFlowCode as jest.MockedFunction<
 >;
 
 describe('renderer/utils/auth/utils.ts', () => {
-  beforeEach(() => {
-    configureAxiosHttpAdapterForNock();
-  });
-
   describe('authGitHub', () => {
     jest.spyOn(logger, 'rendererLogInfo').mockImplementation();
     const openExternalLinkSpy = jest

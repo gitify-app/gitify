@@ -21,10 +21,7 @@ interface AppContextProviderProps {
  * Wrapper component that provides ThemeProvider, BaseStyles, and AppContext
  * with sensible defaults for testing.
  */
-export function AppContextProvider({
-  children,
-  value = {},
-}: AppContextProviderProps) {
+function AppContextProvider({ children, value = {} }: AppContextProviderProps) {
   const defaultValue: AppContextState = useMemo(() => {
     return {
       auth: mockAuth,
@@ -95,14 +92,4 @@ export function renderWithAppContext(
  */
 export function ensureStableEmojis() {
   globalThis.Math.random = jest.fn(() => 0.1);
-}
-
-/**
- * Configure HTTP mocking for tests that use nock.
- *
- * Octokit uses @octokit/request which is compatible with nock's HTTP interception.
- * No special configuration is needed.
- */
-export function configureAxiosHttpAdapterForNock() {
-  // No-op: Octokit's @octokit/request works with nock by default
 }
