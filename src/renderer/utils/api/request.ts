@@ -1,22 +1,9 @@
-
-import type { Hostname, Link, Token } from '../../types';
+import type { Account } from '../../types';
 import type { GitHubGraphQLResponse } from './graphql/types';
 
 import { assertNoGraphQLErrors } from './errors';
 import type { TypedDocumentString } from './graphql/generated/graphql';
 import { createOctokitClient } from './octokit';
-
-/**
- * Extract hostname from a GitHub API URL
- */
-function extractHostnameFromUrl(url: Link): Hostname {
-  const parsedUrl = new URL(url);
-  // For api.github.com URLs, return github.com
-  if (parsedUrl.hostname === 'api.github.com') {
-    return 'github.com' as Hostname;
-  }
-  return parsedUrl.hostname as Hostname;
-}
 
 
 
@@ -29,13 +16,14 @@ function extractHostnameFromUrl(url: Link): Hostname {
  * @returns Resolves to a GitHub GraphQL response
  */
 export async function performGraphQLRequest<TResult, TVariables>(
-  url: Link,
-  token: Token,
+  account: Account,
   query: TypedDocumentString<TResult, TVariables>,
   ...[variables]: TVariables extends Record<string, never> ? [] : [TVariables]
 ): Promise<GitHubGraphQLResponse<TResult>> {
-  const hostname = extractHostnameFromUrl(url);
-  const octokit = await createOctokitClient(hostname, token);
+   // FIXME graphql base url for enterprise accounts
+  // const url = getGitHubGraphQLUrl(account.hostname);
+  
+  const octokit = await createOctokitClient(account);
 
   try {
     const response = await octokit.graphql<TResult>(
@@ -80,13 +68,14 @@ export async function performGraphQLRequest<TResult, TVariables>(
  * @returns Resolves to a GitHub GraphQL response
  */
 export async function performGraphQLRequestString<TResult>(
-  url: Link,
-  token: Token,
+  account: Account,
   query: string,
   variables?: Record<string, unknown>,
 ): Promise<GitHubGraphQLResponse<TResult>> {
-  const hostname = extractHostnameFromUrl(url);
-  const octokit = await createOctokitClient(hostname, token);
+  // FIXME graphql base url for enterprise accounts
+    // const url = getGitHubGraphQLUrl(account.hostname);
+  
+  const octokit = await createOctokitClient(account);
 
   try {
     const response = await octokit.graphql<TResult>(query, variables || {});
@@ -121,4 +110,3 @@ export async function performGraphQLRequestString<TResult>(
     throw error;
   }
 }
-

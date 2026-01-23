@@ -12,12 +12,12 @@ import type {
   SettingsState,
   UserType,
 } from '../../../types';
+import type { GetReleaseResponse } from '../../api/types';
 
 import { followUrl } from '../../api/client';
 import { isStateFilteredOut } from '../filters/filter';
 import { DefaultHandler, defaultHandler } from './default';
 import { getNotificationAuthor } from './utils';
-import { GetReleaseResponse } from '../../api/types';
 
 class ReleaseHandler extends DefaultHandler {
   readonly type = 'Release';
@@ -33,8 +33,9 @@ class ReleaseHandler extends DefaultHandler {
       return {};
     }
 
-    const release = (
-      await followUrl<GetReleaseResponse>(notification.account, notification.subject.url)
+    const release = await followUrl<GetReleaseResponse>(
+      notification.account,
+      notification.subject.url,
     );
 
     const user: GitifyNotificationUser = release.author

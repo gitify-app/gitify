@@ -2,8 +2,9 @@ import { Octokit } from '@octokit/core';
 import { paginateRest } from '@octokit/plugin-paginate-rest';
 import { restEndpointMethods } from '@octokit/plugin-rest-endpoint-methods';
 
-import type { Hostname, Token } from '../../types';
+import type { Account } from '../../types';
 
+import { getAccountUUID } from '../auth/utils';
 import { decryptValue } from '../comms';
 import { getGitHubAPIBaseUrl } from './utils';
 
@@ -11,24 +12,50 @@ import { getGitHubAPIBaseUrl } from './utils';
 const OctokitWithPlugins = Octokit.plugin(paginateRest, restEndpointMethods);
 export type OctokitClient = InstanceType<typeof OctokitWithPlugins>;
 
+// Cache Octokit clients per account UUID
+const octokitClientCache = new Map<string, OctokitClient>();
+
+/**
+ * Clear the Octokit client cache
+ * Useful when accounts are added/removed or tokens change
+ */
+export function clearOctokitClientCache(): void {
+  octokitClientCache.clear();
+}
+
 /**
  * Create an authenticated Octokit client instance
+ * Clients are cached per account UUID to avoid recreating them for every API call
  *
- * @param hostname The account hostname
- * @param token A GitHub token (encrypted)
+ * @param account The account to create the client for
  * @returns An authenticated Octokit instance with pagination and REST endpoint plugins
  */
 export async function createOctokitClient(
-  hostname: Hostname,
-  token: Token,
+  account: Account,
 ): Promise<OctokitClient> {
-  const decryptedToken = (await decryptValue(token)) as Token;
+  const accountUUID = getAccountUUID(account);
+
+  // Return cached client if it exists
+  const cachedClient = octokitClientCache.get(accountUUID);
+  if (cachedClient) {
+    return cachedClient;
+  }
+
+  // Create new client
+  const decryptedToken = await decryptValue(account.token);
 
   // Get the base API URL for the hostname
-  const baseUrl = getGitHubAPIBaseUrl(hostname).toString().replace(/\/$/, '');
+  const baseUrl = getGitHubAPIBaseUrl(account.hostname)
+    .toString()
+    .replace(/\/$/, '');
 
-  return new OctokitWithPlugins({
+  const client = new OctokitWithPlugins({
     auth: decryptedToken,
     baseUrl,
   });
+
+  // Cache the client
+  octokitClientCache.set(accountUUID, client);
+
+  return client;
 }

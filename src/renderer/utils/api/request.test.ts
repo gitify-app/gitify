@@ -1,12 +1,9 @@
-import { mockToken } from '../../__mocks__/state-mocks';
+import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
 
-import type { Link } from '../../types';
 
 import type { OctokitClient } from './octokit';
 import * as octokitModule from './octokit';
-import {
-  performGraphQLRequestString,
-} from './request';
+import { performGraphQLRequestString } from './request';
 
 // Manually mock Octokit for these tests
 jest.mock('@octokit/core', () => {
@@ -33,8 +30,7 @@ jest.mock('@octokit/plugin-rest-endpoint-methods', () => ({
   restEndpointMethods: jest.fn((octokit: any) => octokit),
 }));
 
-const url = 'https://example.com' as Link;
-// const method = 'get';
+
 
 describe('renderer/utils/api/request.ts', () => {
   let mockOctokitInstance: {
@@ -59,17 +55,14 @@ describe('renderer/utils/api/request.ts', () => {
     jest.clearAllMocks();
   });
 
-  
   describe('performGraphQLRequest', () => {
     // it('should performGraphQLRequest with the correct parameters and default data', async () => {
     //   mockOctokitInstance.graphql.mockResolvedValue({});
-
     //   await performGraphQLRequest(
     //     url,
     //     mockToken,
     //     FetchAuthenticatedUserDetailsDocument,
     //   );
-
     //   expect(mockOctokitInstance.graphql).toHaveBeenCalledWith(
     //     FetchAuthenticatedUserDetailsDocument.toString(),
     //     {},
@@ -82,11 +75,9 @@ describe('renderer/utils/api/request.ts', () => {
       const queryString = 'query Foo { repository { issue { title } } }';
       mockOctokitInstance.graphql.mockResolvedValue({});
 
-      await performGraphQLRequestString(url, mockToken, queryString);
+      await performGraphQLRequestString(mockGitHubCloudAccount, queryString);
 
       expect(mockOctokitInstance.graphql).toHaveBeenCalledWith(queryString, {});
     });
   });
-
-  
 });

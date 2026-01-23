@@ -31,7 +31,6 @@ export type RawUser = components['schemas']['simple-user'];
 export type GetAuthenticatedUserResponse =
   Endpoints['GET /user']['response']['data'];
 
-
 /**
  * Minimal response for endpoints where we're only interested in the `html_url`.
  *

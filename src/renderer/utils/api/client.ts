@@ -1,12 +1,12 @@
+import type { OctokitResponse } from '@octokit/plugin-paginate-rest/dist-types/types';
+
 import { Constants } from '../../constants';
 
 import type {
   Account,
   GitifyNotification,
-  Hostname,
   Link,
   SettingsState,
-  Token,
 } from '../../types';
 import type { GitHubGraphQLResponse } from './graphql/types';
 import type {
@@ -36,8 +36,7 @@ import {
 import { MergeQueryBuilder } from './graphql/MergeQueryBuilder';
 import { createOctokitClient } from './octokit';
 import { performGraphQLRequest, performGraphQLRequestString } from './request';
-import { getGitHubGraphQLUrl, getNumberFromUrl } from './utils';
-import { OctokitResponse } from '@octokit/plugin-paginate-rest/dist-types/types';
+import {  getNumberFromUrl } from './utils';
 
 /**
  * Perform a HEAD operation, used to validate that connectivity is established.
@@ -45,10 +44,9 @@ import { OctokitResponse } from '@octokit/plugin-paginate-rest/dist-types/types'
  * Endpoint documentation: https://docs.github.com/en/rest/activity/notifications
  */
 export async function headNotifications(
-  hostname: Hostname,
-  token: Token,
+  account: Account,
 ): Promise<HeadNotificationsResponse> {
-  const octokit = await createOctokitClient(hostname, token);
+  const octokit = await createOctokitClient(account);
 
   await octokit.rest.activity.listNotificationsForAuthenticatedUser({
     per_page: 1,
@@ -64,7 +62,7 @@ export async function listNotificationsForAuthenticatedUser(
   account: Account,
   settings: SettingsState,
 ): Promise<ListNotificationsForAuthenticatedUserResponse> {
-  const octokit = await createOctokitClient(account.hostname, account.token);
+  const octokit = await createOctokitClient(account);
 
   if (settings.fetchAllNotifications) {
     // Fetch all pages using Octokit's pagination
@@ -107,7 +105,7 @@ export async function markNotificationThreadAsRead(
   account: Account,
   threadId: string,
 ): Promise<MarkNotificationThreadAsReadResponse> {
-  const octokit = await createOctokitClient(account.hostname, account.token);
+  const octokit = await createOctokitClient(account);
 
   const response = await octokit.rest.activity.markThreadAsRead({
     thread_id: Number(threadId),
@@ -128,7 +126,7 @@ export async function markNotificationThreadAsDone(
   account: Account,
   threadId: string,
 ): Promise<MarkNotificationThreadAsDoneResponse> {
-  const octokit = await createOctokitClient(account.hostname, account.token);
+  const octokit = await createOctokitClient(account);
 
   const response = await octokit.rest.activity.markThreadAsDone({
     thread_id: Number(threadId),
@@ -146,7 +144,7 @@ export async function ignoreNotificationThreadSubscription(
   account: Account,
   threadId: string,
 ): Promise<IgnoreNotificationThreadSubscriptionResponse> {
-  const octokit = await createOctokitClient(account.hostname, account.token);
+  const octokit = await createOctokitClient(account);
 
   const response = await octokit.rest.activity.setThreadSubscription({
     thread_id: Number(threadId),
@@ -165,7 +163,7 @@ export async function getCommit(
   account: Account,
   url: Link,
 ): Promise<GetCommitResponse> {
-      const octokit = await createOctokitClient(account.hostname, account.token);
+  const octokit = await createOctokitClient(account);
 
   // Perform a generic GET request using Octokit's request method
   const response = await octokit.request('GET {+url}', {
@@ -184,7 +182,7 @@ export async function getCommitComment(
   account: Account,
   url: Link,
 ): Promise<GetCommitCommentResponse> {
-    const octokit = await createOctokitClient(account.hostname, account.token);
+  const octokit = await createOctokitClient(account);
 
   // Perform a generic GET request using Octokit's request method
   const response = await octokit.request('GET {+url}', {
@@ -203,7 +201,7 @@ export async function getRelease(
   account: Account,
   url: Link,
 ): Promise<GetReleaseResponse> {
-  const octokit = await createOctokitClient(account.hostname, account.token);
+  const octokit = await createOctokitClient(account);
 
   // Perform a generic GET request using Octokit's request method
   const response = await octokit.request('GET {+url}', {
@@ -220,7 +218,7 @@ export async function getHtmlUrl(
   account: Account,
   url: Link,
 ): Promise<GitHubHtmlUrlResponse> {
-  const octokit = await createOctokitClient(account.hostname, account.token);
+  const octokit = await createOctokitClient(account);
 
   // Perform a generic GET request using Octokit's request method
   const response = await octokit.request('GET {+url}', {
@@ -230,7 +228,6 @@ export async function getHtmlUrl(
   return response.data as GitHubHtmlUrlResponse;
 }
 
-
 /**
  * Follow GitHub Response URL
  */
@@ -238,7 +235,7 @@ export async function followUrl<TResult>(
   account: Account,
   url: Link,
 ): Promise<TResult> {
-  const octokit = await createOctokitClient(account.hostname, account.token);
+  const octokit = await createOctokitClient(account);
 
   // Perform a generic GET request using Octokit's request method
   const response = await octokit.request('GET {+url}', {
@@ -252,12 +249,11 @@ export async function followUrl<TResult>(
  * Fetch details of the currently authenticated GitHub user.
  */
 export async function fetchAuthenticatedUserDetails(
-  hostname: Hostname,
-  token: Token,
+  account: Account,
 ): Promise<OctokitResponse<GetAuthenticatedUserResponse>> {
-    const octokit = await createOctokitClient(hostname, token);
+  const octokit = await createOctokitClient(account);
 
-  const response = await octokit.rest.users.getAuthenticated()
+  const response = await octokit.rest.users.getAuthenticated();
 
   return response;
 }
@@ -268,12 +264,10 @@ export async function fetchAuthenticatedUserDetails(
 export async function fetchDiscussionByNumber(
   notification: GitifyNotification,
 ): Promise<GitHubGraphQLResponse<FetchDiscussionByNumberQuery>> {
-  const url = getGitHubGraphQLUrl(notification.account.hostname);
   const number = getNumberFromUrl(notification.subject.url);
 
   return performGraphQLRequest(
-    url.toString() as Link,
-    notification.account.token,
+    notification.account,
     FetchDiscussionByNumberDocument,
     {
       owner: notification.repository.owner.login,
@@ -295,12 +289,10 @@ export async function fetchDiscussionByNumber(
 export async function fetchIssueByNumber(
   notification: GitifyNotification,
 ): Promise<GitHubGraphQLResponse<FetchIssueByNumberQuery>> {
-  const url = getGitHubGraphQLUrl(notification.account.hostname);
   const number = getNumberFromUrl(notification.subject.url);
 
   return performGraphQLRequest(
-    url.toString() as Link,
-    notification.account.token,
+    notification.account,
     FetchIssueByNumberDocument,
     {
       owner: notification.repository.owner.login,
@@ -318,12 +310,10 @@ export async function fetchIssueByNumber(
 export async function fetchPullByNumber(
   notification: GitifyNotification,
 ): Promise<GitHubGraphQLResponse<FetchPullRequestByNumberQuery>> {
-  const url = getGitHubGraphQLUrl(notification.account.hostname);
   const number = getNumberFromUrl(notification.subject.url);
 
   return performGraphQLRequest(
-    url.toString() as Link,
-    notification.account.token,
+    notification.account,
     FetchPullRequestByNumberDocument,
     {
       owner: notification.repository.owner.login,
@@ -399,11 +389,8 @@ export async function fetchNotificationDetailsForList(
   const query = builder.getGraphQLQuery();
   const variables = builder.getGraphQLVariables();
 
-  const url = getGitHubGraphQLUrl(notifications[0].account.hostname);
-
   const response = await performGraphQLRequestString(
-    url.toString() as Link,
-    notifications[0].account.token,
+    notifications[0].account,
     query,
     variables,
   );
