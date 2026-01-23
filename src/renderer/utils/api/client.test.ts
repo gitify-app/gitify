@@ -17,7 +17,6 @@ import {
   fetchNotificationDetailsForList,
   fetchPullByNumber,
   getHtmlUrl,
-  headNotifications,
   ignoreNotificationThreadSubscription,
   listNotificationsForAuthenticatedUser,
   markNotificationThreadAsDone,
@@ -57,10 +56,15 @@ describe('renderer/utils/api/client.ts', () => {
     octokitModule,
     'createOctokitClient',
   );
+  const createOctokitClientUncachedSpy = jest.spyOn(
+    octokitModule,
+    'createOctokitClientUncached',
+  );
 
   beforeEach(() => {
     // Mock createOctokitClient to return our mock
     createOctokitClientSpy.mockResolvedValue(mockOctokit as any);
+    createOctokitClientUncachedSpy.mockResolvedValue(mockOctokit as any);
 
     // Mock Octokit REST method
     mockOctokit.rest.activity.listNotificationsForAuthenticatedUser.mockResolvedValue(
@@ -112,24 +116,11 @@ describe('renderer/utils/api/client.ts', () => {
   it('fetchAuthenticatedUserDetails - should fetch authenticated user', async () => {
     await fetchAuthenticatedUserDetails(mockGitHubCloudAccount);
 
-    expect(createOctokitClientSpy).toHaveBeenCalledWith(
+    expect(createOctokitClientUncachedSpy).toHaveBeenCalledWith(
       mockGitHubCloudAccount,
       'rest',
-      false,
     );
     expect(mockOctokit.rest.users.getAuthenticated).toHaveBeenCalled();
-  });
-
-  it('headNotifications - should fetch notifications head', async () => {
-    await headNotifications(mockGitHubCloudAccount);
-
-    expect(createOctokitClientSpy).toHaveBeenCalledWith(
-      mockGitHubCloudAccount,
-      'rest',
-    );
-    expect(
-      mockOctokit.rest.activity.listNotificationsForAuthenticatedUser,
-    ).toHaveBeenCalledWith({ per_page: 1 });
   });
 
   describe('listNotificationsForAuthenticatedUser', () => {

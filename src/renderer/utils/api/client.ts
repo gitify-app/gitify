@@ -11,7 +11,6 @@ import type {
   GetCommitResponse,
   GetReleaseResponse,
   GitHubHtmlUrlResponse,
-  HeadNotificationsResponse,
   IgnoreNotificationThreadSubscriptionResponse,
   ListNotificationsForAuthenticatedUserResponse,
   MarkNotificationThreadAsDoneResponse,
@@ -30,35 +29,19 @@ import {
   type FetchPullRequestByNumberQuery,
 } from './graphql/generated/graphql';
 import { MergeQueryBuilder } from './graphql/MergeQueryBuilder';
-import { createOctokitClient } from './octokit';
+import { createOctokitClient, createOctokitClientUncached } from './octokit';
 import { performGraphQLRequest, performGraphQLRequestString } from './request';
 import { getNumberFromUrl } from './utils';
 
 /**
  * Fetch details of the currently authenticated GitHub user.
+ *
+ * Always fetches fresh data without caching to ensure up-to-date user info.
  */
-export async function fetchAuthenticatedUserDetails(
-  account: Account,
-  skipClientCache = false,
-) {
-  const octokit = await createOctokitClient(account, 'rest', skipClientCache);
+export async function fetchAuthenticatedUserDetails(account: Account) {
+  const octokit = await createOctokitClientUncached(account, 'rest');
 
   return await octokit.rest.users.getAuthenticated();
-}
-
-/**
- * Perform a HEAD operation, used to validate that connectivity is established.
- *
- * Endpoint documentation: https://docs.github.com/en/rest/activity/notifications
- */
-export async function headNotifications(
-  account: Account,
-): Promise<HeadNotificationsResponse> {
-  const octokit = await createOctokitClient(account, 'rest');
-
-  await octokit.rest.activity.listNotificationsForAuthenticatedUser({
-    per_page: 1,
-  });
 }
 
 /**

@@ -5,7 +5,11 @@ import {
 } from '../../__mocks__/account-mocks';
 
 import * as comms from '../comms';
-import { clearOctokitClientCache, createOctokitClient } from './octokit';
+import {
+  clearOctokitClientCache,
+  createOctokitClient,
+  createOctokitClientUncached,
+} from './octokit';
 import * as utils from './utils';
 
 describe('renderer/utils/api/octokit.ts', () => {
@@ -127,31 +131,29 @@ describe('renderer/utils/api/octokit.ts', () => {
       expect(getGitHubAPIBaseUrlSpy).toHaveBeenCalledTimes(1);
     });
 
-    it('should bypass cache when skipClientCache is true', async () => {
+    it('should create separate uncached clients each time', async () => {
       const getGitHubAPIBaseUrlSpy = jest.spyOn(utils, 'getGitHubAPIBaseUrl');
       getGitHubAPIBaseUrlSpy.mockReturnValue(
         new URL('https://api.github.com/'),
       );
 
-      const cachedClient = await createOctokitClient(
+      const client1 = await createOctokitClientUncached(
         mockGitHubCloudAccount,
         'rest',
       );
 
-      const nonCachedClient = await createOctokitClient(
-        mockGitHubCloudAccount,
-        'rest',
-        true,
-      );
-
-      const cachedClientAgain = await createOctokitClient(
+      const client2 = await createOctokitClientUncached(
         mockGitHubCloudAccount,
         'rest',
       );
 
-      expect(cachedClient).toBe(cachedClientAgain);
-      expect(nonCachedClient).not.toBe(cachedClient);
+      // Should create different instances each time
+      expect(client1).not.toBe(client2);
+
+      // Should decrypt token each time
       expect(mockDecryptValue).toHaveBeenCalledTimes(2);
+
+      // Should get base URL each time
       expect(getGitHubAPIBaseUrlSpy).toHaveBeenCalledTimes(2);
     });
 

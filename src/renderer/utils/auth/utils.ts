@@ -114,9 +114,10 @@ export async function addAccount(
     method: method,
     platform: getPlatformFromHostname(hostname),
     token: encryptedToken,
+    user: null, // Will be updated during the refresh call below
   } as Account;
 
-  newAccount = await refreshAccount(newAccount, true);
+  newAccount = await refreshAccount(newAccount);
   const newAccountUUID = getAccountUUID(newAccount);
 
   const accountAlreadyExists = accountList.some(
@@ -147,15 +148,9 @@ export function removeAccount(auth: AuthState, account: Account): AuthState {
   };
 }
 
-export async function refreshAccount(
-  account: Account,
-  skipClientCache = false,
-): Promise<Account> {
+export async function refreshAccount(account: Account): Promise<Account> {
   try {
-    const response = await fetchAuthenticatedUserDetails(
-      account,
-      skipClientCache,
-    );
+    const response = await fetchAuthenticatedUserDetails(account);
 
     const user = response.data;
 

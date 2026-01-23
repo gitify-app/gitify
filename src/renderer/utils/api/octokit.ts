@@ -29,29 +29,43 @@ export function clearOctokitClientCache(): void {
 }
 
 /**
- * Create an authenticated Octokit client instance
+ * Create an authenticated Octokit client instance with caching
  * Clients are cached to avoid recreating them for every API call
  *
  * @param account The account to create the client for
  * @param type The api client type (rest | graphql)
- * @returns An authenticated Octokit instance with pagination and REST endpoint plugins
+ * @returns A cached authenticated Octokit instance
  */
 export async function createOctokitClient(
   account: Account,
   type: APIClientType,
-  skipClientCache = false,
 ): Promise<OctokitClient> {
-  let cacheKey: string;
+  const cacheKey = getClientCacheKey(account, type);
 
   // Return cached client if it exists
-  if (!skipClientCache) {
-    cacheKey = getClientCacheKey(account, type);
-    const cachedClient = octokitClientCache.get(cacheKey);
-    if (cachedClient) {
-      return cachedClient;
-    }
+  const cachedClient = octokitClientCache.get(cacheKey);
+  if (cachedClient) {
+    return cachedClient;
   }
 
+  const client = await createOctokitClientUncached(account, type);
+  octokitClientCache.set(cacheKey, client);
+
+  return client;
+}
+
+/**
+ * Create an authenticated Octokit client instance without caching
+ * Useful when fresh data is needed (e.g., user details during account setup)
+ *
+ * @param account The account to create the client for
+ * @param type The api client type (rest | graphql)
+ * @returns A fresh authenticated Octokit instance
+ */
+export async function createOctokitClientUncached(
+  account: Account,
+  type: APIClientType,
+): Promise<OctokitClient> {
   const decryptedToken = await decryptValue(account.token);
 
   const baseUrl = getGitHubAPIBaseUrl(account.hostname, type)
@@ -59,18 +73,11 @@ export async function createOctokitClient(
     .replace(/\/$/, '');
   const userAgent = getUserAgent();
 
-  const client = new OctokitWithPlugins({
+  return new OctokitWithPlugins({
     auth: decryptedToken,
     baseUrl,
     userAgent: userAgent,
   });
-
-  // Cache the client keyed by account UUID + type unless explicitly skipped
-  if (!skipClientCache) {
-    octokitClientCache.set(cacheKey, client);
-  }
-
-  return client;
 }
 
 /**
