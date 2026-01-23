@@ -1,8 +1,9 @@
 import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
 
+import { FetchIssueByNumberDocument } from './graphql/generated/graphql';
 import type { OctokitClient } from './octokit';
 import * as octokitModule from './octokit';
-import { performGraphQLRequestString } from './request';
+import { performGraphQLRequest, performGraphQLRequestString } from './request';
 
 // Manually mock Octokit for these tests
 jest.mock('@octokit/core', () => {
@@ -36,6 +37,11 @@ describe('renderer/utils/api/request.ts', () => {
     paginate: { iterator: jest.Mock };
   };
 
+  const createOctokitClientSpy = jest.spyOn(
+    octokitModule,
+    'createOctokitClient',
+  );
+
   beforeEach(() => {
     mockOctokitInstance = {
       request: jest.fn(),
@@ -52,29 +58,35 @@ describe('renderer/utils/api/request.ts', () => {
     jest.clearAllMocks();
   });
 
-  describe('performGraphQLRequest', () => {
-    // it('should performGraphQLRequest with the correct parameters and default data', async () => {
-    //   mockOctokitInstance.graphql.mockResolvedValue({});
-    //   await performGraphQLRequest(
-    //     url,
-    //     mockToken,
-    //     FetchAuthenticatedUserDetailsDocument,
-    //   );
-    //   expect(mockOctokitInstance.graphql).toHaveBeenCalledWith(
-    //     FetchAuthenticatedUserDetailsDocument.toString(),
-    //     {},
-    //   );
-    // });
+  it('performGraphQLRequest - perform call with correct params', async () => {
+    mockOctokitInstance.graphql.mockResolvedValue({});
+
+    await performGraphQLRequest(
+      mockGitHubCloudAccount,
+      FetchIssueByNumberDocument,
+      { owner: 'test', name: 'repo', number: 1 },
+    );
+
+    expect(createOctokitClientSpy).toHaveBeenCalledWith(
+      mockGitHubCloudAccount,
+      'graphql',
+    );
+    expect(mockOctokitInstance.graphql).toHaveBeenCalledWith(
+      FetchIssueByNumberDocument.toString(),
+      { owner: 'test', name: 'repo', number: 1 },
+    );
   });
 
-  describe('performGraphQLRequestString', () => {
-    it('should performGraphQLRequestString with the correct parameters and default data', async () => {
-      const queryString = 'query Foo { repository { issue { title } } }';
-      mockOctokitInstance.graphql.mockResolvedValue({});
+  it('performGraphQLRequestString - perform call with correct params', async () => {
+    const queryString = 'query Foo { repository { issue { title } } }';
+    mockOctokitInstance.graphql.mockResolvedValue({});
 
-      await performGraphQLRequestString(mockGitHubCloudAccount, queryString);
+    await performGraphQLRequestString(mockGitHubCloudAccount, queryString, {});
 
-      expect(mockOctokitInstance.graphql).toHaveBeenCalledWith(queryString, {});
-    });
+    expect(createOctokitClientSpy).toHaveBeenCalledWith(
+      mockGitHubCloudAccount,
+      'graphql',
+    );
+    expect(mockOctokitInstance.graphql).toHaveBeenCalledWith(queryString, {});
   });
 });

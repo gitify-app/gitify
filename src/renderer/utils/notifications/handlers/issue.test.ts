@@ -1,5 +1,3 @@
-import nock from 'nock';
-
 import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
 import {
@@ -16,6 +14,7 @@ import {
   type Link,
 } from '../../../types';
 
+import * as apiClient from '../../api/client';
 import type { FetchIssueByNumberQuery } from '../../api/graphql/generated/graphql';
 import { issueHandler } from './issue';
 
@@ -27,6 +26,8 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
   });
 
   describe('enrich', () => {
+    const fetchIssueByNumberSpy = jest.spyOn(apiClient, 'fetchIssueByNumber');
+
     const mockNotification = mockPartialGitifyNotification({
       title: 'This is a mock issue',
       type: 'Issue',
@@ -40,15 +41,11 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         state: 'OPEN',
       });
 
-      nock('https://api.github.com')
-        .post('/graphql')
-        .reply(200, {
-          data: {
-            repository: {
-              issue: mockIssue,
-            },
-          } satisfies FetchIssueByNumberQuery,
-        });
+      fetchIssueByNumberSpy.mockResolvedValue({
+        repository: {
+          issue: mockIssue,
+        },
+      } satisfies FetchIssueByNumberQuery);
 
       const result = await issueHandler.enrich(mockNotification, mockSettings);
 
@@ -75,15 +72,11 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         stateReason: 'COMPLETED',
       });
 
-      nock('https://api.github.com')
-        .post('/graphql')
-        .reply(200, {
-          data: {
-            repository: {
-              issue: mockIssue,
-            },
-          } satisfies FetchIssueByNumberQuery,
-        });
+      fetchIssueByNumberSpy.mockResolvedValue({
+        repository: {
+          issue: mockIssue,
+        },
+      } satisfies FetchIssueByNumberQuery);
 
       const result = await issueHandler.enrich(mockNotification, mockSettings);
 
@@ -118,16 +111,11 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         ],
       };
 
-      nock('https://api.github.com')
-        .post('/graphql')
-        .reply(200, {
-          data: {
-            repository: {
-              issue: mockIssue,
-            },
-          } satisfies FetchIssueByNumberQuery,
-        });
-
+      fetchIssueByNumberSpy.mockResolvedValue({
+        repository: {
+          issue: mockIssue,
+        },
+      } satisfies FetchIssueByNumberQuery);
       const result = await issueHandler.enrich(mockNotification, mockSettings);
 
       expect(result).toEqual({
@@ -155,15 +143,11 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         nodes: [{ name: 'enhancement' }],
       };
 
-      nock('https://api.github.com')
-        .post('/graphql')
-        .reply(200, {
-          data: {
-            repository: {
-              issue: mockIssue,
-            },
-          } satisfies FetchIssueByNumberQuery,
-        });
+      fetchIssueByNumberSpy.mockResolvedValue({
+        repository: {
+          issue: mockIssue,
+        },
+      } satisfies FetchIssueByNumberQuery);
 
       const result = await issueHandler.enrich(mockNotification, mockSettings);
 
@@ -193,15 +177,11 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         title: 'Open Milestone',
       };
 
-      nock('https://api.github.com')
-        .post('/graphql')
-        .reply(200, {
-          data: {
-            repository: {
-              issue: mockIssue,
-            },
-          } satisfies FetchIssueByNumberQuery,
-        });
+      fetchIssueByNumberSpy.mockResolvedValue({
+        repository: {
+          issue: mockIssue,
+        },
+      } satisfies FetchIssueByNumberQuery);
 
       const result = await issueHandler.enrich(mockNotification, mockSettings);
 
