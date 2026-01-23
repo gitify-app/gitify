@@ -5,8 +5,6 @@ import { assertNoGraphQLErrors } from './errors';
 import type { TypedDocumentString } from './graphql/generated/graphql';
 import { createOctokitClient } from './octokit';
 
-
-
 /**
  * Perform a GraphQL API request with typed operation document
  *
@@ -20,9 +18,9 @@ export async function performGraphQLRequest<TResult, TVariables>(
   query: TypedDocumentString<TResult, TVariables>,
   ...[variables]: TVariables extends Record<string, never> ? [] : [TVariables]
 ): Promise<GitHubGraphQLResponse<TResult>> {
-   // FIXME graphql base url for enterprise accounts
+  // FIXME graphql base url for enterprise accounts
   // const url = getGitHubGraphQLUrl(account.hostname);
-  
+
   const octokit = await createOctokitClient(account);
 
   try {
@@ -73,8 +71,8 @@ export async function performGraphQLRequestString<TResult>(
   variables?: Record<string, unknown>,
 ): Promise<GitHubGraphQLResponse<TResult>> {
   // FIXME graphql base url for enterprise accounts
-    // const url = getGitHubGraphQLUrl(account.hostname);
-  
+  // const url = getGitHubGraphQLUrl(account.hostname);
+
   const octokit = await createOctokitClient(account);
 
   try {

@@ -42,6 +42,4 @@ describe('renderer/utils/api/utils.ts', () => {
       expect(result.toString()).toBe('https://github.gitify.io/api/graphql');
     });
   });
-
-  
 });

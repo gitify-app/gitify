@@ -36,7 +36,7 @@ import {
 import { MergeQueryBuilder } from './graphql/MergeQueryBuilder';
 import { createOctokitClient } from './octokit';
 import { performGraphQLRequest, performGraphQLRequestString } from './request';
-import {  getNumberFromUrl } from './utils';
+import { getNumberFromUrl } from './utils';
 
 /**
  * Perform a HEAD operation, used to validate that connectivity is established.
@@ -64,34 +64,33 @@ export async function listNotificationsForAuthenticatedUser(
 ): Promise<ListNotificationsForAuthenticatedUserResponse> {
   const octokit = await createOctokitClient(account);
 
-    if (settings.fetchAllNotifications) {
-      // Fetch all pages using Octokit's pagination
-      return await octokit.paginate(
-        octokit.rest.activity.listNotificationsForAuthenticatedUser,
-        {
-          participating: settings.participating,
-          all: settings.fetchReadNotifications,
-          per_page: 100,
-          headers: {
-            'Cache-Control': 'no-cache', // Prevent caching
-          },
-        },
-      );
-    }
-
-    // Single page request
-    const response =
-      await octokit.rest.activity.listNotificationsForAuthenticatedUser({
+  if (settings.fetchAllNotifications) {
+    // Fetch all pages using Octokit's pagination
+    return await octokit.paginate(
+      octokit.rest.activity.listNotificationsForAuthenticatedUser,
+      {
         participating: settings.participating,
         all: settings.fetchReadNotifications,
         per_page: 100,
         headers: {
           'Cache-Control': 'no-cache', // Prevent caching
         },
-      });
+      },
+    );
+  }
 
-    return response.data;
-  
+  // Single page request
+  const response =
+    await octokit.rest.activity.listNotificationsForAuthenticatedUser({
+      participating: settings.participating,
+      all: settings.fetchReadNotifications,
+      per_page: 100,
+      headers: {
+        'Cache-Control': 'no-cache', // Prevent caching
+      },
+    });
+
+  return response.data;
 }
 
 /**
@@ -106,12 +105,11 @@ export async function markNotificationThreadAsRead(
 ): Promise<MarkNotificationThreadAsReadResponse> {
   const octokit = await createOctokitClient(account);
 
-    const response = await octokit.rest.activity.markThreadAsRead({
-      thread_id: Number(threadId),
-    });
+  const response = await octokit.rest.activity.markThreadAsRead({
+    thread_id: Number(threadId),
+  });
 
-    return response.data;
-  
+  return response.data;
 }
 
 /**
@@ -128,12 +126,11 @@ export async function markNotificationThreadAsDone(
 ): Promise<MarkNotificationThreadAsDoneResponse> {
   const octokit = await createOctokitClient(account);
 
-    const response = await octokit.rest.activity.markThreadAsDone({
-      thread_id: Number(threadId),
-    });
+  const response = await octokit.rest.activity.markThreadAsDone({
+    thread_id: Number(threadId),
+  });
 
-    return response.data;
-  
+  return response.data;
 }
 
 /**
@@ -147,13 +144,12 @@ export async function ignoreNotificationThreadSubscription(
 ): Promise<IgnoreNotificationThreadSubscriptionResponse> {
   const octokit = await createOctokitClient(account);
 
-    const response = await octokit.rest.activity.setThreadSubscription({
-      thread_id: Number(threadId),
-      ignored: true,
-    });
+  const response = await octokit.rest.activity.setThreadSubscription({
+    thread_id: Number(threadId),
+    ignored: true,
+  });
 
-    return response.data;
-  
+  return response.data;
 }
 
 /**
@@ -165,8 +161,7 @@ export async function getCommit(
   account: Account,
   url: Link,
 ): Promise<GetCommitResponse> {
-        return followUrl<GetCommitResponse>(account, url)
-
+  return followUrl<GetCommitResponse>(account, url);
 }
 
 /**
@@ -178,8 +173,7 @@ export async function getCommitComment(
   account: Account,
   url: Link,
 ): Promise<GetCommitCommentResponse> {
-      return followUrl<GetCommitCommentResponse>(account, url)
-
+  return followUrl<GetCommitCommentResponse>(account, url);
 }
 
 /**
@@ -191,8 +185,7 @@ export async function getRelease(
   account: Account,
   url: Link,
 ): Promise<GetReleaseResponse> {
-    return followUrl<GetReleaseResponse>(account, url)
-
+  return followUrl<GetReleaseResponse>(account, url);
 }
 
 /**
@@ -202,7 +195,7 @@ export async function getHtmlUrl(
   account: Account,
   url: Link,
 ): Promise<GitHubHtmlUrlResponse> {
-  return followUrl<GitHubHtmlUrlResponse>(account, url)
+  return followUrl<GitHubHtmlUrlResponse>(account, url);
 }
 
 /**
@@ -214,13 +207,12 @@ async function followUrl<TResult>(
 ): Promise<TResult> {
   const octokit = await createOctokitClient(account);
 
-    // Perform a generic GET request using Octokit's request method
-    const response = await octokit.request('GET {+url}', {
-      url: url,
-    });
+  // Perform a generic GET request using Octokit's request method
+  const response = await octokit.request('GET {+url}', {
+    url: url,
+  });
 
-    return response.data as TResult;
- 
+  return response.data as TResult;
 }
 
 /**
@@ -231,10 +223,9 @@ export async function fetchAuthenticatedUserDetails(
 ): Promise<OctokitResponse<GetAuthenticatedUserResponse>> {
   const octokit = await createOctokitClient(account);
 
-    const response = await octokit.rest.users.getAuthenticated();
+  const response = await octokit.rest.users.getAuthenticated();
 
-    return response;
-  
+  return response;
 }
 
 /**

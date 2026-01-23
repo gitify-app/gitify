@@ -13,9 +13,7 @@ import { rendererLogError } from '../logger';
  * @param err The error
  * @returns The Gitify error type
  */
-export function determineFailureType(
-  err: RequestError,
-): GitifyError {
+export function determineFailureType(err: RequestError): GitifyError {
   // Handle Octokit RequestError
   if (err instanceof RequestError) {
     const status = err.status;
@@ -43,7 +41,6 @@ export function determineFailureType(
       return Errors.NETWORK;
     }
   }
-
 
   return Errors.UNKNOWN;
 }

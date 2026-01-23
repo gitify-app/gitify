@@ -146,9 +146,7 @@ export function removeAccount(auth: AuthState, account: Account): AuthState {
 
 export async function refreshAccount(account: Account): Promise<Account> {
   try {
-    const response = await fetchAuthenticatedUserDetails(
-      account
-    );
+    const response = await fetchAuthenticatedUserDetails(account);
     const user = response.data;
 
     // Refresh user data

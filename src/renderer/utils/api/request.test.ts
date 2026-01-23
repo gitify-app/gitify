@@ -1,6 +1,5 @@
 import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
 
-
 import type { OctokitClient } from './octokit';
 import * as octokitModule from './octokit';
 import { performGraphQLRequestString } from './request';
@@ -29,8 +28,6 @@ jest.mock('@octokit/plugin-rest-endpoint-methods', () => ({
   // biome-ignore lint/suspicious/noExplicitAny: Mock type
   restEndpointMethods: jest.fn((octokit: any) => octokit),
 }));
-
-
 
 describe('renderer/utils/api/request.ts', () => {
   let mockOctokitInstance: {

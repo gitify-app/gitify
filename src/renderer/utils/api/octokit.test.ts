@@ -1,6 +1,9 @@
-import { mockGitHubAppAccount, mockGitHubCloudAccount, mockGitHubEnterpriseServerAccount } from '../../__mocks__/account-mocks';
+import {
+  mockGitHubAppAccount,
+  mockGitHubCloudAccount,
+  mockGitHubEnterpriseServerAccount,
+} from '../../__mocks__/account-mocks';
 import { mockToken } from '../../__mocks__/state-mocks';
-
 
 import * as comms from '../comms';
 import { clearOctokitClientCache, createOctokitClient } from './octokit';
@@ -27,8 +30,7 @@ describe('renderer/utils/api/octokit.ts', () => {
         new URL('https://api.github.com/'),
       );
 
-      const octokit = await createOctokitClient(mockGitHubCloudAccount
-      );
+      const octokit = await createOctokitClient(mockGitHubCloudAccount);
 
       expect(getGitHubAPIBaseUrlSpy).toHaveBeenCalledWith('github.com');
       expect(octokit).toBeDefined();
@@ -41,7 +43,8 @@ describe('renderer/utils/api/octokit.ts', () => {
         new URL('https://github.gitify.io/api/v3/'),
       );
 
-      const octokit = await createOctokitClient(mockGitHubEnterpriseServerAccount
+      const octokit = await createOctokitClient(
+        mockGitHubEnterpriseServerAccount,
       );
 
       expect(getGitHubAPIBaseUrlSpy).toHaveBeenCalledWith('github.gitify.io');
@@ -55,11 +58,9 @@ describe('renderer/utils/api/octokit.ts', () => {
         new URL('https://api.github.com/'),
       );
 
-      const octokit1 = await createOctokitClient(mockGitHubCloudAccount
-      );
+      const octokit1 = await createOctokitClient(mockGitHubCloudAccount);
 
-      const octokit2 = await createOctokitClient(mockGitHubCloudAccount
-      );
+      const octokit2 = await createOctokitClient(mockGitHubCloudAccount);
 
       // Should return the same instance
       expect(octokit1).toBe(octokit2);
@@ -77,11 +78,9 @@ describe('renderer/utils/api/octokit.ts', () => {
         new URL('https://api.github.com/'),
       );
 
-      const octokit1 = await createOctokitClient(mockGitHubAppAccount
-      );
+      const octokit1 = await createOctokitClient(mockGitHubAppAccount);
 
-      const octokit2 = await createOctokitClient(mockGitHubCloudAccount
-      );
+      const octokit2 = await createOctokitClient(mockGitHubCloudAccount);
 
       // Should be different instances for different tokens
       expect(octokit1).not.toBe(octokit2);

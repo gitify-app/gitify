@@ -13,10 +13,10 @@ import type {
   UserType,
 } from '../../../types';
 
+import { getRelease } from '../../api/client';
 import { isStateFilteredOut } from '../filters/filter';
 import { DefaultHandler, defaultHandler } from './default';
 import { getNotificationAuthor } from './utils';
-import { getRelease } from '../../api/client';
 
 class ReleaseHandler extends DefaultHandler {
   readonly type = 'Release';
