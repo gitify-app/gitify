@@ -16,5 +16,6 @@
   "sonarlint.connectedMode.project": {
     "connectionId": "gitify-app",
     "projectKey": "gitify-app_gitify"
-  }
+  },
+  "jest.runMode": "on-save"
 }

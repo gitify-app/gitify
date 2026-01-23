@@ -5,6 +5,8 @@ import {
 } from '../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../__mocks__/state-mocks';
 
+import type { SettingsState } from '../../types';
+
 import {
   removeNotificationsForAccount,
   shouldRemoveNotificationsFromState,
@@ -12,40 +14,45 @@ import {
 
 describe('renderer/utils/remove.ts', () => {
   describe('shouldRemoveNotificationsFromState', () => {
-    it('should return true when both delayNotificationState and fetchReadNotifications are false', () => {
-      const settings = {
-        ...mockSettings,
+    it.each([
+      {
         delayNotificationState: false,
         fetchReadNotifications: false,
-      };
-      expect(shouldRemoveNotificationsFromState(settings)).toBe(true);
-    });
-
-    it('should return false when delayNotificationState is true', () => {
-      const settings = {
-        ...mockSettings,
+        expected: true,
+        description:
+          'both delayNotificationState and fetchReadNotifications are false',
+      },
+      {
         delayNotificationState: true,
         fetchReadNotifications: false,
-      };
-      expect(shouldRemoveNotificationsFromState(settings)).toBe(false);
-    });
-
-    it('should return false when fetchReadNotifications is true', () => {
-      const settings = {
-        ...mockSettings,
+        expected: false,
+        description: 'delayNotificationState is true',
+      },
+      {
         delayNotificationState: false,
         fetchReadNotifications: true,
-      };
-      expect(shouldRemoveNotificationsFromState(settings)).toBe(false);
-    });
-
-    it('should return false when both are true', () => {
-      const settings = {
-        ...mockSettings,
+        expected: false,
+        description: 'fetchReadNotifications is true',
+      },
+      {
         delayNotificationState: true,
         fetchReadNotifications: true,
+        expected: false,
+        description:
+          'both delayNotificationState and fetchReadNotifications are true',
+      },
+    ])('should return $expected when $description', ({
+      delayNotificationState,
+      fetchReadNotifications,
+      expected,
+    }) => {
+      const settings: SettingsState = {
+        ...mockSettings,
+        delayNotificationState,
+        fetchReadNotifications,
       };
-      expect(shouldRemoveNotificationsFromState(settings)).toBe(false);
+
+      expect(shouldRemoveNotificationsFromState(settings)).toBe(expected);
     });
   });
 

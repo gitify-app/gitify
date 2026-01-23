@@ -1,7 +1,7 @@
 import { mockGitifyNotificationForRepoName } from '../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../__mocks__/state-mocks';
 
-import type { GitifyNotification } from '../../types';
+import type { GitifyNotification, SettingsState } from '../../types';
 import { GroupBy } from '../../types';
 
 import {
@@ -14,24 +14,36 @@ import {
 describe('renderer/utils/notifications/group.ts', () => {
   describe('isGroupByDate', () => {
     it('returns true when groupBy is DATE', () => {
-      const settings = { ...mockSettings, groupBy: GroupBy.DATE };
+      const settings: SettingsState = {
+        ...mockSettings,
+        groupBy: GroupBy.DATE,
+      };
       expect(isGroupByDate(settings)).toBe(true);
     });
 
     it('returns false when groupBy is REPOSITORY', () => {
-      const settings = { ...mockSettings, groupBy: GroupBy.REPOSITORY };
+      const settings: SettingsState = {
+        ...mockSettings,
+        groupBy: GroupBy.REPOSITORY,
+      };
       expect(isGroupByDate(settings)).toBe(false);
     });
   });
 
   describe('isGroupByRepository', () => {
     it('returns true when groupBy is REPOSITORY', () => {
-      const settings = { ...mockSettings, groupBy: GroupBy.REPOSITORY };
+      const settings: SettingsState = {
+        ...mockSettings,
+        groupBy: GroupBy.REPOSITORY,
+      };
       expect(isGroupByRepository(settings)).toBe(true);
     });
 
     it('returns false when groupBy is DATE', () => {
-      const settings = { ...mockSettings, groupBy: GroupBy.DATE };
+      const settings: SettingsState = {
+        ...mockSettings,
+        groupBy: GroupBy.DATE,
+      };
       expect(isGroupByRepository(settings)).toBe(false);
     });
   });
@@ -100,7 +112,10 @@ describe('renderer/utils/notifications/group.ts', () => {
 
   describe('getFlattenedNotificationsByRepo', () => {
     it('returns repository-grouped order when groupBy is REPOSITORY', () => {
-      const settings = { ...mockSettings, groupBy: GroupBy.REPOSITORY };
+      const settings: SettingsState = {
+        ...mockSettings,
+        groupBy: GroupBy.REPOSITORY,
+      };
       const notifications: GitifyNotification[] = [
         mockGitifyNotificationForRepoName('1', 'owner/repo-b'),
         mockGitifyNotificationForRepoName('2', 'owner/repo-a'),
@@ -115,7 +130,10 @@ describe('renderer/utils/notifications/group.ts', () => {
     });
 
     it('returns natural account order when groupBy is DATE', () => {
-      const settings = { ...mockSettings, groupBy: GroupBy.DATE };
+      const settings: SettingsState = {
+        ...mockSettings,
+        groupBy: GroupBy.DATE,
+      };
       const notifications: GitifyNotification[] = [
         mockGitifyNotificationForRepoName('1', 'owner/repo-b'),
         mockGitifyNotificationForRepoName('2', 'owner/repo-a'),
@@ -129,7 +147,10 @@ describe('renderer/utils/notifications/group.ts', () => {
     });
 
     it('returns empty array when no notifications', () => {
-      const settings = { ...mockSettings, groupBy: GroupBy.REPOSITORY };
+      const settings: SettingsState = {
+        ...mockSettings,
+        groupBy: GroupBy.REPOSITORY,
+      };
       const notifications: GitifyNotification[] = [];
 
       const result = getFlattenedNotificationsByRepo(notifications, settings);
@@ -138,7 +159,10 @@ describe('renderer/utils/notifications/group.ts', () => {
     });
 
     it('handles notifications without repository data when grouped', () => {
-      const settings = { ...mockSettings, groupBy: GroupBy.REPOSITORY };
+      const settings: SettingsState = {
+        ...mockSettings,
+        groupBy: GroupBy.REPOSITORY,
+      };
       const notifications: GitifyNotification[] = [
         mockGitifyNotificationForRepoName('1', 'owner/repo-a'),
         mockGitifyNotificationForRepoName('2', null),
@@ -152,7 +176,10 @@ describe('renderer/utils/notifications/group.ts', () => {
     });
 
     it('preserves notifications without repository data when not grouped', () => {
-      const settings = { ...mockSettings, groupBy: GroupBy.DATE };
+      const settings: SettingsState = {
+        ...mockSettings,
+        groupBy: GroupBy.DATE,
+      };
       const notifications: GitifyNotification[] = [
         mockGitifyNotificationForRepoName('1', 'owner/repo-a'),
         mockGitifyNotificationForRepoName('2', null),
