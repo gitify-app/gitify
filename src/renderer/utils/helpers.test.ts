@@ -4,8 +4,8 @@ import {
   ChevronRightIcon,
 } from '@primer/octicons-react';
 
+import { mockGitHubCloudAccount } from '../__mocks__/account-mocks';
 import { mockGitifyNotification } from '../__mocks__/notifications-mocks';
-import { mockToken } from '../__mocks__/state-mocks';
 
 import type { GitifySubject, Hostname, Link, SubjectType } from '../types';
 
@@ -127,8 +127,8 @@ describe('renderer/utils/helpers.ts', () => {
 
       expect(getHtmlUrlSpy).toHaveBeenCalledTimes(1);
       expect(getHtmlUrlSpy).toHaveBeenCalledWith(
+        mockGitHubCloudAccount,
         mockLatestCommentUrl,
-        mockToken,
       );
       expect(result).toBe(`${mockHtmlUrl}?${mockNotificationReferrer}`);
     });
@@ -157,7 +157,10 @@ describe('renderer/utils/helpers.ts', () => {
       });
 
       expect(getHtmlUrlSpy).toHaveBeenCalledTimes(1);
-      expect(getHtmlUrlSpy).toHaveBeenCalledWith(mockSubjectUrl, mockToken);
+      expect(getHtmlUrlSpy).toHaveBeenCalledWith(
+        mockGitHubCloudAccount,
+        mockSubjectUrl,
+      );
       expect(result).toBe(`${mockHtmlUrl}?${mockNotificationReferrer}`);
     });
   });
