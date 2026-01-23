@@ -18,9 +18,6 @@ export async function performGraphQLRequest<TResult, TVariables>(
   query: TypedDocumentString<TResult, TVariables>,
   ...[variables]: TVariables extends Record<string, never> ? [] : [TVariables]
 ): Promise<GitHubGraphQLResponse<TResult>> {
-  // FIXME graphql base url for enterprise accounts
-  // const url = getGitHubGraphQLUrl(account.hostname);
-
   const octokit = await createOctokitClient(account, 'graphql');
 
   try {
@@ -70,9 +67,6 @@ export async function performGraphQLRequestString<TResult>(
   query: string,
   variables?: Record<string, unknown>,
 ): Promise<GitHubGraphQLResponse<TResult>> {
-  // FIXME graphql base url for enterprise accounts
-  // const url = getGitHubGraphQLUrl(account.hostname);
-
   const octokit = await createOctokitClient(account, 'graphql');
 
   try {
