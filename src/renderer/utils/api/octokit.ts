@@ -18,8 +18,6 @@ export type OctokitClient = InstanceType<typeof OctokitWithPlugins>;
 // Cache Octokit clients per account UUID + type (rest|graphql)
 const octokitClientCache = new Map<string, OctokitClient>();
 
-const version = getAppVersion();
-
 /**
  * Clear the Octokit client cache
  * Useful when accounts are added/removed or tokens change
@@ -68,25 +66,18 @@ export async function createOctokitClientUncached(
 ): Promise<OctokitClient> {
   const decryptedToken = await decryptValue(account.token);
 
+  const version = await getAppVersion();
+  const userAgent = `${APPLICATION.NAME}/${version}`;
+
   const baseUrl = getGitHubAPIBaseUrl(account.hostname, type)
     .toString()
     .replace(/\/$/, '');
-  const userAgent = getUserAgent();
 
   return new OctokitWithPlugins({
     auth: decryptedToken,
-    baseUrl,
+    baseUrl: baseUrl,
     userAgent: userAgent,
   });
-}
-
-/**
- * Format Gitify User Agent
- *
- * @returns User Agent to be set for API requests
- */
-export function getUserAgent() {
-  return `${APPLICATION.NAME}/${version}`;
 }
 
 /**
