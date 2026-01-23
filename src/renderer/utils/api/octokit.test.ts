@@ -127,6 +127,34 @@ describe('renderer/utils/api/octokit.ts', () => {
       expect(getGitHubAPIBaseUrlSpy).toHaveBeenCalledTimes(1);
     });
 
+    it('should bypass cache when skipClientCache is true', async () => {
+      const getGitHubAPIBaseUrlSpy = jest.spyOn(utils, 'getGitHubAPIBaseUrl');
+      getGitHubAPIBaseUrlSpy.mockReturnValue(
+        new URL('https://api.github.com/'),
+      );
+
+      const cachedClient = await createOctokitClient(
+        mockGitHubCloudAccount,
+        'rest',
+      );
+
+      const nonCachedClient = await createOctokitClient(
+        mockGitHubCloudAccount,
+        'rest',
+        true,
+      );
+
+      const cachedClientAgain = await createOctokitClient(
+        mockGitHubCloudAccount,
+        'rest',
+      );
+
+      expect(cachedClient).toBe(cachedClientAgain);
+      expect(nonCachedClient).not.toBe(cachedClient);
+      expect(mockDecryptValue).toHaveBeenCalledTimes(2);
+      expect(getGitHubAPIBaseUrlSpy).toHaveBeenCalledTimes(2);
+    });
+
     it('should create different clients for different accounts with same api type', async () => {
       const getGitHubAPIBaseUrlSpy = jest.spyOn(utils, 'getGitHubAPIBaseUrl');
       getGitHubAPIBaseUrlSpy.mockReturnValue(

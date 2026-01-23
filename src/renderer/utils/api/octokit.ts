@@ -39,13 +39,17 @@ export function clearOctokitClientCache(): void {
 export async function createOctokitClient(
   account: Account,
   type: APIClientType,
+  skipClientCache = false,
 ): Promise<OctokitClient> {
-  const cacheKey = getClientCacheKey(account, type);
+  let cacheKey: string;
 
   // Return cached client if it exists
-  const cachedClient = octokitClientCache.get(cacheKey);
-  if (cachedClient) {
-    return cachedClient;
+  if (!skipClientCache) {
+    cacheKey = getClientCacheKey(account, type);
+    const cachedClient = octokitClientCache.get(cacheKey);
+    if (cachedClient) {
+      return cachedClient;
+    }
   }
 
   const decryptedToken = await decryptValue(account.token);
@@ -61,8 +65,10 @@ export async function createOctokitClient(
     userAgent: userAgent,
   });
 
-  // Cache the client keyed by account UUID + type
-  octokitClientCache.set(cacheKey, client);
+  // Cache the client keyed by account UUID + type unless explicitly skipped
+  if (!skipClientCache) {
+    octokitClientCache.set(cacheKey, client);
+  }
 
   return client;
 }

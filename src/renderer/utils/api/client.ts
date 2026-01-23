@@ -37,8 +37,11 @@ import { getNumberFromUrl } from './utils';
 /**
  * Fetch details of the currently authenticated GitHub user.
  */
-export async function fetchAuthenticatedUserDetails(account: Account) {
-  const octokit = await createOctokitClient(account, 'rest');
+export async function fetchAuthenticatedUserDetails(
+  account: Account,
+  skipClientCache = false,
+) {
+  const octokit = await createOctokitClient(account, 'rest', skipClientCache);
 
   return await octokit.rest.users.getAuthenticated();
 }

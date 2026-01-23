@@ -91,7 +91,9 @@ export async function exchangeAuthCodeForAccessToken(
     clientSecret: authOptions.clientSecret,
     code: authCode,
     request: request.defaults({
-      baseUrl: getGitHubAuthBaseUrl(authOptions.hostname).toString(),
+      baseUrl: getGitHubAuthBaseUrl(authOptions.hostname)
+        .toString()
+        .replace(/\/$/, ''),
     }),
   });
 
@@ -114,7 +116,7 @@ export async function addAccount(
     token: encryptedToken,
   } as Account;
 
-  newAccount = await refreshAccount(newAccount);
+  newAccount = await refreshAccount(newAccount, true);
   const newAccountUUID = getAccountUUID(newAccount);
 
   const accountAlreadyExists = accountList.some(
@@ -145,9 +147,16 @@ export function removeAccount(auth: AuthState, account: Account): AuthState {
   };
 }
 
-export async function refreshAccount(account: Account): Promise<Account> {
+export async function refreshAccount(
+  account: Account,
+  skipClientCache = false,
+): Promise<Account> {
   try {
-    const response = await fetchAuthenticatedUserDetails(account);
+    const response = await fetchAuthenticatedUserDetails(
+      account,
+      skipClientCache,
+    );
+
     const user = response.data;
 
     // Refresh user data
@@ -185,7 +194,7 @@ export async function refreshAccount(account: Account): Promise<Account> {
   } catch (err) {
     rendererLogError(
       'refreshAccount',
-      `failed to refresh account for user ${account.user.login}`,
+      `failed to refresh account for user ${account.user?.login ?? account.hostname}`,
       err,
     );
   }
