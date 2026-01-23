@@ -3,7 +3,6 @@ import {
   mockGitHubCloudAccount,
   mockGitHubEnterpriseServerAccount,
 } from '../../__mocks__/account-mocks';
-import { mockToken } from '../../__mocks__/state-mocks';
 
 import * as comms from '../comms';
 import { clearOctokitClientCache, createOctokitClient } from './octokit';
@@ -24,20 +23,43 @@ describe('renderer/utils/api/octokit.ts', () => {
   });
 
   describe('createOctokitClient', () => {
-    it('should create octokit client for GitHub Cloud', async () => {
+    it('should create octokit rest client for GitHub Cloud', async () => {
       const getGitHubAPIBaseUrlSpy = jest.spyOn(utils, 'getGitHubAPIBaseUrl');
       getGitHubAPIBaseUrlSpy.mockReturnValue(
         new URL('https://api.github.com/'),
       );
 
-      const octokit = await createOctokitClient(mockGitHubCloudAccount);
+      const octokit = await createOctokitClient(mockGitHubCloudAccount, 'rest');
 
-      expect(getGitHubAPIBaseUrlSpy).toHaveBeenCalledWith('github.com');
+      expect(getGitHubAPIBaseUrlSpy).toHaveBeenCalledWith('github.com', 'rest');
       expect(octokit).toBeDefined();
-      expect(mockDecryptValue).toHaveBeenCalledWith(mockToken);
+      expect(mockDecryptValue).toHaveBeenCalledWith(
+        mockGitHubCloudAccount.token,
+      );
     });
 
-    it('should create octokit client for GitHub Enterprise Server', async () => {
+    it('should create octokit graphql client for GitHub Cloud', async () => {
+      const getGitHubAPIBaseUrlSpy = jest.spyOn(utils, 'getGitHubAPIBaseUrl');
+      getGitHubAPIBaseUrlSpy.mockReturnValue(
+        new URL('https://api.github.com/'),
+      );
+
+      const octokit = await createOctokitClient(
+        mockGitHubCloudAccount,
+        'graphql',
+      );
+
+      expect(getGitHubAPIBaseUrlSpy).toHaveBeenCalledWith(
+        'github.com',
+        'graphql',
+      );
+      expect(octokit).toBeDefined();
+      expect(mockDecryptValue).toHaveBeenCalledWith(
+        mockGitHubCloudAccount.token,
+      );
+    });
+
+    it('should create octokit rest client for GitHub Enterprise Server', async () => {
       const getGitHubAPIBaseUrlSpy = jest.spyOn(utils, 'getGitHubAPIBaseUrl');
       getGitHubAPIBaseUrlSpy.mockReturnValue(
         new URL('https://github.gitify.io/api/v3/'),
@@ -45,22 +67,55 @@ describe('renderer/utils/api/octokit.ts', () => {
 
       const octokit = await createOctokitClient(
         mockGitHubEnterpriseServerAccount,
+        'rest',
       );
 
-      expect(getGitHubAPIBaseUrlSpy).toHaveBeenCalledWith('github.gitify.io');
+      expect(getGitHubAPIBaseUrlSpy).toHaveBeenCalledWith(
+        'github.gitify.io',
+        'rest',
+      );
       expect(octokit).toBeDefined();
-      expect(mockDecryptValue).toHaveBeenCalledWith(mockToken);
+      expect(mockDecryptValue).toHaveBeenCalledWith(
+        mockGitHubEnterpriseServerAccount.token,
+      );
     });
 
-    it('should cache and reuse octokit clients for the same account', async () => {
+    it('should create octokit graphql client for GitHub Enterprise Server', async () => {
+      const getGitHubAPIBaseUrlSpy = jest.spyOn(utils, 'getGitHubAPIBaseUrl');
+      getGitHubAPIBaseUrlSpy.mockReturnValue(
+        new URL('https://github.gitify.io/api/graphql/'),
+      );
+
+      const octokit = await createOctokitClient(
+        mockGitHubEnterpriseServerAccount,
+        'graphql',
+      );
+
+      expect(getGitHubAPIBaseUrlSpy).toHaveBeenCalledWith(
+        'github.gitify.io',
+        'graphql',
+      );
+      expect(octokit).toBeDefined();
+      expect(mockDecryptValue).toHaveBeenCalledWith(
+        mockGitHubEnterpriseServerAccount.token,
+      );
+    });
+
+    it('should cache and reuse octokit clients for the same account and api type', async () => {
       const getGitHubAPIBaseUrlSpy = jest.spyOn(utils, 'getGitHubAPIBaseUrl');
       getGitHubAPIBaseUrlSpy.mockReturnValue(
         new URL('https://api.github.com/'),
       );
 
-      const octokit1 = await createOctokitClient(mockGitHubCloudAccount);
+      const octokit1 = await createOctokitClient(
+        mockGitHubCloudAccount,
+        'rest',
+      );
 
-      const octokit2 = await createOctokitClient(mockGitHubCloudAccount);
+      const octokit2 = await createOctokitClient(
+        mockGitHubCloudAccount,
+        'rest',
+      );
 
       // Should return the same instance
       expect(octokit1).toBe(octokit2);
@@ -72,15 +127,41 @@ describe('renderer/utils/api/octokit.ts', () => {
       expect(getGitHubAPIBaseUrlSpy).toHaveBeenCalledTimes(1);
     });
 
-    it('should create different clients for different accounts', async () => {
+    it('should create different clients for different accounts with same api type', async () => {
       const getGitHubAPIBaseUrlSpy = jest.spyOn(utils, 'getGitHubAPIBaseUrl');
       getGitHubAPIBaseUrlSpy.mockReturnValue(
         new URL('https://api.github.com/'),
       );
 
-      const octokit1 = await createOctokitClient(mockGitHubAppAccount);
+      const octokit1 = await createOctokitClient(mockGitHubAppAccount, 'rest');
 
-      const octokit2 = await createOctokitClient(mockGitHubCloudAccount);
+      const octokit2 = await createOctokitClient(
+        mockGitHubCloudAccount,
+        'rest',
+      );
+
+      // Should be different instances for different tokens
+      expect(octokit1).not.toBe(octokit2);
+
+      // Should decrypt both tokens
+      expect(mockDecryptValue).toHaveBeenCalledTimes(2);
+    });
+
+    it('should create different clients for same accounts with different api type', async () => {
+      const getGitHubAPIBaseUrlSpy = jest.spyOn(utils, 'getGitHubAPIBaseUrl');
+      getGitHubAPIBaseUrlSpy.mockReturnValue(
+        new URL('https://api.github.com/'),
+      );
+
+      const octokit1 = await createOctokitClient(
+        mockGitHubCloudAccount,
+        'rest',
+      );
+
+      const octokit2 = await createOctokitClient(
+        mockGitHubCloudAccount,
+        'graphql',
+      );
 
       // Should be different instances for different tokens
       expect(octokit1).not.toBe(octokit2);

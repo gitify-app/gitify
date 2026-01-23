@@ -12,6 +12,7 @@ import { Constants } from '../../constants';
 
 import type {
   Account,
+  AccountUUID,
   AuthCode,
   AuthState,
   ClientID,
@@ -269,8 +270,10 @@ export function isValidToken(token: Token) {
   return /^[A-Z0-9_]{40}$/i.test(token);
 }
 
-export function getAccountUUID(account: Account): string {
-  return btoa(`${account.hostname}-${account.user.id}-${account.method}`);
+export function getAccountUUID(account: Account): AccountUUID {
+  return btoa(
+    `${account.hostname}-${account.user.id}-${account.method}`,
+  ) as AccountUUID;
 }
 
 /**

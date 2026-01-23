@@ -21,7 +21,7 @@ export async function performGraphQLRequest<TResult, TVariables>(
   // FIXME graphql base url for enterprise accounts
   // const url = getGitHubGraphQLUrl(account.hostname);
 
-  const octokit = await createOctokitClient(account);
+  const octokit = await createOctokitClient(account, 'graphql');
 
   try {
     const response = await octokit.graphql<TResult>(
@@ -73,7 +73,7 @@ export async function performGraphQLRequestString<TResult>(
   // FIXME graphql base url for enterprise accounts
   // const url = getGitHubGraphQLUrl(account.hostname);
 
-  const octokit = await createOctokitClient(account);
+  const octokit = await createOctokitClient(account, 'graphql');
 
   try {
     const response = await octokit.graphql<TResult>(query, variables || {});

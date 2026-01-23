@@ -46,7 +46,7 @@ import { getNumberFromUrl } from './utils';
 export async function headNotifications(
   account: Account,
 ): Promise<HeadNotificationsResponse> {
-  const octokit = await createOctokitClient(account);
+  const octokit = await createOctokitClient(account, 'rest');
 
   await octokit.rest.activity.listNotificationsForAuthenticatedUser({
     per_page: 1,
@@ -62,7 +62,7 @@ export async function listNotificationsForAuthenticatedUser(
   account: Account,
   settings: SettingsState,
 ): Promise<ListNotificationsForAuthenticatedUserResponse> {
-  const octokit = await createOctokitClient(account);
+  const octokit = await createOctokitClient(account, 'rest');
 
   if (settings.fetchAllNotifications) {
     // Fetch all pages using Octokit's pagination
@@ -103,7 +103,7 @@ export async function markNotificationThreadAsRead(
   account: Account,
   threadId: string,
 ): Promise<MarkNotificationThreadAsReadResponse> {
-  const octokit = await createOctokitClient(account);
+  const octokit = await createOctokitClient(account, 'rest');
 
   const response = await octokit.rest.activity.markThreadAsRead({
     thread_id: Number(threadId),
@@ -124,7 +124,7 @@ export async function markNotificationThreadAsDone(
   account: Account,
   threadId: string,
 ): Promise<MarkNotificationThreadAsDoneResponse> {
-  const octokit = await createOctokitClient(account);
+  const octokit = await createOctokitClient(account, 'rest');
 
   const response = await octokit.rest.activity.markThreadAsDone({
     thread_id: Number(threadId),
@@ -142,7 +142,7 @@ export async function ignoreNotificationThreadSubscription(
   account: Account,
   threadId: string,
 ): Promise<IgnoreNotificationThreadSubscriptionResponse> {
-  const octokit = await createOctokitClient(account);
+  const octokit = await createOctokitClient(account, 'rest');
 
   const response = await octokit.rest.activity.setThreadSubscription({
     thread_id: Number(threadId),
@@ -205,9 +205,9 @@ async function followUrl<TResult>(
   account: Account,
   url: Link,
 ): Promise<TResult> {
-  const octokit = await createOctokitClient(account);
+  const octokit = await createOctokitClient(account, 'rest');
 
-  // Perform a generic GET request using Octokit's request method
+  // Perform a generic GET request using Octokit's request method and cast the response type
   const response = await octokit.request('GET {+url}', {
     url: url,
   });
@@ -221,7 +221,7 @@ async function followUrl<TResult>(
 export async function fetchAuthenticatedUserDetails(
   account: Account,
 ): Promise<OctokitResponse<GetAuthenticatedUserResponse>> {
-  const octokit = await createOctokitClient(account);
+  const octokit = await createOctokitClient(account, 'rest');
 
   const response = await octokit.rest.users.getAuthenticated();
 

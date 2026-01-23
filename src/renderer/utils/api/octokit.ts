@@ -5,6 +5,7 @@ import { restEndpointMethods } from '@octokit/plugin-rest-endpoint-methods';
 import { APPLICATION } from '../../../shared/constants';
 
 import type { Account } from '../../types';
+import type { APIClientType } from './types';
 
 import { getAccountUUID } from '../auth/utils';
 import { decryptValue, getAppVersion } from '../comms';
@@ -14,7 +15,7 @@ import { getGitHubAPIBaseUrl } from './utils';
 const OctokitWithPlugins = Octokit.plugin(paginateRest, restEndpointMethods);
 export type OctokitClient = InstanceType<typeof OctokitWithPlugins>;
 
-// Cache Octokit clients per account UUID
+// Cache Octokit clients per account UUID + type (rest|graphql)
 const octokitClientCache = new Map<string, OctokitClient>();
 
 const version = getAppVersion();
@@ -36,11 +37,13 @@ export function clearOctokitClientCache(): void {
  */
 export async function createOctokitClient(
   account: Account,
+  type: APIClientType,
 ): Promise<OctokitClient> {
   const accountUUID = getAccountUUID(account);
+  const cacheKey = `${accountUUID}:${type}`;
 
   // Return cached client if it exists
-  const cachedClient = octokitClientCache.get(accountUUID);
+  const cachedClient = octokitClientCache.get(cacheKey);
   if (cachedClient) {
     return cachedClient;
   }
@@ -49,18 +52,28 @@ export async function createOctokitClient(
   const decryptedToken = await decryptValue(account.token);
 
   // Get the base API URL for the hostname
-  const baseUrl = getGitHubAPIBaseUrl(account.hostname)
+  const baseUrl = getGitHubAPIBaseUrl(account.hostname, type)
     .toString()
     .replace(/\/$/, '');
+
+  const userAgent = getUserAgent();
 
   const client = new OctokitWithPlugins({
     auth: decryptedToken,
     baseUrl,
-    userAgent: `${APPLICATION.NAME}/${version}`,
+    userAgent: userAgent,
   });
 
-  // Cache the client
-  octokitClientCache.set(accountUUID, client);
+  // Cache the client keyed by account UUID + type
+  octokitClientCache.set(cacheKey, client);
 
   return client;
+}
+
+/**
+ * Format Gitify User Agent
+ * @returns User Agent to be set for API requests
+ */
+export function getUserAgent() {
+  return `${APPLICATION.NAME}/${version}`;
 }

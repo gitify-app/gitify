@@ -1,6 +1,8 @@
 import type { components } from '@octokit/openapi-types';
 import type { Endpoints } from '@octokit/types';
 
+export type APIClientType = 'rest' | 'graphql';
+
 export type ListNotificationsForAuthenticatedUserResponse =
   Endpoints['GET /notifications']['response']['data'];
 
