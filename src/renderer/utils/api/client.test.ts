@@ -115,6 +115,7 @@ describe('renderer/utils/api/client.ts', () => {
     expect(createOctokitClientSpy).toHaveBeenCalledWith(
       mockGitHubCloudAccount,
       'rest',
+      false,
     );
     expect(mockOctokit.rest.users.getAuthenticated).toHaveBeenCalled();
   });
