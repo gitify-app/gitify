@@ -17,7 +17,11 @@ import * as comms from '../../utils/comms';
 // import * as apiClient from '../api/client';
 import * as logger from '../logger';
 import * as authUtils from './utils';
-import { getNewOAuthAppURL, getNewTokenURL } from './utils';
+import {
+  getGitHubAuthBaseUrl,
+  getNewOAuthAppURL,
+  getNewTokenURL,
+} from './utils';
 
 jest.mock('@octokit/oauth-methods', () => ({
   ...jest.requireActual('@octokit/oauth-methods'),
@@ -325,6 +329,18 @@ describe('renderer/utils/auth/utils.ts', () => {
     expect(authUtils.extractHostVersion('enterprise-server@3.15.0-beta1')).toBe(
       '3.15.0',
     );
+  });
+
+  describe('getGitHubAuthBaseUrl', () => {
+    it('should generate a GitHub Auth url - non enterprise', () => {
+      const result = getGitHubAuthBaseUrl('github.com' as Hostname);
+      expect(result.toString()).toBe('https://github.com/');
+    });
+
+    it('should generate a GitHub Auth url - enterprise', () => {
+      const result = getGitHubAuthBaseUrl('github.gitify.io' as Hostname);
+      expect(result.toString()).toBe('https://github.gitify.io/api/v3/');
+    });
   });
 
   it('getDeveloperSettingsURL', () => {

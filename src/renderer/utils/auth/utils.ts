@@ -23,9 +23,8 @@ import type {
 import type { AuthMethod, AuthResponse, LoginOAuthAppOptions } from './types';
 
 import { fetchAuthenticatedUserDetails } from '../api/client';
-import { getGitHubAuthBaseUrl } from '../api/utils';
 import { encryptValue, openExternalLink } from '../comms';
-import { getPlatformFromHostname } from '../helpers';
+import { getPlatformFromHostname, isEnterpriseServerHost } from '../helpers';
 import { rendererLogError, rendererLogInfo, rendererLogWarn } from '../logger';
 
 export function performGitHubOAuth(
@@ -159,10 +158,10 @@ export async function refreshAccount(account: Account): Promise<Account> {
     };
 
     account.version = 'latest';
-    // TODO - find correct header
-    // extractHostVersion(
-    //   response.headers['x-github-enterprise-version'],
-    // );
+
+    account.version = extractHostVersion(
+      response.headers['x-github-enterprise-version'] as string,
+    );
 
     const accountScopes = response.headers['x-oauth-scopes']
       ?.split(',')
@@ -199,6 +198,16 @@ export function extractHostVersion(version: string | null): string {
   }
 
   return 'latest';
+}
+
+export function getGitHubAuthBaseUrl(hostname: Hostname): URL {
+  const url = new URL(APPLICATION.GITHUB_BASE_URL);
+
+  if (isEnterpriseServerHost(hostname)) {
+    url.hostname = hostname;
+    url.pathname = '/api/v3/';
+  }
+  return url;
 }
 
 export function getDeveloperSettingsURL(account: Account): Link {
