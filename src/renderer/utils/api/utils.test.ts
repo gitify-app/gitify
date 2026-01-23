@@ -4,7 +4,6 @@ import {
   getGitHubAPIBaseUrl,
   getGitHubAuthBaseUrl,
   getGitHubGraphQLUrl,
-  getNextURLFromLinkHeader,
 } from './utils';
 
 describe('renderer/utils/api/utils.ts', () => {
