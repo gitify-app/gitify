@@ -153,7 +153,7 @@ This project focuses on GitHub notification monitoring, not being a full GitHub 
 ## Technology Stack Reference
 
 **Core Technologies:**
-- **Electron 37+**: Desktop app framework
+- **Electron 40+**: Desktop app framework
 - **React 19+**: UI library  
 - **TypeScript 5+**: Language
 - **pnpm 10+**: Package manager
@@ -166,7 +166,8 @@ This project focuses on GitHub notification monitoring, not being a full GitHub 
 - **menubar**: System tray integration
 - **electron-updater**: Auto-update functionality
 - **@primer/react**: GitHub's React component library
+- **octokit**: HTTP client for GitHub API
+- **@primer/octicons-react**: GitHub icon library
 - **date-fns**: Date utilities
-- **axios**: HTTP client for GitHub API
 
 ALWAYS reference this information first before exploring the codebase or running commands to save time and avoid common pitfalls.

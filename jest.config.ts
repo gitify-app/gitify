@@ -20,10 +20,6 @@ const config: Config = {
     'node_modules/(?!(?:@primer/react|@primer/primitives|@primer/octicons-react|@lit-labs/react|lit|@github/relative-time-element|@github/tab-container-element|@octokit/oauth-methods|@octokit/oauth-authorization-url|@octokit/request|@octokit/request-error|@octokit/endpoint|@octokit/core|@octokit/plugin-paginate-rest|@octokit/plugin-rest-endpoint-methods|universal-user-agent)/)',
   ],
   moduleNameMapper: {
-    // Force CommonJS build for http adapter to be available.
-    // via https://github.com/axios/axios/issues/5101#issuecomment-1276572468
-    '^axios$': require.resolve('axios'),
-
     // GitHub Primer Design System - CSS in JS
     '\\.css$': 'identity-obj-proxy',
   },
