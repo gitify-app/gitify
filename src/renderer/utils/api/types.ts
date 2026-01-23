@@ -1,12 +1,8 @@
 import type { components } from '@octokit/openapi-types';
 import type { Endpoints } from '@octokit/types';
 
-import type { Link } from '../../types';
 
-export interface GitHubRESTError {
-  message: string;
-  documentation_url: Link;
-}
+
 
 export type ListNotificationsForAuthenticatedUserResponse =
   Endpoints['GET /notifications']['response']['data'];

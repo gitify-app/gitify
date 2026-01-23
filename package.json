@@ -101,7 +101,6 @@
     "@types/react-dom": "19.2.3",
     "@types/react-router-dom": "5.3.3",
     "@types/semver": "7.7.1",
-    "axios": "1.13.2",
     "babel-jest": "30.2.0",
     "clsx": "2.1.1",
     "concurrently": "9.2.1",

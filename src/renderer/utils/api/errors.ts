@@ -1,55 +1,49 @@
-import { AxiosError } from 'axios';
+import { RequestError } from '@octokit/request-error';
 import type { GraphQLError } from 'graphql';
 
 import type { GitifyError } from '../../types';
 import type { GitHubGraphQLResponse } from './graphql/types';
-import type { GitHubRESTError } from './types';
 
 import { Errors } from '../errors';
 import { rendererLogError } from '../logger';
 
 /**
- * Determine the failure type based on an Axios error.
+ * Determine the failure type based on an error (Octokit RequestError or unknown).
  *
- * @param err The Axios error
+ * @param err The error
  * @returns The Gitify error type
  */
 export function determineFailureType(
-  err: AxiosError<GitHubRESTError>,
+  err: RequestError,
 ): GitifyError {
-  const code = err.code;
+  // Handle Octokit RequestError
+  if (err instanceof RequestError) {
+    const status = err.status;
+    const message = err.message || '';
 
-  if (code === AxiosError.ERR_NETWORK) {
-    return Errors.NETWORK;
-  }
-
-  if (err.message?.includes('safeStorage')) {
-    return Errors.BAD_CREDENTIALS;
-  }
-
-  if (code !== AxiosError.ERR_BAD_REQUEST) {
-    return Errors.UNKNOWN;
-  }
-
-  const status = err.response.status;
-  const message = err.response.data.message;
-
-  if (status === 401) {
-    return Errors.BAD_CREDENTIALS;
-  }
-
-  if (status === 403) {
-    if (message.includes("Missing the 'notifications' scope")) {
-      return Errors.MISSING_SCOPES;
+    if (status === 401) {
+      return Errors.BAD_CREDENTIALS;
     }
 
-    if (
-      message.includes('API rate limit exceeded') ||
-      message.includes('You have exceeded a secondary rate limit')
-    ) {
-      return Errors.RATE_LIMITED;
+    if (status === 403) {
+      if (message.includes("Missing the 'notifications' scope")) {
+        return Errors.MISSING_SCOPES;
+      }
+
+      if (
+        message.includes('API rate limit exceeded') ||
+        message.includes('You have exceeded a secondary rate limit')
+      ) {
+        return Errors.RATE_LIMITED;
+      }
+    }
+
+    // Network-like errors for RequestError
+    if (status === 0 || status === undefined) {
+      return Errors.NETWORK;
     }
   }
+
 
   return Errors.UNKNOWN;
 }
