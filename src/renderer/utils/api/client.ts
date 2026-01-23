@@ -1,5 +1,3 @@
-import type { ExecutionResult } from 'graphql';
-
 import { Constants } from '../../constants';
 
 import type {
@@ -228,7 +226,7 @@ export async function fetchAuthenticatedUserDetails(account: Account) {
  */
 export async function fetchDiscussionByNumber(
   notification: GitifyNotification,
-): Promise<ExecutionResult<FetchDiscussionByNumberQuery>> {
+): Promise<FetchDiscussionByNumberQuery> {
   const number = getNumberFromUrl(notification.subject.url);
 
   return performGraphQLRequest(
@@ -253,7 +251,7 @@ export async function fetchDiscussionByNumber(
  */
 export async function fetchIssueByNumber(
   notification: GitifyNotification,
-): Promise<ExecutionResult<FetchIssueByNumberQuery>> {
+): Promise<FetchIssueByNumberQuery> {
   const number = getNumberFromUrl(notification.subject.url);
 
   return performGraphQLRequest(
@@ -274,7 +272,7 @@ export async function fetchIssueByNumber(
  */
 export async function fetchPullByNumber(
   notification: GitifyNotification,
-): Promise<ExecutionResult<FetchPullRequestByNumberQuery>> {
+): Promise<FetchPullRequestByNumberQuery> {
   const number = getNumberFromUrl(notification.subject.url);
 
   return performGraphQLRequest(
@@ -360,10 +358,9 @@ export async function fetchNotificationDetailsForList(
     variables,
   );
 
-  const data = response.data as Record<string, unknown> | undefined;
-  if (data) {
+  if (response) {
     for (const [alias, notification] of aliasToNotification) {
-      const repoData = data[alias] as Record<string, unknown> | undefined;
+      const repoData = response[alias] as Record<string, unknown> | undefined;
       if (repoData) {
         const fragment = Object.values(
           repoData,

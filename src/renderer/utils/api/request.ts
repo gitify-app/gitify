@@ -19,7 +19,7 @@ export async function performGraphQLRequest<TResult, TVariables>(
   account: Account,
   query: TypedDocumentString<TResult, TVariables>,
   ...[variables]: TVariables extends Record<string, never> ? [] : [TVariables]
-): Promise<ExecutionResult<TResult>> {
+): Promise<TResult> {
   const octokit = await createOctokitClient(account, 'graphql');
 
   try {
