@@ -8,15 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@octokit/core':
-        specifier: ^7.0.6
-        version: 7.0.6
-      '@octokit/plugin-paginate-rest':
-        specifier: ^14.0.0
-        version: 14.0.0(@octokit/core@7.0.6)
-      '@octokit/plugin-rest-endpoint-methods':
-        specifier: ^17.0.0
-        version: 17.0.0(@octokit/core@7.0.6)
       electron-log:
         specifier: 5.4.3
         version: 5.4.3
@@ -157,7 +148,7 @@ importers:
         specifier: 13.5.6
         version: 13.5.6
       octokit:
-        specifier: ^5.0.5
+        specifier: 5.0.5
         version: 5.0.5
       postcss:
         specifier: 8.5.6

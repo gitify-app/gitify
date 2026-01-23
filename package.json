@@ -72,9 +72,6 @@
   },
   "homepage": "https://gitify.io/",
   "dependencies": {
-    "@octokit/core": "^7.0.6",
-    "@octokit/plugin-paginate-rest": "^14.0.0",
-    "@octokit/plugin-rest-endpoint-methods": "^17.0.0",
     "electron-log": "5.4.3",
     "electron-updater": "6.7.3",
     "menubar": "9.5.2",
@@ -123,7 +120,7 @@
     "jest-environment-jsdom": "30.2.0",
     "mini-css-extract-plugin": "2.10.0",
     "nock": "13.5.6",
-    "octokit": "^5.0.5",
+    "octokit": "5.0.5",
     "postcss": "8.5.6",
     "postcss-loader": "8.2.0",
     "rimraf": "6.1.2",
