@@ -10,7 +10,7 @@ export function getGitHubAPIBaseUrl(hostname: Hostname, type: APIClientType) {
 
   if (isEnterpriseServerHost(hostname)) {
     url.hostname = hostname;
-    url.pathname = type === 'rest' ? '/api/v3' : '/api';
+    url.pathname = type === 'rest' ? '/api/v3/' : '/api/';
   }
 
   return url;
