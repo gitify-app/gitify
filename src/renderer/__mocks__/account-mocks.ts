@@ -56,16 +56,6 @@ export const mockGitHubEnterpriseServerAccount: Account = {
   hasRequiredScopes: true,
 };
 
-export const mockGitHubEnterpriseCloudAccount: Account = {
-  platform: 'GitHub Enterprise Cloud with Data Residency',
-  method: 'Personal Access Token',
-  token: 'token-ghec-456' as Token,
-  hostname: 'gitify.ghe.com' as Hostname,
-  user: mockGitifyUser,
-  version: 'latest',
-  hasRequiredScopes: true,
-};
-
 export function mockAccountWithError(error: GitifyError): AccountNotifications {
   return {
     account: mockGitHubCloudAccount,
