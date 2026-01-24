@@ -1,5 +1,7 @@
-import type { GraphqlResponseError } from '@octokit/graphql';
+import { GraphqlResponseError } from '@octokit/graphql';
 import { RequestError } from '@octokit/request-error';
+
+import { EVENTS } from '../../../shared/events';
 
 import type { GitifyError } from '../../types';
 
@@ -7,16 +9,25 @@ import { Errors } from '../errors';
 import { rendererLogError } from '../logger';
 
 /**
- * Determine the failure type based on an error (Octokit RequestError or unknown).
+ * Determine the failure type based on an error.
+ * Handles Octokit RequestError (REST), GraphqlResponseError (GraphQL), and generic Error.
  *
- * @param err The error
+ * @param err The error (RequestError, GraphqlResponseError, or generic Error)
  * @returns The Gitify error type
  */
-export function determineFailureType(err: RequestError): GitifyError {
-  // Handle Octokit RequestError
+export function determineFailureType(
+  err: Error | RequestError | GraphqlResponseError<unknown>,
+): GitifyError {
+  const message = err.message || '';
+
+  // Check for safe storage decryption failures first (happens before API call)
+  if (message.includes(EVENTS.SAFE_STORAGE_DECRYPT)) {
+    return Errors.BAD_CREDENTIALS;
+  }
+
+  // Handle Octokit REST RequestError
   if (err instanceof RequestError) {
     const status = err.status;
-    const message = err.message || '';
 
     if (status === 401) {
       return Errors.BAD_CREDENTIALS;
@@ -35,9 +46,26 @@ export function determineFailureType(err: RequestError): GitifyError {
       }
     }
 
-    // Network-like errors for RequestError
+    // Network-like errors for RequestError (no status or status 0)
     if (status === 0 || status === undefined) {
       return Errors.NETWORK;
+    }
+  }
+
+  // Handle Octokit GraphQL GraphqlResponseError
+  if (err instanceof GraphqlResponseError) {
+    const errorMessages =
+      err.errors?.map((e) => e.message).join('; ') || message;
+
+    if (errorMessages.includes('Bad credentials')) {
+      return Errors.BAD_CREDENTIALS;
+    }
+
+    if (
+      errorMessages.includes('API rate limit exceeded') ||
+      errorMessages.includes('You have exceeded a secondary rate limit')
+    ) {
+      return Errors.RATE_LIMITED;
     }
   }
 
