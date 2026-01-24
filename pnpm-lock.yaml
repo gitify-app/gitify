@@ -8,9 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@octokit/plugin-retry':
-        specifier: ^8.0.3
-        version: 8.0.3(@octokit/core@7.0.6)
       electron-log:
         specifier: 5.4.3
         version: 5.4.3
@@ -66,6 +63,9 @@ importers:
       '@octokit/plugin-rest-endpoint-methods':
         specifier: 17.0.0
         version: 17.0.0(@octokit/core@7.0.6)
+      '@octokit/plugin-retry':
+        specifier: 8.0.3
+        version: 8.0.3(@octokit/core@7.0.6)
       '@octokit/request-error':
         specifier: ^7.1.0
         version: 7.1.0
