@@ -127,7 +127,8 @@ export async function pollGitHubDeviceFlow(
 
     return authentication.token as Token;
   } catch (err) {
-    const errorCode = (err as Record<string, unknown>)?.response?.data?.error;
+    const errorCode = (err as { response?: { data?: { error?: string } } })
+      ?.response?.data?.error;
 
     if (errorCode === 'authorization_pending' || errorCode === 'slow_down') {
       return null;

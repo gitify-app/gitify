@@ -79,7 +79,6 @@ import {
 export interface AppContextState {
   auth: AuthState;
   isLoggedIn: boolean;
-  loginWithGitHubApp: () => Promise<void>;
   startGitHubDeviceFlow: () => Promise<DeviceFlowSession>;
   pollGitHubDeviceFlow: (session: DeviceFlowSession) => Promise<Token | null>;
   completeGitHubDeviceLogin: (
@@ -438,31 +437,6 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   );
 
   /**
-   * Login with GitHub App using device flow so the client secret is never bundled or persisted.
-   */
-  const loginWithGitHubApp = useCallback(async () => {
-    const session = await startGitHubDeviceFlowWithDefaults();
-    const intervalMs = Math.max(5000, session.intervalSeconds * 1000);
-
-    while (Date.now() < session.expiresAt) {
-      const token = await pollGitHubDeviceFlowWithSession(session);
-
-      if (token) {
-        await completeGitHubDeviceLogin(token, session.hostname);
-        return;
-      }
-
-      await new Promise((resolve) => setTimeout(resolve, intervalMs));
-    }
-
-    throw new Error('Device code expired before authorization completed');
-  }, [
-    startGitHubDeviceFlowWithDefaults,
-    pollGitHubDeviceFlowWithSession,
-    completeGitHubDeviceLogin,
-  ]);
-
-  /**
    * Login with custom GitHub OAuth App.
    */
   const loginWithOAuthApp = useCallback(
@@ -546,7 +520,6 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     () => ({
       auth,
       isLoggedIn,
-      loginWithGitHubApp,
       startGitHubDeviceFlow: startGitHubDeviceFlowWithDefaults,
       pollGitHubDeviceFlow: pollGitHubDeviceFlowWithSession,
       completeGitHubDeviceLogin,
@@ -579,7 +552,6 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     [
       auth,
       isLoggedIn,
-      loginWithGitHubApp,
       startGitHubDeviceFlowWithDefaults,
       pollGitHubDeviceFlowWithSession,
       completeGitHubDeviceLogin,

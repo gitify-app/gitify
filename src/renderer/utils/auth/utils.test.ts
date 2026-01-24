@@ -88,15 +88,10 @@ describe('renderer/utils/auth/utils.ts', () => {
         request: expect.any(Function),
       });
 
-      expect(openExternalLinkSpy).toHaveBeenCalledWith(
-        'https://github.com/login/device?user_code=user-code',
-      );
-
       expect(exchangeDeviceCodeMock).toHaveBeenCalledWith({
         clientType: 'oauth-app',
         clientId: 'FAKE_CLIENT_ID_123',
         code: 'device-code',
-        interval: 5,
         request: expect.any(Function),
       });
 

@@ -1,11 +1,11 @@
 import { type FC, useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { CopyIcon, SignInIcon } from '@primer/octicons-react';
+import { CopyIcon, SignInIcon, SyncIcon } from '@primer/octicons-react';
 import {
   Button,
   IconButton,
-  Spinner,
+  Link as PrimerLink,
   Stack,
   Text,
   Tooltip,
@@ -18,9 +18,10 @@ import { Page } from '../components/layout/Page';
 import { Footer } from '../components/primitives/Footer';
 import { Header } from '../components/primitives/Header';
 
+import type { Link } from '../types';
 import type { DeviceFlowSession } from '../utils/auth/types';
 
-import { copyToClipboard } from '../utils/comms';
+import { copyToClipboard, openExternalLink } from '../utils/comms';
 import { rendererLogError } from '../utils/logger';
 
 export const LoginWithDeviceFlowRoute: FC = () => {
@@ -36,12 +37,18 @@ export const LoginWithDeviceFlowRoute: FC = () => {
   const [isPolling, setIsPolling] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Initialize device flow session
+  // Initialize device flow session, copy code, and open browser
   useEffect(() => {
     const initializeDeviceFlow = async () => {
       try {
         const newSession = await startGitHubDeviceFlow();
         setSession(newSession);
+
+        // Auto-copy the user code to clipboard
+        await copyToClipboard(newSession.userCode);
+
+        // Auto-open the verification URL in the browser
+        openExternalLink(newSession.verificationUri as Link);
       } catch (err) {
         rendererLogError(
           'LoginWithDeviceFlow',
@@ -110,7 +117,7 @@ export const LoginWithDeviceFlowRoute: FC = () => {
         clearTimeout(timeoutId);
       }
     };
-  }, [session, pollGitHubDeviceFlow, completeGitHubDeviceLogin, navigate]);
+  }, [session, pollGitHubDeviceFlow, completeGitHubDeviceLogin]);
 
   const handleCopyUserCode = useCallback(async () => {
     if (session?.userCode) {
@@ -142,9 +149,9 @@ export const LoginWithDeviceFlowRoute: FC = () => {
             <Stack direction="vertical" gap="condensed">
               <Text as="p">
                 Go to{' '}
-                <Text as="strong">
+                <PrimerLink href={session.verificationUri}>
                   <code>{session.verificationUri}</code>
-                </Text>
+                </PrimerLink>
               </Text>
               <Text as="p">and enter your device code when prompted:</Text>
             </Stack>
@@ -190,7 +197,13 @@ export const LoginWithDeviceFlowRoute: FC = () => {
               </Text>
               {isPolling && (
                 <Stack align="center" gap="normal">
-                  <Spinner size="small" />
+                  <IconButton
+                    aria-label="Polling"
+                    className={'animate-spin'}
+                    icon={SyncIcon}
+                    size="small"
+                    variant="invisible"
+                  />
                   <Text style={{ fontSize: '12px' }}>
                     Polling for authorization
                   </Text>
@@ -200,7 +213,13 @@ export const LoginWithDeviceFlowRoute: FC = () => {
           </Stack>
         ) : (
           <Stack align="center" direction="vertical" gap="normal">
-            <Spinner size="large" />
+            <IconButton
+              aria-label="Initializing"
+              className={'animate-spin'}
+              icon={SyncIcon}
+              size="large"
+              variant="invisible"
+            />{' '}
             <Text>Initializing authentication...</Text>
           </Stack>
         )}
@@ -211,7 +230,7 @@ export const LoginWithDeviceFlowRoute: FC = () => {
           Cancel
         </Button>
 
-        {session && (
+        {/* {session && (
           <Button
             disabled={!session || isPolling}
             leadingVisual={SignInIcon}
@@ -224,7 +243,7 @@ export const LoginWithDeviceFlowRoute: FC = () => {
           >
             Open Browser
           </Button>
-        )}
+        )} */}
       </Footer>
     </Page>
   );

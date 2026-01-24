@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 
 import { renderWithAppContext } from '../__helpers__/test-utils';
 
+import * as comms from '../utils/comms';
 import { LoginWithDeviceFlowRoute } from './LoginWithDeviceFlow';
 
 const navigateMock = jest.fn();
@@ -12,6 +13,13 @@ jest.mock('react-router-dom', () => ({
 }));
 
 describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {
+  const copyToClipboardSpy = jest
+    .spyOn(comms, 'copyToClipboard')
+    .mockResolvedValue();
+  const openExternalLinkSpy = jest
+    .spyOn(comms, 'openExternalLink')
+    .mockImplementation();
+
   beforeEach(() => {
     jest.clearAllMocks();
   });
@@ -35,9 +43,15 @@ describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {
 
     await screen.findByText(/USER-1234/);
     expect(screen.getByText(/github.com\/login\/device/)).toBeInTheDocument();
+
+    // Verify auto-copy and auto-open were called
+    expect(copyToClipboardSpy).toHaveBeenCalledWith('USER-1234');
+    expect(openExternalLinkSpy).toHaveBeenCalledWith(
+      'https://github.com/login/device',
+    );
   });
 
-  it('should copy user code to clipboard', async () => {
+  it('should copy user code to clipboard when clicking copy button', async () => {
     const startGitHubDeviceFlowMock = jest.fn().mockResolvedValueOnce({
       hostname: 'github.com',
       clientId: 'test-id',
@@ -54,10 +68,12 @@ describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {
 
     await screen.findByText(/USER-1234/);
 
+    // Clear the auto-copy call from initialization
+    copyToClipboardSpy.mockClear();
+
     await userEvent.click(screen.getByLabelText('Copy device code'));
 
-    // We can't easily spy on navigator.clipboard in tests, but the button exists and works
-    expect(screen.getByLabelText('Copy device code')).toBeInTheDocument();
+    expect(copyToClipboardSpy).toHaveBeenCalledWith('USER-1234');
   });
 
   it('should handle device flow errors during initialization', async () => {

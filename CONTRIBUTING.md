@@ -15,7 +15,7 @@ pnpm install
 > [!TIP]
 > _Optional: If you prefer to use your own OAuth credentials, you can do so by passing them as environment variables when bundling the app. This is optional as the app has some default "development" keys (use at your own discretion)._
 > ```shell
-> OAUTH_CLIENT_ID="123" OAUTH_CLIENT_SECRET="456789" pnpm build
+> OAUTH_CLIENT_ID="123" pnpm build
 > ```
 
 Copy the `.env.template` to `.env` and add update `GITHUB_TOKEN` with a GitHub Personal Access Token.  This is used for fetching the latest GitHub GraphQL API schema for `graphql-codegen`.

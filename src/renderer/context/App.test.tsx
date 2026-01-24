@@ -3,15 +3,24 @@ import { act, fireEvent, waitFor } from '@testing-library/react';
 import { renderWithAppContext } from '../__helpers__/test-utils';
 import { mockGitifyNotification } from '../__mocks__/notifications-mocks';
 import { mockSettings } from '../__mocks__/state-mocks';
+import { mockRawUser } from '../utils/api/__mocks__/response-mocks';
 
 import { Constants } from '../constants';
 
 import { useAppContext } from '../hooks/useAppContext';
 import { useNotifications } from '../hooks/useNotifications';
 
-import type { AuthState, SettingsState } from '../types';
+import type {
+  AuthState,
+  ClientID,
+  ClientSecret,
+  Hostname,
+  SettingsState,
+  Token,
+} from '../types';
+import type { GetAuthenticatedUserResponse } from '../utils/api/types';
 
-// import * as apiRequests from '../utils/api/request';
+import * as apiClient from '../utils/api/client';
 import * as notifications from '../utils/notifications/notifications';
 import * as storage from '../utils/storage';
 import * as tray from '../utils/tray';
@@ -63,6 +72,8 @@ describe('renderer/context/App.tsx', () => {
   const saveStateSpy = jest
     .spyOn(storage, 'saveState')
     .mockImplementation(jest.fn());
+
+  const mockAuthenticatedResponse = mockRawUser('authenticated-user');
 
   beforeEach(() => {
     jest.useFakeTimers();
@@ -184,19 +195,21 @@ describe('renderer/context/App.tsx', () => {
   });
 
   describe('authentication methods', () => {
-    it('should call loginWithGitHubApp', async () => {
-      const { button } = renderContextButton('loginWithGitHubApp');
-
-      fireEvent.click(button);
-
-      await waitFor(() =>
-        expect(mockFetchNotifications).toHaveBeenCalledTimes(1),
-      );
+    jest.spyOn(apiClient, 'fetchAuthenticatedUserDetails').mockResolvedValue({
+      status: 200,
+      url: 'https://api.github.com/user',
+      data: mockAuthenticatedResponse as GetAuthenticatedUserResponse,
+      headers: {
+        'x-oauth-scopes': Constants.OAUTH_SCOPES.RECOMMENDED.join(', '),
+      },
     });
 
     it('should call loginWithOAuthApp', async () => {
-      const { button } = renderContextButton('loginWithOAuthApp');
-
+      const { button } = renderContextButton('loginWithOAuthApp', {
+        hostname: 'github.com' as Hostname,
+        clientId: 'FAKE_CLIENT_ID_123' as ClientID,
+        clientSecret: 'FAKE_CLIENT_SECRET_123' as ClientSecret,
+      });
       fireEvent.click(button);
 
       await waitFor(() =>
@@ -204,29 +217,18 @@ describe('renderer/context/App.tsx', () => {
       );
     });
 
-    // it('should call loginWithPersonalAccessToken', async () => {
-    //   const performAuthenticatedRESTRequestSpy = jest
-    //     .spyOn(apiRequests, 'performAuthenticatedRESTRequest')
-    //     .mockResolvedValueOnce(null);
+    it('should call loginWithPersonalAccessToken', async () => {
+      const { button } = renderContextButton('loginWithPersonalAccessToken', {
+        hostname: 'github.com' as Hostname,
+        token: '123-456' as Token,
+      });
 
-    //   const { button } = renderContextButton('loginWithPersonalAccessToken', {
-    //     hostname: 'github.com' as Hostname,
-    //     token: '123-456' as Token,
-    //   });
+      fireEvent.click(button);
 
-    //   fireEvent.click(button);
-
-    //   await waitFor(() =>
-    //     expect(mockFetchNotifications).toHaveBeenCalledTimes(1),
-    //   );
-
-    //   expect(performAuthenticatedRESTRequestSpy).toHaveBeenCalledTimes(1);
-    //   expect(performAuthenticatedRESTRequestSpy).toHaveBeenCalledWith(
-    //     'HEAD',
-    //     'https://api.github.com/notifications',
-    //     'encrypted',
-    //   );
-    // });
+      await waitFor(() =>
+        expect(mockFetchNotifications).toHaveBeenCalledTimes(1),
+      );
+    });
   });
 
   describe('settings methods', () => {

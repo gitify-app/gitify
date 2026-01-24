@@ -23,7 +23,7 @@ export const LoginRoute: FC = () => {
       showWindow();
       navigate('/', { replace: true });
     }
-  }, [isLoggedIn, navigate]);
+  }, [isLoggedIn]);
 
   return (
     <Centered fullHeight={true}>
@@ -41,7 +41,7 @@ export const LoginRoute: FC = () => {
           <Button
             data-testid="login-github"
             leadingVisual={MarkGithubIcon}
-            onClick={() => navigate('/login-device-flow', { replace: true })}
+            onClick={() => navigate('/login-device-flow')}
             variant="primary"
           >
             GitHub

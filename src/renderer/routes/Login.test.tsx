@@ -38,16 +38,14 @@ describe('renderer/routes/Login.tsx', () => {
   });
 
   it('should login with github', async () => {
-    const loginWithGitHubAppMock = jest.fn();
-
     renderWithAppContext(<LoginRoute />, {
       isLoggedIn: false,
-      loginWithGitHubApp: loginWithGitHubAppMock,
     });
 
     await userEvent.click(screen.getByTestId('login-github'));
 
-    expect(loginWithGitHubAppMock).toHaveBeenCalled();
+    expect(navigateMock).toHaveBeenCalledTimes(1);
+    expect(navigateMock).toHaveBeenCalledWith('/login-device-flow');
   });
 
   it('should navigate to login with personal access token', async () => {
