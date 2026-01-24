@@ -20,13 +20,28 @@ export interface ParsedCodePart {
 }
 
 export function getPlatformFromHostname(hostname: string): PlatformType {
-  return hostname.endsWith(Constants.DEFAULT_AUTH_OPTIONS.hostname)
-    ? 'GitHub Cloud'
-    : 'GitHub Enterprise Server';
+  if (hostname.endsWith(Constants.DEFAULT_AUTH_OPTIONS.hostname)) {
+    return 'GitHub Cloud';
+  }
+
+  if (
+    hostname.endsWith(Constants.GITHUB_ENTERPRISE_CLOUD_DATA_RESIDENCY_HOSTNAME)
+  ) {
+    return 'GitHub Enterprise Cloud with Data Residency';
+  }
+
+  return 'GitHub Enterprise Server';
 }
 
 export function isEnterpriseServerHost(hostname: Hostname): boolean {
-  return !hostname.endsWith(Constants.DEFAULT_AUTH_OPTIONS.hostname);
+  return getPlatformFromHostname(hostname) === 'GitHub Enterprise Server';
+}
+
+export function isCloudDataResidencyHost(hostname: Hostname): boolean {
+  return (
+    getPlatformFromHostname(hostname) ===
+    'GitHub Enterprise Cloud with Data Residency'
+  );
 }
 
 export function generateNotificationReferrerId(

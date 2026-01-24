@@ -369,6 +369,11 @@ describe('renderer/utils/auth/utils.ts', () => {
       const result = getGitHubAuthBaseUrl('github.gitify.io' as Hostname);
       expect(result.toString()).toBe('https://github.gitify.io/api/v3/');
     });
+
+    it('should generate a GitHub Auth url - data residency', () => {
+      const result = getGitHubAuthBaseUrl('gitify.ghe.com' as Hostname);
+      expect(result.toString()).toBe('https://api.gitify.ghe.com/');
+    });
   });
 
   it('getDeveloperSettingsURL', () => {
