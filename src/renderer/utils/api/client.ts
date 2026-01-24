@@ -343,16 +343,15 @@ export async function fetchNotificationDetailsForList(
     variables,
   );
 
-  if (response) {
-    for (const [alias, notification] of aliasToNotification) {
-      const repoData = response[alias] as Record<string, unknown> | undefined;
-      if (repoData) {
-        const fragment = Object.values(
-          repoData,
-        )[0] as FetchMergedDetailsTemplateQuery['repository'];
-        results.set(notification, fragment);
-      }
+  for (const [alias, notification] of aliasToNotification) {
+    const repoData = response[alias] as Record<string, unknown> | undefined;
+    if (!repoData) {
+      continue; // Skip if no data for this alias
     }
+    const fragment = Object.values(
+      repoData,
+    )[0] as FetchMergedDetailsTemplateQuery['repository'];
+    results.set(notification, fragment);
   }
 
   return results;

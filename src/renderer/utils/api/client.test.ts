@@ -16,7 +16,10 @@ import {
   fetchIssueByNumber,
   fetchNotificationDetailsForList,
   fetchPullByNumber,
+  getCommit,
+  getCommitComment,
   getHtmlUrl,
+  getRelease,
   ignoreNotificationThreadSubscription,
   listNotificationsForAuthenticatedUser,
   markNotificationThreadAsDone,
@@ -292,6 +295,51 @@ describe('renderer/utils/api/client.ts', () => {
     );
     expect(mockOctokit.request).toHaveBeenCalledWith('GET {+url}', {
       url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/785',
+    });
+  });
+
+  it('getCommit - should fetch commit details', async () => {
+    const commitUrl =
+      'https://api.github.com/repos/gitify-app/gitify/commits/abc123' as Link;
+
+    await getCommit(mockGitHubCloudAccount, commitUrl);
+
+    expect(createOctokitClientSpy).toHaveBeenCalledWith(
+      mockGitHubCloudAccount,
+      'rest',
+    );
+    expect(mockOctokit.request).toHaveBeenCalledWith('GET {+url}', {
+      url: commitUrl,
+    });
+  });
+
+  it('getCommitComment - should fetch commit comment details', async () => {
+    const commentUrl =
+      'https://api.github.com/repos/gitify-app/gitify/comments/456' as Link;
+
+    await getCommitComment(mockGitHubCloudAccount, commentUrl);
+
+    expect(createOctokitClientSpy).toHaveBeenCalledWith(
+      mockGitHubCloudAccount,
+      'rest',
+    );
+    expect(mockOctokit.request).toHaveBeenCalledWith('GET {+url}', {
+      url: commentUrl,
+    });
+  });
+
+  it('getRelease - should fetch release details', async () => {
+    const releaseUrl =
+      'https://api.github.com/repos/gitify-app/gitify/releases/789' as Link;
+
+    await getRelease(mockGitHubCloudAccount, releaseUrl);
+
+    expect(createOctokitClientSpy).toHaveBeenCalledWith(
+      mockGitHubCloudAccount,
+      'rest',
+    );
+    expect(mockOctokit.request).toHaveBeenCalledWith('GET {+url}', {
+      url: releaseUrl,
     });
   });
 
