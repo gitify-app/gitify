@@ -1,7 +1,5 @@
 import { GraphqlResponseError } from '@octokit/graphql';
 
-import type { ExecutionResult } from 'graphql';
-
 import type { Account } from '../../types';
 
 import { handleGraphQLResponseError } from './errors';
