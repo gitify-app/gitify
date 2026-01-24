@@ -122,6 +122,10 @@ describe('renderer/utils/icons.ts', () => {
     expect(getPlatformIcon('GitHub Cloud')).toMatchSnapshot();
 
     expect(getPlatformIcon('GitHub Enterprise Server')).toMatchSnapshot();
+
+    expect(
+      getPlatformIcon('GitHub Enterprise Cloud with Data Residency'),
+    ).toMatchSnapshot();
   });
 
   describe('getDefaultUserIcon', () => {

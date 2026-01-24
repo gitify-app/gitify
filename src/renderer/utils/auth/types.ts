@@ -8,7 +8,10 @@ import type {
 
 export type AuthMethod = 'GitHub App' | 'Personal Access Token' | 'OAuth App';
 
-export type PlatformType = 'GitHub Cloud' | 'GitHub Enterprise Server';
+export type PlatformType =
+  | 'GitHub Cloud'
+  | 'GitHub Enterprise Server'
+  | 'GitHub Enterprise Cloud with Data Residency';
 
 export interface LoginOAuthDeviceOptions {
   hostname: Hostname;

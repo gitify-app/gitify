@@ -15,8 +15,12 @@ export const Constants = {
     clientId: process.env.OAUTH_CLIENT_ID as ClientID,
   } satisfies LoginOAuthDeviceOptions,
 
+  // GitHub Enterprise Cloud with Data Residency uses *.ghe.com domains
+  GITHUB_ENTERPRISE_CLOUD_DATA_RESIDENCY_HOSTNAME: 'ghe.com',
+
   GITHUB_API_BASE_URL: 'https://api.github.com',
   GITHUB_API_GRAPHQL_URL: 'https://api.github.com/graphql',
+  GITHUB_API_MERGE_BATCH_SIZE: 100,
 
   ALL_READ_EMOJIS: ['🎉', '🎊', '🥳', '👏', '🙌', '😎', '🏖️', '🚀', '✨', '🏆'],
 

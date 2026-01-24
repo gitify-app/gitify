@@ -2,7 +2,6 @@ import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { renderWithAppContext } from '../../__helpers__/test-utils';
-import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
 import { mockGitifyNotification } from '../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../__mocks__/state-mocks';
 
@@ -10,7 +9,7 @@ import { GroupBy } from '../../types';
 
 import * as comms from '../../utils/comms';
 import * as links from '../../utils/links';
-import { NotificationRow } from './NotificationRow';
+import { NotificationRow, type NotificationRowProps } from './NotificationRow';
 
 describe('renderer/components/notifications/NotificationRow.tsx', () => {
   jest.spyOn(links, 'openNotification').mockImplementation();
@@ -24,9 +23,9 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
   });
 
   it('should render itself & its children - group by date', async () => {
-    const props = {
+    const props: NotificationRowProps = {
       notification: mockGitifyNotification,
-      account: mockGitHubCloudAccount,
+      isRepositoryAnimatingExit: false,
     };
 
     const tree = renderWithAppContext(<NotificationRow {...props} />, {
@@ -37,9 +36,9 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
   });
 
   it('should render itself & its children - group by repositories', async () => {
-    const props = {
+    const props: NotificationRowProps = {
       notification: mockGitifyNotification,
-      account: mockGitHubCloudAccount,
+      isRepositoryAnimatingExit: false,
     };
 
     const tree = renderWithAppContext(<NotificationRow {...props} />, {
@@ -50,9 +49,9 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
   });
 
   it('should render itself & its children - hide numbers', async () => {
-    const props = {
+    const props: NotificationRowProps = {
       notification: mockGitifyNotification,
-      account: mockGitHubCloudAccount,
+      isRepositoryAnimatingExit: false,
     };
 
     const tree = renderWithAppContext(<NotificationRow {...props} />, {
@@ -63,12 +62,9 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
   });
 
   it('should render itself & its children - notification is read', async () => {
-    const props = {
-      notification: {
-        ...mockGitifyNotification,
-        unread: false,
-      },
-      account: mockGitHubCloudAccount,
+    const props: NotificationRowProps = {
+      notification: { ...mockGitifyNotification, unread: false },
+      isRepositoryAnimatingExit: false,
     };
 
     const tree = renderWithAppContext(<NotificationRow {...props} />);
@@ -80,9 +76,9 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
     it('should open a notification in the browser - click', async () => {
       const markNotificationsAsReadMock = jest.fn();
 
-      const props = {
+      const props: NotificationRowProps = {
         notification: mockGitifyNotification,
-        account: mockGitHubCloudAccount,
+        isRepositoryAnimatingExit: false,
       };
 
       renderWithAppContext(<NotificationRow {...props} />, {
@@ -99,9 +95,9 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
     it('should open a notification in the browser - delay notification setting enabled', async () => {
       const markNotificationsAsReadMock = jest.fn();
 
-      const props = {
+      const props: NotificationRowProps = {
         notification: mockGitifyNotification,
-        account: mockGitHubCloudAccount,
+        isRepositoryAnimatingExit: false,
       };
 
       renderWithAppContext(<NotificationRow {...props} />, {
@@ -122,9 +118,9 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
     it('should open a notification in browser & mark it as done', async () => {
       const markNotificationsAsDoneMock = jest.fn();
 
-      const props = {
+      const props: NotificationRowProps = {
         notification: mockGitifyNotification,
-        account: mockGitHubCloudAccount,
+        isRepositoryAnimatingExit: false,
       };
 
       renderWithAppContext(<NotificationRow {...props} />, {
@@ -142,9 +138,9 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       const markNotificationsAsReadMock = jest.fn();
       const markNotificationsAsDoneMock = jest.fn();
 
-      const props = {
+      const props: NotificationRowProps = {
         notification: mockGitifyNotification,
-        account: mockGitHubCloudAccount,
+        isRepositoryAnimatingExit: false,
       };
 
       renderWithAppContext(<NotificationRow {...props} />, {
@@ -167,9 +163,9 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
     it('should mark notifications as read', async () => {
       const markNotificationsAsReadMock = jest.fn();
 
-      const props = {
+      const props: NotificationRowProps = {
         notification: mockGitifyNotification,
-        account: mockGitHubCloudAccount,
+        isRepositoryAnimatingExit: false,
       };
 
       renderWithAppContext(<NotificationRow {...props} />, {
@@ -183,14 +179,12 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
     });
 
     it('should hide mark as read button when notification is already read', async () => {
-      const readNotification = {
-        ...mockGitifyNotification,
-        unread: false,
-      };
-
-      const props = {
-        notification: readNotification,
-        account: mockGitHubCloudAccount,
+      const props: NotificationRowProps = {
+        notification: {
+          ...mockGitifyNotification,
+          unread: false,
+        },
+        isRepositoryAnimatingExit: false,
       };
 
       renderWithAppContext(<NotificationRow {...props} />);
@@ -203,9 +197,9 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
     it('should mark notifications as done', async () => {
       const markNotificationsAsDoneMock = jest.fn();
 
-      const props = {
+      const props: NotificationRowProps = {
         notification: mockGitifyNotification,
-        account: mockGitHubCloudAccount,
+        isRepositoryAnimatingExit: false,
       };
 
       renderWithAppContext(<NotificationRow {...props} />, {
@@ -219,14 +213,12 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
     });
 
     it('should hide mark as done button when notification is already read', async () => {
-      const readNotification = {
-        ...mockGitifyNotification,
-        unread: false,
-      };
-
-      const props = {
-        notification: readNotification,
-        account: mockGitHubCloudAccount,
+      const props: NotificationRowProps = {
+        notification: {
+          ...mockGitifyNotification,
+          unread: false,
+        },
+        isRepositoryAnimatingExit: false,
       };
 
       renderWithAppContext(<NotificationRow {...props} />);
@@ -237,9 +229,9 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
     });
 
     it('should show mark as done button when fetchReadNotifications is enabled and notification is unread', async () => {
-      const props = {
+      const props: NotificationRowProps = {
         notification: mockGitifyNotification,
-        account: mockGitHubCloudAccount,
+        isRepositoryAnimatingExit: false,
       };
 
       renderWithAppContext(<NotificationRow {...props} />, {
@@ -257,9 +249,9 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
     it('should unsubscribe from a notification thread', async () => {
       const unsubscribeNotificationMock = jest.fn();
 
-      const props = {
+      const props: NotificationRowProps = {
         notification: mockGitifyNotification,
-        account: mockGitHubCloudAccount,
+        isRepositoryAnimatingExit: false,
       };
 
       renderWithAppContext(<NotificationRow {...props} />, {

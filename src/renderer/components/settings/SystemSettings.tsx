@@ -63,8 +63,8 @@ export const SystemSettings: FC = () => {
           checked={settings.keyboardShortcut}
           label="Enable keyboard shortcut"
           name="keyboardShortcut"
-          onChange={(evt) =>
-            updateSetting('keyboardShortcut', evt.target.checked)
+          onChange={() =>
+            updateSetting('keyboardShortcut', !settings.keyboardShortcut)
           }
           tooltip={
             <div>
@@ -81,8 +81,8 @@ export const SystemSettings: FC = () => {
           checked={settings.showNotifications}
           label="Show system notifications"
           name="showNotifications"
-          onChange={(evt) =>
-            updateSetting('showNotifications', evt.target.checked)
+          onChange={() =>
+            updateSetting('showNotifications', !settings.showNotifications)
           }
           tooltip={
             <Text>
@@ -102,7 +102,7 @@ export const SystemSettings: FC = () => {
             checked={settings.playSound}
             label="Play sound"
             name="playSound"
-            onChange={(evt) => updateSetting('playSound', evt.target.checked)}
+            onChange={() => updateSetting('playSound', !settings.playSound)}
           />
 
           <ButtonGroup
@@ -165,7 +165,9 @@ export const SystemSettings: FC = () => {
           checked={settings.openAtStartup}
           label="Open at startup"
           name="openAtStartup"
-          onChange={(evt) => updateSetting('openAtStartup', evt.target.checked)}
+          onChange={() =>
+            updateSetting('openAtStartup', !settings.openAtStartup)
+          }
           tooltip={
             <Text>Launch {APPLICATION.NAME} automatically at startup.</Text>
           }

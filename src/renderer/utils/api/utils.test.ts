@@ -1,89 +1,49 @@
-import type { AxiosResponse } from 'axios';
-
 import type { Hostname } from '../../types';
 
-import {
-  getGitHubAPIBaseUrl,
-  getGitHubAuthBaseUrl,
-  getGitHubGraphQLUrl,
-  getNextURLFromLinkHeader,
-} from './utils';
+import { getGitHubAPIBaseUrl } from './utils';
 
 describe('renderer/utils/api/utils.ts', () => {
-  describe('getGitHubAuthBaseUrl', () => {
-    it('should generate a GitHub Auth url - non enterprise', () => {
-      const result = getGitHubAuthBaseUrl('github.com' as Hostname);
-      expect(result.toString()).toBe('https://github.com/');
-    });
-
-    it('should generate a GitHub Auth url - enterprise', () => {
-      const result = getGitHubAuthBaseUrl('github.gitify.io' as Hostname);
-      expect(result.toString()).toBe('https://github.gitify.io/api/v3/');
-    });
-  });
-
   describe('getGitHubAPIBaseUrl', () => {
-    it('should generate a GitHub API url - non enterprise', () => {
-      const result = getGitHubAPIBaseUrl('github.com' as Hostname);
+    it('should generate a GitHub REST API url - non enterprise', () => {
+      const result = getGitHubAPIBaseUrl('github.com' as Hostname, 'rest');
+
       expect(result.toString()).toBe('https://api.github.com/');
     });
 
-    it('should generate a GitHub API url - enterprise', () => {
-      const result = getGitHubAPIBaseUrl('github.gitify.io' as Hostname);
+    it('should generate a GitHub REST API url - enterprise server', () => {
+      const result = getGitHubAPIBaseUrl(
+        'github.gitify.io' as Hostname,
+        'rest',
+      );
+
       expect(result.toString()).toBe('https://github.gitify.io/api/v3/');
     });
-  });
 
-  describe('getGitHubGraphQLUrl', () => {
-    it('should generate a GitHub GraphQL url - non enterprise', () => {
-      const result = getGitHubGraphQLUrl('github.com' as Hostname);
-      expect(result.toString()).toBe('https://api.github.com/graphql');
-    });
+    it('should generate a GitHub REST API url - enterprise cloud with data residency', () => {
+      const result = getGitHubAPIBaseUrl('gitify.ghe.com' as Hostname, 'rest');
 
-    it('should generate a GitHub GraphQL url - enterprise', () => {
-      const result = getGitHubGraphQLUrl('github.gitify.io' as Hostname);
-      expect(result.toString()).toBe('https://github.gitify.io/api/graphql');
+      expect(result.toString()).toBe('https://api.gitify.ghe.com/');
     });
   });
 
-  describe('getNextURLFromLinkHeader', () => {
-    it('should parse next url from link header', () => {
-      const mockResponse = {
-        headers: {
-          link: '<https://api.github.com/notifications?participating=false&page=2>; rel="next", <https://api.github.com/notifications?participating=false&page=2>; rel="last"',
-        },
-      };
+  it('should generate a GitHub GraphQL url - non enterprise', () => {
+    const result = getGitHubAPIBaseUrl('github.com' as Hostname, 'graphql');
 
-      const result = getNextURLFromLinkHeader(
-        mockResponse as unknown as AxiosResponse,
-      );
-      expect(result.toString()).toBe(
-        'https://api.github.com/notifications?participating=false&page=2',
-      );
-    });
+    expect(result.toString()).toBe('https://api.github.com/');
+  });
 
-    it('should return null if no next url in link header', () => {
-      const mockResponse = {
-        headers: {
-          link: '<https://api.github.com/notifications?participating=false&page=2>; rel="last"',
-        },
-      };
+  it('should generate a GitHub GraphQL url - enterprise server', () => {
+    const result = getGitHubAPIBaseUrl(
+      'github.gitify.io' as Hostname,
+      'graphql',
+    );
 
-      const result = getNextURLFromLinkHeader(
-        mockResponse as unknown as AxiosResponse,
-      );
-      expect(result).toBeNull();
-    });
+    expect(result.toString()).toBe('https://github.gitify.io/api/');
+  });
 
-    it('should return null if no link header exists', () => {
-      const mockResponse = {
-        headers: {},
-      };
+  it('should generate a GitHub GraphQL url - enterprise cloud with data residency', () => {
+    const result = getGitHubAPIBaseUrl('gitify.ghe.com' as Hostname, 'graphql');
 
-      const result = getNextURLFromLinkHeader(
-        mockResponse as unknown as AxiosResponse,
-      );
-      expect(result).toBeNull();
-    });
+    expect(result.toString()).toBe('https://api.gitify.ghe.com/');
   });
 });

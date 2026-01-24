@@ -18,7 +18,7 @@ import { shouldRemoveNotificationsFromState } from '../../utils/notifications/re
 import { AvatarWithFallback } from '../avatars/AvatarWithFallback';
 import { NotificationRow } from './NotificationRow';
 
-interface RepositoryNotificationsProps {
+export interface RepositoryNotificationsProps {
   repoNotifications: GitifyNotification[];
   repoName: string;
 }
@@ -30,25 +30,32 @@ export const RepositoryNotifications: FC<RepositoryNotificationsProps> = ({
   const { settings, markNotificationsAsRead, markNotificationsAsDone } =
     useAppContext();
 
-  const [animateExit, setAnimateExit] = useState(false);
-  const [showRepositoryNotifications, setShowRepositoryNotifications] =
-    useState(true);
+  const [shouldAnimateRepositoryExit, setShouldAnimateRepositoryExit] =
+    useState(false);
+  const [
+    isRepositoryNotificationsVisible,
+    setIsRepositoryNotificationsVisible,
+  ] = useState(true);
 
   const avatarUrl = repoNotifications[0].repository.owner.avatarUrl;
   const shouldAnimateExit = shouldRemoveNotificationsFromState(settings);
 
+  const actionRepositoryInteraction = () => {
+    openRepository(repoNotifications[0].repository);
+  };
+
   const actionMarkAsDone = () => {
-    setAnimateExit(shouldAnimateExit);
+    setShouldAnimateRepositoryExit(shouldAnimateExit);
     markNotificationsAsDone(repoNotifications);
   };
 
   const actionMarkAsRead = () => {
-    setAnimateExit(shouldAnimateExit);
+    setShouldAnimateRepositoryExit(shouldAnimateExit);
     markNotificationsAsRead(repoNotifications);
   };
 
   const actionToggleRepositoryNotifications = () => {
-    setShowRepositoryNotifications(!showRepositoryNotifications);
+    setIsRepositoryNotificationsVisible(!isRepositoryNotificationsVisible);
   };
 
   const areAllRepoNotificationsRead = repoNotifications.every(
@@ -57,7 +64,7 @@ export const RepositoryNotifications: FC<RepositoryNotificationsProps> = ({
 
   const Chevron = getChevronDetails(
     true,
-    showRepositoryNotifications,
+    isRepositoryNotificationsVisible,
     'repository',
   );
 
@@ -67,7 +74,7 @@ export const RepositoryNotifications: FC<RepositoryNotificationsProps> = ({
         className={cn(
           'group relative pr-1 py-0.5',
           'bg-gitify-repository',
-          animateExit &&
+          shouldAnimateRepositoryExit &&
             'translate-x-full opacity-0 transition duration-350 ease-in-out',
           areAllRepoNotificationsRead && Opacity.READ,
         )}
@@ -81,7 +88,7 @@ export const RepositoryNotifications: FC<RepositoryNotificationsProps> = ({
           onClick={(event: MouseEvent<HTMLElement>) => {
             // Don't trigger onClick of parent element.
             event.stopPropagation();
-            openRepository(repoNotifications[0].repository);
+            actionRepositoryInteraction();
           }}
           title="Open repository ↗"
           variant="invisible"
@@ -95,7 +102,7 @@ export const RepositoryNotifications: FC<RepositoryNotificationsProps> = ({
           />
         </Button>
 
-        {!animateExit && (
+        {!shouldAnimateRepositoryExit && (
           <HoverGroup bgColor="group-hover:bg-gitify-repository">
             <HoverButton
               action={actionMarkAsRead}
@@ -126,10 +133,10 @@ export const RepositoryNotifications: FC<RepositoryNotificationsProps> = ({
         )}
       </Stack>
 
-      {showRepositoryNotifications &&
+      {isRepositoryNotificationsVisible &&
         repoNotifications.map((notification) => (
           <NotificationRow
-            isAnimated={animateExit}
+            isRepositoryAnimatingExit={shouldAnimateRepositoryExit}
             key={notification.id}
             notification={notification}
           />

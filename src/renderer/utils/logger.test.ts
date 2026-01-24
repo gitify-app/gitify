@@ -11,9 +11,7 @@ describe('renderer/utils/logger.ts', () => {
   const mockError = new Error('boom');
 
   beforeEach(() => {
-    logInfoSpy.mockReset();
-    logWarnSpy.mockReset();
-    logErrorSpy.mockReset();
+    jest.clearAllMocks();
   });
 
   it('logs info without notification', () => {

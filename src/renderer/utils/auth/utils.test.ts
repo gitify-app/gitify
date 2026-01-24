@@ -1,7 +1,6 @@
-import { configureAxiosHttpAdapterForNock } from '../../__helpers__/test-utils';
 import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
 import { mockAuth } from '../../__mocks__/state-mocks';
-import { mockGitifyUser } from '../../__mocks__/user-mocks';
+import { mockRawUser } from '../api/__mocks__/response-mocks';
 
 import { Constants } from '../../constants';
 
@@ -12,6 +11,7 @@ import type {
   ClientID,
   ClientSecret,
   Hostname,
+  Link,
   Token,
 } from '../../types';
 import type { AuthMethod, LoginOAuthWebOptions } from './types';
@@ -20,7 +20,11 @@ import * as comms from '../../utils/comms';
 import * as apiClient from '../api/client';
 import * as logger from '../logger';
 import * as authUtils from './utils';
-import { getNewOAuthAppURL, getNewTokenURL } from './utils';
+import {
+  getGitHubAuthBaseUrl,
+  getNewOAuthAppURL,
+  getNewTokenURL,
+} from './utils';
 
 jest.mock('@octokit/oauth-methods', () => ({
   ...jest.requireActual('@octokit/oauth-methods'),
@@ -35,6 +39,8 @@ import {
   exchangeWebFlowCode,
 } from '@octokit/oauth-methods';
 
+import type { GetAuthenticatedUserResponse } from '../api/types';
+
 const createDeviceCodeMock = createDeviceCode as jest.MockedFunction<
   typeof createDeviceCode
 >;
@@ -46,26 +52,16 @@ const exchangeWebFlowCodeMock = exchangeWebFlowCode as jest.MockedFunction<
 >;
 
 describe('renderer/utils/auth/utils.ts', () => {
-  beforeEach(() => {
-    configureAxiosHttpAdapterForNock();
+  jest.spyOn(logger, 'rendererLogInfo').mockImplementation();
+  const openExternalLinkSpy = jest
+    .spyOn(comms, 'openExternalLink')
+    .mockImplementation();
+
+  afterEach(() => {
+    jest.clearAllMocks();
   });
 
-  const webAuthOptions: LoginOAuthWebOptions = {
-    hostname: 'github.com' as Hostname,
-    clientId: 'FAKE_CLIENT_ID_123' as ClientID,
-    clientSecret: 'FAKE_CLIENT_SECRET_123' as ClientSecret,
-  };
-
-  describe('authGitHub', () => {
-    jest.spyOn(logger, 'rendererLogInfo').mockImplementation();
-    const openExternalLinkSpy = jest
-      .spyOn(comms, 'openExternalLink')
-      .mockImplementation();
-
-    afterEach(() => {
-      jest.clearAllMocks();
-    });
-
+  describe('performGitHubDeviceOAuth', () => {
     it('should authenticate using device flow for GitHub app', async () => {
       createDeviceCodeMock.mockResolvedValueOnce({
         data: {
@@ -106,6 +102,14 @@ describe('renderer/utils/auth/utils.ts', () => {
 
       expect(token).toBe('device-token');
     });
+  });
+
+  describe('performGitHubWebOAuth', () => {
+    const webAuthOptions: LoginOAuthWebOptions = {
+      hostname: 'github.com' as Hostname,
+      clientId: 'FAKE_CLIENT_ID_123' as ClientID,
+      clientSecret: 'FAKE_CLIENT_SECRET_123' as ClientSecret,
+    };
 
     it('should call performGitHubWebOAuth using gitify oauth app - success auth flow', async () => {
       window.gitify.onAuthCallback = jest
@@ -190,45 +194,48 @@ describe('renderer/utils/auth/utils.ts', () => {
         expect.any(Function),
       );
     });
-  });
 
-  describe('exchangeAuthCodeForAccessToken', () => {
-    const authCode = '123-456' as AuthCode;
+    describe('exchangeAuthCodeForAccessToken', () => {
+      const authCode = '123-456' as AuthCode;
 
-    it('should exchange auth code for access token', async () => {
-      exchangeWebFlowCodeMock.mockResolvedValueOnce({
-        authentication: {
-          token: 'this-is-a-token',
-        },
-      } as unknown as Awaited<ReturnType<typeof exchangeWebFlowCode>>);
+      it('should exchange auth code for access token', async () => {
+        exchangeWebFlowCodeMock.mockResolvedValueOnce({
+          authentication: {
+            token: 'this-is-a-token',
+          },
+        } as unknown as Awaited<ReturnType<typeof exchangeWebFlowCode>>);
 
-      const res = await authUtils.exchangeAuthCodeForAccessToken(authCode, {
-        ...webAuthOptions,
+        const res = await authUtils.exchangeAuthCodeForAccessToken(authCode, {
+          ...webAuthOptions,
+        });
+
+        expect(exchangeWebFlowCodeMock).toHaveBeenCalledWith({
+          clientType: 'oauth-app',
+          clientId: 'FAKE_CLIENT_ID_123',
+          clientSecret: 'FAKE_CLIENT_SECRET_123',
+          code: '123-456',
+          request: expect.any(Function),
+        });
+        expect(res).toBe('this-is-a-token');
       });
 
-      expect(exchangeWebFlowCodeMock).toHaveBeenCalledWith({
-        clientType: 'oauth-app',
-        clientId: 'FAKE_CLIENT_ID_123',
-        clientSecret: 'FAKE_CLIENT_SECRET_123',
-        code: '123-456',
-        request: expect.any(Function),
+      it('should throw when client secret is missing', async () => {
+        await expect(
+          async () =>
+            await authUtils.exchangeAuthCodeForAccessToken(authCode, {
+              ...webAuthOptions,
+              clientSecret: undefined as unknown as ClientSecret,
+            }),
+        ).rejects.toThrow('clientSecret is required to exchange an auth code');
       });
-      expect(res).toBe('this-is-a-token');
-    });
-
-    it('should throw when client secret is missing', async () => {
-      await expect(
-        async () =>
-          await authUtils.exchangeAuthCodeForAccessToken(authCode, {
-            ...webAuthOptions,
-            clientSecret: undefined as unknown as ClientSecret,
-          }),
-      ).rejects.toThrow('clientSecret is required to exchange an auth code');
     });
   });
 
   describe('addAccount', () => {
     let mockAuthState: AuthState;
+
+    const mockAuthenticatedResponse = mockRawUser('authenticated-user');
+
     const fetchAuthenticatedUserDetailsSpy = jest.spyOn(
       apiClient,
       'fetchAuthenticatedUserDetails',
@@ -243,9 +250,9 @@ describe('renderer/utils/auth/utils.ts', () => {
     describe('should add GitHub Cloud account', () => {
       beforeEach(() => {
         fetchAuthenticatedUserDetailsSpy.mockResolvedValue({
-          data: {
-            viewer: mockGitifyUser,
-          },
+          status: 200,
+          url: 'https://api.github.com/user',
+          data: mockAuthenticatedResponse as GetAuthenticatedUserResponse,
           headers: {
             'x-oauth-scopes': Constants.OAUTH_SCOPES.RECOMMENDED.join(', '),
           },
@@ -267,9 +274,14 @@ describe('renderer/utils/auth/utils.ts', () => {
             method: 'Personal Access Token',
             platform: 'GitHub Cloud',
             token: 'encrypted' as Token,
-            user: mockGitifyUser,
+            user: {
+              id: String(mockAuthenticatedResponse.id),
+              name: mockAuthenticatedResponse.name,
+              login: mockAuthenticatedResponse.login,
+              avatar: mockAuthenticatedResponse.avatar_url as Link,
+            },
             version: 'latest',
-          },
+          } satisfies Account,
         ]);
       });
 
@@ -288,9 +300,14 @@ describe('renderer/utils/auth/utils.ts', () => {
             method: 'OAuth App',
             platform: 'GitHub Cloud',
             token: 'encrypted' as Token,
-            user: mockGitifyUser,
+            user: {
+              id: String(mockAuthenticatedResponse.id),
+              name: mockAuthenticatedResponse.name,
+              login: mockAuthenticatedResponse.login,
+              avatar: mockAuthenticatedResponse.avatar_url as Link,
+            },
             version: 'latest',
-          },
+          } satisfies Account,
         ]);
       });
     });
@@ -298,9 +315,9 @@ describe('renderer/utils/auth/utils.ts', () => {
     describe('should add GitHub Enterprise Server account', () => {
       beforeEach(() => {
         fetchAuthenticatedUserDetailsSpy.mockResolvedValue({
-          data: {
-            viewer: mockGitifyUser,
-          },
+          status: 200,
+          url: 'https://github.gitify.io/api/v3/user',
+          data: mockAuthenticatedResponse as GetAuthenticatedUserResponse,
           headers: {
             'x-github-enterprise-version': '3.0.0',
             'x-oauth-scopes': Constants.OAUTH_SCOPES.RECOMMENDED.join(', '),
@@ -323,9 +340,14 @@ describe('renderer/utils/auth/utils.ts', () => {
             method: 'Personal Access Token',
             platform: 'GitHub Enterprise Server',
             token: 'encrypted' as Token,
-            user: mockGitifyUser,
+            user: {
+              id: String(mockAuthenticatedResponse.id),
+              name: mockAuthenticatedResponse.name,
+              login: mockAuthenticatedResponse.login,
+              avatar: mockAuthenticatedResponse.avatar_url as Link,
+            },
             version: '3.0.0',
-          },
+          } satisfies Account,
         ]);
       });
 
@@ -344,9 +366,14 @@ describe('renderer/utils/auth/utils.ts', () => {
             method: 'OAuth App',
             platform: 'GitHub Enterprise Server',
             token: 'encrypted' as Token,
-            user: mockGitifyUser,
+            user: {
+              id: String(mockAuthenticatedResponse.id),
+              name: mockAuthenticatedResponse.name,
+              login: mockAuthenticatedResponse.login,
+              avatar: mockAuthenticatedResponse.avatar_url as Link,
+            },
             version: '3.0.0',
-          },
+          } satisfies Account,
         ]);
       });
     });
@@ -400,6 +427,23 @@ describe('renderer/utils/auth/utils.ts', () => {
     expect(authUtils.extractHostVersion('enterprise-server@3.15.0-beta1')).toBe(
       '3.15.0',
     );
+  });
+
+  describe('getGitHubAuthBaseUrl', () => {
+    it('should generate a GitHub Auth url - non enterprise', () => {
+      const result = getGitHubAuthBaseUrl('github.com' as Hostname);
+      expect(result.toString()).toBe('https://github.com/');
+    });
+
+    it('should generate a GitHub Auth url - enterprise', () => {
+      const result = getGitHubAuthBaseUrl('github.gitify.io' as Hostname);
+      expect(result.toString()).toBe('https://github.gitify.io/api/v3/');
+    });
+
+    it('should generate a GitHub Auth url - data residency', () => {
+      const result = getGitHubAuthBaseUrl('gitify.ghe.com' as Hostname);
+      expect(result.toString()).toBe('https://api.gitify.ghe.com/');
+    });
   });
 
   it('getDeveloperSettingsURL', () => {

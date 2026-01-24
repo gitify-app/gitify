@@ -1,3 +1,5 @@
+import { Constants } from '../../constants';
+
 import type {
   AccountNotifications,
   GitifyNotification,
@@ -88,8 +90,7 @@ export async function getAllNotifications(
       .filter((response) => !!response)
       .map(async (accountNotifications) => {
         try {
-          const rawNotifications = (await accountNotifications.notifications)
-            .data;
+          const rawNotifications = await accountNotifications.notifications;
 
           let notifications = rawNotifications.map((raw) => {
             return transformNotification(raw, accountNotifications.account);
@@ -141,6 +142,13 @@ export async function getAllNotifications(
   return accountNotifications;
 }
 
+/**
+ * Enrich notification details
+ *
+ * @param notifications All Gitify inbox notifications
+ * @param settings
+ * @returns
+ */
 export async function enrichNotifications(
   notifications: GitifyNotification[],
   settings: SettingsState,
@@ -149,20 +157,7 @@ export async function enrichNotifications(
     return notifications;
   }
 
-  // Build and fetch merged details via client; returns per-notification results
-  let mergedResults: Map<
-    GitifyNotification,
-    FetchMergedDetailsTemplateQuery['repository']
-  > = new Map();
-  try {
-    mergedResults = await fetchNotificationDetailsForList(notifications);
-  } catch (err) {
-    rendererLogError(
-      'enrichNotifications',
-      'Failed to fetch merged notification details',
-      err,
-    );
-  }
+  const mergedResults = await fetchNotificationDetailsInBatches(notifications);
 
   const enrichedNotifications = await Promise.all(
     notifications.map(async (notification: GitifyNotification) => {
@@ -172,6 +167,54 @@ export async function enrichNotifications(
     }),
   );
   return enrichedNotifications;
+}
+
+/**
+ * Fetch notification details in batches to avoid overwhelming the API.
+ *
+ * @param notifications - The notifications to fetch details for.
+ * @returns A map of notifications to their repository details.
+ */
+async function fetchNotificationDetailsInBatches(
+  notifications: GitifyNotification[],
+): Promise<
+  Map<GitifyNotification, FetchMergedDetailsTemplateQuery['repository']>
+> {
+  const mergedResults: Map<
+    GitifyNotification,
+    FetchMergedDetailsTemplateQuery['repository']
+  > = new Map();
+
+  const batchSize = Constants.GITHUB_API_MERGE_BATCH_SIZE;
+
+  for (
+    let batchStart = 0;
+    batchStart < notifications.length;
+    batchStart += batchSize
+  ) {
+    const batchIndex = Math.floor(batchStart / batchSize) + 1;
+    const batchNotifications = notifications.slice(
+      batchStart,
+      batchStart + batchSize,
+    );
+
+    try {
+      const batchResults =
+        await fetchNotificationDetailsForList(batchNotifications);
+
+      for (const [notification, repository] of batchResults) {
+        mergedResults.set(notification, repository);
+      }
+    } catch (err) {
+      rendererLogError(
+        'fetchNotificationDetailsInBatches',
+        `Failed to fetch merged notification details for batch ${batchIndex}`,
+        err,
+      );
+    }
+  }
+
+  return mergedResults;
 }
 
 /**

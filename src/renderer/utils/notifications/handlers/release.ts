@@ -10,6 +10,7 @@ import type {
   GitifySubject,
   Link,
   SettingsState,
+  UserType,
 } from '../../../types';
 
 import { getRelease } from '../../api/client';
@@ -31,16 +32,17 @@ class ReleaseHandler extends DefaultHandler {
       return {};
     }
 
-    const release = (
-      await getRelease(notification.subject.url, notification.account.token)
-    ).data;
+    const release = await getRelease(
+      notification.account,
+      notification.subject.url,
+    );
 
     const user: GitifyNotificationUser = release.author
       ? {
           login: release.author.login,
           avatarUrl: release.author.avatar_url as Link,
           htmlUrl: release.author.html_url as Link,
-          type: release.author.type as GitifyNotificationUser['type'],
+          type: release.author.type as UserType,
         }
       : null;
 

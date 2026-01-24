@@ -13,14 +13,35 @@ import { getHtmlUrl } from './api/client';
 import { rendererLogError } from './logger';
 import { createNotificationHandler } from './notifications/handlers';
 
+export interface ParsedCodePart {
+  id: string;
+  type: 'text' | 'code';
+  content: string;
+}
+
 export function getPlatformFromHostname(hostname: string): PlatformType {
-  return hostname.endsWith(Constants.OAUTH_DEVICE_FLOW.hostname)
-    ? 'GitHub Cloud'
-    : 'GitHub Enterprise Server';
+  if (hostname.endsWith(Constants.OAUTH_DEVICE_FLOW.hostname)) {
+    return 'GitHub Cloud';
+  }
+
+  if (
+    hostname.endsWith(Constants.GITHUB_ENTERPRISE_CLOUD_DATA_RESIDENCY_HOSTNAME)
+  ) {
+    return 'GitHub Enterprise Cloud with Data Residency';
+  }
+
+  return 'GitHub Enterprise Server';
 }
 
 export function isEnterpriseServerHost(hostname: Hostname): boolean {
-  return !hostname.endsWith(Constants.OAUTH_DEVICE_FLOW.hostname);
+  return getPlatformFromHostname(hostname) === 'GitHub Enterprise Server';
+}
+
+export function isCloudDataResidencyHost(hostname: Hostname): boolean {
+  return (
+    getPlatformFromHostname(hostname) ===
+    'GitHub Enterprise Cloud with Data Residency'
+  );
 }
 
 export function generateNotificationReferrerId(
@@ -56,15 +77,19 @@ export async function generateGitHubWebUrl(
   } else {
     try {
       if (notification.subject.latestCommentUrl) {
-        url.href = await getHtmlUrl(
+        const response = await getHtmlUrl(
+          notification.account,
           notification.subject.latestCommentUrl,
-          notification.account.token,
         );
+
+        url.href = response.html_url;
       } else if (notification.subject.url) {
-        url.href = await getHtmlUrl(
+        const response = await getHtmlUrl(
+          notification.account,
           notification.subject.url,
-          notification.account.token,
         );
+
+        url.href = response.html_url;
       }
     } catch (err) {
       rendererLogError(
@@ -107,4 +132,26 @@ export function getChevronDetails(
     icon: ChevronRightIcon,
     label: `Show ${type} notifications`,
   };
+}
+
+/**
+ * Parse inline code blocks (text wrapped in backticks) from a string.
+ * Returns an array of parts where each part is either plain text or code.
+ *
+ * @param text - The text to parse
+ * @returns Array of parts with type and content
+ */
+export function parseInlineCode(text: string): ParsedCodePart[] {
+  const regex = /`(?<code>[^`]+)`|(?<text>[^`]+)/g;
+  const matches = Array.from(text.matchAll(regex));
+
+  if (matches.length === 0) {
+    return [{ id: '0', type: 'text', content: text }];
+  }
+
+  return matches.map((match, index) => ({
+    id: String(index),
+    type: match.groups?.code ? 'code' : 'text',
+    content: match.groups?.code ?? match.groups?.text ?? '',
+  }));
 }

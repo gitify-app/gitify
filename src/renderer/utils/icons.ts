@@ -12,6 +12,7 @@ import {
   OrganizationIcon,
   PersonIcon,
   ServerIcon,
+  ShieldCheckIcon,
 } from '@primer/octicons-react';
 
 import {
@@ -76,6 +77,8 @@ export function getPlatformIcon(
   switch (platform) {
     case 'GitHub Enterprise Server':
       return ServerIcon;
+    case 'GitHub Enterprise Cloud with Data Residency':
+      return ShieldCheckIcon;
     default:
       return MarkGithubIcon;
   }

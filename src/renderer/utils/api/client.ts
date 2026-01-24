@@ -1,30 +1,25 @@
-import type { AxiosPromise } from 'axios';
-import type { ExecutionResult } from 'graphql';
-
 import { Constants } from '../../constants';
 
 import type {
   Account,
   GitifyNotification,
-  Hostname,
   Link,
   SettingsState,
-  Token,
 } from '../../types';
 import type {
-  NotificationThreadSubscription,
-  RawCommit,
-  RawCommitComment,
-  RawGitHubNotification,
-  RawRelease,
+  GetCommitCommentResponse,
+  GetCommitResponse,
+  GetReleaseResponse,
+  GitHubHtmlUrlResponse,
+  IgnoreNotificationThreadSubscriptionResponse,
+  ListNotificationsForAuthenticatedUserResponse,
+  MarkNotificationThreadAsDoneResponse,
+  MarkNotificationThreadAsReadResponse,
 } from './types';
 
 import { isAnsweredDiscussionFeatureSupported } from '../features';
-import { rendererLogError } from '../logger';
 import { createNotificationHandler } from '../notifications/handlers';
 import {
-  FetchAuthenticatedUserDetailsDocument,
-  type FetchAuthenticatedUserDetailsQuery,
   FetchDiscussionByNumberDocument,
   type FetchDiscussionByNumberQuery,
   FetchIssueByNumberDocument,
@@ -34,31 +29,19 @@ import {
   type FetchPullRequestByNumberQuery,
 } from './graphql/generated/graphql';
 import { MergeQueryBuilder } from './graphql/MergeQueryBuilder';
-import {
-  apiRequestAuth,
-  type ExecutionResultWithHeaders,
-  performGraphQLRequest,
-  performGraphQLRequestString,
-} from './request';
-import {
-  getGitHubAPIBaseUrl,
-  getGitHubGraphQLUrl,
-  getNumberFromUrl,
-} from './utils';
+import { createOctokitClient, createOctokitClientUncached } from './octokit';
+import { performGraphQLRequest, performGraphQLRequestString } from './request';
+import { getNumberFromUrl } from './utils';
 
 /**
- * Perform a HEAD operation, used to validate that connectivity is established.
+ * Fetch details of the currently authenticated GitHub user.
  *
- * Endpoint documentation: https://docs.github.com/en/rest/activity/notifications
+ * Always fetches fresh data without caching to ensure up-to-date user info.
  */
-export function headNotifications(
-  hostname: Hostname,
-  token: Token,
-): AxiosPromise<void> {
-  const url = getGitHubAPIBaseUrl(hostname);
-  url.pathname += 'notifications';
+export async function fetchAuthenticatedUserDetails(account: Account) {
+  const octokit = await createOctokitClientUncached(account, 'rest');
 
-  return apiRequestAuth(url.toString() as Link, 'HEAD', token);
+  return await octokit.rest.users.getAuthenticated();
 }
 
 /**
@@ -66,22 +49,39 @@ export function headNotifications(
  *
  * Endpoint documentation: https://docs.github.com/en/rest/activity/notifications#list-notifications-for-the-authenticated-user
  */
-export function listNotificationsForAuthenticatedUser(
+export async function listNotificationsForAuthenticatedUser(
   account: Account,
   settings: SettingsState,
-): AxiosPromise<RawGitHubNotification[]> {
-  const url = getGitHubAPIBaseUrl(account.hostname);
-  url.pathname += 'notifications';
-  url.searchParams.append('participating', String(settings.participating));
-  url.searchParams.append('all', String(settings.fetchReadNotifications));
+): Promise<ListNotificationsForAuthenticatedUserResponse> {
+  const octokit = await createOctokitClient(account, 'rest');
 
-  return apiRequestAuth(
-    url.toString() as Link,
-    'GET',
-    account.token,
-    {},
-    settings.fetchAllNotifications,
-  );
+  if (settings.fetchAllNotifications) {
+    // Fetch all pages using Octokit's pagination
+    return await octokit.paginate(
+      octokit.rest.activity.listNotificationsForAuthenticatedUser,
+      {
+        participating: settings.participating,
+        all: settings.fetchReadNotifications,
+        per_page: 100,
+        headers: {
+          'Cache-Control': 'no-cache', // Prevent caching
+        },
+      },
+    );
+  }
+
+  // Single page request
+  const response =
+    await octokit.rest.activity.listNotificationsForAuthenticatedUser({
+      participating: settings.participating,
+      all: settings.fetchReadNotifications,
+      per_page: 100,
+      headers: {
+        'Cache-Control': 'no-cache', // Prevent caching
+      },
+    });
+
+  return response.data;
 }
 
 /**
@@ -90,15 +90,17 @@ export function listNotificationsForAuthenticatedUser(
  *
  * Endpoint documentation: https://docs.github.com/en/rest/activity/notifications#mark-a-thread-as-read
  */
-export function markNotificationThreadAsRead(
+export async function markNotificationThreadAsRead(
+  account: Account,
   threadId: string,
-  hostname: Hostname,
-  token: Token,
-): AxiosPromise<void> {
-  const url = getGitHubAPIBaseUrl(hostname);
-  url.pathname += `notifications/threads/${threadId}`;
+): Promise<MarkNotificationThreadAsReadResponse> {
+  const octokit = await createOctokitClient(account, 'rest');
 
-  return apiRequestAuth(url.toString() as Link, 'PATCH', token, {});
+  const response = await octokit.rest.activity.markThreadAsRead({
+    thread_id: Number(threadId),
+  });
+
+  return response.data;
 }
 
 /**
@@ -109,15 +111,17 @@ export function markNotificationThreadAsRead(
  *
  * Endpoint documentation: https://docs.github.com/en/rest/activity/notifications#mark-a-thread-as-done
  */
-export function markNotificationThreadAsDone(
+export async function markNotificationThreadAsDone(
+  account: Account,
   threadId: string,
-  hostname: Hostname,
-  token: Token,
-): AxiosPromise<void> {
-  const url = getGitHubAPIBaseUrl(hostname);
-  url.pathname += `notifications/threads/${threadId}`;
+): Promise<MarkNotificationThreadAsDoneResponse> {
+  const octokit = await createOctokitClient(account, 'rest');
 
-  return apiRequestAuth(url.toString() as Link, 'DELETE', token, {});
+  const response = await octokit.rest.activity.markThreadAsDone({
+    thread_id: Number(threadId),
+  });
+
+  return response.data;
 }
 
 /**
@@ -125,17 +129,18 @@ export function markNotificationThreadAsDone(
  *
  * Endpoint documentation: https://docs.github.com/en/rest/activity/notifications#delete-a-thread-subscription
  */
-export function ignoreNotificationThreadSubscription(
+export async function ignoreNotificationThreadSubscription(
+  account: Account,
   threadId: string,
-  hostname: Hostname,
-  token: Token,
-): AxiosPromise<NotificationThreadSubscription> {
-  const url = getGitHubAPIBaseUrl(hostname);
-  url.pathname += `notifications/threads/${threadId}/subscription`;
+): Promise<IgnoreNotificationThreadSubscriptionResponse> {
+  const octokit = await createOctokitClient(account, 'rest');
 
-  return apiRequestAuth(url.toString() as Link, 'PUT', token, {
+  const response = await octokit.rest.activity.setThreadSubscription({
+    thread_id: Number(threadId),
     ignored: true,
   });
+
+  return response.data;
 }
 
 /**
@@ -143,21 +148,23 @@ export function ignoreNotificationThreadSubscription(
  *
  * Endpoint documentation: https://docs.github.com/en/rest/commits/commits#get-a-commit
  */
-export function getCommit(url: Link, token: Token): AxiosPromise<RawCommit> {
-  return apiRequestAuth(url, 'GET', token);
+export async function getCommit(
+  account: Account,
+  url: Link,
+): Promise<GetCommitResponse> {
+  return followUrl<GetCommitResponse>(account, url);
 }
 
 /**
  * Gets a specified commit comment.
- * 
+ *
  * Endpoint documentation: https://docs.github.com/en/rest/commits/comments#get-a-commit-comment
-
  */
-export function getCommitComment(
+export async function getCommitComment(
+  account: Account,
   url: Link,
-  token: Token,
-): AxiosPromise<RawCommitComment> {
-  return apiRequestAuth(url, 'GET', token);
+): Promise<GetCommitCommentResponse> {
+  return followUrl<GetCommitCommentResponse>(account, url);
 }
 
 /**
@@ -165,41 +172,38 @@ export function getCommitComment(
  *
  * Endpoint documentation: https://docs.github.com/en/rest/releases/releases#get-a-release
  */
-export function getRelease(url: Link, token: Token): AxiosPromise<RawRelease> {
-  return apiRequestAuth(url, 'GET', token);
+export async function getRelease(
+  account: Account,
+  url: Link,
+): Promise<GetReleaseResponse> {
+  return followUrl<GetReleaseResponse>(account, url);
 }
 
 /**
  * Get the `html_url` from the GitHub response
  */
-export async function getHtmlUrl(url: Link, token: Token): Promise<string> {
-  try {
-    const response = (await apiRequestAuth(url, 'GET', token)).data;
-
-    return response.html_url;
-  } catch (err) {
-    rendererLogError(
-      'getHtmlUrl',
-      `error occurred while fetching html url for ${url}`,
-      err,
-    );
-  }
+export async function getHtmlUrl(
+  account: Account,
+  url: Link,
+): Promise<GitHubHtmlUrlResponse> {
+  return followUrl<GitHubHtmlUrlResponse>(account, url);
 }
 
 /**
- * Fetch details of the currently authenticated GitHub user.
+ * Follow GitHub Response URL
  */
-export async function fetchAuthenticatedUserDetails(
-  hostname: Hostname,
-  token: Token,
-): Promise<ExecutionResultWithHeaders<FetchAuthenticatedUserDetailsQuery>> {
-  const url = getGitHubGraphQLUrl(hostname);
+async function followUrl<TResult>(
+  account: Account,
+  url: Link,
+): Promise<TResult> {
+  const octokit = await createOctokitClient(account, 'rest');
 
-  return performGraphQLRequest(
-    url.toString() as Link,
-    token,
-    FetchAuthenticatedUserDetailsDocument,
-  );
+  // Perform a generic GET request using Octokit's request method and cast the response type
+  const response = await octokit.request('GET {+url}', {
+    url: url,
+  });
+
+  return response.data as TResult;
 }
 
 /**
@@ -207,13 +211,11 @@ export async function fetchAuthenticatedUserDetails(
  */
 export async function fetchDiscussionByNumber(
   notification: GitifyNotification,
-): Promise<ExecutionResult<FetchDiscussionByNumberQuery>> {
-  const url = getGitHubGraphQLUrl(notification.account.hostname);
+): Promise<FetchDiscussionByNumberQuery> {
   const number = getNumberFromUrl(notification.subject.url);
 
   return performGraphQLRequest(
-    url.toString() as Link,
-    notification.account.token,
+    notification.account,
     FetchDiscussionByNumberDocument,
     {
       owner: notification.repository.owner.login,
@@ -234,13 +236,11 @@ export async function fetchDiscussionByNumber(
  */
 export async function fetchIssueByNumber(
   notification: GitifyNotification,
-): Promise<ExecutionResult<FetchIssueByNumberQuery>> {
-  const url = getGitHubGraphQLUrl(notification.account.hostname);
+): Promise<FetchIssueByNumberQuery> {
   const number = getNumberFromUrl(notification.subject.url);
 
   return performGraphQLRequest(
-    url.toString() as Link,
-    notification.account.token,
+    notification.account,
     FetchIssueByNumberDocument,
     {
       owner: notification.repository.owner.login,
@@ -257,13 +257,11 @@ export async function fetchIssueByNumber(
  */
 export async function fetchPullByNumber(
   notification: GitifyNotification,
-): Promise<ExecutionResult<FetchPullRequestByNumberQuery>> {
-  const url = getGitHubGraphQLUrl(notification.account.hostname);
+): Promise<FetchPullRequestByNumberQuery> {
   const number = getNumberFromUrl(notification.subject.url);
 
   return performGraphQLRequest(
-    url.toString() as Link,
-    notification.account.token,
+    notification.account,
     FetchPullRequestByNumberDocument,
     {
       owner: notification.repository.owner.login,
@@ -339,26 +337,21 @@ export async function fetchNotificationDetailsForList(
   const query = builder.getGraphQLQuery();
   const variables = builder.getGraphQLVariables();
 
-  const url = getGitHubGraphQLUrl(notifications[0].account.hostname);
-
   const response = await performGraphQLRequestString(
-    url.toString() as Link,
-    notifications[0].account.token,
+    notifications[0].account,
     query,
     variables,
   );
 
-  const data = response.data as Record<string, unknown> | undefined;
-  if (data) {
-    for (const [alias, notification] of aliasToNotification) {
-      const repoData = data[alias] as Record<string, unknown> | undefined;
-      if (repoData) {
-        const fragment = Object.values(
-          repoData,
-        )[0] as FetchMergedDetailsTemplateQuery['repository'];
-        results.set(notification, fragment);
-      }
+  for (const [alias, notification] of aliasToNotification) {
+    const repoData = response[alias] as Record<string, unknown> | undefined;
+    if (!repoData) {
+      continue; // Skip if no data for this alias
     }
+    const fragment = Object.values(
+      repoData,
+    )[0] as FetchMergedDetailsTemplateQuery['repository'];
+    results.set(notification, fragment);
   }
 
   return results;

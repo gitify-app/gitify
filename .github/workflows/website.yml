@@ -1,10 +1,10 @@
 name: Website
 
 on:
-  push:
-    tags: 
-      - v*.*.*
-  workflow_dispatch: # For manually verify website deployment
+  workflow_dispatch: # For manually running website deployment
+  release:
+    types:
+      - published # For running on release publish
 
 permissions:
   contents: read
@@ -15,4 +15,3 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: curl -X POST -d {} ${{ secrets.NETLIFY_BUILD_HOOK_URL }}
-        

@@ -1,4 +1,4 @@
-import { screen } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { renderWithAppContext } from '../__helpers__/test-utils';
@@ -153,9 +153,11 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
 
     await userEvent.click(screen.getByTestId('login-submit'));
 
-    expect(loginWithOAuthAppMock).toHaveBeenCalledTimes(1);
-    expect(navigateMock).toHaveBeenCalledTimes(0);
-    expect(rendererLogErrorSpy).toHaveBeenCalledTimes(1);
+    await waitFor(() => {
+      expect(loginWithOAuthAppMock).toHaveBeenCalledTimes(1);
+      expect(navigateMock).toHaveBeenCalledTimes(0);
+      expect(rendererLogErrorSpy).toHaveBeenCalledTimes(1);
+    });
   });
 
   it('should render the form with errors', async () => {

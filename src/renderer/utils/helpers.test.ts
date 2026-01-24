@@ -4,8 +4,8 @@ import {
   ChevronRightIcon,
 } from '@primer/octicons-react';
 
+import { mockGitHubCloudAccount } from '../__mocks__/account-mocks';
 import { mockGitifyNotification } from '../__mocks__/notifications-mocks';
-import { mockToken } from '../__mocks__/state-mocks';
 
 import type { GitifySubject, Hostname, Link, SubjectType } from '../types';
 
@@ -15,7 +15,9 @@ import {
   generateNotificationReferrerId,
   getChevronDetails,
   getPlatformFromHostname,
+  isCloudDataResidencyHost,
   isEnterpriseServerHost,
+  parseInlineCode,
 } from './helpers';
 
 describe('renderer/utils/helpers.ts', () => {
@@ -37,10 +39,38 @@ describe('renderer/utils/helpers.ts', () => {
         'GitHub Enterprise Server',
       );
     });
+
+    it('should return GitHub Enterprise Cloud with Data Residency for ghe.com domains', () => {
+      expect(getPlatformFromHostname('gitify.ghe.com' as Hostname)).toBe(
+        'GitHub Enterprise Cloud with Data Residency',
+      );
+      expect(getPlatformFromHostname('acme-corp.ghe.com' as Hostname)).toBe(
+        'GitHub Enterprise Cloud with Data Residency',
+      );
+    });
+  });
+
+  describe('isCloudDataResidencyHost', () => {
+    it('should return true for ghe.com hosts', () => {
+      expect(isCloudDataResidencyHost('gitify.ghe.com' as Hostname)).toBe(true);
+      expect(isCloudDataResidencyHost('acme-corp.ghe.com' as Hostname)).toBe(
+        true,
+      );
+    });
+
+    it('should return false for non ghe.com hosts', () => {
+      expect(isCloudDataResidencyHost('github.com' as Hostname)).toBe(false);
+      expect(isCloudDataResidencyHost('api.github.com' as Hostname)).toBe(
+        false,
+      );
+      expect(isCloudDataResidencyHost('github.gitify.app' as Hostname)).toBe(
+        false,
+      );
+    });
   });
 
   describe('isEnterpriseServerHost', () => {
-    it('should return true for enterprise host', () => {
+    it('should return true for enterprise server host', () => {
       expect(isEnterpriseServerHost('github.gitify.app' as Hostname)).toBe(
         true,
       );
@@ -49,9 +79,16 @@ describe('renderer/utils/helpers.ts', () => {
       );
     });
 
-    it('should return false for non-enterprise host', () => {
+    it('should return false for github.com host', () => {
       expect(isEnterpriseServerHost('github.com' as Hostname)).toBe(false);
       expect(isEnterpriseServerHost('api.github.com' as Hostname)).toBe(false);
+    });
+
+    it('should return false for ghe.com host', () => {
+      expect(isEnterpriseServerHost('gitify.ghe.com' as Hostname)).toBe(false);
+      expect(isEnterpriseServerHost('acme-corp.ghe.com' as Hostname)).toBe(
+        false,
+      );
     });
   });
 
@@ -66,7 +103,7 @@ describe('renderer/utils/helpers.ts', () => {
 
   describe('generateGitHubWebUrl', () => {
     const mockHtmlUrl =
-      'https://github.com/gitify-app/notifications-test/issues/785';
+      'https://github.com/gitify-app/notifications-test/issues/785' as Link;
     const mockNotificationReferrer =
       'notification_referrer_id=MDE4Ok5vdGlmaWNhdGlvblRocmVhZDEzODY2MTA5NjoxMjM0NTY3ODk%3D';
 
@@ -115,7 +152,9 @@ describe('renderer/utils/helpers.ts', () => {
         htmlUrl: mockSubjectHtmlUrl,
       } as GitifySubject;
 
-      getHtmlUrlSpy.mockResolvedValue(mockHtmlUrl);
+      getHtmlUrlSpy.mockResolvedValue({
+        html_url: mockHtmlUrl,
+      });
 
       const result = await generateGitHubWebUrl({
         ...mockGitifyNotification,
@@ -124,8 +163,8 @@ describe('renderer/utils/helpers.ts', () => {
 
       expect(getHtmlUrlSpy).toHaveBeenCalledTimes(1);
       expect(getHtmlUrlSpy).toHaveBeenCalledWith(
+        mockGitHubCloudAccount,
         mockLatestCommentUrl,
-        mockToken,
       );
       expect(result).toBe(`${mockHtmlUrl}?${mockNotificationReferrer}`);
     });
@@ -144,7 +183,9 @@ describe('renderer/utils/helpers.ts', () => {
         htmlUrl: mockSubjectHtmlUrl,
       } as GitifySubject;
 
-      getHtmlUrlSpy.mockResolvedValue(mockHtmlUrl);
+      getHtmlUrlSpy.mockResolvedValue({
+        html_url: mockHtmlUrl,
+      });
 
       const result = await generateGitHubWebUrl({
         ...mockGitifyNotification,
@@ -152,7 +193,10 @@ describe('renderer/utils/helpers.ts', () => {
       });
 
       expect(getHtmlUrlSpy).toHaveBeenCalledTimes(1);
-      expect(getHtmlUrlSpy).toHaveBeenCalledWith(mockSubjectUrl, mockToken);
+      expect(getHtmlUrlSpy).toHaveBeenCalledWith(
+        mockGitHubCloudAccount,
+        mockSubjectUrl,
+      );
       expect(result).toBe(`${mockHtmlUrl}?${mockNotificationReferrer}`);
     });
   });
@@ -173,6 +217,125 @@ describe('renderer/utils/helpers.ts', () => {
         icon: ChevronLeftIcon,
         label: 'No notifications for account',
       });
+    });
+  });
+
+  describe('parseInlineCode', () => {
+    it('should return plain text when no code blocks present', () => {
+      expect(parseInlineCode('Simple notification title')).toEqual([
+        {
+          id: '0',
+          type: 'text',
+          content: 'Simple notification title',
+        },
+      ]);
+    });
+
+    it('should parse single inline code block', () => {
+      expect(
+        parseInlineCode('refactor: migrate deprecated atlaskit `xcss`'),
+      ).toEqual([
+        {
+          id: '0',
+          type: 'text',
+          content: 'refactor: migrate deprecated atlaskit ',
+        },
+        {
+          id: '1',
+          type: 'code',
+          content: 'xcss',
+        },
+      ]);
+    });
+
+    it('should parse multiple inline code blocks', () => {
+      expect(parseInlineCode('Replace `foo` with `bar` in config')).toEqual([
+        {
+          id: '0',
+          type: 'text',
+          content: 'Replace ',
+        },
+        {
+          id: '1',
+          type: 'code',
+          content: 'foo',
+        },
+        {
+          id: '2',
+          type: 'text',
+          content: ' with ',
+        },
+        {
+          id: '3',
+          type: 'code',
+          content: 'bar',
+        },
+        {
+          id: '4',
+          type: 'text',
+          content: ' in config',
+        },
+      ]);
+    });
+
+    it('should parse code block at the start', () => {
+      expect(parseInlineCode('`useState` hook implementation')).toEqual([
+        {
+          id: '0',
+          type: 'code',
+          content: 'useState',
+        },
+        {
+          id: '1',
+          type: 'text',
+          content: ' hook implementation',
+        },
+      ]);
+    });
+
+    it('should parse code block at the end', () => {
+      expect(parseInlineCode('Fix issue with `render`')).toEqual([
+        {
+          id: '0',
+          type: 'text',
+          content: 'Fix issue with ',
+        },
+        {
+          id: '1',
+          type: 'code',
+          content: 'render',
+        },
+      ]);
+    });
+
+    it('should handle empty string', () => {
+      expect(parseInlineCode('')).toEqual([
+        {
+          id: '0',
+          type: 'text',
+          content: '',
+        },
+      ]);
+    });
+
+    it('should handle adjacent code blocks', () => {
+      expect(parseInlineCode('Compare `foo``bar`')).toEqual([
+        {
+          id: '0',
+          type: 'text',
+          content: 'Compare ',
+        },
+        {
+          id: '1',
+          type: 'code',
+          content: 'foo',
+        },
+        {
+          id: '2',
+          type: 'code',
+          content: 'bar',
+        },
+      ]);
     });
   });
 });

@@ -5,6 +5,7 @@ import {
   getWebFlowAuthorizationUrl,
 } from '@octokit/oauth-methods';
 import { request } from '@octokit/request';
+
 import { format } from 'date-fns';
 import semver from 'semver';
 
@@ -14,6 +15,7 @@ import { Constants } from '../../constants';
 
 import type {
   Account,
+  AccountUUID,
   AuthCode,
   AuthState,
   ClientID,
@@ -30,7 +32,6 @@ import type {
 } from './types';
 
 import { fetchAuthenticatedUserDetails } from '../api/client';
-import { getGitHubAuthBaseUrl } from '../api/utils';
 import { encryptValue, openExternalLink } from '../comms';
 import { getPlatformFromHostname } from '../helpers';
 import { rendererLogError, rendererLogInfo, rendererLogWarn } from '../logger';
@@ -168,7 +169,9 @@ export async function exchangeAuthCodeForAccessToken(
     clientSecret: authOptions.clientSecret,
     code: authCode,
     request: request.defaults({
-      baseUrl: getGitHubAuthBaseUrl(authOptions.hostname).toString(),
+      baseUrl: getGitHubAuthBaseUrl(authOptions.hostname)
+        .toString()
+        .replace(/\/$/, ''),
     }),
   });
 
@@ -189,6 +192,7 @@ export async function addAccount(
     method: method,
     platform: getPlatformFromHostname(hostname),
     token: encryptedToken,
+    user: null, // Will be updated during the refresh call below
   } as Account;
 
   newAccount = await refreshAccount(newAccount);
@@ -224,22 +228,22 @@ export function removeAccount(auth: AuthState, account: Account): AuthState {
 
 export async function refreshAccount(account: Account): Promise<Account> {
   try {
-    const response = await fetchAuthenticatedUserDetails(
-      account.hostname,
-      account.token,
-    );
-    const user = response.data.viewer;
+    const response = await fetchAuthenticatedUserDetails(account);
+
+    const user = response.data;
 
     // Refresh user data
     account.user = {
-      id: user.id,
+      id: String(user.id),
       login: user.login,
       name: user.name,
-      avatar: user.avatar,
+      avatar: user.avatar_url as Link,
     };
 
+    account.version = 'latest';
+
     account.version = extractHostVersion(
-      response.headers['x-github-enterprise-version'],
+      response.headers['x-github-enterprise-version'] as string,
     );
 
     const accountScopes = response.headers['x-oauth-scopes']
@@ -263,7 +267,7 @@ export async function refreshAccount(account: Account): Promise<Account> {
   } catch (err) {
     rendererLogError(
       'refreshAccount',
-      `failed to refresh account for user ${account.user.login}`,
+      `failed to refresh account for user ${account.user?.login ?? account.hostname}`,
       err,
     );
   }
@@ -277,6 +281,27 @@ export function extractHostVersion(version: string | null): string {
   }
 
   return 'latest';
+}
+
+export function getGitHubAuthBaseUrl(hostname: Hostname): URL {
+  const platform = getPlatformFromHostname(hostname);
+  const url = new URL(APPLICATION.GITHUB_BASE_URL);
+
+  switch (platform) {
+    case 'GitHub Enterprise Server':
+      url.hostname = hostname;
+      url.pathname = '/api/v3/';
+      break;
+    case 'GitHub Enterprise Cloud with Data Residency':
+      url.hostname = `api.${hostname}`;
+      url.pathname = '/';
+      break;
+    default:
+      url.pathname = '/';
+      break;
+  }
+
+  return url;
 }
 
 export function getDeveloperSettingsURL(account: Account): Link {
@@ -348,8 +373,10 @@ export function isValidToken(token: Token) {
   return /^[A-Z0-9_]{40}$/i.test(token);
 }
 
-export function getAccountUUID(account: Account): string {
-  return btoa(`${account.hostname}-${account.user.id}-${account.method}`);
+export function getAccountUUID(account: Account): AccountUUID {
+  return btoa(
+    `${account.hostname}-${account.user.id}-${account.method}`,
+  ) as AccountUUID;
 }
 
 /**

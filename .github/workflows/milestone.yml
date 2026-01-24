@@ -24,11 +24,11 @@ jobs:
           milestone=$(gh api repos/${{ github.repository }}/milestones \
             --jq '.[] | select(.state=="open") | .title' | head -n 1)
           echo "Found milestone: $milestone"
-          echo "milestone=$milestone" >> $GITHUB_ENV
+          echo "milestone=$milestone" >> $GITHUB_OUTPUT
 
       - name: Add milestone to PR
-        if: env.milestone != ''
+        if: steps.milestone.outputs.milestone != ''
         run: |
           gh pr edit ${{ github.event.pull_request.number }} \
             --repo ${{ github.repository }} \
-            --milestone "${{ env.milestone }}"
+            --milestone "${{ steps.milestone.outputs.milestone }}"

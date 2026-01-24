@@ -1,6 +1,3 @@
-import nock from 'nock';
-
-import { configureAxiosHttpAdapterForNock } from '../../../__helpers__/test-utils';
 import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
 import {
@@ -18,13 +15,11 @@ import {
   type Link,
 } from '../../../types';
 
+import * as apiClient from '../../api/client';
+import type { FetchDiscussionByNumberQuery } from '../../api/graphql/generated/graphql';
 import { discussionHandler } from './discussion';
 
 describe('renderer/utils/notifications/handlers/discussion.ts', () => {
-  beforeEach(() => {
-    configureAxiosHttpAdapterForNock();
-  });
-
   describe('supportsMergedQueryEnrichment', () => {
     it('should support merge query', () => {
       expect(discussionHandler.supportsMergedQueryEnrichment).toBeTruthy();
@@ -32,6 +27,11 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
   });
 
   describe('enrich', () => {
+    const fetchDiscussionByNumberSpy = jest.spyOn(
+      apiClient,
+      'fetchDiscussionByNumber',
+    );
+
     const mockNotification = mockPartialGitifyNotification({
       title: 'This is a mock discussion',
       type: 'Discussion',
@@ -40,18 +40,18 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
     });
     mockNotification.updatedAt = '2024-01-01T00:00:00Z';
 
+    beforeEach(() => {
+      jest.clearAllMocks();
+    });
+
     it('answered discussion state - no stateReason', async () => {
       const mockDiscussion = mockDiscussionResponseNode({ isAnswered: true });
 
-      nock('https://api.github.com')
-        .post('/graphql')
-        .reply(200, {
-          data: {
-            repository: {
-              discussion: mockDiscussion,
-            },
-          },
-        });
+      fetchDiscussionByNumberSpy.mockResolvedValue({
+        repository: {
+          discussion: mockDiscussion,
+        },
+      } satisfies FetchDiscussionByNumberQuery);
 
       const result = await discussionHandler.enrich(
         mockNotification,
@@ -70,22 +70,18 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         commentCount: 0,
         labels: [],
         htmlUrl:
-          'https://github.com/gitify-app/notifications-test/discussions/123',
-      } as Partial<GitifySubject>);
+          'https://github.com/gitify-app/notifications-test/discussions/123' as Link,
+      } satisfies Partial<GitifySubject>);
     });
 
     it('open / unanswered discussion - no stateReason', async () => {
       const mockDiscussion = mockDiscussionResponseNode({ isAnswered: false });
 
-      nock('https://api.github.com')
-        .post('/graphql')
-        .reply(200, {
-          data: {
-            repository: {
-              discussion: mockDiscussion,
-            },
-          },
-        });
+      fetchDiscussionByNumberSpy.mockResolvedValue({
+        repository: {
+          discussion: mockDiscussion,
+        },
+      } satisfies FetchDiscussionByNumberQuery);
 
       const result = await discussionHandler.enrich(
         mockNotification,
@@ -104,8 +100,8 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         commentCount: 0,
         labels: [],
         htmlUrl:
-          'https://github.com/gitify-app/notifications-test/discussions/123',
-      } as Partial<GitifySubject>);
+          'https://github.com/gitify-app/notifications-test/discussions/123' as Link,
+      } satisfies Partial<GitifySubject>);
     });
 
     it('discussion with stateReason - stateReason always takes precedence', async () => {
@@ -114,15 +110,11 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         stateReason: 'DUPLICATE',
       });
 
-      nock('https://api.github.com')
-        .post('/graphql')
-        .reply(200, {
-          data: {
-            repository: {
-              discussion: mockDiscussion,
-            },
-          },
-        });
+      fetchDiscussionByNumberSpy.mockResolvedValue({
+        repository: {
+          discussion: mockDiscussion,
+        },
+      } satisfies FetchDiscussionByNumberQuery);
 
       const result = await discussionHandler.enrich(
         mockNotification,
@@ -141,8 +133,8 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         commentCount: 0,
         labels: [],
         htmlUrl:
-          'https://github.com/gitify-app/notifications-test/discussions/123',
-      } as Partial<GitifySubject>);
+          'https://github.com/gitify-app/notifications-test/discussions/123' as Link,
+      } satisfies Partial<GitifySubject>);
     });
 
     it('discussion with labels', async () => {
@@ -155,15 +147,11 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         ],
       };
 
-      nock('https://api.github.com')
-        .post('/graphql')
-        .reply(200, {
-          data: {
-            repository: {
-              discussion: mockDiscussion,
-            },
-          },
-        });
+      fetchDiscussionByNumberSpy.mockResolvedValue({
+        repository: {
+          discussion: mockDiscussion,
+        },
+      } satisfies FetchDiscussionByNumberQuery);
 
       const result = await discussionHandler.enrich(
         mockNotification,
@@ -182,8 +170,8 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         commentCount: 0,
         labels: ['enhancement'],
         htmlUrl:
-          'https://github.com/gitify-app/notifications-test/discussions/123',
-      } as Partial<GitifySubject>);
+          'https://github.com/gitify-app/notifications-test/discussions/123' as Link,
+      } satisfies Partial<GitifySubject>);
     });
 
     it('discussion with comments', async () => {
@@ -203,15 +191,11 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         ],
       };
 
-      nock('https://api.github.com')
-        .post('/graphql')
-        .reply(200, {
-          data: {
-            repository: {
-              discussion: mockDiscussion,
-            },
-          },
-        });
+      fetchDiscussionByNumberSpy.mockResolvedValue({
+        repository: {
+          discussion: mockDiscussion,
+        },
+      } satisfies FetchDiscussionByNumberQuery);
 
       const result = await discussionHandler.enrich(
         mockNotification,
@@ -230,8 +214,8 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         commentCount: 1,
         labels: [],
         htmlUrl:
-          'https://github.com/gitify-app/notifications-test/discussions/123#discussioncomment-1234',
-      } as Partial<GitifySubject>);
+          'https://github.com/gitify-app/notifications-test/discussions/123#discussioncomment-1234' as Link,
+      } satisfies Partial<GitifySubject>);
     });
 
     it('discussion with comments and replies', async () => {
@@ -257,15 +241,11 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         ],
       };
 
-      nock('https://api.github.com')
-        .post('/graphql')
-        .reply(200, {
-          data: {
-            repository: {
-              discussion: mockDiscussion,
-            },
-          },
-        });
+      fetchDiscussionByNumberSpy.mockResolvedValue({
+        repository: {
+          discussion: mockDiscussion,
+        },
+      } satisfies FetchDiscussionByNumberQuery);
 
       const result = await discussionHandler.enrich(
         mockNotification,
@@ -284,8 +264,8 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         commentCount: 1,
         labels: [],
         htmlUrl:
-          'https://github.com/gitify-app/notifications-test/discussions/123#discussioncomment-6789',
-      } as Partial<GitifySubject>);
+          'https://github.com/gitify-app/notifications-test/discussions/123#discussioncomment-6789' as Link,
+      } satisfies Partial<GitifySubject>);
     });
   });
 

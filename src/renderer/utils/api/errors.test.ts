@@ -1,140 +1,197 @@
-import { AxiosError, type AxiosResponse } from 'axios';
+import { GraphqlResponseError } from '@octokit/graphql';
+import { RequestError } from '@octokit/request-error';
 
 import { EVENTS } from '../../../shared/events';
 
-import type { Link } from '../../types';
-import type { GitHubRESTError } from './types';
-
 import { Errors } from '../errors';
-import { determineFailureType } from './errors';
+import * as rendererLogger from '../logger';
+import { determineFailureType, handleGraphQLResponseError } from './errors';
 
 describe('renderer/utils/api/errors.ts', () => {
-  it('network error', async () => {
-    const mockError: Partial<AxiosError<GitHubRESTError>> = {
-      code: AxiosError.ERR_NETWORK,
-    };
+  describe('determineFailureType', () => {
+    describe('generic errors', () => {
+      it('bad credentials - safe storage decryption error', () => {
+        const mockError = new Error(
+          `Error invoking remote method '${EVENTS.SAFE_STORAGE_DECRYPT}': Error: Error while decrypting the ciphertext provided to safeStorage.decryptString. Ciphertext does not appear to be encrypted.`,
+        );
+        const result = determineFailureType(mockError);
+        expect(result).toBe(Errors.BAD_CREDENTIALS);
+      });
 
-    const result = determineFailureType(
-      mockError as AxiosError<GitHubRESTError>,
-    );
-
-    expect(result).toBe(Errors.NETWORK);
-  });
-
-  describe('bad request errors', () => {
-    it('bad credentials', async () => {
-      const mockError: Partial<AxiosError<GitHubRESTError>> = {
-        code: AxiosError.ERR_BAD_REQUEST,
-        status: 401,
-        response: createMockResponse(401, 'Bad credentials'),
-      };
-
-      const result = determineFailureType(
-        mockError as AxiosError<GitHubRESTError>,
-      );
-
-      expect(result).toBe(Errors.BAD_CREDENTIALS);
+      it('unknown error - generic error', () => {
+        const mockError = new Error('Something went wrong');
+        const result = determineFailureType(mockError);
+        expect(result).toBe(Errors.UNKNOWN);
+      });
     });
 
-    it('missing scopes', async () => {
-      const mockError: Partial<AxiosError<GitHubRESTError>> = {
-        code: AxiosError.ERR_BAD_REQUEST,
-        status: 403,
-        response: createMockResponse(403, "Missing the 'notifications' scope"),
-      };
+    describe('REST API errors (RequestError)', () => {
+      it('bad credentials - 401 status', () => {
+        const mockError = new RequestError('Bad credentials', 401, {
+          request: {
+            method: 'GET',
+            url: 'https://api.github.com',
+            headers: {},
+          },
+        });
+        const result = determineFailureType(mockError);
+        expect(result).toBe(Errors.BAD_CREDENTIALS);
+      });
 
-      const result = determineFailureType(
-        mockError as AxiosError<GitHubRESTError>,
-      );
-
-      expect(result).toBe(Errors.MISSING_SCOPES);
-    });
-
-    it('rate limited - primary', async () => {
-      const mockError: Partial<AxiosError<GitHubRESTError>> = {
-        code: AxiosError.ERR_BAD_REQUEST,
-        status: 403,
-        response: createMockResponse(403, 'API rate limit exceeded'),
-      };
-
-      const result = determineFailureType(
-        mockError as AxiosError<GitHubRESTError>,
-      );
-
-      expect(result).toBe(Errors.RATE_LIMITED);
-    });
-
-    it('rate limited - secondary', async () => {
-      const mockError: Partial<AxiosError<GitHubRESTError>> = {
-        code: AxiosError.ERR_BAD_REQUEST,
-        status: 403,
-        response: createMockResponse(
+      it('missing scopes - 403 with scope message', () => {
+        const mockError = new RequestError(
+          "Missing the 'notifications' scope",
           403,
+          {
+            request: {
+              method: 'GET',
+              url: 'https://api.github.com',
+              headers: {},
+            },
+          },
+        );
+        const result = determineFailureType(mockError);
+        expect(result).toBe(Errors.MISSING_SCOPES);
+      });
+
+      it('rate limited - primary rate limit', () => {
+        const mockError = new RequestError('API rate limit exceeded', 403, {
+          request: {
+            method: 'GET',
+            url: 'https://api.github.com',
+            headers: {},
+          },
+        });
+        const result = determineFailureType(mockError);
+        expect(result).toBe(Errors.RATE_LIMITED);
+      });
+
+      it('rate limited - secondary rate limit', () => {
+        const mockError = new RequestError(
           'You have exceeded a secondary rate limit',
-        ),
-      };
+          403,
+          {
+            request: {
+              method: 'GET',
+              url: 'https://api.github.com',
+              headers: {},
+            },
+          },
+        );
+        const result = determineFailureType(mockError);
+        expect(result).toBe(Errors.RATE_LIMITED);
+      });
 
-      const result = determineFailureType(
-        mockError as AxiosError<GitHubRESTError>,
-      );
+      it('network error - no status', () => {
+        const mockError = new RequestError('Network error', 0, {
+          request: {
+            method: 'GET',
+            url: 'https://api.github.com',
+            headers: {},
+          },
+        });
+        const result = determineFailureType(mockError);
+        expect(result).toBe(Errors.NETWORK);
+      });
 
-      expect(result).toBe(Errors.RATE_LIMITED);
+      it('unknown error - unhandled 403', () => {
+        const mockError = new RequestError('Forbidden', 403, {
+          request: {
+            method: 'GET',
+            url: 'https://api.github.com',
+            headers: {},
+          },
+        });
+        const result = determineFailureType(mockError);
+        expect(result).toBe(Errors.UNKNOWN);
+      });
     });
 
-    it('unhandled bad request error', async () => {
-      const mockError: Partial<AxiosError<GitHubRESTError>> = {
-        code: AxiosError.ERR_BAD_REQUEST,
-        status: 400,
-        response: createMockResponse(403, 'Oops! Something went wrong.'),
-      };
+    describe('GraphQL API errors (GraphqlResponseError)', () => {
+      it('bad credentials', () => {
+        const mockError = createGraphQLResponseError('Bad credentials');
+        const result = determineFailureType(mockError);
+        expect(result).toBe(Errors.BAD_CREDENTIALS);
+      });
 
-      const result = determineFailureType(
-        mockError as AxiosError<GitHubRESTError>,
-      );
+      it('rate limited - primary rate limit', () => {
+        const mockError = createGraphQLResponseError('API rate limit exceeded');
+        const result = determineFailureType(mockError);
+        expect(result).toBe(Errors.RATE_LIMITED);
+      });
 
-      expect(result).toBe(Errors.UNKNOWN);
+      it('rate limited - secondary rate limit', () => {
+        const mockError = createGraphQLResponseError(
+          'You have exceeded a secondary rate limit',
+        );
+        const result = determineFailureType(mockError);
+        expect(result).toBe(Errors.RATE_LIMITED);
+      });
+
+      it('unknown error', () => {
+        const mockError = createGraphQLResponseError('Something went wrong');
+        const result = determineFailureType(mockError);
+        expect(result).toBe(Errors.UNKNOWN);
+      });
     });
   });
 
-  it('bad credentials - safe storage', async () => {
-    const mockError: Partial<AxiosError<GitHubRESTError>> = {
-      message: `Error invoking remote method '${EVENTS.SAFE_STORAGE_DECRYPT}': Error: Error while decrypting the ciphertext provided to safeStorage.decryptString. Ciphertext does not appear to be encrypted.`,
-    };
+  describe('handleGraphQLResponseError', () => {
+    it('throws and logs when GraphQL errors are present', () => {
+      const rendererLogErrorSpy = jest
+        .spyOn(rendererLogger, 'rendererLogError')
+        .mockImplementation();
 
-    const result = determineFailureType(
-      mockError as AxiosError<GitHubRESTError>,
-    );
+      const payload = createGraphQLResponseError('Something went wrong');
 
-    expect(result).toBe(Errors.BAD_CREDENTIALS);
-  });
+      expect(() => handleGraphQLResponseError('test-context', payload)).toThrow(
+        'GraphQL request returned errors: Something went wrong',
+      );
 
-  it('unknown error', async () => {
-    const mockError: Partial<AxiosError<GitHubRESTError>> = {
-      code: 'anything',
-    };
+      expect(rendererLogErrorSpy).toHaveBeenCalledWith(
+        'test-context',
+        'GraphQL errors present in response',
+        expect.any(Error),
+      );
+    });
 
-    const result = determineFailureType(
-      mockError as AxiosError<GitHubRESTError>,
-    );
+    it('throws with multiple error messages joined', () => {
+      const payload = new GraphqlResponseError(
+        {
+          method: 'POST',
+          url: 'https://api.github.com/graphql',
+          headers: {},
+        },
+        {},
+        {
+          data: {},
+          errors: [
+            { message: 'Error 1' },
+            { message: 'Error 2' },
+          ] as unknown as GraphqlResponseError<unknown>['errors'],
+        },
+      );
 
-    expect(result).toBe(Errors.UNKNOWN);
+      expect(() => handleGraphQLResponseError('test-context', payload)).toThrow(
+        'GraphQL request returned errors: Error 1; Error 2',
+      );
+    });
   });
 });
 
-function createMockResponse(
-  status: number,
+function createGraphQLResponseError(
   message: string,
-): AxiosResponse<GitHubRESTError> {
-  return {
-    data: {
-      message,
-      documentation_url: 'https://some-url.com' as Link,
+): GraphqlResponseError<unknown> {
+  return new GraphqlResponseError(
+    {
+      method: 'POST',
+      url: 'https://api.github.com/graphql',
+      headers: {},
     },
-    status,
-    statusText: 'Some status text',
-    headers: {},
-    config: {
-      headers: undefined,
+    {},
+    {
+      data: {},
+      errors: [{ message }] as GraphqlResponseError<unknown>['errors'],
     },
-  };
+  );
 }

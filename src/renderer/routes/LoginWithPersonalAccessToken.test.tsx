@@ -1,4 +1,4 @@
-import { screen } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { renderWithAppContext } from '../__helpers__/test-utils';
@@ -107,9 +107,11 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
 
     await userEvent.click(screen.getByTestId('login-submit'));
 
-    expect(loginWithPersonalAccessTokenMock).toHaveBeenCalledTimes(1);
-    expect(navigateMock).toHaveBeenCalledTimes(1);
-    expect(navigateMock).toHaveBeenCalledWith(-1);
+    await waitFor(() => {
+      expect(loginWithPersonalAccessTokenMock).toHaveBeenCalledTimes(1);
+      expect(navigateMock).toHaveBeenCalledTimes(1);
+      expect(navigateMock).toHaveBeenCalledWith(-1);
+    });
   });
 
   it('should login using a token - failure', async () => {
@@ -133,9 +135,11 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
 
     await userEvent.click(screen.getByTestId('login-submit'));
 
-    expect(loginWithPersonalAccessTokenMock).toHaveBeenCalledTimes(1);
-    expect(navigateMock).toHaveBeenCalledTimes(0);
-    expect(rendererLogErrorSpy).toHaveBeenCalledTimes(1);
+    await waitFor(() => {
+      expect(loginWithPersonalAccessTokenMock).toHaveBeenCalledTimes(1);
+      expect(navigateMock).toHaveBeenCalledTimes(0);
+      expect(rendererLogErrorSpy).toHaveBeenCalledTimes(1);
+    });
   });
 
   it('should render the form with errors', async () => {

@@ -1,37 +1,31 @@
-import axios, { type AxiosPromise, type AxiosResponse } from 'axios';
+import type { ExecutionResult } from 'graphql';
 
 import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
 import {
   mockGitHubCloudGitifyNotifications,
   mockPartialGitifyNotification,
 } from '../../__mocks__/notifications-mocks';
-import { mockToken } from '../../__mocks__/state-mocks';
-import {
-  mockAuthHeaders,
-  mockNonCachedAuthHeaders,
-} from './__mocks__/request-mocks';
 
 import { Constants } from '../../constants';
 
-import type { Hostname, Link, SettingsState, Token } from '../../types';
+import type { Link, SettingsState } from '../../types';
 
-import * as logger from '../../utils/logger';
 import {
   fetchAuthenticatedUserDetails,
   fetchDiscussionByNumber,
   fetchIssueByNumber,
   fetchNotificationDetailsForList,
   fetchPullByNumber,
+  getCommit,
+  getCommitComment,
   getHtmlUrl,
-  headNotifications,
+  getRelease,
   ignoreNotificationThreadSubscription,
   listNotificationsForAuthenticatedUser,
   markNotificationThreadAsDone,
   markNotificationThreadAsRead,
 } from './client';
 import {
-  FetchAuthenticatedUserDetailsDocument,
-  type FetchAuthenticatedUserDetailsQuery,
   FetchDiscussionByNumberDocument,
   type FetchDiscussionByNumberQuery,
   FetchIssueByNumberDocument,
@@ -39,28 +33,97 @@ import {
   FetchPullRequestByNumberDocument,
   type FetchPullRequestByNumberQuery,
 } from './graphql/generated/graphql';
-import type { ExecutionResultWithHeaders } from './request';
+import * as octokitModule from './octokit';
 import * as apiRequests from './request';
 
-jest.mock('axios');
-
-const mockGitHubHostname = 'github.com' as Hostname;
 const mockThreadId = '1234';
 
 describe('renderer/utils/api/client.ts', () => {
+  const mockOctokit = {
+    rest: {
+      activity: {
+        listNotificationsForAuthenticatedUser: jest.fn(),
+        markThreadAsRead: jest.fn(),
+        markThreadAsDone: jest.fn(),
+        setThreadSubscription: jest.fn(),
+      },
+      users: {
+        getAuthenticated: jest.fn(),
+      },
+    },
+    paginate: jest.fn(),
+    request: jest.fn(),
+  };
+
+  const createOctokitClientSpy = jest.spyOn(
+    octokitModule,
+    'createOctokitClient',
+  );
+  const createOctokitClientUncachedSpy = jest.spyOn(
+    octokitModule,
+    'createOctokitClientUncached',
+  );
+
+  beforeEach(() => {
+    // Mock createOctokitClient to return our mock
+    createOctokitClientSpy.mockResolvedValue(mockOctokit as any);
+    createOctokitClientUncachedSpy.mockResolvedValue(mockOctokit as any);
+
+    // Mock Octokit REST method
+    mockOctokit.rest.activity.listNotificationsForAuthenticatedUser.mockResolvedValue(
+      {
+        data: [],
+        status: 200,
+        headers: {},
+      },
+    );
+
+    // Mock paginate
+    mockOctokit.paginate.mockResolvedValue([]);
+
+    // Mock generic request used by followUrl/getHtmlUrl
+    mockOctokit.request.mockResolvedValue({
+      data: {},
+      status: 200,
+      headers: {},
+    });
+
+    mockOctokit.rest.users.getAuthenticated.mockResolvedValue({
+      data: {},
+      status: 200,
+      headers: {},
+    });
+
+    // Mock other activity endpoints used by client
+    mockOctokit.rest.activity.markThreadAsRead.mockResolvedValue({
+      data: {},
+      status: 200,
+      headers: {},
+    });
+    mockOctokit.rest.activity.markThreadAsDone.mockResolvedValue({
+      data: {},
+      status: 200,
+      headers: {},
+    });
+    mockOctokit.rest.activity.setThreadSubscription.mockResolvedValue({
+      data: {},
+      status: 200,
+      headers: {},
+    });
+  });
+
   afterEach(() => {
     jest.clearAllMocks();
   });
 
-  it('headNotifications - should fetch notifications head', async () => {
-    await headNotifications(mockGitHubHostname, mockToken);
+  it('fetchAuthenticatedUserDetails - should fetch authenticated user', async () => {
+    await fetchAuthenticatedUserDetails(mockGitHubCloudAccount);
 
-    expect(axios).toHaveBeenCalledWith({
-      url: 'https://api.github.com/notifications',
-      headers: mockNonCachedAuthHeaders,
-      method: 'HEAD',
-      data: {},
-    });
+    expect(createOctokitClientUncachedSpy).toHaveBeenCalledWith(
+      mockGitHubCloudAccount,
+      'rest',
+    );
+    expect(mockOctokit.rest.users.getAuthenticated).toHaveBeenCalled();
   });
 
   describe('listNotificationsForAuthenticatedUser', () => {
@@ -68,6 +131,7 @@ describe('renderer/utils/api/client.ts', () => {
       const mockSettings: Partial<SettingsState> = {
         participating: true,
         fetchReadNotifications: false,
+        fetchAllNotifications: false,
       };
 
       await listNotificationsForAuthenticatedUser(
@@ -75,11 +139,19 @@ describe('renderer/utils/api/client.ts', () => {
         mockSettings as SettingsState,
       );
 
-      expect(axios).toHaveBeenCalledWith({
-        url: 'https://api.github.com/notifications?participating=true&all=false',
-        headers: mockNonCachedAuthHeaders,
-        method: 'GET',
-        data: {},
+      expect(createOctokitClientSpy).toHaveBeenCalledWith(
+        mockGitHubCloudAccount,
+        'rest',
+      );
+      expect(
+        mockOctokit.rest.activity.listNotificationsForAuthenticatedUser,
+      ).toHaveBeenCalledWith({
+        participating: true,
+        all: false,
+        per_page: 100,
+        headers: {
+          'Cache-Control': 'no-cache',
+        },
       });
     });
 
@@ -87,6 +159,7 @@ describe('renderer/utils/api/client.ts', () => {
       const mockSettings: Partial<SettingsState> = {
         participating: false,
         fetchReadNotifications: false,
+        fetchAllNotifications: false,
       };
 
       await listNotificationsForAuthenticatedUser(
@@ -94,18 +167,27 @@ describe('renderer/utils/api/client.ts', () => {
         mockSettings as SettingsState,
       );
 
-      expect(axios).toHaveBeenCalledWith({
-        url: 'https://api.github.com/notifications?participating=false&all=false',
-        headers: mockNonCachedAuthHeaders,
-        method: 'GET',
-        data: {},
+      expect(createOctokitClientSpy).toHaveBeenCalledWith(
+        mockGitHubCloudAccount,
+        'rest',
+      );
+      expect(
+        mockOctokit.rest.activity.listNotificationsForAuthenticatedUser,
+      ).toHaveBeenCalledWith({
+        participating: false,
+        all: false,
+        per_page: 100,
+        headers: {
+          'Cache-Control': 'no-cache',
+        },
       });
     });
 
-    it('should include all=true when fetchReadNotifications is enabled', async () => {
+    it('should list read and done notifications for user', async () => {
       const mockSettings: Partial<SettingsState> = {
         participating: false,
         fetchReadNotifications: true,
+        fetchAllNotifications: false,
       };
 
       await listNotificationsForAuthenticatedUser(
@@ -113,18 +195,27 @@ describe('renderer/utils/api/client.ts', () => {
         mockSettings as SettingsState,
       );
 
-      expect(axios).toHaveBeenCalledWith({
-        url: 'https://api.github.com/notifications?participating=false&all=true',
-        headers: mockNonCachedAuthHeaders,
-        method: 'GET',
-        data: {},
+      expect(createOctokitClientSpy).toHaveBeenCalledWith(
+        mockGitHubCloudAccount,
+        'rest',
+      );
+      expect(
+        mockOctokit.rest.activity.listNotificationsForAuthenticatedUser,
+      ).toHaveBeenCalledWith({
+        participating: false,
+        all: true,
+        per_page: 100,
+        headers: {
+          'Cache-Control': 'no-cache',
+        },
       });
     });
 
-    it('should include all=false when fetchReadNotifications is disabled', async () => {
+    it('should unpaginate notifications list for user', async () => {
       const mockSettings: Partial<SettingsState> = {
         participating: false,
         fetchReadNotifications: false,
+        fetchAllNotifications: true,
       };
 
       await listNotificationsForAuthenticatedUser(
@@ -132,120 +223,124 @@ describe('renderer/utils/api/client.ts', () => {
         mockSettings as SettingsState,
       );
 
-      expect(axios).toHaveBeenCalledWith({
-        url: 'https://api.github.com/notifications?participating=false&all=false',
-        headers: mockNonCachedAuthHeaders,
-        method: 'GET',
-        data: {},
-      });
+      expect(createOctokitClientSpy).toHaveBeenCalledWith(
+        mockGitHubCloudAccount,
+        'rest',
+      );
+      expect(mockOctokit.paginate).toHaveBeenCalledWith(
+        mockOctokit.rest.activity.listNotificationsForAuthenticatedUser,
+        {
+          participating: false,
+          all: false,
+          per_page: 100,
+          headers: {
+            'Cache-Control': 'no-cache',
+          },
+        },
+      );
     });
   });
 
   it('markNotificationThreadAsRead - should mark notification thread as read', async () => {
-    await markNotificationThreadAsRead(
-      mockThreadId,
-      mockGitHubHostname,
-      mockToken,
-    );
+    await markNotificationThreadAsRead(mockGitHubCloudAccount, mockThreadId);
 
-    expect(axios).toHaveBeenCalledWith({
-      url: `https://api.github.com/notifications/threads/${mockThreadId}`,
-      headers: mockAuthHeaders,
-      method: 'PATCH',
-      data: {},
+    expect(createOctokitClientSpy).toHaveBeenCalledWith(
+      mockGitHubCloudAccount,
+      'rest',
+    );
+    expect(mockOctokit.rest.activity.markThreadAsRead).toHaveBeenCalledWith({
+      thread_id: Number(mockThreadId),
     });
   });
 
   it('markNotificationThreadAsDone - should mark notification thread as done', async () => {
-    await markNotificationThreadAsDone(
-      mockThreadId,
-      mockGitHubHostname,
-      mockToken,
-    );
+    await markNotificationThreadAsDone(mockGitHubCloudAccount, mockThreadId);
 
-    expect(axios).toHaveBeenCalledWith({
-      url: `https://api.github.com/notifications/threads/${mockThreadId}`,
-      headers: mockAuthHeaders,
-      method: 'DELETE',
-      data: {},
+    expect(createOctokitClientSpy).toHaveBeenCalledWith(
+      mockGitHubCloudAccount,
+      'rest',
+    );
+    expect(mockOctokit.rest.activity.markThreadAsDone).toHaveBeenCalledWith({
+      thread_id: Number(mockThreadId),
     });
   });
 
   it('ignoreNotificationThreadSubscription - should ignore notification thread subscription', async () => {
     await ignoreNotificationThreadSubscription(
+      mockGitHubCloudAccount,
       mockThreadId,
-      mockGitHubHostname,
-      mockToken,
     );
 
-    expect(axios).toHaveBeenCalledWith({
-      url: `https://api.github.com/notifications/threads/${mockThreadId}/subscription`,
-      headers: mockAuthHeaders,
-      method: 'PUT',
-      data: { ignored: true },
+    expect(createOctokitClientSpy).toHaveBeenCalledWith(
+      mockGitHubCloudAccount,
+      'rest',
+    );
+    expect(
+      mockOctokit.rest.activity.setThreadSubscription,
+    ).toHaveBeenCalledWith({
+      thread_id: Number(mockThreadId),
+      ignored: true,
     });
   });
 
-  describe('getHtmlUrl', () => {
-    it('should return the HTML URL', async () => {
-      const apiRequestAuthSpy = jest.spyOn(apiRequests, 'apiRequestAuth');
+  it('getHtmlUrl - should return the HTML URL', async () => {
+    await getHtmlUrl(
+      mockGitHubCloudAccount,
+      'https://api.github.com/repos/gitify-app/notifications-test/issues/785' as Link,
+    );
 
-      const requestPromise = Promise.resolve({
-        data: {
-          html_url:
-            'https://github.com/gitify-app/notifications-test/issues/785',
-        },
-      } as AxiosResponse) as AxiosPromise;
-
-      apiRequestAuthSpy.mockResolvedValue(requestPromise);
-
-      const result = await getHtmlUrl(
-        'https://api.github.com/repos/gitify-app/notifications-test/issues/785' as Link,
-        '123' as Token,
-      );
-      expect(result).toBe(
-        'https://github.com/gitify-app/notifications-test/issues/785',
-      );
-    });
-
-    it('should handle error', async () => {
-      const rendererLogErrorSpy = jest
-        .spyOn(logger, 'rendererLogError')
-        .mockImplementation();
-
-      const apiRequestAuthSpy = jest.spyOn(apiRequests, 'apiRequestAuth');
-
-      const mockError = new Error('Test error');
-
-      apiRequestAuthSpy.mockRejectedValue(mockError);
-
-      await getHtmlUrl(
-        'https://api.github.com/repos/gitify-app/gitify/issues/785' as Link,
-        '123' as Token,
-      );
-
-      expect(rendererLogErrorSpy).toHaveBeenCalledTimes(1);
+    expect(createOctokitClientSpy).toHaveBeenCalledWith(
+      mockGitHubCloudAccount,
+      'rest',
+    );
+    expect(mockOctokit.request).toHaveBeenCalledWith('GET {+url}', {
+      url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/785',
     });
   });
 
-  it('fetchAuthenticatedUserDetails calls performGraphQLRequest with correct args', async () => {
-    const performGraphQLRequestSpy = jest.spyOn(
-      apiRequests,
-      'performGraphQLRequest',
+  it('getCommit - should fetch commit details', async () => {
+    const commitUrl =
+      'https://api.github.com/repos/gitify-app/gitify/commits/abc123' as Link;
+
+    await getCommit(mockGitHubCloudAccount, commitUrl);
+
+    expect(createOctokitClientSpy).toHaveBeenCalledWith(
+      mockGitHubCloudAccount,
+      'rest',
     );
+    expect(mockOctokit.request).toHaveBeenCalledWith('GET {+url}', {
+      url: commitUrl,
+    });
+  });
 
-    performGraphQLRequestSpy.mockResolvedValue({
-      data: {},
-      headers: {},
-    } as ExecutionResultWithHeaders<FetchAuthenticatedUserDetailsQuery>);
+  it('getCommitComment - should fetch commit comment details', async () => {
+    const commentUrl =
+      'https://api.github.com/repos/gitify-app/gitify/comments/456' as Link;
 
-    await fetchAuthenticatedUserDetails(mockGitHubHostname, mockToken);
+    await getCommitComment(mockGitHubCloudAccount, commentUrl);
 
-    expect(performGraphQLRequestSpy).toHaveBeenCalledWith(
-      'https://api.github.com/graphql',
-      mockToken,
-      FetchAuthenticatedUserDetailsDocument,
+    expect(createOctokitClientSpy).toHaveBeenCalledWith(
+      mockGitHubCloudAccount,
+      'rest',
     );
+    expect(mockOctokit.request).toHaveBeenCalledWith('GET {+url}', {
+      url: commentUrl,
+    });
+  });
+
+  it('getRelease - should fetch release details', async () => {
+    const releaseUrl =
+      'https://api.github.com/repos/gitify-app/gitify/releases/789' as Link;
+
+    await getRelease(mockGitHubCloudAccount, releaseUrl);
+
+    expect(createOctokitClientSpy).toHaveBeenCalledWith(
+      mockGitHubCloudAccount,
+      'rest',
+    );
+    expect(mockOctokit.request).toHaveBeenCalledWith('GET {+url}', {
+      url: releaseUrl,
+    });
   });
 
   it('fetchDiscussionByNumber calls performGraphQLRequest with correct args', async () => {
@@ -260,16 +355,14 @@ describe('renderer/utils/api/client.ts', () => {
       type: 'Discussion',
     });
 
-    performGraphQLRequestSpy.mockResolvedValue({
-      data: {},
-      headers: {},
-    } as ExecutionResultWithHeaders<FetchDiscussionByNumberQuery>);
+    performGraphQLRequestSpy.mockResolvedValue(
+      {} as ExecutionResult<FetchDiscussionByNumberQuery>,
+    );
 
     await fetchDiscussionByNumber(mockNotification);
 
     expect(performGraphQLRequestSpy).toHaveBeenCalledWith(
-      'https://api.github.com/graphql',
-      mockNotification.account.token,
+      mockNotification.account,
       FetchDiscussionByNumberDocument,
       {
         owner: mockNotification.repository.owner.login,
@@ -295,16 +388,14 @@ describe('renderer/utils/api/client.ts', () => {
       type: 'Issue',
     });
 
-    performGraphQLRequestSpy.mockResolvedValue({
-      data: {},
-      headers: {},
-    } as ExecutionResultWithHeaders<FetchIssueByNumberQuery>);
+    performGraphQLRequestSpy.mockResolvedValue(
+      {} as ExecutionResult<FetchIssueByNumberQuery>,
+    );
 
     await fetchIssueByNumber(mockNotification);
 
     expect(performGraphQLRequestSpy).toHaveBeenCalledWith(
-      'https://api.github.com/graphql',
-      mockNotification.account.token,
+      mockNotification.account,
       FetchIssueByNumberDocument,
       {
         owner: mockNotification.repository.owner.login,
@@ -328,16 +419,14 @@ describe('renderer/utils/api/client.ts', () => {
       type: 'PullRequest',
     });
 
-    performGraphQLRequestSpy.mockResolvedValue({
-      data: {},
-      headers: {},
-    } as ExecutionResultWithHeaders<FetchPullRequestByNumberQuery>);
+    performGraphQLRequestSpy.mockResolvedValue(
+      {} as ExecutionResult<FetchPullRequestByNumberQuery>,
+    );
 
     await fetchPullByNumber(mockNotification);
 
     expect(performGraphQLRequestSpy).toHaveBeenCalledWith(
-      'https://api.github.com/graphql',
-      mockNotification.account.token,
+      mockNotification.account,
       FetchPullRequestByNumberDocument,
       {
         owner: mockNotification.repository.owner.login,
@@ -364,10 +453,9 @@ describe('renderer/utils/api/client.ts', () => {
         type: 'Commit',
       });
 
-      performGraphQLRequestStringSpy.mockResolvedValue({
-        data: {},
-        headers: {},
-      } as ExecutionResultWithHeaders<unknown>);
+      performGraphQLRequestStringSpy.mockResolvedValue(
+        {} as ExecutionResult<unknown>,
+      );
 
       await fetchNotificationDetailsForList([mockNotification]);
 
@@ -380,10 +468,9 @@ describe('renderer/utils/api/client.ts', () => {
         'performGraphQLRequestString',
       );
 
-      performGraphQLRequestStringSpy.mockResolvedValue({
-        data: {},
-        headers: {},
-      } as ExecutionResultWithHeaders<unknown>);
+      performGraphQLRequestStringSpy.mockResolvedValue(
+        {} as ExecutionResult<unknown>,
+      );
 
       await fetchNotificationDetailsForList([]);
 
@@ -399,13 +486,12 @@ describe('renderer/utils/api/client.ts', () => {
       performGraphQLRequestStringSpy.mockResolvedValue({
         data: {},
         headers: {},
-      } as ExecutionResultWithHeaders<unknown>);
+      } as ExecutionResult<unknown>);
 
       await fetchNotificationDetailsForList(mockGitHubCloudGitifyNotifications);
 
       expect(performGraphQLRequestStringSpy).toHaveBeenCalledWith(
-        'https://api.github.com/graphql',
-        mockToken,
+        mockGitHubCloudGitifyNotifications[0].account,
         expect.stringMatching(/node0|node1/),
         {
           firstClosingIssues: 100,
