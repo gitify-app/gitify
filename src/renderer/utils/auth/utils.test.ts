@@ -1,7 +1,6 @@
-import { configureAxiosHttpAdapterForNock } from '../../__helpers__/test-utils';
 import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
 import { mockAuth } from '../../__mocks__/state-mocks';
-import { mockGitifyUser } from '../../__mocks__/user-mocks';
+import { mockRawUser } from '../api/__mocks__/response-mocks';
 
 import { Constants } from '../../constants';
 
@@ -12,6 +11,7 @@ import type {
   ClientID,
   ClientSecret,
   Hostname,
+  Link,
   Token,
 } from '../../types';
 import type { AuthMethod } from './types';
@@ -20,7 +20,11 @@ import * as comms from '../../utils/comms';
 import * as apiClient from '../api/client';
 import * as logger from '../logger';
 import * as authUtils from './utils';
-import { getNewOAuthAppURL, getNewTokenURL } from './utils';
+import {
+  getGitHubAuthBaseUrl,
+  getNewOAuthAppURL,
+  getNewTokenURL,
+} from './utils';
 
 jest.mock('@octokit/oauth-methods', () => ({
   ...jest.requireActual('@octokit/oauth-methods'),
@@ -29,15 +33,13 @@ jest.mock('@octokit/oauth-methods', () => ({
 
 import { exchangeWebFlowCode } from '@octokit/oauth-methods';
 
+import type { GetAuthenticatedUserResponse } from '../api/types';
+
 const exchangeWebFlowCodeMock = exchangeWebFlowCode as jest.MockedFunction<
   typeof exchangeWebFlowCode
 >;
 
 describe('renderer/utils/auth/utils.ts', () => {
-  beforeEach(() => {
-    configureAxiosHttpAdapterForNock();
-  });
-
   describe('authGitHub', () => {
     jest.spyOn(logger, 'rendererLogInfo').mockImplementation();
     const openExternalLinkSpy = jest
@@ -161,6 +163,9 @@ describe('renderer/utils/auth/utils.ts', () => {
 
   describe('addAccount', () => {
     let mockAuthState: AuthState;
+
+    const mockAuthenticatedResponse = mockRawUser('authenticated-user');
+
     const fetchAuthenticatedUserDetailsSpy = jest.spyOn(
       apiClient,
       'fetchAuthenticatedUserDetails',
@@ -175,9 +180,9 @@ describe('renderer/utils/auth/utils.ts', () => {
     describe('should add GitHub Cloud account', () => {
       beforeEach(() => {
         fetchAuthenticatedUserDetailsSpy.mockResolvedValue({
-          data: {
-            viewer: mockGitifyUser,
-          },
+          status: 200,
+          url: 'https://api.github.com/user',
+          data: mockAuthenticatedResponse as GetAuthenticatedUserResponse,
           headers: {
             'x-oauth-scopes': Constants.OAUTH_SCOPES.RECOMMENDED.join(', '),
           },
@@ -199,9 +204,14 @@ describe('renderer/utils/auth/utils.ts', () => {
             method: 'Personal Access Token',
             platform: 'GitHub Cloud',
             token: 'encrypted' as Token,
-            user: mockGitifyUser,
+            user: {
+              id: String(mockAuthenticatedResponse.id),
+              name: mockAuthenticatedResponse.name,
+              login: mockAuthenticatedResponse.login,
+              avatar: mockAuthenticatedResponse.avatar_url as Link,
+            },
             version: 'latest',
-          },
+          } satisfies Account,
         ]);
       });
 
@@ -220,9 +230,14 @@ describe('renderer/utils/auth/utils.ts', () => {
             method: 'OAuth App',
             platform: 'GitHub Cloud',
             token: 'encrypted' as Token,
-            user: mockGitifyUser,
+            user: {
+              id: String(mockAuthenticatedResponse.id),
+              name: mockAuthenticatedResponse.name,
+              login: mockAuthenticatedResponse.login,
+              avatar: mockAuthenticatedResponse.avatar_url as Link,
+            },
             version: 'latest',
-          },
+          } satisfies Account,
         ]);
       });
     });
@@ -230,9 +245,9 @@ describe('renderer/utils/auth/utils.ts', () => {
     describe('should add GitHub Enterprise Server account', () => {
       beforeEach(() => {
         fetchAuthenticatedUserDetailsSpy.mockResolvedValue({
-          data: {
-            viewer: mockGitifyUser,
-          },
+          status: 200,
+          url: 'https://github.gitify.io/api/v3/user',
+          data: mockAuthenticatedResponse as GetAuthenticatedUserResponse,
           headers: {
             'x-github-enterprise-version': '3.0.0',
             'x-oauth-scopes': Constants.OAUTH_SCOPES.RECOMMENDED.join(', '),
@@ -255,9 +270,14 @@ describe('renderer/utils/auth/utils.ts', () => {
             method: 'Personal Access Token',
             platform: 'GitHub Enterprise Server',
             token: 'encrypted' as Token,
-            user: mockGitifyUser,
+            user: {
+              id: String(mockAuthenticatedResponse.id),
+              name: mockAuthenticatedResponse.name,
+              login: mockAuthenticatedResponse.login,
+              avatar: mockAuthenticatedResponse.avatar_url as Link,
+            },
             version: '3.0.0',
-          },
+          } satisfies Account,
         ]);
       });
 
@@ -276,9 +296,14 @@ describe('renderer/utils/auth/utils.ts', () => {
             method: 'OAuth App',
             platform: 'GitHub Enterprise Server',
             token: 'encrypted' as Token,
-            user: mockGitifyUser,
+            user: {
+              id: String(mockAuthenticatedResponse.id),
+              name: mockAuthenticatedResponse.name,
+              login: mockAuthenticatedResponse.login,
+              avatar: mockAuthenticatedResponse.avatar_url as Link,
+            },
             version: '3.0.0',
-          },
+          } satisfies Account,
         ]);
       });
     });
@@ -332,6 +357,18 @@ describe('renderer/utils/auth/utils.ts', () => {
     expect(authUtils.extractHostVersion('enterprise-server@3.15.0-beta1')).toBe(
       '3.15.0',
     );
+  });
+
+  describe('getGitHubAuthBaseUrl', () => {
+    it('should generate a GitHub Auth url - non enterprise', () => {
+      const result = getGitHubAuthBaseUrl('github.com' as Hostname);
+      expect(result.toString()).toBe('https://github.com/');
+    });
+
+    it('should generate a GitHub Auth url - enterprise', () => {
+      const result = getGitHubAuthBaseUrl('github.gitify.io' as Hostname);
+      expect(result.toString()).toBe('https://github.gitify.io/api/v3/');
+    });
   });
 
   it('getDeveloperSettingsURL', () => {

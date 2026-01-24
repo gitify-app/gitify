@@ -33,8 +33,7 @@ class IssueHandler extends DefaultHandler {
     fetchedData?: IssueDetailsFragment,
   ): Promise<Partial<GitifySubject>> {
     const issue =
-      fetchedData ??
-      (await fetchIssueByNumber(notification)).data.repository?.issue;
+      fetchedData ?? (await fetchIssueByNumber(notification)).repository?.issue;
 
     const issueState = issue.stateReason ?? issue.state;
 

@@ -1,152 +1,92 @@
-import axios from 'axios';
+import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
 
-import { mockToken } from '../../__mocks__/state-mocks';
-import {
-  mockAuthHeaders,
-  mockNoAuthHeaders,
-  mockNonCachedAuthHeaders,
-} from './__mocks__/request-mocks';
+import { FetchIssueByNumberDocument } from './graphql/generated/graphql';
+import type { OctokitClient } from './octokit';
+import * as octokitModule from './octokit';
+import { performGraphQLRequest, performGraphQLRequestString } from './request';
 
-import type { Link } from '../../types';
+// Manually mock Octokit for these tests
+jest.mock('@octokit/core', () => {
+  const mockOctokit = {
+    request: jest.fn(),
+    graphql: jest.fn(),
+    paginate: { iterator: jest.fn() },
+  };
 
-import { FetchAuthenticatedUserDetailsDocument } from './graphql/generated/graphql';
-import {
-  getHeaders,
-  performAuthenticatedRESTRequest,
-  performGraphQLRequest,
-  performGraphQLRequestString,
-  shouldRequestWithNoCache,
-} from './request';
+  const MockOctokitClass = jest.fn(() => mockOctokit);
+  // biome-ignore lint/suspicious/noExplicitAny: Mock type
+  (MockOctokitClass as any).plugin = jest.fn(() => MockOctokitClass);
 
-jest.mock('axios');
+  return { Octokit: MockOctokitClass };
+});
 
-const url = 'https://example.com' as Link;
-const method = 'get';
+jest.mock('@octokit/plugin-paginate-rest', () => ({
+  // biome-ignore lint/suspicious/noExplicitAny: Mock type
+  paginateRest: jest.fn((octokit: any) => octokit),
+}));
+
+jest.mock('@octokit/plugin-rest-endpoint-methods', () => ({
+  // biome-ignore lint/suspicious/noExplicitAny: Mock type
+  restEndpointMethods: jest.fn((octokit: any) => octokit),
+}));
 
 describe('renderer/utils/api/request.ts', () => {
+  let mockOctokitInstance: {
+    request: jest.Mock;
+    graphql: jest.Mock;
+    paginate: { iterator: jest.Mock };
+  };
+
+  const createOctokitClientSpy = jest.spyOn(
+    octokitModule,
+    'createOctokitClient',
+  );
+
+  beforeEach(() => {
+    mockOctokitInstance = {
+      request: jest.fn(),
+      graphql: jest.fn(),
+      paginate: { iterator: jest.fn() },
+    };
+
+    jest
+      .spyOn(octokitModule, 'createOctokitClient')
+      .mockResolvedValue(mockOctokitInstance as unknown as OctokitClient);
+  });
+
   afterEach(() => {
     jest.clearAllMocks();
   });
 
-  describe('apiRequestAuth', () => {
-    afterEach(() => {
-      jest.clearAllMocks();
-    });
+  it('performGraphQLRequest - perform call with correct params', async () => {
+    mockOctokitInstance.graphql.mockResolvedValue({});
 
-    it('should make an authenticated request with the correct parameters', async () => {
-      const data = { key: 'value' };
+    await performGraphQLRequest(
+      mockGitHubCloudAccount,
+      FetchIssueByNumberDocument,
+      { owner: 'test', name: 'repo', number: 1 },
+    );
 
-      await performAuthenticatedRESTRequest(method, url, mockToken, data);
-
-      expect(axios).toHaveBeenCalledWith({
-        method,
-        url,
-        data,
-        headers: mockAuthHeaders,
-      });
-    });
-
-    it('should make an authenticated request with the correct parameters and default data', async () => {
-      const data = {};
-
-      await performAuthenticatedRESTRequest(method, url, mockToken, data);
-
-      expect(axios).toHaveBeenCalledWith({
-        method,
-        url,
-        data,
-        headers: mockAuthHeaders,
-      });
-    });
+    expect(createOctokitClientSpy).toHaveBeenCalledWith(
+      mockGitHubCloudAccount,
+      'graphql',
+    );
+    expect(mockOctokitInstance.graphql).toHaveBeenCalledWith(
+      FetchIssueByNumberDocument.toString(),
+      { owner: 'test', name: 'repo', number: 1 },
+    );
   });
 
-  describe('performGraphQLRequest', () => {
-    it('should performGraphQLRequest with the correct parameters and default data', async () => {
-      (axios as unknown as jest.Mock).mockResolvedValue({
-        data: { data: {}, errors: [] },
-        headers: {},
-      });
-      const expectedData = {
-        query: FetchAuthenticatedUserDetailsDocument,
-        variables: undefined,
-      };
+  it('performGraphQLRequestString - perform call with correct params', async () => {
+    const queryString = 'query Foo { repository { issue { title } } }';
+    mockOctokitInstance.graphql.mockResolvedValue({});
 
-      await performGraphQLRequest(
-        url,
-        mockToken,
-        FetchAuthenticatedUserDetailsDocument,
-      );
+    await performGraphQLRequestString(mockGitHubCloudAccount, queryString, {});
 
-      expect(axios).toHaveBeenCalledWith({
-        method: 'POST',
-        url,
-        data: expectedData,
-        headers: mockAuthHeaders,
-      });
-    });
-  });
-
-  describe('performGraphQLRequestString', () => {
-    it('should performGraphQLRequestString with the correct parameters and default data', async () => {
-      (axios as unknown as jest.Mock).mockResolvedValue({
-        data: { data: {}, errors: [] },
-        headers: {},
-      });
-      const queryString = 'query Foo { repository { issue { title } } }';
-      const expectedData = {
-        query: queryString,
-        variables: undefined,
-      };
-
-      await performGraphQLRequestString(url, mockToken, queryString);
-
-      expect(axios).toHaveBeenCalledWith({
-        method: 'POST',
-        url,
-        data: expectedData,
-        headers: mockAuthHeaders,
-      });
-    });
-  });
-
-  describe('shouldRequestWithNoCache', () => {
-    it('shouldRequestWithNoCache', () => {
-      expect(
-        shouldRequestWithNoCache(
-          'https://example.com/api/v3/notifications' as Link,
-        ),
-      ).toBe(true);
-
-      expect(
-        shouldRequestWithNoCache(
-          'https://example.com/login/oauth/access_token' as Link,
-        ),
-      ).toBe(true);
-
-      expect(
-        shouldRequestWithNoCache('https://example.com/notifications' as Link),
-      ).toBe(true);
-
-      expect(
-        shouldRequestWithNoCache(
-          'https://example.com/some/other/endpoint' as Link,
-        ),
-      ).toBe(false);
-    });
-  });
-
-  describe('getHeaders', () => {
-    it('should get headers correctly', async () => {
-      expect(await getHeaders(url)).toEqual(mockNoAuthHeaders);
-
-      expect(await getHeaders(url, mockToken)).toEqual(mockAuthHeaders);
-
-      expect(
-        await getHeaders(
-          'https://example.com/api/v3/notifications' as Link,
-          mockToken,
-        ),
-      ).toEqual(mockNonCachedAuthHeaders);
-    });
+    expect(createOctokitClientSpy).toHaveBeenCalledWith(
+      mockGitHubCloudAccount,
+      'graphql',
+    );
+    expect(mockOctokitInstance.graphql).toHaveBeenCalledWith(queryString, {});
   });
 });

@@ -90,8 +90,7 @@ export async function getAllNotifications(
       .filter((response) => !!response)
       .map(async (accountNotifications) => {
         try {
-          const rawNotifications = (await accountNotifications.notifications)
-            .data;
+          const rawNotifications = await accountNotifications.notifications;
 
           let notifications = rawNotifications.map((raw) => {
             return transformNotification(raw, accountNotifications.account);

@@ -1,6 +1,3 @@
-import nock from 'nock';
-
-import { configureAxiosHttpAdapterForNock } from '../../../__helpers__/test-utils';
 import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
 import { mockRawUser } from '../../api/__mocks__/response-mocks';
@@ -8,6 +5,7 @@ import { mockRawUser } from '../../api/__mocks__/response-mocks';
 import type { GitifyNotification, Link } from '../../../types';
 import type { GetReleaseResponse } from '../../api/types';
 
+import * as apiClient from '../../api/client';
 import { releaseHandler } from './release';
 
 describe('renderer/utils/notifications/handlers/release.ts', () => {
@@ -19,19 +17,15 @@ describe('renderer/utils/notifications/handlers/release.ts', () => {
       'https://api.github.com/repos/gitify-app/notifications-test/releases/1' as Link,
   });
 
-  beforeEach(() => {
-    configureAxiosHttpAdapterForNock();
-  });
-
   describe('enrich', () => {
+    const getReleaseSpy = jest.spyOn(apiClient, 'getRelease');
+
     const mockAuthor = mockRawUser('some-author');
 
     it('release notification', async () => {
-      nock('https://api.github.com')
-        .get('/repos/gitify-app/notifications-test/releases/1')
-        .reply(200, {
-          author: mockAuthor,
-        } satisfies Partial<GetReleaseResponse>);
+      getReleaseSpy.mockResolvedValue({
+        author: mockAuthor,
+      } as GetReleaseResponse);
 
       const result = await releaseHandler.enrich(
         mockNotification,

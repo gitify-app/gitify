@@ -40,7 +40,7 @@ class DiscussionHandler extends DefaultHandler {
   ): Promise<Partial<GitifySubject>> {
     const discussion =
       fetchedData ??
-      (await fetchDiscussionByNumber(notification)).data.repository?.discussion;
+      (await fetchDiscussionByNumber(notification)).repository?.discussion;
 
     let discussionState: GitifyDiscussionState = 'OPEN';
 

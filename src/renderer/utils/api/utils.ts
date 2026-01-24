@@ -1,50 +1,19 @@
-import type { AxiosResponse } from 'axios';
-
-import { APPLICATION } from '../../../shared/constants';
-
 import { Constants } from '../../constants';
 
 import type { Hostname } from '../../types';
+import type { APIClientType } from './types';
 
 import { isEnterpriseServerHost } from '../helpers';
 
-export function getGitHubAPIBaseUrl(hostname: Hostname): URL {
+export function getGitHubAPIBaseUrl(hostname: Hostname, type: APIClientType) {
   const url = new URL(Constants.GITHUB_API_BASE_URL);
 
   if (isEnterpriseServerHost(hostname)) {
     url.hostname = hostname;
-    url.pathname = '/api/v3/';
-  }
-  return url;
-}
-
-export function getGitHubAuthBaseUrl(hostname: Hostname): URL {
-  const url = new URL(APPLICATION.GITHUB_BASE_URL);
-
-  if (isEnterpriseServerHost(hostname)) {
-    url.hostname = hostname;
-    url.pathname = '/api/v3/';
-  }
-  return url;
-}
-
-export function getGitHubGraphQLUrl(hostname: Hostname): URL {
-  const url = new URL(Constants.GITHUB_API_GRAPHQL_URL);
-
-  if (isEnterpriseServerHost(hostname)) {
-    url.hostname = hostname;
-    url.pathname = '/api/graphql';
+    url.pathname = type === 'rest' ? '/api/v3/' : '/api/';
   }
 
   return url;
-}
-
-export function getNextURLFromLinkHeader(
-  response: AxiosResponse,
-): string | null {
-  const linkHeader = response.headers.link;
-  const matches = linkHeader?.match(/<([^<>]+)>;\s*rel="next"/);
-  return matches ? matches[1] : null;
 }
 
 export function getNumberFromUrl(url: string): number {

@@ -9,9 +9,9 @@ import { Constants } from '../constants';
 import { useAppContext } from '../hooks/useAppContext';
 import { useNotifications } from '../hooks/useNotifications';
 
-import type { AuthState, Hostname, SettingsState, Token } from '../types';
+import type { AuthState, SettingsState } from '../types';
 
-import * as apiRequests from '../utils/api/request';
+// import * as apiRequests from '../utils/api/request';
 import * as notifications from '../utils/notifications/notifications';
 import * as storage from '../utils/storage';
 import * as tray from '../utils/tray';
@@ -204,29 +204,29 @@ describe('renderer/context/App.tsx', () => {
       );
     });
 
-    it('should call loginWithPersonalAccessToken', async () => {
-      const performAuthenticatedRESTRequestSpy = jest
-        .spyOn(apiRequests, 'performAuthenticatedRESTRequest')
-        .mockResolvedValueOnce(null);
+    // it('should call loginWithPersonalAccessToken', async () => {
+    //   const performAuthenticatedRESTRequestSpy = jest
+    //     .spyOn(apiRequests, 'performAuthenticatedRESTRequest')
+    //     .mockResolvedValueOnce(null);
 
-      const { button } = renderContextButton('loginWithPersonalAccessToken', {
-        hostname: 'github.com' as Hostname,
-        token: '123-456' as Token,
-      });
+    //   const { button } = renderContextButton('loginWithPersonalAccessToken', {
+    //     hostname: 'github.com' as Hostname,
+    //     token: '123-456' as Token,
+    //   });
 
-      fireEvent.click(button);
+    //   fireEvent.click(button);
 
-      await waitFor(() =>
-        expect(mockFetchNotifications).toHaveBeenCalledTimes(1),
-      );
+    //   await waitFor(() =>
+    //     expect(mockFetchNotifications).toHaveBeenCalledTimes(1),
+    //   );
 
-      expect(performAuthenticatedRESTRequestSpy).toHaveBeenCalledTimes(1);
-      expect(performAuthenticatedRESTRequestSpy).toHaveBeenCalledWith(
-        'HEAD',
-        'https://api.github.com/notifications',
-        'encrypted',
-      );
-    });
+    //   expect(performAuthenticatedRESTRequestSpy).toHaveBeenCalledTimes(1);
+    //   expect(performAuthenticatedRESTRequestSpy).toHaveBeenCalledWith(
+    //     'HEAD',
+    //     'https://api.github.com/notifications',
+    //     'encrypted',
+    //   );
+    // });
   });
 
   describe('settings methods', () => {

@@ -1,6 +1,3 @@
-import nock from 'nock';
-
-import { configureAxiosHttpAdapterForNock } from '../../__helpers__/test-utils';
 import {
   mockGitHubCloudAccount,
   mockGitHubEnterpriseServerAccount,
@@ -34,10 +31,6 @@ import {
 } from './notifications';
 
 describe('renderer/utils/notifications/notifications.ts', () => {
-  beforeEach(() => {
-    configureAxiosHttpAdapterForNock();
-  });
-
   afterEach(() => {
     jest.clearAllMocks();
   });
@@ -81,7 +74,7 @@ describe('renderer/utils/notifications/notifications.ts', () => {
     };
     mockNotification.repository = mockRepository;
 
-    nock('https://api.github.com').post('/graphql').replyWithError(mockError);
+    jest.spyOn(apiClient, 'fetchIssueByNumber').mockRejectedValue(mockError);
 
     await enrichNotification(mockNotification, mockSettings);
 

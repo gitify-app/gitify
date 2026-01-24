@@ -36,7 +36,8 @@ import type {
   LoginPersonalAccessTokenOptions,
 } from '../utils/auth/types';
 
-import { headNotifications } from '../utils/api/client';
+import { fetchAuthenticatedUserDetails } from '../utils/api/client';
+import { clearOctokitClientCache } from '../utils/api/octokit';
 import {
   addAccount,
   exchangeAuthCodeForAccessToken,
@@ -437,7 +438,10 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   const loginWithPersonalAccessToken = useCallback(
     async ({ token, hostname }: LoginPersonalAccessTokenOptions) => {
       const encryptedToken = (await encryptValue(token)) as Token;
-      await headNotifications(hostname, encryptedToken);
+      await fetchAuthenticatedUserDetails({
+        hostname,
+        token: encryptedToken,
+      } as Account);
 
       const updatedAuth = await addAccount(
         auth,
@@ -456,6 +460,9 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       removeAccountNotifications(account);
 
       const updatedAuth = removeAccount(auth, account);
+
+      // Clear Octokit client cache when removing account
+      clearOctokitClientCache();
 
       persistAuth(updatedAuth);
     },

@@ -48,15 +48,27 @@ importers:
       '@graphql-codegen/schema-ast':
         specifier: 5.0.0
         version: 5.0.0(graphql@16.12.0)
+      '@octokit/core':
+        specifier: 7.0.6
+        version: 7.0.6
+      '@octokit/graphql':
+        specifier: 9.0.3
+        version: 9.0.3
       '@octokit/oauth-methods':
         specifier: 6.0.2
         version: 6.0.2
-      '@octokit/openapi-types':
-        specifier: 27.0.0
-        version: 27.0.0
-      '@octokit/request':
-        specifier: 10.0.7
-        version: 10.0.7
+      '@octokit/plugin-paginate-rest':
+        specifier: 14.0.0
+        version: 14.0.0(@octokit/core@7.0.6)
+      '@octokit/plugin-rest-endpoint-methods':
+        specifier: 17.0.0
+        version: 17.0.0(@octokit/core@7.0.6)
+      '@octokit/plugin-retry':
+        specifier: 8.0.3
+        version: 8.0.3(@octokit/core@7.0.6)
+      '@octokit/request-error':
+        specifier: ^7.1.0
+        version: 7.1.0
       '@octokit/types':
         specifier: 16.0.0
         version: 16.0.0
@@ -69,9 +81,6 @@ importers:
       '@primer/octicons-react':
         specifier: 19.21.2
         version: 19.21.2(react@19.2.3)
-      '@primer/primitives':
-        specifier: 11.3.2
-        version: 11.3.2
       '@primer/react':
         specifier: 38.7.1
         version: 38.7.1(@types/react-dom@19.2.3(@types/react@19.2.8))(@types/react-is@18.3.0)(@types/react@19.2.8)(react-dom@19.2.3(react@19.2.3))(react-is@18.3.1)(react@19.2.3)
@@ -105,9 +114,6 @@ importers:
       '@types/semver':
         specifier: 7.7.1
         version: 7.7.1
-      axios:
-        specifier: 1.13.2
-        version: 1.13.2
       babel-jest:
         specifier: 30.2.0
         version: 30.2.0(@babel/core@7.28.6)
@@ -162,9 +168,6 @@ importers:
       mini-css-extract-plugin:
         specifier: 2.10.0
         version: 2.10.0(webpack@5.104.1)
-      nock:
-        specifier: 13.5.6
-        version: 13.5.6
       postcss:
         specifier: 8.5.6
         version: 8.5.6
@@ -1683,8 +1686,20 @@ packages:
     resolution: {integrity: sha512-/xGlezI6xfGO9NwuJlnwz/K14qD1kCSAGtacBHnGzeAIuJGazcp45KP5NuyARXoKb7cwulAGWVsbeSxdG/cb0Q==}
     engines: {node: ^18.17.0 || >=20.5.0}
 
+  '@octokit/auth-token@6.0.0':
+    resolution: {integrity: sha512-P4YJBPdPSpWTQ1NU4XYdvHvXJJDxM6YwpS0FZHRgP7YFkdVxsWcpWGy/NVqlAA7PcPCnMacXlRm1y2PFZRWL/w==}
+    engines: {node: '>= 20'}
+
+  '@octokit/core@7.0.6':
+    resolution: {integrity: sha512-DhGl4xMVFGVIyMwswXeyzdL4uXD5OGILGX5N8Y+f6W7LhC1Ze2poSNrkF/fedpVDHEEZ+PHFW0vL14I+mm8K3Q==}
+    engines: {node: '>= 20'}
+
   '@octokit/endpoint@11.0.2':
     resolution: {integrity: sha512-4zCpzP1fWc7QlqunZ5bSEjxc6yLAlRTnDwKtgXfcI/FxxGoqedDG8V2+xJ60bV2kODqcGB+nATdtap/XYq2NZQ==}
+    engines: {node: '>= 20'}
+
+  '@octokit/graphql@9.0.3':
+    resolution: {integrity: sha512-grAEuupr/C1rALFnXTv6ZQhFuL1D8G5y8CN04RgrO4FIPMrtm+mcZzFG7dcBm+nq+1ppNixu+Jd78aeJOYxlGA==}
     engines: {node: '>= 20'}
 
   '@octokit/oauth-authorization-url@8.0.0':
@@ -1697,6 +1712,24 @@ packages:
 
   '@octokit/openapi-types@27.0.0':
     resolution: {integrity: sha512-whrdktVs1h6gtR+09+QsNk2+FO+49j6ga1c55YZudfEG+oKJVvJLQi3zkOm5JjiUXAagWK2tI2kTGKJ2Ys7MGA==}
+
+  '@octokit/plugin-paginate-rest@14.0.0':
+    resolution: {integrity: sha512-fNVRE7ufJiAA3XUrha2omTA39M6IXIc6GIZLvlbsm8QOQCYvpq/LkMNGyFlB1d8hTDzsAXa3OKtybdMAYsV/fw==}
+    engines: {node: '>= 20'}
+    peerDependencies:
+      '@octokit/core': '>=6'
+
+  '@octokit/plugin-rest-endpoint-methods@17.0.0':
+    resolution: {integrity: sha512-B5yCyIlOJFPqUUeiD0cnBJwWJO8lkJs5d8+ze9QDP6SvfiXSz1BF+91+0MeI1d2yxgOhU/O+CvtiZ9jSkHhFAw==}
+    engines: {node: '>= 20'}
+    peerDependencies:
+      '@octokit/core': '>=6'
+
+  '@octokit/plugin-retry@8.0.3':
+    resolution: {integrity: sha512-vKGx1i3MC0za53IzYBSBXcrhmd+daQDzuZfYDd52X5S0M2otf3kVZTVP8bLA3EkU0lTvd1WEC2OlNNa4G+dohA==}
+    engines: {node: '>= 20'}
+    peerDependencies:
+      '@octokit/core': '>=7'
 
   '@octokit/request-error@7.1.0':
     resolution: {integrity: sha512-KMQIfq5sOPpkQYajXHwnhjCC0slzCNScLHs9JafXc4RAJI+9f+jNDlBNaIMTvazOPLgb4BnlhGJOTbnN0wIjPw==}
@@ -2478,9 +2511,6 @@ packages:
     resolution: {integrity: sha512-Hdw8qdNiqdJ8LqT0iK0sVzkFbzg6fhnQqqfWhBDxcHZvU75+B+ayzTy8x+k5Ix0Y92XOhOUlx74ps+bA6BeYMQ==}
     engines: {node: '>=8'}
 
-  axios@1.13.2:
-    resolution: {integrity: sha512-VPk9ebNqPcy5lRGuSlKx752IlDatOjT9paPlm8A7yOuW2Fbvp4X3JznJtT4f0GzGLLiWE9W8onz51SqLYwzGaA==}
-
   babel-jest@30.2.0:
     resolution: {integrity: sha512-0YiBEOxWqKkSQWL9nNGGEgndoeL0ZpWrbLMNL5u/Kaxrli3Eaxlt3ZtIDktEvXt4L/R9r3ODr2zKwGM/2BjxVw==}
     engines: {node: ^18.14.0 || ^20.0.0 || ^22.0.0 || >=24.0.0}
@@ -2531,6 +2561,9 @@ packages:
     resolution: {integrity: sha512-Sg0xJUNDU1sJNGdfGWhVHX0kkZ+HWcvmVymJbj6NSgZZmW/8S9Y2HQ5euytnIgakgxN6papOAWiwDo1ctFDcoQ==}
     hasBin: true
 
+  before-after-hook@4.0.0:
+    resolution: {integrity: sha512-q6tR3RPqIB1pMiTRMFcZwuG5T8vwp+vUvEG0vuI6B+Rikh5BfPp2fQ82c925FOs+b0lcFQ8CFrL+KbilfZFhOQ==}
+
   bl@4.1.0:
     resolution: {integrity: sha512-1W07cM9gS6DcLperZfFSj+bWLtaPGSOHWhPiGzXmvVJbRLdG82sH/Kn8EtW1VqWVA54AKf2h5k5BbnIbwF3h6w==}
 
@@ -2546,6 +2579,9 @@ packages:
   boolean@3.2.0:
     resolution: {integrity: sha512-d0II/GO9uf9lfUHH2BQsjxzRJZBdsjgsBiW4BvhWk/3qoKwQFjIDVN19PfX8F2D/r9PCMTtLWjYVCFrpeYUzsw==}
     deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
+
+  bottleneck@2.19.5:
+    resolution: {integrity: sha512-VHiNCbI1lKdl44tGrhNfU3lup0Tj/ZBMJB5/2ZbNXRCPuRCO7ed2mgcK4r17y+KB2EfuYuRaVlwNbAeaWGSpbw==}
 
   brace-expansion@1.1.11:
     resolution: {integrity: sha512-iCuPHDFgrHX7H2vEI/5xpz07zSHB00TpugqhmYtVmMO6518mCuRMoOYFldEBl0g187ufozdaHgWKcYFb61qGiA==}
@@ -2994,15 +3030,6 @@ packages:
     resolution: {integrity: sha512-Xks6RUDLZFdz8LIdR6q0MTH44k7FikOmnh5xkSjMig6ch45afc8sjTjRQf3P6ax8dMgcQrYO/AR2RGWURrruqw==}
     engines: {node: '>=18'}
 
-  debug@4.3.4:
-    resolution: {integrity: sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==}
-    engines: {node: '>=6.0'}
-    peerDependencies:
-      supports-color: '*'
-    peerDependenciesMeta:
-      supports-color:
-        optional: true
-
   debug@4.4.0:
     resolution: {integrity: sha512-6WTZ/IxCY/T6BALoZHaE4ctp9xm+Z5kY/pzYaCHRFeyVhojxlrm+46y68HA6hr0TcwEssoxNiDEUJQjfPZ/RYA==}
     engines: {node: '>=6.0'}
@@ -3422,15 +3449,6 @@ packages:
 
   focus-visible@5.2.1:
     resolution: {integrity: sha512-8Bx950VD1bWTQJEH/AM6SpEk+SU55aVnp4Ujhuuxy3eMEBCRwBnTBnVXr9YAPvZL3/CNjCa8u4IWfNmEO53whA==}
-
-  follow-redirects@1.15.6:
-    resolution: {integrity: sha512-wWN62YITEaOpSK584EZXJafH1AGpO8RVgElfkuXbTOrPX4fIfOyEpW/CsiNd8JdYrAoOvafRTOEnvsO++qCqFA==}
-    engines: {node: '>=4.0'}
-    peerDependencies:
-      debug: '*'
-    peerDependenciesMeta:
-      debug:
-        optional: true
 
   foreground-child@3.1.1:
     resolution: {integrity: sha512-TMKDUnIte6bfb5nWv7V/caI169OHgvwjb7V4WkeUvbQQdjr5rWKqHFiKWb/fcOwB+CzBT+qbWjvj+DVwRskpIg==}
@@ -4505,9 +4523,6 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
 
-  ms@2.1.2:
-    resolution: {integrity: sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==}
-
   ms@2.1.3:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
 
@@ -4537,10 +4552,6 @@ packages:
 
   no-case@3.0.4:
     resolution: {integrity: sha512-fgAN3jGAh+RoxUGZHTSOLJIqUc2wmoBwGR4tbpNAKmmovFoWq0OdRkb0VkldReO2a2iBT/OEulG9XSUc10r3zg==}
-
-  nock@13.5.6:
-    resolution: {integrity: sha512-o2zOYiCpzRqSzPj0Zt/dQ/DqZeYoaQ7TUonc/xUPjCGl9WeHpNbxgVvOquXYAaJzI0M9BXV3HTzG0p8IUAbBTQ==}
-    engines: {node: '>= 10.13'}
 
   node-abi@4.24.0:
     resolution: {integrity: sha512-u2EC1CeNe25uVtX3EZbdQ275c74zdZmmpzrHEQh2aIYqoVjlglfUpOX9YY85x1nlBydEKDVaSmMNhR7N82Qj8A==}
@@ -5007,13 +5018,6 @@ packages:
 
   promise@7.3.1:
     resolution: {integrity: sha512-nolQXZ/4L+bP/UGlkfaIujX9BKxGwmQ9OT4mOt5yvy8iK1h3wqTEJCijzGANTCCl9nWjY41juyAn2K3Q1hLLTg==}
-
-  propagate@2.0.1:
-    resolution: {integrity: sha512-vGrhOavPSTz4QVNuBNdcNXePNdNMaO1xj9yBeH1ScQPjk/rhg9sSlCXPhMkFuaNNW/syTvYqsnbIJxMBfRbbag==}
-    engines: {node: '>= 8'}
-
-  proxy-from-env@1.1.0:
-    resolution: {integrity: sha512-D+zkORCbA9f1tdWRK0RaCR3GPv50cMxcrz4X8k5LTSUD1Dkw47mKJEZQNunItRTkWwgtaUSo1RVFRIG9ZXiFYg==}
 
   pump@3.0.0:
     resolution: {integrity: sha512-LwZy+p3SFs1Pytd/jYct4wpv49HiYCqd9Rlc5ZVdk0V+8Yzv6jR5Blk3TRmPL1ft69TxP0IMZGJ+WPFU2BFhww==}
@@ -8021,8 +8025,26 @@ snapshots:
     dependencies:
       semver: 7.7.3
 
+  '@octokit/auth-token@6.0.0': {}
+
+  '@octokit/core@7.0.6':
+    dependencies:
+      '@octokit/auth-token': 6.0.0
+      '@octokit/graphql': 9.0.3
+      '@octokit/request': 10.0.7
+      '@octokit/request-error': 7.1.0
+      '@octokit/types': 16.0.0
+      before-after-hook: 4.0.0
+      universal-user-agent: 7.0.3
+
   '@octokit/endpoint@11.0.2':
     dependencies:
+      '@octokit/types': 16.0.0
+      universal-user-agent: 7.0.3
+
+  '@octokit/graphql@9.0.3':
+    dependencies:
+      '@octokit/request': 10.0.7
       '@octokit/types': 16.0.0
       universal-user-agent: 7.0.3
 
@@ -8036,6 +8058,23 @@ snapshots:
       '@octokit/types': 16.0.0
 
   '@octokit/openapi-types@27.0.0': {}
+
+  '@octokit/plugin-paginate-rest@14.0.0(@octokit/core@7.0.6)':
+    dependencies:
+      '@octokit/core': 7.0.6
+      '@octokit/types': 16.0.0
+
+  '@octokit/plugin-rest-endpoint-methods@17.0.0(@octokit/core@7.0.6)':
+    dependencies:
+      '@octokit/core': 7.0.6
+      '@octokit/types': 16.0.0
+
+  '@octokit/plugin-retry@8.0.3(@octokit/core@7.0.6)':
+    dependencies:
+      '@octokit/core': 7.0.6
+      '@octokit/request-error': 7.1.0
+      '@octokit/types': 16.0.0
+      bottleneck: 2.19.5
 
   '@octokit/request-error@7.1.0':
     dependencies:
@@ -8856,14 +8895,6 @@ snapshots:
 
   auto-bind@4.0.0: {}
 
-  axios@1.13.2:
-    dependencies:
-      follow-redirects: 1.15.6
-      form-data: 4.0.4
-      proxy-from-env: 1.1.0
-    transitivePeerDependencies:
-      - debug
-
   babel-jest@30.2.0(@babel/core@7.28.6):
     dependencies:
       '@babel/core': 7.28.6
@@ -8946,6 +8977,8 @@ snapshots:
 
   baseline-browser-mapping@2.9.11: {}
 
+  before-after-hook@4.0.0: {}
+
   bl@4.1.0:
     dependencies:
       buffer: 5.7.1
@@ -8962,6 +8995,8 @@ snapshots:
 
   boolean@3.2.0:
     optional: true
+
+  bottleneck@2.19.5: {}
 
   brace-expansion@1.1.11:
     dependencies:
@@ -9487,10 +9522,6 @@ snapshots:
 
   debounce@2.2.0: {}
 
-  debug@4.3.4:
-    dependencies:
-      ms: 2.1.2
-
   debug@4.4.0:
     dependencies:
       ms: 2.1.3
@@ -9944,8 +9975,6 @@ snapshots:
   flat@5.0.2: {}
 
   focus-visible@5.2.1: {}
-
-  follow-redirects@1.15.6: {}
 
   foreground-child@3.1.1:
     dependencies:
@@ -10892,7 +10921,8 @@ snapshots:
 
   json-schema-traverse@1.0.0: {}
 
-  json-stringify-safe@5.0.1: {}
+  json-stringify-safe@5.0.1:
+    optional: true
 
   json-to-pretty-yaml@1.2.2:
     dependencies:
@@ -11214,8 +11244,6 @@ snapshots:
 
   mkdirp@1.0.4: {}
 
-  ms@2.1.2: {}
-
   ms@2.1.3: {}
 
   mute-stream@2.0.0: {}
@@ -11234,14 +11262,6 @@ snapshots:
     dependencies:
       lower-case: 2.0.2
       tslib: 2.8.1
-
-  nock@13.5.6:
-    dependencies:
-      debug: 4.3.4
-      json-stringify-safe: 5.0.1
-      propagate: 2.0.1
-    transitivePeerDependencies:
-      - supports-color
 
   node-abi@4.24.0:
     dependencies:
@@ -11690,10 +11710,6 @@ snapshots:
   promise@7.3.1:
     dependencies:
       asap: 2.0.6
-
-  propagate@2.0.1: {}
-
-  proxy-from-env@1.1.0: {}
 
   pump@3.0.0:
     dependencies:

@@ -1,6 +1,3 @@
-import nock from 'nock';
-
-import { configureAxiosHttpAdapterForNock } from '../../../__helpers__/test-utils';
 import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
 import { mockRawUser } from '../../api/__mocks__/response-mocks';
@@ -11,16 +8,20 @@ import type {
   GetCommitResponse,
 } from '../../api/types';
 
+import * as apiClient from '../../api/client';
 import { commitHandler } from './commit';
 
 describe('renderer/utils/notifications/handlers/commit.ts', () => {
-  beforeEach(() => {
-    configureAxiosHttpAdapterForNock();
-  });
-
   describe('enrich', () => {
+    const getCommitSpy = jest.spyOn(apiClient, 'getCommit');
+    const getCommitCommentSpy = jest.spyOn(apiClient, 'getCommitComment');
+
     const mockAuthor = mockRawUser('some-author');
     const mockCommenter = mockRawUser('some-commenter');
+
+    beforeEach(() => {
+      jest.clearAllMocks();
+    });
 
     it('get commit commenter', async () => {
       const mockNotification = mockPartialGitifyNotification({
@@ -31,17 +32,13 @@ describe('renderer/utils/notifications/handlers/commit.ts', () => {
           'https://api.github.com/repos/gitify-app/notifications-test/comments/141012658' as Link,
       });
 
-      nock('https://api.github.com')
-        .get(
-          '/repos/gitify-app/notifications-test/commits/d2a86d80e3d24ea9510d5de6c147e53c30f313a8',
-        )
-        .reply(200, { author: mockAuthor });
+      getCommitSpy.mockResolvedValue({
+        author: mockAuthor,
+      } as GetCommitResponse);
 
-      nock('https://api.github.com')
-        .get('/repos/gitify-app/notifications-test/comments/141012658')
-        .reply(200, {
-          user: mockCommenter,
-        } satisfies Partial<GetCommitCommentResponse>);
+      getCommitCommentSpy.mockResolvedValue({
+        user: mockCommenter,
+      } as GetCommitCommentResponse);
 
       const result = await commitHandler.enrich(mockNotification, mockSettings);
 
@@ -64,13 +61,9 @@ describe('renderer/utils/notifications/handlers/commit.ts', () => {
         latestCommentUrl: null,
       });
 
-      nock('https://api.github.com')
-        .get(
-          '/repos/gitify-app/notifications-test/commits/d2a86d80e3d24ea9510d5de6c147e53c30f313a8',
-        )
-        .reply(200, {
-          author: mockAuthor,
-        } satisfies Partial<GetCommitResponse>);
+      getCommitSpy.mockResolvedValue({
+        author: mockAuthor,
+      } as GetCommitResponse);
 
       const result = await commitHandler.enrich(mockNotification, mockSettings);
 
@@ -100,6 +93,7 @@ describe('renderer/utils/notifications/handlers/commit.ts', () => {
 
       // Returns empty object when filtered (no API call made)
       expect(result).toEqual({});
+      expect(getCommitSpy).not.toHaveBeenCalled();
     });
   });
 

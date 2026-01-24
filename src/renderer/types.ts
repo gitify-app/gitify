@@ -37,6 +37,8 @@ export type Status = 'loading' | 'success' | 'error';
 
 export type Percentage = Branded<number, 'Percentage'>;
 
+export type AccountUUID = Branded<string, 'AccountUUID'>;
+
 export interface Account {
   method: AuthMethod;
   platform: PlatformType;

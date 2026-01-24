@@ -62,18 +62,17 @@ export async function generateGitHubWebUrl(
   } else {
     try {
       if (notification.subject.latestCommentUrl) {
-        const response = (
-          await getHtmlUrl(
-            notification.subject.latestCommentUrl,
-            notification.account.token,
-          )
-        ).data;
+        const response = await getHtmlUrl(
+          notification.account,
+          notification.subject.latestCommentUrl,
+        );
 
         url.href = response.html_url;
       } else if (notification.subject.url) {
-        const response = (
-          await getHtmlUrl(notification.subject.url, notification.account.token)
-        ).data;
+        const response = await getHtmlUrl(
+          notification.account,
+          notification.subject.url,
+        );
 
         url.href = response.html_url;
       }

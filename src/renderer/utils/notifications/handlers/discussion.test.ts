@@ -1,6 +1,3 @@
-import nock from 'nock';
-
-import { configureAxiosHttpAdapterForNock } from '../../../__helpers__/test-utils';
 import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
 import {
@@ -18,14 +15,11 @@ import {
   type Link,
 } from '../../../types';
 
+import * as apiClient from '../../api/client';
 import type { FetchDiscussionByNumberQuery } from '../../api/graphql/generated/graphql';
 import { discussionHandler } from './discussion';
 
 describe('renderer/utils/notifications/handlers/discussion.ts', () => {
-  beforeEach(() => {
-    configureAxiosHttpAdapterForNock();
-  });
-
   describe('supportsMergedQueryEnrichment', () => {
     it('should support merge query', () => {
       expect(discussionHandler.supportsMergedQueryEnrichment).toBeTruthy();
@@ -33,6 +27,11 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
   });
 
   describe('enrich', () => {
+    const fetchDiscussionByNumberSpy = jest.spyOn(
+      apiClient,
+      'fetchDiscussionByNumber',
+    );
+
     const mockNotification = mockPartialGitifyNotification({
       title: 'This is a mock discussion',
       type: 'Discussion',
@@ -41,18 +40,18 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
     });
     mockNotification.updatedAt = '2024-01-01T00:00:00Z';
 
+    beforeEach(() => {
+      jest.clearAllMocks();
+    });
+
     it('answered discussion state - no stateReason', async () => {
       const mockDiscussion = mockDiscussionResponseNode({ isAnswered: true });
 
-      nock('https://api.github.com')
-        .post('/graphql')
-        .reply(200, {
-          data: {
-            repository: {
-              discussion: mockDiscussion,
-            },
-          } satisfies FetchDiscussionByNumberQuery,
-        });
+      fetchDiscussionByNumberSpy.mockResolvedValue({
+        repository: {
+          discussion: mockDiscussion,
+        },
+      } satisfies FetchDiscussionByNumberQuery);
 
       const result = await discussionHandler.enrich(
         mockNotification,
@@ -78,15 +77,11 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
     it('open / unanswered discussion - no stateReason', async () => {
       const mockDiscussion = mockDiscussionResponseNode({ isAnswered: false });
 
-      nock('https://api.github.com')
-        .post('/graphql')
-        .reply(200, {
-          data: {
-            repository: {
-              discussion: mockDiscussion,
-            },
-          } satisfies FetchDiscussionByNumberQuery,
-        });
+      fetchDiscussionByNumberSpy.mockResolvedValue({
+        repository: {
+          discussion: mockDiscussion,
+        },
+      } satisfies FetchDiscussionByNumberQuery);
 
       const result = await discussionHandler.enrich(
         mockNotification,
@@ -115,15 +110,11 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         stateReason: 'DUPLICATE',
       });
 
-      nock('https://api.github.com')
-        .post('/graphql')
-        .reply(200, {
-          data: {
-            repository: {
-              discussion: mockDiscussion,
-            },
-          } satisfies FetchDiscussionByNumberQuery,
-        });
+      fetchDiscussionByNumberSpy.mockResolvedValue({
+        repository: {
+          discussion: mockDiscussion,
+        },
+      } satisfies FetchDiscussionByNumberQuery);
 
       const result = await discussionHandler.enrich(
         mockNotification,
@@ -156,15 +147,11 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         ],
       };
 
-      nock('https://api.github.com')
-        .post('/graphql')
-        .reply(200, {
-          data: {
-            repository: {
-              discussion: mockDiscussion,
-            },
-          } satisfies FetchDiscussionByNumberQuery,
-        });
+      fetchDiscussionByNumberSpy.mockResolvedValue({
+        repository: {
+          discussion: mockDiscussion,
+        },
+      } satisfies FetchDiscussionByNumberQuery);
 
       const result = await discussionHandler.enrich(
         mockNotification,
@@ -204,15 +191,11 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         ],
       };
 
-      nock('https://api.github.com')
-        .post('/graphql')
-        .reply(200, {
-          data: {
-            repository: {
-              discussion: mockDiscussion,
-            },
-          } satisfies FetchDiscussionByNumberQuery,
-        });
+      fetchDiscussionByNumberSpy.mockResolvedValue({
+        repository: {
+          discussion: mockDiscussion,
+        },
+      } satisfies FetchDiscussionByNumberQuery);
 
       const result = await discussionHandler.enrich(
         mockNotification,
@@ -258,15 +241,11 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         ],
       };
 
-      nock('https://api.github.com')
-        .post('/graphql')
-        .reply(200, {
-          data: {
-            repository: {
-              discussion: mockDiscussion,
-            },
-          } satisfies FetchDiscussionByNumberQuery,
-        });
+      fetchDiscussionByNumberSpy.mockResolvedValue({
+        repository: {
+          discussion: mockDiscussion,
+        },
+      } satisfies FetchDiscussionByNumberQuery);
 
       const result = await discussionHandler.enrich(
         mockNotification,

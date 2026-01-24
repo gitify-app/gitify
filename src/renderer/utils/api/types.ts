@@ -1,12 +1,10 @@
 import type { components } from '@octokit/openapi-types';
 import type { Endpoints } from '@octokit/types';
 
-import type { Link } from '../../types';
+export type APIClientType = 'rest' | 'graphql';
 
-export interface GitHubRESTError {
-  message: string;
-  documentation_url: Link;
-}
+export type GetAuthenticatedUserResponse =
+  Endpoints['GET /user']['response']['data'];
 
 export type ListNotificationsForAuthenticatedUserResponse =
   Endpoints['GET /notifications']['response']['data'];
@@ -39,13 +37,9 @@ export type GitHubHtmlUrlResponse = {
 
 /**
  * These API endpoints don't return a response body:
- *  - HEAD /notifications
  *  - Endpoints['PATCH /notifications/threads/{thread_id}']['response']['data']
  *  - Endpoints['DELETE /notifications/threads/{thread_id}']['response']['data']
  */
-// biome-ignore lint/suspicious/noConfusingVoidType: This endpoint has no response body
-export type HeadNotificationsResponse = void;
-
 // biome-ignore lint/suspicious/noConfusingVoidType: This endpoint has no response body
 export type MarkNotificationThreadAsReadResponse = void;
 

@@ -40,7 +40,7 @@ class PullRequestHandler extends DefaultHandler {
   ): Promise<Partial<GitifySubject>> {
     const pr =
       fetchedData ??
-      (await fetchPullByNumber(notification)).data.repository?.pullRequest;
+      (await fetchPullByNumber(notification)).repository?.pullRequest;
 
     let prState: GitifyPullRequestState = pr.state;
     if (pr.isDraft) {
