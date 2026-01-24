@@ -34,3 +34,10 @@ exports[` 5`] = `
   "render": [Function],
 }
 `;
+
+exports[` 6`] = `
+{
+  "$$typeof": Symbol(react.forward_ref),
+  "render": [Function],
+}
+`;

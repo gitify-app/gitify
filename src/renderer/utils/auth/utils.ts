@@ -25,7 +25,7 @@ import type { AuthMethod, AuthResponse, LoginOAuthAppOptions } from './types';
 
 import { fetchAuthenticatedUserDetails } from '../api/client';
 import { encryptValue, openExternalLink } from '../comms';
-import { getPlatformFromHostname, isEnterpriseServerHost } from '../helpers';
+import { getPlatformFromHostname } from '../helpers';
 import { rendererLogError, rendererLogInfo, rendererLogWarn } from '../logger';
 
 export function performGitHubOAuth(
@@ -206,12 +206,23 @@ export function extractHostVersion(version: string | null): string {
 }
 
 export function getGitHubAuthBaseUrl(hostname: Hostname): URL {
+  const platform = getPlatformFromHostname(hostname);
   const url = new URL(APPLICATION.GITHUB_BASE_URL);
 
-  if (isEnterpriseServerHost(hostname)) {
-    url.hostname = hostname;
-    url.pathname = '/api/v3/';
+  switch (platform) {
+    case 'GitHub Enterprise Server':
+      url.hostname = hostname;
+      url.pathname = '/api/v3/';
+      break;
+    case 'GitHub Enterprise Cloud with Data Residency':
+      url.hostname = `api.${hostname}`;
+      url.pathname = '/';
+      break;
+    default:
+      url.pathname = '/';
+      break;
   }
+
   return url;
 }
 
