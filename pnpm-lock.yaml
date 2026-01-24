@@ -67,7 +67,7 @@ importers:
         specifier: 8.0.3
         version: 8.0.3(@octokit/core@7.0.6)
       '@octokit/request-error':
-        specifier: ^7.1.0
+        specifier: 7.1.0
         version: 7.1.0
       '@octokit/types':
         specifier: 16.0.0
