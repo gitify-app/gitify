@@ -70,3 +70,11 @@ globalThis.matchMedia = (query: string): MediaQueryList => ({
   removeEventListener: () => {},
   dispatchEvent: () => false,
 });
+
+Object.defineProperty(navigator, 'clipboard', {
+  value: {
+    writeText: jest.fn().mockResolvedValue(undefined),
+    readText: jest.fn().mockResolvedValue(''),
+  },
+  configurable: true,
+});

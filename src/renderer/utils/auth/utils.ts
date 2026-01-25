@@ -5,6 +5,7 @@ import {
   getWebFlowAuthorizationUrl,
 } from '@octokit/oauth-methods';
 import { request } from '@octokit/request';
+import { RequestError } from '@octokit/request-error';
 
 import { format } from 'date-fns';
 import semver from 'semver';
@@ -26,6 +27,7 @@ import type {
 import type {
   AuthMethod,
   AuthResponse,
+  DeviceFlowErrorResponse,
   DeviceFlowSession,
   LoginOAuthDeviceOptions,
   LoginOAuthWebOptions,
@@ -124,12 +126,20 @@ export async function pollGitHubDeviceFlow(
 
     return authentication.token as Token;
   } catch (err) {
-    const errorCode = (err as { response?: { data?: { error?: string } } })
-      ?.response?.data?.error;
+    if (err instanceof RequestError) {
+      const response = err.response.data as DeviceFlowErrorResponse;
+      const errorCode = response.error;
 
-    if (errorCode === 'authorization_pending' || errorCode === 'slow_down') {
-      return null;
+      if (errorCode === 'authorization_pending' || errorCode === 'slow_down') {
+        return null;
+      }
     }
+
+    rendererLogError(
+      'pollGitHubDeviceFlow',
+      'Error exchanging device code',
+      err,
+    );
 
     throw err;
   }
