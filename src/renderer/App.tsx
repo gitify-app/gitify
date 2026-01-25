@@ -12,6 +12,7 @@ import { AppProvider } from './context/App';
 import { AccountsRoute } from './routes/Accounts';
 import { FiltersRoute } from './routes/Filters';
 import { LoginRoute } from './routes/Login';
+import { LoginWithDeviceFlowRoute } from './routes/LoginWithDeviceFlow';
 import { LoginWithOAuthAppRoute } from './routes/LoginWithOAuthApp';
 import { LoginWithPersonalAccessTokenRoute } from './routes/LoginWithPersonalAccessToken';
 import { NotificationsRoute } from './routes/Notifications';
@@ -78,6 +79,10 @@ export const App = () => {
                   path="/accounts"
                 />
                 <Route element={<LoginRoute />} path="/login" />
+                <Route
+                  element={<LoginWithDeviceFlowRoute />}
+                  path="/login-device-flow"
+                />
                 <Route
                   element={<LoginWithPersonalAccessTokenRoute />}
                   path="/login-personal-access-token"

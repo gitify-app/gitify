@@ -25,6 +25,7 @@ import type {
   FilterSettingsValue,
   GitifyError,
   GitifyNotification,
+  Hostname,
   SettingsState,
   SettingsValue,
   Status,
@@ -32,7 +33,8 @@ import type {
 } from '../types';
 import { FetchType } from '../types';
 import type {
-  LoginOAuthAppOptions,
+  DeviceFlowSession,
+  LoginOAuthWebOptions,
   LoginPersonalAccessTokenOptions,
 } from '../utils/auth/types';
 
@@ -43,9 +45,11 @@ import {
   exchangeAuthCodeForAccessToken,
   getAccountUUID,
   hasAccounts,
-  performGitHubOAuth,
+  performGitHubWebOAuth,
+  pollGitHubDeviceFlow,
   refreshAccount,
   removeAccount,
+  startGitHubDeviceFlow,
 } from '../utils/auth/utils';
 import {
   decryptValue,
@@ -75,8 +79,15 @@ import {
 export interface AppContextState {
   auth: AuthState;
   isLoggedIn: boolean;
-  loginWithGitHubApp: () => Promise<void>;
-  loginWithOAuthApp: (data: LoginOAuthAppOptions) => Promise<void>;
+  loginWithDeviceFlowStart: () => Promise<DeviceFlowSession>;
+  loginWithDeviceFlowPoll: (
+    session: DeviceFlowSession,
+  ) => Promise<Token | null>;
+  loginWithDeviceFlowComplete: (
+    token: Token,
+    hostname: Hostname,
+  ) => Promise<void>;
+  loginWithOAuthApp: (data: LoginOAuthWebOptions) => Promise<void>;
   loginWithPersonalAccessToken: (
     data: LoginPersonalAccessTokenOptions,
   ) => Promise<void>;
@@ -397,27 +408,45 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   }, [auth]);
 
   /**
-   * Login with GitHub App.
+   * Login to GitHub Gitify OAuth App.
    *
-   * Note: although we call this "Login with GitHub App", this function actually
-   * authenticates via a predefined "Gitify" GitHub OAuth App.
+   * Initiate device flow session.
    */
-  const loginWithGitHubApp = useCallback(async () => {
-    const { authCode } = await performGitHubOAuth();
-    const token = await exchangeAuthCodeForAccessToken(authCode);
-    const hostname = Constants.DEFAULT_AUTH_OPTIONS.hostname;
+  const loginWithDeviceFlowStart = useCallback(
+    async () => await startGitHubDeviceFlow(),
+    [],
+  );
 
-    const updatedAuth = await addAccount(auth, 'GitHub App', token, hostname);
+  /**
+   * Login to GitHub Gitify OAuth App.
+   *
+   * Poll for device flow session.
+   */
+  const loginWithDeviceFlowPoll = useCallback(
+    async (session: DeviceFlowSession) => await pollGitHubDeviceFlow(session),
+    [],
+  );
 
-    persistAuth(updatedAuth);
-  }, [auth, persistAuth]);
+  /**
+   * Login to GitHub Gitify OAuth App.
+   *
+   * Finalize device flow session.
+   */
+  const loginWithDeviceFlowComplete = useCallback(
+    async (token: Token, hostname: Hostname) => {
+      const updatedAuth = await addAccount(auth, 'GitHub App', token, hostname);
+
+      persistAuth(updatedAuth);
+    },
+    [auth, persistAuth],
+  );
 
   /**
    * Login with custom GitHub OAuth App.
    */
   const loginWithOAuthApp = useCallback(
-    async (data: LoginOAuthAppOptions) => {
-      const { authOptions, authCode } = await performGitHubOAuth(data);
+    async (data: LoginOAuthWebOptions) => {
+      const { authOptions, authCode } = await performGitHubWebOAuth(data);
       const token = await exchangeAuthCodeForAccessToken(authCode, authOptions);
 
       const updatedAuth = await addAccount(
@@ -496,7 +525,9 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     () => ({
       auth,
       isLoggedIn,
-      loginWithGitHubApp,
+      loginWithDeviceFlowStart,
+      loginWithDeviceFlowPoll,
+      loginWithDeviceFlowComplete,
       loginWithOAuthApp,
       loginWithPersonalAccessToken,
       logoutFromAccount,
@@ -526,7 +557,9 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     [
       auth,
       isLoggedIn,
-      loginWithGitHubApp,
+      loginWithDeviceFlowStart,
+      loginWithDeviceFlowPoll,
+      loginWithDeviceFlowComplete,
       loginWithOAuthApp,
       loginWithPersonalAccessToken,
       logoutFromAccount,

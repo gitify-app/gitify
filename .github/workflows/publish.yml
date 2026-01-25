@@ -41,7 +41,6 @@ jobs:
         run: pnpm build
         env:
           OAUTH_CLIENT_ID: ${{ secrets.OAUTH_CLIENT_ID }}
-          OAUTH_CLIENT_SECRET: ${{ secrets.OAUTH_CLIENT_SECRET }}
 
       - name: Package and publish for ${{ matrix.platform }}
         run: ${{ matrix.package-cmd }}

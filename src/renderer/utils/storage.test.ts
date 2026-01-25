@@ -1,8 +1,5 @@
+import { mockGitHubCloudAccount } from '../__mocks__/account-mocks';
 import { mockSettings } from '../__mocks__/state-mocks';
-
-import { Constants } from '../constants';
-
-import type { Token } from '../types';
 
 import { clearState, loadState, saveState } from './storage';
 
@@ -11,30 +8,14 @@ describe('renderer/utils/storage.ts', () => {
     jest.spyOn(Storage.prototype, 'getItem').mockReturnValueOnce(
       JSON.stringify({
         auth: {
-          accounts: [
-            {
-              hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
-              platform: 'GitHub Cloud',
-              method: 'Personal Access Token',
-              token: '123-456' as Token,
-              user: null,
-            },
-          ],
+          accounts: [mockGitHubCloudAccount],
         },
         settings: { theme: 'DARK_DEFAULT' },
       }),
     );
     const result = loadState();
 
-    expect(result.auth.accounts).toEqual([
-      {
-        hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
-        platform: 'GitHub Cloud',
-        method: 'Personal Access Token',
-        token: '123-456' as Token,
-        user: null,
-      },
-    ]);
+    expect(result.auth.accounts).toEqual([mockGitHubCloudAccount]);
     expect(result.settings.theme).toBe('DARK_DEFAULT');
   });
 
@@ -53,15 +34,7 @@ describe('renderer/utils/storage.ts', () => {
 
     saveState({
       auth: {
-        accounts: [
-          {
-            hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
-            platform: 'GitHub Cloud',
-            method: 'Personal Access Token',
-            token: '123-456' as Token,
-            user: null,
-          },
-        ],
+        accounts: [mockGitHubCloudAccount],
       },
       settings: mockSettings,
     });

@@ -38,7 +38,9 @@ function AppContextProvider({ children, value = {} }: AppContextProviderProps) {
       globalError: null,
 
       // Default mock implementations for all required methods
-      loginWithGitHubApp: jest.fn(),
+      loginWithDeviceFlowStart: jest.fn(),
+      loginWithDeviceFlowPoll: jest.fn(),
+      loginWithDeviceFlowComplete: jest.fn(),
       loginWithOAuthApp: jest.fn(),
       loginWithPersonalAccessToken: jest.fn(),
       logoutFromAccount: jest.fn(),

@@ -1,8 +1,11 @@
 import {
+  createDeviceCode,
+  exchangeDeviceCode,
   exchangeWebFlowCode,
   getWebFlowAuthorizationUrl,
 } from '@octokit/oauth-methods';
 import { request } from '@octokit/request';
+import { RequestError } from '@octokit/request-error';
 
 import { format } from 'date-fns';
 import semver from 'semver';
@@ -21,15 +24,21 @@ import type {
   Link,
   Token,
 } from '../../types';
-import type { AuthMethod, AuthResponse, LoginOAuthAppOptions } from './types';
+import type {
+  AuthMethod,
+  AuthResponse,
+  DeviceFlowErrorResponse,
+  DeviceFlowSession,
+  LoginOAuthWebOptions,
+} from './types';
 
 import { fetchAuthenticatedUserDetails } from '../api/client';
 import { encryptValue, openExternalLink } from '../comms';
 import { getPlatformFromHostname } from '../helpers';
 import { rendererLogError, rendererLogInfo, rendererLogWarn } from '../logger';
 
-export function performGitHubOAuth(
-  authOptions: LoginOAuthAppOptions = Constants.DEFAULT_AUTH_OPTIONS,
+export function performGitHubWebOAuth(
+  authOptions: LoginOAuthWebOptions,
 ): Promise<AuthResponse> {
   return new Promise((resolve, reject) => {
     const { url } = getWebFlowAuthorizationUrl({
@@ -53,12 +62,9 @@ export function performGitHubOAuth(
       const errorDescription = url.searchParams.get('error_description');
       const errorUri = url.searchParams.get('error_uri');
 
-      if (code && (type === 'auth' || type === 'oauth')) {
-        const authMethod: AuthMethod =
-          type === 'auth' ? 'GitHub App' : 'OAuth App';
-
+      if (code && type === 'oauth') {
         resolve({
-          authMethod: authMethod,
+          authMethod: 'OAuth App',
           authCode: code as AuthCode,
           authOptions: authOptions,
         });
@@ -81,10 +87,87 @@ export function performGitHubOAuth(
   });
 }
 
+export async function startGitHubDeviceFlow(): Promise<DeviceFlowSession> {
+  const deviceCode = await createDeviceCode({
+    clientType: 'oauth-app' as const,
+    clientId: Constants.OAUTH_DEVICE_FLOW_CLIENT_ID,
+    scopes: Constants.OAUTH_SCOPES.RECOMMENDED,
+    request: request.defaults({
+      baseUrl: getGitHubAuthBaseUrl(Constants.GITHUB_HOSTNAME).toString(),
+    }),
+  });
+
+  return {
+    hostname: Constants.GITHUB_HOSTNAME,
+    clientId: Constants.OAUTH_DEVICE_FLOW_CLIENT_ID,
+    deviceCode: deviceCode.data.device_code,
+    userCode: deviceCode.data.user_code,
+    verificationUri: deviceCode.data.verification_uri,
+    intervalSeconds: deviceCode.data.interval,
+    expiresAt: Date.now() + deviceCode.data.expires_in * 1000,
+  } as DeviceFlowSession;
+}
+
+export async function pollGitHubDeviceFlow(
+  session: DeviceFlowSession,
+): Promise<Token | null> {
+  try {
+    const { authentication } = await exchangeDeviceCode({
+      clientType: 'oauth-app' as const,
+      clientId: session.clientId,
+      code: session.deviceCode,
+      request: request.defaults({
+        baseUrl: getGitHubAuthBaseUrl(session.hostname).toString(),
+      }),
+    });
+
+    return authentication.token as Token;
+  } catch (err) {
+    if (err instanceof RequestError) {
+      const response = err.response.data as DeviceFlowErrorResponse;
+      const errorCode = response.error;
+
+      if (errorCode === 'authorization_pending' || errorCode === 'slow_down') {
+        return null;
+      }
+    }
+
+    rendererLogError(
+      'pollGitHubDeviceFlow',
+      'Error exchanging device code',
+      err,
+    );
+
+    throw err;
+  }
+}
+
+export async function performGitHubDeviceOAuth(): Promise<Token> {
+  const session = await startGitHubDeviceFlow();
+
+  const intervalMs = Math.max(5000, session.intervalSeconds * 1000);
+
+  while (Date.now() < session.expiresAt) {
+    const token = await pollGitHubDeviceFlow(session);
+
+    if (token) {
+      return token;
+    }
+
+    await new Promise((resolve) => setTimeout(resolve, intervalMs));
+  }
+
+  throw new Error('Device code expired before authorization completed');
+}
+
 export async function exchangeAuthCodeForAccessToken(
   authCode: AuthCode,
-  authOptions: LoginOAuthAppOptions = Constants.DEFAULT_AUTH_OPTIONS,
+  authOptions: LoginOAuthWebOptions,
 ): Promise<Token> {
+  if (!authOptions.clientSecret) {
+    throw new Error('clientSecret is required to exchange an auth code');
+  }
+
   const { authentication } = await exchangeWebFlowCode({
     clientType: 'oauth-app',
     clientId: authOptions.clientId,
@@ -305,7 +388,7 @@ export function getAccountUUID(account: Account): AccountUUID {
  *  Return the primary (first) account hostname
  */
 export function getPrimaryAccountHostname(auth: AuthState) {
-  return auth.accounts[0]?.hostname ?? Constants.DEFAULT_AUTH_OPTIONS.hostname;
+  return auth.accounts[0]?.hostname ?? Constants.GITHUB_HOSTNAME;
 }
 
 export function hasAccounts(auth: AuthState) {

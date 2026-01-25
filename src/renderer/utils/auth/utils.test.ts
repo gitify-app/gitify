@@ -14,7 +14,7 @@ import type {
   Link,
   Token,
 } from '../../types';
-import type { AuthMethod } from './types';
+import type { AuthMethod, LoginOAuthWebOptions } from './types';
 
 import * as comms from '../../utils/comms';
 import * as apiClient from '../api/client';
@@ -28,61 +28,92 @@ import {
 
 jest.mock('@octokit/oauth-methods', () => ({
   ...jest.requireActual('@octokit/oauth-methods'),
+  createDeviceCode: jest.fn(),
+  exchangeDeviceCode: jest.fn(),
   exchangeWebFlowCode: jest.fn(),
 }));
 
-import { exchangeWebFlowCode } from '@octokit/oauth-methods';
+import {
+  createDeviceCode,
+  exchangeDeviceCode,
+  exchangeWebFlowCode,
+} from '@octokit/oauth-methods';
 
 import type { GetAuthenticatedUserResponse } from '../api/types';
 
+const createDeviceCodeMock = createDeviceCode as jest.MockedFunction<
+  typeof createDeviceCode
+>;
+const exchangeDeviceCodeMock = exchangeDeviceCode as jest.MockedFunction<
+  typeof exchangeDeviceCode
+>;
 const exchangeWebFlowCodeMock = exchangeWebFlowCode as jest.MockedFunction<
   typeof exchangeWebFlowCode
 >;
 
 describe('renderer/utils/auth/utils.ts', () => {
-  describe('authGitHub', () => {
-    jest.spyOn(logger, 'rendererLogInfo').mockImplementation();
-    const openExternalLinkSpy = jest
-      .spyOn(comms, 'openExternalLink')
-      .mockImplementation();
+  jest.spyOn(logger, 'rendererLogInfo').mockImplementation();
+  const openExternalLinkSpy = jest
+    .spyOn(comms, 'openExternalLink')
+    .mockImplementation();
 
-    afterEach(() => {
-      jest.clearAllMocks();
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  describe('performGitHubDeviceOAuth', () => {
+    it('should authenticate using device flow for GitHub app', async () => {
+      createDeviceCodeMock.mockResolvedValueOnce({
+        data: {
+          device_code: 'device-code',
+          user_code: 'user-code',
+          verification_uri: 'https://github.com/login/device',
+          expires_in: 900,
+          interval: 5,
+        },
+      } as unknown as Awaited<ReturnType<typeof createDeviceCode>>);
+
+      exchangeDeviceCodeMock.mockResolvedValueOnce({
+        authentication: {
+          token: 'device-token',
+        },
+      } as unknown as Awaited<ReturnType<typeof exchangeDeviceCode>>);
+
+      const token = await authUtils.performGitHubDeviceOAuth();
+
+      expect(createDeviceCodeMock).toHaveBeenCalledWith({
+        clientType: 'oauth-app',
+        clientId: 'FAKE_CLIENT_ID_123',
+        scopes: Constants.OAUTH_SCOPES.RECOMMENDED,
+        request: expect.any(Function),
+      });
+
+      expect(exchangeDeviceCodeMock).toHaveBeenCalledWith({
+        clientType: 'oauth-app',
+        clientId: 'FAKE_CLIENT_ID_123',
+        code: 'device-code',
+        request: expect.any(Function),
+      });
+
+      expect(token).toBe('device-token');
     });
+  });
 
-    it('should call performGitHubOAuth using gitify oauth app - success auth flow', async () => {
-      window.gitify.onAuthCallback = jest
-        .fn()
-        .mockImplementation((callback) => {
-          callback('gitify://auth?code=123-456');
-        });
+  describe('performGitHubWebOAuth', () => {
+    const webAuthOptions: LoginOAuthWebOptions = {
+      hostname: 'github.com' as Hostname,
+      clientId: 'FAKE_CLIENT_ID_123' as ClientID,
+      clientSecret: 'FAKE_CLIENT_SECRET_123' as ClientSecret,
+    };
 
-      const res = await authUtils.performGitHubOAuth();
-
-      expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
-      expect(openExternalLinkSpy).toHaveBeenCalledWith(
-        expect.stringContaining(
-          'https://github.com/login/oauth/authorize?allow_signup=false&client_id=FAKE_CLIENT_ID_123&scope=read%3Auser%2Cnotifications%2Crepo',
-        ),
-      );
-
-      expect(window.gitify.onAuthCallback).toHaveBeenCalledTimes(1);
-      expect(window.gitify.onAuthCallback).toHaveBeenCalledWith(
-        expect.any(Function),
-      );
-
-      expect(res.authMethod).toBe('GitHub App');
-      expect(res.authCode).toBe('123-456');
-    });
-
-    it('should call performGitHubOAuth using custom oauth app - success oauth flow', async () => {
+    it('should call performGitHubWebOAuth using custom oauth app - success oauth flow', async () => {
       window.gitify.onAuthCallback = jest
         .fn()
         .mockImplementation((callback) => {
           callback('gitify://oauth?code=123-456');
         });
 
-      const res = await authUtils.performGitHubOAuth({
+      const res = await authUtils.performGitHubWebOAuth({
         clientId: 'BYO_CLIENT_ID' as ClientID,
         clientSecret: 'BYO_CLIENT_SECRET' as ClientSecret,
         hostname: 'my.git.com' as Hostname,
@@ -104,7 +135,7 @@ describe('renderer/utils/auth/utils.ts', () => {
       expect(res.authCode).toBe('123-456');
     });
 
-    it('should call performGitHubOAuth - failure', async () => {
+    it('should call performGitHubWebOAuth - failure', async () => {
       window.gitify.onAuthCallback = jest
         .fn()
         .mockImplementation((callback) => {
@@ -114,7 +145,7 @@ describe('renderer/utils/auth/utils.ts', () => {
         });
 
       await expect(
-        async () => await authUtils.performGitHubOAuth(),
+        async () => await authUtils.performGitHubWebOAuth(webAuthOptions),
       ).rejects.toEqual(
         new Error(
           "Oops! Something went wrong and we couldn't log you in using GitHub. Please try again. Reason: The redirect_uri is missing or invalid. Docs: https://docs.github.com/en/developers/apps/troubleshooting-oauth-errors",
@@ -133,31 +164,40 @@ describe('renderer/utils/auth/utils.ts', () => {
         expect.any(Function),
       );
     });
-  });
 
-  describe('exchangeAuthCodeForAccessToken', () => {
-    const authCode = '123-456' as AuthCode;
+    describe('exchangeAuthCodeForAccessToken', () => {
+      const authCode = '123-456' as AuthCode;
 
-    it('should exchange auth code for access token', async () => {
-      exchangeWebFlowCodeMock.mockResolvedValueOnce({
-        authentication: {
-          token: 'this-is-a-token',
-        },
-      } as any);
+      it('should exchange auth code for access token', async () => {
+        exchangeWebFlowCodeMock.mockResolvedValueOnce({
+          authentication: {
+            token: 'this-is-a-token',
+          },
+        } as unknown as Awaited<ReturnType<typeof exchangeWebFlowCode>>);
 
-      const res = await authUtils.exchangeAuthCodeForAccessToken(
-        authCode,
-        Constants.DEFAULT_AUTH_OPTIONS,
-      );
+        const res = await authUtils.exchangeAuthCodeForAccessToken(authCode, {
+          ...webAuthOptions,
+        });
 
-      expect(exchangeWebFlowCodeMock).toHaveBeenCalledWith({
-        clientType: 'oauth-app',
-        clientId: 'FAKE_CLIENT_ID_123',
-        clientSecret: 'FAKE_CLIENT_SECRET_123',
-        code: '123-456',
-        request: expect.any(Function),
+        expect(exchangeWebFlowCodeMock).toHaveBeenCalledWith({
+          clientType: 'oauth-app',
+          clientId: 'FAKE_CLIENT_ID_123',
+          clientSecret: 'FAKE_CLIENT_SECRET_123',
+          code: '123-456',
+          request: expect.any(Function),
+        });
+        expect(res).toBe('this-is-a-token');
       });
-      expect(res).toBe('this-is-a-token');
+
+      it('should throw when client secret is missing', async () => {
+        await expect(
+          async () =>
+            await authUtils.exchangeAuthCodeForAccessToken(authCode, {
+              ...webAuthOptions,
+              clientSecret: undefined as unknown as ClientSecret,
+            }),
+        ).rejects.toThrow('clientSecret is required to exchange an auth code');
+      });
     });
   });
 
@@ -517,7 +557,7 @@ describe('renderer/utils/auth/utils.ts', () => {
 
     it('should use default hostname if no accounts', () => {
       expect(authUtils.getPrimaryAccountHostname({ accounts: [] })).toBe(
-        Constants.DEFAULT_AUTH_OPTIONS.hostname,
+        Constants.GITHUB_HOSTNAME,
       );
     });
   });

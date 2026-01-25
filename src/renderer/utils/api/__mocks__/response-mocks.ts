@@ -20,7 +20,7 @@ export function mockRawUser(login: string): RawUser {
     login,
     id: 1,
     node_id: 'MDQ6VXNlcjE=',
-    avatar_url: 'https://avatars.githubusercontent.com/u/1?v=4' as Link,
+    avatar_url: 'https://avatars.githubusercontent.com/u/583231?v=4' as Link,
     gravatar_id: '',
     url: `https://api.github.com/users/${login}` as Link,
     html_url: `https://github.com/${login}` as Link,
