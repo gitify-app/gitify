@@ -89,9 +89,8 @@ export function performGitHubWebOAuth(
 
 export async function startGitHubDeviceFlow(): Promise<DeviceFlowSession> {
   const deviceCode = await createDeviceCode({
-    clientType: 'oauth-app' as const,
-    clientId: Constants.OAUTH_DEVICE_FLOW_CLIENT_ID,
-    scopes: Constants.OAUTH_SCOPES.RECOMMENDED,
+    clientType: 'github-app' as const,
+    clientId: Constants.GITHUB_APP_DEVICE_FLOW_CLIENT_ID,
     request: request.defaults({
       baseUrl: getGitHubAuthBaseUrl(Constants.GITHUB_HOSTNAME).toString(),
     }),
@@ -99,7 +98,7 @@ export async function startGitHubDeviceFlow(): Promise<DeviceFlowSession> {
 
   return {
     hostname: Constants.GITHUB_HOSTNAME,
-    clientId: Constants.OAUTH_DEVICE_FLOW_CLIENT_ID,
+    clientId: Constants.GITHUB_APP_DEVICE_FLOW_CLIENT_ID,
     deviceCode: deviceCode.data.device_code,
     userCode: deviceCode.data.user_code,
     verificationUri: deviceCode.data.verification_uri,
@@ -113,7 +112,7 @@ export async function pollGitHubDeviceFlow(
 ): Promise<Token | null> {
   try {
     const { authentication } = await exchangeDeviceCode({
-      clientType: 'oauth-app' as const,
+      clientType: 'github-app',
       clientId: session.clientId,
       code: session.deviceCode,
       request: request.defaults({

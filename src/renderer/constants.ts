@@ -11,7 +11,7 @@ export const Constants = {
 
   GITHUB_HOSTNAME: 'github.com' as Hostname,
 
-  OAUTH_DEVICE_FLOW_CLIENT_ID: process.env.OAUTH_CLIENT_ID as ClientID,
+  GITHUB_APP_DEVICE_FLOW_CLIENT_ID: 'Iv23liTDG8BAP5G5EKJR' as ClientID,
 
   // GitHub Enterprise Cloud with Data Residency uses *.ghe.com domains
   GITHUB_ENTERPRISE_CLOUD_DATA_RESIDENCY_HOSTNAME: 'ghe.com',
