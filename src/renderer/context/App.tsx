@@ -79,9 +79,11 @@ import {
 export interface AppContextState {
   auth: AuthState;
   isLoggedIn: boolean;
-  startGitHubDeviceFlow: () => Promise<DeviceFlowSession>;
-  pollGitHubDeviceFlow: (session: DeviceFlowSession) => Promise<Token | null>;
-  completeGitHubDeviceLogin: (
+  loginWithDeviceFlowStart: () => Promise<DeviceFlowSession>;
+  loginWithDeviceFlowPoll: (
+    session: DeviceFlowSession,
+  ) => Promise<Token | null>;
+  loginWithDeviceFlowComplete: (
     token: Token,
     hostname?: Hostname,
   ) => Promise<void>;
@@ -406,25 +408,31 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   }, [auth]);
 
   /**
-   * Start a GitHub device flow session.
+   * Login to GitHub Gitify OAuth App.
+   *
+   * Initiate device flow session.
    */
-  const startGitHubDeviceFlowWithDefaults = useCallback(
+  const loginWithDeviceFlowStart = useCallback(
     async () => await startGitHubDeviceFlow(),
     [],
   );
 
   /**
-   * Poll GitHub device flow session for completion.
+   * Login to GitHub Gitify OAuth App.
+   *
+   * Poll for device flow session.
    */
-  const pollGitHubDeviceFlowWithSession = useCallback(
+  const loginWithDeviceFlowPoll = useCallback(
     async (session: DeviceFlowSession) => await pollGitHubDeviceFlow(session),
     [],
   );
 
   /**
-   * Persist GitHub app login after device flow completes.
+   * Login to GitHub Gitify OAuth App.
+   *
+   * Finalize device flow session.
    */
-  const completeGitHubDeviceLogin = useCallback(
+  const loginWithDeviceFlowComplete = useCallback(
     async (
       token: Token,
       hostname: Hostname = Constants.OAUTH_DEVICE_FLOW.hostname,
@@ -520,9 +528,9 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     () => ({
       auth,
       isLoggedIn,
-      startGitHubDeviceFlow: startGitHubDeviceFlowWithDefaults,
-      pollGitHubDeviceFlow: pollGitHubDeviceFlowWithSession,
-      completeGitHubDeviceLogin,
+      loginWithDeviceFlowStart,
+      loginWithDeviceFlowPoll,
+      loginWithDeviceFlowComplete,
       loginWithOAuthApp,
       loginWithPersonalAccessToken,
       logoutFromAccount,
@@ -552,9 +560,9 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     [
       auth,
       isLoggedIn,
-      startGitHubDeviceFlowWithDefaults,
-      pollGitHubDeviceFlowWithSession,
-      completeGitHubDeviceLogin,
+      loginWithDeviceFlowStart,
+      loginWithDeviceFlowPoll,
+      loginWithDeviceFlowComplete,
       loginWithOAuthApp,
       loginWithPersonalAccessToken,
       logoutFromAccount,

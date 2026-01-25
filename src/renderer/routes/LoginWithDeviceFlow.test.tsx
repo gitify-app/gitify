@@ -25,7 +25,7 @@ describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {
   });
 
   it('should render and initialize device flow', async () => {
-    const startGitHubDeviceFlowMock = jest.fn().mockResolvedValueOnce({
+    const loginWithDeviceFlowStartMock = jest.fn().mockResolvedValueOnce({
       hostname: 'github.com',
       clientId: 'test-id',
       deviceCode: 'device-code',
@@ -36,10 +36,10 @@ describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {
     });
 
     renderWithAppContext(<LoginWithDeviceFlowRoute />, {
-      startGitHubDeviceFlow: startGitHubDeviceFlowMock,
+      loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
     });
 
-    expect(startGitHubDeviceFlowMock).toHaveBeenCalled();
+    expect(loginWithDeviceFlowStartMock).toHaveBeenCalled();
 
     await screen.findByText(/USER-1234/);
     expect(screen.getByText(/github.com\/login\/device/)).toBeInTheDocument();
@@ -52,7 +52,7 @@ describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {
   });
 
   it('should copy user code to clipboard when clicking copy button', async () => {
-    const startGitHubDeviceFlowMock = jest.fn().mockResolvedValueOnce({
+    const loginWithDeviceFlowStartMock = jest.fn().mockResolvedValueOnce({
       hostname: 'github.com',
       clientId: 'test-id',
       deviceCode: 'device-code',
@@ -63,7 +63,7 @@ describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {
     });
 
     renderWithAppContext(<LoginWithDeviceFlowRoute />, {
-      startGitHubDeviceFlow: startGitHubDeviceFlowMock,
+      loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
     });
 
     await screen.findByText(/USER-1234/);
@@ -77,19 +77,19 @@ describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {
   });
 
   it('should handle device flow errors during initialization', async () => {
-    const startGitHubDeviceFlowMock = jest
+    const loginWithDeviceFlowStartMock = jest
       .fn()
       .mockRejectedValueOnce(new Error('Network error'));
 
     renderWithAppContext(<LoginWithDeviceFlowRoute />, {
-      startGitHubDeviceFlow: startGitHubDeviceFlowMock,
+      loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
     });
 
     await screen.findByText(/Failed to start authentication/);
   });
 
   it('should navigate back on cancel', async () => {
-    const startGitHubDeviceFlowMock = jest.fn().mockResolvedValueOnce({
+    const loginWithDeviceFlowStartMock = jest.fn().mockResolvedValueOnce({
       hostname: 'github.com',
       clientId: 'test-id',
       deviceCode: 'device-code',
@@ -100,7 +100,7 @@ describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {
     });
 
     renderWithAppContext(<LoginWithDeviceFlowRoute />, {
-      startGitHubDeviceFlow: startGitHubDeviceFlowMock,
+      loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
     });
 
     await screen.findByText(/USER-1234/);

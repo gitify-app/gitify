@@ -28,9 +28,9 @@ export const LoginWithDeviceFlowRoute: FC = () => {
   const navigate = useNavigate();
 
   const {
-    startGitHubDeviceFlow,
-    pollGitHubDeviceFlow,
-    completeGitHubDeviceLogin,
+    loginWithDeviceFlowStart,
+    loginWithDeviceFlowPoll,
+    loginWithDeviceFlowComplete,
   } = useAppContext();
 
   const [session, setSession] = useState<DeviceFlowSession | null>(null);
@@ -41,7 +41,7 @@ export const LoginWithDeviceFlowRoute: FC = () => {
   useEffect(() => {
     const initializeDeviceFlow = async () => {
       try {
-        const newSession = await startGitHubDeviceFlow();
+        const newSession = await loginWithDeviceFlowStart();
         setSession(newSession);
 
         // Auto-copy the user code to clipboard
@@ -60,7 +60,7 @@ export const LoginWithDeviceFlowRoute: FC = () => {
     };
 
     initializeDeviceFlow();
-  }, [startGitHubDeviceFlow]);
+  }, [loginWithDeviceFlowStart]);
 
   // Poll for device flow completion
   useEffect(() => {
@@ -77,10 +77,10 @@ export const LoginWithDeviceFlowRoute: FC = () => {
 
       try {
         while (isActive && Date.now() < session.expiresAt) {
-          const token = await pollGitHubDeviceFlow(session);
+          const token = await loginWithDeviceFlowPoll(session);
 
           if (token && isActive) {
-            await completeGitHubDeviceLogin(token, session.hostname);
+            await loginWithDeviceFlowComplete(token, session.hostname);
             navigate(-1);
             return;
           }
@@ -117,7 +117,7 @@ export const LoginWithDeviceFlowRoute: FC = () => {
         clearTimeout(timeoutId);
       }
     };
-  }, [session, pollGitHubDeviceFlow, completeGitHubDeviceLogin]);
+  }, [session, loginWithDeviceFlowPoll, loginWithDeviceFlowComplete]);
 
   const handleCopyUserCode = useCallback(async () => {
     if (session?.userCode) {
