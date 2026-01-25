@@ -43,14 +43,12 @@ import {
   openDeveloperSettings,
   openHost,
 } from '../utils/links';
-import { rendererLogError } from '../utils/logger';
 import { saveState } from '../utils/storage';
 
 export const AccountsRoute: FC = () => {
   const navigate = useNavigate();
 
-  const { auth, settings, loginWithGitHubApp, logoutFromAccount } =
-    useAppContext();
+  const { auth, settings, logoutFromAccount } = useAppContext();
 
   const [loadingStates, setLoadingStates] = useState<Record<string, boolean>>(
     {},
@@ -64,13 +62,13 @@ export const AccountsRoute: FC = () => {
     [logoutFromAccount],
   );
 
-  const setAsPrimaryAccount = useCallback((account: Account) => {
+  const setAsPrimaryAccount = (account: Account) => {
     auth.accounts = [account, ...auth.accounts.filter((a) => a !== account)];
     saveState({ auth, settings });
     navigate('/accounts', { replace: true });
-  }, []);
+  };
 
-  const handleRefresh = useCallback(async (account: Account) => {
+  const handleRefresh = async (account: Account) => {
     const accountUUID = getAccountUUID(account);
 
     setLoadingStates((prev) => ({
@@ -91,23 +89,19 @@ export const AccountsRoute: FC = () => {
         [accountUUID]: false,
       }));
     }, 500);
-  }, []);
+  };
 
-  const loginWithGitHub = useCallback(async () => {
-    try {
-      await loginWithGitHubApp();
-    } catch (err) {
-      rendererLogError('loginWithGitHub', 'failed to login with GitHub', err);
-    }
-  }, []);
+  const loginWithGitHub = async () => {
+    return navigate('/login-device-flow', { replace: true });
+  };
 
-  const loginWithPersonalAccessToken = useCallback(() => {
+  const loginWithPersonalAccessToken = () => {
     return navigate('/login-personal-access-token', { replace: true });
-  }, []);
+  };
 
-  const loginWithOAuthApp = useCallback(() => {
+  const loginWithOAuthApp = () => {
     return navigate('/login-oauth-app', { replace: true });
-  }, []);
+  };
 
   return (
     <Page testId="accounts">

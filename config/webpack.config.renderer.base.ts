@@ -58,7 +58,6 @@ const configuration: webpack.Configuration = {
     // Development Keys - See CONTRIBUTING.md
     new webpack.EnvironmentPlugin({
       OAUTH_CLIENT_ID: 'Ov23liQIkFs5ehQLNzHF',
-      OAUTH_CLIENT_SECRET: '404b80632292e18419dbd2a6ed25976856e95255',
     }),
 
     // Extract CSS into a separate file

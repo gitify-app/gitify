@@ -20,7 +20,7 @@ export interface ParsedCodePart {
 }
 
 export function getPlatformFromHostname(hostname: string): PlatformType {
-  if (hostname.endsWith(Constants.DEFAULT_AUTH_OPTIONS.hostname)) {
+  if (hostname.endsWith(Constants.GITHUB_HOSTNAME)) {
     return 'GitHub Cloud';
   }
 

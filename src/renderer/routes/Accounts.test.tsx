@@ -198,19 +198,19 @@ describe('renderer/routes/Accounts.tsx', () => {
 
   describe('Add new accounts', () => {
     it('should show login with github app', async () => {
-      const loginWithGitHubAppMock = jest.fn();
-
       await act(async () => {
         renderWithAppContext(<AccountsRoute />, {
           auth: { accounts: [mockOAuthAccount] },
-          loginWithGitHubApp: loginWithGitHubAppMock,
         });
       });
 
       await userEvent.click(screen.getByTestId('account-add-new'));
       await userEvent.click(screen.getByTestId('account-add-github'));
 
-      expect(loginWithGitHubAppMock).toHaveBeenCalled();
+      expect(navigateMock).toHaveBeenCalledTimes(1);
+      expect(navigateMock).toHaveBeenCalledWith('/login-device-flow', {
+        replace: true,
+      });
     });
 
     it('should show login with personal access token', async () => {

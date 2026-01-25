@@ -78,3 +78,7 @@ export function updateTrayColor(notificationsLength: number): void {
 export function updateTrayTitle(title: string): void {
   window.gitify.tray.updateTitle(title);
 }
+
+export async function copyToClipboard(text: string): Promise<void> {
+  await navigator.clipboard.writeText(text);
+}

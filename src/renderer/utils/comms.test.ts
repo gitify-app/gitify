@@ -3,6 +3,7 @@ import { mockSettings } from '../__mocks__/state-mocks';
 import { type Link, OpenPreference } from '../types';
 
 import {
+  copyToClipboard,
   decryptValue,
   encryptValue,
   getAppVersion,
@@ -155,5 +156,12 @@ describe('renderer/utils/comms.ts', () => {
       expect(window.gitify.tray.updateTitle).toHaveBeenCalledTimes(1);
       expect(window.gitify.tray.updateTitle).toHaveBeenCalledWith('gitify');
     });
+  });
+
+  it('copy to clipboard', async () => {
+    copyToClipboard('some-value');
+
+    expect(navigator.clipboard.writeText).toHaveBeenCalledTimes(1);
+    expect(navigator.clipboard.writeText).toHaveBeenCalledWith('some-value');
   });
 });
