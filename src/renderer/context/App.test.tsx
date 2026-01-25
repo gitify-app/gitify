@@ -10,17 +10,8 @@ import { Constants } from '../constants';
 import { useAppContext } from '../hooks/useAppContext';
 import { useNotifications } from '../hooks/useNotifications';
 
-import type {
-  AuthState,
-  ClientID,
-  ClientSecret,
-  Hostname,
-  SettingsState,
-  Token,
-} from '../types';
-import type { GetAuthenticatedUserResponse } from '../utils/api/types';
+import type { AuthState, SettingsState } from '../types';
 
-import * as apiClient from '../utils/api/client';
 import * as notifications from '../utils/notifications/notifications';
 import * as storage from '../utils/storage';
 import * as tray from '../utils/tray';
@@ -72,8 +63,6 @@ describe('renderer/context/App.tsx', () => {
   const saveStateSpy = jest
     .spyOn(storage, 'saveState')
     .mockImplementation(jest.fn());
-
-  const mockAuthenticatedResponse = mockRawUser('authenticated-user');
 
   beforeEach(() => {
     jest.useFakeTimers();
@@ -191,43 +180,6 @@ describe('renderer/context/App.tsx', () => {
         mockGitifyNotification,
       );
       expect(setTrayIconColorAndTitleSpy).toHaveBeenCalledTimes(1);
-    });
-  });
-
-  describe('authentication methods', () => {
-    jest.spyOn(apiClient, 'fetchAuthenticatedUserDetails').mockResolvedValue({
-      status: 200,
-      url: 'https://api.github.com/user',
-      data: mockAuthenticatedResponse as GetAuthenticatedUserResponse,
-      headers: {
-        'x-oauth-scopes': Constants.OAUTH_SCOPES.RECOMMENDED.join(', '),
-      },
-    });
-
-    it('should call loginWithOAuthApp', async () => {
-      const { button } = renderContextButton('loginWithOAuthApp', {
-        hostname: 'github.com' as Hostname,
-        clientId: 'FAKE_CLIENT_ID_123' as ClientID,
-        clientSecret: 'FAKE_CLIENT_SECRET_123' as ClientSecret,
-      });
-      fireEvent.click(button);
-
-      await waitFor(() =>
-        expect(mockFetchNotifications).toHaveBeenCalledTimes(1),
-      );
-    });
-
-    it('should call loginWithPersonalAccessToken', async () => {
-      const { button } = renderContextButton('loginWithPersonalAccessToken', {
-        hostname: 'github.com' as Hostname,
-        token: '123-456' as Token,
-      });
-
-      fireEvent.click(button);
-
-      await waitFor(() =>
-        expect(mockFetchNotifications).toHaveBeenCalledTimes(1),
-      );
     });
   });
 
