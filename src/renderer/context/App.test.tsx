@@ -1,17 +1,26 @@
-import { act, fireEvent, waitFor } from '@testing-library/react';
+import { act, waitFor } from '@testing-library/react';
 
 import { renderWithAppContext } from '../__helpers__/test-utils';
+import { mockGitHubCloudAccount } from '../__mocks__/account-mocks';
 import { mockGitifyNotification } from '../__mocks__/notifications-mocks';
 import { mockSettings } from '../__mocks__/state-mocks';
-import { mockRawUser } from '../utils/api/__mocks__/response-mocks';
 
 import { Constants } from '../constants';
 
 import { useAppContext } from '../hooks/useAppContext';
 import { useNotifications } from '../hooks/useNotifications';
 
-import type { AuthState, SettingsState } from '../types';
+import type {
+  AuthState,
+  ClientID,
+  ClientSecret,
+  Hostname,
+  SettingsState,
+  Token,
+} from '../types';
+import type { DeviceFlowSession } from '../utils/auth/types';
 
+import * as authUtils from '../utils/auth/utils';
 import * as notifications from '../utils/notifications/notifications';
 import * as storage from '../utils/storage';
 import * as tray from '../utils/tray';
@@ -20,45 +29,30 @@ import { defaultSettings } from './defaults';
 
 jest.mock('../hooks/useNotifications');
 
-// Helper to render a button that calls a context method when clicked
-const renderContextButton = (
-  contextMethodName: keyof AppContextState,
-  ...args: unknown[]
-) => {
-  const TestComponent = () => {
-    const context = useAppContext();
+// Helper to render the context
+const renderWithContext = () => {
+  let context!: AppContextState;
 
-    const method = context[contextMethodName];
-    return (
-      <button
-        data-testid="context-method-button"
-        onClick={() => {
-          if (typeof method === 'function') {
-            (method as (...args: unknown[]) => void)(...args);
-          }
-        }}
-        type="button"
-      >
-        {String(contextMethodName)}
-      </button>
-    );
+  const CaptureContext = () => {
+    context = useAppContext();
+    return null;
   };
 
-  const result = renderWithAppContext(
+  renderWithAppContext(
     <AppProvider>
-      <TestComponent />
+      <CaptureContext />
     </AppProvider>,
   );
 
-  const button = result.getByTestId('context-method-button');
-  return { ...result, button };
+  return () => context;
 };
 
 describe('renderer/context/App.tsx', () => {
-  const mockFetchNotifications = jest.fn();
+  const fetchNotificationsMock = jest.fn();
   const markNotificationsAsReadMock = jest.fn();
   const markNotificationsAsDoneMock = jest.fn();
   const unsubscribeNotificationMock = jest.fn();
+  const removeAccountNotificationsMock = jest.fn();
 
   const saveStateSpy = jest
     .spyOn(storage, 'saveState')
@@ -67,10 +61,11 @@ describe('renderer/context/App.tsx', () => {
   beforeEach(() => {
     jest.useFakeTimers();
     (useNotifications as jest.Mock).mockReturnValue({
-      fetchNotifications: mockFetchNotifications,
+      fetchNotifications: fetchNotificationsMock,
       markNotificationsAsRead: markNotificationsAsReadMock,
       markNotificationsAsDone: markNotificationsAsDoneMock,
       unsubscribeNotification: unsubscribeNotificationMock,
+      removeAccountNotifications: removeAccountNotificationsMock,
     });
   });
 
@@ -101,7 +96,7 @@ describe('renderer/context/App.tsx', () => {
       renderWithAppContext(<AppProvider>{null}</AppProvider>);
 
       await waitFor(() =>
-        expect(mockFetchNotifications).toHaveBeenCalledTimes(1),
+        expect(fetchNotificationsMock).toHaveBeenCalledTimes(1),
       );
 
       act(() => {
@@ -109,39 +104,40 @@ describe('renderer/context/App.tsx', () => {
           Constants.DEFAULT_FETCH_NOTIFICATIONS_INTERVAL_MS,
         );
       });
-      expect(mockFetchNotifications).toHaveBeenCalledTimes(2);
+      expect(fetchNotificationsMock).toHaveBeenCalledTimes(2);
 
       act(() => {
         jest.advanceTimersByTime(
           Constants.DEFAULT_FETCH_NOTIFICATIONS_INTERVAL_MS,
         );
       });
-      expect(mockFetchNotifications).toHaveBeenCalledTimes(3);
+      expect(fetchNotificationsMock).toHaveBeenCalledTimes(3);
 
       act(() => {
         jest.advanceTimersByTime(
           Constants.DEFAULT_FETCH_NOTIFICATIONS_INTERVAL_MS,
         );
       });
-      expect(mockFetchNotifications).toHaveBeenCalledTimes(4);
+      expect(fetchNotificationsMock).toHaveBeenCalledTimes(4);
     });
 
     it('should call fetchNotifications', async () => {
-      const { button } = renderContextButton('fetchNotifications');
+      const getContext = renderWithContext();
+      fetchNotificationsMock.mockReset();
 
-      mockFetchNotifications.mockReset();
+      act(() => {
+        getContext().fetchNotifications();
+      });
 
-      fireEvent.click(button);
-
-      expect(mockFetchNotifications).toHaveBeenCalledTimes(1);
+      expect(fetchNotificationsMock).toHaveBeenCalledTimes(1);
     });
 
     it('should call markNotificationsAsRead', async () => {
-      const { button } = renderContextButton('markNotificationsAsRead', [
-        mockGitifyNotification,
-      ]);
+      const getContext = renderWithContext();
 
-      fireEvent.click(button);
+      act(() => {
+        getContext().markNotificationsAsRead([mockGitifyNotification]);
+      });
 
       expect(markNotificationsAsReadMock).toHaveBeenCalledTimes(1);
       expect(markNotificationsAsReadMock).toHaveBeenCalledWith(
@@ -152,11 +148,11 @@ describe('renderer/context/App.tsx', () => {
     });
 
     it('should call markNotificationsAsDone', async () => {
-      const { button } = renderContextButton('markNotificationsAsDone', [
-        mockGitifyNotification,
-      ]);
+      const getContext = renderWithContext();
 
-      fireEvent.click(button);
+      act(() => {
+        getContext().markNotificationsAsDone([mockGitifyNotification]);
+      });
 
       expect(markNotificationsAsDoneMock).toHaveBeenCalledTimes(1);
       expect(markNotificationsAsDoneMock).toHaveBeenCalledWith(
@@ -167,12 +163,11 @@ describe('renderer/context/App.tsx', () => {
     });
 
     it('should call unsubscribeNotification', async () => {
-      const { button } = renderContextButton(
-        'unsubscribeNotification',
-        mockGitifyNotification,
-      );
+      const getContext = renderWithContext();
 
-      fireEvent.click(button);
+      act(() => {
+        getContext().unsubscribeNotification(mockGitifyNotification);
+      });
 
       expect(unsubscribeNotificationMock).toHaveBeenCalledTimes(1);
       expect(unsubscribeNotificationMock).toHaveBeenCalledWith(
@@ -189,13 +184,11 @@ describe('renderer/context/App.tsx', () => {
       .mockImplementation(jest.fn());
 
     it('should call updateSetting', async () => {
-      const { button } = renderContextButton(
-        'updateSetting',
-        'participating',
-        true,
-      );
+      const getContext = renderWithContext();
 
-      fireEvent.click(button);
+      act(() => {
+        getContext().updateSetting('participating', true);
+      });
 
       expect(saveStateSpy).toHaveBeenCalledWith({
         auth: {
@@ -209,9 +202,11 @@ describe('renderer/context/App.tsx', () => {
     });
 
     it('should call resetSettings', async () => {
-      const { button } = renderContextButton('resetSettings');
+      const getContext = renderWithContext();
 
-      fireEvent.click(button);
+      act(() => {
+        getContext().resetSettings();
+      });
 
       expect(saveStateSpy).toHaveBeenCalledWith({
         auth: {
@@ -224,14 +219,11 @@ describe('renderer/context/App.tsx', () => {
 
   describe('filter methods', () => {
     it('should call updateFilter - checked', async () => {
-      const { button } = renderContextButton(
-        'updateFilter',
-        'filterReasons',
-        'assign',
-        true,
-      );
+      const getContext = renderWithContext();
 
-      fireEvent.click(button);
+      act(() => {
+        getContext().updateFilter('filterReasons', 'assign', true);
+      });
 
       expect(saveStateSpy).toHaveBeenCalledWith({
         auth: {
@@ -245,14 +237,11 @@ describe('renderer/context/App.tsx', () => {
     });
 
     it('should call updateFilter - unchecked', async () => {
-      const { button } = renderContextButton(
-        'updateFilter',
-        'filterReasons',
-        'assign',
-        false,
-      );
+      const getContext = renderWithContext();
 
-      fireEvent.click(button);
+      act(() => {
+        getContext().updateFilter('filterReasons', 'assign', false);
+      });
 
       expect(saveStateSpy).toHaveBeenCalledWith({
         auth: {
@@ -266,9 +255,11 @@ describe('renderer/context/App.tsx', () => {
     });
 
     it('should clear filters back to default', async () => {
-      const { button } = renderContextButton('clearFilters');
+      const getContext = renderWithContext();
 
-      fireEvent.click(button);
+      act(() => {
+        getContext().clearFilters();
+      });
 
       expect(saveStateSpy).toHaveBeenCalledWith({
         auth: {
@@ -284,6 +275,98 @@ describe('renderer/context/App.tsx', () => {
           filterReasons: defaultSettings.filterReasons,
         },
       });
+    });
+  });
+
+  describe('authentication functions', () => {
+    const addAccountSpy = jest
+      .spyOn(authUtils, 'addAccount')
+      .mockImplementation(jest.fn());
+    const removeAccountSpy = jest.spyOn(authUtils, 'removeAccount');
+
+    beforeEach(() => {
+      jest.clearAllMocks();
+    });
+
+    it('loginWithDeviceFlowStart calls startGitHubDeviceFlow', async () => {
+      const startGitHubDeviceFlowSpy = jest
+        .spyOn(authUtils, 'startGitHubDeviceFlow')
+        .mockImplementation(jest.fn());
+
+      const getContext = renderWithContext();
+
+      act(() => {
+        getContext().loginWithDeviceFlowStart();
+      });
+
+      expect(startGitHubDeviceFlowSpy).toHaveBeenCalled();
+    });
+
+    it('loginWithDeviceFlowPoll calls pollGitHubDeviceFlow', async () => {
+      const pollGitHubDeviceFlowSpy = jest
+        .spyOn(authUtils, 'pollGitHubDeviceFlow')
+        .mockImplementation(jest.fn());
+
+      const getContext = renderWithContext();
+
+      act(() => {
+        getContext().loginWithDeviceFlowPoll(
+          'session' as unknown as DeviceFlowSession,
+        );
+      });
+
+      expect(pollGitHubDeviceFlowSpy).toHaveBeenCalledWith('session');
+    });
+
+    it('loginWithDeviceFlowComplete calls addAccount', async () => {
+      const getContext = renderWithContext();
+
+      act(() => {
+        getContext().loginWithDeviceFlowComplete(
+          'token' as Token,
+          'github.com' as Hostname,
+        );
+      });
+
+      expect(addAccountSpy).toHaveBeenCalledWith(
+        expect.anything(),
+        'GitHub App',
+        'token',
+        'github.com',
+      );
+    });
+
+    it('loginWithOAuthApp calls performGitHubWebOAuth', async () => {
+      const performGitHubWebOAuthSpy = jest.spyOn(
+        authUtils,
+        'performGitHubWebOAuth',
+      );
+
+      const getContext = renderWithContext();
+
+      act(() => {
+        getContext().loginWithOAuthApp({
+          clientId: 'id' as ClientID,
+          clientSecret: 'secret' as ClientSecret,
+          hostname: 'github.com' as Hostname,
+        });
+      });
+
+      expect(performGitHubWebOAuthSpy).toHaveBeenCalled();
+    });
+
+    it('logoutFromAccount calls removeAccountNotifications, removeAccount', async () => {
+      const getContext = renderWithContext();
+
+      getContext().logoutFromAccount(mockGitHubCloudAccount);
+
+      expect(removeAccountNotificationsMock).toHaveBeenCalledWith(
+        mockGitHubCloudAccount,
+      );
+      expect(removeAccountSpy).toHaveBeenCalledWith(
+        expect.anything(),
+        mockGitHubCloudAccount,
+      );
     });
   });
 });
