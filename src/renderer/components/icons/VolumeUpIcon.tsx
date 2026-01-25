@@ -4,7 +4,7 @@ export const VolumeUpIcon: FC = () => (
   <svg
     aria-hidden="true"
     aria-label="Volume Up Icon"
-    className="size-2"
+    className="size-4"
     fill="currentColor"
     height="24"
     viewBox="0 0 24 24"
