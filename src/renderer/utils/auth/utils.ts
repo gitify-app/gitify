@@ -61,12 +61,9 @@ export function performGitHubWebOAuth(
       const errorDescription = url.searchParams.get('error_description');
       const errorUri = url.searchParams.get('error_uri');
 
-      if (code && (type === 'auth' || type === 'oauth')) {
-        const authMethod: AuthMethod =
-          type === 'auth' ? 'GitHub App' : 'OAuth App';
-
+      if (code && type === 'oauth') {
         resolve({
-          authMethod: authMethod,
+          authMethod: 'OAuth App',
           authCode: code as AuthCode,
           authOptions: authOptions,
         });

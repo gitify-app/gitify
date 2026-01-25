@@ -106,31 +106,6 @@ describe('renderer/utils/auth/utils.ts', () => {
       clientSecret: 'FAKE_CLIENT_SECRET_123' as ClientSecret,
     };
 
-    it('should call performGitHubWebOAuth using gitify oauth app - success auth flow', async () => {
-      window.gitify.onAuthCallback = jest
-        .fn()
-        .mockImplementation((callback) => {
-          callback('gitify://auth?code=123-456');
-        });
-
-      const res = await authUtils.performGitHubWebOAuth(webAuthOptions);
-
-      expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
-      expect(openExternalLinkSpy).toHaveBeenCalledWith(
-        expect.stringContaining(
-          'https://github.com/login/oauth/authorize?allow_signup=false&client_id=FAKE_CLIENT_ID_123&scope=read%3Auser%2Cnotifications%2Crepo',
-        ),
-      );
-
-      expect(window.gitify.onAuthCallback).toHaveBeenCalledTimes(1);
-      expect(window.gitify.onAuthCallback).toHaveBeenCalledWith(
-        expect.any(Function),
-      );
-
-      expect(res.authMethod).toBe('GitHub App');
-      expect(res.authCode).toBe('123-456');
-    });
-
     it('should call performGitHubWebOAuth using custom oauth app - success oauth flow', async () => {
       window.gitify.onAuthCallback = jest
         .fn()
