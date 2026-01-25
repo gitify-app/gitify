@@ -14,7 +14,6 @@ import type {
   AuthState,
   ClientID,
   ClientSecret,
-  Hostname,
   SettingsState,
   Token,
 } from '../types';
@@ -324,7 +323,7 @@ describe('renderer/context/App.tsx', () => {
       act(() => {
         getContext().loginWithDeviceFlowComplete(
           'token' as Token,
-          'github.com' as Hostname,
+          Constants.GITHUB_HOSTNAME,
         );
       });
 
@@ -348,7 +347,7 @@ describe('renderer/context/App.tsx', () => {
         getContext().loginWithOAuthApp({
           clientId: 'id' as ClientID,
           clientSecret: 'secret' as ClientSecret,
-          hostname: 'github.com' as Hostname,
+          hostname: Constants.GITHUB_HOSTNAME,
         });
       });
 

@@ -29,7 +29,6 @@ import type {
   AuthResponse,
   DeviceFlowErrorResponse,
   DeviceFlowSession,
-  LoginOAuthDeviceOptions,
   LoginOAuthWebOptions,
 } from './types';
 
@@ -88,21 +87,19 @@ export function performGitHubWebOAuth(
   });
 }
 
-export async function startGitHubDeviceFlow(
-  authOptions: LoginOAuthDeviceOptions = Constants.OAUTH_DEVICE_FLOW,
-): Promise<DeviceFlowSession> {
+export async function startGitHubDeviceFlow(): Promise<DeviceFlowSession> {
   const deviceCode = await createDeviceCode({
     clientType: 'oauth-app' as const,
-    clientId: authOptions.clientId,
+    clientId: Constants.OAUTH_DEVICE_FLOW_CLIENT_ID,
     scopes: Constants.OAUTH_SCOPES.RECOMMENDED,
     request: request.defaults({
-      baseUrl: getGitHubAuthBaseUrl(authOptions.hostname).toString(),
+      baseUrl: getGitHubAuthBaseUrl(Constants.GITHUB_HOSTNAME).toString(),
     }),
   });
 
   return {
-    hostname: authOptions.hostname,
-    clientId: authOptions.clientId,
+    hostname: Constants.GITHUB_HOSTNAME,
+    clientId: Constants.OAUTH_DEVICE_FLOW_CLIENT_ID,
     deviceCode: deviceCode.data.device_code,
     userCode: deviceCode.data.user_code,
     verificationUri: deviceCode.data.verification_uri,
@@ -391,7 +388,7 @@ export function getAccountUUID(account: Account): AccountUUID {
  *  Return the primary (first) account hostname
  */
 export function getPrimaryAccountHostname(auth: AuthState) {
-  return auth.accounts[0]?.hostname ?? Constants.OAUTH_DEVICE_FLOW.hostname;
+  return auth.accounts[0]?.hostname ?? Constants.GITHUB_HOSTNAME;
 }
 
 export function hasAccounts(auth: AuthState) {

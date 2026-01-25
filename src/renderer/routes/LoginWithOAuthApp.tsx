@@ -85,7 +85,7 @@ export const LoginWithOAuthAppRoute: FC = () => {
   const [isVerifyingCredentials, setIsVerifyingCredentials] = useState(false);
 
   const [formData, setFormData] = useState({
-    hostname: 'github.com' as Hostname,
+    hostname: Constants.GITHUB_HOSTNAME,
     clientId: '' as ClientID,
     clientSecret: '' as ClientSecret,
   } as IFormData);

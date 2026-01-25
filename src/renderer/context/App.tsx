@@ -85,7 +85,7 @@ export interface AppContextState {
   ) => Promise<Token | null>;
   loginWithDeviceFlowComplete: (
     token: Token,
-    hostname?: Hostname,
+    hostname: Hostname,
   ) => Promise<void>;
   loginWithOAuthApp: (data: LoginOAuthWebOptions) => Promise<void>;
   loginWithPersonalAccessToken: (
@@ -433,10 +433,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
    * Finalize device flow session.
    */
   const loginWithDeviceFlowComplete = useCallback(
-    async (
-      token: Token,
-      hostname: Hostname = Constants.OAUTH_DEVICE_FLOW.hostname,
-    ) => {
+    async (token: Token, hostname: Hostname) => {
       const updatedAuth = await addAccount(auth, 'GitHub App', token, hostname);
 
       persistAuth(updatedAuth);

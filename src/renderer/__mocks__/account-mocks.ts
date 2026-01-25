@@ -14,7 +14,7 @@ export const mockGitHubAppAccount: Account = {
   platform: 'GitHub Cloud',
   method: 'GitHub App',
   token: 'token-987654321' as Token,
-  hostname: Constants.OAUTH_DEVICE_FLOW.hostname,
+  hostname: Constants.GITHUB_HOSTNAME,
   user: mockGitifyUser,
   hasRequiredScopes: true,
 };
@@ -23,7 +23,7 @@ export const mockPersonalAccessTokenAccount: Account = {
   platform: 'GitHub Cloud',
   method: 'Personal Access Token',
   token: 'token-123-456' as Token,
-  hostname: 'github.com' as Hostname,
+  hostname: Constants.GITHUB_HOSTNAME,
   user: mockGitifyUser,
   hasRequiredScopes: true,
 };
@@ -41,7 +41,7 @@ export const mockGitHubCloudAccount: Account = {
   platform: 'GitHub Cloud',
   method: 'Personal Access Token',
   token: 'token-123-456' as Token,
-  hostname: 'github.com' as Hostname,
+  hostname: Constants.GITHUB_HOSTNAME,
   user: mockGitifyUser,
   version: 'latest',
   hasRequiredScopes: true,

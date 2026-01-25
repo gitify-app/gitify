@@ -557,7 +557,7 @@ describe('renderer/utils/auth/utils.ts', () => {
 
     it('should use default hostname if no accounts', () => {
       expect(authUtils.getPrimaryAccountHostname({ accounts: [] })).toBe(
-        Constants.OAUTH_DEVICE_FLOW.hostname,
+        Constants.GITHUB_HOSTNAME,
       );
     });
   });

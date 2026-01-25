@@ -1,5 +1,4 @@
 import type { ClientID, Hostname, Link } from './types';
-import type { LoginOAuthDeviceOptions } from './utils/auth/types';
 
 export const Constants = {
   STORAGE_KEY: 'gitify-storage',
@@ -10,10 +9,9 @@ export const Constants = {
     ALTERNATE: ['read:user', 'notifications', 'public_repo'],
   },
 
-  OAUTH_DEVICE_FLOW: {
-    hostname: 'github.com' as Hostname,
-    clientId: process.env.OAUTH_CLIENT_ID as ClientID,
-  } satisfies LoginOAuthDeviceOptions,
+  GITHUB_HOSTNAME: 'github.com' as Hostname,
+
+  OAUTH_DEVICE_FLOW_CLIENT_ID: process.env.OAUTH_CLIENT_ID as ClientID,
 
   // GitHub Enterprise Cloud with Data Residency uses *.ghe.com domains
   GITHUB_ENTERPRISE_CLOUD_DATA_RESIDENCY_HOSTNAME: 'ghe.com',

@@ -78,7 +78,7 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
   const [isVerifyingCredentials, setIsVerifyingCredentials] = useState(false);
 
   const [formData, setFormData] = useState({
-    hostname: 'github.com' as Hostname,
+    hostname: Constants.GITHUB_HOSTNAME,
     token: '' as Token,
   } as IFormData);
 

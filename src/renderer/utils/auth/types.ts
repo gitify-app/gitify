@@ -13,11 +13,6 @@ export type PlatformType =
   | 'GitHub Enterprise Server'
   | 'GitHub Enterprise Cloud with Data Residency';
 
-export interface LoginOAuthDeviceOptions {
-  hostname: Hostname;
-  clientId: ClientID;
-}
-
 export interface LoginOAuthWebOptions {
   hostname: Hostname;
   clientId: ClientID;

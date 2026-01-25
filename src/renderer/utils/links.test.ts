@@ -4,7 +4,7 @@ import { mockGitifyNotificationUser } from '../__mocks__/user-mocks';
 
 import { Constants } from '../constants';
 
-import type { GitifyRepository, Hostname, Link } from '../types';
+import type { GitifyRepository, Link } from '../types';
 
 import * as authUtils from './auth/utils';
 import * as comms from './comms';
@@ -83,7 +83,7 @@ describe('renderer/utils/links.ts', () => {
   });
 
   it('openHost', () => {
-    openHost('github.com' as Hostname);
+    openHost(Constants.GITHUB_HOSTNAME);
 
     expect(openExternalLinkSpy).toHaveBeenCalledWith('https://github.com');
   });
