@@ -83,8 +83,7 @@ export async function createOctokitClientUncached(
     baseUrl: baseUrl,
     userAgent: userAgent,
     retry: {
-      doNotRetry: ['400', '401', '403', '404', '422'],
-      retries: 3,
+      retries: 1,
     },
   });
 }
