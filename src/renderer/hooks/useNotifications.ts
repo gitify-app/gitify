@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 
 import type {
   Account,
@@ -94,8 +94,14 @@ export const useNotifications = (): NotificationsState => {
     [notifications],
   );
 
+  const isFetchingRef = useRef(false);
   const fetchNotifications = useCallback(
     async (state: GitifyState) => {
+      if (isFetchingRef.current) {
+        // Prevent overlapping fetches
+        return;
+      }
+      isFetchingRef.current = true;
       setStatus('loading');
       try {
         const previousNotifications = notifications;
