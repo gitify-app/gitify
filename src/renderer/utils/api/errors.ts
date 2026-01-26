@@ -46,8 +46,7 @@ export function determineFailureType(
       }
     }
 
-    // Network-like errors for RequestError (no status or status 0)
-    if (status === 0 || status === undefined) {
+    if (status === 500) {
       return Errors.NETWORK;
     }
   }
