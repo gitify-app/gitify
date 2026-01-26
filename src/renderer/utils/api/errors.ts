@@ -29,25 +29,26 @@ export function determineFailureType(
   if (err instanceof RequestError) {
     const status = err.status;
 
-    if (status === 401) {
-      return Errors.BAD_CREDENTIALS;
-    }
+    switch (status) {
+      case 401:
+        return Errors.BAD_CREDENTIALS;
+      case 403:
+        if (message.includes("Missing the 'notifications' scope")) {
+          return Errors.MISSING_SCOPES;
+        }
 
-    if (status === 403) {
-      if (message.includes("Missing the 'notifications' scope")) {
-        return Errors.MISSING_SCOPES;
-      }
+        if (
+          message.includes('API rate limit exceeded') ||
+          message.includes('You have exceeded a secondary rate limit')
+        ) {
+          return Errors.RATE_LIMITED;
+        }
 
-      if (
-        message.includes('API rate limit exceeded') ||
-        message.includes('You have exceeded a secondary rate limit')
-      ) {
-        return Errors.RATE_LIMITED;
-      }
-    }
-
-    if (status === 500) {
-      return Errors.NETWORK;
+        break;
+      case 500:
+        return Errors.NETWORK;
+      default:
+        break;
     }
   }
 
