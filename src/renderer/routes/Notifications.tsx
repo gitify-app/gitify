@@ -1,4 +1,4 @@
-import { type FC, useMemo } from 'react';
+import { type FC, useMemo, useRef } from 'react';
 
 import { useAppContext } from '../hooks/useAppContext';
 
@@ -14,28 +14,57 @@ export const NotificationsRoute: FC = () => {
   const { notifications, status, globalError, settings, hasNotifications } =
     useAppContext();
 
+  // Store previous successful state
+  const prevStateRef = useRef({
+    notifications,
+    status,
+    globalError,
+    hasNotifications,
+  });
+
+  // Update ref only if not loading
+  if (status !== 'loading') {
+    prevStateRef.current = {
+      notifications,
+      status,
+      globalError,
+      hasNotifications,
+    };
+  }
+
+  // Use previous state if loading
+  const displayState =
+    status === 'loading'
+      ? prevStateRef.current
+      : {
+          notifications,
+          status,
+          globalError,
+          hasNotifications,
+        };
+
   const hasMultipleAccounts = useMemo(
-    () => notifications.length > 1,
-    [notifications],
+    () => displayState.notifications.length > 1,
+    [displayState.notifications],
   );
 
   const hasNoAccountErrors = useMemo(
-    () => notifications.every((account) => account.error === null),
-    [notifications],
+    () => displayState.notifications.every((account) => account.error === null),
+    [displayState.notifications],
   );
 
-  if (status === 'error') {
-    return <Oops error={globalError} />;
+  if (displayState.status === 'error') {
+    return <Oops error={displayState.globalError} />;
   }
 
-  if (!hasNotifications && hasNoAccountErrors) {
+  if (!displayState.hasNotifications && hasNoAccountErrors) {
     return <AllRead />;
   }
 
   return (
     <Page testId="notifications">
       <Contents paddingHorizontal={false}>
-        {notifications.map((accountNotification) => {
+        {displayState.notifications.map((accountNotification) => {
           return (
             <AccountNotifications
               account={accountNotification.account}

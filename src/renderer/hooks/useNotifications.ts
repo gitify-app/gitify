@@ -97,41 +97,44 @@ export const useNotifications = (): NotificationsState => {
   const fetchNotifications = useCallback(
     async (state: GitifyState) => {
       setStatus('loading');
-      setGlobalError(null);
+      try {
+        const previousNotifications = notifications;
+        const fetchedNotifications = await getAllNotifications(state);
+        setNotifications(fetchedNotifications);
 
-      const previousNotifications = notifications;
-      const fetchedNotifications = await getAllNotifications(state);
-      setNotifications(fetchedNotifications);
+        // Set Global Error if all accounts have the same error
+        const allAccountsHaveErrors =
+          doesAllAccountsHaveErrors(fetchedNotifications);
+        const allAccountErrorsAreSame =
+          areAllAccountErrorsSame(fetchedNotifications);
 
-      // Set Global Error if all accounts have the same error
-      const allAccountsHaveErrors =
-        doesAllAccountsHaveErrors(fetchedNotifications);
-      const allAccountErrorsAreSame =
-        areAllAccountErrorsSame(fetchedNotifications);
-
-      if (allAccountsHaveErrors) {
-        const accountError = fetchedNotifications[0].error;
-        setStatus('error');
-        setGlobalError(allAccountErrorsAreSame ? accountError : null);
-        return;
-      }
-
-      const diffNotifications = getNewNotifications(
-        previousNotifications,
-        fetchedNotifications,
-      );
-
-      if (diffNotifications.length > 0) {
-        if (state.settings.playSound) {
-          raiseSoundNotification(state.settings.notificationVolume);
+        if (allAccountsHaveErrors) {
+          const accountError = fetchedNotifications[0].error;
+          setStatus('error');
+          setGlobalError(allAccountErrorsAreSame ? accountError : null);
+          return;
         }
 
-        if (state.settings.showNotifications) {
-          raiseNativeNotification(diffNotifications);
-        }
-      }
+        const diffNotifications = getNewNotifications(
+          previousNotifications,
+          fetchedNotifications,
+        );
 
-      setStatus('success');
+        if (diffNotifications.length > 0) {
+          if (state.settings.playSound) {
+            raiseSoundNotification(state.settings.notificationVolume);
+          }
+
+          if (state.settings.showNotifications) {
+            raiseNativeNotification(diffNotifications);
+          }
+        }
+
+        setStatus('success');
+        setGlobalError(null);
+      } finally {
+        isFetchingRef.current = false;
+      }
     },
     [notifications],
   );
