@@ -83,7 +83,7 @@ describe('renderer/utils/api/errors.ts', () => {
       });
 
       it('network error - no status', () => {
-        const mockError = new RequestError('Network error', 0, {
+        const mockError = new RequestError('Network error', 500, {
           request: {
             method: 'GET',
             url: 'https://api.github.com',
@@ -94,8 +94,8 @@ describe('renderer/utils/api/errors.ts', () => {
         expect(result).toBe(Errors.NETWORK);
       });
 
-      it('unknown error - unhandled 403', () => {
-        const mockError = new RequestError('Forbidden', 403, {
+      it('unknown error - unhandled 418', () => {
+        const mockError = new RequestError('Forbidden', 418, {
           request: {
             method: 'GET',
             url: 'https://api.github.com',
