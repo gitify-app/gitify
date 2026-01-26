@@ -136,8 +136,9 @@ export const useNotifications = (): NotificationsState => {
             raiseNativeNotification(diffNotifications);
           }
         }
-      } finally {
+
         setStatus('success');
+      } finally {
         isFetchingRef.current = false;
       }
     },
