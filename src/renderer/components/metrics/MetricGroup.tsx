@@ -96,7 +96,9 @@ export const MetricGroup: FC<MetricGroupProps> = ({
 
         {milestone && (
           <MetricPill
-            color={milestone.state === 'OPEN' ? IconColor.GREEN : IconColor.RED}
+            color={
+              milestone.state === 'OPEN' ? IconColor.GREEN : IconColor.PURPLE
+            }
             icon={MilestoneIcon}
             title={milestone.title}
           />
