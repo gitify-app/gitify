@@ -3232,7 +3232,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
                 >
                   <svg
                     aria-hidden="true"
-                    class="octicon octicon-milestone text-gitify-icon-closed"
+                    class="octicon octicon-milestone text-gitify-icon-done"
                     display="inline-block"
                     fill="currentColor"
                     focusable="false"
@@ -3566,7 +3566,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
               >
                 <svg
                   aria-hidden="true"
-                  class="octicon octicon-milestone text-gitify-icon-closed"
+                  class="octicon octicon-milestone text-gitify-icon-done"
                   display="inline-block"
                   fill="currentColor"
                   focusable="false"
