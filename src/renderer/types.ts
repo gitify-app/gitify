@@ -11,6 +11,7 @@ import type {
   MilestoneFieldsFragment,
   PullRequestReviewState,
   PullRequestState,
+  ReactionGroupFieldsFragment,
 } from './utils/api/graphql/generated/graphql';
 
 declare const __brand: unique symbol;
@@ -338,6 +339,10 @@ export interface GitifySubject {
   milestone?: GitifyMilestone;
   /** Deep link to notification thread */
   htmlUrl?: Link;
+  /** Reaction counts */
+  reactionsCount?: number;
+  /** Reaction groups */
+  reactionGroups?: GitifyReactionGroup[];
 }
 
 /**
@@ -400,6 +405,8 @@ export interface GitifyNotificationDisplay {
 }
 
 export type GitifyMilestone = MilestoneFieldsFragment;
+
+export type GitifyReactionGroup = ReactionGroupFieldsFragment;
 
 export interface GitifyPullRequestReview {
   state: PullRequestReviewState;

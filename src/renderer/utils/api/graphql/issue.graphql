@@ -34,11 +34,23 @@ fragment IssueDetails on Issue {
       author {
         ...AuthorFields
       }
+      reactions {
+        totalCount
+      }
+      reactionGroups {
+        ...ReactionGroupFields
+      }
     }
   }
   labels(first: $firstLabels) {
     nodes {
       name
     }
+  }
+  reactions {
+    totalCount
+  }
+  reactionGroups {
+    ...ReactionGroupFields
   }
 }

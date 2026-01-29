@@ -9,3 +9,10 @@ fragment MilestoneFields on Milestone {
   state
   title
 }
+
+fragment ReactionGroupFields on ReactionGroup {
+  content
+  reactors {
+    totalCount
+  }
+}

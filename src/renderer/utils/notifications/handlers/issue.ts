@@ -44,6 +44,11 @@ class IssueHandler extends DefaultHandler {
       issue.author,
     ]);
 
+    const issueReactionCount =
+      issueComment?.reactions.totalCount ?? issue.reactions.totalCount;
+    const issueReactionGroup =
+      issueComment?.reactionGroups ?? issue.reactionGroups;
+
     return {
       number: issue.number,
       state: issueState,
@@ -52,6 +57,8 @@ class IssueHandler extends DefaultHandler {
       labels: issue.labels?.nodes.map((label) => label.name) ?? [],
       milestone: issue.milestone ?? undefined,
       htmlUrl: issueComment?.url ?? issue.url,
+      reactionsCount: issueReactionCount,
+      reactionGroups: issueReactionGroup,
     };
   }
 

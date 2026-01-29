@@ -4,6 +4,7 @@ import {
   mockAuthor,
   mockCommenter,
   mockIssueResponseNode,
+  noReactionGroups,
 } from '../../api/__mocks__/response-mocks';
 
 import type { GitifyNotification } from '../../../types';
@@ -63,6 +64,8 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
           'https://github.com/gitify-app/notifications-test/issues/123' as Link,
         labels: [],
         milestone: undefined,
+        reactionsCount: 0,
+        reactionGroups: noReactionGroups,
       } satisfies Partial<GitifySubject>);
     });
 
@@ -94,6 +97,8 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
           'https://github.com/gitify-app/notifications-test/issues/123' as Link,
         labels: [],
         milestone: undefined,
+        reactionsCount: 0,
+        reactionGroups: noReactionGroups,
       } satisfies Partial<GitifySubject>);
     });
 
@@ -107,6 +112,9 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
           {
             author: mockCommenter,
             url: 'https://github.com/gitify-app/notifications-test/issues/123#issuecomment-1234',
+            reactions: {
+              totalCount: 0,
+            },
           },
         ],
       };
@@ -132,6 +140,8 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
           'https://github.com/gitify-app/notifications-test/issues/123#issuecomment-1234' as Link,
         labels: [],
         milestone: undefined,
+        reactionsCount: 0,
+        reactionGroups: noReactionGroups,
       } satisfies Partial<GitifySubject>);
     });
 
@@ -165,6 +175,8 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
           'https://github.com/gitify-app/notifications-test/issues/123' as Link,
         labels: ['enhancement'],
         milestone: undefined,
+        reactionsCount: 0,
+        reactionGroups: noReactionGroups,
       } satisfies Partial<GitifySubject>);
     });
 
@@ -202,6 +214,8 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
           state: 'OPEN',
           title: 'Open Milestone',
         },
+        reactionsCount: 0,
+        reactionGroups: noReactionGroups,
       } satisfies Partial<GitifySubject>);
     });
   });
