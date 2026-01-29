@@ -71,7 +71,7 @@ describe('renderer/components/metrics/MetricGroup.tsx', () => {
 
     it('should render reaction pill when multiple reactions', async () => {
       const mockNotification = mockGitifyNotification;
-      mockNotification.subject.reactionsCount = 2;
+      mockNotification.subject.reactionsCount = 53;
       mockNotification.subject.reactionGroups = [
         {
           content: 'THUMBS_UP',
@@ -80,9 +80,45 @@ describe('renderer/components/metrics/MetricGroup.tsx', () => {
           },
         },
         {
-          content: 'ROCKET',
+          content: 'THUMBS_DOWN',
           reactors: {
             totalCount: 1,
+          },
+        },
+        {
+          content: 'LAUGH',
+          reactors: {
+            totalCount: 2,
+          },
+        },
+        {
+          content: 'HOORAY',
+          reactors: {
+            totalCount: 3,
+          },
+        },
+        {
+          content: 'CONFUSED',
+          reactors: {
+            totalCount: 5,
+          },
+        },
+        {
+          content: 'ROCKET',
+          reactors: {
+            totalCount: 8,
+          },
+        },
+        {
+          content: 'EYES',
+          reactors: {
+            totalCount: 13,
+          },
+        },
+        {
+          content: 'HEART',
+          reactors: {
+            totalCount: 21,
           },
         },
       ];

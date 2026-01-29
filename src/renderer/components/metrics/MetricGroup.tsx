@@ -37,6 +37,17 @@ export const MetricGroup: FC<MetricGroupProps> = ({
   const hasReactions = reactionCount > 0;
   const hasMultipleReactions =
     reactionGroups.filter((rg) => rg.reactors.totalCount > 0).length > 1;
+  const reactionEmojiMap: Record<string, string> = {
+    THUMBS_UP: '👍',
+    THUMBS_DOWN: '👎',
+    LAUGH: '😆',
+    HOORAY: '🎉',
+    CONFUSED: '😕',
+    ROCKET: '🚀',
+    EYES: '👀',
+    HEART: '❤️',
+  };
+
   const reactionPillDescription = hasReactions
     ? `${reactionCount} ${
         reactionCount > 1 ? 'reactions' : 'reaction'
@@ -46,35 +57,11 @@ export const MetricGroup: FC<MetricGroupProps> = ({
             return acc;
           }
 
-          let emoji = '';
-          switch (rg.content) {
-            case 'THUMBS_UP':
-              emoji = '👍';
-              break;
-            case 'THUMBS_DOWN':
-              emoji = '👎';
-              break;
-            case 'LAUGH':
-              emoji = '😆';
-              break;
-            case 'HOORAY':
-              emoji = '🎉';
-              break;
-            case 'CONFUSED':
-              emoji = '😕';
-              break;
-            case 'ROCKET':
-              emoji = '🚀';
-              break;
-            case 'EYES':
-              emoji = '👀';
-              break;
-            case 'HEART':
-              emoji = '❤️';
-              break;
-            default:
-              return acc;
+          const emoji = reactionEmojiMap[rg.content];
+          if (!emoji) {
+            return acc;
           }
+
           acc.push(
             `${emoji} ${hasMultipleReactions ? rg.reactors.totalCount : ''}`.trim(),
           );
