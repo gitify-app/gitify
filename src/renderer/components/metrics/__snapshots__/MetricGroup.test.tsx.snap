@@ -71,7 +71,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
               popover="auto"
               role="tooltip"
             >
-              Linked to issues: #1, #2
+              Linked to 2 issues: #1, #2
             </span>
             <button
               aria-describedby="_r_ID_"
@@ -357,7 +357,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
             popover="auto"
             role="tooltip"
           >
-            Linked to issues: #1, #2
+            Linked to 2 issues: #1, #2
           </span>
           <button
             aria-describedby="_r_ID_"
@@ -700,7 +700,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
               popover="auto"
               role="tooltip"
             >
-              Linked to issues: #1, #2
+              Linked to 2 issues: #1, #2
             </span>
             <button
               aria-describedby="_r_ID_"
@@ -986,7 +986,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
             popover="auto"
             role="tooltip"
           >
-            Linked to issues: #1, #2
+            Linked to 2 issues: #1, #2
           </span>
           <button
             aria-describedby="_r_ID_"
@@ -1329,7 +1329,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
               popover="auto"
               role="tooltip"
             >
-              Linked to issues: #1, #2
+              Linked to 2 issues: #1, #2
             </span>
             <button
               aria-describedby="_r_ID_"
@@ -1562,7 +1562,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx comment pills should render
             popover="auto"
             role="tooltip"
           >
-            Linked to issues: #1, #2
+            Linked to 2 issues: #1, #2
           </span>
           <button
             aria-describedby="_r_ID_"
@@ -1852,7 +1852,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx label pills should render l
               popover="auto"
               role="tooltip"
             >
-              Linked to issues: #1, #2
+              Linked to 2 issues: #1, #2
             </span>
             <button
               aria-describedby="_r_ID_"
@@ -2191,7 +2191,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx label pills should render l
             popover="auto"
             role="tooltip"
           >
-            Linked to issues: #1, #2
+            Linked to 2 issues: #1, #2
           </span>
           <button
             aria-describedby="_r_ID_"
@@ -2587,7 +2587,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx linked issue pills should r
               popover="auto"
               role="tooltip"
             >
-              Linked to issues: #1, #2
+              Linked to 2 issues: #1, #2
             </span>
             <button
               aria-describedby="_r_ID_"
@@ -2767,7 +2767,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx linked issue pills should r
             popover="auto"
             role="tooltip"
           >
-            Linked to issues: #1, #2
+            Linked to 2 issues: #1, #2
           </span>
           <button
             aria-describedby="_r_ID_"
@@ -3004,7 +3004,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx linked issue pills should r
               popover="auto"
               role="tooltip"
             >
-              Linked to issue #1
+              Linked to 1 issue: #1
             </span>
             <button
               aria-describedby="_r_ID_"
@@ -3184,7 +3184,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx linked issue pills should r
             popover="auto"
             role="tooltip"
           >
-            Linked to issue #1
+            Linked to 1 issue: #1
           </span>
           <button
             aria-describedby="_r_ID_"
@@ -3421,7 +3421,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
               popover="auto"
               role="tooltip"
             >
-              Linked to issues: #1, #2
+              Linked to 2 issues: #1, #2
             </span>
             <button
               aria-describedby="_r_ID_"
@@ -3808,7 +3808,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
             popover="auto"
             role="tooltip"
           >
-            Linked to issues: #1, #2
+            Linked to 2 issues: #1, #2
           </span>
           <button
             aria-describedby="_r_ID_"
@@ -4252,7 +4252,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
               popover="auto"
               role="tooltip"
             >
-              Linked to issues: #1, #2
+              Linked to 2 issues: #1, #2
             </span>
             <button
               aria-describedby="_r_ID_"
@@ -4639,7 +4639,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx milestone pills should rend
             popover="auto"
             role="tooltip"
           >
-            Linked to issues: #1, #2
+            Linked to 2 issues: #1, #2
           </span>
           <button
             aria-describedby="_r_ID_"
@@ -5083,7 +5083,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx reactions pills should rend
               popover="auto"
               role="tooltip"
             >
-              Linked to issues: #1, #2
+              Linked to 2 issues: #1, #2
             </span>
             <button
               aria-describedby="_r_ID_"
@@ -5316,7 +5316,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx reactions pills should rend
             popover="auto"
             role="tooltip"
           >
-            Linked to issues: #1, #2
+            Linked to 2 issues: #1, #2
           </span>
           <button
             aria-describedby="_r_ID_"
@@ -5606,7 +5606,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx reactions pills should rend
               popover="auto"
               role="tooltip"
             >
-              Linked to issues: #1, #2
+              Linked to 2 issues: #1, #2
             </span>
             <button
               aria-describedby="_r_ID_"
@@ -5839,7 +5839,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx reactions pills should rend
             popover="auto"
             role="tooltip"
           >
-            Linked to issues: #1, #2
+            Linked to 2 issues: #1, #2
           </span>
           <button
             aria-describedby="_r_ID_"
@@ -6129,7 +6129,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx reactions pills should rend
               popover="auto"
               role="tooltip"
             >
-              Linked to issues: #1, #2
+              Linked to 2 issues: #1, #2
             </span>
             <button
               aria-describedby="_r_ID_"
@@ -6362,7 +6362,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx reactions pills should rend
             popover="auto"
             role="tooltip"
           >
-            Linked to issues: #1, #2
+            Linked to 2 issues: #1, #2
           </span>
           <button
             aria-describedby="_r_ID_"

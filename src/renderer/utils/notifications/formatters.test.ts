@@ -2,6 +2,7 @@ import { mockPartialGitifyNotification } from '../../__mocks__/notifications-moc
 
 import {
   formatForDisplay,
+  formatMetricDescription,
   formatNotificationNumber,
   formatNotificationTitle,
   formatNotificationType,
@@ -85,6 +86,28 @@ describe('renderer/utils/notifications/formatters.ts', () => {
       });
 
       expect(formatNotificationTitle(notification)).toBe('Improve docs');
+    });
+  });
+
+  describe('formatMetricDescription', () => {
+    it('return empty if no count', () => {
+      expect(formatMetricDescription(null, 'bee')).toBe('');
+    });
+
+    it('return singular if count is 1', () => {
+      expect(formatMetricDescription(1, 'bee')).toBe('1 bee');
+    });
+
+    it('return pluralized if count is more than 1', () => {
+      expect(formatMetricDescription(2, 'bee')).toBe('2 bees');
+    });
+
+    it('return with custom formatter', () => {
+      expect(
+        formatMetricDescription(2, 'bee', (_count, noun) => {
+          return `Hi ${noun}`;
+        }),
+      ).toBe('Hi bees');
     });
   });
 });

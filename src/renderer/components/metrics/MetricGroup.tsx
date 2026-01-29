@@ -13,6 +13,7 @@ import { useAppContext } from '../../hooks/useAppContext';
 import { type GitifyNotification, IconColor } from '../../types';
 
 import { getPullRequestReviewIcon } from '../../utils/icons';
+import { formatMetricDescription } from '../../utils/notifications/formatters';
 import { MetricPill } from './MetricPill';
 
 export interface MetricGroupProps {
@@ -26,11 +27,11 @@ export const MetricGroup: FC<MetricGroupProps> = ({
 
   const linkedIssues = notification.subject.linkedIssues ?? [];
   const hasLinkedIssues = linkedIssues.length > 0;
-  const linkedIssuesPillDescription = hasLinkedIssues
-    ? `Linked to ${
-        linkedIssues.length > 1 ? 'issues:' : 'issue'
-      } ${linkedIssues.join(', ')}`
-    : '';
+  const linkedIssuesPillDescription = formatMetricDescription(
+    linkedIssues.length,
+    'issue',
+    (count, noun) => `Linked to ${count} ${noun}: ${linkedIssues.join(', ')}`,
+  );
 
   const reactionCount = notification.subject.reactionsCount ?? 0;
   const reactionGroups = notification.subject.reactionGroups ?? [];
@@ -48,40 +49,41 @@ export const MetricGroup: FC<MetricGroupProps> = ({
     HEART: '❤️',
   };
 
-  const reactionPillDescription = hasReactions
-    ? `${reactionCount} ${
-        reactionCount > 1 ? 'reactions' : 'reaction'
-      }: ${reactionGroups
-        .reduce((acc, rg) => {
-          if (!rg.reactors.totalCount || rg.reactors.totalCount <= 0) {
-            return acc;
-          }
-
+  const reactionPillDescription = formatMetricDescription(
+    reactionCount,
+    'reaction',
+    (count, noun) => {
+      const formatted = reactionGroups
+        .map((rg) => {
           const emoji = reactionEmojiMap[rg.content];
-          if (!emoji) {
-            return acc;
+          if (!emoji || !rg.reactors.totalCount) {
+            return '';
           }
 
-          acc.push(
-            `${emoji} ${hasMultipleReactions ? rg.reactors.totalCount : ''}`.trim(),
-          );
-          return acc;
-        }, [] as string[])
-        .join(' ')}`
-    : '';
+          return `${emoji} ${hasMultipleReactions ? rg.reactors.totalCount : ''}`.trim();
+        })
+        .filter(Boolean)
+        .join(' ');
+      return `${count} ${noun}: ${formatted}`;
+    },
+  );
 
   const commentCount = notification.subject.commentCount ?? 0;
   const hasComments = commentCount > 0;
-  const commentsPillDescription = hasComments
-    ? `${notification.subject.commentCount} ${notification.subject.commentCount > 1 ? 'comments' : 'comment'}`
-    : '';
+  const commentsPillDescription = formatMetricDescription(
+    commentCount,
+    'comment',
+  );
 
   const labels = notification.subject.labels ?? [];
   const labelsCount = labels.length;
   const hasLabels = labelsCount > 0;
-  const labelsPillDescription = hasLabels
-    ? `${labelsCount} ${labelsCount > 1 ? 'labels' : 'label'}: ${labels.map((label) => `🏷️ ${label}`).join(', ')}`
-    : '';
+  const labelsPillDescription = formatMetricDescription(
+    labelsCount,
+    'label',
+    (count, noun) =>
+      `${count} ${noun}: ${labels.map((label) => `🏷️ ${label}`).join(', ')}`,
+  );
 
   const milestone = notification.subject.milestone;
 

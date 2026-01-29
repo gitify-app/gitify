@@ -91,3 +91,21 @@ export function formatNotificationTitle(
 
   return title;
 }
+
+/**
+ * Helper to format the metric description, determine singular or plural noun,
+ * and apply a custom formatter if needed.
+ */
+export function formatMetricDescription(
+  count: number,
+  singular: string,
+  formatter?: (count: number, noun: string) => string,
+) {
+  if (!count) {
+    return '';
+  }
+
+  const noun = count === 1 ? singular : `${singular}s`;
+
+  return formatter ? formatter(count, noun) : `${count} ${noun}`;
+}
