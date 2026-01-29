@@ -15,7 +15,8 @@ const USER_TYPE_DETAILS: Record<UserType, TypeDetails> = {
   },
   Bot: {
     title: 'Bot',
-    description: 'Bot accounts such as @dependabot, @renovate, @netlify, etc',
+    description:
+      'Bot accounts such as @copilot, @dependabot, @renovate, @netlify, etc',
   },
   Organization: {
     title: 'Organization',

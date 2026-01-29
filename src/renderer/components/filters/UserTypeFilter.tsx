@@ -29,15 +29,15 @@ export const UserTypeFilter: FC = () => {
             <Stack direction="vertical" gap="condensed">
               <Stack direction="horizontal" gap="condensed">
                 <PersonIcon size={Size.SMALL} />
-                User
+                {userTypeFilter.FILTER_TYPES['User'].title}
               </Stack>
               <Stack direction="horizontal" gap="condensed">
                 <DependabotIcon size={Size.SMALL} />
-                Bot accounts such as @dependabot, @renovate, @netlify, etc
+                {userTypeFilter.FILTER_TYPES['Bot'].description}
               </Stack>
               <Stack direction="horizontal" gap="condensed">
                 <OrganizationIcon size={Size.SMALL} />
-                Organization
+                {userTypeFilter.FILTER_TYPES['Organization'].title}
               </Stack>
             </Stack>
           </div>
