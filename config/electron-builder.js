@@ -4,7 +4,7 @@
 const config = {
   productName: 'Gitify',
   appId: 'com.electron.gitify',
-  copyright: 'Copyright © 2025 Gitify Team',
+  copyright: 'Copyright © 2026 Gitify Team',
   asar: true,
   files: [
     'assets/images/*',
@@ -41,7 +41,12 @@ const config = {
     sign: false,
   },
   win: {
-    target: 'nsis',
+    target: [
+      {
+        target: 'nsis',
+        arch: ['x64'],
+      },
+    ],
     icon: 'assets/images/app-icon.ico',
   },
   nsis: {
