@@ -42,9 +42,9 @@ jobs:
       - name: Package for ${{ matrix.platform }}
         run: ${{ matrix.package-cmd }}
         env:
-          # For macOS
-          CSC_LINK: ${{ secrets.CSC_LINK }}
-          CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
+          # Signing certificates - important to use the correct cert per platform
+          CSC_LINK: ${{ matrix.platform == 'macOS' && secrets.CSC_LINK || (matrix.platform == 'windows' && secrets.WIN_CSC_LINK || '') }}
+          CSC_KEY_PASSWORD: ${{ matrix.platform == 'macOS' && secrets.CSC_KEY_PASSWORD || (matrix.platform == 'windows' && secrets.WIN_CSC_KEY_PASSWORD || '') }}
 
       - name: Clean up builds
         shell: bash
@@ -54,5 +54,7 @@ jobs:
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
         with:
           name: ${{ matrix.artifact-name }}
-          path: dist/
+          path: |
+            dist/*
+            !dist/*/
           overwrite: true

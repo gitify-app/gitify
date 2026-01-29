@@ -45,18 +45,22 @@ jobs:
       - name: Package and publish for ${{ matrix.platform }}
         run: ${{ matrix.package-cmd }}
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # For macOS
+          # Signing certificates - important to use the correct cert per platform
+          CSC_LINK: ${{ matrix.platform == 'macOS' && secrets.CSC_LINK || (matrix.platform == 'windows' && secrets.WIN_CSC_LINK || '') }}
+          CSC_KEY_PASSWORD: ${{ matrix.platform == 'macOS' && secrets.CSC_KEY_PASSWORD || (matrix.platform == 'windows' && secrets.WIN_CSC_KEY_PASSWORD || '') }}
+          # macOS specific
           APPLE_ID_USERNAME: ${{ secrets.APPLE_ID_USERNAME }}
           APPLE_ID_PASSWORD: ${{ secrets.APPLE_ID_PASSWORD }}
           APPLE_ID_TEAM_ID: ${{ secrets.APPLE_ID_TEAM_ID }}
-          CSC_LINK: ${{ secrets.CSC_LINK }}
-          CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
           NOTARIZE: ${{ matrix.use-apple-notarization }}
+          # General
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload artifacts
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
         with:
           name: ${{ matrix.artifact-name }}
-          path: dist/
+          path: |
+            dist/*
+            !dist/*/
           overwrite: true
