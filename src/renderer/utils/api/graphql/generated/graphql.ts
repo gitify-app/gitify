@@ -9416,7 +9416,7 @@ export type Issue = Assignable & Closable & Comment & Deletable & Labelable & Lo
    */
   projectCards: ProjectCardConnection;
   /** List of project items associated with this issue. */
-  projectItems: ProjectV2ItemConnection;
+  projectItems?: Maybe<ProjectV2ItemConnection>;
   /** Find a project by number. */
   projectV2?: Maybe<ProjectV2>;
   /** A list of projects under the owner. */
@@ -21362,7 +21362,7 @@ export type PullRequest = Assignable & Closable & Comment & Labelable & Lockable
    */
   projectCards: ProjectCardConnection;
   /** List of project items associated with this pull request. */
-  projectItems: ProjectV2ItemConnection;
+  projectItems?: Maybe<ProjectV2ItemConnection>;
   /** Find a project by number. */
   projectV2?: Maybe<ProjectV2>;
   /** A list of projects under the owner. */
