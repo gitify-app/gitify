@@ -53,10 +53,11 @@ describe('renderer/utils/api/graphql/utils.ts', () => {
       );
 
       expect(fragments).not.toBeNull();
-      expect(fragments.length).toBe(8);
+      expect(fragments.length).toBe(9);
       expect(fragments.flatMap((f) => f.typeCondition)).toEqual([
         'Actor',
         'Milestone',
+        'ReactionGroup',
         'Discussion',
         'DiscussionComment',
         'DiscussionComment',

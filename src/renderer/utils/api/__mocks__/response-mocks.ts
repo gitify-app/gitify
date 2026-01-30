@@ -10,6 +10,7 @@ import type {
   IssueStateReason,
   PullRequestDetailsFragment,
   PullRequestState,
+  ReactionGroupFieldsFragment,
 } from '../graphql/generated/graphql';
 
 /**
@@ -101,6 +102,10 @@ export function mockIssueResponseNode(mocks: {
     labels: { nodes: [] },
     comments: { totalCount: 0, nodes: [] },
     milestone: null,
+    reactions: {
+      totalCount: 0,
+    },
+    reactionGroups: noReactionGroups,
   } satisfies IssueDetailsFragment;
 }
 
@@ -136,5 +141,60 @@ export function mockPullRequestResponseNode(mocks: {
     closingIssuesReferences: {
       nodes: [],
     },
+    reactions: {
+      totalCount: 0,
+    },
+    reactionGroups: noReactionGroups,
   } satisfies PullRequestDetailsFragment;
 }
+
+export const noReactionGroups = [
+  {
+    content: 'THUMBS_UP',
+    reactors: {
+      totalCount: 0,
+    },
+  },
+  {
+    content: 'THUMBS_DOWN',
+    reactors: {
+      totalCount: 0,
+    },
+  },
+  {
+    content: 'LAUGH',
+    reactors: {
+      totalCount: 0,
+    },
+  },
+  {
+    content: 'HOORAY',
+    reactors: {
+      totalCount: 0,
+    },
+  },
+  {
+    content: 'CONFUSED',
+    reactors: {
+      totalCount: 0,
+    },
+  },
+  {
+    content: 'HEART',
+    reactors: {
+      totalCount: 0,
+    },
+  },
+  {
+    content: 'ROCKET',
+    reactors: {
+      totalCount: 0,
+    },
+  },
+  {
+    content: 'EYES',
+    reactors: {
+      totalCount: 0,
+    },
+  },
+] as ReactionGroupFieldsFragment[];

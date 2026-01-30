@@ -4,6 +4,7 @@ import {
   mockAuthor,
   mockCommenter,
   mockPullRequestResponseNode,
+  noReactionGroups,
 } from '../../api/__mocks__/response-mocks';
 
 import type { GitifyNotification } from '../../../types';
@@ -71,6 +72,8 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         milestone: null,
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/pulls/123' as Link,
+        reactionsCount: 0,
+        reactionGroups: noReactionGroups,
       } satisfies Partial<GitifySubject>);
     });
 
@@ -107,6 +110,8 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         milestone: null,
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/pulls/123' as Link,
+        reactionsCount: 0,
+        reactionGroups: noReactionGroups,
       } satisfies Partial<GitifySubject>);
     });
 
@@ -143,6 +148,8 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         milestone: null,
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/pulls/123' as Link,
+        reactionsCount: 0,
+        reactionGroups: noReactionGroups,
       } satisfies Partial<GitifySubject>);
     });
 
@@ -179,6 +186,8 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         milestone: null,
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/pulls/123' as Link,
+        reactionsCount: 0,
+        reactionGroups: noReactionGroups,
       } satisfies Partial<GitifySubject>);
     });
 
@@ -192,6 +201,9 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
           {
             author: mockCommenter,
             url: 'https://github.com/gitify-app/notifications-test/pulls/123#issuecomment-1234',
+            reactions: {
+              totalCount: 0,
+            },
           },
         ],
       };
@@ -223,6 +235,8 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         milestone: null,
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/pulls/123#issuecomment-1234' as Link,
+        reactionsCount: 0,
+        reactionGroups: noReactionGroups,
       } satisfies Partial<GitifySubject>);
     });
 
@@ -265,6 +279,8 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         milestone: null,
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/pulls/123' as Link,
+        reactionsCount: 0,
+        reactionGroups: noReactionGroups,
       } satisfies Partial<GitifySubject>);
     });
 
@@ -307,6 +323,8 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         milestone: null,
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/pulls/123' as Link,
+        reactionsCount: 0,
+        reactionGroups: noReactionGroups,
       } satisfies Partial<GitifySubject>);
     });
 
@@ -349,6 +367,8 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         },
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/pulls/123' as Link,
+        reactionsCount: 0,
+        reactionGroups: noReactionGroups,
       } satisfies Partial<GitifySubject>);
     });
   });

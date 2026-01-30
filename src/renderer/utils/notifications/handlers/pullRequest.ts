@@ -55,6 +55,10 @@ class PullRequestHandler extends DefaultHandler {
 
     const reviews = getLatestReviewForReviewers(pr.reviews.nodes);
 
+    const prReactionCount =
+      prComment?.reactions.totalCount ?? pr.reactions.totalCount;
+    const prReactionGroup = prComment?.reactionGroups ?? pr.reactionGroups;
+
     return {
       number: pr.number,
       state: prState,
@@ -67,6 +71,8 @@ class PullRequestHandler extends DefaultHandler {
       ),
       milestone: pr.milestone,
       htmlUrl: prComment?.url ?? pr.url,
+      reactionsCount: prReactionCount,
+      reactionGroups: prReactionGroup,
     };
   }
 

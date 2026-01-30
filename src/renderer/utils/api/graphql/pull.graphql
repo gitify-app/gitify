@@ -38,6 +38,12 @@ fragment PullRequestDetails on PullRequest {
       author {
         ...AuthorFields
       }
+      reactions {
+        totalCount
+      }
+      reactionGroups {
+        ...ReactionGroupFields
+      }
     }
   }
   reviews(last: $lastReviews) {
@@ -55,6 +61,12 @@ fragment PullRequestDetails on PullRequest {
     nodes {
       number
     }
+  }
+  reactions {
+    totalCount
+  }
+  reactionGroups {
+    ...ReactionGroupFields
   }
 }
 

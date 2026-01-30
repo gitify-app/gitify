@@ -4,6 +4,7 @@ import {
   CommentIcon,
   IssueOpenedIcon,
   MilestoneIcon,
+  SmileyIcon,
   TagIcon,
 } from '@primer/octicons-react';
 
@@ -12,6 +13,7 @@ import { useAppContext } from '../../hooks/useAppContext';
 import { type GitifyNotification, IconColor } from '../../types';
 
 import { getPullRequestReviewIcon } from '../../utils/icons';
+import { formatMetricDescription } from '../../utils/notifications/formatters';
 import { MetricPill } from './MetricPill';
 
 export interface MetricGroupProps {
@@ -25,25 +27,73 @@ export const MetricGroup: FC<MetricGroupProps> = ({
 
   const linkedIssues = notification.subject.linkedIssues ?? [];
   const hasLinkedIssues = linkedIssues.length > 0;
-  const linkedIssuesPillDescription = hasLinkedIssues
-    ? `Linked to ${
-        linkedIssues.length > 1 ? 'issues' : 'issue'
-      } ${linkedIssues.join(', ')}`
-    : '';
+  const linkedIssuesPillDescription = formatMetricDescription(
+    linkedIssues.length,
+    'issue',
+    (count, noun) => {
+      return `Linked to ${count} ${noun}: ${linkedIssues.join(', ')}`;
+    },
+  );
+
+  const reactionCount = notification.subject.reactionsCount ?? 0;
+  const reactionGroups = notification.subject.reactionGroups ?? [];
+  const hasReactions = reactionCount > 0;
+  const hasMultipleReactions =
+    reactionGroups.filter((rg) => rg.reactors.totalCount > 0).length > 1;
+  const reactionEmojiMap: Record<string, string> = {
+    THUMBS_UP: '👍',
+    THUMBS_DOWN: '👎',
+    LAUGH: '😆',
+    HOORAY: '🎉',
+    CONFUSED: '😕',
+    ROCKET: '🚀',
+    EYES: '👀',
+    HEART: '❤️',
+  };
+
+  const reactionPillDescription = formatMetricDescription(
+    reactionCount,
+    'reaction',
+    (count, noun) => {
+      const formatted = reactionGroups
+        .map((rg) => {
+          const emoji = reactionEmojiMap[rg.content];
+          if (!emoji || !rg.reactors.totalCount) {
+            return '';
+          }
+
+          return `${emoji} ${hasMultipleReactions ? rg.reactors.totalCount : ''}`.trim();
+        })
+        .filter(Boolean)
+        .join(' ');
+
+      return `${count} ${noun}: ${formatted}`;
+    },
+  );
 
   const commentCount = notification.subject.commentCount ?? 0;
   const hasComments = commentCount > 0;
-  const commentsPillDescription = hasComments
-    ? `${notification.subject.commentCount} ${
-        notification.subject.commentCount > 1 ? 'comments' : 'comment'
-      }`
-    : '';
+  const commentsPillDescription = formatMetricDescription(
+    commentCount,
+    'comment',
+  );
 
   const labels = notification.subject.labels ?? [];
-  const hasLabels = labels.length > 0;
-  const labelsPillDescription = hasLabels
-    ? labels.map((label) => `🏷️ ${label}`).join(', ')
-    : '';
+  const labelsCount = labels.length;
+  const hasLabels = labelsCount > 0;
+  const labelsPillDescription = formatMetricDescription(
+    labelsCount,
+    'label',
+    (count, noun) => {
+      const formatted = labels
+        .map((label) => {
+          return `🏷️ ${label}`.trim();
+        })
+        .join(', ');
+
+      return `${count} ${noun}: ${formatted}`;
+    },
+  );
 
   const milestone = notification.subject.milestone;
 
@@ -56,6 +106,15 @@ export const MetricGroup: FC<MetricGroupProps> = ({
             icon={IssueOpenedIcon}
             metric={linkedIssues.length}
             title={linkedIssuesPillDescription}
+          />
+        )}
+
+        {hasReactions && (
+          <MetricPill
+            color={IconColor.GRAY}
+            icon={SmileyIcon}
+            metric={notification.subject.reactionsCount}
+            title={reactionPillDescription}
           />
         )}
 
