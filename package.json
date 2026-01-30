@@ -143,7 +143,7 @@
     "webpack-cli": "6.0.1",
     "webpack-merge": "6.0.1"
   },
-  "packageManager": "pnpm@10.28.1",
+  "packageManager": "pnpm@10.28.2",
   "pnpm": {
     "onlyBuiltDependencies": [
       "@biomejs/biome",
