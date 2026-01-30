@@ -71,7 +71,11 @@ class DiscussionHandler extends DefaultHandler {
         discussion.author,
       ]),
       commentCount: discussion.comments.totalCount,
-      labels: discussion.labels?.nodes.map((label) => label.name) ?? [],
+      labels:
+        discussion.labels?.nodes.map((label) => ({
+          name: label.name,
+          color: (label as any).color,
+        })) ?? [],
       htmlUrl: latestDiscussionComment?.url ?? discussion.url,
       reactionsCount: discussionReactionCount,
       reactionGroups: discussionReactionGroup,

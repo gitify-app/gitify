@@ -2,17 +2,12 @@ import type { FC } from 'react';
 
 import { MilestoneIcon } from '@primer/octicons-react';
 
-import { IconColor } from '../../types';
+import { type GitifyMilestone, IconColor } from '../../types';
 
 import { MetricPill } from './MetricPill';
 
-export interface Milestone {
-  title: string;
-  state: string;
-}
-
 export interface MilestonePillProps {
-  milestone: Milestone;
+  milestone: GitifyMilestone;
 }
 
 export const MilestonePill: FC<MilestonePillProps> = ({ milestone }) => {

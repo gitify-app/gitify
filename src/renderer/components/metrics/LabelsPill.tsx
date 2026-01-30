@@ -1,14 +1,15 @@
 import type { FC } from 'react';
 
 import { TagIcon } from '@primer/octicons-react';
+import { IssueLabelToken } from '@primer/react';
 
-import { IconColor } from '../../types';
+import { type GitifyLabels, IconColor } from '../../types';
 
 import { formatMetricDescription } from '../../utils/notifications/formatters';
 import { MetricPill } from './MetricPill';
 
 export interface LabelsPillProps {
-  labels: string[];
+  labels: GitifyLabels[];
 }
 
 export const LabelsPill: FC<LabelsPillProps> = ({ labels }) => {
@@ -19,19 +20,45 @@ export const LabelsPill: FC<LabelsPillProps> = ({ labels }) => {
   const description = formatMetricDescription(
     labels.length,
     'label',
-    (count, noun) => {
-      const formatted = labels.map((label) => `🏷️ ${label}`).join(', ');
+    (count, noun) => `${count} ${noun}`,
+  );
 
-      return `${count} ${noun}: ${formatted}`;
-    },
+  const tooltipContent = (
+    <div>
+      <span className="sr-only">{description}</span>
+      <div className="flex flex-wrap gap-1">
+        {labels.map((label) => {
+          const safeColor = label.color
+            ? `#${String(label.color).replace(/^#/, '')}`
+            : undefined;
+          return (
+            <span
+              key={label.name}
+              style={{
+                display: 'inline-block',
+                transform: 'scale(0.8)',
+                transformOrigin: 'left center',
+              }}
+            >
+              <IssueLabelToken
+                fillColor={safeColor}
+                size="small"
+                text={label.name}
+              />
+            </span>
+          );
+        })}
+      </div>
+    </div>
   );
 
   return (
     <MetricPill
       color={IconColor.GRAY}
+      content={tooltipContent}
       icon={TagIcon}
       metric={labels.length}
-      title={description}
+      title={'labels'}
     />
   );
 };

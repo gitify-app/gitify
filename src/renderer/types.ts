@@ -8,6 +8,7 @@ import type {
   DiscussionStateReason,
   IssueState,
   IssueStateReason,
+  LabelFieldsFragment,
   MilestoneFieldsFragment,
   PullRequestReviewState,
   PullRequestState,
@@ -333,8 +334,8 @@ export interface GitifySubject {
   linkedIssues?: string[];
   /** Total comment count */
   commentCount?: number;
-  /** Label names */
-  labels?: string[];
+  /** Labels names and colors */
+  labels?: GitifyLabels[];
   /** Milestone state/title */
   milestone?: GitifyMilestone;
   /** Deep link to notification thread */
@@ -407,6 +408,8 @@ export interface GitifyNotificationDisplay {
 export type GitifyMilestone = MilestoneFieldsFragment;
 
 export type GitifyReactionGroup = ReactionGroupFieldsFragment;
+
+export type GitifyLabels = LabelFieldsFragment;
 
 export interface GitifyPullRequestReview {
   state: PullRequestReviewState;

@@ -35608,6 +35608,8 @@ export type MilestoneFieldsFragment = { __typename?: 'Milestone', state: Milesto
 
 export type ReactionGroupFieldsFragment = { __typename?: 'ReactionGroup', content: ReactionContent, reactors: { __typename?: 'ReactorConnection', totalCount: number } };
 
+export type LabelFieldsFragment = { __typename?: 'Label', name: string, color: string };
+
 export type FetchDiscussionByNumberQueryVariables = Exact<{
   owner: Scalars['String']['input'];
   name: Scalars['String']['input'];
@@ -35637,7 +35639,7 @@ export type FetchDiscussionByNumberQuery = { __typename?: 'Query', repository?: 
             | { __typename?: 'Mannequin', login: string, htmlUrl: any, avatarUrl: any, type: 'Mannequin' }
             | { __typename?: 'Organization', login: string, htmlUrl: any, avatarUrl: any, type: 'Organization' }
             | { __typename?: 'User', login: string, htmlUrl: any, avatarUrl: any, type: 'User' }
-           | null, reactions: { __typename?: 'ReactionConnection', totalCount: number }, reactionGroups?: Array<{ __typename?: 'ReactionGroup', content: ReactionContent, reactors: { __typename?: 'ReactorConnection', totalCount: number } }> | null } | null> | null }, labels?: { __typename?: 'LabelConnection', nodes?: Array<{ __typename?: 'Label', name: string } | null> | null } | null, reactions: { __typename?: 'ReactionConnection', totalCount: number }, reactionGroups?: Array<{ __typename?: 'ReactionGroup', content: ReactionContent, reactors: { __typename?: 'ReactorConnection', totalCount: number } }> | null } | null } | null };
+           | null, reactions: { __typename?: 'ReactionConnection', totalCount: number }, reactionGroups?: Array<{ __typename?: 'ReactionGroup', content: ReactionContent, reactors: { __typename?: 'ReactorConnection', totalCount: number } }> | null } | null> | null }, labels?: { __typename?: 'LabelConnection', nodes?: Array<{ __typename?: 'Label', name: string, color: string } | null> | null } | null, reactions: { __typename?: 'ReactionConnection', totalCount: number }, reactionGroups?: Array<{ __typename?: 'ReactionGroup', content: ReactionContent, reactors: { __typename?: 'ReactorConnection', totalCount: number } }> | null } | null } | null };
 
 export type DiscussionDetailsFragment = { __typename: 'Discussion', number: number, title: string, stateReason?: DiscussionStateReason | null, isAnswered?: boolean | null, url: any, author?:
     | { __typename?: 'Bot', login: string, htmlUrl: any, avatarUrl: any, type: 'Bot' }
@@ -35657,7 +35659,7 @@ export type DiscussionDetailsFragment = { __typename: 'Discussion', number: numb
         | { __typename?: 'Mannequin', login: string, htmlUrl: any, avatarUrl: any, type: 'Mannequin' }
         | { __typename?: 'Organization', login: string, htmlUrl: any, avatarUrl: any, type: 'Organization' }
         | { __typename?: 'User', login: string, htmlUrl: any, avatarUrl: any, type: 'User' }
-       | null, reactions: { __typename?: 'ReactionConnection', totalCount: number }, reactionGroups?: Array<{ __typename?: 'ReactionGroup', content: ReactionContent, reactors: { __typename?: 'ReactorConnection', totalCount: number } }> | null } | null> | null }, labels?: { __typename?: 'LabelConnection', nodes?: Array<{ __typename?: 'Label', name: string } | null> | null } | null, reactions: { __typename?: 'ReactionConnection', totalCount: number }, reactionGroups?: Array<{ __typename?: 'ReactionGroup', content: ReactionContent, reactors: { __typename?: 'ReactorConnection', totalCount: number } }> | null };
+       | null, reactions: { __typename?: 'ReactionConnection', totalCount: number }, reactionGroups?: Array<{ __typename?: 'ReactionGroup', content: ReactionContent, reactors: { __typename?: 'ReactorConnection', totalCount: number } }> | null } | null> | null }, labels?: { __typename?: 'LabelConnection', nodes?: Array<{ __typename?: 'Label', name: string, color: string } | null> | null } | null, reactions: { __typename?: 'ReactionConnection', totalCount: number }, reactionGroups?: Array<{ __typename?: 'ReactionGroup', content: ReactionContent, reactors: { __typename?: 'ReactorConnection', totalCount: number } }> | null };
 
 export type CommentFieldsFragment = { __typename?: 'DiscussionComment', databaseId?: number | null, createdAt: any, url: any, author?:
     | { __typename?: 'Bot', login: string, htmlUrl: any, avatarUrl: any, type: 'Bot' }
@@ -35702,7 +35704,7 @@ export type FetchIssueByNumberQuery = { __typename?: 'Query', repository?: { __t
             | { __typename?: 'Mannequin', login: string, htmlUrl: any, avatarUrl: any, type: 'Mannequin' }
             | { __typename?: 'Organization', login: string, htmlUrl: any, avatarUrl: any, type: 'Organization' }
             | { __typename?: 'User', login: string, htmlUrl: any, avatarUrl: any, type: 'User' }
-           | null, reactions: { __typename?: 'ReactionConnection', totalCount: number }, reactionGroups?: Array<{ __typename?: 'ReactionGroup', content: ReactionContent, reactors: { __typename?: 'ReactorConnection', totalCount: number } }> | null } | null> | null }, labels?: { __typename?: 'LabelConnection', nodes?: Array<{ __typename?: 'Label', name: string } | null> | null } | null, reactions: { __typename?: 'ReactionConnection', totalCount: number }, reactionGroups?: Array<{ __typename?: 'ReactionGroup', content: ReactionContent, reactors: { __typename?: 'ReactorConnection', totalCount: number } }> | null } | null } | null };
+           | null, reactions: { __typename?: 'ReactionConnection', totalCount: number }, reactionGroups?: Array<{ __typename?: 'ReactionGroup', content: ReactionContent, reactors: { __typename?: 'ReactorConnection', totalCount: number } }> | null } | null> | null }, labels?: { __typename?: 'LabelConnection', nodes?: Array<{ __typename?: 'Label', name: string, color: string } | null> | null } | null, reactions: { __typename?: 'ReactionConnection', totalCount: number }, reactionGroups?: Array<{ __typename?: 'ReactionGroup', content: ReactionContent, reactors: { __typename?: 'ReactorConnection', totalCount: number } }> | null } | null } | null };
 
 export type IssueDetailsFragment = { __typename: 'Issue', number: number, title: string, url: any, state: IssueState, stateReason?: IssueStateReason | null, milestone?: { __typename?: 'Milestone', state: MilestoneState, title: string } | null, author?:
     | { __typename?: 'Bot', login: string, htmlUrl: any, avatarUrl: any, type: 'Bot' }
@@ -35716,7 +35718,7 @@ export type IssueDetailsFragment = { __typename: 'Issue', number: number, title:
         | { __typename?: 'Mannequin', login: string, htmlUrl: any, avatarUrl: any, type: 'Mannequin' }
         | { __typename?: 'Organization', login: string, htmlUrl: any, avatarUrl: any, type: 'Organization' }
         | { __typename?: 'User', login: string, htmlUrl: any, avatarUrl: any, type: 'User' }
-       | null, reactions: { __typename?: 'ReactionConnection', totalCount: number }, reactionGroups?: Array<{ __typename?: 'ReactionGroup', content: ReactionContent, reactors: { __typename?: 'ReactorConnection', totalCount: number } }> | null } | null> | null }, labels?: { __typename?: 'LabelConnection', nodes?: Array<{ __typename?: 'Label', name: string } | null> | null } | null, reactions: { __typename?: 'ReactionConnection', totalCount: number }, reactionGroups?: Array<{ __typename?: 'ReactionGroup', content: ReactionContent, reactors: { __typename?: 'ReactorConnection', totalCount: number } }> | null };
+       | null, reactions: { __typename?: 'ReactionConnection', totalCount: number }, reactionGroups?: Array<{ __typename?: 'ReactionGroup', content: ReactionContent, reactors: { __typename?: 'ReactorConnection', totalCount: number } }> | null } | null> | null }, labels?: { __typename?: 'LabelConnection', nodes?: Array<{ __typename?: 'Label', name: string, color: string } | null> | null } | null, reactions: { __typename?: 'ReactionConnection', totalCount: number }, reactionGroups?: Array<{ __typename?: 'ReactionGroup', content: ReactionContent, reactors: { __typename?: 'ReactorConnection', totalCount: number } }> | null };
 
 export type FetchMergedDetailsTemplateQueryVariables = Exact<{
   ownerINDEX: Scalars['String']['input'];
@@ -35753,7 +35755,7 @@ export type FetchMergedDetailsTemplateQuery = { __typename?: 'Query', repository
             | { __typename?: 'Mannequin', login: string, htmlUrl: any, avatarUrl: any, type: 'Mannequin' }
             | { __typename?: 'Organization', login: string, htmlUrl: any, avatarUrl: any, type: 'Organization' }
             | { __typename?: 'User', login: string, htmlUrl: any, avatarUrl: any, type: 'User' }
-           | null, reactions: { __typename?: 'ReactionConnection', totalCount: number }, reactionGroups?: Array<{ __typename?: 'ReactionGroup', content: ReactionContent, reactors: { __typename?: 'ReactorConnection', totalCount: number } }> | null } | null> | null }, labels?: { __typename?: 'LabelConnection', nodes?: Array<{ __typename?: 'Label', name: string } | null> | null } | null, reactions: { __typename?: 'ReactionConnection', totalCount: number }, reactionGroups?: Array<{ __typename?: 'ReactionGroup', content: ReactionContent, reactors: { __typename?: 'ReactorConnection', totalCount: number } }> | null } | null, issue?: { __typename: 'Issue', number: number, title: string, url: any, state: IssueState, stateReason?: IssueStateReason | null, milestone?: { __typename?: 'Milestone', state: MilestoneState, title: string } | null, author?:
+           | null, reactions: { __typename?: 'ReactionConnection', totalCount: number }, reactionGroups?: Array<{ __typename?: 'ReactionGroup', content: ReactionContent, reactors: { __typename?: 'ReactorConnection', totalCount: number } }> | null } | null> | null }, labels?: { __typename?: 'LabelConnection', nodes?: Array<{ __typename?: 'Label', name: string, color: string } | null> | null } | null, reactions: { __typename?: 'ReactionConnection', totalCount: number }, reactionGroups?: Array<{ __typename?: 'ReactionGroup', content: ReactionContent, reactors: { __typename?: 'ReactorConnection', totalCount: number } }> | null } | null, issue?: { __typename: 'Issue', number: number, title: string, url: any, state: IssueState, stateReason?: IssueStateReason | null, milestone?: { __typename?: 'Milestone', state: MilestoneState, title: string } | null, author?:
         | { __typename?: 'Bot', login: string, htmlUrl: any, avatarUrl: any, type: 'Bot' }
         | { __typename?: 'EnterpriseUserAccount', login: string, htmlUrl: any, avatarUrl: any, type: 'EnterpriseUserAccount' }
         | { __typename?: 'Mannequin', login: string, htmlUrl: any, avatarUrl: any, type: 'Mannequin' }
@@ -35765,7 +35767,7 @@ export type FetchMergedDetailsTemplateQuery = { __typename?: 'Query', repository
             | { __typename?: 'Mannequin', login: string, htmlUrl: any, avatarUrl: any, type: 'Mannequin' }
             | { __typename?: 'Organization', login: string, htmlUrl: any, avatarUrl: any, type: 'Organization' }
             | { __typename?: 'User', login: string, htmlUrl: any, avatarUrl: any, type: 'User' }
-           | null, reactions: { __typename?: 'ReactionConnection', totalCount: number }, reactionGroups?: Array<{ __typename?: 'ReactionGroup', content: ReactionContent, reactors: { __typename?: 'ReactorConnection', totalCount: number } }> | null } | null> | null }, labels?: { __typename?: 'LabelConnection', nodes?: Array<{ __typename?: 'Label', name: string } | null> | null } | null, reactions: { __typename?: 'ReactionConnection', totalCount: number }, reactionGroups?: Array<{ __typename?: 'ReactionGroup', content: ReactionContent, reactors: { __typename?: 'ReactorConnection', totalCount: number } }> | null } | null, pullRequest?: { __typename: 'PullRequest', number: number, title: string, url: any, state: PullRequestState, merged: boolean, isDraft: boolean, isInMergeQueue: boolean, milestone?: { __typename?: 'Milestone', state: MilestoneState, title: string } | null, author?:
+           | null, reactions: { __typename?: 'ReactionConnection', totalCount: number }, reactionGroups?: Array<{ __typename?: 'ReactionGroup', content: ReactionContent, reactors: { __typename?: 'ReactorConnection', totalCount: number } }> | null } | null> | null }, labels?: { __typename?: 'LabelConnection', nodes?: Array<{ __typename?: 'Label', name: string, color: string } | null> | null } | null, reactions: { __typename?: 'ReactionConnection', totalCount: number }, reactionGroups?: Array<{ __typename?: 'ReactionGroup', content: ReactionContent, reactors: { __typename?: 'ReactorConnection', totalCount: number } }> | null } | null, pullRequest?: { __typename: 'PullRequest', number: number, title: string, url: any, state: PullRequestState, merged: boolean, isDraft: boolean, isInMergeQueue: boolean, milestone?: { __typename?: 'Milestone', state: MilestoneState, title: string } | null, author?:
         | { __typename?: 'Bot', login: string, htmlUrl: any, avatarUrl: any, type: 'Bot' }
         | { __typename?: 'EnterpriseUserAccount', login: string, htmlUrl: any, avatarUrl: any, type: 'EnterpriseUserAccount' }
         | { __typename?: 'Mannequin', login: string, htmlUrl: any, avatarUrl: any, type: 'Mannequin' }
@@ -35783,7 +35785,7 @@ export type FetchMergedDetailsTemplateQuery = { __typename?: 'Query', repository
             | { __typename?: 'Mannequin', login: string }
             | { __typename?: 'Organization', login: string }
             | { __typename?: 'User', login: string }
-           | null } | null> | null } | null, labels?: { __typename?: 'LabelConnection', nodes?: Array<{ __typename?: 'Label', name: string } | null> | null } | null, closingIssuesReferences?: { __typename?: 'IssueConnection', nodes?: Array<{ __typename?: 'Issue', number: number } | null> | null } | null, reactions: { __typename?: 'ReactionConnection', totalCount: number }, reactionGroups?: Array<{ __typename?: 'ReactionGroup', content: ReactionContent, reactors: { __typename?: 'ReactorConnection', totalCount: number } }> | null } | null } | null };
+           | null } | null> | null } | null, labels?: { __typename?: 'LabelConnection', nodes?: Array<{ __typename?: 'Label', name: string, color: string } | null> | null } | null, closingIssuesReferences?: { __typename?: 'IssueConnection', nodes?: Array<{ __typename?: 'Issue', number: number } | null> | null } | null, reactions: { __typename?: 'ReactionConnection', totalCount: number }, reactionGroups?: Array<{ __typename?: 'ReactionGroup', content: ReactionContent, reactors: { __typename?: 'ReactorConnection', totalCount: number } }> | null } | null } | null };
 
 export type MergedDetailsQueryTemplateFragment = { __typename?: 'Query', repository?: { __typename?: 'Repository', discussion?: { __typename: 'Discussion', number: number, title: string, stateReason?: DiscussionStateReason | null, isAnswered?: boolean | null, url: any, author?:
         | { __typename?: 'Bot', login: string, htmlUrl: any, avatarUrl: any, type: 'Bot' }
@@ -35803,7 +35805,7 @@ export type MergedDetailsQueryTemplateFragment = { __typename?: 'Query', reposit
             | { __typename?: 'Mannequin', login: string, htmlUrl: any, avatarUrl: any, type: 'Mannequin' }
             | { __typename?: 'Organization', login: string, htmlUrl: any, avatarUrl: any, type: 'Organization' }
             | { __typename?: 'User', login: string, htmlUrl: any, avatarUrl: any, type: 'User' }
-           | null, reactions: { __typename?: 'ReactionConnection', totalCount: number }, reactionGroups?: Array<{ __typename?: 'ReactionGroup', content: ReactionContent, reactors: { __typename?: 'ReactorConnection', totalCount: number } }> | null } | null> | null }, labels?: { __typename?: 'LabelConnection', nodes?: Array<{ __typename?: 'Label', name: string } | null> | null } | null, reactions: { __typename?: 'ReactionConnection', totalCount: number }, reactionGroups?: Array<{ __typename?: 'ReactionGroup', content: ReactionContent, reactors: { __typename?: 'ReactorConnection', totalCount: number } }> | null } | null, issue?: { __typename: 'Issue', number: number, title: string, url: any, state: IssueState, stateReason?: IssueStateReason | null, milestone?: { __typename?: 'Milestone', state: MilestoneState, title: string } | null, author?:
+           | null, reactions: { __typename?: 'ReactionConnection', totalCount: number }, reactionGroups?: Array<{ __typename?: 'ReactionGroup', content: ReactionContent, reactors: { __typename?: 'ReactorConnection', totalCount: number } }> | null } | null> | null }, labels?: { __typename?: 'LabelConnection', nodes?: Array<{ __typename?: 'Label', name: string, color: string } | null> | null } | null, reactions: { __typename?: 'ReactionConnection', totalCount: number }, reactionGroups?: Array<{ __typename?: 'ReactionGroup', content: ReactionContent, reactors: { __typename?: 'ReactorConnection', totalCount: number } }> | null } | null, issue?: { __typename: 'Issue', number: number, title: string, url: any, state: IssueState, stateReason?: IssueStateReason | null, milestone?: { __typename?: 'Milestone', state: MilestoneState, title: string } | null, author?:
         | { __typename?: 'Bot', login: string, htmlUrl: any, avatarUrl: any, type: 'Bot' }
         | { __typename?: 'EnterpriseUserAccount', login: string, htmlUrl: any, avatarUrl: any, type: 'EnterpriseUserAccount' }
         | { __typename?: 'Mannequin', login: string, htmlUrl: any, avatarUrl: any, type: 'Mannequin' }
@@ -35815,7 +35817,7 @@ export type MergedDetailsQueryTemplateFragment = { __typename?: 'Query', reposit
             | { __typename?: 'Mannequin', login: string, htmlUrl: any, avatarUrl: any, type: 'Mannequin' }
             | { __typename?: 'Organization', login: string, htmlUrl: any, avatarUrl: any, type: 'Organization' }
             | { __typename?: 'User', login: string, htmlUrl: any, avatarUrl: any, type: 'User' }
-           | null, reactions: { __typename?: 'ReactionConnection', totalCount: number }, reactionGroups?: Array<{ __typename?: 'ReactionGroup', content: ReactionContent, reactors: { __typename?: 'ReactorConnection', totalCount: number } }> | null } | null> | null }, labels?: { __typename?: 'LabelConnection', nodes?: Array<{ __typename?: 'Label', name: string } | null> | null } | null, reactions: { __typename?: 'ReactionConnection', totalCount: number }, reactionGroups?: Array<{ __typename?: 'ReactionGroup', content: ReactionContent, reactors: { __typename?: 'ReactorConnection', totalCount: number } }> | null } | null, pullRequest?: { __typename: 'PullRequest', number: number, title: string, url: any, state: PullRequestState, merged: boolean, isDraft: boolean, isInMergeQueue: boolean, milestone?: { __typename?: 'Milestone', state: MilestoneState, title: string } | null, author?:
+           | null, reactions: { __typename?: 'ReactionConnection', totalCount: number }, reactionGroups?: Array<{ __typename?: 'ReactionGroup', content: ReactionContent, reactors: { __typename?: 'ReactorConnection', totalCount: number } }> | null } | null> | null }, labels?: { __typename?: 'LabelConnection', nodes?: Array<{ __typename?: 'Label', name: string, color: string } | null> | null } | null, reactions: { __typename?: 'ReactionConnection', totalCount: number }, reactionGroups?: Array<{ __typename?: 'ReactionGroup', content: ReactionContent, reactors: { __typename?: 'ReactorConnection', totalCount: number } }> | null } | null, pullRequest?: { __typename: 'PullRequest', number: number, title: string, url: any, state: PullRequestState, merged: boolean, isDraft: boolean, isInMergeQueue: boolean, milestone?: { __typename?: 'Milestone', state: MilestoneState, title: string } | null, author?:
         | { __typename?: 'Bot', login: string, htmlUrl: any, avatarUrl: any, type: 'Bot' }
         | { __typename?: 'EnterpriseUserAccount', login: string, htmlUrl: any, avatarUrl: any, type: 'EnterpriseUserAccount' }
         | { __typename?: 'Mannequin', login: string, htmlUrl: any, avatarUrl: any, type: 'Mannequin' }
@@ -35833,7 +35835,7 @@ export type MergedDetailsQueryTemplateFragment = { __typename?: 'Query', reposit
             | { __typename?: 'Mannequin', login: string }
             | { __typename?: 'Organization', login: string }
             | { __typename?: 'User', login: string }
-           | null } | null> | null } | null, labels?: { __typename?: 'LabelConnection', nodes?: Array<{ __typename?: 'Label', name: string } | null> | null } | null, closingIssuesReferences?: { __typename?: 'IssueConnection', nodes?: Array<{ __typename?: 'Issue', number: number } | null> | null } | null, reactions: { __typename?: 'ReactionConnection', totalCount: number }, reactionGroups?: Array<{ __typename?: 'ReactionGroup', content: ReactionContent, reactors: { __typename?: 'ReactorConnection', totalCount: number } }> | null } | null } | null };
+           | null } | null> | null } | null, labels?: { __typename?: 'LabelConnection', nodes?: Array<{ __typename?: 'Label', name: string, color: string } | null> | null } | null, closingIssuesReferences?: { __typename?: 'IssueConnection', nodes?: Array<{ __typename?: 'Issue', number: number } | null> | null } | null, reactions: { __typename?: 'ReactionConnection', totalCount: number }, reactionGroups?: Array<{ __typename?: 'ReactionGroup', content: ReactionContent, reactors: { __typename?: 'ReactorConnection', totalCount: number } }> | null } | null } | null };
 
 export type FetchPullRequestByNumberQueryVariables = Exact<{
   owner: Scalars['String']['input'];
@@ -35864,7 +35866,7 @@ export type FetchPullRequestByNumberQuery = { __typename?: 'Query', repository?:
             | { __typename?: 'Mannequin', login: string }
             | { __typename?: 'Organization', login: string }
             | { __typename?: 'User', login: string }
-           | null } | null> | null } | null, labels?: { __typename?: 'LabelConnection', nodes?: Array<{ __typename?: 'Label', name: string } | null> | null } | null, closingIssuesReferences?: { __typename?: 'IssueConnection', nodes?: Array<{ __typename?: 'Issue', number: number } | null> | null } | null, reactions: { __typename?: 'ReactionConnection', totalCount: number }, reactionGroups?: Array<{ __typename?: 'ReactionGroup', content: ReactionContent, reactors: { __typename?: 'ReactorConnection', totalCount: number } }> | null } | null } | null };
+           | null } | null> | null } | null, labels?: { __typename?: 'LabelConnection', nodes?: Array<{ __typename?: 'Label', name: string, color: string } | null> | null } | null, closingIssuesReferences?: { __typename?: 'IssueConnection', nodes?: Array<{ __typename?: 'Issue', number: number } | null> | null } | null, reactions: { __typename?: 'ReactionConnection', totalCount: number }, reactionGroups?: Array<{ __typename?: 'ReactionGroup', content: ReactionContent, reactors: { __typename?: 'ReactorConnection', totalCount: number } }> | null } | null } | null };
 
 export type PullRequestDetailsFragment = { __typename: 'PullRequest', number: number, title: string, url: any, state: PullRequestState, merged: boolean, isDraft: boolean, isInMergeQueue: boolean, milestone?: { __typename?: 'Milestone', state: MilestoneState, title: string } | null, author?:
     | { __typename?: 'Bot', login: string, htmlUrl: any, avatarUrl: any, type: 'Bot' }
@@ -35884,7 +35886,7 @@ export type PullRequestDetailsFragment = { __typename: 'PullRequest', number: nu
         | { __typename?: 'Mannequin', login: string }
         | { __typename?: 'Organization', login: string }
         | { __typename?: 'User', login: string }
-       | null } | null> | null } | null, labels?: { __typename?: 'LabelConnection', nodes?: Array<{ __typename?: 'Label', name: string } | null> | null } | null, closingIssuesReferences?: { __typename?: 'IssueConnection', nodes?: Array<{ __typename?: 'Issue', number: number } | null> | null } | null, reactions: { __typename?: 'ReactionConnection', totalCount: number }, reactionGroups?: Array<{ __typename?: 'ReactionGroup', content: ReactionContent, reactors: { __typename?: 'ReactorConnection', totalCount: number } }> | null };
+       | null } | null> | null } | null, labels?: { __typename?: 'LabelConnection', nodes?: Array<{ __typename?: 'Label', name: string, color: string } | null> | null } | null, closingIssuesReferences?: { __typename?: 'IssueConnection', nodes?: Array<{ __typename?: 'Issue', number: number } | null> | null } | null, reactions: { __typename?: 'ReactionConnection', totalCount: number }, reactionGroups?: Array<{ __typename?: 'ReactionGroup', content: ReactionContent, reactors: { __typename?: 'ReactorConnection', totalCount: number } }> | null };
 
 export type PullRequestReviewFieldsFragment = { __typename?: 'PullRequestReview', state: PullRequestReviewState, author?:
     | { __typename?: 'Bot', login: string }
@@ -35991,6 +35993,12 @@ fragment CommentFields on DiscussionComment {
     ...ReactionGroupFields
   }
 }`, {"fragmentName":"DiscussionCommentFields"}) as unknown as TypedDocumentString<DiscussionCommentFieldsFragment, unknown>;
+export const LabelFieldsFragmentDoc = new TypedDocumentString(`
+    fragment LabelFields on Label {
+  name
+  color
+}
+    `, {"fragmentName":"LabelFields"}) as unknown as TypedDocumentString<LabelFieldsFragment, unknown>;
 export const DiscussionDetailsFragmentDoc = new TypedDocumentString(`
     fragment DiscussionDetails on Discussion {
   __typename
@@ -36010,7 +36018,7 @@ export const DiscussionDetailsFragmentDoc = new TypedDocumentString(`
   }
   labels(first: $firstLabels) {
     nodes {
-      name
+      ...LabelFields
     }
   }
   reactions {
@@ -36031,6 +36039,10 @@ fragment ReactionGroupFields on ReactionGroup {
   reactors {
     totalCount
   }
+}
+fragment LabelFields on Label {
+  name
+  color
 }
 fragment CommentFields on DiscussionComment {
   databaseId
@@ -36092,7 +36104,7 @@ export const IssueDetailsFragmentDoc = new TypedDocumentString(`
   }
   labels(first: $firstLabels) {
     nodes {
-      name
+      ...LabelFields
     }
   }
   reactions {
@@ -36117,6 +36129,10 @@ fragment ReactionGroupFields on ReactionGroup {
   reactors {
     totalCount
   }
+}
+fragment LabelFields on Label {
+  name
+  color
 }`, {"fragmentName":"IssueDetails"}) as unknown as TypedDocumentString<IssueDetailsFragment, unknown>;
 export const PullRequestReviewFieldsFragmentDoc = new TypedDocumentString(`
     fragment PullRequestReviewFields on PullRequestReview {
@@ -36165,7 +36181,7 @@ export const PullRequestDetailsFragmentDoc = new TypedDocumentString(`
   }
   labels(first: $firstLabels) {
     nodes {
-      name
+      ...LabelFields
     }
   }
   closingIssuesReferences(first: $firstClosingIssues) {
@@ -36195,6 +36211,10 @@ fragment ReactionGroupFields on ReactionGroup {
   reactors {
     totalCount
   }
+}
+fragment LabelFields on Label {
+  name
+  color
 }
 fragment PullRequestReviewFields on PullRequestReview {
   state
@@ -36232,6 +36252,10 @@ fragment ReactionGroupFields on ReactionGroup {
     totalCount
   }
 }
+fragment LabelFields on Label {
+  name
+  color
+}
 fragment DiscussionDetails on Discussion {
   __typename
   number
@@ -36250,7 +36274,7 @@ fragment DiscussionDetails on Discussion {
   }
   labels(first: $firstLabels) {
     nodes {
-      name
+      ...LabelFields
     }
   }
   reactions {
@@ -36313,7 +36337,7 @@ fragment IssueDetails on Issue {
   }
   labels(first: $firstLabels) {
     nodes {
-      name
+      ...LabelFields
     }
   }
   reactions {
@@ -36361,7 +36385,7 @@ fragment PullRequestDetails on PullRequest {
   }
   labels(first: $firstLabels) {
     nodes {
-      name
+      ...LabelFields
     }
   }
   closingIssuesReferences(first: $firstClosingIssues) {
@@ -36402,6 +36426,10 @@ fragment ReactionGroupFields on ReactionGroup {
     totalCount
   }
 }
+fragment LabelFields on Label {
+  name
+  color
+}
 fragment DiscussionDetails on Discussion {
   __typename
   number
@@ -36420,7 +36448,7 @@ fragment DiscussionDetails on Discussion {
   }
   labels(first: $firstLabels) {
     nodes {
-      name
+      ...LabelFields
     }
   }
   reactions {
@@ -36477,6 +36505,10 @@ fragment ReactionGroupFields on ReactionGroup {
     totalCount
   }
 }
+fragment LabelFields on Label {
+  name
+  color
+}
 fragment IssueDetails on Issue {
   __typename
   number
@@ -36507,7 +36539,7 @@ fragment IssueDetails on Issue {
   }
   labels(first: $firstLabels) {
     nodes {
-      name
+      ...LabelFields
     }
   }
   reactions {
@@ -36537,6 +36569,10 @@ fragment ReactionGroupFields on ReactionGroup {
     totalCount
   }
 }
+fragment LabelFields on Label {
+  name
+  color
+}
 fragment DiscussionDetails on Discussion {
   __typename
   number
@@ -36555,7 +36591,7 @@ fragment DiscussionDetails on Discussion {
   }
   labels(first: $firstLabels) {
     nodes {
-      name
+      ...LabelFields
     }
   }
   reactions {
@@ -36618,7 +36654,7 @@ fragment IssueDetails on Issue {
   }
   labels(first: $firstLabels) {
     nodes {
-      name
+      ...LabelFields
     }
   }
   reactions {
@@ -36679,7 +36715,7 @@ fragment PullRequestDetails on PullRequest {
   }
   labels(first: $firstLabels) {
     nodes {
-      name
+      ...LabelFields
     }
   }
   closingIssuesReferences(first: $firstClosingIssues) {
@@ -36724,6 +36760,10 @@ fragment ReactionGroupFields on ReactionGroup {
     totalCount
   }
 }
+fragment LabelFields on Label {
+  name
+  color
+}
 fragment PullRequestDetails on PullRequest {
   __typename
   number
@@ -36762,7 +36802,7 @@ fragment PullRequestDetails on PullRequest {
   }
   labels(first: $firstLabels) {
     nodes {
-      name
+      ...LabelFields
     }
   }
   closingIssuesReferences(first: $firstClosingIssues) {

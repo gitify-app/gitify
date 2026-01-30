@@ -1,4 +1,4 @@
-import type { FC } from 'react';
+import type { FC, ReactNode } from 'react';
 
 import type { Icon } from '@primer/octicons-react';
 import { Label, Stack, Text, Tooltip } from '@primer/react';
@@ -10,6 +10,7 @@ export interface MetricPillProps {
   metric?: number;
   icon: Icon;
   color: IconColor;
+  content?: ReactNode;
 }
 
 export const MetricPill: FC<MetricPillProps> = (props: MetricPillProps) => {
@@ -31,6 +32,7 @@ export const MetricPill: FC<MetricPillProps> = (props: MetricPillProps) => {
             ) : null}
           </Stack>
         </Label>
+        {props.content}
       </button>
     </Tooltip>
   );

@@ -2,19 +2,14 @@ import type { FC } from 'react';
 
 import { SmileyIcon } from '@primer/octicons-react';
 
-import { IconColor } from '../../types';
+import { type GitifyReactionGroup, IconColor } from '../../types';
 
 import { formatMetricDescription } from '../../utils/notifications/formatters';
 import { MetricPill } from './MetricPill';
 
-export interface ReactionGroup {
-  content: string;
-  reactors: { totalCount: number };
-}
-
 export interface ReactionsPillProps {
   reactionsCount: number;
-  reactionGroups: ReactionGroup[];
+  reactionGroups: GitifyReactionGroup[];
 }
 
 const reactionEmojiMap: Record<string, string> = {

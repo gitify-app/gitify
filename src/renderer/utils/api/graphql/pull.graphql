@@ -54,7 +54,7 @@ fragment PullRequestDetails on PullRequest {
   }
   labels(first: $firstLabels) {
     nodes {
-      name
+      ...LabelFields
     }
   }
   closingIssuesReferences(first: $firstClosingIssues) {
