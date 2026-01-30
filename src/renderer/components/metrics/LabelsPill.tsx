@@ -19,8 +19,11 @@ export const LabelsPill: FC<LabelsPillProps> = ({ labels }) => {
   const description = formatMetricDescription(
     labels.length,
     'label',
-    (count, noun) =>
-      `${count} ${noun}: ${labels.map((label) => `🏷️ ${label}`).join(', ')}`,
+    (count, noun) => {
+      const formatted = labels.map((label) => `🏷️ ${label}`).join(', ');
+
+      return `${count} ${noun}: ${formatted}`;
+    },
   );
 
   return (
