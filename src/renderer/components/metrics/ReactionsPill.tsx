@@ -5,7 +5,6 @@ import { IssueLabelToken, LabelGroup } from '@primer/react';
 
 import { type GitifyReactionGroup, IconColor } from '../../types';
 
-// import { formatMetricDescription } from '../../utils/notifications/formatters';
 import { MetricPill } from './MetricPill';
 
 export interface ReactionsPillProps {
