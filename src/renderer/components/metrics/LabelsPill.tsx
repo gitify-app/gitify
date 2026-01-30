@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 
-import { IssueLabelToken } from '@primer/react';
+import { IssueLabelToken, LabelGroup } from '@primer/react';
 
 import type { GitifyLabels } from '../../types';
 
@@ -14,7 +14,7 @@ export const LabelsPill: FC<LabelsPillProps> = ({ labels }) => {
   }
 
   const labelsContent = (
-    <>
+    <LabelGroup visibleChildCount="auto">
       {labels.map((label) => {
         return (
           <IssueLabelToken
@@ -26,7 +26,7 @@ export const LabelsPill: FC<LabelsPillProps> = ({ labels }) => {
           />
         );
       })}
-    </>
+    </LabelGroup>
   );
 
   return labelsContent;
