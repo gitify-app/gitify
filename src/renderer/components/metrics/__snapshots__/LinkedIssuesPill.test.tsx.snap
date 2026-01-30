@@ -1,0 +1,395 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`renderer/components/metrics/LinkedIssuesPill.tsx renders when linked to multiple issues/prs 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        data-color-mode="light"
+        data-dark-theme="dark"
+        data-light-theme="light"
+      >
+        <div
+          class="prc-src-BaseStyles-aopSS"
+          data-portal-root="true"
+        >
+          <button
+            aria-describedby="_r_ID_"
+            type="button"
+          >
+            <span
+              class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
+              data-size="small"
+              data-variant="secondary"
+              tabindex="0"
+            >
+              <div
+                class="prc-Stack-Stack-UQ9k6"
+                data-align="center"
+                data-direction="horizontal"
+                data-gap="none"
+                data-justify="start"
+                data-padding="none"
+                data-wrap="nowrap"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="octicon octicon-issue-opened text-gitify-icon-muted"
+                  display="inline-block"
+                  fill="currentColor"
+                  focusable="false"
+                  height="12"
+                  overflow="visible"
+                  style="vertical-align: text-bottom;"
+                  viewBox="0 0 16 16"
+                  width="12"
+                >
+                  <path
+                    d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
+                  />
+                  <path
+                    d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"
+                  />
+                </svg>
+                <span
+                  class="text-xxs px-1 prc-Text-Text-9mHv3"
+                >
+                  2
+                </span>
+              </div>
+            </span>
+          </button>
+          <span
+            aria-hidden="true"
+            class="prc-TooltipV2-Tooltip-tLeuB"
+            data-direction="s"
+            id="_r_ID_"
+            popover="auto"
+            role="tooltip"
+          >
+            Linked to 2 issues: #1, #2
+          </span>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      data-color-mode="light"
+      data-dark-theme="dark"
+      data-light-theme="light"
+    >
+      <div
+        class="prc-src-BaseStyles-aopSS"
+        data-portal-root="true"
+      >
+        <button
+          aria-describedby="_r_ID_"
+          type="button"
+        >
+          <span
+            class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
+            data-size="small"
+            data-variant="secondary"
+            tabindex="0"
+          >
+            <div
+              class="prc-Stack-Stack-UQ9k6"
+              data-align="center"
+              data-direction="horizontal"
+              data-gap="none"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-issue-opened text-gitify-icon-muted"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="12"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="12"
+              >
+                <path
+                  d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
+                />
+                <path
+                  d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"
+                />
+              </svg>
+              <span
+                class="text-xxs px-1 prc-Text-Text-9mHv3"
+              >
+                2
+              </span>
+            </div>
+          </span>
+        </button>
+        <span
+          aria-hidden="true"
+          class="prc-TooltipV2-Tooltip-tLeuB"
+          data-direction="s"
+          id="_r_ID_"
+          popover="auto"
+          role="tooltip"
+        >
+          Linked to 2 issues: #1, #2
+        </span>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`renderer/components/metrics/LinkedIssuesPill.tsx renders when linked to one issue/pr 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        data-color-mode="light"
+        data-dark-theme="dark"
+        data-light-theme="light"
+      >
+        <div
+          class="prc-src-BaseStyles-aopSS"
+          data-portal-root="true"
+        >
+          <button
+            aria-describedby="_r_ID_"
+            type="button"
+          >
+            <span
+              class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
+              data-size="small"
+              data-variant="secondary"
+              tabindex="0"
+            >
+              <div
+                class="prc-Stack-Stack-UQ9k6"
+                data-align="center"
+                data-direction="horizontal"
+                data-gap="none"
+                data-justify="start"
+                data-padding="none"
+                data-wrap="nowrap"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="octicon octicon-issue-opened text-gitify-icon-muted"
+                  display="inline-block"
+                  fill="currentColor"
+                  focusable="false"
+                  height="12"
+                  overflow="visible"
+                  style="vertical-align: text-bottom;"
+                  viewBox="0 0 16 16"
+                  width="12"
+                >
+                  <path
+                    d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
+                  />
+                  <path
+                    d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"
+                  />
+                </svg>
+                <span
+                  class="text-xxs px-1 prc-Text-Text-9mHv3"
+                >
+                  1
+                </span>
+              </div>
+            </span>
+          </button>
+          <span
+            aria-hidden="true"
+            class="prc-TooltipV2-Tooltip-tLeuB"
+            data-direction="s"
+            id="_r_ID_"
+            popover="auto"
+            role="tooltip"
+          >
+            Linked to 1 issue: #1
+          </span>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      data-color-mode="light"
+      data-dark-theme="dark"
+      data-light-theme="light"
+    >
+      <div
+        class="prc-src-BaseStyles-aopSS"
+        data-portal-root="true"
+      >
+        <button
+          aria-describedby="_r_ID_"
+          type="button"
+        >
+          <span
+            class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
+            data-size="small"
+            data-variant="secondary"
+            tabindex="0"
+          >
+            <div
+              class="prc-Stack-Stack-UQ9k6"
+              data-align="center"
+              data-direction="horizontal"
+              data-gap="none"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-issue-opened text-gitify-icon-muted"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="12"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="12"
+              >
+                <path
+                  d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
+                />
+                <path
+                  d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"
+                />
+              </svg>
+              <span
+                class="text-xxs px-1 prc-Text-Text-9mHv3"
+              >
+                1
+              </span>
+            </div>
+          </span>
+        </button>
+        <span
+          aria-hidden="true"
+          class="prc-TooltipV2-Tooltip-tLeuB"
+          data-direction="s"
+          id="_r_ID_"
+          popover="auto"
+          role="tooltip"
+        >
+          Linked to 1 issue: #1
+        </span>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

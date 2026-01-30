@@ -1,168 +1,45 @@
 import type { FC } from 'react';
 
-import {
-  CommentIcon,
-  IssueOpenedIcon,
-  MilestoneIcon,
-  SmileyIcon,
-  TagIcon,
-} from '@primer/octicons-react';
-
 import { useAppContext } from '../../hooks/useAppContext';
 
-import { type GitifyNotification, IconColor } from '../../types';
+import type { GitifyNotification } from '../../types';
 
-import { getPullRequestReviewIcon } from '../../utils/icons';
-import { formatMetricDescription } from '../../utils/notifications/formatters';
-import { MetricPill } from './MetricPill';
+import { CommentsPill } from './CommentsPill';
+import { LabelsPill } from './LabelsPill';
+import { LinkedIssuesPill } from './LinkedIssuesPill';
+import { MilestonePill } from './MilestonePill';
+import { ReactionsPill } from './ReactionsPill';
+import { ReviewsPill } from './ReviewsPill';
 
 export interface MetricGroupProps {
   notification: GitifyNotification;
 }
 
-export const MetricGroup: FC<MetricGroupProps> = ({
-  notification,
-}: MetricGroupProps) => {
+export const MetricGroup: FC<MetricGroupProps> = ({ notification }) => {
   const { settings } = useAppContext();
 
-  const linkedIssues = notification.subject.linkedIssues ?? [];
-  const hasLinkedIssues = linkedIssues.length > 0;
-  const linkedIssuesPillDescription = formatMetricDescription(
-    linkedIssues.length,
-    'issue',
-    (count, noun) => {
-      return `Linked to ${count} ${noun}: ${linkedIssues.join(', ')}`;
-    },
-  );
-
-  const reactionCount = notification.subject.reactionsCount ?? 0;
-  const reactionGroups = notification.subject.reactionGroups ?? [];
-  const hasReactions = reactionCount > 0;
-  const hasMultipleReactions =
-    reactionGroups.filter((rg) => rg.reactors.totalCount > 0).length > 1;
-  const reactionEmojiMap: Record<string, string> = {
-    THUMBS_UP: '👍',
-    THUMBS_DOWN: '👎',
-    LAUGH: '😆',
-    HOORAY: '🎉',
-    CONFUSED: '😕',
-    ROCKET: '🚀',
-    EYES: '👀',
-    HEART: '❤️',
-  };
-
-  const reactionPillDescription = formatMetricDescription(
-    reactionCount,
-    'reaction',
-    (count, noun) => {
-      const formatted = reactionGroups
-        .map((rg) => {
-          const emoji = reactionEmojiMap[rg.content];
-          if (!emoji || !rg.reactors.totalCount) {
-            return '';
-          }
-
-          return `${emoji} ${hasMultipleReactions ? rg.reactors.totalCount : ''}`.trim();
-        })
-        .filter(Boolean)
-        .join(' ');
-
-      return `${count} ${noun}: ${formatted}`;
-    },
-  );
-
-  const commentCount = notification.subject.commentCount ?? 0;
-  const hasComments = commentCount > 0;
-  const commentsPillDescription = formatMetricDescription(
-    commentCount,
-    'comment',
-  );
-
-  const labels = notification.subject.labels ?? [];
-  const labelsCount = labels.length;
-  const hasLabels = labelsCount > 0;
-  const labelsPillDescription = formatMetricDescription(
-    labelsCount,
-    'label',
-    (count, noun) => {
-      const formatted = labels
-        .map((label) => {
-          return `🏷️ ${label}`.trim();
-        })
-        .join(', ');
-
-      return `${count} ${noun}: ${formatted}`;
-    },
-  );
-
-  const milestone = notification.subject.milestone;
+  if (!settings.showPills) {
+    return null;
+  }
 
   return (
-    settings.showPills && (
-      <div className="flex gap-1">
-        {hasLinkedIssues && (
-          <MetricPill
-            color={IconColor.GRAY}
-            icon={IssueOpenedIcon}
-            metric={linkedIssues.length}
-            title={linkedIssuesPillDescription}
-          />
-        )}
+    <div className="flex gap-1">
+      <LinkedIssuesPill
+        linkedIssues={notification.subject.linkedIssues ?? []}
+      />
 
-        {hasReactions && (
-          <MetricPill
-            color={IconColor.GRAY}
-            icon={SmileyIcon}
-            metric={notification.subject.reactionsCount}
-            title={reactionPillDescription}
-          />
-        )}
+      <ReactionsPill
+        reactionGroups={notification.subject.reactionGroups ?? []}
+        reactionsCount={notification.subject.reactionsCount ?? 0}
+      />
 
-        {notification.subject.reviews?.map((review) => {
-          const icon = getPullRequestReviewIcon(review);
-          if (!icon) {
-            return null;
-          }
+      <ReviewsPill reviews={notification.subject.reviews ?? []} />
 
-          return (
-            <MetricPill
-              color={icon.color}
-              icon={icon.type}
-              key={review.state}
-              metric={review.users.length}
-              title={icon.description}
-            />
-          );
-        })}
+      <CommentsPill commentCount={notification.subject.commentCount ?? 0} />
 
-        {hasComments && (
-          <MetricPill
-            color={IconColor.GRAY}
-            icon={CommentIcon}
-            metric={commentCount}
-            title={commentsPillDescription}
-          />
-        )}
+      <LabelsPill labels={notification.subject.labels ?? []} />
 
-        {hasLabels && (
-          <MetricPill
-            color={IconColor.GRAY}
-            icon={TagIcon}
-            metric={labels.length}
-            title={labelsPillDescription}
-          />
-        )}
-
-        {milestone && (
-          <MetricPill
-            color={
-              milestone.state === 'OPEN' ? IconColor.GREEN : IconColor.PURPLE
-            }
-            icon={MilestoneIcon}
-            title={milestone.title}
-          />
-        )}
-      </div>
-    )
+      <MilestonePill milestone={notification.subject.milestone} />
+    </div>
   );
 };
