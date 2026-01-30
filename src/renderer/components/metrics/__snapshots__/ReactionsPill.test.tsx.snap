@@ -65,7 +65,140 @@ exports[`renderer/components/metrics/ReactionsPill.tsx renders when multiple rea
             popover="auto"
             role="tooltip"
           >
-            54 reactions: 👍 1 👎 1 😆 2 🎉 3 😕 5 🚀 8 👀 13 ❤️ 21
+            <ul
+              class="prc-LabelGroup-Container-E-ePP"
+              data-list="true"
+              data-overflow="inline"
+            >
+              <li>
+                <span
+                  class="prc-Token-TokenBase-te5-F prc-Token-IssueLabel-2IazM"
+                  data-cursor-is-interactive="false"
+                  data-has-remove-button="false"
+                  data-size="small"
+                  style="--label-r: 36; --label-g: 41; --label-b: 46; --label-h: 210; --label-s: 12; --label-l: 16;"
+                  text="👍 1"
+                >
+                  <span
+                    class="prc-Token-TokenTextContainer-cOUaD"
+                  >
+                    👍 1
+                  </span>
+                </span>
+              </li>
+              <li>
+                <span
+                  class="prc-Token-TokenBase-te5-F prc-Token-IssueLabel-2IazM"
+                  data-cursor-is-interactive="false"
+                  data-has-remove-button="false"
+                  data-size="small"
+                  style="--label-r: 36; --label-g: 41; --label-b: 46; --label-h: 210; --label-s: 12; --label-l: 16;"
+                  text="👎 1"
+                >
+                  <span
+                    class="prc-Token-TokenTextContainer-cOUaD"
+                  >
+                    👎 1
+                  </span>
+                </span>
+              </li>
+              <li>
+                <span
+                  class="prc-Token-TokenBase-te5-F prc-Token-IssueLabel-2IazM"
+                  data-cursor-is-interactive="false"
+                  data-has-remove-button="false"
+                  data-size="small"
+                  style="--label-r: 36; --label-g: 41; --label-b: 46; --label-h: 210; --label-s: 12; --label-l: 16;"
+                  text="😆 2"
+                >
+                  <span
+                    class="prc-Token-TokenTextContainer-cOUaD"
+                  >
+                    😆 2
+                  </span>
+                </span>
+              </li>
+              <li>
+                <span
+                  class="prc-Token-TokenBase-te5-F prc-Token-IssueLabel-2IazM"
+                  data-cursor-is-interactive="false"
+                  data-has-remove-button="false"
+                  data-size="small"
+                  style="--label-r: 36; --label-g: 41; --label-b: 46; --label-h: 210; --label-s: 12; --label-l: 16;"
+                  text="🎉 3"
+                >
+                  <span
+                    class="prc-Token-TokenTextContainer-cOUaD"
+                  >
+                    🎉 3
+                  </span>
+                </span>
+              </li>
+              <li>
+                <span
+                  class="prc-Token-TokenBase-te5-F prc-Token-IssueLabel-2IazM"
+                  data-cursor-is-interactive="false"
+                  data-has-remove-button="false"
+                  data-size="small"
+                  style="--label-r: 36; --label-g: 41; --label-b: 46; --label-h: 210; --label-s: 12; --label-l: 16;"
+                  text="😕 5"
+                >
+                  <span
+                    class="prc-Token-TokenTextContainer-cOUaD"
+                  >
+                    😕 5
+                  </span>
+                </span>
+              </li>
+              <li>
+                <span
+                  class="prc-Token-TokenBase-te5-F prc-Token-IssueLabel-2IazM"
+                  data-cursor-is-interactive="false"
+                  data-has-remove-button="false"
+                  data-size="small"
+                  style="--label-r: 36; --label-g: 41; --label-b: 46; --label-h: 210; --label-s: 12; --label-l: 16;"
+                  text="🚀 8"
+                >
+                  <span
+                    class="prc-Token-TokenTextContainer-cOUaD"
+                  >
+                    🚀 8
+                  </span>
+                </span>
+              </li>
+              <li>
+                <span
+                  class="prc-Token-TokenBase-te5-F prc-Token-IssueLabel-2IazM"
+                  data-cursor-is-interactive="false"
+                  data-has-remove-button="false"
+                  data-size="small"
+                  style="--label-r: 36; --label-g: 41; --label-b: 46; --label-h: 210; --label-s: 12; --label-l: 16;"
+                  text="👀 13"
+                >
+                  <span
+                    class="prc-Token-TokenTextContainer-cOUaD"
+                  >
+                    👀 13
+                  </span>
+                </span>
+              </li>
+              <li>
+                <span
+                  class="prc-Token-TokenBase-te5-F prc-Token-IssueLabel-2IazM"
+                  data-cursor-is-interactive="false"
+                  data-has-remove-button="false"
+                  data-size="small"
+                  style="--label-r: 36; --label-g: 41; --label-b: 46; --label-h: 210; --label-s: 12; --label-l: 16;"
+                  text="❤️ 21"
+                >
+                  <span
+                    class="prc-Token-TokenTextContainer-cOUaD"
+                  >
+                    ❤️ 21
+                  </span>
+                </span>
+              </li>
+            </ul>
           </span>
         </div>
       </div>
@@ -132,7 +265,140 @@ exports[`renderer/components/metrics/ReactionsPill.tsx renders when multiple rea
           popover="auto"
           role="tooltip"
         >
-          54 reactions: 👍 1 👎 1 😆 2 🎉 3 😕 5 🚀 8 👀 13 ❤️ 21
+          <ul
+            class="prc-LabelGroup-Container-E-ePP"
+            data-list="true"
+            data-overflow="inline"
+          >
+            <li>
+              <span
+                class="prc-Token-TokenBase-te5-F prc-Token-IssueLabel-2IazM"
+                data-cursor-is-interactive="false"
+                data-has-remove-button="false"
+                data-size="small"
+                style="--label-r: 36; --label-g: 41; --label-b: 46; --label-h: 210; --label-s: 12; --label-l: 16;"
+                text="👍 1"
+              >
+                <span
+                  class="prc-Token-TokenTextContainer-cOUaD"
+                >
+                  👍 1
+                </span>
+              </span>
+            </li>
+            <li>
+              <span
+                class="prc-Token-TokenBase-te5-F prc-Token-IssueLabel-2IazM"
+                data-cursor-is-interactive="false"
+                data-has-remove-button="false"
+                data-size="small"
+                style="--label-r: 36; --label-g: 41; --label-b: 46; --label-h: 210; --label-s: 12; --label-l: 16;"
+                text="👎 1"
+              >
+                <span
+                  class="prc-Token-TokenTextContainer-cOUaD"
+                >
+                  👎 1
+                </span>
+              </span>
+            </li>
+            <li>
+              <span
+                class="prc-Token-TokenBase-te5-F prc-Token-IssueLabel-2IazM"
+                data-cursor-is-interactive="false"
+                data-has-remove-button="false"
+                data-size="small"
+                style="--label-r: 36; --label-g: 41; --label-b: 46; --label-h: 210; --label-s: 12; --label-l: 16;"
+                text="😆 2"
+              >
+                <span
+                  class="prc-Token-TokenTextContainer-cOUaD"
+                >
+                  😆 2
+                </span>
+              </span>
+            </li>
+            <li>
+              <span
+                class="prc-Token-TokenBase-te5-F prc-Token-IssueLabel-2IazM"
+                data-cursor-is-interactive="false"
+                data-has-remove-button="false"
+                data-size="small"
+                style="--label-r: 36; --label-g: 41; --label-b: 46; --label-h: 210; --label-s: 12; --label-l: 16;"
+                text="🎉 3"
+              >
+                <span
+                  class="prc-Token-TokenTextContainer-cOUaD"
+                >
+                  🎉 3
+                </span>
+              </span>
+            </li>
+            <li>
+              <span
+                class="prc-Token-TokenBase-te5-F prc-Token-IssueLabel-2IazM"
+                data-cursor-is-interactive="false"
+                data-has-remove-button="false"
+                data-size="small"
+                style="--label-r: 36; --label-g: 41; --label-b: 46; --label-h: 210; --label-s: 12; --label-l: 16;"
+                text="😕 5"
+              >
+                <span
+                  class="prc-Token-TokenTextContainer-cOUaD"
+                >
+                  😕 5
+                </span>
+              </span>
+            </li>
+            <li>
+              <span
+                class="prc-Token-TokenBase-te5-F prc-Token-IssueLabel-2IazM"
+                data-cursor-is-interactive="false"
+                data-has-remove-button="false"
+                data-size="small"
+                style="--label-r: 36; --label-g: 41; --label-b: 46; --label-h: 210; --label-s: 12; --label-l: 16;"
+                text="🚀 8"
+              >
+                <span
+                  class="prc-Token-TokenTextContainer-cOUaD"
+                >
+                  🚀 8
+                </span>
+              </span>
+            </li>
+            <li>
+              <span
+                class="prc-Token-TokenBase-te5-F prc-Token-IssueLabel-2IazM"
+                data-cursor-is-interactive="false"
+                data-has-remove-button="false"
+                data-size="small"
+                style="--label-r: 36; --label-g: 41; --label-b: 46; --label-h: 210; --label-s: 12; --label-l: 16;"
+                text="👀 13"
+              >
+                <span
+                  class="prc-Token-TokenTextContainer-cOUaD"
+                >
+                  👀 13
+                </span>
+              </span>
+            </li>
+            <li>
+              <span
+                class="prc-Token-TokenBase-te5-F prc-Token-IssueLabel-2IazM"
+                data-cursor-is-interactive="false"
+                data-has-remove-button="false"
+                data-size="small"
+                style="--label-r: 36; --label-g: 41; --label-b: 46; --label-h: 210; --label-s: 12; --label-l: 16;"
+                text="❤️ 21"
+              >
+                <span
+                  class="prc-Token-TokenTextContainer-cOUaD"
+                >
+                  ❤️ 21
+                </span>
+              </span>
+            </li>
+          </ul>
         </span>
       </div>
     </div>
@@ -256,7 +522,28 @@ exports[`renderer/components/metrics/ReactionsPill.tsx renders when one reaction
             popover="auto"
             role="tooltip"
           >
-            1 reaction: 🚀
+            <ul
+              class="prc-LabelGroup-Container-E-ePP"
+              data-list="true"
+              data-overflow="inline"
+            >
+              <li>
+                <span
+                  class="prc-Token-TokenBase-te5-F prc-Token-IssueLabel-2IazM"
+                  data-cursor-is-interactive="false"
+                  data-has-remove-button="false"
+                  data-size="small"
+                  style="--label-r: 36; --label-g: 41; --label-b: 46; --label-h: 210; --label-s: 12; --label-l: 16;"
+                  text="🚀 1"
+                >
+                  <span
+                    class="prc-Token-TokenTextContainer-cOUaD"
+                  >
+                    🚀 1
+                  </span>
+                </span>
+              </li>
+            </ul>
           </span>
         </div>
       </div>
@@ -323,7 +610,28 @@ exports[`renderer/components/metrics/ReactionsPill.tsx renders when one reaction
           popover="auto"
           role="tooltip"
         >
-          1 reaction: 🚀
+          <ul
+            class="prc-LabelGroup-Container-E-ePP"
+            data-list="true"
+            data-overflow="inline"
+          >
+            <li>
+              <span
+                class="prc-Token-TokenBase-te5-F prc-Token-IssueLabel-2IazM"
+                data-cursor-is-interactive="false"
+                data-has-remove-button="false"
+                data-size="small"
+                style="--label-r: 36; --label-g: 41; --label-b: 46; --label-h: 210; --label-s: 12; --label-l: 16;"
+                text="🚀 1"
+              >
+                <span
+                  class="prc-Token-TokenTextContainer-cOUaD"
+                >
+                  🚀 1
+                </span>
+              </span>
+            </li>
+          </ul>
         </span>
       </div>
     </div>

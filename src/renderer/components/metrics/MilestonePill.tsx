@@ -18,8 +18,8 @@ export const MilestonePill: FC<MilestonePillProps> = ({ milestone }) => {
   return (
     <MetricPill
       color={milestone.state === 'OPEN' ? IconColor.GREEN : IconColor.PURPLE}
+      contents={milestone.title}
       icon={MilestoneIcon}
-      title={milestone.title}
     />
   );
 };

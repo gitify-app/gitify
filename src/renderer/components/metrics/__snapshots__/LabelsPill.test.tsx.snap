@@ -14,14 +14,167 @@ exports[`renderer/components/metrics/LabelsPill.tsx renders with labels 1`] = `
           class="prc-src-BaseStyles-aopSS"
           data-portal-root="true"
         >
+          <button
+            aria-describedby="_r_ID_"
+            type="button"
+          >
+            <span
+              class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
+              data-size="small"
+              data-variant="secondary"
+              tabindex="0"
+            >
+              <div
+                class="prc-Stack-Stack-UQ9k6"
+                data-align="center"
+                data-direction="horizontal"
+                data-gap="none"
+                data-justify="start"
+                data-padding="none"
+                data-wrap="nowrap"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="octicon octicon-tag text-gitify-icon-muted"
+                  display="inline-block"
+                  fill="currentColor"
+                  focusable="false"
+                  height="12"
+                  overflow="visible"
+                  style="vertical-align: text-bottom;"
+                  viewBox="0 0 16 16"
+                  width="12"
+                >
+                  <path
+                    d="M1 7.775V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 0 1 0 2.474l-5.026 5.026a1.75 1.75 0 0 1-2.474 0l-6.25-6.25A1.752 1.752 0 0 1 1 7.775Zm1.5 0c0 .066.026.13.073.177l6.25 6.25a.25.25 0 0 0 .354 0l5.025-5.025a.25.25 0 0 0 0-.354l-6.25-6.25a.25.25 0 0 0-.177-.073H2.75a.25.25 0 0 0-.25.25ZM6 5a1 1 0 1 1 0 2 1 1 0 0 1 0-2Z"
+                  />
+                </svg>
+                <span
+                  class="text-xxs px-1 prc-Text-Text-9mHv3"
+                >
+                  2
+                </span>
+              </div>
+            </span>
+          </button>
+          <span
+            aria-hidden="true"
+            class="prc-TooltipV2-Tooltip-tLeuB"
+            data-direction="s"
+            id="_r_ID_"
+            popover="auto"
+            role="tooltip"
+          >
+            <ul
+              class="prc-LabelGroup-Container-E-ePP"
+              data-list="true"
+              data-overflow="inline"
+            >
+              <li>
+                <span
+                  class="prc-Token-TokenBase-te5-F prc-Token-IssueLabel-2IazM"
+                  data-cursor-is-interactive="false"
+                  data-has-remove-button="false"
+                  data-size="small"
+                  style="--label-r: 162; --label-g: 238; --label-b: 239; --label-h: 181; --label-s: 71; --label-l: 79;"
+                  text="enhancement"
+                >
+                  <span
+                    class="prc-Token-TokenTextContainer-cOUaD"
+                  >
+                    enhancement
+                  </span>
+                </span>
+              </li>
+              <li>
+                <span
+                  class="prc-Token-TokenBase-te5-F prc-Token-IssueLabel-2IazM"
+                  data-cursor-is-interactive="false"
+                  data-has-remove-button="false"
+                  data-size="small"
+                  style="--label-r: 112; --label-g: 87; --label-b: 255; --label-h: 249; --label-s: 100; --label-l: 67;"
+                  text="good-first-issue"
+                >
+                  <span
+                    class="prc-Token-TokenTextContainer-cOUaD"
+                  >
+                    good-first-issue
+                  </span>
+                </span>
+              </li>
+            </ul>
+          </span>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      data-color-mode="light"
+      data-dark-theme="dark"
+      data-light-theme="light"
+    >
+      <div
+        class="prc-src-BaseStyles-aopSS"
+        data-portal-root="true"
+      >
+        <button
+          aria-describedby="_r_ID_"
+          type="button"
+        >
+          <span
+            class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
+            data-size="small"
+            data-variant="secondary"
+            tabindex="0"
+          >
+            <div
+              class="prc-Stack-Stack-UQ9k6"
+              data-align="center"
+              data-direction="horizontal"
+              data-gap="none"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-tag text-gitify-icon-muted"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="12"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="12"
+              >
+                <path
+                  d="M1 7.775V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 0 1 0 2.474l-5.026 5.026a1.75 1.75 0 0 1-2.474 0l-6.25-6.25A1.752 1.752 0 0 1 1 7.775Zm1.5 0c0 .066.026.13.073.177l6.25 6.25a.25.25 0 0 0 .354 0l5.025-5.025a.25.25 0 0 0 0-.354l-6.25-6.25a.25.25 0 0 0-.177-.073H2.75a.25.25 0 0 0-.25.25ZM6 5a1 1 0 1 1 0 2 1 1 0 0 1 0-2Z"
+                />
+              </svg>
+              <span
+                class="text-xxs px-1 prc-Text-Text-9mHv3"
+              >
+                2
+              </span>
+            </div>
+          </span>
+        </button>
+        <span
+          aria-hidden="true"
+          class="prc-TooltipV2-Tooltip-tLeuB"
+          data-direction="s"
+          id="_r_ID_"
+          popover="auto"
+          role="tooltip"
+        >
           <ul
             class="prc-LabelGroup-Container-E-ePP"
             data-list="true"
+            data-overflow="inline"
           >
-            <li
-              class="prc-LabelGroup-ItemWrapper-GkO4t"
-              data-index="0"
-            >
+            <li>
               <span
                 class="prc-Token-TokenBase-te5-F prc-Token-IssueLabel-2IazM"
                 data-cursor-is-interactive="false"
@@ -37,10 +190,7 @@ exports[`renderer/components/metrics/LabelsPill.tsx renders with labels 1`] = `
                 </span>
               </span>
             </li>
-            <li
-              class="prc-LabelGroup-ItemWrapper-GkO4t"
-              data-index="1"
-            >
+            <li>
               <span
                 class="prc-Token-TokenBase-te5-F prc-Token-IssueLabel-2IazM"
                 data-cursor-is-interactive="false"
@@ -56,66 +206,8 @@ exports[`renderer/components/metrics/LabelsPill.tsx renders with labels 1`] = `
                 </span>
               </span>
             </li>
-            <li />
           </ul>
-        </div>
-      </div>
-    </div>
-  </body>,
-  "container": <div>
-    <div
-      data-color-mode="light"
-      data-dark-theme="dark"
-      data-light-theme="light"
-    >
-      <div
-        class="prc-src-BaseStyles-aopSS"
-        data-portal-root="true"
-      >
-        <ul
-          class="prc-LabelGroup-Container-E-ePP"
-          data-list="true"
-        >
-          <li
-            class="prc-LabelGroup-ItemWrapper-GkO4t"
-            data-index="0"
-          >
-            <span
-              class="prc-Token-TokenBase-te5-F prc-Token-IssueLabel-2IazM"
-              data-cursor-is-interactive="false"
-              data-has-remove-button="false"
-              data-size="small"
-              style="--label-r: 162; --label-g: 238; --label-b: 239; --label-h: 181; --label-s: 71; --label-l: 79;"
-              text="enhancement"
-            >
-              <span
-                class="prc-Token-TokenTextContainer-cOUaD"
-              >
-                enhancement
-              </span>
-            </span>
-          </li>
-          <li
-            class="prc-LabelGroup-ItemWrapper-GkO4t"
-            data-index="1"
-          >
-            <span
-              class="prc-Token-TokenBase-te5-F prc-Token-IssueLabel-2IazM"
-              data-cursor-is-interactive="false"
-              data-has-remove-button="false"
-              data-size="small"
-              style="--label-r: 112; --label-g: 87; --label-b: 255; --label-h: 249; --label-s: 100; --label-l: 67;"
-              text="good-first-issue"
-            >
-              <span
-                class="prc-Token-TokenTextContainer-cOUaD"
-              >
-                good-first-issue
-              </span>
-            </span>
-          </li>
-          <li />
-        </ul>
+        </span>
       </div>
     </div>
   </div>,

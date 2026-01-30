@@ -9,7 +9,7 @@ import { MetricPill, type MetricPillProps } from './MetricPill';
 describe('renderer/components/metrics/MetricPill.tsx', () => {
   it('should render with metric', () => {
     const props: MetricPillProps = {
-      title: 'Mock Pill',
+      contents: 'Mock Pill',
       metric: 1,
       icon: MarkGithubIcon,
       color: IconColor.GREEN,
@@ -22,7 +22,7 @@ describe('renderer/components/metrics/MetricPill.tsx', () => {
 
   it('should render without metric', () => {
     const props: MetricPillProps = {
-      title: 'Mock Pill',
+      contents: 'Mock Pill',
       icon: MarkGithubIcon,
       color: IconColor.GREEN,
     };

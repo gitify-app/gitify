@@ -1,8 +1,11 @@
 import type { FC } from 'react';
 
+import { TagIcon } from '@primer/octicons-react';
 import { IssueLabelToken, LabelGroup } from '@primer/react';
 
-import type { GitifyLabels } from '../../types';
+import { type GitifyLabels, IconColor } from '../../types';
+
+import { MetricPill } from './MetricPill';
 
 export interface LabelsPillProps {
   labels: GitifyLabels[];
@@ -14,7 +17,7 @@ export const LabelsPill: FC<LabelsPillProps> = ({ labels }) => {
   }
 
   const labelsContent = (
-    <LabelGroup visibleChildCount="auto">
+    <LabelGroup>
       {labels.map((label) => {
         return (
           <IssueLabelToken
@@ -28,5 +31,12 @@ export const LabelsPill: FC<LabelsPillProps> = ({ labels }) => {
     </LabelGroup>
   );
 
-  return labelsContent;
+  return (
+    <MetricPill
+      color={IconColor.GRAY}
+      contents={labelsContent}
+      icon={TagIcon}
+      metric={labels.length}
+    />
+  );
 };

@@ -6,18 +6,18 @@ import { Label, Stack, Text, Tooltip } from '@primer/react';
 import { type IconColor, Size } from '../../types';
 
 export interface MetricPillProps {
-  title: string;
+  contents: string | ReactNode;
   metric?: number;
   icon: Icon;
   color: IconColor;
-  content?: ReactNode;
 }
 
 export const MetricPill: FC<MetricPillProps> = (props: MetricPillProps) => {
   const Icon = props.icon;
 
   return (
-    <Tooltip direction="s" text={props.title}>
+    // @ts-expect-error: We overload text with a ReactNode
+    <Tooltip direction="s" text={props.contents}>
       <button type="button">
         <Label
           className="hover:bg-gitify-notification-pill-hover"
@@ -32,7 +32,6 @@ export const MetricPill: FC<MetricPillProps> = (props: MetricPillProps) => {
             ) : null}
           </Stack>
         </Label>
-        {props.content}
       </button>
     </Tooltip>
   );

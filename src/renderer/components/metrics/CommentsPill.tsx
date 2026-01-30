@@ -21,9 +21,9 @@ export const CommentsPill: FC<CommentsPillProps> = ({ commentCount }) => {
   return (
     <MetricPill
       color={IconColor.GRAY}
+      contents={description}
       icon={CommentIcon}
       metric={commentCount}
-      title={description}
     />
   );
 };

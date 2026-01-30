@@ -68,7 +68,7 @@ exports[`renderer/components/metrics/LinkedIssuesPill.tsx renders when linked to
             popover="auto"
             role="tooltip"
           >
-            Linked to 2 issues: #1, #2
+            Linked to 2: #1, #2
           </span>
         </div>
       </div>
@@ -138,7 +138,7 @@ exports[`renderer/components/metrics/LinkedIssuesPill.tsx renders when linked to
           popover="auto"
           role="tooltip"
         >
-          Linked to 2 issues: #1, #2
+          Linked to 2: #1, #2
         </span>
       </div>
     </div>
@@ -265,7 +265,7 @@ exports[`renderer/components/metrics/LinkedIssuesPill.tsx renders when linked to
             popover="auto"
             role="tooltip"
           >
-            Linked to 1 issue: #1
+            Linked to 1: #1
           </span>
         </div>
       </div>
@@ -335,7 +335,7 @@ exports[`renderer/components/metrics/LinkedIssuesPill.tsx renders when linked to
           popover="auto"
           role="tooltip"
         >
-          Linked to 1 issue: #1
+          Linked to 1: #1
         </span>
       </div>
     </div>

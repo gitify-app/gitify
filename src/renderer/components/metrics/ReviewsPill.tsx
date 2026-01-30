@@ -26,10 +26,10 @@ export const ReviewsPill: FC<ReviewsPillProps> = ({ reviews }) => {
         return (
           <MetricPill
             color={icon.color}
+            contents={icon.description}
             icon={icon.type}
             key={review.state}
             metric={review.users.length}
-            title={icon.description}
           />
         );
       })}
