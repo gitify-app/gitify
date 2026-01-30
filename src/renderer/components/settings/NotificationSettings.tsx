@@ -9,6 +9,7 @@ import {
   IssueOpenedIcon,
   MilestoneIcon,
   PlusIcon,
+  SmileyIcon,
   SyncIcon,
   TagIcon,
 } from '@primer/octicons-react';
@@ -247,6 +248,10 @@ export const NotificationSettings: FC = () => {
                       <Stack direction="horizontal" gap="condensed">
                         <IssueOpenedIcon size={Size.SMALL} />
                         linked issues
+                      </Stack>
+                      <Stack direction="horizontal" gap="condensed">
+                        <SmileyIcon size={Size.SMALL} />
+                        reactions
                       </Stack>
                       <Stack direction="horizontal" gap="condensed">
                         <CheckIcon size={Size.SMALL} />
