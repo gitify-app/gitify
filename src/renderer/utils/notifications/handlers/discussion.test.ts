@@ -72,6 +72,8 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         labels: [],
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/discussions/123' as Link,
+        reactionsCount: 0,
+        reactionGroups: noReactionGroups,
       } satisfies Partial<GitifySubject>);
     });
 
@@ -102,6 +104,8 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         labels: [],
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/discussions/123' as Link,
+        reactionsCount: 0,
+        reactionGroups: noReactionGroups,
       } satisfies Partial<GitifySubject>);
     });
 
@@ -135,6 +139,8 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         labels: [],
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/discussions/123' as Link,
+        reactionsCount: 0,
+        reactionGroups: noReactionGroups,
       } satisfies Partial<GitifySubject>);
     });
 
@@ -172,6 +178,8 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         labels: ['enhancement'],
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/discussions/123' as Link,
+        reactionsCount: 0,
+        reactionGroups: noReactionGroups,
       } satisfies Partial<GitifySubject>);
     });
 
@@ -220,6 +228,8 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         labels: [],
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/discussions/123#discussioncomment-1234' as Link,
+        reactionsCount: 0,
+        reactionGroups: noReactionGroups,
       } satisfies Partial<GitifySubject>);
     });
 
@@ -278,6 +288,8 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         labels: [],
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/discussions/123#discussioncomment-6789' as Link,
+        reactionsCount: 0,
+        reactionGroups: noReactionGroups,
       } satisfies Partial<GitifySubject>);
     });
   });
