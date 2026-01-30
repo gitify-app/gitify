@@ -57,6 +57,12 @@ class DiscussionHandler extends DefaultHandler {
       discussion.comments.nodes,
     );
 
+    const discussionReactionCount =
+      latestDiscussionComment?.reactions.totalCount ??
+      discussion.reactions.totalCount;
+    const discussionReactionGroup =
+      latestDiscussionComment?.reactionGroups ?? discussion.reactionGroups;
+
     return {
       number: discussion.number,
       state: discussionState,
@@ -67,6 +73,8 @@ class DiscussionHandler extends DefaultHandler {
       commentCount: discussion.comments.totalCount,
       labels: discussion.labels?.nodes.map((label) => label.name) ?? [],
       htmlUrl: latestDiscussionComment?.url ?? discussion.url,
+      reactionsCount: discussionReactionCount,
+      reactionGroups: discussionReactionGroup,
     };
   }
 

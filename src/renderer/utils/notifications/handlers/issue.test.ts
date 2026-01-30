@@ -124,6 +124,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
           issue: mockIssue,
         },
       } satisfies FetchIssueByNumberQuery);
+
       const result = await issueHandler.enrich(mockNotification, mockSettings);
 
       expect(result).toEqual({

@@ -37,6 +37,12 @@ fragment DiscussionDetails on Discussion {
       name
     }
   }
+  reactions {
+    totalCount
+  }
+  reactionGroups {
+    ...ReactionGroupFields
+  }
 }
 
 fragment CommentFields on DiscussionComment {
@@ -46,6 +52,12 @@ fragment CommentFields on DiscussionComment {
     ...AuthorFields
   }
   url
+  reactions {
+    totalCount
+  }
+  reactionGroups {
+    ...ReactionGroupFields
+  }
 }
 
 fragment DiscussionCommentFields on DiscussionComment {

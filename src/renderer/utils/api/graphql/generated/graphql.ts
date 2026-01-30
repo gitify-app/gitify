@@ -35631,13 +35631,13 @@ export type FetchDiscussionByNumberQuery = { __typename?: 'Query', repository?: 
                 | { __typename?: 'Mannequin', login: string, htmlUrl: any, avatarUrl: any, type: 'Mannequin' }
                 | { __typename?: 'Organization', login: string, htmlUrl: any, avatarUrl: any, type: 'Organization' }
                 | { __typename?: 'User', login: string, htmlUrl: any, avatarUrl: any, type: 'User' }
-               | null } | null> | null }, author?:
+               | null, reactions: { __typename?: 'ReactionConnection', totalCount: number }, reactionGroups?: Array<{ __typename?: 'ReactionGroup', content: ReactionContent, reactors: { __typename?: 'ReactorConnection', totalCount: number } }> | null } | null> | null }, author?:
             | { __typename?: 'Bot', login: string, htmlUrl: any, avatarUrl: any, type: 'Bot' }
             | { __typename?: 'EnterpriseUserAccount', login: string, htmlUrl: any, avatarUrl: any, type: 'EnterpriseUserAccount' }
             | { __typename?: 'Mannequin', login: string, htmlUrl: any, avatarUrl: any, type: 'Mannequin' }
             | { __typename?: 'Organization', login: string, htmlUrl: any, avatarUrl: any, type: 'Organization' }
             | { __typename?: 'User', login: string, htmlUrl: any, avatarUrl: any, type: 'User' }
-           | null } | null> | null }, labels?: { __typename?: 'LabelConnection', nodes?: Array<{ __typename?: 'Label', name: string } | null> | null } | null } | null } | null };
+           | null, reactions: { __typename?: 'ReactionConnection', totalCount: number }, reactionGroups?: Array<{ __typename?: 'ReactionGroup', content: ReactionContent, reactors: { __typename?: 'ReactorConnection', totalCount: number } }> | null } | null> | null }, labels?: { __typename?: 'LabelConnection', nodes?: Array<{ __typename?: 'Label', name: string } | null> | null } | null, reactions: { __typename?: 'ReactionConnection', totalCount: number }, reactionGroups?: Array<{ __typename?: 'ReactionGroup', content: ReactionContent, reactors: { __typename?: 'ReactorConnection', totalCount: number } }> | null } | null } | null };
 
 export type DiscussionDetailsFragment = { __typename: 'Discussion', number: number, title: string, stateReason?: DiscussionStateReason | null, isAnswered?: boolean | null, url: any, author?:
     | { __typename?: 'Bot', login: string, htmlUrl: any, avatarUrl: any, type: 'Bot' }
@@ -35651,13 +35651,13 @@ export type DiscussionDetailsFragment = { __typename: 'Discussion', number: numb
             | { __typename?: 'Mannequin', login: string, htmlUrl: any, avatarUrl: any, type: 'Mannequin' }
             | { __typename?: 'Organization', login: string, htmlUrl: any, avatarUrl: any, type: 'Organization' }
             | { __typename?: 'User', login: string, htmlUrl: any, avatarUrl: any, type: 'User' }
-           | null } | null> | null }, author?:
+           | null, reactions: { __typename?: 'ReactionConnection', totalCount: number }, reactionGroups?: Array<{ __typename?: 'ReactionGroup', content: ReactionContent, reactors: { __typename?: 'ReactorConnection', totalCount: number } }> | null } | null> | null }, author?:
         | { __typename?: 'Bot', login: string, htmlUrl: any, avatarUrl: any, type: 'Bot' }
         | { __typename?: 'EnterpriseUserAccount', login: string, htmlUrl: any, avatarUrl: any, type: 'EnterpriseUserAccount' }
         | { __typename?: 'Mannequin', login: string, htmlUrl: any, avatarUrl: any, type: 'Mannequin' }
         | { __typename?: 'Organization', login: string, htmlUrl: any, avatarUrl: any, type: 'Organization' }
         | { __typename?: 'User', login: string, htmlUrl: any, avatarUrl: any, type: 'User' }
-       | null } | null> | null }, labels?: { __typename?: 'LabelConnection', nodes?: Array<{ __typename?: 'Label', name: string } | null> | null } | null };
+       | null, reactions: { __typename?: 'ReactionConnection', totalCount: number }, reactionGroups?: Array<{ __typename?: 'ReactionGroup', content: ReactionContent, reactors: { __typename?: 'ReactorConnection', totalCount: number } }> | null } | null> | null }, labels?: { __typename?: 'LabelConnection', nodes?: Array<{ __typename?: 'Label', name: string } | null> | null } | null, reactions: { __typename?: 'ReactionConnection', totalCount: number }, reactionGroups?: Array<{ __typename?: 'ReactionGroup', content: ReactionContent, reactors: { __typename?: 'ReactorConnection', totalCount: number } }> | null };
 
 export type CommentFieldsFragment = { __typename?: 'DiscussionComment', databaseId?: number | null, createdAt: any, url: any, author?:
     | { __typename?: 'Bot', login: string, htmlUrl: any, avatarUrl: any, type: 'Bot' }
@@ -35665,7 +35665,7 @@ export type CommentFieldsFragment = { __typename?: 'DiscussionComment', database
     | { __typename?: 'Mannequin', login: string, htmlUrl: any, avatarUrl: any, type: 'Mannequin' }
     | { __typename?: 'Organization', login: string, htmlUrl: any, avatarUrl: any, type: 'Organization' }
     | { __typename?: 'User', login: string, htmlUrl: any, avatarUrl: any, type: 'User' }
-   | null };
+   | null, reactions: { __typename?: 'ReactionConnection', totalCount: number }, reactionGroups?: Array<{ __typename?: 'ReactionGroup', content: ReactionContent, reactors: { __typename?: 'ReactorConnection', totalCount: number } }> | null };
 
 export type DiscussionCommentFieldsFragment = { __typename?: 'DiscussionComment', databaseId?: number | null, createdAt: any, url: any, replies: { __typename?: 'DiscussionCommentConnection', totalCount: number, nodes?: Array<{ __typename?: 'DiscussionComment', databaseId?: number | null, createdAt: any, url: any, author?:
         | { __typename?: 'Bot', login: string, htmlUrl: any, avatarUrl: any, type: 'Bot' }
@@ -35673,13 +35673,13 @@ export type DiscussionCommentFieldsFragment = { __typename?: 'DiscussionComment'
         | { __typename?: 'Mannequin', login: string, htmlUrl: any, avatarUrl: any, type: 'Mannequin' }
         | { __typename?: 'Organization', login: string, htmlUrl: any, avatarUrl: any, type: 'Organization' }
         | { __typename?: 'User', login: string, htmlUrl: any, avatarUrl: any, type: 'User' }
-       | null } | null> | null }, author?:
+       | null, reactions: { __typename?: 'ReactionConnection', totalCount: number }, reactionGroups?: Array<{ __typename?: 'ReactionGroup', content: ReactionContent, reactors: { __typename?: 'ReactorConnection', totalCount: number } }> | null } | null> | null }, author?:
     | { __typename?: 'Bot', login: string, htmlUrl: any, avatarUrl: any, type: 'Bot' }
     | { __typename?: 'EnterpriseUserAccount', login: string, htmlUrl: any, avatarUrl: any, type: 'EnterpriseUserAccount' }
     | { __typename?: 'Mannequin', login: string, htmlUrl: any, avatarUrl: any, type: 'Mannequin' }
     | { __typename?: 'Organization', login: string, htmlUrl: any, avatarUrl: any, type: 'Organization' }
     | { __typename?: 'User', login: string, htmlUrl: any, avatarUrl: any, type: 'User' }
-   | null };
+   | null, reactions: { __typename?: 'ReactionConnection', totalCount: number }, reactionGroups?: Array<{ __typename?: 'ReactionGroup', content: ReactionContent, reactors: { __typename?: 'ReactorConnection', totalCount: number } }> | null };
 
 export type FetchIssueByNumberQueryVariables = Exact<{
   owner: Scalars['String']['input'];
@@ -35747,13 +35747,13 @@ export type FetchMergedDetailsTemplateQuery = { __typename?: 'Query', repository
                 | { __typename?: 'Mannequin', login: string, htmlUrl: any, avatarUrl: any, type: 'Mannequin' }
                 | { __typename?: 'Organization', login: string, htmlUrl: any, avatarUrl: any, type: 'Organization' }
                 | { __typename?: 'User', login: string, htmlUrl: any, avatarUrl: any, type: 'User' }
-               | null } | null> | null }, author?:
+               | null, reactions: { __typename?: 'ReactionConnection', totalCount: number }, reactionGroups?: Array<{ __typename?: 'ReactionGroup', content: ReactionContent, reactors: { __typename?: 'ReactorConnection', totalCount: number } }> | null } | null> | null }, author?:
             | { __typename?: 'Bot', login: string, htmlUrl: any, avatarUrl: any, type: 'Bot' }
             | { __typename?: 'EnterpriseUserAccount', login: string, htmlUrl: any, avatarUrl: any, type: 'EnterpriseUserAccount' }
             | { __typename?: 'Mannequin', login: string, htmlUrl: any, avatarUrl: any, type: 'Mannequin' }
             | { __typename?: 'Organization', login: string, htmlUrl: any, avatarUrl: any, type: 'Organization' }
             | { __typename?: 'User', login: string, htmlUrl: any, avatarUrl: any, type: 'User' }
-           | null } | null> | null }, labels?: { __typename?: 'LabelConnection', nodes?: Array<{ __typename?: 'Label', name: string } | null> | null } | null } | null, issue?: { __typename: 'Issue', number: number, title: string, url: any, state: IssueState, stateReason?: IssueStateReason | null, milestone?: { __typename?: 'Milestone', state: MilestoneState, title: string } | null, author?:
+           | null, reactions: { __typename?: 'ReactionConnection', totalCount: number }, reactionGroups?: Array<{ __typename?: 'ReactionGroup', content: ReactionContent, reactors: { __typename?: 'ReactorConnection', totalCount: number } }> | null } | null> | null }, labels?: { __typename?: 'LabelConnection', nodes?: Array<{ __typename?: 'Label', name: string } | null> | null } | null, reactions: { __typename?: 'ReactionConnection', totalCount: number }, reactionGroups?: Array<{ __typename?: 'ReactionGroup', content: ReactionContent, reactors: { __typename?: 'ReactorConnection', totalCount: number } }> | null } | null, issue?: { __typename: 'Issue', number: number, title: string, url: any, state: IssueState, stateReason?: IssueStateReason | null, milestone?: { __typename?: 'Milestone', state: MilestoneState, title: string } | null, author?:
         | { __typename?: 'Bot', login: string, htmlUrl: any, avatarUrl: any, type: 'Bot' }
         | { __typename?: 'EnterpriseUserAccount', login: string, htmlUrl: any, avatarUrl: any, type: 'EnterpriseUserAccount' }
         | { __typename?: 'Mannequin', login: string, htmlUrl: any, avatarUrl: any, type: 'Mannequin' }
@@ -35797,13 +35797,13 @@ export type MergedDetailsQueryTemplateFragment = { __typename?: 'Query', reposit
                 | { __typename?: 'Mannequin', login: string, htmlUrl: any, avatarUrl: any, type: 'Mannequin' }
                 | { __typename?: 'Organization', login: string, htmlUrl: any, avatarUrl: any, type: 'Organization' }
                 | { __typename?: 'User', login: string, htmlUrl: any, avatarUrl: any, type: 'User' }
-               | null } | null> | null }, author?:
+               | null, reactions: { __typename?: 'ReactionConnection', totalCount: number }, reactionGroups?: Array<{ __typename?: 'ReactionGroup', content: ReactionContent, reactors: { __typename?: 'ReactorConnection', totalCount: number } }> | null } | null> | null }, author?:
             | { __typename?: 'Bot', login: string, htmlUrl: any, avatarUrl: any, type: 'Bot' }
             | { __typename?: 'EnterpriseUserAccount', login: string, htmlUrl: any, avatarUrl: any, type: 'EnterpriseUserAccount' }
             | { __typename?: 'Mannequin', login: string, htmlUrl: any, avatarUrl: any, type: 'Mannequin' }
             | { __typename?: 'Organization', login: string, htmlUrl: any, avatarUrl: any, type: 'Organization' }
             | { __typename?: 'User', login: string, htmlUrl: any, avatarUrl: any, type: 'User' }
-           | null } | null> | null }, labels?: { __typename?: 'LabelConnection', nodes?: Array<{ __typename?: 'Label', name: string } | null> | null } | null } | null, issue?: { __typename: 'Issue', number: number, title: string, url: any, state: IssueState, stateReason?: IssueStateReason | null, milestone?: { __typename?: 'Milestone', state: MilestoneState, title: string } | null, author?:
+           | null, reactions: { __typename?: 'ReactionConnection', totalCount: number }, reactionGroups?: Array<{ __typename?: 'ReactionGroup', content: ReactionContent, reactors: { __typename?: 'ReactorConnection', totalCount: number } }> | null } | null> | null }, labels?: { __typename?: 'LabelConnection', nodes?: Array<{ __typename?: 'Label', name: string } | null> | null } | null, reactions: { __typename?: 'ReactionConnection', totalCount: number }, reactionGroups?: Array<{ __typename?: 'ReactionGroup', content: ReactionContent, reactors: { __typename?: 'ReactorConnection', totalCount: number } }> | null } | null, issue?: { __typename: 'Issue', number: number, title: string, url: any, state: IssueState, stateReason?: IssueStateReason | null, milestone?: { __typename?: 'Milestone', state: MilestoneState, title: string } | null, author?:
         | { __typename?: 'Bot', login: string, htmlUrl: any, avatarUrl: any, type: 'Bot' }
         | { __typename?: 'EnterpriseUserAccount', login: string, htmlUrl: any, avatarUrl: any, type: 'EnterpriseUserAccount' }
         | { __typename?: 'Mannequin', login: string, htmlUrl: any, avatarUrl: any, type: 'Mannequin' }
@@ -35920,6 +35920,14 @@ export const AuthorFieldsFragmentDoc = new TypedDocumentString(`
   type: __typename
 }
     `, {"fragmentName":"AuthorFields"}) as unknown as TypedDocumentString<AuthorFieldsFragment, unknown>;
+export const ReactionGroupFieldsFragmentDoc = new TypedDocumentString(`
+    fragment ReactionGroupFields on ReactionGroup {
+  content
+  reactors {
+    totalCount
+  }
+}
+    `, {"fragmentName":"ReactionGroupFields"}) as unknown as TypedDocumentString<ReactionGroupFieldsFragment, unknown>;
 export const CommentFieldsFragmentDoc = new TypedDocumentString(`
     fragment CommentFields on DiscussionComment {
   databaseId
@@ -35928,12 +35936,24 @@ export const CommentFieldsFragmentDoc = new TypedDocumentString(`
     ...AuthorFields
   }
   url
+  reactions {
+    totalCount
+  }
+  reactionGroups {
+    ...ReactionGroupFields
+  }
 }
     fragment AuthorFields on Actor {
   login
   htmlUrl: url
   avatarUrl: avatarUrl
   type: __typename
+}
+fragment ReactionGroupFields on ReactionGroup {
+  content
+  reactors {
+    totalCount
+  }
 }`, {"fragmentName":"CommentFields"}) as unknown as TypedDocumentString<CommentFieldsFragment, unknown>;
 export const DiscussionCommentFieldsFragmentDoc = new TypedDocumentString(`
     fragment DiscussionCommentFields on DiscussionComment {
@@ -35951,6 +35971,12 @@ export const DiscussionCommentFieldsFragmentDoc = new TypedDocumentString(`
   avatarUrl: avatarUrl
   type: __typename
 }
+fragment ReactionGroupFields on ReactionGroup {
+  content
+  reactors {
+    totalCount
+  }
+}
 fragment CommentFields on DiscussionComment {
   databaseId
   createdAt
@@ -35958,6 +35984,12 @@ fragment CommentFields on DiscussionComment {
     ...AuthorFields
   }
   url
+  reactions {
+    totalCount
+  }
+  reactionGroups {
+    ...ReactionGroupFields
+  }
 }`, {"fragmentName":"DiscussionCommentFields"}) as unknown as TypedDocumentString<DiscussionCommentFieldsFragment, unknown>;
 export const DiscussionDetailsFragmentDoc = new TypedDocumentString(`
     fragment DiscussionDetails on Discussion {
@@ -35981,12 +36013,24 @@ export const DiscussionDetailsFragmentDoc = new TypedDocumentString(`
       name
     }
   }
+  reactions {
+    totalCount
+  }
+  reactionGroups {
+    ...ReactionGroupFields
+  }
 }
     fragment AuthorFields on Actor {
   login
   htmlUrl: url
   avatarUrl: avatarUrl
   type: __typename
+}
+fragment ReactionGroupFields on ReactionGroup {
+  content
+  reactors {
+    totalCount
+  }
 }
 fragment CommentFields on DiscussionComment {
   databaseId
@@ -35995,6 +36039,12 @@ fragment CommentFields on DiscussionComment {
     ...AuthorFields
   }
   url
+  reactions {
+    totalCount
+  }
+  reactionGroups {
+    ...ReactionGroupFields
+  }
 }
 fragment DiscussionCommentFields on DiscussionComment {
   ...CommentFields
@@ -36011,14 +36061,6 @@ export const MilestoneFieldsFragmentDoc = new TypedDocumentString(`
   title
 }
     `, {"fragmentName":"MilestoneFields"}) as unknown as TypedDocumentString<MilestoneFieldsFragment, unknown>;
-export const ReactionGroupFieldsFragmentDoc = new TypedDocumentString(`
-    fragment ReactionGroupFields on ReactionGroup {
-  content
-  reactors {
-    totalCount
-  }
-}
-    `, {"fragmentName":"ReactionGroupFields"}) as unknown as TypedDocumentString<ReactionGroupFieldsFragment, unknown>;
 export const IssueDetailsFragmentDoc = new TypedDocumentString(`
     fragment IssueDetails on Issue {
   __typename
@@ -36211,6 +36253,12 @@ fragment DiscussionDetails on Discussion {
       name
     }
   }
+  reactions {
+    totalCount
+  }
+  reactionGroups {
+    ...ReactionGroupFields
+  }
 }
 fragment CommentFields on DiscussionComment {
   databaseId
@@ -36219,6 +36267,12 @@ fragment CommentFields on DiscussionComment {
     ...AuthorFields
   }
   url
+  reactions {
+    totalCount
+  }
+  reactionGroups {
+    ...ReactionGroupFields
+  }
 }
 fragment DiscussionCommentFields on DiscussionComment {
   ...CommentFields
@@ -36342,6 +36396,12 @@ export const FetchDiscussionByNumberDocument = new TypedDocumentString(`
   avatarUrl: avatarUrl
   type: __typename
 }
+fragment ReactionGroupFields on ReactionGroup {
+  content
+  reactors {
+    totalCount
+  }
+}
 fragment DiscussionDetails on Discussion {
   __typename
   number
@@ -36363,6 +36423,12 @@ fragment DiscussionDetails on Discussion {
       name
     }
   }
+  reactions {
+    totalCount
+  }
+  reactionGroups {
+    ...ReactionGroupFields
+  }
 }
 fragment CommentFields on DiscussionComment {
   databaseId
@@ -36371,6 +36437,12 @@ fragment CommentFields on DiscussionComment {
     ...AuthorFields
   }
   url
+  reactions {
+    totalCount
+  }
+  reactionGroups {
+    ...ReactionGroupFields
+  }
 }
 fragment DiscussionCommentFields on DiscussionComment {
   ...CommentFields
@@ -36486,6 +36558,12 @@ fragment DiscussionDetails on Discussion {
       name
     }
   }
+  reactions {
+    totalCount
+  }
+  reactionGroups {
+    ...ReactionGroupFields
+  }
 }
 fragment CommentFields on DiscussionComment {
   databaseId
@@ -36494,6 +36572,12 @@ fragment CommentFields on DiscussionComment {
     ...AuthorFields
   }
   url
+  reactions {
+    totalCount
+  }
+  reactionGroups {
+    ...ReactionGroupFields
+  }
 }
 fragment DiscussionCommentFields on DiscussionComment {
   ...CommentFields
