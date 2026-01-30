@@ -89,7 +89,7 @@ export const MetricGroup: FC<MetricGroupProps> = ({
         .map((label) => {
           return `🏷️ ${label}`.trim();
         })
-        .join(' ');
+        .join(', ');
 
       return `${count} ${noun}: ${formatted}`;
     },
