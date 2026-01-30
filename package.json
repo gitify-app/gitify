@@ -75,8 +75,8 @@
     "electron-log": "5.4.3",
     "electron-updater": "6.8.1",
     "menubar": "9.5.2",
-    "react": "19.2.3",
-    "react-dom": "19.2.3",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
     "react-router-dom": "7.13.0"
   },
   "devDependencies": {
@@ -105,7 +105,7 @@
     "@testing-library/user-event": "14.6.1",
     "@types/jest": "30.0.0",
     "@types/node": "24.10.9",
-    "@types/react": "19.2.9",
+    "@types/react": "19.2.10",
     "@types/react-dom": "19.2.3",
     "@types/react-router-dom": "5.3.3",
     "@types/semver": "7.7.1",
