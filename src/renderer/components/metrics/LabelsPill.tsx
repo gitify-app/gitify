@@ -18,7 +18,6 @@ export const LabelsPill: FC<LabelsPillProps> = ({ labels }) => {
       {labels.map((label) => {
         return (
           <IssueLabelToken
-            className="size-0.5"
             fillColor={label.color ? `#${label.color}` : undefined}
             key={label.name}
             size="small"
