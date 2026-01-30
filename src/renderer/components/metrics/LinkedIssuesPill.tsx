@@ -21,15 +21,15 @@ export const LinkedIssuesPill: FC<LinkedIssuesPillProps> = ({
   const description = formatMetricDescription(
     linkedIssues.length,
     'issue',
-    (count, noun) => `Linked to ${count} ${noun}: ${linkedIssues.join(', ')}`,
+    (noun) => `Linked to ${noun}: ${linkedIssues.join(', ')}`,
   );
 
   return (
     <MetricPill
       color={IconColor.GRAY}
+      contents={description}
       icon={IssueOpenedIcon}
       metric={linkedIssues.length}
-      title={description}
     />
   );
 };

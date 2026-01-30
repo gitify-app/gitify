@@ -16,3 +16,8 @@ fragment ReactionGroupFields on ReactionGroup {
     totalCount
   }
 }
+
+fragment LabelFields on Label {
+  name
+  color
+}

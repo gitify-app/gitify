@@ -37,9 +37,9 @@ export const MetricGroup: FC<MetricGroupProps> = ({ notification }) => {
 
       <CommentsPill commentCount={notification.subject.commentCount ?? 0} />
 
-      <LabelsPill labels={notification.subject.labels ?? []} />
-
       <MilestonePill milestone={notification.subject.milestone} />
+
+      <LabelsPill labels={notification.subject.labels ?? []} />
     </div>
   );
 };

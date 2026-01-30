@@ -1,16 +1,25 @@
 import { renderWithAppContext } from '../../__helpers__/test-utils';
-import { mockGitifyNotification } from '../../__mocks__/notifications-mocks';
 
-import { LabelsPill } from './LabelsPill';
+import { LabelsPill, type LabelsPillProps } from './LabelsPill';
 
 describe('renderer/components/metrics/LabelsPill.tsx', () => {
-  it('renders labels pill', () => {
-    const mockNotification = { ...mockGitifyNotification };
-    mockNotification.subject.labels = ['enhancement', 'good-first-issue'];
+  it('renders without labels', () => {
+    const props: LabelsPillProps = { labels: [] };
 
-    const tree = renderWithAppContext(
-      <LabelsPill labels={mockNotification.subject.labels} />,
-    );
+    const tree = renderWithAppContext(<LabelsPill {...props} />);
+
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('renders with labels', () => {
+    const props: LabelsPillProps = {
+      labels: [
+        { name: 'enhancement', color: 'a2eeef' },
+        { name: 'good-first-issue', color: '7057ff' },
+      ],
+    };
+
+    const tree = renderWithAppContext(<LabelsPill {...props} />);
 
     expect(tree).toMatchSnapshot();
   });

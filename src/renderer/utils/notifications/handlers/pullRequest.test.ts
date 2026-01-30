@@ -248,6 +248,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         nodes: [
           {
             name: 'enhancement',
+            color: '0e8a16',
           },
         ],
       };
@@ -273,7 +274,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
           type: mockAuthor.type,
         },
         reviews: null,
-        labels: ['enhancement'],
+        labels: [{ name: 'enhancement', color: '0e8a16' }],
         linkedIssues: [],
         commentCount: 0,
         milestone: null,

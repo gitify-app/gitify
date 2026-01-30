@@ -150,6 +150,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         nodes: [
           {
             name: 'enhancement',
+            color: '0e8a16',
           },
         ],
       };
@@ -175,7 +176,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
           type: mockAuthor.type,
         },
         commentCount: 0,
-        labels: ['enhancement'],
+        labels: [{ name: 'enhancement', color: '0e8a16' }],
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/discussions/123' as Link,
         reactionsCount: 0,

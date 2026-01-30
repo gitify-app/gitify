@@ -1,14 +1,14 @@
 import type { FC } from 'react';
 
 import { TagIcon } from '@primer/octicons-react';
+import { IssueLabelToken, LabelGroup } from '@primer/react';
 
-import { IconColor } from '../../types';
+import { type GitifyLabels, IconColor } from '../../types';
 
-import { formatMetricDescription } from '../../utils/notifications/formatters';
 import { MetricPill } from './MetricPill';
 
 export interface LabelsPillProps {
-  labels: string[];
+  labels: GitifyLabels[];
 }
 
 export const LabelsPill: FC<LabelsPillProps> = ({ labels }) => {
@@ -16,22 +16,27 @@ export const LabelsPill: FC<LabelsPillProps> = ({ labels }) => {
     return null;
   }
 
-  const description = formatMetricDescription(
-    labels.length,
-    'label',
-    (count, noun) => {
-      const formatted = labels.map((label) => `🏷️ ${label}`).join(', ');
-
-      return `${count} ${noun}: ${formatted}`;
-    },
+  const labelsContent = (
+    <LabelGroup>
+      {labels.map((label) => {
+        return (
+          <IssueLabelToken
+            fillColor={label.color ? `#${label.color}` : undefined}
+            key={label.name}
+            size="small"
+            text={label.name}
+          />
+        );
+      })}
+    </LabelGroup>
   );
 
   return (
     <MetricPill
       color={IconColor.GRAY}
+      contents={labelsContent}
       icon={TagIcon}
       metric={labels.length}
-      title={description}
     />
   );
 };

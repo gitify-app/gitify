@@ -1,20 +1,15 @@
 import type { FC } from 'react';
 
 import { SmileyIcon } from '@primer/octicons-react';
+import { IssueLabelToken, LabelGroup } from '@primer/react';
 
-import { IconColor } from '../../types';
+import { type GitifyReactionGroup, IconColor } from '../../types';
 
-import { formatMetricDescription } from '../../utils/notifications/formatters';
 import { MetricPill } from './MetricPill';
-
-export interface ReactionGroup {
-  content: string;
-  reactors: { totalCount: number };
-}
 
 export interface ReactionsPillProps {
   reactionsCount: number;
-  reactionGroups: ReactionGroup[];
+  reactionGroups: GitifyReactionGroup[];
 }
 
 const reactionEmojiMap: Record<string, string> = {
@@ -36,33 +31,34 @@ export const ReactionsPill: FC<ReactionsPillProps> = ({
     return null;
   }
 
-  const hasMultipleReactions =
-    reactionGroups.filter((rg) => rg.reactors.totalCount > 0).length > 1;
+  const visibleReactionGroups = reactionGroups.filter(
+    (rg) => !!rg.reactors && rg.reactors.totalCount > 0,
+  );
 
-  const description = formatMetricDescription(
-    reactionsCount,
-    'reaction',
-    (count, noun) => {
-      const formatted = reactionGroups
-        .map((rg) => {
-          const emoji = reactionEmojiMap[rg.content];
-          if (!emoji || !rg.reactors.totalCount) {
-            return '';
-          }
-          return `${emoji} ${hasMultipleReactions ? rg.reactors.totalCount : ''}`.trim();
-        })
-        .filter(Boolean)
-        .join(' ');
-      return `${count} ${noun}: ${formatted}`;
-    },
+  const reactionsContent = (
+    <LabelGroup>
+      {visibleReactionGroups.map((rg) => {
+        const emoji = reactionEmojiMap[rg.content];
+        const total = rg.reactors.totalCount;
+
+        return (
+          <IssueLabelToken
+            fillColor="#24292e" // Same as sidebar color from tailwind config
+            key={rg.content}
+            size="small"
+            text={`${emoji} ${total}`}
+          />
+        );
+      })}
+    </LabelGroup>
   );
 
   return (
     <MetricPill
       color={IconColor.GRAY}
+      contents={reactionsContent}
       icon={SmileyIcon}
       metric={reactionsCount}
-      title={description}
     />
   );
 };

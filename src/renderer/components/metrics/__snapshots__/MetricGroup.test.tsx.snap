@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`renderer/components/metrics/MetricGroup.tsx showPills disabled should not render any pills when showPills is disabled 1`] = `
+exports[`renderer/components/metrics/MetricGroup.tsx should not render any pills when showPills is disabled 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -27,6 +27,311 @@ exports[`renderer/components/metrics/MetricGroup.tsx showPills disabled should n
         class="prc-src-BaseStyles-aopSS"
         data-portal-root="true"
       />
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`renderer/components/metrics/MetricGroup.tsx should render pills when showPills is enabled 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        data-color-mode="light"
+        data-dark-theme="dark"
+        data-light-theme="light"
+      >
+        <div
+          class="prc-src-BaseStyles-aopSS"
+          data-portal-root="true"
+        >
+          <div
+            class="flex gap-1"
+          >
+            <button
+              aria-describedby="_r_ID_"
+              type="button"
+            >
+              <span
+                class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
+                data-size="small"
+                data-variant="secondary"
+                tabindex="0"
+              >
+                <div
+                  class="prc-Stack-Stack-UQ9k6"
+                  data-align="center"
+                  data-direction="horizontal"
+                  data-gap="none"
+                  data-justify="start"
+                  data-padding="none"
+                  data-wrap="nowrap"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="octicon octicon-check text-gitify-icon-open"
+                    display="inline-block"
+                    fill="currentColor"
+                    focusable="false"
+                    height="12"
+                    overflow="visible"
+                    style="vertical-align: text-bottom;"
+                    viewBox="0 0 16 16"
+                    width="12"
+                  >
+                    <path
+                      d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
+                    />
+                  </svg>
+                  <span
+                    class="text-xxs px-1 prc-Text-Text-9mHv3"
+                  >
+                    1
+                  </span>
+                </div>
+              </span>
+            </button>
+            <span
+              aria-hidden="true"
+              class="prc-TooltipV2-Tooltip-tLeuB"
+              data-direction="s"
+              id="_r_ID_"
+              popover="auto"
+              role="tooltip"
+            >
+              octocat approved these changes
+            </span>
+            <button
+              aria-describedby="_r_ID_"
+              type="button"
+            >
+              <span
+                class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
+                data-size="small"
+                data-variant="secondary"
+                tabindex="0"
+              >
+                <div
+                  class="prc-Stack-Stack-UQ9k6"
+                  data-align="center"
+                  data-direction="horizontal"
+                  data-gap="none"
+                  data-justify="start"
+                  data-padding="none"
+                  data-wrap="nowrap"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="octicon octicon-file-diff text-gitify-icon-closed"
+                    display="inline-block"
+                    fill="currentColor"
+                    focusable="false"
+                    height="12"
+                    overflow="visible"
+                    style="vertical-align: text-bottom;"
+                    viewBox="0 0 16 16"
+                    width="12"
+                  >
+                    <path
+                      d="M1 1.75C1 .784 1.784 0 2.75 0h7.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16H2.75A1.75 1.75 0 0 1 1 14.25Zm1.75-.25a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25V4.664a.25.25 0 0 0-.073-.177l-2.914-2.914a.25.25 0 0 0-.177-.073ZM8 3.25a.75.75 0 0 1 .75.75v1.5h1.5a.75.75 0 0 1 0 1.5h-1.5v1.5a.75.75 0 0 1-1.5 0V7h-1.5a.75.75 0 0 1 0-1.5h1.5V4A.75.75 0 0 1 8 3.25Zm-3 8a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1-.75-.75Z"
+                    />
+                  </svg>
+                  <span
+                    class="text-xxs px-1 prc-Text-Text-9mHv3"
+                  >
+                    1
+                  </span>
+                </div>
+              </span>
+            </button>
+            <span
+              aria-hidden="true"
+              class="prc-TooltipV2-Tooltip-tLeuB"
+              data-direction="s"
+              id="_r_ID_"
+              popover="auto"
+              role="tooltip"
+            >
+              gitify-app requested changes
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      data-color-mode="light"
+      data-dark-theme="dark"
+      data-light-theme="light"
+    >
+      <div
+        class="prc-src-BaseStyles-aopSS"
+        data-portal-root="true"
+      >
+        <div
+          class="flex gap-1"
+        >
+          <button
+            aria-describedby="_r_ID_"
+            type="button"
+          >
+            <span
+              class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
+              data-size="small"
+              data-variant="secondary"
+              tabindex="0"
+            >
+              <div
+                class="prc-Stack-Stack-UQ9k6"
+                data-align="center"
+                data-direction="horizontal"
+                data-gap="none"
+                data-justify="start"
+                data-padding="none"
+                data-wrap="nowrap"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="octicon octicon-check text-gitify-icon-open"
+                  display="inline-block"
+                  fill="currentColor"
+                  focusable="false"
+                  height="12"
+                  overflow="visible"
+                  style="vertical-align: text-bottom;"
+                  viewBox="0 0 16 16"
+                  width="12"
+                >
+                  <path
+                    d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
+                  />
+                </svg>
+                <span
+                  class="text-xxs px-1 prc-Text-Text-9mHv3"
+                >
+                  1
+                </span>
+              </div>
+            </span>
+          </button>
+          <span
+            aria-hidden="true"
+            class="prc-TooltipV2-Tooltip-tLeuB"
+            data-direction="s"
+            id="_r_ID_"
+            popover="auto"
+            role="tooltip"
+          >
+            octocat approved these changes
+          </span>
+          <button
+            aria-describedby="_r_ID_"
+            type="button"
+          >
+            <span
+              class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
+              data-size="small"
+              data-variant="secondary"
+              tabindex="0"
+            >
+              <div
+                class="prc-Stack-Stack-UQ9k6"
+                data-align="center"
+                data-direction="horizontal"
+                data-gap="none"
+                data-justify="start"
+                data-padding="none"
+                data-wrap="nowrap"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="octicon octicon-file-diff text-gitify-icon-closed"
+                  display="inline-block"
+                  fill="currentColor"
+                  focusable="false"
+                  height="12"
+                  overflow="visible"
+                  style="vertical-align: text-bottom;"
+                  viewBox="0 0 16 16"
+                  width="12"
+                >
+                  <path
+                    d="M1 1.75C1 .784 1.784 0 2.75 0h7.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16H2.75A1.75 1.75 0 0 1 1 14.25Zm1.75-.25a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25V4.664a.25.25 0 0 0-.073-.177l-2.914-2.914a.25.25 0 0 0-.177-.073ZM8 3.25a.75.75 0 0 1 .75.75v1.5h1.5a.75.75 0 0 1 0 1.5h-1.5v1.5a.75.75 0 0 1-1.5 0V7h-1.5a.75.75 0 0 1 0-1.5h1.5V4A.75.75 0 0 1 8 3.25Zm-3 8a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1-.75-.75Z"
+                  />
+                </svg>
+                <span
+                  class="text-xxs px-1 prc-Text-Text-9mHv3"
+                >
+                  1
+                </span>
+              </div>
+            </span>
+          </button>
+          <span
+            aria-hidden="true"
+            class="prc-TooltipV2-Tooltip-tLeuB"
+            data-direction="s"
+            id="_r_ID_"
+            popover="auto"
+            role="tooltip"
+          >
+            gitify-app requested changes
+          </span>
+        </div>
+      </div>
     </div>
   </div>,
   "debug": [Function],

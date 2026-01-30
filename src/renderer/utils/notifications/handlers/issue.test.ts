@@ -151,7 +151,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         state: 'OPEN',
       });
       mockIssue.labels = {
-        nodes: [{ name: 'enhancement' }],
+        nodes: [{ name: 'enhancement', color: '0e8a16' }],
       };
 
       fetchIssueByNumberSpy.mockResolvedValue({
@@ -174,7 +174,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         commentCount: 0,
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/issues/123' as Link,
-        labels: ['enhancement'],
+        labels: [{ name: 'enhancement', color: '0e8a16' }],
         milestone: undefined,
         reactionsCount: 0,
         reactionGroups: noReactionGroups,

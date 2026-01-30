@@ -44,7 +44,7 @@ fragment IssueDetails on Issue {
   }
   labels(first: $firstLabels) {
     nodes {
-      name
+      ...LabelFields
     }
   }
   reactions {

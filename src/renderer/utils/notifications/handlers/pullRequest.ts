@@ -65,7 +65,11 @@ class PullRequestHandler extends DefaultHandler {
       user: prUser,
       reviews: reviews,
       commentCount: pr.comments.totalCount,
-      labels: pr.labels?.nodes.map((label) => label.name) ?? [],
+      labels:
+        pr.labels?.nodes.map((label) => ({
+          name: label.name,
+          color: (label as any).color,
+        })) ?? [],
       linkedIssues: pr.closingIssuesReferences?.nodes.map((issue) =>
         formatGitHubNumber(issue.number),
       ),
