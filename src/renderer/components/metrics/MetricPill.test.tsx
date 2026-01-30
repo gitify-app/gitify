@@ -14,7 +14,9 @@ describe('renderer/components/metrics/MetricPill.tsx', () => {
       icon: MarkGithubIcon,
       color: IconColor.GREEN,
     };
+
     const tree = renderWithAppContext(<MetricPill {...props} />);
+
     expect(tree).toMatchSnapshot();
   });
 
@@ -24,7 +26,9 @@ describe('renderer/components/metrics/MetricPill.tsx', () => {
       icon: MarkGithubIcon,
       color: IconColor.GREEN,
     };
+
     const tree = renderWithAppContext(<MetricPill {...props} />);
+
     expect(tree).toMatchSnapshot();
   });
 });
