@@ -1,5 +1,7 @@
 import { useEffect, useRef } from 'react';
 
+import { isOnline } from '../../utils/network';
+
 /**
  * Hook that triggers a callback after a specified period of time.
  *
@@ -16,7 +18,9 @@ export const useIntervalTimer = (callback: () => void, delay: number) => {
   // Set up the interval.
   useEffect(() => {
     function tick() {
-      savedCallback.current();
+      if (savedCallback.current && isOnline()) {
+        savedCallback.current();
+      }
     }
 
     if (delay !== null) {

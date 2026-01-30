@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useRef } from 'react';
 
+import { isOnline } from '../../utils/network';
+
 const events = ['mousedown', 'keypress', 'click'];
 
 /**
@@ -23,8 +25,10 @@ export const useInactivityTimer = (callback: () => void, delay: number) => {
 
     if (delay !== null && savedCallback.current) {
       timeoutRef.current = setTimeout(() => {
-        // Fire callback once inactivity threshold reached
-        savedCallback.current();
+        // Fire callback once inactivity threshold reached if online
+        if (savedCallback.current && isOnline()) {
+          savedCallback.current();
+        }
 
         // Schedule next run while still inactive
         resetTimer();
